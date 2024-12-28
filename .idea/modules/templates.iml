@@ -94,6 +94,9 @@
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/rpmalloc/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/rpmalloc/src/templates/kotlin" isTestSource="false" />
     </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/sdl/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/sdl/src/templates/kotlin" isTestSource="false" />
+    </content>
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/shaderc/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/shaderc/src/templates/kotlin" isTestSource="false" />
     </content>

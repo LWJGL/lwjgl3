@@ -595,6 +595,80 @@ git branch -D @{-1}""")}"""}()}
         library = JNILibrary.create("LibRPmalloc"),
         arrayOverloads = false
     ),
+    SDL(
+        "sdl",
+        "org.lwjgl.sdl",
+        """
+        Contains bindings to the ${url("https://www.libsdl.org/", "Simple DirectMedia Layer")}, a cross-platform development library designed to provide low
+        level access to audio, keyboard, mouse, joystick, and graphics hardware via OpenGL/Direct3D/Metal/Vulkan. It is used by video playback software,
+        emulators, and popular games.
+
+        <h3>Resources</h3>
+        ${ul(
+            url("https://wiki.libsdl.org/SDL3/FrontPage", "Documentation"),
+            url("https://github.com/libsdl-org/SDL", "Source Repository")
+        )}
+
+        <h3>SDL header to Java class mapping</h3>
+        <table>
+        ${mapOf(
+            "SDL_asyncio.h" to "SDLAsyncIO",
+            "SDL_audio.h" to "SDLAudio",
+            "SDL_blendmode.h" to "SDLBlendMode",
+            "SDL_camera.h" to "SDLCamera",
+            "SDL_clipboard.h" to "SDLClipboard",
+            "SDL_cpuinfo.h" to "SDLCPUInfo",
+            "SDL_dialog.h" to "SDLDialog",
+            "SDL_error.h" to "SDLError",
+            "SDL_events.h" to "SDLEvents",
+            "SDL_filesystem.h" to "SDLFileSystem",
+            "SDL_gamepad.h" to "SDLGamepad",
+            "SDL_gpu.h" to "SDLGPU",
+            "SDL_guid.h" to "SDLGUID",
+            "SDL_haptic.h" to "SDLHaptic",
+            "SDL_hidapi.h" to "SDLHIDAPI",
+            "SDL_hints.h" to "SDLHints",
+            "SDL_init.h" to "SDLInit",
+            "SDL_iostream.h" to "SDLIOStream",
+            "SDL_joystick.h" to "SDLJoystick",
+            "SDL_keyboard.h" to "SDLKeyboard",
+            "SDL_keycode.h" to "SDLKeycode",
+            "SDL_loadso.h" to "SDLLoadSO",
+            "SDL_locale.h" to "SDLLocale",
+            "SDL_log.h" to "SDLLog",
+            "SDL_messagebox.h" to "SDLMessageBox",
+            "SDL_metal.h" to "SDLMetal",
+            "SDL_misc.h" to "SDLMisc",
+            "SDL_mouse.h" to "SDLMouse",
+            "SDL_pen.h" to "SDLPen",
+            "SDL_pixels.h" to "SDLPixels",
+            "SDL_platform.h" to "SDLPlatform",
+            "SDL_power.h" to "SDLPower",
+            "SDL_properties.h" to "SDLProperties",
+            "SDL_rect.h" to "SDLRect",
+            "SDL_render.h" to "SDLRender",
+            "SDL_scancode.h" to "SDLScancode",
+            "SDL_sensor.h" to "SDLSensor",
+            "SDL_stdinc.h" to "SDLStdinc",
+            "SDL_storage.h" to "SDLStorage",
+            "SDL_surface.h" to "SDLSurface",
+            "SDL_system.h" to "SDLSystem",
+            "SDL_thread.h" to "SDLThread",
+            "SDL_time.h" to "SDLTime",
+            "SDL_timer.h" to "SDLTimer",
+            "SDL_touch.h" to "SDLTouch",
+            "SDL_tray.h" to "SDLTray",
+            "SDL_version.h" to "SDLVersion",
+            "SDL_video.h" to "SDLVideo",
+            "SDL_vulkan.h" to "SDLVulkan"
+        )
+            .map { (header, java) -> "<tr><td>{@code $header}</td><td>{@link org.lwjgl.sdl.$java $java}</td></tr>" }
+            .joinToString(separator = "\n")
+        }
+        </table>
+        """,
+        arrayOverloads = false
+    ),
     SHADERC(
         "shaderc",
         "org.lwjgl.util.shaderc",
