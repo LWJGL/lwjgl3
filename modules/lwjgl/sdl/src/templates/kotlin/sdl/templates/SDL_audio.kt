@@ -1,0 +1,473 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: https://www.lwjgl.org/license
+ */
+package sdl.templates
+
+import org.lwjgl.generator.*
+import sdl.*
+
+fun SDL_audio() = SDL.apply {
+    IntConstant(
+        "AUDIO_MASK_BITSIZE"..0xFF,
+        "AUDIO_MASK_FLOAT"..(1 shl 8),
+        "AUDIO_MASK_BIG_ENDIAN"..(1 shl 12),
+        "AUDIO_MASK_SIGNED"..(1 shl 15),
+        "AUDIO_DEVICE_DEFAULT_PLAYBACK".."0xFFFFFFFF",
+        "AUDIO_DEVICE_DEFAULT_RECORDING".."0xFFFFFFFE"
+    )
+
+    EnumConstant(
+        "AUDIO_UNKNOWN".enum(0x0000),
+        "AUDIO_U8".enum(0x0008),
+        "AUDIO_S8".enum(0x8008),
+        "AUDIO_S16LE".enum(0x8010),
+        "AUDIO_S16BE".enum(0x9010),
+        "AUDIO_S32LE".enum(0x8020),
+        "AUDIO_S32BE".enum(0x9020),
+        "AUDIO_F32LE".enum(0x8120),
+        "AUDIO_F32BE".enum(0x9120),
+        "AUDIO_S16".enum("SDL_AUDIO_S16LE"),
+        "AUDIO_S32".enum("SDL_AUDIO_S32LE"),
+        "AUDIO_F32".enum("SDL_AUDIO_F32LE")
+    )
+
+    int(
+        "GetNumAudioDrivers",
+
+        void()
+    )
+
+    charUTF8.const.p(
+        "GetAudioDriver",
+
+        int("index")
+    )
+
+    charUTF8.const.p(
+        "GetCurrentAudioDriver",
+
+        void()
+    )
+
+    SDL_AudioDeviceID.p(
+        "GetAudioPlaybackDevices",
+
+        AutoSizeResult..int.p("count")
+    )
+
+    SDL_AudioDeviceID.p(
+        "GetAudioRecordingDevices",
+
+        AutoSizeResult..int.p("count")
+    )
+
+    charUTF8.const.p(
+        "GetAudioDeviceName",
+
+        SDL_AudioDeviceID("devid")
+    )
+
+    _Bool(
+        "GetAudioDeviceFormat",
+
+        SDL_AudioDeviceID("devid"),
+        Check(1)..SDL_AudioSpec.p("spec"),
+        Check(1)..int.p("sample_frames")
+    )
+
+    int.p(
+        "GetAudioDeviceChannelMap",
+
+        SDL_AudioDeviceID("devid"),
+        AutoSizeResult..int.p("count")
+    )
+
+    SDL_AudioDeviceID(
+        "OpenAudioDevice",
+
+        SDL_AudioDeviceID("devid"),
+        nullable..Check(1)..SDL_AudioSpec.const.p("spec")
+    )
+
+    _Bool(
+        "IsAudioDevicePhysical",
+
+        SDL_AudioDeviceID("devid")
+    )
+
+    _Bool(
+        "IsAudioDevicePlayback",
+
+        SDL_AudioDeviceID("devid")
+    )
+
+    _Bool(
+        "PauseAudioDevice",
+
+        SDL_AudioDeviceID("dev")
+    )
+
+    _Bool(
+        "ResumeAudioDevice",
+
+        SDL_AudioDeviceID("dev")
+    )
+
+    _Bool(
+        "AudioDevicePaused",
+
+        SDL_AudioDeviceID("dev")
+    )
+
+    float(
+        "GetAudioDeviceGain",
+
+        SDL_AudioDeviceID("devid")
+    )
+
+    _Bool(
+        "SetAudioDeviceGain",
+
+        SDL_AudioDeviceID("devid"),
+        float("gain")
+    )
+
+    void(
+        "CloseAudioDevice",
+
+        SDL_AudioDeviceID("devid")
+    )
+
+    _Bool(
+        "BindAudioStreams",
+
+        SDL_AudioDeviceID("devid"),
+        SDL_AudioStream.p.const.p("streams"),
+        AutoSize("streams")..int("num_streams")
+    )
+
+    _Bool(
+        "BindAudioStream",
+
+        SDL_AudioDeviceID("devid"),
+        SDL_AudioStream.p("stream")
+    )
+
+    void(
+        "UnbindAudioStreams",
+
+        SDL_AudioStream.p.const.p("streams"),
+        AutoSize("streams")..int("num_streams")
+    )
+
+    void(
+        "UnbindAudioStream",
+
+        SDL_AudioStream.p("stream")
+    )
+
+    SDL_AudioDeviceID(
+        "GetAudioStreamDevice",
+
+        SDL_AudioStream.p("stream")
+    )
+
+    SDL_AudioStream.p(
+        "CreateAudioStream",
+
+        Check(1)..SDL_AudioSpec.const.p("src_spec"),
+        Check(1)..SDL_AudioSpec.const.p("dst_spec")
+    )
+
+    SDL_PropertiesID(
+        "GetAudioStreamProperties",
+
+        SDL_AudioStream.p("stream")
+    )
+
+    _Bool(
+        "GetAudioStreamFormat",
+
+        SDL_AudioStream.p("stream"),
+        Check(1)..SDL_AudioSpec.p("src_spec"),
+        Check(1)..SDL_AudioSpec.p("dst_spec")
+    )
+
+    _Bool(
+        "SetAudioStreamFormat",
+
+        SDL_AudioStream.p("stream"),
+        Check(1)..SDL_AudioSpec.const.p("src_spec"),
+        Check(1)..SDL_AudioSpec.const.p("dst_spec")
+    )
+
+    float(
+        "GetAudioStreamFrequencyRatio",
+
+        SDL_AudioStream.p("stream")
+    )
+
+    _Bool(
+        "SetAudioStreamFrequencyRatio",
+
+        SDL_AudioStream.p("stream"),
+        float("ratio")
+    )
+
+    float(
+        "GetAudioStreamGain",
+
+        SDL_AudioStream.p("stream")
+    )
+
+    _Bool(
+        "SetAudioStreamGain",
+
+        SDL_AudioStream.p("stream"),
+        float("gain")
+    )
+
+    int.p(
+        "GetAudioStreamInputChannelMap",
+
+        SDL_AudioStream.p("stream"),
+        AutoSizeResult..int.p("count")
+    )
+
+    int.p(
+        "GetAudioStreamOutputChannelMap",
+
+        SDL_AudioStream.p("stream"),
+        AutoSizeResult..int.p("count")
+    )
+
+    _Bool(
+        "SetAudioStreamInputChannelMap",
+
+        SDL_AudioStream.p("stream"),
+        int.const.p("chmap"),
+        AutoSize("chmap")..int("count")
+    )
+
+    _Bool(
+        "SetAudioStreamOutputChannelMap",
+
+        SDL_AudioStream.p("stream"),
+        int.const.p("chmap"),
+        AutoSize("chmap")..int("count")
+    )
+
+    _Bool(
+        "PutAudioStreamData",
+
+        SDL_AudioStream.p("stream"),
+        void.const.p("buf"),
+        AutoSize("buf")..int("len")
+    )
+
+    int(
+        "GetAudioStreamData",
+
+        SDL_AudioStream.p("stream"),
+        void.p("buf"),
+        AutoSize("buf")..int("len")
+    )
+
+    int(
+        "GetAudioStreamAvailable",
+
+        SDL_AudioStream.p("stream")
+    )
+
+    int(
+        "GetAudioStreamQueued",
+
+        SDL_AudioStream.p("stream")
+    )
+
+    _Bool(
+        "FlushAudioStream",
+
+        SDL_AudioStream.p("stream")
+    )
+
+    _Bool(
+        "ClearAudioStream",
+
+        SDL_AudioStream.p("stream")
+    )
+
+    _Bool(
+        "PauseAudioStreamDevice",
+
+        SDL_AudioStream.p("stream")
+    )
+
+    _Bool(
+        "ResumeAudioStreamDevice",
+
+        SDL_AudioStream.p("stream")
+    )
+
+    _Bool(
+        "LockAudioStream",
+
+        SDL_AudioStream.p("stream")
+    )
+
+    _Bool(
+        "UnlockAudioStream",
+
+        SDL_AudioStream.p("stream")
+    )
+
+    _Bool(
+        "SetAudioStreamGetCallback",
+
+        SDL_AudioStream.p("stream"),
+        SDL_AudioStreamCallback("callback"),
+        nullable..opaque_p("userdata")
+    )
+
+    _Bool(
+        "SetAudioStreamPutCallback",
+
+        SDL_AudioStream.p("stream"),
+        SDL_AudioStreamCallback("callback"),
+        nullable..opaque_p("userdata")
+    )
+
+    void(
+        "DestroyAudioStream",
+
+        SDL_AudioStream.p("stream")
+    )
+
+    SDL_AudioStream.p(
+        "OpenAudioDeviceStream",
+
+        SDL_AudioDeviceID("devid"),
+        Check(1)..SDL_AudioSpec.const.p("spec"),
+        SDL_AudioStreamCallback("callback"),
+        nullable..opaque_p("userdata")
+    )
+
+    _Bool(
+        "SetAudioPostmixCallback",
+
+        SDL_AudioDeviceID("devid"),
+        SDL_AudioPostmixCallback("callback"),
+        nullable..opaque_p("userdata")
+    )
+
+    _Bool(
+        "LoadWAV_IO",
+
+        SDL_IOStream.p("src"),
+        _Bool("closeio"),
+        Check(1)..SDL_AudioSpec.p("spec"),
+        Check(1)..Uint8.p.p("audio_buf"),
+        Check(1)..Uint32.p("audio_len")
+    )
+
+    _Bool(
+        "LoadWAV",
+
+        charUTF8.const.p("path"),
+        Check(1)..SDL_AudioSpec.p("spec"),
+        Check(1)..Uint8.p.p("audio_buf"),
+        Check(1)..Uint32.p("audio_len")
+    )
+
+    _Bool(
+        "MixAudio",
+
+        Uint8.p("dst"),
+        Check("dst.remaining()")..Uint8.const.p("src"),
+        SDL_AudioFormat("format"),
+        AutoSize("dst")..Uint32("len"),
+        float("volume")
+    )
+
+    _Bool(
+        "ConvertAudioSamples",
+
+        Check(1)..SDL_AudioSpec.const.p("src_spec"),
+        Uint8.const.p("src_data"),
+        AutoSize("src_data")..int("src_len"),
+        Check(1)..SDL_AudioSpec.const.p("dst_spec"),
+        Check(1)..Uint8.p.p("dst_data"),
+        Check(1)..int.p("dst_len")
+    )
+
+    charUTF8.const.p(
+        "GetAudioFormatName",
+
+        SDL_AudioFormat("format")
+    )
+
+    int(
+        "GetSilenceValueForFormat",
+
+        SDL_AudioFormat("format")
+    )
+
+    macro(expression = "(((short)(signed) << 15) | ((short)(bigendian) << 12) | ((short)(flt) << 8) | ((size) & SDL_AUDIO_MASK_BITSIZE))")..uint32_t(
+        "SDL_DEFINE_AUDIO_FORMAT",
+
+        uint32_t("signed"),
+        uint32_t("bigendian"),
+        uint32_t("flt"),
+        uint32_t("size"),
+
+        noPrefix = true
+    )
+
+    macro(expression = "((x) & SDL_AUDIO_MASK_BITSIZE)")..uint32_t(
+        "SDL_AUDIO_BITSIZE",
+        SDL_AudioFormat("x"),
+        noPrefix = true
+    )
+    macro(expression = "(SDL_AUDIO_BITSIZE(x) / 8)")..uint32_t(
+        "SDL_AUDIO_BYTESIZE",
+        SDL_AudioFormat("x"),
+        noPrefix = true
+    )
+    macro(expression = "((x) & SDL_AUDIO_MASK_FLOAT) != 0")..bool(
+        "SDL_AUDIO_ISFLOAT",
+        SDL_AudioFormat("x"),
+        noPrefix = true
+    )
+    macro(expression = "((x) & SDL_AUDIO_MASK_BIG_ENDIAN) != 0")..bool(
+        "SDL_AUDIO_ISBIGENDIAN",
+        SDL_AudioFormat("x"),
+        noPrefix = true
+    )
+    macro(expression = "(!SDL_AUDIO_ISBIGENDIAN(x))")..bool(
+        "SDL_AUDIO_ISLITTLEENDIAN",
+        SDL_AudioFormat("x"),
+        noPrefix = true
+    )
+    macro(expression = "((x) & SDL_AUDIO_MASK_SIGNED) != 0")..bool(
+        "SDL_AUDIO_ISSIGNED",
+        SDL_AudioFormat("x"),
+        noPrefix = true
+    )
+    macro(expression = "(!SDL_AUDIO_ISFLOAT(x))")..bool(
+        "SDL_AUDIO_ISINT",
+        SDL_AudioFormat("x"),
+        noPrefix = true
+    )
+    macro(expression = "(!SDL_AUDIO_ISSIGNED(x))")..bool(
+        "SDL_AUDIO_ISUNSIGNED",
+        SDL_AudioFormat("x"),
+        noPrefix = true
+    )
+
+    macro(expression = "(SDL_AUDIO_BYTESIZE(x.format()) * x.channels())")..uint32_t(
+        "SDL_AUDIO_FRAMESIZE",
+        SDL_AudioSpec("x"),
+        noPrefix = true
+    )
+}

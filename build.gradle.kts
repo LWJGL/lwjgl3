@@ -231,6 +231,11 @@ enum class Artifacts(
         "A public domain cross platform lock free thread caching 16-byte aligned memory allocator implemented in C.",
         *Platforms.ALL
     ),
+    SDL(
+        "lwjgl-sdl", "LWJGL - SDL bindings",
+        "Simple DirectMedia Layer is a cross-platform development library designed to provide low level access to audio, keyboard, mouse, joystick, and graphics hardware.",
+        *Platforms.ALL
+    ),
     SHADERC(
         "lwjgl-shaderc", "LWJGL - Shaderc bindings",
         "A collection of libraries for shader compilation.",

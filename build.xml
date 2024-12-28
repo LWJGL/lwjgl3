@@ -535,6 +535,10 @@
             <compileBinding binding="vma">
                 <classpath><pathelement path="${bin.lwjgl}/vulkan"/></classpath>
             </compileBinding>
+            <compileBinding binding="sdl">
+                <classpath><pathelement path="${bin.lwjgl}/vulkan"/></classpath>
+                <exclude name="org/lwjgl/sdl/SDL_vulkan.java" unless:true="${binding.vulkan}"/>
+            </compileBinding>
         </parallel>
 
         <compileBinding binding="glfw">
@@ -832,6 +836,7 @@
             <include name="org/lwjgl/demo/opengl/**" if:true="${binding.opengl}"/>
 
             <include name="org/lwjgl/demo/openxr/**" if:set="test.openxr"/>
+            <include name="org/lwjgl/demo/sdl/**" if:true="${binding.sdl}"/>
             <include name="org/lwjgl/demo/stb/**" if:set="test.stb"/>
 
             <include name="org/lwjgl/demo/system/jawt/**" if:set="test.jawt"/>
@@ -1837,6 +1842,9 @@
 
         <!-- rpmalloc -->
         <release-module name="rpmalloc" native-library="lwjgl_rpmalloc" title="rpmalloc" if:true="${binding.rpmalloc}"/>
+
+        <!-- SDL -->
+        <release-module name="sdl" native-library="lwjgl_sdl" title="sdl" if:true="${binding.sdl}"/>
 
         <!-- shaderc -->
         <release-module name="shaderc" native-library="shaderc" title="Shaderc" if:true="${binding.shaderc}"/>
