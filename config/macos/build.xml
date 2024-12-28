@@ -356,6 +356,7 @@
             <update-dependency module="ktx" artifact="libktx.dylib"/>
             <update-dependency module="openal" artifact="libopenal.dylib"/>
             <update-dependency module="opus" artifact="libopus.dylib"/>
+            <update-dependency module="sdl" artifact="libSDL3.dylib"/>
             <update-dependency module="shaderc" artifact="libshaderc.dylib"/>
             <update-dependency module="spvc" artifact="libspirv-cross.dylib"/>
 
