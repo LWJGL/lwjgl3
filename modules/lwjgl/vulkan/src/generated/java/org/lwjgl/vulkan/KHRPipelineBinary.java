@@ -371,6 +371,8 @@ public class KHRPipelineBinary {
      * 
      * <p>If {@code pPipelineBinaryData} is {@code NULL}, then the size of the data, in bytes, that is required to store the binary is returned in {@code pPipelineBinaryDataSize}. Otherwise, {@code pPipelineBinaryDataSize} <b>must</b> contain the size of the buffer, in bytes, pointed to by {@code pPipelineBinaryData}, and on return {@code pPipelineBinaryDataSize} is overwritten with the size of the data, in bytes, that is required to store the binary. If {@code pPipelineBinaryDataSize} is less than the size that is required to store the binary, nothing is written to {@code pPipelineBinaryData} and {@link #VK_ERROR_NOT_ENOUGH_SPACE_KHR ERROR_NOT_ENOUGH_SPACE_KHR} will be returned, instead of {@link VK10#VK_SUCCESS SUCCESS}.</p>
      * 
+     * <p>If the call returns one of the success return codes, the pipeline binary key is written to {@code pPipelineBinaryKey}, regardless of whether {@code pPipelineBinaryData} is {@code NULL} or not.</p>
+     * 
      * <p>If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-pipelineBinaryCompressedData">pipelineBinaryCompressedData</a> is {@link VK10#VK_FALSE FALSE}, implementations <b>should</b> not return compressed pipeline binary data to the application.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>

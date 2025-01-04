@@ -156,16 +156,16 @@ val KHR_fragment_shading_rate = "KHRFragmentShadingRate".nativeClassVK("KHR_frag
     )
 
     EnumConstant(
+        "Extends {@code VkStructureType}.",
+
+        "STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR".."1000044006"
+    )
+
+    EnumConstant(
         "Extends {@code VkPipelineCreateFlagBits}.",
 
         "PIPELINE_CREATE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR".enum(0x00200000),
         "PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR".enum(0x00200000)
-    )
-
-    EnumConstant(
-        "Extends {@code VkStructureType}.",
-
-        "STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR".."1000044006"
     )
 
     EnumConstant(

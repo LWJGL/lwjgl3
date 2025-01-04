@@ -7203,9 +7203,10 @@ val VkExecutionGraphPipelineCreateInfoAMDX = struct(Module.VULKAN, "VkExecutionG
             <li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, {@code basePipelineIndex} <b>must</b> be -1 or {@code basePipelineHandle} <b>must</b> be #NULL_HANDLE</li>
             <li>If a push constant block is declared in a shader, a push constant range in {@code layout} <b>must</b> match the shader stage</li>
             <li>If a push constant block is declared in a shader, the block must be contained inside the push constant range in {@code layout} that matches the stage</li>
-            <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variables</a> is declared in a shader, a descriptor slot in {@code layout} <b>must</b> match the shader stage</li>
-            <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variables</a> is declared in a shader, and the descriptor type is not #DESCRIPTOR_TYPE_MUTABLE_EXT, a descriptor slot in {@code layout} <b>must</b> match the descriptor type</li>
-            <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variables</a> is declared in a shader as an array, a descriptor slot in {@code layout} <b>must</b> match the descriptor count</li>
+            <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variable</a> is declared in a shader, the corresponding descriptor set in {@code layout} <b>must</b> match the shader stage</li>
+            <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variable</a> is declared in a shader, and the descriptor type is not #DESCRIPTOR_TYPE_MUTABLE_EXT, the corresponding descriptor set in {@code layout} <b>must</b> match the descriptor type</li>
+            <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variable</a> is declared in a shader as an array, the corresponding descriptor set in {@code layout} <b>must</b> match the descriptor count</li>
+            <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variables</a> is declared in a shader as an array of descriptors, then the descriptor type of that variable <b>must</b> not be #DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK</li>
         </ul>
 
         <ul>
@@ -8474,7 +8475,7 @@ val VkRayTracingPipelineInterfaceCreateInfoKHR = struct(Module.VULKAN, "VkRayTra
         Structure specifying additional interface information when using libraries.
 
         <h5>Description</h5>
-        {@code maxPipelineRayPayloadSize} is calculated as the maximum number of bytes used by any block declared in the {@code RayPayloadKHR} or {@code IncomingRayPayloadKHR} storage classes. {@code maxPipelineRayHitAttributeSize} is calculated as the maximum number of bytes used by any block declared in the {@code HitAttributeKHR} storage class. As variables in these storage classes do not have explicit offsets, the size should be calculated as if each variable has a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-alignment-requirements">scalar alignment</a> equal to the largest scalar alignment of any of the block’s members.
+        {@code maxPipelineRayPayloadSize} is calculated as the maximum size of the block (in bytes) declared in the {@code RayPayloadKHR} or {@code IncomingRayPayloadKHR} storage classes. {@code maxPipelineRayHitAttributeSize} is calculated as the maximum size of any block (in bytes) declared in the {@code HitAttributeKHR} storage class. As variables in these storage classes do not have explicit offsets, the size should be calculated as if each variable has a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-alignment-requirements">scalar alignment</a> equal to the largest scalar alignment of any of the block’s members.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         There is no explicit upper limit for {@code maxPipelineRayPayloadSize}, but in practice it should be kept as small as possible. Similar to invocation local memory, it must be allocated for each shader invocation and for devices which support many simultaneous invocations, this storage can rapidly be exhausted, resulting in failure.
@@ -8527,9 +8528,10 @@ val VkRayTracingPipelineCreateInfoKHR = struct(Module.VULKAN, "VkRayTracingPipel
             <li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, {@code basePipelineIndex} <b>must</b> be -1 or {@code basePipelineHandle} <b>must</b> be #NULL_HANDLE</li>
             <li>If a push constant block is declared in a shader, a push constant range in {@code layout} <b>must</b> match the shader stage</li>
             <li>If a push constant block is declared in a shader, the block must be contained inside the push constant range in {@code layout} that matches the stage</li>
-            <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variables</a> is declared in a shader, a descriptor slot in {@code layout} <b>must</b> match the shader stage</li>
-            <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variables</a> is declared in a shader, and the descriptor type is not #DESCRIPTOR_TYPE_MUTABLE_EXT, a descriptor slot in {@code layout} <b>must</b> match the descriptor type</li>
-            <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variables</a> is declared in a shader as an array, a descriptor slot in {@code layout} <b>must</b> match the descriptor count</li>
+            <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variable</a> is declared in a shader, the corresponding descriptor set in {@code layout} <b>must</b> match the shader stage</li>
+            <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variable</a> is declared in a shader, and the descriptor type is not #DESCRIPTOR_TYPE_MUTABLE_EXT, the corresponding descriptor set in {@code layout} <b>must</b> match the descriptor type</li>
+            <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variable</a> is declared in a shader as an array, the corresponding descriptor set in {@code layout} <b>must</b> match the descriptor count</li>
+            <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variables</a> is declared in a shader as an array of descriptors, then the descriptor type of that variable <b>must</b> not be #DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK</li>
         </ul>
 
         <ul>
@@ -9540,9 +9542,10 @@ val VkRayTracingPipelineCreateInfoNV = struct(Module.VULKAN, "VkRayTracingPipeli
             <li>If {@code flags} contains the #PIPELINE_CREATE_DERIVATIVE_BIT flag, {@code basePipelineIndex} <b>must</b> be -1 or {@code basePipelineHandle} <b>must</b> be #NULL_HANDLE</li>
             <li>If a push constant block is declared in a shader, a push constant range in {@code layout} <b>must</b> match the shader stage</li>
             <li>If a push constant block is declared in a shader, the block must be contained inside the push constant range in {@code layout} that matches the stage</li>
-            <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variables</a> is declared in a shader, a descriptor slot in {@code layout} <b>must</b> match the shader stage</li>
-            <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variables</a> is declared in a shader, and the descriptor type is not #DESCRIPTOR_TYPE_MUTABLE_EXT, a descriptor slot in {@code layout} <b>must</b> match the descriptor type</li>
-            <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variables</a> is declared in a shader as an array, a descriptor slot in {@code layout} <b>must</b> match the descriptor count</li>
+            <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variable</a> is declared in a shader, the corresponding descriptor set in {@code layout} <b>must</b> match the shader stage</li>
+            <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variable</a> is declared in a shader, and the descriptor type is not #DESCRIPTOR_TYPE_MUTABLE_EXT, the corresponding descriptor set in {@code layout} <b>must</b> match the descriptor type</li>
+            <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variable</a> is declared in a shader as an array, the corresponding descriptor set in {@code layout} <b>must</b> match the descriptor count</li>
+            <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variables</a> is declared in a shader as an array of descriptors, then the descriptor type of that variable <b>must</b> not be #DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK</li>
         </ul>
 
         <ul>
@@ -20563,6 +20566,10 @@ val VkShaderCreateInfoEXT = struct(Module.VULKAN, "VkShaderCreateInfoEXT") {
             <li>Any two elements of {@code pPushConstantRanges} <b>must</b> not include the same stage in {@code stageFlags}</li>
             <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and if a push constant block is declared in a shader, then an element of {@code pPushConstantRanges}{@code ::stageFlags} <b>must</b> match {@code stage}</li>
             <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and if a push constant block is declared in a shader, the block must be contained inside the element of {@code pPushConstantRanges} that matches the stage</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variable</a> is declared in a shader, the corresponding descriptor set in {@code pSetLayouts} <b>must</b> match the shader stage</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variable</a> is declared in a shader, and the descriptor type is not #DESCRIPTOR_TYPE_MUTABLE_EXT, the corresponding descriptor set in {@code pSetLayouts} <b>must</b> match the descriptor type</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variable</a> is declared in a shader as an array, the corresponding descriptor set in {@code pSetLayouts} <b>must</b> match the descriptor count</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-resources">resource variable</a> is declared in a shader as an array of descriptors, then the descriptor type of that variable <b>must</b> not be #DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

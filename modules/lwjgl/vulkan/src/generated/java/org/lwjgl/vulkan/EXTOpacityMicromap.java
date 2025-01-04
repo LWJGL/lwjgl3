@@ -484,6 +484,7 @@ public class EXTOpacityMicromap {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
+     * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-micromap">{@code micromap}</a> feature <b>must</b> be enabled</li>
      * <li>All submitted commands that refer to {@code micromap} <b>must</b> have completed execution</li>
      * <li>If {@link VkAllocationCallbacks} were provided when {@code micromap} was created, a compatible set of callbacks <b>must</b> be provided here</li>
      * <li>If no {@link VkAllocationCallbacks} were provided when {@code micromap} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>

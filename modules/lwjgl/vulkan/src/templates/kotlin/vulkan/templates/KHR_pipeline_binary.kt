@@ -293,6 +293,8 @@ val KHR_pipeline_binary = "KHRPipelineBinary".nativeClassVK("KHR_pipeline_binary
         <h5>Description</h5>
         If {@code pPipelineBinaryData} is {@code NULL}, then the size of the data, in bytes, that is required to store the binary is returned in {@code pPipelineBinaryDataSize}. Otherwise, {@code pPipelineBinaryDataSize} <b>must</b> contain the size of the buffer, in bytes, pointed to by {@code pPipelineBinaryData}, and on return {@code pPipelineBinaryDataSize} is overwritten with the size of the data, in bytes, that is required to store the binary. If {@code pPipelineBinaryDataSize} is less than the size that is required to store the binary, nothing is written to {@code pPipelineBinaryData} and #ERROR_NOT_ENOUGH_SPACE_KHR will be returned, instead of #SUCCESS.
 
+        If the call returns one of the success return codes, the pipeline binary key is written to {@code pPipelineBinaryKey}, regardless of whether {@code pPipelineBinaryData} is {@code NULL} or not.
+
         If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#limits-pipelineBinaryCompressedData">pipelineBinaryCompressedData</a> is #FALSE, implementations <b>should</b> not return compressed pipeline binary data to the application.
 
         <h5>Valid Usage (Implicit)</h5>

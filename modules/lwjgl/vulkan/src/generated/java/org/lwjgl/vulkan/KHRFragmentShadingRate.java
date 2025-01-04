@@ -135,6 +135,9 @@ public class KHRFragmentShadingRate {
     /** Extends {@code VkFormatFeatureFlagBits2}. */
     public static final long VK_FORMAT_FEATURE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR = 0x40000000L;
 
+    /** Extends {@code VkStructureType}. */
+    public static final int VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR = 1000044006;
+
     /**
      * Extends {@code VkPipelineCreateFlagBits}.
      * 
@@ -148,9 +151,6 @@ public class KHRFragmentShadingRate {
     public static final int
         VK_PIPELINE_CREATE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR           = 0x200000,
         VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR = 0x200000;
-
-    /** Extends {@code VkStructureType}. */
-    public static final int VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR = 1000044006;
 
     /**
      * VkFragmentShadingRateCombinerOpKHR - Control how fragment shading rates are combined
