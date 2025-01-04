@@ -1266,7 +1266,7 @@ static unsigned int nsvg__parseColorRGB(const char* str)
 				while (*str && nsvg__isdigit(*str)) str++;	// skip fractional part
 			}
 			if (*str == '%') str++; else break;
-			while (nsvg__isspace(*str)) str++;
+			while (*str && nsvg__isspace(*str)) str++;
 			if (*str == delimiter[i]) str++;
 			else break;
 		}
