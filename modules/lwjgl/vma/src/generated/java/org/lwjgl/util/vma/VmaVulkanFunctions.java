@@ -53,6 +53,7 @@ import org.lwjgl.vulkan.*;
  *     PFN_vkGetPhysicalDeviceMemoryProperties2KHR vkGetPhysicalDeviceMemoryProperties2KHR;
  *     PFN_vkGetDeviceBufferMemoryRequirementsKHR vkGetDeviceBufferMemoryRequirements;
  *     PFN_vkGetDeviceImageMemoryRequirementsKHR vkGetDeviceImageMemoryRequirements;
+ *     PFN_vkGetMemoryWin32HandleKHR vkGetMemoryWin32HandleKHR;
  * }</code></pre>
  */
 public class VmaVulkanFunctions extends Struct<VmaVulkanFunctions> implements NativeResource {
@@ -90,10 +91,12 @@ public class VmaVulkanFunctions extends Struct<VmaVulkanFunctions> implements Na
         VKBINDIMAGEMEMORY2KHR,
         VKGETPHYSICALDEVICEMEMORYPROPERTIES2KHR,
         VKGETDEVICEBUFFERMEMORYREQUIREMENTS,
-        VKGETDEVICEIMAGEMEMORYREQUIREMENTS;
+        VKGETDEVICEIMAGEMEMORYREQUIREMENTS,
+        VKGETMEMORYWIN32HANDLEKHR;
 
     static {
         Layout layout = __struct(
+            __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
@@ -151,6 +154,7 @@ public class VmaVulkanFunctions extends Struct<VmaVulkanFunctions> implements Na
         VKGETPHYSICALDEVICEMEMORYPROPERTIES2KHR = layout.offsetof(23);
         VKGETDEVICEBUFFERMEMORYREQUIREMENTS = layout.offsetof(24);
         VKGETDEVICEIMAGEMEMORYREQUIREMENTS = layout.offsetof(25);
+        VKGETMEMORYWIN32HANDLEKHR = layout.offsetof(26);
     }
 
     protected VmaVulkanFunctions(long address, @Nullable ByteBuffer container) {
@@ -259,6 +263,9 @@ public class VmaVulkanFunctions extends Struct<VmaVulkanFunctions> implements Na
     /** @return the value of the {@code vkGetDeviceImageMemoryRequirements} field. */
     @NativeType("PFN_vkGetDeviceImageMemoryRequirementsKHR")
     public long vkGetDeviceImageMemoryRequirements() { return nvkGetDeviceImageMemoryRequirements(address()); }
+    /** @return the value of the {@code vkGetMemoryWin32HandleKHR} field. */
+    @NativeType("PFN_vkGetMemoryWin32HandleKHR")
+    public long vkGetMemoryWin32HandleKHR() { return nvkGetMemoryWin32HandleKHR(address()); }
 
     /** Sets the specified value to the {@code vkGetInstanceProcAddr} field. */
     public VmaVulkanFunctions vkGetInstanceProcAddr(@NativeType("PFN_vkGetInstanceProcAddr") long value) { nvkGetInstanceProcAddr(address(), value); return this; }
@@ -312,6 +319,8 @@ public class VmaVulkanFunctions extends Struct<VmaVulkanFunctions> implements Na
     public VmaVulkanFunctions vkGetDeviceBufferMemoryRequirements(@NativeType("PFN_vkGetDeviceBufferMemoryRequirementsKHR") long value) { nvkGetDeviceBufferMemoryRequirements(address(), value); return this; }
     /** Sets the specified value to the {@code vkGetDeviceImageMemoryRequirements} field. */
     public VmaVulkanFunctions vkGetDeviceImageMemoryRequirements(@NativeType("PFN_vkGetDeviceImageMemoryRequirementsKHR") long value) { nvkGetDeviceImageMemoryRequirements(address(), value); return this; }
+    /** Sets the specified value to the {@code vkGetMemoryWin32HandleKHR} field. */
+    public VmaVulkanFunctions vkGetMemoryWin32HandleKHR(@NativeType("PFN_vkGetMemoryWin32HandleKHR") long value) { nvkGetMemoryWin32HandleKHR(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VmaVulkanFunctions set(
@@ -340,7 +349,8 @@ public class VmaVulkanFunctions extends Struct<VmaVulkanFunctions> implements Na
         long vkBindImageMemory2KHR,
         long vkGetPhysicalDeviceMemoryProperties2KHR,
         long vkGetDeviceBufferMemoryRequirements,
-        long vkGetDeviceImageMemoryRequirements
+        long vkGetDeviceImageMemoryRequirements,
+        long vkGetMemoryWin32HandleKHR
     ) {
         vkGetInstanceProcAddr(vkGetInstanceProcAddr);
         vkGetDeviceProcAddr(vkGetDeviceProcAddr);
@@ -368,6 +378,7 @@ public class VmaVulkanFunctions extends Struct<VmaVulkanFunctions> implements Na
         vkGetPhysicalDeviceMemoryProperties2KHR(vkGetPhysicalDeviceMemoryProperties2KHR);
         vkGetDeviceBufferMemoryRequirements(vkGetDeviceBufferMemoryRequirements);
         vkGetDeviceImageMemoryRequirements(vkGetDeviceImageMemoryRequirements);
+        vkGetMemoryWin32HandleKHR(vkGetMemoryWin32HandleKHR);
 
         return this;
     }
@@ -496,6 +507,8 @@ public class VmaVulkanFunctions extends Struct<VmaVulkanFunctions> implements Na
     public static long nvkGetDeviceBufferMemoryRequirements(long struct) { return memGetAddress(struct + VmaVulkanFunctions.VKGETDEVICEBUFFERMEMORYREQUIREMENTS); }
     /** Unsafe version of {@link #vkGetDeviceImageMemoryRequirements}. */
     public static long nvkGetDeviceImageMemoryRequirements(long struct) { return memGetAddress(struct + VmaVulkanFunctions.VKGETDEVICEIMAGEMEMORYREQUIREMENTS); }
+    /** Unsafe version of {@link #vkGetMemoryWin32HandleKHR}. */
+    public static long nvkGetMemoryWin32HandleKHR(long struct) { return memGetAddress(struct + VmaVulkanFunctions.VKGETMEMORYWIN32HANDLEKHR); }
 
     /** Unsafe version of {@link #vkGetInstanceProcAddr(long) vkGetInstanceProcAddr}. */
     public static void nvkGetInstanceProcAddr(long struct, long value) { memPutAddress(struct + VmaVulkanFunctions.VKGETINSTANCEPROCADDR, value); }
@@ -549,6 +562,8 @@ public class VmaVulkanFunctions extends Struct<VmaVulkanFunctions> implements Na
     public static void nvkGetDeviceBufferMemoryRequirements(long struct, long value) { memPutAddress(struct + VmaVulkanFunctions.VKGETDEVICEBUFFERMEMORYREQUIREMENTS, value); }
     /** Unsafe version of {@link #vkGetDeviceImageMemoryRequirements(long) vkGetDeviceImageMemoryRequirements}. */
     public static void nvkGetDeviceImageMemoryRequirements(long struct, long value) { memPutAddress(struct + VmaVulkanFunctions.VKGETDEVICEIMAGEMEMORYREQUIREMENTS, value); }
+    /** Unsafe version of {@link #vkGetMemoryWin32HandleKHR(long) vkGetMemoryWin32HandleKHR}. */
+    public static void nvkGetMemoryWin32HandleKHR(long struct, long value) { memPutAddress(struct + VmaVulkanFunctions.VKGETMEMORYWIN32HANDLEKHR, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -610,7 +625,8 @@ public class VmaVulkanFunctions extends Struct<VmaVulkanFunctions> implements Na
             .vkBindImageMemory2KHR(dc.vkBindImageMemory2 != NULL ? dc.vkBindImageMemory2 : dc.vkBindImageMemory2KHR)
             .vkGetPhysicalDeviceMemoryProperties2KHR(ic.vkGetPhysicalDeviceMemoryProperties2 != NULL ? ic.vkGetPhysicalDeviceMemoryProperties2 : ic.vkGetPhysicalDeviceMemoryProperties2KHR)
             .vkGetDeviceBufferMemoryRequirements(dc.vkGetDeviceBufferMemoryRequirements != NULL ? dc.vkGetDeviceBufferMemoryRequirements : dc.vkGetDeviceBufferMemoryRequirementsKHR)
-            .vkGetDeviceImageMemoryRequirements(dc.vkGetDeviceImageMemoryRequirements != NULL ? dc.vkGetDeviceImageMemoryRequirements : dc.vkGetDeviceImageMemoryRequirementsKHR);
+            .vkGetDeviceImageMemoryRequirements(dc.vkGetDeviceImageMemoryRequirements != NULL ? dc.vkGetDeviceImageMemoryRequirements : dc.vkGetDeviceImageMemoryRequirementsKHR)
+            .vkGetMemoryWin32HandleKHR(dc.vkGetMemoryWin32HandleKHR);
         return this;
     }
 

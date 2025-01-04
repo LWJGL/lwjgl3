@@ -124,6 +124,7 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
     nullable.."PFN_vkGetPhysicalDeviceMemoryProperties2KHR".handle("vkGetPhysicalDeviceMemoryProperties2KHR", "")
     nullable.."PFN_vkGetDeviceBufferMemoryRequirementsKHR".handle("vkGetDeviceBufferMemoryRequirements", "")
     nullable.."PFN_vkGetDeviceImageMemoryRequirementsKHR".handle("vkGetDeviceImageMemoryRequirements", "")
+    nullable.."PFN_vkGetMemoryWin32HandleKHR".handle("vkGetMemoryWin32HandleKHR", "")
 
     customMethod("""
     /**
@@ -161,7 +162,8 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
             .vkBindImageMemory2KHR(dc.vkBindImageMemory2 != NULL ? dc.vkBindImageMemory2 : dc.vkBindImageMemory2KHR)
             .vkGetPhysicalDeviceMemoryProperties2KHR(ic.vkGetPhysicalDeviceMemoryProperties2 != NULL ? ic.vkGetPhysicalDeviceMemoryProperties2 : ic.vkGetPhysicalDeviceMemoryProperties2KHR)
             .vkGetDeviceBufferMemoryRequirements(dc.vkGetDeviceBufferMemoryRequirements != NULL ? dc.vkGetDeviceBufferMemoryRequirements : dc.vkGetDeviceBufferMemoryRequirementsKHR)
-            .vkGetDeviceImageMemoryRequirements(dc.vkGetDeviceImageMemoryRequirements != NULL ? dc.vkGetDeviceImageMemoryRequirements : dc.vkGetDeviceImageMemoryRequirementsKHR);
+            .vkGetDeviceImageMemoryRequirements(dc.vkGetDeviceImageMemoryRequirements != NULL ? dc.vkGetDeviceImageMemoryRequirements : dc.vkGetDeviceImageMemoryRequirementsKHR)
+            .vkGetMemoryWin32HandleKHR(dc.vkGetMemoryWin32HandleKHR);
         return this;
     }""")
 }
@@ -221,8 +223,7 @@ val VmaAllocatorCreateInfo = struct(Module.VMA, "VmaAllocatorCreateInfo", skipBu
         Vulkan version that the application uses. (optional)
 
         It must be a value in the format as created by macro {@code VK_MAKE_VERSION} or a constant like: {@code VK_API_VERSION_1_1},
-        {@code VK_API_VERSION_1_0}. The patch version number specified is ignored. Only the major and minor versions are considered. Only versions 1.0, 1.1,
-        1.2 and 1.3 are supported by the current implementation.
+        {@code VK_API_VERSION_1_0}. The patch version number specified is ignored. Only the major and minor versions are considered. Only versions 1.0...1.4 are supported by the current implementation.
 
         Leaving it initialized to zero is equivalent to {@code VK_API_VERSION_1_0}.
 

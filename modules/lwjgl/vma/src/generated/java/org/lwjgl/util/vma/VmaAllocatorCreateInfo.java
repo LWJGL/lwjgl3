@@ -113,7 +113,7 @@ public class VmaAllocatorCreateInfo extends Struct<VmaAllocatorCreateInfo> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** flags for created allocator. Use {@code VmaAllocatorCreateFlagBits} enum. One of:<br><table><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_AMD_DEVICE_COHERENT_MEMORY_BIT ALLOCATOR_CREATE_AMD_DEVICE_COHERENT_MEMORY_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_KHR_MAINTENANCE4_BIT ALLOCATOR_CREATE_KHR_MAINTENANCE4_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_KHR_MAINTENANCE5_BIT ALLOCATOR_CREATE_KHR_MAINTENANCE5_BIT}</td></tr></table> */
+    /** flags for created allocator. Use {@code VmaAllocatorCreateFlagBits} enum. One of:<br><table><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_AMD_DEVICE_COHERENT_MEMORY_BIT ALLOCATOR_CREATE_AMD_DEVICE_COHERENT_MEMORY_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_KHR_MAINTENANCE4_BIT ALLOCATOR_CREATE_KHR_MAINTENANCE4_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_KHR_MAINTENANCE5_BIT ALLOCATOR_CREATE_KHR_MAINTENANCE5_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_KHR_EXTERNAL_MEMORY_WIN32_BIT ALLOCATOR_CREATE_KHR_EXTERNAL_MEMORY_WIN32_BIT}</td></tr></table> */
     @NativeType("VmaAllocatorCreateFlags")
     public int flags() { return nflags(address()); }
     /** Vulkan physical device. It must be valid throughout whole lifetime of created allocator. */
@@ -169,8 +169,7 @@ public class VmaAllocatorCreateInfo extends Struct<VmaAllocatorCreateInfo> imple
      * Vulkan version that the application uses. (optional)
      * 
      * <p>It must be a value in the format as created by macro {@code VK_MAKE_VERSION} or a constant like: {@code VK_API_VERSION_1_1},
-     * {@code VK_API_VERSION_1_0}. The patch version number specified is ignored. Only the major and minor versions are considered. Only versions 1.0, 1.1,
-     * 1.2 and 1.3 are supported by the current implementation.</p>
+     * {@code VK_API_VERSION_1_0}. The patch version number specified is ignored. Only the major and minor versions are considered. Only versions 1.0...1.4 are supported by the current implementation.</p>
      * 
      * <p>Leaving it initialized to zero is equivalent to {@code VK_API_VERSION_1_0}.</p>
      * 

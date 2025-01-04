@@ -14,13 +14,17 @@ DISABLE_WARNINGS()
 #define VMA_DYNAMIC_VULKAN_FUNCTIONS 0
 #define VMA_SYSTEM_ALIGNED_MALLOC(size, alignment) org_lwjgl_aligned_alloc((alignment), (size))
 #define VMA_SYSTEM_ALIGNED_FREE(ptr) org_lwjgl_aligned_free(ptr)
-#define VMA_VULKAN_VERSION 1003000
+#define VMA_VULKAN_VERSION 1004000
 #define VMA_DEDICATED_ALLOCATION 1
 #define VMA_BIND_MEMORY2 1
 #define VMA_MEMORY_BUDGET 1
 #define VMA_BUFFER_DEVICE_ADDRESS 1
 #define VMA_MEMORY_PRIORITY 1
 #define VMA_EXTERNAL_MEMORY 1
+#ifdef LWJGL_WINDOWS
+    #define VMA_EXTERNAL_MEMORY_WIN32 1
+    #define VK_USE_PLATFORM_WIN32_KHR 1
+#endif
 #define VMA_KHR_MAINTENANCE4 1
 #define VMA_KHR_MAINTENANCE5 1
 #include "vk_mem_alloc.h"
@@ -260,6 +264,17 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaGetAllocationMemoryProper
     UNUSED_PARAMS(__env, clazz)
     vmaGetAllocationMemoryProperties(allocator, allocation, pFlags);
 }
+
+#ifdef LWJGL_WINDOWS
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaGetMemoryWin32Handle(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong allocationAddress, jlong hTargetProcessAddress, jlong pHandleAddress) {
+    VmaAllocator allocator = (VmaAllocator)(uintptr_t)allocatorAddress;
+    VmaAllocation allocation = (VmaAllocation)(uintptr_t)allocationAddress;
+    HANDLE hTargetProcess = (HANDLE)(uintptr_t)hTargetProcessAddress;
+    HANDLE *pHandle = (HANDLE *)(uintptr_t)pHandleAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)vmaGetMemoryWin32Handle(allocator, allocation, hTargetProcess, pHandle);
+}
+#endif
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaMapMemory(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong allocationAddress, jlong ppDataAddress) {
     VmaAllocator allocator = (VmaAllocator)(uintptr_t)allocatorAddress;

@@ -68,6 +68,12 @@ class Func(
         validate()
     }
 
+    private var ifDirective: String? = null
+    /** Can be used to guard the native stub generation with a preprocessor directive. */
+    fun ifDirective(ifDirective: String?) {
+        this.ifDirective = ifDirective
+    }
+
     private val hasNativeParams = getNativeParams().any()
 
     fun getParam(paramName: String) = paramMap[paramName] ?: throw IllegalArgumentException("Referenced parameter does not exist: $simpleName.$paramName")
@@ -1890,6 +1896,9 @@ class Func(
     }
 
     private fun PrintWriter.generateFunctionImpl(hasArrays: Boolean, hasCritical: Boolean, critical: Boolean) {
+        if (ifDirective != null) {
+            println("#if${ifDirective}")
+        }
         val params = ArrayList<String>(4 + parameters.size)
         if (!critical)
             params.add("JNIEnv *$JNIENV, jclass clazz")
@@ -2089,6 +2098,9 @@ class Func(
         }
 
         println("}")
+        if (ifDirective != null) {
+            println("#endif")
+        }
     }
 
     private fun workaroundJDK8167409(ignoreArrayType: Boolean = false): Boolean = parameters.size.let {

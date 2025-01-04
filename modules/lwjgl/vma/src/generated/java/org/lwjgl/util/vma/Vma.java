@@ -1991,6 +1991,12 @@ public class Vma {
      * <p>You should set this flag if you found available and enabled this device extension, while creating Vulkan device passed as
      * {@code VmaAllocatorCreateInfo::device}.</p>
      * </li>
+     * <li>{@link #VMA_ALLOCATOR_CREATE_KHR_EXTERNAL_MEMORY_WIN32_BIT ALLOCATOR_CREATE_KHR_EXTERNAL_MEMORY_WIN32_BIT} - 
+     * Enables usage of {@code VK_KHR_external_memory_win32} extension in the library.
+     * 
+     * <p>You should set this flag if you found available and enabled this device extension, while creating Vulkan device passed as
+     * {@code VmaAllocatorCreateInfo::device}.</p>
+     * </li>
      * </ul>
      */
     public static final int
@@ -2002,7 +2008,8 @@ public class Vma {
         VMA_ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT      = 0x20,
         VMA_ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT        = 0x40,
         VMA_ALLOCATOR_CREATE_KHR_MAINTENANCE4_BIT           = 0x80,
-        VMA_ALLOCATOR_CREATE_KHR_MAINTENANCE5_BIT           = 0x100;
+        VMA_ALLOCATOR_CREATE_KHR_MAINTENANCE5_BIT           = 0x100,
+        VMA_ALLOCATOR_CREATE_KHR_EXTERNAL_MEMORY_WIN32_BIT  = 0x200;
 
     /**
      * {@code VmaMemoryUsage}
@@ -2655,7 +2662,9 @@ public class Vma {
     public static native void nvmaGetPoolStatistics(long allocator, long pool, long pPoolStats);
 
     /**
-     * Retrieves statistics of existing VmaPool object.
+     * Retrieves statistics of existing {@code VmaPool} object.
+     * 
+     * <p>Note that when using the pool from multiple threads, returned information may immediately become outdated.</p>
      *
      * @param allocator  allocator object
      * @param pool       pool object
@@ -3058,6 +3067,20 @@ public class Vma {
             check(pFlags, 1);
         }
         nvmaGetAllocationMemoryProperties(allocator, allocation, memAddress(pFlags));
+    }
+
+    // --- [ vmaGetMemoryWin32Handle ] ---
+
+    public static native int nvmaGetMemoryWin32Handle(long allocator, long allocation, long hTargetProcess, long pHandle);
+
+    @NativeType("VkResult")
+    public static int vmaGetMemoryWin32Handle(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("HANDLE") long hTargetProcess, @NativeType("HANDLE *") PointerBuffer pHandle) {
+        if (CHECKS) {
+            check(allocator);
+            check(allocation);
+            check(pHandle, 1);
+        }
+        return nvmaGetMemoryWin32Handle(allocator, allocation, hTargetProcess, memAddress(pHandle));
     }
 
     // --- [ vmaMapMemory ] ---

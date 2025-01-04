@@ -20,13 +20,17 @@ DISABLE_WARNINGS()
 #define VMA_DYNAMIC_VULKAN_FUNCTIONS 0
 #define VMA_SYSTEM_ALIGNED_MALLOC(size, alignment) org_lwjgl_aligned_alloc((alignment), (size))
 #define VMA_SYSTEM_ALIGNED_FREE(ptr) org_lwjgl_aligned_free(ptr)
-#define VMA_VULKAN_VERSION 1003000
+#define VMA_VULKAN_VERSION 1004000
 #define VMA_DEDICATED_ALLOCATION 1
 #define VMA_BIND_MEMORY2 1
 #define VMA_MEMORY_BUDGET 1
 #define VMA_BUFFER_DEVICE_ADDRESS 1
 #define VMA_MEMORY_PRIORITY 1
 #define VMA_EXTERNAL_MEMORY 1
+#ifdef LWJGL_WINDOWS
+    #define VMA_EXTERNAL_MEMORY_WIN32 1
+    #define VK_USE_PLATFORM_WIN32_KHR 1
+#endif
 #define VMA_KHR_MAINTENANCE4 1
 #define VMA_KHR_MAINTENANCE5 1
 #include "vk_mem_alloc.h"
@@ -2125,6 +2129,15 @@ vmaCreateImage(allocator, &imgCreateInfo, &allocCreateInfo, &img, &alloc, nullpt
             {@code VmaAllocatorCreateInfo::device}.
             """,
             0x00000100
+        ),
+        "ALLOCATOR_CREATE_KHR_EXTERNAL_MEMORY_WIN32_BIT".enum(
+            """
+            Enables usage of {@code VK_KHR_external_memory_win32} extension in the library.
+
+            You should set this flag if you found available and enabled this device extension, while creating Vulkan device passed as
+            {@code VmaAllocatorCreateInfo::device}.
+            """,
+            0x00000200
         )
     )
 
@@ -2742,7 +2755,11 @@ vmaCreateImage(allocator, &imgCreateInfo, &allocCreateInfo, &img, &alloc, nullpt
 
     void(
         "GetPoolStatistics",
-        "Retrieves statistics of existing VmaPool object.",
+        """
+        Retrieves statistics of existing {@code VmaPool} object.
+
+        Note that when using the pool from multiple threads, returned information may immediately become outdated.
+        """,
 
         VmaAllocator("allocator", "allocator object"),
         VmaPool("pool", "pool object"),
@@ -3010,6 +3027,16 @@ vmaCreateImage(allocator, &imgCreateInfo, &allocCreateInfo, &img, &alloc, nullpt
         VmaAllocation("allocation", ""),
         Check(1)..VkMemoryPropertyFlags.p("pFlags", "")
     )
+
+    VkResult(
+        "GetMemoryWin32Handle",
+        "",
+
+        VmaAllocator("allocator", ""),
+        VmaAllocation("allocation", ""),
+        nullable.."HANDLE".handle("hTargetProcess", ""),
+        Check(1).."HANDLE".handle.p("pHandle", "")
+    ).ifDirective("def LWJGL_WINDOWS")
 
     VkResult(
         "MapMemory",
