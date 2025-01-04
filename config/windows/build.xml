@@ -11,7 +11,7 @@
 
     <macrodef name="compile">
         <attribute name="dest" default="${dest}"/>
-        <attribute name="useClang" default="true"/>
+        <attribute name="useClang" default="false"/>
         <attribute name="flags" default=""/>
         <attribute name="simple" default="false"/>
         <attribute name="relative" default="true"/>
@@ -46,7 +46,7 @@
 
     <macrodef name="build">
         <attribute name="module"/>
-        <attribute name="useClang" default="true"/>
+        <attribute name="useClang" default="false"/>
         <attribute name="flags" default="/W2"/>
         <attribute name="simple" default="false"/>
         <element name="beforeCompile" optional="true"/>
@@ -150,7 +150,7 @@ EXPORTS
 
     <macrodef name="build_simple">
         <attribute name="module"/>
-        <attribute name="useClang" default="true"/>
+        <attribute name="useClang" default="false"/>
         <sequential>
             <build module="@{module}" useClang="@{useClang}" simple="true" if:true="${binding.@{module}}"/>
         </sequential>
@@ -235,7 +235,8 @@ EXPORTS
         <!-- meshoptimizer -->
         <sequential if:true="${binding.meshoptimizer}">
             <local name="meshoptimizer.useClang"/>
-            <condition property="meshoptimizer.useClang" value="false" else="true"><isset property="build.arch.arm64"/></condition>
+            <!--<condition property="meshoptimizer.useClang" value="false" else="true"><isset property="build.arch.arm64"/></condition>-->
+            <property name="meshoptimizer.useClang" value="false"/>
             <build module="meshoptimizer" useClang="${meshoptimizer.useClang}" simple="true">
                 <beforeCompile>
                     <compile useClang="${meshoptimizer.useClang}" flags="/DMESHOPTIMIZER_NO_WRAPPERS">
@@ -314,7 +315,8 @@ EXPORTS
         <!-- Remotery -->
         <sequential if:true="${binding.remotery}">
             <local name="remotery.useClang"/>
-            <condition property="remotery.useClang" value="false" else="true"><isset property="build.arch.x86"/></condition>
+            <!--<condition property="remotery.useClang" value="false" else="true"><isset property="build.arch.x86"/></condition>-->
+            <property name="remotery.useClang" value="false"/>
             <build module="remotery" useClang="${remotery.useClang}">
                 <compileargs>
                     <arg value="/I${src.main}"/>
