@@ -25,9 +25,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct XXH32_state_t {
  *     XXH32_hash_t {@link #total_len_32};
  *     XXH32_hash_t {@link #large_len};
- *     XXH32_hash_t {@link #v}[4];
- *     XXH32_hash_t {@link #mem32}[4];
- *     XXH32_hash_t {@link #memsize};
+ *     XXH32_hash_t {@link #acc}[4];
+ *     unsigned char {@link #buffer}[16];
+ *     XXH32_hash_t {@link #bufferedSize};
  *     XXH32_hash_t {@link #reserved};
  * }</code></pre>
  */
@@ -44,9 +44,9 @@ public class XXH32State extends Struct<XXH32State> implements NativeResource {
     public static final int
         TOTAL_LEN_32,
         LARGE_LEN,
-        V,
-        MEM32,
-        MEMSIZE,
+        ACC,
+        BUFFER,
+        BUFFEREDSIZE,
         RESERVED;
 
     static {
@@ -54,7 +54,7 @@ public class XXH32State extends Struct<XXH32State> implements NativeResource {
             __member(4),
             __member(4),
             __array(4, 4),
-            __array(4, 4),
+            __array(1, 16),
             __member(4),
             __member(4)
         );
@@ -64,9 +64,9 @@ public class XXH32State extends Struct<XXH32State> implements NativeResource {
 
         TOTAL_LEN_32 = layout.offsetof(0);
         LARGE_LEN = layout.offsetof(1);
-        V = layout.offsetof(2);
-        MEM32 = layout.offsetof(3);
-        MEMSIZE = layout.offsetof(4);
+        ACC = layout.offsetof(2);
+        BUFFER = layout.offsetof(3);
+        BUFFEREDSIZE = layout.offsetof(4);
         RESERVED = layout.offsetof(5);
     }
 
@@ -100,19 +100,19 @@ public class XXH32State extends Struct<XXH32State> implements NativeResource {
     public int large_len() { return nlarge_len(address()); }
     /** accumulator lanes */
     @NativeType("XXH32_hash_t[4]")
-    public IntBuffer v() { return nv(address()); }
+    public IntBuffer acc() { return nacc(address()); }
     /** accumulator lanes */
     @NativeType("XXH32_hash_t")
-    public int v(int index) { return nv(address(), index); }
-    /** internal buffer for partial reads. Treated as {@code unsigned char[16]}. */
-    @NativeType("XXH32_hash_t[4]")
-    public IntBuffer mem32() { return nmem32(address()); }
-    /** internal buffer for partial reads. Treated as {@code unsigned char[16]}. */
+    public int acc(int index) { return nacc(address(), index); }
+    /** internal buffer for partial reads */
+    @NativeType("unsigned char[16]")
+    public ByteBuffer buffer() { return nbuffer(address()); }
+    /** internal buffer for partial reads */
+    @NativeType("unsigned char")
+    public byte buffer(int index) { return nbuffer(address(), index); }
+    /** amount of data in {@code buffer} */
     @NativeType("XXH32_hash_t")
-    public int mem32(int index) { return nmem32(address(), index); }
-    /** amount of data in {@code mem32} */
-    @NativeType("XXH32_hash_t")
-    public int memsize() { return nmemsize(address()); }
+    public int bufferedSize() { return nbufferedSize(address()); }
     /** reserved field. Do not read nor write to it. */
     @NativeType("XXH32_hash_t")
     public int reserved() { return nreserved(address()); }
@@ -251,20 +251,20 @@ public class XXH32State extends Struct<XXH32State> implements NativeResource {
     public static int ntotal_len_32(long struct) { return memGetInt(struct + XXH32State.TOTAL_LEN_32); }
     /** Unsafe version of {@link #large_len}. */
     public static int nlarge_len(long struct) { return memGetInt(struct + XXH32State.LARGE_LEN); }
-    /** Unsafe version of {@link #v}. */
-    public static IntBuffer nv(long struct) { return memIntBuffer(struct + XXH32State.V, 4); }
-    /** Unsafe version of {@link #v(int) v}. */
-    public static int nv(long struct, int index) {
-        return memGetInt(struct + XXH32State.V + check(index, 4) * 4);
+    /** Unsafe version of {@link #acc}. */
+    public static IntBuffer nacc(long struct) { return memIntBuffer(struct + XXH32State.ACC, 4); }
+    /** Unsafe version of {@link #acc(int) acc}. */
+    public static int nacc(long struct, int index) {
+        return memGetInt(struct + XXH32State.ACC + check(index, 4) * 4);
     }
-    /** Unsafe version of {@link #mem32}. */
-    public static IntBuffer nmem32(long struct) { return memIntBuffer(struct + XXH32State.MEM32, 4); }
-    /** Unsafe version of {@link #mem32(int) mem32}. */
-    public static int nmem32(long struct, int index) {
-        return memGetInt(struct + XXH32State.MEM32 + check(index, 4) * 4);
+    /** Unsafe version of {@link #buffer}. */
+    public static ByteBuffer nbuffer(long struct) { return memByteBuffer(struct + XXH32State.BUFFER, 16); }
+    /** Unsafe version of {@link #buffer(int) buffer}. */
+    public static byte nbuffer(long struct, int index) {
+        return memGetByte(struct + XXH32State.BUFFER + check(index, 16) * 1);
     }
-    /** Unsafe version of {@link #memsize}. */
-    public static int nmemsize(long struct) { return memGetInt(struct + XXH32State.MEMSIZE); }
+    /** Unsafe version of {@link #bufferedSize}. */
+    public static int nbufferedSize(long struct) { return memGetInt(struct + XXH32State.BUFFEREDSIZE); }
     /** Unsafe version of {@link #reserved}. */
     public static int nreserved(long struct) { return memGetInt(struct + XXH32State.RESERVED); }
 
@@ -317,21 +317,21 @@ public class XXH32State extends Struct<XXH32State> implements NativeResource {
         /** @return the value of the {@link XXH32State#large_len} field. */
         @NativeType("XXH32_hash_t")
         public int large_len() { return XXH32State.nlarge_len(address()); }
-        /** @return a {@link IntBuffer} view of the {@link XXH32State#v} field. */
+        /** @return a {@link IntBuffer} view of the {@link XXH32State#acc} field. */
         @NativeType("XXH32_hash_t[4]")
-        public IntBuffer v() { return XXH32State.nv(address()); }
-        /** @return the value at the specified index of the {@link XXH32State#v} field. */
+        public IntBuffer acc() { return XXH32State.nacc(address()); }
+        /** @return the value at the specified index of the {@link XXH32State#acc} field. */
         @NativeType("XXH32_hash_t")
-        public int v(int index) { return XXH32State.nv(address(), index); }
-        /** @return a {@link IntBuffer} view of the {@link XXH32State#mem32} field. */
-        @NativeType("XXH32_hash_t[4]")
-        public IntBuffer mem32() { return XXH32State.nmem32(address()); }
-        /** @return the value at the specified index of the {@link XXH32State#mem32} field. */
+        public int acc(int index) { return XXH32State.nacc(address(), index); }
+        /** @return a {@link ByteBuffer} view of the {@link XXH32State#buffer} field. */
+        @NativeType("unsigned char[16]")
+        public ByteBuffer buffer() { return XXH32State.nbuffer(address()); }
+        /** @return the value at the specified index of the {@link XXH32State#buffer} field. */
+        @NativeType("unsigned char")
+        public byte buffer(int index) { return XXH32State.nbuffer(address(), index); }
+        /** @return the value of the {@link XXH32State#bufferedSize} field. */
         @NativeType("XXH32_hash_t")
-        public int mem32(int index) { return XXH32State.nmem32(address(), index); }
-        /** @return the value of the {@link XXH32State#memsize} field. */
-        @NativeType("XXH32_hash_t")
-        public int memsize() { return XXH32State.nmemsize(address()); }
+        public int bufferedSize() { return XXH32State.nbufferedSize(address()); }
         /** @return the value of the {@link XXH32State#reserved} field. */
         @NativeType("XXH32_hash_t")
         public int reserved() { return XXH32State.nreserved(address()); }

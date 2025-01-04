@@ -14,9 +14,9 @@ val XXH32_state_t = struct(Module.XXHASH, "XXH32State", nativeName = "XXH32_stat
 
     XXH32_hash_t("total_len_32", "total length hashed, modulo {@code 2^32}")
     XXH32_hash_t("large_len", "whether the hash is &ge; 16 (handles {@code total_len_32} overflow)")
-    XXH32_hash_t("v", "accumulator lanes")[4]
-    XXH32_hash_t("mem32", "internal buffer for partial reads. Treated as {@code unsigned char[16]}.")[4]
-    XXH32_hash_t("memsize", "amount of data in {@code mem32}")
+    XXH32_hash_t("acc", "accumulator lanes")[4]
+    unsigned_char("buffer", "internal buffer for partial reads")[16]
+    XXH32_hash_t("bufferedSize", "amount of data in {@code buffer}")
     XXH32_hash_t("reserved", "reserved field. Do not read nor write to it.")
 }
 
@@ -24,9 +24,9 @@ val XXH64_state_t = struct(Module.XXHASH, "XXH64State", nativeName = "XXH64_stat
     documentation = "The opaque state struct for the XXH64 streaming API."
 
     XXH64_hash_t("total_len", "total length hashed. This is always 64-bit.")
-    XXH64_hash_t("v", "accumulator lanes")[4]
-    XXH64_hash_t("mem64", "internal buffer for partial reads. Treated as {@code unsigned char[32]}.")[4]
-    XXH32_hash_t("memsize", "amount of data in {@code mem64}")
+    XXH64_hash_t("acc", "accumulator lanes")[4]
+    unsigned_char("buffer", "internal buffer for partial reads")[32]
+    XXH32_hash_t("bufferedSize", "amount of data in {@code buffer}")
     XXH32_hash_t("reserved32", "reserved field, needed for padding anyways")
     XXH64_hash_t("reserved64", "reserved field. Do not read or write to it.")
 }

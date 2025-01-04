@@ -159,7 +159,7 @@ public class XXHash {
     public static final int XXH_VERSION_MINOR = 8;
 
     /** The release version number. */
-    public static final int XXH_VERSION_RELEASE = 2;
+    public static final int XXH_VERSION_RELEASE = 3;
 
     /** The version number */
     public static final int XXH_VERSION_NUMBER = (XXH_VERSION_MAJOR *100*100 + XXH_VERSION_MINOR *100 + XXH_VERSION_RELEASE);
@@ -183,6 +183,9 @@ public class XXHash {
      */
     public static final int XXH3_SECRET_DEFAULT_SIZE = 192;
 
+    /** Maximum size of "short" key in bytes. */
+    public static final int XXH3_MIDSIZE_MAX = 240;
+
     protected XXHash() {
         throw new UnsupportedOperationException();
     }
@@ -198,8 +201,6 @@ public class XXHash {
 
     /**
      * Calculates the 32-bit hash of {@code input} using xxHash32.
-     * 
-     * <p>Speed on Core 2 Duo @ 3 GHz (single thread, SMHasher benchmark): 5.4 GB/s</p>
      * 
      * <p>The memory between {@code input} and {@code input + length} must be valid, readable, contiguous memory. However, if {@code length} is {@code 0},
      * {@code input} may be {@code NULL}.</p>
