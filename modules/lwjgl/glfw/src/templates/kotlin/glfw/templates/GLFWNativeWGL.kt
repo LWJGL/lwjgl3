@@ -86,6 +86,6 @@ val GLFWNativeWGL = "GLFWNativeWGL".nativeClass(Module.GLFW, nativeSubPath = "wi
         if (a != NULL) {
             nmemFree(a);
         }
-        memPutAddress(override, path == null ? NULL : memAddress(memUTF16(path)));
+        memPutAddress(override, path == null ? NULL : memAddress(memUTF8(path)));
     }""")
 }
