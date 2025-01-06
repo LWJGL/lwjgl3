@@ -14,6 +14,13 @@
  * <p>Written in C++, it is available under a liberal BSD license. Assimp loads all input model formats into one straightforward data structure for further
  * processing. This feature set is augmented by various post processing tools, including frequently-needed operations such as computing normal and tangent
  * vectors.</p>
+ * 
+ * <h3>Resources</h3>
+ * 
+ * <ul>
+ * <li><a href="https://assimp-docs.readthedocs.io/en/latest/">Documentation</a></li>
+ * <li><a href="https://github.com/assimp/assimp">Source Repository</a></li>
+ * </ul>
  */
 @org.jspecify.annotations.NullMarked
 package org.lwjgl.assimp;

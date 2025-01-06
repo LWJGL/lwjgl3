@@ -11,6 +11,12 @@
  * 
  * <p>Until these bindings are sufficiently tested, this API should be considered unstable. Also, bindings to more (and eventually, all) CUDA Toolkit
  * libraries will be added in the near future.</p>
+ * 
+ * <h3>Resources</h3>
+ * 
+ * <ul>
+ * <li><a href="https://docs.nvidia.com/cuda/">Documentation</a></li>
+ * </ul>
  */
 @org.jspecify.annotations.NullMarked
 package org.lwjgl.cuda;

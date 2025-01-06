@@ -5,7 +5,7 @@
  */
 
 /**
- * Contains bindings to <a href="https://facebook.github.io/yoga/">Yoga</a>.
+ * Contains bindings to <a href="https://www.yogalayout.dev/">Yoga</a>.
  * 
  * <p>Yoga is a cross-platform layout engine enabling maximum collaboration within your team by implementing an API familiar to many designers and opening it
  * up to developers across different platforms.</p>
@@ -19,24 +19,15 @@
  * 
  * <h3>LWJGL implementation</h3>
  * 
- * <p>Unlike the official Yoga Java bindings, the LWJGL bindings directly expose the native C API. {@code YGNodeRef} handles do not need to be wrapped in Java
- * instances, so there is no memory overhead. The internal Yoga structs are also exposed, which makes it very efficient to read the current tree layout
- * after a call to {@link org.lwjgl.util.yoga.Yoga#YGNodeCalculateLayout NodeCalculateLayout}:</p>
+ * <p>Unlike the official Yoga Java bindings, the LWJGL bindings directly expose the native C API. {@code YGNodeRef} handles do not need to be wrapped in
+ * Java instances, so there is no memory overhead.</p>
  * 
- * <pre>{@code
- * // Public API, 4x JNI call overhead
- * float l = YGNodeLayoutGetLeft(node);
- * float t = YGNodeLayoutGetTop(node);
- * float w = YGNodeLayoutGetWidth(node);
- * float h = YGNodeLayoutGetHeight(node);
+ * <h3>Resources</h3>
  * 
- * // Internal API without overhead (plain memory accesses, assuming allocations are eliminated via EA)
- * YGLayout layout = YGNode.create(node).layout();
- * 
- * float l = layout.positions(YGEdgeLeft);
- * float t = layout.positions(YGEdgeTop);
- * float w = layout.dimensions(YGDimensionWidth);
- * float h = layout.dimensions(YGDimensionHeight);}</pre>
+ * <ul>
+ * <li><a href="https://www.yogalayout.dev/docs/about-yoga">Documentation</a></li>
+ * <li><a href="https://github.com/facebook/yoga">Source Repository</a></li>
+ * </ul>
  */
 @org.jspecify.annotations.NullMarked
 package org.lwjgl.util.yoga;

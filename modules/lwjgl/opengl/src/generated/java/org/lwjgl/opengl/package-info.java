@@ -35,6 +35,13 @@
  * <li>Should create a 3.3 Compatibility Profile context. A Core Profile context would have extra validation overhead.</li>
  * <li>Should use the Core Profile hierarchy to avoid deprecated symbols. Auto-complete lists in an IDE will also be cleaner.</li>
  * </ul>
+ * 
+ * <h3>Resources</h3>
+ * 
+ * <ul>
+ * <li><a href="https://registry.khronos.org/OpenGL/index_gl.php">Documentation</a></li>
+ * <li><a href="https://github.com/KhronosGroup/OpenGL-Registry">Source Repository</a></li>
+ * </ul>
  */
 @org.jspecify.annotations.NullMarked
 package org.lwjgl.opengl;

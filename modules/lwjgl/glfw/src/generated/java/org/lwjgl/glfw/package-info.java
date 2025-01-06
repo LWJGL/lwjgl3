@@ -19,6 +19,13 @@
  * <p>Applications that cannot function with the above limitation may set {@link org.lwjgl.system.Configuration#GLFW_LIBRARY_NAME GLFW_LIBRARY_NAME} to the
  * value {@code "glfw_async"}. This will instruct LWJGL to load an alternative GLFW build that dispatches Cocoa calls to the main thread in blocking mode.
  * The other window toolkit must be initialized (e.g. with AWT's {@code Toolkit.getDefaultToolkit()}) before {@link org.lwjgl.glfw.GLFW#glfwInit Init} is called.</p>
+ * 
+ * <h3>Resources</h3>
+ * 
+ * <ul>
+ * <li><a href="https://www.glfw.org/documentation.html">Documentation</a></li>
+ * <li><a href="https://github.com/glfw/glfw">Source Repository</a></li>
+ * </ul>
  */
 @org.jspecify.annotations.NullMarked
 package org.lwjgl.glfw;

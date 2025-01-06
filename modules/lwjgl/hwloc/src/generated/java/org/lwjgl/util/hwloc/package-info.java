@@ -17,6 +17,13 @@
  * 
  * <p>hwloc may also help many applications just by providing a portable CPU and memory binding API and a reliable way to find out how many cores and/or
  * hardware threads are available.</p>
+ * 
+ * <h3>Resources</h3>
+ * 
+ * <ul>
+ * <li><a href="https://www.open-mpi.org/projects/hwloc/doc/">Documentation</a></li>
+ * <li><a href="https://github.com/open-mpi/hwloc">Source Repository</a></li>
+ * </ul>
  */
 @org.jspecify.annotations.NullMarked
 package org.lwjgl.util.hwloc;
