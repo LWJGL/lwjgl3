@@ -11,7 +11,7 @@ val ClangRewrite = "ClangRewrite".nativeClass(
     Module.LLVM,
     prefixConstant = "CX",
     prefixMethod = "clang_CXRewriter_",
-    binding = CLANG_BINDING
+    binding = CLANG_BINDING_DELEGATE
 ) {
     nativeImport("clang-c/Rewrite.h")
     IgnoreMissing..CXRewriter(
