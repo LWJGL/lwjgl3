@@ -335,9 +335,6 @@ EXPORTS
             </linkargs>
         </build>
 
-        <!-- SSE -->
-        <build_simple module="sse"/>
-
         <!-- stb -->
         <build_simple module="stb"/>
 

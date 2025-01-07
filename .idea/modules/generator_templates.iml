@@ -44,7 +44,6 @@
     <orderEntry type="module" module-name="templates.rpmalloc" />
     <orderEntry type="module" module-name="templates.shaderc" />
     <orderEntry type="module" module-name="templates.spvc" />
-    <orderEntry type="module" module-name="templates.sse" />
     <orderEntry type="module" module-name="templates.stb" />
     <orderEntry type="module" module-name="templates.tinyexr" />
     <orderEntry type="module" module-name="templates.tinyfd" />

@@ -280,9 +280,6 @@
         <!-- rpmalloc -->
         <build_simple module="rpmalloc"/>
 
-        <!-- SSE -->
-        <build_simple module="sse"/>
-
         <!-- stb -->
         <build_simple module="stb"/>
 

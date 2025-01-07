@@ -367,13 +367,6 @@
         <!-- rpmalloc -->
         <build_simple module="rpmalloc"/>
 
-        <!-- SSE -->
-        <build module="sse" simple="true" if:true="${binding.sse}">
-            <source>
-                <arg value="-msse3"/>
-            </source>
-        </build>
-
         <!-- stb -->
         <build module="stb" if:true="${binding.stb}">
             <source>

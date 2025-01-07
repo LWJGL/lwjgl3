@@ -704,12 +704,6 @@ git branch -D @{-1}""")}"""}()}
         """,
         arrayOverloads = false
     ),
-    SSE(
-        "sse",
-        "org.lwjgl.util.simd",
-        "Contains bindings to SSE macros.",
-        library = JNILibrary.create("LibSSE")
-    ),
     STB(
         "stb",
         "org.lwjgl.stb",

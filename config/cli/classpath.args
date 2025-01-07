@@ -35,7 +35,6 @@ bin/classes/lwjgl/remotery:\
 bin/classes/lwjgl/rpmalloc:\
 bin/classes/lwjgl/shaderc:\
 bin/classes/lwjgl/spvc:\
-bin/classes/lwjgl/sse:\
 bin/classes/lwjgl/stb:\
 bin/classes/lwjgl/tinyexr:\
 bin/classes/lwjgl/tinyfd:\

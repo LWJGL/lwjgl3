@@ -268,11 +268,6 @@ enum class Artifacts(
         "A library for performing reflection on SPIR-V and disassembling SPIR-V back to high level languages.",
         *Platforms.ALL
     ),
-    SSE(
-        "lwjgl-sse", "LWJGL - SSE bindings",
-        "Simple SSE intrinsics.",
-        Platforms.FREEBSD, Platforms.LINUX, Platforms.MACOS, Platforms.WINDOWS, Platforms.WINDOWS_X86
-    ),
     STB(
         "lwjgl-stb", "LWJGL - stb bindings",
         "Single-file public domain libraries for fonts, images, ogg vorbis files and more.",

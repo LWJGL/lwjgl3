@@ -534,7 +534,6 @@
             <compileBinding binding="rpmalloc"/>
             <compileBinding binding="shaderc"/>
             <compileBinding binding="spvc"/>
-            <compileBinding binding="sse"/>
             <compileBinding binding="stb"/>
             <compileBinding binding="tinyexr"/>
             <compileBinding binding="tinyfd"/>
@@ -911,7 +910,7 @@
                 <pathelement path="${lib}/native"/>
             </classpath>
 
-            <!--<jvmarg value="-Xcheck:jni"/>--> <!-- SIMD fails with this (see -XX:+RestoreMXCSROnJNICall) -->
+            <jvmarg value="-Xcheck:jni" if:set="jdk21"/>
             <jvmarg value="-server"/>
             <jvmarg value="-ea"/>
             <jvmarg line="-Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8"/>
@@ -1935,20 +1934,6 @@
 
         <!-- SPIRV-Cross -->
         <release-module name="spvc" native-library="spirv-cross" title="SPIRV-Cross" if:true="${binding.spvc}"/>
-
-        <!-- SSE -->
-        <release-module name="sse" title="SSE" if:true="${binding.sse}">
-            <natives>
-                <get-release platform="freebsd" arch="x64" file="liblwjgl_sse.so"/>
-
-                <get-release platform="linux" arch="x64" file="liblwjgl_sse.so"/>
-
-                <get-release platform="macos" arch="x64" file="liblwjgl_sse.dylib"/>
-
-                <get-release platform="windows" arch="x64" file="lwjgl_sse.dll"/>
-                <get-release platform="windows" arch="x86" file="lwjgl_sse.dll"/>
-            </natives>
-        </release-module>
 
         <!-- stb -->
         <release-module name="stb" native-library="lwjgl_stb" title="stb" if:true="${binding.stb}"/>

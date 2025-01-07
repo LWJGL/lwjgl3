@@ -55,7 +55,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.rpmalloc.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.rpmalloc.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.shaderc.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.shaderc.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.spvc.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.spvc.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.sse.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.sse.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.stb.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.stb.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.tinyexr.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.tinyexr.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.tinyfd.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.tinyfd.iml" />

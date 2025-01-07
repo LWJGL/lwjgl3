@@ -115,9 +115,6 @@
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/spvc/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/spvc/src/templates/kotlin" isTestSource="false" />
     </content>
-    <content url="file://$MODULE_DIR$/../../modules/lwjgl/sse/src/templates">
-      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/sse/src/templates/kotlin" isTestSource="false" />
-    </content>
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/stb/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/stb/src/templates/kotlin" isTestSource="false" />
     </content>
