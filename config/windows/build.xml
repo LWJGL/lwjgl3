@@ -226,9 +226,6 @@ EXPORTS
             </beforeCompile>
         </build>
 
-        <!-- Meow -->
-        <build_simple module="meow" useClang="false"/>
-
         <!-- meshoptimizer -->
         <sequential if:true="${binding.meshoptimizer}">
             <local name="meshoptimizer.useClang"/>

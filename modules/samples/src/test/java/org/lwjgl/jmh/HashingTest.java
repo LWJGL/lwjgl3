@@ -4,14 +4,12 @@
  */
 package org.lwjgl.jmh;
 
-import org.lwjgl.util.meow.*;
 import org.openjdk.jmh.annotations.*;
 
 import java.nio.*;
 import java.util.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.util.meow.Meow.*;
 import static org.lwjgl.util.xxhash.XXHash.*;
 import static org.testng.Assert.*;
 
@@ -23,7 +21,6 @@ public class HashingTest {
     private int length;
 
     private ByteBuffer buffer;
-    private MeowHash   hash;
 
     @Setup
     public void setup() {
@@ -34,14 +31,11 @@ public class HashingTest {
             buffer.put(i, (byte)(rand.nextInt() & 0xFF));
         }
 
-        hash = MeowHash.create(nmemAlignedAlloc(MeowHash.ALIGNOF, MeowHash.SIZEOF));
-
         assertEquals(xxhashJava(), xxhash());
     }
 
     @TearDown
     public void tearDown() {
-        nmemAlignedFree(hash.address());
         memAlignedFree(buffer);
     }
 
@@ -70,11 +64,6 @@ public class HashingTest {
         }
 
         return h;
-    }
-
-    @Benchmark
-    public long meow() {
-        return MeowHash_Accelerated(7, buffer, hash).u64(0);
     }
 
     @Benchmark

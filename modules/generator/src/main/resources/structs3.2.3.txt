@@ -326,9 +326,6 @@ org.lwjgl.util.lz4.LZ4StreamDecode
 org.lwjgl.util.lz4.LZ4StreamDecodeInternal
 org.lwjgl.util.lz4.LZ4StreamHC
 org.lwjgl.util.lz4.LZ4StreamInternal
-org.lwjgl.util.meow.MeowHash
-org.lwjgl.util.meow.MeowHashState
-org.lwjgl.util.meow.MeowU128
 org.lwjgl.util.nfd.NFDPathSet
 org.lwjgl.util.par.ParSLAnnotation
 org.lwjgl.util.par.ParSLConfig

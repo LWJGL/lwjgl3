@@ -343,20 +343,6 @@ enum class Module(
         library = JNILibrary.create("LibLZ4", setupAllocator = true),
         arrayOverloads = false
     ),
-    MEOW(
-        "meow",
-        "org.lwjgl.util.meow",
-        """
-        Contains bindings to ${url("https://mollyrocket.com/meowhash", "Meow hash")}, an extremely fast non-cryptographic hash.
-
-        <h3>Resources</h3>
-        ${ul(
-            url("https://github.com/cmuratori/meow_hash", "Source Repository")
-        )}
-        """,
-        library = JNILibrary.create("LibMeow"),
-        arrayOverloads = false
-    ),
     MESHOPTIMIZER(
         "meshoptimizer",
         "org.lwjgl.util.meshoptimizer",

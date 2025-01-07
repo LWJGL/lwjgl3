@@ -153,14 +153,6 @@ enum class Artifacts(
         "A lossless data compression algorithm that is focused on compression and decompression speed.",
         *Platforms.ALL
     ),
-    MEOW(
-        "lwjgl-meow", "LWJGL - Meow hash bindings",
-        "An extremely fast non-cryptographic hash.",
-        Platforms.FREEBSD,
-        Platforms.LINUX, Platforms.LINUX_ARM64,
-        Platforms.MACOS, Platforms.MACOS_ARM64,
-        Platforms.WINDOWS, Platforms.WINDOWS_X86, Platforms.WINDOWS_ARM64
-    ),
     MESHOPTIMIZER(
         "lwjgl-meshoptimizer", "LWJGL - meshoptimizer bindings",
         "A library that provides algorithms to help optimize meshes.",

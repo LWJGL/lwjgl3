@@ -22,7 +22,6 @@
     <orderEntry type="module" module-name="templates.llvm" />
     <orderEntry type="module" module-name="templates.lmdb" />
     <orderEntry type="module" module-name="templates.lz4" />
-    <orderEntry type="module" module-name="templates.meow" />
     <orderEntry type="module" module-name="templates.meshoptimizer" />
     <orderEntry type="module" module-name="templates.msdfgen" />
     <orderEntry type="module" module-name="templates.nanovg" />

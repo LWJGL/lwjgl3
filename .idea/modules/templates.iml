@@ -49,9 +49,6 @@
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/lz4/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/lz4/src/templates/kotlin" isTestSource="false" />
     </content>
-    <content url="file://$MODULE_DIR$/../../modules/lwjgl/meow/src/templates">
-      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/meow/src/templates/kotlin" isTestSource="false" />
-    </content>
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/meshoptimizer/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/meshoptimizer/src/templates/kotlin" isTestSource="false" />
     </content>

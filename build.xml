@@ -504,7 +504,6 @@
             <compileBinding binding="llvm"/>
             <compileBinding binding="lmdb"/>
             <compileBinding binding="lz4"/>
-            <compileBinding binding="meow"/>
             <compileBinding binding="meshoptimizer"/>
             <compileBinding binding="msdfgen"/>
             <compileBinding binding="nanovg"/>
@@ -798,14 +797,6 @@
             </and>
         </condition>
 
-        <local name="test.hashing"/>
-        <condition property="test.hashing">
-            <and>
-                <istrue value="${binding.xxhash}"/>
-                <istrue value="${binding.meow}"/>
-            </and>
-        </condition>
-
         <mkdir dir="${bin.samples}"/>
         <lwjgl.javac srcdir="modules/samples/src/test/java" destdir="${bin.samples}" taskname="javac: Samples">
             <classpath>
@@ -851,7 +842,6 @@
             <include name="org/lwjgl/demo/util/ktx/**" if:true="${binding.ktx}"/>
             <include name="org/lwjgl/demo/util/lmdb/**" if:true="${binding.lmdb}"/>
             <include name="org/lwjgl/demo/util/lz4/**" if:true="${binding.lz4}"/>
-            <include name="org/lwjgl/demo/util/meow/**" if:true="${binding.meow}"/>
             <include name="org/lwjgl/demo/util/meshoptimizer/**" if:true="${binding.meshoptimizer}"/>
             <include name="org/lwjgl/demo/util/msdfgen/**" if:set="test.msdfgen"/>
             <include name="org/lwjgl/demo/util/nfd/**" if:set="test.nfd"/>
@@ -868,7 +858,7 @@
 
             <!-- Benchmarks -->
             <include name="org/lwjgl/jmh/**"/>
-            <exclude name="org/lwjgl/jmh/Hashing*" unless:true="${test.hashing}"/>
+            <exclude name="org/lwjgl/jmh/Hashing*" unless:true="${binding.xxhash}"/>
             <exclude name="org/lwjgl/jmh/VarHandle*" unless:set="jdk11"/>
         </lwjgl.javac>
     </target>
@@ -1710,23 +1700,6 @@
 
         <!-- lz4 -->
         <release-module name="lz4" native-library="lwjgl_lz4" title="lz4" if:true="${binding.lz4}"/>
-
-        <!-- Meow hash -->
-        <release-module name="meow" title="Meow hash" if:true="${binding.meow}">
-            <natives>
-                <get-release platform="freebsd" arch="x64" file="liblwjgl_meow.so"/>
-
-                <get-release platform="linux" arch="x64" file="liblwjgl_meow.so"/>
-                <get-release platform="linux" arch="arm64" file="liblwjgl_meow.so"/>
-
-                <get-release platform="macos" arch="x64" file="liblwjgl_meow.dylib"/>
-                <get-release platform="macos" arch="arm64" file="liblwjgl_meow.dylib"/>
-
-                <get-release platform="windows" arch="x64" file="lwjgl_meow.dll"/>
-                <get-release platform="windows" arch="x86" file="lwjgl_meow.dll"/>
-                <get-release platform="windows" arch="arm64" file="lwjgl_meow.dll"/>
-            </natives>
-        </release-module>
 
         <!-- meshoptimizer -->
         <release-module name="meshoptimizer" native-library="lwjgl_meshoptimizer" title="meshoptimizer" if:true="${binding.meshoptimizer}"/>

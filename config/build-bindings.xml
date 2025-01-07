@@ -33,12 +33,6 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.llvm" value="true"/>
     <property name="binding.lmdb" value="true"/>
     <property name="binding.lz4" value="true"/>
-    <condition property="binding.meow" value="true" else="false">
-        <or>
-            <isset property="build.arch.x64|x86"/>
-            <isset property="build.arch.arm64"/>
-        </or>
-    </condition>
     <property name="binding.meshoptimizer" value="true"/>
     <property name="binding.msdfgen" value="true"/>
     <property name="binding.nanovg" value="true"/>
@@ -98,7 +92,6 @@ This script is included in /config/build-definitions.xml.
                 <sequential if:true="${binding.llvm}"><local name="module"/><property name="module" value="llvm"/><body/></sequential>
                 <sequential if:true="${binding.lmdb}"><local name="module"/><property name="module" value="lmdb"/><body/></sequential>
                 <sequential if:true="${binding.lz4}"><local name="module"/><property name="module" value="lz4"/><body/></sequential>
-                <sequential if:true="${binding.meow}"><local name="module"/><property name="module" value="meow"/><body/></sequential>
                 <sequential if:true="${binding.meshoptimizer}"><local name="module"/><property name="module" value="meshoptimizer"/><body/></sequential>
                 <sequential if:true="${binding.msdfgen}"><local name="module"/><property name="module" value="msdfgen"/><body/></sequential>
                 <sequential if:true="${binding.nanovg}"><local name="module"/><property name="module" value="nanovg"/><body/></sequential>

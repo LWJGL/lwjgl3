@@ -233,15 +233,6 @@
             </beforeCompile>
         </build>
 
-        <!-- Meow -->
-        <sequential if:true="${binding.meow}">
-            <local name="meow.flags"/>
-            <condition property="meow.flags" value="-march=armv8-a+crypto"><isset property="build.arch.arm"/></condition>
-            <condition property="meow.flags" value="-maes -msse4.2"><isset property="build.arch.x64|x86"/></condition>
-
-            <build module="meow" simple="true" flags="-Werror -Wfatal-errors ${meow.flags}"/>
-        </sequential>
-
         <!-- meshoptimizer -->
         <build module="meshoptimizer" simple="true" lang="c++" if:true="${binding.meshoptimizer}">
             <beforeCompile>
