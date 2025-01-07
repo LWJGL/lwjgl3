@@ -19,7 +19,6 @@
     <orderEntry type="module" module-name="templates.jawt" />
     <orderEntry type="module" module-name="templates.jemalloc" />
     <orderEntry type="module" module-name="templates.ktx" />
-    <orderEntry type="module" module-name="templates.libdivide" />
     <orderEntry type="module" module-name="templates.llvm" />
     <orderEntry type="module" module-name="templates.lmdb" />
     <orderEntry type="module" module-name="templates.lz4" />

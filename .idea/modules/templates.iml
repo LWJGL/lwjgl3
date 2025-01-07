@@ -40,9 +40,6 @@
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/ktx/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/ktx/src/templates/kotlin" isTestSource="false" />
     </content>
-    <content url="file://$MODULE_DIR$/../../modules/lwjgl/libdivide/src/templates">
-      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/libdivide/src/templates/kotlin" isTestSource="false" />
-    </content>
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/llvm/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/llvm/src/templates/kotlin" isTestSource="false" />
     </content>

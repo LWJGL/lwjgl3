@@ -35,7 +35,6 @@
     <orderEntry type="module" module-name="lwjgl.jawt" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.jemalloc" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.ktx" scope="TEST" />
-    <orderEntry type="module" module-name="lwjgl.libdivide" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.llvm" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.lmdb" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.lz4" scope="TEST" />

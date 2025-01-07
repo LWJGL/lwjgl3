@@ -313,14 +313,6 @@ org.lwjgl.system.windows.SECURITY_ATTRIBUTES
 org.lwjgl.system.windows.TOUCHINPUT
 org.lwjgl.system.windows.WINDOWPLACEMENT
 org.lwjgl.system.windows.WNDCLASSEX
-org.lwjgl.util.libdivide.LibDivideS32
-org.lwjgl.util.libdivide.LibDivideS32BranchFree
-org.lwjgl.util.libdivide.LibDivideS64
-org.lwjgl.util.libdivide.LibDivideS64BranchFree
-org.lwjgl.util.libdivide.LibDivideU32
-org.lwjgl.util.libdivide.LibDivideU32BranchFree
-org.lwjgl.util.libdivide.LibDivideU64
-org.lwjgl.util.libdivide.LibDivideU64BranchFree
 org.lwjgl.util.lmdb.MDBEnvInfo
 org.lwjgl.util.lmdb.MDBStat
 org.lwjgl.util.lmdb.MDBVal

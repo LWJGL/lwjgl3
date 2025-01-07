@@ -30,7 +30,6 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.jawt" value="true"/>
     <property name="binding.jemalloc" value="true"/>
     <property name="binding.ktx" value="true"/>
-    <property name="binding.libdivide" value="true"/>
     <property name="binding.llvm" value="true"/>
     <property name="binding.lmdb" value="true"/>
     <property name="binding.lz4" value="true"/>
@@ -96,7 +95,6 @@ This script is included in /config/build-definitions.xml.
                 <sequential if:true="${binding.jawt}"><local name="module"/><property name="module" value="jawt"/><body/></sequential>
                 <sequential if:true="${binding.jemalloc}"><local name="module"/><property name="module" value="jemalloc"/><body/></sequential>
                 <sequential if:true="${binding.ktx}"><local name="module"/><property name="module" value="ktx"/><body/></sequential>
-                <sequential if:true="${binding.libdivide}"><local name="module"/><property name="module" value="libdivide"/><body/></sequential>
                 <sequential if:true="${binding.llvm}"><local name="module"/><property name="module" value="llvm"/><body/></sequential>
                 <sequential if:true="${binding.lmdb}"><local name="module"/><property name="module" value="lmdb"/><body/></sequential>
                 <sequential if:true="${binding.lz4}"><local name="module"/><property name="module" value="lz4"/><body/></sequential>

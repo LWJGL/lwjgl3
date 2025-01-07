@@ -13,11 +13,6 @@
             <package name="org.lwjgl.system.libffi"/>
         </packages>
     </test>
-    <test name="libdivide" parallel="methods" thread-count="4">
-        <packages>
-            <package name="org.lwjgl.util.libdivide"/>
-        </packages>
-    </test>
     <test name="meshoptimizer">
         <packages>
             <package name="org.lwjgl.util.meshoptimizer"/>

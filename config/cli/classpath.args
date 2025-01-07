@@ -11,7 +11,6 @@ bin/classes/lwjgl/hwloc:\
 bin/classes/lwjgl/jawt:\
 bin/classes/lwjgl/jemalloc:\
 bin/classes/lwjgl/ktx:\
-bin/classes/lwjgl/libdivide:\
 bin/classes/lwjgl/llvm:\
 bin/classes/lwjgl/lmdb:\
 bin/classes/lwjgl/lz4:\

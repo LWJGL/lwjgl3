@@ -193,9 +193,6 @@ EXPORTS
             </link>
         </build>
 
-        <!-- LIBDIVIDE -->
-        <build_simple module="libdivide"/>
-
         <!-- LLVM -->
         <build_simple module="llvm"/>
 

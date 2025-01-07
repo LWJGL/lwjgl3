@@ -180,7 +180,6 @@ improve the chances of a quick and useful response.
 | [hwloc](https://www.open-mpi.org/projects/hwloc/)| A portable abstraction of the hierarchical topology of modern architectures, including NUMA memory nodes, sockets, shared caches, cores and simultaneous multithreading.|
 | [jemalloc](https://jemalloc.net/)| A general purpose malloc implementation that emphasizes fragmentation avoidance and scalable concurrency support.|
 | [libffi](https://sourceware.org)| A portable, high level programming interface to various calling conventions.|
-| [libdivide](https://libdivide.com/)| A library that replaces expensive integer divides with comparatively cheap multiplication and bitshifts.|
 | [LLVM](https://llvm.org/)| A collection of modular and reusable compiler and toolchain technologies.|
 | [LMDB](https://www.symas.com/lmdb)| An extraordinarily fast, memory-efficient database. With memory-mapped files, it has the read performance of a pure in-memory database while retaining the persistence of standard disk-based databases.|
 | [LZ4](https://lz4.org/)| A lossless data compression algorithm that is focused on compression and decompression speed.|

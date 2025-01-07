@@ -287,21 +287,6 @@ enum class Module(
         CallingConvention.STDCALL,
         arrayOverloads = false
     ),
-    LIBDIVIDE(
-        "libdivide",
-        "org.lwjgl.util.libdivide",
-        """
-        Contains bindings to ${url("https://libdivide.com/", "libdivide")}.
-
-        <h3>Resources</h3>
-        ${ul(
-            url("https://libdivide.com/documentation.html", "Documentation"),
-            url("https://github.com/ridiculousfish/libdivide", "Source Repository")
-        )}
-        """,
-        library = JNILibrary.simple(),
-        arrayOverloads = false
-    ),
     LLVM(
         "llvm",
         "org.lwjgl.llvm",

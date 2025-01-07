@@ -138,11 +138,6 @@ enum class Artifacts(
         Platforms.MACOS, Platforms.MACOS_ARM64,
         Platforms.WINDOWS, Platforms.WINDOWS_ARM64
     ),
-    LIBDIVIDE(
-        "lwjgl-libdivide", "LWJGL - libdivide bindings",
-        "A library that replaces expensive integer divides with comparatively cheap multiplication and bitshifts.",
-        *Platforms.ALL
-    ),
     LLVM(
         "lwjgl-llvm", "LWJGL - LLVM/Clang bindings",
         "A collection of modular and reusable compiler and toolchain technologies.",
