@@ -12,7 +12,8 @@
  * <h3>Resources</h3>
  * 
  * <ul>
- * <li><a href="https://registry.khronos.org/EGL/">Documentation</a></li>
+ * <li><a href="https://registry.khronos.org/EGL/sdk/docs/man/">Reference Pages</a></li>
+ * <li><a href="https://registry.khronos.org/EGL/">EGL Registry</a></li>
  * <li><a href="https://github.com/KhronosGroup/EGL-Registry">Source Repository</a></li>
  * </ul>
  */

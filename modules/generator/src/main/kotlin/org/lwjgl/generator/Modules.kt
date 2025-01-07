@@ -135,7 +135,8 @@ enum class Module(
 
         <h3>Resources</h3>
         ${ul(
-            url("https://registry.khronos.org/EGL/", "Documentation"),
+            url("https://registry.khronos.org/EGL/sdk/docs/man/", "Reference Pages"),
+            url("https://registry.khronos.org/EGL/", "EGL Registry"),
             url("https://github.com/KhronosGroup/EGL-Registry", "Source Repository")
         )}
         """,
@@ -497,7 +498,8 @@ enum class Module(
 
         <h3>Resources</h3>
         ${ul(
-            url("https://registry.khronos.org/OpenCL/", "Documentation"),
+            url("https://registry.khronos.org/OpenCL/sdk/3.0/docs/man/html/", "Reference Pages"),
+            url("https://registry.khronos.org/OpenCL/", "OpenCL Registry"),
             url("https://github.com/KhronosGroup/OpenCL-Registry", "Source Repository"),
             url("https://github.com/KhronosGroup/OpenCL-Headers", "Source Repository (headers)")
         )}
@@ -539,7 +541,9 @@ enum class Module(
 
         <h3>Resources</h3>
         ${ul(
-            url("https://registry.khronos.org/OpenGL/index_gl.php", "Documentation"),
+            url("https://docs.gl/", "Reference Pages (docs.gl)"),
+            url("https://registry.khronos.org/OpenGL-Refpages/gl4/", "Reference Pages (Khronos)"),
+            url("https://registry.khronos.org/OpenGL/index_gl.php", "OpenGL Registry"),
             url("https://github.com/KhronosGroup/OpenGL-Registry", "Source Repository")
         )}
         """,
@@ -556,7 +560,9 @@ enum class Module(
 
         <h3>Resources</h3>
         ${ul(
-            url("https://registry.khronos.org/OpenGL/index_es.php", "Documentation"),
+            url("https://docs.gl/", "Reference Pages (docs.gl)"),
+            url("https://registry.khronos.org/OpenGL-Refpages/es3/", "Reference Pages (Khronos)"),
+            url("https://registry.khronos.org/OpenGL/index_es.php", "OpenGL ES Registry"),
             url("https://github.com/KhronosGroup/OpenGL-Registry", "Source Repository")
         )}
         """,
@@ -593,7 +599,8 @@ enum class Module(
 
         <h3>Resources</h3>
         ${ul(
-            url("https://registry.khronos.org/OpenXR/", "Documentation"),
+            url("https://registry.khronos.org/OpenXR/specs/1.1/man/html/openxr.html", "Reference Pages"),
+            url("https://registry.khronos.org/OpenXR/", "OpenXR Registry"),
             url("https://github.com/KhronosGroup/OpenXR-SDK", "Source Repository (loader)"),
         )}
         """,
@@ -792,7 +799,8 @@ git branch -D @{-1}""")}"""}()}
 
         <h3>Resources</h3>
         ${ul(
-            url("https://docs.vulkan.org/", "Documentation"),
+            url("https://docs.vulkan.org/", "Documentation (Khronos)"),
+            url("https://vkdoc.net/", "Documentation (VulkanHub"),
             url("https://vulkan.lunarg.com/", "Vulkan SDK"),
             url("https://github.com/KhronosGroup/Vulkan-Docs", "Source Repository"),
             url("https://github.com/KhronosGroup/Vulkan-Headers", "Source Repository (headers)")

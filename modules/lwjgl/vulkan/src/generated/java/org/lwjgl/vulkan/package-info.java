@@ -16,7 +16,8 @@
  * <h3>Resources</h3>
  * 
  * <ul>
- * <li><a href="https://docs.vulkan.org/">Documentation</a></li>
+ * <li><a href="https://docs.vulkan.org/">Documentation (Khronos)</a></li>
+ * <li><a href="https://vkdoc.net/">Documentation (VulkanHub</a></li>
  * <li><a href="https://vulkan.lunarg.com/">Vulkan SDK</a></li>
  * <li><a href="https://github.com/KhronosGroup/Vulkan-Docs">Source Repository</a></li>
  * <li><a href="https://github.com/KhronosGroup/Vulkan-Headers">Source Repository (headers)</a></li>

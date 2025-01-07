@@ -12,7 +12,9 @@
  * <h3>Resources</h3>
  * 
  * <ul>
- * <li><a href="https://registry.khronos.org/OpenGL/index_es.php">Documentation</a></li>
+ * <li><a href="https://docs.gl/">Reference Pages (docs.gl)</a></li>
+ * <li><a href="https://registry.khronos.org/OpenGL-Refpages/es3/">Reference Pages (Khronos)</a></li>
+ * <li><a href="https://registry.khronos.org/OpenGL/index_es.php">OpenGL ES Registry</a></li>
  * <li><a href="https://github.com/KhronosGroup/OpenGL-Registry">Source Repository</a></li>
  * </ul>
  */

@@ -13,7 +13,8 @@
  * <h3>Resources</h3>
  * 
  * <ul>
- * <li><a href="https://registry.khronos.org/OpenXR/">Documentation</a></li>
+ * <li><a href="https://registry.khronos.org/OpenXR/specs/1.1/man/html/openxr.html">Reference Pages</a></li>
+ * <li><a href="https://registry.khronos.org/OpenXR/">OpenXR Registry</a></li>
  * <li><a href="https://github.com/KhronosGroup/OpenXR-SDK">Source Repository (loader)</a></li>
  * </ul>
  */

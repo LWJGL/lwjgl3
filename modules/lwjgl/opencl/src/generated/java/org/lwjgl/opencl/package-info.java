@@ -10,7 +10,8 @@
  * <h3>Resources</h3>
  * 
  * <ul>
- * <li><a href="https://registry.khronos.org/OpenCL/">Documentation</a></li>
+ * <li><a href="https://registry.khronos.org/OpenCL/sdk/3.0/docs/man/html/">Reference Pages</a></li>
+ * <li><a href="https://registry.khronos.org/OpenCL/">OpenCL Registry</a></li>
  * <li><a href="https://github.com/KhronosGroup/OpenCL-Registry">Source Repository</a></li>
  * <li><a href="https://github.com/KhronosGroup/OpenCL-Headers">Source Repository (headers)</a></li>
  * </ul>
