@@ -106,25 +106,6 @@ enum class Module(
         )}
         """
     ),
-    CUDA(
-        "cuda",
-        "org.lwjgl.cuda",
-        """
-        Contains bindings to <a href="https://developer.nvidia.com/cuda-zone">CUDA</a>.
-
-        <h3>UNSTABLE API</h3>
-
-        Until these bindings are sufficiently tested, this API should be considered unstable. Also, bindings to more (and eventually, all) CUDA Toolkit
-        libraries will be added in the near future.
-
-        <h3>Resources</h3>
-        ${ul(
-            url("https://docs.nvidia.com/cuda/", "Documentation")
-        )}
-        """,
-        CallingConvention.STDCALL,
-        arrayOverloads = false
-    ),
     EGL(
         "egl",
         "org.lwjgl.egl",

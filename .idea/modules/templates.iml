@@ -13,9 +13,6 @@
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/core/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/core/src/templates/kotlin" isTestSource="false" />
     </content>
-    <content url="file://$MODULE_DIR$/../../modules/lwjgl/cuda/src/templates">
-      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/cuda/src/templates/kotlin" isTestSource="false" />
-    </content>
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/egl/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/egl/src/templates/kotlin" isTestSource="false" />
     </content>

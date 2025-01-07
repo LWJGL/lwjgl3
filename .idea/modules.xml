@@ -21,7 +21,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.core11.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.core11.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.core17.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.core17.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.core21.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.core21.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.cuda.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.cuda.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.egl.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.egl.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.fmod.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.fmod.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.freetype.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.freetype.iml" />

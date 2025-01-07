@@ -505,7 +505,6 @@
         <parallel threadsPerProcessor="1">
             <compileBinding binding="assimp"/>
             <compileBinding binding="bgfx"/>
-            <compileBinding binding="cuda"/>
             <compileBinding binding="egl"/>
             <compileBinding binding="fmod"/>
             <compileBinding binding="freetype"/>
@@ -836,7 +835,6 @@
             <!-- Demos -->
             <include name="org/lwjgl/demo/assimp/**" if:true="${binding.assimp}"/>
             <include name="org/lwjgl/demo/bgfx/**" if:set="test.bgfx"/>
-            <include name="org/lwjgl/demo/cuda/**" if:true="${binding.cuda}"/>
             <include name="org/lwjgl/demo/egl/**" if:set="test.egl"/>
             <include name="org/lwjgl/demo/fmod/**" if:true="${binding.fmod}"/>
             <include name="org/lwjgl/demo/glfw/**" if:set="test.glfw"/>
@@ -1640,9 +1638,6 @@
                 <get-release platform="windows" arch="x86" file="bgfx.dll.git"/>
             </natives>
         </release-module>
-
-        <!-- CUDA -->
-        <release-module name="cuda" title="CUDA" if:true="${binding.cuda}"/>
 
         <!-- EGL -->
         <release-module name="egl" title="EGL" if:true="${binding.egl}"/>

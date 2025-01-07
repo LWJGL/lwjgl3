@@ -93,10 +93,6 @@ enum class Artifacts(
         Platforms.MACOS, Platforms.MACOS_ARM64,
         Platforms.WINDOWS, Platforms.WINDOWS_X86
     ),
-    CUDA(
-        "lwjgl-cuda", "LWJGL - CUDA bindings",
-        "A parallel computing platform and programming model developed by NVIDIA for general computing on GPUs."
-    ),
     EGL(
         "lwjgl-egl", "LWJGL - EGL bindings",
         "An interface between Khronos rendering APIs such as OpenGL ES or OpenVG and the underlying native platform window system."

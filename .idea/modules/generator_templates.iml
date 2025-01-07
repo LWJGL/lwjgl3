@@ -10,7 +10,6 @@
     <orderEntry type="module" module-name="templates.assimp" />
     <orderEntry type="module" module-name="templates.bgfx" />
     <orderEntry type="module" module-name="templates.core" />
-    <orderEntry type="module" module-name="templates.cuda" />
     <orderEntry type="module" module-name="templates.egl" />
     <orderEntry type="module" module-name="templates.fmod" />
     <orderEntry type="module" module-name="templates.freetype" />

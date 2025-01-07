@@ -378,51 +378,6 @@ public class Configuration<T> {
     /** Similar to {@link #LIBRARY_NAME} for the BGFX library (<b>org.lwjgl.bgfx.libname</b>). */
     public static final Configuration<String> BGFX_LIBRARY_NAME = new Configuration<>("org.lwjgl.bgfx.libname", StateInit.STRING);
 
-    // -- CUDA
-
-    /** Similar to {@link #LIBRARY_NAME} for the CUDA Driver library &ndash; nvcuda (<b>org.lwjgl.cuda.libname</b>). */
-    public static final Configuration<String> CUDA_LIBRARY_NAME = new Configuration<>("org.lwjgl.cuda.libname", StateInit.STRING);
-
-    /**
-     * This option can be used to force a specific CUDA Toolkit version.
-     *
-     * <p>By default, when LWJGL detects multiple CUDA Toolkits, it will use the toolkit with the greatest version.</p>
-     *
-     * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.cuda.toolkit.version</b><br>
-     * &nbsp; &nbsp;Usage: Static</p>
-     */
-    public static final Configuration<String> CUDA_TOOLKIT_VERSION = new Configuration<>("org.lwjgl.cuda.toolkit.version", StateInit.STRING);
-
-    /**
-     * This option can be used to load toolkit libraries from a non-standard installation folder.
-     *
-     * <p>By default, LWJGL will try to detect CUDA Toolkits in the default installation folder.</p>
-     *
-     * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.cuda.toolkit.path</b><br>
-     * &nbsp; &nbsp;Usage: Static</p>
-     */
-    public static final Configuration<String> CUDA_TOOLKIT_PATH = new Configuration<>("org.lwjgl.cuda.toolkit.path", StateInit.STRING);
-
-    /** Similar to {@link #LIBRARY_NAME} for the CUDA NVRTC library (<b>org.lwjgl.cuda.nvrtc.libname</b>). */
-    public static final Configuration<String> CUDA_NVRTC_LIBRARY_NAME = new Configuration<>("org.lwjgl.cuda.nvrtc.libname", StateInit.STRING);
-
-    /** Similar to {@link #LIBRARY_NAME} for the CUDA NVRTC Builtins library (<b>org.lwjgl.cuda.nvrtc-builtins.libname</b>). */
-    public static final Configuration<String> CUDA_NVRTC_BUILTINS_LIBRARY_NAME = new Configuration<>("org.lwjgl.cuda.nvrtc-builtins.libname", StateInit.STRING);
-
-    /**
-     * To enable per-thread synchronization, set this option to {@code true} before initializing the CUDA driver.
-     *
-     * <p>By default, CUDA uses the legacy default stream. To check if the CUDA driver supports PTDS, call
-     * {@code org.lwjgl.cuda.CUDA.isPerThreadDefaultStreamSupported()}</p>
-     *
-     * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.cuda.ptds</b><br>
-     * &nbsp; &nbsp;Usage: Static</p>
-     */
-    public static final Configuration<Boolean> CUDA_API_PER_THREAD_DEFAULT_STREAM = new Configuration<>("org.lwjgl.cuda.ptds", StateInit.BOOLEAN);
-
     // -- EGL
 
     /**

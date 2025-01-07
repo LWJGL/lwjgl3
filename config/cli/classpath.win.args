@@ -2,7 +2,6 @@
 -cp "bin/classes/lwjgl/core;\
 bin/classes/lwjgl/assimp;\
 bin/classes/lwjgl/bgfx;\
-bin/classes/lwjgl/cuda;\
 bin/classes/lwjgl/egl;\
 bin/classes/lwjgl/fmod;\
 bin/classes/lwjgl/freetype;\

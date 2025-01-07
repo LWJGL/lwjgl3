@@ -21,7 +21,6 @@ This script is included in /config/build-definitions.xml.
             <isset property="build.arch.arm"/>
         </and>
     </condition>
-    <property name="binding.cuda" value="true"/>
     <property name="binding.egl" value="true"/>
     <property name="binding.fmod" value="true"/>
     <property name="binding.freetype" value="true"/>
@@ -74,7 +73,6 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.zstd" value="true"/>
 
     <!-- TODO: automate -->
-    <property name="java-only.binding.cuda" value="true"/>
     <property name="java-only.binding.egl" value="true"/>
     <property name="java-only.binding.fmod" value="true"/>
     <property name="java-only.binding.jawt" value="true"/>
@@ -89,7 +87,6 @@ This script is included in /config/build-definitions.xml.
             <parallel threadsPerProcessor="1">
                 <sequential if:true="${binding.assimp}"><local name="module"/><property name="module" value="assimp"/><body/></sequential>
                 <sequential if:true="${binding.bgfx}"><local name="module"/><property name="module" value="bgfx"/><body/></sequential>
-                <sequential if:true="${binding.cuda}"><local name="module"/><property name="module" value="cuda"/><body/></sequential>
                 <sequential if:true="${binding.egl}"><local name="module"/><property name="module" value="egl"/><body/></sequential>
                 <sequential if:true="${binding.fmod}"><local name="module"/><property name="module" value="fmod"/><body/></sequential>
                 <sequential if:true="${binding.freetype}"><local name="module"/><property name="module" value="freetype"/><body/></sequential>
