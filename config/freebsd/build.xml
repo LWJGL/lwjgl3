@@ -304,9 +304,6 @@
         <!-- OpenGL ES -->
         <build_simple module="opengles"/>
 
-        <!-- OpenVR -->
-        <build_simple module="openvr"/>
-
         <!-- Par -->
         <build simple="true" flags="-Werror -Wfatal-errors -Wno-implicit-const-int-float-conversion" module="par">
             <link>
@@ -456,7 +453,6 @@
             <update-dependency module="jemalloc" artifact="libjemalloc.so"/>
             <update-dependency module="ktx" artifact="libktx.so"/>
             <update-dependency module="openal" artifact="libopenal.so"/>
-            <!--<update-dependency module="openvr" artifact="libopenvr_api.so"/>-->
             <update-dependency module="openxr" artifact="libopenxr_loader.so"/>
             <update-dependency module="opus" artifact="libopus.so"/>
             <update-dependency module="shaderc" artifact="libshaderc.so"/>

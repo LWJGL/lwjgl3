@@ -88,9 +88,6 @@
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/opengles/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/opengles/src/templates/kotlin" isTestSource="false" />
     </content>
-    <content url="file://$MODULE_DIR$/../../modules/lwjgl/openvr/src/templates">
-      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/openvr/src/templates/kotlin" isTestSource="false" />
-    </content>
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/openxr/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/openxr/src/templates/kotlin" isTestSource="false" />
     </content>

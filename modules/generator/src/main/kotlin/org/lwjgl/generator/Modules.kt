@@ -569,25 +569,6 @@ enum class Module(
         CallingConvention.STDCALL,
         library = JNILibrary.create("GLES", custom = true)
     ),
-    OPENVR(
-        "openvr",
-        "org.lwjgl.openvr",
-        """
-        Contains bindings to ${url("https://www.steamvr.com/en/", "OpenVR")}.
-
-        OpenVR is an API and runtime that allows access to VR hardware from multiple vendors without requiring that applications have specific knowledge of the
-        hardware they are targeting.
-
-        <h3>Resources</h3>
-        ${ul(
-            url("https://github.com/ValveSoftware/openvr/wiki/API-Documentation", "Documentation"),
-            url("https://github.com/ValveSoftware/openvr", "Source Repository")
-        )}
-        """,
-        CallingConvention.STDCALL,
-        library = JNILibrary.create("OpenVR", custom = true),
-        arrayOverloads = false
-    ),
     OPENXR(
         "openxr",
         "org.lwjgl.openxr",

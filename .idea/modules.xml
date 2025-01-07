@@ -46,7 +46,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opencl.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opencl.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opengl.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opengl.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opengles.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opengles.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.openvr.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.openvr.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.openxr.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.openxr.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opus.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opus.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.ovr.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.ovr.iml" />

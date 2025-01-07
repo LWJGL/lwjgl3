@@ -722,11 +722,6 @@ public class Configuration<T> {
      */
     public static final Configuration<String> OPENGLES_CONTEXT_API = new Configuration<>("org.lwjgl.opengles.contextAPI", StateInit.STRING);
 
-    // -- OPENVR
-
-    /** Similar to {@link #LIBRARY_NAME} for the OpenVR library (<b>org.lwjgl.openvr.libname</b>). */
-    public static final Configuration<String> OPENVR_LIBRARY_NAME = new Configuration<>("org.lwjgl.openvr.libname", StateInit.STRING);
-
     // -- OpenXR
 
     /** Similar to {@link #EGL_EXPLICIT_INIT} for the OpenXR library (<b>org.lwjgl.openxr.explicitInit</b>). */

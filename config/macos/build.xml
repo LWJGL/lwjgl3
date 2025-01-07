@@ -261,9 +261,6 @@
         <!-- OpenGL ES -->
         <build_simple module="opengles"/>
 
-        <!-- OpenVR -->
-        <build_simple module="openvr"/>
-
         <!-- Par -->
         <build_simple module="par"/>
 
@@ -400,7 +397,6 @@
             <update-dependency module="jemalloc" artifact="libjemalloc.dylib"/>
             <update-dependency module="ktx" artifact="libktx.dylib"/>
             <update-dependency module="openal" artifact="libopenal.dylib"/>
-            <update-dependency module="openvr" artifact="libopenvr_api.dylib"/>
             <update-dependency module="opus" artifact="libopus.dylib"/>
             <update-dependency module="shaderc" artifact="libshaderc.dylib"/>
             <update-dependency module="spvc" artifact="libspirv-cross.dylib"/>

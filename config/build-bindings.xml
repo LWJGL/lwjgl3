@@ -51,15 +51,6 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.opencl" value="true"/>
     <property name="binding.opengl" value="true"/>
     <property name="binding.opengles" value="true"/>
-    <condition property="binding.openvr" value="true" else="false">
-        <or>
-            <isset property="build.arch.x64|x86"/>
-            <and>
-                <isset property="platform.linux"/>
-                <isset property="build.arch.arm64"/>
-            </and>
-        </or>
-    </condition>
     <property name="binding.openxr" value="true"/>
     <property name="binding.opus" value="true"/>
     <property name="binding.par" value="true"/>
@@ -134,7 +125,6 @@ This script is included in /config/build-definitions.xml.
                 <sequential if:true="${binding.opencl}"><local name="module"/><property name="module" value="opencl"/><body/></sequential>
                 <sequential if:true="${binding.opengl}"><local name="module"/><property name="module" value="opengl"/><body/></sequential>
                 <sequential if:true="${binding.opengles}"><local name="module"/><property name="module" value="opengles"/><body/></sequential>
-                <sequential if:true="${binding.openvr}"><local name="module"/><property name="module" value="openvr"/><body/></sequential>
                 <sequential if:true="${binding.openxr}"><local name="module"/><property name="module" value="openxr"/><body/></sequential>
                 <sequential if:true="${binding.opus}"><local name="module"/><property name="module" value="opus"/><body/></sequential>
                 <sequential if:true="${binding.ovr}"><local name="module"/><property name="module" value="ovr"/><body/></sequential>

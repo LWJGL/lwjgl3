@@ -27,7 +27,6 @@ bin/classes/lwjgl/openal;\
 bin/classes/lwjgl/opencl;\
 bin/classes/lwjgl/opengl;\
 bin/classes/lwjgl/opengles;\
-bin/classes/lwjgl/openvr;\
 bin/classes/lwjgl/openxr;\
 bin/classes/lwjgl/opus;\
 bin/classes/lwjgl/par;\

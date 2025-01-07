@@ -35,7 +35,6 @@
     <orderEntry type="module" module-name="templates.opencl" />
     <orderEntry type="module" module-name="templates.opengl" />
     <orderEntry type="module" module-name="templates.opengles" />
-    <orderEntry type="module" module-name="templates.openvr" />
     <orderEntry type="module" module-name="templates.openxr" />
     <orderEntry type="module" module-name="templates.opus" />
     <orderEntry type="module" module-name="templates.ovr" />

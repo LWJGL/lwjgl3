@@ -165,7 +165,6 @@ improve the chances of a quick and useful response.
 | Library| Description|
 |--------|------------|
 | [LibOVR](https://developer.oculus.com/documentation/)| The API of the Oculus SDK.|
-| [OpenVR](https://github.com/ValveSoftware/openvr)| An API and runtime that allows access to VR hardware from multiple vendors without requiring that applications have specific knowledge of the hardware they are targeting.|
 
 #### [stb](https://github.com/nothings/stb) - single-file public domain libraries for C/C++
 

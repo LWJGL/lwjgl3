@@ -51,7 +51,6 @@
     <orderEntry type="module" module-name="lwjgl.opencl" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.opengl" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.opengles" scope="TEST" />
-    <orderEntry type="module" module-name="lwjgl.openvr" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.openxr" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.opus" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.ovr" scope="TEST" />

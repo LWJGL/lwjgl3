@@ -306,9 +306,6 @@ EXPORTS
         <!-- OpenGL ES -->
         <build_simple module="opengles"/>
 
-        <!-- OpenVR -->
-        <build_simple module="openvr"/>
-
         <!-- Par -->
         <build_simple module="par"/>
 
@@ -462,7 +459,6 @@ EXPORTS
             <update-dependency module="jemalloc" artifact="jemalloc.dll"/>
             <update-dependency module="ktx" artifact="ktx.dll" unless:set="build.arch.x86"/>
             <update-dependency module="openal" artifact="OpenAL.dll"/>
-            <update-dependency module="openvr" artifact="openvr_api.dll"/>
             <update-dependency module="openxr" artifact="openxr-loader.dll"/>
             <update-dependency module="opus" artifact="opus.dll"/>
             <update-dependency module="shaderc" artifact="shaderc.dll"/>

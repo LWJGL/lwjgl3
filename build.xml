@@ -527,7 +527,6 @@
             <compileBinding binding="openal"/>
             <compileBinding binding="opencl"/>
             <compileBinding binding="opengles"/>
-            <compileBinding binding="openvr"/>
             <compileBinding binding="opus"/>
             <compileBinding binding="par"/>
             <compileBinding binding="remotery"/>
@@ -858,7 +857,6 @@
 
             <include name="org/lwjgl/demo/opengl/**" if:true="${binding.opengl}"/>
 
-            <include name="org/lwjgl/demo/openvr/**" if:true="${binding.openvr}"/>
             <include name="org/lwjgl/demo/openxr/**" if:set="test.openxr"/>
             <include name="org/lwjgl/demo/ovr/**" if:true="${binding.ovr}"/>
             <include name="org/lwjgl/demo/stb/**" if:set="test.stb"/>
@@ -1835,31 +1833,6 @@
 
         <!-- OpenGL ES -->
         <release-module name="opengles" native-library="lwjgl_opengles" title="OpenGL ES" if:true="${binding.opengles}"/>
-
-        <!-- OpenVR -->
-        <release-module name="openvr" title="OpenVR" if:true="${binding.openvr}">
-            <natives>
-                <get-release platform="linux" arch="x64" file="liblwjgl_openvr.so"/>
-                <get-release platform="linux" arch="x64" file="libopenvr_api.so"/>
-                <get-release platform="linux" arch="x64" file="libopenvr_api.so.git"/>
-
-                <get-release platform="linux" arch="arm64" file="liblwjgl_openvr.so"/>
-                <get-release platform="linux" arch="arm64" file="libopenvr_api.so"/>
-                <get-release platform="linux" arch="arm64" file="libopenvr_api.so.git"/>
-
-                <get-release platform="macos" arch="x64" file="liblwjgl_openvr.dylib"/>
-                <get-release platform="macos" arch="x64" file="libopenvr_api.dylib"/>
-                <get-release platform="macos" arch="x64" file="libopenvr_api.dylib.git"/>
-
-                <get-release platform="windows" arch="x64" file="lwjgl_openvr.dll"/>
-                <get-release platform="windows" arch="x64" file="openvr_api.dll"/>
-                <get-release platform="windows" arch="x64" file="openvr_api.dll.git"/>
-
-                <get-release platform="windows" arch="x86" file="lwjgl_openvr.dll"/>
-                <get-release platform="windows" arch="x86" file="openvr_api.dll"/>
-                <get-release platform="windows" arch="x86" file="openvr_api.dll.git"/>
-            </natives>
-        </release-module>
 
         <!-- OpenXR -->
         <release-module name="openxr" title="OpenXR" if:true="${binding.openxr}">

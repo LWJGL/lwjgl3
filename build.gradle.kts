@@ -218,11 +218,6 @@ enum class Artifacts(
         "A royalty-free, cross-platform API for full-function 2D and 3D graphics on embedded systems - including consoles, phones, appliances and vehicles.",
         *Platforms.ALL
     ),
-    OPENVR(
-        "lwjgl-openvr", "LWJGL - OpenVR bindings",
-        "An API and runtime that allows access to VR hardware from multiple vendors without requiring that applications have specific knowledge of the hardware they are targeting.",
-        Platforms.LINUX, Platforms.LINUX_ARM64, Platforms.MACOS, Platforms.WINDOWS, Platforms.WINDOWS_X86
-    ),
     OPENXR(
         "lwjgl-openxr", "LWJGL - OpenXR bindings",
         "A royalty-free, open standard that provides high-performance access to Augmented Reality (AR) and Virtual Reality (VR)—collectively known as XR—platforms and devices.",
