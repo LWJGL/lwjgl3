@@ -37,7 +37,6 @@
     <orderEntry type="module" module-name="templates.opengles" />
     <orderEntry type="module" module-name="templates.openxr" />
     <orderEntry type="module" module-name="templates.opus" />
-    <orderEntry type="module" module-name="templates.ovr" />
     <orderEntry type="module" module-name="templates.par" />
     <orderEntry type="module" module-name="templates.remotery" />
     <orderEntry type="module" module-name="templates.rpmalloc" />

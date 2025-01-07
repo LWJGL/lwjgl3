@@ -34,12 +34,6 @@ public class BindingConfig extends Task {
             }
         }
 
-        if (isTrue("binding.ovr")) {
-            if (isFalse("binding.opengl") && isFalse("binding.vulkan")) {
-                throw new BuildException("The OpenGL or Vulkan bindings are required.");
-            }
-        }
-
         Project LWJGL = getProject();
 
         ArrayList<String> modules = new ArrayList<>(64);

@@ -160,12 +160,6 @@ improve the chances of a quick and useful response.
 | [Vulkan Memory Allocator](https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator)| An easy to integrate Vulkan memory allocation library.|
 | [Yoga](https://facebook.github.io/yoga/)| An open-source, cross-platform layout library that implements Flexbox.|
 
-#### AR/VR
-
-| Library| Description|
-|--------|------------|
-| [LibOVR](https://developer.oculus.com/documentation/)| The API of the Oculus SDK.|
-
 #### [stb](https://github.com/nothings/stb) - single-file public domain libraries for C/C++
 
 | Library| Description|

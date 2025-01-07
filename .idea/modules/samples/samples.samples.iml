@@ -53,7 +53,6 @@
     <orderEntry type="module" module-name="lwjgl.opengles" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.openxr" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.opus" scope="TEST" />
-    <orderEntry type="module" module-name="lwjgl.ovr" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.par" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.remotery" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.rpmalloc" scope="TEST" />

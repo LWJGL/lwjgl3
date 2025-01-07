@@ -94,9 +94,6 @@
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/opus/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/opus/src/templates/kotlin" isTestSource="false" />
     </content>
-    <content url="file://$MODULE_DIR$/../../modules/lwjgl/ovr/src/templates">
-      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/ovr/src/templates/kotlin" isTestSource="false" />
-    </content>
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/par/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/par/src/templates/kotlin" isTestSource="false" />
     </content>

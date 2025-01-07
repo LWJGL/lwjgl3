@@ -284,22 +284,6 @@ EXPORTS
         <!-- Nuklear -->
         <build_simple module="nuklear"/>
 
-        <!-- LibOVR -->
-        <build module="ovr" if:true="${binding.ovr}">
-            <beforeCompile>
-                <compile relative="false">
-                    <arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include"/>
-                    <fileset dir="${OCULUS_SDK_PATH}/LibOVR/Shim" includes="*.c*"/>
-                </compile>
-            </beforeCompile>
-            <compileargs>
-                <arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include"/>
-            </compileargs>
-            <source>
-                <fileset dir="." includes="${src.generated}/*.c"/>
-            </source>
-        </build>
-
         <!-- OpenGL -->
         <build_simple module="opengl"/>
 

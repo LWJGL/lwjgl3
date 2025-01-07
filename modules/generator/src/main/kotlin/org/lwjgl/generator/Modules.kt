@@ -602,19 +602,6 @@ enum class Module(
         """,
         arrayOverloads = false
     ),
-    OVR(
-        "ovr",
-        "org.lwjgl.ovr",
-        """
-        Contains bindings to LibOVR, the ${url("https://developers.meta.com/horizon/documentation/native/pc/pcsdk-intro/", "Oculus SDK")} library.
-
-        <h3>Resources</h3>
-        ${ul(
-            url("https://developers.meta.com/horizon/develop/native", "Documentation")
-        )}
-        """,
-        library = JNILibrary.create("LibOVR")
-    ),
     PAR(
         "par",
         "org.lwjgl.util.par",

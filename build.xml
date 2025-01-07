@@ -547,9 +547,6 @@
             <compileBinding binding="opengl">
                 <classpath><pathelement path="${bin.lwjgl}/opencl"/></classpath>
             </compileBinding>
-            <compileBinding binding="ovr">
-                <classpath><pathelement path="${bin.lwjgl}/vulkan"/></classpath>
-            </compileBinding>
             <compileBinding binding="vma">
                 <classpath><pathelement path="${bin.lwjgl}/vulkan"/></classpath>
             </compileBinding>
@@ -858,7 +855,6 @@
             <include name="org/lwjgl/demo/opengl/**" if:true="${binding.opengl}"/>
 
             <include name="org/lwjgl/demo/openxr/**" if:set="test.openxr"/>
-            <include name="org/lwjgl/demo/ovr/**" if:true="${binding.ovr}"/>
             <include name="org/lwjgl/demo/stb/**" if:set="test.stb"/>
 
             <include name="org/lwjgl/demo/system/jawt/**" if:set="test.jawt"/>
@@ -1868,14 +1864,6 @@
 
         <!-- Opus -->
         <release-module name="opus" native-library="opus" title="Opus" if:true="${binding.opus}"/>
-
-        <!-- LibOVR -->
-        <release-module name="ovr" title="LibOVR" if:true="${binding.ovr}">
-            <natives>
-                <get-release platform="windows" arch="x64" file="lwjgl_ovr.dll"/>
-                <get-release platform="windows" arch="x86" file="lwjgl_ovr.dll"/>
-            </natives>
-        </release-module>
 
         <!-- Par -->
         <release-module name="par" native-library="lwjgl_par" title="par" if:true="${binding.par}"/>

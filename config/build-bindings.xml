@@ -81,17 +81,6 @@ This script is included in /config/build-definitions.xml.
     <property name="java-only.binding.odbc" value="true"/>
     <property name="java-only.binding.opencl" value="true"/>
 
-    <!-- Set the path to the Oculus SDK to enable. -->
-    <!-- TODO: add headers in here -->
-    <property name="OCULUS_SDK_PATH" location="../OculusSDK" relative="false"/>
-    <condition property="binding.ovr" value="true" else="false">
-        <and>
-            <isset property="OCULUS_SDK_PATH"/>
-            <available file="${OCULUS_SDK_PATH}/LibOVR/Include/OVR_CAPI.h"/>
-            <isset property="build.arch.x64|x86"/>
-        </and>
-    </condition>
-
     <!-- // ================================ // -->
 
     <macrodef name="forEachBinding">
@@ -127,7 +116,6 @@ This script is included in /config/build-definitions.xml.
                 <sequential if:true="${binding.opengles}"><local name="module"/><property name="module" value="opengles"/><body/></sequential>
                 <sequential if:true="${binding.openxr}"><local name="module"/><property name="module" value="openxr"/><body/></sequential>
                 <sequential if:true="${binding.opus}"><local name="module"/><property name="module" value="opus"/><body/></sequential>
-                <sequential if:true="${binding.ovr}"><local name="module"/><property name="module" value="ovr"/><body/></sequential>
                 <sequential if:true="${binding.par}"><local name="module"/><property name="module" value="par"/><body/></sequential>
                 <sequential if:true="${binding.remotery}"><local name="module"/><property name="module" value="remotery"/><body/></sequential>
                 <sequential if:true="${binding.rpmalloc}"><local name="module"/><property name="module" value="rpmalloc"/><body/></sequential>

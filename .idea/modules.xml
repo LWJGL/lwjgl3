@@ -48,7 +48,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opengles.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opengles.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.openxr.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.openxr.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opus.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opus.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.ovr.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.ovr.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.par.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.par.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.remotery.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.remotery.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.rpmalloc.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.rpmalloc.iml" />

@@ -230,11 +230,6 @@ enum class Artifacts(
         "A totally open, royalty-free, highly versatile audio codec.",
         *Platforms.ALL
     ),
-    OVR(
-        "lwjgl-ovr", "LWJGL - OVR bindings",
-        "The API of the Oculus SDK.",
-        Platforms.WINDOWS, Platforms.WINDOWS_X86
-    ),
     PAR(
         "lwjgl-par", "LWJGL - par_shapes bindings",
         "Generate parametric surfaces and other simple shapes.",
