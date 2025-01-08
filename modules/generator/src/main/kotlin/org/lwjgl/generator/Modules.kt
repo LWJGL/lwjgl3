@@ -665,24 +665,6 @@ git branch -D @{-1}""")}"""}()}
         }"""
         )
     ),
-    TOOTLE(
-        "tootle",
-        "org.lwjgl.util.tootle",
-        """
-        Contains bindings to ${url("https://gpuopen.com/archived/tootle/", "AMD Tootle")}.
-
-        AMD Tootle (Triangle Order Optimization Tool) is a 3D triangle mesh optimization library that improves on existing mesh preprocessing techniques. By
-        using AMD Tootle, developers can optimize their models for pixel overdraw as well as vertex cache performance. This can provide significant performance
-        improvements in pixel limited situations, with no penalty in vertex-limited scenarios, and no runtime cost.
-
-        <h3>Resources</h3>
-        ${ul(
-            url("https://github.com/GPUOpen-Archive/amd_tootle", "Source Repository")
-        )}
-        """,
-        library = JNILibrary.simple(),
-        arrayOverloads = false
-    ),
     VMA(
         "vma",
         "org.lwjgl.util.vma",

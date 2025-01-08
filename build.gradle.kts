@@ -256,11 +256,6 @@ enum class Artifacts(
         "Provides basic modal dialogs.",
         *Platforms.ALL
     ),
-    TOOTLE(
-        "lwjgl-tootle", "LWJGL - AMD Tootle bindings",
-        "A 3D triangle mesh optimization library that improves on existing mesh preprocessing techniques.",
-        Platforms.FREEBSD, Platforms.LINUX, Platforms.MACOS, Platforms.WINDOWS, Platforms.WINDOWS_X86
-    ),
     VMA(
         "lwjgl-vma", "LWJGL - Vulkan Memory Allocator bindings",
         "An easy to integrate Vulkan memory allocation library.",

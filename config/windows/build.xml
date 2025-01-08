@@ -339,39 +339,6 @@ EXPORTS
             </linkargs>
         </build>
 
-        <!-- AMD Tootle -->
-        <build module="tootle" if:true="${binding.tootle}">
-            <beforeCompile>
-                <compile>
-                    <fileset dir="." includes="${src.main}/DirectXMesh/*.cpp"/>
-                </compile>
-
-                <compile flags="/TP /D_DX11_1_">
-                    <arg value="/I${src.main}"/>
-                    <arg value="/I${src.main}\include"/>
-                    <arg value="/I${src.main}\RayTracer"/>
-                    <arg value="/I${src.main}\RayTracer\JRT"/>
-                    <arg value="/I${src.main}\RayTracer\Math"/>
-                    <arg value="/I${src.main}\DirectXMesh"/>
-                    <fileset dir="." includes="${src.main}/*.c"/>
-                    <fileset dir="." includes="${src.main}/*.cpp"/>
-                    <fileset dir="." includes="${src.main}/RayTracer/*.cpp"/>
-                    <fileset dir="." includes="${src.main}/RayTracer/JRT/*.cpp"/>
-                    <fileset dir="." includes="${src.main}/RayTracer/Math/*.cpp"/>
-                </compile>
-            </beforeCompile>
-            <compileargs>
-                <arg value="/I${src.main}\include"/>
-            </compileargs>
-            <source>
-                <fileset dir="." includes="${src.generated}/*.cpp"/>
-            </source>
-            <linkargs>
-                <arg value="User32.lib"/>
-                <arg value="D3d9.lib"/>
-            </linkargs>
-        </build>
-
         <!-- Vulkan Memory Allocator -->
         <build module="vma" if:true="${binding.vma}">
             <compileargs>

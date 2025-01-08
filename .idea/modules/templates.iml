@@ -109,9 +109,6 @@
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/tinyfd/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/tinyfd/src/templates/kotlin" isTestSource="false" />
     </content>
-    <content url="file://$MODULE_DIR$/../../modules/lwjgl/tootle/src/templates">
-      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/tootle/src/templates/kotlin" isTestSource="false" />
-    </content>
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/vma/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/vma/src/templates/kotlin" isTestSource="false" />
     </content>

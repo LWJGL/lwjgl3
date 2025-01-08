@@ -42,7 +42,6 @@
     <orderEntry type="module" module-name="templates.stb" />
     <orderEntry type="module" module-name="templates.tinyexr" />
     <orderEntry type="module" module-name="templates.tinyfd" />
-    <orderEntry type="module" module-name="templates.tootle" />
     <orderEntry type="module" module-name="templates.vma" />
     <orderEntry type="module" module-name="templates.vulkan" />
     <orderEntry type="module" module-name="templates.xxhash" />

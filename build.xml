@@ -522,7 +522,6 @@
             <compileBinding binding="stb"/>
             <compileBinding binding="tinyexr"/>
             <compileBinding binding="tinyfd"/>
-            <compileBinding binding="tootle"/>
             <compileBinding binding="vulkan"/>
             <compileBinding binding="xxhash"/>
             <compileBinding binding="yoga"/>
@@ -849,7 +848,6 @@
             <include name="org/lwjgl/demo/util/remotery/**" if:true="${binding.remotery}"/>
             <include name="org/lwjgl/demo/util/tinyexr/**" if:set="test.tinyexr"/>
             <include name="org/lwjgl/demo/util/tinyfd/**" if:set="test.tinyfd"/>
-            <include name="org/lwjgl/demo/util/tootle/**" if:set="test.tootle"/>
             <include name="org/lwjgl/demo/util/xxhash/**" if:true="${binding.xxhash}"/>
             <include name="org/lwjgl/demo/util/yoga/**" if:set="test.yoga"/>
             <include name="org/lwjgl/demo/util/zstd/**" if:true="${binding.zstd}"/>
@@ -1850,20 +1848,6 @@
 
         <!-- tiny file dialogs -->
         <release-module name="tinyfd" native-library="lwjgl_tinyfd" title="tiny file dialogs" if:true="${binding.tinyfd}"/>
-
-        <!-- AMD Tootle -->
-        <release-module name="tootle" title="tootle" if:true="${binding.tootle}">
-            <natives>
-                <get-release platform="freebsd" arch="x64" file="liblwjgl_tootle.so"/>
-
-                <get-release platform="linux" arch="x64" file="liblwjgl_tootle.so"/>
-
-                <get-release platform="macos" arch="x64" file="liblwjgl_tootle.dylib"/>
-
-                <get-release platform="windows" arch="x64" file="lwjgl_tootle.dll"/>
-                <get-release platform="windows" arch="x86" file="lwjgl_tootle.dll"/>
-            </natives>
-        </release-module>
 
         <!-- Vulkan Memory Allocator -->
         <release-module name="vma" native-library="lwjgl_vma" title="vma" if:true="${binding.vma}"/>

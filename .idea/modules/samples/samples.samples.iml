@@ -58,7 +58,6 @@
     <orderEntry type="module" module-name="lwjgl.stb" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.tinyexr" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.tinyfd" scope="TEST" />
-    <orderEntry type="module" module-name="lwjgl.tootle" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.vma" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.vulkan" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.xxhash" scope="TEST" />
