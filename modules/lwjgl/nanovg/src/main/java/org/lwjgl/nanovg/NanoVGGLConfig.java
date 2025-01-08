@@ -42,7 +42,7 @@ final class NanoVGGLConfig {
     }
 
     private static void config(long pointersAddress, FunctionProvider fp) {
-        String[] functions = new String[] {
+        String[] functions = {
             "glActiveTexture",
             "glAttachShader",
             "glBindAttribLocation",
