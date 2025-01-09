@@ -129,15 +129,15 @@ internal class Enum(
 
                 val v = if (renderValue) {
                     if (it.value.startsWith("0x") && it.value.length == 10)
-                        ", ${it.value}"
+                        it.value
                     else
-                        ", \"${it.value}\""
+                        "\"${it.value}\""
                 } else {
                     ""
                 }
 
                 val n = "\"${if (noPrefix) it.name else it.name.substring(context.header.prefixConstant.length)}\""
-                "$n.enum($v)"
+                "$n.enum${if (v.isEmpty()) "" else "($v)"}"
             }
             .joinToString(",\n$t$t")}
     )${if (noPrefix) ".noPrefix()" else ""}"""
