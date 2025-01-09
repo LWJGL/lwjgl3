@@ -197,7 +197,7 @@ class Func(
 
     private fun ReturnValue.nativeMethodType(nullable: Boolean): String =
         if (this.isStructValue) "void" else this.nativeType.nativeMethodType.let {
-            if (nullable) it.nullable else it
+            if (nullable && !this.nativeType.mapping.nativeMethodType.isPrimitive) it.nullable else it
         }
 
     private val ReturnValue.jniFunctionType
@@ -811,7 +811,7 @@ class Func(
             // TODO: This implementation has not been tested with too many different signatures and probably contains bugs.
             println("""$t${t}MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ${if (hasReturnStatement) { """long __result = stack.n${when {
+            ${if (hasReturnStatement) { """long $RESULT = stack.n${when {
                     returns.nativeType is PointerType<*>                   -> "pointer"
                     returns.nativeType.mapping == PrimitiveMapping.POINTER -> "pointer"
                     returns.nativeType.mapping == PrimitiveMapping.BOOLEAN -> "byte"
@@ -846,14 +846,14 @@ class Func(
                 }
             }
 
-            nffi_call(${name}CIF.address(), $FUNCTION_ADDRESS, ${if (returns.isVoid) "NULL" else "__result"}, arguments);${if (hasReturnStatement) {
+            nffi_call(${name}CIF.address(), $FUNCTION_ADDRESS, ${if (returns.isVoid) "NULL" else RESULT}, arguments);${if (hasReturnStatement) {
                 """
 
             return memGet${when {
                     returns.nativeType.mapping == PrimitiveMapping.BOOLEAN -> "Byte"
                     returns.nativeType is PointerType<*>                   -> "Address"
                     else                                                   -> returns.nativeType.nativeMethodType.upperCaseFirst
-                }}(__result)${if (returns.nativeType.mapping.isBoolean()) " != 0" else ""};"""
+                }}($RESULT)${if (returns.nativeType.mapping.isBoolean()) " != 0" else ""};"""
             } else ""}
         } finally {
             stack.setPointer(stackPointer);

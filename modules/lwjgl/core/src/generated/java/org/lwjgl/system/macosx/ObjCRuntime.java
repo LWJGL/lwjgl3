@@ -1279,7 +1279,7 @@ public class ObjCRuntime {
     /** {@code char * method_copyArgumentType(Method m, unsigned int index)} */
     @NativeType("char *")
     public static @Nullable String method_copyArgumentType(@NativeType("Method") long m, @NativeType("unsigned int") int index) {
-        @Nullable long __result = NULL;
+        long __result = NULL;
         try {
             __result = nmethod_copyArgumentType(m, index);
             return memUTF8Safe(__result);
@@ -1496,7 +1496,7 @@ public class ObjCRuntime {
         if (CHECKS) {
             checkNT1(attributeName);
         }
-        @Nullable long __result = NULL;
+        long __result = NULL;
         try {
             __result = nproperty_copyAttributeValue(property, memAddress(attributeName));
             return memUTF8Safe(__result);
@@ -1509,7 +1509,7 @@ public class ObjCRuntime {
     @NativeType("char *")
     public static @Nullable String property_copyAttributeValue(@NativeType("objc_property_t") long property, @NativeType("char const *") CharSequence attributeName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        @Nullable long __result = NULL;
+        long __result = NULL;
         try {
             stack.nUTF8(attributeName, true);
             long attributeNameEncoded = stack.getPointerAddress();
