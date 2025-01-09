@@ -2,7 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.demo.util.tootle;
+package org.lwjgl.demo.util.meshoptimizer;
 
 import org.joml.*;
 import org.jspecify.annotations.*;
@@ -11,6 +11,7 @@ import org.lwjgl.assimp.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
+import org.lwjgl.util.meshoptimizer.*;
 import org.lwjgl.util.nfd.*;
 import org.lwjgl.util.par.*;
 
@@ -18,6 +19,7 @@ import java.io.*;
 import java.nio.*;
 import java.nio.file.*;
 import java.util.*;
+import java.util.Random;
 import java.util.concurrent.*;
 import java.util.regex.*;
 
@@ -31,11 +33,11 @@ import static org.lwjgl.opengl.GL33C.*;
 import static org.lwjgl.stb.STBEasyFont.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.util.meshoptimizer.MeshOptimizer.*;
 import static org.lwjgl.util.nfd.NativeFileDialog.*;
 import static org.lwjgl.util.par.ParShapes.*;
-import static org.lwjgl.util.tootle.Tootle.*;
 
-public final class HelloTootle {
+public final class MeshOptimizerDemo {
 
     private static final Pattern REGEX_SPACE = Pattern.compile("\\s+");
 
@@ -106,16 +108,16 @@ public final class HelloTootle {
     private int
         slices       = 32,
         stacks       = 32,
-        seed         = 1,
+        seed         = 7,
         subdivisions = 4;
 
     private int cubeSize;
 
     private final AIPropertyStore propertyStore;
 
-    private int     vcacheMethod         = Platform.get() == Platform.WINDOWS ? 2 : 0;
-    private int     vcacheSize           = TOOTLE_DEFAULT_VCACHE_SIZE;
-    private boolean optimizeVertexMemory = true;
+    private int vcacheSize = 16;
+
+    private int optimizationLevel = 2;
 
     private boolean fragmentShader = true;
     private boolean optimized      = true;
@@ -133,7 +135,7 @@ public final class HelloTootle {
     private final PerfGraph gpuGraph;
     private final GPUTimer  gpuTimer;
 
-    private HelloTootle() {
+    private MeshOptimizerDemo() {
         GLFWErrorCallback.createPrint().set();
         if (!glfwInit()) {
             throw new IllegalStateException("Unable to initialize GLFW");
@@ -213,7 +215,7 @@ public final class HelloTootle {
                     updateMesh();
                     break;
                 case GLFW_KEY_PAGE_DOWN:
-                    if (meshKey != GLFW_KEY_8) {
+                    if ((mods & GLFW_MOD_CONTROL) == 0) {
                         seed--;
                         updateMesh();
                     } else {
@@ -224,7 +226,7 @@ public final class HelloTootle {
                     }
                     break;
                 case GLFW_KEY_PAGE_UP:
-                    if (meshKey != GLFW_KEY_8) {
+                    if ((mods & GLFW_MOD_CONTROL) == 0) {
                         seed++;
                         updateMesh();
                     } else {
@@ -265,11 +267,7 @@ public final class HelloTootle {
                 case GLFW_KEY_F1:
                 case GLFW_KEY_F2:
                 case GLFW_KEY_F3:
-                    vcacheMethod = key - GLFW_KEY_F1;
-                    setMesh(mesh);
-                    break;
-                case GLFW_KEY_F4:
-                    optimizeVertexMemory = !optimizeVertexMemory;
+                    optimizationLevel = key - GLFW_KEY_F1;
                     setMesh(mesh);
                     break;
                 case GLFW_KEY_F:
@@ -423,20 +421,16 @@ public final class HelloTootle {
         System.out.println("Press <SPACE> to shuffle the index buffer of the unoptimized mesh.");
         System.out.println("Press <CTRL+O> to load a custom mesh using Assimp.");
         System.out.println("Press <F1> to perform ACMR optimization.");
-        System.out.println("Press <F2> to perform slow ACMR+Overdraw optimization.");
-        System.out.println("Press <F3> to perform fast ACMR+Overdraw optimization.");
-        System.out.println("Press <F4> to toggle vertex prefetch cache optimization.");
+        System.out.println("Press <F2> to perform ACMR+Overdraw optimization.");
+        System.out.println("Press <F3> to perform ACMR+Overdraw+Prefetch optimization.");
         System.out.println("Press <F> to toggle fragment shader (ON: full viewport, OFF: null viewport).");
         System.out.println("\tACMR is best measured with FS OFF");
         System.out.println("\tOVDR is best measured with FS ON");
         System.out.println("-----------------------------------------------------------------------------");
 
-        TootleInit();
         try {
-            new HelloTootle().run();
+            new MeshOptimizerDemo().run();
         } finally {
-            TootleCleanup();
-
             for (NFDFilterItem item : ASSIMP_FILTER_LIST) {
                 memFree(item.name());
                 memFree(item.spec());
@@ -535,7 +529,7 @@ public final class HelloTootle {
         double zNear = 0.01;
         double zFar  = 100.0;
 
-        double aspect = (double)width / (double)height;
+        double aspect = (double)width / height;
 
         double fH = tan(fovY / 360 * PI) * zNear;
         double fW = fH * aspect;
@@ -750,7 +744,8 @@ public final class HelloTootle {
                     "    shape connect\n" +
                     "    call llimb";
 
-                mesh = par_shapes_create_lsystem(program, slices, 60, null, NULL);
+                Random rand = new Random(seed);
+                mesh = par_shapes_create_lsystem(program, slices, 60, context -> rand.nextFloat(), NULL);
                 if (mesh != null) {
                     par_shapes_scale(mesh, 0.05f, 0.05f, 0.05f);
                 }
@@ -847,31 +842,28 @@ public final class HelloTootle {
         }
 
         String[] controls = {
-            "(F1-3) VCache Opt:",
+            "(F1-3) Optimization Level:",
             "(-/+) VCache Size:",
-            "(F4) VGeom Opt:",
             "(O) Optimized:",
             "(W) Wireframe:",
             "(F) Fragment Shader:",
             "(up/down) Slices:",
             "(left/right) Stacks:",
-            "(page up/down) Seed:",
-            "(page up/down) Subdivisions:",
+            "(page -/+) Seed:",
+            "(CTRL page -/+) Subdivisions:",
             "(CTRL -/+) Instances:"
         };
 
-        int alignment = stb_easy_font_width(controls[controls.length - 1]);
+        int alignment = stb_easy_font_width(controls[controls.length - 2]);
 
         int y = height / 2 - controls.length * 10 - 4;
 
         setColor(color, 255, 255, 0, 255);
 
         i = 0;
-        y = print(alignment - stb_easy_font_width(controls[i]), y, controls[i] + " " + (vcacheMethod + 1), color, buffer);
+        y = print(alignment - stb_easy_font_width(controls[i]), y, controls[i] + " " + (optimizationLevel + 1), color, buffer);
         i++;
         y = print(alignment - stb_easy_font_width(controls[i]), y, controls[i] + " " + vcacheSize, color, buffer);
-        i++;
-        y = print(alignment - stb_easy_font_width(controls[i]), y, controls[i] + " " + (optimizeVertexMemory ? "ON" : "OFF"), color, buffer);
         i++;
         y = print(alignment - stb_easy_font_width(controls[i]), y, controls[i] + " " + (optimized ? "ON" : "OFF"), color, buffer);
         i++;
@@ -891,13 +883,18 @@ public final class HelloTootle {
         y = print(alignment - stb_easy_font_width(controls[i]), y, controls[i] + " " + stacks, color, buffer);
         i++;
 
-        if (meshKey == GLFW_KEY_8) {
+        if (meshKey == GLFW_KEY_7 || meshKey == GLFW_KEY_8) {
             setColor(color, 255, 255, 0, 255);
         } else {
             setColor(color, 64, 64, 0, 255);
         }
         y = print(alignment - stb_easy_font_width(controls[i]), y, controls[i] + " " + seed, color, buffer);
         i++;
+        if (meshKey == GLFW_KEY_8) {
+            setColor(color, 255, 255, 0, 255);
+        } else {
+            setColor(color, 64, 64, 0, 255);
+        }
         y = print(alignment - stb_easy_font_width(controls[i]), y, controls[i] + " " + subdivisions, color, buffer);
         i++;
         setColor(color, 255, 255, 0, 255);
@@ -1177,7 +1174,7 @@ public final class HelloTootle {
             memFree(shuffled);
         }
 
-        printStats("BEFORE", mesh.points(mesh.npoints() * 3), triangles);
+        printStats("BEFORE", mesh);
         if (!optimized) {
             updateMeshGPU();
         }
@@ -1185,213 +1182,87 @@ public final class HelloTootle {
     }
 
     private void optimize(ParShapesMesh mesh) {
-        int nVertices = mesh.npoints();
-        int nFaces    = mesh.ntriangles();
+        printStats("BEFORE", mesh);
 
-        FloatBuffer pVB  = mesh.points(nVertices * 3);
-        IntBuffer   pnIB = mesh.triangles(nFaces * 3);
+        System.out.println("\nOptimizing...");
+        long t = System.nanoTime();
 
-        if (Platform.get() != Platform.WINDOWS) {
-            System.out.println("\n(overdraw calculation may take several seconds, please be patient)");
-        }
+        IntBuffer indices = mesh.triangles(mesh.ntriangles() * 3);
+        meshopt_optimizeVertexCache(indices, indices, mesh.npoints());
 
-        /*
-        BEFORE OPTIMIZATION
-        -------------------
-        ACMR: 1.03125
-        Overdraw AVG:0.26592624
-        Overdraw MAX:3.156979
-         */
-        printStats("BEFORE", pVB, pnIB);
+        if (0 < optimizationLevel) {
+            FloatBuffer positions = mesh.points(mesh.npoints() * 3);
+            meshopt_optimizeOverdraw(indices, indices, positions, mesh.npoints(), 3 * Float.BYTES, 1.05f);
 
-        IntBuffer pnIBOut = optimizeVertexMemory ?
-            memAllocInt(pnIB.remaining()) :
-            pnIB;
+            if (1 < optimizationLevel) {
+                IntBuffer remap = memAllocInt(mesh.npoints());
 
-        try {
-            System.out.println("\nOptimizing...");
-            long t = System.nanoTime();
-            int  err;
-            switch (vcacheMethod) {
-                case 1:
-                    err = optimize(pVB, pnIB, pnIBOut);
-                    break;
-                case 2:
-                    err = optimizeFast(pVB, pnIB, pnIBOut);
-                    break;
-                default:
-                    err = optimizeVCacheOnly(pVB, pnIB, pnIBOut);
-            }
-            if (err != TOOTLE_OK) {
-                throw new IllegalStateException("Failed: " + err);
-            }
-            t = System.nanoTime() - t;
-            System.out.println("DONE in " + (t / 1_000_000L) + "ms");
+                meshopt_optimizeVertexFetchRemap(remap, indices);
 
-            if (optimizeVertexMemory) {
-                System.out.println("\nRearranging...");
-                t = System.nanoTime();
-                FloatBuffer buffer        = memAllocFloat(pVB.remaining());
-                IntBuffer   pnVertexRemap = memAllocInt(nVertices);
-                try {
-                    err = TootleOptimizeVertexMemory(
-                        pVB,
-                        pnIBOut,
+                meshopt_remapIndexBuffer(indices, indices, mesh.ntriangles() * 3, remap);
+                meshopt_remapVertexBuffer(
+                    memByteBuffer(positions),
+                    memByteBuffer(positions),
+                    mesh.npoints(),
+                    3 * Float.BYTES,
+                    remap
+                );
+
+                FloatBuffer normals = mesh.normals(mesh.npoints() * 3);
+                if (normals != null) {
+                    meshopt_remapVertexBuffer(
+                        memByteBuffer(normals),
+                        memByteBuffer(normals),
+                        mesh.npoints(),
                         3 * Float.BYTES,
-                        buffer,
-                        pnIB,
-                        pnVertexRemap
+                        remap
                     );
-                    if (err != TOOTLE_OK) {
-                        throw new IllegalStateException("Failed: " + err);
-                    }
-                    pVB.put(buffer);
-                    pVB.flip();
-
-                    FloatBuffer normals = mesh.normals(nVertices * 3);
-                    if (normals != null) {
-                        buffer.flip();
-                        for (int i = 0; i < nVertices; i++) {
-                            int n = pnVertexRemap.get(i) * 3;
-                            buffer.put(n + 0, normals.get(i * 3 + 0));
-                            buffer.put(n + 1, normals.get(i * 3 + 1));
-                            buffer.put(n + 2, normals.get(i * 3 + 2));
-                        }
-                        normals.put(buffer);
-                    }
-                } finally {
-                    memFree(pnVertexRemap);
-                    buffer.clear();
-                    memFree(buffer);
                 }
-                t = System.nanoTime() - t;
-                System.out.println("DONE in " + (t / 1_000L) + "us");
-            }
-
-            printStats("AFTER", pVB, pnIB);
-        } finally {
-            if (optimizeVertexMemory) {
-                memFree(pnIBOut);
             }
         }
+
+        t = System.nanoTime() - t;
+        System.out.println("DONE in " + (t / 1_000_000L) + "ms");
+
+        printStats("AFTER", mesh);
     }
 
-    /*
-    vertex cache optimization only
-    809ms
-
-    ACMR: 0.64476764
-    Overdraw AVG:0.26596618
-    Overdraw MAX:3.1577697
-     */
-    private int optimizeVCacheOnly(FloatBuffer pVB, IntBuffer pnIB, IntBuffer pnIBOut) {
-        return TootleOptimizeVCache(
-            pnIB,
-            pVB.remaining() / 3,
-            vcacheSize,
-            pnIBOut,
-            null,
-            TOOTLE_VCACHE_AUTO
-        );
-    }
-
-    /*
-    slow optimizer (TootleClusterMesh -> TootleVCacheClusters -> TootleOptimizeOverdraw)
-
-    TOOTLE_OVERDRAW_AUTO:
-    ---------------------
-    12841ms
-
-    ACMR: 0.6474919
-    Overdraw AVG:0.25006402
-    Overdraw MAX:1.7714512
-
-    TOOTLE_OVERDRAW_FAST:
-    ---------------------
-    319ms
-
-    ACMR: 0.6474919
-    Overdraw AVG:0.24489474
-    Overdraw MAX:1.489917
-    */
-    private int optimize(FloatBuffer pVB, IntBuffer pnIB, IntBuffer pnIBOut) {
-        return TootleOptimize(
-            pVB,
-            pnIB,
-            3 * Float.BYTES,
-            vcacheSize,
-            null,
-            TOOTLE_CCW,
-            pnIBOut,
-            null,
-            TOOTLE_VCACHE_AUTO,
-            TOOTLE_OVERDRAW_AUTO
-        );
-    }
-
-    /*
-    fast optimizer (TootleFastOptimizeVCacheAndClusterMesh -> TootleOptimizeOverdraw)
-    9ms
-
-    ACMR: 0.84388506
-    Overdraw AVG:0.14286888
-    Overdraw MAX:0.72162914
-     */
-    private int optimizeFast(FloatBuffer pVB, IntBuffer pnIB, IntBuffer pnIBOut) {
-        return TootleFastOptimize(
-            pVB,
-            pnIB,
-            3 * Float.BYTES,
-            vcacheSize,
-            TOOTLE_CCW,
-            pnIBOut,
-            null,
-            //  low value: prefer lower ACMR, higher overdraw
-            // high value: prefer higher ACMR, lower overdraw
-            0.0f /*TOOTLE_DEFAULT_ALPHA*/
-        );
-    }
-
-    private void printStats(
-        String title,
-        FloatBuffer pVB,
-        IntBuffer pnIB
-    ) {
+    private void printStats(String title, ParShapesMesh mesh) {
         System.out.println();
         System.out.println(title);
 
         try (MemoryStack stack = stackPush()) {
-            FloatBuffer pfA = stack.mallocFloat(1);
-            FloatBuffer pfB = stack.mallocFloat(1);
+            MeshoptVertexCacheStatistics vcacheStats = meshopt_analyzeVertexCache(
+                mesh.triangles(mesh.ntriangles() * 3),
+                mesh.npoints(),
+                vcacheSize, 0, 0,
+                //32, 32, 32, // NVIDIA
+                //14, 64, 128, // AMD
+                //128, 0, 0, // INTEL
+                MeshoptVertexCacheStatistics.malloc(stack)
+            );
 
-            int err = TootleMeasureCacheEfficiency(pnIB, vcacheSize, pfA);
-            if (err != TOOTLE_OK) {
-                throw new IllegalStateException("Failed: " + err);
-            }
-            System.out.println("\tACMR: " + pfA.get(0));
+            System.out.println("\tACMR: " + vcacheStats.acmr());
+            System.out.println("\tATVR: " + vcacheStats.atvr());
             if ("BEFORE".equals(title)) {
-                acmr = pfA.get(0);
+                acmr = vcacheStats.acmr();
             } else {
-                acmrOptimized = pfA.get(0);
+                acmrOptimized = vcacheStats.acmr();
             }
 
-            if (Platform.get() == Platform.WINDOWS || vcacheMethod != 0) {
-                err = TootleMeasureOverdraw(
-                    pVB,
-                    pnIB,
+            if (optimizationLevel != 0) {
+                MeshoptOverdrawStatistics overdrawStats = meshopt_analyzeOverdraw(
+                    mesh.triangles(mesh.ntriangles() * 3),
+                    mesh.points(mesh.npoints() * 3),
+                    mesh.npoints(),
                     3 * Float.BYTES,
-                    null,
-                    TOOTLE_CCW,
-                    pfA,
-                    pfB,
-                    TOOTLE_OVERDRAW_AUTO
+                    MeshoptOverdrawStatistics.malloc(stack)
                 );
-                if (err != TOOTLE_OK) {
-                    throw new IllegalStateException("Failed: " + err);
-                }
-                float avg = max(0.0f, pfA.get(0));
-                System.out.println("\tOverdraw AVG: " + avg);
-                System.out.println("\tOverdraw MAX: " + pfB.get(0));
+
+                float avg = max(0.0f, overdrawStats.overdraw());
+                System.out.println("\tOverdraw: " + avg);
+                System.out.println("\tPixels Covered: " + overdrawStats.pixels_covered());
+                System.out.println("\tPixels Shaded: " + overdrawStats.pixels_shaded());
                 if ("BEFORE".equals(title)) {
                     ovdr = avg;
                 } else {
@@ -1422,7 +1293,7 @@ public final class HelloTootle {
             for (int i = 0; i < GRAPH_HISTORY_COUNT; i++) {
                 avg += values[i];
             }
-            return avg / (float)GRAPH_HISTORY_COUNT;
+            return avg / GRAPH_HISTORY_COUNT;
         }
     }
 

@@ -69,7 +69,7 @@ public class HelloMeshOptimizer {
 
         memPutInt(mesh.address() + ParShapesMesh.NPOINTS, uniqueVertices);
 
-        System.out.println("AFTER:");
+        System.out.println("\nAFTER:");
         System.out.println("------");
         printStats(mesh);
 
@@ -84,14 +84,27 @@ public class HelloMeshOptimizer {
 
     private static void printStats(ParShapesMesh mesh) {
         try (MemoryStack stack = stackPush()) {
-            MeshoptVertexCacheStatistics stats = meshopt_analyzeVertexCache(
+            MeshoptVertexCacheStatistics vcache = meshopt_analyzeVertexCache(
                 mesh.triangles(mesh.ntriangles() * 3),
                 mesh.npoints(),
-                16, 0, 0,
+                32, 32, 32, // NVIDIA
+                //14, 64, 128, // AMD
+                //128, 0, 0, // INTEL
                 MeshoptVertexCacheStatistics.malloc(stack)
             );
-            System.out.println("ACMR: " + stats.acmr());
-            System.out.println("ATVR: " + stats.atvr());
+            System.out.println("ACMR: " + vcache.acmr());
+            System.out.println("ATVR: " + vcache.atvr());
+
+            MeshoptOverdrawStatistics overdraw = meshopt_analyzeOverdraw(
+                mesh.triangles(mesh.ntriangles() * 3),
+                mesh.points(mesh.npoints() * 3),
+                mesh.npoints(),
+                3 * Float.BYTES,
+                MeshoptOverdrawStatistics.malloc(stack)
+            );
+            System.out.println("Overdraw: " + overdraw.overdraw());
+            System.out.println("Pixels covered: " + overdraw.pixels_covered());
+            System.out.println("Pixels shaded: " + overdraw.pixels_shaded());
         }
     }
 
