@@ -42,6 +42,7 @@ val FloatConstant = ConstantType(Float::class) { "%sf".format(it) }
 val DoubleConstant = ConstantType(Double::class) { "%sd".format(it) }
 
 val StringConstant = ConstantType(String::class) { if (it.contains(" + \"")) it else "\"$it\"" }
+val UnquotedStringConstant = ConstantType(String::class) { it }
 
 abstract class EnumValue()
 
