@@ -21,8 +21,6 @@ import javax.swing.event.*
 import javax.swing.plaf.basic.*
 
 fun main() {
-    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
-
     System.setProperty("line.separator", "\n")
 
     if (Configuration.LLVM_CLANG_LIBRARY_NAME.get() == null) {
@@ -34,8 +32,12 @@ fun main() {
         }
     }
 
-    val app = Application()
-    app.frame.isVisible = true
+    SwingUtilities.invokeLater {
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
+
+        val app = Application()
+        app.frame.isVisible = true
+    }
 }
 
 private fun checkModal() = Window.getWindows().none { it is Dialog && it.isModal && it.isVisible }
