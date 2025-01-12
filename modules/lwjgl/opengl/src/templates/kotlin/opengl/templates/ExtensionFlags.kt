@@ -78,7 +78,7 @@ val EXT_multiview_texture_multisample = EXT_FLAG.nativeClassGL("EXT_multiview_te
 val EXT_multiview_tessellation_geometry_shader = EXT_FLAG.nativeClassGL("EXT_multiview_tessellation_geometry_shader", postfix = EXT)
 val EXT_post_depth_coverage = EXT_FLAG.nativeClassGL("EXT_post_depth_coverage", postfix = EXT)
 val EXT_shader_image_load_formatted = EXT_FLAG.nativeClassGL("EXT_shader_image_load_formatted", postfix = EXT)
-val EXT_shader_integer_mix = "EXTShaderIntegerMix".nativeClassGL("EXT_shader_integer_mix", postfix = EXT)
+val EXT_shader_integer_mix = EXT_FLAG.nativeClassGL("EXT_shader_integer_mix", postfix = EXT)
 val EXT_shader_samples_identical = EXT_FLAG.nativeClassGL("EXT_shader_samples_identical", postfix = EXT)
 val EXT_shadow_funcs = EXT_FLAG.nativeClassGL("EXT_shadow_funcs", postfix = EXT)
 val EXT_sparse_texture2 = EXT_FLAG.nativeClassGL("EXT_sparse_texture2", postfix = EXT)
@@ -96,7 +96,7 @@ val AMD_shader_stencil_export = EXT_FLAG.nativeClassGL("AMD_shader_stencil_expor
 val AMD_shader_trinary_minmax = EXT_FLAG.nativeClassGL("AMD_shader_trinary_minmax", postfix = AMD)
 val AMD_texture_gather_bias_lod = EXT_FLAG.nativeClassGL("AMD_texture_gather_bias_lod", postfix = AMD)
 val AMD_texture_texture4 = EXT_FLAG.nativeClassGL("AMD_texture_texture4", postfix = AMD)
-val AMD_transform_feedback3_lines_triangles = "AMDTransformFeedback3LinesTriangles".nativeClassGL("AMD_transform_feedback3_lines_triangles", postfix = AMD)
+val AMD_transform_feedback3_lines_triangles = EXT_FLAG.nativeClassGL("AMD_transform_feedback3_lines_triangles", postfix = AMD)
 val AMD_vertex_shader_layer = EXT_FLAG.nativeClassGL("AMD_vertex_shader_layer", postfix = AMD)
 val AMD_vertex_shader_viewport_index = EXT_FLAG.nativeClassGL("AMD_vertex_shader_viewport_index", postfix = AMD)
 
@@ -135,7 +135,7 @@ val NV_uniform_buffer_std430_layout = EXT_FLAG.nativeClassGL("NV_uniform_buffer_
 val NV_viewport_array2 = EXT_FLAG.nativeClassGL("NV_viewport_array2", postfix = NV)
 val NVX_blend_equation_advanced_multi_draw_buffers = EXT_FLAG.nativeClassGL("NVX_blend_equation_advanced_multi_draw_buffers", postfix = NVX)
 
-val OVR_multiview2 = "OVRMultiview2".nativeClassGL("OVR_multiview2", postfix = OVR)
+val OVR_multiview2 = EXT_FLAG.nativeClassGL("OVR_multiview2", postfix = OVR)
 
 // Platform-specific
 

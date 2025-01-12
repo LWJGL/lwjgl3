@@ -137,7 +137,7 @@ abstract class GeneratorTarget(
         ).let { (JAVA, NATIVE) -> """($JAVA)?(?<!&)([@\\]?#{1,2})($NATIVE+(?:\((?:(?:, )?$JAVA)*\))?)""".toRegex() }
     }
 
-    private fun getSourceFileName(): String? {
+    internal open fun getSourceFileName(): String? {
         // Nasty hack to retrieve the source file that defines this template, without having to specify it explictly.
         // This enables incremental builds to work even with arbitrary file names or when multiple templates are bundled
         // in the same file (e.g. ExtensionFlags).
@@ -152,11 +152,23 @@ abstract class GeneratorTarget(
         }
     }
 
+    internal var lmt: Long = 0L
     internal val sourceFile = getSourceFileName()
-    internal open fun getLastModified(root: String): Long = Paths.get(root, sourceFile).let {
-        if (Files.isRegularFile(it)) it else
-            throw IllegalStateException("The source file for template ${module.packageKotlin}.$className does not exist ($it).")
-    }.lastModified
+    internal open fun getLastModified(root: String, fileName: String): Long {
+        val path = Paths.get(root, fileName)
+        if (Files.isRegularFile(path)) {
+            return path.lastModified
+        }
+
+        // Kotlin upper-cases the first letter of the file name, try lower-casing it.
+        // This is necessary on case-sensitive file systems.
+        val lc = Paths.get(root, "${fileName[0].lowercaseChar()}${fileName.substring(1)}")
+        if (Files.isRegularFile(lc)) {
+            return lc.lastModified
+        }
+
+        throw IllegalStateException("The source file for template ${module.packageKotlin}.$className does not exist ($path).")
+    }
 
     var subpackage: String? = null
     val packageName get() = if (subpackage == null) module.packageName else "${module.packageName}.$subpackage"
