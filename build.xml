@@ -770,12 +770,15 @@
             </and>
         </condition>
 
-        <local name="test.tootle"/>
-        <condition property="test.tootle">
+        <local name="test.meshoptimizer"/>
+        <condition property="test.meshoptimizer">
             <and>
                 <istrue value="${binding.assimp}"/>
+                <istrue value="${binding.meshoptimizer}"/>
+                <istrue value="${binding.nfd}"/>
+                <istrue value="${binding.opengl}"/>
                 <istrue value="${binding.par}"/>
-                <istrue value="${binding.tootle}"/>
+                <istrue value="${binding.stb}"/>
             </and>
         </condition>
 
@@ -842,6 +845,7 @@
             <include name="org/lwjgl/demo/util/lmdb/**" if:true="${binding.lmdb}"/>
             <include name="org/lwjgl/demo/util/lz4/**" if:true="${binding.lz4}"/>
             <include name="org/lwjgl/demo/util/meshoptimizer/**" if:true="${binding.meshoptimizer}"/>
+            <exclude name="org/lwjgl/demo/util/meshoptimizer/MeshOptimizerDemo.java" unless:set="test.meshoptimizer"/>
             <include name="org/lwjgl/demo/util/msdfgen/**" if:set="test.msdfgen"/>
             <include name="org/lwjgl/demo/util/nfd/**" if:set="test.nfd"/>
             <include name="org/lwjgl/demo/util/par/**" if:set="test.par"/>
