@@ -105,9 +105,11 @@ class ConstantBlock<T : Any>(
                             value = Integer.parseInt(ev.expression) + 1 // decimal
                             formatType = 1 // next values will be decimal
                         } catch(_: NumberFormatException) {
-                            try {
-                                value = Integer.parseInt(ev.expression, 16) + 1 // hex
-                            } catch(_: Exception) {
+                            if (ev.expression.startsWith("0x", ignoreCase = true)) {
+                                try {
+                                    value = Integer.parseInt(ev.expression.substring(2), 16) + 1 // hex
+                                } catch(_: Exception) {
+                                }
                             }
                             formatType = 0 // next values will be hex
                         }
@@ -130,7 +132,7 @@ class ConstantBlock<T : Any>(
     }
 
     private fun generateEnumByte(rootBlock: ArrayList<Constant<Number>>) {
-        var value = 0L
+        var value = 0
         var formatType = 1 // 0: hex, 1: decimal
         for (c in constants) {
             if (c is ConstantExpression) {
@@ -143,19 +145,21 @@ class ConstantBlock<T : Any>(
                 rootBlock.add(when {
                     ev is EnumByteValueExpression -> {
                         try {
-                            value = java.lang.Byte.parseByte(ev.expression) + 1L // decimal
+                            value = java.lang.Byte.parseByte(ev.expression) + 1 // decimal
                             formatType = 1 // next values will be decimal
                         } catch(_: NumberFormatException) {
-                            try {
-                                value = java.lang.Byte.parseByte(ev.expression, 16) + 1L // hex
-                            } catch(_: Exception) {
+                            if (ev.expression.startsWith("0x", ignoreCase = true)) {
+                                try {
+                                    value = java.lang.Byte.parseByte(ev.expression.substring(2), 16) + 1 // hex
+                                } catch (_: Exception) {
+                                }
                             }
                             formatType = 0 // next values will be hex
                         }
                         ConstantExpression(c.name, ev.expression, false)
                     }
                     ev.value != null          -> {
-                        value = ev.value + 1L
+                        value = ev.value + 1
                         formatType = 0
                         Constant(c.name, ev.value)
                     }
@@ -187,9 +191,11 @@ class ConstantBlock<T : Any>(
                             value = java.lang.Long.parseLong(ev.expression) + 1L // decimal
                             formatType = 1 // next values will be decimal
                         } catch(_: NumberFormatException) {
-                            try {
-                                value = java.lang.Long.parseLong(ev.expression, 16) + 1L // hex
-                            } catch(_: Exception) {
+                            if (ev.expression.startsWith("0x", ignoreCase = true)) {
+                                try {
+                                    value = java.lang.Long.parseLong(ev.expression.substring(2), 16) + 1L // hex
+                                } catch (_: Exception) {
+                                }
                             }
                             formatType = 0 // next values will be hex
                         }
