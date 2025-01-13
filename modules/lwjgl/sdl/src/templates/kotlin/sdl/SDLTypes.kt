@@ -261,7 +261,7 @@ val SDL_AsyncIOQueue = "SDL_AsyncIOQueue".opaque
 val SDL_AsyncIOResult = "SDL_AsyncIOResult".enumType
 val SDL_AsyncIOTaskType = "SDL_AsyncIOTaskType".enumType
 
-val SDL_AsyncIOOutcome = struct(Module.SDL, "SDL_AsyncIOOutcome") {
+val SDL_AsyncIOOutcome = struct(Module.SDL, "SDL_AsyncIOOutcome", mutable = false) {
     SDL_AsyncIO.p("asyncio")
     SDL_AsyncIOTaskType("type")
     SDL_AsyncIOResult("result")
@@ -302,7 +302,7 @@ val SDL_AudioPostmixCallback = Module.SDL.callback {
         "SDL_AudioPostmixCallback",
 
         nullable..opaque_p("userdata"),
-        Check(1)..SDL_AudioSpec.const.p("spec"),
+        SDL_AudioSpec.const.p("spec"),
         float.p("buffer"),
         AutoSize("buffer")..int("buflen"),
 

@@ -1097,26 +1097,24 @@ public class SDL {
     }
 
     public static final int
-        SDL_ASYNCIO_TASK_READ  = 0x0,
-        SDL_ASYNCIO_TASK_WRITE = 0x1,
-        SDL_ASYNCIO_TASK_CLOSE = 0x2;
+        SDL_ASYNCIO_TASK_READ  = 0,
+        SDL_ASYNCIO_TASK_WRITE = 1,
+        SDL_ASYNCIO_TASK_CLOSE = 2;
 
     public static final int
-        SDL_ASYNCIO_COMPLETE = 0x0,
-        SDL_ASYNCIO_FAILURE  = 0x1,
-        SDL_ASYNCIO_CANCELED = 0x2;
+        SDL_ASYNCIO_COMPLETE = 0,
+        SDL_ASYNCIO_FAILURE  = 1,
+        SDL_ASYNCIO_CANCELED = 2;
 
     public static final int
-        SDL_AUDIO_MASK_BITSIZE             = 0xFF,
-        SDL_AUDIO_MASK_FLOAT               = 0x100,
-        SDL_AUDIO_MASK_BIG_ENDIAN          = 0x1000,
-        SDL_AUDIO_MASK_SIGNED              = 0x8000,
-        SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK  = 0xFFFFFFFF,
-        SDL_AUDIO_DEVICE_DEFAULT_RECORDING = 0xFFFFFFFE;
+        SDL_AUDIO_MASK_BITSIZE    = 0xFF,
+        SDL_AUDIO_MASK_FLOAT      = 1 << 8,
+        SDL_AUDIO_MASK_BIG_ENDIAN = 1 << 12,
+        SDL_AUDIO_MASK_SIGNED     = 1 << 15;
 
     public static final int
-        SDL_AUDIO_UNKNOWN = 0x0,
-        SDL_AUDIO_U8      = 0x8,
+        SDL_AUDIO_UNKNOWN = 0x0000,
+        SDL_AUDIO_U8      = 0x0008,
         SDL_AUDIO_S8      = 0x8008,
         SDL_AUDIO_S16LE   = 0x8010,
         SDL_AUDIO_S16BE   = 0x9010,
@@ -1124,9 +1122,13 @@ public class SDL {
         SDL_AUDIO_S32BE   = 0x9020,
         SDL_AUDIO_F32LE   = 0x8120,
         SDL_AUDIO_F32BE   = 0x9120,
-        SDL_AUDIO_S16     = SDL_AUDIO_S16LE,
-        SDL_AUDIO_S32     = SDL_AUDIO_S32LE,
-        SDL_AUDIO_F32     = SDL_AUDIO_F32LE;
+        SDL_AUDIO_S16     = ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN ? SDL_AUDIO_S16LE : SDL_AUDIO_S16BE,
+        SDL_AUDIO_S32     = ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN ? SDL_AUDIO_S32LE : SDL_AUDIO_S32BE,
+        SDL_AUDIO_F32     = ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN ? SDL_AUDIO_S32LE : SDL_AUDIO_S32BE;
+
+    public static final int
+        SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK  = 0xFFFFFFFF,
+        SDL_AUDIO_DEVICE_DEFAULT_RECORDING = 0xFFFFFFFE;
 
     public static final int SDL_BLENDMODE_NONE = 0x00000000;
 
@@ -4373,6 +4375,86 @@ public class SDL {
         }
     }
 
+    // --- [ SDL_DEFINE_AUDIO_FORMAT ] ---
+
+    /** {@code uint32_t SDL_DEFINE_AUDIO_FORMAT(uint32_t signed, uint32_t bigendian, uint32_t flt, uint32_t size)} */
+    @NativeType("uint32_t")
+    public static int SDL_DEFINE_AUDIO_FORMAT(@NativeType("uint32_t") int signed, @NativeType("uint32_t") int bigendian, @NativeType("uint32_t") int flt, @NativeType("uint32_t") int size) {
+        return ((signed & 1) << 15) | ((bigendian & 1) << 12) | ((flt & 1) << 8) | (size & SDL_AUDIO_MASK_BITSIZE);
+    }
+
+    // --- [ SDL_AUDIO_BITSIZE ] ---
+
+    /** {@code uint32_t SDL_AUDIO_BITSIZE(SDL_AudioFormat x)} */
+    @NativeType("uint32_t")
+    public static int SDL_AUDIO_BITSIZE(@NativeType("SDL_AudioFormat") int x) {
+        return x & SDL_AUDIO_MASK_BITSIZE;
+    }
+
+    // --- [ SDL_AUDIO_BYTESIZE ] ---
+
+    /** {@code uint32_t SDL_AUDIO_BYTESIZE(SDL_AudioFormat x)} */
+    @NativeType("uint32_t")
+    public static int SDL_AUDIO_BYTESIZE(@NativeType("SDL_AudioFormat") int x) {
+        return SDL_AUDIO_BITSIZE(x) / 8;
+    }
+
+    // --- [ SDL_AUDIO_ISFLOAT ] ---
+
+    /** {@code bool SDL_AUDIO_ISFLOAT(SDL_AudioFormat x)} */
+    @NativeType("bool")
+    public static boolean SDL_AUDIO_ISFLOAT(@NativeType("SDL_AudioFormat") int x) {
+        return (x & SDL_AUDIO_MASK_FLOAT) != 0;
+    }
+
+    // --- [ SDL_AUDIO_ISBIGENDIAN ] ---
+
+    /** {@code bool SDL_AUDIO_ISBIGENDIAN(SDL_AudioFormat x)} */
+    @NativeType("bool")
+    public static boolean SDL_AUDIO_ISBIGENDIAN(@NativeType("SDL_AudioFormat") int x) {
+        return (x & SDL_AUDIO_MASK_BIG_ENDIAN) != 0;
+    }
+
+    // --- [ SDL_AUDIO_ISLITTLEENDIAN ] ---
+
+    /** {@code bool SDL_AUDIO_ISLITTLEENDIAN(SDL_AudioFormat x)} */
+    @NativeType("bool")
+    public static boolean SDL_AUDIO_ISLITTLEENDIAN(@NativeType("SDL_AudioFormat") int x) {
+        return !SDL_AUDIO_ISBIGENDIAN(x);
+    }
+
+    // --- [ SDL_AUDIO_ISSIGNED ] ---
+
+    /** {@code bool SDL_AUDIO_ISSIGNED(SDL_AudioFormat x)} */
+    @NativeType("bool")
+    public static boolean SDL_AUDIO_ISSIGNED(@NativeType("SDL_AudioFormat") int x) {
+        return (x & SDL_AUDIO_MASK_SIGNED) != 0;
+    }
+
+    // --- [ SDL_AUDIO_ISINT ] ---
+
+    /** {@code bool SDL_AUDIO_ISINT(SDL_AudioFormat x)} */
+    @NativeType("bool")
+    public static boolean SDL_AUDIO_ISINT(@NativeType("SDL_AudioFormat") int x) {
+        return !SDL_AUDIO_ISFLOAT(x);
+    }
+
+    // --- [ SDL_AUDIO_ISUNSIGNED ] ---
+
+    /** {@code bool SDL_AUDIO_ISUNSIGNED(SDL_AudioFormat x)} */
+    @NativeType("bool")
+    public static boolean SDL_AUDIO_ISUNSIGNED(@NativeType("SDL_AudioFormat") int x) {
+        return !SDL_AUDIO_ISSIGNED(x);
+    }
+
+    // --- [ SDL_AUDIO_FRAMESIZE ] ---
+
+    /** {@code uint32_t SDL_AUDIO_FRAMESIZE(SDL_AudioSpec x)} */
+    @NativeType("uint32_t")
+    public static int SDL_AUDIO_FRAMESIZE(SDL_AudioSpec x) {
+        return SDL_AUDIO_BYTESIZE(x.format()) * x.channels();
+    }
+
     // --- [ SDL_GetNumAudioDrivers ] ---
 
     /** {@code int SDL_GetNumAudioDrivers(void)} */
@@ -4393,7 +4475,7 @@ public class SDL {
     @NativeType("char const *")
     public static @Nullable String SDL_GetAudioDriver(int index) {
         long __result = nSDL_GetAudioDriver(index);
-        return memUTF8Safe(__result);
+        return memASCIISafe(__result);
     }
 
     // --- [ SDL_GetCurrentAudioDriver ] ---
@@ -4408,7 +4490,7 @@ public class SDL {
     @NativeType("char const *")
     public static @Nullable String SDL_GetCurrentAudioDriver() {
         long __result = nSDL_GetCurrentAudioDriver();
-        return memUTF8Safe(__result);
+        return memASCIISafe(__result);
     }
 
     // --- [ SDL_GetAudioPlaybackDevices ] ---
@@ -4478,9 +4560,8 @@ public class SDL {
 
     /** {@code bool SDL_GetAudioDeviceFormat(SDL_AudioDeviceID devid, SDL_AudioSpec * spec, int * sample_frames)} */
     @NativeType("bool")
-    public static boolean SDL_GetAudioDeviceFormat(@NativeType("SDL_AudioDeviceID") int devid, @NativeType("SDL_AudioSpec *") SDL_AudioSpec.Buffer spec, @NativeType("int *") IntBuffer sample_frames) {
+    public static boolean SDL_GetAudioDeviceFormat(@NativeType("SDL_AudioDeviceID") int devid, @NativeType("SDL_AudioSpec *") SDL_AudioSpec spec, @NativeType("int *") IntBuffer sample_frames) {
         if (CHECKS) {
-            check(spec, 1);
             check(sample_frames, 1);
         }
         return nSDL_GetAudioDeviceFormat(devid, spec.address(), memAddress(sample_frames));
@@ -4517,10 +4598,7 @@ public class SDL {
 
     /** {@code SDL_AudioDeviceID SDL_OpenAudioDevice(SDL_AudioDeviceID devid, SDL_AudioSpec const * spec)} */
     @NativeType("SDL_AudioDeviceID")
-    public static int SDL_OpenAudioDevice(@NativeType("SDL_AudioDeviceID") int devid, @NativeType("SDL_AudioSpec const *") SDL_AudioSpec.@Nullable Buffer spec) {
-        if (CHECKS) {
-            checkSafe(spec, 1);
-        }
+    public static int SDL_OpenAudioDevice(@NativeType("SDL_AudioDeviceID") int devid, @NativeType("SDL_AudioSpec const *") @Nullable SDL_AudioSpec spec) {
         return nSDL_OpenAudioDevice(devid, memAddressSafe(spec));
     }
 
@@ -4629,8 +4707,8 @@ public class SDL {
     }
 
     /** {@code void SDL_UnbindAudioStreams(SDL_AudioStream * const * streams, int num_streams)} */
-    public static void SDL_UnbindAudioStreams(@NativeType("SDL_AudioStream * const *") PointerBuffer streams) {
-        nSDL_UnbindAudioStreams(memAddress(streams), streams.remaining());
+    public static void SDL_UnbindAudioStreams(@NativeType("SDL_AudioStream * const *") @Nullable PointerBuffer streams) {
+        nSDL_UnbindAudioStreams(memAddressSafe(streams), remainingSafe(streams));
     }
 
     // --- [ SDL_UnbindAudioStream ] ---
@@ -4638,9 +4716,6 @@ public class SDL {
     /** {@code void SDL_UnbindAudioStream(SDL_AudioStream * stream)} */
     public static void SDL_UnbindAudioStream(@NativeType("SDL_AudioStream *") long stream) {
         long __functionAddress = Functions.UnbindAudioStream;
-        if (CHECKS) {
-            check(stream);
-        }
         invokePV(stream, __functionAddress);
     }
 
@@ -4666,11 +4741,7 @@ public class SDL {
 
     /** {@code SDL_AudioStream * SDL_CreateAudioStream(SDL_AudioSpec const * src_spec, SDL_AudioSpec const * dst_spec)} */
     @NativeType("SDL_AudioStream *")
-    public static long SDL_CreateAudioStream(@NativeType("SDL_AudioSpec const *") SDL_AudioSpec.Buffer src_spec, @NativeType("SDL_AudioSpec const *") SDL_AudioSpec.Buffer dst_spec) {
-        if (CHECKS) {
-            check(src_spec, 1);
-            check(dst_spec, 1);
-        }
+    public static long SDL_CreateAudioStream(@NativeType("SDL_AudioSpec const *") SDL_AudioSpec src_spec, @NativeType("SDL_AudioSpec const *") SDL_AudioSpec dst_spec) {
         return nSDL_CreateAudioStream(src_spec.address(), dst_spec.address());
     }
 
@@ -4699,12 +4770,8 @@ public class SDL {
 
     /** {@code bool SDL_GetAudioStreamFormat(SDL_AudioStream * stream, SDL_AudioSpec * src_spec, SDL_AudioSpec * dst_spec)} */
     @NativeType("bool")
-    public static boolean SDL_GetAudioStreamFormat(@NativeType("SDL_AudioStream *") long stream, @NativeType("SDL_AudioSpec *") SDL_AudioSpec.Buffer src_spec, @NativeType("SDL_AudioSpec *") SDL_AudioSpec.Buffer dst_spec) {
-        if (CHECKS) {
-            check(src_spec, 1);
-            check(dst_spec, 1);
-        }
-        return nSDL_GetAudioStreamFormat(stream, src_spec.address(), dst_spec.address());
+    public static boolean SDL_GetAudioStreamFormat(@NativeType("SDL_AudioStream *") long stream, @NativeType("SDL_AudioSpec *") @Nullable SDL_AudioSpec src_spec, @NativeType("SDL_AudioSpec *") @Nullable SDL_AudioSpec dst_spec) {
+        return nSDL_GetAudioStreamFormat(stream, memAddressSafe(src_spec), memAddressSafe(dst_spec));
     }
 
     // --- [ SDL_SetAudioStreamFormat ] ---
@@ -4720,12 +4787,8 @@ public class SDL {
 
     /** {@code bool SDL_SetAudioStreamFormat(SDL_AudioStream * stream, SDL_AudioSpec const * src_spec, SDL_AudioSpec const * dst_spec)} */
     @NativeType("bool")
-    public static boolean SDL_SetAudioStreamFormat(@NativeType("SDL_AudioStream *") long stream, @NativeType("SDL_AudioSpec const *") SDL_AudioSpec.Buffer src_spec, @NativeType("SDL_AudioSpec const *") SDL_AudioSpec.Buffer dst_spec) {
-        if (CHECKS) {
-            check(src_spec, 1);
-            check(dst_spec, 1);
-        }
-        return nSDL_SetAudioStreamFormat(stream, src_spec.address(), dst_spec.address());
+    public static boolean SDL_SetAudioStreamFormat(@NativeType("SDL_AudioStream *") long stream, @NativeType("SDL_AudioSpec const *") @Nullable SDL_AudioSpec src_spec, @NativeType("SDL_AudioSpec const *") @Nullable SDL_AudioSpec dst_spec) {
+        return nSDL_SetAudioStreamFormat(stream, memAddressSafe(src_spec), memAddressSafe(dst_spec));
     }
 
     // --- [ SDL_GetAudioStreamFrequencyRatio ] ---
@@ -4835,8 +4898,8 @@ public class SDL {
 
     /** {@code bool SDL_SetAudioStreamInputChannelMap(SDL_AudioStream * stream, int const * chmap, int count)} */
     @NativeType("bool")
-    public static boolean SDL_SetAudioStreamInputChannelMap(@NativeType("SDL_AudioStream *") long stream, @NativeType("int const *") IntBuffer chmap) {
-        return nSDL_SetAudioStreamInputChannelMap(stream, memAddress(chmap), chmap.remaining());
+    public static boolean SDL_SetAudioStreamInputChannelMap(@NativeType("SDL_AudioStream *") long stream, @NativeType("int const *") @Nullable IntBuffer chmap) {
+        return nSDL_SetAudioStreamInputChannelMap(stream, memAddressSafe(chmap), remainingSafe(chmap));
     }
 
     // --- [ SDL_SetAudioStreamOutputChannelMap ] ---
@@ -4852,8 +4915,8 @@ public class SDL {
 
     /** {@code bool SDL_SetAudioStreamOutputChannelMap(SDL_AudioStream * stream, int const * chmap, int count)} */
     @NativeType("bool")
-    public static boolean SDL_SetAudioStreamOutputChannelMap(@NativeType("SDL_AudioStream *") long stream, @NativeType("int const *") IntBuffer chmap) {
-        return nSDL_SetAudioStreamOutputChannelMap(stream, memAddress(chmap), chmap.remaining());
+    public static boolean SDL_SetAudioStreamOutputChannelMap(@NativeType("SDL_AudioStream *") long stream, @NativeType("int const *") @Nullable IntBuffer chmap) {
+        return nSDL_SetAudioStreamOutputChannelMap(stream, memAddressSafe(chmap), remainingSafe(chmap));
     }
 
     // --- [ SDL_PutAudioStreamData ] ---
@@ -4996,8 +5059,8 @@ public class SDL {
 
     /** {@code bool SDL_SetAudioStreamGetCallback(SDL_AudioStream * stream, SDL_AudioStreamCallback callback, void * userdata)} */
     @NativeType("bool")
-    public static boolean SDL_SetAudioStreamGetCallback(@NativeType("SDL_AudioStream *") long stream, @NativeType("SDL_AudioStreamCallback") SDL_AudioStreamCallbackI callback, @NativeType("void *") long userdata) {
-        return nSDL_SetAudioStreamGetCallback(stream, callback.address(), userdata);
+    public static boolean SDL_SetAudioStreamGetCallback(@NativeType("SDL_AudioStream *") long stream, @NativeType("SDL_AudioStreamCallback") @Nullable SDL_AudioStreamCallbackI callback, @NativeType("void *") long userdata) {
+        return nSDL_SetAudioStreamGetCallback(stream, memAddressSafe(callback), userdata);
     }
 
     // --- [ SDL_SetAudioStreamPutCallback ] ---
@@ -5013,8 +5076,8 @@ public class SDL {
 
     /** {@code bool SDL_SetAudioStreamPutCallback(SDL_AudioStream * stream, SDL_AudioStreamCallback callback, void * userdata)} */
     @NativeType("bool")
-    public static boolean SDL_SetAudioStreamPutCallback(@NativeType("SDL_AudioStream *") long stream, @NativeType("SDL_AudioStreamCallback") SDL_AudioStreamCallbackI callback, @NativeType("void *") long userdata) {
-        return nSDL_SetAudioStreamPutCallback(stream, callback.address(), userdata);
+    public static boolean SDL_SetAudioStreamPutCallback(@NativeType("SDL_AudioStream *") long stream, @NativeType("SDL_AudioStreamCallback") @Nullable SDL_AudioStreamCallbackI callback, @NativeType("void *") long userdata) {
+        return nSDL_SetAudioStreamPutCallback(stream, memAddressSafe(callback), userdata);
     }
 
     // --- [ SDL_DestroyAudioStream ] ---
@@ -5038,11 +5101,8 @@ public class SDL {
 
     /** {@code SDL_AudioStream * SDL_OpenAudioDeviceStream(SDL_AudioDeviceID devid, SDL_AudioSpec const * spec, SDL_AudioStreamCallback callback, void * userdata)} */
     @NativeType("SDL_AudioStream *")
-    public static long SDL_OpenAudioDeviceStream(@NativeType("SDL_AudioDeviceID") int devid, @NativeType("SDL_AudioSpec const *") SDL_AudioSpec.Buffer spec, @NativeType("SDL_AudioStreamCallback") SDL_AudioStreamCallbackI callback, @NativeType("void *") long userdata) {
-        if (CHECKS) {
-            check(spec, 1);
-        }
-        return nSDL_OpenAudioDeviceStream(devid, spec.address(), callback.address(), userdata);
+    public static long SDL_OpenAudioDeviceStream(@NativeType("SDL_AudioDeviceID") int devid, @NativeType("SDL_AudioSpec const *") @Nullable SDL_AudioSpec spec, @NativeType("SDL_AudioStreamCallback") @Nullable SDL_AudioStreamCallbackI callback, @NativeType("void *") long userdata) {
+        return nSDL_OpenAudioDeviceStream(devid, memAddressSafe(spec), memAddressSafe(callback), userdata);
     }
 
     // --- [ SDL_SetAudioPostmixCallback ] ---
@@ -5055,8 +5115,8 @@ public class SDL {
 
     /** {@code bool SDL_SetAudioPostmixCallback(SDL_AudioDeviceID devid, SDL_AudioPostmixCallback callback, void * userdata)} */
     @NativeType("bool")
-    public static boolean SDL_SetAudioPostmixCallback(@NativeType("SDL_AudioDeviceID") int devid, @NativeType("SDL_AudioPostmixCallback") SDL_AudioPostmixCallbackI callback, @NativeType("void *") long userdata) {
-        return nSDL_SetAudioPostmixCallback(devid, callback.address(), userdata);
+    public static boolean SDL_SetAudioPostmixCallback(@NativeType("SDL_AudioDeviceID") int devid, @NativeType("SDL_AudioPostmixCallback") @Nullable SDL_AudioPostmixCallbackI callback, @NativeType("void *") long userdata) {
+        return nSDL_SetAudioPostmixCallback(devid, memAddressSafe(callback), userdata);
     }
 
     // --- [ SDL_LoadWAV_IO ] ---
@@ -5072,9 +5132,8 @@ public class SDL {
 
     /** {@code bool SDL_LoadWAV_IO(SDL_IOStream * src, bool closeio, SDL_AudioSpec * spec, Uint8 ** audio_buf, Uint32 * audio_len)} */
     @NativeType("bool")
-    public static boolean SDL_LoadWAV_IO(@NativeType("SDL_IOStream *") long src, @NativeType("bool") boolean closeio, @NativeType("SDL_AudioSpec *") SDL_AudioSpec.Buffer spec, @NativeType("Uint8 **") PointerBuffer audio_buf, @NativeType("Uint32 *") IntBuffer audio_len) {
+    public static boolean SDL_LoadWAV_IO(@NativeType("SDL_IOStream *") long src, @NativeType("bool") boolean closeio, @NativeType("SDL_AudioSpec *") SDL_AudioSpec spec, @NativeType("Uint8 **") PointerBuffer audio_buf, @NativeType("Uint32 *") IntBuffer audio_len) {
         if (CHECKS) {
-            check(spec, 1);
             check(audio_buf, 1);
             check(audio_len, 1);
         }
@@ -5091,10 +5150,9 @@ public class SDL {
 
     /** {@code bool SDL_LoadWAV(char const * path, SDL_AudioSpec * spec, Uint8 ** audio_buf, Uint32 * audio_len)} */
     @NativeType("bool")
-    public static boolean SDL_LoadWAV(@NativeType("char const *") ByteBuffer path, @NativeType("SDL_AudioSpec *") SDL_AudioSpec.Buffer spec, @NativeType("Uint8 **") PointerBuffer audio_buf, @NativeType("Uint32 *") IntBuffer audio_len) {
+    public static boolean SDL_LoadWAV(@NativeType("char const *") ByteBuffer path, @NativeType("SDL_AudioSpec *") SDL_AudioSpec spec, @NativeType("Uint8 **") PointerBuffer audio_buf, @NativeType("Uint32 *") IntBuffer audio_len) {
         if (CHECKS) {
             checkNT1(path);
-            check(spec, 1);
             check(audio_buf, 1);
             check(audio_len, 1);
         }
@@ -5103,9 +5161,8 @@ public class SDL {
 
     /** {@code bool SDL_LoadWAV(char const * path, SDL_AudioSpec * spec, Uint8 ** audio_buf, Uint32 * audio_len)} */
     @NativeType("bool")
-    public static boolean SDL_LoadWAV(@NativeType("char const *") CharSequence path, @NativeType("SDL_AudioSpec *") SDL_AudioSpec.Buffer spec, @NativeType("Uint8 **") PointerBuffer audio_buf, @NativeType("Uint32 *") IntBuffer audio_len) {
+    public static boolean SDL_LoadWAV(@NativeType("char const *") CharSequence path, @NativeType("SDL_AudioSpec *") SDL_AudioSpec spec, @NativeType("Uint8 **") PointerBuffer audio_buf, @NativeType("Uint32 *") IntBuffer audio_len) {
         if (CHECKS) {
-            check(spec, 1);
             check(audio_buf, 1);
             check(audio_len, 1);
         }
@@ -5131,9 +5188,9 @@ public class SDL {
     @NativeType("bool")
     public static boolean SDL_MixAudio(@NativeType("Uint8 *") ByteBuffer dst, @NativeType("Uint8 const *") ByteBuffer src, @NativeType("SDL_AudioFormat") int format, float volume) {
         if (CHECKS) {
-            check(src, dst.remaining());
+            check(dst, src.remaining());
         }
-        return nSDL_MixAudio(memAddress(dst), memAddress(src), format, dst.remaining(), volume);
+        return nSDL_MixAudio(memAddress(dst), memAddress(src), format, src.remaining(), volume);
     }
 
     // --- [ SDL_ConvertAudioSamples ] ---
@@ -5146,10 +5203,8 @@ public class SDL {
 
     /** {@code bool SDL_ConvertAudioSamples(SDL_AudioSpec const * src_spec, Uint8 const * src_data, int src_len, SDL_AudioSpec const * dst_spec, Uint8 ** dst_data, int * dst_len)} */
     @NativeType("bool")
-    public static boolean SDL_ConvertAudioSamples(@NativeType("SDL_AudioSpec const *") SDL_AudioSpec.Buffer src_spec, @NativeType("Uint8 const *") ByteBuffer src_data, @NativeType("SDL_AudioSpec const *") SDL_AudioSpec.Buffer dst_spec, @NativeType("Uint8 **") PointerBuffer dst_data, @NativeType("int *") IntBuffer dst_len) {
+    public static boolean SDL_ConvertAudioSamples(@NativeType("SDL_AudioSpec const *") SDL_AudioSpec src_spec, @NativeType("Uint8 const *") ByteBuffer src_data, @NativeType("SDL_AudioSpec const *") SDL_AudioSpec dst_spec, @NativeType("Uint8 **") PointerBuffer dst_data, @NativeType("int *") IntBuffer dst_len) {
         if (CHECKS) {
-            check(src_spec, 1);
-            check(dst_spec, 1);
             check(dst_data, 1);
             check(dst_len, 1);
         }
@@ -5168,7 +5223,7 @@ public class SDL {
     @NativeType("char const *")
     public static @Nullable String SDL_GetAudioFormatName(@NativeType("SDL_AudioFormat") int format) {
         long __result = nSDL_GetAudioFormatName(format);
-        return memUTF8Safe(__result);
+        return memASCIISafe(__result);
     }
 
     // --- [ SDL_GetSilenceValueForFormat ] ---
@@ -5177,86 +5232,6 @@ public class SDL {
     public static int SDL_GetSilenceValueForFormat(@NativeType("SDL_AudioFormat") int format) {
         long __functionAddress = Functions.GetSilenceValueForFormat;
         return invokeI(format, __functionAddress);
-    }
-
-    // --- [ SDL_DEFINE_AUDIO_FORMAT ] ---
-
-    /** {@code uint32_t SDL_DEFINE_AUDIO_FORMAT(uint32_t signed, uint32_t bigendian, uint32_t flt, uint32_t size)} */
-    @NativeType("uint32_t")
-    public static int SDL_DEFINE_AUDIO_FORMAT(@NativeType("uint32_t") int signed, @NativeType("uint32_t") int bigendian, @NativeType("uint32_t") int flt, @NativeType("uint32_t") int size) {
-        return (((short)(signed) << 15) | ((short)(bigendian) << 12) | ((short)(flt) << 8) | ((size) & SDL_AUDIO_MASK_BITSIZE));
-    }
-
-    // --- [ SDL_AUDIO_BITSIZE ] ---
-
-    /** {@code uint32_t SDL_AUDIO_BITSIZE(SDL_AudioFormat x)} */
-    @NativeType("uint32_t")
-    public static int SDL_AUDIO_BITSIZE(@NativeType("SDL_AudioFormat") int x) {
-        return ((x) & SDL_AUDIO_MASK_BITSIZE);
-    }
-
-    // --- [ SDL_AUDIO_BYTESIZE ] ---
-
-    /** {@code uint32_t SDL_AUDIO_BYTESIZE(SDL_AudioFormat x)} */
-    @NativeType("uint32_t")
-    public static int SDL_AUDIO_BYTESIZE(@NativeType("SDL_AudioFormat") int x) {
-        return (SDL_AUDIO_BITSIZE(x) / 8);
-    }
-
-    // --- [ SDL_AUDIO_ISFLOAT ] ---
-
-    /** {@code bool SDL_AUDIO_ISFLOAT(SDL_AudioFormat x)} */
-    @NativeType("bool")
-    public static boolean SDL_AUDIO_ISFLOAT(@NativeType("SDL_AudioFormat") int x) {
-        return ((x) & SDL_AUDIO_MASK_FLOAT) != 0;
-    }
-
-    // --- [ SDL_AUDIO_ISBIGENDIAN ] ---
-
-    /** {@code bool SDL_AUDIO_ISBIGENDIAN(SDL_AudioFormat x)} */
-    @NativeType("bool")
-    public static boolean SDL_AUDIO_ISBIGENDIAN(@NativeType("SDL_AudioFormat") int x) {
-        return ((x) & SDL_AUDIO_MASK_BIG_ENDIAN) != 0;
-    }
-
-    // --- [ SDL_AUDIO_ISLITTLEENDIAN ] ---
-
-    /** {@code bool SDL_AUDIO_ISLITTLEENDIAN(SDL_AudioFormat x)} */
-    @NativeType("bool")
-    public static boolean SDL_AUDIO_ISLITTLEENDIAN(@NativeType("SDL_AudioFormat") int x) {
-        return (!SDL_AUDIO_ISBIGENDIAN(x));
-    }
-
-    // --- [ SDL_AUDIO_ISSIGNED ] ---
-
-    /** {@code bool SDL_AUDIO_ISSIGNED(SDL_AudioFormat x)} */
-    @NativeType("bool")
-    public static boolean SDL_AUDIO_ISSIGNED(@NativeType("SDL_AudioFormat") int x) {
-        return ((x) & SDL_AUDIO_MASK_SIGNED) != 0;
-    }
-
-    // --- [ SDL_AUDIO_ISINT ] ---
-
-    /** {@code bool SDL_AUDIO_ISINT(SDL_AudioFormat x)} */
-    @NativeType("bool")
-    public static boolean SDL_AUDIO_ISINT(@NativeType("SDL_AudioFormat") int x) {
-        return (!SDL_AUDIO_ISFLOAT(x));
-    }
-
-    // --- [ SDL_AUDIO_ISUNSIGNED ] ---
-
-    /** {@code bool SDL_AUDIO_ISUNSIGNED(SDL_AudioFormat x)} */
-    @NativeType("bool")
-    public static boolean SDL_AUDIO_ISUNSIGNED(@NativeType("SDL_AudioFormat") int x) {
-        return (!SDL_AUDIO_ISSIGNED(x));
-    }
-
-    // --- [ SDL_AUDIO_FRAMESIZE ] ---
-
-    /** {@code uint32_t SDL_AUDIO_FRAMESIZE(SDL_AudioSpec x)} */
-    @NativeType("uint32_t")
-    public static int SDL_AUDIO_FRAMESIZE(SDL_AudioSpec x) {
-        return (SDL_AUDIO_BYTESIZE(x.format()) * x.channels());
     }
 
     // --- [ SDL_ComposeCustomBlendMode ] ---

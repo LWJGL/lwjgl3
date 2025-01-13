@@ -10,26 +10,53 @@ import sdl.*
 fun SDL_audio() = SDL.apply {
     IntConstant(
         "AUDIO_MASK_BITSIZE"..0xFF,
-        "AUDIO_MASK_FLOAT"..(1 shl 8),
-        "AUDIO_MASK_BIG_ENDIAN"..(1 shl 12),
-        "AUDIO_MASK_SIGNED"..(1 shl 15),
+        "AUDIO_MASK_FLOAT".."1 << 8",
+        "AUDIO_MASK_BIG_ENDIAN".."1 << 12",
+        "AUDIO_MASK_SIGNED".."1 << 15"
+    )
+
+    macro(expression = "((signed & 1) << 15) | ((bigendian & 1) << 12) | ((flt & 1) << 8) | (size & SDL_AUDIO_MASK_BITSIZE)")..uint32_t(
+        "DEFINE_AUDIO_FORMAT",
+
+        uint32_t("signed"),
+        uint32_t("bigendian"),
+        uint32_t("flt"),
+        uint32_t("size")
+    )
+
+    EnumConstant(
+        "AUDIO_UNKNOWN".enum("0x0000"),
+        "AUDIO_U8".enum("0x0008"),
+        "AUDIO_S8".enum("0x8008"),
+        "AUDIO_S16LE".enum("0x8010"),
+        "AUDIO_S16BE".enum("0x9010"),
+        "AUDIO_S32LE".enum("0x8020"),
+        "AUDIO_S32BE".enum("0x9020"),
+        "AUDIO_F32LE".enum("0x8120"),
+        "AUDIO_F32BE".enum("0x9120"),
+        "AUDIO_S16".enum("ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN ? SDL_AUDIO_S16LE : SDL_AUDIO_S16BE"),
+        "AUDIO_S32".enum("ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN ? SDL_AUDIO_S32LE : SDL_AUDIO_S32BE"),
+        "AUDIO_F32".enum("ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN ? SDL_AUDIO_S32LE : SDL_AUDIO_S32BE")
+    )
+
+    macro(expression = "x & SDL_AUDIO_MASK_BITSIZE")..uint32_t("AUDIO_BITSIZE", SDL_AudioFormat("x"))
+    macro(expression = "SDL_AUDIO_BITSIZE(x) / 8")..uint32_t("AUDIO_BYTESIZE", SDL_AudioFormat("x"))
+    macro(expression = "(x & SDL_AUDIO_MASK_FLOAT) != 0")..bool("AUDIO_ISFLOAT", SDL_AudioFormat("x"))
+    macro(expression = "(x & SDL_AUDIO_MASK_BIG_ENDIAN) != 0")..bool("AUDIO_ISBIGENDIAN", SDL_AudioFormat("x"))
+    macro(expression = "!SDL_AUDIO_ISBIGENDIAN(x)")..bool("AUDIO_ISLITTLEENDIAN", SDL_AudioFormat("x"))
+    macro(expression = "(x & SDL_AUDIO_MASK_SIGNED) != 0")..bool("AUDIO_ISSIGNED", SDL_AudioFormat("x"))
+    macro(expression = "!SDL_AUDIO_ISFLOAT(x)")..bool("AUDIO_ISINT", SDL_AudioFormat("x"))
+    macro(expression = "!SDL_AUDIO_ISSIGNED(x)")..bool("AUDIO_ISUNSIGNED", SDL_AudioFormat("x"))
+
+    IntConstant(
         "AUDIO_DEVICE_DEFAULT_PLAYBACK".."0xFFFFFFFF",
         "AUDIO_DEVICE_DEFAULT_RECORDING".."0xFFFFFFFE"
     )
 
-    EnumConstant(
-        "AUDIO_UNKNOWN".enum(0x0000),
-        "AUDIO_U8".enum(0x0008),
-        "AUDIO_S8".enum(0x8008),
-        "AUDIO_S16LE".enum(0x8010),
-        "AUDIO_S16BE".enum(0x9010),
-        "AUDIO_S32LE".enum(0x8020),
-        "AUDIO_S32BE".enum(0x9020),
-        "AUDIO_F32LE".enum(0x8120),
-        "AUDIO_F32BE".enum(0x9120),
-        "AUDIO_S16".enum("SDL_AUDIO_S16LE"),
-        "AUDIO_S32".enum("SDL_AUDIO_S32LE"),
-        "AUDIO_F32".enum("SDL_AUDIO_F32LE")
+    macro(expression = "SDL_AUDIO_BYTESIZE(x.format()) * x.channels()")..uint32_t(
+        "AUDIO_FRAMESIZE",
+
+        SDL_AudioSpec("x")
     )
 
     int(
@@ -38,13 +65,13 @@ fun SDL_audio() = SDL.apply {
         void()
     )
 
-    charUTF8.const.p(
+    charASCII.const.p(
         "GetAudioDriver",
 
         int("index")
     )
 
-    charUTF8.const.p(
+    charASCII.const.p(
         "GetCurrentAudioDriver",
 
         void()
@@ -72,7 +99,7 @@ fun SDL_audio() = SDL.apply {
         "GetAudioDeviceFormat",
 
         SDL_AudioDeviceID("devid"),
-        Check(1)..SDL_AudioSpec.p("spec"),
+        SDL_AudioSpec.p("spec"),
         Check(1)..int.p("sample_frames")
     )
 
@@ -87,38 +114,15 @@ fun SDL_audio() = SDL.apply {
         "OpenAudioDevice",
 
         SDL_AudioDeviceID("devid"),
-        nullable..Check(1)..SDL_AudioSpec.const.p("spec")
+        nullable..SDL_AudioSpec.const.p("spec")
     )
 
-    bool(
-        "IsAudioDevicePhysical",
+    bool("IsAudioDevicePhysical", SDL_AudioDeviceID("devid"))
+    bool("IsAudioDevicePlayback", SDL_AudioDeviceID("devid"))
 
-        SDL_AudioDeviceID("devid")
-    )
-
-    bool(
-        "IsAudioDevicePlayback",
-
-        SDL_AudioDeviceID("devid")
-    )
-
-    bool(
-        "PauseAudioDevice",
-
-        SDL_AudioDeviceID("dev")
-    )
-
-    bool(
-        "ResumeAudioDevice",
-
-        SDL_AudioDeviceID("dev")
-    )
-
-    bool(
-        "AudioDevicePaused",
-
-        SDL_AudioDeviceID("dev")
-    )
+    bool("PauseAudioDevice", SDL_AudioDeviceID("dev"))
+    bool("ResumeAudioDevice", SDL_AudioDeviceID("dev"))
+    bool("AudioDevicePaused", SDL_AudioDeviceID("dev"))
 
     float(
         "GetAudioDeviceGain",
@@ -157,14 +161,14 @@ fun SDL_audio() = SDL.apply {
     void(
         "UnbindAudioStreams",
 
-        SDL_AudioStream.p.const.p("streams"),
+        nullable..SDL_AudioStream.p.const.p("streams"),
         AutoSize("streams")..int("num_streams")
     )
 
     void(
         "UnbindAudioStream",
 
-        SDL_AudioStream.p("stream")
+        nullable..SDL_AudioStream.p("stream")
     )
 
     SDL_AudioDeviceID(
@@ -176,8 +180,8 @@ fun SDL_audio() = SDL.apply {
     SDL_AudioStream.p(
         "CreateAudioStream",
 
-        Check(1)..SDL_AudioSpec.const.p("src_spec"),
-        Check(1)..SDL_AudioSpec.const.p("dst_spec")
+        SDL_AudioSpec.const.p("src_spec"),
+        SDL_AudioSpec.const.p("dst_spec")
     )
 
     SDL_PropertiesID(
@@ -190,16 +194,16 @@ fun SDL_audio() = SDL.apply {
         "GetAudioStreamFormat",
 
         SDL_AudioStream.p("stream"),
-        Check(1)..SDL_AudioSpec.p("src_spec"),
-        Check(1)..SDL_AudioSpec.p("dst_spec")
+        nullable..SDL_AudioSpec.p("src_spec"),
+        nullable..SDL_AudioSpec.p("dst_spec")
     )
 
     bool(
         "SetAudioStreamFormat",
 
         SDL_AudioStream.p("stream"),
-        Check(1)..SDL_AudioSpec.const.p("src_spec"),
-        Check(1)..SDL_AudioSpec.const.p("dst_spec")
+        nullable..SDL_AudioSpec.const.p("src_spec"),
+        nullable..SDL_AudioSpec.const.p("dst_spec")
     )
 
     float(
@@ -246,7 +250,7 @@ fun SDL_audio() = SDL.apply {
         "SetAudioStreamInputChannelMap",
 
         SDL_AudioStream.p("stream"),
-        int.const.p("chmap"),
+        nullable..int.const.p("chmap"),
         AutoSize("chmap")..int("count")
     )
 
@@ -254,7 +258,7 @@ fun SDL_audio() = SDL.apply {
         "SetAudioStreamOutputChannelMap",
 
         SDL_AudioStream.p("stream"),
-        int.const.p("chmap"),
+        nullable..int.const.p("chmap"),
         AutoSize("chmap")..int("count")
     )
 
@@ -326,7 +330,7 @@ fun SDL_audio() = SDL.apply {
         "SetAudioStreamGetCallback",
 
         SDL_AudioStream.p("stream"),
-        SDL_AudioStreamCallback("callback"),
+        nullable..SDL_AudioStreamCallback("callback"),
         nullable..opaque_p("userdata")
     )
 
@@ -334,7 +338,7 @@ fun SDL_audio() = SDL.apply {
         "SetAudioStreamPutCallback",
 
         SDL_AudioStream.p("stream"),
-        SDL_AudioStreamCallback("callback"),
+        nullable..SDL_AudioStreamCallback("callback"),
         nullable..opaque_p("userdata")
     )
 
@@ -348,8 +352,8 @@ fun SDL_audio() = SDL.apply {
         "OpenAudioDeviceStream",
 
         SDL_AudioDeviceID("devid"),
-        Check(1)..SDL_AudioSpec.const.p("spec"),
-        SDL_AudioStreamCallback("callback"),
+        nullable..SDL_AudioSpec.const.p("spec"),
+        nullable..SDL_AudioStreamCallback("callback"),
         nullable..opaque_p("userdata")
     )
 
@@ -357,7 +361,7 @@ fun SDL_audio() = SDL.apply {
         "SetAudioPostmixCallback",
 
         SDL_AudioDeviceID("devid"),
-        SDL_AudioPostmixCallback("callback"),
+        nullable..SDL_AudioPostmixCallback("callback"),
         nullable..opaque_p("userdata")
     )
 
@@ -366,7 +370,7 @@ fun SDL_audio() = SDL.apply {
 
         SDL_IOStream.p("src"),
         bool("closeio"),
-        Check(1)..SDL_AudioSpec.p("spec"),
+        SDL_AudioSpec.p("spec"),
         Check(1)..Uint8.p.p("audio_buf"),
         Check(1)..Uint32.p("audio_len")
     )
@@ -375,7 +379,7 @@ fun SDL_audio() = SDL.apply {
         "LoadWAV",
 
         charUTF8.const.p("path"),
-        Check(1)..SDL_AudioSpec.p("spec"),
+        SDL_AudioSpec.p("spec"),
         Check(1)..Uint8.p.p("audio_buf"),
         Check(1)..Uint32.p("audio_len")
     )
@@ -384,24 +388,24 @@ fun SDL_audio() = SDL.apply {
         "MixAudio",
 
         Uint8.p("dst"),
-        Check("dst.remaining()")..Uint8.const.p("src"),
+        Uint8.const.p("src"),
         SDL_AudioFormat("format"),
-        AutoSize("dst")..Uint32("len"),
+        AutoSize("src", "dst")..Uint32("len"),
         float("volume")
     )
 
     bool(
         "ConvertAudioSamples",
 
-        Check(1)..SDL_AudioSpec.const.p("src_spec"),
+        SDL_AudioSpec.const.p("src_spec"),
         Uint8.const.p("src_data"),
         AutoSize("src_data")..int("src_len"),
-        Check(1)..SDL_AudioSpec.const.p("dst_spec"),
+        SDL_AudioSpec.const.p("dst_spec"),
         Check(1)..Uint8.p.p("dst_data"),
         Check(1)..int.p("dst_len")
     )
 
-    charUTF8.const.p(
+    charASCII.const.p(
         "GetAudioFormatName",
 
         SDL_AudioFormat("format")
@@ -411,63 +415,5 @@ fun SDL_audio() = SDL.apply {
         "GetSilenceValueForFormat",
 
         SDL_AudioFormat("format")
-    )
-
-    macro(expression = "(((short)(signed) << 15) | ((short)(bigendian) << 12) | ((short)(flt) << 8) | ((size) & SDL_AUDIO_MASK_BITSIZE))")..uint32_t(
-        "SDL_DEFINE_AUDIO_FORMAT",
-
-        uint32_t("signed"),
-        uint32_t("bigendian"),
-        uint32_t("flt"),
-        uint32_t("size"),
-
-        noPrefix = true
-    )
-
-    macro(expression = "((x) & SDL_AUDIO_MASK_BITSIZE)")..uint32_t(
-        "SDL_AUDIO_BITSIZE",
-        SDL_AudioFormat("x"),
-        noPrefix = true
-    )
-    macro(expression = "(SDL_AUDIO_BITSIZE(x) / 8)")..uint32_t(
-        "SDL_AUDIO_BYTESIZE",
-        SDL_AudioFormat("x"),
-        noPrefix = true
-    )
-    macro(expression = "((x) & SDL_AUDIO_MASK_FLOAT) != 0")..bool(
-        "SDL_AUDIO_ISFLOAT",
-        SDL_AudioFormat("x"),
-        noPrefix = true
-    )
-    macro(expression = "((x) & SDL_AUDIO_MASK_BIG_ENDIAN) != 0")..bool(
-        "SDL_AUDIO_ISBIGENDIAN",
-        SDL_AudioFormat("x"),
-        noPrefix = true
-    )
-    macro(expression = "(!SDL_AUDIO_ISBIGENDIAN(x))")..bool(
-        "SDL_AUDIO_ISLITTLEENDIAN",
-        SDL_AudioFormat("x"),
-        noPrefix = true
-    )
-    macro(expression = "((x) & SDL_AUDIO_MASK_SIGNED) != 0")..bool(
-        "SDL_AUDIO_ISSIGNED",
-        SDL_AudioFormat("x"),
-        noPrefix = true
-    )
-    macro(expression = "(!SDL_AUDIO_ISFLOAT(x))")..bool(
-        "SDL_AUDIO_ISINT",
-        SDL_AudioFormat("x"),
-        noPrefix = true
-    )
-    macro(expression = "(!SDL_AUDIO_ISSIGNED(x))")..bool(
-        "SDL_AUDIO_ISUNSIGNED",
-        SDL_AudioFormat("x"),
-        noPrefix = true
-    )
-
-    macro(expression = "(SDL_AUDIO_BYTESIZE(x.format()) * x.channels())")..uint32_t(
-        "SDL_AUDIO_FRAMESIZE",
-        SDL_AudioSpec("x"),
-        noPrefix = true
     )
 }

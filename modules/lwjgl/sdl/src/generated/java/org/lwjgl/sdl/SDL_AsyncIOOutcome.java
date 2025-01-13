@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -119,58 +118,6 @@ public class SDL_AsyncIOOutcome extends Struct<SDL_AsyncIOOutcome> implements Na
     /** @return the value of the {@code userdata} field. */
     @NativeType("void *")
     public long userdata() { return nuserdata(address()); }
-
-    /** Sets the specified value to the {@code asyncio} field. */
-    public SDL_AsyncIOOutcome asyncio(@NativeType("SDL_AsyncIO *") long value) { nasyncio(address(), value); return this; }
-    /** Sets the specified value to the {@code type} field. */
-    public SDL_AsyncIOOutcome type(@NativeType("SDL_AsyncIOTaskType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code result} field. */
-    public SDL_AsyncIOOutcome result(@NativeType("SDL_AsyncIOResult") int value) { nresult(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@code buffer} field. */
-    public SDL_AsyncIOOutcome buffer(@NativeType("void *") ByteBuffer value) { nbuffer(address(), value); return this; }
-    /** Sets the specified value to the {@code offset} field. */
-    public SDL_AsyncIOOutcome offset(@NativeType("Uint64") long value) { noffset(address(), value); return this; }
-    /** Sets the specified value to the {@code bytes_requested} field. */
-    public SDL_AsyncIOOutcome bytes_requested(@NativeType("Uint64") long value) { nbytes_requested(address(), value); return this; }
-    /** Sets the specified value to the {@code bytes_transferred} field. */
-    public SDL_AsyncIOOutcome bytes_transferred(@NativeType("Uint64") long value) { nbytes_transferred(address(), value); return this; }
-    /** Sets the specified value to the {@code userdata} field. */
-    public SDL_AsyncIOOutcome userdata(@NativeType("void *") long value) { nuserdata(address(), value); return this; }
-
-    /** Initializes this struct with the specified values. */
-    public SDL_AsyncIOOutcome set(
-        long asyncio,
-        int type,
-        int result,
-        ByteBuffer buffer,
-        long offset,
-        long bytes_requested,
-        long bytes_transferred,
-        long userdata
-    ) {
-        asyncio(asyncio);
-        type(type);
-        result(result);
-        buffer(buffer);
-        offset(offset);
-        bytes_requested(bytes_requested);
-        bytes_transferred(bytes_transferred);
-        userdata(userdata);
-
-        return this;
-    }
-
-    /**
-     * Copies the specified struct data to this struct.
-     *
-     * @param src the source struct
-     *
-     * @return this struct
-     */
-    public SDL_AsyncIOOutcome set(SDL_AsyncIOOutcome src) {
-        memCopy(src.address(), address(), SIZEOF);
-        return this;
-    }
 
     // -----------------------------------
 
@@ -300,33 +247,6 @@ public class SDL_AsyncIOOutcome extends Struct<SDL_AsyncIOOutcome> implements Na
     /** Unsafe version of {@link #userdata}. */
     public static long nuserdata(long struct) { return memGetAddress(struct + SDL_AsyncIOOutcome.USERDATA); }
 
-    /** Unsafe version of {@link #asyncio(long) asyncio}. */
-    public static void nasyncio(long struct, long value) { memPutAddress(struct + SDL_AsyncIOOutcome.ASYNCIO, check(value)); }
-    /** Unsafe version of {@link #type(int) type}. */
-    public static void ntype(long struct, int value) { memPutInt(struct + SDL_AsyncIOOutcome.TYPE, value); }
-    /** Unsafe version of {@link #result(int) result}. */
-    public static void nresult(long struct, int value) { memPutInt(struct + SDL_AsyncIOOutcome.RESULT, value); }
-    /** Unsafe version of {@link #buffer(ByteBuffer) buffer}. */
-    public static void nbuffer(long struct, ByteBuffer value) { memPutAddress(struct + SDL_AsyncIOOutcome.BUFFER, memAddress(value)); }
-    /** Unsafe version of {@link #offset(long) offset}. */
-    public static void noffset(long struct, long value) { memPutLong(struct + SDL_AsyncIOOutcome.OFFSET, value); }
-    /** Unsafe version of {@link #bytes_requested(long) bytes_requested}. */
-    public static void nbytes_requested(long struct, long value) { memPutLong(struct + SDL_AsyncIOOutcome.BYTES_REQUESTED, value); }
-    /** Unsafe version of {@link #bytes_transferred(long) bytes_transferred}. */
-    public static void nbytes_transferred(long struct, long value) { memPutLong(struct + SDL_AsyncIOOutcome.BYTES_TRANSFERRED, value); }
-    /** Unsafe version of {@link #userdata(long) userdata}. */
-    public static void nuserdata(long struct, long value) { memPutAddress(struct + SDL_AsyncIOOutcome.USERDATA, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + SDL_AsyncIOOutcome.ASYNCIO));
-        check(memGetAddress(struct + SDL_AsyncIOOutcome.BUFFER));
-    }
-
     // -----------------------------------
 
     /** An array of {@link SDL_AsyncIOOutcome} structs. */
@@ -394,23 +314,6 @@ public class SDL_AsyncIOOutcome extends Struct<SDL_AsyncIOOutcome> implements Na
         /** @return the value of the {@code userdata} field. */
         @NativeType("void *")
         public long userdata() { return SDL_AsyncIOOutcome.nuserdata(address()); }
-
-        /** Sets the specified value to the {@code asyncio} field. */
-        public SDL_AsyncIOOutcome.Buffer asyncio(@NativeType("SDL_AsyncIO *") long value) { SDL_AsyncIOOutcome.nasyncio(address(), value); return this; }
-        /** Sets the specified value to the {@code type} field. */
-        public SDL_AsyncIOOutcome.Buffer type(@NativeType("SDL_AsyncIOTaskType") int value) { SDL_AsyncIOOutcome.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code result} field. */
-        public SDL_AsyncIOOutcome.Buffer result(@NativeType("SDL_AsyncIOResult") int value) { SDL_AsyncIOOutcome.nresult(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@code buffer} field. */
-        public SDL_AsyncIOOutcome.Buffer buffer(@NativeType("void *") ByteBuffer value) { SDL_AsyncIOOutcome.nbuffer(address(), value); return this; }
-        /** Sets the specified value to the {@code offset} field. */
-        public SDL_AsyncIOOutcome.Buffer offset(@NativeType("Uint64") long value) { SDL_AsyncIOOutcome.noffset(address(), value); return this; }
-        /** Sets the specified value to the {@code bytes_requested} field. */
-        public SDL_AsyncIOOutcome.Buffer bytes_requested(@NativeType("Uint64") long value) { SDL_AsyncIOOutcome.nbytes_requested(address(), value); return this; }
-        /** Sets the specified value to the {@code bytes_transferred} field. */
-        public SDL_AsyncIOOutcome.Buffer bytes_transferred(@NativeType("Uint64") long value) { SDL_AsyncIOOutcome.nbytes_transferred(address(), value); return this; }
-        /** Sets the specified value to the {@code userdata} field. */
-        public SDL_AsyncIOOutcome.Buffer userdata(@NativeType("void *") long value) { SDL_AsyncIOOutcome.nuserdata(address(), value); return this; }
 
     }
 

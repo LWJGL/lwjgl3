@@ -9,13 +9,13 @@ import sdl.*
 
 fun SDL_asyncio() = SDL.apply {
     EnumConstant(
-        "ASYNCIO_TASK_READ".enum(0),
+        "ASYNCIO_TASK_READ".enum("0"),
         "ASYNCIO_TASK_WRITE".enum,
         "ASYNCIO_TASK_CLOSE".enum
     )
 
     EnumConstant(
-        "ASYNCIO_COMPLETE".enum(0),
+        "ASYNCIO_COMPLETE".enum("0"),
         "ASYNCIO_FAILURE".enum,
         "ASYNCIO_CANCELED".enum
     )
@@ -104,5 +104,4 @@ fun SDL_asyncio() = SDL.apply {
         SDL_AsyncIOQueue.p("queue"),
         nullable..opaque_p("userdata")
     )
-
 }
