@@ -455,6 +455,7 @@
             <update-dependency module="openal" artifact="libopenal.so"/>
             <update-dependency module="openxr" artifact="libopenxr_loader.so"/>
             <update-dependency module="opus" artifact="libopus.so"/>
+            <update-dependency module="sdl" artifact="libSDL3.so"/>
             <update-dependency module="shaderc" artifact="libshaderc.so"/>
             <update-dependency module="spvc" artifact="libspirv-cross.so"/>
 

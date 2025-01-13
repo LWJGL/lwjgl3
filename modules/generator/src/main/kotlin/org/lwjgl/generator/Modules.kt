@@ -595,6 +595,17 @@ git branch -D @{-1}""")}"""}()}
         library = JNILibrary.create("LibRPmalloc"),
         arrayOverloads = false
     ),
+    SDL(
+        "sdl",
+        "org.lwjgl.sdl",
+        """
+        Contains bindings to the ${url("https://www.libsdl.org/", "Simple DirectMedia Layer")} library. Simple DirectMedia Layer is a cross-platform
+        development library designed to provide low level access to audio, keyboard, mouse, joystick, and graphics hardware.
+
+        SDL has extensive online documentation on its wiki ${url("https://wiki.libsdl.org/SDL3/FrontPage/", "here")}.
+        """,
+        arrayOverloads = false
+    ),
     SHADERC(
         "shaderc",
         "org.lwjgl.util.shaderc",

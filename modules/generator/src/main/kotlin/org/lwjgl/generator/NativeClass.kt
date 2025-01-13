@@ -66,8 +66,12 @@ abstract class APIBinding(
         _classes.add(clazz)
     }
 
-    override fun getLastModified(root: String): Long = max(
-        super.getLastModified(root),
+    // For NativeClass, we use the reflected method to retrieve the containing file.
+    // If there are multiple files that contribute to the NativeClass definition,
+    // the last modified time is the most recent of all files.
+    override fun getSourceFileName(): String? = null
+    override fun getLastModified(root: String, fileName: String): Long = max(
+        super.getLastModified(root, fileName),
         Paths.get(root, "templates").lastModified()
     )
 
