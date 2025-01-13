@@ -93,7 +93,7 @@ fun SDL_filesystem() = SDL.apply {
         "GetPathInfo",
 
         charUTF8.const.p("path"),
-        nullable..Check(1)..SDL_PathInfo.p("info")
+        nullable..SDL_PathInfo.p("info")
     )
 
     charUTF8.p.p(
@@ -110,5 +110,4 @@ fun SDL_filesystem() = SDL.apply {
 
         void()
     )
-
 }

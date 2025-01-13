@@ -126,12 +126,6 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
     /** @return the value of the {@code clear_stencil} field. */
     @NativeType("Uint8")
     public byte clear_stencil() { return nclear_stencil(address()); }
-    /** @return the value of the {@code padding1} field. */
-    @NativeType("Uint8")
-    public byte padding1() { return npadding1(address()); }
-    /** @return the value of the {@code padding2} field. */
-    @NativeType("Uint8")
-    public byte padding2() { return npadding2(address()); }
 
     /** Sets the specified value to the {@code texture} field. */
     public SDL_GPUDepthStencilTargetInfo texture(@NativeType("SDL_GPUTexture *") long value) { ntexture(address(), value); return this; }
@@ -149,10 +143,6 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
     public SDL_GPUDepthStencilTargetInfo cycle(@NativeType("bool") boolean value) { ncycle(address(), value); return this; }
     /** Sets the specified value to the {@code clear_stencil} field. */
     public SDL_GPUDepthStencilTargetInfo clear_stencil(@NativeType("Uint8") byte value) { nclear_stencil(address(), value); return this; }
-    /** Sets the specified value to the {@code padding1} field. */
-    public SDL_GPUDepthStencilTargetInfo padding1(@NativeType("Uint8") byte value) { npadding1(address(), value); return this; }
-    /** Sets the specified value to the {@code padding2} field. */
-    public SDL_GPUDepthStencilTargetInfo padding2(@NativeType("Uint8") byte value) { npadding2(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public SDL_GPUDepthStencilTargetInfo set(
@@ -163,9 +153,7 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
         int stencil_load_op,
         int stencil_store_op,
         boolean cycle,
-        byte clear_stencil,
-        byte padding1,
-        byte padding2
+        byte clear_stencil
     ) {
         texture(texture);
         clear_depth(clear_depth);
@@ -175,8 +163,6 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
         stencil_store_op(stencil_store_op);
         cycle(cycle);
         clear_stencil(clear_stencil);
-        padding1(padding1);
-        padding2(padding2);
 
         return this;
     }
@@ -320,9 +306,7 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
     public static boolean ncycle(long struct) { return memGetByte(struct + SDL_GPUDepthStencilTargetInfo.CYCLE) != 0; }
     /** Unsafe version of {@link #clear_stencil}. */
     public static byte nclear_stencil(long struct) { return memGetByte(struct + SDL_GPUDepthStencilTargetInfo.CLEAR_STENCIL); }
-    /** Unsafe version of {@link #padding1}. */
     public static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUDepthStencilTargetInfo.PADDING1); }
-    /** Unsafe version of {@link #padding2}. */
     public static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUDepthStencilTargetInfo.PADDING2); }
 
     /** Unsafe version of {@link #texture(long) texture}. */
@@ -341,9 +325,7 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
     public static void ncycle(long struct, boolean value) { memPutByte(struct + SDL_GPUDepthStencilTargetInfo.CYCLE, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #clear_stencil(byte) clear_stencil}. */
     public static void nclear_stencil(long struct, byte value) { memPutByte(struct + SDL_GPUDepthStencilTargetInfo.CLEAR_STENCIL, value); }
-    /** Unsafe version of {@link #padding1(byte) padding1}. */
     public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUDepthStencilTargetInfo.PADDING1, value); }
-    /** Unsafe version of {@link #padding2(byte) padding2}. */
     public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUDepthStencilTargetInfo.PADDING2, value); }
 
     /**
@@ -421,12 +403,6 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
         /** @return the value of the {@code clear_stencil} field. */
         @NativeType("Uint8")
         public byte clear_stencil() { return SDL_GPUDepthStencilTargetInfo.nclear_stencil(address()); }
-        /** @return the value of the {@code padding1} field. */
-        @NativeType("Uint8")
-        public byte padding1() { return SDL_GPUDepthStencilTargetInfo.npadding1(address()); }
-        /** @return the value of the {@code padding2} field. */
-        @NativeType("Uint8")
-        public byte padding2() { return SDL_GPUDepthStencilTargetInfo.npadding2(address()); }
 
         /** Sets the specified value to the {@code texture} field. */
         public SDL_GPUDepthStencilTargetInfo.Buffer texture(@NativeType("SDL_GPUTexture *") long value) { SDL_GPUDepthStencilTargetInfo.ntexture(address(), value); return this; }
@@ -444,10 +420,6 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
         public SDL_GPUDepthStencilTargetInfo.Buffer cycle(@NativeType("bool") boolean value) { SDL_GPUDepthStencilTargetInfo.ncycle(address(), value); return this; }
         /** Sets the specified value to the {@code clear_stencil} field. */
         public SDL_GPUDepthStencilTargetInfo.Buffer clear_stencil(@NativeType("Uint8") byte value) { SDL_GPUDepthStencilTargetInfo.nclear_stencil(address(), value); return this; }
-        /** Sets the specified value to the {@code padding1} field. */
-        public SDL_GPUDepthStencilTargetInfo.Buffer padding1(@NativeType("Uint8") byte value) { SDL_GPUDepthStencilTargetInfo.npadding1(address(), value); return this; }
-        /** Sets the specified value to the {@code padding2} field. */
-        public SDL_GPUDepthStencilTargetInfo.Buffer padding2(@NativeType("Uint8") byte value) { SDL_GPUDepthStencilTargetInfo.npadding2(address(), value); return this; }
 
     }
 

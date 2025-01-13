@@ -133,12 +133,6 @@ public class SDL_GPUColorTargetBlendState extends Struct<SDL_GPUColorTargetBlend
     /** @return the value of the {@code enable_color_write_mask} field. */
     @NativeType("bool")
     public boolean enable_color_write_mask() { return nenable_color_write_mask(address()); }
-    /** @return the value of the {@code padding1} field. */
-    @NativeType("Uint8")
-    public byte padding1() { return npadding1(address()); }
-    /** @return the value of the {@code padding2} field. */
-    @NativeType("Uint8")
-    public byte padding2() { return npadding2(address()); }
 
     /** Sets the specified value to the {@code src_color_blendfactor} field. */
     public SDL_GPUColorTargetBlendState src_color_blendfactor(@NativeType("SDL_GPUBlendFactor") int value) { nsrc_color_blendfactor(address(), value); return this; }
@@ -158,10 +152,6 @@ public class SDL_GPUColorTargetBlendState extends Struct<SDL_GPUColorTargetBlend
     public SDL_GPUColorTargetBlendState enable_blend(@NativeType("bool") boolean value) { nenable_blend(address(), value); return this; }
     /** Sets the specified value to the {@code enable_color_write_mask} field. */
     public SDL_GPUColorTargetBlendState enable_color_write_mask(@NativeType("bool") boolean value) { nenable_color_write_mask(address(), value); return this; }
-    /** Sets the specified value to the {@code padding1} field. */
-    public SDL_GPUColorTargetBlendState padding1(@NativeType("Uint8") byte value) { npadding1(address(), value); return this; }
-    /** Sets the specified value to the {@code padding2} field. */
-    public SDL_GPUColorTargetBlendState padding2(@NativeType("Uint8") byte value) { npadding2(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public SDL_GPUColorTargetBlendState set(
@@ -173,9 +163,7 @@ public class SDL_GPUColorTargetBlendState extends Struct<SDL_GPUColorTargetBlend
         int alpha_blend_op,
         byte color_write_mask,
         boolean enable_blend,
-        boolean enable_color_write_mask,
-        byte padding1,
-        byte padding2
+        boolean enable_color_write_mask
     ) {
         src_color_blendfactor(src_color_blendfactor);
         dst_color_blendfactor(dst_color_blendfactor);
@@ -186,8 +174,6 @@ public class SDL_GPUColorTargetBlendState extends Struct<SDL_GPUColorTargetBlend
         color_write_mask(color_write_mask);
         enable_blend(enable_blend);
         enable_color_write_mask(enable_color_write_mask);
-        padding1(padding1);
-        padding2(padding2);
 
         return this;
     }
@@ -333,9 +319,7 @@ public class SDL_GPUColorTargetBlendState extends Struct<SDL_GPUColorTargetBlend
     public static boolean nenable_blend(long struct) { return memGetByte(struct + SDL_GPUColorTargetBlendState.ENABLE_BLEND) != 0; }
     /** Unsafe version of {@link #enable_color_write_mask}. */
     public static boolean nenable_color_write_mask(long struct) { return memGetByte(struct + SDL_GPUColorTargetBlendState.ENABLE_COLOR_WRITE_MASK) != 0; }
-    /** Unsafe version of {@link #padding1}. */
     public static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUColorTargetBlendState.PADDING1); }
-    /** Unsafe version of {@link #padding2}. */
     public static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUColorTargetBlendState.PADDING2); }
 
     /** Unsafe version of {@link #src_color_blendfactor(int) src_color_blendfactor}. */
@@ -356,9 +340,7 @@ public class SDL_GPUColorTargetBlendState extends Struct<SDL_GPUColorTargetBlend
     public static void nenable_blend(long struct, boolean value) { memPutByte(struct + SDL_GPUColorTargetBlendState.ENABLE_BLEND, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #enable_color_write_mask(boolean) enable_color_write_mask}. */
     public static void nenable_color_write_mask(long struct, boolean value) { memPutByte(struct + SDL_GPUColorTargetBlendState.ENABLE_COLOR_WRITE_MASK, value ? (byte)1 : (byte)0); }
-    /** Unsafe version of {@link #padding1(byte) padding1}. */
     public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUColorTargetBlendState.PADDING1, value); }
-    /** Unsafe version of {@link #padding2(byte) padding2}. */
     public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUColorTargetBlendState.PADDING2, value); }
 
     // -----------------------------------
@@ -431,12 +413,6 @@ public class SDL_GPUColorTargetBlendState extends Struct<SDL_GPUColorTargetBlend
         /** @return the value of the {@code enable_color_write_mask} field. */
         @NativeType("bool")
         public boolean enable_color_write_mask() { return SDL_GPUColorTargetBlendState.nenable_color_write_mask(address()); }
-        /** @return the value of the {@code padding1} field. */
-        @NativeType("Uint8")
-        public byte padding1() { return SDL_GPUColorTargetBlendState.npadding1(address()); }
-        /** @return the value of the {@code padding2} field. */
-        @NativeType("Uint8")
-        public byte padding2() { return SDL_GPUColorTargetBlendState.npadding2(address()); }
 
         /** Sets the specified value to the {@code src_color_blendfactor} field. */
         public SDL_GPUColorTargetBlendState.Buffer src_color_blendfactor(@NativeType("SDL_GPUBlendFactor") int value) { SDL_GPUColorTargetBlendState.nsrc_color_blendfactor(address(), value); return this; }
@@ -456,10 +432,6 @@ public class SDL_GPUColorTargetBlendState extends Struct<SDL_GPUColorTargetBlend
         public SDL_GPUColorTargetBlendState.Buffer enable_blend(@NativeType("bool") boolean value) { SDL_GPUColorTargetBlendState.nenable_blend(address(), value); return this; }
         /** Sets the specified value to the {@code enable_color_write_mask} field. */
         public SDL_GPUColorTargetBlendState.Buffer enable_color_write_mask(@NativeType("bool") boolean value) { SDL_GPUColorTargetBlendState.nenable_color_write_mask(address(), value); return this; }
-        /** Sets the specified value to the {@code padding1} field. */
-        public SDL_GPUColorTargetBlendState.Buffer padding1(@NativeType("Uint8") byte value) { SDL_GPUColorTargetBlendState.npadding1(address(), value); return this; }
-        /** Sets the specified value to the {@code padding2} field. */
-        public SDL_GPUColorTargetBlendState.Buffer padding2(@NativeType("Uint8") byte value) { SDL_GPUColorTargetBlendState.npadding2(address(), value); return this; }
 
     }
 

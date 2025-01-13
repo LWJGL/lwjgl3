@@ -8,7 +8,6 @@ import org.lwjgl.generator.*
 import sdl.*
 
 fun SDL_camera() = SDL.apply {
-
     EnumConstant(
         "CAMERA_POSITION_UNKNOWN".enum("0"),
         "CAMERA_POSITION_FRONT_FACING".enum,
@@ -21,13 +20,13 @@ fun SDL_camera() = SDL.apply {
         void()
     )
 
-    charUTF8.const.p(
+    charASCII.const.p(
         "GetCameraDriver",
 
         int("index")
     )
 
-    charUTF8.const.p(
+    charASCII.const.p(
         "GetCurrentCameraDriver",
 
         void()
@@ -62,7 +61,7 @@ fun SDL_camera() = SDL.apply {
         "OpenCamera",
 
         SDL_CameraID("instance_id"),
-        Check(1)..SDL_CameraSpec.const.p("spec")
+        nullable..SDL_CameraSpec.const.p("spec")
     )
 
     int(
@@ -87,21 +86,21 @@ fun SDL_camera() = SDL.apply {
         "GetCameraFormat",
 
         SDL_Camera.p("camera"),
-        Check(1)..SDL_CameraSpec.p("spec")
+        SDL_CameraSpec.p("spec")
     )
 
     SDL_Surface.p(
         "AcquireCameraFrame",
 
         SDL_Camera.p("camera"),
-        Check(1)..Uint64.p("timestampNS")
+        Check(1)..nullable..Uint64.p("timestampNS")
     )
 
     void(
         "ReleaseCameraFrame",
 
         SDL_Camera.p("camera"),
-        Check(1)..SDL_Surface.p("frame")
+        SDL_Surface.p("frame")
     )
 
     void(
@@ -109,5 +108,4 @@ fun SDL_camera() = SDL.apply {
 
         SDL_Camera.p("camera")
     )
-
 }

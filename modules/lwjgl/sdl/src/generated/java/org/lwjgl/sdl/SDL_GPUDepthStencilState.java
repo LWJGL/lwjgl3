@@ -128,15 +128,6 @@ public class SDL_GPUDepthStencilState extends Struct<SDL_GPUDepthStencilState> i
     /** @return the value of the {@code enable_stencil_test} field. */
     @NativeType("bool")
     public boolean enable_stencil_test() { return nenable_stencil_test(address()); }
-    /** @return the value of the {@code padding1} field. */
-    @NativeType("Uint8")
-    public byte padding1() { return npadding1(address()); }
-    /** @return the value of the {@code padding2} field. */
-    @NativeType("Uint8")
-    public byte padding2() { return npadding2(address()); }
-    /** @return the value of the {@code padding3} field. */
-    @NativeType("Uint8")
-    public byte padding3() { return npadding3(address()); }
 
     /** Sets the specified value to the {@code compare_op} field. */
     public SDL_GPUDepthStencilState compare_op(@NativeType("SDL_GPUCompareOp") int value) { ncompare_op(address(), value); return this; }
@@ -158,12 +149,6 @@ public class SDL_GPUDepthStencilState extends Struct<SDL_GPUDepthStencilState> i
     public SDL_GPUDepthStencilState enable_depth_write(@NativeType("bool") boolean value) { nenable_depth_write(address(), value); return this; }
     /** Sets the specified value to the {@code enable_stencil_test} field. */
     public SDL_GPUDepthStencilState enable_stencil_test(@NativeType("bool") boolean value) { nenable_stencil_test(address(), value); return this; }
-    /** Sets the specified value to the {@code padding1} field. */
-    public SDL_GPUDepthStencilState padding1(@NativeType("Uint8") byte value) { npadding1(address(), value); return this; }
-    /** Sets the specified value to the {@code padding2} field. */
-    public SDL_GPUDepthStencilState padding2(@NativeType("Uint8") byte value) { npadding2(address(), value); return this; }
-    /** Sets the specified value to the {@code padding3} field. */
-    public SDL_GPUDepthStencilState padding3(@NativeType("Uint8") byte value) { npadding3(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public SDL_GPUDepthStencilState set(
@@ -174,10 +159,7 @@ public class SDL_GPUDepthStencilState extends Struct<SDL_GPUDepthStencilState> i
         byte write_mask,
         boolean enable_depth_test,
         boolean enable_depth_write,
-        boolean enable_stencil_test,
-        byte padding1,
-        byte padding2,
-        byte padding3
+        boolean enable_stencil_test
     ) {
         compare_op(compare_op);
         back_stencil_state(back_stencil_state);
@@ -187,9 +169,6 @@ public class SDL_GPUDepthStencilState extends Struct<SDL_GPUDepthStencilState> i
         enable_depth_test(enable_depth_test);
         enable_depth_write(enable_depth_write);
         enable_stencil_test(enable_stencil_test);
-        padding1(padding1);
-        padding2(padding2);
-        padding3(padding3);
 
         return this;
     }
@@ -333,11 +312,8 @@ public class SDL_GPUDepthStencilState extends Struct<SDL_GPUDepthStencilState> i
     public static boolean nenable_depth_write(long struct) { return memGetByte(struct + SDL_GPUDepthStencilState.ENABLE_DEPTH_WRITE) != 0; }
     /** Unsafe version of {@link #enable_stencil_test}. */
     public static boolean nenable_stencil_test(long struct) { return memGetByte(struct + SDL_GPUDepthStencilState.ENABLE_STENCIL_TEST) != 0; }
-    /** Unsafe version of {@link #padding1}. */
     public static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUDepthStencilState.PADDING1); }
-    /** Unsafe version of {@link #padding2}. */
     public static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUDepthStencilState.PADDING2); }
-    /** Unsafe version of {@link #padding3}. */
     public static byte npadding3(long struct) { return memGetByte(struct + SDL_GPUDepthStencilState.PADDING3); }
 
     /** Unsafe version of {@link #compare_op(int) compare_op}. */
@@ -356,11 +332,8 @@ public class SDL_GPUDepthStencilState extends Struct<SDL_GPUDepthStencilState> i
     public static void nenable_depth_write(long struct, boolean value) { memPutByte(struct + SDL_GPUDepthStencilState.ENABLE_DEPTH_WRITE, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #enable_stencil_test(boolean) enable_stencil_test}. */
     public static void nenable_stencil_test(long struct, boolean value) { memPutByte(struct + SDL_GPUDepthStencilState.ENABLE_STENCIL_TEST, value ? (byte)1 : (byte)0); }
-    /** Unsafe version of {@link #padding1(byte) padding1}. */
     public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUDepthStencilState.PADDING1, value); }
-    /** Unsafe version of {@link #padding2(byte) padding2}. */
     public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUDepthStencilState.PADDING2, value); }
-    /** Unsafe version of {@link #padding3(byte) padding3}. */
     public static void npadding3(long struct, byte value) { memPutByte(struct + SDL_GPUDepthStencilState.PADDING3, value); }
 
     // -----------------------------------
@@ -428,15 +401,6 @@ public class SDL_GPUDepthStencilState extends Struct<SDL_GPUDepthStencilState> i
         /** @return the value of the {@code enable_stencil_test} field. */
         @NativeType("bool")
         public boolean enable_stencil_test() { return SDL_GPUDepthStencilState.nenable_stencil_test(address()); }
-        /** @return the value of the {@code padding1} field. */
-        @NativeType("Uint8")
-        public byte padding1() { return SDL_GPUDepthStencilState.npadding1(address()); }
-        /** @return the value of the {@code padding2} field. */
-        @NativeType("Uint8")
-        public byte padding2() { return SDL_GPUDepthStencilState.npadding2(address()); }
-        /** @return the value of the {@code padding3} field. */
-        @NativeType("Uint8")
-        public byte padding3() { return SDL_GPUDepthStencilState.npadding3(address()); }
 
         /** Sets the specified value to the {@code compare_op} field. */
         public SDL_GPUDepthStencilState.Buffer compare_op(@NativeType("SDL_GPUCompareOp") int value) { SDL_GPUDepthStencilState.ncompare_op(address(), value); return this; }
@@ -458,12 +422,6 @@ public class SDL_GPUDepthStencilState extends Struct<SDL_GPUDepthStencilState> i
         public SDL_GPUDepthStencilState.Buffer enable_depth_write(@NativeType("bool") boolean value) { SDL_GPUDepthStencilState.nenable_depth_write(address(), value); return this; }
         /** Sets the specified value to the {@code enable_stencil_test} field. */
         public SDL_GPUDepthStencilState.Buffer enable_stencil_test(@NativeType("bool") boolean value) { SDL_GPUDepthStencilState.nenable_stencil_test(address(), value); return this; }
-        /** Sets the specified value to the {@code padding1} field. */
-        public SDL_GPUDepthStencilState.Buffer padding1(@NativeType("Uint8") byte value) { SDL_GPUDepthStencilState.npadding1(address(), value); return this; }
-        /** Sets the specified value to the {@code padding2} field. */
-        public SDL_GPUDepthStencilState.Buffer padding2(@NativeType("Uint8") byte value) { SDL_GPUDepthStencilState.npadding2(address(), value); return this; }
-        /** Sets the specified value to the {@code padding3} field. */
-        public SDL_GPUDepthStencilState.Buffer padding3(@NativeType("Uint8") byte value) { SDL_GPUDepthStencilState.npadding3(address(), value); return this; }
 
     }
 

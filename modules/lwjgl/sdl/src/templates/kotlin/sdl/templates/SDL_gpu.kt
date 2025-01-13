@@ -8,51 +8,6 @@ import org.lwjgl.generator.*
 import sdl.*
 
 fun SDL_gpu() = SDL.apply {
-    IntConstant("GPU_TEXTUREUSAGE_SAMPLER".."(1 << 0)")
-    IntConstant("GPU_TEXTUREUSAGE_COLOR_TARGET".."(1 << 1)")
-    IntConstant("GPU_TEXTUREUSAGE_DEPTH_STENCIL_TARGET".."(1 << 2)")
-    IntConstant("GPU_TEXTUREUSAGE_GRAPHICS_STORAGE_READ".."(1 << 3)")
-    IntConstant("GPU_TEXTUREUSAGE_COMPUTE_STORAGE_READ".."(1 << 4)")
-    IntConstant("GPU_TEXTUREUSAGE_COMPUTE_STORAGE_WRITE".."(1 << 5)")
-    IntConstant("GPU_TEXTUREUSAGE_COMPUTE_STORAGE_SIMULTANEOUS_READ_WRITE".."(1 << 6)")
-
-    IntConstant("GPU_BUFFERUSAGE_VERTEX".."(1 << 0)")
-    IntConstant("GPU_BUFFERUSAGE_INDEX".."(1 << 1)")
-    IntConstant("GPU_BUFFERUSAGE_INDIRECT".."(1 << 2)")
-    IntConstant("GPU_BUFFERUSAGE_GRAPHICS_STORAGE_READ".."(1 << 3)")
-    IntConstant("GPU_BUFFERUSAGE_COMPUTE_STORAGE_READ".."(1 << 4)")
-    IntConstant("GPU_BUFFERUSAGE_COMPUTE_STORAGE_WRITE".."(1 << 5)")
-
-    IntConstant("GPU_SHADERFORMAT_INVALID".."0")
-    IntConstant("GPU_SHADERFORMAT_PRIVATE".."(1 << 0)")
-    IntConstant("GPU_SHADERFORMAT_SPIRV".."(1 << 1)")
-    IntConstant("GPU_SHADERFORMAT_DXBC".."(1 << 2)")
-    IntConstant("GPU_SHADERFORMAT_DXIL".."(1 << 3)")
-    IntConstant("GPU_SHADERFORMAT_MSL".."(1 << 4)")
-    IntConstant("GPU_SHADERFORMAT_METALLIB".."(1 << 5)")
-
-    IntConstant("GPU_COLORCOMPONENT_R".."(1 << 0)")
-    IntConstant("GPU_COLORCOMPONENT_G".."(1 << 1)")
-    IntConstant("GPU_COLORCOMPONENT_B".."(1 << 2)")
-    IntConstant("GPU_COLORCOMPONENT_A".."(1 << 3)")
-
-    StringConstant("PROP_GPU_DEVICE_CREATE_DEBUGMODE_BOOLEAN".."SDL.gpu.device.create.debugmode")
-    StringConstant("PROP_GPU_DEVICE_CREATE_PREFERLOWPOWER_BOOLEAN".."SDL.gpu.device.create.preferlowpower")
-    StringConstant("PROP_GPU_DEVICE_CREATE_NAME_STRING".."SDL.gpu.device.create.name")
-    StringConstant("PROP_GPU_DEVICE_CREATE_SHADERS_PRIVATE_BOOLEAN".."SDL.gpu.device.create.shaders.private")
-    StringConstant("PROP_GPU_DEVICE_CREATE_SHADERS_SPIRV_BOOLEAN".."SDL.gpu.device.create.shaders.spirv")
-    StringConstant("PROP_GPU_DEVICE_CREATE_SHADERS_DXBC_BOOLEAN".."SDL.gpu.device.create.shaders.dxbc")
-    StringConstant("PROP_GPU_DEVICE_CREATE_SHADERS_DXIL_BOOLEAN".."SDL.gpu.device.create.shaders.dxil")
-    StringConstant("PROP_GPU_DEVICE_CREATE_SHADERS_MSL_BOOLEAN".."SDL.gpu.device.create.shaders.msl")
-    StringConstant("PROP_GPU_DEVICE_CREATE_SHADERS_METALLIB_BOOLEAN".."SDL.gpu.device.create.shaders.metallib")
-    StringConstant("PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING".."SDL.gpu.device.create.d3d12.semantic")
-    StringConstant("PROP_GPU_CREATETEXTURE_D3D12_CLEAR_R_FLOAT".."SDL.gpu.createtexture.d3d12.clear.r")
-    StringConstant("PROP_GPU_CREATETEXTURE_D3D12_CLEAR_G_FLOAT".."SDL.gpu.createtexture.d3d12.clear.g")
-    StringConstant("PROP_GPU_CREATETEXTURE_D3D12_CLEAR_B_FLOAT".."SDL.gpu.createtexture.d3d12.clear.b")
-    StringConstant("PROP_GPU_CREATETEXTURE_D3D12_CLEAR_A_FLOAT".."SDL.gpu.createtexture.d3d12.clear.a")
-    StringConstant("PROP_GPU_CREATETEXTURE_D3D12_CLEAR_DEPTH_FLOAT".."SDL.gpu.createtexture.d3d12.clear.depth")
-    StringConstant("PROP_GPU_CREATETEXTURE_D3D12_CLEAR_STENCIL_UINT8".."SDL.gpu.createtexture.d3d12.clear.stencil")
-
     EnumConstant(
         "GPU_PRIMITIVETYPE_TRIANGLELIST".enum("0"),
         "GPU_PRIMITIVETYPE_TRIANGLESTRIP".enum,
@@ -187,6 +142,16 @@ fun SDL_gpu() = SDL.apply {
         "GPU_TEXTUREFORMAT_ASTC_12x12_FLOAT".enum
     )
 
+    IntConstant(
+        "GPU_TEXTUREUSAGE_SAMPLER".."(1 << 0)",
+        "GPU_TEXTUREUSAGE_COLOR_TARGET".."(1 << 1)",
+        "GPU_TEXTUREUSAGE_DEPTH_STENCIL_TARGET".."(1 << 2)",
+        "GPU_TEXTUREUSAGE_GRAPHICS_STORAGE_READ".."(1 << 3)",
+        "GPU_TEXTUREUSAGE_COMPUTE_STORAGE_READ".."(1 << 4)",
+        "GPU_TEXTUREUSAGE_COMPUTE_STORAGE_WRITE".."(1 << 5)",
+        "GPU_TEXTUREUSAGE_COMPUTE_STORAGE_SIMULTANEOUS_READ_WRITE".."(1 << 6)"
+    )
+
     EnumConstant(
         "GPU_TEXTURETYPE_2D".enum("0"),
         "GPU_TEXTURETYPE_2D_ARRAY".enum,
@@ -211,6 +176,15 @@ fun SDL_gpu() = SDL.apply {
         "GPU_CUBEMAPFACE_NEGATIVEZ".enum
     )
 
+    IntConstant(
+        "GPU_BUFFERUSAGE_VERTEX".."(1 << 0)",
+        "GPU_BUFFERUSAGE_INDEX".."(1 << 1)",
+        "GPU_BUFFERUSAGE_INDIRECT".."(1 << 2)",
+        "GPU_BUFFERUSAGE_GRAPHICS_STORAGE_READ".."(1 << 3)",
+        "GPU_BUFFERUSAGE_COMPUTE_STORAGE_READ".."(1 << 4)",
+        "GPU_BUFFERUSAGE_COMPUTE_STORAGE_WRITE".."(1 << 5)"
+    )
+
     EnumConstant(
         "GPU_TRANSFERBUFFERUSAGE_UPLOAD".enum("0"),
         "GPU_TRANSFERBUFFERUSAGE_DOWNLOAD".enum
@@ -219,6 +193,16 @@ fun SDL_gpu() = SDL.apply {
     EnumConstant(
         "GPU_SHADERSTAGE_VERTEX".enum("0"),
         "GPU_SHADERSTAGE_FRAGMENT".enum
+    )
+
+    IntConstant(
+        "GPU_SHADERFORMAT_INVALID".."0",
+        "GPU_SHADERFORMAT_PRIVATE".."(1 << 0)",
+        "GPU_SHADERFORMAT_SPIRV".."(1 << 1)",
+        "GPU_SHADERFORMAT_DXBC".."(1 << 2)",
+        "GPU_SHADERFORMAT_DXIL".."(1 << 3)",
+        "GPU_SHADERFORMAT_MSL".."(1 << 4)",
+        "GPU_SHADERFORMAT_METALLIB".."(1 << 5)"
     )
 
     EnumConstant(
@@ -326,6 +310,13 @@ fun SDL_gpu() = SDL.apply {
         "GPU_BLENDFACTOR_SRC_ALPHA_SATURATE".enum
     )
 
+    IntConstant(
+        "GPU_COLORCOMPONENT_R".."(1 << 0)",
+        "GPU_COLORCOMPONENT_G".."(1 << 1)",
+        "GPU_COLORCOMPONENT_B".."(1 << 2)",
+        "GPU_COLORCOMPONENT_A".."(1 << 3)"
+    )
+
     EnumConstant(
         "GPU_FILTER_NEAREST".enum("0"),
         "GPU_FILTER_LINEAR".enum
@@ -353,6 +344,28 @@ fun SDL_gpu() = SDL.apply {
         "GPU_SWAPCHAINCOMPOSITION_SDR_LINEAR".enum,
         "GPU_SWAPCHAINCOMPOSITION_HDR_EXTENDED_LINEAR".enum,
         "GPU_SWAPCHAINCOMPOSITION_HDR10_ST2084".enum
+    )
+
+    StringConstant(
+        "PROP_GPU_DEVICE_CREATE_DEBUGMODE_BOOLEAN".."SDL.gpu.device.create.debugmode",
+        "PROP_GPU_DEVICE_CREATE_PREFERLOWPOWER_BOOLEAN".."SDL.gpu.device.create.preferlowpower",
+        "PROP_GPU_DEVICE_CREATE_NAME_STRING".."SDL.gpu.device.create.name",
+        "PROP_GPU_DEVICE_CREATE_SHADERS_PRIVATE_BOOLEAN".."SDL.gpu.device.create.shaders.private",
+        "PROP_GPU_DEVICE_CREATE_SHADERS_SPIRV_BOOLEAN".."SDL.gpu.device.create.shaders.spirv",
+        "PROP_GPU_DEVICE_CREATE_SHADERS_DXBC_BOOLEAN".."SDL.gpu.device.create.shaders.dxbc",
+        "PROP_GPU_DEVICE_CREATE_SHADERS_DXIL_BOOLEAN".."SDL.gpu.device.create.shaders.dxil",
+        "PROP_GPU_DEVICE_CREATE_SHADERS_MSL_BOOLEAN".."SDL.gpu.device.create.shaders.msl",
+        "PROP_GPU_DEVICE_CREATE_SHADERS_METALLIB_BOOLEAN".."SDL.gpu.device.create.shaders.metallib",
+        "PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING".."SDL.gpu.device.create.d3d12.semantic"
+    )
+
+    StringConstant(
+        "PROP_GPU_CREATETEXTURE_D3D12_CLEAR_R_FLOAT".."SDL.gpu.createtexture.d3d12.clear.r",
+        "PROP_GPU_CREATETEXTURE_D3D12_CLEAR_G_FLOAT".."SDL.gpu.createtexture.d3d12.clear.g",
+        "PROP_GPU_CREATETEXTURE_D3D12_CLEAR_B_FLOAT".."SDL.gpu.createtexture.d3d12.clear.b",
+        "PROP_GPU_CREATETEXTURE_D3D12_CLEAR_A_FLOAT".."SDL.gpu.createtexture.d3d12.clear.a",
+        "PROP_GPU_CREATETEXTURE_D3D12_CLEAR_DEPTH_FLOAT".."SDL.gpu.createtexture.d3d12.clear.depth",
+        "PROP_GPU_CREATETEXTURE_D3D12_CLEAR_STENCIL_UINT8".."SDL.gpu.createtexture.d3d12.clear.stencil"
     )
 
     bool(
@@ -416,49 +429,49 @@ fun SDL_gpu() = SDL.apply {
         "CreateGPUComputePipeline",
 
         SDL_GPUDevice.p("device"),
-        Check(1)..SDL_GPUComputePipelineCreateInfo.const.p("createinfo")
+        SDL_GPUComputePipelineCreateInfo.const.p("createinfo")
     )
 
     SDL_GPUGraphicsPipeline.p(
         "CreateGPUGraphicsPipeline",
 
         SDL_GPUDevice.p("device"),
-        Check(1)..SDL_GPUGraphicsPipelineCreateInfo.const.p("createinfo")
+        SDL_GPUGraphicsPipelineCreateInfo.const.p("createinfo")
     )
 
     SDL_GPUSampler.p(
         "CreateGPUSampler",
 
         SDL_GPUDevice.p("device"),
-        Check(1)..SDL_GPUSamplerCreateInfo.const.p("createinfo")
+        SDL_GPUSamplerCreateInfo.const.p("createinfo")
     )
 
     SDL_GPUShader.p(
         "CreateGPUShader",
 
         SDL_GPUDevice.p("device"),
-        Check(1)..SDL_GPUShaderCreateInfo.const.p("createinfo")
+        SDL_GPUShaderCreateInfo.const.p("createinfo")
     )
 
     SDL_GPUTexture.p(
         "CreateGPUTexture",
 
         SDL_GPUDevice.p("device"),
-        Check(1)..SDL_GPUTextureCreateInfo.const.p("createinfo")
+        SDL_GPUTextureCreateInfo.const.p("createinfo")
     )
 
     SDL_GPUBuffer.p(
         "CreateGPUBuffer",
 
         SDL_GPUDevice.p("device"),
-        Check(1)..SDL_GPUBufferCreateInfo.const.p("createinfo")
+        SDL_GPUBufferCreateInfo.const.p("createinfo")
     )
 
     SDL_GPUTransferBuffer.p(
         "CreateGPUTransferBuffer",
 
         SDL_GPUDevice.p("device"),
-        Check(1)..SDL_GPUTransferBufferCreateInfo.const.p("createinfo")
+        SDL_GPUTransferBufferCreateInfo.const.p("createinfo")
     )
 
     void(
@@ -466,7 +479,7 @@ fun SDL_gpu() = SDL.apply {
 
         SDL_GPUDevice.p("device"),
         SDL_GPUBuffer.p("buffer"),
-        nullable..charUTF8.const.p("text")
+        charUTF8.const.p("text")
     )
 
     void(
@@ -474,21 +487,21 @@ fun SDL_gpu() = SDL.apply {
 
         SDL_GPUDevice.p("device"),
         SDL_GPUTexture.p("texture"),
-        nullable..charUTF8.const.p("text")
+        charUTF8.const.p("text")
     )
 
     void(
         "InsertGPUDebugLabel",
 
         SDL_GPUCommandBuffer.p("command_buffer"),
-        nullable..charUTF8.const.p("text")
+        charUTF8.const.p("text")
     )
 
     void(
         "PushGPUDebugGroup",
 
         SDL_GPUCommandBuffer.p("command_buffer"),
-        nullable..charUTF8.const.p("name")
+        charUTF8.const.p("name")
     )
 
     void(
@@ -585,7 +598,7 @@ fun SDL_gpu() = SDL.apply {
         SDL_GPUCommandBuffer.p("command_buffer"),
         nullable..SDL_GPUColorTargetInfo.const.p("color_target_infos"),
         AutoSize("color_target_infos")..Uint32("num_color_targets"),
-        nullable..Check(1)..SDL_GPUDepthStencilTargetInfo.const.p("depth_stencil_target_info")
+        nullable..SDL_GPUDepthStencilTargetInfo.const.p("depth_stencil_target_info")
     )
 
     void(
@@ -599,14 +612,14 @@ fun SDL_gpu() = SDL.apply {
         "SetGPUViewport",
 
         SDL_GPURenderPass.p("render_pass"),
-        Check(1)..SDL_GPUViewport.const.p("viewport")
+        SDL_GPUViewport.const.p("viewport")
     )
 
     void(
         "SetGPUScissor",
 
         SDL_GPURenderPass.p("render_pass"),
-        Check(1)..SDL_Rect.const.p("scissor")
+        SDL_Rect.const.p("scissor")
     )
 
     void(
@@ -628,7 +641,7 @@ fun SDL_gpu() = SDL.apply {
 
         SDL_GPURenderPass.p("render_pass"),
         Uint32("first_slot"),
-        SDL_GPUBufferBinding.const.p("bindings"),
+        nullable..SDL_GPUBufferBinding.const.p("bindings"),
         AutoSize("bindings")..Uint32("num_bindings")
     )
 
@@ -636,7 +649,7 @@ fun SDL_gpu() = SDL.apply {
         "BindGPUIndexBuffer",
 
         SDL_GPURenderPass.p("render_pass"),
-        Check(1)..SDL_GPUBufferBinding.const.p("binding"),
+        SDL_GPUBufferBinding.const.p("binding"),
         SDL_GPUIndexElementSize("index_element_size")
     )
 
@@ -645,7 +658,7 @@ fun SDL_gpu() = SDL.apply {
 
         SDL_GPURenderPass.p("render_pass"),
         Uint32("first_slot"),
-        SDL_GPUTextureSamplerBinding.const.p("texture_sampler_bindings"),
+        nullable..SDL_GPUTextureSamplerBinding.const.p("texture_sampler_bindings"),
         AutoSize("texture_sampler_bindings")..Uint32("num_bindings")
     )
 
@@ -654,7 +667,7 @@ fun SDL_gpu() = SDL.apply {
 
         SDL_GPURenderPass.p("render_pass"),
         Uint32("first_slot"),
-        SDL_GPUTexture.p.const.p("storage_textures"),
+        nullable..SDL_GPUTexture.p.const.p("storage_textures"),
         AutoSize("storage_textures")..Uint32("num_bindings")
     )
 
@@ -663,7 +676,7 @@ fun SDL_gpu() = SDL.apply {
 
         SDL_GPURenderPass.p("render_pass"),
         Uint32("first_slot"),
-        SDL_GPUBuffer.p.const.p("storage_buffers"),
+        nullable..SDL_GPUBuffer.p.const.p("storage_buffers"),
         AutoSize("storage_buffers")..Uint32("num_bindings")
     )
 
@@ -672,7 +685,7 @@ fun SDL_gpu() = SDL.apply {
 
         SDL_GPURenderPass.p("render_pass"),
         Uint32("first_slot"),
-        SDL_GPUTextureSamplerBinding.const.p("texture_sampler_bindings"),
+        nullable..SDL_GPUTextureSamplerBinding.const.p("texture_sampler_bindings"),
         AutoSize("texture_sampler_bindings")..Uint32("num_bindings")
     )
 
@@ -681,7 +694,7 @@ fun SDL_gpu() = SDL.apply {
 
         SDL_GPURenderPass.p("render_pass"),
         Uint32("first_slot"),
-        SDL_GPUTexture.p.const.p("storage_textures"),
+        nullable..SDL_GPUTexture.p.const.p("storage_textures"),
         AutoSize("storage_textures")..Uint32("num_bindings")
     )
 
@@ -690,7 +703,7 @@ fun SDL_gpu() = SDL.apply {
 
         SDL_GPURenderPass.p("render_pass"),
         Uint32("first_slot"),
-        SDL_GPUBuffer.p.const.p("storage_buffers"),
+        nullable..SDL_GPUBuffer.p.const.p("storage_buffers"),
         AutoSize("storage_buffers")..Uint32("num_bindings")
     )
 
@@ -743,9 +756,9 @@ fun SDL_gpu() = SDL.apply {
         "BeginGPUComputePass",
 
         SDL_GPUCommandBuffer.p("command_buffer"),
-        SDL_GPUStorageTextureReadWriteBinding.const.p("storage_texture_bindings"),
+        nullable..SDL_GPUStorageTextureReadWriteBinding.const.p("storage_texture_bindings"),
         AutoSize("storage_texture_bindings")..Uint32("num_storage_texture_bindings"),
-        SDL_GPUStorageBufferReadWriteBinding.const.p("storage_buffer_bindings"),
+        nullable..SDL_GPUStorageBufferReadWriteBinding.const.p("storage_buffer_bindings"),
         AutoSize("storage_buffer_bindings")..Uint32("num_storage_buffer_bindings")
     )
 
@@ -761,7 +774,7 @@ fun SDL_gpu() = SDL.apply {
 
         SDL_GPUComputePass.p("compute_pass"),
         Uint32("first_slot"),
-        SDL_GPUTextureSamplerBinding.const.p("texture_sampler_bindings"),
+        nullable..SDL_GPUTextureSamplerBinding.const.p("texture_sampler_bindings"),
         AutoSize("texture_sampler_bindings")..Uint32("num_bindings")
     )
 
@@ -770,7 +783,7 @@ fun SDL_gpu() = SDL.apply {
 
         SDL_GPUComputePass.p("compute_pass"),
         Uint32("first_slot"),
-        SDL_GPUTexture.p.const.p("storage_textures"),
+        nullable..SDL_GPUTexture.p.const.p("storage_textures"),
         AutoSize("storage_textures")..Uint32("num_bindings")
     )
 
@@ -779,7 +792,7 @@ fun SDL_gpu() = SDL.apply {
 
         SDL_GPUComputePass.p("compute_pass"),
         Uint32("first_slot"),
-        SDL_GPUBuffer.p.const.p("storage_buffers"),
+        nullable..SDL_GPUBuffer.p.const.p("storage_buffers"),
         AutoSize("storage_buffers")..Uint32("num_bindings")
     )
 
@@ -812,7 +825,7 @@ fun SDL_gpu() = SDL.apply {
         SDL_GPUDevice.p("device"),
         SDL_GPUTransferBuffer.p("transfer_buffer"),
         bool("cycle"),
-        AutoSizeResult..Virtual..size_t("buffer_size"),
+        AutoSizeResult..Virtual..size_t("buffer_size")
     )
 
     void(
@@ -832,8 +845,8 @@ fun SDL_gpu() = SDL.apply {
         "UploadToGPUTexture",
 
         SDL_GPUCopyPass.p("copy_pass"),
-        Check(1)..SDL_GPUTextureTransferInfo.const.p("source"),
-        Check(1)..SDL_GPUTextureRegion.const.p("destination"),
+        SDL_GPUTextureTransferInfo.const.p("source"),
+        SDL_GPUTextureRegion.const.p("destination"),
         bool("cycle")
     )
 
@@ -841,8 +854,8 @@ fun SDL_gpu() = SDL.apply {
         "UploadToGPUBuffer",
 
         SDL_GPUCopyPass.p("copy_pass"),
-        Check(1)..SDL_GPUTransferBufferLocation.const.p("source"),
-        Check(1)..SDL_GPUBufferRegion.const.p("destination"),
+        SDL_GPUTransferBufferLocation.const.p("source"),
+        SDL_GPUBufferRegion.const.p("destination"),
         bool("cycle")
     )
 
@@ -850,8 +863,8 @@ fun SDL_gpu() = SDL.apply {
         "CopyGPUTextureToTexture",
 
         SDL_GPUCopyPass.p("copy_pass"),
-        Check(1)..SDL_GPUTextureLocation.const.p("source"),
-        Check(1)..SDL_GPUTextureLocation.const.p("destination"),
+        SDL_GPUTextureLocation.const.p("source"),
+        SDL_GPUTextureLocation.const.p("destination"),
         Uint32("w"),
         Uint32("h"),
         Uint32("d"),
@@ -862,8 +875,8 @@ fun SDL_gpu() = SDL.apply {
         "CopyGPUBufferToBuffer",
 
         SDL_GPUCopyPass.p("copy_pass"),
-        Check(1)..SDL_GPUBufferLocation.const.p("source"),
-        Check(1)..SDL_GPUBufferLocation.const.p("destination"),
+        SDL_GPUBufferLocation.const.p("source"),
+        SDL_GPUBufferLocation.const.p("destination"),
         Uint32("size"),
         bool("cycle")
     )
@@ -872,16 +885,16 @@ fun SDL_gpu() = SDL.apply {
         "DownloadFromGPUTexture",
 
         SDL_GPUCopyPass.p("copy_pass"),
-        Check(1)..SDL_GPUTextureRegion.const.p("source"),
-        Check(1)..SDL_GPUTextureTransferInfo.const.p("destination")
+        SDL_GPUTextureRegion.const.p("source"),
+        SDL_GPUTextureTransferInfo.const.p("destination")
     )
 
     void(
         "DownloadFromGPUBuffer",
 
         SDL_GPUCopyPass.p("copy_pass"),
-        Check(1)..SDL_GPUBufferRegion.const.p("source"),
-        Check(1)..SDL_GPUTransferBufferLocation.const.p("destination")
+        SDL_GPUBufferRegion.const.p("source"),
+        SDL_GPUTransferBufferLocation.const.p("destination")
     )
 
     void(
@@ -901,7 +914,7 @@ fun SDL_gpu() = SDL.apply {
         "BlitGPUTexture",
 
         SDL_GPUCommandBuffer.p("command_buffer"),
-        Check(1)..SDL_GPUBlitInfo.const.p("info")
+        SDL_GPUBlitInfo.const.p("info")
     )
 
     bool(
@@ -963,8 +976,8 @@ fun SDL_gpu() = SDL.apply {
         SDL_GPUCommandBuffer.p("command_buffer"),
         SDL_Window.p("window"),
         Check(1)..SDL_GPUTexture.p.p("swapchain_texture"),
-        nullable..Check(1)..Uint32.p("swapchain_texture_width"),
-        nullable..Check(1)..Uint32.p("swapchain_texture_height")
+        Check(1)..nullable..Uint32.p("swapchain_texture_width"),
+        Check(1)..nullable..Uint32.p("swapchain_texture_height")
     )
 
     bool(
@@ -980,8 +993,8 @@ fun SDL_gpu() = SDL.apply {
         SDL_GPUCommandBuffer.p("command_buffer"),
         SDL_Window.p("window"),
         Check(1)..SDL_GPUTexture.p.p("swapchain_texture"),
-        nullable..Check(1)..Uint32.p("swapchain_texture_width"),
-        nullable..Check(1)..Uint32.p("swapchain_texture_height")
+        Check(1)..nullable..Uint32.p("swapchain_texture_width"),
+        Check(1)..nullable..Uint32.p("swapchain_texture_height")
     )
 
     bool(
@@ -1013,7 +1026,7 @@ fun SDL_gpu() = SDL.apply {
 
         SDL_GPUDevice.p("device"),
         bool("wait_all"),
-        SDL_GPUFence.p.const.p("fences"),
+        nullable..SDL_GPUFence.p.const.p("fences"),
         AutoSize("fences")..Uint32("num_fences")
     )
 
@@ -1062,5 +1075,4 @@ fun SDL_gpu() = SDL.apply {
         Uint32("height"),
         Uint32("depth_or_layer_count")
     )
-
 }

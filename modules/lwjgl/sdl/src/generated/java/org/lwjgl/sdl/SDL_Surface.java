@@ -111,9 +111,6 @@ public class SDL_Surface extends Struct<SDL_Surface> implements NativeResource {
     public @Nullable ByteBuffer pixels() { return npixels(address()); }
     /** @return the value of the {@code refcount} field. */
     public int refcount() { return nrefcount(address()); }
-    /** @return the value of the {@code reserved} field. */
-    @NativeType("void *")
-    public long reserved() { return nreserved(address()); }
 
     /** Sets the specified value to the {@code flags} field. */
     public SDL_Surface flags(@NativeType("SDL_SurfaceFlags") int value) { nflags(address(), value); return this; }
@@ -129,8 +126,6 @@ public class SDL_Surface extends Struct<SDL_Surface> implements NativeResource {
     public SDL_Surface pixels(@Nullable @NativeType("void *") ByteBuffer value) { npixels(address(), value); return this; }
     /** Sets the specified value to the {@code refcount} field. */
     public SDL_Surface refcount(int value) { nrefcount(address(), value); return this; }
-    /** Sets the specified value to the {@code reserved} field. */
-    public SDL_Surface reserved(@NativeType("void *") long value) { nreserved(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public SDL_Surface set(
@@ -140,8 +135,7 @@ public class SDL_Surface extends Struct<SDL_Surface> implements NativeResource {
         int h,
         int pitch,
         @Nullable ByteBuffer pixels,
-        int refcount,
-        long reserved
+        int refcount
     ) {
         flags(flags);
         format(format);
@@ -150,7 +144,6 @@ public class SDL_Surface extends Struct<SDL_Surface> implements NativeResource {
         pitch(pitch);
         pixels(pixels);
         refcount(refcount);
-        reserved(reserved);
 
         return this;
     }
@@ -289,10 +282,9 @@ public class SDL_Surface extends Struct<SDL_Surface> implements NativeResource {
     /** Unsafe version of {@link #pitch}. */
     public static int npitch(long struct) { return memGetInt(struct + SDL_Surface.PITCH); }
     /** Unsafe version of {@link #pixels() pixels}. */
-    public static @Nullable ByteBuffer npixels(long struct) { return memByteBufferSafe(memGetAddress(struct + SDL_Surface.PIXELS), npitch(struct)*nh(struct)); }
+    public static @Nullable ByteBuffer npixels(long struct) { return memByteBufferSafe(memGetAddress(struct + SDL_Surface.PIXELS), npitch(struct) * nh(struct)); }
     /** Unsafe version of {@link #refcount}. */
     public static int nrefcount(long struct) { return memGetInt(struct + SDL_Surface.REFCOUNT); }
-    /** Unsafe version of {@link #reserved}. */
     public static long nreserved(long struct) { return memGetAddress(struct + SDL_Surface.RESERVED); }
 
     /** Unsafe version of {@link #flags(int) flags}. */
@@ -309,7 +301,6 @@ public class SDL_Surface extends Struct<SDL_Surface> implements NativeResource {
     public static void npixels(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + SDL_Surface.PIXELS, memAddressSafe(value)); }
     /** Unsafe version of {@link #refcount(int) refcount}. */
     public static void nrefcount(long struct, int value) { memPutInt(struct + SDL_Surface.REFCOUNT, value); }
-    /** Unsafe version of {@link #reserved(long) reserved}. */
     public static void nreserved(long struct, long value) { memPutAddress(struct + SDL_Surface.RESERVED, value); }
 
     // -----------------------------------
@@ -372,9 +363,6 @@ public class SDL_Surface extends Struct<SDL_Surface> implements NativeResource {
         public @Nullable ByteBuffer pixels() { return SDL_Surface.npixels(address()); }
         /** @return the value of the {@code refcount} field. */
         public int refcount() { return SDL_Surface.nrefcount(address()); }
-        /** @return the value of the {@code reserved} field. */
-        @NativeType("void *")
-        public long reserved() { return SDL_Surface.nreserved(address()); }
 
         /** Sets the specified value to the {@code flags} field. */
         public SDL_Surface.Buffer flags(@NativeType("SDL_SurfaceFlags") int value) { SDL_Surface.nflags(address(), value); return this; }
@@ -390,8 +378,6 @@ public class SDL_Surface extends Struct<SDL_Surface> implements NativeResource {
         public SDL_Surface.Buffer pixels(@Nullable @NativeType("void *") ByteBuffer value) { SDL_Surface.npixels(address(), value); return this; }
         /** Sets the specified value to the {@code refcount} field. */
         public SDL_Surface.Buffer refcount(int value) { SDL_Surface.nrefcount(address(), value); return this; }
-        /** Sets the specified value to the {@code reserved} field. */
-        public SDL_Surface.Buffer reserved(@NativeType("void *") long value) { SDL_Surface.nreserved(address(), value); return this; }
 
     }
 

@@ -1130,21 +1130,15 @@ public class SDL {
         SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK  = 0xFFFFFFFF,
         SDL_AUDIO_DEVICE_DEFAULT_RECORDING = 0xFFFFFFFE;
 
-    public static final int SDL_BLENDMODE_NONE = 0x00000000;
-
-    public static final int SDL_BLENDMODE_BLEND = 0x00000001;
-
-    public static final int SDL_BLENDMODE_BLEND_PREMULTIPLIED = 0x00000010;
-
-    public static final int SDL_BLENDMODE_ADD = 0x00000002;
-
-    public static final int SDL_BLENDMODE_ADD_PREMULTIPLIED = 0x00000020;
-
-    public static final int SDL_BLENDMODE_MOD = 0x00000004;
-
-    public static final int SDL_BLENDMODE_MUL = 0x00000008;
-
-    public static final int SDL_BLENDMODE_INVALID = 0x7FFFFFFF;
+    public static final int
+        SDL_BLENDMODE_NONE                = 0x00000000,
+        SDL_BLENDMODE_BLEND               = 0x00000001,
+        SDL_BLENDMODE_BLEND_PREMULTIPLIED = 0x00000010,
+        SDL_BLENDMODE_ADD                 = 0x00000002,
+        SDL_BLENDMODE_ADD_PREMULTIPLIED   = 0x00000020,
+        SDL_BLENDMODE_MOD                 = 0x00000004,
+        SDL_BLENDMODE_MUL                 = 0x00000008,
+        SDL_BLENDMODE_INVALID             = 0x7FFFFFFF;
 
     public static final int
         SDL_BLENDOPERATION_ADD          = 0x1,
@@ -1172,29 +1166,23 @@ public class SDL {
 
     public static final int SDL_CACHELINE_SIZE = 128;
 
-    public static final String SDL_PROP_FILE_DIALOG_FILTERS_POINTER = "SDL.filedialog.filters";
-
-    public static final String SDL_PROP_FILE_DIALOG_NFILTERS_NUMBER = "SDL.filedialog.nfilters";
-
-    public static final String SDL_PROP_FILE_DIALOG_WINDOW_POINTER = "SDL.filedialog.window";
-
-    public static final String SDL_PROP_FILE_DIALOG_LOCATION_STRING = "SDL.filedialog.location";
-
-    public static final String SDL_PROP_FILE_DIALOG_MANY_BOOLEAN = "SDL.filedialog.many";
-
-    public static final String SDL_PROP_FILE_DIALOG_TITLE_STRING = "SDL.filedialog.title";
-
-    public static final String SDL_PROP_FILE_DIALOG_ACCEPT_STRING = "SDL.filedialog.accept";
-
-    public static final String SDL_PROP_FILE_DIALOG_CANCEL_STRING = "SDL.filedialog.cancel";
+    public static final String
+        SDL_PROP_FILE_DIALOG_FILTERS_POINTER = "SDL.filedialog.filters",
+        SDL_PROP_FILE_DIALOG_NFILTERS_NUMBER = "SDL.filedialog.nfilters",
+        SDL_PROP_FILE_DIALOG_WINDOW_POINTER  = "SDL.filedialog.window",
+        SDL_PROP_FILE_DIALOG_LOCATION_STRING = "SDL.filedialog.location",
+        SDL_PROP_FILE_DIALOG_MANY_BOOLEAN    = "SDL.filedialog.many",
+        SDL_PROP_FILE_DIALOG_TITLE_STRING    = "SDL.filedialog.title",
+        SDL_PROP_FILE_DIALOG_ACCEPT_STRING   = "SDL.filedialog.accept",
+        SDL_PROP_FILE_DIALOG_CANCEL_STRING   = "SDL.filedialog.cancel";
 
     public static final int
-        SDL_FILEDIALOG_OPENFILE   = 0x0,
-        SDL_FILEDIALOG_SAVEFILE   = 0x1,
-        SDL_FILEDIALOG_OPENFOLDER = 0x2;
+        SDL_FILEDIALOG_OPENFILE   = 0,
+        SDL_FILEDIALOG_SAVEFILE   = 1,
+        SDL_FILEDIALOG_OPENFOLDER = 2;
 
     public static final int
-        SDL_EVENT_FIRST                         = 0x0,
+        SDL_EVENT_FIRST                         = 0,
         SDL_EVENT_QUIT                          = 0x100,
         SDL_EVENT_TERMINATING                   = 0x101,
         SDL_EVENT_LOW_MEMORY                    = 0x102,
@@ -1314,9 +1302,9 @@ public class SDL {
         SDL_EVENT_ENUM_PADDING                  = 0x7FFFFFFF;
 
     public static final int
-        SDL_ADDEVENT  = 0x0,
-        SDL_PEEKEVENT = 0x1,
-        SDL_GETEVENT  = 0x2;
+        SDL_ADDEVENT  = 0,
+        SDL_PEEKEVENT = 1,
+        SDL_GETEVENT  = 2;
 
     public static final int
         SDL_FOLDER_HOME        = 0,
@@ -1342,86 +1330,6 @@ public class SDL {
         SDL_ENUM_CONTINUE = 0,
         SDL_ENUM_SUCCESS  = 1,
         SDL_ENUM_FAILURE  = 2;
-
-    public static final int SDL_GPU_TEXTUREUSAGE_SAMPLER = (1 << 0);
-
-    public static final int SDL_GPU_TEXTUREUSAGE_COLOR_TARGET = (1 << 1);
-
-    public static final int SDL_GPU_TEXTUREUSAGE_DEPTH_STENCIL_TARGET = (1 << 2);
-
-    public static final int SDL_GPU_TEXTUREUSAGE_GRAPHICS_STORAGE_READ = (1 << 3);
-
-    public static final int SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_READ = (1 << 4);
-
-    public static final int SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_WRITE = (1 << 5);
-
-    public static final int SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_SIMULTANEOUS_READ_WRITE = (1 << 6);
-
-    public static final int SDL_GPU_BUFFERUSAGE_VERTEX = (1 << 0);
-
-    public static final int SDL_GPU_BUFFERUSAGE_INDEX = (1 << 1);
-
-    public static final int SDL_GPU_BUFFERUSAGE_INDIRECT = (1 << 2);
-
-    public static final int SDL_GPU_BUFFERUSAGE_GRAPHICS_STORAGE_READ = (1 << 3);
-
-    public static final int SDL_GPU_BUFFERUSAGE_COMPUTE_STORAGE_READ = (1 << 4);
-
-    public static final int SDL_GPU_BUFFERUSAGE_COMPUTE_STORAGE_WRITE = (1 << 5);
-
-    public static final int SDL_GPU_SHADERFORMAT_INVALID = 0;
-
-    public static final int SDL_GPU_SHADERFORMAT_PRIVATE = (1 << 0);
-
-    public static final int SDL_GPU_SHADERFORMAT_SPIRV = (1 << 1);
-
-    public static final int SDL_GPU_SHADERFORMAT_DXBC = (1 << 2);
-
-    public static final int SDL_GPU_SHADERFORMAT_DXIL = (1 << 3);
-
-    public static final int SDL_GPU_SHADERFORMAT_MSL = (1 << 4);
-
-    public static final int SDL_GPU_SHADERFORMAT_METALLIB = (1 << 5);
-
-    public static final int SDL_GPU_COLORCOMPONENT_R = (1 << 0);
-
-    public static final int SDL_GPU_COLORCOMPONENT_G = (1 << 1);
-
-    public static final int SDL_GPU_COLORCOMPONENT_B = (1 << 2);
-
-    public static final int SDL_GPU_COLORCOMPONENT_A = (1 << 3);
-
-    public static final String SDL_PROP_GPU_DEVICE_CREATE_DEBUGMODE_BOOLEAN = "SDL.gpu.device.create.debugmode";
-
-    public static final String SDL_PROP_GPU_DEVICE_CREATE_PREFERLOWPOWER_BOOLEAN = "SDL.gpu.device.create.preferlowpower";
-
-    public static final String SDL_PROP_GPU_DEVICE_CREATE_NAME_STRING = "SDL.gpu.device.create.name";
-
-    public static final String SDL_PROP_GPU_DEVICE_CREATE_SHADERS_PRIVATE_BOOLEAN = "SDL.gpu.device.create.shaders.private";
-
-    public static final String SDL_PROP_GPU_DEVICE_CREATE_SHADERS_SPIRV_BOOLEAN = "SDL.gpu.device.create.shaders.spirv";
-
-    public static final String SDL_PROP_GPU_DEVICE_CREATE_SHADERS_DXBC_BOOLEAN = "SDL.gpu.device.create.shaders.dxbc";
-
-    public static final String SDL_PROP_GPU_DEVICE_CREATE_SHADERS_DXIL_BOOLEAN = "SDL.gpu.device.create.shaders.dxil";
-
-    public static final String SDL_PROP_GPU_DEVICE_CREATE_SHADERS_MSL_BOOLEAN = "SDL.gpu.device.create.shaders.msl";
-
-    public static final String SDL_PROP_GPU_DEVICE_CREATE_SHADERS_METALLIB_BOOLEAN = "SDL.gpu.device.create.shaders.metallib";
-
-    public static final String SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING = "SDL.gpu.device.create.d3d12.semantic";
-
-    public static final String SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_R_FLOAT = "SDL.gpu.createtexture.d3d12.clear.r";
-
-    public static final String SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_G_FLOAT = "SDL.gpu.createtexture.d3d12.clear.g";
-
-    public static final String SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_B_FLOAT = "SDL.gpu.createtexture.d3d12.clear.b";
-
-    public static final String SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_A_FLOAT = "SDL.gpu.createtexture.d3d12.clear.a";
-
-    public static final String SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_DEPTH_FLOAT = "SDL.gpu.createtexture.d3d12.clear.depth";
-
-    public static final String SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_STENCIL_UINT8 = "SDL.gpu.createtexture.d3d12.clear.stencil";
 
     public static final int
         SDL_GPU_PRIMITIVETYPE_TRIANGLELIST  = 0,
@@ -1553,6 +1461,15 @@ public class SDL {
         SDL_GPU_TEXTUREFORMAT_ASTC_12x12_FLOAT      = 104;
 
     public static final int
+        SDL_GPU_TEXTUREUSAGE_SAMPLER                                 = (1 << 0),
+        SDL_GPU_TEXTUREUSAGE_COLOR_TARGET                            = (1 << 1),
+        SDL_GPU_TEXTUREUSAGE_DEPTH_STENCIL_TARGET                    = (1 << 2),
+        SDL_GPU_TEXTUREUSAGE_GRAPHICS_STORAGE_READ                   = (1 << 3),
+        SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_READ                    = (1 << 4),
+        SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_WRITE                   = (1 << 5),
+        SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_SIMULTANEOUS_READ_WRITE = (1 << 6);
+
+    public static final int
         SDL_GPU_TEXTURETYPE_2D         = 0,
         SDL_GPU_TEXTURETYPE_2D_ARRAY   = 1,
         SDL_GPU_TEXTURETYPE_3D         = 2,
@@ -1574,12 +1491,29 @@ public class SDL {
         SDL_GPU_CUBEMAPFACE_NEGATIVEZ = 5;
 
     public static final int
+        SDL_GPU_BUFFERUSAGE_VERTEX                = (1 << 0),
+        SDL_GPU_BUFFERUSAGE_INDEX                 = (1 << 1),
+        SDL_GPU_BUFFERUSAGE_INDIRECT              = (1 << 2),
+        SDL_GPU_BUFFERUSAGE_GRAPHICS_STORAGE_READ = (1 << 3),
+        SDL_GPU_BUFFERUSAGE_COMPUTE_STORAGE_READ  = (1 << 4),
+        SDL_GPU_BUFFERUSAGE_COMPUTE_STORAGE_WRITE = (1 << 5);
+
+    public static final int
         SDL_GPU_TRANSFERBUFFERUSAGE_UPLOAD   = 0,
         SDL_GPU_TRANSFERBUFFERUSAGE_DOWNLOAD = 1;
 
     public static final int
         SDL_GPU_SHADERSTAGE_VERTEX   = 0,
         SDL_GPU_SHADERSTAGE_FRAGMENT = 1;
+
+    public static final int
+        SDL_GPU_SHADERFORMAT_INVALID  = 0,
+        SDL_GPU_SHADERFORMAT_PRIVATE  = (1 << 0),
+        SDL_GPU_SHADERFORMAT_SPIRV    = (1 << 1),
+        SDL_GPU_SHADERFORMAT_DXBC     = (1 << 2),
+        SDL_GPU_SHADERFORMAT_DXIL     = (1 << 3),
+        SDL_GPU_SHADERFORMAT_MSL      = (1 << 4),
+        SDL_GPU_SHADERFORMAT_METALLIB = (1 << 5);
 
     public static final int
         SDL_GPU_VERTEXELEMENTFORMAT_INVALID      = 0,
@@ -1678,6 +1612,12 @@ public class SDL {
         SDL_GPU_BLENDFACTOR_SRC_ALPHA_SATURATE       = 13;
 
     public static final int
+        SDL_GPU_COLORCOMPONENT_R = (1 << 0),
+        SDL_GPU_COLORCOMPONENT_G = (1 << 1),
+        SDL_GPU_COLORCOMPONENT_B = (1 << 2),
+        SDL_GPU_COLORCOMPONENT_A = (1 << 3);
+
+    public static final int
         SDL_GPU_FILTER_NEAREST = 0,
         SDL_GPU_FILTER_LINEAR  = 1;
 
@@ -1700,6 +1640,26 @@ public class SDL {
         SDL_GPU_SWAPCHAINCOMPOSITION_SDR_LINEAR          = 1,
         SDL_GPU_SWAPCHAINCOMPOSITION_HDR_EXTENDED_LINEAR = 2,
         SDL_GPU_SWAPCHAINCOMPOSITION_HDR10_ST2084        = 3;
+
+    public static final String
+        SDL_PROP_GPU_DEVICE_CREATE_DEBUGMODE_BOOLEAN          = "SDL.gpu.device.create.debugmode",
+        SDL_PROP_GPU_DEVICE_CREATE_PREFERLOWPOWER_BOOLEAN     = "SDL.gpu.device.create.preferlowpower",
+        SDL_PROP_GPU_DEVICE_CREATE_NAME_STRING                = "SDL.gpu.device.create.name",
+        SDL_PROP_GPU_DEVICE_CREATE_SHADERS_PRIVATE_BOOLEAN    = "SDL.gpu.device.create.shaders.private",
+        SDL_PROP_GPU_DEVICE_CREATE_SHADERS_SPIRV_BOOLEAN      = "SDL.gpu.device.create.shaders.spirv",
+        SDL_PROP_GPU_DEVICE_CREATE_SHADERS_DXBC_BOOLEAN       = "SDL.gpu.device.create.shaders.dxbc",
+        SDL_PROP_GPU_DEVICE_CREATE_SHADERS_DXIL_BOOLEAN       = "SDL.gpu.device.create.shaders.dxil",
+        SDL_PROP_GPU_DEVICE_CREATE_SHADERS_MSL_BOOLEAN        = "SDL.gpu.device.create.shaders.msl",
+        SDL_PROP_GPU_DEVICE_CREATE_SHADERS_METALLIB_BOOLEAN   = "SDL.gpu.device.create.shaders.metallib",
+        SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING = "SDL.gpu.device.create.d3d12.semantic";
+
+    public static final String
+        SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_R_FLOAT       = "SDL.gpu.createtexture.d3d12.clear.r",
+        SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_G_FLOAT       = "SDL.gpu.createtexture.d3d12.clear.g",
+        SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_B_FLOAT       = "SDL.gpu.createtexture.d3d12.clear.b",
+        SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_A_FLOAT       = "SDL.gpu.createtexture.d3d12.clear.a",
+        SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_DEPTH_FLOAT   = "SDL.gpu.createtexture.d3d12.clear.depth",
+        SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_STENCIL_UINT8 = "SDL.gpu.createtexture.d3d12.clear.stencil";
 
     public static final int SDL_HAPTIC_CONSTANT = (1<<0);
 
@@ -2342,15 +2302,12 @@ public class SDL {
         SDL_JOYSTICK_CONNECTION_WIRED    = 1,
         SDL_JOYSTICK_CONNECTION_WIRELESS = 2;
 
-    public static final String SDL_PROP_GAMEPAD_CAP_MONO_LED_BOOLEAN = SDL_PROP_JOYSTICK_CAP_MONO_LED_BOOLEAN;
-
-    public static final String SDL_PROP_GAMEPAD_CAP_RGB_LED_BOOLEAN = SDL_PROP_JOYSTICK_CAP_RGB_LED_BOOLEAN;
-
-    public static final String SDL_PROP_GAMEPAD_CAP_PLAYER_LED_BOOLEAN = SDL_PROP_JOYSTICK_CAP_PLAYER_LED_BOOLEAN;
-
-    public static final String SDL_PROP_GAMEPAD_CAP_RUMBLE_BOOLEAN = SDL_PROP_JOYSTICK_CAP_RUMBLE_BOOLEAN;
-
-    public static final String SDL_PROP_GAMEPAD_CAP_TRIGGER_RUMBLE_BOOLEAN = SDL_PROP_JOYSTICK_CAP_TRIGGER_RUMBLE_BOOLEAN;
+    public static final String
+        SDL_PROP_GAMEPAD_CAP_MONO_LED_BOOLEAN       = SDL_PROP_JOYSTICK_CAP_MONO_LED_BOOLEAN,
+        SDL_PROP_GAMEPAD_CAP_RGB_LED_BOOLEAN        = SDL_PROP_JOYSTICK_CAP_RGB_LED_BOOLEAN,
+        SDL_PROP_GAMEPAD_CAP_PLAYER_LED_BOOLEAN     = SDL_PROP_JOYSTICK_CAP_PLAYER_LED_BOOLEAN,
+        SDL_PROP_GAMEPAD_CAP_RUMBLE_BOOLEAN         = SDL_PROP_JOYSTICK_CAP_RUMBLE_BOOLEAN,
+        SDL_PROP_GAMEPAD_CAP_TRIGGER_RUMBLE_BOOLEAN = SDL_PROP_JOYSTICK_CAP_TRIGGER_RUMBLE_BOOLEAN;
 
     public static final int
         SDL_GAMEPAD_TYPE_UNKNOWN                      = 0,
@@ -5263,7 +5220,7 @@ public class SDL {
     @NativeType("char const *")
     public static @Nullable String SDL_GetCameraDriver(int index) {
         long __result = nSDL_GetCameraDriver(index);
-        return memUTF8Safe(__result);
+        return memASCIISafe(__result);
     }
 
     // --- [ SDL_GetCurrentCameraDriver ] ---
@@ -5278,7 +5235,7 @@ public class SDL {
     @NativeType("char const *")
     public static @Nullable String SDL_GetCurrentCameraDriver() {
         long __result = nSDL_GetCurrentCameraDriver();
-        return memUTF8Safe(__result);
+        return memASCIISafe(__result);
     }
 
     // --- [ SDL_GetCameras ] ---
@@ -5357,11 +5314,8 @@ public class SDL {
 
     /** {@code SDL_Camera * SDL_OpenCamera(SDL_CameraID instance_id, SDL_CameraSpec const * spec)} */
     @NativeType("SDL_Camera *")
-    public static long SDL_OpenCamera(@NativeType("SDL_CameraID") int instance_id, @NativeType("SDL_CameraSpec const *") SDL_CameraSpec.Buffer spec) {
-        if (CHECKS) {
-            check(spec, 1);
-        }
-        return nSDL_OpenCamera(instance_id, spec.address());
+    public static long SDL_OpenCamera(@NativeType("SDL_CameraID") int instance_id, @NativeType("SDL_CameraSpec const *") @Nullable SDL_CameraSpec spec) {
+        return nSDL_OpenCamera(instance_id, memAddressSafe(spec));
     }
 
     // --- [ SDL_GetCameraPermissionState ] ---
@@ -5412,10 +5366,7 @@ public class SDL {
 
     /** {@code bool SDL_GetCameraFormat(SDL_Camera * camera, SDL_CameraSpec * spec)} */
     @NativeType("bool")
-    public static boolean SDL_GetCameraFormat(@NativeType("SDL_Camera *") long camera, @NativeType("SDL_CameraSpec *") SDL_CameraSpec.Buffer spec) {
-        if (CHECKS) {
-            check(spec, 1);
-        }
+    public static boolean SDL_GetCameraFormat(@NativeType("SDL_Camera *") long camera, @NativeType("SDL_CameraSpec *") SDL_CameraSpec spec) {
         return nSDL_GetCameraFormat(camera, spec.address());
     }
 
@@ -5432,11 +5383,11 @@ public class SDL {
 
     /** {@code SDL_Surface * SDL_AcquireCameraFrame(SDL_Camera * camera, Uint64 * timestampNS)} */
     @NativeType("SDL_Surface *")
-    public static @Nullable SDL_Surface SDL_AcquireCameraFrame(@NativeType("SDL_Camera *") long camera, @NativeType("Uint64 *") LongBuffer timestampNS) {
+    public static @Nullable SDL_Surface SDL_AcquireCameraFrame(@NativeType("SDL_Camera *") long camera, @NativeType("Uint64 *") @Nullable LongBuffer timestampNS) {
         if (CHECKS) {
-            check(timestampNS, 1);
+            checkSafe(timestampNS, 1);
         }
-        long __result = nSDL_AcquireCameraFrame(camera, memAddress(timestampNS));
+        long __result = nSDL_AcquireCameraFrame(camera, memAddressSafe(timestampNS));
         return SDL_Surface.createSafe(__result);
     }
 
@@ -5452,10 +5403,7 @@ public class SDL {
     }
 
     /** {@code void SDL_ReleaseCameraFrame(SDL_Camera * camera, SDL_Surface * frame)} */
-    public static void SDL_ReleaseCameraFrame(@NativeType("SDL_Camera *") long camera, @NativeType("SDL_Surface *") SDL_Surface.Buffer frame) {
-        if (CHECKS) {
-            check(frame, 1);
-        }
+    public static void SDL_ReleaseCameraFrame(@NativeType("SDL_Camera *") long camera, @NativeType("SDL_Surface *") SDL_Surface frame) {
         nSDL_ReleaseCameraFrame(camera, frame.address());
     }
 
@@ -5641,7 +5589,7 @@ public class SDL {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             PointerBuffer size = stack.callocPointer(1);
-            stack.nUTF8(mime_type, true);
+            stack.nASCII(mime_type, true);
             long mime_typeEncoded = stack.getPointerAddress();
             long __result = nSDL_GetClipboardData(mime_typeEncoded, memAddress(size));
             return memByteBufferSafe(__result, (int)size.get(0));
@@ -5672,7 +5620,7 @@ public class SDL {
     public static boolean SDL_HasClipboardData(@NativeType("char const *") CharSequence mime_type) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nUTF8(mime_type, true);
+            stack.nASCII(mime_type, true);
             long mime_typeEncoded = stack.getPointerAddress();
             return nSDL_HasClipboardData(mime_typeEncoded);
         } finally {
@@ -5866,7 +5814,6 @@ public class SDL {
     public static void nSDL_ShowOpenFileDialog(long callback, long userdata, long window, long filters, int nfilters, long default_location, boolean allow_many) {
         long __functionAddress = Functions.ShowOpenFileDialog;
         if (CHECKS) {
-            check(window);
             if (filters != NULL) { Struct.validate(filters, nfilters, SDL_DialogFileFilter.SIZEOF, SDL_DialogFileFilter::validate); }
         }
         invokePPPPPV(callback, userdata, window, filters, nfilters, default_location, allow_many, __functionAddress);
@@ -6077,8 +6024,8 @@ public class SDL {
     }
 
     /** {@code int SDL_PeepEvents(SDL_Event * events, int numevents, SDL_EventAction action, Uint32 minType, Uint32 maxType)} */
-    public static int SDL_PeepEvents(@NativeType("SDL_Event *") SDL_Event.Buffer events, @NativeType("SDL_EventAction") int action, @NativeType("Uint32") int minType, @NativeType("Uint32") int maxType) {
-        return nSDL_PeepEvents(events.address(), events.remaining(), action, minType, maxType);
+    public static int SDL_PeepEvents(@NativeType("SDL_Event *") SDL_Event.@Nullable Buffer events, @NativeType("SDL_EventAction") int action, @NativeType("Uint32") int minType, @NativeType("Uint32") int maxType) {
+        return nSDL_PeepEvents(memAddressSafe(events), remainingSafe(events), action, minType, maxType);
     }
 
     // --- [ SDL_HasEvent ] ---
@@ -6167,10 +6114,7 @@ public class SDL {
 
     /** {@code bool SDL_PushEvent(SDL_Event * event)} */
     @NativeType("bool")
-    public static boolean SDL_PushEvent(@NativeType("SDL_Event *") SDL_Event.Buffer event) {
-        if (CHECKS) {
-            check(event, 1);
-        }
+    public static boolean SDL_PushEvent(@NativeType("SDL_Event *") SDL_Event event) {
         return nSDL_PushEvent(event.address());
     }
 
@@ -6183,8 +6127,8 @@ public class SDL {
     }
 
     /** {@code void SDL_SetEventFilter(SDL_EventFilter filter, void * userdata)} */
-    public static void SDL_SetEventFilter(@NativeType("SDL_EventFilter") SDL_EventFilterI filter, @NativeType("void *") long userdata) {
-        nSDL_SetEventFilter(filter.address(), userdata);
+    public static void SDL_SetEventFilter(@NativeType("SDL_EventFilter") @Nullable SDL_EventFilterI filter, @NativeType("void *") long userdata) {
+        nSDL_SetEventFilter(memAddressSafe(filter), userdata);
     }
 
     // --- [ SDL_GetEventFilter ] ---
@@ -6197,12 +6141,12 @@ public class SDL {
 
     /** {@code bool SDL_GetEventFilter(SDL_EventFilter * filter, void ** userdata)} */
     @NativeType("bool")
-    public static boolean SDL_GetEventFilter(@NativeType("SDL_EventFilter *") PointerBuffer filter, @NativeType("void **") @Nullable PointerBuffer userdata) {
+    public static boolean SDL_GetEventFilter(@NativeType("SDL_EventFilter *") @Nullable PointerBuffer filter, @NativeType("void **") @Nullable PointerBuffer userdata) {
         if (CHECKS) {
-            check(filter, 1);
+            checkSafe(filter, 1);
             checkSafe(userdata, 1);
         }
-        return nSDL_GetEventFilter(memAddress(filter), memAddressSafe(userdata));
+        return nSDL_GetEventFilter(memAddressSafe(filter), memAddressSafe(userdata));
     }
 
     // --- [ SDL_AddEventWatch ] ---
@@ -6281,10 +6225,7 @@ public class SDL {
 
     /** {@code SDL_Window * SDL_GetWindowFromEvent(SDL_Event const * event)} */
     @NativeType("SDL_Window *")
-    public static long SDL_GetWindowFromEvent(@NativeType("SDL_Event const *") SDL_Event.Buffer event) {
-        if (CHECKS) {
-            check(event, 1);
-        }
+    public static long SDL_GetWindowFromEvent(@NativeType("SDL_Event const *") SDL_Event event) {
         return nSDL_GetWindowFromEvent(event.address());
     }
 
@@ -6526,20 +6467,16 @@ public class SDL {
 
     /** {@code bool SDL_GetPathInfo(char const * path, SDL_PathInfo * info)} */
     @NativeType("bool")
-    public static boolean SDL_GetPathInfo(@NativeType("char const *") ByteBuffer path, @NativeType("SDL_PathInfo *") SDL_PathInfo.@Nullable Buffer info) {
+    public static boolean SDL_GetPathInfo(@NativeType("char const *") ByteBuffer path, @NativeType("SDL_PathInfo *") @Nullable SDL_PathInfo info) {
         if (CHECKS) {
             checkNT1(path);
-            checkSafe(info, 1);
         }
         return nSDL_GetPathInfo(memAddress(path), memAddressSafe(info));
     }
 
     /** {@code bool SDL_GetPathInfo(char const * path, SDL_PathInfo * info)} */
     @NativeType("bool")
-    public static boolean SDL_GetPathInfo(@NativeType("char const *") CharSequence path, @NativeType("SDL_PathInfo *") SDL_PathInfo.@Nullable Buffer info) {
-        if (CHECKS) {
-            checkSafe(info, 1);
-        }
+    public static boolean SDL_GetPathInfo(@NativeType("char const *") CharSequence path, @NativeType("SDL_PathInfo *") @Nullable SDL_PathInfo info) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(path, true);
@@ -6761,17 +6698,14 @@ public class SDL {
         long __functionAddress = Functions.CreateGPUComputePipeline;
         if (CHECKS) {
             check(device);
-            Struct.validate(createinfo, 1, SDL_GPUComputePipelineCreateInfo.SIZEOF, SDL_GPUComputePipelineCreateInfo::validate);
+            SDL_GPUComputePipelineCreateInfo.validate(createinfo);
         }
         return invokePPP(device, createinfo, __functionAddress);
     }
 
     /** {@code SDL_GPUComputePipeline * SDL_CreateGPUComputePipeline(SDL_GPUDevice * device, SDL_GPUComputePipelineCreateInfo const * createinfo)} */
     @NativeType("SDL_GPUComputePipeline *")
-    public static long SDL_CreateGPUComputePipeline(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUComputePipelineCreateInfo const *") SDL_GPUComputePipelineCreateInfo.Buffer createinfo) {
-        if (CHECKS) {
-            check(createinfo, 1);
-        }
+    public static long SDL_CreateGPUComputePipeline(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUComputePipelineCreateInfo const *") SDL_GPUComputePipelineCreateInfo createinfo) {
         return nSDL_CreateGPUComputePipeline(device, createinfo.address());
     }
 
@@ -6782,17 +6716,13 @@ public class SDL {
         long __functionAddress = Functions.CreateGPUGraphicsPipeline;
         if (CHECKS) {
             check(device);
-            Struct.validate(createinfo, 1, SDL_GPUGraphicsPipelineCreateInfo.SIZEOF, SDL_GPUGraphicsPipelineCreateInfo::validate);
         }
         return invokePPP(device, createinfo, __functionAddress);
     }
 
     /** {@code SDL_GPUGraphicsPipeline * SDL_CreateGPUGraphicsPipeline(SDL_GPUDevice * device, SDL_GPUGraphicsPipelineCreateInfo const * createinfo)} */
     @NativeType("SDL_GPUGraphicsPipeline *")
-    public static long SDL_CreateGPUGraphicsPipeline(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUGraphicsPipelineCreateInfo const *") SDL_GPUGraphicsPipelineCreateInfo.Buffer createinfo) {
-        if (CHECKS) {
-            check(createinfo, 1);
-        }
+    public static long SDL_CreateGPUGraphicsPipeline(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUGraphicsPipelineCreateInfo const *") SDL_GPUGraphicsPipelineCreateInfo createinfo) {
         return nSDL_CreateGPUGraphicsPipeline(device, createinfo.address());
     }
 
@@ -6809,10 +6739,7 @@ public class SDL {
 
     /** {@code SDL_GPUSampler * SDL_CreateGPUSampler(SDL_GPUDevice * device, SDL_GPUSamplerCreateInfo const * createinfo)} */
     @NativeType("SDL_GPUSampler *")
-    public static long SDL_CreateGPUSampler(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUSamplerCreateInfo const *") SDL_GPUSamplerCreateInfo.Buffer createinfo) {
-        if (CHECKS) {
-            check(createinfo, 1);
-        }
+    public static long SDL_CreateGPUSampler(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUSamplerCreateInfo const *") SDL_GPUSamplerCreateInfo createinfo) {
         return nSDL_CreateGPUSampler(device, createinfo.address());
     }
 
@@ -6823,17 +6750,14 @@ public class SDL {
         long __functionAddress = Functions.CreateGPUShader;
         if (CHECKS) {
             check(device);
-            Struct.validate(createinfo, 1, SDL_GPUShaderCreateInfo.SIZEOF, SDL_GPUShaderCreateInfo::validate);
+            SDL_GPUShaderCreateInfo.validate(createinfo);
         }
         return invokePPP(device, createinfo, __functionAddress);
     }
 
     /** {@code SDL_GPUShader * SDL_CreateGPUShader(SDL_GPUDevice * device, SDL_GPUShaderCreateInfo const * createinfo)} */
     @NativeType("SDL_GPUShader *")
-    public static long SDL_CreateGPUShader(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUShaderCreateInfo const *") SDL_GPUShaderCreateInfo.Buffer createinfo) {
-        if (CHECKS) {
-            check(createinfo, 1);
-        }
+    public static long SDL_CreateGPUShader(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUShaderCreateInfo const *") SDL_GPUShaderCreateInfo createinfo) {
         return nSDL_CreateGPUShader(device, createinfo.address());
     }
 
@@ -6850,10 +6774,7 @@ public class SDL {
 
     /** {@code SDL_GPUTexture * SDL_CreateGPUTexture(SDL_GPUDevice * device, SDL_GPUTextureCreateInfo const * createinfo)} */
     @NativeType("SDL_GPUTexture *")
-    public static long SDL_CreateGPUTexture(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUTextureCreateInfo const *") SDL_GPUTextureCreateInfo.Buffer createinfo) {
-        if (CHECKS) {
-            check(createinfo, 1);
-        }
+    public static long SDL_CreateGPUTexture(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUTextureCreateInfo const *") SDL_GPUTextureCreateInfo createinfo) {
         return nSDL_CreateGPUTexture(device, createinfo.address());
     }
 
@@ -6870,10 +6791,7 @@ public class SDL {
 
     /** {@code SDL_GPUBuffer * SDL_CreateGPUBuffer(SDL_GPUDevice * device, SDL_GPUBufferCreateInfo const * createinfo)} */
     @NativeType("SDL_GPUBuffer *")
-    public static long SDL_CreateGPUBuffer(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUBufferCreateInfo const *") SDL_GPUBufferCreateInfo.Buffer createinfo) {
-        if (CHECKS) {
-            check(createinfo, 1);
-        }
+    public static long SDL_CreateGPUBuffer(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUBufferCreateInfo const *") SDL_GPUBufferCreateInfo createinfo) {
         return nSDL_CreateGPUBuffer(device, createinfo.address());
     }
 
@@ -6890,10 +6808,7 @@ public class SDL {
 
     /** {@code SDL_GPUTransferBuffer * SDL_CreateGPUTransferBuffer(SDL_GPUDevice * device, SDL_GPUTransferBufferCreateInfo const * createinfo)} */
     @NativeType("SDL_GPUTransferBuffer *")
-    public static long SDL_CreateGPUTransferBuffer(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUTransferBufferCreateInfo const *") SDL_GPUTransferBufferCreateInfo.Buffer createinfo) {
-        if (CHECKS) {
-            check(createinfo, 1);
-        }
+    public static long SDL_CreateGPUTransferBuffer(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUTransferBufferCreateInfo const *") SDL_GPUTransferBufferCreateInfo createinfo) {
         return nSDL_CreateGPUTransferBuffer(device, createinfo.address());
     }
 
@@ -6910,19 +6825,19 @@ public class SDL {
     }
 
     /** {@code void SDL_SetGPUBufferName(SDL_GPUDevice * device, SDL_GPUBuffer * buffer, char const * text)} */
-    public static void SDL_SetGPUBufferName(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUBuffer *") long buffer, @NativeType("char const *") @Nullable ByteBuffer text) {
+    public static void SDL_SetGPUBufferName(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUBuffer *") long buffer, @NativeType("char const *") ByteBuffer text) {
         if (CHECKS) {
-            checkNT1Safe(text);
+            checkNT1(text);
         }
-        nSDL_SetGPUBufferName(device, buffer, memAddressSafe(text));
+        nSDL_SetGPUBufferName(device, buffer, memAddress(text));
     }
 
     /** {@code void SDL_SetGPUBufferName(SDL_GPUDevice * device, SDL_GPUBuffer * buffer, char const * text)} */
-    public static void SDL_SetGPUBufferName(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUBuffer *") long buffer, @NativeType("char const *") @Nullable CharSequence text) {
+    public static void SDL_SetGPUBufferName(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUBuffer *") long buffer, @NativeType("char const *") CharSequence text) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nUTF8Safe(text, true);
-            long textEncoded = text == null ? NULL : stack.getPointerAddress();
+            stack.nUTF8(text, true);
+            long textEncoded = stack.getPointerAddress();
             nSDL_SetGPUBufferName(device, buffer, textEncoded);
         } finally {
             stack.setPointer(stackPointer);
@@ -6942,19 +6857,19 @@ public class SDL {
     }
 
     /** {@code void SDL_SetGPUTextureName(SDL_GPUDevice * device, SDL_GPUTexture * texture, char const * text)} */
-    public static void SDL_SetGPUTextureName(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUTexture *") long texture, @NativeType("char const *") @Nullable ByteBuffer text) {
+    public static void SDL_SetGPUTextureName(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUTexture *") long texture, @NativeType("char const *") ByteBuffer text) {
         if (CHECKS) {
-            checkNT1Safe(text);
+            checkNT1(text);
         }
-        nSDL_SetGPUTextureName(device, texture, memAddressSafe(text));
+        nSDL_SetGPUTextureName(device, texture, memAddress(text));
     }
 
     /** {@code void SDL_SetGPUTextureName(SDL_GPUDevice * device, SDL_GPUTexture * texture, char const * text)} */
-    public static void SDL_SetGPUTextureName(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUTexture *") long texture, @NativeType("char const *") @Nullable CharSequence text) {
+    public static void SDL_SetGPUTextureName(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUTexture *") long texture, @NativeType("char const *") CharSequence text) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nUTF8Safe(text, true);
-            long textEncoded = text == null ? NULL : stack.getPointerAddress();
+            stack.nUTF8(text, true);
+            long textEncoded = stack.getPointerAddress();
             nSDL_SetGPUTextureName(device, texture, textEncoded);
         } finally {
             stack.setPointer(stackPointer);
@@ -6973,19 +6888,19 @@ public class SDL {
     }
 
     /** {@code void SDL_InsertGPUDebugLabel(SDL_GPUCommandBuffer * command_buffer, char const * text)} */
-    public static void SDL_InsertGPUDebugLabel(@NativeType("SDL_GPUCommandBuffer *") long command_buffer, @NativeType("char const *") @Nullable ByteBuffer text) {
+    public static void SDL_InsertGPUDebugLabel(@NativeType("SDL_GPUCommandBuffer *") long command_buffer, @NativeType("char const *") ByteBuffer text) {
         if (CHECKS) {
-            checkNT1Safe(text);
+            checkNT1(text);
         }
-        nSDL_InsertGPUDebugLabel(command_buffer, memAddressSafe(text));
+        nSDL_InsertGPUDebugLabel(command_buffer, memAddress(text));
     }
 
     /** {@code void SDL_InsertGPUDebugLabel(SDL_GPUCommandBuffer * command_buffer, char const * text)} */
-    public static void SDL_InsertGPUDebugLabel(@NativeType("SDL_GPUCommandBuffer *") long command_buffer, @NativeType("char const *") @Nullable CharSequence text) {
+    public static void SDL_InsertGPUDebugLabel(@NativeType("SDL_GPUCommandBuffer *") long command_buffer, @NativeType("char const *") CharSequence text) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nUTF8Safe(text, true);
-            long textEncoded = text == null ? NULL : stack.getPointerAddress();
+            stack.nUTF8(text, true);
+            long textEncoded = stack.getPointerAddress();
             nSDL_InsertGPUDebugLabel(command_buffer, textEncoded);
         } finally {
             stack.setPointer(stackPointer);
@@ -7004,19 +6919,19 @@ public class SDL {
     }
 
     /** {@code void SDL_PushGPUDebugGroup(SDL_GPUCommandBuffer * command_buffer, char const * name)} */
-    public static void SDL_PushGPUDebugGroup(@NativeType("SDL_GPUCommandBuffer *") long command_buffer, @NativeType("char const *") @Nullable ByteBuffer name) {
+    public static void SDL_PushGPUDebugGroup(@NativeType("SDL_GPUCommandBuffer *") long command_buffer, @NativeType("char const *") ByteBuffer name) {
         if (CHECKS) {
-            checkNT1Safe(name);
+            checkNT1(name);
         }
-        nSDL_PushGPUDebugGroup(command_buffer, memAddressSafe(name));
+        nSDL_PushGPUDebugGroup(command_buffer, memAddress(name));
     }
 
     /** {@code void SDL_PushGPUDebugGroup(SDL_GPUCommandBuffer * command_buffer, char const * name)} */
-    public static void SDL_PushGPUDebugGroup(@NativeType("SDL_GPUCommandBuffer *") long command_buffer, @NativeType("char const *") @Nullable CharSequence name) {
+    public static void SDL_PushGPUDebugGroup(@NativeType("SDL_GPUCommandBuffer *") long command_buffer, @NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nUTF8Safe(name, true);
-            long nameEncoded = name == null ? NULL : stack.getPointerAddress();
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
             nSDL_PushGPUDebugGroup(command_buffer, nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
@@ -7276,17 +7191,14 @@ public class SDL {
         if (CHECKS) {
             check(command_buffer);
             if (color_target_infos != NULL) { Struct.validate(color_target_infos, num_color_targets, SDL_GPUColorTargetInfo.SIZEOF, SDL_GPUColorTargetInfo::validate); }
-            if (depth_stencil_target_info != NULL) { Struct.validate(depth_stencil_target_info, 1, SDL_GPUDepthStencilTargetInfo.SIZEOF, SDL_GPUDepthStencilTargetInfo::validate); }
+            if (depth_stencil_target_info != NULL) { SDL_GPUDepthStencilTargetInfo.validate(depth_stencil_target_info); }
         }
         return invokePPPP(command_buffer, color_target_infos, num_color_targets, depth_stencil_target_info, __functionAddress);
     }
 
     /** {@code SDL_GPURenderPass * SDL_BeginGPURenderPass(SDL_GPUCommandBuffer * command_buffer, SDL_GPUColorTargetInfo const * color_target_infos, Uint32 num_color_targets, SDL_GPUDepthStencilTargetInfo const * depth_stencil_target_info)} */
     @NativeType("SDL_GPURenderPass *")
-    public static long SDL_BeginGPURenderPass(@NativeType("SDL_GPUCommandBuffer *") long command_buffer, @NativeType("SDL_GPUColorTargetInfo const *") SDL_GPUColorTargetInfo.@Nullable Buffer color_target_infos, @NativeType("SDL_GPUDepthStencilTargetInfo const *") SDL_GPUDepthStencilTargetInfo.@Nullable Buffer depth_stencil_target_info) {
-        if (CHECKS) {
-            checkSafe(depth_stencil_target_info, 1);
-        }
+    public static long SDL_BeginGPURenderPass(@NativeType("SDL_GPUCommandBuffer *") long command_buffer, @NativeType("SDL_GPUColorTargetInfo const *") SDL_GPUColorTargetInfo.@Nullable Buffer color_target_infos, @NativeType("SDL_GPUDepthStencilTargetInfo const *") @Nullable SDL_GPUDepthStencilTargetInfo depth_stencil_target_info) {
         return nSDL_BeginGPURenderPass(command_buffer, memAddressSafe(color_target_infos), remainingSafe(color_target_infos), memAddressSafe(depth_stencil_target_info));
     }
 
@@ -7314,10 +7226,7 @@ public class SDL {
     }
 
     /** {@code void SDL_SetGPUViewport(SDL_GPURenderPass * render_pass, SDL_GPUViewport const * viewport)} */
-    public static void SDL_SetGPUViewport(@NativeType("SDL_GPURenderPass *") long render_pass, @NativeType("SDL_GPUViewport const *") SDL_GPUViewport.Buffer viewport) {
-        if (CHECKS) {
-            check(viewport, 1);
-        }
+    public static void SDL_SetGPUViewport(@NativeType("SDL_GPURenderPass *") long render_pass, @NativeType("SDL_GPUViewport const *") SDL_GPUViewport viewport) {
         nSDL_SetGPUViewport(render_pass, viewport.address());
     }
 
@@ -7333,10 +7242,7 @@ public class SDL {
     }
 
     /** {@code void SDL_SetGPUScissor(SDL_GPURenderPass * render_pass, SDL_Rect const * scissor)} */
-    public static void SDL_SetGPUScissor(@NativeType("SDL_GPURenderPass *") long render_pass, @NativeType("SDL_Rect const *") SDL_Rect.Buffer scissor) {
-        if (CHECKS) {
-            check(scissor, 1);
-        }
+    public static void SDL_SetGPUScissor(@NativeType("SDL_GPURenderPass *") long render_pass, @NativeType("SDL_Rect const *") SDL_Rect scissor) {
         nSDL_SetGPUScissor(render_pass, scissor.address());
     }
 
@@ -7388,14 +7294,14 @@ public class SDL {
         long __functionAddress = Functions.BindGPUVertexBuffers;
         if (CHECKS) {
             check(render_pass);
-            Struct.validate(bindings, num_bindings, SDL_GPUBufferBinding.SIZEOF, SDL_GPUBufferBinding::validate);
+            if (bindings != NULL) { Struct.validate(bindings, num_bindings, SDL_GPUBufferBinding.SIZEOF, SDL_GPUBufferBinding::validate); }
         }
         invokePPV(render_pass, first_slot, bindings, num_bindings, __functionAddress);
     }
 
     /** {@code void SDL_BindGPUVertexBuffers(SDL_GPURenderPass * render_pass, Uint32 first_slot, SDL_GPUBufferBinding const * bindings, Uint32 num_bindings)} */
-    public static void SDL_BindGPUVertexBuffers(@NativeType("SDL_GPURenderPass *") long render_pass, @NativeType("Uint32") int first_slot, @NativeType("SDL_GPUBufferBinding const *") SDL_GPUBufferBinding.Buffer bindings) {
-        nSDL_BindGPUVertexBuffers(render_pass, first_slot, bindings.address(), bindings.remaining());
+    public static void SDL_BindGPUVertexBuffers(@NativeType("SDL_GPURenderPass *") long render_pass, @NativeType("Uint32") int first_slot, @NativeType("SDL_GPUBufferBinding const *") SDL_GPUBufferBinding.@Nullable Buffer bindings) {
+        nSDL_BindGPUVertexBuffers(render_pass, first_slot, memAddressSafe(bindings), remainingSafe(bindings));
     }
 
     // --- [ SDL_BindGPUIndexBuffer ] ---
@@ -7405,16 +7311,13 @@ public class SDL {
         long __functionAddress = Functions.BindGPUIndexBuffer;
         if (CHECKS) {
             check(render_pass);
-            Struct.validate(binding, 1, SDL_GPUBufferBinding.SIZEOF, SDL_GPUBufferBinding::validate);
+            SDL_GPUBufferBinding.validate(binding);
         }
         invokePPV(render_pass, binding, index_element_size, __functionAddress);
     }
 
     /** {@code void SDL_BindGPUIndexBuffer(SDL_GPURenderPass * render_pass, SDL_GPUBufferBinding const * binding, SDL_GPUIndexElementSize index_element_size)} */
-    public static void SDL_BindGPUIndexBuffer(@NativeType("SDL_GPURenderPass *") long render_pass, @NativeType("SDL_GPUBufferBinding const *") SDL_GPUBufferBinding.Buffer binding, @NativeType("SDL_GPUIndexElementSize") int index_element_size) {
-        if (CHECKS) {
-            check(binding, 1);
-        }
+    public static void SDL_BindGPUIndexBuffer(@NativeType("SDL_GPURenderPass *") long render_pass, @NativeType("SDL_GPUBufferBinding const *") SDL_GPUBufferBinding binding, @NativeType("SDL_GPUIndexElementSize") int index_element_size) {
         nSDL_BindGPUIndexBuffer(render_pass, binding.address(), index_element_size);
     }
 
@@ -7425,14 +7328,14 @@ public class SDL {
         long __functionAddress = Functions.BindGPUVertexSamplers;
         if (CHECKS) {
             check(render_pass);
-            Struct.validate(texture_sampler_bindings, num_bindings, SDL_GPUTextureSamplerBinding.SIZEOF, SDL_GPUTextureSamplerBinding::validate);
+            if (texture_sampler_bindings != NULL) { Struct.validate(texture_sampler_bindings, num_bindings, SDL_GPUTextureSamplerBinding.SIZEOF, SDL_GPUTextureSamplerBinding::validate); }
         }
         invokePPV(render_pass, first_slot, texture_sampler_bindings, num_bindings, __functionAddress);
     }
 
     /** {@code void SDL_BindGPUVertexSamplers(SDL_GPURenderPass * render_pass, Uint32 first_slot, SDL_GPUTextureSamplerBinding const * texture_sampler_bindings, Uint32 num_bindings)} */
-    public static void SDL_BindGPUVertexSamplers(@NativeType("SDL_GPURenderPass *") long render_pass, @NativeType("Uint32") int first_slot, @NativeType("SDL_GPUTextureSamplerBinding const *") SDL_GPUTextureSamplerBinding.Buffer texture_sampler_bindings) {
-        nSDL_BindGPUVertexSamplers(render_pass, first_slot, texture_sampler_bindings.address(), texture_sampler_bindings.remaining());
+    public static void SDL_BindGPUVertexSamplers(@NativeType("SDL_GPURenderPass *") long render_pass, @NativeType("Uint32") int first_slot, @NativeType("SDL_GPUTextureSamplerBinding const *") SDL_GPUTextureSamplerBinding.@Nullable Buffer texture_sampler_bindings) {
+        nSDL_BindGPUVertexSamplers(render_pass, first_slot, memAddressSafe(texture_sampler_bindings), remainingSafe(texture_sampler_bindings));
     }
 
     // --- [ SDL_BindGPUVertexStorageTextures ] ---
@@ -7447,8 +7350,8 @@ public class SDL {
     }
 
     /** {@code void SDL_BindGPUVertexStorageTextures(SDL_GPURenderPass * render_pass, Uint32 first_slot, SDL_GPUTexture * const * storage_textures, Uint32 num_bindings)} */
-    public static void SDL_BindGPUVertexStorageTextures(@NativeType("SDL_GPURenderPass *") long render_pass, @NativeType("Uint32") int first_slot, @NativeType("SDL_GPUTexture * const *") PointerBuffer storage_textures) {
-        nSDL_BindGPUVertexStorageTextures(render_pass, first_slot, memAddress(storage_textures), storage_textures.remaining());
+    public static void SDL_BindGPUVertexStorageTextures(@NativeType("SDL_GPURenderPass *") long render_pass, @NativeType("Uint32") int first_slot, @NativeType("SDL_GPUTexture * const *") @Nullable PointerBuffer storage_textures) {
+        nSDL_BindGPUVertexStorageTextures(render_pass, first_slot, memAddressSafe(storage_textures), remainingSafe(storage_textures));
     }
 
     // --- [ SDL_BindGPUVertexStorageBuffers ] ---
@@ -7463,8 +7366,8 @@ public class SDL {
     }
 
     /** {@code void SDL_BindGPUVertexStorageBuffers(SDL_GPURenderPass * render_pass, Uint32 first_slot, SDL_GPUBuffer * const * storage_buffers, Uint32 num_bindings)} */
-    public static void SDL_BindGPUVertexStorageBuffers(@NativeType("SDL_GPURenderPass *") long render_pass, @NativeType("Uint32") int first_slot, @NativeType("SDL_GPUBuffer * const *") PointerBuffer storage_buffers) {
-        nSDL_BindGPUVertexStorageBuffers(render_pass, first_slot, memAddress(storage_buffers), storage_buffers.remaining());
+    public static void SDL_BindGPUVertexStorageBuffers(@NativeType("SDL_GPURenderPass *") long render_pass, @NativeType("Uint32") int first_slot, @NativeType("SDL_GPUBuffer * const *") @Nullable PointerBuffer storage_buffers) {
+        nSDL_BindGPUVertexStorageBuffers(render_pass, first_slot, memAddressSafe(storage_buffers), remainingSafe(storage_buffers));
     }
 
     // --- [ SDL_BindGPUFragmentSamplers ] ---
@@ -7474,14 +7377,14 @@ public class SDL {
         long __functionAddress = Functions.BindGPUFragmentSamplers;
         if (CHECKS) {
             check(render_pass);
-            Struct.validate(texture_sampler_bindings, num_bindings, SDL_GPUTextureSamplerBinding.SIZEOF, SDL_GPUTextureSamplerBinding::validate);
+            if (texture_sampler_bindings != NULL) { Struct.validate(texture_sampler_bindings, num_bindings, SDL_GPUTextureSamplerBinding.SIZEOF, SDL_GPUTextureSamplerBinding::validate); }
         }
         invokePPV(render_pass, first_slot, texture_sampler_bindings, num_bindings, __functionAddress);
     }
 
     /** {@code void SDL_BindGPUFragmentSamplers(SDL_GPURenderPass * render_pass, Uint32 first_slot, SDL_GPUTextureSamplerBinding const * texture_sampler_bindings, Uint32 num_bindings)} */
-    public static void SDL_BindGPUFragmentSamplers(@NativeType("SDL_GPURenderPass *") long render_pass, @NativeType("Uint32") int first_slot, @NativeType("SDL_GPUTextureSamplerBinding const *") SDL_GPUTextureSamplerBinding.Buffer texture_sampler_bindings) {
-        nSDL_BindGPUFragmentSamplers(render_pass, first_slot, texture_sampler_bindings.address(), texture_sampler_bindings.remaining());
+    public static void SDL_BindGPUFragmentSamplers(@NativeType("SDL_GPURenderPass *") long render_pass, @NativeType("Uint32") int first_slot, @NativeType("SDL_GPUTextureSamplerBinding const *") SDL_GPUTextureSamplerBinding.@Nullable Buffer texture_sampler_bindings) {
+        nSDL_BindGPUFragmentSamplers(render_pass, first_slot, memAddressSafe(texture_sampler_bindings), remainingSafe(texture_sampler_bindings));
     }
 
     // --- [ SDL_BindGPUFragmentStorageTextures ] ---
@@ -7496,8 +7399,8 @@ public class SDL {
     }
 
     /** {@code void SDL_BindGPUFragmentStorageTextures(SDL_GPURenderPass * render_pass, Uint32 first_slot, SDL_GPUTexture * const * storage_textures, Uint32 num_bindings)} */
-    public static void SDL_BindGPUFragmentStorageTextures(@NativeType("SDL_GPURenderPass *") long render_pass, @NativeType("Uint32") int first_slot, @NativeType("SDL_GPUTexture * const *") PointerBuffer storage_textures) {
-        nSDL_BindGPUFragmentStorageTextures(render_pass, first_slot, memAddress(storage_textures), storage_textures.remaining());
+    public static void SDL_BindGPUFragmentStorageTextures(@NativeType("SDL_GPURenderPass *") long render_pass, @NativeType("Uint32") int first_slot, @NativeType("SDL_GPUTexture * const *") @Nullable PointerBuffer storage_textures) {
+        nSDL_BindGPUFragmentStorageTextures(render_pass, first_slot, memAddressSafe(storage_textures), remainingSafe(storage_textures));
     }
 
     // --- [ SDL_BindGPUFragmentStorageBuffers ] ---
@@ -7512,8 +7415,8 @@ public class SDL {
     }
 
     /** {@code void SDL_BindGPUFragmentStorageBuffers(SDL_GPURenderPass * render_pass, Uint32 first_slot, SDL_GPUBuffer * const * storage_buffers, Uint32 num_bindings)} */
-    public static void SDL_BindGPUFragmentStorageBuffers(@NativeType("SDL_GPURenderPass *") long render_pass, @NativeType("Uint32") int first_slot, @NativeType("SDL_GPUBuffer * const *") PointerBuffer storage_buffers) {
-        nSDL_BindGPUFragmentStorageBuffers(render_pass, first_slot, memAddress(storage_buffers), storage_buffers.remaining());
+    public static void SDL_BindGPUFragmentStorageBuffers(@NativeType("SDL_GPURenderPass *") long render_pass, @NativeType("Uint32") int first_slot, @NativeType("SDL_GPUBuffer * const *") @Nullable PointerBuffer storage_buffers) {
+        nSDL_BindGPUFragmentStorageBuffers(render_pass, first_slot, memAddressSafe(storage_buffers), remainingSafe(storage_buffers));
     }
 
     // --- [ SDL_DrawGPUIndexedPrimitives ] ---
@@ -7580,16 +7483,16 @@ public class SDL {
         long __functionAddress = Functions.BeginGPUComputePass;
         if (CHECKS) {
             check(command_buffer);
-            Struct.validate(storage_texture_bindings, num_storage_texture_bindings, SDL_GPUStorageTextureReadWriteBinding.SIZEOF, SDL_GPUStorageTextureReadWriteBinding::validate);
-            Struct.validate(storage_buffer_bindings, num_storage_buffer_bindings, SDL_GPUStorageBufferReadWriteBinding.SIZEOF, SDL_GPUStorageBufferReadWriteBinding::validate);
+            if (storage_texture_bindings != NULL) { Struct.validate(storage_texture_bindings, num_storage_texture_bindings, SDL_GPUStorageTextureReadWriteBinding.SIZEOF, SDL_GPUStorageTextureReadWriteBinding::validate); }
+            if (storage_buffer_bindings != NULL) { Struct.validate(storage_buffer_bindings, num_storage_buffer_bindings, SDL_GPUStorageBufferReadWriteBinding.SIZEOF, SDL_GPUStorageBufferReadWriteBinding::validate); }
         }
         return invokePPPP(command_buffer, storage_texture_bindings, num_storage_texture_bindings, storage_buffer_bindings, num_storage_buffer_bindings, __functionAddress);
     }
 
     /** {@code SDL_GPUComputePass * SDL_BeginGPUComputePass(SDL_GPUCommandBuffer * command_buffer, SDL_GPUStorageTextureReadWriteBinding const * storage_texture_bindings, Uint32 num_storage_texture_bindings, SDL_GPUStorageBufferReadWriteBinding const * storage_buffer_bindings, Uint32 num_storage_buffer_bindings)} */
     @NativeType("SDL_GPUComputePass *")
-    public static long SDL_BeginGPUComputePass(@NativeType("SDL_GPUCommandBuffer *") long command_buffer, @NativeType("SDL_GPUStorageTextureReadWriteBinding const *") SDL_GPUStorageTextureReadWriteBinding.Buffer storage_texture_bindings, @NativeType("SDL_GPUStorageBufferReadWriteBinding const *") SDL_GPUStorageBufferReadWriteBinding.Buffer storage_buffer_bindings) {
-        return nSDL_BeginGPUComputePass(command_buffer, storage_texture_bindings.address(), storage_texture_bindings.remaining(), storage_buffer_bindings.address(), storage_buffer_bindings.remaining());
+    public static long SDL_BeginGPUComputePass(@NativeType("SDL_GPUCommandBuffer *") long command_buffer, @NativeType("SDL_GPUStorageTextureReadWriteBinding const *") SDL_GPUStorageTextureReadWriteBinding.@Nullable Buffer storage_texture_bindings, @NativeType("SDL_GPUStorageBufferReadWriteBinding const *") SDL_GPUStorageBufferReadWriteBinding.@Nullable Buffer storage_buffer_bindings) {
+        return nSDL_BeginGPUComputePass(command_buffer, memAddressSafe(storage_texture_bindings), remainingSafe(storage_texture_bindings), memAddressSafe(storage_buffer_bindings), remainingSafe(storage_buffer_bindings));
     }
 
     // --- [ SDL_BindGPUComputePipeline ] ---
@@ -7611,14 +7514,14 @@ public class SDL {
         long __functionAddress = Functions.BindGPUComputeSamplers;
         if (CHECKS) {
             check(compute_pass);
-            Struct.validate(texture_sampler_bindings, num_bindings, SDL_GPUTextureSamplerBinding.SIZEOF, SDL_GPUTextureSamplerBinding::validate);
+            if (texture_sampler_bindings != NULL) { Struct.validate(texture_sampler_bindings, num_bindings, SDL_GPUTextureSamplerBinding.SIZEOF, SDL_GPUTextureSamplerBinding::validate); }
         }
         invokePPV(compute_pass, first_slot, texture_sampler_bindings, num_bindings, __functionAddress);
     }
 
     /** {@code void SDL_BindGPUComputeSamplers(SDL_GPUComputePass * compute_pass, Uint32 first_slot, SDL_GPUTextureSamplerBinding const * texture_sampler_bindings, Uint32 num_bindings)} */
-    public static void SDL_BindGPUComputeSamplers(@NativeType("SDL_GPUComputePass *") long compute_pass, @NativeType("Uint32") int first_slot, @NativeType("SDL_GPUTextureSamplerBinding const *") SDL_GPUTextureSamplerBinding.Buffer texture_sampler_bindings) {
-        nSDL_BindGPUComputeSamplers(compute_pass, first_slot, texture_sampler_bindings.address(), texture_sampler_bindings.remaining());
+    public static void SDL_BindGPUComputeSamplers(@NativeType("SDL_GPUComputePass *") long compute_pass, @NativeType("Uint32") int first_slot, @NativeType("SDL_GPUTextureSamplerBinding const *") SDL_GPUTextureSamplerBinding.@Nullable Buffer texture_sampler_bindings) {
+        nSDL_BindGPUComputeSamplers(compute_pass, first_slot, memAddressSafe(texture_sampler_bindings), remainingSafe(texture_sampler_bindings));
     }
 
     // --- [ SDL_BindGPUComputeStorageTextures ] ---
@@ -7633,8 +7536,8 @@ public class SDL {
     }
 
     /** {@code void SDL_BindGPUComputeStorageTextures(SDL_GPUComputePass * compute_pass, Uint32 first_slot, SDL_GPUTexture * const * storage_textures, Uint32 num_bindings)} */
-    public static void SDL_BindGPUComputeStorageTextures(@NativeType("SDL_GPUComputePass *") long compute_pass, @NativeType("Uint32") int first_slot, @NativeType("SDL_GPUTexture * const *") PointerBuffer storage_textures) {
-        nSDL_BindGPUComputeStorageTextures(compute_pass, first_slot, memAddress(storage_textures), storage_textures.remaining());
+    public static void SDL_BindGPUComputeStorageTextures(@NativeType("SDL_GPUComputePass *") long compute_pass, @NativeType("Uint32") int first_slot, @NativeType("SDL_GPUTexture * const *") @Nullable PointerBuffer storage_textures) {
+        nSDL_BindGPUComputeStorageTextures(compute_pass, first_slot, memAddressSafe(storage_textures), remainingSafe(storage_textures));
     }
 
     // --- [ SDL_BindGPUComputeStorageBuffers ] ---
@@ -7649,8 +7552,8 @@ public class SDL {
     }
 
     /** {@code void SDL_BindGPUComputeStorageBuffers(SDL_GPUComputePass * compute_pass, Uint32 first_slot, SDL_GPUBuffer * const * storage_buffers, Uint32 num_bindings)} */
-    public static void SDL_BindGPUComputeStorageBuffers(@NativeType("SDL_GPUComputePass *") long compute_pass, @NativeType("Uint32") int first_slot, @NativeType("SDL_GPUBuffer * const *") PointerBuffer storage_buffers) {
-        nSDL_BindGPUComputeStorageBuffers(compute_pass, first_slot, memAddress(storage_buffers), storage_buffers.remaining());
+    public static void SDL_BindGPUComputeStorageBuffers(@NativeType("SDL_GPUComputePass *") long compute_pass, @NativeType("Uint32") int first_slot, @NativeType("SDL_GPUBuffer * const *") @Nullable PointerBuffer storage_buffers) {
+        nSDL_BindGPUComputeStorageBuffers(compute_pass, first_slot, memAddressSafe(storage_buffers), remainingSafe(storage_buffers));
     }
 
     // --- [ SDL_DispatchGPUCompute ] ---
@@ -7737,18 +7640,14 @@ public class SDL {
         long __functionAddress = Functions.UploadToGPUTexture;
         if (CHECKS) {
             check(copy_pass);
-            Struct.validate(source, 1, SDL_GPUTextureTransferInfo.SIZEOF, SDL_GPUTextureTransferInfo::validate);
-            Struct.validate(destination, 1, SDL_GPUTextureRegion.SIZEOF, SDL_GPUTextureRegion::validate);
+            SDL_GPUTextureTransferInfo.validate(source);
+            SDL_GPUTextureRegion.validate(destination);
         }
         invokePPPV(copy_pass, source, destination, cycle, __functionAddress);
     }
 
     /** {@code void SDL_UploadToGPUTexture(SDL_GPUCopyPass * copy_pass, SDL_GPUTextureTransferInfo const * source, SDL_GPUTextureRegion const * destination, bool cycle)} */
-    public static void SDL_UploadToGPUTexture(@NativeType("SDL_GPUCopyPass *") long copy_pass, @NativeType("SDL_GPUTextureTransferInfo const *") SDL_GPUTextureTransferInfo.Buffer source, @NativeType("SDL_GPUTextureRegion const *") SDL_GPUTextureRegion.Buffer destination, @NativeType("bool") boolean cycle) {
-        if (CHECKS) {
-            check(source, 1);
-            check(destination, 1);
-        }
+    public static void SDL_UploadToGPUTexture(@NativeType("SDL_GPUCopyPass *") long copy_pass, @NativeType("SDL_GPUTextureTransferInfo const *") SDL_GPUTextureTransferInfo source, @NativeType("SDL_GPUTextureRegion const *") SDL_GPUTextureRegion destination, @NativeType("bool") boolean cycle) {
         nSDL_UploadToGPUTexture(copy_pass, source.address(), destination.address(), cycle);
     }
 
@@ -7759,18 +7658,14 @@ public class SDL {
         long __functionAddress = Functions.UploadToGPUBuffer;
         if (CHECKS) {
             check(copy_pass);
-            Struct.validate(source, 1, SDL_GPUTransferBufferLocation.SIZEOF, SDL_GPUTransferBufferLocation::validate);
-            Struct.validate(destination, 1, SDL_GPUBufferRegion.SIZEOF, SDL_GPUBufferRegion::validate);
+            SDL_GPUTransferBufferLocation.validate(source);
+            SDL_GPUBufferRegion.validate(destination);
         }
         invokePPPV(copy_pass, source, destination, cycle, __functionAddress);
     }
 
     /** {@code void SDL_UploadToGPUBuffer(SDL_GPUCopyPass * copy_pass, SDL_GPUTransferBufferLocation const * source, SDL_GPUBufferRegion const * destination, bool cycle)} */
-    public static void SDL_UploadToGPUBuffer(@NativeType("SDL_GPUCopyPass *") long copy_pass, @NativeType("SDL_GPUTransferBufferLocation const *") SDL_GPUTransferBufferLocation.Buffer source, @NativeType("SDL_GPUBufferRegion const *") SDL_GPUBufferRegion.Buffer destination, @NativeType("bool") boolean cycle) {
-        if (CHECKS) {
-            check(source, 1);
-            check(destination, 1);
-        }
+    public static void SDL_UploadToGPUBuffer(@NativeType("SDL_GPUCopyPass *") long copy_pass, @NativeType("SDL_GPUTransferBufferLocation const *") SDL_GPUTransferBufferLocation source, @NativeType("SDL_GPUBufferRegion const *") SDL_GPUBufferRegion destination, @NativeType("bool") boolean cycle) {
         nSDL_UploadToGPUBuffer(copy_pass, source.address(), destination.address(), cycle);
     }
 
@@ -7781,18 +7676,14 @@ public class SDL {
         long __functionAddress = Functions.CopyGPUTextureToTexture;
         if (CHECKS) {
             check(copy_pass);
-            Struct.validate(source, 1, SDL_GPUTextureLocation.SIZEOF, SDL_GPUTextureLocation::validate);
-            Struct.validate(destination, 1, SDL_GPUTextureLocation.SIZEOF, SDL_GPUTextureLocation::validate);
+            SDL_GPUTextureLocation.validate(source);
+            SDL_GPUTextureLocation.validate(destination);
         }
         invokePPPV(copy_pass, source, destination, w, h, d, cycle, __functionAddress);
     }
 
     /** {@code void SDL_CopyGPUTextureToTexture(SDL_GPUCopyPass * copy_pass, SDL_GPUTextureLocation const * source, SDL_GPUTextureLocation const * destination, Uint32 w, Uint32 h, Uint32 d, bool cycle)} */
-    public static void SDL_CopyGPUTextureToTexture(@NativeType("SDL_GPUCopyPass *") long copy_pass, @NativeType("SDL_GPUTextureLocation const *") SDL_GPUTextureLocation.Buffer source, @NativeType("SDL_GPUTextureLocation const *") SDL_GPUTextureLocation.Buffer destination, @NativeType("Uint32") int w, @NativeType("Uint32") int h, @NativeType("Uint32") int d, @NativeType("bool") boolean cycle) {
-        if (CHECKS) {
-            check(source, 1);
-            check(destination, 1);
-        }
+    public static void SDL_CopyGPUTextureToTexture(@NativeType("SDL_GPUCopyPass *") long copy_pass, @NativeType("SDL_GPUTextureLocation const *") SDL_GPUTextureLocation source, @NativeType("SDL_GPUTextureLocation const *") SDL_GPUTextureLocation destination, @NativeType("Uint32") int w, @NativeType("Uint32") int h, @NativeType("Uint32") int d, @NativeType("bool") boolean cycle) {
         nSDL_CopyGPUTextureToTexture(copy_pass, source.address(), destination.address(), w, h, d, cycle);
     }
 
@@ -7803,18 +7694,14 @@ public class SDL {
         long __functionAddress = Functions.CopyGPUBufferToBuffer;
         if (CHECKS) {
             check(copy_pass);
-            Struct.validate(source, 1, SDL_GPUBufferLocation.SIZEOF, SDL_GPUBufferLocation::validate);
-            Struct.validate(destination, 1, SDL_GPUBufferLocation.SIZEOF, SDL_GPUBufferLocation::validate);
+            SDL_GPUBufferLocation.validate(source);
+            SDL_GPUBufferLocation.validate(destination);
         }
         invokePPPV(copy_pass, source, destination, size, cycle, __functionAddress);
     }
 
     /** {@code void SDL_CopyGPUBufferToBuffer(SDL_GPUCopyPass * copy_pass, SDL_GPUBufferLocation const * source, SDL_GPUBufferLocation const * destination, Uint32 size, bool cycle)} */
-    public static void SDL_CopyGPUBufferToBuffer(@NativeType("SDL_GPUCopyPass *") long copy_pass, @NativeType("SDL_GPUBufferLocation const *") SDL_GPUBufferLocation.Buffer source, @NativeType("SDL_GPUBufferLocation const *") SDL_GPUBufferLocation.Buffer destination, @NativeType("Uint32") int size, @NativeType("bool") boolean cycle) {
-        if (CHECKS) {
-            check(source, 1);
-            check(destination, 1);
-        }
+    public static void SDL_CopyGPUBufferToBuffer(@NativeType("SDL_GPUCopyPass *") long copy_pass, @NativeType("SDL_GPUBufferLocation const *") SDL_GPUBufferLocation source, @NativeType("SDL_GPUBufferLocation const *") SDL_GPUBufferLocation destination, @NativeType("Uint32") int size, @NativeType("bool") boolean cycle) {
         nSDL_CopyGPUBufferToBuffer(copy_pass, source.address(), destination.address(), size, cycle);
     }
 
@@ -7825,18 +7712,14 @@ public class SDL {
         long __functionAddress = Functions.DownloadFromGPUTexture;
         if (CHECKS) {
             check(copy_pass);
-            Struct.validate(source, 1, SDL_GPUTextureRegion.SIZEOF, SDL_GPUTextureRegion::validate);
-            Struct.validate(destination, 1, SDL_GPUTextureTransferInfo.SIZEOF, SDL_GPUTextureTransferInfo::validate);
+            SDL_GPUTextureRegion.validate(source);
+            SDL_GPUTextureTransferInfo.validate(destination);
         }
         invokePPPV(copy_pass, source, destination, __functionAddress);
     }
 
     /** {@code void SDL_DownloadFromGPUTexture(SDL_GPUCopyPass * copy_pass, SDL_GPUTextureRegion const * source, SDL_GPUTextureTransferInfo const * destination)} */
-    public static void SDL_DownloadFromGPUTexture(@NativeType("SDL_GPUCopyPass *") long copy_pass, @NativeType("SDL_GPUTextureRegion const *") SDL_GPUTextureRegion.Buffer source, @NativeType("SDL_GPUTextureTransferInfo const *") SDL_GPUTextureTransferInfo.Buffer destination) {
-        if (CHECKS) {
-            check(source, 1);
-            check(destination, 1);
-        }
+    public static void SDL_DownloadFromGPUTexture(@NativeType("SDL_GPUCopyPass *") long copy_pass, @NativeType("SDL_GPUTextureRegion const *") SDL_GPUTextureRegion source, @NativeType("SDL_GPUTextureTransferInfo const *") SDL_GPUTextureTransferInfo destination) {
         nSDL_DownloadFromGPUTexture(copy_pass, source.address(), destination.address());
     }
 
@@ -7847,18 +7730,14 @@ public class SDL {
         long __functionAddress = Functions.DownloadFromGPUBuffer;
         if (CHECKS) {
             check(copy_pass);
-            Struct.validate(source, 1, SDL_GPUBufferRegion.SIZEOF, SDL_GPUBufferRegion::validate);
-            Struct.validate(destination, 1, SDL_GPUTransferBufferLocation.SIZEOF, SDL_GPUTransferBufferLocation::validate);
+            SDL_GPUBufferRegion.validate(source);
+            SDL_GPUTransferBufferLocation.validate(destination);
         }
         invokePPPV(copy_pass, source, destination, __functionAddress);
     }
 
     /** {@code void SDL_DownloadFromGPUBuffer(SDL_GPUCopyPass * copy_pass, SDL_GPUBufferRegion const * source, SDL_GPUTransferBufferLocation const * destination)} */
-    public static void SDL_DownloadFromGPUBuffer(@NativeType("SDL_GPUCopyPass *") long copy_pass, @NativeType("SDL_GPUBufferRegion const *") SDL_GPUBufferRegion.Buffer source, @NativeType("SDL_GPUTransferBufferLocation const *") SDL_GPUTransferBufferLocation.Buffer destination) {
-        if (CHECKS) {
-            check(source, 1);
-            check(destination, 1);
-        }
+    public static void SDL_DownloadFromGPUBuffer(@NativeType("SDL_GPUCopyPass *") long copy_pass, @NativeType("SDL_GPUBufferRegion const *") SDL_GPUBufferRegion source, @NativeType("SDL_GPUTransferBufferLocation const *") SDL_GPUTransferBufferLocation destination) {
         nSDL_DownloadFromGPUBuffer(copy_pass, source.address(), destination.address());
     }
 
@@ -7892,16 +7771,13 @@ public class SDL {
         long __functionAddress = Functions.BlitGPUTexture;
         if (CHECKS) {
             check(command_buffer);
-            Struct.validate(info, 1, SDL_GPUBlitInfo.SIZEOF, SDL_GPUBlitInfo::validate);
+            SDL_GPUBlitInfo.validate(info);
         }
         invokePPV(command_buffer, info, __functionAddress);
     }
 
     /** {@code void SDL_BlitGPUTexture(SDL_GPUCommandBuffer * command_buffer, SDL_GPUBlitInfo const * info)} */
-    public static void SDL_BlitGPUTexture(@NativeType("SDL_GPUCommandBuffer *") long command_buffer, @NativeType("SDL_GPUBlitInfo const *") SDL_GPUBlitInfo.Buffer info) {
-        if (CHECKS) {
-            check(info, 1);
-        }
+    public static void SDL_BlitGPUTexture(@NativeType("SDL_GPUCommandBuffer *") long command_buffer, @NativeType("SDL_GPUBlitInfo const *") SDL_GPUBlitInfo info) {
         nSDL_BlitGPUTexture(command_buffer, info.address());
     }
 
@@ -8114,8 +7990,8 @@ public class SDL {
 
     /** {@code bool SDL_WaitForGPUFences(SDL_GPUDevice * device, bool wait_all, SDL_GPUFence * const * fences, Uint32 num_fences)} */
     @NativeType("bool")
-    public static boolean SDL_WaitForGPUFences(@NativeType("SDL_GPUDevice *") long device, @NativeType("bool") boolean wait_all, @NativeType("SDL_GPUFence * const *") PointerBuffer fences) {
-        return nSDL_WaitForGPUFences(device, wait_all, memAddress(fences), fences.remaining());
+    public static boolean SDL_WaitForGPUFences(@NativeType("SDL_GPUDevice *") long device, @NativeType("bool") boolean wait_all, @NativeType("SDL_GPUFence * const *") @Nullable PointerBuffer fences) {
+        return nSDL_WaitForGPUFences(device, wait_all, memAddressSafe(fences), remainingSafe(fences));
     }
 
     // --- [ SDL_QueryGPUFence ] ---
@@ -11578,11 +11454,11 @@ public class SDL {
 
     /** {@code SDL_PowerState SDL_GetGamepadPowerInfo(SDL_Gamepad * gamepad, int * percent)} */
     @NativeType("SDL_PowerState")
-    public static int SDL_GetGamepadPowerInfo(@NativeType("SDL_Gamepad *") long gamepad, @NativeType("int *") IntBuffer percent) {
+    public static int SDL_GetGamepadPowerInfo(@NativeType("SDL_Gamepad *") long gamepad, @NativeType("int *") @Nullable IntBuffer percent) {
         if (CHECKS) {
-            check(percent, 1);
+            checkSafe(percent, 1);
         }
-        return nSDL_GetGamepadPowerInfo(gamepad, memAddress(percent));
+        return nSDL_GetGamepadPowerInfo(gamepad, memAddressSafe(percent));
     }
 
     // --- [ SDL_GamepadConnected ] ---

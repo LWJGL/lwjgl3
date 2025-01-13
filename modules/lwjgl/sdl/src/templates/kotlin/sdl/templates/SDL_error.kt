@@ -5,7 +5,6 @@
 package sdl.templates
 
 import org.lwjgl.generator.*
-import sdl.*
 
 fun SDL_error() = SDL.apply {
     bool(
@@ -21,21 +20,9 @@ fun SDL_error() = SDL.apply {
         va_list("ap")
     )
 
-    bool(
-        "OutOfMemory",
+    bool("OutOfMemory", void())
 
-        void()
-    )
+    charUTF8.const.p("GetError", void())
 
-    charUTF8.const.p(
-        "GetError",
-
-        void()
-    )
-
-    bool(
-        "ClearError",
-
-        void()
-    )
+    bool("ClearError", void())
 }

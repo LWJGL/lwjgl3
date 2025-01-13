@@ -336,15 +336,6 @@ public class SDL_GPUGraphicsPipelineCreateInfo extends Struct<SDL_GPUGraphicsPip
     /** Unsafe version of {@link #props(int) props}. */
     public static void nprops(long struct, int value) { memPutInt(struct + SDL_GPUGraphicsPipelineCreateInfo.PROPS, value); }
 
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        SDL_GPUGraphicsPipelineTargetInfo.validate(struct + SDL_GPUGraphicsPipelineCreateInfo.TARGET_INFO);
-    }
-
     // -----------------------------------
 
     /** An array of {@link SDL_GPUGraphicsPipelineCreateInfo} structs. */

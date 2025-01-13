@@ -161,12 +161,6 @@ public class SDL_GPUSamplerCreateInfo extends Struct<SDL_GPUSamplerCreateInfo> i
     /** @return the value of the {@code enable_compare} field. */
     @NativeType("bool")
     public boolean enable_compare() { return nenable_compare(address()); }
-    /** @return the value of the {@code padding1} field. */
-    @NativeType("Uint8")
-    public byte padding1() { return npadding1(address()); }
-    /** @return the value of the {@code padding2} field. */
-    @NativeType("Uint8")
-    public byte padding2() { return npadding2(address()); }
     /** @return the value of the {@code props} field. */
     @NativeType("SDL_PropertiesID")
     public int props() { return nprops(address()); }
@@ -197,10 +191,6 @@ public class SDL_GPUSamplerCreateInfo extends Struct<SDL_GPUSamplerCreateInfo> i
     public SDL_GPUSamplerCreateInfo enable_anisotropy(@NativeType("bool") boolean value) { nenable_anisotropy(address(), value); return this; }
     /** Sets the specified value to the {@code enable_compare} field. */
     public SDL_GPUSamplerCreateInfo enable_compare(@NativeType("bool") boolean value) { nenable_compare(address(), value); return this; }
-    /** Sets the specified value to the {@code padding1} field. */
-    public SDL_GPUSamplerCreateInfo padding1(@NativeType("Uint8") byte value) { npadding1(address(), value); return this; }
-    /** Sets the specified value to the {@code padding2} field. */
-    public SDL_GPUSamplerCreateInfo padding2(@NativeType("Uint8") byte value) { npadding2(address(), value); return this; }
     /** Sets the specified value to the {@code props} field. */
     public SDL_GPUSamplerCreateInfo props(@NativeType("SDL_PropertiesID") int value) { nprops(address(), value); return this; }
 
@@ -219,8 +209,6 @@ public class SDL_GPUSamplerCreateInfo extends Struct<SDL_GPUSamplerCreateInfo> i
         float max_lod,
         boolean enable_anisotropy,
         boolean enable_compare,
-        byte padding1,
-        byte padding2,
         int props
     ) {
         min_filter(min_filter);
@@ -236,8 +224,6 @@ public class SDL_GPUSamplerCreateInfo extends Struct<SDL_GPUSamplerCreateInfo> i
         max_lod(max_lod);
         enable_anisotropy(enable_anisotropy);
         enable_compare(enable_compare);
-        padding1(padding1);
-        padding2(padding2);
         props(props);
 
         return this;
@@ -392,9 +378,7 @@ public class SDL_GPUSamplerCreateInfo extends Struct<SDL_GPUSamplerCreateInfo> i
     public static boolean nenable_anisotropy(long struct) { return memGetByte(struct + SDL_GPUSamplerCreateInfo.ENABLE_ANISOTROPY) != 0; }
     /** Unsafe version of {@link #enable_compare}. */
     public static boolean nenable_compare(long struct) { return memGetByte(struct + SDL_GPUSamplerCreateInfo.ENABLE_COMPARE) != 0; }
-    /** Unsafe version of {@link #padding1}. */
     public static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUSamplerCreateInfo.PADDING1); }
-    /** Unsafe version of {@link #padding2}. */
     public static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUSamplerCreateInfo.PADDING2); }
     /** Unsafe version of {@link #props}. */
     public static int nprops(long struct) { return memGetInt(struct + SDL_GPUSamplerCreateInfo.PROPS); }
@@ -425,9 +409,7 @@ public class SDL_GPUSamplerCreateInfo extends Struct<SDL_GPUSamplerCreateInfo> i
     public static void nenable_anisotropy(long struct, boolean value) { memPutByte(struct + SDL_GPUSamplerCreateInfo.ENABLE_ANISOTROPY, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #enable_compare(boolean) enable_compare}. */
     public static void nenable_compare(long struct, boolean value) { memPutByte(struct + SDL_GPUSamplerCreateInfo.ENABLE_COMPARE, value ? (byte)1 : (byte)0); }
-    /** Unsafe version of {@link #padding1(byte) padding1}. */
     public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUSamplerCreateInfo.PADDING1, value); }
-    /** Unsafe version of {@link #padding2(byte) padding2}. */
     public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUSamplerCreateInfo.PADDING2, value); }
     /** Unsafe version of {@link #props(int) props}. */
     public static void nprops(long struct, int value) { memPutInt(struct + SDL_GPUSamplerCreateInfo.PROPS, value); }
@@ -510,12 +492,6 @@ public class SDL_GPUSamplerCreateInfo extends Struct<SDL_GPUSamplerCreateInfo> i
         /** @return the value of the {@code enable_compare} field. */
         @NativeType("bool")
         public boolean enable_compare() { return SDL_GPUSamplerCreateInfo.nenable_compare(address()); }
-        /** @return the value of the {@code padding1} field. */
-        @NativeType("Uint8")
-        public byte padding1() { return SDL_GPUSamplerCreateInfo.npadding1(address()); }
-        /** @return the value of the {@code padding2} field. */
-        @NativeType("Uint8")
-        public byte padding2() { return SDL_GPUSamplerCreateInfo.npadding2(address()); }
         /** @return the value of the {@code props} field. */
         @NativeType("SDL_PropertiesID")
         public int props() { return SDL_GPUSamplerCreateInfo.nprops(address()); }
@@ -546,10 +522,6 @@ public class SDL_GPUSamplerCreateInfo extends Struct<SDL_GPUSamplerCreateInfo> i
         public SDL_GPUSamplerCreateInfo.Buffer enable_anisotropy(@NativeType("bool") boolean value) { SDL_GPUSamplerCreateInfo.nenable_anisotropy(address(), value); return this; }
         /** Sets the specified value to the {@code enable_compare} field. */
         public SDL_GPUSamplerCreateInfo.Buffer enable_compare(@NativeType("bool") boolean value) { SDL_GPUSamplerCreateInfo.nenable_compare(address(), value); return this; }
-        /** Sets the specified value to the {@code padding1} field. */
-        public SDL_GPUSamplerCreateInfo.Buffer padding1(@NativeType("Uint8") byte value) { SDL_GPUSamplerCreateInfo.npadding1(address(), value); return this; }
-        /** Sets the specified value to the {@code padding2} field. */
-        public SDL_GPUSamplerCreateInfo.Buffer padding2(@NativeType("Uint8") byte value) { SDL_GPUSamplerCreateInfo.npadding2(address(), value); return this; }
         /** Sets the specified value to the {@code props} field. */
         public SDL_GPUSamplerCreateInfo.Buffer props(@NativeType("SDL_PropertiesID") int value) { SDL_GPUSamplerCreateInfo.nprops(address(), value); return this; }
 

@@ -219,15 +219,16 @@ val SDL_SurfaceFlags = typedef(Uint32, "SDL_SurfaceFlags")
 val SDL_FlipMode = "SDL_FlipMode".enumType
 val SDL_ScaleMode = "SDL_ScaleMode".enumType
 
+// TODO: mutable?
 val SDL_Surface = struct(Module.SDL, "SDL_Surface") {
     SDL_SurfaceFlags("flags")
     SDL_PixelFormat("format")
     int("w")
     int("h")
     int("pitch")
-    nullable..Check("pitch*h")..void.p("pixels")
+    Check("pitch * h")..nullable..void.p("pixels")
     int("refcount")
-    nullable..opaque_p("reserved")
+    nullable..opaque_p("reserved").private()
 }
 
 // SDL_video.h (early definitions)
@@ -338,7 +339,7 @@ val SDL_ClipboardDataCallback = Module.SDL.callback {
 
         nullable..opaque_p("userdata"),
         charASCII.const.p("mime_type"),
-        size_t.p("size"),
+        Check(1)..size_t.p("size"),
 
         nativeType = "SDL_ClipboardDataCallback"
     )
@@ -436,7 +437,7 @@ val SDL_DialogFileCallback = Module.SDL.callback {
         "SDL_DialogFileCallback",
 
         nullable..opaque_p("userdata"),
-        charUTF8.const.p.const.p("filelist"),
+        nullable..charUTF8.const.p.const.p("filelist"),
         int("filter"),
 
         nativeType = "SDL_DialogFileCallback"
@@ -1331,8 +1332,8 @@ val SDL_GPUSamplerCreateInfo = struct(Module.SDL, "SDL_GPUSamplerCreateInfo") {
     float("max_lod")
     bool("enable_anisotropy")
     bool("enable_compare")
-    Uint8("padding1")
-    Uint8("padding2")
+    Uint8("padding1").private()
+    Uint8("padding2").private()
     SDL_PropertiesID("props")
 }
 
@@ -1374,8 +1375,8 @@ val SDL_GPUColorTargetBlendState = struct(Module.SDL, "SDL_GPUColorTargetBlendSt
     SDL_GPUColorComponentFlags("color_write_mask")
     bool("enable_blend")
     bool("enable_color_write_mask")
-    Uint8("padding1")
-    Uint8("padding2")
+    Uint8("padding1").private()
+    Uint8("padding2").private()
 }
 
 val SDL_GPUShaderCreateInfo = struct(Module.SDL, "SDL_GPUShaderCreateInfo") {
@@ -1424,17 +1425,17 @@ val SDL_GPURasterizerState = struct(Module.SDL, "SDL_GPURasterizerState") {
     float("depth_bias_slope_factor")
     bool("enable_depth_bias")
     bool("enable_depth_clip")
-    Uint8("padding1")
-    Uint8("padding2")
+    Uint8("padding1").private()
+    Uint8("padding2").private()
 }
 
 val SDL_GPUMultisampleState = struct(Module.SDL, "SDL_GPUMultisampleState") {
     SDL_GPUSampleCount("sample_count")
     Uint32("sample_mask")
     bool("enable_mask")
-    Uint8("padding1")
-    Uint8("padding2")
-    Uint8("padding3")
+    Uint8("padding1").private()
+    Uint8("padding2").private()
+    Uint8("padding3").private()
 }
 
 val SDL_GPUDepthStencilState = struct(Module.SDL, "SDL_GPUDepthStencilState") {
@@ -1446,9 +1447,9 @@ val SDL_GPUDepthStencilState = struct(Module.SDL, "SDL_GPUDepthStencilState") {
     bool("enable_depth_test")
     bool("enable_depth_write")
     bool("enable_stencil_test")
-    Uint8("padding1")
-    Uint8("padding2")
-    Uint8("padding3")
+    Uint8("padding1").private()
+    Uint8("padding2").private()
+    Uint8("padding3").private()
 }
 
 val SDL_GPUColorTargetDescription = struct(Module.SDL, "SDL_GPUColorTargetDescription") {
@@ -1457,13 +1458,13 @@ val SDL_GPUColorTargetDescription = struct(Module.SDL, "SDL_GPUColorTargetDescri
 }
 
 val SDL_GPUGraphicsPipelineTargetInfo = struct(Module.SDL, "SDL_GPUGraphicsPipelineTargetInfo") {
-    SDL_GPUColorTargetDescription.const.p("color_target_descriptions")
-    Uint32("num_color_targets")
+    nullable..SDL_GPUColorTargetDescription.const.p("color_target_descriptions")
+    AutoSize("color_target_descriptions")..Uint32("num_color_targets")
     SDL_GPUTextureFormat("depth_stencil_format")
     bool("has_depth_stencil_target")
-    Uint8("padding1")
-    Uint8("padding2")
-    Uint8("padding3")
+    Uint8("padding1").private()
+    Uint8("padding2").private()
+    Uint8("padding3").private()
 }
 
 val SDL_GPUGraphicsPipelineCreateInfo = struct(Module.SDL, "SDL_GPUGraphicsPipelineCreateInfo") {
@@ -1507,8 +1508,8 @@ val SDL_GPUColorTargetInfo = struct(Module.SDL, "SDL_GPUColorTargetInfo") {
     Uint32("resolve_layer")
     bool("cycle")
     bool("cycle_resolve_texture")
-    Uint8("padding1")
-    Uint8("padding2")
+    Uint8("padding1").private()
+    Uint8("padding2").private()
 }
 
 val SDL_GPUDepthStencilTargetInfo = struct(Module.SDL, "SDL_GPUDepthStencilTargetInfo") {
@@ -1520,8 +1521,8 @@ val SDL_GPUDepthStencilTargetInfo = struct(Module.SDL, "SDL_GPUDepthStencilTarge
     SDL_GPUStoreOp("stencil_store_op")
     bool("cycle")
     Uint8("clear_stencil")
-    Uint8("padding1")
-    Uint8("padding2")
+    Uint8("padding1").private()
+    Uint8("padding2").private()
 }
 
 val SDL_GPUBlitInfo = struct(Module.SDL, "SDL_GPUBlitInfo") {
@@ -1532,9 +1533,9 @@ val SDL_GPUBlitInfo = struct(Module.SDL, "SDL_GPUBlitInfo") {
     SDL_FlipMode("flip_mode")
     SDL_GPUFilter("filter")
     bool("cycle")
-    Uint8("padding1")
-    Uint8("padding2")
-    Uint8("padding3")
+    Uint8("padding1").private()
+    Uint8("padding2").private()
+    Uint8("padding3").private()
 }
 
 val SDL_GPUBufferBinding = struct(Module.SDL, "SDL_GPUBufferBinding") {
@@ -1550,9 +1551,9 @@ val SDL_GPUTextureSamplerBinding = struct(Module.SDL, "SDL_GPUTextureSamplerBind
 val SDL_GPUStorageBufferReadWriteBinding = struct(Module.SDL, "SDL_GPUStorageBufferReadWriteBinding") {
     SDL_GPUBuffer.p("buffer")
     bool("cycle")
-    Uint8("padding1")
-    Uint8("padding2")
-    Uint8("padding3")
+    Uint8("padding1").private()
+    Uint8("padding2").private()
+    Uint8("padding3").private()
 }
 
 val SDL_GPUStorageTextureReadWriteBinding = struct(Module.SDL, "SDL_GPUStorageTextureReadWriteBinding") {
@@ -1560,9 +1561,9 @@ val SDL_GPUStorageTextureReadWriteBinding = struct(Module.SDL, "SDL_GPUStorageTe
     Uint32("mip_level")
     Uint32("layer")
     bool("cycle")
-    Uint8("padding1")
-    Uint8("padding2")
-    Uint8("padding3")
+    Uint8("padding1").private()
+    Uint8("padding2").private()
+    Uint8("padding3").private()
 }
 
 // SDL_events.h (last, because it uses types from almost all other headers)
@@ -1999,7 +2000,7 @@ val SDL_EventFilter = Module.SDL.callback {
         "SDL_EventFilter",
 
         nullable..opaque_p("userdata"),
-        Check(1)..SDL_Event.p("event"),
+        SDL_Event.p("event"),
 
         nativeType = "SDL_EventFilter"
     )

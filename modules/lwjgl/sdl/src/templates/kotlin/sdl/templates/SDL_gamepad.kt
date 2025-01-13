@@ -9,11 +9,13 @@ import sdl.*
 
 // generate SDL_gamepad after SDL_joystick
 fun SDL_joystick_gamepad() = SDL.apply {
-    UnquotedStringConstant("PROP_GAMEPAD_CAP_MONO_LED_BOOLEAN".."SDL_PROP_JOYSTICK_CAP_MONO_LED_BOOLEAN")
-    UnquotedStringConstant("PROP_GAMEPAD_CAP_RGB_LED_BOOLEAN".."SDL_PROP_JOYSTICK_CAP_RGB_LED_BOOLEAN")
-    UnquotedStringConstant("PROP_GAMEPAD_CAP_PLAYER_LED_BOOLEAN".."SDL_PROP_JOYSTICK_CAP_PLAYER_LED_BOOLEAN")
-    UnquotedStringConstant("PROP_GAMEPAD_CAP_RUMBLE_BOOLEAN".."SDL_PROP_JOYSTICK_CAP_RUMBLE_BOOLEAN")
-    UnquotedStringConstant("PROP_GAMEPAD_CAP_TRIGGER_RUMBLE_BOOLEAN".."SDL_PROP_JOYSTICK_CAP_TRIGGER_RUMBLE_BOOLEAN")
+    UnquotedStringConstant(
+        "PROP_GAMEPAD_CAP_MONO_LED_BOOLEAN".."SDL_PROP_JOYSTICK_CAP_MONO_LED_BOOLEAN",
+        "PROP_GAMEPAD_CAP_RGB_LED_BOOLEAN".."SDL_PROP_JOYSTICK_CAP_RGB_LED_BOOLEAN",
+        "PROP_GAMEPAD_CAP_PLAYER_LED_BOOLEAN".."SDL_PROP_JOYSTICK_CAP_PLAYER_LED_BOOLEAN",
+        "PROP_GAMEPAD_CAP_RUMBLE_BOOLEAN".."SDL_PROP_JOYSTICK_CAP_RUMBLE_BOOLEAN",
+        "PROP_GAMEPAD_CAP_TRIGGER_RUMBLE_BOOLEAN".."SDL_PROP_JOYSTICK_CAP_TRIGGER_RUMBLE_BOOLEAN"
+    )
 
     EnumConstant(
         "GAMEPAD_TYPE_UNKNOWN".enum("0"),
@@ -110,11 +112,7 @@ fun SDL_joystick_gamepad() = SDL.apply {
         charUTF8.const.p("file")
     )
 
-    bool(
-        "ReloadGamepadMappings",
-
-        void()
-    )
+    bool("ReloadGamepadMappings", void())
 
     charUTF8.p.p(
         "GetGamepadMappings",
@@ -122,17 +120,8 @@ fun SDL_joystick_gamepad() = SDL.apply {
         AutoSizeResult..int.p("count")
     )
 
-    SDLFreeResult..charUTF8.p(
-        "GetGamepadMappingForGUID",
-
-        SDL_GUID("guid")
-    )
-
-    SDLFreeResult..charUTF8.p(
-        "GetGamepadMapping",
-
-        SDL_Gamepad.p("gamepad")
-    )
+    SDLFreeResult..charUTF8.p("GetGamepadMappingForGUID", SDL_GUID("guid"))
+    SDLFreeResult..charUTF8.p("GetGamepadMapping", SDL_Gamepad.p("gamepad"))
 
     bool(
         "SetGamepadMapping",
@@ -141,11 +130,7 @@ fun SDL_joystick_gamepad() = SDL.apply {
         charUTF8.const.p("mapping")
     )
 
-    bool(
-        "HasGamepad",
-
-        void()
-    )
+    bool("HasGamepad", void())
 
     SDL_JoystickID.p(
         "GetGamepads",
@@ -153,132 +138,39 @@ fun SDL_joystick_gamepad() = SDL.apply {
         AutoSizeResult..int.p("count")
     )
 
-    bool(
-        "IsGamepad",
+    bool("IsGamepad", SDL_JoystickID("instance_id"))
 
-        SDL_JoystickID("instance_id")
-    )
+    charUTF8.const.p("GetGamepadNameForID", SDL_JoystickID("instance_id"))
+    charUTF8.const.p("GetGamepadPathForID", SDL_JoystickID("instance_id"))
 
-    charUTF8.const.p(
-        "GetGamepadNameForID",
+    int("GetGamepadPlayerIndexForID", SDL_JoystickID("instance_id"))
 
-        SDL_JoystickID("instance_id")
-    )
+    SDL_GUID("GetGamepadGUIDForID", SDL_JoystickID("instance_id"))
 
-    charUTF8.const.p(
-        "GetGamepadPathForID",
+    Uint16("GetGamepadVendorForID", SDL_JoystickID("instance_id"))
+    Uint16("GetGamepadProductForID", SDL_JoystickID("instance_id"))
+    Uint16("GetGamepadProductVersionForID", SDL_JoystickID("instance_id"))
 
-        SDL_JoystickID("instance_id")
-    )
+    SDL_GamepadType("GetGamepadTypeForID", SDL_JoystickID("instance_id"))
+    SDL_GamepadType("GetRealGamepadTypeForID", SDL_JoystickID("instance_id"))
+    SDLFreeResult..charUTF8.p("GetGamepadMappingForID", SDL_JoystickID("instance_id"))
 
-    int(
-        "GetGamepadPlayerIndexForID",
+    SDL_Gamepad.p("OpenGamepad", SDL_JoystickID("instance_id"))
 
-        SDL_JoystickID("instance_id")
-    )
+    SDL_Gamepad.p("GetGamepadFromID", SDL_JoystickID("instance_id"))
+    SDL_Gamepad.p("GetGamepadFromPlayerIndex", int("player_index"))
 
-    SDL_GUID(
-        "GetGamepadGUIDForID",
+    SDL_PropertiesID("GetGamepadProperties", SDL_Gamepad.p("gamepad"))
 
-        SDL_JoystickID("instance_id")
-    )
+    SDL_JoystickID("GetGamepadID", SDL_Gamepad.p("gamepad"))
 
-    Uint16(
-        "GetGamepadVendorForID",
+    charUTF8.const.p("GetGamepadName", SDL_Gamepad.p("gamepad"))
+    charUTF8.const.p("GetGamepadPath", SDL_Gamepad.p("gamepad"))
 
-        SDL_JoystickID("instance_id")
-    )
+    SDL_GamepadType("GetGamepadType", SDL_Gamepad.p("gamepad"))
+    SDL_GamepadType("GetRealGamepadType", SDL_Gamepad.p("gamepad"))
 
-    Uint16(
-        "GetGamepadProductForID",
-
-        SDL_JoystickID("instance_id")
-    )
-
-    Uint16(
-        "GetGamepadProductVersionForID",
-
-        SDL_JoystickID("instance_id")
-    )
-
-    SDL_GamepadType(
-        "GetGamepadTypeForID",
-
-        SDL_JoystickID("instance_id")
-    )
-
-    SDL_GamepadType(
-        "GetRealGamepadTypeForID",
-
-        SDL_JoystickID("instance_id")
-    )
-
-    SDLFreeResult..charUTF8.p(
-        "GetGamepadMappingForID",
-
-        SDL_JoystickID("instance_id")
-    )
-
-    SDL_Gamepad.p(
-        "OpenGamepad",
-
-        SDL_JoystickID("instance_id")
-    )
-
-    SDL_Gamepad.p(
-        "GetGamepadFromID",
-
-        SDL_JoystickID("instance_id")
-    )
-
-    SDL_Gamepad.p(
-        "GetGamepadFromPlayerIndex",
-
-        int("player_index")
-    )
-
-    SDL_PropertiesID(
-        "GetGamepadProperties",
-
-        SDL_Gamepad.p("gamepad")
-    )
-
-    SDL_JoystickID(
-        "GetGamepadID",
-
-        SDL_Gamepad.p("gamepad")
-    )
-
-    charUTF8.const.p(
-        "GetGamepadName",
-
-        SDL_Gamepad.p("gamepad")
-    )
-
-    charUTF8.const.p(
-        "GetGamepadPath",
-
-        SDL_Gamepad.p("gamepad")
-    )
-
-    SDL_GamepadType(
-        "GetGamepadType",
-
-        SDL_Gamepad.p("gamepad")
-    )
-
-    SDL_GamepadType(
-        "GetRealGamepadType",
-
-        SDL_Gamepad.p("gamepad")
-    )
-
-    int(
-        "GetGamepadPlayerIndex",
-
-        SDL_Gamepad.p("gamepad")
-    )
-
+    int("GetGamepadPlayerIndex", SDL_Gamepad.p("gamepad"))
     bool(
         "SetGamepadPlayerIndex",
 
@@ -286,78 +178,28 @@ fun SDL_joystick_gamepad() = SDL.apply {
         int("player_index")
     )
 
-    Uint16(
-        "GetGamepadVendor",
-
-        SDL_Gamepad.p("gamepad")
-    )
-
-    Uint16(
-        "GetGamepadProduct",
-
-        SDL_Gamepad.p("gamepad")
-    )
-
-    Uint16(
-        "GetGamepadProductVersion",
-
-        SDL_Gamepad.p("gamepad")
-    )
-
-    Uint16(
-        "GetGamepadFirmwareVersion",
-
-        SDL_Gamepad.p("gamepad")
-    )
-
-    charUTF8.const.p(
-        "GetGamepadSerial",
-
-        SDL_Gamepad.p("gamepad")
-    )
-
-    Uint64(
-        "GetGamepadSteamHandle",
-
-        SDL_Gamepad.p("gamepad")
-    )
-
-    SDL_JoystickConnectionState(
-        "GetGamepadConnectionState",
-
-        SDL_Gamepad.p("gamepad")
-    )
+    Uint16("GetGamepadVendor", SDL_Gamepad.p("gamepad"))
+    Uint16("GetGamepadProduct", SDL_Gamepad.p("gamepad"))
+    Uint16("GetGamepadProductVersion", SDL_Gamepad.p("gamepad"))
+    Uint16("GetGamepadFirmwareVersion", SDL_Gamepad.p("gamepad"))
+    charUTF8.const.p("GetGamepadSerial", SDL_Gamepad.p("gamepad"))
+    Uint64("GetGamepadSteamHandle", SDL_Gamepad.p("gamepad"))
+    SDL_JoystickConnectionState("GetGamepadConnectionState", SDL_Gamepad.p("gamepad"))
 
     SDL_PowerState(
         "GetGamepadPowerInfo",
 
         SDL_Gamepad.p("gamepad"),
-        Check(1)..int.p("percent")
+        Check(1)..nullable..int.p("percent")
     )
 
-    bool(
-        "GamepadConnected",
+    bool("GamepadConnected", SDL_Gamepad.p("gamepad"))
 
-        SDL_Gamepad.p("gamepad")
-    )
+    SDL_Joystick.p("GetGamepadJoystick", SDL_Gamepad.p("gamepad"))
 
-    SDL_Joystick.p(
-        "GetGamepadJoystick",
+    void("SetGamepadEventsEnabled", bool("enabled"))
 
-        SDL_Gamepad.p("gamepad")
-    )
-
-    void(
-        "SetGamepadEventsEnabled",
-
-        bool("enabled")
-    )
-
-    bool(
-        "GamepadEventsEnabled",
-
-        void()
-    )
+    bool("GamepadEventsEnabled", void())
 
     SDL_GamepadBinding.p.p(
         "GetGamepadBindings",
@@ -366,35 +208,13 @@ fun SDL_joystick_gamepad() = SDL.apply {
         AutoSizeResult..int.p("count")
     )
 
-    void(
-        "UpdateGamepads",
+    void("UpdateGamepads", void())
 
-        void()
-    )
+    SDL_GamepadType("GetGamepadTypeFromString", charUTF8.const.p("str"))
+    charUTF8.const.p("GetGamepadStringForType", SDL_GamepadType("type"))
 
-    SDL_GamepadType(
-        "GetGamepadTypeFromString",
-
-        charUTF8.const.p("str")
-    )
-
-    charUTF8.const.p(
-        "GetGamepadStringForType",
-
-        SDL_GamepadType("type")
-    )
-
-    SDL_GamepadAxis(
-        "GetGamepadAxisFromString",
-
-        charUTF8.const.p("str")
-    )
-
-    charUTF8.const.p(
-        "GetGamepadStringForAxis",
-
-        SDL_GamepadAxis("axis")
-    )
+    SDL_GamepadAxis("GetGamepadAxisFromString", charUTF8.const.p("str"))
+    charUTF8.const.p("GetGamepadStringForAxis", SDL_GamepadAxis("axis"))
 
     bool(
         "GamepadHasAxis",
@@ -410,17 +230,8 @@ fun SDL_joystick_gamepad() = SDL.apply {
         SDL_GamepadAxis("axis")
     )
 
-    SDL_GamepadButton(
-        "GetGamepadButtonFromString",
-
-        charUTF8.const.p("str")
-    )
-
-    charUTF8.const.p(
-        "GetGamepadStringForButton",
-
-        SDL_GamepadButton("button")
-    )
+    SDL_GamepadButton("GetGamepadButtonFromString", charUTF8.const.p("str"))
+    charUTF8.const.p("GetGamepadStringForButton", SDL_GamepadButton("button"))
 
     bool(
         "GamepadHasButton",
@@ -450,11 +261,7 @@ fun SDL_joystick_gamepad() = SDL.apply {
         SDL_GamepadButton("button")
     )
 
-    int(
-        "GetNumGamepadTouchpads",
-
-        SDL_Gamepad.p("gamepad")
-    )
+    int("GetNumGamepadTouchpads", SDL_Gamepad.p("gamepad"))
 
     int(
         "GetNumGamepadTouchpadFingers",
@@ -469,10 +276,10 @@ fun SDL_joystick_gamepad() = SDL.apply {
         SDL_Gamepad.p("gamepad"),
         int("touchpad"),
         int("finger"),
-        nullable..Check(1)..bool.p("down"),
-        nullable..Check(1)..float.p("x"),
-        nullable..Check(1)..float.p("y"),
-        nullable..Check(1)..float.p("pressure")
+        Check(1)..nullable..bool.p("down"),
+        Check(1)..nullable..float.p("x"),
+        Check(1)..nullable..float.p("y"),
+        Check(1)..nullable..float.p("pressure")
     )
 
     bool(
@@ -548,11 +355,7 @@ fun SDL_joystick_gamepad() = SDL.apply {
         AutoSize("data")..int("size")
     )
 
-    void(
-        "CloseGamepad",
-
-        SDL_Gamepad.p("gamepad")
-    )
+    void("CloseGamepad", SDL_Gamepad.p("gamepad"))
 
     charUTF8.const.p(
         "GetGamepadAppleSFSymbolsNameForButton",
@@ -567,5 +370,4 @@ fun SDL_joystick_gamepad() = SDL.apply {
         SDL_Gamepad.p("gamepad"),
         SDL_GamepadAxis("axis")
     )
-
 }

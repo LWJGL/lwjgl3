@@ -147,12 +147,6 @@ public class SDL_GPUColorTargetInfo extends Struct<SDL_GPUColorTargetInfo> imple
     /** @return the value of the {@code cycle_resolve_texture} field. */
     @NativeType("bool")
     public boolean cycle_resolve_texture() { return ncycle_resolve_texture(address()); }
-    /** @return the value of the {@code padding1} field. */
-    @NativeType("Uint8")
-    public byte padding1() { return npadding1(address()); }
-    /** @return the value of the {@code padding2} field. */
-    @NativeType("Uint8")
-    public byte padding2() { return npadding2(address()); }
 
     /** Sets the specified value to the {@code texture} field. */
     public SDL_GPUColorTargetInfo texture(@NativeType("SDL_GPUTexture *") long value) { ntexture(address(), value); return this; }
@@ -178,10 +172,6 @@ public class SDL_GPUColorTargetInfo extends Struct<SDL_GPUColorTargetInfo> imple
     public SDL_GPUColorTargetInfo cycle(@NativeType("bool") boolean value) { ncycle(address(), value); return this; }
     /** Sets the specified value to the {@code cycle_resolve_texture} field. */
     public SDL_GPUColorTargetInfo cycle_resolve_texture(@NativeType("bool") boolean value) { ncycle_resolve_texture(address(), value); return this; }
-    /** Sets the specified value to the {@code padding1} field. */
-    public SDL_GPUColorTargetInfo padding1(@NativeType("Uint8") byte value) { npadding1(address(), value); return this; }
-    /** Sets the specified value to the {@code padding2} field. */
-    public SDL_GPUColorTargetInfo padding2(@NativeType("Uint8") byte value) { npadding2(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public SDL_GPUColorTargetInfo set(
@@ -195,9 +185,7 @@ public class SDL_GPUColorTargetInfo extends Struct<SDL_GPUColorTargetInfo> imple
         int resolve_mip_level,
         int resolve_layer,
         boolean cycle,
-        boolean cycle_resolve_texture,
-        byte padding1,
-        byte padding2
+        boolean cycle_resolve_texture
     ) {
         texture(texture);
         mip_level(mip_level);
@@ -210,8 +198,6 @@ public class SDL_GPUColorTargetInfo extends Struct<SDL_GPUColorTargetInfo> imple
         resolve_layer(resolve_layer);
         cycle(cycle);
         cycle_resolve_texture(cycle_resolve_texture);
-        padding1(padding1);
-        padding2(padding2);
 
         return this;
     }
@@ -361,9 +347,7 @@ public class SDL_GPUColorTargetInfo extends Struct<SDL_GPUColorTargetInfo> imple
     public static boolean ncycle(long struct) { return memGetByte(struct + SDL_GPUColorTargetInfo.CYCLE) != 0; }
     /** Unsafe version of {@link #cycle_resolve_texture}. */
     public static boolean ncycle_resolve_texture(long struct) { return memGetByte(struct + SDL_GPUColorTargetInfo.CYCLE_RESOLVE_TEXTURE) != 0; }
-    /** Unsafe version of {@link #padding1}. */
     public static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUColorTargetInfo.PADDING1); }
-    /** Unsafe version of {@link #padding2}. */
     public static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUColorTargetInfo.PADDING2); }
 
     /** Unsafe version of {@link #texture(long) texture}. */
@@ -388,9 +372,7 @@ public class SDL_GPUColorTargetInfo extends Struct<SDL_GPUColorTargetInfo> imple
     public static void ncycle(long struct, boolean value) { memPutByte(struct + SDL_GPUColorTargetInfo.CYCLE, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #cycle_resolve_texture(boolean) cycle_resolve_texture}. */
     public static void ncycle_resolve_texture(long struct, boolean value) { memPutByte(struct + SDL_GPUColorTargetInfo.CYCLE_RESOLVE_TEXTURE, value ? (byte)1 : (byte)0); }
-    /** Unsafe version of {@link #padding1(byte) padding1}. */
     public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUColorTargetInfo.PADDING1, value); }
-    /** Unsafe version of {@link #padding2(byte) padding2}. */
     public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUColorTargetInfo.PADDING2, value); }
 
     /**
@@ -477,12 +459,6 @@ public class SDL_GPUColorTargetInfo extends Struct<SDL_GPUColorTargetInfo> imple
         /** @return the value of the {@code cycle_resolve_texture} field. */
         @NativeType("bool")
         public boolean cycle_resolve_texture() { return SDL_GPUColorTargetInfo.ncycle_resolve_texture(address()); }
-        /** @return the value of the {@code padding1} field. */
-        @NativeType("Uint8")
-        public byte padding1() { return SDL_GPUColorTargetInfo.npadding1(address()); }
-        /** @return the value of the {@code padding2} field. */
-        @NativeType("Uint8")
-        public byte padding2() { return SDL_GPUColorTargetInfo.npadding2(address()); }
 
         /** Sets the specified value to the {@code texture} field. */
         public SDL_GPUColorTargetInfo.Buffer texture(@NativeType("SDL_GPUTexture *") long value) { SDL_GPUColorTargetInfo.ntexture(address(), value); return this; }
@@ -508,10 +484,6 @@ public class SDL_GPUColorTargetInfo extends Struct<SDL_GPUColorTargetInfo> imple
         public SDL_GPUColorTargetInfo.Buffer cycle(@NativeType("bool") boolean value) { SDL_GPUColorTargetInfo.ncycle(address(), value); return this; }
         /** Sets the specified value to the {@code cycle_resolve_texture} field. */
         public SDL_GPUColorTargetInfo.Buffer cycle_resolve_texture(@NativeType("bool") boolean value) { SDL_GPUColorTargetInfo.ncycle_resolve_texture(address(), value); return this; }
-        /** Sets the specified value to the {@code padding1} field. */
-        public SDL_GPUColorTargetInfo.Buffer padding1(@NativeType("Uint8") byte value) { SDL_GPUColorTargetInfo.npadding1(address(), value); return this; }
-        /** Sets the specified value to the {@code padding2} field. */
-        public SDL_GPUColorTargetInfo.Buffer padding2(@NativeType("Uint8") byte value) { SDL_GPUColorTargetInfo.npadding2(address(), value); return this; }
 
     }
 

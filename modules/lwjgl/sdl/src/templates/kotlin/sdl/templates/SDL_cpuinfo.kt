@@ -10,112 +10,25 @@ import sdl.*
 fun SDL_cpuinfo() = SDL.apply {
     IntConstant("CACHELINE_SIZE".."128")
 
-    int(
-        "GetNumLogicalCPUCores",
+    int("GetNumLogicalCPUCores", void())
+    int("GetCPUCacheLineSize", void())
 
-        void()
-    )
+    bool("HasAltiVec", void())
+    bool("HasMMX", void())
+    bool("HasSSE", void())
+    bool("HasSSE2", void())
+    bool("HasSSE3", void())
+    bool("HasSSE41", void())
+    bool("HasSSE42", void())
+    bool("HasAVX", void())
+    bool("HasAVX2", void())
+    bool("HasAVX512F", void())
+    bool("HasARMSIMD", void())
+    bool("HasNEON", void())
+    bool("HasLSX", void())
+    bool("HasLASX", void())
 
-    int(
-        "GetCPUCacheLineSize",
+    int("GetSystemRAM", void())
 
-        void()
-    )
-
-    bool(
-        "HasAltiVec",
-
-        void()
-    )
-
-    bool(
-        "HasMMX",
-
-        void()
-    )
-
-    bool(
-        "HasSSE",
-
-        void()
-    )
-
-    bool(
-        "HasSSE2",
-
-        void()
-    )
-
-    bool(
-        "HasSSE3",
-
-        void()
-    )
-
-    bool(
-        "HasSSE41",
-
-        void()
-    )
-
-    bool(
-        "HasSSE42",
-
-        void()
-    )
-
-    bool(
-        "HasAVX",
-
-        void()
-    )
-
-    bool(
-        "HasAVX2",
-
-        void()
-    )
-
-    bool(
-        "HasAVX512F",
-
-        void()
-    )
-
-    bool(
-        "HasARMSIMD",
-
-        void()
-    )
-
-    bool(
-        "HasNEON",
-
-        void()
-    )
-
-    bool(
-        "HasLSX",
-
-        void()
-    )
-
-    bool(
-        "HasLASX",
-
-        void()
-    )
-
-    int(
-        "GetSystemRAM",
-
-        void()
-    )
-
-    size_t(
-        "GetSIMDAlignment",
-
-        void()
-    )
-
+    size_t("GetSIMDAlignment", void())
 }

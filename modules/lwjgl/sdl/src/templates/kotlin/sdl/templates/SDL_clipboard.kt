@@ -50,7 +50,7 @@ fun SDL_clipboard() = SDL.apply {
         SDL_ClipboardDataCallback("callback"),
         SDL_ClipboardCleanupCallback("cleanup"),
         nullable..opaque_p("userdata"),
-        charUTF8.const.p.p("mime_types"),
+        charASCII.const.p.p("mime_types"),
         AutoSize("mime_types")..size_t("num_mime_types")
     )
 
@@ -63,20 +63,19 @@ fun SDL_clipboard() = SDL.apply {
     void.p(
         "GetClipboardData",
 
-        charUTF8.const.p("mime_type"),
+        charASCII.const.p("mime_type"),
         AutoSizeResult..size_t.p("size")
     )
 
     bool(
         "HasClipboardData",
 
-        charUTF8.const.p("mime_type")
+        charASCII.const.p("mime_type")
     )
 
-    charUTF8.p.p(
+    charASCII.p.p(
         "GetClipboardMimeTypes",
 
         AutoSizeResult..size_t.p("num_mime_types")
     )
-
 }

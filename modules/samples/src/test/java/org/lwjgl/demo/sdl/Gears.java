@@ -137,7 +137,29 @@ public class Gears {
         }
     }
 
+    private void renderFrame() {
+        gears.render();
+        gears.animate();
+
+        checkSdlError(SDL_GL_SwapWindow(window));
+    }
+
     private void loop() {
+        // This will continue rendering while the event loop below is blocked on window resize
+        SDL_SetEventFilter((userdata, event) -> {
+            SDL_Event e = SDL_Event.create(event);
+            switch (e.type()) {
+                case SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED:
+                    SDL_WindowEvent we = e.window();
+                    framebufferSizeChanged(window, we.data1(), we.data2());
+                    return false;
+                case SDL_EVENT_WINDOW_EXPOSED:
+                    renderFrame();
+                    return false;
+            }
+            return true;
+        }, NULL);
+
         try (MemoryStack stack = stackPush()) {
             long lastUpdate = System.currentTimeMillis();
 
@@ -146,8 +168,7 @@ public class Gears {
             SDL_Event event = SDL_Event.calloc(stack);
 
             // Cache typed event views to avoid allocating memory in the main loop
-            SDL_KeyboardEvent keyEvent    = event.key();
-            SDL_WindowEvent   windowEvent = event.window();
+            SDL_KeyboardEvent keyEvent = event.key();
 
             boolean continueRunning = true;
             while (continueRunning) {
@@ -155,9 +176,6 @@ public class Gears {
                     switch (event.type()) {
                         case SDL_EVENT_QUIT:
                             continueRunning = false;
-                            break;
-                        case SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED:
-                            framebufferSizeChanged(window, windowEvent.data1(), windowEvent.data2());
                             break;
                         case SDL_EVENT_KEY_DOWN:
                             switch (keyEvent.key()) {
@@ -207,10 +225,7 @@ public class Gears {
                     }
                 }
 
-                gears.render();
-                gears.animate();
-
-                checkSdlError(SDL_GL_SwapWindow(window));
+                renderFrame();
 
                 frames++;
 

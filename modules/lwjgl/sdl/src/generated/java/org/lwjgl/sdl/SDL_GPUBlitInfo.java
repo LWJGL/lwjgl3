@@ -120,15 +120,6 @@ public class SDL_GPUBlitInfo extends Struct<SDL_GPUBlitInfo> implements NativeRe
     /** @return the value of the {@code cycle} field. */
     @NativeType("bool")
     public boolean cycle() { return ncycle(address()); }
-    /** @return the value of the {@code padding1} field. */
-    @NativeType("Uint8")
-    public byte padding1() { return npadding1(address()); }
-    /** @return the value of the {@code padding2} field. */
-    @NativeType("Uint8")
-    public byte padding2() { return npadding2(address()); }
-    /** @return the value of the {@code padding3} field. */
-    @NativeType("Uint8")
-    public byte padding3() { return npadding3(address()); }
 
     /** Copies the specified {@link SDL_GPUBlitRegion} to the {@code source} field. */
     public SDL_GPUBlitInfo source(SDL_GPUBlitRegion value) { nsource(address(), value); return this; }
@@ -150,12 +141,6 @@ public class SDL_GPUBlitInfo extends Struct<SDL_GPUBlitInfo> implements NativeRe
     public SDL_GPUBlitInfo filter(@NativeType("SDL_GPUFilter") int value) { nfilter(address(), value); return this; }
     /** Sets the specified value to the {@code cycle} field. */
     public SDL_GPUBlitInfo cycle(@NativeType("bool") boolean value) { ncycle(address(), value); return this; }
-    /** Sets the specified value to the {@code padding1} field. */
-    public SDL_GPUBlitInfo padding1(@NativeType("Uint8") byte value) { npadding1(address(), value); return this; }
-    /** Sets the specified value to the {@code padding2} field. */
-    public SDL_GPUBlitInfo padding2(@NativeType("Uint8") byte value) { npadding2(address(), value); return this; }
-    /** Sets the specified value to the {@code padding3} field. */
-    public SDL_GPUBlitInfo padding3(@NativeType("Uint8") byte value) { npadding3(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public SDL_GPUBlitInfo set(
@@ -165,10 +150,7 @@ public class SDL_GPUBlitInfo extends Struct<SDL_GPUBlitInfo> implements NativeRe
         SDL_FColor clear_color,
         int flip_mode,
         int filter,
-        boolean cycle,
-        byte padding1,
-        byte padding2,
-        byte padding3
+        boolean cycle
     ) {
         source(source);
         destination(destination);
@@ -177,9 +159,6 @@ public class SDL_GPUBlitInfo extends Struct<SDL_GPUBlitInfo> implements NativeRe
         flip_mode(flip_mode);
         filter(filter);
         cycle(cycle);
-        padding1(padding1);
-        padding2(padding2);
-        padding3(padding3);
 
         return this;
     }
@@ -321,11 +300,8 @@ public class SDL_GPUBlitInfo extends Struct<SDL_GPUBlitInfo> implements NativeRe
     public static int nfilter(long struct) { return memGetInt(struct + SDL_GPUBlitInfo.FILTER); }
     /** Unsafe version of {@link #cycle}. */
     public static boolean ncycle(long struct) { return memGetByte(struct + SDL_GPUBlitInfo.CYCLE) != 0; }
-    /** Unsafe version of {@link #padding1}. */
     public static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUBlitInfo.PADDING1); }
-    /** Unsafe version of {@link #padding2}. */
     public static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUBlitInfo.PADDING2); }
-    /** Unsafe version of {@link #padding3}. */
     public static byte npadding3(long struct) { return memGetByte(struct + SDL_GPUBlitInfo.PADDING3); }
 
     /** Unsafe version of {@link #source(SDL_GPUBlitRegion) source}. */
@@ -342,11 +318,8 @@ public class SDL_GPUBlitInfo extends Struct<SDL_GPUBlitInfo> implements NativeRe
     public static void nfilter(long struct, int value) { memPutInt(struct + SDL_GPUBlitInfo.FILTER, value); }
     /** Unsafe version of {@link #cycle(boolean) cycle}. */
     public static void ncycle(long struct, boolean value) { memPutByte(struct + SDL_GPUBlitInfo.CYCLE, value ? (byte)1 : (byte)0); }
-    /** Unsafe version of {@link #padding1(byte) padding1}. */
     public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUBlitInfo.PADDING1, value); }
-    /** Unsafe version of {@link #padding2(byte) padding2}. */
     public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUBlitInfo.PADDING2, value); }
-    /** Unsafe version of {@link #padding3(byte) padding3}. */
     public static void npadding3(long struct, byte value) { memPutByte(struct + SDL_GPUBlitInfo.PADDING3, value); }
 
     /**
@@ -420,15 +393,6 @@ public class SDL_GPUBlitInfo extends Struct<SDL_GPUBlitInfo> implements NativeRe
         /** @return the value of the {@code cycle} field. */
         @NativeType("bool")
         public boolean cycle() { return SDL_GPUBlitInfo.ncycle(address()); }
-        /** @return the value of the {@code padding1} field. */
-        @NativeType("Uint8")
-        public byte padding1() { return SDL_GPUBlitInfo.npadding1(address()); }
-        /** @return the value of the {@code padding2} field. */
-        @NativeType("Uint8")
-        public byte padding2() { return SDL_GPUBlitInfo.npadding2(address()); }
-        /** @return the value of the {@code padding3} field. */
-        @NativeType("Uint8")
-        public byte padding3() { return SDL_GPUBlitInfo.npadding3(address()); }
 
         /** Copies the specified {@link SDL_GPUBlitRegion} to the {@code source} field. */
         public SDL_GPUBlitInfo.Buffer source(SDL_GPUBlitRegion value) { SDL_GPUBlitInfo.nsource(address(), value); return this; }
@@ -450,12 +414,6 @@ public class SDL_GPUBlitInfo extends Struct<SDL_GPUBlitInfo> implements NativeRe
         public SDL_GPUBlitInfo.Buffer filter(@NativeType("SDL_GPUFilter") int value) { SDL_GPUBlitInfo.nfilter(address(), value); return this; }
         /** Sets the specified value to the {@code cycle} field. */
         public SDL_GPUBlitInfo.Buffer cycle(@NativeType("bool") boolean value) { SDL_GPUBlitInfo.ncycle(address(), value); return this; }
-        /** Sets the specified value to the {@code padding1} field. */
-        public SDL_GPUBlitInfo.Buffer padding1(@NativeType("Uint8") byte value) { SDL_GPUBlitInfo.npadding1(address(), value); return this; }
-        /** Sets the specified value to the {@code padding2} field. */
-        public SDL_GPUBlitInfo.Buffer padding2(@NativeType("Uint8") byte value) { SDL_GPUBlitInfo.npadding2(address(), value); return this; }
-        /** Sets the specified value to the {@code padding3} field. */
-        public SDL_GPUBlitInfo.Buffer padding3(@NativeType("Uint8") byte value) { SDL_GPUBlitInfo.npadding3(address(), value); return this; }
 
     }
 

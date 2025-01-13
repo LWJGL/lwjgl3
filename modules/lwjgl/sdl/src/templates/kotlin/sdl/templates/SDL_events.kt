@@ -10,8 +10,8 @@ import sdl.*
 fun SDL_events() = SDL.apply {
 
     EnumConstant(
-        "EVENT_FIRST".enum(0),
-        "EVENT_QUIT".enum(0x100),
+        "EVENT_FIRST".enum("0"),
+        "EVENT_QUIT".enum("0x100"),
         "EVENT_TERMINATING".enum,
         "EVENT_LOW_MEMORY".enum,
         "EVENT_WILL_ENTER_BACKGROUND".enum,
@@ -20,7 +20,7 @@ fun SDL_events() = SDL.apply {
         "EVENT_DID_ENTER_FOREGROUND".enum,
         "EVENT_LOCALE_CHANGED".enum,
         "EVENT_SYSTEM_THEME_CHANGED".enum,
-        "EVENT_DISPLAY_ORIENTATION".enum(0x151),
+        "EVENT_DISPLAY_ORIENTATION".enum("0x151"),
         "EVENT_DISPLAY_ADDED".enum,
         "EVENT_DISPLAY_REMOVED".enum,
         "EVENT_DISPLAY_MOVED".enum,
@@ -29,7 +29,7 @@ fun SDL_events() = SDL.apply {
         "EVENT_DISPLAY_CONTENT_SCALE_CHANGED".enum,
         "EVENT_DISPLAY_FIRST".enum("SDL_EVENT_DISPLAY_ORIENTATION"),
         "EVENT_DISPLAY_LAST".enum("SDL_EVENT_DISPLAY_CONTENT_SCALE_CHANGED"),
-        "EVENT_WINDOW_SHOWN".enum(0x202),
+        "EVENT_WINDOW_SHOWN".enum("0x202"),
         "EVENT_WINDOW_HIDDEN".enum,
         "EVENT_WINDOW_EXPOSED".enum,
         "EVENT_WINDOW_MOVED".enum,
@@ -56,7 +56,7 @@ fun SDL_events() = SDL.apply {
         "EVENT_WINDOW_HDR_STATE_CHANGED".enum,
         "EVENT_WINDOW_FIRST".enum("SDL_EVENT_WINDOW_SHOWN"),
         "EVENT_WINDOW_LAST".enum("SDL_EVENT_WINDOW_HDR_STATE_CHANGED"),
-        "EVENT_KEY_DOWN".enum(0x300),
+        "EVENT_KEY_DOWN".enum("0x300"),
         "EVENT_KEY_UP".enum,
         "EVENT_TEXT_EDITING".enum,
         "EVENT_TEXT_INPUT".enum,
@@ -64,13 +64,13 @@ fun SDL_events() = SDL.apply {
         "EVENT_KEYBOARD_ADDED".enum,
         "EVENT_KEYBOARD_REMOVED".enum,
         "EVENT_TEXT_EDITING_CANDIDATES".enum,
-        "EVENT_MOUSE_MOTION".enum(0x400),
+        "EVENT_MOUSE_MOTION".enum("0x400"),
         "EVENT_MOUSE_BUTTON_DOWN".enum,
         "EVENT_MOUSE_BUTTON_UP".enum,
         "EVENT_MOUSE_WHEEL".enum,
         "EVENT_MOUSE_ADDED".enum,
         "EVENT_MOUSE_REMOVED".enum,
-        "EVENT_JOYSTICK_AXIS_MOTION".enum(0x600),
+        "EVENT_JOYSTICK_AXIS_MOTION".enum("0x600"),
         "EVENT_JOYSTICK_BALL_MOTION".enum,
         "EVENT_JOYSTICK_HAT_MOTION".enum,
         "EVENT_JOYSTICK_BUTTON_DOWN".enum,
@@ -79,7 +79,7 @@ fun SDL_events() = SDL.apply {
         "EVENT_JOYSTICK_REMOVED".enum,
         "EVENT_JOYSTICK_BATTERY_UPDATED".enum,
         "EVENT_JOYSTICK_UPDATE_COMPLETE".enum,
-        "EVENT_GAMEPAD_AXIS_MOTION".enum(0x650),
+        "EVENT_GAMEPAD_AXIS_MOTION".enum("0x650"),
         "EVENT_GAMEPAD_BUTTON_DOWN".enum,
         "EVENT_GAMEPAD_BUTTON_UP".enum,
         "EVENT_GAMEPAD_ADDED".enum,
@@ -91,21 +91,21 @@ fun SDL_events() = SDL.apply {
         "EVENT_GAMEPAD_SENSOR_UPDATE".enum,
         "EVENT_GAMEPAD_UPDATE_COMPLETE".enum,
         "EVENT_GAMEPAD_STEAM_HANDLE_UPDATED".enum,
-        "EVENT_FINGER_DOWN".enum(0x700),
+        "EVENT_FINGER_DOWN".enum("0x700"),
         "EVENT_FINGER_UP".enum,
         "EVENT_FINGER_MOTION".enum,
         "EVENT_FINGER_CANCELED".enum,
-        "EVENT_CLIPBOARD_UPDATE".enum(0x900),
-        "EVENT_DROP_FILE".enum(0x1000),
+        "EVENT_CLIPBOARD_UPDATE".enum("0x900"),
+        "EVENT_DROP_FILE".enum("0x1000"),
         "EVENT_DROP_TEXT".enum,
         "EVENT_DROP_BEGIN".enum,
         "EVENT_DROP_COMPLETE".enum,
         "EVENT_DROP_POSITION".enum,
-        "EVENT_AUDIO_DEVICE_ADDED".enum(0x1100),
+        "EVENT_AUDIO_DEVICE_ADDED".enum("0x1100"),
         "EVENT_AUDIO_DEVICE_REMOVED".enum,
         "EVENT_AUDIO_DEVICE_FORMAT_CHANGED".enum,
-        "EVENT_SENSOR_UPDATE".enum(0x1200),
-        "EVENT_PEN_PROXIMITY_IN".enum(0x1300),
+        "EVENT_SENSOR_UPDATE".enum("0x1200"),
+        "EVENT_PEN_PROXIMITY_IN".enum("0x1300"),
         "EVENT_PEN_PROXIMITY_OUT".enum,
         "EVENT_PEN_DOWN".enum,
         "EVENT_PEN_UP".enum,
@@ -113,25 +113,26 @@ fun SDL_events() = SDL.apply {
         "EVENT_PEN_BUTTON_UP".enum,
         "EVENT_PEN_MOTION".enum,
         "EVENT_PEN_AXIS".enum,
-        "EVENT_CAMERA_DEVICE_ADDED".enum(0x1400),
+        "EVENT_CAMERA_DEVICE_ADDED".enum("0x1400"),
         "EVENT_CAMERA_DEVICE_REMOVED".enum,
         "EVENT_CAMERA_DEVICE_APPROVED".enum,
         "EVENT_CAMERA_DEVICE_DENIED".enum,
-        "EVENT_RENDER_TARGETS_RESET".enum(0x2000),
+        "EVENT_RENDER_TARGETS_RESET".enum("0x2000"),
         "EVENT_RENDER_DEVICE_RESET".enum,
         "EVENT_RENDER_DEVICE_LOST".enum,
-        "EVENT_PRIVATE0".enum(0x4000),
+        "EVENT_PRIVATE0".enum("0x4000"),
         "EVENT_PRIVATE1".enum,
         "EVENT_PRIVATE2".enum,
         "EVENT_PRIVATE3".enum,
-        "EVENT_POLL_SENTINEL".enum(0x7F00),
-        "EVENT_USER".enum(0x8000),
-        "EVENT_LAST".enum(0xFFFF),
+        "EVENT_POLL_SENTINEL".enum("0x7F00"),
+        "EVENT_USER".enum("0x8000"),
+        "EVENT_LAST".enum("0xFFFF"),
+
         "EVENT_ENUM_PADDING".enum(0x7FFFFFFF)
     )
 
     EnumConstant(
-        "ADDEVENT".enum(0),
+        "ADDEVENT".enum("0"),
         "PEEKEVENT".enum,
         "GETEVENT".enum
     )
@@ -145,7 +146,7 @@ fun SDL_events() = SDL.apply {
     int(
         "PeepEvents",
 
-        SDL_Event.p("events"),
+        nullable..SDL_Event.p("events"),
         AutoSize("events")..int("numevents"),
         SDL_EventAction("action"),
         Uint32("minType"),
@@ -200,21 +201,21 @@ fun SDL_events() = SDL.apply {
     bool(
         "PushEvent",
 
-        Check(1)..SDL_Event.p("event")
+        SDL_Event.p("event")
     )
 
     void(
         "SetEventFilter",
 
-        SDL_EventFilter("filter"),
+        nullable..SDL_EventFilter("filter"),
         nullable..opaque_p("userdata")
     )
 
     bool(
         "GetEventFilter",
 
-        Check(1)..SDL_EventFilter.p("filter"),
-        nullable..Check(1)..opaque_p.p("userdata")
+        Check(1)..nullable..SDL_EventFilter.p("filter"),
+        Check(1)..nullable..opaque_p.p("userdata")
     )
 
     bool(
@@ -260,7 +261,6 @@ fun SDL_events() = SDL.apply {
     SDL_Window.p(
         "GetWindowFromEvent",
 
-        Check(1)..SDL_Event.const.p("event")
+        SDL_Event.const.p("event")
     )
-
 }

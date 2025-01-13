@@ -123,12 +123,6 @@ public class SDL_GPURasterizerState extends Struct<SDL_GPURasterizerState> imple
     /** @return the value of the {@code enable_depth_clip} field. */
     @NativeType("bool")
     public boolean enable_depth_clip() { return nenable_depth_clip(address()); }
-    /** @return the value of the {@code padding1} field. */
-    @NativeType("Uint8")
-    public byte padding1() { return npadding1(address()); }
-    /** @return the value of the {@code padding2} field. */
-    @NativeType("Uint8")
-    public byte padding2() { return npadding2(address()); }
 
     /** Sets the specified value to the {@code fill_mode} field. */
     public SDL_GPURasterizerState fill_mode(@NativeType("SDL_GPUFillMode") int value) { nfill_mode(address(), value); return this; }
@@ -146,10 +140,6 @@ public class SDL_GPURasterizerState extends Struct<SDL_GPURasterizerState> imple
     public SDL_GPURasterizerState enable_depth_bias(@NativeType("bool") boolean value) { nenable_depth_bias(address(), value); return this; }
     /** Sets the specified value to the {@code enable_depth_clip} field. */
     public SDL_GPURasterizerState enable_depth_clip(@NativeType("bool") boolean value) { nenable_depth_clip(address(), value); return this; }
-    /** Sets the specified value to the {@code padding1} field. */
-    public SDL_GPURasterizerState padding1(@NativeType("Uint8") byte value) { npadding1(address(), value); return this; }
-    /** Sets the specified value to the {@code padding2} field. */
-    public SDL_GPURasterizerState padding2(@NativeType("Uint8") byte value) { npadding2(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public SDL_GPURasterizerState set(
@@ -160,9 +150,7 @@ public class SDL_GPURasterizerState extends Struct<SDL_GPURasterizerState> imple
         float depth_bias_clamp,
         float depth_bias_slope_factor,
         boolean enable_depth_bias,
-        boolean enable_depth_clip,
-        byte padding1,
-        byte padding2
+        boolean enable_depth_clip
     ) {
         fill_mode(fill_mode);
         cull_mode(cull_mode);
@@ -172,8 +160,6 @@ public class SDL_GPURasterizerState extends Struct<SDL_GPURasterizerState> imple
         depth_bias_slope_factor(depth_bias_slope_factor);
         enable_depth_bias(enable_depth_bias);
         enable_depth_clip(enable_depth_clip);
-        padding1(padding1);
-        padding2(padding2);
 
         return this;
     }
@@ -317,9 +303,7 @@ public class SDL_GPURasterizerState extends Struct<SDL_GPURasterizerState> imple
     public static boolean nenable_depth_bias(long struct) { return memGetByte(struct + SDL_GPURasterizerState.ENABLE_DEPTH_BIAS) != 0; }
     /** Unsafe version of {@link #enable_depth_clip}. */
     public static boolean nenable_depth_clip(long struct) { return memGetByte(struct + SDL_GPURasterizerState.ENABLE_DEPTH_CLIP) != 0; }
-    /** Unsafe version of {@link #padding1}. */
     public static byte npadding1(long struct) { return memGetByte(struct + SDL_GPURasterizerState.PADDING1); }
-    /** Unsafe version of {@link #padding2}. */
     public static byte npadding2(long struct) { return memGetByte(struct + SDL_GPURasterizerState.PADDING2); }
 
     /** Unsafe version of {@link #fill_mode(int) fill_mode}. */
@@ -338,9 +322,7 @@ public class SDL_GPURasterizerState extends Struct<SDL_GPURasterizerState> imple
     public static void nenable_depth_bias(long struct, boolean value) { memPutByte(struct + SDL_GPURasterizerState.ENABLE_DEPTH_BIAS, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #enable_depth_clip(boolean) enable_depth_clip}. */
     public static void nenable_depth_clip(long struct, boolean value) { memPutByte(struct + SDL_GPURasterizerState.ENABLE_DEPTH_CLIP, value ? (byte)1 : (byte)0); }
-    /** Unsafe version of {@link #padding1(byte) padding1}. */
     public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPURasterizerState.PADDING1, value); }
-    /** Unsafe version of {@link #padding2(byte) padding2}. */
     public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPURasterizerState.PADDING2, value); }
 
     // -----------------------------------
@@ -407,12 +389,6 @@ public class SDL_GPURasterizerState extends Struct<SDL_GPURasterizerState> imple
         /** @return the value of the {@code enable_depth_clip} field. */
         @NativeType("bool")
         public boolean enable_depth_clip() { return SDL_GPURasterizerState.nenable_depth_clip(address()); }
-        /** @return the value of the {@code padding1} field. */
-        @NativeType("Uint8")
-        public byte padding1() { return SDL_GPURasterizerState.npadding1(address()); }
-        /** @return the value of the {@code padding2} field. */
-        @NativeType("Uint8")
-        public byte padding2() { return SDL_GPURasterizerState.npadding2(address()); }
 
         /** Sets the specified value to the {@code fill_mode} field. */
         public SDL_GPURasterizerState.Buffer fill_mode(@NativeType("SDL_GPUFillMode") int value) { SDL_GPURasterizerState.nfill_mode(address(), value); return this; }
@@ -430,10 +406,6 @@ public class SDL_GPURasterizerState extends Struct<SDL_GPURasterizerState> imple
         public SDL_GPURasterizerState.Buffer enable_depth_bias(@NativeType("bool") boolean value) { SDL_GPURasterizerState.nenable_depth_bias(address(), value); return this; }
         /** Sets the specified value to the {@code enable_depth_clip} field. */
         public SDL_GPURasterizerState.Buffer enable_depth_clip(@NativeType("bool") boolean value) { SDL_GPURasterizerState.nenable_depth_clip(address(), value); return this; }
-        /** Sets the specified value to the {@code padding1} field. */
-        public SDL_GPURasterizerState.Buffer padding1(@NativeType("Uint8") byte value) { SDL_GPURasterizerState.npadding1(address(), value); return this; }
-        /** Sets the specified value to the {@code padding2} field. */
-        public SDL_GPURasterizerState.Buffer padding2(@NativeType("Uint8") byte value) { SDL_GPURasterizerState.npadding2(address(), value); return this; }
 
     }
 

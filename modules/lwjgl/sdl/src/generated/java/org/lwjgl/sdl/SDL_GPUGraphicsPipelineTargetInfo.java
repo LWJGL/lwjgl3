@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -91,9 +90,9 @@ public class SDL_GPUGraphicsPipelineTargetInfo extends Struct<SDL_GPUGraphicsPip
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return a {@link SDL_GPUColorTargetDescription} view of the struct pointed to by the {@code color_target_descriptions} field. */
+    /** @return a {@link SDL_GPUColorTargetDescription.Buffer} view of the struct array pointed to by the {@code color_target_descriptions} field. */
     @NativeType("SDL_GPUColorTargetDescription const *")
-    public SDL_GPUColorTargetDescription color_target_descriptions() { return ncolor_target_descriptions(address()); }
+    public SDL_GPUColorTargetDescription.@Nullable Buffer color_target_descriptions() { return ncolor_target_descriptions(address()); }
     /** @return the value of the {@code num_color_targets} field. */
     @NativeType("Uint32")
     public int num_color_targets() { return nnum_color_targets(address()); }
@@ -103,48 +102,27 @@ public class SDL_GPUGraphicsPipelineTargetInfo extends Struct<SDL_GPUGraphicsPip
     /** @return the value of the {@code has_depth_stencil_target} field. */
     @NativeType("bool")
     public boolean has_depth_stencil_target() { return nhas_depth_stencil_target(address()); }
-    /** @return the value of the {@code padding1} field. */
-    @NativeType("Uint8")
-    public byte padding1() { return npadding1(address()); }
-    /** @return the value of the {@code padding2} field. */
-    @NativeType("Uint8")
-    public byte padding2() { return npadding2(address()); }
-    /** @return the value of the {@code padding3} field. */
-    @NativeType("Uint8")
-    public byte padding3() { return npadding3(address()); }
 
-    /** Sets the address of the specified {@link SDL_GPUColorTargetDescription} to the {@code color_target_descriptions} field. */
-    public SDL_GPUGraphicsPipelineTargetInfo color_target_descriptions(@NativeType("SDL_GPUColorTargetDescription const *") SDL_GPUColorTargetDescription value) { ncolor_target_descriptions(address(), value); return this; }
+    /** Sets the address of the specified {@link SDL_GPUColorTargetDescription.Buffer} to the {@code color_target_descriptions} field. */
+    public SDL_GPUGraphicsPipelineTargetInfo color_target_descriptions(@NativeType("SDL_GPUColorTargetDescription const *") SDL_GPUColorTargetDescription.@Nullable Buffer value) { ncolor_target_descriptions(address(), value); return this; }
     /** Sets the specified value to the {@code num_color_targets} field. */
     public SDL_GPUGraphicsPipelineTargetInfo num_color_targets(@NativeType("Uint32") int value) { nnum_color_targets(address(), value); return this; }
     /** Sets the specified value to the {@code depth_stencil_format} field. */
     public SDL_GPUGraphicsPipelineTargetInfo depth_stencil_format(@NativeType("SDL_GPUTextureFormat") int value) { ndepth_stencil_format(address(), value); return this; }
     /** Sets the specified value to the {@code has_depth_stencil_target} field. */
     public SDL_GPUGraphicsPipelineTargetInfo has_depth_stencil_target(@NativeType("bool") boolean value) { nhas_depth_stencil_target(address(), value); return this; }
-    /** Sets the specified value to the {@code padding1} field. */
-    public SDL_GPUGraphicsPipelineTargetInfo padding1(@NativeType("Uint8") byte value) { npadding1(address(), value); return this; }
-    /** Sets the specified value to the {@code padding2} field. */
-    public SDL_GPUGraphicsPipelineTargetInfo padding2(@NativeType("Uint8") byte value) { npadding2(address(), value); return this; }
-    /** Sets the specified value to the {@code padding3} field. */
-    public SDL_GPUGraphicsPipelineTargetInfo padding3(@NativeType("Uint8") byte value) { npadding3(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public SDL_GPUGraphicsPipelineTargetInfo set(
-        SDL_GPUColorTargetDescription color_target_descriptions,
+        SDL_GPUColorTargetDescription.@Nullable Buffer color_target_descriptions,
         int num_color_targets,
         int depth_stencil_format,
-        boolean has_depth_stencil_target,
-        byte padding1,
-        byte padding2,
-        byte padding3
+        boolean has_depth_stencil_target
     ) {
         color_target_descriptions(color_target_descriptions);
         num_color_targets(num_color_targets);
         depth_stencil_format(depth_stencil_format);
         has_depth_stencil_target(has_depth_stencil_target);
-        padding1(padding1);
-        padding2(padding2);
-        padding3(padding3);
 
         return this;
     }
@@ -273,43 +251,28 @@ public class SDL_GPUGraphicsPipelineTargetInfo extends Struct<SDL_GPUGraphicsPip
     // -----------------------------------
 
     /** Unsafe version of {@link #color_target_descriptions}. */
-    public static SDL_GPUColorTargetDescription ncolor_target_descriptions(long struct) { return SDL_GPUColorTargetDescription.create(memGetAddress(struct + SDL_GPUGraphicsPipelineTargetInfo.COLOR_TARGET_DESCRIPTIONS)); }
+    public static SDL_GPUColorTargetDescription.@Nullable Buffer ncolor_target_descriptions(long struct) { return SDL_GPUColorTargetDescription.createSafe(memGetAddress(struct + SDL_GPUGraphicsPipelineTargetInfo.COLOR_TARGET_DESCRIPTIONS), nnum_color_targets(struct)); }
     /** Unsafe version of {@link #num_color_targets}. */
     public static int nnum_color_targets(long struct) { return memGetInt(struct + SDL_GPUGraphicsPipelineTargetInfo.NUM_COLOR_TARGETS); }
     /** Unsafe version of {@link #depth_stencil_format}. */
     public static int ndepth_stencil_format(long struct) { return memGetInt(struct + SDL_GPUGraphicsPipelineTargetInfo.DEPTH_STENCIL_FORMAT); }
     /** Unsafe version of {@link #has_depth_stencil_target}. */
     public static boolean nhas_depth_stencil_target(long struct) { return memGetByte(struct + SDL_GPUGraphicsPipelineTargetInfo.HAS_DEPTH_STENCIL_TARGET) != 0; }
-    /** Unsafe version of {@link #padding1}. */
     public static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUGraphicsPipelineTargetInfo.PADDING1); }
-    /** Unsafe version of {@link #padding2}. */
     public static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUGraphicsPipelineTargetInfo.PADDING2); }
-    /** Unsafe version of {@link #padding3}. */
     public static byte npadding3(long struct) { return memGetByte(struct + SDL_GPUGraphicsPipelineTargetInfo.PADDING3); }
 
-    /** Unsafe version of {@link #color_target_descriptions(SDL_GPUColorTargetDescription) color_target_descriptions}. */
-    public static void ncolor_target_descriptions(long struct, SDL_GPUColorTargetDescription value) { memPutAddress(struct + SDL_GPUGraphicsPipelineTargetInfo.COLOR_TARGET_DESCRIPTIONS, value.address()); }
-    /** Unsafe version of {@link #num_color_targets(int) num_color_targets}. */
+    /** Unsafe version of {@link #color_target_descriptions(SDL_GPUColorTargetDescription.Buffer) color_target_descriptions}. */
+    public static void ncolor_target_descriptions(long struct, SDL_GPUColorTargetDescription.@Nullable Buffer value) { memPutAddress(struct + SDL_GPUGraphicsPipelineTargetInfo.COLOR_TARGET_DESCRIPTIONS, memAddressSafe(value)); nnum_color_targets(struct, value == null ? 0 : value.remaining()); }
+    /** Sets the specified value to the {@code num_color_targets} field of the specified {@code struct}. */
     public static void nnum_color_targets(long struct, int value) { memPutInt(struct + SDL_GPUGraphicsPipelineTargetInfo.NUM_COLOR_TARGETS, value); }
     /** Unsafe version of {@link #depth_stencil_format(int) depth_stencil_format}. */
     public static void ndepth_stencil_format(long struct, int value) { memPutInt(struct + SDL_GPUGraphicsPipelineTargetInfo.DEPTH_STENCIL_FORMAT, value); }
     /** Unsafe version of {@link #has_depth_stencil_target(boolean) has_depth_stencil_target}. */
     public static void nhas_depth_stencil_target(long struct, boolean value) { memPutByte(struct + SDL_GPUGraphicsPipelineTargetInfo.HAS_DEPTH_STENCIL_TARGET, value ? (byte)1 : (byte)0); }
-    /** Unsafe version of {@link #padding1(byte) padding1}. */
     public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUGraphicsPipelineTargetInfo.PADDING1, value); }
-    /** Unsafe version of {@link #padding2(byte) padding2}. */
     public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUGraphicsPipelineTargetInfo.PADDING2, value); }
-    /** Unsafe version of {@link #padding3(byte) padding3}. */
     public static void npadding3(long struct, byte value) { memPutByte(struct + SDL_GPUGraphicsPipelineTargetInfo.PADDING3, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + SDL_GPUGraphicsPipelineTargetInfo.COLOR_TARGET_DESCRIPTIONS));
-    }
 
     // -----------------------------------
 
@@ -354,9 +317,9 @@ public class SDL_GPUGraphicsPipelineTargetInfo extends Struct<SDL_GPUGraphicsPip
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link SDL_GPUColorTargetDescription} view of the struct pointed to by the {@code color_target_descriptions} field. */
+        /** @return a {@link SDL_GPUColorTargetDescription.Buffer} view of the struct array pointed to by the {@code color_target_descriptions} field. */
         @NativeType("SDL_GPUColorTargetDescription const *")
-        public SDL_GPUColorTargetDescription color_target_descriptions() { return SDL_GPUGraphicsPipelineTargetInfo.ncolor_target_descriptions(address()); }
+        public SDL_GPUColorTargetDescription.@Nullable Buffer color_target_descriptions() { return SDL_GPUGraphicsPipelineTargetInfo.ncolor_target_descriptions(address()); }
         /** @return the value of the {@code num_color_targets} field. */
         @NativeType("Uint32")
         public int num_color_targets() { return SDL_GPUGraphicsPipelineTargetInfo.nnum_color_targets(address()); }
@@ -366,30 +329,15 @@ public class SDL_GPUGraphicsPipelineTargetInfo extends Struct<SDL_GPUGraphicsPip
         /** @return the value of the {@code has_depth_stencil_target} field. */
         @NativeType("bool")
         public boolean has_depth_stencil_target() { return SDL_GPUGraphicsPipelineTargetInfo.nhas_depth_stencil_target(address()); }
-        /** @return the value of the {@code padding1} field. */
-        @NativeType("Uint8")
-        public byte padding1() { return SDL_GPUGraphicsPipelineTargetInfo.npadding1(address()); }
-        /** @return the value of the {@code padding2} field. */
-        @NativeType("Uint8")
-        public byte padding2() { return SDL_GPUGraphicsPipelineTargetInfo.npadding2(address()); }
-        /** @return the value of the {@code padding3} field. */
-        @NativeType("Uint8")
-        public byte padding3() { return SDL_GPUGraphicsPipelineTargetInfo.npadding3(address()); }
 
-        /** Sets the address of the specified {@link SDL_GPUColorTargetDescription} to the {@code color_target_descriptions} field. */
-        public SDL_GPUGraphicsPipelineTargetInfo.Buffer color_target_descriptions(@NativeType("SDL_GPUColorTargetDescription const *") SDL_GPUColorTargetDescription value) { SDL_GPUGraphicsPipelineTargetInfo.ncolor_target_descriptions(address(), value); return this; }
+        /** Sets the address of the specified {@link SDL_GPUColorTargetDescription.Buffer} to the {@code color_target_descriptions} field. */
+        public SDL_GPUGraphicsPipelineTargetInfo.Buffer color_target_descriptions(@NativeType("SDL_GPUColorTargetDescription const *") SDL_GPUColorTargetDescription.@Nullable Buffer value) { SDL_GPUGraphicsPipelineTargetInfo.ncolor_target_descriptions(address(), value); return this; }
         /** Sets the specified value to the {@code num_color_targets} field. */
         public SDL_GPUGraphicsPipelineTargetInfo.Buffer num_color_targets(@NativeType("Uint32") int value) { SDL_GPUGraphicsPipelineTargetInfo.nnum_color_targets(address(), value); return this; }
         /** Sets the specified value to the {@code depth_stencil_format} field. */
         public SDL_GPUGraphicsPipelineTargetInfo.Buffer depth_stencil_format(@NativeType("SDL_GPUTextureFormat") int value) { SDL_GPUGraphicsPipelineTargetInfo.ndepth_stencil_format(address(), value); return this; }
         /** Sets the specified value to the {@code has_depth_stencil_target} field. */
         public SDL_GPUGraphicsPipelineTargetInfo.Buffer has_depth_stencil_target(@NativeType("bool") boolean value) { SDL_GPUGraphicsPipelineTargetInfo.nhas_depth_stencil_target(address(), value); return this; }
-        /** Sets the specified value to the {@code padding1} field. */
-        public SDL_GPUGraphicsPipelineTargetInfo.Buffer padding1(@NativeType("Uint8") byte value) { SDL_GPUGraphicsPipelineTargetInfo.npadding1(address(), value); return this; }
-        /** Sets the specified value to the {@code padding2} field. */
-        public SDL_GPUGraphicsPipelineTargetInfo.Buffer padding2(@NativeType("Uint8") byte value) { SDL_GPUGraphicsPipelineTargetInfo.npadding2(address(), value); return this; }
-        /** Sets the specified value to the {@code padding3} field. */
-        public SDL_GPUGraphicsPipelineTargetInfo.Buffer padding3(@NativeType("Uint8") byte value) { SDL_GPUGraphicsPipelineTargetInfo.npadding3(address(), value); return this; }
 
     }
 
