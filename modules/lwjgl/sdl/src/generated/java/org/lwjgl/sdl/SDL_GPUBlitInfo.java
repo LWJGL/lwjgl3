@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link SDL_FColor SDL_FColor} clear_color;
  *     SDL_FlipMode flip_mode;
  *     SDL_GPUFilter filter;
- *     _Bool cycle;
+ *     bool cycle;
  *     Uint8 padding1;
  *     Uint8 padding2;
  *     Uint8 padding3;
@@ -118,7 +118,7 @@ public class SDL_GPUBlitInfo extends Struct<SDL_GPUBlitInfo> implements NativeRe
     @NativeType("SDL_GPUFilter")
     public int filter() { return nfilter(address()); }
     /** @return the value of the {@code cycle} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean cycle() { return ncycle(address()); }
     /** @return the value of the {@code padding1} field. */
     @NativeType("Uint8")
@@ -149,7 +149,7 @@ public class SDL_GPUBlitInfo extends Struct<SDL_GPUBlitInfo> implements NativeRe
     /** Sets the specified value to the {@code filter} field. */
     public SDL_GPUBlitInfo filter(@NativeType("SDL_GPUFilter") int value) { nfilter(address(), value); return this; }
     /** Sets the specified value to the {@code cycle} field. */
-    public SDL_GPUBlitInfo cycle(@NativeType("_Bool") boolean value) { ncycle(address(), value); return this; }
+    public SDL_GPUBlitInfo cycle(@NativeType("bool") boolean value) { ncycle(address(), value); return this; }
     /** Sets the specified value to the {@code padding1} field. */
     public SDL_GPUBlitInfo padding1(@NativeType("Uint8") byte value) { npadding1(address(), value); return this; }
     /** Sets the specified value to the {@code padding2} field. */
@@ -418,7 +418,7 @@ public class SDL_GPUBlitInfo extends Struct<SDL_GPUBlitInfo> implements NativeRe
         @NativeType("SDL_GPUFilter")
         public int filter() { return SDL_GPUBlitInfo.nfilter(address()); }
         /** @return the value of the {@code cycle} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean cycle() { return SDL_GPUBlitInfo.ncycle(address()); }
         /** @return the value of the {@code padding1} field. */
         @NativeType("Uint8")
@@ -449,7 +449,7 @@ public class SDL_GPUBlitInfo extends Struct<SDL_GPUBlitInfo> implements NativeRe
         /** Sets the specified value to the {@code filter} field. */
         public SDL_GPUBlitInfo.Buffer filter(@NativeType("SDL_GPUFilter") int value) { SDL_GPUBlitInfo.nfilter(address(), value); return this; }
         /** Sets the specified value to the {@code cycle} field. */
-        public SDL_GPUBlitInfo.Buffer cycle(@NativeType("_Bool") boolean value) { SDL_GPUBlitInfo.ncycle(address(), value); return this; }
+        public SDL_GPUBlitInfo.Buffer cycle(@NativeType("bool") boolean value) { SDL_GPUBlitInfo.ncycle(address(), value); return this; }
         /** Sets the specified value to the {@code padding1} field. */
         public SDL_GPUBlitInfo.Buffer padding1(@NativeType("Uint8") byte value) { SDL_GPUBlitInfo.npadding1(address(), value); return this; }
         /** Sets the specified value to the {@code padding2} field. */

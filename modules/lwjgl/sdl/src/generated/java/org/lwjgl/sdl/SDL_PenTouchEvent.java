@@ -26,8 +26,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     SDL_PenInputFlags pen_state;
  *     float x;
  *     float y;
- *     _Bool eraser;
- *     _Bool down;
+ *     bool eraser;
+ *     bool down;
  * }}</pre>
  */
 public class SDL_PenTouchEvent extends Struct<SDL_PenTouchEvent> implements NativeResource {
@@ -125,10 +125,10 @@ public class SDL_PenTouchEvent extends Struct<SDL_PenTouchEvent> implements Nati
     /** @return the value of the {@code y} field. */
     public float y() { return ny(address()); }
     /** @return the value of the {@code eraser} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean eraser() { return neraser(address()); }
     /** @return the value of the {@code down} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean down() { return ndown(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -148,9 +148,9 @@ public class SDL_PenTouchEvent extends Struct<SDL_PenTouchEvent> implements Nati
     /** Sets the specified value to the {@code y} field. */
     public SDL_PenTouchEvent y(float value) { ny(address(), value); return this; }
     /** Sets the specified value to the {@code eraser} field. */
-    public SDL_PenTouchEvent eraser(@NativeType("_Bool") boolean value) { neraser(address(), value); return this; }
+    public SDL_PenTouchEvent eraser(@NativeType("bool") boolean value) { neraser(address(), value); return this; }
     /** Sets the specified value to the {@code down} field. */
-    public SDL_PenTouchEvent down(@NativeType("_Bool") boolean value) { ndown(address(), value); return this; }
+    public SDL_PenTouchEvent down(@NativeType("bool") boolean value) { ndown(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public SDL_PenTouchEvent set(
@@ -410,10 +410,10 @@ public class SDL_PenTouchEvent extends Struct<SDL_PenTouchEvent> implements Nati
         /** @return the value of the {@code y} field. */
         public float y() { return SDL_PenTouchEvent.ny(address()); }
         /** @return the value of the {@code eraser} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean eraser() { return SDL_PenTouchEvent.neraser(address()); }
         /** @return the value of the {@code down} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean down() { return SDL_PenTouchEvent.ndown(address()); }
 
         /** Sets the specified value to the {@code type} field. */
@@ -433,9 +433,9 @@ public class SDL_PenTouchEvent extends Struct<SDL_PenTouchEvent> implements Nati
         /** Sets the specified value to the {@code y} field. */
         public SDL_PenTouchEvent.Buffer y(float value) { SDL_PenTouchEvent.ny(address(), value); return this; }
         /** Sets the specified value to the {@code eraser} field. */
-        public SDL_PenTouchEvent.Buffer eraser(@NativeType("_Bool") boolean value) { SDL_PenTouchEvent.neraser(address(), value); return this; }
+        public SDL_PenTouchEvent.Buffer eraser(@NativeType("bool") boolean value) { SDL_PenTouchEvent.neraser(address(), value); return this; }
         /** Sets the specified value to the {@code down} field. */
-        public SDL_PenTouchEvent.Buffer down(@NativeType("_Bool") boolean value) { SDL_PenTouchEvent.ndown(address(), value); return this; }
+        public SDL_PenTouchEvent.Buffer down(@NativeType("bool") boolean value) { SDL_PenTouchEvent.ndown(address(), value); return this; }
 
     }
 

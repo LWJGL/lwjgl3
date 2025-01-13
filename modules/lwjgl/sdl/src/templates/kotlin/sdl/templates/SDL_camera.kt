@@ -83,7 +83,7 @@ fun SDL_camera() = SDL.apply {
         SDL_Camera.p("camera")
     )
 
-    _Bool(
+    bool(
         "GetCameraFormat",
 
         SDL_Camera.p("camera"),

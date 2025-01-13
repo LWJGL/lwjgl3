@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     Uint64 timestamp;
  *     SDL_JoystickID which;
  *     Uint8 button;
- *     _Bool down;
+ *     bool down;
  *     Uint8 padding1;
  *     Uint8 padding2;
  * }}</pre>
@@ -110,7 +110,7 @@ public class SDL_GamepadButtonEvent extends Struct<SDL_GamepadButtonEvent> imple
     @NativeType("Uint8")
     public byte button() { return nbutton(address()); }
     /** @return the value of the {@code down} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean down() { return ndown(address()); }
     /** @return the value of the {@code padding1} field. */
     @NativeType("Uint8")
@@ -130,7 +130,7 @@ public class SDL_GamepadButtonEvent extends Struct<SDL_GamepadButtonEvent> imple
     /** Sets the specified value to the {@code button} field. */
     public SDL_GamepadButtonEvent button(@NativeType("Uint8") byte value) { nbutton(address(), value); return this; }
     /** Sets the specified value to the {@code down} field. */
-    public SDL_GamepadButtonEvent down(@NativeType("_Bool") boolean value) { ndown(address(), value); return this; }
+    public SDL_GamepadButtonEvent down(@NativeType("bool") boolean value) { ndown(address(), value); return this; }
     /** Sets the specified value to the {@code padding1} field. */
     public SDL_GamepadButtonEvent padding1(@NativeType("Uint8") byte value) { npadding1(address(), value); return this; }
     /** Sets the specified value to the {@code padding2} field. */
@@ -375,7 +375,7 @@ public class SDL_GamepadButtonEvent extends Struct<SDL_GamepadButtonEvent> imple
         @NativeType("Uint8")
         public byte button() { return SDL_GamepadButtonEvent.nbutton(address()); }
         /** @return the value of the {@code down} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean down() { return SDL_GamepadButtonEvent.ndown(address()); }
         /** @return the value of the {@code padding1} field. */
         @NativeType("Uint8")
@@ -395,7 +395,7 @@ public class SDL_GamepadButtonEvent extends Struct<SDL_GamepadButtonEvent> imple
         /** Sets the specified value to the {@code button} field. */
         public SDL_GamepadButtonEvent.Buffer button(@NativeType("Uint8") byte value) { SDL_GamepadButtonEvent.nbutton(address(), value); return this; }
         /** Sets the specified value to the {@code down} field. */
-        public SDL_GamepadButtonEvent.Buffer down(@NativeType("_Bool") boolean value) { SDL_GamepadButtonEvent.ndown(address(), value); return this; }
+        public SDL_GamepadButtonEvent.Buffer down(@NativeType("bool") boolean value) { SDL_GamepadButtonEvent.ndown(address(), value); return this; }
         /** Sets the specified value to the {@code padding1} field. */
         public SDL_GamepadButtonEvent.Buffer padding1(@NativeType("Uint8") byte value) { SDL_GamepadButtonEvent.npadding1(address(), value); return this; }
         /** Sets the specified value to the {@code padding2} field. */

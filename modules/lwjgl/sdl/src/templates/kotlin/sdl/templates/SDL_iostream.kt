@@ -66,7 +66,7 @@ fun SDL_iostream() = SDL.apply {
         nullable..opaque_p("userdata")
     )
 
-    _Bool(
+    bool(
         "CloseIO",
 
         SDL_IOStream.p("context")
@@ -135,7 +135,7 @@ fun SDL_iostream() = SDL.apply {
         va_list("ap")
     )
 
-    _Bool(
+    bool(
         "FlushIO",
 
         SDL_IOStream.p("context")
@@ -146,7 +146,7 @@ fun SDL_iostream() = SDL.apply {
 
         SDL_IOStream.p("src"),
         AutoSizeResult..size_t.p("datasize"),
-        _Bool("closeio")
+        bool("closeio")
     )
 
     void.p(
@@ -156,16 +156,16 @@ fun SDL_iostream() = SDL.apply {
         AutoSizeResult..size_t.p("datasize")
     )
 
-    _Bool(
+    bool(
         "SaveFile_IO",
 
         SDL_IOStream.p("src"),
         void.const.p("data"),
         AutoSize("data")..size_t("datasize"),
-        _Bool("closeio")
+        bool("closeio")
     )
 
-    _Bool(
+    bool(
         "SaveFile",
 
         charUTF8.const.p("file"),
@@ -173,196 +173,196 @@ fun SDL_iostream() = SDL.apply {
         AutoSize("data")..size_t("datasize")
     )
 
-    _Bool(
+    bool(
         "ReadU8",
 
         SDL_IOStream.p("src"),
         Check(1)..Uint8.p("value")
     )
 
-    _Bool(
+    bool(
         "ReadS8",
 
         SDL_IOStream.p("src"),
         Check(1)..Sint8.p("value")
     )
 
-    _Bool(
+    bool(
         "ReadU16LE",
 
         SDL_IOStream.p("src"),
         Check(1)..Uint16.p("value")
     )
 
-    _Bool(
+    bool(
         "ReadS16LE",
 
         SDL_IOStream.p("src"),
         Check(1)..Sint16.p("value")
     )
 
-    _Bool(
+    bool(
         "ReadU16BE",
 
         SDL_IOStream.p("src"),
         Check(1)..Uint16.p("value")
     )
 
-    _Bool(
+    bool(
         "ReadS16BE",
 
         SDL_IOStream.p("src"),
         Check(1)..Sint16.p("value")
     )
 
-    _Bool(
+    bool(
         "ReadU32LE",
 
         SDL_IOStream.p("src"),
         Check(1)..Uint32.p("value")
     )
 
-    _Bool(
+    bool(
         "ReadS32LE",
 
         SDL_IOStream.p("src"),
         Check(1)..Sint32.p("value")
     )
 
-    _Bool(
+    bool(
         "ReadU32BE",
 
         SDL_IOStream.p("src"),
         Check(1)..Uint32.p("value")
     )
 
-    _Bool(
+    bool(
         "ReadS32BE",
 
         SDL_IOStream.p("src"),
         Check(1)..Sint32.p("value")
     )
 
-    _Bool(
+    bool(
         "ReadU64LE",
 
         SDL_IOStream.p("src"),
         Check(1)..Uint64.p("value")
     )
 
-    _Bool(
+    bool(
         "ReadS64LE",
 
         SDL_IOStream.p("src"),
         Check(1)..Sint64.p("value")
     )
 
-    _Bool(
+    bool(
         "ReadU64BE",
 
         SDL_IOStream.p("src"),
         Check(1)..Uint64.p("value")
     )
 
-    _Bool(
+    bool(
         "ReadS64BE",
 
         SDL_IOStream.p("src"),
         Check(1)..Sint64.p("value")
     )
 
-    _Bool(
+    bool(
         "WriteU8",
 
         SDL_IOStream.p("dst"),
         Uint8("value")
     )
 
-    _Bool(
+    bool(
         "WriteS8",
 
         SDL_IOStream.p("dst"),
         Sint8("value")
     )
 
-    _Bool(
+    bool(
         "WriteU16LE",
 
         SDL_IOStream.p("dst"),
         Uint16("value")
     )
 
-    _Bool(
+    bool(
         "WriteS16LE",
 
         SDL_IOStream.p("dst"),
         Sint16("value")
     )
 
-    _Bool(
+    bool(
         "WriteU16BE",
 
         SDL_IOStream.p("dst"),
         Uint16("value")
     )
 
-    _Bool(
+    bool(
         "WriteS16BE",
 
         SDL_IOStream.p("dst"),
         Sint16("value")
     )
 
-    _Bool(
+    bool(
         "WriteU32LE",
 
         SDL_IOStream.p("dst"),
         Uint32("value")
     )
 
-    _Bool(
+    bool(
         "WriteS32LE",
 
         SDL_IOStream.p("dst"),
         Sint32("value")
     )
 
-    _Bool(
+    bool(
         "WriteU32BE",
 
         SDL_IOStream.p("dst"),
         Uint32("value")
     )
 
-    _Bool(
+    bool(
         "WriteS32BE",
 
         SDL_IOStream.p("dst"),
         Sint32("value")
     )
 
-    _Bool(
+    bool(
         "WriteU64LE",
 
         SDL_IOStream.p("dst"),
         Uint64("value")
     )
 
-    _Bool(
+    bool(
         "WriteS64LE",
 
         SDL_IOStream.p("dst"),
         Sint64("value")
     )
 
-    _Bool(
+    bool(
         "WriteU64BE",
 
         SDL_IOStream.p("dst"),
         Uint64("value")
     )
 
-    _Bool(
+    bool(
         "WriteS64BE",
 
         SDL_IOStream.p("dst"),

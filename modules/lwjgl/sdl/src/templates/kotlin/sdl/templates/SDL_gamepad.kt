@@ -101,7 +101,7 @@ fun SDL_joystick_gamepad() = SDL.apply {
         "AddGamepadMappingsFromIO",
 
         SDL_IOStream.p("src"),
-        _Bool("closeio")
+        bool("closeio")
     )
 
     int(
@@ -110,7 +110,7 @@ fun SDL_joystick_gamepad() = SDL.apply {
         charUTF8.const.p("file")
     )
 
-    _Bool(
+    bool(
         "ReloadGamepadMappings",
 
         void()
@@ -134,14 +134,14 @@ fun SDL_joystick_gamepad() = SDL.apply {
         SDL_Gamepad.p("gamepad")
     )
 
-    _Bool(
+    bool(
         "SetGamepadMapping",
 
         SDL_JoystickID("instance_id"),
         charUTF8.const.p("mapping")
     )
 
-    _Bool(
+    bool(
         "HasGamepad",
 
         void()
@@ -153,7 +153,7 @@ fun SDL_joystick_gamepad() = SDL.apply {
         AutoSizeResult..int.p("count")
     )
 
-    _Bool(
+    bool(
         "IsGamepad",
 
         SDL_JoystickID("instance_id")
@@ -279,7 +279,7 @@ fun SDL_joystick_gamepad() = SDL.apply {
         SDL_Gamepad.p("gamepad")
     )
 
-    _Bool(
+    bool(
         "SetGamepadPlayerIndex",
 
         SDL_Gamepad.p("gamepad"),
@@ -335,7 +335,7 @@ fun SDL_joystick_gamepad() = SDL.apply {
         Check(1)..int.p("percent")
     )
 
-    _Bool(
+    bool(
         "GamepadConnected",
 
         SDL_Gamepad.p("gamepad")
@@ -350,10 +350,10 @@ fun SDL_joystick_gamepad() = SDL.apply {
     void(
         "SetGamepadEventsEnabled",
 
-        _Bool("enabled")
+        bool("enabled")
     )
 
-    _Bool(
+    bool(
         "GamepadEventsEnabled",
 
         void()
@@ -396,7 +396,7 @@ fun SDL_joystick_gamepad() = SDL.apply {
         SDL_GamepadAxis("axis")
     )
 
-    _Bool(
+    bool(
         "GamepadHasAxis",
 
         SDL_Gamepad.p("gamepad"),
@@ -422,14 +422,14 @@ fun SDL_joystick_gamepad() = SDL.apply {
         SDL_GamepadButton("button")
     )
 
-    _Bool(
+    bool(
         "GamepadHasButton",
 
         SDL_Gamepad.p("gamepad"),
         SDL_GamepadButton("button")
     )
 
-    _Bool(
+    bool(
         "GetGamepadButton",
 
         SDL_Gamepad.p("gamepad"),
@@ -463,34 +463,34 @@ fun SDL_joystick_gamepad() = SDL.apply {
         int("touchpad")
     )
 
-    _Bool(
+    bool(
         "GetGamepadTouchpadFinger",
 
         SDL_Gamepad.p("gamepad"),
         int("touchpad"),
         int("finger"),
-        nullable..Check(1).._Bool.p("down"),
+        nullable..Check(1)..bool.p("down"),
         nullable..Check(1)..float.p("x"),
         nullable..Check(1)..float.p("y"),
         nullable..Check(1)..float.p("pressure")
     )
 
-    _Bool(
+    bool(
         "GamepadHasSensor",
 
         SDL_Gamepad.p("gamepad"),
         SDL_SensorType("type")
     )
 
-    _Bool(
+    bool(
         "SetGamepadSensorEnabled",
 
         SDL_Gamepad.p("gamepad"),
         SDL_SensorType("type"),
-        _Bool("enabled")
+        bool("enabled")
     )
 
-    _Bool(
+    bool(
         "GamepadSensorEnabled",
 
         SDL_Gamepad.p("gamepad"),
@@ -504,7 +504,7 @@ fun SDL_joystick_gamepad() = SDL.apply {
         SDL_SensorType("type")
     )
 
-    _Bool(
+    bool(
         "GetGamepadSensorData",
 
         SDL_Gamepad.p("gamepad"),
@@ -513,7 +513,7 @@ fun SDL_joystick_gamepad() = SDL.apply {
         AutoSize("data")..int("num_values")
     )
 
-    _Bool(
+    bool(
         "RumbleGamepad",
 
         SDL_Gamepad.p("gamepad"),
@@ -522,7 +522,7 @@ fun SDL_joystick_gamepad() = SDL.apply {
         Uint32("duration_ms")
     )
 
-    _Bool(
+    bool(
         "RumbleGamepadTriggers",
 
         SDL_Gamepad.p("gamepad"),
@@ -531,7 +531,7 @@ fun SDL_joystick_gamepad() = SDL.apply {
         Uint32("duration_ms")
     )
 
-    _Bool(
+    bool(
         "SetGamepadLED",
 
         SDL_Gamepad.p("gamepad"),
@@ -540,7 +540,7 @@ fun SDL_joystick_gamepad() = SDL.apply {
         Uint8("blue")
     )
 
-    _Bool(
+    bool(
         "SendGamepadEffect",
 
         SDL_Gamepad.p("gamepad"),

@@ -73,7 +73,7 @@ fun SDL_timer() = SDL.apply {
         nullable..opaque_p("userdata")
     )
 
-    _Bool(
+    bool(
         "RemoveTimer",
 
         SDL_TimerID("id")

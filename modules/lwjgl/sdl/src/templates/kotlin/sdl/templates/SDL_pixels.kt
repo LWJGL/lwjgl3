@@ -243,7 +243,7 @@ fun SDL_pixels() = SDL.apply {
         SDL_PixelFormat("format")
     )
 
-    _Bool(
+    bool(
         "GetMasksForPixelFormat",
 
         SDL_PixelFormat("format"),
@@ -276,7 +276,7 @@ fun SDL_pixels() = SDL.apply {
         int("ncolors")
     )
 
-    _Bool(
+    bool(
         "SetPaletteColors",
 
         Check(1)..SDL_Palette.p("palette"),

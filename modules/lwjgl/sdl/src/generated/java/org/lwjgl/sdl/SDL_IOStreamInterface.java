@@ -24,8 +24,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     Sint64 (* seek) (void * userdata, Sint64 offset, SDL_IOWhence whence);
  *     size_t (* read) (void * userdata, void * ptr, size_t size, SDL_IOStatus * status);
  *     size_t (* write) (void * userdata, void const * ptr, size_t size, SDL_IOStatus * status);
- *     _Bool (* flush) (void * userdata, SDL_IOStatus * status);
- *     _Bool (* close) (void * userdata);
+ *     bool (* flush) (void * userdata, SDL_IOStatus * status);
+ *     bool (* close) (void * userdata);
  * }}</pre>
  */
 public class SDL_IOStreamInterface extends Struct<SDL_IOStreamInterface> implements NativeResource {
@@ -107,10 +107,10 @@ public class SDL_IOStreamInterface extends Struct<SDL_IOStreamInterface> impleme
     @NativeType("size_t (*) (void *, void const *, size_t, SDL_IOStatus *)")
     public SDL_IOStreamInterfaceWriteCallback write() { return nwrite(address()); }
     /** @return the value of the {@code flush} field. */
-    @NativeType("_Bool (*) (void *, SDL_IOStatus *)")
+    @NativeType("bool (*) (void *, SDL_IOStatus *)")
     public SDL_IOStreamInterfaceFlushCallback flush() { return nflush(address()); }
     /** @return the value of the {@code close} field. */
-    @NativeType("_Bool (*) (void *)")
+    @NativeType("bool (*) (void *)")
     public SDL_IOStreamInterfaceCloseCallback close$() { return nclose$(address()); }
 
     /** Sets the specified value to the {@code version} field. */
@@ -124,9 +124,9 @@ public class SDL_IOStreamInterface extends Struct<SDL_IOStreamInterface> impleme
     /** Sets the specified value to the {@code write} field. */
     public SDL_IOStreamInterface write(@NativeType("size_t (*) (void *, void const *, size_t, SDL_IOStatus *)") SDL_IOStreamInterfaceWriteCallbackI value) { nwrite(address(), value); return this; }
     /** Sets the specified value to the {@code flush} field. */
-    public SDL_IOStreamInterface flush(@NativeType("_Bool (*) (void *, SDL_IOStatus *)") SDL_IOStreamInterfaceFlushCallbackI value) { nflush(address(), value); return this; }
+    public SDL_IOStreamInterface flush(@NativeType("bool (*) (void *, SDL_IOStatus *)") SDL_IOStreamInterfaceFlushCallbackI value) { nflush(address(), value); return this; }
     /** Sets the specified value to the {@code close} field. */
-    public SDL_IOStreamInterface close$(@NativeType("_Bool (*) (void *)") SDL_IOStreamInterfaceCloseCallbackI value) { nclose$(address(), value); return this; }
+    public SDL_IOStreamInterface close$(@NativeType("bool (*) (void *)") SDL_IOStreamInterfaceCloseCallbackI value) { nclose$(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public SDL_IOStreamInterface set(
@@ -382,10 +382,10 @@ public class SDL_IOStreamInterface extends Struct<SDL_IOStreamInterface> impleme
         @NativeType("size_t (*) (void *, void const *, size_t, SDL_IOStatus *)")
         public SDL_IOStreamInterfaceWriteCallback write() { return SDL_IOStreamInterface.nwrite(address()); }
         /** @return the value of the {@code flush} field. */
-        @NativeType("_Bool (*) (void *, SDL_IOStatus *)")
+        @NativeType("bool (*) (void *, SDL_IOStatus *)")
         public SDL_IOStreamInterfaceFlushCallback flush() { return SDL_IOStreamInterface.nflush(address()); }
         /** @return the value of the {@code close} field. */
-        @NativeType("_Bool (*) (void *)")
+        @NativeType("bool (*) (void *)")
         public SDL_IOStreamInterfaceCloseCallback close$() { return SDL_IOStreamInterface.nclose$(address()); }
 
         /** Sets the specified value to the {@code version} field. */
@@ -399,9 +399,9 @@ public class SDL_IOStreamInterface extends Struct<SDL_IOStreamInterface> impleme
         /** Sets the specified value to the {@code write} field. */
         public SDL_IOStreamInterface.Buffer write(@NativeType("size_t (*) (void *, void const *, size_t, SDL_IOStatus *)") SDL_IOStreamInterfaceWriteCallbackI value) { SDL_IOStreamInterface.nwrite(address(), value); return this; }
         /** Sets the specified value to the {@code flush} field. */
-        public SDL_IOStreamInterface.Buffer flush(@NativeType("_Bool (*) (void *, SDL_IOStatus *)") SDL_IOStreamInterfaceFlushCallbackI value) { SDL_IOStreamInterface.nflush(address(), value); return this; }
+        public SDL_IOStreamInterface.Buffer flush(@NativeType("bool (*) (void *, SDL_IOStatus *)") SDL_IOStreamInterfaceFlushCallbackI value) { SDL_IOStreamInterface.nflush(address(), value); return this; }
         /** Sets the specified value to the {@code close} field. */
-        public SDL_IOStreamInterface.Buffer close$(@NativeType("_Bool (*) (void *)") SDL_IOStreamInterfaceCloseCallbackI value) { SDL_IOStreamInterface.nclose$(address(), value); return this; }
+        public SDL_IOStreamInterface.Buffer close$(@NativeType("bool (*) (void *)") SDL_IOStreamInterfaceCloseCallbackI value) { SDL_IOStreamInterface.nclose$(address(), value); return this; }
 
     }
 

@@ -29,8 +29,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     SDL_GPUCompareOp compare_op;
  *     float min_lod;
  *     float max_lod;
- *     _Bool enable_anisotropy;
- *     _Bool enable_compare;
+ *     bool enable_anisotropy;
+ *     bool enable_compare;
  *     Uint8 padding1;
  *     Uint8 padding2;
  *     SDL_PropertiesID props;
@@ -156,10 +156,10 @@ public class SDL_GPUSamplerCreateInfo extends Struct<SDL_GPUSamplerCreateInfo> i
     /** @return the value of the {@code max_lod} field. */
     public float max_lod() { return nmax_lod(address()); }
     /** @return the value of the {@code enable_anisotropy} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean enable_anisotropy() { return nenable_anisotropy(address()); }
     /** @return the value of the {@code enable_compare} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean enable_compare() { return nenable_compare(address()); }
     /** @return the value of the {@code padding1} field. */
     @NativeType("Uint8")
@@ -194,9 +194,9 @@ public class SDL_GPUSamplerCreateInfo extends Struct<SDL_GPUSamplerCreateInfo> i
     /** Sets the specified value to the {@code max_lod} field. */
     public SDL_GPUSamplerCreateInfo max_lod(float value) { nmax_lod(address(), value); return this; }
     /** Sets the specified value to the {@code enable_anisotropy} field. */
-    public SDL_GPUSamplerCreateInfo enable_anisotropy(@NativeType("_Bool") boolean value) { nenable_anisotropy(address(), value); return this; }
+    public SDL_GPUSamplerCreateInfo enable_anisotropy(@NativeType("bool") boolean value) { nenable_anisotropy(address(), value); return this; }
     /** Sets the specified value to the {@code enable_compare} field. */
-    public SDL_GPUSamplerCreateInfo enable_compare(@NativeType("_Bool") boolean value) { nenable_compare(address(), value); return this; }
+    public SDL_GPUSamplerCreateInfo enable_compare(@NativeType("bool") boolean value) { nenable_compare(address(), value); return this; }
     /** Sets the specified value to the {@code padding1} field. */
     public SDL_GPUSamplerCreateInfo padding1(@NativeType("Uint8") byte value) { npadding1(address(), value); return this; }
     /** Sets the specified value to the {@code padding2} field. */
@@ -505,10 +505,10 @@ public class SDL_GPUSamplerCreateInfo extends Struct<SDL_GPUSamplerCreateInfo> i
         /** @return the value of the {@code max_lod} field. */
         public float max_lod() { return SDL_GPUSamplerCreateInfo.nmax_lod(address()); }
         /** @return the value of the {@code enable_anisotropy} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean enable_anisotropy() { return SDL_GPUSamplerCreateInfo.nenable_anisotropy(address()); }
         /** @return the value of the {@code enable_compare} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean enable_compare() { return SDL_GPUSamplerCreateInfo.nenable_compare(address()); }
         /** @return the value of the {@code padding1} field. */
         @NativeType("Uint8")
@@ -543,9 +543,9 @@ public class SDL_GPUSamplerCreateInfo extends Struct<SDL_GPUSamplerCreateInfo> i
         /** Sets the specified value to the {@code max_lod} field. */
         public SDL_GPUSamplerCreateInfo.Buffer max_lod(float value) { SDL_GPUSamplerCreateInfo.nmax_lod(address(), value); return this; }
         /** Sets the specified value to the {@code enable_anisotropy} field. */
-        public SDL_GPUSamplerCreateInfo.Buffer enable_anisotropy(@NativeType("_Bool") boolean value) { SDL_GPUSamplerCreateInfo.nenable_anisotropy(address(), value); return this; }
+        public SDL_GPUSamplerCreateInfo.Buffer enable_anisotropy(@NativeType("bool") boolean value) { SDL_GPUSamplerCreateInfo.nenable_anisotropy(address(), value); return this; }
         /** Sets the specified value to the {@code enable_compare} field. */
-        public SDL_GPUSamplerCreateInfo.Buffer enable_compare(@NativeType("_Bool") boolean value) { SDL_GPUSamplerCreateInfo.nenable_compare(address(), value); return this; }
+        public SDL_GPUSamplerCreateInfo.Buffer enable_compare(@NativeType("bool") boolean value) { SDL_GPUSamplerCreateInfo.nenable_compare(address(), value); return this; }
         /** Sets the specified value to the {@code padding1} field. */
         public SDL_GPUSamplerCreateInfo.Buffer padding1(@NativeType("Uint8") byte value) { SDL_GPUSamplerCreateInfo.npadding1(address(), value); return this; }
         /** Sets the specified value to the {@code padding2} field. */

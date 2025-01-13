@@ -57,7 +57,7 @@ fun SDL_surface() = SDL.apply {
         Check(1)..SDL_Surface.p("surface")
     )
 
-    _Bool(
+    bool(
         "SetSurfaceColorspace",
 
         Check(1)..SDL_Surface.p("surface"),
@@ -76,7 +76,7 @@ fun SDL_surface() = SDL.apply {
         Check(1)..SDL_Surface.p("surface")
     )
 
-    _Bool(
+    bool(
         "SetSurfacePalette",
 
         Check(1)..SDL_Surface.p("surface"),
@@ -89,14 +89,14 @@ fun SDL_surface() = SDL.apply {
         Check(1)..SDL_Surface.p("surface")
     )
 
-    _Bool(
+    bool(
         "AddSurfaceAlternateImage",
 
         Check(1)..SDL_Surface.p("surface"),
         Check(1)..SDL_Surface.p("image")
     )
 
-    _Bool(
+    bool(
         "SurfaceHasAlternateImages",
 
         Check(1)..SDL_Surface.p("surface")
@@ -115,7 +115,7 @@ fun SDL_surface() = SDL.apply {
         Check(1)..SDL_Surface.p("surface")
     )
 
-    _Bool(
+    bool(
         "LockSurface",
 
         Check(1)..SDL_Surface.p("surface")
@@ -131,7 +131,7 @@ fun SDL_surface() = SDL.apply {
         "LoadBMP_IO",
 
         SDL_IOStream.p("src"),
-        _Bool("closeio")
+        bool("closeio")
     )
 
     SDL_Surface.p(
@@ -140,56 +140,56 @@ fun SDL_surface() = SDL.apply {
         charUTF8.const.p("file")
     )
 
-    _Bool(
+    bool(
         "SaveBMP_IO",
 
         Check(1)..SDL_Surface.p("surface"),
         SDL_IOStream.p("dst"),
-        _Bool("closeio")
+        bool("closeio")
     )
 
-    _Bool(
+    bool(
         "SaveBMP",
 
         Check(1)..SDL_Surface.p("surface"),
         charUTF8.const.p("file")
     )
 
-    _Bool(
+    bool(
         "SetSurfaceRLE",
 
         Check(1)..SDL_Surface.p("surface"),
-        _Bool("enabled")
+        bool("enabled")
     )
 
-    _Bool(
+    bool(
         "SurfaceHasRLE",
 
         Check(1)..SDL_Surface.p("surface")
     )
 
-    _Bool(
+    bool(
         "SetSurfaceColorKey",
 
         Check(1)..SDL_Surface.p("surface"),
-        _Bool("enabled"),
+        bool("enabled"),
         Uint32("key")
     )
 
-    _Bool(
+    bool(
         "SurfaceHasColorKey",
 
         Check(1)..SDL_Surface.p("surface")
     )
 
-    _Bool(
+    bool(
         "GetSurfaceColorKey",
 
         Check(1)..SDL_Surface.p("surface"),
         Check(1)..Uint32.p("key")
     )
 
-    _Bool(
+    bool(
         "SetSurfaceColorMod",
 
         Check(1)..SDL_Surface.p("surface"),
@@ -198,7 +198,7 @@ fun SDL_surface() = SDL.apply {
         Uint8("b")
     )
 
-    _Bool(
+    bool(
         "GetSurfaceColorMod",
 
         Check(1)..SDL_Surface.p("surface"),
@@ -207,49 +207,49 @@ fun SDL_surface() = SDL.apply {
         Check(1)..Uint8.p("b")
     )
 
-    _Bool(
+    bool(
         "SetSurfaceAlphaMod",
 
         Check(1)..SDL_Surface.p("surface"),
         Uint8("alpha")
     )
 
-    _Bool(
+    bool(
         "GetSurfaceAlphaMod",
 
         Check(1)..SDL_Surface.p("surface"),
         Check(1)..Uint8.p("alpha")
     )
 
-    _Bool(
+    bool(
         "SetSurfaceBlendMode",
 
         Check(1)..SDL_Surface.p("surface"),
         SDL_BlendMode("blendMode")
     )
 
-    _Bool(
+    bool(
         "GetSurfaceBlendMode",
 
         Check(1)..SDL_Surface.p("surface"),
         Check(1)..SDL_BlendMode.p("blendMode")
     )
 
-    _Bool(
+    bool(
         "SetSurfaceClipRect",
 
         Check(1)..SDL_Surface.p("surface"),
         Check(1)..SDL_Rect.const.p("rect")
     )
 
-    _Bool(
+    bool(
         "GetSurfaceClipRect",
 
         Check(1)..SDL_Surface.p("surface"),
         Check(1)..SDL_Rect.p("rect")
     )
 
-    _Bool(
+    bool(
         "FlipSurface",
 
         Check(1)..SDL_Surface.p("surface"),
@@ -288,7 +288,7 @@ fun SDL_surface() = SDL.apply {
         SDL_PropertiesID("props")
     )
 
-    _Bool(
+    bool(
         "ConvertPixels",
 
         int("width"),
@@ -301,7 +301,7 @@ fun SDL_surface() = SDL.apply {
         int("dst_pitch")
     )
 
-    _Bool(
+    bool(
         "ConvertPixelsAndColorspace",
 
         int("width"),
@@ -318,7 +318,7 @@ fun SDL_surface() = SDL.apply {
         int("dst_pitch")
     )
 
-    _Bool(
+    bool(
         "PremultiplyAlpha",
 
         int("width"),
@@ -329,17 +329,17 @@ fun SDL_surface() = SDL.apply {
         SDL_PixelFormat("dst_format"),
         Check("height*dst_pitch")..void.p("dst"),
         int("dst_pitch"),
-        _Bool("linear")
+        bool("linear")
     )
 
-    _Bool(
+    bool(
         "PremultiplySurfaceAlpha",
 
         Check(1)..SDL_Surface.p("surface"),
-        _Bool("linear")
+        bool("linear")
     )
 
-    _Bool(
+    bool(
         "ClearSurface",
 
         Check(1)..SDL_Surface.p("surface"),
@@ -349,7 +349,7 @@ fun SDL_surface() = SDL.apply {
         float("a")
     )
 
-    _Bool(
+    bool(
         "FillSurfaceRect",
 
         Check(1)..SDL_Surface.p("dst"),
@@ -357,7 +357,7 @@ fun SDL_surface() = SDL.apply {
         Uint32("color")
     )
 
-    _Bool(
+    bool(
         "FillSurfaceRects",
 
         Check(1)..SDL_Surface.p("dst"),
@@ -366,7 +366,7 @@ fun SDL_surface() = SDL.apply {
         Uint32("color")
     )
 
-    _Bool(
+    bool(
         "BlitSurface",
 
         Check(1)..SDL_Surface.p("src"),
@@ -375,7 +375,7 @@ fun SDL_surface() = SDL.apply {
         Check(1)..SDL_Rect.const.p("dstrect")
     )
 
-    _Bool(
+    bool(
         "BlitSurfaceUnchecked",
 
         Check(1)..SDL_Surface.p("src"),
@@ -384,7 +384,7 @@ fun SDL_surface() = SDL.apply {
         Check(1)..SDL_Rect.const.p("dstrect")
     )
 
-    _Bool(
+    bool(
         "BlitSurfaceScaled",
 
         Check(1)..SDL_Surface.p("src"),
@@ -394,7 +394,7 @@ fun SDL_surface() = SDL.apply {
         SDL_ScaleMode("scaleMode")
     )
 
-    _Bool(
+    bool(
         "BlitSurfaceUncheckedScaled",
 
         Check(1)..SDL_Surface.p("src"),
@@ -404,7 +404,7 @@ fun SDL_surface() = SDL.apply {
         SDL_ScaleMode("scaleMode")
     )
 
-    _Bool(
+    bool(
         "BlitSurfaceTiled",
 
         Check(1)..SDL_Surface.p("src"),
@@ -413,7 +413,7 @@ fun SDL_surface() = SDL.apply {
         Check(1)..SDL_Rect.const.p("dstrect")
     )
 
-    _Bool(
+    bool(
         "BlitSurfaceTiledWithScale",
 
         Check(1)..SDL_Surface.p("src"),
@@ -424,7 +424,7 @@ fun SDL_surface() = SDL.apply {
         Check(1)..SDL_Rect.const.p("dstrect")
     )
 
-    _Bool(
+    bool(
         "BlitSurface9Grid",
 
         Check(1)..SDL_Surface.p("src"),
@@ -458,7 +458,7 @@ fun SDL_surface() = SDL.apply {
         Uint8("a")
     )
 
-    _Bool(
+    bool(
         "ReadSurfacePixel",
 
         Check(1)..SDL_Surface.p("surface"),
@@ -470,7 +470,7 @@ fun SDL_surface() = SDL.apply {
         nullable..Check(1)..Uint8.p("a")
     )
 
-    _Bool(
+    bool(
         "ReadSurfacePixelFloat",
 
         Check(1)..SDL_Surface.p("surface"),
@@ -482,7 +482,7 @@ fun SDL_surface() = SDL.apply {
         nullable..Check(1)..float.p("a")
     )
 
-    _Bool(
+    bool(
         "WriteSurfacePixel",
 
         Check(1)..SDL_Surface.p("surface"),
@@ -494,7 +494,7 @@ fun SDL_surface() = SDL.apply {
         Uint8("a")
     )
 
-    _Bool(
+    bool(
         "WriteSurfacePixelFloat",
 
         Check(1)..SDL_Surface.p("surface"),

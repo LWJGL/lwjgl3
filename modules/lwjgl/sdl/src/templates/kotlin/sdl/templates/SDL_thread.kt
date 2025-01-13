@@ -48,7 +48,7 @@ fun SDL_thread() = SDL.apply {
         SDL_Thread.p("thread")
     )
 
-    _Bool(
+    bool(
         "SetCurrentThreadPriority",
 
         SDL_ThreadPriority("priority")
@@ -79,7 +79,7 @@ fun SDL_thread() = SDL.apply {
         nullable..Check(1)..SDL_TLSID.p("id")
     )
 
-    _Bool(
+    bool(
         "SetTLS",
 
         nullable..Check(1)..SDL_TLSID.p("id"),

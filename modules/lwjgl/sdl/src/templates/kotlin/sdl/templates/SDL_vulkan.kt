@@ -11,7 +11,7 @@ import vulkan.*
 val SDL_vulkan = "SDL_vulkan".nativeClassSDL {
     javaImport("org.lwjgl.vulkan.*")
 
-    _Bool(
+    bool(
         "Vulkan_LoadLibrary",
 
         nullable..charUTF8.const.p("path")
@@ -35,7 +35,7 @@ val SDL_vulkan = "SDL_vulkan".nativeClassSDL {
         AutoSizeResult..Uint32.p("count")
     )
 
-    _Bool(
+    bool(
         "Vulkan_CreateSurface",
 
         SDL_Window.p("window"),
@@ -52,7 +52,7 @@ val SDL_vulkan = "SDL_vulkan".nativeClassSDL {
         nullable..Check(1)..VkAllocationCallbacks.const.p("allocator")
     )
 
-    _Bool(
+    bool(
         "Vulkan_GetPresentationSupport",
 
         VkInstance("instance"),

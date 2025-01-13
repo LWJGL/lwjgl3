@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre>{@code
  * struct SDL_GPUStorageBufferReadWriteBinding {
  *     SDL_GPUBuffer * buffer;
- *     _Bool cycle;
+ *     bool cycle;
  *     Uint8 padding1;
  *     Uint8 padding2;
  *     Uint8 padding3;
@@ -87,7 +87,7 @@ public class SDL_GPUStorageBufferReadWriteBinding extends Struct<SDL_GPUStorageB
     @NativeType("SDL_GPUBuffer *")
     public long buffer() { return nbuffer(address()); }
     /** @return the value of the {@code cycle} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean cycle() { return ncycle(address()); }
     /** @return the value of the {@code padding1} field. */
     @NativeType("Uint8")
@@ -102,7 +102,7 @@ public class SDL_GPUStorageBufferReadWriteBinding extends Struct<SDL_GPUStorageB
     /** Sets the specified value to the {@code buffer} field. */
     public SDL_GPUStorageBufferReadWriteBinding buffer(@NativeType("SDL_GPUBuffer *") long value) { nbuffer(address(), value); return this; }
     /** Sets the specified value to the {@code cycle} field. */
-    public SDL_GPUStorageBufferReadWriteBinding cycle(@NativeType("_Bool") boolean value) { ncycle(address(), value); return this; }
+    public SDL_GPUStorageBufferReadWriteBinding cycle(@NativeType("bool") boolean value) { ncycle(address(), value); return this; }
     /** Sets the specified value to the {@code padding1} field. */
     public SDL_GPUStorageBufferReadWriteBinding padding1(@NativeType("Uint8") byte value) { npadding1(address(), value); return this; }
     /** Sets the specified value to the {@code padding2} field. */
@@ -328,7 +328,7 @@ public class SDL_GPUStorageBufferReadWriteBinding extends Struct<SDL_GPUStorageB
         @NativeType("SDL_GPUBuffer *")
         public long buffer() { return SDL_GPUStorageBufferReadWriteBinding.nbuffer(address()); }
         /** @return the value of the {@code cycle} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean cycle() { return SDL_GPUStorageBufferReadWriteBinding.ncycle(address()); }
         /** @return the value of the {@code padding1} field. */
         @NativeType("Uint8")
@@ -343,7 +343,7 @@ public class SDL_GPUStorageBufferReadWriteBinding extends Struct<SDL_GPUStorageB
         /** Sets the specified value to the {@code buffer} field. */
         public SDL_GPUStorageBufferReadWriteBinding.Buffer buffer(@NativeType("SDL_GPUBuffer *") long value) { SDL_GPUStorageBufferReadWriteBinding.nbuffer(address(), value); return this; }
         /** Sets the specified value to the {@code cycle} field. */
-        public SDL_GPUStorageBufferReadWriteBinding.Buffer cycle(@NativeType("_Bool") boolean value) { SDL_GPUStorageBufferReadWriteBinding.ncycle(address(), value); return this; }
+        public SDL_GPUStorageBufferReadWriteBinding.Buffer cycle(@NativeType("bool") boolean value) { SDL_GPUStorageBufferReadWriteBinding.ncycle(address(), value); return this; }
         /** Sets the specified value to the {@code padding1} field. */
         public SDL_GPUStorageBufferReadWriteBinding.Buffer padding1(@NativeType("Uint8") byte value) { SDL_GPUStorageBufferReadWriteBinding.npadding1(address(), value); return this; }
         /** Sets the specified value to the {@code padding2} field. */

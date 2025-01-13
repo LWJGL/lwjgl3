@@ -35,7 +35,7 @@ public interface SDL_X11EventHookI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /** {@code _Bool (* SDL_X11EventHook) (void * userdata, XEvent * xevent)} */
-    @NativeType("_Bool") boolean invoke(@NativeType("void *") long userdata, @NativeType("XEvent *") long xevent);
+    /** {@code bool (* SDL_X11EventHook) (void * userdata, XEvent * xevent)} */
+    @NativeType("bool") boolean invoke(@NativeType("void *") long userdata, @NativeType("XEvent *") long xevent);
 
 }

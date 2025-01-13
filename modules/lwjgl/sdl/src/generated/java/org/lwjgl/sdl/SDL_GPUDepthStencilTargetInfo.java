@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     SDL_GPUStoreOp store_op;
  *     SDL_GPULoadOp stencil_load_op;
  *     SDL_GPUStoreOp stencil_store_op;
- *     _Bool cycle;
+ *     bool cycle;
  *     Uint8 clear_stencil;
  *     Uint8 padding1;
  *     Uint8 padding2;
@@ -121,7 +121,7 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
     @NativeType("SDL_GPUStoreOp")
     public int stencil_store_op() { return nstencil_store_op(address()); }
     /** @return the value of the {@code cycle} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean cycle() { return ncycle(address()); }
     /** @return the value of the {@code clear_stencil} field. */
     @NativeType("Uint8")
@@ -146,7 +146,7 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
     /** Sets the specified value to the {@code stencil_store_op} field. */
     public SDL_GPUDepthStencilTargetInfo stencil_store_op(@NativeType("SDL_GPUStoreOp") int value) { nstencil_store_op(address(), value); return this; }
     /** Sets the specified value to the {@code cycle} field. */
-    public SDL_GPUDepthStencilTargetInfo cycle(@NativeType("_Bool") boolean value) { ncycle(address(), value); return this; }
+    public SDL_GPUDepthStencilTargetInfo cycle(@NativeType("bool") boolean value) { ncycle(address(), value); return this; }
     /** Sets the specified value to the {@code clear_stencil} field. */
     public SDL_GPUDepthStencilTargetInfo clear_stencil(@NativeType("Uint8") byte value) { nclear_stencil(address(), value); return this; }
     /** Sets the specified value to the {@code padding1} field. */
@@ -416,7 +416,7 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
         @NativeType("SDL_GPUStoreOp")
         public int stencil_store_op() { return SDL_GPUDepthStencilTargetInfo.nstencil_store_op(address()); }
         /** @return the value of the {@code cycle} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean cycle() { return SDL_GPUDepthStencilTargetInfo.ncycle(address()); }
         /** @return the value of the {@code clear_stencil} field. */
         @NativeType("Uint8")
@@ -441,7 +441,7 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
         /** Sets the specified value to the {@code stencil_store_op} field. */
         public SDL_GPUDepthStencilTargetInfo.Buffer stencil_store_op(@NativeType("SDL_GPUStoreOp") int value) { SDL_GPUDepthStencilTargetInfo.nstencil_store_op(address(), value); return this; }
         /** Sets the specified value to the {@code cycle} field. */
-        public SDL_GPUDepthStencilTargetInfo.Buffer cycle(@NativeType("_Bool") boolean value) { SDL_GPUDepthStencilTargetInfo.ncycle(address(), value); return this; }
+        public SDL_GPUDepthStencilTargetInfo.Buffer cycle(@NativeType("bool") boolean value) { SDL_GPUDepthStencilTargetInfo.ncycle(address(), value); return this; }
         /** Sets the specified value to the {@code clear_stencil} field. */
         public SDL_GPUDepthStencilTargetInfo.Buffer clear_stencil(@NativeType("Uint8") byte value) { SDL_GPUDepthStencilTargetInfo.nclear_stencil(address(), value); return this; }
         /** Sets the specified value to the {@code padding1} field. */

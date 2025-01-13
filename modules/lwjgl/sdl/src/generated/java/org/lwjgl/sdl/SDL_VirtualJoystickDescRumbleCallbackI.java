@@ -14,7 +14,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 
 /** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
-@NativeType("_Bool (*) (void *, Uint16, Uint16)")
+@NativeType("bool (*) (void *, Uint16, Uint16)")
 public interface SDL_VirtualJoystickDescRumbleCallbackI extends CallbackI {
 
     FFICIF CIF = apiCreateCIF(
@@ -36,7 +36,7 @@ public interface SDL_VirtualJoystickDescRumbleCallbackI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /** {@code _Bool (*) (void * userdata, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble)} */
-    @NativeType("_Bool") boolean invoke(@NativeType("void *") long userdata, @NativeType("Uint16") short low_frequency_rumble, @NativeType("Uint16") short high_frequency_rumble);
+    /** {@code bool (*) (void * userdata, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble)} */
+    @NativeType("bool") boolean invoke(@NativeType("void *") long userdata, @NativeType("Uint16") short low_frequency_rumble, @NativeType("Uint16") short high_frequency_rumble);
 
 }

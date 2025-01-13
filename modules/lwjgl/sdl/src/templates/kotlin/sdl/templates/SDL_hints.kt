@@ -248,7 +248,7 @@ fun SDL_hints() = SDL.apply {
         "HINT_OVERRIDE".enum
     )
 
-    _Bool(
+    bool(
         "SetHintWithPriority",
 
         charUTF8.const.p("name"),
@@ -256,14 +256,14 @@ fun SDL_hints() = SDL.apply {
         SDL_HintPriority("priority")
     )
 
-    _Bool(
+    bool(
         "SetHint",
 
         charUTF8.const.p("name"),
         nullable..charUTF8.const.p("value")
     )
 
-    _Bool(
+    bool(
         "ResetHint",
 
         charUTF8.const.p("name")
@@ -281,14 +281,14 @@ fun SDL_hints() = SDL.apply {
         charUTF8.const.p("name")
     )
 
-    _Bool(
+    bool(
         "GetHintBoolean",
 
         charUTF8.const.p("name"),
-        _Bool("default_value")
+        bool("default_value")
     )
 
-    _Bool(
+    bool(
         "AddHintCallback",
 
         charUTF8.const.p("name"),

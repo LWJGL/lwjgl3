@@ -29,14 +29,14 @@ fun SDL_properties() = SDL.apply {
         void()
     )
 
-    _Bool(
+    bool(
         "CopyProperties",
 
         SDL_PropertiesID("src"),
         SDL_PropertiesID("dst")
     )
 
-    _Bool(
+    bool(
         "LockProperties",
 
         SDL_PropertiesID("props")
@@ -48,7 +48,7 @@ fun SDL_properties() = SDL.apply {
         SDL_PropertiesID("props")
     )
 
-    _Bool(
+    bool(
         "SetPointerPropertyWithCleanup",
 
         SDL_PropertiesID("props"),
@@ -58,7 +58,7 @@ fun SDL_properties() = SDL.apply {
         nullable..opaque_p("userdata")
     )
 
-    _Bool(
+    bool(
         "SetPointerProperty",
 
         SDL_PropertiesID("props"),
@@ -66,7 +66,7 @@ fun SDL_properties() = SDL.apply {
         nullable..opaque_p("value")
     )
 
-    _Bool(
+    bool(
         "SetStringProperty",
 
         SDL_PropertiesID("props"),
@@ -74,7 +74,7 @@ fun SDL_properties() = SDL.apply {
         charUTF8.const.p("value")
     )
 
-    _Bool(
+    bool(
         "SetNumberProperty",
 
         SDL_PropertiesID("props"),
@@ -82,7 +82,7 @@ fun SDL_properties() = SDL.apply {
         Sint64("value")
     )
 
-    _Bool(
+    bool(
         "SetFloatProperty",
 
         SDL_PropertiesID("props"),
@@ -90,15 +90,15 @@ fun SDL_properties() = SDL.apply {
         float("value")
     )
 
-    _Bool(
+    bool(
         "SetBooleanProperty",
 
         SDL_PropertiesID("props"),
         charUTF8.const.p("name"),
-        _Bool("value")
+        bool("value")
     )
 
-    _Bool(
+    bool(
         "HasProperty",
 
         SDL_PropertiesID("props"),
@@ -144,22 +144,22 @@ fun SDL_properties() = SDL.apply {
         float("default_value")
     )
 
-    _Bool(
+    bool(
         "GetBooleanProperty",
 
         SDL_PropertiesID("props"),
         charUTF8.const.p("name"),
-        _Bool("default_value")
+        bool("default_value")
     )
 
-    _Bool(
+    bool(
         "ClearProperty",
 
         SDL_PropertiesID("props"),
         charUTF8.const.p("name")
     )
 
-    _Bool(
+    bool(
         "EnumerateProperties",
 
         SDL_PropertiesID("props"),

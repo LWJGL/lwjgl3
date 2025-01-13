@@ -27,8 +27,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     SDL_Keycode key;
  *     SDL_Keymod mod;
  *     Uint16 raw;
- *     _Bool down;
- *     _Bool repeat;
+ *     bool down;
+ *     bool repeat;
  * }}</pre>
  */
 public class SDL_KeyboardEvent extends Struct<SDL_KeyboardEvent> implements NativeResource {
@@ -134,10 +134,10 @@ public class SDL_KeyboardEvent extends Struct<SDL_KeyboardEvent> implements Nati
     @NativeType("Uint16")
     public short raw() { return nraw(address()); }
     /** @return the value of the {@code down} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean down() { return ndown(address()); }
     /** @return the value of the {@code repeat} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean repeat() { return nrepeat(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -159,9 +159,9 @@ public class SDL_KeyboardEvent extends Struct<SDL_KeyboardEvent> implements Nati
     /** Sets the specified value to the {@code raw} field. */
     public SDL_KeyboardEvent raw(@NativeType("Uint16") short value) { nraw(address(), value); return this; }
     /** Sets the specified value to the {@code down} field. */
-    public SDL_KeyboardEvent down(@NativeType("_Bool") boolean value) { ndown(address(), value); return this; }
+    public SDL_KeyboardEvent down(@NativeType("bool") boolean value) { ndown(address(), value); return this; }
     /** Sets the specified value to the {@code repeat} field. */
-    public SDL_KeyboardEvent repeat(@NativeType("_Bool") boolean value) { nrepeat(address(), value); return this; }
+    public SDL_KeyboardEvent repeat(@NativeType("bool") boolean value) { nrepeat(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public SDL_KeyboardEvent set(
@@ -432,10 +432,10 @@ public class SDL_KeyboardEvent extends Struct<SDL_KeyboardEvent> implements Nati
         @NativeType("Uint16")
         public short raw() { return SDL_KeyboardEvent.nraw(address()); }
         /** @return the value of the {@code down} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean down() { return SDL_KeyboardEvent.ndown(address()); }
         /** @return the value of the {@code repeat} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean repeat() { return SDL_KeyboardEvent.nrepeat(address()); }
 
         /** Sets the specified value to the {@code type} field. */
@@ -457,9 +457,9 @@ public class SDL_KeyboardEvent extends Struct<SDL_KeyboardEvent> implements Nati
         /** Sets the specified value to the {@code raw} field. */
         public SDL_KeyboardEvent.Buffer raw(@NativeType("Uint16") short value) { SDL_KeyboardEvent.nraw(address(), value); return this; }
         /** Sets the specified value to the {@code down} field. */
-        public SDL_KeyboardEvent.Buffer down(@NativeType("_Bool") boolean value) { SDL_KeyboardEvent.ndown(address(), value); return this; }
+        public SDL_KeyboardEvent.Buffer down(@NativeType("bool") boolean value) { SDL_KeyboardEvent.ndown(address(), value); return this; }
         /** Sets the specified value to the {@code repeat} field. */
-        public SDL_KeyboardEvent.Buffer repeat(@NativeType("_Bool") boolean value) { SDL_KeyboardEvent.nrepeat(address(), value); return this; }
+        public SDL_KeyboardEvent.Buffer repeat(@NativeType("bool") boolean value) { SDL_KeyboardEvent.nrepeat(address(), value); return this; }
 
     }
 

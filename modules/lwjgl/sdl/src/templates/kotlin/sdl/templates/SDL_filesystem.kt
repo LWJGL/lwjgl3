@@ -55,13 +55,13 @@ fun SDL_filesystem() = SDL.apply {
         SDL_Folder("folder")
     )
 
-    _Bool(
+    bool(
         "CreateDirectory",
 
         charUTF8.const.p("path")
     )
 
-    _Bool(
+    bool(
         "EnumerateDirectory",
 
         charUTF8.const.p("path"),
@@ -69,27 +69,27 @@ fun SDL_filesystem() = SDL.apply {
         nullable..opaque_p("userdata")
     )
 
-    _Bool(
+    bool(
         "RemovePath",
 
         charUTF8.const.p("path")
     )
 
-    _Bool(
+    bool(
         "RenamePath",
 
         charUTF8.const.p("oldpath"),
         charUTF8.const.p("newpath")
     )
 
-    _Bool(
+    bool(
         "CopyFile",
 
         charUTF8.const.p("oldpath"),
         charUTF8.const.p("newpath")
     )
 
-    _Bool(
+    bool(
         "GetPathInfo",
 
         charUTF8.const.p("path"),

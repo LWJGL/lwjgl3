@@ -46,14 +46,14 @@ public class SDL_vulkan {
 
     // --- [ SDL_Vulkan_LoadLibrary ] ---
 
-    /** {@code _Bool SDL_Vulkan_LoadLibrary(char const * path)} */
+    /** {@code bool SDL_Vulkan_LoadLibrary(char const * path)} */
     public static boolean nSDL_Vulkan_LoadLibrary(long path) {
         long __functionAddress = Functions.Vulkan_LoadLibrary;
         return invokePZ(path, __functionAddress);
     }
 
-    /** {@code _Bool SDL_Vulkan_LoadLibrary(char const * path)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_Vulkan_LoadLibrary(char const * path)} */
+    @NativeType("bool")
     public static boolean SDL_Vulkan_LoadLibrary(@NativeType("char const *") @Nullable ByteBuffer path) {
         if (CHECKS) {
             checkNT1Safe(path);
@@ -61,8 +61,8 @@ public class SDL_vulkan {
         return nSDL_Vulkan_LoadLibrary(memAddressSafe(path));
     }
 
-    /** {@code _Bool SDL_Vulkan_LoadLibrary(char const * path)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_Vulkan_LoadLibrary(char const * path)} */
+    @NativeType("bool")
     public static boolean SDL_Vulkan_LoadLibrary(@NativeType("char const *") @Nullable CharSequence path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -114,7 +114,7 @@ public class SDL_vulkan {
 
     // --- [ SDL_Vulkan_CreateSurface ] ---
 
-    /** {@code _Bool SDL_Vulkan_CreateSurface(SDL_Window * window, VkInstance instance, VkAllocationCallbacks const * allocator, VkSurfaceKHR * surface)} */
+    /** {@code bool SDL_Vulkan_CreateSurface(SDL_Window * window, VkInstance instance, VkAllocationCallbacks const * allocator, VkSurfaceKHR * surface)} */
     public static boolean nSDL_Vulkan_CreateSurface(long window, long instance, long allocator, long surface) {
         long __functionAddress = Functions.Vulkan_CreateSurface;
         if (CHECKS) {
@@ -123,8 +123,8 @@ public class SDL_vulkan {
         return invokePPPPZ(window, instance, allocator, surface, __functionAddress);
     }
 
-    /** {@code _Bool SDL_Vulkan_CreateSurface(SDL_Window * window, VkInstance instance, VkAllocationCallbacks const * allocator, VkSurfaceKHR * surface)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_Vulkan_CreateSurface(SDL_Window * window, VkInstance instance, VkAllocationCallbacks const * allocator, VkSurfaceKHR * surface)} */
+    @NativeType("bool")
     public static boolean SDL_Vulkan_CreateSurface(@NativeType("SDL_Window *") long window, VkInstance instance, @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks.@Nullable Buffer allocator, @NativeType("VkSurfaceKHR *") LongBuffer surface) {
         if (CHECKS) {
             checkSafe(allocator, 1);
@@ -151,8 +151,8 @@ public class SDL_vulkan {
 
     // --- [ SDL_Vulkan_GetPresentationSupport ] ---
 
-    /** {@code _Bool SDL_Vulkan_GetPresentationSupport(VkInstance instance, VkPhysicalDevice physicalDevice, Uint32 queueFamilyIndex)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_Vulkan_GetPresentationSupport(VkInstance instance, VkPhysicalDevice physicalDevice, Uint32 queueFamilyIndex)} */
+    @NativeType("bool")
     public static boolean SDL_Vulkan_GetPresentationSupport(VkInstance instance, VkPhysicalDevice physicalDevice, @NativeType("Uint32") int queueFamilyIndex) {
         long __functionAddress = Functions.Vulkan_GetPresentationSupport;
         return invokePPZ(instance.address(), physicalDevice.address(), queueFamilyIndex, __functionAddress);

@@ -4228,7 +4228,7 @@ public class SDL {
 
     // --- [ SDL_ReadAsyncIO ] ---
 
-    /** {@code _Bool SDL_ReadAsyncIO(SDL_AsyncIO * asyncio, void * ptr, Uint64 offset, Uint64 size, SDL_AsyncIOQueue * queue, void * userdata)} */
+    /** {@code bool SDL_ReadAsyncIO(SDL_AsyncIO * asyncio, void * ptr, Uint64 offset, Uint64 size, SDL_AsyncIOQueue * queue, void * userdata)} */
     public static boolean nSDL_ReadAsyncIO(long asyncio, long ptr, long offset, long size, long queue, long userdata) {
         long __functionAddress = Functions.ReadAsyncIO;
         if (CHECKS) {
@@ -4238,15 +4238,15 @@ public class SDL {
         return invokePPJJPPZ(asyncio, ptr, offset, size, queue, userdata, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ReadAsyncIO(SDL_AsyncIO * asyncio, void * ptr, Uint64 offset, Uint64 size, SDL_AsyncIOQueue * queue, void * userdata)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ReadAsyncIO(SDL_AsyncIO * asyncio, void * ptr, Uint64 offset, Uint64 size, SDL_AsyncIOQueue * queue, void * userdata)} */
+    @NativeType("bool")
     public static boolean SDL_ReadAsyncIO(@NativeType("SDL_AsyncIO *") long asyncio, @NativeType("void *") ByteBuffer ptr, @NativeType("Uint64") long offset, @NativeType("SDL_AsyncIOQueue *") long queue, @NativeType("void *") long userdata) {
         return nSDL_ReadAsyncIO(asyncio, memAddress(ptr), offset, ptr.remaining(), queue, userdata);
     }
 
     // --- [ SDL_WriteAsyncIO ] ---
 
-    /** {@code _Bool SDL_WriteAsyncIO(SDL_AsyncIO * asyncio, void * ptr, Uint64 offset, Uint64 size, SDL_AsyncIOQueue * queue, void * userdata)} */
+    /** {@code bool SDL_WriteAsyncIO(SDL_AsyncIO * asyncio, void * ptr, Uint64 offset, Uint64 size, SDL_AsyncIOQueue * queue, void * userdata)} */
     public static boolean nSDL_WriteAsyncIO(long asyncio, long ptr, long offset, long size, long queue, long userdata) {
         long __functionAddress = Functions.WriteAsyncIO;
         if (CHECKS) {
@@ -4256,17 +4256,17 @@ public class SDL {
         return invokePPJJPPZ(asyncio, ptr, offset, size, queue, userdata, __functionAddress);
     }
 
-    /** {@code _Bool SDL_WriteAsyncIO(SDL_AsyncIO * asyncio, void * ptr, Uint64 offset, Uint64 size, SDL_AsyncIOQueue * queue, void * userdata)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WriteAsyncIO(SDL_AsyncIO * asyncio, void * ptr, Uint64 offset, Uint64 size, SDL_AsyncIOQueue * queue, void * userdata)} */
+    @NativeType("bool")
     public static boolean SDL_WriteAsyncIO(@NativeType("SDL_AsyncIO *") long asyncio, @NativeType("void *") ByteBuffer ptr, @NativeType("Uint64") long offset, @NativeType("SDL_AsyncIOQueue *") long queue, @NativeType("void *") long userdata) {
         return nSDL_WriteAsyncIO(asyncio, memAddress(ptr), offset, ptr.remaining(), queue, userdata);
     }
 
     // --- [ SDL_CloseAsyncIO ] ---
 
-    /** {@code _Bool SDL_CloseAsyncIO(SDL_AsyncIO * asyncio, _Bool flush, SDL_AsyncIOQueue * queue, void * userdata)} */
-    @NativeType("_Bool")
-    public static boolean SDL_CloseAsyncIO(@NativeType("SDL_AsyncIO *") long asyncio, @NativeType("_Bool") boolean flush, @NativeType("SDL_AsyncIOQueue *") long queue, @NativeType("void *") long userdata) {
+    /** {@code bool SDL_CloseAsyncIO(SDL_AsyncIO * asyncio, bool flush, SDL_AsyncIOQueue * queue, void * userdata)} */
+    @NativeType("bool")
+    public static boolean SDL_CloseAsyncIO(@NativeType("SDL_AsyncIO *") long asyncio, @NativeType("bool") boolean flush, @NativeType("SDL_AsyncIOQueue *") long queue, @NativeType("void *") long userdata) {
         long __functionAddress = Functions.CloseAsyncIO;
         if (CHECKS) {
             check(asyncio);
@@ -4297,7 +4297,7 @@ public class SDL {
 
     // --- [ SDL_GetAsyncIOResult ] ---
 
-    /** {@code _Bool SDL_GetAsyncIOResult(SDL_AsyncIOQueue * queue, SDL_AsyncIOOutcome * outcome)} */
+    /** {@code bool SDL_GetAsyncIOResult(SDL_AsyncIOQueue * queue, SDL_AsyncIOOutcome * outcome)} */
     public static boolean nSDL_GetAsyncIOResult(long queue, long outcome) {
         long __functionAddress = Functions.GetAsyncIOResult;
         if (CHECKS) {
@@ -4306,15 +4306,15 @@ public class SDL {
         return invokePPZ(queue, outcome, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetAsyncIOResult(SDL_AsyncIOQueue * queue, SDL_AsyncIOOutcome * outcome)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetAsyncIOResult(SDL_AsyncIOQueue * queue, SDL_AsyncIOOutcome * outcome)} */
+    @NativeType("bool")
     public static boolean SDL_GetAsyncIOResult(@NativeType("SDL_AsyncIOQueue *") long queue, @NativeType("SDL_AsyncIOOutcome *") SDL_AsyncIOOutcome outcome) {
         return nSDL_GetAsyncIOResult(queue, outcome.address());
     }
 
     // --- [ SDL_WaitAsyncIOResult ] ---
 
-    /** {@code _Bool SDL_WaitAsyncIOResult(SDL_AsyncIOQueue * queue, SDL_AsyncIOOutcome * outcome, Sint32 timeoutMS)} */
+    /** {@code bool SDL_WaitAsyncIOResult(SDL_AsyncIOQueue * queue, SDL_AsyncIOOutcome * outcome, Sint32 timeoutMS)} */
     public static boolean nSDL_WaitAsyncIOResult(long queue, long outcome, int timeoutMS) {
         long __functionAddress = Functions.WaitAsyncIOResult;
         if (CHECKS) {
@@ -4323,8 +4323,8 @@ public class SDL {
         return invokePPZ(queue, outcome, timeoutMS, __functionAddress);
     }
 
-    /** {@code _Bool SDL_WaitAsyncIOResult(SDL_AsyncIOQueue * queue, SDL_AsyncIOOutcome * outcome, Sint32 timeoutMS)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WaitAsyncIOResult(SDL_AsyncIOQueue * queue, SDL_AsyncIOOutcome * outcome, Sint32 timeoutMS)} */
+    @NativeType("bool")
     public static boolean SDL_WaitAsyncIOResult(@NativeType("SDL_AsyncIOQueue *") long queue, @NativeType("SDL_AsyncIOOutcome *") SDL_AsyncIOOutcome outcome, @NativeType("Sint32") int timeoutMS) {
         return nSDL_WaitAsyncIOResult(queue, outcome.address(), timeoutMS);
     }
@@ -4342,7 +4342,7 @@ public class SDL {
 
     // --- [ SDL_LoadFileAsync ] ---
 
-    /** {@code _Bool SDL_LoadFileAsync(char const * file, SDL_AsyncIOQueue * queue, void * userdata)} */
+    /** {@code bool SDL_LoadFileAsync(char const * file, SDL_AsyncIOQueue * queue, void * userdata)} */
     public static boolean nSDL_LoadFileAsync(long file, long queue, long userdata) {
         long __functionAddress = Functions.LoadFileAsync;
         if (CHECKS) {
@@ -4351,8 +4351,8 @@ public class SDL {
         return invokePPPZ(file, queue, userdata, __functionAddress);
     }
 
-    /** {@code _Bool SDL_LoadFileAsync(char const * file, SDL_AsyncIOQueue * queue, void * userdata)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_LoadFileAsync(char const * file, SDL_AsyncIOQueue * queue, void * userdata)} */
+    @NativeType("bool")
     public static boolean SDL_LoadFileAsync(@NativeType("char const *") ByteBuffer file, @NativeType("SDL_AsyncIOQueue *") long queue, @NativeType("void *") long userdata) {
         if (CHECKS) {
             checkNT1(file);
@@ -4360,8 +4360,8 @@ public class SDL {
         return nSDL_LoadFileAsync(memAddress(file), queue, userdata);
     }
 
-    /** {@code _Bool SDL_LoadFileAsync(char const * file, SDL_AsyncIOQueue * queue, void * userdata)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_LoadFileAsync(char const * file, SDL_AsyncIOQueue * queue, void * userdata)} */
+    @NativeType("bool")
     public static boolean SDL_LoadFileAsync(@NativeType("char const *") CharSequence file, @NativeType("SDL_AsyncIOQueue *") long queue, @NativeType("void *") long userdata) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -4470,14 +4470,14 @@ public class SDL {
 
     // --- [ SDL_GetAudioDeviceFormat ] ---
 
-    /** {@code _Bool SDL_GetAudioDeviceFormat(SDL_AudioDeviceID devid, SDL_AudioSpec * spec, int * sample_frames)} */
+    /** {@code bool SDL_GetAudioDeviceFormat(SDL_AudioDeviceID devid, SDL_AudioSpec * spec, int * sample_frames)} */
     public static boolean nSDL_GetAudioDeviceFormat(int devid, long spec, long sample_frames) {
         long __functionAddress = Functions.GetAudioDeviceFormat;
         return invokePPZ(devid, spec, sample_frames, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetAudioDeviceFormat(SDL_AudioDeviceID devid, SDL_AudioSpec * spec, int * sample_frames)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetAudioDeviceFormat(SDL_AudioDeviceID devid, SDL_AudioSpec * spec, int * sample_frames)} */
+    @NativeType("bool")
     public static boolean SDL_GetAudioDeviceFormat(@NativeType("SDL_AudioDeviceID") int devid, @NativeType("SDL_AudioSpec *") SDL_AudioSpec.Buffer spec, @NativeType("int *") IntBuffer sample_frames) {
         if (CHECKS) {
             check(spec, 1);
@@ -4526,8 +4526,8 @@ public class SDL {
 
     // --- [ SDL_IsAudioDevicePhysical ] ---
 
-    /** {@code _Bool SDL_IsAudioDevicePhysical(SDL_AudioDeviceID devid)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_IsAudioDevicePhysical(SDL_AudioDeviceID devid)} */
+    @NativeType("bool")
     public static boolean SDL_IsAudioDevicePhysical(@NativeType("SDL_AudioDeviceID") int devid) {
         long __functionAddress = Functions.IsAudioDevicePhysical;
         return invokeZ(devid, __functionAddress);
@@ -4535,8 +4535,8 @@ public class SDL {
 
     // --- [ SDL_IsAudioDevicePlayback ] ---
 
-    /** {@code _Bool SDL_IsAudioDevicePlayback(SDL_AudioDeviceID devid)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_IsAudioDevicePlayback(SDL_AudioDeviceID devid)} */
+    @NativeType("bool")
     public static boolean SDL_IsAudioDevicePlayback(@NativeType("SDL_AudioDeviceID") int devid) {
         long __functionAddress = Functions.IsAudioDevicePlayback;
         return invokeZ(devid, __functionAddress);
@@ -4544,8 +4544,8 @@ public class SDL {
 
     // --- [ SDL_PauseAudioDevice ] ---
 
-    /** {@code _Bool SDL_PauseAudioDevice(SDL_AudioDeviceID dev)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_PauseAudioDevice(SDL_AudioDeviceID dev)} */
+    @NativeType("bool")
     public static boolean SDL_PauseAudioDevice(@NativeType("SDL_AudioDeviceID") int dev) {
         long __functionAddress = Functions.PauseAudioDevice;
         return invokeZ(dev, __functionAddress);
@@ -4553,8 +4553,8 @@ public class SDL {
 
     // --- [ SDL_ResumeAudioDevice ] ---
 
-    /** {@code _Bool SDL_ResumeAudioDevice(SDL_AudioDeviceID dev)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ResumeAudioDevice(SDL_AudioDeviceID dev)} */
+    @NativeType("bool")
     public static boolean SDL_ResumeAudioDevice(@NativeType("SDL_AudioDeviceID") int dev) {
         long __functionAddress = Functions.ResumeAudioDevice;
         return invokeZ(dev, __functionAddress);
@@ -4562,8 +4562,8 @@ public class SDL {
 
     // --- [ SDL_AudioDevicePaused ] ---
 
-    /** {@code _Bool SDL_AudioDevicePaused(SDL_AudioDeviceID dev)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_AudioDevicePaused(SDL_AudioDeviceID dev)} */
+    @NativeType("bool")
     public static boolean SDL_AudioDevicePaused(@NativeType("SDL_AudioDeviceID") int dev) {
         long __functionAddress = Functions.AudioDevicePaused;
         return invokeZ(dev, __functionAddress);
@@ -4579,8 +4579,8 @@ public class SDL {
 
     // --- [ SDL_SetAudioDeviceGain ] ---
 
-    /** {@code _Bool SDL_SetAudioDeviceGain(SDL_AudioDeviceID devid, float gain)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetAudioDeviceGain(SDL_AudioDeviceID devid, float gain)} */
+    @NativeType("bool")
     public static boolean SDL_SetAudioDeviceGain(@NativeType("SDL_AudioDeviceID") int devid, float gain) {
         long __functionAddress = Functions.SetAudioDeviceGain;
         return invokeZ(devid, gain, __functionAddress);
@@ -4596,22 +4596,22 @@ public class SDL {
 
     // --- [ SDL_BindAudioStreams ] ---
 
-    /** {@code _Bool SDL_BindAudioStreams(SDL_AudioDeviceID devid, SDL_AudioStream * const * streams, int num_streams)} */
+    /** {@code bool SDL_BindAudioStreams(SDL_AudioDeviceID devid, SDL_AudioStream * const * streams, int num_streams)} */
     public static boolean nSDL_BindAudioStreams(int devid, long streams, int num_streams) {
         long __functionAddress = Functions.BindAudioStreams;
         return invokePZ(devid, streams, num_streams, __functionAddress);
     }
 
-    /** {@code _Bool SDL_BindAudioStreams(SDL_AudioDeviceID devid, SDL_AudioStream * const * streams, int num_streams)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_BindAudioStreams(SDL_AudioDeviceID devid, SDL_AudioStream * const * streams, int num_streams)} */
+    @NativeType("bool")
     public static boolean SDL_BindAudioStreams(@NativeType("SDL_AudioDeviceID") int devid, @NativeType("SDL_AudioStream * const *") PointerBuffer streams) {
         return nSDL_BindAudioStreams(devid, memAddress(streams), streams.remaining());
     }
 
     // --- [ SDL_BindAudioStream ] ---
 
-    /** {@code _Bool SDL_BindAudioStream(SDL_AudioDeviceID devid, SDL_AudioStream * stream)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_BindAudioStream(SDL_AudioDeviceID devid, SDL_AudioStream * stream)} */
+    @NativeType("bool")
     public static boolean SDL_BindAudioStream(@NativeType("SDL_AudioDeviceID") int devid, @NativeType("SDL_AudioStream *") long stream) {
         long __functionAddress = Functions.BindAudioStream;
         if (CHECKS) {
@@ -4688,7 +4688,7 @@ public class SDL {
 
     // --- [ SDL_GetAudioStreamFormat ] ---
 
-    /** {@code _Bool SDL_GetAudioStreamFormat(SDL_AudioStream * stream, SDL_AudioSpec * src_spec, SDL_AudioSpec * dst_spec)} */
+    /** {@code bool SDL_GetAudioStreamFormat(SDL_AudioStream * stream, SDL_AudioSpec * src_spec, SDL_AudioSpec * dst_spec)} */
     public static boolean nSDL_GetAudioStreamFormat(long stream, long src_spec, long dst_spec) {
         long __functionAddress = Functions.GetAudioStreamFormat;
         if (CHECKS) {
@@ -4697,8 +4697,8 @@ public class SDL {
         return invokePPPZ(stream, src_spec, dst_spec, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetAudioStreamFormat(SDL_AudioStream * stream, SDL_AudioSpec * src_spec, SDL_AudioSpec * dst_spec)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetAudioStreamFormat(SDL_AudioStream * stream, SDL_AudioSpec * src_spec, SDL_AudioSpec * dst_spec)} */
+    @NativeType("bool")
     public static boolean SDL_GetAudioStreamFormat(@NativeType("SDL_AudioStream *") long stream, @NativeType("SDL_AudioSpec *") SDL_AudioSpec.Buffer src_spec, @NativeType("SDL_AudioSpec *") SDL_AudioSpec.Buffer dst_spec) {
         if (CHECKS) {
             check(src_spec, 1);
@@ -4709,7 +4709,7 @@ public class SDL {
 
     // --- [ SDL_SetAudioStreamFormat ] ---
 
-    /** {@code _Bool SDL_SetAudioStreamFormat(SDL_AudioStream * stream, SDL_AudioSpec const * src_spec, SDL_AudioSpec const * dst_spec)} */
+    /** {@code bool SDL_SetAudioStreamFormat(SDL_AudioStream * stream, SDL_AudioSpec const * src_spec, SDL_AudioSpec const * dst_spec)} */
     public static boolean nSDL_SetAudioStreamFormat(long stream, long src_spec, long dst_spec) {
         long __functionAddress = Functions.SetAudioStreamFormat;
         if (CHECKS) {
@@ -4718,8 +4718,8 @@ public class SDL {
         return invokePPPZ(stream, src_spec, dst_spec, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetAudioStreamFormat(SDL_AudioStream * stream, SDL_AudioSpec const * src_spec, SDL_AudioSpec const * dst_spec)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetAudioStreamFormat(SDL_AudioStream * stream, SDL_AudioSpec const * src_spec, SDL_AudioSpec const * dst_spec)} */
+    @NativeType("bool")
     public static boolean SDL_SetAudioStreamFormat(@NativeType("SDL_AudioStream *") long stream, @NativeType("SDL_AudioSpec const *") SDL_AudioSpec.Buffer src_spec, @NativeType("SDL_AudioSpec const *") SDL_AudioSpec.Buffer dst_spec) {
         if (CHECKS) {
             check(src_spec, 1);
@@ -4741,8 +4741,8 @@ public class SDL {
 
     // --- [ SDL_SetAudioStreamFrequencyRatio ] ---
 
-    /** {@code _Bool SDL_SetAudioStreamFrequencyRatio(SDL_AudioStream * stream, float ratio)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetAudioStreamFrequencyRatio(SDL_AudioStream * stream, float ratio)} */
+    @NativeType("bool")
     public static boolean SDL_SetAudioStreamFrequencyRatio(@NativeType("SDL_AudioStream *") long stream, float ratio) {
         long __functionAddress = Functions.SetAudioStreamFrequencyRatio;
         if (CHECKS) {
@@ -4764,8 +4764,8 @@ public class SDL {
 
     // --- [ SDL_SetAudioStreamGain ] ---
 
-    /** {@code _Bool SDL_SetAudioStreamGain(SDL_AudioStream * stream, float gain)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetAudioStreamGain(SDL_AudioStream * stream, float gain)} */
+    @NativeType("bool")
     public static boolean SDL_SetAudioStreamGain(@NativeType("SDL_AudioStream *") long stream, float gain) {
         long __functionAddress = Functions.SetAudioStreamGain;
         if (CHECKS) {
@@ -4824,7 +4824,7 @@ public class SDL {
 
     // --- [ SDL_SetAudioStreamInputChannelMap ] ---
 
-    /** {@code _Bool SDL_SetAudioStreamInputChannelMap(SDL_AudioStream * stream, int const * chmap, int count)} */
+    /** {@code bool SDL_SetAudioStreamInputChannelMap(SDL_AudioStream * stream, int const * chmap, int count)} */
     public static boolean nSDL_SetAudioStreamInputChannelMap(long stream, long chmap, int count) {
         long __functionAddress = Functions.SetAudioStreamInputChannelMap;
         if (CHECKS) {
@@ -4833,15 +4833,15 @@ public class SDL {
         return invokePPZ(stream, chmap, count, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetAudioStreamInputChannelMap(SDL_AudioStream * stream, int const * chmap, int count)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetAudioStreamInputChannelMap(SDL_AudioStream * stream, int const * chmap, int count)} */
+    @NativeType("bool")
     public static boolean SDL_SetAudioStreamInputChannelMap(@NativeType("SDL_AudioStream *") long stream, @NativeType("int const *") IntBuffer chmap) {
         return nSDL_SetAudioStreamInputChannelMap(stream, memAddress(chmap), chmap.remaining());
     }
 
     // --- [ SDL_SetAudioStreamOutputChannelMap ] ---
 
-    /** {@code _Bool SDL_SetAudioStreamOutputChannelMap(SDL_AudioStream * stream, int const * chmap, int count)} */
+    /** {@code bool SDL_SetAudioStreamOutputChannelMap(SDL_AudioStream * stream, int const * chmap, int count)} */
     public static boolean nSDL_SetAudioStreamOutputChannelMap(long stream, long chmap, int count) {
         long __functionAddress = Functions.SetAudioStreamOutputChannelMap;
         if (CHECKS) {
@@ -4850,15 +4850,15 @@ public class SDL {
         return invokePPZ(stream, chmap, count, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetAudioStreamOutputChannelMap(SDL_AudioStream * stream, int const * chmap, int count)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetAudioStreamOutputChannelMap(SDL_AudioStream * stream, int const * chmap, int count)} */
+    @NativeType("bool")
     public static boolean SDL_SetAudioStreamOutputChannelMap(@NativeType("SDL_AudioStream *") long stream, @NativeType("int const *") IntBuffer chmap) {
         return nSDL_SetAudioStreamOutputChannelMap(stream, memAddress(chmap), chmap.remaining());
     }
 
     // --- [ SDL_PutAudioStreamData ] ---
 
-    /** {@code _Bool SDL_PutAudioStreamData(SDL_AudioStream * stream, void const * buf, int len)} */
+    /** {@code bool SDL_PutAudioStreamData(SDL_AudioStream * stream, void const * buf, int len)} */
     public static boolean nSDL_PutAudioStreamData(long stream, long buf, int len) {
         long __functionAddress = Functions.PutAudioStreamData;
         if (CHECKS) {
@@ -4867,8 +4867,8 @@ public class SDL {
         return invokePPZ(stream, buf, len, __functionAddress);
     }
 
-    /** {@code _Bool SDL_PutAudioStreamData(SDL_AudioStream * stream, void const * buf, int len)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_PutAudioStreamData(SDL_AudioStream * stream, void const * buf, int len)} */
+    @NativeType("bool")
     public static boolean SDL_PutAudioStreamData(@NativeType("SDL_AudioStream *") long stream, @NativeType("void const *") ByteBuffer buf) {
         return nSDL_PutAudioStreamData(stream, memAddress(buf), buf.remaining());
     }
@@ -4913,8 +4913,8 @@ public class SDL {
 
     // --- [ SDL_FlushAudioStream ] ---
 
-    /** {@code _Bool SDL_FlushAudioStream(SDL_AudioStream * stream)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_FlushAudioStream(SDL_AudioStream * stream)} */
+    @NativeType("bool")
     public static boolean SDL_FlushAudioStream(@NativeType("SDL_AudioStream *") long stream) {
         long __functionAddress = Functions.FlushAudioStream;
         if (CHECKS) {
@@ -4925,8 +4925,8 @@ public class SDL {
 
     // --- [ SDL_ClearAudioStream ] ---
 
-    /** {@code _Bool SDL_ClearAudioStream(SDL_AudioStream * stream)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ClearAudioStream(SDL_AudioStream * stream)} */
+    @NativeType("bool")
     public static boolean SDL_ClearAudioStream(@NativeType("SDL_AudioStream *") long stream) {
         long __functionAddress = Functions.ClearAudioStream;
         if (CHECKS) {
@@ -4937,8 +4937,8 @@ public class SDL {
 
     // --- [ SDL_PauseAudioStreamDevice ] ---
 
-    /** {@code _Bool SDL_PauseAudioStreamDevice(SDL_AudioStream * stream)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_PauseAudioStreamDevice(SDL_AudioStream * stream)} */
+    @NativeType("bool")
     public static boolean SDL_PauseAudioStreamDevice(@NativeType("SDL_AudioStream *") long stream) {
         long __functionAddress = Functions.PauseAudioStreamDevice;
         if (CHECKS) {
@@ -4949,8 +4949,8 @@ public class SDL {
 
     // --- [ SDL_ResumeAudioStreamDevice ] ---
 
-    /** {@code _Bool SDL_ResumeAudioStreamDevice(SDL_AudioStream * stream)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ResumeAudioStreamDevice(SDL_AudioStream * stream)} */
+    @NativeType("bool")
     public static boolean SDL_ResumeAudioStreamDevice(@NativeType("SDL_AudioStream *") long stream) {
         long __functionAddress = Functions.ResumeAudioStreamDevice;
         if (CHECKS) {
@@ -4961,8 +4961,8 @@ public class SDL {
 
     // --- [ SDL_LockAudioStream ] ---
 
-    /** {@code _Bool SDL_LockAudioStream(SDL_AudioStream * stream)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_LockAudioStream(SDL_AudioStream * stream)} */
+    @NativeType("bool")
     public static boolean SDL_LockAudioStream(@NativeType("SDL_AudioStream *") long stream) {
         long __functionAddress = Functions.LockAudioStream;
         if (CHECKS) {
@@ -4973,8 +4973,8 @@ public class SDL {
 
     // --- [ SDL_UnlockAudioStream ] ---
 
-    /** {@code _Bool SDL_UnlockAudioStream(SDL_AudioStream * stream)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_UnlockAudioStream(SDL_AudioStream * stream)} */
+    @NativeType("bool")
     public static boolean SDL_UnlockAudioStream(@NativeType("SDL_AudioStream *") long stream) {
         long __functionAddress = Functions.UnlockAudioStream;
         if (CHECKS) {
@@ -4985,7 +4985,7 @@ public class SDL {
 
     // --- [ SDL_SetAudioStreamGetCallback ] ---
 
-    /** {@code _Bool SDL_SetAudioStreamGetCallback(SDL_AudioStream * stream, SDL_AudioStreamCallback callback, void * userdata)} */
+    /** {@code bool SDL_SetAudioStreamGetCallback(SDL_AudioStream * stream, SDL_AudioStreamCallback callback, void * userdata)} */
     public static boolean nSDL_SetAudioStreamGetCallback(long stream, long callback, long userdata) {
         long __functionAddress = Functions.SetAudioStreamGetCallback;
         if (CHECKS) {
@@ -4994,15 +4994,15 @@ public class SDL {
         return invokePPPZ(stream, callback, userdata, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetAudioStreamGetCallback(SDL_AudioStream * stream, SDL_AudioStreamCallback callback, void * userdata)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetAudioStreamGetCallback(SDL_AudioStream * stream, SDL_AudioStreamCallback callback, void * userdata)} */
+    @NativeType("bool")
     public static boolean SDL_SetAudioStreamGetCallback(@NativeType("SDL_AudioStream *") long stream, @NativeType("SDL_AudioStreamCallback") SDL_AudioStreamCallbackI callback, @NativeType("void *") long userdata) {
         return nSDL_SetAudioStreamGetCallback(stream, callback.address(), userdata);
     }
 
     // --- [ SDL_SetAudioStreamPutCallback ] ---
 
-    /** {@code _Bool SDL_SetAudioStreamPutCallback(SDL_AudioStream * stream, SDL_AudioStreamCallback callback, void * userdata)} */
+    /** {@code bool SDL_SetAudioStreamPutCallback(SDL_AudioStream * stream, SDL_AudioStreamCallback callback, void * userdata)} */
     public static boolean nSDL_SetAudioStreamPutCallback(long stream, long callback, long userdata) {
         long __functionAddress = Functions.SetAudioStreamPutCallback;
         if (CHECKS) {
@@ -5011,8 +5011,8 @@ public class SDL {
         return invokePPPZ(stream, callback, userdata, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetAudioStreamPutCallback(SDL_AudioStream * stream, SDL_AudioStreamCallback callback, void * userdata)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetAudioStreamPutCallback(SDL_AudioStream * stream, SDL_AudioStreamCallback callback, void * userdata)} */
+    @NativeType("bool")
     public static boolean SDL_SetAudioStreamPutCallback(@NativeType("SDL_AudioStream *") long stream, @NativeType("SDL_AudioStreamCallback") SDL_AudioStreamCallbackI callback, @NativeType("void *") long userdata) {
         return nSDL_SetAudioStreamPutCallback(stream, callback.address(), userdata);
     }
@@ -5047,21 +5047,21 @@ public class SDL {
 
     // --- [ SDL_SetAudioPostmixCallback ] ---
 
-    /** {@code _Bool SDL_SetAudioPostmixCallback(SDL_AudioDeviceID devid, SDL_AudioPostmixCallback callback, void * userdata)} */
+    /** {@code bool SDL_SetAudioPostmixCallback(SDL_AudioDeviceID devid, SDL_AudioPostmixCallback callback, void * userdata)} */
     public static boolean nSDL_SetAudioPostmixCallback(int devid, long callback, long userdata) {
         long __functionAddress = Functions.SetAudioPostmixCallback;
         return invokePPZ(devid, callback, userdata, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetAudioPostmixCallback(SDL_AudioDeviceID devid, SDL_AudioPostmixCallback callback, void * userdata)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetAudioPostmixCallback(SDL_AudioDeviceID devid, SDL_AudioPostmixCallback callback, void * userdata)} */
+    @NativeType("bool")
     public static boolean SDL_SetAudioPostmixCallback(@NativeType("SDL_AudioDeviceID") int devid, @NativeType("SDL_AudioPostmixCallback") SDL_AudioPostmixCallbackI callback, @NativeType("void *") long userdata) {
         return nSDL_SetAudioPostmixCallback(devid, callback.address(), userdata);
     }
 
     // --- [ SDL_LoadWAV_IO ] ---
 
-    /** {@code _Bool SDL_LoadWAV_IO(SDL_IOStream * src, _Bool closeio, SDL_AudioSpec * spec, Uint8 ** audio_buf, Uint32 * audio_len)} */
+    /** {@code bool SDL_LoadWAV_IO(SDL_IOStream * src, bool closeio, SDL_AudioSpec * spec, Uint8 ** audio_buf, Uint32 * audio_len)} */
     public static boolean nSDL_LoadWAV_IO(long src, boolean closeio, long spec, long audio_buf, long audio_len) {
         long __functionAddress = Functions.LoadWAV_IO;
         if (CHECKS) {
@@ -5070,9 +5070,9 @@ public class SDL {
         return invokePPPPZ(src, closeio, spec, audio_buf, audio_len, __functionAddress);
     }
 
-    /** {@code _Bool SDL_LoadWAV_IO(SDL_IOStream * src, _Bool closeio, SDL_AudioSpec * spec, Uint8 ** audio_buf, Uint32 * audio_len)} */
-    @NativeType("_Bool")
-    public static boolean SDL_LoadWAV_IO(@NativeType("SDL_IOStream *") long src, @NativeType("_Bool") boolean closeio, @NativeType("SDL_AudioSpec *") SDL_AudioSpec.Buffer spec, @NativeType("Uint8 **") PointerBuffer audio_buf, @NativeType("Uint32 *") IntBuffer audio_len) {
+    /** {@code bool SDL_LoadWAV_IO(SDL_IOStream * src, bool closeio, SDL_AudioSpec * spec, Uint8 ** audio_buf, Uint32 * audio_len)} */
+    @NativeType("bool")
+    public static boolean SDL_LoadWAV_IO(@NativeType("SDL_IOStream *") long src, @NativeType("bool") boolean closeio, @NativeType("SDL_AudioSpec *") SDL_AudioSpec.Buffer spec, @NativeType("Uint8 **") PointerBuffer audio_buf, @NativeType("Uint32 *") IntBuffer audio_len) {
         if (CHECKS) {
             check(spec, 1);
             check(audio_buf, 1);
@@ -5083,14 +5083,14 @@ public class SDL {
 
     // --- [ SDL_LoadWAV ] ---
 
-    /** {@code _Bool SDL_LoadWAV(char const * path, SDL_AudioSpec * spec, Uint8 ** audio_buf, Uint32 * audio_len)} */
+    /** {@code bool SDL_LoadWAV(char const * path, SDL_AudioSpec * spec, Uint8 ** audio_buf, Uint32 * audio_len)} */
     public static boolean nSDL_LoadWAV(long path, long spec, long audio_buf, long audio_len) {
         long __functionAddress = Functions.LoadWAV;
         return invokePPPPZ(path, spec, audio_buf, audio_len, __functionAddress);
     }
 
-    /** {@code _Bool SDL_LoadWAV(char const * path, SDL_AudioSpec * spec, Uint8 ** audio_buf, Uint32 * audio_len)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_LoadWAV(char const * path, SDL_AudioSpec * spec, Uint8 ** audio_buf, Uint32 * audio_len)} */
+    @NativeType("bool")
     public static boolean SDL_LoadWAV(@NativeType("char const *") ByteBuffer path, @NativeType("SDL_AudioSpec *") SDL_AudioSpec.Buffer spec, @NativeType("Uint8 **") PointerBuffer audio_buf, @NativeType("Uint32 *") IntBuffer audio_len) {
         if (CHECKS) {
             checkNT1(path);
@@ -5101,8 +5101,8 @@ public class SDL {
         return nSDL_LoadWAV(memAddress(path), spec.address(), memAddress(audio_buf), memAddress(audio_len));
     }
 
-    /** {@code _Bool SDL_LoadWAV(char const * path, SDL_AudioSpec * spec, Uint8 ** audio_buf, Uint32 * audio_len)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_LoadWAV(char const * path, SDL_AudioSpec * spec, Uint8 ** audio_buf, Uint32 * audio_len)} */
+    @NativeType("bool")
     public static boolean SDL_LoadWAV(@NativeType("char const *") CharSequence path, @NativeType("SDL_AudioSpec *") SDL_AudioSpec.Buffer spec, @NativeType("Uint8 **") PointerBuffer audio_buf, @NativeType("Uint32 *") IntBuffer audio_len) {
         if (CHECKS) {
             check(spec, 1);
@@ -5121,14 +5121,14 @@ public class SDL {
 
     // --- [ SDL_MixAudio ] ---
 
-    /** {@code _Bool SDL_MixAudio(Uint8 * dst, Uint8 const * src, SDL_AudioFormat format, Uint32 len, float volume)} */
+    /** {@code bool SDL_MixAudio(Uint8 * dst, Uint8 const * src, SDL_AudioFormat format, Uint32 len, float volume)} */
     public static boolean nSDL_MixAudio(long dst, long src, int format, int len, float volume) {
         long __functionAddress = Functions.MixAudio;
         return invokePPZ(dst, src, format, len, volume, __functionAddress);
     }
 
-    /** {@code _Bool SDL_MixAudio(Uint8 * dst, Uint8 const * src, SDL_AudioFormat format, Uint32 len, float volume)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_MixAudio(Uint8 * dst, Uint8 const * src, SDL_AudioFormat format, Uint32 len, float volume)} */
+    @NativeType("bool")
     public static boolean SDL_MixAudio(@NativeType("Uint8 *") ByteBuffer dst, @NativeType("Uint8 const *") ByteBuffer src, @NativeType("SDL_AudioFormat") int format, float volume) {
         if (CHECKS) {
             check(src, dst.remaining());
@@ -5138,14 +5138,14 @@ public class SDL {
 
     // --- [ SDL_ConvertAudioSamples ] ---
 
-    /** {@code _Bool SDL_ConvertAudioSamples(SDL_AudioSpec const * src_spec, Uint8 const * src_data, int src_len, SDL_AudioSpec const * dst_spec, Uint8 ** dst_data, int * dst_len)} */
+    /** {@code bool SDL_ConvertAudioSamples(SDL_AudioSpec const * src_spec, Uint8 const * src_data, int src_len, SDL_AudioSpec const * dst_spec, Uint8 ** dst_data, int * dst_len)} */
     public static boolean nSDL_ConvertAudioSamples(long src_spec, long src_data, int src_len, long dst_spec, long dst_data, long dst_len) {
         long __functionAddress = Functions.ConvertAudioSamples;
         return invokePPPPPZ(src_spec, src_data, src_len, dst_spec, dst_data, dst_len, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ConvertAudioSamples(SDL_AudioSpec const * src_spec, Uint8 const * src_data, int src_len, SDL_AudioSpec const * dst_spec, Uint8 ** dst_data, int * dst_len)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ConvertAudioSamples(SDL_AudioSpec const * src_spec, Uint8 const * src_data, int src_len, SDL_AudioSpec const * dst_spec, Uint8 ** dst_data, int * dst_len)} */
+    @NativeType("bool")
     public static boolean SDL_ConvertAudioSamples(@NativeType("SDL_AudioSpec const *") SDL_AudioSpec.Buffer src_spec, @NativeType("Uint8 const *") ByteBuffer src_data, @NativeType("SDL_AudioSpec const *") SDL_AudioSpec.Buffer dst_spec, @NativeType("Uint8 **") PointerBuffer dst_data, @NativeType("int *") IntBuffer dst_len) {
         if (CHECKS) {
             check(src_spec, 1);
@@ -5426,7 +5426,7 @@ public class SDL {
 
     // --- [ SDL_GetCameraFormat ] ---
 
-    /** {@code _Bool SDL_GetCameraFormat(SDL_Camera * camera, SDL_CameraSpec * spec)} */
+    /** {@code bool SDL_GetCameraFormat(SDL_Camera * camera, SDL_CameraSpec * spec)} */
     public static boolean nSDL_GetCameraFormat(long camera, long spec) {
         long __functionAddress = Functions.GetCameraFormat;
         if (CHECKS) {
@@ -5435,8 +5435,8 @@ public class SDL {
         return invokePPZ(camera, spec, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetCameraFormat(SDL_Camera * camera, SDL_CameraSpec * spec)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetCameraFormat(SDL_Camera * camera, SDL_CameraSpec * spec)} */
+    @NativeType("bool")
     public static boolean SDL_GetCameraFormat(@NativeType("SDL_Camera *") long camera, @NativeType("SDL_CameraSpec *") SDL_CameraSpec.Buffer spec) {
         if (CHECKS) {
             check(spec, 1);
@@ -5497,14 +5497,14 @@ public class SDL {
 
     // --- [ SDL_SetClipboardText ] ---
 
-    /** {@code _Bool SDL_SetClipboardText(char const * text)} */
+    /** {@code bool SDL_SetClipboardText(char const * text)} */
     public static boolean nSDL_SetClipboardText(long text) {
         long __functionAddress = Functions.SetClipboardText;
         return invokePZ(text, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetClipboardText(char const * text)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetClipboardText(char const * text)} */
+    @NativeType("bool")
     public static boolean SDL_SetClipboardText(@NativeType("char const *") ByteBuffer text) {
         if (CHECKS) {
             checkNT1(text);
@@ -5512,8 +5512,8 @@ public class SDL {
         return nSDL_SetClipboardText(memAddress(text));
     }
 
-    /** {@code _Bool SDL_SetClipboardText(char const * text)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetClipboardText(char const * text)} */
+    @NativeType("bool")
     public static boolean SDL_SetClipboardText(@NativeType("char const *") CharSequence text) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -5547,8 +5547,8 @@ public class SDL {
 
     // --- [ SDL_HasClipboardText ] ---
 
-    /** {@code _Bool SDL_HasClipboardText(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasClipboardText(void)} */
+    @NativeType("bool")
     public static boolean SDL_HasClipboardText() {
         long __functionAddress = Functions.HasClipboardText;
         return invokeZ(__functionAddress);
@@ -5556,14 +5556,14 @@ public class SDL {
 
     // --- [ SDL_SetPrimarySelectionText ] ---
 
-    /** {@code _Bool SDL_SetPrimarySelectionText(char const * text)} */
+    /** {@code bool SDL_SetPrimarySelectionText(char const * text)} */
     public static boolean nSDL_SetPrimarySelectionText(long text) {
         long __functionAddress = Functions.SetPrimarySelectionText;
         return invokePZ(text, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetPrimarySelectionText(char const * text)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetPrimarySelectionText(char const * text)} */
+    @NativeType("bool")
     public static boolean SDL_SetPrimarySelectionText(@NativeType("char const *") ByteBuffer text) {
         if (CHECKS) {
             checkNT1(text);
@@ -5571,8 +5571,8 @@ public class SDL {
         return nSDL_SetPrimarySelectionText(memAddress(text));
     }
 
-    /** {@code _Bool SDL_SetPrimarySelectionText(char const * text)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetPrimarySelectionText(char const * text)} */
+    @NativeType("bool")
     public static boolean SDL_SetPrimarySelectionText(@NativeType("char const *") CharSequence text) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -5606,8 +5606,8 @@ public class SDL {
 
     // --- [ SDL_HasPrimarySelectionText ] ---
 
-    /** {@code _Bool SDL_HasPrimarySelectionText(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasPrimarySelectionText(void)} */
+    @NativeType("bool")
     public static boolean SDL_HasPrimarySelectionText() {
         long __functionAddress = Functions.HasPrimarySelectionText;
         return invokeZ(__functionAddress);
@@ -5615,22 +5615,22 @@ public class SDL {
 
     // --- [ SDL_SetClipboardData ] ---
 
-    /** {@code _Bool SDL_SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCleanupCallback cleanup, void * userdata, char const ** mime_types, size_t num_mime_types)} */
+    /** {@code bool SDL_SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCleanupCallback cleanup, void * userdata, char const ** mime_types, size_t num_mime_types)} */
     public static boolean nSDL_SetClipboardData(long callback, long cleanup, long userdata, long mime_types, long num_mime_types) {
         long __functionAddress = Functions.SetClipboardData;
         return invokePPPPPZ(callback, cleanup, userdata, mime_types, num_mime_types, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCleanupCallback cleanup, void * userdata, char const ** mime_types, size_t num_mime_types)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCleanupCallback cleanup, void * userdata, char const ** mime_types, size_t num_mime_types)} */
+    @NativeType("bool")
     public static boolean SDL_SetClipboardData(@NativeType("SDL_ClipboardDataCallback") SDL_ClipboardDataCallbackI callback, @NativeType("SDL_ClipboardCleanupCallback") SDL_ClipboardCleanupCallbackI cleanup, @NativeType("void *") long userdata, @NativeType("char const **") PointerBuffer mime_types) {
         return nSDL_SetClipboardData(callback.address(), cleanup.address(), userdata, memAddress(mime_types), mime_types.remaining());
     }
 
     // --- [ SDL_ClearClipboardData ] ---
 
-    /** {@code _Bool SDL_ClearClipboardData(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ClearClipboardData(void)} */
+    @NativeType("bool")
     public static boolean SDL_ClearClipboardData() {
         long __functionAddress = Functions.ClearClipboardData;
         return invokeZ(__functionAddress);
@@ -5677,14 +5677,14 @@ public class SDL {
 
     // --- [ SDL_HasClipboardData ] ---
 
-    /** {@code _Bool SDL_HasClipboardData(char const * mime_type)} */
+    /** {@code bool SDL_HasClipboardData(char const * mime_type)} */
     public static boolean nSDL_HasClipboardData(long mime_type) {
         long __functionAddress = Functions.HasClipboardData;
         return invokePZ(mime_type, __functionAddress);
     }
 
-    /** {@code _Bool SDL_HasClipboardData(char const * mime_type)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasClipboardData(char const * mime_type)} */
+    @NativeType("bool")
     public static boolean SDL_HasClipboardData(@NativeType("char const *") ByteBuffer mime_type) {
         if (CHECKS) {
             checkNT1(mime_type);
@@ -5692,8 +5692,8 @@ public class SDL {
         return nSDL_HasClipboardData(memAddress(mime_type));
     }
 
-    /** {@code _Bool SDL_HasClipboardData(char const * mime_type)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasClipboardData(char const * mime_type)} */
+    @NativeType("bool")
     public static boolean SDL_HasClipboardData(@NativeType("char const *") CharSequence mime_type) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -5744,8 +5744,8 @@ public class SDL {
 
     // --- [ SDL_HasAltiVec ] ---
 
-    /** {@code _Bool SDL_HasAltiVec(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasAltiVec(void)} */
+    @NativeType("bool")
     public static boolean SDL_HasAltiVec() {
         long __functionAddress = Functions.HasAltiVec;
         return invokeZ(__functionAddress);
@@ -5753,8 +5753,8 @@ public class SDL {
 
     // --- [ SDL_HasMMX ] ---
 
-    /** {@code _Bool SDL_HasMMX(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasMMX(void)} */
+    @NativeType("bool")
     public static boolean SDL_HasMMX() {
         long __functionAddress = Functions.HasMMX;
         return invokeZ(__functionAddress);
@@ -5762,8 +5762,8 @@ public class SDL {
 
     // --- [ SDL_HasSSE ] ---
 
-    /** {@code _Bool SDL_HasSSE(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasSSE(void)} */
+    @NativeType("bool")
     public static boolean SDL_HasSSE() {
         long __functionAddress = Functions.HasSSE;
         return invokeZ(__functionAddress);
@@ -5771,8 +5771,8 @@ public class SDL {
 
     // --- [ SDL_HasSSE2 ] ---
 
-    /** {@code _Bool SDL_HasSSE2(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasSSE2(void)} */
+    @NativeType("bool")
     public static boolean SDL_HasSSE2() {
         long __functionAddress = Functions.HasSSE2;
         return invokeZ(__functionAddress);
@@ -5780,8 +5780,8 @@ public class SDL {
 
     // --- [ SDL_HasSSE3 ] ---
 
-    /** {@code _Bool SDL_HasSSE3(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasSSE3(void)} */
+    @NativeType("bool")
     public static boolean SDL_HasSSE3() {
         long __functionAddress = Functions.HasSSE3;
         return invokeZ(__functionAddress);
@@ -5789,8 +5789,8 @@ public class SDL {
 
     // --- [ SDL_HasSSE41 ] ---
 
-    /** {@code _Bool SDL_HasSSE41(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasSSE41(void)} */
+    @NativeType("bool")
     public static boolean SDL_HasSSE41() {
         long __functionAddress = Functions.HasSSE41;
         return invokeZ(__functionAddress);
@@ -5798,8 +5798,8 @@ public class SDL {
 
     // --- [ SDL_HasSSE42 ] ---
 
-    /** {@code _Bool SDL_HasSSE42(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasSSE42(void)} */
+    @NativeType("bool")
     public static boolean SDL_HasSSE42() {
         long __functionAddress = Functions.HasSSE42;
         return invokeZ(__functionAddress);
@@ -5807,8 +5807,8 @@ public class SDL {
 
     // --- [ SDL_HasAVX ] ---
 
-    /** {@code _Bool SDL_HasAVX(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasAVX(void)} */
+    @NativeType("bool")
     public static boolean SDL_HasAVX() {
         long __functionAddress = Functions.HasAVX;
         return invokeZ(__functionAddress);
@@ -5816,8 +5816,8 @@ public class SDL {
 
     // --- [ SDL_HasAVX2 ] ---
 
-    /** {@code _Bool SDL_HasAVX2(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasAVX2(void)} */
+    @NativeType("bool")
     public static boolean SDL_HasAVX2() {
         long __functionAddress = Functions.HasAVX2;
         return invokeZ(__functionAddress);
@@ -5825,8 +5825,8 @@ public class SDL {
 
     // --- [ SDL_HasAVX512F ] ---
 
-    /** {@code _Bool SDL_HasAVX512F(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasAVX512F(void)} */
+    @NativeType("bool")
     public static boolean SDL_HasAVX512F() {
         long __functionAddress = Functions.HasAVX512F;
         return invokeZ(__functionAddress);
@@ -5834,8 +5834,8 @@ public class SDL {
 
     // --- [ SDL_HasARMSIMD ] ---
 
-    /** {@code _Bool SDL_HasARMSIMD(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasARMSIMD(void)} */
+    @NativeType("bool")
     public static boolean SDL_HasARMSIMD() {
         long __functionAddress = Functions.HasARMSIMD;
         return invokeZ(__functionAddress);
@@ -5843,8 +5843,8 @@ public class SDL {
 
     // --- [ SDL_HasNEON ] ---
 
-    /** {@code _Bool SDL_HasNEON(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasNEON(void)} */
+    @NativeType("bool")
     public static boolean SDL_HasNEON() {
         long __functionAddress = Functions.HasNEON;
         return invokeZ(__functionAddress);
@@ -5852,8 +5852,8 @@ public class SDL {
 
     // --- [ SDL_HasLSX ] ---
 
-    /** {@code _Bool SDL_HasLSX(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasLSX(void)} */
+    @NativeType("bool")
     public static boolean SDL_HasLSX() {
         long __functionAddress = Functions.HasLSX;
         return invokeZ(__functionAddress);
@@ -5861,8 +5861,8 @@ public class SDL {
 
     // --- [ SDL_HasLASX ] ---
 
-    /** {@code _Bool SDL_HasLASX(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasLASX(void)} */
+    @NativeType("bool")
     public static boolean SDL_HasLASX() {
         long __functionAddress = Functions.HasLASX;
         return invokeZ(__functionAddress);
@@ -5887,7 +5887,7 @@ public class SDL {
 
     // --- [ SDL_ShowOpenFileDialog ] ---
 
-    /** {@code void SDL_ShowOpenFileDialog(SDL_DialogFileCallback callback, void * userdata, SDL_Window * window, SDL_DialogFileFilter const * filters, int nfilters, char const * default_location, _Bool allow_many)} */
+    /** {@code void SDL_ShowOpenFileDialog(SDL_DialogFileCallback callback, void * userdata, SDL_Window * window, SDL_DialogFileFilter const * filters, int nfilters, char const * default_location, bool allow_many)} */
     public static void nSDL_ShowOpenFileDialog(long callback, long userdata, long window, long filters, int nfilters, long default_location, boolean allow_many) {
         long __functionAddress = Functions.ShowOpenFileDialog;
         if (CHECKS) {
@@ -5897,16 +5897,16 @@ public class SDL {
         invokePPPPPV(callback, userdata, window, filters, nfilters, default_location, allow_many, __functionAddress);
     }
 
-    /** {@code void SDL_ShowOpenFileDialog(SDL_DialogFileCallback callback, void * userdata, SDL_Window * window, SDL_DialogFileFilter const * filters, int nfilters, char const * default_location, _Bool allow_many)} */
-    public static void SDL_ShowOpenFileDialog(@NativeType("SDL_DialogFileCallback") SDL_DialogFileCallbackI callback, @NativeType("void *") long userdata, @NativeType("SDL_Window *") long window, @NativeType("SDL_DialogFileFilter const *") SDL_DialogFileFilter.@Nullable Buffer filters, @NativeType("char const *") @Nullable ByteBuffer default_location, @NativeType("_Bool") boolean allow_many) {
+    /** {@code void SDL_ShowOpenFileDialog(SDL_DialogFileCallback callback, void * userdata, SDL_Window * window, SDL_DialogFileFilter const * filters, int nfilters, char const * default_location, bool allow_many)} */
+    public static void SDL_ShowOpenFileDialog(@NativeType("SDL_DialogFileCallback") SDL_DialogFileCallbackI callback, @NativeType("void *") long userdata, @NativeType("SDL_Window *") long window, @NativeType("SDL_DialogFileFilter const *") SDL_DialogFileFilter.@Nullable Buffer filters, @NativeType("char const *") @Nullable ByteBuffer default_location, @NativeType("bool") boolean allow_many) {
         if (CHECKS) {
             checkNT1Safe(default_location);
         }
         nSDL_ShowOpenFileDialog(callback.address(), userdata, window, memAddressSafe(filters), remainingSafe(filters), memAddressSafe(default_location), allow_many);
     }
 
-    /** {@code void SDL_ShowOpenFileDialog(SDL_DialogFileCallback callback, void * userdata, SDL_Window * window, SDL_DialogFileFilter const * filters, int nfilters, char const * default_location, _Bool allow_many)} */
-    public static void SDL_ShowOpenFileDialog(@NativeType("SDL_DialogFileCallback") SDL_DialogFileCallbackI callback, @NativeType("void *") long userdata, @NativeType("SDL_Window *") long window, @NativeType("SDL_DialogFileFilter const *") SDL_DialogFileFilter.@Nullable Buffer filters, @NativeType("char const *") @Nullable CharSequence default_location, @NativeType("_Bool") boolean allow_many) {
+    /** {@code void SDL_ShowOpenFileDialog(SDL_DialogFileCallback callback, void * userdata, SDL_Window * window, SDL_DialogFileFilter const * filters, int nfilters, char const * default_location, bool allow_many)} */
+    public static void SDL_ShowOpenFileDialog(@NativeType("SDL_DialogFileCallback") SDL_DialogFileCallbackI callback, @NativeType("void *") long userdata, @NativeType("SDL_Window *") long window, @NativeType("SDL_DialogFileFilter const *") SDL_DialogFileFilter.@Nullable Buffer filters, @NativeType("char const *") @Nullable CharSequence default_location, @NativeType("bool") boolean allow_many) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8Safe(default_location, true);
@@ -5950,22 +5950,22 @@ public class SDL {
 
     // --- [ SDL_ShowOpenFolderDialog ] ---
 
-    /** {@code void SDL_ShowOpenFolderDialog(SDL_DialogFileCallback callback, void * userdata, SDL_Window * window, char const * default_location, _Bool allow_many)} */
+    /** {@code void SDL_ShowOpenFolderDialog(SDL_DialogFileCallback callback, void * userdata, SDL_Window * window, char const * default_location, bool allow_many)} */
     public static void nSDL_ShowOpenFolderDialog(long callback, long userdata, long window, long default_location, boolean allow_many) {
         long __functionAddress = Functions.ShowOpenFolderDialog;
         invokePPPPV(callback, userdata, window, default_location, allow_many, __functionAddress);
     }
 
-    /** {@code void SDL_ShowOpenFolderDialog(SDL_DialogFileCallback callback, void * userdata, SDL_Window * window, char const * default_location, _Bool allow_many)} */
-    public static void SDL_ShowOpenFolderDialog(@NativeType("SDL_DialogFileCallback") SDL_DialogFileCallbackI callback, @NativeType("void *") long userdata, @NativeType("SDL_Window *") long window, @NativeType("char const *") @Nullable ByteBuffer default_location, @NativeType("_Bool") boolean allow_many) {
+    /** {@code void SDL_ShowOpenFolderDialog(SDL_DialogFileCallback callback, void * userdata, SDL_Window * window, char const * default_location, bool allow_many)} */
+    public static void SDL_ShowOpenFolderDialog(@NativeType("SDL_DialogFileCallback") SDL_DialogFileCallbackI callback, @NativeType("void *") long userdata, @NativeType("SDL_Window *") long window, @NativeType("char const *") @Nullable ByteBuffer default_location, @NativeType("bool") boolean allow_many) {
         if (CHECKS) {
             checkNT1Safe(default_location);
         }
         nSDL_ShowOpenFolderDialog(callback.address(), userdata, window, memAddressSafe(default_location), allow_many);
     }
 
-    /** {@code void SDL_ShowOpenFolderDialog(SDL_DialogFileCallback callback, void * userdata, SDL_Window * window, char const * default_location, _Bool allow_many)} */
-    public static void SDL_ShowOpenFolderDialog(@NativeType("SDL_DialogFileCallback") SDL_DialogFileCallbackI callback, @NativeType("void *") long userdata, @NativeType("SDL_Window *") long window, @NativeType("char const *") @Nullable CharSequence default_location, @NativeType("_Bool") boolean allow_many) {
+    /** {@code void SDL_ShowOpenFolderDialog(SDL_DialogFileCallback callback, void * userdata, SDL_Window * window, char const * default_location, bool allow_many)} */
+    public static void SDL_ShowOpenFolderDialog(@NativeType("SDL_DialogFileCallback") SDL_DialogFileCallbackI callback, @NativeType("void *") long userdata, @NativeType("SDL_Window *") long window, @NativeType("char const *") @Nullable CharSequence default_location, @NativeType("bool") boolean allow_many) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8Safe(default_location, true);
@@ -5991,14 +5991,14 @@ public class SDL {
 
     // --- [ SDL_SetError ] ---
 
-    /** {@code _Bool SDL_SetError(char const * fmt)} */
+    /** {@code bool SDL_SetError(char const * fmt)} */
     public static boolean nSDL_SetError(long fmt) {
         long __functionAddress = Functions.SetError;
         return invokePZ(fmt, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetError(char const * fmt)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetError(char const * fmt)} */
+    @NativeType("bool")
     public static boolean SDL_SetError(@NativeType("char const *") ByteBuffer fmt) {
         if (CHECKS) {
             checkNT1(fmt);
@@ -6006,8 +6006,8 @@ public class SDL {
         return nSDL_SetError(memAddress(fmt));
     }
 
-    /** {@code _Bool SDL_SetError(char const * fmt)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetError(char const * fmt)} */
+    @NativeType("bool")
     public static boolean SDL_SetError(@NativeType("char const *") CharSequence fmt) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -6021,7 +6021,7 @@ public class SDL {
 
     // --- [ SDL_SetErrorV ] ---
 
-    /** {@code _Bool SDL_SetErrorV(char const * fmt, va_list ap)} */
+    /** {@code bool SDL_SetErrorV(char const * fmt, va_list ap)} */
     public static boolean nSDL_SetErrorV(long fmt, long ap) {
         long __functionAddress = Functions.SetErrorV;
         if (CHECKS) {
@@ -6030,8 +6030,8 @@ public class SDL {
         return invokePPZ(fmt, ap, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetErrorV(char const * fmt, va_list ap)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetErrorV(char const * fmt, va_list ap)} */
+    @NativeType("bool")
     public static boolean SDL_SetErrorV(@NativeType("char const *") ByteBuffer fmt, @NativeType("va_list") long ap) {
         if (CHECKS) {
             checkNT1(fmt);
@@ -6039,8 +6039,8 @@ public class SDL {
         return nSDL_SetErrorV(memAddress(fmt), ap);
     }
 
-    /** {@code _Bool SDL_SetErrorV(char const * fmt, va_list ap)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetErrorV(char const * fmt, va_list ap)} */
+    @NativeType("bool")
     public static boolean SDL_SetErrorV(@NativeType("char const *") CharSequence fmt, @NativeType("va_list") long ap) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -6054,8 +6054,8 @@ public class SDL {
 
     // --- [ SDL_OutOfMemory ] ---
 
-    /** {@code _Bool SDL_OutOfMemory(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_OutOfMemory(void)} */
+    @NativeType("bool")
     public static boolean SDL_OutOfMemory() {
         long __functionAddress = Functions.OutOfMemory;
         return invokeZ(__functionAddress);
@@ -6078,8 +6078,8 @@ public class SDL {
 
     // --- [ SDL_ClearError ] ---
 
-    /** {@code _Bool SDL_ClearError(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ClearError(void)} */
+    @NativeType("bool")
     public static boolean SDL_ClearError() {
         long __functionAddress = Functions.ClearError;
         return invokeZ(__functionAddress);
@@ -6108,8 +6108,8 @@ public class SDL {
 
     // --- [ SDL_HasEvent ] ---
 
-    /** {@code _Bool SDL_HasEvent(Uint32 type)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasEvent(Uint32 type)} */
+    @NativeType("bool")
     public static boolean SDL_HasEvent(@NativeType("Uint32") int type) {
         long __functionAddress = Functions.HasEvent;
         return invokeZ(type, __functionAddress);
@@ -6117,8 +6117,8 @@ public class SDL {
 
     // --- [ SDL_HasEvents ] ---
 
-    /** {@code _Bool SDL_HasEvents(Uint32 minType, Uint32 maxType)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasEvents(Uint32 minType, Uint32 maxType)} */
+    @NativeType("bool")
     public static boolean SDL_HasEvents(@NativeType("Uint32") int minType, @NativeType("Uint32") int maxType) {
         long __functionAddress = Functions.HasEvents;
         return invokeZ(minType, maxType, __functionAddress);
@@ -6142,56 +6142,56 @@ public class SDL {
 
     // --- [ SDL_PollEvent ] ---
 
-    /** {@code _Bool SDL_PollEvent(SDL_Event * event)} */
+    /** {@code bool SDL_PollEvent(SDL_Event * event)} */
     public static boolean nSDL_PollEvent(long event) {
         long __functionAddress = Functions.PollEvent;
         return invokePZ(event, __functionAddress);
     }
 
-    /** {@code _Bool SDL_PollEvent(SDL_Event * event)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_PollEvent(SDL_Event * event)} */
+    @NativeType("bool")
     public static boolean SDL_PollEvent(@NativeType("SDL_Event *") @Nullable SDL_Event event) {
         return nSDL_PollEvent(memAddressSafe(event));
     }
 
     // --- [ SDL_WaitEvent ] ---
 
-    /** {@code _Bool SDL_WaitEvent(SDL_Event * event)} */
+    /** {@code bool SDL_WaitEvent(SDL_Event * event)} */
     public static boolean nSDL_WaitEvent(long event) {
         long __functionAddress = Functions.WaitEvent;
         return invokePZ(event, __functionAddress);
     }
 
-    /** {@code _Bool SDL_WaitEvent(SDL_Event * event)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WaitEvent(SDL_Event * event)} */
+    @NativeType("bool")
     public static boolean SDL_WaitEvent(@NativeType("SDL_Event *") @Nullable SDL_Event event) {
         return nSDL_WaitEvent(memAddressSafe(event));
     }
 
     // --- [ SDL_WaitEventTimeout ] ---
 
-    /** {@code _Bool SDL_WaitEventTimeout(SDL_Event * event, Sint32 timeoutMS)} */
+    /** {@code bool SDL_WaitEventTimeout(SDL_Event * event, Sint32 timeoutMS)} */
     public static boolean nSDL_WaitEventTimeout(long event, int timeoutMS) {
         long __functionAddress = Functions.WaitEventTimeout;
         return invokePZ(event, timeoutMS, __functionAddress);
     }
 
-    /** {@code _Bool SDL_WaitEventTimeout(SDL_Event * event, Sint32 timeoutMS)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WaitEventTimeout(SDL_Event * event, Sint32 timeoutMS)} */
+    @NativeType("bool")
     public static boolean SDL_WaitEventTimeout(@NativeType("SDL_Event *") @Nullable SDL_Event event, @NativeType("Sint32") int timeoutMS) {
         return nSDL_WaitEventTimeout(memAddressSafe(event), timeoutMS);
     }
 
     // --- [ SDL_PushEvent ] ---
 
-    /** {@code _Bool SDL_PushEvent(SDL_Event * event)} */
+    /** {@code bool SDL_PushEvent(SDL_Event * event)} */
     public static boolean nSDL_PushEvent(long event) {
         long __functionAddress = Functions.PushEvent;
         return invokePZ(event, __functionAddress);
     }
 
-    /** {@code _Bool SDL_PushEvent(SDL_Event * event)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_PushEvent(SDL_Event * event)} */
+    @NativeType("bool")
     public static boolean SDL_PushEvent(@NativeType("SDL_Event *") SDL_Event.Buffer event) {
         if (CHECKS) {
             check(event, 1);
@@ -6214,14 +6214,14 @@ public class SDL {
 
     // --- [ SDL_GetEventFilter ] ---
 
-    /** {@code _Bool SDL_GetEventFilter(SDL_EventFilter * filter, void ** userdata)} */
+    /** {@code bool SDL_GetEventFilter(SDL_EventFilter * filter, void ** userdata)} */
     public static boolean nSDL_GetEventFilter(long filter, long userdata) {
         long __functionAddress = Functions.GetEventFilter;
         return invokePPZ(filter, userdata, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetEventFilter(SDL_EventFilter * filter, void ** userdata)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetEventFilter(SDL_EventFilter * filter, void ** userdata)} */
+    @NativeType("bool")
     public static boolean SDL_GetEventFilter(@NativeType("SDL_EventFilter *") PointerBuffer filter, @NativeType("void **") @Nullable PointerBuffer userdata) {
         if (CHECKS) {
             check(filter, 1);
@@ -6232,14 +6232,14 @@ public class SDL {
 
     // --- [ SDL_AddEventWatch ] ---
 
-    /** {@code _Bool SDL_AddEventWatch(SDL_EventFilter filter, void * userdata)} */
+    /** {@code bool SDL_AddEventWatch(SDL_EventFilter filter, void * userdata)} */
     public static boolean nSDL_AddEventWatch(long filter, long userdata) {
         long __functionAddress = Functions.AddEventWatch;
         return invokePPZ(filter, userdata, __functionAddress);
     }
 
-    /** {@code _Bool SDL_AddEventWatch(SDL_EventFilter filter, void * userdata)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_AddEventWatch(SDL_EventFilter filter, void * userdata)} */
+    @NativeType("bool")
     public static boolean SDL_AddEventWatch(@NativeType("SDL_EventFilter") SDL_EventFilterI filter, @NativeType("void *") long userdata) {
         return nSDL_AddEventWatch(filter.address(), userdata);
     }
@@ -6272,16 +6272,16 @@ public class SDL {
 
     // --- [ SDL_SetEventEnabled ] ---
 
-    /** {@code void SDL_SetEventEnabled(Uint32 type, _Bool enabled)} */
-    public static void SDL_SetEventEnabled(@NativeType("Uint32") int type, @NativeType("_Bool") boolean enabled) {
+    /** {@code void SDL_SetEventEnabled(Uint32 type, bool enabled)} */
+    public static void SDL_SetEventEnabled(@NativeType("Uint32") int type, @NativeType("bool") boolean enabled) {
         long __functionAddress = Functions.SetEventEnabled;
         invokeV(type, enabled, __functionAddress);
     }
 
     // --- [ SDL_EventEnabled ] ---
 
-    /** {@code _Bool SDL_EventEnabled(Uint32 type)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_EventEnabled(Uint32 type)} */
+    @NativeType("bool")
     public static boolean SDL_EventEnabled(@NativeType("Uint32") int type) {
         long __functionAddress = Functions.EventEnabled;
         return invokeZ(type, __functionAddress);
@@ -6387,14 +6387,14 @@ public class SDL {
 
     // --- [ SDL_CreateDirectory ] ---
 
-    /** {@code _Bool SDL_CreateDirectory(char const * path)} */
+    /** {@code bool SDL_CreateDirectory(char const * path)} */
     public static boolean nSDL_CreateDirectory(long path) {
         long __functionAddress = Functions.CreateDirectory;
         return invokePZ(path, __functionAddress);
     }
 
-    /** {@code _Bool SDL_CreateDirectory(char const * path)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_CreateDirectory(char const * path)} */
+    @NativeType("bool")
     public static boolean SDL_CreateDirectory(@NativeType("char const *") ByteBuffer path) {
         if (CHECKS) {
             checkNT1(path);
@@ -6402,8 +6402,8 @@ public class SDL {
         return nSDL_CreateDirectory(memAddress(path));
     }
 
-    /** {@code _Bool SDL_CreateDirectory(char const * path)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_CreateDirectory(char const * path)} */
+    @NativeType("bool")
     public static boolean SDL_CreateDirectory(@NativeType("char const *") CharSequence path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -6417,14 +6417,14 @@ public class SDL {
 
     // --- [ SDL_EnumerateDirectory ] ---
 
-    /** {@code _Bool SDL_EnumerateDirectory(char const * path, SDL_EnumerateDirectoryCallback callback, void * userdata)} */
+    /** {@code bool SDL_EnumerateDirectory(char const * path, SDL_EnumerateDirectoryCallback callback, void * userdata)} */
     public static boolean nSDL_EnumerateDirectory(long path, long callback, long userdata) {
         long __functionAddress = Functions.EnumerateDirectory;
         return invokePPPZ(path, callback, userdata, __functionAddress);
     }
 
-    /** {@code _Bool SDL_EnumerateDirectory(char const * path, SDL_EnumerateDirectoryCallback callback, void * userdata)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_EnumerateDirectory(char const * path, SDL_EnumerateDirectoryCallback callback, void * userdata)} */
+    @NativeType("bool")
     public static boolean SDL_EnumerateDirectory(@NativeType("char const *") ByteBuffer path, @NativeType("SDL_EnumerateDirectoryCallback") SDL_EnumerateDirectoryCallbackI callback, @NativeType("void *") long userdata) {
         if (CHECKS) {
             checkNT1(path);
@@ -6432,8 +6432,8 @@ public class SDL {
         return nSDL_EnumerateDirectory(memAddress(path), callback.address(), userdata);
     }
 
-    /** {@code _Bool SDL_EnumerateDirectory(char const * path, SDL_EnumerateDirectoryCallback callback, void * userdata)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_EnumerateDirectory(char const * path, SDL_EnumerateDirectoryCallback callback, void * userdata)} */
+    @NativeType("bool")
     public static boolean SDL_EnumerateDirectory(@NativeType("char const *") CharSequence path, @NativeType("SDL_EnumerateDirectoryCallback") SDL_EnumerateDirectoryCallbackI callback, @NativeType("void *") long userdata) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -6447,14 +6447,14 @@ public class SDL {
 
     // --- [ SDL_RemovePath ] ---
 
-    /** {@code _Bool SDL_RemovePath(char const * path)} */
+    /** {@code bool SDL_RemovePath(char const * path)} */
     public static boolean nSDL_RemovePath(long path) {
         long __functionAddress = Functions.RemovePath;
         return invokePZ(path, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RemovePath(char const * path)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RemovePath(char const * path)} */
+    @NativeType("bool")
     public static boolean SDL_RemovePath(@NativeType("char const *") ByteBuffer path) {
         if (CHECKS) {
             checkNT1(path);
@@ -6462,8 +6462,8 @@ public class SDL {
         return nSDL_RemovePath(memAddress(path));
     }
 
-    /** {@code _Bool SDL_RemovePath(char const * path)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RemovePath(char const * path)} */
+    @NativeType("bool")
     public static boolean SDL_RemovePath(@NativeType("char const *") CharSequence path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -6477,14 +6477,14 @@ public class SDL {
 
     // --- [ SDL_RenamePath ] ---
 
-    /** {@code _Bool SDL_RenamePath(char const * oldpath, char const * newpath)} */
+    /** {@code bool SDL_RenamePath(char const * oldpath, char const * newpath)} */
     public static boolean nSDL_RenamePath(long oldpath, long newpath) {
         long __functionAddress = Functions.RenamePath;
         return invokePPZ(oldpath, newpath, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RenamePath(char const * oldpath, char const * newpath)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenamePath(char const * oldpath, char const * newpath)} */
+    @NativeType("bool")
     public static boolean SDL_RenamePath(@NativeType("char const *") ByteBuffer oldpath, @NativeType("char const *") ByteBuffer newpath) {
         if (CHECKS) {
             checkNT1(oldpath);
@@ -6493,8 +6493,8 @@ public class SDL {
         return nSDL_RenamePath(memAddress(oldpath), memAddress(newpath));
     }
 
-    /** {@code _Bool SDL_RenamePath(char const * oldpath, char const * newpath)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenamePath(char const * oldpath, char const * newpath)} */
+    @NativeType("bool")
     public static boolean SDL_RenamePath(@NativeType("char const *") CharSequence oldpath, @NativeType("char const *") CharSequence newpath) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -6510,14 +6510,14 @@ public class SDL {
 
     // --- [ SDL_CopyFile ] ---
 
-    /** {@code _Bool SDL_CopyFile(char const * oldpath, char const * newpath)} */
+    /** {@code bool SDL_CopyFile(char const * oldpath, char const * newpath)} */
     public static boolean nSDL_CopyFile(long oldpath, long newpath) {
         long __functionAddress = Functions.CopyFile;
         return invokePPZ(oldpath, newpath, __functionAddress);
     }
 
-    /** {@code _Bool SDL_CopyFile(char const * oldpath, char const * newpath)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_CopyFile(char const * oldpath, char const * newpath)} */
+    @NativeType("bool")
     public static boolean SDL_CopyFile(@NativeType("char const *") ByteBuffer oldpath, @NativeType("char const *") ByteBuffer newpath) {
         if (CHECKS) {
             checkNT1(oldpath);
@@ -6526,8 +6526,8 @@ public class SDL {
         return nSDL_CopyFile(memAddress(oldpath), memAddress(newpath));
     }
 
-    /** {@code _Bool SDL_CopyFile(char const * oldpath, char const * newpath)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_CopyFile(char const * oldpath, char const * newpath)} */
+    @NativeType("bool")
     public static boolean SDL_CopyFile(@NativeType("char const *") CharSequence oldpath, @NativeType("char const *") CharSequence newpath) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -6543,14 +6543,14 @@ public class SDL {
 
     // --- [ SDL_GetPathInfo ] ---
 
-    /** {@code _Bool SDL_GetPathInfo(char const * path, SDL_PathInfo * info)} */
+    /** {@code bool SDL_GetPathInfo(char const * path, SDL_PathInfo * info)} */
     public static boolean nSDL_GetPathInfo(long path, long info) {
         long __functionAddress = Functions.GetPathInfo;
         return invokePPZ(path, info, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetPathInfo(char const * path, SDL_PathInfo * info)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetPathInfo(char const * path, SDL_PathInfo * info)} */
+    @NativeType("bool")
     public static boolean SDL_GetPathInfo(@NativeType("char const *") ByteBuffer path, @NativeType("SDL_PathInfo *") SDL_PathInfo.@Nullable Buffer info) {
         if (CHECKS) {
             checkNT1(path);
@@ -6559,8 +6559,8 @@ public class SDL {
         return nSDL_GetPathInfo(memAddress(path), memAddressSafe(info));
     }
 
-    /** {@code _Bool SDL_GetPathInfo(char const * path, SDL_PathInfo * info)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetPathInfo(char const * path, SDL_PathInfo * info)} */
+    @NativeType("bool")
     public static boolean SDL_GetPathInfo(@NativeType("char const *") CharSequence path, @NativeType("SDL_PathInfo *") SDL_PathInfo.@Nullable Buffer info) {
         if (CHECKS) {
             checkSafe(info, 1);
@@ -6639,14 +6639,14 @@ public class SDL {
 
     // --- [ SDL_GPUSupportsShaderFormats ] ---
 
-    /** {@code _Bool SDL_GPUSupportsShaderFormats(SDL_GPUShaderFormat format_flags, char const * name)} */
+    /** {@code bool SDL_GPUSupportsShaderFormats(SDL_GPUShaderFormat format_flags, char const * name)} */
     public static boolean nSDL_GPUSupportsShaderFormats(int format_flags, long name) {
         long __functionAddress = Functions.GPUSupportsShaderFormats;
         return invokePZ(format_flags, name, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GPUSupportsShaderFormats(SDL_GPUShaderFormat format_flags, char const * name)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GPUSupportsShaderFormats(SDL_GPUShaderFormat format_flags, char const * name)} */
+    @NativeType("bool")
     public static boolean SDL_GPUSupportsShaderFormats(@NativeType("SDL_GPUShaderFormat") int format_flags, @NativeType("char const *") @Nullable ByteBuffer name) {
         if (CHECKS) {
             checkNT1Safe(name);
@@ -6654,8 +6654,8 @@ public class SDL {
         return nSDL_GPUSupportsShaderFormats(format_flags, memAddressSafe(name));
     }
 
-    /** {@code _Bool SDL_GPUSupportsShaderFormats(SDL_GPUShaderFormat format_flags, char const * name)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GPUSupportsShaderFormats(SDL_GPUShaderFormat format_flags, char const * name)} */
+    @NativeType("bool")
     public static boolean SDL_GPUSupportsShaderFormats(@NativeType("SDL_GPUShaderFormat") int format_flags, @NativeType("char const *") @Nullable CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -6669,8 +6669,8 @@ public class SDL {
 
     // --- [ SDL_GPUSupportsProperties ] ---
 
-    /** {@code _Bool SDL_GPUSupportsProperties(SDL_PropertiesID props)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GPUSupportsProperties(SDL_PropertiesID props)} */
+    @NativeType("bool")
     public static boolean SDL_GPUSupportsProperties(@NativeType("SDL_PropertiesID") int props) {
         long __functionAddress = Functions.GPUSupportsProperties;
         return invokeZ(props, __functionAddress);
@@ -6678,24 +6678,24 @@ public class SDL {
 
     // --- [ SDL_CreateGPUDevice ] ---
 
-    /** {@code SDL_GPUDevice * SDL_CreateGPUDevice(SDL_GPUShaderFormat format_flags, _Bool debug_mode, char const * name)} */
+    /** {@code SDL_GPUDevice * SDL_CreateGPUDevice(SDL_GPUShaderFormat format_flags, bool debug_mode, char const * name)} */
     public static long nSDL_CreateGPUDevice(int format_flags, boolean debug_mode, long name) {
         long __functionAddress = Functions.CreateGPUDevice;
         return invokePP(format_flags, debug_mode, name, __functionAddress);
     }
 
-    /** {@code SDL_GPUDevice * SDL_CreateGPUDevice(SDL_GPUShaderFormat format_flags, _Bool debug_mode, char const * name)} */
+    /** {@code SDL_GPUDevice * SDL_CreateGPUDevice(SDL_GPUShaderFormat format_flags, bool debug_mode, char const * name)} */
     @NativeType("SDL_GPUDevice *")
-    public static long SDL_CreateGPUDevice(@NativeType("SDL_GPUShaderFormat") int format_flags, @NativeType("_Bool") boolean debug_mode, @NativeType("char const *") @Nullable ByteBuffer name) {
+    public static long SDL_CreateGPUDevice(@NativeType("SDL_GPUShaderFormat") int format_flags, @NativeType("bool") boolean debug_mode, @NativeType("char const *") @Nullable ByteBuffer name) {
         if (CHECKS) {
             checkNT1Safe(name);
         }
         return nSDL_CreateGPUDevice(format_flags, debug_mode, memAddressSafe(name));
     }
 
-    /** {@code SDL_GPUDevice * SDL_CreateGPUDevice(SDL_GPUShaderFormat format_flags, _Bool debug_mode, char const * name)} */
+    /** {@code SDL_GPUDevice * SDL_CreateGPUDevice(SDL_GPUShaderFormat format_flags, bool debug_mode, char const * name)} */
     @NativeType("SDL_GPUDevice *")
-    public static long SDL_CreateGPUDevice(@NativeType("SDL_GPUShaderFormat") int format_flags, @NativeType("_Bool") boolean debug_mode, @NativeType("char const *") @Nullable CharSequence name) {
+    public static long SDL_CreateGPUDevice(@NativeType("SDL_GPUShaderFormat") int format_flags, @NativeType("bool") boolean debug_mode, @NativeType("char const *") @Nullable CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8Safe(name, true);
@@ -7714,7 +7714,7 @@ public class SDL {
 
     // --- [ SDL_MapGPUTransferBuffer ] ---
 
-    /** {@code void * SDL_MapGPUTransferBuffer(SDL_GPUDevice * device, SDL_GPUTransferBuffer * transfer_buffer, _Bool cycle, size_t buffer_size)} */
+    /** {@code void * SDL_MapGPUTransferBuffer(SDL_GPUDevice * device, SDL_GPUTransferBuffer * transfer_buffer, bool cycle, size_t buffer_size)} */
     public static long nSDL_MapGPUTransferBuffer(long device, long transfer_buffer, boolean cycle) {
         long __functionAddress = Functions.MapGPUTransferBuffer;
         if (CHECKS) {
@@ -7724,9 +7724,9 @@ public class SDL {
         return invokePPP(device, transfer_buffer, cycle, __functionAddress);
     }
 
-    /** {@code void * SDL_MapGPUTransferBuffer(SDL_GPUDevice * device, SDL_GPUTransferBuffer * transfer_buffer, _Bool cycle, size_t buffer_size)} */
+    /** {@code void * SDL_MapGPUTransferBuffer(SDL_GPUDevice * device, SDL_GPUTransferBuffer * transfer_buffer, bool cycle, size_t buffer_size)} */
     @NativeType("void *")
-    public static @Nullable ByteBuffer SDL_MapGPUTransferBuffer(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUTransferBuffer *") long transfer_buffer, @NativeType("_Bool") boolean cycle, @NativeType("size_t") long buffer_size) {
+    public static @Nullable ByteBuffer SDL_MapGPUTransferBuffer(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUTransferBuffer *") long transfer_buffer, @NativeType("bool") boolean cycle, @NativeType("size_t") long buffer_size) {
         long __result = nSDL_MapGPUTransferBuffer(device, transfer_buffer, cycle);
         return memByteBufferSafe(__result, (int)buffer_size);
     }
@@ -7757,7 +7757,7 @@ public class SDL {
 
     // --- [ SDL_UploadToGPUTexture ] ---
 
-    /** {@code void SDL_UploadToGPUTexture(SDL_GPUCopyPass * copy_pass, SDL_GPUTextureTransferInfo const * source, SDL_GPUTextureRegion const * destination, _Bool cycle)} */
+    /** {@code void SDL_UploadToGPUTexture(SDL_GPUCopyPass * copy_pass, SDL_GPUTextureTransferInfo const * source, SDL_GPUTextureRegion const * destination, bool cycle)} */
     public static void nSDL_UploadToGPUTexture(long copy_pass, long source, long destination, boolean cycle) {
         long __functionAddress = Functions.UploadToGPUTexture;
         if (CHECKS) {
@@ -7768,8 +7768,8 @@ public class SDL {
         invokePPPV(copy_pass, source, destination, cycle, __functionAddress);
     }
 
-    /** {@code void SDL_UploadToGPUTexture(SDL_GPUCopyPass * copy_pass, SDL_GPUTextureTransferInfo const * source, SDL_GPUTextureRegion const * destination, _Bool cycle)} */
-    public static void SDL_UploadToGPUTexture(@NativeType("SDL_GPUCopyPass *") long copy_pass, @NativeType("SDL_GPUTextureTransferInfo const *") SDL_GPUTextureTransferInfo.Buffer source, @NativeType("SDL_GPUTextureRegion const *") SDL_GPUTextureRegion.Buffer destination, @NativeType("_Bool") boolean cycle) {
+    /** {@code void SDL_UploadToGPUTexture(SDL_GPUCopyPass * copy_pass, SDL_GPUTextureTransferInfo const * source, SDL_GPUTextureRegion const * destination, bool cycle)} */
+    public static void SDL_UploadToGPUTexture(@NativeType("SDL_GPUCopyPass *") long copy_pass, @NativeType("SDL_GPUTextureTransferInfo const *") SDL_GPUTextureTransferInfo.Buffer source, @NativeType("SDL_GPUTextureRegion const *") SDL_GPUTextureRegion.Buffer destination, @NativeType("bool") boolean cycle) {
         if (CHECKS) {
             check(source, 1);
             check(destination, 1);
@@ -7779,7 +7779,7 @@ public class SDL {
 
     // --- [ SDL_UploadToGPUBuffer ] ---
 
-    /** {@code void SDL_UploadToGPUBuffer(SDL_GPUCopyPass * copy_pass, SDL_GPUTransferBufferLocation const * source, SDL_GPUBufferRegion const * destination, _Bool cycle)} */
+    /** {@code void SDL_UploadToGPUBuffer(SDL_GPUCopyPass * copy_pass, SDL_GPUTransferBufferLocation const * source, SDL_GPUBufferRegion const * destination, bool cycle)} */
     public static void nSDL_UploadToGPUBuffer(long copy_pass, long source, long destination, boolean cycle) {
         long __functionAddress = Functions.UploadToGPUBuffer;
         if (CHECKS) {
@@ -7790,8 +7790,8 @@ public class SDL {
         invokePPPV(copy_pass, source, destination, cycle, __functionAddress);
     }
 
-    /** {@code void SDL_UploadToGPUBuffer(SDL_GPUCopyPass * copy_pass, SDL_GPUTransferBufferLocation const * source, SDL_GPUBufferRegion const * destination, _Bool cycle)} */
-    public static void SDL_UploadToGPUBuffer(@NativeType("SDL_GPUCopyPass *") long copy_pass, @NativeType("SDL_GPUTransferBufferLocation const *") SDL_GPUTransferBufferLocation.Buffer source, @NativeType("SDL_GPUBufferRegion const *") SDL_GPUBufferRegion.Buffer destination, @NativeType("_Bool") boolean cycle) {
+    /** {@code void SDL_UploadToGPUBuffer(SDL_GPUCopyPass * copy_pass, SDL_GPUTransferBufferLocation const * source, SDL_GPUBufferRegion const * destination, bool cycle)} */
+    public static void SDL_UploadToGPUBuffer(@NativeType("SDL_GPUCopyPass *") long copy_pass, @NativeType("SDL_GPUTransferBufferLocation const *") SDL_GPUTransferBufferLocation.Buffer source, @NativeType("SDL_GPUBufferRegion const *") SDL_GPUBufferRegion.Buffer destination, @NativeType("bool") boolean cycle) {
         if (CHECKS) {
             check(source, 1);
             check(destination, 1);
@@ -7801,7 +7801,7 @@ public class SDL {
 
     // --- [ SDL_CopyGPUTextureToTexture ] ---
 
-    /** {@code void SDL_CopyGPUTextureToTexture(SDL_GPUCopyPass * copy_pass, SDL_GPUTextureLocation const * source, SDL_GPUTextureLocation const * destination, Uint32 w, Uint32 h, Uint32 d, _Bool cycle)} */
+    /** {@code void SDL_CopyGPUTextureToTexture(SDL_GPUCopyPass * copy_pass, SDL_GPUTextureLocation const * source, SDL_GPUTextureLocation const * destination, Uint32 w, Uint32 h, Uint32 d, bool cycle)} */
     public static void nSDL_CopyGPUTextureToTexture(long copy_pass, long source, long destination, int w, int h, int d, boolean cycle) {
         long __functionAddress = Functions.CopyGPUTextureToTexture;
         if (CHECKS) {
@@ -7812,8 +7812,8 @@ public class SDL {
         invokePPPV(copy_pass, source, destination, w, h, d, cycle, __functionAddress);
     }
 
-    /** {@code void SDL_CopyGPUTextureToTexture(SDL_GPUCopyPass * copy_pass, SDL_GPUTextureLocation const * source, SDL_GPUTextureLocation const * destination, Uint32 w, Uint32 h, Uint32 d, _Bool cycle)} */
-    public static void SDL_CopyGPUTextureToTexture(@NativeType("SDL_GPUCopyPass *") long copy_pass, @NativeType("SDL_GPUTextureLocation const *") SDL_GPUTextureLocation.Buffer source, @NativeType("SDL_GPUTextureLocation const *") SDL_GPUTextureLocation.Buffer destination, @NativeType("Uint32") int w, @NativeType("Uint32") int h, @NativeType("Uint32") int d, @NativeType("_Bool") boolean cycle) {
+    /** {@code void SDL_CopyGPUTextureToTexture(SDL_GPUCopyPass * copy_pass, SDL_GPUTextureLocation const * source, SDL_GPUTextureLocation const * destination, Uint32 w, Uint32 h, Uint32 d, bool cycle)} */
+    public static void SDL_CopyGPUTextureToTexture(@NativeType("SDL_GPUCopyPass *") long copy_pass, @NativeType("SDL_GPUTextureLocation const *") SDL_GPUTextureLocation.Buffer source, @NativeType("SDL_GPUTextureLocation const *") SDL_GPUTextureLocation.Buffer destination, @NativeType("Uint32") int w, @NativeType("Uint32") int h, @NativeType("Uint32") int d, @NativeType("bool") boolean cycle) {
         if (CHECKS) {
             check(source, 1);
             check(destination, 1);
@@ -7823,7 +7823,7 @@ public class SDL {
 
     // --- [ SDL_CopyGPUBufferToBuffer ] ---
 
-    /** {@code void SDL_CopyGPUBufferToBuffer(SDL_GPUCopyPass * copy_pass, SDL_GPUBufferLocation const * source, SDL_GPUBufferLocation const * destination, Uint32 size, _Bool cycle)} */
+    /** {@code void SDL_CopyGPUBufferToBuffer(SDL_GPUCopyPass * copy_pass, SDL_GPUBufferLocation const * source, SDL_GPUBufferLocation const * destination, Uint32 size, bool cycle)} */
     public static void nSDL_CopyGPUBufferToBuffer(long copy_pass, long source, long destination, int size, boolean cycle) {
         long __functionAddress = Functions.CopyGPUBufferToBuffer;
         if (CHECKS) {
@@ -7834,8 +7834,8 @@ public class SDL {
         invokePPPV(copy_pass, source, destination, size, cycle, __functionAddress);
     }
 
-    /** {@code void SDL_CopyGPUBufferToBuffer(SDL_GPUCopyPass * copy_pass, SDL_GPUBufferLocation const * source, SDL_GPUBufferLocation const * destination, Uint32 size, _Bool cycle)} */
-    public static void SDL_CopyGPUBufferToBuffer(@NativeType("SDL_GPUCopyPass *") long copy_pass, @NativeType("SDL_GPUBufferLocation const *") SDL_GPUBufferLocation.Buffer source, @NativeType("SDL_GPUBufferLocation const *") SDL_GPUBufferLocation.Buffer destination, @NativeType("Uint32") int size, @NativeType("_Bool") boolean cycle) {
+    /** {@code void SDL_CopyGPUBufferToBuffer(SDL_GPUCopyPass * copy_pass, SDL_GPUBufferLocation const * source, SDL_GPUBufferLocation const * destination, Uint32 size, bool cycle)} */
+    public static void SDL_CopyGPUBufferToBuffer(@NativeType("SDL_GPUCopyPass *") long copy_pass, @NativeType("SDL_GPUBufferLocation const *") SDL_GPUBufferLocation.Buffer source, @NativeType("SDL_GPUBufferLocation const *") SDL_GPUBufferLocation.Buffer destination, @NativeType("Uint32") int size, @NativeType("bool") boolean cycle) {
         if (CHECKS) {
             check(source, 1);
             check(destination, 1);
@@ -7932,8 +7932,8 @@ public class SDL {
 
     // --- [ SDL_WindowSupportsGPUSwapchainComposition ] ---
 
-    /** {@code _Bool SDL_WindowSupportsGPUSwapchainComposition(SDL_GPUDevice * device, SDL_Window * window, SDL_GPUSwapchainComposition swapchain_composition)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WindowSupportsGPUSwapchainComposition(SDL_GPUDevice * device, SDL_Window * window, SDL_GPUSwapchainComposition swapchain_composition)} */
+    @NativeType("bool")
     public static boolean SDL_WindowSupportsGPUSwapchainComposition(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_Window *") long window, @NativeType("SDL_GPUSwapchainComposition") int swapchain_composition) {
         long __functionAddress = Functions.WindowSupportsGPUSwapchainComposition;
         if (CHECKS) {
@@ -7945,8 +7945,8 @@ public class SDL {
 
     // --- [ SDL_WindowSupportsGPUPresentMode ] ---
 
-    /** {@code _Bool SDL_WindowSupportsGPUPresentMode(SDL_GPUDevice * device, SDL_Window * window, SDL_GPUPresentMode present_mode)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WindowSupportsGPUPresentMode(SDL_GPUDevice * device, SDL_Window * window, SDL_GPUPresentMode present_mode)} */
+    @NativeType("bool")
     public static boolean SDL_WindowSupportsGPUPresentMode(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_Window *") long window, @NativeType("SDL_GPUPresentMode") int present_mode) {
         long __functionAddress = Functions.WindowSupportsGPUPresentMode;
         if (CHECKS) {
@@ -7958,8 +7958,8 @@ public class SDL {
 
     // --- [ SDL_ClaimWindowForGPUDevice ] ---
 
-    /** {@code _Bool SDL_ClaimWindowForGPUDevice(SDL_GPUDevice * device, SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ClaimWindowForGPUDevice(SDL_GPUDevice * device, SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_ClaimWindowForGPUDevice(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.ClaimWindowForGPUDevice;
         if (CHECKS) {
@@ -7983,8 +7983,8 @@ public class SDL {
 
     // --- [ SDL_SetGPUSwapchainParameters ] ---
 
-    /** {@code _Bool SDL_SetGPUSwapchainParameters(SDL_GPUDevice * device, SDL_Window * window, SDL_GPUSwapchainComposition swapchain_composition, SDL_GPUPresentMode present_mode)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetGPUSwapchainParameters(SDL_GPUDevice * device, SDL_Window * window, SDL_GPUSwapchainComposition swapchain_composition, SDL_GPUPresentMode present_mode)} */
+    @NativeType("bool")
     public static boolean SDL_SetGPUSwapchainParameters(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_Window *") long window, @NativeType("SDL_GPUSwapchainComposition") int swapchain_composition, @NativeType("SDL_GPUPresentMode") int present_mode) {
         long __functionAddress = Functions.SetGPUSwapchainParameters;
         if (CHECKS) {
@@ -7996,8 +7996,8 @@ public class SDL {
 
     // --- [ SDL_SetGPUAllowedFramesInFlight ] ---
 
-    /** {@code _Bool SDL_SetGPUAllowedFramesInFlight(SDL_GPUDevice * device, Uint32 allowed_frames_in_flight)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetGPUAllowedFramesInFlight(SDL_GPUDevice * device, Uint32 allowed_frames_in_flight)} */
+    @NativeType("bool")
     public static boolean SDL_SetGPUAllowedFramesInFlight(@NativeType("SDL_GPUDevice *") long device, @NativeType("Uint32") int allowed_frames_in_flight) {
         long __functionAddress = Functions.SetGPUAllowedFramesInFlight;
         if (CHECKS) {
@@ -8021,7 +8021,7 @@ public class SDL {
 
     // --- [ SDL_AcquireGPUSwapchainTexture ] ---
 
-    /** {@code _Bool SDL_AcquireGPUSwapchainTexture(SDL_GPUCommandBuffer * command_buffer, SDL_Window * window, SDL_GPUTexture ** swapchain_texture, Uint32 * swapchain_texture_width, Uint32 * swapchain_texture_height)} */
+    /** {@code bool SDL_AcquireGPUSwapchainTexture(SDL_GPUCommandBuffer * command_buffer, SDL_Window * window, SDL_GPUTexture ** swapchain_texture, Uint32 * swapchain_texture_width, Uint32 * swapchain_texture_height)} */
     public static boolean nSDL_AcquireGPUSwapchainTexture(long command_buffer, long window, long swapchain_texture, long swapchain_texture_width, long swapchain_texture_height) {
         long __functionAddress = Functions.AcquireGPUSwapchainTexture;
         if (CHECKS) {
@@ -8031,8 +8031,8 @@ public class SDL {
         return invokePPPPPZ(command_buffer, window, swapchain_texture, swapchain_texture_width, swapchain_texture_height, __functionAddress);
     }
 
-    /** {@code _Bool SDL_AcquireGPUSwapchainTexture(SDL_GPUCommandBuffer * command_buffer, SDL_Window * window, SDL_GPUTexture ** swapchain_texture, Uint32 * swapchain_texture_width, Uint32 * swapchain_texture_height)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_AcquireGPUSwapchainTexture(SDL_GPUCommandBuffer * command_buffer, SDL_Window * window, SDL_GPUTexture ** swapchain_texture, Uint32 * swapchain_texture_width, Uint32 * swapchain_texture_height)} */
+    @NativeType("bool")
     public static boolean SDL_AcquireGPUSwapchainTexture(@NativeType("SDL_GPUCommandBuffer *") long command_buffer, @NativeType("SDL_Window *") long window, @NativeType("SDL_GPUTexture **") PointerBuffer swapchain_texture, @NativeType("Uint32 *") @Nullable IntBuffer swapchain_texture_width, @NativeType("Uint32 *") @Nullable IntBuffer swapchain_texture_height) {
         if (CHECKS) {
             check(swapchain_texture, 1);
@@ -8044,8 +8044,8 @@ public class SDL {
 
     // --- [ SDL_WaitForGPUSwapchain ] ---
 
-    /** {@code _Bool SDL_WaitForGPUSwapchain(SDL_GPUDevice * device, SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WaitForGPUSwapchain(SDL_GPUDevice * device, SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_WaitForGPUSwapchain(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.WaitForGPUSwapchain;
         if (CHECKS) {
@@ -8057,7 +8057,7 @@ public class SDL {
 
     // --- [ SDL_WaitAndAcquireGPUSwapchainTexture ] ---
 
-    /** {@code _Bool SDL_WaitAndAcquireGPUSwapchainTexture(SDL_GPUCommandBuffer * command_buffer, SDL_Window * window, SDL_GPUTexture ** swapchain_texture, Uint32 * swapchain_texture_width, Uint32 * swapchain_texture_height)} */
+    /** {@code bool SDL_WaitAndAcquireGPUSwapchainTexture(SDL_GPUCommandBuffer * command_buffer, SDL_Window * window, SDL_GPUTexture ** swapchain_texture, Uint32 * swapchain_texture_width, Uint32 * swapchain_texture_height)} */
     public static boolean nSDL_WaitAndAcquireGPUSwapchainTexture(long command_buffer, long window, long swapchain_texture, long swapchain_texture_width, long swapchain_texture_height) {
         long __functionAddress = Functions.WaitAndAcquireGPUSwapchainTexture;
         if (CHECKS) {
@@ -8067,8 +8067,8 @@ public class SDL {
         return invokePPPPPZ(command_buffer, window, swapchain_texture, swapchain_texture_width, swapchain_texture_height, __functionAddress);
     }
 
-    /** {@code _Bool SDL_WaitAndAcquireGPUSwapchainTexture(SDL_GPUCommandBuffer * command_buffer, SDL_Window * window, SDL_GPUTexture ** swapchain_texture, Uint32 * swapchain_texture_width, Uint32 * swapchain_texture_height)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WaitAndAcquireGPUSwapchainTexture(SDL_GPUCommandBuffer * command_buffer, SDL_Window * window, SDL_GPUTexture ** swapchain_texture, Uint32 * swapchain_texture_width, Uint32 * swapchain_texture_height)} */
+    @NativeType("bool")
     public static boolean SDL_WaitAndAcquireGPUSwapchainTexture(@NativeType("SDL_GPUCommandBuffer *") long command_buffer, @NativeType("SDL_Window *") long window, @NativeType("SDL_GPUTexture **") PointerBuffer swapchain_texture, @NativeType("Uint32 *") @Nullable IntBuffer swapchain_texture_width, @NativeType("Uint32 *") @Nullable IntBuffer swapchain_texture_height) {
         if (CHECKS) {
             check(swapchain_texture, 1);
@@ -8080,8 +8080,8 @@ public class SDL {
 
     // --- [ SDL_SubmitGPUCommandBuffer ] ---
 
-    /** {@code _Bool SDL_SubmitGPUCommandBuffer(SDL_GPUCommandBuffer * command_buffer)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SubmitGPUCommandBuffer(SDL_GPUCommandBuffer * command_buffer)} */
+    @NativeType("bool")
     public static boolean SDL_SubmitGPUCommandBuffer(@NativeType("SDL_GPUCommandBuffer *") long command_buffer) {
         long __functionAddress = Functions.SubmitGPUCommandBuffer;
         if (CHECKS) {
@@ -8104,8 +8104,8 @@ public class SDL {
 
     // --- [ SDL_CancelGPUCommandBuffer ] ---
 
-    /** {@code _Bool SDL_CancelGPUCommandBuffer(SDL_GPUCommandBuffer * command_buffer)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_CancelGPUCommandBuffer(SDL_GPUCommandBuffer * command_buffer)} */
+    @NativeType("bool")
     public static boolean SDL_CancelGPUCommandBuffer(@NativeType("SDL_GPUCommandBuffer *") long command_buffer) {
         long __functionAddress = Functions.CancelGPUCommandBuffer;
         if (CHECKS) {
@@ -8116,8 +8116,8 @@ public class SDL {
 
     // --- [ SDL_WaitForGPUIdle ] ---
 
-    /** {@code _Bool SDL_WaitForGPUIdle(SDL_GPUDevice * device)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WaitForGPUIdle(SDL_GPUDevice * device)} */
+    @NativeType("bool")
     public static boolean SDL_WaitForGPUIdle(@NativeType("SDL_GPUDevice *") long device) {
         long __functionAddress = Functions.WaitForGPUIdle;
         if (CHECKS) {
@@ -8128,7 +8128,7 @@ public class SDL {
 
     // --- [ SDL_WaitForGPUFences ] ---
 
-    /** {@code _Bool SDL_WaitForGPUFences(SDL_GPUDevice * device, _Bool wait_all, SDL_GPUFence * const * fences, Uint32 num_fences)} */
+    /** {@code bool SDL_WaitForGPUFences(SDL_GPUDevice * device, bool wait_all, SDL_GPUFence * const * fences, Uint32 num_fences)} */
     public static boolean nSDL_WaitForGPUFences(long device, boolean wait_all, long fences, int num_fences) {
         long __functionAddress = Functions.WaitForGPUFences;
         if (CHECKS) {
@@ -8137,16 +8137,16 @@ public class SDL {
         return invokePPZ(device, wait_all, fences, num_fences, __functionAddress);
     }
 
-    /** {@code _Bool SDL_WaitForGPUFences(SDL_GPUDevice * device, _Bool wait_all, SDL_GPUFence * const * fences, Uint32 num_fences)} */
-    @NativeType("_Bool")
-    public static boolean SDL_WaitForGPUFences(@NativeType("SDL_GPUDevice *") long device, @NativeType("_Bool") boolean wait_all, @NativeType("SDL_GPUFence * const *") PointerBuffer fences) {
+    /** {@code bool SDL_WaitForGPUFences(SDL_GPUDevice * device, bool wait_all, SDL_GPUFence * const * fences, Uint32 num_fences)} */
+    @NativeType("bool")
+    public static boolean SDL_WaitForGPUFences(@NativeType("SDL_GPUDevice *") long device, @NativeType("bool") boolean wait_all, @NativeType("SDL_GPUFence * const *") PointerBuffer fences) {
         return nSDL_WaitForGPUFences(device, wait_all, memAddress(fences), fences.remaining());
     }
 
     // --- [ SDL_QueryGPUFence ] ---
 
-    /** {@code _Bool SDL_QueryGPUFence(SDL_GPUDevice * device, SDL_GPUFence * fence)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_QueryGPUFence(SDL_GPUDevice * device, SDL_GPUFence * fence)} */
+    @NativeType("bool")
     public static boolean SDL_QueryGPUFence(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUFence *") long fence) {
         long __functionAddress = Functions.QueryGPUFence;
         if (CHECKS) {
@@ -8179,8 +8179,8 @@ public class SDL {
 
     // --- [ SDL_GPUTextureSupportsFormat ] ---
 
-    /** {@code _Bool SDL_GPUTextureSupportsFormat(SDL_GPUDevice * device, SDL_GPUTextureFormat format, SDL_GPUTextureType type, SDL_GPUTextureUsageFlags usage)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GPUTextureSupportsFormat(SDL_GPUDevice * device, SDL_GPUTextureFormat format, SDL_GPUTextureType type, SDL_GPUTextureUsageFlags usage)} */
+    @NativeType("bool")
     public static boolean SDL_GPUTextureSupportsFormat(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUTextureFormat") int format, @NativeType("SDL_GPUTextureType") int type, @NativeType("SDL_GPUTextureUsageFlags") int usage) {
         long __functionAddress = Functions.GPUTextureSupportsFormat;
         if (CHECKS) {
@@ -8191,8 +8191,8 @@ public class SDL {
 
     // --- [ SDL_GPUTextureSupportsSampleCount ] ---
 
-    /** {@code _Bool SDL_GPUTextureSupportsSampleCount(SDL_GPUDevice * device, SDL_GPUTextureFormat format, SDL_GPUSampleCount sample_count)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GPUTextureSupportsSampleCount(SDL_GPUDevice * device, SDL_GPUTextureFormat format, SDL_GPUSampleCount sample_count)} */
+    @NativeType("bool")
     public static boolean SDL_GPUTextureSupportsSampleCount(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUTextureFormat") int format, @NativeType("SDL_GPUSampleCount") int sample_count) {
         long __functionAddress = Functions.GPUTextureSupportsSampleCount;
         if (CHECKS) {
@@ -8370,8 +8370,8 @@ public class SDL {
 
     // --- [ SDL_IsMouseHaptic ] ---
 
-    /** {@code _Bool SDL_IsMouseHaptic(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_IsMouseHaptic(void)} */
+    @NativeType("bool")
     public static boolean SDL_IsMouseHaptic() {
         long __functionAddress = Functions.IsMouseHaptic;
         return invokeZ(__functionAddress);
@@ -8388,8 +8388,8 @@ public class SDL {
 
     // --- [ SDL_IsJoystickHaptic ] ---
 
-    /** {@code _Bool SDL_IsJoystickHaptic(SDL_Joystick * joystick)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_IsJoystickHaptic(SDL_Joystick * joystick)} */
+    @NativeType("bool")
     public static boolean SDL_IsJoystickHaptic(@NativeType("SDL_Joystick *") long joystick) {
         long __functionAddress = Functions.IsJoystickHaptic;
         if (CHECKS) {
@@ -8468,7 +8468,7 @@ public class SDL {
 
     // --- [ SDL_HapticEffectSupported ] ---
 
-    /** {@code _Bool SDL_HapticEffectSupported(SDL_Haptic * haptic, SDL_HapticEffect const * effect)} */
+    /** {@code bool SDL_HapticEffectSupported(SDL_Haptic * haptic, SDL_HapticEffect const * effect)} */
     public static boolean nSDL_HapticEffectSupported(long haptic, long effect) {
         long __functionAddress = Functions.HapticEffectSupported;
         if (CHECKS) {
@@ -8477,8 +8477,8 @@ public class SDL {
         return invokePPZ(haptic, effect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_HapticEffectSupported(SDL_Haptic * haptic, SDL_HapticEffect const * effect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HapticEffectSupported(SDL_Haptic * haptic, SDL_HapticEffect const * effect)} */
+    @NativeType("bool")
     public static boolean SDL_HapticEffectSupported(@NativeType("SDL_Haptic *") long haptic, @NativeType("SDL_HapticEffect const *") SDL_HapticEffect.Buffer effect) {
         if (CHECKS) {
             check(effect, 1);
@@ -8507,7 +8507,7 @@ public class SDL {
 
     // --- [ SDL_UpdateHapticEffect ] ---
 
-    /** {@code _Bool SDL_UpdateHapticEffect(SDL_Haptic * haptic, int effect, SDL_HapticEffect const * data)} */
+    /** {@code bool SDL_UpdateHapticEffect(SDL_Haptic * haptic, int effect, SDL_HapticEffect const * data)} */
     public static boolean nSDL_UpdateHapticEffect(long haptic, int effect, long data) {
         long __functionAddress = Functions.UpdateHapticEffect;
         if (CHECKS) {
@@ -8516,8 +8516,8 @@ public class SDL {
         return invokePPZ(haptic, effect, data, __functionAddress);
     }
 
-    /** {@code _Bool SDL_UpdateHapticEffect(SDL_Haptic * haptic, int effect, SDL_HapticEffect const * data)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_UpdateHapticEffect(SDL_Haptic * haptic, int effect, SDL_HapticEffect const * data)} */
+    @NativeType("bool")
     public static boolean SDL_UpdateHapticEffect(@NativeType("SDL_Haptic *") long haptic, int effect, @NativeType("SDL_HapticEffect const *") SDL_HapticEffect.Buffer data) {
         if (CHECKS) {
             check(data, 1);
@@ -8527,8 +8527,8 @@ public class SDL {
 
     // --- [ SDL_RunHapticEffect ] ---
 
-    /** {@code _Bool SDL_RunHapticEffect(SDL_Haptic * haptic, int effect, Uint32 iterations)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RunHapticEffect(SDL_Haptic * haptic, int effect, Uint32 iterations)} */
+    @NativeType("bool")
     public static boolean SDL_RunHapticEffect(@NativeType("SDL_Haptic *") long haptic, int effect, @NativeType("Uint32") int iterations) {
         long __functionAddress = Functions.RunHapticEffect;
         if (CHECKS) {
@@ -8539,8 +8539,8 @@ public class SDL {
 
     // --- [ SDL_StopHapticEffect ] ---
 
-    /** {@code _Bool SDL_StopHapticEffect(SDL_Haptic * haptic, int effect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_StopHapticEffect(SDL_Haptic * haptic, int effect)} */
+    @NativeType("bool")
     public static boolean SDL_StopHapticEffect(@NativeType("SDL_Haptic *") long haptic, int effect) {
         long __functionAddress = Functions.StopHapticEffect;
         if (CHECKS) {
@@ -8562,8 +8562,8 @@ public class SDL {
 
     // --- [ SDL_GetHapticEffectStatus ] ---
 
-    /** {@code _Bool SDL_GetHapticEffectStatus(SDL_Haptic * haptic, int effect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetHapticEffectStatus(SDL_Haptic * haptic, int effect)} */
+    @NativeType("bool")
     public static boolean SDL_GetHapticEffectStatus(@NativeType("SDL_Haptic *") long haptic, int effect) {
         long __functionAddress = Functions.GetHapticEffectStatus;
         if (CHECKS) {
@@ -8574,8 +8574,8 @@ public class SDL {
 
     // --- [ SDL_SetHapticGain ] ---
 
-    /** {@code _Bool SDL_SetHapticGain(SDL_Haptic * haptic, int gain)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetHapticGain(SDL_Haptic * haptic, int gain)} */
+    @NativeType("bool")
     public static boolean SDL_SetHapticGain(@NativeType("SDL_Haptic *") long haptic, int gain) {
         long __functionAddress = Functions.SetHapticGain;
         if (CHECKS) {
@@ -8586,8 +8586,8 @@ public class SDL {
 
     // --- [ SDL_SetHapticAutocenter ] ---
 
-    /** {@code _Bool SDL_SetHapticAutocenter(SDL_Haptic * haptic, int autocenter)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetHapticAutocenter(SDL_Haptic * haptic, int autocenter)} */
+    @NativeType("bool")
     public static boolean SDL_SetHapticAutocenter(@NativeType("SDL_Haptic *") long haptic, int autocenter) {
         long __functionAddress = Functions.SetHapticAutocenter;
         if (CHECKS) {
@@ -8598,8 +8598,8 @@ public class SDL {
 
     // --- [ SDL_PauseHaptic ] ---
 
-    /** {@code _Bool SDL_PauseHaptic(SDL_Haptic * haptic)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_PauseHaptic(SDL_Haptic * haptic)} */
+    @NativeType("bool")
     public static boolean SDL_PauseHaptic(@NativeType("SDL_Haptic *") long haptic) {
         long __functionAddress = Functions.PauseHaptic;
         if (CHECKS) {
@@ -8610,8 +8610,8 @@ public class SDL {
 
     // --- [ SDL_ResumeHaptic ] ---
 
-    /** {@code _Bool SDL_ResumeHaptic(SDL_Haptic * haptic)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ResumeHaptic(SDL_Haptic * haptic)} */
+    @NativeType("bool")
     public static boolean SDL_ResumeHaptic(@NativeType("SDL_Haptic *") long haptic) {
         long __functionAddress = Functions.ResumeHaptic;
         if (CHECKS) {
@@ -8622,8 +8622,8 @@ public class SDL {
 
     // --- [ SDL_StopHapticEffects ] ---
 
-    /** {@code _Bool SDL_StopHapticEffects(SDL_Haptic * haptic)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_StopHapticEffects(SDL_Haptic * haptic)} */
+    @NativeType("bool")
     public static boolean SDL_StopHapticEffects(@NativeType("SDL_Haptic *") long haptic) {
         long __functionAddress = Functions.StopHapticEffects;
         if (CHECKS) {
@@ -8634,8 +8634,8 @@ public class SDL {
 
     // --- [ SDL_HapticRumbleSupported ] ---
 
-    /** {@code _Bool SDL_HapticRumbleSupported(SDL_Haptic * haptic)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HapticRumbleSupported(SDL_Haptic * haptic)} */
+    @NativeType("bool")
     public static boolean SDL_HapticRumbleSupported(@NativeType("SDL_Haptic *") long haptic) {
         long __functionAddress = Functions.HapticRumbleSupported;
         if (CHECKS) {
@@ -8646,8 +8646,8 @@ public class SDL {
 
     // --- [ SDL_InitHapticRumble ] ---
 
-    /** {@code _Bool SDL_InitHapticRumble(SDL_Haptic * haptic)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_InitHapticRumble(SDL_Haptic * haptic)} */
+    @NativeType("bool")
     public static boolean SDL_InitHapticRumble(@NativeType("SDL_Haptic *") long haptic) {
         long __functionAddress = Functions.InitHapticRumble;
         if (CHECKS) {
@@ -8658,8 +8658,8 @@ public class SDL {
 
     // --- [ SDL_PlayHapticRumble ] ---
 
-    /** {@code _Bool SDL_PlayHapticRumble(SDL_Haptic * haptic, float strength, Uint32 length)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_PlayHapticRumble(SDL_Haptic * haptic, float strength, Uint32 length)} */
+    @NativeType("bool")
     public static boolean SDL_PlayHapticRumble(@NativeType("SDL_Haptic *") long haptic, float strength, @NativeType("Uint32") int length) {
         long __functionAddress = Functions.PlayHapticRumble;
         if (CHECKS) {
@@ -8670,8 +8670,8 @@ public class SDL {
 
     // --- [ SDL_StopHapticRumble ] ---
 
-    /** {@code _Bool SDL_StopHapticRumble(SDL_Haptic * haptic)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_StopHapticRumble(SDL_Haptic * haptic)} */
+    @NativeType("bool")
     public static boolean SDL_StopHapticRumble(@NativeType("SDL_Haptic *") long haptic) {
         long __functionAddress = Functions.StopHapticRumble;
         if (CHECKS) {
@@ -9014,22 +9014,22 @@ public class SDL {
 
     // --- [ SDL_hid_ble_scan ] ---
 
-    /** {@code void SDL_hid_ble_scan(_Bool active)} */
-    public static void SDL_hid_ble_scan(@NativeType("_Bool") boolean active) {
+    /** {@code void SDL_hid_ble_scan(bool active)} */
+    public static void SDL_hid_ble_scan(@NativeType("bool") boolean active) {
         long __functionAddress = Functions.hid_ble_scan;
         invokeV(active, __functionAddress);
     }
 
     // --- [ SDL_SetHintWithPriority ] ---
 
-    /** {@code _Bool SDL_SetHintWithPriority(char const * name, char const * value, SDL_HintPriority priority)} */
+    /** {@code bool SDL_SetHintWithPriority(char const * name, char const * value, SDL_HintPriority priority)} */
     public static boolean nSDL_SetHintWithPriority(long name, long value, int priority) {
         long __functionAddress = Functions.SetHintWithPriority;
         return invokePPZ(name, value, priority, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetHintWithPriority(char const * name, char const * value, SDL_HintPriority priority)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetHintWithPriority(char const * name, char const * value, SDL_HintPriority priority)} */
+    @NativeType("bool")
     public static boolean SDL_SetHintWithPriority(@NativeType("char const *") ByteBuffer name, @NativeType("char const *") @Nullable ByteBuffer value, @NativeType("SDL_HintPriority") int priority) {
         if (CHECKS) {
             checkNT1(name);
@@ -9038,8 +9038,8 @@ public class SDL {
         return nSDL_SetHintWithPriority(memAddress(name), memAddressSafe(value), priority);
     }
 
-    /** {@code _Bool SDL_SetHintWithPriority(char const * name, char const * value, SDL_HintPriority priority)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetHintWithPriority(char const * name, char const * value, SDL_HintPriority priority)} */
+    @NativeType("bool")
     public static boolean SDL_SetHintWithPriority(@NativeType("char const *") CharSequence name, @NativeType("char const *") @Nullable CharSequence value, @NativeType("SDL_HintPriority") int priority) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -9055,14 +9055,14 @@ public class SDL {
 
     // --- [ SDL_SetHint ] ---
 
-    /** {@code _Bool SDL_SetHint(char const * name, char const * value)} */
+    /** {@code bool SDL_SetHint(char const * name, char const * value)} */
     public static boolean nSDL_SetHint(long name, long value) {
         long __functionAddress = Functions.SetHint;
         return invokePPZ(name, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetHint(char const * name, char const * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetHint(char const * name, char const * value)} */
+    @NativeType("bool")
     public static boolean SDL_SetHint(@NativeType("char const *") ByteBuffer name, @NativeType("char const *") @Nullable ByteBuffer value) {
         if (CHECKS) {
             checkNT1(name);
@@ -9071,8 +9071,8 @@ public class SDL {
         return nSDL_SetHint(memAddress(name), memAddressSafe(value));
     }
 
-    /** {@code _Bool SDL_SetHint(char const * name, char const * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetHint(char const * name, char const * value)} */
+    @NativeType("bool")
     public static boolean SDL_SetHint(@NativeType("char const *") CharSequence name, @NativeType("char const *") @Nullable CharSequence value) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -9088,14 +9088,14 @@ public class SDL {
 
     // --- [ SDL_ResetHint ] ---
 
-    /** {@code _Bool SDL_ResetHint(char const * name)} */
+    /** {@code bool SDL_ResetHint(char const * name)} */
     public static boolean nSDL_ResetHint(long name) {
         long __functionAddress = Functions.ResetHint;
         return invokePZ(name, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ResetHint(char const * name)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ResetHint(char const * name)} */
+    @NativeType("bool")
     public static boolean SDL_ResetHint(@NativeType("char const *") ByteBuffer name) {
         if (CHECKS) {
             checkNT1(name);
@@ -9103,8 +9103,8 @@ public class SDL {
         return nSDL_ResetHint(memAddress(name));
     }
 
-    /** {@code _Bool SDL_ResetHint(char const * name)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ResetHint(char const * name)} */
+    @NativeType("bool")
     public static boolean SDL_ResetHint(@NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -9158,24 +9158,24 @@ public class SDL {
 
     // --- [ SDL_GetHintBoolean ] ---
 
-    /** {@code _Bool SDL_GetHintBoolean(char const * name, _Bool default_value)} */
+    /** {@code bool SDL_GetHintBoolean(char const * name, bool default_value)} */
     public static boolean nSDL_GetHintBoolean(long name, boolean default_value) {
         long __functionAddress = Functions.GetHintBoolean;
         return invokePZ(name, default_value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetHintBoolean(char const * name, _Bool default_value)} */
-    @NativeType("_Bool")
-    public static boolean SDL_GetHintBoolean(@NativeType("char const *") ByteBuffer name, @NativeType("_Bool") boolean default_value) {
+    /** {@code bool SDL_GetHintBoolean(char const * name, bool default_value)} */
+    @NativeType("bool")
+    public static boolean SDL_GetHintBoolean(@NativeType("char const *") ByteBuffer name, @NativeType("bool") boolean default_value) {
         if (CHECKS) {
             checkNT1(name);
         }
         return nSDL_GetHintBoolean(memAddress(name), default_value);
     }
 
-    /** {@code _Bool SDL_GetHintBoolean(char const * name, _Bool default_value)} */
-    @NativeType("_Bool")
-    public static boolean SDL_GetHintBoolean(@NativeType("char const *") CharSequence name, @NativeType("_Bool") boolean default_value) {
+    /** {@code bool SDL_GetHintBoolean(char const * name, bool default_value)} */
+    @NativeType("bool")
+    public static boolean SDL_GetHintBoolean(@NativeType("char const *") CharSequence name, @NativeType("bool") boolean default_value) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(name, true);
@@ -9188,14 +9188,14 @@ public class SDL {
 
     // --- [ SDL_AddHintCallback ] ---
 
-    /** {@code _Bool SDL_AddHintCallback(char const * name, SDL_HintCallback callback, void * userdata)} */
+    /** {@code bool SDL_AddHintCallback(char const * name, SDL_HintCallback callback, void * userdata)} */
     public static boolean nSDL_AddHintCallback(long name, long callback, long userdata) {
         long __functionAddress = Functions.AddHintCallback;
         return invokePPPZ(name, callback, userdata, __functionAddress);
     }
 
-    /** {@code _Bool SDL_AddHintCallback(char const * name, SDL_HintCallback callback, void * userdata)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_AddHintCallback(char const * name, SDL_HintCallback callback, void * userdata)} */
+    @NativeType("bool")
     public static boolean SDL_AddHintCallback(@NativeType("char const *") ByteBuffer name, @NativeType("SDL_HintCallback") SDL_HintCallbackI callback, @NativeType("void *") long userdata) {
         if (CHECKS) {
             checkNT1(name);
@@ -9203,8 +9203,8 @@ public class SDL {
         return nSDL_AddHintCallback(memAddress(name), callback.address(), userdata);
     }
 
-    /** {@code _Bool SDL_AddHintCallback(char const * name, SDL_HintCallback callback, void * userdata)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_AddHintCallback(char const * name, SDL_HintCallback callback, void * userdata)} */
+    @NativeType("bool")
     public static boolean SDL_AddHintCallback(@NativeType("char const *") CharSequence name, @NativeType("SDL_HintCallback") SDL_HintCallbackI callback, @NativeType("void *") long userdata) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -9246,8 +9246,8 @@ public class SDL {
 
     // --- [ SDL_Init ] ---
 
-    /** {@code _Bool SDL_Init(SDL_InitFlags flags)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_Init(SDL_InitFlags flags)} */
+    @NativeType("bool")
     public static boolean SDL_Init(@NativeType("SDL_InitFlags") int flags) {
         long __functionAddress = Functions.Init;
         return invokeZ(flags, __functionAddress);
@@ -9255,8 +9255,8 @@ public class SDL {
 
     // --- [ SDL_InitSubSystem ] ---
 
-    /** {@code _Bool SDL_InitSubSystem(SDL_InitFlags flags)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_InitSubSystem(SDL_InitFlags flags)} */
+    @NativeType("bool")
     public static boolean SDL_InitSubSystem(@NativeType("SDL_InitFlags") int flags) {
         long __functionAddress = Functions.InitSubSystem;
         return invokeZ(flags, __functionAddress);
@@ -9289,8 +9289,8 @@ public class SDL {
 
     // --- [ SDL_IsMainThread ] ---
 
-    /** {@code _Bool SDL_IsMainThread(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_IsMainThread(void)} */
+    @NativeType("bool")
     public static boolean SDL_IsMainThread() {
         long __functionAddress = Functions.IsMainThread;
         return invokeZ(__functionAddress);
@@ -9298,28 +9298,28 @@ public class SDL {
 
     // --- [ SDL_RunOnMainThread ] ---
 
-    /** {@code _Bool SDL_RunOnMainThread(SDL_MainThreadCallback callback, void * userdata, _Bool wait_complete)} */
+    /** {@code bool SDL_RunOnMainThread(SDL_MainThreadCallback callback, void * userdata, bool wait_complete)} */
     public static boolean nSDL_RunOnMainThread(long callback, long userdata, boolean wait_complete) {
         long __functionAddress = Functions.RunOnMainThread;
         return invokePPZ(callback, userdata, wait_complete, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RunOnMainThread(SDL_MainThreadCallback callback, void * userdata, _Bool wait_complete)} */
-    @NativeType("_Bool")
-    public static boolean SDL_RunOnMainThread(@NativeType("SDL_MainThreadCallback") SDL_MainThreadCallbackI callback, @NativeType("void *") long userdata, @NativeType("_Bool") boolean wait_complete) {
+    /** {@code bool SDL_RunOnMainThread(SDL_MainThreadCallback callback, void * userdata, bool wait_complete)} */
+    @NativeType("bool")
+    public static boolean SDL_RunOnMainThread(@NativeType("SDL_MainThreadCallback") SDL_MainThreadCallbackI callback, @NativeType("void *") long userdata, @NativeType("bool") boolean wait_complete) {
         return nSDL_RunOnMainThread(callback.address(), userdata, wait_complete);
     }
 
     // --- [ SDL_SetAppMetadata ] ---
 
-    /** {@code _Bool SDL_SetAppMetadata(char const * appname, char const * appversion, char const * appidentifier)} */
+    /** {@code bool SDL_SetAppMetadata(char const * appname, char const * appversion, char const * appidentifier)} */
     public static boolean nSDL_SetAppMetadata(long appname, long appversion, long appidentifier) {
         long __functionAddress = Functions.SetAppMetadata;
         return invokePPPZ(appname, appversion, appidentifier, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetAppMetadata(char const * appname, char const * appversion, char const * appidentifier)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetAppMetadata(char const * appname, char const * appversion, char const * appidentifier)} */
+    @NativeType("bool")
     public static boolean SDL_SetAppMetadata(@NativeType("char const *") ByteBuffer appname, @NativeType("char const *") ByteBuffer appversion, @NativeType("char const *") ByteBuffer appidentifier) {
         if (CHECKS) {
             checkNT1(appname);
@@ -9329,8 +9329,8 @@ public class SDL {
         return nSDL_SetAppMetadata(memAddress(appname), memAddress(appversion), memAddress(appidentifier));
     }
 
-    /** {@code _Bool SDL_SetAppMetadata(char const * appname, char const * appversion, char const * appidentifier)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetAppMetadata(char const * appname, char const * appversion, char const * appidentifier)} */
+    @NativeType("bool")
     public static boolean SDL_SetAppMetadata(@NativeType("char const *") CharSequence appname, @NativeType("char const *") CharSequence appversion, @NativeType("char const *") CharSequence appidentifier) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -9348,14 +9348,14 @@ public class SDL {
 
     // --- [ SDL_SetAppMetadataProperty ] ---
 
-    /** {@code _Bool SDL_SetAppMetadataProperty(char const * name, char const * value)} */
+    /** {@code bool SDL_SetAppMetadataProperty(char const * name, char const * value)} */
     public static boolean nSDL_SetAppMetadataProperty(long name, long value) {
         long __functionAddress = Functions.SetAppMetadataProperty;
         return invokePPZ(name, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetAppMetadataProperty(char const * name, char const * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetAppMetadataProperty(char const * name, char const * value)} */
+    @NativeType("bool")
     public static boolean SDL_SetAppMetadataProperty(@NativeType("char const *") ByteBuffer name, @NativeType("char const *") ByteBuffer value) {
         if (CHECKS) {
             checkNT1(name);
@@ -9364,8 +9364,8 @@ public class SDL {
         return nSDL_SetAppMetadataProperty(memAddress(name), memAddress(value));
     }
 
-    /** {@code _Bool SDL_SetAppMetadataProperty(char const * name, char const * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetAppMetadataProperty(char const * name, char const * value)} */
+    @NativeType("bool")
     public static boolean SDL_SetAppMetadataProperty(@NativeType("char const *") CharSequence name, @NativeType("char const *") CharSequence value) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -9500,8 +9500,8 @@ public class SDL {
 
     // --- [ SDL_CloseIO ] ---
 
-    /** {@code _Bool SDL_CloseIO(SDL_IOStream * context)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_CloseIO(SDL_IOStream * context)} */
+    @NativeType("bool")
     public static boolean SDL_CloseIO(@NativeType("SDL_IOStream *") long context) {
         long __functionAddress = Functions.CloseIO;
         if (CHECKS) {
@@ -9673,8 +9673,8 @@ public class SDL {
 
     // --- [ SDL_FlushIO ] ---
 
-    /** {@code _Bool SDL_FlushIO(SDL_IOStream * context)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_FlushIO(SDL_IOStream * context)} */
+    @NativeType("bool")
     public static boolean SDL_FlushIO(@NativeType("SDL_IOStream *") long context) {
         long __functionAddress = Functions.FlushIO;
         if (CHECKS) {
@@ -9685,7 +9685,7 @@ public class SDL {
 
     // --- [ SDL_LoadFile_IO ] ---
 
-    /** {@code void * SDL_LoadFile_IO(SDL_IOStream * src, size_t * datasize, _Bool closeio)} */
+    /** {@code void * SDL_LoadFile_IO(SDL_IOStream * src, size_t * datasize, bool closeio)} */
     public static long nSDL_LoadFile_IO(long src, long datasize, boolean closeio) {
         long __functionAddress = Functions.LoadFile_IO;
         if (CHECKS) {
@@ -9694,9 +9694,9 @@ public class SDL {
         return invokePPP(src, datasize, closeio, __functionAddress);
     }
 
-    /** {@code void * SDL_LoadFile_IO(SDL_IOStream * src, size_t * datasize, _Bool closeio)} */
+    /** {@code void * SDL_LoadFile_IO(SDL_IOStream * src, size_t * datasize, bool closeio)} */
     @NativeType("void *")
-    public static @Nullable ByteBuffer SDL_LoadFile_IO(@NativeType("SDL_IOStream *") long src, @NativeType("_Bool") boolean closeio) {
+    public static @Nullable ByteBuffer SDL_LoadFile_IO(@NativeType("SDL_IOStream *") long src, @NativeType("bool") boolean closeio) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         PointerBuffer datasize = stack.callocPointer(1);
         try {
@@ -9748,7 +9748,7 @@ public class SDL {
 
     // --- [ SDL_SaveFile_IO ] ---
 
-    /** {@code _Bool SDL_SaveFile_IO(SDL_IOStream * src, void const * data, size_t datasize, _Bool closeio)} */
+    /** {@code bool SDL_SaveFile_IO(SDL_IOStream * src, void const * data, size_t datasize, bool closeio)} */
     public static boolean nSDL_SaveFile_IO(long src, long data, long datasize, boolean closeio) {
         long __functionAddress = Functions.SaveFile_IO;
         if (CHECKS) {
@@ -9757,22 +9757,22 @@ public class SDL {
         return invokePPPZ(src, data, datasize, closeio, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SaveFile_IO(SDL_IOStream * src, void const * data, size_t datasize, _Bool closeio)} */
-    @NativeType("_Bool")
-    public static boolean SDL_SaveFile_IO(@NativeType("SDL_IOStream *") long src, @NativeType("void const *") ByteBuffer data, @NativeType("_Bool") boolean closeio) {
+    /** {@code bool SDL_SaveFile_IO(SDL_IOStream * src, void const * data, size_t datasize, bool closeio)} */
+    @NativeType("bool")
+    public static boolean SDL_SaveFile_IO(@NativeType("SDL_IOStream *") long src, @NativeType("void const *") ByteBuffer data, @NativeType("bool") boolean closeio) {
         return nSDL_SaveFile_IO(src, memAddress(data), data.remaining(), closeio);
     }
 
     // --- [ SDL_SaveFile ] ---
 
-    /** {@code _Bool SDL_SaveFile(char const * file, void const * data, size_t datasize)} */
+    /** {@code bool SDL_SaveFile(char const * file, void const * data, size_t datasize)} */
     public static boolean nSDL_SaveFile(long file, long data, long datasize) {
         long __functionAddress = Functions.SaveFile;
         return invokePPPZ(file, data, datasize, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SaveFile(char const * file, void const * data, size_t datasize)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SaveFile(char const * file, void const * data, size_t datasize)} */
+    @NativeType("bool")
     public static boolean SDL_SaveFile(@NativeType("char const *") ByteBuffer file, @NativeType("void const *") ByteBuffer data) {
         if (CHECKS) {
             checkNT1(file);
@@ -9780,8 +9780,8 @@ public class SDL {
         return nSDL_SaveFile(memAddress(file), memAddress(data), data.remaining());
     }
 
-    /** {@code _Bool SDL_SaveFile(char const * file, void const * data, size_t datasize)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SaveFile(char const * file, void const * data, size_t datasize)} */
+    @NativeType("bool")
     public static boolean SDL_SaveFile(@NativeType("char const *") CharSequence file, @NativeType("void const *") ByteBuffer data) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -9795,7 +9795,7 @@ public class SDL {
 
     // --- [ SDL_ReadU8 ] ---
 
-    /** {@code _Bool SDL_ReadU8(SDL_IOStream * src, Uint8 * value)} */
+    /** {@code bool SDL_ReadU8(SDL_IOStream * src, Uint8 * value)} */
     public static boolean nSDL_ReadU8(long src, long value) {
         long __functionAddress = Functions.ReadU8;
         if (CHECKS) {
@@ -9804,8 +9804,8 @@ public class SDL {
         return invokePPZ(src, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ReadU8(SDL_IOStream * src, Uint8 * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ReadU8(SDL_IOStream * src, Uint8 * value)} */
+    @NativeType("bool")
     public static boolean SDL_ReadU8(@NativeType("SDL_IOStream *") long src, @NativeType("Uint8 *") ByteBuffer value) {
         if (CHECKS) {
             check(value, 1);
@@ -9815,7 +9815,7 @@ public class SDL {
 
     // --- [ SDL_ReadS8 ] ---
 
-    /** {@code _Bool SDL_ReadS8(SDL_IOStream * src, Sint8 * value)} */
+    /** {@code bool SDL_ReadS8(SDL_IOStream * src, Sint8 * value)} */
     public static boolean nSDL_ReadS8(long src, long value) {
         long __functionAddress = Functions.ReadS8;
         if (CHECKS) {
@@ -9824,8 +9824,8 @@ public class SDL {
         return invokePPZ(src, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ReadS8(SDL_IOStream * src, Sint8 * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ReadS8(SDL_IOStream * src, Sint8 * value)} */
+    @NativeType("bool")
     public static boolean SDL_ReadS8(@NativeType("SDL_IOStream *") long src, @NativeType("Sint8 *") ByteBuffer value) {
         if (CHECKS) {
             check(value, 1);
@@ -9835,7 +9835,7 @@ public class SDL {
 
     // --- [ SDL_ReadU16LE ] ---
 
-    /** {@code _Bool SDL_ReadU16LE(SDL_IOStream * src, Uint16 * value)} */
+    /** {@code bool SDL_ReadU16LE(SDL_IOStream * src, Uint16 * value)} */
     public static boolean nSDL_ReadU16LE(long src, long value) {
         long __functionAddress = Functions.ReadU16LE;
         if (CHECKS) {
@@ -9844,8 +9844,8 @@ public class SDL {
         return invokePPZ(src, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ReadU16LE(SDL_IOStream * src, Uint16 * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ReadU16LE(SDL_IOStream * src, Uint16 * value)} */
+    @NativeType("bool")
     public static boolean SDL_ReadU16LE(@NativeType("SDL_IOStream *") long src, @NativeType("Uint16 *") ShortBuffer value) {
         if (CHECKS) {
             check(value, 1);
@@ -9855,7 +9855,7 @@ public class SDL {
 
     // --- [ SDL_ReadS16LE ] ---
 
-    /** {@code _Bool SDL_ReadS16LE(SDL_IOStream * src, Sint16 * value)} */
+    /** {@code bool SDL_ReadS16LE(SDL_IOStream * src, Sint16 * value)} */
     public static boolean nSDL_ReadS16LE(long src, long value) {
         long __functionAddress = Functions.ReadS16LE;
         if (CHECKS) {
@@ -9864,8 +9864,8 @@ public class SDL {
         return invokePPZ(src, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ReadS16LE(SDL_IOStream * src, Sint16 * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ReadS16LE(SDL_IOStream * src, Sint16 * value)} */
+    @NativeType("bool")
     public static boolean SDL_ReadS16LE(@NativeType("SDL_IOStream *") long src, @NativeType("Sint16 *") ShortBuffer value) {
         if (CHECKS) {
             check(value, 1);
@@ -9875,7 +9875,7 @@ public class SDL {
 
     // --- [ SDL_ReadU16BE ] ---
 
-    /** {@code _Bool SDL_ReadU16BE(SDL_IOStream * src, Uint16 * value)} */
+    /** {@code bool SDL_ReadU16BE(SDL_IOStream * src, Uint16 * value)} */
     public static boolean nSDL_ReadU16BE(long src, long value) {
         long __functionAddress = Functions.ReadU16BE;
         if (CHECKS) {
@@ -9884,8 +9884,8 @@ public class SDL {
         return invokePPZ(src, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ReadU16BE(SDL_IOStream * src, Uint16 * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ReadU16BE(SDL_IOStream * src, Uint16 * value)} */
+    @NativeType("bool")
     public static boolean SDL_ReadU16BE(@NativeType("SDL_IOStream *") long src, @NativeType("Uint16 *") ShortBuffer value) {
         if (CHECKS) {
             check(value, 1);
@@ -9895,7 +9895,7 @@ public class SDL {
 
     // --- [ SDL_ReadS16BE ] ---
 
-    /** {@code _Bool SDL_ReadS16BE(SDL_IOStream * src, Sint16 * value)} */
+    /** {@code bool SDL_ReadS16BE(SDL_IOStream * src, Sint16 * value)} */
     public static boolean nSDL_ReadS16BE(long src, long value) {
         long __functionAddress = Functions.ReadS16BE;
         if (CHECKS) {
@@ -9904,8 +9904,8 @@ public class SDL {
         return invokePPZ(src, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ReadS16BE(SDL_IOStream * src, Sint16 * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ReadS16BE(SDL_IOStream * src, Sint16 * value)} */
+    @NativeType("bool")
     public static boolean SDL_ReadS16BE(@NativeType("SDL_IOStream *") long src, @NativeType("Sint16 *") ShortBuffer value) {
         if (CHECKS) {
             check(value, 1);
@@ -9915,7 +9915,7 @@ public class SDL {
 
     // --- [ SDL_ReadU32LE ] ---
 
-    /** {@code _Bool SDL_ReadU32LE(SDL_IOStream * src, Uint32 * value)} */
+    /** {@code bool SDL_ReadU32LE(SDL_IOStream * src, Uint32 * value)} */
     public static boolean nSDL_ReadU32LE(long src, long value) {
         long __functionAddress = Functions.ReadU32LE;
         if (CHECKS) {
@@ -9924,8 +9924,8 @@ public class SDL {
         return invokePPZ(src, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ReadU32LE(SDL_IOStream * src, Uint32 * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ReadU32LE(SDL_IOStream * src, Uint32 * value)} */
+    @NativeType("bool")
     public static boolean SDL_ReadU32LE(@NativeType("SDL_IOStream *") long src, @NativeType("Uint32 *") IntBuffer value) {
         if (CHECKS) {
             check(value, 1);
@@ -9935,7 +9935,7 @@ public class SDL {
 
     // --- [ SDL_ReadS32LE ] ---
 
-    /** {@code _Bool SDL_ReadS32LE(SDL_IOStream * src, Sint32 * value)} */
+    /** {@code bool SDL_ReadS32LE(SDL_IOStream * src, Sint32 * value)} */
     public static boolean nSDL_ReadS32LE(long src, long value) {
         long __functionAddress = Functions.ReadS32LE;
         if (CHECKS) {
@@ -9944,8 +9944,8 @@ public class SDL {
         return invokePPZ(src, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ReadS32LE(SDL_IOStream * src, Sint32 * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ReadS32LE(SDL_IOStream * src, Sint32 * value)} */
+    @NativeType("bool")
     public static boolean SDL_ReadS32LE(@NativeType("SDL_IOStream *") long src, @NativeType("Sint32 *") IntBuffer value) {
         if (CHECKS) {
             check(value, 1);
@@ -9955,7 +9955,7 @@ public class SDL {
 
     // --- [ SDL_ReadU32BE ] ---
 
-    /** {@code _Bool SDL_ReadU32BE(SDL_IOStream * src, Uint32 * value)} */
+    /** {@code bool SDL_ReadU32BE(SDL_IOStream * src, Uint32 * value)} */
     public static boolean nSDL_ReadU32BE(long src, long value) {
         long __functionAddress = Functions.ReadU32BE;
         if (CHECKS) {
@@ -9964,8 +9964,8 @@ public class SDL {
         return invokePPZ(src, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ReadU32BE(SDL_IOStream * src, Uint32 * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ReadU32BE(SDL_IOStream * src, Uint32 * value)} */
+    @NativeType("bool")
     public static boolean SDL_ReadU32BE(@NativeType("SDL_IOStream *") long src, @NativeType("Uint32 *") IntBuffer value) {
         if (CHECKS) {
             check(value, 1);
@@ -9975,7 +9975,7 @@ public class SDL {
 
     // --- [ SDL_ReadS32BE ] ---
 
-    /** {@code _Bool SDL_ReadS32BE(SDL_IOStream * src, Sint32 * value)} */
+    /** {@code bool SDL_ReadS32BE(SDL_IOStream * src, Sint32 * value)} */
     public static boolean nSDL_ReadS32BE(long src, long value) {
         long __functionAddress = Functions.ReadS32BE;
         if (CHECKS) {
@@ -9984,8 +9984,8 @@ public class SDL {
         return invokePPZ(src, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ReadS32BE(SDL_IOStream * src, Sint32 * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ReadS32BE(SDL_IOStream * src, Sint32 * value)} */
+    @NativeType("bool")
     public static boolean SDL_ReadS32BE(@NativeType("SDL_IOStream *") long src, @NativeType("Sint32 *") IntBuffer value) {
         if (CHECKS) {
             check(value, 1);
@@ -9995,7 +9995,7 @@ public class SDL {
 
     // --- [ SDL_ReadU64LE ] ---
 
-    /** {@code _Bool SDL_ReadU64LE(SDL_IOStream * src, Uint64 * value)} */
+    /** {@code bool SDL_ReadU64LE(SDL_IOStream * src, Uint64 * value)} */
     public static boolean nSDL_ReadU64LE(long src, long value) {
         long __functionAddress = Functions.ReadU64LE;
         if (CHECKS) {
@@ -10004,8 +10004,8 @@ public class SDL {
         return invokePPZ(src, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ReadU64LE(SDL_IOStream * src, Uint64 * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ReadU64LE(SDL_IOStream * src, Uint64 * value)} */
+    @NativeType("bool")
     public static boolean SDL_ReadU64LE(@NativeType("SDL_IOStream *") long src, @NativeType("Uint64 *") LongBuffer value) {
         if (CHECKS) {
             check(value, 1);
@@ -10015,7 +10015,7 @@ public class SDL {
 
     // --- [ SDL_ReadS64LE ] ---
 
-    /** {@code _Bool SDL_ReadS64LE(SDL_IOStream * src, Sint64 * value)} */
+    /** {@code bool SDL_ReadS64LE(SDL_IOStream * src, Sint64 * value)} */
     public static boolean nSDL_ReadS64LE(long src, long value) {
         long __functionAddress = Functions.ReadS64LE;
         if (CHECKS) {
@@ -10024,8 +10024,8 @@ public class SDL {
         return invokePPZ(src, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ReadS64LE(SDL_IOStream * src, Sint64 * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ReadS64LE(SDL_IOStream * src, Sint64 * value)} */
+    @NativeType("bool")
     public static boolean SDL_ReadS64LE(@NativeType("SDL_IOStream *") long src, @NativeType("Sint64 *") LongBuffer value) {
         if (CHECKS) {
             check(value, 1);
@@ -10035,7 +10035,7 @@ public class SDL {
 
     // --- [ SDL_ReadU64BE ] ---
 
-    /** {@code _Bool SDL_ReadU64BE(SDL_IOStream * src, Uint64 * value)} */
+    /** {@code bool SDL_ReadU64BE(SDL_IOStream * src, Uint64 * value)} */
     public static boolean nSDL_ReadU64BE(long src, long value) {
         long __functionAddress = Functions.ReadU64BE;
         if (CHECKS) {
@@ -10044,8 +10044,8 @@ public class SDL {
         return invokePPZ(src, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ReadU64BE(SDL_IOStream * src, Uint64 * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ReadU64BE(SDL_IOStream * src, Uint64 * value)} */
+    @NativeType("bool")
     public static boolean SDL_ReadU64BE(@NativeType("SDL_IOStream *") long src, @NativeType("Uint64 *") LongBuffer value) {
         if (CHECKS) {
             check(value, 1);
@@ -10055,7 +10055,7 @@ public class SDL {
 
     // --- [ SDL_ReadS64BE ] ---
 
-    /** {@code _Bool SDL_ReadS64BE(SDL_IOStream * src, Sint64 * value)} */
+    /** {@code bool SDL_ReadS64BE(SDL_IOStream * src, Sint64 * value)} */
     public static boolean nSDL_ReadS64BE(long src, long value) {
         long __functionAddress = Functions.ReadS64BE;
         if (CHECKS) {
@@ -10064,8 +10064,8 @@ public class SDL {
         return invokePPZ(src, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ReadS64BE(SDL_IOStream * src, Sint64 * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ReadS64BE(SDL_IOStream * src, Sint64 * value)} */
+    @NativeType("bool")
     public static boolean SDL_ReadS64BE(@NativeType("SDL_IOStream *") long src, @NativeType("Sint64 *") LongBuffer value) {
         if (CHECKS) {
             check(value, 1);
@@ -10075,8 +10075,8 @@ public class SDL {
 
     // --- [ SDL_WriteU8 ] ---
 
-    /** {@code _Bool SDL_WriteU8(SDL_IOStream * dst, Uint8 value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WriteU8(SDL_IOStream * dst, Uint8 value)} */
+    @NativeType("bool")
     public static boolean SDL_WriteU8(@NativeType("SDL_IOStream *") long dst, @NativeType("Uint8") byte value) {
         long __functionAddress = Functions.WriteU8;
         if (CHECKS) {
@@ -10087,8 +10087,8 @@ public class SDL {
 
     // --- [ SDL_WriteS8 ] ---
 
-    /** {@code _Bool SDL_WriteS8(SDL_IOStream * dst, Sint8 value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WriteS8(SDL_IOStream * dst, Sint8 value)} */
+    @NativeType("bool")
     public static boolean SDL_WriteS8(@NativeType("SDL_IOStream *") long dst, @NativeType("Sint8") byte value) {
         long __functionAddress = Functions.WriteS8;
         if (CHECKS) {
@@ -10099,8 +10099,8 @@ public class SDL {
 
     // --- [ SDL_WriteU16LE ] ---
 
-    /** {@code _Bool SDL_WriteU16LE(SDL_IOStream * dst, Uint16 value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WriteU16LE(SDL_IOStream * dst, Uint16 value)} */
+    @NativeType("bool")
     public static boolean SDL_WriteU16LE(@NativeType("SDL_IOStream *") long dst, @NativeType("Uint16") short value) {
         long __functionAddress = Functions.WriteU16LE;
         if (CHECKS) {
@@ -10111,8 +10111,8 @@ public class SDL {
 
     // --- [ SDL_WriteS16LE ] ---
 
-    /** {@code _Bool SDL_WriteS16LE(SDL_IOStream * dst, Sint16 value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WriteS16LE(SDL_IOStream * dst, Sint16 value)} */
+    @NativeType("bool")
     public static boolean SDL_WriteS16LE(@NativeType("SDL_IOStream *") long dst, @NativeType("Sint16") short value) {
         long __functionAddress = Functions.WriteS16LE;
         if (CHECKS) {
@@ -10123,8 +10123,8 @@ public class SDL {
 
     // --- [ SDL_WriteU16BE ] ---
 
-    /** {@code _Bool SDL_WriteU16BE(SDL_IOStream * dst, Uint16 value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WriteU16BE(SDL_IOStream * dst, Uint16 value)} */
+    @NativeType("bool")
     public static boolean SDL_WriteU16BE(@NativeType("SDL_IOStream *") long dst, @NativeType("Uint16") short value) {
         long __functionAddress = Functions.WriteU16BE;
         if (CHECKS) {
@@ -10135,8 +10135,8 @@ public class SDL {
 
     // --- [ SDL_WriteS16BE ] ---
 
-    /** {@code _Bool SDL_WriteS16BE(SDL_IOStream * dst, Sint16 value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WriteS16BE(SDL_IOStream * dst, Sint16 value)} */
+    @NativeType("bool")
     public static boolean SDL_WriteS16BE(@NativeType("SDL_IOStream *") long dst, @NativeType("Sint16") short value) {
         long __functionAddress = Functions.WriteS16BE;
         if (CHECKS) {
@@ -10147,8 +10147,8 @@ public class SDL {
 
     // --- [ SDL_WriteU32LE ] ---
 
-    /** {@code _Bool SDL_WriteU32LE(SDL_IOStream * dst, Uint32 value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WriteU32LE(SDL_IOStream * dst, Uint32 value)} */
+    @NativeType("bool")
     public static boolean SDL_WriteU32LE(@NativeType("SDL_IOStream *") long dst, @NativeType("Uint32") int value) {
         long __functionAddress = Functions.WriteU32LE;
         if (CHECKS) {
@@ -10159,8 +10159,8 @@ public class SDL {
 
     // --- [ SDL_WriteS32LE ] ---
 
-    /** {@code _Bool SDL_WriteS32LE(SDL_IOStream * dst, Sint32 value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WriteS32LE(SDL_IOStream * dst, Sint32 value)} */
+    @NativeType("bool")
     public static boolean SDL_WriteS32LE(@NativeType("SDL_IOStream *") long dst, @NativeType("Sint32") int value) {
         long __functionAddress = Functions.WriteS32LE;
         if (CHECKS) {
@@ -10171,8 +10171,8 @@ public class SDL {
 
     // --- [ SDL_WriteU32BE ] ---
 
-    /** {@code _Bool SDL_WriteU32BE(SDL_IOStream * dst, Uint32 value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WriteU32BE(SDL_IOStream * dst, Uint32 value)} */
+    @NativeType("bool")
     public static boolean SDL_WriteU32BE(@NativeType("SDL_IOStream *") long dst, @NativeType("Uint32") int value) {
         long __functionAddress = Functions.WriteU32BE;
         if (CHECKS) {
@@ -10183,8 +10183,8 @@ public class SDL {
 
     // --- [ SDL_WriteS32BE ] ---
 
-    /** {@code _Bool SDL_WriteS32BE(SDL_IOStream * dst, Sint32 value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WriteS32BE(SDL_IOStream * dst, Sint32 value)} */
+    @NativeType("bool")
     public static boolean SDL_WriteS32BE(@NativeType("SDL_IOStream *") long dst, @NativeType("Sint32") int value) {
         long __functionAddress = Functions.WriteS32BE;
         if (CHECKS) {
@@ -10195,8 +10195,8 @@ public class SDL {
 
     // --- [ SDL_WriteU64LE ] ---
 
-    /** {@code _Bool SDL_WriteU64LE(SDL_IOStream * dst, Uint64 value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WriteU64LE(SDL_IOStream * dst, Uint64 value)} */
+    @NativeType("bool")
     public static boolean SDL_WriteU64LE(@NativeType("SDL_IOStream *") long dst, @NativeType("Uint64") long value) {
         long __functionAddress = Functions.WriteU64LE;
         if (CHECKS) {
@@ -10207,8 +10207,8 @@ public class SDL {
 
     // --- [ SDL_WriteS64LE ] ---
 
-    /** {@code _Bool SDL_WriteS64LE(SDL_IOStream * dst, Sint64 value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WriteS64LE(SDL_IOStream * dst, Sint64 value)} */
+    @NativeType("bool")
     public static boolean SDL_WriteS64LE(@NativeType("SDL_IOStream *") long dst, @NativeType("Sint64") long value) {
         long __functionAddress = Functions.WriteS64LE;
         if (CHECKS) {
@@ -10219,8 +10219,8 @@ public class SDL {
 
     // --- [ SDL_WriteU64BE ] ---
 
-    /** {@code _Bool SDL_WriteU64BE(SDL_IOStream * dst, Uint64 value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WriteU64BE(SDL_IOStream * dst, Uint64 value)} */
+    @NativeType("bool")
     public static boolean SDL_WriteU64BE(@NativeType("SDL_IOStream *") long dst, @NativeType("Uint64") long value) {
         long __functionAddress = Functions.WriteU64BE;
         if (CHECKS) {
@@ -10231,8 +10231,8 @@ public class SDL {
 
     // --- [ SDL_WriteS64BE ] ---
 
-    /** {@code _Bool SDL_WriteS64BE(SDL_IOStream * dst, Sint64 value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WriteS64BE(SDL_IOStream * dst, Sint64 value)} */
+    @NativeType("bool")
     public static boolean SDL_WriteS64BE(@NativeType("SDL_IOStream *") long dst, @NativeType("Sint64") long value) {
         long __functionAddress = Functions.WriteS64BE;
         if (CHECKS) {
@@ -10259,8 +10259,8 @@ public class SDL {
 
     // --- [ SDL_HasJoystick ] ---
 
-    /** {@code _Bool SDL_HasJoystick(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasJoystick(void)} */
+    @NativeType("bool")
     public static boolean SDL_HasJoystick() {
         long __functionAddress = Functions.HasJoystick;
         return invokeZ(__functionAddress);
@@ -10437,8 +10437,8 @@ public class SDL {
 
     // --- [ SDL_DetachVirtualJoystick ] ---
 
-    /** {@code _Bool SDL_DetachVirtualJoystick(SDL_JoystickID instance_id)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_DetachVirtualJoystick(SDL_JoystickID instance_id)} */
+    @NativeType("bool")
     public static boolean SDL_DetachVirtualJoystick(@NativeType("SDL_JoystickID") int instance_id) {
         long __functionAddress = Functions.DetachVirtualJoystick;
         return invokeZ(instance_id, __functionAddress);
@@ -10446,8 +10446,8 @@ public class SDL {
 
     // --- [ SDL_IsJoystickVirtual ] ---
 
-    /** {@code _Bool SDL_IsJoystickVirtual(SDL_JoystickID instance_id)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_IsJoystickVirtual(SDL_JoystickID instance_id)} */
+    @NativeType("bool")
     public static boolean SDL_IsJoystickVirtual(@NativeType("SDL_JoystickID") int instance_id) {
         long __functionAddress = Functions.IsJoystickVirtual;
         return invokeZ(instance_id, __functionAddress);
@@ -10455,8 +10455,8 @@ public class SDL {
 
     // --- [ SDL_SetJoystickVirtualAxis ] ---
 
-    /** {@code _Bool SDL_SetJoystickVirtualAxis(SDL_Joystick * joystick, int axis, Sint16 value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetJoystickVirtualAxis(SDL_Joystick * joystick, int axis, Sint16 value)} */
+    @NativeType("bool")
     public static boolean SDL_SetJoystickVirtualAxis(@NativeType("SDL_Joystick *") long joystick, int axis, @NativeType("Sint16") short value) {
         long __functionAddress = Functions.SetJoystickVirtualAxis;
         if (CHECKS) {
@@ -10467,8 +10467,8 @@ public class SDL {
 
     // --- [ SDL_SetJoystickVirtualBall ] ---
 
-    /** {@code _Bool SDL_SetJoystickVirtualBall(SDL_Joystick * joystick, int ball, Sint16 xrel, Sint16 yrel)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetJoystickVirtualBall(SDL_Joystick * joystick, int ball, Sint16 xrel, Sint16 yrel)} */
+    @NativeType("bool")
     public static boolean SDL_SetJoystickVirtualBall(@NativeType("SDL_Joystick *") long joystick, int ball, @NativeType("Sint16") short xrel, @NativeType("Sint16") short yrel) {
         long __functionAddress = Functions.SetJoystickVirtualBall;
         if (CHECKS) {
@@ -10479,9 +10479,9 @@ public class SDL {
 
     // --- [ SDL_SetJoystickVirtualButton ] ---
 
-    /** {@code _Bool SDL_SetJoystickVirtualButton(SDL_Joystick * joystick, int button, _Bool down)} */
-    @NativeType("_Bool")
-    public static boolean SDL_SetJoystickVirtualButton(@NativeType("SDL_Joystick *") long joystick, int button, @NativeType("_Bool") boolean down) {
+    /** {@code bool SDL_SetJoystickVirtualButton(SDL_Joystick * joystick, int button, bool down)} */
+    @NativeType("bool")
+    public static boolean SDL_SetJoystickVirtualButton(@NativeType("SDL_Joystick *") long joystick, int button, @NativeType("bool") boolean down) {
         long __functionAddress = Functions.SetJoystickVirtualButton;
         if (CHECKS) {
             check(joystick);
@@ -10491,8 +10491,8 @@ public class SDL {
 
     // --- [ SDL_SetJoystickVirtualHat ] ---
 
-    /** {@code _Bool SDL_SetJoystickVirtualHat(SDL_Joystick * joystick, int hat, Uint8 value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetJoystickVirtualHat(SDL_Joystick * joystick, int hat, Uint8 value)} */
+    @NativeType("bool")
     public static boolean SDL_SetJoystickVirtualHat(@NativeType("SDL_Joystick *") long joystick, int hat, @NativeType("Uint8") byte value) {
         long __functionAddress = Functions.SetJoystickVirtualHat;
         if (CHECKS) {
@@ -10503,9 +10503,9 @@ public class SDL {
 
     // --- [ SDL_SetJoystickVirtualTouchpad ] ---
 
-    /** {@code _Bool SDL_SetJoystickVirtualTouchpad(SDL_Joystick * joystick, int touchpad, int finger, _Bool down, float x, float y, float pressure)} */
-    @NativeType("_Bool")
-    public static boolean SDL_SetJoystickVirtualTouchpad(@NativeType("SDL_Joystick *") long joystick, int touchpad, int finger, @NativeType("_Bool") boolean down, float x, float y, float pressure) {
+    /** {@code bool SDL_SetJoystickVirtualTouchpad(SDL_Joystick * joystick, int touchpad, int finger, bool down, float x, float y, float pressure)} */
+    @NativeType("bool")
+    public static boolean SDL_SetJoystickVirtualTouchpad(@NativeType("SDL_Joystick *") long joystick, int touchpad, int finger, @NativeType("bool") boolean down, float x, float y, float pressure) {
         long __functionAddress = Functions.SetJoystickVirtualTouchpad;
         if (CHECKS) {
             check(joystick);
@@ -10515,7 +10515,7 @@ public class SDL {
 
     // --- [ SDL_SendJoystickVirtualSensorData ] ---
 
-    /** {@code _Bool SDL_SendJoystickVirtualSensorData(SDL_Joystick * joystick, SDL_SensorType type, Uint64 sensor_timestamp, float const * data, int num_values)} */
+    /** {@code bool SDL_SendJoystickVirtualSensorData(SDL_Joystick * joystick, SDL_SensorType type, Uint64 sensor_timestamp, float const * data, int num_values)} */
     public static boolean nSDL_SendJoystickVirtualSensorData(long joystick, int type, long sensor_timestamp, long data, int num_values) {
         long __functionAddress = Functions.SendJoystickVirtualSensorData;
         if (CHECKS) {
@@ -10524,8 +10524,8 @@ public class SDL {
         return invokePJPZ(joystick, type, sensor_timestamp, data, num_values, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SendJoystickVirtualSensorData(SDL_Joystick * joystick, SDL_SensorType type, Uint64 sensor_timestamp, float const * data, int num_values)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SendJoystickVirtualSensorData(SDL_Joystick * joystick, SDL_SensorType type, Uint64 sensor_timestamp, float const * data, int num_values)} */
+    @NativeType("bool")
     public static boolean SDL_SendJoystickVirtualSensorData(@NativeType("SDL_Joystick *") long joystick, @NativeType("SDL_SensorType") int type, @NativeType("Uint64") long sensor_timestamp, @NativeType("float const *") FloatBuffer data) {
         return nSDL_SendJoystickVirtualSensorData(joystick, type, sensor_timestamp, memAddress(data), data.remaining());
     }
@@ -10591,8 +10591,8 @@ public class SDL {
 
     // --- [ SDL_SetJoystickPlayerIndex ] ---
 
-    /** {@code _Bool SDL_SetJoystickPlayerIndex(SDL_Joystick * joystick, int player_index)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetJoystickPlayerIndex(SDL_Joystick * joystick, int player_index)} */
+    @NativeType("bool")
     public static boolean SDL_SetJoystickPlayerIndex(@NativeType("SDL_Joystick *") long joystick, int player_index) {
         long __functionAddress = Functions.SetJoystickPlayerIndex;
         if (CHECKS) {
@@ -10747,8 +10747,8 @@ public class SDL {
 
     // --- [ SDL_JoystickConnected ] ---
 
-    /** {@code _Bool SDL_JoystickConnected(SDL_Joystick * joystick)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_JoystickConnected(SDL_Joystick * joystick)} */
+    @NativeType("bool")
     public static boolean SDL_JoystickConnected(@NativeType("SDL_Joystick *") long joystick) {
         long __functionAddress = Functions.JoystickConnected;
         if (CHECKS) {
@@ -10815,16 +10815,16 @@ public class SDL {
 
     // --- [ SDL_SetJoystickEventsEnabled ] ---
 
-    /** {@code void SDL_SetJoystickEventsEnabled(_Bool enabled)} */
-    public static void SDL_SetJoystickEventsEnabled(@NativeType("_Bool") boolean enabled) {
+    /** {@code void SDL_SetJoystickEventsEnabled(bool enabled)} */
+    public static void SDL_SetJoystickEventsEnabled(@NativeType("bool") boolean enabled) {
         long __functionAddress = Functions.SetJoystickEventsEnabled;
         invokeV(enabled, __functionAddress);
     }
 
     // --- [ SDL_JoystickEventsEnabled ] ---
 
-    /** {@code _Bool SDL_JoystickEventsEnabled(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_JoystickEventsEnabled(void)} */
+    @NativeType("bool")
     public static boolean SDL_JoystickEventsEnabled() {
         long __functionAddress = Functions.JoystickEventsEnabled;
         return invokeZ(__functionAddress);
@@ -10852,7 +10852,7 @@ public class SDL {
 
     // --- [ SDL_GetJoystickAxisInitialState ] ---
 
-    /** {@code _Bool SDL_GetJoystickAxisInitialState(SDL_Joystick * joystick, int axis, Sint16 * state)} */
+    /** {@code bool SDL_GetJoystickAxisInitialState(SDL_Joystick * joystick, int axis, Sint16 * state)} */
     public static boolean nSDL_GetJoystickAxisInitialState(long joystick, int axis, long state) {
         long __functionAddress = Functions.GetJoystickAxisInitialState;
         if (CHECKS) {
@@ -10861,8 +10861,8 @@ public class SDL {
         return invokePPZ(joystick, axis, state, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetJoystickAxisInitialState(SDL_Joystick * joystick, int axis, Sint16 * state)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetJoystickAxisInitialState(SDL_Joystick * joystick, int axis, Sint16 * state)} */
+    @NativeType("bool")
     public static boolean SDL_GetJoystickAxisInitialState(@NativeType("SDL_Joystick *") long joystick, int axis, @NativeType("Sint16 *") ShortBuffer state) {
         if (CHECKS) {
             check(state, 1);
@@ -10872,7 +10872,7 @@ public class SDL {
 
     // --- [ SDL_GetJoystickBall ] ---
 
-    /** {@code _Bool SDL_GetJoystickBall(SDL_Joystick * joystick, int ball, int * dx, int * dy)} */
+    /** {@code bool SDL_GetJoystickBall(SDL_Joystick * joystick, int ball, int * dx, int * dy)} */
     public static boolean nSDL_GetJoystickBall(long joystick, int ball, long dx, long dy) {
         long __functionAddress = Functions.GetJoystickBall;
         if (CHECKS) {
@@ -10881,8 +10881,8 @@ public class SDL {
         return invokePPPZ(joystick, ball, dx, dy, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetJoystickBall(SDL_Joystick * joystick, int ball, int * dx, int * dy)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetJoystickBall(SDL_Joystick * joystick, int ball, int * dx, int * dy)} */
+    @NativeType("bool")
     public static boolean SDL_GetJoystickBall(@NativeType("SDL_Joystick *") long joystick, int ball, @NativeType("int *") IntBuffer dx, @NativeType("int *") IntBuffer dy) {
         if (CHECKS) {
             check(dx, 1);
@@ -10905,8 +10905,8 @@ public class SDL {
 
     // --- [ SDL_GetJoystickButton ] ---
 
-    /** {@code _Bool SDL_GetJoystickButton(SDL_Joystick * joystick, int button)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetJoystickButton(SDL_Joystick * joystick, int button)} */
+    @NativeType("bool")
     public static boolean SDL_GetJoystickButton(@NativeType("SDL_Joystick *") long joystick, int button) {
         long __functionAddress = Functions.GetJoystickButton;
         if (CHECKS) {
@@ -10917,8 +10917,8 @@ public class SDL {
 
     // --- [ SDL_RumbleJoystick ] ---
 
-    /** {@code _Bool SDL_RumbleJoystick(SDL_Joystick * joystick, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RumbleJoystick(SDL_Joystick * joystick, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms)} */
+    @NativeType("bool")
     public static boolean SDL_RumbleJoystick(@NativeType("SDL_Joystick *") long joystick, @NativeType("Uint16") short low_frequency_rumble, @NativeType("Uint16") short high_frequency_rumble, @NativeType("Uint32") int duration_ms) {
         long __functionAddress = Functions.RumbleJoystick;
         if (CHECKS) {
@@ -10929,8 +10929,8 @@ public class SDL {
 
     // --- [ SDL_RumbleJoystickTriggers ] ---
 
-    /** {@code _Bool SDL_RumbleJoystickTriggers(SDL_Joystick * joystick, Uint16 left_rumble, Uint16 right_rumble, Uint32 duration_ms)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RumbleJoystickTriggers(SDL_Joystick * joystick, Uint16 left_rumble, Uint16 right_rumble, Uint32 duration_ms)} */
+    @NativeType("bool")
     public static boolean SDL_RumbleJoystickTriggers(@NativeType("SDL_Joystick *") long joystick, @NativeType("Uint16") short left_rumble, @NativeType("Uint16") short right_rumble, @NativeType("Uint32") int duration_ms) {
         long __functionAddress = Functions.RumbleJoystickTriggers;
         if (CHECKS) {
@@ -10941,8 +10941,8 @@ public class SDL {
 
     // --- [ SDL_SetJoystickLED ] ---
 
-    /** {@code _Bool SDL_SetJoystickLED(SDL_Joystick * joystick, Uint8 red, Uint8 green, Uint8 blue)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetJoystickLED(SDL_Joystick * joystick, Uint8 red, Uint8 green, Uint8 blue)} */
+    @NativeType("bool")
     public static boolean SDL_SetJoystickLED(@NativeType("SDL_Joystick *") long joystick, @NativeType("Uint8") byte red, @NativeType("Uint8") byte green, @NativeType("Uint8") byte blue) {
         long __functionAddress = Functions.SetJoystickLED;
         if (CHECKS) {
@@ -10953,7 +10953,7 @@ public class SDL {
 
     // --- [ SDL_SendJoystickEffect ] ---
 
-    /** {@code _Bool SDL_SendJoystickEffect(SDL_Joystick * joystick, void const * data, int size)} */
+    /** {@code bool SDL_SendJoystickEffect(SDL_Joystick * joystick, void const * data, int size)} */
     public static boolean nSDL_SendJoystickEffect(long joystick, long data, int size) {
         long __functionAddress = Functions.SendJoystickEffect;
         if (CHECKS) {
@@ -10962,8 +10962,8 @@ public class SDL {
         return invokePPZ(joystick, data, size, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SendJoystickEffect(SDL_Joystick * joystick, void const * data, int size)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SendJoystickEffect(SDL_Joystick * joystick, void const * data, int size)} */
+    @NativeType("bool")
     public static boolean SDL_SendJoystickEffect(@NativeType("SDL_Joystick *") long joystick, @NativeType("void const *") ByteBuffer data) {
         return nSDL_SendJoystickEffect(joystick, memAddress(data), data.remaining());
     }
@@ -11041,8 +11041,8 @@ public class SDL {
 
     // --- [ SDL_AddGamepadMappingsFromIO ] ---
 
-    /** {@code int SDL_AddGamepadMappingsFromIO(SDL_IOStream * src, _Bool closeio)} */
-    public static int SDL_AddGamepadMappingsFromIO(@NativeType("SDL_IOStream *") long src, @NativeType("_Bool") boolean closeio) {
+    /** {@code int SDL_AddGamepadMappingsFromIO(SDL_IOStream * src, bool closeio)} */
+    public static int SDL_AddGamepadMappingsFromIO(@NativeType("SDL_IOStream *") long src, @NativeType("bool") boolean closeio) {
         long __functionAddress = Functions.AddGamepadMappingsFromIO;
         if (CHECKS) {
             check(src);
@@ -11080,8 +11080,8 @@ public class SDL {
 
     // --- [ SDL_ReloadGamepadMappings ] ---
 
-    /** {@code _Bool SDL_ReloadGamepadMappings(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ReloadGamepadMappings(void)} */
+    @NativeType("bool")
     public static boolean SDL_ReloadGamepadMappings() {
         long __functionAddress = Functions.ReloadGamepadMappings;
         return invokeZ(__functionAddress);
@@ -11169,14 +11169,14 @@ public class SDL {
 
     // --- [ SDL_SetGamepadMapping ] ---
 
-    /** {@code _Bool SDL_SetGamepadMapping(SDL_JoystickID instance_id, char const * mapping)} */
+    /** {@code bool SDL_SetGamepadMapping(SDL_JoystickID instance_id, char const * mapping)} */
     public static boolean nSDL_SetGamepadMapping(int instance_id, long mapping) {
         long __functionAddress = Functions.SetGamepadMapping;
         return invokePZ(instance_id, mapping, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetGamepadMapping(SDL_JoystickID instance_id, char const * mapping)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetGamepadMapping(SDL_JoystickID instance_id, char const * mapping)} */
+    @NativeType("bool")
     public static boolean SDL_SetGamepadMapping(@NativeType("SDL_JoystickID") int instance_id, @NativeType("char const *") ByteBuffer mapping) {
         if (CHECKS) {
             checkNT1(mapping);
@@ -11184,8 +11184,8 @@ public class SDL {
         return nSDL_SetGamepadMapping(instance_id, memAddress(mapping));
     }
 
-    /** {@code _Bool SDL_SetGamepadMapping(SDL_JoystickID instance_id, char const * mapping)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetGamepadMapping(SDL_JoystickID instance_id, char const * mapping)} */
+    @NativeType("bool")
     public static boolean SDL_SetGamepadMapping(@NativeType("SDL_JoystickID") int instance_id, @NativeType("char const *") CharSequence mapping) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -11199,8 +11199,8 @@ public class SDL {
 
     // --- [ SDL_HasGamepad ] ---
 
-    /** {@code _Bool SDL_HasGamepad(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasGamepad(void)} */
+    @NativeType("bool")
     public static boolean SDL_HasGamepad() {
         long __functionAddress = Functions.HasGamepad;
         return invokeZ(__functionAddress);
@@ -11229,8 +11229,8 @@ public class SDL {
 
     // --- [ SDL_IsGamepad ] ---
 
-    /** {@code _Bool SDL_IsGamepad(SDL_JoystickID instance_id)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_IsGamepad(SDL_JoystickID instance_id)} */
+    @NativeType("bool")
     public static boolean SDL_IsGamepad(@NativeType("SDL_JoystickID") int instance_id) {
         long __functionAddress = Functions.IsGamepad;
         return invokeZ(instance_id, __functionAddress);
@@ -11490,8 +11490,8 @@ public class SDL {
 
     // --- [ SDL_SetGamepadPlayerIndex ] ---
 
-    /** {@code _Bool SDL_SetGamepadPlayerIndex(SDL_Gamepad * gamepad, int player_index)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetGamepadPlayerIndex(SDL_Gamepad * gamepad, int player_index)} */
+    @NativeType("bool")
     public static boolean SDL_SetGamepadPlayerIndex(@NativeType("SDL_Gamepad *") long gamepad, int player_index) {
         long __functionAddress = Functions.SetGamepadPlayerIndex;
         if (CHECKS) {
@@ -11612,8 +11612,8 @@ public class SDL {
 
     // --- [ SDL_GamepadConnected ] ---
 
-    /** {@code _Bool SDL_GamepadConnected(SDL_Gamepad * gamepad)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GamepadConnected(SDL_Gamepad * gamepad)} */
+    @NativeType("bool")
     public static boolean SDL_GamepadConnected(@NativeType("SDL_Gamepad *") long gamepad) {
         long __functionAddress = Functions.GamepadConnected;
         if (CHECKS) {
@@ -11636,16 +11636,16 @@ public class SDL {
 
     // --- [ SDL_SetGamepadEventsEnabled ] ---
 
-    /** {@code void SDL_SetGamepadEventsEnabled(_Bool enabled)} */
-    public static void SDL_SetGamepadEventsEnabled(@NativeType("_Bool") boolean enabled) {
+    /** {@code void SDL_SetGamepadEventsEnabled(bool enabled)} */
+    public static void SDL_SetGamepadEventsEnabled(@NativeType("bool") boolean enabled) {
         long __functionAddress = Functions.SetGamepadEventsEnabled;
         invokeV(enabled, __functionAddress);
     }
 
     // --- [ SDL_GamepadEventsEnabled ] ---
 
-    /** {@code _Bool SDL_GamepadEventsEnabled(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GamepadEventsEnabled(void)} */
+    @NativeType("bool")
     public static boolean SDL_GamepadEventsEnabled() {
         long __functionAddress = Functions.GamepadEventsEnabled;
         return invokeZ(__functionAddress);
@@ -11775,8 +11775,8 @@ public class SDL {
 
     // --- [ SDL_GamepadHasAxis ] ---
 
-    /** {@code _Bool SDL_GamepadHasAxis(SDL_Gamepad * gamepad, SDL_GamepadAxis axis)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GamepadHasAxis(SDL_Gamepad * gamepad, SDL_GamepadAxis axis)} */
+    @NativeType("bool")
     public static boolean SDL_GamepadHasAxis(@NativeType("SDL_Gamepad *") long gamepad, @NativeType("SDL_GamepadAxis") int axis) {
         long __functionAddress = Functions.GamepadHasAxis;
         if (CHECKS) {
@@ -11844,8 +11844,8 @@ public class SDL {
 
     // --- [ SDL_GamepadHasButton ] ---
 
-    /** {@code _Bool SDL_GamepadHasButton(SDL_Gamepad * gamepad, SDL_GamepadButton button)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GamepadHasButton(SDL_Gamepad * gamepad, SDL_GamepadButton button)} */
+    @NativeType("bool")
     public static boolean SDL_GamepadHasButton(@NativeType("SDL_Gamepad *") long gamepad, @NativeType("SDL_GamepadButton") int button) {
         long __functionAddress = Functions.GamepadHasButton;
         if (CHECKS) {
@@ -11856,8 +11856,8 @@ public class SDL {
 
     // --- [ SDL_GetGamepadButton ] ---
 
-    /** {@code _Bool SDL_GetGamepadButton(SDL_Gamepad * gamepad, SDL_GamepadButton button)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetGamepadButton(SDL_Gamepad * gamepad, SDL_GamepadButton button)} */
+    @NativeType("bool")
     public static boolean SDL_GetGamepadButton(@NativeType("SDL_Gamepad *") long gamepad, @NativeType("SDL_GamepadButton") int button) {
         long __functionAddress = Functions.GetGamepadButton;
         if (CHECKS) {
@@ -11911,7 +11911,7 @@ public class SDL {
 
     // --- [ SDL_GetGamepadTouchpadFinger ] ---
 
-    /** {@code _Bool SDL_GetGamepadTouchpadFinger(SDL_Gamepad * gamepad, int touchpad, int finger, _Bool * down, float * x, float * y, float * pressure)} */
+    /** {@code bool SDL_GetGamepadTouchpadFinger(SDL_Gamepad * gamepad, int touchpad, int finger, bool * down, float * x, float * y, float * pressure)} */
     public static boolean nSDL_GetGamepadTouchpadFinger(long gamepad, int touchpad, int finger, long down, long x, long y, long pressure) {
         long __functionAddress = Functions.GetGamepadTouchpadFinger;
         if (CHECKS) {
@@ -11920,9 +11920,9 @@ public class SDL {
         return invokePPPPPZ(gamepad, touchpad, finger, down, x, y, pressure, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetGamepadTouchpadFinger(SDL_Gamepad * gamepad, int touchpad, int finger, _Bool * down, float * x, float * y, float * pressure)} */
-    @NativeType("_Bool")
-    public static boolean SDL_GetGamepadTouchpadFinger(@NativeType("SDL_Gamepad *") long gamepad, int touchpad, int finger, @NativeType("_Bool *") @Nullable ByteBuffer down, @NativeType("float *") @Nullable FloatBuffer x, @NativeType("float *") @Nullable FloatBuffer y, @NativeType("float *") @Nullable FloatBuffer pressure) {
+    /** {@code bool SDL_GetGamepadTouchpadFinger(SDL_Gamepad * gamepad, int touchpad, int finger, bool * down, float * x, float * y, float * pressure)} */
+    @NativeType("bool")
+    public static boolean SDL_GetGamepadTouchpadFinger(@NativeType("SDL_Gamepad *") long gamepad, int touchpad, int finger, @NativeType("bool *") @Nullable ByteBuffer down, @NativeType("float *") @Nullable FloatBuffer x, @NativeType("float *") @Nullable FloatBuffer y, @NativeType("float *") @Nullable FloatBuffer pressure) {
         if (CHECKS) {
             checkSafe(down, 1);
             checkSafe(x, 1);
@@ -11934,8 +11934,8 @@ public class SDL {
 
     // --- [ SDL_GamepadHasSensor ] ---
 
-    /** {@code _Bool SDL_GamepadHasSensor(SDL_Gamepad * gamepad, SDL_SensorType type)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GamepadHasSensor(SDL_Gamepad * gamepad, SDL_SensorType type)} */
+    @NativeType("bool")
     public static boolean SDL_GamepadHasSensor(@NativeType("SDL_Gamepad *") long gamepad, @NativeType("SDL_SensorType") int type) {
         long __functionAddress = Functions.GamepadHasSensor;
         if (CHECKS) {
@@ -11946,9 +11946,9 @@ public class SDL {
 
     // --- [ SDL_SetGamepadSensorEnabled ] ---
 
-    /** {@code _Bool SDL_SetGamepadSensorEnabled(SDL_Gamepad * gamepad, SDL_SensorType type, _Bool enabled)} */
-    @NativeType("_Bool")
-    public static boolean SDL_SetGamepadSensorEnabled(@NativeType("SDL_Gamepad *") long gamepad, @NativeType("SDL_SensorType") int type, @NativeType("_Bool") boolean enabled) {
+    /** {@code bool SDL_SetGamepadSensorEnabled(SDL_Gamepad * gamepad, SDL_SensorType type, bool enabled)} */
+    @NativeType("bool")
+    public static boolean SDL_SetGamepadSensorEnabled(@NativeType("SDL_Gamepad *") long gamepad, @NativeType("SDL_SensorType") int type, @NativeType("bool") boolean enabled) {
         long __functionAddress = Functions.SetGamepadSensorEnabled;
         if (CHECKS) {
             check(gamepad);
@@ -11958,8 +11958,8 @@ public class SDL {
 
     // --- [ SDL_GamepadSensorEnabled ] ---
 
-    /** {@code _Bool SDL_GamepadSensorEnabled(SDL_Gamepad * gamepad, SDL_SensorType type)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GamepadSensorEnabled(SDL_Gamepad * gamepad, SDL_SensorType type)} */
+    @NativeType("bool")
     public static boolean SDL_GamepadSensorEnabled(@NativeType("SDL_Gamepad *") long gamepad, @NativeType("SDL_SensorType") int type) {
         long __functionAddress = Functions.GamepadSensorEnabled;
         if (CHECKS) {
@@ -11981,7 +11981,7 @@ public class SDL {
 
     // --- [ SDL_GetGamepadSensorData ] ---
 
-    /** {@code _Bool SDL_GetGamepadSensorData(SDL_Gamepad * gamepad, SDL_SensorType type, float * data, int num_values)} */
+    /** {@code bool SDL_GetGamepadSensorData(SDL_Gamepad * gamepad, SDL_SensorType type, float * data, int num_values)} */
     public static boolean nSDL_GetGamepadSensorData(long gamepad, int type, long data, int num_values) {
         long __functionAddress = Functions.GetGamepadSensorData;
         if (CHECKS) {
@@ -11990,16 +11990,16 @@ public class SDL {
         return invokePPZ(gamepad, type, data, num_values, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetGamepadSensorData(SDL_Gamepad * gamepad, SDL_SensorType type, float * data, int num_values)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetGamepadSensorData(SDL_Gamepad * gamepad, SDL_SensorType type, float * data, int num_values)} */
+    @NativeType("bool")
     public static boolean SDL_GetGamepadSensorData(@NativeType("SDL_Gamepad *") long gamepad, @NativeType("SDL_SensorType") int type, @NativeType("float *") FloatBuffer data) {
         return nSDL_GetGamepadSensorData(gamepad, type, memAddress(data), data.remaining());
     }
 
     // --- [ SDL_RumbleGamepad ] ---
 
-    /** {@code _Bool SDL_RumbleGamepad(SDL_Gamepad * gamepad, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RumbleGamepad(SDL_Gamepad * gamepad, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms)} */
+    @NativeType("bool")
     public static boolean SDL_RumbleGamepad(@NativeType("SDL_Gamepad *") long gamepad, @NativeType("Uint16") short low_frequency_rumble, @NativeType("Uint16") short high_frequency_rumble, @NativeType("Uint32") int duration_ms) {
         long __functionAddress = Functions.RumbleGamepad;
         if (CHECKS) {
@@ -12010,8 +12010,8 @@ public class SDL {
 
     // --- [ SDL_RumbleGamepadTriggers ] ---
 
-    /** {@code _Bool SDL_RumbleGamepadTriggers(SDL_Gamepad * gamepad, Uint16 left_rumble, Uint16 right_rumble, Uint32 duration_ms)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RumbleGamepadTriggers(SDL_Gamepad * gamepad, Uint16 left_rumble, Uint16 right_rumble, Uint32 duration_ms)} */
+    @NativeType("bool")
     public static boolean SDL_RumbleGamepadTriggers(@NativeType("SDL_Gamepad *") long gamepad, @NativeType("Uint16") short left_rumble, @NativeType("Uint16") short right_rumble, @NativeType("Uint32") int duration_ms) {
         long __functionAddress = Functions.RumbleGamepadTriggers;
         if (CHECKS) {
@@ -12022,8 +12022,8 @@ public class SDL {
 
     // --- [ SDL_SetGamepadLED ] ---
 
-    /** {@code _Bool SDL_SetGamepadLED(SDL_Gamepad * gamepad, Uint8 red, Uint8 green, Uint8 blue)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetGamepadLED(SDL_Gamepad * gamepad, Uint8 red, Uint8 green, Uint8 blue)} */
+    @NativeType("bool")
     public static boolean SDL_SetGamepadLED(@NativeType("SDL_Gamepad *") long gamepad, @NativeType("Uint8") byte red, @NativeType("Uint8") byte green, @NativeType("Uint8") byte blue) {
         long __functionAddress = Functions.SetGamepadLED;
         if (CHECKS) {
@@ -12034,7 +12034,7 @@ public class SDL {
 
     // --- [ SDL_SendGamepadEffect ] ---
 
-    /** {@code _Bool SDL_SendGamepadEffect(SDL_Gamepad * gamepad, void const * data, int size)} */
+    /** {@code bool SDL_SendGamepadEffect(SDL_Gamepad * gamepad, void const * data, int size)} */
     public static boolean nSDL_SendGamepadEffect(long gamepad, long data, int size) {
         long __functionAddress = Functions.SendGamepadEffect;
         if (CHECKS) {
@@ -12043,8 +12043,8 @@ public class SDL {
         return invokePPZ(gamepad, data, size, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SendGamepadEffect(SDL_Gamepad * gamepad, void const * data, int size)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SendGamepadEffect(SDL_Gamepad * gamepad, void const * data, int size)} */
+    @NativeType("bool")
     public static boolean SDL_SendGamepadEffect(@NativeType("SDL_Gamepad *") long gamepad, @NativeType("void const *") ByteBuffer data) {
         return nSDL_SendGamepadEffect(gamepad, memAddress(data), data.remaining());
     }
@@ -12098,8 +12098,8 @@ public class SDL {
 
     // --- [ SDL_HasKeyboard ] ---
 
-    /** {@code _Bool SDL_HasKeyboard(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasKeyboard(void)} */
+    @NativeType("bool")
     public static boolean SDL_HasKeyboard() {
         long __functionAddress = Functions.HasKeyboard;
         return invokeZ(__functionAddress);
@@ -12152,14 +12152,14 @@ public class SDL {
 
     // --- [ SDL_GetKeyboardState ] ---
 
-    /** {@code _Bool const * SDL_GetKeyboardState(int * numkeys)} */
+    /** {@code bool const * SDL_GetKeyboardState(int * numkeys)} */
     public static long nSDL_GetKeyboardState(long numkeys) {
         long __functionAddress = Functions.GetKeyboardState;
         return invokePP(numkeys, __functionAddress);
     }
 
-    /** {@code _Bool const * SDL_GetKeyboardState(int * numkeys)} */
-    @NativeType("_Bool const *")
+    /** {@code bool const * SDL_GetKeyboardState(int * numkeys)} */
+    @NativeType("bool const *")
     public static @Nullable ByteBuffer SDL_GetKeyboardState() {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         IntBuffer numkeys = stack.callocInt(1);
@@ -12198,9 +12198,9 @@ public class SDL {
 
     // --- [ SDL_GetKeyFromScancode ] ---
 
-    /** {@code SDL_Keycode SDL_GetKeyFromScancode(SDL_Scancode scancode, SDL_Keymod modstate, _Bool key_event)} */
+    /** {@code SDL_Keycode SDL_GetKeyFromScancode(SDL_Scancode scancode, SDL_Keymod modstate, bool key_event)} */
     @NativeType("SDL_Keycode")
-    public static int SDL_GetKeyFromScancode(@NativeType("SDL_Scancode") int scancode, @NativeType("SDL_Keymod") short modstate, @NativeType("_Bool") boolean key_event) {
+    public static int SDL_GetKeyFromScancode(@NativeType("SDL_Scancode") int scancode, @NativeType("SDL_Keymod") short modstate, @NativeType("bool") boolean key_event) {
         long __functionAddress = Functions.GetKeyFromScancode;
         return invokeCI(scancode, modstate, key_event, __functionAddress);
     }
@@ -12224,14 +12224,14 @@ public class SDL {
 
     // --- [ SDL_SetScancodeName ] ---
 
-    /** {@code _Bool SDL_SetScancodeName(SDL_Scancode scancode, char const * name)} */
+    /** {@code bool SDL_SetScancodeName(SDL_Scancode scancode, char const * name)} */
     public static boolean nSDL_SetScancodeName(int scancode, long name) {
         long __functionAddress = Functions.SetScancodeName;
         return invokePZ(scancode, name, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetScancodeName(SDL_Scancode scancode, char const * name)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetScancodeName(SDL_Scancode scancode, char const * name)} */
+    @NativeType("bool")
     public static boolean SDL_SetScancodeName(@NativeType("SDL_Scancode") int scancode, @NativeType("char const *") ByteBuffer name) {
         if (CHECKS) {
             checkNT1(name);
@@ -12331,8 +12331,8 @@ public class SDL {
 
     // --- [ SDL_StartTextInput ] ---
 
-    /** {@code _Bool SDL_StartTextInput(SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_StartTextInput(SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_StartTextInput(@NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.StartTextInput;
         if (CHECKS) {
@@ -12343,8 +12343,8 @@ public class SDL {
 
     // --- [ SDL_StartTextInputWithProperties ] ---
 
-    /** {@code _Bool SDL_StartTextInputWithProperties(SDL_Window * window, SDL_PropertiesID props)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_StartTextInputWithProperties(SDL_Window * window, SDL_PropertiesID props)} */
+    @NativeType("bool")
     public static boolean SDL_StartTextInputWithProperties(@NativeType("SDL_Window *") long window, @NativeType("SDL_PropertiesID") int props) {
         long __functionAddress = Functions.StartTextInputWithProperties;
         if (CHECKS) {
@@ -12355,8 +12355,8 @@ public class SDL {
 
     // --- [ SDL_TextInputActive ] ---
 
-    /** {@code _Bool SDL_TextInputActive(SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_TextInputActive(SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_TextInputActive(@NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.TextInputActive;
         if (CHECKS) {
@@ -12367,8 +12367,8 @@ public class SDL {
 
     // --- [ SDL_StopTextInput ] ---
 
-    /** {@code _Bool SDL_StopTextInput(SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_StopTextInput(SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_StopTextInput(@NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.StopTextInput;
         if (CHECKS) {
@@ -12379,8 +12379,8 @@ public class SDL {
 
     // --- [ SDL_ClearComposition ] ---
 
-    /** {@code _Bool SDL_ClearComposition(SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ClearComposition(SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_ClearComposition(@NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.ClearComposition;
         if (CHECKS) {
@@ -12391,7 +12391,7 @@ public class SDL {
 
     // --- [ SDL_SetTextInputArea ] ---
 
-    /** {@code _Bool SDL_SetTextInputArea(SDL_Window * window, SDL_Rect const * rect, int cursor)} */
+    /** {@code bool SDL_SetTextInputArea(SDL_Window * window, SDL_Rect const * rect, int cursor)} */
     public static boolean nSDL_SetTextInputArea(long window, long rect, int cursor) {
         long __functionAddress = Functions.SetTextInputArea;
         if (CHECKS) {
@@ -12400,8 +12400,8 @@ public class SDL {
         return invokePPZ(window, rect, cursor, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetTextInputArea(SDL_Window * window, SDL_Rect const * rect, int cursor)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetTextInputArea(SDL_Window * window, SDL_Rect const * rect, int cursor)} */
+    @NativeType("bool")
     public static boolean SDL_SetTextInputArea(@NativeType("SDL_Window *") long window, @NativeType("SDL_Rect const *") SDL_Rect.@Nullable Buffer rect, int cursor) {
         if (CHECKS) {
             checkSafe(rect, 1);
@@ -12411,7 +12411,7 @@ public class SDL {
 
     // --- [ SDL_GetTextInputArea ] ---
 
-    /** {@code _Bool SDL_GetTextInputArea(SDL_Window * window, SDL_Rect * rect, int * cursor)} */
+    /** {@code bool SDL_GetTextInputArea(SDL_Window * window, SDL_Rect * rect, int * cursor)} */
     public static boolean nSDL_GetTextInputArea(long window, long rect, long cursor) {
         long __functionAddress = Functions.GetTextInputArea;
         if (CHECKS) {
@@ -12420,8 +12420,8 @@ public class SDL {
         return invokePPPZ(window, rect, cursor, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetTextInputArea(SDL_Window * window, SDL_Rect * rect, int * cursor)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetTextInputArea(SDL_Window * window, SDL_Rect * rect, int * cursor)} */
+    @NativeType("bool")
     public static boolean SDL_GetTextInputArea(@NativeType("SDL_Window *") long window, @NativeType("SDL_Rect *") SDL_Rect.@Nullable Buffer rect, @NativeType("int *") IntBuffer cursor) {
         if (CHECKS) {
             checkSafe(rect, 1);
@@ -12432,8 +12432,8 @@ public class SDL {
 
     // --- [ SDL_HasScreenKeyboardSupport ] ---
 
-    /** {@code _Bool SDL_HasScreenKeyboardSupport(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasScreenKeyboardSupport(void)} */
+    @NativeType("bool")
     public static boolean SDL_HasScreenKeyboardSupport() {
         long __functionAddress = Functions.HasScreenKeyboardSupport;
         return invokeZ(__functionAddress);
@@ -12441,8 +12441,8 @@ public class SDL {
 
     // --- [ SDL_ScreenKeyboardShown ] ---
 
-    /** {@code _Bool SDL_ScreenKeyboardShown(SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ScreenKeyboardShown(SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_ScreenKeyboardShown(@NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.ScreenKeyboardShown;
         if (CHECKS) {
@@ -12515,14 +12515,14 @@ public class SDL {
 
     // --- [ SDL_SetLogPriorityPrefix ] ---
 
-    /** {@code _Bool SDL_SetLogPriorityPrefix(SDL_LogPriority priority, char const * prefix)} */
+    /** {@code bool SDL_SetLogPriorityPrefix(SDL_LogPriority priority, char const * prefix)} */
     public static boolean nSDL_SetLogPriorityPrefix(int priority, long prefix) {
         long __functionAddress = Functions.SetLogPriorityPrefix;
         return invokePZ(priority, prefix, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetLogPriorityPrefix(SDL_LogPriority priority, char const * prefix)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetLogPriorityPrefix(SDL_LogPriority priority, char const * prefix)} */
+    @NativeType("bool")
     public static boolean SDL_SetLogPriorityPrefix(@NativeType("SDL_LogPriority") int priority, @NativeType("char const *") @Nullable ByteBuffer prefix) {
         if (CHECKS) {
             checkNT1Safe(prefix);
@@ -12530,8 +12530,8 @@ public class SDL {
         return nSDL_SetLogPriorityPrefix(priority, memAddressSafe(prefix));
     }
 
-    /** {@code _Bool SDL_SetLogPriorityPrefix(SDL_LogPriority priority, char const * prefix)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetLogPriorityPrefix(SDL_LogPriority priority, char const * prefix)} */
+    @NativeType("bool")
     public static boolean SDL_SetLogPriorityPrefix(@NativeType("SDL_LogPriority") int priority, @NativeType("char const *") @Nullable CharSequence prefix) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -12664,7 +12664,7 @@ public class SDL {
 
     // --- [ SDL_ShowMessageBox ] ---
 
-    /** {@code _Bool SDL_ShowMessageBox(SDL_MessageBoxData const * messageboxdata, int * buttonid)} */
+    /** {@code bool SDL_ShowMessageBox(SDL_MessageBoxData const * messageboxdata, int * buttonid)} */
     public static boolean nSDL_ShowMessageBox(long messageboxdata, long buttonid) {
         long __functionAddress = Functions.ShowMessageBox;
         if (CHECKS) {
@@ -12673,8 +12673,8 @@ public class SDL {
         return invokePPZ(messageboxdata, buttonid, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ShowMessageBox(SDL_MessageBoxData const * messageboxdata, int * buttonid)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ShowMessageBox(SDL_MessageBoxData const * messageboxdata, int * buttonid)} */
+    @NativeType("bool")
     public static boolean SDL_ShowMessageBox(@NativeType("SDL_MessageBoxData const *") SDL_MessageBoxData.Buffer messageboxdata, @NativeType("int *") IntBuffer buttonid) {
         if (CHECKS) {
             check(messageboxdata, 1);
@@ -12685,14 +12685,14 @@ public class SDL {
 
     // --- [ SDL_ShowSimpleMessageBox ] ---
 
-    /** {@code _Bool SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, char const * title, char const * message, SDL_Window * window)} */
+    /** {@code bool SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, char const * title, char const * message, SDL_Window * window)} */
     public static boolean nSDL_ShowSimpleMessageBox(int flags, long title, long message, long window) {
         long __functionAddress = Functions.ShowSimpleMessageBox;
         return invokePPPZ(flags, title, message, window, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, char const * title, char const * message, SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, char const * title, char const * message, SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_ShowSimpleMessageBox(@NativeType("SDL_MessageBoxFlags") int flags, @NativeType("char const *") ByteBuffer title, @NativeType("char const *") ByteBuffer message, @NativeType("SDL_Window *") long window) {
         if (CHECKS) {
             checkNT1(title);
@@ -12701,8 +12701,8 @@ public class SDL {
         return nSDL_ShowSimpleMessageBox(flags, memAddress(title), memAddress(message), window);
     }
 
-    /** {@code _Bool SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, char const * title, char const * message, SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, char const * title, char const * message, SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_ShowSimpleMessageBox(@NativeType("SDL_MessageBoxFlags") int flags, @NativeType("char const *") CharSequence title, @NativeType("char const *") CharSequence message, @NativeType("SDL_Window *") long window) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -12718,14 +12718,14 @@ public class SDL {
 
     // --- [ SDL_OpenURL ] ---
 
-    /** {@code _Bool SDL_OpenURL(char const * url)} */
+    /** {@code bool SDL_OpenURL(char const * url)} */
     public static boolean nSDL_OpenURL(long url) {
         long __functionAddress = Functions.OpenURL;
         return invokePZ(url, __functionAddress);
     }
 
-    /** {@code _Bool SDL_OpenURL(char const * url)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_OpenURL(char const * url)} */
+    @NativeType("bool")
     public static boolean SDL_OpenURL(@NativeType("char const *") ByteBuffer url) {
         if (CHECKS) {
             checkNT1(url);
@@ -12733,8 +12733,8 @@ public class SDL {
         return nSDL_OpenURL(memAddress(url));
     }
 
-    /** {@code _Bool SDL_OpenURL(char const * url)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_OpenURL(char const * url)} */
+    @NativeType("bool")
     public static boolean SDL_OpenURL(@NativeType("char const *") CharSequence url) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -12748,8 +12748,8 @@ public class SDL {
 
     // --- [ SDL_HasMouse ] ---
 
-    /** {@code _Bool SDL_HasMouse(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasMouse(void)} */
+    @NativeType("bool")
     public static boolean SDL_HasMouse() {
         long __functionAddress = Functions.HasMouse;
         return invokeZ(__functionAddress);
@@ -12867,8 +12867,8 @@ public class SDL {
 
     // --- [ SDL_WarpMouseGlobal ] ---
 
-    /** {@code _Bool SDL_WarpMouseGlobal(float x, float y)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WarpMouseGlobal(float x, float y)} */
+    @NativeType("bool")
     public static boolean SDL_WarpMouseGlobal(float x, float y) {
         long __functionAddress = Functions.WarpMouseGlobal;
         return invokeZ(x, y, __functionAddress);
@@ -12876,9 +12876,9 @@ public class SDL {
 
     // --- [ SDL_SetWindowRelativeMouseMode ] ---
 
-    /** {@code _Bool SDL_SetWindowRelativeMouseMode(SDL_Window * window, _Bool enabled)} */
-    @NativeType("_Bool")
-    public static boolean SDL_SetWindowRelativeMouseMode(@NativeType("SDL_Window *") long window, @NativeType("_Bool") boolean enabled) {
+    /** {@code bool SDL_SetWindowRelativeMouseMode(SDL_Window * window, bool enabled)} */
+    @NativeType("bool")
+    public static boolean SDL_SetWindowRelativeMouseMode(@NativeType("SDL_Window *") long window, @NativeType("bool") boolean enabled) {
         long __functionAddress = Functions.SetWindowRelativeMouseMode;
         if (CHECKS) {
             check(window);
@@ -12888,8 +12888,8 @@ public class SDL {
 
     // --- [ SDL_GetWindowRelativeMouseMode ] ---
 
-    /** {@code _Bool SDL_GetWindowRelativeMouseMode(SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetWindowRelativeMouseMode(SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_GetWindowRelativeMouseMode(@NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.GetWindowRelativeMouseMode;
         if (CHECKS) {
@@ -12900,9 +12900,9 @@ public class SDL {
 
     // --- [ SDL_CaptureMouse ] ---
 
-    /** {@code _Bool SDL_CaptureMouse(_Bool enabled)} */
-    @NativeType("_Bool")
-    public static boolean SDL_CaptureMouse(@NativeType("_Bool") boolean enabled) {
+    /** {@code bool SDL_CaptureMouse(bool enabled)} */
+    @NativeType("bool")
+    public static boolean SDL_CaptureMouse(@NativeType("bool") boolean enabled) {
         long __functionAddress = Functions.CaptureMouse;
         return invokeZ(enabled, __functionAddress);
     }
@@ -12953,8 +12953,8 @@ public class SDL {
 
     // --- [ SDL_SetCursor ] ---
 
-    /** {@code _Bool SDL_SetCursor(SDL_Cursor * cursor)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetCursor(SDL_Cursor * cursor)} */
+    @NativeType("bool")
     public static boolean SDL_SetCursor(@NativeType("SDL_Cursor *") long cursor) {
         long __functionAddress = Functions.SetCursor;
         if (CHECKS) {
@@ -12994,8 +12994,8 @@ public class SDL {
 
     // --- [ SDL_ShowCursor ] ---
 
-    /** {@code _Bool SDL_ShowCursor(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ShowCursor(void)} */
+    @NativeType("bool")
     public static boolean SDL_ShowCursor() {
         long __functionAddress = Functions.ShowCursor;
         return invokeZ(__functionAddress);
@@ -13003,8 +13003,8 @@ public class SDL {
 
     // --- [ SDL_HideCursor ] ---
 
-    /** {@code _Bool SDL_HideCursor(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HideCursor(void)} */
+    @NativeType("bool")
     public static boolean SDL_HideCursor() {
         long __functionAddress = Functions.HideCursor;
         return invokeZ(__functionAddress);
@@ -13012,8 +13012,8 @@ public class SDL {
 
     // --- [ SDL_CursorVisible ] ---
 
-    /** {@code _Bool SDL_CursorVisible(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_CursorVisible(void)} */
+    @NativeType("bool")
     public static boolean SDL_CursorVisible() {
         long __functionAddress = Functions.CursorVisible;
         return invokeZ(__functionAddress);
@@ -13036,14 +13036,14 @@ public class SDL {
 
     // --- [ SDL_GetMasksForPixelFormat ] ---
 
-    /** {@code _Bool SDL_GetMasksForPixelFormat(SDL_PixelFormat format, int * bpp, Uint32 * Rmask, Uint32 * Gmask, Uint32 * Bmask, Uint32 * Amask)} */
+    /** {@code bool SDL_GetMasksForPixelFormat(SDL_PixelFormat format, int * bpp, Uint32 * Rmask, Uint32 * Gmask, Uint32 * Bmask, Uint32 * Amask)} */
     public static boolean nSDL_GetMasksForPixelFormat(int format, long bpp, long Rmask, long Gmask, long Bmask, long Amask) {
         long __functionAddress = Functions.GetMasksForPixelFormat;
         return invokePPPPPZ(format, bpp, Rmask, Gmask, Bmask, Amask, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetMasksForPixelFormat(SDL_PixelFormat format, int * bpp, Uint32 * Rmask, Uint32 * Gmask, Uint32 * Bmask, Uint32 * Amask)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetMasksForPixelFormat(SDL_PixelFormat format, int * bpp, Uint32 * Rmask, Uint32 * Gmask, Uint32 * Bmask, Uint32 * Amask)} */
+    @NativeType("bool")
     public static boolean SDL_GetMasksForPixelFormat(@NativeType("SDL_PixelFormat") int format, @NativeType("int *") IntBuffer bpp, @NativeType("Uint32 *") IntBuffer Rmask, @NativeType("Uint32 *") IntBuffer Gmask, @NativeType("Uint32 *") IntBuffer Bmask, @NativeType("Uint32 *") IntBuffer Amask) {
         if (CHECKS) {
             check(bpp, 1);
@@ -13096,14 +13096,14 @@ public class SDL {
 
     // --- [ SDL_SetPaletteColors ] ---
 
-    /** {@code _Bool SDL_SetPaletteColors(SDL_Palette * palette, SDL_Color const * colors, int firstcolor, int ncolors)} */
+    /** {@code bool SDL_SetPaletteColors(SDL_Palette * palette, SDL_Color const * colors, int firstcolor, int ncolors)} */
     public static boolean nSDL_SetPaletteColors(long palette, long colors, int firstcolor, int ncolors) {
         long __functionAddress = Functions.SetPaletteColors;
         return invokePPZ(palette, colors, firstcolor, ncolors, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetPaletteColors(SDL_Palette * palette, SDL_Color const * colors, int firstcolor, int ncolors)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetPaletteColors(SDL_Palette * palette, SDL_Color const * colors, int firstcolor, int ncolors)} */
+    @NativeType("bool")
     public static boolean SDL_SetPaletteColors(@NativeType("SDL_Palette *") SDL_Palette.Buffer palette, @NativeType("SDL_Color const *") SDL_Color.Buffer colors, int firstcolor) {
         if (CHECKS) {
             check(palette, 1);
@@ -13510,8 +13510,8 @@ public class SDL {
 
     // --- [ SDL_CopyProperties ] ---
 
-    /** {@code _Bool SDL_CopyProperties(SDL_PropertiesID src, SDL_PropertiesID dst)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_CopyProperties(SDL_PropertiesID src, SDL_PropertiesID dst)} */
+    @NativeType("bool")
     public static boolean SDL_CopyProperties(@NativeType("SDL_PropertiesID") int src, @NativeType("SDL_PropertiesID") int dst) {
         long __functionAddress = Functions.CopyProperties;
         return invokeZ(src, dst, __functionAddress);
@@ -13519,8 +13519,8 @@ public class SDL {
 
     // --- [ SDL_LockProperties ] ---
 
-    /** {@code _Bool SDL_LockProperties(SDL_PropertiesID props)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_LockProperties(SDL_PropertiesID props)} */
+    @NativeType("bool")
     public static boolean SDL_LockProperties(@NativeType("SDL_PropertiesID") int props) {
         long __functionAddress = Functions.LockProperties;
         return invokeZ(props, __functionAddress);
@@ -13536,14 +13536,14 @@ public class SDL {
 
     // --- [ SDL_SetPointerPropertyWithCleanup ] ---
 
-    /** {@code _Bool SDL_SetPointerPropertyWithCleanup(SDL_PropertiesID props, char const * name, void * value, SDL_CleanupPropertyCallback cleanup, void * userdata)} */
+    /** {@code bool SDL_SetPointerPropertyWithCleanup(SDL_PropertiesID props, char const * name, void * value, SDL_CleanupPropertyCallback cleanup, void * userdata)} */
     public static boolean nSDL_SetPointerPropertyWithCleanup(int props, long name, long value, long cleanup, long userdata) {
         long __functionAddress = Functions.SetPointerPropertyWithCleanup;
         return invokePPPPZ(props, name, value, cleanup, userdata, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetPointerPropertyWithCleanup(SDL_PropertiesID props, char const * name, void * value, SDL_CleanupPropertyCallback cleanup, void * userdata)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetPointerPropertyWithCleanup(SDL_PropertiesID props, char const * name, void * value, SDL_CleanupPropertyCallback cleanup, void * userdata)} */
+    @NativeType("bool")
     public static boolean SDL_SetPointerPropertyWithCleanup(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") ByteBuffer name, @NativeType("void *") long value, @NativeType("SDL_CleanupPropertyCallback") SDL_CleanupPropertyCallbackI cleanup, @NativeType("void *") long userdata) {
         if (CHECKS) {
             checkNT1(name);
@@ -13551,8 +13551,8 @@ public class SDL {
         return nSDL_SetPointerPropertyWithCleanup(props, memAddress(name), value, cleanup.address(), userdata);
     }
 
-    /** {@code _Bool SDL_SetPointerPropertyWithCleanup(SDL_PropertiesID props, char const * name, void * value, SDL_CleanupPropertyCallback cleanup, void * userdata)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetPointerPropertyWithCleanup(SDL_PropertiesID props, char const * name, void * value, SDL_CleanupPropertyCallback cleanup, void * userdata)} */
+    @NativeType("bool")
     public static boolean SDL_SetPointerPropertyWithCleanup(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") CharSequence name, @NativeType("void *") long value, @NativeType("SDL_CleanupPropertyCallback") SDL_CleanupPropertyCallbackI cleanup, @NativeType("void *") long userdata) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -13566,14 +13566,14 @@ public class SDL {
 
     // --- [ SDL_SetPointerProperty ] ---
 
-    /** {@code _Bool SDL_SetPointerProperty(SDL_PropertiesID props, char const * name, void * value)} */
+    /** {@code bool SDL_SetPointerProperty(SDL_PropertiesID props, char const * name, void * value)} */
     public static boolean nSDL_SetPointerProperty(int props, long name, long value) {
         long __functionAddress = Functions.SetPointerProperty;
         return invokePPZ(props, name, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetPointerProperty(SDL_PropertiesID props, char const * name, void * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetPointerProperty(SDL_PropertiesID props, char const * name, void * value)} */
+    @NativeType("bool")
     public static boolean SDL_SetPointerProperty(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") ByteBuffer name, @NativeType("void *") long value) {
         if (CHECKS) {
             checkNT1(name);
@@ -13581,8 +13581,8 @@ public class SDL {
         return nSDL_SetPointerProperty(props, memAddress(name), value);
     }
 
-    /** {@code _Bool SDL_SetPointerProperty(SDL_PropertiesID props, char const * name, void * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetPointerProperty(SDL_PropertiesID props, char const * name, void * value)} */
+    @NativeType("bool")
     public static boolean SDL_SetPointerProperty(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") CharSequence name, @NativeType("void *") long value) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -13596,14 +13596,14 @@ public class SDL {
 
     // --- [ SDL_SetStringProperty ] ---
 
-    /** {@code _Bool SDL_SetStringProperty(SDL_PropertiesID props, char const * name, char const * value)} */
+    /** {@code bool SDL_SetStringProperty(SDL_PropertiesID props, char const * name, char const * value)} */
     public static boolean nSDL_SetStringProperty(int props, long name, long value) {
         long __functionAddress = Functions.SetStringProperty;
         return invokePPZ(props, name, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetStringProperty(SDL_PropertiesID props, char const * name, char const * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetStringProperty(SDL_PropertiesID props, char const * name, char const * value)} */
+    @NativeType("bool")
     public static boolean SDL_SetStringProperty(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") ByteBuffer name, @NativeType("char const *") ByteBuffer value) {
         if (CHECKS) {
             checkNT1(name);
@@ -13612,8 +13612,8 @@ public class SDL {
         return nSDL_SetStringProperty(props, memAddress(name), memAddress(value));
     }
 
-    /** {@code _Bool SDL_SetStringProperty(SDL_PropertiesID props, char const * name, char const * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetStringProperty(SDL_PropertiesID props, char const * name, char const * value)} */
+    @NativeType("bool")
     public static boolean SDL_SetStringProperty(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") CharSequence name, @NativeType("char const *") CharSequence value) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -13629,14 +13629,14 @@ public class SDL {
 
     // --- [ SDL_SetNumberProperty ] ---
 
-    /** {@code _Bool SDL_SetNumberProperty(SDL_PropertiesID props, char const * name, Sint64 value)} */
+    /** {@code bool SDL_SetNumberProperty(SDL_PropertiesID props, char const * name, Sint64 value)} */
     public static boolean nSDL_SetNumberProperty(int props, long name, long value) {
         long __functionAddress = Functions.SetNumberProperty;
         return invokePJZ(props, name, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetNumberProperty(SDL_PropertiesID props, char const * name, Sint64 value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetNumberProperty(SDL_PropertiesID props, char const * name, Sint64 value)} */
+    @NativeType("bool")
     public static boolean SDL_SetNumberProperty(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") ByteBuffer name, @NativeType("Sint64") long value) {
         if (CHECKS) {
             checkNT1(name);
@@ -13644,8 +13644,8 @@ public class SDL {
         return nSDL_SetNumberProperty(props, memAddress(name), value);
     }
 
-    /** {@code _Bool SDL_SetNumberProperty(SDL_PropertiesID props, char const * name, Sint64 value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetNumberProperty(SDL_PropertiesID props, char const * name, Sint64 value)} */
+    @NativeType("bool")
     public static boolean SDL_SetNumberProperty(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") CharSequence name, @NativeType("Sint64") long value) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -13659,14 +13659,14 @@ public class SDL {
 
     // --- [ SDL_SetFloatProperty ] ---
 
-    /** {@code _Bool SDL_SetFloatProperty(SDL_PropertiesID props, char const * name, float value)} */
+    /** {@code bool SDL_SetFloatProperty(SDL_PropertiesID props, char const * name, float value)} */
     public static boolean nSDL_SetFloatProperty(int props, long name, float value) {
         long __functionAddress = Functions.SetFloatProperty;
         return invokePZ(props, name, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetFloatProperty(SDL_PropertiesID props, char const * name, float value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetFloatProperty(SDL_PropertiesID props, char const * name, float value)} */
+    @NativeType("bool")
     public static boolean SDL_SetFloatProperty(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") ByteBuffer name, float value) {
         if (CHECKS) {
             checkNT1(name);
@@ -13674,8 +13674,8 @@ public class SDL {
         return nSDL_SetFloatProperty(props, memAddress(name), value);
     }
 
-    /** {@code _Bool SDL_SetFloatProperty(SDL_PropertiesID props, char const * name, float value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetFloatProperty(SDL_PropertiesID props, char const * name, float value)} */
+    @NativeType("bool")
     public static boolean SDL_SetFloatProperty(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") CharSequence name, float value) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -13689,24 +13689,24 @@ public class SDL {
 
     // --- [ SDL_SetBooleanProperty ] ---
 
-    /** {@code _Bool SDL_SetBooleanProperty(SDL_PropertiesID props, char const * name, _Bool value)} */
+    /** {@code bool SDL_SetBooleanProperty(SDL_PropertiesID props, char const * name, bool value)} */
     public static boolean nSDL_SetBooleanProperty(int props, long name, boolean value) {
         long __functionAddress = Functions.SetBooleanProperty;
         return invokePZ(props, name, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetBooleanProperty(SDL_PropertiesID props, char const * name, _Bool value)} */
-    @NativeType("_Bool")
-    public static boolean SDL_SetBooleanProperty(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") ByteBuffer name, @NativeType("_Bool") boolean value) {
+    /** {@code bool SDL_SetBooleanProperty(SDL_PropertiesID props, char const * name, bool value)} */
+    @NativeType("bool")
+    public static boolean SDL_SetBooleanProperty(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") ByteBuffer name, @NativeType("bool") boolean value) {
         if (CHECKS) {
             checkNT1(name);
         }
         return nSDL_SetBooleanProperty(props, memAddress(name), value);
     }
 
-    /** {@code _Bool SDL_SetBooleanProperty(SDL_PropertiesID props, char const * name, _Bool value)} */
-    @NativeType("_Bool")
-    public static boolean SDL_SetBooleanProperty(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") CharSequence name, @NativeType("_Bool") boolean value) {
+    /** {@code bool SDL_SetBooleanProperty(SDL_PropertiesID props, char const * name, bool value)} */
+    @NativeType("bool")
+    public static boolean SDL_SetBooleanProperty(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") CharSequence name, @NativeType("bool") boolean value) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(name, true);
@@ -13719,14 +13719,14 @@ public class SDL {
 
     // --- [ SDL_HasProperty ] ---
 
-    /** {@code _Bool SDL_HasProperty(SDL_PropertiesID props, char const * name)} */
+    /** {@code bool SDL_HasProperty(SDL_PropertiesID props, char const * name)} */
     public static boolean nSDL_HasProperty(int props, long name) {
         long __functionAddress = Functions.HasProperty;
         return invokePZ(props, name, __functionAddress);
     }
 
-    /** {@code _Bool SDL_HasProperty(SDL_PropertiesID props, char const * name)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasProperty(SDL_PropertiesID props, char const * name)} */
+    @NativeType("bool")
     public static boolean SDL_HasProperty(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") ByteBuffer name) {
         if (CHECKS) {
             checkNT1(name);
@@ -13734,8 +13734,8 @@ public class SDL {
         return nSDL_HasProperty(props, memAddress(name));
     }
 
-    /** {@code _Bool SDL_HasProperty(SDL_PropertiesID props, char const * name)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasProperty(SDL_PropertiesID props, char const * name)} */
+    @NativeType("bool")
     public static boolean SDL_HasProperty(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -13902,24 +13902,24 @@ public class SDL {
 
     // --- [ SDL_GetBooleanProperty ] ---
 
-    /** {@code _Bool SDL_GetBooleanProperty(SDL_PropertiesID props, char const * name, _Bool default_value)} */
+    /** {@code bool SDL_GetBooleanProperty(SDL_PropertiesID props, char const * name, bool default_value)} */
     public static boolean nSDL_GetBooleanProperty(int props, long name, boolean default_value) {
         long __functionAddress = Functions.GetBooleanProperty;
         return invokePZ(props, name, default_value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetBooleanProperty(SDL_PropertiesID props, char const * name, _Bool default_value)} */
-    @NativeType("_Bool")
-    public static boolean SDL_GetBooleanProperty(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") ByteBuffer name, @NativeType("_Bool") boolean default_value) {
+    /** {@code bool SDL_GetBooleanProperty(SDL_PropertiesID props, char const * name, bool default_value)} */
+    @NativeType("bool")
+    public static boolean SDL_GetBooleanProperty(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") ByteBuffer name, @NativeType("bool") boolean default_value) {
         if (CHECKS) {
             checkNT1(name);
         }
         return nSDL_GetBooleanProperty(props, memAddress(name), default_value);
     }
 
-    /** {@code _Bool SDL_GetBooleanProperty(SDL_PropertiesID props, char const * name, _Bool default_value)} */
-    @NativeType("_Bool")
-    public static boolean SDL_GetBooleanProperty(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") CharSequence name, @NativeType("_Bool") boolean default_value) {
+    /** {@code bool SDL_GetBooleanProperty(SDL_PropertiesID props, char const * name, bool default_value)} */
+    @NativeType("bool")
+    public static boolean SDL_GetBooleanProperty(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") CharSequence name, @NativeType("bool") boolean default_value) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(name, true);
@@ -13932,14 +13932,14 @@ public class SDL {
 
     // --- [ SDL_ClearProperty ] ---
 
-    /** {@code _Bool SDL_ClearProperty(SDL_PropertiesID props, char const * name)} */
+    /** {@code bool SDL_ClearProperty(SDL_PropertiesID props, char const * name)} */
     public static boolean nSDL_ClearProperty(int props, long name) {
         long __functionAddress = Functions.ClearProperty;
         return invokePZ(props, name, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ClearProperty(SDL_PropertiesID props, char const * name)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ClearProperty(SDL_PropertiesID props, char const * name)} */
+    @NativeType("bool")
     public static boolean SDL_ClearProperty(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") ByteBuffer name) {
         if (CHECKS) {
             checkNT1(name);
@@ -13947,8 +13947,8 @@ public class SDL {
         return nSDL_ClearProperty(props, memAddress(name));
     }
 
-    /** {@code _Bool SDL_ClearProperty(SDL_PropertiesID props, char const * name)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ClearProperty(SDL_PropertiesID props, char const * name)} */
+    @NativeType("bool")
     public static boolean SDL_ClearProperty(@NativeType("SDL_PropertiesID") int props, @NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -13962,14 +13962,14 @@ public class SDL {
 
     // --- [ SDL_EnumerateProperties ] ---
 
-    /** {@code _Bool SDL_EnumerateProperties(SDL_PropertiesID props, SDL_EnumeratePropertiesCallback callback, void * userdata)} */
+    /** {@code bool SDL_EnumerateProperties(SDL_PropertiesID props, SDL_EnumeratePropertiesCallback callback, void * userdata)} */
     public static boolean nSDL_EnumerateProperties(int props, long callback, long userdata) {
         long __functionAddress = Functions.EnumerateProperties;
         return invokePPZ(props, callback, userdata, __functionAddress);
     }
 
-    /** {@code _Bool SDL_EnumerateProperties(SDL_PropertiesID props, SDL_EnumeratePropertiesCallback callback, void * userdata)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_EnumerateProperties(SDL_PropertiesID props, SDL_EnumeratePropertiesCallback callback, void * userdata)} */
+    @NativeType("bool")
     public static boolean SDL_EnumerateProperties(@NativeType("SDL_PropertiesID") int props, @NativeType("SDL_EnumeratePropertiesCallback") SDL_EnumeratePropertiesCallbackI callback, @NativeType("void *") long userdata) {
         return nSDL_EnumerateProperties(props, callback.address(), userdata);
     }
@@ -13984,14 +13984,14 @@ public class SDL {
 
     // --- [ SDL_HasRectIntersection ] ---
 
-    /** {@code _Bool SDL_HasRectIntersection(SDL_Rect const * A, SDL_Rect const * B)} */
+    /** {@code bool SDL_HasRectIntersection(SDL_Rect const * A, SDL_Rect const * B)} */
     public static boolean nSDL_HasRectIntersection(long A, long B) {
         long __functionAddress = Functions.HasRectIntersection;
         return invokePPZ(A, B, __functionAddress);
     }
 
-    /** {@code _Bool SDL_HasRectIntersection(SDL_Rect const * A, SDL_Rect const * B)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasRectIntersection(SDL_Rect const * A, SDL_Rect const * B)} */
+    @NativeType("bool")
     public static boolean SDL_HasRectIntersection(@NativeType("SDL_Rect const *") SDL_Rect.@Nullable Buffer A, @NativeType("SDL_Rect const *") SDL_Rect.@Nullable Buffer B) {
         if (CHECKS) {
             checkSafe(A, 1);
@@ -14002,14 +14002,14 @@ public class SDL {
 
     // --- [ SDL_GetRectIntersection ] ---
 
-    /** {@code _Bool SDL_GetRectIntersection(SDL_Rect const * A, SDL_Rect const * B, SDL_Rect * result)} */
+    /** {@code bool SDL_GetRectIntersection(SDL_Rect const * A, SDL_Rect const * B, SDL_Rect * result)} */
     public static boolean nSDL_GetRectIntersection(long A, long B, long result) {
         long __functionAddress = Functions.GetRectIntersection;
         return invokePPPZ(A, B, result, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetRectIntersection(SDL_Rect const * A, SDL_Rect const * B, SDL_Rect * result)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetRectIntersection(SDL_Rect const * A, SDL_Rect const * B, SDL_Rect * result)} */
+    @NativeType("bool")
     public static boolean SDL_GetRectIntersection(@NativeType("SDL_Rect const *") SDL_Rect.@Nullable Buffer A, @NativeType("SDL_Rect const *") SDL_Rect.@Nullable Buffer B, @NativeType("SDL_Rect *") SDL_Rect.@Nullable Buffer result) {
         if (CHECKS) {
             checkSafe(A, 1);
@@ -14021,14 +14021,14 @@ public class SDL {
 
     // --- [ SDL_GetRectUnion ] ---
 
-    /** {@code _Bool SDL_GetRectUnion(SDL_Rect const * A, SDL_Rect const * B, SDL_Rect * result)} */
+    /** {@code bool SDL_GetRectUnion(SDL_Rect const * A, SDL_Rect const * B, SDL_Rect * result)} */
     public static boolean nSDL_GetRectUnion(long A, long B, long result) {
         long __functionAddress = Functions.GetRectUnion;
         return invokePPPZ(A, B, result, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetRectUnion(SDL_Rect const * A, SDL_Rect const * B, SDL_Rect * result)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetRectUnion(SDL_Rect const * A, SDL_Rect const * B, SDL_Rect * result)} */
+    @NativeType("bool")
     public static boolean SDL_GetRectUnion(@NativeType("SDL_Rect const *") SDL_Rect.@Nullable Buffer A, @NativeType("SDL_Rect const *") SDL_Rect.@Nullable Buffer B, @NativeType("SDL_Rect *") SDL_Rect.@Nullable Buffer result) {
         if (CHECKS) {
             checkSafe(A, 1);
@@ -14040,14 +14040,14 @@ public class SDL {
 
     // --- [ SDL_GetRectEnclosingPoints ] ---
 
-    /** {@code _Bool SDL_GetRectEnclosingPoints(SDL_Point const * points, int count, SDL_Rect const * clip, SDL_Rect * result)} */
+    /** {@code bool SDL_GetRectEnclosingPoints(SDL_Point const * points, int count, SDL_Rect const * clip, SDL_Rect * result)} */
     public static boolean nSDL_GetRectEnclosingPoints(long points, int count, long clip, long result) {
         long __functionAddress = Functions.GetRectEnclosingPoints;
         return invokePPPZ(points, count, clip, result, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetRectEnclosingPoints(SDL_Point const * points, int count, SDL_Rect const * clip, SDL_Rect * result)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetRectEnclosingPoints(SDL_Point const * points, int count, SDL_Rect const * clip, SDL_Rect * result)} */
+    @NativeType("bool")
     public static boolean SDL_GetRectEnclosingPoints(@NativeType("SDL_Point const *") SDL_Point.Buffer points, @NativeType("SDL_Rect const *") SDL_Rect.@Nullable Buffer clip, @NativeType("SDL_Rect *") SDL_Rect.Buffer result) {
         if (CHECKS) {
             checkSafe(clip, 1);
@@ -14058,14 +14058,14 @@ public class SDL {
 
     // --- [ SDL_GetRectAndLineIntersection ] ---
 
-    /** {@code _Bool SDL_GetRectAndLineIntersection(SDL_Rect const * rect, int * X1, int * Y1, int * X2, int * Y2)} */
+    /** {@code bool SDL_GetRectAndLineIntersection(SDL_Rect const * rect, int * X1, int * Y1, int * X2, int * Y2)} */
     public static boolean nSDL_GetRectAndLineIntersection(long rect, long X1, long Y1, long X2, long Y2) {
         long __functionAddress = Functions.GetRectAndLineIntersection;
         return invokePPPPPZ(rect, X1, Y1, X2, Y2, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetRectAndLineIntersection(SDL_Rect const * rect, int * X1, int * Y1, int * X2, int * Y2)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetRectAndLineIntersection(SDL_Rect const * rect, int * X1, int * Y1, int * X2, int * Y2)} */
+    @NativeType("bool")
     public static boolean SDL_GetRectAndLineIntersection(@NativeType("SDL_Rect const *") SDL_Rect.Buffer rect, @NativeType("int *") IntBuffer X1, @NativeType("int *") IntBuffer Y1, @NativeType("int *") IntBuffer X2, @NativeType("int *") IntBuffer Y2) {
         if (CHECKS) {
             check(rect, 1);
@@ -14079,14 +14079,14 @@ public class SDL {
 
     // --- [ SDL_HasRectIntersectionFloat ] ---
 
-    /** {@code _Bool SDL_HasRectIntersectionFloat(SDL_FRect const * A, SDL_FRect const * B)} */
+    /** {@code bool SDL_HasRectIntersectionFloat(SDL_FRect const * A, SDL_FRect const * B)} */
     public static boolean nSDL_HasRectIntersectionFloat(long A, long B) {
         long __functionAddress = Functions.HasRectIntersectionFloat;
         return invokePPZ(A, B, __functionAddress);
     }
 
-    /** {@code _Bool SDL_HasRectIntersectionFloat(SDL_FRect const * A, SDL_FRect const * B)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HasRectIntersectionFloat(SDL_FRect const * A, SDL_FRect const * B)} */
+    @NativeType("bool")
     public static boolean SDL_HasRectIntersectionFloat(@NativeType("SDL_FRect const *") SDL_FRect.@Nullable Buffer A, @NativeType("SDL_FRect const *") SDL_FRect.@Nullable Buffer B) {
         if (CHECKS) {
             checkSafe(A, 1);
@@ -14097,14 +14097,14 @@ public class SDL {
 
     // --- [ SDL_GetRectIntersectionFloat ] ---
 
-    /** {@code _Bool SDL_GetRectIntersectionFloat(SDL_FRect const * A, SDL_FRect const * B, SDL_FRect * result)} */
+    /** {@code bool SDL_GetRectIntersectionFloat(SDL_FRect const * A, SDL_FRect const * B, SDL_FRect * result)} */
     public static boolean nSDL_GetRectIntersectionFloat(long A, long B, long result) {
         long __functionAddress = Functions.GetRectIntersectionFloat;
         return invokePPPZ(A, B, result, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetRectIntersectionFloat(SDL_FRect const * A, SDL_FRect const * B, SDL_FRect * result)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetRectIntersectionFloat(SDL_FRect const * A, SDL_FRect const * B, SDL_FRect * result)} */
+    @NativeType("bool")
     public static boolean SDL_GetRectIntersectionFloat(@NativeType("SDL_FRect const *") SDL_FRect.@Nullable Buffer A, @NativeType("SDL_FRect const *") SDL_FRect.@Nullable Buffer B, @NativeType("SDL_FRect *") SDL_FRect.@Nullable Buffer result) {
         if (CHECKS) {
             checkSafe(A, 1);
@@ -14116,14 +14116,14 @@ public class SDL {
 
     // --- [ SDL_GetRectUnionFloat ] ---
 
-    /** {@code _Bool SDL_GetRectUnionFloat(SDL_FRect const * A, SDL_FRect const * B, SDL_FRect * result)} */
+    /** {@code bool SDL_GetRectUnionFloat(SDL_FRect const * A, SDL_FRect const * B, SDL_FRect * result)} */
     public static boolean nSDL_GetRectUnionFloat(long A, long B, long result) {
         long __functionAddress = Functions.GetRectUnionFloat;
         return invokePPPZ(A, B, result, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetRectUnionFloat(SDL_FRect const * A, SDL_FRect const * B, SDL_FRect * result)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetRectUnionFloat(SDL_FRect const * A, SDL_FRect const * B, SDL_FRect * result)} */
+    @NativeType("bool")
     public static boolean SDL_GetRectUnionFloat(@NativeType("SDL_FRect const *") SDL_FRect.@Nullable Buffer A, @NativeType("SDL_FRect const *") SDL_FRect.@Nullable Buffer B, @NativeType("SDL_FRect *") SDL_FRect.Buffer result) {
         if (CHECKS) {
             checkSafe(A, 1);
@@ -14135,14 +14135,14 @@ public class SDL {
 
     // --- [ SDL_GetRectEnclosingPointsFloat ] ---
 
-    /** {@code _Bool SDL_GetRectEnclosingPointsFloat(SDL_FPoint const * points, int count, SDL_FRect const * clip, SDL_FRect * result)} */
+    /** {@code bool SDL_GetRectEnclosingPointsFloat(SDL_FPoint const * points, int count, SDL_FRect const * clip, SDL_FRect * result)} */
     public static boolean nSDL_GetRectEnclosingPointsFloat(long points, int count, long clip, long result) {
         long __functionAddress = Functions.GetRectEnclosingPointsFloat;
         return invokePPPZ(points, count, clip, result, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetRectEnclosingPointsFloat(SDL_FPoint const * points, int count, SDL_FRect const * clip, SDL_FRect * result)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetRectEnclosingPointsFloat(SDL_FPoint const * points, int count, SDL_FRect const * clip, SDL_FRect * result)} */
+    @NativeType("bool")
     public static boolean SDL_GetRectEnclosingPointsFloat(@NativeType("SDL_FPoint const *") SDL_FPoint.Buffer points, @NativeType("SDL_FRect const *") SDL_FRect.@Nullable Buffer clip, @NativeType("SDL_FRect *") SDL_FRect.Buffer result) {
         if (CHECKS) {
             checkSafe(clip, 1);
@@ -14153,14 +14153,14 @@ public class SDL {
 
     // --- [ SDL_GetRectAndLineIntersectionFloat ] ---
 
-    /** {@code _Bool SDL_GetRectAndLineIntersectionFloat(SDL_FRect const * rect, float * X1, float * Y1, float * X2, float * Y2)} */
+    /** {@code bool SDL_GetRectAndLineIntersectionFloat(SDL_FRect const * rect, float * X1, float * Y1, float * X2, float * Y2)} */
     public static boolean nSDL_GetRectAndLineIntersectionFloat(long rect, long X1, long Y1, long X2, long Y2) {
         long __functionAddress = Functions.GetRectAndLineIntersectionFloat;
         return invokePPPPPZ(rect, X1, Y1, X2, Y2, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetRectAndLineIntersectionFloat(SDL_FRect const * rect, float * X1, float * Y1, float * X2, float * Y2)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetRectAndLineIntersectionFloat(SDL_FRect const * rect, float * X1, float * Y1, float * X2, float * Y2)} */
+    @NativeType("bool")
     public static boolean SDL_GetRectAndLineIntersectionFloat(@NativeType("SDL_FRect const *") SDL_FRect.Buffer rect, @NativeType("float *") FloatBuffer X1, @NativeType("float *") FloatBuffer Y1, @NativeType("float *") FloatBuffer X2, @NativeType("float *") FloatBuffer Y2) {
         if (CHECKS) {
             check(rect, 1);
@@ -14197,14 +14197,14 @@ public class SDL {
 
     // --- [ SDL_CreateWindowAndRenderer ] ---
 
-    /** {@code _Bool SDL_CreateWindowAndRenderer(char const * title, int width, int height, SDL_WindowFlags window_flags, SDL_Window ** window, SDL_Renderer ** renderer)} */
+    /** {@code bool SDL_CreateWindowAndRenderer(char const * title, int width, int height, SDL_WindowFlags window_flags, SDL_Window ** window, SDL_Renderer ** renderer)} */
     public static boolean nSDL_CreateWindowAndRenderer(long title, int width, int height, long window_flags, long window, long renderer) {
         long __functionAddress = Functions.CreateWindowAndRenderer;
         return invokePJPPZ(title, width, height, window_flags, window, renderer, __functionAddress);
     }
 
-    /** {@code _Bool SDL_CreateWindowAndRenderer(char const * title, int width, int height, SDL_WindowFlags window_flags, SDL_Window ** window, SDL_Renderer ** renderer)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_CreateWindowAndRenderer(char const * title, int width, int height, SDL_WindowFlags window_flags, SDL_Window ** window, SDL_Renderer ** renderer)} */
+    @NativeType("bool")
     public static boolean SDL_CreateWindowAndRenderer(@NativeType("char const *") ByteBuffer title, int width, int height, @NativeType("SDL_WindowFlags") long window_flags, @NativeType("SDL_Window **") PointerBuffer window, @NativeType("SDL_Renderer **") PointerBuffer renderer) {
         if (CHECKS) {
             checkNT1(title);
@@ -14214,8 +14214,8 @@ public class SDL {
         return nSDL_CreateWindowAndRenderer(memAddress(title), width, height, window_flags, memAddress(window), memAddress(renderer));
     }
 
-    /** {@code _Bool SDL_CreateWindowAndRenderer(char const * title, int width, int height, SDL_WindowFlags window_flags, SDL_Window ** window, SDL_Renderer ** renderer)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_CreateWindowAndRenderer(char const * title, int width, int height, SDL_WindowFlags window_flags, SDL_Window ** window, SDL_Renderer ** renderer)} */
+    @NativeType("bool")
     public static boolean SDL_CreateWindowAndRenderer(@NativeType("char const *") CharSequence title, int width, int height, @NativeType("SDL_WindowFlags") long window_flags, @NativeType("SDL_Window **") PointerBuffer window, @NativeType("SDL_Renderer **") PointerBuffer renderer) {
         if (CHECKS) {
             check(window, 1);
@@ -14346,7 +14346,7 @@ public class SDL {
 
     // --- [ SDL_GetRenderOutputSize ] ---
 
-    /** {@code _Bool SDL_GetRenderOutputSize(SDL_Renderer * renderer, int * w, int * h)} */
+    /** {@code bool SDL_GetRenderOutputSize(SDL_Renderer * renderer, int * w, int * h)} */
     public static boolean nSDL_GetRenderOutputSize(long renderer, long w, long h) {
         long __functionAddress = Functions.GetRenderOutputSize;
         if (CHECKS) {
@@ -14355,8 +14355,8 @@ public class SDL {
         return invokePPPZ(renderer, w, h, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetRenderOutputSize(SDL_Renderer * renderer, int * w, int * h)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetRenderOutputSize(SDL_Renderer * renderer, int * w, int * h)} */
+    @NativeType("bool")
     public static boolean SDL_GetRenderOutputSize(@NativeType("SDL_Renderer *") long renderer, @NativeType("int *") IntBuffer w, @NativeType("int *") IntBuffer h) {
         if (CHECKS) {
             check(w, 1);
@@ -14367,7 +14367,7 @@ public class SDL {
 
     // --- [ SDL_GetCurrentRenderOutputSize ] ---
 
-    /** {@code _Bool SDL_GetCurrentRenderOutputSize(SDL_Renderer * renderer, int * w, int * h)} */
+    /** {@code bool SDL_GetCurrentRenderOutputSize(SDL_Renderer * renderer, int * w, int * h)} */
     public static boolean nSDL_GetCurrentRenderOutputSize(long renderer, long w, long h) {
         long __functionAddress = Functions.GetCurrentRenderOutputSize;
         if (CHECKS) {
@@ -14376,8 +14376,8 @@ public class SDL {
         return invokePPPZ(renderer, w, h, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetCurrentRenderOutputSize(SDL_Renderer * renderer, int * w, int * h)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetCurrentRenderOutputSize(SDL_Renderer * renderer, int * w, int * h)} */
+    @NativeType("bool")
     public static boolean SDL_GetCurrentRenderOutputSize(@NativeType("SDL_Renderer *") long renderer, @NativeType("int *") IntBuffer w, @NativeType("int *") IntBuffer h) {
         if (CHECKS) {
             check(w, 1);
@@ -14473,14 +14473,14 @@ public class SDL {
 
     // --- [ SDL_GetTextureSize ] ---
 
-    /** {@code _Bool SDL_GetTextureSize(SDL_Texture * texture, float * w, float * h)} */
+    /** {@code bool SDL_GetTextureSize(SDL_Texture * texture, float * w, float * h)} */
     public static boolean nSDL_GetTextureSize(long texture, long w, long h) {
         long __functionAddress = Functions.GetTextureSize;
         return invokePPPZ(texture, w, h, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetTextureSize(SDL_Texture * texture, float * w, float * h)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetTextureSize(SDL_Texture * texture, float * w, float * h)} */
+    @NativeType("bool")
     public static boolean SDL_GetTextureSize(@NativeType("SDL_Texture *") SDL_Texture texture, @NativeType("float *") FloatBuffer w, @NativeType("float *") FloatBuffer h) {
         if (CHECKS) {
             check(w, 1);
@@ -14491,42 +14491,42 @@ public class SDL {
 
     // --- [ SDL_SetTextureColorMod ] ---
 
-    /** {@code _Bool SDL_SetTextureColorMod(SDL_Texture * texture, Uint8 r, Uint8 g, Uint8 b)} */
+    /** {@code bool SDL_SetTextureColorMod(SDL_Texture * texture, Uint8 r, Uint8 g, Uint8 b)} */
     public static boolean nSDL_SetTextureColorMod(long texture, byte r, byte g, byte b) {
         long __functionAddress = Functions.SetTextureColorMod;
         return invokePUUUZ(texture, r, g, b, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetTextureColorMod(SDL_Texture * texture, Uint8 r, Uint8 g, Uint8 b)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetTextureColorMod(SDL_Texture * texture, Uint8 r, Uint8 g, Uint8 b)} */
+    @NativeType("bool")
     public static boolean SDL_SetTextureColorMod(@NativeType("SDL_Texture *") SDL_Texture texture, @NativeType("Uint8") byte r, @NativeType("Uint8") byte g, @NativeType("Uint8") byte b) {
         return nSDL_SetTextureColorMod(texture.address(), r, g, b);
     }
 
     // --- [ SDL_SetTextureColorModFloat ] ---
 
-    /** {@code _Bool SDL_SetTextureColorModFloat(SDL_Texture * texture, float r, float g, float b)} */
+    /** {@code bool SDL_SetTextureColorModFloat(SDL_Texture * texture, float r, float g, float b)} */
     public static boolean nSDL_SetTextureColorModFloat(long texture, float r, float g, float b) {
         long __functionAddress = Functions.SetTextureColorModFloat;
         return invokePZ(texture, r, g, b, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetTextureColorModFloat(SDL_Texture * texture, float r, float g, float b)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetTextureColorModFloat(SDL_Texture * texture, float r, float g, float b)} */
+    @NativeType("bool")
     public static boolean SDL_SetTextureColorModFloat(@NativeType("SDL_Texture *") SDL_Texture texture, float r, float g, float b) {
         return nSDL_SetTextureColorModFloat(texture.address(), r, g, b);
     }
 
     // --- [ SDL_GetTextureColorMod ] ---
 
-    /** {@code _Bool SDL_GetTextureColorMod(SDL_Texture * texture, Uint8 * r, Uint8 * g, Uint8 * b)} */
+    /** {@code bool SDL_GetTextureColorMod(SDL_Texture * texture, Uint8 * r, Uint8 * g, Uint8 * b)} */
     public static boolean nSDL_GetTextureColorMod(long texture, long r, long g, long b) {
         long __functionAddress = Functions.GetTextureColorMod;
         return invokePPPPZ(texture, r, g, b, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetTextureColorMod(SDL_Texture * texture, Uint8 * r, Uint8 * g, Uint8 * b)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetTextureColorMod(SDL_Texture * texture, Uint8 * r, Uint8 * g, Uint8 * b)} */
+    @NativeType("bool")
     public static boolean SDL_GetTextureColorMod(@NativeType("SDL_Texture *") SDL_Texture texture, @NativeType("Uint8 *") ByteBuffer r, @NativeType("Uint8 *") ByteBuffer g, @NativeType("Uint8 *") ByteBuffer b) {
         if (CHECKS) {
             check(r, 1);
@@ -14538,14 +14538,14 @@ public class SDL {
 
     // --- [ SDL_GetTextureColorModFloat ] ---
 
-    /** {@code _Bool SDL_GetTextureColorModFloat(SDL_Texture * texture, float * r, float * g, float * b)} */
+    /** {@code bool SDL_GetTextureColorModFloat(SDL_Texture * texture, float * r, float * g, float * b)} */
     public static boolean nSDL_GetTextureColorModFloat(long texture, long r, long g, long b) {
         long __functionAddress = Functions.GetTextureColorModFloat;
         return invokePPPPZ(texture, r, g, b, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetTextureColorModFloat(SDL_Texture * texture, float * r, float * g, float * b)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetTextureColorModFloat(SDL_Texture * texture, float * r, float * g, float * b)} */
+    @NativeType("bool")
     public static boolean SDL_GetTextureColorModFloat(@NativeType("SDL_Texture *") SDL_Texture texture, @NativeType("float *") FloatBuffer r, @NativeType("float *") FloatBuffer g, @NativeType("float *") FloatBuffer b) {
         if (CHECKS) {
             check(r, 1);
@@ -14557,42 +14557,42 @@ public class SDL {
 
     // --- [ SDL_SetTextureAlphaMod ] ---
 
-    /** {@code _Bool SDL_SetTextureAlphaMod(SDL_Texture * texture, Uint8 alpha)} */
+    /** {@code bool SDL_SetTextureAlphaMod(SDL_Texture * texture, Uint8 alpha)} */
     public static boolean nSDL_SetTextureAlphaMod(long texture, byte alpha) {
         long __functionAddress = Functions.SetTextureAlphaMod;
         return invokePUZ(texture, alpha, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetTextureAlphaMod(SDL_Texture * texture, Uint8 alpha)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetTextureAlphaMod(SDL_Texture * texture, Uint8 alpha)} */
+    @NativeType("bool")
     public static boolean SDL_SetTextureAlphaMod(@NativeType("SDL_Texture *") SDL_Texture texture, @NativeType("Uint8") byte alpha) {
         return nSDL_SetTextureAlphaMod(texture.address(), alpha);
     }
 
     // --- [ SDL_SetTextureAlphaModFloat ] ---
 
-    /** {@code _Bool SDL_SetTextureAlphaModFloat(SDL_Texture * texture, float alpha)} */
+    /** {@code bool SDL_SetTextureAlphaModFloat(SDL_Texture * texture, float alpha)} */
     public static boolean nSDL_SetTextureAlphaModFloat(long texture, float alpha) {
         long __functionAddress = Functions.SetTextureAlphaModFloat;
         return invokePZ(texture, alpha, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetTextureAlphaModFloat(SDL_Texture * texture, float alpha)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetTextureAlphaModFloat(SDL_Texture * texture, float alpha)} */
+    @NativeType("bool")
     public static boolean SDL_SetTextureAlphaModFloat(@NativeType("SDL_Texture *") SDL_Texture texture, float alpha) {
         return nSDL_SetTextureAlphaModFloat(texture.address(), alpha);
     }
 
     // --- [ SDL_GetTextureAlphaMod ] ---
 
-    /** {@code _Bool SDL_GetTextureAlphaMod(SDL_Texture * texture, Uint8 * alpha)} */
+    /** {@code bool SDL_GetTextureAlphaMod(SDL_Texture * texture, Uint8 * alpha)} */
     public static boolean nSDL_GetTextureAlphaMod(long texture, long alpha) {
         long __functionAddress = Functions.GetTextureAlphaMod;
         return invokePPZ(texture, alpha, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetTextureAlphaMod(SDL_Texture * texture, Uint8 * alpha)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetTextureAlphaMod(SDL_Texture * texture, Uint8 * alpha)} */
+    @NativeType("bool")
     public static boolean SDL_GetTextureAlphaMod(@NativeType("SDL_Texture *") SDL_Texture texture, @NativeType("Uint8 *") ByteBuffer alpha) {
         if (CHECKS) {
             check(alpha, 1);
@@ -14602,14 +14602,14 @@ public class SDL {
 
     // --- [ SDL_GetTextureAlphaModFloat ] ---
 
-    /** {@code _Bool SDL_GetTextureAlphaModFloat(SDL_Texture * texture, float * alpha)} */
+    /** {@code bool SDL_GetTextureAlphaModFloat(SDL_Texture * texture, float * alpha)} */
     public static boolean nSDL_GetTextureAlphaModFloat(long texture, long alpha) {
         long __functionAddress = Functions.GetTextureAlphaModFloat;
         return invokePPZ(texture, alpha, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetTextureAlphaModFloat(SDL_Texture * texture, float * alpha)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetTextureAlphaModFloat(SDL_Texture * texture, float * alpha)} */
+    @NativeType("bool")
     public static boolean SDL_GetTextureAlphaModFloat(@NativeType("SDL_Texture *") SDL_Texture texture, @NativeType("float *") FloatBuffer alpha) {
         if (CHECKS) {
             check(alpha, 1);
@@ -14619,28 +14619,28 @@ public class SDL {
 
     // --- [ SDL_SetTextureBlendMode ] ---
 
-    /** {@code _Bool SDL_SetTextureBlendMode(SDL_Texture * texture, SDL_BlendMode blendMode)} */
+    /** {@code bool SDL_SetTextureBlendMode(SDL_Texture * texture, SDL_BlendMode blendMode)} */
     public static boolean nSDL_SetTextureBlendMode(long texture, int blendMode) {
         long __functionAddress = Functions.SetTextureBlendMode;
         return invokePZ(texture, blendMode, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetTextureBlendMode(SDL_Texture * texture, SDL_BlendMode blendMode)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetTextureBlendMode(SDL_Texture * texture, SDL_BlendMode blendMode)} */
+    @NativeType("bool")
     public static boolean SDL_SetTextureBlendMode(@NativeType("SDL_Texture *") SDL_Texture texture, @NativeType("SDL_BlendMode") int blendMode) {
         return nSDL_SetTextureBlendMode(texture.address(), blendMode);
     }
 
     // --- [ SDL_GetTextureBlendMode ] ---
 
-    /** {@code _Bool SDL_GetTextureBlendMode(SDL_Texture * texture, SDL_BlendMode * blendMode)} */
+    /** {@code bool SDL_GetTextureBlendMode(SDL_Texture * texture, SDL_BlendMode * blendMode)} */
     public static boolean nSDL_GetTextureBlendMode(long texture, long blendMode) {
         long __functionAddress = Functions.GetTextureBlendMode;
         return invokePPZ(texture, blendMode, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetTextureBlendMode(SDL_Texture * texture, SDL_BlendMode * blendMode)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetTextureBlendMode(SDL_Texture * texture, SDL_BlendMode * blendMode)} */
+    @NativeType("bool")
     public static boolean SDL_GetTextureBlendMode(@NativeType("SDL_Texture *") SDL_Texture texture, @NativeType("SDL_BlendMode *") IntBuffer blendMode) {
         if (CHECKS) {
             check(blendMode, 1);
@@ -14650,28 +14650,28 @@ public class SDL {
 
     // --- [ SDL_SetTextureScaleMode ] ---
 
-    /** {@code _Bool SDL_SetTextureScaleMode(SDL_Texture * texture, SDL_ScaleMode scaleMode)} */
+    /** {@code bool SDL_SetTextureScaleMode(SDL_Texture * texture, SDL_ScaleMode scaleMode)} */
     public static boolean nSDL_SetTextureScaleMode(long texture, int scaleMode) {
         long __functionAddress = Functions.SetTextureScaleMode;
         return invokePZ(texture, scaleMode, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetTextureScaleMode(SDL_Texture * texture, SDL_ScaleMode scaleMode)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetTextureScaleMode(SDL_Texture * texture, SDL_ScaleMode scaleMode)} */
+    @NativeType("bool")
     public static boolean SDL_SetTextureScaleMode(@NativeType("SDL_Texture *") SDL_Texture texture, @NativeType("SDL_ScaleMode") int scaleMode) {
         return nSDL_SetTextureScaleMode(texture.address(), scaleMode);
     }
 
     // --- [ SDL_GetTextureScaleMode ] ---
 
-    /** {@code _Bool SDL_GetTextureScaleMode(SDL_Texture * texture, SDL_ScaleMode * scaleMode)} */
+    /** {@code bool SDL_GetTextureScaleMode(SDL_Texture * texture, SDL_ScaleMode * scaleMode)} */
     public static boolean nSDL_GetTextureScaleMode(long texture, long scaleMode) {
         long __functionAddress = Functions.GetTextureScaleMode;
         return invokePPZ(texture, scaleMode, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetTextureScaleMode(SDL_Texture * texture, SDL_ScaleMode * scaleMode)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetTextureScaleMode(SDL_Texture * texture, SDL_ScaleMode * scaleMode)} */
+    @NativeType("bool")
     public static boolean SDL_GetTextureScaleMode(@NativeType("SDL_Texture *") SDL_Texture texture, @NativeType("SDL_ScaleMode *") IntBuffer scaleMode) {
         if (CHECKS) {
             check(scaleMode, 1);
@@ -14681,14 +14681,14 @@ public class SDL {
 
     // --- [ SDL_UpdateTexture ] ---
 
-    /** {@code _Bool SDL_UpdateTexture(SDL_Texture * texture, SDL_Rect const * rect, void const * pixels, int pitch)} */
+    /** {@code bool SDL_UpdateTexture(SDL_Texture * texture, SDL_Rect const * rect, void const * pixels, int pitch)} */
     public static boolean nSDL_UpdateTexture(long texture, long rect, long pixels, int pitch) {
         long __functionAddress = Functions.UpdateTexture;
         return invokePPPZ(texture, rect, pixels, pitch, __functionAddress);
     }
 
-    /** {@code _Bool SDL_UpdateTexture(SDL_Texture * texture, SDL_Rect const * rect, void const * pixels, int pitch)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_UpdateTexture(SDL_Texture * texture, SDL_Rect const * rect, void const * pixels, int pitch)} */
+    @NativeType("bool")
     public static boolean SDL_UpdateTexture(@NativeType("SDL_Texture *") SDL_Texture texture, @NativeType("SDL_Rect const *") SDL_Rect.@Nullable Buffer rect, @NativeType("void const *") ByteBuffer pixels, int pitch) {
         if (CHECKS) {
             checkSafe(rect, 1);
@@ -14698,14 +14698,14 @@ public class SDL {
 
     // --- [ SDL_UpdateYUVTexture ] ---
 
-    /** {@code _Bool SDL_UpdateYUVTexture(SDL_Texture * texture, SDL_Rect const * rect, Uint8 const * Yplane, int Ypitch, Uint8 const * Uplane, int Upitch, Uint8 const * Vplane, int Vpitch)} */
+    /** {@code bool SDL_UpdateYUVTexture(SDL_Texture * texture, SDL_Rect const * rect, Uint8 const * Yplane, int Ypitch, Uint8 const * Uplane, int Upitch, Uint8 const * Vplane, int Vpitch)} */
     public static boolean nSDL_UpdateYUVTexture(long texture, long rect, long Yplane, int Ypitch, long Uplane, int Upitch, long Vplane, int Vpitch) {
         long __functionAddress = Functions.UpdateYUVTexture;
         return invokePPPPPZ(texture, rect, Yplane, Ypitch, Uplane, Upitch, Vplane, Vpitch, __functionAddress);
     }
 
-    /** {@code _Bool SDL_UpdateYUVTexture(SDL_Texture * texture, SDL_Rect const * rect, Uint8 const * Yplane, int Ypitch, Uint8 const * Uplane, int Upitch, Uint8 const * Vplane, int Vpitch)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_UpdateYUVTexture(SDL_Texture * texture, SDL_Rect const * rect, Uint8 const * Yplane, int Ypitch, Uint8 const * Uplane, int Upitch, Uint8 const * Vplane, int Vpitch)} */
+    @NativeType("bool")
     public static boolean SDL_UpdateYUVTexture(@NativeType("SDL_Texture *") SDL_Texture texture, @NativeType("SDL_Rect const *") SDL_Rect.@Nullable Buffer rect, @NativeType("Uint8 const *") ByteBuffer Yplane, int Ypitch, @NativeType("Uint8 const *") ByteBuffer Uplane, int Upitch, @NativeType("Uint8 const *") ByteBuffer Vplane, int Vpitch) {
         if (CHECKS) {
             checkSafe(rect, 1);
@@ -14715,14 +14715,14 @@ public class SDL {
 
     // --- [ SDL_UpdateNVTexture ] ---
 
-    /** {@code _Bool SDL_UpdateNVTexture(SDL_Texture * texture, SDL_Rect const * rect, Uint8 const * Yplane, int Ypitch, Uint8 const * UVplane, int UVpitch)} */
+    /** {@code bool SDL_UpdateNVTexture(SDL_Texture * texture, SDL_Rect const * rect, Uint8 const * Yplane, int Ypitch, Uint8 const * UVplane, int UVpitch)} */
     public static boolean nSDL_UpdateNVTexture(long texture, long rect, long Yplane, int Ypitch, long UVplane, int UVpitch) {
         long __functionAddress = Functions.UpdateNVTexture;
         return invokePPPPZ(texture, rect, Yplane, Ypitch, UVplane, UVpitch, __functionAddress);
     }
 
-    /** {@code _Bool SDL_UpdateNVTexture(SDL_Texture * texture, SDL_Rect const * rect, Uint8 const * Yplane, int Ypitch, Uint8 const * UVplane, int UVpitch)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_UpdateNVTexture(SDL_Texture * texture, SDL_Rect const * rect, Uint8 const * Yplane, int Ypitch, Uint8 const * UVplane, int UVpitch)} */
+    @NativeType("bool")
     public static boolean SDL_UpdateNVTexture(@NativeType("SDL_Texture *") SDL_Texture texture, @NativeType("SDL_Rect const *") SDL_Rect.@Nullable Buffer rect, @NativeType("Uint8 const *") ByteBuffer Yplane, int Ypitch, @NativeType("Uint8 const *") ByteBuffer UVplane, int UVpitch) {
         if (CHECKS) {
             checkSafe(rect, 1);
@@ -14732,14 +14732,14 @@ public class SDL {
 
     // --- [ SDL_LockTexture ] ---
 
-    /** {@code _Bool SDL_LockTexture(SDL_Texture * texture, SDL_Rect const * rect, void ** pixels, int * pitch)} */
+    /** {@code bool SDL_LockTexture(SDL_Texture * texture, SDL_Rect const * rect, void ** pixels, int * pitch)} */
     public static boolean nSDL_LockTexture(long texture, long rect, long pixels, long pitch) {
         long __functionAddress = Functions.LockTexture;
         return invokePPPPZ(texture, rect, pixels, pitch, __functionAddress);
     }
 
-    /** {@code _Bool SDL_LockTexture(SDL_Texture * texture, SDL_Rect const * rect, void ** pixels, int * pitch)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_LockTexture(SDL_Texture * texture, SDL_Rect const * rect, void ** pixels, int * pitch)} */
+    @NativeType("bool")
     public static boolean SDL_LockTexture(@NativeType("SDL_Texture *") SDL_Texture texture, @NativeType("SDL_Rect const *") SDL_Rect.@Nullable Buffer rect, @NativeType("void **") PointerBuffer pixels, @NativeType("int *") IntBuffer pitch) {
         if (CHECKS) {
             checkSafe(rect, 1);
@@ -14751,14 +14751,14 @@ public class SDL {
 
     // --- [ SDL_LockTextureToSurface ] ---
 
-    /** {@code _Bool SDL_LockTextureToSurface(SDL_Texture * texture, SDL_Rect const * rect, SDL_Surface ** surface)} */
+    /** {@code bool SDL_LockTextureToSurface(SDL_Texture * texture, SDL_Rect const * rect, SDL_Surface ** surface)} */
     public static boolean nSDL_LockTextureToSurface(long texture, long rect, long surface) {
         long __functionAddress = Functions.LockTextureToSurface;
         return invokePPPZ(texture, rect, surface, __functionAddress);
     }
 
-    /** {@code _Bool SDL_LockTextureToSurface(SDL_Texture * texture, SDL_Rect const * rect, SDL_Surface ** surface)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_LockTextureToSurface(SDL_Texture * texture, SDL_Rect const * rect, SDL_Surface ** surface)} */
+    @NativeType("bool")
     public static boolean SDL_LockTextureToSurface(@NativeType("SDL_Texture *") SDL_Texture texture, @NativeType("SDL_Rect const *") SDL_Rect.@Nullable Buffer rect, @NativeType("SDL_Surface **") PointerBuffer surface) {
         if (CHECKS) {
             checkSafe(rect, 1);
@@ -14782,7 +14782,7 @@ public class SDL {
 
     // --- [ SDL_SetRenderTarget ] ---
 
-    /** {@code _Bool SDL_SetRenderTarget(SDL_Renderer * renderer, SDL_Texture * texture)} */
+    /** {@code bool SDL_SetRenderTarget(SDL_Renderer * renderer, SDL_Texture * texture)} */
     public static boolean nSDL_SetRenderTarget(long renderer, long texture) {
         long __functionAddress = Functions.SetRenderTarget;
         if (CHECKS) {
@@ -14791,8 +14791,8 @@ public class SDL {
         return invokePPZ(renderer, texture, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetRenderTarget(SDL_Renderer * renderer, SDL_Texture * texture)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetRenderTarget(SDL_Renderer * renderer, SDL_Texture * texture)} */
+    @NativeType("bool")
     public static boolean SDL_SetRenderTarget(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_Texture *") SDL_Texture.@Nullable Buffer texture) {
         if (CHECKS) {
             checkSafe(texture, 1);
@@ -14820,8 +14820,8 @@ public class SDL {
 
     // --- [ SDL_SetRenderLogicalPresentation ] ---
 
-    /** {@code _Bool SDL_SetRenderLogicalPresentation(SDL_Renderer * renderer, int w, int h, SDL_RendererLogicalPresentation mode)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetRenderLogicalPresentation(SDL_Renderer * renderer, int w, int h, SDL_RendererLogicalPresentation mode)} */
+    @NativeType("bool")
     public static boolean SDL_SetRenderLogicalPresentation(@NativeType("SDL_Renderer *") long renderer, int w, int h, @NativeType("SDL_RendererLogicalPresentation") int mode) {
         long __functionAddress = Functions.SetRenderLogicalPresentation;
         if (CHECKS) {
@@ -14832,7 +14832,7 @@ public class SDL {
 
     // --- [ SDL_GetRenderLogicalPresentation ] ---
 
-    /** {@code _Bool SDL_GetRenderLogicalPresentation(SDL_Renderer * renderer, int * w, int * h, SDL_RendererLogicalPresentation * mode)} */
+    /** {@code bool SDL_GetRenderLogicalPresentation(SDL_Renderer * renderer, int * w, int * h, SDL_RendererLogicalPresentation * mode)} */
     public static boolean nSDL_GetRenderLogicalPresentation(long renderer, long w, long h, long mode) {
         long __functionAddress = Functions.GetRenderLogicalPresentation;
         if (CHECKS) {
@@ -14841,8 +14841,8 @@ public class SDL {
         return invokePPPPZ(renderer, w, h, mode, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetRenderLogicalPresentation(SDL_Renderer * renderer, int * w, int * h, SDL_RendererLogicalPresentation * mode)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetRenderLogicalPresentation(SDL_Renderer * renderer, int * w, int * h, SDL_RendererLogicalPresentation * mode)} */
+    @NativeType("bool")
     public static boolean SDL_GetRenderLogicalPresentation(@NativeType("SDL_Renderer *") long renderer, @NativeType("int *") IntBuffer w, @NativeType("int *") IntBuffer h, @NativeType("SDL_RendererLogicalPresentation *") IntBuffer mode) {
         if (CHECKS) {
             check(w, 1);
@@ -14854,7 +14854,7 @@ public class SDL {
 
     // --- [ SDL_GetRenderLogicalPresentationRect ] ---
 
-    /** {@code _Bool SDL_GetRenderLogicalPresentationRect(SDL_Renderer * renderer, SDL_FRect * rect)} */
+    /** {@code bool SDL_GetRenderLogicalPresentationRect(SDL_Renderer * renderer, SDL_FRect * rect)} */
     public static boolean nSDL_GetRenderLogicalPresentationRect(long renderer, long rect) {
         long __functionAddress = Functions.GetRenderLogicalPresentationRect;
         if (CHECKS) {
@@ -14863,8 +14863,8 @@ public class SDL {
         return invokePPZ(renderer, rect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetRenderLogicalPresentationRect(SDL_Renderer * renderer, SDL_FRect * rect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetRenderLogicalPresentationRect(SDL_Renderer * renderer, SDL_FRect * rect)} */
+    @NativeType("bool")
     public static boolean SDL_GetRenderLogicalPresentationRect(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_FRect *") SDL_FRect.Buffer rect) {
         if (CHECKS) {
             check(rect, 1);
@@ -14874,7 +14874,7 @@ public class SDL {
 
     // --- [ SDL_RenderCoordinatesFromWindow ] ---
 
-    /** {@code _Bool SDL_RenderCoordinatesFromWindow(SDL_Renderer * renderer, float window_x, float window_y, float * x, float * y)} */
+    /** {@code bool SDL_RenderCoordinatesFromWindow(SDL_Renderer * renderer, float window_x, float window_y, float * x, float * y)} */
     public static boolean nSDL_RenderCoordinatesFromWindow(long renderer, float window_x, float window_y, long x, long y) {
         long __functionAddress = Functions.RenderCoordinatesFromWindow;
         if (CHECKS) {
@@ -14883,8 +14883,8 @@ public class SDL {
         return invokePPPZ(renderer, window_x, window_y, x, y, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RenderCoordinatesFromWindow(SDL_Renderer * renderer, float window_x, float window_y, float * x, float * y)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderCoordinatesFromWindow(SDL_Renderer * renderer, float window_x, float window_y, float * x, float * y)} */
+    @NativeType("bool")
     public static boolean SDL_RenderCoordinatesFromWindow(@NativeType("SDL_Renderer *") long renderer, float window_x, float window_y, @NativeType("float *") FloatBuffer x, @NativeType("float *") FloatBuffer y) {
         if (CHECKS) {
             check(x, 1);
@@ -14895,7 +14895,7 @@ public class SDL {
 
     // --- [ SDL_RenderCoordinatesToWindow ] ---
 
-    /** {@code _Bool SDL_RenderCoordinatesToWindow(SDL_Renderer * renderer, float x, float y, float * window_x, float * window_y)} */
+    /** {@code bool SDL_RenderCoordinatesToWindow(SDL_Renderer * renderer, float x, float y, float * window_x, float * window_y)} */
     public static boolean nSDL_RenderCoordinatesToWindow(long renderer, float x, float y, long window_x, long window_y) {
         long __functionAddress = Functions.RenderCoordinatesToWindow;
         if (CHECKS) {
@@ -14904,8 +14904,8 @@ public class SDL {
         return invokePPPZ(renderer, x, y, window_x, window_y, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RenderCoordinatesToWindow(SDL_Renderer * renderer, float x, float y, float * window_x, float * window_y)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderCoordinatesToWindow(SDL_Renderer * renderer, float x, float y, float * window_x, float * window_y)} */
+    @NativeType("bool")
     public static boolean SDL_RenderCoordinatesToWindow(@NativeType("SDL_Renderer *") long renderer, float x, float y, @NativeType("float *") FloatBuffer window_x, @NativeType("float *") FloatBuffer window_y) {
         if (CHECKS) {
             check(window_x, 1);
@@ -14916,7 +14916,7 @@ public class SDL {
 
     // --- [ SDL_ConvertEventToRenderCoordinates ] ---
 
-    /** {@code _Bool SDL_ConvertEventToRenderCoordinates(SDL_Renderer * renderer, SDL_Event * event)} */
+    /** {@code bool SDL_ConvertEventToRenderCoordinates(SDL_Renderer * renderer, SDL_Event * event)} */
     public static boolean nSDL_ConvertEventToRenderCoordinates(long renderer, long event) {
         long __functionAddress = Functions.ConvertEventToRenderCoordinates;
         if (CHECKS) {
@@ -14925,8 +14925,8 @@ public class SDL {
         return invokePPZ(renderer, event, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ConvertEventToRenderCoordinates(SDL_Renderer * renderer, SDL_Event * event)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ConvertEventToRenderCoordinates(SDL_Renderer * renderer, SDL_Event * event)} */
+    @NativeType("bool")
     public static boolean SDL_ConvertEventToRenderCoordinates(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_Event *") SDL_Event.Buffer event) {
         if (CHECKS) {
             check(event, 1);
@@ -14936,7 +14936,7 @@ public class SDL {
 
     // --- [ SDL_SetRenderViewport ] ---
 
-    /** {@code _Bool SDL_SetRenderViewport(SDL_Renderer * renderer, SDL_Rect const * rect)} */
+    /** {@code bool SDL_SetRenderViewport(SDL_Renderer * renderer, SDL_Rect const * rect)} */
     public static boolean nSDL_SetRenderViewport(long renderer, long rect) {
         long __functionAddress = Functions.SetRenderViewport;
         if (CHECKS) {
@@ -14945,8 +14945,8 @@ public class SDL {
         return invokePPZ(renderer, rect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetRenderViewport(SDL_Renderer * renderer, SDL_Rect const * rect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetRenderViewport(SDL_Renderer * renderer, SDL_Rect const * rect)} */
+    @NativeType("bool")
     public static boolean SDL_SetRenderViewport(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_Rect const *") SDL_Rect.@Nullable Buffer rect) {
         if (CHECKS) {
             checkSafe(rect, 1);
@@ -14956,7 +14956,7 @@ public class SDL {
 
     // --- [ SDL_GetRenderViewport ] ---
 
-    /** {@code _Bool SDL_GetRenderViewport(SDL_Renderer * renderer, SDL_Rect * rect)} */
+    /** {@code bool SDL_GetRenderViewport(SDL_Renderer * renderer, SDL_Rect * rect)} */
     public static boolean nSDL_GetRenderViewport(long renderer, long rect) {
         long __functionAddress = Functions.GetRenderViewport;
         if (CHECKS) {
@@ -14965,8 +14965,8 @@ public class SDL {
         return invokePPZ(renderer, rect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetRenderViewport(SDL_Renderer * renderer, SDL_Rect * rect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetRenderViewport(SDL_Renderer * renderer, SDL_Rect * rect)} */
+    @NativeType("bool")
     public static boolean SDL_GetRenderViewport(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_Rect *") SDL_Rect.Buffer rect) {
         if (CHECKS) {
             check(rect, 1);
@@ -14976,8 +14976,8 @@ public class SDL {
 
     // --- [ SDL_RenderViewportSet ] ---
 
-    /** {@code _Bool SDL_RenderViewportSet(SDL_Renderer * renderer)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderViewportSet(SDL_Renderer * renderer)} */
+    @NativeType("bool")
     public static boolean SDL_RenderViewportSet(@NativeType("SDL_Renderer *") long renderer) {
         long __functionAddress = Functions.RenderViewportSet;
         if (CHECKS) {
@@ -14988,7 +14988,7 @@ public class SDL {
 
     // --- [ SDL_GetRenderSafeArea ] ---
 
-    /** {@code _Bool SDL_GetRenderSafeArea(SDL_Renderer * renderer, SDL_Rect * rect)} */
+    /** {@code bool SDL_GetRenderSafeArea(SDL_Renderer * renderer, SDL_Rect * rect)} */
     public static boolean nSDL_GetRenderSafeArea(long renderer, long rect) {
         long __functionAddress = Functions.GetRenderSafeArea;
         if (CHECKS) {
@@ -14997,8 +14997,8 @@ public class SDL {
         return invokePPZ(renderer, rect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetRenderSafeArea(SDL_Renderer * renderer, SDL_Rect * rect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetRenderSafeArea(SDL_Renderer * renderer, SDL_Rect * rect)} */
+    @NativeType("bool")
     public static boolean SDL_GetRenderSafeArea(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_Rect *") SDL_Rect.Buffer rect) {
         if (CHECKS) {
             check(rect, 1);
@@ -15008,7 +15008,7 @@ public class SDL {
 
     // --- [ SDL_SetRenderClipRect ] ---
 
-    /** {@code _Bool SDL_SetRenderClipRect(SDL_Renderer * renderer, SDL_Rect const * rect)} */
+    /** {@code bool SDL_SetRenderClipRect(SDL_Renderer * renderer, SDL_Rect const * rect)} */
     public static boolean nSDL_SetRenderClipRect(long renderer, long rect) {
         long __functionAddress = Functions.SetRenderClipRect;
         if (CHECKS) {
@@ -15017,8 +15017,8 @@ public class SDL {
         return invokePPZ(renderer, rect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetRenderClipRect(SDL_Renderer * renderer, SDL_Rect const * rect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetRenderClipRect(SDL_Renderer * renderer, SDL_Rect const * rect)} */
+    @NativeType("bool")
     public static boolean SDL_SetRenderClipRect(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_Rect const *") SDL_Rect.@Nullable Buffer rect) {
         if (CHECKS) {
             checkSafe(rect, 1);
@@ -15028,7 +15028,7 @@ public class SDL {
 
     // --- [ SDL_GetRenderClipRect ] ---
 
-    /** {@code _Bool SDL_GetRenderClipRect(SDL_Renderer * renderer, SDL_Rect * rect)} */
+    /** {@code bool SDL_GetRenderClipRect(SDL_Renderer * renderer, SDL_Rect * rect)} */
     public static boolean nSDL_GetRenderClipRect(long renderer, long rect) {
         long __functionAddress = Functions.GetRenderClipRect;
         if (CHECKS) {
@@ -15037,8 +15037,8 @@ public class SDL {
         return invokePPZ(renderer, rect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetRenderClipRect(SDL_Renderer * renderer, SDL_Rect * rect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetRenderClipRect(SDL_Renderer * renderer, SDL_Rect * rect)} */
+    @NativeType("bool")
     public static boolean SDL_GetRenderClipRect(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_Rect *") SDL_Rect.Buffer rect) {
         if (CHECKS) {
             check(rect, 1);
@@ -15048,8 +15048,8 @@ public class SDL {
 
     // --- [ SDL_RenderClipEnabled ] ---
 
-    /** {@code _Bool SDL_RenderClipEnabled(SDL_Renderer * renderer)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderClipEnabled(SDL_Renderer * renderer)} */
+    @NativeType("bool")
     public static boolean SDL_RenderClipEnabled(@NativeType("SDL_Renderer *") long renderer) {
         long __functionAddress = Functions.RenderClipEnabled;
         if (CHECKS) {
@@ -15060,8 +15060,8 @@ public class SDL {
 
     // --- [ SDL_SetRenderScale ] ---
 
-    /** {@code _Bool SDL_SetRenderScale(SDL_Renderer * renderer, float scaleX, float scaleY)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetRenderScale(SDL_Renderer * renderer, float scaleX, float scaleY)} */
+    @NativeType("bool")
     public static boolean SDL_SetRenderScale(@NativeType("SDL_Renderer *") long renderer, float scaleX, float scaleY) {
         long __functionAddress = Functions.SetRenderScale;
         if (CHECKS) {
@@ -15072,7 +15072,7 @@ public class SDL {
 
     // --- [ SDL_GetRenderScale ] ---
 
-    /** {@code _Bool SDL_GetRenderScale(SDL_Renderer * renderer, float * scaleX, float * scaleY)} */
+    /** {@code bool SDL_GetRenderScale(SDL_Renderer * renderer, float * scaleX, float * scaleY)} */
     public static boolean nSDL_GetRenderScale(long renderer, long scaleX, long scaleY) {
         long __functionAddress = Functions.GetRenderScale;
         if (CHECKS) {
@@ -15081,8 +15081,8 @@ public class SDL {
         return invokePPPZ(renderer, scaleX, scaleY, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetRenderScale(SDL_Renderer * renderer, float * scaleX, float * scaleY)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetRenderScale(SDL_Renderer * renderer, float * scaleX, float * scaleY)} */
+    @NativeType("bool")
     public static boolean SDL_GetRenderScale(@NativeType("SDL_Renderer *") long renderer, @NativeType("float *") FloatBuffer scaleX, @NativeType("float *") FloatBuffer scaleY) {
         if (CHECKS) {
             check(scaleX, 1);
@@ -15093,8 +15093,8 @@ public class SDL {
 
     // --- [ SDL_SetRenderDrawColor ] ---
 
-    /** {@code _Bool SDL_SetRenderDrawColor(SDL_Renderer * renderer, Uint8 r, Uint8 g, Uint8 b, Uint8 a)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetRenderDrawColor(SDL_Renderer * renderer, Uint8 r, Uint8 g, Uint8 b, Uint8 a)} */
+    @NativeType("bool")
     public static boolean SDL_SetRenderDrawColor(@NativeType("SDL_Renderer *") long renderer, @NativeType("Uint8") byte r, @NativeType("Uint8") byte g, @NativeType("Uint8") byte b, @NativeType("Uint8") byte a) {
         long __functionAddress = Functions.SetRenderDrawColor;
         if (CHECKS) {
@@ -15105,8 +15105,8 @@ public class SDL {
 
     // --- [ SDL_SetRenderDrawColorFloat ] ---
 
-    /** {@code _Bool SDL_SetRenderDrawColorFloat(SDL_Renderer * renderer, float r, float g, float b, float a)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetRenderDrawColorFloat(SDL_Renderer * renderer, float r, float g, float b, float a)} */
+    @NativeType("bool")
     public static boolean SDL_SetRenderDrawColorFloat(@NativeType("SDL_Renderer *") long renderer, float r, float g, float b, float a) {
         long __functionAddress = Functions.SetRenderDrawColorFloat;
         if (CHECKS) {
@@ -15117,7 +15117,7 @@ public class SDL {
 
     // --- [ SDL_GetRenderDrawColor ] ---
 
-    /** {@code _Bool SDL_GetRenderDrawColor(SDL_Renderer * renderer, Uint8 * r, Uint8 * g, Uint8 * b, Uint8 * a)} */
+    /** {@code bool SDL_GetRenderDrawColor(SDL_Renderer * renderer, Uint8 * r, Uint8 * g, Uint8 * b, Uint8 * a)} */
     public static boolean nSDL_GetRenderDrawColor(long renderer, long r, long g, long b, long a) {
         long __functionAddress = Functions.GetRenderDrawColor;
         if (CHECKS) {
@@ -15126,8 +15126,8 @@ public class SDL {
         return invokePPPPPZ(renderer, r, g, b, a, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetRenderDrawColor(SDL_Renderer * renderer, Uint8 * r, Uint8 * g, Uint8 * b, Uint8 * a)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetRenderDrawColor(SDL_Renderer * renderer, Uint8 * r, Uint8 * g, Uint8 * b, Uint8 * a)} */
+    @NativeType("bool")
     public static boolean SDL_GetRenderDrawColor(@NativeType("SDL_Renderer *") long renderer, @NativeType("Uint8 *") ByteBuffer r, @NativeType("Uint8 *") ByteBuffer g, @NativeType("Uint8 *") ByteBuffer b, @NativeType("Uint8 *") ByteBuffer a) {
         if (CHECKS) {
             check(r, 1);
@@ -15140,7 +15140,7 @@ public class SDL {
 
     // --- [ SDL_GetRenderDrawColorFloat ] ---
 
-    /** {@code _Bool SDL_GetRenderDrawColorFloat(SDL_Renderer * renderer, float * r, float * g, float * b, float * a)} */
+    /** {@code bool SDL_GetRenderDrawColorFloat(SDL_Renderer * renderer, float * r, float * g, float * b, float * a)} */
     public static boolean nSDL_GetRenderDrawColorFloat(long renderer, long r, long g, long b, long a) {
         long __functionAddress = Functions.GetRenderDrawColorFloat;
         if (CHECKS) {
@@ -15149,8 +15149,8 @@ public class SDL {
         return invokePPPPPZ(renderer, r, g, b, a, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetRenderDrawColorFloat(SDL_Renderer * renderer, float * r, float * g, float * b, float * a)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetRenderDrawColorFloat(SDL_Renderer * renderer, float * r, float * g, float * b, float * a)} */
+    @NativeType("bool")
     public static boolean SDL_GetRenderDrawColorFloat(@NativeType("SDL_Renderer *") long renderer, @NativeType("float *") FloatBuffer r, @NativeType("float *") FloatBuffer g, @NativeType("float *") FloatBuffer b, @NativeType("float *") FloatBuffer a) {
         if (CHECKS) {
             check(r, 1);
@@ -15163,8 +15163,8 @@ public class SDL {
 
     // --- [ SDL_SetRenderColorScale ] ---
 
-    /** {@code _Bool SDL_SetRenderColorScale(SDL_Renderer * renderer, float scale)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetRenderColorScale(SDL_Renderer * renderer, float scale)} */
+    @NativeType("bool")
     public static boolean SDL_SetRenderColorScale(@NativeType("SDL_Renderer *") long renderer, float scale) {
         long __functionAddress = Functions.SetRenderColorScale;
         if (CHECKS) {
@@ -15175,7 +15175,7 @@ public class SDL {
 
     // --- [ SDL_GetRenderColorScale ] ---
 
-    /** {@code _Bool SDL_GetRenderColorScale(SDL_Renderer * renderer, float * scale)} */
+    /** {@code bool SDL_GetRenderColorScale(SDL_Renderer * renderer, float * scale)} */
     public static boolean nSDL_GetRenderColorScale(long renderer, long scale) {
         long __functionAddress = Functions.GetRenderColorScale;
         if (CHECKS) {
@@ -15184,8 +15184,8 @@ public class SDL {
         return invokePPZ(renderer, scale, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetRenderColorScale(SDL_Renderer * renderer, float * scale)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetRenderColorScale(SDL_Renderer * renderer, float * scale)} */
+    @NativeType("bool")
     public static boolean SDL_GetRenderColorScale(@NativeType("SDL_Renderer *") long renderer, @NativeType("float *") FloatBuffer scale) {
         if (CHECKS) {
             check(scale, 1);
@@ -15195,8 +15195,8 @@ public class SDL {
 
     // --- [ SDL_SetRenderDrawBlendMode ] ---
 
-    /** {@code _Bool SDL_SetRenderDrawBlendMode(SDL_Renderer * renderer, SDL_BlendMode blendMode)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetRenderDrawBlendMode(SDL_Renderer * renderer, SDL_BlendMode blendMode)} */
+    @NativeType("bool")
     public static boolean SDL_SetRenderDrawBlendMode(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_BlendMode") int blendMode) {
         long __functionAddress = Functions.SetRenderDrawBlendMode;
         if (CHECKS) {
@@ -15207,7 +15207,7 @@ public class SDL {
 
     // --- [ SDL_GetRenderDrawBlendMode ] ---
 
-    /** {@code _Bool SDL_GetRenderDrawBlendMode(SDL_Renderer * renderer, SDL_BlendMode * blendMode)} */
+    /** {@code bool SDL_GetRenderDrawBlendMode(SDL_Renderer * renderer, SDL_BlendMode * blendMode)} */
     public static boolean nSDL_GetRenderDrawBlendMode(long renderer, long blendMode) {
         long __functionAddress = Functions.GetRenderDrawBlendMode;
         if (CHECKS) {
@@ -15216,8 +15216,8 @@ public class SDL {
         return invokePPZ(renderer, blendMode, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetRenderDrawBlendMode(SDL_Renderer * renderer, SDL_BlendMode * blendMode)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetRenderDrawBlendMode(SDL_Renderer * renderer, SDL_BlendMode * blendMode)} */
+    @NativeType("bool")
     public static boolean SDL_GetRenderDrawBlendMode(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_BlendMode *") IntBuffer blendMode) {
         if (CHECKS) {
             check(blendMode, 1);
@@ -15227,8 +15227,8 @@ public class SDL {
 
     // --- [ SDL_RenderClear ] ---
 
-    /** {@code _Bool SDL_RenderClear(SDL_Renderer * renderer)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderClear(SDL_Renderer * renderer)} */
+    @NativeType("bool")
     public static boolean SDL_RenderClear(@NativeType("SDL_Renderer *") long renderer) {
         long __functionAddress = Functions.RenderClear;
         if (CHECKS) {
@@ -15239,8 +15239,8 @@ public class SDL {
 
     // --- [ SDL_RenderPoint ] ---
 
-    /** {@code _Bool SDL_RenderPoint(SDL_Renderer * renderer, float x, float y)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderPoint(SDL_Renderer * renderer, float x, float y)} */
+    @NativeType("bool")
     public static boolean SDL_RenderPoint(@NativeType("SDL_Renderer *") long renderer, float x, float y) {
         long __functionAddress = Functions.RenderPoint;
         if (CHECKS) {
@@ -15251,7 +15251,7 @@ public class SDL {
 
     // --- [ SDL_RenderPoints ] ---
 
-    /** {@code _Bool SDL_RenderPoints(SDL_Renderer * renderer, SDL_FPoint const * points, int count)} */
+    /** {@code bool SDL_RenderPoints(SDL_Renderer * renderer, SDL_FPoint const * points, int count)} */
     public static boolean nSDL_RenderPoints(long renderer, long points, int count) {
         long __functionAddress = Functions.RenderPoints;
         if (CHECKS) {
@@ -15260,16 +15260,16 @@ public class SDL {
         return invokePPZ(renderer, points, count, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RenderPoints(SDL_Renderer * renderer, SDL_FPoint const * points, int count)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderPoints(SDL_Renderer * renderer, SDL_FPoint const * points, int count)} */
+    @NativeType("bool")
     public static boolean SDL_RenderPoints(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_FPoint const *") SDL_FPoint.Buffer points) {
         return nSDL_RenderPoints(renderer, points.address(), points.remaining());
     }
 
     // --- [ SDL_RenderLine ] ---
 
-    /** {@code _Bool SDL_RenderLine(SDL_Renderer * renderer, float x1, float y1, float x2, float y2)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderLine(SDL_Renderer * renderer, float x1, float y1, float x2, float y2)} */
+    @NativeType("bool")
     public static boolean SDL_RenderLine(@NativeType("SDL_Renderer *") long renderer, float x1, float y1, float x2, float y2) {
         long __functionAddress = Functions.RenderLine;
         if (CHECKS) {
@@ -15280,7 +15280,7 @@ public class SDL {
 
     // --- [ SDL_RenderLines ] ---
 
-    /** {@code _Bool SDL_RenderLines(SDL_Renderer * renderer, SDL_FPoint const * points, int count)} */
+    /** {@code bool SDL_RenderLines(SDL_Renderer * renderer, SDL_FPoint const * points, int count)} */
     public static boolean nSDL_RenderLines(long renderer, long points, int count) {
         long __functionAddress = Functions.RenderLines;
         if (CHECKS) {
@@ -15289,15 +15289,15 @@ public class SDL {
         return invokePPZ(renderer, points, count, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RenderLines(SDL_Renderer * renderer, SDL_FPoint const * points, int count)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderLines(SDL_Renderer * renderer, SDL_FPoint const * points, int count)} */
+    @NativeType("bool")
     public static boolean SDL_RenderLines(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_FPoint const *") SDL_FPoint.Buffer points) {
         return nSDL_RenderLines(renderer, points.address(), points.remaining());
     }
 
     // --- [ SDL_RenderRect ] ---
 
-    /** {@code _Bool SDL_RenderRect(SDL_Renderer * renderer, SDL_FRect const * rect)} */
+    /** {@code bool SDL_RenderRect(SDL_Renderer * renderer, SDL_FRect const * rect)} */
     public static boolean nSDL_RenderRect(long renderer, long rect) {
         long __functionAddress = Functions.RenderRect;
         if (CHECKS) {
@@ -15306,8 +15306,8 @@ public class SDL {
         return invokePPZ(renderer, rect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RenderRect(SDL_Renderer * renderer, SDL_FRect const * rect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderRect(SDL_Renderer * renderer, SDL_FRect const * rect)} */
+    @NativeType("bool")
     public static boolean SDL_RenderRect(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_FRect const *") SDL_FRect.Buffer rect) {
         if (CHECKS) {
             check(rect, 1);
@@ -15317,7 +15317,7 @@ public class SDL {
 
     // --- [ SDL_RenderRects ] ---
 
-    /** {@code _Bool SDL_RenderRects(SDL_Renderer * renderer, SDL_FRect const * rects, int count)} */
+    /** {@code bool SDL_RenderRects(SDL_Renderer * renderer, SDL_FRect const * rects, int count)} */
     public static boolean nSDL_RenderRects(long renderer, long rects, int count) {
         long __functionAddress = Functions.RenderRects;
         if (CHECKS) {
@@ -15326,15 +15326,15 @@ public class SDL {
         return invokePPZ(renderer, rects, count, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RenderRects(SDL_Renderer * renderer, SDL_FRect const * rects, int count)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderRects(SDL_Renderer * renderer, SDL_FRect const * rects, int count)} */
+    @NativeType("bool")
     public static boolean SDL_RenderRects(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_FRect const *") SDL_FRect.Buffer rects) {
         return nSDL_RenderRects(renderer, rects.address(), rects.remaining());
     }
 
     // --- [ SDL_RenderFillRect ] ---
 
-    /** {@code _Bool SDL_RenderFillRect(SDL_Renderer * renderer, SDL_FRect const * rect)} */
+    /** {@code bool SDL_RenderFillRect(SDL_Renderer * renderer, SDL_FRect const * rect)} */
     public static boolean nSDL_RenderFillRect(long renderer, long rect) {
         long __functionAddress = Functions.RenderFillRect;
         if (CHECKS) {
@@ -15343,8 +15343,8 @@ public class SDL {
         return invokePPZ(renderer, rect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RenderFillRect(SDL_Renderer * renderer, SDL_FRect const * rect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderFillRect(SDL_Renderer * renderer, SDL_FRect const * rect)} */
+    @NativeType("bool")
     public static boolean SDL_RenderFillRect(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_FRect const *") SDL_FRect.Buffer rect) {
         if (CHECKS) {
             check(rect, 1);
@@ -15354,7 +15354,7 @@ public class SDL {
 
     // --- [ SDL_RenderFillRects ] ---
 
-    /** {@code _Bool SDL_RenderFillRects(SDL_Renderer * renderer, SDL_FRect const * rects, int count)} */
+    /** {@code bool SDL_RenderFillRects(SDL_Renderer * renderer, SDL_FRect const * rects, int count)} */
     public static boolean nSDL_RenderFillRects(long renderer, long rects, int count) {
         long __functionAddress = Functions.RenderFillRects;
         if (CHECKS) {
@@ -15363,15 +15363,15 @@ public class SDL {
         return invokePPZ(renderer, rects, count, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RenderFillRects(SDL_Renderer * renderer, SDL_FRect const * rects, int count)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderFillRects(SDL_Renderer * renderer, SDL_FRect const * rects, int count)} */
+    @NativeType("bool")
     public static boolean SDL_RenderFillRects(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_FRect const *") SDL_FRect.Buffer rects) {
         return nSDL_RenderFillRects(renderer, rects.address(), rects.remaining());
     }
 
     // --- [ SDL_RenderTexture ] ---
 
-    /** {@code _Bool SDL_RenderTexture(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, SDL_FRect const * dstrect)} */
+    /** {@code bool SDL_RenderTexture(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, SDL_FRect const * dstrect)} */
     public static boolean nSDL_RenderTexture(long renderer, long texture, long srcrect, long dstrect) {
         long __functionAddress = Functions.RenderTexture;
         if (CHECKS) {
@@ -15380,8 +15380,8 @@ public class SDL {
         return invokePPPPZ(renderer, texture, srcrect, dstrect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RenderTexture(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, SDL_FRect const * dstrect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderTexture(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, SDL_FRect const * dstrect)} */
+    @NativeType("bool")
     public static boolean SDL_RenderTexture(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_Texture *") SDL_Texture.Buffer texture, @NativeType("SDL_FRect const *") SDL_FRect.@Nullable Buffer srcrect, @NativeType("SDL_FRect const *") SDL_FRect.@Nullable Buffer dstrect) {
         if (CHECKS) {
             check(texture, 1);
@@ -15393,7 +15393,7 @@ public class SDL {
 
     // --- [ SDL_RenderTextureRotated ] ---
 
-    /** {@code _Bool SDL_RenderTextureRotated(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, SDL_FRect const * dstrect, double angle, SDL_FPoint const * center, SDL_FlipMode flip)} */
+    /** {@code bool SDL_RenderTextureRotated(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, SDL_FRect const * dstrect, double angle, SDL_FPoint const * center, SDL_FlipMode flip)} */
     public static boolean nSDL_RenderTextureRotated(long renderer, long texture, long srcrect, long dstrect, double angle, long center, int flip) {
         long __functionAddress = Functions.RenderTextureRotated;
         if (CHECKS) {
@@ -15402,8 +15402,8 @@ public class SDL {
         return invokePPPPPZ(renderer, texture, srcrect, dstrect, angle, center, flip, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RenderTextureRotated(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, SDL_FRect const * dstrect, double angle, SDL_FPoint const * center, SDL_FlipMode flip)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderTextureRotated(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, SDL_FRect const * dstrect, double angle, SDL_FPoint const * center, SDL_FlipMode flip)} */
+    @NativeType("bool")
     public static boolean SDL_RenderTextureRotated(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_Texture *") SDL_Texture.Buffer texture, @NativeType("SDL_FRect const *") SDL_FRect.@Nullable Buffer srcrect, @NativeType("SDL_FRect const *") SDL_FRect.@Nullable Buffer dstrect, double angle, @NativeType("SDL_FPoint const *") SDL_FPoint.@Nullable Buffer center, @NativeType("SDL_FlipMode") int flip) {
         if (CHECKS) {
             check(texture, 1);
@@ -15416,7 +15416,7 @@ public class SDL {
 
     // --- [ SDL_RenderTextureAffine ] ---
 
-    /** {@code _Bool SDL_RenderTextureAffine(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, SDL_FPoint const * origin, SDL_FPoint const * right, SDL_FPoint const * down)} */
+    /** {@code bool SDL_RenderTextureAffine(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, SDL_FPoint const * origin, SDL_FPoint const * right, SDL_FPoint const * down)} */
     public static boolean nSDL_RenderTextureAffine(long renderer, long texture, long srcrect, long origin, long right, long down) {
         long __functionAddress = Functions.RenderTextureAffine;
         if (CHECKS) {
@@ -15425,8 +15425,8 @@ public class SDL {
         return invokePPPPPPZ(renderer, texture, srcrect, origin, right, down, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RenderTextureAffine(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, SDL_FPoint const * origin, SDL_FPoint const * right, SDL_FPoint const * down)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderTextureAffine(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, SDL_FPoint const * origin, SDL_FPoint const * right, SDL_FPoint const * down)} */
+    @NativeType("bool")
     public static boolean SDL_RenderTextureAffine(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_Texture *") SDL_Texture.Buffer texture, @NativeType("SDL_FRect const *") SDL_FRect.@Nullable Buffer srcrect, @NativeType("SDL_FPoint const *") SDL_FPoint.@Nullable Buffer origin, @NativeType("SDL_FPoint const *") SDL_FPoint.@Nullable Buffer right, @NativeType("SDL_FPoint const *") SDL_FPoint.@Nullable Buffer down) {
         if (CHECKS) {
             check(texture, 1);
@@ -15440,7 +15440,7 @@ public class SDL {
 
     // --- [ SDL_RenderTextureTiled ] ---
 
-    /** {@code _Bool SDL_RenderTextureTiled(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, float scale, SDL_FRect const * dstrect)} */
+    /** {@code bool SDL_RenderTextureTiled(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, float scale, SDL_FRect const * dstrect)} */
     public static boolean nSDL_RenderTextureTiled(long renderer, long texture, long srcrect, float scale, long dstrect) {
         long __functionAddress = Functions.RenderTextureTiled;
         if (CHECKS) {
@@ -15449,8 +15449,8 @@ public class SDL {
         return invokePPPPZ(renderer, texture, srcrect, scale, dstrect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RenderTextureTiled(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, float scale, SDL_FRect const * dstrect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderTextureTiled(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, float scale, SDL_FRect const * dstrect)} */
+    @NativeType("bool")
     public static boolean SDL_RenderTextureTiled(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_Texture *") SDL_Texture.Buffer texture, @NativeType("SDL_FRect const *") SDL_FRect.@Nullable Buffer srcrect, float scale, @NativeType("SDL_FRect const *") SDL_FRect.@Nullable Buffer dstrect) {
         if (CHECKS) {
             check(texture, 1);
@@ -15462,7 +15462,7 @@ public class SDL {
 
     // --- [ SDL_RenderTexture9Grid ] ---
 
-    /** {@code _Bool SDL_RenderTexture9Grid(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, SDL_FRect const * dstrect)} */
+    /** {@code bool SDL_RenderTexture9Grid(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, SDL_FRect const * dstrect)} */
     public static boolean nSDL_RenderTexture9Grid(long renderer, long texture, long srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, long dstrect) {
         long __functionAddress = Functions.RenderTexture9Grid;
         if (CHECKS) {
@@ -15471,8 +15471,8 @@ public class SDL {
         return invokePPPPZ(renderer, texture, srcrect, left_width, right_width, top_height, bottom_height, scale, dstrect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RenderTexture9Grid(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, SDL_FRect const * dstrect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderTexture9Grid(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, SDL_FRect const * dstrect)} */
+    @NativeType("bool")
     public static boolean SDL_RenderTexture9Grid(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_Texture *") SDL_Texture.Buffer texture, @NativeType("SDL_FRect const *") SDL_FRect.@Nullable Buffer srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, @NativeType("SDL_FRect const *") SDL_FRect.@Nullable Buffer dstrect) {
         if (CHECKS) {
             check(texture, 1);
@@ -15484,7 +15484,7 @@ public class SDL {
 
     // --- [ SDL_RenderGeometry ] ---
 
-    /** {@code _Bool SDL_RenderGeometry(SDL_Renderer * renderer, SDL_Texture * texture, SDL_Vertex const * vertices, int num_vertices, int const * indices, int num_indices)} */
+    /** {@code bool SDL_RenderGeometry(SDL_Renderer * renderer, SDL_Texture * texture, SDL_Vertex const * vertices, int num_vertices, int const * indices, int num_indices)} */
     public static boolean nSDL_RenderGeometry(long renderer, long texture, long vertices, int num_vertices, long indices, int num_indices) {
         long __functionAddress = Functions.RenderGeometry;
         if (CHECKS) {
@@ -15493,8 +15493,8 @@ public class SDL {
         return invokePPPPZ(renderer, texture, vertices, num_vertices, indices, num_indices, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RenderGeometry(SDL_Renderer * renderer, SDL_Texture * texture, SDL_Vertex const * vertices, int num_vertices, int const * indices, int num_indices)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderGeometry(SDL_Renderer * renderer, SDL_Texture * texture, SDL_Vertex const * vertices, int num_vertices, int const * indices, int num_indices)} */
+    @NativeType("bool")
     public static boolean SDL_RenderGeometry(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_Texture *") SDL_Texture.Buffer texture, @NativeType("SDL_Vertex const *") SDL_Vertex.Buffer vertices, @NativeType("int const *") IntBuffer indices) {
         if (CHECKS) {
             check(texture, 1);
@@ -15504,7 +15504,7 @@ public class SDL {
 
     // --- [ SDL_RenderGeometryRaw ] ---
 
-    /** {@code _Bool SDL_RenderGeometryRaw(SDL_Renderer * renderer, SDL_Texture * texture, float const * xy, int xy_stride, SDL_FColor const * color, int color_stride, float const * uv, int uv_stride, int num_vertices, void const * indices, int num_indices, int size_indices)} */
+    /** {@code bool SDL_RenderGeometryRaw(SDL_Renderer * renderer, SDL_Texture * texture, float const * xy, int xy_stride, SDL_FColor const * color, int color_stride, float const * uv, int uv_stride, int num_vertices, void const * indices, int num_indices, int size_indices)} */
     public static boolean nSDL_RenderGeometryRaw(long renderer, long texture, long xy, int xy_stride, long color, int color_stride, long uv, int uv_stride, int num_vertices, long indices, int num_indices, int size_indices) {
         long __functionAddress = Functions.RenderGeometryRaw;
         if (CHECKS) {
@@ -15513,8 +15513,8 @@ public class SDL {
         return invokePPPPPPZ(renderer, texture, xy, xy_stride, color, color_stride, uv, uv_stride, num_vertices, indices, num_indices, size_indices, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RenderGeometryRaw(SDL_Renderer * renderer, SDL_Texture * texture, float const * xy, int xy_stride, SDL_FColor const * color, int color_stride, float const * uv, int uv_stride, int num_vertices, void const * indices, int num_indices, int size_indices)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderGeometryRaw(SDL_Renderer * renderer, SDL_Texture * texture, float const * xy, int xy_stride, SDL_FColor const * color, int color_stride, float const * uv, int uv_stride, int num_vertices, void const * indices, int num_indices, int size_indices)} */
+    @NativeType("bool")
     public static boolean SDL_RenderGeometryRaw(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_Texture *") SDL_Texture.Buffer texture, @NativeType("float const *") @Nullable FloatBuffer xy, int xy_stride, @NativeType("SDL_FColor const *") SDL_FColor.@Nullable Buffer color, int color_stride, @NativeType("float const *") @Nullable FloatBuffer uv, int uv_stride, int num_vertices, @NativeType("void const *") @Nullable ByteBuffer indices, int num_indices, int size_indices) {
         if (CHECKS) {
             check(texture, 1);
@@ -15526,8 +15526,8 @@ public class SDL {
         return nSDL_RenderGeometryRaw(renderer, texture.address(), memAddressSafe(xy), xy_stride, memAddressSafe(color), color_stride, memAddressSafe(uv), uv_stride, num_vertices, memAddressSafe(indices), num_indices, size_indices);
     }
 
-    /** {@code _Bool SDL_RenderGeometryRaw(SDL_Renderer * renderer, SDL_Texture * texture, float const * xy, int xy_stride, SDL_FColor const * color, int color_stride, float const * uv, int uv_stride, int num_vertices, void const * indices, int num_indices, int size_indices)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderGeometryRaw(SDL_Renderer * renderer, SDL_Texture * texture, float const * xy, int xy_stride, SDL_FColor const * color, int color_stride, float const * uv, int uv_stride, int num_vertices, void const * indices, int num_indices, int size_indices)} */
+    @NativeType("bool")
     public static boolean SDL_RenderGeometryRaw(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_Texture *") SDL_Texture.Buffer texture, @NativeType("float const *") @Nullable FloatBuffer xy, int xy_stride, @NativeType("SDL_FColor const *") SDL_FColor.@Nullable Buffer color, int color_stride, @NativeType("float const *") @Nullable FloatBuffer uv, int uv_stride, int num_vertices, @NativeType("void const *") @Nullable ShortBuffer indices, int num_indices, int size_indices) {
         if (CHECKS) {
             check(texture, 1);
@@ -15539,8 +15539,8 @@ public class SDL {
         return nSDL_RenderGeometryRaw(renderer, texture.address(), memAddressSafe(xy), xy_stride, memAddressSafe(color), color_stride, memAddressSafe(uv), uv_stride, num_vertices, memAddressSafe(indices), num_indices, size_indices);
     }
 
-    /** {@code _Bool SDL_RenderGeometryRaw(SDL_Renderer * renderer, SDL_Texture * texture, float const * xy, int xy_stride, SDL_FColor const * color, int color_stride, float const * uv, int uv_stride, int num_vertices, void const * indices, int num_indices, int size_indices)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderGeometryRaw(SDL_Renderer * renderer, SDL_Texture * texture, float const * xy, int xy_stride, SDL_FColor const * color, int color_stride, float const * uv, int uv_stride, int num_vertices, void const * indices, int num_indices, int size_indices)} */
+    @NativeType("bool")
     public static boolean SDL_RenderGeometryRaw(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_Texture *") SDL_Texture.Buffer texture, @NativeType("float const *") @Nullable FloatBuffer xy, int xy_stride, @NativeType("SDL_FColor const *") SDL_FColor.@Nullable Buffer color, int color_stride, @NativeType("float const *") @Nullable FloatBuffer uv, int uv_stride, int num_vertices, @NativeType("void const *") @Nullable IntBuffer indices, int num_indices, int size_indices) {
         if (CHECKS) {
             check(texture, 1);
@@ -15575,8 +15575,8 @@ public class SDL {
 
     // --- [ SDL_RenderPresent ] ---
 
-    /** {@code _Bool SDL_RenderPresent(SDL_Renderer * renderer)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderPresent(SDL_Renderer * renderer)} */
+    @NativeType("bool")
     public static boolean SDL_RenderPresent(@NativeType("SDL_Renderer *") long renderer) {
         long __functionAddress = Functions.RenderPresent;
         if (CHECKS) {
@@ -15611,8 +15611,8 @@ public class SDL {
 
     // --- [ SDL_FlushRenderer ] ---
 
-    /** {@code _Bool SDL_FlushRenderer(SDL_Renderer * renderer)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_FlushRenderer(SDL_Renderer * renderer)} */
+    @NativeType("bool")
     public static boolean SDL_FlushRenderer(@NativeType("SDL_Renderer *") long renderer) {
         long __functionAddress = Functions.FlushRenderer;
         if (CHECKS) {
@@ -15647,8 +15647,8 @@ public class SDL {
 
     // --- [ SDL_AddVulkanRenderSemaphores ] ---
 
-    /** {@code _Bool SDL_AddVulkanRenderSemaphores(SDL_Renderer * renderer, Uint32 wait_stage_mask, Sint64 wait_semaphore, Sint64 signal_semaphore)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_AddVulkanRenderSemaphores(SDL_Renderer * renderer, Uint32 wait_stage_mask, Sint64 wait_semaphore, Sint64 signal_semaphore)} */
+    @NativeType("bool")
     public static boolean SDL_AddVulkanRenderSemaphores(@NativeType("SDL_Renderer *") long renderer, @NativeType("Uint32") int wait_stage_mask, @NativeType("Sint64") long wait_semaphore, @NativeType("Sint64") long signal_semaphore) {
         long __functionAddress = Functions.AddVulkanRenderSemaphores;
         if (CHECKS) {
@@ -15659,8 +15659,8 @@ public class SDL {
 
     // --- [ SDL_SetRenderVSync ] ---
 
-    /** {@code _Bool SDL_SetRenderVSync(SDL_Renderer * renderer, int vsync)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetRenderVSync(SDL_Renderer * renderer, int vsync)} */
+    @NativeType("bool")
     public static boolean SDL_SetRenderVSync(@NativeType("SDL_Renderer *") long renderer, int vsync) {
         long __functionAddress = Functions.SetRenderVSync;
         if (CHECKS) {
@@ -15671,7 +15671,7 @@ public class SDL {
 
     // --- [ SDL_GetRenderVSync ] ---
 
-    /** {@code _Bool SDL_GetRenderVSync(SDL_Renderer * renderer, int * vsync)} */
+    /** {@code bool SDL_GetRenderVSync(SDL_Renderer * renderer, int * vsync)} */
     public static boolean nSDL_GetRenderVSync(long renderer, long vsync) {
         long __functionAddress = Functions.GetRenderVSync;
         if (CHECKS) {
@@ -15680,8 +15680,8 @@ public class SDL {
         return invokePPZ(renderer, vsync, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetRenderVSync(SDL_Renderer * renderer, int * vsync)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetRenderVSync(SDL_Renderer * renderer, int * vsync)} */
+    @NativeType("bool")
     public static boolean SDL_GetRenderVSync(@NativeType("SDL_Renderer *") long renderer, @NativeType("int *") IntBuffer vsync) {
         if (CHECKS) {
             check(vsync, 1);
@@ -15691,7 +15691,7 @@ public class SDL {
 
     // --- [ SDL_RenderDebugText ] ---
 
-    /** {@code _Bool SDL_RenderDebugText(SDL_Renderer * renderer, float x, float y, char const * str)} */
+    /** {@code bool SDL_RenderDebugText(SDL_Renderer * renderer, float x, float y, char const * str)} */
     public static boolean nSDL_RenderDebugText(long renderer, float x, float y, long str) {
         long __functionAddress = Functions.RenderDebugText;
         if (CHECKS) {
@@ -15700,8 +15700,8 @@ public class SDL {
         return invokePPZ(renderer, x, y, str, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RenderDebugText(SDL_Renderer * renderer, float x, float y, char const * str)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderDebugText(SDL_Renderer * renderer, float x, float y, char const * str)} */
+    @NativeType("bool")
     public static boolean SDL_RenderDebugText(@NativeType("SDL_Renderer *") long renderer, float x, float y, @NativeType("char const *") ByteBuffer str) {
         if (CHECKS) {
             checkNT1(str);
@@ -15709,8 +15709,8 @@ public class SDL {
         return nSDL_RenderDebugText(renderer, x, y, memAddress(str));
     }
 
-    /** {@code _Bool SDL_RenderDebugText(SDL_Renderer * renderer, float x, float y, char const * str)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderDebugText(SDL_Renderer * renderer, float x, float y, char const * str)} */
+    @NativeType("bool")
     public static boolean SDL_RenderDebugText(@NativeType("SDL_Renderer *") long renderer, float x, float y, @NativeType("char const *") CharSequence str) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -15724,7 +15724,7 @@ public class SDL {
 
     // --- [ SDL_RenderDebugTextFormat ] ---
 
-    /** {@code _Bool SDL_RenderDebugTextFormat(SDL_Renderer * renderer, float x, float y, char const * fmt)} */
+    /** {@code bool SDL_RenderDebugTextFormat(SDL_Renderer * renderer, float x, float y, char const * fmt)} */
     public static boolean nSDL_RenderDebugTextFormat(long renderer, float x, float y, long fmt) {
         long __functionAddress = Functions.RenderDebugTextFormat;
         if (CHECKS) {
@@ -15733,8 +15733,8 @@ public class SDL {
         return invokePPZ(renderer, x, y, fmt, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RenderDebugTextFormat(SDL_Renderer * renderer, float x, float y, char const * fmt)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderDebugTextFormat(SDL_Renderer * renderer, float x, float y, char const * fmt)} */
+    @NativeType("bool")
     public static boolean SDL_RenderDebugTextFormat(@NativeType("SDL_Renderer *") long renderer, float x, float y, @NativeType("char const *") ByteBuffer fmt) {
         if (CHECKS) {
             checkNT1(fmt);
@@ -15742,8 +15742,8 @@ public class SDL {
         return nSDL_RenderDebugTextFormat(renderer, x, y, memAddress(fmt));
     }
 
-    /** {@code _Bool SDL_RenderDebugTextFormat(SDL_Renderer * renderer, float x, float y, char const * fmt)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenderDebugTextFormat(SDL_Renderer * renderer, float x, float y, char const * fmt)} */
+    @NativeType("bool")
     public static boolean SDL_RenderDebugTextFormat(@NativeType("SDL_Renderer *") long renderer, float x, float y, @NativeType("char const *") CharSequence fmt) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -15893,7 +15893,7 @@ public class SDL {
 
     // --- [ SDL_GetSensorData ] ---
 
-    /** {@code _Bool SDL_GetSensorData(SDL_Sensor * sensor, float * data, int num_values)} */
+    /** {@code bool SDL_GetSensorData(SDL_Sensor * sensor, float * data, int num_values)} */
     public static boolean nSDL_GetSensorData(long sensor, long data, int num_values) {
         long __functionAddress = Functions.GetSensorData;
         if (CHECKS) {
@@ -15902,8 +15902,8 @@ public class SDL {
         return invokePPZ(sensor, data, num_values, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetSensorData(SDL_Sensor * sensor, float * data, int num_values)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetSensorData(SDL_Sensor * sensor, float * data, int num_values)} */
+    @NativeType("bool")
     public static boolean SDL_GetSensorData(@NativeType("SDL_Sensor *") long sensor, @NativeType("float *") FloatBuffer data) {
         return nSDL_GetSensorData(sensor, memAddress(data), data.remaining());
     }
@@ -16025,14 +16025,14 @@ public class SDL {
 
     // --- [ SDL_SetMemoryFunctions ] ---
 
-    /** {@code _Bool SDL_SetMemoryFunctions(SDL_malloc_func malloc_func, SDL_calloc_func calloc_func, SDL_realloc_func realloc_func, SDL_free_func free_func)} */
+    /** {@code bool SDL_SetMemoryFunctions(SDL_malloc_func malloc_func, SDL_calloc_func calloc_func, SDL_realloc_func realloc_func, SDL_free_func free_func)} */
     public static boolean nSDL_SetMemoryFunctions(long malloc_func, long calloc_func, long realloc_func, long free_func) {
         long __functionAddress = Functions.SetMemoryFunctions;
         return invokePPPPZ(malloc_func, calloc_func, realloc_func, free_func, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetMemoryFunctions(SDL_malloc_func malloc_func, SDL_calloc_func calloc_func, SDL_realloc_func realloc_func, SDL_free_func free_func)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetMemoryFunctions(SDL_malloc_func malloc_func, SDL_calloc_func calloc_func, SDL_realloc_func realloc_func, SDL_free_func free_func)} */
+    @NativeType("bool")
     public static boolean SDL_SetMemoryFunctions(@NativeType("SDL_malloc_func") SDL_malloc_funcI malloc_func, @NativeType("SDL_calloc_func") SDL_calloc_funcI calloc_func, @NativeType("SDL_realloc_func") SDL_realloc_funcI realloc_func, @NativeType("SDL_free_func") SDL_free_funcI free_func) {
         return nSDL_SetMemoryFunctions(malloc_func.address(), calloc_func.address(), realloc_func.address(), free_func.address());
     }
@@ -16854,8 +16854,8 @@ public class SDL {
 
     // --- [ SDL_CloseStorage ] ---
 
-    /** {@code _Bool SDL_CloseStorage(SDL_Storage * storage)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_CloseStorage(SDL_Storage * storage)} */
+    @NativeType("bool")
     public static boolean SDL_CloseStorage(@NativeType("SDL_Storage *") long storage) {
         long __functionAddress = Functions.CloseStorage;
         if (CHECKS) {
@@ -16866,8 +16866,8 @@ public class SDL {
 
     // --- [ SDL_StorageReady ] ---
 
-    /** {@code _Bool SDL_StorageReady(SDL_Storage * storage)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_StorageReady(SDL_Storage * storage)} */
+    @NativeType("bool")
     public static boolean SDL_StorageReady(@NativeType("SDL_Storage *") long storage) {
         long __functionAddress = Functions.StorageReady;
         if (CHECKS) {
@@ -16878,7 +16878,7 @@ public class SDL {
 
     // --- [ SDL_GetStorageFileSize ] ---
 
-    /** {@code _Bool SDL_GetStorageFileSize(SDL_Storage * storage, char const * path, Uint64 * length)} */
+    /** {@code bool SDL_GetStorageFileSize(SDL_Storage * storage, char const * path, Uint64 * length)} */
     public static boolean nSDL_GetStorageFileSize(long storage, long path, long length) {
         long __functionAddress = Functions.GetStorageFileSize;
         if (CHECKS) {
@@ -16887,8 +16887,8 @@ public class SDL {
         return invokePPPZ(storage, path, length, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetStorageFileSize(SDL_Storage * storage, char const * path, Uint64 * length)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetStorageFileSize(SDL_Storage * storage, char const * path, Uint64 * length)} */
+    @NativeType("bool")
     public static boolean SDL_GetStorageFileSize(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") ByteBuffer path, @NativeType("Uint64 *") LongBuffer length) {
         if (CHECKS) {
             checkNT1(path);
@@ -16897,8 +16897,8 @@ public class SDL {
         return nSDL_GetStorageFileSize(storage, memAddress(path), memAddress(length));
     }
 
-    /** {@code _Bool SDL_GetStorageFileSize(SDL_Storage * storage, char const * path, Uint64 * length)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetStorageFileSize(SDL_Storage * storage, char const * path, Uint64 * length)} */
+    @NativeType("bool")
     public static boolean SDL_GetStorageFileSize(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") CharSequence path, @NativeType("Uint64 *") LongBuffer length) {
         if (CHECKS) {
             check(length, 1);
@@ -16915,7 +16915,7 @@ public class SDL {
 
     // --- [ SDL_ReadStorageFile ] ---
 
-    /** {@code _Bool SDL_ReadStorageFile(SDL_Storage * storage, char const * path, void * destination, Uint64 length)} */
+    /** {@code bool SDL_ReadStorageFile(SDL_Storage * storage, char const * path, void * destination, Uint64 length)} */
     public static boolean nSDL_ReadStorageFile(long storage, long path, long destination, long length) {
         long __functionAddress = Functions.ReadStorageFile;
         if (CHECKS) {
@@ -16924,8 +16924,8 @@ public class SDL {
         return invokePPPJZ(storage, path, destination, length, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ReadStorageFile(SDL_Storage * storage, char const * path, void * destination, Uint64 length)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ReadStorageFile(SDL_Storage * storage, char const * path, void * destination, Uint64 length)} */
+    @NativeType("bool")
     public static boolean SDL_ReadStorageFile(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") ByteBuffer path, @NativeType("void *") ByteBuffer destination) {
         if (CHECKS) {
             checkNT1(path);
@@ -16933,8 +16933,8 @@ public class SDL {
         return nSDL_ReadStorageFile(storage, memAddress(path), memAddress(destination), destination.remaining());
     }
 
-    /** {@code _Bool SDL_ReadStorageFile(SDL_Storage * storage, char const * path, void * destination, Uint64 length)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ReadStorageFile(SDL_Storage * storage, char const * path, void * destination, Uint64 length)} */
+    @NativeType("bool")
     public static boolean SDL_ReadStorageFile(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") CharSequence path, @NativeType("void *") ByteBuffer destination) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -16948,7 +16948,7 @@ public class SDL {
 
     // --- [ SDL_WriteStorageFile ] ---
 
-    /** {@code _Bool SDL_WriteStorageFile(SDL_Storage * storage, char const * path, void const * source, Uint64 length)} */
+    /** {@code bool SDL_WriteStorageFile(SDL_Storage * storage, char const * path, void const * source, Uint64 length)} */
     public static boolean nSDL_WriteStorageFile(long storage, long path, long source, long length) {
         long __functionAddress = Functions.WriteStorageFile;
         if (CHECKS) {
@@ -16957,8 +16957,8 @@ public class SDL {
         return invokePPPJZ(storage, path, source, length, __functionAddress);
     }
 
-    /** {@code _Bool SDL_WriteStorageFile(SDL_Storage * storage, char const * path, void const * source, Uint64 length)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WriteStorageFile(SDL_Storage * storage, char const * path, void const * source, Uint64 length)} */
+    @NativeType("bool")
     public static boolean SDL_WriteStorageFile(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") ByteBuffer path, @NativeType("void const *") ByteBuffer source) {
         if (CHECKS) {
             checkNT1(path);
@@ -16966,8 +16966,8 @@ public class SDL {
         return nSDL_WriteStorageFile(storage, memAddress(path), memAddress(source), source.remaining());
     }
 
-    /** {@code _Bool SDL_WriteStorageFile(SDL_Storage * storage, char const * path, void const * source, Uint64 length)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WriteStorageFile(SDL_Storage * storage, char const * path, void const * source, Uint64 length)} */
+    @NativeType("bool")
     public static boolean SDL_WriteStorageFile(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") CharSequence path, @NativeType("void const *") ByteBuffer source) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -16981,7 +16981,7 @@ public class SDL {
 
     // --- [ SDL_CreateStorageDirectory ] ---
 
-    /** {@code _Bool SDL_CreateStorageDirectory(SDL_Storage * storage, char const * path)} */
+    /** {@code bool SDL_CreateStorageDirectory(SDL_Storage * storage, char const * path)} */
     public static boolean nSDL_CreateStorageDirectory(long storage, long path) {
         long __functionAddress = Functions.CreateStorageDirectory;
         if (CHECKS) {
@@ -16990,8 +16990,8 @@ public class SDL {
         return invokePPZ(storage, path, __functionAddress);
     }
 
-    /** {@code _Bool SDL_CreateStorageDirectory(SDL_Storage * storage, char const * path)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_CreateStorageDirectory(SDL_Storage * storage, char const * path)} */
+    @NativeType("bool")
     public static boolean SDL_CreateStorageDirectory(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") ByteBuffer path) {
         if (CHECKS) {
             checkNT1(path);
@@ -16999,8 +16999,8 @@ public class SDL {
         return nSDL_CreateStorageDirectory(storage, memAddress(path));
     }
 
-    /** {@code _Bool SDL_CreateStorageDirectory(SDL_Storage * storage, char const * path)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_CreateStorageDirectory(SDL_Storage * storage, char const * path)} */
+    @NativeType("bool")
     public static boolean SDL_CreateStorageDirectory(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") CharSequence path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -17014,7 +17014,7 @@ public class SDL {
 
     // --- [ SDL_EnumerateStorageDirectory ] ---
 
-    /** {@code _Bool SDL_EnumerateStorageDirectory(SDL_Storage * storage, char const * path, SDL_EnumerateDirectoryCallback callback, void * userdata)} */
+    /** {@code bool SDL_EnumerateStorageDirectory(SDL_Storage * storage, char const * path, SDL_EnumerateDirectoryCallback callback, void * userdata)} */
     public static boolean nSDL_EnumerateStorageDirectory(long storage, long path, long callback, long userdata) {
         long __functionAddress = Functions.EnumerateStorageDirectory;
         if (CHECKS) {
@@ -17023,8 +17023,8 @@ public class SDL {
         return invokePPPPZ(storage, path, callback, userdata, __functionAddress);
     }
 
-    /** {@code _Bool SDL_EnumerateStorageDirectory(SDL_Storage * storage, char const * path, SDL_EnumerateDirectoryCallback callback, void * userdata)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_EnumerateStorageDirectory(SDL_Storage * storage, char const * path, SDL_EnumerateDirectoryCallback callback, void * userdata)} */
+    @NativeType("bool")
     public static boolean SDL_EnumerateStorageDirectory(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") ByteBuffer path, @NativeType("SDL_EnumerateDirectoryCallback") SDL_EnumerateDirectoryCallbackI callback, @NativeType("void *") long userdata) {
         if (CHECKS) {
             checkNT1(path);
@@ -17032,8 +17032,8 @@ public class SDL {
         return nSDL_EnumerateStorageDirectory(storage, memAddress(path), callback.address(), userdata);
     }
 
-    /** {@code _Bool SDL_EnumerateStorageDirectory(SDL_Storage * storage, char const * path, SDL_EnumerateDirectoryCallback callback, void * userdata)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_EnumerateStorageDirectory(SDL_Storage * storage, char const * path, SDL_EnumerateDirectoryCallback callback, void * userdata)} */
+    @NativeType("bool")
     public static boolean SDL_EnumerateStorageDirectory(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") CharSequence path, @NativeType("SDL_EnumerateDirectoryCallback") SDL_EnumerateDirectoryCallbackI callback, @NativeType("void *") long userdata) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -17047,7 +17047,7 @@ public class SDL {
 
     // --- [ SDL_RemoveStoragePath ] ---
 
-    /** {@code _Bool SDL_RemoveStoragePath(SDL_Storage * storage, char const * path)} */
+    /** {@code bool SDL_RemoveStoragePath(SDL_Storage * storage, char const * path)} */
     public static boolean nSDL_RemoveStoragePath(long storage, long path) {
         long __functionAddress = Functions.RemoveStoragePath;
         if (CHECKS) {
@@ -17056,8 +17056,8 @@ public class SDL {
         return invokePPZ(storage, path, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RemoveStoragePath(SDL_Storage * storage, char const * path)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RemoveStoragePath(SDL_Storage * storage, char const * path)} */
+    @NativeType("bool")
     public static boolean SDL_RemoveStoragePath(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") ByteBuffer path) {
         if (CHECKS) {
             checkNT1(path);
@@ -17065,8 +17065,8 @@ public class SDL {
         return nSDL_RemoveStoragePath(storage, memAddress(path));
     }
 
-    /** {@code _Bool SDL_RemoveStoragePath(SDL_Storage * storage, char const * path)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RemoveStoragePath(SDL_Storage * storage, char const * path)} */
+    @NativeType("bool")
     public static boolean SDL_RemoveStoragePath(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") CharSequence path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -17080,7 +17080,7 @@ public class SDL {
 
     // --- [ SDL_RenameStoragePath ] ---
 
-    /** {@code _Bool SDL_RenameStoragePath(SDL_Storage * storage, char const * oldpath, char const * newpath)} */
+    /** {@code bool SDL_RenameStoragePath(SDL_Storage * storage, char const * oldpath, char const * newpath)} */
     public static boolean nSDL_RenameStoragePath(long storage, long oldpath, long newpath) {
         long __functionAddress = Functions.RenameStoragePath;
         if (CHECKS) {
@@ -17089,8 +17089,8 @@ public class SDL {
         return invokePPPZ(storage, oldpath, newpath, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RenameStoragePath(SDL_Storage * storage, char const * oldpath, char const * newpath)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenameStoragePath(SDL_Storage * storage, char const * oldpath, char const * newpath)} */
+    @NativeType("bool")
     public static boolean SDL_RenameStoragePath(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") ByteBuffer oldpath, @NativeType("char const *") ByteBuffer newpath) {
         if (CHECKS) {
             checkNT1(oldpath);
@@ -17099,8 +17099,8 @@ public class SDL {
         return nSDL_RenameStoragePath(storage, memAddress(oldpath), memAddress(newpath));
     }
 
-    /** {@code _Bool SDL_RenameStoragePath(SDL_Storage * storage, char const * oldpath, char const * newpath)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RenameStoragePath(SDL_Storage * storage, char const * oldpath, char const * newpath)} */
+    @NativeType("bool")
     public static boolean SDL_RenameStoragePath(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") CharSequence oldpath, @NativeType("char const *") CharSequence newpath) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -17116,7 +17116,7 @@ public class SDL {
 
     // --- [ SDL_CopyStorageFile ] ---
 
-    /** {@code _Bool SDL_CopyStorageFile(SDL_Storage * storage, char const * oldpath, char const * newpath)} */
+    /** {@code bool SDL_CopyStorageFile(SDL_Storage * storage, char const * oldpath, char const * newpath)} */
     public static boolean nSDL_CopyStorageFile(long storage, long oldpath, long newpath) {
         long __functionAddress = Functions.CopyStorageFile;
         if (CHECKS) {
@@ -17125,8 +17125,8 @@ public class SDL {
         return invokePPPZ(storage, oldpath, newpath, __functionAddress);
     }
 
-    /** {@code _Bool SDL_CopyStorageFile(SDL_Storage * storage, char const * oldpath, char const * newpath)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_CopyStorageFile(SDL_Storage * storage, char const * oldpath, char const * newpath)} */
+    @NativeType("bool")
     public static boolean SDL_CopyStorageFile(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") ByteBuffer oldpath, @NativeType("char const *") ByteBuffer newpath) {
         if (CHECKS) {
             checkNT1(oldpath);
@@ -17135,8 +17135,8 @@ public class SDL {
         return nSDL_CopyStorageFile(storage, memAddress(oldpath), memAddress(newpath));
     }
 
-    /** {@code _Bool SDL_CopyStorageFile(SDL_Storage * storage, char const * oldpath, char const * newpath)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_CopyStorageFile(SDL_Storage * storage, char const * oldpath, char const * newpath)} */
+    @NativeType("bool")
     public static boolean SDL_CopyStorageFile(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") CharSequence oldpath, @NativeType("char const *") CharSequence newpath) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -17152,7 +17152,7 @@ public class SDL {
 
     // --- [ SDL_GetStoragePathInfo ] ---
 
-    /** {@code _Bool SDL_GetStoragePathInfo(SDL_Storage * storage, char const * path, SDL_PathInfo * info)} */
+    /** {@code bool SDL_GetStoragePathInfo(SDL_Storage * storage, char const * path, SDL_PathInfo * info)} */
     public static boolean nSDL_GetStoragePathInfo(long storage, long path, long info) {
         long __functionAddress = Functions.GetStoragePathInfo;
         if (CHECKS) {
@@ -17161,8 +17161,8 @@ public class SDL {
         return invokePPPZ(storage, path, info, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetStoragePathInfo(SDL_Storage * storage, char const * path, SDL_PathInfo * info)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetStoragePathInfo(SDL_Storage * storage, char const * path, SDL_PathInfo * info)} */
+    @NativeType("bool")
     public static boolean SDL_GetStoragePathInfo(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") ByteBuffer path, @NativeType("SDL_PathInfo *") SDL_PathInfo.Buffer info) {
         if (CHECKS) {
             checkNT1(path);
@@ -17171,8 +17171,8 @@ public class SDL {
         return nSDL_GetStoragePathInfo(storage, memAddress(path), info.address());
     }
 
-    /** {@code _Bool SDL_GetStoragePathInfo(SDL_Storage * storage, char const * path, SDL_PathInfo * info)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetStoragePathInfo(SDL_Storage * storage, char const * path, SDL_PathInfo * info)} */
+    @NativeType("bool")
     public static boolean SDL_GetStoragePathInfo(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") CharSequence path, @NativeType("SDL_PathInfo *") SDL_PathInfo.Buffer info) {
         if (CHECKS) {
             check(info, 1);
@@ -17312,14 +17312,14 @@ public class SDL {
 
     // --- [ SDL_SetSurfaceColorspace ] ---
 
-    /** {@code _Bool SDL_SetSurfaceColorspace(SDL_Surface * surface, SDL_Colorspace colorspace)} */
+    /** {@code bool SDL_SetSurfaceColorspace(SDL_Surface * surface, SDL_Colorspace colorspace)} */
     public static boolean nSDL_SetSurfaceColorspace(long surface, int colorspace) {
         long __functionAddress = Functions.SetSurfaceColorspace;
         return invokePZ(surface, colorspace, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetSurfaceColorspace(SDL_Surface * surface, SDL_Colorspace colorspace)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetSurfaceColorspace(SDL_Surface * surface, SDL_Colorspace colorspace)} */
+    @NativeType("bool")
     public static boolean SDL_SetSurfaceColorspace(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("SDL_Colorspace") int colorspace) {
         if (CHECKS) {
             check(surface, 1);
@@ -17364,14 +17364,14 @@ public class SDL {
 
     // --- [ SDL_SetSurfacePalette ] ---
 
-    /** {@code _Bool SDL_SetSurfacePalette(SDL_Surface * surface, SDL_Palette * palette)} */
+    /** {@code bool SDL_SetSurfacePalette(SDL_Surface * surface, SDL_Palette * palette)} */
     public static boolean nSDL_SetSurfacePalette(long surface, long palette) {
         long __functionAddress = Functions.SetSurfacePalette;
         return invokePPZ(surface, palette, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetSurfacePalette(SDL_Surface * surface, SDL_Palette * palette)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetSurfacePalette(SDL_Surface * surface, SDL_Palette * palette)} */
+    @NativeType("bool")
     public static boolean SDL_SetSurfacePalette(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("SDL_Palette *") SDL_Palette.Buffer palette) {
         if (CHECKS) {
             check(surface, 1);
@@ -17400,14 +17400,14 @@ public class SDL {
 
     // --- [ SDL_AddSurfaceAlternateImage ] ---
 
-    /** {@code _Bool SDL_AddSurfaceAlternateImage(SDL_Surface * surface, SDL_Surface * image)} */
+    /** {@code bool SDL_AddSurfaceAlternateImage(SDL_Surface * surface, SDL_Surface * image)} */
     public static boolean nSDL_AddSurfaceAlternateImage(long surface, long image) {
         long __functionAddress = Functions.AddSurfaceAlternateImage;
         return invokePPZ(surface, image, __functionAddress);
     }
 
-    /** {@code _Bool SDL_AddSurfaceAlternateImage(SDL_Surface * surface, SDL_Surface * image)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_AddSurfaceAlternateImage(SDL_Surface * surface, SDL_Surface * image)} */
+    @NativeType("bool")
     public static boolean SDL_AddSurfaceAlternateImage(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("SDL_Surface *") SDL_Surface.Buffer image) {
         if (CHECKS) {
             check(surface, 1);
@@ -17418,14 +17418,14 @@ public class SDL {
 
     // --- [ SDL_SurfaceHasAlternateImages ] ---
 
-    /** {@code _Bool SDL_SurfaceHasAlternateImages(SDL_Surface * surface)} */
+    /** {@code bool SDL_SurfaceHasAlternateImages(SDL_Surface * surface)} */
     public static boolean nSDL_SurfaceHasAlternateImages(long surface) {
         long __functionAddress = Functions.SurfaceHasAlternateImages;
         return invokePZ(surface, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SurfaceHasAlternateImages(SDL_Surface * surface)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SurfaceHasAlternateImages(SDL_Surface * surface)} */
+    @NativeType("bool")
     public static boolean SDL_SurfaceHasAlternateImages(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface) {
         if (CHECKS) {
             check(surface, 1);
@@ -17475,14 +17475,14 @@ public class SDL {
 
     // --- [ SDL_LockSurface ] ---
 
-    /** {@code _Bool SDL_LockSurface(SDL_Surface * surface)} */
+    /** {@code bool SDL_LockSurface(SDL_Surface * surface)} */
     public static boolean nSDL_LockSurface(long surface) {
         long __functionAddress = Functions.LockSurface;
         return invokePZ(surface, __functionAddress);
     }
 
-    /** {@code _Bool SDL_LockSurface(SDL_Surface * surface)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_LockSurface(SDL_Surface * surface)} */
+    @NativeType("bool")
     public static boolean SDL_LockSurface(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface) {
         if (CHECKS) {
             check(surface, 1);
@@ -17508,7 +17508,7 @@ public class SDL {
 
     // --- [ SDL_LoadBMP_IO ] ---
 
-    /** {@code SDL_Surface * SDL_LoadBMP_IO(SDL_IOStream * src, _Bool closeio)} */
+    /** {@code SDL_Surface * SDL_LoadBMP_IO(SDL_IOStream * src, bool closeio)} */
     public static long nSDL_LoadBMP_IO(long src, boolean closeio) {
         long __functionAddress = Functions.LoadBMP_IO;
         if (CHECKS) {
@@ -17517,9 +17517,9 @@ public class SDL {
         return invokePP(src, closeio, __functionAddress);
     }
 
-    /** {@code SDL_Surface * SDL_LoadBMP_IO(SDL_IOStream * src, _Bool closeio)} */
+    /** {@code SDL_Surface * SDL_LoadBMP_IO(SDL_IOStream * src, bool closeio)} */
     @NativeType("SDL_Surface *")
-    public static @Nullable SDL_Surface SDL_LoadBMP_IO(@NativeType("SDL_IOStream *") long src, @NativeType("_Bool") boolean closeio) {
+    public static @Nullable SDL_Surface SDL_LoadBMP_IO(@NativeType("SDL_IOStream *") long src, @NativeType("bool") boolean closeio) {
         long __result = nSDL_LoadBMP_IO(src, closeio);
         return SDL_Surface.createSafe(__result);
     }
@@ -17558,7 +17558,7 @@ public class SDL {
 
     // --- [ SDL_SaveBMP_IO ] ---
 
-    /** {@code _Bool SDL_SaveBMP_IO(SDL_Surface * surface, SDL_IOStream * dst, _Bool closeio)} */
+    /** {@code bool SDL_SaveBMP_IO(SDL_Surface * surface, SDL_IOStream * dst, bool closeio)} */
     public static boolean nSDL_SaveBMP_IO(long surface, long dst, boolean closeio) {
         long __functionAddress = Functions.SaveBMP_IO;
         if (CHECKS) {
@@ -17567,9 +17567,9 @@ public class SDL {
         return invokePPZ(surface, dst, closeio, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SaveBMP_IO(SDL_Surface * surface, SDL_IOStream * dst, _Bool closeio)} */
-    @NativeType("_Bool")
-    public static boolean SDL_SaveBMP_IO(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("SDL_IOStream *") long dst, @NativeType("_Bool") boolean closeio) {
+    /** {@code bool SDL_SaveBMP_IO(SDL_Surface * surface, SDL_IOStream * dst, bool closeio)} */
+    @NativeType("bool")
+    public static boolean SDL_SaveBMP_IO(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("SDL_IOStream *") long dst, @NativeType("bool") boolean closeio) {
         if (CHECKS) {
             check(surface, 1);
         }
@@ -17578,14 +17578,14 @@ public class SDL {
 
     // --- [ SDL_SaveBMP ] ---
 
-    /** {@code _Bool SDL_SaveBMP(SDL_Surface * surface, char const * file)} */
+    /** {@code bool SDL_SaveBMP(SDL_Surface * surface, char const * file)} */
     public static boolean nSDL_SaveBMP(long surface, long file) {
         long __functionAddress = Functions.SaveBMP;
         return invokePPZ(surface, file, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SaveBMP(SDL_Surface * surface, char const * file)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SaveBMP(SDL_Surface * surface, char const * file)} */
+    @NativeType("bool")
     public static boolean SDL_SaveBMP(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("char const *") ByteBuffer file) {
         if (CHECKS) {
             check(surface, 1);
@@ -17594,8 +17594,8 @@ public class SDL {
         return nSDL_SaveBMP(surface.address(), memAddress(file));
     }
 
-    /** {@code _Bool SDL_SaveBMP(SDL_Surface * surface, char const * file)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SaveBMP(SDL_Surface * surface, char const * file)} */
+    @NativeType("bool")
     public static boolean SDL_SaveBMP(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("char const *") CharSequence file) {
         if (CHECKS) {
             check(surface, 1);
@@ -17612,15 +17612,15 @@ public class SDL {
 
     // --- [ SDL_SetSurfaceRLE ] ---
 
-    /** {@code _Bool SDL_SetSurfaceRLE(SDL_Surface * surface, _Bool enabled)} */
+    /** {@code bool SDL_SetSurfaceRLE(SDL_Surface * surface, bool enabled)} */
     public static boolean nSDL_SetSurfaceRLE(long surface, boolean enabled) {
         long __functionAddress = Functions.SetSurfaceRLE;
         return invokePZ(surface, enabled, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetSurfaceRLE(SDL_Surface * surface, _Bool enabled)} */
-    @NativeType("_Bool")
-    public static boolean SDL_SetSurfaceRLE(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("_Bool") boolean enabled) {
+    /** {@code bool SDL_SetSurfaceRLE(SDL_Surface * surface, bool enabled)} */
+    @NativeType("bool")
+    public static boolean SDL_SetSurfaceRLE(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("bool") boolean enabled) {
         if (CHECKS) {
             check(surface, 1);
         }
@@ -17629,14 +17629,14 @@ public class SDL {
 
     // --- [ SDL_SurfaceHasRLE ] ---
 
-    /** {@code _Bool SDL_SurfaceHasRLE(SDL_Surface * surface)} */
+    /** {@code bool SDL_SurfaceHasRLE(SDL_Surface * surface)} */
     public static boolean nSDL_SurfaceHasRLE(long surface) {
         long __functionAddress = Functions.SurfaceHasRLE;
         return invokePZ(surface, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SurfaceHasRLE(SDL_Surface * surface)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SurfaceHasRLE(SDL_Surface * surface)} */
+    @NativeType("bool")
     public static boolean SDL_SurfaceHasRLE(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface) {
         if (CHECKS) {
             check(surface, 1);
@@ -17646,15 +17646,15 @@ public class SDL {
 
     // --- [ SDL_SetSurfaceColorKey ] ---
 
-    /** {@code _Bool SDL_SetSurfaceColorKey(SDL_Surface * surface, _Bool enabled, Uint32 key)} */
+    /** {@code bool SDL_SetSurfaceColorKey(SDL_Surface * surface, bool enabled, Uint32 key)} */
     public static boolean nSDL_SetSurfaceColorKey(long surface, boolean enabled, int key) {
         long __functionAddress = Functions.SetSurfaceColorKey;
         return invokePZ(surface, enabled, key, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetSurfaceColorKey(SDL_Surface * surface, _Bool enabled, Uint32 key)} */
-    @NativeType("_Bool")
-    public static boolean SDL_SetSurfaceColorKey(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("_Bool") boolean enabled, @NativeType("Uint32") int key) {
+    /** {@code bool SDL_SetSurfaceColorKey(SDL_Surface * surface, bool enabled, Uint32 key)} */
+    @NativeType("bool")
+    public static boolean SDL_SetSurfaceColorKey(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("bool") boolean enabled, @NativeType("Uint32") int key) {
         if (CHECKS) {
             check(surface, 1);
         }
@@ -17663,14 +17663,14 @@ public class SDL {
 
     // --- [ SDL_SurfaceHasColorKey ] ---
 
-    /** {@code _Bool SDL_SurfaceHasColorKey(SDL_Surface * surface)} */
+    /** {@code bool SDL_SurfaceHasColorKey(SDL_Surface * surface)} */
     public static boolean nSDL_SurfaceHasColorKey(long surface) {
         long __functionAddress = Functions.SurfaceHasColorKey;
         return invokePZ(surface, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SurfaceHasColorKey(SDL_Surface * surface)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SurfaceHasColorKey(SDL_Surface * surface)} */
+    @NativeType("bool")
     public static boolean SDL_SurfaceHasColorKey(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface) {
         if (CHECKS) {
             check(surface, 1);
@@ -17680,14 +17680,14 @@ public class SDL {
 
     // --- [ SDL_GetSurfaceColorKey ] ---
 
-    /** {@code _Bool SDL_GetSurfaceColorKey(SDL_Surface * surface, Uint32 * key)} */
+    /** {@code bool SDL_GetSurfaceColorKey(SDL_Surface * surface, Uint32 * key)} */
     public static boolean nSDL_GetSurfaceColorKey(long surface, long key) {
         long __functionAddress = Functions.GetSurfaceColorKey;
         return invokePPZ(surface, key, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetSurfaceColorKey(SDL_Surface * surface, Uint32 * key)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetSurfaceColorKey(SDL_Surface * surface, Uint32 * key)} */
+    @NativeType("bool")
     public static boolean SDL_GetSurfaceColorKey(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("Uint32 *") IntBuffer key) {
         if (CHECKS) {
             check(surface, 1);
@@ -17698,14 +17698,14 @@ public class SDL {
 
     // --- [ SDL_SetSurfaceColorMod ] ---
 
-    /** {@code _Bool SDL_SetSurfaceColorMod(SDL_Surface * surface, Uint8 r, Uint8 g, Uint8 b)} */
+    /** {@code bool SDL_SetSurfaceColorMod(SDL_Surface * surface, Uint8 r, Uint8 g, Uint8 b)} */
     public static boolean nSDL_SetSurfaceColorMod(long surface, byte r, byte g, byte b) {
         long __functionAddress = Functions.SetSurfaceColorMod;
         return invokePUUUZ(surface, r, g, b, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetSurfaceColorMod(SDL_Surface * surface, Uint8 r, Uint8 g, Uint8 b)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetSurfaceColorMod(SDL_Surface * surface, Uint8 r, Uint8 g, Uint8 b)} */
+    @NativeType("bool")
     public static boolean SDL_SetSurfaceColorMod(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("Uint8") byte r, @NativeType("Uint8") byte g, @NativeType("Uint8") byte b) {
         if (CHECKS) {
             check(surface, 1);
@@ -17715,14 +17715,14 @@ public class SDL {
 
     // --- [ SDL_GetSurfaceColorMod ] ---
 
-    /** {@code _Bool SDL_GetSurfaceColorMod(SDL_Surface * surface, Uint8 * r, Uint8 * g, Uint8 * b)} */
+    /** {@code bool SDL_GetSurfaceColorMod(SDL_Surface * surface, Uint8 * r, Uint8 * g, Uint8 * b)} */
     public static boolean nSDL_GetSurfaceColorMod(long surface, long r, long g, long b) {
         long __functionAddress = Functions.GetSurfaceColorMod;
         return invokePPPPZ(surface, r, g, b, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetSurfaceColorMod(SDL_Surface * surface, Uint8 * r, Uint8 * g, Uint8 * b)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetSurfaceColorMod(SDL_Surface * surface, Uint8 * r, Uint8 * g, Uint8 * b)} */
+    @NativeType("bool")
     public static boolean SDL_GetSurfaceColorMod(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("Uint8 *") ByteBuffer r, @NativeType("Uint8 *") ByteBuffer g, @NativeType("Uint8 *") ByteBuffer b) {
         if (CHECKS) {
             check(surface, 1);
@@ -17735,14 +17735,14 @@ public class SDL {
 
     // --- [ SDL_SetSurfaceAlphaMod ] ---
 
-    /** {@code _Bool SDL_SetSurfaceAlphaMod(SDL_Surface * surface, Uint8 alpha)} */
+    /** {@code bool SDL_SetSurfaceAlphaMod(SDL_Surface * surface, Uint8 alpha)} */
     public static boolean nSDL_SetSurfaceAlphaMod(long surface, byte alpha) {
         long __functionAddress = Functions.SetSurfaceAlphaMod;
         return invokePUZ(surface, alpha, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetSurfaceAlphaMod(SDL_Surface * surface, Uint8 alpha)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetSurfaceAlphaMod(SDL_Surface * surface, Uint8 alpha)} */
+    @NativeType("bool")
     public static boolean SDL_SetSurfaceAlphaMod(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("Uint8") byte alpha) {
         if (CHECKS) {
             check(surface, 1);
@@ -17752,14 +17752,14 @@ public class SDL {
 
     // --- [ SDL_GetSurfaceAlphaMod ] ---
 
-    /** {@code _Bool SDL_GetSurfaceAlphaMod(SDL_Surface * surface, Uint8 * alpha)} */
+    /** {@code bool SDL_GetSurfaceAlphaMod(SDL_Surface * surface, Uint8 * alpha)} */
     public static boolean nSDL_GetSurfaceAlphaMod(long surface, long alpha) {
         long __functionAddress = Functions.GetSurfaceAlphaMod;
         return invokePPZ(surface, alpha, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetSurfaceAlphaMod(SDL_Surface * surface, Uint8 * alpha)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetSurfaceAlphaMod(SDL_Surface * surface, Uint8 * alpha)} */
+    @NativeType("bool")
     public static boolean SDL_GetSurfaceAlphaMod(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("Uint8 *") ByteBuffer alpha) {
         if (CHECKS) {
             check(surface, 1);
@@ -17770,14 +17770,14 @@ public class SDL {
 
     // --- [ SDL_SetSurfaceBlendMode ] ---
 
-    /** {@code _Bool SDL_SetSurfaceBlendMode(SDL_Surface * surface, SDL_BlendMode blendMode)} */
+    /** {@code bool SDL_SetSurfaceBlendMode(SDL_Surface * surface, SDL_BlendMode blendMode)} */
     public static boolean nSDL_SetSurfaceBlendMode(long surface, int blendMode) {
         long __functionAddress = Functions.SetSurfaceBlendMode;
         return invokePZ(surface, blendMode, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetSurfaceBlendMode(SDL_Surface * surface, SDL_BlendMode blendMode)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetSurfaceBlendMode(SDL_Surface * surface, SDL_BlendMode blendMode)} */
+    @NativeType("bool")
     public static boolean SDL_SetSurfaceBlendMode(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("SDL_BlendMode") int blendMode) {
         if (CHECKS) {
             check(surface, 1);
@@ -17787,14 +17787,14 @@ public class SDL {
 
     // --- [ SDL_GetSurfaceBlendMode ] ---
 
-    /** {@code _Bool SDL_GetSurfaceBlendMode(SDL_Surface * surface, SDL_BlendMode * blendMode)} */
+    /** {@code bool SDL_GetSurfaceBlendMode(SDL_Surface * surface, SDL_BlendMode * blendMode)} */
     public static boolean nSDL_GetSurfaceBlendMode(long surface, long blendMode) {
         long __functionAddress = Functions.GetSurfaceBlendMode;
         return invokePPZ(surface, blendMode, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetSurfaceBlendMode(SDL_Surface * surface, SDL_BlendMode * blendMode)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetSurfaceBlendMode(SDL_Surface * surface, SDL_BlendMode * blendMode)} */
+    @NativeType("bool")
     public static boolean SDL_GetSurfaceBlendMode(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("SDL_BlendMode *") IntBuffer blendMode) {
         if (CHECKS) {
             check(surface, 1);
@@ -17805,14 +17805,14 @@ public class SDL {
 
     // --- [ SDL_SetSurfaceClipRect ] ---
 
-    /** {@code _Bool SDL_SetSurfaceClipRect(SDL_Surface * surface, SDL_Rect const * rect)} */
+    /** {@code bool SDL_SetSurfaceClipRect(SDL_Surface * surface, SDL_Rect const * rect)} */
     public static boolean nSDL_SetSurfaceClipRect(long surface, long rect) {
         long __functionAddress = Functions.SetSurfaceClipRect;
         return invokePPZ(surface, rect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetSurfaceClipRect(SDL_Surface * surface, SDL_Rect const * rect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetSurfaceClipRect(SDL_Surface * surface, SDL_Rect const * rect)} */
+    @NativeType("bool")
     public static boolean SDL_SetSurfaceClipRect(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("SDL_Rect const *") SDL_Rect.Buffer rect) {
         if (CHECKS) {
             check(surface, 1);
@@ -17823,14 +17823,14 @@ public class SDL {
 
     // --- [ SDL_GetSurfaceClipRect ] ---
 
-    /** {@code _Bool SDL_GetSurfaceClipRect(SDL_Surface * surface, SDL_Rect * rect)} */
+    /** {@code bool SDL_GetSurfaceClipRect(SDL_Surface * surface, SDL_Rect * rect)} */
     public static boolean nSDL_GetSurfaceClipRect(long surface, long rect) {
         long __functionAddress = Functions.GetSurfaceClipRect;
         return invokePPZ(surface, rect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetSurfaceClipRect(SDL_Surface * surface, SDL_Rect * rect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetSurfaceClipRect(SDL_Surface * surface, SDL_Rect * rect)} */
+    @NativeType("bool")
     public static boolean SDL_GetSurfaceClipRect(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("SDL_Rect *") SDL_Rect.Buffer rect) {
         if (CHECKS) {
             check(surface, 1);
@@ -17841,14 +17841,14 @@ public class SDL {
 
     // --- [ SDL_FlipSurface ] ---
 
-    /** {@code _Bool SDL_FlipSurface(SDL_Surface * surface, SDL_FlipMode flip)} */
+    /** {@code bool SDL_FlipSurface(SDL_Surface * surface, SDL_FlipMode flip)} */
     public static boolean nSDL_FlipSurface(long surface, int flip) {
         long __functionAddress = Functions.FlipSurface;
         return invokePZ(surface, flip, __functionAddress);
     }
 
-    /** {@code _Bool SDL_FlipSurface(SDL_Surface * surface, SDL_FlipMode flip)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_FlipSurface(SDL_Surface * surface, SDL_FlipMode flip)} */
+    @NativeType("bool")
     public static boolean SDL_FlipSurface(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("SDL_FlipMode") int flip) {
         if (CHECKS) {
             check(surface, 1);
@@ -17931,14 +17931,14 @@ public class SDL {
 
     // --- [ SDL_ConvertPixels ] ---
 
-    /** {@code _Bool SDL_ConvertPixels(int width, int height, SDL_PixelFormat src_format, void const * src, int src_pitch, SDL_PixelFormat dst_format, void * dst, int dst_pitch)} */
+    /** {@code bool SDL_ConvertPixels(int width, int height, SDL_PixelFormat src_format, void const * src, int src_pitch, SDL_PixelFormat dst_format, void * dst, int dst_pitch)} */
     public static boolean nSDL_ConvertPixels(int width, int height, int src_format, long src, int src_pitch, int dst_format, long dst, int dst_pitch) {
         long __functionAddress = Functions.ConvertPixels;
         return invokePPZ(width, height, src_format, src, src_pitch, dst_format, dst, dst_pitch, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ConvertPixels(int width, int height, SDL_PixelFormat src_format, void const * src, int src_pitch, SDL_PixelFormat dst_format, void * dst, int dst_pitch)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ConvertPixels(int width, int height, SDL_PixelFormat src_format, void const * src, int src_pitch, SDL_PixelFormat dst_format, void * dst, int dst_pitch)} */
+    @NativeType("bool")
     public static boolean SDL_ConvertPixels(int width, int height, @NativeType("SDL_PixelFormat") int src_format, @NativeType("void const *") ByteBuffer src, int src_pitch, @NativeType("SDL_PixelFormat") int dst_format, @NativeType("void *") ByteBuffer dst, int dst_pitch) {
         if (CHECKS) {
             check(src, height*src_pitch);
@@ -17949,14 +17949,14 @@ public class SDL {
 
     // --- [ SDL_ConvertPixelsAndColorspace ] ---
 
-    /** {@code _Bool SDL_ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormat src_format, SDL_Colorspace src_colorspace, SDL_PropertiesID src_properties, void const * src, int src_pitch, SDL_PixelFormat dst_format, SDL_Colorspace dst_colorspace, SDL_PropertiesID dst_properties, void * dst, int dst_pitch)} */
+    /** {@code bool SDL_ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormat src_format, SDL_Colorspace src_colorspace, SDL_PropertiesID src_properties, void const * src, int src_pitch, SDL_PixelFormat dst_format, SDL_Colorspace dst_colorspace, SDL_PropertiesID dst_properties, void * dst, int dst_pitch)} */
     public static boolean nSDL_ConvertPixelsAndColorspace(int width, int height, int src_format, int src_colorspace, int src_properties, long src, int src_pitch, int dst_format, int dst_colorspace, int dst_properties, long dst, int dst_pitch) {
         long __functionAddress = Functions.ConvertPixelsAndColorspace;
         return invokePPZ(width, height, src_format, src_colorspace, src_properties, src, src_pitch, dst_format, dst_colorspace, dst_properties, dst, dst_pitch, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormat src_format, SDL_Colorspace src_colorspace, SDL_PropertiesID src_properties, void const * src, int src_pitch, SDL_PixelFormat dst_format, SDL_Colorspace dst_colorspace, SDL_PropertiesID dst_properties, void * dst, int dst_pitch)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormat src_format, SDL_Colorspace src_colorspace, SDL_PropertiesID src_properties, void const * src, int src_pitch, SDL_PixelFormat dst_format, SDL_Colorspace dst_colorspace, SDL_PropertiesID dst_properties, void * dst, int dst_pitch)} */
+    @NativeType("bool")
     public static boolean SDL_ConvertPixelsAndColorspace(int width, int height, @NativeType("SDL_PixelFormat") int src_format, @NativeType("SDL_Colorspace") int src_colorspace, @NativeType("SDL_PropertiesID") int src_properties, @NativeType("void const *") ByteBuffer src, int src_pitch, @NativeType("SDL_PixelFormat") int dst_format, @NativeType("SDL_Colorspace") int dst_colorspace, @NativeType("SDL_PropertiesID") int dst_properties, @NativeType("void *") ByteBuffer dst, int dst_pitch) {
         if (CHECKS) {
             check(src, height*src_pitch);
@@ -17967,15 +17967,15 @@ public class SDL {
 
     // --- [ SDL_PremultiplyAlpha ] ---
 
-    /** {@code _Bool SDL_PremultiplyAlpha(int width, int height, SDL_PixelFormat src_format, void const * src, int src_pitch, SDL_PixelFormat dst_format, void * dst, int dst_pitch, _Bool linear)} */
+    /** {@code bool SDL_PremultiplyAlpha(int width, int height, SDL_PixelFormat src_format, void const * src, int src_pitch, SDL_PixelFormat dst_format, void * dst, int dst_pitch, bool linear)} */
     public static boolean nSDL_PremultiplyAlpha(int width, int height, int src_format, long src, int src_pitch, int dst_format, long dst, int dst_pitch, boolean linear) {
         long __functionAddress = Functions.PremultiplyAlpha;
         return invokePPZ(width, height, src_format, src, src_pitch, dst_format, dst, dst_pitch, linear, __functionAddress);
     }
 
-    /** {@code _Bool SDL_PremultiplyAlpha(int width, int height, SDL_PixelFormat src_format, void const * src, int src_pitch, SDL_PixelFormat dst_format, void * dst, int dst_pitch, _Bool linear)} */
-    @NativeType("_Bool")
-    public static boolean SDL_PremultiplyAlpha(int width, int height, @NativeType("SDL_PixelFormat") int src_format, @NativeType("void const *") ByteBuffer src, int src_pitch, @NativeType("SDL_PixelFormat") int dst_format, @NativeType("void *") ByteBuffer dst, int dst_pitch, @NativeType("_Bool") boolean linear) {
+    /** {@code bool SDL_PremultiplyAlpha(int width, int height, SDL_PixelFormat src_format, void const * src, int src_pitch, SDL_PixelFormat dst_format, void * dst, int dst_pitch, bool linear)} */
+    @NativeType("bool")
+    public static boolean SDL_PremultiplyAlpha(int width, int height, @NativeType("SDL_PixelFormat") int src_format, @NativeType("void const *") ByteBuffer src, int src_pitch, @NativeType("SDL_PixelFormat") int dst_format, @NativeType("void *") ByteBuffer dst, int dst_pitch, @NativeType("bool") boolean linear) {
         if (CHECKS) {
             check(src, height*src_pitch);
             check(dst, height*dst_pitch);
@@ -17985,15 +17985,15 @@ public class SDL {
 
     // --- [ SDL_PremultiplySurfaceAlpha ] ---
 
-    /** {@code _Bool SDL_PremultiplySurfaceAlpha(SDL_Surface * surface, _Bool linear)} */
+    /** {@code bool SDL_PremultiplySurfaceAlpha(SDL_Surface * surface, bool linear)} */
     public static boolean nSDL_PremultiplySurfaceAlpha(long surface, boolean linear) {
         long __functionAddress = Functions.PremultiplySurfaceAlpha;
         return invokePZ(surface, linear, __functionAddress);
     }
 
-    /** {@code _Bool SDL_PremultiplySurfaceAlpha(SDL_Surface * surface, _Bool linear)} */
-    @NativeType("_Bool")
-    public static boolean SDL_PremultiplySurfaceAlpha(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("_Bool") boolean linear) {
+    /** {@code bool SDL_PremultiplySurfaceAlpha(SDL_Surface * surface, bool linear)} */
+    @NativeType("bool")
+    public static boolean SDL_PremultiplySurfaceAlpha(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, @NativeType("bool") boolean linear) {
         if (CHECKS) {
             check(surface, 1);
         }
@@ -18002,14 +18002,14 @@ public class SDL {
 
     // --- [ SDL_ClearSurface ] ---
 
-    /** {@code _Bool SDL_ClearSurface(SDL_Surface * surface, float r, float g, float b, float a)} */
+    /** {@code bool SDL_ClearSurface(SDL_Surface * surface, float r, float g, float b, float a)} */
     public static boolean nSDL_ClearSurface(long surface, float r, float g, float b, float a) {
         long __functionAddress = Functions.ClearSurface;
         return invokePZ(surface, r, g, b, a, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ClearSurface(SDL_Surface * surface, float r, float g, float b, float a)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ClearSurface(SDL_Surface * surface, float r, float g, float b, float a)} */
+    @NativeType("bool")
     public static boolean SDL_ClearSurface(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, float r, float g, float b, float a) {
         if (CHECKS) {
             check(surface, 1);
@@ -18019,14 +18019,14 @@ public class SDL {
 
     // --- [ SDL_FillSurfaceRect ] ---
 
-    /** {@code _Bool SDL_FillSurfaceRect(SDL_Surface * dst, SDL_Rect const * rect, Uint32 color)} */
+    /** {@code bool SDL_FillSurfaceRect(SDL_Surface * dst, SDL_Rect const * rect, Uint32 color)} */
     public static boolean nSDL_FillSurfaceRect(long dst, long rect, int color) {
         long __functionAddress = Functions.FillSurfaceRect;
         return invokePPZ(dst, rect, color, __functionAddress);
     }
 
-    /** {@code _Bool SDL_FillSurfaceRect(SDL_Surface * dst, SDL_Rect const * rect, Uint32 color)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_FillSurfaceRect(SDL_Surface * dst, SDL_Rect const * rect, Uint32 color)} */
+    @NativeType("bool")
     public static boolean SDL_FillSurfaceRect(@NativeType("SDL_Surface *") SDL_Surface.Buffer dst, @NativeType("SDL_Rect const *") SDL_Rect.Buffer rect, @NativeType("Uint32") int color) {
         if (CHECKS) {
             check(dst, 1);
@@ -18037,14 +18037,14 @@ public class SDL {
 
     // --- [ SDL_FillSurfaceRects ] ---
 
-    /** {@code _Bool SDL_FillSurfaceRects(SDL_Surface * dst, SDL_Rect const * rects, int count, Uint32 color)} */
+    /** {@code bool SDL_FillSurfaceRects(SDL_Surface * dst, SDL_Rect const * rects, int count, Uint32 color)} */
     public static boolean nSDL_FillSurfaceRects(long dst, long rects, int count, int color) {
         long __functionAddress = Functions.FillSurfaceRects;
         return invokePPZ(dst, rects, count, color, __functionAddress);
     }
 
-    /** {@code _Bool SDL_FillSurfaceRects(SDL_Surface * dst, SDL_Rect const * rects, int count, Uint32 color)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_FillSurfaceRects(SDL_Surface * dst, SDL_Rect const * rects, int count, Uint32 color)} */
+    @NativeType("bool")
     public static boolean SDL_FillSurfaceRects(@NativeType("SDL_Surface *") SDL_Surface.Buffer dst, @NativeType("SDL_Rect const *") SDL_Rect.Buffer rects, @NativeType("Uint32") int color) {
         if (CHECKS) {
             check(dst, 1);
@@ -18054,14 +18054,14 @@ public class SDL {
 
     // --- [ SDL_BlitSurface ] ---
 
-    /** {@code _Bool SDL_BlitSurface(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect)} */
+    /** {@code bool SDL_BlitSurface(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect)} */
     public static boolean nSDL_BlitSurface(long src, long srcrect, long dst, long dstrect) {
         long __functionAddress = Functions.BlitSurface;
         return invokePPPPZ(src, srcrect, dst, dstrect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_BlitSurface(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_BlitSurface(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect)} */
+    @NativeType("bool")
     public static boolean SDL_BlitSurface(@NativeType("SDL_Surface *") SDL_Surface.Buffer src, @NativeType("SDL_Rect const *") SDL_Rect.Buffer srcrect, @NativeType("SDL_Surface *") SDL_Surface.Buffer dst, @NativeType("SDL_Rect const *") SDL_Rect.Buffer dstrect) {
         if (CHECKS) {
             check(src, 1);
@@ -18074,14 +18074,14 @@ public class SDL {
 
     // --- [ SDL_BlitSurfaceUnchecked ] ---
 
-    /** {@code _Bool SDL_BlitSurfaceUnchecked(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect)} */
+    /** {@code bool SDL_BlitSurfaceUnchecked(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect)} */
     public static boolean nSDL_BlitSurfaceUnchecked(long src, long srcrect, long dst, long dstrect) {
         long __functionAddress = Functions.BlitSurfaceUnchecked;
         return invokePPPPZ(src, srcrect, dst, dstrect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_BlitSurfaceUnchecked(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_BlitSurfaceUnchecked(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect)} */
+    @NativeType("bool")
     public static boolean SDL_BlitSurfaceUnchecked(@NativeType("SDL_Surface *") SDL_Surface.Buffer src, @NativeType("SDL_Rect const *") SDL_Rect.Buffer srcrect, @NativeType("SDL_Surface *") SDL_Surface.Buffer dst, @NativeType("SDL_Rect const *") SDL_Rect.Buffer dstrect) {
         if (CHECKS) {
             check(src, 1);
@@ -18094,14 +18094,14 @@ public class SDL {
 
     // --- [ SDL_BlitSurfaceScaled ] ---
 
-    /** {@code _Bool SDL_BlitSurfaceScaled(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect, SDL_ScaleMode scaleMode)} */
+    /** {@code bool SDL_BlitSurfaceScaled(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect, SDL_ScaleMode scaleMode)} */
     public static boolean nSDL_BlitSurfaceScaled(long src, long srcrect, long dst, long dstrect, int scaleMode) {
         long __functionAddress = Functions.BlitSurfaceScaled;
         return invokePPPPZ(src, srcrect, dst, dstrect, scaleMode, __functionAddress);
     }
 
-    /** {@code _Bool SDL_BlitSurfaceScaled(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect, SDL_ScaleMode scaleMode)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_BlitSurfaceScaled(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect, SDL_ScaleMode scaleMode)} */
+    @NativeType("bool")
     public static boolean SDL_BlitSurfaceScaled(@NativeType("SDL_Surface *") SDL_Surface.Buffer src, @NativeType("SDL_Rect const *") SDL_Rect.Buffer srcrect, @NativeType("SDL_Surface *") SDL_Surface.Buffer dst, @NativeType("SDL_Rect const *") SDL_Rect.Buffer dstrect, @NativeType("SDL_ScaleMode") int scaleMode) {
         if (CHECKS) {
             check(src, 1);
@@ -18114,14 +18114,14 @@ public class SDL {
 
     // --- [ SDL_BlitSurfaceUncheckedScaled ] ---
 
-    /** {@code _Bool SDL_BlitSurfaceUncheckedScaled(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect, SDL_ScaleMode scaleMode)} */
+    /** {@code bool SDL_BlitSurfaceUncheckedScaled(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect, SDL_ScaleMode scaleMode)} */
     public static boolean nSDL_BlitSurfaceUncheckedScaled(long src, long srcrect, long dst, long dstrect, int scaleMode) {
         long __functionAddress = Functions.BlitSurfaceUncheckedScaled;
         return invokePPPPZ(src, srcrect, dst, dstrect, scaleMode, __functionAddress);
     }
 
-    /** {@code _Bool SDL_BlitSurfaceUncheckedScaled(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect, SDL_ScaleMode scaleMode)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_BlitSurfaceUncheckedScaled(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect, SDL_ScaleMode scaleMode)} */
+    @NativeType("bool")
     public static boolean SDL_BlitSurfaceUncheckedScaled(@NativeType("SDL_Surface *") SDL_Surface.Buffer src, @NativeType("SDL_Rect const *") SDL_Rect.Buffer srcrect, @NativeType("SDL_Surface *") SDL_Surface.Buffer dst, @NativeType("SDL_Rect const *") SDL_Rect.Buffer dstrect, @NativeType("SDL_ScaleMode") int scaleMode) {
         if (CHECKS) {
             check(src, 1);
@@ -18134,14 +18134,14 @@ public class SDL {
 
     // --- [ SDL_BlitSurfaceTiled ] ---
 
-    /** {@code _Bool SDL_BlitSurfaceTiled(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect)} */
+    /** {@code bool SDL_BlitSurfaceTiled(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect)} */
     public static boolean nSDL_BlitSurfaceTiled(long src, long srcrect, long dst, long dstrect) {
         long __functionAddress = Functions.BlitSurfaceTiled;
         return invokePPPPZ(src, srcrect, dst, dstrect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_BlitSurfaceTiled(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_BlitSurfaceTiled(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect)} */
+    @NativeType("bool")
     public static boolean SDL_BlitSurfaceTiled(@NativeType("SDL_Surface *") SDL_Surface.Buffer src, @NativeType("SDL_Rect const *") SDL_Rect.Buffer srcrect, @NativeType("SDL_Surface *") SDL_Surface.Buffer dst, @NativeType("SDL_Rect const *") SDL_Rect.Buffer dstrect) {
         if (CHECKS) {
             check(src, 1);
@@ -18154,14 +18154,14 @@ public class SDL {
 
     // --- [ SDL_BlitSurfaceTiledWithScale ] ---
 
-    /** {@code _Bool SDL_BlitSurfaceTiledWithScale(SDL_Surface * src, SDL_Rect const * srcrect, float scale, SDL_ScaleMode scaleMode, SDL_Surface * dst, SDL_Rect const * dstrect)} */
+    /** {@code bool SDL_BlitSurfaceTiledWithScale(SDL_Surface * src, SDL_Rect const * srcrect, float scale, SDL_ScaleMode scaleMode, SDL_Surface * dst, SDL_Rect const * dstrect)} */
     public static boolean nSDL_BlitSurfaceTiledWithScale(long src, long srcrect, float scale, int scaleMode, long dst, long dstrect) {
         long __functionAddress = Functions.BlitSurfaceTiledWithScale;
         return invokePPPPZ(src, srcrect, scale, scaleMode, dst, dstrect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_BlitSurfaceTiledWithScale(SDL_Surface * src, SDL_Rect const * srcrect, float scale, SDL_ScaleMode scaleMode, SDL_Surface * dst, SDL_Rect const * dstrect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_BlitSurfaceTiledWithScale(SDL_Surface * src, SDL_Rect const * srcrect, float scale, SDL_ScaleMode scaleMode, SDL_Surface * dst, SDL_Rect const * dstrect)} */
+    @NativeType("bool")
     public static boolean SDL_BlitSurfaceTiledWithScale(@NativeType("SDL_Surface *") SDL_Surface.Buffer src, @NativeType("SDL_Rect const *") SDL_Rect.Buffer srcrect, float scale, @NativeType("SDL_ScaleMode") int scaleMode, @NativeType("SDL_Surface *") SDL_Surface.Buffer dst, @NativeType("SDL_Rect const *") SDL_Rect.Buffer dstrect) {
         if (CHECKS) {
             check(src, 1);
@@ -18174,14 +18174,14 @@ public class SDL {
 
     // --- [ SDL_BlitSurface9Grid ] ---
 
-    /** {@code _Bool SDL_BlitSurface9Grid(SDL_Surface * src, SDL_Rect const * srcrect, int left_width, int right_width, int top_height, int bottom_height, float scale, SDL_ScaleMode scaleMode, SDL_Surface * dst, SDL_Rect const * dstrect)} */
+    /** {@code bool SDL_BlitSurface9Grid(SDL_Surface * src, SDL_Rect const * srcrect, int left_width, int right_width, int top_height, int bottom_height, float scale, SDL_ScaleMode scaleMode, SDL_Surface * dst, SDL_Rect const * dstrect)} */
     public static boolean nSDL_BlitSurface9Grid(long src, long srcrect, int left_width, int right_width, int top_height, int bottom_height, float scale, int scaleMode, long dst, long dstrect) {
         long __functionAddress = Functions.BlitSurface9Grid;
         return invokePPPPZ(src, srcrect, left_width, right_width, top_height, bottom_height, scale, scaleMode, dst, dstrect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_BlitSurface9Grid(SDL_Surface * src, SDL_Rect const * srcrect, int left_width, int right_width, int top_height, int bottom_height, float scale, SDL_ScaleMode scaleMode, SDL_Surface * dst, SDL_Rect const * dstrect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_BlitSurface9Grid(SDL_Surface * src, SDL_Rect const * srcrect, int left_width, int right_width, int top_height, int bottom_height, float scale, SDL_ScaleMode scaleMode, SDL_Surface * dst, SDL_Rect const * dstrect)} */
+    @NativeType("bool")
     public static boolean SDL_BlitSurface9Grid(@NativeType("SDL_Surface *") SDL_Surface.Buffer src, @NativeType("SDL_Rect const *") SDL_Rect.Buffer srcrect, int left_width, int right_width, int top_height, int bottom_height, float scale, @NativeType("SDL_ScaleMode") int scaleMode, @NativeType("SDL_Surface *") SDL_Surface.Buffer dst, @NativeType("SDL_Rect const *") SDL_Rect.Buffer dstrect) {
         if (CHECKS) {
             check(src, 1);
@@ -18228,14 +18228,14 @@ public class SDL {
 
     // --- [ SDL_ReadSurfacePixel ] ---
 
-    /** {@code _Bool SDL_ReadSurfacePixel(SDL_Surface * surface, int x, int y, Uint8 * r, Uint8 * g, Uint8 * b, Uint8 * a)} */
+    /** {@code bool SDL_ReadSurfacePixel(SDL_Surface * surface, int x, int y, Uint8 * r, Uint8 * g, Uint8 * b, Uint8 * a)} */
     public static boolean nSDL_ReadSurfacePixel(long surface, int x, int y, long r, long g, long b, long a) {
         long __functionAddress = Functions.ReadSurfacePixel;
         return invokePPPPPZ(surface, x, y, r, g, b, a, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ReadSurfacePixel(SDL_Surface * surface, int x, int y, Uint8 * r, Uint8 * g, Uint8 * b, Uint8 * a)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ReadSurfacePixel(SDL_Surface * surface, int x, int y, Uint8 * r, Uint8 * g, Uint8 * b, Uint8 * a)} */
+    @NativeType("bool")
     public static boolean SDL_ReadSurfacePixel(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, int x, int y, @NativeType("Uint8 *") @Nullable ByteBuffer r, @NativeType("Uint8 *") @Nullable ByteBuffer g, @NativeType("Uint8 *") @Nullable ByteBuffer b, @NativeType("Uint8 *") @Nullable ByteBuffer a) {
         if (CHECKS) {
             check(surface, 1);
@@ -18249,14 +18249,14 @@ public class SDL {
 
     // --- [ SDL_ReadSurfacePixelFloat ] ---
 
-    /** {@code _Bool SDL_ReadSurfacePixelFloat(SDL_Surface * surface, int x, int y, float * r, float * g, float * b, float * a)} */
+    /** {@code bool SDL_ReadSurfacePixelFloat(SDL_Surface * surface, int x, int y, float * r, float * g, float * b, float * a)} */
     public static boolean nSDL_ReadSurfacePixelFloat(long surface, int x, int y, long r, long g, long b, long a) {
         long __functionAddress = Functions.ReadSurfacePixelFloat;
         return invokePPPPPZ(surface, x, y, r, g, b, a, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ReadSurfacePixelFloat(SDL_Surface * surface, int x, int y, float * r, float * g, float * b, float * a)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ReadSurfacePixelFloat(SDL_Surface * surface, int x, int y, float * r, float * g, float * b, float * a)} */
+    @NativeType("bool")
     public static boolean SDL_ReadSurfacePixelFloat(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, int x, int y, @NativeType("float *") @Nullable FloatBuffer r, @NativeType("float *") @Nullable FloatBuffer g, @NativeType("float *") @Nullable FloatBuffer b, @NativeType("float *") @Nullable FloatBuffer a) {
         if (CHECKS) {
             check(surface, 1);
@@ -18270,14 +18270,14 @@ public class SDL {
 
     // --- [ SDL_WriteSurfacePixel ] ---
 
-    /** {@code _Bool SDL_WriteSurfacePixel(SDL_Surface * surface, int x, int y, Uint8 r, Uint8 g, Uint8 b, Uint8 a)} */
+    /** {@code bool SDL_WriteSurfacePixel(SDL_Surface * surface, int x, int y, Uint8 r, Uint8 g, Uint8 b, Uint8 a)} */
     public static boolean nSDL_WriteSurfacePixel(long surface, int x, int y, byte r, byte g, byte b, byte a) {
         long __functionAddress = Functions.WriteSurfacePixel;
         return invokePUUUUZ(surface, x, y, r, g, b, a, __functionAddress);
     }
 
-    /** {@code _Bool SDL_WriteSurfacePixel(SDL_Surface * surface, int x, int y, Uint8 r, Uint8 g, Uint8 b, Uint8 a)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WriteSurfacePixel(SDL_Surface * surface, int x, int y, Uint8 r, Uint8 g, Uint8 b, Uint8 a)} */
+    @NativeType("bool")
     public static boolean SDL_WriteSurfacePixel(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, int x, int y, @NativeType("Uint8") byte r, @NativeType("Uint8") byte g, @NativeType("Uint8") byte b, @NativeType("Uint8") byte a) {
         if (CHECKS) {
             check(surface, 1);
@@ -18287,14 +18287,14 @@ public class SDL {
 
     // --- [ SDL_WriteSurfacePixelFloat ] ---
 
-    /** {@code _Bool SDL_WriteSurfacePixelFloat(SDL_Surface * surface, int x, int y, float r, float g, float b, float a)} */
+    /** {@code bool SDL_WriteSurfacePixelFloat(SDL_Surface * surface, int x, int y, float r, float g, float b, float a)} */
     public static boolean nSDL_WriteSurfacePixelFloat(long surface, int x, int y, float r, float g, float b, float a) {
         long __functionAddress = Functions.WriteSurfacePixelFloat;
         return invokePZ(surface, x, y, r, g, b, a, __functionAddress);
     }
 
-    /** {@code _Bool SDL_WriteSurfacePixelFloat(SDL_Surface * surface, int x, int y, float r, float g, float b, float a)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WriteSurfacePixelFloat(SDL_Surface * surface, int x, int y, float r, float g, float b, float a)} */
+    @NativeType("bool")
     public static boolean SDL_WriteSurfacePixelFloat(@NativeType("SDL_Surface *") SDL_Surface.Buffer surface, int x, int y, float r, float g, float b, float a) {
         if (CHECKS) {
             check(surface, 1);
@@ -18339,7 +18339,7 @@ public class SDL {
 
     // --- [ SDL_GetDXGIOutputInfo ] ---
 
-    /** {@code _Bool SDL_GetDXGIOutputInfo(SDL_DisplayID displayID, int * adapterIndex, int * outputIndex)} */
+    /** {@code bool SDL_GetDXGIOutputInfo(SDL_DisplayID displayID, int * adapterIndex, int * outputIndex)} */
     public static boolean nSDL_GetDXGIOutputInfo(int displayID, long adapterIndex, long outputIndex) {
         long __functionAddress = Functions.GetDXGIOutputInfo;
         if (CHECKS) {
@@ -18348,8 +18348,8 @@ public class SDL {
         return invokePPZ(displayID, adapterIndex, outputIndex, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetDXGIOutputInfo(SDL_DisplayID displayID, int * adapterIndex, int * outputIndex)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetDXGIOutputInfo(SDL_DisplayID displayID, int * adapterIndex, int * outputIndex)} */
+    @NativeType("bool")
     public static boolean SDL_GetDXGIOutputInfo(@NativeType("SDL_DisplayID") int displayID, @NativeType("int *") IntBuffer adapterIndex, @NativeType("int *") IntBuffer outputIndex) {
         if (CHECKS) {
             check(adapterIndex, 1);
@@ -18376,8 +18376,8 @@ public class SDL {
 
     // --- [ SDL_SetLinuxThreadPriority ] ---
 
-    /** {@code _Bool SDL_SetLinuxThreadPriority(Sint64 threadID, int priority)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetLinuxThreadPriority(Sint64 threadID, int priority)} */
+    @NativeType("bool")
     public static boolean SDL_SetLinuxThreadPriority(@NativeType("Sint64") long threadID, int priority) {
         long __functionAddress = Functions.SetLinuxThreadPriority;
         if (CHECKS) {
@@ -18388,8 +18388,8 @@ public class SDL {
 
     // --- [ SDL_SetLinuxThreadPriorityAndPolicy ] ---
 
-    /** {@code _Bool SDL_SetLinuxThreadPriorityAndPolicy(Sint64 threadID, int sdlPriority, int schedPolicy)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetLinuxThreadPriorityAndPolicy(Sint64 threadID, int sdlPriority, int schedPolicy)} */
+    @NativeType("bool")
     public static boolean SDL_SetLinuxThreadPriorityAndPolicy(@NativeType("Sint64") long threadID, int sdlPriority, int schedPolicy) {
         long __functionAddress = Functions.SetLinuxThreadPriorityAndPolicy;
         if (CHECKS) {
@@ -18400,7 +18400,7 @@ public class SDL {
 
     // --- [ SDL_SetiOSAnimationCallback ] ---
 
-    /** {@code _Bool SDL_SetiOSAnimationCallback(SDL_Window * window, int interval, SDL_iOSAnimationCallback callback, void * callbackParam)} */
+    /** {@code bool SDL_SetiOSAnimationCallback(SDL_Window * window, int interval, SDL_iOSAnimationCallback callback, void * callbackParam)} */
     public static boolean nSDL_SetiOSAnimationCallback(long window, int interval, long callback, long callbackParam) {
         long __functionAddress = Functions.SetiOSAnimationCallback;
         if (CHECKS) {
@@ -18410,16 +18410,16 @@ public class SDL {
         return invokePPPZ(window, interval, callback, callbackParam, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetiOSAnimationCallback(SDL_Window * window, int interval, SDL_iOSAnimationCallback callback, void * callbackParam)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetiOSAnimationCallback(SDL_Window * window, int interval, SDL_iOSAnimationCallback callback, void * callbackParam)} */
+    @NativeType("bool")
     public static boolean SDL_SetiOSAnimationCallback(@NativeType("SDL_Window *") long window, int interval, @NativeType("SDL_iOSAnimationCallback") @Nullable SDL_iOSAnimationCallbackI callback, @NativeType("void *") long callbackParam) {
         return nSDL_SetiOSAnimationCallback(window, interval, memAddressSafe(callback), callbackParam);
     }
 
     // --- [ SDL_SetiOSEventPump ] ---
 
-    /** {@code void SDL_SetiOSEventPump(_Bool enabled)} */
-    public static void SDL_SetiOSEventPump(@NativeType("_Bool") boolean enabled) {
+    /** {@code void SDL_SetiOSEventPump(bool enabled)} */
+    public static void SDL_SetiOSEventPump(@NativeType("bool") boolean enabled) {
         long __functionAddress = Functions.SetiOSEventPump;
         if (CHECKS) {
             check(__functionAddress);
@@ -18464,8 +18464,8 @@ public class SDL {
 
     // --- [ SDL_IsChromebook ] ---
 
-    /** {@code _Bool SDL_IsChromebook(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_IsChromebook(void)} */
+    @NativeType("bool")
     public static boolean SDL_IsChromebook() {
         long __functionAddress = Functions.IsChromebook;
         if (CHECKS) {
@@ -18476,8 +18476,8 @@ public class SDL {
 
     // --- [ SDL_IsDeXMode ] ---
 
-    /** {@code _Bool SDL_IsDeXMode(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_IsDeXMode(void)} */
+    @NativeType("bool")
     public static boolean SDL_IsDeXMode() {
         long __functionAddress = Functions.IsDeXMode;
         if (CHECKS) {
@@ -18565,7 +18565,7 @@ public class SDL {
 
     // --- [ SDL_RequestAndroidPermission ] ---
 
-    /** {@code _Bool SDL_RequestAndroidPermission(char const * permission, SDL_RequestAndroidPermissionCallback cb, void * userdata)} */
+    /** {@code bool SDL_RequestAndroidPermission(char const * permission, SDL_RequestAndroidPermissionCallback cb, void * userdata)} */
     public static boolean nSDL_RequestAndroidPermission(long permission, long cb, long userdata) {
         long __functionAddress = Functions.RequestAndroidPermission;
         if (CHECKS) {
@@ -18574,8 +18574,8 @@ public class SDL {
         return invokePPPZ(permission, cb, userdata, __functionAddress);
     }
 
-    /** {@code _Bool SDL_RequestAndroidPermission(char const * permission, SDL_RequestAndroidPermissionCallback cb, void * userdata)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RequestAndroidPermission(char const * permission, SDL_RequestAndroidPermissionCallback cb, void * userdata)} */
+    @NativeType("bool")
     public static boolean SDL_RequestAndroidPermission(@NativeType("char const *") ByteBuffer permission, @NativeType("SDL_RequestAndroidPermissionCallback") SDL_RequestAndroidPermissionCallbackI cb, @NativeType("void *") long userdata) {
         if (CHECKS) {
             checkNT1(permission);
@@ -18583,8 +18583,8 @@ public class SDL {
         return nSDL_RequestAndroidPermission(memAddress(permission), cb.address(), userdata);
     }
 
-    /** {@code _Bool SDL_RequestAndroidPermission(char const * permission, SDL_RequestAndroidPermissionCallback cb, void * userdata)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RequestAndroidPermission(char const * permission, SDL_RequestAndroidPermissionCallback cb, void * userdata)} */
+    @NativeType("bool")
     public static boolean SDL_RequestAndroidPermission(@NativeType("char const *") CharSequence permission, @NativeType("SDL_RequestAndroidPermissionCallback") SDL_RequestAndroidPermissionCallbackI cb, @NativeType("void *") long userdata) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -18598,7 +18598,7 @@ public class SDL {
 
     // --- [ SDL_ShowAndroidToast ] ---
 
-    /** {@code _Bool SDL_ShowAndroidToast(char const * message, int duration, int gravity, int xoffset, int yoffset)} */
+    /** {@code bool SDL_ShowAndroidToast(char const * message, int duration, int gravity, int xoffset, int yoffset)} */
     public static boolean nSDL_ShowAndroidToast(long message, int duration, int gravity, int xoffset, int yoffset) {
         long __functionAddress = Functions.ShowAndroidToast;
         if (CHECKS) {
@@ -18607,8 +18607,8 @@ public class SDL {
         return invokePZ(message, duration, gravity, xoffset, yoffset, __functionAddress);
     }
 
-    /** {@code _Bool SDL_ShowAndroidToast(char const * message, int duration, int gravity, int xoffset, int yoffset)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ShowAndroidToast(char const * message, int duration, int gravity, int xoffset, int yoffset)} */
+    @NativeType("bool")
     public static boolean SDL_ShowAndroidToast(@NativeType("char const *") ByteBuffer message, int duration, int gravity, int xoffset, int yoffset) {
         if (CHECKS) {
             checkNT1(message);
@@ -18616,8 +18616,8 @@ public class SDL {
         return nSDL_ShowAndroidToast(memAddress(message), duration, gravity, xoffset, yoffset);
     }
 
-    /** {@code _Bool SDL_ShowAndroidToast(char const * message, int duration, int gravity, int xoffset, int yoffset)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ShowAndroidToast(char const * message, int duration, int gravity, int xoffset, int yoffset)} */
+    @NativeType("bool")
     public static boolean SDL_ShowAndroidToast(@NativeType("char const *") CharSequence message, int duration, int gravity, int xoffset, int yoffset) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -18631,8 +18631,8 @@ public class SDL {
 
     // --- [ SDL_SendAndroidMessage ] ---
 
-    /** {@code _Bool SDL_SendAndroidMessage(Uint32 command, int param)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SendAndroidMessage(Uint32 command, int param)} */
+    @NativeType("bool")
     public static boolean SDL_SendAndroidMessage(@NativeType("Uint32") int command, int param) {
         long __functionAddress = Functions.SendAndroidMessage;
         if (CHECKS) {
@@ -18643,8 +18643,8 @@ public class SDL {
 
     // --- [ SDL_IsTablet ] ---
 
-    /** {@code _Bool SDL_IsTablet(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_IsTablet(void)} */
+    @NativeType("bool")
     public static boolean SDL_IsTablet() {
         long __functionAddress = Functions.IsTablet;
         return invokeZ(__functionAddress);
@@ -18652,8 +18652,8 @@ public class SDL {
 
     // --- [ SDL_IsTV ] ---
 
-    /** {@code _Bool SDL_IsTV(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_IsTV(void)} */
+    @NativeType("bool")
     public static boolean SDL_IsTV() {
         long __functionAddress = Functions.IsTV;
         return invokeZ(__functionAddress);
@@ -18747,7 +18747,7 @@ public class SDL {
 
     // --- [ SDL_GetGDKTaskQueue ] ---
 
-    /** {@code _Bool SDL_GetGDKTaskQueue(XTaskQueueHandle * outTaskQueue)} */
+    /** {@code bool SDL_GetGDKTaskQueue(XTaskQueueHandle * outTaskQueue)} */
     public static boolean nSDL_GetGDKTaskQueue(long outTaskQueue) {
         long __functionAddress = Functions.GetGDKTaskQueue;
         if (CHECKS) {
@@ -18756,8 +18756,8 @@ public class SDL {
         return invokePZ(outTaskQueue, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetGDKTaskQueue(XTaskQueueHandle * outTaskQueue)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetGDKTaskQueue(XTaskQueueHandle * outTaskQueue)} */
+    @NativeType("bool")
     public static boolean SDL_GetGDKTaskQueue(@NativeType("XTaskQueueHandle *") PointerBuffer outTaskQueue) {
         if (CHECKS) {
             check(outTaskQueue, 1);
@@ -18767,7 +18767,7 @@ public class SDL {
 
     // --- [ SDL_GetGDKDefaultUser ] ---
 
-    /** {@code _Bool SDL_GetGDKDefaultUser(XUserHandle * outUserHandle)} */
+    /** {@code bool SDL_GetGDKDefaultUser(XUserHandle * outUserHandle)} */
     public static boolean nSDL_GetGDKDefaultUser(long outUserHandle) {
         long __functionAddress = Functions.GetGDKDefaultUser;
         if (CHECKS) {
@@ -18776,8 +18776,8 @@ public class SDL {
         return invokePZ(outUserHandle, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetGDKDefaultUser(XUserHandle * outUserHandle)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetGDKDefaultUser(XUserHandle * outUserHandle)} */
+    @NativeType("bool")
     public static boolean SDL_GetGDKDefaultUser(@NativeType("XUserHandle *") PointerBuffer outUserHandle) {
         if (CHECKS) {
             check(outUserHandle, 1);
@@ -18826,8 +18826,8 @@ public class SDL {
 
     // --- [ SDL_SetCurrentThreadPriority ] ---
 
-    /** {@code _Bool SDL_SetCurrentThreadPriority(SDL_ThreadPriority priority)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetCurrentThreadPriority(SDL_ThreadPriority priority)} */
+    @NativeType("bool")
     public static boolean SDL_SetCurrentThreadPriority(@NativeType("SDL_ThreadPriority") int priority) {
         long __functionAddress = Functions.SetCurrentThreadPriority;
         return invokeZ(priority, __functionAddress);
@@ -18894,7 +18894,7 @@ public class SDL {
 
     // --- [ SDL_SetTLS ] ---
 
-    /** {@code _Bool SDL_SetTLS(SDL_TLSID * id, void * value, SDL_TLSDestructorCallback destructor)} */
+    /** {@code bool SDL_SetTLS(SDL_TLSID * id, void * value, SDL_TLSDestructorCallback destructor)} */
     public static boolean nSDL_SetTLS(long id, long value, long destructor) {
         long __functionAddress = Functions.SetTLS;
         if (CHECKS) {
@@ -18903,8 +18903,8 @@ public class SDL {
         return invokePPPZ(id, value, destructor, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetTLS(SDL_TLSID * id, void * value, SDL_TLSDestructorCallback destructor)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetTLS(SDL_TLSID * id, void * value, SDL_TLSDestructorCallback destructor)} */
+    @NativeType("bool")
     public static boolean SDL_SetTLS(@NativeType("SDL_TLSID *") @Nullable IntBuffer id, @NativeType("void *") long value, @NativeType("SDL_TLSDestructorCallback") SDL_TLSDestructorCallbackI destructor) {
         if (CHECKS) {
             checkSafe(id, 1);
@@ -18922,14 +18922,14 @@ public class SDL {
 
     // --- [ SDL_GetDateTimeLocalePreferences ] ---
 
-    /** {@code _Bool SDL_GetDateTimeLocalePreferences(SDL_DateFormat * dateFormat, SDL_TimeFormat * timeFormat)} */
+    /** {@code bool SDL_GetDateTimeLocalePreferences(SDL_DateFormat * dateFormat, SDL_TimeFormat * timeFormat)} */
     public static boolean nSDL_GetDateTimeLocalePreferences(long dateFormat, long timeFormat) {
         long __functionAddress = Functions.GetDateTimeLocalePreferences;
         return invokePPZ(dateFormat, timeFormat, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetDateTimeLocalePreferences(SDL_DateFormat * dateFormat, SDL_TimeFormat * timeFormat)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetDateTimeLocalePreferences(SDL_DateFormat * dateFormat, SDL_TimeFormat * timeFormat)} */
+    @NativeType("bool")
     public static boolean SDL_GetDateTimeLocalePreferences(@NativeType("SDL_DateFormat *") IntBuffer dateFormat, @NativeType("SDL_TimeFormat *") IntBuffer timeFormat) {
         if (CHECKS) {
             check(dateFormat, 1);
@@ -18940,14 +18940,14 @@ public class SDL {
 
     // --- [ SDL_GetCurrentTime ] ---
 
-    /** {@code _Bool SDL_GetCurrentTime(SDL_Time * ticks)} */
+    /** {@code bool SDL_GetCurrentTime(SDL_Time * ticks)} */
     public static boolean nSDL_GetCurrentTime(long ticks) {
         long __functionAddress = Functions.GetCurrentTime;
         return invokePZ(ticks, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetCurrentTime(SDL_Time * ticks)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetCurrentTime(SDL_Time * ticks)} */
+    @NativeType("bool")
     public static boolean SDL_GetCurrentTime(@NativeType("SDL_Time *") LongBuffer ticks) {
         if (CHECKS) {
             check(ticks, 1);
@@ -18957,15 +18957,15 @@ public class SDL {
 
     // --- [ SDL_TimeToDateTime ] ---
 
-    /** {@code _Bool SDL_TimeToDateTime(SDL_Time ticks, SDL_DateTime * dt, _Bool localTime)} */
+    /** {@code bool SDL_TimeToDateTime(SDL_Time ticks, SDL_DateTime * dt, bool localTime)} */
     public static boolean nSDL_TimeToDateTime(long ticks, long dt, boolean localTime) {
         long __functionAddress = Functions.TimeToDateTime;
         return invokeJPZ(ticks, dt, localTime, __functionAddress);
     }
 
-    /** {@code _Bool SDL_TimeToDateTime(SDL_Time ticks, SDL_DateTime * dt, _Bool localTime)} */
-    @NativeType("_Bool")
-    public static boolean SDL_TimeToDateTime(@NativeType("SDL_Time") long ticks, @NativeType("SDL_DateTime *") SDL_DateTime.Buffer dt, @NativeType("_Bool") boolean localTime) {
+    /** {@code bool SDL_TimeToDateTime(SDL_Time ticks, SDL_DateTime * dt, bool localTime)} */
+    @NativeType("bool")
+    public static boolean SDL_TimeToDateTime(@NativeType("SDL_Time") long ticks, @NativeType("SDL_DateTime *") SDL_DateTime.Buffer dt, @NativeType("bool") boolean localTime) {
         if (CHECKS) {
             check(dt, 1);
         }
@@ -18974,14 +18974,14 @@ public class SDL {
 
     // --- [ SDL_DateTimeToTime ] ---
 
-    /** {@code _Bool SDL_DateTimeToTime(SDL_DateTime const * dt, SDL_Time * ticks)} */
+    /** {@code bool SDL_DateTimeToTime(SDL_DateTime const * dt, SDL_Time * ticks)} */
     public static boolean nSDL_DateTimeToTime(long dt, long ticks) {
         long __functionAddress = Functions.DateTimeToTime;
         return invokePPZ(dt, ticks, __functionAddress);
     }
 
-    /** {@code _Bool SDL_DateTimeToTime(SDL_DateTime const * dt, SDL_Time * ticks)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_DateTimeToTime(SDL_DateTime const * dt, SDL_Time * ticks)} */
+    @NativeType("bool")
     public static boolean SDL_DateTimeToTime(@NativeType("SDL_DateTime const *") SDL_DateTime.Buffer dt, @NativeType("SDL_Time *") LongBuffer ticks) {
         if (CHECKS) {
             check(dt, 1);
@@ -19130,8 +19130,8 @@ public class SDL {
 
     // --- [ SDL_RemoveTimer ] ---
 
-    /** {@code _Bool SDL_RemoveTimer(SDL_TimerID id)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RemoveTimer(SDL_TimerID id)} */
+    @NativeType("bool")
     public static boolean SDL_RemoveTimer(@NativeType("SDL_TimerID") int id) {
         long __functionAddress = Functions.RemoveTimer;
         return invokeZ(id, __functionAddress);
@@ -19502,8 +19502,8 @@ public class SDL {
 
     // --- [ SDL_SetTrayEntryChecked ] ---
 
-    /** {@code void SDL_SetTrayEntryChecked(SDL_TrayEntry * entry, _Bool checked)} */
-    public static void SDL_SetTrayEntryChecked(@NativeType("SDL_TrayEntry *") long entry, @NativeType("_Bool") boolean checked) {
+    /** {@code void SDL_SetTrayEntryChecked(SDL_TrayEntry * entry, bool checked)} */
+    public static void SDL_SetTrayEntryChecked(@NativeType("SDL_TrayEntry *") long entry, @NativeType("bool") boolean checked) {
         long __functionAddress = Functions.SetTrayEntryChecked;
         if (CHECKS) {
             check(entry);
@@ -19513,8 +19513,8 @@ public class SDL {
 
     // --- [ SDL_GetTrayEntryChecked ] ---
 
-    /** {@code _Bool SDL_GetTrayEntryChecked(SDL_TrayEntry * entry)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetTrayEntryChecked(SDL_TrayEntry * entry)} */
+    @NativeType("bool")
     public static boolean SDL_GetTrayEntryChecked(@NativeType("SDL_TrayEntry *") long entry) {
         long __functionAddress = Functions.GetTrayEntryChecked;
         if (CHECKS) {
@@ -19525,8 +19525,8 @@ public class SDL {
 
     // --- [ SDL_SetTrayEntryEnabled ] ---
 
-    /** {@code void SDL_SetTrayEntryEnabled(SDL_TrayEntry * entry, _Bool enabled)} */
-    public static void SDL_SetTrayEntryEnabled(@NativeType("SDL_TrayEntry *") long entry, @NativeType("_Bool") boolean enabled) {
+    /** {@code void SDL_SetTrayEntryEnabled(SDL_TrayEntry * entry, bool enabled)} */
+    public static void SDL_SetTrayEntryEnabled(@NativeType("SDL_TrayEntry *") long entry, @NativeType("bool") boolean enabled) {
         long __functionAddress = Functions.SetTrayEntryEnabled;
         if (CHECKS) {
             check(entry);
@@ -19536,8 +19536,8 @@ public class SDL {
 
     // --- [ SDL_GetTrayEntryEnabled ] ---
 
-    /** {@code _Bool SDL_GetTrayEntryEnabled(SDL_TrayEntry * entry)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetTrayEntryEnabled(SDL_TrayEntry * entry)} */
+    @NativeType("bool")
     public static boolean SDL_GetTrayEntryEnabled(@NativeType("SDL_TrayEntry *") long entry) {
         long __functionAddress = Functions.GetTrayEntryEnabled;
         if (CHECKS) {
@@ -19775,14 +19775,14 @@ public class SDL {
 
     // --- [ SDL_GetDisplayBounds ] ---
 
-    /** {@code _Bool SDL_GetDisplayBounds(SDL_DisplayID displayID, SDL_Rect * rect)} */
+    /** {@code bool SDL_GetDisplayBounds(SDL_DisplayID displayID, SDL_Rect * rect)} */
     public static boolean nSDL_GetDisplayBounds(int displayID, long rect) {
         long __functionAddress = Functions.GetDisplayBounds;
         return invokePZ(displayID, rect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetDisplayBounds(SDL_DisplayID displayID, SDL_Rect * rect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetDisplayBounds(SDL_DisplayID displayID, SDL_Rect * rect)} */
+    @NativeType("bool")
     public static boolean SDL_GetDisplayBounds(@NativeType("SDL_DisplayID") int displayID, @NativeType("SDL_Rect *") SDL_Rect.Buffer rect) {
         if (CHECKS) {
             check(rect, 1);
@@ -19792,14 +19792,14 @@ public class SDL {
 
     // --- [ SDL_GetDisplayUsableBounds ] ---
 
-    /** {@code _Bool SDL_GetDisplayUsableBounds(SDL_DisplayID displayID, SDL_Rect * rect)} */
+    /** {@code bool SDL_GetDisplayUsableBounds(SDL_DisplayID displayID, SDL_Rect * rect)} */
     public static boolean nSDL_GetDisplayUsableBounds(int displayID, long rect) {
         long __functionAddress = Functions.GetDisplayUsableBounds;
         return invokePZ(displayID, rect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetDisplayUsableBounds(SDL_DisplayID displayID, SDL_Rect * rect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetDisplayUsableBounds(SDL_DisplayID displayID, SDL_Rect * rect)} */
+    @NativeType("bool")
     public static boolean SDL_GetDisplayUsableBounds(@NativeType("SDL_DisplayID") int displayID, @NativeType("SDL_Rect *") SDL_Rect.Buffer rect) {
         if (CHECKS) {
             check(rect, 1);
@@ -19856,15 +19856,15 @@ public class SDL {
 
     // --- [ SDL_GetClosestFullscreenDisplayMode ] ---
 
-    /** {@code _Bool SDL_GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, _Bool include_high_density_modes, SDL_DisplayMode * closest)} */
+    /** {@code bool SDL_GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, bool include_high_density_modes, SDL_DisplayMode * closest)} */
     public static boolean nSDL_GetClosestFullscreenDisplayMode(int displayID, int w, int h, float refresh_rate, boolean include_high_density_modes, long closest) {
         long __functionAddress = Functions.GetClosestFullscreenDisplayMode;
         return invokePZ(displayID, w, h, refresh_rate, include_high_density_modes, closest, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, _Bool include_high_density_modes, SDL_DisplayMode * closest)} */
-    @NativeType("_Bool")
-    public static boolean SDL_GetClosestFullscreenDisplayMode(@NativeType("SDL_DisplayID") int displayID, int w, int h, float refresh_rate, @NativeType("_Bool") boolean include_high_density_modes, @NativeType("SDL_DisplayMode *") SDL_DisplayMode.Buffer closest) {
+    /** {@code bool SDL_GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, bool include_high_density_modes, SDL_DisplayMode * closest)} */
+    @NativeType("bool")
+    public static boolean SDL_GetClosestFullscreenDisplayMode(@NativeType("SDL_DisplayID") int displayID, int w, int h, float refresh_rate, @NativeType("bool") boolean include_high_density_modes, @NativeType("SDL_DisplayMode *") SDL_DisplayMode.Buffer closest) {
         if (CHECKS) {
             check(closest, 1);
         }
@@ -19971,7 +19971,7 @@ public class SDL {
 
     // --- [ SDL_SetWindowFullscreenMode ] ---
 
-    /** {@code _Bool SDL_SetWindowFullscreenMode(SDL_Window * window, SDL_DisplayMode const * mode)} */
+    /** {@code bool SDL_SetWindowFullscreenMode(SDL_Window * window, SDL_DisplayMode const * mode)} */
     public static boolean nSDL_SetWindowFullscreenMode(long window, long mode) {
         long __functionAddress = Functions.SetWindowFullscreenMode;
         if (CHECKS) {
@@ -19981,8 +19981,8 @@ public class SDL {
         return invokePPZ(window, mode, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetWindowFullscreenMode(SDL_Window * window, SDL_DisplayMode const * mode)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetWindowFullscreenMode(SDL_Window * window, SDL_DisplayMode const * mode)} */
+    @NativeType("bool")
     public static boolean SDL_SetWindowFullscreenMode(@NativeType("SDL_Window *") long window, @NativeType("SDL_DisplayMode const *") SDL_DisplayMode.Buffer mode) {
         if (CHECKS) {
             check(mode, 1);
@@ -20175,7 +20175,7 @@ public class SDL {
 
     // --- [ SDL_SetWindowTitle ] ---
 
-    /** {@code _Bool SDL_SetWindowTitle(SDL_Window * window, char const * title)} */
+    /** {@code bool SDL_SetWindowTitle(SDL_Window * window, char const * title)} */
     public static boolean nSDL_SetWindowTitle(long window, long title) {
         long __functionAddress = Functions.SetWindowTitle;
         if (CHECKS) {
@@ -20184,8 +20184,8 @@ public class SDL {
         return invokePPZ(window, title, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetWindowTitle(SDL_Window * window, char const * title)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetWindowTitle(SDL_Window * window, char const * title)} */
+    @NativeType("bool")
     public static boolean SDL_SetWindowTitle(@NativeType("SDL_Window *") long window, @NativeType("char const *") ByteBuffer title) {
         if (CHECKS) {
             checkNT1(title);
@@ -20193,8 +20193,8 @@ public class SDL {
         return nSDL_SetWindowTitle(window, memAddress(title));
     }
 
-    /** {@code _Bool SDL_SetWindowTitle(SDL_Window * window, char const * title)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetWindowTitle(SDL_Window * window, char const * title)} */
+    @NativeType("bool")
     public static boolean SDL_SetWindowTitle(@NativeType("SDL_Window *") long window, @NativeType("char const *") CharSequence title) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -20226,7 +20226,7 @@ public class SDL {
 
     // --- [ SDL_SetWindowIcon ] ---
 
-    /** {@code _Bool SDL_SetWindowIcon(SDL_Window * window, SDL_Surface * icon)} */
+    /** {@code bool SDL_SetWindowIcon(SDL_Window * window, SDL_Surface * icon)} */
     public static boolean nSDL_SetWindowIcon(long window, long icon) {
         long __functionAddress = Functions.SetWindowIcon;
         if (CHECKS) {
@@ -20235,8 +20235,8 @@ public class SDL {
         return invokePPZ(window, icon, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetWindowIcon(SDL_Window * window, SDL_Surface * icon)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetWindowIcon(SDL_Window * window, SDL_Surface * icon)} */
+    @NativeType("bool")
     public static boolean SDL_SetWindowIcon(@NativeType("SDL_Window *") long window, @NativeType("SDL_Surface *") SDL_Surface.Buffer icon) {
         if (CHECKS) {
             check(icon, 1);
@@ -20246,8 +20246,8 @@ public class SDL {
 
     // --- [ SDL_SetWindowPosition ] ---
 
-    /** {@code _Bool SDL_SetWindowPosition(SDL_Window * window, int x, int y)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetWindowPosition(SDL_Window * window, int x, int y)} */
+    @NativeType("bool")
     public static boolean SDL_SetWindowPosition(@NativeType("SDL_Window *") long window, int x, int y) {
         long __functionAddress = Functions.SetWindowPosition;
         if (CHECKS) {
@@ -20258,7 +20258,7 @@ public class SDL {
 
     // --- [ SDL_GetWindowPosition ] ---
 
-    /** {@code _Bool SDL_GetWindowPosition(SDL_Window * window, int * x, int * y)} */
+    /** {@code bool SDL_GetWindowPosition(SDL_Window * window, int * x, int * y)} */
     public static boolean nSDL_GetWindowPosition(long window, long x, long y) {
         long __functionAddress = Functions.GetWindowPosition;
         if (CHECKS) {
@@ -20267,8 +20267,8 @@ public class SDL {
         return invokePPPZ(window, x, y, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetWindowPosition(SDL_Window * window, int * x, int * y)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetWindowPosition(SDL_Window * window, int * x, int * y)} */
+    @NativeType("bool")
     public static boolean SDL_GetWindowPosition(@NativeType("SDL_Window *") long window, @NativeType("int *") IntBuffer x, @NativeType("int *") IntBuffer y) {
         if (CHECKS) {
             check(x, 1);
@@ -20279,8 +20279,8 @@ public class SDL {
 
     // --- [ SDL_SetWindowSize ] ---
 
-    /** {@code _Bool SDL_SetWindowSize(SDL_Window * window, int w, int h)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetWindowSize(SDL_Window * window, int w, int h)} */
+    @NativeType("bool")
     public static boolean SDL_SetWindowSize(@NativeType("SDL_Window *") long window, int w, int h) {
         long __functionAddress = Functions.SetWindowSize;
         if (CHECKS) {
@@ -20291,7 +20291,7 @@ public class SDL {
 
     // --- [ SDL_GetWindowSize ] ---
 
-    /** {@code _Bool SDL_GetWindowSize(SDL_Window * window, int * w, int * h)} */
+    /** {@code bool SDL_GetWindowSize(SDL_Window * window, int * w, int * h)} */
     public static boolean nSDL_GetWindowSize(long window, long w, long h) {
         long __functionAddress = Functions.GetWindowSize;
         if (CHECKS) {
@@ -20300,8 +20300,8 @@ public class SDL {
         return invokePPPZ(window, w, h, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetWindowSize(SDL_Window * window, int * w, int * h)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetWindowSize(SDL_Window * window, int * w, int * h)} */
+    @NativeType("bool")
     public static boolean SDL_GetWindowSize(@NativeType("SDL_Window *") long window, @NativeType("int *") IntBuffer w, @NativeType("int *") IntBuffer h) {
         if (CHECKS) {
             check(w, 1);
@@ -20312,7 +20312,7 @@ public class SDL {
 
     // --- [ SDL_GetWindowSafeArea ] ---
 
-    /** {@code _Bool SDL_GetWindowSafeArea(SDL_Window * window, SDL_Rect * rect)} */
+    /** {@code bool SDL_GetWindowSafeArea(SDL_Window * window, SDL_Rect * rect)} */
     public static boolean nSDL_GetWindowSafeArea(long window, long rect) {
         long __functionAddress = Functions.GetWindowSafeArea;
         if (CHECKS) {
@@ -20321,8 +20321,8 @@ public class SDL {
         return invokePPZ(window, rect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetWindowSafeArea(SDL_Window * window, SDL_Rect * rect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetWindowSafeArea(SDL_Window * window, SDL_Rect * rect)} */
+    @NativeType("bool")
     public static boolean SDL_GetWindowSafeArea(@NativeType("SDL_Window *") long window, @NativeType("SDL_Rect *") SDL_Rect.Buffer rect) {
         if (CHECKS) {
             check(rect, 1);
@@ -20332,8 +20332,8 @@ public class SDL {
 
     // --- [ SDL_SetWindowAspectRatio ] ---
 
-    /** {@code _Bool SDL_SetWindowAspectRatio(SDL_Window * window, float min_aspect, float max_aspect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetWindowAspectRatio(SDL_Window * window, float min_aspect, float max_aspect)} */
+    @NativeType("bool")
     public static boolean SDL_SetWindowAspectRatio(@NativeType("SDL_Window *") long window, float min_aspect, float max_aspect) {
         long __functionAddress = Functions.SetWindowAspectRatio;
         if (CHECKS) {
@@ -20344,7 +20344,7 @@ public class SDL {
 
     // --- [ SDL_GetWindowAspectRatio ] ---
 
-    /** {@code _Bool SDL_GetWindowAspectRatio(SDL_Window * window, float * min_aspect, float * max_aspect)} */
+    /** {@code bool SDL_GetWindowAspectRatio(SDL_Window * window, float * min_aspect, float * max_aspect)} */
     public static boolean nSDL_GetWindowAspectRatio(long window, long min_aspect, long max_aspect) {
         long __functionAddress = Functions.GetWindowAspectRatio;
         if (CHECKS) {
@@ -20353,8 +20353,8 @@ public class SDL {
         return invokePPPZ(window, min_aspect, max_aspect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetWindowAspectRatio(SDL_Window * window, float * min_aspect, float * max_aspect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetWindowAspectRatio(SDL_Window * window, float * min_aspect, float * max_aspect)} */
+    @NativeType("bool")
     public static boolean SDL_GetWindowAspectRatio(@NativeType("SDL_Window *") long window, @NativeType("float *") FloatBuffer min_aspect, @NativeType("float *") FloatBuffer max_aspect) {
         if (CHECKS) {
             check(min_aspect, 1);
@@ -20365,7 +20365,7 @@ public class SDL {
 
     // --- [ SDL_GetWindowBordersSize ] ---
 
-    /** {@code _Bool SDL_GetWindowBordersSize(SDL_Window * window, int * top, int * left, int * bottom, int * right)} */
+    /** {@code bool SDL_GetWindowBordersSize(SDL_Window * window, int * top, int * left, int * bottom, int * right)} */
     public static boolean nSDL_GetWindowBordersSize(long window, long top, long left, long bottom, long right) {
         long __functionAddress = Functions.GetWindowBordersSize;
         if (CHECKS) {
@@ -20374,8 +20374,8 @@ public class SDL {
         return invokePPPPPZ(window, top, left, bottom, right, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetWindowBordersSize(SDL_Window * window, int * top, int * left, int * bottom, int * right)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetWindowBordersSize(SDL_Window * window, int * top, int * left, int * bottom, int * right)} */
+    @NativeType("bool")
     public static boolean SDL_GetWindowBordersSize(@NativeType("SDL_Window *") long window, @NativeType("int *") IntBuffer top, @NativeType("int *") IntBuffer left, @NativeType("int *") IntBuffer bottom, @NativeType("int *") IntBuffer right) {
         if (CHECKS) {
             check(top, 1);
@@ -20388,7 +20388,7 @@ public class SDL {
 
     // --- [ SDL_GetWindowSizeInPixels ] ---
 
-    /** {@code _Bool SDL_GetWindowSizeInPixels(SDL_Window * window, int * w, int * h)} */
+    /** {@code bool SDL_GetWindowSizeInPixels(SDL_Window * window, int * w, int * h)} */
     public static boolean nSDL_GetWindowSizeInPixels(long window, long w, long h) {
         long __functionAddress = Functions.GetWindowSizeInPixels;
         if (CHECKS) {
@@ -20397,8 +20397,8 @@ public class SDL {
         return invokePPPZ(window, w, h, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetWindowSizeInPixels(SDL_Window * window, int * w, int * h)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetWindowSizeInPixels(SDL_Window * window, int * w, int * h)} */
+    @NativeType("bool")
     public static boolean SDL_GetWindowSizeInPixels(@NativeType("SDL_Window *") long window, @NativeType("int *") IntBuffer w, @NativeType("int *") IntBuffer h) {
         if (CHECKS) {
             check(w, 1);
@@ -20409,8 +20409,8 @@ public class SDL {
 
     // --- [ SDL_SetWindowMinimumSize ] ---
 
-    /** {@code _Bool SDL_SetWindowMinimumSize(SDL_Window * window, int min_w, int min_h)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetWindowMinimumSize(SDL_Window * window, int min_w, int min_h)} */
+    @NativeType("bool")
     public static boolean SDL_SetWindowMinimumSize(@NativeType("SDL_Window *") long window, int min_w, int min_h) {
         long __functionAddress = Functions.SetWindowMinimumSize;
         if (CHECKS) {
@@ -20421,7 +20421,7 @@ public class SDL {
 
     // --- [ SDL_GetWindowMinimumSize ] ---
 
-    /** {@code _Bool SDL_GetWindowMinimumSize(SDL_Window * window, int * w, int * h)} */
+    /** {@code bool SDL_GetWindowMinimumSize(SDL_Window * window, int * w, int * h)} */
     public static boolean nSDL_GetWindowMinimumSize(long window, long w, long h) {
         long __functionAddress = Functions.GetWindowMinimumSize;
         if (CHECKS) {
@@ -20430,8 +20430,8 @@ public class SDL {
         return invokePPPZ(window, w, h, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetWindowMinimumSize(SDL_Window * window, int * w, int * h)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetWindowMinimumSize(SDL_Window * window, int * w, int * h)} */
+    @NativeType("bool")
     public static boolean SDL_GetWindowMinimumSize(@NativeType("SDL_Window *") long window, @NativeType("int *") IntBuffer w, @NativeType("int *") IntBuffer h) {
         if (CHECKS) {
             check(w, 1);
@@ -20442,8 +20442,8 @@ public class SDL {
 
     // --- [ SDL_SetWindowMaximumSize ] ---
 
-    /** {@code _Bool SDL_SetWindowMaximumSize(SDL_Window * window, int max_w, int max_h)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetWindowMaximumSize(SDL_Window * window, int max_w, int max_h)} */
+    @NativeType("bool")
     public static boolean SDL_SetWindowMaximumSize(@NativeType("SDL_Window *") long window, int max_w, int max_h) {
         long __functionAddress = Functions.SetWindowMaximumSize;
         if (CHECKS) {
@@ -20454,7 +20454,7 @@ public class SDL {
 
     // --- [ SDL_GetWindowMaximumSize ] ---
 
-    /** {@code _Bool SDL_GetWindowMaximumSize(SDL_Window * window, int * w, int * h)} */
+    /** {@code bool SDL_GetWindowMaximumSize(SDL_Window * window, int * w, int * h)} */
     public static boolean nSDL_GetWindowMaximumSize(long window, long w, long h) {
         long __functionAddress = Functions.GetWindowMaximumSize;
         if (CHECKS) {
@@ -20463,8 +20463,8 @@ public class SDL {
         return invokePPPZ(window, w, h, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetWindowMaximumSize(SDL_Window * window, int * w, int * h)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetWindowMaximumSize(SDL_Window * window, int * w, int * h)} */
+    @NativeType("bool")
     public static boolean SDL_GetWindowMaximumSize(@NativeType("SDL_Window *") long window, @NativeType("int *") IntBuffer w, @NativeType("int *") IntBuffer h) {
         if (CHECKS) {
             check(w, 1);
@@ -20475,9 +20475,9 @@ public class SDL {
 
     // --- [ SDL_SetWindowBordered ] ---
 
-    /** {@code _Bool SDL_SetWindowBordered(SDL_Window * window, _Bool bordered)} */
-    @NativeType("_Bool")
-    public static boolean SDL_SetWindowBordered(@NativeType("SDL_Window *") long window, @NativeType("_Bool") boolean bordered) {
+    /** {@code bool SDL_SetWindowBordered(SDL_Window * window, bool bordered)} */
+    @NativeType("bool")
+    public static boolean SDL_SetWindowBordered(@NativeType("SDL_Window *") long window, @NativeType("bool") boolean bordered) {
         long __functionAddress = Functions.SetWindowBordered;
         if (CHECKS) {
             check(window);
@@ -20487,9 +20487,9 @@ public class SDL {
 
     // --- [ SDL_SetWindowResizable ] ---
 
-    /** {@code _Bool SDL_SetWindowResizable(SDL_Window * window, _Bool resizable)} */
-    @NativeType("_Bool")
-    public static boolean SDL_SetWindowResizable(@NativeType("SDL_Window *") long window, @NativeType("_Bool") boolean resizable) {
+    /** {@code bool SDL_SetWindowResizable(SDL_Window * window, bool resizable)} */
+    @NativeType("bool")
+    public static boolean SDL_SetWindowResizable(@NativeType("SDL_Window *") long window, @NativeType("bool") boolean resizable) {
         long __functionAddress = Functions.SetWindowResizable;
         if (CHECKS) {
             check(window);
@@ -20499,9 +20499,9 @@ public class SDL {
 
     // --- [ SDL_SetWindowAlwaysOnTop ] ---
 
-    /** {@code _Bool SDL_SetWindowAlwaysOnTop(SDL_Window * window, _Bool on_top)} */
-    @NativeType("_Bool")
-    public static boolean SDL_SetWindowAlwaysOnTop(@NativeType("SDL_Window *") long window, @NativeType("_Bool") boolean on_top) {
+    /** {@code bool SDL_SetWindowAlwaysOnTop(SDL_Window * window, bool on_top)} */
+    @NativeType("bool")
+    public static boolean SDL_SetWindowAlwaysOnTop(@NativeType("SDL_Window *") long window, @NativeType("bool") boolean on_top) {
         long __functionAddress = Functions.SetWindowAlwaysOnTop;
         if (CHECKS) {
             check(window);
@@ -20511,8 +20511,8 @@ public class SDL {
 
     // --- [ SDL_ShowWindow ] ---
 
-    /** {@code _Bool SDL_ShowWindow(SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ShowWindow(SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_ShowWindow(@NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.ShowWindow;
         if (CHECKS) {
@@ -20523,8 +20523,8 @@ public class SDL {
 
     // --- [ SDL_HideWindow ] ---
 
-    /** {@code _Bool SDL_HideWindow(SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_HideWindow(SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_HideWindow(@NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.HideWindow;
         if (CHECKS) {
@@ -20535,8 +20535,8 @@ public class SDL {
 
     // --- [ SDL_RaiseWindow ] ---
 
-    /** {@code _Bool SDL_RaiseWindow(SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RaiseWindow(SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_RaiseWindow(@NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.RaiseWindow;
         if (CHECKS) {
@@ -20547,8 +20547,8 @@ public class SDL {
 
     // --- [ SDL_MaximizeWindow ] ---
 
-    /** {@code _Bool SDL_MaximizeWindow(SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_MaximizeWindow(SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_MaximizeWindow(@NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.MaximizeWindow;
         if (CHECKS) {
@@ -20559,8 +20559,8 @@ public class SDL {
 
     // --- [ SDL_MinimizeWindow ] ---
 
-    /** {@code _Bool SDL_MinimizeWindow(SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_MinimizeWindow(SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_MinimizeWindow(@NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.MinimizeWindow;
         if (CHECKS) {
@@ -20571,8 +20571,8 @@ public class SDL {
 
     // --- [ SDL_RestoreWindow ] ---
 
-    /** {@code _Bool SDL_RestoreWindow(SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_RestoreWindow(SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_RestoreWindow(@NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.RestoreWindow;
         if (CHECKS) {
@@ -20583,9 +20583,9 @@ public class SDL {
 
     // --- [ SDL_SetWindowFullscreen ] ---
 
-    /** {@code _Bool SDL_SetWindowFullscreen(SDL_Window * window, _Bool fullscreen)} */
-    @NativeType("_Bool")
-    public static boolean SDL_SetWindowFullscreen(@NativeType("SDL_Window *") long window, @NativeType("_Bool") boolean fullscreen) {
+    /** {@code bool SDL_SetWindowFullscreen(SDL_Window * window, bool fullscreen)} */
+    @NativeType("bool")
+    public static boolean SDL_SetWindowFullscreen(@NativeType("SDL_Window *") long window, @NativeType("bool") boolean fullscreen) {
         long __functionAddress = Functions.SetWindowFullscreen;
         if (CHECKS) {
             check(window);
@@ -20595,8 +20595,8 @@ public class SDL {
 
     // --- [ SDL_SyncWindow ] ---
 
-    /** {@code _Bool SDL_SyncWindow(SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SyncWindow(SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_SyncWindow(@NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.SyncWindow;
         if (CHECKS) {
@@ -20607,8 +20607,8 @@ public class SDL {
 
     // --- [ SDL_WindowHasSurface ] ---
 
-    /** {@code _Bool SDL_WindowHasSurface(SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_WindowHasSurface(SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_WindowHasSurface(@NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.WindowHasSurface;
         if (CHECKS) {
@@ -20637,8 +20637,8 @@ public class SDL {
 
     // --- [ SDL_SetWindowSurfaceVSync ] ---
 
-    /** {@code _Bool SDL_SetWindowSurfaceVSync(SDL_Window * window, int vsync)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetWindowSurfaceVSync(SDL_Window * window, int vsync)} */
+    @NativeType("bool")
     public static boolean SDL_SetWindowSurfaceVSync(@NativeType("SDL_Window *") long window, int vsync) {
         long __functionAddress = Functions.SetWindowSurfaceVSync;
         if (CHECKS) {
@@ -20649,7 +20649,7 @@ public class SDL {
 
     // --- [ SDL_GetWindowSurfaceVSync ] ---
 
-    /** {@code _Bool SDL_GetWindowSurfaceVSync(SDL_Window * window, int * vsync)} */
+    /** {@code bool SDL_GetWindowSurfaceVSync(SDL_Window * window, int * vsync)} */
     public static boolean nSDL_GetWindowSurfaceVSync(long window, long vsync) {
         long __functionAddress = Functions.GetWindowSurfaceVSync;
         if (CHECKS) {
@@ -20658,8 +20658,8 @@ public class SDL {
         return invokePPZ(window, vsync, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GetWindowSurfaceVSync(SDL_Window * window, int * vsync)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetWindowSurfaceVSync(SDL_Window * window, int * vsync)} */
+    @NativeType("bool")
     public static boolean SDL_GetWindowSurfaceVSync(@NativeType("SDL_Window *") long window, @NativeType("int *") IntBuffer vsync) {
         if (CHECKS) {
             check(vsync, 1);
@@ -20669,8 +20669,8 @@ public class SDL {
 
     // --- [ SDL_UpdateWindowSurface ] ---
 
-    /** {@code _Bool SDL_UpdateWindowSurface(SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_UpdateWindowSurface(SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_UpdateWindowSurface(@NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.UpdateWindowSurface;
         if (CHECKS) {
@@ -20681,7 +20681,7 @@ public class SDL {
 
     // --- [ SDL_UpdateWindowSurfaceRects ] ---
 
-    /** {@code _Bool SDL_UpdateWindowSurfaceRects(SDL_Window * window, SDL_Rect const * rects, int numrects)} */
+    /** {@code bool SDL_UpdateWindowSurfaceRects(SDL_Window * window, SDL_Rect const * rects, int numrects)} */
     public static boolean nSDL_UpdateWindowSurfaceRects(long window, long rects, int numrects) {
         long __functionAddress = Functions.UpdateWindowSurfaceRects;
         if (CHECKS) {
@@ -20690,16 +20690,16 @@ public class SDL {
         return invokePPZ(window, rects, numrects, __functionAddress);
     }
 
-    /** {@code _Bool SDL_UpdateWindowSurfaceRects(SDL_Window * window, SDL_Rect const * rects, int numrects)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_UpdateWindowSurfaceRects(SDL_Window * window, SDL_Rect const * rects, int numrects)} */
+    @NativeType("bool")
     public static boolean SDL_UpdateWindowSurfaceRects(@NativeType("SDL_Window *") long window, @NativeType("SDL_Rect const *") SDL_Rect.Buffer rects) {
         return nSDL_UpdateWindowSurfaceRects(window, rects.address(), rects.remaining());
     }
 
     // --- [ SDL_DestroyWindowSurface ] ---
 
-    /** {@code _Bool SDL_DestroyWindowSurface(SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_DestroyWindowSurface(SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_DestroyWindowSurface(@NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.DestroyWindowSurface;
         if (CHECKS) {
@@ -20710,9 +20710,9 @@ public class SDL {
 
     // --- [ SDL_SetWindowKeyboardGrab ] ---
 
-    /** {@code _Bool SDL_SetWindowKeyboardGrab(SDL_Window * window, _Bool grabbed)} */
-    @NativeType("_Bool")
-    public static boolean SDL_SetWindowKeyboardGrab(@NativeType("SDL_Window *") long window, @NativeType("_Bool") boolean grabbed) {
+    /** {@code bool SDL_SetWindowKeyboardGrab(SDL_Window * window, bool grabbed)} */
+    @NativeType("bool")
+    public static boolean SDL_SetWindowKeyboardGrab(@NativeType("SDL_Window *") long window, @NativeType("bool") boolean grabbed) {
         long __functionAddress = Functions.SetWindowKeyboardGrab;
         if (CHECKS) {
             check(window);
@@ -20722,9 +20722,9 @@ public class SDL {
 
     // --- [ SDL_SetWindowMouseGrab ] ---
 
-    /** {@code _Bool SDL_SetWindowMouseGrab(SDL_Window * window, _Bool grabbed)} */
-    @NativeType("_Bool")
-    public static boolean SDL_SetWindowMouseGrab(@NativeType("SDL_Window *") long window, @NativeType("_Bool") boolean grabbed) {
+    /** {@code bool SDL_SetWindowMouseGrab(SDL_Window * window, bool grabbed)} */
+    @NativeType("bool")
+    public static boolean SDL_SetWindowMouseGrab(@NativeType("SDL_Window *") long window, @NativeType("bool") boolean grabbed) {
         long __functionAddress = Functions.SetWindowMouseGrab;
         if (CHECKS) {
             check(window);
@@ -20734,8 +20734,8 @@ public class SDL {
 
     // --- [ SDL_GetWindowKeyboardGrab ] ---
 
-    /** {@code _Bool SDL_GetWindowKeyboardGrab(SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetWindowKeyboardGrab(SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_GetWindowKeyboardGrab(@NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.GetWindowKeyboardGrab;
         if (CHECKS) {
@@ -20746,8 +20746,8 @@ public class SDL {
 
     // --- [ SDL_GetWindowMouseGrab ] ---
 
-    /** {@code _Bool SDL_GetWindowMouseGrab(SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GetWindowMouseGrab(SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_GetWindowMouseGrab(@NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.GetWindowMouseGrab;
         if (CHECKS) {
@@ -20767,7 +20767,7 @@ public class SDL {
 
     // --- [ SDL_SetWindowMouseRect ] ---
 
-    /** {@code _Bool SDL_SetWindowMouseRect(SDL_Window * window, SDL_Rect const * rect)} */
+    /** {@code bool SDL_SetWindowMouseRect(SDL_Window * window, SDL_Rect const * rect)} */
     public static boolean nSDL_SetWindowMouseRect(long window, long rect) {
         long __functionAddress = Functions.SetWindowMouseRect;
         if (CHECKS) {
@@ -20776,8 +20776,8 @@ public class SDL {
         return invokePPZ(window, rect, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetWindowMouseRect(SDL_Window * window, SDL_Rect const * rect)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetWindowMouseRect(SDL_Window * window, SDL_Rect const * rect)} */
+    @NativeType("bool")
     public static boolean SDL_SetWindowMouseRect(@NativeType("SDL_Window *") long window, @NativeType("SDL_Rect const *") SDL_Rect.Buffer rect) {
         if (CHECKS) {
             check(rect, 1);
@@ -20805,8 +20805,8 @@ public class SDL {
 
     // --- [ SDL_SetWindowOpacity ] ---
 
-    /** {@code _Bool SDL_SetWindowOpacity(SDL_Window * window, float opacity)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetWindowOpacity(SDL_Window * window, float opacity)} */
+    @NativeType("bool")
     public static boolean SDL_SetWindowOpacity(@NativeType("SDL_Window *") long window, float opacity) {
         long __functionAddress = Functions.SetWindowOpacity;
         if (CHECKS) {
@@ -20828,8 +20828,8 @@ public class SDL {
 
     // --- [ SDL_SetWindowParent ] ---
 
-    /** {@code _Bool SDL_SetWindowParent(SDL_Window * window, SDL_Window * parent)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetWindowParent(SDL_Window * window, SDL_Window * parent)} */
+    @NativeType("bool")
     public static boolean SDL_SetWindowParent(@NativeType("SDL_Window *") long window, @NativeType("SDL_Window *") long parent) {
         long __functionAddress = Functions.SetWindowParent;
         if (CHECKS) {
@@ -20841,9 +20841,9 @@ public class SDL {
 
     // --- [ SDL_SetWindowModal ] ---
 
-    /** {@code _Bool SDL_SetWindowModal(SDL_Window * window, _Bool modal)} */
-    @NativeType("_Bool")
-    public static boolean SDL_SetWindowModal(@NativeType("SDL_Window *") long window, @NativeType("_Bool") boolean modal) {
+    /** {@code bool SDL_SetWindowModal(SDL_Window * window, bool modal)} */
+    @NativeType("bool")
+    public static boolean SDL_SetWindowModal(@NativeType("SDL_Window *") long window, @NativeType("bool") boolean modal) {
         long __functionAddress = Functions.SetWindowModal;
         if (CHECKS) {
             check(window);
@@ -20853,9 +20853,9 @@ public class SDL {
 
     // --- [ SDL_SetWindowFocusable ] ---
 
-    /** {@code _Bool SDL_SetWindowFocusable(SDL_Window * window, _Bool focusable)} */
-    @NativeType("_Bool")
-    public static boolean SDL_SetWindowFocusable(@NativeType("SDL_Window *") long window, @NativeType("_Bool") boolean focusable) {
+    /** {@code bool SDL_SetWindowFocusable(SDL_Window * window, bool focusable)} */
+    @NativeType("bool")
+    public static boolean SDL_SetWindowFocusable(@NativeType("SDL_Window *") long window, @NativeType("bool") boolean focusable) {
         long __functionAddress = Functions.SetWindowFocusable;
         if (CHECKS) {
             check(window);
@@ -20865,8 +20865,8 @@ public class SDL {
 
     // --- [ SDL_ShowWindowSystemMenu ] ---
 
-    /** {@code _Bool SDL_ShowWindowSystemMenu(SDL_Window * window, int x, int y)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ShowWindowSystemMenu(SDL_Window * window, int x, int y)} */
+    @NativeType("bool")
     public static boolean SDL_ShowWindowSystemMenu(@NativeType("SDL_Window *") long window, int x, int y) {
         long __functionAddress = Functions.ShowWindowSystemMenu;
         if (CHECKS) {
@@ -20877,7 +20877,7 @@ public class SDL {
 
     // --- [ SDL_SetWindowHitTest ] ---
 
-    /** {@code _Bool SDL_SetWindowHitTest(SDL_Window * window, SDL_HitTest callback, void * callback_data)} */
+    /** {@code bool SDL_SetWindowHitTest(SDL_Window * window, SDL_HitTest callback, void * callback_data)} */
     public static boolean nSDL_SetWindowHitTest(long window, long callback, long callback_data) {
         long __functionAddress = Functions.SetWindowHitTest;
         if (CHECKS) {
@@ -20886,15 +20886,15 @@ public class SDL {
         return invokePPPZ(window, callback, callback_data, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetWindowHitTest(SDL_Window * window, SDL_HitTest callback, void * callback_data)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetWindowHitTest(SDL_Window * window, SDL_HitTest callback, void * callback_data)} */
+    @NativeType("bool")
     public static boolean SDL_SetWindowHitTest(@NativeType("SDL_Window *") long window, @NativeType("SDL_HitTest") SDL_HitTestI callback, @NativeType("void *") long callback_data) {
         return nSDL_SetWindowHitTest(window, callback.address(), callback_data);
     }
 
     // --- [ SDL_SetWindowShape ] ---
 
-    /** {@code _Bool SDL_SetWindowShape(SDL_Window * window, SDL_Surface * shape)} */
+    /** {@code bool SDL_SetWindowShape(SDL_Window * window, SDL_Surface * shape)} */
     public static boolean nSDL_SetWindowShape(long window, long shape) {
         long __functionAddress = Functions.SetWindowShape;
         if (CHECKS) {
@@ -20903,8 +20903,8 @@ public class SDL {
         return invokePPZ(window, shape, __functionAddress);
     }
 
-    /** {@code _Bool SDL_SetWindowShape(SDL_Window * window, SDL_Surface * shape)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_SetWindowShape(SDL_Window * window, SDL_Surface * shape)} */
+    @NativeType("bool")
     public static boolean SDL_SetWindowShape(@NativeType("SDL_Window *") long window, @NativeType("SDL_Surface *") SDL_Surface.Buffer shape) {
         if (CHECKS) {
             check(shape, 1);
@@ -20914,8 +20914,8 @@ public class SDL {
 
     // --- [ SDL_FlashWindow ] ---
 
-    /** {@code _Bool SDL_FlashWindow(SDL_Window * window, SDL_FlashOperation operation)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_FlashWindow(SDL_Window * window, SDL_FlashOperation operation)} */
+    @NativeType("bool")
     public static boolean SDL_FlashWindow(@NativeType("SDL_Window *") long window, @NativeType("SDL_FlashOperation") int operation) {
         long __functionAddress = Functions.FlashWindow;
         if (CHECKS) {
@@ -20937,8 +20937,8 @@ public class SDL {
 
     // --- [ SDL_ScreenSaverEnabled ] ---
 
-    /** {@code _Bool SDL_ScreenSaverEnabled(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_ScreenSaverEnabled(void)} */
+    @NativeType("bool")
     public static boolean SDL_ScreenSaverEnabled() {
         long __functionAddress = Functions.ScreenSaverEnabled;
         return invokeZ(__functionAddress);
@@ -20946,8 +20946,8 @@ public class SDL {
 
     // --- [ SDL_EnableScreenSaver ] ---
 
-    /** {@code _Bool SDL_EnableScreenSaver(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_EnableScreenSaver(void)} */
+    @NativeType("bool")
     public static boolean SDL_EnableScreenSaver() {
         long __functionAddress = Functions.EnableScreenSaver;
         return invokeZ(__functionAddress);
@@ -20955,8 +20955,8 @@ public class SDL {
 
     // --- [ SDL_DisableScreenSaver ] ---
 
-    /** {@code _Bool SDL_DisableScreenSaver(void)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_DisableScreenSaver(void)} */
+    @NativeType("bool")
     public static boolean SDL_DisableScreenSaver() {
         long __functionAddress = Functions.DisableScreenSaver;
         return invokeZ(__functionAddress);
@@ -20964,14 +20964,14 @@ public class SDL {
 
     // --- [ SDL_GL_LoadLibrary ] ---
 
-    /** {@code _Bool SDL_GL_LoadLibrary(char const * path)} */
+    /** {@code bool SDL_GL_LoadLibrary(char const * path)} */
     public static boolean nSDL_GL_LoadLibrary(long path) {
         long __functionAddress = Functions.GL_LoadLibrary;
         return invokePZ(path, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GL_LoadLibrary(char const * path)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GL_LoadLibrary(char const * path)} */
+    @NativeType("bool")
     public static boolean SDL_GL_LoadLibrary(@NativeType("char const *") @Nullable ByteBuffer path) {
         if (CHECKS) {
             checkNT1Safe(path);
@@ -20979,8 +20979,8 @@ public class SDL {
         return nSDL_GL_LoadLibrary(memAddressSafe(path));
     }
 
-    /** {@code _Bool SDL_GL_LoadLibrary(char const * path)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GL_LoadLibrary(char const * path)} */
+    @NativeType("bool")
     public static boolean SDL_GL_LoadLibrary(@NativeType("char const *") @Nullable CharSequence path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -21062,14 +21062,14 @@ public class SDL {
 
     // --- [ SDL_GL_ExtensionSupported ] ---
 
-    /** {@code _Bool SDL_GL_ExtensionSupported(char const * extension)} */
+    /** {@code bool SDL_GL_ExtensionSupported(char const * extension)} */
     public static boolean nSDL_GL_ExtensionSupported(long extension) {
         long __functionAddress = Functions.GL_ExtensionSupported;
         return invokePZ(extension, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GL_ExtensionSupported(char const * extension)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GL_ExtensionSupported(char const * extension)} */
+    @NativeType("bool")
     public static boolean SDL_GL_ExtensionSupported(@NativeType("char const *") ByteBuffer extension) {
         if (CHECKS) {
             checkNT1(extension);
@@ -21077,8 +21077,8 @@ public class SDL {
         return nSDL_GL_ExtensionSupported(memAddress(extension));
     }
 
-    /** {@code _Bool SDL_GL_ExtensionSupported(char const * extension)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GL_ExtensionSupported(char const * extension)} */
+    @NativeType("bool")
     public static boolean SDL_GL_ExtensionSupported(@NativeType("char const *") CharSequence extension) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -21100,8 +21100,8 @@ public class SDL {
 
     // --- [ SDL_GL_SetAttribute ] ---
 
-    /** {@code _Bool SDL_GL_SetAttribute(SDL_GLAttr attr, int value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GL_SetAttribute(SDL_GLAttr attr, int value)} */
+    @NativeType("bool")
     public static boolean SDL_GL_SetAttribute(@NativeType("SDL_GLAttr") int attr, int value) {
         long __functionAddress = Functions.GL_SetAttribute;
         return invokeZ(attr, value, __functionAddress);
@@ -21109,14 +21109,14 @@ public class SDL {
 
     // --- [ SDL_GL_GetAttribute ] ---
 
-    /** {@code _Bool SDL_GL_GetAttribute(SDL_GLAttr attr, int * value)} */
+    /** {@code bool SDL_GL_GetAttribute(SDL_GLAttr attr, int * value)} */
     public static boolean nSDL_GL_GetAttribute(int attr, long value) {
         long __functionAddress = Functions.GL_GetAttribute;
         return invokePZ(attr, value, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GL_GetAttribute(SDL_GLAttr attr, int * value)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GL_GetAttribute(SDL_GLAttr attr, int * value)} */
+    @NativeType("bool")
     public static boolean SDL_GL_GetAttribute(@NativeType("SDL_GLAttr") int attr, @NativeType("int *") IntBuffer value) {
         if (CHECKS) {
             check(value, 1);
@@ -21138,8 +21138,8 @@ public class SDL {
 
     // --- [ SDL_GL_MakeCurrent ] ---
 
-    /** {@code _Bool SDL_GL_MakeCurrent(SDL_Window * window, SDL_GLContext context)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GL_MakeCurrent(SDL_Window * window, SDL_GLContext context)} */
+    @NativeType("bool")
     public static boolean SDL_GL_MakeCurrent(@NativeType("SDL_Window *") long window, @NativeType("SDL_GLContext") long context) {
         long __functionAddress = Functions.GL_MakeCurrent;
         if (CHECKS) {
@@ -21211,8 +21211,8 @@ public class SDL {
 
     // --- [ SDL_GL_SetSwapInterval ] ---
 
-    /** {@code _Bool SDL_GL_SetSwapInterval(int interval)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GL_SetSwapInterval(int interval)} */
+    @NativeType("bool")
     public static boolean SDL_GL_SetSwapInterval(int interval) {
         long __functionAddress = Functions.GL_SetSwapInterval;
         return invokeZ(interval, __functionAddress);
@@ -21220,14 +21220,14 @@ public class SDL {
 
     // --- [ SDL_GL_GetSwapInterval ] ---
 
-    /** {@code _Bool SDL_GL_GetSwapInterval(int * interval)} */
+    /** {@code bool SDL_GL_GetSwapInterval(int * interval)} */
     public static boolean nSDL_GL_GetSwapInterval(long interval) {
         long __functionAddress = Functions.GL_GetSwapInterval;
         return invokePZ(interval, __functionAddress);
     }
 
-    /** {@code _Bool SDL_GL_GetSwapInterval(int * interval)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GL_GetSwapInterval(int * interval)} */
+    @NativeType("bool")
     public static boolean SDL_GL_GetSwapInterval(@NativeType("int *") IntBuffer interval) {
         if (CHECKS) {
             check(interval, 1);
@@ -21237,8 +21237,8 @@ public class SDL {
 
     // --- [ SDL_GL_SwapWindow ] ---
 
-    /** {@code _Bool SDL_GL_SwapWindow(SDL_Window * window)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GL_SwapWindow(SDL_Window * window)} */
+    @NativeType("bool")
     public static boolean SDL_GL_SwapWindow(@NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.GL_SwapWindow;
         if (CHECKS) {
@@ -21249,8 +21249,8 @@ public class SDL {
 
     // --- [ SDL_GL_DestroyContext ] ---
 
-    /** {@code _Bool SDL_GL_DestroyContext(SDL_GLContext context)} */
-    @NativeType("_Bool")
+    /** {@code bool SDL_GL_DestroyContext(SDL_GLContext context)} */
+    @NativeType("bool")
     public static boolean SDL_GL_DestroyContext(@NativeType("SDL_GLContext") long context) {
         long __functionAddress = Functions.GL_DestroyContext;
         if (CHECKS) {

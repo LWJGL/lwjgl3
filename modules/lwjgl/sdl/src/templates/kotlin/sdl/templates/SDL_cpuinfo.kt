@@ -22,85 +22,85 @@ fun SDL_cpuinfo() = SDL.apply {
         void()
     )
 
-    _Bool(
+    bool(
         "HasAltiVec",
 
         void()
     )
 
-    _Bool(
+    bool(
         "HasMMX",
 
         void()
     )
 
-    _Bool(
+    bool(
         "HasSSE",
 
         void()
     )
 
-    _Bool(
+    bool(
         "HasSSE2",
 
         void()
     )
 
-    _Bool(
+    bool(
         "HasSSE3",
 
         void()
     )
 
-    _Bool(
+    bool(
         "HasSSE41",
 
         void()
     )
 
-    _Bool(
+    bool(
         "HasSSE42",
 
         void()
     )
 
-    _Bool(
+    bool(
         "HasAVX",
 
         void()
     )
 
-    _Bool(
+    bool(
         "HasAVX2",
 
         void()
     )
 
-    _Bool(
+    bool(
         "HasAVX512F",
 
         void()
     )
 
-    _Bool(
+    bool(
         "HasARMSIMD",
 
         void()
     )
 
-    _Bool(
+    bool(
         "HasNEON",
 
         void()
     )
 
-    _Bool(
+    bool(
         "HasLSX",
 
         void()
     )
 
-    _Bool(
+    bool(
         "HasLASX",
 
         void()

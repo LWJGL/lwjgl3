@@ -8,20 +8,20 @@ import org.lwjgl.generator.*
 import sdl.*
 
 fun SDL_error() = SDL.apply {
-    _Bool(
+    bool(
         "SetError",
 
         charUTF8.const.p("fmt")
     )
 
-    _Bool(
+    bool(
         "SetErrorV",
 
         charUTF8.const.p("fmt"),
         va_list("ap")
     )
 
-    _Bool(
+    bool(
         "OutOfMemory",
 
         void()
@@ -33,7 +33,7 @@ fun SDL_error() = SDL.apply {
         void()
     )
 
-    _Bool(
+    bool(
         "ClearError",
 
         void()

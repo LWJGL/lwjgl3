@@ -71,7 +71,7 @@ fun SDL_haptic() = SDL.apply {
         SDL_Haptic.p("haptic")
     )
 
-    _Bool(
+    bool(
         "IsMouseHaptic",
 
         void()
@@ -83,7 +83,7 @@ fun SDL_haptic() = SDL.apply {
         void()
     )
 
-    _Bool(
+    bool(
         "IsJoystickHaptic",
 
         SDL_Joystick.p("joystick")
@@ -125,7 +125,7 @@ fun SDL_haptic() = SDL.apply {
         SDL_Haptic.p("haptic")
     )
 
-    _Bool(
+    bool(
         "HapticEffectSupported",
 
         SDL_Haptic.p("haptic"),
@@ -139,7 +139,7 @@ fun SDL_haptic() = SDL.apply {
         Check(1)..SDL_HapticEffect.const.p("effect")
     )
 
-    _Bool(
+    bool(
         "UpdateHapticEffect",
 
         SDL_Haptic.p("haptic"),
@@ -147,7 +147,7 @@ fun SDL_haptic() = SDL.apply {
         Check(1)..SDL_HapticEffect.const.p("data")
     )
 
-    _Bool(
+    bool(
         "RunHapticEffect",
 
         SDL_Haptic.p("haptic"),
@@ -155,7 +155,7 @@ fun SDL_haptic() = SDL.apply {
         Uint32("iterations")
     )
 
-    _Bool(
+    bool(
         "StopHapticEffect",
 
         SDL_Haptic.p("haptic"),
@@ -169,58 +169,58 @@ fun SDL_haptic() = SDL.apply {
         int("effect")
     )
 
-    _Bool(
+    bool(
         "GetHapticEffectStatus",
 
         SDL_Haptic.p("haptic"),
         int("effect")
     )
 
-    _Bool(
+    bool(
         "SetHapticGain",
 
         SDL_Haptic.p("haptic"),
         int("gain")
     )
 
-    _Bool(
+    bool(
         "SetHapticAutocenter",
 
         SDL_Haptic.p("haptic"),
         int("autocenter")
     )
 
-    _Bool(
+    bool(
         "PauseHaptic",
 
         SDL_Haptic.p("haptic")
     )
 
-    _Bool(
+    bool(
         "ResumeHaptic",
 
         SDL_Haptic.p("haptic")
     )
 
-    _Bool(
+    bool(
         "StopHapticEffects",
 
         SDL_Haptic.p("haptic")
     )
 
-    _Bool(
+    bool(
         "HapticRumbleSupported",
 
         SDL_Haptic.p("haptic")
     )
 
-    _Bool(
+    bool(
         "InitHapticRumble",
 
         SDL_Haptic.p("haptic")
     )
 
-    _Bool(
+    bool(
         "PlayHapticRumble",
 
         SDL_Haptic.p("haptic"),
@@ -228,7 +228,7 @@ fun SDL_haptic() = SDL.apply {
         Uint32("length")
     )
 
-    _Bool(
+    bool(
         "StopHapticRumble",
 
         SDL_Haptic.p("haptic")

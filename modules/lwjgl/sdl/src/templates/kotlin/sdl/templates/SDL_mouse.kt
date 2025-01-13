@@ -44,7 +44,7 @@ fun SDL_mouse() = SDL.apply {
         "MOUSEWHEEL_FLIPPED".enum
     )
 
-    _Bool(
+    bool(
         "HasMouse",
 
         void()
@@ -97,30 +97,30 @@ fun SDL_mouse() = SDL.apply {
         float("y")
     )
 
-    _Bool(
+    bool(
         "WarpMouseGlobal",
 
         float("x"),
         float("y")
     )
 
-    _Bool(
+    bool(
         "SetWindowRelativeMouseMode",
 
         SDL_Window.p("window"),
-        _Bool("enabled")
+        bool("enabled")
     )
 
-    _Bool(
+    bool(
         "GetWindowRelativeMouseMode",
 
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "CaptureMouse",
 
-        _Bool("enabled")
+        bool("enabled")
     )
 
     SDL_Cursor.p(
@@ -148,7 +148,7 @@ fun SDL_mouse() = SDL.apply {
         SDL_SystemCursor("id")
     )
 
-    _Bool(
+    bool(
         "SetCursor",
 
         SDL_Cursor.p("cursor")
@@ -172,19 +172,19 @@ fun SDL_mouse() = SDL.apply {
         SDL_Cursor.p("cursor")
     )
 
-    _Bool(
+    bool(
         "ShowCursor",
 
         void()
     )
 
-    _Bool(
+    bool(
         "HideCursor",
 
         void()
     )
 
-    _Bool(
+    bool(
         "CursorVisible",
 
         void()

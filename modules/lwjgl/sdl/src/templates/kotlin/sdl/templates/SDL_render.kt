@@ -124,7 +124,7 @@ fun SDL_render() = SDL.apply {
         int("index")
     )
 
-    _Bool(
+    bool(
         "CreateWindowAndRenderer",
 
         charUTF8.const.p("title"),
@@ -178,7 +178,7 @@ fun SDL_render() = SDL.apply {
         SDL_Renderer.p("renderer")
     )
 
-    _Bool(
+    bool(
         "GetRenderOutputSize",
 
         SDL_Renderer.p("renderer"),
@@ -186,7 +186,7 @@ fun SDL_render() = SDL.apply {
         Check(1)..int.p("h")
     )
 
-    _Bool(
+    bool(
         "GetCurrentRenderOutputSize",
 
         SDL_Renderer.p("renderer"),
@@ -230,7 +230,7 @@ fun SDL_render() = SDL.apply {
         SDL_Texture.p("texture")
     )
 
-    _Bool(
+    bool(
         "GetTextureSize",
 
         SDL_Texture.p("texture"),
@@ -238,7 +238,7 @@ fun SDL_render() = SDL.apply {
         Check(1)..float.p("h")
     )
 
-    _Bool(
+    bool(
         "SetTextureColorMod",
 
         SDL_Texture.p("texture"),
@@ -247,7 +247,7 @@ fun SDL_render() = SDL.apply {
         Uint8("b")
     )
 
-    _Bool(
+    bool(
         "SetTextureColorModFloat",
 
         SDL_Texture.p("texture"),
@@ -256,7 +256,7 @@ fun SDL_render() = SDL.apply {
         float("b")
     )
 
-    _Bool(
+    bool(
         "GetTextureColorMod",
 
         SDL_Texture.p("texture"),
@@ -265,7 +265,7 @@ fun SDL_render() = SDL.apply {
         Check(1)..Uint8.p("b")
     )
 
-    _Bool(
+    bool(
         "GetTextureColorModFloat",
 
         SDL_Texture.p("texture"),
@@ -274,63 +274,63 @@ fun SDL_render() = SDL.apply {
         Check(1)..float.p("b")
     )
 
-    _Bool(
+    bool(
         "SetTextureAlphaMod",
 
         SDL_Texture.p("texture"),
         Uint8("alpha")
     )
 
-    _Bool(
+    bool(
         "SetTextureAlphaModFloat",
 
         SDL_Texture.p("texture"),
         float("alpha")
     )
 
-    _Bool(
+    bool(
         "GetTextureAlphaMod",
 
         SDL_Texture.p("texture"),
         Check(1)..Uint8.p("alpha")
     )
 
-    _Bool(
+    bool(
         "GetTextureAlphaModFloat",
 
         SDL_Texture.p("texture"),
         Check(1)..float.p("alpha")
     )
 
-    _Bool(
+    bool(
         "SetTextureBlendMode",
 
         SDL_Texture.p("texture"),
         SDL_BlendMode("blendMode")
     )
 
-    _Bool(
+    bool(
         "GetTextureBlendMode",
 
         SDL_Texture.p("texture"),
         Check(1)..SDL_BlendMode.p("blendMode")
     )
 
-    _Bool(
+    bool(
         "SetTextureScaleMode",
 
         SDL_Texture.p("texture"),
         SDL_ScaleMode("scaleMode")
     )
 
-    _Bool(
+    bool(
         "GetTextureScaleMode",
 
         SDL_Texture.p("texture"),
         Check(1)..SDL_ScaleMode.p("scaleMode")
     )
 
-    _Bool(
+    bool(
         "UpdateTexture",
 
         SDL_Texture.p("texture"),
@@ -339,7 +339,7 @@ fun SDL_render() = SDL.apply {
         int("pitch")
     )
 
-    _Bool(
+    bool(
         "UpdateYUVTexture",
 
         SDL_Texture.p("texture"),
@@ -352,7 +352,7 @@ fun SDL_render() = SDL.apply {
         int("Vpitch")
     )
 
-    _Bool(
+    bool(
         "UpdateNVTexture",
 
         SDL_Texture.p("texture"),
@@ -363,7 +363,7 @@ fun SDL_render() = SDL.apply {
         int("UVpitch")
     )
 
-    _Bool(
+    bool(
         "LockTexture",
 
         SDL_Texture.p("texture"),
@@ -372,7 +372,7 @@ fun SDL_render() = SDL.apply {
         Check(1)..int.p("pitch")
     )
 
-    _Bool(
+    bool(
         "LockTextureToSurface",
 
         SDL_Texture.p("texture"),
@@ -386,7 +386,7 @@ fun SDL_render() = SDL.apply {
         SDL_Texture.p("texture")
     )
 
-    _Bool(
+    bool(
         "SetRenderTarget",
 
         SDL_Renderer.p("renderer"),
@@ -399,7 +399,7 @@ fun SDL_render() = SDL.apply {
         SDL_Renderer.p("renderer")
     )
 
-    _Bool(
+    bool(
         "SetRenderLogicalPresentation",
 
         SDL_Renderer.p("renderer"),
@@ -408,7 +408,7 @@ fun SDL_render() = SDL.apply {
         SDL_RendererLogicalPresentation("mode")
     )
 
-    _Bool(
+    bool(
         "GetRenderLogicalPresentation",
 
         SDL_Renderer.p("renderer"),
@@ -417,14 +417,14 @@ fun SDL_render() = SDL.apply {
         Check(1)..SDL_RendererLogicalPresentation.p("mode")
     )
 
-    _Bool(
+    bool(
         "GetRenderLogicalPresentationRect",
 
         SDL_Renderer.p("renderer"),
         Check(1)..SDL_FRect.p("rect")
     )
 
-    _Bool(
+    bool(
         "RenderCoordinatesFromWindow",
 
         SDL_Renderer.p("renderer"),
@@ -434,7 +434,7 @@ fun SDL_render() = SDL.apply {
         Check(1)..float.p("y")
     )
 
-    _Bool(
+    bool(
         "RenderCoordinatesToWindow",
 
         SDL_Renderer.p("renderer"),
@@ -444,61 +444,61 @@ fun SDL_render() = SDL.apply {
         Check(1)..float.p("window_y")
     )
 
-    _Bool(
+    bool(
         "ConvertEventToRenderCoordinates",
 
         SDL_Renderer.p("renderer"),
         Check(1)..SDL_Event.p("event")
     )
 
-    _Bool(
+    bool(
         "SetRenderViewport",
 
         SDL_Renderer.p("renderer"),
         nullable..Check(1)..SDL_Rect.const.p("rect")
     )
 
-    _Bool(
+    bool(
         "GetRenderViewport",
 
         SDL_Renderer.p("renderer"),
         Check(1)..SDL_Rect.p("rect")
     )
 
-    _Bool(
+    bool(
         "RenderViewportSet",
 
         SDL_Renderer.p("renderer")
     )
 
-    _Bool(
+    bool(
         "GetRenderSafeArea",
 
         SDL_Renderer.p("renderer"),
         Check(1)..SDL_Rect.p("rect")
     )
 
-    _Bool(
+    bool(
         "SetRenderClipRect",
 
         SDL_Renderer.p("renderer"),
         nullable..Check(1)..SDL_Rect.const.p("rect")
     )
 
-    _Bool(
+    bool(
         "GetRenderClipRect",
 
         SDL_Renderer.p("renderer"),
         Check(1)..SDL_Rect.p("rect")
     )
 
-    _Bool(
+    bool(
         "RenderClipEnabled",
 
         SDL_Renderer.p("renderer")
     )
 
-    _Bool(
+    bool(
         "SetRenderScale",
 
         SDL_Renderer.p("renderer"),
@@ -506,7 +506,7 @@ fun SDL_render() = SDL.apply {
         float("scaleY")
     )
 
-    _Bool(
+    bool(
         "GetRenderScale",
 
         SDL_Renderer.p("renderer"),
@@ -514,7 +514,7 @@ fun SDL_render() = SDL.apply {
         Check(1)..float.p("scaleY")
     )
 
-    _Bool(
+    bool(
         "SetRenderDrawColor",
 
         SDL_Renderer.p("renderer"),
@@ -524,7 +524,7 @@ fun SDL_render() = SDL.apply {
         Uint8("a")
     )
 
-    _Bool(
+    bool(
         "SetRenderDrawColorFloat",
 
         SDL_Renderer.p("renderer"),
@@ -534,7 +534,7 @@ fun SDL_render() = SDL.apply {
         float("a")
     )
 
-    _Bool(
+    bool(
         "GetRenderDrawColor",
 
         SDL_Renderer.p("renderer"),
@@ -544,7 +544,7 @@ fun SDL_render() = SDL.apply {
         Check(1)..Uint8.p("a")
     )
 
-    _Bool(
+    bool(
         "GetRenderDrawColorFloat",
 
         SDL_Renderer.p("renderer"),
@@ -554,41 +554,41 @@ fun SDL_render() = SDL.apply {
         Check(1)..float.p("a")
     )
 
-    _Bool(
+    bool(
         "SetRenderColorScale",
 
         SDL_Renderer.p("renderer"),
         float("scale")
     )
 
-    _Bool(
+    bool(
         "GetRenderColorScale",
 
         SDL_Renderer.p("renderer"),
         Check(1)..float.p("scale")
     )
 
-    _Bool(
+    bool(
         "SetRenderDrawBlendMode",
 
         SDL_Renderer.p("renderer"),
         SDL_BlendMode("blendMode")
     )
 
-    _Bool(
+    bool(
         "GetRenderDrawBlendMode",
 
         SDL_Renderer.p("renderer"),
         Check(1)..SDL_BlendMode.p("blendMode")
     )
 
-    _Bool(
+    bool(
         "RenderClear",
 
         SDL_Renderer.p("renderer")
     )
 
-    _Bool(
+    bool(
         "RenderPoint",
 
         SDL_Renderer.p("renderer"),
@@ -596,7 +596,7 @@ fun SDL_render() = SDL.apply {
         float("y")
     )
 
-    _Bool(
+    bool(
         "RenderPoints",
 
         SDL_Renderer.p("renderer"),
@@ -604,7 +604,7 @@ fun SDL_render() = SDL.apply {
         AutoSize("points")..int("count")
     )
 
-    _Bool(
+    bool(
         "RenderLine",
 
         SDL_Renderer.p("renderer"),
@@ -614,7 +614,7 @@ fun SDL_render() = SDL.apply {
         float("y2")
     )
 
-    _Bool(
+    bool(
         "RenderLines",
 
         SDL_Renderer.p("renderer"),
@@ -622,14 +622,14 @@ fun SDL_render() = SDL.apply {
         AutoSize("points")..int("count")
     )
 
-    _Bool(
+    bool(
         "RenderRect",
 
         SDL_Renderer.p("renderer"),
         Check(1)..SDL_FRect.const.p("rect")
     )
 
-    _Bool(
+    bool(
         "RenderRects",
 
         SDL_Renderer.p("renderer"),
@@ -637,14 +637,14 @@ fun SDL_render() = SDL.apply {
         AutoSize("rects")..int("count")
     )
 
-    _Bool(
+    bool(
         "RenderFillRect",
 
         SDL_Renderer.p("renderer"),
         Check(1)..SDL_FRect.const.p("rect")
     )
 
-    _Bool(
+    bool(
         "RenderFillRects",
 
         SDL_Renderer.p("renderer"),
@@ -652,7 +652,7 @@ fun SDL_render() = SDL.apply {
         AutoSize("rects")..int("count")
     )
 
-    _Bool(
+    bool(
         "RenderTexture",
 
         SDL_Renderer.p("renderer"),
@@ -661,7 +661,7 @@ fun SDL_render() = SDL.apply {
         nullable..Check(1)..SDL_FRect.const.p("dstrect")
     )
 
-    _Bool(
+    bool(
         "RenderTextureRotated",
 
         SDL_Renderer.p("renderer"),
@@ -673,7 +673,7 @@ fun SDL_render() = SDL.apply {
         SDL_FlipMode("flip")
     )
 
-    _Bool(
+    bool(
         "RenderTextureAffine",
 
         SDL_Renderer.p("renderer"),
@@ -684,7 +684,7 @@ fun SDL_render() = SDL.apply {
         nullable..Check(1)..SDL_FPoint.const.p("down")
     )
 
-    _Bool(
+    bool(
         "RenderTextureTiled",
 
         SDL_Renderer.p("renderer"),
@@ -694,7 +694,7 @@ fun SDL_render() = SDL.apply {
         nullable..Check(1)..SDL_FRect.const.p("dstrect")
     )
 
-    _Bool(
+    bool(
         "RenderTexture9Grid",
 
         SDL_Renderer.p("renderer"),
@@ -708,7 +708,7 @@ fun SDL_render() = SDL.apply {
         nullable..Check(1)..SDL_FRect.const.p("dstrect")
     )
 
-    _Bool(
+    bool(
         "RenderGeometry",
 
         SDL_Renderer.p("renderer"),
@@ -719,7 +719,7 @@ fun SDL_render() = SDL.apply {
         AutoSize("indices")..int("num_indices")
     )
 
-    _Bool(
+    bool(
         "RenderGeometryRaw",
 
         SDL_Renderer.p("renderer"),
@@ -743,7 +743,7 @@ fun SDL_render() = SDL.apply {
         nullable..Check(1)..SDL_Rect.const.p("rect")
     )
 
-    _Bool(
+    bool(
         "RenderPresent",
 
         SDL_Renderer.p("renderer")
@@ -761,7 +761,7 @@ fun SDL_render() = SDL.apply {
         SDL_Renderer.p("renderer")
     )
 
-    _Bool(
+    bool(
         "FlushRenderer",
 
         SDL_Renderer.p("renderer")
@@ -779,7 +779,7 @@ fun SDL_render() = SDL.apply {
         SDL_Renderer.p("renderer")
     )
 
-    _Bool(
+    bool(
         "AddVulkanRenderSemaphores",
 
         SDL_Renderer.p("renderer"),
@@ -788,21 +788,21 @@ fun SDL_render() = SDL.apply {
         Sint64("signal_semaphore")
     )
 
-    _Bool(
+    bool(
         "SetRenderVSync",
 
         SDL_Renderer.p("renderer"),
         int("vsync")
     )
 
-    _Bool(
+    bool(
         "GetRenderVSync",
 
         SDL_Renderer.p("renderer"),
         Check(1)..int.p("vsync")
     )
 
-    _Bool(
+    bool(
         "RenderDebugText",
 
         SDL_Renderer.p("renderer"),
@@ -811,7 +811,7 @@ fun SDL_render() = SDL.apply {
         charUTF8.const.p("str")
     )
 
-    _Bool(
+    bool(
         "RenderDebugTextFormat",
 
         SDL_Renderer.p("renderer"),

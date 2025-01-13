@@ -59,7 +59,7 @@ fun SDL_joystick() = SDL.apply {
         void()
     )
 
-    _Bool(
+    bool(
         "HasJoystick",
 
         void()
@@ -143,19 +143,19 @@ fun SDL_joystick() = SDL.apply {
         Check(1)..SDL_VirtualJoystickDesc.const.p("desc")
     )
 
-    _Bool(
+    bool(
         "DetachVirtualJoystick",
 
         SDL_JoystickID("instance_id")
     )
 
-    _Bool(
+    bool(
         "IsJoystickVirtual",
 
         SDL_JoystickID("instance_id")
     )
 
-    _Bool(
+    bool(
         "SetJoystickVirtualAxis",
 
         SDL_Joystick.p("joystick"),
@@ -163,7 +163,7 @@ fun SDL_joystick() = SDL.apply {
         Sint16("value")
     )
 
-    _Bool(
+    bool(
         "SetJoystickVirtualBall",
 
         SDL_Joystick.p("joystick"),
@@ -172,15 +172,15 @@ fun SDL_joystick() = SDL.apply {
         Sint16("yrel")
     )
 
-    _Bool(
+    bool(
         "SetJoystickVirtualButton",
 
         SDL_Joystick.p("joystick"),
         int("button"),
-        _Bool("down")
+        bool("down")
     )
 
-    _Bool(
+    bool(
         "SetJoystickVirtualHat",
 
         SDL_Joystick.p("joystick"),
@@ -188,19 +188,19 @@ fun SDL_joystick() = SDL.apply {
         Uint8("value")
     )
 
-    _Bool(
+    bool(
         "SetJoystickVirtualTouchpad",
 
         SDL_Joystick.p("joystick"),
         int("touchpad"),
         int("finger"),
-        _Bool("down"),
+        bool("down"),
         float("x"),
         float("y"),
         float("pressure")
     )
 
-    _Bool(
+    bool(
         "SendJoystickVirtualSensorData",
 
         SDL_Joystick.p("joystick"),
@@ -234,7 +234,7 @@ fun SDL_joystick() = SDL.apply {
         SDL_Joystick.p("joystick")
     )
 
-    _Bool(
+    bool(
         "SetJoystickPlayerIndex",
 
         SDL_Joystick.p("joystick"),
@@ -293,7 +293,7 @@ fun SDL_joystick() = SDL.apply {
         Check(1)..Uint16.p("crc16")
     )
 
-    _Bool(
+    bool(
         "JoystickConnected",
 
         SDL_Joystick.p("joystick")
@@ -332,10 +332,10 @@ fun SDL_joystick() = SDL.apply {
     void(
         "SetJoystickEventsEnabled",
 
-        _Bool("enabled")
+        bool("enabled")
     )
 
-    _Bool(
+    bool(
         "JoystickEventsEnabled",
 
         void()
@@ -354,7 +354,7 @@ fun SDL_joystick() = SDL.apply {
         int("axis")
     )
 
-    _Bool(
+    bool(
         "GetJoystickAxisInitialState",
 
         SDL_Joystick.p("joystick"),
@@ -362,7 +362,7 @@ fun SDL_joystick() = SDL.apply {
         Check(1)..Sint16.p("state")
     )
 
-    _Bool(
+    bool(
         "GetJoystickBall",
 
         SDL_Joystick.p("joystick"),
@@ -378,14 +378,14 @@ fun SDL_joystick() = SDL.apply {
         int("hat")
     )
 
-    _Bool(
+    bool(
         "GetJoystickButton",
 
         SDL_Joystick.p("joystick"),
         int("button")
     )
 
-    _Bool(
+    bool(
         "RumbleJoystick",
 
         SDL_Joystick.p("joystick"),
@@ -394,7 +394,7 @@ fun SDL_joystick() = SDL.apply {
         Uint32("duration_ms")
     )
 
-    _Bool(
+    bool(
         "RumbleJoystickTriggers",
 
         SDL_Joystick.p("joystick"),
@@ -403,7 +403,7 @@ fun SDL_joystick() = SDL.apply {
         Uint32("duration_ms")
     )
 
-    _Bool(
+    bool(
         "SetJoystickLED",
 
         SDL_Joystick.p("joystick"),
@@ -412,7 +412,7 @@ fun SDL_joystick() = SDL.apply {
         Uint8("blue")
     )
 
-    _Bool(
+    bool(
         "SendJoystickEffect",
 
         SDL_Joystick.p("joystick"),

@@ -62,14 +62,14 @@ fun SDL_rect() = SDL.apply {
         return SDL_RectsEqualEpsilon(a, b, SDL_FLT_EPSILON);
     }""")
 
-    _Bool(
+    bool(
         "HasRectIntersection",
 
         nullable..Check(1)..SDL_Rect.const.p("A"),
         nullable..Check(1)..SDL_Rect.const.p("B")
     )
 
-    _Bool(
+    bool(
         "GetRectIntersection",
 
         nullable..Check(1)..SDL_Rect.const.p("A"),
@@ -77,7 +77,7 @@ fun SDL_rect() = SDL.apply {
         nullable..Check(1)..SDL_Rect.p("result")
     )
 
-    _Bool(
+    bool(
         "GetRectUnion",
 
         nullable..Check(1)..SDL_Rect.const.p("A"),
@@ -85,7 +85,7 @@ fun SDL_rect() = SDL.apply {
         nullable..Check(1)..SDL_Rect.p("result")
     )
 
-    _Bool(
+    bool(
         "GetRectEnclosingPoints",
 
         SDL_Point.const.p("points"),
@@ -94,7 +94,7 @@ fun SDL_rect() = SDL.apply {
         Check(1)..SDL_Rect.p("result")
     )
 
-    _Bool(
+    bool(
         "GetRectAndLineIntersection",
 
         Check(1)..SDL_Rect.const.p("rect"),
@@ -104,14 +104,14 @@ fun SDL_rect() = SDL.apply {
         Check(1)..int.p("Y2")
     )
 
-    _Bool(
+    bool(
         "HasRectIntersectionFloat",
 
         nullable..Check(1)..SDL_FRect.const.p("A"),
         nullable..Check(1)..SDL_FRect.const.p("B")
     )
 
-    _Bool(
+    bool(
         "GetRectIntersectionFloat",
 
         nullable..Check(1)..SDL_FRect.const.p("A"),
@@ -119,7 +119,7 @@ fun SDL_rect() = SDL.apply {
         nullable..Check(1)..SDL_FRect.p("result")
     )
 
-    _Bool(
+    bool(
         "GetRectUnionFloat",
 
         nullable..Check(1)..SDL_FRect.const.p("A"),
@@ -127,7 +127,7 @@ fun SDL_rect() = SDL.apply {
         Check(1)..SDL_FRect.p("result")
     )
 
-    _Bool(
+    bool(
         "GetRectEnclosingPointsFloat",
 
         SDL_FPoint.const.p("points"),
@@ -136,7 +136,7 @@ fun SDL_rect() = SDL.apply {
         Check(1)..SDL_FRect.p("result")
     )
 
-    _Bool(
+    bool(
         "GetRectAndLineIntersectionFloat",
 
         Check(1)..SDL_FRect.const.p("rect"),

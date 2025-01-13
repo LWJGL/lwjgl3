@@ -37,19 +37,19 @@ fun SDL_storage() = SDL.apply {
         nullable..opaque_p("userdata")
     )
 
-    _Bool(
+    bool(
         "CloseStorage",
 
         SDL_Storage.p("storage")
     )
 
-    _Bool(
+    bool(
         "StorageReady",
 
         SDL_Storage.p("storage")
     )
 
-    _Bool(
+    bool(
         "GetStorageFileSize",
 
         SDL_Storage.p("storage"),
@@ -57,7 +57,7 @@ fun SDL_storage() = SDL.apply {
         Check(1)..Uint64.p("length")
     )
 
-    _Bool(
+    bool(
         "ReadStorageFile",
 
         SDL_Storage.p("storage"),
@@ -66,7 +66,7 @@ fun SDL_storage() = SDL.apply {
         AutoSize("destination")..Uint64("length")
     )
 
-    _Bool(
+    bool(
         "WriteStorageFile",
 
         SDL_Storage.p("storage"),
@@ -75,14 +75,14 @@ fun SDL_storage() = SDL.apply {
         AutoSize("source")..Uint64("length")
     )
 
-    _Bool(
+    bool(
         "CreateStorageDirectory",
 
         SDL_Storage.p("storage"),
         charUTF8.const.p("path")
     )
 
-    _Bool(
+    bool(
         "EnumerateStorageDirectory",
 
         SDL_Storage.p("storage"),
@@ -91,14 +91,14 @@ fun SDL_storage() = SDL.apply {
         nullable..opaque_p("userdata")
     )
 
-    _Bool(
+    bool(
         "RemoveStoragePath",
 
         SDL_Storage.p("storage"),
         charUTF8.const.p("path")
     )
 
-    _Bool(
+    bool(
         "RenameStoragePath",
 
         SDL_Storage.p("storage"),
@@ -106,7 +106,7 @@ fun SDL_storage() = SDL.apply {
         charUTF8.const.p("newpath")
     )
 
-    _Bool(
+    bool(
         "CopyStorageFile",
 
         SDL_Storage.p("storage"),
@@ -114,7 +114,7 @@ fun SDL_storage() = SDL.apply {
         charUTF8.const.p("newpath")
     )
 
-    _Bool(
+    bool(
         "GetStoragePathInfo",
 
         SDL_Storage.p("storage"),

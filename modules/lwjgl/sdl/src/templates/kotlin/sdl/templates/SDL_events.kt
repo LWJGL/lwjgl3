@@ -152,13 +152,13 @@ fun SDL_events() = SDL.apply {
         Uint32("maxType")
     )
 
-    _Bool(
+    bool(
         "HasEvent",
 
         Uint32("type")
     )
 
-    _Bool(
+    bool(
         "HasEvents",
 
         Uint32("minType"),
@@ -178,26 +178,26 @@ fun SDL_events() = SDL.apply {
         Uint32("maxType")
     )
 
-    _Bool(
+    bool(
         "PollEvent",
 
         nullable..SDL_Event.p("event")
     )
 
-    _Bool(
+    bool(
         "WaitEvent",
 
         nullable..SDL_Event.p("event")
     )
 
-    _Bool(
+    bool(
         "WaitEventTimeout",
 
         nullable..SDL_Event.p("event"),
         Sint32("timeoutMS")
     )
 
-    _Bool(
+    bool(
         "PushEvent",
 
         Check(1)..SDL_Event.p("event")
@@ -210,14 +210,14 @@ fun SDL_events() = SDL.apply {
         nullable..opaque_p("userdata")
     )
 
-    _Bool(
+    bool(
         "GetEventFilter",
 
         Check(1)..SDL_EventFilter.p("filter"),
         nullable..Check(1)..opaque_p.p("userdata")
     )
 
-    _Bool(
+    bool(
         "AddEventWatch",
 
         SDL_EventFilter("filter"),
@@ -242,10 +242,10 @@ fun SDL_events() = SDL.apply {
         "SetEventEnabled",
 
         Uint32("type"),
-        _Bool("enabled")
+        bool("enabled")
     )
 
-    _Bool(
+    bool(
         "EventEnabled",
 
         Uint32("type")

@@ -236,14 +236,14 @@ fun SDL_video() = SDL.apply {
         SDL_DisplayID("displayID")
     )
 
-    _Bool(
+    bool(
         "GetDisplayBounds",
 
         SDL_DisplayID("displayID"),
         Check(1)..SDL_Rect.p("rect")
     )
 
-    _Bool(
+    bool(
         "GetDisplayUsableBounds",
 
         SDL_DisplayID("displayID"),
@@ -275,14 +275,14 @@ fun SDL_video() = SDL.apply {
         AutoSizeResult..int.p("count")
     )
 
-    _Bool(
+    bool(
         "GetClosestFullscreenDisplayMode",
 
         SDL_DisplayID("displayID"),
         int("w"),
         int("h"),
         float("refresh_rate"),
-        _Bool("include_high_density_modes"),
+        bool("include_high_density_modes"),
         Check(1)..SDL_DisplayMode.p("closest")
     )
 
@@ -328,7 +328,7 @@ fun SDL_video() = SDL.apply {
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "SetWindowFullscreenMode",
 
         SDL_Window.p("window"),
@@ -416,7 +416,7 @@ fun SDL_video() = SDL.apply {
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "SetWindowTitle",
 
         SDL_Window.p("window"),
@@ -429,14 +429,14 @@ fun SDL_video() = SDL.apply {
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "SetWindowIcon",
 
         SDL_Window.p("window"),
         Check(1)..SDL_Surface.p("icon")
     )
 
-    _Bool(
+    bool(
         "SetWindowPosition",
 
         SDL_Window.p("window"),
@@ -444,7 +444,7 @@ fun SDL_video() = SDL.apply {
         int("y")
     )
 
-    _Bool(
+    bool(
         "GetWindowPosition",
 
         SDL_Window.p("window"),
@@ -452,7 +452,7 @@ fun SDL_video() = SDL.apply {
         Check(1)..int.p("y")
     )
 
-    _Bool(
+    bool(
         "SetWindowSize",
 
         SDL_Window.p("window"),
@@ -460,7 +460,7 @@ fun SDL_video() = SDL.apply {
         int("h")
     )
 
-    _Bool(
+    bool(
         "GetWindowSize",
 
         SDL_Window.p("window"),
@@ -468,14 +468,14 @@ fun SDL_video() = SDL.apply {
         Check(1)..int.p("h")
     )
 
-    _Bool(
+    bool(
         "GetWindowSafeArea",
 
         SDL_Window.p("window"),
         Check(1)..SDL_Rect.p("rect")
     )
 
-    _Bool(
+    bool(
         "SetWindowAspectRatio",
 
         SDL_Window.p("window"),
@@ -483,7 +483,7 @@ fun SDL_video() = SDL.apply {
         float("max_aspect")
     )
 
-    _Bool(
+    bool(
         "GetWindowAspectRatio",
 
         SDL_Window.p("window"),
@@ -491,7 +491,7 @@ fun SDL_video() = SDL.apply {
         Check(1)..float.p("max_aspect")
     )
 
-    _Bool(
+    bool(
         "GetWindowBordersSize",
 
         SDL_Window.p("window"),
@@ -501,7 +501,7 @@ fun SDL_video() = SDL.apply {
         Check(1)..int.p("right")
     )
 
-    _Bool(
+    bool(
         "GetWindowSizeInPixels",
 
         SDL_Window.p("window"),
@@ -509,7 +509,7 @@ fun SDL_video() = SDL.apply {
         Check(1)..int.p("h")
     )
 
-    _Bool(
+    bool(
         "SetWindowMinimumSize",
 
         SDL_Window.p("window"),
@@ -517,7 +517,7 @@ fun SDL_video() = SDL.apply {
         int("min_h")
     )
 
-    _Bool(
+    bool(
         "GetWindowMinimumSize",
 
         SDL_Window.p("window"),
@@ -525,7 +525,7 @@ fun SDL_video() = SDL.apply {
         Check(1)..int.p("h")
     )
 
-    _Bool(
+    bool(
         "SetWindowMaximumSize",
 
         SDL_Window.p("window"),
@@ -533,7 +533,7 @@ fun SDL_video() = SDL.apply {
         int("max_h")
     )
 
-    _Bool(
+    bool(
         "GetWindowMaximumSize",
 
         SDL_Window.p("window"),
@@ -541,77 +541,77 @@ fun SDL_video() = SDL.apply {
         Check(1)..int.p("h")
     )
 
-    _Bool(
+    bool(
         "SetWindowBordered",
 
         SDL_Window.p("window"),
-        _Bool("bordered")
+        bool("bordered")
     )
 
-    _Bool(
+    bool(
         "SetWindowResizable",
 
         SDL_Window.p("window"),
-        _Bool("resizable")
+        bool("resizable")
     )
 
-    _Bool(
+    bool(
         "SetWindowAlwaysOnTop",
 
         SDL_Window.p("window"),
-        _Bool("on_top")
+        bool("on_top")
     )
 
-    _Bool(
+    bool(
         "ShowWindow",
 
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "HideWindow",
 
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "RaiseWindow",
 
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "MaximizeWindow",
 
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "MinimizeWindow",
 
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "RestoreWindow",
 
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "SetWindowFullscreen",
 
         SDL_Window.p("window"),
-        _Bool("fullscreen")
+        bool("fullscreen")
     )
 
-    _Bool(
+    bool(
         "SyncWindow",
 
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "WindowHasSurface",
 
         SDL_Window.p("window")
@@ -623,27 +623,27 @@ fun SDL_video() = SDL.apply {
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "SetWindowSurfaceVSync",
 
         SDL_Window.p("window"),
         int("vsync")
     )
 
-    _Bool(
+    bool(
         "GetWindowSurfaceVSync",
 
         SDL_Window.p("window"),
         Check(1)..int.p("vsync")
     )
 
-    _Bool(
+    bool(
         "UpdateWindowSurface",
 
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "UpdateWindowSurfaceRects",
 
         SDL_Window.p("window"),
@@ -651,33 +651,33 @@ fun SDL_video() = SDL.apply {
         AutoSize("rects")..int("numrects")
     )
 
-    _Bool(
+    bool(
         "DestroyWindowSurface",
 
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "SetWindowKeyboardGrab",
 
         SDL_Window.p("window"),
-        _Bool("grabbed")
+        bool("grabbed")
     )
 
-    _Bool(
+    bool(
         "SetWindowMouseGrab",
 
         SDL_Window.p("window"),
-        _Bool("grabbed")
+        bool("grabbed")
     )
 
-    _Bool(
+    bool(
         "GetWindowKeyboardGrab",
 
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "GetWindowMouseGrab",
 
         SDL_Window.p("window")
@@ -689,7 +689,7 @@ fun SDL_video() = SDL.apply {
         void()
     )
 
-    _Bool(
+    bool(
         "SetWindowMouseRect",
 
         SDL_Window.p("window"),
@@ -702,7 +702,7 @@ fun SDL_video() = SDL.apply {
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "SetWindowOpacity",
 
         SDL_Window.p("window"),
@@ -715,28 +715,28 @@ fun SDL_video() = SDL.apply {
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "SetWindowParent",
 
         SDL_Window.p("window"),
         SDL_Window.p("parent")
     )
 
-    _Bool(
+    bool(
         "SetWindowModal",
 
         SDL_Window.p("window"),
-        _Bool("modal")
+        bool("modal")
     )
 
-    _Bool(
+    bool(
         "SetWindowFocusable",
 
         SDL_Window.p("window"),
-        _Bool("focusable")
+        bool("focusable")
     )
 
-    _Bool(
+    bool(
         "ShowWindowSystemMenu",
 
         SDL_Window.p("window"),
@@ -744,7 +744,7 @@ fun SDL_video() = SDL.apply {
         int("y")
     )
 
-    _Bool(
+    bool(
         "SetWindowHitTest",
 
         SDL_Window.p("window"),
@@ -752,14 +752,14 @@ fun SDL_video() = SDL.apply {
         nullable..opaque_p("callback_data")
     )
 
-    _Bool(
+    bool(
         "SetWindowShape",
 
         SDL_Window.p("window"),
         Check(1)..SDL_Surface.p("shape")
     )
 
-    _Bool(
+    bool(
         "FlashWindow",
 
         SDL_Window.p("window"),
@@ -772,25 +772,25 @@ fun SDL_video() = SDL.apply {
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "ScreenSaverEnabled",
 
         void()
     )
 
-    _Bool(
+    bool(
         "EnableScreenSaver",
 
         void()
     )
 
-    _Bool(
+    bool(
         "DisableScreenSaver",
 
         void()
     )
 
-    _Bool(
+    bool(
         "GL_LoadLibrary",
 
         nullable..charUTF8.const.p("path")
@@ -814,7 +814,7 @@ fun SDL_video() = SDL.apply {
         void()
     )
 
-    _Bool(
+    bool(
         "GL_ExtensionSupported",
 
         charUTF8.const.p("extension")
@@ -826,14 +826,14 @@ fun SDL_video() = SDL.apply {
         void()
     )
 
-    _Bool(
+    bool(
         "GL_SetAttribute",
 
         SDL_GLAttr("attr"),
         int("value")
     )
 
-    _Bool(
+    bool(
         "GL_GetAttribute",
 
         SDL_GLAttr("attr"),
@@ -846,7 +846,7 @@ fun SDL_video() = SDL.apply {
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "GL_MakeCurrent",
 
         SDL_Window.p("window"),
@@ -892,25 +892,25 @@ fun SDL_video() = SDL.apply {
         nullable..opaque_p("userdata")
     )
 
-    _Bool(
+    bool(
         "GL_SetSwapInterval",
 
         int("interval")
     )
 
-    _Bool(
+    bool(
         "GL_GetSwapInterval",
 
         Check(1)..int.p("interval")
     )
 
-    _Bool(
+    bool(
         "GL_SwapWindow",
 
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "GL_DestroyContext",
 
         SDL_GLContext("context")

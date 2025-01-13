@@ -32,7 +32,7 @@ fun SDL_dialog() = SDL.apply {
         nullable..SDL_DialogFileFilter.const.p("filters"),
         AutoSize("filters")..int("nfilters"),
         nullable..charUTF8.const.p("default_location"),
-        _Bool("allow_many")
+        bool("allow_many")
     )
 
     void(
@@ -53,7 +53,7 @@ fun SDL_dialog() = SDL.apply {
         nullable..opaque_p("userdata"),
         nullable..SDL_Window.p("window"),
         nullable..charUTF8.const.p("default_location"),
-        _Bool("allow_many")
+        bool("allow_many")
     )
 
     void(

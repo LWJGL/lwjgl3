@@ -34,7 +34,7 @@ fun SDL_keyboard() = SDL.apply {
         "CAPITALIZE_LETTERS".enum
     )
 
-    _Bool(
+    bool(
         "HasKeyboard",
 
         void()
@@ -58,7 +58,7 @@ fun SDL_keyboard() = SDL.apply {
         void()
     )
 
-    _Bool.const.p(
+    bool.const.p(
         "GetKeyboardState",
 
         AutoSizeResult..int.p("numkeys")
@@ -87,7 +87,7 @@ fun SDL_keyboard() = SDL.apply {
 
         SDL_Scancode("scancode"),
         SDL_Keymod("modstate"),
-        _Bool("key_event")
+        bool("key_event")
     )
 
     SDL_Scancode(
@@ -97,7 +97,7 @@ fun SDL_keyboard() = SDL.apply {
         nullable..Check(1)..SDL_Keymod.p("modstate")
     )
 
-    _Bool(
+    bool(
         "SetScancodeName",
 
         SDL_Scancode("scancode"),
@@ -129,38 +129,38 @@ fun SDL_keyboard() = SDL.apply {
         charUTF8.const.p("name")
     )
 
-    _Bool(
+    bool(
         "StartTextInput",
 
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "StartTextInputWithProperties",
 
         SDL_Window.p("window"),
         SDL_PropertiesID("props")
     )
 
-    _Bool(
+    bool(
         "TextInputActive",
 
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "StopTextInput",
 
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "ClearComposition",
 
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "SetTextInputArea",
 
         SDL_Window.p("window"),
@@ -168,7 +168,7 @@ fun SDL_keyboard() = SDL.apply {
         int("cursor")
     )
 
-    _Bool(
+    bool(
         "GetTextInputArea",
 
         SDL_Window.p("window"),
@@ -176,13 +176,13 @@ fun SDL_keyboard() = SDL.apply {
         Check(1)..int.p("cursor")
     )
 
-    _Bool(
+    bool(
         "HasScreenKeyboardSupport",
 
         void()
     )
 
-    _Bool(
+    bool(
         "ScreenKeyboardShown",
 
         SDL_Window.p("window")

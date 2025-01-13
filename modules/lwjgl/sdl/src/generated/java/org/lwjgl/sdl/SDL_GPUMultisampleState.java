@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct SDL_GPUMultisampleState {
  *     SDL_GPUSampleCount sample_count;
  *     Uint32 sample_mask;
- *     _Bool enable_mask;
+ *     bool enable_mask;
  *     Uint8 padding1;
  *     Uint8 padding2;
  *     Uint8 padding3;
@@ -93,7 +93,7 @@ public class SDL_GPUMultisampleState extends Struct<SDL_GPUMultisampleState> imp
     @NativeType("Uint32")
     public int sample_mask() { return nsample_mask(address()); }
     /** @return the value of the {@code enable_mask} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean enable_mask() { return nenable_mask(address()); }
     /** @return the value of the {@code padding1} field. */
     @NativeType("Uint8")
@@ -110,7 +110,7 @@ public class SDL_GPUMultisampleState extends Struct<SDL_GPUMultisampleState> imp
     /** Sets the specified value to the {@code sample_mask} field. */
     public SDL_GPUMultisampleState sample_mask(@NativeType("Uint32") int value) { nsample_mask(address(), value); return this; }
     /** Sets the specified value to the {@code enable_mask} field. */
-    public SDL_GPUMultisampleState enable_mask(@NativeType("_Bool") boolean value) { nenable_mask(address(), value); return this; }
+    public SDL_GPUMultisampleState enable_mask(@NativeType("bool") boolean value) { nenable_mask(address(), value); return this; }
     /** Sets the specified value to the {@code padding1} field. */
     public SDL_GPUMultisampleState padding1(@NativeType("Uint8") byte value) { npadding1(address(), value); return this; }
     /** Sets the specified value to the {@code padding2} field. */
@@ -336,7 +336,7 @@ public class SDL_GPUMultisampleState extends Struct<SDL_GPUMultisampleState> imp
         @NativeType("Uint32")
         public int sample_mask() { return SDL_GPUMultisampleState.nsample_mask(address()); }
         /** @return the value of the {@code enable_mask} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean enable_mask() { return SDL_GPUMultisampleState.nenable_mask(address()); }
         /** @return the value of the {@code padding1} field. */
         @NativeType("Uint8")
@@ -353,7 +353,7 @@ public class SDL_GPUMultisampleState extends Struct<SDL_GPUMultisampleState> imp
         /** Sets the specified value to the {@code sample_mask} field. */
         public SDL_GPUMultisampleState.Buffer sample_mask(@NativeType("Uint32") int value) { SDL_GPUMultisampleState.nsample_mask(address(), value); return this; }
         /** Sets the specified value to the {@code enable_mask} field. */
-        public SDL_GPUMultisampleState.Buffer enable_mask(@NativeType("_Bool") boolean value) { SDL_GPUMultisampleState.nenable_mask(address(), value); return this; }
+        public SDL_GPUMultisampleState.Buffer enable_mask(@NativeType("bool") boolean value) { SDL_GPUMultisampleState.nenable_mask(address(), value); return this; }
         /** Sets the specified value to the {@code padding1} field. */
         public SDL_GPUMultisampleState.Buffer padding1(@NativeType("Uint8") byte value) { SDL_GPUMultisampleState.npadding1(address(), value); return this; }
         /** Sets the specified value to the {@code padding2} field. */

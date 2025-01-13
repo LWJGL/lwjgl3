@@ -24,8 +24,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float depth_bias_constant_factor;
  *     float depth_bias_clamp;
  *     float depth_bias_slope_factor;
- *     _Bool enable_depth_bias;
- *     _Bool enable_depth_clip;
+ *     bool enable_depth_bias;
+ *     bool enable_depth_clip;
  *     Uint8 padding1;
  *     Uint8 padding2;
  * }}</pre>
@@ -118,10 +118,10 @@ public class SDL_GPURasterizerState extends Struct<SDL_GPURasterizerState> imple
     /** @return the value of the {@code depth_bias_slope_factor} field. */
     public float depth_bias_slope_factor() { return ndepth_bias_slope_factor(address()); }
     /** @return the value of the {@code enable_depth_bias} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean enable_depth_bias() { return nenable_depth_bias(address()); }
     /** @return the value of the {@code enable_depth_clip} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean enable_depth_clip() { return nenable_depth_clip(address()); }
     /** @return the value of the {@code padding1} field. */
     @NativeType("Uint8")
@@ -143,9 +143,9 @@ public class SDL_GPURasterizerState extends Struct<SDL_GPURasterizerState> imple
     /** Sets the specified value to the {@code depth_bias_slope_factor} field. */
     public SDL_GPURasterizerState depth_bias_slope_factor(float value) { ndepth_bias_slope_factor(address(), value); return this; }
     /** Sets the specified value to the {@code enable_depth_bias} field. */
-    public SDL_GPURasterizerState enable_depth_bias(@NativeType("_Bool") boolean value) { nenable_depth_bias(address(), value); return this; }
+    public SDL_GPURasterizerState enable_depth_bias(@NativeType("bool") boolean value) { nenable_depth_bias(address(), value); return this; }
     /** Sets the specified value to the {@code enable_depth_clip} field. */
-    public SDL_GPURasterizerState enable_depth_clip(@NativeType("_Bool") boolean value) { nenable_depth_clip(address(), value); return this; }
+    public SDL_GPURasterizerState enable_depth_clip(@NativeType("bool") boolean value) { nenable_depth_clip(address(), value); return this; }
     /** Sets the specified value to the {@code padding1} field. */
     public SDL_GPURasterizerState padding1(@NativeType("Uint8") byte value) { npadding1(address(), value); return this; }
     /** Sets the specified value to the {@code padding2} field. */
@@ -402,10 +402,10 @@ public class SDL_GPURasterizerState extends Struct<SDL_GPURasterizerState> imple
         /** @return the value of the {@code depth_bias_slope_factor} field. */
         public float depth_bias_slope_factor() { return SDL_GPURasterizerState.ndepth_bias_slope_factor(address()); }
         /** @return the value of the {@code enable_depth_bias} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean enable_depth_bias() { return SDL_GPURasterizerState.nenable_depth_bias(address()); }
         /** @return the value of the {@code enable_depth_clip} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean enable_depth_clip() { return SDL_GPURasterizerState.nenable_depth_clip(address()); }
         /** @return the value of the {@code padding1} field. */
         @NativeType("Uint8")
@@ -427,9 +427,9 @@ public class SDL_GPURasterizerState extends Struct<SDL_GPURasterizerState> imple
         /** Sets the specified value to the {@code depth_bias_slope_factor} field. */
         public SDL_GPURasterizerState.Buffer depth_bias_slope_factor(float value) { SDL_GPURasterizerState.ndepth_bias_slope_factor(address(), value); return this; }
         /** Sets the specified value to the {@code enable_depth_bias} field. */
-        public SDL_GPURasterizerState.Buffer enable_depth_bias(@NativeType("_Bool") boolean value) { SDL_GPURasterizerState.nenable_depth_bias(address(), value); return this; }
+        public SDL_GPURasterizerState.Buffer enable_depth_bias(@NativeType("bool") boolean value) { SDL_GPURasterizerState.nenable_depth_bias(address(), value); return this; }
         /** Sets the specified value to the {@code enable_depth_clip} field. */
-        public SDL_GPURasterizerState.Buffer enable_depth_clip(@NativeType("_Bool") boolean value) { SDL_GPURasterizerState.nenable_depth_clip(address(), value); return this; }
+        public SDL_GPURasterizerState.Buffer enable_depth_clip(@NativeType("bool") boolean value) { SDL_GPURasterizerState.nenable_depth_clip(address(), value); return this; }
         /** Sets the specified value to the {@code padding1} field. */
         public SDL_GPURasterizerState.Buffer padding1(@NativeType("Uint8") byte value) { SDL_GPURasterizerState.npadding1(address(), value); return this; }
         /** Sets the specified value to the {@code padding2} field. */

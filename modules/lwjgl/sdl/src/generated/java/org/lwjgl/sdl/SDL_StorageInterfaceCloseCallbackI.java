@@ -14,7 +14,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 
 /** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
-@NativeType("_Bool (*) (void *)")
+@NativeType("bool (*) (void *)")
 public interface SDL_StorageInterfaceCloseCallbackI extends CallbackI {
 
     FFICIF CIF = apiCreateCIF(
@@ -34,7 +34,7 @@ public interface SDL_StorageInterfaceCloseCallbackI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /** {@code _Bool (*) (void * userdata)} */
-    @NativeType("_Bool") boolean invoke(@NativeType("void *") long userdata);
+    /** {@code bool (*) (void * userdata)} */
+    @NativeType("bool") boolean invoke(@NativeType("void *") long userdata);
 
 }

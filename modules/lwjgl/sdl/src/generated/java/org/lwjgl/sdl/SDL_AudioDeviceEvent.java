@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     Uint32 reserved;
  *     Uint64 timestamp;
  *     SDL_AudioDeviceID which;
- *     _Bool recording;
+ *     bool recording;
  *     Uint8 padding1;
  *     Uint8 padding2;
  *     Uint8 padding3;
@@ -107,7 +107,7 @@ public class SDL_AudioDeviceEvent extends Struct<SDL_AudioDeviceEvent> implement
     @NativeType("SDL_AudioDeviceID")
     public int which() { return nwhich(address()); }
     /** @return the value of the {@code recording} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean recording() { return nrecording(address()); }
     /** @return the value of the {@code padding1} field. */
     @NativeType("Uint8")
@@ -128,7 +128,7 @@ public class SDL_AudioDeviceEvent extends Struct<SDL_AudioDeviceEvent> implement
     /** Sets the specified value to the {@code which} field. */
     public SDL_AudioDeviceEvent which(@NativeType("SDL_AudioDeviceID") int value) { nwhich(address(), value); return this; }
     /** Sets the specified value to the {@code recording} field. */
-    public SDL_AudioDeviceEvent recording(@NativeType("_Bool") boolean value) { nrecording(address(), value); return this; }
+    public SDL_AudioDeviceEvent recording(@NativeType("bool") boolean value) { nrecording(address(), value); return this; }
     /** Sets the specified value to the {@code padding1} field. */
     public SDL_AudioDeviceEvent padding1(@NativeType("Uint8") byte value) { npadding1(address(), value); return this; }
     /** Sets the specified value to the {@code padding2} field. */
@@ -372,7 +372,7 @@ public class SDL_AudioDeviceEvent extends Struct<SDL_AudioDeviceEvent> implement
         @NativeType("SDL_AudioDeviceID")
         public int which() { return SDL_AudioDeviceEvent.nwhich(address()); }
         /** @return the value of the {@code recording} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean recording() { return SDL_AudioDeviceEvent.nrecording(address()); }
         /** @return the value of the {@code padding1} field. */
         @NativeType("Uint8")
@@ -393,7 +393,7 @@ public class SDL_AudioDeviceEvent extends Struct<SDL_AudioDeviceEvent> implement
         /** Sets the specified value to the {@code which} field. */
         public SDL_AudioDeviceEvent.Buffer which(@NativeType("SDL_AudioDeviceID") int value) { SDL_AudioDeviceEvent.nwhich(address(), value); return this; }
         /** Sets the specified value to the {@code recording} field. */
-        public SDL_AudioDeviceEvent.Buffer recording(@NativeType("_Bool") boolean value) { SDL_AudioDeviceEvent.nrecording(address(), value); return this; }
+        public SDL_AudioDeviceEvent.Buffer recording(@NativeType("bool") boolean value) { SDL_AudioDeviceEvent.nrecording(address(), value); return this; }
         /** Sets the specified value to the {@code padding1} field. */
         public SDL_AudioDeviceEvent.Buffer padding1(@NativeType("Uint8") byte value) { SDL_AudioDeviceEvent.npadding1(address(), value); return this; }
         /** Sets the specified value to the {@code padding2} field. */

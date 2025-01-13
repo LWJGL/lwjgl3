@@ -34,7 +34,7 @@ fun SDL_system() = SDL.apply {
         SDL_DisplayID("displayID")
     )
 
-    IgnoreMissing.._Bool(
+    IgnoreMissing..bool(
         "GetDXGIOutputInfo",
 
         SDL_DisplayID("displayID"),
@@ -49,14 +49,14 @@ fun SDL_system() = SDL.apply {
         nullable..opaque_p("userdata")
     )
 
-    IgnoreMissing.._Bool(
+    IgnoreMissing..bool(
         "SetLinuxThreadPriority",
 
         Sint64("threadID"),
         int("priority")
     )
 
-    IgnoreMissing.._Bool(
+    IgnoreMissing..bool(
         "SetLinuxThreadPriorityAndPolicy",
 
         Sint64("threadID"),
@@ -64,7 +64,7 @@ fun SDL_system() = SDL.apply {
         int("schedPolicy")
     )
 
-    IgnoreMissing.._Bool(
+    IgnoreMissing..bool(
         "SetiOSAnimationCallback",
 
         SDL_Window.p("window"),
@@ -76,7 +76,7 @@ fun SDL_system() = SDL.apply {
     IgnoreMissing..void(
         "SetiOSEventPump",
 
-        _Bool("enabled")
+        bool("enabled")
     )
 
     IgnoreMissing..opaque_p(
@@ -97,13 +97,13 @@ fun SDL_system() = SDL.apply {
         void()
     )
 
-    IgnoreMissing.._Bool(
+    IgnoreMissing..bool(
         "IsChromebook",
 
         void()
     )
 
-    IgnoreMissing.._Bool(
+    IgnoreMissing..bool(
         "IsDeXMode",
 
         void()
@@ -139,7 +139,7 @@ fun SDL_system() = SDL.apply {
         void()
     )
 
-    IgnoreMissing.._Bool(
+    IgnoreMissing..bool(
         "RequestAndroidPermission",
 
         charUTF8.const.p("permission"),
@@ -147,7 +147,7 @@ fun SDL_system() = SDL.apply {
         nullable..opaque_p("userdata")
     )
 
-    IgnoreMissing.._Bool(
+    IgnoreMissing..bool(
         "ShowAndroidToast",
 
         charUTF8.const.p("message"),
@@ -157,20 +157,20 @@ fun SDL_system() = SDL.apply {
         int("yoffset")
     )
 
-    IgnoreMissing.._Bool(
+    IgnoreMissing..bool(
         "SendAndroidMessage",
 
         Uint32("command"),
         int("param")
     )
 
-    _Bool(
+    bool(
         "IsTablet",
 
         void()
     )
 
-    _Bool(
+    bool(
         "IsTV",
 
         void()
@@ -224,13 +224,13 @@ fun SDL_system() = SDL.apply {
         void()
     )
 
-    IgnoreMissing.._Bool(
+    IgnoreMissing..bool(
         "GetGDKTaskQueue",
 
         Check(1)..XTaskQueueHandle.p("outTaskQueue")
     )
 
-    IgnoreMissing.._Bool(
+    IgnoreMissing..bool(
         "GetGDKDefaultUser",
 
         Check(1)..XUserHandle.p("outUserHandle")

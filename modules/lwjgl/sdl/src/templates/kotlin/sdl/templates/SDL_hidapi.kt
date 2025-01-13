@@ -174,7 +174,7 @@ fun SDL_hidapi() = SDL.apply {
     void(
         "hid_ble_scan",
 
-        _Bool("active")
+        bool("active")
     )
 
 }

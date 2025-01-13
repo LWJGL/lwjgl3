@@ -60,7 +60,7 @@ fun SDL_stdinc() = SDL.apply {
         Check(1)..SDL_free_func.p("free_func")
     )
 
-    _Bool(
+    bool(
         "SetMemoryFunctions",
 
         SDL_malloc_func("malloc_func"),

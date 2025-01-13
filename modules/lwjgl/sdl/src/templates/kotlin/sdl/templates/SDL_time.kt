@@ -20,28 +20,28 @@ fun SDL_time() = SDL.apply {
         "TIME_FORMAT_12HR".enum
     )
 
-    _Bool(
+    bool(
         "GetDateTimeLocalePreferences",
 
         Check(1)..SDL_DateFormat.p("dateFormat"),
         Check(1)..SDL_TimeFormat.p("timeFormat")
     )
 
-    _Bool(
+    bool(
         "GetCurrentTime",
 
         Check(1)..SDL_Time.p("ticks")
     )
 
-    _Bool(
+    bool(
         "TimeToDateTime",
 
         SDL_Time("ticks"),
         Check(1)..SDL_DateTime.p("dt"),
-        _Bool("localTime")
+        bool("localTime")
     )
 
-    _Bool(
+    bool(
         "DateTimeToTime",
 
         Check(1)..SDL_DateTime.const.p("dt"),

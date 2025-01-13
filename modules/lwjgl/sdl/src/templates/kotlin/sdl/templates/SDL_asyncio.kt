@@ -33,7 +33,7 @@ fun SDL_asyncio() = SDL.apply {
         SDL_AsyncIO.p("asyncio")
     )
 
-    _Bool(
+    bool(
         "ReadAsyncIO",
 
         SDL_AsyncIO.p("asyncio"),
@@ -44,7 +44,7 @@ fun SDL_asyncio() = SDL.apply {
         nullable..opaque_p("userdata")
     )
 
-    _Bool(
+    bool(
         "WriteAsyncIO",
 
         SDL_AsyncIO.p("asyncio"),
@@ -55,11 +55,11 @@ fun SDL_asyncio() = SDL.apply {
         nullable..opaque_p("userdata")
     )
 
-    _Bool(
+    bool(
         "CloseAsyncIO",
 
         SDL_AsyncIO.p("asyncio"),
-        _Bool("flush"),
+        bool("flush"),
         SDL_AsyncIOQueue.p("queue"),
         nullable..opaque_p("userdata")
     )
@@ -76,14 +76,14 @@ fun SDL_asyncio() = SDL.apply {
         SDL_AsyncIOQueue.p("queue")
     )
 
-    _Bool(
+    bool(
         "GetAsyncIOResult",
 
         SDL_AsyncIOQueue.p("queue"),
         SDL_AsyncIOOutcome.p("outcome")
     )
 
-    _Bool(
+    bool(
         "WaitAsyncIOResult",
 
         SDL_AsyncIOQueue.p("queue"),
@@ -97,7 +97,7 @@ fun SDL_asyncio() = SDL.apply {
         SDL_AsyncIOQueue.p("queue")
     )
 
-    _Bool(
+    bool(
         "LoadFileAsync",
 
         charUTF8.const.p("file"),

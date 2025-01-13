@@ -68,7 +68,7 @@ fun SDL_audio() = SDL.apply {
         SDL_AudioDeviceID("devid")
     )
 
-    _Bool(
+    bool(
         "GetAudioDeviceFormat",
 
         SDL_AudioDeviceID("devid"),
@@ -90,31 +90,31 @@ fun SDL_audio() = SDL.apply {
         nullable..Check(1)..SDL_AudioSpec.const.p("spec")
     )
 
-    _Bool(
+    bool(
         "IsAudioDevicePhysical",
 
         SDL_AudioDeviceID("devid")
     )
 
-    _Bool(
+    bool(
         "IsAudioDevicePlayback",
 
         SDL_AudioDeviceID("devid")
     )
 
-    _Bool(
+    bool(
         "PauseAudioDevice",
 
         SDL_AudioDeviceID("dev")
     )
 
-    _Bool(
+    bool(
         "ResumeAudioDevice",
 
         SDL_AudioDeviceID("dev")
     )
 
-    _Bool(
+    bool(
         "AudioDevicePaused",
 
         SDL_AudioDeviceID("dev")
@@ -126,7 +126,7 @@ fun SDL_audio() = SDL.apply {
         SDL_AudioDeviceID("devid")
     )
 
-    _Bool(
+    bool(
         "SetAudioDeviceGain",
 
         SDL_AudioDeviceID("devid"),
@@ -139,7 +139,7 @@ fun SDL_audio() = SDL.apply {
         SDL_AudioDeviceID("devid")
     )
 
-    _Bool(
+    bool(
         "BindAudioStreams",
 
         SDL_AudioDeviceID("devid"),
@@ -147,7 +147,7 @@ fun SDL_audio() = SDL.apply {
         AutoSize("streams")..int("num_streams")
     )
 
-    _Bool(
+    bool(
         "BindAudioStream",
 
         SDL_AudioDeviceID("devid"),
@@ -186,7 +186,7 @@ fun SDL_audio() = SDL.apply {
         SDL_AudioStream.p("stream")
     )
 
-    _Bool(
+    bool(
         "GetAudioStreamFormat",
 
         SDL_AudioStream.p("stream"),
@@ -194,7 +194,7 @@ fun SDL_audio() = SDL.apply {
         Check(1)..SDL_AudioSpec.p("dst_spec")
     )
 
-    _Bool(
+    bool(
         "SetAudioStreamFormat",
 
         SDL_AudioStream.p("stream"),
@@ -208,7 +208,7 @@ fun SDL_audio() = SDL.apply {
         SDL_AudioStream.p("stream")
     )
 
-    _Bool(
+    bool(
         "SetAudioStreamFrequencyRatio",
 
         SDL_AudioStream.p("stream"),
@@ -221,7 +221,7 @@ fun SDL_audio() = SDL.apply {
         SDL_AudioStream.p("stream")
     )
 
-    _Bool(
+    bool(
         "SetAudioStreamGain",
 
         SDL_AudioStream.p("stream"),
@@ -242,7 +242,7 @@ fun SDL_audio() = SDL.apply {
         AutoSizeResult..int.p("count")
     )
 
-    _Bool(
+    bool(
         "SetAudioStreamInputChannelMap",
 
         SDL_AudioStream.p("stream"),
@@ -250,7 +250,7 @@ fun SDL_audio() = SDL.apply {
         AutoSize("chmap")..int("count")
     )
 
-    _Bool(
+    bool(
         "SetAudioStreamOutputChannelMap",
 
         SDL_AudioStream.p("stream"),
@@ -258,7 +258,7 @@ fun SDL_audio() = SDL.apply {
         AutoSize("chmap")..int("count")
     )
 
-    _Bool(
+    bool(
         "PutAudioStreamData",
 
         SDL_AudioStream.p("stream"),
@@ -286,43 +286,43 @@ fun SDL_audio() = SDL.apply {
         SDL_AudioStream.p("stream")
     )
 
-    _Bool(
+    bool(
         "FlushAudioStream",
 
         SDL_AudioStream.p("stream")
     )
 
-    _Bool(
+    bool(
         "ClearAudioStream",
 
         SDL_AudioStream.p("stream")
     )
 
-    _Bool(
+    bool(
         "PauseAudioStreamDevice",
 
         SDL_AudioStream.p("stream")
     )
 
-    _Bool(
+    bool(
         "ResumeAudioStreamDevice",
 
         SDL_AudioStream.p("stream")
     )
 
-    _Bool(
+    bool(
         "LockAudioStream",
 
         SDL_AudioStream.p("stream")
     )
 
-    _Bool(
+    bool(
         "UnlockAudioStream",
 
         SDL_AudioStream.p("stream")
     )
 
-    _Bool(
+    bool(
         "SetAudioStreamGetCallback",
 
         SDL_AudioStream.p("stream"),
@@ -330,7 +330,7 @@ fun SDL_audio() = SDL.apply {
         nullable..opaque_p("userdata")
     )
 
-    _Bool(
+    bool(
         "SetAudioStreamPutCallback",
 
         SDL_AudioStream.p("stream"),
@@ -353,7 +353,7 @@ fun SDL_audio() = SDL.apply {
         nullable..opaque_p("userdata")
     )
 
-    _Bool(
+    bool(
         "SetAudioPostmixCallback",
 
         SDL_AudioDeviceID("devid"),
@@ -361,17 +361,17 @@ fun SDL_audio() = SDL.apply {
         nullable..opaque_p("userdata")
     )
 
-    _Bool(
+    bool(
         "LoadWAV_IO",
 
         SDL_IOStream.p("src"),
-        _Bool("closeio"),
+        bool("closeio"),
         Check(1)..SDL_AudioSpec.p("spec"),
         Check(1)..Uint8.p.p("audio_buf"),
         Check(1)..Uint32.p("audio_len")
     )
 
-    _Bool(
+    bool(
         "LoadWAV",
 
         charUTF8.const.p("path"),
@@ -380,7 +380,7 @@ fun SDL_audio() = SDL.apply {
         Check(1)..Uint32.p("audio_len")
     )
 
-    _Bool(
+    bool(
         "MixAudio",
 
         Uint8.p("dst"),
@@ -390,7 +390,7 @@ fun SDL_audio() = SDL.apply {
         float("volume")
     )
 
-    _Bool(
+    bool(
         "ConvertAudioSamples",
 
         Check(1)..SDL_AudioSpec.const.p("src_spec"),

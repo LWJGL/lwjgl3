@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     SDL_GPUTexture * texture;
  *     Uint32 mip_level;
  *     Uint32 layer;
- *     _Bool cycle;
+ *     bool cycle;
  *     Uint8 padding1;
  *     Uint8 padding2;
  *     Uint8 padding3;
@@ -101,7 +101,7 @@ public class SDL_GPUStorageTextureReadWriteBinding extends Struct<SDL_GPUStorage
     @NativeType("Uint32")
     public int layer() { return nlayer(address()); }
     /** @return the value of the {@code cycle} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean cycle() { return ncycle(address()); }
     /** @return the value of the {@code padding1} field. */
     @NativeType("Uint8")
@@ -120,7 +120,7 @@ public class SDL_GPUStorageTextureReadWriteBinding extends Struct<SDL_GPUStorage
     /** Sets the specified value to the {@code layer} field. */
     public SDL_GPUStorageTextureReadWriteBinding layer(@NativeType("Uint32") int value) { nlayer(address(), value); return this; }
     /** Sets the specified value to the {@code cycle} field. */
-    public SDL_GPUStorageTextureReadWriteBinding cycle(@NativeType("_Bool") boolean value) { ncycle(address(), value); return this; }
+    public SDL_GPUStorageTextureReadWriteBinding cycle(@NativeType("bool") boolean value) { ncycle(address(), value); return this; }
     /** Sets the specified value to the {@code padding1} field. */
     public SDL_GPUStorageTextureReadWriteBinding padding1(@NativeType("Uint8") byte value) { npadding1(address(), value); return this; }
     /** Sets the specified value to the {@code padding2} field. */
@@ -364,7 +364,7 @@ public class SDL_GPUStorageTextureReadWriteBinding extends Struct<SDL_GPUStorage
         @NativeType("Uint32")
         public int layer() { return SDL_GPUStorageTextureReadWriteBinding.nlayer(address()); }
         /** @return the value of the {@code cycle} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean cycle() { return SDL_GPUStorageTextureReadWriteBinding.ncycle(address()); }
         /** @return the value of the {@code padding1} field. */
         @NativeType("Uint8")
@@ -383,7 +383,7 @@ public class SDL_GPUStorageTextureReadWriteBinding extends Struct<SDL_GPUStorage
         /** Sets the specified value to the {@code layer} field. */
         public SDL_GPUStorageTextureReadWriteBinding.Buffer layer(@NativeType("Uint32") int value) { SDL_GPUStorageTextureReadWriteBinding.nlayer(address(), value); return this; }
         /** Sets the specified value to the {@code cycle} field. */
-        public SDL_GPUStorageTextureReadWriteBinding.Buffer cycle(@NativeType("_Bool") boolean value) { SDL_GPUStorageTextureReadWriteBinding.ncycle(address(), value); return this; }
+        public SDL_GPUStorageTextureReadWriteBinding.Buffer cycle(@NativeType("bool") boolean value) { SDL_GPUStorageTextureReadWriteBinding.ncycle(address(), value); return this; }
         /** Sets the specified value to the {@code padding1} field. */
         public SDL_GPUStorageTextureReadWriteBinding.Buffer padding1(@NativeType("Uint8") byte value) { SDL_GPUStorageTextureReadWriteBinding.npadding1(address(), value); return this; }
         /** Sets the specified value to the {@code padding2} field. */

@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     SDL_WindowID windowID;
  *     SDL_MouseID which;
  *     Uint8 button;
- *     _Bool down;
+ *     bool down;
  *     Uint8 clicks;
  *     Uint8 padding;
  *     float x;
@@ -125,7 +125,7 @@ public class SDL_MouseButtonEvent extends Struct<SDL_MouseButtonEvent> implement
     @NativeType("Uint8")
     public byte button() { return nbutton(address()); }
     /** @return the value of the {@code down} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean down() { return ndown(address()); }
     /** @return the value of the {@code clicks} field. */
     @NativeType("Uint8")
@@ -151,7 +151,7 @@ public class SDL_MouseButtonEvent extends Struct<SDL_MouseButtonEvent> implement
     /** Sets the specified value to the {@code button} field. */
     public SDL_MouseButtonEvent button(@NativeType("Uint8") byte value) { nbutton(address(), value); return this; }
     /** Sets the specified value to the {@code down} field. */
-    public SDL_MouseButtonEvent down(@NativeType("_Bool") boolean value) { ndown(address(), value); return this; }
+    public SDL_MouseButtonEvent down(@NativeType("bool") boolean value) { ndown(address(), value); return this; }
     /** Sets the specified value to the {@code clicks} field. */
     public SDL_MouseButtonEvent clicks(@NativeType("Uint8") byte value) { nclicks(address(), value); return this; }
     /** Sets the specified value to the {@code padding} field. */
@@ -421,7 +421,7 @@ public class SDL_MouseButtonEvent extends Struct<SDL_MouseButtonEvent> implement
         @NativeType("Uint8")
         public byte button() { return SDL_MouseButtonEvent.nbutton(address()); }
         /** @return the value of the {@code down} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean down() { return SDL_MouseButtonEvent.ndown(address()); }
         /** @return the value of the {@code clicks} field. */
         @NativeType("Uint8")
@@ -447,7 +447,7 @@ public class SDL_MouseButtonEvent extends Struct<SDL_MouseButtonEvent> implement
         /** Sets the specified value to the {@code button} field. */
         public SDL_MouseButtonEvent.Buffer button(@NativeType("Uint8") byte value) { SDL_MouseButtonEvent.nbutton(address(), value); return this; }
         /** Sets the specified value to the {@code down} field. */
-        public SDL_MouseButtonEvent.Buffer down(@NativeType("_Bool") boolean value) { SDL_MouseButtonEvent.ndown(address(), value); return this; }
+        public SDL_MouseButtonEvent.Buffer down(@NativeType("bool") boolean value) { SDL_MouseButtonEvent.ndown(address(), value); return this; }
         /** Sets the specified value to the {@code clicks} field. */
         public SDL_MouseButtonEvent.Buffer clicks(@NativeType("Uint8") byte value) { SDL_MouseButtonEvent.nclicks(address(), value); return this; }
         /** Sets the specified value to the {@code padding} field. */

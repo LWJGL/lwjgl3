@@ -31,13 +31,13 @@ fun SDL_init() = SDL.apply {
         "APP_FAILURE".enum
     )
 
-    _Bool(
+    bool(
         "Init",
 
         SDL_InitFlags("flags")
     )
 
-    _Bool(
+    bool(
         "InitSubSystem",
 
         SDL_InitFlags("flags")
@@ -61,21 +61,21 @@ fun SDL_init() = SDL.apply {
         void()
     )
 
-    _Bool(
+    bool(
         "IsMainThread",
 
         void()
     )
 
-    _Bool(
+    bool(
         "RunOnMainThread",
 
         SDL_MainThreadCallback("callback"),
         nullable..opaque_p("userdata"),
-        _Bool("wait_complete")
+        bool("wait_complete")
     )
 
-    _Bool(
+    bool(
         "SetAppMetadata",
 
         charUTF8.const.p("appname"),
@@ -83,7 +83,7 @@ fun SDL_init() = SDL.apply {
         charUTF8.const.p("appidentifier")
     )
 
-    _Bool(
+    bool(
         "SetAppMetadataProperty",
 
         charUTF8.const.p("name"),

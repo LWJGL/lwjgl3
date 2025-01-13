@@ -88,7 +88,7 @@ fun SDL_sensor() = SDL.apply {
         SDL_Sensor.p("sensor")
     )
 
-    _Bool(
+    bool(
         "GetSensorData",
 
         SDL_Sensor.p("sensor"),

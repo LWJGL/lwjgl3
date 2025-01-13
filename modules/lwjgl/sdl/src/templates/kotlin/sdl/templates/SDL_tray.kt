@@ -99,10 +99,10 @@ fun SDL_tray() = SDL.apply {
         "SetTrayEntryChecked",
 
         SDL_TrayEntry.p("entry"),
-        _Bool("checked")
+        bool("checked")
     )
 
-    _Bool(
+    bool(
         "GetTrayEntryChecked",
 
         SDL_TrayEntry.p("entry")
@@ -112,10 +112,10 @@ fun SDL_tray() = SDL.apply {
         "SetTrayEntryEnabled",
 
         SDL_TrayEntry.p("entry"),
-        _Bool("enabled")
+        bool("enabled")
     )
 
-    _Bool(
+    bool(
         "GetTrayEntryEnabled",
 
         SDL_TrayEntry.p("entry")

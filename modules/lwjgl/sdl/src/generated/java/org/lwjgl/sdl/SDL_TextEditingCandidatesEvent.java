@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     char const * const * candidates;
  *     Sint32 num_candidates;
  *     Sint32 selected_candidate;
- *     _Bool horizontal;
+ *     bool horizontal;
  *     Uint8 padding1;
  *     Uint8 padding2;
  *     Uint8 padding3;
@@ -128,7 +128,7 @@ public class SDL_TextEditingCandidatesEvent extends Struct<SDL_TextEditingCandid
     @NativeType("Sint32")
     public int selected_candidate() { return nselected_candidate(address()); }
     /** @return the value of the {@code horizontal} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean horizontal() { return nhorizontal(address()); }
     /** @return the value of the {@code padding1} field. */
     @NativeType("Uint8")
@@ -155,7 +155,7 @@ public class SDL_TextEditingCandidatesEvent extends Struct<SDL_TextEditingCandid
     /** Sets the specified value to the {@code selected_candidate} field. */
     public SDL_TextEditingCandidatesEvent selected_candidate(@NativeType("Sint32") int value) { nselected_candidate(address(), value); return this; }
     /** Sets the specified value to the {@code horizontal} field. */
-    public SDL_TextEditingCandidatesEvent horizontal(@NativeType("_Bool") boolean value) { nhorizontal(address(), value); return this; }
+    public SDL_TextEditingCandidatesEvent horizontal(@NativeType("bool") boolean value) { nhorizontal(address(), value); return this; }
     /** Sets the specified value to the {@code padding1} field. */
     public SDL_TextEditingCandidatesEvent padding1(@NativeType("Uint8") byte value) { npadding1(address(), value); return this; }
     /** Sets the specified value to the {@code padding2} field. */
@@ -426,7 +426,7 @@ public class SDL_TextEditingCandidatesEvent extends Struct<SDL_TextEditingCandid
         @NativeType("Sint32")
         public int selected_candidate() { return SDL_TextEditingCandidatesEvent.nselected_candidate(address()); }
         /** @return the value of the {@code horizontal} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean horizontal() { return SDL_TextEditingCandidatesEvent.nhorizontal(address()); }
         /** @return the value of the {@code padding1} field. */
         @NativeType("Uint8")
@@ -453,7 +453,7 @@ public class SDL_TextEditingCandidatesEvent extends Struct<SDL_TextEditingCandid
         /** Sets the specified value to the {@code selected_candidate} field. */
         public SDL_TextEditingCandidatesEvent.Buffer selected_candidate(@NativeType("Sint32") int value) { SDL_TextEditingCandidatesEvent.nselected_candidate(address(), value); return this; }
         /** Sets the specified value to the {@code horizontal} field. */
-        public SDL_TextEditingCandidatesEvent.Buffer horizontal(@NativeType("_Bool") boolean value) { SDL_TextEditingCandidatesEvent.nhorizontal(address(), value); return this; }
+        public SDL_TextEditingCandidatesEvent.Buffer horizontal(@NativeType("bool") boolean value) { SDL_TextEditingCandidatesEvent.nhorizontal(address(), value); return this; }
         /** Sets the specified value to the {@code padding1} field. */
         public SDL_TextEditingCandidatesEvent.Buffer padding1(@NativeType("Uint8") byte value) { SDL_TextEditingCandidatesEvent.npadding1(address(), value); return this; }
         /** Sets the specified value to the {@code padding2} field. */

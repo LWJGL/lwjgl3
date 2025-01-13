@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float x;
  *     float y;
  *     Uint8 button;
- *     _Bool down;
+ *     bool down;
  * }}</pre>
  */
 public class SDL_PenButtonEvent extends Struct<SDL_PenButtonEvent> implements NativeResource {
@@ -128,7 +128,7 @@ public class SDL_PenButtonEvent extends Struct<SDL_PenButtonEvent> implements Na
     @NativeType("Uint8")
     public byte button() { return nbutton(address()); }
     /** @return the value of the {@code down} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean down() { return ndown(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -150,7 +150,7 @@ public class SDL_PenButtonEvent extends Struct<SDL_PenButtonEvent> implements Na
     /** Sets the specified value to the {@code button} field. */
     public SDL_PenButtonEvent button(@NativeType("Uint8") byte value) { nbutton(address(), value); return this; }
     /** Sets the specified value to the {@code down} field. */
-    public SDL_PenButtonEvent down(@NativeType("_Bool") boolean value) { ndown(address(), value); return this; }
+    public SDL_PenButtonEvent down(@NativeType("bool") boolean value) { ndown(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public SDL_PenButtonEvent set(
@@ -413,7 +413,7 @@ public class SDL_PenButtonEvent extends Struct<SDL_PenButtonEvent> implements Na
         @NativeType("Uint8")
         public byte button() { return SDL_PenButtonEvent.nbutton(address()); }
         /** @return the value of the {@code down} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean down() { return SDL_PenButtonEvent.ndown(address()); }
 
         /** Sets the specified value to the {@code type} field. */
@@ -435,7 +435,7 @@ public class SDL_PenButtonEvent extends Struct<SDL_PenButtonEvent> implements Na
         /** Sets the specified value to the {@code button} field. */
         public SDL_PenButtonEvent.Buffer button(@NativeType("Uint8") byte value) { SDL_PenButtonEvent.nbutton(address(), value); return this; }
         /** Sets the specified value to the {@code down} field. */
-        public SDL_PenButtonEvent.Buffer down(@NativeType("_Bool") boolean value) { SDL_PenButtonEvent.ndown(address(), value); return this; }
+        public SDL_PenButtonEvent.Buffer down(@NativeType("bool") boolean value) { SDL_PenButtonEvent.ndown(address(), value); return this; }
 
     }
 

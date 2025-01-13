@@ -20,16 +20,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre>{@code
  * struct SDL_StorageInterface {
  *     Uint32 version;
- *     _Bool (* close) (void * userdata);
- *     _Bool (* ready) (void * userdata);
- *     _Bool (* enumerate) (void * userdata, char const * path, SDL_EnumerateDirectoryCallback callback, void * callback_userdata);
- *     _Bool (* info) (void * userdata, char const * path, SDL_PathInfo * info);
- *     _Bool (* read_file) (void * userdata, char const * path, void * destination, Uint64 length);
- *     _Bool (* write_file) (void * userdata, char const * path, void const * source, Uint64 length);
- *     _Bool (* mkdir) (void * userdata, char const * path);
- *     _Bool (* remove) (void * userdata, char const * path);
- *     _Bool (* rename) (void * userdata, char const * oldpath, char const * newpath);
- *     _Bool (* copy) (void * userdata, char const * oldpath, char const * newpath);
+ *     bool (* close) (void * userdata);
+ *     bool (* ready) (void * userdata);
+ *     bool (* enumerate) (void * userdata, char const * path, SDL_EnumerateDirectoryCallback callback, void * callback_userdata);
+ *     bool (* info) (void * userdata, char const * path, SDL_PathInfo * info);
+ *     bool (* read_file) (void * userdata, char const * path, void * destination, Uint64 length);
+ *     bool (* write_file) (void * userdata, char const * path, void const * source, Uint64 length);
+ *     bool (* mkdir) (void * userdata, char const * path);
+ *     bool (* remove) (void * userdata, char const * path);
+ *     bool (* rename) (void * userdata, char const * oldpath, char const * newpath);
+ *     bool (* copy) (void * userdata, char const * oldpath, char const * newpath);
  *     Uint64 (* space_remaining) (void * userdata);
  * }}</pre>
  */
@@ -115,34 +115,34 @@ public class SDL_StorageInterface extends Struct<SDL_StorageInterface> implement
     @NativeType("Uint32")
     public int version() { return nversion(address()); }
     /** @return the value of the {@code close} field. */
-    @NativeType("_Bool (*) (void *)")
+    @NativeType("bool (*) (void *)")
     public SDL_StorageInterfaceCloseCallback close$() { return nclose$(address()); }
     /** @return the value of the {@code ready} field. */
-    @NativeType("_Bool (*) (void *)")
+    @NativeType("bool (*) (void *)")
     public SDL_StorageInterfaceReadyCallback ready() { return nready(address()); }
     /** @return the value of the {@code enumerate} field. */
-    @NativeType("_Bool (*) (void *, char const *, SDL_EnumerateDirectoryCallback, void *)")
+    @NativeType("bool (*) (void *, char const *, SDL_EnumerateDirectoryCallback, void *)")
     public SDL_StorageInterfaceEnumerateCallback enumerate() { return nenumerate(address()); }
     /** @return the value of the {@code info} field. */
-    @NativeType("_Bool (*) (void *, char const *, SDL_PathInfo *)")
+    @NativeType("bool (*) (void *, char const *, SDL_PathInfo *)")
     public SDL_StorageInterfaceInfoCallback info() { return ninfo(address()); }
     /** @return the value of the {@code read_file} field. */
-    @NativeType("_Bool (*) (void *, char const *, void *, Uint64)")
+    @NativeType("bool (*) (void *, char const *, void *, Uint64)")
     public SDL_StorageInterfaceReadFileCallback read_file() { return nread_file(address()); }
     /** @return the value of the {@code write_file} field. */
-    @NativeType("_Bool (*) (void *, char const *, void const *, Uint64)")
+    @NativeType("bool (*) (void *, char const *, void const *, Uint64)")
     public SDL_StorageInterfaceWriteFileCallback write_file() { return nwrite_file(address()); }
     /** @return the value of the {@code mkdir} field. */
-    @NativeType("_Bool (*) (void *, char const *)")
+    @NativeType("bool (*) (void *, char const *)")
     public SDL_StorageInterfaceMkdirCallback mkdir() { return nmkdir(address()); }
     /** @return the value of the {@code remove} field. */
-    @NativeType("_Bool (*) (void *, char const *)")
+    @NativeType("bool (*) (void *, char const *)")
     public SDL_StorageInterfaceRemoveCallback remove() { return nremove(address()); }
     /** @return the value of the {@code rename} field. */
-    @NativeType("_Bool (*) (void *, char const *, char const *)")
+    @NativeType("bool (*) (void *, char const *, char const *)")
     public SDL_StorageInterfaceRenameCallback rename() { return nrename(address()); }
     /** @return the value of the {@code copy} field. */
-    @NativeType("_Bool (*) (void *, char const *, char const *)")
+    @NativeType("bool (*) (void *, char const *, char const *)")
     public SDL_StorageInterfaceCopyCallback copy() { return ncopy(address()); }
     /** @return the value of the {@code space_remaining} field. */
     @NativeType("Uint64 (*) (void *)")
@@ -151,25 +151,25 @@ public class SDL_StorageInterface extends Struct<SDL_StorageInterface> implement
     /** Sets the specified value to the {@code version} field. */
     public SDL_StorageInterface version(@NativeType("Uint32") int value) { nversion(address(), value); return this; }
     /** Sets the specified value to the {@code close} field. */
-    public SDL_StorageInterface close$(@NativeType("_Bool (*) (void *)") SDL_StorageInterfaceCloseCallbackI value) { nclose$(address(), value); return this; }
+    public SDL_StorageInterface close$(@NativeType("bool (*) (void *)") SDL_StorageInterfaceCloseCallbackI value) { nclose$(address(), value); return this; }
     /** Sets the specified value to the {@code ready} field. */
-    public SDL_StorageInterface ready(@NativeType("_Bool (*) (void *)") SDL_StorageInterfaceReadyCallbackI value) { nready(address(), value); return this; }
+    public SDL_StorageInterface ready(@NativeType("bool (*) (void *)") SDL_StorageInterfaceReadyCallbackI value) { nready(address(), value); return this; }
     /** Sets the specified value to the {@code enumerate} field. */
-    public SDL_StorageInterface enumerate(@NativeType("_Bool (*) (void *, char const *, SDL_EnumerateDirectoryCallback, void *)") SDL_StorageInterfaceEnumerateCallbackI value) { nenumerate(address(), value); return this; }
+    public SDL_StorageInterface enumerate(@NativeType("bool (*) (void *, char const *, SDL_EnumerateDirectoryCallback, void *)") SDL_StorageInterfaceEnumerateCallbackI value) { nenumerate(address(), value); return this; }
     /** Sets the specified value to the {@code info} field. */
-    public SDL_StorageInterface info(@NativeType("_Bool (*) (void *, char const *, SDL_PathInfo *)") SDL_StorageInterfaceInfoCallbackI value) { ninfo(address(), value); return this; }
+    public SDL_StorageInterface info(@NativeType("bool (*) (void *, char const *, SDL_PathInfo *)") SDL_StorageInterfaceInfoCallbackI value) { ninfo(address(), value); return this; }
     /** Sets the specified value to the {@code read_file} field. */
-    public SDL_StorageInterface read_file(@NativeType("_Bool (*) (void *, char const *, void *, Uint64)") SDL_StorageInterfaceReadFileCallbackI value) { nread_file(address(), value); return this; }
+    public SDL_StorageInterface read_file(@NativeType("bool (*) (void *, char const *, void *, Uint64)") SDL_StorageInterfaceReadFileCallbackI value) { nread_file(address(), value); return this; }
     /** Sets the specified value to the {@code write_file} field. */
-    public SDL_StorageInterface write_file(@NativeType("_Bool (*) (void *, char const *, void const *, Uint64)") SDL_StorageInterfaceWriteFileCallbackI value) { nwrite_file(address(), value); return this; }
+    public SDL_StorageInterface write_file(@NativeType("bool (*) (void *, char const *, void const *, Uint64)") SDL_StorageInterfaceWriteFileCallbackI value) { nwrite_file(address(), value); return this; }
     /** Sets the specified value to the {@code mkdir} field. */
-    public SDL_StorageInterface mkdir(@NativeType("_Bool (*) (void *, char const *)") SDL_StorageInterfaceMkdirCallbackI value) { nmkdir(address(), value); return this; }
+    public SDL_StorageInterface mkdir(@NativeType("bool (*) (void *, char const *)") SDL_StorageInterfaceMkdirCallbackI value) { nmkdir(address(), value); return this; }
     /** Sets the specified value to the {@code remove} field. */
-    public SDL_StorageInterface remove(@NativeType("_Bool (*) (void *, char const *)") SDL_StorageInterfaceRemoveCallbackI value) { nremove(address(), value); return this; }
+    public SDL_StorageInterface remove(@NativeType("bool (*) (void *, char const *)") SDL_StorageInterfaceRemoveCallbackI value) { nremove(address(), value); return this; }
     /** Sets the specified value to the {@code rename} field. */
-    public SDL_StorageInterface rename(@NativeType("_Bool (*) (void *, char const *, char const *)") SDL_StorageInterfaceRenameCallbackI value) { nrename(address(), value); return this; }
+    public SDL_StorageInterface rename(@NativeType("bool (*) (void *, char const *, char const *)") SDL_StorageInterfaceRenameCallbackI value) { nrename(address(), value); return this; }
     /** Sets the specified value to the {@code copy} field. */
-    public SDL_StorageInterface copy(@NativeType("_Bool (*) (void *, char const *, char const *)") SDL_StorageInterfaceCopyCallbackI value) { ncopy(address(), value); return this; }
+    public SDL_StorageInterface copy(@NativeType("bool (*) (void *, char const *, char const *)") SDL_StorageInterfaceCopyCallbackI value) { ncopy(address(), value); return this; }
     /** Sets the specified value to the {@code space_remaining} field. */
     public SDL_StorageInterface space_remaining(@NativeType("Uint64 (*) (void *)") SDL_StorageInterfaceSpaceRemainingCallbackI value) { nspace_remaining(address(), value); return this; }
 
@@ -450,34 +450,34 @@ public class SDL_StorageInterface extends Struct<SDL_StorageInterface> implement
         @NativeType("Uint32")
         public int version() { return SDL_StorageInterface.nversion(address()); }
         /** @return the value of the {@code close} field. */
-        @NativeType("_Bool (*) (void *)")
+        @NativeType("bool (*) (void *)")
         public SDL_StorageInterfaceCloseCallback close$() { return SDL_StorageInterface.nclose$(address()); }
         /** @return the value of the {@code ready} field. */
-        @NativeType("_Bool (*) (void *)")
+        @NativeType("bool (*) (void *)")
         public SDL_StorageInterfaceReadyCallback ready() { return SDL_StorageInterface.nready(address()); }
         /** @return the value of the {@code enumerate} field. */
-        @NativeType("_Bool (*) (void *, char const *, SDL_EnumerateDirectoryCallback, void *)")
+        @NativeType("bool (*) (void *, char const *, SDL_EnumerateDirectoryCallback, void *)")
         public SDL_StorageInterfaceEnumerateCallback enumerate() { return SDL_StorageInterface.nenumerate(address()); }
         /** @return the value of the {@code info} field. */
-        @NativeType("_Bool (*) (void *, char const *, SDL_PathInfo *)")
+        @NativeType("bool (*) (void *, char const *, SDL_PathInfo *)")
         public SDL_StorageInterfaceInfoCallback info() { return SDL_StorageInterface.ninfo(address()); }
         /** @return the value of the {@code read_file} field. */
-        @NativeType("_Bool (*) (void *, char const *, void *, Uint64)")
+        @NativeType("bool (*) (void *, char const *, void *, Uint64)")
         public SDL_StorageInterfaceReadFileCallback read_file() { return SDL_StorageInterface.nread_file(address()); }
         /** @return the value of the {@code write_file} field. */
-        @NativeType("_Bool (*) (void *, char const *, void const *, Uint64)")
+        @NativeType("bool (*) (void *, char const *, void const *, Uint64)")
         public SDL_StorageInterfaceWriteFileCallback write_file() { return SDL_StorageInterface.nwrite_file(address()); }
         /** @return the value of the {@code mkdir} field. */
-        @NativeType("_Bool (*) (void *, char const *)")
+        @NativeType("bool (*) (void *, char const *)")
         public SDL_StorageInterfaceMkdirCallback mkdir() { return SDL_StorageInterface.nmkdir(address()); }
         /** @return the value of the {@code remove} field. */
-        @NativeType("_Bool (*) (void *, char const *)")
+        @NativeType("bool (*) (void *, char const *)")
         public SDL_StorageInterfaceRemoveCallback remove() { return SDL_StorageInterface.nremove(address()); }
         /** @return the value of the {@code rename} field. */
-        @NativeType("_Bool (*) (void *, char const *, char const *)")
+        @NativeType("bool (*) (void *, char const *, char const *)")
         public SDL_StorageInterfaceRenameCallback rename() { return SDL_StorageInterface.nrename(address()); }
         /** @return the value of the {@code copy} field. */
-        @NativeType("_Bool (*) (void *, char const *, char const *)")
+        @NativeType("bool (*) (void *, char const *, char const *)")
         public SDL_StorageInterfaceCopyCallback copy() { return SDL_StorageInterface.ncopy(address()); }
         /** @return the value of the {@code space_remaining} field. */
         @NativeType("Uint64 (*) (void *)")
@@ -486,25 +486,25 @@ public class SDL_StorageInterface extends Struct<SDL_StorageInterface> implement
         /** Sets the specified value to the {@code version} field. */
         public SDL_StorageInterface.Buffer version(@NativeType("Uint32") int value) { SDL_StorageInterface.nversion(address(), value); return this; }
         /** Sets the specified value to the {@code close} field. */
-        public SDL_StorageInterface.Buffer close$(@NativeType("_Bool (*) (void *)") SDL_StorageInterfaceCloseCallbackI value) { SDL_StorageInterface.nclose$(address(), value); return this; }
+        public SDL_StorageInterface.Buffer close$(@NativeType("bool (*) (void *)") SDL_StorageInterfaceCloseCallbackI value) { SDL_StorageInterface.nclose$(address(), value); return this; }
         /** Sets the specified value to the {@code ready} field. */
-        public SDL_StorageInterface.Buffer ready(@NativeType("_Bool (*) (void *)") SDL_StorageInterfaceReadyCallbackI value) { SDL_StorageInterface.nready(address(), value); return this; }
+        public SDL_StorageInterface.Buffer ready(@NativeType("bool (*) (void *)") SDL_StorageInterfaceReadyCallbackI value) { SDL_StorageInterface.nready(address(), value); return this; }
         /** Sets the specified value to the {@code enumerate} field. */
-        public SDL_StorageInterface.Buffer enumerate(@NativeType("_Bool (*) (void *, char const *, SDL_EnumerateDirectoryCallback, void *)") SDL_StorageInterfaceEnumerateCallbackI value) { SDL_StorageInterface.nenumerate(address(), value); return this; }
+        public SDL_StorageInterface.Buffer enumerate(@NativeType("bool (*) (void *, char const *, SDL_EnumerateDirectoryCallback, void *)") SDL_StorageInterfaceEnumerateCallbackI value) { SDL_StorageInterface.nenumerate(address(), value); return this; }
         /** Sets the specified value to the {@code info} field. */
-        public SDL_StorageInterface.Buffer info(@NativeType("_Bool (*) (void *, char const *, SDL_PathInfo *)") SDL_StorageInterfaceInfoCallbackI value) { SDL_StorageInterface.ninfo(address(), value); return this; }
+        public SDL_StorageInterface.Buffer info(@NativeType("bool (*) (void *, char const *, SDL_PathInfo *)") SDL_StorageInterfaceInfoCallbackI value) { SDL_StorageInterface.ninfo(address(), value); return this; }
         /** Sets the specified value to the {@code read_file} field. */
-        public SDL_StorageInterface.Buffer read_file(@NativeType("_Bool (*) (void *, char const *, void *, Uint64)") SDL_StorageInterfaceReadFileCallbackI value) { SDL_StorageInterface.nread_file(address(), value); return this; }
+        public SDL_StorageInterface.Buffer read_file(@NativeType("bool (*) (void *, char const *, void *, Uint64)") SDL_StorageInterfaceReadFileCallbackI value) { SDL_StorageInterface.nread_file(address(), value); return this; }
         /** Sets the specified value to the {@code write_file} field. */
-        public SDL_StorageInterface.Buffer write_file(@NativeType("_Bool (*) (void *, char const *, void const *, Uint64)") SDL_StorageInterfaceWriteFileCallbackI value) { SDL_StorageInterface.nwrite_file(address(), value); return this; }
+        public SDL_StorageInterface.Buffer write_file(@NativeType("bool (*) (void *, char const *, void const *, Uint64)") SDL_StorageInterfaceWriteFileCallbackI value) { SDL_StorageInterface.nwrite_file(address(), value); return this; }
         /** Sets the specified value to the {@code mkdir} field. */
-        public SDL_StorageInterface.Buffer mkdir(@NativeType("_Bool (*) (void *, char const *)") SDL_StorageInterfaceMkdirCallbackI value) { SDL_StorageInterface.nmkdir(address(), value); return this; }
+        public SDL_StorageInterface.Buffer mkdir(@NativeType("bool (*) (void *, char const *)") SDL_StorageInterfaceMkdirCallbackI value) { SDL_StorageInterface.nmkdir(address(), value); return this; }
         /** Sets the specified value to the {@code remove} field. */
-        public SDL_StorageInterface.Buffer remove(@NativeType("_Bool (*) (void *, char const *)") SDL_StorageInterfaceRemoveCallbackI value) { SDL_StorageInterface.nremove(address(), value); return this; }
+        public SDL_StorageInterface.Buffer remove(@NativeType("bool (*) (void *, char const *)") SDL_StorageInterfaceRemoveCallbackI value) { SDL_StorageInterface.nremove(address(), value); return this; }
         /** Sets the specified value to the {@code rename} field. */
-        public SDL_StorageInterface.Buffer rename(@NativeType("_Bool (*) (void *, char const *, char const *)") SDL_StorageInterfaceRenameCallbackI value) { SDL_StorageInterface.nrename(address(), value); return this; }
+        public SDL_StorageInterface.Buffer rename(@NativeType("bool (*) (void *, char const *, char const *)") SDL_StorageInterfaceRenameCallbackI value) { SDL_StorageInterface.nrename(address(), value); return this; }
         /** Sets the specified value to the {@code copy} field. */
-        public SDL_StorageInterface.Buffer copy(@NativeType("_Bool (*) (void *, char const *, char const *)") SDL_StorageInterfaceCopyCallbackI value) { SDL_StorageInterface.ncopy(address(), value); return this; }
+        public SDL_StorageInterface.Buffer copy(@NativeType("bool (*) (void *, char const *, char const *)") SDL_StorageInterfaceCopyCallbackI value) { SDL_StorageInterface.ncopy(address(), value); return this; }
         /** Sets the specified value to the {@code space_remaining} field. */
         public SDL_StorageInterface.Buffer space_remaining(@NativeType("Uint64 (*) (void *)") SDL_StorageInterfaceSpaceRemainingCallbackI value) { SDL_StorageInterface.nspace_remaining(address(), value); return this; }
 

@@ -23,9 +23,9 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link SDL_GPUStencilOpState SDL_GPUStencilOpState} front_stencil_state;
  *     Uint8 compare_mask;
  *     Uint8 write_mask;
- *     _Bool enable_depth_test;
- *     _Bool enable_depth_write;
- *     _Bool enable_stencil_test;
+ *     bool enable_depth_test;
+ *     bool enable_depth_write;
+ *     bool enable_stencil_test;
  *     Uint8 padding1;
  *     Uint8 padding2;
  *     Uint8 padding3;
@@ -120,13 +120,13 @@ public class SDL_GPUDepthStencilState extends Struct<SDL_GPUDepthStencilState> i
     @NativeType("Uint8")
     public byte write_mask() { return nwrite_mask(address()); }
     /** @return the value of the {@code enable_depth_test} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean enable_depth_test() { return nenable_depth_test(address()); }
     /** @return the value of the {@code enable_depth_write} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean enable_depth_write() { return nenable_depth_write(address()); }
     /** @return the value of the {@code enable_stencil_test} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean enable_stencil_test() { return nenable_stencil_test(address()); }
     /** @return the value of the {@code padding1} field. */
     @NativeType("Uint8")
@@ -153,11 +153,11 @@ public class SDL_GPUDepthStencilState extends Struct<SDL_GPUDepthStencilState> i
     /** Sets the specified value to the {@code write_mask} field. */
     public SDL_GPUDepthStencilState write_mask(@NativeType("Uint8") byte value) { nwrite_mask(address(), value); return this; }
     /** Sets the specified value to the {@code enable_depth_test} field. */
-    public SDL_GPUDepthStencilState enable_depth_test(@NativeType("_Bool") boolean value) { nenable_depth_test(address(), value); return this; }
+    public SDL_GPUDepthStencilState enable_depth_test(@NativeType("bool") boolean value) { nenable_depth_test(address(), value); return this; }
     /** Sets the specified value to the {@code enable_depth_write} field. */
-    public SDL_GPUDepthStencilState enable_depth_write(@NativeType("_Bool") boolean value) { nenable_depth_write(address(), value); return this; }
+    public SDL_GPUDepthStencilState enable_depth_write(@NativeType("bool") boolean value) { nenable_depth_write(address(), value); return this; }
     /** Sets the specified value to the {@code enable_stencil_test} field. */
-    public SDL_GPUDepthStencilState enable_stencil_test(@NativeType("_Bool") boolean value) { nenable_stencil_test(address(), value); return this; }
+    public SDL_GPUDepthStencilState enable_stencil_test(@NativeType("bool") boolean value) { nenable_stencil_test(address(), value); return this; }
     /** Sets the specified value to the {@code padding1} field. */
     public SDL_GPUDepthStencilState padding1(@NativeType("Uint8") byte value) { npadding1(address(), value); return this; }
     /** Sets the specified value to the {@code padding2} field. */
@@ -420,13 +420,13 @@ public class SDL_GPUDepthStencilState extends Struct<SDL_GPUDepthStencilState> i
         @NativeType("Uint8")
         public byte write_mask() { return SDL_GPUDepthStencilState.nwrite_mask(address()); }
         /** @return the value of the {@code enable_depth_test} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean enable_depth_test() { return SDL_GPUDepthStencilState.nenable_depth_test(address()); }
         /** @return the value of the {@code enable_depth_write} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean enable_depth_write() { return SDL_GPUDepthStencilState.nenable_depth_write(address()); }
         /** @return the value of the {@code enable_stencil_test} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean enable_stencil_test() { return SDL_GPUDepthStencilState.nenable_stencil_test(address()); }
         /** @return the value of the {@code padding1} field. */
         @NativeType("Uint8")
@@ -453,11 +453,11 @@ public class SDL_GPUDepthStencilState extends Struct<SDL_GPUDepthStencilState> i
         /** Sets the specified value to the {@code write_mask} field. */
         public SDL_GPUDepthStencilState.Buffer write_mask(@NativeType("Uint8") byte value) { SDL_GPUDepthStencilState.nwrite_mask(address(), value); return this; }
         /** Sets the specified value to the {@code enable_depth_test} field. */
-        public SDL_GPUDepthStencilState.Buffer enable_depth_test(@NativeType("_Bool") boolean value) { SDL_GPUDepthStencilState.nenable_depth_test(address(), value); return this; }
+        public SDL_GPUDepthStencilState.Buffer enable_depth_test(@NativeType("bool") boolean value) { SDL_GPUDepthStencilState.nenable_depth_test(address(), value); return this; }
         /** Sets the specified value to the {@code enable_depth_write} field. */
-        public SDL_GPUDepthStencilState.Buffer enable_depth_write(@NativeType("_Bool") boolean value) { SDL_GPUDepthStencilState.nenable_depth_write(address(), value); return this; }
+        public SDL_GPUDepthStencilState.Buffer enable_depth_write(@NativeType("bool") boolean value) { SDL_GPUDepthStencilState.nenable_depth_write(address(), value); return this; }
         /** Sets the specified value to the {@code enable_stencil_test} field. */
-        public SDL_GPUDepthStencilState.Buffer enable_stencil_test(@NativeType("_Bool") boolean value) { SDL_GPUDepthStencilState.nenable_stencil_test(address(), value); return this; }
+        public SDL_GPUDepthStencilState.Buffer enable_stencil_test(@NativeType("bool") boolean value) { SDL_GPUDepthStencilState.nenable_stencil_test(address(), value); return this; }
         /** Sets the specified value to the {@code padding1} field. */
         public SDL_GPUDepthStencilState.Buffer padding1(@NativeType("Uint8") byte value) { SDL_GPUDepthStencilState.npadding1(address(), value); return this; }
         /** Sets the specified value to the {@code padding2} field. */

@@ -35,7 +35,7 @@ public interface SDL_EventFilterI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /** {@code _Bool (* SDL_EventFilter) (void * userdata, SDL_Event * event)} */
-    @NativeType("_Bool") boolean invoke(@NativeType("void *") long userdata, @NativeType("SDL_Event *") long event);
+    /** {@code bool (* SDL_EventFilter) (void * userdata, SDL_Event * event)} */
+    @NativeType("bool") boolean invoke(@NativeType("void *") long userdata, @NativeType("SDL_Event *") long event);
 
 }

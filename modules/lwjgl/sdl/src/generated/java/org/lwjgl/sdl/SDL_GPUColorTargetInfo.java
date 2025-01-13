@@ -28,8 +28,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     SDL_GPUTexture * resolve_texture;
  *     Uint32 resolve_mip_level;
  *     Uint32 resolve_layer;
- *     _Bool cycle;
- *     _Bool cycle_resolve_texture;
+ *     bool cycle;
+ *     bool cycle_resolve_texture;
  *     Uint8 padding1;
  *     Uint8 padding2;
  * }}</pre>
@@ -142,10 +142,10 @@ public class SDL_GPUColorTargetInfo extends Struct<SDL_GPUColorTargetInfo> imple
     @NativeType("Uint32")
     public int resolve_layer() { return nresolve_layer(address()); }
     /** @return the value of the {@code cycle} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean cycle() { return ncycle(address()); }
     /** @return the value of the {@code cycle_resolve_texture} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean cycle_resolve_texture() { return ncycle_resolve_texture(address()); }
     /** @return the value of the {@code padding1} field. */
     @NativeType("Uint8")
@@ -175,9 +175,9 @@ public class SDL_GPUColorTargetInfo extends Struct<SDL_GPUColorTargetInfo> imple
     /** Sets the specified value to the {@code resolve_layer} field. */
     public SDL_GPUColorTargetInfo resolve_layer(@NativeType("Uint32") int value) { nresolve_layer(address(), value); return this; }
     /** Sets the specified value to the {@code cycle} field. */
-    public SDL_GPUColorTargetInfo cycle(@NativeType("_Bool") boolean value) { ncycle(address(), value); return this; }
+    public SDL_GPUColorTargetInfo cycle(@NativeType("bool") boolean value) { ncycle(address(), value); return this; }
     /** Sets the specified value to the {@code cycle_resolve_texture} field. */
-    public SDL_GPUColorTargetInfo cycle_resolve_texture(@NativeType("_Bool") boolean value) { ncycle_resolve_texture(address(), value); return this; }
+    public SDL_GPUColorTargetInfo cycle_resolve_texture(@NativeType("bool") boolean value) { ncycle_resolve_texture(address(), value); return this; }
     /** Sets the specified value to the {@code padding1} field. */
     public SDL_GPUColorTargetInfo padding1(@NativeType("Uint8") byte value) { npadding1(address(), value); return this; }
     /** Sets the specified value to the {@code padding2} field. */
@@ -472,10 +472,10 @@ public class SDL_GPUColorTargetInfo extends Struct<SDL_GPUColorTargetInfo> imple
         @NativeType("Uint32")
         public int resolve_layer() { return SDL_GPUColorTargetInfo.nresolve_layer(address()); }
         /** @return the value of the {@code cycle} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean cycle() { return SDL_GPUColorTargetInfo.ncycle(address()); }
         /** @return the value of the {@code cycle_resolve_texture} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean cycle_resolve_texture() { return SDL_GPUColorTargetInfo.ncycle_resolve_texture(address()); }
         /** @return the value of the {@code padding1} field. */
         @NativeType("Uint8")
@@ -505,9 +505,9 @@ public class SDL_GPUColorTargetInfo extends Struct<SDL_GPUColorTargetInfo> imple
         /** Sets the specified value to the {@code resolve_layer} field. */
         public SDL_GPUColorTargetInfo.Buffer resolve_layer(@NativeType("Uint32") int value) { SDL_GPUColorTargetInfo.nresolve_layer(address(), value); return this; }
         /** Sets the specified value to the {@code cycle} field. */
-        public SDL_GPUColorTargetInfo.Buffer cycle(@NativeType("_Bool") boolean value) { SDL_GPUColorTargetInfo.ncycle(address(), value); return this; }
+        public SDL_GPUColorTargetInfo.Buffer cycle(@NativeType("bool") boolean value) { SDL_GPUColorTargetInfo.ncycle(address(), value); return this; }
         /** Sets the specified value to the {@code cycle_resolve_texture} field. */
-        public SDL_GPUColorTargetInfo.Buffer cycle_resolve_texture(@NativeType("_Bool") boolean value) { SDL_GPUColorTargetInfo.ncycle_resolve_texture(address(), value); return this; }
+        public SDL_GPUColorTargetInfo.Buffer cycle_resolve_texture(@NativeType("bool") boolean value) { SDL_GPUColorTargetInfo.ncycle_resolve_texture(address(), value); return this; }
         /** Sets the specified value to the {@code padding1} field. */
         public SDL_GPUColorTargetInfo.Buffer padding1(@NativeType("Uint8") byte value) { SDL_GPUColorTargetInfo.npadding1(address(), value); return this; }
         /** Sets the specified value to the {@code padding2} field. */

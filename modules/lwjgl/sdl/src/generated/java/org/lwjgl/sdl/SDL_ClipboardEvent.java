@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     SDL_EventType type;
  *     Uint32 reserved;
  *     Uint64 timestamp;
- *     _Bool owner;
+ *     bool owner;
  *     Sint32 num_mime_types;
  *     char const ** mime_types;
  * }}</pre>
@@ -96,7 +96,7 @@ public class SDL_ClipboardEvent extends Struct<SDL_ClipboardEvent> implements Na
     @NativeType("Uint64")
     public long timestamp() { return ntimestamp(address()); }
     /** @return the value of the {@code owner} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean owner() { return nowner(address()); }
     /** @return the value of the {@code num_mime_types} field. */
     @NativeType("Sint32")
@@ -112,7 +112,7 @@ public class SDL_ClipboardEvent extends Struct<SDL_ClipboardEvent> implements Na
     /** Sets the specified value to the {@code timestamp} field. */
     public SDL_ClipboardEvent timestamp(@NativeType("Uint64") long value) { ntimestamp(address(), value); return this; }
     /** Sets the specified value to the {@code owner} field. */
-    public SDL_ClipboardEvent owner(@NativeType("_Bool") boolean value) { nowner(address(), value); return this; }
+    public SDL_ClipboardEvent owner(@NativeType("bool") boolean value) { nowner(address(), value); return this; }
     /** Sets the specified value to the {@code num_mime_types} field. */
     public SDL_ClipboardEvent num_mime_types(@NativeType("Sint32") int value) { nnum_mime_types(address(), value); return this; }
     /** Sets the address of the specified {@link PointerBuffer} to the {@code mime_types} field. */
@@ -339,7 +339,7 @@ public class SDL_ClipboardEvent extends Struct<SDL_ClipboardEvent> implements Na
         @NativeType("Uint64")
         public long timestamp() { return SDL_ClipboardEvent.ntimestamp(address()); }
         /** @return the value of the {@code owner} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean owner() { return SDL_ClipboardEvent.nowner(address()); }
         /** @return the value of the {@code num_mime_types} field. */
         @NativeType("Sint32")
@@ -355,7 +355,7 @@ public class SDL_ClipboardEvent extends Struct<SDL_ClipboardEvent> implements Na
         /** Sets the specified value to the {@code timestamp} field. */
         public SDL_ClipboardEvent.Buffer timestamp(@NativeType("Uint64") long value) { SDL_ClipboardEvent.ntimestamp(address(), value); return this; }
         /** Sets the specified value to the {@code owner} field. */
-        public SDL_ClipboardEvent.Buffer owner(@NativeType("_Bool") boolean value) { SDL_ClipboardEvent.nowner(address(), value); return this; }
+        public SDL_ClipboardEvent.Buffer owner(@NativeType("bool") boolean value) { SDL_ClipboardEvent.nowner(address(), value); return this; }
         /** Sets the specified value to the {@code num_mime_types} field. */
         public SDL_ClipboardEvent.Buffer num_mime_types(@NativeType("Sint32") int value) { SDL_ClipboardEvent.nnum_mime_types(address(), value); return this; }
         /** Sets the address of the specified {@link PointerBuffer} to the {@code mime_types} field. */

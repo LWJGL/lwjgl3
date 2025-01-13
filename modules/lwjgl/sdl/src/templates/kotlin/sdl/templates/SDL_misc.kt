@@ -9,7 +9,7 @@ import sdl.*
 
 fun SDL_misc() = SDL.apply {
 
-    _Bool(
+    bool(
         "OpenURL",
 
         charUTF8.const.p("url")

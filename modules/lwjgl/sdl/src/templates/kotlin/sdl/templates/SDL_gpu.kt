@@ -355,14 +355,14 @@ fun SDL_gpu() = SDL.apply {
         "GPU_SWAPCHAINCOMPOSITION_HDR10_ST2084".enum
     )
 
-    _Bool(
+    bool(
         "GPUSupportsShaderFormats",
 
         SDL_GPUShaderFormat("format_flags"),
         nullable..charUTF8.const.p("name")
     )
 
-    _Bool(
+    bool(
         "GPUSupportsProperties",
 
         SDL_PropertiesID("props")
@@ -372,7 +372,7 @@ fun SDL_gpu() = SDL.apply {
         "CreateGPUDevice",
 
         SDL_GPUShaderFormat("format_flags"),
-        _Bool("debug_mode"),
+        bool("debug_mode"),
         nullable..charUTF8.const.p("name")
     )
 
@@ -811,7 +811,7 @@ fun SDL_gpu() = SDL.apply {
 
         SDL_GPUDevice.p("device"),
         SDL_GPUTransferBuffer.p("transfer_buffer"),
-        _Bool("cycle"),
+        bool("cycle"),
         AutoSizeResult..Virtual..size_t("buffer_size"),
     )
 
@@ -834,7 +834,7 @@ fun SDL_gpu() = SDL.apply {
         SDL_GPUCopyPass.p("copy_pass"),
         Check(1)..SDL_GPUTextureTransferInfo.const.p("source"),
         Check(1)..SDL_GPUTextureRegion.const.p("destination"),
-        _Bool("cycle")
+        bool("cycle")
     )
 
     void(
@@ -843,7 +843,7 @@ fun SDL_gpu() = SDL.apply {
         SDL_GPUCopyPass.p("copy_pass"),
         Check(1)..SDL_GPUTransferBufferLocation.const.p("source"),
         Check(1)..SDL_GPUBufferRegion.const.p("destination"),
-        _Bool("cycle")
+        bool("cycle")
     )
 
     void(
@@ -855,7 +855,7 @@ fun SDL_gpu() = SDL.apply {
         Uint32("w"),
         Uint32("h"),
         Uint32("d"),
-        _Bool("cycle")
+        bool("cycle")
     )
 
     void(
@@ -865,7 +865,7 @@ fun SDL_gpu() = SDL.apply {
         Check(1)..SDL_GPUBufferLocation.const.p("source"),
         Check(1)..SDL_GPUBufferLocation.const.p("destination"),
         Uint32("size"),
-        _Bool("cycle")
+        bool("cycle")
     )
 
     void(
@@ -904,7 +904,7 @@ fun SDL_gpu() = SDL.apply {
         Check(1)..SDL_GPUBlitInfo.const.p("info")
     )
 
-    _Bool(
+    bool(
         "WindowSupportsGPUSwapchainComposition",
 
         SDL_GPUDevice.p("device"),
@@ -912,7 +912,7 @@ fun SDL_gpu() = SDL.apply {
         SDL_GPUSwapchainComposition("swapchain_composition")
     )
 
-    _Bool(
+    bool(
         "WindowSupportsGPUPresentMode",
 
         SDL_GPUDevice.p("device"),
@@ -920,7 +920,7 @@ fun SDL_gpu() = SDL.apply {
         SDL_GPUPresentMode("present_mode")
     )
 
-    _Bool(
+    bool(
         "ClaimWindowForGPUDevice",
 
         SDL_GPUDevice.p("device"),
@@ -934,7 +934,7 @@ fun SDL_gpu() = SDL.apply {
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "SetGPUSwapchainParameters",
 
         SDL_GPUDevice.p("device"),
@@ -943,7 +943,7 @@ fun SDL_gpu() = SDL.apply {
         SDL_GPUPresentMode("present_mode")
     )
 
-    _Bool(
+    bool(
         "SetGPUAllowedFramesInFlight",
 
         SDL_GPUDevice.p("device"),
@@ -957,7 +957,7 @@ fun SDL_gpu() = SDL.apply {
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "AcquireGPUSwapchainTexture",
 
         SDL_GPUCommandBuffer.p("command_buffer"),
@@ -967,14 +967,14 @@ fun SDL_gpu() = SDL.apply {
         nullable..Check(1)..Uint32.p("swapchain_texture_height")
     )
 
-    _Bool(
+    bool(
         "WaitForGPUSwapchain",
 
         SDL_GPUDevice.p("device"),
         SDL_Window.p("window")
     )
 
-    _Bool(
+    bool(
         "WaitAndAcquireGPUSwapchainTexture",
 
         SDL_GPUCommandBuffer.p("command_buffer"),
@@ -984,7 +984,7 @@ fun SDL_gpu() = SDL.apply {
         nullable..Check(1)..Uint32.p("swapchain_texture_height")
     )
 
-    _Bool(
+    bool(
         "SubmitGPUCommandBuffer",
 
         SDL_GPUCommandBuffer.p("command_buffer")
@@ -996,28 +996,28 @@ fun SDL_gpu() = SDL.apply {
         SDL_GPUCommandBuffer.p("command_buffer")
     )
 
-    _Bool(
+    bool(
         "CancelGPUCommandBuffer",
 
         SDL_GPUCommandBuffer.p("command_buffer")
     )
 
-    _Bool(
+    bool(
         "WaitForGPUIdle",
 
         SDL_GPUDevice.p("device")
     )
 
-    _Bool(
+    bool(
         "WaitForGPUFences",
 
         SDL_GPUDevice.p("device"),
-        _Bool("wait_all"),
+        bool("wait_all"),
         SDL_GPUFence.p.const.p("fences"),
         AutoSize("fences")..Uint32("num_fences")
     )
 
-    _Bool(
+    bool(
         "QueryGPUFence",
 
         SDL_GPUDevice.p("device"),
@@ -1037,7 +1037,7 @@ fun SDL_gpu() = SDL.apply {
         SDL_GPUTextureFormat("format")
     )
 
-    _Bool(
+    bool(
         "GPUTextureSupportsFormat",
 
         SDL_GPUDevice.p("device"),
@@ -1046,7 +1046,7 @@ fun SDL_gpu() = SDL.apply {
         SDL_GPUTextureUsageFlags("usage")
     )
 
-    _Bool(
+    bool(
         "GPUTextureSupportsSampleCount",
 
         SDL_GPUDevice.p("device"),

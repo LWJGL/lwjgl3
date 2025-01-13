@@ -25,14 +25,14 @@ fun SDL_messagebox() = SDL.apply {
         "MESSAGEBOX_COLOR_COUNT".enum
     )
 
-    _Bool(
+    bool(
         "ShowMessageBox",
 
         Check(1)..SDL_MessageBoxData.const.p("messageboxdata"),
         Check(1)..int.p("buttonid")
     )
 
-    _Bool(
+    bool(
         "ShowSimpleMessageBox",
 
         SDL_MessageBoxFlags("flags"),

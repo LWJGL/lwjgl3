@@ -69,7 +69,7 @@ fun SDL_log() = SDL.apply {
         void()
     )
 
-    _Bool(
+    bool(
         "SetLogPriorityPrefix",
 
         SDL_LogPriority("priority"),

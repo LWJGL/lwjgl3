@@ -9,7 +9,6 @@ import org.lwjgl.generator.*
 // SDL_stdinc.kt
 val SDL_iconv_t = "SDL_iconv_t".handle
 
-val _Bool = typedef(bool, "_Bool")
 val wchar_t = CharType("wchar_t", CharMapping.UTF16)
 val Sint16 = typedef(int16_t, "Sint16")
 val Sint32 = typedef(int32_t, "Sint32")
@@ -408,7 +407,7 @@ val SDL_IOStreamInterface = struct(Module.SDL, "SDL_IOStreamInterface") {
         ) {}
     }("write")
     Module.SDL.callback {
-        _Bool(
+        bool(
             "SDL_IOStreamInterfaceFlushCallback",
 
             nullable..opaque_p("userdata"),
@@ -416,7 +415,7 @@ val SDL_IOStreamInterface = struct(Module.SDL, "SDL_IOStreamInterface") {
         ) {}
     }("flush")
     Module.SDL.callback {
-        _Bool(
+        bool(
             "SDL_IOStreamInterfaceCloseCallback",
 
             nullable..opaque_p("userdata")
@@ -709,7 +708,7 @@ val SDL_VirtualJoystickDesc = struct(Module.SDL, "SDL_VirtualJoystickDesc") {
         ) {}
     }("SetPlayerIndex")
     Module.SDL.callback {
-        _Bool(
+        bool(
             "SDL_VirtualJoystickDescRumbleCallback",
 
             nullable..opaque_p("userdata"),
@@ -718,7 +717,7 @@ val SDL_VirtualJoystickDesc = struct(Module.SDL, "SDL_VirtualJoystickDesc") {
         ) {}
     }("Rumble")
     Module.SDL.callback {
-        _Bool(
+        bool(
             "SDL_VirtualJoystickDescRumbleTriggersCallback",
 
             nullable..opaque_p("userdata"),
@@ -727,7 +726,7 @@ val SDL_VirtualJoystickDesc = struct(Module.SDL, "SDL_VirtualJoystickDesc") {
         ) {}
     }("RumbleTriggers")
     Module.SDL.callback {
-        _Bool(
+        bool(
             "SDL_VirtualJoystickDescSetLEDCallback",
 
             nullable..opaque_p("userdata"),
@@ -737,7 +736,7 @@ val SDL_VirtualJoystickDesc = struct(Module.SDL, "SDL_VirtualJoystickDesc") {
         ) {}
     }("SetLED")
     Module.SDL.callback {
-        _Bool(
+        bool(
             "SDL_VirtualJoystickDescSendEffectCallback",
 
             nullable..opaque_p("userdata"),
@@ -746,11 +745,11 @@ val SDL_VirtualJoystickDesc = struct(Module.SDL, "SDL_VirtualJoystickDesc") {
         ) {}
     }("SendEffect")
     Module.SDL.callback {
-        _Bool(
+        bool(
             "SDL_VirtualJoystickDescSetSensorsEnabledCallback",
 
             nullable..opaque_p("userdata"),
-            _Bool("enabled")
+            bool("enabled")
         ) {}
     }("SetSensorsEnabled")
     Module.SDL.callback {
@@ -895,21 +894,21 @@ val SDL_StorageInterface = struct(Module.SDL, "SDL_StorageInterface") {
 
     Uint32("version")
     Module.SDL.callback {
-        _Bool(
+        bool(
             "SDL_StorageInterfaceCloseCallback",
 
             nullable..opaque_p("userdata")
         ) {}
     }("close")
     Module.SDL.callback {
-        _Bool(
+        bool(
             "SDL_StorageInterfaceReadyCallback",
 
             nullable..opaque_p("userdata")
         ) {}
     }("ready")
     Module.SDL.callback {
-        _Bool(
+        bool(
             "SDL_StorageInterfaceEnumerateCallback",
 
             nullable..opaque_p("userdata"),
@@ -919,7 +918,7 @@ val SDL_StorageInterface = struct(Module.SDL, "SDL_StorageInterface") {
         ) {}
     }("enumerate")
     Module.SDL.callback {
-        _Bool(
+        bool(
             "SDL_StorageInterfaceInfoCallback",
 
             nullable..opaque_p("userdata"),
@@ -928,7 +927,7 @@ val SDL_StorageInterface = struct(Module.SDL, "SDL_StorageInterface") {
         ) {}
     }("info")
     Module.SDL.callback {
-        _Bool(
+        bool(
             "SDL_StorageInterfaceReadFileCallback",
 
             nullable..opaque_p("userdata"),
@@ -938,7 +937,7 @@ val SDL_StorageInterface = struct(Module.SDL, "SDL_StorageInterface") {
         ) {}
     }("read_file")
     Module.SDL.callback {
-        _Bool(
+        bool(
             "SDL_StorageInterfaceWriteFileCallback",
 
             nullable..opaque_p("userdata"),
@@ -948,7 +947,7 @@ val SDL_StorageInterface = struct(Module.SDL, "SDL_StorageInterface") {
         ) {}
     }("write_file")
     Module.SDL.callback {
-        _Bool(
+        bool(
             "SDL_StorageInterfaceMkdirCallback",
 
             nullable..opaque_p("userdata"),
@@ -956,7 +955,7 @@ val SDL_StorageInterface = struct(Module.SDL, "SDL_StorageInterface") {
         ) {}
     }("mkdir")
     Module.SDL.callback {
-        _Bool(
+        bool(
             "SDL_StorageInterfaceRemoveCallback",
 
             nullable..opaque_p("userdata"),
@@ -964,7 +963,7 @@ val SDL_StorageInterface = struct(Module.SDL, "SDL_StorageInterface") {
         ) {}
     }("remove")
     Module.SDL.callback {
-        _Bool(
+        bool(
             "SDL_StorageInterfaceRenameCallback",
 
             nullable..opaque_p("userdata"),
@@ -973,7 +972,7 @@ val SDL_StorageInterface = struct(Module.SDL, "SDL_StorageInterface") {
         ) {}
     }("rename")
     Module.SDL.callback {
-        _Bool(
+        bool(
             "SDL_StorageInterfaceCopyCallback",
 
             nullable..opaque_p("userdata"),
@@ -999,7 +998,7 @@ val XEvent = "XEvent".opaque
 val SDL_Sandbox = "SDL_Sandbox".enumType
 
 val SDL_WindowsMessageHook = Module.SDL.callback {
-    _Bool(
+    bool(
         "SDL_WindowsMessageHook",
 
         nullable..opaque_p("userdata"),
@@ -1010,7 +1009,7 @@ val SDL_WindowsMessageHook = Module.SDL.callback {
 }
 
 val SDL_X11EventHook = Module.SDL.callback {
-    _Bool(
+    bool(
         "SDL_X11EventHook",
 
         nullable..opaque_p("userdata"),
@@ -1036,7 +1035,7 @@ val SDL_RequestAndroidPermissionCallback = Module.SDL.callback {
 
         nullable..opaque_p("userdata"),
         charUTF8.const.p("permission"),
-        _Bool("granted"),
+        bool("granted"),
 
         nativeType = "SDL_RequestAndroidPermissionCallback"
     )
@@ -1330,8 +1329,8 @@ val SDL_GPUSamplerCreateInfo = struct(Module.SDL, "SDL_GPUSamplerCreateInfo") {
     SDL_GPUCompareOp("compare_op")
     float("min_lod")
     float("max_lod")
-    _Bool("enable_anisotropy")
-    _Bool("enable_compare")
+    bool("enable_anisotropy")
+    bool("enable_compare")
     Uint8("padding1")
     Uint8("padding2")
     SDL_PropertiesID("props")
@@ -1373,8 +1372,8 @@ val SDL_GPUColorTargetBlendState = struct(Module.SDL, "SDL_GPUColorTargetBlendSt
     SDL_GPUBlendFactor("dst_alpha_blendfactor")
     SDL_GPUBlendOp("alpha_blend_op")
     SDL_GPUColorComponentFlags("color_write_mask")
-    _Bool("enable_blend")
-    _Bool("enable_color_write_mask")
+    bool("enable_blend")
+    bool("enable_color_write_mask")
     Uint8("padding1")
     Uint8("padding2")
 }
@@ -1423,8 +1422,8 @@ val SDL_GPURasterizerState = struct(Module.SDL, "SDL_GPURasterizerState") {
     float("depth_bias_constant_factor")
     float("depth_bias_clamp")
     float("depth_bias_slope_factor")
-    _Bool("enable_depth_bias")
-    _Bool("enable_depth_clip")
+    bool("enable_depth_bias")
+    bool("enable_depth_clip")
     Uint8("padding1")
     Uint8("padding2")
 }
@@ -1432,7 +1431,7 @@ val SDL_GPURasterizerState = struct(Module.SDL, "SDL_GPURasterizerState") {
 val SDL_GPUMultisampleState = struct(Module.SDL, "SDL_GPUMultisampleState") {
     SDL_GPUSampleCount("sample_count")
     Uint32("sample_mask")
-    _Bool("enable_mask")
+    bool("enable_mask")
     Uint8("padding1")
     Uint8("padding2")
     Uint8("padding3")
@@ -1444,9 +1443,9 @@ val SDL_GPUDepthStencilState = struct(Module.SDL, "SDL_GPUDepthStencilState") {
     SDL_GPUStencilOpState("front_stencil_state")
     Uint8("compare_mask")
     Uint8("write_mask")
-    _Bool("enable_depth_test")
-    _Bool("enable_depth_write")
-    _Bool("enable_stencil_test")
+    bool("enable_depth_test")
+    bool("enable_depth_write")
+    bool("enable_stencil_test")
     Uint8("padding1")
     Uint8("padding2")
     Uint8("padding3")
@@ -1461,7 +1460,7 @@ val SDL_GPUGraphicsPipelineTargetInfo = struct(Module.SDL, "SDL_GPUGraphicsPipel
     SDL_GPUColorTargetDescription.const.p("color_target_descriptions")
     Uint32("num_color_targets")
     SDL_GPUTextureFormat("depth_stencil_format")
-    _Bool("has_depth_stencil_target")
+    bool("has_depth_stencil_target")
     Uint8("padding1")
     Uint8("padding2")
     Uint8("padding3")
@@ -1506,8 +1505,8 @@ val SDL_GPUColorTargetInfo = struct(Module.SDL, "SDL_GPUColorTargetInfo") {
     nullable..SDL_GPUTexture.p("resolve_texture")
     Uint32("resolve_mip_level")
     Uint32("resolve_layer")
-    _Bool("cycle")
-    _Bool("cycle_resolve_texture")
+    bool("cycle")
+    bool("cycle_resolve_texture")
     Uint8("padding1")
     Uint8("padding2")
 }
@@ -1519,7 +1518,7 @@ val SDL_GPUDepthStencilTargetInfo = struct(Module.SDL, "SDL_GPUDepthStencilTarge
     SDL_GPUStoreOp("store_op")
     SDL_GPULoadOp("stencil_load_op")
     SDL_GPUStoreOp("stencil_store_op")
-    _Bool("cycle")
+    bool("cycle")
     Uint8("clear_stencil")
     Uint8("padding1")
     Uint8("padding2")
@@ -1532,7 +1531,7 @@ val SDL_GPUBlitInfo = struct(Module.SDL, "SDL_GPUBlitInfo") {
     SDL_FColor("clear_color")
     SDL_FlipMode("flip_mode")
     SDL_GPUFilter("filter")
-    _Bool("cycle")
+    bool("cycle")
     Uint8("padding1")
     Uint8("padding2")
     Uint8("padding3")
@@ -1550,7 +1549,7 @@ val SDL_GPUTextureSamplerBinding = struct(Module.SDL, "SDL_GPUTextureSamplerBind
 
 val SDL_GPUStorageBufferReadWriteBinding = struct(Module.SDL, "SDL_GPUStorageBufferReadWriteBinding") {
     SDL_GPUBuffer.p("buffer")
-    _Bool("cycle")
+    bool("cycle")
     Uint8("padding1")
     Uint8("padding2")
     Uint8("padding3")
@@ -1560,7 +1559,7 @@ val SDL_GPUStorageTextureReadWriteBinding = struct(Module.SDL, "SDL_GPUStorageTe
     SDL_GPUTexture.p("texture")
     Uint32("mip_level")
     Uint32("layer")
-    _Bool("cycle")
+    bool("cycle")
     Uint8("padding1")
     Uint8("padding2")
     Uint8("padding3")
@@ -1611,8 +1610,8 @@ val SDL_KeyboardEvent = struct(Module.SDL, "SDL_KeyboardEvent") {
     SDL_Keycode("key")
     SDL_Keymod("mod")
     Uint16("raw")
-    _Bool("down")
-    _Bool("repeat")
+    bool("down")
+    bool("repeat")
 }
 
 val SDL_TextEditingEvent = struct(Module.SDL, "SDL_TextEditingEvent") {
@@ -1633,7 +1632,7 @@ val SDL_TextEditingCandidatesEvent = struct(Module.SDL, "SDL_TextEditingCandidat
     nullable..charUTF8.const.p.const.p("candidates")
     AutoSize("candidates")..Sint32("num_candidates")
     Sint32("selected_candidate")
-    _Bool("horizontal")
+    bool("horizontal")
     Uint8("padding1")
     Uint8("padding2")
     Uint8("padding3")
@@ -1674,7 +1673,7 @@ val SDL_MouseButtonEvent = struct(Module.SDL, "SDL_MouseButtonEvent") {
     SDL_WindowID("windowID")
     SDL_MouseID("which")
     Uint8("button")
-    _Bool("down")
+    bool("down")
     Uint8("clicks")
     Uint8("padding")
     float("x")
@@ -1737,7 +1736,7 @@ val SDL_JoyButtonEvent = struct(Module.SDL, "SDL_JoyButtonEvent") {
     Uint64("timestamp")
     SDL_JoystickID("which")
     Uint8("button")
-    _Bool("down")
+    bool("down")
     Uint8("padding1")
     Uint8("padding2")
 }
@@ -1777,7 +1776,7 @@ val SDL_GamepadButtonEvent = struct(Module.SDL, "SDL_GamepadButtonEvent") {
     Uint64("timestamp")
     SDL_JoystickID("which")
     Uint8("button")
-    _Bool("down")
+    bool("down")
     Uint8("padding1")
     Uint8("padding2")
 }
@@ -1816,7 +1815,7 @@ val SDL_AudioDeviceEvent = struct(Module.SDL, "SDL_AudioDeviceEvent") {
     Uint32("reserved")
     Uint64("timestamp")
     SDL_AudioDeviceID("which")
-    _Bool("recording")
+    bool("recording")
     Uint8("padding1")
     Uint8("padding2")
     Uint8("padding3")
@@ -1878,8 +1877,8 @@ val SDL_PenTouchEvent = struct(Module.SDL, "SDL_PenTouchEvent") {
     SDL_PenInputFlags("pen_state")
     float("x")
     float("y")
-    _Bool("eraser")
-    _Bool("down")
+    bool("eraser")
+    bool("down")
 }
 
 val SDL_PenButtonEvent = struct(Module.SDL, "SDL_PenButtonEvent") {
@@ -1892,7 +1891,7 @@ val SDL_PenButtonEvent = struct(Module.SDL, "SDL_PenButtonEvent") {
     float("x")
     float("y")
     Uint8("button")
-    _Bool("down")
+    bool("down")
 }
 
 val SDL_PenAxisEvent = struct(Module.SDL, "SDL_PenAxisEvent") {
@@ -1923,7 +1922,7 @@ val SDL_ClipboardEvent = struct(Module.SDL, "SDL_ClipboardEvent") {
     SDL_EventType("type")
     Uint32("reserved")
     Uint64("timestamp")
-    _Bool("owner")
+    bool("owner")
     AutoSize("mime_types")..Sint32("num_mime_types")
     nullable..charUTF8.const.p.p("mime_types")
 }
@@ -1996,7 +1995,7 @@ val SDL_Event = union(Module.SDL, "SDL_Event") {
 }
 
 val SDL_EventFilter = Module.SDL.callback {
-    _Bool(
+    bool(
         "SDL_EventFilter",
 
         nullable..opaque_p("userdata"),

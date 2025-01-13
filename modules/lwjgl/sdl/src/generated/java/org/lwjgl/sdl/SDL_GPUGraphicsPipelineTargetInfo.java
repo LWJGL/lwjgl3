@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link SDL_GPUColorTargetDescription SDL_GPUColorTargetDescription} const * color_target_descriptions;
  *     Uint32 num_color_targets;
  *     SDL_GPUTextureFormat depth_stencil_format;
- *     _Bool has_depth_stencil_target;
+ *     bool has_depth_stencil_target;
  *     Uint8 padding1;
  *     Uint8 padding2;
  *     Uint8 padding3;
@@ -101,7 +101,7 @@ public class SDL_GPUGraphicsPipelineTargetInfo extends Struct<SDL_GPUGraphicsPip
     @NativeType("SDL_GPUTextureFormat")
     public int depth_stencil_format() { return ndepth_stencil_format(address()); }
     /** @return the value of the {@code has_depth_stencil_target} field. */
-    @NativeType("_Bool")
+    @NativeType("bool")
     public boolean has_depth_stencil_target() { return nhas_depth_stencil_target(address()); }
     /** @return the value of the {@code padding1} field. */
     @NativeType("Uint8")
@@ -120,7 +120,7 @@ public class SDL_GPUGraphicsPipelineTargetInfo extends Struct<SDL_GPUGraphicsPip
     /** Sets the specified value to the {@code depth_stencil_format} field. */
     public SDL_GPUGraphicsPipelineTargetInfo depth_stencil_format(@NativeType("SDL_GPUTextureFormat") int value) { ndepth_stencil_format(address(), value); return this; }
     /** Sets the specified value to the {@code has_depth_stencil_target} field. */
-    public SDL_GPUGraphicsPipelineTargetInfo has_depth_stencil_target(@NativeType("_Bool") boolean value) { nhas_depth_stencil_target(address(), value); return this; }
+    public SDL_GPUGraphicsPipelineTargetInfo has_depth_stencil_target(@NativeType("bool") boolean value) { nhas_depth_stencil_target(address(), value); return this; }
     /** Sets the specified value to the {@code padding1} field. */
     public SDL_GPUGraphicsPipelineTargetInfo padding1(@NativeType("Uint8") byte value) { npadding1(address(), value); return this; }
     /** Sets the specified value to the {@code padding2} field. */
@@ -364,7 +364,7 @@ public class SDL_GPUGraphicsPipelineTargetInfo extends Struct<SDL_GPUGraphicsPip
         @NativeType("SDL_GPUTextureFormat")
         public int depth_stencil_format() { return SDL_GPUGraphicsPipelineTargetInfo.ndepth_stencil_format(address()); }
         /** @return the value of the {@code has_depth_stencil_target} field. */
-        @NativeType("_Bool")
+        @NativeType("bool")
         public boolean has_depth_stencil_target() { return SDL_GPUGraphicsPipelineTargetInfo.nhas_depth_stencil_target(address()); }
         /** @return the value of the {@code padding1} field. */
         @NativeType("Uint8")
@@ -383,7 +383,7 @@ public class SDL_GPUGraphicsPipelineTargetInfo extends Struct<SDL_GPUGraphicsPip
         /** Sets the specified value to the {@code depth_stencil_format} field. */
         public SDL_GPUGraphicsPipelineTargetInfo.Buffer depth_stencil_format(@NativeType("SDL_GPUTextureFormat") int value) { SDL_GPUGraphicsPipelineTargetInfo.ndepth_stencil_format(address(), value); return this; }
         /** Sets the specified value to the {@code has_depth_stencil_target} field. */
-        public SDL_GPUGraphicsPipelineTargetInfo.Buffer has_depth_stencil_target(@NativeType("_Bool") boolean value) { SDL_GPUGraphicsPipelineTargetInfo.nhas_depth_stencil_target(address(), value); return this; }
+        public SDL_GPUGraphicsPipelineTargetInfo.Buffer has_depth_stencil_target(@NativeType("bool") boolean value) { SDL_GPUGraphicsPipelineTargetInfo.nhas_depth_stencil_target(address(), value); return this; }
         /** Sets the specified value to the {@code padding1} field. */
         public SDL_GPUGraphicsPipelineTargetInfo.Buffer padding1(@NativeType("Uint8") byte value) { SDL_GPUGraphicsPipelineTargetInfo.npadding1(address(), value); return this; }
         /** Sets the specified value to the {@code padding2} field. */

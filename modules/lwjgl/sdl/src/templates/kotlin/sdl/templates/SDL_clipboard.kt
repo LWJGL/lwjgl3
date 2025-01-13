@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import sdl.*
 
 fun SDL_clipboard() = SDL.apply {
-    _Bool(
+    bool(
         "SetClipboardText",
 
         charUTF8.const.p("text")
@@ -20,13 +20,13 @@ fun SDL_clipboard() = SDL.apply {
         void()
     )
 
-    _Bool(
+    bool(
         "HasClipboardText",
 
         void()
     )
 
-    _Bool(
+    bool(
         "SetPrimarySelectionText",
 
         charUTF8.const.p("text")
@@ -38,13 +38,13 @@ fun SDL_clipboard() = SDL.apply {
         void()
     )
 
-    _Bool(
+    bool(
         "HasPrimarySelectionText",
 
         void()
     )
 
-    _Bool(
+    bool(
         "SetClipboardData",
 
         SDL_ClipboardDataCallback("callback"),
@@ -54,7 +54,7 @@ fun SDL_clipboard() = SDL.apply {
         AutoSize("mime_types")..size_t("num_mime_types")
     )
 
-    _Bool(
+    bool(
         "ClearClipboardData",
 
         void()
@@ -67,7 +67,7 @@ fun SDL_clipboard() = SDL.apply {
         AutoSizeResult..size_t.p("size")
     )
 
-    _Bool(
+    bool(
         "HasClipboardData",
 
         charUTF8.const.p("mime_type")

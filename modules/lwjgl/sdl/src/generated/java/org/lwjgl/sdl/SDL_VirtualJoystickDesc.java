@@ -39,11 +39,11 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void * userdata;
  *     void (* Update) (void * userdata);
  *     void (* SetPlayerIndex) (void * userdata, int player_index);
- *     _Bool (* Rumble) (void * userdata, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble);
- *     _Bool (* RumbleTriggers) (void * userdata, Uint16 left_rumble, Uint16 right_rumble);
- *     _Bool (* SetLED) (void * userdata, Uint8 red, Uint8 green, Uint8 blue);
- *     _Bool (* SendEffect) (void * userdata, void const * data, int size);
- *     _Bool (* SetSensorsEnabled) (void * userdata, _Bool enabled);
+ *     bool (* Rumble) (void * userdata, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble);
+ *     bool (* RumbleTriggers) (void * userdata, Uint16 left_rumble, Uint16 right_rumble);
+ *     bool (* SetLED) (void * userdata, Uint8 red, Uint8 green, Uint8 blue);
+ *     bool (* SendEffect) (void * userdata, void const * data, int size);
+ *     bool (* SetSensorsEnabled) (void * userdata, bool enabled);
  *     void (* Cleanup) (void * userdata);
  * }}</pre>
  */
@@ -234,19 +234,19 @@ public class SDL_VirtualJoystickDesc extends Struct<SDL_VirtualJoystickDesc> imp
     @NativeType("void (*) (void *, int)")
     public SDL_VirtualJoystickDescSetPlayerIndexCallback SetPlayerIndex() { return nSetPlayerIndex(address()); }
     /** @return the value of the {@code Rumble} field. */
-    @NativeType("_Bool (*) (void *, Uint16, Uint16)")
+    @NativeType("bool (*) (void *, Uint16, Uint16)")
     public SDL_VirtualJoystickDescRumbleCallback Rumble() { return nRumble(address()); }
     /** @return the value of the {@code RumbleTriggers} field. */
-    @NativeType("_Bool (*) (void *, Uint16, Uint16)")
+    @NativeType("bool (*) (void *, Uint16, Uint16)")
     public SDL_VirtualJoystickDescRumbleTriggersCallback RumbleTriggers() { return nRumbleTriggers(address()); }
     /** @return the value of the {@code SetLED} field. */
-    @NativeType("_Bool (*) (void *, Uint8, Uint8, Uint8)")
+    @NativeType("bool (*) (void *, Uint8, Uint8, Uint8)")
     public SDL_VirtualJoystickDescSetLEDCallback SetLED() { return nSetLED(address()); }
     /** @return the value of the {@code SendEffect} field. */
-    @NativeType("_Bool (*) (void *, void const *, int)")
+    @NativeType("bool (*) (void *, void const *, int)")
     public SDL_VirtualJoystickDescSendEffectCallback SendEffect() { return nSendEffect(address()); }
     /** @return the value of the {@code SetSensorsEnabled} field. */
-    @NativeType("_Bool (*) (void *, _Bool)")
+    @NativeType("bool (*) (void *, bool)")
     public SDL_VirtualJoystickDescSetSensorsEnabledCallback SetSensorsEnabled() { return nSetSensorsEnabled(address()); }
     /** @return the value of the {@code Cleanup} field. */
     @NativeType("void (*) (void *)")
@@ -291,15 +291,15 @@ public class SDL_VirtualJoystickDesc extends Struct<SDL_VirtualJoystickDesc> imp
     /** Sets the specified value to the {@code SetPlayerIndex} field. */
     public SDL_VirtualJoystickDesc SetPlayerIndex(@NativeType("void (*) (void *, int)") SDL_VirtualJoystickDescSetPlayerIndexCallbackI value) { nSetPlayerIndex(address(), value); return this; }
     /** Sets the specified value to the {@code Rumble} field. */
-    public SDL_VirtualJoystickDesc Rumble(@NativeType("_Bool (*) (void *, Uint16, Uint16)") SDL_VirtualJoystickDescRumbleCallbackI value) { nRumble(address(), value); return this; }
+    public SDL_VirtualJoystickDesc Rumble(@NativeType("bool (*) (void *, Uint16, Uint16)") SDL_VirtualJoystickDescRumbleCallbackI value) { nRumble(address(), value); return this; }
     /** Sets the specified value to the {@code RumbleTriggers} field. */
-    public SDL_VirtualJoystickDesc RumbleTriggers(@NativeType("_Bool (*) (void *, Uint16, Uint16)") SDL_VirtualJoystickDescRumbleTriggersCallbackI value) { nRumbleTriggers(address(), value); return this; }
+    public SDL_VirtualJoystickDesc RumbleTriggers(@NativeType("bool (*) (void *, Uint16, Uint16)") SDL_VirtualJoystickDescRumbleTriggersCallbackI value) { nRumbleTriggers(address(), value); return this; }
     /** Sets the specified value to the {@code SetLED} field. */
-    public SDL_VirtualJoystickDesc SetLED(@NativeType("_Bool (*) (void *, Uint8, Uint8, Uint8)") SDL_VirtualJoystickDescSetLEDCallbackI value) { nSetLED(address(), value); return this; }
+    public SDL_VirtualJoystickDesc SetLED(@NativeType("bool (*) (void *, Uint8, Uint8, Uint8)") SDL_VirtualJoystickDescSetLEDCallbackI value) { nSetLED(address(), value); return this; }
     /** Sets the specified value to the {@code SendEffect} field. */
-    public SDL_VirtualJoystickDesc SendEffect(@NativeType("_Bool (*) (void *, void const *, int)") SDL_VirtualJoystickDescSendEffectCallbackI value) { nSendEffect(address(), value); return this; }
+    public SDL_VirtualJoystickDesc SendEffect(@NativeType("bool (*) (void *, void const *, int)") SDL_VirtualJoystickDescSendEffectCallbackI value) { nSendEffect(address(), value); return this; }
     /** Sets the specified value to the {@code SetSensorsEnabled} field. */
-    public SDL_VirtualJoystickDesc SetSensorsEnabled(@NativeType("_Bool (*) (void *, _Bool)") SDL_VirtualJoystickDescSetSensorsEnabledCallbackI value) { nSetSensorsEnabled(address(), value); return this; }
+    public SDL_VirtualJoystickDesc SetSensorsEnabled(@NativeType("bool (*) (void *, bool)") SDL_VirtualJoystickDescSetSensorsEnabledCallbackI value) { nSetSensorsEnabled(address(), value); return this; }
     /** Sets the specified value to the {@code Cleanup} field. */
     public SDL_VirtualJoystickDesc Cleanup(@NativeType("void (*) (void *)") SDL_VirtualJoystickDescCleanupCallbackI value) { nCleanup(address(), value); return this; }
 
@@ -739,19 +739,19 @@ public class SDL_VirtualJoystickDesc extends Struct<SDL_VirtualJoystickDesc> imp
         @NativeType("void (*) (void *, int)")
         public SDL_VirtualJoystickDescSetPlayerIndexCallback SetPlayerIndex() { return SDL_VirtualJoystickDesc.nSetPlayerIndex(address()); }
         /** @return the value of the {@code Rumble} field. */
-        @NativeType("_Bool (*) (void *, Uint16, Uint16)")
+        @NativeType("bool (*) (void *, Uint16, Uint16)")
         public SDL_VirtualJoystickDescRumbleCallback Rumble() { return SDL_VirtualJoystickDesc.nRumble(address()); }
         /** @return the value of the {@code RumbleTriggers} field. */
-        @NativeType("_Bool (*) (void *, Uint16, Uint16)")
+        @NativeType("bool (*) (void *, Uint16, Uint16)")
         public SDL_VirtualJoystickDescRumbleTriggersCallback RumbleTriggers() { return SDL_VirtualJoystickDesc.nRumbleTriggers(address()); }
         /** @return the value of the {@code SetLED} field. */
-        @NativeType("_Bool (*) (void *, Uint8, Uint8, Uint8)")
+        @NativeType("bool (*) (void *, Uint8, Uint8, Uint8)")
         public SDL_VirtualJoystickDescSetLEDCallback SetLED() { return SDL_VirtualJoystickDesc.nSetLED(address()); }
         /** @return the value of the {@code SendEffect} field. */
-        @NativeType("_Bool (*) (void *, void const *, int)")
+        @NativeType("bool (*) (void *, void const *, int)")
         public SDL_VirtualJoystickDescSendEffectCallback SendEffect() { return SDL_VirtualJoystickDesc.nSendEffect(address()); }
         /** @return the value of the {@code SetSensorsEnabled} field. */
-        @NativeType("_Bool (*) (void *, _Bool)")
+        @NativeType("bool (*) (void *, bool)")
         public SDL_VirtualJoystickDescSetSensorsEnabledCallback SetSensorsEnabled() { return SDL_VirtualJoystickDesc.nSetSensorsEnabled(address()); }
         /** @return the value of the {@code Cleanup} field. */
         @NativeType("void (*) (void *)")
@@ -796,15 +796,15 @@ public class SDL_VirtualJoystickDesc extends Struct<SDL_VirtualJoystickDesc> imp
         /** Sets the specified value to the {@code SetPlayerIndex} field. */
         public SDL_VirtualJoystickDesc.Buffer SetPlayerIndex(@NativeType("void (*) (void *, int)") SDL_VirtualJoystickDescSetPlayerIndexCallbackI value) { SDL_VirtualJoystickDesc.nSetPlayerIndex(address(), value); return this; }
         /** Sets the specified value to the {@code Rumble} field. */
-        public SDL_VirtualJoystickDesc.Buffer Rumble(@NativeType("_Bool (*) (void *, Uint16, Uint16)") SDL_VirtualJoystickDescRumbleCallbackI value) { SDL_VirtualJoystickDesc.nRumble(address(), value); return this; }
+        public SDL_VirtualJoystickDesc.Buffer Rumble(@NativeType("bool (*) (void *, Uint16, Uint16)") SDL_VirtualJoystickDescRumbleCallbackI value) { SDL_VirtualJoystickDesc.nRumble(address(), value); return this; }
         /** Sets the specified value to the {@code RumbleTriggers} field. */
-        public SDL_VirtualJoystickDesc.Buffer RumbleTriggers(@NativeType("_Bool (*) (void *, Uint16, Uint16)") SDL_VirtualJoystickDescRumbleTriggersCallbackI value) { SDL_VirtualJoystickDesc.nRumbleTriggers(address(), value); return this; }
+        public SDL_VirtualJoystickDesc.Buffer RumbleTriggers(@NativeType("bool (*) (void *, Uint16, Uint16)") SDL_VirtualJoystickDescRumbleTriggersCallbackI value) { SDL_VirtualJoystickDesc.nRumbleTriggers(address(), value); return this; }
         /** Sets the specified value to the {@code SetLED} field. */
-        public SDL_VirtualJoystickDesc.Buffer SetLED(@NativeType("_Bool (*) (void *, Uint8, Uint8, Uint8)") SDL_VirtualJoystickDescSetLEDCallbackI value) { SDL_VirtualJoystickDesc.nSetLED(address(), value); return this; }
+        public SDL_VirtualJoystickDesc.Buffer SetLED(@NativeType("bool (*) (void *, Uint8, Uint8, Uint8)") SDL_VirtualJoystickDescSetLEDCallbackI value) { SDL_VirtualJoystickDesc.nSetLED(address(), value); return this; }
         /** Sets the specified value to the {@code SendEffect} field. */
-        public SDL_VirtualJoystickDesc.Buffer SendEffect(@NativeType("_Bool (*) (void *, void const *, int)") SDL_VirtualJoystickDescSendEffectCallbackI value) { SDL_VirtualJoystickDesc.nSendEffect(address(), value); return this; }
+        public SDL_VirtualJoystickDesc.Buffer SendEffect(@NativeType("bool (*) (void *, void const *, int)") SDL_VirtualJoystickDescSendEffectCallbackI value) { SDL_VirtualJoystickDesc.nSendEffect(address(), value); return this; }
         /** Sets the specified value to the {@code SetSensorsEnabled} field. */
-        public SDL_VirtualJoystickDesc.Buffer SetSensorsEnabled(@NativeType("_Bool (*) (void *, _Bool)") SDL_VirtualJoystickDescSetSensorsEnabledCallbackI value) { SDL_VirtualJoystickDesc.nSetSensorsEnabled(address(), value); return this; }
+        public SDL_VirtualJoystickDesc.Buffer SetSensorsEnabled(@NativeType("bool (*) (void *, bool)") SDL_VirtualJoystickDescSetSensorsEnabledCallbackI value) { SDL_VirtualJoystickDesc.nSetSensorsEnabled(address(), value); return this; }
         /** Sets the specified value to the {@code Cleanup} field. */
         public SDL_VirtualJoystickDesc.Buffer Cleanup(@NativeType("void (*) (void *)") SDL_VirtualJoystickDescCleanupCallbackI value) { SDL_VirtualJoystickDesc.nCleanup(address(), value); return this; }
 

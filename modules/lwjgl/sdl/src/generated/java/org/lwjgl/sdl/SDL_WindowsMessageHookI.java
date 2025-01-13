@@ -35,7 +35,7 @@ public interface SDL_WindowsMessageHookI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /** {@code _Bool (* SDL_WindowsMessageHook) (void * userdata, MSG * msg)} */
-    @NativeType("_Bool") boolean invoke(@NativeType("void *") long userdata, @NativeType("MSG *") long msg);
+    /** {@code bool (* SDL_WindowsMessageHook) (void * userdata, MSG * msg)} */
+    @NativeType("bool") boolean invoke(@NativeType("void *") long userdata, @NativeType("MSG *") long msg);
 
 }

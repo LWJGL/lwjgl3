@@ -35,7 +35,7 @@ public interface SDL_RequestAndroidPermissionCallbackI extends CallbackI {
         );
     }
 
-    /** {@code void (* SDL_RequestAndroidPermissionCallback) (void * userdata, char const * permission, _Bool granted)} */
-    void invoke(@NativeType("void *") long userdata, @NativeType("char const *") long permission, @NativeType("_Bool") boolean granted);
+    /** {@code void (* SDL_RequestAndroidPermissionCallback) (void * userdata, char const * permission, bool granted)} */
+    void invoke(@NativeType("void *") long userdata, @NativeType("char const *") long permission, @NativeType("bool") boolean granted);
 
 }
