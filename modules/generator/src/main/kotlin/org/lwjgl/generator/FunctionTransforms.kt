@@ -103,8 +103,10 @@ private class AutoSizeBytesTransform(
                     val s = (if (factor.operator == ">>") f else -f) - b
                     if (s < 0)
                         "$expression << ${-s}"
-                    else
+                    else if (0 < s)
                         "$expression >> $s"
+                    else
+                        expression
                 }
             } catch(_: NumberFormatException) {
                 // non-numeric expressions
