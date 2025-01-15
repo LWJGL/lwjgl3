@@ -7,6 +7,7 @@ package openal.templates
 import org.lwjgl.generator.*
 import openal.*
 
+// TODO: change to uppercase F in LWJGL 4
 val AL_SOFT_bformat_ex = "SOFTBformatEx".nativeClassAL("SOFT_bformat_ex") {
     IntConstant(
         "AMBISONIC_LAYOUT_SOFT"..0x1997,

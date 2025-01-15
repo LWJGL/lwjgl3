@@ -395,6 +395,8 @@ public final class ALCapabilities {
     public final boolean AL_LOKI_WAVE_format;
     /** When true, {@code SOFT_bformat_ex} is supported. */
     public final boolean AL_SOFT_bformat_ex;
+    /** When true, {@code SOFT_bformat_hoa} is supported. */
+    public final boolean AL_SOFT_bformat_hoa;
     /** When true, {@code SOFT_block_alignment} is supported. */
     public final boolean AL_SOFT_block_alignment;
     /** When true, {@code SOFT_buffer_length_query} is supported. */
@@ -470,6 +472,7 @@ public final class ALCapabilities {
         AL_LOKI_quadriphonic = ext.contains("AL_LOKI_quadriphonic");
         AL_LOKI_WAVE_format = ext.contains("AL_LOKI_WAVE_format");
         AL_SOFT_bformat_ex = ext.contains("AL_SOFT_bformat_ex");
+        AL_SOFT_bformat_hoa = ext.contains("AL_SOFT_bformat_hoa");
         AL_SOFT_block_alignment = ext.contains("AL_SOFT_block_alignment");
         AL_SOFT_buffer_length_query = ext.contains("AL_SOFT_buffer_length_query");
         AL_SOFT_buffer_samples = check_SOFT_buffer_samples(provider, caps, ext);
