@@ -449,7 +449,7 @@ class NativeClass internal constructor(
             val functions = this@NativeClass.functions
                 .filter { !it.has<Reuse>() }
 
-            val hasLibFFI = skipNative && functions.any { it.returns.isStructValue || it.parameters.any { param -> param.nativeType is StructType }}
+            val hasLibFFI = skipNative && functions.any { (it.returns.isStructValue || it.parameters.any { param -> param.nativeType is StructType }) && !it.has<Macro>() }
             val hasMemoryStack = (hasBuffers && functions.any { func ->
                 func.hasParam {
                     it.nativeType is PointerType<*> &&
