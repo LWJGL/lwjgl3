@@ -12,7 +12,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 import org.jspecify.annotations.*;
-import org.lwjgl.opengl.GL;
 import org.lwjgl.system.macosx.*;
 
 import static org.lwjgl.system.MemoryUtil.*;

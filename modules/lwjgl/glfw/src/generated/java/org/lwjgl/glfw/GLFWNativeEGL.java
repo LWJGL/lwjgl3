@@ -12,9 +12,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 import org.jspecify.annotations.*;
-import org.lwjgl.egl.EGL;
-import org.lwjgl.egl.EGL10;
-import org.lwjgl.opengles.GLES;
 
 import static org.lwjgl.system.MemoryUtil.*;
 

@@ -11,7 +11,6 @@ import core.windows.*
 val GLFWNativeWGL = "GLFWNativeWGL".nativeClass(Module.GLFW, nativeSubPath = "windows", prefix = "GLFW", binding = GLFW_BINDING_DELEGATE) {
     javaImport(
         "org.jspecify.annotations.*",
-        "org.lwjgl.opengl.GL",
         "static org.lwjgl.system.MemoryUtil.*"
     )
 

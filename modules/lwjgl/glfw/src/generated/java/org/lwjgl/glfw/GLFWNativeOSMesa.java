@@ -19,7 +19,6 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 import org.jspecify.annotations.*;
-import org.lwjgl.opengl.GL;
 
 import static org.lwjgl.system.MemoryUtil.*;
 

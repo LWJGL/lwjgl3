@@ -11,7 +11,6 @@ import core.macos.*
 val GLFWNativeNSGL = "GLFWNativeNSGL".nativeClass(Module.GLFW, nativeSubPath = "macos", prefix = "GLFW", binding = GLFW_BINDING_DELEGATE) {
     javaImport(
         "org.jspecify.annotations.*",
-        "org.lwjgl.opengl.GL",
         "org.lwjgl.system.macosx.*",
         "static org.lwjgl.system.MemoryUtil.*"
     )
