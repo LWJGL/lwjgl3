@@ -863,7 +863,7 @@ val XrVulkanGraphicsDeviceGetInfoKHR = struct(Module.OPENXR, "XrVulkanGraphicsDe
     VkInstance("vulkanInstance")
 }
 
-val XrSwapchainImageVulkan2KHR = struct(Module.OPENXR, "XrSwapchainImageVulkan2KHR", mutable = false, alias = XrSwapchainImageVulkanKHR) {
+val XrSwapchainImageVulkan2KHR = struct(Module.OPENXR, "XrSwapchainImageVulkan2KHR", mutable = false, alias = XrSwapchainImageVulkanKHR, parentStruct = XrSwapchainImageBaseHeader) {
     javaImport("org.lwjgl.vulkan.*")
     Expression("#TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR")..XrStructureType("type").mutable()
     nullable..opaque_p("next").mutable()
@@ -1247,7 +1247,7 @@ val XrSpaceComponentStatusFB = struct(Module.OPENXR, "XrSpaceComponentStatusFB",
 }
 
 val XrUuidEXT = struct(Module.OPENXR, "XrUuidEXT", alias = XrUuid) {
-    javaImport("static org.lwjgl.openxr.XR10.*")
+    javaImport("static org.lwjgl.openxr.XR11.*")
     uint8_t("data")["XR_UUID_SIZE"]
 }
 

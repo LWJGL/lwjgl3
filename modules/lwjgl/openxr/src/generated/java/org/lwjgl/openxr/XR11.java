@@ -15,8 +15,8 @@ import static org.lwjgl.openxr.XR10.*;
 public class XR11 {
 
     public static final int
-        XR_ERROR_EXTENSION_DEPENDENCY_NOT_ENABLED = -1000710001,
-        XR_ERROR_PERMISSION_INSUFFICIENT          = -1000710000;
+        XR_ERROR_PERMISSION_INSUFFICIENT          = -1000710000,
+        XR_ERROR_EXTENSION_DEPENDENCY_NOT_ENABLED = -1000710001;
 
     public static final int
         XR_TYPE_SPACES_LOCATE_INFO = 1000471000,
@@ -28,6 +28,8 @@ public class XR11 {
     public static final int XR_VIEW_CONFIGURATION_TYPE_PRIMARY_STEREO_WITH_FOVEATED_INSET = 1000037000;
 
     public static final long XR_API_VERSION_1_1 = XR_MAKE_VERSION(1, 1, XR_VERSION_PATCH(XR_CURRENT_API_VERSION));
+
+    public static final int XR_UUID_SIZE = 16;
 
     protected XR11() {
         throw new UnsupportedOperationException();

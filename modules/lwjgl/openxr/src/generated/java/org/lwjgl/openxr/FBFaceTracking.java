@@ -22,9 +22,9 @@ public class FBFaceTracking {
     public static final int XR_OBJECT_TYPE_FACE_TRACKER_FB = 1000201000;
 
     public static final int
+        XR_TYPE_FACE_EXPRESSION_INFO_FB            = 1000201002,
         XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES_FB = 1000201004,
         XR_TYPE_FACE_TRACKER_CREATE_INFO_FB        = 1000201005,
-        XR_TYPE_FACE_EXPRESSION_INFO_FB            = 1000201002,
         XR_TYPE_FACE_EXPRESSION_WEIGHTS_FB         = 1000201006;
 
     public static final int

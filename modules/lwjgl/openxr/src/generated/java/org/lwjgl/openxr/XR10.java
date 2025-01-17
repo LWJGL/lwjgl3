@@ -261,8 +261,7 @@ public class XR10 {
         XR_MAX_ACTION_NAME_SIZE               = 64,
         XR_MAX_LOCALIZED_ACTION_SET_NAME_SIZE = 128,
         XR_MAX_LOCALIZED_ACTION_NAME_SIZE     = 128,
-        XR_MIN_COMPOSITION_LAYERS_SUPPORTED   = 16,
-        XR_UUID_SIZE                          = 16;
+        XR_MIN_COMPOSITION_LAYERS_SUPPORTED   = 16;
 
     protected XR10() {
         throw new UnsupportedOperationException();

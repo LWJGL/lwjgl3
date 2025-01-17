@@ -165,8 +165,7 @@ fun templateCustomization() {
             "MAX_ACTION_NAME_SIZE".."64",
             "MAX_LOCALIZED_ACTION_SET_NAME_SIZE".."128",
             "MAX_LOCALIZED_ACTION_NAME_SIZE".."128",
-            "MIN_COMPOSITION_LAYERS_SUPPORTED".."16",
-            "UUID_SIZE".."16"
+            "MIN_COMPOSITION_LAYERS_SUPPORTED".."16"
         )
 
         macro(expression = "result >= 0")..bool(
@@ -201,6 +200,10 @@ fun templateCustomization() {
 
         LongConstant(
             "API_VERSION_1_1".."XR_MAKE_VERSION(1, 1, XR_VERSION_PATCH(XR_CURRENT_API_VERSION))"
+        )
+
+        IntConstant(
+            "UUID_SIZE".."16"
         )
     }
 

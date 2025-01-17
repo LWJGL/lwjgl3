@@ -637,7 +637,7 @@ val XrFrustumf = struct(Module.OPENXR, "XrFrustumf") {
 }
 
 val XrUuid = struct(Module.OPENXR, "XrUuid") {
-    javaImport("static org.lwjgl.openxr.XR10.*")
+    javaImport("static org.lwjgl.openxr.XR11.*")
     uint8_t("data")["XR_UUID_SIZE"]
 }
 

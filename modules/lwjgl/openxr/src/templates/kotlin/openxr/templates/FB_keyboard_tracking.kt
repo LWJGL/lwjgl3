@@ -22,9 +22,9 @@ val FB_keyboard_tracking = "FBKeyboardTracking".nativeClassXR("FB_keyboard_track
     )
 
     EnumConstant(
-        "TYPE_KEYBOARD_SPACE_CREATE_INFO_FB".."1000116009",
+        "TYPE_SYSTEM_KEYBOARD_TRACKING_PROPERTIES_FB".."1000116002",
         "TYPE_KEYBOARD_TRACKING_QUERY_FB".."1000116004",
-        "TYPE_SYSTEM_KEYBOARD_TRACKING_PROPERTIES_FB".."1000116002"
+        "TYPE_KEYBOARD_SPACE_CREATE_INFO_FB".."1000116009"
     )
 
     EnumConstant(

@@ -22,9 +22,9 @@ public class FBKeyboardTracking {
     public static final int XR_MAX_KEYBOARD_TRACKING_NAME_SIZE_FB = 128;
 
     public static final int
-        XR_TYPE_KEYBOARD_SPACE_CREATE_INFO_FB          = 1000116009,
+        XR_TYPE_SYSTEM_KEYBOARD_TRACKING_PROPERTIES_FB = 1000116002,
         XR_TYPE_KEYBOARD_TRACKING_QUERY_FB             = 1000116004,
-        XR_TYPE_SYSTEM_KEYBOARD_TRACKING_PROPERTIES_FB = 1000116002;
+        XR_TYPE_KEYBOARD_SPACE_CREATE_INFO_FB          = 1000116009;
 
     public static final int
         XR_KEYBOARD_TRACKING_EXISTS_BIT_FB    = 0x1,

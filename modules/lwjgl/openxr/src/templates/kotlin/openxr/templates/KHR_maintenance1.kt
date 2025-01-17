@@ -18,7 +18,7 @@ val KHR_maintenance1 = "KHRMaintenance1".nativeClassXR("KHR_maintenance1", type 
     )
 
     EnumConstant(
-        "ERROR_EXTENSION_DEPENDENCY_NOT_ENABLED_KHR".."-1000710001",
-        "ERROR_PERMISSION_INSUFFICIENT_KHR".."-1000710000"
+        "ERROR_PERMISSION_INSUFFICIENT_KHR".."-1000710000",
+        "ERROR_EXTENSION_DEPENDENCY_NOT_ENABLED_KHR".."-1000710001"
     )
 }

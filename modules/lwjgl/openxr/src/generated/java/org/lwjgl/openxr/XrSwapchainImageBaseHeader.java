@@ -143,6 +143,11 @@ public class XrSwapchainImageBaseHeader extends Struct<XrSwapchainImageBaseHeade
         return new XrSwapchainImageBaseHeader(value.address(), __getContainer(value));
     }
 
+    /** Upcasts the specified {@code XrSwapchainImageVulkan2KHR} instance to {@code XrSwapchainImageBaseHeader}. */
+    public static XrSwapchainImageBaseHeader create(XrSwapchainImageVulkan2KHR value) {
+        return new XrSwapchainImageBaseHeader(value.address(), __getContainer(value));
+    }
+
     /**
      * Returns a new {@link XrSwapchainImageBaseHeader.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -193,6 +198,11 @@ public class XrSwapchainImageBaseHeader extends Struct<XrSwapchainImageBaseHeade
 
     /** Upcasts the specified {@code XrSwapchainImageVulkanKHR.Buffer} instance to {@code XrSwapchainImageBaseHeader.Buffer}. */
     public static XrSwapchainImageBaseHeader.Buffer create(XrSwapchainImageVulkanKHR.Buffer value) {
+        return new XrSwapchainImageBaseHeader.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
+    /** Upcasts the specified {@code XrSwapchainImageVulkan2KHR.Buffer} instance to {@code XrSwapchainImageBaseHeader.Buffer}. */
+    public static XrSwapchainImageBaseHeader.Buffer create(XrSwapchainImageVulkan2KHR.Buffer value) {
         return new XrSwapchainImageBaseHeader.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 

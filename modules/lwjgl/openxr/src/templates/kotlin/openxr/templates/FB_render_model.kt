@@ -31,8 +31,8 @@ val FB_render_model = "FBRenderModel".nativeClassXR("FB_render_model", type = "i
     )
 
     EnumConstant(
-        "ERROR_RENDER_MODEL_KEY_INVALID_FB".."-1000119000",
-        "RENDER_MODEL_UNAVAILABLE_FB".."1000119020"
+        "RENDER_MODEL_UNAVAILABLE_FB".."1000119020",
+        "ERROR_RENDER_MODEL_KEY_INVALID_FB".."-1000119000"
     )
 
     EnumConstant(
