@@ -54,14 +54,14 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tin
         charASCII.const.p("aIconType")
     )
 
-    val messageBox = intb(
+    val messageBox = int(
         "messageBox",
 
         nullable..charUTF8.const.p("aTitle"),
         nullable..charUTF8.const.p("aMessage"),
         charASCII.const.p("aDialogType"),
         charASCII.const.p("aIconType"),
-        intb("aDefaultButton")
+        int("aDefaultButton")
     )
 
     charUTF8.const.p(

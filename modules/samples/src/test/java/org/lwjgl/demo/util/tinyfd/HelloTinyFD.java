@@ -53,7 +53,19 @@ public final class HelloTinyFD {
                     break;
                 case GLFW_KEY_1:
                     System.out.println("\nOpening message dialog...");
-                    System.out.println(tinyfd_messageBox("Please read...", "...this message.", "okcancel", "info", true) ? "OK" : "Cancel");
+                    String answer;
+                    switch (tinyfd_messageBox("Please answer...", "...this question?", "yesnocancel", "question", 2)) {
+                        case 1:
+                            answer = "Yes";
+                            break;
+                        case 2:
+                            answer = "No";
+                            break;
+                        default:
+                            answer = "Cancel";
+                            break;
+                    }
+                    System.out.println(answer);
                     break;
                 case GLFW_KEY_2:
                     System.out.println("\nOpening input box dialog...");
@@ -109,11 +121,12 @@ public final class HelloTinyFD {
 
         glfwSwapInterval(1);
 
-        tinyfd_messageBox("tinyfd_query", "", "ok", "info", true);
-        System.out.println("tiny file dialogs " + tinyfd_getGlobalChar(tinyfd_version) + " (" + tinyfd_getGlobalChar(tinyfd_response) + ")");
+        int mode = tinyfd_notifyPopup("tinyfd_query", null, "info");
+        System.out.println("tiny file dialogs " + tinyfd_getGlobalChar(tinyfd_version) + " (" + tinyfd_getGlobalChar(tinyfd_response) + " - " + (mode == 0 ? "console" : "graphic") + " mode)");
         System.out.println();
         System.out.println(tinyfd_getGlobalChar(tinyfd_needs));
         System.out.println();
+        System.out.println("Press N to launch a notification popup.");
         System.out.println("Press 1 to launch a message dialog.");
         System.out.println("Press 2 to launch an input box fialog.");
         System.out.println("Press 3 to launch a file open dialog.");

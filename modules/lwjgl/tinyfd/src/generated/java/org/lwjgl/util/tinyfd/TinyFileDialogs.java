@@ -162,20 +162,18 @@ public class TinyFileDialogs {
     public static native int ntinyfd_messageBox(long aTitle, long aMessage, long aDialogType, long aIconType, int aDefaultButton);
 
     /** {@code int tinyfd_messageBox(char const * aTitle, char const * aMessage, char const * aDialogType, char const * aIconType, int aDefaultButton)} */
-    @NativeType("int")
-    public static boolean tinyfd_messageBox(@NativeType("char const *") @Nullable ByteBuffer aTitle, @NativeType("char const *") @Nullable ByteBuffer aMessage, @NativeType("char const *") ByteBuffer aDialogType, @NativeType("char const *") ByteBuffer aIconType, @NativeType("int") boolean aDefaultButton) {
+    public static int tinyfd_messageBox(@NativeType("char const *") @Nullable ByteBuffer aTitle, @NativeType("char const *") @Nullable ByteBuffer aMessage, @NativeType("char const *") ByteBuffer aDialogType, @NativeType("char const *") ByteBuffer aIconType, int aDefaultButton) {
         if (CHECKS) {
             checkNT1Safe(aTitle);
             checkNT1Safe(aMessage);
             checkNT1(aDialogType);
             checkNT1(aIconType);
         }
-        return ntinyfd_messageBox(memAddressSafe(aTitle), memAddressSafe(aMessage), memAddress(aDialogType), memAddress(aIconType), aDefaultButton ? 1 : 0) != 0;
+        return ntinyfd_messageBox(memAddressSafe(aTitle), memAddressSafe(aMessage), memAddress(aDialogType), memAddress(aIconType), aDefaultButton);
     }
 
     /** {@code int tinyfd_messageBox(char const * aTitle, char const * aMessage, char const * aDialogType, char const * aIconType, int aDefaultButton)} */
-    @NativeType("int")
-    public static boolean tinyfd_messageBox(@NativeType("char const *") @Nullable CharSequence aTitle, @NativeType("char const *") @Nullable CharSequence aMessage, @NativeType("char const *") CharSequence aDialogType, @NativeType("char const *") CharSequence aIconType, @NativeType("int") boolean aDefaultButton) {
+    public static int tinyfd_messageBox(@NativeType("char const *") @Nullable CharSequence aTitle, @NativeType("char const *") @Nullable CharSequence aMessage, @NativeType("char const *") CharSequence aDialogType, @NativeType("char const *") CharSequence aIconType, int aDefaultButton) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8Safe(aTitle, true);
@@ -186,7 +184,7 @@ public class TinyFileDialogs {
             long aDialogTypeEncoded = stack.getPointerAddress();
             stack.nASCII(aIconType, true);
             long aIconTypeEncoded = stack.getPointerAddress();
-            return ntinyfd_messageBox(aTitleEncoded, aMessageEncoded, aDialogTypeEncoded, aIconTypeEncoded, aDefaultButton ? 1 : 0) != 0;
+            return ntinyfd_messageBox(aTitleEncoded, aMessageEncoded, aDialogTypeEncoded, aIconTypeEncoded, aDefaultButton);
         } finally {
             stack.setPointer(stackPointer);
         }
