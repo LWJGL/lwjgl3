@@ -80,9 +80,9 @@ public class KHRVideoQueue {
     public static final int VK_VIDEO_CODING_CONTROL_RESET_BIT_KHR = 0x1;
 
     public static final int
-        VK_QUERY_RESULT_STATUS_ERROR_KHR     = -1,
         VK_QUERY_RESULT_STATUS_NOT_READY_KHR = 0,
-        VK_QUERY_RESULT_STATUS_COMPLETE_KHR  = 1;
+        VK_QUERY_RESULT_STATUS_COMPLETE_KHR  = 1,
+        VK_QUERY_RESULT_STATUS_ERROR_KHR     = -1;
 
     protected KHRVideoQueue() {
         throw new UnsupportedOperationException();

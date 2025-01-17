@@ -47,7 +47,7 @@ fun templateCustomization() {
         )
 
         IntConstant(
-            "HEADER_VERSION".."304"
+            "HEADER_VERSION".."305"
         )
 
         LongConstant(
@@ -134,7 +134,6 @@ fun templateCustomization() {
         IntConstant(
             "MAX_PHYSICAL_DEVICE_NAME_SIZE".."256",
             "UUID_SIZE".."16",
-            "LUID_SIZE".."8",
             "MAX_EXTENSION_NAME_SIZE".."256",
             "MAX_DESCRIPTION_SIZE".."256",
             "MAX_MEMORY_TYPES".."32",
@@ -145,12 +144,7 @@ fun templateCustomization() {
             "TRUE".."1",
             "FALSE".."0",
             "QUEUE_FAMILY_IGNORED".."(~0)",
-            "QUEUE_FAMILY_EXTERNAL".."(~0-1)",
-            "SUBPASS_EXTERNAL".."(~0)",
-            "MAX_DEVICE_GROUP_SIZE".."32",
-            "MAX_DRIVER_NAME_SIZE".."256",
-            "MAX_DRIVER_INFO_SIZE".."256",
-            "MAX_GLOBAL_PRIORITY_SIZE".."16"
+            "SUBPASS_EXTERNAL".."(~0)"
         )
 
         FloatConstant(
@@ -202,11 +196,22 @@ fun templateCustomization() {
         IntConstant(
             "API_VERSION_1_1".."VK_MAKE_API_VERSION(0, 1, 1, 0)"
         )
+
+        IntConstant(
+            "LUID_SIZE".."8",
+            "QUEUE_FAMILY_EXTERNAL".."(~0-1)",
+            "MAX_DEVICE_GROUP_SIZE".."32"
+        )
     }
 
     VK12.apply {
         IntConstant(
             "API_VERSION_1_2".."VK_MAKE_API_VERSION(0, 1, 2, 0)"
+        )
+
+        IntConstant(
+            "MAX_DRIVER_NAME_SIZE".."256",
+            "MAX_DRIVER_INFO_SIZE".."256"
         )
     }
 
@@ -219,6 +224,10 @@ fun templateCustomization() {
     VK14.apply {
         IntConstant(
             "API_VERSION_1_4".."VK_MAKE_API_VERSION(0, 1, 4, 0)"
+        )
+
+        IntConstant(
+            "MAX_GLOBAL_PRIORITY_SIZE".."16"
         )
     }
 

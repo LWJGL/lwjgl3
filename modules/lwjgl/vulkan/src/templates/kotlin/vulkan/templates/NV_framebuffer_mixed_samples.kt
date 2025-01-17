@@ -18,11 +18,8 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassVK("NV
     )
 
     EnumConstant(
+        "STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_NV".."1000044008",
         "STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV".."1000152000"
-    )
-
-    EnumConstant(
-        "STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_NV".."1000044008"
     )
 
     EnumConstant(

@@ -1020,6 +1020,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_ANDROID_external_format_resolve;
     /** When true, {@code ANDROID_external_memory_android_hardware_buffer} is supported. */
     public final boolean VK_ANDROID_external_memory_android_hardware_buffer;
+    /** When true, {@code ARM_pipeline_opacity_micromap} is supported. */
+    public final boolean VK_ARM_pipeline_opacity_micromap;
     /** When true, {@code ARM_rasterization_order_attachment_access} is supported. */
     public final boolean VK_ARM_rasterization_order_attachment_access;
     /** When true, {@code ARM_render_pass_striped} is supported. */
@@ -1316,6 +1318,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_dedicated_allocation;
     /** When true, {@code KHR_deferred_host_operations} is supported. */
     public final boolean VK_KHR_deferred_host_operations;
+    /** When true, {@code KHR_depth_clamp_zero_one} is supported. */
+    public final boolean VK_KHR_depth_clamp_zero_one;
     /** When true, {@code KHR_depth_stencil_resolve} is supported. */
     public final boolean VK_KHR_depth_stencil_resolve;
     /** When true, {@code KHR_descriptor_update_template} is supported. */
@@ -1386,6 +1390,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_maintenance6;
     /** When true, {@code KHR_maintenance7} is supported. */
     public final boolean VK_KHR_maintenance7;
+    /** When true, {@code KHR_maintenance8} is supported. */
+    public final boolean VK_KHR_maintenance8;
     /** When true, {@code KHR_map_memory2} is supported. */
     public final boolean VK_KHR_map_memory2;
     /** When true, {@code KHR_multiview} is supported. */
@@ -1697,6 +1703,7 @@ public class VKCapabilitiesDevice {
         VK_AMDX_shader_enqueue = check_AMDX_shader_enqueue(provider, caps, ext);
         VK_ANDROID_external_format_resolve = ext.contains("VK_ANDROID_external_format_resolve");
         VK_ANDROID_external_memory_android_hardware_buffer = check_ANDROID_external_memory_android_hardware_buffer(provider, caps, ext);
+        VK_ARM_pipeline_opacity_micromap = ext.contains("VK_ARM_pipeline_opacity_micromap");
         VK_ARM_rasterization_order_attachment_access = ext.contains("VK_ARM_rasterization_order_attachment_access");
         VK_ARM_render_pass_striped = ext.contains("VK_ARM_render_pass_striped");
         VK_ARM_scheduling_controls = ext.contains("VK_ARM_scheduling_controls");
@@ -1845,6 +1852,7 @@ public class VKCapabilitiesDevice {
         VK_KHR_create_renderpass2 = check_KHR_create_renderpass2(provider, caps, ext);
         VK_KHR_dedicated_allocation = ext.contains("VK_KHR_dedicated_allocation");
         VK_KHR_deferred_host_operations = check_KHR_deferred_host_operations(provider, caps, ext);
+        VK_KHR_depth_clamp_zero_one = ext.contains("VK_KHR_depth_clamp_zero_one");
         VK_KHR_depth_stencil_resolve = ext.contains("VK_KHR_depth_stencil_resolve");
         VK_KHR_descriptor_update_template = check_KHR_descriptor_update_template(provider, caps, ext);
         VK_KHR_device_group = check_KHR_device_group(provider, caps, ext);
@@ -1880,6 +1888,7 @@ public class VKCapabilitiesDevice {
         VK_KHR_maintenance5 = check_KHR_maintenance5(provider, caps, ext);
         VK_KHR_maintenance6 = check_KHR_maintenance6(provider, caps, ext);
         VK_KHR_maintenance7 = ext.contains("VK_KHR_maintenance7");
+        VK_KHR_maintenance8 = ext.contains("VK_KHR_maintenance8");
         VK_KHR_map_memory2 = check_KHR_map_memory2(provider, caps, ext);
         VK_KHR_multiview = ext.contains("VK_KHR_multiview");
         VK_KHR_performance_query = check_KHR_performance_query(provider, caps, ext);

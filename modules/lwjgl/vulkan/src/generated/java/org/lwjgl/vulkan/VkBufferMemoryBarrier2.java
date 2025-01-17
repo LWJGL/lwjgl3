@@ -148,6 +148,8 @@ public class VkBufferMemoryBarrier2 extends Struct<VkBufferMemoryBarrier2> imple
     public VkBufferMemoryBarrier2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkExternalMemoryAcquireUnmodifiedEXT} value to the {@code pNext} chain. */
     public VkBufferMemoryBarrier2 pNext(VkExternalMemoryAcquireUnmodifiedEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkMemoryBarrierAccessFlags3KHR} value to the {@code pNext} chain. */
+    public VkBufferMemoryBarrier2 pNext(VkMemoryBarrierAccessFlags3KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code srcStageMask} field. */
     public VkBufferMemoryBarrier2 srcStageMask(@NativeType("VkPipelineStageFlags2") long value) { nsrcStageMask(address(), value); return this; }
     /** Sets the specified value to the {@code srcAccessMask} field. */
@@ -450,6 +452,8 @@ public class VkBufferMemoryBarrier2 extends Struct<VkBufferMemoryBarrier2> imple
         public VkBufferMemoryBarrier2.Buffer pNext(@NativeType("void const *") long value) { VkBufferMemoryBarrier2.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkExternalMemoryAcquireUnmodifiedEXT} value to the {@code pNext} chain. */
         public VkBufferMemoryBarrier2.Buffer pNext(VkExternalMemoryAcquireUnmodifiedEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkMemoryBarrierAccessFlags3KHR} value to the {@code pNext} chain. */
+        public VkBufferMemoryBarrier2.Buffer pNext(VkMemoryBarrierAccessFlags3KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code srcStageMask} field. */
         public VkBufferMemoryBarrier2.Buffer srcStageMask(@NativeType("VkPipelineStageFlags2") long value) { VkBufferMemoryBarrier2.nsrcStageMask(address(), value); return this; }
         /** Sets the specified value to the {@code srcAccessMask} field. */

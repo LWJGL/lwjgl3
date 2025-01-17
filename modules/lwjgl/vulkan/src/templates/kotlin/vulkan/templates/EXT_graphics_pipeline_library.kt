@@ -24,8 +24,8 @@ val EXT_graphics_pipeline_library = "EXTGraphicsPipelineLibrary".nativeClassVK("
     )
 
     EnumConstant(
-        "PIPELINE_CREATE_RETAIN_LINK_TIME_OPTIMIZATION_INFO_BIT_EXT".enum(0x00800000),
-        "PIPELINE_CREATE_LINK_TIME_OPTIMIZATION_BIT_EXT".enum(0x00000400)
+        "PIPELINE_CREATE_LINK_TIME_OPTIMIZATION_BIT_EXT".enum(0x00000400),
+        "PIPELINE_CREATE_RETAIN_LINK_TIME_OPTIMIZATION_INFO_BIT_EXT".enum(0x00800000)
     )
 
     EnumConstant(

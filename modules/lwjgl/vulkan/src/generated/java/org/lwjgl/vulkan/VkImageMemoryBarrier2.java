@@ -154,6 +154,8 @@ public class VkImageMemoryBarrier2 extends Struct<VkImageMemoryBarrier2> impleme
     public VkImageMemoryBarrier2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkExternalMemoryAcquireUnmodifiedEXT} value to the {@code pNext} chain. */
     public VkImageMemoryBarrier2 pNext(VkExternalMemoryAcquireUnmodifiedEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkMemoryBarrierAccessFlags3KHR} value to the {@code pNext} chain. */
+    public VkImageMemoryBarrier2 pNext(VkMemoryBarrierAccessFlags3KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSampleLocationsInfoEXT} value to the {@code pNext} chain. */
     public VkImageMemoryBarrier2 pNext(VkSampleLocationsInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code srcStageMask} field. */
@@ -470,6 +472,8 @@ public class VkImageMemoryBarrier2 extends Struct<VkImageMemoryBarrier2> impleme
         public VkImageMemoryBarrier2.Buffer pNext(@NativeType("void const *") long value) { VkImageMemoryBarrier2.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkExternalMemoryAcquireUnmodifiedEXT} value to the {@code pNext} chain. */
         public VkImageMemoryBarrier2.Buffer pNext(VkExternalMemoryAcquireUnmodifiedEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkMemoryBarrierAccessFlags3KHR} value to the {@code pNext} chain. */
+        public VkImageMemoryBarrier2.Buffer pNext(VkMemoryBarrierAccessFlags3KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSampleLocationsInfoEXT} value to the {@code pNext} chain. */
         public VkImageMemoryBarrier2.Buffer pNext(VkSampleLocationsInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code srcStageMask} field. */

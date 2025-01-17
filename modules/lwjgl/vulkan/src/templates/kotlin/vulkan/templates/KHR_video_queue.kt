@@ -92,9 +92,9 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
     )
 
     EnumConstant(
-        "QUERY_RESULT_STATUS_ERROR_KHR".."-1",
         "QUERY_RESULT_STATUS_NOT_READY_KHR".."0",
-        "QUERY_RESULT_STATUS_COMPLETE_KHR".."1"
+        "QUERY_RESULT_STATUS_COMPLETE_KHR".."1",
+        "QUERY_RESULT_STATUS_ERROR_KHR".."-1"
     )
 
     VkResult(

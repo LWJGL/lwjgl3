@@ -36,6 +36,10 @@ val KHR_video_encode_av1 = "KHRVideoEncodeAV1".nativeClassVK("KHR_video_encode_a
     )
 
     EnumConstant(
+        "MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR".."7"
+    )
+
+    EnumConstant(
         "VIDEO_ENCODE_AV1_PREDICTION_MODE_INTRA_ONLY_KHR".."0",
         "VIDEO_ENCODE_AV1_PREDICTION_MODE_SINGLE_REFERENCE_KHR".."1",
         "VIDEO_ENCODE_AV1_PREDICTION_MODE_UNIDIRECTIONAL_COMPOUND_KHR".."2",

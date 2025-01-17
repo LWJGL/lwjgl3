@@ -9,6 +9,7 @@ import org.lwjgl.generator.*
 import vulkan.*
 
 val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK_BINDING_INSTANCE) {
+    
     EnumConstant(
         "SUCCESS".."0",
         "NOT_READY".."1",
@@ -613,8 +614,8 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         "SHADER_STAGE_TESSELLATION_EVALUATION_BIT".enum(0x00000004),
         "SHADER_STAGE_GEOMETRY_BIT".enum(0x00000008),
         "SHADER_STAGE_FRAGMENT_BIT".enum(0x00000010),
-        "SHADER_STAGE_COMPUTE_BIT".enum(0x00000020),
         "SHADER_STAGE_ALL_GRAPHICS".."0x0000001F",
+        "SHADER_STAGE_COMPUTE_BIT".enum(0x00000020),
         "SHADER_STAGE_ALL".."0x7FFFFFFF"
     )
 

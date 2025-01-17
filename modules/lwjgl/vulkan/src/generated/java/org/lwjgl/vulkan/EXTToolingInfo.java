@@ -28,11 +28,9 @@ public class EXTToolingInfo {
         VK_TOOL_PURPOSE_PROFILING_BIT_EXT           = 0x2,
         VK_TOOL_PURPOSE_TRACING_BIT_EXT             = 0x4,
         VK_TOOL_PURPOSE_ADDITIONAL_FEATURES_BIT_EXT = 0x8,
-        VK_TOOL_PURPOSE_MODIFYING_FEATURES_BIT_EXT  = 0x10;
-
-    public static final int
-        VK_TOOL_PURPOSE_DEBUG_REPORTING_BIT_EXT = 0x20,
-        VK_TOOL_PURPOSE_DEBUG_MARKERS_BIT_EXT   = 0x40;
+        VK_TOOL_PURPOSE_MODIFYING_FEATURES_BIT_EXT  = 0x10,
+        VK_TOOL_PURPOSE_DEBUG_REPORTING_BIT_EXT     = 0x20,
+        VK_TOOL_PURPOSE_DEBUG_MARKERS_BIT_EXT       = 0x40;
 
     protected EXTToolingInfo() {
         throw new UnsupportedOperationException();

@@ -7,7 +7,6 @@ package vulkan
 
 import org.lwjgl.generator.*
 import core.linux.*
-import core.macos.*
 import core.windows.*
 
 // Handle types
@@ -247,6 +246,7 @@ val VkIndirectExecutionSetInfoTypeEXT = "VkIndirectExecutionSetInfoTypeEXT".enum
 val VkIndirectCommandsTokenTypeEXT = "VkIndirectCommandsTokenTypeEXT".enumType
 val VkIndirectCommandsInputModeFlagBitsEXT = "VkIndirectCommandsInputModeFlagBitsEXT".enumType
 val VkIndirectCommandsLayoutUsageFlagBitsEXT = "VkIndirectCommandsLayoutUsageFlagBitsEXT".enumType
+val VkAccessFlagBits3KHR = "VkAccessFlagBits3KHR".enumType
 
 // Bitmask types
 val VkCompositeAlphaFlagsKHR = typedef(VkFlags, "VkCompositeAlphaFlagsKHR")
@@ -379,6 +379,7 @@ val VkVideoEncodeAV1SuperblockSizeFlagsKHR = typedef(VkFlags, "VkVideoEncodeAV1S
 val VkVideoEncodeAV1RateControlFlagsKHR = typedef(VkFlags, "VkVideoEncodeAV1RateControlFlagsKHR")
 val VkIndirectCommandsInputModeFlagsEXT = typedef(VkFlags, "VkIndirectCommandsInputModeFlagsEXT")
 val VkIndirectCommandsLayoutUsageFlagsEXT = typedef(VkFlags, "VkIndirectCommandsLayoutUsageFlagsEXT")
+val VkAccessFlags3KHR = typedef(VkFlags64, "VkAccessFlags3KHR")
 
 // Function pointer types
 val PFN_vkDebugReportCallbackEXT = Module.VULKAN.callback {
@@ -505,7 +506,7 @@ val VkAcquireNextImageInfoKHR = struct(Module.VULKAN, "VkAcquireNextImageInfoKHR
 }
 
 val VkDeviceGroupPresentCapabilitiesKHR = struct(Module.VULKAN, "VkDeviceGroupPresentCapabilitiesKHR", mutable = false) {
-    javaImport("static org.lwjgl.vulkan.VK10.*")
+    javaImport("static org.lwjgl.vulkan.VK11.*")
     Expression("#STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR")..VkStructureType("sType").mutable()
     nullable..opaque_p("pNext").mutable()
     uint32_t("presentMask")["VK_MAX_DEVICE_GROUP_SIZE"]
@@ -1656,7 +1657,7 @@ val VkPipelineRobustnessCreateInfoEXT = struct(Module.VULKAN, "VkPipelineRobustn
 }
 
 val VkPhysicalDeviceGroupPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceGroupPropertiesKHR", mutable = false, alias = VkPhysicalDeviceGroupProperties) {
-    javaImport("static org.lwjgl.vulkan.VK10.*")
+    javaImport("static org.lwjgl.vulkan.VK11.*")
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES")..VkStructureType("sType").mutable()
     nullable..opaque_p("pNext").mutable()
     AutoSize("physicalDevices")..uint32_t("physicalDeviceCount")
@@ -1705,6 +1706,7 @@ val VkExternalBufferPropertiesKHR = struct(Module.VULKAN, "VkExternalBufferPrope
 
 val VkPhysicalDeviceIDPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceIDPropertiesKHR", mutable = false, alias = VkPhysicalDeviceIDProperties) {
     javaImport("static org.lwjgl.vulkan.VK10.*")
+    javaImport("static org.lwjgl.vulkan.VK11.*")
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES")..VkStructureType("sType").mutable()
     nullable..opaque_p("pNext").mutable()
     uint8_t("deviceUUID")["VK_UUID_SIZE"]
@@ -3509,7 +3511,7 @@ val VkGeometryNV = struct(Module.VULKAN, "VkGeometryNV") {
 val VkAccelerationStructureInfoNV = struct(Module.VULKAN, "VkAccelerationStructureInfoNV") {
     Expression("#STRUCTURE_TYPE_ACCELERATION_STRUCTURE_INFO_NV")..VkStructureType("sType")
     nullable..opaque_const_p("pNext")
-    VkAccelerationStructureTypeKHR("type")
+    VkAccelerationStructureTypeNV("type")
     VkBuildAccelerationStructureFlagsNV("flags")
     uint32_t("instanceCount")
     AutoSize("pGeometries", optional = true)..uint32_t("geometryCount")
@@ -3837,7 +3839,7 @@ val VkConformanceVersionKHR = struct(Module.VULKAN, "VkConformanceVersionKHR", a
 }
 
 val VkPhysicalDeviceDriverPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceDriverPropertiesKHR", mutable = false, alias = VkPhysicalDeviceDriverProperties) {
-    javaImport("static org.lwjgl.vulkan.VK10.*")
+    javaImport("static org.lwjgl.vulkan.VK12.*")
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES")..VkStructureType("sType").mutable()
     nullable..opaque_p("pNext").mutable()
     VkDriverId("driverID")
@@ -6769,8 +6771,9 @@ val VkDescriptorSetLayoutHostMappingInfoVALVE = struct(Module.VULKAN, "VkDescrip
     uint32_t("descriptorSize")
 }
 
-val VkPhysicalDeviceDepthClampZeroOneFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceDepthClampZeroOneFeaturesEXT") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT")..VkStructureType("sType")
+val _VkPhysicalDeviceDepthClampZeroOneFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceDepthClampZeroOneFeaturesKHR")
+val VkPhysicalDeviceDepthClampZeroOneFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceDepthClampZeroOneFeaturesEXT", alias = _VkPhysicalDeviceDepthClampZeroOneFeaturesKHR) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_KHR")..VkStructureType("sType")
     nullable..opaque_p("pNext")
     VkBool32("depthClampZeroOne")
 }
@@ -7700,7 +7703,7 @@ val VkVideoDecodeAV1SessionParametersCreateInfoKHR = struct(Module.VULKAN, "VkVi
 
 val VkVideoDecodeAV1PictureInfoKHR = struct(Module.VULKAN, "VkVideoDecodeAV1PictureInfoKHR") {
     javaImport("org.lwjgl.vulkan.video.*")
-    javaImport("static org.lwjgl.vulkan.KHRVideoDecodeAV1.*")
+    javaImport("static org.lwjgl.vulkan.KHRVideoEncodeAV1.*")
     Expression("#STRUCTURE_TYPE_VIDEO_DECODE_AV1_PICTURE_INFO_KHR")..VkStructureType("sType")
     nullable..opaque_const_p("pNext")
     StdVideoDecodeAV1PictureInfo.const.p("pStdPictureInfo")
@@ -7800,7 +7803,7 @@ val VkVideoEncodeAV1SessionParametersCreateInfoKHR = struct(Module.VULKAN, "VkVi
 
 val VkVideoEncodeAV1PictureInfoKHR = struct(Module.VULKAN, "VkVideoEncodeAV1PictureInfoKHR") {
     javaImport("org.lwjgl.vulkan.video.*")
-    javaImport("static org.lwjgl.vulkan.KHRVideoDecodeAV1.*")
+    javaImport("static org.lwjgl.vulkan.KHRVideoEncodeAV1.*")
     Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_AV1_PICTURE_INFO_KHR")..VkStructureType("sType")
     nullable..opaque_const_p("pNext")
     VkVideoEncodeAV1PredictionModeKHR("predictionMode")
@@ -8452,6 +8455,19 @@ val VkWriteIndirectExecutionSetShaderEXT = struct(Module.VULKAN, "VkWriteIndirec
     VkShaderEXT("shader")
 }
 
+val VkPhysicalDeviceMaintenance8FeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceMaintenance8FeaturesKHR") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_8_FEATURES_KHR")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("maintenance8")
+}
+
+val VkMemoryBarrierAccessFlags3KHR = struct(Module.VULKAN, "VkMemoryBarrierAccessFlags3KHR") {
+    Expression("#STRUCTURE_TYPE_MEMORY_BARRIER_ACCESS_FLAGS_3_KHR")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkAccessFlags3KHR("srcAccessMask3")
+    VkAccessFlags3KHR("dstAccessMask3")
+}
+
 val VkPhysicalDeviceImageAlignmentControlFeaturesMESA = struct(Module.VULKAN, "VkPhysicalDeviceImageAlignmentControlFeaturesMESA") {
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_FEATURES_MESA")..VkStructureType("sType")
     nullable..opaque_p("pNext")
@@ -8529,6 +8545,18 @@ val VkPhysicalDeviceCooperativeMatrix2PropertiesNV = struct(Module.VULKAN, "VkPh
     uint32_t("cooperativeMatrixWorkgroupScopeMaxWorkgroupSize")
     uint32_t("cooperativeMatrixFlexibleDimensionsMaxDimension")
     uint32_t("cooperativeMatrixWorkgroupScopeReservedSharedMemory")
+}
+
+val VkPhysicalDevicePipelineOpacityMicromapFeaturesARM = struct(Module.VULKAN, "VkPhysicalDevicePipelineOpacityMicromapFeaturesARM") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_OPACITY_MICROMAP_FEATURES_ARM")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("pipelineOpacityMicromap")
+}
+
+val VkPhysicalDeviceDepthClampZeroOneFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceDepthClampZeroOneFeaturesKHR") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_KHR")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("depthClampZeroOne")
 }
 
 val VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT") {

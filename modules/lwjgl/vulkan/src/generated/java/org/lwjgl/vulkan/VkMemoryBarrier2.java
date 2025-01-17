@@ -111,6 +111,8 @@ public class VkMemoryBarrier2 extends Struct<VkMemoryBarrier2> implements Native
     public VkMemoryBarrier2 sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_MEMORY_BARRIER_2); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkMemoryBarrier2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkMemoryBarrierAccessFlags3KHR} value to the {@code pNext} chain. */
+    public VkMemoryBarrier2 pNext(VkMemoryBarrierAccessFlags3KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code srcStageMask} field. */
     public VkMemoryBarrier2 srcStageMask(@NativeType("VkPipelineStageFlags2") long value) { nsrcStageMask(address(), value); return this; }
     /** Sets the specified value to the {@code srcAccessMask} field. */
@@ -356,6 +358,8 @@ public class VkMemoryBarrier2 extends Struct<VkMemoryBarrier2> implements Native
         public VkMemoryBarrier2.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_MEMORY_BARRIER_2); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkMemoryBarrier2.Buffer pNext(@NativeType("void const *") long value) { VkMemoryBarrier2.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkMemoryBarrierAccessFlags3KHR} value to the {@code pNext} chain. */
+        public VkMemoryBarrier2.Buffer pNext(VkMemoryBarrierAccessFlags3KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code srcStageMask} field. */
         public VkMemoryBarrier2.Buffer srcStageMask(@NativeType("VkPipelineStageFlags2") long value) { VkMemoryBarrier2.nsrcStageMask(address(), value); return this; }
         /** Sets the specified value to the {@code srcAccessMask} field. */

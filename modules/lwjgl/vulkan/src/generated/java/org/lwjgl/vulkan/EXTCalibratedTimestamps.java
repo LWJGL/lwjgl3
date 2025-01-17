@@ -25,14 +25,12 @@ public class EXTCalibratedTimestamps {
 
     public static final int
         VK_TIME_DOMAIN_DEVICE_EXT                    = 0,
-        VK_TIME_DOMAIN_CLOCK_MONOTONIC_EXT           = 1,
-        VK_TIME_DOMAIN_CLOCK_MONOTONIC_RAW_EXT       = 2,
-        VK_TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_EXT = 3;
-
-    public static final int
         VK_TIME_DOMAIN_DEVICE_KHR                    = 0,
+        VK_TIME_DOMAIN_CLOCK_MONOTONIC_EXT           = 1,
         VK_TIME_DOMAIN_CLOCK_MONOTONIC_KHR           = 1,
+        VK_TIME_DOMAIN_CLOCK_MONOTONIC_RAW_EXT       = 2,
         VK_TIME_DOMAIN_CLOCK_MONOTONIC_RAW_KHR       = 2,
+        VK_TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_EXT = 3,
         VK_TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_KHR = 3;
 
     protected EXTCalibratedTimestamps() {

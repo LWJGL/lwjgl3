@@ -17,6 +17,8 @@ public final class EXTLegacyDithering {
 
     public static final int VK_RENDERING_ENABLE_LEGACY_DITHERING_BIT_EXT = 0x8;
 
+    public static final long VK_PIPELINE_CREATE_2_ENABLE_LEGACY_DITHERING_BIT_EXT = 0x400000000L;
+
     private EXTLegacyDithering() {}
 
 }

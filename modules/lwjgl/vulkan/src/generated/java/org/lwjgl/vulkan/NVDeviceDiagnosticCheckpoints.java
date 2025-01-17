@@ -22,10 +22,8 @@ public class NVDeviceDiagnosticCheckpoints {
     public static final String VK_NV_DEVICE_DIAGNOSTIC_CHECKPOINTS_EXTENSION_NAME = "VK_NV_device_diagnostic_checkpoints";
 
     public static final int
-        VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV                    = 1000206000,
-        VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV = 1000206001;
-
-    public static final int
+        VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV                      = 1000206000,
+        VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV   = 1000206001,
         VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV = 1000314008,
         VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV                    = 1000314009;
 

@@ -28,4 +28,8 @@ val EXT_legacy_dithering = "EXTLegacyDithering".nativeClassVK("EXT_legacy_dither
     EnumConstant(
         "RENDERING_ENABLE_LEGACY_DITHERING_BIT_EXT".enum(0x00000008)
     )
+
+    EnumConstantLong(
+        "PIPELINE_CREATE_2_ENABLE_LEGACY_DITHERING_BIT_EXT".enum(0x400000000L)
+    )
 }

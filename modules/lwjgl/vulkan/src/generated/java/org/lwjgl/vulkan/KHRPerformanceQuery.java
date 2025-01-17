@@ -47,10 +47,10 @@ public class KHRPerformanceQuery {
 
     public static final int
         VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_BUFFER_KHR = 0,
-        VK_PERFORMANCE_COUNTER_SCOPE_RENDER_PASS_KHR    = 1,
-        VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_KHR        = 2,
         VK_QUERY_SCOPE_COMMAND_BUFFER_KHR               = 0,
+        VK_PERFORMANCE_COUNTER_SCOPE_RENDER_PASS_KHR    = 1,
         VK_QUERY_SCOPE_RENDER_PASS_KHR                  = 1,
+        VK_PERFORMANCE_COUNTER_SCOPE_COMMAND_KHR        = 2,
         VK_QUERY_SCOPE_COMMAND_KHR                      = 2;
 
     public static final int

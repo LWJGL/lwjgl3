@@ -581,8 +581,8 @@ public class VK10 {
         VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT = 0x4,
         VK_SHADER_STAGE_GEOMETRY_BIT                = 0x8,
         VK_SHADER_STAGE_FRAGMENT_BIT                = 0x10,
-        VK_SHADER_STAGE_COMPUTE_BIT                 = 0x20,
         VK_SHADER_STAGE_ALL_GRAPHICS                = 0x0000001F,
+        VK_SHADER_STAGE_COMPUTE_BIT                 = 0x20,
         VK_SHADER_STAGE_ALL                         = 0x7FFFFFFF;
 
     public static final int
@@ -745,14 +745,13 @@ public class VK10 {
 
     public static final int VK_API_VERSION_1_0 = VK_MAKE_API_VERSION(0, 1, 0, 0);
 
-    public static final int VK_HEADER_VERSION = 304;
+    public static final int VK_HEADER_VERSION = 305;
 
     public static final long VK_NULL_HANDLE = 0x0L;
 
     public static final int
         VK_MAX_PHYSICAL_DEVICE_NAME_SIZE = 256,
         VK_UUID_SIZE                     = 16,
-        VK_LUID_SIZE                     = 8,
         VK_MAX_EXTENSION_NAME_SIZE       = 256,
         VK_MAX_DESCRIPTION_SIZE          = 256,
         VK_MAX_MEMORY_TYPES              = 32,
@@ -763,12 +762,7 @@ public class VK10 {
         VK_TRUE                          = 1,
         VK_FALSE                         = 0,
         VK_QUEUE_FAMILY_IGNORED          = (~0),
-        VK_QUEUE_FAMILY_EXTERNAL         = (~0-1),
-        VK_SUBPASS_EXTERNAL              = (~0),
-        VK_MAX_DEVICE_GROUP_SIZE         = 32,
-        VK_MAX_DRIVER_NAME_SIZE          = 256,
-        VK_MAX_DRIVER_INFO_SIZE          = 256,
-        VK_MAX_GLOBAL_PRIORITY_SIZE      = 16;
+        VK_SUBPASS_EXTERNAL              = (~0);
 
     public static final float VK_LOD_CLAMP_NONE = 1000.0f;
 

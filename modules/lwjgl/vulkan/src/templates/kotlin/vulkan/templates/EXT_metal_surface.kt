@@ -6,7 +6,6 @@
 package vulkan.templates
 
 import org.lwjgl.generator.*
-import core.macos.*
 import vulkan.*
 
 val EXT_metal_surface = "EXTMetalSurface".nativeClassVK("EXT_metal_surface", type = "instance", postfix = "EXT") {

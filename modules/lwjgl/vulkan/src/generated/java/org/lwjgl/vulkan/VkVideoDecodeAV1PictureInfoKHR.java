@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 
 import org.lwjgl.vulkan.video.*;
 
-import static org.lwjgl.vulkan.KHRVideoDecodeAV1.*;
+import static org.lwjgl.vulkan.KHRVideoEncodeAV1.*;
 
 /**
  * <pre>{@code
