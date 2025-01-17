@@ -222,6 +222,7 @@ public class SDLHints {
         SDL_HINT_VIDEO_EGL_ALLOW_GETDISPLAY_FALLBACK     = "SDL_VIDEO_EGL_ALLOW_GETDISPLAY_FALLBACK",
         SDL_HINT_VIDEO_FORCE_EGL                         = "SDL_VIDEO_FORCE_EGL",
         SDL_HINT_VIDEO_MAC_FULLSCREEN_SPACES             = "SDL_VIDEO_MAC_FULLSCREEN_SPACES",
+        SDL_HINT_VIDEO_MAC_FULLSCREEN_MENU_VISIBILITY    = "SDL_VIDEO_MAC_FULLSCREEN_MENU_VISIBILITY",
         SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS            = "SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS",
         SDL_HINT_VIDEO_OFFSCREEN_SAVE_FRAMES             = "SDL_VIDEO_OFFSCREEN_SAVE_FRAMES",
         SDL_HINT_VIDEO_SYNC_WINDOW_OPERATIONS            = "SDL_VIDEO_SYNC_WINDOW_OPERATIONS",
@@ -269,7 +270,9 @@ public class SDLHints {
         SDL_HINT_X11_WINDOW_TYPE                         = "SDL_X11_WINDOW_TYPE",
         SDL_HINT_X11_XCB_LIBRARY                         = "SDL_X11_XCB_LIBRARY",
         SDL_HINT_XINPUT_ENABLED                          = "SDL_XINPUT_ENABLED",
-        SDL_HINT_ASSERT                                  = "SDL_ASSERT";
+        SDL_HINT_ASSERT                                  = "SDL_ASSERT",
+        SDL_HINT_PEN_MOUSE_EVENTS                        = "SDL_PEN_MOUSE_EVENTS",
+        SDL_HINT_PEN_TOUCH_EVENTS                        = "SDL_PEN_TOUCH_EVENTS";
 
     public static final int
         SDL_HINT_DEFAULT  = 0,

@@ -9,6 +9,11 @@ import sdl.*
 
 val SDL_pen = "SDLPen".nativeClassSDL("SDL_pen") {
     IntConstant(
+        "PEN_MOUSEID".."-2",
+        "PEN_TOUCHID".."-2"
+    )
+
+    IntConstant(
         "PEN_INPUT_DOWN".."(1 << 0)",
         "PEN_INPUT_BUTTON_1".."(1 << 1)",
         "PEN_INPUT_BUTTON_2".."(1 << 2)",

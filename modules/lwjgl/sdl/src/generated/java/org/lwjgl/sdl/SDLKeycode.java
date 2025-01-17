@@ -12,7 +12,9 @@ import static org.lwjgl.system.JNI.*;
 
 public class SDLKeycode {
 
-    public static final int SDLK_SCANCODE_MASK = 1 << 30;
+    public static final int
+        SDLK_EXTENDED_MASK = 1 << 29,
+        SDLK_SCANCODE_MASK = 1 << 30;
 
     public static final int
         SDLK_UNKNOWN              = 0x00000000,
@@ -263,12 +265,20 @@ public class SDLKeycode {
         SDLK_SOFTLEFT             = 0x4000011F,
         SDLK_SOFTRIGHT            = 0x40000120,
         SDLK_CALL                 = 0x40000121,
-        SDLK_ENDCALL              = 0x40000122;
+        SDLK_ENDCALL              = 0x40000122,
+        SDLK_LEFT_TAB             = 0x20000001,
+        SDLK_LEVEL5_SHIFT         = 0x20000002,
+        SDLK_MULTI_KEY_COMPOSE    = 0x20000003,
+        SDLK_LMETA                = 0x20000004,
+        SDLK_RMETA                = 0x20000005,
+        SDLK_LHYPER               = 0x20000006,
+        SDLK_RHYPER               = 0x20000007;
 
     public static final int
         SDL_KMOD_NONE   = 0x0000,
         SDL_KMOD_LSHIFT = 0x0001,
         SDL_KMOD_RSHIFT = 0x0002,
+        SDL_KMOD_LEVEL5 = 0x0004,
         SDL_KMOD_LCTRL  = 0x0040,
         SDL_KMOD_RCTRL  = 0x0080,
         SDL_KMOD_LALT   = 0x0100,

@@ -10,6 +10,10 @@ import org.lwjgl.system.*;
 public final class SDLPen {
 
     public static final int
+        SDL_PEN_MOUSEID = -2,
+        SDL_PEN_TOUCHID = -2;
+
+    public static final int
         SDL_PEN_INPUT_DOWN       = (1 << 0),
         SDL_PEN_INPUT_BUTTON_1   = (1 << 1),
         SDL_PEN_INPUT_BUTTON_2   = (1 << 2),

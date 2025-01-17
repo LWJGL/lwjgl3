@@ -315,6 +315,12 @@ val SDL_audio = "SDLAudio".nativeClassSDL("SDL_audio") {
     )
 
     bool(
+        "AudioStreamDevicePaused",
+
+        SDL_AudioStream.p("stream")
+    )
+
+    bool(
         "LockAudioStream",
 
         SDL_AudioStream.p("stream")

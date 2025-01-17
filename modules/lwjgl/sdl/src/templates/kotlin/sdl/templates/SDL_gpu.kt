@@ -360,12 +360,22 @@ val SDL_gpu = "SDLGPU".nativeClassSDL("SDL_gpu") {
     )
 
     StringConstant(
-        "PROP_GPU_CREATETEXTURE_D3D12_CLEAR_R_FLOAT".."SDL.gpu.createtexture.d3d12.clear.r",
-        "PROP_GPU_CREATETEXTURE_D3D12_CLEAR_G_FLOAT".."SDL.gpu.createtexture.d3d12.clear.g",
-        "PROP_GPU_CREATETEXTURE_D3D12_CLEAR_B_FLOAT".."SDL.gpu.createtexture.d3d12.clear.b",
-        "PROP_GPU_CREATETEXTURE_D3D12_CLEAR_A_FLOAT".."SDL.gpu.createtexture.d3d12.clear.a",
-        "PROP_GPU_CREATETEXTURE_D3D12_CLEAR_DEPTH_FLOAT".."SDL.gpu.createtexture.d3d12.clear.depth",
-        "PROP_GPU_CREATETEXTURE_D3D12_CLEAR_STENCIL_UINT8".."SDL.gpu.createtexture.d3d12.clear.stencil"
+        "PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_R_FLOAT".."SDL.gpu.texture.create.d3d12.clear.r",
+        "PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_G_FLOAT".."SDL.gpu.texture.create.d3d12.clear.g",
+        "PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_B_FLOAT".."SDL.gpu.texture.create.d3d12.clear.b",
+        "PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_A_FLOAT".."SDL.gpu.texture.create.d3d12.clear.a",
+        "PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_DEPTH_FLOAT".."SDL.gpu.texture.create.d3d12.clear.depth",
+        "PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_STENCIL_UINT8".."SDL.gpu.texture.create.d3d12.clear.stencil"
+    )
+
+    StringConstant(
+        "PROP_GPU_COMPUTEPIPELINE_CREATE_NAME_STRING".."SDL.gpu.computepipeline.create.name",
+        "PROP_GPU_GRAPHICSPIPELINE_CREATE_NAME_STRING".."SDL.gpu.graphicspipeline.create.name",
+        "PROP_GPU_SAMPLER_CREATE_NAME_STRING".."SDL.gpu.sampler.create.name",
+        "PROP_GPU_SHADER_CREATE_NAME_STRING".."SDL.gpu.shader.create.name",
+        "PROP_GPU_TEXTURE_CREATE_NAME_STRING".."SDL.gpu.texture.create.name",
+        "PROP_GPU_BUFFER_CREATE_NAME_STRING".."SDL.gpu.buffer.create.name",
+        "PROP_GPU_TRANSFERBUFFER_CREATE_NAME_STRING".."SDL.gpu.transferbuffer.create.name"
     )
 
     bool(
