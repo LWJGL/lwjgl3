@@ -70,6 +70,7 @@ public class SDLAudio {
             ClearAudioStream               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_ClearAudioStream"),
             PauseAudioStreamDevice         = apiGetFunctionAddress(SDL.getLibrary(), "SDL_PauseAudioStreamDevice"),
             ResumeAudioStreamDevice        = apiGetFunctionAddress(SDL.getLibrary(), "SDL_ResumeAudioStreamDevice"),
+            AudioStreamDevicePaused        = apiGetFunctionAddress(SDL.getLibrary(), "SDL_AudioStreamDevicePaused"),
             LockAudioStream                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_LockAudioStream"),
             UnlockAudioStream              = apiGetFunctionAddress(SDL.getLibrary(), "SDL_UnlockAudioStream"),
             SetAudioStreamGetCallback      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetAudioStreamGetCallback"),
@@ -755,6 +756,18 @@ public class SDLAudio {
     @NativeType("bool")
     public static boolean SDL_ResumeAudioStreamDevice(@NativeType("SDL_AudioStream *") long stream) {
         long __functionAddress = Functions.ResumeAudioStreamDevice;
+        if (CHECKS) {
+            check(stream);
+        }
+        return invokePZ(stream, __functionAddress);
+    }
+
+    // --- [ SDL_AudioStreamDevicePaused ] ---
+
+    /** {@code bool SDL_AudioStreamDevicePaused(SDL_AudioStream * stream)} */
+    @NativeType("bool")
+    public static boolean SDL_AudioStreamDevicePaused(@NativeType("SDL_AudioStream *") long stream) {
+        long __functionAddress = Functions.AudioStreamDevicePaused;
         if (CHECKS) {
             check(stream);
         }

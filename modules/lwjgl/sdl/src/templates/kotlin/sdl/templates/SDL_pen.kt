@@ -8,6 +8,9 @@ import org.lwjgl.generator.*
 import sdl.*
 
 val SDL_pen = "SDLPen".nativeClassSDL("SDL_pen") {
+    IntConstant("PEN_MOUSEID".."-2")
+    LongConstant("PEN_TOUCHID".."-2L")
+
     IntConstant(
         "PEN_INPUT_DOWN".."(1 << 0)",
         "PEN_INPUT_BUTTON_1".."(1 << 1)",

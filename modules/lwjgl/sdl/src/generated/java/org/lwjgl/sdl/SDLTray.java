@@ -45,6 +45,7 @@ public class SDLTray {
             SetTrayEntryEnabled    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetTrayEntryEnabled"),
             GetTrayEntryEnabled    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTrayEntryEnabled"),
             SetTrayEntryCallback   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetTrayEntryCallback"),
+            ClickTrayEntry         = apiGetFunctionAddress(SDL.getLibrary(), "SDL_ClickTrayEntry"),
             DestroyTray            = apiGetFunctionAddress(SDL.getLibrary(), "SDL_DestroyTray"),
             GetTrayEntryParent     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTrayEntryParent"),
             GetTrayMenuParentEntry = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTrayMenuParentEntry"),
@@ -369,6 +370,17 @@ public class SDLTray {
     /** {@code void SDL_SetTrayEntryCallback(SDL_TrayEntry * entry, SDL_TrayCallback callback, void * userdata)} */
     public static void SDL_SetTrayEntryCallback(@NativeType("SDL_TrayEntry *") long entry, @NativeType("SDL_TrayCallback") @Nullable SDL_TrayCallbackI callback, @NativeType("void *") long userdata) {
         nSDL_SetTrayEntryCallback(entry, memAddressSafe(callback), userdata);
+    }
+
+    // --- [ SDL_ClickTrayEntry ] ---
+
+    /** {@code void SDL_ClickTrayEntry(SDL_TrayEntry * entry)} */
+    public static void SDL_ClickTrayEntry(@NativeType("SDL_TrayEntry *") long entry) {
+        long __functionAddress = Functions.ClickTrayEntry;
+        if (CHECKS) {
+            check(entry);
+        }
+        invokePV(entry, __functionAddress);
     }
 
     // --- [ SDL_DestroyTray ] ---

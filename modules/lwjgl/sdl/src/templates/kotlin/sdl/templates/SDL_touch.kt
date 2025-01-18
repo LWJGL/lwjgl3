@@ -15,10 +15,8 @@ val SDL_touch = "SDLTouch".nativeClassSDL("SDL_touch") {
         "TOUCH_DEVICE_INDIRECT_RELATIVE".enum
     )
 
-    IntConstant(
-        "TOUCH_MOUSEID".."-1",
-        "MOUSE_TOUCHID".."-1"
-    )
+    IntConstant("TOUCH_MOUSEID".."-1")
+    LongConstant("MOUSE_TOUCHID".."-1L")
 
     SDL_TouchID.p(
         "GetTouchDevices",

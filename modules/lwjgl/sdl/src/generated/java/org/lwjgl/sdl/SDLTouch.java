@@ -41,9 +41,9 @@ public class SDLTouch {
         SDL_TOUCH_DEVICE_INDIRECT_ABSOLUTE = 1,
         SDL_TOUCH_DEVICE_INDIRECT_RELATIVE = 2;
 
-    public static final int
-        SDL_TOUCH_MOUSEID = -1,
-        SDL_MOUSE_TOUCHID = -1;
+    public static final int SDL_TOUCH_MOUSEID = -1;
+
+    public static final long SDL_MOUSE_TOUCHID = -1L;
 
     protected SDLTouch() {
         throw new UnsupportedOperationException();

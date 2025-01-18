@@ -131,6 +131,12 @@ val SDL_tray = "SDLTray".nativeClassSDL("SDL_tray") {
     )
 
     void(
+        "ClickTrayEntry",
+
+        SDL_TrayEntry.p("entry")
+    )
+
+    void(
         "DestroyTray",
 
         SDL_Tray.p("tray")

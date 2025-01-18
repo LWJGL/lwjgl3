@@ -448,12 +448,21 @@ public class SDLGPU {
         SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING = "SDL.gpu.device.create.d3d12.semantic";
 
     public static final String
-        SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_R_FLOAT       = "SDL.gpu.createtexture.d3d12.clear.r",
-        SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_G_FLOAT       = "SDL.gpu.createtexture.d3d12.clear.g",
-        SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_B_FLOAT       = "SDL.gpu.createtexture.d3d12.clear.b",
-        SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_A_FLOAT       = "SDL.gpu.createtexture.d3d12.clear.a",
-        SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_DEPTH_FLOAT   = "SDL.gpu.createtexture.d3d12.clear.depth",
-        SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_STENCIL_UINT8 = "SDL.gpu.createtexture.d3d12.clear.stencil";
+        SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_R_FLOAT       = "SDL.gpu.texture.create.d3d12.clear.r",
+        SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_G_FLOAT       = "SDL.gpu.texture.create.d3d12.clear.g",
+        SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_B_FLOAT       = "SDL.gpu.texture.create.d3d12.clear.b",
+        SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_A_FLOAT       = "SDL.gpu.texture.create.d3d12.clear.a",
+        SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_DEPTH_FLOAT   = "SDL.gpu.texture.create.d3d12.clear.depth",
+        SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_STENCIL_UINT8 = "SDL.gpu.texture.create.d3d12.clear.stencil";
+
+    public static final String
+        SDL_PROP_GPU_COMPUTEPIPELINE_CREATE_NAME_STRING  = "SDL.gpu.computepipeline.create.name",
+        SDL_PROP_GPU_GRAPHICSPIPELINE_CREATE_NAME_STRING = "SDL.gpu.graphicspipeline.create.name",
+        SDL_PROP_GPU_SAMPLER_CREATE_NAME_STRING          = "SDL.gpu.sampler.create.name",
+        SDL_PROP_GPU_SHADER_CREATE_NAME_STRING           = "SDL.gpu.shader.create.name",
+        SDL_PROP_GPU_TEXTURE_CREATE_NAME_STRING          = "SDL.gpu.texture.create.name",
+        SDL_PROP_GPU_BUFFER_CREATE_NAME_STRING           = "SDL.gpu.buffer.create.name",
+        SDL_PROP_GPU_TRANSFERBUFFER_CREATE_NAME_STRING   = "SDL.gpu.transferbuffer.create.name";
 
     protected SDLGPU() {
         throw new UnsupportedOperationException();

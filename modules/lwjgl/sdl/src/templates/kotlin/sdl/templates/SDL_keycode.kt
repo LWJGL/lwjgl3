@@ -8,6 +8,7 @@ import org.lwjgl.generator.*
 import sdl.*
 
 val SDL_keycode = "SDLKeycode".nativeClassSDL("SDL_keycode") {
+    IntConstant("SDLK_EXTENDED_MASK".."1 << 29").noPrefix()
     IntConstant("SDLK_SCANCODE_MASK".."1 << 30").noPrefix()
 
     IntConstant(
@@ -259,13 +260,21 @@ val SDL_keycode = "SDLKeycode".nativeClassSDL("SDL_keycode") {
         "SDLK_SOFTLEFT"..0x4000011f,
         "SDLK_SOFTRIGHT"..0x40000120,
         "SDLK_CALL"..0x40000121,
-        "SDLK_ENDCALL"..0x40000122
+        "SDLK_ENDCALL"..0x40000122,
+        "SDLK_LEFT_TAB"..0x20000001,
+        "SDLK_LEVEL5_SHIFT"..0x20000002,
+        "SDLK_MULTI_KEY_COMPOSE"..0x20000003,
+        "SDLK_LMETA"..0x20000004,
+        "SDLK_RMETA"..0x20000005,
+        "SDLK_LHYPER"..0x20000006,
+        "SDLK_RHYPER"..0x20000007
     ).noPrefix()
 
     IntConstant(
         "KMOD_NONE".."0x0000",
         "KMOD_LSHIFT".."0x0001",
         "KMOD_RSHIFT".."0x0002",
+        "KMOD_LEVEL5".."0x0004",
         "KMOD_LCTRL".."0x0040",
         "KMOD_RCTRL".."0x0080",
         "KMOD_LALT".."0x0100",
