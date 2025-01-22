@@ -49,7 +49,8 @@ public class SDLTray {
             DestroyTray            = apiGetFunctionAddress(SDL.getLibrary(), "SDL_DestroyTray"),
             GetTrayEntryParent     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTrayEntryParent"),
             GetTrayMenuParentEntry = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTrayMenuParentEntry"),
-            GetTrayMenuParentTray  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTrayMenuParentTray");
+            GetTrayMenuParentTray  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTrayMenuParentTray"),
+            UpdateTrays            = apiGetFunctionAddress(SDL.getLibrary(), "SDL_UpdateTrays");
 
     }
 
@@ -428,6 +429,14 @@ public class SDLTray {
             check(menu);
         }
         return invokePP(menu, __functionAddress);
+    }
+
+    // --- [ SDL_UpdateTrays ] ---
+
+    /** {@code void SDL_UpdateTrays(void)} */
+    public static void SDL_UpdateTrays() {
+        long __functionAddress = Functions.UpdateTrays;
+        invokeV(__functionAddress);
     }
 
 }

@@ -159,4 +159,10 @@ val SDL_tray = "SDLTray".nativeClassSDL("SDL_tray") {
 
         SDL_TrayMenu.p("menu")
     )
+
+    void(
+        "UpdateTrays",
+
+        void()
+    )
 }

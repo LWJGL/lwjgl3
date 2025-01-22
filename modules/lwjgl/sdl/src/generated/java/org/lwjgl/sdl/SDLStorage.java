@@ -332,20 +332,20 @@ public class SDLStorage {
 
     /** {@code bool SDL_EnumerateStorageDirectory(SDL_Storage * storage, char const * path, SDL_EnumerateDirectoryCallback callback, void * userdata)} */
     @NativeType("bool")
-    public static boolean SDL_EnumerateStorageDirectory(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") ByteBuffer path, @NativeType("SDL_EnumerateDirectoryCallback") SDL_EnumerateDirectoryCallbackI callback, @NativeType("void *") long userdata) {
+    public static boolean SDL_EnumerateStorageDirectory(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") @Nullable ByteBuffer path, @NativeType("SDL_EnumerateDirectoryCallback") SDL_EnumerateDirectoryCallbackI callback, @NativeType("void *") long userdata) {
         if (CHECKS) {
-            checkNT1(path);
+            checkNT1Safe(path);
         }
-        return nSDL_EnumerateStorageDirectory(storage, memAddress(path), callback.address(), userdata);
+        return nSDL_EnumerateStorageDirectory(storage, memAddressSafe(path), callback.address(), userdata);
     }
 
     /** {@code bool SDL_EnumerateStorageDirectory(SDL_Storage * storage, char const * path, SDL_EnumerateDirectoryCallback callback, void * userdata)} */
     @NativeType("bool")
-    public static boolean SDL_EnumerateStorageDirectory(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") CharSequence path, @NativeType("SDL_EnumerateDirectoryCallback") SDL_EnumerateDirectoryCallbackI callback, @NativeType("void *") long userdata) {
+    public static boolean SDL_EnumerateStorageDirectory(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") @Nullable CharSequence path, @NativeType("SDL_EnumerateDirectoryCallback") SDL_EnumerateDirectoryCallbackI callback, @NativeType("void *") long userdata) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nUTF8(path, true);
-            long pathEncoded = stack.getPointerAddress();
+            stack.nUTF8Safe(path, true);
+            long pathEncoded = path == null ? NULL : stack.getPointerAddress();
             return nSDL_EnumerateStorageDirectory(storage, pathEncoded, callback.address(), userdata);
         } finally {
             stack.setPointer(stackPointer);
@@ -515,15 +515,15 @@ public class SDLStorage {
 
     /** {@code char ** SDL_GlobStorageDirectory(SDL_Storage * storage, char const * path, char const * pattern, SDL_GlobFlags flags, int * count)} */
     @NativeType("char **")
-    public static @Nullable PointerBuffer SDL_GlobStorageDirectory(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") ByteBuffer path, @NativeType("char const *") @Nullable ByteBuffer pattern, @NativeType("SDL_GlobFlags") int flags) {
+    public static @Nullable PointerBuffer SDL_GlobStorageDirectory(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") @Nullable ByteBuffer path, @NativeType("char const *") @Nullable ByteBuffer pattern, @NativeType("SDL_GlobFlags") int flags) {
         if (CHECKS) {
-            checkNT1(path);
+            checkNT1Safe(path);
             checkNT1Safe(pattern);
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         IntBuffer count = stack.callocInt(1);
         try {
-            long __result = nSDL_GlobStorageDirectory(storage, memAddress(path), memAddressSafe(pattern), flags, memAddress(count));
+            long __result = nSDL_GlobStorageDirectory(storage, memAddressSafe(path), memAddressSafe(pattern), flags, memAddress(count));
             return memPointerBufferSafe(__result, count.get(0));
         } finally {
             stack.setPointer(stackPointer);
@@ -532,12 +532,12 @@ public class SDLStorage {
 
     /** {@code char ** SDL_GlobStorageDirectory(SDL_Storage * storage, char const * path, char const * pattern, SDL_GlobFlags flags, int * count)} */
     @NativeType("char **")
-    public static @Nullable PointerBuffer SDL_GlobStorageDirectory(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") CharSequence path, @NativeType("char const *") @Nullable CharSequence pattern, @NativeType("SDL_GlobFlags") int flags) {
+    public static @Nullable PointerBuffer SDL_GlobStorageDirectory(@NativeType("SDL_Storage *") long storage, @NativeType("char const *") @Nullable CharSequence path, @NativeType("char const *") @Nullable CharSequence pattern, @NativeType("SDL_GlobFlags") int flags) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             IntBuffer count = stack.callocInt(1);
-            stack.nUTF8(path, true);
-            long pathEncoded = stack.getPointerAddress();
+            stack.nUTF8Safe(path, true);
+            long pathEncoded = path == null ? NULL : stack.getPointerAddress();
             stack.nUTF8Safe(pattern, true);
             long patternEncoded = pattern == null ? NULL : stack.getPointerAddress();
             long __result = nSDL_GlobStorageDirectory(storage, pathEncoded, patternEncoded, flags, memAddress(count));

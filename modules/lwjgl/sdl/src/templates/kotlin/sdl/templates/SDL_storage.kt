@@ -85,7 +85,7 @@ val SDL_storage = "SDLStorage".nativeClassSDL("SDL_storage") {
         "EnumerateStorageDirectory",
 
         SDL_Storage.p("storage"),
-        charUTF8.const.p("path"),
+        nullable..charUTF8.const.p("path"),
         SDL_EnumerateDirectoryCallback("callback"),
         nullable..opaque_p("userdata")
     )
@@ -131,7 +131,7 @@ val SDL_storage = "SDLStorage".nativeClassSDL("SDL_storage") {
         "GlobStorageDirectory",
 
         SDL_Storage.p("storage"),
-        charUTF8.const.p("path"),
+        nullable..charUTF8.const.p("path"),
         nullable..charUTF8.const.p("pattern"),
         SDL_GlobFlags("flags"),
         AutoSizeResult..int.p("count")
