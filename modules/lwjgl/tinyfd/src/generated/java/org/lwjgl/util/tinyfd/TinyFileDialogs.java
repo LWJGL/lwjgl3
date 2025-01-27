@@ -27,15 +27,14 @@ public class TinyFileDialogs {
     }
 
     public static final String
-        tinyfd_version              = "tinyfd_version",
-        tinyfd_needs                = "tinyfd_needs",
-        tinyfd_response             = "tinyfd_response",
-        tinyfd_verbose              = "tinyfd_verbose",
-        tinyfd_silent               = "tinyfd_silent",
-        tinyfd_allowCursesDialogs   = "tinyfd_allowCursesDialogs",
-        tinyfd_forceConsole         = "tinyfd_forceConsole",
-        tinyfd_assumeGraphicDisplay = "tinyfd_assumeGraphicDisplay",
-        tinyfd_winUtf8              = "tinyfd_winUtf8";
+        tinyfd_version            = "tinyfd_version",
+        tinyfd_needs              = "tinyfd_needs",
+        tinyfd_response           = "tinyfd_response",
+        tinyfd_verbose            = "tinyfd_verbose",
+        tinyfd_silent             = "tinyfd_silent",
+        tinyfd_allowCursesDialogs = "tinyfd_allowCursesDialogs",
+        tinyfd_forceConsole       = "tinyfd_forceConsole",
+        tinyfd_winUtf8            = "tinyfd_winUtf8";
 
     protected TinyFileDialogs() {
         throw new UnsupportedOperationException();
