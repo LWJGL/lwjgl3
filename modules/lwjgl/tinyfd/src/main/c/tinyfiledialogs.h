@@ -7,7 +7,7 @@ Copyright (c) 2014 - 2024 Guillaume Vareille http://ysengrin.com
 
 ********* TINY FILE DIALOGS OFFICIAL WEBSITE IS ON SOURCEFORGE *********
   _________
- /         \ tinyfiledialogs.h v3.18.1 [May 2, 2024]
+ /         \ tinyfiledialogs.h v3.19.1 [Jan 27, 2025]
  |tiny file| Unique header file created [November 9, 2014]
  | dialogs |
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -112,7 +112,7 @@ extern int tinyfd_forceConsole;  /* 0 (default) or 1 */
    if enabled, it can use the package Dialog or dialog.exe.
    on windows it only make sense for console applications */
 
-extern int tinyfd_assumeGraphicDisplay; /* 0 (default) or 1  */
+/* extern int tinyfd_assumeGraphicDisplay; */ /* 0 (default) or 1  */
 /* some systems don't set the environment variable DISPLAY even when a graphic display is present.
 set this to 1 to tell tinyfiledialogs to assume the existence of a graphic display */
 

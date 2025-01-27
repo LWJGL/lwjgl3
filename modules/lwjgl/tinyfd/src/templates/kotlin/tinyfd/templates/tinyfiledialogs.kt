@@ -17,7 +17,6 @@ val tinyfiledialogs = "TinyFileDialogs".nativeClass(Module.TINYFD, prefix = "tin
         "silent".."tinyfd_silent",
         "allowCursesDialogs".."tinyfd_allowCursesDialogs",
         "forceConsole".."tinyfd_forceConsole",
-        "assumeGraphicDisplay".."tinyfd_assumeGraphicDisplay",
         "winUtf8".."tinyfd_winUtf8"
     )
 
