@@ -106,10 +106,9 @@ public class Gears {
         checkSdlError(SDL_SetBooleanProperty(props, SDL_PROP_WINDOW_CREATE_HIDDEN_BOOLEAN, true));
         checkSdlError(SDL_SetBooleanProperty(props, SDL_PROP_WINDOW_CREATE_RESIZABLE_BOOLEAN, true));
 
-        checkSdlError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0));
+        checkSdlError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG));
         checkSdlError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2));
         checkSdlError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1));
-        checkSdlError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_DEBUG_FLAG, 1));
         checkSdlError(SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1));
         checkSdlError(SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24));
         checkSdlError(SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8));
