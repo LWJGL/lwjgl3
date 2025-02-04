@@ -55,6 +55,8 @@ public class KHRRayTracingPipeline {
 
     public static final int VK_DYNAMIC_STATE_RAY_TRACING_PIPELINE_STACK_SIZE_KHR = 1000347000;
 
+    public static final long VK_PIPELINE_CREATE_2_RAY_TRACING_SKIP_BUILT_IN_PRIMITIVES_BIT_KHR = 0x1000L;
+
     public static final int
         VK_RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_KHR              = 0,
         VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR  = 1,

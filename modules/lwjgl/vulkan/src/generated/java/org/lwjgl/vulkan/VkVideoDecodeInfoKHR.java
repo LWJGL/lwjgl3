@@ -139,10 +139,16 @@ public class VkVideoDecodeInfoKHR extends Struct<VkVideoDecodeInfoKHR> implement
     public VkVideoDecodeInfoKHR sType$Default() { return sType(KHRVideoDecodeQueue.VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkVideoDecodeInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkVideoDecodeAV1InlineSessionParametersInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoDecodeInfoKHR pNext(VkVideoDecodeAV1InlineSessionParametersInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoDecodeAV1PictureInfoKHR} value to the {@code pNext} chain. */
     public VkVideoDecodeInfoKHR pNext(VkVideoDecodeAV1PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoDecodeH264InlineSessionParametersInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoDecodeInfoKHR pNext(VkVideoDecodeH264InlineSessionParametersInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoDecodeH264PictureInfoKHR} value to the {@code pNext} chain. */
     public VkVideoDecodeInfoKHR pNext(VkVideoDecodeH264PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoDecodeH265InlineSessionParametersInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoDecodeInfoKHR pNext(VkVideoDecodeH265InlineSessionParametersInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoDecodeH265PictureInfoKHR} value to the {@code pNext} chain. */
     public VkVideoDecodeInfoKHR pNext(VkVideoDecodeH265PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoInlineQueryInfoKHR} value to the {@code pNext} chain. */
@@ -444,10 +450,16 @@ public class VkVideoDecodeInfoKHR extends Struct<VkVideoDecodeInfoKHR> implement
         public VkVideoDecodeInfoKHR.Buffer sType$Default() { return sType(KHRVideoDecodeQueue.VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkVideoDecodeInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoDecodeInfoKHR.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkVideoDecodeAV1InlineSessionParametersInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoDecodeAV1InlineSessionParametersInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoDecodeAV1PictureInfoKHR} value to the {@code pNext} chain. */
         public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoDecodeAV1PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoDecodeH264InlineSessionParametersInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoDecodeH264InlineSessionParametersInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoDecodeH264PictureInfoKHR} value to the {@code pNext} chain. */
         public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoDecodeH264PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoDecodeH265InlineSessionParametersInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoDecodeH265InlineSessionParametersInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoDecodeH265PictureInfoKHR} value to the {@code pNext} chain. */
         public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoDecodeH265PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoInlineQueryInfoKHR} value to the {@code pNext} chain. */

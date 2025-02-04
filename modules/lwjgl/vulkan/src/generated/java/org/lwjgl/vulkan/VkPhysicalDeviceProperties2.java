@@ -93,6 +93,8 @@ public class VkPhysicalDeviceProperties2 extends Struct<VkPhysicalDeviceProperti
     public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceAccelerationStructurePropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceClusterAccelerationStructurePropertiesNV} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceClusterAccelerationStructurePropertiesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI} value to the {@code pNext} chain. */
     public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR} value to the {@code pNext} chain. */
@@ -105,6 +107,8 @@ public class VkPhysicalDeviceProperties2 extends Struct<VkPhysicalDeviceProperti
     public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceCooperativeMatrixPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceCooperativeMatrixPropertiesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceCooperativeMatrixPropertiesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceCooperativeVectorPropertiesNV} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceCooperativeVectorPropertiesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceCopyMemoryIndirectPropertiesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceCopyMemoryIndirectPropertiesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceCudaKernelLaunchPropertiesNV} value to the {@code pNext} chain. */
@@ -235,6 +239,8 @@ public class VkPhysicalDeviceProperties2 extends Struct<VkPhysicalDeviceProperti
     public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceOpticalFlowPropertiesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePCIBusInfoPropertiesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceProperties2 pNext(VkPhysicalDevicePCIBusInfoPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDevicePartitionedAccelerationStructurePropertiesNV} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDevicePartitionedAccelerationStructurePropertiesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePerformanceQueryPropertiesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceProperties2 pNext(VkPhysicalDevicePerformanceQueryPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePipelineBinaryPropertiesKHR} value to the {@code pNext} chain. */
@@ -559,6 +565,8 @@ public class VkPhysicalDeviceProperties2 extends Struct<VkPhysicalDeviceProperti
         public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceAccelerationStructurePropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceClusterAccelerationStructurePropertiesNV} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceClusterAccelerationStructurePropertiesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI} value to the {@code pNext} chain. */
         public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR} value to the {@code pNext} chain. */
@@ -571,6 +579,8 @@ public class VkPhysicalDeviceProperties2 extends Struct<VkPhysicalDeviceProperti
         public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceCooperativeMatrixPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceCooperativeMatrixPropertiesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceCooperativeMatrixPropertiesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceCooperativeVectorPropertiesNV} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceCooperativeVectorPropertiesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceCopyMemoryIndirectPropertiesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceCopyMemoryIndirectPropertiesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceCudaKernelLaunchPropertiesNV} value to the {@code pNext} chain. */
@@ -701,6 +711,8 @@ public class VkPhysicalDeviceProperties2 extends Struct<VkPhysicalDeviceProperti
         public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceOpticalFlowPropertiesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePCIBusInfoPropertiesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDevicePCIBusInfoPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDevicePartitionedAccelerationStructurePropertiesNV} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDevicePartitionedAccelerationStructurePropertiesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePerformanceQueryPropertiesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDevicePerformanceQueryPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePipelineBinaryPropertiesKHR} value to the {@code pNext} chain. */

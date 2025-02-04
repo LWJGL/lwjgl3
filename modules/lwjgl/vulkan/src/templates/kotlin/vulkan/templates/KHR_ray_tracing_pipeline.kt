@@ -64,6 +64,10 @@ val KHR_ray_tracing_pipeline = "KHRRayTracingPipeline".nativeClassVK("KHR_ray_tr
         "DYNAMIC_STATE_RAY_TRACING_PIPELINE_STACK_SIZE_KHR".."1000347000"
     )
 
+    EnumConstantLong(
+        "PIPELINE_CREATE_2_RAY_TRACING_SKIP_BUILT_IN_PRIMITIVES_BIT_KHR".enum(0x00001000L)
+    )
+
     EnumConstant(
         "RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_KHR".."0",
         "RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR".."1",

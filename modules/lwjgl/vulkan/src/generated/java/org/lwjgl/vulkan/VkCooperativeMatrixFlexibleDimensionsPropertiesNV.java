@@ -23,10 +23,10 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t MGranularity;
  *     uint32_t NGranularity;
  *     uint32_t KGranularity;
- *     VkComponentTypeKHR AType;
- *     VkComponentTypeKHR BType;
- *     VkComponentTypeKHR CType;
- *     VkComponentTypeKHR ResultType;
+ *     VkComponentTypeNV AType;
+ *     VkComponentTypeNV BType;
+ *     VkComponentTypeNV CType;
+ *     VkComponentTypeNV ResultType;
  *     VkBool32 saturatingAccumulation;
  *     VkScopeKHR scope;
  *     uint32_t workgroupInvocations;
@@ -126,16 +126,16 @@ public class VkCooperativeMatrixFlexibleDimensionsPropertiesNV extends Struct<Vk
     @NativeType("uint32_t")
     public int KGranularity() { return nKGranularity(address()); }
     /** @return the value of the {@code AType} field. */
-    @NativeType("VkComponentTypeKHR")
+    @NativeType("VkComponentTypeNV")
     public int AType() { return nAType(address()); }
     /** @return the value of the {@code BType} field. */
-    @NativeType("VkComponentTypeKHR")
+    @NativeType("VkComponentTypeNV")
     public int BType() { return nBType(address()); }
     /** @return the value of the {@code CType} field. */
-    @NativeType("VkComponentTypeKHR")
+    @NativeType("VkComponentTypeNV")
     public int CType() { return nCType(address()); }
     /** @return the value of the {@code ResultType} field. */
-    @NativeType("VkComponentTypeKHR")
+    @NativeType("VkComponentTypeNV")
     public int ResultType() { return nResultType(address()); }
     /** @return the value of the {@code saturatingAccumulation} field. */
     @NativeType("VkBool32")
@@ -377,16 +377,16 @@ public class VkCooperativeMatrixFlexibleDimensionsPropertiesNV extends Struct<Vk
         @NativeType("uint32_t")
         public int KGranularity() { return VkCooperativeMatrixFlexibleDimensionsPropertiesNV.nKGranularity(address()); }
         /** @return the value of the {@code AType} field. */
-        @NativeType("VkComponentTypeKHR")
+        @NativeType("VkComponentTypeNV")
         public int AType() { return VkCooperativeMatrixFlexibleDimensionsPropertiesNV.nAType(address()); }
         /** @return the value of the {@code BType} field. */
-        @NativeType("VkComponentTypeKHR")
+        @NativeType("VkComponentTypeNV")
         public int BType() { return VkCooperativeMatrixFlexibleDimensionsPropertiesNV.nBType(address()); }
         /** @return the value of the {@code CType} field. */
-        @NativeType("VkComponentTypeKHR")
+        @NativeType("VkComponentTypeNV")
         public int CType() { return VkCooperativeMatrixFlexibleDimensionsPropertiesNV.nCType(address()); }
         /** @return the value of the {@code ResultType} field. */
-        @NativeType("VkComponentTypeKHR")
+        @NativeType("VkComponentTypeNV")
         public int ResultType() { return VkCooperativeMatrixFlexibleDimensionsPropertiesNV.nResultType(address()); }
         /** @return the value of the {@code saturatingAccumulation} field. */
         @NativeType("VkBool32")

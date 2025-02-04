@@ -147,6 +147,8 @@ public class VkWriteDescriptorSet extends Struct<VkWriteDescriptorSet> implement
     public VkWriteDescriptorSet pNext(VkWriteDescriptorSetInlineUniformBlock value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkWriteDescriptorSetInlineUniformBlockEXT} value to the {@code pNext} chain. */
     public VkWriteDescriptorSet pNext(VkWriteDescriptorSetInlineUniformBlockEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkWriteDescriptorSetPartitionedAccelerationStructureNV} value to the {@code pNext} chain. */
+    public VkWriteDescriptorSet pNext(VkWriteDescriptorSetPartitionedAccelerationStructureNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code dstSet} field. */
     public VkWriteDescriptorSet dstSet(@NativeType("VkDescriptorSet") long value) { ndstSet(address(), value); return this; }
     /** Sets the specified value to the {@code dstBinding} field. */
@@ -463,6 +465,8 @@ public class VkWriteDescriptorSet extends Struct<VkWriteDescriptorSet> implement
         public VkWriteDescriptorSet.Buffer pNext(VkWriteDescriptorSetInlineUniformBlock value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkWriteDescriptorSetInlineUniformBlockEXT} value to the {@code pNext} chain. */
         public VkWriteDescriptorSet.Buffer pNext(VkWriteDescriptorSetInlineUniformBlockEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkWriteDescriptorSetPartitionedAccelerationStructureNV} value to the {@code pNext} chain. */
+        public VkWriteDescriptorSet.Buffer pNext(VkWriteDescriptorSetPartitionedAccelerationStructureNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code dstSet} field. */
         public VkWriteDescriptorSet.Buffer dstSet(@NativeType("VkDescriptorSet") long value) { VkWriteDescriptorSet.ndstSet(address(), value); return this; }
         /** Sets the specified value to the {@code dstBinding} field. */

@@ -245,6 +245,10 @@ public class VKCapabilitiesInstance {
     public final long
         vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV;
 
+    /** Function pointers for NV_cooperative_vector */
+    public final long
+        vkGetPhysicalDeviceCooperativeVectorPropertiesNV;
+
     /** Function pointers for NV_coverage_reduction_mode */
     public final long
         vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV;
@@ -344,7 +348,7 @@ public class VKCapabilitiesInstance {
     VKCapabilitiesInstance(FunctionProvider provider, int apiVersion, Set<String> ext, Set<String> deviceExt) {
         this.apiVersion = apiVersion;
 
-        long[] caps = new long[107];
+        long[] caps = new long[108];
 
         Vulkan10 = check_VK10(provider, caps, ext);
         Vulkan11 = check_VK11(provider, caps, ext);
@@ -399,6 +403,7 @@ public class VKCapabilitiesInstance {
         check_NV_acquire_winrt_display(provider, caps, deviceExt);
         check_NV_cooperative_matrix(provider, caps, deviceExt);
         check_NV_cooperative_matrix2(provider, caps, deviceExt);
+        check_NV_cooperative_vector(provider, caps, deviceExt);
         check_NV_coverage_reduction_mode(provider, caps, deviceExt);
         VK_NV_display_stereo = ext.contains("VK_NV_display_stereo");
         VK_NV_external_memory_capabilities = check_NV_external_memory_capabilities(provider, caps, ext);
@@ -508,9 +513,10 @@ public class VKCapabilitiesInstance {
         vkGetWinrtDisplayNV = caps[101];
         vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = caps[102];
         vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV = caps[103];
-        vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV = caps[104];
-        vkGetPhysicalDeviceExternalImageFormatPropertiesNV = caps[105];
-        vkGetPhysicalDeviceOpticalFlowImageFormatsNV = caps[106];
+        vkGetPhysicalDeviceCooperativeVectorPropertiesNV = caps[104];
+        vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV = caps[105];
+        vkGetPhysicalDeviceExternalImageFormatPropertiesNV = caps[106];
+        vkGetPhysicalDeviceOpticalFlowImageFormatsNV = caps[107];
     }
 
     private static boolean check_VK10(FunctionProvider provider, long[] caps, Set<String> ext) {
@@ -1034,13 +1040,25 @@ public class VKCapabilitiesInstance {
         ) || reportMissing("VK", "VK_NV_cooperative_matrix2");
     }
 
+    private static boolean check_NV_cooperative_vector(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_NV_cooperative_vector")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            104
+        },
+            "vkGetPhysicalDeviceCooperativeVectorPropertiesNV"
+        ) || reportMissing("VK", "VK_NV_cooperative_vector");
+    }
+
     private static boolean check_NV_coverage_reduction_mode(FunctionProvider provider, long[] caps, Set<String> ext) {
         if (!ext.contains("VK_NV_coverage_reduction_mode")) {
             return false;
         }
 
         return checkFunctions(provider, caps, new int[] {
-            104
+            105
         },
             "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV"
         ) || reportMissing("VK", "VK_NV_coverage_reduction_mode");
@@ -1052,7 +1070,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            105
+            106
         },
             "vkGetPhysicalDeviceExternalImageFormatPropertiesNV"
         ) || reportMissing("VK", "VK_NV_external_memory_capabilities");
@@ -1064,7 +1082,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            106
+            107
         },
             "vkGetPhysicalDeviceOpticalFlowImageFormatsNV"
         ) || reportMissing("VK", "VK_NV_optical_flow");
