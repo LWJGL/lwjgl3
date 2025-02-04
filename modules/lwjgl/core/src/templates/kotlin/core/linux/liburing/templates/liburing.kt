@@ -162,6 +162,41 @@ ENABLE_WARNINGS()""")
     )
 
     int(
+        "submit_and_wait_reg",
+
+        io_uring.p("ring"),
+        io_uring_cqe.p.p("cqe_ptr"),
+        AutoSize("cqe_ptr")..unsigned("wait_nr"),
+        int("reg_index")
+    )
+
+    int(
+        "register_wait_reg",
+
+        io_uring.p("ring"),
+        io_uring_reg_wait.p("reg"),
+        int("nr")
+    )
+
+    int(
+        "resize_rings",
+
+        io_uring.p("ring"),
+        io_uring_params.p("p")
+    )
+
+    int(
+        "clone_buffers_offset",
+
+        io_uring.p("dst"),
+        io_uring.p("src"),
+        unsigned("dst_off"),
+        unsigned("src_off"),
+        unsigned("nr"),
+        unsigned("flags")
+    )
+
+    int(
         "clone_buffers",
 
         io_uring.p("dst"),
@@ -467,6 +502,13 @@ ENABLE_WARNINGS()""")
         unsigned_int("nr_args")
     )
 
+    int(
+        "register_region",
+
+        io_uring.p("ring"),
+        io_uring_mem_region_reg.p("reg")
+    )
+
     io_uring_buf_ring.p(
         "setup_buf_ring",
 
@@ -524,6 +566,13 @@ ENABLE_WARNINGS()""")
 
         io_uring_sqe.p("sqe"),
         unsigned_int("flags")
+    )
+
+    void(
+        "sqe_set_buf_group",
+
+        io_uring_sqe.p("sqe"),
+        int("bgid")
     )
 
     void(

@@ -6,7 +6,6 @@
 #include "liburing.h"
 #include "int_flags.h"
 #include "setup.h"
-#include "liburing/compat.h"
 #include "liburing/io_uring.h"
 
 #define KERN_MAX_ENTRIES	32768
@@ -59,7 +58,7 @@ static int get_sq_cq_entries(unsigned entries, struct io_uring_params *p,
 	return 0;
 }
 
-static void io_uring_unmap_rings(struct io_uring_sq *sq, struct io_uring_cq *cq)
+void io_uring_unmap_rings(struct io_uring_sq *sq, struct io_uring_cq *cq)
 {
 	if (sq->ring_sz)
 		__sys_munmap(sq->ring_ptr, sq->ring_sz);
@@ -67,9 +66,9 @@ static void io_uring_unmap_rings(struct io_uring_sq *sq, struct io_uring_cq *cq)
 		__sys_munmap(cq->ring_ptr, cq->ring_sz);
 }
 
-static void io_uring_setup_ring_pointers(struct io_uring_params *p,
-					 struct io_uring_sq *sq,
-					 struct io_uring_cq *cq)
+void io_uring_setup_ring_pointers(struct io_uring_params *p,
+				  struct io_uring_sq *sq,
+				  struct io_uring_cq *cq)
 {
 	sq->khead = sq->ring_ptr + p->sq_off.head;
 	sq->ktail = sq->ring_ptr + p->sq_off.tail;
@@ -95,8 +94,8 @@ static void io_uring_setup_ring_pointers(struct io_uring_params *p,
 	cq->ring_entries = *cq->kring_entries;
 }
 
-static int io_uring_mmap(int fd, struct io_uring_params *p,
-			 struct io_uring_sq *sq, struct io_uring_cq *cq)
+int io_uring_mmap(int fd, struct io_uring_params *p, struct io_uring_sq *sq,
+		  struct io_uring_cq *cq)
 {
 	size_t size;
 	int ret;
@@ -210,7 +209,7 @@ static int io_uring_alloc_huge(unsigned entries, struct io_uring_params *p,
 {
 	unsigned long page_size = get_page_size();
 	unsigned sq_entries, cq_entries;
-	size_t ring_mem, sqes_mem, cqes_mem;
+	size_t ring_mem, sqes_mem, cqes_mem, sqe_size;
 	unsigned long mem_used = 0;
 	void *ptr;
 	int ret;
@@ -221,7 +220,10 @@ static int io_uring_alloc_huge(unsigned entries, struct io_uring_params *p,
 
 	ring_mem = KRING_SIZE;
 
-	sqes_mem = sq_entries * sizeof(struct io_uring_sqe);
+	sqe_size = sizeof(struct io_uring_sqe);
+	if (p->flags & IORING_SETUP_SQE128)
+		sqe_size <<= 1;
+	sqes_mem = sq_entries * sqe_size;
 	if (!(p->flags & IORING_SETUP_NO_SQARRAY))
 		sqes_mem += sq_entries * sizeof(unsigned);
 	sqes_mem = (sqes_mem + page_size - 1) & ~(page_size - 1);
@@ -431,18 +433,17 @@ __cold void io_uring_queue_exit(struct io_uring *ring)
 {
 	struct io_uring_sq *sq = &ring->sq;
 	struct io_uring_cq *cq = &ring->cq;
-	size_t sqe_size;
+	size_t sqe_size = sizeof(struct io_uring_sqe);
+
+	if (ring->flags & IORING_SETUP_SQE128)
+		sqe_size <<= 1;
 
 	if (!sq->ring_sz && !(ring->int_flags & INT_FLAG_APP_MEM)) {
-		sqe_size = sizeof(struct io_uring_sqe);
-		if (ring->flags & IORING_SETUP_SQE128)
-			sqe_size += 64;
 		__sys_munmap(sq->sqes, sqe_size * sq->ring_entries);
 		io_uring_unmap_rings(sq, cq);
 	} else {
 		if (!(ring->int_flags & INT_FLAG_APP_MEM)) {
-			__sys_munmap(sq->sqes,
-				*sq->kring_entries * sizeof(struct io_uring_sqe));
+			__sys_munmap(sq->sqes, *sq->kring_entries * sqe_size);
 			io_uring_unmap_rings(sq, cq);
 		}
 	}

@@ -217,6 +217,46 @@ public class LibURing {
         return nio_uring_submit_and_wait_min_timeout(ring.address(), memAddress(cqe_ptr), cqe_ptr.remaining(), memAddressSafe(ts), min_wait, sigmask);
     }
 
+    // --- [ io_uring_submit_and_wait_reg ] ---
+
+    /** {@code int io_uring_submit_and_wait_reg(struct io_uring * ring, struct io_uring_cqe ** cqe_ptr, unsigned wait_nr, int reg_index)} */
+    public static native int nio_uring_submit_and_wait_reg(long ring, long cqe_ptr, int wait_nr, int reg_index);
+
+    /** {@code int io_uring_submit_and_wait_reg(struct io_uring * ring, struct io_uring_cqe ** cqe_ptr, unsigned wait_nr, int reg_index)} */
+    public static int io_uring_submit_and_wait_reg(@NativeType("struct io_uring *") IOURing ring, @NativeType("struct io_uring_cqe **") PointerBuffer cqe_ptr, int reg_index) {
+        return nio_uring_submit_and_wait_reg(ring.address(), memAddress(cqe_ptr), cqe_ptr.remaining(), reg_index);
+    }
+
+    // --- [ io_uring_register_wait_reg ] ---
+
+    /** {@code int io_uring_register_wait_reg(struct io_uring * ring, struct io_uring_reg_wait * reg, int nr)} */
+    public static native int nio_uring_register_wait_reg(long ring, long reg, int nr);
+
+    /** {@code int io_uring_register_wait_reg(struct io_uring * ring, struct io_uring_reg_wait * reg, int nr)} */
+    public static int io_uring_register_wait_reg(@NativeType("struct io_uring *") IOURing ring, @NativeType("struct io_uring_reg_wait *") IOURingRegWait reg, int nr) {
+        return nio_uring_register_wait_reg(ring.address(), reg.address(), nr);
+    }
+
+    // --- [ io_uring_resize_rings ] ---
+
+    /** {@code int io_uring_resize_rings(struct io_uring * ring, struct io_uring_params * p)} */
+    public static native int nio_uring_resize_rings(long ring, long p);
+
+    /** {@code int io_uring_resize_rings(struct io_uring * ring, struct io_uring_params * p)} */
+    public static int io_uring_resize_rings(@NativeType("struct io_uring *") IOURing ring, @NativeType("struct io_uring_params *") IOURingParams p) {
+        return nio_uring_resize_rings(ring.address(), p.address());
+    }
+
+    // --- [ io_uring_clone_buffers_offset ] ---
+
+    /** {@code int io_uring_clone_buffers_offset(struct io_uring * dst, struct io_uring * src, unsigned dst_off, unsigned src_off, unsigned nr, unsigned flags)} */
+    public static native int nio_uring_clone_buffers_offset(long dst, long src, int dst_off, int src_off, int nr, int flags);
+
+    /** {@code int io_uring_clone_buffers_offset(struct io_uring * dst, struct io_uring * src, unsigned dst_off, unsigned src_off, unsigned nr, unsigned flags)} */
+    public static int io_uring_clone_buffers_offset(@NativeType("struct io_uring *") IOURing dst, @NativeType("struct io_uring *") IOURing src, @NativeType("unsigned") int dst_off, @NativeType("unsigned") int src_off, @NativeType("unsigned") int nr, @NativeType("unsigned") int flags) {
+        return nio_uring_clone_buffers_offset(dst.address(), src.address(), dst_off, src_off, nr, flags);
+    }
+
     // --- [ io_uring_clone_buffers ] ---
 
     /** {@code int io_uring_clone_buffers(struct io_uring * dst, struct io_uring * src)} */
@@ -649,6 +689,16 @@ public class LibURing {
     /** {@code int io_uring_register(unsigned int fd, unsigned int opcode, void * arg, unsigned int nr_args)} */
     public static native int io_uring_register(@NativeType("unsigned int") int fd, @NativeType("unsigned int") int opcode, @NativeType("void *") long arg, @NativeType("unsigned int") int nr_args);
 
+    // --- [ io_uring_register_region ] ---
+
+    /** {@code int io_uring_register_region(struct io_uring * ring, struct io_uring_mem_region_reg * reg)} */
+    public static native int nio_uring_register_region(long ring, long reg);
+
+    /** {@code int io_uring_register_region(struct io_uring * ring, struct io_uring_mem_region_reg * reg)} */
+    public static int io_uring_register_region(@NativeType("struct io_uring *") IOURing ring, @NativeType("struct io_uring_mem_region_reg *") IOURingMemRegionReg reg) {
+        return nio_uring_register_region(ring.address(), reg.address());
+    }
+
     // --- [ io_uring_setup_buf_ring ] ---
 
     /** {@code struct io_uring_buf_ring * io_uring_setup_buf_ring(struct io_uring * ring, unsigned int nentries, int bgid, unsigned int flags, int * err)} */
@@ -737,6 +787,16 @@ public class LibURing {
     /** {@code void io_uring_sqe_set_flags(struct io_uring_sqe * sqe, unsigned int flags)} */
     public static void io_uring_sqe_set_flags(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("unsigned int") int flags) {
         nio_uring_sqe_set_flags(sqe.address(), flags);
+    }
+
+    // --- [ io_uring_sqe_set_buf_group ] ---
+
+    /** {@code void io_uring_sqe_set_buf_group(struct io_uring_sqe * sqe, int bgid)} */
+    public static native void nio_uring_sqe_set_buf_group(long sqe, int bgid);
+
+    /** {@code void io_uring_sqe_set_buf_group(struct io_uring_sqe * sqe, int bgid)} */
+    public static void io_uring_sqe_set_buf_group(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int bgid) {
+        nio_uring_sqe_set_buf_group(sqe.address(), bgid);
     }
 
     // --- [ io_uring_prep_splice ] ---

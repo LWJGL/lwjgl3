@@ -4,8 +4,8 @@
 #include "lib.h"
 #include "syscall.h"
 #include "liburing.h"
+#include "setup.h"
 #include "int_flags.h"
-#include "liburing/compat.h"
 #include "liburing/io_uring.h"
 #include "liburing/sanitize.h"
 
@@ -395,16 +395,84 @@ int io_uring_register_clock(struct io_uring *ring,
 	return do_register(ring, IORING_REGISTER_CLOCK, arg, 0);
 }
 
-int io_uring_clone_buffers(struct io_uring *dst, struct io_uring *src)
+int io_uring_clone_buffers_offset(struct io_uring *dst, struct io_uring *src,
+				  unsigned int dst_off, unsigned int src_off,
+				  unsigned int nr, unsigned int flags)
 {
-	struct io_uring_clone_buffers buf = { .src_fd = src->ring_fd, };
+	struct io_uring_clone_buffers buf = {
+		.src_fd		= src->ring_fd,
+		.flags		= flags,
+		.src_off	= src_off,
+		.dst_off	= dst_off,
+		.nr		= nr,
+	};
 
 	if (src->int_flags & INT_FLAG_REG_REG_RING) {
 		buf.src_fd = src->enter_ring_fd;
-		buf.flags = IORING_REGISTER_SRC_REGISTERED;
+		buf.flags |= IORING_REGISTER_SRC_REGISTERED;
 	} else {
 		buf.src_fd = src->ring_fd;
 	}
 
 	return do_register(dst, IORING_REGISTER_CLONE_BUFFERS, &buf, 1);
+}
+
+int io_uring_clone_buffers(struct io_uring *dst, struct io_uring *src)
+{
+	return io_uring_clone_buffers_offset(dst, src, 0, 0, 0, 0);
+}
+
+int io_uring_resize_rings(struct io_uring *ring, struct io_uring_params *p)
+{
+	unsigned sq_head, sq_tail;
+	int ret;
+
+	if (ring->flags & IORING_SETUP_NO_MMAP)
+		return -EINVAL;
+
+	memset(&p->sq_off, 0, sizeof(p->sq_off));
+	memset(&p->cq_off, 0, sizeof(p->cq_off));
+
+	ret = do_register(ring, IORING_REGISTER_RESIZE_RINGS, p, 1);
+	if (ret < 0)
+		goto out;
+
+	sq_head = ring->sq.sqe_head;
+	sq_tail = ring->sq.sqe_tail;
+	io_uring_unmap_rings(&ring->sq, &ring->cq);
+	memset(&ring->sq, 0, sizeof(ring->sq));
+	memset(&ring->cq, 0, sizeof(ring->cq));
+	ret = io_uring_mmap(ring->ring_fd, p, &ring->sq, &ring->cq);
+	if (ret)
+		goto out;
+
+	ring->sq.sqe_head = sq_head;
+	ring->sq.sqe_tail = sq_tail;
+
+	/*
+	 * Directly map SQ slots to SQEs
+	 */
+	if (!(p->flags & IORING_SETUP_NO_SQARRAY)) {
+		unsigned index;
+
+		for (index = 0; index < p->sq_entries; index++)
+			ring->sq.array[index] = index;
+	}
+
+	/* clear for next use */
+out:
+	p->flags = 0;
+	return ret;
+}
+
+int io_uring_register_wait_reg(struct io_uring *ring,
+			       struct io_uring_reg_wait *reg, int nr)
+{
+	return -EINVAL;
+}
+
+int io_uring_register_region(struct io_uring *ring,
+			     struct io_uring_mem_region_reg *reg)
+{
+	return do_register(ring, IORING_REGISTER_MEM_REGION, reg, 1);
 }

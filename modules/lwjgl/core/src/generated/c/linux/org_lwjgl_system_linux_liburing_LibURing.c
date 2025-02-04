@@ -139,6 +139,34 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     return (jint)io_uring_submit_and_wait_min_timeout(ring, cqe_ptr, (unsigned)wait_nr, ts, (unsigned)min_wait, sigmask);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1submit_1and_1wait_1reg(JNIEnv *__env, jclass clazz, jlong ringAddress, jlong cqe_ptrAddress, jint wait_nr, jint reg_index) {
+    struct io_uring *ring = (struct io_uring *)(uintptr_t)ringAddress;
+    struct io_uring_cqe **cqe_ptr = (struct io_uring_cqe **)(uintptr_t)cqe_ptrAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)io_uring_submit_and_wait_reg(ring, cqe_ptr, (unsigned)wait_nr, reg_index);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1register_1wait_1reg(JNIEnv *__env, jclass clazz, jlong ringAddress, jlong regAddress, jint nr) {
+    struct io_uring *ring = (struct io_uring *)(uintptr_t)ringAddress;
+    struct io_uring_reg_wait *reg = (struct io_uring_reg_wait *)(uintptr_t)regAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)io_uring_register_wait_reg(ring, reg, nr);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1resize_1rings(JNIEnv *__env, jclass clazz, jlong ringAddress, jlong pAddress) {
+    struct io_uring *ring = (struct io_uring *)(uintptr_t)ringAddress;
+    struct io_uring_params *p = (struct io_uring_params *)(uintptr_t)pAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)io_uring_resize_rings(ring, p);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1clone_1buffers_1offset(JNIEnv *__env, jclass clazz, jlong dstAddress, jlong srcAddress, jint dst_off, jint src_off, jint nr, jint flags) {
+    struct io_uring *dst = (struct io_uring *)(uintptr_t)dstAddress;
+    struct io_uring *src = (struct io_uring *)(uintptr_t)srcAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)io_uring_clone_buffers_offset(dst, src, (unsigned)dst_off, (unsigned)src_off, (unsigned)nr, (unsigned)flags);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1clone_1buffers(JNIEnv *__env, jclass clazz, jlong dstAddress, jlong srcAddress) {
     struct io_uring *dst = (struct io_uring *)(uintptr_t)dstAddress;
     struct io_uring *src = (struct io_uring *)(uintptr_t)srcAddress;
@@ -407,6 +435,13 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_io_1uring_1
     return (jint)io_uring_register((unsigned int)fd, (unsigned int)opcode, arg, (unsigned int)nr_args);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1register_1region(JNIEnv *__env, jclass clazz, jlong ringAddress, jlong regAddress) {
+    struct io_uring *ring = (struct io_uring *)(uintptr_t)ringAddress;
+    struct io_uring_mem_region_reg *reg = (struct io_uring_mem_region_reg *)(uintptr_t)regAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)io_uring_register_region(ring, reg);
+}
+
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1setup_1buf_1ring(JNIEnv *__env, jclass clazz, jlong ringAddress, jint nentries, jint bgid, jint flags, jlong errAddress) {
     struct io_uring *ring = (struct io_uring *)(uintptr_t)ringAddress;
     int *err = (int *)(uintptr_t)errAddress;
@@ -457,6 +492,12 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     UNUSED_PARAMS(__env, clazz)
     io_uring_sqe_set_flags(sqe, (unsigned int)flags);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1sqe_1set_1buf_1group(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint bgid) {
+    struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
+    UNUSED_PARAMS(__env, clazz)
+    io_uring_sqe_set_buf_group(sqe, bgid);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1splice(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd_in, jlong off_in, jint fd_out, jlong off_out, jint nbytes, jint splice_flags) {

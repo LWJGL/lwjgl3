@@ -196,7 +196,16 @@ int io_uring_submit_and_wait_min_timeout(struct io_uring *ring,
 					 struct __kernel_timespec *ts,
 					 unsigned min_wait,
 					 sigset_t *sigmask);
+int io_uring_submit_and_wait_reg(struct io_uring *ring,
+				 struct io_uring_cqe **cqe_ptr, unsigned wait_nr,
+				 int reg_index);
 
+int io_uring_register_wait_reg(struct io_uring *ring,
+			       struct io_uring_reg_wait *reg, int nr);
+int io_uring_resize_rings(struct io_uring *ring, struct io_uring_params *p);
+int io_uring_clone_buffers_offset(struct io_uring *dst, struct io_uring *src,
+				  unsigned int dst_off, unsigned int src_off,
+				  unsigned int nr, unsigned int flags);
 int io_uring_clone_buffers(struct io_uring *dst, struct io_uring *src);
 int io_uring_register_buffers(struct io_uring *ring, const struct iovec *iovecs,
 			      unsigned nr_iovecs);
@@ -274,6 +283,12 @@ int io_uring_enter2(unsigned int fd, unsigned int to_submit,
 int io_uring_setup(unsigned int entries, struct io_uring_params *p);
 int io_uring_register(unsigned int fd, unsigned int opcode, const void *arg,
 		      unsigned int nr_args);
+
+/*
+ * Mapped/registered regions
+ */
+int io_uring_register_region(struct io_uring *ring,
+			     struct io_uring_mem_region_reg *reg);
 
 /*
  * Mapped buffer ring alloc/register + unregister/free helpers
@@ -392,6 +407,12 @@ IOURINGINLINE void io_uring_sqe_set_flags(struct io_uring_sqe *sqe,
 					  unsigned flags)
 {
 	sqe->flags = (__u8) flags;
+}
+
+IOURINGINLINE void io_uring_sqe_set_buf_group(struct io_uring_sqe *sqe,
+					      int bgid)
+{
+	sqe->buf_group = (__u16) bgid;
 }
 
 IOURINGINLINE void __io_uring_set_target_fixed_file(struct io_uring_sqe *sqe,

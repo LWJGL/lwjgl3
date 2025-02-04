@@ -125,6 +125,21 @@ val io_uring_params = struct(Module.CORE_LINUX_LIBURING, "IOURingParams", native
     io_cqring_offsets("cq_off")
 }
 
+val io_uring_region_desc = struct(Module.CORE_LINUX_LIBURING, "IOUringRegionDesc", nativeName = "struct io_uring_region_desc") {
+    __u64("user_addr")
+    __u64("size")
+    __u32("flags")
+    __u32("id")
+    __u64("mmap_offset")
+    __u64("__resv")[4].private()
+}
+
+val io_uring_mem_region_reg = struct(Module.CORE_LINUX_LIBURING, "IOURingMemRegionReg", nativeName = "struct io_uring_mem_region_reg") {
+    __u64("region_uptr")
+    __u64("flags")
+    __u64("__resv")[2].private()
+}
+
 val io_uring_rsrc_register = struct(Module.CORE_LINUX_LIBURING, "IOURingRSRCRegister", nativeName = "struct io_uring_rsrc_register") {
     __u32("nr")
     __u32("flags")
@@ -182,7 +197,10 @@ val io_uring_clock_register = struct(Module.CORE_LINUX_LIBURING, "IOURingClockRe
 val io_uring_clone_buffers = struct(Module.CORE_LINUX_LIBURING, "IOURingCloneBuffers", nativeName = "struct io_uring_clone_buffers") {
     __u32("src_fd")
     __u32("flags")
-    __u32("pad")[6].private()
+    __u32("src_off")
+    __u32("dst_off")
+    __u32("nr")
+    __u32("pad")[3].private()
 };
 
 val io_uring_buf = struct(Module.CORE_LINUX_LIBURING, "IOURingBuf", nativeName = "struct io_uring_buf") {
@@ -223,6 +241,28 @@ val io_uring_napi = struct(Module.CORE_LINUX_LIBURING, "IOURingNAPI", nativeName
     __u8("prefer_busy_poll")
     __u8("pad")[3].private()
     __u64("resv").private()
+}
+
+val io_uring_cqwait_reg_arg = struct(Module.CORE_LINUX_LIBURING, "IOURingCQWaitRegArg", nativeName = "struct io_uring_cqwait_reg_arg") {
+    __u32("flags")
+    __u32("struct_size")
+    __u32("nr_entries")
+    __u32("pad")
+    __u64("user_addr")
+    __u64("pad2")[3].private()
+}
+
+val io_uring_reg_wait = struct(Module.CORE_LINUX_LIBURING, "IOURingRegWait", nativeName = "struct" +
+" io_uring_reg_wait") {
+    javaImport("org.lwjgl.system.linux.*")
+
+    __kernel_timespec("ts")
+    __u32("min_wait_usec")
+    __u32("flags")
+    __u64("sigmask")
+    __u32("sigmask_sz")
+    __u32("pad")[3].private()
+    __u64("pad2")[2].private()
 }
 
 val io_uring_getevents_arg = struct(Module.CORE_LINUX_LIBURING, "IOURingGeteventsArg", nativeName = "struct io_uring_getevents_arg") {

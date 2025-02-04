@@ -6,7 +6,6 @@
 #include "liburing.h"
 #include "int_flags.h"
 #include "liburing/sanitize.h"
-#include "liburing/compat.h"
 #include "liburing/io_uring.h"
 
 /*
@@ -319,6 +318,28 @@ int io_uring_wait_cqes_min_timeout(struct io_uring *ring,
 {
 	return io_uring_wait_cqes_new(ring, cqe_ptr, wait_nr, ts, min_wait_usec,
 					sigmask);
+}
+
+int io_uring_submit_and_wait_reg(struct io_uring *ring,
+				 struct io_uring_cqe **cqe_ptr,
+				 unsigned wait_nr, int reg_index)
+{
+	unsigned long offset = reg_index * sizeof(struct io_uring_reg_wait);
+
+	struct get_data data = {
+		.submit		= __io_uring_flush_sq(ring),
+		.wait_nr	= wait_nr,
+		.get_flags	= IORING_ENTER_EXT_ARG |
+				  IORING_ENTER_EXT_ARG_REG,
+		.sz		= sizeof(struct io_uring_reg_wait),
+		.has_ts		= true,
+		.arg		= (void *) (uintptr_t) offset,
+	};
+
+	if (!(ring->features & IORING_FEAT_EXT_ARG))
+		return -EINVAL;
+
+	return _io_uring_get_cqe(ring, cqe_ptr, &data);
 }
 
 static int __io_uring_submit_and_wait_timeout(struct io_uring *ring,

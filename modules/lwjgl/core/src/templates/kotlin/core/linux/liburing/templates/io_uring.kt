@@ -62,7 +62,8 @@ ENABLE_WARNINGS()""")
         "SETUP_DEFER_TASKRUN".enum("1 << 13"),
         "SETUP_NO_MMAP".enum("1 << 14"),
         "SETUP_REGISTERED_FD_ONLY".enum("1 << 15"),
-        "SETUP_NO_SQARRAY".enum("1 << 16")
+        "SETUP_NO_SQARRAY".enum("1 << 16"),
+        "SETUP_HYBRID_IOPOLL".enum("1 << 17")
     )
 
     EnumConstantByte(
@@ -239,7 +240,8 @@ ENABLE_WARNINGS()""")
         "ENTER_SQ_WAIT".enum("1 << 2"),
         "ENTER_EXT_ARG".enum("1 << 3"),
         "ENTER_REGISTERED_RING".enum("1 << 4"),
-        "ENTER_ABS_TIMER".enum("1 << 5")
+        "ENTER_ABS_TIMER".enum("1 << 5"),
+        "ENTER_EXT_ARG_REG".enum("1 << 6")
     )
 
     EnumConstant(
@@ -293,6 +295,8 @@ ENABLE_WARNINGS()""")
         "UNREGISTER_NAPI".enum,
         "REGISTER_CLOCK".enum,
         "REGISTER_CLONE_BUFFERS".enum,
+        "REGISTER_RESIZE_RINGS".enum("33"),
+        "REGISTER_MEM_REGION".enum,
 
         "REGISTER_LAST".enum,
 
@@ -300,13 +304,21 @@ ENABLE_WARNINGS()""")
     )
 
     EnumConstant(
-        "RSRC_REGISTER_SPARSE".enum("1 << 0")
-    )
-
-    EnumConstant(
         "IO_WQ_BOUND".enum("0"),
         "IO_WQ_UNBOUND".enum
     ).noPrefix()
+
+    EnumConstant(
+        "MEM_REGION_TYPE_USER".enum("1")
+    )
+
+    EnumConstant(
+        "MEM_REGION_REG_WAIT_ARG".enum("1")
+    )
+
+    EnumConstant(
+        "RSRC_REGISTER_SPARSE".enum("1 << 0")
+    )
 
     IntConstant(
         "REGISTER_FILES_SKIP".."-2"
@@ -317,7 +329,8 @@ ENABLE_WARNINGS()""")
     ).noPrefix()
 
     EnumConstant(
-        "REGISTER_SRC_REGISTERED".enum("1")
+        "REGISTER_SRC_REGISTERED".enum("1 << 0"),
+        "REGISTER_DST_REPLACE".enum("1 << 1")
     )
 
     EnumConstant(
@@ -331,6 +344,10 @@ ENABLE_WARNINGS()""")
         "RESTRICTION_SQE_FLAGS_ALLOWED".enum,
         "RESTRICTION_SQE_FLAGS_REQUIRED".enum,
         "RESTRICTION_LAST".enum
+    )
+
+    EnumConstant(
+        "REG_WAIT_TS".enum("1 << 0")
     )
 
     EnumConstant(
