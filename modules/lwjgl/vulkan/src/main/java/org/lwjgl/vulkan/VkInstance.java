@@ -51,12 +51,12 @@ public class VkInstance extends DispatchableHandleInstance {
         HashSet<String> extensions = new HashSet<>();
 
         out:
-        try (MemoryStack frame0 = stackPush()) {
-            IntBuffer ip = frame0.callocInt(1);
+        try (MemoryStack stack = stackPush()) {
+            IntBuffer ip = stack.callocInt(1);
 
             long GetInstanceProcAddr                = VK.getGlobalCommands().vkGetInstanceProcAddr;
-            long EnumeratePhysicalDevices           = callPPP(instance, memAddress(frame0.ASCII("vkEnumeratePhysicalDevices")), GetInstanceProcAddr);
-            long EnumerateDeviceExtensionProperties = callPPP(instance, memAddress(frame0.ASCII("vkEnumerateDeviceExtensionProperties")), GetInstanceProcAddr);
+            long EnumeratePhysicalDevices           = callPPP(instance, memAddress(stack.ASCII("vkEnumeratePhysicalDevices")), GetInstanceProcAddr);
+            long EnumerateDeviceExtensionProperties = callPPP(instance, memAddress(stack.ASCII("vkEnumerateDeviceExtensionProperties")), GetInstanceProcAddr);
             if (EnumeratePhysicalDevices == NULL || EnumerateDeviceExtensionProperties == NULL) {
                 break out;
             }
@@ -66,7 +66,7 @@ public class VkInstance extends DispatchableHandleInstance {
                 break out;
             }
 
-            PointerBuffer physicalDevices = frame0.mallocPointer(ip.get(0));
+            PointerBuffer physicalDevices = stack.mallocPointer(ip.get(0));
             err = callPPPI(instance, memAddress(ip), memAddress(physicalDevices), EnumeratePhysicalDevices);
             if (err != VK_SUCCESS) {
                 break out;
@@ -78,8 +78,7 @@ public class VkInstance extends DispatchableHandleInstance {
                     continue;
                 }
 
-                try (MemoryStack frame1 = frame0.push()) {
-                    VkExtensionProperties.Buffer deviceExtensions = VkExtensionProperties.malloc(ip.get(0), frame1);
+                try (VkExtensionProperties.Buffer deviceExtensions = VkExtensionProperties.malloc(ip.get(0))) {
                     err = callPPPPI(physicalDevices.get(i), NULL, memAddress(ip), deviceExtensions.address(), EnumerateDeviceExtensionProperties);
                     if (err != VK_SUCCESS) {
                         continue;

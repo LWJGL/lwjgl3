@@ -497,14 +497,15 @@ public final class HelloVulkan {
             check(vkEnumerateDeviceExtensionProperties(gpu, (String)null, ip, null));
 
             if (ip.get(0) > 0) {
-                VkExtensionProperties.Buffer device_extensions = VkExtensionProperties.malloc(ip.get(0), stack);
-                check(vkEnumerateDeviceExtensionProperties(gpu, (String)null, ip, device_extensions));
+                try (VkExtensionProperties.Buffer device_extensions = VkExtensionProperties.malloc(ip.get(0))) {
+                    check(vkEnumerateDeviceExtensionProperties(gpu, (String)null, ip, device_extensions));
 
-                for (int i = 0; i < ip.get(0); i++) {
-                    device_extensions.position(i);
-                    if (VK_KHR_SWAPCHAIN_EXTENSION_NAME.equals(device_extensions.extensionNameString())) {
-                        swapchainExtFound = true;
-                        extension_names.put(KHR_swapchain);
+                    for (int i = 0; i < ip.get(0); i++) {
+                        device_extensions.position(i);
+                        if (VK_KHR_SWAPCHAIN_EXTENSION_NAME.equals(device_extensions.extensionNameString())) {
+                            swapchainExtFound = true;
+                            extension_names.put(KHR_swapchain);
+                        }
                     }
                 }
             }
