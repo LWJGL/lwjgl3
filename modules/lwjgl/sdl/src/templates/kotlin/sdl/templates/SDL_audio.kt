@@ -120,9 +120,9 @@ val SDL_audio = "SDLAudio".nativeClassSDL("SDL_audio") {
     bool("IsAudioDevicePhysical", SDL_AudioDeviceID("devid"))
     bool("IsAudioDevicePlayback", SDL_AudioDeviceID("devid"))
 
-    bool("PauseAudioDevice", SDL_AudioDeviceID("dev"))
-    bool("ResumeAudioDevice", SDL_AudioDeviceID("dev"))
-    bool("AudioDevicePaused", SDL_AudioDeviceID("dev"))
+    bool("PauseAudioDevice", SDL_AudioDeviceID("devid"))
+    bool("ResumeAudioDevice", SDL_AudioDeviceID("devid"))
+    bool("AudioDevicePaused", SDL_AudioDeviceID("devid"))
 
     float(
         "GetAudioDeviceGain",

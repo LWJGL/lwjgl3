@@ -41,7 +41,7 @@ val SDL_camera = "SDLCamera".nativeClassSDL("SDL_camera") {
     SDL_CameraSpec.p.p(
         "GetCameraSupportedFormats",
 
-        SDL_CameraID("devid"),
+        SDL_CameraID("instance_id"),
         AutoSizeResult..int.p("count")
     )
 

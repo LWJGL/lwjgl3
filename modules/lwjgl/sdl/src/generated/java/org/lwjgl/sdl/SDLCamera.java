@@ -116,19 +116,19 @@ public class SDLCamera {
 
     // --- [ SDL_GetCameraSupportedFormats ] ---
 
-    /** {@code SDL_CameraSpec ** SDL_GetCameraSupportedFormats(SDL_CameraID devid, int * count)} */
-    public static long nSDL_GetCameraSupportedFormats(int devid, long count) {
+    /** {@code SDL_CameraSpec ** SDL_GetCameraSupportedFormats(SDL_CameraID instance_id, int * count)} */
+    public static long nSDL_GetCameraSupportedFormats(int instance_id, long count) {
         long __functionAddress = Functions.GetCameraSupportedFormats;
-        return invokePP(devid, count, __functionAddress);
+        return invokePP(instance_id, count, __functionAddress);
     }
 
-    /** {@code SDL_CameraSpec ** SDL_GetCameraSupportedFormats(SDL_CameraID devid, int * count)} */
+    /** {@code SDL_CameraSpec ** SDL_GetCameraSupportedFormats(SDL_CameraID instance_id, int * count)} */
     @NativeType("SDL_CameraSpec **")
-    public static @Nullable PointerBuffer SDL_GetCameraSupportedFormats(@NativeType("SDL_CameraID") int devid) {
+    public static @Nullable PointerBuffer SDL_GetCameraSupportedFormats(@NativeType("SDL_CameraID") int instance_id) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         IntBuffer count = stack.callocInt(1);
         try {
-            long __result = nSDL_GetCameraSupportedFormats(devid, memAddress(count));
+            long __result = nSDL_GetCameraSupportedFormats(instance_id, memAddress(count));
             return memPointerBufferSafe(__result, count.get(0));
         } finally {
             stack.setPointer(stackPointer);

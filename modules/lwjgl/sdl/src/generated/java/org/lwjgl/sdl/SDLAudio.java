@@ -362,29 +362,29 @@ public class SDLAudio {
 
     // --- [ SDL_PauseAudioDevice ] ---
 
-    /** {@code bool SDL_PauseAudioDevice(SDL_AudioDeviceID dev)} */
+    /** {@code bool SDL_PauseAudioDevice(SDL_AudioDeviceID devid)} */
     @NativeType("bool")
-    public static boolean SDL_PauseAudioDevice(@NativeType("SDL_AudioDeviceID") int dev) {
+    public static boolean SDL_PauseAudioDevice(@NativeType("SDL_AudioDeviceID") int devid) {
         long __functionAddress = Functions.PauseAudioDevice;
-        return invokeZ(dev, __functionAddress);
+        return invokeZ(devid, __functionAddress);
     }
 
     // --- [ SDL_ResumeAudioDevice ] ---
 
-    /** {@code bool SDL_ResumeAudioDevice(SDL_AudioDeviceID dev)} */
+    /** {@code bool SDL_ResumeAudioDevice(SDL_AudioDeviceID devid)} */
     @NativeType("bool")
-    public static boolean SDL_ResumeAudioDevice(@NativeType("SDL_AudioDeviceID") int dev) {
+    public static boolean SDL_ResumeAudioDevice(@NativeType("SDL_AudioDeviceID") int devid) {
         long __functionAddress = Functions.ResumeAudioDevice;
-        return invokeZ(dev, __functionAddress);
+        return invokeZ(devid, __functionAddress);
     }
 
     // --- [ SDL_AudioDevicePaused ] ---
 
-    /** {@code bool SDL_AudioDevicePaused(SDL_AudioDeviceID dev)} */
+    /** {@code bool SDL_AudioDevicePaused(SDL_AudioDeviceID devid)} */
     @NativeType("bool")
-    public static boolean SDL_AudioDevicePaused(@NativeType("SDL_AudioDeviceID") int dev) {
+    public static boolean SDL_AudioDevicePaused(@NativeType("SDL_AudioDeviceID") int devid) {
         long __functionAddress = Functions.AudioDevicePaused;
-        return invokeZ(dev, __functionAddress);
+        return invokeZ(devid, __functionAddress);
     }
 
     // --- [ SDL_GetAudioDeviceGain ] ---
