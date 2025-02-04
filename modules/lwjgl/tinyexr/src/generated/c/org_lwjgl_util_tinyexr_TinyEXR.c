@@ -5,6 +5,7 @@
  */
 #include "common_tools.h"
 DISABLE_WARNINGS()
+#define TINYEXR_USE_COMPILER_FP16 1
 #include "tinyexr.h"
 ENABLE_WARNINGS()
 

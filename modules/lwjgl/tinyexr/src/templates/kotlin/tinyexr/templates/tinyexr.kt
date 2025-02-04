@@ -9,6 +9,7 @@ import tinyexr.*
 
 val tinyexr = "TinyEXR".nativeClass(Module.TINYEXR, prefix = "TINYEXR", prefixMethod = "") {
     nativeDirective("""DISABLE_WARNINGS()
+#define TINYEXR_USE_COMPILER_FP16 1
 #include "tinyexr.h"
 ENABLE_WARNINGS()""")
 
