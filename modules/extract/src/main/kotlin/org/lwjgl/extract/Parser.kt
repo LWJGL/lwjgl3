@@ -46,11 +46,11 @@ private fun parseConstant(header: Header, nativeName: String, value: String): St
             type = "Int"
             v = "/*FIXME?*/\"$value\""
         }
-    } else if (value.length == 18 && value.startsWith("0x") && value.toULongOrNull(16) != null) {
-        type = "Long"
-        v = value
-    } else if (value.length == 10 && value.startsWith("0x") && value.toUIntOrNull(16) != null) {
+    } else if (value.startsWith("0x") && value.toUIntOrNull(16) != null) {
         type = "Int"
+        v = value
+    } else if (value.startsWith("0x") && value.toULongOrNull(16) != null) {
+        type = "Long"
         v = value
     } else if (value.toIntOrNull() != null) {
         type = "Int"
@@ -116,7 +116,7 @@ internal class Enum(
         return """    EnumConstant(
         ${constants
             .mapIndexed { index, it ->
-                val renderValue = if (it.value.startsWith("0x") && it.value.length != 10) {
+                val renderValue = if (it.value.startsWith("0x") && it.value[2] == '0') {
                     true
                 } else if (index == 0) {
                     !it.value.startsWith("0x") || it.toIntOrNull() != 0
@@ -128,7 +128,7 @@ internal class Enum(
                 }
 
                 val v = if (renderValue) {
-                    if (it.value.startsWith("0x") && it.value.length == 10)
+                    if (it.value.startsWith("0x") && it.value[2] != '0')
                         it.value
                     else
                         "\"${it.value}\""
