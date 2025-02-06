@@ -58,7 +58,9 @@ public final class APIUtil {
         Object state = Configuration.DEBUG_STREAM.get();
         if (state instanceof String) {
             try {
-                Supplier<PrintStream> factory = (Supplier<PrintStream>)Class.forName((String)state).getConstructor().newInstance();
+                Supplier<PrintStream> factory = (Supplier<PrintStream>)Class.forName((String)state)
+                    .getDeclaredConstructor()
+                    .newInstance();
                 debugStream = factory.get();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -316,7 +318,9 @@ public final class APIUtil {
             String s = (String)value;
             if (s.indexOf('.') != -1) { // classpath
                 try {
-                    @SuppressWarnings("unchecked") Predicate<String> predicate = (Predicate<String>)Class.forName(s).newInstance();
+                    @SuppressWarnings("unchecked") Predicate<String> predicate = (Predicate<String>)Class.forName(s)
+                        .getDeclaredConstructor()
+                        .newInstance();
                     extensions.removeIf(predicate);
                 } catch (Exception e) {
                     throw new RuntimeException(e);

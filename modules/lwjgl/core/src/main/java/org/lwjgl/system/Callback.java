@@ -109,6 +109,7 @@ public abstract class Callback implements Pointer, NativeResource {
      *
      * @param cif the libffi CIF
      */
+    @SuppressWarnings("this-escape")
     protected Callback(FFICIF cif) {
         this.address = create(cif, this);
     }

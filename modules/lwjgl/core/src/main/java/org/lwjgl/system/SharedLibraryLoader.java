@@ -279,6 +279,7 @@ final class SharedLibraryLoader {
      *
      * @return true if the file is writable
      */
+    @SuppressWarnings("try")
     private static boolean canWrite(Path root, Path file, URL resource, @Nullable Consumer<String> load) {
         Path testFile;
         if (Files.exists(file)) {
