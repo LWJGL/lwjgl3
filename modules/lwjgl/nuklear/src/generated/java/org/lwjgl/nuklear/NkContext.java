@@ -213,7 +213,6 @@ public class NkContext extends Struct<NkContext> implements NativeResource {
     @Deprecated public static NkContext mallocStack(MemoryStack stack) { return malloc(stack); }
     /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
     @Deprecated public static NkContext callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
 
     /**
      * Returns a new {@code NkContext} instance allocated on the specified {@link MemoryStack}.

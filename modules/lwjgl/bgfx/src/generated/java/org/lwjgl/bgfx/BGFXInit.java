@@ -249,7 +249,6 @@ public class BGFXInit extends Struct<BGFXInit> implements NativeResource {
     @Deprecated public static BGFXInit mallocStack(MemoryStack stack) { return malloc(stack); }
     /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
     @Deprecated public static BGFXInit callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
 
     /**
      * Returns a new {@code BGFXInit} instance allocated on the specified {@link MemoryStack}.

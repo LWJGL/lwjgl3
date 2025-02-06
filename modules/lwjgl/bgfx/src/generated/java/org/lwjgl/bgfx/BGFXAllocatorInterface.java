@@ -125,7 +125,6 @@ public class BGFXAllocatorInterface extends Struct<BGFXAllocatorInterface> imple
     @Deprecated public static BGFXAllocatorInterface mallocStack(MemoryStack stack) { return malloc(stack); }
     /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
     @Deprecated public static BGFXAllocatorInterface callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
 
     /**
      * Returns a new {@code BGFXAllocatorInterface} instance allocated on the specified {@link MemoryStack}.

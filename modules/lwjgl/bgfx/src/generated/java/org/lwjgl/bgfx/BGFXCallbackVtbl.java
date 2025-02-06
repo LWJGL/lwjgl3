@@ -255,7 +255,6 @@ public class BGFXCallbackVtbl extends Struct<BGFXCallbackVtbl> implements Native
     @Deprecated public static BGFXCallbackVtbl mallocStack(MemoryStack stack) { return malloc(stack); }
     /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
     @Deprecated public static BGFXCallbackVtbl callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
 
     /**
      * Returns a new {@code BGFXCallbackVtbl} instance allocated on the specified {@link MemoryStack}.

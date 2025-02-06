@@ -1177,10 +1177,10 @@ $indentation}"""
     /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
     @Deprecated public static $className mallocStack(MemoryStack stack) { return malloc(stack); }
     /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static $className callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */""")
+    @Deprecated public static $className callocStack(MemoryStack stack) { return calloc(stack); }""")
                 if (generateBuffer) {
                     print("""
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
     @Deprecated public static $className.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
     /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
     @Deprecated public static $className.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }

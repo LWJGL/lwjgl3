@@ -421,7 +421,6 @@ public class VmaVulkanFunctions extends Struct<VmaVulkanFunctions> implements Na
     @Deprecated public static VmaVulkanFunctions mallocStack(MemoryStack stack) { return malloc(stack); }
     /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
     @Deprecated public static VmaVulkanFunctions callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
 
     /**
      * Returns a new {@code VmaVulkanFunctions} instance allocated on the specified {@link MemoryStack}.

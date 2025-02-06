@@ -222,7 +222,6 @@ public class ExtentHooks extends Struct<ExtentHooks> implements NativeResource {
     @Deprecated public static ExtentHooks mallocStack(MemoryStack stack) { return malloc(stack); }
     /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
     @Deprecated public static ExtentHooks callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
 
     /**
      * Returns a new {@code ExtentHooks} instance allocated on the specified {@link MemoryStack}.

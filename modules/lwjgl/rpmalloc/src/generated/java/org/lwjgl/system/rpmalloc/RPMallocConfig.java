@@ -239,7 +239,6 @@ public class RPMallocConfig extends Struct<RPMallocConfig> implements NativeReso
     @Deprecated public static RPMallocConfig mallocStack(MemoryStack stack) { return malloc(stack); }
     /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
     @Deprecated public static RPMallocConfig callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
 
     /**
      * Returns a new {@code RPMallocConfig} instance allocated on the specified {@link MemoryStack}.
