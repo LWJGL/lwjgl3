@@ -105,6 +105,8 @@ public class XrCompositionLayerProjectionView extends Struct<XrCompositionLayerP
     public XrCompositionLayerProjectionView next(XrCompositionLayerDepthInfoKHR value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrCompositionLayerSpaceWarpInfoFB} value to the {@code next} chain. */
     public XrCompositionLayerProjectionView next(XrCompositionLayerSpaceWarpInfoFB value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrFrameSynthesisInfoEXT} value to the {@code next} chain. */
+    public XrCompositionLayerProjectionView next(XrFrameSynthesisInfoEXT value) { return this.next(value.next(this.next()).address()); }
     /** Copies the specified {@link XrPosef} to the {@code pose} field. */
     public XrCompositionLayerProjectionView pose(XrPosef value) { npose(address(), value); return this; }
     /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
@@ -355,6 +357,8 @@ public class XrCompositionLayerProjectionView extends Struct<XrCompositionLayerP
         public XrCompositionLayerProjectionView.Buffer next(XrCompositionLayerDepthInfoKHR value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrCompositionLayerSpaceWarpInfoFB} value to the {@code next} chain. */
         public XrCompositionLayerProjectionView.Buffer next(XrCompositionLayerSpaceWarpInfoFB value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrFrameSynthesisInfoEXT} value to the {@code next} chain. */
+        public XrCompositionLayerProjectionView.Buffer next(XrFrameSynthesisInfoEXT value) { return this.next(value.next(this.next()).address()); }
         /** Copies the specified {@link XrPosef} to the {@code pose} field. */
         public XrCompositionLayerProjectionView.Buffer pose(XrPosef value) { XrCompositionLayerProjectionView.npose(address(), value); return this; }
         /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */

@@ -44,6 +44,7 @@ private fun generateDispatchableHandle(handle: PointerType<*>, parent: PointerTy
 fun templateCustomization() {
     generateDispatchableHandle(XrActionSet, XrInstance)
     generateDispatchableHandle(XrAction, XrActionSet)
+    generateDispatchableHandle(XrBodyTrackerBD, XrSession)
     generateDispatchableHandle(XrBodyTrackerFB, XrSession)
     generateDispatchableHandle(XrBodyTrackerHTC, XrSession)
     generateDispatchableHandle(XrDebugUtilsMessengerEXT, XrInstance)
@@ -80,7 +81,7 @@ fun templateCustomization() {
 
     XR10.apply {
         LongConstant(
-            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 1, 43)"
+            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 1, 45)"
         )
 
         LongConstant(

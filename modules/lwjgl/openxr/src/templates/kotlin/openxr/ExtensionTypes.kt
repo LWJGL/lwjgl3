@@ -40,6 +40,7 @@ val XrEnvironmentDepthProviderMETA = XR_DEFINE_HANDLE("XrEnvironmentDepthProvide
 val XrEnvironmentDepthSwapchainMETA = XR_DEFINE_HANDLE("XrEnvironmentDepthSwapchainMETA")
 val XrPassthroughHTC = XR_DEFINE_HANDLE("XrPassthroughHTC")
 val XrBodyTrackerHTC = XR_DEFINE_HANDLE("XrBodyTrackerHTC")
+val XrBodyTrackerBD = XR_DEFINE_HANDLE("XrBodyTrackerBD")
 val XrPlaneDetectorEXT = XR_DEFINE_HANDLE("XrPlaneDetectorEXT")
 val XrWorldMeshDetectorML = XR_DEFINE_HANDLE("XrWorldMeshDetectorML")
 val XrFacialExpressionClientML = XR_DEFINE_HANDLE("XrFacialExpressionClientML")
@@ -130,6 +131,8 @@ val XrBodyJointHTC = "XrBodyJointHTC".enumType
 val XrBodyJointSetHTC = "XrBodyJointSetHTC".enumType
 val XrBodyJointConfidenceHTC = "XrBodyJointConfidenceHTC".enumType
 val XrForceFeedbackCurlLocationMNDX = "XrForceFeedbackCurlLocationMNDX".enumType
+val XrBodyJointBD = "XrBodyJointBD".enumType
+val XrBodyJointSetBD = "XrBodyJointSetBD".enumType
 val XrHandTrackingDataSourceEXT = "XrHandTrackingDataSourceEXT".enumType
 val XrPlaneDetectorOrientationEXT = "XrPlaneDetectorOrientationEXT".enumType
 val XrPlaneDetectorSemanticTypeEXT = "XrPlaneDetectorSemanticTypeEXT".enumType
@@ -169,6 +172,7 @@ val XrDigitalLensControlFlagsALMALENCE = typedef(XrFlags64, "XrDigitalLensContro
 val XrFoveationEyeTrackedProfileCreateFlagsMETA = typedef(XrFlags64, "XrFoveationEyeTrackedProfileCreateFlagsMETA")
 val XrFoveationEyeTrackedStateFlagsMETA = typedef(XrFlags64, "XrFoveationEyeTrackedStateFlagsMETA")
 val XrCompositionLayerSettingsFlagsFB = typedef(XrFlags64, "XrCompositionLayerSettingsFlagsFB")
+val XrFrameSynthesisInfoFlagsEXT = typedef(XrFlags64, "XrFrameSynthesisInfoFlagsEXT")
 val XrPassthroughPreferenceFlagsMETA = typedef(XrFlags64, "XrPassthroughPreferenceFlagsMETA")
 val XrVirtualKeyboardInputStateFlagsMETA = typedef(XrFlags64, "XrVirtualKeyboardInputStateFlagsMETA")
 val XrExternalCameraStatusFlagsOCULUS = typedef(XrFlags64, "XrExternalCameraStatusFlagsOCULUS")
@@ -2265,6 +2269,28 @@ val XrDevicePcmSampleRateGetInfoFB = struct(Module.OPENXR, "XrDevicePcmSampleRat
     float("sampleRate")
 }
 
+val XrFrameSynthesisInfoEXT = struct(Module.OPENXR, "XrFrameSynthesisInfoEXT") {
+    Expression("#TYPE_FRAME_SYNTHESIS_INFO_EXT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrFrameSynthesisInfoFlagsEXT("layerFlags")
+    XrSwapchainSubImage("motionVectorSubImage")
+    XrVector4f("motionVectorScale")
+    XrVector4f("motionVectorOffset")
+    XrPosef("appSpaceDeltaPose")
+    XrSwapchainSubImage("depthSubImage")
+    float("minDepth")
+    float("maxDepth")
+    float("nearZ")
+    float("farZ")
+}
+
+val XrFrameSynthesisConfigViewEXT = struct(Module.OPENXR, "XrFrameSynthesisConfigViewEXT") {
+    Expression("#TYPE_FRAME_SYNTHESIS_CONFIG_VIEW_EXT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    uint32_t("recommendedMotionVectorImageRectWidth")
+    uint32_t("recommendedMotionVectorImageRectHeight")
+}
+
 val XrCompositionLayerDepthTestFB = struct(Module.OPENXR, "XrCompositionLayerDepthTestFB") {
     Expression("#TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB")..XrStructureType("type")
     nullable..opaque_const_p("next")
@@ -2814,6 +2840,38 @@ val XrForceFeedbackCurlApplyLocationsMNDX = struct(Module.OPENXR, "XrForceFeedba
     nullable..opaque_const_p("next")
     AutoSize("locations")..uint32_t("locationCount")
     XrForceFeedbackCurlApplyLocationMNDX.p("locations")
+}
+
+val XrSystemBodyTrackingPropertiesBD = struct(Module.OPENXR, "XrSystemBodyTrackingPropertiesBD", mutable = false) {
+    Expression("#TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_BD")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsBodyTracking")
+}
+
+val XrBodyTrackerCreateInfoBD = struct(Module.OPENXR, "XrBodyTrackerCreateInfoBD") {
+    Expression("#TYPE_BODY_TRACKER_CREATE_INFO_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrBodyJointSetBD("jointSet")
+}
+
+val XrBodyJointsLocateInfoBD = struct(Module.OPENXR, "XrBodyJointsLocateInfoBD") {
+    Expression("#TYPE_BODY_JOINTS_LOCATE_INFO_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("baseSpace")
+    XrTime("time")
+}
+
+val XrBodyJointLocationBD = struct(Module.OPENXR, "XrBodyJointLocationBD") {
+    XrSpaceLocationFlags("locationFlags")
+    XrPosef("pose")
+}
+
+val XrBodyJointLocationsBD = struct(Module.OPENXR, "XrBodyJointLocationsBD") {
+    Expression("#TYPE_BODY_JOINT_LOCATIONS_BD")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrBool32("allJointPosesTracked")
+    AutoSize("jointLocations")..uint32_t("jointLocationCount")
+    XrBodyJointLocationBD.p("jointLocations")
 }
 
 val XrHandTrackingDataSourceInfoEXT = struct(Module.OPENXR, "XrHandTrackingDataSourceInfoEXT") {

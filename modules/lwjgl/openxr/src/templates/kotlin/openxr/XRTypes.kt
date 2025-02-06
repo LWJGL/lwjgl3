@@ -115,7 +115,7 @@ val XrSystemProperties = struct(Module.OPENXR, "XrSystemProperties", mutable = f
     javaImport("static org.lwjgl.openxr.XR10.*")
     Expression("#TYPE_SYSTEM_PROPERTIES")..XrStructureType("type").mutable()
     PointerSetter(
-        "XrSystemAnchorPropertiesHTC", "XrSystemBodyTrackingPropertiesFB", "XrSystemBodyTrackingPropertiesHTC", "XrSystemColocationDiscoveryPropertiesMETA", "XrSystemColorSpacePropertiesFB", "XrSystemEnvironmentDepthPropertiesMETA", "XrSystemEyeGazeInteractionPropertiesEXT", "XrSystemEyeTrackingPropertiesFB", "XrSystemFaceTrackingProperties2FB", "XrSystemFaceTrackingPropertiesFB", "XrSystemFacialExpressionPropertiesML", "XrSystemFacialTrackingPropertiesHTC", "XrSystemForceFeedbackCurlPropertiesMNDX", "XrSystemFoveatedRenderingPropertiesVARJO", "XrSystemFoveationEyeTrackedPropertiesMETA", "XrSystemHandTrackingMeshPropertiesMSFT", "XrSystemHandTrackingPropertiesEXT", "XrSystemHeadsetIdPropertiesMETA", "XrSystemKeyboardTrackingPropertiesFB", "XrSystemMarkerTrackingPropertiesVARJO", "XrSystemMarkerUnderstandingPropertiesML", "XrSystemPassthroughColorLutPropertiesMETA", "XrSystemPassthroughProperties2FB", "XrSystemPassthroughPropertiesFB", "XrSystemPlaneDetectionPropertiesEXT", "XrSystemRenderModelPropertiesFB", "XrSystemSpaceWarpPropertiesFB", "XrSystemSpatialEntityGroupSharingPropertiesMETA", "XrSystemSpatialEntityPropertiesFB", "XrSystemSpatialEntitySharingPropertiesMETA", "XrSystemUserPresencePropertiesEXT", "XrSystemVirtualKeyboardPropertiesMETA",
+        "XrSystemAnchorPropertiesHTC", "XrSystemBodyTrackingPropertiesBD", "XrSystemBodyTrackingPropertiesFB", "XrSystemBodyTrackingPropertiesHTC", "XrSystemColocationDiscoveryPropertiesMETA", "XrSystemColorSpacePropertiesFB", "XrSystemEnvironmentDepthPropertiesMETA", "XrSystemEyeGazeInteractionPropertiesEXT", "XrSystemEyeTrackingPropertiesFB", "XrSystemFaceTrackingProperties2FB", "XrSystemFaceTrackingPropertiesFB", "XrSystemFacialExpressionPropertiesML", "XrSystemFacialTrackingPropertiesHTC", "XrSystemForceFeedbackCurlPropertiesMNDX", "XrSystemFoveatedRenderingPropertiesVARJO", "XrSystemFoveationEyeTrackedPropertiesMETA", "XrSystemHandTrackingMeshPropertiesMSFT", "XrSystemHandTrackingPropertiesEXT", "XrSystemHeadsetIdPropertiesMETA", "XrSystemKeyboardTrackingPropertiesFB", "XrSystemMarkerTrackingPropertiesVARJO", "XrSystemMarkerUnderstandingPropertiesML", "XrSystemPassthroughColorLutPropertiesMETA", "XrSystemPassthroughProperties2FB", "XrSystemPassthroughPropertiesFB", "XrSystemPlaneDetectionPropertiesEXT", "XrSystemRenderModelPropertiesFB", "XrSystemSpaceWarpPropertiesFB", "XrSystemSpatialEntityGroupSharingPropertiesMETA", "XrSystemSpatialEntityPropertiesFB", "XrSystemSpatialEntitySharingPropertiesMETA", "XrSystemUserPresencePropertiesEXT", "XrSystemVirtualKeyboardPropertiesMETA",
         prepend = true
     )..nullable..opaque_p("next").mutable()
     XrSystemId("systemId")
@@ -201,7 +201,7 @@ val XrViewConfigurationProperties = struct(Module.OPENXR, "XrViewConfigurationPr
 val XrViewConfigurationView = struct(Module.OPENXR, "XrViewConfigurationView") {
     Expression("#TYPE_VIEW_CONFIGURATION_VIEW")..XrStructureType("type")
     PointerSetter(
-        "XrFoveatedViewConfigurationViewVARJO", "XrViewConfigurationDepthRangeEXT", "XrViewConfigurationViewFovEPIC",
+        "XrFoveatedViewConfigurationViewVARJO", "XrFrameSynthesisConfigViewEXT", "XrViewConfigurationDepthRangeEXT", "XrViewConfigurationViewFovEPIC",
         prepend = true
     )..nullable..opaque_p("next")
     uint32_t("recommendedImageRectWidth")
@@ -503,7 +503,7 @@ val XrSwapchainSubImage = struct(Module.OPENXR, "XrSwapchainSubImage") {
 val XrCompositionLayerProjectionView = struct(Module.OPENXR, "XrCompositionLayerProjectionView") {
     Expression("#TYPE_COMPOSITION_LAYER_PROJECTION_VIEW")..XrStructureType("type")
     PointerSetter(
-        "XrCompositionLayerDepthInfoKHR", "XrCompositionLayerSpaceWarpInfoFB",
+        "XrCompositionLayerDepthInfoKHR", "XrCompositionLayerSpaceWarpInfoFB", "XrFrameSynthesisInfoEXT",
         prepend = true
     )..nullable..opaque_const_p("next")
     XrPosef("pose")

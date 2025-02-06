@@ -123,6 +123,8 @@ public class XrSystemProperties extends Struct<XrSystemProperties> implements Na
     public XrSystemProperties next(@NativeType("void *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrSystemAnchorPropertiesHTC} value to the {@code next} chain. */
     public XrSystemProperties next(XrSystemAnchorPropertiesHTC value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrSystemBodyTrackingPropertiesBD} value to the {@code next} chain. */
+    public XrSystemProperties next(XrSystemBodyTrackingPropertiesBD value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSystemBodyTrackingPropertiesFB} value to the {@code next} chain. */
     public XrSystemProperties next(XrSystemBodyTrackingPropertiesFB value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSystemBodyTrackingPropertiesHTC} value to the {@code next} chain. */
@@ -416,6 +418,8 @@ public class XrSystemProperties extends Struct<XrSystemProperties> implements Na
         public XrSystemProperties.Buffer next(@NativeType("void *") long value) { XrSystemProperties.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrSystemAnchorPropertiesHTC} value to the {@code next} chain. */
         public XrSystemProperties.Buffer next(XrSystemAnchorPropertiesHTC value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrSystemBodyTrackingPropertiesBD} value to the {@code next} chain. */
+        public XrSystemProperties.Buffer next(XrSystemBodyTrackingPropertiesBD value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSystemBodyTrackingPropertiesFB} value to the {@code next} chain. */
         public XrSystemProperties.Buffer next(XrSystemBodyTrackingPropertiesFB value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSystemBodyTrackingPropertiesHTC} value to the {@code next} chain. */

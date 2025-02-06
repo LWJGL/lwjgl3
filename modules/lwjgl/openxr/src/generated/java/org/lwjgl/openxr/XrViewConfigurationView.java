@@ -127,6 +127,8 @@ public class XrViewConfigurationView extends Struct<XrViewConfigurationView> imp
     public XrViewConfigurationView next(@NativeType("void *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrFoveatedViewConfigurationViewVARJO} value to the {@code next} chain. */
     public XrViewConfigurationView next(XrFoveatedViewConfigurationViewVARJO value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrFrameSynthesisConfigViewEXT} value to the {@code next} chain. */
+    public XrViewConfigurationView next(XrFrameSynthesisConfigViewEXT value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrViewConfigurationDepthRangeEXT} value to the {@code next} chain. */
     public XrViewConfigurationView next(XrViewConfigurationDepthRangeEXT value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrViewConfigurationViewFovEPIC} value to the {@code next} chain. */
@@ -400,6 +402,8 @@ public class XrViewConfigurationView extends Struct<XrViewConfigurationView> imp
         public XrViewConfigurationView.Buffer next(@NativeType("void *") long value) { XrViewConfigurationView.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrFoveatedViewConfigurationViewVARJO} value to the {@code next} chain. */
         public XrViewConfigurationView.Buffer next(XrFoveatedViewConfigurationViewVARJO value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrFrameSynthesisConfigViewEXT} value to the {@code next} chain. */
+        public XrViewConfigurationView.Buffer next(XrFrameSynthesisConfigViewEXT value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrViewConfigurationDepthRangeEXT} value to the {@code next} chain. */
         public XrViewConfigurationView.Buffer next(XrViewConfigurationDepthRangeEXT value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrViewConfigurationViewFovEPIC} value to the {@code next} chain. */
