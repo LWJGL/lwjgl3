@@ -1777,9 +1777,6 @@ public class SDLVideo {
     @NativeType("bool")
     public static boolean SDL_GL_MakeCurrent(@NativeType("SDL_Window *") long window, @NativeType("SDL_GLContext") long context) {
         long __functionAddress = Functions.GL_MakeCurrent;
-        if (CHECKS) {
-            check(window);
-        }
         return invokePPZ(window, context, __functionAddress);
     }
 

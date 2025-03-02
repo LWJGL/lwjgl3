@@ -698,7 +698,7 @@ val SDL_video = "SDLVideo".nativeClassSDL("SDL_video") {
     bool(
         "GL_MakeCurrent",
 
-        SDL_Window.p("window"),
+        nullable..SDL_Window.p("window"),
         nullable..SDL_GLContext("context")
     )
 
