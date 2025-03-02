@@ -35,7 +35,11 @@ val SDL_stdinc = "SDLStdinc".nativeClassSDL("SDL_stdinc") {
     void(
         "free",
 
-        Unsafe..nullable..void.p("mem")
+        MultiType(
+            PointerMapping.DATA_INT,
+            PointerMapping.DATA_LONG,
+            PointerMapping.DATA_POINTER
+        )..Unsafe..nullable..void.p("mem")
     )
 
     void(

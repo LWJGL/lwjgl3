@@ -134,6 +134,21 @@ public class SDLStdinc {
         nSDL_free(memAddressSafe(mem));
     }
 
+    /** {@code void SDL_free(void * mem)} */
+    public static void SDL_free(@NativeType("void *") @Nullable IntBuffer mem) {
+        nSDL_free(memAddressSafe(mem));
+    }
+
+    /** {@code void SDL_free(void * mem)} */
+    public static void SDL_free(@NativeType("void *") @Nullable LongBuffer mem) {
+        nSDL_free(memAddressSafe(mem));
+    }
+
+    /** {@code void SDL_free(void * mem)} */
+    public static void SDL_free(@NativeType("void *") @Nullable PointerBuffer mem) {
+        nSDL_free(memAddressSafe(mem));
+    }
+
     // --- [ SDL_GetOriginalMemoryFunctions ] ---
 
     /** {@code void SDL_GetOriginalMemoryFunctions(SDL_malloc_func * malloc_func, SDL_calloc_func * calloc_func, SDL_realloc_func * realloc_func, SDL_free_func * free_func)} */
