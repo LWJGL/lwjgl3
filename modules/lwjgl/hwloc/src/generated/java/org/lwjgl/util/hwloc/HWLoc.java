@@ -175,6 +175,7 @@ public class HWLoc {
             topology_get_allowed_nodeset          = apiGetFunctionAddress(HWLOC, "hwloc_topology_get_allowed_nodeset"),
             memattr_get_by_name                   = apiGetFunctionAddress(HWLOC, "hwloc_memattr_get_by_name"),
             get_local_numanode_objs               = apiGetFunctionAddress(HWLOC, "hwloc_get_local_numanode_objs"),
+            topology_get_default_nodeset          = apiGetFunctionAddress(HWLOC, "hwloc_topology_get_default_nodeset"),
             memattr_get_value                     = apiGetFunctionAddress(HWLOC, "hwloc_memattr_get_value"),
             memattr_get_best_target               = apiGetFunctionAddress(HWLOC, "hwloc_memattr_get_best_target"),
             memattr_get_best_initiator            = apiGetFunctionAddress(HWLOC, "hwloc_memattr_get_best_initiator"),
@@ -2534,6 +2535,18 @@ public class HWLoc {
             check(nodes, nr.get(nr.position()));
         }
         return nhwloc_get_local_numanode_objs(topology, location.address(), memAddress(nr), memAddress(nodes), flags);
+    }
+
+    // --- [ hwloc_topology_get_default_nodeset ] ---
+
+    /** {@code int hwloc_topology_get_default_nodeset(hwloc_topology_t topology, hwloc_nodeset_t nodeset, unsigned long flags)} */
+    public static int hwloc_topology_get_default_nodeset(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_nodeset_t") long nodeset, @NativeType("unsigned long") long flags) {
+        long __functionAddress = Functions.topology_get_default_nodeset;
+        if (CHECKS) {
+            check(topology);
+            check(nodeset);
+        }
+        return invokePPNI(topology, nodeset, flags, __functionAddress);
     }
 
     // --- [ hwloc_memattr_get_value ] ---

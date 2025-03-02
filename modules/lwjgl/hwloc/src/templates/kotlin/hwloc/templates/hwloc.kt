@@ -1968,6 +1968,14 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
     )
 
     int(
+        "topology_get_default_nodeset",
+
+        hwloc_topology_t("topology"),
+        hwloc_nodeset_t("nodeset"),
+        unsigned_long("flags")
+    )
+
+    int(
         "memattr_get_value",
 
         hwloc_topology_t("topology"),
