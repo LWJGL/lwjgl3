@@ -27,7 +27,7 @@ public class GLFWNativeEGL {
             GetEGLDisplay = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetEGLDisplay"),
             GetEGLContext = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetEGLContext"),
             GetEGLSurface = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetEGLSurface"),
-            GetEGLConfig  = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetEGLConfig");
+            GetEGLConfig  = apiGetFunctionAddressOptional(GLFW.getLibrary(), "glfwGetEGLConfig");
 
     }
 
@@ -75,6 +75,7 @@ public class GLFWNativeEGL {
     public static long glfwGetEGLConfig(@NativeType("GLFWwindow *") long window) {
         long __functionAddress = Functions.GetEGLConfig;
         if (CHECKS) {
+            check(__functionAddress);
             check(window);
         }
         return invokePP(window, __functionAddress);

@@ -27,7 +27,7 @@ val GLFWNativeWin32 = "GLFWNativeWin32".nativeClass(Module.GLFW, nativeSubPath =
         GLFWwindow.p("window")
     )
 
-    GLFWwindow.p(
+    IgnoreMissing..GLFWwindow.p(
         "AttachWin32Window",
 
         HWND("handle"),

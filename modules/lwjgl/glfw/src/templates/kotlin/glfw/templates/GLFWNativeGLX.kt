@@ -26,7 +26,7 @@ val GLFWNativeGLX = "GLFWNativeGLX".nativeClass(Module.GLFW, nativeSubPath = "li
         GLFWwindow.p("window")
     )
 
-    GLXWindow(
+    IgnoreMissing..GLXWindow(
         "GetGLXFBConfig",
 
         GLFWwindow.p("window")

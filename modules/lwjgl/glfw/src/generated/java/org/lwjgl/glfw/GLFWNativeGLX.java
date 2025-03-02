@@ -26,7 +26,7 @@ public class GLFWNativeGLX {
         public static final long
             GetGLXContext  = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetGLXContext"),
             GetGLXWindow   = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetGLXWindow"),
-            GetGLXFBConfig = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetGLXFBConfig");
+            GetGLXFBConfig = apiGetFunctionAddressOptional(GLFW.getLibrary(), "glfwGetGLXFBConfig");
 
     }
 
@@ -65,6 +65,7 @@ public class GLFWNativeGLX {
     public static long glfwGetGLXFBConfig(@NativeType("GLFWwindow *") long window) {
         long __functionAddress = Functions.GetGLXFBConfig;
         if (CHECKS) {
+            check(__functionAddress);
             check(window);
         }
         return invokePP(window, __functionAddress);

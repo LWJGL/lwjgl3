@@ -26,7 +26,7 @@ public class GLFWNativeWin32 {
             GetWin32Adapter   = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetWin32Adapter"),
             GetWin32Monitor   = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetWin32Monitor"),
             GetWin32Window    = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetWin32Window"),
-            AttachWin32Window = apiGetFunctionAddress(GLFW.getLibrary(), "glfwAttachWin32Window");
+            AttachWin32Window = apiGetFunctionAddressOptional(GLFW.getLibrary(), "glfwAttachWin32Window");
 
     }
 
@@ -89,6 +89,7 @@ public class GLFWNativeWin32 {
     public static long glfwAttachWin32Window(@NativeType("HWND") long handle, @NativeType("GLFWwindow *") long share) {
         long __functionAddress = Functions.AttachWin32Window;
         if (CHECKS) {
+            check(__functionAddress);
             check(handle);
         }
         return invokePPP(handle, share, __functionAddress);

@@ -31,7 +31,7 @@ val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(Module.GLFW, nativeSubPath = "eg
         GLFWwindow.p("window")
     )
 
-    EGLConfig(
+    IgnoreMissing..EGLConfig(
         "GetEGLConfig",
 
         GLFWwindow.p("window")
