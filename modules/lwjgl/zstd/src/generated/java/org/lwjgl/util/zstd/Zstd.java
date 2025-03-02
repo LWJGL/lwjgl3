@@ -21,7 +21,7 @@ public class Zstd {
     public static final int
         ZSTD_VERSION_MAJOR   = 1,
         ZSTD_VERSION_MINOR   = 5,
-        ZSTD_VERSION_RELEASE = 6;
+        ZSTD_VERSION_RELEASE = 7;
 
     public static final int ZSTD_VERSION_NUMBER = (ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE);
 
@@ -94,7 +94,8 @@ public class Zstd {
         ZSTD_c_experimentalParam16        = 1013,
         ZSTD_c_experimentalParam17        = 1014,
         ZSTD_c_experimentalParam18        = 1015,
-        ZSTD_c_experimentalParam19        = 1016;
+        ZSTD_c_experimentalParam19        = 1016,
+        ZSTD_c_experimentalParam20        = 1017;
 
     public static final int
         ZSTD_reset_session_only           = 1,
@@ -189,24 +190,30 @@ public class Zstd {
 
     // --- [ ZSTD_isError ] ---
 
-    /** {@code unsigned int ZSTD_isError(size_t code)} */
-    public static native int nZSTD_isError(long code);
+    /** {@code unsigned int ZSTD_isError(size_t result)} */
+    public static native int nZSTD_isError(long result);
 
-    /** {@code unsigned int ZSTD_isError(size_t code)} */
+    /** {@code unsigned int ZSTD_isError(size_t result)} */
     @NativeType("unsigned int")
-    public static boolean ZSTD_isError(@NativeType("size_t") long code) {
-        return nZSTD_isError(code) != 0;
+    public static boolean ZSTD_isError(@NativeType("size_t") long result) {
+        return nZSTD_isError(result) != 0;
     }
+
+    // --- [ ZSTD_getErrorCode ] ---
+
+    /** {@code ZSTD_ErrorCode ZSTD_getErrorCode(size_t functionResult)} */
+    @NativeType("ZSTD_ErrorCode")
+    public static native int ZSTD_getErrorCode(@NativeType("size_t") long functionResult);
 
     // --- [ ZSTD_getErrorName ] ---
 
-    /** {@code char const * ZSTD_getErrorName(size_t code)} */
-    public static native long nZSTD_getErrorName(long code);
+    /** {@code char const * ZSTD_getErrorName(size_t result)} */
+    public static native long nZSTD_getErrorName(long result);
 
-    /** {@code char const * ZSTD_getErrorName(size_t code)} */
+    /** {@code char const * ZSTD_getErrorName(size_t result)} */
     @NativeType("char const *")
-    public static String ZSTD_getErrorName(@NativeType("size_t") long code) {
-        long __result = nZSTD_getErrorName(code);
+    public static String ZSTD_getErrorName(@NativeType("size_t") long result) {
+        long __result = nZSTD_getErrorName(result);
         return memASCII(__result);
     }
 

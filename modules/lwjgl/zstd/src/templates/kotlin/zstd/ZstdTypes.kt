@@ -25,7 +25,7 @@ val ZSTD_dictAttachPref_e = "ZSTD_dictAttachPref_e".enumType
 val ZSTD_dictContentType_e = "ZSTD_dictContentType_e".enumType
 val ZSTD_dictLoadMethod_e = "ZSTD_dictLoadMethod_e".enumType
 val ZSTD_format_e = "ZSTD_format_e".enumType
-val ZSTD_frameType_e = "ZSTD_frameType_e".enumType
+val ZSTD_FrameType_e = "ZSTD_FrameType_e".enumType
 val ZSTD_nextInputType_e = "ZSTD_nextInputType_e".enumType
 val ZSTD_strategy = "ZSTD_strategy".enumType
 
@@ -114,11 +114,11 @@ val ZSTD_frameProgression = struct(Module.ZSTD, "ZSTDFrameProgression", nativeNa
     unsigned_int("nbActiveWorkers")
 }
 
-val ZSTD_frameHeader = struct(Module.ZSTD, "ZSTDFrameHeader", nativeName = "ZSTD_frameHeader", mutable = false) {
+val ZSTD_FrameHeader = struct(Module.ZSTD, "ZSTDFrameHeader", nativeName = "ZSTD_FrameHeader", mutable = false) {
     unsigned_long_long("frameContentSize")
     unsigned_long_long("windowSize")
     unsigned_int("blockSizeMax")
-    ZSTD_frameType_e("frameType")
+    ZSTD_FrameType_e("frameType")
     unsigned_int("headerSize")
     unsigned_int("dictID")
     unsigned_int("checksumFlag")

@@ -129,6 +129,8 @@ public class ZstdX {
 
     public static final int ZSTD_SRCSIZEHINT_MAX = Integer.MAX_VALUE;
 
+    public static final int ZSTD_BLOCKSPLITTER_LEVEL_MAX = 6;
+
     public static final int
         ZSTD_c_rsyncable                 = ZSTD_c_experimentalParam1,
         ZSTD_c_format                    = ZSTD_c_experimentalParam2,
@@ -141,13 +143,14 @@ public class ZstdX {
         ZSTD_c_stableOutBuffer           = ZSTD_c_experimentalParam10,
         ZSTD_c_blockDelimiters           = ZSTD_c_experimentalParam11,
         ZSTD_c_validateSequences         = ZSTD_c_experimentalParam12,
-        ZSTD_c_useBlockSplitter          = ZSTD_c_experimentalParam13,
+        ZSTD_c_blockSplitterLevel        = ZSTD_c_experimentalParam20,
+        ZSTD_c_splitAfterSequences       = ZSTD_c_experimentalParam13,
         ZSTD_c_useRowMatchFinder         = ZSTD_c_experimentalParam14,
         ZSTD_c_deterministicRefPrefix    = ZSTD_c_experimentalParam15,
         ZSTD_c_prefetchCDictTables       = ZSTD_c_experimentalParam16,
         ZSTD_c_enableSeqProducerFallback = ZSTD_c_experimentalParam17,
         ZSTD_c_maxBlockSize              = ZSTD_c_experimentalParam18,
-        ZSTD_c_searchForExternalRepcodes = ZSTD_c_experimentalParam19;
+        ZSTD_c_repcodeResolution         = ZSTD_c_experimentalParam19;
 
     public static final int
         ZSTD_d_format                 = ZSTD_d_experimentalParam1,
@@ -212,23 +215,23 @@ public class ZstdX {
 
     // --- [ ZSTD_getFrameHeader ] ---
 
-    /** {@code size_t ZSTD_getFrameHeader(ZSTD_frameHeader * zfhPtr, void const * src, size_t srcSize)} */
+    /** {@code size_t ZSTD_getFrameHeader(ZSTD_FrameHeader * zfhPtr, void const * src, size_t srcSize)} */
     public static native long nZSTD_getFrameHeader(long zfhPtr, long src, long srcSize);
 
-    /** {@code size_t ZSTD_getFrameHeader(ZSTD_frameHeader * zfhPtr, void const * src, size_t srcSize)} */
+    /** {@code size_t ZSTD_getFrameHeader(ZSTD_FrameHeader * zfhPtr, void const * src, size_t srcSize)} */
     @NativeType("size_t")
-    public static long ZSTD_getFrameHeader(@NativeType("ZSTD_frameHeader *") ZSTDFrameHeader zfhPtr, @NativeType("void const *") ByteBuffer src) {
+    public static long ZSTD_getFrameHeader(@NativeType("ZSTD_FrameHeader *") ZSTDFrameHeader zfhPtr, @NativeType("void const *") ByteBuffer src) {
         return nZSTD_getFrameHeader(zfhPtr.address(), memAddress(src), src.remaining());
     }
 
     // --- [ ZSTD_getFrameHeader_advanced ] ---
 
-    /** {@code size_t ZSTD_getFrameHeader_advanced(ZSTD_frameHeader * zfhPtr, void const * src, size_t srcSize, ZSTD_format_e format)} */
+    /** {@code size_t ZSTD_getFrameHeader_advanced(ZSTD_FrameHeader * zfhPtr, void const * src, size_t srcSize, ZSTD_format_e format)} */
     public static native long nZSTD_getFrameHeader_advanced(long zfhPtr, long src, long srcSize, int format);
 
-    /** {@code size_t ZSTD_getFrameHeader_advanced(ZSTD_frameHeader * zfhPtr, void const * src, size_t srcSize, ZSTD_format_e format)} */
+    /** {@code size_t ZSTD_getFrameHeader_advanced(ZSTD_FrameHeader * zfhPtr, void const * src, size_t srcSize, ZSTD_format_e format)} */
     @NativeType("size_t")
-    public static long ZSTD_getFrameHeader_advanced(@NativeType("ZSTD_frameHeader *") ZSTDFrameHeader zfhPtr, @NativeType("void const *") ByteBuffer src, @NativeType("ZSTD_format_e") int format) {
+    public static long ZSTD_getFrameHeader_advanced(@NativeType("ZSTD_FrameHeader *") ZSTDFrameHeader zfhPtr, @NativeType("void const *") ByteBuffer src, @NativeType("ZSTD_format_e") int format) {
         return nZSTD_getFrameHeader_advanced(zfhPtr.address(), memAddress(src), src.remaining(), format);
     }
 
@@ -262,16 +265,30 @@ public class ZstdX {
 
     // --- [ ZSTD_compressSequences ] ---
 
-    /** {@code size_t ZSTD_compressSequences(ZSTD_CCtx * cctx, void * dst, size_t dstSize, ZSTD_Sequence const * inSeqs, size_t inSeqsSize, void const * src, size_t srcSize)} */
-    public static native long nZSTD_compressSequences(long cctx, long dst, long dstSize, long inSeqs, long inSeqsSize, long src, long srcSize);
+    /** {@code size_t ZSTD_compressSequences(ZSTD_CCtx * cctx, void * dst, size_t dstCapacity, ZSTD_Sequence const * inSeqs, size_t inSeqsSize, void const * src, size_t srcSize)} */
+    public static native long nZSTD_compressSequences(long cctx, long dst, long dstCapacity, long inSeqs, long inSeqsSize, long src, long srcSize);
 
-    /** {@code size_t ZSTD_compressSequences(ZSTD_CCtx * cctx, void * dst, size_t dstSize, ZSTD_Sequence const * inSeqs, size_t inSeqsSize, void const * src, size_t srcSize)} */
+    /** {@code size_t ZSTD_compressSequences(ZSTD_CCtx * cctx, void * dst, size_t dstCapacity, ZSTD_Sequence const * inSeqs, size_t inSeqsSize, void const * src, size_t srcSize)} */
     @NativeType("size_t")
     public static long ZSTD_compressSequences(@NativeType("ZSTD_CCtx *") long cctx, @NativeType("void *") ByteBuffer dst, @NativeType("ZSTD_Sequence const *") ZSTDSequence.Buffer inSeqs, @NativeType("void const *") ByteBuffer src) {
         if (CHECKS) {
             check(cctx);
         }
         return nZSTD_compressSequences(cctx, memAddress(dst), dst.remaining(), inSeqs.address(), inSeqs.remaining(), memAddress(src), src.remaining());
+    }
+
+    // --- [ ZSTD_compressSequencesAndLiterals ] ---
+
+    /** {@code size_t ZSTD_compressSequencesAndLiterals(ZSTD_CCtx * cctx, void * dst, size_t dstCapacity, ZSTD_Sequence const * inSeqs, size_t nbSequences, void const * literals, size_t litSize, size_t litBufCapacity, size_t decompressedSize)} */
+    public static native long nZSTD_compressSequencesAndLiterals(long cctx, long dst, long dstCapacity, long inSeqs, long nbSequences, long literals, long litSize, long litBufCapacity, long decompressedSize);
+
+    /** {@code size_t ZSTD_compressSequencesAndLiterals(ZSTD_CCtx * cctx, void * dst, size_t dstCapacity, ZSTD_Sequence const * inSeqs, size_t nbSequences, void const * literals, size_t litSize, size_t litBufCapacity, size_t decompressedSize)} */
+    @NativeType("size_t")
+    public static long ZSTD_compressSequencesAndLiterals(@NativeType("ZSTD_CCtx *") long cctx, @NativeType("void *") ByteBuffer dst, @NativeType("ZSTD_Sequence const *") ZSTDSequence.Buffer inSeqs, @NativeType("void const *") ByteBuffer literals, @NativeType("size_t") long litSize, @NativeType("size_t") long decompressedSize) {
+        if (CHECKS) {
+            check(cctx);
+        }
+        return nZSTD_compressSequencesAndLiterals(cctx, memAddress(dst), dst.remaining(), inSeqs.address(), inSeqs.remaining(), memAddress(literals), litSize, literals.remaining(), decompressedSize);
     }
 
     // --- [ ZSTD_writeSkippableFrame ] ---

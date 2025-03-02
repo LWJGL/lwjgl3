@@ -33,6 +33,7 @@ ENABLE_WARNINGS()""")*/
         "error_tableLog_tooLarge".."44",
         "error_maxSymbolValue_tooLarge".."46",
         "error_maxSymbolValue_tooSmall".."48",
+        "error_cannotProduce_uncompressedBlock".."49",
         "error_stabilityCondition_notRespected".."50",
         "error_stage_wrong".."60",
         "error_init_missing".."62",
@@ -50,12 +51,6 @@ ENABLE_WARNINGS()""")*/
         "error_srcBuffer_wrong".."105",
         "error_sequenceProducer_failed".."106",
         "error_externalSequences_invalid".."107"
-    )
-
-    ZSTD_ErrorCode(
-        "getErrorCode",
-
-        size_t("functionResult")
     )
 
     Nonnull..charASCII.const.p(

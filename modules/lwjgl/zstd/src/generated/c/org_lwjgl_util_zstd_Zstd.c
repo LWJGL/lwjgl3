@@ -52,14 +52,19 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zstd_ZSTD_1compressBound(JNIEnv
     return (jlong)ZSTD_compressBound((size_t)srcSize);
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_zstd_Zstd_nZSTD_1isError(JNIEnv *__env, jclass clazz, jlong code) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_zstd_Zstd_nZSTD_1isError(JNIEnv *__env, jclass clazz, jlong result) {
     UNUSED_PARAMS(__env, clazz)
-    return (jint)ZSTD_isError((size_t)code);
+    return (jint)ZSTD_isError((size_t)result);
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zstd_nZSTD_1getErrorName(JNIEnv *__env, jclass clazz, jlong code) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_zstd_Zstd_ZSTD_1getErrorCode(JNIEnv *__env, jclass clazz, jlong functionResult) {
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)(uintptr_t)ZSTD_getErrorName((size_t)code);
+    return (jint)ZSTD_getErrorCode((size_t)functionResult);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zstd_nZSTD_1getErrorName(JNIEnv *__env, jclass clazz, jlong result) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)ZSTD_getErrorName((size_t)result);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_zstd_Zstd_ZSTD_1minCLevel(JNIEnv *__env, jclass clazz) {

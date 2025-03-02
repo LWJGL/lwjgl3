@@ -24,10 +24,21 @@
 #ifndef ZSTD_DEPS_COMMON
 #define ZSTD_DEPS_COMMON
 
+/* Even though we use qsort_r only for the dictionary builder, the macro
+ * _GNU_SOURCE has to be declared *before* the inclusion of any standard
+ * header and the script 'combine.sh' combines the whole zstd source code
+ * in a single file.
+ */
+#if defined(__linux) || defined(__linux__) || defined(linux) || defined(__gnu_linux__) || \
+    defined(__CYGWIN__) || defined(__MSYS__)
+#if !defined(_GNU_SOURCE) && !defined(__ANDROID__) /* NDK doesn't ship qsort_r(). */
+#define _GNU_SOURCE
+#endif
+#endif
+
 #include <limits.h>
 #include <stddef.h>
 #include <string.h>
-#include "lwjgl_malloc.h"
 
 #if defined(__GNUC__) && __GNUC__ >= 4
 # define ZSTD_memcpy(d,s,l) __builtin_memcpy((d),(s),(l))
@@ -52,9 +63,9 @@
 
 #include <stdlib.h>
 
-#define ZSTD_malloc(s) org_lwjgl_malloc(s)
-#define ZSTD_calloc(n,s) org_lwjgl_calloc((n), (s))
-#define ZSTD_free(p) org_lwjgl_free((p))
+#define ZSTD_malloc(s) malloc(s)
+#define ZSTD_calloc(n,s) calloc((n), (s))
+#define ZSTD_free(p) free((p))
 
 #endif /* ZSTD_DEPS_MALLOC */
 #endif /* ZSTD_DEPS_NEED_MALLOC */

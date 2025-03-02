@@ -32,6 +32,7 @@ public class ZstdErrors {
         ZSTD_error_tableLog_tooLarge                 = 44,
         ZSTD_error_maxSymbolValue_tooLarge           = 46,
         ZSTD_error_maxSymbolValue_tooSmall           = 48,
+        ZSTD_error_cannotProduce_uncompressedBlock   = 49,
         ZSTD_error_stabilityCondition_notRespected   = 50,
         ZSTD_error_stage_wrong                       = 60,
         ZSTD_error_init_missing                      = 62,
@@ -52,12 +53,6 @@ public class ZstdErrors {
     protected ZstdErrors() {
         throw new UnsupportedOperationException();
     }
-
-    // --- [ ZSTD_getErrorCode ] ---
-
-    /** {@code ZSTD_ErrorCode ZSTD_getErrorCode(size_t functionResult)} */
-    @NativeType("ZSTD_ErrorCode")
-    public static native int ZSTD_getErrorCode(@NativeType("size_t") long functionResult);
 
     // --- [ ZSTD_getErrorString ] ---
 

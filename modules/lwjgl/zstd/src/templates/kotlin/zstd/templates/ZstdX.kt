@@ -107,6 +107,8 @@ ENABLE_WARNINGS()""")
     IntConstant("SRCSIZEHINT_MIN".."0")
     IntConstant("SRCSIZEHINT_MAX".."Integer.MAX_VALUE")
 
+    IntConstant("BLOCKSPLITTER_LEVEL_MAX".."6")
+
     IntConstant(
         "c_rsyncable".."ZSTD_c_experimentalParam1",
         "c_format".."ZSTD_c_experimentalParam2",
@@ -119,13 +121,14 @@ ENABLE_WARNINGS()""")
         "c_stableOutBuffer".."ZSTD_c_experimentalParam10",
         "c_blockDelimiters".."ZSTD_c_experimentalParam11",
         "c_validateSequences".."ZSTD_c_experimentalParam12",
-        "c_useBlockSplitter".."ZSTD_c_experimentalParam13",
+        "c_blockSplitterLevel".."ZSTD_c_experimentalParam20",
+        "c_splitAfterSequences".."ZSTD_c_experimentalParam13",
         "c_useRowMatchFinder".."ZSTD_c_experimentalParam14",
         "c_deterministicRefPrefix".."ZSTD_c_experimentalParam15",
         "c_prefetchCDictTables".."ZSTD_c_experimentalParam16",
         "c_enableSeqProducerFallback".."ZSTD_c_experimentalParam17",
         "c_maxBlockSize".."ZSTD_c_experimentalParam18",
-        "c_searchForExternalRepcodes".."ZSTD_c_experimentalParam19"
+        "c_repcodeResolution".."ZSTD_c_experimentalParam19"
     )
 
     IntConstant(
@@ -173,7 +176,7 @@ ENABLE_WARNINGS()""")
     size_t(
         "getFrameHeader",
 
-        ZSTD_frameHeader.p("zfhPtr"),
+        ZSTD_FrameHeader.p("zfhPtr"),
         void.const.p("src"),
         AutoSize("src")..size_t("srcSize")
     )
@@ -181,7 +184,7 @@ ENABLE_WARNINGS()""")
     size_t(
         "getFrameHeader_advanced",
 
-        ZSTD_frameHeader.p("zfhPtr"),
+        ZSTD_FrameHeader.p("zfhPtr"),
         void.const.p("src"),
         AutoSize("src")..size_t("srcSize"),
         ZSTD_format_e("format")
@@ -237,11 +240,25 @@ ENABLE_WARNINGS()""")
 
         ZSTD_CCtx.p("cctx"),
         void.p("dst"),
-        AutoSize("dst")..size_t("dstSize"),
+        AutoSize("dst")..size_t("dstCapacity"),
         ZSTD_Sequence.const.p("inSeqs"),
         AutoSize("inSeqs")..size_t("inSeqsSize"),
         void.const.p("src"),
         AutoSize("src")..size_t("srcSize")
+    )
+
+    size_t(
+        "compressSequencesAndLiterals",
+
+        ZSTD_CCtx.p("cctx"),
+        void.p("dst"),
+        AutoSize("dst")..size_t("dstCapacity"),
+        ZSTD_Sequence.const.p("inSeqs"),
+        AutoSize("inSeqs")..size_t("nbSequences"),
+        void.const.p("literals"),
+        size_t("litSize"),
+        AutoSize("literals")..size_t("litBufCapacity"),
+        size_t("decompressedSize")
     )
 
     size_t(

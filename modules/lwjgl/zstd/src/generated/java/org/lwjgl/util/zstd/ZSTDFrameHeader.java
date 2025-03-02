@@ -17,11 +17,11 @@ import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * <pre>{@code
- * struct ZSTD_frameHeader {
+ * struct ZSTD_FrameHeader {
  *     unsigned long long frameContentSize;
  *     unsigned long long windowSize;
  *     unsigned int blockSizeMax;
- *     ZSTD_frameType_e frameType;
+ *     ZSTD_FrameType_e frameType;
  *     unsigned int headerSize;
  *     unsigned int dictID;
  *     unsigned int checksumFlag;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned _reserved2;
  * }}</pre>
  */
-@NativeType("struct ZSTD_frameHeader")
+@NativeType("struct ZSTD_FrameHeader")
 public class ZSTDFrameHeader extends Struct<ZSTDFrameHeader> implements NativeResource {
 
     /** The struct size in bytes. */
@@ -109,7 +109,7 @@ public class ZSTDFrameHeader extends Struct<ZSTDFrameHeader> implements NativeRe
     @NativeType("unsigned int")
     public int blockSizeMax() { return nblockSizeMax(address()); }
     /** @return the value of the {@code frameType} field. */
-    @NativeType("ZSTD_frameType_e")
+    @NativeType("ZSTD_FrameType_e")
     public int frameType() { return nframeType(address()); }
     /** @return the value of the {@code headerSize} field. */
     @NativeType("unsigned int")
@@ -321,7 +321,7 @@ public class ZSTDFrameHeader extends Struct<ZSTDFrameHeader> implements NativeRe
         @NativeType("unsigned int")
         public int blockSizeMax() { return ZSTDFrameHeader.nblockSizeMax(address()); }
         /** @return the value of the {@code frameType} field. */
-        @NativeType("ZSTD_frameType_e")
+        @NativeType("ZSTD_FrameType_e")
         public int frameType() { return ZSTDFrameHeader.nframeType(address()); }
         /** @return the value of the {@code headerSize} field. */
         @NativeType("unsigned int")

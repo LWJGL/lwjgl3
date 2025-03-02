@@ -17,7 +17,7 @@ ENABLE_WARNINGS()""")
     IntConstant(
         "VERSION_MAJOR".."1",
         "VERSION_MINOR".."5",
-        "VERSION_RELEASE".."6"
+        "VERSION_RELEASE".."7"
     )
 
     IntConstant("VERSION_NUMBER".."(ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE)")
@@ -93,7 +93,8 @@ ENABLE_WARNINGS()""")
         "c_experimentalParam16".enum,
         "c_experimentalParam17".enum,
         "c_experimentalParam18".enum,
-        "c_experimentalParam19".enum
+        "c_experimentalParam19".enum,
+        "c_experimentalParam20".enum
     )
 
     EnumConstant(
@@ -176,13 +177,19 @@ ENABLE_WARNINGS()""")
     unsigned_intb(
         "isError",
 
-        size_t("code")
+        size_t("result")
+    )
+
+    ZSTD_ErrorCode(
+        "getErrorCode",
+
+        size_t("functionResult")
     )
 
     Nonnull..charASCII.const.p(
         "getErrorName",
 
-        size_t("code")
+        size_t("result")
     )
 
     int("minCLevel", void())
