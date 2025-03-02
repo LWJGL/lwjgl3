@@ -938,6 +938,15 @@ val hb_ot = "OpenType".nativeClass(Module.HARFBUZZ, prefix = "HB_OT", prefixMeth
         hb_set_t.p("lookup_indexes")
     )
 
+    unsigned_int(
+        "shape_plan_get_feature_tags",
+
+        hb_shape_plan_t.p("shape_plan"),
+        unsigned_int("start_offset"),
+        AutoSize("tags")..Check(1)..unsigned_int.p("tag_count"),
+        hb_tag_t.p("tags")
+    )
+
     // hb-ot-var.h
 
     IntConstant(

@@ -301,7 +301,7 @@ public class HarfBuzz {
             ft_face_create_from_file_or_fail              = apiGetFunctionAddressOptional(HARFBUZZ, "hb_ft_face_create_from_file_or_fail"),
             ft_font_create                                = apiGetFunctionAddressOptional(HARFBUZZ, "hb_ft_font_create"),
             ft_font_create_referenced                     = apiGetFunctionAddressOptional(HARFBUZZ, "hb_ft_font_create_referenced"),
-            ft_font_get_face                              = apiGetFunctionAddressOptional(HARFBUZZ, "hb_ft_font_get_face"),
+            ft_font_get_ft_face                           = apiGetFunctionAddressOptional(HARFBUZZ, "hb_ft_font_get_ft_face"),
             ft_font_lock_face                             = apiGetFunctionAddressOptional(HARFBUZZ, "hb_ft_font_lock_face"),
             ft_font_unlock_face                           = apiGetFunctionAddressOptional(HARFBUZZ, "hb_ft_font_unlock_face"),
             ft_font_set_load_flags                        = apiGetFunctionAddressOptional(HARFBUZZ, "hb_ft_font_set_load_flags"),
@@ -859,11 +859,11 @@ public class HarfBuzz {
 
     public static final int HB_VERSION_MAJOR = 10;
 
-    public static final int HB_VERSION_MINOR = 2;
+    public static final int HB_VERSION_MINOR = 4;
 
     public static final int HB_VERSION_MICRO = 0;
 
-    public static final String HB_VERSION_STRING = "10.2.0";
+    public static final String HB_VERSION_STRING = "10.4.0";
 
     protected HarfBuzz() {
         throw new UnsupportedOperationException();
@@ -4599,12 +4599,12 @@ public class HarfBuzz {
         return invokePP(ft_face, __functionAddress);
     }
 
-    // --- [ hb_ft_font_get_face ] ---
+    // --- [ hb_ft_font_get_ft_face ] ---
 
-    /** {@code FT_Face hb_ft_font_get_face(hb_font_t * font)} */
+    /** {@code FT_Face hb_ft_font_get_ft_face(hb_font_t * font)} */
     @NativeType("FT_Face")
-    public static long hb_ft_font_get_face(@NativeType("hb_font_t *") long font) {
-        long __functionAddress = Functions.ft_font_get_face;
+    public static long hb_ft_font_get_ft_face(@NativeType("hb_font_t *") long font) {
+        long __functionAddress = Functions.ft_font_get_ft_face;
         if (CHECKS) {
             check(__functionAddress);
             check(font);

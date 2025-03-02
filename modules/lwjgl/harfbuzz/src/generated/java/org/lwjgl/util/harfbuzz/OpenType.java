@@ -111,6 +111,7 @@ public class OpenType {
             name_get_utf32                                = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_name_get_utf32"),
             shape_glyphs_closure                          = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_shape_glyphs_closure"),
             shape_plan_collect_lookups                    = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_shape_plan_collect_lookups"),
+            shape_plan_get_feature_tags                   = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_shape_plan_get_feature_tags"),
             var_has_data                                  = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_var_has_data"),
             var_get_axis_count                            = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_var_get_axis_count"),
             var_get_axis_infos                            = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_var_get_axis_infos"),
@@ -1652,6 +1653,27 @@ public class OpenType {
             check(lookup_indexes);
         }
         invokePPV(shape_plan, table_tag, lookup_indexes, __functionAddress);
+    }
+
+    // --- [ hb_ot_shape_plan_get_feature_tags ] ---
+
+    /** {@code unsigned int hb_ot_shape_plan_get_feature_tags(hb_shape_plan_t * shape_plan, unsigned int start_offset, unsigned int * tag_count, hb_tag_t * tags)} */
+    public static int nhb_ot_shape_plan_get_feature_tags(long shape_plan, int start_offset, long tag_count, long tags) {
+        long __functionAddress = Functions.shape_plan_get_feature_tags;
+        if (CHECKS) {
+            check(shape_plan);
+        }
+        return invokePPPI(shape_plan, start_offset, tag_count, tags, __functionAddress);
+    }
+
+    /** {@code unsigned int hb_ot_shape_plan_get_feature_tags(hb_shape_plan_t * shape_plan, unsigned int start_offset, unsigned int * tag_count, hb_tag_t * tags)} */
+    @NativeType("unsigned int")
+    public static int hb_ot_shape_plan_get_feature_tags(@NativeType("hb_shape_plan_t *") long shape_plan, @NativeType("unsigned int") int start_offset, @NativeType("unsigned int *") IntBuffer tag_count, @NativeType("hb_tag_t *") IntBuffer tags) {
+        if (CHECKS) {
+            check(tag_count, 1);
+            check(tags, tag_count.get(tag_count.position()));
+        }
+        return nhb_ot_shape_plan_get_feature_tags(shape_plan, start_offset, memAddress(tag_count), memAddress(tags));
     }
 
     // --- [ hb_ot_var_has_data ] ---

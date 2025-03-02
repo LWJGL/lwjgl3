@@ -2274,7 +2274,7 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     )
 
     IgnoreMissing..FT_Face(
-        "ft_font_get_face",
+        "ft_font_get_ft_face",
 
         hb_font_t.p("font")
     )
@@ -3523,10 +3523,10 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     // hb-version.h
 
     IntConstant("VERSION_MAJOR".."10")
-    IntConstant("VERSION_MINOR".."2")
+    IntConstant("VERSION_MINOR".."4")
     IntConstant("VERSION_MICRO".."0")
 
-    StringConstant("VERSION_STRING".."10.2.0")
+    StringConstant("VERSION_STRING".."10.4.0")
 
     customMethod("""
     public static boolean HB_VERSION_ATLEAST(int major, int minor, int micro) {
