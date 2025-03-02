@@ -76,6 +76,7 @@ public class SDLSurface {
             BlitSurfaceUnchecked         = apiGetFunctionAddress(SDL.getLibrary(), "SDL_BlitSurfaceUnchecked"),
             BlitSurfaceScaled            = apiGetFunctionAddress(SDL.getLibrary(), "SDL_BlitSurfaceScaled"),
             BlitSurfaceUncheckedScaled   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_BlitSurfaceUncheckedScaled"),
+            StretchSurface               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_StretchSurface"),
             BlitSurfaceTiled             = apiGetFunctionAddress(SDL.getLibrary(), "SDL_BlitSurfaceTiled"),
             BlitSurfaceTiledWithScale    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_BlitSurfaceTiledWithScale"),
             BlitSurface9Grid             = apiGetFunctionAddress(SDL.getLibrary(), "SDL_BlitSurface9Grid"),
@@ -106,7 +107,9 @@ public class SDLSurface {
     public static final String
         SDL_PROP_SURFACE_SDR_WHITE_POINT_FLOAT   = "SDL.surface.SDR_white_point",
         SDL_PROP_SURFACE_HDR_HEADROOM_FLOAT      = "SDL.surface.HDR_headroom",
-        SDL_PROP_SURFACE_TONEMAP_OPERATOR_STRING = "SDL.surface.tonemap";
+        SDL_PROP_SURFACE_TONEMAP_OPERATOR_STRING = "SDL.surface.tonemap",
+        SDL_PROP_SURFACE_HOTSPOT_X_NUMBER        = "SDL.surface.hotspot.x",
+        SDL_PROP_SURFACE_HOTSPOT_Y_NUMBER        = "SDL.surface.hotspot.y";
 
     protected SDLSurface() {
         throw new UnsupportedOperationException();
@@ -864,6 +867,20 @@ public class SDLSurface {
     @NativeType("bool")
     public static boolean SDL_BlitSurfaceUncheckedScaled(@NativeType("SDL_Surface *") SDL_Surface src, @NativeType("SDL_Rect const *") SDL_Rect srcrect, @NativeType("SDL_Surface *") SDL_Surface dst, @NativeType("SDL_Rect const *") SDL_Rect dstrect, @NativeType("SDL_ScaleMode") int scaleMode) {
         return nSDL_BlitSurfaceUncheckedScaled(src.address(), srcrect.address(), dst.address(), dstrect.address(), scaleMode);
+    }
+
+    // --- [ SDL_StretchSurface ] ---
+
+    /** {@code bool SDL_StretchSurface(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect, SDL_ScaleMode scaleMode)} */
+    public static boolean nSDL_StretchSurface(long src, long srcrect, long dst, long dstrect, int scaleMode) {
+        long __functionAddress = Functions.StretchSurface;
+        return invokePPPPZ(src, srcrect, dst, dstrect, scaleMode, __functionAddress);
+    }
+
+    /** {@code bool SDL_StretchSurface(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect, SDL_ScaleMode scaleMode)} */
+    @NativeType("bool")
+    public static boolean SDL_StretchSurface(@NativeType("SDL_Surface *") SDL_Surface src, @NativeType("SDL_Rect const *") SDL_Rect srcrect, @NativeType("SDL_Surface *") SDL_Surface dst, @NativeType("SDL_Rect const *") SDL_Rect dstrect, @NativeType("SDL_ScaleMode") int scaleMode) {
+        return nSDL_StretchSurface(src.address(), srcrect.address(), dst.address(), dstrect.address(), scaleMode);
     }
 
     // --- [ SDL_BlitSurfaceTiled ] ---

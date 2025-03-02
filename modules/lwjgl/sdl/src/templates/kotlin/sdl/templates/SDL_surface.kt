@@ -29,7 +29,9 @@ val SDL_surface = "SDLSurface".nativeClassSDL("SDL_surface") {
     StringConstant(
         "PROP_SURFACE_SDR_WHITE_POINT_FLOAT".."SDL.surface.SDR_white_point",
         "PROP_SURFACE_HDR_HEADROOM_FLOAT".."SDL.surface.HDR_headroom",
-        "PROP_SURFACE_TONEMAP_OPERATOR_STRING".."SDL.surface.tonemap"
+        "PROP_SURFACE_TONEMAP_OPERATOR_STRING".."SDL.surface.tonemap",
+        "PROP_SURFACE_HOTSPOT_X_NUMBER".."SDL.surface.hotspot.x",
+        "PROP_SURFACE_HOTSPOT_Y_NUMBER".."SDL.surface.hotspot.y",
     )
 
     SDL_Surface.p(
@@ -401,6 +403,16 @@ val SDL_surface = "SDLSurface".nativeClassSDL("SDL_surface") {
 
     bool(
         "BlitSurfaceUncheckedScaled",
+
+        SDL_Surface.p("src"),
+        SDL_Rect.const.p("srcrect"),
+        SDL_Surface.p("dst"),
+        SDL_Rect.const.p("dstrect"),
+        SDL_ScaleMode("scaleMode")
+    )
+
+    bool(
+        "StretchSurface",
 
         SDL_Surface.p("src"),
         SDL_Rect.const.p("srcrect"),

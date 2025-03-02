@@ -196,23 +196,23 @@ public class SDLTray {
 
     // --- [ SDL_GetTrayEntries ] ---
 
-    /** {@code SDL_TrayEntry const ** SDL_GetTrayEntries(SDL_TrayMenu * menu, int * size)} */
-    public static long nSDL_GetTrayEntries(long menu, long size) {
+    /** {@code SDL_TrayEntry const ** SDL_GetTrayEntries(SDL_TrayMenu * menu, int * count)} */
+    public static long nSDL_GetTrayEntries(long menu, long count) {
         long __functionAddress = Functions.GetTrayEntries;
         if (CHECKS) {
             check(menu);
         }
-        return invokePPP(menu, size, __functionAddress);
+        return invokePPP(menu, count, __functionAddress);
     }
 
-    /** {@code SDL_TrayEntry const ** SDL_GetTrayEntries(SDL_TrayMenu * menu, int * size)} */
+    /** {@code SDL_TrayEntry const ** SDL_GetTrayEntries(SDL_TrayMenu * menu, int * count)} */
     @NativeType("SDL_TrayEntry const **")
     public static @Nullable PointerBuffer SDL_GetTrayEntries(@NativeType("SDL_TrayMenu *") long menu) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        IntBuffer size = stack.callocInt(1);
+        IntBuffer count = stack.callocInt(1);
         try {
-            long __result = nSDL_GetTrayEntries(menu, memAddress(size));
-            return memPointerBufferSafe(__result, size.get(0));
+            long __result = nSDL_GetTrayEntries(menu, memAddress(count));
+            return memPointerBufferSafe(__result, count.get(0));
         } finally {
             stack.setPointer(stackPointer);
         }

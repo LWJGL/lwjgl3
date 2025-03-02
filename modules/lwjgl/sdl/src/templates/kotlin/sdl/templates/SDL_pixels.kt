@@ -141,6 +141,7 @@ val SDL_pixels = "SDLPixels".nativeClassSDL("SDL_pixels") {
         "PIXELFORMAT_NV21".enum("0x3132564e"),
         "PIXELFORMAT_P010".enum("0x30313050"),
         "PIXELFORMAT_EXTERNAL_OES".enum("0x2053454f"),
+        "PIXELFORMAT_MJPG".enum("0x47504a4d"),
         "PIXELFORMAT_RGBA32".enum("ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN ? SDL_PIXELFORMAT_ABGR8888 : SDL_PIXELFORMAT_RGBA8888"),
         "PIXELFORMAT_ARGB32".enum("ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN ? SDL_PIXELFORMAT_BGRA8888 : SDL_PIXELFORMAT_ARGB8888"),
         "PIXELFORMAT_BGRA32".enum("ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN ? SDL_PIXELFORMAT_ARGB8888 : SDL_PIXELFORMAT_BGRA8888"),
