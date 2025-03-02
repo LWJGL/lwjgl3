@@ -1620,6 +1620,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_NV_per_stage_descriptor_set;
     /** When true, {@code NV_present_barrier} is supported. */
     public final boolean VK_NV_present_barrier;
+    /** When true, {@code NV_present_metering} is supported. */
+    public final boolean VK_NV_present_metering;
     /** When true, {@code NV_raw_access_chains} is supported. */
     public final boolean VK_NV_raw_access_chains;
     /** When true, {@code NV_ray_tracing} is supported. */
@@ -2025,6 +2027,7 @@ public class VKCapabilitiesDevice {
         VK_NV_partitioned_acceleration_structure = check_NV_partitioned_acceleration_structure(provider, caps, ext);
         VK_NV_per_stage_descriptor_set = ext.contains("VK_NV_per_stage_descriptor_set");
         VK_NV_present_barrier = ext.contains("VK_NV_present_barrier");
+        VK_NV_present_metering = ext.contains("VK_NV_present_metering");
         VK_NV_raw_access_chains = ext.contains("VK_NV_raw_access_chains");
         VK_NV_ray_tracing = check_NV_ray_tracing(provider, caps, ext);
         VK_NV_ray_tracing_invocation_reorder = ext.contains("VK_NV_ray_tracing_invocation_reorder");

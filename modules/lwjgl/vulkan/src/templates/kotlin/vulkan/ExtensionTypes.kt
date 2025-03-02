@@ -488,7 +488,7 @@ val VkSwapchainCreateInfoKHR = struct(Module.VULKAN, "VkSwapchainCreateInfoKHR")
 val VkPresentInfoKHR = struct(Module.VULKAN, "VkPresentInfoKHR") {
     Expression("#STRUCTURE_TYPE_PRESENT_INFO_KHR")..VkStructureType("sType")
     PointerSetter(
-        "VkDeviceGroupPresentInfoKHR", "VkDisplayPresentInfoKHR", "VkFrameBoundaryEXT", "VkPresentIdKHR", "VkPresentRegionsKHR", "VkPresentTimesInfoGOOGLE", "VkSwapchainPresentFenceInfoEXT", "VkSwapchainPresentModeInfoEXT",
+        "VkDeviceGroupPresentInfoKHR", "VkDisplayPresentInfoKHR", "VkFrameBoundaryEXT", "VkPresentIdKHR", "VkPresentRegionsKHR", "VkPresentTimesInfoGOOGLE", "VkSetPresentConfigNV", "VkSwapchainPresentFenceInfoEXT", "VkSwapchainPresentModeInfoEXT",
         prepend = true
     )..nullable..opaque_const_p("pNext")
     AutoSize("pWaitSemaphores", optional = true)..uint32_t("waitSemaphoreCount")
@@ -2956,7 +2956,10 @@ val VkAccelerationStructureGeometryDataKHR = union(Module.VULKAN, "VkAcceleratio
 
 val VkAccelerationStructureGeometryKHR = struct(Module.VULKAN, "VkAccelerationStructureGeometryKHR") {
     Expression("#STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_KHR")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
+    PointerSetter(
+        "VkAccelerationStructureGeometryLinearSweptSpheresDataNV", "VkAccelerationStructureGeometrySpheresDataNV",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
     VkGeometryTypeKHR("geometryType")
     VkAccelerationStructureGeometryDataKHR("geometry")
     VkGeometryFlagsKHR("flags")
@@ -5787,9 +5790,9 @@ val VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV = struct(Module.VULKAN, "
     VkBool32("noInvocationFragmentShadingRates")
 }
 
-val VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV = struct(Module.VULKAN, "VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
+val VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV = struct(Module.VULKAN, "VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV", mutable = false) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
     VkSampleCountFlagBits("maxFragmentShadingRateInvocationCount")
 }
 
@@ -6749,9 +6752,9 @@ val VkPhysicalDeviceSchedulingControlsFeaturesARM = struct(Module.VULKAN, "VkPhy
     VkBool32("schedulingControls")
 }
 
-val VkPhysicalDeviceSchedulingControlsPropertiesARM = struct(Module.VULKAN, "VkPhysicalDeviceSchedulingControlsPropertiesARM") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_PROPERTIES_ARM")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
+val VkPhysicalDeviceSchedulingControlsPropertiesARM = struct(Module.VULKAN, "VkPhysicalDeviceSchedulingControlsPropertiesARM", mutable = false) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_PROPERTIES_ARM")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
     VkPhysicalDeviceSchedulingControlsFlagsARM("schedulingControlsFlags")
 }
 
@@ -8941,4 +8944,17 @@ val VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT = struct(Module.VULKAN,
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_ROBUSTNESS_FEATURES_EXT")..VkStructureType("sType")
     nullable..opaque_p("pNext")
     VkBool32("vertexAttributeRobustness")
+}
+
+val VkSetPresentConfigNV = struct(Module.VULKAN, "VkSetPresentConfigNV") {
+    Expression("#STRUCTURE_TYPE_SET_PRESENT_CONFIG_NV")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    uint32_t("numFramesPerBatch")
+    uint32_t("presentConfigFeedback")
+}
+
+val VkPhysicalDevicePresentMeteringFeaturesNV = struct(Module.VULKAN, "VkPhysicalDevicePresentMeteringFeaturesNV") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_METERING_FEATURES_NV")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("presentMetering")
 }

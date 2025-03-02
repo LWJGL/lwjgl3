@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 307
+#define VK_HEADER_VERSION 309
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 4, VK_HEADER_VERSION)
@@ -1227,6 +1227,12 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_MEMORY_GET_METAL_HANDLE_INFO_EXT = 1000602002,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_KHR = 1000421000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_ROBUSTNESS_FEATURES_EXT = 1000608000,
+#ifdef VK_ENABLE_BETA_EXTENSIONS
+    VK_STRUCTURE_TYPE_SET_PRESENT_CONFIG_NV = 1000613000,
+#endif
+#ifdef VK_ENABLE_BETA_EXTENSIONS
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_METERING_FEATURES_NV = 1000613001,
+#endif
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES,
   // VK_STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT is a deprecated alias
@@ -21344,6 +21350,25 @@ typedef struct VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT {
     void*              pNext;
     VkBool32           vertexAttributeRobustness;
 } VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT;
+
+
+
+// VK_NV_present_metering is a preprocessor guard. Do not pass it to API calls.
+#define VK_NV_present_metering 1
+#define VK_NV_PRESENT_METERING_SPEC_VERSION 1
+#define VK_NV_PRESENT_METERING_EXTENSION_NAME "VK_NV_present_metering"
+typedef struct VkSetPresentConfigNV {
+    VkStructureType    sType;
+    const void*        pNext;
+    uint32_t           numFramesPerBatch;
+    uint32_t           presentConfigFeedback;
+} VkSetPresentConfigNV;
+
+typedef struct VkPhysicalDevicePresentMeteringFeaturesNV {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           presentMetering;
+} VkPhysicalDevicePresentMeteringFeaturesNV;
 
 
 

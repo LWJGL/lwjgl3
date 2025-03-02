@@ -103,6 +103,10 @@ public class VkAccelerationStructureGeometryKHR extends Struct<VkAccelerationStr
     public VkAccelerationStructureGeometryKHR sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkAccelerationStructureGeometryKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkAccelerationStructureGeometryLinearSweptSpheresDataNV} value to the {@code pNext} chain. */
+    public VkAccelerationStructureGeometryKHR pNext(VkAccelerationStructureGeometryLinearSweptSpheresDataNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkAccelerationStructureGeometrySpheresDataNV} value to the {@code pNext} chain. */
+    public VkAccelerationStructureGeometryKHR pNext(VkAccelerationStructureGeometrySpheresDataNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code geometryType} field. */
     public VkAccelerationStructureGeometryKHR geometryType(@NativeType("VkGeometryTypeKHR") int value) { ngeometryType(address(), value); return this; }
     /** Copies the specified {@link VkAccelerationStructureGeometryDataKHR} to the {@code geometry} field. */
@@ -338,6 +342,10 @@ public class VkAccelerationStructureGeometryKHR extends Struct<VkAccelerationStr
         public VkAccelerationStructureGeometryKHR.Buffer sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkAccelerationStructureGeometryKHR.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureGeometryKHR.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkAccelerationStructureGeometryLinearSweptSpheresDataNV} value to the {@code pNext} chain. */
+        public VkAccelerationStructureGeometryKHR.Buffer pNext(VkAccelerationStructureGeometryLinearSweptSpheresDataNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkAccelerationStructureGeometrySpheresDataNV} value to the {@code pNext} chain. */
+        public VkAccelerationStructureGeometryKHR.Buffer pNext(VkAccelerationStructureGeometrySpheresDataNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code geometryType} field. */
         public VkAccelerationStructureGeometryKHR.Buffer geometryType(@NativeType("VkGeometryTypeKHR") int value) { VkAccelerationStructureGeometryKHR.ngeometryType(address(), value); return this; }
         /** Copies the specified {@link VkAccelerationStructureGeometryDataKHR} to the {@code geometry} field. */

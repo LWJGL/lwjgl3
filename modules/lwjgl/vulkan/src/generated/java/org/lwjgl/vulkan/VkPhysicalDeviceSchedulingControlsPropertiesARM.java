@@ -90,18 +90,14 @@ public class VkPhysicalDeviceSchedulingControlsPropertiesARM extends Struct<VkPh
     public VkPhysicalDeviceSchedulingControlsPropertiesARM sType$Default() { return sType(ARMSchedulingControls.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_PROPERTIES_ARM); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceSchedulingControlsPropertiesARM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code schedulingControlsFlags} field. */
-    public VkPhysicalDeviceSchedulingControlsPropertiesARM schedulingControlsFlags(@NativeType("VkPhysicalDeviceSchedulingControlsFlagsARM") long value) { nschedulingControlsFlags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDeviceSchedulingControlsPropertiesARM set(
         int sType,
-        long pNext,
-        long schedulingControlsFlags
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        schedulingControlsFlags(schedulingControlsFlags);
 
         return this;
     }
@@ -240,8 +236,6 @@ public class VkPhysicalDeviceSchedulingControlsPropertiesARM extends Struct<VkPh
     public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceSchedulingControlsPropertiesARM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceSchedulingControlsPropertiesARM.PNEXT, value); }
-    /** Unsafe version of {@link #schedulingControlsFlags(long) schedulingControlsFlags}. */
-    public static void nschedulingControlsFlags(long struct, long value) { memPutLong(struct + VkPhysicalDeviceSchedulingControlsPropertiesARM.SCHEDULINGCONTROLSFLAGS, value); }
 
     // -----------------------------------
 
@@ -302,8 +296,6 @@ public class VkPhysicalDeviceSchedulingControlsPropertiesARM extends Struct<VkPh
         public VkPhysicalDeviceSchedulingControlsPropertiesARM.Buffer sType$Default() { return sType(ARMSchedulingControls.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_PROPERTIES_ARM); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceSchedulingControlsPropertiesARM.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSchedulingControlsPropertiesARM.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code schedulingControlsFlags} field. */
-        public VkPhysicalDeviceSchedulingControlsPropertiesARM.Buffer schedulingControlsFlags(@NativeType("VkPhysicalDeviceSchedulingControlsFlagsARM") long value) { VkPhysicalDeviceSchedulingControlsPropertiesARM.nschedulingControlsFlags(address(), value); return this; }
 
     }
 
