@@ -14,8 +14,8 @@ val FMOD = "FMOD".nativeClass(
     binding = simpleBinding(Module.FMOD, libraryName = "FMOD", libraryExpression = "Configuration.FMOD_LIBRARY_NAME, \"fmod\"")
 ) {
 
-    IntConstant("VERSION"..0x00020304)
-    IntConstant("BUILDNUMBER"..147563)
+    IntConstant("VERSION"..0x00020306)
+    IntConstant("BUILDNUMBER"..149358)
 
     IntConstant(
         "DEBUG_LEVEL_NONE"..0x00000000,
