@@ -519,7 +519,7 @@ val nk_command_text = struct(Binding.NUKLEAR, "NkCommandText", nativeName = "str
     unsigned_short("h")
     float("height")
     int("length")
-    char("string")[1]
+    char("string")[2]
 }*/
 
 val nk_command_custom_callback = Module.NUKLEAR.callback {
