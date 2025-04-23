@@ -12,13 +12,13 @@ typedef void (APIENTRY *glFlushMappedBufferRangeEXTPROC) (jint, uintptr_t, uintp
 EXTERN_C_ENTER
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_opengles_EXTMapBufferRange_nglMapBufferRangeEXT(JNIEnv *__env, jclass clazz, jint target, jlong offset, jlong length, jint access) {
-    glMapBufferRangeEXTPROC glMapBufferRangeEXT = (glMapBufferRangeEXTPROC)tlsGetFunction(448);
+    glMapBufferRangeEXTPROC glMapBufferRangeEXT = (glMapBufferRangeEXTPROC)tlsGetFunction(447);
     UNUSED_PARAM(clazz)
     return (jlong)glMapBufferRangeEXT(target, (uintptr_t)offset, (uintptr_t)length, access);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMapBufferRange_glFlushMappedBufferRangeEXT(JNIEnv *__env, jclass clazz, jint target, jlong offset, jlong length) {
-    glFlushMappedBufferRangeEXTPROC glFlushMappedBufferRangeEXT = (glFlushMappedBufferRangeEXTPROC)tlsGetFunction(449);
+    glFlushMappedBufferRangeEXTPROC glFlushMappedBufferRangeEXT = (glFlushMappedBufferRangeEXTPROC)tlsGetFunction(448);
     UNUSED_PARAM(clazz)
     glFlushMappedBufferRangeEXT(target, (uintptr_t)offset, (uintptr_t)length);
 }

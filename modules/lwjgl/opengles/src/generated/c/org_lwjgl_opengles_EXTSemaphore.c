@@ -17,41 +17,41 @@ typedef void (APIENTRY *glSignalSemaphoreEXTPROC) (jint, jint, uintptr_t, jint, 
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTSemaphore_nglGenSemaphoresEXT__IJ(JNIEnv *__env, jclass clazz, jint n, jlong semaphoresAddress) {
-    glGenSemaphoresEXTPROC glGenSemaphoresEXT = (glGenSemaphoresEXTPROC)tlsGetFunction(486);
+    glGenSemaphoresEXTPROC glGenSemaphoresEXT = (glGenSemaphoresEXTPROC)tlsGetFunction(485);
     uintptr_t semaphores = (uintptr_t)semaphoresAddress;
     UNUSED_PARAM(clazz)
     glGenSemaphoresEXT(n, semaphores);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTSemaphore_nglDeleteSemaphoresEXT__IJ(JNIEnv *__env, jclass clazz, jint n, jlong semaphoresAddress) {
-    glDeleteSemaphoresEXTPROC glDeleteSemaphoresEXT = (glDeleteSemaphoresEXTPROC)tlsGetFunction(487);
+    glDeleteSemaphoresEXTPROC glDeleteSemaphoresEXT = (glDeleteSemaphoresEXTPROC)tlsGetFunction(486);
     uintptr_t semaphores = (uintptr_t)semaphoresAddress;
     UNUSED_PARAM(clazz)
     glDeleteSemaphoresEXT(n, semaphores);
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengles_EXTSemaphore_glIsSemaphoreEXT(JNIEnv *__env, jclass clazz, jint semaphore) {
-    glIsSemaphoreEXTPROC glIsSemaphoreEXT = (glIsSemaphoreEXTPROC)tlsGetFunction(488);
+    glIsSemaphoreEXTPROC glIsSemaphoreEXT = (glIsSemaphoreEXTPROC)tlsGetFunction(487);
     UNUSED_PARAM(clazz)
     return glIsSemaphoreEXT(semaphore);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTSemaphore_nglSemaphoreParameterui64vEXT__IIJ(JNIEnv *__env, jclass clazz, jint semaphore, jint pname, jlong paramsAddress) {
-    glSemaphoreParameterui64vEXTPROC glSemaphoreParameterui64vEXT = (glSemaphoreParameterui64vEXTPROC)tlsGetFunction(489);
+    glSemaphoreParameterui64vEXTPROC glSemaphoreParameterui64vEXT = (glSemaphoreParameterui64vEXTPROC)tlsGetFunction(488);
     uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glSemaphoreParameterui64vEXT(semaphore, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTSemaphore_nglGetSemaphoreParameterui64vEXT__IIJ(JNIEnv *__env, jclass clazz, jint semaphore, jint pname, jlong paramsAddress) {
-    glGetSemaphoreParameterui64vEXTPROC glGetSemaphoreParameterui64vEXT = (glGetSemaphoreParameterui64vEXTPROC)tlsGetFunction(490);
+    glGetSemaphoreParameterui64vEXTPROC glGetSemaphoreParameterui64vEXT = (glGetSemaphoreParameterui64vEXTPROC)tlsGetFunction(489);
     uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetSemaphoreParameterui64vEXT(semaphore, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTSemaphore_nglWaitSemaphoreEXT__IIJIJJ(JNIEnv *__env, jclass clazz, jint semaphore, jint numBufferBarriers, jlong buffersAddress, jint numTextureBarriers, jlong texturesAddress, jlong srcLayoutsAddress) {
-    glWaitSemaphoreEXTPROC glWaitSemaphoreEXT = (glWaitSemaphoreEXTPROC)tlsGetFunction(491);
+    glWaitSemaphoreEXTPROC glWaitSemaphoreEXT = (glWaitSemaphoreEXTPROC)tlsGetFunction(490);
     uintptr_t buffers = (uintptr_t)buffersAddress;
     uintptr_t textures = (uintptr_t)texturesAddress;
     uintptr_t srcLayouts = (uintptr_t)srcLayoutsAddress;
@@ -60,7 +60,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTSemaphore_nglWaitSemaphoreEXT_
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTSemaphore_nglSignalSemaphoreEXT__IIJIJJ(JNIEnv *__env, jclass clazz, jint semaphore, jint numBufferBarriers, jlong buffersAddress, jint numTextureBarriers, jlong texturesAddress, jlong dstLayoutsAddress) {
-    glSignalSemaphoreEXTPROC glSignalSemaphoreEXT = (glSignalSemaphoreEXTPROC)tlsGetFunction(492);
+    glSignalSemaphoreEXTPROC glSignalSemaphoreEXT = (glSignalSemaphoreEXTPROC)tlsGetFunction(491);
     uintptr_t buffers = (uintptr_t)buffersAddress;
     uintptr_t textures = (uintptr_t)texturesAddress;
     uintptr_t dstLayouts = (uintptr_t)dstLayoutsAddress;

@@ -12,13 +12,13 @@ typedef void (APIENTRY *glDrawElementsInstancedNVPROC) (jint, jint, jint, uintpt
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVDrawInstanced_glDrawArraysInstancedNV(JNIEnv *__env, jclass clazz, jint mode, jint first, jint count, jint primcount) {
-    glDrawArraysInstancedNVPROC glDrawArraysInstancedNV = (glDrawArraysInstancedNVPROC)tlsGetFunction(628);
+    glDrawArraysInstancedNVPROC glDrawArraysInstancedNV = (glDrawArraysInstancedNVPROC)tlsGetFunction(627);
     UNUSED_PARAM(clazz)
     glDrawArraysInstancedNV(mode, first, count, primcount);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVDrawInstanced_nglDrawElementsInstancedNV(JNIEnv *__env, jclass clazz, jint mode, jint count, jint type, jlong indicesAddress, jint primcount) {
-    glDrawElementsInstancedNVPROC glDrawElementsInstancedNV = (glDrawElementsInstancedNVPROC)tlsGetFunction(629);
+    glDrawElementsInstancedNVPROC glDrawElementsInstancedNV = (glDrawElementsInstancedNVPROC)tlsGetFunction(628);
     uintptr_t indices = (uintptr_t)indicesAddress;
     UNUSED_PARAM(clazz)
     glDrawElementsInstancedNV(mode, count, type, indices, primcount);

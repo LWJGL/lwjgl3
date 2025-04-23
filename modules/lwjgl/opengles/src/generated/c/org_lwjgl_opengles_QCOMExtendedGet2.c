@@ -14,7 +14,7 @@ typedef void (APIENTRY *glExtGetProgramBinarySourceQCOMPROC) (jint, jint, uintpt
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMExtendedGet2_nglExtGetShadersQCOM__JIJ(JNIEnv *__env, jclass clazz, jlong shadersAddress, jint maxShaders, jlong numShadersAddress) {
-    glExtGetShadersQCOMPROC glExtGetShadersQCOM = (glExtGetShadersQCOMPROC)tlsGetFunction(861);
+    glExtGetShadersQCOMPROC glExtGetShadersQCOM = (glExtGetShadersQCOMPROC)tlsGetFunction(860);
     uintptr_t shaders = (uintptr_t)shadersAddress;
     uintptr_t numShaders = (uintptr_t)numShadersAddress;
     UNUSED_PARAM(clazz)
@@ -22,7 +22,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMExtendedGet2_nglExtGetShaders
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMExtendedGet2_nglExtGetProgramsQCOM__JIJ(JNIEnv *__env, jclass clazz, jlong programsAddress, jint maxPrograms, jlong numProgramsAddress) {
-    glExtGetProgramsQCOMPROC glExtGetProgramsQCOM = (glExtGetProgramsQCOMPROC)tlsGetFunction(862);
+    glExtGetProgramsQCOMPROC glExtGetProgramsQCOM = (glExtGetProgramsQCOMPROC)tlsGetFunction(861);
     uintptr_t programs = (uintptr_t)programsAddress;
     uintptr_t numPrograms = (uintptr_t)numProgramsAddress;
     UNUSED_PARAM(clazz)
@@ -30,13 +30,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMExtendedGet2_nglExtGetProgram
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengles_QCOMExtendedGet2_glExtIsProgramBinaryQCOM(JNIEnv *__env, jclass clazz, jint program) {
-    glExtIsProgramBinaryQCOMPROC glExtIsProgramBinaryQCOM = (glExtIsProgramBinaryQCOMPROC)tlsGetFunction(863);
+    glExtIsProgramBinaryQCOMPROC glExtIsProgramBinaryQCOM = (glExtIsProgramBinaryQCOMPROC)tlsGetFunction(862);
     UNUSED_PARAM(clazz)
     return glExtIsProgramBinaryQCOM(program);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMExtendedGet2_nglExtGetProgramBinarySourceQCOM__IIJJ(JNIEnv *__env, jclass clazz, jint program, jint shadertype, jlong sourceAddress, jlong lengthAddress) {
-    glExtGetProgramBinarySourceQCOMPROC glExtGetProgramBinarySourceQCOM = (glExtGetProgramBinarySourceQCOMPROC)tlsGetFunction(864);
+    glExtGetProgramBinarySourceQCOMPROC glExtGetProgramBinarySourceQCOM = (glExtGetProgramBinarySourceQCOMPROC)tlsGetFunction(863);
     uintptr_t source = (uintptr_t)sourceAddress;
     uintptr_t length = (uintptr_t)lengthAddress;
     UNUSED_PARAM(clazz)

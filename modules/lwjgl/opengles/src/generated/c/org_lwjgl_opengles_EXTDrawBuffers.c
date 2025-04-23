@@ -11,7 +11,7 @@ typedef void (APIENTRY *glDrawBuffersEXTPROC) (jint, uintptr_t);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTDrawBuffers_nglDrawBuffersEXT__IJ(JNIEnv *__env, jclass clazz, jint n, jlong bufsAddress) {
-    glDrawBuffersEXTPROC glDrawBuffersEXT = (glDrawBuffersEXTPROC)tlsGetFunction(419);
+    glDrawBuffersEXTPROC glDrawBuffersEXT = (glDrawBuffersEXTPROC)tlsGetFunction(418);
     uintptr_t bufs = (uintptr_t)bufsAddress;
     UNUSED_PARAM(clazz)
     glDrawBuffersEXT(n, bufs);

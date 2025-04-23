@@ -11,7 +11,7 @@ typedef void (APIENTRY *glCopyBufferSubDataNVPROC) (jint, jint, uintptr_t, uintp
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVCopyBuffer_glCopyBufferSubDataNV(JNIEnv *__env, jclass clazz, jint readTarget, jint writeTarget, jlong readOffset, jlong writeOffset, jlong size) {
-    glCopyBufferSubDataNVPROC glCopyBufferSubDataNV = (glCopyBufferSubDataNVPROC)tlsGetFunction(624);
+    glCopyBufferSubDataNVPROC glCopyBufferSubDataNV = (glCopyBufferSubDataNVPROC)tlsGetFunction(623);
     UNUSED_PARAM(clazz)
     glCopyBufferSubDataNV(readTarget, writeTarget, (uintptr_t)readOffset, (uintptr_t)writeOffset, (uintptr_t)size);
 }

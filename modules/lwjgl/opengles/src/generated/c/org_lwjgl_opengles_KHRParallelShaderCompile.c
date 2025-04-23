@@ -11,7 +11,7 @@ typedef void (APIENTRY *glMaxShaderCompilerThreadsKHRPROC) (jint);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRParallelShaderCompile_glMaxShaderCompilerThreadsKHR(JNIEnv *__env, jclass clazz, jint count) {
-    glMaxShaderCompilerThreadsKHRPROC glMaxShaderCompilerThreadsKHR = (glMaxShaderCompilerThreadsKHRPROC)tlsGetFunction(595);
+    glMaxShaderCompilerThreadsKHRPROC glMaxShaderCompilerThreadsKHR = (glMaxShaderCompilerThreadsKHRPROC)tlsGetFunction(594);
     UNUSED_PARAM(clazz)
     glMaxShaderCompilerThreadsKHR(count);
 }

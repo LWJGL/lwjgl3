@@ -63,36 +63,6 @@ public class EXTBufferStorage {
         nglBufferStorageEXT(target, Integer.toUnsignedLong(data.remaining()) << 2, memAddress(data), flags);
     }
 
-    // --- [ glNamedBufferStorageEXT ] ---
-
-    /** {@code void glNamedBufferStorageEXT(GLuint buffer, GLsizeiptr size, void const * data, GLbitfield flags)} */
-    public static native void nglNamedBufferStorageEXT(int buffer, long size, long data, int flags);
-
-    /** {@code void glNamedBufferStorageEXT(GLuint buffer, GLsizeiptr size, void const * data, GLbitfield flags)} */
-    public static void glNamedBufferStorageEXT(@NativeType("GLuint") int buffer, @NativeType("GLsizeiptr") long size, @NativeType("GLbitfield") int flags) {
-        nglNamedBufferStorageEXT(buffer, size, NULL, flags);
-    }
-
-    /** {@code void glNamedBufferStorageEXT(GLuint buffer, GLsizeiptr size, void const * data, GLbitfield flags)} */
-    public static void glNamedBufferStorageEXT(@NativeType("GLuint") int buffer, @NativeType("void const *") ByteBuffer data, @NativeType("GLbitfield") int flags) {
-        nglNamedBufferStorageEXT(buffer, data.remaining(), memAddress(data), flags);
-    }
-
-    /** {@code void glNamedBufferStorageEXT(GLuint buffer, GLsizeiptr size, void const * data, GLbitfield flags)} */
-    public static void glNamedBufferStorageEXT(@NativeType("GLuint") int buffer, @NativeType("void const *") ShortBuffer data, @NativeType("GLbitfield") int flags) {
-        nglNamedBufferStorageEXT(buffer, Integer.toUnsignedLong(data.remaining()) << 1, memAddress(data), flags);
-    }
-
-    /** {@code void glNamedBufferStorageEXT(GLuint buffer, GLsizeiptr size, void const * data, GLbitfield flags)} */
-    public static void glNamedBufferStorageEXT(@NativeType("GLuint") int buffer, @NativeType("void const *") IntBuffer data, @NativeType("GLbitfield") int flags) {
-        nglNamedBufferStorageEXT(buffer, Integer.toUnsignedLong(data.remaining()) << 2, memAddress(data), flags);
-    }
-
-    /** {@code void glNamedBufferStorageEXT(GLuint buffer, GLsizeiptr size, void const * data, GLbitfield flags)} */
-    public static void glNamedBufferStorageEXT(@NativeType("GLuint") int buffer, @NativeType("void const *") FloatBuffer data, @NativeType("GLbitfield") int flags) {
-        nglNamedBufferStorageEXT(buffer, Integer.toUnsignedLong(data.remaining()) << 2, memAddress(data), flags);
-    }
-
     /** {@code void glBufferStorageEXT(GLenum target, GLsizeiptr size, void const * data, GLbitfield flags)} */
     public static void glBufferStorageEXT(@NativeType("GLenum") int target, @NativeType("void const *") short[] data, @NativeType("GLbitfield") int flags) {
         long __functionAddress = GLES.getICD().glBufferStorageEXT;
@@ -118,33 +88,6 @@ public class EXTBufferStorage {
             check(__functionAddress);
         }
         callPPV(target, Integer.toUnsignedLong(data.length) << 2, data, flags, __functionAddress);
-    }
-
-    /** {@code void glNamedBufferStorageEXT(GLuint buffer, GLsizeiptr size, void const * data, GLbitfield flags)} */
-    public static void glNamedBufferStorageEXT(@NativeType("GLuint") int buffer, @NativeType("void const *") short[] data, @NativeType("GLbitfield") int flags) {
-        long __functionAddress = GLES.getICD().glNamedBufferStorageEXT;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPPV(buffer, Integer.toUnsignedLong(data.length) << 1, data, flags, __functionAddress);
-    }
-
-    /** {@code void glNamedBufferStorageEXT(GLuint buffer, GLsizeiptr size, void const * data, GLbitfield flags)} */
-    public static void glNamedBufferStorageEXT(@NativeType("GLuint") int buffer, @NativeType("void const *") int[] data, @NativeType("GLbitfield") int flags) {
-        long __functionAddress = GLES.getICD().glNamedBufferStorageEXT;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPPV(buffer, Integer.toUnsignedLong(data.length) << 2, data, flags, __functionAddress);
-    }
-
-    /** {@code void glNamedBufferStorageEXT(GLuint buffer, GLsizeiptr size, void const * data, GLbitfield flags)} */
-    public static void glNamedBufferStorageEXT(@NativeType("GLuint") int buffer, @NativeType("void const *") float[] data, @NativeType("GLbitfield") int flags) {
-        long __functionAddress = GLES.getICD().glNamedBufferStorageEXT;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPPV(buffer, Integer.toUnsignedLong(data.length) << 2, data, flags, __functionAddress);
     }
 
 }

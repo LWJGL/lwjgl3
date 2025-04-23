@@ -13,13 +13,13 @@ typedef void (APIENTRY *glGetIntegeri_vEXTPROC) (jint, jint, uintptr_t);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMultiviewDrawBuffers_glReadBufferIndexedEXT(JNIEnv *__env, jclass clazz, jint src, jint index) {
-    glReadBufferIndexedEXTPROC glReadBufferIndexedEXT = (glReadBufferIndexedEXTPROC)tlsGetFunction(476);
+    glReadBufferIndexedEXTPROC glReadBufferIndexedEXT = (glReadBufferIndexedEXTPROC)tlsGetFunction(475);
     UNUSED_PARAM(clazz)
     glReadBufferIndexedEXT(src, index);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMultiviewDrawBuffers_nglDrawBuffersIndexedEXT__IJJ(JNIEnv *__env, jclass clazz, jint n, jlong locationAddress, jlong indicesAddress) {
-    glDrawBuffersIndexedEXTPROC glDrawBuffersIndexedEXT = (glDrawBuffersIndexedEXTPROC)tlsGetFunction(477);
+    glDrawBuffersIndexedEXTPROC glDrawBuffersIndexedEXT = (glDrawBuffersIndexedEXTPROC)tlsGetFunction(476);
     uintptr_t location = (uintptr_t)locationAddress;
     uintptr_t indices = (uintptr_t)indicesAddress;
     UNUSED_PARAM(clazz)
@@ -27,7 +27,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMultiviewDrawBuffers_nglDrawBu
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMultiviewDrawBuffers_nglGetIntegeri_1vEXT__IIJ(JNIEnv *__env, jclass clazz, jint target, jint index, jlong dataAddress) {
-    glGetIntegeri_vEXTPROC glGetIntegeri_vEXT = (glGetIntegeri_vEXTPROC)tlsGetFunction(478);
+    glGetIntegeri_vEXTPROC glGetIntegeri_vEXT = (glGetIntegeri_vEXTPROC)tlsGetFunction(477);
     uintptr_t data = (uintptr_t)dataAddress;
     UNUSED_PARAM(clazz)
     glGetIntegeri_vEXT(target, index, data);

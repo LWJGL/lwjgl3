@@ -12,7 +12,7 @@ typedef void (APIENTRY *glMultiDrawElementsEXTPROC) (jint, uintptr_t, jint, uint
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMultiDrawArrays_nglMultiDrawArraysEXT__IJJI(JNIEnv *__env, jclass clazz, jint mode, jlong firstAddress, jlong countAddress, jint drawcount) {
-    glMultiDrawArraysEXTPROC glMultiDrawArraysEXT = (glMultiDrawArraysEXTPROC)tlsGetFunction(470);
+    glMultiDrawArraysEXTPROC glMultiDrawArraysEXT = (glMultiDrawArraysEXTPROC)tlsGetFunction(469);
     uintptr_t first = (uintptr_t)firstAddress;
     uintptr_t count = (uintptr_t)countAddress;
     UNUSED_PARAM(clazz)
@@ -20,7 +20,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMultiDrawArrays_nglMultiDrawAr
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMultiDrawArrays_nglMultiDrawElementsEXT__IJIJI(JNIEnv *__env, jclass clazz, jint mode, jlong countAddress, jint type, jlong indicesAddress, jint drawcount) {
-    glMultiDrawElementsEXTPROC glMultiDrawElementsEXT = (glMultiDrawElementsEXTPROC)tlsGetFunction(471);
+    glMultiDrawElementsEXTPROC glMultiDrawElementsEXT = (glMultiDrawElementsEXTPROC)tlsGetFunction(470);
     uintptr_t count = (uintptr_t)countAddress;
     uintptr_t indices = (uintptr_t)indicesAddress;
     UNUSED_PARAM(clazz)

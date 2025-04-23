@@ -40,7 +40,7 @@ val EXT_sparse_texture = "EXTSparseTexture".nativeClassGLES("EXT_sparse_texture"
     )
 
     void(
-        "TexPageCommitmentARB",
+        "TexPageCommitmentEXT",
 
         GLenum("target"),
         GLint("level"),

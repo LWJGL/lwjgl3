@@ -12,13 +12,13 @@ typedef void (APIENTRY *glTexBufferRangeOESPROC) (jint, jint, jint, uintptr_t, u
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_OESTextureBuffer_glTexBufferOES(JNIEnv *__env, jclass clazz, jint target, jint internalformat, jint buffer) {
-    glTexBufferOESPROC glTexBufferOES = (glTexBufferOESPROC)tlsGetFunction(828);
+    glTexBufferOESPROC glTexBufferOES = (glTexBufferOESPROC)tlsGetFunction(827);
     UNUSED_PARAM(clazz)
     glTexBufferOES(target, internalformat, buffer);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_OESTextureBuffer_glTexBufferRangeOES(JNIEnv *__env, jclass clazz, jint target, jint internalformat, jint buffer, jlong offset, jlong size) {
-    glTexBufferRangeOESPROC glTexBufferRangeOES = (glTexBufferRangeOESPROC)tlsGetFunction(829);
+    glTexBufferRangeOESPROC glTexBufferRangeOES = (glTexBufferRangeOESPROC)tlsGetFunction(828);
     UNUSED_PARAM(clazz)
     glTexBufferRangeOES(target, internalformat, buffer, (uintptr_t)offset, (uintptr_t)size);
 }

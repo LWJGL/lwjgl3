@@ -21,21 +21,21 @@ typedef void (APIENTRY *glGetObjectPtrLabelKHRPROC) (uintptr_t, jint, uintptr_t,
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglDebugMessageControlKHR__IIIIJZ(JNIEnv *__env, jclass clazz, jint source, jint type, jint severity, jint count, jlong idsAddress, jboolean enabled) {
-    glDebugMessageControlKHRPROC glDebugMessageControlKHR = (glDebugMessageControlKHRPROC)tlsGetFunction(584);
+    glDebugMessageControlKHRPROC glDebugMessageControlKHR = (glDebugMessageControlKHRPROC)tlsGetFunction(583);
     uintptr_t ids = (uintptr_t)idsAddress;
     UNUSED_PARAM(clazz)
     glDebugMessageControlKHR(source, type, severity, count, ids, enabled);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglDebugMessageInsertKHR(JNIEnv *__env, jclass clazz, jint source, jint type, jint id, jint severity, jint length, jlong messageAddress) {
-    glDebugMessageInsertKHRPROC glDebugMessageInsertKHR = (glDebugMessageInsertKHRPROC)tlsGetFunction(585);
+    glDebugMessageInsertKHRPROC glDebugMessageInsertKHR = (glDebugMessageInsertKHRPROC)tlsGetFunction(584);
     uintptr_t message = (uintptr_t)messageAddress;
     UNUSED_PARAM(clazz)
     glDebugMessageInsertKHR(source, type, id, severity, length, message);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglDebugMessageCallbackKHR(JNIEnv *__env, jclass clazz, jlong callbackAddress, jlong userParamAddress) {
-    glDebugMessageCallbackKHRPROC glDebugMessageCallbackKHR = (glDebugMessageCallbackKHRPROC)tlsGetFunction(586);
+    glDebugMessageCallbackKHRPROC glDebugMessageCallbackKHR = (glDebugMessageCallbackKHRPROC)tlsGetFunction(585);
     uintptr_t callback = (uintptr_t)callbackAddress;
     uintptr_t userParam = (uintptr_t)userParamAddress;
     UNUSED_PARAM(clazz)
@@ -43,7 +43,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglDebugMessageCallbackK
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengles_KHRDebug_nglGetDebugMessageLogKHR__IIJJJJJJ(JNIEnv *__env, jclass clazz, jint count, jint bufsize, jlong sourcesAddress, jlong typesAddress, jlong idsAddress, jlong severitiesAddress, jlong lengthsAddress, jlong messageLogAddress) {
-    glGetDebugMessageLogKHRPROC glGetDebugMessageLogKHR = (glGetDebugMessageLogKHRPROC)tlsGetFunction(587);
+    glGetDebugMessageLogKHRPROC glGetDebugMessageLogKHR = (glGetDebugMessageLogKHRPROC)tlsGetFunction(586);
     uintptr_t sources = (uintptr_t)sourcesAddress;
     uintptr_t types = (uintptr_t)typesAddress;
     uintptr_t ids = (uintptr_t)idsAddress;
@@ -55,34 +55,34 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengles_KHRDebug_nglGetDebugMessageLogKHR
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglGetPointervKHR(JNIEnv *__env, jclass clazz, jint pname, jlong paramsAddress) {
-    glGetPointervKHRPROC glGetPointervKHR = (glGetPointervKHRPROC)tlsGetFunction(588);
+    glGetPointervKHRPROC glGetPointervKHR = (glGetPointervKHRPROC)tlsGetFunction(587);
     uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetPointervKHR(pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglPushDebugGroupKHR(JNIEnv *__env, jclass clazz, jint source, jint id, jint length, jlong messageAddress) {
-    glPushDebugGroupKHRPROC glPushDebugGroupKHR = (glPushDebugGroupKHRPROC)tlsGetFunction(589);
+    glPushDebugGroupKHRPROC glPushDebugGroupKHR = (glPushDebugGroupKHRPROC)tlsGetFunction(588);
     uintptr_t message = (uintptr_t)messageAddress;
     UNUSED_PARAM(clazz)
     glPushDebugGroupKHR(source, id, length, message);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_glPopDebugGroupKHR(JNIEnv *__env, jclass clazz) {
-    glPopDebugGroupKHRPROC glPopDebugGroupKHR = (glPopDebugGroupKHRPROC)tlsGetFunction(590);
+    glPopDebugGroupKHRPROC glPopDebugGroupKHR = (glPopDebugGroupKHRPROC)tlsGetFunction(589);
     UNUSED_PARAM(clazz)
     glPopDebugGroupKHR();
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglObjectLabelKHR(JNIEnv *__env, jclass clazz, jint identifier, jint name, jint length, jlong labelAddress) {
-    glObjectLabelKHRPROC glObjectLabelKHR = (glObjectLabelKHRPROC)tlsGetFunction(591);
+    glObjectLabelKHRPROC glObjectLabelKHR = (glObjectLabelKHRPROC)tlsGetFunction(590);
     uintptr_t label = (uintptr_t)labelAddress;
     UNUSED_PARAM(clazz)
     glObjectLabelKHR(identifier, name, length, label);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglGetObjectLabelKHR__IIIJJ(JNIEnv *__env, jclass clazz, jint identifier, jint name, jint bufSize, jlong lengthAddress, jlong labelAddress) {
-    glGetObjectLabelKHRPROC glGetObjectLabelKHR = (glGetObjectLabelKHRPROC)tlsGetFunction(592);
+    glGetObjectLabelKHRPROC glGetObjectLabelKHR = (glGetObjectLabelKHRPROC)tlsGetFunction(591);
     uintptr_t length = (uintptr_t)lengthAddress;
     uintptr_t label = (uintptr_t)labelAddress;
     UNUSED_PARAM(clazz)
@@ -90,7 +90,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglGetObjectLabelKHR__II
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglObjectPtrLabelKHR(JNIEnv *__env, jclass clazz, jlong ptrAddress, jint length, jlong labelAddress) {
-    glObjectPtrLabelKHRPROC glObjectPtrLabelKHR = (glObjectPtrLabelKHRPROC)tlsGetFunction(593);
+    glObjectPtrLabelKHRPROC glObjectPtrLabelKHR = (glObjectPtrLabelKHRPROC)tlsGetFunction(592);
     uintptr_t ptr = (uintptr_t)ptrAddress;
     uintptr_t label = (uintptr_t)labelAddress;
     UNUSED_PARAM(clazz)
@@ -98,7 +98,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglObjectPtrLabelKHR(JNI
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglGetObjectPtrLabelKHR__JIJJ(JNIEnv *__env, jclass clazz, jlong ptrAddress, jint bufSize, jlong lengthAddress, jlong labelAddress) {
-    glGetObjectPtrLabelKHRPROC glGetObjectPtrLabelKHR = (glGetObjectPtrLabelKHRPROC)tlsGetFunction(594);
+    glGetObjectPtrLabelKHRPROC glGetObjectPtrLabelKHR = (glGetObjectPtrLabelKHRPROC)tlsGetFunction(593);
     uintptr_t ptr = (uintptr_t)ptrAddress;
     uintptr_t length = (uintptr_t)lengthAddress;
     uintptr_t label = (uintptr_t)labelAddress;

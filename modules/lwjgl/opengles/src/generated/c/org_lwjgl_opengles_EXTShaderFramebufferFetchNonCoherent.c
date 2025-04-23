@@ -11,7 +11,7 @@ typedef void (APIENTRY *glFramebufferFetchBarrierEXTPROC) (void);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTShaderFramebufferFetchNonCoherent_glFramebufferFetchBarrierEXT(JNIEnv *__env, jclass clazz) {
-    glFramebufferFetchBarrierEXTPROC glFramebufferFetchBarrierEXT = (glFramebufferFetchBarrierEXTPROC)tlsGetFunction(540);
+    glFramebufferFetchBarrierEXTPROC glFramebufferFetchBarrierEXT = (glFramebufferFetchBarrierEXTPROC)tlsGetFunction(539);
     UNUSED_PARAM(clazz)
     glFramebufferFetchBarrierEXT();
 }
