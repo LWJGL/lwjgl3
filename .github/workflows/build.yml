@@ -12,7 +12,7 @@ env:
   JAVA_HOME: jdk8
   ANT_OPTS: -Xmx1G
   LWJGL_BUILD_TYPE: nightly
-  ZULU_BUILD: 82.0.21-ca-jdk8.0.432
+  ZULU_BUILD: 86.0.25-ca-jdk8.0.452
 
 jobs:
   cache-kotlinc:
@@ -151,10 +151,9 @@ jobs:
           curl -L https://cdn.azul.com/zulu/bin/zulu8.${ZULU_BUILD}-linux_x64.tar.gz | tar xz -C jdk8 --strip-components 1
       - name: Prepare cross-compilation for ${{matrix.CROSS_ARCH}}
         run: |
-          sudo sed -i 's/deb mirror/deb [arch=amd64,i386] mirror/' /etc/apt/sources.list
-          sudo grep "mirror+file" /etc/apt/sources.list | sudo tee /etc/apt/sources.list.d/ports.list
-          sudo sed -i 's/amd64,i386/${{matrix.CROSS_ARCH}}/' /etc/apt/sources.list.d/ports.list
-          sudo sed -i 's#mirror+file:/etc/apt/apt-mirrors.txt#http://ports.ubuntu.com/ubuntu-ports/#' /etc/apt/sources.list.d/ports.list
+          sudo grep 'deb http' /etc/apt/sources.list | sudo tee /etc/apt/sources.list.d/ports.list
+          sudo sed -i 's/^deb http/deb [arch=amd64] http/' /etc/apt/sources.list
+          sudo sed -i 's#^deb http://[^ ]\+#deb [arch=${{matrix.CROSS_ARCH}}] http://ports.ubuntu.com/ubuntu-ports/#' /etc/apt/sources.list.d/ports.list
           sudo dpkg --add-architecture ${{matrix.CROSS_ARCH}}
           sudo apt-get update || true
       - name: Install cross-compilation dependencies
