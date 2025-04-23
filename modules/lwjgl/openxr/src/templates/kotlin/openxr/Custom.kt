@@ -44,6 +44,7 @@ private fun generateDispatchableHandle(handle: PointerType<*>, parent: PointerTy
 fun templateCustomization() {
     generateDispatchableHandle(XrActionSet, XrInstance)
     generateDispatchableHandle(XrAction, XrActionSet)
+    generateDispatchableHandle(XrAnchorBD, XrSenseDataProviderBD)
     generateDispatchableHandle(XrBodyTrackerBD, XrSession)
     generateDispatchableHandle(XrBodyTrackerFB, XrSession)
     generateDispatchableHandle(XrBodyTrackerHTC, XrSession)
@@ -67,6 +68,8 @@ fun templateCustomization() {
     generateDispatchableHandle(XrPlaneDetectorEXT, XrSession)
     generateDispatchableHandle(XrSceneMSFT, XrSceneObserverMSFT)
     generateDispatchableHandle(XrSceneObserverMSFT, XrSession)
+    generateDispatchableHandle(XrSenseDataProviderBD, XrSession)
+    generateDispatchableHandle(XrSenseDataSnapshotBD, XrSenseDataProviderBD)
     generateDispatchableHandle(XrSession, XrInstance)
     generateDispatchableHandle(XrSpace, XrSession)
     generateDispatchableHandle(XrSpaceUserFB, XrSession)
@@ -81,7 +84,7 @@ fun templateCustomization() {
 
     XR10.apply {
         LongConstant(
-            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 1, 45)"
+            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 1, 47)"
         )
 
         LongConstant(

@@ -169,8 +169,18 @@ public class XrFutureCompletionBaseHeaderEXT extends Struct<XrFutureCompletionBa
         return new XrFutureCompletionBaseHeaderEXT(value.address(), __getContainer(value));
     }
 
+    /** Upcasts the specified {@code XrSenseDataQueryCompletionBD} instance to {@code XrFutureCompletionBaseHeaderEXT}. */
+    public static XrFutureCompletionBaseHeaderEXT create(XrSenseDataQueryCompletionBD value) {
+        return new XrFutureCompletionBaseHeaderEXT(value.address(), __getContainer(value));
+    }
+
     /** Upcasts the specified {@code XrFutureCompletionEXT} instance to {@code XrFutureCompletionBaseHeaderEXT}. */
     public static XrFutureCompletionBaseHeaderEXT create(XrFutureCompletionEXT value) {
+        return new XrFutureCompletionBaseHeaderEXT(value.address(), __getContainer(value));
+    }
+
+    /** Upcasts the specified {@code XrSpatialAnchorCreateCompletionBD} instance to {@code XrFutureCompletionBaseHeaderEXT}. */
+    public static XrFutureCompletionBaseHeaderEXT create(XrSpatialAnchorCreateCompletionBD value) {
         return new XrFutureCompletionBaseHeaderEXT(value.address(), __getContainer(value));
     }
 
@@ -252,8 +262,18 @@ public class XrFutureCompletionBaseHeaderEXT extends Struct<XrFutureCompletionBa
         return new XrFutureCompletionBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
+    /** Upcasts the specified {@code XrSenseDataQueryCompletionBD.Buffer} instance to {@code XrFutureCompletionBaseHeaderEXT.Buffer}. */
+    public static XrFutureCompletionBaseHeaderEXT.Buffer create(XrSenseDataQueryCompletionBD.Buffer value) {
+        return new XrFutureCompletionBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
     /** Upcasts the specified {@code XrFutureCompletionEXT.Buffer} instance to {@code XrFutureCompletionBaseHeaderEXT.Buffer}. */
     public static XrFutureCompletionBaseHeaderEXT.Buffer create(XrFutureCompletionEXT.Buffer value) {
+        return new XrFutureCompletionBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
+    /** Upcasts the specified {@code XrSpatialAnchorCreateCompletionBD.Buffer} instance to {@code XrFutureCompletionBaseHeaderEXT.Buffer}. */
+    public static XrFutureCompletionBaseHeaderEXT.Buffer create(XrSpatialAnchorCreateCompletionBD.Buffer value) {
         return new XrFutureCompletionBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 

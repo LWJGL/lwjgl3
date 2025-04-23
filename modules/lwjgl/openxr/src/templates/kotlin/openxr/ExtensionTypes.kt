@@ -41,6 +41,9 @@ val XrEnvironmentDepthSwapchainMETA = XR_DEFINE_HANDLE("XrEnvironmentDepthSwapch
 val XrPassthroughHTC = XR_DEFINE_HANDLE("XrPassthroughHTC")
 val XrBodyTrackerHTC = XR_DEFINE_HANDLE("XrBodyTrackerHTC")
 val XrBodyTrackerBD = XR_DEFINE_HANDLE("XrBodyTrackerBD")
+val XrSenseDataProviderBD = XR_DEFINE_HANDLE("XrSenseDataProviderBD")
+val XrSenseDataSnapshotBD = XR_DEFINE_HANDLE("XrSenseDataSnapshotBD")
+val XrAnchorBD = XR_DEFINE_HANDLE("XrAnchorBD")
 val XrPlaneDetectorEXT = XR_DEFINE_HANDLE("XrPlaneDetectorEXT")
 val XrWorldMeshDetectorML = XR_DEFINE_HANDLE("XrWorldMeshDetectorML")
 val XrFacialExpressionClientML = XR_DEFINE_HANDLE("XrFacialExpressionClientML")
@@ -133,6 +136,13 @@ val XrBodyJointConfidenceHTC = "XrBodyJointConfidenceHTC".enumType
 val XrForceFeedbackCurlLocationMNDX = "XrForceFeedbackCurlLocationMNDX".enumType
 val XrBodyJointBD = "XrBodyJointBD".enumType
 val XrBodyJointSetBD = "XrBodyJointSetBD".enumType
+val XrSpatialEntityComponentTypeBD = "XrSpatialEntityComponentTypeBD".enumType
+val XrSemanticLabelBD = "XrSemanticLabelBD".enumType
+val XrSenseDataProviderTypeBD = "XrSenseDataProviderTypeBD".enumType
+val XrSenseDataProviderStateBD = "XrSenseDataProviderStateBD".enumType
+val XrPersistenceLocationBD = "XrPersistenceLocationBD".enumType
+val XrSpatialMeshLodBD = "XrSpatialMeshLodBD".enumType
+val XrSpatialMeshConfigFlagBitsBD = "XrSpatialMeshConfigFlagBitsBD".enumType
 val XrHandTrackingDataSourceEXT = "XrHandTrackingDataSourceEXT".enumType
 val XrPlaneDetectorOrientationEXT = "XrPlaneDetectorOrientationEXT".enumType
 val XrPlaneDetectorSemanticTypeEXT = "XrPlaneDetectorSemanticTypeEXT".enumType
@@ -180,6 +190,7 @@ val XrPerformanceMetricsCounterFlagsMETA = typedef(XrFlags64, "XrPerformanceMetr
 val XrEnvironmentDepthProviderCreateFlagsMETA = typedef(XrFlags64, "XrEnvironmentDepthProviderCreateFlagsMETA")
 val XrEnvironmentDepthSwapchainCreateFlagsMETA = typedef(XrFlags64, "XrEnvironmentDepthSwapchainCreateFlagsMETA")
 val XrFoveationDynamicFlagsHTC = typedef(XrFlags64, "XrFoveationDynamicFlagsHTC")
+val XrSpatialMeshConfigFlagsBD = typedef(XrFlags64, "XrSpatialMeshConfigFlagsBD")
 val XrPlaneDetectionCapabilityFlagsEXT = typedef(XrFlags64, "XrPlaneDetectionCapabilityFlagsEXT")
 val XrPlaneDetectorFlagsEXT = typedef(XrFlags64, "XrPlaneDetectorFlagsEXT")
 val XrWorldMeshDetectorFlagsML = typedef(XrFlags64, "XrWorldMeshDetectorFlagsML")
@@ -2874,6 +2885,253 @@ val XrBodyJointLocationsBD = struct(Module.OPENXR, "XrBodyJointLocationsBD") {
     XrBodyJointLocationBD.p("jointLocations")
 }
 
+val XrSystemSpatialSensingPropertiesBD = struct(Module.OPENXR, "XrSystemSpatialSensingPropertiesBD", mutable = false) {
+    Expression("#TYPE_SYSTEM_SPATIAL_SENSING_PROPERTIES_BD")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsSpatialSensing")
+}
+
+val XrSpatialEntityComponentGetInfoBD = struct(Module.OPENXR, "XrSpatialEntityComponentGetInfoBD") {
+    Expression("#TYPE_SPATIAL_ENTITY_COMPONENT_GET_INFO_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpatialEntityIdBD("entityId")
+    XrSpatialEntityComponentTypeBD("componentType")
+}
+
+val XrSpatialEntityComponentDataBaseHeaderBD = struct(Module.OPENXR, "XrSpatialEntityComponentDataBaseHeaderBD") {
+    XrStructureType("type")
+    PointerSetter(
+        "XrSpatialEntityComponentDataBoundingBox2DBD", "XrSpatialEntityComponentDataBoundingBox3DBD", "XrSpatialEntityComponentDataLocationBD", "XrSpatialEntityComponentDataPolygonBD", "XrSpatialEntityComponentDataSemanticBD", "XrSpatialEntityComponentDataTriangleMeshBD",
+        prepend = true
+    )..nullable..opaque_p("next")
+}
+
+val XrSpatialEntityLocationGetInfoBD = struct(Module.OPENXR, "XrSpatialEntityLocationGetInfoBD") {
+    Expression("#TYPE_SPATIAL_ENTITY_LOCATION_GET_INFO_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("baseSpace")
+}
+
+val XrSpatialEntityComponentDataLocationBD = struct(Module.OPENXR, "XrSpatialEntityComponentDataLocationBD") {
+    Expression("#TYPE_SPATIAL_ENTITY_COMPONENT_DATA_LOCATION_BD")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrSpaceLocation("location")
+}
+
+val XrSpatialEntityComponentDataSemanticBD = struct(Module.OPENXR, "XrSpatialEntityComponentDataSemanticBD") {
+    Expression("#TYPE_SPATIAL_ENTITY_COMPONENT_DATA_SEMANTIC_BD")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("labels", optional = true)..uint32_t("labelCapacityInput")
+    uint32_t("labelCountOutput")
+    nullable..XrSemanticLabelBD.p("labels")
+}
+
+val XrSpatialEntityComponentDataBoundingBox2DBD = struct(Module.OPENXR, "XrSpatialEntityComponentDataBoundingBox2DBD") {
+    Expression("#TYPE_SPATIAL_ENTITY_COMPONENT_DATA_BOUNDING_BOX_2D_BD")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrRect2Df("boundingBox2D")
+}
+
+val XrSpatialEntityComponentDataPolygonBD = struct(Module.OPENXR, "XrSpatialEntityComponentDataPolygonBD") {
+    Expression("#TYPE_SPATIAL_ENTITY_COMPONENT_DATA_POLYGON_BD")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("vertices", optional = true)..uint32_t("vertexCapacityInput")
+    uint32_t("vertexCountOutput")
+    nullable..XrVector2f.p("vertices")
+}
+
+val XrSpatialEntityComponentDataBoundingBox3DBD = struct(Module.OPENXR, "XrSpatialEntityComponentDataBoundingBox3DBD") {
+    Expression("#TYPE_SPATIAL_ENTITY_COMPONENT_DATA_BOUNDING_BOX_3D_BD")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrBoxf("boundingBox3D")
+}
+
+val XrSpatialEntityComponentDataTriangleMeshBD = struct(Module.OPENXR, "XrSpatialEntityComponentDataTriangleMeshBD") {
+    Expression("#TYPE_SPATIAL_ENTITY_COMPONENT_DATA_TRIANGLE_MESH_BD")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("vertices", optional = true)..uint32_t("vertexCapacityInput")
+    uint32_t("vertexCountOutput")
+    nullable..XrVector3f.p("vertices")
+    AutoSize("indices", optional = true)..uint32_t("indexCapacityInput")
+    uint32_t("indexCountOutput")
+    nullable..uint16_t.p("indices")
+}
+
+val XrSenseDataProviderCreateInfoBD = struct(Module.OPENXR, "XrSenseDataProviderCreateInfoBD") {
+    Expression("#TYPE_SENSE_DATA_PROVIDER_CREATE_INFO_BD")..XrStructureType("type")
+    PointerSetter(
+        "XrSenseDataProviderCreateInfoSpatialMeshBD",
+        prepend = true
+    )..nullable..opaque_const_p("next")
+    XrSenseDataProviderTypeBD("providerType")
+}
+
+val XrSenseDataProviderStartInfoBD = struct(Module.OPENXR, "XrSenseDataProviderStartInfoBD") {
+    Expression("#TYPE_SENSE_DATA_PROVIDER_START_INFO_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+}
+
+val XrEventDataSenseDataProviderStateChangedBD = struct(Module.OPENXR, "XrEventDataSenseDataProviderStateChangedBD", mutable = false, parentStruct = XrEventDataBaseHeader) {
+    Expression("#TYPE_EVENT_DATA_SENSE_DATA_PROVIDER_STATE_CHANGED_BD")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrSenseDataProviderBD("provider")
+    XrSenseDataProviderStateBD("newState")
+}
+
+val XrEventDataSenseDataUpdatedBD = struct(Module.OPENXR, "XrEventDataSenseDataUpdatedBD", mutable = false, parentStruct = XrEventDataBaseHeader) {
+    Expression("#TYPE_EVENT_DATA_SENSE_DATA_UPDATED_BD")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrSenseDataProviderBD("provider")
+}
+
+val XrSenseDataQueryInfoBD = struct(Module.OPENXR, "XrSenseDataQueryInfoBD") {
+    Expression("#TYPE_SENSE_DATA_QUERY_INFO_BD")..XrStructureType("type")
+    PointerSetter(
+        "XrSenseDataFilterSemanticBD", "XrSenseDataFilterUuidBD",
+        prepend = true
+    )..nullable..opaque_const_p("next")
+}
+
+val XrSenseDataQueryCompletionBD = struct(Module.OPENXR, "XrSenseDataQueryCompletionBD", parentStruct = _XrFutureCompletionBaseHeaderEXT) {
+    Expression("#TYPE_SENSE_DATA_QUERY_COMPLETION_BD")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrResult("futureResult")
+    XrSenseDataSnapshotBD("snapshot")
+}
+
+val XrQueriedSenseDataGetInfoBD = struct(Module.OPENXR, "XrQueriedSenseDataGetInfoBD") {
+    Expression("#TYPE_QUERIED_SENSE_DATA_GET_INFO_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+}
+
+val XrSpatialEntityStateBD = struct(Module.OPENXR, "XrSpatialEntityStateBD") {
+    Expression("#TYPE_SPATIAL_ENTITY_STATE_BD")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrSpatialEntityIdBD("entityId")
+    XrTime("lastUpdateTime")
+    XrUuidEXT("uuid")
+}
+
+val XrQueriedSenseDataBD = struct(Module.OPENXR, "XrQueriedSenseDataBD") {
+    Expression("#TYPE_QUERIED_SENSE_DATA_BD")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("states", optional = true)..uint32_t("stateCapacityInput")
+    uint32_t("stateCountOutput")
+    nullable..XrSpatialEntityStateBD.p("states")
+}
+
+val XrSenseDataFilterUuidBD = struct(Module.OPENXR, "XrSenseDataFilterUuidBD") {
+    Expression("#TYPE_SENSE_DATA_FILTER_UUID_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("uuids")..uint32_t("uuidCount")
+    XrUuidEXT.const.p("uuids")
+}
+
+val XrSenseDataFilterSemanticBD = struct(Module.OPENXR, "XrSenseDataFilterSemanticBD") {
+    Expression("#TYPE_SENSE_DATA_FILTER_SEMANTIC_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("labels")..uint32_t("labelCount")
+    XrSemanticLabelBD.const.p("labels")
+}
+
+val XrSpatialEntityAnchorCreateInfoBD = struct(Module.OPENXR, "XrSpatialEntityAnchorCreateInfoBD") {
+    Expression("#TYPE_SPATIAL_ENTITY_ANCHOR_CREATE_INFO_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSenseDataSnapshotBD("snapshot")
+    XrSpatialEntityIdBD("entityId")
+}
+
+val XrAnchorSpaceCreateInfoBD = struct(Module.OPENXR, "XrAnchorSpaceCreateInfoBD") {
+    Expression("#TYPE_ANCHOR_SPACE_CREATE_INFO_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrAnchorBD("anchor")
+    XrPosef("poseInAnchorSpace")
+}
+
+val XrFutureCompletionEXT = struct(Module.OPENXR, "XrFutureCompletionEXT", parentStruct = _XrFutureCompletionBaseHeaderEXT) {
+    Expression("#TYPE_FUTURE_COMPLETION_EXT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrResult("futureResult")
+}
+
+val XrSystemSpatialAnchorPropertiesBD = struct(Module.OPENXR, "XrSystemSpatialAnchorPropertiesBD", mutable = false) {
+    Expression("#TYPE_SYSTEM_SPATIAL_ANCHOR_PROPERTIES_BD")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsSpatialAnchor")
+}
+
+val XrSpatialAnchorCreateInfoBD = struct(Module.OPENXR, "XrSpatialAnchorCreateInfoBD") {
+    Expression("#TYPE_SPATIAL_ANCHOR_CREATE_INFO_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("space")
+    XrPosef("pose")
+    XrTime("time")
+}
+
+val XrSpatialAnchorCreateCompletionBD = struct(Module.OPENXR, "XrSpatialAnchorCreateCompletionBD", parentStruct = _XrFutureCompletionBaseHeaderEXT) {
+    Expression("#TYPE_SPATIAL_ANCHOR_CREATE_COMPLETION_BD")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrResult("futureResult")
+    XrAnchorBD("anchor")
+    XrUuidEXT("uuid")
+}
+
+val XrSpatialAnchorPersistInfoBD = struct(Module.OPENXR, "XrSpatialAnchorPersistInfoBD") {
+    Expression("#TYPE_SPATIAL_ANCHOR_PERSIST_INFO_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrPersistenceLocationBD("location")
+    XrAnchorBD("anchor")
+}
+
+val XrSpatialAnchorUnpersistInfoBD = struct(Module.OPENXR, "XrSpatialAnchorUnpersistInfoBD") {
+    Expression("#TYPE_SPATIAL_ANCHOR_UNPERSIST_INFO_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrPersistenceLocationBD("location")
+    XrAnchorBD("anchor")
+}
+
+val XrSystemSpatialAnchorSharingPropertiesBD = struct(Module.OPENXR, "XrSystemSpatialAnchorSharingPropertiesBD", mutable = false) {
+    Expression("#TYPE_SYSTEM_SPATIAL_ANCHOR_SHARING_PROPERTIES_BD")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsSpatialAnchorSharing")
+}
+
+val XrSpatialAnchorShareInfoBD = struct(Module.OPENXR, "XrSpatialAnchorShareInfoBD") {
+    Expression("#TYPE_SPATIAL_ANCHOR_SHARE_INFO_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrAnchorBD("anchor")
+}
+
+val XrSharedSpatialAnchorDownloadInfoBD = struct(Module.OPENXR, "XrSharedSpatialAnchorDownloadInfoBD") {
+    Expression("#TYPE_SHARED_SPATIAL_ANCHOR_DOWNLOAD_INFO_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrUuidEXT("uuid")
+}
+
+val XrSystemSpatialScenePropertiesBD = struct(Module.OPENXR, "XrSystemSpatialScenePropertiesBD", mutable = false) {
+    Expression("#TYPE_SYSTEM_SPATIAL_SCENE_PROPERTIES_BD")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsSpatialScene")
+}
+
+val XrSceneCaptureInfoBD = struct(Module.OPENXR, "XrSceneCaptureInfoBD") {
+    Expression("#TYPE_SCENE_CAPTURE_INFO_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+}
+
+val XrSystemSpatialMeshPropertiesBD = struct(Module.OPENXR, "XrSystemSpatialMeshPropertiesBD", mutable = false) {
+    Expression("#TYPE_SYSTEM_SPATIAL_MESH_PROPERTIES_BD")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsSpatialMesh")
+}
+
+val XrSenseDataProviderCreateInfoSpatialMeshBD = struct(Module.OPENXR, "XrSenseDataProviderCreateInfoSpatialMeshBD") {
+    Expression("#TYPE_SENSE_DATA_PROVIDER_CREATE_INFO_SPATIAL_MESH_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpatialMeshConfigFlagsBD("configFlags")
+    XrSpatialMeshLodBD("lod")
+}
+
 val XrHandTrackingDataSourceInfoEXT = struct(Module.OPENXR, "XrHandTrackingDataSourceInfoEXT") {
     Expression("#TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT")..XrStructureType("type")
     nullable..opaque_const_p("next")
@@ -2970,12 +3228,6 @@ val XrFuturePollInfoEXT = struct(Module.OPENXR, "XrFuturePollInfoEXT") {
 
 val XrFutureCompletionBaseHeaderEXT = struct(Module.OPENXR, "XrFutureCompletionBaseHeaderEXT") {
     XrStructureType("type")
-    nullable..opaque_p("next")
-    XrResult("futureResult")
-}
-
-val XrFutureCompletionEXT = struct(Module.OPENXR, "XrFutureCompletionEXT", parentStruct = XrFutureCompletionBaseHeaderEXT) {
-    Expression("#TYPE_FUTURE_COMPLETION_EXT")..XrStructureType("type")
     nullable..opaque_p("next")
     XrResult("futureResult")
 }

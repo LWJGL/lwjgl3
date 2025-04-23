@@ -37,6 +37,9 @@ val xcb_visualid_t = typedef(uint32_t, "xcb_visualid_t")
 val xcb_glx_drawable_t = typedef(uint32_t, "xcb_glx_drawable_t")
 val xcb_glx_context_t = typedef(uint32_t, "xcb_glx_context_t")
 
+// XR_BD_spatial_sensing
+val XrSpatialEntityIdBD = XR_DEFINE_ATOM("XrSpatialEntityIdBD")
+
 // XR_EXT_future
 val XrFutureEXT = typedef(uint64_t, "XrFutureEXT")
 
