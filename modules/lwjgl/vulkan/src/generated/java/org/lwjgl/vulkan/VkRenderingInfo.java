@@ -151,10 +151,14 @@ public class VkRenderingInfo extends Struct<VkRenderingInfo> implements NativeRe
     public VkRenderingInfo pNext(VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderPassStripeBeginInfoARM} value to the {@code pNext} chain. */
     public VkRenderingInfo pNext(VkRenderPassStripeBeginInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkRenderPassTileShadingCreateInfoQCOM} value to the {@code pNext} chain. */
+    public VkRenderingInfo pNext(VkRenderPassTileShadingCreateInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderingFragmentDensityMapAttachmentInfoEXT} value to the {@code pNext} chain. */
     public VkRenderingInfo pNext(VkRenderingFragmentDensityMapAttachmentInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderingFragmentShadingRateAttachmentInfoKHR} value to the {@code pNext} chain. */
     public VkRenderingInfo pNext(VkRenderingFragmentShadingRateAttachmentInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkTileMemorySizeInfoQCOM} value to the {@code pNext} chain. */
+    public VkRenderingInfo pNext(VkTileMemorySizeInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code flags} field. */
     public VkRenderingInfo flags(@NativeType("VkRenderingFlags") int value) { nflags(address(), value); return this; }
     /** Copies the specified {@link VkRect2D} to the {@code renderArea} field. */
@@ -464,10 +468,14 @@ public class VkRenderingInfo extends Struct<VkRenderingInfo> implements NativeRe
         public VkRenderingInfo.Buffer pNext(VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderPassStripeBeginInfoARM} value to the {@code pNext} chain. */
         public VkRenderingInfo.Buffer pNext(VkRenderPassStripeBeginInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkRenderPassTileShadingCreateInfoQCOM} value to the {@code pNext} chain. */
+        public VkRenderingInfo.Buffer pNext(VkRenderPassTileShadingCreateInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderingFragmentDensityMapAttachmentInfoEXT} value to the {@code pNext} chain. */
         public VkRenderingInfo.Buffer pNext(VkRenderingFragmentDensityMapAttachmentInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderingFragmentShadingRateAttachmentInfoKHR} value to the {@code pNext} chain. */
         public VkRenderingInfo.Buffer pNext(VkRenderingFragmentShadingRateAttachmentInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkTileMemorySizeInfoQCOM} value to the {@code pNext} chain. */
+        public VkRenderingInfo.Buffer pNext(VkTileMemorySizeInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code flags} field. */
         public VkRenderingInfo.Buffer flags(@NativeType("VkRenderingFlags") int value) { VkRenderingInfo.nflags(address(), value); return this; }
         /** Copies the specified {@link VkRect2D} to the {@code renderArea} field. */

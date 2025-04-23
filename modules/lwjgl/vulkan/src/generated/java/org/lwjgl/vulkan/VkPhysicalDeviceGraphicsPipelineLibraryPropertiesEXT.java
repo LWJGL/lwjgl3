@@ -97,22 +97,14 @@ public class VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT extends Struct
     public VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT sType$Default() { return sType(EXTGraphicsPipelineLibrary.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_PROPERTIES_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code graphicsPipelineLibraryFastLinking} field. */
-    public VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT graphicsPipelineLibraryFastLinking(@NativeType("VkBool32") boolean value) { ngraphicsPipelineLibraryFastLinking(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code graphicsPipelineLibraryIndependentInterpolationDecoration} field. */
-    public VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT graphicsPipelineLibraryIndependentInterpolationDecoration(@NativeType("VkBool32") boolean value) { ngraphicsPipelineLibraryIndependentInterpolationDecoration(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT set(
         int sType,
-        long pNext,
-        boolean graphicsPipelineLibraryFastLinking,
-        boolean graphicsPipelineLibraryIndependentInterpolationDecoration
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        graphicsPipelineLibraryFastLinking(graphicsPipelineLibraryFastLinking);
-        graphicsPipelineLibraryIndependentInterpolationDecoration(graphicsPipelineLibraryIndependentInterpolationDecoration);
 
         return this;
     }
@@ -253,10 +245,6 @@ public class VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT extends Struct
     public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT.PNEXT, value); }
-    /** Unsafe version of {@link #graphicsPipelineLibraryFastLinking(boolean) graphicsPipelineLibraryFastLinking}. */
-    public static void ngraphicsPipelineLibraryFastLinking(long struct, int value) { memPutInt(struct + VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT.GRAPHICSPIPELINELIBRARYFASTLINKING, value); }
-    /** Unsafe version of {@link #graphicsPipelineLibraryIndependentInterpolationDecoration(boolean) graphicsPipelineLibraryIndependentInterpolationDecoration}. */
-    public static void ngraphicsPipelineLibraryIndependentInterpolationDecoration(long struct, int value) { memPutInt(struct + VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT.GRAPHICSPIPELINELIBRARYINDEPENDENTINTERPOLATIONDECORATION, value); }
 
     // -----------------------------------
 
@@ -320,10 +308,6 @@ public class VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT extends Struct
         public VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT.Buffer sType$Default() { return sType(EXTGraphicsPipelineLibrary.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_PROPERTIES_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code graphicsPipelineLibraryFastLinking} field. */
-        public VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT.Buffer graphicsPipelineLibraryFastLinking(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT.ngraphicsPipelineLibraryFastLinking(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code graphicsPipelineLibraryIndependentInterpolationDecoration} field. */
-        public VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT.Buffer graphicsPipelineLibraryIndependentInterpolationDecoration(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT.ngraphicsPipelineLibraryIndependentInterpolationDecoration(address(), value ? 1 : 0); return this; }
 
     }
 

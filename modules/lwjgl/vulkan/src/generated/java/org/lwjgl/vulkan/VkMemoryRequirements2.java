@@ -93,6 +93,8 @@ public class VkMemoryRequirements2 extends Struct<VkMemoryRequirements2> impleme
     public VkMemoryRequirements2 pNext(VkMemoryDedicatedRequirements value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMemoryDedicatedRequirementsKHR} value to the {@code pNext} chain. */
     public VkMemoryRequirements2 pNext(VkMemoryDedicatedRequirementsKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkTileMemoryRequirementsQCOM} value to the {@code pNext} chain. */
+    public VkMemoryRequirements2 pNext(VkTileMemoryRequirementsQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     /** Initializes this struct with the specified values. */
     public VkMemoryRequirements2 set(
@@ -321,6 +323,8 @@ public class VkMemoryRequirements2 extends Struct<VkMemoryRequirements2> impleme
         public VkMemoryRequirements2.Buffer pNext(VkMemoryDedicatedRequirements value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMemoryDedicatedRequirementsKHR} value to the {@code pNext} chain. */
         public VkMemoryRequirements2.Buffer pNext(VkMemoryDedicatedRequirementsKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkTileMemoryRequirementsQCOM} value to the {@code pNext} chain. */
+        public VkMemoryRequirements2.Buffer pNext(VkTileMemoryRequirementsQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     }
 

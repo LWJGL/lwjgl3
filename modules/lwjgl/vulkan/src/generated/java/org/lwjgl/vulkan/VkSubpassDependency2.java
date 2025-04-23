@@ -143,6 +143,8 @@ public class VkSubpassDependency2 extends Struct<VkSubpassDependency2> implement
     public VkSubpassDependency2 pNext(VkMemoryBarrier2 value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMemoryBarrier2KHR} value to the {@code pNext} chain. */
     public VkSubpassDependency2 pNext(VkMemoryBarrier2KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkMemoryBarrierAccessFlags3KHR} value to the {@code pNext} chain. */
+    public VkSubpassDependency2 pNext(VkMemoryBarrierAccessFlags3KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code srcSubpass} field. */
     public VkSubpassDependency2 srcSubpass(@NativeType("uint32_t") int value) { nsrcSubpass(address(), value); return this; }
     /** Sets the specified value to the {@code dstSubpass} field. */
@@ -436,6 +438,8 @@ public class VkSubpassDependency2 extends Struct<VkSubpassDependency2> implement
         public VkSubpassDependency2.Buffer pNext(VkMemoryBarrier2 value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMemoryBarrier2KHR} value to the {@code pNext} chain. */
         public VkSubpassDependency2.Buffer pNext(VkMemoryBarrier2KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkMemoryBarrierAccessFlags3KHR} value to the {@code pNext} chain. */
+        public VkSubpassDependency2.Buffer pNext(VkMemoryBarrierAccessFlags3KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code srcSubpass} field. */
         public VkSubpassDependency2.Buffer srcSubpass(@NativeType("uint32_t") int value) { VkSubpassDependency2.nsrcSubpass(address(), value); return this; }
         /** Sets the specified value to the {@code dstSubpass} field. */

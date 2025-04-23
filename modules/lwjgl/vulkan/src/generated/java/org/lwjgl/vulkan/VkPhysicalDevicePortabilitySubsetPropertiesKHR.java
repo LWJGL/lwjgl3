@@ -90,18 +90,14 @@ public class VkPhysicalDevicePortabilitySubsetPropertiesKHR extends Struct<VkPhy
     public VkPhysicalDevicePortabilitySubsetPropertiesKHR sType$Default() { return sType(KHRPortabilitySubset.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDevicePortabilitySubsetPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code minVertexInputBindingStrideAlignment} field. */
-    public VkPhysicalDevicePortabilitySubsetPropertiesKHR minVertexInputBindingStrideAlignment(@NativeType("uint32_t") int value) { nminVertexInputBindingStrideAlignment(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDevicePortabilitySubsetPropertiesKHR set(
         int sType,
-        long pNext,
-        int minVertexInputBindingStrideAlignment
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        minVertexInputBindingStrideAlignment(minVertexInputBindingStrideAlignment);
 
         return this;
     }
@@ -240,8 +236,6 @@ public class VkPhysicalDevicePortabilitySubsetPropertiesKHR extends Struct<VkPhy
     public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevicePortabilitySubsetPropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevicePortabilitySubsetPropertiesKHR.PNEXT, value); }
-    /** Unsafe version of {@link #minVertexInputBindingStrideAlignment(int) minVertexInputBindingStrideAlignment}. */
-    public static void nminVertexInputBindingStrideAlignment(long struct, int value) { memPutInt(struct + VkPhysicalDevicePortabilitySubsetPropertiesKHR.MINVERTEXINPUTBINDINGSTRIDEALIGNMENT, value); }
 
     // -----------------------------------
 
@@ -302,8 +296,6 @@ public class VkPhysicalDevicePortabilitySubsetPropertiesKHR extends Struct<VkPhy
         public VkPhysicalDevicePortabilitySubsetPropertiesKHR.Buffer sType$Default() { return sType(KHRPortabilitySubset.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDevicePortabilitySubsetPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePortabilitySubsetPropertiesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code minVertexInputBindingStrideAlignment} field. */
-        public VkPhysicalDevicePortabilitySubsetPropertiesKHR.Buffer minVertexInputBindingStrideAlignment(@NativeType("uint32_t") int value) { VkPhysicalDevicePortabilitySubsetPropertiesKHR.nminVertexInputBindingStrideAlignment(address(), value); return this; }
 
     }
 

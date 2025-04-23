@@ -143,6 +143,8 @@ public class VkCommandBufferInheritanceInfo extends Struct<VkCommandBufferInheri
     public VkCommandBufferInheritanceInfo pNext(VkExternalFormatANDROID value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMultiviewPerViewAttributesInfoNVX} value to the {@code pNext} chain. */
     public VkCommandBufferInheritanceInfo pNext(VkMultiviewPerViewAttributesInfoNVX value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkRenderPassTileShadingCreateInfoQCOM} value to the {@code pNext} chain. */
+    public VkCommandBufferInheritanceInfo pNext(VkRenderPassTileShadingCreateInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderingAttachmentLocationInfo} value to the {@code pNext} chain. */
     public VkCommandBufferInheritanceInfo pNext(VkRenderingAttachmentLocationInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderingAttachmentLocationInfoKHR} value to the {@code pNext} chain. */
@@ -151,6 +153,8 @@ public class VkCommandBufferInheritanceInfo extends Struct<VkCommandBufferInheri
     public VkCommandBufferInheritanceInfo pNext(VkRenderingInputAttachmentIndexInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderingInputAttachmentIndexInfoKHR} value to the {@code pNext} chain. */
     public VkCommandBufferInheritanceInfo pNext(VkRenderingInputAttachmentIndexInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkTileMemoryBindInfoQCOM} value to the {@code pNext} chain. */
+    public VkCommandBufferInheritanceInfo pNext(VkTileMemoryBindInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code renderPass} field. */
     public VkCommandBufferInheritanceInfo renderPass(@NativeType("VkRenderPass") long value) { nrenderPass(address(), value); return this; }
     /** Sets the specified value to the {@code subpass} field. */
@@ -455,6 +459,8 @@ public class VkCommandBufferInheritanceInfo extends Struct<VkCommandBufferInheri
         public VkCommandBufferInheritanceInfo.Buffer pNext(VkExternalFormatANDROID value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMultiviewPerViewAttributesInfoNVX} value to the {@code pNext} chain. */
         public VkCommandBufferInheritanceInfo.Buffer pNext(VkMultiviewPerViewAttributesInfoNVX value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkRenderPassTileShadingCreateInfoQCOM} value to the {@code pNext} chain. */
+        public VkCommandBufferInheritanceInfo.Buffer pNext(VkRenderPassTileShadingCreateInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderingAttachmentLocationInfo} value to the {@code pNext} chain. */
         public VkCommandBufferInheritanceInfo.Buffer pNext(VkRenderingAttachmentLocationInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderingAttachmentLocationInfoKHR} value to the {@code pNext} chain. */
@@ -463,6 +469,8 @@ public class VkCommandBufferInheritanceInfo extends Struct<VkCommandBufferInheri
         public VkCommandBufferInheritanceInfo.Buffer pNext(VkRenderingInputAttachmentIndexInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderingInputAttachmentIndexInfoKHR} value to the {@code pNext} chain. */
         public VkCommandBufferInheritanceInfo.Buffer pNext(VkRenderingInputAttachmentIndexInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkTileMemoryBindInfoQCOM} value to the {@code pNext} chain. */
+        public VkCommandBufferInheritanceInfo.Buffer pNext(VkTileMemoryBindInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code renderPass} field. */
         public VkCommandBufferInheritanceInfo.Buffer renderPass(@NativeType("VkRenderPass") long value) { VkCommandBufferInheritanceInfo.nrenderPass(address(), value); return this; }
         /** Sets the specified value to the {@code subpass} field. */

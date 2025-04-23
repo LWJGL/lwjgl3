@@ -118,34 +118,14 @@ public class VkPhysicalDevicePipelineBinaryPropertiesKHR extends Struct<VkPhysic
     public VkPhysicalDevicePipelineBinaryPropertiesKHR sType$Default() { return sType(KHRPipelineBinary.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_BINARY_PROPERTIES_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDevicePipelineBinaryPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code pipelineBinaryInternalCache} field. */
-    public VkPhysicalDevicePipelineBinaryPropertiesKHR pipelineBinaryInternalCache(@NativeType("VkBool32") boolean value) { npipelineBinaryInternalCache(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code pipelineBinaryInternalCacheControl} field. */
-    public VkPhysicalDevicePipelineBinaryPropertiesKHR pipelineBinaryInternalCacheControl(@NativeType("VkBool32") boolean value) { npipelineBinaryInternalCacheControl(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code pipelineBinaryPrefersInternalCache} field. */
-    public VkPhysicalDevicePipelineBinaryPropertiesKHR pipelineBinaryPrefersInternalCache(@NativeType("VkBool32") boolean value) { npipelineBinaryPrefersInternalCache(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code pipelineBinaryPrecompiledInternalCache} field. */
-    public VkPhysicalDevicePipelineBinaryPropertiesKHR pipelineBinaryPrecompiledInternalCache(@NativeType("VkBool32") boolean value) { npipelineBinaryPrecompiledInternalCache(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code pipelineBinaryCompressedData} field. */
-    public VkPhysicalDevicePipelineBinaryPropertiesKHR pipelineBinaryCompressedData(@NativeType("VkBool32") boolean value) { npipelineBinaryCompressedData(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDevicePipelineBinaryPropertiesKHR set(
         int sType,
-        long pNext,
-        boolean pipelineBinaryInternalCache,
-        boolean pipelineBinaryInternalCacheControl,
-        boolean pipelineBinaryPrefersInternalCache,
-        boolean pipelineBinaryPrecompiledInternalCache,
-        boolean pipelineBinaryCompressedData
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        pipelineBinaryInternalCache(pipelineBinaryInternalCache);
-        pipelineBinaryInternalCacheControl(pipelineBinaryInternalCacheControl);
-        pipelineBinaryPrefersInternalCache(pipelineBinaryPrefersInternalCache);
-        pipelineBinaryPrecompiledInternalCache(pipelineBinaryPrecompiledInternalCache);
-        pipelineBinaryCompressedData(pipelineBinaryCompressedData);
 
         return this;
     }
@@ -292,16 +272,6 @@ public class VkPhysicalDevicePipelineBinaryPropertiesKHR extends Struct<VkPhysic
     public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PNEXT, value); }
-    /** Unsafe version of {@link #pipelineBinaryInternalCache(boolean) pipelineBinaryInternalCache}. */
-    public static void npipelineBinaryInternalCache(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYINTERNALCACHE, value); }
-    /** Unsafe version of {@link #pipelineBinaryInternalCacheControl(boolean) pipelineBinaryInternalCacheControl}. */
-    public static void npipelineBinaryInternalCacheControl(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYINTERNALCACHECONTROL, value); }
-    /** Unsafe version of {@link #pipelineBinaryPrefersInternalCache(boolean) pipelineBinaryPrefersInternalCache}. */
-    public static void npipelineBinaryPrefersInternalCache(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYPREFERSINTERNALCACHE, value); }
-    /** Unsafe version of {@link #pipelineBinaryPrecompiledInternalCache(boolean) pipelineBinaryPrecompiledInternalCache}. */
-    public static void npipelineBinaryPrecompiledInternalCache(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYPRECOMPILEDINTERNALCACHE, value); }
-    /** Unsafe version of {@link #pipelineBinaryCompressedData(boolean) pipelineBinaryCompressedData}. */
-    public static void npipelineBinaryCompressedData(long struct, int value) { memPutInt(struct + VkPhysicalDevicePipelineBinaryPropertiesKHR.PIPELINEBINARYCOMPRESSEDDATA, value); }
 
     // -----------------------------------
 
@@ -374,16 +344,6 @@ public class VkPhysicalDevicePipelineBinaryPropertiesKHR extends Struct<VkPhysic
         public VkPhysicalDevicePipelineBinaryPropertiesKHR.Buffer sType$Default() { return sType(KHRPipelineBinary.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_BINARY_PROPERTIES_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDevicePipelineBinaryPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePipelineBinaryPropertiesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code pipelineBinaryInternalCache} field. */
-        public VkPhysicalDevicePipelineBinaryPropertiesKHR.Buffer pipelineBinaryInternalCache(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePipelineBinaryPropertiesKHR.npipelineBinaryInternalCache(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code pipelineBinaryInternalCacheControl} field. */
-        public VkPhysicalDevicePipelineBinaryPropertiesKHR.Buffer pipelineBinaryInternalCacheControl(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePipelineBinaryPropertiesKHR.npipelineBinaryInternalCacheControl(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code pipelineBinaryPrefersInternalCache} field. */
-        public VkPhysicalDevicePipelineBinaryPropertiesKHR.Buffer pipelineBinaryPrefersInternalCache(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePipelineBinaryPropertiesKHR.npipelineBinaryPrefersInternalCache(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code pipelineBinaryPrecompiledInternalCache} field. */
-        public VkPhysicalDevicePipelineBinaryPropertiesKHR.Buffer pipelineBinaryPrecompiledInternalCache(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePipelineBinaryPropertiesKHR.npipelineBinaryPrecompiledInternalCache(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code pipelineBinaryCompressedData} field. */
-        public VkPhysicalDevicePipelineBinaryPropertiesKHR.Buffer pipelineBinaryCompressedData(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePipelineBinaryPropertiesKHR.npipelineBinaryCompressedData(address(), value ? 1 : 0); return this; }
 
     }
 

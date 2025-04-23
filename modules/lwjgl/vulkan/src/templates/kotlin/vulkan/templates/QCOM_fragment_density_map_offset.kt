@@ -10,7 +10,7 @@ import vulkan.*
 
 val QCOM_fragment_density_map_offset = "QCOMFragmentDensityMapOffset".nativeClassVK("QCOM_fragment_density_map_offset", type = "device", postfix = "QCOM") {
     IntConstant(
-        "QCOM_FRAGMENT_DENSITY_MAP_OFFSET_SPEC_VERSION".."2"
+        "QCOM_FRAGMENT_DENSITY_MAP_OFFSET_SPEC_VERSION".."3"
     )
 
     StringConstant(

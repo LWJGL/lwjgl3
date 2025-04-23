@@ -90,18 +90,14 @@ public class VkPhysicalDeviceExtendedDynamicState3PropertiesEXT extends Struct<V
     public VkPhysicalDeviceExtendedDynamicState3PropertiesEXT sType$Default() { return sType(EXTExtendedDynamicState3.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_3_PROPERTIES_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceExtendedDynamicState3PropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code dynamicPrimitiveTopologyUnrestricted} field. */
-    public VkPhysicalDeviceExtendedDynamicState3PropertiesEXT dynamicPrimitiveTopologyUnrestricted(@NativeType("VkBool32") boolean value) { ndynamicPrimitiveTopologyUnrestricted(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDeviceExtendedDynamicState3PropertiesEXT set(
         int sType,
-        long pNext,
-        boolean dynamicPrimitiveTopologyUnrestricted
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        dynamicPrimitiveTopologyUnrestricted(dynamicPrimitiveTopologyUnrestricted);
 
         return this;
     }
@@ -240,8 +236,6 @@ public class VkPhysicalDeviceExtendedDynamicState3PropertiesEXT extends Struct<V
     public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.PNEXT, value); }
-    /** Unsafe version of {@link #dynamicPrimitiveTopologyUnrestricted(boolean) dynamicPrimitiveTopologyUnrestricted}. */
-    public static void ndynamicPrimitiveTopologyUnrestricted(long struct, int value) { memPutInt(struct + VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.DYNAMICPRIMITIVETOPOLOGYUNRESTRICTED, value); }
 
     // -----------------------------------
 
@@ -302,8 +296,6 @@ public class VkPhysicalDeviceExtendedDynamicState3PropertiesEXT extends Struct<V
         public VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.Buffer sType$Default() { return sType(EXTExtendedDynamicState3.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_3_PROPERTIES_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code dynamicPrimitiveTopologyUnrestricted} field. */
-        public VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.Buffer dynamicPrimitiveTopologyUnrestricted(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.ndynamicPrimitiveTopologyUnrestricted(address(), value ? 1 : 0); return this; }
 
     }
 

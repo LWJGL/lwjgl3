@@ -83,6 +83,8 @@ public class VkSubpassEndInfo extends Struct<VkSubpassEndInfo> implements Native
     public VkSubpassEndInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_END_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkSubpassEndInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkRenderPassFragmentDensityMapOffsetEndInfoEXT} value to the {@code pNext} chain. */
+    public VkSubpassEndInfo pNext(VkRenderPassFragmentDensityMapOffsetEndInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSubpassFragmentDensityMapOffsetEndInfoQCOM} value to the {@code pNext} chain. */
     public VkSubpassEndInfo pNext(VkSubpassFragmentDensityMapOffsetEndInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
@@ -286,6 +288,8 @@ public class VkSubpassEndInfo extends Struct<VkSubpassEndInfo> implements Native
         public VkSubpassEndInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_END_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkSubpassEndInfo.Buffer pNext(@NativeType("void const *") long value) { VkSubpassEndInfo.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkRenderPassFragmentDensityMapOffsetEndInfoEXT} value to the {@code pNext} chain. */
+        public VkSubpassEndInfo.Buffer pNext(VkRenderPassFragmentDensityMapOffsetEndInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSubpassFragmentDensityMapOffsetEndInfoQCOM} value to the {@code pNext} chain. */
         public VkSubpassEndInfo.Buffer pNext(VkSubpassFragmentDensityMapOffsetEndInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
 

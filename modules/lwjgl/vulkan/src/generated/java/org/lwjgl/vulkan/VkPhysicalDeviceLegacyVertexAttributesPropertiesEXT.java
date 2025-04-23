@@ -90,18 +90,14 @@ public class VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT extends Struct<
     public VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT sType$Default() { return sType(EXTLegacyVertexAttributes.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_PROPERTIES_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code nativeUnalignedPerformance} field. */
-    public VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT nativeUnalignedPerformance(@NativeType("VkBool32") boolean value) { nnativeUnalignedPerformance(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT set(
         int sType,
-        long pNext,
-        boolean nativeUnalignedPerformance
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        nativeUnalignedPerformance(nativeUnalignedPerformance);
 
         return this;
     }
@@ -240,8 +236,6 @@ public class VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT extends Struct<
     public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.PNEXT, value); }
-    /** Unsafe version of {@link #nativeUnalignedPerformance(boolean) nativeUnalignedPerformance}. */
-    public static void nnativeUnalignedPerformance(long struct, int value) { memPutInt(struct + VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.NATIVEUNALIGNEDPERFORMANCE, value); }
 
     // -----------------------------------
 
@@ -302,8 +296,6 @@ public class VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT extends Struct<
         public VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.Buffer sType$Default() { return sType(EXTLegacyVertexAttributes.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_PROPERTIES_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code nativeUnalignedPerformance} field. */
-        public VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.Buffer nativeUnalignedPerformance(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.nnativeUnalignedPerformance(address(), value ? 1 : 0); return this; }
 
     }
 

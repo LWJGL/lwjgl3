@@ -90,18 +90,14 @@ public class VkPhysicalDeviceNestedCommandBufferPropertiesEXT extends Struct<VkP
     public VkPhysicalDeviceNestedCommandBufferPropertiesEXT sType$Default() { return sType(EXTNestedCommandBuffer.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_NESTED_COMMAND_BUFFER_PROPERTIES_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceNestedCommandBufferPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code maxCommandBufferNestingLevel} field. */
-    public VkPhysicalDeviceNestedCommandBufferPropertiesEXT maxCommandBufferNestingLevel(@NativeType("uint32_t") int value) { nmaxCommandBufferNestingLevel(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDeviceNestedCommandBufferPropertiesEXT set(
         int sType,
-        long pNext,
-        int maxCommandBufferNestingLevel
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        maxCommandBufferNestingLevel(maxCommandBufferNestingLevel);
 
         return this;
     }
@@ -240,8 +236,6 @@ public class VkPhysicalDeviceNestedCommandBufferPropertiesEXT extends Struct<VkP
     public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceNestedCommandBufferPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceNestedCommandBufferPropertiesEXT.PNEXT, value); }
-    /** Unsafe version of {@link #maxCommandBufferNestingLevel(int) maxCommandBufferNestingLevel}. */
-    public static void nmaxCommandBufferNestingLevel(long struct, int value) { memPutInt(struct + VkPhysicalDeviceNestedCommandBufferPropertiesEXT.MAXCOMMANDBUFFERNESTINGLEVEL, value); }
 
     // -----------------------------------
 
@@ -302,8 +296,6 @@ public class VkPhysicalDeviceNestedCommandBufferPropertiesEXT extends Struct<VkP
         public VkPhysicalDeviceNestedCommandBufferPropertiesEXT.Buffer sType$Default() { return sType(EXTNestedCommandBuffer.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_NESTED_COMMAND_BUFFER_PROPERTIES_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceNestedCommandBufferPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceNestedCommandBufferPropertiesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code maxCommandBufferNestingLevel} field. */
-        public VkPhysicalDeviceNestedCommandBufferPropertiesEXT.Buffer maxCommandBufferNestingLevel(@NativeType("uint32_t") int value) { VkPhysicalDeviceNestedCommandBufferPropertiesEXT.nmaxCommandBufferNestingLevel(address(), value); return this; }
 
     }
 

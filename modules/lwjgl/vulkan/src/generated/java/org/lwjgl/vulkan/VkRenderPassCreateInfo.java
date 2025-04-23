@@ -143,6 +143,10 @@ public class VkRenderPassCreateInfo extends Struct<VkRenderPassCreateInfo> imple
     public VkRenderPassCreateInfo pNext(VkRenderPassMultiviewCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderPassMultiviewCreateInfoKHR} value to the {@code pNext} chain. */
     public VkRenderPassCreateInfo pNext(VkRenderPassMultiviewCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkRenderPassTileShadingCreateInfoQCOM} value to the {@code pNext} chain. */
+    public VkRenderPassCreateInfo pNext(VkRenderPassTileShadingCreateInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkTileMemorySizeInfoQCOM} value to the {@code pNext} chain. */
+    public VkRenderPassCreateInfo pNext(VkTileMemorySizeInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code flags} field. */
     public VkRenderPassCreateInfo flags(@NativeType("VkRenderPassCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the address of the specified {@link VkAttachmentDescription.Buffer} to the {@code pAttachments} field. */
@@ -456,6 +460,10 @@ public class VkRenderPassCreateInfo extends Struct<VkRenderPassCreateInfo> imple
         public VkRenderPassCreateInfo.Buffer pNext(VkRenderPassMultiviewCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderPassMultiviewCreateInfoKHR} value to the {@code pNext} chain. */
         public VkRenderPassCreateInfo.Buffer pNext(VkRenderPassMultiviewCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkRenderPassTileShadingCreateInfoQCOM} value to the {@code pNext} chain. */
+        public VkRenderPassCreateInfo.Buffer pNext(VkRenderPassTileShadingCreateInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkTileMemorySizeInfoQCOM} value to the {@code pNext} chain. */
+        public VkRenderPassCreateInfo.Buffer pNext(VkTileMemorySizeInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code flags} field. */
         public VkRenderPassCreateInfo.Buffer flags(@NativeType("VkRenderPassCreateFlags") int value) { VkRenderPassCreateInfo.nflags(address(), value); return this; }
         /** Sets the address of the specified {@link VkAttachmentDescription.Buffer} to the {@code pAttachments} field. */
