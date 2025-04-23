@@ -13,7 +13,7 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
 
     cpp = true
 
-    IntConstant("MESHOPTIMIZER_VERSION".."220").noPrefix()
+    IntConstant("MESHOPTIMIZER_VERSION".."230").noPrefix()
 
     size_t(
         "generateVertexRemap",
@@ -203,6 +203,13 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
         AutoSize("buffer")..size_t("buffer_size")
     )
 
+    int(
+        "decodeIndexVersion",
+
+        unsigned_char.const.p("buffer"),
+        AutoSize("buffer")..size_t("buffer_size")
+    )
+
     size_t(
         "encodeIndexSequence",
 
@@ -245,6 +252,17 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
         size_t("vertex_size")
     )
 
+    size_t(
+        "encodeVertexBufferLevel",
+
+        unsigned_char.p("buffer"),
+        AutoSize("buffer")..size_t("buffer_size"),
+        Check("vertex_count * vertex_size")..void.const.p("vertices"),
+        size_t("vertex_count"),
+        size_t("vertex_size"),
+        int("level")
+    )
+
     void(
         "encodeVertexVersion",
 
@@ -257,6 +275,13 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
         Check("vertex_count * vertex_size")..void.p("destination"),
         size_t("vertex_count"),
         size_t("vertex_size"),
+        unsigned_char.const.p("buffer"),
+        AutoSize("buffer")..size_t("buffer_size")
+    )
+
+    int(
+        "decodeVertexVersion",
+
         unsigned_char.const.p("buffer"),
         AutoSize("buffer")..size_t("buffer_size")
     )
@@ -498,6 +523,24 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
         size_t("max_triangles")
     )
 
+    size_t(
+        "buildMeshletsFlex",
+
+        Unsafe..meshopt_Meshlet.p("meshlets"),
+        Check("meshlets.remaining() * max_vertices")..unsigned_int.p("meshlet_vertices"),
+        Check("meshlets.remaining() * max_triangles * 3")..unsigned_char.p("meshlet_triangles"),
+        unsigned_int.const.p("indices"),
+        AutoSize("indices")..size_t("index_count"),
+        Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p("vertex_positions"),
+        size_t("vertex_count"),
+        size_t("vertex_positions_stride"),
+        size_t("max_vertices"),
+        size_t("min_triangles"),
+        size_t("max_triangles"),
+        float("cone_weight"),
+        float("split_factor")
+    )
+
     void(
         "optimizeMeshlet",
 
@@ -528,6 +571,28 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
         size_t("vertex_positions_stride")
     )
 
+    meshopt_Bounds(
+        "computeSphereBounds",
+
+        Check("count * (positions_stride >>> 2)")..float.const.p("positions"),
+        size_t("count"),
+        size_t("positions_stride"),
+        Check("count * (radii_stride >>> 2)")..nullable..float.const.p("radii"),
+        size_t("radii_stride")
+    )
+
+    size_t(
+        "partitionClusters",
+
+        unsigned_int.p("destination"),
+        unsigned_int.const.p("cluster_indices"),
+        AutoSize("cluster_indices")..size_t("total_index_count"),
+        unsigned_int.const.p("cluster_index_counts"),
+        AutoSize("cluster_index_counts", "destination")..size_t("cluster_count"),
+        size_t("vertex_count"),
+        size_t("target_partition_size")
+    )
+
     void(
         "spatialSortRemap",
 
@@ -546,13 +611,6 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
         Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p("vertex_positions"),
         size_t("vertex_count"),
         size_t("vertex_positions_stride")
-    )
-
-    void(
-        "setAllocator",
-
-        meshopt_AllocateCB("allocate"),
-        meshopt_DeallocateCB("deallocate")
     )
 
     NativeName("meshopt_quantizeUnorm")..internal..int(
@@ -586,6 +644,13 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
         "dequantizeHalf_ref",
 
         unsigned_short("h")
+    )
+
+    void(
+        "setAllocator",
+
+        meshopt_AllocateCB("allocate"),
+        meshopt_DeallocateCB("deallocate")
     )
 
     customMethod("""

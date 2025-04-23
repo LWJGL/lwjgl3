@@ -20,7 +20,7 @@ public class MeshOptimizer {
 
     static { LibMeshOptimizer.initialize(); }
 
-    public static final int MESHOPTIMIZER_VERSION = 220;
+    public static final int MESHOPTIMIZER_VERSION = 230;
 
     public static final int
         meshopt_EncodeExpSeparate        = 0,
@@ -283,6 +283,16 @@ public class MeshOptimizer {
         return nmeshopt_decodeIndexBuffer(memAddress(destination), index_count, index_size, memAddress(buffer), buffer.remaining());
     }
 
+    // --- [ meshopt_decodeIndexVersion ] ---
+
+    /** {@code int meshopt_decodeIndexVersion(unsigned char const * buffer, size_t buffer_size)} */
+    public static native int nmeshopt_decodeIndexVersion(long buffer, long buffer_size);
+
+    /** {@code int meshopt_decodeIndexVersion(unsigned char const * buffer, size_t buffer_size)} */
+    public static int meshopt_decodeIndexVersion(@NativeType("unsigned char const *") ByteBuffer buffer) {
+        return nmeshopt_decodeIndexVersion(memAddress(buffer), buffer.remaining());
+    }
+
     // --- [ meshopt_encodeIndexSequence ] ---
 
     /** {@code size_t meshopt_encodeIndexSequence(unsigned char * buffer, size_t buffer_size, unsigned int const * indices, size_t index_count)} */
@@ -333,6 +343,20 @@ public class MeshOptimizer {
     @NativeType("size_t")
     public static native long meshopt_encodeVertexBufferBound(@NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_size);
 
+    // --- [ meshopt_encodeVertexBufferLevel ] ---
+
+    /** {@code size_t meshopt_encodeVertexBufferLevel(unsigned char * buffer, size_t buffer_size, void const * vertices, size_t vertex_count, size_t vertex_size, int level)} */
+    public static native long nmeshopt_encodeVertexBufferLevel(long buffer, long buffer_size, long vertices, long vertex_count, long vertex_size, int level);
+
+    /** {@code size_t meshopt_encodeVertexBufferLevel(unsigned char * buffer, size_t buffer_size, void const * vertices, size_t vertex_count, size_t vertex_size, int level)} */
+    @NativeType("size_t")
+    public static long meshopt_encodeVertexBufferLevel(@NativeType("unsigned char *") ByteBuffer buffer, @NativeType("void const *") ByteBuffer vertices, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_size, int level) {
+        if (CHECKS) {
+            check(vertices, vertex_count * vertex_size);
+        }
+        return nmeshopt_encodeVertexBufferLevel(memAddress(buffer), buffer.remaining(), memAddress(vertices), vertex_count, vertex_size, level);
+    }
+
     // --- [ meshopt_encodeVertexVersion ] ---
 
     /** {@code void meshopt_encodeVertexVersion(int version)} */
@@ -349,6 +373,16 @@ public class MeshOptimizer {
             check(destination, vertex_count * vertex_size);
         }
         return nmeshopt_decodeVertexBuffer(memAddress(destination), vertex_count, vertex_size, memAddress(buffer), buffer.remaining());
+    }
+
+    // --- [ meshopt_decodeVertexVersion ] ---
+
+    /** {@code int meshopt_decodeVertexVersion(unsigned char const * buffer, size_t buffer_size)} */
+    public static native int nmeshopt_decodeVertexVersion(long buffer, long buffer_size);
+
+    /** {@code int meshopt_decodeVertexVersion(unsigned char const * buffer, size_t buffer_size)} */
+    public static int meshopt_decodeVertexVersion(@NativeType("unsigned char const *") ByteBuffer buffer) {
+        return nmeshopt_decodeVertexVersion(memAddress(buffer), buffer.remaining());
     }
 
     // --- [ meshopt_decodeFilterOct ] ---
@@ -672,6 +706,22 @@ public class MeshOptimizer {
     @NativeType("size_t")
     public static native long meshopt_buildMeshletsBound(@NativeType("size_t") long index_count, @NativeType("size_t") long max_vertices, @NativeType("size_t") long max_triangles);
 
+    // --- [ meshopt_buildMeshletsFlex ] ---
+
+    /** {@code size_t meshopt_buildMeshletsFlex(struct meshopt_Meshlet * meshlets, unsigned int * meshlet_vertices, unsigned char * meshlet_triangles, unsigned int const * indices, size_t index_count, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride, size_t max_vertices, size_t min_triangles, size_t max_triangles, float cone_weight, float split_factor)} */
+    public static native long nmeshopt_buildMeshletsFlex(long meshlets, long meshlet_vertices, long meshlet_triangles, long indices, long index_count, long vertex_positions, long vertex_count, long vertex_positions_stride, long max_vertices, long min_triangles, long max_triangles, float cone_weight, float split_factor);
+
+    /** {@code size_t meshopt_buildMeshletsFlex(struct meshopt_Meshlet * meshlets, unsigned int * meshlet_vertices, unsigned char * meshlet_triangles, unsigned int const * indices, size_t index_count, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride, size_t max_vertices, size_t min_triangles, size_t max_triangles, float cone_weight, float split_factor)} */
+    @NativeType("size_t")
+    public static long meshopt_buildMeshletsFlex(@NativeType("struct meshopt_Meshlet *") MeshoptMeshlet.Buffer meshlets, @NativeType("unsigned int *") IntBuffer meshlet_vertices, @NativeType("unsigned char *") ByteBuffer meshlet_triangles, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("size_t") long max_vertices, @NativeType("size_t") long min_triangles, @NativeType("size_t") long max_triangles, float cone_weight, float split_factor) {
+        if (CHECKS) {
+            check(meshlet_vertices, meshlets.remaining() * max_vertices);
+            check(meshlet_triangles, meshlets.remaining() * max_triangles * 3);
+            check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
+        }
+        return nmeshopt_buildMeshletsFlex(meshlets.address(), memAddress(meshlet_vertices), memAddress(meshlet_triangles), memAddress(indices), indices.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride, max_vertices, min_triangles, max_triangles, cone_weight, split_factor);
+    }
+
     // --- [ meshopt_optimizeMeshlet ] ---
 
     /** {@code void meshopt_optimizeMeshlet(unsigned int * meshlet_vertices, unsigned char * meshlet_triangles, size_t triangle_count, size_t vertex_count)} */
@@ -712,6 +762,36 @@ public class MeshOptimizer {
         return __result;
     }
 
+    // --- [ meshopt_computeSphereBounds ] ---
+
+    /** {@code struct meshopt_Bounds meshopt_computeSphereBounds(float const * positions, size_t count, size_t positions_stride, float const * radii, size_t radii_stride)} */
+    public static native void nmeshopt_computeSphereBounds(long positions, long count, long positions_stride, long radii, long radii_stride, long __result);
+
+    /** {@code struct meshopt_Bounds meshopt_computeSphereBounds(float const * positions, size_t count, size_t positions_stride, float const * radii, size_t radii_stride)} */
+    @NativeType("struct meshopt_Bounds")
+    public static MeshoptBounds meshopt_computeSphereBounds(@NativeType("float const *") FloatBuffer positions, @NativeType("size_t") long count, @NativeType("size_t") long positions_stride, @NativeType("float const *") @Nullable FloatBuffer radii, @NativeType("size_t") long radii_stride, @NativeType("struct meshopt_Bounds") MeshoptBounds __result) {
+        if (CHECKS) {
+            check(positions, count * (positions_stride >>> 2));
+            checkSafe(radii, count * (radii_stride >>> 2));
+        }
+        nmeshopt_computeSphereBounds(memAddress(positions), count, positions_stride, memAddressSafe(radii), radii_stride, __result.address());
+        return __result;
+    }
+
+    // --- [ meshopt_partitionClusters ] ---
+
+    /** {@code size_t meshopt_partitionClusters(unsigned int * destination, unsigned int const * cluster_indices, size_t total_index_count, unsigned int const * cluster_index_counts, size_t cluster_count, size_t vertex_count, size_t target_partition_size)} */
+    public static native long nmeshopt_partitionClusters(long destination, long cluster_indices, long total_index_count, long cluster_index_counts, long cluster_count, long vertex_count, long target_partition_size);
+
+    /** {@code size_t meshopt_partitionClusters(unsigned int * destination, unsigned int const * cluster_indices, size_t total_index_count, unsigned int const * cluster_index_counts, size_t cluster_count, size_t vertex_count, size_t target_partition_size)} */
+    @NativeType("size_t")
+    public static long meshopt_partitionClusters(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer cluster_indices, @NativeType("unsigned int const *") IntBuffer cluster_index_counts, @NativeType("size_t") long vertex_count, @NativeType("size_t") long target_partition_size) {
+        if (CHECKS) {
+            check(destination, cluster_index_counts.remaining());
+        }
+        return nmeshopt_partitionClusters(memAddress(destination), memAddress(cluster_indices), cluster_indices.remaining(), memAddress(cluster_index_counts), cluster_index_counts.remaining(), vertex_count, target_partition_size);
+    }
+
     // --- [ meshopt_spatialSortRemap ] ---
 
     /** {@code void meshopt_spatialSortRemap(unsigned int * destination, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride)} */
@@ -738,16 +818,6 @@ public class MeshOptimizer {
             check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
         }
         nmeshopt_spatialSortTriangles(memAddress(destination), memAddress(indices), indices.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride);
-    }
-
-    // --- [ meshopt_setAllocator ] ---
-
-    /** {@code void meshopt_setAllocator(void * (*) (size_t) allocate, void (*) (void *) deallocate)} */
-    public static native void nmeshopt_setAllocator(long allocate, long deallocate);
-
-    /** {@code void meshopt_setAllocator(void * (*) (size_t) allocate, void (*) (void *) deallocate)} */
-    public static void meshopt_setAllocator(@NativeType("void * (*) (size_t)") MeshoptAllocateI allocate, @NativeType("void (*) (void *)") MeshoptDeallocateI deallocate) {
-        nmeshopt_setAllocator(allocate.address(), deallocate.address());
     }
 
     // --- [ meshopt_quantizeUnorm_ref ] ---
@@ -798,6 +868,16 @@ public class MeshOptimizer {
     /** {@code float meshopt_dequantizeHalf_ref(unsigned short h)} */
     static float meshopt_dequantizeHalf_ref(@NativeType("unsigned short") short h) {
         return nmeshopt_dequantizeHalf_ref(h);
+    }
+
+    // --- [ meshopt_setAllocator ] ---
+
+    /** {@code void meshopt_setAllocator(void * (*) (size_t) allocate, void (*) (void *) deallocate)} */
+    public static native void nmeshopt_setAllocator(long allocate, long deallocate);
+
+    /** {@code void meshopt_setAllocator(void * (*) (size_t) allocate, void (*) (void *) deallocate)} */
+    public static void meshopt_setAllocator(@NativeType("void * (*) (size_t)") MeshoptAllocateI allocate, @NativeType("void (*) (void *)") MeshoptDeallocateI deallocate) {
+        nmeshopt_setAllocator(allocate.address(), deallocate.address());
     }
 
     /**
