@@ -5,10 +5,10 @@
  */
 package org.lwjgl.opencl;
 
-public final class INTELExecByLocalThread {
+public final class EXTImageUnormInt2101010 {
 
-    public static final long CL_QUEUE_THREAD_LOCAL_EXEC_ENABLE_INTEL = 1L << 31;
+    public static final int CL_UNORM_INT_2_101010_EXT = 0x10E5;
 
-    private INTELExecByLocalThread() {}
+    private EXTImageUnormInt2101010() {}
 
 }

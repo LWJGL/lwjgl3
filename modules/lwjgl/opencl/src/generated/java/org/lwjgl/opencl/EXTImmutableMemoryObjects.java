@@ -5,10 +5,10 @@
  */
 package org.lwjgl.opencl;
 
-public final class INTELExecByLocalThread {
+public final class EXTImmutableMemoryObjects {
 
-    public static final long CL_QUEUE_THREAD_LOCAL_EXEC_ENABLE_INTEL = 1L << 31;
+    public static final int CL_MEM_IMMUTABLE_EXT = 1 << 6;
 
-    private INTELExecByLocalThread() {}
+    private EXTImmutableMemoryObjects() {}
 
 }

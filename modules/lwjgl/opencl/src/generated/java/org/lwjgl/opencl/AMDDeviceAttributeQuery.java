@@ -25,7 +25,10 @@ public final class AMDDeviceAttributeQuery {
         CL_DEVICE_GFXIP_MAJOR_AMD                     = 0x404A,
         CL_DEVICE_GFXIP_MINOR_AMD                     = 0x404B,
         CL_DEVICE_AVAILABLE_ASYNC_QUEUES_AMD          = 0x404C,
-        CL_DEVICE_PREFERRED_WORK_GROUP_SIZE_AMD       = 0x4030;
+        CL_DEVICE_PREFERRED_WORK_GROUP_SIZE_AMD       = 0x4030,
+        CL_DEVICE_MAX_WORK_GROUP_SIZE_AMD             = 0x4031,
+        CL_DEVICE_PREFERRED_CONSTANT_BUFFER_SIZE_AMD  = 0x4033,
+        CL_DEVICE_PCIE_ID_AMD                         = 0x4034;
 
     private AMDDeviceAttributeQuery() {}
 

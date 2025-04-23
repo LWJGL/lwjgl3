@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class EXTMigrateMemobject {
 
-    public static final int CL_MIGRATE_MEM_OBJECT_HOST_EXT = 0x1;
+    public static final int CL_MIGRATE_MEM_OBJECT_HOST_EXT = 1 << 0;
 
     public static final int CL_COMMAND_MIGRATE_MEM_OBJECT_EXT = 0x4040;
 

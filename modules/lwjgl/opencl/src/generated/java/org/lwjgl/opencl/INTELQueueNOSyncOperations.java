@@ -5,10 +5,10 @@
  */
 package org.lwjgl.opencl;
 
-public final class INTELExecByLocalThread {
+public final class INTELQueueNOSyncOperations {
 
-    public static final long CL_QUEUE_THREAD_LOCAL_EXEC_ENABLE_INTEL = 1L << 31;
+    public static final int CL_QUEUE_NO_SYNC_OPERATIONS_INTEL = 1 << 29;
 
-    private INTELExecByLocalThread() {}
+    private INTELQueueNOSyncOperations() {}
 
 }

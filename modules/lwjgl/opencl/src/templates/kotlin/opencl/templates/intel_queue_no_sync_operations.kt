@@ -7,10 +7,8 @@ package opencl.templates
 import org.lwjgl.generator.*
 import opencl.*
 
-val intel_exec_by_local_thread = "INTELExecByLocalThread".nativeClassCL("intel_exec_by_local_thread", INTEL) {
-
+val intel_queue_no_sync_operations = "INTELQueueNOSyncOperations".nativeClassCL("intel_queue_no_sync_operations", INTEL) {
     IntConstant(
-        "QUEUE_THREAD_LOCAL_EXEC_ENABLE_INTEL".."1 << 31"
+        "QUEUE_NO_SYNC_OPERATIONS_INTEL".."1 << 29",
     )
-
 }

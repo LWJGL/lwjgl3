@@ -5,10 +5,10 @@
  */
 package org.lwjgl.opencl;
 
-public final class INTELExecByLocalThread {
+public final class KHRExternalMemoryDMABuf {
 
-    public static final long CL_QUEUE_THREAD_LOCAL_EXEC_ENABLE_INTEL = 1L << 31;
+    public static final int CL_EXTERNAL_MEMORY_HANDLE_DMA_BUF_KHR = 0x2067;
 
-    private INTELExecByLocalThread() {}
+    private KHRExternalMemoryDMABuf() {}
 
 }

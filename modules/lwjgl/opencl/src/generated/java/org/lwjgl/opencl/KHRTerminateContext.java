@@ -12,9 +12,13 @@ import static org.lwjgl.system.JNI.*;
 
 public class KHRTerminateContext {
 
-    public static final int CL_DEVICE_TERMINATE_CAPABILITY_KHR = 0x200F;
+    public static final int CL_DEVICE_TERMINATE_CAPABILITY_KHR = 0x2031;
 
-    public static final int CL_CONTEXT_TERMINATE_KHR = 0x2010;
+    public static final int CL_CONTEXT_TERMINATE_KHR = 0x2032;
+
+    public static final int CL_DEVICE_TERMINATE_CAPABILITY_CONTEXT_KHR = 1 << 0;
+
+    public static final int CL_CONTEXT_TERMINATED_KHR = -1121;
 
     protected KHRTerminateContext() {
         throw new UnsupportedOperationException();

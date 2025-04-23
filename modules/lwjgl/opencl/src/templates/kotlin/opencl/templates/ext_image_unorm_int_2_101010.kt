@@ -7,9 +7,8 @@ package opencl.templates
 import org.lwjgl.generator.*
 import opencl.*
 
-val arm_printf = "ARMPrintf".nativeClassCL("arm_printf", ARM) {
+val ext_image_unorm_int_2_101010 = "EXTImageUnormInt2101010".nativeClassCL("ext_image_unorm_int_2_101010", EXT) {
     IntConstant(
-        "PRINTF_CALLBACK_ARM"..0x40B0,
-        "PRINTF_BUFFERSIZE_ARM"..0x40B1
+        "UNORM_INT_2_101010_EXT"..0x10E5
     )
 }

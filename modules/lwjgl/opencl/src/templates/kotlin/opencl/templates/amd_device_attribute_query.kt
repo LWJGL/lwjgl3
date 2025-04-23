@@ -26,6 +26,9 @@ val amd_device_attribute_query = "AMDDeviceAttributeQuery".nativeClassCL("amd_de
         "DEVICE_GFXIP_MAJOR_AMD".enum(0x404A),
         "DEVICE_GFXIP_MINOR_AMD".enum(0x404B),
         "DEVICE_AVAILABLE_ASYNC_QUEUES_AMD".enum(0x404C),
-        "DEVICE_PREFERRED_WORK_GROUP_SIZE_AMD".enum(0x4030)
+        "DEVICE_PREFERRED_WORK_GROUP_SIZE_AMD".enum(0x4030),
+        "DEVICE_MAX_WORK_GROUP_SIZE_AMD".enum(0x4031),
+        "DEVICE_PREFERRED_CONSTANT_BUFFER_SIZE_AMD".enum(0x4033),
+        "DEVICE_PCIE_ID_AMD".enum(0x4034)
     )
 }

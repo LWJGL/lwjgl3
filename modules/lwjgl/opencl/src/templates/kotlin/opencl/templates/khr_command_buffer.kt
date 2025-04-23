@@ -10,21 +10,20 @@ import opencl.*
 val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", KHR) {
     IntConstant(
         "DEVICE_COMMAND_BUFFER_CAPABILITIES_KHR"..0x12A9,
+        "DEVICE_COMMAND_BUFFER_SUPPORTED_QUEUE_PROPERTIES_KHR"..0x129A,
         "DEVICE_COMMAND_BUFFER_REQUIRED_QUEUE_PROPERTIES_KHR"..0x12AA
     )
 
     IntConstant(
         "COMMAND_BUFFER_CAPABILITY_KERNEL_PRINTF_KHR".."0x1 << 0",
         "COMMAND_BUFFER_CAPABILITY_DEVICE_SIDE_ENQUEUE_KHR".."0x1 << 1",
-        "COMMAND_BUFFER_CAPABILITY_SIMULTANEOUS_USE_KHR".."0x1 << 2",
-        "COMMAND_BUFFER_CAPABILITY_OUT_OF_ORDER_KHR".."0x1 << 3"
+        "COMMAND_BUFFER_CAPABILITY_SIMULTANEOUS_USE_KHR".."0x1 << 2"
     )
 
     IntConstant(
         "COMMAND_BUFFER_STATE_RECORDING_KHR"..0x0,
         "COMMAND_BUFFER_STATE_EXECUTABLE_KHR"..0x1,
-        "COMMAND_BUFFER_STATE_PENDING_KHR"..0x2,
-        "COMMAND_BUFFER_STATE_INVALID_KHR"..0x3
+        "COMMAND_BUFFER_STATE_PENDING_KHR"..0x2
     )
 
     IntConstant(
@@ -46,7 +45,8 @@ val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", 
         "COMMAND_BUFFER_NUM_QUEUES_KHR"..0x1295,
         "COMMAND_BUFFER_REFERENCE_COUNT_KHR"..0x1296,
         "COMMAND_BUFFER_STATE_KHR"..0x1297,
-        "COMMAND_BUFFER_PROPERTIES_ARRAY_KHR"..0x1298
+        "COMMAND_BUFFER_PROPERTIES_ARRAY_KHR"..0x1298,
+        "COMMAND_BUFFER_CONTEXT_KHR"..0x1299
     )
 
     IntConstant(
@@ -62,23 +62,9 @@ val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", 
         ERROR_RET
     )
 
-    cl_int(
-        "RetainCommandBufferKHR",
-
-        cl_command_buffer_khr("command_buffer")
-    )
-
-    cl_int(
-        "ReleaseCommandBufferKHR",
-
-        cl_command_buffer_khr("command_buffer")
-    )
-
-    cl_int(
-        "FinalizeCommandBufferKHR",
-
-        cl_command_buffer_khr("command_buffer")
-    )
+    cl_int("RetainCommandBufferKHR", cl_command_buffer_khr("command_buffer"))
+    cl_int("ReleaseCommandBufferKHR", cl_command_buffer_khr("command_buffer"))
+    cl_int("FinalizeCommandBufferKHR", cl_command_buffer_khr("command_buffer"))
 
     cl_int(
         "EnqueueCommandBufferKHR",
@@ -96,6 +82,7 @@ val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", 
 
         cl_command_buffer_khr("command_buffer"),
         nullable..cl_command_queue("command_queue"),
+        nullable..NullTerminated..cl_command_properties_khr.const.p("properties"),
         AutoSize("sync_point_wait_list")..cl_uint("num_sync_points_in_wait_list"),
         nullable..cl_sync_point_khr.const.p("sync_point_wait_list"),
         Check(1)..nullable..cl_sync_point_khr.p("sync_point"),
@@ -107,6 +94,7 @@ val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", 
 
         CommandBarrierWithWaitListKHR["command_buffer"],
         CommandBarrierWithWaitListKHR["command_queue"],
+        nullable..NullTerminated..cl_command_properties_khr.const.p("properties"),
         cl_mem("src_buffer"),
         cl_mem("dst_buffer"),
         size_t("src_offset"),
@@ -115,7 +103,7 @@ val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", 
         CommandBarrierWithWaitListKHR["num_sync_points_in_wait_list"],
         CommandBarrierWithWaitListKHR["sync_point_wait_list"],
         CommandBarrierWithWaitListKHR["sync_point"],
-        CommandBarrierWithWaitListKHR["mutable_handle"],
+        CommandBarrierWithWaitListKHR["mutable_handle"]
     )
 
     cl_int(
@@ -123,6 +111,7 @@ val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", 
 
         CommandBarrierWithWaitListKHR["command_buffer"],
         CommandBarrierWithWaitListKHR["command_queue"],
+        nullable..NullTerminated..cl_command_properties_khr.const.p("properties"),
         cl_mem("src_buffer"),
         cl_mem("dst_buffer"),
         Check(3)..size_t.const.p("src_origin"),
@@ -135,7 +124,7 @@ val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", 
         CommandBarrierWithWaitListKHR["num_sync_points_in_wait_list"],
         CommandBarrierWithWaitListKHR["sync_point_wait_list"],
         CommandBarrierWithWaitListKHR["sync_point"],
-        CommandBarrierWithWaitListKHR["mutable_handle"],
+        CommandBarrierWithWaitListKHR["mutable_handle"]
     )
 
     cl_int(
@@ -143,6 +132,7 @@ val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", 
 
         CommandBarrierWithWaitListKHR["command_buffer"],
         CommandBarrierWithWaitListKHR["command_queue"],
+        nullable..NullTerminated..cl_command_properties_khr.const.p("properties"),
         cl_mem("src_buffer"),
         cl_mem("dst_image"),
         size_t("src_offset"),
@@ -151,7 +141,7 @@ val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", 
         CommandBarrierWithWaitListKHR["num_sync_points_in_wait_list"],
         CommandBarrierWithWaitListKHR["sync_point_wait_list"],
         CommandBarrierWithWaitListKHR["sync_point"],
-        CommandBarrierWithWaitListKHR["mutable_handle"],
+        CommandBarrierWithWaitListKHR["mutable_handle"]
     )
 
     cl_int(
@@ -159,6 +149,7 @@ val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", 
 
         CommandBarrierWithWaitListKHR["command_buffer"],
         CommandBarrierWithWaitListKHR["command_queue"],
+        nullable..NullTerminated..cl_command_properties_khr.const.p("properties"),
         cl_mem("src_image"),
         cl_mem("dst_image"),
         Check(3)..size_t.const.p("src_origin"),
@@ -167,7 +158,7 @@ val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", 
         CommandBarrierWithWaitListKHR["num_sync_points_in_wait_list"],
         CommandBarrierWithWaitListKHR["sync_point_wait_list"],
         CommandBarrierWithWaitListKHR["sync_point"],
-        CommandBarrierWithWaitListKHR["mutable_handle"],
+        CommandBarrierWithWaitListKHR["mutable_handle"]
     )
 
     cl_int(
@@ -175,6 +166,7 @@ val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", 
 
         CommandBarrierWithWaitListKHR["command_buffer"],
         CommandBarrierWithWaitListKHR["command_queue"],
+        nullable..NullTerminated..cl_command_properties_khr.const.p("properties"),
         cl_mem("src_image"),
         cl_mem("dst_buffer"),
         Check(3)..size_t.const.p("src_origin"),
@@ -183,7 +175,7 @@ val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", 
         CommandBarrierWithWaitListKHR["num_sync_points_in_wait_list"],
         CommandBarrierWithWaitListKHR["sync_point_wait_list"],
         CommandBarrierWithWaitListKHR["sync_point"],
-        CommandBarrierWithWaitListKHR["mutable_handle"],
+        CommandBarrierWithWaitListKHR["mutable_handle"]
     )
 
     cl_int(
@@ -191,6 +183,7 @@ val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", 
 
         CommandBarrierWithWaitListKHR["command_buffer"],
         CommandBarrierWithWaitListKHR["command_queue"],
+        nullable..NullTerminated..cl_command_properties_khr.const.p("properties"),
         cl_mem("buffer"),
         void.const.p("pattern"),
         AutoSize("pattern")..size_t("pattern_size"),
@@ -199,7 +192,7 @@ val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", 
         CommandBarrierWithWaitListKHR["num_sync_points_in_wait_list"],
         CommandBarrierWithWaitListKHR["sync_point_wait_list"],
         CommandBarrierWithWaitListKHR["sync_point"],
-        CommandBarrierWithWaitListKHR["mutable_handle"],
+        CommandBarrierWithWaitListKHR["mutable_handle"]
     )
 
     cl_int(
@@ -207,6 +200,7 @@ val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", 
 
         CommandBarrierWithWaitListKHR["command_buffer"],
         CommandBarrierWithWaitListKHR["command_queue"],
+        nullable..NullTerminated..cl_command_properties_khr.const.p("properties"),
         cl_mem("image"),
         MultiType(
             PointerMapping.DATA_INT,
@@ -217,7 +211,7 @@ val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", 
         CommandBarrierWithWaitListKHR["num_sync_points_in_wait_list"],
         CommandBarrierWithWaitListKHR["sync_point_wait_list"],
         CommandBarrierWithWaitListKHR["sync_point"],
-        CommandBarrierWithWaitListKHR["mutable_handle"],
+        CommandBarrierWithWaitListKHR["mutable_handle"]
     )
 
     cl_int(
@@ -234,7 +228,7 @@ val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", 
         CommandBarrierWithWaitListKHR["num_sync_points_in_wait_list"],
         CommandBarrierWithWaitListKHR["sync_point_wait_list"],
         CommandBarrierWithWaitListKHR["sync_point"],
-        CommandBarrierWithWaitListKHR["mutable_handle"],
+        CommandBarrierWithWaitListKHR["mutable_handle"]
     )
 
     cl_int(
@@ -248,5 +242,36 @@ val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", 
             PointerMapping.DATA_POINTER
         )..nullable..void.p("param_value"),
         PARAM_VALUE_SIZE_RET
+    )
+
+    IgnoreMissing..cl_int(
+        "CommandSVMMemcpyKHR",
+
+        cl_command_buffer_khr("command_buffer"),
+        cl_command_queue("command_queue"),
+        nullable..NullTerminated..cl_command_properties_khr.const.p("properties"),
+        void.p("dst_ptr"),
+        void.const.p("src_ptr"),
+        AutoSize("dst_ptr", "src_ptr")..size_t("size"),
+        CommandBarrierWithWaitListKHR["num_sync_points_in_wait_list"],
+        CommandBarrierWithWaitListKHR["sync_point_wait_list"],
+        CommandBarrierWithWaitListKHR["sync_point"],
+        CommandBarrierWithWaitListKHR["mutable_handle"]
+    )
+
+    IgnoreMissing..cl_int(
+        "CommandSVMMemFillKHR",
+
+        cl_command_buffer_khr("command_buffer"),
+        cl_command_queue("command_queue"),
+        nullable..NullTerminated..cl_command_properties_khr.const.p("properties"),
+        void.p("svm_ptr"),
+        void.const.p("pattern"),
+        AutoSize("pattern")..size_t("pattern_size"),
+        AutoSize("svm_ptr")..size_t("size"),
+        CommandBarrierWithWaitListKHR["num_sync_points_in_wait_list"],
+        CommandBarrierWithWaitListKHR["sync_point_wait_list"],
+        CommandBarrierWithWaitListKHR["sync_point"],
+        CommandBarrierWithWaitListKHR["mutable_handle"]
     )
 }

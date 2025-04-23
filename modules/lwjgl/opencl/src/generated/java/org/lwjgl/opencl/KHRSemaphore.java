@@ -33,9 +33,9 @@ public class KHRSemaphore {
         CL_SEMAPHORE_PAYLOAD_KHR         = 0x203C;
 
     public static final int
-        CL_SEMAPHORE_TYPE_KHR         = 0x203D,
-        CL_DEVICE_HANDLE_LIST_KHR     = 0x2051,
-        CL_DEVICE_HANDLE_LIST_END_KHR = 0;
+        CL_SEMAPHORE_TYPE_KHR                   = 0x203D,
+        CL_SEMAPHORE_DEVICE_HANDLE_LIST_KHR     = 0x2051,
+        CL_SEMAPHORE_DEVICE_HANDLE_LIST_END_KHR = 0;
 
     public static final int
         CL_COMMAND_SEMAPHORE_WAIT_KHR   = 0x2042,
@@ -85,6 +85,7 @@ public class KHRSemaphore {
     @NativeType("cl_int")
     public static int clEnqueueWaitSemaphoresKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_semaphore_khr const *") PointerBuffer sema_objects, @NativeType("cl_semaphore_payload_khr const *") @Nullable LongBuffer sema_payload_list, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
+            checkSafe(sema_payload_list, sema_objects.remaining());
             checkSafe(event, 1);
         }
         return nclEnqueueWaitSemaphoresKHR(command_queue, sema_objects.remaining(), memAddress(sema_objects), memAddressSafe(sema_payload_list), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
@@ -104,11 +105,12 @@ public class KHRSemaphore {
 
     /** {@code cl_int clEnqueueSignalSemaphoresKHR(cl_command_queue command_queue, cl_uint num_sema_objects, cl_semaphore_khr const * sema_objects, cl_semaphore_payload_khr const * sema_payload_list, cl_uint num_events_in_wait_list, cl_event const * event_wait_list, cl_event * event)} */
     @NativeType("cl_int")
-    public static int clEnqueueSignalSemaphoresKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_semaphore_khr const *") PointerBuffer sema_objects, @NativeType("cl_semaphore_payload_khr const *") LongBuffer sema_payload_list, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
+    public static int clEnqueueSignalSemaphoresKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_semaphore_khr const *") PointerBuffer sema_objects, @NativeType("cl_semaphore_payload_khr const *") @Nullable LongBuffer sema_payload_list, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
+            checkSafe(sema_payload_list, sema_objects.remaining());
             checkSafe(event, 1);
         }
-        return nclEnqueueSignalSemaphoresKHR(command_queue, sema_objects.remaining(), memAddress(sema_objects), memAddress(sema_payload_list), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
+        return nclEnqueueSignalSemaphoresKHR(command_queue, sema_objects.remaining(), memAddress(sema_objects), memAddressSafe(sema_payload_list), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
     }
 
     // --- [ clGetSemaphoreInfoKHR ] ---
@@ -196,6 +198,7 @@ public class KHRSemaphore {
         if (CHECKS) {
             check(__functionAddress);
             check(command_queue);
+            checkSafe(sema_payload_list, sema_objects.remaining());
             checkSafe(event, 1);
         }
         return callPPPPPI(command_queue, sema_objects.remaining(), memAddress(sema_objects), sema_payload_list, remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event), __functionAddress);
@@ -203,11 +206,12 @@ public class KHRSemaphore {
 
     /** {@code cl_int clEnqueueSignalSemaphoresKHR(cl_command_queue command_queue, cl_uint num_sema_objects, cl_semaphore_khr const * sema_objects, cl_semaphore_payload_khr const * sema_payload_list, cl_uint num_events_in_wait_list, cl_event const * event_wait_list, cl_event * event)} */
     @NativeType("cl_int")
-    public static int clEnqueueSignalSemaphoresKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_semaphore_khr const *") PointerBuffer sema_objects, @NativeType("cl_semaphore_payload_khr const *") long[] sema_payload_list, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
+    public static int clEnqueueSignalSemaphoresKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_semaphore_khr const *") PointerBuffer sema_objects, @NativeType("cl_semaphore_payload_khr const *") long @Nullable [] sema_payload_list, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueSignalSemaphoresKHR;
         if (CHECKS) {
             check(__functionAddress);
             check(command_queue);
+            checkSafe(sema_payload_list, sema_objects.remaining());
             checkSafe(event, 1);
         }
         return callPPPPPI(command_queue, sema_objects.remaining(), memAddress(sema_objects), sema_payload_list, remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event), __functionAddress);

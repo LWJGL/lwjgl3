@@ -20,6 +20,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class EXTDeviceFission {
 
     public static final int
+        CL_DEVICE_PARTITION_FAILED_EXT = -1057,
+        CL_INVALID_PARTITION_COUNT_EXT = -1058,
+        CL_INVALID_PARTITION_NAME_EXT  = -1059;
+
+    public static final int
+        CL_DEVICE_PARENT_DEVICE_EXT    = 0x4054,
+        CL_DEVICE_PARTITION_TYPES_EXT  = 0x4055,
+        CL_DEVICE_AFFINITY_DOMAINS_EXT = 0x4056,
+        CL_DEVICE_REFERENCE_COUNT_EXT  = 0x4057,
+        CL_DEVICE_PARTITION_STYLE_EXT  = 0x4058;
+
+    public static final int
         CL_DEVICE_PARTITION_EQUALLY_EXT            = 0x4050,
         CL_DEVICE_PARTITION_BY_COUNTS_EXT          = 0x4051,
         CL_DEVICE_PARTITION_BY_NAMES_EXT           = 0x4052,
@@ -33,24 +45,10 @@ public class EXTDeviceFission {
         CL_AFFINITY_DOMAIN_NUMA_EXT             = 0x10,
         CL_AFFINITY_DOMAIN_NEXT_FISSIONABLE_EXT = 0x100;
 
-    public static final int
-        CL_DEVICE_PARENT_DEVICE_EXT    = 0x4054,
-        CL_DEVICE_PARITION_TYPES_EXT   = 0x4055,
-        CL_DEVICE_AFFINITY_DOMAINS_EXT = 0x4056,
-        CL_DEVICE_REFERENCE_COUNT_EXT  = 0x4057,
-        CL_DEVICE_PARTITION_STYLE_EXT  = 0x4058;
-
-    public static final int CL_PROPERTIES_LIST_END_EXT = 0x0;
-
-    public static final int CL_PARTITION_BY_COUNTS_LIST_END_EXT = 0x0;
-
-    public static final int CL_PARTITION_BY_NAMES_LIST_END_EXT = -1;
-
-    public static final int CL_DEVICE_PARTITION_FAILED_EXT = -1057;
-
-    public static final int CL_INVALID_PARTITION_COUNT_EXT = -1058;
-
-    public static final int CL_INVALID_PARTITION_NAME_EXT = -1059;
+    public static final long
+        CL_PROPERTIES_LIST_END_EXT          = 0L,
+        CL_PARTITION_BY_COUNTS_LIST_END_EXT = 0L,
+        CL_PARTITION_BY_NAMES_LIST_END_EXT  = -1L;
 
     protected EXTDeviceFission() {
         throw new UnsupportedOperationException();

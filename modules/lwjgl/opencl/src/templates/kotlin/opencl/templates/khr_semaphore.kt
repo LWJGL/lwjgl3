@@ -29,8 +29,8 @@ val khr_semaphore = "KHRSemaphore".nativeClassCL("khr_semaphore", KHR) {
 
     IntConstant(
         "SEMAPHORE_TYPE_KHR"..0x203D,
-        "DEVICE_HANDLE_LIST_KHR"..0x2051,
-        "DEVICE_HANDLE_LIST_END_KHR".."0"
+        "SEMAPHORE_DEVICE_HANDLE_LIST_KHR"..0x2051,
+        "SEMAPHORE_DEVICE_HANDLE_LIST_END_KHR".."0"
     )
 
     IntConstant(
@@ -54,9 +54,9 @@ val khr_semaphore = "KHRSemaphore".nativeClassCL("khr_semaphore", KHR) {
         "EnqueueWaitSemaphoresKHR",
 
         cl_command_queue("command_queue"),
-        AutoSize("sema_objects")..cl_uint("num_sema_objects"),
+        AutoSize("sema_objects", "sema_payload_list")..cl_uint("num_sema_objects"),
         cl_semaphore_khr.const.p("sema_objects"),
-        Unsafe..nullable..cl_semaphore_payload_khr.const.p("sema_payload_list"), // TODO
+        nullable..cl_semaphore_payload_khr.const.p("sema_payload_list"),
         NEWL,
         EWL,
         EVENT
@@ -66,9 +66,9 @@ val khr_semaphore = "KHRSemaphore".nativeClassCL("khr_semaphore", KHR) {
         "EnqueueSignalSemaphoresKHR",
 
         cl_command_queue("command_queue"),
-        AutoSize("sema_objects")..cl_uint("num_sema_objects"),
+        AutoSize("sema_objects", "sema_payload_list")..cl_uint("num_sema_objects"),
         cl_semaphore_khr.const.p("sema_objects"),
-        Unsafe..cl_semaphore_payload_khr.const.p("sema_payload_list"),
+        nullable..cl_semaphore_payload_khr.const.p("sema_payload_list"),
         NEWL,
         EWL,
         EVENT

@@ -90,6 +90,8 @@ val cl_khronos_vendor_id = typedef(cl_uint, "cl_khronos_vendor_id")
 val cl_mem_properties = typedef(cl_properties, "cl_mem_properties")
 val cl_version = typedef(cl_uint, "cl_version")
 
+val cl_icdl_info = typedef(cl_uint, "cl_icdl_info")
+
 // strings
 
 val cl_charASCII = CharType("cl_char", CharMapping.ASCII)
@@ -316,6 +318,8 @@ val cl_mem_ext_host_ptr = struct(Module.OPENCL, "CLMemEXTHostPtr", nativeName = 
 
 val cl_image_requirements_info_ext = typedef(cl_uint, "cl_image_requirements_info_ext")
 
+val cl_mem_device_address_ext = typedef(cl_ulong, "cl_mem_device_address_ext")
+
 // IMG
 
 val cl_mipmap_filter_mode_img = typedef(cl_uint, "cl_mipmap_filter_mode_img")
@@ -344,6 +348,8 @@ val cl_semaphore_khr = "cl_semaphore_khr".handle
 
 val cl_command_buffer_info_khr = typedef(cl_uint, "cl_command_buffer_info_khr")
 val cl_command_buffer_properties_khr = typedef(cl_properties, "cl_command_buffer_properties_khr")
+val cl_command_properties_khr = typedef(cl_properties, "cl_command_properties_khr")
+val cl_device_kernel_clock_capabilities_khr = typedef(cl_bitfield, "cl_device_kernel_clock_capabilities_khr")
 val cl_ndrange_kernel_command_properties_khr = typedef(cl_properties, "cl_ndrange_kernel_command_properties_khr")
 val cl_queue_properties_khr = typedef(cl_properties, "cl_queue_properties_khr")
 val cl_semaphore_properties_khr = typedef(cl_properties, "cl_semaphore_properties_khr")
@@ -353,6 +359,43 @@ val cl_semaphore_payload_khr = typedef(cl_ulong, "cl_semaphore_payload_khr")
 val cl_sync_point_khr = typedef(cl_uint, "cl_sync_point_khr")
 val cl_version_khr = typedef(cl_uint, "cl_version_khr")
 
+val cl_command_buffer_update_type_khr = typedef(cl_uint, "cl_command_buffer_update_type_khr")
+val cl_mutable_dispatch_fields_khr = typedef(cl_bitfield, "cl_mutable_dispatch_fields_khr")
+val cl_mutable_command_info_khr = typedef(cl_uint, "cl_mutable_command_info_khr")
+val cl_mutable_dispatch_asserts_khr = typedef(cl_bitfield, "cl_mutable_dispatch_asserts_khr")
+
+val cl_semaphore_reimport_properties_khr = typedef(cl_properties, "cl_semaphore_reimport_properties_khr")
+
+val cl_mutable_dispatch_arg_khr = struct(Module.OPENCL, "CLMutableDispatchArgKHR", nativeName = "cl_mutable_dispatch_arg_khr") {
+    cl_uint("arg_index")
+    AutoSize("arg_value")..size_t("arg_size")
+    nullable..void.const.p("arg_value")
+}
+
+val cl_mutable_dispatch_exec_info_khr = struct(Module.OPENCL, "CLMutableDispatchExecInfoKHR", nativeName = "cl_mutable_dispatch_exec_info_khr") {
+    cl_uint("param_name")
+    AutoSize("param_value")..size_t("param_value_size")
+    nullable..void.const.p("param_value")
+}
+
+val cl_mutable_dispatch_config_khr = struct(Module.OPENCL, "CLMutableDispatchConfigKHR", nativeName = "cl_mutable_dispatch_config_khr") {
+    cl_mutable_command_khr("command")
+    AutoSize("arg_list")..cl_uint("num_args")
+    AutoSize("arg_svm_list")..cl_uint("num_svm_args")
+    AutoSize("exec_info_list")..cl_uint("num_exec_infos")
+    cl_uint("work_dim")
+    nullable..cl_mutable_dispatch_arg_khr.const.p("arg_list")
+    nullable..cl_mutable_dispatch_arg_khr.const.p("arg_svm_list")
+    nullable..cl_mutable_dispatch_exec_info_khr.const.p("exec_info_list")
+    Check("work_dim")..nullable..size_t.const.p("global_work_offset")
+    Check("work_dim")..nullable..size_t.const.p("global_work_size")
+    Check("work_dim")..nullable..size_t.const.p("local_work_size")
+}
+
 // NV
 
 val cl_mem_flags_NV = typedef(cl_bitfield, "cl_mem_flags_NV")
+
+// QCOM
+
+val cl_perf_hint_qcom = typedef(cl_uint, "cl_perf_hint_qcom")

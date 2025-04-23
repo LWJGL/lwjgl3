@@ -9,6 +9,20 @@ import opencl.*
 
 val ext_device_fission = "EXTDeviceFission".nativeClassCL("ext_device_fission", EXT) {
     IntConstant(
+        "DEVICE_PARTITION_FAILED_EXT".."-1057",
+        "INVALID_PARTITION_COUNT_EXT".."-1058",
+        "INVALID_PARTITION_NAME_EXT".."-1059"
+    )
+
+    IntConstant(
+        "DEVICE_PARENT_DEVICE_EXT"..0x4054,
+        "DEVICE_PARTITION_TYPES_EXT"..0x4055,
+        "DEVICE_AFFINITY_DOMAINS_EXT"..0x4056,
+        "DEVICE_REFERENCE_COUNT_EXT"..0x4057,
+        "DEVICE_PARTITION_STYLE_EXT"..0x4058
+    )
+
+    IntConstant(
         "DEVICE_PARTITION_EQUALLY_EXT"..0x4050,
         "DEVICE_PARTITION_BY_COUNTS_EXT"..0x4051,
         "DEVICE_PARTITION_BY_NAMES_EXT"..0x4052,
@@ -24,49 +38,14 @@ val ext_device_fission = "EXTDeviceFission".nativeClassCL("ext_device_fission", 
         "AFFINITY_DOMAIN_NEXT_FISSIONABLE_EXT"..0x100
     )
 
-    IntConstant(
-        "DEVICE_PARENT_DEVICE_EXT"..0x4054,
-        "DEVICE_PARITION_TYPES_EXT"..0x4055,
-        "DEVICE_AFFINITY_DOMAINS_EXT"..0x4056,
-        "DEVICE_REFERENCE_COUNT_EXT"..0x4057,
-        "DEVICE_PARTITION_STYLE_EXT"..0x4058
+    LongConstant(
+        "PROPERTIES_LIST_END_EXT".."0L",
+        "PARTITION_BY_COUNTS_LIST_END_EXT".."0L",
+        "PARTITION_BY_NAMES_LIST_END_EXT".."-1L"
     )
 
-    IntConstant(
-        "PROPERTIES_LIST_END_EXT"..0x0
-    )
-
-    IntConstant(
-        "PARTITION_BY_COUNTS_LIST_END_EXT"..0x0
-    )
-
-    IntConstant(
-        "PARTITION_BY_NAMES_LIST_END_EXT".."-1"
-    )
-
-    IntConstant(
-        "DEVICE_PARTITION_FAILED_EXT".."-1057"
-    )
-
-    IntConstant(
-        "INVALID_PARTITION_COUNT_EXT".."-1058"
-    )
-
-    IntConstant(
-        "INVALID_PARTITION_NAME_EXT".."-1059"
-    )
-
-    cl_int(
-        "ReleaseDeviceEXT",
-
-        cl_device_id("device")
-    )
-
-    cl_int(
-        "RetainDeviceEXT",
-
-        cl_device_id("device")
-    )
+    cl_int("ReleaseDeviceEXT", cl_device_id("device"))
+    cl_int( "RetainDeviceEXT", cl_device_id("device"))
 
     cl_int(
         "CreateSubDevicesEXT",

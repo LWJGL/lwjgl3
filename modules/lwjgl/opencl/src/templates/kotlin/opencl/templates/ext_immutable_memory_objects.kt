@@ -7,9 +7,8 @@ package opencl.templates
 import org.lwjgl.generator.*
 import opencl.*
 
-val arm_printf = "ARMPrintf".nativeClassCL("arm_printf", ARM) {
+val ext_immutable_memory_objects = "EXTImmutableMemoryObjects".nativeClassCL("ext_immutable_memory_objects", EXT) {
     IntConstant(
-        "PRINTF_CALLBACK_ARM"..0x40B0,
-        "PRINTF_BUFFERSIZE_ARM"..0x40B1
+        "MEM_IMMUTABLE_EXT".."1 << 6"
     )
 }
