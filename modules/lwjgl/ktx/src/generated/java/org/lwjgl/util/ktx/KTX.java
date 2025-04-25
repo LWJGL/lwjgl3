@@ -30,6 +30,7 @@ public class KTX {
 
         /** Function address. */
         public static final long
+            LoadOpenGL                     = apiGetFunctionAddressOptional(KTX, "ktxLoadOpenGL"),
             Texture_CreateFromNamedFile    = apiGetFunctionAddress(KTX, "ktxTexture_CreateFromNamedFile"),
             Texture_CreateFromMemory       = apiGetFunctionAddress(KTX, "ktxTexture_CreateFromMemory"),
             Texture_CreateFromStream       = apiGetFunctionAddress(KTX, "ktxTexture_CreateFromStream"),
@@ -43,7 +44,12 @@ public class KTX {
             Texture1_CreateFromNamedFile   = apiGetFunctionAddress(KTX, "ktxTexture1_CreateFromNamedFile"),
             Texture1_CreateFromMemory      = apiGetFunctionAddress(KTX, "ktxTexture1_CreateFromMemory"),
             Texture1_CreateFromStream      = apiGetFunctionAddress(KTX, "ktxTexture1_CreateFromStream"),
+            Texture1_Destroy               = apiGetFunctionAddressOptional(KTX, "ktxTexture1_Destroy"),
             Texture1_NeedsTranscoding      = apiGetFunctionAddress(KTX, "ktxTexture1_NeedsTranscoding"),
+            Texture1_LoadImageData         = apiGetFunctionAddressOptional(KTX, "ktxTexture1_LoadImageData"),
+            Texture1_WriteToNamedFile      = apiGetFunctionAddressOptional(KTX, "ktxTexture1_WriteToNamedFile"),
+            Texture1_WriteToMemory         = apiGetFunctionAddressOptional(KTX, "ktxTexture1_WriteToMemory"),
+            Texture1_WriteToStream         = apiGetFunctionAddressOptional(KTX, "ktxTexture1_WriteToStream"),
             Texture1_WriteKTX2ToNamedFile  = apiGetFunctionAddressOptional(KTX, "ktxTexture1_WriteKTX2ToNamedFile"),
             Texture1_WriteKTX2ToMemory     = apiGetFunctionAddressOptional(KTX, "ktxTexture1_WriteKTX2ToMemory"),
             Texture1_WriteKTX2ToStream     = apiGetFunctionAddressOptional(KTX, "ktxTexture1_WriteKTX2ToStream"),
@@ -52,17 +58,30 @@ public class KTX {
             Texture2_CreateFromNamedFile   = apiGetFunctionAddress(KTX, "ktxTexture2_CreateFromNamedFile"),
             Texture2_CreateFromMemory      = apiGetFunctionAddress(KTX, "ktxTexture2_CreateFromMemory"),
             Texture2_CreateFromStream      = apiGetFunctionAddress(KTX, "ktxTexture2_CreateFromStream"),
+            Texture2_Destroy               = apiGetFunctionAddressOptional(KTX, "ktxTexture2_Destroy"),
             Texture2_CompressBasis         = apiGetFunctionAddressOptional(KTX, "ktxTexture2_CompressBasis"),
             Texture2_DeflateZstd           = apiGetFunctionAddressOptional(KTX, "ktxTexture2_DeflateZstd"),
             Texture2_DeflateZLIB           = apiGetFunctionAddress(KTX, "ktxTexture2_DeflateZLIB"),
             Texture2_GetComponentInfo      = apiGetFunctionAddress(KTX, "ktxTexture2_GetComponentInfo"),
+            Texture2_GetImageOffset        = apiGetFunctionAddressOptional(KTX, "ktxTexture2_GetImageOffset"),
             Texture2_GetNumComponents      = apiGetFunctionAddress(KTX, "ktxTexture2_GetNumComponents"),
+            Texture2_GetTransferFunction_e = apiGetFunctionAddressOptional(KTX, "ktxTexture2_GetTransferFunction_e"),
             Texture2_GetOETF_e             = apiGetFunctionAddress(KTX, "ktxTexture2_GetOETF_e"),
             Texture2_GetOETF               = apiGetFunctionAddress(KTX, "ktxTexture2_GetOETF"),
             Texture2_GetColorModel_e       = apiGetFunctionAddress(KTX, "ktxTexture2_GetColorModel_e"),
             Texture2_GetPremultipliedAlpha = apiGetFunctionAddress(KTX, "ktxTexture2_GetPremultipliedAlpha"),
+            Texture2_GetPrimaries_e        = apiGetFunctionAddressOptional(KTX, "ktxTexture2_GetPrimaries_e"),
             Texture2_NeedsTranscoding      = apiGetFunctionAddress(KTX, "ktxTexture2_NeedsTranscoding"),
+            Texture2_SetTransferFunction   = apiGetFunctionAddress(KTX, "ktxTexture2_SetTransferFunction"),
+            Texture2_SetOETF               = apiGetFunctionAddress(KTX, "ktxTexture2_SetOETF"),
+            Texture2_SetPrimaries          = apiGetFunctionAddress(KTX, "ktxTexture2_SetPrimaries"),
+            Texture2_LoadImageData         = apiGetFunctionAddress(KTX, "ktxTexture2_LoadImageData"),
+            Texture2_LoadDeflatedImageData = apiGetFunctionAddress(KTX, "ktxTexture2_LoadDeflatedImageData"),
+            Texture2_WriteToNamedFile      = apiGetFunctionAddress(KTX, "ktxTexture2_WriteToNamedFile"),
+            Texture2_WriteToMemory         = apiGetFunctionAddress(KTX, "ktxTexture2_WriteToMemory"),
+            Texture2_WriteToStream         = apiGetFunctionAddress(KTX, "ktxTexture2_WriteToStream"),
             Texture2_CompressAstcEx        = apiGetFunctionAddressOptional(KTX, "ktxTexture2_CompressAstcEx"),
+            Texture2_DecodeAstc            = apiGetFunctionAddress(KTX, "ktxTexture2_DecodeAstc"),
             Texture2_CompressAstc          = apiGetFunctionAddressOptional(KTX, "ktxTexture2_CompressAstc"),
             Texture2_CompressBasisEx       = apiGetFunctionAddressOptional(KTX, "ktxTexture2_CompressBasisEx"),
             Texture2_TranscodeBasis        = apiGetFunctionAddress(KTX, "ktxTexture2_TranscodeBasis"),
@@ -285,6 +304,19 @@ public class KTX {
         throw new UnsupportedOperationException();
     }
 
+    // --- [ ktxLoadOpenGL ] ---
+
+    /** {@code KTX_error_code ktxLoadOpenGL(PFNGLGETPROCADDRESS pfnGLGetProcAddress)} */
+    @NativeType("KTX_error_code")
+    public static int ktxLoadOpenGL(@NativeType("PFNGLGETPROCADDRESS") long pfnGLGetProcAddress) {
+        long __functionAddress = Functions.LoadOpenGL;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(pfnGLGetProcAddress);
+        }
+        return callPI(pfnGLGetProcAddress, __functionAddress);
+    }
+
     // --- [ ktxTexture_CreateFromNamedFile ] ---
 
     /** {@code KTX_error_code ktxTexture_CreateFromNamedFile(char const * const filename, ktxTextureCreateFlags createFlags, ktxTexture ** newTex)} */
@@ -452,15 +484,15 @@ public class KTX {
 
     // --- [ ktxTexture1_Create ] ---
 
-    /** {@code KTX_error_code ktxTexture1_Create(ktxTextureCreateInfo * createInfo, ktxTextureCreateStorageEnum storageAllocation, ktxTexture1 ** newTex)} */
+    /** {@code KTX_error_code ktxTexture1_Create(ktxTextureCreateInfo const * const createInfo, ktxTextureCreateStorageEnum storageAllocation, ktxTexture1 ** newTex)} */
     public static int nktxTexture1_Create(long createInfo, int storageAllocation, long newTex) {
         long __functionAddress = Functions.Texture1_Create;
         return callPPI(createInfo, storageAllocation, newTex, __functionAddress);
     }
 
-    /** {@code KTX_error_code ktxTexture1_Create(ktxTextureCreateInfo * createInfo, ktxTextureCreateStorageEnum storageAllocation, ktxTexture1 ** newTex)} */
+    /** {@code KTX_error_code ktxTexture1_Create(ktxTextureCreateInfo const * const createInfo, ktxTextureCreateStorageEnum storageAllocation, ktxTexture1 ** newTex)} */
     @NativeType("KTX_error_code")
-    public static int ktxTexture1_Create(@NativeType("ktxTextureCreateInfo *") ktxTextureCreateInfo createInfo, @NativeType("ktxTextureCreateStorageEnum") int storageAllocation, @NativeType("ktxTexture1 **") PointerBuffer newTex) {
+    public static int ktxTexture1_Create(@NativeType("ktxTextureCreateInfo const * const") ktxTextureCreateInfo createInfo, @NativeType("ktxTextureCreateStorageEnum") int storageAllocation, @NativeType("ktxTexture1 **") PointerBuffer newTex) {
         if (CHECKS) {
             check(newTex, 1);
         }
@@ -535,6 +567,22 @@ public class KTX {
         return nktxTexture1_CreateFromStream(stream.address(), createFlags, memAddress(newTex));
     }
 
+    // --- [ ktxTexture1_Destroy ] ---
+
+    /** {@code void ktxTexture1_Destroy(ktxTexture1 * This)} */
+    public static void nktxTexture1_Destroy(long This) {
+        long __functionAddress = Functions.Texture1_Destroy;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(This, __functionAddress);
+    }
+
+    /** {@code void ktxTexture1_Destroy(ktxTexture1 * This)} */
+    public static void ktxTexture1_Destroy(@NativeType("ktxTexture1 *") ktxTexture1 This) {
+        nktxTexture1_Destroy(This.address());
+    }
+
     // --- [ ktxTexture1_NeedsTranscoding ] ---
 
     /** {@code ktx_bool_t ktxTexture1_NeedsTranscoding(ktxTexture1 * This)} */
@@ -547,6 +595,94 @@ public class KTX {
     @NativeType("ktx_bool_t")
     public static boolean ktxTexture1_NeedsTranscoding(@NativeType("ktxTexture1 *") ktxTexture1 This) {
         return nktxTexture1_NeedsTranscoding(This.address());
+    }
+
+    // --- [ ktxTexture1_LoadImageData ] ---
+
+    /** {@code KTX_error_code ktxTexture1_LoadImageData(ktxTexture1 * This, ktx_uint8_t * pBuffer, ktx_size_t bufSize)} */
+    public static int nktxTexture1_LoadImageData(long This, long pBuffer, long bufSize) {
+        long __functionAddress = Functions.Texture1_LoadImageData;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPPPI(This, pBuffer, bufSize, __functionAddress);
+    }
+
+    /** {@code KTX_error_code ktxTexture1_LoadImageData(ktxTexture1 * This, ktx_uint8_t * pBuffer, ktx_size_t bufSize)} */
+    @NativeType("KTX_error_code")
+    public static int ktxTexture1_LoadImageData(@NativeType("ktxTexture1 *") ktxTexture1 This, @NativeType("ktx_uint8_t *") ByteBuffer pBuffer) {
+        return nktxTexture1_LoadImageData(This.address(), memAddress(pBuffer), pBuffer.remaining());
+    }
+
+    // --- [ ktxTexture1_WriteToNamedFile ] ---
+
+    /** {@code KTX_error_code ktxTexture1_WriteToNamedFile(ktxTexture1 * This, char const * const dstname)} */
+    public static int nktxTexture1_WriteToNamedFile(long This, long dstname) {
+        long __functionAddress = Functions.Texture1_WriteToNamedFile;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPPI(This, dstname, __functionAddress);
+    }
+
+    /** {@code KTX_error_code ktxTexture1_WriteToNamedFile(ktxTexture1 * This, char const * const dstname)} */
+    @NativeType("KTX_error_code")
+    public static int ktxTexture1_WriteToNamedFile(@NativeType("ktxTexture1 *") ktxTexture1 This, @NativeType("char const * const") ByteBuffer dstname) {
+        if (CHECKS) {
+            checkNT1(dstname);
+        }
+        return nktxTexture1_WriteToNamedFile(This.address(), memAddress(dstname));
+    }
+
+    /** {@code KTX_error_code ktxTexture1_WriteToNamedFile(ktxTexture1 * This, char const * const dstname)} */
+    @NativeType("KTX_error_code")
+    public static int ktxTexture1_WriteToNamedFile(@NativeType("ktxTexture1 *") ktxTexture1 This, @NativeType("char const * const") CharSequence dstname) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(dstname, true);
+            long dstnameEncoded = stack.getPointerAddress();
+            return nktxTexture1_WriteToNamedFile(This.address(), dstnameEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ ktxTexture1_WriteToMemory ] ---
+
+    /** {@code KTX_error_code ktxTexture1_WriteToMemory(ktxTexture1 * This, ktx_uint8_t ** bytes, ktx_size_t * size)} */
+    public static int nktxTexture1_WriteToMemory(long This, long bytes, long size) {
+        long __functionAddress = Functions.Texture1_WriteToMemory;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPPPI(This, bytes, size, __functionAddress);
+    }
+
+    /** {@code KTX_error_code ktxTexture1_WriteToMemory(ktxTexture1 * This, ktx_uint8_t ** bytes, ktx_size_t * size)} */
+    @NativeType("KTX_error_code")
+    public static int ktxTexture1_WriteToMemory(@NativeType("ktxTexture1 *") ktxTexture1 This, @NativeType("ktx_uint8_t **") PointerBuffer bytes, @NativeType("ktx_size_t *") PointerBuffer size) {
+        if (CHECKS) {
+            check(bytes, 1);
+            check(size, 1);
+        }
+        return nktxTexture1_WriteToMemory(This.address(), memAddress(bytes), memAddress(size));
+    }
+
+    // --- [ ktxTexture1_WriteToStream ] ---
+
+    /** {@code KTX_error_code ktxTexture1_WriteToStream(ktxTexture1 * This, struct ktxStream * dststr)} */
+    public static int nktxTexture1_WriteToStream(long This, long dststr) {
+        long __functionAddress = Functions.Texture1_WriteToStream;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPPI(This, dststr, __functionAddress);
+    }
+
+    /** {@code KTX_error_code ktxTexture1_WriteToStream(ktxTexture1 * This, struct ktxStream * dststr)} */
+    @NativeType("KTX_error_code")
+    public static int ktxTexture1_WriteToStream(@NativeType("ktxTexture1 *") ktxTexture1 This, @NativeType("struct ktxStream *") ktxStream dststr) {
+        return nktxTexture1_WriteToStream(This.address(), dststr.address());
     }
 
     // --- [ ktxTexture1_WriteKTX2ToNamedFile ] ---
@@ -622,15 +758,15 @@ public class KTX {
 
     // --- [ ktxTexture2_Create ] ---
 
-    /** {@code KTX_error_code ktxTexture2_Create(ktxTextureCreateInfo * createInfo, ktxTextureCreateStorageEnum storageAllocation, ktxTexture2 ** newTex)} */
+    /** {@code KTX_error_code ktxTexture2_Create(ktxTextureCreateInfo const * const createInfo, ktxTextureCreateStorageEnum storageAllocation, ktxTexture2 ** newTex)} */
     public static int nktxTexture2_Create(long createInfo, int storageAllocation, long newTex) {
         long __functionAddress = Functions.Texture2_Create;
         return callPPI(createInfo, storageAllocation, newTex, __functionAddress);
     }
 
-    /** {@code KTX_error_code ktxTexture2_Create(ktxTextureCreateInfo * createInfo, ktxTextureCreateStorageEnum storageAllocation, ktxTexture2 ** newTex)} */
+    /** {@code KTX_error_code ktxTexture2_Create(ktxTextureCreateInfo const * const createInfo, ktxTextureCreateStorageEnum storageAllocation, ktxTexture2 ** newTex)} */
     @NativeType("KTX_error_code")
-    public static int ktxTexture2_Create(@NativeType("ktxTextureCreateInfo *") ktxTextureCreateInfo createInfo, @NativeType("ktxTextureCreateStorageEnum") int storageAllocation, @NativeType("ktxTexture2 **") PointerBuffer newTex) {
+    public static int ktxTexture2_Create(@NativeType("ktxTextureCreateInfo const * const") ktxTextureCreateInfo createInfo, @NativeType("ktxTextureCreateStorageEnum") int storageAllocation, @NativeType("ktxTexture2 **") PointerBuffer newTex) {
         if (CHECKS) {
             check(newTex, 1);
         }
@@ -722,6 +858,22 @@ public class KTX {
         return nktxTexture2_CreateFromStream(stream.address(), createFlags, memAddress(newTex));
     }
 
+    // --- [ ktxTexture2_Destroy ] ---
+
+    /** {@code void ktxTexture2_Destroy(ktxTexture2 * This)} */
+    public static void nktxTexture2_Destroy(long This) {
+        long __functionAddress = Functions.Texture2_Destroy;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(This, __functionAddress);
+    }
+
+    /** {@code void ktxTexture2_Destroy(ktxTexture2 * This)} */
+    public static void ktxTexture2_Destroy(@NativeType("ktxTexture2 *") ktxTexture2 This) {
+        nktxTexture2_Destroy(This.address());
+    }
+
     // --- [ ktxTexture2_CompressBasis ] ---
 
     /** {@code KTX_error_code ktxTexture2_CompressBasis(ktxTexture2 * This, ktx_uint32_t quality)} */
@@ -787,6 +939,26 @@ public class KTX {
         nktxTexture2_GetComponentInfo(This.address(), memAddress(numComponents), memAddress(componentByteLength));
     }
 
+    // --- [ ktxTexture2_GetImageOffset ] ---
+
+    /** {@code KTX_error_code ktxTexture2_GetImageOffset(ktxTexture2 * This, ktx_uint32_t level, ktx_uint32_t layer, ktx_uint32_t faceSlice, ktx_size_t * pOffset)} */
+    public static int nktxTexture2_GetImageOffset(long This, int level, int layer, int faceSlice, long pOffset) {
+        long __functionAddress = Functions.Texture2_GetImageOffset;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPPI(This, level, layer, faceSlice, pOffset, __functionAddress);
+    }
+
+    /** {@code KTX_error_code ktxTexture2_GetImageOffset(ktxTexture2 * This, ktx_uint32_t level, ktx_uint32_t layer, ktx_uint32_t faceSlice, ktx_size_t * pOffset)} */
+    @NativeType("KTX_error_code")
+    public static int ktxTexture2_GetImageOffset(@NativeType("ktxTexture2 *") ktxTexture2 This, @NativeType("ktx_uint32_t") int level, @NativeType("ktx_uint32_t") int layer, @NativeType("ktx_uint32_t") int faceSlice, @NativeType("ktx_size_t *") PointerBuffer pOffset) {
+        if (CHECKS) {
+            check(pOffset, 1);
+        }
+        return nktxTexture2_GetImageOffset(This.address(), level, layer, faceSlice, memAddress(pOffset));
+    }
+
     // --- [ ktxTexture2_GetNumComponents ] ---
 
     /** {@code ktx_uint32_t ktxTexture2_GetNumComponents(ktxTexture2 * This)} */
@@ -799,6 +971,23 @@ public class KTX {
     @NativeType("ktx_uint32_t")
     public static int ktxTexture2_GetNumComponents(@NativeType("ktxTexture2 *") ktxTexture2 This) {
         return nktxTexture2_GetNumComponents(This.address());
+    }
+
+    // --- [ ktxTexture2_GetTransferFunction_e ] ---
+
+    /** {@code khr_df_transfer_e ktxTexture2_GetTransferFunction_e(ktxTexture2 * This)} */
+    public static int nktxTexture2_GetTransferFunction_e(long This) {
+        long __functionAddress = Functions.Texture2_GetTransferFunction_e;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPI(This, __functionAddress);
+    }
+
+    /** {@code khr_df_transfer_e ktxTexture2_GetTransferFunction_e(ktxTexture2 * This)} */
+    @NativeType("khr_df_transfer_e")
+    public static int ktxTexture2_GetTransferFunction_e(@NativeType("ktxTexture2 *") ktxTexture2 This) {
+        return nktxTexture2_GetTransferFunction_e(This.address());
     }
 
     // --- [ ktxTexture2_GetOETF_e ] ---
@@ -857,6 +1046,23 @@ public class KTX {
         return nktxTexture2_GetPremultipliedAlpha(This.address());
     }
 
+    // --- [ ktxTexture2_GetPrimaries_e ] ---
+
+    /** {@code khr_df_primaries_e ktxTexture2_GetPrimaries_e(ktxTexture2 * This)} */
+    public static int nktxTexture2_GetPrimaries_e(long This) {
+        long __functionAddress = Functions.Texture2_GetPrimaries_e;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPI(This, __functionAddress);
+    }
+
+    /** {@code khr_df_primaries_e ktxTexture2_GetPrimaries_e(ktxTexture2 * This)} */
+    @NativeType("khr_df_primaries_e")
+    public static int ktxTexture2_GetPrimaries_e(@NativeType("ktxTexture2 *") ktxTexture2 This) {
+        return nktxTexture2_GetPrimaries_e(This.address());
+    }
+
     // --- [ ktxTexture2_NeedsTranscoding ] ---
 
     /** {@code ktx_bool_t ktxTexture2_NeedsTranscoding(ktxTexture2 * This)} */
@@ -869,6 +1075,138 @@ public class KTX {
     @NativeType("ktx_bool_t")
     public static boolean ktxTexture2_NeedsTranscoding(@NativeType("ktxTexture2 *") ktxTexture2 This) {
         return nktxTexture2_NeedsTranscoding(This.address());
+    }
+
+    // --- [ ktxTexture2_SetTransferFunction ] ---
+
+    /** {@code KTX_error_code ktxTexture2_SetTransferFunction(ktxTexture2 * This, khr_df_transfer_e tf)} */
+    public static int nktxTexture2_SetTransferFunction(long This, int tf) {
+        long __functionAddress = Functions.Texture2_SetTransferFunction;
+        return callPI(This, tf, __functionAddress);
+    }
+
+    /** {@code KTX_error_code ktxTexture2_SetTransferFunction(ktxTexture2 * This, khr_df_transfer_e tf)} */
+    @NativeType("KTX_error_code")
+    public static int ktxTexture2_SetTransferFunction(@NativeType("ktxTexture2 *") ktxTexture2 This, @NativeType("khr_df_transfer_e") int tf) {
+        return nktxTexture2_SetTransferFunction(This.address(), tf);
+    }
+
+    // --- [ ktxTexture2_SetOETF ] ---
+
+    /** {@code KTX_error_code ktxTexture2_SetOETF(ktxTexture2 * This, khr_df_transfer_e oetf)} */
+    public static int nktxTexture2_SetOETF(long This, int oetf) {
+        long __functionAddress = Functions.Texture2_SetOETF;
+        return callPI(This, oetf, __functionAddress);
+    }
+
+    /** {@code KTX_error_code ktxTexture2_SetOETF(ktxTexture2 * This, khr_df_transfer_e oetf)} */
+    @NativeType("KTX_error_code")
+    public static int ktxTexture2_SetOETF(@NativeType("ktxTexture2 *") ktxTexture2 This, @NativeType("khr_df_transfer_e") int oetf) {
+        return nktxTexture2_SetOETF(This.address(), oetf);
+    }
+
+    // --- [ ktxTexture2_SetPrimaries ] ---
+
+    /** {@code KTX_error_code ktxTexture2_SetPrimaries(ktxTexture2 * This, khr_df_primaries_e primaries)} */
+    public static int nktxTexture2_SetPrimaries(long This, int primaries) {
+        long __functionAddress = Functions.Texture2_SetPrimaries;
+        return callPI(This, primaries, __functionAddress);
+    }
+
+    /** {@code KTX_error_code ktxTexture2_SetPrimaries(ktxTexture2 * This, khr_df_primaries_e primaries)} */
+    @NativeType("KTX_error_code")
+    public static int ktxTexture2_SetPrimaries(@NativeType("ktxTexture2 *") ktxTexture2 This, @NativeType("khr_df_primaries_e") int primaries) {
+        return nktxTexture2_SetPrimaries(This.address(), primaries);
+    }
+
+    // --- [ ktxTexture2_LoadImageData ] ---
+
+    /** {@code KTX_error_code ktxTexture2_LoadImageData(ktxTexture2 * This, ktx_uint8_t * pBuffer, ktx_size_t bufSize)} */
+    public static int nktxTexture2_LoadImageData(long This, long pBuffer, long bufSize) {
+        long __functionAddress = Functions.Texture2_LoadImageData;
+        return callPPPI(This, pBuffer, bufSize, __functionAddress);
+    }
+
+    /** {@code KTX_error_code ktxTexture2_LoadImageData(ktxTexture2 * This, ktx_uint8_t * pBuffer, ktx_size_t bufSize)} */
+    @NativeType("KTX_error_code")
+    public static int ktxTexture2_LoadImageData(@NativeType("ktxTexture2 *") ktxTexture2 This, @NativeType("ktx_uint8_t *") ByteBuffer pBuffer) {
+        return nktxTexture2_LoadImageData(This.address(), memAddress(pBuffer), pBuffer.remaining());
+    }
+
+    // --- [ ktxTexture2_LoadDeflatedImageData ] ---
+
+    /** {@code KTX_error_code ktxTexture2_LoadDeflatedImageData(ktxTexture2 * This, ktx_uint8_t * pBuffer, ktx_size_t bufSize)} */
+    public static int nktxTexture2_LoadDeflatedImageData(long This, long pBuffer, long bufSize) {
+        long __functionAddress = Functions.Texture2_LoadDeflatedImageData;
+        return callPPPI(This, pBuffer, bufSize, __functionAddress);
+    }
+
+    /** {@code KTX_error_code ktxTexture2_LoadDeflatedImageData(ktxTexture2 * This, ktx_uint8_t * pBuffer, ktx_size_t bufSize)} */
+    @NativeType("KTX_error_code")
+    public static int ktxTexture2_LoadDeflatedImageData(@NativeType("ktxTexture2 *") ktxTexture2 This, @NativeType("ktx_uint8_t *") ByteBuffer pBuffer) {
+        return nktxTexture2_LoadDeflatedImageData(This.address(), memAddress(pBuffer), pBuffer.remaining());
+    }
+
+    // --- [ ktxTexture2_WriteToNamedFile ] ---
+
+    /** {@code KTX_error_code ktxTexture2_WriteToNamedFile(ktxTexture2 * This, char const * const dstname)} */
+    public static int nktxTexture2_WriteToNamedFile(long This, long dstname) {
+        long __functionAddress = Functions.Texture2_WriteToNamedFile;
+        return callPPI(This, dstname, __functionAddress);
+    }
+
+    /** {@code KTX_error_code ktxTexture2_WriteToNamedFile(ktxTexture2 * This, char const * const dstname)} */
+    @NativeType("KTX_error_code")
+    public static int ktxTexture2_WriteToNamedFile(@NativeType("ktxTexture2 *") ktxTexture2 This, @NativeType("char const * const") ByteBuffer dstname) {
+        if (CHECKS) {
+            checkNT1(dstname);
+        }
+        return nktxTexture2_WriteToNamedFile(This.address(), memAddress(dstname));
+    }
+
+    /** {@code KTX_error_code ktxTexture2_WriteToNamedFile(ktxTexture2 * This, char const * const dstname)} */
+    @NativeType("KTX_error_code")
+    public static int ktxTexture2_WriteToNamedFile(@NativeType("ktxTexture2 *") ktxTexture2 This, @NativeType("char const * const") CharSequence dstname) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(dstname, true);
+            long dstnameEncoded = stack.getPointerAddress();
+            return nktxTexture2_WriteToNamedFile(This.address(), dstnameEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ ktxTexture2_WriteToMemory ] ---
+
+    /** {@code KTX_error_code ktxTexture2_WriteToMemory(ktxTexture2 * This, ktx_uint8_t ** bytes, ktx_size_t * size)} */
+    public static int nktxTexture2_WriteToMemory(long This, long bytes, long size) {
+        long __functionAddress = Functions.Texture2_WriteToMemory;
+        return callPPPI(This, bytes, size, __functionAddress);
+    }
+
+    /** {@code KTX_error_code ktxTexture2_WriteToMemory(ktxTexture2 * This, ktx_uint8_t ** bytes, ktx_size_t * size)} */
+    @NativeType("KTX_error_code")
+    public static int ktxTexture2_WriteToMemory(@NativeType("ktxTexture2 *") ktxTexture2 This, @NativeType("ktx_uint8_t **") PointerBuffer bytes, @NativeType("ktx_size_t *") PointerBuffer size) {
+        if (CHECKS) {
+            check(bytes, 1);
+            check(size, 1);
+        }
+        return nktxTexture2_WriteToMemory(This.address(), memAddress(bytes), memAddress(size));
+    }
+
+    // --- [ ktxTexture2_WriteToStream ] ---
+
+    /** {@code KTX_error_code ktxTexture2_WriteToStream(ktxTexture2 * This, struct ktxStream * dststr)} */
+    public static int nktxTexture2_WriteToStream(long This, long dststr) {
+        long __functionAddress = Functions.Texture2_WriteToStream;
+        return callPPI(This, dststr, __functionAddress);
+    }
+
+    /** {@code KTX_error_code ktxTexture2_WriteToStream(ktxTexture2 * This, struct ktxStream * dststr)} */
+    @NativeType("KTX_error_code")
+    public static int ktxTexture2_WriteToStream(@NativeType("ktxTexture2 *") ktxTexture2 This, @NativeType("struct ktxStream *") ktxStream dststr) {
+        return nktxTexture2_WriteToStream(This.address(), dststr.address());
     }
 
     // --- [ ktxTexture2_CompressAstcEx ] ---
@@ -886,6 +1224,20 @@ public class KTX {
     @NativeType("KTX_error_code")
     public static int ktxTexture2_CompressAstcEx(@NativeType("ktxTexture2 *") ktxTexture2 This, @NativeType("ktxAstcParams *") ktxAstcParams params) {
         return nktxTexture2_CompressAstcEx(This.address(), params.address());
+    }
+
+    // --- [ ktxTexture2_DecodeAstc ] ---
+
+    /** {@code KTX_error_code ktxTexture2_DecodeAstc(ktxTexture2 * This)} */
+    public static int nktxTexture2_DecodeAstc(long This) {
+        long __functionAddress = Functions.Texture2_DecodeAstc;
+        return callPI(This, __functionAddress);
+    }
+
+    /** {@code KTX_error_code ktxTexture2_DecodeAstc(ktxTexture2 * This)} */
+    @NativeType("KTX_error_code")
+    public static int ktxTexture2_DecodeAstc(@NativeType("ktxTexture2 *") ktxTexture2 This) {
+        return nktxTexture2_DecodeAstc(This.address());
     }
 
     // --- [ ktxTexture2_CompressAstc ] ---
@@ -1516,6 +1868,11 @@ public class KTX {
     @NativeType("ktx_size_t")
     public static long ktxTexture_GetImageSize(@NativeType("ktxTexture *") ktxTexture This, @NativeType("ktx_uint32_t") int level) {
         return callPP(This.address(), level, This.vtbl().GetImageSize());
+    }
+
+    @NativeType("ktx_size_t")
+    public static long ktxTexture_GetLevelSize(@NativeType("ktxTexture *") ktxTexture This, @NativeType("ktx_uint32_t") int level) {
+        return callPP(This.address(), level, This.vtbl().GetLevelSize());
     }
 
     @NativeType("KTX_error_code")

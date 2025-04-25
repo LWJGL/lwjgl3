@@ -20,6 +20,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     PFNKTEXGETIMAGEOFFSET GetImageOffset;
  *     PFNKTEXGETDATASIZEUNCOMPRESSED GetDataSizeUncompressed;
  *     PFNKTEXGETIMAGESIZE GetImageSize;
+ *     PFNKTEXGETLEVELSIZE GetLevelSize;
  *     PFNKTEXITERATELEVELS IterateLevels;
  *     PFNKTEXITERATELOADLEVELFACES IterateLoadLevelFaces;
  *     PFNKTEXNEEDSTRANSCODING NeedsTranscoding;
@@ -47,6 +48,7 @@ public class ktxTexture_vtbl extends Struct<ktxTexture_vtbl> {
         GETIMAGEOFFSET,
         GETDATASIZEUNCOMPRESSED,
         GETIMAGESIZE,
+        GETLEVELSIZE,
         ITERATELEVELS,
         ITERATELOADLEVELFACES,
         NEEDSTRANSCODING,
@@ -73,6 +75,7 @@ public class ktxTexture_vtbl extends Struct<ktxTexture_vtbl> {
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
+            __member(POINTER_SIZE),
             __member(POINTER_SIZE)
         );
 
@@ -83,16 +86,17 @@ public class ktxTexture_vtbl extends Struct<ktxTexture_vtbl> {
         GETIMAGEOFFSET = layout.offsetof(1);
         GETDATASIZEUNCOMPRESSED = layout.offsetof(2);
         GETIMAGESIZE = layout.offsetof(3);
-        ITERATELEVELS = layout.offsetof(4);
-        ITERATELOADLEVELFACES = layout.offsetof(5);
-        NEEDSTRANSCODING = layout.offsetof(6);
-        LOADIMAGEDATA = layout.offsetof(7);
-        SETIMAGEFROMMEMORY = layout.offsetof(8);
-        SETIMAGEFROMSTDIOSTREAM = layout.offsetof(9);
-        WRITETOSTDIOSTREAM = layout.offsetof(10);
-        WRITETONAMEDFILE = layout.offsetof(11);
-        WRITETOMEMORY = layout.offsetof(12);
-        WRITETOSTREAM = layout.offsetof(13);
+        GETLEVELSIZE = layout.offsetof(4);
+        ITERATELEVELS = layout.offsetof(5);
+        ITERATELOADLEVELFACES = layout.offsetof(6);
+        NEEDSTRANSCODING = layout.offsetof(7);
+        LOADIMAGEDATA = layout.offsetof(8);
+        SETIMAGEFROMMEMORY = layout.offsetof(9);
+        SETIMAGEFROMSTDIOSTREAM = layout.offsetof(10);
+        WRITETOSTDIOSTREAM = layout.offsetof(11);
+        WRITETONAMEDFILE = layout.offsetof(12);
+        WRITETOMEMORY = layout.offsetof(13);
+        WRITETOSTREAM = layout.offsetof(14);
     }
 
     protected ktxTexture_vtbl(long address, @Nullable ByteBuffer container) {
@@ -129,6 +133,9 @@ public class ktxTexture_vtbl extends Struct<ktxTexture_vtbl> {
     /** @return the value of the {@code GetImageSize} field. */
     @NativeType("PFNKTEXGETIMAGESIZE")
     public long GetImageSize() { return nGetImageSize(address()); }
+    /** @return the value of the {@code GetLevelSize} field. */
+    @NativeType("PFNKTEXGETLEVELSIZE")
+    public long GetLevelSize() { return nGetLevelSize(address()); }
     /** @return the value of the {@code IterateLevels} field. */
     @NativeType("PFNKTEXITERATELEVELS")
     public long IterateLevels() { return nIterateLevels(address()); }
@@ -197,6 +204,8 @@ public class ktxTexture_vtbl extends Struct<ktxTexture_vtbl> {
     public static long nGetDataSizeUncompressed(long struct) { return memGetAddress(struct + ktxTexture_vtbl.GETDATASIZEUNCOMPRESSED); }
     /** Unsafe version of {@link #GetImageSize}. */
     public static long nGetImageSize(long struct) { return memGetAddress(struct + ktxTexture_vtbl.GETIMAGESIZE); }
+    /** Unsafe version of {@link #GetLevelSize}. */
+    public static long nGetLevelSize(long struct) { return memGetAddress(struct + ktxTexture_vtbl.GETLEVELSIZE); }
     /** Unsafe version of {@link #IterateLevels}. */
     public static long nIterateLevels(long struct) { return memGetAddress(struct + ktxTexture_vtbl.ITERATELEVELS); }
     /** Unsafe version of {@link #IterateLoadLevelFaces}. */
@@ -273,6 +282,9 @@ public class ktxTexture_vtbl extends Struct<ktxTexture_vtbl> {
         /** @return the value of the {@code GetImageSize} field. */
         @NativeType("PFNKTEXGETIMAGESIZE")
         public long GetImageSize() { return ktxTexture_vtbl.nGetImageSize(address()); }
+        /** @return the value of the {@code GetLevelSize} field. */
+        @NativeType("PFNKTEXGETLEVELSIZE")
+        public long GetLevelSize() { return ktxTexture_vtbl.nGetLevelSize(address()); }
         /** @return the value of the {@code IterateLevels} field. */
         @NativeType("PFNKTEXITERATELEVELS")
         public long IterateLevels() { return ktxTexture_vtbl.nIterateLevels(address()); }

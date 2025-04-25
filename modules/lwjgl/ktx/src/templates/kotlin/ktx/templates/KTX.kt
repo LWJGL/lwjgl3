@@ -198,6 +198,12 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
         "TF_HIGH_QUALITY".enum("32")
     )
 
+    IgnoreMissing..ktx_error_code_e(
+        "LoadOpenGL",
+
+        "PFNGLGETPROCADDRESS".handle("pfnGLGetProcAddress")
+    )
+
     /*ktx_error_code_e(
         "Texture_CreateFromStdioStream",
         "These four create a ktxTexture1 or ktxTexture2 according to the data header, and return a pointer to the base ktxTexture class.",
@@ -277,7 +283,7 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
     ktx_error_code_e(
         "Texture1_Create",
 
-        ktxTextureCreateInfo.p("createInfo"),
+        ktxTextureCreateInfo.const.p.const("createInfo"),
         ktxTextureCreateStorageEnum("storageAllocation"),
         Check(1)..ktxTexture1.p.p("newTex")
     )
@@ -316,10 +322,53 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
         Check(1)..ktxTexture1.p.p("newTex")
     )
 
+    IgnoreMissing..void(
+        "Texture1_Destroy",
+
+        ktxTexture1.p("This")
+    )
+
     ktx_bool_t(
         "Texture1_NeedsTranscoding",
 
         ktxTexture1.p("This")
+    )
+
+    IgnoreMissing..ktx_error_code_e(
+        "Texture1_LoadImageData",
+
+        ktxTexture1.p("This"),
+        ktx_uint8_t.p("pBuffer"),
+        AutoSize("pBuffer")..ktx_size_t("bufSize")
+    )
+
+    /*ktx_error_code_e(
+        "Texture1_WriteToStdioStream",
+
+        ktxTexture1.p("This"),
+        "FILE".opaque.p("dstsstr")
+    )*/
+
+    IgnoreMissing..ktx_error_code_e(
+        "Texture1_WriteToNamedFile",
+
+        ktxTexture1.p("This"),
+        charUTF8.const.p.const("dstname")
+    )
+
+    IgnoreMissing..ktx_error_code_e(
+        "Texture1_WriteToMemory",
+
+        ktxTexture1.p("This"),
+        Check(1)..ktx_uint8_t.p.p("bytes"),
+        Check(1)..ktx_size_t.p("size")
+    )
+
+    IgnoreMissing..ktx_error_code_e(
+        "Texture1_WriteToStream",
+
+        ktxTexture1.p("This"),
+        ktxStream.p("dststr")
     )
 
     /*ktx_error_code_e(
@@ -355,7 +404,7 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
     ktx_error_code_e(
         "Texture2_Create",
 
-        ktxTextureCreateInfo.p("createInfo"),
+        ktxTextureCreateInfo.const.p.const("createInfo"),
         ktxTextureCreateStorageEnum("storageAllocation"),
         Check(1)..ktxTexture2.p.p("newTex")
     )
@@ -401,6 +450,12 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
         Check(1)..ktxTexture2.p.p("newTex")
     )
 
+    IgnoreMissing..void(
+        "Texture2_Destroy",
+
+        ktxTexture2.p("This")
+    )
+
     IgnoreMissing..ktx_error_code_e(
         "Texture2_CompressBasis",
 
@@ -430,8 +485,24 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
         Check(1)..ktx_uint32_t.p("componentByteLength")
     )
 
+    IgnoreMissing..ktx_error_code_e(
+        "Texture2_GetImageOffset",
+
+        ktxTexture2.p("This"),
+        ktx_uint32_t("level"),
+        ktx_uint32_t("layer"),
+        ktx_uint32_t("faceSlice"),
+        Check(1)..ktx_size_t.p("pOffset")
+    )
+
     ktx_uint32_t(
         "Texture2_GetNumComponents",
+
+        ktxTexture2.p("This")
+    )
+
+    IgnoreMissing..khr_df_transfer_e(
+        "Texture2_GetTransferFunction_e",
 
         ktxTexture2.p("This")
     )
@@ -460,10 +531,88 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
         ktxTexture2.p("This")
     )
 
+    IgnoreMissing..khr_df_primaries_e(
+        "Texture2_GetPrimaries_e",
+
+        ktxTexture2.p("This")
+    )
+
     ktx_bool_t(
         "Texture2_NeedsTranscoding",
 
         ktxTexture2.p("This")
+    )
+
+//    ktx_error_code_e ktxTexture2_SetTransferFunction(ktxTexture2* This, khr_df_transfer_e tf);
+//    ktx_error_code_e ktxTexture2_SetOETF(ktxTexture2* This, khr_df_transfer_e oetf);
+//    ktx_error_code_e ktxTexture2_SetPrimaries(ktxTexture2* This, khr_df_primaries_e primaries);
+//    ktx_error_code_e ktxTexture2_LoadImageData(ktxTexture2* This, ktx_uint8_t* pBuffer, ktx_size_t bufSize);
+//    ktx_error_code_e ktxTexture2_LoadDeflatedImageData(ktxTexture2* This, ktx_uint8_t* pBuffer, ktx_size_t bufSize);
+
+    ktx_error_code_e(
+        "Texture2_SetTransferFunction",
+
+        ktxTexture2.p("This"),
+        khr_df_transfer_e("tf")
+    )
+
+    ktx_error_code_e(
+        "Texture2_SetOETF",
+
+        ktxTexture2.p("This"),
+        khr_df_transfer_e("oetf")
+    )
+
+    ktx_error_code_e(
+        "Texture2_SetPrimaries",
+
+        ktxTexture2.p("This"),
+        khr_df_primaries_e("primaries")
+    )
+
+    ktx_error_code_e(
+        "Texture2_LoadImageData",
+
+        ktxTexture2.p("This"),
+        ktx_uint8_t.p("pBuffer"),
+        AutoSize("pBuffer")..ktx_size_t("bufSize")
+    )
+
+    ktx_error_code_e(
+        "Texture2_LoadDeflatedImageData",
+
+        ktxTexture2.p("This"),
+        ktx_uint8_t.p("pBuffer"),
+        AutoSize("pBuffer")..ktx_size_t("bufSize")
+    )
+
+    /*ktx_error_code_e(
+        "Texture2_WriteToStdioStream",
+
+        ktxTexture2.p("This"),
+        "FILE".opaque.p("dstsstr")
+    )*/
+
+    ktx_error_code_e(
+        "Texture2_WriteToNamedFile",
+
+        ktxTexture2.p("This"),
+        charUTF8.const.p.const("dstname")
+    )
+
+    ktx_error_code_e(
+        "Texture2_WriteToMemory",
+
+        ktxTexture2.p("This"),
+        Check(1)..ktx_uint8_t.p.p("bytes"),
+        Check(1)..ktx_size_t.p("size")
+    )
+
+    ktx_error_code_e(
+        "Texture2_WriteToStream",
+
+        ktxTexture2.p("This"),
+        ktxStream.p("dststr")
     )
 
     customMethod("""
@@ -478,6 +627,12 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
 
         ktxTexture2.p("This"),
         ktxAstcParams.p("params")
+    )
+
+    ktx_error_code_e(
+        "Texture2_DecodeAstc",
+
+        ktxTexture2.p("This")
     )
 
     IgnoreMissing..ktx_error_code_e(
@@ -737,6 +892,13 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
         ktx_uint32_t("level")
     )
 
+    ktx_size_t(
+        "Texture_GetLevelSize",
+
+        ktxTexture.p("This"),
+        ktx_uint32_t("level")
+    )
+
     ktx_error_code_e(
         "Texture_IterateLevels",
 
@@ -824,6 +986,11 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
     @NativeType("ktx_size_t")
     public static long ktxTexture_GetImageSize(@NativeType("ktxTexture *") ktxTexture This, @NativeType("ktx_uint32_t") int level) {
         return callPP(This.address(), level, This.vtbl().GetImageSize());
+    }
+
+    @NativeType("ktx_size_t")
+    public static long ktxTexture_GetLevelSize(@NativeType("ktxTexture *") ktxTexture This, @NativeType("ktx_uint32_t") int level) {
+        return callPP(This.address(), level, This.vtbl().GetLevelSize());
     }
 
     @NativeType("KTX_error_code")
