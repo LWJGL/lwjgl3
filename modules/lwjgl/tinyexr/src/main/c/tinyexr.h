@@ -4295,7 +4295,7 @@ static bool DecodePixelData(/* out */ unsigned char **out_images,
 static bool DecodeTiledPixelData(
     unsigned char **out_images, int *width, int *height,
     const int *requested_pixel_types, const unsigned char *data_ptr,
-    size_t data_len, int compression_type, int line_order, int data_width,
+    size_t data_len, int compression_type, int data_width,
     int data_height, int tile_offset_x, int tile_offset_y, int tile_size_x,
     int tile_size_y, size_t pixel_data_size, size_t num_attributes,
     const EXRAttribute *attributes, size_t num_channels,
@@ -4321,8 +4321,9 @@ static bool DecodeTiledPixelData(
   }
 
   // Image size = tile size.
+  // Line order within tiles is always increasing.
   return DecodePixelData(out_images, requested_pixel_types, data_ptr, data_len,
-                         compression_type, line_order, (*width), tile_size_y,
+                         compression_type, /* line_order*/ 0, (*width), tile_size_y,
                          /* stride */ tile_size_x, /* y */ 0, /* line_no */ 0,
                          (*height), pixel_data_size, num_attributes, attributes,
                          num_channels, channels, channel_offset_list);
@@ -5097,7 +5098,6 @@ static int DecodeTiledLevel(EXRImage* exr_image, const EXRHeader* exr_header,
       &(exr_image->tiles[tile_idx].height),
       exr_header->requested_pixel_types, data_ptr,
       static_cast<size_t>(data_len), exr_header->compression_type,
-      exr_header->line_order,
       exr_image->width, exr_image->height,
       tile_coordinates[0], tile_coordinates[1], exr_header->tile_size_x,
       exr_header->tile_size_y, static_cast<size_t>(pixel_data_size),
@@ -5451,10 +5451,11 @@ static int DecodeChunk(EXRImage *exr_image, const EXRHeader *exr_header,
                 if (line_no < 0) {
                   invalid_data = true;
                 } else {
+                  // Line order is increasing because we read in line offset table order.
                   if (!tinyexr::DecodePixelData(
                           exr_image->images, exr_header->requested_pixel_types,
                           data_ptr, static_cast<size_t>(data_len),
-                          exr_header->compression_type, exr_header->line_order,
+                          exr_header->compression_type, /* line_order*/ 0,
                           int(data_width), int(data_height), int(data_width), y, line_no,
                           num_lines, static_cast<size_t>(pixel_data_size),
                           static_cast<size_t>(
@@ -8158,7 +8159,7 @@ size_t SaveEXRMultipartImageToMemory(const EXRImage* exr_images,
                                      const EXRHeader** exr_headers,
                                      unsigned int num_parts,
                                      unsigned char** memory_out, const char** err) {
-  if (exr_images == NULL || exr_headers == NULL || num_parts < 2 ||
+  if (exr_images == NULL || exr_headers == NULL || num_parts == 0 ||
       memory_out == NULL) {
     tinyexr::SetErrorMessage("Invalid argument for SaveEXRNPartImageToMemory",
                               err);
@@ -8172,7 +8173,7 @@ int SaveEXRMultipartImageToFile(const EXRImage* exr_images,
                                 unsigned int num_parts,
                                 const char* filename,
                                 const char** err) {
-  if (exr_images == NULL || exr_headers == NULL || num_parts < 2) {
+  if (exr_images == NULL || exr_headers == NULL || num_parts == 0) {
     tinyexr::SetErrorMessage("Invalid argument for SaveEXRMultipartImageToFile",
                               err);
     return TINYEXR_ERROR_INVALID_ARGUMENT;
