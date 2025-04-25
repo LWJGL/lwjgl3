@@ -421,9 +421,9 @@ public class FMOD {
         return FMOD;
     }
 
-    public static final int FMOD_VERSION = 0x20306;
+    public static final int FMOD_VERSION = 0x20307;
 
-    public static final int FMOD_BUILDNUMBER = 0x2476E;
+    public static final int FMOD_BUILDNUMBER = 150747;
 
     public static final int
         FMOD_DEBUG_LEVEL_NONE          = 0x0,
