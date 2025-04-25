@@ -225,13 +225,13 @@ val hb_draw_state_t = struct(Module.HARFBUZZ, "hb_draw_state_t") {
     float("path_start_y")
     float("current_x")
     float("current_y")
+    float("slant_xy")
     hb_var_num_t("reserved1").private()
     hb_var_num_t("reserved2").private()
     hb_var_num_t("reserved3").private()
     hb_var_num_t("reserved4").private()
     hb_var_num_t("reserved5").private()
     hb_var_num_t("reserved6").private()
-    hb_var_num_t("reserved7").private()
 }
 
 val hb_draw_move_to_func_t = Module.HARFBUZZ.callback {
