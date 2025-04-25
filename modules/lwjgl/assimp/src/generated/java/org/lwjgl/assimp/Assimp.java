@@ -422,7 +422,9 @@ public class Assimp {
         aiTextureType_MAYA_BASE               = 22,
         aiTextureType_MAYA_SPECULAR           = 23,
         aiTextureType_MAYA_SPECULAR_COLOR     = 24,
-        aiTextureType_MAYA_SPECULAR_ROUGHNESS = 25;
+        aiTextureType_MAYA_SPECULAR_ROUGHNESS = 25,
+        aiTextureType_ANISOTROPY              = 26,
+        aiTextureType_GLTF_METALLIC_ROUGHNESS = 27;
 
     public static final int
         aiShadingMode_Flat         = 0x1,
@@ -501,6 +503,7 @@ public class Assimp {
         AI_MATKEY_USE_EMISSIVE_MAP            = "$mat.useEmissiveMap",
         AI_MATKEY_EMISSIVE_INTENSITY          = "$mat.emissiveIntensity",
         AI_MATKEY_USE_AO_MAP                  = "$mat.useAOMap",
+        AI_MATKEY_ANISOTROPY_ROTATION         = "$mat.anisotropyRotation",
         AI_MATKEY_OBJ_ILLUM                   = "$mat.illum",
         _AI_MATKEY_TEXTURE_BASE               = "$tex.file",
         _AI_MATKEY_UVWSRC_BASE                = "$tex.uvwsrc",
@@ -514,7 +517,9 @@ public class Assimp {
         _AI_MATKEY_TEXFLAGS_BASE              = "$tex.flags",
         _AI_MATKEY_OBJ_BUMPMULT_BASE          = "$tex.bumpmult";
 
-    public static final int AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE = aiTextureType_UNKNOWN;
+    public static final int
+        AI_MATKEY_ANISOTROPY_TEXTURE                                  = aiTextureType_ANISOTROPY,
+        AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE = aiTextureType_GLTF_METALLIC_ROUGHNESS;
 
     public static final String
         AI_MATKEY_GLTF_ALPHAMODE               = "$mat.gltf.alphaMode",

@@ -1136,7 +1136,9 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         "TextureType_MAYA_BASE".enum,
         "TextureType_MAYA_SPECULAR".enum,
         "TextureType_MAYA_SPECULAR_COLOR".enum,
-        "TextureType_MAYA_SPECULAR_ROUGHNESS".enum
+        "TextureType_MAYA_SPECULAR_ROUGHNESS".enum,
+        "TextureType_ANISOTROPY".enum,
+        "TextureType_GLTF_METALLIC_ROUGHNESS".enum
     )
 
     EnumConstant(
@@ -1221,6 +1223,8 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         "AI_MATKEY_USE_EMISSIVE_MAP".."\$mat.useEmissiveMap",
         "AI_MATKEY_EMISSIVE_INTENSITY".."\$mat.emissiveIntensity",
         "AI_MATKEY_USE_AO_MAP".."\$mat.useAOMap",
+        "AI_MATKEY_ANISOTROPY_ROTATION".."\$mat.anisotropyRotation",
+
         "AI_MATKEY_OBJ_ILLUM".."\$mat.illum",
 
         "_AI_MATKEY_TEXTURE_BASE".."\$tex.file",
@@ -1237,7 +1241,8 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
     ).noPrefix()
 
     IntConstant(
-        "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE".."aiTextureType_UNKNOWN"
+        "AI_MATKEY_ANISOTROPY_TEXTURE".."aiTextureType_ANISOTROPY",
+        "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE".."aiTextureType_GLTF_METALLIC_ROUGHNESS"
     ).noPrefix()
 
     StringConstant(
