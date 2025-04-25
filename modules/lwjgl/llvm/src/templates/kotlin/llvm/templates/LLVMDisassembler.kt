@@ -51,7 +51,8 @@ val LLVMDisassembler = "LLVMDisassembler".nativeClass(
         "Disassembler_Option_PrintImmHex".."2",
         "Disassembler_Option_AsmPrinterVariant".."4",
         "Disassembler_Option_SetInstrComments".."8",
-        "Disassembler_Option_PrintLatency".."16"
+        "Disassembler_Option_PrintLatency".."16",
+        "Disassembler_Option_Color".."32"
     )
 
     LLVMDisasmContextRef(

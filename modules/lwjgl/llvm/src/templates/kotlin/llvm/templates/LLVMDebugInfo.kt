@@ -111,6 +111,7 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         "DWARFSourceLanguageRuby".enum,
         "DWARFSourceLanguageMove".enum,
         "DWARFSourceLanguageHylo".enum,
+        "DWARFSourceLanguageMetal".enum,
         "DWARFSourceLanguageMips_Assembler".enum,
         "DWARFSourceLanguageGOOGLE_RenderScript".enum,
         "DWARFSourceLanguageBORLAND_Delphi".enum
@@ -660,7 +661,8 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         "DIBuilderCreateObjectPointerType",
 
         LLVMDIBuilderRef("Builder"),
-        LLVMMetadataRef("Type")
+        LLVMMetadataRef("Type"),
+        LLVMBool("Implicit")
     )
 
     LLVMMetadataRef(
@@ -1097,6 +1099,36 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
 
         LLVMValueRef("Inst"),
         nullable..LLVMMetadataRef("Loc")
+    )
+
+    IgnoreMissing..LLVMMetadataRef(
+        "DIBuilderCreateLabel",
+
+        LLVMDIBuilderRef("Builder"),
+        LLVMMetadataRef("Context"),
+        charUTF8.const.p("Name"),
+        AutoSize("Name")..size_t("NameLen"),
+        LLVMMetadataRef("File"),
+        unsigned("LineNo"),
+        LLVMBool("AlwaysPreserve")
+    )
+
+    IgnoreMissing..LLVMDbgRecordRef(
+        "DIBuilderInsertLabelBefore",
+
+        LLVMDIBuilderRef("Builder"),
+        LLVMMetadataRef("LabelInfo"),
+        LLVMMetadataRef("Location"),
+        LLVMValueRef("InsertBefore")
+    )
+
+    IgnoreMissing..LLVMDbgRecordRef(
+        "DIBuilderInsertLabelAtEnd",
+
+        LLVMDIBuilderRef("Builder"),
+        LLVMMetadataRef("LabelInfo"),
+        LLVMMetadataRef("Location"),
+        LLVMBasicBlockRef("InsertAtEnd")
     )
 
     IgnoreMissing..LLVMMetadataKind(

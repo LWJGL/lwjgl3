@@ -51,6 +51,7 @@ public class ClangIndex {
             File_tryGetRealPathName                 = apiGetFunctionAddressOptional(CLANG, "clang_File_tryGetRealPathName"),
             getNullLocation                         = apiGetFunctionAddress(CLANG, "clang_getNullLocation"),
             equalLocations                          = apiGetFunctionAddress(CLANG, "clang_equalLocations"),
+            isBeforeInTranslationUnit               = apiGetFunctionAddressOptional(CLANG, "clang_isBeforeInTranslationUnit"),
             getLocation                             = apiGetFunctionAddress(CLANG, "clang_getLocation"),
             getLocationForOffset                    = apiGetFunctionAddress(CLANG, "clang_getLocationForOffset"),
             Location_isInSystemHeader               = apiGetFunctionAddress(CLANG, "clang_Location_isInSystemHeader"),
@@ -217,6 +218,7 @@ public class ClangIndex {
             Type_getTemplateArgumentAsType          = apiGetFunctionAddress(CLANG, "clang_Type_getTemplateArgumentAsType"),
             Type_getCXXRefQualifier                 = apiGetFunctionAddress(CLANG, "clang_Type_getCXXRefQualifier"),
             isVirtualBase                           = apiGetFunctionAddress(CLANG, "clang_isVirtualBase"),
+            getOffsetOfBase                         = apiGetFunctionAddressOptional(CLANG, "clang_getOffsetOfBase"),
             getCXXAccessSpecifier                   = apiGetFunctionAddress(CLANG, "clang_getCXXAccessSpecifier"),
             Cursor_getBinaryOpcode                  = apiGetFunctionAddressOptional(CLANG, "clang_Cursor_getBinaryOpcode"),
             Cursor_getBinaryOpcodeStr               = apiGetFunctionAddressOptional(CLANG, "clang_Cursor_getBinaryOpcodeStr"),
@@ -239,6 +241,7 @@ public class ClangIndex {
             getCursorPrintingPolicy                 = apiGetFunctionAddressOptional(CLANG, "clang_getCursorPrintingPolicy"),
             PrintingPolicy_dispose                  = apiGetFunctionAddressOptional(CLANG, "clang_PrintingPolicy_dispose"),
             getCursorPrettyPrinted                  = apiGetFunctionAddressOptional(CLANG, "clang_getCursorPrettyPrinted"),
+            getTypePrettyPrinted                    = apiGetFunctionAddressOptional(CLANG, "clang_getTypePrettyPrinted"),
             getCursorDisplayName                    = apiGetFunctionAddress(CLANG, "clang_getCursorDisplayName"),
             getCursorReferenced                     = apiGetFunctionAddress(CLANG, "clang_getCursorReferenced"),
             getCursorDefinition                     = apiGetFunctionAddress(CLANG, "clang_getCursorDefinition"),
@@ -362,6 +365,7 @@ public class ClangIndex {
             indexLoc_getFileLocation                = apiGetFunctionAddress(CLANG, "clang_indexLoc_getFileLocation"),
             indexLoc_getCXSourceLocation            = apiGetFunctionAddress(CLANG, "clang_indexLoc_getCXSourceLocation"),
             Type_visitFields                        = apiGetFunctionAddress(CLANG, "clang_Type_visitFields"),
+            visitCXXBaseClasses                     = apiGetFunctionAddressOptional(CLANG, "clang_visitCXXBaseClasses"),
             getBinaryOperatorKindSpelling           = apiGetFunctionAddressOptional(CLANG, "clang_getBinaryOperatorKindSpelling"),
             getCursorBinaryOperatorKind             = apiGetFunctionAddressOptional(CLANG, "clang_getCursorBinaryOperatorKind"),
             getUnaryOperatorKindSpelling            = apiGetFunctionAddressOptional(CLANG, "clang_getUnaryOperatorKindSpelling"),
@@ -718,9 +722,20 @@ public class ClangIndex {
         CXCursor_OMPScopeDirective                                = 306,
         CXCursor_OMPReverseDirective                              = 307,
         CXCursor_OMPInterchangeDirective                          = 308,
+        CXCursor_OMPAssumeDirective                               = 309,
         CXCursor_OpenACCComputeConstruct                          = 320,
         CXCursor_OpenACCLoopConstruct                             = 321,
-        CXCursor_LastStmt                                         = CXCursor_OpenACCLoopConstruct,
+        CXCursor_OpenACCCombinedConstruct                         = 322,
+        CXCursor_OpenACCDataConstruct                             = 323,
+        CXCursor_OpenACCEnterDataConstruct                        = 324,
+        CXCursor_OpenACCExitDataConstruct                         = 325,
+        CXCursor_OpenACCHostDataConstruct                         = 326,
+        CXCursor_OpenACCWaitConstruct                             = 327,
+        CXCursor_OpenACCInitConstruct                             = 328,
+        CXCursor_OpenACCShutdownConstruct                         = 329,
+        CXCursor_OpenACCSetConstruct                              = 330,
+        CXCursor_OpenACCUpdateConstruct                           = 331,
+        CXCursor_LastStmt                                         = CXCursor_OpenACCUpdateConstruct,
         CXCursor_TranslationUnit                                  = 350,
         CXCursor_FirstAttr                                        = 400,
         CXCursor_UnexposedAttr                                    = 400,
@@ -932,7 +947,9 @@ public class ClangIndex {
         CXType_OCLIntelSubgroupAVCImeDualRefStreamin                = 175,
         CXType_ExtVector                                            = 176,
         CXType_Atomic                                               = 177,
-        CXType_BTFTagAttributed                                     = 178;
+        CXType_BTFTagAttributed                                     = 178,
+        CXType_HLSLResource                                         = 179,
+        CXType_HLSLAttributedResource                               = 180;
 
     public static final int
         CXCallingConv_Default           = 0,
@@ -1650,6 +1667,26 @@ public class ClangIndex {
     @NativeType("unsigned")
     public static boolean clang_equalLocations(CXSourceLocation loc1, CXSourceLocation loc2) {
         return nclang_equalLocations(loc1.address(), loc2.address()) != 0;
+    }
+
+    // --- [ clang_isBeforeInTranslationUnit ] ---
+
+    /** {@code unsigned clang_isBeforeInTranslationUnit(CXSourceLocation loc1, CXSourceLocation loc2)} */
+    public static native int nclang_isBeforeInTranslationUnit(long loc1, long loc2, long __functionAddress);
+
+    /** {@code unsigned clang_isBeforeInTranslationUnit(CXSourceLocation loc1, CXSourceLocation loc2)} */
+    public static int nclang_isBeforeInTranslationUnit(long loc1, long loc2) {
+        long __functionAddress = Functions.isBeforeInTranslationUnit;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return nclang_isBeforeInTranslationUnit(loc1, loc2, __functionAddress);
+    }
+
+    /** {@code unsigned clang_isBeforeInTranslationUnit(CXSourceLocation loc1, CXSourceLocation loc2)} */
+    @NativeType("unsigned")
+    public static boolean clang_isBeforeInTranslationUnit(CXSourceLocation loc1, CXSourceLocation loc2) {
+        return nclang_isBeforeInTranslationUnit(loc1.address(), loc2.address()) != 0;
     }
 
     // --- [ clang_getLocation ] ---
@@ -4536,6 +4573,26 @@ public class ClangIndex {
         return nclang_isVirtualBase(cursor.address()) != 0;
     }
 
+    // --- [ clang_getOffsetOfBase ] ---
+
+    /** {@code long long clang_getOffsetOfBase(CXCursor Parent, CXCursor Base)} */
+    public static native long nclang_getOffsetOfBase(long Parent, long Base, long __functionAddress);
+
+    /** {@code long long clang_getOffsetOfBase(CXCursor Parent, CXCursor Base)} */
+    public static long nclang_getOffsetOfBase(long Parent, long Base) {
+        long __functionAddress = Functions.getOffsetOfBase;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return nclang_getOffsetOfBase(Parent, Base, __functionAddress);
+    }
+
+    /** {@code long long clang_getOffsetOfBase(CXCursor Parent, CXCursor Base)} */
+    @NativeType("long long")
+    public static long clang_getOffsetOfBase(CXCursor Parent, CXCursor Base) {
+        return nclang_getOffsetOfBase(Parent.address(), Base.address());
+    }
+
     // --- [ clang_getCXXAccessSpecifier ] ---
 
     /** {@code enum CX_CXXAccessSpecifier clang_getCXXAccessSpecifier(CXCursor cursor)} */
@@ -5005,6 +5062,27 @@ public class ClangIndex {
     /** {@code CXString clang_getCursorPrettyPrinted(CXCursor Cursor, CXPrintingPolicy Policy)} */
     public static CXString clang_getCursorPrettyPrinted(CXCursor Cursor, @NativeType("CXPrintingPolicy") long Policy, CXString __result) {
         nclang_getCursorPrettyPrinted(Cursor.address(), Policy, __result.address());
+        return __result;
+    }
+
+    // --- [ clang_getTypePrettyPrinted ] ---
+
+    /** {@code CXString clang_getTypePrettyPrinted(CXType CT, CXPrintingPolicy cxPolicy)} */
+    public static native void nclang_getTypePrettyPrinted(long CT, long cxPolicy, long __functionAddress, long __result);
+
+    /** {@code CXString clang_getTypePrettyPrinted(CXType CT, CXPrintingPolicy cxPolicy)} */
+    public static void nclang_getTypePrettyPrinted(long CT, long cxPolicy, long __result) {
+        long __functionAddress = Functions.getTypePrettyPrinted;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(cxPolicy);
+        }
+        nclang_getTypePrettyPrinted(CT, cxPolicy, __functionAddress, __result);
+    }
+
+    /** {@code CXString clang_getTypePrettyPrinted(CXType CT, CXPrintingPolicy cxPolicy)} */
+    public static CXString clang_getTypePrettyPrinted(CXType CT, @NativeType("CXPrintingPolicy") long cxPolicy, CXString __result) {
+        nclang_getTypePrettyPrinted(CT.address(), cxPolicy, __result.address());
         return __result;
     }
 
@@ -7064,6 +7142,26 @@ public class ClangIndex {
     @NativeType("unsigned")
     public static boolean clang_Type_visitFields(CXType T, @NativeType("enum CXVisitorResult (*) (CXCursor, CXClientData)") CXFieldVisitorI visitor, @NativeType("CXClientData") long client_data) {
         return nclang_Type_visitFields(T.address(), visitor.address(), client_data) != 0;
+    }
+
+    // --- [ clang_visitCXXBaseClasses ] ---
+
+    /** {@code unsigned clang_visitCXXBaseClasses(CXType T, enum CXVisitorResult (*) (CXCursor, CXClientData) visitor, CXClientData client_data)} */
+    public static native int nclang_visitCXXBaseClasses(long T, long visitor, long client_data, long __functionAddress);
+
+    /** {@code unsigned clang_visitCXXBaseClasses(CXType T, enum CXVisitorResult (*) (CXCursor, CXClientData) visitor, CXClientData client_data)} */
+    public static int nclang_visitCXXBaseClasses(long T, long visitor, long client_data) {
+        long __functionAddress = Functions.visitCXXBaseClasses;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return nclang_visitCXXBaseClasses(T, visitor, client_data, __functionAddress);
+    }
+
+    /** {@code unsigned clang_visitCXXBaseClasses(CXType T, enum CXVisitorResult (*) (CXCursor, CXClientData) visitor, CXClientData client_data)} */
+    @NativeType("unsigned")
+    public static boolean clang_visitCXXBaseClasses(CXType T, @NativeType("enum CXVisitorResult (*) (CXCursor, CXClientData)") CXFieldVisitorI visitor, @NativeType("CXClientData") long client_data) {
+        return nclang_visitCXXBaseClasses(T.address(), visitor.address(), client_data) != 0;
     }
 
     // --- [ clang_getBinaryOperatorKindSpelling ] ---

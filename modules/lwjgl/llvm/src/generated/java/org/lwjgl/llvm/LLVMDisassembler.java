@@ -70,7 +70,8 @@ public class LLVMDisassembler {
         LLVMDisassembler_Option_PrintImmHex       = 2,
         LLVMDisassembler_Option_AsmPrinterVariant = 4,
         LLVMDisassembler_Option_SetInstrComments  = 8,
-        LLVMDisassembler_Option_PrintLatency      = 16;
+        LLVMDisassembler_Option_PrintLatency      = 16,
+        LLVMDisassembler_Option_Color             = 32;
 
     protected LLVMDisassembler() {
         throw new UnsupportedOperationException();

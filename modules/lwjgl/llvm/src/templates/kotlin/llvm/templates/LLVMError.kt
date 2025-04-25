@@ -27,6 +27,12 @@ val LLVMError = "LLVMError".nativeClass(
         LLVMErrorRef("Err")
     )
 
+    IgnoreMissing..void(
+        "CantFail",
+
+        LLVMErrorRef("Err")
+    )
+
     MustBeDisposed..charUTF8.p(
         "GetErrorMessage",
 

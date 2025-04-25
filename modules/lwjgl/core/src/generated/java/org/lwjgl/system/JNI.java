@@ -344,6 +344,7 @@ public final class JNI {
     public static native long invokePPJPPP(long param0, long param1, long param2, int param3, int param4, long param5, long param6, long __functionAddress);
     public static native long invokePPPPPP(long param0, long param1, long param2, int param3, long param4, int param5, long param6, long __functionAddress);
     public static native long invokePPPPPP(long param0, long param1, long param2, long param3, int param4, long param5, int param6, long __functionAddress);
+    public static native long invokePPPPPP(long param0, long param1, long param2, long param3, long param4, int param5, int param6, long __functionAddress);
     public static native long invokePPPPPP(long param0, long param1, long param2, long param3, long param4, int param5, int param6, int param7, int param8, long __functionAddress);
     public static native long invokePPJJPPP(long param0, long param1, long param2, long param3, long param4, long param5, long __functionAddress);
     public static native long invokePPPPPPP(long param0, long param1, long param2, long param3, long param4, long param5, long __functionAddress);

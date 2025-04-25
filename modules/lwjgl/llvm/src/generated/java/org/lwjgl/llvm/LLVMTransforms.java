@@ -50,9 +50,11 @@ public class LLVMTransforms {
             AddStripDeadPrototypesPass                            = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMAddStripDeadPrototypesPass"),
             AddStripSymbolsPass                                   = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMAddStripSymbolsPass"),
             RunPasses                                             = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMRunPasses"),
+            RunPassesOnFunction                                   = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMRunPassesOnFunction"),
             CreatePassBuilderOptions                              = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMCreatePassBuilderOptions"),
             PassBuilderOptionsSetVerifyEach                       = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMPassBuilderOptionsSetVerifyEach"),
             PassBuilderOptionsSetDebugLogging                     = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMPassBuilderOptionsSetDebugLogging"),
+            PassBuilderOptionsSetAAPipeline                       = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMPassBuilderOptionsSetAAPipeline"),
             PassBuilderOptionsSetLoopInterleaving                 = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMPassBuilderOptionsSetLoopInterleaving"),
             PassBuilderOptionsSetLoopVectorization                = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMPassBuilderOptionsSetLoopVectorization"),
             PassBuilderOptionsSetSLPVectorization                 = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMPassBuilderOptionsSetSLPVectorization"),
@@ -471,6 +473,42 @@ public class LLVMTransforms {
         }
     }
 
+    // --- [ LLVMRunPassesOnFunction ] ---
+
+    /** {@code LLVMErrorRef LLVMRunPassesOnFunction(LLVMValueRef F, char const * Passes, LLVMTargetMachineRef TM, LLVMPassBuilderOptionsRef Options)} */
+    public static long nLLVMRunPassesOnFunction(long F, long Passes, long TM, long Options) {
+        long __functionAddress = Functions.RunPassesOnFunction;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(F);
+            check(TM);
+            check(Options);
+        }
+        return invokePPPPP(F, Passes, TM, Options, __functionAddress);
+    }
+
+    /** {@code LLVMErrorRef LLVMRunPassesOnFunction(LLVMValueRef F, char const * Passes, LLVMTargetMachineRef TM, LLVMPassBuilderOptionsRef Options)} */
+    @NativeType("LLVMErrorRef")
+    public static long LLVMRunPassesOnFunction(@NativeType("LLVMValueRef") long F, @NativeType("char const *") ByteBuffer Passes, @NativeType("LLVMTargetMachineRef") long TM, @NativeType("LLVMPassBuilderOptionsRef") long Options) {
+        if (CHECKS) {
+            checkNT1(Passes);
+        }
+        return nLLVMRunPassesOnFunction(F, memAddress(Passes), TM, Options);
+    }
+
+    /** {@code LLVMErrorRef LLVMRunPassesOnFunction(LLVMValueRef F, char const * Passes, LLVMTargetMachineRef TM, LLVMPassBuilderOptionsRef Options)} */
+    @NativeType("LLVMErrorRef")
+    public static long LLVMRunPassesOnFunction(@NativeType("LLVMValueRef") long F, @NativeType("char const *") CharSequence Passes, @NativeType("LLVMTargetMachineRef") long TM, @NativeType("LLVMPassBuilderOptionsRef") long Options) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(Passes, true);
+            long PassesEncoded = stack.getPointerAddress();
+            return nLLVMRunPassesOnFunction(F, PassesEncoded, TM, Options);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ LLVMCreatePassBuilderOptions ] ---
 
     /** {@code LLVMPassBuilderOptionsRef LLVMCreatePassBuilderOptions(void)} */
@@ -505,6 +543,38 @@ public class LLVMTransforms {
             check(Options);
         }
         invokePV(Options, DebugLogging ? 1 : 0, __functionAddress);
+    }
+
+    // --- [ LLVMPassBuilderOptionsSetAAPipeline ] ---
+
+    /** {@code void LLVMPassBuilderOptionsSetAAPipeline(LLVMPassBuilderOptionsRef Options, char const * AAPipeline)} */
+    public static void nLLVMPassBuilderOptionsSetAAPipeline(long Options, long AAPipeline) {
+        long __functionAddress = Functions.PassBuilderOptionsSetAAPipeline;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Options);
+        }
+        invokePPV(Options, AAPipeline, __functionAddress);
+    }
+
+    /** {@code void LLVMPassBuilderOptionsSetAAPipeline(LLVMPassBuilderOptionsRef Options, char const * AAPipeline)} */
+    public static void LLVMPassBuilderOptionsSetAAPipeline(@NativeType("LLVMPassBuilderOptionsRef") long Options, @NativeType("char const *") ByteBuffer AAPipeline) {
+        if (CHECKS) {
+            checkNT1(AAPipeline);
+        }
+        nLLVMPassBuilderOptionsSetAAPipeline(Options, memAddress(AAPipeline));
+    }
+
+    /** {@code void LLVMPassBuilderOptionsSetAAPipeline(LLVMPassBuilderOptionsRef Options, char const * AAPipeline)} */
+    public static void LLVMPassBuilderOptionsSetAAPipeline(@NativeType("LLVMPassBuilderOptionsRef") long Options, @NativeType("char const *") CharSequence AAPipeline) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(AAPipeline, true);
+            long AAPipelineEncoded = stack.getPointerAddress();
+            nLLVMPassBuilderOptionsSetAAPipeline(Options, AAPipelineEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
     }
 
     // --- [ LLVMPassBuilderOptionsSetLoopInterleaving ] ---

@@ -99,8 +99,8 @@ val LLVMCore = "LLVMCore".nativeClass(
         "PointerTypeKind".enum,
         "VectorTypeKind".enum,
         "MetadataTypeKind".enum,
-        "X86_MMXTypeKind".enum,
-        "TokenTypeKind".enum,
+        //"X86_MMXTypeKind".enum,
+        "TokenTypeKind".enum("16"),
         "ScalableVectorTypeKind".enum,
         "BFloatTypeKind".enum,
         "X86_AMXTypeKind".enum,
@@ -292,7 +292,9 @@ val LLVMCore = "LLVMCore".nativeClass(
         "AtomicRMWBinOpFMax".enum,
         "AtomicRMWBinOpFMin".enum,
         "AtomicRMWBinOpUIncWrap".enum,
-        "AtomicRMWBinOpUDecWrap".enum
+        "AtomicRMWBinOpUDecWrap".enum,
+        "AtomicRMWBinOpUSubCond".enum,
+        "AtomicRMWBinOpUSubSat".enum
     )
 
     EnumConstant(
@@ -469,6 +471,14 @@ val LLVMCore = "LLVMCore".nativeClass(
             LLVMContextRef("C"),
             charUTF8.const.p("Name"),
             AutoSize("Name")..unsigned_int("SLen")
+        )
+
+        IgnoreMissing..unsigned(
+            "GetSyncScopeID",
+
+            LLVMContextRef("C"),
+            charUTF8.const.p("Name"),
+            AutoSize("Name")..size_t("SLen")
         )
 
         unsigned_int(
@@ -951,6 +961,14 @@ val LLVMCore = "LLVMCore".nativeClass(
             charUTF8.const.p("Name")
         )
 
+        IgnoreMissing..LLVMValueRef(
+            "GetNamedFunctionWithLength",
+
+            LLVMModuleRef("M"),
+            charUTF8.const.p("Name"),
+            AutoSize("Name")..size_t("Length")
+        )
+
         LLVMValueRef(
             "GetFirstFunction",
 
@@ -1370,7 +1388,7 @@ val LLVMCore = "LLVMCore".nativeClass(
             LLVMContextRef("C")
         )
 
-        LLVMTypeRef(
+        IgnoreMissing..LLVMTypeRef(
             "X86MMXTypeInContext",
 
             LLVMContextRef("C")
@@ -1485,6 +1503,12 @@ val LLVMCore = "LLVMCore".nativeClass(
 
         Nonnull..charUTF8.p(
             "PrintValueToString",
+
+            LLVMValueRef("Val")
+        )
+
+        IgnoreMissing..LLVMContextRef(
+            "GetValueContext",
 
             LLVMValueRef("Val")
         )
@@ -2608,6 +2632,14 @@ val LLVMCore = "LLVMCore".nativeClass(
             charUTF8.const.p("Name")
         )
 
+        IgnoreMissing..LLVMValueRef(
+            "GetNamedGlobalWithLength",
+
+            LLVMModuleRef("M"),
+            charUTF8.const.p("Name"),
+            AutoSize("Name")..size_t("Length")
+        )
+
         LLVMValueRef(
             "GetFirstGlobal",
 
@@ -2830,7 +2862,7 @@ val LLVMCore = "LLVMCore".nativeClass(
             AutoSizeResult..Check(1)..size_t.p("NameLength")
         )
 
-        IgnoreMissing..charUTF8.const.p(
+        IgnoreMissing..charUTF8.p(
             "IntrinsicCopyOverloadedName",
 
             unsigned("ID"),
@@ -2839,7 +2871,7 @@ val LLVMCore = "LLVMCore".nativeClass(
             AutoSizeResult..Check(1)..size_t.p("NameLength")
         )
 
-        IgnoreMissing..charUTF8.const.p(
+        IgnoreMissing..charUTF8.p(
             "IntrinsicCopyOverloadedName2",
 
             LLVMModuleRef("Mod"),
@@ -3501,6 +3533,12 @@ val LLVMCore = "LLVMCore".nativeClass(
             LLVMValueRef("Inst")
         )
 
+        IgnoreMissing..LLVMDbgRecordRef("GetFirstDbgRecord", LLVMValueRef("Inst"))
+        IgnoreMissing..LLVMDbgRecordRef("GetLastDbgRecord",  LLVMValueRef("Inst"))
+
+        IgnoreMissing..LLVMDbgRecordRef("GetNextDbgRecord",     LLVMDbgRecordRef("DbgRecord"))
+        IgnoreMissing..LLVMDbgRecordRef("GetPreviousDbgRecord", LLVMDbgRecordRef("DbgRecord"))
+
         unsigned_int(
             "GetNumArgOperands",
 
@@ -3924,6 +3962,12 @@ val LLVMCore = "LLVMCore".nativeClass(
 
             LLVMBuilderRef("Builder"),
             nullable..LLVMMetadataRef("FPMathTag")
+        )
+
+        IgnoreMissing..LLVMContextRef(
+            "GetBuilderContext",
+
+            LLVMBuilderRef("Builder")
         )
 
         void(
@@ -5170,6 +5214,15 @@ val LLVMCore = "LLVMCore".nativeClass(
             charUTF8.const.p("Name")
         )
 
+        IgnoreMissing..LLVMValueRef(
+            "BuildFenceSyncScope",
+
+            LLVMBuilderRef("B"),
+            LLVMAtomicOrdering("ordering"),
+            unsigned("SSID"),
+            charUTF8.const.p("Name")
+        )
+
         LLVMValueRef(
             "BuildAtomicRMW",
 
@@ -5179,6 +5232,17 @@ val LLVMCore = "LLVMCore".nativeClass(
             LLVMValueRef("Val"),
             LLVMAtomicOrdering("ordering"),
             LLVMBool("singleThread")
+        )
+
+        IgnoreMissing..LLVMValueRef(
+            "BuildAtomicRMWSyncScope",
+
+            LLVMBuilderRef("B"),
+            LLVMAtomicRMWBinOp("op"),
+            LLVMValueRef("PTR"),
+            LLVMValueRef("Val"),
+            LLVMAtomicOrdering("ordering"),
+            unsigned("SSID")
         )
 
         LLVMValueRef(
@@ -5191,6 +5255,18 @@ val LLVMCore = "LLVMCore".nativeClass(
             LLVMAtomicOrdering("SuccessOrdering"),
             LLVMAtomicOrdering("FailureOrdering"),
             LLVMBool("SingleThread")
+        )
+
+        IgnoreMissing..LLVMValueRef(
+            "BuildAtomicCmpXchgSyncScope",
+
+            LLVMBuilderRef("B"),
+            LLVMValueRef("Ptr"),
+            LLVMValueRef("Cmp"),
+            LLVMValueRef("New"),
+            LLVMAtomicOrdering("SuccessOrdering"),
+            LLVMAtomicOrdering("FailureOrdering"),
+            unsigned("SSID")
         )
 
         IgnoreMissing..unsigned(
@@ -5223,6 +5299,25 @@ val LLVMCore = "LLVMCore".nativeClass(
 
             LLVMValueRef("AtomicInst"),
             LLVMBool("SingleThread")
+        )
+
+        IgnoreMissing..LLVMBool(
+            "IsAtomic",
+
+            LLVMValueRef("Inst")
+        )
+
+        IgnoreMissing..unsigned(
+            "GetAtomicSyncScopeID",
+
+            LLVMValueRef("AtomicInst")
+        )
+
+        IgnoreMissing..void(
+            "SetAtomicSyncScopeID",
+
+            LLVMValueRef("AtomicInst"),
+            unsigned("SSID")
         )
 
         LLVMAtomicOrdering(

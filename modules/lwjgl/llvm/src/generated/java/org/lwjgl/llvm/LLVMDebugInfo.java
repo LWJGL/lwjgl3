@@ -121,6 +121,9 @@ public class LLVMDebugInfo {
             DISubprogramGetLine                        = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDISubprogramGetLine"),
             InstructionGetDebugLoc                     = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMInstructionGetDebugLoc"),
             InstructionSetDebugLoc                     = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMInstructionSetDebugLoc"),
+            DIBuilderCreateLabel                       = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderCreateLabel"),
+            DIBuilderInsertLabelBefore                 = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertLabelBefore"),
+            DIBuilderInsertLabelAtEnd                  = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertLabelAtEnd"),
             GetMetadataKind                            = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMGetMetadataKind");
 
     }
@@ -222,9 +225,10 @@ public class LLVMDebugInfo {
         LLVMDWARFSourceLanguageRuby                = 56,
         LLVMDWARFSourceLanguageMove                = 57,
         LLVMDWARFSourceLanguageHylo                = 58,
-        LLVMDWARFSourceLanguageMips_Assembler      = 59,
-        LLVMDWARFSourceLanguageGOOGLE_RenderScript = 60,
-        LLVMDWARFSourceLanguageBORLAND_Delphi      = 61;
+        LLVMDWARFSourceLanguageMetal               = 59,
+        LLVMDWARFSourceLanguageMips_Assembler      = 60,
+        LLVMDWARFSourceLanguageGOOGLE_RenderScript = 61,
+        LLVMDWARFSourceLanguageBORLAND_Delphi      = 62;
 
     public static final int
         LLVMDWARFEmissionNone           = 0,
@@ -1296,15 +1300,15 @@ public class LLVMDebugInfo {
 
     // --- [ LLVMDIBuilderCreateObjectPointerType ] ---
 
-    /** {@code LLVMMetadataRef LLVMDIBuilderCreateObjectPointerType(LLVMDIBuilderRef Builder, LLVMMetadataRef Type)} */
+    /** {@code LLVMMetadataRef LLVMDIBuilderCreateObjectPointerType(LLVMDIBuilderRef Builder, LLVMMetadataRef Type, LLVMBool Implicit)} */
     @NativeType("LLVMMetadataRef")
-    public static long LLVMDIBuilderCreateObjectPointerType(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Type) {
+    public static long LLVMDIBuilderCreateObjectPointerType(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Type, @NativeType("LLVMBool") boolean Implicit) {
         long __functionAddress = Functions.DIBuilderCreateObjectPointerType;
         if (CHECKS) {
             check(Builder);
             check(Type);
         }
-        return invokePPP(Builder, Type, __functionAddress);
+        return invokePPP(Builder, Type, Implicit ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderCreateQualifiedType ] ---
@@ -2146,6 +2150,71 @@ public class LLVMDebugInfo {
             check(Inst);
         }
         invokePPV(Inst, Loc, __functionAddress);
+    }
+
+    // --- [ LLVMDIBuilderCreateLabel ] ---
+
+    /** {@code LLVMMetadataRef LLVMDIBuilderCreateLabel(LLVMDIBuilderRef Builder, LLVMMetadataRef Context, char const * Name, size_t NameLen, LLVMMetadataRef File, unsigned LineNo, LLVMBool AlwaysPreserve)} */
+    public static long nLLVMDIBuilderCreateLabel(long Builder, long Context, long Name, long NameLen, long File, int LineNo, int AlwaysPreserve) {
+        long __functionAddress = Functions.DIBuilderCreateLabel;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Builder);
+            check(Context);
+            check(File);
+        }
+        return invokePPPPPP(Builder, Context, Name, NameLen, File, LineNo, AlwaysPreserve, __functionAddress);
+    }
+
+    /** {@code LLVMMetadataRef LLVMDIBuilderCreateLabel(LLVMDIBuilderRef Builder, LLVMMetadataRef Context, char const * Name, size_t NameLen, LLVMMetadataRef File, unsigned LineNo, LLVMBool AlwaysPreserve)} */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDIBuilderCreateLabel(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Context, @NativeType("char const *") ByteBuffer Name, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned") int LineNo, @NativeType("LLVMBool") boolean AlwaysPreserve) {
+        return nLLVMDIBuilderCreateLabel(Builder, Context, memAddress(Name), Name.remaining(), File, LineNo, AlwaysPreserve ? 1 : 0);
+    }
+
+    /** {@code LLVMMetadataRef LLVMDIBuilderCreateLabel(LLVMDIBuilderRef Builder, LLVMMetadataRef Context, char const * Name, size_t NameLen, LLVMMetadataRef File, unsigned LineNo, LLVMBool AlwaysPreserve)} */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDIBuilderCreateLabel(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Context, @NativeType("char const *") CharSequence Name, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned") int LineNo, @NativeType("LLVMBool") boolean AlwaysPreserve) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateLabel(Builder, Context, NameEncoded, NameEncodedLength, File, LineNo, AlwaysPreserve ? 1 : 0);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ LLVMDIBuilderInsertLabelBefore ] ---
+
+    /** {@code LLVMDbgRecordRef LLVMDIBuilderInsertLabelBefore(LLVMDIBuilderRef Builder, LLVMMetadataRef LabelInfo, LLVMMetadataRef Location, LLVMValueRef InsertBefore)} */
+    @NativeType("LLVMDbgRecordRef")
+    public static long LLVMDIBuilderInsertLabelBefore(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long LabelInfo, @NativeType("LLVMMetadataRef") long Location, @NativeType("LLVMValueRef") long InsertBefore) {
+        long __functionAddress = Functions.DIBuilderInsertLabelBefore;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Builder);
+            check(LabelInfo);
+            check(Location);
+            check(InsertBefore);
+        }
+        return invokePPPPP(Builder, LabelInfo, Location, InsertBefore, __functionAddress);
+    }
+
+    // --- [ LLVMDIBuilderInsertLabelAtEnd ] ---
+
+    /** {@code LLVMDbgRecordRef LLVMDIBuilderInsertLabelAtEnd(LLVMDIBuilderRef Builder, LLVMMetadataRef LabelInfo, LLVMMetadataRef Location, LLVMBasicBlockRef InsertAtEnd)} */
+    @NativeType("LLVMDbgRecordRef")
+    public static long LLVMDIBuilderInsertLabelAtEnd(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long LabelInfo, @NativeType("LLVMMetadataRef") long Location, @NativeType("LLVMBasicBlockRef") long InsertAtEnd) {
+        long __functionAddress = Functions.DIBuilderInsertLabelAtEnd;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Builder);
+            check(LabelInfo);
+            check(Location);
+            check(InsertAtEnd);
+        }
+        return invokePPPPP(Builder, LabelInfo, Location, InsertAtEnd, __functionAddress);
     }
 
     // --- [ LLVMGetMetadataKind ] ---

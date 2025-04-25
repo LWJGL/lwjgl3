@@ -377,9 +377,20 @@ val ClangIndex = "ClangIndex".nativeClass(
         "Cursor_OMPScopeDirective".enum,
         "Cursor_OMPReverseDirective".enum,
         "Cursor_OMPInterchangeDirective".enum,
+        "Cursor_OMPAssumeDirective".enum,
         "Cursor_OpenACCComputeConstruct".enum("320"),
         "Cursor_OpenACCLoopConstruct".enum,
-        "Cursor_LastStmt".enum("CXCursor_OpenACCLoopConstruct"),
+        "Cursor_OpenACCCombinedConstruct".enum,
+        "Cursor_OpenACCDataConstruct".enum,
+        "Cursor_OpenACCEnterDataConstruct".enum,
+        "Cursor_OpenACCExitDataConstruct".enum,
+        "Cursor_OpenACCHostDataConstruct".enum,
+        "Cursor_OpenACCWaitConstruct".enum,
+        "Cursor_OpenACCInitConstruct".enum,
+        "Cursor_OpenACCShutdownConstruct".enum,
+        "Cursor_OpenACCSetConstruct".enum,
+        "Cursor_OpenACCUpdateConstruct".enum,
+        "Cursor_LastStmt".enum("CXCursor_OpenACCUpdateConstruct"),
         "Cursor_TranslationUnit".enum("350"),
         "Cursor_FirstAttr".enum("400"),
         "Cursor_UnexposedAttr".enum("400"),
@@ -600,7 +611,9 @@ val ClangIndex = "ClangIndex".nativeClass(
 
         "Type_ExtVector".enum,
         "Type_Atomic".enum,
-        "Type_BTFTagAttributed".enum
+        "Type_BTFTagAttributed".enum,
+        "Type_HLSLResource".enum,
+        "Type_HLSLAttributedResource".enum
     )
 
     EnumConstant(
@@ -1141,6 +1154,13 @@ val ClangIndex = "ClangIndex".nativeClass(
 
     unsignedb(
         "equalLocations",
+
+        CXSourceLocation("loc1"),
+        CXSourceLocation("loc2")
+    )
+
+    IgnoreMissing..unsignedb(
+        "isBeforeInTranslationUnit",
 
         CXSourceLocation("loc1"),
         CXSourceLocation("loc2")
@@ -2232,6 +2252,13 @@ val ClangIndex = "ClangIndex".nativeClass(
         CXCursor("cursor")
     )
 
+    IgnoreMissing..long_long(
+        "getOffsetOfBase",
+
+        CXCursor("Parent"),
+        CXCursor("Base")
+    )
+
     CX_CXXAccessSpecifier(
         "getCXXAccessSpecifier",
 
@@ -2376,6 +2403,13 @@ val ClangIndex = "ClangIndex".nativeClass(
 
         CXCursor("Cursor"),
         CXPrintingPolicy("Policy")
+    )
+
+    IgnoreMissing..CXString(
+        "getTypePrettyPrinted",
+
+        CXType("CT"),
+        CXPrintingPolicy("cxPolicy")
     )
 
     CXString(
@@ -3195,6 +3229,14 @@ val ClangIndex = "ClangIndex".nativeClass(
 
     unsignedb(
         "Type_visitFields",
+
+        CXType("T"),
+        CXFieldVisitor("visitor"),
+        nullable..CXClientData("client_data")
+    )
+
+    IgnoreMissing..unsignedb(
+        "visitCXXBaseClasses",
 
         CXType("T"),
         CXFieldVisitor("visitor"),

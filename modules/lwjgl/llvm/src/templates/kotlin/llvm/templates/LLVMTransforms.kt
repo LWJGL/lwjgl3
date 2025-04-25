@@ -175,6 +175,15 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
         LLVMPassBuilderOptionsRef("Options")
     )
 
+    IgnoreMissing..LLVMErrorRef(
+        "RunPassesOnFunction",
+
+        LLVMValueRef("F"),
+        charUTF8.const.p("Passes"),
+        LLVMTargetMachineRef("TM"),
+        LLVMPassBuilderOptionsRef("Options")
+    )
+
     IgnoreMissing..LLVMPassBuilderOptionsRef(
         "CreatePassBuilderOptions",
 
@@ -193,6 +202,13 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
 
         LLVMPassBuilderOptionsRef("Options"),
         LLVMBool("DebugLogging")
+    )
+
+    IgnoreMissing..void(
+        "PassBuilderOptionsSetAAPipeline",
+
+        LLVMPassBuilderOptionsRef("Options"),
+        charUTF8.const.p("AAPipeline")
     )
 
     IgnoreMissing..void(

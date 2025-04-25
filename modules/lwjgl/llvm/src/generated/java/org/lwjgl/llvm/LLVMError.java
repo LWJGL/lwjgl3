@@ -28,6 +28,7 @@ public class LLVMError {
         public static final long
             GetErrorTypeId       = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetErrorTypeId"),
             ConsumeError         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMConsumeError"),
+            CantFail             = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMCantFail"),
             GetErrorMessage      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetErrorMessage"),
             DisposeErrorMessage  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDisposeErrorMessage"),
             GetStringErrorTypeId = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetStringErrorTypeId"),
@@ -59,6 +60,18 @@ public class LLVMError {
     public static void LLVMConsumeError(@NativeType("LLVMErrorRef") long Err) {
         long __functionAddress = Functions.ConsumeError;
         if (CHECKS) {
+            check(Err);
+        }
+        invokePV(Err, __functionAddress);
+    }
+
+    // --- [ LLVMCantFail ] ---
+
+    /** {@code void LLVMCantFail(LLVMErrorRef Err)} */
+    public static void LLVMCantFail(@NativeType("LLVMErrorRef") long Err) {
+        long __functionAddress = Functions.CantFail;
+        if (CHECKS) {
+            check(__functionAddress);
             check(Err);
         }
         invokePV(Err, __functionAddress);
