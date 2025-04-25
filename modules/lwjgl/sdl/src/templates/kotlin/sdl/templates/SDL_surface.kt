@@ -16,7 +16,8 @@ val SDL_surface = "SDLSurface".nativeClassSDL("SDL_surface") {
     )
 
     EnumConstant(
-        "SCALEMODE_NEAREST".enum("0"),
+        "SCALEMODE_INVALID".enum("-1"),
+        "SCALEMODE_NEAREST".enum,
         "SCALEMODE_LINEAR".enum
     )
 
