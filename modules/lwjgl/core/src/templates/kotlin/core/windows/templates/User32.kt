@@ -1026,6 +1026,13 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         int("nIndex")
     )
 
+    // TODO: remove in LWJGL 4, added for #1052
+    customMethod("""
+    @NativeType("LONG_PTR")
+    public static long GetWindowLongPtr(@NativeType("HWND") long hWnd, int nIndex) {
+        return nGetWindowLongPtr(NULL, hWnd, nIndex);
+    }""")
+
     NativeName("Pointer.BITS64 ? \"SetClassLongPtrW\" : \"SetClassLongW\"")..LONG_PTR(
         "SetClassLongPtr",
 

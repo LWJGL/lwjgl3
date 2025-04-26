@@ -2170,4 +2170,9 @@ public class User32 {
         return callPPI(hWnd, pulFlags, __functionAddress) != 0;
     }
 
+    @NativeType("LONG_PTR")
+    public static long GetWindowLongPtr(@NativeType("HWND") long hWnd, int nIndex) {
+        return nGetWindowLongPtr(NULL, hWnd, nIndex);
+    }
+
 }
