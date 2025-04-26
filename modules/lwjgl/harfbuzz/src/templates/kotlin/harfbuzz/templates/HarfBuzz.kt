@@ -2307,14 +2307,6 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         hb_font_t.p("font")
     )
 
-    // hb-fontations.h
-
-    void(
-        "fontations_font_set_funcs",
-
-        hb_font_t.p("font")
-    )
-
     // hb-ft.h
 
     IgnoreMissing..hb_face_t.p(

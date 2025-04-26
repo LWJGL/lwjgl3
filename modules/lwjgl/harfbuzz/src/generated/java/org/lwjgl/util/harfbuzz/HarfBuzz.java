@@ -300,7 +300,6 @@ public class HarfBuzz {
             font_get_var_coords_normalized                = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_var_coords_normalized"),
             font_set_var_named_instance                   = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_var_named_instance"),
             font_get_var_named_instance                   = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_var_named_instance"),
-            fontations_font_set_funcs                     = apiGetFunctionAddress(HARFBUZZ, "hb_fontations_font_set_funcs"),
             ft_face_create                                = apiGetFunctionAddressOptional(HARFBUZZ, "hb_ft_face_create"),
             ft_face_create_cached                         = apiGetFunctionAddressOptional(HARFBUZZ, "hb_ft_face_create_cached"),
             ft_face_create_referenced                     = apiGetFunctionAddressOptional(HARFBUZZ, "hb_ft_face_create_referenced"),
@@ -4642,17 +4641,6 @@ public class HarfBuzz {
             check(font);
         }
         return invokePI(font, __functionAddress);
-    }
-
-    // --- [ hb_fontations_font_set_funcs ] ---
-
-    /** {@code void hb_fontations_font_set_funcs(hb_font_t * font)} */
-    public static void hb_fontations_font_set_funcs(@NativeType("hb_font_t *") long font) {
-        long __functionAddress = Functions.fontations_font_set_funcs;
-        if (CHECKS) {
-            check(font);
-        }
-        invokePV(font, __functionAddress);
     }
 
     // --- [ hb_ft_face_create ] ---
