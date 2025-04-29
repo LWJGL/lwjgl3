@@ -436,6 +436,7 @@ public class HelloOpenXRGL {
 
                 long[] desiredSwapchainFormats = {
                     GL_RGB10_A2,
+                    GL_SRGB8,
                     GL_RGBA16F,
                     // The two below should only be used as a fallback, as they are linear color formats without enough bits for color
                     // depth, thus leading to banding.
