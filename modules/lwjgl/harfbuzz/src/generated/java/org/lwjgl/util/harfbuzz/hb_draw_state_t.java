@@ -23,13 +23,13 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float path_start_y;
  *     float current_x;
  *     float current_y;
- *     float slant_xy;
  *     {@link hb_var_num_t hb_var_num_t} reserved1;
  *     {@link hb_var_num_t hb_var_num_t} reserved2;
  *     {@link hb_var_num_t hb_var_num_t} reserved3;
  *     {@link hb_var_num_t hb_var_num_t} reserved4;
  *     {@link hb_var_num_t hb_var_num_t} reserved5;
  *     {@link hb_var_num_t hb_var_num_t} reserved6;
+ *     {@link hb_var_num_t hb_var_num_t} reserved7;
  * }}</pre>
  */
 public class hb_draw_state_t extends Struct<hb_draw_state_t> implements NativeResource {
@@ -47,13 +47,13 @@ public class hb_draw_state_t extends Struct<hb_draw_state_t> implements NativeRe
         PATH_START_Y,
         CURRENT_X,
         CURRENT_Y,
-        SLANT_XY,
         RESERVED1,
         RESERVED2,
         RESERVED3,
         RESERVED4,
         RESERVED5,
-        RESERVED6;
+        RESERVED6,
+        RESERVED7;
 
     static {
         Layout layout = __struct(
@@ -62,7 +62,7 @@ public class hb_draw_state_t extends Struct<hb_draw_state_t> implements NativeRe
             __member(4),
             __member(4),
             __member(4),
-            __member(4),
+            __member(hb_var_num_t.SIZEOF, hb_var_num_t.ALIGNOF),
             __member(hb_var_num_t.SIZEOF, hb_var_num_t.ALIGNOF),
             __member(hb_var_num_t.SIZEOF, hb_var_num_t.ALIGNOF),
             __member(hb_var_num_t.SIZEOF, hb_var_num_t.ALIGNOF),
@@ -79,13 +79,13 @@ public class hb_draw_state_t extends Struct<hb_draw_state_t> implements NativeRe
         PATH_START_Y = layout.offsetof(2);
         CURRENT_X = layout.offsetof(3);
         CURRENT_Y = layout.offsetof(4);
-        SLANT_XY = layout.offsetof(5);
-        RESERVED1 = layout.offsetof(6);
-        RESERVED2 = layout.offsetof(7);
-        RESERVED3 = layout.offsetof(8);
-        RESERVED4 = layout.offsetof(9);
-        RESERVED5 = layout.offsetof(10);
-        RESERVED6 = layout.offsetof(11);
+        RESERVED1 = layout.offsetof(5);
+        RESERVED2 = layout.offsetof(6);
+        RESERVED3 = layout.offsetof(7);
+        RESERVED4 = layout.offsetof(8);
+        RESERVED5 = layout.offsetof(9);
+        RESERVED6 = layout.offsetof(10);
+        RESERVED7 = layout.offsetof(11);
     }
 
     protected hb_draw_state_t(long address, @Nullable ByteBuffer container) {
@@ -121,8 +121,6 @@ public class hb_draw_state_t extends Struct<hb_draw_state_t> implements NativeRe
     public float current_x() { return ncurrent_x(address()); }
     /** @return the value of the {@code current_y} field. */
     public float current_y() { return ncurrent_y(address()); }
-    /** @return the value of the {@code slant_xy} field. */
-    public float slant_xy() { return nslant_xy(address()); }
 
     /** Sets the specified value to the {@code path_open} field. */
     public hb_draw_state_t path_open(@NativeType("hb_bool_t") boolean value) { npath_open(address(), value ? 1 : 0); return this; }
@@ -134,8 +132,6 @@ public class hb_draw_state_t extends Struct<hb_draw_state_t> implements NativeRe
     public hb_draw_state_t current_x(float value) { ncurrent_x(address(), value); return this; }
     /** Sets the specified value to the {@code current_y} field. */
     public hb_draw_state_t current_y(float value) { ncurrent_y(address(), value); return this; }
-    /** Sets the specified value to the {@code slant_xy} field. */
-    public hb_draw_state_t slant_xy(float value) { nslant_xy(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public hb_draw_state_t set(
@@ -143,15 +139,13 @@ public class hb_draw_state_t extends Struct<hb_draw_state_t> implements NativeRe
         float path_start_x,
         float path_start_y,
         float current_x,
-        float current_y,
-        float slant_xy
+        float current_y
     ) {
         path_open(path_open);
         path_start_x(path_start_x);
         path_start_y(path_start_y);
         current_x(current_x);
         current_y(current_y);
-        slant_xy(slant_xy);
 
         return this;
     }
@@ -289,14 +283,13 @@ public class hb_draw_state_t extends Struct<hb_draw_state_t> implements NativeRe
     public static float ncurrent_x(long struct) { return memGetFloat(struct + hb_draw_state_t.CURRENT_X); }
     /** Unsafe version of {@link #current_y}. */
     public static float ncurrent_y(long struct) { return memGetFloat(struct + hb_draw_state_t.CURRENT_Y); }
-    /** Unsafe version of {@link #slant_xy}. */
-    public static float nslant_xy(long struct) { return memGetFloat(struct + hb_draw_state_t.SLANT_XY); }
     public static hb_var_num_t nreserved1(long struct) { return hb_var_num_t.create(struct + hb_draw_state_t.RESERVED1); }
     public static hb_var_num_t nreserved2(long struct) { return hb_var_num_t.create(struct + hb_draw_state_t.RESERVED2); }
     public static hb_var_num_t nreserved3(long struct) { return hb_var_num_t.create(struct + hb_draw_state_t.RESERVED3); }
     public static hb_var_num_t nreserved4(long struct) { return hb_var_num_t.create(struct + hb_draw_state_t.RESERVED4); }
     public static hb_var_num_t nreserved5(long struct) { return hb_var_num_t.create(struct + hb_draw_state_t.RESERVED5); }
     public static hb_var_num_t nreserved6(long struct) { return hb_var_num_t.create(struct + hb_draw_state_t.RESERVED6); }
+    public static hb_var_num_t nreserved7(long struct) { return hb_var_num_t.create(struct + hb_draw_state_t.RESERVED7); }
 
     /** Unsafe version of {@link #path_open(boolean) path_open}. */
     public static void npath_open(long struct, int value) { memPutInt(struct + hb_draw_state_t.PATH_OPEN, value); }
@@ -308,14 +301,13 @@ public class hb_draw_state_t extends Struct<hb_draw_state_t> implements NativeRe
     public static void ncurrent_x(long struct, float value) { memPutFloat(struct + hb_draw_state_t.CURRENT_X, value); }
     /** Unsafe version of {@link #current_y(float) current_y}. */
     public static void ncurrent_y(long struct, float value) { memPutFloat(struct + hb_draw_state_t.CURRENT_Y, value); }
-    /** Unsafe version of {@link #slant_xy(float) slant_xy}. */
-    public static void nslant_xy(long struct, float value) { memPutFloat(struct + hb_draw_state_t.SLANT_XY, value); }
     public static void nreserved1(long struct, hb_var_num_t value) { memCopy(value.address(), struct + hb_draw_state_t.RESERVED1, hb_var_num_t.SIZEOF); }
     public static void nreserved2(long struct, hb_var_num_t value) { memCopy(value.address(), struct + hb_draw_state_t.RESERVED2, hb_var_num_t.SIZEOF); }
     public static void nreserved3(long struct, hb_var_num_t value) { memCopy(value.address(), struct + hb_draw_state_t.RESERVED3, hb_var_num_t.SIZEOF); }
     public static void nreserved4(long struct, hb_var_num_t value) { memCopy(value.address(), struct + hb_draw_state_t.RESERVED4, hb_var_num_t.SIZEOF); }
     public static void nreserved5(long struct, hb_var_num_t value) { memCopy(value.address(), struct + hb_draw_state_t.RESERVED5, hb_var_num_t.SIZEOF); }
     public static void nreserved6(long struct, hb_var_num_t value) { memCopy(value.address(), struct + hb_draw_state_t.RESERVED6, hb_var_num_t.SIZEOF); }
+    public static void nreserved7(long struct, hb_var_num_t value) { memCopy(value.address(), struct + hb_draw_state_t.RESERVED7, hb_var_num_t.SIZEOF); }
 
     // -----------------------------------
 
@@ -371,8 +363,6 @@ public class hb_draw_state_t extends Struct<hb_draw_state_t> implements NativeRe
         public float current_x() { return hb_draw_state_t.ncurrent_x(address()); }
         /** @return the value of the {@code current_y} field. */
         public float current_y() { return hb_draw_state_t.ncurrent_y(address()); }
-        /** @return the value of the {@code slant_xy} field. */
-        public float slant_xy() { return hb_draw_state_t.nslant_xy(address()); }
 
         /** Sets the specified value to the {@code path_open} field. */
         public hb_draw_state_t.Buffer path_open(@NativeType("hb_bool_t") boolean value) { hb_draw_state_t.npath_open(address(), value ? 1 : 0); return this; }
@@ -384,8 +374,6 @@ public class hb_draw_state_t extends Struct<hb_draw_state_t> implements NativeRe
         public hb_draw_state_t.Buffer current_x(float value) { hb_draw_state_t.ncurrent_x(address(), value); return this; }
         /** Sets the specified value to the {@code current_y} field. */
         public hb_draw_state_t.Buffer current_y(float value) { hb_draw_state_t.ncurrent_y(address(), value); return this; }
-        /** Sets the specified value to the {@code slant_xy} field. */
-        public hb_draw_state_t.Buffer slant_xy(float value) { hb_draw_state_t.nslant_xy(address(), value); return this; }
 
     }
 

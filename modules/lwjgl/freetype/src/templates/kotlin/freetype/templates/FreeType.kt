@@ -3129,4 +3129,49 @@ val freetype = "FreeType".nativeClass(Module.FREETYPE, prefix = "FT", prefixMeth
         "TTAG_0xA5lst".."FT_MAKE_TAG( 0xA5, 'l', 's', 't' )"
     ).noPrefix()
 
+    /*customMethod("""
+    /**
+     * Calls {@link #setHarfBuzzPath(String)} with the path of the specified {@link SharedLibrary}.
+     * 
+     * <p>Example usage: ${code("FreeType.setHarfBuzzPath(HarfBuzz.getLibrary());")}</p> 
+     *
+     * @param sharedLibrary a {@code FunctionProvider} instance that will be cast to {@code SharedLibrary}
+     */
+    public static void setHarfBuzzPath(FunctionProvider sharedLibrary) {
+        if (!(sharedLibrary instanceof SharedLibrary)) {
+            apiLog("FreeType path override for HarfBuzz not set: function provider is not a shared library.");
+            return;
+        }
+
+        String path = ((SharedLibrary)sharedLibrary).getPath();
+        if (path == null) {
+            apiLog("FreeType path override for HarfBuzz not set: Could not resolve the shared library path.");
+            return;
+        }
+
+        setHarfBuzzPath(path);
+    }
+
+    /**
+     * Overrides the HarfBuzz shared library that FreeType loads internally.
+     *
+     * <p>This method must be called before FreeType initializes HarfBuzz. The override is available only in the default FreeType build bundled with LWJGL.
+     * Using the override with a custom FreeType build will produce a warning in {@code DEBUG} mode (but not an error).</p>
+     *
+     * @param path the HarfBuzz shared library path, or {@code null} to remove the override.
+     */
+    public static void setHarfBuzzPath(@Nullable String path) {
+        long override = FreeType.getLibrary().getFunctionAddress("_freetype_harfbuzz_library");
+        if (override == NULL) {
+            apiLog("FreeType path override for HarfBuzz not set: Could not resolve override symbol.");
+            return;
+        }
+
+        long a = memGetAddress(override);
+        if (a != NULL) {
+            nmemFree(a);
+        }
+        memPutAddress(override, path == null ? NULL : memAddress(Platform.get() == Platform.WINDOWS ? memUTF16(path) : memUTF8(path)));
+    }""")*/
+
 }

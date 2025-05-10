@@ -1738,6 +1738,7 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         nullable..hb_destroy_func_t("destroy")
     )
 
+    // TODO: remove in LWJGL 4
     void(
         "font_funcs_set_draw_glyph_func",
 
@@ -1748,10 +1749,29 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     )
 
     void(
+        "font_funcs_set_draw_glyph_or_fail_func",
+
+        hb_font_funcs_t.p("ffuncs"),
+        hb_font_draw_glyph_or_fail_func_t("func"),
+        nullable..opaque_p("user_data"),
+        nullable..hb_destroy_func_t("destroy")
+    )
+
+    // TODO: remove in LWJGL 4
+    void(
         "font_funcs_set_paint_glyph_func",
 
         hb_font_funcs_t.p("ffuncs"),
         hb_font_paint_glyph_func_t("func"),
+        nullable..opaque_p("user_data"),
+        nullable..hb_destroy_func_t("destroy")
+    )
+
+    void(
+        "font_funcs_set_paint_glyph_or_fail_func",
+
+        hb_font_funcs_t.p("ffuncs"),
+        hb_font_paint_glyph_or_fail_func_t("func"),
         nullable..opaque_p("user_data"),
         nullable..hb_destroy_func_t("destroy")
     )
@@ -1905,8 +1925,28 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         nullable..opaque_p("draw_data")
     )
 
+    hb_bool_t(
+        "font_draw_glyph_or_fail",
+
+        hb_font_t.p("font"),
+        hb_codepoint_t("glyph"),
+        hb_draw_funcs_t.p("dfuncs"),
+        nullable..opaque_p("draw_data")
+    )
+
     void(
         "font_paint_glyph",
+
+        hb_font_t.p("font"),
+        hb_codepoint_t("glyph"),
+        hb_draw_funcs_t.p("pfuncs"),
+        nullable..opaque_p("paint_data"),
+        unsigned_int("palette_index"),
+        hb_color_t("foreground")
+    )
+
+    hb_bool_t(
+        "font_paint_glyph_or_fail",
 
         hb_font_t.p("font"),
         hb_codepoint_t("glyph"),
@@ -2213,6 +2253,12 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
 
     float(
         "font_get_ptem",
+
+        hb_font_t.p("font")
+    )
+
+    hb_bool_t(
+        "font_is_synthetic",
 
         hb_font_t.p("font")
     )
@@ -3621,10 +3667,10 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     // hb-version.h
 
     IntConstant("VERSION_MAJOR".."11")
-    IntConstant("VERSION_MINOR".."1")
-    IntConstant("VERSION_MICRO".."0")
+    IntConstant("VERSION_MINOR".."2")
+    IntConstant("VERSION_MICRO".."1")
 
-    StringConstant("VERSION_STRING".."11.1.0")
+    StringConstant("VERSION_STRING".."11.2.1")
 
     customMethod("""
     public static boolean HB_VERSION_ATLEAST(int major, int minor, int micro) {

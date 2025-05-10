@@ -225,13 +225,13 @@ val hb_draw_state_t = struct(Module.HARFBUZZ, "hb_draw_state_t") {
     float("path_start_y")
     float("current_x")
     float("current_y")
-    float("slant_xy")
     hb_var_num_t("reserved1").private()
     hb_var_num_t("reserved2").private()
     hb_var_num_t("reserved3").private()
     hb_var_num_t("reserved4").private()
     hb_var_num_t("reserved5").private()
     hb_var_num_t("reserved6").private()
+    hb_var_num_t("reserved7").private()
 }
 
 val hb_draw_move_to_func_t = Module.HARFBUZZ.callback {
@@ -513,6 +513,7 @@ val hb_font_get_glyph_from_name_func_t = Module.HARFBUZZ.callback {
     )
 }
 
+// TODO: remove in LWJGL 4
 val hb_font_draw_glyph_func_t = Module.HARFBUZZ.callback {
     void(
         "hb_font_draw_glyph_func_t",
@@ -528,6 +529,22 @@ val hb_font_draw_glyph_func_t = Module.HARFBUZZ.callback {
     )
 }
 
+val hb_font_draw_glyph_or_fail_func_t = Module.HARFBUZZ.callback {
+    hb_bool_t(
+        "hb_font_draw_glyph_or_fail_func_t",
+
+        hb_font_t.p("font"),
+        nullable..opaque_p("font_data"),
+        hb_codepoint_t("glyph"),
+        hb_draw_funcs_t.p("draw_funcs"),
+        nullable..opaque_p("draw_data"),
+        nullable..opaque_p("user_data"),
+
+        nativeType = "hb_font_draw_glyph_or_fail_func_t"
+    )
+}
+
+// TODO: remove in LWJGL 4
 val hb_font_paint_glyph_func_t = Module.HARFBUZZ.callback {
     void(
         "hb_font_paint_glyph_func_t",
@@ -542,6 +559,23 @@ val hb_font_paint_glyph_func_t = Module.HARFBUZZ.callback {
         nullable..opaque_p("user_data"),
 
         nativeType = "hb_font_paint_glyph_func_t"
+    )
+}
+
+val hb_font_paint_glyph_or_fail_func_t = Module.HARFBUZZ.callback {
+    hb_bool_t(
+        "hb_font_paint_glyph_or_fail_func_t",
+
+        hb_font_t.p("font"),
+        nullable..opaque_p("font_data"),
+        hb_codepoint_t("glyph"),
+        hb_paint_funcs_t.p("paint_funcs"),
+        nullable..opaque_p("paint_data"),
+        unsigned_int("palette_index"),
+        hb_color_t("foreground"),
+        nullable..opaque_p("user_data"),
+
+        nativeType = "hb_font_paint_glyph_or_fail_func_t"
     )
 }
 

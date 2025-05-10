@@ -232,7 +232,9 @@ public class HarfBuzz {
             font_funcs_set_glyph_name_func                = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_name_func"),
             font_funcs_set_glyph_from_name_func           = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_from_name_func"),
             font_funcs_set_draw_glyph_func                = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_draw_glyph_func"),
+            font_funcs_set_draw_glyph_or_fail_func        = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_draw_glyph_or_fail_func"),
             font_funcs_set_paint_glyph_func               = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_paint_glyph_func"),
+            font_funcs_set_paint_glyph_or_fail_func       = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_paint_glyph_or_fail_func"),
             font_get_h_extents                            = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_h_extents"),
             font_get_v_extents                            = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_v_extents"),
             font_get_nominal_glyph                        = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_nominal_glyph"),
@@ -250,7 +252,9 @@ public class HarfBuzz {
             font_get_glyph_name                           = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_name"),
             font_get_glyph_from_name                      = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_from_name"),
             font_draw_glyph                               = apiGetFunctionAddress(HARFBUZZ, "hb_font_draw_glyph"),
+            font_draw_glyph_or_fail                       = apiGetFunctionAddress(HARFBUZZ, "hb_font_draw_glyph_or_fail"),
             font_paint_glyph                              = apiGetFunctionAddress(HARFBUZZ, "hb_font_paint_glyph"),
+            font_paint_glyph_or_fail                      = apiGetFunctionAddress(HARFBUZZ, "hb_font_paint_glyph_or_fail"),
             font_get_glyph                                = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph"),
             font_get_extents_for_direction                = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_extents_for_direction"),
             font_get_glyph_advance_for_direction          = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_advance_for_direction"),
@@ -288,6 +292,7 @@ public class HarfBuzz {
             font_get_ppem                                 = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_ppem"),
             font_set_ptem                                 = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_ptem"),
             font_get_ptem                                 = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_ptem"),
+            font_is_synthetic                             = apiGetFunctionAddress(HARFBUZZ, "hb_font_is_synthetic"),
             font_set_synthetic_bold                       = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_synthetic_bold"),
             font_get_synthetic_bold                       = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_synthetic_bold"),
             font_set_synthetic_slant                      = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_synthetic_slant"),
@@ -868,11 +873,11 @@ public class HarfBuzz {
 
     public static final int HB_VERSION_MAJOR = 11;
 
-    public static final int HB_VERSION_MINOR = 1;
+    public static final int HB_VERSION_MINOR = 2;
 
-    public static final int HB_VERSION_MICRO = 0;
+    public static final int HB_VERSION_MICRO = 1;
 
-    public static final String HB_VERSION_STRING = "11.1.0";
+    public static final String HB_VERSION_STRING = "11.2.1";
 
     protected HarfBuzz() {
         throw new UnsupportedOperationException();
@@ -3516,6 +3521,22 @@ public class HarfBuzz {
         nhb_font_funcs_set_draw_glyph_func(ffuncs, func.address(), user_data, memAddressSafe(destroy));
     }
 
+    // --- [ hb_font_funcs_set_draw_glyph_or_fail_func ] ---
+
+    /** {@code void hb_font_funcs_set_draw_glyph_or_fail_func(hb_font_funcs_t * ffuncs, hb_font_draw_glyph_or_fail_func_t func, void * user_data, hb_destroy_func_t destroy)} */
+    public static void nhb_font_funcs_set_draw_glyph_or_fail_func(long ffuncs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.font_funcs_set_draw_glyph_or_fail_func;
+        if (CHECKS) {
+            check(ffuncs);
+        }
+        invokePPPPV(ffuncs, func, user_data, destroy, __functionAddress);
+    }
+
+    /** {@code void hb_font_funcs_set_draw_glyph_or_fail_func(hb_font_funcs_t * ffuncs, hb_font_draw_glyph_or_fail_func_t func, void * user_data, hb_destroy_func_t destroy)} */
+    public static void hb_font_funcs_set_draw_glyph_or_fail_func(@NativeType("hb_font_funcs_t *") long ffuncs, @NativeType("hb_font_draw_glyph_or_fail_func_t") hb_font_draw_glyph_or_fail_func_tI func, @NativeType("void *") long user_data, @NativeType("hb_destroy_func_t") @Nullable hb_destroy_func_tI destroy) {
+        nhb_font_funcs_set_draw_glyph_or_fail_func(ffuncs, func.address(), user_data, memAddressSafe(destroy));
+    }
+
     // --- [ hb_font_funcs_set_paint_glyph_func ] ---
 
     /** {@code void hb_font_funcs_set_paint_glyph_func(hb_font_funcs_t * ffuncs, hb_font_paint_glyph_func_t func, void * user_data, hb_destroy_func_t destroy)} */
@@ -3530,6 +3551,22 @@ public class HarfBuzz {
     /** {@code void hb_font_funcs_set_paint_glyph_func(hb_font_funcs_t * ffuncs, hb_font_paint_glyph_func_t func, void * user_data, hb_destroy_func_t destroy)} */
     public static void hb_font_funcs_set_paint_glyph_func(@NativeType("hb_font_funcs_t *") long ffuncs, @NativeType("hb_font_paint_glyph_func_t") hb_font_paint_glyph_func_tI func, @NativeType("void *") long user_data, @NativeType("hb_destroy_func_t") @Nullable hb_destroy_func_tI destroy) {
         nhb_font_funcs_set_paint_glyph_func(ffuncs, func.address(), user_data, memAddressSafe(destroy));
+    }
+
+    // --- [ hb_font_funcs_set_paint_glyph_or_fail_func ] ---
+
+    /** {@code void hb_font_funcs_set_paint_glyph_or_fail_func(hb_font_funcs_t * ffuncs, hb_font_paint_glyph_or_fail_func_t func, void * user_data, hb_destroy_func_t destroy)} */
+    public static void nhb_font_funcs_set_paint_glyph_or_fail_func(long ffuncs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.font_funcs_set_paint_glyph_or_fail_func;
+        if (CHECKS) {
+            check(ffuncs);
+        }
+        invokePPPPV(ffuncs, func, user_data, destroy, __functionAddress);
+    }
+
+    /** {@code void hb_font_funcs_set_paint_glyph_or_fail_func(hb_font_funcs_t * ffuncs, hb_font_paint_glyph_or_fail_func_t func, void * user_data, hb_destroy_func_t destroy)} */
+    public static void hb_font_funcs_set_paint_glyph_or_fail_func(@NativeType("hb_font_funcs_t *") long ffuncs, @NativeType("hb_font_paint_glyph_or_fail_func_t") hb_font_paint_glyph_or_fail_func_tI func, @NativeType("void *") long user_data, @NativeType("hb_destroy_func_t") @Nullable hb_destroy_func_tI destroy) {
+        nhb_font_funcs_set_paint_glyph_or_fail_func(ffuncs, func.address(), user_data, memAddressSafe(destroy));
     }
 
     // --- [ hb_font_get_h_extents ] ---
@@ -3848,6 +3885,19 @@ public class HarfBuzz {
         invokePPPV(font, glyph, dfuncs, draw_data, __functionAddress);
     }
 
+    // --- [ hb_font_draw_glyph_or_fail ] ---
+
+    /** {@code hb_bool_t hb_font_draw_glyph_or_fail(hb_font_t * font, hb_codepoint_t glyph, hb_draw_funcs_t * dfuncs, void * draw_data)} */
+    @NativeType("hb_bool_t")
+    public static boolean hb_font_draw_glyph_or_fail(@NativeType("hb_font_t *") long font, @NativeType("hb_codepoint_t") int glyph, @NativeType("hb_draw_funcs_t *") long dfuncs, @NativeType("void *") long draw_data) {
+        long __functionAddress = Functions.font_draw_glyph_or_fail;
+        if (CHECKS) {
+            check(font);
+            check(dfuncs);
+        }
+        return invokePPPI(font, glyph, dfuncs, draw_data, __functionAddress) != 0;
+    }
+
     // --- [ hb_font_paint_glyph ] ---
 
     /** {@code void hb_font_paint_glyph(hb_font_t * font, hb_codepoint_t glyph, hb_draw_funcs_t * pfuncs, void * paint_data, unsigned int palette_index, hb_color_t foreground)} */
@@ -3858,6 +3908,19 @@ public class HarfBuzz {
             check(pfuncs);
         }
         invokePPPV(font, glyph, pfuncs, paint_data, palette_index, foreground, __functionAddress);
+    }
+
+    // --- [ hb_font_paint_glyph_or_fail ] ---
+
+    /** {@code hb_bool_t hb_font_paint_glyph_or_fail(hb_font_t * font, hb_codepoint_t glyph, hb_draw_funcs_t * pfuncs, void * paint_data, unsigned int palette_index, hb_color_t foreground)} */
+    @NativeType("hb_bool_t")
+    public static boolean hb_font_paint_glyph_or_fail(@NativeType("hb_font_t *") long font, @NativeType("hb_codepoint_t") int glyph, @NativeType("hb_draw_funcs_t *") long pfuncs, @NativeType("void *") long paint_data, @NativeType("unsigned int") int palette_index, @NativeType("hb_color_t") int foreground) {
+        long __functionAddress = Functions.font_paint_glyph_or_fail;
+        if (CHECKS) {
+            check(font);
+            check(pfuncs);
+        }
+        return invokePPPI(font, glyph, pfuncs, paint_data, palette_index, foreground, __functionAddress) != 0;
     }
 
     // --- [ hb_font_get_glyph ] ---
@@ -4457,6 +4520,18 @@ public class HarfBuzz {
             check(font);
         }
         return invokePF(font, __functionAddress);
+    }
+
+    // --- [ hb_font_is_synthetic ] ---
+
+    /** {@code hb_bool_t hb_font_is_synthetic(hb_font_t * font)} */
+    @NativeType("hb_bool_t")
+    public static boolean hb_font_is_synthetic(@NativeType("hb_font_t *") long font) {
+        long __functionAddress = Functions.font_is_synthetic;
+        if (CHECKS) {
+            check(font);
+        }
+        return invokePI(font, __functionAddress) != 0;
     }
 
     // --- [ hb_font_set_synthetic_bold ] ---
