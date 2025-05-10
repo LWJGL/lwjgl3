@@ -49,8 +49,8 @@ val SDL_rect = "SDLRect".nativeClassSDL("SDL_rect") {
     }
 
     /** {@code bool SDL_RectEmptyFloat(SDL_FRect const * r)} */
-    public static boolean SDL_RectEmptyFloat(@Nullable SDL_Rect r) {
-        return r == null || r.w() <= 0.0f || r.h() <= 0.0f;
+    public static boolean SDL_RectEmptyFloat(@Nullable SDL_FRect r) {
+        return r == null || r.w() < 0.0f || r.h() < 0.0f;
     }
 
     /** {@code bool SDL_RectsEqualEpsilon(DL_FRect const * a, SDL_FRect const * b, float epsilon)} */
