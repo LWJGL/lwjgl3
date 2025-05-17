@@ -5183,16 +5183,18 @@ val VkDeviceDeviceMemoryReportCreateInfoEXT = struct(Module.VULKAN, "VkDeviceDev
     opaque_p("pUserData")
 }
 
-val VkPhysicalDeviceRobustness2FeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceRobustness2FeaturesEXT") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT")..VkStructureType("sType")
+val _VkPhysicalDeviceRobustness2FeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceRobustness2FeaturesKHR")
+val VkPhysicalDeviceRobustness2FeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceRobustness2FeaturesEXT", alias = _VkPhysicalDeviceRobustness2FeaturesKHR) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_KHR")..VkStructureType("sType")
     nullable..opaque_p("pNext")
     VkBool32("robustBufferAccess2")
     VkBool32("robustImageAccess2")
     VkBool32("nullDescriptor")
 }
 
-val VkPhysicalDeviceRobustness2PropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceRobustness2PropertiesEXT", mutable = false) {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT")..VkStructureType("sType").mutable()
+val _VkPhysicalDeviceRobustness2PropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceRobustness2PropertiesKHR")
+val VkPhysicalDeviceRobustness2PropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceRobustness2PropertiesEXT", mutable = false, alias = _VkPhysicalDeviceRobustness2PropertiesKHR) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_KHR")..VkStructureType("sType").mutable()
     nullable..opaque_p("pNext").mutable()
     VkDeviceSize("robustStorageBufferAccessSizeAlignment")
     VkDeviceSize("robustUniformBufferAccessSizeAlignment")
@@ -9067,6 +9069,21 @@ val VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT = struct(Module.VULKAN,
     VkBool32("vertexAttributeRobustness")
 }
 
+val VkPhysicalDeviceRobustness2FeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceRobustness2FeaturesKHR") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_KHR")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("robustBufferAccess2")
+    VkBool32("robustImageAccess2")
+    VkBool32("nullDescriptor")
+}
+
+val VkPhysicalDeviceRobustness2PropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceRobustness2PropertiesKHR", mutable = false) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_KHR")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
+    VkDeviceSize("robustStorageBufferAccessSizeAlignment")
+    VkDeviceSize("robustUniformBufferAccessSizeAlignment")
+}
+
 val VkSetPresentConfigNV = struct(Module.VULKAN, "VkSetPresentConfigNV") {
     Expression("#STRUCTURE_TYPE_SET_PRESENT_CONFIG_NV")..VkStructureType("sType")
     nullable..opaque_const_p("pNext")
@@ -9105,4 +9122,10 @@ val VkRenderPassFragmentDensityMapOffsetEndInfoEXT = struct(Module.VULKAN, "VkRe
     nullable..opaque_const_p("pNext")
     AutoSize("pFragmentDensityOffsets", optional = true)..uint32_t("fragmentDensityOffsetCount")
     VkOffset2D.const.p("pFragmentDensityOffsets")
+}
+
+val VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_DEVICE_MEMORY_FEATURES_EXT")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("zeroInitializeDeviceMemory")
 }

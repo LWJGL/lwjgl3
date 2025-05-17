@@ -526,6 +526,8 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceRobustness2FeaturesEXT} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceRobustness2FeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceRobustness2FeaturesKHR} value to the {@code pNext} chain. */
+    public VkDeviceCreateInfo pNext(VkPhysicalDeviceRobustness2FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceSamplerYcbcrConversionFeatures} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceSamplerYcbcrConversionFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR} value to the {@code pNext} chain. */
@@ -704,6 +706,8 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceYcbcrDegammaFeaturesQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceYcbcrImageArraysFeaturesEXT} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceYcbcrImageArraysFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT} value to the {@code pNext} chain. */
+    public VkDeviceCreateInfo pNext(VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR} value to the {@code pNext} chain. */
@@ -1408,6 +1412,8 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceRobustness2FeaturesEXT} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceRobustness2FeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceRobustness2FeaturesKHR} value to the {@code pNext} chain. */
+        public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceRobustness2FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceSamplerYcbcrConversionFeatures} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceSamplerYcbcrConversionFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR} value to the {@code pNext} chain. */
@@ -1586,6 +1592,8 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceYcbcrDegammaFeaturesQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceYcbcrImageArraysFeaturesEXT} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceYcbcrImageArraysFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT} value to the {@code pNext} chain. */
+        public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR} value to the {@code pNext} chain. */

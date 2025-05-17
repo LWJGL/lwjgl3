@@ -22,15 +22,15 @@ val QCOM_tile_memory_heap = "QCOMTileMemoryHeap".nativeClassVK("QCOM_tile_memory
     )
 
     EnumConstant(
-        "BUFFER_USAGE_TILE_MEMORY_QCOM".enum(0x08000000)
+        "BUFFER_USAGE_TILE_MEMORY_BIT_QCOM".enum(0x08000000)
     )
 
     EnumConstantLong(
-        "BUFFER_USAGE_2_TILE_MEMORY_QCOM".enum(0x08000000L)
+        "BUFFER_USAGE_2_TILE_MEMORY_BIT_QCOM".enum(0x08000000L)
     )
 
     EnumConstant(
-        "IMAGE_USAGE_TILE_MEMORY_QCOM".enum(0x08000000)
+        "IMAGE_USAGE_TILE_MEMORY_BIT_QCOM".enum(0x08000000)
     )
 
     EnumConstant(

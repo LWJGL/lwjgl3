@@ -21,11 +21,11 @@ public class QCOMTileMemoryHeap {
 
     public static final int VK_MEMORY_HEAP_TILE_MEMORY_BIT_QCOM = 0x8;
 
-    public static final int VK_BUFFER_USAGE_TILE_MEMORY_QCOM = 0x8000000;
+    public static final int VK_BUFFER_USAGE_TILE_MEMORY_BIT_QCOM = 0x8000000;
 
-    public static final long VK_BUFFER_USAGE_2_TILE_MEMORY_QCOM = 0x8000000L;
+    public static final long VK_BUFFER_USAGE_2_TILE_MEMORY_BIT_QCOM = 0x8000000L;
 
-    public static final int VK_IMAGE_USAGE_TILE_MEMORY_QCOM = 0x8000000;
+    public static final int VK_IMAGE_USAGE_TILE_MEMORY_BIT_QCOM = 0x8000000;
 
     public static final int
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TILE_MEMORY_HEAP_FEATURES_QCOM   = 1000547000,

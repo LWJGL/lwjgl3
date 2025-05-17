@@ -25,40 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 nullDescriptor;
  * }}</pre>
  */
-public class VkPhysicalDeviceRobustness2FeaturesEXT extends Struct<VkPhysicalDeviceRobustness2FeaturesEXT> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        ROBUSTBUFFERACCESS2,
-        ROBUSTIMAGEACCESS2,
-        NULLDESCRIPTOR;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(4),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        ROBUSTBUFFERACCESS2 = layout.offsetof(2);
-        ROBUSTIMAGEACCESS2 = layout.offsetof(3);
-        NULLDESCRIPTOR = layout.offsetof(4);
-    }
+public class VkPhysicalDeviceRobustness2FeaturesEXT extends VkPhysicalDeviceRobustness2FeaturesKHR {
 
     protected VkPhysicalDeviceRobustness2FeaturesEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -76,42 +43,30 @@ public class VkPhysicalDeviceRobustness2FeaturesEXT extends Struct<VkPhysicalDev
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceRobustness2FeaturesEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** @return the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** @return the value of the {@code robustBufferAccess2} field. */
-    @NativeType("VkBool32")
-    public boolean robustBufferAccess2() { return nrobustBufferAccess2(address()) != 0; }
-    /** @return the value of the {@code robustImageAccess2} field. */
-    @NativeType("VkBool32")
-    public boolean robustImageAccess2() { return nrobustImageAccess2(address()) != 0; }
-    /** @return the value of the {@code nullDescriptor} field. */
-    @NativeType("VkBool32")
-    public boolean nullDescriptor() { return nnullDescriptor(address()) != 0; }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceRobustness2FeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTRobustness2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT} value to the {@code sType} field. */
-    public VkPhysicalDeviceRobustness2FeaturesEXT sType$Default() { return sType(EXTRobustness2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT); }
+    /** Sets the {@link KHRRobustness2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_KHR} value to the {@code sType} field. */
+    @Override
+    public VkPhysicalDeviceRobustness2FeaturesEXT sType$Default() { return sType(KHRRobustness2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceRobustness2FeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code robustBufferAccess2} field. */
+    @Override
     public VkPhysicalDeviceRobustness2FeaturesEXT robustBufferAccess2(@NativeType("VkBool32") boolean value) { nrobustBufferAccess2(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code robustImageAccess2} field. */
+    @Override
     public VkPhysicalDeviceRobustness2FeaturesEXT robustImageAccess2(@NativeType("VkBool32") boolean value) { nrobustImageAccess2(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code nullDescriptor} field. */
+    @Override
     public VkPhysicalDeviceRobustness2FeaturesEXT nullDescriptor(@NativeType("VkBool32") boolean value) { nnullDescriptor(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceRobustness2FeaturesEXT set(
         int sType,
         long pNext,
@@ -251,32 +206,8 @@ public class VkPhysicalDeviceRobustness2FeaturesEXT extends Struct<VkPhysicalDev
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceRobustness2FeaturesEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceRobustness2FeaturesEXT.PNEXT); }
-    /** Unsafe version of {@link #robustBufferAccess2}. */
-    public static int nrobustBufferAccess2(long struct) { return memGetInt(struct + VkPhysicalDeviceRobustness2FeaturesEXT.ROBUSTBUFFERACCESS2); }
-    /** Unsafe version of {@link #robustImageAccess2}. */
-    public static int nrobustImageAccess2(long struct) { return memGetInt(struct + VkPhysicalDeviceRobustness2FeaturesEXT.ROBUSTIMAGEACCESS2); }
-    /** Unsafe version of {@link #nullDescriptor}. */
-    public static int nnullDescriptor(long struct) { return memGetInt(struct + VkPhysicalDeviceRobustness2FeaturesEXT.NULLDESCRIPTOR); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRobustness2FeaturesEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceRobustness2FeaturesEXT.PNEXT, value); }
-    /** Unsafe version of {@link #robustBufferAccess2(boolean) robustBufferAccess2}. */
-    public static void nrobustBufferAccess2(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRobustness2FeaturesEXT.ROBUSTBUFFERACCESS2, value); }
-    /** Unsafe version of {@link #robustImageAccess2(boolean) robustImageAccess2}. */
-    public static void nrobustImageAccess2(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRobustness2FeaturesEXT.ROBUSTIMAGEACCESS2, value); }
-    /** Unsafe version of {@link #nullDescriptor(boolean) nullDescriptor}. */
-    public static void nnullDescriptor(long struct, int value) { memPutInt(struct + VkPhysicalDeviceRobustness2FeaturesEXT.NULLDESCRIPTOR, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceRobustness2FeaturesEXT} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceRobustness2FeaturesEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceRobustness2FeaturesKHR.Buffer {
 
         private static final VkPhysicalDeviceRobustness2FeaturesEXT ELEMENT_FACTORY = VkPhysicalDeviceRobustness2FeaturesEXT.create(-1L);
 
@@ -290,7 +221,7 @@ public class VkPhysicalDeviceRobustness2FeaturesEXT extends Struct<VkPhysicalDev
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -316,33 +247,23 @@ public class VkPhysicalDeviceRobustness2FeaturesEXT extends Struct<VkPhysicalDev
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceRobustness2FeaturesEXT.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceRobustness2FeaturesEXT.npNext(address()); }
-        /** @return the value of the {@code robustBufferAccess2} field. */
-        @NativeType("VkBool32")
-        public boolean robustBufferAccess2() { return VkPhysicalDeviceRobustness2FeaturesEXT.nrobustBufferAccess2(address()) != 0; }
-        /** @return the value of the {@code robustImageAccess2} field. */
-        @NativeType("VkBool32")
-        public boolean robustImageAccess2() { return VkPhysicalDeviceRobustness2FeaturesEXT.nrobustImageAccess2(address()) != 0; }
-        /** @return the value of the {@code nullDescriptor} field. */
-        @NativeType("VkBool32")
-        public boolean nullDescriptor() { return VkPhysicalDeviceRobustness2FeaturesEXT.nnullDescriptor(address()) != 0; }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceRobustness2FeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceRobustness2FeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTRobustness2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT} value to the {@code sType} field. */
-        public VkPhysicalDeviceRobustness2FeaturesEXT.Buffer sType$Default() { return sType(EXTRobustness2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT); }
+        /** Sets the {@link KHRRobustness2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_KHR} value to the {@code sType} field. */
+        @Override
+        public VkPhysicalDeviceRobustness2FeaturesEXT.Buffer sType$Default() { return sType(KHRRobustness2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceRobustness2FeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceRobustness2FeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code robustBufferAccess2} field. */
+        @Override
         public VkPhysicalDeviceRobustness2FeaturesEXT.Buffer robustBufferAccess2(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceRobustness2FeaturesEXT.nrobustBufferAccess2(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code robustImageAccess2} field. */
+        @Override
         public VkPhysicalDeviceRobustness2FeaturesEXT.Buffer robustImageAccess2(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceRobustness2FeaturesEXT.nrobustImageAccess2(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code nullDescriptor} field. */
+        @Override
         public VkPhysicalDeviceRobustness2FeaturesEXT.Buffer nullDescriptor(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceRobustness2FeaturesEXT.nnullDescriptor(address(), value ? 1 : 0); return this; }
 
     }

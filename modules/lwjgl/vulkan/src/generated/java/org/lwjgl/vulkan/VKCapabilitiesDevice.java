@@ -1312,6 +1312,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_ycbcr_2plane_444_formats;
     /** When true, {@code EXT_ycbcr_image_arrays} is supported. */
     public final boolean VK_EXT_ycbcr_image_arrays;
+    /** When true, {@code EXT_zero_initialize_device_memory} is supported. */
+    public final boolean VK_EXT_zero_initialize_device_memory;
     /** When true, {@code GOOGLE_decorate_string} is supported. */
     public final boolean VK_GOOGLE_decorate_string;
     /** When true, {@code GOOGLE_display_timing} is supported. */
@@ -1466,6 +1468,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_ray_tracing_position_fetch;
     /** When true, {@code KHR_relaxed_block_layout} is supported. */
     public final boolean VK_KHR_relaxed_block_layout;
+    /** When true, {@code KHR_robustness2} is supported. */
+    public final boolean VK_KHR_robustness2;
     /** When true, {@code KHR_sampler_mirror_clamp_to_edge} is supported. */
     public final boolean VK_KHR_sampler_mirror_clamp_to_edge;
     /** When true, {@code KHR_sampler_ycbcr_conversion} is supported. */
@@ -1893,6 +1897,7 @@ public class VKCapabilitiesDevice {
         VK_EXT_vertex_input_dynamic_state = check_EXT_vertex_input_dynamic_state(provider, caps, ext);
         VK_EXT_ycbcr_2plane_444_formats = ext.contains("VK_EXT_ycbcr_2plane_444_formats");
         VK_EXT_ycbcr_image_arrays = ext.contains("VK_EXT_ycbcr_image_arrays");
+        VK_EXT_zero_initialize_device_memory = ext.contains("VK_EXT_zero_initialize_device_memory");
         VK_GOOGLE_decorate_string = ext.contains("VK_GOOGLE_decorate_string");
         VK_GOOGLE_display_timing = check_GOOGLE_display_timing(provider, caps, ext);
         VK_GOOGLE_hlsl_functionality1 = ext.contains("VK_GOOGLE_hlsl_functionality1");
@@ -1970,6 +1975,7 @@ public class VKCapabilitiesDevice {
         VK_KHR_ray_tracing_pipeline = check_KHR_ray_tracing_pipeline(provider, caps, ext);
         VK_KHR_ray_tracing_position_fetch = ext.contains("VK_KHR_ray_tracing_position_fetch");
         VK_KHR_relaxed_block_layout = ext.contains("VK_KHR_relaxed_block_layout");
+        VK_KHR_robustness2 = ext.contains("VK_KHR_robustness2");
         VK_KHR_sampler_mirror_clamp_to_edge = ext.contains("VK_KHR_sampler_mirror_clamp_to_edge");
         VK_KHR_sampler_ycbcr_conversion = check_KHR_sampler_ycbcr_conversion(provider, caps, ext);
         VK_KHR_separate_depth_stencil_layouts = ext.contains("VK_KHR_separate_depth_stencil_layouts");

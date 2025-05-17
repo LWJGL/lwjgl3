@@ -277,6 +277,8 @@ public class VkPhysicalDeviceProperties2 extends Struct<VkPhysicalDeviceProperti
     public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceRenderPassStripedPropertiesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceRobustness2PropertiesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceRobustness2PropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceRobustness2PropertiesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceRobustness2PropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceSampleLocationsPropertiesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceSampleLocationsPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceSamplerFilterMinmaxProperties} value to the {@code pNext} chain. */
@@ -757,6 +759,8 @@ public class VkPhysicalDeviceProperties2 extends Struct<VkPhysicalDeviceProperti
         public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceRenderPassStripedPropertiesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceRobustness2PropertiesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceRobustness2PropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceRobustness2PropertiesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceRobustness2PropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceSampleLocationsPropertiesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceSampleLocationsPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceSamplerFilterMinmaxProperties} value to the {@code pNext} chain. */
