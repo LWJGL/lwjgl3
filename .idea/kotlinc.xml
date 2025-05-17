@@ -15,6 +15,6 @@
     <option name="copyJsLibraryFiles" value="false" />
   </component>
   <component name="KotlinJpsPluginSettings">
-    <option name="version" value="2.1.0" />
+    <option name="version" value="2.1.21" />
   </component>
 </project>
