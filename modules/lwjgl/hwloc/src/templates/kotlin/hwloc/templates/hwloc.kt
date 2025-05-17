@@ -1940,6 +1940,7 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
     EnumConstantLong(
         "LOCAL_NUMANODE_FLAG_LARGER_LOCALITY".enumLong("1L<<0"),
         "LOCAL_NUMANODE_FLAG_SMALLER_LOCALITY".enumLong("1L<<1"),
+        "LOCAL_NUMANODE_FLAG_INTERSECT_LOCALITY".enumLong("1L<<3"),
         "LOCAL_NUMANODE_FLAG_ALL".enumLong("1L<<2")
     )
 
