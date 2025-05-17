@@ -28,6 +28,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     SDL_MouseWheelDirection direction;
  *     float mouse_x;
  *     float mouse_y;
+ *     Sint32 integer_x;
+ *     Sint32 integer_y;
  * }}</pre>
  */
 public class SDL_MouseWheelEvent extends Struct<SDL_MouseWheelEvent> implements NativeResource {
@@ -49,13 +51,17 @@ public class SDL_MouseWheelEvent extends Struct<SDL_MouseWheelEvent> implements 
         Y,
         DIRECTION,
         MOUSE_X,
-        MOUSE_Y;
+        MOUSE_Y,
+        INTEGER_X,
+        INTEGER_Y;
 
     static {
         Layout layout = __struct(
             __member(4),
             __member(4),
             __member(8),
+            __member(4),
+            __member(4),
             __member(4),
             __member(4),
             __member(4),
@@ -78,6 +84,8 @@ public class SDL_MouseWheelEvent extends Struct<SDL_MouseWheelEvent> implements 
         DIRECTION = layout.offsetof(7);
         MOUSE_X = layout.offsetof(8);
         MOUSE_Y = layout.offsetof(9);
+        INTEGER_X = layout.offsetof(10);
+        INTEGER_Y = layout.offsetof(11);
     }
 
     protected SDL_MouseWheelEvent(long address, @Nullable ByteBuffer container) {
@@ -128,6 +136,12 @@ public class SDL_MouseWheelEvent extends Struct<SDL_MouseWheelEvent> implements 
     public float mouse_x() { return nmouse_x(address()); }
     /** @return the value of the {@code mouse_y} field. */
     public float mouse_y() { return nmouse_y(address()); }
+    /** @return the value of the {@code integer_x} field. */
+    @NativeType("Sint32")
+    public int integer_x() { return ninteger_x(address()); }
+    /** @return the value of the {@code integer_y} field. */
+    @NativeType("Sint32")
+    public int integer_y() { return ninteger_y(address()); }
 
     /** Sets the specified value to the {@code type} field. */
     public SDL_MouseWheelEvent type(@NativeType("SDL_EventType") int value) { ntype(address(), value); return this; }
@@ -149,6 +163,10 @@ public class SDL_MouseWheelEvent extends Struct<SDL_MouseWheelEvent> implements 
     public SDL_MouseWheelEvent mouse_x(float value) { nmouse_x(address(), value); return this; }
     /** Sets the specified value to the {@code mouse_y} field. */
     public SDL_MouseWheelEvent mouse_y(float value) { nmouse_y(address(), value); return this; }
+    /** Sets the specified value to the {@code integer_x} field. */
+    public SDL_MouseWheelEvent integer_x(@NativeType("Sint32") int value) { ninteger_x(address(), value); return this; }
+    /** Sets the specified value to the {@code integer_y} field. */
+    public SDL_MouseWheelEvent integer_y(@NativeType("Sint32") int value) { ninteger_y(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public SDL_MouseWheelEvent set(
@@ -161,7 +179,9 @@ public class SDL_MouseWheelEvent extends Struct<SDL_MouseWheelEvent> implements 
         float y,
         int direction,
         float mouse_x,
-        float mouse_y
+        float mouse_y,
+        int integer_x,
+        int integer_y
     ) {
         type(type);
         reserved(reserved);
@@ -173,6 +193,8 @@ public class SDL_MouseWheelEvent extends Struct<SDL_MouseWheelEvent> implements 
         direction(direction);
         mouse_x(mouse_x);
         mouse_y(mouse_y);
+        integer_x(integer_x);
+        integer_y(integer_y);
 
         return this;
     }
@@ -320,6 +342,10 @@ public class SDL_MouseWheelEvent extends Struct<SDL_MouseWheelEvent> implements 
     public static float nmouse_x(long struct) { return memGetFloat(struct + SDL_MouseWheelEvent.MOUSE_X); }
     /** Unsafe version of {@link #mouse_y}. */
     public static float nmouse_y(long struct) { return memGetFloat(struct + SDL_MouseWheelEvent.MOUSE_Y); }
+    /** Unsafe version of {@link #integer_x}. */
+    public static int ninteger_x(long struct) { return memGetInt(struct + SDL_MouseWheelEvent.INTEGER_X); }
+    /** Unsafe version of {@link #integer_y}. */
+    public static int ninteger_y(long struct) { return memGetInt(struct + SDL_MouseWheelEvent.INTEGER_Y); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_MouseWheelEvent.TYPE, value); }
@@ -341,6 +367,10 @@ public class SDL_MouseWheelEvent extends Struct<SDL_MouseWheelEvent> implements 
     public static void nmouse_x(long struct, float value) { memPutFloat(struct + SDL_MouseWheelEvent.MOUSE_X, value); }
     /** Unsafe version of {@link #mouse_y(float) mouse_y}. */
     public static void nmouse_y(long struct, float value) { memPutFloat(struct + SDL_MouseWheelEvent.MOUSE_Y, value); }
+    /** Unsafe version of {@link #integer_x(int) integer_x}. */
+    public static void ninteger_x(long struct, int value) { memPutInt(struct + SDL_MouseWheelEvent.INTEGER_X, value); }
+    /** Unsafe version of {@link #integer_y(int) integer_y}. */
+    public static void ninteger_y(long struct, int value) { memPutInt(struct + SDL_MouseWheelEvent.INTEGER_Y, value); }
 
     // -----------------------------------
 
@@ -411,6 +441,12 @@ public class SDL_MouseWheelEvent extends Struct<SDL_MouseWheelEvent> implements 
         public float mouse_x() { return SDL_MouseWheelEvent.nmouse_x(address()); }
         /** @return the value of the {@code mouse_y} field. */
         public float mouse_y() { return SDL_MouseWheelEvent.nmouse_y(address()); }
+        /** @return the value of the {@code integer_x} field. */
+        @NativeType("Sint32")
+        public int integer_x() { return SDL_MouseWheelEvent.ninteger_x(address()); }
+        /** @return the value of the {@code integer_y} field. */
+        @NativeType("Sint32")
+        public int integer_y() { return SDL_MouseWheelEvent.ninteger_y(address()); }
 
         /** Sets the specified value to the {@code type} field. */
         public SDL_MouseWheelEvent.Buffer type(@NativeType("SDL_EventType") int value) { SDL_MouseWheelEvent.ntype(address(), value); return this; }
@@ -432,6 +468,10 @@ public class SDL_MouseWheelEvent extends Struct<SDL_MouseWheelEvent> implements 
         public SDL_MouseWheelEvent.Buffer mouse_x(float value) { SDL_MouseWheelEvent.nmouse_x(address(), value); return this; }
         /** Sets the specified value to the {@code mouse_y} field. */
         public SDL_MouseWheelEvent.Buffer mouse_y(float value) { SDL_MouseWheelEvent.nmouse_y(address(), value); return this; }
+        /** Sets the specified value to the {@code integer_x} field. */
+        public SDL_MouseWheelEvent.Buffer integer_x(@NativeType("Sint32") int value) { SDL_MouseWheelEvent.ninteger_x(address(), value); return this; }
+        /** Sets the specified value to the {@code integer_y} field. */
+        public SDL_MouseWheelEvent.Buffer integer_y(@NativeType("Sint32") int value) { SDL_MouseWheelEvent.ninteger_y(address(), value); return this; }
 
     }
 

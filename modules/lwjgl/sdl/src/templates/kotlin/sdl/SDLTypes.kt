@@ -1667,6 +1667,8 @@ val SDL_MouseWheelEvent = struct(Module.SDL, "SDL_MouseWheelEvent") {
     SDL_MouseWheelDirection("direction")
     float("mouse_x")
     float("mouse_y")
+    Sint32("integer_x")
+    Sint32("integer_y")
 }
 
 val SDL_JoyAxisEvent = struct(Module.SDL, "SDL_JoyAxisEvent") {
