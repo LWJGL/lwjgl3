@@ -446,11 +446,11 @@ public class Vma {
 
     // --- [ vmaFreeMemory ] ---
 
-    /** {@code void vmaFreeMemory(VmaAllocator allocator, VmaAllocation const allocation)} */
+    /** {@code void vmaFreeMemory(VmaAllocator allocator, VmaAllocation allocation)} */
     public static native void nvmaFreeMemory(long allocator, long allocation);
 
-    /** {@code void vmaFreeMemory(VmaAllocator allocator, VmaAllocation const allocation)} */
-    public static void vmaFreeMemory(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation const") long allocation) {
+    /** {@code void vmaFreeMemory(VmaAllocator allocator, VmaAllocation allocation)} */
+    public static void vmaFreeMemory(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation) {
         if (CHECKS) {
             check(allocator);
         }

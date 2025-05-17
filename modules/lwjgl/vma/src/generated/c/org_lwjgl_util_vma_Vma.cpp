@@ -213,7 +213,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaAllocateMemoryForImage(JN
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaFreeMemory(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong allocationAddress) {
     VmaAllocator allocator = (VmaAllocator)(uintptr_t)allocatorAddress;
-    VmaAllocation const allocation = (VmaAllocation const)(uintptr_t)allocationAddress;
+    VmaAllocation allocation = (VmaAllocation)(uintptr_t)allocationAddress;
     UNUSED_PARAMS(__env, clazz)
     vmaFreeMemory(allocator, allocation);
 }

@@ -308,7 +308,7 @@ ENABLE_WARNINGS()"""
         "FreeMemory",
 
         VmaAllocator("allocator"),
-        nullable..VmaAllocation.const("allocation")
+        nullable..VmaAllocation("allocation")
     )
 
     void(
