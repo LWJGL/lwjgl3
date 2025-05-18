@@ -518,6 +518,7 @@
             <compileBinding binding="remotery"/>
             <compileBinding binding="rpmalloc"/>
             <compileBinding binding="shaderc"/>
+            <compileBinding binding="spng"/>
             <compileBinding binding="spvc"/>
             <compileBinding binding="stb"/>
             <compileBinding binding="tinyexr"/>
@@ -855,6 +856,7 @@
             <include name="org/lwjgl/demo/util/nfd/**" if:set="test.nfd"/>
             <include name="org/lwjgl/demo/util/par/**" if:set="test.par"/>
             <include name="org/lwjgl/demo/util/remotery/**" if:true="${binding.remotery}"/>
+            <include name="org/lwjgl/demo/util/spng/**" if:true="${binding.spng}"/>
             <include name="org/lwjgl/demo/util/tinyexr/**" if:set="test.tinyexr"/>
             <include name="org/lwjgl/demo/util/tinyfd/**" if:set="test.tinyfd"/>
             <include name="org/lwjgl/demo/util/xxhash/**" if:true="${binding.xxhash}"/>
@@ -1848,6 +1850,9 @@
 
         <!-- shaderc -->
         <release-module name="shaderc" native-library="shaderc" title="Shaderc" if:true="${binding.shaderc}"/>
+
+        <!-- spng -->
+        <release-module name="spng" native-library="lwjgl_spng" title="spng" if:true="${binding.spng}"/>
 
         <!-- SPIRV-Cross -->
         <release-module name="spvc" native-library="spirv-cross" title="SPIRV-Cross" if:true="${binding.spvc}"/>

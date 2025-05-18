@@ -39,6 +39,7 @@
     <orderEntry type="module" module-name="templates.rpmalloc" />
     <orderEntry type="module" module-name="templates.sdl" />
     <orderEntry type="module" module-name="templates.shaderc" />
+    <orderEntry type="module" module-name="templates.spng" />
     <orderEntry type="module" module-name="templates.spvc" />
     <orderEntry type="module" module-name="templates.stb" />
     <orderEntry type="module" module-name="templates.tinyexr" />

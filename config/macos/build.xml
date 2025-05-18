@@ -265,6 +265,15 @@
         <!-- rpmalloc -->
         <build_simple module="rpmalloc"/>
 
+        <!-- spng -->
+        <build module="spng" simple="true" if:true="${binding.spng}">
+            <source>
+                <arg value="-I${module.lwjgl.rel}/core/src/main/c/dependencies/miniz"/>
+                <arg value="-msse4.1" if:set="build.arch.x64"/>
+                <fileset dir="." includes="${module.lwjgl}/core/src/main/c/dependencies/miniz/*.c"/>
+            </source>
+        </build>
+
         <!-- stb -->
         <build_simple module="stb"/>
 
@@ -273,12 +282,12 @@
             <beforeCompile>
                 <compile lang="c++">
                     <arg value="-I${src.main.rel}"/>
+                    <arg value="-I${module.lwjgl.rel}/core/src/main/c/dependencies/miniz"/>
                     <fileset dir="." includes="${src.main}/*.cc"/>
                     <fileset dir="." includes="${src.generated}/*.cpp"/>
                 </compile>
                 <compile>
-                    <arg value="-I${src.main.rel}"/>
-                    <fileset dir="." includes="${src.main}/miniz.c"/>
+                    <fileset dir="." includes="${module.lwjgl}/core/src/main/c/dependencies/miniz/*.c"/>
                 </compile>
             </beforeCompile>
         </build>

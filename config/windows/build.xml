@@ -310,6 +310,15 @@ EXPORTS
             </linkargs>
         </build>
 
+        <build module="spng" simple="true" if:true="${binding.spng}">
+            <compileargs>
+                <arg value="/I${module.lwjgl}\core\src\main\c\dependencies\miniz"/>
+            </compileargs>
+            <source>
+                <fileset dir="." includes="${module.lwjgl}\core\src\main\c\dependencies\miniz\*.c"/>
+            </source>
+        </build>
+
         <!-- stb -->
         <build_simple module="stb"/>
 
@@ -318,7 +327,10 @@ EXPORTS
             <beforeCompile>
                 <compile>
                     <arg value="/I${src.main}"/>
+                    <arg value="/I${module.lwjgl}\core\src\main\c\dependencies\miniz"/>
+
                     <fileset dir="." includes="${src.main}/*"/>
+                    <fileset dir="." includes="${module.lwjgl}\core\src\main\c\dependencies\miniz\*.c"/>
                 </compile>
             </beforeCompile>
         </build>

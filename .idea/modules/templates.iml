@@ -100,6 +100,9 @@
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/shaderc/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/shaderc/src/templates/kotlin" isTestSource="false" />
     </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/spng/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/spng/src/templates/kotlin" isTestSource="false" />
+    </content>
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/spvc/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/spvc/src/templates/kotlin" isTestSource="false" />
     </content>
