@@ -55,6 +55,7 @@
     <orderEntry type="module" module-name="lwjgl.rpmalloc" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.sdl" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.shaderc" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.spng" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.spvc" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.stb" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.tinyexr" scope="TEST" />

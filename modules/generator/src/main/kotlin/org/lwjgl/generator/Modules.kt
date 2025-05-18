@@ -689,6 +689,15 @@ git branch -D @{-1}""")}"""}()}
         """,
         arrayOverloads = false
     ),
+    SPNG(
+        "spng",
+        "org.lwjgl.util.spng",
+        """
+        libspbg (simple png) is a C library for reading and writing Portable Network Graphics (PNG) format files with a focus on security and easy of use.
+        """,
+        library = JNILibrary.create("LibSPNG", setupAllocator = true),
+        arrayOverloads = false
+    ),
     SPVC(
         "spvc",
         "org.lwjgl.util.spvc",
