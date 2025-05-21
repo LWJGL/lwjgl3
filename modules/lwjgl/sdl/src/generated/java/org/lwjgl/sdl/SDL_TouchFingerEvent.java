@@ -109,9 +109,6 @@ public class SDL_TouchFingerEvent extends Struct<SDL_TouchFingerEvent> implement
     /** @return the value of the {@code type} field. */
     @NativeType("SDL_EventType")
     public int type() { return ntype(address()); }
-    /** @return the value of the {@code reserved} field. */
-    @NativeType("Uint32")
-    public int reserved() { return nreserved(address()); }
     /** @return the value of the {@code timestamp} field. */
     @NativeType("Uint64")
     public long timestamp() { return ntimestamp(address()); }
@@ -137,8 +134,6 @@ public class SDL_TouchFingerEvent extends Struct<SDL_TouchFingerEvent> implement
 
     /** Sets the specified value to the {@code type} field. */
     public SDL_TouchFingerEvent type(@NativeType("SDL_EventType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code reserved} field. */
-    public SDL_TouchFingerEvent reserved(@NativeType("Uint32") int value) { nreserved(address(), value); return this; }
     /** Sets the specified value to the {@code timestamp} field. */
     public SDL_TouchFingerEvent timestamp(@NativeType("Uint64") long value) { ntimestamp(address(), value); return this; }
     /** Sets the specified value to the {@code touchID} field. */
@@ -161,7 +156,6 @@ public class SDL_TouchFingerEvent extends Struct<SDL_TouchFingerEvent> implement
     /** Initializes this struct with the specified values. */
     public SDL_TouchFingerEvent set(
         int type,
-        int reserved,
         long timestamp,
         long touchID,
         long fingerID,
@@ -173,7 +167,6 @@ public class SDL_TouchFingerEvent extends Struct<SDL_TouchFingerEvent> implement
         int windowID
     ) {
         type(type);
-        reserved(reserved);
         timestamp(timestamp);
         touchID(touchID);
         fingerID(fingerID);
@@ -312,7 +305,6 @@ public class SDL_TouchFingerEvent extends Struct<SDL_TouchFingerEvent> implement
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_TouchFingerEvent.TYPE); }
-    /** Unsafe version of {@link #reserved}. */
     public static int nreserved(long struct) { return memGetInt(struct + SDL_TouchFingerEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_TouchFingerEvent.TIMESTAMP); }
@@ -335,7 +327,6 @@ public class SDL_TouchFingerEvent extends Struct<SDL_TouchFingerEvent> implement
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_TouchFingerEvent.TYPE, value); }
-    /** Unsafe version of {@link #reserved(int) reserved}. */
     public static void nreserved(long struct, int value) { memPutInt(struct + SDL_TouchFingerEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_TouchFingerEvent.TIMESTAMP, value); }
@@ -402,9 +393,6 @@ public class SDL_TouchFingerEvent extends Struct<SDL_TouchFingerEvent> implement
         /** @return the value of the {@code type} field. */
         @NativeType("SDL_EventType")
         public int type() { return SDL_TouchFingerEvent.ntype(address()); }
-        /** @return the value of the {@code reserved} field. */
-        @NativeType("Uint32")
-        public int reserved() { return SDL_TouchFingerEvent.nreserved(address()); }
         /** @return the value of the {@code timestamp} field. */
         @NativeType("Uint64")
         public long timestamp() { return SDL_TouchFingerEvent.ntimestamp(address()); }
@@ -430,8 +418,6 @@ public class SDL_TouchFingerEvent extends Struct<SDL_TouchFingerEvent> implement
 
         /** Sets the specified value to the {@code type} field. */
         public SDL_TouchFingerEvent.Buffer type(@NativeType("SDL_EventType") int value) { SDL_TouchFingerEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code reserved} field. */
-        public SDL_TouchFingerEvent.Buffer reserved(@NativeType("Uint32") int value) { SDL_TouchFingerEvent.nreserved(address(), value); return this; }
         /** Sets the specified value to the {@code timestamp} field. */
         public SDL_TouchFingerEvent.Buffer timestamp(@NativeType("Uint64") long value) { SDL_TouchFingerEvent.ntimestamp(address(), value); return this; }
         /** Sets the specified value to the {@code touchID} field. */

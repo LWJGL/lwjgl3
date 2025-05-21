@@ -97,9 +97,6 @@ public class SDL_JoyHatEvent extends Struct<SDL_JoyHatEvent> implements NativeRe
     /** @return the value of the {@code type} field. */
     @NativeType("SDL_EventType")
     public int type() { return ntype(address()); }
-    /** @return the value of the {@code reserved} field. */
-    @NativeType("Uint32")
-    public int reserved() { return nreserved(address()); }
     /** @return the value of the {@code timestamp} field. */
     @NativeType("Uint64")
     public long timestamp() { return ntimestamp(address()); }
@@ -115,8 +112,6 @@ public class SDL_JoyHatEvent extends Struct<SDL_JoyHatEvent> implements NativeRe
 
     /** Sets the specified value to the {@code type} field. */
     public SDL_JoyHatEvent type(@NativeType("SDL_EventType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code reserved} field. */
-    public SDL_JoyHatEvent reserved(@NativeType("Uint32") int value) { nreserved(address(), value); return this; }
     /** Sets the specified value to the {@code timestamp} field. */
     public SDL_JoyHatEvent timestamp(@NativeType("Uint64") long value) { ntimestamp(address(), value); return this; }
     /** Sets the specified value to the {@code which} field. */
@@ -129,14 +124,12 @@ public class SDL_JoyHatEvent extends Struct<SDL_JoyHatEvent> implements NativeRe
     /** Initializes this struct with the specified values. */
     public SDL_JoyHatEvent set(
         int type,
-        int reserved,
         long timestamp,
         int which,
         byte hat,
         byte value
     ) {
         type(type);
-        reserved(reserved);
         timestamp(timestamp);
         which(which);
         hat(hat);
@@ -270,7 +263,6 @@ public class SDL_JoyHatEvent extends Struct<SDL_JoyHatEvent> implements NativeRe
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_JoyHatEvent.TYPE); }
-    /** Unsafe version of {@link #reserved}. */
     public static int nreserved(long struct) { return memGetInt(struct + SDL_JoyHatEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_JoyHatEvent.TIMESTAMP); }
@@ -285,7 +277,6 @@ public class SDL_JoyHatEvent extends Struct<SDL_JoyHatEvent> implements NativeRe
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_JoyHatEvent.TYPE, value); }
-    /** Unsafe version of {@link #reserved(int) reserved}. */
     public static void nreserved(long struct, int value) { memPutInt(struct + SDL_JoyHatEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_JoyHatEvent.TIMESTAMP, value); }
@@ -344,9 +335,6 @@ public class SDL_JoyHatEvent extends Struct<SDL_JoyHatEvent> implements NativeRe
         /** @return the value of the {@code type} field. */
         @NativeType("SDL_EventType")
         public int type() { return SDL_JoyHatEvent.ntype(address()); }
-        /** @return the value of the {@code reserved} field. */
-        @NativeType("Uint32")
-        public int reserved() { return SDL_JoyHatEvent.nreserved(address()); }
         /** @return the value of the {@code timestamp} field. */
         @NativeType("Uint64")
         public long timestamp() { return SDL_JoyHatEvent.ntimestamp(address()); }
@@ -362,8 +350,6 @@ public class SDL_JoyHatEvent extends Struct<SDL_JoyHatEvent> implements NativeRe
 
         /** Sets the specified value to the {@code type} field. */
         public SDL_JoyHatEvent.Buffer type(@NativeType("SDL_EventType") int value) { SDL_JoyHatEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code reserved} field. */
-        public SDL_JoyHatEvent.Buffer reserved(@NativeType("Uint32") int value) { SDL_JoyHatEvent.nreserved(address(), value); return this; }
         /** Sets the specified value to the {@code timestamp} field. */
         public SDL_JoyHatEvent.Buffer timestamp(@NativeType("Uint64") long value) { SDL_JoyHatEvent.ntimestamp(address(), value); return this; }
         /** Sets the specified value to the {@code which} field. */

@@ -1547,13 +1547,13 @@ val SDL_EventType = "SDL_EventType".enumType
 
 val SDL_CommonEvent = struct(Module.SDL, "SDL_CommonEvent") {
     Uint32("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
 }
 
 val SDL_DisplayEvent = struct(Module.SDL, "SDL_DisplayEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_DisplayID("displayID")
     Sint32("data1")
@@ -1562,7 +1562,7 @@ val SDL_DisplayEvent = struct(Module.SDL, "SDL_DisplayEvent") {
 
 val SDL_WindowEvent = struct(Module.SDL, "SDL_WindowEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_WindowID("windowID")
     Sint32("data1")
@@ -1571,14 +1571,14 @@ val SDL_WindowEvent = struct(Module.SDL, "SDL_WindowEvent") {
 
 val SDL_KeyboardDeviceEvent = struct(Module.SDL, "SDL_KeyboardDeviceEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_KeyboardID("which")
 }
 
 val SDL_KeyboardEvent = struct(Module.SDL, "SDL_KeyboardEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_WindowID("windowID")
     SDL_KeyboardID("which")
@@ -1592,7 +1592,7 @@ val SDL_KeyboardEvent = struct(Module.SDL, "SDL_KeyboardEvent") {
 
 val SDL_TextEditingEvent = struct(Module.SDL, "SDL_TextEditingEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_WindowID("windowID")
     nullable..charUTF8.const.p("text")
@@ -1602,7 +1602,7 @@ val SDL_TextEditingEvent = struct(Module.SDL, "SDL_TextEditingEvent") {
 
 val SDL_TextEditingCandidatesEvent = struct(Module.SDL, "SDL_TextEditingCandidatesEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_WindowID("windowID")
     nullable..charUTF8.const.p.const.p("candidates")
@@ -1616,7 +1616,7 @@ val SDL_TextEditingCandidatesEvent = struct(Module.SDL, "SDL_TextEditingCandidat
 
 val SDL_TextInputEvent = struct(Module.SDL, "SDL_TextInputEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_WindowID("windowID")
     nullable..charUTF8.const.p("text")
@@ -1624,14 +1624,14 @@ val SDL_TextInputEvent = struct(Module.SDL, "SDL_TextInputEvent") {
 
 val SDL_MouseDeviceEvent = struct(Module.SDL, "SDL_MouseDeviceEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_MouseID("which")
 }
 
 val SDL_MouseMotionEvent = struct(Module.SDL, "SDL_MouseMotionEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_WindowID("windowID")
     SDL_MouseID("which")
@@ -1644,7 +1644,7 @@ val SDL_MouseMotionEvent = struct(Module.SDL, "SDL_MouseMotionEvent") {
 
 val SDL_MouseButtonEvent = struct(Module.SDL, "SDL_MouseButtonEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_WindowID("windowID")
     SDL_MouseID("which")
@@ -1658,7 +1658,7 @@ val SDL_MouseButtonEvent = struct(Module.SDL, "SDL_MouseButtonEvent") {
 
 val SDL_MouseWheelEvent = struct(Module.SDL, "SDL_MouseWheelEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_WindowID("windowID")
     SDL_MouseID("which")
@@ -1673,7 +1673,7 @@ val SDL_MouseWheelEvent = struct(Module.SDL, "SDL_MouseWheelEvent") {
 
 val SDL_JoyAxisEvent = struct(Module.SDL, "SDL_JoyAxisEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_JoystickID("which")
     Uint8("axis")
@@ -1686,7 +1686,7 @@ val SDL_JoyAxisEvent = struct(Module.SDL, "SDL_JoyAxisEvent") {
 
 val SDL_JoyBallEvent = struct(Module.SDL, "SDL_JoyBallEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_JoystickID("which")
     Uint8("ball")
@@ -1699,7 +1699,7 @@ val SDL_JoyBallEvent = struct(Module.SDL, "SDL_JoyBallEvent") {
 
 val SDL_JoyHatEvent = struct(Module.SDL, "SDL_JoyHatEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_JoystickID("which")
     Uint8("hat")
@@ -1710,7 +1710,7 @@ val SDL_JoyHatEvent = struct(Module.SDL, "SDL_JoyHatEvent") {
 
 val SDL_JoyButtonEvent = struct(Module.SDL, "SDL_JoyButtonEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_JoystickID("which")
     Uint8("button")
@@ -1721,14 +1721,14 @@ val SDL_JoyButtonEvent = struct(Module.SDL, "SDL_JoyButtonEvent") {
 
 val SDL_JoyDeviceEvent = struct(Module.SDL, "SDL_JoyDeviceEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_JoystickID("which")
 }
 
 val SDL_JoyBatteryEvent = struct(Module.SDL, "SDL_JoyBatteryEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_JoystickID("which")
     SDL_PowerState("state")
@@ -1737,7 +1737,7 @@ val SDL_JoyBatteryEvent = struct(Module.SDL, "SDL_JoyBatteryEvent") {
 
 val SDL_GamepadAxisEvent = struct(Module.SDL, "SDL_GamepadAxisEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_JoystickID("which")
     Uint8("axis")
@@ -1750,7 +1750,7 @@ val SDL_GamepadAxisEvent = struct(Module.SDL, "SDL_GamepadAxisEvent") {
 
 val SDL_GamepadButtonEvent = struct(Module.SDL, "SDL_GamepadButtonEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_JoystickID("which")
     Uint8("button")
@@ -1761,14 +1761,14 @@ val SDL_GamepadButtonEvent = struct(Module.SDL, "SDL_GamepadButtonEvent") {
 
 val SDL_GamepadDeviceEvent = struct(Module.SDL, "SDL_GamepadDeviceEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_JoystickID("which")
 }
 
 val SDL_GamepadTouchpadEvent = struct(Module.SDL, "SDL_GamepadTouchpadEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_JoystickID("which")
     Sint32("touchpad")
@@ -1780,7 +1780,7 @@ val SDL_GamepadTouchpadEvent = struct(Module.SDL, "SDL_GamepadTouchpadEvent") {
 
 val SDL_GamepadSensorEvent = struct(Module.SDL, "SDL_GamepadSensorEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_JoystickID("which")
     Sint32("sensor")
@@ -1790,7 +1790,7 @@ val SDL_GamepadSensorEvent = struct(Module.SDL, "SDL_GamepadSensorEvent") {
 
 val SDL_AudioDeviceEvent = struct(Module.SDL, "SDL_AudioDeviceEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_AudioDeviceID("which")
     bool("recording")
@@ -1801,21 +1801,21 @@ val SDL_AudioDeviceEvent = struct(Module.SDL, "SDL_AudioDeviceEvent") {
 
 val SDL_CameraDeviceEvent = struct(Module.SDL, "SDL_CameraDeviceEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_CameraID("which")
 }
 
 val SDL_RenderEvent = struct(Module.SDL, "SDL_RenderEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_WindowID("windowID")
 }
 
 val SDL_TouchFingerEvent = struct(Module.SDL, "SDL_TouchFingerEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_TouchID("touchID")
     SDL_FingerID("fingerID")
@@ -1829,7 +1829,7 @@ val SDL_TouchFingerEvent = struct(Module.SDL, "SDL_TouchFingerEvent") {
 
 val SDL_PenProximityEvent = struct(Module.SDL, "SDL_PenProximityEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_WindowID("windowID")
     SDL_PenID("which")
@@ -1837,7 +1837,7 @@ val SDL_PenProximityEvent = struct(Module.SDL, "SDL_PenProximityEvent") {
 
 val SDL_PenMotionEvent = struct(Module.SDL, "SDL_PenMotionEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_WindowID("windowID")
     SDL_PenID("which")
@@ -1848,7 +1848,7 @@ val SDL_PenMotionEvent = struct(Module.SDL, "SDL_PenMotionEvent") {
 
 val SDL_PenTouchEvent = struct(Module.SDL, "SDL_PenTouchEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_WindowID("windowID")
     SDL_PenID("which")
@@ -1861,7 +1861,7 @@ val SDL_PenTouchEvent = struct(Module.SDL, "SDL_PenTouchEvent") {
 
 val SDL_PenButtonEvent = struct(Module.SDL, "SDL_PenButtonEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_WindowID("windowID")
     SDL_PenID("which")
@@ -1874,7 +1874,7 @@ val SDL_PenButtonEvent = struct(Module.SDL, "SDL_PenButtonEvent") {
 
 val SDL_PenAxisEvent = struct(Module.SDL, "SDL_PenAxisEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_WindowID("windowID")
     SDL_PenID("which")
@@ -1887,7 +1887,7 @@ val SDL_PenAxisEvent = struct(Module.SDL, "SDL_PenAxisEvent") {
 
 val SDL_DropEvent = struct(Module.SDL, "SDL_DropEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_WindowID("windowID")
     float("x")
@@ -1898,7 +1898,7 @@ val SDL_DropEvent = struct(Module.SDL, "SDL_DropEvent") {
 
 val SDL_ClipboardEvent = struct(Module.SDL, "SDL_ClipboardEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     bool("owner")
     AutoSize("mime_types")..Sint32("num_mime_types")
@@ -1907,7 +1907,7 @@ val SDL_ClipboardEvent = struct(Module.SDL, "SDL_ClipboardEvent") {
 
 val SDL_SensorEvent = struct(Module.SDL, "SDL_SensorEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_SensorID("which")
     float("data")[6]
@@ -1916,13 +1916,13 @@ val SDL_SensorEvent = struct(Module.SDL, "SDL_SensorEvent") {
 
 val SDL_QuitEvent = struct(Module.SDL, "SDL_QuitEvent") {
     SDL_EventType("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
 }
 
 val SDL_UserEvent = struct(Module.SDL, "SDL_UserEvent") {
     Uint32("type")
-    Uint32("reserved")
+    Uint32("reserved").private()
     Uint64("timestamp")
     SDL_WindowID("windowID")
     Sint32("code")

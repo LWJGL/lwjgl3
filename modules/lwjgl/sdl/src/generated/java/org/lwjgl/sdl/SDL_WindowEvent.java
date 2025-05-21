@@ -89,9 +89,6 @@ public class SDL_WindowEvent extends Struct<SDL_WindowEvent> implements NativeRe
     /** @return the value of the {@code type} field. */
     @NativeType("SDL_EventType")
     public int type() { return ntype(address()); }
-    /** @return the value of the {@code reserved} field. */
-    @NativeType("Uint32")
-    public int reserved() { return nreserved(address()); }
     /** @return the value of the {@code timestamp} field. */
     @NativeType("Uint64")
     public long timestamp() { return ntimestamp(address()); }
@@ -107,8 +104,6 @@ public class SDL_WindowEvent extends Struct<SDL_WindowEvent> implements NativeRe
 
     /** Sets the specified value to the {@code type} field. */
     public SDL_WindowEvent type(@NativeType("SDL_EventType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code reserved} field. */
-    public SDL_WindowEvent reserved(@NativeType("Uint32") int value) { nreserved(address(), value); return this; }
     /** Sets the specified value to the {@code timestamp} field. */
     public SDL_WindowEvent timestamp(@NativeType("Uint64") long value) { ntimestamp(address(), value); return this; }
     /** Sets the specified value to the {@code windowID} field. */
@@ -121,14 +116,12 @@ public class SDL_WindowEvent extends Struct<SDL_WindowEvent> implements NativeRe
     /** Initializes this struct with the specified values. */
     public SDL_WindowEvent set(
         int type,
-        int reserved,
         long timestamp,
         int windowID,
         int data1,
         int data2
     ) {
         type(type);
-        reserved(reserved);
         timestamp(timestamp);
         windowID(windowID);
         data1(data1);
@@ -262,7 +255,6 @@ public class SDL_WindowEvent extends Struct<SDL_WindowEvent> implements NativeRe
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_WindowEvent.TYPE); }
-    /** Unsafe version of {@link #reserved}. */
     public static int nreserved(long struct) { return memGetInt(struct + SDL_WindowEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_WindowEvent.TIMESTAMP); }
@@ -275,7 +267,6 @@ public class SDL_WindowEvent extends Struct<SDL_WindowEvent> implements NativeRe
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_WindowEvent.TYPE, value); }
-    /** Unsafe version of {@link #reserved(int) reserved}. */
     public static void nreserved(long struct, int value) { memPutInt(struct + SDL_WindowEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_WindowEvent.TIMESTAMP, value); }
@@ -332,9 +323,6 @@ public class SDL_WindowEvent extends Struct<SDL_WindowEvent> implements NativeRe
         /** @return the value of the {@code type} field. */
         @NativeType("SDL_EventType")
         public int type() { return SDL_WindowEvent.ntype(address()); }
-        /** @return the value of the {@code reserved} field. */
-        @NativeType("Uint32")
-        public int reserved() { return SDL_WindowEvent.nreserved(address()); }
         /** @return the value of the {@code timestamp} field. */
         @NativeType("Uint64")
         public long timestamp() { return SDL_WindowEvent.ntimestamp(address()); }
@@ -350,8 +338,6 @@ public class SDL_WindowEvent extends Struct<SDL_WindowEvent> implements NativeRe
 
         /** Sets the specified value to the {@code type} field. */
         public SDL_WindowEvent.Buffer type(@NativeType("SDL_EventType") int value) { SDL_WindowEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code reserved} field. */
-        public SDL_WindowEvent.Buffer reserved(@NativeType("Uint32") int value) { SDL_WindowEvent.nreserved(address(), value); return this; }
         /** Sets the specified value to the {@code timestamp} field. */
         public SDL_WindowEvent.Buffer timestamp(@NativeType("Uint64") long value) { SDL_WindowEvent.ntimestamp(address(), value); return this; }
         /** Sets the specified value to the {@code windowID} field. */

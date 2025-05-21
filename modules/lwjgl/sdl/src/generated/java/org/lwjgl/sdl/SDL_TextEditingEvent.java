@@ -94,9 +94,6 @@ public class SDL_TextEditingEvent extends Struct<SDL_TextEditingEvent> implement
     /** @return the value of the {@code type} field. */
     @NativeType("SDL_EventType")
     public int type() { return ntype(address()); }
-    /** @return the value of the {@code reserved} field. */
-    @NativeType("Uint32")
-    public int reserved() { return nreserved(address()); }
     /** @return the value of the {@code timestamp} field. */
     @NativeType("Uint64")
     public long timestamp() { return ntimestamp(address()); }
@@ -118,8 +115,6 @@ public class SDL_TextEditingEvent extends Struct<SDL_TextEditingEvent> implement
 
     /** Sets the specified value to the {@code type} field. */
     public SDL_TextEditingEvent type(@NativeType("SDL_EventType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code reserved} field. */
-    public SDL_TextEditingEvent reserved(@NativeType("Uint32") int value) { nreserved(address(), value); return this; }
     /** Sets the specified value to the {@code timestamp} field. */
     public SDL_TextEditingEvent timestamp(@NativeType("Uint64") long value) { ntimestamp(address(), value); return this; }
     /** Sets the specified value to the {@code windowID} field. */
@@ -134,7 +129,6 @@ public class SDL_TextEditingEvent extends Struct<SDL_TextEditingEvent> implement
     /** Initializes this struct with the specified values. */
     public SDL_TextEditingEvent set(
         int type,
-        int reserved,
         long timestamp,
         int windowID,
         @Nullable ByteBuffer text,
@@ -142,7 +136,6 @@ public class SDL_TextEditingEvent extends Struct<SDL_TextEditingEvent> implement
         int length
     ) {
         type(type);
-        reserved(reserved);
         timestamp(timestamp);
         windowID(windowID);
         text(text);
@@ -277,7 +270,6 @@ public class SDL_TextEditingEvent extends Struct<SDL_TextEditingEvent> implement
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_TextEditingEvent.TYPE); }
-    /** Unsafe version of {@link #reserved}. */
     public static int nreserved(long struct) { return memGetInt(struct + SDL_TextEditingEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_TextEditingEvent.TIMESTAMP); }
@@ -294,7 +286,6 @@ public class SDL_TextEditingEvent extends Struct<SDL_TextEditingEvent> implement
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_TextEditingEvent.TYPE, value); }
-    /** Unsafe version of {@link #reserved(int) reserved}. */
     public static void nreserved(long struct, int value) { memPutInt(struct + SDL_TextEditingEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_TextEditingEvent.TIMESTAMP, value); }
@@ -356,9 +347,6 @@ public class SDL_TextEditingEvent extends Struct<SDL_TextEditingEvent> implement
         /** @return the value of the {@code type} field. */
         @NativeType("SDL_EventType")
         public int type() { return SDL_TextEditingEvent.ntype(address()); }
-        /** @return the value of the {@code reserved} field. */
-        @NativeType("Uint32")
-        public int reserved() { return SDL_TextEditingEvent.nreserved(address()); }
         /** @return the value of the {@code timestamp} field. */
         @NativeType("Uint64")
         public long timestamp() { return SDL_TextEditingEvent.ntimestamp(address()); }
@@ -380,8 +368,6 @@ public class SDL_TextEditingEvent extends Struct<SDL_TextEditingEvent> implement
 
         /** Sets the specified value to the {@code type} field. */
         public SDL_TextEditingEvent.Buffer type(@NativeType("SDL_EventType") int value) { SDL_TextEditingEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code reserved} field. */
-        public SDL_TextEditingEvent.Buffer reserved(@NativeType("Uint32") int value) { SDL_TextEditingEvent.nreserved(address(), value); return this; }
         /** Sets the specified value to the {@code timestamp} field. */
         public SDL_TextEditingEvent.Buffer timestamp(@NativeType("Uint64") long value) { SDL_TextEditingEvent.ntimestamp(address(), value); return this; }
         /** Sets the specified value to the {@code windowID} field. */

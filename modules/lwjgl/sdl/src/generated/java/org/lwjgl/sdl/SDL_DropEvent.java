@@ -98,9 +98,6 @@ public class SDL_DropEvent extends Struct<SDL_DropEvent> implements NativeResour
     /** @return the value of the {@code type} field. */
     @NativeType("SDL_EventType")
     public int type() { return ntype(address()); }
-    /** @return the value of the {@code reserved} field. */
-    @NativeType("Uint32")
-    public int reserved() { return nreserved(address()); }
     /** @return the value of the {@code timestamp} field. */
     @NativeType("Uint64")
     public long timestamp() { return ntimestamp(address()); }
@@ -126,8 +123,6 @@ public class SDL_DropEvent extends Struct<SDL_DropEvent> implements NativeResour
 
     /** Sets the specified value to the {@code type} field. */
     public SDL_DropEvent type(@NativeType("SDL_EventType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code reserved} field. */
-    public SDL_DropEvent reserved(@NativeType("Uint32") int value) { nreserved(address(), value); return this; }
     /** Sets the specified value to the {@code timestamp} field. */
     public SDL_DropEvent timestamp(@NativeType("Uint64") long value) { ntimestamp(address(), value); return this; }
     /** Sets the specified value to the {@code windowID} field. */
@@ -144,7 +139,6 @@ public class SDL_DropEvent extends Struct<SDL_DropEvent> implements NativeResour
     /** Initializes this struct with the specified values. */
     public SDL_DropEvent set(
         int type,
-        int reserved,
         long timestamp,
         int windowID,
         float x,
@@ -153,7 +147,6 @@ public class SDL_DropEvent extends Struct<SDL_DropEvent> implements NativeResour
         @Nullable ByteBuffer data
     ) {
         type(type);
-        reserved(reserved);
         timestamp(timestamp);
         windowID(windowID);
         x(x);
@@ -289,7 +282,6 @@ public class SDL_DropEvent extends Struct<SDL_DropEvent> implements NativeResour
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_DropEvent.TYPE); }
-    /** Unsafe version of {@link #reserved}. */
     public static int nreserved(long struct) { return memGetInt(struct + SDL_DropEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_DropEvent.TIMESTAMP); }
@@ -310,7 +302,6 @@ public class SDL_DropEvent extends Struct<SDL_DropEvent> implements NativeResour
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_DropEvent.TYPE, value); }
-    /** Unsafe version of {@link #reserved(int) reserved}. */
     public static void nreserved(long struct, int value) { memPutInt(struct + SDL_DropEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_DropEvent.TIMESTAMP, value); }
@@ -377,9 +368,6 @@ public class SDL_DropEvent extends Struct<SDL_DropEvent> implements NativeResour
         /** @return the value of the {@code type} field. */
         @NativeType("SDL_EventType")
         public int type() { return SDL_DropEvent.ntype(address()); }
-        /** @return the value of the {@code reserved} field. */
-        @NativeType("Uint32")
-        public int reserved() { return SDL_DropEvent.nreserved(address()); }
         /** @return the value of the {@code timestamp} field. */
         @NativeType("Uint64")
         public long timestamp() { return SDL_DropEvent.ntimestamp(address()); }
@@ -405,8 +393,6 @@ public class SDL_DropEvent extends Struct<SDL_DropEvent> implements NativeResour
 
         /** Sets the specified value to the {@code type} field. */
         public SDL_DropEvent.Buffer type(@NativeType("SDL_EventType") int value) { SDL_DropEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code reserved} field. */
-        public SDL_DropEvent.Buffer reserved(@NativeType("Uint32") int value) { SDL_DropEvent.nreserved(address(), value); return this; }
         /** Sets the specified value to the {@code timestamp} field. */
         public SDL_DropEvent.Buffer timestamp(@NativeType("Uint64") long value) { SDL_DropEvent.ntimestamp(address(), value); return this; }
         /** Sets the specified value to the {@code windowID} field. */

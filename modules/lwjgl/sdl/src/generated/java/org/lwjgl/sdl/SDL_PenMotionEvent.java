@@ -97,9 +97,6 @@ public class SDL_PenMotionEvent extends Struct<SDL_PenMotionEvent> implements Na
     /** @return the value of the {@code type} field. */
     @NativeType("SDL_EventType")
     public int type() { return ntype(address()); }
-    /** @return the value of the {@code reserved} field. */
-    @NativeType("Uint32")
-    public int reserved() { return nreserved(address()); }
     /** @return the value of the {@code timestamp} field. */
     @NativeType("Uint64")
     public long timestamp() { return ntimestamp(address()); }
@@ -119,8 +116,6 @@ public class SDL_PenMotionEvent extends Struct<SDL_PenMotionEvent> implements Na
 
     /** Sets the specified value to the {@code type} field. */
     public SDL_PenMotionEvent type(@NativeType("SDL_EventType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code reserved} field. */
-    public SDL_PenMotionEvent reserved(@NativeType("Uint32") int value) { nreserved(address(), value); return this; }
     /** Sets the specified value to the {@code timestamp} field. */
     public SDL_PenMotionEvent timestamp(@NativeType("Uint64") long value) { ntimestamp(address(), value); return this; }
     /** Sets the specified value to the {@code windowID} field. */
@@ -137,7 +132,6 @@ public class SDL_PenMotionEvent extends Struct<SDL_PenMotionEvent> implements Na
     /** Initializes this struct with the specified values. */
     public SDL_PenMotionEvent set(
         int type,
-        int reserved,
         long timestamp,
         int windowID,
         int which,
@@ -146,7 +140,6 @@ public class SDL_PenMotionEvent extends Struct<SDL_PenMotionEvent> implements Na
         float y
     ) {
         type(type);
-        reserved(reserved);
         timestamp(timestamp);
         windowID(windowID);
         which(which);
@@ -282,7 +275,6 @@ public class SDL_PenMotionEvent extends Struct<SDL_PenMotionEvent> implements Na
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_PenMotionEvent.TYPE); }
-    /** Unsafe version of {@link #reserved}. */
     public static int nreserved(long struct) { return memGetInt(struct + SDL_PenMotionEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_PenMotionEvent.TIMESTAMP); }
@@ -299,7 +291,6 @@ public class SDL_PenMotionEvent extends Struct<SDL_PenMotionEvent> implements Na
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_PenMotionEvent.TYPE, value); }
-    /** Unsafe version of {@link #reserved(int) reserved}. */
     public static void nreserved(long struct, int value) { memPutInt(struct + SDL_PenMotionEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_PenMotionEvent.TIMESTAMP, value); }
@@ -360,9 +351,6 @@ public class SDL_PenMotionEvent extends Struct<SDL_PenMotionEvent> implements Na
         /** @return the value of the {@code type} field. */
         @NativeType("SDL_EventType")
         public int type() { return SDL_PenMotionEvent.ntype(address()); }
-        /** @return the value of the {@code reserved} field. */
-        @NativeType("Uint32")
-        public int reserved() { return SDL_PenMotionEvent.nreserved(address()); }
         /** @return the value of the {@code timestamp} field. */
         @NativeType("Uint64")
         public long timestamp() { return SDL_PenMotionEvent.ntimestamp(address()); }
@@ -382,8 +370,6 @@ public class SDL_PenMotionEvent extends Struct<SDL_PenMotionEvent> implements Na
 
         /** Sets the specified value to the {@code type} field. */
         public SDL_PenMotionEvent.Buffer type(@NativeType("SDL_EventType") int value) { SDL_PenMotionEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code reserved} field. */
-        public SDL_PenMotionEvent.Buffer reserved(@NativeType("Uint32") int value) { SDL_PenMotionEvent.nreserved(address(), value); return this; }
         /** Sets the specified value to the {@code timestamp} field. */
         public SDL_PenMotionEvent.Buffer timestamp(@NativeType("Uint64") long value) { SDL_PenMotionEvent.ntimestamp(address(), value); return this; }
         /** Sets the specified value to the {@code windowID} field. */

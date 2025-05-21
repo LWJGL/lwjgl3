@@ -81,9 +81,6 @@ public class SDL_CameraDeviceEvent extends Struct<SDL_CameraDeviceEvent> impleme
     /** @return the value of the {@code type} field. */
     @NativeType("SDL_EventType")
     public int type() { return ntype(address()); }
-    /** @return the value of the {@code reserved} field. */
-    @NativeType("Uint32")
-    public int reserved() { return nreserved(address()); }
     /** @return the value of the {@code timestamp} field. */
     @NativeType("Uint64")
     public long timestamp() { return ntimestamp(address()); }
@@ -93,8 +90,6 @@ public class SDL_CameraDeviceEvent extends Struct<SDL_CameraDeviceEvent> impleme
 
     /** Sets the specified value to the {@code type} field. */
     public SDL_CameraDeviceEvent type(@NativeType("SDL_EventType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code reserved} field. */
-    public SDL_CameraDeviceEvent reserved(@NativeType("Uint32") int value) { nreserved(address(), value); return this; }
     /** Sets the specified value to the {@code timestamp} field. */
     public SDL_CameraDeviceEvent timestamp(@NativeType("Uint64") long value) { ntimestamp(address(), value); return this; }
     /** Sets the specified value to the {@code which} field. */
@@ -103,12 +98,10 @@ public class SDL_CameraDeviceEvent extends Struct<SDL_CameraDeviceEvent> impleme
     /** Initializes this struct with the specified values. */
     public SDL_CameraDeviceEvent set(
         int type,
-        int reserved,
         long timestamp,
         int which
     ) {
         type(type);
-        reserved(reserved);
         timestamp(timestamp);
         which(which);
 
@@ -240,7 +233,6 @@ public class SDL_CameraDeviceEvent extends Struct<SDL_CameraDeviceEvent> impleme
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_CameraDeviceEvent.TYPE); }
-    /** Unsafe version of {@link #reserved}. */
     public static int nreserved(long struct) { return memGetInt(struct + SDL_CameraDeviceEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_CameraDeviceEvent.TIMESTAMP); }
@@ -249,7 +241,6 @@ public class SDL_CameraDeviceEvent extends Struct<SDL_CameraDeviceEvent> impleme
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_CameraDeviceEvent.TYPE, value); }
-    /** Unsafe version of {@link #reserved(int) reserved}. */
     public static void nreserved(long struct, int value) { memPutInt(struct + SDL_CameraDeviceEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_CameraDeviceEvent.TIMESTAMP, value); }
@@ -302,9 +293,6 @@ public class SDL_CameraDeviceEvent extends Struct<SDL_CameraDeviceEvent> impleme
         /** @return the value of the {@code type} field. */
         @NativeType("SDL_EventType")
         public int type() { return SDL_CameraDeviceEvent.ntype(address()); }
-        /** @return the value of the {@code reserved} field. */
-        @NativeType("Uint32")
-        public int reserved() { return SDL_CameraDeviceEvent.nreserved(address()); }
         /** @return the value of the {@code timestamp} field. */
         @NativeType("Uint64")
         public long timestamp() { return SDL_CameraDeviceEvent.ntimestamp(address()); }
@@ -314,8 +302,6 @@ public class SDL_CameraDeviceEvent extends Struct<SDL_CameraDeviceEvent> impleme
 
         /** Sets the specified value to the {@code type} field. */
         public SDL_CameraDeviceEvent.Buffer type(@NativeType("SDL_EventType") int value) { SDL_CameraDeviceEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code reserved} field. */
-        public SDL_CameraDeviceEvent.Buffer reserved(@NativeType("Uint32") int value) { SDL_CameraDeviceEvent.nreserved(address(), value); return this; }
         /** Sets the specified value to the {@code timestamp} field. */
         public SDL_CameraDeviceEvent.Buffer timestamp(@NativeType("Uint64") long value) { SDL_CameraDeviceEvent.ntimestamp(address(), value); return this; }
         /** Sets the specified value to the {@code which} field. */

@@ -89,9 +89,6 @@ public class SDL_ClipboardEvent extends Struct<SDL_ClipboardEvent> implements Na
     /** @return the value of the {@code type} field. */
     @NativeType("SDL_EventType")
     public int type() { return ntype(address()); }
-    /** @return the value of the {@code reserved} field. */
-    @NativeType("Uint32")
-    public int reserved() { return nreserved(address()); }
     /** @return the value of the {@code timestamp} field. */
     @NativeType("Uint64")
     public long timestamp() { return ntimestamp(address()); }
@@ -107,8 +104,6 @@ public class SDL_ClipboardEvent extends Struct<SDL_ClipboardEvent> implements Na
 
     /** Sets the specified value to the {@code type} field. */
     public SDL_ClipboardEvent type(@NativeType("SDL_EventType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code reserved} field. */
-    public SDL_ClipboardEvent reserved(@NativeType("Uint32") int value) { nreserved(address(), value); return this; }
     /** Sets the specified value to the {@code timestamp} field. */
     public SDL_ClipboardEvent timestamp(@NativeType("Uint64") long value) { ntimestamp(address(), value); return this; }
     /** Sets the specified value to the {@code owner} field. */
@@ -121,14 +116,12 @@ public class SDL_ClipboardEvent extends Struct<SDL_ClipboardEvent> implements Na
     /** Initializes this struct with the specified values. */
     public SDL_ClipboardEvent set(
         int type,
-        int reserved,
         long timestamp,
         boolean owner,
         int num_mime_types,
         @Nullable PointerBuffer mime_types
     ) {
         type(type);
-        reserved(reserved);
         timestamp(timestamp);
         owner(owner);
         num_mime_types(num_mime_types);
@@ -262,7 +255,6 @@ public class SDL_ClipboardEvent extends Struct<SDL_ClipboardEvent> implements Na
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_ClipboardEvent.TYPE); }
-    /** Unsafe version of {@link #reserved}. */
     public static int nreserved(long struct) { return memGetInt(struct + SDL_ClipboardEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_ClipboardEvent.TIMESTAMP); }
@@ -275,7 +267,6 @@ public class SDL_ClipboardEvent extends Struct<SDL_ClipboardEvent> implements Na
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_ClipboardEvent.TYPE, value); }
-    /** Unsafe version of {@link #reserved(int) reserved}. */
     public static void nreserved(long struct, int value) { memPutInt(struct + SDL_ClipboardEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_ClipboardEvent.TIMESTAMP, value); }
@@ -332,9 +323,6 @@ public class SDL_ClipboardEvent extends Struct<SDL_ClipboardEvent> implements Na
         /** @return the value of the {@code type} field. */
         @NativeType("SDL_EventType")
         public int type() { return SDL_ClipboardEvent.ntype(address()); }
-        /** @return the value of the {@code reserved} field. */
-        @NativeType("Uint32")
-        public int reserved() { return SDL_ClipboardEvent.nreserved(address()); }
         /** @return the value of the {@code timestamp} field. */
         @NativeType("Uint64")
         public long timestamp() { return SDL_ClipboardEvent.ntimestamp(address()); }
@@ -350,8 +338,6 @@ public class SDL_ClipboardEvent extends Struct<SDL_ClipboardEvent> implements Na
 
         /** Sets the specified value to the {@code type} field. */
         public SDL_ClipboardEvent.Buffer type(@NativeType("SDL_EventType") int value) { SDL_ClipboardEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code reserved} field. */
-        public SDL_ClipboardEvent.Buffer reserved(@NativeType("Uint32") int value) { SDL_ClipboardEvent.nreserved(address(), value); return this; }
         /** Sets the specified value to the {@code timestamp} field. */
         public SDL_ClipboardEvent.Buffer timestamp(@NativeType("Uint64") long value) { SDL_ClipboardEvent.ntimestamp(address(), value); return this; }
         /** Sets the specified value to the {@code owner} field. */

@@ -94,9 +94,6 @@ public class SDL_GamepadSensorEvent extends Struct<SDL_GamepadSensorEvent> imple
     /** @return the value of the {@code type} field. */
     @NativeType("SDL_EventType")
     public int type() { return ntype(address()); }
-    /** @return the value of the {@code reserved} field. */
-    @NativeType("Uint32")
-    public int reserved() { return nreserved(address()); }
     /** @return the value of the {@code timestamp} field. */
     @NativeType("Uint64")
     public long timestamp() { return ntimestamp(address()); }
@@ -117,8 +114,6 @@ public class SDL_GamepadSensorEvent extends Struct<SDL_GamepadSensorEvent> imple
 
     /** Sets the specified value to the {@code type} field. */
     public SDL_GamepadSensorEvent type(@NativeType("SDL_EventType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code reserved} field. */
-    public SDL_GamepadSensorEvent reserved(@NativeType("Uint32") int value) { nreserved(address(), value); return this; }
     /** Sets the specified value to the {@code timestamp} field. */
     public SDL_GamepadSensorEvent timestamp(@NativeType("Uint64") long value) { ntimestamp(address(), value); return this; }
     /** Sets the specified value to the {@code which} field. */
@@ -135,7 +130,6 @@ public class SDL_GamepadSensorEvent extends Struct<SDL_GamepadSensorEvent> imple
     /** Initializes this struct with the specified values. */
     public SDL_GamepadSensorEvent set(
         int type,
-        int reserved,
         long timestamp,
         int which,
         int sensor,
@@ -143,7 +137,6 @@ public class SDL_GamepadSensorEvent extends Struct<SDL_GamepadSensorEvent> imple
         long sensor_timestamp
     ) {
         type(type);
-        reserved(reserved);
         timestamp(timestamp);
         which(which);
         sensor(sensor);
@@ -278,7 +271,6 @@ public class SDL_GamepadSensorEvent extends Struct<SDL_GamepadSensorEvent> imple
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_GamepadSensorEvent.TYPE); }
-    /** Unsafe version of {@link #reserved}. */
     public static int nreserved(long struct) { return memGetInt(struct + SDL_GamepadSensorEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_GamepadSensorEvent.TIMESTAMP); }
@@ -297,7 +289,6 @@ public class SDL_GamepadSensorEvent extends Struct<SDL_GamepadSensorEvent> imple
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_GamepadSensorEvent.TYPE, value); }
-    /** Unsafe version of {@link #reserved(int) reserved}. */
     public static void nreserved(long struct, int value) { memPutInt(struct + SDL_GamepadSensorEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_GamepadSensorEvent.TIMESTAMP, value); }
@@ -363,9 +354,6 @@ public class SDL_GamepadSensorEvent extends Struct<SDL_GamepadSensorEvent> imple
         /** @return the value of the {@code type} field. */
         @NativeType("SDL_EventType")
         public int type() { return SDL_GamepadSensorEvent.ntype(address()); }
-        /** @return the value of the {@code reserved} field. */
-        @NativeType("Uint32")
-        public int reserved() { return SDL_GamepadSensorEvent.nreserved(address()); }
         /** @return the value of the {@code timestamp} field. */
         @NativeType("Uint64")
         public long timestamp() { return SDL_GamepadSensorEvent.ntimestamp(address()); }
@@ -386,8 +374,6 @@ public class SDL_GamepadSensorEvent extends Struct<SDL_GamepadSensorEvent> imple
 
         /** Sets the specified value to the {@code type} field. */
         public SDL_GamepadSensorEvent.Buffer type(@NativeType("SDL_EventType") int value) { SDL_GamepadSensorEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code reserved} field. */
-        public SDL_GamepadSensorEvent.Buffer reserved(@NativeType("Uint32") int value) { SDL_GamepadSensorEvent.nreserved(address(), value); return this; }
         /** Sets the specified value to the {@code timestamp} field. */
         public SDL_GamepadSensorEvent.Buffer timestamp(@NativeType("Uint64") long value) { SDL_GamepadSensorEvent.ntimestamp(address(), value); return this; }
         /** Sets the specified value to the {@code which} field. */

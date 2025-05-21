@@ -89,9 +89,6 @@ public class SDL_JoyBatteryEvent extends Struct<SDL_JoyBatteryEvent> implements 
     /** @return the value of the {@code type} field. */
     @NativeType("SDL_EventType")
     public int type() { return ntype(address()); }
-    /** @return the value of the {@code reserved} field. */
-    @NativeType("Uint32")
-    public int reserved() { return nreserved(address()); }
     /** @return the value of the {@code timestamp} field. */
     @NativeType("Uint64")
     public long timestamp() { return ntimestamp(address()); }
@@ -106,8 +103,6 @@ public class SDL_JoyBatteryEvent extends Struct<SDL_JoyBatteryEvent> implements 
 
     /** Sets the specified value to the {@code type} field. */
     public SDL_JoyBatteryEvent type(@NativeType("SDL_EventType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code reserved} field. */
-    public SDL_JoyBatteryEvent reserved(@NativeType("Uint32") int value) { nreserved(address(), value); return this; }
     /** Sets the specified value to the {@code timestamp} field. */
     public SDL_JoyBatteryEvent timestamp(@NativeType("Uint64") long value) { ntimestamp(address(), value); return this; }
     /** Sets the specified value to the {@code which} field. */
@@ -120,14 +115,12 @@ public class SDL_JoyBatteryEvent extends Struct<SDL_JoyBatteryEvent> implements 
     /** Initializes this struct with the specified values. */
     public SDL_JoyBatteryEvent set(
         int type,
-        int reserved,
         long timestamp,
         int which,
         int state,
         int percent
     ) {
         type(type);
-        reserved(reserved);
         timestamp(timestamp);
         which(which);
         state(state);
@@ -261,7 +254,6 @@ public class SDL_JoyBatteryEvent extends Struct<SDL_JoyBatteryEvent> implements 
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_JoyBatteryEvent.TYPE); }
-    /** Unsafe version of {@link #reserved}. */
     public static int nreserved(long struct) { return memGetInt(struct + SDL_JoyBatteryEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_JoyBatteryEvent.TIMESTAMP); }
@@ -274,7 +266,6 @@ public class SDL_JoyBatteryEvent extends Struct<SDL_JoyBatteryEvent> implements 
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_JoyBatteryEvent.TYPE, value); }
-    /** Unsafe version of {@link #reserved(int) reserved}. */
     public static void nreserved(long struct, int value) { memPutInt(struct + SDL_JoyBatteryEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_JoyBatteryEvent.TIMESTAMP, value); }
@@ -331,9 +322,6 @@ public class SDL_JoyBatteryEvent extends Struct<SDL_JoyBatteryEvent> implements 
         /** @return the value of the {@code type} field. */
         @NativeType("SDL_EventType")
         public int type() { return SDL_JoyBatteryEvent.ntype(address()); }
-        /** @return the value of the {@code reserved} field. */
-        @NativeType("Uint32")
-        public int reserved() { return SDL_JoyBatteryEvent.nreserved(address()); }
         /** @return the value of the {@code timestamp} field. */
         @NativeType("Uint64")
         public long timestamp() { return SDL_JoyBatteryEvent.ntimestamp(address()); }
@@ -348,8 +336,6 @@ public class SDL_JoyBatteryEvent extends Struct<SDL_JoyBatteryEvent> implements 
 
         /** Sets the specified value to the {@code type} field. */
         public SDL_JoyBatteryEvent.Buffer type(@NativeType("SDL_EventType") int value) { SDL_JoyBatteryEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code reserved} field. */
-        public SDL_JoyBatteryEvent.Buffer reserved(@NativeType("Uint32") int value) { SDL_JoyBatteryEvent.nreserved(address(), value); return this; }
         /** Sets the specified value to the {@code timestamp} field. */
         public SDL_JoyBatteryEvent.Buffer timestamp(@NativeType("Uint64") long value) { SDL_JoyBatteryEvent.ntimestamp(address(), value); return this; }
         /** Sets the specified value to the {@code which} field. */

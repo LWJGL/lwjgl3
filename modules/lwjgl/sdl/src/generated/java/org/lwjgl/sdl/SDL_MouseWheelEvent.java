@@ -113,9 +113,6 @@ public class SDL_MouseWheelEvent extends Struct<SDL_MouseWheelEvent> implements 
     /** @return the value of the {@code type} field. */
     @NativeType("SDL_EventType")
     public int type() { return ntype(address()); }
-    /** @return the value of the {@code reserved} field. */
-    @NativeType("Uint32")
-    public int reserved() { return nreserved(address()); }
     /** @return the value of the {@code timestamp} field. */
     @NativeType("Uint64")
     public long timestamp() { return ntimestamp(address()); }
@@ -145,8 +142,6 @@ public class SDL_MouseWheelEvent extends Struct<SDL_MouseWheelEvent> implements 
 
     /** Sets the specified value to the {@code type} field. */
     public SDL_MouseWheelEvent type(@NativeType("SDL_EventType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code reserved} field. */
-    public SDL_MouseWheelEvent reserved(@NativeType("Uint32") int value) { nreserved(address(), value); return this; }
     /** Sets the specified value to the {@code timestamp} field. */
     public SDL_MouseWheelEvent timestamp(@NativeType("Uint64") long value) { ntimestamp(address(), value); return this; }
     /** Sets the specified value to the {@code windowID} field. */
@@ -171,7 +166,6 @@ public class SDL_MouseWheelEvent extends Struct<SDL_MouseWheelEvent> implements 
     /** Initializes this struct with the specified values. */
     public SDL_MouseWheelEvent set(
         int type,
-        int reserved,
         long timestamp,
         int windowID,
         int which,
@@ -184,7 +178,6 @@ public class SDL_MouseWheelEvent extends Struct<SDL_MouseWheelEvent> implements 
         int integer_y
     ) {
         type(type);
-        reserved(reserved);
         timestamp(timestamp);
         windowID(windowID);
         which(which);
@@ -324,7 +317,6 @@ public class SDL_MouseWheelEvent extends Struct<SDL_MouseWheelEvent> implements 
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_MouseWheelEvent.TYPE); }
-    /** Unsafe version of {@link #reserved}. */
     public static int nreserved(long struct) { return memGetInt(struct + SDL_MouseWheelEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_MouseWheelEvent.TIMESTAMP); }
@@ -349,7 +341,6 @@ public class SDL_MouseWheelEvent extends Struct<SDL_MouseWheelEvent> implements 
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_MouseWheelEvent.TYPE, value); }
-    /** Unsafe version of {@link #reserved(int) reserved}. */
     public static void nreserved(long struct, int value) { memPutInt(struct + SDL_MouseWheelEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_MouseWheelEvent.TIMESTAMP, value); }
@@ -418,9 +409,6 @@ public class SDL_MouseWheelEvent extends Struct<SDL_MouseWheelEvent> implements 
         /** @return the value of the {@code type} field. */
         @NativeType("SDL_EventType")
         public int type() { return SDL_MouseWheelEvent.ntype(address()); }
-        /** @return the value of the {@code reserved} field. */
-        @NativeType("Uint32")
-        public int reserved() { return SDL_MouseWheelEvent.nreserved(address()); }
         /** @return the value of the {@code timestamp} field. */
         @NativeType("Uint64")
         public long timestamp() { return SDL_MouseWheelEvent.ntimestamp(address()); }
@@ -450,8 +438,6 @@ public class SDL_MouseWheelEvent extends Struct<SDL_MouseWheelEvent> implements 
 
         /** Sets the specified value to the {@code type} field. */
         public SDL_MouseWheelEvent.Buffer type(@NativeType("SDL_EventType") int value) { SDL_MouseWheelEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code reserved} field. */
-        public SDL_MouseWheelEvent.Buffer reserved(@NativeType("Uint32") int value) { SDL_MouseWheelEvent.nreserved(address(), value); return this; }
         /** Sets the specified value to the {@code timestamp} field. */
         public SDL_MouseWheelEvent.Buffer timestamp(@NativeType("Uint64") long value) { SDL_MouseWheelEvent.ntimestamp(address(), value); return this; }
         /** Sets the specified value to the {@code windowID} field. */

@@ -90,9 +90,6 @@ public class SDL_SensorEvent extends Struct<SDL_SensorEvent> implements NativeRe
     /** @return the value of the {@code type} field. */
     @NativeType("SDL_EventType")
     public int type() { return ntype(address()); }
-    /** @return the value of the {@code reserved} field. */
-    @NativeType("Uint32")
-    public int reserved() { return nreserved(address()); }
     /** @return the value of the {@code timestamp} field. */
     @NativeType("Uint64")
     public long timestamp() { return ntimestamp(address()); }
@@ -110,8 +107,6 @@ public class SDL_SensorEvent extends Struct<SDL_SensorEvent> implements NativeRe
 
     /** Sets the specified value to the {@code type} field. */
     public SDL_SensorEvent type(@NativeType("SDL_EventType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code reserved} field. */
-    public SDL_SensorEvent reserved(@NativeType("Uint32") int value) { nreserved(address(), value); return this; }
     /** Sets the specified value to the {@code timestamp} field. */
     public SDL_SensorEvent timestamp(@NativeType("Uint64") long value) { ntimestamp(address(), value); return this; }
     /** Sets the specified value to the {@code which} field. */
@@ -126,14 +121,12 @@ public class SDL_SensorEvent extends Struct<SDL_SensorEvent> implements NativeRe
     /** Initializes this struct with the specified values. */
     public SDL_SensorEvent set(
         int type,
-        int reserved,
         long timestamp,
         int which,
         FloatBuffer data,
         long sensor_timestamp
     ) {
         type(type);
-        reserved(reserved);
         timestamp(timestamp);
         which(which);
         data(data);
@@ -267,7 +260,6 @@ public class SDL_SensorEvent extends Struct<SDL_SensorEvent> implements NativeRe
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_SensorEvent.TYPE); }
-    /** Unsafe version of {@link #reserved}. */
     public static int nreserved(long struct) { return memGetInt(struct + SDL_SensorEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_SensorEvent.TIMESTAMP); }
@@ -284,7 +276,6 @@ public class SDL_SensorEvent extends Struct<SDL_SensorEvent> implements NativeRe
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_SensorEvent.TYPE, value); }
-    /** Unsafe version of {@link #reserved(int) reserved}. */
     public static void nreserved(long struct, int value) { memPutInt(struct + SDL_SensorEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_SensorEvent.TIMESTAMP, value); }
@@ -348,9 +339,6 @@ public class SDL_SensorEvent extends Struct<SDL_SensorEvent> implements NativeRe
         /** @return the value of the {@code type} field. */
         @NativeType("SDL_EventType")
         public int type() { return SDL_SensorEvent.ntype(address()); }
-        /** @return the value of the {@code reserved} field. */
-        @NativeType("Uint32")
-        public int reserved() { return SDL_SensorEvent.nreserved(address()); }
         /** @return the value of the {@code timestamp} field. */
         @NativeType("Uint64")
         public long timestamp() { return SDL_SensorEvent.ntimestamp(address()); }
@@ -368,8 +356,6 @@ public class SDL_SensorEvent extends Struct<SDL_SensorEvent> implements NativeRe
 
         /** Sets the specified value to the {@code type} field. */
         public SDL_SensorEvent.Buffer type(@NativeType("SDL_EventType") int value) { SDL_SensorEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code reserved} field. */
-        public SDL_SensorEvent.Buffer reserved(@NativeType("Uint32") int value) { SDL_SensorEvent.nreserved(address(), value); return this; }
         /** Sets the specified value to the {@code timestamp} field. */
         public SDL_SensorEvent.Buffer timestamp(@NativeType("Uint64") long value) { SDL_SensorEvent.ntimestamp(address(), value); return this; }
         /** Sets the specified value to the {@code which} field. */
