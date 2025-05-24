@@ -141,8 +141,6 @@ public:
     void moveEndPoint(Point2 to);
     void splitInThirds(EdgeSegment *&part0, EdgeSegment *&part1, EdgeSegment *&part2) const;
 
-    void deconverge(int param, double amount);
-
 };
 
 }

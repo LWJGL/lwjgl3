@@ -474,4 +474,11 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "MSDF", prefixMetho
         msdf_transform.const.p("transform"),
         msdf_multichannel_config.const.p("config")
     )
+
+    int(
+        "render_sdf",
+
+        msdf_bitmap.p("output"),
+        msdf_bitmap.p("sdf")
+    )
 }

@@ -11,7 +11,9 @@ import org.lwjgl.util.msdfgen.*;
 
 import java.io.*;
 import java.nio.*;
+import java.util.*;
 
+import static java.lang.Math.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.stb.STBImageWrite.*;
 import static org.lwjgl.system.MemoryStack.*;
@@ -20,6 +22,9 @@ import static org.lwjgl.util.msdfgen.MSDFGen.*;
 import static org.lwjgl.util.msdfgen.MSDFGenExt.*;
 
 public class HelloMSDFGen {
+
+    private HelloMSDFGen() {
+    }
 
     public static void main(String[] args) throws IOException {
         ByteBuffer fontData = ioResourceToByteBuffer("demo/FiraSans.ttf", 512 * 1024);
@@ -55,21 +60,32 @@ public class HelloMSDFGen {
                     .upper(0.5 * 0.125))
             ));
 
+            MSDFGenBitmap output = bitmap;
+            /*
+            MSDFGenBitmap output = MSDFGenBitmap.calloc(stack);
+            check(msdf_bitmap_alloc(MSDF_BITMAP_TYPE_MSDF, 32, 32, output));
+
+            msdf_render_sdf(output, bitmap);
+            //*/
+
             IntBuffer pi = stack.mallocInt(1);
-            msdf_bitmap_get_channel_count(bitmap, pi);
+            msdf_bitmap_get_channel_count(output, pi);
             int channelCount = pi.get(0);
 
-            ByteBuffer pixels = getBitmapU8(stack, bitmap, channelCount);
+            ByteBuffer pixels = getBitmapU8(stack, output, channelCount);
+
+            //msdf_bitmap_free(output);
+            msdf_bitmap_free(bitmap);
 
             stbi_flip_vertically_on_write(true);
-            stbi_write_png("msdfgen.png", bitmap.width(), bitmap.height(), channelCount, pixels, 0);
+            stbi_write_png("msdfgen.png", output.width(), output.height(), channelCount, pixels, 0);
 
             memFree(pixels);
 
             nmsdf_ft_font_destroy(font);
             msdf_ft_deinit(ft);
 
-            msdf_ft_get_load_callback().free();
+            Objects.requireNonNull(msdf_ft_get_load_callback()).free();
         }
     }
 
@@ -82,14 +98,14 @@ public class HelloMSDFGen {
         check(msdf_bitmap_get_pixels(bitmap, pp));
         FloatBuffer pixels = memFloatBuffer(pp.get(0), (int)byteSize >> 2);
 
-        ByteBuffer data = memAlloc(bitmap.width() * bitmap.height() * channelCount);
-        for (int y = 0; y < bitmap.height(); y++) {
-            for (int x = 0; x < bitmap.width(); x++) {
-                int index = (y * bitmap.width() + x) * channelCount;
-                for (int c = 0; c < channelCount; c++) {
-                    data.put(index + c, (byte)(255.0f * pixels.get(index + c)));
-                }
-            }
+        ByteBuffer data = memAlloc(pixels.capacity());
+        for (int i = 0; i < pixels.capacity(); i++) {
+            // clamp to [0, 1] range
+            float v = max(0.0f, min(1.0f, pixels.get(i)));
+            // half-down rounding (this is what msdfgen does)
+            data.put(i, (byte)(~(int)(255.5f - 255.0f * v)));
+            // half-up rounding
+            //data.put(i, (byte)(255.f * v + 0.5f));
         }
 
         return data;

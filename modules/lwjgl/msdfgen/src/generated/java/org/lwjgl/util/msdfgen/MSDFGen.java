@@ -794,4 +794,14 @@ public class MSDFGen {
         return nmsdf_generate_mtsdf_with_config(output.address(), shape, transform.address(), config.address());
     }
 
+    // --- [ msdf_render_sdf ] ---
+
+    /** {@code int msdf_render_sdf(struct msdf_bitmap * output, struct msdf_bitmap * sdf)} */
+    public static native int nmsdf_render_sdf(long output, long sdf);
+
+    /** {@code int msdf_render_sdf(struct msdf_bitmap * output, struct msdf_bitmap * sdf)} */
+    public static int msdf_render_sdf(@NativeType("struct msdf_bitmap *") MSDFGenBitmap output, @NativeType("struct msdf_bitmap *") MSDFGenBitmap sdf) {
+        return nmsdf_render_sdf(output.address(), sdf.address());
+    }
+
 }

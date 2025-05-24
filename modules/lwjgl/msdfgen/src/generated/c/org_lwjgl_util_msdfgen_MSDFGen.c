@@ -391,4 +391,11 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1generate_1mtsd
     return (jint)msdf_generate_mtsdf_with_config(output, shape, transform, config);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1render_1sdf(JNIEnv *__env, jclass clazz, jlong outputAddress, jlong sdfAddress) {
+    struct msdf_bitmap *output = (struct msdf_bitmap *)(uintptr_t)outputAddress;
+    struct msdf_bitmap *sdf = (struct msdf_bitmap *)(uintptr_t)sdfAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_render_sdf(output, sdf);
+}
+
 EXTERN_C_EXIT

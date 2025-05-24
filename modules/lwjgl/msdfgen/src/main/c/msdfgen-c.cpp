@@ -823,4 +823,48 @@ MSDF_API int msdf_generate_mtsdf_with_config(msdf_bitmap_t* output,
                            actual_config);
     return MSDF_SUCCESS;
 }
+
+MSDF_API int msdf_render_sdf(msdf_bitmap_t* output, msdf_bitmap_t* sdf) {
+    if (output == nullptr || sdf == nullptr) {
+        return MSDF_ERR_INVALID_ARG;
+    }
+    switch (output->type) {
+        case MSDF_BITMAP_TYPE_SDF:
+        case MSDF_BITMAP_TYPE_PSDF:
+            switch (sdf->type) {
+                case MSDF_BITMAP_TYPE_SDF:
+                case MSDF_BITMAP_TYPE_PSDF:
+                    msdfgen::renderSDF(*static_cast<msdfgen::Bitmap<float>*>(output->handle), *static_cast<const msdfgen::Bitmap<float>*>(sdf->handle));
+                    return MSDF_SUCCESS;
+                case MSDF_BITMAP_TYPE_MSDF:
+                    msdfgen::renderSDF(*static_cast<msdfgen::Bitmap<float>*>(output->handle), *static_cast<const msdfgen::Bitmap<float, 3>*>(sdf->handle));
+                    return MSDF_SUCCESS;
+                case MSDF_BITMAP_TYPE_MTSDF:
+                    msdfgen::renderSDF(*static_cast<msdfgen::Bitmap<float>*>(output->handle), *static_cast<const msdfgen::Bitmap<float, 4>*>(sdf->handle));
+                    return MSDF_SUCCESS;
+            }
+            break;
+        case MSDF_BITMAP_TYPE_MSDF:
+            switch (sdf->type) {
+                case MSDF_BITMAP_TYPE_SDF:
+                case MSDF_BITMAP_TYPE_PSDF:
+                    msdfgen::renderSDF(*static_cast<msdfgen::Bitmap<float, 3>*>(output->handle), *static_cast<const msdfgen::Bitmap<float>*>(sdf->handle));
+                    return MSDF_SUCCESS;
+                case MSDF_BITMAP_TYPE_MSDF:
+                    msdfgen::renderSDF(*static_cast<msdfgen::Bitmap<float, 3>*>(output->handle), *static_cast<const msdfgen::Bitmap<float, 3>*>(sdf->handle));
+                    return MSDF_SUCCESS;
+            }
+            break;
+        case MSDF_BITMAP_TYPE_MTSDF:
+            switch (sdf->type) {
+                case MSDF_BITMAP_TYPE_MSDF:
+                    msdfgen::renderSDF(*static_cast<msdfgen::Bitmap<float, 4>*>(output->handle), *static_cast<const msdfgen::Bitmap<float, 4>*>(sdf->handle));
+                    return MSDF_SUCCESS;
+            }
+            break;
+    }
+
+    return MSDF_ERR_INVALID_TYPE;
+}
+
 }

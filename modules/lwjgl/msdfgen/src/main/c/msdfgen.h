@@ -34,8 +34,6 @@
 #include "render-sdf.h"
 #include "rasterization.h"
 #include "sdf-error-estimation.h"
-#include "save-bmp.h"
-#include "save-tiff.h"
 #include "shape-description.h"
 
 namespace msdfgen {

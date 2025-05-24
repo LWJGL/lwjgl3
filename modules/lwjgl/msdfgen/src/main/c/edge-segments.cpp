@@ -524,18 +524,4 @@ EdgeSegment *QuadraticSegment::convertToCubic() const {
     return new CubicSegment(p[0], mix(p[0], p[1], 2/3.), mix(p[1], p[2], 1/3.), p[2], color);
 }
 
-void CubicSegment::deconverge(int param, double amount) {
-    Vector2 dir = direction(param);
-    Vector2 normal = dir.getOrthonormal();
-    double h = dotProduct(directionChange(param)-dir, normal);
-    switch (param) {
-        case 0:
-            p[1] += amount*(dir+sign(h)*sqrt(fabs(h))*normal);
-            break;
-        case 1:
-            p[2] -= amount*(dir-sign(h)*sqrt(fabs(h))*normal);
-            break;
-    }
-}
-
 }

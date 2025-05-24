@@ -648,6 +648,9 @@ MSDF_API int msdf_generate_mtsdf_with_config(msdf_bitmap_t* output,
                                              const msdf_transform_t* transform,
                                              const msdf_multichannel_config_t* config);
 
+
+MSDF_API int msdf_render_sdf(msdf_bitmap_t* output, msdf_bitmap_t* sdf);
+
 #ifdef MSDFGEN_EXTENSIONS
 
 #endif
