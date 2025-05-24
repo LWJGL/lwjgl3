@@ -241,6 +241,11 @@ enum class Artifacts(
         "A collection of libraries for shader compilation.",
         *Platforms.ALL
     ),
+    SPNG(
+        "lwjgl-spng", "LWJGL - spng bindings",
+        "libspng (simple png) is a C library for reading and writing Portable Network Graphics (PNG) format files with a focus on security and ease of use.",
+        *Platforms.ALL
+    ),
     SPVC(
         "lwjgl-spvc", "LWJGL - SPIRV-Cross bindings",
         "A library for performing reflection on SPIR-V and disassembling SPIR-V back to high level languages.",

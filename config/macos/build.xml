@@ -265,6 +265,9 @@
         <!-- rpmalloc -->
         <build_simple module="rpmalloc"/>
 
+        <!-- spng -->
+        <build_simple module="spng"/>
+
         <!-- stb -->
         <build_simple module="stb"/>
 

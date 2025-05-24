@@ -310,6 +310,9 @@ EXPORTS
             </linkargs>
         </build>
 
+        <!-- spng -->
+        <build_simple module="spng"/>
+
         <!-- stb -->
         <build_simple module="stb"/>
 

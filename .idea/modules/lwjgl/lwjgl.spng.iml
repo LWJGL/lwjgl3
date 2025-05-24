@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/../../../bin/classes/lwjgl/spng" />
+    <output-test url="file://$MODULE_DIR$/../../../bin/classes/test" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../modules/lwjgl/spng">
+      <sourceFolder url="file://$MODULE_DIR$/../../../modules/lwjgl/spng/src/generated/java" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="lwjgl.core" />
+    <orderEntry type="library" name="JSpecify" level="project" />
+  </component>
+</module>

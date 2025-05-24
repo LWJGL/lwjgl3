@@ -55,6 +55,7 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.rpmalloc" value="true"/>
     <property name="binding.sdl" value="true"/>
     <property name="binding.shaderc" value="true"/>
+    <property name="binding.spng" value="true"/>
     <property name="binding.spvc" value="true"/>
     <property name="binding.stb" value="true"/>
     <property name="binding.tinyexr" value="true"/>
@@ -109,6 +110,7 @@ This script is included in /config/build-definitions.xml.
                 <sequential if:true="${binding.rpmalloc}"><local name="module"/><property name="module" value="rpmalloc"/><body/></sequential>
                 <sequential if:true="${binding.sdl}"><local name="module"/><property name="module" value="sdl"/><body/></sequential>
                 <sequential if:true="${binding.shaderc}"><local name="module"/><property name="module" value="shaderc"/><body/></sequential>
+                <sequential if:true="${binding.spng}"><local name="module"/><property name="module" value="spng"/><body/></sequential>
                 <sequential if:true="${binding.spvc}"><local name="module"/><property name="module" value="spvc"/><body/></sequential>
                 <sequential if:true="${binding.stb}"><local name="module"/><property name="module" value="stb"/><body/></sequential>
                 <sequential if:true="${binding.tinyexr}"><local name="module"/><property name="module" value="tinyexr"/><body/></sequential>

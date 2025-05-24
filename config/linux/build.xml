@@ -352,6 +352,13 @@
         <!-- rpmalloc -->
         <build_simple module="rpmalloc"/>
 
+        <!-- spng -->
+        <build module="spng" simple="true">
+            <link>
+                <arg value="-lm" />
+            </link>
+        </build>
+
         <!-- stb -->
         <build module="stb" if:true="${binding.stb}">
             <source>
