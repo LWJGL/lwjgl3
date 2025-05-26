@@ -24,7 +24,7 @@ LWJGL is open source software and freely available at no charge.
 Useful links:
 
 - [Wiki](https://github.com/LWJGL/lwjgl3-wiki/wiki)
-- [Release Notes](https://github.com/LWJGL/lwjgl3/tree/master/doc/notes)  
+- [Release Notes](https://github.com/LWJGL/lwjgl3/tree/master/doc/notes)
 - [JavaDoc](https://javadoc.lwjgl.org)
 - [Blog](https://blog.lwjgl.org)
 
@@ -74,6 +74,7 @@ following platforms/architectures:
 - Linux arm32 (ARMv7/armhf)
 - Linux ppc64le
 - Linux riscv64
+- Linux loongarch64
 - macOS x64
 - macOS arm64
 - Windows x64

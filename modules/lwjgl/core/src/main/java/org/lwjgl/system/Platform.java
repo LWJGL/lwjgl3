@@ -70,6 +70,7 @@ public enum Platform {
         ARM32(false),
         PPC64LE(true),
         RISCV64(true);
+        LOONGARCH64(true);
 
         static final Architecture current;
 
@@ -91,6 +92,11 @@ public enum Platform {
                     throw new UnsupportedOperationException("Only RISC-V 64 is supported.");
                 }
                 current = Architecture.RISCV64;
+            } else if (osArch.startsWith("loong")) {
+                if (!"loongarch64".equals(osArch) && !"loong64".equals(osArch)) {
+                    throw new UnsupportedOperationException("Only LoongArch 64 is supported.");
+                }
+                current = Architecture.LOONGARCH64;
             } else {
                 current = is64Bit ? Architecture.X64 : Architecture.X86;
             }
