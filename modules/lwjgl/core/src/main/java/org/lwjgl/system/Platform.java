@@ -69,7 +69,7 @@ public enum Platform {
         ARM64(true),
         ARM32(false),
         PPC64LE(true),
-        RISCV64(true);
+        RISCV64(true),
         LOONGARCH64(true);
 
         static final Architecture current;

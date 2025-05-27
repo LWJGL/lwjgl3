@@ -9,7 +9,7 @@
     <condition property="linux.triplet" value="aarch64-linux-gnu"><isset property="build.arch.arm64"/></condition>
     <condition property="linux.triplet" value="powerpc64le-linux-gnu"><isset property="build.arch.ppc64le"/></condition>
     <condition property="linux.triplet" value="riscv64-linux-gnu"><isset property="build.arch.riscv64"/></condition>
-    <condition property="linux.triplet" value="loongarch64-linux-gnu"><isset property="build.arch.loongarch64"/></condition>
+    <condition property="linux.triplet" value="loongarch64-unknown-linux-gnu"><isset property="build.arch.loongarch64"/></condition>
     <condition property="linux.triplet" value="x86_64-linux-gnu"><isset property="build.arch.x64|x86"/></condition>
 
     <condition property="gcc.prefix" value="" else="${linux.triplet}-">
