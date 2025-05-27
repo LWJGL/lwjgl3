@@ -817,6 +817,8 @@ get_thread_id(void) {
 #  elif defined(__riscv)
     // LWJGL
     __asm__ volatile ("mv %0, tp" : "=r" (tid));
+#  elif defined(__loongarch__)
+    __asm__ volatile ("move %0, $tp": "=r" (tid));
 #  else
 #    error This platform needs implementation of get_thread_id()
 #  endif
