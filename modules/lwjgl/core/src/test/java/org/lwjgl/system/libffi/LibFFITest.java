@@ -18,6 +18,11 @@ import static org.testng.Assert.*;
 @Test
 public class LibFFITest {
 
+    public void testConstants() {
+        assertEquals(ffi_get_default_abi(), FFI_DEFAULT_ABI);
+        assertEquals(ffi_get_closure_size(), FFIClosure.SIZEOF);
+    }
+
     /** Calls {@link MemoryAccessJNI#nputInt} using libffi. */
     public void testDowncall() {
         // Get the function address. Ignore this particular implementation, normally you'd create

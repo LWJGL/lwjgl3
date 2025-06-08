@@ -20,6 +20,10 @@ public class LibFFI {
 
     static { Library.initialize(); }
 
+    public static final String FFI_VERSION_STRING = "3.5.0";
+
+    public static final int FFI_VERSION_NUMBER = 0x7724;
+
     public static final short
         FFI_TYPE_VOID       = 0,
         FFI_TYPE_INT        = 1,
@@ -417,6 +421,30 @@ public class LibFFI {
     /** {@code ffi_type * ffi_type_pointer(void)} */
     public static final FFIType ffi_type_pointer = ffi_type_pointer();
 
+    // --- [ ffi_get_version ] ---
+
+    /** {@code char const * ffi_get_version(void)} */
+    public static native long nffi_get_version();
+
+    /** {@code char const * ffi_get_version(void)} */
+    @NativeType("char const *")
+    public static @Nullable String ffi_get_version() {
+        long __result = nffi_get_version();
+        return memASCIISafe(__result);
+    }
+
+    // --- [ ffi_get_version_number ] ---
+
+    /** {@code unsigned long ffi_get_version_number(void)} */
+    @NativeType("unsigned long")
+    public static native long ffi_get_version_number();
+
+    // --- [ ffi_get_default_abi ] ---
+
+    /** {@code unsigned int ffi_get_default_abi(void)} */
+    @NativeType("unsigned int")
+    public static native int ffi_get_default_abi();
+
     // --- [ ffi_prep_cif ] ---
 
     /** {@code ffi_status ffi_prep_cif(ffi_cif * cif, ffi_abi abi, unsigned int nargs, ffi_type * rtype, ffi_type ** atypes)} */
@@ -462,6 +490,12 @@ public class LibFFI {
     public static int ffi_get_struct_offsets(@NativeType("ffi_abi") int abi, @NativeType("ffi_type *") FFIType struct_type, @NativeType("size_t *") @Nullable PointerBuffer offsets) {
         return nffi_get_struct_offsets(abi, struct_type.address(), memAddressSafe(offsets));
     }
+
+    // --- [ ffi_get_closure_size ] ---
+
+    /** {@code size_t ffi_get_closure_size(void)} */
+    @NativeType("size_t")
+    public static native long ffi_get_closure_size();
 
     // --- [ ffi_closure_alloc ] ---
 

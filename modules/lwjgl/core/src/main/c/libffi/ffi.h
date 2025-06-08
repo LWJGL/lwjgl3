@@ -63,6 +63,8 @@ extern "C" {
 #define FFI_EXEC_TRAMPOLINE_TABLE 0
 #endif
 
+/* ---- System configuration information --------------------------------- */
+
 /* If these change, update src/mips/ffitarget.h. */
 #define FFI_TYPE_VOID       0
 #define FFI_TYPE_INT        1
@@ -150,10 +152,8 @@ typedef struct _ffi_type
 #if defined _MSC_VER && !defined(FFI_STATIC_BUILD)
 # if defined FFI_BUILDING_DLL /* Building libffi.DLL with msvcc.sh */
 #  define FFI_API __declspec(dllexport)
-# elif !defined FFI_BUILDING  /* Importing libffi.DLL */
+# else  /* Importing libffi.DLL */
 #  define FFI_API __declspec(dllimport)
-# else                        /* Building/linking static library */
-#  define FFI_API
 # endif
 #else
 # define FFI_API
@@ -322,6 +322,24 @@ FFI_API
 void ffi_java_raw_to_ptrarray (ffi_cif *cif, ffi_java_raw *raw, void **args) __attribute__((deprecated));
 FFI_API
 size_t ffi_java_raw_size (ffi_cif *cif) __attribute__((deprecated));
+
+/* ---- Version API ------------------------------------------------------ */
+
+#define FFI_VERSION_STRING "3.5.0"
+#define FFI_VERSION_NUMBER 30500
+
+#ifndef LIBFFI_ASM
+/* Return a version string. */
+FFI_API const char *ffi_get_version (void);
+
+/* Return the version as an unsigned long value: (x * 10000 + y * 100 + z) */
+FFI_API unsigned long ffi_get_version_number (void);
+#endif
+
+/* ---- Internals API ---------------------------------------------------- */
+
+FFI_API unsigned int ffi_get_default_abi (void);
+FFI_API size_t ffi_get_closure_size (void);
 
 /* ---- Definitions for closures ----------------------------------------- */
 

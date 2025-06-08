@@ -10,7 +10,7 @@ import core.libffi.*
 fun LibFFI() = "LibFFI".nativeClass(Module.CORE_LIBFFI, prefix = "FFI_") {
     nativeDirective("""
 DISABLE_WARNINGS()
-#define FFI_BUILDING
+#define FFI_STATIC_BUILD
 #include "ffi.h"
 ENABLE_WARNINGS()
 typedef void (*FFI_FN_TYPE)(void);
@@ -52,6 +52,9 @@ typedef void (*FFI_CLOSURE_FUN)(ffi_cif*, void*, void**, void*);
 #ifndef HAS_FFI_VFP
 #define FFI_VFP -1
 #endif""")
+
+    StringConstant("VERSION_STRING".."3.5.0")
+    IntConstant("VERSION_NUMBER"..30500)
 
     ShortConstant(
         "TYPE_VOID".."0",
@@ -148,6 +151,24 @@ typedef void (*FFI_CLOSURE_FUN)(ffi_cif*, void*, void**, void*);
 
     macro..Address..ffi_type.p("type_pointer", void())
 
+    charASCII.const.p(
+        "get_version",
+
+        void()
+    )
+
+    unsigned_long(
+        "get_version_number",
+
+        void()
+    )
+
+    unsigned_int(
+        "get_default_abi",
+
+        void()
+    )
+
     ffi_status(
         "prep_cif",
 
@@ -184,6 +205,12 @@ typedef void (*FFI_CLOSURE_FUN)(ffi_cif*, void*, void**, void*);
         ffi_abi("abi"),
         ffi_type.p("struct_type"),
         Unsafe..nullable..size_t.p("offsets")
+    )
+
+    size_t(
+        "get_closure_size",
+
+        void()
     )
 
     ffi_closure.p(
