@@ -18,7 +18,6 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 public interface FT_Incremental_GetGlyphMetricsFuncI extends CallbackI {
 
     FFICIF CIF = apiCreateCIF(
-        FFI_DEFAULT_ABI,
         ffi_type_sint32,
         ffi_type_pointer, ffi_type_uint32, ffi_type_uint8, ffi_type_pointer
     );

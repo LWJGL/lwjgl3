@@ -18,7 +18,6 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 public interface SDL_ClipboardCleanupCallbackI extends CallbackI {
 
     FFICIF CIF = apiCreateCIF(
-        FFI_DEFAULT_ABI,
         ffi_type_void,
         ffi_type_pointer
     );

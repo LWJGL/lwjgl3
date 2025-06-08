@@ -221,7 +221,7 @@ public class SDLJoystick {
     // --- [ SDL_GetJoystickGUIDForID ] ---
 
     private static final FFICIF SDL_GetJoystickGUIDForIDCIF = apiCreateCIF(
-        FFI_DEFAULT_ABI, apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)),
+        apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)),
         ffi_type_uint32
     );
 
@@ -494,7 +494,7 @@ public class SDLJoystick {
     // --- [ SDL_GetJoystickGUID ] ---
 
     private static final FFICIF SDL_GetJoystickGUIDCIF = apiCreateCIF(
-        FFI_DEFAULT_ABI, apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)),
+        apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)),
         ffi_type_pointer
     );
 
@@ -602,7 +602,7 @@ public class SDLJoystick {
     // --- [ SDL_GetJoystickGUIDInfo ] ---
 
     private static final FFICIF SDL_GetJoystickGUIDInfoCIF = apiCreateCIF(
-        FFI_DEFAULT_ABI, ffi_type_void,
+        ffi_type_void,
         apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)), ffi_type_pointer, ffi_type_pointer, ffi_type_pointer, ffi_type_pointer
     );
 

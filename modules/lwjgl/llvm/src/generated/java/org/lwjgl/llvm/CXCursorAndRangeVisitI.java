@@ -18,7 +18,6 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 public interface CXCursorAndRangeVisitI extends CallbackI {
 
     FFICIF CIF = apiCreateCIF(
-        FFI_DEFAULT_ABI,
         ffi_type_uint32,
         ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_sint32, apiCreateArray(ffi_type_pointer, 3)), apiCreateStruct(apiCreateArray(ffi_type_pointer, 2), ffi_type_uint32, ffi_type_uint32)
     );

@@ -1168,7 +1168,7 @@ public class SDLGPU {
     // --- [ SDL_SetGPUBlendConstants ] ---
 
     private static final FFICIF SDL_SetGPUBlendConstantsCIF = apiCreateCIF(
-        FFI_DEFAULT_ABI, ffi_type_void,
+        ffi_type_void,
         ffi_type_pointer, apiCreateStruct(ffi_type_float, ffi_type_float, ffi_type_float, ffi_type_float)
     );
 

@@ -18,7 +18,6 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 public interface SVG_Lib_Free_FuncI extends CallbackI {
 
     FFICIF CIF = apiCreateCIF(
-        FFI_DEFAULT_ABI,
         ffi_type_void,
         ffi_type_pointer
     );

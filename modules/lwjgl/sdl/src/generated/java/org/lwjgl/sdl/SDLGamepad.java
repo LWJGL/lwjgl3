@@ -290,7 +290,7 @@ public class SDLGamepad {
     // --- [ SDL_GetGamepadMappingForGUID ] ---
 
     private static final FFICIF SDL_GetGamepadMappingForGUIDCIF = apiCreateCIF(
-        FFI_DEFAULT_ABI, ffi_type_pointer,
+        ffi_type_pointer,
         apiCreateStruct(apiCreateArray(ffi_type_uint8, 16))
     );
 
@@ -456,7 +456,7 @@ public class SDLGamepad {
     // --- [ SDL_GetGamepadGUIDForID ] ---
 
     private static final FFICIF SDL_GetGamepadGUIDForIDCIF = apiCreateCIF(
-        FFI_DEFAULT_ABI, apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)),
+        apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)),
         ffi_type_uint32
     );
 

@@ -2413,7 +2413,7 @@ public class FreeType {
     // --- [ FT_Bitmap_Blend ] ---
 
     private static final FFICIF FT_Bitmap_BlendCIF = apiCreateCIF(
-        FFI_DEFAULT_ABI, ffi_type_sint32,
+        ffi_type_sint32,
         ffi_type_pointer, ffi_type_pointer, apiCreateStruct(ffi_type_slong, ffi_type_slong), ffi_type_pointer, ffi_type_pointer, apiCreateStruct(ffi_type_uint8, ffi_type_uint8, ffi_type_uint8, ffi_type_uint8)
     );
 
@@ -2847,7 +2847,7 @@ public class FreeType {
     // --- [ FT_Palette_Set_Foreground_Color ] ---
 
     private static final FFICIF FT_Palette_Set_Foreground_ColorCIF = apiCreateCIF(
-        FFI_DEFAULT_ABI, ffi_type_sint32,
+        ffi_type_sint32,
         ffi_type_pointer, apiCreateStruct(ffi_type_uint8, ffi_type_uint8, ffi_type_uint8, ffi_type_uint8)
     );
 
@@ -2952,7 +2952,7 @@ public class FreeType {
     // --- [ FT_Get_Paint ] ---
 
     private static final FFICIF FT_Get_PaintCIF = apiCreateCIF(
-        FFI_DEFAULT_ABI, ffi_type_uint8,
+        ffi_type_uint8,
         ffi_type_pointer, apiCreateStruct(ffi_type_pointer, ffi_type_uint8), ffi_type_pointer
     );
 

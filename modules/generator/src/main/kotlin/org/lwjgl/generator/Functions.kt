@@ -714,7 +714,7 @@ class Func(
         if (useLibFFI) {
             println("""
     private static final FFICIF ${name}CIF = apiCreateCIF(
-        ${if (nativeClass.module.callingConvention == CallingConvention.DEFAULT) "FFI_DEFAULT_ABI" else "apiStdcall()"}, ${returns.nativeType.libffiType},
+        ${if (nativeClass.module.callingConvention == CallingConvention.STDCALL) "apiStdcall(), " else ""}${returns.nativeType.libffiType},
         ${parameters.joinToString(", ") { it.nativeType.libffiType }}
     );""")
         }

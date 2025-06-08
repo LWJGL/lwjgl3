@@ -38,7 +38,7 @@ public class SDLGUID {
     // --- [ SDL_GUIDToString ] ---
 
     private static final FFICIF SDL_GUIDToStringCIF = apiCreateCIF(
-        FFI_DEFAULT_ABI, ffi_type_void,
+        ffi_type_void,
         apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)), ffi_type_pointer, ffi_type_sint32
     );
 
@@ -69,7 +69,7 @@ public class SDLGUID {
     // --- [ SDL_StringToGUID ] ---
 
     private static final FFICIF SDL_StringToGUIDCIF = apiCreateCIF(
-        FFI_DEFAULT_ABI, apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)),
+        apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)),
         ffi_type_pointer
     );
 

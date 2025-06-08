@@ -614,6 +614,8 @@ public final class APIUtil {
             .elements(elementBuffer);
     }
 
+    /** Allocates and prepares a libffi CIF using the default ABI. */
+    public static FFICIF apiCreateCIF(FFIType rtype, FFIType... atypes) { return apiCreateCIF(FFI_DEFAULT_ABI, rtype, atypes); }
     /** Allocates and prepares a libffi CIF. */
     public static FFICIF apiCreateCIF(int abi, FFIType rtype, FFIType... atypes) {
         // These CIFs will never be deallocated, use the allocator directly to ignore them when detecting memory leaks.
@@ -634,6 +636,8 @@ public final class APIUtil {
         return cif;
     }
 
+    /** Allocates and prepares a libffi var CIF using the default ABI. */
+    public static FFICIF apiCreateCIFVar(int nfixedargs, FFIType rtype, FFIType... atypes) { return apiCreateCIFVar(FFI_DEFAULT_ABI, nfixedargs, rtype, atypes); }
     /** Allocates and prepares a libffi var CIF. */
     public static FFICIF apiCreateCIFVar(int abi, int nfixedargs, FFIType rtype, FFIType... atypes) {
         // These CIFs will never be deallocated, use the allocator directly to ignore them when detecting memory leaks.
@@ -655,7 +659,7 @@ public final class APIUtil {
     }
 
     public static int apiStdcall() {
-        return Platform.get() == Platform.WINDOWS && Pointer.BITS32 ? FFI_STDCALL : FFI_DEFAULT_ABI;
+        return BITS64 || Platform.get() != Platform.WINDOWS ? FFI_DEFAULT_ABI : FFI_STDCALL;
     }
 
     public static void apiClosureRet(long ret, boolean __result) { memPutAddress(ret, __result ? 1L : 0L); }

@@ -184,8 +184,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 @NativeType("$nativeType")
 ${access.modifier}interface ${className}I extends CallbackI {
 
-    FFICIF CIF = apiCreateCIF(
-        ${if (callingConvention === CallingConvention.STDCALL) "apiStdcall()" else "FFI_DEFAULT_ABI"},
+    FFICIF CIF = apiCreateCIF(${if (callingConvention === CallingConvention.STDCALL) """
+        apiStdcall(),""" else ""}
         ${returns.libffi},
         ${signature.joinToString(", ") { it.nativeType.libffi }}
     );

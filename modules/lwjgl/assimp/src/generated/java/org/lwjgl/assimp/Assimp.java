@@ -1086,7 +1086,7 @@ public class Assimp {
     // --- [ aiGetPredefinedLogStream ] ---
 
     private static final FFICIF aiGetPredefinedLogStreamCIF = apiCreateCIF(
-        FFI_DEFAULT_ABI, apiCreateStruct(ffi_type_pointer, ffi_type_pointer),
+        apiCreateStruct(ffi_type_pointer, ffi_type_pointer),
         ffi_type_uint32, ffi_type_pointer
     );
 
