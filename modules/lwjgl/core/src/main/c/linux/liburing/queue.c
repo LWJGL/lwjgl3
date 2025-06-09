@@ -47,7 +47,7 @@ static inline bool cq_ring_needs_flush(struct io_uring *ring)
 
 static inline bool cq_ring_needs_enter(struct io_uring *ring)
 {
-	return (ring->flags & IORING_SETUP_IOPOLL) || cq_ring_needs_flush(ring);
+	return (ring->int_flags & INT_FLAG_CQ_ENTER) || cq_ring_needs_flush(ring);
 }
 
 struct get_data {
@@ -151,6 +151,31 @@ int io_uring_get_events(struct io_uring *ring)
 	return __sys_io_uring_enter(ring->enter_ring_fd, 0, 0, flags, NULL);
 }
 
+static inline bool io_uring_peek_batch_cqe_(struct io_uring *ring,
+					    struct io_uring_cqe **cqes,
+					    unsigned *count)
+{
+	unsigned ready = io_uring_cq_ready(ring);
+	unsigned shift;
+	unsigned head;
+	unsigned mask;
+	unsigned last;
+
+	if (!ready)
+		return false;
+
+	shift = io_uring_cqe_shift(ring);
+	head = *ring->cq.khead;
+	mask = ring->cq.ring_mask;
+	if (ready < *count)
+		*count = ready;
+	last = head + *count;
+	for (;head != last; head++)
+		*(cqes++) = &ring->cq.cqes[(head & mask) << shift];
+
+	return true;
+}
+
 /*
  * Fill in an array of IO completions up to count, if any are available.
  * Returns the amount of IO completions filled.
@@ -158,39 +183,17 @@ int io_uring_get_events(struct io_uring *ring)
 unsigned io_uring_peek_batch_cqe(struct io_uring *ring,
 				 struct io_uring_cqe **cqes, unsigned count)
 {
-	unsigned ready;
-	bool overflow_checked = false;
-	int shift = 0;
-
-	if (ring->flags & IORING_SETUP_CQE32)
-		shift = 1;
-
-again:
-	ready = io_uring_cq_ready(ring);
-	if (ready) {
-		unsigned head = *ring->cq.khead;
-		unsigned mask = ring->cq.ring_mask;
-		unsigned last;
-		int i = 0;
-
-		count = count > ready ? ready : count;
-		last = head + count;
-		for (;head != last; head++, i++)
-			cqes[i] = &ring->cq.cqes[(head & mask) << shift];
-
+	if (io_uring_peek_batch_cqe_(ring, cqes, &count))
 		return count;
-	}
 
-	if (overflow_checked)
+	if (!cq_ring_needs_flush(ring))
 		return 0;
 
-	if (cq_ring_needs_flush(ring)) {
-		io_uring_get_events(ring);
-		overflow_checked = true;
-		goto again;
-	}
+	io_uring_get_events(ring);
+	if (!io_uring_peek_batch_cqe_(ring, cqes, &count))
+		return 0;
 
-	return 0;
+	return count;
 }
 
 /*

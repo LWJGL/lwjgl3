@@ -125,6 +125,10 @@ ENABLE_WARNINGS()""")
         "OP_FTRUNCATE".enumByte,
         "OP_BIND".enumByte,
         "OP_LISTEN".enumByte,
+        "OP_RECV_ZC".enumByte,
+        "OP_EPOLL_WAIT".enumByte,
+        "OP_READV_FIXED".enumByte,
+        "OP_WRITEV_FIXED".enumByte,
         "OP_LAST".enumByte
     )
 
@@ -241,7 +245,8 @@ ENABLE_WARNINGS()""")
         "ENTER_EXT_ARG".enum("1 << 3"),
         "ENTER_REGISTERED_RING".enum("1 << 4"),
         "ENTER_ABS_TIMER".enum("1 << 5"),
-        "ENTER_EXT_ARG_REG".enum("1 << 6")
+        "ENTER_EXT_ARG_REG".enum("1 << 6"),
+        "ENTER_NO_IOWAIT".enum("1 << 7")
     )
 
     EnumConstant(
@@ -260,7 +265,9 @@ ENABLE_WARNINGS()""")
         "FEAT_LINKED_FILE".enum("1 << 12"),
         "FEAT_REG_REG_RING".enum("1 << 13"),
         "FEAT_RECVSEND_BUNDLE".enum("1 << 14"),
-        "FEAT_MIN_TIMEOUT".enum("1 << 15")
+        "FEAT_MIN_TIMEOUT".enum("1 << 15"),
+        "FEAT_RW_ATTR".enum("1 << 16"),
+        "FEAT_NO_IOWAIT".enum("1 << 17")
     )
 
     EnumConstant(
@@ -295,7 +302,9 @@ ENABLE_WARNINGS()""")
         "UNREGISTER_NAPI".enum,
         "REGISTER_CLOCK".enum,
         "REGISTER_CLONE_BUFFERS".enum,
-        "REGISTER_RESIZE_RINGS".enum("33"),
+        "REGISTER_SEND_MSG_RING".enum,
+        "REGISTER_ZCRX_IFQ".enum,
+        "REGISTER_RESIZE_RINGS".enum,
         "REGISTER_MEM_REGION".enum,
 
         "REGISTER_LAST".enum,
@@ -356,6 +365,13 @@ ENABLE_WARNINGS()""")
         "SOCKET_URING_OP_GETSOCKOPT".enum,
         "SOCKET_URING_OP_SETSOCKOPT".enum,
     ).noPrefix()
+
+    IntConstant("ZCRX_AREA_SHIFT".."48")
+    LongConstant("ZCRX_AREA_MASK".."~((1L << IORING_ZCRX_AREA_SHIFT) - 1)")
+
+    EnumConstant(
+        "ZCRX_AREA_DMABUF".enum("1")
+    )
 
     NativeName("__sys_io_uring_setup")..int(
         "setup",

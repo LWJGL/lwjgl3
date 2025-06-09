@@ -74,6 +74,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     union {
  *         __s32 splice_fd_in;
  *         __u32 file_index;
+ *         __u32 zcrx_ifq_idx;
  *         __u32 optlen;
  *         struct {
  *             __u16 addr_len;
@@ -143,6 +144,7 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
         PERSONALITY,
         SPLICE_FD_IN,
         FILE_INDEX,
+        ZCRX_IFQ_IDX,
         OPTLEN,
         ADDR_LEN,
         __PAD3,
@@ -209,6 +211,7 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
                 __member(4),
                 __member(4),
                 __member(4),
+                __member(4),
                 __struct(
                     __member(2),
                     __array(2, 1)
@@ -269,13 +272,14 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
         PERSONALITY = layout.offsetof(45);
         SPLICE_FD_IN = layout.offsetof(47);
         FILE_INDEX = layout.offsetof(48);
-        OPTLEN = layout.offsetof(49);
-        ADDR_LEN = layout.offsetof(51);
-        __PAD3 = layout.offsetof(52);
-        ADDR3 = layout.offsetof(55);
-        __PAD2 = layout.offsetof(56);
-        OPTVAL = layout.offsetof(57);
-        CMD = layout.offsetof(58);
+        ZCRX_IFQ_IDX = layout.offsetof(49);
+        OPTLEN = layout.offsetof(50);
+        ADDR_LEN = layout.offsetof(52);
+        __PAD3 = layout.offsetof(53);
+        ADDR3 = layout.offsetof(56);
+        __PAD2 = layout.offsetof(57);
+        OPTVAL = layout.offsetof(58);
+        CMD = layout.offsetof(59);
     }
 
     protected IOURingSQE(long address, @Nullable ByteBuffer container) {
@@ -426,6 +430,9 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     /** @return the value of the {@code file_index} field. */
     @NativeType("__u32")
     public int file_index() { return nfile_index(address()); }
+    /** @return the value of the {@code zcrx_ifq_idx} field. */
+    @NativeType("__u32")
+    public int zcrx_ifq_idx() { return nzcrx_ifq_idx(address()); }
     /** @return the value of the {@code optlen} field. */
     @NativeType("__u32")
     public int optlen() { return noptlen(address()); }
@@ -541,6 +548,8 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     public IOURingSQE splice_fd_in(@NativeType("__s32") int value) { nsplice_fd_in(address(), value); return this; }
     /** Sets the specified value to the {@code file_index} field. */
     public IOURingSQE file_index(@NativeType("__u32") int value) { nfile_index(address(), value); return this; }
+    /** Sets the specified value to the {@code zcrx_ifq_idx} field. */
+    public IOURingSQE zcrx_ifq_idx(@NativeType("__u32") int value) { nzcrx_ifq_idx(address(), value); return this; }
     /** Sets the specified value to the {@code optlen} field. */
     public IOURingSQE optlen(@NativeType("__u32") int value) { noptlen(address(), value); return this; }
     /** Sets the specified value to the {@code addr_len} field. */
@@ -768,6 +777,8 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     public static int nsplice_fd_in(long struct) { return memGetInt(struct + IOURingSQE.SPLICE_FD_IN); }
     /** Unsafe version of {@link #file_index}. */
     public static int nfile_index(long struct) { return memGetInt(struct + IOURingSQE.FILE_INDEX); }
+    /** Unsafe version of {@link #zcrx_ifq_idx}. */
+    public static int nzcrx_ifq_idx(long struct) { return memGetInt(struct + IOURingSQE.ZCRX_IFQ_IDX); }
     /** Unsafe version of {@link #optlen}. */
     public static int noptlen(long struct) { return memGetInt(struct + IOURingSQE.OPTLEN); }
     /** Unsafe version of {@link #addr_len}. */
@@ -874,6 +885,8 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     public static void nsplice_fd_in(long struct, int value) { memPutInt(struct + IOURingSQE.SPLICE_FD_IN, value); }
     /** Unsafe version of {@link #file_index(int) file_index}. */
     public static void nfile_index(long struct, int value) { memPutInt(struct + IOURingSQE.FILE_INDEX, value); }
+    /** Unsafe version of {@link #zcrx_ifq_idx(int) zcrx_ifq_idx}. */
+    public static void nzcrx_ifq_idx(long struct, int value) { memPutInt(struct + IOURingSQE.ZCRX_IFQ_IDX, value); }
     /** Unsafe version of {@link #optlen(int) optlen}. */
     public static void noptlen(long struct, int value) { memPutInt(struct + IOURingSQE.OPTLEN, value); }
     /** Unsafe version of {@link #addr_len(short) addr_len}. */
@@ -1075,6 +1088,9 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
         /** @return the value of the {@code file_index} field. */
         @NativeType("__u32")
         public int file_index() { return IOURingSQE.nfile_index(address()); }
+        /** @return the value of the {@code zcrx_ifq_idx} field. */
+        @NativeType("__u32")
+        public int zcrx_ifq_idx() { return IOURingSQE.nzcrx_ifq_idx(address()); }
         /** @return the value of the {@code optlen} field. */
         @NativeType("__u32")
         public int optlen() { return IOURingSQE.noptlen(address()); }
@@ -1190,6 +1206,8 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
         public IOURingSQE.Buffer splice_fd_in(@NativeType("__s32") int value) { IOURingSQE.nsplice_fd_in(address(), value); return this; }
         /** Sets the specified value to the {@code file_index} field. */
         public IOURingSQE.Buffer file_index(@NativeType("__u32") int value) { IOURingSQE.nfile_index(address(), value); return this; }
+        /** Sets the specified value to the {@code zcrx_ifq_idx} field. */
+        public IOURingSQE.Buffer zcrx_ifq_idx(@NativeType("__u32") int value) { IOURingSQE.nzcrx_ifq_idx(address(), value); return this; }
         /** Sets the specified value to the {@code optlen} field. */
         public IOURingSQE.Buffer optlen(@NativeType("__u32") int value) { IOURingSQE.noptlen(address(), value); return this; }
         /** Sets the specified value to the {@code addr_len} field. */

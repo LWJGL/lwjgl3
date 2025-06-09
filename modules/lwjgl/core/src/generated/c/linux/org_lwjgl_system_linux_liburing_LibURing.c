@@ -392,6 +392,13 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     return (jint)io_uring_unregister_napi(ring, napi);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1register_1ifq(JNIEnv *__env, jclass clazz, jlong ringAddress, jlong regAddress) {
+    struct io_uring *ring = (struct io_uring *)(uintptr_t)ringAddress;
+    struct io_uring_zcrx_ifq_reg *reg = (struct io_uring_zcrx_ifq_reg *)(uintptr_t)regAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)io_uring_register_ifq(ring, reg);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1register_1clock(JNIEnv *__env, jclass clazz, jlong ringAddress, jlong argAddress) {
     struct io_uring *ring = (struct io_uring *)(uintptr_t)ringAddress;
     struct io_uring_clock_register *arg = (struct io_uring_clock_register *)(uintptr_t)argAddress;
@@ -417,10 +424,10 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     return (jint)io_uring_enter((unsigned int)fd, (unsigned int)to_submit, (unsigned int)min_complete, (unsigned int)flags, sig);
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1enter2(JNIEnv *__env, jclass clazz, jint fd, jint to_submit, jint min_complete, jint flags, jlong sigAddress, jlong sz) {
-    sigset_t *sig = (sigset_t *)(uintptr_t)sigAddress;
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1enter2(JNIEnv *__env, jclass clazz, jint fd, jint to_submit, jint min_complete, jint flags, jlong argAddress, jlong sz) {
+    void *arg = (void *)(uintptr_t)argAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)io_uring_enter2((unsigned int)fd, (unsigned int)to_submit, (unsigned int)min_complete, (unsigned int)flags, sig, (size_t)sz);
+    return (jint)io_uring_enter2((unsigned int)fd, (unsigned int)to_submit, (unsigned int)min_complete, (unsigned int)flags, arg, (size_t)sz);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1setup(JNIEnv *__env, jclass clazz, jint entries, jlong pAddress) {
@@ -454,6 +461,12 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     struct io_uring_buf_ring *br = (struct io_uring_buf_ring *)(uintptr_t)brAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jint)io_uring_free_buf_ring(ring, br, (unsigned int)nentries, bgid);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1set_1iowait(JNIEnv *__env, jclass clazz, jlong ringAddress, jboolean enable_iowait) {
+    struct io_uring *ring = (struct io_uring *)(uintptr_t)ringAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)io_uring_set_iowait(ring, (bool)enable_iowait);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1cqe_1seen(JNIEnv *__env, jclass clazz, jlong ringAddress, jlong cqeAddress) {
@@ -500,6 +513,12 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     io_uring_sqe_set_buf_group(sqe, bgid);
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1initialize_1sqe(JNIEnv *__env, jclass clazz, jlong sqeAddress) {
+    struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
+    UNUSED_PARAMS(__env, clazz)
+    io_uring_initialize_sqe(sqe);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1splice(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd_in, jlong off_in, jint fd_out, jlong off_out, jint nbytes, jint splice_flags) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     UNUSED_PARAMS(__env, clazz)
@@ -526,39 +545,53 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     io_uring_prep_readv2(sqe, fd, iovecs, (unsigned int)nr_vecs, offset, flags);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1read_1fixed(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong bufAddress, jint nbytes, jint offset, jint buf_index) {
+JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1read_1fixed(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong bufAddress, jint nbytes, jlong offset, jint buf_index) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     void *buf = (void *)(uintptr_t)bufAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_read_fixed(sqe, fd, buf, (unsigned int)nbytes, offset, buf_index);
+    io_uring_prep_read_fixed(sqe, fd, buf, (unsigned int)nbytes, (__u64)offset, buf_index);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1writev(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong iovecsAddress, jint nr_vecs, jint offset) {
+JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1readv_1fixed(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong iovecsAddress, jint nr_vecs, jlong offset, jint flags, jint buf_index) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     struct iovec const *iovecs = (struct iovec const *)(uintptr_t)iovecsAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_writev(sqe, fd, iovecs, (unsigned int)nr_vecs, offset);
+    io_uring_prep_readv_fixed(sqe, fd, iovecs, (unsigned int)nr_vecs, (__u64)offset, flags, buf_index);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1writev2(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong iovecsAddress, jint nr_vecs, jint offset, jint flags) {
+JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1writev(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong iovecsAddress, jint nr_vecs, jlong offset) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     struct iovec const *iovecs = (struct iovec const *)(uintptr_t)iovecsAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_writev2(sqe, fd, iovecs, (unsigned int)nr_vecs, offset, flags);
+    io_uring_prep_writev(sqe, fd, iovecs, (unsigned int)nr_vecs, (__u64)offset);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1write_1fixed(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong bufAddress, jint nbytes, jint offset, jint buf_index) {
+JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1writev2(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong iovecsAddress, jint nr_vecs, jlong offset, jint flags) {
+    struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
+    struct iovec const *iovecs = (struct iovec const *)(uintptr_t)iovecsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    io_uring_prep_writev2(sqe, fd, iovecs, (unsigned int)nr_vecs, (__u64)offset, flags);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1write_1fixed(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong bufAddress, jint nbytes, jlong offset, jint buf_index) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     void const *buf = (void const *)(uintptr_t)bufAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_write_fixed(sqe, fd, buf, (unsigned int)nbytes, offset, buf_index);
+    io_uring_prep_write_fixed(sqe, fd, buf, (unsigned int)nbytes, (__u64)offset, buf_index);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1writev_1fixed(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong iovecsAddress, jint nr_vecs, jlong offset, jint flags, jint buf_index) {
+    struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
+    struct iovec const *iovecs = (struct iovec const *)(uintptr_t)iovecsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    io_uring_prep_writev_fixed(sqe, fd, iovecs, (unsigned int)nr_vecs, (__u64)offset, flags, buf_index);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1recvmsg(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong msgAddress, jint flags) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     struct msghdr *msg = (struct msghdr *)(uintptr_t)msgAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_recvmsg(sqe, fd, msg, (unsigned int)flags);
+    io_uring_prep_recvmsg(sqe, fd, msg, (unsigned)flags);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1recvmsg_1multishot(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong msgAddress, jint flags) {
@@ -572,19 +605,19 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     struct msghdr const *msg = (struct msghdr const *)(uintptr_t)msgAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_sendmsg(sqe, fd, msg, (unsigned int)flags);
+    io_uring_prep_sendmsg(sqe, fd, msg, (unsigned)flags);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1poll_1add(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jint poll_mask) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_poll_add(sqe, fd, (unsigned int)poll_mask);
+    io_uring_prep_poll_add(sqe, fd, (unsigned)poll_mask);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1poll_1multishot(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jint poll_mask) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_poll_multishot(sqe, fd, (unsigned int)poll_mask);
+    io_uring_prep_poll_multishot(sqe, fd, (unsigned)poll_mask);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1poll_1remove(JNIEnv *__env, jclass clazz, jlong sqeAddress, jlong user_data) {
@@ -596,13 +629,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1poll_1update(JNIEnv *__env, jclass clazz, jlong sqeAddress, jlong old_user_data, jlong new_user_data, jint poll_mask, jint flags) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_poll_update(sqe, (__u64)old_user_data, (__u64)new_user_data, (unsigned int)poll_mask, (unsigned int)flags);
+    io_uring_prep_poll_update(sqe, (__u64)old_user_data, (__u64)new_user_data, (unsigned)poll_mask, (unsigned)flags);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1fsync(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jint fsync_flags) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_fsync(sqe, fd, (unsigned int)fsync_flags);
+    io_uring_prep_fsync(sqe, fd, (unsigned)fsync_flags);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1nop(JNIEnv *__env, jclass clazz, jlong sqeAddress) {
@@ -615,20 +648,20 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     struct __kernel_timespec *ts = (struct __kernel_timespec *)(uintptr_t)tsAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_timeout(sqe, ts, (unsigned int)count, (unsigned int)flags);
+    io_uring_prep_timeout(sqe, ts, (unsigned)count, (unsigned)flags);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1timeout_1remove(JNIEnv *__env, jclass clazz, jlong sqeAddress, jlong user_data, jint flags) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_timeout_remove(sqe, (__u64)user_data, (unsigned int)flags);
+    io_uring_prep_timeout_remove(sqe, (__u64)user_data, (unsigned)flags);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1timeout_1update(JNIEnv *__env, jclass clazz, jlong sqeAddress, jlong tsAddress, jlong user_data, jint flags) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     struct __kernel_timespec *ts = (struct __kernel_timespec *)(uintptr_t)tsAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_timeout_update(sqe, ts, (__u64)user_data, (unsigned int)flags);
+    io_uring_prep_timeout_update(sqe, ts, (__u64)user_data, (unsigned)flags);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1accept(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong addrAddress, jlong addrlenAddress, jint flags) {
@@ -686,7 +719,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     struct __kernel_timespec *ts = (struct __kernel_timespec *)(uintptr_t)tsAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_link_timeout(sqe, ts, (unsigned int)flags);
+    io_uring_prep_link_timeout(sqe, ts, (unsigned)flags);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1connect(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong addrAddress, jint addrlen) {
@@ -709,17 +742,24 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     io_uring_prep_listen(sqe, fd, backlog);
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1epoll_1wait(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong eventsAddress, jint maxevents, jint flags) {
+    struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
+    struct epoll_event *events = (struct epoll_event *)(uintptr_t)eventsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    io_uring_prep_epoll_wait(sqe, fd, events, (unsigned int)maxevents, (unsigned)flags);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1files_1update(JNIEnv *__env, jclass clazz, jlong sqeAddress, jlong fdsAddress, jint nr_fds, jint offset) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     int *fds = (int *)(uintptr_t)fdsAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_files_update(sqe, fds, (unsigned int)nr_fds, offset);
+    io_uring_prep_files_update(sqe, fds, (unsigned)nr_fds, offset);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1fallocate(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jint mode, jlong offset, jlong len) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_fallocate(sqe, fd, mode, (off_t)offset, (off_t)len);
+    io_uring_prep_fallocate(sqe, fd, mode, (__u64)offset, (__u64)len);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1openat(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint dfd, jlong pathAddress, jint flags, jint mode) {
@@ -762,11 +802,11 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     io_uring_prep_close_direct(sqe, (unsigned int)file_index);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1read(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong bufAddress, jint nbytes, jint offset) {
+JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1read(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong bufAddress, jint nbytes, jlong offset) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     void *buf = (void *)(uintptr_t)bufAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_read(sqe, fd, buf, (unsigned int)nbytes, offset);
+    io_uring_prep_read(sqe, fd, buf, (unsigned int)nbytes, (__u64)offset);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1read_1multishot(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jint nbytes, jlong offset, jint buf_group) {
@@ -775,11 +815,11 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     io_uring_prep_read_multishot(sqe, fd, (unsigned int)nbytes, (__u64)offset, buf_group);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1write(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong bufAddress, jint nbytes, jint offset) {
+JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1write(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong bufAddress, jint nbytes, jlong offset) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     void const *buf = (void const *)(uintptr_t)bufAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_write(sqe, fd, buf, (unsigned int)nbytes, offset);
+    io_uring_prep_write(sqe, fd, buf, (unsigned int)nbytes, (__u64)offset);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1statx(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint dfd, jlong pathAddress, jint flags, jint mask, jlong statxbufAddress) {
@@ -787,7 +827,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     char const *path = (char const *)(uintptr_t)pathAddress;
     struct statx *statxbuf = (struct statx *)(uintptr_t)statxbufAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_statx(sqe, dfd, path, flags, (unsigned int)mask, statxbuf);
+    io_uring_prep_statx(sqe, dfd, path, flags, (unsigned)mask, statxbuf);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1fadvise(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong offset, jint len, jint advice) {
@@ -803,10 +843,10 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     io_uring_prep_madvise(sqe, addr, (__u32)length, advice);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1fadvise64(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong offset, jint len, jint advice) {
+JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1fadvise64(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong offset, jlong len, jint advice) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_fadvise64(sqe, fd, (__u64)offset, (__u32)len, advice);
+    io_uring_prep_fadvise64(sqe, fd, (__u64)offset, (off_t)len, advice);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1madvise64(JNIEnv *__env, jclass clazz, jlong sqeAddress, jlong addrAddress, jlong length, jint advice) {
@@ -863,6 +903,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     struct msghdr const *msg = (struct msghdr const *)(uintptr_t)msgAddress;
     UNUSED_PARAMS(__env, clazz)
     io_uring_prep_sendmsg_zc(sqe, fd, msg, (unsigned)flags);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1sendmsg_1zc_1fixed(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong msgAddress, jint flags, jint buf_index) {
+    struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
+    struct msghdr const *msg = (struct msghdr const *)(uintptr_t)msgAddress;
+    UNUSED_PARAMS(__env, clazz)
+    io_uring_prep_sendmsg_zc_fixed(sqe, fd, msg, (unsigned)flags, (unsigned)buf_index);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1recv(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint sockfd, jlong bufAddress, jlong len, jint flags) {
@@ -934,7 +981,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     char const *path = (char const *)(uintptr_t)pathAddress;
     struct open_how *how = (struct open_how *)(uintptr_t)howAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_openat2_direct(sqe, dfd, path, how, (unsigned int)file_index);
+    io_uring_prep_openat2_direct(sqe, dfd, path, how, (unsigned)file_index);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1epoll_1ctl(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint epfd, jint fd, jint op, jlong evAddress) {
@@ -993,10 +1040,10 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     io_uring_prep_rename(sqe, oldpath, newpath);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1sync_1file_1range(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jint len, jint offset, jint flags) {
+JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1sync_1file_1range(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jint len, jlong offset, jint flags) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_sync_file_range(sqe, fd, (unsigned int)len, offset, flags);
+    io_uring_prep_sync_file_range(sqe, fd, (unsigned)len, (__u64)offset, flags);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1mkdirat(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint dfd, jlong pathAddress, jint mode) {
@@ -1112,7 +1159,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1socket_1direct(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint domain, jint type, jint protocol, jint file_index, jint flags) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_socket_direct(sqe, domain, type, protocol, (unsigned int)file_index, (unsigned int)flags);
+    io_uring_prep_socket_direct(sqe, domain, type, protocol, (unsigned)file_index, (unsigned int)flags);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1socket_1direct_1alloc(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint domain, jint type, jint protocol, jint flags) {
@@ -1174,6 +1221,12 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     io_uring_prep_cmd_discard(sqe, fd, (uint64_t)offset, (uint64_t)nbytes);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1load_1sq_1head(JNIEnv *__env, jclass clazz, jlong ringAddress) {
+    struct io_uring const *ring = (struct io_uring const *)(uintptr_t)ringAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)io_uring_load_sq_head(ring);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1sq_1ready(JNIEnv *__env, jclass clazz, jlong ringAddress) {
     struct io_uring const *ring = (struct io_uring const *)(uintptr_t)ringAddress;
     UNUSED_PARAMS(__env, clazz)
@@ -1184,6 +1237,17 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     struct io_uring const *ring = (struct io_uring const *)(uintptr_t)ringAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jint)io_uring_sq_space_left(ring);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_io_1uring_1sqe_1shift_1from_1flags(JNIEnv *__env, jclass clazz, jint flags) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)io_uring_sqe_shift_from_flags((unsigned)flags);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1sqe_1shift(JNIEnv *__env, jclass clazz, jlong ringAddress) {
+    struct io_uring const *ring = (struct io_uring const *)(uintptr_t)ringAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)io_uring_sqe_shift(ring);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1sqring_1wait(JNIEnv *__env, jclass clazz, jlong ringAddress) {

@@ -618,6 +618,16 @@ public class LibURing {
         return nio_uring_unregister_napi(ring.address(), napi.address());
     }
 
+    // --- [ io_uring_register_ifq ] ---
+
+    /** {@code int io_uring_register_ifq(struct io_uring * ring, struct io_uring_zcrx_ifq_reg * reg)} */
+    public static native int nio_uring_register_ifq(long ring, long reg);
+
+    /** {@code int io_uring_register_ifq(struct io_uring * ring, struct io_uring_zcrx_ifq_reg * reg)} */
+    public static int io_uring_register_ifq(@NativeType("struct io_uring *") IOURing ring, @NativeType("struct io_uring_zcrx_ifq_reg *") IOURingZCRXIfqReg reg) {
+        return nio_uring_register_ifq(ring.address(), reg.address());
+    }
+
     // --- [ io_uring_register_clock ] ---
 
     /** {@code int io_uring_register_clock(struct io_uring * ring, struct io_uring_clock_register * arg)} */
@@ -663,15 +673,12 @@ public class LibURing {
 
     // --- [ io_uring_enter2 ] ---
 
-    /** {@code int io_uring_enter2(unsigned int fd, unsigned int to_submit, unsigned int min_complete, unsigned int flags, sigset_t * sig, size_t sz)} */
-    public static native int nio_uring_enter2(int fd, int to_submit, int min_complete, int flags, long sig, long sz);
+    /** {@code int io_uring_enter2(unsigned int fd, unsigned int to_submit, unsigned int min_complete, unsigned int flags, void * arg, size_t sz)} */
+    public static native int nio_uring_enter2(int fd, int to_submit, int min_complete, int flags, long arg, long sz);
 
-    /** {@code int io_uring_enter2(unsigned int fd, unsigned int to_submit, unsigned int min_complete, unsigned int flags, sigset_t * sig, size_t sz)} */
-    public static int io_uring_enter2(@NativeType("unsigned int") int fd, @NativeType("unsigned int") int to_submit, @NativeType("unsigned int") int min_complete, @NativeType("unsigned int") int flags, @NativeType("sigset_t *") long sig, @NativeType("size_t") long sz) {
-        if (CHECKS) {
-            check(sig);
-        }
-        return nio_uring_enter2(fd, to_submit, min_complete, flags, sig, sz);
+    /** {@code int io_uring_enter2(unsigned int fd, unsigned int to_submit, unsigned int min_complete, unsigned int flags, void * arg, size_t sz)} */
+    public static int io_uring_enter2(@NativeType("unsigned int") int fd, @NativeType("unsigned int") int to_submit, @NativeType("unsigned int") int min_complete, @NativeType("unsigned int") int flags, @NativeType("void *") ByteBuffer arg) {
+        return nio_uring_enter2(fd, to_submit, min_complete, flags, memAddress(arg), arg.remaining());
     }
 
     // --- [ io_uring_setup ] ---
@@ -722,6 +729,16 @@ public class LibURing {
     /** {@code int io_uring_free_buf_ring(struct io_uring * ring, struct io_uring_buf_ring * br, unsigned int nentries, int bgid)} */
     public static int io_uring_free_buf_ring(@NativeType("struct io_uring *") IOURing ring, @NativeType("struct io_uring_buf_ring *") IOURingBufRing br, @NativeType("unsigned int") int nentries, int bgid) {
         return nio_uring_free_buf_ring(ring.address(), br.address(), nentries, bgid);
+    }
+
+    // --- [ io_uring_set_iowait ] ---
+
+    /** {@code int io_uring_set_iowait(struct io_uring * ring, bool enable_iowait)} */
+    public static native int nio_uring_set_iowait(long ring, boolean enable_iowait);
+
+    /** {@code int io_uring_set_iowait(struct io_uring * ring, bool enable_iowait)} */
+    public static int io_uring_set_iowait(@NativeType("struct io_uring *") IOURing ring, @NativeType("bool") boolean enable_iowait) {
+        return nio_uring_set_iowait(ring.address(), enable_iowait);
     }
 
     // --- [ io_uring_cqe_seen ] ---
@@ -799,6 +816,16 @@ public class LibURing {
         nio_uring_sqe_set_buf_group(sqe.address(), bgid);
     }
 
+    // --- [ io_uring_initialize_sqe ] ---
+
+    /** {@code void io_uring_initialize_sqe(struct io_uring_sqe * sqe)} */
+    public static native void nio_uring_initialize_sqe(long sqe);
+
+    /** {@code void io_uring_initialize_sqe(struct io_uring_sqe * sqe)} */
+    public static void io_uring_initialize_sqe(@NativeType("struct io_uring_sqe *") IOURingSQE sqe) {
+        nio_uring_initialize_sqe(sqe.address());
+    }
+
     // --- [ io_uring_prep_splice ] ---
 
     /** {@code void io_uring_prep_splice(struct io_uring_sqe * sqe, int fd_in, int64_t off_in, int fd_out, int64_t off_out, unsigned int nbytes, unsigned int splice_flags)} */
@@ -841,51 +868,71 @@ public class LibURing {
 
     // --- [ io_uring_prep_read_fixed ] ---
 
-    /** {@code void io_uring_prep_read_fixed(struct io_uring_sqe * sqe, int fd, void * buf, unsigned int nbytes, int offset, int buf_index)} */
-    public static native void nio_uring_prep_read_fixed(long sqe, int fd, long buf, int nbytes, int offset, int buf_index);
+    /** {@code void io_uring_prep_read_fixed(struct io_uring_sqe * sqe, int fd, void * buf, unsigned int nbytes, __u64 offset, int buf_index)} */
+    public static native void nio_uring_prep_read_fixed(long sqe, int fd, long buf, int nbytes, long offset, int buf_index);
 
-    /** {@code void io_uring_prep_read_fixed(struct io_uring_sqe * sqe, int fd, void * buf, unsigned int nbytes, int offset, int buf_index)} */
-    public static void io_uring_prep_read_fixed(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("void *") ByteBuffer buf, int offset, int buf_index) {
+    /** {@code void io_uring_prep_read_fixed(struct io_uring_sqe * sqe, int fd, void * buf, unsigned int nbytes, __u64 offset, int buf_index)} */
+    public static void io_uring_prep_read_fixed(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("void *") ByteBuffer buf, @NativeType("__u64") long offset, int buf_index) {
         nio_uring_prep_read_fixed(sqe.address(), fd, memAddress(buf), buf.remaining(), offset, buf_index);
+    }
+
+    // --- [ io_uring_prep_readv_fixed ] ---
+
+    /** {@code void io_uring_prep_readv_fixed(struct io_uring_sqe * sqe, int fd, struct iovec const * iovecs, unsigned int nr_vecs, __u64 offset, int flags, int buf_index)} */
+    public static native void nio_uring_prep_readv_fixed(long sqe, int fd, long iovecs, int nr_vecs, long offset, int flags, int buf_index);
+
+    /** {@code void io_uring_prep_readv_fixed(struct io_uring_sqe * sqe, int fd, struct iovec const * iovecs, unsigned int nr_vecs, __u64 offset, int flags, int buf_index)} */
+    public static void io_uring_prep_readv_fixed(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("struct iovec const *") IOVec.Buffer iovecs, @NativeType("__u64") long offset, int flags, int buf_index) {
+        nio_uring_prep_readv_fixed(sqe.address(), fd, iovecs.address(), iovecs.remaining(), offset, flags, buf_index);
     }
 
     // --- [ io_uring_prep_writev ] ---
 
-    /** {@code void io_uring_prep_writev(struct io_uring_sqe * sqe, int fd, struct iovec const * iovecs, unsigned int nr_vecs, int offset)} */
-    public static native void nio_uring_prep_writev(long sqe, int fd, long iovecs, int nr_vecs, int offset);
+    /** {@code void io_uring_prep_writev(struct io_uring_sqe * sqe, int fd, struct iovec const * iovecs, unsigned int nr_vecs, __u64 offset)} */
+    public static native void nio_uring_prep_writev(long sqe, int fd, long iovecs, int nr_vecs, long offset);
 
-    /** {@code void io_uring_prep_writev(struct io_uring_sqe * sqe, int fd, struct iovec const * iovecs, unsigned int nr_vecs, int offset)} */
-    public static void io_uring_prep_writev(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("struct iovec const *") IOVec.Buffer iovecs, int offset) {
+    /** {@code void io_uring_prep_writev(struct io_uring_sqe * sqe, int fd, struct iovec const * iovecs, unsigned int nr_vecs, __u64 offset)} */
+    public static void io_uring_prep_writev(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("struct iovec const *") IOVec.Buffer iovecs, @NativeType("__u64") long offset) {
         nio_uring_prep_writev(sqe.address(), fd, iovecs.address(), iovecs.remaining(), offset);
     }
 
     // --- [ io_uring_prep_writev2 ] ---
 
-    /** {@code void io_uring_prep_writev2(struct io_uring_sqe * sqe, int fd, struct iovec const * iovecs, unsigned int nr_vecs, int offset, int flags)} */
-    public static native void nio_uring_prep_writev2(long sqe, int fd, long iovecs, int nr_vecs, int offset, int flags);
+    /** {@code void io_uring_prep_writev2(struct io_uring_sqe * sqe, int fd, struct iovec const * iovecs, unsigned int nr_vecs, __u64 offset, int flags)} */
+    public static native void nio_uring_prep_writev2(long sqe, int fd, long iovecs, int nr_vecs, long offset, int flags);
 
-    /** {@code void io_uring_prep_writev2(struct io_uring_sqe * sqe, int fd, struct iovec const * iovecs, unsigned int nr_vecs, int offset, int flags)} */
-    public static void io_uring_prep_writev2(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("struct iovec const *") IOVec.Buffer iovecs, int offset, int flags) {
+    /** {@code void io_uring_prep_writev2(struct io_uring_sqe * sqe, int fd, struct iovec const * iovecs, unsigned int nr_vecs, __u64 offset, int flags)} */
+    public static void io_uring_prep_writev2(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("struct iovec const *") IOVec.Buffer iovecs, @NativeType("__u64") long offset, int flags) {
         nio_uring_prep_writev2(sqe.address(), fd, iovecs.address(), iovecs.remaining(), offset, flags);
     }
 
     // --- [ io_uring_prep_write_fixed ] ---
 
-    /** {@code void io_uring_prep_write_fixed(struct io_uring_sqe * sqe, int fd, void const * buf, unsigned int nbytes, int offset, int buf_index)} */
-    public static native void nio_uring_prep_write_fixed(long sqe, int fd, long buf, int nbytes, int offset, int buf_index);
+    /** {@code void io_uring_prep_write_fixed(struct io_uring_sqe * sqe, int fd, void const * buf, unsigned int nbytes, __u64 offset, int buf_index)} */
+    public static native void nio_uring_prep_write_fixed(long sqe, int fd, long buf, int nbytes, long offset, int buf_index);
 
-    /** {@code void io_uring_prep_write_fixed(struct io_uring_sqe * sqe, int fd, void const * buf, unsigned int nbytes, int offset, int buf_index)} */
-    public static void io_uring_prep_write_fixed(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("void const *") ByteBuffer buf, int offset, int buf_index) {
+    /** {@code void io_uring_prep_write_fixed(struct io_uring_sqe * sqe, int fd, void const * buf, unsigned int nbytes, __u64 offset, int buf_index)} */
+    public static void io_uring_prep_write_fixed(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("void const *") ByteBuffer buf, @NativeType("__u64") long offset, int buf_index) {
         nio_uring_prep_write_fixed(sqe.address(), fd, memAddress(buf), buf.remaining(), offset, buf_index);
+    }
+
+    // --- [ io_uring_prep_writev_fixed ] ---
+
+    /** {@code void io_uring_prep_writev_fixed(struct io_uring_sqe * sqe, int fd, struct iovec const * iovecs, unsigned int nr_vecs, __u64 offset, int flags, int buf_index)} */
+    public static native void nio_uring_prep_writev_fixed(long sqe, int fd, long iovecs, int nr_vecs, long offset, int flags, int buf_index);
+
+    /** {@code void io_uring_prep_writev_fixed(struct io_uring_sqe * sqe, int fd, struct iovec const * iovecs, unsigned int nr_vecs, __u64 offset, int flags, int buf_index)} */
+    public static void io_uring_prep_writev_fixed(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("struct iovec const *") IOVec.Buffer iovecs, @NativeType("__u64") long offset, int flags, int buf_index) {
+        nio_uring_prep_writev_fixed(sqe.address(), fd, iovecs.address(), iovecs.remaining(), offset, flags, buf_index);
     }
 
     // --- [ io_uring_prep_recvmsg ] ---
 
-    /** {@code void io_uring_prep_recvmsg(struct io_uring_sqe * sqe, int fd, struct msghdr * msg, unsigned int flags)} */
+    /** {@code void io_uring_prep_recvmsg(struct io_uring_sqe * sqe, int fd, struct msghdr * msg, unsigned flags)} */
     public static native void nio_uring_prep_recvmsg(long sqe, int fd, long msg, int flags);
 
-    /** {@code void io_uring_prep_recvmsg(struct io_uring_sqe * sqe, int fd, struct msghdr * msg, unsigned int flags)} */
-    public static void io_uring_prep_recvmsg(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("struct msghdr *") Msghdr msg, @NativeType("unsigned int") int flags) {
+    /** {@code void io_uring_prep_recvmsg(struct io_uring_sqe * sqe, int fd, struct msghdr * msg, unsigned flags)} */
+    public static void io_uring_prep_recvmsg(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("struct msghdr *") Msghdr msg, @NativeType("unsigned") int flags) {
         nio_uring_prep_recvmsg(sqe.address(), fd, msg.address(), flags);
     }
 
@@ -901,11 +948,11 @@ public class LibURing {
 
     // --- [ io_uring_prep_sendmsg ] ---
 
-    /** {@code void io_uring_prep_sendmsg(struct io_uring_sqe * sqe, int fd, struct msghdr const * msg, unsigned int flags)} */
+    /** {@code void io_uring_prep_sendmsg(struct io_uring_sqe * sqe, int fd, struct msghdr const * msg, unsigned flags)} */
     public static native void nio_uring_prep_sendmsg(long sqe, int fd, long msg, int flags);
 
-    /** {@code void io_uring_prep_sendmsg(struct io_uring_sqe * sqe, int fd, struct msghdr const * msg, unsigned int flags)} */
-    public static void io_uring_prep_sendmsg(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("struct msghdr const *") Msghdr msg, @NativeType("unsigned int") int flags) {
+    /** {@code void io_uring_prep_sendmsg(struct io_uring_sqe * sqe, int fd, struct msghdr const * msg, unsigned flags)} */
+    public static void io_uring_prep_sendmsg(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("struct msghdr const *") Msghdr msg, @NativeType("unsigned") int flags) {
         if (CHECKS) {
             Msghdr.validate(msg.address());
         }
@@ -914,21 +961,21 @@ public class LibURing {
 
     // --- [ io_uring_prep_poll_add ] ---
 
-    /** {@code void io_uring_prep_poll_add(struct io_uring_sqe * sqe, int fd, unsigned int poll_mask)} */
+    /** {@code void io_uring_prep_poll_add(struct io_uring_sqe * sqe, int fd, unsigned poll_mask)} */
     public static native void nio_uring_prep_poll_add(long sqe, int fd, int poll_mask);
 
-    /** {@code void io_uring_prep_poll_add(struct io_uring_sqe * sqe, int fd, unsigned int poll_mask)} */
-    public static void io_uring_prep_poll_add(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("unsigned int") int poll_mask) {
+    /** {@code void io_uring_prep_poll_add(struct io_uring_sqe * sqe, int fd, unsigned poll_mask)} */
+    public static void io_uring_prep_poll_add(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("unsigned") int poll_mask) {
         nio_uring_prep_poll_add(sqe.address(), fd, poll_mask);
     }
 
     // --- [ io_uring_prep_poll_multishot ] ---
 
-    /** {@code void io_uring_prep_poll_multishot(struct io_uring_sqe * sqe, int fd, unsigned int poll_mask)} */
+    /** {@code void io_uring_prep_poll_multishot(struct io_uring_sqe * sqe, int fd, unsigned poll_mask)} */
     public static native void nio_uring_prep_poll_multishot(long sqe, int fd, int poll_mask);
 
-    /** {@code void io_uring_prep_poll_multishot(struct io_uring_sqe * sqe, int fd, unsigned int poll_mask)} */
-    public static void io_uring_prep_poll_multishot(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("unsigned int") int poll_mask) {
+    /** {@code void io_uring_prep_poll_multishot(struct io_uring_sqe * sqe, int fd, unsigned poll_mask)} */
+    public static void io_uring_prep_poll_multishot(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("unsigned") int poll_mask) {
         nio_uring_prep_poll_multishot(sqe.address(), fd, poll_mask);
     }
 
@@ -944,21 +991,21 @@ public class LibURing {
 
     // --- [ io_uring_prep_poll_update ] ---
 
-    /** {@code void io_uring_prep_poll_update(struct io_uring_sqe * sqe, __u64 old_user_data, __u64 new_user_data, unsigned int poll_mask, unsigned int flags)} */
+    /** {@code void io_uring_prep_poll_update(struct io_uring_sqe * sqe, __u64 old_user_data, __u64 new_user_data, unsigned poll_mask, unsigned flags)} */
     public static native void nio_uring_prep_poll_update(long sqe, long old_user_data, long new_user_data, int poll_mask, int flags);
 
-    /** {@code void io_uring_prep_poll_update(struct io_uring_sqe * sqe, __u64 old_user_data, __u64 new_user_data, unsigned int poll_mask, unsigned int flags)} */
-    public static void io_uring_prep_poll_update(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("__u64") long old_user_data, @NativeType("__u64") long new_user_data, @NativeType("unsigned int") int poll_mask, @NativeType("unsigned int") int flags) {
+    /** {@code void io_uring_prep_poll_update(struct io_uring_sqe * sqe, __u64 old_user_data, __u64 new_user_data, unsigned poll_mask, unsigned flags)} */
+    public static void io_uring_prep_poll_update(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("__u64") long old_user_data, @NativeType("__u64") long new_user_data, @NativeType("unsigned") int poll_mask, @NativeType("unsigned") int flags) {
         nio_uring_prep_poll_update(sqe.address(), old_user_data, new_user_data, poll_mask, flags);
     }
 
     // --- [ io_uring_prep_fsync ] ---
 
-    /** {@code void io_uring_prep_fsync(struct io_uring_sqe * sqe, int fd, unsigned int fsync_flags)} */
+    /** {@code void io_uring_prep_fsync(struct io_uring_sqe * sqe, int fd, unsigned fsync_flags)} */
     public static native void nio_uring_prep_fsync(long sqe, int fd, int fsync_flags);
 
-    /** {@code void io_uring_prep_fsync(struct io_uring_sqe * sqe, int fd, unsigned int fsync_flags)} */
-    public static void io_uring_prep_fsync(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("unsigned int") int fsync_flags) {
+    /** {@code void io_uring_prep_fsync(struct io_uring_sqe * sqe, int fd, unsigned fsync_flags)} */
+    public static void io_uring_prep_fsync(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("unsigned") int fsync_flags) {
         nio_uring_prep_fsync(sqe.address(), fd, fsync_flags);
     }
 
@@ -974,31 +1021,31 @@ public class LibURing {
 
     // --- [ io_uring_prep_timeout ] ---
 
-    /** {@code void io_uring_prep_timeout(struct io_uring_sqe * sqe, struct __kernel_timespec * ts, unsigned int count, unsigned int flags)} */
+    /** {@code void io_uring_prep_timeout(struct io_uring_sqe * sqe, struct __kernel_timespec * ts, unsigned count, unsigned flags)} */
     public static native void nio_uring_prep_timeout(long sqe, long ts, int count, int flags);
 
-    /** {@code void io_uring_prep_timeout(struct io_uring_sqe * sqe, struct __kernel_timespec * ts, unsigned int count, unsigned int flags)} */
-    public static void io_uring_prep_timeout(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("struct __kernel_timespec *") KernelTimespec ts, @NativeType("unsigned int") int count, @NativeType("unsigned int") int flags) {
+    /** {@code void io_uring_prep_timeout(struct io_uring_sqe * sqe, struct __kernel_timespec * ts, unsigned count, unsigned flags)} */
+    public static void io_uring_prep_timeout(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("struct __kernel_timespec *") KernelTimespec ts, @NativeType("unsigned") int count, @NativeType("unsigned") int flags) {
         nio_uring_prep_timeout(sqe.address(), ts.address(), count, flags);
     }
 
     // --- [ io_uring_prep_timeout_remove ] ---
 
-    /** {@code void io_uring_prep_timeout_remove(struct io_uring_sqe * sqe, __u64 user_data, unsigned int flags)} */
+    /** {@code void io_uring_prep_timeout_remove(struct io_uring_sqe * sqe, __u64 user_data, unsigned flags)} */
     public static native void nio_uring_prep_timeout_remove(long sqe, long user_data, int flags);
 
-    /** {@code void io_uring_prep_timeout_remove(struct io_uring_sqe * sqe, __u64 user_data, unsigned int flags)} */
-    public static void io_uring_prep_timeout_remove(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("__u64") long user_data, @NativeType("unsigned int") int flags) {
+    /** {@code void io_uring_prep_timeout_remove(struct io_uring_sqe * sqe, __u64 user_data, unsigned flags)} */
+    public static void io_uring_prep_timeout_remove(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("__u64") long user_data, @NativeType("unsigned") int flags) {
         nio_uring_prep_timeout_remove(sqe.address(), user_data, flags);
     }
 
     // --- [ io_uring_prep_timeout_update ] ---
 
-    /** {@code void io_uring_prep_timeout_update(struct io_uring_sqe * sqe, struct __kernel_timespec * ts, __u64 user_data, unsigned int flags)} */
+    /** {@code void io_uring_prep_timeout_update(struct io_uring_sqe * sqe, struct __kernel_timespec * ts, __u64 user_data, unsigned flags)} */
     public static native void nio_uring_prep_timeout_update(long sqe, long ts, long user_data, int flags);
 
-    /** {@code void io_uring_prep_timeout_update(struct io_uring_sqe * sqe, struct __kernel_timespec * ts, __u64 user_data, unsigned int flags)} */
-    public static void io_uring_prep_timeout_update(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("struct __kernel_timespec *") KernelTimespec ts, @NativeType("__u64") long user_data, @NativeType("unsigned int") int flags) {
+    /** {@code void io_uring_prep_timeout_update(struct io_uring_sqe * sqe, struct __kernel_timespec * ts, __u64 user_data, unsigned flags)} */
+    public static void io_uring_prep_timeout_update(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("struct __kernel_timespec *") KernelTimespec ts, @NativeType("__u64") long user_data, @NativeType("unsigned") int flags) {
         nio_uring_prep_timeout_update(sqe.address(), ts.address(), user_data, flags);
     }
 
@@ -1071,9 +1118,6 @@ public class LibURing {
 
     /** {@code void io_uring_prep_cancel(struct io_uring_sqe * sqe, void * user_data, int flags)} */
     public static void io_uring_prep_cancel(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("void *") long user_data, int flags) {
-        if (CHECKS) {
-            check(user_data);
-        }
         nio_uring_prep_cancel(sqe.address(), user_data, flags);
     }
 
@@ -1089,11 +1133,11 @@ public class LibURing {
 
     // --- [ io_uring_prep_link_timeout ] ---
 
-    /** {@code void io_uring_prep_link_timeout(struct io_uring_sqe * sqe, struct __kernel_timespec * ts, unsigned int flags)} */
+    /** {@code void io_uring_prep_link_timeout(struct io_uring_sqe * sqe, struct __kernel_timespec * ts, unsigned flags)} */
     public static native void nio_uring_prep_link_timeout(long sqe, long ts, int flags);
 
-    /** {@code void io_uring_prep_link_timeout(struct io_uring_sqe * sqe, struct __kernel_timespec * ts, unsigned int flags)} */
-    public static void io_uring_prep_link_timeout(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("struct __kernel_timespec *") KernelTimespec ts, @NativeType("unsigned int") int flags) {
+    /** {@code void io_uring_prep_link_timeout(struct io_uring_sqe * sqe, struct __kernel_timespec * ts, unsigned flags)} */
+    public static void io_uring_prep_link_timeout(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("struct __kernel_timespec *") KernelTimespec ts, @NativeType("unsigned") int flags) {
         nio_uring_prep_link_timeout(sqe.address(), ts.address(), flags);
     }
 
@@ -1127,23 +1171,33 @@ public class LibURing {
         nio_uring_prep_listen(sqe.address(), fd, backlog);
     }
 
+    // --- [ io_uring_prep_epoll_wait ] ---
+
+    /** {@code void io_uring_prep_epoll_wait(struct io_uring_sqe * sqe, int fd, struct epoll_event * events, unsigned int maxevents, unsigned flags)} */
+    public static native void nio_uring_prep_epoll_wait(long sqe, int fd, long events, int maxevents, int flags);
+
+    /** {@code void io_uring_prep_epoll_wait(struct io_uring_sqe * sqe, int fd, struct epoll_event * events, unsigned int maxevents, unsigned flags)} */
+    public static void io_uring_prep_epoll_wait(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("struct epoll_event *") EpollEvent.Buffer events, @NativeType("unsigned") int flags) {
+        nio_uring_prep_epoll_wait(sqe.address(), fd, events.address(), events.remaining(), flags);
+    }
+
     // --- [ io_uring_prep_files_update ] ---
 
-    /** {@code void io_uring_prep_files_update(struct io_uring_sqe * sqe, int * fds, unsigned int nr_fds, int offset)} */
+    /** {@code void io_uring_prep_files_update(struct io_uring_sqe * sqe, int * fds, unsigned nr_fds, int offset)} */
     public static native void nio_uring_prep_files_update(long sqe, long fds, int nr_fds, int offset);
 
-    /** {@code void io_uring_prep_files_update(struct io_uring_sqe * sqe, int * fds, unsigned int nr_fds, int offset)} */
+    /** {@code void io_uring_prep_files_update(struct io_uring_sqe * sqe, int * fds, unsigned nr_fds, int offset)} */
     public static void io_uring_prep_files_update(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("int *") IntBuffer fds, int offset) {
         nio_uring_prep_files_update(sqe.address(), memAddress(fds), fds.remaining(), offset);
     }
 
     // --- [ io_uring_prep_fallocate ] ---
 
-    /** {@code void io_uring_prep_fallocate(struct io_uring_sqe * sqe, int fd, int mode, off_t offset, off_t len)} */
+    /** {@code void io_uring_prep_fallocate(struct io_uring_sqe * sqe, int fd, int mode, __u64 offset, __u64 len)} */
     public static native void nio_uring_prep_fallocate(long sqe, int fd, int mode, long offset, long len);
 
-    /** {@code void io_uring_prep_fallocate(struct io_uring_sqe * sqe, int fd, int mode, off_t offset, off_t len)} */
-    public static void io_uring_prep_fallocate(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, int mode, @NativeType("off_t") long offset, @NativeType("off_t") long len) {
+    /** {@code void io_uring_prep_fallocate(struct io_uring_sqe * sqe, int fd, int mode, __u64 offset, __u64 len)} */
+    public static void io_uring_prep_fallocate(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, int mode, @NativeType("__u64") long offset, @NativeType("__u64") long len) {
         nio_uring_prep_fallocate(sqe.address(), fd, mode, offset, len);
     }
 
@@ -1269,11 +1323,11 @@ public class LibURing {
 
     // --- [ io_uring_prep_read ] ---
 
-    /** {@code void io_uring_prep_read(struct io_uring_sqe * sqe, int fd, void * buf, unsigned int nbytes, int offset)} */
-    public static native void nio_uring_prep_read(long sqe, int fd, long buf, int nbytes, int offset);
+    /** {@code void io_uring_prep_read(struct io_uring_sqe * sqe, int fd, void * buf, unsigned int nbytes, __u64 offset)} */
+    public static native void nio_uring_prep_read(long sqe, int fd, long buf, int nbytes, long offset);
 
-    /** {@code void io_uring_prep_read(struct io_uring_sqe * sqe, int fd, void * buf, unsigned int nbytes, int offset)} */
-    public static void io_uring_prep_read(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("void *") ByteBuffer buf, int offset) {
+    /** {@code void io_uring_prep_read(struct io_uring_sqe * sqe, int fd, void * buf, unsigned int nbytes, __u64 offset)} */
+    public static void io_uring_prep_read(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("void *") ByteBuffer buf, @NativeType("__u64") long offset) {
         nio_uring_prep_read(sqe.address(), fd, memAddress(buf), buf.remaining(), offset);
     }
 
@@ -1289,29 +1343,29 @@ public class LibURing {
 
     // --- [ io_uring_prep_write ] ---
 
-    /** {@code void io_uring_prep_write(struct io_uring_sqe * sqe, int fd, void const * buf, unsigned int nbytes, int offset)} */
-    public static native void nio_uring_prep_write(long sqe, int fd, long buf, int nbytes, int offset);
+    /** {@code void io_uring_prep_write(struct io_uring_sqe * sqe, int fd, void const * buf, unsigned int nbytes, __u64 offset)} */
+    public static native void nio_uring_prep_write(long sqe, int fd, long buf, int nbytes, long offset);
 
-    /** {@code void io_uring_prep_write(struct io_uring_sqe * sqe, int fd, void const * buf, unsigned int nbytes, int offset)} */
-    public static void io_uring_prep_write(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("void const *") ByteBuffer buf, int offset) {
+    /** {@code void io_uring_prep_write(struct io_uring_sqe * sqe, int fd, void const * buf, unsigned int nbytes, __u64 offset)} */
+    public static void io_uring_prep_write(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("void const *") ByteBuffer buf, @NativeType("__u64") long offset) {
         nio_uring_prep_write(sqe.address(), fd, memAddress(buf), buf.remaining(), offset);
     }
 
     // --- [ io_uring_prep_statx ] ---
 
-    /** {@code void io_uring_prep_statx(struct io_uring_sqe * sqe, int dfd, char const * path, int flags, unsigned int mask, struct statx * statxbuf)} */
+    /** {@code void io_uring_prep_statx(struct io_uring_sqe * sqe, int dfd, char const * path, int flags, unsigned mask, struct statx * statxbuf)} */
     public static native void nio_uring_prep_statx(long sqe, int dfd, long path, int flags, int mask, long statxbuf);
 
-    /** {@code void io_uring_prep_statx(struct io_uring_sqe * sqe, int dfd, char const * path, int flags, unsigned int mask, struct statx * statxbuf)} */
-    public static void io_uring_prep_statx(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int dfd, @NativeType("char const *") ByteBuffer path, int flags, @NativeType("unsigned int") int mask, @NativeType("struct statx *") Statx statxbuf) {
+    /** {@code void io_uring_prep_statx(struct io_uring_sqe * sqe, int dfd, char const * path, int flags, unsigned mask, struct statx * statxbuf)} */
+    public static void io_uring_prep_statx(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int dfd, @NativeType("char const *") ByteBuffer path, int flags, @NativeType("unsigned") int mask, @NativeType("struct statx *") Statx statxbuf) {
         if (CHECKS) {
             checkNT1(path);
         }
         nio_uring_prep_statx(sqe.address(), dfd, memAddress(path), flags, mask, statxbuf.address());
     }
 
-    /** {@code void io_uring_prep_statx(struct io_uring_sqe * sqe, int dfd, char const * path, int flags, unsigned int mask, struct statx * statxbuf)} */
-    public static void io_uring_prep_statx(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int dfd, @NativeType("char const *") CharSequence path, int flags, @NativeType("unsigned int") int mask, @NativeType("struct statx *") Statx statxbuf) {
+    /** {@code void io_uring_prep_statx(struct io_uring_sqe * sqe, int dfd, char const * path, int flags, unsigned mask, struct statx * statxbuf)} */
+    public static void io_uring_prep_statx(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int dfd, @NativeType("char const *") CharSequence path, int flags, @NativeType("unsigned") int mask, @NativeType("struct statx *") Statx statxbuf) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(path, true);
@@ -1344,11 +1398,11 @@ public class LibURing {
 
     // --- [ io_uring_prep_fadvise64 ] ---
 
-    /** {@code void io_uring_prep_fadvise64(struct io_uring_sqe * sqe, int fd, __u64 offset, __u32 len, int advice)} */
-    public static native void nio_uring_prep_fadvise64(long sqe, int fd, long offset, int len, int advice);
+    /** {@code void io_uring_prep_fadvise64(struct io_uring_sqe * sqe, int fd, __u64 offset, off_t len, int advice)} */
+    public static native void nio_uring_prep_fadvise64(long sqe, int fd, long offset, long len, int advice);
 
-    /** {@code void io_uring_prep_fadvise64(struct io_uring_sqe * sqe, int fd, __u64 offset, __u32 len, int advice)} */
-    public static void io_uring_prep_fadvise64(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("__u64") long offset, @NativeType("__u32") int len, int advice) {
+    /** {@code void io_uring_prep_fadvise64(struct io_uring_sqe * sqe, int fd, __u64 offset, off_t len, int advice)} */
+    public static void io_uring_prep_fadvise64(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("__u64") long offset, @NativeType("off_t") long len, int advice) {
         nio_uring_prep_fadvise64(sqe.address(), fd, offset, len, advice);
     }
 
@@ -1433,6 +1487,19 @@ public class LibURing {
             Msghdr.validate(msg.address());
         }
         nio_uring_prep_sendmsg_zc(sqe.address(), fd, msg.address(), flags);
+    }
+
+    // --- [ io_uring_prep_sendmsg_zc_fixed ] ---
+
+    /** {@code void io_uring_prep_sendmsg_zc_fixed(struct io_uring_sqe * sqe, int fd, struct msghdr const * msg, unsigned flags, unsigned buf_index)} */
+    public static native void nio_uring_prep_sendmsg_zc_fixed(long sqe, int fd, long msg, int flags, int buf_index);
+
+    /** {@code void io_uring_prep_sendmsg_zc_fixed(struct io_uring_sqe * sqe, int fd, struct msghdr const * msg, unsigned flags, unsigned buf_index)} */
+    public static void io_uring_prep_sendmsg_zc_fixed(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("struct msghdr const *") Msghdr msg, @NativeType("unsigned") int flags, @NativeType("unsigned") int buf_index) {
+        if (CHECKS) {
+            Msghdr.validate(msg.address());
+        }
+        nio_uring_prep_sendmsg_zc_fixed(sqe.address(), fd, msg.address(), flags, buf_index);
     }
 
     // --- [ io_uring_prep_recv ] ---
@@ -1551,19 +1618,19 @@ public class LibURing {
 
     // --- [ io_uring_prep_openat2_direct ] ---
 
-    /** {@code void io_uring_prep_openat2_direct(struct io_uring_sqe * sqe, int dfd, char const * path, struct open_how * how, unsigned int file_index)} */
+    /** {@code void io_uring_prep_openat2_direct(struct io_uring_sqe * sqe, int dfd, char const * path, struct open_how * how, unsigned file_index)} */
     public static native void nio_uring_prep_openat2_direct(long sqe, int dfd, long path, long how, int file_index);
 
-    /** {@code void io_uring_prep_openat2_direct(struct io_uring_sqe * sqe, int dfd, char const * path, struct open_how * how, unsigned int file_index)} */
-    public static void io_uring_prep_openat2_direct(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int dfd, @NativeType("char const *") ByteBuffer path, @NativeType("struct open_how *") OpenHow how, @NativeType("unsigned int") int file_index) {
+    /** {@code void io_uring_prep_openat2_direct(struct io_uring_sqe * sqe, int dfd, char const * path, struct open_how * how, unsigned file_index)} */
+    public static void io_uring_prep_openat2_direct(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int dfd, @NativeType("char const *") ByteBuffer path, @NativeType("struct open_how *") OpenHow how, @NativeType("unsigned") int file_index) {
         if (CHECKS) {
             checkNT1(path);
         }
         nio_uring_prep_openat2_direct(sqe.address(), dfd, memAddress(path), how.address(), file_index);
     }
 
-    /** {@code void io_uring_prep_openat2_direct(struct io_uring_sqe * sqe, int dfd, char const * path, struct open_how * how, unsigned int file_index)} */
-    public static void io_uring_prep_openat2_direct(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int dfd, @NativeType("char const *") CharSequence path, @NativeType("struct open_how *") OpenHow how, @NativeType("unsigned int") int file_index) {
+    /** {@code void io_uring_prep_openat2_direct(struct io_uring_sqe * sqe, int dfd, char const * path, struct open_how * how, unsigned file_index)} */
+    public static void io_uring_prep_openat2_direct(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int dfd, @NativeType("char const *") CharSequence path, @NativeType("struct open_how *") OpenHow how, @NativeType("unsigned") int file_index) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(path, true);
@@ -1722,11 +1789,11 @@ public class LibURing {
 
     // --- [ io_uring_prep_sync_file_range ] ---
 
-    /** {@code void io_uring_prep_sync_file_range(struct io_uring_sqe * sqe, int fd, unsigned int len, int offset, int flags)} */
-    public static native void nio_uring_prep_sync_file_range(long sqe, int fd, int len, int offset, int flags);
+    /** {@code void io_uring_prep_sync_file_range(struct io_uring_sqe * sqe, int fd, unsigned len, __u64 offset, int flags)} */
+    public static native void nio_uring_prep_sync_file_range(long sqe, int fd, int len, long offset, int flags);
 
-    /** {@code void io_uring_prep_sync_file_range(struct io_uring_sqe * sqe, int fd, unsigned int len, int offset, int flags)} */
-    public static void io_uring_prep_sync_file_range(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("unsigned int") int len, int offset, int flags) {
+    /** {@code void io_uring_prep_sync_file_range(struct io_uring_sqe * sqe, int fd, unsigned len, __u64 offset, int flags)} */
+    public static void io_uring_prep_sync_file_range(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("unsigned") int len, @NativeType("__u64") long offset, int flags) {
         nio_uring_prep_sync_file_range(sqe.address(), fd, len, offset, flags);
     }
 
@@ -2050,11 +2117,11 @@ public class LibURing {
 
     // --- [ io_uring_prep_socket_direct ] ---
 
-    /** {@code void io_uring_prep_socket_direct(struct io_uring_sqe * sqe, int domain, int type, int protocol, unsigned int file_index, unsigned int flags)} */
+    /** {@code void io_uring_prep_socket_direct(struct io_uring_sqe * sqe, int domain, int type, int protocol, unsigned file_index, unsigned int flags)} */
     public static native void nio_uring_prep_socket_direct(long sqe, int domain, int type, int protocol, int file_index, int flags);
 
-    /** {@code void io_uring_prep_socket_direct(struct io_uring_sqe * sqe, int domain, int type, int protocol, unsigned int file_index, unsigned int flags)} */
-    public static void io_uring_prep_socket_direct(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int domain, int type, int protocol, @NativeType("unsigned int") int file_index, @NativeType("unsigned int") int flags) {
+    /** {@code void io_uring_prep_socket_direct(struct io_uring_sqe * sqe, int domain, int type, int protocol, unsigned file_index, unsigned int flags)} */
+    public static void io_uring_prep_socket_direct(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int domain, int type, int protocol, @NativeType("unsigned") int file_index, @NativeType("unsigned int") int flags) {
         nio_uring_prep_socket_direct(sqe.address(), domain, type, protocol, file_index, flags);
     }
 
@@ -2157,6 +2224,20 @@ public class LibURing {
         nio_uring_prep_cmd_discard(sqe.address(), fd, offset, nbytes);
     }
 
+    // --- [ io_uring_load_sq_head ] ---
+
+    /** {@code unsigned io_uring_load_sq_head(struct io_uring const * ring)} */
+    public static native int nio_uring_load_sq_head(long ring);
+
+    /** {@code unsigned io_uring_load_sq_head(struct io_uring const * ring)} */
+    @NativeType("unsigned")
+    public static int io_uring_load_sq_head(@NativeType("struct io_uring const *") IOURing ring) {
+        if (CHECKS) {
+            IOURing.validate(ring.address());
+        }
+        return nio_uring_load_sq_head(ring.address());
+    }
+
     // --- [ io_uring_sq_ready ] ---
 
     /** {@code unsigned int io_uring_sq_ready(struct io_uring const * ring)} */
@@ -2183,6 +2264,26 @@ public class LibURing {
             IOURing.validate(ring.address());
         }
         return nio_uring_sq_space_left(ring.address());
+    }
+
+    // --- [ io_uring_sqe_shift_from_flags ] ---
+
+    /** {@code unsigned io_uring_sqe_shift_from_flags(unsigned flags)} */
+    @NativeType("unsigned")
+    public static native int io_uring_sqe_shift_from_flags(@NativeType("unsigned") int flags);
+
+    // --- [ io_uring_sqe_shift ] ---
+
+    /** {@code unsigned io_uring_sqe_shift(struct io_uring const * ring)} */
+    public static native int nio_uring_sqe_shift(long ring);
+
+    /** {@code unsigned io_uring_sqe_shift(struct io_uring const * ring)} */
+    @NativeType("unsigned")
+    public static int io_uring_sqe_shift(@NativeType("struct io_uring const *") IOURing ring) {
+        if (CHECKS) {
+            IOURing.validate(ring.address());
+        }
+        return nio_uring_sqe_shift(ring.address());
     }
 
     // --- [ io_uring_sqring_wait ] ---
