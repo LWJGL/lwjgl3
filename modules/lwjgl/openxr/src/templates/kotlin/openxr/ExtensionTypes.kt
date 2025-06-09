@@ -119,6 +119,7 @@ val XrVirtualKeyboardInputSourceMETA = "XrVirtualKeyboardInputSourceMETA".enumTy
 val XrExternalCameraAttachedToDeviceOCULUS = "XrExternalCameraAttachedToDeviceOCULUS".enumType
 val XrPerformanceMetricsCounterUnitMETA = "XrPerformanceMetricsCounterUnitMETA".enumType
 val XrPassthroughColorLutChannelsMETA = "XrPassthroughColorLutChannelsMETA".enumType
+val XrFullBodyJointMETA = "XrFullBodyJointMETA".enumType
 val XrFaceExpression2FB = "XrFaceExpression2FB".enumType
 val XrFaceExpressionSet2FB = "XrFaceExpressionSet2FB".enumType
 val XrFaceTrackingDataSource2FB = "XrFaceTrackingDataSource2FB".enumType
@@ -2571,6 +2572,12 @@ val XrSpaceTriangleMeshMETA = struct(Module.OPENXR, "XrSpaceTriangleMeshMETA", m
     nullable..uint32_t.p("indices")
 }
 
+val XrSystemPropertiesBodyTrackingFullBodyMETA = struct(Module.OPENXR, "XrSystemPropertiesBodyTrackingFullBodyMETA", mutable = false) {
+    Expression("#TYPE_SYSTEM_PROPERTIES_BODY_TRACKING_FULL_BODY_META")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsFullBodyTracking")
+}
+
 val XrEventDataPassthroughLayerResumedMETA = struct(Module.OPENXR, "XrEventDataPassthroughLayerResumedMETA", mutable = false, parentStruct = XrEventDataBaseHeader) {
     Expression("#TYPE_EVENT_DATA_PASSTHROUGH_LAYER_RESUMED_META")..XrStructureType("type").mutable()
     nullable..opaque_const_p("next").mutable()
@@ -3132,6 +3139,13 @@ val XrSenseDataProviderCreateInfoSpatialMeshBD = struct(Module.OPENXR, "XrSenseD
     XrSpatialMeshLodBD("lod")
 }
 
+val XrFuturePollResultProgressBD = struct(Module.OPENXR, "XrFuturePollResultProgressBD", mutable = false) {
+    Expression("#TYPE_FUTURE_POLL_RESULT_PROGRESS_BD")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("isSupported")
+    uint32_t("progressPercentage")
+}
+
 val XrHandTrackingDataSourceInfoEXT = struct(Module.OPENXR, "XrHandTrackingDataSourceInfoEXT") {
     Expression("#TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT")..XrStructureType("type")
     nullable..opaque_const_p("next")
@@ -3234,7 +3248,10 @@ val XrFutureCompletionBaseHeaderEXT = struct(Module.OPENXR, "XrFutureCompletionB
 
 val XrFuturePollResultEXT = struct(Module.OPENXR, "XrFuturePollResultEXT", mutable = false) {
     Expression("#TYPE_FUTURE_POLL_RESULT_EXT")..XrStructureType("type").mutable()
-    nullable..opaque_p("next").mutable()
+    PointerSetter(
+        "XrFuturePollResultProgressBD",
+        prepend = true
+    )..nullable..opaque_p("next").mutable()
     XrFutureStateEXT("state")
 }
 
@@ -3418,6 +3435,22 @@ val XrFacialExpressionBlendShapePropertiesML = struct(Module.OPENXR, "XrFacialEx
     float("weight")
     XrFacialExpressionBlendShapePropertiesFlagsML("flags")
     XrTime("time")
+}
+
+val XrSystemSimultaneousHandsAndControllersPropertiesMETA = struct(Module.OPENXR, "XrSystemSimultaneousHandsAndControllersPropertiesMETA", mutable = false) {
+    Expression("#TYPE_SYSTEM_SIMULTANEOUS_HANDS_AND_CONTROLLERS_PROPERTIES_META")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsSimultaneousHandsAndControllers")
+}
+
+val XrSimultaneousHandsAndControllersTrackingResumeInfoMETA = struct(Module.OPENXR, "XrSimultaneousHandsAndControllersTrackingResumeInfoMETA") {
+    Expression("#TYPE_SIMULTANEOUS_HANDS_AND_CONTROLLERS_TRACKING_RESUME_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+}
+
+val XrSimultaneousHandsAndControllersTrackingPauseInfoMETA = struct(Module.OPENXR, "XrSimultaneousHandsAndControllersTrackingPauseInfoMETA") {
+    Expression("#TYPE_SIMULTANEOUS_HANDS_AND_CONTROLLERS_TRACKING_PAUSE_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
 }
 
 val XrColocationDiscoveryStartInfoMETA = struct(Module.OPENXR, "XrColocationDiscoveryStartInfoMETA") {

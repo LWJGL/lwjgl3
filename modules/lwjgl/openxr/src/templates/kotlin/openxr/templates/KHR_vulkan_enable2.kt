@@ -12,7 +12,7 @@ import openxr.*
 val KHR_vulkan_enable2 = "KHRVulkanEnable2".nativeClassXR("KHR_vulkan_enable2", type = "instance", postfix = "KHR") {
     javaImport("org.lwjgl.vulkan.*")
     IntConstant(
-        "KHR_vulkan_enable2_SPEC_VERSION".."2"
+        "KHR_vulkan_enable2_SPEC_VERSION".."3"
     )
 
     StringConstant(

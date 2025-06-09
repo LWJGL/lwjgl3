@@ -90,6 +90,8 @@ public class XrFuturePollResultEXT extends Struct<XrFuturePollResultEXT> impleme
     public XrFuturePollResultEXT type$Default() { return type(EXTFuture.XR_TYPE_FUTURE_POLL_RESULT_EXT); }
     /** Sets the specified value to the {@code next} field. */
     public XrFuturePollResultEXT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrFuturePollResultProgressBD} value to the {@code next} chain. */
+    public XrFuturePollResultEXT next(XrFuturePollResultProgressBD value) { return this.next(value.next(this.next()).address()); }
 
     /** Initializes this struct with the specified values. */
     public XrFuturePollResultEXT set(
@@ -296,6 +298,8 @@ public class XrFuturePollResultEXT extends Struct<XrFuturePollResultEXT> impleme
         public XrFuturePollResultEXT.Buffer type$Default() { return type(EXTFuture.XR_TYPE_FUTURE_POLL_RESULT_EXT); }
         /** Sets the specified value to the {@code next} field. */
         public XrFuturePollResultEXT.Buffer next(@NativeType("void *") long value) { XrFuturePollResultEXT.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrFuturePollResultProgressBD} value to the {@code next} chain. */
+        public XrFuturePollResultEXT.Buffer next(XrFuturePollResultProgressBD value) { return this.next(value.next(this.next()).address()); }
 
     }
 

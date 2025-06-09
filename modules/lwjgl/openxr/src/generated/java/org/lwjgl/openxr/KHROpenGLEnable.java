@@ -12,7 +12,7 @@ import static org.lwjgl.system.JNI.*;
 
 public class KHROpenGLEnable {
 
-    public static final int XR_KHR_opengl_enable_SPEC_VERSION = 10;
+    public static final int XR_KHR_opengl_enable_SPEC_VERSION = 11;
 
     public static final String XR_KHR_OPENGL_ENABLE_EXTENSION_NAME = "XR_KHR_opengl_enable";
 
