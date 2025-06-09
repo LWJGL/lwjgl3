@@ -62,6 +62,7 @@ enum class Platforms(val classifier: String) {
     LINUX_ARM32("linux-arm32"),
     LINUX_PPC64LE("linux-ppc64le"),
     LINUX_RISCV64("linux-riscv64"),
+    LINUX_LOONGARCH64("linux-loongarch64"),
     MACOS("macos"),
     MACOS_ARM64("macos-arm64"),
     WINDOWS("windows"),
@@ -89,7 +90,7 @@ enum class Artifacts(
         "lwjgl-bgfx", "LWJGL - bgfx bindings",
         "A cross-platform, graphics API agnostic rendering library. It provides a high performance, low level abstraction for common platform graphics APIs like OpenGL, Direct3D and Apple Metal.",
         Platforms.FREEBSD,
-        Platforms.LINUX, Platforms.LINUX_ARM64, Platforms.LINUX_ARM32, Platforms.LINUX_PPC64LE, Platforms.LINUX_RISCV64,
+        Platforms.LINUX, Platforms.LINUX_ARM64, Platforms.LINUX_ARM32, Platforms.LINUX_PPC64LE, Platforms.LINUX_RISCV64, Platforms.LINUX_LOONGARCH64,
         Platforms.MACOS, Platforms.MACOS_ARM64,
         Platforms.WINDOWS, Platforms.WINDOWS_X86
     ),
@@ -134,7 +135,7 @@ enum class Artifacts(
         "lwjgl-ktx", "LWJGL - KTX (Khronos Texture) bindings",
         "A lightweight container for textures for OpenGL®, Vulkan® and other GPU APIs.",
         Platforms.FREEBSD,
-        Platforms.LINUX, Platforms.LINUX_ARM64, Platforms.LINUX_ARM32, Platforms.LINUX_PPC64LE, Platforms.LINUX_RISCV64,
+        Platforms.LINUX, Platforms.LINUX_ARM64, Platforms.LINUX_ARM32, Platforms.LINUX_PPC64LE, Platforms.LINUX_RISCV64, Platforms.LINUX_LOONGARCH64,
         Platforms.MACOS, Platforms.MACOS_ARM64,
         Platforms.WINDOWS, Platforms.WINDOWS_ARM64
     ),
@@ -205,7 +206,7 @@ enum class Artifacts(
         "lwjgl-openxr", "LWJGL - OpenXR bindings",
         "A royalty-free, open standard that provides high-performance access to Augmented Reality (AR) and Virtual Reality (VR)—collectively known as XR—platforms and devices.",
         Platforms.FREEBSD,
-        Platforms.LINUX, Platforms.LINUX_ARM64, Platforms.LINUX_ARM32, Platforms.LINUX_PPC64LE, Platforms.LINUX_RISCV64,
+        Platforms.LINUX, Platforms.LINUX_ARM64, Platforms.LINUX_ARM32, Platforms.LINUX_PPC64LE, Platforms.LINUX_RISCV64, Platforms.LINUX_LOONGARCH64,
         Platforms.WINDOWS, Platforms.WINDOWS_X86, Platforms.WINDOWS_ARM64
     ),
     OPUS(
@@ -222,7 +223,7 @@ enum class Artifacts(
         "lwjgl-remotery", "LWJGL - Remotery bindings",
         "A realtime CPU/GPU profiler hosted in a single C file with a viewer that runs in a web browser.",
         Platforms.FREEBSD,
-        Platforms.LINUX, Platforms.LINUX_ARM64, Platforms.LINUX_ARM32, Platforms.LINUX_PPC64LE, Platforms.LINUX_RISCV64,
+        Platforms.LINUX, Platforms.LINUX_ARM64, Platforms.LINUX_ARM32, Platforms.LINUX_PPC64LE, Platforms.LINUX_RISCV64, Platforms.LINUX_LOONGARCH64,
         Platforms.MACOS, Platforms.MACOS_ARM64,
         Platforms.WINDOWS, Platforms.WINDOWS_X86
     ),
