@@ -880,8 +880,8 @@ public class SDLSurface {
 
     /** {@code bool SDL_StretchSurface(SDL_Surface * src, SDL_Rect const * srcrect, SDL_Surface * dst, SDL_Rect const * dstrect, SDL_ScaleMode scaleMode)} */
     @NativeType("bool")
-    public static boolean SDL_StretchSurface(@NativeType("SDL_Surface *") SDL_Surface src, @NativeType("SDL_Rect const *") SDL_Rect srcrect, @NativeType("SDL_Surface *") SDL_Surface dst, @NativeType("SDL_Rect const *") SDL_Rect dstrect, @NativeType("SDL_ScaleMode") int scaleMode) {
-        return nSDL_StretchSurface(src.address(), srcrect.address(), dst.address(), dstrect.address(), scaleMode);
+    public static boolean SDL_StretchSurface(@NativeType("SDL_Surface *") SDL_Surface src, @NativeType("SDL_Rect const *") @Nullable SDL_Rect srcrect, @NativeType("SDL_Surface *") SDL_Surface dst, @NativeType("SDL_Rect const *") @Nullable SDL_Rect dstrect, @NativeType("SDL_ScaleMode") int scaleMode) {
+        return nSDL_StretchSurface(src.address(), memAddressSafe(srcrect), dst.address(), memAddressSafe(dstrect), scaleMode);
     }
 
     // --- [ SDL_BlitSurfaceTiled ] ---

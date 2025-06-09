@@ -416,9 +416,9 @@ val SDL_surface = "SDLSurface".nativeClassSDL("SDL_surface") {
         "StretchSurface",
 
         SDL_Surface.p("src"),
-        SDL_Rect.const.p("srcrect"),
+        nullable..SDL_Rect.const.p("srcrect"),
         SDL_Surface.p("dst"),
-        SDL_Rect.const.p("dstrect"),
+        nullable..SDL_Rect.const.p("dstrect"),
         SDL_ScaleMode("scaleMode")
     )
 
