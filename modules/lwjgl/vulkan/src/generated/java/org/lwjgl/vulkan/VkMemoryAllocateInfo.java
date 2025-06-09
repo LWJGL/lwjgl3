@@ -133,6 +133,8 @@ public class VkMemoryAllocateInfo extends Struct<VkMemoryAllocateInfo> implement
     public VkMemoryAllocateInfo pNext(VkMemoryDedicatedAllocateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMemoryDedicatedAllocateInfoKHR} value to the {@code pNext} chain. */
     public VkMemoryAllocateInfo pNext(VkMemoryDedicatedAllocateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkMemoryDedicatedAllocateInfoTensorARM} value to the {@code pNext} chain. */
+    public VkMemoryAllocateInfo pNext(VkMemoryDedicatedAllocateInfoTensorARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMemoryOpaqueCaptureAddressAllocateInfo} value to the {@code pNext} chain. */
     public VkMemoryAllocateInfo pNext(VkMemoryOpaqueCaptureAddressAllocateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMemoryOpaqueCaptureAddressAllocateInfoKHR} value to the {@code pNext} chain. */
@@ -417,6 +419,8 @@ public class VkMemoryAllocateInfo extends Struct<VkMemoryAllocateInfo> implement
         public VkMemoryAllocateInfo.Buffer pNext(VkMemoryDedicatedAllocateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMemoryDedicatedAllocateInfoKHR} value to the {@code pNext} chain. */
         public VkMemoryAllocateInfo.Buffer pNext(VkMemoryDedicatedAllocateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkMemoryDedicatedAllocateInfoTensorARM} value to the {@code pNext} chain. */
+        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryDedicatedAllocateInfoTensorARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMemoryOpaqueCaptureAddressAllocateInfo} value to the {@code pNext} chain. */
         public VkMemoryAllocateInfo.Buffer pNext(VkMemoryOpaqueCaptureAddressAllocateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMemoryOpaqueCaptureAddressAllocateInfoKHR} value to the {@code pNext} chain. */

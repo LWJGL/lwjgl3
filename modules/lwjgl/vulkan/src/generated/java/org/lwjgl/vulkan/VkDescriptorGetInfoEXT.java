@@ -96,6 +96,8 @@ public class VkDescriptorGetInfoEXT extends Struct<VkDescriptorGetInfoEXT> imple
     public VkDescriptorGetInfoEXT sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_DESCRIPTOR_GET_INFO_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkDescriptorGetInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkDescriptorGetTensorInfoARM} value to the {@code pNext} chain. */
+    public VkDescriptorGetInfoEXT pNext(VkDescriptorGetTensorInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code type} field. */
     public VkDescriptorGetInfoEXT type(@NativeType("VkDescriptorType") int value) { ntype(address(), value); return this; }
     /** Copies the specified {@link VkDescriptorDataEXT} to the {@code data} field. */
@@ -320,6 +322,8 @@ public class VkDescriptorGetInfoEXT extends Struct<VkDescriptorGetInfoEXT> imple
         public VkDescriptorGetInfoEXT.Buffer sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_DESCRIPTOR_GET_INFO_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkDescriptorGetInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkDescriptorGetInfoEXT.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkDescriptorGetTensorInfoARM} value to the {@code pNext} chain. */
+        public VkDescriptorGetInfoEXT.Buffer pNext(VkDescriptorGetTensorInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code type} field. */
         public VkDescriptorGetInfoEXT.Buffer type(@NativeType("VkDescriptorType") int value) { VkDescriptorGetInfoEXT.ntype(address(), value); return this; }
         /** Copies the specified {@link VkDescriptorDataEXT} to the {@code data} field. */

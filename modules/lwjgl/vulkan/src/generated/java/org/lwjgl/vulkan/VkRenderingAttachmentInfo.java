@@ -138,6 +138,8 @@ public class VkRenderingAttachmentInfo extends Struct<VkRenderingAttachmentInfo>
     public VkRenderingAttachmentInfo sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkRenderingAttachmentInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkAttachmentFeedbackLoopInfoEXT} value to the {@code pNext} chain. */
+    public VkRenderingAttachmentInfo pNext(VkAttachmentFeedbackLoopInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code imageView} field. */
     public VkRenderingAttachmentInfo imageView(@NativeType("VkImageView") long value) { nimageView(address(), value); return this; }
     /** Sets the specified value to the {@code imageLayout} field. */
@@ -428,6 +430,8 @@ public class VkRenderingAttachmentInfo extends Struct<VkRenderingAttachmentInfo>
         public VkRenderingAttachmentInfo.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkRenderingAttachmentInfo.Buffer pNext(@NativeType("void const *") long value) { VkRenderingAttachmentInfo.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkAttachmentFeedbackLoopInfoEXT} value to the {@code pNext} chain. */
+        public VkRenderingAttachmentInfo.Buffer pNext(VkAttachmentFeedbackLoopInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code imageView} field. */
         public VkRenderingAttachmentInfo.Buffer imageView(@NativeType("VkImageView") long value) { VkRenderingAttachmentInfo.nimageView(address(), value); return this; }
         /** Sets the specified value to the {@code imageLayout} field. */

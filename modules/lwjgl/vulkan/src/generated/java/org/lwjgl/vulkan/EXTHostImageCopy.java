@@ -32,7 +32,9 @@ public class EXTHostImageCopy {
 
     public static final long VK_FORMAT_FEATURE_2_HOST_IMAGE_TRANSFER_BIT_EXT = 0x400000000000L;
 
-    public static final int VK_HOST_IMAGE_COPY_MEMCPY_EXT = 0x1;
+    public static final int
+        VK_HOST_IMAGE_COPY_MEMCPY_BIT_EXT = 0x1,
+        VK_HOST_IMAGE_COPY_MEMCPY_EXT     = 0x1;
 
     protected EXTHostImageCopy() {
         throw new UnsupportedOperationException();

@@ -99,6 +99,8 @@ public class VkFormatProperties2 extends Struct<VkFormatProperties2> implements 
     public VkFormatProperties2 pNext(VkFormatProperties3KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSubpassResolvePerformanceQueryEXT} value to the {@code pNext} chain. */
     public VkFormatProperties2 pNext(VkSubpassResolvePerformanceQueryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkTensorFormatPropertiesARM} value to the {@code pNext} chain. */
+    public VkFormatProperties2 pNext(VkTensorFormatPropertiesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     /** Initializes this struct with the specified values. */
     public VkFormatProperties2 set(
@@ -333,6 +335,8 @@ public class VkFormatProperties2 extends Struct<VkFormatProperties2> implements 
         public VkFormatProperties2.Buffer pNext(VkFormatProperties3KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSubpassResolvePerformanceQueryEXT} value to the {@code pNext} chain. */
         public VkFormatProperties2.Buffer pNext(VkSubpassResolvePerformanceQueryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkTensorFormatPropertiesARM} value to the {@code pNext} chain. */
+        public VkFormatProperties2.Buffer pNext(VkTensorFormatPropertiesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     }
 

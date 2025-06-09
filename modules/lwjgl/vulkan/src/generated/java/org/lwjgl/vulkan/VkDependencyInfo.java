@@ -133,6 +133,10 @@ public class VkDependencyInfo extends Struct<VkDependencyInfo> implements Native
     public VkDependencyInfo sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_DEPENDENCY_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkDependencyInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkTensorDependencyInfoARM} value to the {@code pNext} chain. */
+    public VkDependencyInfo pNext(VkTensorDependencyInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkTensorMemoryBarrierARM} value to the {@code pNext} chain. */
+    public VkDependencyInfo pNext(VkTensorMemoryBarrierARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code dependencyFlags} field. */
     public VkDependencyInfo dependencyFlags(@NativeType("VkDependencyFlags") int value) { ndependencyFlags(address(), value); return this; }
     /** Sets the address of the specified {@link VkMemoryBarrier2.Buffer} to the {@code pMemoryBarriers} field. */
@@ -416,6 +420,10 @@ public class VkDependencyInfo extends Struct<VkDependencyInfo> implements Native
         public VkDependencyInfo.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_DEPENDENCY_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkDependencyInfo.Buffer pNext(@NativeType("void const *") long value) { VkDependencyInfo.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkTensorDependencyInfoARM} value to the {@code pNext} chain. */
+        public VkDependencyInfo.Buffer pNext(VkTensorDependencyInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkTensorMemoryBarrierARM} value to the {@code pNext} chain. */
+        public VkDependencyInfo.Buffer pNext(VkTensorMemoryBarrierARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code dependencyFlags} field. */
         public VkDependencyInfo.Buffer dependencyFlags(@NativeType("VkDependencyFlags") int value) { VkDependencyInfo.ndependencyFlags(address(), value); return this; }
         /** Sets the address of the specified {@link VkMemoryBarrier2.Buffer} to the {@code pMemoryBarriers} field. */

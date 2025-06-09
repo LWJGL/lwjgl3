@@ -169,6 +169,7 @@ val VK14 = "VK14".nativeClass(Module.VULKAN, "VK14", prefix = "VK", binding = VK
     )
 
     EnumConstant(
+        "HOST_IMAGE_COPY_MEMCPY_BIT".enum(0x00000001),
         "HOST_IMAGE_COPY_MEMCPY".enum(0x00000001)
     )
 

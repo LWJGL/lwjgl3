@@ -132,6 +132,10 @@ public class VkPresentInfoKHR extends Struct<VkPresentInfoKHR> implements Native
     public VkPresentInfoKHR pNext(VkDisplayPresentInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkFrameBoundaryEXT} value to the {@code pNext} chain. */
     public VkPresentInfoKHR pNext(VkFrameBoundaryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkFrameBoundaryTensorsARM} value to the {@code pNext} chain. */
+    public VkPresentInfoKHR pNext(VkFrameBoundaryTensorsARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPresentId2KHR} value to the {@code pNext} chain. */
+    public VkPresentInfoKHR pNext(VkPresentId2KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPresentIdKHR} value to the {@code pNext} chain. */
     public VkPresentInfoKHR pNext(VkPresentIdKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPresentRegionsKHR} value to the {@code pNext} chain. */
@@ -445,6 +449,10 @@ public class VkPresentInfoKHR extends Struct<VkPresentInfoKHR> implements Native
         public VkPresentInfoKHR.Buffer pNext(VkDisplayPresentInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkFrameBoundaryEXT} value to the {@code pNext} chain. */
         public VkPresentInfoKHR.Buffer pNext(VkFrameBoundaryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkFrameBoundaryTensorsARM} value to the {@code pNext} chain. */
+        public VkPresentInfoKHR.Buffer pNext(VkFrameBoundaryTensorsARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPresentId2KHR} value to the {@code pNext} chain. */
+        public VkPresentInfoKHR.Buffer pNext(VkPresentId2KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPresentIdKHR} value to the {@code pNext} chain. */
         public VkPresentInfoKHR.Buffer pNext(VkPresentIdKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPresentRegionsKHR} value to the {@code pNext} chain. */

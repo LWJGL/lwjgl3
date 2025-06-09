@@ -43,7 +43,8 @@ val QCOM_tile_shading = "QCOMTileShading".nativeClassVK("QCOM_tile_shading", typ
     void(
         "CmdDispatchTileQCOM",
 
-        VkCommandBuffer("commandBuffer")
+        VkCommandBuffer("commandBuffer"),
+        VkDispatchTileInfoQCOM.const.p("pDispatchTileInfo")
     )
 
     void(

@@ -24,6 +24,7 @@ val ANDROID_external_format_resolve = "ANDROIDExternalFormatResolve".nativeClass
     )
 
     EnumConstant(
+        "RESOLVE_MODE_EXTERNAL_FORMAT_DOWNSAMPLE_BIT_ANDROID".enum(0x00000010),
         "RESOLVE_MODE_EXTERNAL_FORMAT_DOWNSAMPLE_ANDROID".enum(0x00000010)
     )
 }

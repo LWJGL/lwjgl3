@@ -144,7 +144,9 @@ public class VK14 extends VK13 {
         VK_PIPELINE_CREATE_2_NO_PROTECTED_ACCESS_BIT               = 0x8000000L,
         VK_PIPELINE_CREATE_2_PROTECTED_ACCESS_ONLY_BIT             = 0x40000000L;
 
-    public static final int VK_HOST_IMAGE_COPY_MEMCPY = 0x1;
+    public static final int
+        VK_HOST_IMAGE_COPY_MEMCPY_BIT = 0x1,
+        VK_HOST_IMAGE_COPY_MEMCPY     = 0x1;
 
     public static final int VK_API_VERSION_1_4 = VK_MAKE_API_VERSION(0, 1, 4, 0);
 

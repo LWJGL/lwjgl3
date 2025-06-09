@@ -99,6 +99,8 @@ public class VkQueueFamilyProperties2 extends Struct<VkQueueFamilyProperties2> i
     public VkQueueFamilyProperties2 pNext(VkQueueFamilyGlobalPriorityPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkQueueFamilyGlobalPriorityPropertiesKHR} value to the {@code pNext} chain. */
     public VkQueueFamilyProperties2 pNext(VkQueueFamilyGlobalPriorityPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkQueueFamilyOwnershipTransferPropertiesKHR} value to the {@code pNext} chain. */
+    public VkQueueFamilyProperties2 pNext(VkQueueFamilyOwnershipTransferPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkQueueFamilyQueryResultStatusPropertiesKHR} value to the {@code pNext} chain. */
     public VkQueueFamilyProperties2 pNext(VkQueueFamilyQueryResultStatusPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkQueueFamilyVideoPropertiesKHR} value to the {@code pNext} chain. */
@@ -337,6 +339,8 @@ public class VkQueueFamilyProperties2 extends Struct<VkQueueFamilyProperties2> i
         public VkQueueFamilyProperties2.Buffer pNext(VkQueueFamilyGlobalPriorityPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkQueueFamilyGlobalPriorityPropertiesKHR} value to the {@code pNext} chain. */
         public VkQueueFamilyProperties2.Buffer pNext(VkQueueFamilyGlobalPriorityPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkQueueFamilyOwnershipTransferPropertiesKHR} value to the {@code pNext} chain. */
+        public VkQueueFamilyProperties2.Buffer pNext(VkQueueFamilyOwnershipTransferPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkQueueFamilyQueryResultStatusPropertiesKHR} value to the {@code pNext} chain. */
         public VkQueueFamilyProperties2.Buffer pNext(VkQueueFamilyQueryResultStatusPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkQueueFamilyVideoPropertiesKHR} value to the {@code pNext} chain. */

@@ -46,6 +46,7 @@ val KHR_device_group = "KHRDeviceGroup".nativeClassVK("KHR_device_group", type =
 
     EnumConstant(
         "PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHR".enum(0x00000008),
+        "PIPELINE_CREATE_DISPATCH_BASE_BIT_KHR".enum(0x00000010),
         "PIPELINE_CREATE_DISPATCH_BASE_KHR".enum(0x00000010)
     )
 

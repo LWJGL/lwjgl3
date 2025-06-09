@@ -46,6 +46,7 @@ public class KHRDeviceGroup {
 
     public static final int
         VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHR = 0x8,
+        VK_PIPELINE_CREATE_DISPATCH_BASE_BIT_KHR                = 0x10,
         VK_PIPELINE_CREATE_DISPATCH_BASE_KHR                    = 0x10;
 
     public static final int VK_DEPENDENCY_DEVICE_GROUP_BIT_KHR = 0x4;

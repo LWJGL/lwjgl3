@@ -40,13 +40,18 @@ public class QCOMTileShading {
 
     // --- [ vkCmdDispatchTileQCOM ] ---
 
-    /** {@code void vkCmdDispatchTileQCOM(VkCommandBuffer commandBuffer)} */
-    public static void vkCmdDispatchTileQCOM(VkCommandBuffer commandBuffer) {
+    /** {@code void vkCmdDispatchTileQCOM(VkCommandBuffer commandBuffer, VkDispatchTileInfoQCOM const * pDispatchTileInfo)} */
+    public static void nvkCmdDispatchTileQCOM(VkCommandBuffer commandBuffer, long pDispatchTileInfo) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdDispatchTileQCOM;
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(commandBuffer.address(), __functionAddress);
+        callPPV(commandBuffer.address(), pDispatchTileInfo, __functionAddress);
+    }
+
+    /** {@code void vkCmdDispatchTileQCOM(VkCommandBuffer commandBuffer, VkDispatchTileInfoQCOM const * pDispatchTileInfo)} */
+    public static void vkCmdDispatchTileQCOM(VkCommandBuffer commandBuffer, @NativeType("VkDispatchTileInfoQCOM const *") VkDispatchTileInfoQCOM pDispatchTileInfo) {
+        nvkCmdDispatchTileQCOM(commandBuffer, pDispatchTileInfo.address());
     }
 
     // --- [ vkCmdBeginPerTileExecutionQCOM ] ---
