@@ -85,7 +85,7 @@ MSDF_API int msdf_ft_load_font_data(msdf_ft_handle handle, const void* data, siz
 /**
  * Loads a single glyph from the given font and converts it into a vector shape
  * for rendering glyph sprites.
- * @param font A handle to the font to load the glyph shape from.
+ * @param font A handle to the font to use for generating the glyph shape.
  * @param cp The codepoint to generate a shape for.
  * @param coordinateScaling The type of coordinate transform applied to the shape.
  * @param shape A pointer to a handle to be populated with the address of the newly created shape.
