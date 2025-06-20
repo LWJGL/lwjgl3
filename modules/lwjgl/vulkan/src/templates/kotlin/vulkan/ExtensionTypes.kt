@@ -37,6 +37,7 @@ val VkTensorViewARM = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkTensorViewARM")
 val VkOpticalFlowSessionNV = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkOpticalFlowSessionNV")
 val VkShaderEXT = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkShaderEXT")
 val VkPipelineBinaryKHR = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkPipelineBinaryKHR")
+val VkDataGraphPipelineSessionARM = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkDataGraphPipelineSessionARM")
 val VkExternalComputeQueueNV = VK_DEFINE_HANDLE("VkExternalComputeQueueNV")
 val VkIndirectExecutionSetEXT = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkIndirectExecutionSetEXT")
 val VkIndirectCommandsLayoutEXT = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkIndirectCommandsLayoutEXT")
@@ -239,6 +240,13 @@ val VkLatencyMarkerNV = "VkLatencyMarkerNV".enumType
 val VkOutOfBandQueueTypeNV = "VkOutOfBandQueueTypeNV".enumType
 val VkComponentTypeKHR = "VkComponentTypeKHR".enumType
 val VkScopeKHR = "VkScopeKHR".enumType
+val VkDataGraphPipelineSessionBindPointARM = "VkDataGraphPipelineSessionBindPointARM".enumType
+val VkDataGraphPipelineSessionBindPointTypeARM = "VkDataGraphPipelineSessionBindPointTypeARM".enumType
+val VkDataGraphPipelineSessionCreateFlagBitsARM = "VkDataGraphPipelineSessionCreateFlagBitsARM".enumType
+val VkDataGraphPipelinePropertyARM = "VkDataGraphPipelinePropertyARM".enumType
+val VkDataGraphPipelineDispatchFlagBitsARM = "VkDataGraphPipelineDispatchFlagBitsARM".enumType
+val VkPhysicalDeviceDataGraphProcessingEngineTypeARM = "VkPhysicalDeviceDataGraphProcessingEngineTypeARM".enumType
+val VkPhysicalDeviceDataGraphOperationTypeARM = "VkPhysicalDeviceDataGraphOperationTypeARM".enumType
 val VkVideoEncodeAV1PredictionModeKHR = "VkVideoEncodeAV1PredictionModeKHR".enumType
 val VkVideoEncodeAV1RateControlGroupKHR = "VkVideoEncodeAV1RateControlGroupKHR".enumType
 val VkVideoEncodeAV1CapabilityFlagBitsKHR = "VkVideoEncodeAV1CapabilityFlagBitsKHR".enumType
@@ -398,6 +406,8 @@ val VkOpticalFlowExecuteFlagsNV = typedef(VkFlags, "VkOpticalFlowExecuteFlagsNV"
 val VkPipelineCreateFlags2KHR = typedef(VkFlags64, "VkPipelineCreateFlags2KHR")
 val VkBufferUsageFlags2KHR = typedef(VkFlags64, "VkBufferUsageFlags2KHR")
 val VkShaderCreateFlagsEXT = typedef(VkFlags, "VkShaderCreateFlagsEXT")
+val VkDataGraphPipelineSessionCreateFlagsARM = typedef(VkFlags64, "VkDataGraphPipelineSessionCreateFlagsARM")
+val VkDataGraphPipelineDispatchFlagsARM = typedef(VkFlags64, "VkDataGraphPipelineDispatchFlagsARM")
 val VkVideoEncodeAV1CapabilityFlagsKHR = typedef(VkFlags, "VkVideoEncodeAV1CapabilityFlagsKHR")
 val VkVideoEncodeAV1StdFlagsKHR = typedef(VkFlags, "VkVideoEncodeAV1StdFlagsKHR")
 val VkVideoEncodeAV1SuperblockSizeFlagsKHR = typedef(VkFlags, "VkVideoEncodeAV1SuperblockSizeFlagsKHR")
@@ -7388,7 +7398,7 @@ val VkPhysicalDeviceDescriptorBufferTensorFeaturesARM = struct(Module.VULKAN, "V
 
 val VkPhysicalDeviceDescriptorBufferTensorPropertiesARM = struct(Module.VULKAN, "VkPhysicalDeviceDescriptorBufferTensorPropertiesARM") {
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_TENSOR_PROPERTIES_ARM")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
+    nullable..opaque_p("pNext")
     size_t("tensorCaptureReplayDescriptorDataSize")
     size_t("tensorViewCaptureReplayDescriptorDataSize")
     size_t("tensorDescriptorSize")
@@ -8069,6 +8079,183 @@ val VkPhysicalDeviceCooperativeMatrixPropertiesKHR = struct(Module.VULKAN, "VkPh
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR")..VkStructureType("sType").mutable()
     nullable..opaque_p("pNext").mutable()
     VkShaderStageFlags("cooperativeMatrixSupportedStages")
+}
+
+val VkPhysicalDeviceDataGraphFeaturesARM = struct(Module.VULKAN, "VkPhysicalDeviceDataGraphFeaturesARM") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DATA_GRAPH_FEATURES_ARM")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("dataGraph")
+    VkBool32("dataGraphUpdateAfterBind")
+    VkBool32("dataGraphSpecializationConstants")
+    VkBool32("dataGraphDescriptorBuffer")
+    VkBool32("dataGraphShaderModule")
+}
+
+val VkDataGraphPipelineConstantARM = struct(Module.VULKAN, "VkDataGraphPipelineConstantARM") {
+    Expression("#STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_CONSTANT_ARM")..VkStructureType("sType")
+    PointerSetter(
+        "VkDataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM", "VkTensorDescriptionARM",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    uint32_t("id")
+    opaque_const_p("pConstantData")
+}
+
+val VkDataGraphPipelineResourceInfoARM = struct(Module.VULKAN, "VkDataGraphPipelineResourceInfoARM") {
+    Expression("#STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_RESOURCE_INFO_ARM")..VkStructureType("sType")
+    PointerSetter(
+        "VkTensorDescriptionARM",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    uint32_t("descriptorSet")
+    uint32_t("binding")
+    uint32_t("arrayElement")
+}
+
+val VkDataGraphPipelineCompilerControlCreateInfoARM = struct(Module.VULKAN, "VkDataGraphPipelineCompilerControlCreateInfoARM") {
+    Expression("#STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_COMPILER_CONTROL_CREATE_INFO_ARM")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    charUTF8.const.p("pVendorOptions")
+}
+
+val VkDataGraphPipelineCreateInfoARM = struct(Module.VULKAN, "VkDataGraphPipelineCreateInfoARM") {
+    Expression("#STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_CREATE_INFO_ARM")..VkStructureType("sType")
+    PointerSetter(
+        "VkDataGraphPipelineCompilerControlCreateInfoARM", "VkDataGraphPipelineIdentifierCreateInfoARM", "VkDataGraphPipelineShaderModuleCreateInfoARM", "VkDataGraphProcessingEngineCreateInfoARM", "VkPipelineCreationFeedbackCreateInfo", "VkPipelineCreationFeedbackCreateInfoEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkPipelineCreateFlags2KHR("flags")
+    VkPipelineLayout("layout")
+    AutoSize("pResourceInfos")..uint32_t("resourceInfoCount")
+    VkDataGraphPipelineResourceInfoARM.const.p("pResourceInfos")
+}
+
+val VkDataGraphPipelineShaderModuleCreateInfoARM = struct(Module.VULKAN, "VkDataGraphPipelineShaderModuleCreateInfoARM") {
+    Expression("#STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SHADER_MODULE_CREATE_INFO_ARM")..VkStructureType("sType")
+    PointerSetter(
+        "VkShaderModuleCreateInfo",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkShaderModule("module")
+    charUTF8.const.p("pName")
+    nullable..VkSpecializationInfo.const.p("pSpecializationInfo")
+    AutoSize("pConstants", optional = true)..uint32_t("constantCount")
+    nullable..VkDataGraphPipelineConstantARM.const.p("pConstants")
+}
+
+val VkDataGraphPipelineSessionCreateInfoARM = struct(Module.VULKAN, "VkDataGraphPipelineSessionCreateInfoARM") {
+    Expression("#STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SESSION_CREATE_INFO_ARM")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkDataGraphPipelineSessionCreateFlagsARM("flags")
+    VkPipeline("dataGraphPipeline")
+}
+
+val VkDataGraphPipelineSessionBindPointRequirementsInfoARM = struct(Module.VULKAN, "VkDataGraphPipelineSessionBindPointRequirementsInfoARM") {
+    Expression("#STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_REQUIREMENTS_INFO_ARM")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkDataGraphPipelineSessionARM("session")
+}
+
+val VkDataGraphPipelineSessionBindPointRequirementARM = struct(Module.VULKAN, "VkDataGraphPipelineSessionBindPointRequirementARM") {
+    Expression("#STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_REQUIREMENT_ARM")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkDataGraphPipelineSessionBindPointARM("bindPoint")
+    VkDataGraphPipelineSessionBindPointTypeARM("bindPointType")
+    uint32_t("numObjects")
+}
+
+val VkDataGraphPipelineSessionMemoryRequirementsInfoARM = struct(Module.VULKAN, "VkDataGraphPipelineSessionMemoryRequirementsInfoARM") {
+    Expression("#STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SESSION_MEMORY_REQUIREMENTS_INFO_ARM")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkDataGraphPipelineSessionARM("session")
+    VkDataGraphPipelineSessionBindPointARM("bindPoint")
+    uint32_t("objectIndex")
+}
+
+val VkBindDataGraphPipelineSessionMemoryInfoARM = struct(Module.VULKAN, "VkBindDataGraphPipelineSessionMemoryInfoARM") {
+    Expression("#STRUCTURE_TYPE_BIND_DATA_GRAPH_PIPELINE_SESSION_MEMORY_INFO_ARM")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkDataGraphPipelineSessionARM("session")
+    VkDataGraphPipelineSessionBindPointARM("bindPoint")
+    uint32_t("objectIndex")
+    VkDeviceMemory("memory")
+    VkDeviceSize("memoryOffset")
+}
+
+val VkDataGraphPipelineInfoARM = struct(Module.VULKAN, "VkDataGraphPipelineInfoARM") {
+    Expression("#STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_INFO_ARM")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkPipeline("dataGraphPipeline")
+}
+
+val VkDataGraphPipelinePropertyQueryResultARM = struct(Module.VULKAN, "VkDataGraphPipelinePropertyQueryResultARM") {
+    Expression("#STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_PROPERTY_QUERY_RESULT_ARM")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkDataGraphPipelinePropertyARM("property")
+    VkBool32("isText")
+    AutoSize("pData", optional = true)..size_t("dataSize")
+    nullable..void.p("pData")
+}
+
+val VkDataGraphPipelineIdentifierCreateInfoARM = struct(Module.VULKAN, "VkDataGraphPipelineIdentifierCreateInfoARM") {
+    Expression("#STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_IDENTIFIER_CREATE_INFO_ARM")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    AutoSize("pIdentifier")..uint32_t("identifierSize")
+    uint8_t.const.p("pIdentifier")
+}
+
+val VkDataGraphPipelineDispatchInfoARM = struct(Module.VULKAN, "VkDataGraphPipelineDispatchInfoARM") {
+    Expression("#STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_DISPATCH_INFO_ARM")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkDataGraphPipelineDispatchFlagsARM("flags")
+}
+
+val VkPhysicalDeviceDataGraphProcessingEngineARM = struct(Module.VULKAN, "VkPhysicalDeviceDataGraphProcessingEngineARM") {
+    VkPhysicalDeviceDataGraphProcessingEngineTypeARM("type")
+    VkBool32("isForeign")
+}
+
+val VkPhysicalDeviceDataGraphOperationSupportARM = struct(Module.VULKAN, "VkPhysicalDeviceDataGraphOperationSupportARM") {
+    javaImport("static org.lwjgl.vulkan.ARMDataGraph.*")
+    VkPhysicalDeviceDataGraphOperationTypeARM("operationType")
+    charUTF8("name")["VK_MAX_PHYSICAL_DEVICE_DATA_GRAPH_OPERATION_SET_NAME_SIZE_ARM"]
+    uint32_t("version")
+}
+
+val VkQueueFamilyDataGraphPropertiesARM = struct(Module.VULKAN, "VkQueueFamilyDataGraphPropertiesARM") {
+    Expression("#STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROPERTIES_ARM")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkPhysicalDeviceDataGraphProcessingEngineARM("engine")
+    VkPhysicalDeviceDataGraphOperationSupportARM("operation")
+}
+
+val VkDataGraphProcessingEngineCreateInfoARM = struct(Module.VULKAN, "VkDataGraphProcessingEngineCreateInfoARM") {
+    Expression("#STRUCTURE_TYPE_DATA_GRAPH_PROCESSING_ENGINE_CREATE_INFO_ARM")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    AutoSize("pProcessingEngines")..uint32_t("processingEngineCount")
+    VkPhysicalDeviceDataGraphProcessingEngineARM.p("pProcessingEngines")
+}
+
+val VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM = struct(Module.VULKAN, "VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_QUEUE_FAMILY_DATA_GRAPH_PROCESSING_ENGINE_INFO_ARM")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    uint32_t("queueFamilyIndex")
+    VkPhysicalDeviceDataGraphProcessingEngineTypeARM("engineType")
+}
+
+val VkQueueFamilyDataGraphProcessingEnginePropertiesARM = struct(Module.VULKAN, "VkQueueFamilyDataGraphProcessingEnginePropertiesARM") {
+    Expression("#STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROCESSING_ENGINE_PROPERTIES_ARM")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkExternalSemaphoreHandleTypeFlags("foreignSemaphoreHandleTypes")
+    VkExternalMemoryHandleTypeFlags("foreignMemoryHandleTypes")
+}
+
+val VkDataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM = struct(Module.VULKAN, "VkDataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM") {
+    Expression("#STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_CONSTANT_TENSOR_SEMI_STRUCTURED_SPARSITY_INFO_ARM")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    uint32_t("dimension")
+    uint32_t("zeroCount")
+    uint32_t("groupSize")
 }
 
 val VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM = struct(Module.VULKAN, "VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM") {
@@ -8946,6 +9133,10 @@ val VkClusterAccelerationStructureInstantiateClusterInfoNV = struct(Module.VULKA
     VkStridedDeviceAddressNV("vertexBuffer")
 }
 
+val VkClusterAccelerationStructureGetTemplateIndicesInfoNV = struct(Module.VULKAN, "VkClusterAccelerationStructureGetTemplateIndicesInfoNV") {
+    VkDeviceAddress("clusterTemplateAddress")
+}
+
 val VkRayTracingPipelineClusterAccelerationStructureCreateInfoNV = struct(Module.VULKAN, "VkRayTracingPipelineClusterAccelerationStructureCreateInfoNV") {
     Expression("#STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CLUSTER_ACCELERATION_STRUCTURE_CREATE_INFO_NV")..VkStructureType("sType")
     nullable..opaque_p("pNext")
@@ -9395,6 +9586,24 @@ val VkPhysicalDeviceFormatPackFeaturesARM = struct(Module.VULKAN, "VkPhysicalDev
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_FORMAT_PACK_FEATURES_ARM")..VkStructureType("sType")
     nullable..opaque_p("pNext")
     VkBool32("formatPack")
+}
+
+val VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE = struct(Module.VULKAN, "VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE", mutable = false) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_LAYERED_FEATURES_VALVE")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
+    VkBool32("fragmentDensityMapLayered")
+}
+
+val VkPhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE = struct(Module.VULKAN, "VkPhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE", mutable = false) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_LAYERED_PROPERTIES_VALVE")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
+    uint32_t("maxFragmentDensityMapLayers")
+}
+
+val VkPipelineFragmentDensityMapLayeredCreateInfoVALVE = struct(Module.VULKAN, "VkPipelineFragmentDensityMapLayeredCreateInfoVALVE") {
+    Expression("#STRUCTURE_TYPE_PIPELINE_FRAGMENT_DENSITY_MAP_LAYERED_CREATE_INFO_VALVE")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    uint32_t("maxFragmentDensityMapLayers")
 }
 
 val VkPhysicalDeviceRobustness2FeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceRobustness2FeaturesKHR") {

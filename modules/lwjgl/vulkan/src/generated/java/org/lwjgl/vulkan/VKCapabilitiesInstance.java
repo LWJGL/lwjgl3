@@ -51,6 +51,11 @@ public class VKCapabilitiesInstance {
     public final long
         vkGetPhysicalDeviceToolProperties;
 
+    /** Function pointers for ARM_data_graph */
+    public final long
+        vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM,
+        vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM;
+
     /** Function pointers for ARM_tensors */
     public final long
         vkGetPhysicalDeviceExternalTensorPropertiesARM;
@@ -352,13 +357,14 @@ public class VKCapabilitiesInstance {
     VKCapabilitiesInstance(FunctionProvider provider, int apiVersion, Set<String> ext, Set<String> deviceExt) {
         this.apiVersion = apiVersion;
 
-        long[] caps = new long[109];
+        long[] caps = new long[111];
 
         Vulkan10 = check_VK10(provider, caps, ext);
         Vulkan11 = check_VK11(provider, caps, ext);
         Vulkan12 = ext.contains("Vulkan12");
         Vulkan13 = check_VK13(provider, caps, ext);
         Vulkan14 = ext.contains("Vulkan14");
+        check_ARM_data_graph(provider, caps, deviceExt);
         check_ARM_tensors(provider, caps, deviceExt);
         VK_EXT_acquire_drm_display = check_EXT_acquire_drm_display(provider, caps, ext);
         VK_EXT_acquire_xlib_display = check_EXT_acquire_xlib_display(provider, caps, ext);
@@ -438,91 +444,93 @@ public class VKCapabilitiesInstance {
         vkGetPhysicalDeviceExternalFenceProperties = caps[21];
         vkGetPhysicalDeviceExternalSemaphoreProperties = caps[22];
         vkGetPhysicalDeviceToolProperties = caps[23];
-        vkGetPhysicalDeviceExternalTensorPropertiesARM = caps[24];
-        vkAcquireDrmDisplayEXT = caps[25];
-        vkGetDrmDisplayEXT = caps[26];
-        vkAcquireXlibDisplayEXT = caps[27];
-        vkGetRandROutputDisplayEXT = caps[28];
-        vkGetPhysicalDeviceCalibrateableTimeDomainsEXT = caps[29];
-        vkCreateDebugReportCallbackEXT = caps[30];
-        vkDestroyDebugReportCallbackEXT = caps[31];
-        vkDebugReportMessageEXT = caps[32];
-        vkSetDebugUtilsObjectNameEXT = caps[33];
-        vkSetDebugUtilsObjectTagEXT = caps[34];
-        vkQueueBeginDebugUtilsLabelEXT = caps[35];
-        vkQueueEndDebugUtilsLabelEXT = caps[36];
-        vkQueueInsertDebugUtilsLabelEXT = caps[37];
-        vkCmdBeginDebugUtilsLabelEXT = caps[38];
-        vkCmdEndDebugUtilsLabelEXT = caps[39];
-        vkCmdInsertDebugUtilsLabelEXT = caps[40];
-        vkCreateDebugUtilsMessengerEXT = caps[41];
-        vkDestroyDebugUtilsMessengerEXT = caps[42];
-        vkSubmitDebugUtilsMessageEXT = caps[43];
-        vkReleaseDisplayEXT = caps[44];
-        vkCreateDirectFBSurfaceEXT = caps[45];
-        vkGetPhysicalDeviceDirectFBPresentationSupportEXT = caps[46];
-        vkGetPhysicalDeviceSurfaceCapabilities2EXT = caps[47];
-        vkGetPhysicalDeviceSurfacePresentModes2EXT = caps[48];
-        vkCreateHeadlessSurfaceEXT = caps[49];
-        vkCreateMetalSurfaceEXT = caps[50];
-        vkGetPhysicalDeviceMultisamplePropertiesEXT = caps[51];
-        vkGetPhysicalDeviceToolPropertiesEXT = caps[52];
-        vkCreateAndroidSurfaceKHR = caps[53];
-        vkGetPhysicalDeviceCalibrateableTimeDomainsKHR = caps[54];
-        vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR = caps[55];
-        vkGetPhysicalDevicePresentRectanglesKHR = caps[56];
-        vkEnumeratePhysicalDeviceGroupsKHR = caps[57];
-        vkGetPhysicalDeviceDisplayPropertiesKHR = caps[58];
-        vkGetPhysicalDeviceDisplayPlanePropertiesKHR = caps[59];
-        vkGetDisplayPlaneSupportedDisplaysKHR = caps[60];
-        vkGetDisplayModePropertiesKHR = caps[61];
-        vkCreateDisplayModeKHR = caps[62];
-        vkGetDisplayPlaneCapabilitiesKHR = caps[63];
-        vkCreateDisplayPlaneSurfaceKHR = caps[64];
-        vkGetPhysicalDeviceExternalFencePropertiesKHR = caps[65];
-        vkGetPhysicalDeviceExternalBufferPropertiesKHR = caps[66];
-        vkGetPhysicalDeviceExternalSemaphorePropertiesKHR = caps[67];
-        vkGetPhysicalDeviceFragmentShadingRatesKHR = caps[68];
-        vkGetPhysicalDeviceDisplayProperties2KHR = caps[69];
-        vkGetPhysicalDeviceDisplayPlaneProperties2KHR = caps[70];
-        vkGetDisplayModeProperties2KHR = caps[71];
-        vkGetDisplayPlaneCapabilities2KHR = caps[72];
-        vkGetPhysicalDeviceFeatures2KHR = caps[73];
-        vkGetPhysicalDeviceProperties2KHR = caps[74];
-        vkGetPhysicalDeviceFormatProperties2KHR = caps[75];
-        vkGetPhysicalDeviceImageFormatProperties2KHR = caps[76];
-        vkGetPhysicalDeviceQueueFamilyProperties2KHR = caps[77];
-        vkGetPhysicalDeviceMemoryProperties2KHR = caps[78];
-        vkGetPhysicalDeviceSparseImageFormatProperties2KHR = caps[79];
-        vkGetPhysicalDeviceSurfaceCapabilities2KHR = caps[80];
-        vkGetPhysicalDeviceSurfaceFormats2KHR = caps[81];
-        vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR = caps[82];
-        vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR = caps[83];
-        vkDestroySurfaceKHR = caps[84];
-        vkGetPhysicalDeviceSurfaceSupportKHR = caps[85];
-        vkGetPhysicalDeviceSurfaceCapabilitiesKHR = caps[86];
-        vkGetPhysicalDeviceSurfaceFormatsKHR = caps[87];
-        vkGetPhysicalDeviceSurfacePresentModesKHR = caps[88];
-        vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR = caps[89];
-        vkGetPhysicalDeviceVideoCapabilitiesKHR = caps[90];
-        vkGetPhysicalDeviceVideoFormatPropertiesKHR = caps[91];
-        vkCreateWaylandSurfaceKHR = caps[92];
-        vkGetPhysicalDeviceWaylandPresentationSupportKHR = caps[93];
-        vkCreateWin32SurfaceKHR = caps[94];
-        vkGetPhysicalDeviceWin32PresentationSupportKHR = caps[95];
-        vkCreateXcbSurfaceKHR = caps[96];
-        vkGetPhysicalDeviceXcbPresentationSupportKHR = caps[97];
-        vkCreateXlibSurfaceKHR = caps[98];
-        vkGetPhysicalDeviceXlibPresentationSupportKHR = caps[99];
-        vkCreateMacOSSurfaceMVK = caps[100];
-        vkAcquireWinrtDisplayNV = caps[101];
-        vkGetWinrtDisplayNV = caps[102];
-        vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = caps[103];
-        vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV = caps[104];
-        vkGetPhysicalDeviceCooperativeVectorPropertiesNV = caps[105];
-        vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV = caps[106];
-        vkGetPhysicalDeviceExternalImageFormatPropertiesNV = caps[107];
-        vkGetPhysicalDeviceOpticalFlowImageFormatsNV = caps[108];
+        vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM = caps[24];
+        vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM = caps[25];
+        vkGetPhysicalDeviceExternalTensorPropertiesARM = caps[26];
+        vkAcquireDrmDisplayEXT = caps[27];
+        vkGetDrmDisplayEXT = caps[28];
+        vkAcquireXlibDisplayEXT = caps[29];
+        vkGetRandROutputDisplayEXT = caps[30];
+        vkGetPhysicalDeviceCalibrateableTimeDomainsEXT = caps[31];
+        vkCreateDebugReportCallbackEXT = caps[32];
+        vkDestroyDebugReportCallbackEXT = caps[33];
+        vkDebugReportMessageEXT = caps[34];
+        vkSetDebugUtilsObjectNameEXT = caps[35];
+        vkSetDebugUtilsObjectTagEXT = caps[36];
+        vkQueueBeginDebugUtilsLabelEXT = caps[37];
+        vkQueueEndDebugUtilsLabelEXT = caps[38];
+        vkQueueInsertDebugUtilsLabelEXT = caps[39];
+        vkCmdBeginDebugUtilsLabelEXT = caps[40];
+        vkCmdEndDebugUtilsLabelEXT = caps[41];
+        vkCmdInsertDebugUtilsLabelEXT = caps[42];
+        vkCreateDebugUtilsMessengerEXT = caps[43];
+        vkDestroyDebugUtilsMessengerEXT = caps[44];
+        vkSubmitDebugUtilsMessageEXT = caps[45];
+        vkReleaseDisplayEXT = caps[46];
+        vkCreateDirectFBSurfaceEXT = caps[47];
+        vkGetPhysicalDeviceDirectFBPresentationSupportEXT = caps[48];
+        vkGetPhysicalDeviceSurfaceCapabilities2EXT = caps[49];
+        vkGetPhysicalDeviceSurfacePresentModes2EXT = caps[50];
+        vkCreateHeadlessSurfaceEXT = caps[51];
+        vkCreateMetalSurfaceEXT = caps[52];
+        vkGetPhysicalDeviceMultisamplePropertiesEXT = caps[53];
+        vkGetPhysicalDeviceToolPropertiesEXT = caps[54];
+        vkCreateAndroidSurfaceKHR = caps[55];
+        vkGetPhysicalDeviceCalibrateableTimeDomainsKHR = caps[56];
+        vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR = caps[57];
+        vkGetPhysicalDevicePresentRectanglesKHR = caps[58];
+        vkEnumeratePhysicalDeviceGroupsKHR = caps[59];
+        vkGetPhysicalDeviceDisplayPropertiesKHR = caps[60];
+        vkGetPhysicalDeviceDisplayPlanePropertiesKHR = caps[61];
+        vkGetDisplayPlaneSupportedDisplaysKHR = caps[62];
+        vkGetDisplayModePropertiesKHR = caps[63];
+        vkCreateDisplayModeKHR = caps[64];
+        vkGetDisplayPlaneCapabilitiesKHR = caps[65];
+        vkCreateDisplayPlaneSurfaceKHR = caps[66];
+        vkGetPhysicalDeviceExternalFencePropertiesKHR = caps[67];
+        vkGetPhysicalDeviceExternalBufferPropertiesKHR = caps[68];
+        vkGetPhysicalDeviceExternalSemaphorePropertiesKHR = caps[69];
+        vkGetPhysicalDeviceFragmentShadingRatesKHR = caps[70];
+        vkGetPhysicalDeviceDisplayProperties2KHR = caps[71];
+        vkGetPhysicalDeviceDisplayPlaneProperties2KHR = caps[72];
+        vkGetDisplayModeProperties2KHR = caps[73];
+        vkGetDisplayPlaneCapabilities2KHR = caps[74];
+        vkGetPhysicalDeviceFeatures2KHR = caps[75];
+        vkGetPhysicalDeviceProperties2KHR = caps[76];
+        vkGetPhysicalDeviceFormatProperties2KHR = caps[77];
+        vkGetPhysicalDeviceImageFormatProperties2KHR = caps[78];
+        vkGetPhysicalDeviceQueueFamilyProperties2KHR = caps[79];
+        vkGetPhysicalDeviceMemoryProperties2KHR = caps[80];
+        vkGetPhysicalDeviceSparseImageFormatProperties2KHR = caps[81];
+        vkGetPhysicalDeviceSurfaceCapabilities2KHR = caps[82];
+        vkGetPhysicalDeviceSurfaceFormats2KHR = caps[83];
+        vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR = caps[84];
+        vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR = caps[85];
+        vkDestroySurfaceKHR = caps[86];
+        vkGetPhysicalDeviceSurfaceSupportKHR = caps[87];
+        vkGetPhysicalDeviceSurfaceCapabilitiesKHR = caps[88];
+        vkGetPhysicalDeviceSurfaceFormatsKHR = caps[89];
+        vkGetPhysicalDeviceSurfacePresentModesKHR = caps[90];
+        vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR = caps[91];
+        vkGetPhysicalDeviceVideoCapabilitiesKHR = caps[92];
+        vkGetPhysicalDeviceVideoFormatPropertiesKHR = caps[93];
+        vkCreateWaylandSurfaceKHR = caps[94];
+        vkGetPhysicalDeviceWaylandPresentationSupportKHR = caps[95];
+        vkCreateWin32SurfaceKHR = caps[96];
+        vkGetPhysicalDeviceWin32PresentationSupportKHR = caps[97];
+        vkCreateXcbSurfaceKHR = caps[98];
+        vkGetPhysicalDeviceXcbPresentationSupportKHR = caps[99];
+        vkCreateXlibSurfaceKHR = caps[100];
+        vkGetPhysicalDeviceXlibPresentationSupportKHR = caps[101];
+        vkCreateMacOSSurfaceMVK = caps[102];
+        vkAcquireWinrtDisplayNV = caps[103];
+        vkGetWinrtDisplayNV = caps[104];
+        vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = caps[105];
+        vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV = caps[106];
+        vkGetPhysicalDeviceCooperativeVectorPropertiesNV = caps[107];
+        vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV = caps[108];
+        vkGetPhysicalDeviceExternalImageFormatPropertiesNV = caps[109];
+        vkGetPhysicalDeviceOpticalFlowImageFormatsNV = caps[110];
     }
 
     private static boolean check_VK10(FunctionProvider provider, long[] caps, Set<String> ext) {
@@ -567,13 +575,25 @@ public class VKCapabilitiesInstance {
         ) || reportMissing("VK", "Vulkan13");
     }
 
+    private static boolean check_ARM_data_graph(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_ARM_data_graph")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            24, 25
+        },
+            "vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM", "vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM"
+        ) || reportMissing("VK", "VK_ARM_data_graph");
+    }
+
     private static boolean check_ARM_tensors(FunctionProvider provider, long[] caps, Set<String> ext) {
         if (!ext.contains("VK_ARM_tensors")) {
             return false;
         }
 
         return checkFunctions(provider, caps, new int[] {
-            24
+            26
         },
             "vkGetPhysicalDeviceExternalTensorPropertiesARM"
         ) || reportMissing("VK", "VK_ARM_tensors");
@@ -585,7 +605,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            25, 26
+            27, 28
         },
             "vkAcquireDrmDisplayEXT", "vkGetDrmDisplayEXT"
         ) || reportMissing("VK", "VK_EXT_acquire_drm_display");
@@ -597,7 +617,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            27, 28
+            29, 30
         },
             "vkAcquireXlibDisplayEXT", "vkGetRandROutputDisplayEXT"
         ) || reportMissing("VK", "VK_EXT_acquire_xlib_display");
@@ -609,7 +629,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            29
+            31
         },
             "vkGetPhysicalDeviceCalibrateableTimeDomainsEXT"
         ) || reportMissing("VK", "VK_EXT_calibrated_timestamps");
@@ -621,7 +641,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            30, 31, 32
+            32, 33, 34
         },
             "vkCreateDebugReportCallbackEXT", "vkDestroyDebugReportCallbackEXT", "vkDebugReportMessageEXT"
         ) || reportMissing("VK", "VK_EXT_debug_report");
@@ -633,7 +653,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43
+            35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45
         },
             "vkSetDebugUtilsObjectNameEXT", "vkSetDebugUtilsObjectTagEXT", "vkQueueBeginDebugUtilsLabelEXT", "vkQueueEndDebugUtilsLabelEXT", 
             "vkQueueInsertDebugUtilsLabelEXT", "vkCmdBeginDebugUtilsLabelEXT", "vkCmdEndDebugUtilsLabelEXT", "vkCmdInsertDebugUtilsLabelEXT", 
@@ -647,7 +667,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            44
+            46
         },
             "vkReleaseDisplayEXT"
         ) || reportMissing("VK", "VK_EXT_direct_mode_display");
@@ -659,7 +679,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            45, 46
+            47, 48
         },
             "vkCreateDirectFBSurfaceEXT", "vkGetPhysicalDeviceDirectFBPresentationSupportEXT"
         ) || reportMissing("VK", "VK_EXT_directfb_surface");
@@ -671,7 +691,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            47
+            49
         },
             "vkGetPhysicalDeviceSurfaceCapabilities2EXT"
         ) || reportMissing("VK", "VK_EXT_display_surface_counter");
@@ -683,7 +703,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            48
+            50
         },
             "vkGetPhysicalDeviceSurfacePresentModes2EXT"
         ) || reportMissing("VK", "VK_EXT_full_screen_exclusive");
@@ -695,7 +715,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            49
+            51
         },
             "vkCreateHeadlessSurfaceEXT"
         ) || reportMissing("VK", "VK_EXT_headless_surface");
@@ -707,7 +727,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            50
+            52
         },
             "vkCreateMetalSurfaceEXT"
         ) || reportMissing("VK", "VK_EXT_metal_surface");
@@ -719,7 +739,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            51
+            53
         },
             "vkGetPhysicalDeviceMultisamplePropertiesEXT"
         ) || reportMissing("VK", "VK_EXT_sample_locations");
@@ -731,7 +751,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            52
+            54
         },
             "vkGetPhysicalDeviceToolPropertiesEXT"
         ) || reportMissing("VK", "VK_EXT_tooling_info");
@@ -743,7 +763,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            53
+            55
         },
             "vkCreateAndroidSurfaceKHR"
         ) || reportMissing("VK", "VK_KHR_android_surface");
@@ -755,7 +775,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            54
+            56
         },
             "vkGetPhysicalDeviceCalibrateableTimeDomainsKHR"
         ) || reportMissing("VK", "VK_KHR_calibrated_timestamps");
@@ -767,7 +787,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            55
+            57
         },
             "vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR"
         ) || reportMissing("VK", "VK_KHR_cooperative_matrix");
@@ -781,7 +801,7 @@ public class VKCapabilitiesInstance {
         int flag0 = ext.contains("VK_KHR_surface") ? 0 : Integer.MIN_VALUE;
 
         return checkFunctions(provider, caps, new int[] {
-            flag0 + 56
+            flag0 + 58
         },
             "vkGetPhysicalDevicePresentRectanglesKHR"
         ) || reportMissing("VK", "VK_KHR_device_group");
@@ -793,7 +813,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            57
+            59
         },
             "vkEnumeratePhysicalDeviceGroupsKHR"
         ) || reportMissing("VK", "VK_KHR_device_group_creation");
@@ -805,7 +825,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            58, 59, 60, 61, 62, 63, 64
+            60, 61, 62, 63, 64, 65, 66
         },
             "vkGetPhysicalDeviceDisplayPropertiesKHR", "vkGetPhysicalDeviceDisplayPlanePropertiesKHR", "vkGetDisplayPlaneSupportedDisplaysKHR", 
             "vkGetDisplayModePropertiesKHR", "vkCreateDisplayModeKHR", "vkGetDisplayPlaneCapabilitiesKHR", "vkCreateDisplayPlaneSurfaceKHR"
@@ -818,7 +838,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            65
+            67
         },
             "vkGetPhysicalDeviceExternalFencePropertiesKHR"
         ) || reportMissing("VK", "VK_KHR_external_fence_capabilities");
@@ -830,7 +850,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            66
+            68
         },
             "vkGetPhysicalDeviceExternalBufferPropertiesKHR"
         ) || reportMissing("VK", "VK_KHR_external_memory_capabilities");
@@ -842,7 +862,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            67
+            69
         },
             "vkGetPhysicalDeviceExternalSemaphorePropertiesKHR"
         ) || reportMissing("VK", "VK_KHR_external_semaphore_capabilities");
@@ -854,7 +874,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            68
+            70
         },
             "vkGetPhysicalDeviceFragmentShadingRatesKHR"
         ) || reportMissing("VK", "VK_KHR_fragment_shading_rate");
@@ -866,7 +886,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            69, 70, 71, 72
+            71, 72, 73, 74
         },
             "vkGetPhysicalDeviceDisplayProperties2KHR", "vkGetPhysicalDeviceDisplayPlaneProperties2KHR", "vkGetDisplayModeProperties2KHR", 
             "vkGetDisplayPlaneCapabilities2KHR"
@@ -879,7 +899,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            73, 74, 75, 76, 77, 78, 79
+            75, 76, 77, 78, 79, 80, 81
         },
             "vkGetPhysicalDeviceFeatures2KHR", "vkGetPhysicalDeviceProperties2KHR", "vkGetPhysicalDeviceFormatProperties2KHR", 
             "vkGetPhysicalDeviceImageFormatProperties2KHR", "vkGetPhysicalDeviceQueueFamilyProperties2KHR", "vkGetPhysicalDeviceMemoryProperties2KHR", 
@@ -893,7 +913,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            80, 81
+            82, 83
         },
             "vkGetPhysicalDeviceSurfaceCapabilities2KHR", "vkGetPhysicalDeviceSurfaceFormats2KHR"
         ) || reportMissing("VK", "VK_KHR_get_surface_capabilities2");
@@ -905,7 +925,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            82, 83
+            84, 85
         },
             "vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR", "vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR"
         ) || reportMissing("VK", "VK_KHR_performance_query");
@@ -917,7 +937,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            84, 85, 86, 87, 88
+            86, 87, 88, 89, 90
         },
             "vkDestroySurfaceKHR", "vkGetPhysicalDeviceSurfaceSupportKHR", "vkGetPhysicalDeviceSurfaceCapabilitiesKHR", "vkGetPhysicalDeviceSurfaceFormatsKHR", 
             "vkGetPhysicalDeviceSurfacePresentModesKHR"
@@ -932,7 +952,7 @@ public class VKCapabilitiesInstance {
         int flag0 = ext.contains("Vulkan11") ? 0 : Integer.MIN_VALUE;
 
         return checkFunctions(provider, caps, new int[] {
-            flag0 + 56
+            flag0 + 58
         },
             "vkGetPhysicalDevicePresentRectanglesKHR"
         ) || reportMissing("VK", "VK_KHR_swapchain");
@@ -944,7 +964,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            89
+            91
         },
             "vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR"
         ) || reportMissing("VK", "VK_KHR_video_encode_queue");
@@ -956,7 +976,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            90, 91
+            92, 93
         },
             "vkGetPhysicalDeviceVideoCapabilitiesKHR", "vkGetPhysicalDeviceVideoFormatPropertiesKHR"
         ) || reportMissing("VK", "VK_KHR_video_queue");
@@ -968,7 +988,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            92, 93
+            94, 95
         },
             "vkCreateWaylandSurfaceKHR", "vkGetPhysicalDeviceWaylandPresentationSupportKHR"
         ) || reportMissing("VK", "VK_KHR_wayland_surface");
@@ -980,7 +1000,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            94, 95
+            96, 97
         },
             "vkCreateWin32SurfaceKHR", "vkGetPhysicalDeviceWin32PresentationSupportKHR"
         ) || reportMissing("VK", "VK_KHR_win32_surface");
@@ -992,7 +1012,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            96, 97
+            98, 99
         },
             "vkCreateXcbSurfaceKHR", "vkGetPhysicalDeviceXcbPresentationSupportKHR"
         ) || reportMissing("VK", "VK_KHR_xcb_surface");
@@ -1004,7 +1024,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            98, 99
+            100, 101
         },
             "vkCreateXlibSurfaceKHR", "vkGetPhysicalDeviceXlibPresentationSupportKHR"
         ) || reportMissing("VK", "VK_KHR_xlib_surface");
@@ -1016,7 +1036,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            100
+            102
         },
             "vkCreateMacOSSurfaceMVK"
         ) || reportMissing("VK", "VK_MVK_macos_surface");
@@ -1028,7 +1048,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            101, 102
+            103, 104
         },
             "vkAcquireWinrtDisplayNV", "vkGetWinrtDisplayNV"
         ) || reportMissing("VK", "VK_NV_acquire_winrt_display");
@@ -1040,7 +1060,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            103
+            105
         },
             "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV"
         ) || reportMissing("VK", "VK_NV_cooperative_matrix");
@@ -1052,7 +1072,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            104
+            106
         },
             "vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV"
         ) || reportMissing("VK", "VK_NV_cooperative_matrix2");
@@ -1064,7 +1084,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            105
+            107
         },
             "vkGetPhysicalDeviceCooperativeVectorPropertiesNV"
         ) || reportMissing("VK", "VK_NV_cooperative_vector");
@@ -1076,7 +1096,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            106
+            108
         },
             "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV"
         ) || reportMissing("VK", "VK_NV_coverage_reduction_mode");
@@ -1088,7 +1108,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            107
+            109
         },
             "vkGetPhysicalDeviceExternalImageFormatPropertiesNV"
         ) || reportMissing("VK", "VK_NV_external_memory_capabilities");
@@ -1100,7 +1120,7 @@ public class VKCapabilitiesInstance {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            108
+            110
         },
             "vkGetPhysicalDeviceOpticalFlowImageFormatsNV"
         ) || reportMissing("VK", "VK_NV_optical_flow");

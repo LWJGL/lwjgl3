@@ -22,7 +22,7 @@ val EXT_shader_float8 = "EXTShaderFloat8".nativeClassVK("EXT_shader_float8", typ
     )
 
     EnumConstant(
-        "COMPONENT_TYPE_FLOAT8_E4M3_EXT".."1000567000",
-        "COMPONENT_TYPE_FLOAT8_E5M2_EXT".."1000567001"
+        "COMPONENT_TYPE_FLOAT8_E4M3_EXT".."1000491002",
+        "COMPONENT_TYPE_FLOAT8_E5M2_EXT".."1000491003"
     )
 }

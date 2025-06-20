@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre>{@code
  * struct VkPhysicalDeviceDescriptorBufferTensorPropertiesARM {
  *     VkStructureType sType;
- *     void const * pNext;
+ *     void * pNext;
  *     size_t tensorCaptureReplayDescriptorDataSize;
  *     size_t tensorViewCaptureReplayDescriptorDataSize;
  *     size_t tensorDescriptorSize;
@@ -86,7 +86,7 @@ public class VkPhysicalDeviceDescriptorBufferTensorPropertiesARM extends Struct<
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** @return the value of the {@code pNext} field. */
-    @NativeType("void const *")
+    @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** @return the value of the {@code tensorCaptureReplayDescriptorDataSize} field. */
     @NativeType("size_t")
@@ -103,7 +103,7 @@ public class VkPhysicalDeviceDescriptorBufferTensorPropertiesARM extends Struct<
     /** Sets the {@link ARMTensors#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_TENSOR_PROPERTIES_ARM STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_TENSOR_PROPERTIES_ARM} value to the {@code sType} field. */
     public VkPhysicalDeviceDescriptorBufferTensorPropertiesARM sType$Default() { return sType(ARMTensors.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_TENSOR_PROPERTIES_ARM); }
     /** Sets the specified value to the {@code pNext} field. */
-    public VkPhysicalDeviceDescriptorBufferTensorPropertiesARM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    public VkPhysicalDeviceDescriptorBufferTensorPropertiesARM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code tensorCaptureReplayDescriptorDataSize} field. */
     public VkPhysicalDeviceDescriptorBufferTensorPropertiesARM tensorCaptureReplayDescriptorDataSize(@NativeType("size_t") long value) { ntensorCaptureReplayDescriptorDataSize(address(), value); return this; }
     /** Sets the specified value to the {@code tensorViewCaptureReplayDescriptorDataSize} field. */
@@ -320,7 +320,7 @@ public class VkPhysicalDeviceDescriptorBufferTensorPropertiesARM extends Struct<
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDescriptorBufferTensorPropertiesARM.nsType(address()); }
         /** @return the value of the {@code pNext} field. */
-        @NativeType("void const *")
+        @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDescriptorBufferTensorPropertiesARM.npNext(address()); }
         /** @return the value of the {@code tensorCaptureReplayDescriptorDataSize} field. */
         @NativeType("size_t")
@@ -337,7 +337,7 @@ public class VkPhysicalDeviceDescriptorBufferTensorPropertiesARM extends Struct<
         /** Sets the {@link ARMTensors#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_TENSOR_PROPERTIES_ARM STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_TENSOR_PROPERTIES_ARM} value to the {@code sType} field. */
         public VkPhysicalDeviceDescriptorBufferTensorPropertiesARM.Buffer sType$Default() { return sType(ARMTensors.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_TENSOR_PROPERTIES_ARM); }
         /** Sets the specified value to the {@code pNext} field. */
-        public VkPhysicalDeviceDescriptorBufferTensorPropertiesARM.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceDescriptorBufferTensorPropertiesARM.npNext(address(), value); return this; }
+        public VkPhysicalDeviceDescriptorBufferTensorPropertiesARM.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDescriptorBufferTensorPropertiesARM.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code tensorCaptureReplayDescriptorDataSize} field. */
         public VkPhysicalDeviceDescriptorBufferTensorPropertiesARM.Buffer tensorCaptureReplayDescriptorDataSize(@NativeType("size_t") long value) { VkPhysicalDeviceDescriptorBufferTensorPropertiesARM.ntensorCaptureReplayDescriptorDataSize(address(), value); return this; }
         /** Sets the specified value to the {@code tensorViewCaptureReplayDescriptorDataSize} field. */

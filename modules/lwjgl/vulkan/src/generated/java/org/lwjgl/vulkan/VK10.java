@@ -745,7 +745,7 @@ public class VK10 {
 
     public static final int VK_API_VERSION_1_0 = VK_MAKE_API_VERSION(0, 1, 0, 0);
 
-    public static final int VK_HEADER_VERSION = 317;
+    public static final int VK_HEADER_VERSION = 319;
 
     public static final long VK_NULL_HANDLE = 0x0L;
 

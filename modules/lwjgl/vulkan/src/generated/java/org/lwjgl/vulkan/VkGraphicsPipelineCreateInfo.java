@@ -228,6 +228,8 @@ public class VkGraphicsPipelineCreateInfo extends Struct<VkGraphicsPipelineCreat
     public VkGraphicsPipelineCreateInfo pNext(VkPipelineCreationFeedbackCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineDiscardRectangleStateCreateInfoEXT} value to the {@code pNext} chain. */
     public VkGraphicsPipelineCreateInfo pNext(VkPipelineDiscardRectangleStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPipelineFragmentDensityMapLayeredCreateInfoVALVE} value to the {@code pNext} chain. */
+    public VkGraphicsPipelineCreateInfo pNext(VkPipelineFragmentDensityMapLayeredCreateInfoVALVE value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineFragmentShadingRateEnumStateCreateInfoNV} value to the {@code pNext} chain. */
     public VkGraphicsPipelineCreateInfo pNext(VkPipelineFragmentShadingRateEnumStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineFragmentShadingRateStateCreateInfoKHR} value to the {@code pNext} chain. */
@@ -701,6 +703,8 @@ public class VkGraphicsPipelineCreateInfo extends Struct<VkGraphicsPipelineCreat
         public VkGraphicsPipelineCreateInfo.Buffer pNext(VkPipelineCreationFeedbackCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineDiscardRectangleStateCreateInfoEXT} value to the {@code pNext} chain. */
         public VkGraphicsPipelineCreateInfo.Buffer pNext(VkPipelineDiscardRectangleStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPipelineFragmentDensityMapLayeredCreateInfoVALVE} value to the {@code pNext} chain. */
+        public VkGraphicsPipelineCreateInfo.Buffer pNext(VkPipelineFragmentDensityMapLayeredCreateInfoVALVE value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineFragmentShadingRateEnumStateCreateInfoNV} value to the {@code pNext} chain. */
         public VkGraphicsPipelineCreateInfo.Buffer pNext(VkPipelineFragmentShadingRateEnumStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineFragmentShadingRateStateCreateInfoKHR} value to the {@code pNext} chain. */
