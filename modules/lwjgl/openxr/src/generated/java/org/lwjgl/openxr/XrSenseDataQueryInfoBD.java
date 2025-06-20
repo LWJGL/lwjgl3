@@ -83,6 +83,8 @@ public class XrSenseDataQueryInfoBD extends Struct<XrSenseDataQueryInfoBD> imple
     public XrSenseDataQueryInfoBD type$Default() { return type(BDSpatialSensing.XR_TYPE_SENSE_DATA_QUERY_INFO_BD); }
     /** Sets the specified value to the {@code next} field. */
     public XrSenseDataQueryInfoBD next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrSenseDataFilterPlaneOrientationBD} value to the {@code next} chain. */
+    public XrSenseDataQueryInfoBD next(XrSenseDataFilterPlaneOrientationBD value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSenseDataFilterSemanticBD} value to the {@code next} chain. */
     public XrSenseDataQueryInfoBD next(XrSenseDataFilterSemanticBD value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSenseDataFilterUuidBD} value to the {@code next} chain. */
@@ -288,6 +290,8 @@ public class XrSenseDataQueryInfoBD extends Struct<XrSenseDataQueryInfoBD> imple
         public XrSenseDataQueryInfoBD.Buffer type$Default() { return type(BDSpatialSensing.XR_TYPE_SENSE_DATA_QUERY_INFO_BD); }
         /** Sets the specified value to the {@code next} field. */
         public XrSenseDataQueryInfoBD.Buffer next(@NativeType("void const *") long value) { XrSenseDataQueryInfoBD.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrSenseDataFilterPlaneOrientationBD} value to the {@code next} chain. */
+        public XrSenseDataQueryInfoBD.Buffer next(XrSenseDataFilterPlaneOrientationBD value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSenseDataFilterSemanticBD} value to the {@code next} chain. */
         public XrSenseDataQueryInfoBD.Buffer next(XrSenseDataFilterSemanticBD value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSenseDataFilterUuidBD} value to the {@code next} chain. */

@@ -43,6 +43,13 @@ val XrSpatialEntityIdBD = XR_DEFINE_ATOM("XrSpatialEntityIdBD")
 // XR_EXT_future
 val XrFutureEXT = typedef(uint64_t, "XrFutureEXT")
 
+// XR_EXT_render_model
+val XrRenderModelIdEXT = XR_DEFINE_ATOM("XrRenderModelIdEXT")
+
+// XR_EXT_spatial_entity
+val XrSpatialEntityIdEXT = XR_DEFINE_ATOM("XrSpatialEntityIdEXT")
+val XrSpatialBufferIdEXT = XR_DEFINE_ATOM("XrSpatialBufferIdEXT")
+
 // XR_FB_spatial_entity_user
 val XrSpaceUserIdFB = typedef(uint64_t, "XrSpaceUserIdFB")
 

@@ -87,6 +87,8 @@ public class XrSpatialEntityComponentDataBaseHeaderBD extends Struct<XrSpatialEn
     public XrSpatialEntityComponentDataBaseHeaderBD next(XrSpatialEntityComponentDataBoundingBox3DBD value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSpatialEntityComponentDataLocationBD} value to the {@code next} chain. */
     public XrSpatialEntityComponentDataBaseHeaderBD next(XrSpatialEntityComponentDataLocationBD value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrSpatialEntityComponentDataPlaneOrientationBD} value to the {@code next} chain. */
+    public XrSpatialEntityComponentDataBaseHeaderBD next(XrSpatialEntityComponentDataPlaneOrientationBD value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSpatialEntityComponentDataPolygonBD} value to the {@code next} chain. */
     public XrSpatialEntityComponentDataBaseHeaderBD next(XrSpatialEntityComponentDataPolygonBD value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSpatialEntityComponentDataSemanticBD} value to the {@code next} chain. */
@@ -298,6 +300,8 @@ public class XrSpatialEntityComponentDataBaseHeaderBD extends Struct<XrSpatialEn
         public XrSpatialEntityComponentDataBaseHeaderBD.Buffer next(XrSpatialEntityComponentDataBoundingBox3DBD value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSpatialEntityComponentDataLocationBD} value to the {@code next} chain. */
         public XrSpatialEntityComponentDataBaseHeaderBD.Buffer next(XrSpatialEntityComponentDataLocationBD value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrSpatialEntityComponentDataPlaneOrientationBD} value to the {@code next} chain. */
+        public XrSpatialEntityComponentDataBaseHeaderBD.Buffer next(XrSpatialEntityComponentDataPlaneOrientationBD value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSpatialEntityComponentDataPolygonBD} value to the {@code next} chain. */
         public XrSpatialEntityComponentDataBaseHeaderBD.Buffer next(XrSpatialEntityComponentDataPolygonBD value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSpatialEntityComponentDataSemanticBD} value to the {@code next} chain. */

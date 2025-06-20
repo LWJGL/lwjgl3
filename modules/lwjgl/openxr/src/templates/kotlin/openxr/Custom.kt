@@ -66,6 +66,8 @@ fun templateCustomization() {
     generateDispatchableHandle(XrPassthroughHTC, XrSession)
     generateDispatchableHandle(XrPassthroughLayerFB, XrSession)
     generateDispatchableHandle(XrPlaneDetectorEXT, XrSession)
+    generateDispatchableHandle(XrRenderModelEXT, XrSession)
+    generateDispatchableHandle(XrRenderModelAssetEXT, XrSession)
     generateDispatchableHandle(XrSceneMSFT, XrSceneObserverMSFT)
     generateDispatchableHandle(XrSceneObserverMSFT, XrSession)
     generateDispatchableHandle(XrSenseDataProviderBD, XrSession)
@@ -76,7 +78,11 @@ fun templateCustomization() {
     generateDispatchableHandle(XrSpatialAnchorMSFT, XrSession)
     generateDispatchableHandle(XrSpatialAnchorStoreConnectionMSFT, XrSession)
     generateDispatchableHandle(XrSpatialAnchorsStorageML, XrSession)
+    generateDispatchableHandle(XrSpatialContextEXT, XrSession)
+    generateDispatchableHandle(XrSpatialEntityEXT, XrSpatialContextEXT)
     generateDispatchableHandle(XrSpatialGraphNodeBindingMSFT, XrSession)
+    generateDispatchableHandle(XrSpatialPersistenceContextEXT, XrSession)
+    generateDispatchableHandle(XrSpatialSnapshotEXT, XrSpatialContextEXT)
     generateDispatchableHandle(XrSwapchain, XrSession)
     generateDispatchableHandle(XrTriangleMeshFB, XrSession)
     generateDispatchableHandle(XrVirtualKeyboardMETA, XrSession)
@@ -84,7 +90,7 @@ fun templateCustomization() {
 
     XR10.apply {
         LongConstant(
-            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 1, 48)"
+            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 1, 49)"
         )
 
         LongConstant(

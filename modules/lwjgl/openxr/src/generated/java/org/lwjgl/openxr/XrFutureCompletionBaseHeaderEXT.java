@@ -194,6 +194,31 @@ public class XrFutureCompletionBaseHeaderEXT extends Struct<XrFutureCompletionBa
         return new XrFutureCompletionBaseHeaderEXT(value.address(), __getContainer(value));
     }
 
+    /** Upcasts the specified {@code XrCreateSpatialContextCompletionEXT} instance to {@code XrFutureCompletionBaseHeaderEXT}. */
+    public static XrFutureCompletionBaseHeaderEXT create(XrCreateSpatialContextCompletionEXT value) {
+        return new XrFutureCompletionBaseHeaderEXT(value.address(), __getContainer(value));
+    }
+
+    /** Upcasts the specified {@code XrCreateSpatialDiscoverySnapshotCompletionEXT} instance to {@code XrFutureCompletionBaseHeaderEXT}. */
+    public static XrFutureCompletionBaseHeaderEXT create(XrCreateSpatialDiscoverySnapshotCompletionEXT value) {
+        return new XrFutureCompletionBaseHeaderEXT(value.address(), __getContainer(value));
+    }
+
+    /** Upcasts the specified {@code XrCreateSpatialPersistenceContextCompletionEXT} instance to {@code XrFutureCompletionBaseHeaderEXT}. */
+    public static XrFutureCompletionBaseHeaderEXT create(XrCreateSpatialPersistenceContextCompletionEXT value) {
+        return new XrFutureCompletionBaseHeaderEXT(value.address(), __getContainer(value));
+    }
+
+    /** Upcasts the specified {@code XrPersistSpatialEntityCompletionEXT} instance to {@code XrFutureCompletionBaseHeaderEXT}. */
+    public static XrFutureCompletionBaseHeaderEXT create(XrPersistSpatialEntityCompletionEXT value) {
+        return new XrFutureCompletionBaseHeaderEXT(value.address(), __getContainer(value));
+    }
+
+    /** Upcasts the specified {@code XrUnpersistSpatialEntityCompletionEXT} instance to {@code XrFutureCompletionBaseHeaderEXT}. */
+    public static XrFutureCompletionBaseHeaderEXT create(XrUnpersistSpatialEntityCompletionEXT value) {
+        return new XrFutureCompletionBaseHeaderEXT(value.address(), __getContainer(value));
+    }
+
     /**
      * Returns a new {@link XrFutureCompletionBaseHeaderEXT.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -284,6 +309,31 @@ public class XrFutureCompletionBaseHeaderEXT extends Struct<XrFutureCompletionBa
 
     /** Upcasts the specified {@code XrWorldMeshRequestCompletionML.Buffer} instance to {@code XrFutureCompletionBaseHeaderEXT.Buffer}. */
     public static XrFutureCompletionBaseHeaderEXT.Buffer create(XrWorldMeshRequestCompletionML.Buffer value) {
+        return new XrFutureCompletionBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
+    /** Upcasts the specified {@code XrCreateSpatialContextCompletionEXT.Buffer} instance to {@code XrFutureCompletionBaseHeaderEXT.Buffer}. */
+    public static XrFutureCompletionBaseHeaderEXT.Buffer create(XrCreateSpatialContextCompletionEXT.Buffer value) {
+        return new XrFutureCompletionBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
+    /** Upcasts the specified {@code XrCreateSpatialDiscoverySnapshotCompletionEXT.Buffer} instance to {@code XrFutureCompletionBaseHeaderEXT.Buffer}. */
+    public static XrFutureCompletionBaseHeaderEXT.Buffer create(XrCreateSpatialDiscoverySnapshotCompletionEXT.Buffer value) {
+        return new XrFutureCompletionBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
+    /** Upcasts the specified {@code XrCreateSpatialPersistenceContextCompletionEXT.Buffer} instance to {@code XrFutureCompletionBaseHeaderEXT.Buffer}. */
+    public static XrFutureCompletionBaseHeaderEXT.Buffer create(XrCreateSpatialPersistenceContextCompletionEXT.Buffer value) {
+        return new XrFutureCompletionBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
+    /** Upcasts the specified {@code XrPersistSpatialEntityCompletionEXT.Buffer} instance to {@code XrFutureCompletionBaseHeaderEXT.Buffer}. */
+    public static XrFutureCompletionBaseHeaderEXT.Buffer create(XrPersistSpatialEntityCompletionEXT.Buffer value) {
+        return new XrFutureCompletionBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
+    /** Upcasts the specified {@code XrUnpersistSpatialEntityCompletionEXT.Buffer} instance to {@code XrFutureCompletionBaseHeaderEXT.Buffer}. */
+    public static XrFutureCompletionBaseHeaderEXT.Buffer create(XrUnpersistSpatialEntityCompletionEXT.Buffer value) {
         return new XrFutureCompletionBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 

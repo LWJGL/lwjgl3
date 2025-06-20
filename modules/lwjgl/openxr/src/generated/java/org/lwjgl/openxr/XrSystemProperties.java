@@ -193,6 +193,8 @@ public class XrSystemProperties extends Struct<XrSystemProperties> implements Na
     public XrSystemProperties next(XrSystemSpatialEntitySharingPropertiesMETA value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSystemSpatialMeshPropertiesBD} value to the {@code next} chain. */
     public XrSystemProperties next(XrSystemSpatialMeshPropertiesBD value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrSystemSpatialPlanePropertiesBD} value to the {@code next} chain. */
+    public XrSystemProperties next(XrSystemSpatialPlanePropertiesBD value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSystemSpatialScenePropertiesBD} value to the {@code next} chain. */
     public XrSystemProperties next(XrSystemSpatialScenePropertiesBD value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSystemSpatialSensingPropertiesBD} value to the {@code next} chain. */
@@ -502,6 +504,8 @@ public class XrSystemProperties extends Struct<XrSystemProperties> implements Na
         public XrSystemProperties.Buffer next(XrSystemSpatialEntitySharingPropertiesMETA value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSystemSpatialMeshPropertiesBD} value to the {@code next} chain. */
         public XrSystemProperties.Buffer next(XrSystemSpatialMeshPropertiesBD value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrSystemSpatialPlanePropertiesBD} value to the {@code next} chain. */
+        public XrSystemProperties.Buffer next(XrSystemSpatialPlanePropertiesBD value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSystemSpatialScenePropertiesBD} value to the {@code next} chain. */
         public XrSystemProperties.Buffer next(XrSystemSpatialScenePropertiesBD value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSystemSpatialSensingPropertiesBD} value to the {@code next} chain. */
