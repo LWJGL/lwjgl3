@@ -7,6 +7,7 @@
 #include "int_flags.h"
 #include "setup.h"
 #include "liburing/io_uring.h"
+#include <stdio.h>
 
 #define KERN_MAX_ENTRIES	32768
 #define KERN_MAX_CQ_ENTRIES	(2 * KERN_MAX_ENTRIES)
@@ -498,25 +499,55 @@ __cold void io_uring_free_probe(struct io_uring_probe *probe)
 	free(probe);
 }
 
-static size_t npages(size_t size, long page_size)
-{
-	size--;
-	size /= page_size;
-	return __fls((int) size);
-}
-
 static size_t rings_size(struct io_uring_params *p, unsigned entries,
 			 unsigned cq_entries, long page_size)
 {
 	size_t pages, sq_size, cq_size;
 
-	cq_size = KRING_SIZE + params_cq_size(p, cq_entries);
-	cq_size = (cq_size + 63) & ~63UL;
-	pages = (size_t) 1 << npages(cq_size, page_size);
+	/*
+	 * CQ ring size is number of pages that we need for the
+	 * struct io_uring_cqe entries, which may be 16b (default) or
+	 * 32b if the ring is setup with IORING_SETUP_CQE32. We also need
+	 * room for the head/tail parts.
+	 */
+	cq_size = params_cq_size(p, cq_entries);
+	cq_size += KRING_SIZE;
+	cq_size = (cq_size + page_size - 1) & ~(page_size - 1);
+	pages = (size_t) cq_size / page_size;
 
 	sq_size = params_sqes_size(p, entries);
-	pages += (size_t) 1 << npages(sq_size, page_size);
+	sq_size = (sq_size + page_size - 1) & ~(page_size - 1);
+	pages += sq_size / page_size;
 	return pages * page_size;
+}
+
+ssize_t io_uring_memory_size_params(unsigned entries, struct io_uring_params *p)
+{
+	unsigned sq, cq;
+	long page_size;
+	ssize_t ret;
+
+	if (!entries)
+		return -EINVAL;
+	if (entries > KERN_MAX_ENTRIES) {
+		if (!(p->flags & IORING_SETUP_CLAMP))
+			return -EINVAL;
+		entries = KERN_MAX_ENTRIES;
+	}
+
+	ret = get_sq_cq_entries(entries, p, &sq, &cq);
+	if (ret)
+		return ret;
+
+	page_size = get_page_size();
+	return rings_size(p, sq, cq, page_size);
+}
+
+ssize_t io_uring_memory_size(unsigned entries, unsigned ring_flags)
+{
+	struct io_uring_params p = { .flags = ring_flags, };
+
+	return io_uring_memory_size_params(entries, &p);
 }
 
 /*
@@ -532,10 +563,7 @@ __cold ssize_t io_uring_mlock_size_params(unsigned entries,
 {
 	struct io_uring_params lp;
 	struct io_uring ring;
-	unsigned cq_entries, sq;
-	long page_size;
 	ssize_t ret;
-	int cret;
 
 	memset(&lp, 0, sizeof(lp));
 
@@ -557,20 +585,7 @@ __cold ssize_t io_uring_mlock_size_params(unsigned entries,
 	if (lp.features & IORING_FEAT_NATIVE_WORKERS)
 		return 0;
 
-	if (!entries)
-		return -EINVAL;
-	if (entries > KERN_MAX_ENTRIES) {
-		if (!(p->flags & IORING_SETUP_CLAMP))
-			return -EINVAL;
-		entries = KERN_MAX_ENTRIES;
-	}
-
-	cret = get_sq_cq_entries(entries, p, &sq, &cq_entries);
-	if (cret)
-		return cret;
-
-	page_size = get_page_size();
-	return rings_size(p, sq, cq_entries, page_size);
+	return io_uring_memory_size_params(entries, p);
 }
 
 /*

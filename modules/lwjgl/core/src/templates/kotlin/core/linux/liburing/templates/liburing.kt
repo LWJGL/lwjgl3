@@ -1705,6 +1705,20 @@ ENABLE_WARNINGS()""")
         io_uring_params.p("p")
     )
 
+    ssize_t(
+        "memory_size",
+
+        unsigned("entries"),
+        unsigned("flags")
+    )
+
+    ssize_t(
+        "memory_size_params",
+
+        unsigned("entries"),
+        io_uring_params.p("p")
+    )
+
     int(
         "major_version",
 

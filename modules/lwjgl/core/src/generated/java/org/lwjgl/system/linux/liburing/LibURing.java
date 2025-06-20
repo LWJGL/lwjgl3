@@ -2441,6 +2441,23 @@ public class LibURing {
         return nio_uring_mlock_size_params(entries, p.address());
     }
 
+    // --- [ io_uring_memory_size ] ---
+
+    /** {@code ssize_t io_uring_memory_size(unsigned entries, unsigned flags)} */
+    @NativeType("ssize_t")
+    public static native long io_uring_memory_size(@NativeType("unsigned") int entries, @NativeType("unsigned") int flags);
+
+    // --- [ io_uring_memory_size_params ] ---
+
+    /** {@code ssize_t io_uring_memory_size_params(unsigned entries, struct io_uring_params * p)} */
+    public static native long nio_uring_memory_size_params(int entries, long p);
+
+    /** {@code ssize_t io_uring_memory_size_params(unsigned entries, struct io_uring_params * p)} */
+    @NativeType("ssize_t")
+    public static long io_uring_memory_size_params(@NativeType("unsigned") int entries, @NativeType("struct io_uring_params *") IOURingParams p) {
+        return nio_uring_memory_size_params(entries, p.address());
+    }
+
     // --- [ io_uring_major_version ] ---
 
     /** {@code int io_uring_major_version(void)} */
