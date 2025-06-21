@@ -32,6 +32,11 @@ val meshopt_VertexFetchStatistics = struct(Module.MESHOPTIMIZER, "MeshoptVertexF
     float("overfetch")
 }
 
+val meshopt_CoverageStatistics = struct(Module.MESHOPTIMIZER, "MeshoptCoverageStatistics", nativeName = "struct meshopt_CoverageStatistics", mutable = false)  {
+    float("coverage")[3]
+    float("extent")
+}
+
 val meshopt_Meshlet = struct(Module.MESHOPTIMIZER, "MeshoptMeshlet", nativeName = "struct meshopt_Meshlet", mutable = false) {
     unsigned_int("vertex_offset")
     unsigned_int("triangle_offset")
@@ -63,5 +68,15 @@ val meshopt_DeallocateCB = Module.MESHOPTIMIZER.callback {
         "MeshoptDeallocate",
 
         void.p("ptr")
+    ) {}
+}
+
+val meshopt_EqualsCB = Module.MESHOPTIMIZER.callback {
+    intb(
+        "MeshoptEquals",
+
+        opaque_p("context"),
+        unsigned_int("index_a"),
+        unsigned_int("index_b")
     ) {}
 }

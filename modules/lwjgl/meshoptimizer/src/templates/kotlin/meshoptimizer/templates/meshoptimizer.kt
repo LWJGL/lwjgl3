@@ -13,7 +13,7 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
 
     cpp = true
 
-    IntConstant("MESHOPTIMIZER_VERSION".."230").noPrefix()
+    IntConstant("MESHOPTIMIZER_VERSION".."240").noPrefix()
 
     size_t(
         "generateVertexRemap",
@@ -35,6 +35,19 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
         size_t("vertex_count"),
         meshopt_Stream.const.p("streams"),
         AutoSize("streams")..size_t("stream_count")
+    )
+
+    size_t(
+        "generateVertexRemapCustom",
+
+        Check("vertex_count")..unsigned_int.p("destination"),
+        nullable..unsigned_int.const.p("indices"),
+        AutoSize("indices")..size_t("index_count"),
+        Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p("vertex_positions"),
+        size_t("vertex_count"),
+        size_t("vertex_positions_stride"),
+        nullable..meshopt_EqualsCB("callback"),
+        nullable..opaque_p("context")
     )
 
     void(
@@ -260,7 +273,8 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
         Check("vertex_count * vertex_size")..void.const.p("vertices"),
         size_t("vertex_count"),
         size_t("vertex_size"),
-        int("level")
+        int("level"),
+        int("version")
     )
 
     void(
@@ -405,6 +419,18 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
     )
 
     size_t(
+        "simplifyPrune",
+
+        unsigned_int.p("destination"),
+        unsigned_int.const.p("indices"),
+        AutoSize("indices", "destination")..size_t("index_count"),
+        Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p("vertex_positions"),
+        size_t("vertex_count"),
+        size_t("vertex_positions_stride"),
+        float("target_error")
+    )
+
+    size_t(
         "simplifyPoints",
 
         Check("target_vertex_count")..unsigned_int.p("destination"),
@@ -467,6 +493,15 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
         unsigned_int("primgroup_size")
     )
 
+    meshopt_VertexFetchStatistics(
+        "analyzeVertexFetch",
+
+        unsigned_int.const.p("indices"),
+        AutoSize("indices")..size_t("index_count"),
+        size_t("vertex_count"),
+        size_t("vertex_size")
+    )
+
     meshopt_OverdrawStatistics(
         "analyzeOverdraw",
 
@@ -477,13 +512,14 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
         size_t("vertex_positions_stride")
     )
 
-    meshopt_VertexFetchStatistics(
-        "analyzeVertexFetch",
+    meshopt_CoverageStatistics(
+        "analyzeCoverage",
 
         unsigned_int.const.p("indices"),
         AutoSize("indices")..size_t("index_count"),
+        Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p("vertex_positions"),
         size_t("vertex_count"),
-        size_t("vertex_size")
+        size_t("vertex_positions_stride")
     )
 
     size_t(
@@ -541,6 +577,23 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
         float("split_factor")
     )
 
+    size_t(
+        "buildMeshletsSpatial",
+
+        Unsafe..meshopt_Meshlet.p("meshlets"),
+        Check("meshlets.remaining() * max_vertices")..unsigned_int.p("meshlet_vertices"),
+        Check("meshlets.remaining() * max_triangles * 3")..unsigned_char.p("meshlet_triangles"),
+        unsigned_int.const.p("indices"),
+        AutoSize("indices")..size_t("index_count"),
+        Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p("vertex_positions"),
+        size_t("vertex_count"),
+        size_t("vertex_positions_stride"),
+        size_t("max_vertices"),
+        size_t("min_triangles"),
+        size_t("max_triangles"),
+        float("fill_weight")
+    )
+
     void(
         "optimizeMeshlet",
 
@@ -589,7 +642,9 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
         AutoSize("cluster_indices")..size_t("total_index_count"),
         unsigned_int.const.p("cluster_index_counts"),
         AutoSize("cluster_index_counts", "destination")..size_t("cluster_count"),
+        Check("vertex_count * (vertex_positions_stride >>> 2)")..nullable..float.const.p("vertex_positions"),
         size_t("vertex_count"),
+        size_t("vertex_positions_stride"),
         size_t("target_partition_size")
     )
 
@@ -611,6 +666,16 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
         Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p("vertex_positions"),
         size_t("vertex_count"),
         size_t("vertex_positions_stride")
+    )
+
+    void(
+        "spatialClusterPoints",
+
+        Check("vertex_count")..unsigned_int.p("destination"),
+        Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p("vertex_positions"),
+        size_t("vertex_count"),
+        size_t("vertex_positions_stride"),
+        size_t("cluster_size")
     )
 
     NativeName("meshopt_quantizeUnorm")..internal..int(
