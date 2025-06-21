@@ -36,13 +36,13 @@ data class Deployment(
 val deployment = when {
     hasProperty("release") -> Deployment(
         type = BuildType.RELEASE,
-        repo = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+        repo = uri("https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/")
     )
     hasProperty("snapshot") -> {
         version = "$version-SNAPSHOT"
         Deployment(
             type = BuildType.SNAPSHOT,
-            repo = uri("https://oss.sonatype.org/content/repositories/snapshots/")
+            repo = uri("https://central.sonatype.com/repository/maven-snapshots/")
         )
     }
     else -> {
