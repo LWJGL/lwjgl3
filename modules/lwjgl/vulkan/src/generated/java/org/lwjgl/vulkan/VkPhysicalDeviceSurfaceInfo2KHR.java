@@ -96,6 +96,8 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct<VkPhysicalDeviceSurf
     public VkPhysicalDeviceSurfaceInfo2KHR pNext(VkSurfaceFullScreenExclusiveWin32InfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSurfacePresentModeEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceSurfaceInfo2KHR pNext(VkSurfacePresentModeEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkSurfacePresentModeKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceSurfaceInfo2KHR pNext(VkSurfacePresentModeKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code surface} field. */
     public VkPhysicalDeviceSurfaceInfo2KHR surface(@NativeType("VkSurfaceKHR") long value) { nsurface(address(), value); return this; }
 
@@ -333,6 +335,8 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct<VkPhysicalDeviceSurf
         public VkPhysicalDeviceSurfaceInfo2KHR.Buffer pNext(VkSurfaceFullScreenExclusiveWin32InfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSurfacePresentModeEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceSurfaceInfo2KHR.Buffer pNext(VkSurfacePresentModeEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkSurfacePresentModeKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceSurfaceInfo2KHR.Buffer pNext(VkSurfacePresentModeKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code surface} field. */
         public VkPhysicalDeviceSurfaceInfo2KHR.Buffer surface(@NativeType("VkSurfaceKHR") long value) { VkPhysicalDeviceSurfaceInfo2KHR.nsurface(address(), value); return this; }
 

@@ -238,6 +238,8 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceDataGraphFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX} value to the {@code pNext} chain. */
+    public VkDeviceCreateInfo pNext(VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceDepthBiasControlFeaturesEXT} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceDepthBiasControlFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceDepthClampControlFeaturesEXT} value to the {@code pNext} chain. */
@@ -460,6 +462,8 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
     public VkDeviceCreateInfo pNext(VkPhysicalDevicePerformanceQueryFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePipelineBinaryFeaturesKHR} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkPhysicalDevicePipelineBinaryFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC} value to the {@code pNext} chain. */
+    public VkDeviceCreateInfo pNext(VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePipelineCreationCacheControlFeatures} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkPhysicalDevicePipelineCreationCacheControlFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT} value to the {@code pNext} chain. */
@@ -492,6 +496,8 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
     public VkDeviceCreateInfo pNext(VkPhysicalDevicePresentMeteringFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR} value to the {@code pNext} chain. */
+    public VkDeviceCreateInfo pNext(VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePresentWait2FeaturesKHR} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkPhysicalDevicePresentWait2FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePresentWaitFeaturesKHR} value to the {@code pNext} chain. */
@@ -650,6 +656,8 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceSubpassShadingFeaturesHUAWEI value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceSwapchainMaintenance1FeaturesKHR} value to the {@code pNext} chain. */
+    public VkDeviceCreateInfo pNext(VkPhysicalDeviceSwapchainMaintenance1FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceSynchronization2Features} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceSynchronization2Features value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceSynchronization2FeaturesKHR} value to the {@code pNext} chain. */
@@ -702,6 +710,8 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceVideoDecodeVP9FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceVideoEncodeAV1FeaturesKHR} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceVideoEncodeAV1FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR} value to the {@code pNext} chain. */
+    public VkDeviceCreateInfo pNext(VkPhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceVideoMaintenance1FeaturesKHR} value to the {@code pNext} chain. */
@@ -1148,6 +1158,8 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceDataGraphFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX} value to the {@code pNext} chain. */
+        public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceDepthBiasControlFeaturesEXT} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceDepthBiasControlFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceDepthClampControlFeaturesEXT} value to the {@code pNext} chain. */
@@ -1370,6 +1382,8 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDevicePerformanceQueryFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePipelineBinaryFeaturesKHR} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDevicePipelineBinaryFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC} value to the {@code pNext} chain. */
+        public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePipelineCreationCacheControlFeatures} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDevicePipelineCreationCacheControlFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT} value to the {@code pNext} chain. */
@@ -1402,6 +1416,8 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDevicePresentMeteringFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR} value to the {@code pNext} chain. */
+        public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePresentWait2FeaturesKHR} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDevicePresentWait2FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePresentWaitFeaturesKHR} value to the {@code pNext} chain. */
@@ -1560,6 +1576,8 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceSubpassShadingFeaturesHUAWEI value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceSwapchainMaintenance1FeaturesKHR} value to the {@code pNext} chain. */
+        public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceSwapchainMaintenance1FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceSynchronization2Features} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceSynchronization2Features value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceSynchronization2FeaturesKHR} value to the {@code pNext} chain. */
@@ -1612,6 +1630,8 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceVideoDecodeVP9FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceVideoEncodeAV1FeaturesKHR} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceVideoEncodeAV1FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR} value to the {@code pNext} chain. */
+        public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceVideoMaintenance1FeaturesKHR} value to the {@code pNext} chain. */

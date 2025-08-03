@@ -32,19 +32,19 @@ public class EXTSwapchainMaintenance1 {
 
     // --- [ vkReleaseSwapchainImagesEXT ] ---
 
-    /** {@code VkResult vkReleaseSwapchainImagesEXT(VkDevice device, VkReleaseSwapchainImagesInfoEXT const * pReleaseInfo)} */
+    /** {@code VkResult vkReleaseSwapchainImagesEXT(VkDevice device, VkReleaseSwapchainImagesInfoKHR const * pReleaseInfo)} */
     public static int nvkReleaseSwapchainImagesEXT(VkDevice device, long pReleaseInfo) {
         long __functionAddress = device.getCapabilities().vkReleaseSwapchainImagesEXT;
         if (CHECKS) {
             check(__functionAddress);
-            VkReleaseSwapchainImagesInfoEXT.validate(pReleaseInfo);
+            VkReleaseSwapchainImagesInfoKHR.validate(pReleaseInfo);
         }
         return callPPI(device.address(), pReleaseInfo, __functionAddress);
     }
 
-    /** {@code VkResult vkReleaseSwapchainImagesEXT(VkDevice device, VkReleaseSwapchainImagesInfoEXT const * pReleaseInfo)} */
+    /** {@code VkResult vkReleaseSwapchainImagesEXT(VkDevice device, VkReleaseSwapchainImagesInfoKHR const * pReleaseInfo)} */
     @NativeType("VkResult")
-    public static int vkReleaseSwapchainImagesEXT(VkDevice device, @NativeType("VkReleaseSwapchainImagesInfoEXT const *") VkReleaseSwapchainImagesInfoEXT pReleaseInfo) {
+    public static int vkReleaseSwapchainImagesEXT(VkDevice device, @NativeType("VkReleaseSwapchainImagesInfoKHR const *") VkReleaseSwapchainImagesInfoKHR pReleaseInfo) {
         return nvkReleaseSwapchainImagesEXT(device, pReleaseInfo.address());
     }
 

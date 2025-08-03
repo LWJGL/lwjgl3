@@ -7,7 +7,7 @@ package org.lwjgl.vulkan;
 
 public final class QCOMRenderPassTransform {
 
-    public static final int VK_QCOM_RENDER_PASS_TRANSFORM_SPEC_VERSION = 4;
+    public static final int VK_QCOM_RENDER_PASS_TRANSFORM_SPEC_VERSION = 5;
 
     public static final String VK_QCOM_RENDER_PASS_TRANSFORM_EXTENSION_NAME = "VK_QCOM_render_pass_transform";
 

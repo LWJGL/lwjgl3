@@ -29,7 +29,8 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         "ERROR_TOO_MANY_OBJECTS".."-10",
         "ERROR_FORMAT_NOT_SUPPORTED".."-11",
         "ERROR_FRAGMENTED_POOL".."-12",
-        "ERROR_UNKNOWN".."-13"
+        "ERROR_UNKNOWN".."-13",
+        "ERROR_VALIDATION_FAILED".."-1000011001"
     )
 
     EnumConstant(

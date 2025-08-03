@@ -109,6 +109,8 @@ public class VkVideoReferenceSlotInfoKHR extends Struct<VkVideoReferenceSlotInfo
     public VkVideoReferenceSlotInfoKHR pNext(VkVideoEncodeH264DpbSlotInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH265DpbSlotInfoKHR} value to the {@code pNext} chain. */
     public VkVideoReferenceSlotInfoKHR pNext(VkVideoEncodeH265DpbSlotInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoReferenceIntraRefreshInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoReferenceSlotInfoKHR pNext(VkVideoReferenceIntraRefreshInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code slotIndex} field. */
     public VkVideoReferenceSlotInfoKHR slotIndex(@NativeType("int32_t") int value) { nslotIndex(address(), value); return this; }
     /** Sets the address of the specified {@link VkVideoPictureResourceInfoKHR} to the {@code pPictureResource} field. */
@@ -344,6 +346,8 @@ public class VkVideoReferenceSlotInfoKHR extends Struct<VkVideoReferenceSlotInfo
         public VkVideoReferenceSlotInfoKHR.Buffer pNext(VkVideoEncodeH264DpbSlotInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH265DpbSlotInfoKHR} value to the {@code pNext} chain. */
         public VkVideoReferenceSlotInfoKHR.Buffer pNext(VkVideoEncodeH265DpbSlotInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoReferenceIntraRefreshInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoReferenceSlotInfoKHR.Buffer pNext(VkVideoReferenceIntraRefreshInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code slotIndex} field. */
         public VkVideoReferenceSlotInfoKHR.Buffer slotIndex(@NativeType("int32_t") int value) { VkVideoReferenceSlotInfoKHR.nslotIndex(address(), value); return this; }
         /** Sets the address of the specified {@link VkVideoPictureResourceInfoKHR} to the {@code pPictureResource} field. */

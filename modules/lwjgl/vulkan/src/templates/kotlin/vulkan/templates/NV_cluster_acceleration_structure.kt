@@ -10,7 +10,7 @@ import vulkan.*
 
 val NV_cluster_acceleration_structure = "NVClusterAccelerationStructure".nativeClassVK("NV_cluster_acceleration_structure", type = "device", postfix = "NV") {
     IntConstant(
-        "NV_CLUSTER_ACCELERATION_STRUCTURE_SPEC_VERSION".."3"
+        "NV_CLUSTER_ACCELERATION_STRUCTURE_SPEC_VERSION".."4"
     )
 
     StringConstant(
@@ -26,6 +26,10 @@ val NV_cluster_acceleration_structure = "NVClusterAccelerationStructure".nativeC
         "STRUCTURE_TYPE_CLUSTER_ACCELERATION_STRUCTURE_INPUT_INFO_NV".."1000569005",
         "STRUCTURE_TYPE_CLUSTER_ACCELERATION_STRUCTURE_COMMANDS_INFO_NV".."1000569006",
         "STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CLUSTER_ACCELERATION_STRUCTURE_CREATE_INFO_NV".."1000569007"
+    )
+
+    EnumConstant(
+        "BUILD_ACCELERATION_STRUCTURE_ALLOW_CLUSTER_OPACITY_MICROMAPS_BIT_NV".enum(0x00001000)
     )
 
     EnumConstant(

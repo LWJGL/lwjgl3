@@ -335,6 +335,8 @@ public class VKCapabilitiesInstance {
     public final boolean VK_KHR_portability_enumeration;
     /** When true, {@code KHR_surface} is supported. */
     public final boolean VK_KHR_surface;
+    /** When true, {@code KHR_surface_maintenance1} is supported. */
+    public final boolean VK_KHR_surface_maintenance1;
     /** When true, {@code KHR_surface_protected_capabilities} is supported. */
     public final boolean VK_KHR_surface_protected_capabilities;
     /** When true, {@code KHR_wayland_surface} is supported. */
@@ -401,6 +403,7 @@ public class VKCapabilitiesInstance {
         check_KHR_performance_query(provider, caps, deviceExt);
         VK_KHR_portability_enumeration = ext.contains("VK_KHR_portability_enumeration");
         VK_KHR_surface = check_KHR_surface(provider, caps, ext);
+        VK_KHR_surface_maintenance1 = ext.contains("VK_KHR_surface_maintenance1");
         VK_KHR_surface_protected_capabilities = ext.contains("VK_KHR_surface_protected_capabilities");
         check_KHR_swapchain(provider, caps, deviceExt);
         check_KHR_video_encode_queue(provider, caps, deviceExt);

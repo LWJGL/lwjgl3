@@ -1,0 +1,51 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: https://www.lwjgl.org/license
+ * MACHINE GENERATED FILE, DO NOT EDIT
+ */
+package vulkan.templates
+
+import org.lwjgl.generator.*
+import vulkan.*
+
+val KHR_video_encode_intra_refresh = "KHRVideoEncodeIntraRefresh".nativeClassVK("KHR_video_encode_intra_refresh", type = "device", postfix = "KHR") {
+    IntConstant(
+        "KHR_VIDEO_ENCODE_INTRA_REFRESH_SPEC_VERSION".."1"
+    )
+
+    StringConstant(
+        "KHR_VIDEO_ENCODE_INTRA_REFRESH_EXTENSION_NAME".."VK_KHR_video_encode_intra_refresh"
+    )
+
+    EnumConstant(
+        "STRUCTURE_TYPE_VIDEO_ENCODE_INTRA_REFRESH_CAPABILITIES_KHR".."1000552000",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_SESSION_INTRA_REFRESH_CREATE_INFO_KHR".."1000552001",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_INTRA_REFRESH_INFO_KHR".."1000552002",
+        "STRUCTURE_TYPE_VIDEO_REFERENCE_INTRA_REFRESH_INFO_KHR".."1000552003",
+        "STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_INTRA_REFRESH_FEATURES_KHR".."1000552004"
+    )
+
+    EnumConstant(
+        "VIDEO_ENCODE_INTRA_REFRESH_BIT_KHR".enum(0x00000004)
+    )
+
+    EnumConstant(
+        "VIDEO_ENCODE_H264_CAPABILITY_B_PICTURE_INTRA_REFRESH_BIT_KHR".enum(0x00000400)
+    )
+
+    EnumConstant(
+        "VIDEO_ENCODE_H265_CAPABILITY_B_PICTURE_INTRA_REFRESH_BIT_KHR".enum(0x00000800)
+    )
+
+    EnumConstant(
+        "VIDEO_ENCODE_AV1_CAPABILITY_COMPOUND_PREDICTION_INTRA_REFRESH_BIT_KHR".enum(0x00000020)
+    )
+
+    EnumConstant(
+        "VIDEO_ENCODE_INTRA_REFRESH_MODE_NONE_KHR".."0",
+        "VIDEO_ENCODE_INTRA_REFRESH_MODE_PER_PICTURE_PARTITION_BIT_KHR".enum(0x00000001),
+        "VIDEO_ENCODE_INTRA_REFRESH_MODE_BLOCK_BASED_BIT_KHR".enum(0x00000002),
+        "VIDEO_ENCODE_INTRA_REFRESH_MODE_BLOCK_ROW_BASED_BIT_KHR".enum(0x00000004),
+        "VIDEO_ENCODE_INTRA_REFRESH_MODE_BLOCK_COLUMN_BASED_BIT_KHR".enum(0x00000008)
+    )
+}

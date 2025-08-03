@@ -216,8 +216,12 @@ public class VkSwapchainCreateInfoKHR extends Struct<VkSwapchainCreateInfoKHR> i
     public VkSwapchainCreateInfoKHR pNext(VkSwapchainPresentBarrierCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSwapchainPresentModesCreateInfoEXT} value to the {@code pNext} chain. */
     public VkSwapchainCreateInfoKHR pNext(VkSwapchainPresentModesCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkSwapchainPresentModesCreateInfoKHR} value to the {@code pNext} chain. */
+    public VkSwapchainCreateInfoKHR pNext(VkSwapchainPresentModesCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSwapchainPresentScalingCreateInfoEXT} value to the {@code pNext} chain. */
     public VkSwapchainCreateInfoKHR pNext(VkSwapchainPresentScalingCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkSwapchainPresentScalingCreateInfoKHR} value to the {@code pNext} chain. */
+    public VkSwapchainCreateInfoKHR pNext(VkSwapchainPresentScalingCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code flags} field. */
     public VkSwapchainCreateInfoKHR flags(@NativeType("VkSwapchainCreateFlagsKHR") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@code surface} field. */
@@ -637,8 +641,12 @@ public class VkSwapchainCreateInfoKHR extends Struct<VkSwapchainCreateInfoKHR> i
         public VkSwapchainCreateInfoKHR.Buffer pNext(VkSwapchainPresentBarrierCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSwapchainPresentModesCreateInfoEXT} value to the {@code pNext} chain. */
         public VkSwapchainCreateInfoKHR.Buffer pNext(VkSwapchainPresentModesCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkSwapchainPresentModesCreateInfoKHR} value to the {@code pNext} chain. */
+        public VkSwapchainCreateInfoKHR.Buffer pNext(VkSwapchainPresentModesCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSwapchainPresentScalingCreateInfoEXT} value to the {@code pNext} chain. */
         public VkSwapchainCreateInfoKHR.Buffer pNext(VkSwapchainPresentScalingCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkSwapchainPresentScalingCreateInfoKHR} value to the {@code pNext} chain. */
+        public VkSwapchainCreateInfoKHR.Buffer pNext(VkSwapchainPresentScalingCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code flags} field. */
         public VkSwapchainCreateInfoKHR.Buffer flags(@NativeType("VkSwapchainCreateFlagsKHR") int value) { VkSwapchainCreateInfoKHR.nflags(address(), value); return this; }
         /** Sets the specified value to the {@code surface} field. */

@@ -105,8 +105,12 @@ public class VkSurfaceCapabilities2KHR extends Struct<VkSurfaceCapabilities2KHR>
     public VkSurfaceCapabilities2KHR pNext(VkSurfaceCapabilitiesPresentWait2KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSurfacePresentModeCompatibilityEXT} value to the {@code pNext} chain. */
     public VkSurfaceCapabilities2KHR pNext(VkSurfacePresentModeCompatibilityEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkSurfacePresentModeCompatibilityKHR} value to the {@code pNext} chain. */
+    public VkSurfaceCapabilities2KHR pNext(VkSurfacePresentModeCompatibilityKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSurfacePresentScalingCapabilitiesEXT} value to the {@code pNext} chain. */
     public VkSurfaceCapabilities2KHR pNext(VkSurfacePresentScalingCapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkSurfacePresentScalingCapabilitiesKHR} value to the {@code pNext} chain. */
+    public VkSurfaceCapabilities2KHR pNext(VkSurfacePresentScalingCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSurfaceProtectedCapabilitiesKHR} value to the {@code pNext} chain. */
     public VkSurfaceCapabilities2KHR pNext(VkSurfaceProtectedCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
@@ -349,8 +353,12 @@ public class VkSurfaceCapabilities2KHR extends Struct<VkSurfaceCapabilities2KHR>
         public VkSurfaceCapabilities2KHR.Buffer pNext(VkSurfaceCapabilitiesPresentWait2KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSurfacePresentModeCompatibilityEXT} value to the {@code pNext} chain. */
         public VkSurfaceCapabilities2KHR.Buffer pNext(VkSurfacePresentModeCompatibilityEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkSurfacePresentModeCompatibilityKHR} value to the {@code pNext} chain. */
+        public VkSurfaceCapabilities2KHR.Buffer pNext(VkSurfacePresentModeCompatibilityKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSurfacePresentScalingCapabilitiesEXT} value to the {@code pNext} chain. */
         public VkSurfaceCapabilities2KHR.Buffer pNext(VkSurfacePresentScalingCapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkSurfacePresentScalingCapabilitiesKHR} value to the {@code pNext} chain. */
+        public VkSurfaceCapabilities2KHR.Buffer pNext(VkSurfacePresentScalingCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSurfaceProtectedCapabilitiesKHR} value to the {@code pNext} chain. */
         public VkSurfaceCapabilities2KHR.Buffer pNext(VkSurfaceProtectedCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
 

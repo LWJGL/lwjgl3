@@ -26,40 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t const * pImageIndices;
  * }}</pre>
  */
-public class VkReleaseSwapchainImagesInfoEXT extends Struct<VkReleaseSwapchainImagesInfoEXT> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        SWAPCHAIN,
-        IMAGEINDEXCOUNT,
-        PIMAGEINDICES;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(8),
-            __member(4),
-            __member(POINTER_SIZE)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        SWAPCHAIN = layout.offsetof(2);
-        IMAGEINDEXCOUNT = layout.offsetof(3);
-        PIMAGEINDICES = layout.offsetof(4);
-    }
+public class VkReleaseSwapchainImagesInfoEXT extends VkReleaseSwapchainImagesInfoKHR {
 
     protected VkReleaseSwapchainImagesInfoEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -77,40 +44,27 @@ public class VkReleaseSwapchainImagesInfoEXT extends Struct<VkReleaseSwapchainIm
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkReleaseSwapchainImagesInfoEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** @return the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** @return the value of the {@code swapchain} field. */
-    @NativeType("VkSwapchainKHR")
-    public long swapchain() { return nswapchain(address()); }
-    /** @return the value of the {@code imageIndexCount} field. */
-    @NativeType("uint32_t")
-    public int imageIndexCount() { return nimageIndexCount(address()); }
-    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pImageIndices} field. */
-    @NativeType("uint32_t const *")
-    public IntBuffer pImageIndices() { return npImageIndices(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkReleaseSwapchainImagesInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTSwapchainMaintenance1#VK_STRUCTURE_TYPE_RELEASE_SWAPCHAIN_IMAGES_INFO_EXT STRUCTURE_TYPE_RELEASE_SWAPCHAIN_IMAGES_INFO_EXT} value to the {@code sType} field. */
-    public VkReleaseSwapchainImagesInfoEXT sType$Default() { return sType(EXTSwapchainMaintenance1.VK_STRUCTURE_TYPE_RELEASE_SWAPCHAIN_IMAGES_INFO_EXT); }
+    /** Sets the {@link KHRSwapchainMaintenance1#VK_STRUCTURE_TYPE_RELEASE_SWAPCHAIN_IMAGES_INFO_KHR STRUCTURE_TYPE_RELEASE_SWAPCHAIN_IMAGES_INFO_KHR} value to the {@code sType} field. */
+    @Override
+    public VkReleaseSwapchainImagesInfoEXT sType$Default() { return sType(KHRSwapchainMaintenance1.VK_STRUCTURE_TYPE_RELEASE_SWAPCHAIN_IMAGES_INFO_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkReleaseSwapchainImagesInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code swapchain} field. */
+    @Override
     public VkReleaseSwapchainImagesInfoEXT swapchain(@NativeType("VkSwapchainKHR") long value) { nswapchain(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@code pImageIndices} field. */
+    @Override
     public VkReleaseSwapchainImagesInfoEXT pImageIndices(@NativeType("uint32_t const *") IntBuffer value) { npImageIndices(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkReleaseSwapchainImagesInfoEXT set(
         int sType,
         long pNext,
@@ -248,41 +202,8 @@ public class VkReleaseSwapchainImagesInfoEXT extends Struct<VkReleaseSwapchainIm
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkReleaseSwapchainImagesInfoEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkReleaseSwapchainImagesInfoEXT.PNEXT); }
-    /** Unsafe version of {@link #swapchain}. */
-    public static long nswapchain(long struct) { return memGetLong(struct + VkReleaseSwapchainImagesInfoEXT.SWAPCHAIN); }
-    /** Unsafe version of {@link #imageIndexCount}. */
-    public static int nimageIndexCount(long struct) { return memGetInt(struct + VkReleaseSwapchainImagesInfoEXT.IMAGEINDEXCOUNT); }
-    /** Unsafe version of {@link #pImageIndices() pImageIndices}. */
-    public static IntBuffer npImageIndices(long struct) { return memIntBuffer(memGetAddress(struct + VkReleaseSwapchainImagesInfoEXT.PIMAGEINDICES), nimageIndexCount(struct)); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkReleaseSwapchainImagesInfoEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkReleaseSwapchainImagesInfoEXT.PNEXT, value); }
-    /** Unsafe version of {@link #swapchain(long) swapchain}. */
-    public static void nswapchain(long struct, long value) { memPutLong(struct + VkReleaseSwapchainImagesInfoEXT.SWAPCHAIN, value); }
-    /** Sets the specified value to the {@code imageIndexCount} field of the specified {@code struct}. */
-    public static void nimageIndexCount(long struct, int value) { memPutInt(struct + VkReleaseSwapchainImagesInfoEXT.IMAGEINDEXCOUNT, value); }
-    /** Unsafe version of {@link #pImageIndices(IntBuffer) pImageIndices}. */
-    public static void npImageIndices(long struct, IntBuffer value) { memPutAddress(struct + VkReleaseSwapchainImagesInfoEXT.PIMAGEINDICES, memAddress(value)); nimageIndexCount(struct, value.remaining()); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + VkReleaseSwapchainImagesInfoEXT.PIMAGEINDICES));
-    }
-
-    // -----------------------------------
-
     /** An array of {@link VkReleaseSwapchainImagesInfoEXT} structs. */
-    public static class Buffer extends StructBuffer<VkReleaseSwapchainImagesInfoEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkReleaseSwapchainImagesInfoKHR.Buffer {
 
         private static final VkReleaseSwapchainImagesInfoEXT ELEMENT_FACTORY = VkReleaseSwapchainImagesInfoEXT.create(-1L);
 
@@ -296,7 +217,7 @@ public class VkReleaseSwapchainImagesInfoEXT extends Struct<VkReleaseSwapchainIm
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -322,31 +243,20 @@ public class VkReleaseSwapchainImagesInfoEXT extends Struct<VkReleaseSwapchainIm
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkReleaseSwapchainImagesInfoEXT.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkReleaseSwapchainImagesInfoEXT.npNext(address()); }
-        /** @return the value of the {@code swapchain} field. */
-        @NativeType("VkSwapchainKHR")
-        public long swapchain() { return VkReleaseSwapchainImagesInfoEXT.nswapchain(address()); }
-        /** @return the value of the {@code imageIndexCount} field. */
-        @NativeType("uint32_t")
-        public int imageIndexCount() { return VkReleaseSwapchainImagesInfoEXT.nimageIndexCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pImageIndices} field. */
-        @NativeType("uint32_t const *")
-        public IntBuffer pImageIndices() { return VkReleaseSwapchainImagesInfoEXT.npImageIndices(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkReleaseSwapchainImagesInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkReleaseSwapchainImagesInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTSwapchainMaintenance1#VK_STRUCTURE_TYPE_RELEASE_SWAPCHAIN_IMAGES_INFO_EXT STRUCTURE_TYPE_RELEASE_SWAPCHAIN_IMAGES_INFO_EXT} value to the {@code sType} field. */
-        public VkReleaseSwapchainImagesInfoEXT.Buffer sType$Default() { return sType(EXTSwapchainMaintenance1.VK_STRUCTURE_TYPE_RELEASE_SWAPCHAIN_IMAGES_INFO_EXT); }
+        /** Sets the {@link KHRSwapchainMaintenance1#VK_STRUCTURE_TYPE_RELEASE_SWAPCHAIN_IMAGES_INFO_KHR STRUCTURE_TYPE_RELEASE_SWAPCHAIN_IMAGES_INFO_KHR} value to the {@code sType} field. */
+        @Override
+        public VkReleaseSwapchainImagesInfoEXT.Buffer sType$Default() { return sType(KHRSwapchainMaintenance1.VK_STRUCTURE_TYPE_RELEASE_SWAPCHAIN_IMAGES_INFO_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkReleaseSwapchainImagesInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkReleaseSwapchainImagesInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code swapchain} field. */
+        @Override
         public VkReleaseSwapchainImagesInfoEXT.Buffer swapchain(@NativeType("VkSwapchainKHR") long value) { VkReleaseSwapchainImagesInfoEXT.nswapchain(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@code pImageIndices} field. */
+        @Override
         public VkReleaseSwapchainImagesInfoEXT.Buffer pImageIndices(@NativeType("uint32_t const *") IntBuffer value) { VkReleaseSwapchainImagesInfoEXT.npImageIndices(address(), value); return this; }
 
     }

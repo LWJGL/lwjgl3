@@ -23,34 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkPresentModeKHR presentMode;
  * }}</pre>
  */
-public class VkSurfacePresentModeEXT extends Struct<VkSurfacePresentModeEXT> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        PRESENTMODE;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        PRESENTMODE = layout.offsetof(2);
-    }
+public class VkSurfacePresentModeEXT extends VkSurfacePresentModeKHR {
 
     protected VkSurfacePresentModeEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -68,32 +41,24 @@ public class VkSurfacePresentModeEXT extends Struct<VkSurfacePresentModeEXT> imp
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSurfacePresentModeEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** @return the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** @return the value of the {@code presentMode} field. */
-    @NativeType("VkPresentModeKHR")
-    public int presentMode() { return npresentMode(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkSurfacePresentModeEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTSurfaceMaintenance1#VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_EXT STRUCTURE_TYPE_SURFACE_PRESENT_MODE_EXT} value to the {@code sType} field. */
-    public VkSurfacePresentModeEXT sType$Default() { return sType(EXTSurfaceMaintenance1.VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_EXT); }
+    /** Sets the {@link KHRSurfaceMaintenance1#VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_KHR STRUCTURE_TYPE_SURFACE_PRESENT_MODE_KHR} value to the {@code sType} field. */
+    @Override
+    public VkSurfacePresentModeEXT sType$Default() { return sType(KHRSurfaceMaintenance1.VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkSurfacePresentModeEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code presentMode} field. */
+    @Override
     public VkSurfacePresentModeEXT presentMode(@NativeType("VkPresentModeKHR") int value) { npresentMode(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkSurfacePresentModeEXT set(
         int sType,
         long pNext,
@@ -229,24 +194,8 @@ public class VkSurfacePresentModeEXT extends Struct<VkSurfacePresentModeEXT> imp
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkSurfacePresentModeEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkSurfacePresentModeEXT.PNEXT); }
-    /** Unsafe version of {@link #presentMode}. */
-    public static int npresentMode(long struct) { return memGetInt(struct + VkSurfacePresentModeEXT.PRESENTMODE); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkSurfacePresentModeEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkSurfacePresentModeEXT.PNEXT, value); }
-    /** Unsafe version of {@link #presentMode(int) presentMode}. */
-    public static void npresentMode(long struct, int value) { memPutInt(struct + VkSurfacePresentModeEXT.PRESENTMODE, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkSurfacePresentModeEXT} structs. */
-    public static class Buffer extends StructBuffer<VkSurfacePresentModeEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkSurfacePresentModeKHR.Buffer {
 
         private static final VkSurfacePresentModeEXT ELEMENT_FACTORY = VkSurfacePresentModeEXT.create(-1L);
 
@@ -260,7 +209,7 @@ public class VkSurfacePresentModeEXT extends Struct<VkSurfacePresentModeEXT> imp
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -286,23 +235,17 @@ public class VkSurfacePresentModeEXT extends Struct<VkSurfacePresentModeEXT> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkSurfacePresentModeEXT.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkSurfacePresentModeEXT.npNext(address()); }
-        /** @return the value of the {@code presentMode} field. */
-        @NativeType("VkPresentModeKHR")
-        public int presentMode() { return VkSurfacePresentModeEXT.npresentMode(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkSurfacePresentModeEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSurfacePresentModeEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTSurfaceMaintenance1#VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_EXT STRUCTURE_TYPE_SURFACE_PRESENT_MODE_EXT} value to the {@code sType} field. */
-        public VkSurfacePresentModeEXT.Buffer sType$Default() { return sType(EXTSurfaceMaintenance1.VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_EXT); }
+        /** Sets the {@link KHRSurfaceMaintenance1#VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_KHR STRUCTURE_TYPE_SURFACE_PRESENT_MODE_KHR} value to the {@code sType} field. */
+        @Override
+        public VkSurfacePresentModeEXT.Buffer sType$Default() { return sType(KHRSurfaceMaintenance1.VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkSurfacePresentModeEXT.Buffer pNext(@NativeType("void *") long value) { VkSurfacePresentModeEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code presentMode} field. */
+        @Override
         public VkSurfacePresentModeEXT.Buffer presentMode(@NativeType("VkPresentModeKHR") int value) { VkSurfacePresentModeEXT.npresentMode(address(), value); return this; }
 
     }

@@ -146,8 +146,12 @@ public class VkPresentInfoKHR extends Struct<VkPresentInfoKHR> implements Native
     public VkPresentInfoKHR pNext(VkSetPresentConfigNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSwapchainPresentFenceInfoEXT} value to the {@code pNext} chain. */
     public VkPresentInfoKHR pNext(VkSwapchainPresentFenceInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkSwapchainPresentFenceInfoKHR} value to the {@code pNext} chain. */
+    public VkPresentInfoKHR pNext(VkSwapchainPresentFenceInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSwapchainPresentModeInfoEXT} value to the {@code pNext} chain. */
     public VkPresentInfoKHR pNext(VkSwapchainPresentModeInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkSwapchainPresentModeInfoKHR} value to the {@code pNext} chain. */
+    public VkPresentInfoKHR pNext(VkSwapchainPresentModeInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the address of the specified {@link LongBuffer} to the {@code pWaitSemaphores} field. */
     public VkPresentInfoKHR pWaitSemaphores(@Nullable @NativeType("VkSemaphore const *") LongBuffer value) { npWaitSemaphores(address(), value); return this; }
     /** Sets the specified value to the {@code swapchainCount} field. */
@@ -463,8 +467,12 @@ public class VkPresentInfoKHR extends Struct<VkPresentInfoKHR> implements Native
         public VkPresentInfoKHR.Buffer pNext(VkSetPresentConfigNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSwapchainPresentFenceInfoEXT} value to the {@code pNext} chain. */
         public VkPresentInfoKHR.Buffer pNext(VkSwapchainPresentFenceInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkSwapchainPresentFenceInfoKHR} value to the {@code pNext} chain. */
+        public VkPresentInfoKHR.Buffer pNext(VkSwapchainPresentFenceInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSwapchainPresentModeInfoEXT} value to the {@code pNext} chain. */
         public VkPresentInfoKHR.Buffer pNext(VkSwapchainPresentModeInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkSwapchainPresentModeInfoKHR} value to the {@code pNext} chain. */
+        public VkPresentInfoKHR.Buffer pNext(VkSwapchainPresentModeInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the address of the specified {@link LongBuffer} to the {@code pWaitSemaphores} field. */
         public VkPresentInfoKHR.Buffer pWaitSemaphores(@Nullable @NativeType("VkSemaphore const *") LongBuffer value) { VkPresentInfoKHR.npWaitSemaphores(address(), value); return this; }
         /** Sets the specified value to the {@code swapchainCount} field. */

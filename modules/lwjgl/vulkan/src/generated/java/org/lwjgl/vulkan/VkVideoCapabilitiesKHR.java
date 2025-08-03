@@ -166,6 +166,8 @@ public class VkVideoCapabilitiesKHR extends Struct<VkVideoCapabilitiesKHR> imple
     public VkVideoCapabilitiesKHR pNext(VkVideoEncodeH265CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH265QuantizationMapCapabilitiesKHR} value to the {@code pNext} chain. */
     public VkVideoCapabilitiesKHR pNext(VkVideoEncodeH265QuantizationMapCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeIntraRefreshCapabilitiesKHR} value to the {@code pNext} chain. */
+    public VkVideoCapabilitiesKHR pNext(VkVideoEncodeIntraRefreshCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeQuantizationMapCapabilitiesKHR} value to the {@code pNext} chain. */
     public VkVideoCapabilitiesKHR pNext(VkVideoEncodeQuantizationMapCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
@@ -434,6 +436,8 @@ public class VkVideoCapabilitiesKHR extends Struct<VkVideoCapabilitiesKHR> imple
         public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoEncodeH265CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH265QuantizationMapCapabilitiesKHR} value to the {@code pNext} chain. */
         public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoEncodeH265QuantizationMapCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeIntraRefreshCapabilitiesKHR} value to the {@code pNext} chain. */
+        public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoEncodeIntraRefreshCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeQuantizationMapCapabilitiesKHR} value to the {@code pNext} chain. */
         public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoEncodeQuantizationMapCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
