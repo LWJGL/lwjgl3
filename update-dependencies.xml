@@ -16,8 +16,8 @@
         <property name="jquery" value="3.5.1"/>
         <property name="slf4j" value="1.7.36"/>
     <property name="joml" value="1.10.8"/>
-    <property name="kotlinc-version" value="2.1.21"/>
-    <property name="kotlinc-build" value="2.1.21-release-317"/>
+    <property name="kotlinc-version" value="2.2.20-Beta2"/>
+    <property name="kotlinc-build" value="2.2.20-Beta2-release-177"/>
     <property name="jmh-core" value="1.37"/>
         <property name="jmh-generator-annprocess" value="1.37"/>
         <property name="jopt-simple" value="5.0.4"/>

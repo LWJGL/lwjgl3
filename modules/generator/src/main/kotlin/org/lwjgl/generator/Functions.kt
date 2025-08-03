@@ -1522,7 +1522,7 @@ class Func(
             else {
                 val space = it.lastIndexOf(' ')
                 val type = it.substring(startIndex = 0, endIndex = space)
-                    .let { if (nullable) it.nullable else it }
+                    .let { type -> if (nullable) type.nullable else type }
 
                 "${nativeType.annotate(type)} ${it.substring(space + 1)}"
             }
@@ -1552,7 +1552,7 @@ class Func(
         // Method signature
 
         val retType = returns.transformDeclarationOrElse(transforms, returns.javaMethodType, false, nullable = false)!!.let {
-            if ((returns.nativeType.isReference && returnsNull) || (transforms[returns].let { it is FunctionTransform<*> && it.forceNullable }))
+            if ((returns.nativeType.isReference && returnsNull) || (transforms[returns].let { returnTransform -> returnTransform is FunctionTransform<*> && returnTransform.forceNullable }))
                 it.nullable
             else
                 it
@@ -1614,7 +1614,7 @@ class Func(
             }
             print("${get<Reuse>().source.className}.$name(")
             printList(getNativeParams(withAutoSizeResultParams = false)) {
-                it.transformDeclarationOrElse(transforms, it.name, false, false).let { name ->
+                it.transformDeclarationOrElse(transforms, it.name, annotate = false, nullable = false).let { name ->
                     name?.substring(name.lastIndexOf(' ') + 1)
                 }
             }
@@ -1830,7 +1830,7 @@ class Func(
 
     internal fun generateFunction(writer: PrintWriter) {
         val hasArrays = hasParam { it.nativeType is ArrayType<*> }
-        val hasCritical = false && nativeClass.binding?.apiCapabilities != APICapabilities.JNI_CAPABILITIES && !parameters.contains(JNI_ENV)
+        val hasCritical = false/* && nativeClass.binding?.apiCapabilities != APICapabilities.JNI_CAPABILITIES && !parameters.contains(JNI_ENV)*/
         if (hasCritical) {
             writer.generateFunctionImpl(hasArrays, hasCritical, critical = true)
         }

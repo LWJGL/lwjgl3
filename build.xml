@@ -132,8 +132,8 @@
         <echo message="Compiling Kotlin generator..." level="info" taskname="Generator" unless:set="generator-uptodate"/>
         <mkdir dir="${bin.generator}"/>
         <kotlinc moduleName="generator" output="${bin.generator}" printVersion="true" unless:set="generator-uptodate">
-            <compilerarg line="-language-version 2.1"/>
-            <compilerarg line="-api-version 2.1"/>
+            <compilerarg line="-language-version 2.2"/>
+            <compilerarg line="-api-version 2.2"/>
             <compilerarg value="-progressive"/>
             <compilerarg value="-Xno-call-assertions"/>
             <compilerarg value="-Xno-param-assertions"/>
@@ -200,8 +200,8 @@
                 <pathelement location="${bin.generator}"/>
             </classpath>
 
-            <compilerarg line="-language-version 2.1"/>
-            <compilerarg line="-api-version 2.1"/>
+            <compilerarg line="-language-version 2.2"/>
+            <compilerarg line="-api-version 2.2"/>
             <compilerarg value="-progressive"/>
             <compilerarg value="-Xno-call-assertions"/>
             <compilerarg value="-Xno-param-assertions"/>
@@ -592,13 +592,18 @@
                 <pathelement path="${kotlinc}/lib/kotlin-stdlib.jar"/>
             </classpath>
 
-            <compilerarg line="-jvm-target 1.8"/>
+            <compilerarg line="-language-version 2.2"/>
+            <compilerarg line="-api-version 2.2"/>
+            <compilerarg value="-progressive"/>
             <compilerarg value="-Xno-call-assertions"/>
             <compilerarg value="-Xno-param-assertions"/>
+            <compilerarg value="-Xlambdas=indy"/>
             <compilerarg value="-Xreport-perf"/>
-            <compilerarg value="-progressive"/>
-            <compilerarg value="-Xuse-experimental=kotlin.Experimental"/>
-            <compilerarg value="-Xuse-experimental=kotlin.contracts.ExperimentalContracts"/>
+            <compilerarg value="-Xbackend-threads=${backend-threads}" if:set="backend-threads"/>
+            <compilerarg line="-jvm-target 1.8"/>
+
+            <!--<compilerarg value="-Xuse-experimental=kotlin.Experimental"/>
+            <compilerarg value="-Xuse-experimental=kotlin.contracts.ExperimentalContracts"/>-->
 
             <src path="${src.extract}/kotlin"/>
         </kotlinc>
