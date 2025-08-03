@@ -15,7 +15,7 @@ val SPVC_BINDING = simpleBinding(
 val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spvc_", binding = SPVC_BINDING) {
     IntConstant(
         "C_API_VERSION_MAJOR".."0",
-        "C_API_VERSION_MINOR".."66",
+        "C_API_VERSION_MINOR".."67",
         "C_API_VERSION_PATCH".."0"
     )
 
@@ -76,7 +76,8 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         "RESOURCE_TYPE_ACCELERATION_STRUCTURE".enum,
         "RESOURCE_TYPE_RAY_QUERY".enum,
         "RESOURCE_TYPE_SHADER_RECORD_BUFFER".enum,
-        "RESOURCE_TYPE_GL_PLAIN_UNIFORM".enum
+        "RESOURCE_TYPE_GL_PLAIN_UNIFORM".enum,
+        "RESOURCE_TYPE_TENSOR".enum
     )
 
     EnumConstant(

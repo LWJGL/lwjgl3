@@ -208,7 +208,7 @@ public class Spvc {
 
     public static final int
         SPVC_C_API_VERSION_MAJOR = 0,
-        SPVC_C_API_VERSION_MINOR = 66,
+        SPVC_C_API_VERSION_MINOR = 67,
         SPVC_C_API_VERSION_PATCH = 0;
 
     public static final int
@@ -263,7 +263,8 @@ public class Spvc {
         SPVC_RESOURCE_TYPE_ACCELERATION_STRUCTURE = 12,
         SPVC_RESOURCE_TYPE_RAY_QUERY              = 13,
         SPVC_RESOURCE_TYPE_SHADER_RECORD_BUFFER   = 14,
-        SPVC_RESOURCE_TYPE_GL_PLAIN_UNIFORM       = 15;
+        SPVC_RESOURCE_TYPE_GL_PLAIN_UNIFORM       = 15,
+        SPVC_RESOURCE_TYPE_TENSOR                 = 16;
 
     public static final int
         SPVC_BUILTIN_RESOURCE_TYPE_UNKNOWN      = 0,
