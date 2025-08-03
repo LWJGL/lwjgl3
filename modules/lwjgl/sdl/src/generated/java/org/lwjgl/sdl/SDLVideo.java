@@ -248,6 +248,7 @@ public class SDLVideo {
     public static final String
         SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN               = "SDL.window.create.always_on_top",
         SDL_PROP_WINDOW_CREATE_BORDERLESS_BOOLEAN                  = "SDL.window.create.borderless",
+        SDL_PROP_WINDOW_CREATE_CONSTRAIN_POPUP_BOOLEAN             = "SDL.window.create.constrain_popup",
         SDL_PROP_WINDOW_CREATE_FOCUSABLE_BOOLEAN                   = "SDL.window.create.focusable",
         SDL_PROP_WINDOW_CREATE_EXTERNAL_GRAPHICS_CONTEXT_BOOLEAN   = "SDL.window.create.external_graphics_context",
         SDL_PROP_WINDOW_CREATE_FLAGS_NUMBER                        = "SDL.window.create.flags",
