@@ -439,6 +439,25 @@ val hb_font_get_glyph_origin_func_t = Module.HARFBUZZ.callback {
     )
 }
 
+val hb_font_get_glyph_origins_func_t = Module.HARFBUZZ.callback {
+    hb_bool_t(
+        "hb_font_get_glyph_origin_func_t",
+
+        hb_font_t.p("font"),
+        nullable..opaque_p("font_data"),
+        unsigned_int("count"),
+        Check("(count * glyph_stride) >> 2")..hb_codepoint_t.const.p("first_glyph"),
+        unsigned("glyph_stride"),
+        Check("(count * x_stride) >> 2")..hb_position_t.p("first_x"),
+        unsigned("x_stride"),
+        Check("(count * y_stride) >> 2")..hb_position_t.p("first_y"),
+        unsigned("y_stride"),
+        nullable..opaque_p("user_data"),
+
+        nativeType = "hb_font_get_glyph_origins_func_t"
+    )
+}
+
 val hb_font_get_glyph_kerning_func_t = Module.HARFBUZZ.callback {
     hb_position_t(
         "hb_font_get_glyph_kerning_func_t",
@@ -851,10 +870,12 @@ val hb_font_get_glyph_h_advance_func_t = typedef(hb_font_get_glyph_advance_func_
 val hb_font_get_glyph_h_advances_func_t = typedef(hb_font_get_glyph_advances_func_t, "hb_font_get_glyph_h_advances_func_t")
 val hb_font_get_glyph_h_kerning_func_t = typedef(hb_font_get_glyph_kerning_func_t, "hb_font_get_glyph_h_kerning_func_t")
 val hb_font_get_glyph_h_origin_func_t = typedef(hb_font_get_glyph_origin_func_t, "hb_font_get_glyph_h_origin_func_t")
+val hb_font_get_glyph_h_origins_func_t = typedef(hb_font_get_glyph_origins_func_t, "hb_font_get_glyph_h_origins_func_t")
 val hb_font_get_glyph_v_advance_func_t = typedef(hb_font_get_glyph_advance_func_t, "hb_font_get_glyph_v_advance_func_t")
 val hb_font_get_glyph_v_advances_func_t = typedef(hb_font_get_glyph_advances_func_t, "hb_font_get_glyph_v_advances_func_t")
 val hb_font_get_glyph_v_kerning_func_t = typedef(hb_font_get_glyph_kerning_func_t, "hb_font_get_glyph_v_kerning_func_t")
 val hb_font_get_glyph_v_origin_func_t = typedef(hb_font_get_glyph_origin_func_t, "hb_font_get_glyph_v_origin_func_t")
+val hb_font_get_glyph_v_origins_func_t = typedef(hb_font_get_glyph_origins_func_t, "hb_font_get_glyph_v_origins_func_t")
 
 val hb_glyph_info_t = struct(Module.HARFBUZZ, "hb_glyph_info_t") {
     hb_codepoint_t("codepoint")

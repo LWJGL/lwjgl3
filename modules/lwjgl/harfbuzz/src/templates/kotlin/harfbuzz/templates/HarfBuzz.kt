@@ -1694,6 +1694,24 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     )
 
     void(
+        "font_funcs_set_glyph_h_origins_func",
+
+        hb_font_funcs_t.p("ffuncs"),
+        hb_font_get_glyph_h_origins_func_t("func"),
+        nullable..opaque_p("user_data"),
+        nullable..hb_destroy_func_t("destroy")
+    )
+
+    void(
+        "font_funcs_set_glyph_v_origins_func",
+
+        hb_font_funcs_t.p("ffuncs"),
+        hb_font_get_glyph_v_origins_func_t("func"),
+        nullable..opaque_p("user_data"),
+        nullable..hb_destroy_func_t("destroy")
+    )
+
+    void(
         "font_funcs_set_glyph_h_kerning_func",
 
         hb_font_funcs_t.p("ffuncs"),
@@ -1870,6 +1888,32 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         hb_codepoint_t("glyph"),
         Check(1)..hb_position_t.p("x"),
         Check(1)..hb_position_t.p("y")
+    )
+
+    hb_bool_t(
+        "font_get_glyph_h_origins",
+
+        hb_font_t.p("font"),
+        unsigned_int("count"),
+        Check("(count * glyph_stride) >> 2")..hb_codepoint_t.const.p("first_glyph"),
+        unsigned("glyph_stride"),
+        Check("(count * x_stride) >> 2")..hb_position_t.p("first_x"),
+        unsigned("x_stride"),
+        Check("(count * y_stride) >> 2")..hb_position_t.p("first_y"),
+        unsigned("y_stride")
+    )
+
+    hb_bool_t(
+        "font_get_glyph_v_origins",
+
+        hb_font_t.p("font"),
+        unsigned_int("count"),
+        Check("(count * glyph_stride) >> 2")..hb_codepoint_t.const.p("first_glyph"),
+        unsigned("glyph_stride"),
+        Check("(count * x_stride) >> 2")..hb_position_t.p("first_x"),
+        unsigned("x_stride"),
+        Check("(count * y_stride) >> 2")..hb_position_t.p("first_y"),
+        unsigned("y_stride")
     )
 
     hb_position_t(
@@ -3667,10 +3711,10 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     // hb-version.h
 
     IntConstant("VERSION_MAJOR".."11")
-    IntConstant("VERSION_MINOR".."2")
-    IntConstant("VERSION_MICRO".."1")
+    IntConstant("VERSION_MINOR".."3")
+    IntConstant("VERSION_MICRO".."3")
 
-    StringConstant("VERSION_STRING".."11.2.1")
+    StringConstant("VERSION_STRING".."11.3.3")
 
     customMethod("""
     public static boolean HB_VERSION_ATLEAST(int major, int minor, int micro) {
