@@ -199,7 +199,7 @@ public class LLVMCore {
             MetadataTypeInContext                      = apiGetFunctionAddressOptional(LLVM, "LLVMMetadataTypeInContext"),
             VoidType                                   = apiGetFunctionAddress(LLVM, "LLVMVoidType"),
             LabelType                                  = apiGetFunctionAddress(LLVM, "LLVMLabelType"),
-            X86MMXType                                 = apiGetFunctionAddress(LLVM, "LLVMX86MMXType"),
+            X86MMXType                                 = apiGetFunctionAddressOptional(LLVM, "LLVMX86MMXType"),
             X86AMXType                                 = apiGetFunctionAddressOptional(LLVM, "LLVMX86AMXType"),
             TargetExtTypeInContext                     = apiGetFunctionAddressOptional(LLVM, "LLVMTargetExtTypeInContext"),
             GetTargetExtTypeName                       = apiGetFunctionAddressOptional(LLVM, "LLVMGetTargetExtTypeName"),
@@ -4014,6 +4014,9 @@ public class LLVMCore {
     @NativeType("LLVMTypeRef")
     public static long LLVMX86MMXType() {
         long __functionAddress = Functions.X86MMXType;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         return invokeP(__functionAddress);
     }
 

@@ -1418,7 +1418,7 @@ val LLVMCore = "LLVMCore".nativeClass(
             void()
         )
         LLVMTypeRef("LabelType", void())
-        LLVMTypeRef("X86MMXType", void())
+        IgnoreMissing..LLVMTypeRef("X86MMXType", void())
         IgnoreMissing..LLVMTypeRef(
             "X86AMXType",
 
