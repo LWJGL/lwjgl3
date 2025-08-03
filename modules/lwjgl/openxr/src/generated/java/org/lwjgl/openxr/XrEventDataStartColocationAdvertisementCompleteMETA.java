@@ -103,28 +103,14 @@ public class XrEventDataStartColocationAdvertisementCompleteMETA extends Struct<
     public XrEventDataStartColocationAdvertisementCompleteMETA type$Default() { return type(METAColocationDiscovery.XR_TYPE_EVENT_DATA_START_COLOCATION_ADVERTISEMENT_COMPLETE_META); }
     /** Sets the specified value to the {@code next} field. */
     public XrEventDataStartColocationAdvertisementCompleteMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@code advertisementRequestId} field. */
-    public XrEventDataStartColocationAdvertisementCompleteMETA advertisementRequestId(@NativeType("XrAsyncRequestIdFB") long value) { nadvertisementRequestId(address(), value); return this; }
-    /** Sets the specified value to the {@code result} field. */
-    public XrEventDataStartColocationAdvertisementCompleteMETA result(@NativeType("XrResult") int value) { nresult(address(), value); return this; }
-    /** Copies the specified {@link XrUuid} to the {@code advertisementUuid} field. */
-    public XrEventDataStartColocationAdvertisementCompleteMETA advertisementUuid(XrUuid value) { nadvertisementUuid(address(), value); return this; }
-    /** Passes the {@code advertisementUuid} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public XrEventDataStartColocationAdvertisementCompleteMETA advertisementUuid(java.util.function.Consumer<XrUuid> consumer) { consumer.accept(advertisementUuid()); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrEventDataStartColocationAdvertisementCompleteMETA set(
         int type,
-        long next,
-        long advertisementRequestId,
-        int result,
-        XrUuid advertisementUuid
+        long next
     ) {
         type(type);
         next(next);
-        advertisementRequestId(advertisementRequestId);
-        result(result);
-        advertisementUuid(advertisementUuid);
 
         return this;
     }
@@ -169,6 +155,11 @@ public class XrEventDataStartColocationAdvertisementCompleteMETA extends Struct<
         return address == NULL ? null : new XrEventDataStartColocationAdvertisementCompleteMETA(address, null);
     }
 
+    /** Downcasts the specified {@code XrEventDataBaseHeader} instance to {@code XrEventDataStartColocationAdvertisementCompleteMETA}. */
+    public static XrEventDataStartColocationAdvertisementCompleteMETA create(XrEventDataBaseHeader value) {
+        return new XrEventDataStartColocationAdvertisementCompleteMETA(value.address(), __getContainer(value));
+    }
+
     /**
      * Returns a new {@link XrEventDataStartColocationAdvertisementCompleteMETA.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -210,6 +201,11 @@ public class XrEventDataStartColocationAdvertisementCompleteMETA extends Struct<
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     public static XrEventDataStartColocationAdvertisementCompleteMETA.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrEventDataBaseHeader.Buffer} instance to {@code XrEventDataStartColocationAdvertisementCompleteMETA.Buffer}. */
+    public static XrEventDataStartColocationAdvertisementCompleteMETA.Buffer create(XrEventDataBaseHeader.Buffer value) {
+        return new XrEventDataStartColocationAdvertisementCompleteMETA.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /**
@@ -267,12 +263,6 @@ public class XrEventDataStartColocationAdvertisementCompleteMETA extends Struct<
     public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataStartColocationAdvertisementCompleteMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataStartColocationAdvertisementCompleteMETA.NEXT, value); }
-    /** Unsafe version of {@link #advertisementRequestId(long) advertisementRequestId}. */
-    public static void nadvertisementRequestId(long struct, long value) { memPutLong(struct + XrEventDataStartColocationAdvertisementCompleteMETA.ADVERTISEMENTREQUESTID, value); }
-    /** Unsafe version of {@link #result(int) result}. */
-    public static void nresult(long struct, int value) { memPutInt(struct + XrEventDataStartColocationAdvertisementCompleteMETA.RESULT, value); }
-    /** Unsafe version of {@link #advertisementUuid(XrUuid) advertisementUuid}. */
-    public static void nadvertisementUuid(long struct, XrUuid value) { memCopy(value.address(), struct + XrEventDataStartColocationAdvertisementCompleteMETA.ADVERTISEMENTUUID, XrUuid.SIZEOF); }
 
     // -----------------------------------
 
@@ -338,14 +328,6 @@ public class XrEventDataStartColocationAdvertisementCompleteMETA extends Struct<
         public XrEventDataStartColocationAdvertisementCompleteMETA.Buffer type$Default() { return type(METAColocationDiscovery.XR_TYPE_EVENT_DATA_START_COLOCATION_ADVERTISEMENT_COMPLETE_META); }
         /** Sets the specified value to the {@code next} field. */
         public XrEventDataStartColocationAdvertisementCompleteMETA.Buffer next(@NativeType("void const *") long value) { XrEventDataStartColocationAdvertisementCompleteMETA.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@code advertisementRequestId} field. */
-        public XrEventDataStartColocationAdvertisementCompleteMETA.Buffer advertisementRequestId(@NativeType("XrAsyncRequestIdFB") long value) { XrEventDataStartColocationAdvertisementCompleteMETA.nadvertisementRequestId(address(), value); return this; }
-        /** Sets the specified value to the {@code result} field. */
-        public XrEventDataStartColocationAdvertisementCompleteMETA.Buffer result(@NativeType("XrResult") int value) { XrEventDataStartColocationAdvertisementCompleteMETA.nresult(address(), value); return this; }
-        /** Copies the specified {@link XrUuid} to the {@code advertisementUuid} field. */
-        public XrEventDataStartColocationAdvertisementCompleteMETA.Buffer advertisementUuid(XrUuid value) { XrEventDataStartColocationAdvertisementCompleteMETA.nadvertisementUuid(address(), value); return this; }
-        /** Passes the {@code advertisementUuid} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public XrEventDataStartColocationAdvertisementCompleteMETA.Buffer advertisementUuid(java.util.function.Consumer<XrUuid> consumer) { consumer.accept(advertisementUuid()); return this; }
 
     }
 

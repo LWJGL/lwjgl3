@@ -116,30 +116,14 @@ public class XrEventDataColocationDiscoveryResultMETA extends Struct<XrEventData
     public XrEventDataColocationDiscoveryResultMETA type$Default() { return type(METAColocationDiscovery.XR_TYPE_EVENT_DATA_COLOCATION_DISCOVERY_RESULT_META); }
     /** Sets the specified value to the {@code next} field. */
     public XrEventDataColocationDiscoveryResultMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@code discoveryRequestId} field. */
-    public XrEventDataColocationDiscoveryResultMETA discoveryRequestId(@NativeType("XrAsyncRequestIdFB") long value) { ndiscoveryRequestId(address(), value); return this; }
-    /** Copies the specified {@link XrUuid} to the {@code advertisementUuid} field. */
-    public XrEventDataColocationDiscoveryResultMETA advertisementUuid(XrUuid value) { nadvertisementUuid(address(), value); return this; }
-    /** Passes the {@code advertisementUuid} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public XrEventDataColocationDiscoveryResultMETA advertisementUuid(java.util.function.Consumer<XrUuid> consumer) { consumer.accept(advertisementUuid()); return this; }
-    /** Copies the specified {@link ByteBuffer} to the {@code buffer} field. */
-    public XrEventDataColocationDiscoveryResultMETA buffer(@NativeType("uint8_t[XR_MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META]") ByteBuffer value) { nbuffer(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code buffer} field. */
-    public XrEventDataColocationDiscoveryResultMETA buffer(int index, @NativeType("uint8_t") byte value) { nbuffer(address(), index, value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrEventDataColocationDiscoveryResultMETA set(
         int type,
-        long next,
-        long discoveryRequestId,
-        XrUuid advertisementUuid,
-        ByteBuffer buffer
+        long next
     ) {
         type(type);
         next(next);
-        discoveryRequestId(discoveryRequestId);
-        advertisementUuid(advertisementUuid);
-        buffer(buffer);
 
         return this;
     }
@@ -184,6 +168,11 @@ public class XrEventDataColocationDiscoveryResultMETA extends Struct<XrEventData
         return address == NULL ? null : new XrEventDataColocationDiscoveryResultMETA(address, null);
     }
 
+    /** Downcasts the specified {@code XrEventDataBaseHeader} instance to {@code XrEventDataColocationDiscoveryResultMETA}. */
+    public static XrEventDataColocationDiscoveryResultMETA create(XrEventDataBaseHeader value) {
+        return new XrEventDataColocationDiscoveryResultMETA(value.address(), __getContainer(value));
+    }
+
     /**
      * Returns a new {@link XrEventDataColocationDiscoveryResultMETA.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -225,6 +214,11 @@ public class XrEventDataColocationDiscoveryResultMETA extends Struct<XrEventData
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     public static XrEventDataColocationDiscoveryResultMETA.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrEventDataBaseHeader.Buffer} instance to {@code XrEventDataColocationDiscoveryResultMETA.Buffer}. */
+    public static XrEventDataColocationDiscoveryResultMETA.Buffer create(XrEventDataBaseHeader.Buffer value) {
+        return new XrEventDataColocationDiscoveryResultMETA.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /**
@@ -288,22 +282,6 @@ public class XrEventDataColocationDiscoveryResultMETA extends Struct<XrEventData
     public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataColocationDiscoveryResultMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataColocationDiscoveryResultMETA.NEXT, value); }
-    /** Unsafe version of {@link #discoveryRequestId(long) discoveryRequestId}. */
-    public static void ndiscoveryRequestId(long struct, long value) { memPutLong(struct + XrEventDataColocationDiscoveryResultMETA.DISCOVERYREQUESTID, value); }
-    /** Unsafe version of {@link #advertisementUuid(XrUuid) advertisementUuid}. */
-    public static void nadvertisementUuid(long struct, XrUuid value) { memCopy(value.address(), struct + XrEventDataColocationDiscoveryResultMETA.ADVERTISEMENTUUID, XrUuid.SIZEOF); }
-    /** Sets the specified value to the {@code bufferSize} field of the specified {@code struct}. */
-    public static void nbufferSize(long struct, int value) { memPutInt(struct + XrEventDataColocationDiscoveryResultMETA.BUFFERSIZE, value); }
-    /** Unsafe version of {@link #buffer(ByteBuffer) buffer}. */
-    public static void nbuffer(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, XR_MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META); }
-        memCopy(memAddress(value), struct + XrEventDataColocationDiscoveryResultMETA.BUFFER, value.remaining() * 1);
-        nbufferSize(struct, value.remaining());
-    }
-    /** Unsafe version of {@link #buffer(int, byte) buffer}. */
-    public static void nbuffer(long struct, int index, byte value) {
-        memPutByte(struct + XrEventDataColocationDiscoveryResultMETA.BUFFER + check(index, XR_MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META) * 1, value);
-    }
 
     // -----------------------------------
 
@@ -375,16 +353,6 @@ public class XrEventDataColocationDiscoveryResultMETA extends Struct<XrEventData
         public XrEventDataColocationDiscoveryResultMETA.Buffer type$Default() { return type(METAColocationDiscovery.XR_TYPE_EVENT_DATA_COLOCATION_DISCOVERY_RESULT_META); }
         /** Sets the specified value to the {@code next} field. */
         public XrEventDataColocationDiscoveryResultMETA.Buffer next(@NativeType("void const *") long value) { XrEventDataColocationDiscoveryResultMETA.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@code discoveryRequestId} field. */
-        public XrEventDataColocationDiscoveryResultMETA.Buffer discoveryRequestId(@NativeType("XrAsyncRequestIdFB") long value) { XrEventDataColocationDiscoveryResultMETA.ndiscoveryRequestId(address(), value); return this; }
-        /** Copies the specified {@link XrUuid} to the {@code advertisementUuid} field. */
-        public XrEventDataColocationDiscoveryResultMETA.Buffer advertisementUuid(XrUuid value) { XrEventDataColocationDiscoveryResultMETA.nadvertisementUuid(address(), value); return this; }
-        /** Passes the {@code advertisementUuid} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public XrEventDataColocationDiscoveryResultMETA.Buffer advertisementUuid(java.util.function.Consumer<XrUuid> consumer) { consumer.accept(advertisementUuid()); return this; }
-        /** Copies the specified {@link ByteBuffer} to the {@code buffer} field. */
-        public XrEventDataColocationDiscoveryResultMETA.Buffer buffer(@NativeType("uint8_t[XR_MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META]") ByteBuffer value) { XrEventDataColocationDiscoveryResultMETA.nbuffer(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code buffer} field. */
-        public XrEventDataColocationDiscoveryResultMETA.Buffer buffer(int index, @NativeType("uint8_t") byte value) { XrEventDataColocationDiscoveryResultMETA.nbuffer(address(), index, value); return this; }
 
     }
 

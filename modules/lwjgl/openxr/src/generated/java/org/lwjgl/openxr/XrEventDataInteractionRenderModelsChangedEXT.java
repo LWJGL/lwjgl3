@@ -135,6 +135,11 @@ public class XrEventDataInteractionRenderModelsChangedEXT extends Struct<XrEvent
         return address == NULL ? null : new XrEventDataInteractionRenderModelsChangedEXT(address, null);
     }
 
+    /** Downcasts the specified {@code XrEventDataBaseHeader} instance to {@code XrEventDataInteractionRenderModelsChangedEXT}. */
+    public static XrEventDataInteractionRenderModelsChangedEXT create(XrEventDataBaseHeader value) {
+        return new XrEventDataInteractionRenderModelsChangedEXT(value.address(), __getContainer(value));
+    }
+
     /**
      * Returns a new {@link XrEventDataInteractionRenderModelsChangedEXT.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -176,6 +181,11 @@ public class XrEventDataInteractionRenderModelsChangedEXT extends Struct<XrEvent
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     public static XrEventDataInteractionRenderModelsChangedEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrEventDataBaseHeader.Buffer} instance to {@code XrEventDataInteractionRenderModelsChangedEXT.Buffer}. */
+    public static XrEventDataInteractionRenderModelsChangedEXT.Buffer create(XrEventDataBaseHeader.Buffer value) {
+        return new XrEventDataInteractionRenderModelsChangedEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /**

@@ -22,8 +22,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrStructureType type;
  *     void * next;
  *     XrResult futureResult;
- *     XrAnchorBD anchor;
  *     {@link XrUuidEXT XrUuidEXT} uuid;
+ *     XrAnchorBD anchor;
  * }}</pre>
  */
 public class XrSpatialAnchorCreateCompletionBD extends Struct<XrSpatialAnchorCreateCompletionBD> implements NativeResource {
@@ -39,16 +39,16 @@ public class XrSpatialAnchorCreateCompletionBD extends Struct<XrSpatialAnchorCre
         TYPE,
         NEXT,
         FUTURERESULT,
-        ANCHOR,
-        UUID;
+        UUID,
+        ANCHOR;
 
     static {
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
             __member(4),
-            __member(POINTER_SIZE),
-            __member(XrUuidEXT.SIZEOF, XrUuidEXT.ALIGNOF)
+            __member(XrUuidEXT.SIZEOF, XrUuidEXT.ALIGNOF),
+            __member(POINTER_SIZE)
         );
 
         SIZEOF = layout.getSize();
@@ -57,8 +57,8 @@ public class XrSpatialAnchorCreateCompletionBD extends Struct<XrSpatialAnchorCre
         TYPE = layout.offsetof(0);
         NEXT = layout.offsetof(1);
         FUTURERESULT = layout.offsetof(2);
-        ANCHOR = layout.offsetof(3);
-        UUID = layout.offsetof(4);
+        UUID = layout.offsetof(3);
+        ANCHOR = layout.offsetof(4);
     }
 
     protected XrSpatialAnchorCreateCompletionBD(long address, @Nullable ByteBuffer container) {
@@ -92,11 +92,11 @@ public class XrSpatialAnchorCreateCompletionBD extends Struct<XrSpatialAnchorCre
     /** @return the value of the {@code futureResult} field. */
     @NativeType("XrResult")
     public int futureResult() { return nfutureResult(address()); }
+    /** @return a {@link XrUuidEXT} view of the {@code uuid} field. */
+    public XrUuidEXT uuid() { return nuuid(address()); }
     /** @return the value of the {@code anchor} field. */
     @NativeType("XrAnchorBD")
     public long anchor() { return nanchor(address()); }
-    /** @return a {@link XrUuidEXT} view of the {@code uuid} field. */
-    public XrUuidEXT uuid() { return nuuid(address()); }
 
     /** Sets the specified value to the {@code type} field. */
     public XrSpatialAnchorCreateCompletionBD type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -106,26 +106,26 @@ public class XrSpatialAnchorCreateCompletionBD extends Struct<XrSpatialAnchorCre
     public XrSpatialAnchorCreateCompletionBD next(@NativeType("void *") long value) { nnext(address(), value); return this; }
     /** Sets the specified value to the {@code futureResult} field. */
     public XrSpatialAnchorCreateCompletionBD futureResult(@NativeType("XrResult") int value) { nfutureResult(address(), value); return this; }
-    /** Sets the specified value to the {@code anchor} field. */
-    public XrSpatialAnchorCreateCompletionBD anchor(XrAnchorBD value) { nanchor(address(), value); return this; }
     /** Copies the specified {@link XrUuidEXT} to the {@code uuid} field. */
     public XrSpatialAnchorCreateCompletionBD uuid(XrUuidEXT value) { nuuid(address(), value); return this; }
     /** Passes the {@code uuid} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrSpatialAnchorCreateCompletionBD uuid(java.util.function.Consumer<XrUuidEXT> consumer) { consumer.accept(uuid()); return this; }
+    /** Sets the specified value to the {@code anchor} field. */
+    public XrSpatialAnchorCreateCompletionBD anchor(XrAnchorBD value) { nanchor(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrSpatialAnchorCreateCompletionBD set(
         int type,
         long next,
         int futureResult,
-        XrAnchorBD anchor,
-        XrUuidEXT uuid
+        XrUuidEXT uuid,
+        XrAnchorBD anchor
     ) {
         type(type);
         next(next);
         futureResult(futureResult);
-        anchor(anchor);
         uuid(uuid);
+        anchor(anchor);
 
         return this;
     }
@@ -269,10 +269,10 @@ public class XrSpatialAnchorCreateCompletionBD extends Struct<XrSpatialAnchorCre
     public static long nnext(long struct) { return memGetAddress(struct + XrSpatialAnchorCreateCompletionBD.NEXT); }
     /** Unsafe version of {@link #futureResult}. */
     public static int nfutureResult(long struct) { return memGetInt(struct + XrSpatialAnchorCreateCompletionBD.FUTURERESULT); }
-    /** Unsafe version of {@link #anchor}. */
-    public static long nanchor(long struct) { return memGetAddress(struct + XrSpatialAnchorCreateCompletionBD.ANCHOR); }
     /** Unsafe version of {@link #uuid}. */
     public static XrUuidEXT nuuid(long struct) { return XrUuidEXT.create(struct + XrSpatialAnchorCreateCompletionBD.UUID); }
+    /** Unsafe version of {@link #anchor}. */
+    public static long nanchor(long struct) { return memGetAddress(struct + XrSpatialAnchorCreateCompletionBD.ANCHOR); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + XrSpatialAnchorCreateCompletionBD.TYPE, value); }
@@ -280,10 +280,10 @@ public class XrSpatialAnchorCreateCompletionBD extends Struct<XrSpatialAnchorCre
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSpatialAnchorCreateCompletionBD.NEXT, value); }
     /** Unsafe version of {@link #futureResult(int) futureResult}. */
     public static void nfutureResult(long struct, int value) { memPutInt(struct + XrSpatialAnchorCreateCompletionBD.FUTURERESULT, value); }
-    /** Unsafe version of {@link #anchor(XrAnchorBD) anchor}. */
-    public static void nanchor(long struct, XrAnchorBD value) { memPutAddress(struct + XrSpatialAnchorCreateCompletionBD.ANCHOR, value.address()); }
     /** Unsafe version of {@link #uuid(XrUuidEXT) uuid}. */
     public static void nuuid(long struct, XrUuidEXT value) { memCopy(value.address(), struct + XrSpatialAnchorCreateCompletionBD.UUID, XrUuidEXT.SIZEOF); }
+    /** Unsafe version of {@link #anchor(XrAnchorBD) anchor}. */
+    public static void nanchor(long struct, XrAnchorBD value) { memPutAddress(struct + XrSpatialAnchorCreateCompletionBD.ANCHOR, value.address()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -346,11 +346,11 @@ public class XrSpatialAnchorCreateCompletionBD extends Struct<XrSpatialAnchorCre
         /** @return the value of the {@code futureResult} field. */
         @NativeType("XrResult")
         public int futureResult() { return XrSpatialAnchorCreateCompletionBD.nfutureResult(address()); }
+        /** @return a {@link XrUuidEXT} view of the {@code uuid} field. */
+        public XrUuidEXT uuid() { return XrSpatialAnchorCreateCompletionBD.nuuid(address()); }
         /** @return the value of the {@code anchor} field. */
         @NativeType("XrAnchorBD")
         public long anchor() { return XrSpatialAnchorCreateCompletionBD.nanchor(address()); }
-        /** @return a {@link XrUuidEXT} view of the {@code uuid} field. */
-        public XrUuidEXT uuid() { return XrSpatialAnchorCreateCompletionBD.nuuid(address()); }
 
         /** Sets the specified value to the {@code type} field. */
         public XrSpatialAnchorCreateCompletionBD.Buffer type(@NativeType("XrStructureType") int value) { XrSpatialAnchorCreateCompletionBD.ntype(address(), value); return this; }
@@ -360,12 +360,12 @@ public class XrSpatialAnchorCreateCompletionBD extends Struct<XrSpatialAnchorCre
         public XrSpatialAnchorCreateCompletionBD.Buffer next(@NativeType("void *") long value) { XrSpatialAnchorCreateCompletionBD.nnext(address(), value); return this; }
         /** Sets the specified value to the {@code futureResult} field. */
         public XrSpatialAnchorCreateCompletionBD.Buffer futureResult(@NativeType("XrResult") int value) { XrSpatialAnchorCreateCompletionBD.nfutureResult(address(), value); return this; }
-        /** Sets the specified value to the {@code anchor} field. */
-        public XrSpatialAnchorCreateCompletionBD.Buffer anchor(XrAnchorBD value) { XrSpatialAnchorCreateCompletionBD.nanchor(address(), value); return this; }
         /** Copies the specified {@link XrUuidEXT} to the {@code uuid} field. */
         public XrSpatialAnchorCreateCompletionBD.Buffer uuid(XrUuidEXT value) { XrSpatialAnchorCreateCompletionBD.nuuid(address(), value); return this; }
         /** Passes the {@code uuid} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrSpatialAnchorCreateCompletionBD.Buffer uuid(java.util.function.Consumer<XrUuidEXT> consumer) { consumer.accept(uuid()); return this; }
+        /** Sets the specified value to the {@code anchor} field. */
+        public XrSpatialAnchorCreateCompletionBD.Buffer anchor(XrAnchorBD value) { XrSpatialAnchorCreateCompletionBD.nanchor(address(), value); return this; }
 
     }
 

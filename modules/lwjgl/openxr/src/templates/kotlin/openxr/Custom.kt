@@ -49,6 +49,7 @@ fun templateCustomization() {
     generateDispatchableHandle(XrBodyTrackerFB, XrSession)
     generateDispatchableHandle(XrBodyTrackerHTC, XrSession)
     generateDispatchableHandle(XrDebugUtilsMessengerEXT, XrInstance)
+    generateDispatchableHandle(XrDeviceAnchorPersistenceANDROID, XrSession)
     generateDispatchableHandle(XrEnvironmentDepthProviderMETA, XrSession)
     generateDispatchableHandle(XrEnvironmentDepthSwapchainMETA, XrEnvironmentDepthProviderMETA)
     generateDispatchableHandle(XrEyeTrackerFB, XrSession)
@@ -84,13 +85,14 @@ fun templateCustomization() {
     generateDispatchableHandle(XrSpatialPersistenceContextEXT, XrSession)
     generateDispatchableHandle(XrSpatialSnapshotEXT, XrSpatialContextEXT)
     generateDispatchableHandle(XrSwapchain, XrSession)
+    generateDispatchableHandle(XrTrackableTrackerANDROID, XrSession)
     generateDispatchableHandle(XrTriangleMeshFB, XrSession)
     generateDispatchableHandle(XrVirtualKeyboardMETA, XrSession)
     generateDispatchableHandle(XrWorldMeshDetectorML, XrSession)
 
     XR10.apply {
         LongConstant(
-            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 1, 49)"
+            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 1, 50)"
         )
 
         LongConstant(

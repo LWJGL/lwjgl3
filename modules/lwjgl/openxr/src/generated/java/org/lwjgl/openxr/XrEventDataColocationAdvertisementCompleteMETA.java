@@ -97,22 +97,14 @@ public class XrEventDataColocationAdvertisementCompleteMETA extends Struct<XrEve
     public XrEventDataColocationAdvertisementCompleteMETA type$Default() { return type(METAColocationDiscovery.XR_TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META); }
     /** Sets the specified value to the {@code next} field. */
     public XrEventDataColocationAdvertisementCompleteMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@code advertisementRequestId} field. */
-    public XrEventDataColocationAdvertisementCompleteMETA advertisementRequestId(@NativeType("XrAsyncRequestIdFB") long value) { nadvertisementRequestId(address(), value); return this; }
-    /** Sets the specified value to the {@code result} field. */
-    public XrEventDataColocationAdvertisementCompleteMETA result(@NativeType("XrResult") int value) { nresult(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrEventDataColocationAdvertisementCompleteMETA set(
         int type,
-        long next,
-        long advertisementRequestId,
-        int result
+        long next
     ) {
         type(type);
         next(next);
-        advertisementRequestId(advertisementRequestId);
-        result(result);
 
         return this;
     }
@@ -157,6 +149,11 @@ public class XrEventDataColocationAdvertisementCompleteMETA extends Struct<XrEve
         return address == NULL ? null : new XrEventDataColocationAdvertisementCompleteMETA(address, null);
     }
 
+    /** Downcasts the specified {@code XrEventDataBaseHeader} instance to {@code XrEventDataColocationAdvertisementCompleteMETA}. */
+    public static XrEventDataColocationAdvertisementCompleteMETA create(XrEventDataBaseHeader value) {
+        return new XrEventDataColocationAdvertisementCompleteMETA(value.address(), __getContainer(value));
+    }
+
     /**
      * Returns a new {@link XrEventDataColocationAdvertisementCompleteMETA.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -198,6 +195,11 @@ public class XrEventDataColocationAdvertisementCompleteMETA extends Struct<XrEve
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     public static XrEventDataColocationAdvertisementCompleteMETA.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrEventDataBaseHeader.Buffer} instance to {@code XrEventDataColocationAdvertisementCompleteMETA.Buffer}. */
+    public static XrEventDataColocationAdvertisementCompleteMETA.Buffer create(XrEventDataBaseHeader.Buffer value) {
+        return new XrEventDataColocationAdvertisementCompleteMETA.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /**
@@ -253,10 +255,6 @@ public class XrEventDataColocationAdvertisementCompleteMETA extends Struct<XrEve
     public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataColocationAdvertisementCompleteMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataColocationAdvertisementCompleteMETA.NEXT, value); }
-    /** Unsafe version of {@link #advertisementRequestId(long) advertisementRequestId}. */
-    public static void nadvertisementRequestId(long struct, long value) { memPutLong(struct + XrEventDataColocationAdvertisementCompleteMETA.ADVERTISEMENTREQUESTID, value); }
-    /** Unsafe version of {@link #result(int) result}. */
-    public static void nresult(long struct, int value) { memPutInt(struct + XrEventDataColocationAdvertisementCompleteMETA.RESULT, value); }
 
     // -----------------------------------
 
@@ -320,10 +318,6 @@ public class XrEventDataColocationAdvertisementCompleteMETA extends Struct<XrEve
         public XrEventDataColocationAdvertisementCompleteMETA.Buffer type$Default() { return type(METAColocationDiscovery.XR_TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META); }
         /** Sets the specified value to the {@code next} field. */
         public XrEventDataColocationAdvertisementCompleteMETA.Buffer next(@NativeType("void const *") long value) { XrEventDataColocationAdvertisementCompleteMETA.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@code advertisementRequestId} field. */
-        public XrEventDataColocationAdvertisementCompleteMETA.Buffer advertisementRequestId(@NativeType("XrAsyncRequestIdFB") long value) { XrEventDataColocationAdvertisementCompleteMETA.nadvertisementRequestId(address(), value); return this; }
-        /** Sets the specified value to the {@code result} field. */
-        public XrEventDataColocationAdvertisementCompleteMETA.Buffer result(@NativeType("XrResult") int value) { XrEventDataColocationAdvertisementCompleteMETA.nresult(address(), value); return this; }
 
     }
 

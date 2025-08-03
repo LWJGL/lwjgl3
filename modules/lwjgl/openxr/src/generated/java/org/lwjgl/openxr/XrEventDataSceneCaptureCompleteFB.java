@@ -97,22 +97,14 @@ public class XrEventDataSceneCaptureCompleteFB extends Struct<XrEventDataSceneCa
     public XrEventDataSceneCaptureCompleteFB type$Default() { return type(FBSceneCapture.XR_TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB); }
     /** Sets the specified value to the {@code next} field. */
     public XrEventDataSceneCaptureCompleteFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@code requestId} field. */
-    public XrEventDataSceneCaptureCompleteFB requestId(@NativeType("XrAsyncRequestIdFB") long value) { nrequestId(address(), value); return this; }
-    /** Sets the specified value to the {@code result} field. */
-    public XrEventDataSceneCaptureCompleteFB result(@NativeType("XrResult") int value) { nresult(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrEventDataSceneCaptureCompleteFB set(
         int type,
-        long next,
-        long requestId,
-        int result
+        long next
     ) {
         type(type);
         next(next);
-        requestId(requestId);
-        result(result);
 
         return this;
     }
@@ -157,6 +149,11 @@ public class XrEventDataSceneCaptureCompleteFB extends Struct<XrEventDataSceneCa
         return address == NULL ? null : new XrEventDataSceneCaptureCompleteFB(address, null);
     }
 
+    /** Downcasts the specified {@code XrEventDataBaseHeader} instance to {@code XrEventDataSceneCaptureCompleteFB}. */
+    public static XrEventDataSceneCaptureCompleteFB create(XrEventDataBaseHeader value) {
+        return new XrEventDataSceneCaptureCompleteFB(value.address(), __getContainer(value));
+    }
+
     /**
      * Returns a new {@link XrEventDataSceneCaptureCompleteFB.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -198,6 +195,11 @@ public class XrEventDataSceneCaptureCompleteFB extends Struct<XrEventDataSceneCa
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     public static XrEventDataSceneCaptureCompleteFB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrEventDataBaseHeader.Buffer} instance to {@code XrEventDataSceneCaptureCompleteFB.Buffer}. */
+    public static XrEventDataSceneCaptureCompleteFB.Buffer create(XrEventDataBaseHeader.Buffer value) {
+        return new XrEventDataSceneCaptureCompleteFB.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /**
@@ -253,10 +255,6 @@ public class XrEventDataSceneCaptureCompleteFB extends Struct<XrEventDataSceneCa
     public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataSceneCaptureCompleteFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataSceneCaptureCompleteFB.NEXT, value); }
-    /** Unsafe version of {@link #requestId(long) requestId}. */
-    public static void nrequestId(long struct, long value) { memPutLong(struct + XrEventDataSceneCaptureCompleteFB.REQUESTID, value); }
-    /** Unsafe version of {@link #result(int) result}. */
-    public static void nresult(long struct, int value) { memPutInt(struct + XrEventDataSceneCaptureCompleteFB.RESULT, value); }
 
     // -----------------------------------
 
@@ -320,10 +318,6 @@ public class XrEventDataSceneCaptureCompleteFB extends Struct<XrEventDataSceneCa
         public XrEventDataSceneCaptureCompleteFB.Buffer type$Default() { return type(FBSceneCapture.XR_TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB); }
         /** Sets the specified value to the {@code next} field. */
         public XrEventDataSceneCaptureCompleteFB.Buffer next(@NativeType("void const *") long value) { XrEventDataSceneCaptureCompleteFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@code requestId} field. */
-        public XrEventDataSceneCaptureCompleteFB.Buffer requestId(@NativeType("XrAsyncRequestIdFB") long value) { XrEventDataSceneCaptureCompleteFB.nrequestId(address(), value); return this; }
-        /** Sets the specified value to the {@code result} field. */
-        public XrEventDataSceneCaptureCompleteFB.Buffer result(@NativeType("XrResult") int value) { XrEventDataSceneCaptureCompleteFB.nresult(address(), value); return this; }
 
     }
 

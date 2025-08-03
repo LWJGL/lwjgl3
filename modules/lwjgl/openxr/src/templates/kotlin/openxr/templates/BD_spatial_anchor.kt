@@ -10,7 +10,7 @@ import openxr.*
 
 val BD_spatial_anchor = "BDSpatialAnchor".nativeClassXR("BD_spatial_anchor", type = "instance", postfix = "BD") {
     IntConstant(
-        "BD_spatial_anchor_SPEC_VERSION".."1"
+        "BD_spatial_anchor_SPEC_VERSION".."2"
     )
 
     StringConstant(

@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -125,34 +124,16 @@ public class XrBodyJointLocationsFB extends Struct<XrBodyJointLocationsFB> imple
     public XrBodyJointLocationsFB type$Default() { return type(FBBodyTracking.XR_TYPE_BODY_JOINT_LOCATIONS_FB); }
     /** Sets the specified value to the {@code next} field. */
     public XrBodyJointLocationsFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@code isActive} field. */
-    public XrBodyJointLocationsFB isActive(@NativeType("XrBool32") boolean value) { nisActive(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code confidence} field. */
-    public XrBodyJointLocationsFB confidence(float value) { nconfidence(address(), value); return this; }
-    /** Sets the address of the specified {@link XrBodyJointLocationFB.Buffer} to the {@code jointLocations} field. */
-    public XrBodyJointLocationsFB jointLocations(@NativeType("XrBodyJointLocationFB *") XrBodyJointLocationFB.Buffer value) { njointLocations(address(), value); return this; }
-    /** Sets the specified value to the {@code skeletonChangedCount} field. */
-    public XrBodyJointLocationsFB skeletonChangedCount(@NativeType("uint32_t") int value) { nskeletonChangedCount(address(), value); return this; }
-    /** Sets the specified value to the {@code time} field. */
-    public XrBodyJointLocationsFB time(@NativeType("XrTime") long value) { ntime(address(), value); return this; }
+    /** Prepends the specified {@link XrBodyTrackingCalibrationStatusMETA} value to the {@code next} chain. */
+    public XrBodyJointLocationsFB next(XrBodyTrackingCalibrationStatusMETA value) { return this.next(value.next(this.next()).address()); }
 
     /** Initializes this struct with the specified values. */
     public XrBodyJointLocationsFB set(
         int type,
-        long next,
-        boolean isActive,
-        float confidence,
-        XrBodyJointLocationFB.Buffer jointLocations,
-        int skeletonChangedCount,
-        long time
+        long next
     ) {
         type(type);
         next(next);
-        isActive(isActive);
-        confidence(confidence);
-        jointLocations(jointLocations);
-        skeletonChangedCount(skeletonChangedCount);
-        time(time);
 
         return this;
     }
@@ -301,27 +282,6 @@ public class XrBodyJointLocationsFB extends Struct<XrBodyJointLocationsFB> imple
     public static void ntype(long struct, int value) { memPutInt(struct + XrBodyJointLocationsFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrBodyJointLocationsFB.NEXT, value); }
-    /** Unsafe version of {@link #isActive(boolean) isActive}. */
-    public static void nisActive(long struct, int value) { memPutInt(struct + XrBodyJointLocationsFB.ISACTIVE, value); }
-    /** Unsafe version of {@link #confidence(float) confidence}. */
-    public static void nconfidence(long struct, float value) { memPutFloat(struct + XrBodyJointLocationsFB.CONFIDENCE, value); }
-    /** Sets the specified value to the {@code jointCount} field of the specified {@code struct}. */
-    public static void njointCount(long struct, int value) { memPutInt(struct + XrBodyJointLocationsFB.JOINTCOUNT, value); }
-    /** Unsafe version of {@link #jointLocations(XrBodyJointLocationFB.Buffer) jointLocations}. */
-    public static void njointLocations(long struct, XrBodyJointLocationFB.Buffer value) { memPutAddress(struct + XrBodyJointLocationsFB.JOINTLOCATIONS, value.address()); njointCount(struct, value.remaining()); }
-    /** Unsafe version of {@link #skeletonChangedCount(int) skeletonChangedCount}. */
-    public static void nskeletonChangedCount(long struct, int value) { memPutInt(struct + XrBodyJointLocationsFB.SKELETONCHANGEDCOUNT, value); }
-    /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { memPutLong(struct + XrBodyJointLocationsFB.TIME, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrBodyJointLocationsFB.JOINTLOCATIONS));
-    }
 
     // -----------------------------------
 
@@ -396,16 +356,8 @@ public class XrBodyJointLocationsFB extends Struct<XrBodyJointLocationsFB> imple
         public XrBodyJointLocationsFB.Buffer type$Default() { return type(FBBodyTracking.XR_TYPE_BODY_JOINT_LOCATIONS_FB); }
         /** Sets the specified value to the {@code next} field. */
         public XrBodyJointLocationsFB.Buffer next(@NativeType("void *") long value) { XrBodyJointLocationsFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@code isActive} field. */
-        public XrBodyJointLocationsFB.Buffer isActive(@NativeType("XrBool32") boolean value) { XrBodyJointLocationsFB.nisActive(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code confidence} field. */
-        public XrBodyJointLocationsFB.Buffer confidence(float value) { XrBodyJointLocationsFB.nconfidence(address(), value); return this; }
-        /** Sets the address of the specified {@link XrBodyJointLocationFB.Buffer} to the {@code jointLocations} field. */
-        public XrBodyJointLocationsFB.Buffer jointLocations(@NativeType("XrBodyJointLocationFB *") XrBodyJointLocationFB.Buffer value) { XrBodyJointLocationsFB.njointLocations(address(), value); return this; }
-        /** Sets the specified value to the {@code skeletonChangedCount} field. */
-        public XrBodyJointLocationsFB.Buffer skeletonChangedCount(@NativeType("uint32_t") int value) { XrBodyJointLocationsFB.nskeletonChangedCount(address(), value); return this; }
-        /** Sets the specified value to the {@code time} field. */
-        public XrBodyJointLocationsFB.Buffer time(@NativeType("XrTime") long value) { XrBodyJointLocationsFB.ntime(address(), value); return this; }
+        /** Prepends the specified {@link XrBodyTrackingCalibrationStatusMETA} value to the {@code next} chain. */
+        public XrBodyJointLocationsFB.Buffer next(XrBodyTrackingCalibrationStatusMETA value) { return this.next(value.next(this.next()).address()); }
 
     }
 

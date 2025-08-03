@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -98,22 +97,14 @@ public class XrEventDataUserPresenceChangedEXT extends Struct<XrEventDataUserPre
     public XrEventDataUserPresenceChangedEXT type$Default() { return type(EXTUserPresence.XR_TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT); }
     /** Sets the specified value to the {@code next} field. */
     public XrEventDataUserPresenceChangedEXT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@code session} field. */
-    public XrEventDataUserPresenceChangedEXT session(XrSession value) { nsession(address(), value); return this; }
-    /** Sets the specified value to the {@code isUserPresent} field. */
-    public XrEventDataUserPresenceChangedEXT isUserPresent(@NativeType("XrBool32") boolean value) { nisUserPresent(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrEventDataUserPresenceChangedEXT set(
         int type,
-        long next,
-        XrSession session,
-        boolean isUserPresent
+        long next
     ) {
         type(type);
         next(next);
-        session(session);
-        isUserPresent(isUserPresent);
 
         return this;
     }
@@ -158,6 +149,11 @@ public class XrEventDataUserPresenceChangedEXT extends Struct<XrEventDataUserPre
         return address == NULL ? null : new XrEventDataUserPresenceChangedEXT(address, null);
     }
 
+    /** Downcasts the specified {@code XrEventDataBaseHeader} instance to {@code XrEventDataUserPresenceChangedEXT}. */
+    public static XrEventDataUserPresenceChangedEXT create(XrEventDataBaseHeader value) {
+        return new XrEventDataUserPresenceChangedEXT(value.address(), __getContainer(value));
+    }
+
     /**
      * Returns a new {@link XrEventDataUserPresenceChangedEXT.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -199,6 +195,11 @@ public class XrEventDataUserPresenceChangedEXT extends Struct<XrEventDataUserPre
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     public static XrEventDataUserPresenceChangedEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrEventDataBaseHeader.Buffer} instance to {@code XrEventDataUserPresenceChangedEXT.Buffer}. */
+    public static XrEventDataUserPresenceChangedEXT.Buffer create(XrEventDataBaseHeader.Buffer value) {
+        return new XrEventDataUserPresenceChangedEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /**
@@ -254,19 +255,6 @@ public class XrEventDataUserPresenceChangedEXT extends Struct<XrEventDataUserPre
     public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataUserPresenceChangedEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataUserPresenceChangedEXT.NEXT, value); }
-    /** Unsafe version of {@link #session(XrSession) session}. */
-    public static void nsession(long struct, XrSession value) { memPutAddress(struct + XrEventDataUserPresenceChangedEXT.SESSION, value.address()); }
-    /** Unsafe version of {@link #isUserPresent(boolean) isUserPresent}. */
-    public static void nisUserPresent(long struct, int value) { memPutInt(struct + XrEventDataUserPresenceChangedEXT.ISUSERPRESENT, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrEventDataUserPresenceChangedEXT.SESSION));
-    }
 
     // -----------------------------------
 
@@ -330,10 +318,6 @@ public class XrEventDataUserPresenceChangedEXT extends Struct<XrEventDataUserPre
         public XrEventDataUserPresenceChangedEXT.Buffer type$Default() { return type(EXTUserPresence.XR_TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT); }
         /** Sets the specified value to the {@code next} field. */
         public XrEventDataUserPresenceChangedEXT.Buffer next(@NativeType("void const *") long value) { XrEventDataUserPresenceChangedEXT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@code session} field. */
-        public XrEventDataUserPresenceChangedEXT.Buffer session(XrSession value) { XrEventDataUserPresenceChangedEXT.nsession(address(), value); return this; }
-        /** Sets the specified value to the {@code isUserPresent} field. */
-        public XrEventDataUserPresenceChangedEXT.Buffer isUserPresent(@NativeType("XrBool32") boolean value) { XrEventDataUserPresenceChangedEXT.nisUserPresent(address(), value ? 1 : 0); return this; }
 
     }
 
