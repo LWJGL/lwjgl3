@@ -10,6 +10,10 @@ lwjglPlatforms {
     addSupport(ALL, NATIVE_REQUIRED)
 }
 
+dependencies {
+    api(project(":lwjgl-modules:lwjgl"))
+}
+
 lwjglPublication.create {
     title("LWJGL - Zstandard bindings")
     description("A fast lossless compression algorithm, targeting real-time compression scenarios at zlib-level and better compression ratios.")

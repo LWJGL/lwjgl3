@@ -10,6 +10,10 @@ lwjglPlatforms {
     addSupport(ALL, NATIVE_REQUIRED)
 }
 
+dependencies {
+    api(project(":lwjgl-modules:lwjgl"))
+}
+
 lwjglPublication.create {
     title("LWJGL - Opus bindings")
     description("A totally open, royalty-free, highly versatile audio codec.")

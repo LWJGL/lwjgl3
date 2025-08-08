@@ -10,6 +10,10 @@ lwjglPlatforms {
     addSupport(ALL, NATIVE_OPTIONAL)
 }
 
+dependencies {
+    api(project(":lwjgl-modules:lwjgl"))
+}
+
 lwjglPublication.create {
     title("LWJGL - FMOD bindings")
     description("An end-to-end solution for adding sound and music to any game.")

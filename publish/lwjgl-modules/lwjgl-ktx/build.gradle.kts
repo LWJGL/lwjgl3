@@ -14,6 +14,10 @@ lwjglPlatforms {
     addSupport(WINDOWS_ARM64, NATIVE_REQUIRED)
 }
 
+dependencies {
+    api(project(":lwjgl-modules:lwjgl"))
+}
+
 lwjglPublication.create {
     title("LWJGL - KTX (Khronos Texture) bindings")
     description("A lightweight container for textures for OpenGL®, Vulkan® and other GPU APIs.")

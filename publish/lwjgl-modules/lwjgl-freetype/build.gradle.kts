@@ -10,6 +10,10 @@ lwjglPlatforms {
     addSupport(ALL, NATIVE_REQUIRED)
 }
 
+dependencies {
+    api(project(":lwjgl-modules:lwjgl"))
+}
+
 lwjglPublication.create {
     title("LWJGL - FreeType bindings")
     description("A freely available software library to render fonts.")

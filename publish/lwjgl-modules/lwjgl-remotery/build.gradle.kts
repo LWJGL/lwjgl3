@@ -14,6 +14,10 @@ lwjglPlatforms {
     addSupport(WINDOWS_X86, NATIVE_REQUIRED)
 }
 
+dependencies {
+    api(project(":lwjgl-modules:lwjgl"))
+}
+
 lwjglPublication.create {
     title("LWJGL - Remotery bindings")
     description("A realtime CPU/GPU profiler hosted in a single C file with a viewer that runs in a web browser.")

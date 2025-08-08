@@ -10,6 +10,10 @@ lwjglPlatforms {
     addSupport(ALL, NATIVE_REQUIRED)
 }
 
+dependencies {
+    api(project(":lwjgl-modules:lwjgl"))
+}
+
 lwjglPublication.create {
     title("LWJGL - msdfgen bindings")
     description("Multi-channel signed distance field generator.")
