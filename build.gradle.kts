@@ -35,9 +35,6 @@ val pomDeveloperName: String? by project
 val pomDeveloperEmail: String? by project
 val pomDeveloperUrl: String? by project
 
-val canSign: Boolean = signingKeyId != null && signingKey != null && signingPassword != null
-val canRemotePublish: Boolean = sonatypeUsername != null && sonatypePassword != null
-
 enum class PublishType {
     LOCAL,
     SNAPSHOT,
@@ -54,18 +51,141 @@ val publishType: PublishType = when {
 
 logger.info("Publishing to {} repository", publishType)
 
-if (publishType !== PublishType.LOCAL && !canSign) {
-    throw GradleException("Must specify 'signingKeyId', 'signingKey' and 'signingPassword' properties for $publishType publishing")
+data class SigningCredentials(
+    val keyId: String,
+    val key: String,
+    val password: String
+)
+
+data class PublishingCredentials(
+    val username: String,
+    val password: String
+)
+
+data class PomScmInfo(
+    val connection: String,
+    val developerConnection: String,
+    val url: String
+)
+
+data class PomLicenseInfo(
+    val name: String,
+    val url: String,
+    val distribution: String
+)
+
+data class PomDeveloperInfo(
+    val id: String,
+    val name: String,
+    val email: String,
+    val url: String
+)
+
+data class PomInfo(
+    val url: String,
+    val scm: PomScmInfo,
+    val license: PomLicenseInfo,
+    val developer: PomDeveloperInfo
+)
+
+val signingCredentials: SigningCredentials? = signingKeyId?.let { keyId ->
+    signingKey?.let { key ->
+        signingPassword?.let { password ->
+            SigningCredentials(keyId, key, password)
+        }
+    }
 }
 
-if (publishType !== PublishType.LOCAL && !canRemotePublish) {
-    throw GradleException("Must specify 'sonatypeUsername' and 'sonatypePassword' properties for $publishType publishing")
+val publishingCredentials: PublishingCredentials? = sonatypeUsername?.let { username ->
+    sonatypePassword?.let { password ->
+        PublishingCredentials(username, password)
+    }
 }
 
-val publishRepository = when(publishType) {
-    PublishType.RELEASE -> uri(releaseRepo ?: "")
-    PublishType.SNAPSHOT -> uri(snapshotRepo ?: "")
-    else -> repositories.mavenLocal().url
+val publishRepository: String = when (publishType) {
+    PublishType.RELEASE -> releaseRepo ?: ""
+    PublishType.SNAPSHOT -> snapshotRepo ?: ""
+    else -> ""
+}
+
+val pomScmInfo: PomScmInfo? = pomScmConnection?.let { connection ->
+    pomScmDeveloperConnection?.let { developerConnection ->
+        pomScmUrl?.let { url ->
+            PomScmInfo(connection, developerConnection, url)
+        }
+    }
+}
+
+val pomLicenseInfo: PomLicenseInfo? = pomLicenseName?.let { name ->
+    pomLicenseUrl?.let { url ->
+        pomLicenseDistribution?.let { distribution ->
+            PomLicenseInfo(name, url, distribution)
+        }
+    }
+}
+
+val pomDeveloperInfo: PomDeveloperInfo? = pomDeveloperId?.let { id ->
+    pomDeveloperName?.let { name ->
+        pomDeveloperEmail?.let { email ->
+            pomDeveloperUrl?.let { url ->
+                PomDeveloperInfo(id, name, email, url)
+            }
+        }
+    }
+}
+
+val pomInfo: PomInfo? = pomUrl?.let { url ->
+    pomScmInfo?.let { scmInfo ->
+        pomLicenseInfo?.let { licenseInfo ->
+            pomDeveloperInfo?.let { developerInfo ->
+                PomInfo(url, scmInfo, licenseInfo, developerInfo)
+            }
+        }
+    }
+}
+
+fun throwMissingPropertyException(vararg properties: String) {
+    val properties = when (properties.size) {
+        1 -> "property '${properties[0]}'"
+        else -> {
+            val allButLast = properties.dropLast(1).joinToString(", ") { "'$it'" }
+            "properties $allButLast and '${properties.last()}'"
+        }
+    }
+
+    throw GradleException("Missing required $properties for '$publishType' publishing")
+}
+
+if (publishType != PublishType.LOCAL && signingCredentials == null) {
+    throwMissingPropertyException("signingKeyId", "signingKey", "signingPassword")
+}
+
+if (publishType != PublishType.LOCAL && publishingCredentials == null) {
+    throwMissingPropertyException("sonatypeUsername", "sonatypePassword")
+}
+
+if (publishType == PublishType.RELEASE && releaseRepo == null) {
+    throwMissingPropertyException("releaseRepo")
+}
+
+if (publishType == PublishType.SNAPSHOT && snapshotRepo == null) {
+    throwMissingPropertyException("snapshotRepo")
+}
+
+if (publishType != PublishType.LOCAL && pomScmInfo == null) {
+    throwMissingPropertyException("pomScmConnection", "pomScmDeveloperConnection", "pomScmUrl")
+}
+
+if (publishType != PublishType.LOCAL && pomLicenseInfo == null) {
+    throwMissingPropertyException("pomLicenseName", "pomLicenseUrl", "pomLicenseDistribution")
+}
+
+if (publishType != PublishType.LOCAL && pomLicenseInfo == null) {
+    throwMissingPropertyException("pomDeveloperId", "pomDeveloperName", "pomDeveloperEmail", "pomDeveloperUrl")
+}
+
+if (publishType != PublishType.LOCAL && pomInfo == null) {
+    throwMissingPropertyException("pomUrl")
 }
 
 defaultTasks = mutableListOf("publish")
@@ -332,15 +452,19 @@ enum class Artifacts(
 
 publishing {
     repositories {
-        maven {
-            url = publishRepository
+        if (publishType != PublishType.LOCAL) {
+            maven {
+                url = uri(publishRepository)
 
-            if (publishType !== PublishType.LOCAL) {
-                credentials {
-                    username = sonatypeUsername
-                    password = sonatypePassword
+                if (publishingCredentials != null) {
+                    credentials {
+                        username = publishingCredentials.username
+                        password = publishingCredentials.password
+                    }
                 }
             }
+        } else {
+            mavenLocal()
         }
     }
     publications {
@@ -380,29 +504,32 @@ publishing {
         fun org.gradle.api.publish.maven.MavenPom.setupPom(pomName: String, pomDescription: String, pomPackaging: String) {
             name.set(pomName)
             description.set(pomDescription)
-            url.set(pomUrl)
             packaging = pomPackaging
 
-            scm {
-                connection.set(pomScmConnection)
-                developerConnection.set(pomScmDeveloperConnection)
-                url.set(pomScmUrl)
-            }
+            if (pomInfo != null) {
+                url.set(pomInfo.url)
 
-            licenses {
-                license {
-                    name.set(pomLicenseName)
-                    url.set(pomLicenseUrl)
-                    distribution.set(pomLicenseDistribution)
+                scm {
+                    connection.set(pomInfo.scm.connection)
+                    developerConnection.set(pomInfo.scm.developerConnection)
+                    url.set(pomInfo.scm.url)
                 }
-            }
 
-            developers {
-                developer {
-                    id.set(pomDeveloperId)
-                    name.set(pomDeveloperName)
-                    email.set(pomDeveloperEmail)
-                    url.set(pomDeveloperUrl)
+                licenses {
+                    license {
+                        name.set(pomInfo.license.name)
+                        url.set(pomInfo.license.url)
+                        distribution.set(pomInfo.license.distribution)
+                    }
+                }
+
+                developers {
+                    developer {
+                        id.set(pomInfo.developer.id)
+                        name.set(pomInfo.developer.name)
+                        email.set(pomInfo.developer.email)
+                        url.set(pomInfo.developer.url)
+                    }
                 }
             }
         }
@@ -483,13 +610,15 @@ publishing {
 
 signing {
     setRequired({
-        canSign
+        signingCredentials != null
     })
-    useInMemoryPgpKeys(
-        signingKeyId,
-        signingKey,
-        signingPassword
-    )
+    if (signingCredentials != null) {
+        useInMemoryPgpKeys(
+            signingCredentials.keyId,
+            signingCredentials.key,
+            signingCredentials.password
+        )
+    }
     sign(publishing.publications)
 }
 
