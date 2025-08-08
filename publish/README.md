@@ -2,7 +2,19 @@
 
 LWJGL uses Gradle to publish its platform (maven BOM) and modules.
 
-## Design
+### build-logic
+
+A composite Gradle build containing shared build logic.
+
+### modules
+
+The parent project for all module projects.
+
+### lwjgl-bom
+
+The platform (maven BOM) for the modules.
+
+## Module Design
 
 Ideally, we'd have the following structure:
 ```
