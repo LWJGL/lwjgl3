@@ -11,11 +11,14 @@ plugins {
 }
 
 val lwjglVersion: String by project
-val signingKeyId: String by project
-val signingKey: String by project
-val signingPassword: String by project
-val sonatypeUsername: String by project
-val sonatypePassword: String by project
+val signingKeyId: String? by project
+val signingKey: String? by project
+val signingPassword: String? by project
+val sonatypeUsername: String? by project
+val sonatypePassword: String? by project
+
+val canSign: Boolean = signingKeyId != null && signingKey != null && signingPassword != null
+val canRemotePublish: Boolean = sonatypeUsername != null && sonatypePassword != null
 
 defaultTasks = mutableListOf("publish")
 buildDir = file("bin/MAVEN")
@@ -53,7 +56,16 @@ val deployment = when {
         )
     }
 }
+
 println("${deployment.type.name} BUILD")
+
+if (deployment.type !== BuildType.LOCAL && !canSign) {
+    throw GradleException("Must specify 'signingKeyId', 'signingKey' and 'signingPassword' properties for ${deployment.type.name} builds")
+}
+
+if (deployment.type !== BuildType.LOCAL && !canRemotePublish) {
+    throw GradleException("Must specify 'sonatypeUsername' and 'sonatypePassword' properties for ${deployment.type.name} builds")
+}
 
 enum class Platforms(val classifier: String) {
     FREEBSD("freebsd"),
@@ -460,6 +472,9 @@ publishing {
 }
 
 signing {
+    setRequired({
+        canSign
+    })
     useInMemoryPgpKeys(
         signingKeyId,
         signingKey,
