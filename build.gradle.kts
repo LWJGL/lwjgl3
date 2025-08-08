@@ -38,51 +38,43 @@ val pomDeveloperUrl: String? by project
 val canSign: Boolean = signingKeyId != null && signingKey != null && signingPassword != null
 val canRemotePublish: Boolean = sonatypeUsername != null && sonatypePassword != null
 
+enum class PublishType {
+    LOCAL,
+    SNAPSHOT,
+    RELEASE;
+
+    override fun toString(): String = name.lowercase()
+}
+
+val publishType: PublishType = when {
+    hasProperty("release") -> PublishType.RELEASE
+    hasProperty("snapshot") -> PublishType.SNAPSHOT
+    else -> PublishType.LOCAL
+}
+
+logger.info("Publishing to {} repository", publishType)
+
+if (publishType !== PublishType.LOCAL && !canSign) {
+    throw GradleException("Must specify 'signingKeyId', 'signingKey' and 'signingPassword' properties for $publishType publishing")
+}
+
+if (publishType !== PublishType.LOCAL && !canRemotePublish) {
+    throw GradleException("Must specify 'sonatypeUsername' and 'sonatypePassword' properties for $publishType publishing")
+}
+
+val publishRepository = when(publishType) {
+    PublishType.RELEASE -> uri(releaseRepo ?: "")
+    PublishType.SNAPSHOT -> uri(snapshotRepo ?: "")
+    else -> repositories.mavenLocal().url
+}
+
 defaultTasks = mutableListOf("publish")
 buildDir = file("bin/MAVEN")
 group = lwjglGroup
-version = lwjglVersion
-
-enum class BuildType {
-    LOCAL,
-    SNAPSHOT,
-    RELEASE
-}
-
-data class Deployment(
-    val type: BuildType,
-    val repo: URI
-)
-
-val deployment = when {
-    hasProperty("release") -> Deployment(
-        type = BuildType.RELEASE,
-        repo = uri(releaseRepo ?: "")
-    )
-    hasProperty("snapshot") -> {
-        version = "$version-SNAPSHOT"
-        Deployment(
-            type = BuildType.SNAPSHOT,
-            repo = uri(snapshotRepo ?: "")
-        )
-    }
-    else -> {
-        version = "$version-SNAPSHOT"
-        Deployment(
-            type = BuildType.LOCAL,
-            repo = repositories.mavenLocal().url
-        )
-    }
-}
-
-println("${deployment.type.name} BUILD")
-
-if (deployment.type !== BuildType.LOCAL && !canSign) {
-    throw GradleException("Must specify 'signingKeyId', 'signingKey' and 'signingPassword' properties for ${deployment.type.name} builds")
-}
-
-if (deployment.type !== BuildType.LOCAL && !canRemotePublish) {
-    throw GradleException("Must specify 'sonatypeUsername' and 'sonatypePassword' properties for ${deployment.type.name} builds")
+version = when (publishType) {
+    PublishType.RELEASE -> lwjglVersion
+    PublishType.SNAPSHOT -> "$lwjglVersion-SNAPSHOT"
+    PublishType.LOCAL -> "$lwjglVersion-SNAPSHOT"
 }
 
 enum class Platforms(val classifier: String) {
@@ -341,9 +333,9 @@ enum class Artifacts(
 publishing {
     repositories {
         maven {
-            url = deployment.repo
+            url = publishRepository
 
-            if (deployment.type !== BuildType.LOCAL) {
+            if (publishType !== PublishType.LOCAL) {
                 credentials {
                     username = sonatypeUsername
                     password = sonatypePassword
@@ -420,18 +412,18 @@ publishing {
                 create<MavenPublication>("maven${module.name}") {
                     artifactId = module.artifact
                     artifact(module.artifact())
-                    if (deployment.type !== BuildType.LOCAL || module.hasArtifact("sources")) {
+                    if (publishType !== PublishType.LOCAL || module.hasArtifact("sources")) {
                         artifact(module.artifact("sources")) {
                             classifier = "sources"
                         }
                     }
-                    if (deployment.type !== BuildType.LOCAL || module.hasArtifact("javadoc")) {
+                    if (publishType !== PublishType.LOCAL || module.hasArtifact("javadoc")) {
                         artifact(module.artifact("javadoc")) {
                             classifier = "javadoc"
                         }
                     }
                     module.platforms.forEach {
-                        if (deployment.type !== BuildType.LOCAL || module.hasArtifact("natives-${it.classifier}")) {
+                        if (publishType !== PublishType.LOCAL || module.hasArtifact("natives-${it.classifier}")) {
                             artifact(module.artifact("natives-${it.classifier}")) {
                                 classifier = "natives-${it.classifier}"
                             }
