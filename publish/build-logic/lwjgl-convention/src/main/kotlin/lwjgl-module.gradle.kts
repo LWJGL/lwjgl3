@@ -42,9 +42,12 @@ if (isPresent && (!isLocal || hasArtifact("sources"))) {
     lwjglAdhoc.sources(getArtifact("sources"))
 }
 
+val nativeArtifacts = mutableListOf<String>()
+
 lwjglPlatforms.all { platform, requiresNative ->
     if (requiresNative) {
         if (isPresent && (!isLocal || hasArtifact(platform.classifier()))) {
+            nativeArtifacts.add("${project.group}:${project.name}:${project.version}:${platform.classifier()}")
             lwjglAdhoc.platform(platform.os, platform.arch, platform.classifier(), getArtifact(platform.classifier()))
         }
     } else {
@@ -59,5 +62,31 @@ lwjglPublication.all {
 
     pom {
         packaging = "jar"
+    }
+}
+
+val metadataTask = tasks.register("generateMetadata") {
+    val outputFile = layout.buildDirectory.file("generated/metadata.txt")
+    val text = nativeArtifacts.joinToString("\n")
+
+    outputs.file(outputFile)
+
+    doLast {
+        val file = outputFile.get().asFile
+        file.parentFile.mkdirs()
+        file.writeText(text)
+    }
+}
+
+configurations.register("metadata") {
+    isCanBeResolved = false
+    isCanBeConsumed = true
+    attributes {
+        attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage::class.java, "metadata"))
+    }
+    outgoing.artifact(metadataTask) {
+        classifier = "metadata"
+        extension = "txt"
+        builtBy(metadataTask)
     }
 }
