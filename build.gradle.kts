@@ -8,30 +8,7 @@ plugins {
     `maven-publish`
     signing
 }
-
-enum class Artifacts(
-    val artifact: String,
-    val projectName: String,
-    val projectDescription: String,
-    vararg val platforms: Platforms
-) {
-
-    fun directory(buildDir: String) = "$buildDir/$artifact"
-
-    private fun path() = "${directory("bin/MAVEN")}/$artifact"
-
-    val isActive get() = File(directory("bin/RELEASE")).exists()
-
-    fun hasArtifact(classifier: String) = File("${directory("bin/RELEASE")}/${artifact}-${classifier}.jar").exists()
-
-    fun artifact(classifier: String? = null) =
-        if (classifier === null)
-            File("${path()}.jar")
-        else
-            File("${path()}-$classifier.jar")
-
-}
-
+/*
 publishing {
     publications {
         /*
@@ -67,61 +44,13 @@ publishing {
         and a whole lot more verbose in Maven. Hopefully, the automation
         is going to alleviate the pain.
          */
-        fun org.gradle.api.publish.maven.MavenPom.setupPom(pomName: String, pomDescription: String, pomPackaging: String) {
-            name.set(pomName)
-            description.set(pomDescription)
-            packaging = pomPackaging
-        }
-
-        Artifacts.values().forEach { module ->
-            if (module.isActive) {
-                create<MavenPublication>("maven${module.name}") {
-                    artifactId = module.artifact
-                    artifact(module.artifact())
-                    if (publishType !== PublishType.LOCAL || module.hasArtifact("sources")) {
-                        artifact(module.artifact("sources")) {
-                            classifier = "sources"
-                        }
-                    }
-                    if (publishType !== PublishType.LOCAL || module.hasArtifact("javadoc")) {
-                        artifact(module.artifact("javadoc")) {
-                            classifier = "javadoc"
-                        }
-                    }
-                    module.platforms.forEach {
-                        if (publishType !== PublishType.LOCAL || module.hasArtifact("natives-${it.classifier}")) {
-                            artifact(module.artifact("natives-${it.classifier}")) {
-                                classifier = "natives-${it.classifier}"
-                            }
-                        }
-                    }
-
-                    pom {
-                        setupPom(module.projectName, module.projectDescription, "jar")
-
-                        if (module != Artifacts.CORE) {
-                            withXml {
-                                asNode().appendNode("dependencies").apply {
-                                    appendNode("dependency").apply {
-                                        appendNode("groupId", "org.lwjgl")
-                                        appendNode("artifactId", "lwjgl")
-                                        appendNode("version", project.version)
-                                        appendNode("scope", "compile")
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
 
         create<MavenPublication>("lwjglBOM") {
             from(components["javaPlatform"])
             artifactId = "lwjgl-bom"
 
             pom {
-                setupPom("", "", "pom")
+                packaging = "pom"
 
                 withXml {
                     asElement().getElementsByTagName("dependencyManagement").item(0).apply {
@@ -163,4 +92,4 @@ dependencies {
             api("org.lwjgl:${module.artifact}:$version")
         }
     }
-}
+}*/
