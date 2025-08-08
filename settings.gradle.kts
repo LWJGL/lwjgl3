@@ -3,3 +3,5 @@
  * License terms: https://www.lwjgl.org/license
  */
 rootProject.name = "Root"
+
+includeBuild("publish/build-logic")
