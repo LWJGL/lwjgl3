@@ -11,5 +11,6 @@ rootProject.name = "build-logic"
 include("lwjgl-convention")
 
 include("lwjgl-plugins")
+include("lwjgl-plugins:lwjgl-publication")
 
 include("lwjgl-utils")
