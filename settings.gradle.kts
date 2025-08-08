@@ -5,3 +5,6 @@
 rootProject.name = "Root"
 
 includeBuild("publish/build-logic")
+
+include("lwjgl-bom")
+project(":lwjgl-bom").projectDir = file("publish/lwjgl-bom")
