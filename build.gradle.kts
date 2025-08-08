@@ -2,13 +2,6 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-import java.net.*
-
-plugins {
-    `maven-publish`
-    signing
-}
-
 /*
 Ideally, we'd have the following structure:
 -------------------------------------------
@@ -42,15 +35,3 @@ compile 'org.lwjgl:lwjgl-stb:$lwjglVersion'
 and a whole lot more verbose in Maven. Hopefully, the automation
 is going to alleviate the pain.
  */
-
-/*
-val copyArchives = tasks.create<Copy>("copyArchives") {
-    from("bin/RELEASE")
-    include("**")
-    destinationDir = buildDir
-}
-
-tasks.withType<Sign> {
-    dependsOn(copyArchives)
-}
-*/
