@@ -14,6 +14,39 @@ The parent project for all module projects.
 
 The platform (maven BOM) for the modules.
 
+## Gradle Migration
+
+If LWJGL ever decide to completly migrate to Gradle,
+the contents of this folder should be moved to the root.
+Currently, the root modules folder
+also contains other projects like tools.
+These should be moved out to the root folder and be prefixed
+with `lwjgl-` to match the scheme used by the current gradle projects.
+The two modules folders can then be merged
+as they both contain all the modules (bindings + core).
+With the merge, the modules now contains source code.
+This means that the ad hoc setup currently used to manually
+create configurations and a software component can be replaced
+with the java-library plugin.
+The build-logic composite build should also be used for
+the new Gradle projects so that it becomes
+the only source of shared build logic.
+
+This is the proposed folder structure:
+
+- build-logic/
+    - lwjgl-convention/
+    - lwjgl-plugins/
+        - ...
+    - lwjgl-utils/
+- lwjgl-bom/
+- lwjgl-modules/
+    - lwjgl-core/
+        - ...
+- lwjgl-extract/
+- lwjgl-generator/
+- lwjgl-samples/
+
 ## Module Design
 
 Ideally, we'd have the following structure:
