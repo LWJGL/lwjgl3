@@ -5,7 +5,6 @@
 import java.net.*
 
 plugins {
-    `java-platform`
     `maven-publish`
     signing
 }
@@ -122,7 +121,7 @@ publishing {
             artifactId = "lwjgl-bom"
 
             pom {
-                setupPom("LWJGL BOM", "LWJGL 3 Bill of Materials.", "pom")
+                setupPom("", "", "pom")
 
                 withXml {
                     asElement().getElementsByTagName("dependencyManagement").item(0).apply {
