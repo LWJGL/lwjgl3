@@ -7,7 +7,10 @@ plugins {
 }
 
 lwjglPlatforms {
+    addSupport(FREEBSD, NATIVE_OPTIONAL)
+    addSupport(LINUX, NATIVE_OPTIONAL)
     addSupport(MACOS, NATIVE_REQUIRED)
+    addSupport(WINDOWS, NATIVE_OPTIONAL)
 }
 
 dependencies {
