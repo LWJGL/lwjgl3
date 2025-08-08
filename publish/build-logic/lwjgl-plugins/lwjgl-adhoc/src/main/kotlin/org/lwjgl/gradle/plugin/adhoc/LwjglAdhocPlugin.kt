@@ -49,7 +49,8 @@ internal enum class ConfigurationType {
 }
 
 class LwjglConfigurations internal constructor(
-    private val project: Project
+    private val project: Project,
+    private val minJvmVersion: Int
 ) {
     private val objects: ObjectFactory = project.objects
 
@@ -80,7 +81,7 @@ class LwjglConfigurations internal constructor(
                 attribute(Category.CATEGORY_ATTRIBUTE, objects.named(Category::class.java, Category.LIBRARY))
                 attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling::class.java, Bundling.EXTERNAL))
                 attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named(LibraryElements::class.java, LibraryElements.JAR))
-                attribute(TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 8)
+                attribute(TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, minJvmVersion)
             }
         }
     }
@@ -100,7 +101,7 @@ class LwjglConfigurations internal constructor(
                 attribute(Category.CATEGORY_ATTRIBUTE, objects.named(Category::class.java, Category.LIBRARY))
                 attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling::class.java, Bundling.EXTERNAL))
                 attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named(LibraryElements::class.java, LibraryElements.JAR))
-                attribute(TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 8)
+                attribute(TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, minJvmVersion)
                 attribute(OperatingSystemFamily.OPERATING_SYSTEM_ATTRIBUTE, objects.named(OperatingSystemFamily::class.java, os))
                 attribute(MachineArchitecture.ARCHITECTURE_ATTRIBUTE, objects.named(MachineArchitecture::class.java, arch))
             }
@@ -206,7 +207,9 @@ class LwjglAdhocPlugin @Inject constructor(
     private val softwareComponentFactory: SoftwareComponentFactory
 ) : Plugin<Project> {
     override fun apply(project: Project) {
-        val lwjglConfigurations = LwjglConfigurations(project)
+        val minJvmVersion: String? = project.findProperty("minJvmVersion") as? String
+        
+        val lwjglConfigurations = LwjglConfigurations(project, minJvmVersion?.toInt() ?: 8)
         val lwjglComponent = LwjglComponent(project, softwareComponentFactory, lwjglConfigurations)
 
         project.extensions.create(
