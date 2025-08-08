@@ -143,7 +143,7 @@ val pomInfo: PomInfo? = pomUrl?.let { url ->
 }
 
 fun throwMissingPropertyException(vararg properties: String) {
-    val properties = when (properties.size) {
+    val missingProperties = when (properties.size) {
         1 -> "property '${properties[0]}'"
         else -> {
             val allButLast = properties.dropLast(1).joinToString(", ") { "'$it'" }
@@ -151,7 +151,7 @@ fun throwMissingPropertyException(vararg properties: String) {
         }
     }
 
-    throw GradleException("Missing required $properties for '$publishType' publishing")
+    throw GradleException("Missing required $missingProperties for '$publishType' publishing")
 }
 
 if (publishType != PublishType.LOCAL && signingCredentials == null) {
