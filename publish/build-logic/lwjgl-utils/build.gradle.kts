@@ -3,7 +3,7 @@
  * License terms: https://www.lwjgl.org/license
  */
 plugins {
-    `kotlin-dsl`
+    `kotlin-dsl-base`
 }
 
 val kotlinToolchainVersion: String by project
