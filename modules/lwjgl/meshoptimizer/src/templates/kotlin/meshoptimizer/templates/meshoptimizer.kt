@@ -13,7 +13,7 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
 
     cpp = true
 
-    IntConstant("MESHOPTIMIZER_VERSION".."240").noPrefix()
+    IntConstant("MESHOPTIMIZER_VERSION".."250").noPrefix()
 
     size_t(
         "generateVertexRemap",
@@ -90,6 +90,15 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
         size_t("vertex_count"),
         meshopt_Stream.const.p("streams"),
         AutoSize("streams")..size_t("stream_count")
+    )
+
+    void(
+        "generatePositionRemap",
+
+        Check("vertex_count")..unsigned_int.p("destination"),
+        Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p("vertex_positions"),
+        size_t("vertex_count"),
+        size_t("vertex_positions_stride")
     )
 
     void(
@@ -324,6 +333,14 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
         size_t("stride")
     )
 
+    void(
+        "decodeFilterColor",
+
+        MultiType(PointerMapping.DATA_SHORT)..Check("count * stride")..void.p("buffer"),
+        size_t("count"),
+        size_t("stride")
+    )
+
     EnumConstant(
         "EncodeExpSeparate".enum("0"),
         "EncodeExpSharedVector".enum,
@@ -334,7 +351,7 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
     void(
         "encodeFilterOct",
 
-        MultiType(PointerMapping.DATA_SHORT)..Check("count * 4 * (stride >> 2)")..void.p("destination"),
+        MultiType(PointerMapping.DATA_SHORT)..Check("count * stride")..void.p("destination"),
         size_t("count"),
         size_t("stride"),
         int("bits"),
@@ -344,7 +361,7 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
     void(
         "encodeFilterQuat",
 
-        MultiType(PointerMapping.DATA_SHORT)..Check("count * 4 * 2")..void.p("destination"),
+        MultiType(PointerMapping.DATA_SHORT)..Check("count * stride")..void.p("destination"),
         size_t("count"),
         size_t("stride"),
         int("bits"),
@@ -354,7 +371,7 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
     void(
         "encodeFilterExp",
 
-        MultiType(PointerMapping.DATA_INT)..Check("count * (stride >> 2) * 4")..void.p("destination"),
+        MultiType(PointerMapping.DATA_INT)..Check("count * stride")..void.p("destination"),
         size_t("count"),
         size_t("stride"),
         int("bits"),
@@ -362,11 +379,28 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
         meshopt_EncodeExpMode("mode")
     )
 
+    void(
+        "encodeFilterColor",
+
+        MultiType(PointerMapping.DATA_SHORT)..Check("count * stride")..void.p("destination"),
+        size_t("count"),
+        size_t("stride"),
+        int("bits"),
+        Check("count * 4")..float.const.p("data")
+    )
+
     EnumConstant(
         "SimplifyLockBorder".enum("1 << 0"),
         "SimplifySparse".enum("1 << 1"),
         "SimplifyErrorAbsolute".enum("1 << 2"),
-        "SimplifyPrune".enum("1 << 3")
+        "SimplifyPrune".enum("1 << 3"),
+        "SimplifyRegularize".enum("1 << 4"),
+        "SimplifyPermissive".enum("1 << 5")
+    )
+
+    EnumConstant(
+        "SimplifyVertex_Lock".enum("1 << 0"),
+        "SimplifyVertex_Protect".enum("1 << 1")
     )
 
     size_t(
@@ -405,6 +439,25 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
     )
 
     size_t(
+        "simplifyWithUpdate",
+
+        unsigned_int.p("indices"),
+        AutoSize("indices")..size_t("index_count"),
+        Check("vertex_count * (vertex_positions_stride >>> 2)")..float.p("vertex_positions"),
+        size_t("vertex_count"),
+        size_t("vertex_positions_stride"),
+        Check("vertex_count * (vertex_attributes_stride >>> 2)")..float.p("vertex_attributes"),
+        size_t("vertex_attributes_stride"),
+        float.const.p("attribute_weights"),
+        AutoSize("attribute_weights")..size_t("attribute_count"),
+        Check("vertex_count")..nullable..unsigned_char.const.p("vertex_lock"),
+        size_t("target_index_count"),
+        float("target_error"),
+        unsigned_int("options"),
+        Check(1)..nullable..float.p("result_error")
+    )
+
+    size_t(
         "simplifySloppy",
 
         unsigned_int.p("destination"),
@@ -413,6 +466,7 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
         Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p("vertex_positions"),
         size_t("vertex_count"),
         size_t("vertex_positions_stride"),
+        Check("vertex_count")..nullable..unsigned_char.const.p("vertex_lock"),
         size_t("target_index_count"),
         float("target_error"),
         Check(1)..nullable..float.p("result_error")
