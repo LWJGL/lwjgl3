@@ -6555,6 +6555,12 @@ val VkTraceRaysIndirectCommand2KHR = struct(Module.VULKAN, "VkTraceRaysIndirectC
     uint32_t("depth")
 }
 
+val VkPhysicalDeviceShaderUntypedPointersFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceShaderUntypedPointersFeaturesKHR") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_UNTYPED_POINTERS_FEATURES_KHR")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("shaderUntypedPointers")
+}
+
 val VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT", alias = VkPhysicalDeviceGlobalPriorityQueryFeatures) {
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES")..VkStructureType("sType")
     nullable..opaque_p("pNext")

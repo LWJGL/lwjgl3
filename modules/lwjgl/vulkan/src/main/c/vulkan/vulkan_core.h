@@ -69,7 +69,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 323
+#define VK_HEADER_VERSION 325
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 4, VK_HEADER_VERSION)
@@ -969,6 +969,7 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PIPELINE_COLOR_WRITE_CREATE_INFO_EXT = 1000381001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVES_GENERATED_QUERY_FEATURES_EXT = 1000382000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MAINTENANCE_1_FEATURES_KHR = 1000386000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_UNTYPED_POINTERS_FEATURES_KHR = 1000387000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_MIN_LOD_FEATURES_EXT = 1000391000,
     VK_STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT = 1000391001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT = 1000392000,
@@ -1086,6 +1087,12 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD = 1000476000,
     VK_STRUCTURE_TYPE_ANTI_LAG_DATA_AMD = 1000476001,
     VK_STRUCTURE_TYPE_ANTI_LAG_PRESENTATION_INFO_AMD = 1000476002,
+#ifdef VK_ENABLE_BETA_EXTENSIONS
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DENSE_GEOMETRY_FORMAT_FEATURES_AMDX = 1000478000,
+#endif
+#ifdef VK_ENABLE_BETA_EXTENSIONS
+    VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DENSE_GEOMETRY_FORMAT_TRIANGLES_DATA_AMDX = 1000478001,
+#endif
     VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_PRESENT_ID_2_KHR = 1000479000,
     VK_STRUCTURE_TYPE_PRESENT_ID_2_KHR = 1000479001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_2_FEATURES_KHR = 1000479002,
@@ -8100,6 +8107,9 @@ static const VkBufferUsageFlagBits2 VK_BUFFER_USAGE_2_RESOURCE_DESCRIPTOR_BUFFER
 static const VkBufferUsageFlagBits2 VK_BUFFER_USAGE_2_PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT = 0x04000000ULL;
 static const VkBufferUsageFlagBits2 VK_BUFFER_USAGE_2_MICROMAP_BUILD_INPUT_READ_ONLY_BIT_EXT = 0x00800000ULL;
 static const VkBufferUsageFlagBits2 VK_BUFFER_USAGE_2_MICROMAP_STORAGE_BIT_EXT = 0x01000000ULL;
+#ifdef VK_ENABLE_BETA_EXTENSIONS
+static const VkBufferUsageFlagBits2 VK_BUFFER_USAGE_2_COMPRESSED_DATA_DGF1_BIT_AMDX = 0x200000000ULL;
+#endif
 static const VkBufferUsageFlagBits2 VK_BUFFER_USAGE_2_DATA_GRAPH_FOREIGN_DESCRIPTOR_BIT_ARM = 0x20000000ULL;
 static const VkBufferUsageFlagBits2 VK_BUFFER_USAGE_2_TILE_MEMORY_BIT_QCOM = 0x08000000ULL;
 static const VkBufferUsageFlagBits2 VK_BUFFER_USAGE_2_PREPROCESS_BUFFER_BIT_EXT = 0x80000000ULL;
@@ -12352,6 +12362,18 @@ VKAPI_ATTR void VKAPI_CALL vkCmdTraceRaysIndirect2KHR(
 #endif
 
 
+// VK_KHR_shader_untyped_pointers is a preprocessor guard. Do not pass it to API calls.
+#define VK_KHR_shader_untyped_pointers 1
+#define VK_KHR_SHADER_UNTYPED_POINTERS_SPEC_VERSION 1
+#define VK_KHR_SHADER_UNTYPED_POINTERS_EXTENSION_NAME "VK_KHR_shader_untyped_pointers"
+typedef struct VkPhysicalDeviceShaderUntypedPointersFeaturesKHR {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           shaderUntypedPointers;
+} VkPhysicalDeviceShaderUntypedPointersFeaturesKHR;
+
+
+
 // VK_KHR_portability_enumeration is a preprocessor guard. Do not pass it to API calls.
 #define VK_KHR_portability_enumeration 1
 #define VK_KHR_PORTABILITY_ENUMERATION_SPEC_VERSION 1
@@ -13616,18 +13638,18 @@ typedef VkFlags64 VkAccessFlags3KHR;
 typedef VkFlags64 VkAccessFlagBits3KHR;
 static const VkAccessFlagBits3KHR VK_ACCESS_3_NONE_KHR = 0ULL;
 
-typedef struct VkPhysicalDeviceMaintenance8FeaturesKHR {
-    VkStructureType    sType;
-    void*              pNext;
-    VkBool32           maintenance8;
-} VkPhysicalDeviceMaintenance8FeaturesKHR;
-
 typedef struct VkMemoryBarrierAccessFlags3KHR {
     VkStructureType      sType;
     const void*          pNext;
     VkAccessFlags3KHR    srcAccessMask3;
     VkAccessFlags3KHR    dstAccessMask3;
 } VkMemoryBarrierAccessFlags3KHR;
+
+typedef struct VkPhysicalDeviceMaintenance8FeaturesKHR {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           maintenance8;
+} VkPhysicalDeviceMaintenance8FeaturesKHR;
 
 
 
@@ -15728,6 +15750,9 @@ typedef enum VkGeometryTypeKHR {
     VK_GEOMETRY_TYPE_INSTANCES_KHR = 2,
     VK_GEOMETRY_TYPE_SPHERES_NV = 1000429004,
     VK_GEOMETRY_TYPE_LINEAR_SWEPT_SPHERES_NV = 1000429005,
+#ifdef VK_ENABLE_BETA_EXTENSIONS
+    VK_GEOMETRY_TYPE_DENSE_GEOMETRY_FORMAT_TRIANGLES_AMDX = 1000478000,
+#endif
     VK_GEOMETRY_TYPE_TRIANGLES_NV = VK_GEOMETRY_TYPE_TRIANGLES_KHR,
     VK_GEOMETRY_TYPE_AABBS_NV = VK_GEOMETRY_TYPE_AABBS_KHR,
     VK_GEOMETRY_TYPE_MAX_ENUM_KHR = 0x7FFFFFFF

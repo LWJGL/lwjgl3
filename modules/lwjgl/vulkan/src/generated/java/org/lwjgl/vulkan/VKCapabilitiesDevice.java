@@ -1561,6 +1561,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_shader_subgroup_uniform_control_flow;
     /** When true, {@code KHR_shader_terminate_invocation} is supported. */
     public final boolean VK_KHR_shader_terminate_invocation;
+    /** When true, {@code KHR_shader_untyped_pointers} is supported. */
+    public final boolean VK_KHR_shader_untyped_pointers;
     /** When true, {@code KHR_shared_presentable_image} is supported. */
     public final boolean VK_KHR_shared_presentable_image;
     /** When true, {@code KHR_spirv_1_4} is supported. */
@@ -2070,6 +2072,7 @@ public class VKCapabilitiesDevice {
         VK_KHR_shader_subgroup_rotate = ext.contains("VK_KHR_shader_subgroup_rotate");
         VK_KHR_shader_subgroup_uniform_control_flow = ext.contains("VK_KHR_shader_subgroup_uniform_control_flow");
         VK_KHR_shader_terminate_invocation = ext.contains("VK_KHR_shader_terminate_invocation");
+        VK_KHR_shader_untyped_pointers = ext.contains("VK_KHR_shader_untyped_pointers");
         VK_KHR_shared_presentable_image = check_KHR_shared_presentable_image(provider, caps, ext);
         VK_KHR_spirv_1_4 = ext.contains("VK_KHR_spirv_1_4");
         VK_KHR_storage_buffer_storage_class = ext.contains("VK_KHR_storage_buffer_storage_class");
