@@ -3,7 +3,8 @@
 /nbproject/private/
 /bin
 /wiki
-.gradle
+/.gradle/
+/build/
 .DS_Store
 *.bat
 *.conf
