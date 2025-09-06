@@ -4248,7 +4248,7 @@ val XrSpatialComponentMarkerListEXT = struct(Module.OPENXR, "XrSpatialComponentM
     XrSpatialMarkerDataEXT.p("markers")
 }
 
-val XrSpatialCapabilityConfigurationAnchorEXT = struct(Module.OPENXR, "XrSpatialCapabilityConfigurationAnchorEXT") {
+val XrSpatialCapabilityConfigurationAnchorEXT = struct(Module.OPENXR, "XrSpatialCapabilityConfigurationAnchorEXT", parentStruct = XrSpatialCapabilityConfigurationBaseHeaderEXT) {
     Expression("#TYPE_SPATIAL_CAPABILITY_CONFIGURATION_ANCHOR_EXT")..XrStructureType("type")
     nullable..opaque_const_p("next")
     XrSpatialCapabilityEXT("capability")

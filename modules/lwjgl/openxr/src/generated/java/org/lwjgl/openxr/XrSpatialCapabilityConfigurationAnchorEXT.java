@@ -165,6 +165,11 @@ public class XrSpatialCapabilityConfigurationAnchorEXT extends Struct<XrSpatialC
         return address == NULL ? null : new XrSpatialCapabilityConfigurationAnchorEXT(address, null);
     }
 
+    /** Downcasts the specified {@code XrSpatialCapabilityConfigurationBaseHeaderEXT} instance to {@code XrSpatialCapabilityConfigurationAnchorEXT}. */
+    public static XrSpatialCapabilityConfigurationAnchorEXT create(XrSpatialCapabilityConfigurationBaseHeaderEXT value) {
+        return new XrSpatialCapabilityConfigurationAnchorEXT(value.address(), __getContainer(value));
+    }
+
     /**
      * Returns a new {@link XrSpatialCapabilityConfigurationAnchorEXT.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -206,6 +211,11 @@ public class XrSpatialCapabilityConfigurationAnchorEXT extends Struct<XrSpatialC
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     public static XrSpatialCapabilityConfigurationAnchorEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrSpatialCapabilityConfigurationBaseHeaderEXT.Buffer} instance to {@code XrSpatialCapabilityConfigurationAnchorEXT.Buffer}. */
+    public static XrSpatialCapabilityConfigurationAnchorEXT.Buffer create(XrSpatialCapabilityConfigurationBaseHeaderEXT.Buffer value) {
+        return new XrSpatialCapabilityConfigurationAnchorEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /**

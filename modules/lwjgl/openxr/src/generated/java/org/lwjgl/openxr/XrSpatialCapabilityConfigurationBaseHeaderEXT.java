@@ -188,6 +188,11 @@ public class XrSpatialCapabilityConfigurationBaseHeaderEXT extends Struct<XrSpat
         return new XrSpatialCapabilityConfigurationBaseHeaderEXT(value.address(), __getContainer(value));
     }
 
+    /** Upcasts the specified {@code XrSpatialCapabilityConfigurationAnchorEXT} instance to {@code XrSpatialCapabilityConfigurationBaseHeaderEXT}. */
+    public static XrSpatialCapabilityConfigurationBaseHeaderEXT create(XrSpatialCapabilityConfigurationAnchorEXT value) {
+        return new XrSpatialCapabilityConfigurationBaseHeaderEXT(value.address(), __getContainer(value));
+    }
+
     /**
      * Returns a new {@link XrSpatialCapabilityConfigurationBaseHeaderEXT.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -253,6 +258,11 @@ public class XrSpatialCapabilityConfigurationBaseHeaderEXT extends Struct<XrSpat
 
     /** Upcasts the specified {@code XrSpatialCapabilityConfigurationAprilTagEXT.Buffer} instance to {@code XrSpatialCapabilityConfigurationBaseHeaderEXT.Buffer}. */
     public static XrSpatialCapabilityConfigurationBaseHeaderEXT.Buffer create(XrSpatialCapabilityConfigurationAprilTagEXT.Buffer value) {
+        return new XrSpatialCapabilityConfigurationBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
+    /** Upcasts the specified {@code XrSpatialCapabilityConfigurationAnchorEXT.Buffer} instance to {@code XrSpatialCapabilityConfigurationBaseHeaderEXT.Buffer}. */
+    public static XrSpatialCapabilityConfigurationBaseHeaderEXT.Buffer create(XrSpatialCapabilityConfigurationAnchorEXT.Buffer value) {
         return new XrSpatialCapabilityConfigurationBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
