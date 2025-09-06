@@ -53,7 +53,8 @@ public class SDLSensor {
         SDL_SENSOR_ACCEL_L = 3,
         SDL_SENSOR_GYRO_L  = 4,
         SDL_SENSOR_ACCEL_R = 5,
-        SDL_SENSOR_GYRO_R  = 6;
+        SDL_SENSOR_GYRO_R  = 6,
+        SDL_SENSOR_COUNT   = 7;
 
     protected SDLSensor() {
         throw new UnsupportedOperationException();
