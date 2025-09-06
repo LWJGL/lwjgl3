@@ -5,11 +5,14 @@
  */
 package org.lwjgl.glfw;
 
+import org.lwjgl.*;
+
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 import org.jspecify.annotations.*;
 
@@ -27,7 +30,7 @@ public class GLFWNativeEGL {
             GetEGLDisplay = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetEGLDisplay"),
             GetEGLContext = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetEGLContext"),
             GetEGLSurface = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetEGLSurface"),
-            GetEGLConfig  = apiGetFunctionAddressOptional(GLFW.getLibrary(), "glfwGetEGLConfig");
+            GetEGLConfig  = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetEGLConfig");
 
     }
 
@@ -70,15 +73,22 @@ public class GLFWNativeEGL {
 
     // --- [ glfwGetEGLConfig ] ---
 
-    /** {@code EGLConfig glfwGetEGLConfig(GLFWwindow * window)} */
-    @NativeType("EGLConfig")
-    public static long glfwGetEGLConfig(@NativeType("GLFWwindow *") long window) {
+    /** {@code int glfwGetEGLConfig(GLFWwindow * window, EGLConfig * config)} */
+    public static int nglfwGetEGLConfig(long window, long config) {
         long __functionAddress = Functions.GetEGLConfig;
         if (CHECKS) {
-            check(__functionAddress);
             check(window);
         }
-        return invokePP(window, __functionAddress);
+        return invokePPI(window, config, __functionAddress);
+    }
+
+    /** {@code int glfwGetEGLConfig(GLFWwindow * window, EGLConfig * config)} */
+    @NativeType("int")
+    public static boolean glfwGetEGLConfig(@NativeType("GLFWwindow *") long window, @NativeType("EGLConfig *") PointerBuffer config) {
+        if (CHECKS) {
+            check(config, 1);
+        }
+        return nglfwGetEGLConfig(window, memAddress(config)) != 0;
     }
 
     /**

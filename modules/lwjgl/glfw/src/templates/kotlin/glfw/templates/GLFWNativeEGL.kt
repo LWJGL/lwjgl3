@@ -31,10 +31,11 @@ val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(Module.GLFW, nativeSubPath = "eg
         GLFWwindow.p("window")
     )
 
-    IgnoreMissing..EGLConfig(
+    intb(
         "GetEGLConfig",
 
-        GLFWwindow.p("window")
+        GLFWwindow.p("window"),
+        Check(1)..EGLConfig.p("config")
     )
 
     customMethod("""

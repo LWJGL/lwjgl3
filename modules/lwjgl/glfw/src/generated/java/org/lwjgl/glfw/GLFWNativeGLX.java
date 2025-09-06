@@ -5,11 +5,14 @@
  */
 package org.lwjgl.glfw;
 
+import org.lwjgl.*;
+
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 import org.jspecify.annotations.*;
 
@@ -26,7 +29,7 @@ public class GLFWNativeGLX {
         public static final long
             GetGLXContext  = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetGLXContext"),
             GetGLXWindow   = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetGLXWindow"),
-            GetGLXFBConfig = apiGetFunctionAddressOptional(GLFW.getLibrary(), "glfwGetGLXFBConfig");
+            GetGLXFBConfig = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetGLXFBConfig");
 
     }
 
@@ -60,15 +63,22 @@ public class GLFWNativeGLX {
 
     // --- [ glfwGetGLXFBConfig ] ---
 
-    /** {@code GLXWindow glfwGetGLXFBConfig(GLFWwindow * window)} */
-    @NativeType("GLXWindow")
-    public static long glfwGetGLXFBConfig(@NativeType("GLFWwindow *") long window) {
+    /** {@code int glfwGetGLXFBConfig(GLFWwindow * window, GLXFBConfig * config)} */
+    public static int nglfwGetGLXFBConfig(long window, long config) {
         long __functionAddress = Functions.GetGLXFBConfig;
         if (CHECKS) {
-            check(__functionAddress);
             check(window);
         }
-        return invokePP(window, __functionAddress);
+        return invokePPI(window, config, __functionAddress);
+    }
+
+    /** {@code int glfwGetGLXFBConfig(GLFWwindow * window, GLXFBConfig * config)} */
+    @NativeType("int")
+    public static boolean glfwGetGLXFBConfig(@NativeType("GLFWwindow *") long window, @NativeType("GLXFBConfig *") PointerBuffer config) {
+        if (CHECKS) {
+            check(config, 1);
+        }
+        return nglfwGetGLXFBConfig(window, memAddress(config)) != 0;
     }
 
     /**
