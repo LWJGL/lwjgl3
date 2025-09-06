@@ -8230,7 +8230,7 @@ val VkDataGraphPipelineCompilerControlCreateInfoARM = struct(Module.VULKAN, "VkD
 val VkDataGraphPipelineCreateInfoARM = struct(Module.VULKAN, "VkDataGraphPipelineCreateInfoARM") {
     Expression("#STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_CREATE_INFO_ARM")..VkStructureType("sType")
     PointerSetter(
-        "VkDataGraphPipelineCompilerControlCreateInfoARM", "VkDataGraphPipelineIdentifierCreateInfoARM", "VkDataGraphPipelineShaderModuleCreateInfoARM", "VkDataGraphProcessingEngineCreateInfoARM", "VkPipelineCreationFeedbackCreateInfo", "VkPipelineCreationFeedbackCreateInfoEXT",
+        "VkDataGraphPipelineCompilerControlCreateInfoARM", "VkDataGraphPipelineIdentifierCreateInfoARM", "VkDataGraphPipelineShaderModuleCreateInfoARM", "VkDataGraphProcessingEngineCreateInfoARM", "VkPipelineCreationFeedbackCreateInfo", "VkPipelineCreationFeedbackCreateInfoEXT", "VkShaderModuleCreateInfo",
         prepend = true
     )..nullable..opaque_const_p("pNext")
     VkPipelineCreateFlags2KHR("flags")
@@ -8241,10 +8241,7 @@ val VkDataGraphPipelineCreateInfoARM = struct(Module.VULKAN, "VkDataGraphPipelin
 
 val VkDataGraphPipelineShaderModuleCreateInfoARM = struct(Module.VULKAN, "VkDataGraphPipelineShaderModuleCreateInfoARM") {
     Expression("#STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SHADER_MODULE_CREATE_INFO_ARM")..VkStructureType("sType")
-    PointerSetter(
-        "VkShaderModuleCreateInfo",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
+    nullable..opaque_const_p("pNext")
     VkShaderModule("module")
     charUTF8.const.p("pName")
     nullable..VkSpecializationInfo.const.p("pSpecializationInfo")

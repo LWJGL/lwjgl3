@@ -122,8 +122,6 @@ public class VkDataGraphPipelineShaderModuleCreateInfoARM extends Struct<VkDataG
     public VkDataGraphPipelineShaderModuleCreateInfoARM sType$Default() { return sType(ARMDataGraph.VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SHADER_MODULE_CREATE_INFO_ARM); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkDataGraphPipelineShaderModuleCreateInfoARM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Prepends the specified {@link VkShaderModuleCreateInfo} value to the {@code pNext} chain. */
-    public VkDataGraphPipelineShaderModuleCreateInfoARM pNext(VkShaderModuleCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code module} field. */
     public VkDataGraphPipelineShaderModuleCreateInfoARM module(@NativeType("VkShaderModule") long value) { nmodule(address(), value); return this; }
     /** Sets the address of the specified encoded string to the {@code pName} field. */
@@ -401,8 +399,6 @@ public class VkDataGraphPipelineShaderModuleCreateInfoARM extends Struct<VkDataG
         public VkDataGraphPipelineShaderModuleCreateInfoARM.Buffer sType$Default() { return sType(ARMDataGraph.VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SHADER_MODULE_CREATE_INFO_ARM); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkDataGraphPipelineShaderModuleCreateInfoARM.Buffer pNext(@NativeType("void const *") long value) { VkDataGraphPipelineShaderModuleCreateInfoARM.npNext(address(), value); return this; }
-        /** Prepends the specified {@link VkShaderModuleCreateInfo} value to the {@code pNext} chain. */
-        public VkDataGraphPipelineShaderModuleCreateInfoARM.Buffer pNext(VkShaderModuleCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code module} field. */
         public VkDataGraphPipelineShaderModuleCreateInfoARM.Buffer module(@NativeType("VkShaderModule") long value) { VkDataGraphPipelineShaderModuleCreateInfoARM.nmodule(address(), value); return this; }
         /** Sets the address of the specified encoded string to the {@code pName} field. */

@@ -10,7 +10,7 @@ import vulkan.*
 
 val QCOM_tile_shading = "QCOMTileShading".nativeClassVK("QCOM_tile_shading", type = "device", postfix = "QCOM") {
     IntConstant(
-        "QCOM_TILE_SHADING_SPEC_VERSION".."1"
+        "QCOM_TILE_SHADING_SPEC_VERSION".."2"
     )
 
     StringConstant(

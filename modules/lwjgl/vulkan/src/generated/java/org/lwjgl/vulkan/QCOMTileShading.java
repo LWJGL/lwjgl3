@@ -12,7 +12,7 @@ import static org.lwjgl.system.JNI.*;
 
 public class QCOMTileShading {
 
-    public static final int VK_QCOM_TILE_SHADING_SPEC_VERSION = 1;
+    public static final int VK_QCOM_TILE_SHADING_SPEC_VERSION = 2;
 
     public static final String VK_QCOM_TILE_SHADING_EXTENSION_NAME = "VK_QCOM_tile_shading";
 
