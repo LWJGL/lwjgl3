@@ -877,11 +877,11 @@ public class HarfBuzz {
 
     public static final int HB_VERSION_MAJOR = 11;
 
-    public static final int HB_VERSION_MINOR = 3;
+    public static final int HB_VERSION_MINOR = 4;
 
-    public static final int HB_VERSION_MICRO = 3;
+    public static final int HB_VERSION_MICRO = 5;
 
-    public static final String HB_VERSION_STRING = "11.3.3";
+    public static final String HB_VERSION_STRING = "11.4.5";
 
     protected HarfBuzz() {
         throw new UnsupportedOperationException();
