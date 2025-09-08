@@ -18,14 +18,14 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.video.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoDecodeH265InlineSessionParametersInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link StdVideoH265VideoParameterSet StdVideoH265VideoParameterSet} const * pStdVPS;
  *     {@link StdVideoH265SequenceParameterSet StdVideoH265SequenceParameterSet} const * pStdSPS;
  *     {@link StdVideoH265PictureParameterSet StdVideoH265PictureParameterSet} const * pStdPPS;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoDecodeH265InlineSessionParametersInfoKHR extends Struct<VkVideoDecodeH265InlineSessionParametersInfoKHR> implements NativeResource {
 

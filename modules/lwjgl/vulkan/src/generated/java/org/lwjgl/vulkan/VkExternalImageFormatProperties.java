@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkExternalImageFormatProperties {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkExternalMemoryProperties VkExternalMemoryProperties} externalMemoryProperties;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkExternalImageFormatProperties extends Struct<VkExternalImageFormatProperties> implements NativeResource {
 

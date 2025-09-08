@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiUVTransform {
  *     {@link AIVector2D struct aiVector2D} mTranslation;
  *     {@link AIVector2D struct aiVector2D} mScaling;
  *     float mRotation;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiUVTransform")
 public class AIUVTransform extends Struct<AIUVTransform> implements NativeResource {

@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrHandMeshSpaceCreateInfoMSFT {
  *     XrStructureType type;
  *     void const * next;
  *     XrHandPoseTypeMSFT handPoseType;
  *     {@link XrPosef XrPosef} poseInHandMeshSpace;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrHandMeshSpaceCreateInfoMSFT extends Struct<XrHandMeshSpaceCreateInfoMSFT> implements NativeResource {
 

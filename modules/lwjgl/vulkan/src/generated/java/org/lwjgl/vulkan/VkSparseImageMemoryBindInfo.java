@@ -17,12 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkSparseImageMemoryBindInfo {
  *     VkImage image;
  *     uint32_t bindCount;
  *     {@link VkSparseImageMemoryBind VkSparseImageMemoryBind} const * pBinds;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkSparseImageMemoryBindInfo extends Struct<VkSparseImageMemoryBindInfo> implements NativeResource {
 

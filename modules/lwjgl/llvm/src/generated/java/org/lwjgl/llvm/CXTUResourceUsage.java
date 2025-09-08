@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct CXTUResourceUsage {
  *     void * data;
  *     unsigned numEntries;
  *     {@link CXTUResourceUsageEntry CXTUResourceUsageEntry} * entries;
- * }}</pre>
+ * }</code></pre>
  */
 public class CXTUResourceUsage extends Struct<CXTUResourceUsage> implements NativeResource {
 

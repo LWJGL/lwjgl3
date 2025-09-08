@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct MONITORINFOEX {
  *     DWORD cbSize;
  *     {@link RECT RECT} rcMonitor;
  *     {@link RECT RECT} rcWork;
  *     DWORD dwFlags;
  *     TCHAR szDevice[32];
- * }}</pre>
+ * }</code></pre>
  */
 public class MONITORINFOEX extends Struct<MONITORINFOEX> implements NativeResource {
 

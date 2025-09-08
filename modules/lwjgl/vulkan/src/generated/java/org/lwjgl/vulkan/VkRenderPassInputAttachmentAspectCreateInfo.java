@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkRenderPassInputAttachmentAspectCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t aspectReferenceCount;
  *     {@link VkInputAttachmentAspectReference VkInputAttachmentAspectReference} const * pAspectReferences;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkRenderPassInputAttachmentAspectCreateInfo extends Struct<VkRenderPassInputAttachmentAspectCreateInfo> implements NativeResource {
 

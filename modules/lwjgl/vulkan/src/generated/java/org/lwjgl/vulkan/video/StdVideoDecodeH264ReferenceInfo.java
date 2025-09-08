@@ -19,13 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH264.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoDecodeH264ReferenceInfo {
  *     {@link StdVideoDecodeH264ReferenceInfoFlags StdVideoDecodeH264ReferenceInfoFlags} flags;
  *     uint16_t FrameNum;
  *     uint16_t reserved;
  *     int32_t PicOrderCnt[STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE];
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoDecodeH264ReferenceInfo extends Struct<StdVideoDecodeH264ReferenceInfo> implements NativeResource {
 

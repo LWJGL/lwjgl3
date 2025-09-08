@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPipelineExecutableStatisticKHR {
  *     VkStructureType sType;
  *     void * pNext;
@@ -26,7 +26,7 @@ import static org.lwjgl.vulkan.VK10.*;
  *     char description[VK_MAX_DESCRIPTION_SIZE];
  *     VkPipelineExecutableStatisticFormatKHR format;
  *     {@link VkPipelineExecutableStatisticValueKHR VkPipelineExecutableStatisticValueKHR} value;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPipelineExecutableStatisticKHR extends Struct<VkPipelineExecutableStatisticKHR> implements NativeResource {
 

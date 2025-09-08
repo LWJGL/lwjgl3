@@ -17,14 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpatialAnchorCreateInfoEXT {
  *     XrStructureType type;
  *     void const * next;
  *     XrSpace baseSpace;
  *     XrTime time;
  *     {@link XrPosef XrPosef} pose;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpatialAnchorCreateInfoEXT extends Struct<XrSpatialAnchorCreateInfoEXT> implements NativeResource {
 

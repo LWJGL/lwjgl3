@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct ktxStream {
  *     {@link ktxStream_readI ktxStream_read} read;
  *     {@link ktxStream_skipI ktxStream_skip} skip;
@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     } data;
  *     ktx_off_t readpos;
  *     ktx_bool_t closeOnDestruct;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct ktxStream")
 public class ktxStream extends Struct<ktxStream> implements NativeResource {

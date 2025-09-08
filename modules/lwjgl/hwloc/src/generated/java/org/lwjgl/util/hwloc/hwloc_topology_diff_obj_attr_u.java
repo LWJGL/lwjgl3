@@ -14,12 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * union struct hwloc_topology_diff_obj_attr_u {
  *     {@link hwloc_topology_diff_obj_attr_generic_s hwloc_topology_diff_obj_attr_generic_s} generic;
  *     {@link hwloc_topology_diff_obj_attr_uint64_s hwloc_topology_diff_obj_attr_uint64_s} uint64;
  *     {@link hwloc_topology_diff_obj_attr_string_s hwloc_topology_diff_obj_attr_string_s} string;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("union struct hwloc_topology_diff_obj_attr_u")
 public class hwloc_topology_diff_obj_attr_u extends Struct<hwloc_topology_diff_obj_attr_u> {

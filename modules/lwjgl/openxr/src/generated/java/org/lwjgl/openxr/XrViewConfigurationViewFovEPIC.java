@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrViewConfigurationViewFovEPIC {
  *     XrStructureType type;
  *     void const * next;
  *     {@link XrFovf XrFovf} recommendedFov;
  *     {@link XrFovf XrFovf} maxMutableFov;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrViewConfigurationViewFovEPIC extends Struct<XrViewConfigurationViewFovEPIC> implements NativeResource {
 

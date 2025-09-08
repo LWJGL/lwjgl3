@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkSubresourceLayout2EXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkSubresourceLayout VkSubresourceLayout} subresourceLayout;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkSubresourceLayout2EXT extends VkSubresourceLayout2 {
 

@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkBaseOutStructure {
  *     VkStructureType sType;
  *     {@link VkBaseOutStructure VkBaseOutStructure} * pNext;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkBaseOutStructure extends Struct<VkBaseOutStructure> implements NativeResource {
 

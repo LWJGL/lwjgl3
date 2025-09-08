@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct hwloc_obj {
  *     hwloc_obj_type_t type;
  *     char * subtype;
@@ -50,7 +50,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link hwloc_infos_s struct hwloc_infos_s} infos;
  *     void * userdata;
  *     hwloc_uint64_t gp_index;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct hwloc_obj")
 public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_buffer {
  *     {@link NkBufferMarker struct nk_buffer_marker} marker[2];
  *     {@link NkAllocator struct nk_allocator} pool;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     nk_size needed;
  *     nk_size calls;
  *     nk_size size;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_buffer")
 public class NkBuffer extends Struct<NkBuffer> implements NativeResource {

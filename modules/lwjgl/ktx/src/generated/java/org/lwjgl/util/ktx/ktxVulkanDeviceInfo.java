@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct ktxVulkanDeviceInfo {
  *     VkInstance instance;
  *     VkPhysicalDevice physicalDevice;
@@ -30,7 +30,7 @@ import org.lwjgl.vulkan.*;
  *     {@link VkAllocationCallbacks VkAllocationCallbacks} const * pAllocator;
  *     {@link VkPhysicalDeviceMemoryProperties VkPhysicalDeviceMemoryProperties} deviceMemoryProperties;
  *     {@link ktxVulkanFunctions ktxVulkanFunctions} vkFuncs;
- * }}</pre>
+ * }</code></pre>
  */
 public class ktxVulkanDeviceInfo extends Struct<ktxVulkanDeviceInfo> implements NativeResource {
 

@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpatialComponentBounded2DListEXT {
  *     XrStructureType type;
  *     void * next;
  *     uint32_t boundCount;
  *     {@link XrSpatialBounded2DDataEXT XrSpatialBounded2DDataEXT} * bounds;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpatialComponentBounded2DListEXT extends Struct<XrSpatialComponentBounded2DListEXT> implements NativeResource {
 

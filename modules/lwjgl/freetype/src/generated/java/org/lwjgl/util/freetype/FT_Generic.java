@@ -17,11 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_Generic {
  *     void * data;
  *     {@link FT_Generic_FinalizerI FT_Generic_Finalizer} finalizer;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_Generic extends Struct<FT_Generic> implements NativeResource {
 

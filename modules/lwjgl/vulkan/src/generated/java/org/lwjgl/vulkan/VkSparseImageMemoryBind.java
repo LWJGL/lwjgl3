@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkSparseImageMemoryBind {
  *     {@link VkImageSubresource VkImageSubresource} subresource;
  *     {@link VkOffset3D VkOffset3D} offset;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkDeviceMemory memory;
  *     VkDeviceSize memoryOffset;
  *     VkSparseMemoryBindFlags flags;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkSparseImageMemoryBind extends Struct<VkSparseImageMemoryBind> implements NativeResource {
 

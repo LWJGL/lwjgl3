@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDisplaySurfaceCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float globalAlpha;
  *     VkDisplayPlaneAlphaFlagBitsKHR alphaMode;
  *     {@link VkExtent2D VkExtent2D} imageExtent;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDisplaySurfaceCreateInfoKHR extends Struct<VkDisplaySurfaceCreateInfoKHR> implements NativeResource {
 

@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkClearRect {
  *     {@link VkRect2D VkRect2D} rect;
  *     uint32_t baseArrayLayer;
  *     uint32_t layerCount;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkClearRect extends Struct<VkClearRect> implements NativeResource {
 

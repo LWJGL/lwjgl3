@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrVirtualKeyboardModelAnimationStatesMETA {
  *     XrStructureType type;
  *     void * next;
  *     uint32_t stateCapacityInput;
  *     uint32_t stateCountOutput;
  *     {@link XrVirtualKeyboardAnimationStateMETA XrVirtualKeyboardAnimationStateMETA} * states;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrVirtualKeyboardModelAnimationStatesMETA extends Struct<XrVirtualKeyboardModelAnimationStatesMETA> implements NativeResource {
 

@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkCommandBufferBeginInfo {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkCommandBufferUsageFlags flags;
  *     {@link VkCommandBufferInheritanceInfo VkCommandBufferInheritanceInfo} const * pInheritanceInfo;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkCommandBufferBeginInfo extends Struct<VkCommandBufferBeginInfo> implements NativeResource {
 

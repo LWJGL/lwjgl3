@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiFile {
  *     {@link AIFileReadProcI aiFileReadProc} ReadProc;
  *     {@link AIFileWriteProcI aiFileWriteProc} WriteProc;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link AIFileSeekI aiFileSeek} SeekProc;
  *     {@link AIFileFlushProcI aiFileFlushProc} FlushProc;
  *     aiUserData UserData;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiFile")
 public class AIFile extends Struct<AIFile> implements NativeResource {

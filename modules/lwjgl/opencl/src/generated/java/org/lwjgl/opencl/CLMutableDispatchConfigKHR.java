@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct cl_mutable_dispatch_config_khr {
  *     cl_mutable_command_khr command;
  *     cl_uint num_args;
@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     size_t const * global_work_offset;
  *     size_t const * global_work_size;
  *     size_t const * local_work_size;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct cl_mutable_dispatch_config_khr")
 public class CLMutableDispatchConfigKHR extends Struct<CLMutableDispatchConfigKHR> implements NativeResource {

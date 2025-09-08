@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrForceFeedbackCurlApplyLocationsMNDX {
  *     XrStructureType type;
  *     void const * next;
  *     uint32_t locationCount;
  *     {@link XrForceFeedbackCurlApplyLocationMNDX XrForceFeedbackCurlApplyLocationMNDX} * locations;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrForceFeedbackCurlApplyLocationsMNDX extends Struct<XrForceFeedbackCurlApplyLocationsMNDX> implements NativeResource {
 

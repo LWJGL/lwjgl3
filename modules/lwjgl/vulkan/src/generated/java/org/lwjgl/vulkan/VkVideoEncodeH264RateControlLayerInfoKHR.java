@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoEncodeH264RateControlLayerInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkVideoEncodeH264QpKHR VkVideoEncodeH264QpKHR} maxQp;
  *     VkBool32 useMaxFrameSize;
  *     {@link VkVideoEncodeH264FrameSizeKHR VkVideoEncodeH264FrameSizeKHR} maxFrameSize;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoEncodeH264RateControlLayerInfoKHR extends Struct<VkVideoEncodeH264RateControlLayerInfoKHR> implements NativeResource {
 

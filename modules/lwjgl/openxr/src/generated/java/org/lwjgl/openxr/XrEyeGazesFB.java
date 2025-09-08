@@ -19,13 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.FBEyeTrackingSocial.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrEyeGazesFB {
  *     XrStructureType type;
  *     void * next;
  *     {@link XrEyeGazeFB XrEyeGazeFB} gaze[XR_EYE_POSITION_COUNT_FB];
  *     XrTime time;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrEyeGazesFB extends Struct<XrEyeGazesFB> implements NativeResource {
 

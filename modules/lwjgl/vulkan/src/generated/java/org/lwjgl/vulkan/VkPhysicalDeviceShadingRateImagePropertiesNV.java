@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPhysicalDeviceShadingRateImagePropertiesNV {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkExtent2D VkExtent2D} shadingRateTexelSize;
  *     uint32_t shadingRatePaletteSize;
  *     uint32_t shadingRateMaxCoarseSamples;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceShadingRateImagePropertiesNV extends Struct<VkPhysicalDeviceShadingRateImagePropertiesNV> implements NativeResource {
 

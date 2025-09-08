@@ -17,14 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDirectDriverLoadingListLUNARG {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkDirectDriverLoadingModeLUNARG mode;
  *     uint32_t driverCount;
  *     {@link VkDirectDriverLoadingInfoLUNARG VkDirectDriverLoadingInfoLUNARG} const * pDrivers;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDirectDriverLoadingListLUNARG extends Struct<VkDirectDriverLoadingListLUNARG> implements NativeResource {
 

@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPipelineFragmentShadingRateStateCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link VkExtent2D VkExtent2D} fragmentSize;
  *     VkFragmentShadingRateCombinerOpKHR combinerOps[2];
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPipelineFragmentShadingRateStateCreateInfoKHR extends Struct<VkPipelineFragmentShadingRateStateCreateInfoKHR> implements NativeResource {
 

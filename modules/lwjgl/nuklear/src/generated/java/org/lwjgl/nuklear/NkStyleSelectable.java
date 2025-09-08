@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_style_selectable {
  *     {@link NkStyleItem struct nk_style_item} normal;
  *     {@link NkStyleItem struct nk_style_item} hover;
@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkHandle nk_handle} userdata;
  *     {@link NkDrawBeginCallbackI nk_draw_begin} draw_begin;
  *     {@link NkDrawEndCallbackI nk_draw_end} draw_end;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_style_selectable")
 public class NkStyleSelectable extends Struct<NkStyleSelectable> implements NativeResource {

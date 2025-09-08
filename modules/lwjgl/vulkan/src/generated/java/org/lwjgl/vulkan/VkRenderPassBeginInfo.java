@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkRenderPassBeginInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkRect2D VkRect2D} renderArea;
  *     uint32_t clearValueCount;
  *     {@link VkClearValue VkClearValue} const * pClearValues;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkRenderPassBeginInfo extends Struct<VkRenderPassBeginInfo> implements NativeResource {
 

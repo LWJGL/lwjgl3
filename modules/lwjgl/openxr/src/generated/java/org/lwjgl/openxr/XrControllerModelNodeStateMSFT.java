@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrControllerModelNodeStateMSFT {
  *     XrStructureType type;
  *     void * next;
  *     {@link XrPosef XrPosef} nodePose;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrControllerModelNodeStateMSFT extends Struct<XrControllerModelNodeStateMSFT> implements NativeResource {
 

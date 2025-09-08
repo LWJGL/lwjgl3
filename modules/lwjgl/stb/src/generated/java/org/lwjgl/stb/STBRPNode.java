@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct stbrp_node {
  *     stbrp_coord x;
  *     stbrp_coord y;
  *     {@link STBRPNode stbrp_node} * next;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct stbrp_node")
 public class STBRPNode extends Struct<STBRPNode> implements NativeResource {

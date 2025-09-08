@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.system.linux.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct io_uring_reg_wait {
  *     {@link KernelTimespec struct __kernel_timespec} ts;
  *     __u32 min_wait_usec;
@@ -28,7 +28,7 @@ import org.lwjgl.system.linux.*;
  *     __u32 sigmask_sz;
  *     __u32 pad[3];
  *     __u64 pad2[2];
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct io_uring_reg_wait")
 public class IOURingRegWait extends Struct<IOURingRegWait> implements NativeResource {

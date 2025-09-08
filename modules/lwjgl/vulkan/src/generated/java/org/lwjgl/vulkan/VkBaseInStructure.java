@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkBaseInStructure {
  *     VkStructureType sType;
  *     {@link VkBaseInStructure VkBaseInStructure} const * pNext;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkBaseInStructure extends Struct<VkBaseInStructure> implements NativeResource {
 

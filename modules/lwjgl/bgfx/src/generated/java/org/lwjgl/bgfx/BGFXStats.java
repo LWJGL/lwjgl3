@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.bgfx.BGFX.BGFX_TOPOLOGY_COUNT;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct bgfx_stats_t {
  *     int64_t cpuTimeFrame;
  *     int64_t cpuTimeBegin;
@@ -59,7 +59,7 @@ import static org.lwjgl.bgfx.BGFX.BGFX_TOPOLOGY_COUNT;
  *     {@link BGFXViewStats bgfx_view_stats_t} * viewStats;
  *     uint16_t numEncoders;
  *     {@link BGFXEncoderStats bgfx_encoder_stats_t} * encoderStats;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct bgfx_stats_t")
 public class BGFXStats extends Struct<BGFXStats> {

@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct OpusFileCallbacks {
  *     {@link OPReadFuncI op_read_func} read;
  *     {@link OPSeekFuncI op_seek_func} seek;
  *     {@link OPTellFuncI op_tell_func} tell;
  *     {@link OPCloseFuncI op_close_func} close;
- * }}</pre>
+ * }</code></pre>
  */
 public class OpusFileCallbacks extends Struct<OpusFileCallbacks> implements NativeResource {
 

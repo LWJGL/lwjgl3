@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrPlaneDetectorLocationsEXT {
  *     XrStructureType type;
  *     void * next;
  *     uint32_t planeLocationCapacityInput;
  *     uint32_t planeLocationCountOutput;
  *     {@link XrPlaneDetectorLocationEXT XrPlaneDetectorLocationEXT} * planeLocations;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrPlaneDetectorLocationsEXT extends Struct<XrPlaneDetectorLocationsEXT> implements NativeResource {
 

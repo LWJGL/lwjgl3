@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkAccelerationStructureGeometryLinearSweptSpheresDataNV {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkDeviceSize indexStride;
  *     VkRayTracingLssIndexingModeNV indexingMode;
  *     VkRayTracingLssPrimitiveEndCapsModeNV endCapsMode;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkAccelerationStructureGeometryLinearSweptSpheresDataNV extends Struct<VkAccelerationStructureGeometryLinearSweptSpheresDataNV> implements NativeResource {
 

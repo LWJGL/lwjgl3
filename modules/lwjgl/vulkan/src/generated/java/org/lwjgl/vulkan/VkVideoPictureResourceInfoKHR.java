@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoPictureResourceInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkExtent2D VkExtent2D} codedExtent;
  *     uint32_t baseArrayLayer;
  *     VkImageView imageViewBinding;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoPictureResourceInfoKHR extends Struct<VkVideoPictureResourceInfoKHR> implements NativeResource {
 

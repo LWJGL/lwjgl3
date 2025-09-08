@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct SDL_HapticCustom {
  *     Uint16 type;
  *     {@link SDL_HapticDirection SDL_HapticDirection} direction;
@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     Uint16 attack_level;
  *     Uint16 fade_length;
  *     Uint16 fade_level;
- * }}</pre>
+ * }</code></pre>
  */
 public class SDL_HapticCustom extends Struct<SDL_HapticCustom> implements NativeResource {
 

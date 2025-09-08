@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct stbrp_context {
  *     int width;
  *     int height;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link STBRPNode stbrp_node} * active_head;
  *     {@link STBRPNode stbrp_node} * free_head;
  *     {@link STBRPNode stbrp_node} extra[2];
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct stbrp_context")
 public class STBRPContext extends Struct<STBRPContext> implements NativeResource {

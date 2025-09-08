@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_user_font {
  *     {@link NkHandle nk_handle} userdata;
  *     float height;
  *     {@link NkTextWidthCallbackI nk_text_width_f} width;
  *     {@link NkQueryFontGlyphCallbackI nk_query_font_glyph_f} query;
  *     {@link NkHandle nk_handle} texture;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_user_font")
 public class NkUserFont extends Struct<NkUserFont> implements NativeResource {

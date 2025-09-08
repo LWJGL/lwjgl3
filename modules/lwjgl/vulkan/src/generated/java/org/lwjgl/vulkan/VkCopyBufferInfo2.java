@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkCopyBufferInfo2 {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBuffer dstBuffer;
  *     uint32_t regionCount;
  *     {@link VkBufferCopy2 VkBufferCopy2} const * pRegions;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkCopyBufferInfo2 extends Struct<VkCopyBufferInfo2> implements NativeResource {
 

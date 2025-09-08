@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct DEVMODE {
  *     TCHAR dmDeviceName[32];
  *     WORD dmSpecVersion;
@@ -64,7 +64,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     DWORD dmReserved2;
  *     DWORD dmPanningWidth;
  *     DWORD dmPanningHeight;
- * }}</pre>
+ * }</code></pre>
  */
 public class DEVMODE extends Struct<DEVMODE> implements NativeResource {
 

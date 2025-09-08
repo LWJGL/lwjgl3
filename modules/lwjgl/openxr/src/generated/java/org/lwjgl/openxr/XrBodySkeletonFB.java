@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrBodySkeletonFB {
  *     XrStructureType type;
  *     void * next;
  *     uint32_t jointCount;
  *     {@link XrBodySkeletonJointFB XrBodySkeletonJointFB} * joints;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrBodySkeletonFB extends Struct<XrBodySkeletonFB> implements NativeResource {
 

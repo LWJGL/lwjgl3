@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkBufferImageCopy2 {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} imageSubresource;
  *     {@link VkOffset3D VkOffset3D} imageOffset;
  *     {@link VkExtent3D VkExtent3D} imageExtent;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkBufferImageCopy2 extends Struct<VkBufferImageCopy2> implements NativeResource {
 

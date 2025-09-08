@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * union XEvent {
  *     int type;
  *     {@link XAnyEvent XAnyEvent} xany;
@@ -53,7 +53,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link XGenericEvent XGenericEvent} xgeneric;
  *     {@link XGenericEventCookie XGenericEventCookie} xcookie;
  *     long[24];
- * }}</pre>
+ * }</code></pre>
  */
 public class XEvent extends Struct<XEvent> implements NativeResource {
 

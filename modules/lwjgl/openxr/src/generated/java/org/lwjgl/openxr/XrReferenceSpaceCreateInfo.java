@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrReferenceSpaceCreateInfo {
  *     XrStructureType type;
  *     void const * next;
  *     XrReferenceSpaceType referenceSpaceType;
  *     {@link XrPosef XrPosef} poseInReferenceSpace;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrReferenceSpaceCreateInfo extends Struct<XrReferenceSpaceCreateInfo> implements NativeResource {
 

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct MSG {
  *     HWND hwnd;
  *     UINT message;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     LPARAM lParam;
  *     DWORD time;
  *     {@link POINT POINT} pt;
- * }}</pre>
+ * }</code></pre>
  */
 public class MSG extends Struct<MSG> implements NativeResource {
 

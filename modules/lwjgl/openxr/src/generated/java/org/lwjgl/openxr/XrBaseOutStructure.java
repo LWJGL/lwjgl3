@@ -17,11 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrBaseOutStructure {
  *     XrStructureType type;
  *     {@link XrBaseOutStructure XrBaseOutStructure} * next;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrBaseOutStructure extends Struct<XrBaseOutStructure> implements NativeResource {
 

@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSceneSphereBoundMSFT {
  *     {@link XrVector3f XrVector3f} center;
  *     float radius;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSceneSphereBoundMSFT extends Struct<XrSceneSphereBoundMSFT> implements NativeResource {
 

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrHandTrackingMeshFB {
  *     XrStructureType type;
  *     void * next;
@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t indexCapacityInput;
  *     uint32_t indexCountOutput;
  *     int16_t * indices;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrHandTrackingMeshFB extends Struct<XrHandTrackingMeshFB> implements NativeResource {
 

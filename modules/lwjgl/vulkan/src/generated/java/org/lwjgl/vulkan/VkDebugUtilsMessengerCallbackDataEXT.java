@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDebugUtilsMessengerCallbackDataEXT {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkDebugUtilsLabelEXT VkDebugUtilsLabelEXT} const * pCmdBufLabels;
  *     uint32_t objectCount;
  *     {@link VkDebugUtilsObjectNameInfoEXT VkDebugUtilsObjectNameInfoEXT} const * pObjects;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDebugUtilsMessengerCallbackDataEXT extends Struct<VkDebugUtilsMessengerCallbackDataEXT> implements NativeResource {
 

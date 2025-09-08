@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSceneComponentParentFilterInfoMSFT {
  *     XrStructureType type;
  *     void const * next;
  *     {@link XrUuidMSFT XrUuidMSFT} parentId;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSceneComponentParentFilterInfoMSFT extends Struct<XrSceneComponentParentFilterInfoMSFT> implements NativeResource {
 

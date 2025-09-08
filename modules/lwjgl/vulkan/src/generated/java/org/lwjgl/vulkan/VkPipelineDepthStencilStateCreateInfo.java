@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPipelineDepthStencilStateCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkStencilOpState VkStencilOpState} back;
  *     float minDepthBounds;
  *     float maxDepthBounds;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPipelineDepthStencilStateCreateInfo extends Struct<VkPipelineDepthStencilStateCreateInfo> implements NativeResource {
 

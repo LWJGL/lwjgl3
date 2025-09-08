@@ -14,12 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct hwloc_numanode_attr_s {
  *     hwloc_uint64_t local_memory;
  *     unsigned page_types_len;
  *     {@link hwloc_memory_page_type_s hwloc_memory_page_type_s} * page_types;
- * }}</pre>
+ * }</code></pre>
  */
 public class hwloc_numanode_attr_s extends Struct<hwloc_numanode_attr_s> {
 

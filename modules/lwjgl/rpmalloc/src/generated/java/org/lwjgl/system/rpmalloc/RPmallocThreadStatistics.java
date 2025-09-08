@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct rpmalloc_thread_statistics_t {
  *     size_t sizecache;
  *     size_t spancache;
@@ -44,7 +44,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         size_t spans_from_reserved;
  *         size_t map_calls;
  *     } {@link size_use size_use}[128];
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct rpmalloc_thread_statistics_t")
 public class RPmallocThreadStatistics extends Struct<RPmallocThreadStatistics> implements NativeResource {

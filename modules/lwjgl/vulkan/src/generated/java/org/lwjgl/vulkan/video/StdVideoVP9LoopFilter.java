@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecVP9.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoVP9LoopFilter {
  *     {@link StdVideoVP9LoopFilterFlags StdVideoVP9LoopFilterFlags} flags;
  *     uint8_t loop_filter_level;
@@ -28,7 +28,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecVP9.*;
  *     int8_t loop_filter_ref_deltas[STD_VIDEO_VP9_MAX_REF_FRAMES];
  *     uint8_t update_mode_delta;
  *     int8_t loop_filter_mode_deltas[STD_VIDEO_VP9_LOOP_FILTER_ADJUSTMENTS];
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoVP9LoopFilter extends Struct<StdVideoVP9LoopFilter> implements NativeResource {
 

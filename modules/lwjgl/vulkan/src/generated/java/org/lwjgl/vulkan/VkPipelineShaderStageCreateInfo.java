@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPipelineShaderStageCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkShaderModule module;
  *     char const * pName;
  *     {@link VkSpecializationInfo VkSpecializationInfo} const * pSpecializationInfo;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStageCreateInfo> implements NativeResource {
 

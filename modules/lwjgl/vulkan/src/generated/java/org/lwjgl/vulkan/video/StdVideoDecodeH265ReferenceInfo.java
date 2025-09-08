@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoDecodeH265ReferenceInfo {
  *     {@link StdVideoDecodeH265ReferenceInfoFlags StdVideoDecodeH265ReferenceInfoFlags} flags;
  *     int32_t PicOrderCntVal;
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoDecodeH265ReferenceInfo extends Struct<StdVideoDecodeH265ReferenceInfo> implements NativeResource {
 

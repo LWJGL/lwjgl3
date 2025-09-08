@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkExtent2D VkExtent2D} fragmentDensityOffsetGranularity;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM extends VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT {
 

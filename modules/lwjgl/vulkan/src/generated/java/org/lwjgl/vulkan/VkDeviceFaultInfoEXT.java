@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDeviceFaultInfoEXT {
  *     VkStructureType sType;
  *     void * pNext;
@@ -26,7 +26,7 @@ import static org.lwjgl.vulkan.VK10.*;
  *     {@link VkDeviceFaultAddressInfoEXT VkDeviceFaultAddressInfoEXT} * pAddressInfos;
  *     {@link VkDeviceFaultVendorInfoEXT VkDeviceFaultVendorInfoEXT} * pVendorInfos;
  *     void * pVendorBinaryData;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDeviceFaultInfoEXT extends Struct<VkDeviceFaultInfoEXT> implements NativeResource {
 

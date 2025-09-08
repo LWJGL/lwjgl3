@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkSurfacePresentScalingCapabilitiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkPresentGravityFlagsKHR supportedPresentGravityY;
  *     {@link VkExtent2D VkExtent2D} minScaledImageExtent;
  *     {@link VkExtent2D VkExtent2D} maxScaledImageExtent;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkSurfacePresentScalingCapabilitiesKHR extends Struct<VkSurfacePresentScalingCapabilitiesKHR> implements NativeResource {
 

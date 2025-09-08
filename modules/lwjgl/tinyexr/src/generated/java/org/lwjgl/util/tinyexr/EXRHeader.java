@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.util.tinyexr.TinyEXR.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct EXRHeader {
  *     float pixel_aspect_ratio;
  *     int line_order;
@@ -45,7 +45,7 @@ import static org.lwjgl.util.tinyexr.TinyEXR.*;
  *     int compression_type;
  *     int * requested_pixel_types;
  *     char name[256];
- * }}</pre>
+ * }</code></pre>
  */
 public class EXRHeader extends Struct<EXRHeader> implements NativeResource {
 

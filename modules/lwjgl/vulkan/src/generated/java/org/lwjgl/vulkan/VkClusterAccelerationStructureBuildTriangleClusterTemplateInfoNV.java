@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV {
  *     uint32_t clusterID;
  *     VkClusterAccelerationStructureClusterFlagsNV clusterFlags;
@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkDeviceAddress opacityMicromapArray;
  *     VkDeviceAddress opacityMicromapIndexBuffer;
  *     VkDeviceAddress instantiationBoundingBoxLimit;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV extends Struct<VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV> implements NativeResource {
 

@@ -17,11 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct LLVMOrcCSymbolFlagsMapPair {
  *     LLVMOrcSymbolStringPoolEntryRef Name;
  *     {@link LLVMJITSymbolFlags LLVMJITSymbolFlags} Flags;
- * }}</pre>
+ * }</code></pre>
  */
 public class LLVMOrcCSymbolFlagsMapPair extends Struct<LLVMOrcCSymbolFlagsMapPair> implements NativeResource {
 

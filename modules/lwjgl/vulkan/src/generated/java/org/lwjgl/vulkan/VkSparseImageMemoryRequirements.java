@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkSparseImageMemoryRequirements {
  *     {@link VkSparseImageFormatProperties VkSparseImageFormatProperties} formatProperties;
  *     uint32_t imageMipTailFirstLod;
  *     VkDeviceSize imageMipTailSize;
  *     VkDeviceSize imageMipTailOffset;
  *     VkDeviceSize imageMipTailStride;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkSparseImageMemoryRequirements extends Struct<VkSparseImageMemoryRequirements> implements NativeResource {
 

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoEncodeH265QualityLevelPropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkVideoEncodeH265QpKHR VkVideoEncodeH265QpKHR} preferredConstantQp;
  *     uint32_t preferredMaxL0ReferenceCount;
  *     uint32_t preferredMaxL1ReferenceCount;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoEncodeH265QualityLevelPropertiesKHR extends Struct<VkVideoEncodeH265QualityLevelPropertiesKHR> implements NativeResource {
 

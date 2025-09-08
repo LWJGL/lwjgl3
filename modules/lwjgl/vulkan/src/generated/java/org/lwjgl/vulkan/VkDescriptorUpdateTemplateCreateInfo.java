@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDescriptorUpdateTemplateCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkPipelineBindPoint pipelineBindPoint;
  *     VkPipelineLayout pipelineLayout;
  *     uint32_t set;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDescriptorUpdateTemplateCreateInfo extends Struct<VkDescriptorUpdateTemplateCreateInfo> implements NativeResource {
 

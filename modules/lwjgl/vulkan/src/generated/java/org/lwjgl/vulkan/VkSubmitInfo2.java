@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkSubmitInfo2 {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkCommandBufferSubmitInfo VkCommandBufferSubmitInfo} const * pCommandBufferInfos;
  *     uint32_t signalSemaphoreInfoCount;
  *     {@link VkSemaphoreSubmitInfo VkSemaphoreSubmitInfo} const * pSignalSemaphoreInfos;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkSubmitInfo2 extends Struct<VkSubmitInfo2> implements NativeResource {
 

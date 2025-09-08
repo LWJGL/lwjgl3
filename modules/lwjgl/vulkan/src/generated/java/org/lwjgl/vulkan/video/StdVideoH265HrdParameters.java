@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoH265HrdParameters {
  *     {@link StdVideoH265HrdFlags StdVideoH265HrdFlags} flags;
  *     uint8_t tick_divisor_minus2;
@@ -36,7 +36,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
  *     uint16_t reserved[3];
  *     {@link StdVideoH265SubLayerHrdParameters StdVideoH265SubLayerHrdParameters} const * pSubLayerHrdParametersNal;
  *     {@link StdVideoH265SubLayerHrdParameters StdVideoH265SubLayerHrdParameters} const * pSubLayerHrdParametersVcl;
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoH265HrdParameters extends Struct<StdVideoH265HrdParameters> implements NativeResource {
 

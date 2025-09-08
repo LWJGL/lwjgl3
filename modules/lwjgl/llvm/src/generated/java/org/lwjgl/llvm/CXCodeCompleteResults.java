@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct CXCodeCompleteResults {
  *     {@link CXCompletionResult CXCompletionResult} * Results;
  *     unsigned NumResults;
- * }}</pre>
+ * }</code></pre>
  */
 public class CXCodeCompleteResults extends Struct<CXCodeCompleteResults> implements NativeResource {
 

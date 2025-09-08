@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPhysicalDeviceImageProcessing2PropertiesQCOM {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkExtent2D VkExtent2D} maxBlockMatchWindow;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceImageProcessing2PropertiesQCOM extends Struct<VkPhysicalDeviceImageProcessing2PropertiesQCOM> implements NativeResource {
 

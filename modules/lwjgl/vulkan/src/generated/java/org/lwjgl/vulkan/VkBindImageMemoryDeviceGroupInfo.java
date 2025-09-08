@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkBindImageMemoryDeviceGroupInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t const * pDeviceIndices;
  *     uint32_t splitInstanceBindRegionCount;
  *     {@link VkRect2D VkRect2D} const * pSplitInstanceBindRegions;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkBindImageMemoryDeviceGroupInfo extends Struct<VkBindImageMemoryDeviceGroupInfo> implements NativeResource {
 

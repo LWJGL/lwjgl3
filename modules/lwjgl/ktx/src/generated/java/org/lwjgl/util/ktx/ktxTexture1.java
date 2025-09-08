@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct ktxTexture1 {
  *     class_id classId;
  *     {@link ktxTexture_vtbl struct ktxTexture_vtbl} * vtbl;
@@ -44,7 +44,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     ktx_uint32_t glBaseInternalformat;
  *     ktx_uint32_t glType;
  *     struct ktxTexture1_private * _private;
- * }}</pre>
+ * }</code></pre>
  */
 public class ktxTexture1 extends Struct<ktxTexture1> implements NativeResource {
 

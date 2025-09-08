@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSceneComponentMSFT {
  *     XrSceneComponentTypeMSFT componentType;
  *     {@link XrUuidMSFT XrUuidMSFT} id;
  *     {@link XrUuidMSFT XrUuidMSFT} parentId;
  *     XrTime updateTime;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSceneComponentMSFT extends Struct<XrSceneComponentMSFT> implements NativeResource {
 

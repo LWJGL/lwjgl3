@@ -14,7 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_configuration_stacks {
  *     {@link NkConfigStackStyleItem struct nk_config_stack_style_item} style_items;
  *     {@link NkConfigStackFloat struct nk_config_stack_float} floats;
@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link NkConfigStackColor struct nk_config_stack_color} colors;
  *     {@link NkConfigStackUserFont struct nk_config_stack_user_font} fonts;
  *     {@link NkConfigStackButtonBehavior struct nk_config_stack_button_behavior} button_behaviors;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_configuration_stacks")
 class NkConfigurationStacks extends Struct<NkConfigurationStacks> {

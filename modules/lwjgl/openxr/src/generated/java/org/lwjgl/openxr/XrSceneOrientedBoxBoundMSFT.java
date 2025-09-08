@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSceneOrientedBoxBoundMSFT {
  *     {@link XrPosef XrPosef} pose;
  *     {@link XrVector3f XrVector3f} extents;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSceneOrientedBoxBoundMSFT extends Struct<XrSceneOrientedBoxBoundMSFT> implements NativeResource {
 

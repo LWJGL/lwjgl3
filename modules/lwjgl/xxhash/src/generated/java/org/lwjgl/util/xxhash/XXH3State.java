@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.util.xxhash.XXHash.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XXH3_state_t {
  *     XXH64_hash_t acc[8];
  *     unsigned char customSecret[XXH3_SECRET_DEFAULT_SIZE];
@@ -34,7 +34,7 @@ import static org.lwjgl.util.xxhash.XXHash.*;
  *     XXH64_hash_t seed;
  *     XXH64_hash_t reserved64;
  *     unsigned char const * extSecret;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct XXH3_state_t")
 public class XXH3State extends Struct<XXH3State> implements NativeResource {

@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpatialAnchorsDeleteInfoML {
  *     XrStructureType type;
  *     void const * next;
  *     uint32_t uuidCount;
  *     {@link XrUuidEXT XrUuidEXT} const * uuids;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpatialAnchorsDeleteInfoML extends Struct<XrSpatialAnchorsDeleteInfoML> implements NativeResource {
 

@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoH265ProfileTierLevel {
  *     {@link StdVideoH265ProfileTierLevelFlags StdVideoH265ProfileTierLevelFlags} flags;
  *     StdVideoH265ProfileIdc general_profile_idc;
  *     StdVideoH265LevelIdc general_level_idc;
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoH265ProfileTierLevel extends Struct<StdVideoH265ProfileTierLevel> implements NativeResource {
 

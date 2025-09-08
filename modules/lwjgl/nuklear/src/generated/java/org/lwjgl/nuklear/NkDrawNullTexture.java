@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_draw_null_texture {
  *     {@link NkHandle nk_handle} texture;
  *     {@link NkVec2 struct nk_vec2} uv;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_draw_null_texture")
 public class NkDrawNullTexture extends Struct<NkDrawNullTexture> implements NativeResource {

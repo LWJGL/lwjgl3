@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkInstanceCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     char const * const * ppEnabledLayerNames;
  *     uint32_t enabledExtensionCount;
  *     char const * const * ppEnabledExtensionNames;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkInstanceCreateInfo extends Struct<VkInstanceCreateInfo> implements NativeResource {
 

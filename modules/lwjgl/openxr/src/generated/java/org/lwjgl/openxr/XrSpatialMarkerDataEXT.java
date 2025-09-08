@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpatialMarkerDataEXT {
  *     XrSpatialCapabilityEXT capability;
  *     uint32_t markerId;
  *     {@link XrSpatialBufferEXT XrSpatialBufferEXT} data;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpatialMarkerDataEXT extends Struct<XrSpatialMarkerDataEXT> implements NativeResource {
 

@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkSamplerCustomBorderColorCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link VkClearColorValue VkClearColorValue} customBorderColor;
  *     VkFormat format;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkSamplerCustomBorderColorCreateInfoEXT extends Struct<VkSamplerCustomBorderColorCreateInfoEXT> implements NativeResource {
 

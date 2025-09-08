@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDeviceCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t enabledExtensionCount;
  *     char const * const * ppEnabledExtensionNames;
  *     {@link VkPhysicalDeviceFeatures VkPhysicalDeviceFeatures} const * pEnabledFeatures;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements NativeResource {
 

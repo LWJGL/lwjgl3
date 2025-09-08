@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkSamplerYcbcrConversionCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkChromaLocation yChromaOffset;
  *     VkFilter chromaFilter;
  *     VkBool32 forceExplicitReconstruction;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkSamplerYcbcrConversionCreateInfoKHR extends VkSamplerYcbcrConversionCreateInfo {
 

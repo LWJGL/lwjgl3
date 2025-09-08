@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.bgfx.BGFX.BGFX_TEXTURE_FORMAT_COUNT;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct bgfx_caps_t {
  *     bgfx_renderer_type_t rendererType;
  *     uint64_t supported;
@@ -29,7 +29,7 @@ import static org.lwjgl.bgfx.BGFX.BGFX_TEXTURE_FORMAT_COUNT;
  *     {@link BGFXCapsGPU bgfx_caps_gpu_t} gpu[4];
  *     {@link BGFXCapsLimits bgfx_caps_limits_t} limits;
  *     uint16_t formats[BGFX_TEXTURE_FORMAT_COUNT];
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct bgfx_caps_t")
 public class BGFXCaps extends Struct<BGFXCaps> {

@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPhysicalDeviceLayeredApiPropertiesListKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     uint32_t layeredApiCount;
  *     {@link VkPhysicalDeviceLayeredApiPropertiesKHR VkPhysicalDeviceLayeredApiPropertiesKHR} * pLayeredApis;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceLayeredApiPropertiesListKHR extends Struct<VkPhysicalDeviceLayeredApiPropertiesListKHR> implements NativeResource {
 

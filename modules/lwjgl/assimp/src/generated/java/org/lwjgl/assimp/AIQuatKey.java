@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiQuatKey {
  *     double mTime;
  *     {@link AIQuaternion struct aiQuaternion} mValue;
  *     aiAnimInterpolation mInterpolation;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiQuatKey")
 public class AIQuatKey extends Struct<AIQuatKey> implements NativeResource {

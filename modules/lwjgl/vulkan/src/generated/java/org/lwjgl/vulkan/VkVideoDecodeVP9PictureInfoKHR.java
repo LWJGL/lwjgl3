@@ -21,7 +21,7 @@ import org.lwjgl.vulkan.video.*;
 import static org.lwjgl.vulkan.KHRVideoDecodeVP9.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoDecodeVP9PictureInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -30,7 +30,7 @@ import static org.lwjgl.vulkan.KHRVideoDecodeVP9.*;
  *     uint32_t uncompressedHeaderOffset;
  *     uint32_t compressedHeaderOffset;
  *     uint32_t tilesOffset;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoDecodeVP9PictureInfoKHR extends Struct<VkVideoDecodeVP9PictureInfoKHR> implements NativeResource {
 

@@ -14,14 +14,14 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct JAWT_DrawingSurfaceInfo {
  *     void * platformInfo;
  *     {@link JAWTDrawingSurface JAWT_DrawingSurface} * ds;
  *     {@link JAWTRectangle JAWT_Rectangle} bounds;
  *     jint clipSize;
  *     {@link JAWTRectangle JAWT_Rectangle} * clip;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct JAWT_DrawingSurfaceInfo")
 public class JAWTDrawingSurfaceInfo extends Struct<JAWTDrawingSurfaceInfo> {

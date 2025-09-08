@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FMOD_CODEC_STATE {
  *     void * plugindata;
  *     {@link FMOD_CODEC_WAVEFORMAT struct FMOD_CODEC_WAVEFORMAT} * waveformat;
  *     {@link FMOD_CODEC_STATE_FUNCTIONS FMOD_CODEC_STATE_FUNCTIONS} * functions;
  *     int numsubsounds;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct FMOD_CODEC_STATE")
 public class FMOD_CODEC_STATE extends Struct<FMOD_CODEC_STATE> implements NativeResource {

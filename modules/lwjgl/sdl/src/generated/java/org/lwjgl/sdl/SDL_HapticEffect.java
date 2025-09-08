@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * union SDL_HapticEffect {
  *     Uint16 type;
  *     {@link SDL_HapticConstant SDL_HapticConstant} constant;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link SDL_HapticRamp SDL_HapticRamp} ramp;
  *     {@link SDL_HapticLeftRight SDL_HapticLeftRight} leftright;
  *     {@link SDL_HapticCustom SDL_HapticCustom} custom;
- * }}</pre>
+ * }</code></pre>
  */
 public class SDL_HapticEffect extends Struct<SDL_HapticEffect> implements NativeResource {
 

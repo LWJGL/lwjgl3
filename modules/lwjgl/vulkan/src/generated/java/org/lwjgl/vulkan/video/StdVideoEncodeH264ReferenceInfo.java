@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoEncodeH264ReferenceInfo {
  *     {@link StdVideoEncodeH264ReferenceInfoFlags StdVideoEncodeH264ReferenceInfoFlags} flags;
  *     StdVideoH264PictureType primary_pic_type;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint16_t long_term_pic_num;
  *     uint16_t long_term_frame_idx;
  *     uint8_t temporal_id;
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoEncodeH264ReferenceInfo extends Struct<StdVideoEncodeH264ReferenceInfo> implements NativeResource {
 

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrTrackableMarkerANDROID {
  *     XrStructureType type;
  *     void * next;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int32_t markerId;
  *     {@link XrPosef XrPosef} centerPose;
  *     {@link XrExtent2Df XrExtent2Df} extents;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrTrackableMarkerANDROID extends Struct<XrTrackableMarkerANDROID> implements NativeResource {
 

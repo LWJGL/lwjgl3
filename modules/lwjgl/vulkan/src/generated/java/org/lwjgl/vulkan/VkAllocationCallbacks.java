@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkAllocationCallbacks {
  *     void * pUserData;
  *     {@link VkAllocationFunctionI PFN_vkAllocationFunction} pfnAllocation;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkFreeFunctionI PFN_vkFreeFunction} pfnFree;
  *     {@link VkInternalAllocationNotificationI PFN_vkInternalAllocationNotification} pfnInternalAllocation;
  *     {@link VkInternalFreeNotificationI PFN_vkInternalFreeNotification} pfnInternalFree;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkAllocationCallbacks extends Struct<VkAllocationCallbacks> implements NativeResource {
 

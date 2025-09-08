@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrGeometryInstanceCreateInfoFB {
  *     XrStructureType type;
  *     void const * next;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrSpace baseSpace;
  *     {@link XrPosef XrPosef} pose;
  *     {@link XrVector3f XrVector3f} scale;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrGeometryInstanceCreateInfoFB extends Struct<XrGeometryInstanceCreateInfoFB> implements NativeResource {
 

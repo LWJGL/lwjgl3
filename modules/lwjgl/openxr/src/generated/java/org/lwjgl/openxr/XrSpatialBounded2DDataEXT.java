@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpatialBounded2DDataEXT {
  *     {@link XrPosef XrPosef} center;
  *     {@link XrExtent2Df XrExtent2Df} extents;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpatialBounded2DDataEXT extends Struct<XrSpatialBounded2DDataEXT> implements NativeResource {
 

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_StreamRec {
  *     unsigned char * base;
  *     unsigned long size;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     FT_Memory memory;
  *     unsigned char * cursor;
  *     unsigned char * limit;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct FT_StreamRec")
 public class FT_Stream extends Struct<FT_Stream> implements NativeResource {

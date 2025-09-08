@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct STBIR_RESIZE {
  *     void * user_data;
  *     void const * input_pixels;
@@ -55,7 +55,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link STBIRKernelCallbackI stbir__kernel_callback *}* vertical_filter_kernel;
  *     {@link STBIRSupportCallbackI stbir__support_callback *}* vertical_filter_support;
  *     stbir__info * samplers;
- * }}</pre>
+ * }</code></pre>
  */
 public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource {
 

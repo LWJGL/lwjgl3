@@ -19,12 +19,12 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.FBPassthrough.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrPassthroughColorMapMonoToRgbaFB {
  *     XrStructureType type;
  *     void const * next;
  *     {@link XrColor4f XrColor4f} textureColorMap[XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB];
- * }}</pre>
+ * }</code></pre>
  */
 public class XrPassthroughColorMapMonoToRgbaFB extends Struct<XrPassthroughColorMapMonoToRgbaFB> implements NativeResource {
 

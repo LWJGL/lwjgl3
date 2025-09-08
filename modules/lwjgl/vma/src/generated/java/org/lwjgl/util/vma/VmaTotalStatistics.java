@@ -17,12 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VmaTotalStatistics {
  *     {@link VmaDetailedStatistics VmaDetailedStatistics} memoryType[32];
  *     {@link VmaDetailedStatistics VmaDetailedStatistics} memoryHeap[16];
  *     {@link VmaDetailedStatistics VmaDetailedStatistics} total;
- * }}</pre>
+ * }</code></pre>
  */
 public class VmaTotalStatistics extends Struct<VmaTotalStatistics> implements NativeResource {
 

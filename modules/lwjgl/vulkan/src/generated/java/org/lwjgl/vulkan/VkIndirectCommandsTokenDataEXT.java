@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * union VkIndirectCommandsTokenDataEXT {
  *     {@link VkIndirectCommandsPushConstantTokenEXT VkIndirectCommandsPushConstantTokenEXT} const * pPushConstant;
  *     {@link VkIndirectCommandsVertexBufferTokenEXT VkIndirectCommandsVertexBufferTokenEXT} const * pVertexBuffer;
  *     {@link VkIndirectCommandsIndexBufferTokenEXT VkIndirectCommandsIndexBufferTokenEXT} const * pIndexBuffer;
  *     {@link VkIndirectCommandsExecutionSetTokenEXT VkIndirectCommandsExecutionSetTokenEXT} const * pExecutionSet;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkIndirectCommandsTokenDataEXT extends Struct<VkIndirectCommandsTokenDataEXT> implements NativeResource {
 

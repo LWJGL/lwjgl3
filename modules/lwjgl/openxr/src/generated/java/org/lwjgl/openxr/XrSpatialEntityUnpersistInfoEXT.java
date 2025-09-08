@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpatialEntityUnpersistInfoEXT {
  *     XrStructureType type;
  *     void const * next;
  *     {@link XrUuid XrUuid} persistUuid;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpatialEntityUnpersistInfoEXT extends Struct<XrSpatialEntityUnpersistInfoEXT> implements NativeResource {
 

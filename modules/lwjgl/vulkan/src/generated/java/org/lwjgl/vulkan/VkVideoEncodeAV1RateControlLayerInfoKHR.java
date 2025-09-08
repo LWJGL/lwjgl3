@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoEncodeAV1RateControlLayerInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkVideoEncodeAV1QIndexKHR VkVideoEncodeAV1QIndexKHR} maxQIndex;
  *     VkBool32 useMaxFrameSize;
  *     {@link VkVideoEncodeAV1FrameSizeKHR VkVideoEncodeAV1FrameSizeKHR} maxFrameSize;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoEncodeAV1RateControlLayerInfoKHR extends Struct<VkVideoEncodeAV1RateControlLayerInfoKHR> implements NativeResource {
 

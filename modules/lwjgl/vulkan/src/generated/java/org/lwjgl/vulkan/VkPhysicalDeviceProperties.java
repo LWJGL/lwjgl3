@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPhysicalDeviceProperties {
  *     uint32_t apiVersion;
  *     uint32_t driverVersion;
@@ -30,7 +30,7 @@ import static org.lwjgl.vulkan.VK10.*;
  *     uint8_t pipelineCacheUUID[VK_UUID_SIZE];
  *     {@link VkPhysicalDeviceLimits VkPhysicalDeviceLimits} limits;
  *     {@link VkPhysicalDeviceSparseProperties VkPhysicalDeviceSparseProperties} sparseProperties;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceProperties extends Struct<VkPhysicalDeviceProperties> implements NativeResource {
 

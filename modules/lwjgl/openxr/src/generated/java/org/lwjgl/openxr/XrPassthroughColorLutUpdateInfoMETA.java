@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrPassthroughColorLutUpdateInfoMETA {
  *     XrStructureType type;
  *     void const * next;
  *     {@link XrPassthroughColorLutDataMETA XrPassthroughColorLutDataMETA} data;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrPassthroughColorLutUpdateInfoMETA extends Struct<XrPassthroughColorLutUpdateInfoMETA> implements NativeResource {
 

@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrPersistSpatialEntityCompletionEXT {
  *     XrStructureType type;
  *     void * next;
  *     XrResult futureResult;
  *     XrSpatialPersistenceContextResultEXT persistResult;
  *     {@link XrUuid XrUuid} persistUuid;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrPersistSpatialEntityCompletionEXT extends Struct<XrPersistSpatialEntityCompletionEXT> implements NativeResource {
 

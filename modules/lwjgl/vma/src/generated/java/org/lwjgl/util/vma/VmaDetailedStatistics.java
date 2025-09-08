@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VmaDetailedStatistics {
  *     {@link VmaStatistics VmaStatistics} statistics;
  *     uint32_t unusedRangeCount;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkDeviceSize allocationSizeMax;
  *     VkDeviceSize unusedRangeSizeMin;
  *     VkDeviceSize unusedRangeSizeMax;
- * }}</pre>
+ * }</code></pre>
  */
 public class VmaDetailedStatistics extends Struct<VmaDetailedStatistics> implements NativeResource {
 

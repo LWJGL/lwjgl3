@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrFoveationConfigurationHTC {
  *     XrFoveationLevelHTC level;
  *     float clearFovDegree;
  *     {@link XrVector2f XrVector2f} focalCenterOffset;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrFoveationConfigurationHTC extends Struct<XrFoveationConfigurationHTC> implements NativeResource {
 

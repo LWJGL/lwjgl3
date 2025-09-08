@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_str {
  *     {@link NkBuffer struct nk_buffer} buffer;
  *     int len;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_str")
 public class NkStr extends Struct<NkStr> implements NativeResource {

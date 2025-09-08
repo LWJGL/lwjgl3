@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkAccelerationStructureGeometryMotionTrianglesDataNV {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} vertexData;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkAccelerationStructureGeometryMotionTrianglesDataNV extends Struct<VkAccelerationStructureGeometryMotionTrianglesDataNV> implements NativeResource {
 

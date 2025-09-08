@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_draw_list {
  *     {@link NkRect struct nk_rect} clip_rect;
  *     {@link NkVec2 struct nk_vec2} circle_vtx[12];
@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     enum nk_anti_aliasing line_AA;
  *     enum nk_anti_aliasing shape_AA;
  *     {@link NkHandle nk_handle} userdata;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_draw_list")
 public class NkDrawList extends Struct<NkDrawList> implements NativeResource {

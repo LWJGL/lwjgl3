@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct statx {
  *     __u32 stx_mask;
  *     __u32 stx_blksize;
@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     __u64 stx_mnt_id;
  *     __u64 __spare2;
  *     __u64 __spare3[12];
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct statx")
 public class Statx extends Struct<Statx> implements NativeResource {

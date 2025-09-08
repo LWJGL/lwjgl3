@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSwapchainStateSamplerVulkanFB {
  *     XrStructureType type;
  *     void * next;
@@ -33,7 +33,7 @@ import org.lwjgl.vulkan.*;
  *     VkComponentSwizzle swizzleAlpha;
  *     float maxAnisotropy;
  *     {@link XrColor4f XrColor4f} borderColor;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSwapchainStateSamplerVulkanFB extends Struct<XrSwapchainStateSamplerVulkanFB> implements NativeResource {
 

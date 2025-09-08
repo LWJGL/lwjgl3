@@ -17,10 +17,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct bgfx_allocator_interface_t {
  *     {@link BGFXAllocatorVtbl bgfx_allocator_vtbl_t} const * vtbl;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct bgfx_allocator_interface_t")
 public class BGFXAllocatorInterface extends Struct<BGFXAllocatorInterface> implements NativeResource {

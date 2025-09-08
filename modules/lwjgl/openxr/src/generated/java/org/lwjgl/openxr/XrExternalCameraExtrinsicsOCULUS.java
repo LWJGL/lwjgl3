@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrExternalCameraExtrinsicsOCULUS {
  *     XrTime lastChangeTime;
  *     XrExternalCameraStatusFlagsOCULUS cameraStatusFlags;
  *     XrExternalCameraAttachedToDeviceOCULUS attachedToDevice;
  *     {@link XrPosef XrPosef} relativePose;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrExternalCameraExtrinsicsOCULUS extends Struct<XrExternalCameraExtrinsicsOCULUS> implements NativeResource {
 

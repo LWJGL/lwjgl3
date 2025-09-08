@@ -14,12 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpaceVelocityData {
  *     XrSpaceVelocityFlags velocityFlags;
  *     {@link XrVector3f XrVector3f} linearVelocity;
  *     {@link XrVector3f XrVector3f} angularVelocity;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpaceVelocityData extends Struct<XrSpaceVelocityData> {
 

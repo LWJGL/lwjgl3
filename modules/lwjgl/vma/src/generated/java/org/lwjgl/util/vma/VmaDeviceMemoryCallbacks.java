@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VmaDeviceMemoryCallbacks {
  *     {@link VmaAllocateDeviceMemoryFunctionI PFN_vmaAllocateDeviceMemoryFunction} pfnAllocate;
  *     {@link VmaFreeDeviceMemoryFunctionI PFN_vmaFreeDeviceMemoryFunction} pfnFree;
  *     void * pUserData;
- * }}</pre>
+ * }</code></pre>
  */
 public class VmaDeviceMemoryCallbacks extends Struct<VmaDeviceMemoryCallbacks> implements NativeResource {
 

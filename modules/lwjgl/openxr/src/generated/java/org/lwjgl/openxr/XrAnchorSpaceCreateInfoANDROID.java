@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrAnchorSpaceCreateInfoANDROID {
  *     XrStructureType type;
  *     void const * next;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrTime time;
  *     {@link XrPosef XrPosef} pose;
  *     XrTrackableANDROID trackable;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrAnchorSpaceCreateInfoANDROID extends Struct<XrAnchorSpaceCreateInfoANDROID> implements NativeResource {
 

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkConvertCooperativeVectorMatrixInfoNV {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     size_t srcStride;
  *     VkCooperativeVectorMatrixLayoutNV dstLayout;
  *     size_t dstStride;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkConvertCooperativeVectorMatrixInfoNV extends Struct<VkConvertCooperativeVectorMatrixInfoNV> implements NativeResource {
 

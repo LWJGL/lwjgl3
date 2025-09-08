@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPhysicalDeviceTileShadingPropertiesQCOM {
  *     VkStructureType sType;
  *     void * pNext;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 preferNonCoherent;
  *     {@link VkExtent2D VkExtent2D} tileGranularity;
  *     {@link VkExtent2D VkExtent2D} maxTileShadingRate;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceTileShadingPropertiesQCOM extends Struct<VkPhysicalDeviceTileShadingPropertiesQCOM> implements NativeResource {
 

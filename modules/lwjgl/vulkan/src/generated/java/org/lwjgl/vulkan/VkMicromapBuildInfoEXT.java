@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkMicromapBuildInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkDeviceOrHostAddressKHR VkDeviceOrHostAddressKHR} scratchData;
  *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} triangleArray;
  *     VkDeviceSize triangleArrayStride;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkMicromapBuildInfoEXT extends Struct<VkMicromapBuildInfoEXT> implements NativeResource {
 

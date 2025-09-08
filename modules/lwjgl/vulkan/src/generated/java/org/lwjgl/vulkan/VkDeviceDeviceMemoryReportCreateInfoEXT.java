@@ -17,14 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDeviceDeviceMemoryReportCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkDeviceMemoryReportFlagsEXT flags;
  *     {@link VkDeviceMemoryReportCallbackEXTI PFN_vkDeviceMemoryReportCallbackEXT} pfnUserCallback;
  *     void * pUserData;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDeviceDeviceMemoryReportCreateInfoEXT extends Struct<VkDeviceDeviceMemoryReportCreateInfoEXT> implements NativeResource {
 

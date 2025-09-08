@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDisplayPresentInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link VkRect2D VkRect2D} srcRect;
  *     {@link VkRect2D VkRect2D} dstRect;
  *     VkBool32 persistent;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDisplayPresentInfoKHR extends Struct<VkDisplayPresentInfoKHR> implements NativeResource {
 

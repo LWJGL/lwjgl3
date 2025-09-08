@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPipelineSampleLocationsStateCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkBool32 sampleLocationsEnable;
  *     {@link VkSampleLocationsInfoEXT VkSampleLocationsInfoEXT} sampleLocationsInfo;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct<VkPipelineSampleLocationsStateCreateInfoEXT> implements NativeResource {
 

@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkImageFormatProperties {
  *     {@link VkExtent3D VkExtent3D} maxExtent;
  *     uint32_t maxMipLevels;
  *     uint32_t maxArrayLayers;
  *     VkSampleCountFlags sampleCounts;
  *     VkDeviceSize maxResourceSize;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkImageFormatProperties extends Struct<VkImageFormatProperties> implements NativeResource {
 

@@ -17,14 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct io_uring_probe {
  *     __u8 last_op;
  *     __u8 ops_len;
  *     __u16 resv;
  *     __u32 resv2[3];
  *     {@link IOURingProbeOp struct io_uring_probe_op} ops[0];
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct io_uring_probe")
 public class IOURingProbe extends Struct<IOURingProbe> implements NativeResource {

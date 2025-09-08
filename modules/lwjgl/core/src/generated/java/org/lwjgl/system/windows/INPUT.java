@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct INPUT {
  *     DWORD type;
  *     union {
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         {@link KEYBDINPUT KEYBDINPUT} ki;
  *         {@link HARDWAREINPUT HARDWAREINPUT} hi;
  *     } DUMMYUNIONNAME;
- * }}</pre>
+ * }</code></pre>
  */
 public class INPUT extends Struct<INPUT> implements NativeResource {
 

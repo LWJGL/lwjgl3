@@ -15,7 +15,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkShaderStatisticsInfoAMD {
  *     VkShaderStageFlags shaderStageMask;
  *     {@link VkShaderResourceUsageAMD VkShaderResourceUsageAMD} resourceUsage;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     uint32_t numAvailableVgprs;
  *     uint32_t numAvailableSgprs;
  *     uint32_t computeWorkGroupSize[3];
- * }}</pre>
+ * }</code></pre>
  */
 public class VkShaderStatisticsInfoAMD extends Struct<VkShaderStatisticsInfoAMD> {
 

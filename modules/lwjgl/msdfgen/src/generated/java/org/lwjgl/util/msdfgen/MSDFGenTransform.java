@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct msdf_transform {
  *     {@link MSDFGenVector2 struct msdf_vector2} scale;
  *     {@link MSDFGenVector2 struct msdf_vector2} translation;
  *     {@link MSDFGenRange struct msdf_range} distance_mapping;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct msdf_transform")
 public class MSDFGenTransform extends Struct<MSDFGenTransform> implements NativeResource {

@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrRenderModelNodeStateEXT {
  *     {@link XrPosef XrPosef} nodePose;
  *     XrBool32 isVisible;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrRenderModelNodeStateEXT extends Struct<XrRenderModelNodeStateEXT> implements NativeResource {
 

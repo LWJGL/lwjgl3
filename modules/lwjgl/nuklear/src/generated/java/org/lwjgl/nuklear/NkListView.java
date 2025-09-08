@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_list_view {
  *     int begin;
  *     int end;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkContext struct nk_context} * ctx;
  *     nk_uint * scroll_pointer;
  *     nk_uint scroll_value;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_list_view")
 public class NkListView extends Struct<NkListView> implements NativeResource {

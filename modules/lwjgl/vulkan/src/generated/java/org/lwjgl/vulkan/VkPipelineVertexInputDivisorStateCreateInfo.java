@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPipelineVertexInputDivisorStateCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t vertexBindingDivisorCount;
  *     {@link VkVertexInputBindingDivisorDescription VkVertexInputBindingDivisorDescription} const * pVertexBindingDivisors;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPipelineVertexInputDivisorStateCreateInfo extends Struct<VkPipelineVertexInputDivisorStateCreateInfo> implements NativeResource {
 

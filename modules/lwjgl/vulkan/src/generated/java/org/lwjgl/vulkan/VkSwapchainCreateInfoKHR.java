@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkSwapchainCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkPresentModeKHR presentMode;
  *     VkBool32 clipped;
  *     VkSwapchainKHR oldSwapchain;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkSwapchainCreateInfoKHR extends Struct<VkSwapchainCreateInfoKHR> implements NativeResource {
 

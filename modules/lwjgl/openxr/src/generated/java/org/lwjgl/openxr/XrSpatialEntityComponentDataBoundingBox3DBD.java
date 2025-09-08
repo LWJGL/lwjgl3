@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpatialEntityComponentDataBoundingBox3DBD {
  *     XrStructureType type;
  *     void * next;
  *     {@link XrBoxf XrBoxf} boundingBox3D;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpatialEntityComponentDataBoundingBox3DBD extends Struct<XrSpatialEntityComponentDataBoundingBox3DBD> implements NativeResource {
 

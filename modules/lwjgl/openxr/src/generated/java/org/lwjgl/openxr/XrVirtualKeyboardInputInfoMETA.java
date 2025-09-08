@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrVirtualKeyboardInputInfoMETA {
  *     XrStructureType type;
  *     void const * next;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrSpace inputSpace;
  *     {@link XrPosef XrPosef} inputPoseInSpace;
  *     XrVirtualKeyboardInputStateFlagsMETA inputState;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrVirtualKeyboardInputInfoMETA extends Struct<XrVirtualKeyboardInputInfoMETA> implements NativeResource {
 

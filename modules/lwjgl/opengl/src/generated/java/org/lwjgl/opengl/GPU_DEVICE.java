@@ -18,14 +18,14 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.system.windows.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct GPU_DEVICE {
  *     DWORD cb;
  *     CHAR DeviceName[32];
  *     CHAR DeviceString[128];
  *     DWORD Flags;
  *     {@link RECT RECT} rcVirtualScreen;
- * }}</pre>
+ * }</code></pre>
  */
 public class GPU_DEVICE extends Struct<GPU_DEVICE> implements NativeResource {
 

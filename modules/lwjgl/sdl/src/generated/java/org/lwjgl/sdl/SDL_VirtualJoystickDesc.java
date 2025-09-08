@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct SDL_VirtualJoystickDesc {
  *     Uint32 version;
  *     Uint16 type;
@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     bool (* SendEffect) (void * userdata, void const * data, int size);
  *     bool (* SetSensorsEnabled) (void * userdata, bool enabled);
  *     void (* Cleanup) (void * userdata);
- * }}</pre>
+ * }</code></pre>
  */
 public class SDL_VirtualJoystickDesc extends Struct<SDL_VirtualJoystickDesc> implements NativeResource {
 

@@ -155,14 +155,18 @@ private val CODE_BLOCK_ESCAPE_PATTERN = "^".toRegex(RegexOption.MULTILINE) // li
 private val CODE_BLOCK_TAB_PATTERN = "\t".toRegex() // tabs
 
 /** Useful for pre-formatted code blocks. HTML markup is not allowed and will be escaped. */
-fun codeBlock(code: String) = """<pre>{@code
-${
-    code
-        .htmlEscaped
+fun codeBlock(code: String): String {
+    val escaped = code.htmlEscaped
+    val processed = escaped
         .replace(CODE_BLOCK_TRIM_PATTERN, "") // ...trim
         .replace(CODE_BLOCK_ESCAPE_PATTERN, "\uFFFF") // ...escape
         .replace(CODE_BLOCK_TAB_PATTERN, "    ") // ...replace with 4 spaces for consistent formatting.
-}}</pre>"""
+    return if (escaped !== code || code.contains("{@"))
+        """<pre><code>
+${processed}</code></pre>"""
+    else """<pre>{@code
+${processed}}</pre>"""
+}
 
 fun url(href: String, innerHTML: String = href) = """<a href="$href">$innerHTML</a>"""
 

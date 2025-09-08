@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiBone {
  *     {@link AIString struct aiString} mName;
  *     unsigned int mNumWeights;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link AINode struct aiNode} * mNode;
  *     {@link AIVertexWeight struct aiVertexWeight} * mWeights;
  *     {@link AIMatrix4x4 struct aiMatrix4x4} mOffsetMatrix;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiBone")
 public class AIBone extends Struct<AIBone> implements NativeResource {

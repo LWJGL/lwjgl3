@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct CXIdxAttrInfo {
  *     CXIdxAttrKind kind;
  *     {@link CXCursor CXCursor} cursor;
  *     {@link CXIdxLoc CXIdxLoc} loc;
- * }}</pre>
+ * }</code></pre>
  */
 public class CXIdxAttrInfo extends Struct<CXIdxAttrInfo> implements NativeResource {
 

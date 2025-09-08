@@ -17,11 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.lz4.LZ4HC.LZ4_STREAMHC_MINSIZE;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * union LZ4_streamHC_t {
  *     char minStateSize[LZ4_STREAMHC_MINSIZE];
  *     {@link LZ4HCCCtxInternal struct LZ4HC_CCtx_internal} internal_donotuse;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("union LZ4_streamHC_t")
 public class LZ4StreamHC extends Struct<LZ4StreamHC> {

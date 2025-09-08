@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.video.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoEncodeAV1CapabilitiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
@@ -46,7 +46,7 @@ import org.lwjgl.vulkan.video.*;
  *     VkBool32 prefersGopRemainingFrames;
  *     VkBool32 requiresGopRemainingFrames;
  *     VkVideoEncodeAV1StdFlagsKHR stdSyntaxFlags;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoEncodeAV1CapabilitiesKHR extends Struct<VkVideoEncodeAV1CapabilitiesKHR> implements NativeResource {
 

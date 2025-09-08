@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct SDL_GPUColorTargetInfo {
  *     SDL_GPUTexture * texture;
  *     Uint32 mip_level;
@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     bool cycle_resolve_texture;
  *     Uint8 padding1;
  *     Uint8 padding2;
- * }}</pre>
+ * }</code></pre>
  */
 public class SDL_GPUColorTargetInfo extends Struct<SDL_GPUColorTargetInfo> implements NativeResource {
 

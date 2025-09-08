@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrHandMeshVertexBufferMSFT {
  *     XrTime vertexUpdateTime;
  *     uint32_t vertexCapacityInput;
  *     uint32_t vertexCountOutput;
  *     {@link XrHandMeshVertexMSFT XrHandMeshVertexMSFT} * vertices;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrHandMeshVertexBufferMSFT extends Struct<XrHandMeshVertexBufferMSFT> implements NativeResource {
 

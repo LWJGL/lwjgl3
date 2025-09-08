@@ -14,7 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_SVG_DocumentRec {
  *     FT_Byte * svg_document;
  *     FT_ULong svg_document_length;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_UShort end_glyph_id;
  *     {@link FT_Matrix FT_Matrix} transform;
  *     {@link FT_Vector FT_Vector} delta;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct FT_SVG_DocumentRec")
 public class FT_SVG_Document extends Struct<FT_SVG_Document> {

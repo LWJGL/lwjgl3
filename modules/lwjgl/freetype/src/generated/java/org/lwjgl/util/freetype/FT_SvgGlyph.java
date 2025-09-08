@@ -14,7 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_SvgGlyphRec {
  *     {@link FT_Glyph FT_GlyphRec} root;
  *     FT_Byte * svg_document;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_UShort end_glyph_id;
  *     {@link FT_Matrix FT_Matrix} transform;
  *     {@link FT_Vector FT_Vector} delta;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct FT_SvgGlyphRec")
 public class FT_SvgGlyph extends Struct<FT_SvgGlyph> {

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiNodeAnim {
  *     {@link AIString struct aiString} mNodeName;
  *     unsigned int mNumPositionKeys;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link AIVectorKey struct aiVectorKey} * mScalingKeys;
  *     aiAnimBehaviour mPreState;
  *     aiAnimBehaviour mPostState;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiNodeAnim")
 public class AINodeAnim extends Struct<AINodeAnim> implements NativeResource {

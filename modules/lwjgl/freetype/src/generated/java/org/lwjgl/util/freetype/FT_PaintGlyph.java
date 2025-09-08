@@ -14,11 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_PaintGlyph {
  *     {@link FT_OpaquePaint FT_OpaquePaintRec} paint;
  *     FT_UInt glyphID;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_PaintGlyph extends Struct<FT_PaintGlyph> {
 

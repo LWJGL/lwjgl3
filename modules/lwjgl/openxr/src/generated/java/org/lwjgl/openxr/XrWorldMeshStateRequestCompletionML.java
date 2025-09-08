@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrWorldMeshStateRequestCompletionML {
  *     XrStructureType type;
  *     void * next;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t meshBlockStateCapacityInput;
  *     uint32_t meshBlockStateCountOutput;
  *     {@link XrWorldMeshBlockStateML XrWorldMeshBlockStateML} * meshBlockStates;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrWorldMeshStateRequestCompletionML extends Struct<XrWorldMeshStateRequestCompletionML> implements NativeResource {
 

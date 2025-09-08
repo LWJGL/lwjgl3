@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPushDescriptorSetInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t set;
  *     uint32_t descriptorWriteCount;
  *     {@link VkWriteDescriptorSet VkWriteDescriptorSet} const * pDescriptorWrites;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPushDescriptorSetInfo extends Struct<VkPushDescriptorSetInfo> implements NativeResource {
 

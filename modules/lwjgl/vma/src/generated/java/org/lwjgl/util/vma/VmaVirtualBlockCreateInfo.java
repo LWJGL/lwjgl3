@@ -18,12 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VmaVirtualBlockCreateInfo {
  *     VkDeviceSize size;
  *     VmaVirtualBlockCreateFlagBits flags;
  *     {@link VkAllocationCallbacks VkAllocationCallbacks} const * pAllocationCallbacks;
- * }}</pre>
+ * }</code></pre>
  */
 public class VmaVirtualBlockCreateInfo extends Struct<VmaVirtualBlockCreateInfo> implements NativeResource {
 

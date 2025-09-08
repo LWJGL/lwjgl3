@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_Raster_Params {
  *     {@link FT_Bitmap FT_Bitmap} const * target;
  *     void const * source;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     FT_Raster_BitTest_Func bit_set;
  *     void * user;
  *     {@link FT_BBox FT_BBox} clip_box;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_Raster_Params extends Struct<FT_Raster_Params> implements NativeResource {
 

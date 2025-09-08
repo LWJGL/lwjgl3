@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkImageMemoryBarrier {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t dstQueueFamilyIndex;
  *     VkImage image;
  *     {@link VkImageSubresourceRange VkImageSubresourceRange} subresourceRange;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkImageMemoryBarrier extends Struct<VkImageMemoryBarrier> implements NativeResource {
 

@@ -17,11 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrBaseInStructure {
  *     XrStructureType type;
  *     {@link XrBaseInStructure XrBaseInStructure} const * next;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrBaseInStructure extends Struct<XrBaseInStructure> implements NativeResource {
 

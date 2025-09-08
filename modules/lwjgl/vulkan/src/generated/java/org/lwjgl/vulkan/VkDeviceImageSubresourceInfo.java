@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDeviceImageSubresourceInfo {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link VkImageCreateInfo VkImageCreateInfo} const * pCreateInfo;
  *     {@link VkImageSubresource2 VkImageSubresource2} const * pSubresource;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDeviceImageSubresourceInfo extends Struct<VkDeviceImageSubresourceInfo> implements NativeResource {
 

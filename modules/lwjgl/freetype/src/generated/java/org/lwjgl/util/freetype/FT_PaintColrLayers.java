@@ -14,10 +14,10 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_PaintColrLayers {
  *     {@link FT_LayerIterator FT_LayerIterator} layer_iterator;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_PaintColrLayers extends Struct<FT_PaintColrLayers> {
 

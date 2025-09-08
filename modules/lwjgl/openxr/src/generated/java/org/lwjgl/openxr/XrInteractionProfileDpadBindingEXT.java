@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrInteractionProfileDpadBindingEXT {
  *     XrStructureType type;
  *     void const * next;
@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrBool32 isSticky;
  *     {@link XrHapticBaseHeader XrHapticBaseHeader} const * onHaptic;
  *     {@link XrHapticBaseHeader XrHapticBaseHeader} const * offHaptic;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrInteractionProfileDpadBindingEXT extends Struct<XrInteractionProfileDpadBindingEXT> implements NativeResource {
 

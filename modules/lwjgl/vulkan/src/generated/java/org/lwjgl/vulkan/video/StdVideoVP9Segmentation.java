@@ -19,14 +19,14 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecVP9.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoVP9Segmentation {
  *     {@link StdVideoVP9SegmentationFlags StdVideoVP9SegmentationFlags} flags;
  *     uint8_t segmentation_tree_probs[STD_VIDEO_VP9_MAX_SEGMENTATION_TREE_PROBS];
  *     uint8_t segmentation_pred_prob[STD_VIDEO_VP9_MAX_SEGMENTATION_PRED_PROB];
  *     uint8_t FeatureEnabled[STD_VIDEO_VP9_MAX_SEGMENTS];
  *     int16_t FeatureData[STD_VIDEO_VP9_SEG_LVL_MAX];
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoVP9Segmentation extends Struct<StdVideoVP9Segmentation> implements NativeResource {
 

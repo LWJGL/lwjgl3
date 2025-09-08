@@ -15,7 +15,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct NSVGshape {
  *     char id[64];
  *     {@link NSVGPaint NSVGpaint} fill;
@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     float xform[6];
  *     {@link NSVGPath NSVGpath} * paths;
  *     {@link NSVGShape NSVGshape} * next;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct NSVGshape")
 public class NSVGShape extends Struct<NSVGShape> {

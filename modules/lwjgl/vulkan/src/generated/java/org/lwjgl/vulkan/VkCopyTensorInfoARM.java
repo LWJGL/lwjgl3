@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkCopyTensorInfoARM {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkTensorARM dstTensor;
  *     uint32_t regionCount;
  *     {@link VkTensorCopyARM VkTensorCopyARM} const * pRegions;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkCopyTensorInfoARM extends Struct<VkCopyTensorInfoARM> implements NativeResource {
 

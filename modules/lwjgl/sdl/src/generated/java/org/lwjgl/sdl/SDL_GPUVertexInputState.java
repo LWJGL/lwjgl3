@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct SDL_GPUVertexInputState {
  *     {@link SDL_GPUVertexBufferDescription SDL_GPUVertexBufferDescription} const * vertex_buffer_descriptions;
  *     Uint32 num_vertex_buffers;
  *     {@link SDL_GPUVertexAttribute SDL_GPUVertexAttribute} const * vertex_attributes;
  *     Uint32 num_vertex_attributes;
- * }}</pre>
+ * }</code></pre>
  */
 public class SDL_GPUVertexInputState extends Struct<SDL_GPUVertexInputState> implements NativeResource {
 

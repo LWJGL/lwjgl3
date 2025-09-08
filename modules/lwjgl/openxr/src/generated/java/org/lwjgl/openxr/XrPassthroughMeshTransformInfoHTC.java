@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrPassthroughMeshTransformInfoHTC {
  *     XrStructureType type;
  *     void const * next;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrTime time;
  *     {@link XrPosef XrPosef} pose;
  *     {@link XrVector3f XrVector3f} scale;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrPassthroughMeshTransformInfoHTC extends Struct<XrPassthroughMeshTransformInfoHTC> implements NativeResource {
 

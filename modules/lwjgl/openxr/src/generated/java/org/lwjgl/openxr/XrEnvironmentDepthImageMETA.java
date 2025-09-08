@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrEnvironmentDepthImageMETA {
  *     XrStructureType type;
  *     void const * next;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float nearZ;
  *     float farZ;
  *     {@link XrEnvironmentDepthImageViewMETA XrEnvironmentDepthImageViewMETA} views[2];
- * }}</pre>
+ * }</code></pre>
  */
 public class XrEnvironmentDepthImageMETA extends Struct<XrEnvironmentDepthImageMETA> implements NativeResource {
 

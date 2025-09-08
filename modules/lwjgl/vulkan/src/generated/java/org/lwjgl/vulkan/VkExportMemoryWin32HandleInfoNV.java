@@ -18,13 +18,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.system.windows.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkExportMemoryWin32HandleInfoNV {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link SECURITY_ATTRIBUTES SECURITY_ATTRIBUTES} const * pAttributes;
  *     DWORD dwAccess;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkExportMemoryWin32HandleInfoNV extends Struct<VkExportMemoryWin32HandleInfoNV> implements NativeResource {
 

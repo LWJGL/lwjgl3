@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkAccelerationStructureCreateInfoNV {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkDeviceSize compactedSize;
  *     {@link VkAccelerationStructureInfoNV VkAccelerationStructureInfoNV} info;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkAccelerationStructureCreateInfoNV extends Struct<VkAccelerationStructureCreateInfoNV> implements NativeResource {
 

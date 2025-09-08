@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct hb_glyph_info_t {
  *     hb_codepoint_t codepoint;
  *     hb_mask_t mask;
  *     uint32_t cluster;
  *     {@link hb_var_int_t hb_var_int_t} var1;
  *     {@link hb_var_int_t hb_var_int_t} var2;
- * }}</pre>
+ * }</code></pre>
  */
 public class hb_glyph_info_t extends Struct<hb_glyph_info_t> implements NativeResource {
 

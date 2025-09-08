@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_style_item {
  *     enum nk_style_item_type type;
  *     {@link NkStyleItemData union nk_style_item_data} data;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_style_item")
 public class NkStyleItem extends Struct<NkStyleItem> implements NativeResource {

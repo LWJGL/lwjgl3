@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoAV1TimingInfo {
  *     {@link StdVideoAV1TimingInfoFlags StdVideoAV1TimingInfoFlags} flags;
  *     uint32_t num_units_in_display_tick;
  *     uint32_t time_scale;
  *     uint32_t num_ticks_per_picture_minus_1;
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoAV1TimingInfo extends Struct<StdVideoAV1TimingInfo> implements NativeResource {
 

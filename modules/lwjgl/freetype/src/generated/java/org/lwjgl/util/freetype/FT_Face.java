@@ -15,7 +15,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_FaceRec {
  *     FT_Long num_faces;
  *     FT_Long face_index;
@@ -48,7 +48,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link FT_Generic FT_Generic} autohint;
  *     void * extensions;
  *     FT_Face_Internal internal;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct FT_FaceRec")
 public class FT_Face extends Struct<FT_Face> {

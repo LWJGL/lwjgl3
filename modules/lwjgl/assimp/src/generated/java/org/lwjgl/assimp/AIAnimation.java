@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiAnimation {
  *     {@link AIString struct aiString} mName;
  *     double mDuration;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link AIMeshAnim struct aiMeshAnim} ** mMeshChannels;
  *     unsigned int mNumMorphMeshChannels;
  *     {@link AIMeshMorphAnim struct aiMeshMorphAnim} ** mMorphMeshChannels;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiAnimation")
 public class AIAnimation extends Struct<AIAnimation> implements NativeResource {

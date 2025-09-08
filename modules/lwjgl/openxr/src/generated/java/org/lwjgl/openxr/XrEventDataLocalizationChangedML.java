@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrEventDataLocalizationChangedML {
  *     XrStructureType type;
  *     void const * next;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link XrLocalizationMapML XrLocalizationMapML} map;
  *     XrLocalizationMapConfidenceML confidence;
  *     XrLocalizationMapErrorFlagsML errorFlags;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrEventDataLocalizationChangedML extends Struct<XrEventDataLocalizationChangedML> implements NativeResource {
 

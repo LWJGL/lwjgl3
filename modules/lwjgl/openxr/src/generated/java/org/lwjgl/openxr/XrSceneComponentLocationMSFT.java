@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSceneComponentLocationMSFT {
  *     XrSpaceLocationFlags flags;
  *     {@link XrPosef XrPosef} pose;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSceneComponentLocationMSFT extends Struct<XrSceneComponentLocationMSFT> implements NativeResource {
 

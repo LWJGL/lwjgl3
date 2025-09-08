@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkTensorCreateInfoARM {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkSharingMode sharingMode;
  *     uint32_t queueFamilyIndexCount;
  *     uint32_t const * pQueueFamilyIndices;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkTensorCreateInfoARM extends Struct<VkTensorCreateInfoARM> implements NativeResource {
 

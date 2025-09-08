@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSceneComponentsLocateInfoMSFT {
  *     XrStructureType type;
  *     void const * next;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrTime time;
  *     uint32_t componentIdCount;
  *     {@link XrUuidMSFT XrUuidMSFT} const * componentIds;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSceneComponentsLocateInfoMSFT extends Struct<XrSceneComponentsLocateInfoMSFT> implements NativeResource {
 

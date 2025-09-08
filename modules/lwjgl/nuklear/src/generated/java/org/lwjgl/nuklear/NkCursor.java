@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_cursor {
  *     {@link NkImage struct nk_image} img;
  *     {@link NkVec2 struct nk_vec2} size;
  *     {@link NkVec2 struct nk_vec2} offset;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_cursor")
 public class NkCursor extends Struct<NkCursor> implements NativeResource {

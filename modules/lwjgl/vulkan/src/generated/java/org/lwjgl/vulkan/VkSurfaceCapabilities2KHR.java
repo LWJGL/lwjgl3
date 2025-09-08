@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkSurfaceCapabilities2KHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkSurfaceCapabilitiesKHR VkSurfaceCapabilitiesKHR} surfaceCapabilities;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkSurfaceCapabilities2KHR extends Struct<VkSurfaceCapabilities2KHR> implements NativeResource {
 

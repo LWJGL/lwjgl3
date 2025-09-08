@@ -17,14 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPipelineViewportCoarseSampleOrderStateCreateInfoNV {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkCoarseSampleOrderTypeNV sampleOrderType;
  *     uint32_t customSampleOrderCount;
  *     {@link VkCoarseSampleOrderCustomNV VkCoarseSampleOrderCustomNV} const * pCustomSampleOrders;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends Struct<VkPipelineViewportCoarseSampleOrderStateCreateInfoNV> implements NativeResource {
 

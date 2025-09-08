@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct stbtt_pack_range {
  *     float font_size;
  *     int first_unicode_codepoint_in_range;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link STBTTPackedchar stbtt_packedchar} * chardata_for_range;
  *     unsigned char h_oversample;
  *     unsigned char v_oversample;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct stbtt_pack_range")
 public class STBTTPackRange extends Struct<STBTTPackRange> implements NativeResource {

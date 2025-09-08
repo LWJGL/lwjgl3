@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkSparseImageMemoryRequirements2 {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkSparseImageMemoryRequirements VkSparseImageMemoryRequirements} memoryRequirements;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkSparseImageMemoryRequirements2 extends Struct<VkSparseImageMemoryRequirements2> implements NativeResource {
 

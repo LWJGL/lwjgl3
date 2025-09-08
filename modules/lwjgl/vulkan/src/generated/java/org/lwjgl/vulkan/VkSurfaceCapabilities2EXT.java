@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkSurfaceCapabilities2EXT {
  *     VkStructureType sType;
  *     void * pNext;
@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkCompositeAlphaFlagsKHR supportedCompositeAlpha;
  *     VkImageUsageFlags supportedUsageFlags;
  *     VkSurfaceCounterFlagsEXT supportedSurfaceCounters;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkSurfaceCapabilities2EXT extends Struct<VkSurfaceCapabilities2EXT> implements NativeResource {
 

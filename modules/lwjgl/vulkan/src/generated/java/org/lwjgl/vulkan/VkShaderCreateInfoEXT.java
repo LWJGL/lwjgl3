@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkShaderCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t pushConstantRangeCount;
  *     {@link VkPushConstantRange VkPushConstantRange} const * pPushConstantRanges;
  *     {@link VkSpecializationInfo VkSpecializationInfo} const * pSpecializationInfo;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkShaderCreateInfoEXT extends Struct<VkShaderCreateInfoEXT> implements NativeResource {
 

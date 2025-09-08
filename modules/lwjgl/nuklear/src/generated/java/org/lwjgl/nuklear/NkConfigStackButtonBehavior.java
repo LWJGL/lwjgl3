@@ -15,11 +15,11 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_config_stack_button_behavior {
  *     int head;
  *     {@link NkConfigStackButtonBehaviorElement struct nk_config_stack_button_behavior_element} elements[8];
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_config_stack_button_behavior")
 class NkConfigStackButtonBehavior extends Struct<NkConfigStackButtonBehavior> {

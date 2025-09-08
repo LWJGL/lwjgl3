@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkIndirectCommandsLayoutTokenEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkIndirectCommandsTokenTypeEXT type;
  *     {@link VkIndirectCommandsTokenDataEXT VkIndirectCommandsTokenDataEXT} data;
  *     uint32_t offset;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkIndirectCommandsLayoutTokenEXT extends Struct<VkIndirectCommandsLayoutTokenEXT> implements NativeResource {
 

@@ -14,11 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_OutlineGlyphRec {
  *     {@link FT_Glyph FT_GlyphRec} root;
  *     {@link FT_Outline FT_Outline} outline;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct FT_OutlineGlyphRec")
 public class FT_OutlineGlyph extends Struct<FT_OutlineGlyph> {

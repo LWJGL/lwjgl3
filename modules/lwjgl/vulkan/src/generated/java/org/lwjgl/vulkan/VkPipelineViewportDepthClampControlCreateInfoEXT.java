@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPipelineViewportDepthClampControlCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkDepthClampModeEXT depthClampMode;
  *     {@link VkDepthClampRangeEXT VkDepthClampRangeEXT} const * pDepthClampRange;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPipelineViewportDepthClampControlCreateInfoEXT extends Struct<VkPipelineViewportDepthClampControlCreateInfoEXT> implements NativeResource {
 

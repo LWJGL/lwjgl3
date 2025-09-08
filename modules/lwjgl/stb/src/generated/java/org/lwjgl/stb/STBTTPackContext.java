@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct stbtt_pack_context {
  *     void * user_allocator_context;
  *     {@link STBRPContext stbrp_context} * pack_info;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int v_oversample;
  *     unsigned char * pixels;
  *     {@link STBRPNode stbrp_node} * nodes;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct stbtt_pack_context")
 public class STBTTPackContext extends Struct<STBTTPackContext> implements NativeResource {

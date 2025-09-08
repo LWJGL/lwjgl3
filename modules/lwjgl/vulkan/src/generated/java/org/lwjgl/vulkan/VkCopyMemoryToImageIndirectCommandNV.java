@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkCopyMemoryToImageIndirectCommandNV {
  *     VkDeviceAddress srcAddress;
  *     uint32_t bufferRowLength;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} imageSubresource;
  *     {@link VkOffset3D VkOffset3D} imageOffset;
  *     {@link VkExtent3D VkExtent3D} imageExtent;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkCopyMemoryToImageIndirectCommandNV extends Struct<VkCopyMemoryToImageIndirectCommandNV> implements NativeResource {
 

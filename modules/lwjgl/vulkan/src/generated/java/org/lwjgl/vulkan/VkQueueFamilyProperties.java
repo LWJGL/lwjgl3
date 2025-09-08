@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkQueueFamilyProperties {
  *     VkQueueFlags queueFlags;
  *     uint32_t queueCount;
  *     uint32_t timestampValidBits;
  *     {@link VkExtent3D VkExtent3D} minImageTransferGranularity;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkQueueFamilyProperties extends Struct<VkQueueFamilyProperties> implements NativeResource {
 

@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrFrustumf {
  *     {@link XrPosef XrPosef} pose;
  *     {@link XrFovf XrFovf} fov;
  *     float nearZ;
  *     float farZ;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrFrustumf extends Struct<XrFrustumf> implements NativeResource {
 

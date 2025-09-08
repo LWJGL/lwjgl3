@@ -17,14 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrTrackableMarkerConfigurationANDROID {
  *     XrStructureType type;
  *     void * next;
  *     XrTrackableMarkerTrackingModeANDROID trackingMode;
  *     uint32_t databaseCount;
  *     {@link XrTrackableMarkerDatabaseANDROID XrTrackableMarkerDatabaseANDROID} const * databases;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrTrackableMarkerConfigurationANDROID extends Struct<XrTrackableMarkerConfigurationANDROID> implements NativeResource {
 

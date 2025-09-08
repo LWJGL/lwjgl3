@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkAccelerationStructureGeometrySpheresDataNV {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkIndexType indexType;
  *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} indexData;
  *     VkDeviceSize indexStride;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkAccelerationStructureGeometrySpheresDataNV extends Struct<VkAccelerationStructureGeometrySpheresDataNV> implements NativeResource {
 

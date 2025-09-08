@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct WINDOWPLACEMENT {
  *     UINT length;
  *     UINT flags;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link POINT POINT} ptMinPosition;
  *     {@link POINT POINT} ptMaxPosition;
  *     {@link RECT RECT} rcNormalPosition;
- * }}</pre>
+ * }</code></pre>
  */
 public class WINDOWPLACEMENT extends Struct<WINDOWPLACEMENT> implements NativeResource {
 

@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpaceQueryResultFB {
  *     XrSpace space;
  *     {@link XrUuidEXT XrUuidEXT} uuid;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpaceQueryResultFB extends Struct<XrSpaceQueryResultFB> implements NativeResource {
 

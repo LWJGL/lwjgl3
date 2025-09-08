@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct WNDCLASSEX {
  *     UINT cbSize;
  *     UINT style;
@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     LPCTSTR lpszMenuName;
  *     LPCTSTR lpszClassName;
  *     HICON hIconSm;
- * }}</pre>
+ * }</code></pre>
  */
 public class WNDCLASSEX extends Struct<WNDCLASSEX> implements NativeResource {
 

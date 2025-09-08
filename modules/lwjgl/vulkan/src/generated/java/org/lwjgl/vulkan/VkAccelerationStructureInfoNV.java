@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkAccelerationStructureInfoNV {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t instanceCount;
  *     uint32_t geometryCount;
  *     {@link VkGeometryNV VkGeometryNV} const * pGeometries;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkAccelerationStructureInfoNV extends Struct<VkAccelerationStructureInfoNV> implements NativeResource {
 

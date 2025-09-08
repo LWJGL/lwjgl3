@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkExecutionGraphPipelineCreateInfoAMDX {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkPipelineLayout layout;
  *     VkPipeline basePipelineHandle;
  *     int32_t basePipelineIndex;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkExecutionGraphPipelineCreateInfoAMDX extends Struct<VkExecutionGraphPipelineCreateInfoAMDX> implements NativeResource {
 

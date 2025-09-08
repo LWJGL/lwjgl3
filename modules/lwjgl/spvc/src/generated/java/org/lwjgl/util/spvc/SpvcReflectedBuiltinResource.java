@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct spvc_reflected_builtin_resource {
  *     SpvBuiltIn builtin;
  *     spvc_type_id value_type_id;
  *     {@link SpvcReflectedResource spvc_reflected_resource} resource;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct spvc_reflected_builtin_resource")
 public class SpvcReflectedBuiltinResource extends Struct<SpvcReflectedBuiltinResource> implements NativeResource {

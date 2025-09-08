@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrEventDataReferenceSpaceChangePending {
  *     XrStructureType type;
  *     void const * next;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrTime changeTime;
  *     XrBool32 poseValid;
  *     {@link XrPosef XrPosef} poseInPreviousSpace;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrEventDataReferenceSpaceChangePending extends Struct<XrEventDataReferenceSpaceChangePending> implements NativeResource {
 

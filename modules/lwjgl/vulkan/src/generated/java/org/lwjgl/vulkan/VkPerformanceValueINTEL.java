@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPerformanceValueINTEL {
  *     VkPerformanceValueTypeINTEL type;
  *     {@link VkPerformanceValueDataINTEL VkPerformanceValueDataINTEL} data;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPerformanceValueINTEL extends Struct<VkPerformanceValueINTEL> implements NativeResource {
 

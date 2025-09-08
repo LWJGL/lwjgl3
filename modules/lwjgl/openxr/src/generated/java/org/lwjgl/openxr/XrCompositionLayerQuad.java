@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrCompositionLayerQuad {
  *     XrStructureType type;
  *     void const * next;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link XrSwapchainSubImage XrSwapchainSubImage} subImage;
  *     {@link XrPosef XrPosef} pose;
  *     {@link XrExtent2Df XrExtent2Df} size;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrCompositionLayerQuad extends Struct<XrCompositionLayerQuad> implements NativeResource {
 

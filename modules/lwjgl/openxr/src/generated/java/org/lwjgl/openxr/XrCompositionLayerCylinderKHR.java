@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrCompositionLayerCylinderKHR {
  *     XrStructureType type;
  *     void const * next;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float radius;
  *     float centralAngle;
  *     float aspectRatio;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrCompositionLayerCylinderKHR extends Struct<XrCompositionLayerCylinderKHR> implements NativeResource {
 

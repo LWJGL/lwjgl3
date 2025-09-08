@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_style_window_header {
  *     {@link NkStyleItem struct nk_style_item} normal;
  *     {@link NkStyleItem struct nk_style_item} hover;
@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkVec2 struct nk_vec2} padding;
  *     {@link NkVec2 struct nk_vec2} label_padding;
  *     {@link NkVec2 struct nk_vec2} spacing;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_style_window_header")
 public class NkStyleWindowHeader extends Struct<NkStyleWindowHeader> implements NativeResource {

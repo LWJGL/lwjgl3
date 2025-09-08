@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkCoarseSampleOrderCustomNV {
  *     VkShadingRatePaletteEntryNV shadingRate;
  *     uint32_t sampleCount;
  *     uint32_t sampleLocationCount;
  *     {@link VkCoarseSampleLocationNV VkCoarseSampleLocationNV} const * pSampleLocations;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkCoarseSampleOrderCustomNV extends Struct<VkCoarseSampleOrderCustomNV> implements NativeResource {
 

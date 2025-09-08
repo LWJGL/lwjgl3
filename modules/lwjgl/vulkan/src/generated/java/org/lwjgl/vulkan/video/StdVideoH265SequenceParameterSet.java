@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoH265SequenceParameterSet {
  *     {@link StdVideoH265SpsFlags StdVideoH265SpsFlags} flags;
  *     StdVideoH265ChromaFormatIdc chroma_format_idc;
@@ -59,7 +59,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link StdVideoH265LongTermRefPicsSps StdVideoH265LongTermRefPicsSps} const * pLongTermRefPicsSps;
  *     {@link StdVideoH265SequenceParameterSetVui StdVideoH265SequenceParameterSetVui} const * pSequenceParameterSetVui;
  *     {@link StdVideoH265PredictorPaletteEntries StdVideoH265PredictorPaletteEntries} const * pPredictorPaletteEntries;
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoH265SequenceParameterSet extends Struct<StdVideoH265SequenceParameterSet> implements NativeResource {
 

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct NVGpaint {
  *     float xform[6];
  *     float extent[2];
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NVGColor NVGcolor} innerColor;
  *     {@link NVGColor NVGcolor} outerColor;
  *     int image;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct NVGpaint")
 public class NVGPaint extends Struct<NVGPaint> implements NativeResource {

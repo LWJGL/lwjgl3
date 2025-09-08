@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrPlaneDetectorBeginInfoEXT {
  *     XrStructureType type;
  *     void const * next;
@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float minArea;
  *     {@link XrPosef XrPosef} boundingBoxPose;
  *     {@link XrExtent3DfEXT XrExtent3DfEXT} boundingBoxExtent;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrPlaneDetectorBeginInfoEXT extends Struct<XrPlaneDetectorBeginInfoEXT> implements NativeResource {
 

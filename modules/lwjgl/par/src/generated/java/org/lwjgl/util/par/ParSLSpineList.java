@@ -17,14 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct parsl_spine_list {
  *     uint32_t num_vertices;
  *     uint16_t num_spines;
  *     {@link ParSLPosition parsl_position} * vertices;
  *     uint16_t * spine_lengths;
  *     bool closed;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct parsl_spine_list")
 public class ParSLSpineList extends Struct<ParSLSpineList> implements NativeResource {

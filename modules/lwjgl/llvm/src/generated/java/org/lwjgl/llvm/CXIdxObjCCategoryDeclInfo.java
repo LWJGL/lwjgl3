@@ -14,14 +14,14 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct CXIdxObjCCategoryDeclInfo {
  *     {@link CXIdxObjCContainerDeclInfo CXIdxObjCContainerDeclInfo} const * containerInfo;
  *     {@link CXIdxEntityInfo CXIdxEntityInfo} const * objcClass;
  *     {@link CXCursor CXCursor} classCursor;
  *     {@link CXIdxLoc CXIdxLoc} classLoc;
  *     {@link CXIdxObjCProtocolRefListInfo CXIdxObjCProtocolRefListInfo} const * protocols;
- * }}</pre>
+ * }</code></pre>
  */
 public class CXIdxObjCCategoryDeclInfo extends Struct<CXIdxObjCCategoryDeclInfo> {
 

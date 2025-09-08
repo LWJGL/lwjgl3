@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPhysicalDeviceSampleLocationsPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float sampleLocationCoordinateRange[2];
  *     uint32_t sampleLocationSubPixelBits;
  *     VkBool32 variableSampleLocations;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceSampleLocationsPropertiesEXT extends Struct<VkPhysicalDeviceSampleLocationsPropertiesEXT> implements NativeResource {
 

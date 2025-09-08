@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrEnvironmentDepthImageViewMETA {
  *     XrStructureType type;
  *     void const * next;
  *     {@link XrFovf XrFovf} fov;
  *     {@link XrPosef XrPosef} pose;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrEnvironmentDepthImageViewMETA extends Struct<XrEnvironmentDepthImageViewMETA> implements NativeResource {
 

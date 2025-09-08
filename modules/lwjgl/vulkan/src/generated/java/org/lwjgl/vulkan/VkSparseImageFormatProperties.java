@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkSparseImageFormatProperties {
  *     VkImageAspectFlags aspectMask;
  *     {@link VkExtent3D VkExtent3D} imageGranularity;
  *     VkSparseImageFormatFlags flags;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkSparseImageFormatProperties extends Struct<VkSparseImageFormatProperties> implements NativeResource {
 

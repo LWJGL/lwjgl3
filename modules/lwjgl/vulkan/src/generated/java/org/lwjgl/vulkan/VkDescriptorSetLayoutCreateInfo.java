@@ -17,14 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDescriptorSetLayoutCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkDescriptorSetLayoutCreateFlags flags;
  *     uint32_t bindingCount;
  *     {@link VkDescriptorSetLayoutBinding VkDescriptorSetLayoutBinding} const * pBindings;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDescriptorSetLayoutCreateInfo extends Struct<VkDescriptorSetLayoutCreateInfo> implements NativeResource {
 

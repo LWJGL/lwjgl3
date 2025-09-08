@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH264.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoDecodeH264PictureInfo {
  *     {@link StdVideoDecodeH264PictureInfoFlags StdVideoDecodeH264PictureInfoFlags} flags;
  *     uint8_t seq_parameter_set_id;
@@ -29,7 +29,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH264.*;
  *     uint16_t frame_num;
  *     uint16_t idr_pic_id;
  *     int32_t PicOrderCnt[STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE];
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoDecodeH264PictureInfo extends Struct<StdVideoDecodeH264PictureInfo> implements NativeResource {
 

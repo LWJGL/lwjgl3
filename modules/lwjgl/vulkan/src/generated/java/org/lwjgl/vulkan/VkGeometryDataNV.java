@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkGeometryDataNV {
  *     {@link VkGeometryTrianglesNV VkGeometryTrianglesNV} triangles;
  *     {@link VkGeometryAABBNV VkGeometryAABBNV} aabbs;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkGeometryDataNV extends Struct<VkGeometryDataNV> implements NativeResource {
 

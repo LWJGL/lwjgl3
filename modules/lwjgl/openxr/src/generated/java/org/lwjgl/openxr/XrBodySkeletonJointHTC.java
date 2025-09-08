@@ -16,10 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrBodySkeletonJointHTC {
  *     {@link XrPosef XrPosef} pose;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrBodySkeletonJointHTC extends Struct<XrBodySkeletonJointHTC> implements NativeResource {
 

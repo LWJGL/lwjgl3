@@ -14,12 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_Size_Internal {
  *     void * module_data;
  *     FT_Render_Mode autohint_mode;
  *     {@link FT_Size_Metrics FT_Size_Metrics} autohint_metrics;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_Size_Internal extends Struct<FT_Size_Internal> {
 

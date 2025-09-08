@@ -14,12 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct NSVGimage {
  *     float width;
  *     float height;
  *     {@link NSVGShape NSVGshape} * shapes;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct NSVGimage")
 public class NSVGImage extends Struct<NSVGImage> {

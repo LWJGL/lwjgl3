@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct CXPlatformAvailability {
  *     {@link CXString CXString} Platform;
  *     {@link CXVersion CXVersion} Introduced;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link CXVersion CXVersion} Obsoleted;
  *     int Unavailable;
  *     {@link CXString CXString} Message;
- * }}</pre>
+ * }</code></pre>
  */
 public class CXPlatformAvailability extends Struct<CXPlatformAvailability> implements NativeResource {
 

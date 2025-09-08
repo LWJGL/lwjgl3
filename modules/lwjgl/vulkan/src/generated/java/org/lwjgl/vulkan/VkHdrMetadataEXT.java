@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkHdrMetadataEXT {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float minLuminance;
  *     float maxContentLightLevel;
  *     float maxFrameAverageLightLevel;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkHdrMetadataEXT extends Struct<VkHdrMetadataEXT> implements NativeResource {
 

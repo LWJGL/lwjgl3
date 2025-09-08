@@ -14,7 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct CXIdxIncludedFileInfo {
  *     {@link CXIdxLoc CXIdxLoc} hashLoc;
  *     char const * filename;
@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     int isImport;
  *     int isAngled;
  *     int isModuleImport;
- * }}</pre>
+ * }</code></pre>
  */
 public class CXIdxIncludedFileInfo extends Struct<CXIdxIncludedFileInfo> {
 

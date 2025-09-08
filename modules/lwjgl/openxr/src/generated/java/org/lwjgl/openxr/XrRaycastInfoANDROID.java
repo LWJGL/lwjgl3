@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrRaycastInfoANDROID {
  *     XrStructureType type;
  *     void const * next;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link XrVector3f XrVector3f} trajectory;
  *     XrSpace space;
  *     XrTime time;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrRaycastInfoANDROID extends Struct<XrRaycastInfoANDROID> implements NativeResource {
 

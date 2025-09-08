@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkRect2D {
  *     {@link VkOffset2D VkOffset2D} offset;
  *     {@link VkExtent2D VkExtent2D} extent;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkRect2D extends Struct<VkRect2D> implements NativeResource {
 

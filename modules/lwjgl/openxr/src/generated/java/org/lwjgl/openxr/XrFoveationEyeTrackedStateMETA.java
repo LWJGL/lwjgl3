@@ -19,13 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.METAFoveationEyeTracked.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrFoveationEyeTrackedStateMETA {
  *     XrStructureType type;
  *     void * next;
  *     {@link XrVector2f XrVector2f} foveationCenter[XR_FOVEATION_CENTER_SIZE_META];
  *     XrFoveationEyeTrackedStateFlagsMETA flags;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrFoveationEyeTrackedStateMETA extends Struct<XrFoveationEyeTrackedStateMETA> implements NativeResource {
 

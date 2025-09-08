@@ -17,14 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrFoveationApplyInfoHTC {
  *     XrStructureType type;
  *     void const * next;
  *     XrFoveationModeHTC mode;
  *     uint32_t subImageCount;
  *     {@link XrSwapchainSubImage XrSwapchainSubImage} * subImages;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrFoveationApplyInfoHTC extends Struct<XrFoveationApplyInfoHTC> implements NativeResource {
 

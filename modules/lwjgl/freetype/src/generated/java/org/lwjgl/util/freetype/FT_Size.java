@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_SizeRec {
  *     {@link FT_Face FT_Face} face;
  *     {@link FT_Generic FT_Generic} generic;
  *     {@link FT_Size_Metrics FT_Size_Metrics} metrics;
  *     {@link FT_Size_Internal FT_Size_Internal} * internal;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct FT_SizeRec")
 public class FT_Size extends Struct<FT_Size> implements NativeResource {

@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkAttachmentSampleLocationsEXT {
  *     uint32_t attachmentIndex;
  *     {@link VkSampleLocationsInfoEXT VkSampleLocationsInfoEXT} sampleLocationsInfo;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkAttachmentSampleLocationsEXT extends Struct<VkAttachmentSampleLocationsEXT> implements NativeResource {
 

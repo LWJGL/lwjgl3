@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkWriteDescriptorSet {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkDescriptorImageInfo VkDescriptorImageInfo} const * pImageInfo;
  *     {@link VkDescriptorBufferInfo VkDescriptorBufferInfo} const * pBufferInfo;
  *     VkBufferView const * pTexelBufferView;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkWriteDescriptorSet extends Struct<VkWriteDescriptorSet> implements NativeResource {
 

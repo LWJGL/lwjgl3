@@ -19,14 +19,14 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoDecodeAV1ReferenceInfo {
  *     {@link StdVideoDecodeAV1ReferenceInfoFlags StdVideoDecodeAV1ReferenceInfoFlags} flags;
  *     uint8_t frame_type;
  *     uint8_t RefFrameSignBias;
  *     uint8_t OrderHint;
  *     uint8_t SavedOrderHints[STD_VIDEO_AV1_NUM_REF_FRAMES];
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoDecodeAV1ReferenceInfo extends Struct<StdVideoDecodeAV1ReferenceInfo> implements NativeResource {
 

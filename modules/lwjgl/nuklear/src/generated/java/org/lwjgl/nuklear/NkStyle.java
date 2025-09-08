@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.nuklear.Nuklear.NK_CURSOR_COUNT;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_style {
  *     {@link NkUserFont struct nk_user_font} * font;
  *     {@link NkCursor struct nk_cursor} * cursors[NK_CURSOR_COUNT];
@@ -44,7 +44,7 @@ import static org.lwjgl.nuklear.Nuklear.NK_CURSOR_COUNT;
  *     {@link NkStyleTab struct nk_style_tab} tab;
  *     {@link NkStyleCombo struct nk_style_combo} combo;
  *     {@link NkStyleWindow struct nk_style_window} window;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_style")
 public class NkStyle extends Struct<NkStyle> implements NativeResource {

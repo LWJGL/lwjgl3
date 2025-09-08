@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct epoll_event {
  *     uint32_t events;
  *     {@link EpollData epoll_data_t} data;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct epoll_event")
 public class EpollEvent extends Struct<EpollEvent> implements NativeResource {

@@ -14,13 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_GlyphRec {
  *     FT_Library library;
  *     FT_Glyph_Class const * clazz;
  *     FT_Glyph_Format format;
  *     {@link FT_Vector FT_Vector} advance;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct FT_GlyphRec")
 public class FT_Glyph extends Struct<FT_Glyph> {

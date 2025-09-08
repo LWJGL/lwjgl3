@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPartitionedAccelerationStructureWriteInstanceDataNV {
  *     {@link VkTransformMatrixKHR VkTransformMatrixKHR} transform;
  *     float explicitAABB[6];
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t instanceIndex;
  *     uint32_t partitionIndex;
  *     VkDeviceAddress accelerationStructure;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPartitionedAccelerationStructureWriteInstanceDataNV extends Struct<VkPartitionedAccelerationStructureWriteInstanceDataNV> implements NativeResource {
 

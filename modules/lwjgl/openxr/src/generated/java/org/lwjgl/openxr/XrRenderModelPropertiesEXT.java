@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrRenderModelPropertiesEXT {
  *     XrStructureType type;
  *     void * next;
  *     {@link XrUuidEXT XrUuidEXT} cacheId;
  *     uint32_t animatableNodeCount;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrRenderModelPropertiesEXT extends Struct<XrRenderModelPropertiesEXT> implements NativeResource {
 

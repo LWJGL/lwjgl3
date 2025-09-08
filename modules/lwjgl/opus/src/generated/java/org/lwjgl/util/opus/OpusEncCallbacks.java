@@ -17,11 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct OpusEncCallbacks {
  *     {@link OPEWriteFuncI ope_write_func} write;
  *     {@link OPECloseFuncI ope_close_func} close;
- * }}</pre>
+ * }</code></pre>
  */
 public class OpusEncCallbacks extends Struct<OpusEncCallbacks> implements NativeResource {
 

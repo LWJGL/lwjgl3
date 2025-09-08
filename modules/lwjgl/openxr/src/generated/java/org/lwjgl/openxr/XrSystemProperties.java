@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.XR10.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSystemProperties {
  *     XrStructureType type;
  *     void * next;
@@ -27,7 +27,7 @@ import static org.lwjgl.openxr.XR10.*;
  *     char systemName[XR_MAX_SYSTEM_NAME_SIZE];
  *     {@link XrSystemGraphicsProperties XrSystemGraphicsProperties} graphicsProperties;
  *     {@link XrSystemTrackingProperties XrSystemTrackingProperties} trackingProperties;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSystemProperties extends Struct<XrSystemProperties> implements NativeResource {
 

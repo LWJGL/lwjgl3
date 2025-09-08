@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.system.linux.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct io_uring_sync_cancel_reg {
  *     __u64 addr;
  *     __s32 fd;
@@ -28,7 +28,7 @@ import org.lwjgl.system.linux.*;
  *     __u8 opcode;
  *     __u8 pad[7];
  *     __u64 pad2[3];
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct io_uring_sync_cancel_reg")
 public class IOURingSyncCancelReg extends Struct<IOURingSyncCancelReg> implements NativeResource {

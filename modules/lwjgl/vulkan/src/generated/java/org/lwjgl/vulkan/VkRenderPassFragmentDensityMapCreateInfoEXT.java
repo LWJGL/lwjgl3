@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkRenderPassFragmentDensityMapCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link VkAttachmentReference VkAttachmentReference} fragmentDensityMapAttachment;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkRenderPassFragmentDensityMapCreateInfoEXT extends Struct<VkRenderPassFragmentDensityMapCreateInfoEXT> implements NativeResource {
 

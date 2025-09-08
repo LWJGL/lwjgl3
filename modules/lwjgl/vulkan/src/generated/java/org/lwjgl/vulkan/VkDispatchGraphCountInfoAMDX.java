@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDispatchGraphCountInfoAMDX {
  *     uint32_t count;
  *     {@link VkDeviceOrHostAddressConstAMDX VkDeviceOrHostAddressConstAMDX} infos;
  *     uint64_t stride;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDispatchGraphCountInfoAMDX extends Struct<VkDispatchGraphCountInfoAMDX> implements NativeResource {
 

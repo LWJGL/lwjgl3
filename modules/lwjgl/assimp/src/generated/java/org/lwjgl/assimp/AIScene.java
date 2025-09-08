@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiScene {
  *     unsigned int mFlags;
  *     {@link AINode struct aiNode} * mRootNode;
@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int mNumSkeletons;
  *     {@link AISkeleton struct aiSkeleton} ** mSkeletons;
  *     char * mPrivate;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiScene")
 public class AIScene extends Struct<AIScene> implements NativeResource {

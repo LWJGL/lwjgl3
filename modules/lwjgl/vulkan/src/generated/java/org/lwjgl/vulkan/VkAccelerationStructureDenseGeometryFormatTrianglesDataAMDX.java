@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t maxPrimitiveIndex;
  *     uint32_t maxGeometryIndex;
  *     VkCompressedTriangleFormatAMDX format;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX extends Struct<VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX> implements NativeResource {
 

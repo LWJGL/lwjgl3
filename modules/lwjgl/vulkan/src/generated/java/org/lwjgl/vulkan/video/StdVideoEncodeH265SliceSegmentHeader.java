@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoEncodeH265SliceSegmentHeader {
  *     {@link StdVideoEncodeH265SliceSegmentHeaderFlags StdVideoEncodeH265SliceSegmentHeaderFlags} flags;
  *     StdVideoH265SliceType slice_type;
@@ -36,7 +36,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
  *     int8_t slice_qp_delta;
  *     uint16_t reserved1;
  *     {@link StdVideoEncodeH265WeightTable StdVideoEncodeH265WeightTable} const * pWeightTable;
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoEncodeH265SliceSegmentHeader extends Struct<StdVideoEncodeH265SliceSegmentHeader> implements NativeResource {
 

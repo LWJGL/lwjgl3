@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.assimp.Assimp.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiMesh {
  *     unsigned int mPrimitiveTypes;
  *     unsigned int mNumVertices;
@@ -41,7 +41,7 @@ import static org.lwjgl.assimp.Assimp.*;
  *     aiMorphingMethod mMethod;
  *     {@link AIAABB struct aiAABB} mAABB;
  *     {@link AIString struct aiString} ** mTextureCoordsNames;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiMesh")
 public class AIMesh extends Struct<AIMesh> implements NativeResource {

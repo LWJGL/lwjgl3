@@ -17,12 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiFileIO {
  *     {@link AIFileOpenProcI aiFileOpenProc} OpenProc;
  *     {@link AIFileCloseProcI aiFileCloseProc} CloseProc;
  *     aiUserData UserData;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiFileIO")
 public class AIFileIO extends Struct<AIFileIO> implements NativeResource {

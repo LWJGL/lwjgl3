@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct SDL_GPUBlitInfo {
  *     {@link SDL_GPUBlitRegion SDL_GPUBlitRegion} source;
  *     {@link SDL_GPUBlitRegion SDL_GPUBlitRegion} destination;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     Uint8 padding1;
  *     Uint8 padding2;
  *     Uint8 padding3;
- * }}</pre>
+ * }</code></pre>
  */
 public class SDL_GPUBlitInfo extends Struct<SDL_GPUBlitInfo> implements NativeResource {
 

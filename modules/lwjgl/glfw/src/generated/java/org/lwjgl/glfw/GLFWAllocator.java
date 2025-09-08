@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct GLFWallocator {
  *     {@link GLFWAllocateCallbackI GLFWallocatefun} allocate;
  *     {@link GLFWReallocateCallbackI GLFWreallocatefun} reallocate;
  *     {@link GLFWDeallocateCallbackI GLFWdeallocatefun} deallocate;
  *     void * user;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct GLFWallocator")
 public class GLFWAllocator extends Struct<GLFWAllocator> implements NativeResource {

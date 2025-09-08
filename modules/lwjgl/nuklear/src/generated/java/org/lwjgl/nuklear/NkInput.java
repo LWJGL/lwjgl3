@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_input {
  *     {@link NkKeyboard struct nk_keyboard} keyboard;
  *     {@link NkMouse struct nk_mouse} mouse;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_input")
 public class NkInput extends Struct<NkInput> implements NativeResource {

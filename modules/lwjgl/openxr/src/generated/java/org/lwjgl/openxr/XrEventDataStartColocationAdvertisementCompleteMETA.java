@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrEventDataStartColocationAdvertisementCompleteMETA {
  *     XrStructureType type;
  *     void const * next;
  *     XrAsyncRequestIdFB advertisementRequestId;
  *     XrResult result;
  *     {@link XrUuid XrUuid} advertisementUuid;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrEventDataStartColocationAdvertisementCompleteMETA extends Struct<XrEventDataStartColocationAdvertisementCompleteMETA> implements NativeResource {
 

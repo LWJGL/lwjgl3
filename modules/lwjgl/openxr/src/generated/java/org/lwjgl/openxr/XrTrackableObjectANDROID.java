@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrTrackableObjectANDROID {
  *     XrStructureType type;
  *     void * next;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link XrExtent3DfEXT XrExtent3DfEXT} extents;
  *     XrObjectLabelANDROID objectLabel;
  *     XrTime lastUpdatedTime;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrTrackableObjectANDROID extends Struct<XrTrackableObjectANDROID> implements NativeResource {
 

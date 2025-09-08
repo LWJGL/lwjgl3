@@ -14,10 +14,10 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_PaintSolid {
  *     {@link FT_ColorIndex FT_ColorIndex} color;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_PaintSolid extends Struct<FT_PaintSolid> {
 

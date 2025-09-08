@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpaceGroupUuidFilterInfoMETA {
  *     XrStructureType type;
  *     void const * next;
  *     {@link XrUuid XrUuid} groupUuid;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpaceGroupUuidFilterInfoMETA extends Struct<XrSpaceGroupUuidFilterInfoMETA> implements NativeResource {
 

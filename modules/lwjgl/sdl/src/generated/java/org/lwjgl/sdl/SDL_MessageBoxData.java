@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct SDL_MessageBoxData {
  *     SDL_MessageBoxFlags flags;
  *     SDL_Window * window;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int numbuttons;
  *     {@link SDL_MessageBoxButtonData SDL_MessageBoxButtonData} const * buttons;
  *     {@link SDL_MessageBoxColorScheme SDL_MessageBoxColorScheme} const * colorScheme;
- * }}</pre>
+ * }</code></pre>
  */
 public class SDL_MessageBoxData extends Struct<SDL_MessageBoxData> implements NativeResource {
 

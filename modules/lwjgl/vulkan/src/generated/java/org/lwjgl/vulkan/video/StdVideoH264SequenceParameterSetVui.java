@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoH264SequenceParameterSetVui {
  *     {@link StdVideoH264SpsVuiFlags StdVideoH264SpsVuiFlags} flags;
  *     StdVideoH264AspectRatioIdc aspect_ratio_idc;
@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint8_t chroma_sample_loc_type_bottom_field;
  *     uint32_t reserved1;
  *     {@link StdVideoH264HrdParameters StdVideoH264HrdParameters} const * pHrdParameters;
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoH264SequenceParameterSetVui extends Struct<StdVideoH264SequenceParameterSetVui> implements NativeResource {
 

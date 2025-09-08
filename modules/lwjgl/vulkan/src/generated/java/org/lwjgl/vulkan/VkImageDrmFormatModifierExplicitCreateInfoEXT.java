@@ -17,14 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkImageDrmFormatModifierExplicitCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint64_t drmFormatModifier;
  *     uint32_t drmFormatModifierPlaneCount;
  *     {@link VkSubresourceLayout VkSubresourceLayout} const * pPlaneLayouts;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkImageDrmFormatModifierExplicitCreateInfoEXT extends Struct<VkImageDrmFormatModifierExplicitCreateInfoEXT> implements NativeResource {
 

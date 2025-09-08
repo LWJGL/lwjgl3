@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XVisualInfo {
  *     {@link Visual Visual} * visual;
  *     VisualID visualid;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned long blue_mask;
  *     int colormap_size;
  *     int bits_per_rgb;
- * }}</pre>
+ * }</code></pre>
  */
 public class XVisualInfo extends Struct<XVisualInfo> implements NativeResource {
 

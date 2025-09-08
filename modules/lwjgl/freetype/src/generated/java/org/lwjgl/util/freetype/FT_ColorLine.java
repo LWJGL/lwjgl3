@@ -14,11 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_ColorLine {
  *     FT_PaintExtend extend;
  *     {@link FT_ColorStopIterator FT_ColorStopIterator} color_stop_iterator;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_ColorLine extends Struct<FT_ColorLine> {
 

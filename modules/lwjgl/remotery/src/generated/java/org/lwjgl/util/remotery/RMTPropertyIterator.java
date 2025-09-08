@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct rmtPropertyIterator {
  *     {@link RMTProperty rmtProperty} * property;
  *     {@link RMTProperty rmtProperty} * initial;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct rmtPropertyIterator")
 public class RMTPropertyIterator extends Struct<RMTPropertyIterator> implements NativeResource {

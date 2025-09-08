@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkAntiLagDataAMD {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkAntiLagModeAMD mode;
  *     uint32_t maxFPS;
  *     {@link VkAntiLagPresentationInfoAMD VkAntiLagPresentationInfoAMD} const * pPresentationInfo;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkAntiLagDataAMD extends Struct<VkAntiLagDataAMD> implements NativeResource {
 

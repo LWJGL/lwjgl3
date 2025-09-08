@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkSurfaceCapabilitiesKHR {
  *     uint32_t minImageCount;
  *     uint32_t maxImageCount;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkSurfaceTransformFlagBitsKHR currentTransform;
  *     VkCompositeAlphaFlagsKHR supportedCompositeAlpha;
  *     VkImageUsageFlags supportedUsageFlags;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkSurfaceCapabilitiesKHR extends Struct<VkSurfaceCapabilitiesKHR> implements NativeResource {
 

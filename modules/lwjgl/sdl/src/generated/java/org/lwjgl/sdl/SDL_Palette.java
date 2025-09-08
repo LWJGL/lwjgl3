@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct SDL_Palette {
  *     int ncolors;
  *     {@link SDL_Color SDL_Color} * colors;
  *     Uint32 version;
  *     int refcount;
- * }}</pre>
+ * }</code></pre>
  */
 public class SDL_Palette extends Struct<SDL_Palette> implements NativeResource {
 

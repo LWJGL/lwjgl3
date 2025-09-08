@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoH265PictureParameterSet {
  *     {@link StdVideoH265PpsFlags StdVideoH265PpsFlags} flags;
  *     uint8_t pps_pic_parameter_set_id;
@@ -57,7 +57,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
  *     uint32_t reserved3;
  *     {@link StdVideoH265ScalingLists StdVideoH265ScalingLists} const * pScalingLists;
  *     {@link StdVideoH265PredictorPaletteEntries StdVideoH265PredictorPaletteEntries} const * pPredictorPaletteEntries;
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureParameterSet> implements NativeResource {
 

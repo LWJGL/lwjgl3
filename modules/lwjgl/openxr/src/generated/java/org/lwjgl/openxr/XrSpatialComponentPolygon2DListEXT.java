@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpatialComponentPolygon2DListEXT {
  *     XrStructureType type;
  *     void * next;
  *     uint32_t polygonCount;
  *     {@link XrSpatialPolygon2DDataEXT XrSpatialPolygon2DDataEXT} * polygons;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpatialComponentPolygon2DListEXT extends Struct<XrSpatialComponentPolygon2DListEXT> implements NativeResource {
 

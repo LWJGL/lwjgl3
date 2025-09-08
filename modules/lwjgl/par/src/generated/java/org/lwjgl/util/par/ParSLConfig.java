@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct parsl_config {
  *     float thickness;
  *     uint32_t flags;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float streamlines_seed_spacing;
  *     {@link ParSLViewport parsl_viewport} streamlines_seed_viewport;
  *     float miter_limit;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct parsl_config")
 public class ParSLConfig extends Struct<ParSLConfig> implements NativeResource {

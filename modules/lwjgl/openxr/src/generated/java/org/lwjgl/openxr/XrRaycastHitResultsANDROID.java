@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrRaycastHitResultsANDROID {
  *     XrStructureType type;
  *     void * next;
  *     uint32_t resultsCapacityInput;
  *     uint32_t resultsCountOutput;
  *     {@link XrRaycastHitResultANDROID XrRaycastHitResultANDROID} * results;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrRaycastHitResultsANDROID extends Struct<XrRaycastHitResultsANDROID> implements NativeResource {
 

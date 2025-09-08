@@ -14,11 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_Prop_IncreaseXHeight {
  *     {@link FT_Face FT_Face} face;
  *     FT_UInt limit;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_Prop_IncreaseXHeight extends Struct<FT_Prop_IncreaseXHeight> {
 

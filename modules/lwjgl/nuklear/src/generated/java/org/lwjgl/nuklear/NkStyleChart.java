@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_style_chart {
  *     {@link NkStyleItem struct nk_style_item} background;
  *     {@link NkColor struct nk_color} border_color;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float color_factor;
  *     float disabled_factor;
  *     nk_bool show_markers;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_style_chart")
 public class NkStyleChart extends Struct<NkStyleChart> implements NativeResource {

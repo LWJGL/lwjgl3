@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPhysicalDeviceFragmentDensityMapPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkExtent2D VkExtent2D} minFragmentDensityTexelSize;
  *     {@link VkExtent2D VkExtent2D} maxFragmentDensityTexelSize;
  *     VkBool32 fragmentDensityInvocations;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceFragmentDensityMapPropertiesEXT extends Struct<VkPhysicalDeviceFragmentDensityMapPropertiesEXT> implements NativeResource {
 

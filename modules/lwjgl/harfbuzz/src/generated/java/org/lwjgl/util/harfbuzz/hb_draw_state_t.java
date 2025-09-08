@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct hb_draw_state_t {
  *     hb_bool_t path_open;
  *     float path_start_x;
@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link hb_var_num_t hb_var_num_t} reserved5;
  *     {@link hb_var_num_t hb_var_num_t} reserved6;
  *     {@link hb_var_num_t hb_var_num_t} reserved7;
- * }}</pre>
+ * }</code></pre>
  */
 public class hb_draw_state_t extends Struct<hb_draw_state_t> implements NativeResource {
 

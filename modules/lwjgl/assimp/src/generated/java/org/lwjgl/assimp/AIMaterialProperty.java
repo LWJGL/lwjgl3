@@ -14,7 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiMaterialProperty {
  *     {@link AIString struct aiString} mKey;
  *     unsigned int mSemantic;
@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     unsigned int mDataLength;
  *     aiPropertyTypeInfo mType;
  *     char * mData;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiMaterialProperty")
 public class AIMaterialProperty extends Struct<AIMaterialProperty> {

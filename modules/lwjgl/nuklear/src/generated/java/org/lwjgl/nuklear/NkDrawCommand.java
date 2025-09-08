@@ -14,13 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_draw_command {
  *     unsigned int elem_count;
  *     {@link NkRect struct nk_rect} clip_rect;
  *     {@link NkHandle nk_handle} texture;
  *     {@link NkHandle nk_handle} userdata;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_draw_command")
 public class NkDrawCommand extends Struct<NkDrawCommand> {

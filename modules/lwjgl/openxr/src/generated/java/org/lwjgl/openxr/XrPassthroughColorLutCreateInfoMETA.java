@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrPassthroughColorLutCreateInfoMETA {
  *     XrStructureType type;
  *     void const * next;
  *     XrPassthroughColorLutChannelsMETA channels;
  *     uint32_t resolution;
  *     {@link XrPassthroughColorLutDataMETA XrPassthroughColorLutDataMETA} data;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrPassthroughColorLutCreateInfoMETA extends Struct<XrPassthroughColorLutCreateInfoMETA> implements NativeResource {
 

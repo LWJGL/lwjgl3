@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrActionStateVector2f {
  *     XrStructureType type;
  *     void * next;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrBool32 changedSinceLastSync;
  *     XrTime lastChangeTime;
  *     XrBool32 isActive;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrActionStateVector2f extends Struct<XrActionStateVector2f> implements NativeResource {
 

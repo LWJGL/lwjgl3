@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoVP9ColorConfig {
  *     {@link StdVideoVP9ColorConfigFlags StdVideoVP9ColorConfigFlags} flags;
  *     uint8_t BitDepth;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint8_t subsampling_y;
  *     uint8_t reserved1;
  *     StdVideoVP9ColorSpace color_space;
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoVP9ColorConfig extends Struct<StdVideoVP9ColorConfig> implements NativeResource {
 

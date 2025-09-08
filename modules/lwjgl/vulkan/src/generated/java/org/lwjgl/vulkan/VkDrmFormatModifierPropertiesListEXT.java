@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDrmFormatModifierPropertiesListEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     uint32_t drmFormatModifierCount;
  *     {@link VkDrmFormatModifierPropertiesEXT VkDrmFormatModifierPropertiesEXT} * pDrmFormatModifierProperties;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDrmFormatModifierPropertiesListEXT extends Struct<VkDrmFormatModifierPropertiesListEXT> implements NativeResource {
 

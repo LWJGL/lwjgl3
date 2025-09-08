@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDisplayPlaneCapabilitiesKHR {
  *     VkDisplayPlaneAlphaFlagsKHR supportedAlpha;
  *     {@link VkOffset2D VkOffset2D} minSrcPosition;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkOffset2D VkOffset2D} maxDstPosition;
  *     {@link VkExtent2D VkExtent2D} minDstExtent;
  *     {@link VkExtent2D VkExtent2D} maxDstExtent;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDisplayPlaneCapabilitiesKHR extends Struct<VkDisplayPlaneCapabilitiesKHR> implements NativeResource {
 

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrRoomLayoutFB {
  *     XrStructureType type;
  *     void const * next;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t wallUuidCapacityInput;
  *     uint32_t wallUuidCountOutput;
  *     {@link XrUuidEXT XrUuidEXT} * wallUuids;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrRoomLayoutFB extends Struct<XrRoomLayoutFB> implements NativeResource {
 

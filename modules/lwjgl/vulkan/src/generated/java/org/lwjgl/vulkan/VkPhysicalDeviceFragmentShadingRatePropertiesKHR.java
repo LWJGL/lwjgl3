@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPhysicalDeviceFragmentShadingRatePropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 fragmentShadingRateWithFragmentShaderInterlock;
  *     VkBool32 fragmentShadingRateWithCustomSampleLocations;
  *     VkBool32 fragmentShadingRateStrictMultiplyCombiner;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceFragmentShadingRatePropertiesKHR extends Struct<VkPhysicalDeviceFragmentShadingRatePropertiesKHR> implements NativeResource {
 

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FMOD_OUTPUT_DESCRIPTION {
  *     unsigned int apiversion;
  *     char const * name;
@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link FMOD_OUTPUT_OPENPORT_CALLBACKI FMOD_OUTPUT_OPENPORT_CALLBACK} openport;
  *     {@link FMOD_OUTPUT_CLOSEPORT_CALLBACKI FMOD_OUTPUT_CLOSEPORT_CALLBACK} closeport;
  *     {@link FMOD_OUTPUT_DEVICELISTCHANGED_CALLBACKI FMOD_OUTPUT_DEVICELISTCHANGED_CALLBACK} devicelistchanged;
- * }}</pre>
+ * }</code></pre>
  */
 public class FMOD_OUTPUT_DESCRIPTION extends Struct<FMOD_OUTPUT_DESCRIPTION> implements NativeResource {
 

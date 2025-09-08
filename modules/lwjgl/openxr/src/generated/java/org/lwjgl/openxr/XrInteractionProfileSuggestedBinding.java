@@ -17,14 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrInteractionProfileSuggestedBinding {
  *     XrStructureType type;
  *     void const * next;
  *     XrPath interactionProfile;
  *     uint32_t countSuggestedBindings;
  *     {@link XrActionSuggestedBinding XrActionSuggestedBinding} const * suggestedBindings;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrInteractionProfileSuggestedBinding extends Struct<XrInteractionProfileSuggestedBinding> implements NativeResource {
 

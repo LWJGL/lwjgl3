@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoCapabilitiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t maxDpbSlots;
  *     uint32_t maxActiveReferencePictures;
  *     {@link VkExtensionProperties VkExtensionProperties} stdHeaderVersion;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoCapabilitiesKHR extends Struct<VkVideoCapabilitiesKHR> implements NativeResource {
 

@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkExternalTensorPropertiesARM {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link VkExternalMemoryProperties VkExternalMemoryProperties} externalMemoryProperties;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkExternalTensorPropertiesARM extends Struct<VkExternalTensorPropertiesARM> implements NativeResource {
 

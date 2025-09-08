@@ -14,13 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_PaintSweepGradient {
  *     {@link FT_ColorLine FT_ColorLine} colorline;
  *     {@link FT_Vector FT_Vector} center;
  *     FT_Fixed start_angle;
  *     FT_Fixed end_angle;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_PaintSweepGradient extends Struct<FT_PaintSweepGradient> {
 

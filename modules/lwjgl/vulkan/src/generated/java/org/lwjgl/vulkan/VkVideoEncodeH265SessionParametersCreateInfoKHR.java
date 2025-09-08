@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoEncodeH265SessionParametersCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t maxStdSPSCount;
  *     uint32_t maxStdPPSCount;
  *     {@link VkVideoEncodeH265SessionParametersAddInfoKHR VkVideoEncodeH265SessionParametersAddInfoKHR} const * pParametersAddInfo;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoEncodeH265SessionParametersCreateInfoKHR extends Struct<VkVideoEncodeH265SessionParametersCreateInfoKHR> implements NativeResource {
 

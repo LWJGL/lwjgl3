@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkRenderPassFragmentDensityMapOffsetEndInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t fragmentDensityOffsetCount;
  *     {@link VkOffset2D VkOffset2D} const * pFragmentDensityOffsets;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkRenderPassFragmentDensityMapOffsetEndInfoEXT extends Struct<VkRenderPassFragmentDensityMapOffsetEndInfoEXT> implements NativeResource {
 

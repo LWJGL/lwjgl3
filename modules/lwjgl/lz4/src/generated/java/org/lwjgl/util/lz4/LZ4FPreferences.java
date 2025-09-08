@@ -17,14 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct LZ4F_preferences_t {
  *     {@link LZ4FFrameInfo LZ4F_frameInfo_t} frameInfo;
  *     int compressionLevel;
  *     unsigned autoFlush;
  *     unsigned favorDecSpeed;
  *     unsigned reserved[3];
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct LZ4F_preferences_t")
 public class LZ4FPreferences extends Struct<LZ4FPreferences> implements NativeResource {

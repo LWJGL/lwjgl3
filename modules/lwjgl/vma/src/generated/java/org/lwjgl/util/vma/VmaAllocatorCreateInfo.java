@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VmaAllocatorCreateInfo {
  *     VmaAllocatorCreateFlags flags;
  *     VkPhysicalDevice physicalDevice;
@@ -32,7 +32,7 @@ import org.lwjgl.vulkan.*;
  *     VkInstance instance;
  *     uint32_t vulkanApiVersion;
  *     VkExternalMemoryHandleTypeFlagsKHR const * pTypeExternalMemoryHandleTypes;
- * }}</pre>
+ * }</code></pre>
  */
 public class VmaAllocatorCreateInfo extends Struct<VmaAllocatorCreateInfo> implements NativeResource {
 

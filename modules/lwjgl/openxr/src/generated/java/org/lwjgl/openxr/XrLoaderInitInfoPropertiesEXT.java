@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrLoaderInitInfoPropertiesEXT {
  *     XrStructureType type;
  *     void const * next;
  *     uint32_t propertyValueCount;
  *     {@link XrLoaderInitPropertyValueEXT XrLoaderInitPropertyValueEXT} const * propertyValues;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrLoaderInitInfoPropertiesEXT extends Struct<XrLoaderInitInfoPropertiesEXT> implements NativeResource {
 

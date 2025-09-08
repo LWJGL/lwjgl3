@@ -17,14 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPipelineViewportSwizzleStateCreateInfoNV {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkPipelineViewportSwizzleStateCreateFlagsNV flags;
  *     uint32_t viewportCount;
  *     {@link VkViewportSwizzleNV VkViewportSwizzleNV} const * pViewportSwizzles;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct<VkPipelineViewportSwizzleStateCreateInfoNV> implements NativeResource {
 

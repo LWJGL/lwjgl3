@@ -14,12 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct CXIdxBaseClassInfo {
  *     {@link CXIdxEntityInfo CXIdxEntityInfo} const * base;
  *     {@link CXCursor CXCursor} cursor;
  *     {@link CXIdxLoc CXIdxLoc} loc;
- * }}</pre>
+ * }</code></pre>
  */
 public class CXIdxBaseClassInfo extends Struct<CXIdxBaseClassInfo> {
 

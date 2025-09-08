@@ -17,11 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_Incremental_InterfaceRec {
  *     {@link FT_Incremental_Funcs FT_Incremental_FuncsRec} const * funcs;
  *     FT_Incremental object;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct FT_Incremental_InterfaceRec")
 public class FT_Incremental_Interface extends Struct<FT_Incremental_Interface> implements NativeResource {

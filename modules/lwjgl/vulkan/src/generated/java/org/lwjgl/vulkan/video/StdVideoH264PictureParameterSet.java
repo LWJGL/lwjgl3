@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoH264PictureParameterSet {
  *     {@link StdVideoH264PpsFlags StdVideoH264PpsFlags} flags;
  *     uint8_t seq_parameter_set_id;
@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int8_t chroma_qp_index_offset;
  *     int8_t second_chroma_qp_index_offset;
  *     {@link StdVideoH264ScalingLists StdVideoH264ScalingLists} const * pScalingLists;
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoH264PictureParameterSet extends Struct<StdVideoH264PictureParameterSet> implements NativeResource {
 

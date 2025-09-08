@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct ZSTD_parameters {
  *     {@link ZSTDCompressionParameters ZSTD_compressionParameters} cParams;
  *     {@link ZSTDFrameParameters ZSTD_frameParameters} fParams;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct ZSTD_parameters")
 public class ZSTDParameters extends Struct<ZSTDParameters> implements NativeResource {

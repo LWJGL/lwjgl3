@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoProfileListInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t profileCount;
  *     {@link VkVideoProfileInfoKHR VkVideoProfileInfoKHR} const * pProfiles;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoProfileListInfoKHR extends Struct<VkVideoProfileListInfoKHR> implements NativeResource {
 

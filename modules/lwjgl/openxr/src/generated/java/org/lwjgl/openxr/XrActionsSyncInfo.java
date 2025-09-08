@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrActionsSyncInfo {
  *     XrStructureType type;
  *     void const * next;
  *     uint32_t countActiveActionSets;
  *     {@link XrActiveActionSet XrActiveActionSet} const * activeActionSets;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrActionsSyncInfo extends Struct<XrActionsSyncInfo> implements NativeResource {
 

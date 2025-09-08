@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpacesEraseInfoMETA {
  *     XrStructureType type;
  *     void const * next;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrSpace * spaces;
  *     uint32_t uuidCount;
  *     {@link XrUuidEXT XrUuidEXT} * uuids;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpacesEraseInfoMETA extends Struct<XrSpacesEraseInfoMETA> implements NativeResource {
 

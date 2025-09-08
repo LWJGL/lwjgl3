@@ -14,12 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_PaintComposite {
  *     {@link FT_OpaquePaint FT_OpaquePaintRec} source_paint;
  *     FT_Composite_Mode composite_mode;
  *     {@link FT_OpaquePaint FT_OpaquePaintRec} backdrop_paint;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_PaintComposite extends Struct<FT_PaintComposite> {
 

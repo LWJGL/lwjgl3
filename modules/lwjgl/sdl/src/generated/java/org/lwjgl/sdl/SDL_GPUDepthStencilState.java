@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct SDL_GPUDepthStencilState {
  *     SDL_GPUCompareOp compare_op;
  *     {@link SDL_GPUStencilOpState SDL_GPUStencilOpState} back_stencil_state;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     Uint8 padding1;
  *     Uint8 padding2;
  *     Uint8 padding3;
- * }}</pre>
+ * }</code></pre>
  */
 public class SDL_GPUDepthStencilState extends Struct<SDL_GPUDepthStencilState> implements NativeResource {
 

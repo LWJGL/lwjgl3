@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct io_uring_buf_ring {
  *     union {
  *         struct {
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         };
  *         {@link IOURingBuf struct io_uring_buf} bufs[0];
  *     };
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct io_uring_buf_ring")
 public class IOURingBufRing extends Struct<IOURingBufRing> implements NativeResource {

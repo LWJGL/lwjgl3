@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VmaDefragmentationInfo {
  *     VmaDefragmentationFlags flags;
  *     VmaPool pool;
@@ -26,7 +26,7 @@ import org.lwjgl.vulkan.*;
  *     uint32_t maxAllocationsPerPass;
  *     {@link VmaCheckDefragmentationBreakFunctionI PFN_vmaCheckDefragmentationBreakFunction} pfnBreakCallback;
  *     void * pBreakCallbackUserData;
- * }}</pre>
+ * }</code></pre>
  */
 public class VmaDefragmentationInfo extends Struct<VmaDefragmentationInfo> implements NativeResource {
 

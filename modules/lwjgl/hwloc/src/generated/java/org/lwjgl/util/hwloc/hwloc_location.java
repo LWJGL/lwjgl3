@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct hwloc_location {
  *     enum hwloc_location_type_e type;
  *     {@link hwloc_location_u hwloc_location_u} location;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct hwloc_location")
 public class hwloc_location extends Struct<hwloc_location> implements NativeResource {

@@ -14,11 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct bgfx_internal_data_t {
  *     {@link BGFXCaps bgfx_caps_t} * caps;
  *     void * context;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct bgfx_internal_data_t")
 public class BGFXInternalData extends Struct<BGFXInternalData> {

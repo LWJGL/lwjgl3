@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct rmtSettings {
  *     rmtU16 port;
  *     rmtBool reuse_open_port;
@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void * snapshot_context;
  *     void * input_handler_context;
  *     rmtPStr logPath;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct rmtSettings")
 public class RMTSettings extends Struct<RMTSettings> implements NativeResource {

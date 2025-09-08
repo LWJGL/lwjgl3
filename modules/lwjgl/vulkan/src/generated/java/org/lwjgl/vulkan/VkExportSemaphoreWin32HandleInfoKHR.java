@@ -19,14 +19,14 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.system.windows.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkExportSemaphoreWin32HandleInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link SECURITY_ATTRIBUTES SECURITY_ATTRIBUTES} const * pAttributes;
  *     DWORD dwAccess;
  *     LPCWSTR name;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkExportSemaphoreWin32HandleInfoKHR extends Struct<VkExportSemaphoreWin32HandleInfoKHR> implements NativeResource {
 

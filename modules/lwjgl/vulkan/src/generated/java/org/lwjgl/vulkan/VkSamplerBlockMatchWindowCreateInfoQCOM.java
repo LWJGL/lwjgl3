@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkSamplerBlockMatchWindowCreateInfoQCOM {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link VkExtent2D VkExtent2D} windowExtent;
  *     VkBlockMatchWindowCompareModeQCOM windowCompareMode;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkSamplerBlockMatchWindowCreateInfoQCOM extends Struct<VkSamplerBlockMatchWindowCreateInfoQCOM> implements NativeResource {
 

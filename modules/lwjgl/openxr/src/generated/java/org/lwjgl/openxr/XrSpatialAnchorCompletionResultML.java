@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpatialAnchorCompletionResultML {
  *     {@link XrUuidEXT XrUuidEXT} uuid;
  *     XrResult result;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpatialAnchorCompletionResultML extends Struct<XrSpatialAnchorCompletionResultML> implements NativeResource {
 

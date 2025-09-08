@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrAnchorSpaceCreateInfoBD {
  *     XrStructureType type;
  *     void const * next;
  *     XrAnchorBD anchor;
  *     {@link XrPosef XrPosef} poseInAnchorSpace;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrAnchorSpaceCreateInfoBD extends Struct<XrAnchorSpaceCreateInfoBD> implements NativeResource {
 

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiCamera {
  *     {@link AIString struct aiString} mName;
  *     {@link AIVector3D struct aiVector3D} mPosition;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float mClipPlaneFar;
  *     float mAspect;
  *     float mOrthographicWidth;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiCamera")
 public class AICamera extends Struct<AICamera> implements NativeResource {

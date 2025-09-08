@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPipelineViewportShadingRateImageStateCreateInfoNV {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkBool32 shadingRateImageEnable;
  *     uint32_t viewportCount;
  *     {@link VkShadingRatePaletteNV VkShadingRatePaletteNV} const * pShadingRatePalettes;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct<VkPipelineViewportShadingRateImageStateCreateInfoNV> implements NativeResource {
 

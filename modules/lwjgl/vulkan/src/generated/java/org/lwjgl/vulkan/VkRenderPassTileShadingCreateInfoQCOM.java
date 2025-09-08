@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkRenderPassTileShadingCreateInfoQCOM {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkTileShadingRenderPassFlagsQCOM flags;
  *     {@link VkExtent2D VkExtent2D} tileApronSize;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkRenderPassTileShadingCreateInfoQCOM extends Struct<VkRenderPassTileShadingCreateInfoQCOM> implements NativeResource {
 

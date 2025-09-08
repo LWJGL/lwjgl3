@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkSubpassSampleLocationsEXT {
  *     uint32_t subpassIndex;
  *     {@link VkSampleLocationsInfoEXT VkSampleLocationsInfoEXT} sampleLocationsInfo;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkSubpassSampleLocationsEXT extends Struct<VkSubpassSampleLocationsEXT> implements NativeResource {
 

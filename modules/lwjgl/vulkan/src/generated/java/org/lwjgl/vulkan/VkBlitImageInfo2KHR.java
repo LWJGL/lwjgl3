@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkBlitImageInfo2KHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t regionCount;
  *     {@link VkImageBlit2 VkImageBlit2} const * pRegions;
  *     VkFilter filter;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkBlitImageInfo2KHR extends VkBlitImageInfo2 {
 

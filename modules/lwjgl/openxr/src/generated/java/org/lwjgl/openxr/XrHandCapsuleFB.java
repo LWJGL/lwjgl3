@@ -17,12 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.openxr.FBHandTrackingCapsules.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrHandCapsuleFB {
  *     {@link XrVector3f XrVector3f} points[XR_HAND_TRACKING_CAPSULE_POINT_COUNT_FB];
  *     float radius;
  *     XrHandJointEXT joint;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrHandCapsuleFB extends Struct<XrHandCapsuleFB> {
 

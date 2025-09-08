@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrCompositionLayerEquirectKHR {
  *     XrStructureType type;
  *     void const * next;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float radius;
  *     {@link XrVector2f XrVector2f} scale;
  *     {@link XrVector2f XrVector2f} bias;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrCompositionLayerEquirectKHR extends Struct<XrCompositionLayerEquirectKHR> implements NativeResource {
 

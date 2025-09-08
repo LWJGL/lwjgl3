@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkRenderPassSampleLocationsBeginInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkAttachmentSampleLocationsEXT VkAttachmentSampleLocationsEXT} const * pAttachmentInitialSampleLocations;
  *     uint32_t postSubpassSampleLocationsCount;
  *     {@link VkSubpassSampleLocationsEXT VkSubpassSampleLocationsEXT} const * pPostSubpassSampleLocations;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct<VkRenderPassSampleLocationsBeginInfoEXT> implements NativeResource {
 

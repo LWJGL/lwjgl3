@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrEventDataSpaceSetStatusCompleteFB {
  *     XrStructureType type;
  *     void const * next;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link XrUuidEXT XrUuidEXT} uuid;
  *     XrSpaceComponentTypeFB componentType;
  *     XrBool32 enabled;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrEventDataSpaceSetStatusCompleteFB extends Struct<XrEventDataSpaceSetStatusCompleteFB> implements NativeResource {
 

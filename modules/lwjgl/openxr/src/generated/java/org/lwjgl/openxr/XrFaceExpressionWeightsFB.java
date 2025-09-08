@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrFaceExpressionWeightsFB {
  *     XrStructureType type;
  *     void * next;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float * confidences;
  *     {@link XrFaceExpressionStatusFB XrFaceExpressionStatusFB} status;
  *     XrTime time;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrFaceExpressionWeightsFB extends Struct<XrFaceExpressionWeightsFB> implements NativeResource {
 

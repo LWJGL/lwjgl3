@@ -14,11 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_Prop_GlyphToScriptMap {
  *     {@link FT_Face FT_Face} face;
  *     FT_UShort * map;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_Prop_GlyphToScriptMap extends Struct<FT_Prop_GlyphToScriptMap> {
 

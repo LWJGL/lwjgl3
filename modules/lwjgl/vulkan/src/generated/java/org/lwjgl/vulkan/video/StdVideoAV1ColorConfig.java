@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoAV1ColorConfig {
  *     {@link StdVideoAV1ColorConfigFlags StdVideoAV1ColorConfigFlags} flags;
  *     uint8_t BitDepth;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     StdVideoAV1TransferCharacteristics transfer_characteristics;
  *     StdVideoAV1MatrixCoefficients matrix_coefficients;
  *     StdVideoAV1ChromaSamplePosition chroma_sample_position;
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoAV1ColorConfig extends Struct<StdVideoAV1ColorConfig> implements NativeResource {
 

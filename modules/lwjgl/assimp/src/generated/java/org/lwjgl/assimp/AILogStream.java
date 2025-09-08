@@ -17,11 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiLogStream {
  *     {@link AILogStreamCallbackI aiLogStreamCallback} callback;
  *     char * user;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiLogStream")
 public class AILogStream extends Struct<AILogStream> implements NativeResource {

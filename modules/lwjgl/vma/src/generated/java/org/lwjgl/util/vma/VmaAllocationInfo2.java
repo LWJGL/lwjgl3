@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VmaAllocationInfo2 {
  *     {@link VmaAllocationInfo VmaAllocationInfo} allocationInfo;
  *     VkDeviceSize blockSize;
  *     VkBool32 dedicatedMemory;
- * }}</pre>
+ * }</code></pre>
  */
 public class VmaAllocationInfo2 extends Struct<VmaAllocationInfo2> implements NativeResource {
 

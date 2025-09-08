@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoEncodeQuantizationMapInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkImageView quantizationMap;
  *     {@link VkExtent2D VkExtent2D} quantizationMapExtent;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoEncodeQuantizationMapInfoKHR extends Struct<VkVideoEncodeQuantizationMapInfoKHR> implements NativeResource {
 

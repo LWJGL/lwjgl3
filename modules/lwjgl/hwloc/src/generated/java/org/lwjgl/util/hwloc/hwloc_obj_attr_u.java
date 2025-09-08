@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * union struct hwloc_obj_attr_u {
  *     {@link hwloc_numanode_attr_s hwloc_numanode_attr_s} numanode;
  *     {@link hwloc_cache_attr_s hwloc_cache_attr_s} cache;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link hwloc_pcidev_attr_s hwloc_pcidev_attr_s} pcidev;
  *     {@link hwloc_bridge_attr_s hwloc_bridge_attr_s} bridge;
  *     {@link hwloc_osdev_attr_s hwloc_osdev_attr_s} osdev;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("union struct hwloc_obj_attr_u")
 public class hwloc_obj_attr_u extends Struct<hwloc_obj_attr_u> implements NativeResource {

@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrBodySkeletonJointFB {
  *     int32_t joint;
  *     int32_t parentJoint;
  *     {@link XrPosef XrPosef} pose;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrBodySkeletonJointFB extends Struct<XrBodySkeletonJointFB> implements NativeResource {
 

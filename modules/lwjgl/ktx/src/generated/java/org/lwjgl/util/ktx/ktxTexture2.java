@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct ktxTexture2 {
  *     class_id classId;
  *     {@link ktxTexture_vtbl struct ktxTexture_vtbl} * vtbl;
@@ -47,7 +47,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     ktx_uint32_t timescale;
  *     ktx_uint32_t loopcount;
  *     struct ktxTexture2_private * _private;
- * }}</pre>
+ * }</code></pre>
  */
 public class ktxTexture2 extends Struct<ktxTexture2> implements NativeResource {
 

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_style_combo {
  *     {@link NkStyleItem struct nk_style_item} normal;
  *     {@link NkStyleItem struct nk_style_item} hover;
@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkVec2 struct nk_vec2} spacing;
  *     float color_factor;
  *     float disabled_factor;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_style_combo")
 public class NkStyleCombo extends Struct<NkStyleCombo> implements NativeResource {

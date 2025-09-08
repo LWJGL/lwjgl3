@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkQueueFamilyDataGraphPropertiesARM {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link VkPhysicalDeviceDataGraphProcessingEngineARM VkPhysicalDeviceDataGraphProcessingEngineARM} engine;
  *     {@link VkPhysicalDeviceDataGraphOperationSupportARM VkPhysicalDeviceDataGraphOperationSupportARM} operation;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkQueueFamilyDataGraphPropertiesARM extends Struct<VkQueueFamilyDataGraphPropertiesARM> implements NativeResource {
 

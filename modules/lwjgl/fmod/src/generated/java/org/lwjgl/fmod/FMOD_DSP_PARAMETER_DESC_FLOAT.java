@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FMOD_DSP_PARAMETER_DESC_FLOAT {
  *     float min;
  *     float max;
  *     float defaultval;
  *     {@link FMOD_DSP_PARAMETER_FLOAT_MAPPING FMOD_DSP_PARAMETER_FLOAT_MAPPING} mapping;
- * }}</pre>
+ * }</code></pre>
  */
 public class FMOD_DSP_PARAMETER_DESC_FLOAT extends Struct<FMOD_DSP_PARAMETER_DESC_FLOAT> implements NativeResource {
 

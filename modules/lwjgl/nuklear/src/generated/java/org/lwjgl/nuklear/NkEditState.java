@@ -14,7 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_edit_state {
  *     nk_hash name;
  *     unsigned int seq;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link NkScroll struct nk_scroll} scrollbar;
  *     unsigned char mode;
  *     bool single_line;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_edit_state")
 public class NkEditState extends Struct<NkEditState> {

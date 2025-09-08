@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkClusterAccelerationStructureInstantiateClusterInfoNV {
  *     uint32_t clusterIdOffset;
  *     uint32_t geometryIndexOffset : 24;
  *     uint32_t reserved : 8;
  *     VkDeviceAddress clusterTemplateAddress;
  *     {@link VkStridedDeviceAddressNV VkStridedDeviceAddressNV} vertexBuffer;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkClusterAccelerationStructureInstantiateClusterInfoNV extends Struct<VkClusterAccelerationStructureInstantiateClusterInfoNV> implements NativeResource {
 

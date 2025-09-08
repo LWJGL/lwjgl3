@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_style_edit {
  *     {@link NkStyleItem struct nk_style_item} normal;
  *     {@link NkStyleItem struct nk_style_item} hover;
@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float row_padding;
  *     float color_factor;
  *     float disabled_factor;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_style_edit")
 public class NkStyleEdit extends Struct<NkStyleEdit> implements NativeResource {

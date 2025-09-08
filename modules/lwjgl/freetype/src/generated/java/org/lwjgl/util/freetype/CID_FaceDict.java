@@ -14,7 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct CID_FaceDictRec {
  *     {@link PS_Private PS_PrivateRec} private_dict;
  *     FT_UInt len_buildchar;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_UInt num_subrs;
  *     FT_ULong subrmap_offset;
  *     FT_UInt sd_bytes;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct CID_FaceDictRec")
 public class CID_FaceDict extends Struct<CID_FaceDict> {

@@ -17,14 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpatialAnchorsUpdateExpirationInfoML {
  *     XrStructureType type;
  *     void const * next;
  *     uint32_t uuidCount;
  *     {@link XrUuidEXT XrUuidEXT} const * uuids;
  *     uint64_t expiration;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpatialAnchorsUpdateExpirationInfoML extends Struct<XrSpatialAnchorsUpdateExpirationInfoML> implements NativeResource {
 

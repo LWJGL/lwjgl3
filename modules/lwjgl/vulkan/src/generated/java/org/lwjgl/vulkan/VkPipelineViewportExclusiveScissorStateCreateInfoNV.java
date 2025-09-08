@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPipelineViewportExclusiveScissorStateCreateInfoNV {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t exclusiveScissorCount;
  *     {@link VkRect2D VkRect2D} const * pExclusiveScissors;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPipelineViewportExclusiveScissorStateCreateInfoNV extends Struct<VkPipelineViewportExclusiveScissorStateCreateInfoNV> implements NativeResource {
 

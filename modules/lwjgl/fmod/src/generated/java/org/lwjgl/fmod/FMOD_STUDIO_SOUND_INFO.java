@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FMOD_STUDIO_SOUND_INFO {
  *     char const * name_or_data;
  *     FMOD_MODE mode;
  *     {@link FMOD_CREATESOUNDEXINFO FMOD_CREATESOUNDEXINFO} exinfo;
  *     int subsoundindex;
- * }}</pre>
+ * }</code></pre>
  */
 public class FMOD_STUDIO_SOUND_INFO extends Struct<FMOD_STUDIO_SOUND_INFO> implements NativeResource {
 

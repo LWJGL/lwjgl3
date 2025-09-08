@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct EXRImage {
  *     {@link EXRTile EXRTile} * tiles;
  *     {@link EXRImage struct _EXRImage} * next_level;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int height;
  *     int num_channels;
  *     int num_tiles;
- * }}</pre>
+ * }</code></pre>
  */
 public class EXRImage extends Struct<EXRImage> implements NativeResource {
 

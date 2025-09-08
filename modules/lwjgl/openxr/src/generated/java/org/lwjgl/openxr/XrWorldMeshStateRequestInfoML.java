@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrWorldMeshStateRequestInfoML {
  *     XrStructureType type;
  *     void const * next;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrTime time;
  *     {@link XrPosef XrPosef} boundingBoxCenter;
  *     {@link XrExtent3DfEXT XrExtent3DfEXT} boundingBoxExtents;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrWorldMeshStateRequestInfoML extends Struct<XrWorldMeshStateRequestInfoML> implements NativeResource {
 

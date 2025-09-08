@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FMOD_CODEC_DESCRIPTION {
  *     unsigned int apiversion;
  *     char const * name;
@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link FMOD_CODEC_GETPOSITION_CALLBACKI FMOD_CODEC_GETPOSITION_CALLBACK} getposition;
  *     {@link FMOD_CODEC_SOUNDCREATE_CALLBACKI FMOD_CODEC_SOUNDCREATE_CALLBACK} soundcreate;
  *     {@link FMOD_CODEC_GETWAVEFORMAT_CALLBACKI FMOD_CODEC_GETWAVEFORMAT_CALLBACK} getwaveformat;
- * }}</pre>
+ * }</code></pre>
  */
 public class FMOD_CODEC_DESCRIPTION extends Struct<FMOD_CODEC_DESCRIPTION> implements NativeResource {
 

@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecVP9.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoDecodeVP9PictureInfo {
  *     {@link StdVideoDecodeVP9PictureInfoFlags StdVideoDecodeVP9PictureInfoFlags} flags;
  *     StdVideoVP9Profile profile;
@@ -39,7 +39,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecVP9.*;
  *     {@link StdVideoVP9ColorConfig StdVideoVP9ColorConfig} const * pColorConfig;
  *     {@link StdVideoVP9LoopFilter StdVideoVP9LoopFilter} const * pLoopFilter;
  *     {@link StdVideoVP9Segmentation StdVideoVP9Segmentation} const * pSegmentation;
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoDecodeVP9PictureInfo extends Struct<StdVideoDecodeVP9PictureInfo> implements NativeResource {
 

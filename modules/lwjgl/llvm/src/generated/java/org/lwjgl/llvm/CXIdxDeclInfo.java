@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct CXIdxDeclInfo {
  *     {@link CXIdxEntityInfo CXIdxEntityInfo} const * entityInfo;
  *     {@link CXCursor CXCursor} cursor;
@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link CXIdxAttrInfo CXIdxAttrInfo} const * const * attributes;
  *     unsigned numAttributes;
  *     unsigned flags;
- * }}</pre>
+ * }</code></pre>
  */
 public class CXIdxDeclInfo extends Struct<CXIdxDeclInfo> implements NativeResource {
 

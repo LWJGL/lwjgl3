@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpatialEntityComponentDataPolygonBD {
  *     XrStructureType type;
  *     void * next;
  *     uint32_t vertexCapacityInput;
  *     uint32_t vertexCountOutput;
  *     {@link XrVector2f XrVector2f} * vertices;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpatialEntityComponentDataPolygonBD extends Struct<XrSpatialEntityComponentDataPolygonBD> implements NativeResource {
 

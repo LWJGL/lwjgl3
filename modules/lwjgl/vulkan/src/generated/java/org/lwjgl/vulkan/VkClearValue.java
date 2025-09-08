@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * union VkClearValue {
  *     {@link VkClearColorValue VkClearColorValue} color;
  *     {@link VkClearDepthStencilValue VkClearDepthStencilValue} depthStencil;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkClearValue extends Struct<VkClearValue> implements NativeResource {
 

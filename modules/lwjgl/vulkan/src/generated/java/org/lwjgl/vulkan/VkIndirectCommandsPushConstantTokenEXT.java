@@ -16,10 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkIndirectCommandsPushConstantTokenEXT {
  *     {@link VkPushConstantRange VkPushConstantRange} updateRange;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkIndirectCommandsPushConstantTokenEXT extends Struct<VkIndirectCommandsPushConstantTokenEXT> implements NativeResource {
 

@@ -14,13 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct hwloc_topology_support {
  *     {@link hwloc_topology_discovery_support struct hwloc_topology_discovery_support} * discovery;
  *     {@link hwloc_topology_cpubind_support struct hwloc_topology_cpubind_support} * cpubind;
  *     {@link hwloc_topology_membind_support struct hwloc_topology_membind_support} * membind;
  *     {@link hwloc_topology_misc_support struct hwloc_topology_misc_support} * misc;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct hwloc_topology_support")
 public class hwloc_topology_support extends Struct<hwloc_topology_support> {

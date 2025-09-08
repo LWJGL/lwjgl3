@@ -19,13 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.video.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoEncodeH265NaluSliceSegmentInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     int32_t constantQp;
  *     {@link StdVideoEncodeH265SliceSegmentHeader StdVideoEncodeH265SliceSegmentHeader} const * pStdSliceSegmentHeader;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoEncodeH265NaluSliceSegmentInfoKHR extends Struct<VkVideoEncodeH265NaluSliceSegmentInfoKHR> implements NativeResource {
 

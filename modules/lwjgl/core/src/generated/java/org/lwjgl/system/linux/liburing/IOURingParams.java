@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct io_uring_params {
  *     __u32 sq_entries;
  *     __u32 cq_entries;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     __u32 resv[3];
  *     {@link IOSQRingOffsets struct io_sqring_offsets} sq_off;
  *     {@link IOCQRingOffsets struct io_cqring_offsets} cq_off;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct io_uring_params")
 public class IOURingParams extends Struct<IOURingParams> implements NativeResource {

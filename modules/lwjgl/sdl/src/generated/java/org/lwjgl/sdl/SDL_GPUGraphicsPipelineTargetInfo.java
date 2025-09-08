@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct SDL_GPUGraphicsPipelineTargetInfo {
  *     {@link SDL_GPUColorTargetDescription SDL_GPUColorTargetDescription} const * color_target_descriptions;
  *     Uint32 num_color_targets;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     Uint8 padding1;
  *     Uint8 padding2;
  *     Uint8 padding3;
- * }}</pre>
+ * }</code></pre>
  */
 public class SDL_GPUGraphicsPipelineTargetInfo extends Struct<SDL_GPUGraphicsPipelineTargetInfo> implements NativeResource {
 

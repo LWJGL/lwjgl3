@@ -17,14 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDeviceGroupRenderPassBeginInfo {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t deviceMask;
  *     uint32_t deviceRenderAreaCount;
  *     {@link VkRect2D VkRect2D} const * pDeviceRenderAreas;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDeviceGroupRenderPassBeginInfo extends Struct<VkDeviceGroupRenderPassBeginInfo> implements NativeResource {
 

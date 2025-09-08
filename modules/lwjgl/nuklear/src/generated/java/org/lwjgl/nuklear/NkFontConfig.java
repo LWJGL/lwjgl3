@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_font_config {
  *     {@link NkFontConfig struct nk_font_config} * next;
  *     void * ttf_blob;
@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     nk_rune fallback_glyph;
  *     {@link NkFontConfig struct nk_font_config} * n;
  *     {@link NkFontConfig struct nk_font_config} * p;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_font_config")
 public class NkFontConfig extends Struct<NkFontConfig> implements NativeResource {

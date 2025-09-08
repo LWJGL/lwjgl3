@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkQueueFamilyProperties2KHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkQueueFamilyProperties VkQueueFamilyProperties} queueFamilyProperties;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkQueueFamilyProperties2KHR extends VkQueueFamilyProperties2 {
 

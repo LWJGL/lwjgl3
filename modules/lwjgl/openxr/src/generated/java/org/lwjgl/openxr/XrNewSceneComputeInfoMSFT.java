@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrNewSceneComputeInfoMSFT {
  *     XrStructureType type;
  *     void const * next;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrSceneComputeFeatureMSFT const * requestedFeatures;
  *     XrSceneComputeConsistencyMSFT consistency;
  *     {@link XrSceneBoundsMSFT XrSceneBoundsMSFT} bounds;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrNewSceneComputeInfoMSFT extends Struct<XrNewSceneComputeInfoMSFT> implements NativeResource {
 

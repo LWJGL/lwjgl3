@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct ZDICT_fastCover_params_t {
  *     unsigned k;
  *     unsigned d;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     double splitPoint;
  *     unsigned accel;
  *     {@link ZDICTParams ZDICT_params_t} zParams;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct ZDICT_fastCover_params_t")
 public class ZDICTFastCoverParams extends Struct<ZDICTFastCoverParams> implements NativeResource {

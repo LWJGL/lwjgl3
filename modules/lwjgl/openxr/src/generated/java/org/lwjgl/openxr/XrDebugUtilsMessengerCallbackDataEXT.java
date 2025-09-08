@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrDebugUtilsMessengerCallbackDataEXT {
  *     XrStructureType type;
  *     void const * next;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link XrDebugUtilsObjectNameInfoEXT XrDebugUtilsObjectNameInfoEXT} * objects;
  *     uint32_t sessionLabelCount;
  *     {@link XrDebugUtilsLabelEXT XrDebugUtilsLabelEXT} * sessionLabels;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrDebugUtilsMessengerCallbackDataEXT extends Struct<XrDebugUtilsMessengerCallbackDataEXT> implements NativeResource {
 

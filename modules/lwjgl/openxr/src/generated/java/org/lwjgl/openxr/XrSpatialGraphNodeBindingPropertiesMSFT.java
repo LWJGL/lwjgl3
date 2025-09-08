@@ -19,13 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.MSFTSpatialGraphBridge.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpatialGraphNodeBindingPropertiesMSFT {
  *     XrStructureType type;
  *     void * next;
  *     uint8_t nodeId[XR_GUID_SIZE_MSFT];
  *     {@link XrPosef XrPosef} poseInNodeSpace;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpatialGraphNodeBindingPropertiesMSFT extends Struct<XrSpatialGraphNodeBindingPropertiesMSFT> implements NativeResource {
 

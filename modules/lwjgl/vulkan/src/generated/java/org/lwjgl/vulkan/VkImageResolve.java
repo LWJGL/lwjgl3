@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkImageResolve {
  *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} srcSubresource;
  *     {@link VkOffset3D VkOffset3D} srcOffset;
  *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} dstSubresource;
  *     {@link VkOffset3D VkOffset3D} dstOffset;
  *     {@link VkExtent3D VkExtent3D} extent;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkImageResolve extends Struct<VkImageResolve> implements NativeResource {
 

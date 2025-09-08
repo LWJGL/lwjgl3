@@ -14,13 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_BitmapGlyphRec {
  *     {@link FT_Glyph FT_GlyphRec} root;
  *     FT_Int left;
  *     FT_Int top;
  *     {@link FT_Bitmap FT_Bitmap} bitmap;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct FT_BitmapGlyphRec")
 public class FT_BitmapGlyph extends Struct<FT_BitmapGlyph> {

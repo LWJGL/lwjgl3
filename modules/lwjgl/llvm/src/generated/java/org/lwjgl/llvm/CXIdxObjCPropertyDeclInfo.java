@@ -14,12 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct CXIdxObjCPropertyDeclInfo {
  *     {@link CXIdxDeclInfo CXIdxDeclInfo} const * declInfo;
  *     {@link CXIdxEntityInfo CXIdxEntityInfo} const * getter;
  *     {@link CXIdxEntityInfo CXIdxEntityInfo} const * setter;
- * }}</pre>
+ * }</code></pre>
  */
 public class CXIdxObjCPropertyDeclInfo extends Struct<CXIdxObjCPropertyDeclInfo> {
 

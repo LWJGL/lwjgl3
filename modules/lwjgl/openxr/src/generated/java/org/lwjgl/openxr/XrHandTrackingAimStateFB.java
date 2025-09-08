@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrHandTrackingAimStateFB {
  *     XrStructureType type;
  *     void * next;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float pinchStrengthMiddle;
  *     float pinchStrengthRing;
  *     float pinchStrengthLittle;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrHandTrackingAimStateFB extends Struct<XrHandTrackingAimStateFB> implements NativeResource {
 

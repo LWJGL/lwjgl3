@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkSampleLocationsInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkExtent2D VkExtent2D} sampleLocationGridSize;
  *     uint32_t sampleLocationsCount;
  *     {@link VkSampleLocationEXT VkSampleLocationEXT} const * pSampleLocations;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkSampleLocationsInfoEXT extends Struct<VkSampleLocationsInfoEXT> implements NativeResource {
 

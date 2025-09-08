@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.video.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoDecodeH265SessionParametersAddInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -29,7 +29,7 @@ import org.lwjgl.vulkan.video.*;
  *     {@link StdVideoH265SequenceParameterSet StdVideoH265SequenceParameterSet} const * pStdSPSs;
  *     uint32_t stdPPSCount;
  *     {@link StdVideoH265PictureParameterSet StdVideoH265PictureParameterSet} const * pStdPPSs;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoDecodeH265SessionParametersAddInfoKHR extends Struct<VkVideoDecodeH265SessionParametersAddInfoKHR> implements NativeResource {
 

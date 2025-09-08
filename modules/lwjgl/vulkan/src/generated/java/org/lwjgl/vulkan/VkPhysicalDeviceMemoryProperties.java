@@ -19,13 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPhysicalDeviceMemoryProperties {
  *     uint32_t memoryTypeCount;
  *     {@link VkMemoryType VkMemoryType} memoryTypes[VK_MAX_MEMORY_TYPES];
  *     uint32_t memoryHeapCount;
  *     {@link VkMemoryHeap VkMemoryHeap} memoryHeaps[VK_MAX_MEMORY_HEAPS];
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceMemoryProperties extends Struct<VkPhysicalDeviceMemoryProperties> implements NativeResource {
 

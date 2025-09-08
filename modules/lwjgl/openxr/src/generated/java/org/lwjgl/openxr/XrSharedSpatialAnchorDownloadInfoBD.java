@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSharedSpatialAnchorDownloadInfoBD {
  *     XrStructureType type;
  *     void const * next;
  *     {@link XrUuidEXT XrUuidEXT} uuid;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSharedSpatialAnchorDownloadInfoBD extends Struct<XrSharedSpatialAnchorDownloadInfoBD> implements NativeResource {
 

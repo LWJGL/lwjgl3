@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * union SDL_Event {
  *     Uint32 type;
  *     {@link SDL_CommonEvent SDL_CommonEvent} common;
@@ -58,7 +58,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link SDL_DropEvent SDL_DropEvent} drop;
  *     {@link SDL_ClipboardEvent SDL_ClipboardEvent} clipboard;
  *     Uint8 padding[128];
- * }}</pre>
+ * }</code></pre>
  */
 public class SDL_Event extends Struct<SDL_Event> implements NativeResource {
 

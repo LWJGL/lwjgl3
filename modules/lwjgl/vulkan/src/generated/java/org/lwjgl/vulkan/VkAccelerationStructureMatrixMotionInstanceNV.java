@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkAccelerationStructureMatrixMotionInstanceNV {
  *     {@link VkTransformMatrixKHR VkTransformMatrixKHR} transformT0;
  *     {@link VkTransformMatrixKHR VkTransformMatrixKHR} transformT1;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t instanceShaderBindingTableRecordOffset : 24;
  *     VkGeometryInstanceFlagsKHR flags : 8;
  *     uint64_t accelerationStructureReference;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkAccelerationStructureMatrixMotionInstanceNV extends Struct<VkAccelerationStructureMatrixMotionInstanceNV> implements NativeResource {
 

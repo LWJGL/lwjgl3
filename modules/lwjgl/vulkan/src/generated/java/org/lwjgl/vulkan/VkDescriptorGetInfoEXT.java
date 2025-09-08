@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDescriptorGetInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkDescriptorType type;
  *     {@link VkDescriptorDataEXT VkDescriptorDataEXT} data;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDescriptorGetInfoEXT extends Struct<VkDescriptorGetInfoEXT> implements NativeResource {
 

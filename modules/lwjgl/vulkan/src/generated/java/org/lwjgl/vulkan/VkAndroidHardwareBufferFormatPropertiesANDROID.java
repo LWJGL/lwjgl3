@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkAndroidHardwareBufferFormatPropertiesANDROID {
  *     VkStructureType sType;
  *     void * pNext;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkSamplerYcbcrRange suggestedYcbcrRange;
  *     VkChromaLocation suggestedXChromaOffset;
  *     VkChromaLocation suggestedYChromaOffset;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkAndroidHardwareBufferFormatPropertiesANDROID extends Struct<VkAndroidHardwareBufferFormatPropertiesANDROID> implements NativeResource {
 

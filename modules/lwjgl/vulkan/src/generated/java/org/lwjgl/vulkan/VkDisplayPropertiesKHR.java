@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDisplayPropertiesKHR {
  *     VkDisplayKHR display;
  *     char const * displayName;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkSurfaceTransformFlagsKHR supportedTransforms;
  *     VkBool32 planeReorderPossible;
  *     VkBool32 persistentContent;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDisplayPropertiesKHR extends Struct<VkDisplayPropertiesKHR> implements NativeResource {
 

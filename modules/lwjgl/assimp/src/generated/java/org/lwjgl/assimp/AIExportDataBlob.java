@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiExportDataBlob {
  *     size_t size;
  *     void * data;
  *     {@link AIString struct aiString} name;
  *     {@link AIExportDataBlob struct aiExportDataBlob} * next;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiExportDataBlob")
 public class AIExportDataBlob extends Struct<AIExportDataBlob> implements NativeResource {

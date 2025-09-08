@@ -17,12 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiMeshMorphAnim {
  *     {@link AIString struct aiString} mName;
  *     unsigned int mNumKeys;
  *     {@link AIMeshMorphKey struct aiMeshMorphKey} * mKeys;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiMeshMorphAnim")
 public class AIMeshMorphAnim extends Struct<AIMeshMorphAnim> implements NativeResource {

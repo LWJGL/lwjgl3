@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nfdopendialogu8args_t {
  *     {@link NFDFilterItem nfdfilteritem_t} const * filterList;
  *     nfdfiltersize_t filterCount;
  *     nfdchar_t const * defaultPath;
  *     {@link NFDWindowHandle nfdwindowhandle_t} parentWindow;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nfdopendialogu8args_t")
 public class NFDOpenDialogArgs extends Struct<NFDOpenDialogArgs> implements NativeResource {

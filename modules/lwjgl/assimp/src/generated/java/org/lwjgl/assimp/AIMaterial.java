@@ -17,12 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiMaterial {
  *     {@link AIMaterialProperty struct aiMaterialProperty} ** mProperties;
  *     unsigned int mNumProperties;
  *     unsigned int mNumAllocated;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiMaterial")
 public class AIMaterial extends Struct<AIMaterial> implements NativeResource {

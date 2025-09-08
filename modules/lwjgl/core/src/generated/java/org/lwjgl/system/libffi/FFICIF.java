@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct ffi_cif {
  *     ffi_abi abi;
  *     unsigned nargs;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link FFIType ffi_type} * rtype;
  *     unsigned bytes;
  *     unsigned flags;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct ffi_cif")
 public class FFICIF extends Struct<FFICIF> implements NativeResource {

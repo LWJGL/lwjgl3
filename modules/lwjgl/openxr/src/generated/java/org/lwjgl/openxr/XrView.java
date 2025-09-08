@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrView {
  *     XrStructureType type;
  *     void * next;
  *     {@link XrPosef XrPosef} pose;
  *     {@link XrFovf XrFovf} fov;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrView extends Struct<XrView> implements NativeResource {
 

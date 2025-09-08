@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrRect3DfFB {
  *     {@link XrOffset3DfFB XrOffset3DfFB} offset;
  *     {@link XrExtent3DfFB XrExtent3DfFB} extent;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrRect3DfFB extends Struct<XrRect3DfFB> implements NativeResource {
 

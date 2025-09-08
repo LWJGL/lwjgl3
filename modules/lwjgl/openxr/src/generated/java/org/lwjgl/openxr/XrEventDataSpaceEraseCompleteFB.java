@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrEventDataSpaceEraseCompleteFB {
  *     XrStructureType type;
  *     void const * next;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrSpace space;
  *     {@link XrUuidEXT XrUuidEXT} uuid;
  *     XrSpaceStorageLocationFB location;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrEventDataSpaceEraseCompleteFB extends Struct<XrEventDataSpaceEraseCompleteFB> implements NativeResource {
 

@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.video.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoEncodeAV1SessionParametersCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -27,7 +27,7 @@ import org.lwjgl.vulkan.video.*;
  *     {@link StdVideoEncodeAV1DecoderModelInfo StdVideoEncodeAV1DecoderModelInfo} const * pStdDecoderModelInfo;
  *     uint32_t stdOperatingPointCount;
  *     {@link StdVideoEncodeAV1OperatingPointInfo StdVideoEncodeAV1OperatingPointInfo} const * pStdOperatingPoints;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoEncodeAV1SessionParametersCreateInfoKHR extends Struct<VkVideoEncodeAV1SessionParametersCreateInfoKHR> implements NativeResource {
 

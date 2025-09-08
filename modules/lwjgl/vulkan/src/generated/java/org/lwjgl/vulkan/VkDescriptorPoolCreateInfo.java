@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDescriptorPoolCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t maxSets;
  *     uint32_t poolSizeCount;
  *     {@link VkDescriptorPoolSize VkDescriptorPoolSize} const * pPoolSizes;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDescriptorPoolCreateInfo extends Struct<VkDescriptorPoolCreateInfo> implements NativeResource {
 

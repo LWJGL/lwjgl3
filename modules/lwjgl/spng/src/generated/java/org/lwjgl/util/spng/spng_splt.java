@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct spng_splt {
  *     char name[80];
  *     uint8_t sample_depth;
  *     uint32_t n_entries;
  *     {@link spng_splt_entry struct spng_splt_entry} * entries;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct spng_splt")
 public class spng_splt extends Struct<spng_splt> implements NativeResource {

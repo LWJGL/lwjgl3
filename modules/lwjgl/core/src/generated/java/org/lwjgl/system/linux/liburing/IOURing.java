@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct io_uring {
  *     {@link IOURingSQ struct io_uring_sq} sq;
  *     {@link IOURingCQ struct io_uring_cq} cq;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     __u8 int_flags;
  *     __u8 pad[3];
  *     unsigned pad2;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct io_uring")
 public class IOURing extends Struct<IOURing> implements NativeResource {

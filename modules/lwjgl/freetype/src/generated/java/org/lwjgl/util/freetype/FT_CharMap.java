@@ -14,13 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_CharMapRec {
  *     {@link FT_Face FT_Face} face;
  *     FT_Encoding encoding;
  *     FT_UShort platform_id;
  *     FT_UShort encoding_id;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct FT_CharMapRec")
 public class FT_CharMap extends Struct<FT_CharMap> {

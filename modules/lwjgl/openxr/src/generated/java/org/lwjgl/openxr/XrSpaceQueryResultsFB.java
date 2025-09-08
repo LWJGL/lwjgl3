@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpaceQueryResultsFB {
  *     XrStructureType type;
  *     void * next;
  *     uint32_t resultCapacityInput;
  *     uint32_t resultCountOutput;
  *     {@link XrSpaceQueryResultFB XrSpaceQueryResultFB} * results;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpaceQueryResultsFB extends Struct<XrSpaceQueryResultsFB> implements NativeResource {
 

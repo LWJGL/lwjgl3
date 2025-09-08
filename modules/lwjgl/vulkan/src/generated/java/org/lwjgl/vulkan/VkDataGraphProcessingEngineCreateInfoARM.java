@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDataGraphProcessingEngineCreateInfoARM {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t processingEngineCount;
  *     {@link VkPhysicalDeviceDataGraphProcessingEngineARM VkPhysicalDeviceDataGraphProcessingEngineARM} * pProcessingEngines;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDataGraphProcessingEngineCreateInfoARM extends Struct<VkDataGraphProcessingEngineCreateInfoARM> implements NativeResource {
 

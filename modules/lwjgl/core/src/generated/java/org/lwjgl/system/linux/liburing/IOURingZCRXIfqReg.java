@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct io_uring_zcrx_ifq_reg {
  *     __u32 if_idx;
  *     __u32 if_rxq;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     __u32 zcrx_id;
  *     __u32 __resv2;
  *     __u64 __resv[3];
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct io_uring_zcrx_ifq_reg")
 public class IOURingZCRXIfqReg extends Struct<IOURingZCRXIfqReg> implements NativeResource {

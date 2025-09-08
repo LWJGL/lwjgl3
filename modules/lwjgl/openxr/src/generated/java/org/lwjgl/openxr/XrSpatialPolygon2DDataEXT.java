@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpatialPolygon2DDataEXT {
  *     {@link XrPosef XrPosef} origin;
  *     {@link XrSpatialBufferEXT XrSpatialBufferEXT} vertexBuffer;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpatialPolygon2DDataEXT extends Struct<XrSpatialPolygon2DDataEXT> implements NativeResource {
 

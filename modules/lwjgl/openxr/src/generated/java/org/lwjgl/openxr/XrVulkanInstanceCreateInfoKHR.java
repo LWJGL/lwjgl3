@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrVulkanInstanceCreateInfoKHR {
  *     XrStructureType type;
  *     void const * next;
@@ -28,7 +28,7 @@ import org.lwjgl.vulkan.*;
  *     PFN_vkGetInstanceProcAddr pfnGetInstanceProcAddr;
  *     {@link VkInstanceCreateInfo VkInstanceCreateInfo} const * vulkanCreateInfo;
  *     {@link VkAllocationCallbacks VkAllocationCallbacks} const * vulkanAllocator;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrVulkanInstanceCreateInfoKHR extends Struct<XrVulkanInstanceCreateInfoKHR> implements NativeResource {
 

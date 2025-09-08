@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkRenderingFragmentShadingRateAttachmentInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkImageView imageView;
  *     VkImageLayout imageLayout;
  *     {@link VkExtent2D VkExtent2D} shadingRateAttachmentTexelSize;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkRenderingFragmentShadingRateAttachmentInfoKHR extends Struct<VkRenderingFragmentShadingRateAttachmentInfoKHR> implements NativeResource {
 

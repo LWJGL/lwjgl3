@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkAccelerationStructureInstanceNV {
  *     {@link VkTransformMatrixKHR VkTransformMatrixKHR} transform;
  *     uint32_t instanceCustomIndex : 24;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t instanceShaderBindingTableRecordOffset : 24;
  *     VkGeometryInstanceFlagsKHR flags : 8;
  *     uint64_t accelerationStructureReference;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkAccelerationStructureInstanceNV extends VkAccelerationStructureInstanceKHR {
 

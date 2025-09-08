@@ -17,12 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDeviceTensorMemoryRequirementsARM {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link VkTensorCreateInfoARM VkTensorCreateInfoARM} const * pCreateInfo;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDeviceTensorMemoryRequirementsARM extends Struct<VkDeviceTensorMemoryRequirementsARM> implements NativeResource {
 

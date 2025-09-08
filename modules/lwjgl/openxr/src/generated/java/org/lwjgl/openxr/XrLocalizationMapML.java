@@ -19,14 +19,14 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.MLLocalizationMap.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrLocalizationMapML {
  *     XrStructureType type;
  *     void * next;
  *     char name[XR_MAX_LOCALIZATION_MAP_NAME_LENGTH_ML];
  *     {@link XrUuidEXT XrUuidEXT} mapUuid;
  *     XrLocalizationMapTypeML mapType;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrLocalizationMapML extends Struct<XrLocalizationMapML> implements NativeResource {
 

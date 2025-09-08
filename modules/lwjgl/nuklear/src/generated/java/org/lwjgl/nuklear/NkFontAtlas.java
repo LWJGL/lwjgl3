@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_font_atlas {
  *     void * pixel;
  *     int tex_width;
@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkFont struct nk_font} * fonts;
  *     {@link NkFontConfig struct nk_font_config} * config;
  *     int font_num;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_font_atlas")
 public class NkFontAtlas extends Struct<NkFontAtlas> implements NativeResource {

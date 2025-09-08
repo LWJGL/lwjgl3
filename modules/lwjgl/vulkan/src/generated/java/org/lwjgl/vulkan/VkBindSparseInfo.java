@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkBindSparseInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkSparseImageMemoryBindInfo VkSparseImageMemoryBindInfo} const * pImageBinds;
  *     uint32_t signalSemaphoreCount;
  *     VkSemaphore const * pSignalSemaphores;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkBindSparseInfo extends Struct<VkBindSparseInfo> implements NativeResource {
 

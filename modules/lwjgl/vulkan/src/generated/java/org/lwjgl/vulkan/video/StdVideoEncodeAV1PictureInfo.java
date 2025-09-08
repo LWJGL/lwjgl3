@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoEncodeAV1PictureInfo {
  *     {@link StdVideoEncodeAV1PictureInfoFlags StdVideoEncodeAV1PictureInfoFlags} flags;
  *     StdVideoAV1FrameType frame_type;
@@ -48,7 +48,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*;
  *     {@link StdVideoAV1GlobalMotion StdVideoAV1GlobalMotion} const * pGlobalMotion;
  *     {@link StdVideoEncodeAV1ExtensionHeader StdVideoEncodeAV1ExtensionHeader} const * pExtensionHeader;
  *     uint32_t const * pBufferRemovalTimes;
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoEncodeAV1PictureInfo extends Struct<StdVideoEncodeAV1PictureInfo> implements NativeResource {
 

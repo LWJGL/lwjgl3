@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct ffi_closure {
  *     {@link FFICIF ffi_cif} * cif;
  *     void (*)(ffi_cif*,void*,void**,void*) fun;
  *     void * user_data;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct ffi_closure")
 public class FFIClosure extends Struct<FFIClosure> implements NativeResource {

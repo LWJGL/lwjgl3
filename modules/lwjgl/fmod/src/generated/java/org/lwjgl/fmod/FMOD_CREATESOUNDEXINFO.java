@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FMOD_CREATESOUNDEXINFO {
  *     int cbsize;
  *     unsigned int length;
@@ -55,7 +55,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int minmidigranularity;
  *     int nonblockthreadid;
  *     {@link FMOD_GUID FMOD_GUID} * fsbguid;
- * }}</pre>
+ * }</code></pre>
  */
 public class FMOD_CREATESOUNDEXINFO extends Struct<FMOD_CREATESOUNDEXINFO> implements NativeResource {
 

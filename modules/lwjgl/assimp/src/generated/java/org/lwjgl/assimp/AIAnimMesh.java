@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiAnimMesh {
  *     {@link AIString struct aiString} mName;
  *     {@link AIVector3D struct aiVector3D} * mVertices;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link AIVector3D struct aiVector3D} * mTextureCoords[Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS];
  *     unsigned int mNumVertices;
  *     float mWeight;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiAnimMesh")
 public class AIAnimMesh extends Struct<AIAnimMesh> implements NativeResource {

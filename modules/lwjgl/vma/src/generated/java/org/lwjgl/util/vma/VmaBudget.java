@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VmaBudget {
  *     {@link VmaStatistics VmaStatistics} statistics;
  *     VkDeviceSize usage;
  *     VkDeviceSize budget;
- * }}</pre>
+ * }</code></pre>
  */
 public class VmaBudget extends Struct<VmaBudget> implements NativeResource {
 

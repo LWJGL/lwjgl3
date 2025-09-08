@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkImageSubresource2KHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkImageSubresource VkImageSubresource} imageSubresource;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkImageSubresource2KHR extends VkImageSubresource2 {
 

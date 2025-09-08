@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoEncodeAV1ReferenceInfo {
  *     {@link StdVideoEncodeAV1ReferenceInfoFlags StdVideoEncodeAV1ReferenceInfoFlags} flags;
  *     uint32_t RefFrameId;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint8_t OrderHint;
  *     uint8_t reserved1[3];
  *     {@link StdVideoEncodeAV1ExtensionHeader StdVideoEncodeAV1ExtensionHeader} const * pExtensionHeader;
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoEncodeAV1ReferenceInfo extends Struct<StdVideoEncodeAV1ReferenceInfo> implements NativeResource {
 

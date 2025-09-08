@@ -14,14 +14,14 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_PaintSkew {
  *     {@link FT_OpaquePaint FT_OpaquePaintRec} paint;
  *     FT_Fixed x_skew_angle;
  *     FT_Fixed y_skew_angle;
  *     FT_Fixed center_x;
  *     FT_Fixed center_y;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_PaintSkew extends Struct<FT_PaintSkew> {
 

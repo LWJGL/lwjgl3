@@ -14,7 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_GlyphSlotRec {
  *     FT_Library library;
  *     {@link FT_Face FT_Face} face;
@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_Pos rsb_delta;
  *     void * other;
  *     FT_Slot_Internal internal;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct FT_GlyphSlotRec")
 public class FT_GlyphSlot extends Struct<FT_GlyphSlot> {

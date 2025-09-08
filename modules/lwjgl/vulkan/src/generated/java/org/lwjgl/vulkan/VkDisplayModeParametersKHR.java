@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDisplayModeParametersKHR {
  *     {@link VkExtent2D VkExtent2D} visibleRegion;
  *     uint32_t refreshRate;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDisplayModeParametersKHR extends Struct<VkDisplayModeParametersKHR> implements NativeResource {
 

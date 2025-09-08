@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrTrackablePlaneANDROID {
  *     XrStructureType type;
  *     void * next;
@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t vertexCapacityInput;
  *     uint32_t vertexCountOutput;
  *     {@link XrVector2f XrVector2f} * vertices;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrTrackablePlaneANDROID extends Struct<XrTrackablePlaneANDROID> implements NativeResource {
 

@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpatialContextCreateInfoEXT {
  *     XrStructureType type;
  *     void const * next;
  *     uint32_t capabilityConfigCount;
  *     {@link XrSpatialCapabilityConfigurationBaseHeaderEXT XrSpatialCapabilityConfigurationBaseHeaderEXT} const * const * capabilityConfigs;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpatialContextCreateInfoEXT extends Struct<XrSpatialContextCreateInfoEXT> implements NativeResource {
 

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_Raster_Funcs {
  *     FT_Glyph_Format glyph_format;
  *     {@link FT_Raster_NewFuncI FT_Raster_NewFunc} raster_new;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link FT_Raster_SetModeFuncI FT_Raster_SetModeFunc} raster_set_mode;
  *     {@link FT_Raster_RenderFuncI FT_Raster_RenderFunc} raster_render;
  *     {@link FT_Raster_DoneFuncI FT_Raster_DoneFunc} raster_done;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_Raster_Funcs extends Struct<FT_Raster_Funcs> implements NativeResource {
 

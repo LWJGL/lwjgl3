@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_Outline {
  *     unsigned short n_contours;
  *     unsigned short n_points;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned char * tags;
  *     unsigned short * contours;
  *     int flags;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_Outline extends Struct<FT_Outline> implements NativeResource {
 

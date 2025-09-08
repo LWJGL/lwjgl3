@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrMarkerSpaceCreateInfoVARJO {
  *     XrStructureType type;
  *     void const * next;
  *     uint64_t markerId;
  *     {@link XrPosef XrPosef} poseInMarkerSpace;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrMarkerSpaceCreateInfoVARJO extends Struct<XrMarkerSpaceCreateInfoVARJO> implements NativeResource {
 

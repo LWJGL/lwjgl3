@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct LZ4F_CustomMem {
  *     {@link LZ4FAllocFunctionI LZ4F_AllocFunction} customAlloc;
  *     {@link LZ4FCallocFunctionI LZ4F_CallocFunction} customCalloc;
  *     {@link LZ4FFreeFunctionI LZ4F_FreeFunction} customFree;
  *     void * opaqueState;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct LZ4F_CustomMem")
 public class LZ4FCustomMem extends Struct<LZ4FCustomMem> implements NativeResource {

@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkMultisamplePropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkExtent2D VkExtent2D} maxSampleLocationGridSize;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkMultisamplePropertiesEXT extends Struct<VkMultisamplePropertiesEXT> implements NativeResource {
 

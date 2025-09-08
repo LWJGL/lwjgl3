@@ -14,7 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct CXIdxEntityRefInfo {
  *     CXIdxEntityRefKind kind;
  *     {@link CXCursor CXCursor} cursor;
@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link CXIdxEntityInfo CXIdxEntityInfo} const * parentEntity;
  *     {@link CXIdxContainerInfo CXIdxContainerInfo} const * container;
  *     CXSymbolRole role;
- * }}</pre>
+ * }</code></pre>
  */
 public class CXIdxEntityRefInfo extends Struct<CXIdxEntityRefInfo> {
 

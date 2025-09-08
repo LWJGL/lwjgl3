@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpaceUuidFilterInfoFB {
  *     XrStructureType type;
  *     void const * next;
  *     uint32_t uuidCount;
  *     {@link XrUuidEXT XrUuidEXT} * uuids;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpaceUuidFilterInfoFB extends Struct<XrSpaceUuidFilterInfoFB> implements NativeResource {
 

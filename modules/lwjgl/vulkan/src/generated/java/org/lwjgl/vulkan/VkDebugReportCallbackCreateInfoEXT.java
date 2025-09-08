@@ -17,14 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDebugReportCallbackCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkDebugReportFlagsEXT flags;
  *     {@link VkDebugReportCallbackEXTI PFN_vkDebugReportCallbackEXT} pfnCallback;
  *     void * pUserData;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDebugReportCallbackCreateInfoEXT extends Struct<VkDebugReportCallbackCreateInfoEXT> implements NativeResource {
 

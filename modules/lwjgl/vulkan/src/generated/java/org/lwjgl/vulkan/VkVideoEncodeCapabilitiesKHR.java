@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoEncodeCapabilitiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t maxQualityLevels;
  *     {@link VkExtent2D VkExtent2D} encodeInputPictureGranularity;
  *     VkVideoEncodeFeedbackFlagsKHR supportedEncodeFeedbackFlags;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoEncodeCapabilitiesKHR extends Struct<VkVideoEncodeCapabilitiesKHR> implements NativeResource {
 

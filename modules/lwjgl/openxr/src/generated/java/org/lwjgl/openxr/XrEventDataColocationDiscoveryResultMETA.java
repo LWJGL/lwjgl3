@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.METAColocationDiscovery.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrEventDataColocationDiscoveryResultMETA {
  *     XrStructureType type;
  *     void const * next;
@@ -27,7 +27,7 @@ import static org.lwjgl.openxr.METAColocationDiscovery.*;
  *     {@link XrUuid XrUuid} advertisementUuid;
  *     uint32_t bufferSize;
  *     uint8_t buffer[XR_MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META];
- * }}</pre>
+ * }</code></pre>
  */
 public class XrEventDataColocationDiscoveryResultMETA extends Struct<XrEventDataColocationDiscoveryResultMETA> implements NativeResource {
 

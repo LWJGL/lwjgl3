@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrTriangleMeshCreateInfoFB {
  *     XrStructureType type;
  *     void const * next;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link XrVector3f XrVector3f} const * vertexBuffer;
  *     uint32_t triangleCount;
  *     uint32_t const * indexBuffer;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrTriangleMeshCreateInfoFB extends Struct<XrTriangleMeshCreateInfoFB> implements NativeResource {
 

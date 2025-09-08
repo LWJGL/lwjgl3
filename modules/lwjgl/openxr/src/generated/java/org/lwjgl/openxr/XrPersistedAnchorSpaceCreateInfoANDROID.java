@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrPersistedAnchorSpaceCreateInfoANDROID {
  *     XrStructureType type;
  *     void const * next;
  *     {@link XrUuidEXT XrUuidEXT} anchorId;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrPersistedAnchorSpaceCreateInfoANDROID extends Struct<XrPersistedAnchorSpaceCreateInfoANDROID> implements NativeResource {
 

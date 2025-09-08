@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FMOD_STUDIO_PARAMETER_DESCRIPTION {
  *     char const * name;
  *     {@link FMOD_STUDIO_PARAMETER_ID FMOD_STUDIO_PARAMETER_ID} id;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     FMOD_STUDIO_PARAMETER_TYPE type;
  *     FMOD_STUDIO_PARAMETER_FLAGS flags;
  *     {@link FMOD_GUID FMOD_GUID} guid;
- * }}</pre>
+ * }</code></pre>
  */
 public class FMOD_STUDIO_PARAMETER_DESCRIPTION extends Struct<FMOD_STUDIO_PARAMETER_DESCRIPTION> implements NativeResource {
 

@@ -14,11 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_PaintTransform {
  *     {@link FT_OpaquePaint FT_OpaquePaintRec} paint;
  *     {@link FT_Affine23 FT_Affine23} affine;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_PaintTransform extends Struct<FT_PaintTransform> {
 
