@@ -11,8 +11,8 @@
     <condition property="linux.triplet" value="riscv64-linux-gnu"><isset property="build.arch.riscv64"/></condition>
     <condition property="linux.triplet" value="x86_64-linux-gnu"><isset property="build.arch.x64|x86"/></condition>
 
-    <condition property="gcc.prefix" value="" else="${linux.triplet}-">
-        <isset property="build.arch.x64|x86"/>
+    <condition property="gcc.prefix" value="${linux.triplet}-" else="">
+        <isset property="env.LWJGL_BUILD_ARCH"/>
     </condition>
     <condition property="gcc.suffix" value="-${gcc.version}" else="">
         <isset property="gcc.version"/>
