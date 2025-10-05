@@ -377,9 +377,9 @@ public class FreeType {
 
     public static final int FREETYPE_MAJOR = 2;
 
-    public static final int FREETYPE_MINOR = 13;
+    public static final int FREETYPE_MINOR = 14;
 
-    public static final int FREETYPE_PATCH = 3;
+    public static final int FREETYPE_PATCH = 1;
 
     public static final int FT_ADVANCE_FLAG_FAST_ONLY = 0x20000000;
 

@@ -564,8 +564,8 @@ val freetype = "FreeType".nativeClass(Module.FREETYPE, prefix = "FT", prefixMeth
     )
 
     IntConstant("FREETYPE_MAJOR".."2").noPrefix()
-    IntConstant("FREETYPE_MINOR".."13").noPrefix()
-    IntConstant("FREETYPE_PATCH".."3").noPrefix()
+    IntConstant("FREETYPE_MINOR".."14").noPrefix()
+    IntConstant("FREETYPE_PATCH".."1").noPrefix()
 
     void(
         "Library_Version",
