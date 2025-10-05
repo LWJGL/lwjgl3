@@ -14,8 +14,8 @@ val FMOD = "FMOD".nativeClass(
     binding = simpleBinding(Module.FMOD, libraryName = "FMOD", libraryExpression = "Configuration.FMOD_LIBRARY_NAME, \"fmod\"")
 ) {
 
-    IntConstant("VERSION"..0x00020307)
-    IntConstant("BUILDNUMBER".."150747")
+    IntConstant("VERSION"..0x00020309)
+    IntConstant("BUILDNUMBER".."155273")
 
     IntConstant(
         "DEBUG_LEVEL_NONE"..0x00000000,
@@ -26,6 +26,7 @@ val FMOD = "FMOD".nativeClass(
         "DEBUG_TYPE_FILE"..0x00000200,
         "DEBUG_TYPE_CODEC"..0x00000400,
         "DEBUG_TYPE_TRACE"..0x00000800,
+        "DEBUG_TYPE_VIRTUAL"..0x00001000,
         "DEBUG_DISPLAY_TIMESTAMPS"..0x00010000,
         "DEBUG_DISPLAY_LINENUMBERS"..0x00020000,
         "DEBUG_DISPLAY_THREAD"..0x00040000
@@ -585,6 +586,7 @@ val FMOD = "FMOD".nativeClass(
         "DSPCONNECTION_TYPE_SIDECHAIN".enum,
         "DSPCONNECTION_TYPE_SEND".enum,
         "DSPCONNECTION_TYPE_SEND_SIDECHAIN".enum,
+        "DSPCONNECTION_TYPE_PREALLOCATED".enum,
         "DSPCONNECTION_TYPE_MAX".enum
     )
 
@@ -1802,6 +1804,14 @@ val FMOD = "FMOD".nativeClass(
         FMOD_SYSTEM.p("system"),
         FMOD_DSP_TYPE("type"),
         Check(1)..FMOD_DSP.p.p("dsp")
+    )
+
+    IgnoreMissing..FMOD_RESULT(
+        "System_CreateDSPConnection",
+
+        FMOD_SYSTEM.p("system"),
+        FMOD_DSPCONNECTION_TYPE("type"),
+        Check(1)..FMOD_DSPCONNECTION.p.p("connection")
     )
 
     FMOD_RESULT(
