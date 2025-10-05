@@ -9,6 +9,7 @@
     <condition property="linux.triplet" value="aarch64-linux-gnu"><isset property="build.arch.arm64"/></condition>
     <condition property="linux.triplet" value="powerpc64le-linux-gnu"><isset property="build.arch.ppc64le"/></condition>
     <condition property="linux.triplet" value="riscv64-linux-gnu"><isset property="build.arch.riscv64"/></condition>
+    <condition property="linux.triplet" value="loongarch64-unknown-linux-gnu"><isset property="build.arch.loongarch64"/></condition>
     <condition property="linux.triplet" value="x86_64-linux-gnu"><isset property="build.arch.x64|x86"/></condition>
 
     <condition property="gcc.prefix" value="${linux.triplet}-" else="">
@@ -42,6 +43,7 @@
                 <arg line="-m32 -mfpmath=sse -msse -msse2" if:set="build.arch.x86"/>
                 <arg line="-mcpu=powerpc64le" if:set="build.arch.ppc64le"/>
                 <arg line="-march=rv64g" if:set="build.arch.riscv64"/>
+                <arg line="-march=la64v1.1" if:set="build.arch.loongarch64"/>
                 <arg line="-O3 -flto=auto -fPIC @{flags} -pthread -DNDEBUG -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
                 <arg line="-U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_GNU_SOURCE"/>
                 <arg line="-D_FILE_OFFSET_BITS=64"/>
@@ -183,6 +185,7 @@
                 <arg value="-I${src.main.rel}/libffi/arm" if:set="build.arch.arm32"/>
                 <arg value="-I${src.main.rel}/libffi/ppc64le" if:set="build.arch.ppc64le"/>
                 <arg value="-I${src.main.rel}/libffi/riscv64" if:set="build.arch.riscv64"/>
+                <arg value="-I${src.main.rel}/libffi/loongarch64" if:set="build.arch.loongarch64"/>
                 <arg value="-I${src.main.rel}/libffi/x86" if:set="build.arch.x64|x86"/>
                 <arg value="-DX86_64" if:set="build.arch.x64"/> <!-- for libffi/x86/ffitarget.h -->
                 <arg value="-I${src.main.rel}/${platform}/liburing"/>
