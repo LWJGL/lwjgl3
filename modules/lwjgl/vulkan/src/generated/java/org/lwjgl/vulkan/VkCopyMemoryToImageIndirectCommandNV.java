@@ -26,43 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkExtent3D VkExtent3D} imageExtent;
  * }</code></pre>
  */
-public class VkCopyMemoryToImageIndirectCommandNV extends Struct<VkCopyMemoryToImageIndirectCommandNV> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        SRCADDRESS,
-        BUFFERROWLENGTH,
-        BUFFERIMAGEHEIGHT,
-        IMAGESUBRESOURCE,
-        IMAGEOFFSET,
-        IMAGEEXTENT;
-
-    static {
-        Layout layout = __struct(
-            __member(8),
-            __member(4),
-            __member(4),
-            __member(VkImageSubresourceLayers.SIZEOF, VkImageSubresourceLayers.ALIGNOF),
-            __member(VkOffset3D.SIZEOF, VkOffset3D.ALIGNOF),
-            __member(VkExtent3D.SIZEOF, VkExtent3D.ALIGNOF)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        SRCADDRESS = layout.offsetof(0);
-        BUFFERROWLENGTH = layout.offsetof(1);
-        BUFFERIMAGEHEIGHT = layout.offsetof(2);
-        IMAGESUBRESOURCE = layout.offsetof(3);
-        IMAGEOFFSET = layout.offsetof(4);
-        IMAGEEXTENT = layout.offsetof(5);
-    }
+public class VkCopyMemoryToImageIndirectCommandNV extends VkCopyMemoryToImageIndirectCommandKHR {
 
     protected VkCopyMemoryToImageIndirectCommandNV(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -80,48 +44,39 @@ public class VkCopyMemoryToImageIndirectCommandNV extends Struct<VkCopyMemoryToI
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkCopyMemoryToImageIndirectCommandNV(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** @return the value of the {@code srcAddress} field. */
-    @NativeType("VkDeviceAddress")
-    public long srcAddress() { return nsrcAddress(address()); }
-    /** @return the value of the {@code bufferRowLength} field. */
-    @NativeType("uint32_t")
-    public int bufferRowLength() { return nbufferRowLength(address()); }
-    /** @return the value of the {@code bufferImageHeight} field. */
-    @NativeType("uint32_t")
-    public int bufferImageHeight() { return nbufferImageHeight(address()); }
-    /** @return a {@link VkImageSubresourceLayers} view of the {@code imageSubresource} field. */
-    public VkImageSubresourceLayers imageSubresource() { return nimageSubresource(address()); }
-    /** @return a {@link VkOffset3D} view of the {@code imageOffset} field. */
-    public VkOffset3D imageOffset() { return nimageOffset(address()); }
-    /** @return a {@link VkExtent3D} view of the {@code imageExtent} field. */
-    public VkExtent3D imageExtent() { return nimageExtent(address()); }
-
     /** Sets the specified value to the {@code srcAddress} field. */
+    @Override
     public VkCopyMemoryToImageIndirectCommandNV srcAddress(@NativeType("VkDeviceAddress") long value) { nsrcAddress(address(), value); return this; }
     /** Sets the specified value to the {@code bufferRowLength} field. */
+    @Override
     public VkCopyMemoryToImageIndirectCommandNV bufferRowLength(@NativeType("uint32_t") int value) { nbufferRowLength(address(), value); return this; }
     /** Sets the specified value to the {@code bufferImageHeight} field. */
+    @Override
     public VkCopyMemoryToImageIndirectCommandNV bufferImageHeight(@NativeType("uint32_t") int value) { nbufferImageHeight(address(), value); return this; }
     /** Copies the specified {@link VkImageSubresourceLayers} to the {@code imageSubresource} field. */
+    @Override
     public VkCopyMemoryToImageIndirectCommandNV imageSubresource(VkImageSubresourceLayers value) { nimageSubresource(address(), value); return this; }
     /** Passes the {@code imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+    @Override
     public VkCopyMemoryToImageIndirectCommandNV imageSubresource(java.util.function.Consumer<VkImageSubresourceLayers> consumer) { consumer.accept(imageSubresource()); return this; }
     /** Copies the specified {@link VkOffset3D} to the {@code imageOffset} field. */
+    @Override
     public VkCopyMemoryToImageIndirectCommandNV imageOffset(VkOffset3D value) { nimageOffset(address(), value); return this; }
     /** Passes the {@code imageOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
+    @Override
     public VkCopyMemoryToImageIndirectCommandNV imageOffset(java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(imageOffset()); return this; }
     /** Copies the specified {@link VkExtent3D} to the {@code imageExtent} field. */
+    @Override
     public VkCopyMemoryToImageIndirectCommandNV imageExtent(VkExtent3D value) { nimageExtent(address(), value); return this; }
     /** Passes the {@code imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+    @Override
     public VkCopyMemoryToImageIndirectCommandNV imageExtent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(imageExtent()); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkCopyMemoryToImageIndirectCommandNV set(
         long srcAddress,
         int bufferRowLength,
@@ -263,36 +218,8 @@ public class VkCopyMemoryToImageIndirectCommandNV extends Struct<VkCopyMemoryToI
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #srcAddress}. */
-    public static long nsrcAddress(long struct) { return memGetLong(struct + VkCopyMemoryToImageIndirectCommandNV.SRCADDRESS); }
-    /** Unsafe version of {@link #bufferRowLength}. */
-    public static int nbufferRowLength(long struct) { return memGetInt(struct + VkCopyMemoryToImageIndirectCommandNV.BUFFERROWLENGTH); }
-    /** Unsafe version of {@link #bufferImageHeight}. */
-    public static int nbufferImageHeight(long struct) { return memGetInt(struct + VkCopyMemoryToImageIndirectCommandNV.BUFFERIMAGEHEIGHT); }
-    /** Unsafe version of {@link #imageSubresource}. */
-    public static VkImageSubresourceLayers nimageSubresource(long struct) { return VkImageSubresourceLayers.create(struct + VkCopyMemoryToImageIndirectCommandNV.IMAGESUBRESOURCE); }
-    /** Unsafe version of {@link #imageOffset}. */
-    public static VkOffset3D nimageOffset(long struct) { return VkOffset3D.create(struct + VkCopyMemoryToImageIndirectCommandNV.IMAGEOFFSET); }
-    /** Unsafe version of {@link #imageExtent}. */
-    public static VkExtent3D nimageExtent(long struct) { return VkExtent3D.create(struct + VkCopyMemoryToImageIndirectCommandNV.IMAGEEXTENT); }
-
-    /** Unsafe version of {@link #srcAddress(long) srcAddress}. */
-    public static void nsrcAddress(long struct, long value) { memPutLong(struct + VkCopyMemoryToImageIndirectCommandNV.SRCADDRESS, value); }
-    /** Unsafe version of {@link #bufferRowLength(int) bufferRowLength}. */
-    public static void nbufferRowLength(long struct, int value) { memPutInt(struct + VkCopyMemoryToImageIndirectCommandNV.BUFFERROWLENGTH, value); }
-    /** Unsafe version of {@link #bufferImageHeight(int) bufferImageHeight}. */
-    public static void nbufferImageHeight(long struct, int value) { memPutInt(struct + VkCopyMemoryToImageIndirectCommandNV.BUFFERIMAGEHEIGHT, value); }
-    /** Unsafe version of {@link #imageSubresource(VkImageSubresourceLayers) imageSubresource}. */
-    public static void nimageSubresource(long struct, VkImageSubresourceLayers value) { memCopy(value.address(), struct + VkCopyMemoryToImageIndirectCommandNV.IMAGESUBRESOURCE, VkImageSubresourceLayers.SIZEOF); }
-    /** Unsafe version of {@link #imageOffset(VkOffset3D) imageOffset}. */
-    public static void nimageOffset(long struct, VkOffset3D value) { memCopy(value.address(), struct + VkCopyMemoryToImageIndirectCommandNV.IMAGEOFFSET, VkOffset3D.SIZEOF); }
-    /** Unsafe version of {@link #imageExtent(VkExtent3D) imageExtent}. */
-    public static void nimageExtent(long struct, VkExtent3D value) { memCopy(value.address(), struct + VkCopyMemoryToImageIndirectCommandNV.IMAGEEXTENT, VkExtent3D.SIZEOF); }
-
-    // -----------------------------------
-
     /** An array of {@link VkCopyMemoryToImageIndirectCommandNV} structs. */
-    public static class Buffer extends StructBuffer<VkCopyMemoryToImageIndirectCommandNV, Buffer> implements NativeResource {
+    public static class Buffer extends VkCopyMemoryToImageIndirectCommandKHR.Buffer {
 
         private static final VkCopyMemoryToImageIndirectCommandNV ELEMENT_FACTORY = VkCopyMemoryToImageIndirectCommandNV.create(-1L);
 
@@ -306,7 +233,7 @@ public class VkCopyMemoryToImageIndirectCommandNV extends Struct<VkCopyMemoryToI
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -332,39 +259,32 @@ public class VkCopyMemoryToImageIndirectCommandNV extends Struct<VkCopyMemoryToI
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code srcAddress} field. */
-        @NativeType("VkDeviceAddress")
-        public long srcAddress() { return VkCopyMemoryToImageIndirectCommandNV.nsrcAddress(address()); }
-        /** @return the value of the {@code bufferRowLength} field. */
-        @NativeType("uint32_t")
-        public int bufferRowLength() { return VkCopyMemoryToImageIndirectCommandNV.nbufferRowLength(address()); }
-        /** @return the value of the {@code bufferImageHeight} field. */
-        @NativeType("uint32_t")
-        public int bufferImageHeight() { return VkCopyMemoryToImageIndirectCommandNV.nbufferImageHeight(address()); }
-        /** @return a {@link VkImageSubresourceLayers} view of the {@code imageSubresource} field. */
-        public VkImageSubresourceLayers imageSubresource() { return VkCopyMemoryToImageIndirectCommandNV.nimageSubresource(address()); }
-        /** @return a {@link VkOffset3D} view of the {@code imageOffset} field. */
-        public VkOffset3D imageOffset() { return VkCopyMemoryToImageIndirectCommandNV.nimageOffset(address()); }
-        /** @return a {@link VkExtent3D} view of the {@code imageExtent} field. */
-        public VkExtent3D imageExtent() { return VkCopyMemoryToImageIndirectCommandNV.nimageExtent(address()); }
-
         /** Sets the specified value to the {@code srcAddress} field. */
+        @Override
         public VkCopyMemoryToImageIndirectCommandNV.Buffer srcAddress(@NativeType("VkDeviceAddress") long value) { VkCopyMemoryToImageIndirectCommandNV.nsrcAddress(address(), value); return this; }
         /** Sets the specified value to the {@code bufferRowLength} field. */
+        @Override
         public VkCopyMemoryToImageIndirectCommandNV.Buffer bufferRowLength(@NativeType("uint32_t") int value) { VkCopyMemoryToImageIndirectCommandNV.nbufferRowLength(address(), value); return this; }
         /** Sets the specified value to the {@code bufferImageHeight} field. */
+        @Override
         public VkCopyMemoryToImageIndirectCommandNV.Buffer bufferImageHeight(@NativeType("uint32_t") int value) { VkCopyMemoryToImageIndirectCommandNV.nbufferImageHeight(address(), value); return this; }
         /** Copies the specified {@link VkImageSubresourceLayers} to the {@code imageSubresource} field. */
+        @Override
         public VkCopyMemoryToImageIndirectCommandNV.Buffer imageSubresource(VkImageSubresourceLayers value) { VkCopyMemoryToImageIndirectCommandNV.nimageSubresource(address(), value); return this; }
         /** Passes the {@code imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+        @Override
         public VkCopyMemoryToImageIndirectCommandNV.Buffer imageSubresource(java.util.function.Consumer<VkImageSubresourceLayers> consumer) { consumer.accept(imageSubresource()); return this; }
         /** Copies the specified {@link VkOffset3D} to the {@code imageOffset} field. */
+        @Override
         public VkCopyMemoryToImageIndirectCommandNV.Buffer imageOffset(VkOffset3D value) { VkCopyMemoryToImageIndirectCommandNV.nimageOffset(address(), value); return this; }
         /** Passes the {@code imageOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
+        @Override
         public VkCopyMemoryToImageIndirectCommandNV.Buffer imageOffset(java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(imageOffset()); return this; }
         /** Copies the specified {@link VkExtent3D} to the {@code imageExtent} field. */
+        @Override
         public VkCopyMemoryToImageIndirectCommandNV.Buffer imageExtent(VkExtent3D value) { VkCopyMemoryToImageIndirectCommandNV.nimageExtent(address(), value); return this; }
         /** Passes the {@code imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+        @Override
         public VkCopyMemoryToImageIndirectCommandNV.Buffer imageExtent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(imageExtent()); return this; }
 
     }

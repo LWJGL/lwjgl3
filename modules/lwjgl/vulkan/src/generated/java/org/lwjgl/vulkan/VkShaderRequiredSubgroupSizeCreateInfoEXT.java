@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre>{@code
  * struct VkShaderRequiredSubgroupSizeCreateInfoEXT {
  *     VkStructureType sType;
- *     void * pNext;
+ *     void const * pNext;
  *     uint32_t requiredSubgroupSize;
  * }}</pre>
  */
@@ -52,16 +52,21 @@ public class VkShaderRequiredSubgroupSizeCreateInfoEXT extends VkPipelineShaderS
     public VkShaderRequiredSubgroupSizeCreateInfoEXT sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
-    public VkShaderRequiredSubgroupSizeCreateInfoEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    public VkShaderRequiredSubgroupSizeCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the specified value to the {@code requiredSubgroupSize} field. */
+    @Override
+    public VkShaderRequiredSubgroupSizeCreateInfoEXT requiredSubgroupSize(@NativeType("uint32_t") int value) { nrequiredSubgroupSize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     @Override
     public VkShaderRequiredSubgroupSizeCreateInfoEXT set(
         int sType,
-        long pNext
+        long pNext,
+        int requiredSubgroupSize
     ) {
         sType(sType);
         pNext(pNext);
+        requiredSubgroupSize(requiredSubgroupSize);
 
         return this;
     }
@@ -238,7 +243,10 @@ public class VkShaderRequiredSubgroupSizeCreateInfoEXT extends VkPipelineShaderS
         public VkShaderRequiredSubgroupSizeCreateInfoEXT.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
-        public VkShaderRequiredSubgroupSizeCreateInfoEXT.Buffer pNext(@NativeType("void *") long value) { VkShaderRequiredSubgroupSizeCreateInfoEXT.npNext(address(), value); return this; }
+        public VkShaderRequiredSubgroupSizeCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkShaderRequiredSubgroupSizeCreateInfoEXT.npNext(address(), value); return this; }
+        /** Sets the specified value to the {@code requiredSubgroupSize} field. */
+        @Override
+        public VkShaderRequiredSubgroupSizeCreateInfoEXT.Buffer requiredSubgroupSize(@NativeType("uint32_t") int value) { VkShaderRequiredSubgroupSizeCreateInfoEXT.nrequiredSubgroupSize(address(), value); return this; }
 
     }
 

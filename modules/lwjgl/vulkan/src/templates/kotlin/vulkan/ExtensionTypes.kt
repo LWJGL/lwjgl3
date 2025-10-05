@@ -199,6 +199,9 @@ val VkDeviceAddressBindingTypeEXT = "VkDeviceAddressBindingTypeEXT".enumType
 val VkDeviceAddressBindingFlagBitsEXT = "VkDeviceAddressBindingFlagBitsEXT".enumType
 val VkFormatFeatureFlagBits2KHR = "VkFormatFeatureFlagBits2KHR".enumType
 val VkFrameBoundaryFlagBitsEXT = "VkFrameBoundaryFlagBitsEXT".enumType
+val VkVideoEncodeRgbModelConversionFlagBitsVALVE = "VkVideoEncodeRgbModelConversionFlagBitsVALVE".enumType
+val VkVideoEncodeRgbRangeCompressionFlagBitsVALVE = "VkVideoEncodeRgbRangeCompressionFlagBitsVALVE".enumType
+val VkVideoEncodeRgbChromaOffsetFlagBitsVALVE = "VkVideoEncodeRgbChromaOffsetFlagBitsVALVE".enumType
 val VkMicromapTypeEXT = "VkMicromapTypeEXT".enumType
 val VkBuildMicromapModeEXT = "VkBuildMicromapModeEXT".enumType
 val VkBuildMicromapFlagBitsEXT = "VkBuildMicromapFlagBitsEXT".enumType
@@ -259,6 +262,7 @@ val VkBlockMatchWindowCompareModeQCOM = "VkBlockMatchWindowCompareModeQCOM".enum
 val VkCubicFilterWeightsQCOM = "VkCubicFilterWeightsQCOM".enumType
 val VkLayeredDriverUnderlyingApiMSFT = "VkLayeredDriverUnderlyingApiMSFT".enumType
 val VkLineRasterizationModeKHR = "VkLineRasterizationModeKHR".enumType
+val VkAddressCopyFlagBitsKHR = "VkAddressCopyFlagBitsKHR".enumType
 val VkDisplaySurfaceStereoTypeNV = "VkDisplaySurfaceStereoTypeNV".enumType
 val VkVideoEncodeIntraRefreshModeFlagBitsKHR = "VkVideoEncodeIntraRefreshModeFlagBitsKHR".enumType
 val VkVideoEncodeFlagBitsKHR = "VkVideoEncodeFlagBitsKHR".enumType
@@ -396,6 +400,9 @@ val VkDirectFBSurfaceCreateFlagsEXT = typedef(VkFlags, "VkDirectFBSurfaceCreateF
 val VkDeviceAddressBindingFlagsEXT = typedef(VkFlags, "VkDeviceAddressBindingFlagsEXT")
 val VkFormatFeatureFlags2KHR = typedef(VkFlags64, "VkFormatFeatureFlags2KHR")
 val VkFrameBoundaryFlagsEXT = typedef(VkFlags, "VkFrameBoundaryFlagsEXT")
+val VkVideoEncodeRgbModelConversionFlagsVALVE = typedef(VkFlags, "VkVideoEncodeRgbModelConversionFlagsVALVE")
+val VkVideoEncodeRgbRangeCompressionFlagsVALVE = typedef(VkFlags, "VkVideoEncodeRgbRangeCompressionFlagsVALVE")
+val VkVideoEncodeRgbChromaOffsetFlagsVALVE = typedef(VkFlags, "VkVideoEncodeRgbChromaOffsetFlagsVALVE")
 val VkBuildMicromapFlagsEXT = typedef(VkFlags, "VkBuildMicromapFlagsEXT")
 val VkMicromapCreateFlagsEXT = typedef(VkFlags, "VkMicromapCreateFlagsEXT")
 val VkPhysicalDeviceSchedulingControlsFlagsARM = typedef(VkFlags64, "VkPhysicalDeviceSchedulingControlsFlagsARM")
@@ -417,6 +424,7 @@ val VkVideoEncodeAV1CapabilityFlagsKHR = typedef(VkFlags, "VkVideoEncodeAV1Capab
 val VkVideoEncodeAV1StdFlagsKHR = typedef(VkFlags, "VkVideoEncodeAV1StdFlagsKHR")
 val VkVideoEncodeAV1SuperblockSizeFlagsKHR = typedef(VkFlags, "VkVideoEncodeAV1SuperblockSizeFlagsKHR")
 val VkVideoEncodeAV1RateControlFlagsKHR = typedef(VkFlags, "VkVideoEncodeAV1RateControlFlagsKHR")
+val VkAddressCopyFlagsKHR = typedef(VkFlags, "VkAddressCopyFlagsKHR")
 val VkVideoEncodeIntraRefreshModeFlagsKHR = typedef(VkFlags, "VkVideoEncodeIntraRefreshModeFlagsKHR")
 val VkClusterAccelerationStructureAddressResolutionFlagsNV = typedef(VkFlags, "VkClusterAccelerationStructureAddressResolutionFlagsNV")
 val VkClusterAccelerationStructureClusterFlagsNV = typedef(VkFlags, "VkClusterAccelerationStructureClusterFlagsNV")
@@ -737,7 +745,7 @@ val VkQueueFamilyVideoPropertiesKHR = struct(Module.VULKAN, "VkQueueFamilyVideoP
 val VkVideoProfileInfoKHR = struct(Module.VULKAN, "VkVideoProfileInfoKHR") {
     Expression("#STRUCTURE_TYPE_VIDEO_PROFILE_INFO_KHR")..VkStructureType("sType")
     PointerSetter(
-        "VkVideoDecodeAV1ProfileInfoKHR", "VkVideoDecodeH264ProfileInfoKHR", "VkVideoDecodeH265ProfileInfoKHR", "VkVideoDecodeUsageInfoKHR", "VkVideoDecodeVP9ProfileInfoKHR", "VkVideoEncodeAV1ProfileInfoKHR", "VkVideoEncodeH264ProfileInfoKHR", "VkVideoEncodeH265ProfileInfoKHR", "VkVideoEncodeUsageInfoKHR",
+        "VkVideoDecodeAV1ProfileInfoKHR", "VkVideoDecodeH264ProfileInfoKHR", "VkVideoDecodeH265ProfileInfoKHR", "VkVideoDecodeUsageInfoKHR", "VkVideoDecodeVP9ProfileInfoKHR", "VkVideoEncodeAV1ProfileInfoKHR", "VkVideoEncodeH264ProfileInfoKHR", "VkVideoEncodeH265ProfileInfoKHR", "VkVideoEncodeProfileRgbConversionInfoVALVE", "VkVideoEncodeUsageInfoKHR",
         prepend = true
     )..nullable..opaque_const_p("pNext")
     VkVideoCodecOperationFlagBitsKHR("videoCodecOperation")
@@ -756,7 +764,7 @@ val VkVideoProfileListInfoKHR = struct(Module.VULKAN, "VkVideoProfileListInfoKHR
 val VkVideoCapabilitiesKHR = struct(Module.VULKAN, "VkVideoCapabilitiesKHR", mutable = false) {
     Expression("#STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR")..VkStructureType("sType").mutable()
     PointerSetter(
-        "VkVideoDecodeAV1CapabilitiesKHR", "VkVideoDecodeCapabilitiesKHR", "VkVideoDecodeH264CapabilitiesKHR", "VkVideoDecodeH265CapabilitiesKHR", "VkVideoDecodeVP9CapabilitiesKHR", "VkVideoEncodeAV1CapabilitiesKHR", "VkVideoEncodeAV1QuantizationMapCapabilitiesKHR", "VkVideoEncodeCapabilitiesKHR", "VkVideoEncodeH264CapabilitiesKHR", "VkVideoEncodeH264QuantizationMapCapabilitiesKHR", "VkVideoEncodeH265CapabilitiesKHR", "VkVideoEncodeH265QuantizationMapCapabilitiesKHR", "VkVideoEncodeIntraRefreshCapabilitiesKHR", "VkVideoEncodeQuantizationMapCapabilitiesKHR",
+        "VkVideoDecodeAV1CapabilitiesKHR", "VkVideoDecodeCapabilitiesKHR", "VkVideoDecodeH264CapabilitiesKHR", "VkVideoDecodeH265CapabilitiesKHR", "VkVideoDecodeVP9CapabilitiesKHR", "VkVideoEncodeAV1CapabilitiesKHR", "VkVideoEncodeAV1QuantizationMapCapabilitiesKHR", "VkVideoEncodeCapabilitiesKHR", "VkVideoEncodeH264CapabilitiesKHR", "VkVideoEncodeH264QuantizationMapCapabilitiesKHR", "VkVideoEncodeH265CapabilitiesKHR", "VkVideoEncodeH265QuantizationMapCapabilitiesKHR", "VkVideoEncodeIntraRefreshCapabilitiesKHR", "VkVideoEncodeQuantizationMapCapabilitiesKHR", "VkVideoEncodeRgbConversionCapabilitiesVALVE",
         prepend = true
     )..nullable..opaque_p("pNext").mutable()
     VkVideoCapabilityFlagsKHR("flags")
@@ -831,7 +839,7 @@ val VkBindVideoSessionMemoryInfoKHR = struct(Module.VULKAN, "VkBindVideoSessionM
 val VkVideoSessionCreateInfoKHR = struct(Module.VULKAN, "VkVideoSessionCreateInfoKHR") {
     Expression("#STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR")..VkStructureType("sType")
     PointerSetter(
-        "VkVideoEncodeAV1SessionCreateInfoKHR", "VkVideoEncodeH264SessionCreateInfoKHR", "VkVideoEncodeH265SessionCreateInfoKHR", "VkVideoEncodeSessionIntraRefreshCreateInfoKHR",
+        "VkVideoEncodeAV1SessionCreateInfoKHR", "VkVideoEncodeH264SessionCreateInfoKHR", "VkVideoEncodeH265SessionCreateInfoKHR", "VkVideoEncodeSessionIntraRefreshCreateInfoKHR", "VkVideoEncodeSessionRgbConversionCreateInfoVALVE",
         prepend = true
     )..nullable..opaque_const_p("pNext")
     uint32_t("queueFamilyIndex")
@@ -4235,9 +4243,9 @@ val VkPhysicalDeviceSubgroupSizeControlPropertiesEXT = struct(Module.VULKAN, "Vk
     VkShaderStageFlags("requiredSubgroupSizeStages")
 }
 
-val VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT = struct(Module.VULKAN, "VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT", mutable = false, alias = VkPipelineShaderStageRequiredSubgroupSizeCreateInfo) {
-    Expression("#STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO")..VkStructureType("sType").mutable()
-    nullable..opaque_p("pNext").mutable()
+val VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT = struct(Module.VULKAN, "VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT", alias = VkPipelineShaderStageRequiredSubgroupSizeCreateInfo) {
+    Expression("#STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
     uint32_t("requiredSubgroupSize")
 }
 
@@ -6575,6 +6583,36 @@ val VkQueueFamilyGlobalPriorityPropertiesEXT = struct(Module.VULKAN, "VkQueueFam
     VkQueueGlobalPriority("priorities")["VK_MAX_GLOBAL_PRIORITY_SIZE"]
 }
 
+val VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE = struct(Module.VULKAN, "VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_RGB_CONVERSION_FEATURES_VALVE")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("videoEncodeRgbConversion")
+}
+
+val VkVideoEncodeRgbConversionCapabilitiesVALVE = struct(Module.VULKAN, "VkVideoEncodeRgbConversionCapabilitiesVALVE", mutable = false) {
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_RGB_CONVERSION_CAPABILITIES_VALVE")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
+    VkVideoEncodeRgbModelConversionFlagsVALVE("rgbModels")
+    VkVideoEncodeRgbRangeCompressionFlagsVALVE("rgbRanges")
+    VkVideoEncodeRgbChromaOffsetFlagsVALVE("xChromaOffsets")
+    VkVideoEncodeRgbChromaOffsetFlagsVALVE("yChromaOffsets")
+}
+
+val VkVideoEncodeProfileRgbConversionInfoVALVE = struct(Module.VULKAN, "VkVideoEncodeProfileRgbConversionInfoVALVE") {
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_PROFILE_RGB_CONVERSION_INFO_VALVE")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkBool32("performEncodeRgbConversion")
+}
+
+val VkVideoEncodeSessionRgbConversionCreateInfoVALVE = struct(Module.VULKAN, "VkVideoEncodeSessionRgbConversionCreateInfoVALVE") {
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_SESSION_RGB_CONVERSION_CREATE_INFO_VALVE")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkVideoEncodeRgbModelConversionFlagBitsVALVE("rgbModel")
+    VkVideoEncodeRgbRangeCompressionFlagBitsVALVE("rgbRange")
+    VkVideoEncodeRgbChromaOffsetFlagBitsVALVE("xChromaOffset")
+    VkVideoEncodeRgbChromaOffsetFlagBitsVALVE("yChromaOffset")
+}
+
 val VkPhysicalDeviceImageViewMinLodFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceImageViewMinLodFeaturesEXT") {
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_MIN_LOD_FEATURES_EXT")..VkStructureType("sType")
     nullable..opaque_p("pNext")
@@ -6975,13 +7013,15 @@ val VkSubpassFragmentDensityMapOffsetEndInfoQCOM = struct(Module.VULKAN, "VkSubp
     VkOffset2D.const.p("pFragmentDensityOffsets")
 }
 
-val VkCopyMemoryIndirectCommandNV = struct(Module.VULKAN, "VkCopyMemoryIndirectCommandNV") {
+val _VkCopyMemoryIndirectCommandKHR = struct(Module.VULKAN, "VkCopyMemoryIndirectCommandKHR")
+val VkCopyMemoryIndirectCommandNV = struct(Module.VULKAN, "VkCopyMemoryIndirectCommandNV", alias = _VkCopyMemoryIndirectCommandKHR) {
     VkDeviceAddress("srcAddress")
     VkDeviceAddress("dstAddress")
     VkDeviceSize("size")
 }
 
-val VkCopyMemoryToImageIndirectCommandNV = struct(Module.VULKAN, "VkCopyMemoryToImageIndirectCommandNV") {
+val _VkCopyMemoryToImageIndirectCommandKHR = struct(Module.VULKAN, "VkCopyMemoryToImageIndirectCommandKHR")
+val VkCopyMemoryToImageIndirectCommandNV = struct(Module.VULKAN, "VkCopyMemoryToImageIndirectCommandNV", alias = _VkCopyMemoryToImageIndirectCommandKHR) {
     VkDeviceAddress("srcAddress")
     uint32_t("bufferRowLength")
     uint32_t("bufferImageHeight")
@@ -6996,8 +7036,9 @@ val VkPhysicalDeviceCopyMemoryIndirectFeaturesNV = struct(Module.VULKAN, "VkPhys
     VkBool32("indirectCopy")
 }
 
-val VkPhysicalDeviceCopyMemoryIndirectPropertiesNV = struct(Module.VULKAN, "VkPhysicalDeviceCopyMemoryIndirectPropertiesNV", mutable = false) {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_PROPERTIES_NV")..VkStructureType("sType").mutable()
+val _VkPhysicalDeviceCopyMemoryIndirectPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceCopyMemoryIndirectPropertiesKHR")
+val VkPhysicalDeviceCopyMemoryIndirectPropertiesNV = struct(Module.VULKAN, "VkPhysicalDeviceCopyMemoryIndirectPropertiesNV", mutable = false, alias = _VkPhysicalDeviceCopyMemoryIndirectPropertiesKHR) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_PROPERTIES_KHR")..VkStructureType("sType").mutable()
     nullable..opaque_p("pNext").mutable()
     VkQueueFlags("supportedQueues")
 }
@@ -7772,9 +7813,9 @@ val VkShaderCreateInfoEXT = struct(Module.VULKAN, "VkShaderCreateInfoEXT") {
     nullable..VkSpecializationInfo.const.p("pSpecializationInfo")
 }
 
-val VkShaderRequiredSubgroupSizeCreateInfoEXT = struct(Module.VULKAN, "VkShaderRequiredSubgroupSizeCreateInfoEXT", mutable = false, alias = VkPipelineShaderStageRequiredSubgroupSizeCreateInfo) {
-    Expression("#STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO")..VkStructureType("sType").mutable()
-    nullable..opaque_p("pNext").mutable()
+val VkShaderRequiredSubgroupSizeCreateInfoEXT = struct(Module.VULKAN, "VkShaderRequiredSubgroupSizeCreateInfoEXT", alias = VkPipelineShaderStageRequiredSubgroupSizeCreateInfo) {
+    Expression("#STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
     uint32_t("requiredSubgroupSize")
 }
 
@@ -8902,6 +8943,60 @@ val VkTileMemorySizeInfoQCOM = struct(Module.VULKAN, "VkTileMemorySizeInfoQCOM")
     Expression("#STRUCTURE_TYPE_TILE_MEMORY_SIZE_INFO_QCOM")..VkStructureType("sType")
     nullable..opaque_const_p("pNext")
     VkDeviceSize("size")
+}
+
+val VkStridedDeviceAddressRangeKHR = struct(Module.VULKAN, "VkStridedDeviceAddressRangeKHR") {
+    VkDeviceAddress("address")
+    VkDeviceSize("size")
+    VkDeviceSize("stride")
+}
+
+val VkCopyMemoryIndirectCommandKHR = struct(Module.VULKAN, "VkCopyMemoryIndirectCommandKHR") {
+    VkDeviceAddress("srcAddress")
+    VkDeviceAddress("dstAddress")
+    VkDeviceSize("size")
+}
+
+val VkCopyMemoryIndirectInfoKHR = struct(Module.VULKAN, "VkCopyMemoryIndirectInfoKHR") {
+    Expression("#STRUCTURE_TYPE_COPY_MEMORY_INDIRECT_INFO_KHR")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkAddressCopyFlagsKHR("srcCopyFlags")
+    VkAddressCopyFlagsKHR("dstCopyFlags")
+    uint32_t("copyCount")
+    VkStridedDeviceAddressRangeKHR("copyAddressRange")
+}
+
+val VkCopyMemoryToImageIndirectCommandKHR = struct(Module.VULKAN, "VkCopyMemoryToImageIndirectCommandKHR") {
+    VkDeviceAddress("srcAddress")
+    uint32_t("bufferRowLength")
+    uint32_t("bufferImageHeight")
+    VkImageSubresourceLayers("imageSubresource")
+    VkOffset3D("imageOffset")
+    VkExtent3D("imageExtent")
+}
+
+val VkCopyMemoryToImageIndirectInfoKHR = struct(Module.VULKAN, "VkCopyMemoryToImageIndirectInfoKHR") {
+    Expression("#STRUCTURE_TYPE_COPY_MEMORY_TO_IMAGE_INDIRECT_INFO_KHR")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkAddressCopyFlagsKHR("srcCopyFlags")
+    AutoSize("pImageSubresources")..uint32_t("copyCount")
+    VkStridedDeviceAddressRangeKHR("copyAddressRange")
+    VkImage("dstImage")
+    VkImageLayout("dstImageLayout")
+    VkImageSubresourceLayers.const.p("pImageSubresources")
+}
+
+val VkPhysicalDeviceCopyMemoryIndirectFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceCopyMemoryIndirectFeaturesKHR") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_KHR")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("indirectMemoryCopy")
+    VkBool32("indirectMemoryToImageCopy")
+}
+
+val VkPhysicalDeviceCopyMemoryIndirectPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceCopyMemoryIndirectPropertiesKHR", mutable = false) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_PROPERTIES_KHR")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
+    VkQueueFlags("supportedQueues")
 }
 
 val VkDisplaySurfaceStereoCreateInfoNV = struct(Module.VULKAN, "VkDisplaySurfaceStereoCreateInfoNV") {
