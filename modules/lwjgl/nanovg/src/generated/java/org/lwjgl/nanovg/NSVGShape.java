@@ -29,6 +29,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     char strokeLineCap;
  *     float miterLimit;
  *     char fillRule;
+ *     unsigned char paintOrder;
  *     unsigned char flags;
  *     float bounds[4];
  *     char fillGradient[64];
@@ -61,6 +62,7 @@ public class NSVGShape extends Struct<NSVGShape> {
         STROKELINECAP,
         MITERLIMIT,
         FILLRULE,
+        PAINTORDER,
         FLAGS,
         BOUNDS,
         FILLGRADIENT,
@@ -82,6 +84,7 @@ public class NSVGShape extends Struct<NSVGShape> {
             __member(1),
             __member(1),
             __member(4),
+            __member(1),
             __member(1),
             __member(1),
             __array(4, 4),
@@ -107,13 +110,14 @@ public class NSVGShape extends Struct<NSVGShape> {
         STROKELINECAP = layout.offsetof(9);
         MITERLIMIT = layout.offsetof(10);
         FILLRULE = layout.offsetof(11);
-        FLAGS = layout.offsetof(12);
-        BOUNDS = layout.offsetof(13);
-        FILLGRADIENT = layout.offsetof(14);
-        STROKEGRADIENT = layout.offsetof(15);
-        XFORM = layout.offsetof(16);
-        PATHS = layout.offsetof(17);
-        NEXT = layout.offsetof(18);
+        PAINTORDER = layout.offsetof(12);
+        FLAGS = layout.offsetof(13);
+        BOUNDS = layout.offsetof(14);
+        FILLGRADIENT = layout.offsetof(15);
+        STROKEGRADIENT = layout.offsetof(16);
+        XFORM = layout.offsetof(17);
+        PATHS = layout.offsetof(18);
+        NEXT = layout.offsetof(19);
     }
 
     protected NSVGShape(long address, @Nullable ByteBuffer container) {
@@ -175,6 +179,9 @@ public class NSVGShape extends Struct<NSVGShape> {
     /** @return the value of the {@code fillRule} field. */
     @NativeType("char")
     public byte fillRule() { return nfillRule(address()); }
+    /** @return the value of the {@code paintOrder} field. */
+    @NativeType("unsigned char")
+    public byte paintOrder() { return npaintOrder(address()); }
     /** @return the value of the {@code flags} field. */
     @NativeType("unsigned char")
     public byte flags() { return nflags(address()); }
@@ -266,6 +273,8 @@ public class NSVGShape extends Struct<NSVGShape> {
     public static float nmiterLimit(long struct) { return memGetFloat(struct + NSVGShape.MITERLIMIT); }
     /** Unsafe version of {@link #fillRule}. */
     public static byte nfillRule(long struct) { return memGetByte(struct + NSVGShape.FILLRULE); }
+    /** Unsafe version of {@link #paintOrder}. */
+    public static byte npaintOrder(long struct) { return memGetByte(struct + NSVGShape.PAINTORDER); }
     /** Unsafe version of {@link #flags}. */
     public static byte nflags(long struct) { return memGetByte(struct + NSVGShape.FLAGS); }
     /** Unsafe version of {@link #bounds}. */
@@ -373,6 +382,9 @@ public class NSVGShape extends Struct<NSVGShape> {
         /** @return the value of the {@code fillRule} field. */
         @NativeType("char")
         public byte fillRule() { return NSVGShape.nfillRule(address()); }
+        /** @return the value of the {@code paintOrder} field. */
+        @NativeType("unsigned char")
+        public byte paintOrder() { return NSVGShape.npaintOrder(address()); }
         /** @return the value of the {@code flags} field. */
         @NativeType("unsigned char")
         public byte flags() { return NSVGShape.nflags(address()); }

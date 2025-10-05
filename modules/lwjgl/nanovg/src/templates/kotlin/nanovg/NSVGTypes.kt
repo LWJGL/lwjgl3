@@ -51,6 +51,7 @@ val NSVGshape = struct(Module.NANOVG, "NSVGShape", nativeName = "NSVGshape", mut
     char("strokeLineCap")
     float("miterLimit")
     char("fillRule")
+    unsigned_char("paintOrder")
     unsigned_char("flags")
     float("bounds")[4]
     charASCII("fillGradient")[64]

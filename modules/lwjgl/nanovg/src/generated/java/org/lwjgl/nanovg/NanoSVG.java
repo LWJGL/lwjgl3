@@ -47,6 +47,11 @@ public class NanoSVG {
 
     public static final int NSVG_FLAGS_VISIBLE = 0x01;
 
+    public static final int
+        NSVG_PAINT_FILL    = 0x00,
+        NSVG_PAINT_MARKERS = 0x01,
+        NSVG_PAINT_STROKE  = 0x02;
+
     protected NanoSVG() {
         throw new UnsupportedOperationException();
     }

@@ -50,6 +50,12 @@ val nanosvg = "NanoSVG".nativeClass(Module.NANOVG, prefix = "NSVG") {
         "FLAGS_VISIBLE".."0x01"
     )
 
+    EnumConstant(
+        "PAINT_FILL".."0x00",
+        "PAINT_MARKERS".."0x01",
+        "PAINT_STROKE".."0x02"
+    )
+
     NSVGimage.p(
         "ParseFromFile",
 
