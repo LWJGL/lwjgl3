@@ -74,7 +74,7 @@ public class LLVMOrc {
             OrcCreateDynamicLibrarySearchGeneratorForPath         = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMOrcCreateDynamicLibrarySearchGeneratorForPath"),
             OrcCreateStaticLibrarySearchGeneratorForPath          = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMOrcCreateStaticLibrarySearchGeneratorForPath"),
             OrcCreateNewThreadSafeContext                         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOrcCreateNewThreadSafeContext"),
-            OrcThreadSafeContextGetContext                        = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOrcThreadSafeContextGetContext"),
+            OrcCreateNewThreadSafeContextFromLLVMContext          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOrcCreateNewThreadSafeContextFromLLVMContext"),
             OrcDisposeThreadSafeContext                           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOrcDisposeThreadSafeContext"),
             OrcCreateNewThreadSafeModule                          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOrcCreateNewThreadSafeModule"),
             OrcDisposeThreadSafeModule                            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOrcDisposeThreadSafeModule"),
@@ -895,30 +895,29 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcCreateStaticLibrarySearchGeneratorForPath ] ---
 
-    /** {@code LLVMErrorRef LLVMOrcCreateStaticLibrarySearchGeneratorForPath(LLVMOrcDefinitionGeneratorRef * Result, LLVMOrcObjectLayerRef ObjLayer, char const * FileName, char const * TargetTriple)} */
-    public static long nLLVMOrcCreateStaticLibrarySearchGeneratorForPath(long Result, long ObjLayer, long FileName, long TargetTriple) {
+    /** {@code LLVMErrorRef LLVMOrcCreateStaticLibrarySearchGeneratorForPath(LLVMOrcDefinitionGeneratorRef * Result, LLVMOrcObjectLayerRef ObjLayer, char const * FileName)} */
+    public static long nLLVMOrcCreateStaticLibrarySearchGeneratorForPath(long Result, long ObjLayer, long FileName) {
         long __functionAddress = Functions.OrcCreateStaticLibrarySearchGeneratorForPath;
         if (CHECKS) {
             check(__functionAddress);
             check(ObjLayer);
         }
-        return invokePPPPP(Result, ObjLayer, FileName, TargetTriple, __functionAddress);
+        return invokePPPP(Result, ObjLayer, FileName, __functionAddress);
     }
 
-    /** {@code LLVMErrorRef LLVMOrcCreateStaticLibrarySearchGeneratorForPath(LLVMOrcDefinitionGeneratorRef * Result, LLVMOrcObjectLayerRef ObjLayer, char const * FileName, char const * TargetTriple)} */
+    /** {@code LLVMErrorRef LLVMOrcCreateStaticLibrarySearchGeneratorForPath(LLVMOrcDefinitionGeneratorRef * Result, LLVMOrcObjectLayerRef ObjLayer, char const * FileName)} */
     @NativeType("LLVMErrorRef")
-    public static long LLVMOrcCreateStaticLibrarySearchGeneratorForPath(@NativeType("LLVMOrcDefinitionGeneratorRef *") PointerBuffer Result, @NativeType("LLVMOrcObjectLayerRef") long ObjLayer, @NativeType("char const *") ByteBuffer FileName, @NativeType("char const *") @Nullable ByteBuffer TargetTriple) {
+    public static long LLVMOrcCreateStaticLibrarySearchGeneratorForPath(@NativeType("LLVMOrcDefinitionGeneratorRef *") PointerBuffer Result, @NativeType("LLVMOrcObjectLayerRef") long ObjLayer, @NativeType("char const *") ByteBuffer FileName) {
         if (CHECKS) {
             check(Result, 1);
             checkNT1(FileName);
-            checkNT1Safe(TargetTriple);
         }
-        return nLLVMOrcCreateStaticLibrarySearchGeneratorForPath(memAddress(Result), ObjLayer, memAddress(FileName), memAddressSafe(TargetTriple));
+        return nLLVMOrcCreateStaticLibrarySearchGeneratorForPath(memAddress(Result), ObjLayer, memAddress(FileName));
     }
 
-    /** {@code LLVMErrorRef LLVMOrcCreateStaticLibrarySearchGeneratorForPath(LLVMOrcDefinitionGeneratorRef * Result, LLVMOrcObjectLayerRef ObjLayer, char const * FileName, char const * TargetTriple)} */
+    /** {@code LLVMErrorRef LLVMOrcCreateStaticLibrarySearchGeneratorForPath(LLVMOrcDefinitionGeneratorRef * Result, LLVMOrcObjectLayerRef ObjLayer, char const * FileName)} */
     @NativeType("LLVMErrorRef")
-    public static long LLVMOrcCreateStaticLibrarySearchGeneratorForPath(@NativeType("LLVMOrcDefinitionGeneratorRef *") PointerBuffer Result, @NativeType("LLVMOrcObjectLayerRef") long ObjLayer, @NativeType("char const *") CharSequence FileName, @NativeType("char const *") @Nullable CharSequence TargetTriple) {
+    public static long LLVMOrcCreateStaticLibrarySearchGeneratorForPath(@NativeType("LLVMOrcDefinitionGeneratorRef *") PointerBuffer Result, @NativeType("LLVMOrcObjectLayerRef") long ObjLayer, @NativeType("char const *") CharSequence FileName) {
         if (CHECKS) {
             check(Result, 1);
         }
@@ -926,9 +925,7 @@ public class LLVMOrc {
         try {
             stack.nUTF8(FileName, true);
             long FileNameEncoded = stack.getPointerAddress();
-            stack.nUTF8Safe(TargetTriple, true);
-            long TargetTripleEncoded = TargetTriple == null ? NULL : stack.getPointerAddress();
-            return nLLVMOrcCreateStaticLibrarySearchGeneratorForPath(memAddress(Result), ObjLayer, FileNameEncoded, TargetTripleEncoded);
+            return nLLVMOrcCreateStaticLibrarySearchGeneratorForPath(memAddress(Result), ObjLayer, FileNameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -943,16 +940,16 @@ public class LLVMOrc {
         return invokeP(__functionAddress);
     }
 
-    // --- [ LLVMOrcThreadSafeContextGetContext ] ---
+    // --- [ LLVMOrcCreateNewThreadSafeContextFromLLVMContext ] ---
 
-    /** {@code LLVMContextRef LLVMOrcThreadSafeContextGetContext(LLVMOrcThreadSafeContextRef TSCtx)} */
-    @NativeType("LLVMContextRef")
-    public static long LLVMOrcThreadSafeContextGetContext(@NativeType("LLVMOrcThreadSafeContextRef") long TSCtx) {
-        long __functionAddress = Functions.OrcThreadSafeContextGetContext;
+    /** {@code LLVMOrcThreadSafeContextRef LLVMOrcCreateNewThreadSafeContextFromLLVMContext(LLVMContextRef Ctx)} */
+    @NativeType("LLVMOrcThreadSafeContextRef")
+    public static long LLVMOrcCreateNewThreadSafeContextFromLLVMContext(@NativeType("LLVMContextRef") long Ctx) {
+        long __functionAddress = Functions.OrcCreateNewThreadSafeContextFromLLVMContext;
         if (CHECKS) {
-            check(TSCtx);
+            check(Ctx);
         }
-        return invokePP(TSCtx, __functionAddress);
+        return invokePP(Ctx, __functionAddress);
     }
 
     // --- [ LLVMOrcDisposeThreadSafeContext ] ---

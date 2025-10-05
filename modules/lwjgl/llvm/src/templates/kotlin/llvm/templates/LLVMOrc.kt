@@ -361,8 +361,7 @@ val LLVMOrc = "LLVMOrc".nativeClass(
 
         Check(1)..LLVMOrcDefinitionGeneratorRef.p("Result"),
         LLVMOrcObjectLayerRef("ObjLayer"),
-        charUTF8.const.p("FileName"),
-        nullable..charUTF8.const.p("TargetTriple")
+        charUTF8.const.p("FileName")
     )
 
     LLVMOrcThreadSafeContextRef(
@@ -371,10 +370,10 @@ val LLVMOrc = "LLVMOrc".nativeClass(
         void()
     )
 
-    LLVMContextRef(
-        "OrcThreadSafeContextGetContext",
+    LLVMOrcThreadSafeContextRef(
+        "OrcCreateNewThreadSafeContextFromLLVMContext",
 
-        LLVMOrcThreadSafeContextRef("TSCtx")
+        LLVMContextRef("Ctx")
     )
 
     void(

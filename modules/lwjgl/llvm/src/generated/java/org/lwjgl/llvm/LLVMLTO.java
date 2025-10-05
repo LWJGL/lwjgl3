@@ -52,6 +52,8 @@ public class LLVMLTO {
             module_get_num_symbols                                           = apiGetFunctionAddress(LTO, "lto_module_get_num_symbols"),
             module_get_symbol_name                                           = apiGetFunctionAddress(LTO, "lto_module_get_symbol_name"),
             module_get_symbol_attribute                                      = apiGetFunctionAddress(LTO, "lto_module_get_symbol_attribute"),
+            module_get_num_asm_undef_symbols                                 = apiGetFunctionAddressOptional(LTO, "lto_module_get_num_asm_undef_symbols"),
+            module_get_asm_undef_symbol_name                                 = apiGetFunctionAddressOptional(LTO, "lto_module_get_asm_undef_symbol_name"),
             module_get_linkeropts                                            = apiGetFunctionAddress(LTO, "lto_module_get_linkeropts"),
             module_get_macho_cputype                                         = apiGetFunctionAddressOptional(LTO, "lto_module_get_macho_cputype"),
             module_has_ctor_dtor                                             = apiGetFunctionAddressOptional(LTO, "lto_module_has_ctor_dtor"),
@@ -117,7 +119,7 @@ public class LLVMLTO {
         return LTO;
     }
 
-    public static final int LTOAPI_VERSION = 29;
+    public static final int LTOAPI_VERSION = 30;
 
     public static final int
         LTOSYMBOL_ALIGNMENT_MASK              = 0x0000001F,
@@ -608,6 +610,38 @@ public class LLVMLTO {
             check(mod);
         }
         return invokePI(mod, index, __functionAddress);
+    }
+
+    // --- [ lto_module_get_num_asm_undef_symbols ] ---
+
+    /** {@code unsigned int lto_module_get_num_asm_undef_symbols(lto_module_t mod)} */
+    @NativeType("unsigned int")
+    public static int lto_module_get_num_asm_undef_symbols(@NativeType("lto_module_t") long mod) {
+        long __functionAddress = Functions.module_get_num_asm_undef_symbols;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(mod);
+        }
+        return invokePI(mod, __functionAddress);
+    }
+
+    // --- [ lto_module_get_asm_undef_symbol_name ] ---
+
+    /** {@code char const * lto_module_get_asm_undef_symbol_name(lto_module_t mod, unsigned int index)} */
+    public static long nlto_module_get_asm_undef_symbol_name(long mod, int index) {
+        long __functionAddress = Functions.module_get_asm_undef_symbol_name;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(mod);
+        }
+        return invokePP(mod, index, __functionAddress);
+    }
+
+    /** {@code char const * lto_module_get_asm_undef_symbol_name(lto_module_t mod, unsigned int index)} */
+    @NativeType("char const *")
+    public static @Nullable String lto_module_get_asm_undef_symbol_name(@NativeType("lto_module_t") long mod, @NativeType("unsigned int") int index) {
+        long __result = nlto_module_get_asm_undef_symbol_name(mod, index);
+        return memUTF8Safe(__result);
     }
 
     // --- [ lto_module_get_linkeropts ] ---

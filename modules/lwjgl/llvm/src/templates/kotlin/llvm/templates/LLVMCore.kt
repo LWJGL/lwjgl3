@@ -253,11 +253,6 @@ val LLVMCore = "LLVMCore".nativeClass(
     )
 
     EnumConstant(
-        "LandingPadCatch".enum("0"),
-        "LandingPadFilter".enum
-    )
-
-    EnumConstant(
         "NotThreadLocal".enum("0"),
         "GeneralDynamicTLSModel".enum,
         "LocalDynamicTLSModel".enum,
@@ -294,7 +289,9 @@ val LLVMCore = "LLVMCore".nativeClass(
         "AtomicRMWBinOpUIncWrap".enum,
         "AtomicRMWBinOpUDecWrap".enum,
         "AtomicRMWBinOpUSubCond".enum,
-        "AtomicRMWBinOpUSubSat".enum
+        "AtomicRMWBinOpUSubSat".enum,
+        "AtomicRMWBinOpFMaximum".enum,
+        "AtomicRMWBinOpFMinimum".enum
     )
 
     EnumConstant(
@@ -1877,6 +1874,14 @@ val LLVMCore = "LLVMCore".nativeClass(
             AutoSizeResult..size_t.p("Length")
         )
 
+        IgnoreMissing..Nonnull..char.const.p(
+            "GetRawDataValues",
+
+            LLVMValueRef("c"),
+            AutoSizeResult..size_t.p("SizeInBytes")
+        )
+
+
         LLVMValueRef(
             "ConstStructInContext",
 
@@ -1908,6 +1913,14 @@ val LLVMCore = "LLVMCore".nativeClass(
             LLVMTypeRef("ElementTy"),
             LLVMValueRef.p("ConstantVals"),
             AutoSize("ConstantVals")..uint64_t("Length")
+        )
+
+        IgnoreMissing..LLVMValueRef(
+            "ConstDataArray",
+
+            LLVMTypeRef("ElementTy"),
+            char.const.p("Data"),
+            AutoSize("Data")..size_t("SizeInBytes")
         )
 
         LLVMValueRef(
@@ -2052,21 +2065,21 @@ val LLVMCore = "LLVMCore".nativeClass(
             LLVMValueRef("RHSConstant")
         )
 
-        LLVMValueRef(
+        IgnoreMissing..LLVMValueRef(
             "ConstMul",
 
             LLVMValueRef("LHSConstant"),
             LLVMValueRef("RHSConstant")
         )
 
-        LLVMValueRef(
+        IgnoreMissing..LLVMValueRef(
             "ConstNSWMul",
 
             LLVMValueRef("LHSConstant"),
             LLVMValueRef("RHSConstant")
         )
 
-        LLVMValueRef(
+        IgnoreMissing..LLVMValueRef(
             "ConstNUWMul",
 
             LLVMValueRef("LHSConstant"),
@@ -3513,6 +3526,19 @@ val LLVMCore = "LLVMCore".nativeClass(
             "GetICmpPredicate",
 
             LLVMValueRef("Inst")
+        )
+
+        IgnoreMissing..LLVMBool(
+            "GetICmpSameSign",
+
+            LLVMValueRef("Inst")
+        )
+
+        IgnoreMissing..void(
+            "SetICmpSameSign",
+
+            LLVMValueRef("Inst"),
+            LLVMBool("SameSign")
         )
 
         LLVMRealPredicate(

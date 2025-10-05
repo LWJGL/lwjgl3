@@ -341,10 +341,12 @@ public class LLVMCore {
             ConstString                                = apiGetFunctionAddress(LLVM, "LLVMConstString"),
             IsConstantString                           = apiGetFunctionAddress(LLVM, "LLVMIsConstantString"),
             GetAsString                                = apiGetFunctionAddress(LLVM, "LLVMGetAsString"),
+            GetRawDataValues                           = apiGetFunctionAddressOptional(LLVM, "LLVMGetRawDataValues"),
             ConstStructInContext                       = apiGetFunctionAddress(LLVM, "LLVMConstStructInContext"),
             ConstStruct                                = apiGetFunctionAddress(LLVM, "LLVMConstStruct"),
             ConstArray                                 = apiGetFunctionAddress(LLVM, "LLVMConstArray"),
             ConstArray2                                = apiGetFunctionAddress(LLVM, "LLVMConstArray2"),
+            ConstDataArray                             = apiGetFunctionAddressOptional(LLVM, "LLVMConstDataArray"),
             ConstNamedStruct                           = apiGetFunctionAddress(LLVM, "LLVMConstNamedStruct"),
             GetAggregateElement                        = apiGetFunctionAddressOptional(LLVM, "LLVMGetAggregateElement"),
             GetElementAsConstant                       = apiGetFunctionAddress(LLVM, "LLVMGetElementAsConstant"),
@@ -366,9 +368,9 @@ public class LLVMCore {
             ConstNSWSub                                = apiGetFunctionAddress(LLVM, "LLVMConstNSWSub"),
             ConstNUWSub                                = apiGetFunctionAddress(LLVM, "LLVMConstNUWSub"),
             ConstFSub                                  = apiGetFunctionAddressOptional(LLVM, "LLVMConstFSub"),
-            ConstMul                                   = apiGetFunctionAddress(LLVM, "LLVMConstMul"),
-            ConstNSWMul                                = apiGetFunctionAddress(LLVM, "LLVMConstNSWMul"),
-            ConstNUWMul                                = apiGetFunctionAddress(LLVM, "LLVMConstNUWMul"),
+            ConstMul                                   = apiGetFunctionAddressOptional(LLVM, "LLVMConstMul"),
+            ConstNSWMul                                = apiGetFunctionAddressOptional(LLVM, "LLVMConstNSWMul"),
+            ConstNUWMul                                = apiGetFunctionAddressOptional(LLVM, "LLVMConstNUWMul"),
             ConstFMul                                  = apiGetFunctionAddressOptional(LLVM, "LLVMConstFMul"),
             ConstUDiv                                  = apiGetFunctionAddressOptional(LLVM, "LLVMConstUDiv"),
             ConstExactUDiv                             = apiGetFunctionAddressOptional(LLVM, "LLVMConstExactUDiv"),
@@ -576,6 +578,8 @@ public class LLVMCore {
             DeleteInstruction                          = apiGetFunctionAddressOptional(LLVM, "LLVMDeleteInstruction"),
             GetInstructionOpcode                       = apiGetFunctionAddress(LLVM, "LLVMGetInstructionOpcode"),
             GetICmpPredicate                           = apiGetFunctionAddress(LLVM, "LLVMGetICmpPredicate"),
+            GetICmpSameSign                            = apiGetFunctionAddressOptional(LLVM, "LLVMGetICmpSameSign"),
+            SetICmpSameSign                            = apiGetFunctionAddressOptional(LLVM, "LLVMSetICmpSameSign"),
             GetFCmpPredicate                           = apiGetFunctionAddress(LLVM, "LLVMGetFCmpPredicate"),
             InstructionClone                           = apiGetFunctionAddress(LLVM, "LLVMInstructionClone"),
             IsATerminatorInst                          = apiGetFunctionAddress(LLVM, "LLVMIsATerminatorInst"),
@@ -1071,10 +1075,6 @@ public class LLVMCore {
         LLVMRealPredicateTrue  = 15;
 
     public static final int
-        LLVMLandingPadCatch  = 0,
-        LLVMLandingPadFilter = 1;
-
-    public static final int
         LLVMNotThreadLocal         = 0,
         LLVMGeneralDynamicTLSModel = 1,
         LLVMLocalDynamicTLSModel   = 2,
@@ -1109,7 +1109,9 @@ public class LLVMCore {
         LLVMAtomicRMWBinOpUIncWrap = 15,
         LLVMAtomicRMWBinOpUDecWrap = 16,
         LLVMAtomicRMWBinOpUSubCond = 17,
-        LLVMAtomicRMWBinOpUSubSat  = 18;
+        LLVMAtomicRMWBinOpUSubSat  = 18,
+        LLVMAtomicRMWBinOpFMaximum = 19,
+        LLVMAtomicRMWBinOpFMinimum = 20;
 
     public static final int
         LLVMDSError   = 0,
@@ -5980,6 +5982,31 @@ public class LLVMCore {
         }
     }
 
+    // --- [ LLVMGetRawDataValues ] ---
+
+    /** {@code char const * LLVMGetRawDataValues(LLVMValueRef c, size_t * SizeInBytes)} */
+    public static long nLLVMGetRawDataValues(long c, long SizeInBytes) {
+        long __functionAddress = Functions.GetRawDataValues;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(c);
+        }
+        return invokePPP(c, SizeInBytes, __functionAddress);
+    }
+
+    /** {@code char const * LLVMGetRawDataValues(LLVMValueRef c, size_t * SizeInBytes)} */
+    @NativeType("char const *")
+    public static ByteBuffer LLVMGetRawDataValues(@NativeType("LLVMValueRef") long c) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        PointerBuffer SizeInBytes = stack.callocPointer(1);
+        try {
+            long __result = nLLVMGetRawDataValues(c, memAddress(SizeInBytes));
+            return memByteBuffer(__result, (int)SizeInBytes.get(0));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ LLVMConstStructInContext ] ---
 
     /** {@code LLVMValueRef LLVMConstStructInContext(LLVMContextRef C, LLVMValueRef * ConstantVals, unsigned int Count, LLVMBool Packed)} */
@@ -6043,6 +6070,24 @@ public class LLVMCore {
     @NativeType("LLVMValueRef")
     public static long LLVMConstArray2(@NativeType("LLVMTypeRef") long ElementTy, @NativeType("LLVMValueRef *") PointerBuffer ConstantVals) {
         return nLLVMConstArray2(ElementTy, memAddress(ConstantVals), ConstantVals.remaining());
+    }
+
+    // --- [ LLVMConstDataArray ] ---
+
+    /** {@code LLVMValueRef LLVMConstDataArray(LLVMTypeRef ElementTy, char const * Data, size_t SizeInBytes)} */
+    public static long nLLVMConstDataArray(long ElementTy, long Data, long SizeInBytes) {
+        long __functionAddress = Functions.ConstDataArray;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(ElementTy);
+        }
+        return invokePPPP(ElementTy, Data, SizeInBytes, __functionAddress);
+    }
+
+    /** {@code LLVMValueRef LLVMConstDataArray(LLVMTypeRef ElementTy, char const * Data, size_t SizeInBytes)} */
+    @NativeType("LLVMValueRef")
+    public static long LLVMConstDataArray(@NativeType("LLVMTypeRef") long ElementTy, @NativeType("char const *") ByteBuffer Data) {
+        return nLLVMConstDataArray(ElementTy, memAddress(Data), Data.remaining());
     }
 
     // --- [ LLVMConstNamedStruct ] ---
@@ -6327,6 +6372,7 @@ public class LLVMCore {
     public static long LLVMConstMul(@NativeType("LLVMValueRef") long LHSConstant, @NativeType("LLVMValueRef") long RHSConstant) {
         long __functionAddress = Functions.ConstMul;
         if (CHECKS) {
+            check(__functionAddress);
             check(LHSConstant);
             check(RHSConstant);
         }
@@ -6340,6 +6386,7 @@ public class LLVMCore {
     public static long LLVMConstNSWMul(@NativeType("LLVMValueRef") long LHSConstant, @NativeType("LLVMValueRef") long RHSConstant) {
         long __functionAddress = Functions.ConstNSWMul;
         if (CHECKS) {
+            check(__functionAddress);
             check(LHSConstant);
             check(RHSConstant);
         }
@@ -6353,6 +6400,7 @@ public class LLVMCore {
     public static long LLVMConstNUWMul(@NativeType("LLVMValueRef") long LHSConstant, @NativeType("LLVMValueRef") long RHSConstant) {
         long __functionAddress = Functions.ConstNUWMul;
         if (CHECKS) {
+            check(__functionAddress);
             check(LHSConstant);
             check(RHSConstant);
         }
@@ -9636,6 +9684,31 @@ public class LLVMCore {
             check(Inst);
         }
         return invokePI(Inst, __functionAddress);
+    }
+
+    // --- [ LLVMGetICmpSameSign ] ---
+
+    /** {@code LLVMBool LLVMGetICmpSameSign(LLVMValueRef Inst)} */
+    @NativeType("LLVMBool")
+    public static boolean LLVMGetICmpSameSign(@NativeType("LLVMValueRef") long Inst) {
+        long __functionAddress = Functions.GetICmpSameSign;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Inst);
+        }
+        return invokePI(Inst, __functionAddress) != 0;
+    }
+
+    // --- [ LLVMSetICmpSameSign ] ---
+
+    /** {@code void LLVMSetICmpSameSign(LLVMValueRef Inst, LLVMBool SameSign)} */
+    public static void LLVMSetICmpSameSign(@NativeType("LLVMValueRef") long Inst, @NativeType("LLVMBool") boolean SameSign) {
+        long __functionAddress = Functions.SetICmpSameSign;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Inst);
+        }
+        invokePV(Inst, SameSign ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMGetFCmpPredicate ] ---

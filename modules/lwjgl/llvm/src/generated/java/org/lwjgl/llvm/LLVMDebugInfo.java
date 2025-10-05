@@ -28,103 +28,109 @@ public class LLVMDebugInfo {
 
         /** Function address. */
         public static final long
-            DebugMetadataVersion                       = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDebugMetadataVersion"),
-            GetModuleDebugMetadataVersion              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetModuleDebugMetadataVersion"),
-            StripModuleDebugInfo                       = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMStripModuleDebugInfo"),
-            CreateDIBuilderDisallowUnresolved          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMCreateDIBuilderDisallowUnresolved"),
-            CreateDIBuilder                            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMCreateDIBuilder"),
-            DisposeDIBuilder                           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDisposeDIBuilder"),
-            DIBuilderFinalize                          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderFinalize"),
-            DIBuilderFinalizeSubprogram                = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderFinalizeSubprogram"),
-            DIBuilderCreateCompileUnit                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateCompileUnit"),
-            DIBuilderCreateFile                        = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateFile"),
-            DIBuilderCreateModule                      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateModule"),
-            DIBuilderCreateNameSpace                   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateNameSpace"),
-            DIBuilderCreateFunction                    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateFunction"),
-            DIBuilderCreateLexicalBlock                = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateLexicalBlock"),
-            DIBuilderCreateLexicalBlockFile            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateLexicalBlockFile"),
-            DIBuilderCreateImportedModuleFromNamespace = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateImportedModuleFromNamespace"),
-            DIBuilderCreateImportedModuleFromAlias     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateImportedModuleFromAlias"),
-            DIBuilderCreateImportedModuleFromModule    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateImportedModuleFromModule"),
-            DIBuilderCreateImportedDeclaration         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateImportedDeclaration"),
-            DIBuilderCreateDebugLocation               = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateDebugLocation"),
-            DILocationGetLine                          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDILocationGetLine"),
-            DILocationGetColumn                        = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDILocationGetColumn"),
-            DILocationGetScope                         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDILocationGetScope"),
-            DILocationGetInlinedAt                     = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDILocationGetInlinedAt"),
-            DIScopeGetFile                             = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIScopeGetFile"),
-            DIFileGetDirectory                         = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIFileGetDirectory"),
-            DIFileGetFilename                          = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIFileGetFilename"),
-            DIFileGetSource                            = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIFileGetSource"),
-            DIBuilderGetOrCreateTypeArray              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderGetOrCreateTypeArray"),
-            DIBuilderCreateSubroutineType              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateSubroutineType"),
-            DIBuilderCreateMacro                       = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderCreateMacro"),
-            DIBuilderCreateTempMacroFile               = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderCreateTempMacroFile"),
-            DIBuilderCreateEnumerator                  = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderCreateEnumerator"),
-            DIBuilderCreateEnumerationType             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateEnumerationType"),
-            DIBuilderCreateUnionType                   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateUnionType"),
-            DIBuilderCreateArrayType                   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateArrayType"),
-            DIBuilderCreateVectorType                  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateVectorType"),
-            DIBuilderCreateUnspecifiedType             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateUnspecifiedType"),
-            DIBuilderCreateBasicType                   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateBasicType"),
-            DIBuilderCreatePointerType                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreatePointerType"),
-            DIBuilderCreateStructType                  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateStructType"),
-            DIBuilderCreateMemberType                  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateMemberType"),
-            DIBuilderCreateStaticMemberType            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateStaticMemberType"),
-            DIBuilderCreateMemberPointerType           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateMemberPointerType"),
-            DIBuilderCreateObjCIVar                    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateObjCIVar"),
-            DIBuilderCreateObjCProperty                = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateObjCProperty"),
-            DIBuilderCreateObjectPointerType           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateObjectPointerType"),
-            DIBuilderCreateQualifiedType               = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateQualifiedType"),
-            DIBuilderCreateReferenceType               = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateReferenceType"),
-            DIBuilderCreateNullPtrType                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateNullPtrType"),
-            DIBuilderCreateTypedef                     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateTypedef"),
-            DIBuilderCreateInheritance                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateInheritance"),
-            DIBuilderCreateForwardDecl                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateForwardDecl"),
-            DIBuilderCreateReplaceableCompositeType    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateReplaceableCompositeType"),
-            DIBuilderCreateBitFieldMemberType          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateBitFieldMemberType"),
-            DIBuilderCreateClassType                   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateClassType"),
-            DIBuilderCreateArtificialType              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateArtificialType"),
-            DITypeGetName                              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDITypeGetName"),
-            DITypeGetSizeInBits                        = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDITypeGetSizeInBits"),
-            DITypeGetOffsetInBits                      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDITypeGetOffsetInBits"),
-            DITypeGetAlignInBits                       = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDITypeGetAlignInBits"),
-            DITypeGetLine                              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDITypeGetLine"),
-            DITypeGetFlags                             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDITypeGetFlags"),
-            DIBuilderGetOrCreateSubrange               = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderGetOrCreateSubrange"),
-            DIBuilderGetOrCreateArray                  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderGetOrCreateArray"),
-            DIBuilderCreateExpression                  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateExpression"),
-            DIBuilderCreateConstantValueExpression     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateConstantValueExpression"),
-            DIBuilderCreateGlobalVariableExpression    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateGlobalVariableExpression"),
-            GetDINodeTag                               = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMGetDINodeTag"),
-            DIGlobalVariableExpressionGetVariable      = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIGlobalVariableExpressionGetVariable"),
-            DIGlobalVariableExpressionGetExpression    = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIGlobalVariableExpressionGetExpression"),
-            DIVariableGetFile                          = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIVariableGetFile"),
-            DIVariableGetScope                         = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIVariableGetScope"),
-            DIVariableGetLine                          = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIVariableGetLine"),
-            TemporaryMDNode                            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTemporaryMDNode"),
-            DisposeTemporaryMDNode                     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDisposeTemporaryMDNode"),
-            MetadataReplaceAllUsesWith                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMMetadataReplaceAllUsesWith"),
-            DIBuilderCreateTempGlobalVariableFwdDecl   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateTempGlobalVariableFwdDecl"),
-            DIBuilderInsertDeclareBefore               = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertDeclareBefore"),
-            DIBuilderInsertDeclareAtEnd                = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertDeclareAtEnd"),
-            DIBuilderInsertDbgValueBefore              = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertDbgValueBefore"),
-            DIBuilderInsertDbgValueAtEnd               = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertDbgValueAtEnd"),
-            DIBuilderInsertDeclareRecordBefore         = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertDeclareRecordBefore"),
-            DIBuilderInsertDeclareRecordAtEnd          = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertDeclareRecordAtEnd"),
-            DIBuilderInsertDbgValueRecordBefore        = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertDbgValueRecordBefore"),
-            DIBuilderInsertDbgValueRecordAtEnd         = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertDbgValueRecordAtEnd"),
-            DIBuilderCreateAutoVariable                = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateAutoVariable"),
-            DIBuilderCreateParameterVariable           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateParameterVariable"),
-            GetSubprogram                              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetSubprogram"),
-            SetSubprogram                              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMSetSubprogram"),
-            DISubprogramGetLine                        = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDISubprogramGetLine"),
-            InstructionGetDebugLoc                     = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMInstructionGetDebugLoc"),
-            InstructionSetDebugLoc                     = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMInstructionSetDebugLoc"),
-            DIBuilderCreateLabel                       = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderCreateLabel"),
-            DIBuilderInsertLabelBefore                 = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertLabelBefore"),
-            DIBuilderInsertLabelAtEnd                  = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertLabelAtEnd"),
-            GetMetadataKind                            = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMGetMetadataKind");
+            DebugMetadataVersion                          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDebugMetadataVersion"),
+            GetModuleDebugMetadataVersion                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetModuleDebugMetadataVersion"),
+            StripModuleDebugInfo                          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMStripModuleDebugInfo"),
+            CreateDIBuilderDisallowUnresolved             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMCreateDIBuilderDisallowUnresolved"),
+            CreateDIBuilder                               = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMCreateDIBuilder"),
+            DisposeDIBuilder                              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDisposeDIBuilder"),
+            DIBuilderFinalize                             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderFinalize"),
+            DIBuilderFinalizeSubprogram                   = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderFinalizeSubprogram"),
+            DIBuilderCreateCompileUnit                    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateCompileUnit"),
+            DIBuilderCreateFile                           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateFile"),
+            DIBuilderCreateModule                         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateModule"),
+            DIBuilderCreateNameSpace                      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateNameSpace"),
+            DIBuilderCreateFunction                       = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateFunction"),
+            DIBuilderCreateLexicalBlock                   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateLexicalBlock"),
+            DIBuilderCreateLexicalBlockFile               = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateLexicalBlockFile"),
+            DIBuilderCreateImportedModuleFromNamespace    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateImportedModuleFromNamespace"),
+            DIBuilderCreateImportedModuleFromAlias        = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateImportedModuleFromAlias"),
+            DIBuilderCreateImportedModuleFromModule       = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateImportedModuleFromModule"),
+            DIBuilderCreateImportedDeclaration            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateImportedDeclaration"),
+            DIBuilderCreateDebugLocation                  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateDebugLocation"),
+            DILocationGetLine                             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDILocationGetLine"),
+            DILocationGetColumn                           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDILocationGetColumn"),
+            DILocationGetScope                            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDILocationGetScope"),
+            DILocationGetInlinedAt                        = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDILocationGetInlinedAt"),
+            DIScopeGetFile                                = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIScopeGetFile"),
+            DIFileGetDirectory                            = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIFileGetDirectory"),
+            DIFileGetFilename                             = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIFileGetFilename"),
+            DIFileGetSource                               = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIFileGetSource"),
+            DIBuilderGetOrCreateTypeArray                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderGetOrCreateTypeArray"),
+            DIBuilderCreateSubroutineType                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateSubroutineType"),
+            DIBuilderCreateMacro                          = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderCreateMacro"),
+            DIBuilderCreateTempMacroFile                  = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderCreateTempMacroFile"),
+            DIBuilderCreateEnumerator                     = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderCreateEnumerator"),
+            DIBuilderCreateEnumeratorOfArbitraryPrecision = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderCreateEnumeratorOfArbitraryPrecision"),
+            DIBuilderCreateEnumerationType                = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateEnumerationType"),
+            DIBuilderCreateUnionType                      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateUnionType"),
+            DIBuilderCreateArrayType                      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateArrayType"),
+            DIBuilderCreateSetType                        = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderCreateSetType"),
+            DIBuilderCreateSubrangeType                   = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderCreateSubrangeType"),
+            DIBuilderCreateDynamicArrayType               = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderCreateDynamicArrayType"),
+            ReplaceArrays                                 = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMReplaceArrays"),
+            DIBuilderCreateVectorType                     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateVectorType"),
+            DIBuilderCreateUnspecifiedType                = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateUnspecifiedType"),
+            DIBuilderCreateBasicType                      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateBasicType"),
+            DIBuilderCreatePointerType                    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreatePointerType"),
+            DIBuilderCreateStructType                     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateStructType"),
+            DIBuilderCreateMemberType                     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateMemberType"),
+            DIBuilderCreateStaticMemberType               = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateStaticMemberType"),
+            DIBuilderCreateMemberPointerType              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateMemberPointerType"),
+            DIBuilderCreateObjCIVar                       = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateObjCIVar"),
+            DIBuilderCreateObjCProperty                   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateObjCProperty"),
+            DIBuilderCreateObjectPointerType              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateObjectPointerType"),
+            DIBuilderCreateQualifiedType                  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateQualifiedType"),
+            DIBuilderCreateReferenceType                  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateReferenceType"),
+            DIBuilderCreateNullPtrType                    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateNullPtrType"),
+            DIBuilderCreateTypedef                        = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateTypedef"),
+            DIBuilderCreateInheritance                    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateInheritance"),
+            DIBuilderCreateForwardDecl                    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateForwardDecl"),
+            DIBuilderCreateReplaceableCompositeType       = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateReplaceableCompositeType"),
+            DIBuilderCreateBitFieldMemberType             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateBitFieldMemberType"),
+            DIBuilderCreateClassType                      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateClassType"),
+            DIBuilderCreateArtificialType                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateArtificialType"),
+            DITypeGetName                                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDITypeGetName"),
+            DITypeGetSizeInBits                           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDITypeGetSizeInBits"),
+            DITypeGetOffsetInBits                         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDITypeGetOffsetInBits"),
+            DITypeGetAlignInBits                          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDITypeGetAlignInBits"),
+            DITypeGetLine                                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDITypeGetLine"),
+            DITypeGetFlags                                = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDITypeGetFlags"),
+            DIBuilderGetOrCreateSubrange                  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderGetOrCreateSubrange"),
+            DIBuilderGetOrCreateArray                     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderGetOrCreateArray"),
+            DIBuilderCreateExpression                     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateExpression"),
+            DIBuilderCreateConstantValueExpression        = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateConstantValueExpression"),
+            DIBuilderCreateGlobalVariableExpression       = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateGlobalVariableExpression"),
+            GetDINodeTag                                  = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMGetDINodeTag"),
+            DIGlobalVariableExpressionGetVariable         = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIGlobalVariableExpressionGetVariable"),
+            DIGlobalVariableExpressionGetExpression       = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIGlobalVariableExpressionGetExpression"),
+            DIVariableGetFile                             = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIVariableGetFile"),
+            DIVariableGetScope                            = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIVariableGetScope"),
+            DIVariableGetLine                             = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIVariableGetLine"),
+            TemporaryMDNode                               = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTemporaryMDNode"),
+            DisposeTemporaryMDNode                        = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDisposeTemporaryMDNode"),
+            MetadataReplaceAllUsesWith                    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMMetadataReplaceAllUsesWith"),
+            DIBuilderCreateTempGlobalVariableFwdDecl      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateTempGlobalVariableFwdDecl"),
+            DIBuilderInsertDeclareBefore                  = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertDeclareBefore"),
+            DIBuilderInsertDeclareAtEnd                   = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertDeclareAtEnd"),
+            DIBuilderInsertDbgValueBefore                 = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertDbgValueBefore"),
+            DIBuilderInsertDbgValueAtEnd                  = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertDbgValueAtEnd"),
+            DIBuilderInsertDeclareRecordBefore            = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertDeclareRecordBefore"),
+            DIBuilderInsertDeclareRecordAtEnd             = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertDeclareRecordAtEnd"),
+            DIBuilderInsertDbgValueRecordBefore           = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertDbgValueRecordBefore"),
+            DIBuilderInsertDbgValueRecordAtEnd            = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertDbgValueRecordAtEnd"),
+            DIBuilderCreateAutoVariable                   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateAutoVariable"),
+            DIBuilderCreateParameterVariable              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateParameterVariable"),
+            GetSubprogram                                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetSubprogram"),
+            SetSubprogram                                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMSetSubprogram"),
+            DISubprogramGetLine                           = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDISubprogramGetLine"),
+            DISubprogramReplaceType                       = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDISubprogramReplaceType"),
+            InstructionGetDebugLoc                        = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMInstructionGetDebugLoc"),
+            InstructionSetDebugLoc                        = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMInstructionSetDebugLoc"),
+            DIBuilderCreateLabel                          = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderCreateLabel"),
+            DIBuilderInsertLabelBefore                    = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertLabelBefore"),
+            DIBuilderInsertLabelAtEnd                     = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderInsertLabelAtEnd"),
+            GetMetadataKind                               = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMGetMetadataKind");
 
     }
 
@@ -271,7 +277,9 @@ public class LLVMDebugInfo {
         LLVMDIStringTypeMetadataKind                 = 32,
         LLVMDIGenericSubrangeMetadataKind            = 33,
         LLVMDIArgListMetadataKind                    = 34,
-        LLVMDIAssignIDMetadataKind                   = 35;
+        LLVMDIAssignIDMetadataKind                   = 35,
+        LLVMDISubrangeTypeMetadataKind               = 36,
+        LLVMDIFixedPointTypeMetadataKind             = 37;
 
     public static final int
         LLVMDWARFMacinfoRecordTypeDefine    = 0x01,
@@ -918,6 +926,27 @@ public class LLVMDebugInfo {
         return nLLVMDIBuilderCreateEnumerator(Builder, memAddress(Name), Name.remaining(), Value, IsUnsigned ? 1 : 0);
     }
 
+    // --- [ LLVMDIBuilderCreateEnumeratorOfArbitraryPrecision ] ---
+
+    /** {@code LLVMMetadataRef LLVMDIBuilderCreateEnumeratorOfArbitraryPrecision(LLVMDIBuilderRef Builder, char const * Name, size_t NameLen, uint64_t SizeInBits, uint64_t const * Words, LLVMBool IsUnsigned)} */
+    public static long nLLVMDIBuilderCreateEnumeratorOfArbitraryPrecision(long Builder, long Name, long NameLen, long SizeInBits, long Words, int IsUnsigned) {
+        long __functionAddress = Functions.DIBuilderCreateEnumeratorOfArbitraryPrecision;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Builder);
+        }
+        return invokePPPJPP(Builder, Name, NameLen, SizeInBits, Words, IsUnsigned, __functionAddress);
+    }
+
+    /** {@code LLVMMetadataRef LLVMDIBuilderCreateEnumeratorOfArbitraryPrecision(LLVMDIBuilderRef Builder, char const * Name, size_t NameLen, uint64_t SizeInBits, uint64_t const * Words, LLVMBool IsUnsigned)} */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDIBuilderCreateEnumeratorOfArbitraryPrecision(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("char const *") ByteBuffer Name, @NativeType("uint64_t") long SizeInBits, @NativeType("uint64_t const *") LongBuffer Words, @NativeType("LLVMBool") boolean IsUnsigned) {
+        if (CHECKS) {
+            check(Words, (SizeInBits + 63) / 64);
+        }
+        return nLLVMDIBuilderCreateEnumeratorOfArbitraryPrecision(Builder, memAddress(Name), Name.remaining(), SizeInBits, memAddress(Words), IsUnsigned ? 1 : 0);
+    }
+
     // --- [ LLVMDIBuilderCreateEnumerationType ] ---
 
     /** {@code LLVMMetadataRef LLVMDIBuilderCreateEnumerationType(LLVMDIBuilderRef Builder, LLVMMetadataRef Scope, char const * Name, size_t NameLen, LLVMMetadataRef File, unsigned int LineNumber, uint64_t SizeInBits, uint32_t AlignInBits, LLVMMetadataRef * Elements, unsigned int NumElements, LLVMMetadataRef ClassTy)} */
@@ -1001,6 +1030,94 @@ public class LLVMDebugInfo {
     @NativeType("LLVMMetadataRef")
     public static long LLVMDIBuilderCreateArrayType(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("uint64_t") long Size, @NativeType("uint32_t") int AlignInBits, @NativeType("LLVMMetadataRef") long Ty, @NativeType("LLVMMetadataRef *") PointerBuffer Subscripts) {
         return nLLVMDIBuilderCreateArrayType(Builder, Size, AlignInBits, Ty, memAddress(Subscripts), Subscripts.remaining());
+    }
+
+    // --- [ LLVMDIBuilderCreateSetType ] ---
+
+    /** {@code LLVMMetadataRef LLVMDIBuilderCreateSetType(LLVMDIBuilderRef Builder, LLVMMetadataRef Scope, char const * Name, size_t NameLen, LLVMMetadataRef File, unsigned LineNumber, uint64_t SizeInBits, uint32_t AlignInBits, LLVMMetadataRef BaseTy)} */
+    public static long nLLVMDIBuilderCreateSetType(long Builder, long Scope, long Name, long NameLen, long File, int LineNumber, long SizeInBits, int AlignInBits, long BaseTy) {
+        long __functionAddress = Functions.DIBuilderCreateSetType;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Builder);
+            check(Scope);
+            check(File);
+            check(BaseTy);
+        }
+        return invokePPPPPJPP(Builder, Scope, Name, NameLen, File, LineNumber, SizeInBits, AlignInBits, BaseTy, __functionAddress);
+    }
+
+    /** {@code LLVMMetadataRef LLVMDIBuilderCreateSetType(LLVMDIBuilderRef Builder, LLVMMetadataRef Scope, char const * Name, size_t NameLen, LLVMMetadataRef File, unsigned LineNumber, uint64_t SizeInBits, uint32_t AlignInBits, LLVMMetadataRef BaseTy)} */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDIBuilderCreateSetType(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("char const *") ByteBuffer Name, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned") int LineNumber, @NativeType("uint64_t") long SizeInBits, @NativeType("uint32_t") int AlignInBits, @NativeType("LLVMMetadataRef") long BaseTy) {
+        return nLLVMDIBuilderCreateSetType(Builder, Scope, memAddress(Name), Name.remaining(), File, LineNumber, SizeInBits, AlignInBits, BaseTy);
+    }
+
+    // --- [ LLVMDIBuilderCreateSubrangeType ] ---
+
+    /** {@code LLVMMetadataRef LLVMDIBuilderCreateSubrangeType(LLVMDIBuilderRef Builder, LLVMMetadataRef Scope, char const * Name, size_t NameLen, unsigned LineNo, LLVMMetadataRef File, uint64_t SizeInBits, uint32_t AlignInBits, LLVMDIFlags Flags, LLVMMetadataRef BaseTy, LLVMMetadataRef LowerBound, LLVMMetadataRef UpperBound, LLVMMetadataRef Stride, LLVMMetadataRef Bias)} */
+    public static long nLLVMDIBuilderCreateSubrangeType(long Builder, long Scope, long Name, long NameLen, int LineNo, long File, long SizeInBits, int AlignInBits, int Flags, long BaseTy, long LowerBound, long UpperBound, long Stride, long Bias) {
+        long __functionAddress = Functions.DIBuilderCreateSubrangeType;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Builder);
+            check(Scope);
+            check(File);
+            check(BaseTy);
+            check(LowerBound);
+            check(UpperBound);
+            check(Stride);
+            check(Bias);
+        }
+        return invokePPPPPJPPPPPP(Builder, Scope, Name, NameLen, LineNo, File, SizeInBits, AlignInBits, Flags, BaseTy, LowerBound, UpperBound, Stride, Bias, __functionAddress);
+    }
+
+    /** {@code LLVMMetadataRef LLVMDIBuilderCreateSubrangeType(LLVMDIBuilderRef Builder, LLVMMetadataRef Scope, char const * Name, size_t NameLen, unsigned LineNo, LLVMMetadataRef File, uint64_t SizeInBits, uint32_t AlignInBits, LLVMDIFlags Flags, LLVMMetadataRef BaseTy, LLVMMetadataRef LowerBound, LLVMMetadataRef UpperBound, LLVMMetadataRef Stride, LLVMMetadataRef Bias)} */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDIBuilderCreateSubrangeType(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("char const *") ByteBuffer Name, @NativeType("unsigned") int LineNo, @NativeType("LLVMMetadataRef") long File, @NativeType("uint64_t") long SizeInBits, @NativeType("uint32_t") int AlignInBits, @NativeType("LLVMDIFlags") int Flags, @NativeType("LLVMMetadataRef") long BaseTy, @NativeType("LLVMMetadataRef") long LowerBound, @NativeType("LLVMMetadataRef") long UpperBound, @NativeType("LLVMMetadataRef") long Stride, @NativeType("LLVMMetadataRef") long Bias) {
+        return nLLVMDIBuilderCreateSubrangeType(Builder, Scope, memAddress(Name), Name.remaining(), LineNo, File, SizeInBits, AlignInBits, Flags, BaseTy, LowerBound, UpperBound, Stride, Bias);
+    }
+
+    // --- [ LLVMDIBuilderCreateDynamicArrayType ] ---
+
+    /** {@code LLVMMetadataRef LLVMDIBuilderCreateDynamicArrayType(LLVMDIBuilderRef Builder, LLVMMetadataRef Scope, char const * Name, size_t NameLen, unsigned LineNo, LLVMMetadataRef File, uint64_t Size, uint32_t AlignInBits, LLVMMetadataRef Ty, LLVMMetadataRef * Subscripts, unsigned NumSubscripts, LLVMMetadataRef DataLocation, LLVMMetadataRef Associated, LLVMMetadataRef Allocated, LLVMMetadataRef Rank, LLVMMetadataRef BitStride)} */
+    public static long nLLVMDIBuilderCreateDynamicArrayType(long Builder, long Scope, long Name, long NameLen, int LineNo, long File, long Size, int AlignInBits, long Ty, long Subscripts, int NumSubscripts, long DataLocation, long Associated, long Allocated, long Rank, long BitStride) {
+        long __functionAddress = Functions.DIBuilderCreateDynamicArrayType;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Builder);
+            check(Scope);
+            check(File);
+            check(Ty);
+            check(BitStride);
+        }
+        return invokePPPPPJPPPPPPPP(Builder, Scope, Name, NameLen, LineNo, File, Size, AlignInBits, Ty, Subscripts, NumSubscripts, DataLocation, Associated, Allocated, Rank, BitStride, __functionAddress);
+    }
+
+    /** {@code LLVMMetadataRef LLVMDIBuilderCreateDynamicArrayType(LLVMDIBuilderRef Builder, LLVMMetadataRef Scope, char const * Name, size_t NameLen, unsigned LineNo, LLVMMetadataRef File, uint64_t Size, uint32_t AlignInBits, LLVMMetadataRef Ty, LLVMMetadataRef * Subscripts, unsigned NumSubscripts, LLVMMetadataRef DataLocation, LLVMMetadataRef Associated, LLVMMetadataRef Allocated, LLVMMetadataRef Rank, LLVMMetadataRef BitStride)} */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDIBuilderCreateDynamicArrayType(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("char const *") ByteBuffer Name, @NativeType("unsigned") int LineNo, @NativeType("LLVMMetadataRef") long File, @NativeType("uint64_t") long Size, @NativeType("uint32_t") int AlignInBits, @NativeType("LLVMMetadataRef") long Ty, @NativeType("LLVMMetadataRef *") PointerBuffer Subscripts, @NativeType("LLVMMetadataRef") long DataLocation, @NativeType("LLVMMetadataRef") long Associated, @NativeType("LLVMMetadataRef") long Allocated, @NativeType("LLVMMetadataRef") long Rank, @NativeType("LLVMMetadataRef") long BitStride) {
+        return nLLVMDIBuilderCreateDynamicArrayType(Builder, Scope, memAddress(Name), Name.remaining(), LineNo, File, Size, AlignInBits, Ty, memAddress(Subscripts), Subscripts.remaining(), DataLocation, Associated, Allocated, Rank, BitStride);
+    }
+
+    // --- [ LLVMReplaceArrays ] ---
+
+    /** {@code void LLVMReplaceArrays(LLVMDIBuilderRef Builder, LLVMMetadataRef * T, LLVMMetadataRef * Elements, unsigned NumElements)} */
+    public static void nLLVMReplaceArrays(long Builder, long T, long Elements, int NumElements) {
+        long __functionAddress = Functions.ReplaceArrays;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Builder);
+        }
+        invokePPPV(Builder, T, Elements, NumElements, __functionAddress);
+    }
+
+    /** {@code void LLVMReplaceArrays(LLVMDIBuilderRef Builder, LLVMMetadataRef * T, LLVMMetadataRef * Elements, unsigned NumElements)} */
+    public static void LLVMReplaceArrays(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef *") PointerBuffer T, @NativeType("LLVMMetadataRef *") PointerBuffer Elements) {
+        if (CHECKS) {
+            check(T, 1);
+        }
+        nLLVMReplaceArrays(Builder, memAddress(T), memAddress(Elements), Elements.remaining());
     }
 
     // --- [ LLVMDIBuilderCreateVectorType ] ---
@@ -2125,6 +2242,19 @@ public class LLVMDebugInfo {
             check(Subprogram);
         }
         return invokePI(Subprogram, __functionAddress);
+    }
+
+    // --- [ LLVMDISubprogramReplaceType ] ---
+
+    /** {@code void LLVMDISubprogramReplaceType(LLVMMetadataRef Subprogram, LLVMMetadataRef SubroutineType)} */
+    public static void LLVMDISubprogramReplaceType(@NativeType("LLVMMetadataRef") long Subprogram, @NativeType("LLVMMetadataRef") long SubroutineType) {
+        long __functionAddress = Functions.DISubprogramReplaceType;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Subprogram);
+            check(SubroutineType);
+        }
+        invokePPV(Subprogram, SubroutineType, __functionAddress);
     }
 
     // --- [ LLVMInstructionGetDebugLoc ] ---

@@ -19,7 +19,7 @@ typedef struct {
   size_t Size;
 } LTOObjectBuffer;""")
 
-    IntConstant("API_VERSION".."29")
+    IntConstant("API_VERSION".."30")
 
     EnumConstant(
         "SYMBOL_ALIGNMENT_MASK".enum("0x0000001F"),
@@ -199,6 +199,19 @@ typedef struct {
 
     lto_symbol_attributes(
         "module_get_symbol_attribute",
+
+        lto_module_t("mod"),
+        unsigned_int("index")
+    )
+
+    IgnoreMissing..unsigned_int(
+        "module_get_num_asm_undef_symbols",
+
+        lto_module_t("mod")
+    )
+
+    IgnoreMissing..charUTF8.const.p(
+        "module_get_asm_undef_symbol_name",
 
         lto_module_t("mod"),
         unsigned_int("index")

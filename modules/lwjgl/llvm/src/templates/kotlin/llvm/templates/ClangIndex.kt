@@ -378,6 +378,7 @@ val ClangIndex = "ClangIndex".nativeClass(
         "Cursor_OMPReverseDirective".enum,
         "Cursor_OMPInterchangeDirective".enum,
         "Cursor_OMPAssumeDirective".enum,
+        "Cursor_OMPStripeDirective".enum,
         "Cursor_OpenACCComputeConstruct".enum("320"),
         "Cursor_OpenACCLoopConstruct".enum,
         "Cursor_OpenACCCombinedConstruct".enum,
@@ -390,7 +391,9 @@ val ClangIndex = "ClangIndex".nativeClass(
         "Cursor_OpenACCShutdownConstruct".enum,
         "Cursor_OpenACCSetConstruct".enum,
         "Cursor_OpenACCUpdateConstruct".enum,
-        "Cursor_LastStmt".enum("CXCursor_OpenACCUpdateConstruct"),
+        "Cursor_OpenACCAtomicConstruct".enum,
+        "Cursor_OpenACCCacheConstruct".enum,
+        "Cursor_LastStmt".enum("CXCursor_OpenACCCacheConstruct"),
         "Cursor_TranslationUnit".enum("350"),
         "Cursor_FirstAttr".enum("400"),
         "Cursor_UnexposedAttr".enum("400"),
@@ -613,7 +616,8 @@ val ClangIndex = "ClangIndex".nativeClass(
         "Type_Atomic".enum,
         "Type_BTFTagAttributed".enum,
         "Type_HLSLResource".enum,
-        "Type_HLSLAttributedResource".enum
+        "Type_HLSLAttributedResource".enum,
+        "Type_HLSLInlineSpirv".enum
     )
 
     EnumConstant(
@@ -640,6 +644,18 @@ val ClangIndex = "ClangIndex".nativeClass(
         "CallingConv_M68kRTD".enum,
         "CallingConv_PreserveNone".enum,
         "CallingConv_RISCVVectorCall".enum,
+        "CallingConv_RISCVVLSCall_32".enum,
+        "CallingConv_RISCVVLSCall_64".enum,
+        "CallingConv_RISCVVLSCall_128".enum,
+        "CallingConv_RISCVVLSCall_256".enum,
+        "CallingConv_RISCVVLSCall_512".enum,
+        "CallingConv_RISCVVLSCall_1024".enum,
+        "CallingConv_RISCVVLSCall_2048".enum,
+        "CallingConv_RISCVVLSCall_4096".enum,
+        "CallingConv_RISCVVLSCall_8192".enum,
+        "CallingConv_RISCVVLSCall_16384".enum,
+        "CallingConv_RISCVVLSCall_32768".enum,
+        "CallingConv_RISCVVLSCall_65536".enum,
         "CallingConv_Invalid".enum("100"),
         "CallingConv_Unexposed".enum("200")
     )
@@ -2412,6 +2428,14 @@ val ClangIndex = "ClangIndex".nativeClass(
         CXPrintingPolicy("cxPolicy")
     )
 
+    IgnoreMissing..CXString(
+        "getFullyQualifiedName",
+
+        CXType("CT"),
+        CXPrintingPolicy("Policy"),
+        unsigned("WithGlobalNsPrefix")
+    )
+
     CXString(
         "getCursorDisplayName",
 
@@ -2540,6 +2564,67 @@ val ClangIndex = "ClangIndex".nativeClass(
         "Cursor_getObjCManglings",
 
         CXCursor("cursor")
+    )
+
+    IgnoreMissing..CXString(
+        "Cursor_getGCCAssemblyTemplate",
+
+        CXCursor("Cursor")
+    )
+
+    IgnoreMissing..unsignedb(
+        "Cursor_isGCCAssemblyHasGoto",
+
+        CXCursor("Cursor")
+    )
+
+    IgnoreMissing..unsigned(
+        "Cursor_getGCCAssemblyNumOutputs",
+
+        CXCursor("Cursor")
+    )
+
+    IgnoreMissing..unsigned(
+        "Cursor_getGCCAssemblyNumInputs",
+
+        CXCursor("Cursor")
+    )
+
+    IgnoreMissing..unsignedb(
+        "Cursor_getGCCAssemblyInput",
+
+        CXCursor("Cursor"),
+        unsigned("Index"),
+        nullable..CXString.p("Constraint"),
+        nullable..CXCursor.p("Expr")
+    )
+
+    IgnoreMissing..unsignedb(
+        "Cursor_getGCCAssemblyOutput",
+
+        CXCursor("Cursor"),
+        unsigned("Index"),
+        nullable..CXString.p("Constraint"),
+        nullable..CXCursor.p("Expr")
+    )
+
+    IgnoreMissing..unsigned(
+        "Cursor_getGCCAssemblyNumClobbers",
+
+        CXCursor("Cursor")
+    )
+
+    IgnoreMissing..CXString(
+        "Cursor_getGCCAssemblyClobber",
+
+        CXCursor("Cursor"),
+        unsigned("Index")
+    )
+
+    IgnoreMissing..unsignedb(
+        "Cursor_isGCCAssemblyVolatile",
+
+        CXCursor("Cursor")
     )
 
     CXModule(
@@ -3029,26 +3114,26 @@ val ClangIndex = "ClangIndex".nativeClass(
         CXEvalResult("E")
     )
 
-    CXRemapping(
+    IgnoreMissing..CXRemapping(
         "getRemappings",
 
         charUTF8.const.p("path")
     )
 
-    CXRemapping(
+    IgnoreMissing..CXRemapping(
         "getRemappingsFromFileList",
 
         charUTF8.const.p.p("filePaths"),
         AutoSize("filePaths")..unsigned("numFiles")
     )
 
-    unsigned(
+    IgnoreMissing..unsigned(
         "remap_getNumFiles",
 
         CXRemapping("Remapping")
     )
 
-    void(
+    IgnoreMissing..void(
         "remap_getFilenames",
 
         CXRemapping("Remapping"),
@@ -3057,7 +3142,7 @@ val ClangIndex = "ClangIndex".nativeClass(
         nullable..CXString.p("transformed")
     )
 
-    void(
+    IgnoreMissing..void(
         "remap_dispose",
 
         CXRemapping("Remapping")
@@ -3237,6 +3322,14 @@ val ClangIndex = "ClangIndex".nativeClass(
 
     IgnoreMissing..unsignedb(
         "visitCXXBaseClasses",
+
+        CXType("T"),
+        CXFieldVisitor("visitor"),
+        nullable..CXClientData("client_data")
+    )
+
+    IgnoreMissing..unsignedb(
+        "visitCXXMethods",
 
         CXType("T"),
         CXFieldVisitor("visitor"),

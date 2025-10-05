@@ -242,6 +242,7 @@ public class ClangIndex {
             PrintingPolicy_dispose                  = apiGetFunctionAddressOptional(CLANG, "clang_PrintingPolicy_dispose"),
             getCursorPrettyPrinted                  = apiGetFunctionAddressOptional(CLANG, "clang_getCursorPrettyPrinted"),
             getTypePrettyPrinted                    = apiGetFunctionAddressOptional(CLANG, "clang_getTypePrettyPrinted"),
+            getFullyQualifiedName                   = apiGetFunctionAddressOptional(CLANG, "clang_getFullyQualifiedName"),
             getCursorDisplayName                    = apiGetFunctionAddress(CLANG, "clang_getCursorDisplayName"),
             getCursorReferenced                     = apiGetFunctionAddress(CLANG, "clang_getCursorReferenced"),
             getCursorDefinition                     = apiGetFunctionAddress(CLANG, "clang_getCursorDefinition"),
@@ -263,6 +264,15 @@ public class ClangIndex {
             Cursor_getMangling                      = apiGetFunctionAddress(CLANG, "clang_Cursor_getMangling"),
             Cursor_getCXXManglings                  = apiGetFunctionAddress(CLANG, "clang_Cursor_getCXXManglings"),
             Cursor_getObjCManglings                 = apiGetFunctionAddressOptional(CLANG, "clang_Cursor_getObjCManglings"),
+            Cursor_getGCCAssemblyTemplate           = apiGetFunctionAddressOptional(CLANG, "clang_Cursor_getGCCAssemblyTemplate"),
+            Cursor_isGCCAssemblyHasGoto             = apiGetFunctionAddressOptional(CLANG, "clang_Cursor_isGCCAssemblyHasGoto"),
+            Cursor_getGCCAssemblyNumOutputs         = apiGetFunctionAddressOptional(CLANG, "clang_Cursor_getGCCAssemblyNumOutputs"),
+            Cursor_getGCCAssemblyNumInputs          = apiGetFunctionAddressOptional(CLANG, "clang_Cursor_getGCCAssemblyNumInputs"),
+            Cursor_getGCCAssemblyInput              = apiGetFunctionAddressOptional(CLANG, "clang_Cursor_getGCCAssemblyInput"),
+            Cursor_getGCCAssemblyOutput             = apiGetFunctionAddressOptional(CLANG, "clang_Cursor_getGCCAssemblyOutput"),
+            Cursor_getGCCAssemblyNumClobbers        = apiGetFunctionAddressOptional(CLANG, "clang_Cursor_getGCCAssemblyNumClobbers"),
+            Cursor_getGCCAssemblyClobber            = apiGetFunctionAddressOptional(CLANG, "clang_Cursor_getGCCAssemblyClobber"),
+            Cursor_isGCCAssemblyVolatile            = apiGetFunctionAddressOptional(CLANG, "clang_Cursor_isGCCAssemblyVolatile"),
             Cursor_getModule                        = apiGetFunctionAddress(CLANG, "clang_Cursor_getModule"),
             getModuleForFile                        = apiGetFunctionAddress(CLANG, "clang_getModuleForFile"),
             Module_getASTFile                       = apiGetFunctionAddress(CLANG, "clang_Module_getASTFile"),
@@ -338,11 +348,11 @@ public class ClangIndex {
             EvalResult_getAsDouble                  = apiGetFunctionAddress(CLANG, "clang_EvalResult_getAsDouble"),
             EvalResult_getAsStr                     = apiGetFunctionAddress(CLANG, "clang_EvalResult_getAsStr"),
             EvalResult_dispose                      = apiGetFunctionAddress(CLANG, "clang_EvalResult_dispose"),
-            getRemappings                           = apiGetFunctionAddress(CLANG, "clang_getRemappings"),
-            getRemappingsFromFileList               = apiGetFunctionAddress(CLANG, "clang_getRemappingsFromFileList"),
-            remap_getNumFiles                       = apiGetFunctionAddress(CLANG, "clang_remap_getNumFiles"),
-            remap_getFilenames                      = apiGetFunctionAddress(CLANG, "clang_remap_getFilenames"),
-            remap_dispose                           = apiGetFunctionAddress(CLANG, "clang_remap_dispose"),
+            getRemappings                           = apiGetFunctionAddressOptional(CLANG, "clang_getRemappings"),
+            getRemappingsFromFileList               = apiGetFunctionAddressOptional(CLANG, "clang_getRemappingsFromFileList"),
+            remap_getNumFiles                       = apiGetFunctionAddressOptional(CLANG, "clang_remap_getNumFiles"),
+            remap_getFilenames                      = apiGetFunctionAddressOptional(CLANG, "clang_remap_getFilenames"),
+            remap_dispose                           = apiGetFunctionAddressOptional(CLANG, "clang_remap_dispose"),
             findReferencesInFile                    = apiGetFunctionAddress(CLANG, "clang_findReferencesInFile"),
             findIncludesInFile                      = apiGetFunctionAddress(CLANG, "clang_findIncludesInFile"),
             index_isEntityObjCContainerKind         = apiGetFunctionAddress(CLANG, "clang_index_isEntityObjCContainerKind"),
@@ -366,6 +376,7 @@ public class ClangIndex {
             indexLoc_getCXSourceLocation            = apiGetFunctionAddress(CLANG, "clang_indexLoc_getCXSourceLocation"),
             Type_visitFields                        = apiGetFunctionAddress(CLANG, "clang_Type_visitFields"),
             visitCXXBaseClasses                     = apiGetFunctionAddressOptional(CLANG, "clang_visitCXXBaseClasses"),
+            visitCXXMethods                         = apiGetFunctionAddressOptional(CLANG, "clang_visitCXXMethods"),
             getBinaryOperatorKindSpelling           = apiGetFunctionAddressOptional(CLANG, "clang_getBinaryOperatorKindSpelling"),
             getCursorBinaryOperatorKind             = apiGetFunctionAddressOptional(CLANG, "clang_getCursorBinaryOperatorKind"),
             getUnaryOperatorKindSpelling            = apiGetFunctionAddressOptional(CLANG, "clang_getUnaryOperatorKindSpelling"),
@@ -723,6 +734,7 @@ public class ClangIndex {
         CXCursor_OMPReverseDirective                              = 307,
         CXCursor_OMPInterchangeDirective                          = 308,
         CXCursor_OMPAssumeDirective                               = 309,
+        CXCursor_OMPStripeDirective                               = 310,
         CXCursor_OpenACCComputeConstruct                          = 320,
         CXCursor_OpenACCLoopConstruct                             = 321,
         CXCursor_OpenACCCombinedConstruct                         = 322,
@@ -735,7 +747,9 @@ public class ClangIndex {
         CXCursor_OpenACCShutdownConstruct                         = 329,
         CXCursor_OpenACCSetConstruct                              = 330,
         CXCursor_OpenACCUpdateConstruct                           = 331,
-        CXCursor_LastStmt                                         = CXCursor_OpenACCUpdateConstruct,
+        CXCursor_OpenACCAtomicConstruct                           = 332,
+        CXCursor_OpenACCCacheConstruct                            = 333,
+        CXCursor_LastStmt                                         = CXCursor_OpenACCCacheConstruct,
         CXCursor_TranslationUnit                                  = 350,
         CXCursor_FirstAttr                                        = 400,
         CXCursor_UnexposedAttr                                    = 400,
@@ -949,34 +963,47 @@ public class ClangIndex {
         CXType_Atomic                                               = 177,
         CXType_BTFTagAttributed                                     = 178,
         CXType_HLSLResource                                         = 179,
-        CXType_HLSLAttributedResource                               = 180;
+        CXType_HLSLAttributedResource                               = 180,
+        CXType_HLSLInlineSpirv                                      = 181;
 
     public static final int
-        CXCallingConv_Default           = 0,
-        CXCallingConv_C                 = 1,
-        CXCallingConv_X86StdCall        = 2,
-        CXCallingConv_X86FastCall       = 3,
-        CXCallingConv_X86ThisCall       = 4,
-        CXCallingConv_X86Pascal         = 5,
-        CXCallingConv_AAPCS             = 6,
-        CXCallingConv_AAPCS_VFP         = 7,
-        CXCallingConv_X86RegCall        = 8,
-        CXCallingConv_IntelOclBicc      = 9,
-        CXCallingConv_Win64             = 10,
-        CXCallingConv_X86_64Win64       = CXCallingConv_Win64,
-        CXCallingConv_X86_64SysV        = 11,
-        CXCallingConv_X86VectorCall     = 12,
-        CXCallingConv_Swift             = 13,
-        CXCallingConv_PreserveMost      = 14,
-        CXCallingConv_PreserveAll       = 15,
-        CXCallingConv_AArch64VectorCall = 16,
-        CXCallingConv_SwiftAsync        = 17,
-        CXCallingConv_AArch64SVEPCS     = 18,
-        CXCallingConv_M68kRTD           = 19,
-        CXCallingConv_PreserveNone      = 20,
-        CXCallingConv_RISCVVectorCall   = 21,
-        CXCallingConv_Invalid           = 100,
-        CXCallingConv_Unexposed         = 200;
+        CXCallingConv_Default            = 0,
+        CXCallingConv_C                  = 1,
+        CXCallingConv_X86StdCall         = 2,
+        CXCallingConv_X86FastCall        = 3,
+        CXCallingConv_X86ThisCall        = 4,
+        CXCallingConv_X86Pascal          = 5,
+        CXCallingConv_AAPCS              = 6,
+        CXCallingConv_AAPCS_VFP          = 7,
+        CXCallingConv_X86RegCall         = 8,
+        CXCallingConv_IntelOclBicc       = 9,
+        CXCallingConv_Win64              = 10,
+        CXCallingConv_X86_64Win64        = CXCallingConv_Win64,
+        CXCallingConv_X86_64SysV         = 11,
+        CXCallingConv_X86VectorCall      = 12,
+        CXCallingConv_Swift              = 13,
+        CXCallingConv_PreserveMost       = 14,
+        CXCallingConv_PreserveAll        = 15,
+        CXCallingConv_AArch64VectorCall  = 16,
+        CXCallingConv_SwiftAsync         = 17,
+        CXCallingConv_AArch64SVEPCS      = 18,
+        CXCallingConv_M68kRTD            = 19,
+        CXCallingConv_PreserveNone       = 20,
+        CXCallingConv_RISCVVectorCall    = 21,
+        CXCallingConv_RISCVVLSCall_32    = 22,
+        CXCallingConv_RISCVVLSCall_64    = 23,
+        CXCallingConv_RISCVVLSCall_128   = 24,
+        CXCallingConv_RISCVVLSCall_256   = 25,
+        CXCallingConv_RISCVVLSCall_512   = 26,
+        CXCallingConv_RISCVVLSCall_1024  = 27,
+        CXCallingConv_RISCVVLSCall_2048  = 28,
+        CXCallingConv_RISCVVLSCall_4096  = 29,
+        CXCallingConv_RISCVVLSCall_8192  = 30,
+        CXCallingConv_RISCVVLSCall_16384 = 31,
+        CXCallingConv_RISCVVLSCall_32768 = 32,
+        CXCallingConv_RISCVVLSCall_65536 = 33,
+        CXCallingConv_Invalid            = 100,
+        CXCallingConv_Unexposed          = 200;
 
     public static final int
         CXTemplateArgumentKind_Null              = 0,
@@ -5086,6 +5113,27 @@ public class ClangIndex {
         return __result;
     }
 
+    // --- [ clang_getFullyQualifiedName ] ---
+
+    /** {@code CXString clang_getFullyQualifiedName(CXType CT, CXPrintingPolicy Policy, unsigned WithGlobalNsPrefix)} */
+    public static native void nclang_getFullyQualifiedName(long CT, long Policy, int WithGlobalNsPrefix, long __functionAddress, long __result);
+
+    /** {@code CXString clang_getFullyQualifiedName(CXType CT, CXPrintingPolicy Policy, unsigned WithGlobalNsPrefix)} */
+    public static void nclang_getFullyQualifiedName(long CT, long Policy, int WithGlobalNsPrefix, long __result) {
+        long __functionAddress = Functions.getFullyQualifiedName;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Policy);
+        }
+        nclang_getFullyQualifiedName(CT, Policy, WithGlobalNsPrefix, __functionAddress, __result);
+    }
+
+    /** {@code CXString clang_getFullyQualifiedName(CXType CT, CXPrintingPolicy Policy, unsigned WithGlobalNsPrefix)} */
+    public static CXString clang_getFullyQualifiedName(CXType CT, @NativeType("CXPrintingPolicy") long Policy, @NativeType("unsigned") int WithGlobalNsPrefix, CXString __result) {
+        nclang_getFullyQualifiedName(CT.address(), Policy, WithGlobalNsPrefix, __result.address());
+        return __result;
+    }
+
     // --- [ clang_getCursorDisplayName ] ---
 
     /** {@code CXString clang_getCursorDisplayName(CXCursor cursor)} */
@@ -5456,6 +5504,186 @@ public class ClangIndex {
     public static @Nullable CXStringSet clang_Cursor_getObjCManglings(CXCursor cursor) {
         long __result = nclang_Cursor_getObjCManglings(cursor.address());
         return CXStringSet.createSafe(__result);
+    }
+
+    // --- [ clang_Cursor_getGCCAssemblyTemplate ] ---
+
+    /** {@code CXString clang_Cursor_getGCCAssemblyTemplate(CXCursor Cursor)} */
+    public static native void nclang_Cursor_getGCCAssemblyTemplate(long Cursor, long __functionAddress, long __result);
+
+    /** {@code CXString clang_Cursor_getGCCAssemblyTemplate(CXCursor Cursor)} */
+    public static void nclang_Cursor_getGCCAssemblyTemplate(long Cursor, long __result) {
+        long __functionAddress = Functions.Cursor_getGCCAssemblyTemplate;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        nclang_Cursor_getGCCAssemblyTemplate(Cursor, __functionAddress, __result);
+    }
+
+    /** {@code CXString clang_Cursor_getGCCAssemblyTemplate(CXCursor Cursor)} */
+    public static CXString clang_Cursor_getGCCAssemblyTemplate(CXCursor Cursor, CXString __result) {
+        nclang_Cursor_getGCCAssemblyTemplate(Cursor.address(), __result.address());
+        return __result;
+    }
+
+    // --- [ clang_Cursor_isGCCAssemblyHasGoto ] ---
+
+    /** {@code unsigned clang_Cursor_isGCCAssemblyHasGoto(CXCursor Cursor)} */
+    public static native int nclang_Cursor_isGCCAssemblyHasGoto(long Cursor, long __functionAddress);
+
+    /** {@code unsigned clang_Cursor_isGCCAssemblyHasGoto(CXCursor Cursor)} */
+    public static int nclang_Cursor_isGCCAssemblyHasGoto(long Cursor) {
+        long __functionAddress = Functions.Cursor_isGCCAssemblyHasGoto;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return nclang_Cursor_isGCCAssemblyHasGoto(Cursor, __functionAddress);
+    }
+
+    /** {@code unsigned clang_Cursor_isGCCAssemblyHasGoto(CXCursor Cursor)} */
+    @NativeType("unsigned")
+    public static boolean clang_Cursor_isGCCAssemblyHasGoto(CXCursor Cursor) {
+        return nclang_Cursor_isGCCAssemblyHasGoto(Cursor.address()) != 0;
+    }
+
+    // --- [ clang_Cursor_getGCCAssemblyNumOutputs ] ---
+
+    /** {@code unsigned clang_Cursor_getGCCAssemblyNumOutputs(CXCursor Cursor)} */
+    public static native int nclang_Cursor_getGCCAssemblyNumOutputs(long Cursor, long __functionAddress);
+
+    /** {@code unsigned clang_Cursor_getGCCAssemblyNumOutputs(CXCursor Cursor)} */
+    public static int nclang_Cursor_getGCCAssemblyNumOutputs(long Cursor) {
+        long __functionAddress = Functions.Cursor_getGCCAssemblyNumOutputs;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return nclang_Cursor_getGCCAssemblyNumOutputs(Cursor, __functionAddress);
+    }
+
+    /** {@code unsigned clang_Cursor_getGCCAssemblyNumOutputs(CXCursor Cursor)} */
+    @NativeType("unsigned")
+    public static int clang_Cursor_getGCCAssemblyNumOutputs(CXCursor Cursor) {
+        return nclang_Cursor_getGCCAssemblyNumOutputs(Cursor.address());
+    }
+
+    // --- [ clang_Cursor_getGCCAssemblyNumInputs ] ---
+
+    /** {@code unsigned clang_Cursor_getGCCAssemblyNumInputs(CXCursor Cursor)} */
+    public static native int nclang_Cursor_getGCCAssemblyNumInputs(long Cursor, long __functionAddress);
+
+    /** {@code unsigned clang_Cursor_getGCCAssemblyNumInputs(CXCursor Cursor)} */
+    public static int nclang_Cursor_getGCCAssemblyNumInputs(long Cursor) {
+        long __functionAddress = Functions.Cursor_getGCCAssemblyNumInputs;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return nclang_Cursor_getGCCAssemblyNumInputs(Cursor, __functionAddress);
+    }
+
+    /** {@code unsigned clang_Cursor_getGCCAssemblyNumInputs(CXCursor Cursor)} */
+    @NativeType("unsigned")
+    public static int clang_Cursor_getGCCAssemblyNumInputs(CXCursor Cursor) {
+        return nclang_Cursor_getGCCAssemblyNumInputs(Cursor.address());
+    }
+
+    // --- [ clang_Cursor_getGCCAssemblyInput ] ---
+
+    /** {@code unsigned clang_Cursor_getGCCAssemblyInput(CXCursor Cursor, unsigned Index, CXString * Constraint, CXCursor * Expr)} */
+    public static native int nclang_Cursor_getGCCAssemblyInput(long Cursor, int Index, long Constraint, long Expr, long __functionAddress);
+
+    /** {@code unsigned clang_Cursor_getGCCAssemblyInput(CXCursor Cursor, unsigned Index, CXString * Constraint, CXCursor * Expr)} */
+    public static int nclang_Cursor_getGCCAssemblyInput(long Cursor, int Index, long Constraint, long Expr) {
+        long __functionAddress = Functions.Cursor_getGCCAssemblyInput;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return nclang_Cursor_getGCCAssemblyInput(Cursor, Index, Constraint, Expr, __functionAddress);
+    }
+
+    /** {@code unsigned clang_Cursor_getGCCAssemblyInput(CXCursor Cursor, unsigned Index, CXString * Constraint, CXCursor * Expr)} */
+    @NativeType("unsigned")
+    public static boolean clang_Cursor_getGCCAssemblyInput(CXCursor Cursor, @NativeType("unsigned") int Index, @NativeType("CXString *") @Nullable CXString Constraint, @NativeType("CXCursor *") @Nullable CXCursor Expr) {
+        return nclang_Cursor_getGCCAssemblyInput(Cursor.address(), Index, memAddressSafe(Constraint), memAddressSafe(Expr)) != 0;
+    }
+
+    // --- [ clang_Cursor_getGCCAssemblyOutput ] ---
+
+    /** {@code unsigned clang_Cursor_getGCCAssemblyOutput(CXCursor Cursor, unsigned Index, CXString * Constraint, CXCursor * Expr)} */
+    public static native int nclang_Cursor_getGCCAssemblyOutput(long Cursor, int Index, long Constraint, long Expr, long __functionAddress);
+
+    /** {@code unsigned clang_Cursor_getGCCAssemblyOutput(CXCursor Cursor, unsigned Index, CXString * Constraint, CXCursor * Expr)} */
+    public static int nclang_Cursor_getGCCAssemblyOutput(long Cursor, int Index, long Constraint, long Expr) {
+        long __functionAddress = Functions.Cursor_getGCCAssemblyOutput;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return nclang_Cursor_getGCCAssemblyOutput(Cursor, Index, Constraint, Expr, __functionAddress);
+    }
+
+    /** {@code unsigned clang_Cursor_getGCCAssemblyOutput(CXCursor Cursor, unsigned Index, CXString * Constraint, CXCursor * Expr)} */
+    @NativeType("unsigned")
+    public static boolean clang_Cursor_getGCCAssemblyOutput(CXCursor Cursor, @NativeType("unsigned") int Index, @NativeType("CXString *") @Nullable CXString Constraint, @NativeType("CXCursor *") @Nullable CXCursor Expr) {
+        return nclang_Cursor_getGCCAssemblyOutput(Cursor.address(), Index, memAddressSafe(Constraint), memAddressSafe(Expr)) != 0;
+    }
+
+    // --- [ clang_Cursor_getGCCAssemblyNumClobbers ] ---
+
+    /** {@code unsigned clang_Cursor_getGCCAssemblyNumClobbers(CXCursor Cursor)} */
+    public static native int nclang_Cursor_getGCCAssemblyNumClobbers(long Cursor, long __functionAddress);
+
+    /** {@code unsigned clang_Cursor_getGCCAssemblyNumClobbers(CXCursor Cursor)} */
+    public static int nclang_Cursor_getGCCAssemblyNumClobbers(long Cursor) {
+        long __functionAddress = Functions.Cursor_getGCCAssemblyNumClobbers;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return nclang_Cursor_getGCCAssemblyNumClobbers(Cursor, __functionAddress);
+    }
+
+    /** {@code unsigned clang_Cursor_getGCCAssemblyNumClobbers(CXCursor Cursor)} */
+    @NativeType("unsigned")
+    public static int clang_Cursor_getGCCAssemblyNumClobbers(CXCursor Cursor) {
+        return nclang_Cursor_getGCCAssemblyNumClobbers(Cursor.address());
+    }
+
+    // --- [ clang_Cursor_getGCCAssemblyClobber ] ---
+
+    /** {@code CXString clang_Cursor_getGCCAssemblyClobber(CXCursor Cursor, unsigned Index)} */
+    public static native void nclang_Cursor_getGCCAssemblyClobber(long Cursor, int Index, long __functionAddress, long __result);
+
+    /** {@code CXString clang_Cursor_getGCCAssemblyClobber(CXCursor Cursor, unsigned Index)} */
+    public static void nclang_Cursor_getGCCAssemblyClobber(long Cursor, int Index, long __result) {
+        long __functionAddress = Functions.Cursor_getGCCAssemblyClobber;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        nclang_Cursor_getGCCAssemblyClobber(Cursor, Index, __functionAddress, __result);
+    }
+
+    /** {@code CXString clang_Cursor_getGCCAssemblyClobber(CXCursor Cursor, unsigned Index)} */
+    public static CXString clang_Cursor_getGCCAssemblyClobber(CXCursor Cursor, @NativeType("unsigned") int Index, CXString __result) {
+        nclang_Cursor_getGCCAssemblyClobber(Cursor.address(), Index, __result.address());
+        return __result;
+    }
+
+    // --- [ clang_Cursor_isGCCAssemblyVolatile ] ---
+
+    /** {@code unsigned clang_Cursor_isGCCAssemblyVolatile(CXCursor Cursor)} */
+    public static native int nclang_Cursor_isGCCAssemblyVolatile(long Cursor, long __functionAddress);
+
+    /** {@code unsigned clang_Cursor_isGCCAssemblyVolatile(CXCursor Cursor)} */
+    public static int nclang_Cursor_isGCCAssemblyVolatile(long Cursor) {
+        long __functionAddress = Functions.Cursor_isGCCAssemblyVolatile;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return nclang_Cursor_isGCCAssemblyVolatile(Cursor, __functionAddress);
+    }
+
+    /** {@code unsigned clang_Cursor_isGCCAssemblyVolatile(CXCursor Cursor)} */
+    @NativeType("unsigned")
+    public static boolean clang_Cursor_isGCCAssemblyVolatile(CXCursor Cursor) {
+        return nclang_Cursor_isGCCAssemblyVolatile(Cursor.address()) != 0;
     }
 
     // --- [ clang_Cursor_getModule ] ---
@@ -6681,6 +6909,9 @@ public class ClangIndex {
     /** {@code CXRemapping clang_getRemappings(char const * path)} */
     public static long nclang_getRemappings(long path) {
         long __functionAddress = Functions.getRemappings;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         return invokePP(path, __functionAddress);
     }
 
@@ -6711,6 +6942,9 @@ public class ClangIndex {
     /** {@code CXRemapping clang_getRemappingsFromFileList(char const ** filePaths, unsigned numFiles)} */
     public static long nclang_getRemappingsFromFileList(long filePaths, int numFiles) {
         long __functionAddress = Functions.getRemappingsFromFileList;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         return invokePP(filePaths, numFiles, __functionAddress);
     }
 
@@ -6727,6 +6961,7 @@ public class ClangIndex {
     public static int clang_remap_getNumFiles(@NativeType("CXRemapping") long Remapping) {
         long __functionAddress = Functions.remap_getNumFiles;
         if (CHECKS) {
+            check(__functionAddress);
             check(Remapping);
         }
         return invokePI(Remapping, __functionAddress);
@@ -6738,6 +6973,7 @@ public class ClangIndex {
     public static void nclang_remap_getFilenames(long Remapping, int index, long original, long transformed) {
         long __functionAddress = Functions.remap_getFilenames;
         if (CHECKS) {
+            check(__functionAddress);
             check(Remapping);
         }
         invokePPPV(Remapping, index, original, transformed, __functionAddress);
@@ -6754,6 +6990,7 @@ public class ClangIndex {
     public static void clang_remap_dispose(@NativeType("CXRemapping") long Remapping) {
         long __functionAddress = Functions.remap_dispose;
         if (CHECKS) {
+            check(__functionAddress);
             check(Remapping);
         }
         invokePV(Remapping, __functionAddress);
@@ -7162,6 +7399,26 @@ public class ClangIndex {
     @NativeType("unsigned")
     public static boolean clang_visitCXXBaseClasses(CXType T, @NativeType("enum CXVisitorResult (*) (CXCursor, CXClientData)") CXFieldVisitorI visitor, @NativeType("CXClientData") long client_data) {
         return nclang_visitCXXBaseClasses(T.address(), visitor.address(), client_data) != 0;
+    }
+
+    // --- [ clang_visitCXXMethods ] ---
+
+    /** {@code unsigned clang_visitCXXMethods(CXType T, enum CXVisitorResult (*) (CXCursor, CXClientData) visitor, CXClientData client_data)} */
+    public static native int nclang_visitCXXMethods(long T, long visitor, long client_data, long __functionAddress);
+
+    /** {@code unsigned clang_visitCXXMethods(CXType T, enum CXVisitorResult (*) (CXCursor, CXClientData) visitor, CXClientData client_data)} */
+    public static int nclang_visitCXXMethods(long T, long visitor, long client_data) {
+        long __functionAddress = Functions.visitCXXMethods;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return nclang_visitCXXMethods(T, visitor, client_data, __functionAddress);
+    }
+
+    /** {@code unsigned clang_visitCXXMethods(CXType T, enum CXVisitorResult (*) (CXCursor, CXClientData) visitor, CXClientData client_data)} */
+    @NativeType("unsigned")
+    public static boolean clang_visitCXXMethods(CXType T, @NativeType("enum CXVisitorResult (*) (CXCursor, CXClientData)") CXFieldVisitorI visitor, @NativeType("CXClientData") long client_data) {
+        return nclang_visitCXXMethods(T.address(), visitor.address(), client_data) != 0;
     }
 
     // --- [ clang_getBinaryOperatorKindSpelling ] ---
