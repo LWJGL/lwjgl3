@@ -690,6 +690,39 @@ public class MSDFGen {
         nmsdf_segment_free(segment);
     }
 
+    // --- [ msdf_error_correction ] ---
+
+    /** {@code int msdf_error_correction(struct msdf_bitmap * bitmap, msdf_shape_const_handle shape, struct msdf_transform const * transform)} */
+    public static native int nmsdf_error_correction(long bitmap, long shape, long transform);
+
+    /** {@code int msdf_error_correction(struct msdf_bitmap * bitmap, msdf_shape_const_handle shape, struct msdf_transform const * transform)} */
+    public static int msdf_error_correction(@NativeType("struct msdf_bitmap *") MSDFGenBitmap bitmap, @NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_transform const *") MSDFGenTransform transform) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_error_correction(bitmap.address(), shape, transform.address());
+    }
+
+    // --- [ msdf_error_correction_fast_distance ] ---
+
+    /** {@code int msdf_error_correction_fast_distance(struct msdf_bitmap * bitmap, struct msdf_transform const * transform)} */
+    public static native int nmsdf_error_correction_fast_distance(long bitmap, long transform);
+
+    /** {@code int msdf_error_correction_fast_distance(struct msdf_bitmap * bitmap, struct msdf_transform const * transform)} */
+    public static int msdf_error_correction_fast_distance(@NativeType("struct msdf_bitmap *") MSDFGenBitmap bitmap, @NativeType("struct msdf_transform const *") MSDFGenTransform transform) {
+        return nmsdf_error_correction_fast_distance(bitmap.address(), transform.address());
+    }
+
+    // --- [ msdf_error_correction_fast_edge ] ---
+
+    /** {@code int msdf_error_correction_fast_edge(struct msdf_bitmap * bitmap, struct msdf_transform const * transform)} */
+    public static native int nmsdf_error_correction_fast_edge(long bitmap, long transform);
+
+    /** {@code int msdf_error_correction_fast_edge(struct msdf_bitmap * bitmap, struct msdf_transform const * transform)} */
+    public static int msdf_error_correction_fast_edge(@NativeType("struct msdf_bitmap *") MSDFGenBitmap bitmap, @NativeType("struct msdf_transform const *") MSDFGenTransform transform) {
+        return nmsdf_error_correction_fast_edge(bitmap.address(), transform.address());
+    }
+
     // --- [ msdf_generate_sdf ] ---
 
     /** {@code int msdf_generate_sdf(struct msdf_bitmap * output, msdf_shape_const_handle shape, struct msdf_transform const * transform)} */

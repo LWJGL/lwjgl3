@@ -60,7 +60,7 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "MSDF", prefixMetho
         "DISTANCE_CHECK_MODE_AT_EDGE".enum,
         "DISTANCE_CHECK_MODE_ALWAYS".enum
     )
-    
+
     // msdf_bitmap
 
     int(
@@ -403,6 +403,30 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "MSDF", prefixMetho
         "segment_free",
 
         msdf_segment_handle("segment")
+    )
+
+    // Error correction functions
+
+    int(
+        "error_correction",
+
+        msdf_bitmap.p("bitmap"),
+        msdf_shape_const_handle("shape"),
+        msdf_transform.const.p("transform")
+    )
+
+    int(
+        "error_correction_fast_distance",
+
+        msdf_bitmap.p("bitmap"),
+        msdf_transform.const.p("transform")
+    )
+
+    int(
+        "error_correction_fast_edge",
+
+        msdf_bitmap.p("bitmap"),
+        msdf_transform.const.p("transform")
     )
 
     // Main API functions

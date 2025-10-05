@@ -323,6 +323,28 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1segment_1free(
     msdf_segment_free(segment);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1error_1correction(JNIEnv *__env, jclass clazz, jlong bitmapAddress, jlong shapeAddress, jlong transformAddress) {
+    struct msdf_bitmap *bitmap = (struct msdf_bitmap *)(uintptr_t)bitmapAddress;
+    msdf_shape_const_handle shape = (msdf_shape_const_handle)(uintptr_t)shapeAddress;
+    struct msdf_transform const *transform = (struct msdf_transform const *)(uintptr_t)transformAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_error_correction(bitmap, shape, transform);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1error_1correction_1fast_1distance(JNIEnv *__env, jclass clazz, jlong bitmapAddress, jlong transformAddress) {
+    struct msdf_bitmap *bitmap = (struct msdf_bitmap *)(uintptr_t)bitmapAddress;
+    struct msdf_transform const *transform = (struct msdf_transform const *)(uintptr_t)transformAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_error_correction_fast_distance(bitmap, transform);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1error_1correction_1fast_1edge(JNIEnv *__env, jclass clazz, jlong bitmapAddress, jlong transformAddress) {
+    struct msdf_bitmap *bitmap = (struct msdf_bitmap *)(uintptr_t)bitmapAddress;
+    struct msdf_transform const *transform = (struct msdf_transform const *)(uintptr_t)transformAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_error_correction_fast_edge(bitmap, transform);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1generate_1sdf(JNIEnv *__env, jclass clazz, jlong outputAddress, jlong shapeAddress, jlong transformAddress) {
     struct msdf_bitmap *output = (struct msdf_bitmap *)(uintptr_t)outputAddress;
     msdf_shape_const_handle shape = (msdf_shape_const_handle)(uintptr_t)shapeAddress;
