@@ -189,6 +189,8 @@ public class XrSystemProperties extends Struct<XrSystemProperties> implements Na
     public XrSystemProperties next(XrSystemRenderModelPropertiesFB value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSystemSimultaneousHandsAndControllersPropertiesMETA} value to the {@code next} chain. */
     public XrSystemProperties next(XrSystemSimultaneousHandsAndControllersPropertiesMETA value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrSystemSpaceDiscoveryPropertiesMETA} value to the {@code next} chain. */
+    public XrSystemProperties next(XrSystemSpaceDiscoveryPropertiesMETA value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSystemSpacePersistencePropertiesMETA} value to the {@code next} chain. */
     public XrSystemProperties next(XrSystemSpacePersistencePropertiesMETA value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSystemSpaceWarpPropertiesFB} value to the {@code next} chain. */
@@ -514,6 +516,8 @@ public class XrSystemProperties extends Struct<XrSystemProperties> implements Na
         public XrSystemProperties.Buffer next(XrSystemRenderModelPropertiesFB value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSystemSimultaneousHandsAndControllersPropertiesMETA} value to the {@code next} chain. */
         public XrSystemProperties.Buffer next(XrSystemSimultaneousHandsAndControllersPropertiesMETA value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrSystemSpaceDiscoveryPropertiesMETA} value to the {@code next} chain. */
+        public XrSystemProperties.Buffer next(XrSystemSpaceDiscoveryPropertiesMETA value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSystemSpacePersistencePropertiesMETA} value to the {@code next} chain. */
         public XrSystemProperties.Buffer next(XrSystemSpacePersistencePropertiesMETA value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSystemSpaceWarpPropertiesFB} value to the {@code next} chain. */

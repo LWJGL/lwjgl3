@@ -89,7 +89,7 @@ public class XrCreateSpatialContextCompletionEXT extends Struct<XrCreateSpatialC
     public int futureResult() { return nfutureResult(address()); }
     /** @return the value of the {@code spatialContext} field. */
     @NativeType("XrSpatialContextEXT")
-    public @Nullable long spatialContext() { return nspatialContext(address()); }
+    public long spatialContext() { return nspatialContext(address()); }
 
     /** Sets the specified value to the {@code type} field. */
     public XrCreateSpatialContextCompletionEXT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -322,7 +322,7 @@ public class XrCreateSpatialContextCompletionEXT extends Struct<XrCreateSpatialC
         public int futureResult() { return XrCreateSpatialContextCompletionEXT.nfutureResult(address()); }
         /** @return the value of the {@code spatialContext} field. */
         @NativeType("XrSpatialContextEXT")
-        public @Nullable long spatialContext() { return XrCreateSpatialContextCompletionEXT.nspatialContext(address()); }
+        public long spatialContext() { return XrCreateSpatialContextCompletionEXT.nspatialContext(address()); }
 
         /** Sets the specified value to the {@code type} field. */
         public XrCreateSpatialContextCompletionEXT.Buffer type(@NativeType("XrStructureType") int value) { XrCreateSpatialContextCompletionEXT.ntype(address(), value); return this; }

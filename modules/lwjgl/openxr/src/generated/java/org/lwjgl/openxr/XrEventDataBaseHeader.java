@@ -278,6 +278,16 @@ public class XrEventDataBaseHeader extends Struct<XrEventDataBaseHeader> impleme
         return new XrEventDataBaseHeader(value.address(), __getContainer(value));
     }
 
+    /** Upcasts the specified {@code XrEventDataSpaceDiscoveryResultsAvailableMETA} instance to {@code XrEventDataBaseHeader}. */
+    public static XrEventDataBaseHeader create(XrEventDataSpaceDiscoveryResultsAvailableMETA value) {
+        return new XrEventDataBaseHeader(value.address(), __getContainer(value));
+    }
+
+    /** Upcasts the specified {@code XrEventDataSpaceDiscoveryCompleteMETA} instance to {@code XrEventDataBaseHeader}. */
+    public static XrEventDataBaseHeader create(XrEventDataSpaceDiscoveryCompleteMETA value) {
+        return new XrEventDataBaseHeader(value.address(), __getContainer(value));
+    }
+
     /** Upcasts the specified {@code XrEventDataSpacesSaveResultMETA} instance to {@code XrEventDataBaseHeader}. */
     public static XrEventDataBaseHeader create(XrEventDataSpacesSaveResultMETA value) {
         return new XrEventDataBaseHeader(value.address(), __getContainer(value));
@@ -543,6 +553,16 @@ public class XrEventDataBaseHeader extends Struct<XrEventDataBaseHeader> impleme
 
     /** Upcasts the specified {@code XrEventDataSpaceListSaveCompleteFB.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
     public static XrEventDataBaseHeader.Buffer create(XrEventDataSpaceListSaveCompleteFB.Buffer value) {
+        return new XrEventDataBaseHeader.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
+    /** Upcasts the specified {@code XrEventDataSpaceDiscoveryResultsAvailableMETA.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
+    public static XrEventDataBaseHeader.Buffer create(XrEventDataSpaceDiscoveryResultsAvailableMETA.Buffer value) {
+        return new XrEventDataBaseHeader.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
+    /** Upcasts the specified {@code XrEventDataSpaceDiscoveryCompleteMETA.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
+    public static XrEventDataBaseHeader.Buffer create(XrEventDataSpaceDiscoveryCompleteMETA.Buffer value) {
         return new XrEventDataBaseHeader.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 

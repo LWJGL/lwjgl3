@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrTrackableANDROID subsumedByPlane;
  *     XrTime lastUpdatedTime;
  *     uint32_t vertexCapacityInput;
- *     uint32_t vertexCountOutput;
+ *     uint32_t * vertexCountOutput;
  *     {@link XrVector2f XrVector2f} * vertices;
  * }</code></pre>
  */
@@ -67,7 +67,7 @@ public class XrTrackablePlaneANDROID extends Struct<XrTrackablePlaneANDROID> imp
             __member(8),
             __member(8),
             __member(4),
-            __member(4),
+            __member(POINTER_SIZE),
             __member(POINTER_SIZE)
         );
 
@@ -138,9 +138,9 @@ public class XrTrackablePlaneANDROID extends Struct<XrTrackablePlaneANDROID> imp
     /** @return the value of the {@code vertexCapacityInput} field. */
     @NativeType("uint32_t")
     public int vertexCapacityInput() { return nvertexCapacityInput(address()); }
-    /** @return the value of the {@code vertexCountOutput} field. */
-    @NativeType("uint32_t")
-    public int vertexCountOutput() { return nvertexCountOutput(address()); }
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code vertexCountOutput} field. */
+    @NativeType("uint32_t *")
+    public @Nullable IntBuffer vertexCountOutput(int capacity) { return nvertexCountOutput(address(), capacity); }
     /** @return a {@link XrVector2f.Buffer} view of the struct array pointed to by the {@code vertices} field. */
     @NativeType("XrVector2f *")
     public XrVector2f.@Nullable Buffer vertices() { return nvertices(address()); }
@@ -171,8 +171,8 @@ public class XrTrackablePlaneANDROID extends Struct<XrTrackablePlaneANDROID> imp
     public XrTrackablePlaneANDROID lastUpdatedTime(@NativeType("XrTime") long value) { nlastUpdatedTime(address(), value); return this; }
     /** Sets the specified value to the {@code vertexCapacityInput} field. */
     public XrTrackablePlaneANDROID vertexCapacityInput(@NativeType("uint32_t") int value) { nvertexCapacityInput(address(), value); return this; }
-    /** Sets the specified value to the {@code vertexCountOutput} field. */
-    public XrTrackablePlaneANDROID vertexCountOutput(@NativeType("uint32_t") int value) { nvertexCountOutput(address(), value); return this; }
+    /** Sets the address of the specified {@link IntBuffer} to the {@code vertexCountOutput} field. */
+    public XrTrackablePlaneANDROID vertexCountOutput(@Nullable @NativeType("uint32_t *") IntBuffer value) { nvertexCountOutput(address(), value); return this; }
     /** Sets the address of the specified {@link XrVector2f.Buffer} to the {@code vertices} field. */
     public XrTrackablePlaneANDROID vertices(@NativeType("XrVector2f *") XrVector2f.@Nullable Buffer value) { nvertices(address(), value); return this; }
 
@@ -188,7 +188,7 @@ public class XrTrackablePlaneANDROID extends Struct<XrTrackablePlaneANDROID> imp
         long subsumedByPlane,
         long lastUpdatedTime,
         int vertexCapacityInput,
-        int vertexCountOutput,
+        @Nullable IntBuffer vertexCountOutput,
         XrVector2f.@Nullable Buffer vertices
     ) {
         type(type);
@@ -350,8 +350,8 @@ public class XrTrackablePlaneANDROID extends Struct<XrTrackablePlaneANDROID> imp
     public static long nlastUpdatedTime(long struct) { return memGetLong(struct + XrTrackablePlaneANDROID.LASTUPDATEDTIME); }
     /** Unsafe version of {@link #vertexCapacityInput}. */
     public static int nvertexCapacityInput(long struct) { return memGetInt(struct + XrTrackablePlaneANDROID.VERTEXCAPACITYINPUT); }
-    /** Unsafe version of {@link #vertexCountOutput}. */
-    public static int nvertexCountOutput(long struct) { return memGetInt(struct + XrTrackablePlaneANDROID.VERTEXCOUNTOUTPUT); }
+    /** Unsafe version of {@link #vertexCountOutput(int) vertexCountOutput}. */
+    public static @Nullable IntBuffer nvertexCountOutput(long struct, int capacity) { return memIntBufferSafe(memGetAddress(struct + XrTrackablePlaneANDROID.VERTEXCOUNTOUTPUT), capacity); }
     /** Unsafe version of {@link #vertices}. */
     public static XrVector2f.@Nullable Buffer nvertices(long struct) { return XrVector2f.createSafe(memGetAddress(struct + XrTrackablePlaneANDROID.VERTICES), nvertexCapacityInput(struct)); }
 
@@ -375,8 +375,8 @@ public class XrTrackablePlaneANDROID extends Struct<XrTrackablePlaneANDROID> imp
     public static void nlastUpdatedTime(long struct, long value) { memPutLong(struct + XrTrackablePlaneANDROID.LASTUPDATEDTIME, value); }
     /** Sets the specified value to the {@code vertexCapacityInput} field of the specified {@code struct}. */
     public static void nvertexCapacityInput(long struct, int value) { memPutInt(struct + XrTrackablePlaneANDROID.VERTEXCAPACITYINPUT, value); }
-    /** Unsafe version of {@link #vertexCountOutput(int) vertexCountOutput}. */
-    public static void nvertexCountOutput(long struct, int value) { memPutInt(struct + XrTrackablePlaneANDROID.VERTEXCOUNTOUTPUT, value); }
+    /** Unsafe version of {@link #vertexCountOutput(IntBuffer) vertexCountOutput}. */
+    public static void nvertexCountOutput(long struct, @Nullable IntBuffer value) { memPutAddress(struct + XrTrackablePlaneANDROID.VERTEXCOUNTOUTPUT, memAddressSafe(value)); }
     /** Unsafe version of {@link #vertices(XrVector2f.Buffer) vertices}. */
     public static void nvertices(long struct, XrVector2f.@Nullable Buffer value) { memPutAddress(struct + XrTrackablePlaneANDROID.VERTICES, memAddressSafe(value)); if (value != null) { nvertexCapacityInput(struct, value.remaining()); } }
 
@@ -451,9 +451,9 @@ public class XrTrackablePlaneANDROID extends Struct<XrTrackablePlaneANDROID> imp
         /** @return the value of the {@code vertexCapacityInput} field. */
         @NativeType("uint32_t")
         public int vertexCapacityInput() { return XrTrackablePlaneANDROID.nvertexCapacityInput(address()); }
-        /** @return the value of the {@code vertexCountOutput} field. */
-        @NativeType("uint32_t")
-        public int vertexCountOutput() { return XrTrackablePlaneANDROID.nvertexCountOutput(address()); }
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code vertexCountOutput} field. */
+        @NativeType("uint32_t *")
+        public @Nullable IntBuffer vertexCountOutput(int capacity) { return XrTrackablePlaneANDROID.nvertexCountOutput(address(), capacity); }
         /** @return a {@link XrVector2f.Buffer} view of the struct array pointed to by the {@code vertices} field. */
         @NativeType("XrVector2f *")
         public XrVector2f.@Nullable Buffer vertices() { return XrTrackablePlaneANDROID.nvertices(address()); }
@@ -484,8 +484,8 @@ public class XrTrackablePlaneANDROID extends Struct<XrTrackablePlaneANDROID> imp
         public XrTrackablePlaneANDROID.Buffer lastUpdatedTime(@NativeType("XrTime") long value) { XrTrackablePlaneANDROID.nlastUpdatedTime(address(), value); return this; }
         /** Sets the specified value to the {@code vertexCapacityInput} field. */
         public XrTrackablePlaneANDROID.Buffer vertexCapacityInput(@NativeType("uint32_t") int value) { XrTrackablePlaneANDROID.nvertexCapacityInput(address(), value); return this; }
-        /** Sets the specified value to the {@code vertexCountOutput} field. */
-        public XrTrackablePlaneANDROID.Buffer vertexCountOutput(@NativeType("uint32_t") int value) { XrTrackablePlaneANDROID.nvertexCountOutput(address(), value); return this; }
+        /** Sets the address of the specified {@link IntBuffer} to the {@code vertexCountOutput} field. */
+        public XrTrackablePlaneANDROID.Buffer vertexCountOutput(@Nullable @NativeType("uint32_t *") IntBuffer value) { XrTrackablePlaneANDROID.nvertexCountOutput(address(), value); return this; }
         /** Sets the address of the specified {@link XrVector2f.Buffer} to the {@code vertices} field. */
         public XrTrackablePlaneANDROID.Buffer vertices(@NativeType("XrVector2f *") XrVector2f.@Nullable Buffer value) { XrTrackablePlaneANDROID.nvertices(address(), value); return this; }
 

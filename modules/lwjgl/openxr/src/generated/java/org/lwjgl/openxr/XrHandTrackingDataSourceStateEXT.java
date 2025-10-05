@@ -97,22 +97,14 @@ public class XrHandTrackingDataSourceStateEXT extends Struct<XrHandTrackingDataS
     public XrHandTrackingDataSourceStateEXT type$Default() { return type(EXTHandTrackingDataSource.XR_TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT); }
     /** Sets the specified value to the {@code next} field. */
     public XrHandTrackingDataSourceStateEXT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@code isActive} field. */
-    public XrHandTrackingDataSourceStateEXT isActive(@NativeType("XrBool32") boolean value) { nisActive(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code dataSource} field. */
-    public XrHandTrackingDataSourceStateEXT dataSource(@NativeType("XrHandTrackingDataSourceEXT") int value) { ndataSource(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrHandTrackingDataSourceStateEXT set(
         int type,
-        long next,
-        boolean isActive,
-        int dataSource
+        long next
     ) {
         type(type);
         next(next);
-        isActive(isActive);
-        dataSource(dataSource);
 
         return this;
     }
@@ -253,10 +245,6 @@ public class XrHandTrackingDataSourceStateEXT extends Struct<XrHandTrackingDataS
     public static void ntype(long struct, int value) { memPutInt(struct + XrHandTrackingDataSourceStateEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrHandTrackingDataSourceStateEXT.NEXT, value); }
-    /** Unsafe version of {@link #isActive(boolean) isActive}. */
-    public static void nisActive(long struct, int value) { memPutInt(struct + XrHandTrackingDataSourceStateEXT.ISACTIVE, value); }
-    /** Unsafe version of {@link #dataSource(int) dataSource}. */
-    public static void ndataSource(long struct, int value) { memPutInt(struct + XrHandTrackingDataSourceStateEXT.DATASOURCE, value); }
 
     // -----------------------------------
 
@@ -320,10 +308,6 @@ public class XrHandTrackingDataSourceStateEXT extends Struct<XrHandTrackingDataS
         public XrHandTrackingDataSourceStateEXT.Buffer type$Default() { return type(EXTHandTrackingDataSource.XR_TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT); }
         /** Sets the specified value to the {@code next} field. */
         public XrHandTrackingDataSourceStateEXT.Buffer next(@NativeType("void *") long value) { XrHandTrackingDataSourceStateEXT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@code isActive} field. */
-        public XrHandTrackingDataSourceStateEXT.Buffer isActive(@NativeType("XrBool32") boolean value) { XrHandTrackingDataSourceStateEXT.nisActive(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code dataSource} field. */
-        public XrHandTrackingDataSourceStateEXT.Buffer dataSource(@NativeType("XrHandTrackingDataSourceEXT") int value) { XrHandTrackingDataSourceStateEXT.ndataSource(address(), value); return this; }
 
     }
 

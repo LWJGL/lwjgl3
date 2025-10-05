@@ -1840,7 +1840,7 @@ ${validations.joinToString("\n")}
     ) = nullable(nativeType.annotate(type), nativeType)
 
     private fun StructMember.nullable(type: String, nativeType: DataType = this.nativeType) =
-        if (nativeType.isReference && isNullable && nativeType !is CArrayType<*>) {
+        if (nativeType.isReference && isNullable && nativeType !is CArrayType<*> && type != "long") {
             type.nullable
         } else {
             type

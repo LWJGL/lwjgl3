@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class ANDROIDTrackables {
 
-    public static final int XR_ANDROID_trackables_SPEC_VERSION = 1;
+    public static final int XR_ANDROID_trackables_SPEC_VERSION = 2;
 
     public static final String XR_ANDROID_TRACKABLES_EXTENSION_NAME = "XR_ANDROID_trackables";
 

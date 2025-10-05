@@ -108,7 +108,7 @@ public class XrCompositionLayerPassthroughFB extends Struct<XrCompositionLayerPa
     /** Sets the specified value to the {@code flags} field. */
     public XrCompositionLayerPassthroughFB flags(@NativeType("XrCompositionLayerFlags") long value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@code space} field. */
-    public XrCompositionLayerPassthroughFB space(XrSpace value) { nspace(address(), value); return this; }
+    public XrCompositionLayerPassthroughFB space(@Nullable XrSpace value) { nspace(address(), value); return this; }
     /** Sets the specified value to the {@code layerHandle} field. */
     public XrCompositionLayerPassthroughFB layerHandle(XrPassthroughLayerFB value) { nlayerHandle(address(), value); return this; }
 
@@ -280,7 +280,7 @@ public class XrCompositionLayerPassthroughFB extends Struct<XrCompositionLayerPa
     /** Unsafe version of {@link #flags(long) flags}. */
     public static void nflags(long struct, long value) { memPutLong(struct + XrCompositionLayerPassthroughFB.FLAGS, value); }
     /** Unsafe version of {@link #space(XrSpace) space}. */
-    public static void nspace(long struct, XrSpace value) { memPutAddress(struct + XrCompositionLayerPassthroughFB.SPACE, value.address()); }
+    public static void nspace(long struct, @Nullable XrSpace value) { memPutAddress(struct + XrCompositionLayerPassthroughFB.SPACE, memAddressSafe(value)); }
     /** Unsafe version of {@link #layerHandle(XrPassthroughLayerFB) layerHandle}. */
     public static void nlayerHandle(long struct, XrPassthroughLayerFB value) { memPutAddress(struct + XrCompositionLayerPassthroughFB.LAYERHANDLE, value.address()); }
 
@@ -290,7 +290,6 @@ public class XrCompositionLayerPassthroughFB extends Struct<XrCompositionLayerPa
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrCompositionLayerPassthroughFB.SPACE));
         check(memGetAddress(struct + XrCompositionLayerPassthroughFB.LAYERHANDLE));
     }
 
@@ -362,7 +361,7 @@ public class XrCompositionLayerPassthroughFB extends Struct<XrCompositionLayerPa
         /** Sets the specified value to the {@code flags} field. */
         public XrCompositionLayerPassthroughFB.Buffer flags(@NativeType("XrCompositionLayerFlags") long value) { XrCompositionLayerPassthroughFB.nflags(address(), value); return this; }
         /** Sets the specified value to the {@code space} field. */
-        public XrCompositionLayerPassthroughFB.Buffer space(XrSpace value) { XrCompositionLayerPassthroughFB.nspace(address(), value); return this; }
+        public XrCompositionLayerPassthroughFB.Buffer space(@Nullable XrSpace value) { XrCompositionLayerPassthroughFB.nspace(address(), value); return this; }
         /** Sets the specified value to the {@code layerHandle} field. */
         public XrCompositionLayerPassthroughFB.Buffer layerHandle(XrPassthroughLayerFB value) { XrCompositionLayerPassthroughFB.nlayerHandle(address(), value); return this; }
 

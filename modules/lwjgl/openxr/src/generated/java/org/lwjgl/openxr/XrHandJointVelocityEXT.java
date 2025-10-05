@@ -9,11 +9,9 @@ import org.jspecify.annotations.*;
 
 import java.nio.*;
 
-import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * <pre><code>
@@ -23,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link XrVector3f XrVector3f} angularVelocity;
  * }</code></pre>
  */
-public class XrHandJointVelocityEXT extends Struct<XrHandJointVelocityEXT> implements NativeResource {
+public class XrHandJointVelocityEXT extends Struct<XrHandJointVelocityEXT> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -82,59 +80,7 @@ public class XrHandJointVelocityEXT extends Struct<XrHandJointVelocityEXT> imple
     /** @return a {@link XrVector3f} view of the {@code angularVelocity} field. */
     public XrVector3f angularVelocity() { return nangularVelocity(address()); }
 
-    /** Sets the specified value to the {@code velocityFlags} field. */
-    public XrHandJointVelocityEXT velocityFlags(@NativeType("XrSpaceVelocityFlags") long value) { nvelocityFlags(address(), value); return this; }
-    /** Copies the specified {@link XrVector3f} to the {@code linearVelocity} field. */
-    public XrHandJointVelocityEXT linearVelocity(XrVector3f value) { nlinearVelocity(address(), value); return this; }
-    /** Passes the {@code linearVelocity} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public XrHandJointVelocityEXT linearVelocity(java.util.function.Consumer<XrVector3f> consumer) { consumer.accept(linearVelocity()); return this; }
-    /** Copies the specified {@link XrVector3f} to the {@code angularVelocity} field. */
-    public XrHandJointVelocityEXT angularVelocity(XrVector3f value) { nangularVelocity(address(), value); return this; }
-    /** Passes the {@code angularVelocity} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public XrHandJointVelocityEXT angularVelocity(java.util.function.Consumer<XrVector3f> consumer) { consumer.accept(angularVelocity()); return this; }
-
-    /** Initializes this struct with the specified values. */
-    public XrHandJointVelocityEXT set(
-        long velocityFlags,
-        XrVector3f linearVelocity,
-        XrVector3f angularVelocity
-    ) {
-        velocityFlags(velocityFlags);
-        linearVelocity(linearVelocity);
-        angularVelocity(angularVelocity);
-
-        return this;
-    }
-
-    /**
-     * Copies the specified struct data to this struct.
-     *
-     * @param src the source struct
-     *
-     * @return this struct
-     */
-    public XrHandJointVelocityEXT set(XrHandJointVelocityEXT src) {
-        memCopy(src.address(), address(), SIZEOF);
-        return this;
-    }
-
     // -----------------------------------
-
-    /** Returns a new {@code XrHandJointVelocityEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
-    public static XrHandJointVelocityEXT malloc() {
-        return new XrHandJointVelocityEXT(nmemAllocChecked(SIZEOF), null);
-    }
-
-    /** Returns a new {@code XrHandJointVelocityEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
-    public static XrHandJointVelocityEXT calloc() {
-        return new XrHandJointVelocityEXT(nmemCallocChecked(1, SIZEOF), null);
-    }
-
-    /** Returns a new {@code XrHandJointVelocityEXT} instance allocated with {@link BufferUtils}. */
-    public static XrHandJointVelocityEXT create() {
-        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return new XrHandJointVelocityEXT(memAddress(container), container);
-    }
 
     /** Returns a new {@code XrHandJointVelocityEXT} instance for the specified memory address. */
     public static XrHandJointVelocityEXT create(long address) {
@@ -144,34 +90,6 @@ public class XrHandJointVelocityEXT extends Struct<XrHandJointVelocityEXT> imple
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     public static @Nullable XrHandJointVelocityEXT createSafe(long address) {
         return address == NULL ? null : new XrHandJointVelocityEXT(address, null);
-    }
-
-    /**
-     * Returns a new {@link XrHandJointVelocityEXT.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static XrHandJointVelocityEXT.Buffer malloc(int capacity) {
-        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
-    }
-
-    /**
-     * Returns a new {@link XrHandJointVelocityEXT.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static XrHandJointVelocityEXT.Buffer calloc(int capacity) {
-        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link XrHandJointVelocityEXT.Buffer} instance allocated with {@link BufferUtils}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static XrHandJointVelocityEXT.Buffer create(int capacity) {
-        ByteBuffer container = __create(capacity, SIZEOF);
-        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -189,44 +107,6 @@ public class XrHandJointVelocityEXT extends Struct<XrHandJointVelocityEXT> imple
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
-    /**
-     * Returns a new {@code XrHandJointVelocityEXT} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack the stack from which to allocate
-     */
-    public static XrHandJointVelocityEXT malloc(MemoryStack stack) {
-        return new XrHandJointVelocityEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
-    }
-
-    /**
-     * Returns a new {@code XrHandJointVelocityEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack the stack from which to allocate
-     */
-    public static XrHandJointVelocityEXT calloc(MemoryStack stack) {
-        return new XrHandJointVelocityEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
-    }
-
-    /**
-     * Returns a new {@link XrHandJointVelocityEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack    the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static XrHandJointVelocityEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link XrHandJointVelocityEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack    the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static XrHandJointVelocityEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
-    }
-
     // -----------------------------------
 
     /** Unsafe version of {@link #velocityFlags}. */
@@ -236,17 +116,10 @@ public class XrHandJointVelocityEXT extends Struct<XrHandJointVelocityEXT> imple
     /** Unsafe version of {@link #angularVelocity}. */
     public static XrVector3f nangularVelocity(long struct) { return XrVector3f.create(struct + XrHandJointVelocityEXT.ANGULARVELOCITY); }
 
-    /** Unsafe version of {@link #velocityFlags(long) velocityFlags}. */
-    public static void nvelocityFlags(long struct, long value) { memPutLong(struct + XrHandJointVelocityEXT.VELOCITYFLAGS, value); }
-    /** Unsafe version of {@link #linearVelocity(XrVector3f) linearVelocity}. */
-    public static void nlinearVelocity(long struct, XrVector3f value) { memCopy(value.address(), struct + XrHandJointVelocityEXT.LINEARVELOCITY, XrVector3f.SIZEOF); }
-    /** Unsafe version of {@link #angularVelocity(XrVector3f) angularVelocity}. */
-    public static void nangularVelocity(long struct, XrVector3f value) { memCopy(value.address(), struct + XrHandJointVelocityEXT.ANGULARVELOCITY, XrVector3f.SIZEOF); }
-
     // -----------------------------------
 
     /** An array of {@link XrHandJointVelocityEXT} structs. */
-    public static class Buffer extends StructBuffer<XrHandJointVelocityEXT, Buffer> implements NativeResource {
+    public static class Buffer extends StructBuffer<XrHandJointVelocityEXT, Buffer> {
 
         private static final XrHandJointVelocityEXT ELEMENT_FACTORY = XrHandJointVelocityEXT.create(-1L);
 
@@ -293,17 +166,6 @@ public class XrHandJointVelocityEXT extends Struct<XrHandJointVelocityEXT> imple
         public XrVector3f linearVelocity() { return XrHandJointVelocityEXT.nlinearVelocity(address()); }
         /** @return a {@link XrVector3f} view of the {@code angularVelocity} field. */
         public XrVector3f angularVelocity() { return XrHandJointVelocityEXT.nangularVelocity(address()); }
-
-        /** Sets the specified value to the {@code velocityFlags} field. */
-        public XrHandJointVelocityEXT.Buffer velocityFlags(@NativeType("XrSpaceVelocityFlags") long value) { XrHandJointVelocityEXT.nvelocityFlags(address(), value); return this; }
-        /** Copies the specified {@link XrVector3f} to the {@code linearVelocity} field. */
-        public XrHandJointVelocityEXT.Buffer linearVelocity(XrVector3f value) { XrHandJointVelocityEXT.nlinearVelocity(address(), value); return this; }
-        /** Passes the {@code linearVelocity} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public XrHandJointVelocityEXT.Buffer linearVelocity(java.util.function.Consumer<XrVector3f> consumer) { consumer.accept(linearVelocity()); return this; }
-        /** Copies the specified {@link XrVector3f} to the {@code angularVelocity} field. */
-        public XrHandJointVelocityEXT.Buffer angularVelocity(XrVector3f value) { XrHandJointVelocityEXT.nangularVelocity(address(), value); return this; }
-        /** Passes the {@code angularVelocity} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public XrHandJointVelocityEXT.Buffer angularVelocity(java.util.function.Consumer<XrVector3f> consumer) { consumer.accept(angularVelocity()); return this; }
 
     }
 

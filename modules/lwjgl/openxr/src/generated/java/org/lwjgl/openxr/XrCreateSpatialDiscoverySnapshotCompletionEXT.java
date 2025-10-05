@@ -89,7 +89,7 @@ public class XrCreateSpatialDiscoverySnapshotCompletionEXT extends Struct<XrCrea
     public int futureResult() { return nfutureResult(address()); }
     /** @return the value of the {@code snapshot} field. */
     @NativeType("XrSpatialSnapshotEXT")
-    public @Nullable long snapshot() { return nsnapshot(address()); }
+    public long snapshot() { return nsnapshot(address()); }
 
     /** Sets the specified value to the {@code type} field. */
     public XrCreateSpatialDiscoverySnapshotCompletionEXT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
@@ -322,7 +322,7 @@ public class XrCreateSpatialDiscoverySnapshotCompletionEXT extends Struct<XrCrea
         public int futureResult() { return XrCreateSpatialDiscoverySnapshotCompletionEXT.nfutureResult(address()); }
         /** @return the value of the {@code snapshot} field. */
         @NativeType("XrSpatialSnapshotEXT")
-        public @Nullable long snapshot() { return XrCreateSpatialDiscoverySnapshotCompletionEXT.nsnapshot(address()); }
+        public long snapshot() { return XrCreateSpatialDiscoverySnapshotCompletionEXT.nsnapshot(address()); }
 
         /** Sets the specified value to the {@code type} field. */
         public XrCreateSpatialDiscoverySnapshotCompletionEXT.Buffer type(@NativeType("XrStructureType") int value) { XrCreateSpatialDiscoverySnapshotCompletionEXT.ntype(address(), value); return this; }

@@ -97,7 +97,7 @@ public class XrVirtualKeyboardInputInfoMETA extends Struct<XrVirtualKeyboardInpu
     public int inputSource() { return ninputSource(address()); }
     /** @return the value of the {@code inputSpace} field. */
     @NativeType("XrSpace")
-    public @Nullable long inputSpace() { return ninputSpace(address()); }
+    public long inputSpace() { return ninputSpace(address()); }
     /** @return a {@link XrPosef} view of the {@code inputPoseInSpace} field. */
     public XrPosef inputPoseInSpace() { return ninputPoseInSpace(address()); }
     /** @return the value of the {@code inputState} field. */
@@ -343,7 +343,7 @@ public class XrVirtualKeyboardInputInfoMETA extends Struct<XrVirtualKeyboardInpu
         public int inputSource() { return XrVirtualKeyboardInputInfoMETA.ninputSource(address()); }
         /** @return the value of the {@code inputSpace} field. */
         @NativeType("XrSpace")
-        public @Nullable long inputSpace() { return XrVirtualKeyboardInputInfoMETA.ninputSpace(address()); }
+        public long inputSpace() { return XrVirtualKeyboardInputInfoMETA.ninputSpace(address()); }
         /** @return a {@link XrPosef} view of the {@code inputPoseInSpace} field. */
         public XrPosef inputPoseInSpace() { return XrVirtualKeyboardInputInfoMETA.ninputPoseInSpace(address()); }
         /** @return the value of the {@code inputState} field. */

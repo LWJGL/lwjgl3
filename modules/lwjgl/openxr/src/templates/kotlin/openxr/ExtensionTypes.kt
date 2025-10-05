@@ -584,7 +584,7 @@ val XrHandJointLocationEXT = struct(Module.OPENXR, "XrHandJointLocationEXT") {
     float("radius")
 }
 
-val XrHandJointVelocityEXT = struct(Module.OPENXR, "XrHandJointVelocityEXT") {
+val XrHandJointVelocityEXT = struct(Module.OPENXR, "XrHandJointVelocityEXT", mutable = false) {
     XrSpaceVelocityFlags("velocityFlags")
     XrVector3f("linearVelocity")
     XrVector3f("angularVelocity")
@@ -1423,7 +1423,7 @@ val XrCompositionLayerPassthroughFB = struct(Module.OPENXR, "XrCompositionLayerP
     Expression("#TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB")..XrStructureType("type")
     nullable..opaque_const_p("next")
     XrCompositionLayerFlags("flags")
-    XrSpace("space")
+    nullable..XrSpace("space")
     XrPassthroughLayerFB("layerHandle")
 }
 
@@ -2539,6 +2539,63 @@ val XrSystemHeadsetIdPropertiesMETA = struct(Module.OPENXR, "XrSystemHeadsetIdPr
     XrUuidEXT("id")
 }
 
+val XrSystemSpaceDiscoveryPropertiesMETA = struct(Module.OPENXR, "XrSystemSpaceDiscoveryPropertiesMETA", mutable = false) {
+    Expression("#TYPE_SYSTEM_SPACE_DISCOVERY_PROPERTIES_META")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrBool32("supportsSpaceDiscovery")
+}
+
+val XrSpaceFilterBaseHeaderMETA = struct(Module.OPENXR, "XrSpaceFilterBaseHeaderMETA") {
+    XrStructureType("type")
+    nullable..opaque_const_p("next")
+}
+
+val XrSpaceDiscoveryInfoMETA = struct(Module.OPENXR, "XrSpaceDiscoveryInfoMETA") {
+    Expression("#TYPE_SPACE_DISCOVERY_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("filters", optional = true)..uint32_t("filterCount")
+    nullable..XrSpaceFilterBaseHeaderMETA.const.p.const.p("filters")
+}
+
+val XrSpaceFilterUuidMETA = struct(Module.OPENXR, "XrSpaceFilterUuidMETA", parentStruct = XrSpaceFilterBaseHeaderMETA) {
+    Expression("#TYPE_SPACE_FILTER_UUID_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("uuids")..uint32_t("uuidCount")
+    XrUuidEXT.const.p("uuids")
+}
+
+val XrSpaceFilterComponentMETA = struct(Module.OPENXR, "XrSpaceFilterComponentMETA", parentStruct = XrSpaceFilterBaseHeaderMETA) {
+    Expression("#TYPE_SPACE_FILTER_COMPONENT_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpaceComponentTypeFB("componentType")
+}
+
+val XrSpaceDiscoveryResultMETA = struct(Module.OPENXR, "XrSpaceDiscoveryResultMETA", mutable = false) {
+    XrSpace("space")
+    XrUuidEXT("uuid")
+}
+
+val XrSpaceDiscoveryResultsMETA = struct(Module.OPENXR, "XrSpaceDiscoveryResultsMETA") {
+    Expression("#TYPE_SPACE_DISCOVERY_RESULTS_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("results", optional = true)..uint32_t("resultCapacityInput")
+    uint32_t("resultCountOutput")
+    nullable..XrSpaceDiscoveryResultMETA.p("results")
+}
+
+val XrEventDataSpaceDiscoveryResultsAvailableMETA = struct(Module.OPENXR, "XrEventDataSpaceDiscoveryResultsAvailableMETA", mutable = false, parentStruct = XrEventDataBaseHeader) {
+    Expression("#TYPE_EVENT_DATA_SPACE_DISCOVERY_RESULTS_AVAILABLE_META")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrAsyncRequestIdFB("requestId")
+}
+
+val XrEventDataSpaceDiscoveryCompleteMETA = struct(Module.OPENXR, "XrEventDataSpaceDiscoveryCompleteMETA", mutable = false, parentStruct = XrEventDataBaseHeader) {
+    Expression("#TYPE_EVENT_DATA_SPACE_DISCOVERY_COMPLETE_META")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrAsyncRequestIdFB("requestId")
+    XrResult("result")
+}
+
 val XrRecommendedLayerResolutionMETA = struct(Module.OPENXR, "XrRecommendedLayerResolutionMETA", mutable = false) {
     Expression("#TYPE_RECOMMENDED_LAYER_RESOLUTION_META")..XrStructureType("type").mutable()
     nullable..opaque_p("next").mutable()
@@ -3365,9 +3422,9 @@ val XrHandTrackingDataSourceInfoEXT = struct(Module.OPENXR, "XrHandTrackingDataS
     XrHandTrackingDataSourceEXT.p("requestedDataSources")
 }
 
-val XrHandTrackingDataSourceStateEXT = struct(Module.OPENXR, "XrHandTrackingDataSourceStateEXT") {
-    Expression("#TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT")..XrStructureType("type")
-    nullable..opaque_p("next")
+val XrHandTrackingDataSourceStateEXT = struct(Module.OPENXR, "XrHandTrackingDataSourceStateEXT", mutable = false) {
+    Expression("#TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
     XrBool32("isActive")
     XrHandTrackingDataSourceEXT("dataSource")
 }
@@ -3468,7 +3525,7 @@ val XrTrackablePlaneANDROID = struct(Module.OPENXR, "XrTrackablePlaneANDROID") {
     XrTrackableANDROID("subsumedByPlane")
     XrTime("lastUpdatedTime")
     AutoSize("vertices", optional = true)..uint32_t("vertexCapacityInput")
-    uint32_t("vertexCountOutput")
+    nullable..uint32_t.p("vertexCountOutput")
     nullable..XrVector2f.p("vertices")
 }
 
