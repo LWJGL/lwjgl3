@@ -107,6 +107,7 @@ public class KTX {
             HashListEntry_GetValue         = apiGetFunctionAddress(KTX, "ktxHashListEntry_GetValue"),
             PrintInfoForNamedFile          = apiGetFunctionAddress(KTX, "ktxPrintInfoForNamedFile"),
             PrintInfoForMemory             = apiGetFunctionAddress(KTX, "ktxPrintInfoForMemory"),
+            PrintKTX1InfoTextForStream     = apiGetFunctionAddress(KTX, "ktxPrintKTX1InfoTextForStream"),
             PrintKTX2InfoTextForMemory     = apiGetFunctionAddress(KTX, "ktxPrintKTX2InfoTextForMemory"),
             PrintKTX2InfoTextForNamedFile  = apiGetFunctionAddress(KTX, "ktxPrintKTX2InfoTextForNamedFile"),
             PrintKTX2InfoTextForStream     = apiGetFunctionAddress(KTX, "ktxPrintKTX2InfoTextForStream"),
@@ -1716,6 +1717,20 @@ public class KTX {
     @NativeType("KTX_error_code")
     public static int ktxPrintInfoForMemory(@NativeType("ktx_uint8_t const *") ByteBuffer bytes) {
         return nktxPrintInfoForMemory(memAddress(bytes), bytes.remaining());
+    }
+
+    // --- [ ktxPrintKTX1InfoTextForStream ] ---
+
+    /** {@code KTX_error_code ktxPrintKTX1InfoTextForStream(struct ktxStream * stream)} */
+    public static int nktxPrintKTX1InfoTextForStream(long stream) {
+        long __functionAddress = Functions.PrintKTX1InfoTextForStream;
+        return callPI(stream, __functionAddress);
+    }
+
+    /** {@code KTX_error_code ktxPrintKTX1InfoTextForStream(struct ktxStream * stream)} */
+    @NativeType("KTX_error_code")
+    public static int ktxPrintKTX1InfoTextForStream(@NativeType("struct ktxStream *") ktxStream stream) {
+        return nktxPrintKTX1InfoTextForStream(stream.address());
     }
 
     // --- [ ktxPrintKTX2InfoTextForMemory ] ---

@@ -817,6 +817,12 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
     )
 
     ktx_error_code_e(
+        "PrintKTX1InfoTextForStream",
+
+        ktxStream.p("stream")
+    )
+
+    ktx_error_code_e(
         "PrintKTX2InfoTextForMemory",
 
         ktx_uint8_t.const.p("bytes"),
