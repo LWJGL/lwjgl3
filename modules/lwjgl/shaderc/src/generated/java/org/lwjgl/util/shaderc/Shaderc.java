@@ -51,6 +51,7 @@ public class Shaderc {
             compile_options_set_binding_base                            = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_binding_base"),
             compile_options_set_binding_base_for_stage                  = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_binding_base_for_stage"),
             compile_options_set_preserve_bindings                       = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_preserve_bindings"),
+            compile_options_set_max_id_bound                            = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_max_id_bound"),
             compile_options_set_auto_map_locations                      = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_auto_map_locations"),
             compile_options_set_hlsl_register_set_and_binding_for_stage = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_register_set_and_binding_for_stage"),
             compile_options_set_hlsl_register_set_and_binding           = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_register_set_and_binding"),
@@ -563,6 +564,17 @@ public class Shaderc {
             check(options);
         }
         invokePV(options, preserve_bindings, __functionAddress);
+    }
+
+    // --- [ shaderc_compile_options_set_max_id_bound ] ---
+
+    /** {@code void shaderc_compile_options_set_max_id_bound(shaderc_compile_options_t options, uint32_t max_id_bound)} */
+    public static void shaderc_compile_options_set_max_id_bound(@NativeType("shaderc_compile_options_t") long options, @NativeType("uint32_t") int max_id_bound) {
+        long __functionAddress = Functions.compile_options_set_max_id_bound;
+        if (CHECKS) {
+            check(options);
+        }
+        invokePV(options, max_id_bound, __functionAddress);
     }
 
     // --- [ shaderc_compile_options_set_auto_map_locations ] ---

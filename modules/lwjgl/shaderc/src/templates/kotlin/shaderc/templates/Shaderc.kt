@@ -402,6 +402,13 @@ val Shaderc = "Shaderc".nativeClass(Module.SHADERC, prefix = "shaderc_", prefixM
     )
 
     void(
+        "compile_options_set_max_id_bound",
+
+        shaderc_compile_options_t("options"),
+        uint32_t("max_id_bound")
+    )
+
+    void(
         "compile_options_set_auto_map_locations",
 
         shaderc_compile_options_t("options"),
