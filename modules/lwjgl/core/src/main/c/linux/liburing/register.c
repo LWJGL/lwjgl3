@@ -368,6 +368,11 @@ int io_uring_register_sync_cancel(struct io_uring *ring,
 	return do_register(ring, IORING_REGISTER_SYNC_CANCEL, reg, 1);
 }
 
+int io_uring_register_sync_msg(struct io_uring_sqe *sqe)
+{
+	return __sys_io_uring_register(-1, IORING_REGISTER_SEND_MSG_RING, sqe, 1);
+}
+
 int io_uring_register_file_alloc_range(struct io_uring *ring,
 					unsigned off, unsigned len)
 {

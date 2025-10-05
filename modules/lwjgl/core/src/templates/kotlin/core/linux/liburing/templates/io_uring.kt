@@ -129,6 +129,7 @@ ENABLE_WARNINGS()""")
         "OP_EPOLL_WAIT".enumByte,
         "OP_READV_FIXED".enumByte,
         "OP_WRITEV_FIXED".enumByte,
+        "OP_PIPE".enumByte,
         "OP_LAST".enumByte
     )
 
@@ -178,7 +179,8 @@ ENABLE_WARNINGS()""")
         "RECV_MULTISHOT".enum("1 << 1"),
         "RECVSEND_FIXED_BUF".enum("1 << 2"),
         "SEND_ZC_REPORT_USAGE".enum("1 << 3"),
-        "RECVSEND_BUNDLE".enum("1 << 4")
+        "RECVSEND_BUNDLE".enum("1 << 4"),
+        "SEND_VECTORIZED".enum("1 << 5")
     )
 
     IntConstant("NOTIF_USAGE_ZC_COPIED".."1 << 31")
@@ -365,6 +367,12 @@ ENABLE_WARNINGS()""")
         "SOCKET_URING_OP_GETSOCKOPT".enum,
         "SOCKET_URING_OP_SETSOCKOPT".enum,
     ).noPrefix()
+
+    IntConstant(
+        "TIMESTAMP_HW_SHIFT".."16",
+        "TIMESTAMP_TYPE_SHIFT".."IORING_TIMESTAMP_HW_SHIFT + 1",
+        "CQE_F_TSTAMP_HW".."1 << IORING_TIMESTAMP_HW_SHIFT"
+    )
 
     IntConstant("ZCRX_AREA_SHIFT".."48")
     LongConstant("ZCRX_AREA_MASK".."~((1L << IORING_ZCRX_AREA_SHIFT) - 1)")

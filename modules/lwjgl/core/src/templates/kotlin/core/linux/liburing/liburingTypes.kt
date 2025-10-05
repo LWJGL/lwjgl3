@@ -55,6 +55,7 @@ val io_uring_sqe = struct(Module.CORE_LINUX_LIBURING, "IOURingSQE", nativeName =
 		__u32("futex_flags")
 		__u32("install_fd_flags")
         __u32("nop_flags")
+        __u32("pipe_flags")
     }
     __u64("user_data")
     union {
@@ -287,6 +288,11 @@ val io_uring_recvmsg_out = struct(Module.CORE_LINUX_LIBURING, "IOURingRecvmsgOut
     __u32("controllen")
     __u32("payloadlen")
     __u32("flags")
+}
+
+val io_timespec = struct(Module.CORE_LINUX_LIBURING, "IOTimespec", nativeName = "struct io_timespec") {
+    __u64("tv_sec")
+    __u64("tv_nsec")
 }
 
 val io_uring_zcrx_rqe = struct(Module.CORE_LINUX_LIBURING, "IOURingZCRXRQE", nativeName = "struct io_uring_zcrx_rqe") {

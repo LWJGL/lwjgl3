@@ -123,7 +123,8 @@ public class LibIOURing {
         IORING_OP_EPOLL_WAIT       = 59,
         IORING_OP_READV_FIXED      = 60,
         IORING_OP_WRITEV_FIXED     = 61,
-        IORING_OP_LAST             = 62;
+        IORING_OP_PIPE             = 62,
+        IORING_OP_LAST             = 63;
 
     public static final int
         IORING_URING_CMD_FIXED = 1 << 0,
@@ -163,7 +164,8 @@ public class LibIOURing {
         IORING_RECV_MULTISHOT       = 1 << 1,
         IORING_RECVSEND_FIXED_BUF   = 1 << 2,
         IORING_SEND_ZC_REPORT_USAGE = 1 << 3,
-        IORING_RECVSEND_BUNDLE      = 1 << 4;
+        IORING_RECVSEND_BUNDLE      = 1 << 4,
+        IORING_SEND_VECTORIZED      = 1 << 5;
 
     public static final int IORING_NOTIF_USAGE_ZC_COPIED = 1 << 31;
 
@@ -313,6 +315,11 @@ public class LibIOURing {
         SOCKET_URING_OP_SIOCOUTQ   = 1,
         SOCKET_URING_OP_GETSOCKOPT = 2,
         SOCKET_URING_OP_SETSOCKOPT = 3;
+
+    public static final int
+        IORING_TIMESTAMP_HW_SHIFT   = 16,
+        IORING_TIMESTAMP_TYPE_SHIFT = IORING_TIMESTAMP_HW_SHIFT + 1,
+        IORING_CQE_F_TSTAMP_HW      = 1 << IORING_TIMESTAMP_HW_SHIFT;
 
     public static final int IORING_ZCRX_AREA_SHIFT = 48;
 

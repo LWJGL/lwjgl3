@@ -64,6 +64,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         __u32 futex_flags;
  *         __u32 install_fd_flags;
  *         __u32 nop_flags;
+ *         __u32 pipe_flags;
  *     };
  *     __u64 user_data;
  *     union {
@@ -138,6 +139,7 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
         FUTEX_FLAGS,
         INSTALL_FD_FLAGS,
         NOP_FLAGS,
+        PIPE_FLAGS,
         USER_DATA,
         BUF_INDEX,
         BUF_GROUP,
@@ -180,6 +182,7 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
                 __member(4),
                 __member(4),
                 __member(2),
+                __member(4),
                 __member(4),
                 __member(4),
                 __member(4),
@@ -266,20 +269,21 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
         FUTEX_FLAGS = layout.offsetof(38);
         INSTALL_FD_FLAGS = layout.offsetof(39);
         NOP_FLAGS = layout.offsetof(40);
-        USER_DATA = layout.offsetof(41);
-        BUF_INDEX = layout.offsetof(43);
-        BUF_GROUP = layout.offsetof(44);
-        PERSONALITY = layout.offsetof(45);
-        SPLICE_FD_IN = layout.offsetof(47);
-        FILE_INDEX = layout.offsetof(48);
-        ZCRX_IFQ_IDX = layout.offsetof(49);
-        OPTLEN = layout.offsetof(50);
-        ADDR_LEN = layout.offsetof(52);
-        __PAD3 = layout.offsetof(53);
-        ADDR3 = layout.offsetof(56);
-        __PAD2 = layout.offsetof(57);
-        OPTVAL = layout.offsetof(58);
-        CMD = layout.offsetof(59);
+        PIPE_FLAGS = layout.offsetof(41);
+        USER_DATA = layout.offsetof(42);
+        BUF_INDEX = layout.offsetof(44);
+        BUF_GROUP = layout.offsetof(45);
+        PERSONALITY = layout.offsetof(46);
+        SPLICE_FD_IN = layout.offsetof(48);
+        FILE_INDEX = layout.offsetof(49);
+        ZCRX_IFQ_IDX = layout.offsetof(50);
+        OPTLEN = layout.offsetof(51);
+        ADDR_LEN = layout.offsetof(53);
+        __PAD3 = layout.offsetof(54);
+        ADDR3 = layout.offsetof(57);
+        __PAD2 = layout.offsetof(58);
+        OPTVAL = layout.offsetof(59);
+        CMD = layout.offsetof(60);
     }
 
     protected IOURingSQE(long address, @Nullable ByteBuffer container) {
@@ -412,6 +416,9 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     /** @return the value of the {@code nop_flags} field. */
     @NativeType("__u32")
     public int nop_flags() { return nnop_flags(address()); }
+    /** @return the value of the {@code pipe_flags} field. */
+    @NativeType("__u32")
+    public int pipe_flags() { return npipe_flags(address()); }
     /** @return the value of the {@code user_data} field. */
     @NativeType("__u64")
     public long user_data() { return nuser_data(address()); }
@@ -536,6 +543,8 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     public IOURingSQE install_fd_flags(@NativeType("__u32") int value) { ninstall_fd_flags(address(), value); return this; }
     /** Sets the specified value to the {@code nop_flags} field. */
     public IOURingSQE nop_flags(@NativeType("__u32") int value) { nnop_flags(address(), value); return this; }
+    /** Sets the specified value to the {@code pipe_flags} field. */
+    public IOURingSQE pipe_flags(@NativeType("__u32") int value) { npipe_flags(address(), value); return this; }
     /** Sets the specified value to the {@code user_data} field. */
     public IOURingSQE user_data(@NativeType("__u64") long value) { nuser_data(address(), value); return this; }
     /** Sets the specified value to the {@code buf_index} field. */
@@ -765,6 +774,8 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     public static int ninstall_fd_flags(long struct) { return memGetInt(struct + IOURingSQE.INSTALL_FD_FLAGS); }
     /** Unsafe version of {@link #nop_flags}. */
     public static int nnop_flags(long struct) { return memGetInt(struct + IOURingSQE.NOP_FLAGS); }
+    /** Unsafe version of {@link #pipe_flags}. */
+    public static int npipe_flags(long struct) { return memGetInt(struct + IOURingSQE.PIPE_FLAGS); }
     /** Unsafe version of {@link #user_data}. */
     public static long nuser_data(long struct) { return memGetLong(struct + IOURingSQE.USER_DATA); }
     /** Unsafe version of {@link #buf_index}. */
@@ -873,6 +884,8 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     public static void ninstall_fd_flags(long struct, int value) { memPutInt(struct + IOURingSQE.INSTALL_FD_FLAGS, value); }
     /** Unsafe version of {@link #nop_flags(int) nop_flags}. */
     public static void nnop_flags(long struct, int value) { memPutInt(struct + IOURingSQE.NOP_FLAGS, value); }
+    /** Unsafe version of {@link #pipe_flags(int) pipe_flags}. */
+    public static void npipe_flags(long struct, int value) { memPutInt(struct + IOURingSQE.PIPE_FLAGS, value); }
     /** Unsafe version of {@link #user_data(long) user_data}. */
     public static void nuser_data(long struct, long value) { memPutLong(struct + IOURingSQE.USER_DATA, value); }
     /** Unsafe version of {@link #buf_index(short) buf_index}. */
@@ -1070,6 +1083,9 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
         /** @return the value of the {@code nop_flags} field. */
         @NativeType("__u32")
         public int nop_flags() { return IOURingSQE.nnop_flags(address()); }
+        /** @return the value of the {@code pipe_flags} field. */
+        @NativeType("__u32")
+        public int pipe_flags() { return IOURingSQE.npipe_flags(address()); }
         /** @return the value of the {@code user_data} field. */
         @NativeType("__u64")
         public long user_data() { return IOURingSQE.nuser_data(address()); }
@@ -1194,6 +1210,8 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
         public IOURingSQE.Buffer install_fd_flags(@NativeType("__u32") int value) { IOURingSQE.ninstall_fd_flags(address(), value); return this; }
         /** Sets the specified value to the {@code nop_flags} field. */
         public IOURingSQE.Buffer nop_flags(@NativeType("__u32") int value) { IOURingSQE.nnop_flags(address(), value); return this; }
+        /** Sets the specified value to the {@code pipe_flags} field. */
+        public IOURingSQE.Buffer pipe_flags(@NativeType("__u32") int value) { IOURingSQE.npipe_flags(address(), value); return this; }
         /** Sets the specified value to the {@code user_data} field. */
         public IOURingSQE.Buffer user_data(@NativeType("__u64") long value) { IOURingSQE.nuser_data(address(), value); return this; }
         /** Sets the specified value to the {@code buf_index} field. */

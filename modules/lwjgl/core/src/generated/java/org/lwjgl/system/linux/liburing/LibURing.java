@@ -2224,6 +2224,32 @@ public class LibURing {
         nio_uring_prep_cmd_discard(sqe.address(), fd, offset, nbytes);
     }
 
+    // --- [ io_uring_prep_pipe ] ---
+
+    /** {@code void io_uring_prep_pipe(struct io_uring_sqe * sqe, int * fds, int pipe_flags)} */
+    public static native void nio_uring_prep_pipe(long sqe, long fds, int pipe_flags);
+
+    /** {@code void io_uring_prep_pipe(struct io_uring_sqe * sqe, int * fds, int pipe_flags)} */
+    public static void io_uring_prep_pipe(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("int *") IntBuffer fds, int pipe_flags) {
+        if (CHECKS) {
+            check(fds, 2);
+        }
+        nio_uring_prep_pipe(sqe.address(), memAddress(fds), pipe_flags);
+    }
+
+    // --- [ io_uring_prep_pipe_direct ] ---
+
+    /** {@code void io_uring_prep_pipe_direct(struct io_uring_sqe * sqe, int * fds, int pipe_flags, unsigned int file_index)} */
+    public static native void nio_uring_prep_pipe_direct(long sqe, long fds, int pipe_flags, int file_index);
+
+    /** {@code void io_uring_prep_pipe_direct(struct io_uring_sqe * sqe, int * fds, int pipe_flags, unsigned int file_index)} */
+    public static void io_uring_prep_pipe_direct(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("int *") IntBuffer fds, int pipe_flags, @NativeType("unsigned int") int file_index) {
+        if (CHECKS) {
+            check(fds, 2);
+        }
+        nio_uring_prep_pipe_direct(sqe.address(), memAddress(fds), pipe_flags, file_index);
+    }
+
     // --- [ io_uring_load_sq_head ] ---
 
     /** {@code unsigned io_uring_load_sq_head(struct io_uring const * ring)} */

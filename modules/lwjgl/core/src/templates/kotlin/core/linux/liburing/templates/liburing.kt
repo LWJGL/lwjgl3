@@ -1561,6 +1561,23 @@ ENABLE_WARNINGS()""")
         uint64_t("nbytes")
     )
 
+    void(
+        "prep_pipe",
+
+        io_uring_sqe.p("sqe"),
+        Check(2)..int.p("fds"),
+        int("pipe_flags")
+    )
+
+    void(
+        "prep_pipe_direct",
+
+        io_uring_sqe.p("sqe"),
+        Check(2)..int.p("fds"),
+        int("pipe_flags"),
+        unsigned_int("file_index")
+    )
+
     unsigned(
         "load_sq_head",
 

@@ -1221,6 +1221,20 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     io_uring_prep_cmd_discard(sqe, fd, (uint64_t)offset, (uint64_t)nbytes);
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1pipe(JNIEnv *__env, jclass clazz, jlong sqeAddress, jlong fdsAddress, jint pipe_flags) {
+    struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
+    int *fds = (int *)(uintptr_t)fdsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    io_uring_prep_pipe(sqe, fds, pipe_flags);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1pipe_1direct(JNIEnv *__env, jclass clazz, jlong sqeAddress, jlong fdsAddress, jint pipe_flags, jint file_index) {
+    struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
+    int *fds = (int *)(uintptr_t)fdsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    io_uring_prep_pipe_direct(sqe, fds, pipe_flags, (unsigned int)file_index);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1load_1sq_1head(JNIEnv *__env, jclass clazz, jlong ringAddress) {
     struct io_uring const *ring = (struct io_uring const *)(uintptr_t)ringAddress;
     UNUSED_PARAMS(__env, clazz)
