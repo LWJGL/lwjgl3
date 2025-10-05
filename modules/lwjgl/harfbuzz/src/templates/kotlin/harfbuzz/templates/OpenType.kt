@@ -449,6 +449,15 @@ val hb_ot = "OpenType".nativeClass(Module.HARFBUZZ, prefix = "HB_OT", prefixMeth
     )
 
     hb_bool_t(
+        "layout_lookup_collect_glyph_alternates",
+
+        hb_face_t.p("face"),
+        unsigned("lookup_index"),
+        hb_map_t.p("alternate_count"),
+        hb_map_t.p("alternate_glyphs")
+    )
+
+    hb_bool_t(
         "layout_lookup_would_substitute",
 
         hb_face_t.p("face"),

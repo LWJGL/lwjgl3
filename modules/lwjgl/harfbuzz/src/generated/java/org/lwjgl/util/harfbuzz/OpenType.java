@@ -73,6 +73,7 @@ public class OpenType {
             layout_feature_with_variations_get_lookups    = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_layout_feature_with_variations_get_lookups"),
             layout_has_substitution                       = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_layout_has_substitution"),
             layout_lookup_get_glyph_alternates            = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_layout_lookup_get_glyph_alternates"),
+            layout_lookup_collect_glyph_alternates        = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_layout_lookup_collect_glyph_alternates"),
             layout_lookup_would_substitute                = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_layout_lookup_would_substitute"),
             layout_lookup_substitute_closure              = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_layout_lookup_substitute_closure"),
             layout_lookups_substitute_closure             = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_layout_lookups_substitute_closure"),
@@ -1019,6 +1020,20 @@ public class OpenType {
             if (alternate_count != null) { checkSafe(alternate_glyphs, alternate_count.get(alternate_count.position())); }
         }
         return nhb_ot_layout_lookup_get_glyph_alternates(face, lookup_index, glyph, start_offset, memAddressSafe(alternate_count), memAddressSafe(alternate_glyphs));
+    }
+
+    // --- [ hb_ot_layout_lookup_collect_glyph_alternates ] ---
+
+    /** {@code hb_bool_t hb_ot_layout_lookup_collect_glyph_alternates(hb_face_t * face, unsigned lookup_index, hb_map_t * alternate_count, hb_map_t * alternate_glyphs)} */
+    @NativeType("hb_bool_t")
+    public static boolean hb_ot_layout_lookup_collect_glyph_alternates(@NativeType("hb_face_t *") long face, @NativeType("unsigned") int lookup_index, @NativeType("hb_map_t *") long alternate_count, @NativeType("hb_map_t *") long alternate_glyphs) {
+        long __functionAddress = Functions.layout_lookup_collect_glyph_alternates;
+        if (CHECKS) {
+            check(face);
+            check(alternate_count);
+            check(alternate_glyphs);
+        }
+        return invokePPPI(face, lookup_index, alternate_count, alternate_glyphs, __functionAddress) != 0;
     }
 
     // --- [ hb_ot_layout_lookup_would_substitute ] ---

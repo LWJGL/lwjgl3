@@ -234,6 +234,11 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         "SCRIPT_TODHRI".enum("HB_TAG ('T','o','d','r')"),
         "SCRIPT_TULU_TIGALARI".enum("HB_TAG ('T','u','t','g')"),
 
+        "SCRIPT_BERIA_ERFE".enum("HB_TAG('B','e','r','f')"),
+        "SCRIPT_SIDETIC".enum("HB_TAG ('S','i','d','t')"),
+        "SCRIPT_TAI_YO".enum("HB_TAG ('T','a','y','o')"),
+        "SCRIPT_TOLONG_SIKI".enum("HB_TAG ('T','o','l','s')"),
+
         "SCRIPT_INVALID".enum("HB_TAG_NONE")
     )
 
@@ -3710,11 +3715,11 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
 
     // hb-version.h
 
-    IntConstant("VERSION_MAJOR".."11")
-    IntConstant("VERSION_MINOR".."4")
-    IntConstant("VERSION_MICRO".."5")
+    IntConstant("VERSION_MAJOR".."12")
+    IntConstant("VERSION_MINOR".."1")
+    IntConstant("VERSION_MICRO".."0")
 
-    StringConstant("VERSION_STRING".."11.4.5")
+    StringConstant("VERSION_STRING".."12.1.0")
 
     customMethod("""
     public static boolean HB_VERSION_ATLEAST(int major, int minor, int micro) {

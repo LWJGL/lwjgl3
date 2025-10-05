@@ -660,6 +660,10 @@ public class HarfBuzz {
         HB_SCRIPT_SUNUWAR                = HB_TAG ('S','u','n','u'),
         HB_SCRIPT_TODHRI                 = HB_TAG ('T','o','d','r'),
         HB_SCRIPT_TULU_TIGALARI          = HB_TAG ('T','u','t','g'),
+        HB_SCRIPT_BERIA_ERFE             = HB_TAG('B','e','r','f'),
+        HB_SCRIPT_SIDETIC                = HB_TAG ('S','i','d','t'),
+        HB_SCRIPT_TAI_YO                 = HB_TAG ('T','a','y','o'),
+        HB_SCRIPT_TOLONG_SIKI            = HB_TAG ('T','o','l','s'),
         HB_SCRIPT_INVALID                = HB_TAG_NONE;
 
     public static final int HB_LANGUAGE_INVALID = 0;
@@ -875,13 +879,13 @@ public class HarfBuzz {
         HB_UNICODE_COMBINING_CLASS_IOTA_SUBSCRIPT       = 240,
         HB_UNICODE_COMBINING_CLASS_INVALID              = 255;
 
-    public static final int HB_VERSION_MAJOR = 11;
+    public static final int HB_VERSION_MAJOR = 12;
 
-    public static final int HB_VERSION_MINOR = 4;
+    public static final int HB_VERSION_MINOR = 1;
 
-    public static final int HB_VERSION_MICRO = 5;
+    public static final int HB_VERSION_MICRO = 0;
 
-    public static final String HB_VERSION_STRING = "11.4.5";
+    public static final String HB_VERSION_STRING = "12.1.0";
 
     protected HarfBuzz() {
         throw new UnsupportedOperationException();
