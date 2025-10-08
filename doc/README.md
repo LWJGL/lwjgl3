@@ -158,7 +158,10 @@ Contributors are encouraged but not required to submit PRs using these guideline
 
 When starting a new binding, it is recommended to copy the structure of an existing binding under `modules/lwjgl/`. LWJGL includes bindings with different styles of definition and configuration, depending on the nature of the library. Search for an existing binding that is similar to the new one.
 
-Besides adding the appropriate files under `modules/lwjgl/<binding>/`, a few other places must be editted to correctly support the new binding. These are listed below.
+To be able to publish the binding, a gradle projet must also be created under `publish/lwjgl-modules/`. In the `build.gradle.kts`, specify supported platforms, a title and a description.
+Use the other binding projects as a guide. The project name should be prefixed with `lwjgl-`.
+
+Besides adding the appropriate files under `modules/lwjgl/<binding>/` and `publish/lwjgl-modules/lwjgl-<binding>/`, a few other places must be editted to correctly support the new binding. These are listed below.
 
 In the `lwjgl3` repository:
 
@@ -179,8 +182,6 @@ In the `lwjgl3` repository:
     * Add to the `List of Supported Bindings`.
 - `doc/notes/<version>.md`
     * Add to the next version release notes.
-- `build.gradle`
-    * Add to the `Artifacts` enum.
 - IDEA project (optional)
     * `.idea/modules.xml`: add the Java and Kotlin modules
     * The Java module should be stored at `.idea/modules/lwjgl`
