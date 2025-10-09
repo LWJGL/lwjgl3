@@ -13,10 +13,6 @@ let
     xorg.libXxf86vm
     wayland
     libxkbcommon
-    gtk3
-    gtk3-x11
-    gdk-pixbuf
-    dbus
   ];
   runtimeLibs = with pkgs; lib.makeLibraryPath libs;
 in
@@ -27,7 +23,13 @@ pkgs.mkShell {
     NIX_CFLAGS_COMPILE="$PKG_CONFIG_OUT $NIX_CFLAGS_COMPILE"
   '';
 
-  buildInputs = with pkgs; libs ++ [ pkg-config ];
+  buildInputs = with pkgs; libs ++ [
+    pkg-config
+    gtk3
+    gtk3-x11
+    gdk-pixbuf
+    dbus
+  ];
 
   packages = with pkgs; [
     jdk21
@@ -35,3 +37,4 @@ pkgs.mkShell {
     kotlin
   ];
 }
+
