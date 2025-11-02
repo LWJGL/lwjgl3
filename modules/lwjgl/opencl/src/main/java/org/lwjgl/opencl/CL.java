@@ -247,12 +247,12 @@ public final class CL {
         try (MemoryStack stack = stackPush()) {
             IntBuffer pi = stack.mallocInt(1);
 
-            checkCLError(nclGetDeviceIDs(cl_platform_id, CL_DEVICE_TYPE_ALL, 0, NULL, memAddress(pi)));
+            checkCLError(nclGetDeviceIDs(cl_platform_id, CL_DEVICE_TYPE_ALL & 0xFFFF_FFFFl, 0, NULL, memAddress(pi)));
             int num_devices = pi.get(0);
             if (num_devices != 0) {
                 PointerBuffer pp = stack.mallocPointer(num_devices);
 
-                checkCLError(nclGetDeviceIDs(cl_platform_id, CL_DEVICE_TYPE_ALL, num_devices, memAddress(pp), NULL));
+                checkCLError(nclGetDeviceIDs(cl_platform_id, CL_DEVICE_TYPE_ALL & 0xFFFF_FFFFl, num_devices, memAddress(pp), NULL));
 
                 // Add device extensions to the set
                 for (int i = 0; i < num_devices; i++) {
