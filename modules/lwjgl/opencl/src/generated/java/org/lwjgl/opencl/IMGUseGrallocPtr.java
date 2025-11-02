@@ -25,7 +25,7 @@ public class IMGUseGrallocPtr {
         CL_GRALLOC_RESOURCE_NOT_ACQUIRED_IMG = 0x40D4,
         CL_INVALID_GRALLOC_OBJECT_IMG        = 0x40D5;
 
-    public static final int CL_MEM_USE_GRALLOC_PTR_IMG = 1 << 28;
+    public static final long CL_MEM_USE_GRALLOC_PTR_IMG = 1L << 28;
 
     protected IMGUseGrallocPtr() {
         throw new UnsupportedOperationException();

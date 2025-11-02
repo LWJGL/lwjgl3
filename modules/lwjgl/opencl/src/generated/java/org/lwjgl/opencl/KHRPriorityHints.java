@@ -7,7 +7,7 @@ package org.lwjgl.opencl;
 
 public final class KHRPriorityHints {
 
-    public static final int CL_QUEUE_PRIORITY_KHR = 0x1096;
+    public static final long CL_QUEUE_PRIORITY_KHR = 0x1096L;
 
     public static final int
         CL_QUEUE_PRIORITY_HIGH_KHR = (1<<0),

@@ -8,8 +8,8 @@ import org.lwjgl.generator.*
 import opencl.*
 
 val khr_command_buffer_mutable_dispatch = "KHRCommandBufferMutableDispatch".nativeClassCL("khr_command_buffer_mutable_dispatch", KHR) {
-    IntConstant(
-        "COMMAND_BUFFER_MUTABLE_KHR".."1 << 1"
+    LongConstant(
+        "COMMAND_BUFFER_MUTABLE_KHR".."1L << 1"
     )
 
     IntConstant(
@@ -20,16 +20,16 @@ val khr_command_buffer_mutable_dispatch = "KHRCommandBufferMutableDispatch".nati
         "DEVICE_MUTABLE_DISPATCH_CAPABILITIES_KHR"..0x12B0
     )
 
-    IntConstant(
-        "MUTABLE_DISPATCH_UPDATABLE_FIELDS_KHR"..0x12B1
+    LongConstant(
+        "MUTABLE_DISPATCH_UPDATABLE_FIELDS_KHR"..0x12B1L
     )
 
-    IntConstant(
-        "MUTABLE_DISPATCH_GLOBAL_OFFSET_KHR".."1 << 0",
-        "MUTABLE_DISPATCH_GLOBAL_SIZE_KHR".."1 << 1",
-        "MUTABLE_DISPATCH_LOCAL_SIZE_KHR".."1 << 2",
-        "MUTABLE_DISPATCH_ARGUMENTS_KHR".."1 << 3",
-        "MUTABLE_DISPATCH_EXEC_INFO_KHR".."1 << 4"
+    LongConstant(
+        "MUTABLE_DISPATCH_GLOBAL_OFFSET_KHR".."1L << 0",
+        "MUTABLE_DISPATCH_GLOBAL_SIZE_KHR".."1L << 1",
+        "MUTABLE_DISPATCH_LOCAL_SIZE_KHR".."1L << 2",
+        "MUTABLE_DISPATCH_ARGUMENTS_KHR".."1L << 3",
+        "MUTABLE_DISPATCH_EXEC_INFO_KHR".."1L << 4"
     )
 
     IntConstant(
@@ -48,16 +48,16 @@ val khr_command_buffer_mutable_dispatch = "KHRCommandBufferMutableDispatch".nati
         "STRUCTURE_TYPE_MUTABLE_DISPATCH_CONFIG_KHR"..0
     )
 
-    IntConstant(
-        "COMMAND_BUFFER_MUTABLE_DISPATCH_ASSERTS_KHR"..0x12B7
+    LongConstant(
+        "COMMAND_BUFFER_MUTABLE_DISPATCH_ASSERTS_KHR"..0x12B7L
     )
 
     IntConstant(
         "MUTABLE_DISPATCH_ASSERTS_KHR"..0x12B8
     )
 
-    IntConstant(
-        "MUTABLE_DISPATCH_ASSERT_NO_ADDITIONAL_WORK_GROUPS_KHR".."1 << 0"
+    LongConstant(
+        "MUTABLE_DISPATCH_ASSERT_NO_ADDITIONAL_WORK_GROUPS_KHR".."1L << 0"
     )
 
     cl_int(

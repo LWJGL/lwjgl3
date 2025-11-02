@@ -7,9 +7,9 @@ package org.lwjgl.opencl;
 
 public final class INTELPlanarYUV {
 
-    public static final int
-        CL_MEM_NO_ACCESS_INTEL                 = 1 << 24,
-        CL_MEM_ACCESS_FLAGS_UNRESTRICTED_INTEL = 1 << 25;
+    public static final long
+        CL_MEM_NO_ACCESS_INTEL                 = 1L << 24,
+        CL_MEM_ACCESS_FLAGS_UNRESTRICTED_INTEL = 1L << 25;
 
     public static final int CL_NV12_INTEL = 0x410E;
 

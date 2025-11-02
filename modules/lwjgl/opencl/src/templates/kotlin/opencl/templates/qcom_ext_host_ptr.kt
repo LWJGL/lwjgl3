@@ -13,8 +13,8 @@ val qcom_ext_host_ptr = "QCOMEXTHostPtr".nativeClassCL("qcom_ext_host_ptr", QCOM
         "DEVICE_PAGE_SIZE_QCOM"..0x40A1
     )
 
-    IntConstant(
-        "MEM_EXT_HOST_PTR_QCOM".."1 << 29"
+    LongConstant(
+        "MEM_EXT_HOST_PTR_QCOM".."1L << 29"
     )
 
     IntConstant(

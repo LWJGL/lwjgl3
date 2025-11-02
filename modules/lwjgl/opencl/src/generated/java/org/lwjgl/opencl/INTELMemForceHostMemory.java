@@ -7,7 +7,7 @@ package org.lwjgl.opencl;
 
 public final class INTELMemForceHostMemory {
 
-    public static final int CL_MEM_FORCE_HOST_MEMORY_INTEL = (1 << 20);
+    public static final long CL_MEM_FORCE_HOST_MEMORY_INTEL = (1L << 20);
 
     private INTELMemForceHostMemory() {}
 

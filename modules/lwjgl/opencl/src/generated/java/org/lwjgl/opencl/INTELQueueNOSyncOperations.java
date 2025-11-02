@@ -7,7 +7,7 @@ package org.lwjgl.opencl;
 
 public final class INTELQueueNOSyncOperations {
 
-    public static final int CL_QUEUE_NO_SYNC_OPERATIONS_INTEL = 1 << 29;
+    public static final long CL_QUEUE_NO_SYNC_OPERATIONS_INTEL = 1L << 29;
 
     private INTELQueueNOSyncOperations() {}
 

@@ -101,19 +101,19 @@ val CL30 = "CL30".nativeClassCL("CL30") {
         "COMMAND_SVM_MIGRATE_MEM"..0x120E
     )
 
-    IntConstant(
-        "DEVICE_ATOMIC_ORDER_RELAXED".."(1 << 0)",
-        "DEVICE_ATOMIC_ORDER_ACQ_REL".."(1 << 1)",
-        "DEVICE_ATOMIC_ORDER_SEQ_CST".."(1 << 2)",
-        "DEVICE_ATOMIC_SCOPE_WORK_ITEM".."(1 << 3)",
-        "DEVICE_ATOMIC_SCOPE_WORK_GROUP".."(1 << 4)",
-        "DEVICE_ATOMIC_SCOPE_DEVICE".."(1 << 5)",
-        "DEVICE_ATOMIC_SCOPE_ALL_DEVICES".."(1 << 6)"
+    LongConstant(
+        "DEVICE_ATOMIC_ORDER_RELAXED".."(1L << 0)",
+        "DEVICE_ATOMIC_ORDER_ACQ_REL".."(1L << 1)",
+        "DEVICE_ATOMIC_ORDER_SEQ_CST".."(1L << 2)",
+        "DEVICE_ATOMIC_SCOPE_WORK_ITEM".."(1L << 3)",
+        "DEVICE_ATOMIC_SCOPE_WORK_GROUP".."(1L << 4)",
+        "DEVICE_ATOMIC_SCOPE_DEVICE".."(1L << 5)",
+        "DEVICE_ATOMIC_SCOPE_ALL_DEVICES".."(1L << 6)"
     )
 
-    IntConstant(
-        "DEVICE_QUEUE_SUPPORTED".."(1 << 0)",
-        "DEVICE_QUEUE_REPLACEABLE_DEFAULT".."(1 << 1)"
+    LongConstant(
+        "DEVICE_QUEUE_SUPPORTED".."(1L << 0)",
+        "DEVICE_QUEUE_REPLACEABLE_DEFAULT".."(1L << 1)"
     )
 
     IntConstant(

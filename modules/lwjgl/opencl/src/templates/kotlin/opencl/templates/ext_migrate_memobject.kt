@@ -8,8 +8,8 @@ import org.lwjgl.generator.*
 import opencl.*
 
 val ext_migrate_memobject = "EXTMigrateMemobject".nativeClassCL("ext_migrate_memobject", EXT) {
-    IntConstant(
-        "MIGRATE_MEM_OBJECT_HOST_EXT".."1 << 0"
+    LongConstant(
+        "MIGRATE_MEM_OBJECT_HOST_EXT".."1L << 0"
     )
 
     IntConstant(

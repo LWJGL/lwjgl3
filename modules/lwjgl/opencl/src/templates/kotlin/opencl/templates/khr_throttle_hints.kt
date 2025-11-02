@@ -8,8 +8,8 @@ import org.lwjgl.generator.*
 import opencl.*
 
 val khr_throttle_hints = "KHRThrottleHints".nativeClassCL("khr_throttle_hints", KHR) {
-    IntConstant(
-        "QUEUE_THROTTLE_KHR"..0x1097
+    LongConstant(
+        "QUEUE_THROTTLE_KHR"..0x1097L
     )
 
     IntConstant(

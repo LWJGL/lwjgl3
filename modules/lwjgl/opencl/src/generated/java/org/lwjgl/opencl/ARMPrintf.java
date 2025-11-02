@@ -7,9 +7,9 @@ package org.lwjgl.opencl;
 
 public final class ARMPrintf {
 
-    public static final int
-        CL_PRINTF_CALLBACK_ARM   = 0x40B0,
-        CL_PRINTF_BUFFERSIZE_ARM = 0x40B1;
+    public static final long
+        CL_PRINTF_CALLBACK_ARM   = 0x40B0L,
+        CL_PRINTF_BUFFERSIZE_ARM = 0x40B1L;
 
     private ARMPrintf() {}
 

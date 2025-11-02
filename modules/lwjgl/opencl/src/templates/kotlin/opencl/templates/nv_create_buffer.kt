@@ -8,9 +8,9 @@ import org.lwjgl.generator.*
 import opencl.*
 
 val nv_create_buffer = "NVCreateBuffer".nativeClassCL("nv_create_buffer", NV) {
-    IntConstant(
-        "MEM_LOCATION_HOST_NV".."(1 << 0)",
-        "MEM_PINNED_NV".."(1 << 1)"
+    LongConstant(
+        "MEM_LOCATION_HOST_NV".."(1L << 0)",
+        "MEM_PINNED_NV".."(1L << 1)"
     )
 
     val CreateBuffer = CL10["CreateBuffer"]

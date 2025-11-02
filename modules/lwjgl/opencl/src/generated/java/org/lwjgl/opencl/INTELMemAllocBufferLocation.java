@@ -7,7 +7,7 @@ package org.lwjgl.opencl;
 
 public final class INTELMemAllocBufferLocation {
 
-    public static final int CL_MEM_ALLOC_BUFFER_LOCATION_INTEL = 0x419E;
+    public static final long CL_MEM_ALLOC_BUFFER_LOCATION_INTEL = 0x419EL;
 
     private INTELMemAllocBufferLocation() {}
 

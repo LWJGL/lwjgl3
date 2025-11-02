@@ -23,9 +23,9 @@ public class KHRExternalMemory {
         CL_DEVICE_EXTERNAL_MEMORY_IMPORT_HANDLE_TYPES_KHR                      = 0x204F,
         CL_DEVICE_EXTERNAL_MEMORY_IMPORT_ASSUME_LINEAR_IMAGES_HANDLE_TYPES_KHR = 0x2052;
 
-    public static final int
-        CL_MEM_DEVICE_HANDLE_LIST_KHR     = 0x2051,
-        CL_MEM_DEVICE_HANDLE_LIST_END_KHR = 0;
+    public static final long
+        CL_MEM_DEVICE_HANDLE_LIST_KHR     = 0x2051L,
+        CL_MEM_DEVICE_HANDLE_LIST_END_KHR = 0L;
 
     public static final int
         CL_COMMAND_ACQUIRE_EXTERNAL_MEM_OBJECTS_KHR = 0x2047,

@@ -34,8 +34,8 @@ val CL11 = "CL11".nativeClassCL("CL11") {
         "DEVICE_OPENCL_C_VERSION"..0x103D
     )
 
-    IntConstant(
-        "FP_SOFT_FLOAT".."1 << 6"
+    LongConstant(
+        "FP_SOFT_FLOAT".."1L << 6"
     )
 
     IntConstant(

@@ -7,7 +7,7 @@ package org.lwjgl.opencl;
 
 public final class KHRThrottleHints {
 
-    public static final int CL_QUEUE_THROTTLE_KHR = 0x1097;
+    public static final long CL_QUEUE_THROTTLE_KHR = 0x1097L;
 
     public static final int
         CL_QUEUE_THROTTLE_HIGH_KHR = (1<<0),

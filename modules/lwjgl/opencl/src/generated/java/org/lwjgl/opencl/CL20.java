@@ -59,23 +59,22 @@ public class CL20 extends CL12 {
         CL_DEVICE_PREFERRED_GLOBAL_ATOMIC_ALIGNMENT   = 0x1059,
         CL_DEVICE_PREFERRED_LOCAL_ATOMIC_ALIGNMENT    = 0x105A;
 
-    public static final int
-        CL_QUEUE_ON_DEVICE         = 1 << 2,
-        CL_QUEUE_ON_DEVICE_DEFAULT = 1 << 3;
+    public static final long
+        CL_QUEUE_ON_DEVICE         = 1L << 2,
+        CL_QUEUE_ON_DEVICE_DEFAULT = 1L << 3;
 
-    public static final int
-        CL_DEVICE_SVM_COARSE_GRAIN_BUFFER = 1 << 0,
-        CL_DEVICE_SVM_FINE_GRAIN_BUFFER   = 1 << 1,
-        CL_DEVICE_SVM_FINE_GRAIN_SYSTEM   = 1 << 2,
-        CL_DEVICE_SVM_ATOMICS             = 1 << 3;
+    public static final long
+        CL_DEVICE_SVM_COARSE_GRAIN_BUFFER = 1L << 0,
+        CL_DEVICE_SVM_FINE_GRAIN_BUFFER   = 1L << 1,
+        CL_DEVICE_SVM_FINE_GRAIN_SYSTEM   = 1L << 2,
+        CL_DEVICE_SVM_ATOMICS             = 1L << 3;
 
     public static final int CL_QUEUE_SIZE = 0x1094;
 
-    public static final int CL_MEM_SVM_FINE_GRAIN_BUFFER = 1 << 10;
-
-    public static final int CL_MEM_SVM_ATOMICS = 1 << 11;
-
-    public static final int CL_MEM_KERNEL_READ_AND_WRITE = 1 << 12;
+    public static final long
+        CL_MEM_SVM_FINE_GRAIN_BUFFER = 1L << 10,
+        CL_MEM_SVM_ATOMICS           = 1L << 11,
+        CL_MEM_KERNEL_READ_AND_WRITE = 1L << 12;
 
     public static final int CL_MEM_OBJECT_PIPE = 0x10F7;
 
@@ -99,7 +98,7 @@ public class CL20 extends CL12 {
 
     public static final int CL_PROGRAM_BUILD_GLOBAL_VARIABLE_TOTAL_SIZE = 0x1185;
 
-    public static final int CL_KERNEL_ARG_TYPE_PIPE = 1 << 3;
+    public static final long CL_KERNEL_ARG_TYPE_PIPE = 1L << 3;
 
     public static final int CL_KERNEL_EXEC_INFO_SVM_PTRS = 0x11B6;
 

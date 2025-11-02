@@ -18,8 +18,8 @@ val intel_device_attribute_query = "INTELDeviceAttributeQuery".nativeClassCL("in
         "DEVICE_FEATURE_CAPABILITIES_INTEL"..0x4256
     )
 
-    IntConstant(
-        "DEVICE_FEATURE_FLAG_DP4A_INTEL".."1 << 0",
-        "DEVICE_FEATURE_FLAG_DPAS_INTEL".."1 << 1"
+    LongConstant(
+        "DEVICE_FEATURE_FLAG_DP4A_INTEL".."1L << 0",
+        "DEVICE_FEATURE_FLAG_DPAS_INTEL".."1L << 1"
     )
 }

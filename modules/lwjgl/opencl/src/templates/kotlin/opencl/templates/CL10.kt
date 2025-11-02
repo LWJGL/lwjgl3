@@ -86,12 +86,12 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         "PLATFORM_EXTENSIONS"..0x0904
     )
 
-    IntConstant(
-        "DEVICE_TYPE_DEFAULT".."1 << 0",
-        "DEVICE_TYPE_CPU".."1 << 1",
-        "DEVICE_TYPE_GPU".."1 << 2",
-        "DEVICE_TYPE_ACCELERATOR".."1 << 3",
-        "DEVICE_TYPE_ALL"..0xFFFFFFFF.i
+    LongConstant(
+        "DEVICE_TYPE_DEFAULT".."1L << 0",
+        "DEVICE_TYPE_CPU".."1L << 1",
+        "DEVICE_TYPE_GPU".."1L << 2",
+        "DEVICE_TYPE_ACCELERATOR".."1L << 3",
+        "DEVICE_TYPE_ALL"..0xFFFFFFFFL
     )
 
     IntConstant(
@@ -147,13 +147,13 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         "DEVICE_PLATFORM"..0x1031
     )
 
-    IntConstant(
-        "FP_DENORM".."1 << 0",
-        "FP_INF_NAN".."1 << 1",
-        "FP_ROUND_TO_NEAREST".."1 << 2",
-        "FP_ROUND_TO_ZERO".."1 << 3",
-        "FP_ROUND_TO_INF".."1 << 4",
-        "FP_FMA".."1 << 5"
+    LongConstant(
+        "FP_DENORM".."1L << 0",
+        "FP_INF_NAN".."1L << 1",
+        "FP_ROUND_TO_NEAREST".."1L << 2",
+        "FP_ROUND_TO_ZERO".."1L << 3",
+        "FP_ROUND_TO_INF".."1L << 4",
+        "FP_FMA".."1L << 5"
     )
 
     IntConstant(
@@ -167,14 +167,14 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         "GLOBAL"..0x2
     )
 
-    IntConstant(
-        "EXEC_KERNEL".."1 << 0",
-        "EXEC_NATIVE_KERNEL".."1 << 1"
+    LongConstant(
+        "EXEC_KERNEL".."1L << 0",
+        "EXEC_NATIVE_KERNEL".."1L << 1"
     )
 
-    IntConstant(
-        "QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE".."1 << 0",
-        "QUEUE_PROFILING_ENABLE".."1 << 1"
+    LongConstant(
+        "QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE".."1L << 0",
+        "QUEUE_PROFILING_ENABLE".."1L << 1"
     )
 
     IntConstant(
@@ -194,13 +194,13 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         "QUEUE_PROPERTIES"..0x1093
     )
 
-    IntConstant(
-        "MEM_READ_WRITE".."1 << 0",
-        "MEM_WRITE_ONLY".."1 << 1",
-        "MEM_READ_ONLY".."1 << 2",
-        "MEM_USE_HOST_PTR".."1 << 3",
-        "MEM_ALLOC_HOST_PTR".."1 << 4",
-        "MEM_COPY_HOST_PTR".."1 << 5"
+    LongConstant(
+        "MEM_READ_WRITE".."1L << 0",
+        "MEM_WRITE_ONLY".."1L << 1",
+        "MEM_READ_ONLY".."1L << 2",
+        "MEM_USE_HOST_PTR".."1L << 3",
+        "MEM_ALLOC_HOST_PTR".."1L << 4",
+        "MEM_COPY_HOST_PTR".."1L << 5"
     )
 
     IntConstant(
@@ -280,9 +280,9 @@ val CL10 = "CL10".nativeClassCL("CL10") {
         "SAMPLER_FILTER_MODE"..0x1154
     )
 
-    IntConstant(
-        "MAP_READ".."1 << 0",
-        "MAP_WRITE".."1 << 1"
+    LongConstant(
+        "MAP_READ".."1L << 0",
+        "MAP_WRITE".."1L << 1"
     )
 
     IntConstant(

@@ -15,9 +15,9 @@ public final class KHRExternalSemaphore {
         CL_DEVICE_SEMAPHORE_IMPORT_HANDLE_TYPES_KHR = 0x204D,
         CL_DEVICE_SEMAPHORE_EXPORT_HANDLE_TYPES_KHR = 0x204E;
 
-    public static final int
-        CL_SEMAPHORE_EXPORT_HANDLE_TYPES_KHR          = 0x203F,
-        CL_SEMAPHORE_EXPORT_HANDLE_TYPES_LIST_END_KHR = 0;
+    public static final long
+        CL_SEMAPHORE_EXPORT_HANDLE_TYPES_KHR          = 0x203FL,
+        CL_SEMAPHORE_EXPORT_HANDLE_TYPES_LIST_END_KHR = 0L;
 
     public static final int CL_SEMAPHORE_EXPORTABLE_KHR = 0x2054;
 

@@ -27,18 +27,18 @@ public class INTELUnifiedSharedMemory {
         CL_DEVICE_CROSS_DEVICE_SHARED_MEM_CAPABILITIES_INTEL  = 0x4193,
         CL_DEVICE_SHARED_SYSTEM_MEM_CAPABILITIES_INTEL        = 0x4194;
 
-    public static final int
-        CL_UNIFIED_SHARED_MEMORY_ACCESS_INTEL                   = 1 << 0,
-        CL_UNIFIED_SHARED_MEMORY_ATOMIC_ACCESS_INTEL            = 1 << 1,
-        CL_UNIFIED_SHARED_MEMORY_CONCURRENT_ACCESS_INTEL        = 1 << 2,
-        CL_UNIFIED_SHARED_MEMORY_CONCURRENT_ATOMIC_ACCESS_INTEL = 1 << 3;
+    public static final long
+        CL_UNIFIED_SHARED_MEMORY_ACCESS_INTEL                   = 1L << 0,
+        CL_UNIFIED_SHARED_MEMORY_ATOMIC_ACCESS_INTEL            = 1L << 1,
+        CL_UNIFIED_SHARED_MEMORY_CONCURRENT_ACCESS_INTEL        = 1L << 2,
+        CL_UNIFIED_SHARED_MEMORY_CONCURRENT_ATOMIC_ACCESS_INTEL = 1L << 3;
 
-    public static final int CL_MEM_ALLOC_FLAGS_INTEL = 0x4195;
+    public static final long CL_MEM_ALLOC_FLAGS_INTEL = 0x4195L;
 
-    public static final int
-        CL_MEM_ALLOC_WRITE_COMBINED_INTEL           = 1 << 0,
-        CL_MEM_ALLOC_INITIAL_PLACEMENT_DEVICE_INTEL = 1 << 1,
-        CL_MEM_ALLOC_INITIAL_PLACEMENT_HOST_INTEL   = 1 << 2;
+    public static final long
+        CL_MEM_ALLOC_WRITE_COMBINED_INTEL           = 1L << 0,
+        CL_MEM_ALLOC_INITIAL_PLACEMENT_DEVICE_INTEL = 1L << 1,
+        CL_MEM_ALLOC_INITIAL_PLACEMENT_HOST_INTEL   = 1L << 2;
 
     public static final int
         CL_MEM_ALLOC_TYPE_INTEL     = 0x419A,

@@ -14,8 +14,8 @@ val khr_integer_dot_product = "KHRIntegerDotProduct".nativeClassCL("khr_integer_
         "DEVICE_INTEGER_DOT_PRODUCT_ACCELERATION_PROPERTIES_4x8BIT_PACKED_KHR"..0x1075
     )
 
-    IntConstant(
-        "DEVICE_INTEGER_DOT_PRODUCT_INPUT_4x8BIT_PACKED_KHR".."(1 << 0)",
-        "DEVICE_INTEGER_DOT_PRODUCT_INPUT_4x8BIT_KHR".."(1 << 1)"
+    LongConstant(
+        "DEVICE_INTEGER_DOT_PRODUCT_INPUT_4x8BIT_PACKED_KHR".."(1L << 0)",
+        "DEVICE_INTEGER_DOT_PRODUCT_INPUT_4x8BIT_KHR".."(1L << 1)"
     )
 }

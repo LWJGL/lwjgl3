@@ -8,8 +8,8 @@ import org.lwjgl.generator.*
 import opencl.*
 
 val khr_priority_hints = "KHRPriorityHints".nativeClassCL("khr_priority_hints", KHR) {
-    IntConstant(
-        "QUEUE_PRIORITY_KHR"..0x1096
+    LongConstant(
+        "QUEUE_PRIORITY_KHR"..0x1096L
     )
 
     IntConstant(

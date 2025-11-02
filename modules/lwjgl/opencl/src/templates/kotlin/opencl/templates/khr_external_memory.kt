@@ -17,9 +17,9 @@ val khr_external_memory = "KHRExternalMemory".nativeClassCL("khr_external_memory
         "DEVICE_EXTERNAL_MEMORY_IMPORT_ASSUME_LINEAR_IMAGES_HANDLE_TYPES_KHR"..0x2052
     )
 
-    IntConstant(
-        "MEM_DEVICE_HANDLE_LIST_KHR"..0x2051,
-        "MEM_DEVICE_HANDLE_LIST_END_KHR".."0"
+    LongConstant(
+        "MEM_DEVICE_HANDLE_LIST_KHR"..0x2051L,
+        "MEM_DEVICE_HANDLE_LIST_END_KHR".."0L"
     )
 
     IntConstant(

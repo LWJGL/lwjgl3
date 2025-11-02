@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import opencl.*
 
 val intel_mem_channel_property = "INTELMemChannelProperty".nativeClassCL("intel_mem_channel_property", INTEL) {
-    IntConstant(
-        "MEM_CHANNEL_INTEL"..0x4213
+    LongConstant(
+        "MEM_CHANNEL_INTEL"..0x4213L
     )
 }

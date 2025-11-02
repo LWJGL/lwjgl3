@@ -25,10 +25,10 @@ public class KHRCommandBuffer {
         CL_DEVICE_COMMAND_BUFFER_SUPPORTED_QUEUE_PROPERTIES_KHR = 0x129A,
         CL_DEVICE_COMMAND_BUFFER_REQUIRED_QUEUE_PROPERTIES_KHR  = 0x12AA;
 
-    public static final int
-        CL_COMMAND_BUFFER_CAPABILITY_KERNEL_PRINTF_KHR       = 0x1 << 0,
-        CL_COMMAND_BUFFER_CAPABILITY_DEVICE_SIDE_ENQUEUE_KHR = 0x1 << 1,
-        CL_COMMAND_BUFFER_CAPABILITY_SIMULTANEOUS_USE_KHR    = 0x1 << 2;
+    public static final long
+        CL_COMMAND_BUFFER_CAPABILITY_KERNEL_PRINTF_KHR       = 1L << 0,
+        CL_COMMAND_BUFFER_CAPABILITY_DEVICE_SIDE_ENQUEUE_KHR = 1L << 1,
+        CL_COMMAND_BUFFER_CAPABILITY_SIMULTANEOUS_USE_KHR    = 1L << 2;
 
     public static final int
         CL_COMMAND_BUFFER_STATE_RECORDING_KHR  = 0x0,
@@ -40,9 +40,9 @@ public class KHRCommandBuffer {
         CL_INVALID_SYNC_POINT_WAIT_LIST_KHR = -1139,
         CL_INCOMPATIBLE_COMMAND_QUEUE_KHR   = -1140;
 
-    public static final int CL_COMMAND_BUFFER_FLAGS_KHR = 0x1293;
+    public static final long CL_COMMAND_BUFFER_FLAGS_KHR = 0x1293L;
 
-    public static final int CL_COMMAND_BUFFER_SIMULTANEOUS_USE_KHR = 0x1 << 0;
+    public static final long CL_COMMAND_BUFFER_SIMULTANEOUS_USE_KHR = 1L << 0;
 
     public static final int
         CL_COMMAND_BUFFER_QUEUES_KHR           = 0x1294,

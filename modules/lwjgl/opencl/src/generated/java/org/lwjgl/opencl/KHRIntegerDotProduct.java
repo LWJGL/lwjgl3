@@ -12,9 +12,9 @@ public final class KHRIntegerDotProduct {
         CL_DEVICE_INTEGER_DOT_PRODUCT_ACCELERATION_PROPERTIES_8BIT_KHR          = 0x1074,
         CL_DEVICE_INTEGER_DOT_PRODUCT_ACCELERATION_PROPERTIES_4x8BIT_PACKED_KHR = 0x1075;
 
-    public static final int
-        CL_DEVICE_INTEGER_DOT_PRODUCT_INPUT_4x8BIT_PACKED_KHR = (1 << 0),
-        CL_DEVICE_INTEGER_DOT_PRODUCT_INPUT_4x8BIT_KHR        = (1 << 1);
+    public static final long
+        CL_DEVICE_INTEGER_DOT_PRODUCT_INPUT_4x8BIT_PACKED_KHR = (1L << 0),
+        CL_DEVICE_INTEGER_DOT_PRODUCT_INPUT_4x8BIT_KHR        = (1L << 1);
 
     private KHRIntegerDotProduct() {}
 

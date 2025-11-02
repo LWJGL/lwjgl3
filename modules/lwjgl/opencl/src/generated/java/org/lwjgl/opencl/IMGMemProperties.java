@@ -7,9 +7,9 @@ package org.lwjgl.opencl;
 
 public final class IMGMemProperties {
 
-    public static final int CL_MEM_ALLOC_FLAGS_IMG = 0x40D7;
+    public static final long CL_MEM_ALLOC_FLAGS_IMG = 0x40D7L;
 
-    public static final int CL_MEM_ALLOC_RELAX_REQUIREMENTS_IMG = 1 << 0;
+    public static final long CL_MEM_ALLOC_RELAX_REQUIREMENTS_IMG = 1L << 0;
 
     private IMGMemProperties() {}
 

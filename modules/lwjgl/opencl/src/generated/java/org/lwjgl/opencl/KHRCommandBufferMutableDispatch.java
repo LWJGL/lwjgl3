@@ -20,20 +20,20 @@ import static org.lwjgl.system.Pointer.*;
 
 public class KHRCommandBufferMutableDispatch {
 
-    public static final int CL_COMMAND_BUFFER_MUTABLE_KHR = 1 << 1;
+    public static final long CL_COMMAND_BUFFER_MUTABLE_KHR = 1L << 1;
 
     public static final int CL_INVALID_MUTABLE_COMMAND_KHR = -1141;
 
     public static final int CL_DEVICE_MUTABLE_DISPATCH_CAPABILITIES_KHR = 0x12B0;
 
-    public static final int CL_MUTABLE_DISPATCH_UPDATABLE_FIELDS_KHR = 0x12B1;
+    public static final long CL_MUTABLE_DISPATCH_UPDATABLE_FIELDS_KHR = 0x12B1L;
 
-    public static final int
-        CL_MUTABLE_DISPATCH_GLOBAL_OFFSET_KHR = 1 << 0,
-        CL_MUTABLE_DISPATCH_GLOBAL_SIZE_KHR   = 1 << 1,
-        CL_MUTABLE_DISPATCH_LOCAL_SIZE_KHR    = 1 << 2,
-        CL_MUTABLE_DISPATCH_ARGUMENTS_KHR     = 1 << 3,
-        CL_MUTABLE_DISPATCH_EXEC_INFO_KHR     = 1 << 4;
+    public static final long
+        CL_MUTABLE_DISPATCH_GLOBAL_OFFSET_KHR = 1L << 0,
+        CL_MUTABLE_DISPATCH_GLOBAL_SIZE_KHR   = 1L << 1,
+        CL_MUTABLE_DISPATCH_LOCAL_SIZE_KHR    = 1L << 2,
+        CL_MUTABLE_DISPATCH_ARGUMENTS_KHR     = 1L << 3,
+        CL_MUTABLE_DISPATCH_EXEC_INFO_KHR     = 1L << 4;
 
     public static final int
         CL_MUTABLE_COMMAND_COMMAND_QUEUE_KHR       = 0x12A0,
@@ -48,11 +48,11 @@ public class KHRCommandBufferMutableDispatch {
 
     public static final int CL_STRUCTURE_TYPE_MUTABLE_DISPATCH_CONFIG_KHR = 0x0;
 
-    public static final int CL_COMMAND_BUFFER_MUTABLE_DISPATCH_ASSERTS_KHR = 0x12B7;
+    public static final long CL_COMMAND_BUFFER_MUTABLE_DISPATCH_ASSERTS_KHR = 0x12B7L;
 
     public static final int CL_MUTABLE_DISPATCH_ASSERTS_KHR = 0x12B8;
 
-    public static final int CL_MUTABLE_DISPATCH_ASSERT_NO_ADDITIONAL_WORK_GROUPS_KHR = 1 << 0;
+    public static final long CL_MUTABLE_DISPATCH_ASSERT_NO_ADDITIONAL_WORK_GROUPS_KHR = 1L << 0;
 
     protected KHRCommandBufferMutableDispatch() {
         throw new UnsupportedOperationException();

@@ -14,10 +14,10 @@ val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", 
         "DEVICE_COMMAND_BUFFER_REQUIRED_QUEUE_PROPERTIES_KHR"..0x12AA
     )
 
-    IntConstant(
-        "COMMAND_BUFFER_CAPABILITY_KERNEL_PRINTF_KHR".."0x1 << 0",
-        "COMMAND_BUFFER_CAPABILITY_DEVICE_SIDE_ENQUEUE_KHR".."0x1 << 1",
-        "COMMAND_BUFFER_CAPABILITY_SIMULTANEOUS_USE_KHR".."0x1 << 2"
+    LongConstant(
+        "COMMAND_BUFFER_CAPABILITY_KERNEL_PRINTF_KHR".."1L << 0",
+        "COMMAND_BUFFER_CAPABILITY_DEVICE_SIDE_ENQUEUE_KHR".."1L << 1",
+        "COMMAND_BUFFER_CAPABILITY_SIMULTANEOUS_USE_KHR".."1L << 2"
     )
 
     IntConstant(
@@ -32,12 +32,12 @@ val khr_command_buffer = "KHRCommandBuffer".nativeClassCL("khr_command_buffer", 
         "INCOMPATIBLE_COMMAND_QUEUE_KHR".."-1140"
     )
 
-    IntConstant(
-        "COMMAND_BUFFER_FLAGS_KHR"..0x1293
+    LongConstant(
+        "COMMAND_BUFFER_FLAGS_KHR"..0x1293L
     )
 
-    IntConstant(
-        "COMMAND_BUFFER_SIMULTANEOUS_USE_KHR".."0x1 << 0"
+    LongConstant(
+        "COMMAND_BUFFER_SIMULTANEOUS_USE_KHR".."1L << 0"
     )
 
     IntConstant(
