@@ -36,7 +36,7 @@ val SDL_audio = "SDLAudio".nativeClassSDL("SDL_audio") {
         "AUDIO_F32BE".enum("0x9120"),
         "AUDIO_S16".enum("ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN ? SDL_AUDIO_S16LE : SDL_AUDIO_S16BE"),
         "AUDIO_S32".enum("ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN ? SDL_AUDIO_S32LE : SDL_AUDIO_S32BE"),
-        "AUDIO_F32".enum("ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN ? SDL_AUDIO_S32LE : SDL_AUDIO_S32BE")
+        "AUDIO_F32".enum("ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN ? SDL_AUDIO_F32LE : SDL_AUDIO_F32BE")
     )
 
     macro(expression = "x & SDL_AUDIO_MASK_BITSIZE")..uint32_t("AUDIO_BITSIZE", SDL_AudioFormat("x"))
