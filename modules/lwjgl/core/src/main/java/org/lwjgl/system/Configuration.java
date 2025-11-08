@@ -700,6 +700,22 @@ public class Configuration<T> {
     /** Similar to {@link #LIBRARY_NAME} for the Shaderc libshaderc library (<b>org.lwjgl.shaderc.libname</b>). */
     public static final Configuration<String> SHADERC_LIBRARY_NAME = new Configuration<>("org.lwjgl.shaderc.libname", StateInit.STRING);
 
+    /**
+     * Similar to {@link #LIBRARY_NAME} for the Shaderc glslang library (<b>org.lwjgl.shaderc.glslang.libname</b>).
+     *
+     * <p>The Shaderc shared library provided by LWJGL is built with the glslang API exposed. This option can be set to use the glslang bindings with a
+     * third-party shared library.</p>
+     */
+    public static final Configuration<String> GLSLANG_LIBRARY_NAME = new Configuration<>("org.lwjgl.shaderc.glslang.libname", StateInit.STRING);
+
+    /**
+     * Similar to {@link #LIBRARY_NAME} for the Shaderc SPIRV Tools library (<b>org.lwjgl.shaderc.spirv_tools.libname</b>).
+     *
+     * <p>The Shaderc shared library provided by LWJGL is built with the SPIRV Tools API exposed. This option can be set to use the SPIRV Tools bindings with a
+     * third-party shared library.</p>
+     */
+    public static final Configuration<String> SPIRV_TOOLS_LIBRARY_NAME = new Configuration<>("org.lwjgl.shaderc.spirv_tools.libname", StateInit.STRING);
+
     // -- SPVC
 
     /** Similar to {@link #LIBRARY_NAME} for the SPIRV-Cross library (<b>org.lwjgl.spvc.libname</b>). */

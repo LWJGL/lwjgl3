@@ -7,11 +7,6 @@ package shaderc.templates
 import shaderc.*
 import org.lwjgl.generator.*
 
-val SHADERC_BINDING = simpleBinding(
-    Module.SHADERC,
-    libraryExpression = """Configuration.SHADERC_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("shaderc"))""",
-    bundledWithLWJGL = true
-)
 val Shaderc = "Shaderc".nativeClass(Module.SHADERC, prefix = "shaderc_", prefixMethod = "shaderc_", binding = SHADERC_BINDING) {
     EnumConstant(
         "target_env_vulkan".enum("0"),
