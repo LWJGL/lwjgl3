@@ -175,8 +175,8 @@ import static org.lwjgl.system.MemoryUtil.*;
         println("import static org.lwjgl.system.APIUtil.*;")
         if (signature.isNotEmpty()) {
             println("import static org.lwjgl.system.MemoryUtil.*;")
-            println("import static org.lwjgl.system.libffi.LibFFI.*;")
         }
+        println("import static org.lwjgl.system.libffi.LibFFI.*;")
         println()
 
         generateDocumentation()
@@ -186,8 +186,8 @@ ${access.modifier}interface ${className}I extends CallbackI {
 
     FFICIF CIF = apiCreateCIF(${if (callingConvention === CallingConvention.STDCALL) """
         apiStdcall(),""" else ""}
-        ${returns.libffi},
-        ${signature.joinToString(", ") { it.nativeType.libffi }}
+        ${returns.libffi}${if (signature.isEmpty()) "" else """,
+        ${signature.joinToString(", ") { it.nativeType.libffi }}"""}
     );
 
     @Override
