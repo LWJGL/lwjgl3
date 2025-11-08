@@ -314,17 +314,6 @@ public class RMTSettings extends Struct<RMTSettings> implements NativeResource {
         return address == NULL ? null : new RMTSettings(address, null);
     }
 
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static RMTSettings mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static RMTSettings callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static RMTSettings mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static RMTSettings callocStack(MemoryStack stack) { return calloc(stack); }
-
     /**
      * Returns a new {@code RMTSettings} instance allocated on the specified {@link MemoryStack}.
      *

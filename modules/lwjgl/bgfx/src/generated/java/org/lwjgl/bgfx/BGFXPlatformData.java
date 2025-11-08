@@ -178,17 +178,6 @@ public class BGFXPlatformData extends Struct<BGFXPlatformData> implements Native
         return address == NULL ? null : new BGFXPlatformData(address, null);
     }
 
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static BGFXPlatformData mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static BGFXPlatformData callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static BGFXPlatformData mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static BGFXPlatformData callocStack(MemoryStack stack) { return calloc(stack); }
-
     /**
      * Returns a new {@code BGFXPlatformData} instance allocated on the specified {@link MemoryStack}.
      *

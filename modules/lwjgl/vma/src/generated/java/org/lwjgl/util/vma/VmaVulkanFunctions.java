@@ -411,17 +411,6 @@ public class VmaVulkanFunctions extends Struct<VmaVulkanFunctions> implements Na
         return address == NULL ? null : new VmaVulkanFunctions(address, null);
     }
 
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VmaVulkanFunctions mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VmaVulkanFunctions callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VmaVulkanFunctions mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VmaVulkanFunctions callocStack(MemoryStack stack) { return calloc(stack); }
-
     /**
      * Returns a new {@code VmaVulkanFunctions} instance allocated on the specified {@link MemoryStack}.
      *

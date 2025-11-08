@@ -115,17 +115,6 @@ public class BGFXCallbackInterface extends Struct<BGFXCallbackInterface> impleme
         return address == NULL ? null : new BGFXCallbackInterface(address, null);
     }
 
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static BGFXCallbackInterface mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static BGFXCallbackInterface callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static BGFXCallbackInterface mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static BGFXCallbackInterface callocStack(MemoryStack stack) { return calloc(stack); }
-
     /**
      * Returns a new {@code BGFXCallbackInterface} instance allocated on the specified {@link MemoryStack}.
      *

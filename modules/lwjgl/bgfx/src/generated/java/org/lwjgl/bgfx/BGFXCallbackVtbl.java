@@ -245,17 +245,6 @@ public class BGFXCallbackVtbl extends Struct<BGFXCallbackVtbl> implements Native
         return address == NULL ? null : new BGFXCallbackVtbl(address, null);
     }
 
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static BGFXCallbackVtbl mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static BGFXCallbackVtbl callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static BGFXCallbackVtbl mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static BGFXCallbackVtbl callocStack(MemoryStack stack) { return calloc(stack); }
-
     /**
      * Returns a new {@code BGFXCallbackVtbl} instance allocated on the specified {@link MemoryStack}.
      *

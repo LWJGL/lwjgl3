@@ -19,7 +19,7 @@ private val KEYWORDS = JAVA_KEYWORDS + setOf(
     // NativeResource
     "free",
     // Struct
-    "create", "callocStack", "calloc", "isNull", "malloc", "mallocStack", "sizeof"
+    "create", "calloc", "isNull", "malloc", "sizeof"
 )
 
 private val BUFFER_KEYWORDS = setOf(
@@ -165,11 +165,6 @@ class Struct(
 
         private const val BUFFER_CAPACITY_PARAM = "capacity"
         private val BUFFER_CAPACITY = Parameter(int, BUFFER_CAPACITY_PARAM)
-
-        // Do not generate deprecated stack allocation methods for structs introduced after 3.2.3.
-        private val STRUCTS_323 = Files
-            .readAllLines(Paths.get("modules/generator/src/main/resources/structs3.2.3.txt"))
-            .toHashSet()
     }
 
     /* Output parameter or function result by value */
@@ -1166,31 +1161,6 @@ $indentation}"""
         }
 
         if (mallocable) {
-            if (STRUCTS_323.contains("$packageName.$className")) {
-                print("""
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static $className mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static $className callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static $className mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static $className callocStack(MemoryStack stack) { return calloc(stack); }""")
-                if (generateBuffer) {
-                    print("""
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static $className.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static $className.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static $className.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static $className.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }""")
-                }
-                println()
-            }
             print("""
     /**
      * Returns a new {@code $className} instance allocated on the specified {@link MemoryStack}.
