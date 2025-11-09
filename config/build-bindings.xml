@@ -52,6 +52,7 @@ This script is included in /config/build-definitions.xml.
             <isset property="build.arch.arm"/>
         </and>
     </condition>
+    <property name="binding.renderdoc" value="true"/>
     <property name="binding.rpmalloc" value="true"/>
     <property name="binding.sdl" value="true"/>
     <property name="binding.shaderc" value="true"/>
@@ -72,6 +73,7 @@ This script is included in /config/build-definitions.xml.
     <property name="java-only.binding.jawt" value="true"/>
     <property name="java-only.binding.odbc" value="true"/>
     <property name="java-only.binding.opencl" value="true"/>
+    <property name="java-only.binding.renderdoc" value="true"/>
 
     <!-- // ================================ // -->
 
@@ -107,6 +109,7 @@ This script is included in /config/build-definitions.xml.
                 <sequential if:true="${binding.opus}"><local name="module"/><property name="module" value="opus"/><body/></sequential>
                 <sequential if:true="${binding.par}"><local name="module"/><property name="module" value="par"/><body/></sequential>
                 <sequential if:true="${binding.remotery}"><local name="module"/><property name="module" value="remotery"/><body/></sequential>
+                <sequential if:true="${binding.renderdoc}"><local name="module"/><property name="module" value="renderdoc"/><body/></sequential>
                 <sequential if:true="${binding.rpmalloc}"><local name="module"/><property name="module" value="rpmalloc"/><body/></sequential>
                 <sequential if:true="${binding.sdl}"><local name="module"/><property name="module" value="sdl"/><body/></sequential>
                 <sequential if:true="${binding.shaderc}"><local name="module"/><property name="module" value="shaderc"/><body/></sequential>

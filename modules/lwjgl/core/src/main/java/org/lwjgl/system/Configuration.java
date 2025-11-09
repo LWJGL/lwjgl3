@@ -690,6 +690,11 @@ public class Configuration<T> {
     /** Similar to {@link #LIBRARY_NAME} for the Opus library (<b>org.lwjgl.opus.libname</b>). */
     public static final Configuration<String> OPUS_LIBRARY_NAME = new Configuration<>("org.lwjgl.opus.libname", StateInit.STRING);
 
+    // -- RENDERDOC
+
+    /** Similar to {@link #LIBRARY_NAME} for the RenderDoc library (<b>org.lwjgl.renderdoc.libname</b>). */
+    public static final Configuration<String> RENDERDOC_LIBRARY_NAME = new Configuration<>("org.lwjgl.renderdoc.libname", StateInit.STRING);
+
     // -- SDL
 
     /** Similar to {@link #LIBRARY_NAME} for the SDL library (<b>org.lwjgl.sdl.libname</b>). */

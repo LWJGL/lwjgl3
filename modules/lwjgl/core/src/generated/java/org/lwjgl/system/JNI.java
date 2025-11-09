@@ -87,6 +87,7 @@ public final class JNI {
     public static native int invokeI(long __functionAddress);
     public static native int invokeI(int param0, long __functionAddress);
     public static native int invokeI(boolean param0, long __functionAddress);
+    public static native int invokeI(int param0, float param1, long __functionAddress);
     public static native int invokeI(int param0, int param1, long __functionAddress);
     public static native int invokeI(int param0, boolean param1, long __functionAddress);
     public static native int invokeI(int param0, int param1, int param2, long __functionAddress);
@@ -143,6 +144,7 @@ public final class JNI {
     public static native int invokePNPI(long param0, long param1, int param2, long param3, long __functionAddress);
     public static native int invokePNPI(long param0, long param1, long param2, int param3, long __functionAddress);
     public static native int invokePPNI(long param0, int param1, long param2, long param3, long __functionAddress);
+    public static native int invokePPPI(int param0, long param1, long param2, long param3, long __functionAddress);
     public static native int invokePPPI(long param0, int param1, long param2, long param3, long __functionAddress);
     public static native int invokePPPI(long param0, long param1, int param2, long param3, long __functionAddress);
     public static native int invokePPPI(long param0, long param1, long param2, int param3, long __functionAddress);

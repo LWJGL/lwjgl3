@@ -226,6 +226,10 @@ enum class Artifacts(
         Platforms.MACOS, Platforms.MACOS_ARM64,
         Platforms.WINDOWS, Platforms.WINDOWS_X86
     ),
+    RENDERDOC(
+        "lwjgl-renderdoc", "LWJGL - RenderDoc bindings",
+        "An API to control the RenderDoc debugger."
+    ),
     RPMALLOC(
         "lwjgl-rpmalloc", "LWJGL - rpmalloc bindings",
         "A public domain cross platform lock free thread caching 16-byte aligned memory allocator implemented in C.",

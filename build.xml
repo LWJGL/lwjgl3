@@ -516,6 +516,7 @@
             <compileBinding binding="opus"/>
             <compileBinding binding="par"/>
             <compileBinding binding="remotery"/>
+            <compileBinding binding="renderdoc"/>
             <compileBinding binding="rpmalloc"/>
             <compileBinding binding="shaderc"/>
             <compileBinding binding="spng"/>
@@ -861,6 +862,7 @@
             <include name="org/lwjgl/demo/util/nfd/**" if:set="test.nfd"/>
             <include name="org/lwjgl/demo/util/par/**" if:set="test.par"/>
             <include name="org/lwjgl/demo/util/remotery/**" if:true="${binding.remotery}"/>
+            <include name="org/lwjgl/demo/util/renderdoc/**" if:true="${binding.renderdoc}"/>
             <include name="org/lwjgl/demo/util/spng/**" if:true="${binding.spng}"/>
             <include name="org/lwjgl/demo/util/tinyexr/**" if:set="test.tinyexr"/>
             <include name="org/lwjgl/demo/util/tinyfd/**" if:set="test.tinyfd"/>
@@ -1846,6 +1848,9 @@
                 <get-release platform="windows" arch="x86" file="lwjgl_remotery.dll"/>
             </natives>
         </release-module>
+
+        <!-- RenderDoc -->
+        <release-module name="renderdoc" title="RenderDoc" if:true="${binding.renderdoc}"/>
 
         <!-- rpmalloc -->
         <release-module name="rpmalloc" native-library="lwjgl_rpmalloc" title="rpmalloc" if:true="${binding.rpmalloc}"/>
