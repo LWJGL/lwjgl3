@@ -139,6 +139,7 @@ public class BGFX {
             set_view_frame_buffer                                = apiGetFunctionAddress(BGFX, "bgfx_set_view_frame_buffer"),
             set_view_transform                                   = apiGetFunctionAddress(BGFX, "bgfx_set_view_transform"),
             set_view_order                                       = apiGetFunctionAddress(BGFX, "bgfx_set_view_order"),
+            set_view_shading_rate                                = apiGetFunctionAddress(BGFX, "bgfx_set_view_shading_rate"),
             reset_view                                           = apiGetFunctionAddress(BGFX, "bgfx_reset_view"),
             encoder_begin                                        = apiGetFunctionAddress(BGFX, "bgfx_encoder_begin"),
             encoder_end                                          = apiGetFunctionAddress(BGFX, "bgfx_encoder_end"),
@@ -231,7 +232,7 @@ public class BGFX {
         return BGFX;
     }
 
-    public static final int BGFX_API_VERSION = 129;
+    public static final int BGFX_API_VERSION = 133;
 
     public static final short BGFX_INVALID_HANDLE = (short)0xFFFF;
 
@@ -576,10 +577,11 @@ public class BGFX {
         BGFX_CAPS_TEXTURE_2D_ARRAY         = 0x1000000L,
         BGFX_CAPS_TEXTURE_3D               = 0x2000000L,
         BGFX_CAPS_TRANSPARENT_BACKBUFFER   = 0x4000000L,
-        BGFX_CAPS_VERTEX_ATTRIB_HALF       = 0x8000000L,
-        BGFX_CAPS_VERTEX_ATTRIB_UINT10     = 0x10000000L,
-        BGFX_CAPS_VERTEX_ID                = 0x20000000L,
-        BGFX_CAPS_VIEWPORT_LAYER_ARRAY     = 0x40000000L,
+        BGFX_CAPS_VARIABLE_RATE_SHADING    = 0x8000000L,
+        BGFX_CAPS_VERTEX_ATTRIB_HALF       = 0x10000000L,
+        BGFX_CAPS_VERTEX_ATTRIB_UINT10     = 0x20000000L,
+        BGFX_CAPS_VERTEX_ID                = 0x40000000L,
+        BGFX_CAPS_VIEWPORT_LAYER_ARRAY     = 0x80000000L,
         BGFX_CAPS_TEXTURE_COMPARE_ALL      = BGFX_CAPS_TEXTURE_COMPARE_RESERVED | BGFX_CAPS_TEXTURE_COMPARE_LEQUAL;
 
     public static final int
@@ -838,6 +840,16 @@ public class BGFX {
         BGFX_VIEW_MODE_DEPTH_ASCENDING  = 2,
         BGFX_VIEW_MODE_DEPTH_DESCENDING = 3,
         BGFX_VIEW_MODE_COUNT            = 4;
+
+    public static final int
+        BGFX_SHADING_RATE_RATE_1X_1 = 0,
+        BGFX_SHADING_RATE_RATE_1X_2 = 1,
+        BGFX_SHADING_RATE_RATE_2X_1 = 2,
+        BGFX_SHADING_RATE_RATE_2X_2 = 3,
+        BGFX_SHADING_RATE_RATE_2X_4 = 4,
+        BGFX_SHADING_RATE_RATE_4X_2 = 5,
+        BGFX_SHADING_RATE_RATE_4X_4 = 6,
+        BGFX_SHADING_RATE_COUNT     = 7;
 
     public static final int
         BGFX_NATIVE_WINDOW_HANDLE_TYPE_DEFAULT = 0,
@@ -2613,6 +2625,19 @@ public class BGFX {
             checkSafe(_order, _num);
         }
         nbgfx_set_view_order((short)_id, (short)_num, memAddressSafe(_order));
+    }
+
+    // --- [ bgfx_set_view_shading_rate ] ---
+
+    /** {@code void bgfx_set_view_shading_rate(bgfx_view_id_t _id, bgfx_shading_rate_t _shadingRate)} */
+    public static void nbgfx_set_view_shading_rate(short _id, int _shadingRate) {
+        long __functionAddress = Functions.set_view_shading_rate;
+        invokeCV(_id, _shadingRate, __functionAddress);
+    }
+
+    /** {@code void bgfx_set_view_shading_rate(bgfx_view_id_t _id, bgfx_shading_rate_t _shadingRate)} */
+    public static void bgfx_set_view_shading_rate(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_shading_rate_t") int _shadingRate) {
+        nbgfx_set_view_shading_rate((short)_id, _shadingRate);
     }
 
     // --- [ bgfx_reset_view ] ---

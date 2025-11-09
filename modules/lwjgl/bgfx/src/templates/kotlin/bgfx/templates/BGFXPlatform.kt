@@ -38,7 +38,8 @@ val BGFXPlatform = "BGFXPlatform".nativeClass(Module.BGFX, prefix = "BGFX", pref
         "override_internal_texture_ptr",
 
         bgfx_texture_handle_t("_handle"),
-        uintptr_t("_ptr")
+        uintptr_t("_ptr"),
+        uint16_t("_layerIndex")
     )
 
     uintptr_t(

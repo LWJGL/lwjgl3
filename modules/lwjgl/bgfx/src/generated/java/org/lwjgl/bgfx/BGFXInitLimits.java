@@ -20,8 +20,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct bgfx_init_limits_t {
  *     uint16_t maxEncoders;
  *     uint32_t minResourceCbSize;
- *     uint32_t transientVbSize;
- *     uint32_t transientIbSize;
+ *     uint32_t maxTransientVbSize;
+ *     uint32_t maxTransientIbSize;
+ *     uint32_t minUniformBufferSize;
  * }}</pre>
  */
 @NativeType("struct bgfx_init_limits_t")
@@ -37,12 +38,14 @@ public class BGFXInitLimits extends Struct<BGFXInitLimits> implements NativeReso
     public static final int
         MAXENCODERS,
         MINRESOURCECBSIZE,
-        TRANSIENTVBSIZE,
-        TRANSIENTIBSIZE;
+        MAXTRANSIENTVBSIZE,
+        MAXTRANSIENTIBSIZE,
+        MINUNIFORMBUFFERSIZE;
 
     static {
         Layout layout = __struct(
             __member(2),
+            __member(4),
             __member(4),
             __member(4),
             __member(4)
@@ -53,8 +56,9 @@ public class BGFXInitLimits extends Struct<BGFXInitLimits> implements NativeReso
 
         MAXENCODERS = layout.offsetof(0);
         MINRESOURCECBSIZE = layout.offsetof(1);
-        TRANSIENTVBSIZE = layout.offsetof(2);
-        TRANSIENTIBSIZE = layout.offsetof(3);
+        MAXTRANSIENTVBSIZE = layout.offsetof(2);
+        MAXTRANSIENTIBSIZE = layout.offsetof(3);
+        MINUNIFORMBUFFERSIZE = layout.offsetof(4);
     }
 
     protected BGFXInitLimits(long address, @Nullable ByteBuffer container) {
@@ -85,33 +89,40 @@ public class BGFXInitLimits extends Struct<BGFXInitLimits> implements NativeReso
     /** @return the value of the {@code minResourceCbSize} field. */
     @NativeType("uint32_t")
     public int minResourceCbSize() { return nminResourceCbSize(address()); }
-    /** @return the value of the {@code transientVbSize} field. */
+    /** @return the value of the {@code maxTransientVbSize} field. */
     @NativeType("uint32_t")
-    public int transientVbSize() { return ntransientVbSize(address()); }
-    /** @return the value of the {@code transientIbSize} field. */
+    public int maxTransientVbSize() { return nmaxTransientVbSize(address()); }
+    /** @return the value of the {@code maxTransientIbSize} field. */
     @NativeType("uint32_t")
-    public int transientIbSize() { return ntransientIbSize(address()); }
+    public int maxTransientIbSize() { return nmaxTransientIbSize(address()); }
+    /** @return the value of the {@code minUniformBufferSize} field. */
+    @NativeType("uint32_t")
+    public int minUniformBufferSize() { return nminUniformBufferSize(address()); }
 
     /** Sets the specified value to the {@code maxEncoders} field. */
     public BGFXInitLimits maxEncoders(@NativeType("uint16_t") short value) { nmaxEncoders(address(), value); return this; }
     /** Sets the specified value to the {@code minResourceCbSize} field. */
     public BGFXInitLimits minResourceCbSize(@NativeType("uint32_t") int value) { nminResourceCbSize(address(), value); return this; }
-    /** Sets the specified value to the {@code transientVbSize} field. */
-    public BGFXInitLimits transientVbSize(@NativeType("uint32_t") int value) { ntransientVbSize(address(), value); return this; }
-    /** Sets the specified value to the {@code transientIbSize} field. */
-    public BGFXInitLimits transientIbSize(@NativeType("uint32_t") int value) { ntransientIbSize(address(), value); return this; }
+    /** Sets the specified value to the {@code maxTransientVbSize} field. */
+    public BGFXInitLimits maxTransientVbSize(@NativeType("uint32_t") int value) { nmaxTransientVbSize(address(), value); return this; }
+    /** Sets the specified value to the {@code maxTransientIbSize} field. */
+    public BGFXInitLimits maxTransientIbSize(@NativeType("uint32_t") int value) { nmaxTransientIbSize(address(), value); return this; }
+    /** Sets the specified value to the {@code minUniformBufferSize} field. */
+    public BGFXInitLimits minUniformBufferSize(@NativeType("uint32_t") int value) { nminUniformBufferSize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public BGFXInitLimits set(
         short maxEncoders,
         int minResourceCbSize,
-        int transientVbSize,
-        int transientIbSize
+        int maxTransientVbSize,
+        int maxTransientIbSize,
+        int minUniformBufferSize
     ) {
         maxEncoders(maxEncoders);
         minResourceCbSize(minResourceCbSize);
-        transientVbSize(transientVbSize);
-        transientIbSize(transientIbSize);
+        maxTransientVbSize(maxTransientVbSize);
+        maxTransientIbSize(maxTransientIbSize);
+        minUniformBufferSize(minUniformBufferSize);
 
         return this;
     }
@@ -180,18 +191,22 @@ public class BGFXInitLimits extends Struct<BGFXInitLimits> implements NativeReso
     public static short nmaxEncoders(long struct) { return memGetShort(struct + BGFXInitLimits.MAXENCODERS); }
     /** Unsafe version of {@link #minResourceCbSize}. */
     public static int nminResourceCbSize(long struct) { return memGetInt(struct + BGFXInitLimits.MINRESOURCECBSIZE); }
-    /** Unsafe version of {@link #transientVbSize}. */
-    public static int ntransientVbSize(long struct) { return memGetInt(struct + BGFXInitLimits.TRANSIENTVBSIZE); }
-    /** Unsafe version of {@link #transientIbSize}. */
-    public static int ntransientIbSize(long struct) { return memGetInt(struct + BGFXInitLimits.TRANSIENTIBSIZE); }
+    /** Unsafe version of {@link #maxTransientVbSize}. */
+    public static int nmaxTransientVbSize(long struct) { return memGetInt(struct + BGFXInitLimits.MAXTRANSIENTVBSIZE); }
+    /** Unsafe version of {@link #maxTransientIbSize}. */
+    public static int nmaxTransientIbSize(long struct) { return memGetInt(struct + BGFXInitLimits.MAXTRANSIENTIBSIZE); }
+    /** Unsafe version of {@link #minUniformBufferSize}. */
+    public static int nminUniformBufferSize(long struct) { return memGetInt(struct + BGFXInitLimits.MINUNIFORMBUFFERSIZE); }
 
     /** Unsafe version of {@link #maxEncoders(short) maxEncoders}. */
     public static void nmaxEncoders(long struct, short value) { memPutShort(struct + BGFXInitLimits.MAXENCODERS, value); }
     /** Unsafe version of {@link #minResourceCbSize(int) minResourceCbSize}. */
     public static void nminResourceCbSize(long struct, int value) { memPutInt(struct + BGFXInitLimits.MINRESOURCECBSIZE, value); }
-    /** Unsafe version of {@link #transientVbSize(int) transientVbSize}. */
-    public static void ntransientVbSize(long struct, int value) { memPutInt(struct + BGFXInitLimits.TRANSIENTVBSIZE, value); }
-    /** Unsafe version of {@link #transientIbSize(int) transientIbSize}. */
-    public static void ntransientIbSize(long struct, int value) { memPutInt(struct + BGFXInitLimits.TRANSIENTIBSIZE, value); }
+    /** Unsafe version of {@link #maxTransientVbSize(int) maxTransientVbSize}. */
+    public static void nmaxTransientVbSize(long struct, int value) { memPutInt(struct + BGFXInitLimits.MAXTRANSIENTVBSIZE, value); }
+    /** Unsafe version of {@link #maxTransientIbSize(int) maxTransientIbSize}. */
+    public static void nmaxTransientIbSize(long struct, int value) { memPutInt(struct + BGFXInitLimits.MAXTRANSIENTIBSIZE, value); }
+    /** Unsafe version of {@link #minUniformBufferSize(int) minUniformBufferSize}. */
+    public static void nminUniformBufferSize(long struct, int value) { memPutInt(struct + BGFXInitLimits.MINUNIFORMBUFFERSIZE, value); }
 
 }

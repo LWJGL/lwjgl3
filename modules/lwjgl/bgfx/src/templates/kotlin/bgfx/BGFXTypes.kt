@@ -20,6 +20,7 @@ val bgfx_backbuffer_ratio_t = "bgfx_backbuffer_ratio_t".enumType
 val bgfx_native_window_handle_type_t = "bgfx_native_window_handle_type_t".enumType
 val bgfx_occlusion_query_result_t = "bgfx_occlusion_query_result_t".enumType
 val bgfx_renderer_type_t = "bgfx_renderer_type_t".enumType
+val bgfx_shading_rate_t = "bgfx_shading_rate_t".enumType
 val bgfx_texture_format_t = "bgfx_texture_format_t".enumType
 val bgfx_topology_convert_t = "bgfx_topology_convert_t".enumType
 val bgfx_topology_sort_t = "bgfx_topology_sort_t".enumType
@@ -229,8 +230,9 @@ val bgfx_caps_limits_t = struct(Module.BGFX, "BGFXCapsLimits", nativeName = "bgf
     uint32_t("maxOcclusionQueries")
     uint32_t("maxEncoders")
     uint32_t("minResourceCbSize")
-    uint32_t("transientVbSize")
-    uint32_t("transientIbSize")
+    uint32_t("maxTransientVbSize")
+    uint32_t("maxTansientIbSize")
+    uint32_t("minUniformBufferSize")
 }
 
 val bgfx_caps_t = struct(Module.BGFX, "BGFXCaps", nativeName = "bgfx_caps_t", mutable = false, skipBuffer = true) {
@@ -408,7 +410,8 @@ val bgfx_allocator_interface_t = struct(Module.BGFX, "BGFXAllocatorInterface", n
 }
 
 val bgfx_resolution_t = struct(Module.BGFX, "BGFXResolution", nativeName = "bgfx_resolution_t", skipBuffer = true) {
-    bgfx_texture_format_t("format")
+    bgfx_texture_format_t("formatColor")
+    bgfx_texture_format_t("formatDepthStencil")
     uint32_t("width")
     uint32_t("height")
     uint32_t("reset")
@@ -420,8 +423,9 @@ val bgfx_resolution_t = struct(Module.BGFX, "BGFXResolution", nativeName = "bgfx
 val bgfx_init_limits_t = struct(Module.BGFX, "BGFXInitLimits", nativeName = "bgfx_init_limits_t", skipBuffer = true)  {
     uint16_t("maxEncoders")
     uint32_t("minResourceCbSize")
-    uint32_t("transientVbSize")
-    uint32_t("transientIbSize")
+    uint32_t("maxTransientVbSize")
+    uint32_t("maxTransientIbSize")
+    uint32_t("minUniformBufferSize")
 }
 
 val bgfx_platform_data_t = struct(Module.BGFX, "BGFXPlatformData", nativeName = "bgfx_platform_data_t", skipBuffer = true) {

@@ -9,7 +9,7 @@ import org.lwjgl.generator.*
 
 val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx_", binding = BGFX_BINDING) {
     IntConstant(
-        "API_VERSION".."129"
+        "API_VERSION".."133"
     )
 
     ShortConstant(
@@ -421,10 +421,11 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "CAPS_TEXTURE_2D_ARRAY"..0x0000000001000000L,
         "CAPS_TEXTURE_3D"..0x0000000002000000L,
         "CAPS_TRANSPARENT_BACKBUFFER"..0x0000000004000000L,
-        "CAPS_VERTEX_ATTRIB_HALF"..0x0000000008000000L,
-        "CAPS_VERTEX_ATTRIB_UINT10"..0x0000000010000000L,
-        "CAPS_VERTEX_ID"..0x0000000020000000L,
-        "CAPS_VIEWPORT_LAYER_ARRAY"..0x0000000040000000L,
+        "CAPS_VARIABLE_RATE_SHADING"..0x0000000008000000,
+        "CAPS_VERTEX_ATTRIB_HALF"..0x0000000010000000,
+        "CAPS_VERTEX_ATTRIB_UINT10"..0x0000000020000000,
+        "CAPS_VERTEX_ID"..0x0000000040000000,
+        "CAPS_VIEWPORT_LAYER_ARRAY"..0x0000000080000000,
         "CAPS_TEXTURE_COMPARE_ALL".."BGFX_CAPS_TEXTURE_COMPARE_RESERVED | BGFX_CAPS_TEXTURE_COMPARE_LEQUAL"
     )
 
@@ -718,6 +719,18 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "VIEW_MODE_DEPTH_DESCENDING".enum,
 
         "VIEW_MODE_COUNT".enum
+    )
+
+    EnumConstant(
+        "SHADING_RATE_RATE_1X_1".enum("0"),
+        "SHADING_RATE_RATE_1X_2".enum,
+        "SHADING_RATE_RATE_2X_1".enum,
+        "SHADING_RATE_RATE_2X_2".enum,
+        "SHADING_RATE_RATE_2X_4".enum,
+        "SHADING_RATE_RATE_4X_2".enum,
+        "SHADING_RATE_RATE_4X_4".enum,
+
+        "SHADING_RATE_COUNT".enum
     )
 
     EnumConstant(
@@ -1633,6 +1646,13 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         MapToInt..bgfx_view_id_t("_id"),
         MapToInt..uint16_t("_num"),
         Check("_num")..nullable..bgfx_view_id_t.const.p("_order")
+    )
+
+    void(
+        "set_view_shading_rate",
+
+        MapToInt..bgfx_view_id_t("_id"),
+        bgfx_shading_rate_t("_shadingRate")
     )
 
     void(
