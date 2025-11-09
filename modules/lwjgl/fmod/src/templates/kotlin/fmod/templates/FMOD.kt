@@ -14,8 +14,8 @@ val FMOD = "FMOD".nativeClass(
     binding = simpleBinding(Module.FMOD, libraryName = "FMOD", libraryExpression = "Configuration.FMOD_LIBRARY_NAME, \"fmod\"")
 ) {
 
-    IntConstant("VERSION"..0x00020309)
-    IntConstant("BUILDNUMBER".."155273")
+    IntConstant("VERSION"..0x00020310)
+    IntConstant("BUILDNUMBER".."157581")
 
     IntConstant(
         "DEBUG_LEVEL_NONE"..0x00000000,
@@ -3675,6 +3675,14 @@ val FMOD = "FMOD".nativeClass(
         FMOD_DSP.p("input"),
         nullable..Check(1)..FMOD_DSPCONNECTION.p.p("connection"),
         FMOD_DSPCONNECTION_TYPE("type")
+    )
+
+    IgnoreMissing..FMOD_RESULT(
+        "DSP_AddInputPreallocated",
+
+        FMOD_DSP.p("dsp"),
+        FMOD_DSP.p("input"),
+        nullable..Check(1)..FMOD_DSPCONNECTION.p.p("connection")
     )
 
     FMOD_RESULT(

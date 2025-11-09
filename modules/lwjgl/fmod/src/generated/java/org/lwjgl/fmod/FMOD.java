@@ -338,6 +338,7 @@ public class FMOD {
             DSP_Release                       = apiGetFunctionAddress(FMOD, "FMOD_DSP_Release"),
             DSP_GetSystemObject               = apiGetFunctionAddress(FMOD, "FMOD_DSP_GetSystemObject"),
             DSP_AddInput                      = apiGetFunctionAddress(FMOD, "FMOD_DSP_AddInput"),
+            DSP_AddInputPreallocated          = apiGetFunctionAddressOptional(FMOD, "FMOD_DSP_AddInputPreallocated"),
             DSP_DisconnectFrom                = apiGetFunctionAddress(FMOD, "FMOD_DSP_DisconnectFrom"),
             DSP_DisconnectAll                 = apiGetFunctionAddress(FMOD, "FMOD_DSP_DisconnectAll"),
             DSP_GetNumInputs                  = apiGetFunctionAddress(FMOD, "FMOD_DSP_GetNumInputs"),
@@ -422,9 +423,9 @@ public class FMOD {
         return FMOD;
     }
 
-    public static final int FMOD_VERSION = 0x20309;
+    public static final int FMOD_VERSION = 0x20310;
 
-    public static final int FMOD_BUILDNUMBER = 155273;
+    public static final int FMOD_BUILDNUMBER = 157581;
 
     public static final int
         FMOD_DEBUG_LEVEL_NONE          = 0x0,
@@ -6877,6 +6878,28 @@ public class FMOD {
             checkSafe(connection, 1);
         }
         return nFMOD_DSP_AddInput(dsp, input, memAddressSafe(connection), type);
+    }
+
+    // --- [ FMOD_DSP_AddInputPreallocated ] ---
+
+    /** {@code FMOD_RESULT FMOD_DSP_AddInputPreallocated(FMOD_DSP * dsp, FMOD_DSP * input, FMOD_DSPCONNECTION ** connection)} */
+    public static int nFMOD_DSP_AddInputPreallocated(long dsp, long input, long connection) {
+        long __functionAddress = Functions.DSP_AddInputPreallocated;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(dsp);
+            check(input);
+        }
+        return callPPPI(dsp, input, connection, __functionAddress);
+    }
+
+    /** {@code FMOD_RESULT FMOD_DSP_AddInputPreallocated(FMOD_DSP * dsp, FMOD_DSP * input, FMOD_DSPCONNECTION ** connection)} */
+    @NativeType("FMOD_RESULT")
+    public static int FMOD_DSP_AddInputPreallocated(@NativeType("FMOD_DSP *") long dsp, @NativeType("FMOD_DSP *") long input, @NativeType("FMOD_DSPCONNECTION **") @Nullable PointerBuffer connection) {
+        if (CHECKS) {
+            checkSafe(connection, 1);
+        }
+        return nFMOD_DSP_AddInputPreallocated(dsp, input, memAddressSafe(connection));
     }
 
     // --- [ FMOD_DSP_DisconnectFrom ] ---
