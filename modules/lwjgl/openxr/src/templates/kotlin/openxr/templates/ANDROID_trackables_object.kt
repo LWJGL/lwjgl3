@@ -10,7 +10,7 @@ import openxr.*
 
 val ANDROID_trackables_object = "ANDROIDTrackablesObject".nativeClassXR("ANDROID_trackables_object", type = "instance", postfix = "ANDROID") {
     IntConstant(
-        "ANDROID_trackables_object_SPEC_VERSION".."1"
+        "ANDROID_trackables_object_SPEC_VERSION".."2"
     )
 
     StringConstant(

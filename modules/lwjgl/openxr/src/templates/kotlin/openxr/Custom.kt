@@ -54,6 +54,8 @@ fun templateCustomization() {
     generateDispatchableHandle(XrEnvironmentDepthSwapchainMETA, XrEnvironmentDepthProviderMETA)
     generateDispatchableHandle(XrEyeTrackerFB, XrSession)
     generateDispatchableHandle(XrExportedLocalizationMapML, XrSession)
+    generateDispatchableHandle(XrFaceTrackerANDROID, XrSession)
+    generateDispatchableHandle(XrFaceTrackerBD, XrSession)
     generateDispatchableHandle(XrFaceTrackerFB, XrSession)
     generateDispatchableHandle(XrFaceTracker2FB, XrSession)
     generateDispatchableHandle(XrFacialExpressionClientML, XrSession)
@@ -92,7 +94,7 @@ fun templateCustomization() {
 
     XR10.apply {
         LongConstant(
-            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 1, 52)"
+            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 1, 53)"
         )
 
         LongConstant(

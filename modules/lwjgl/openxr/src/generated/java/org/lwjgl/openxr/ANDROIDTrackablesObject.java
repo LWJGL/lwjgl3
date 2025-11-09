@@ -12,7 +12,7 @@ import static org.lwjgl.system.JNI.*;
 
 public class ANDROIDTrackablesObject {
 
-    public static final int XR_ANDROID_trackables_object_SPEC_VERSION = 1;
+    public static final int XR_ANDROID_trackables_object_SPEC_VERSION = 2;
 
     public static final String XR_ANDROID_TRACKABLES_OBJECT_EXTENSION_NAME = "XR_ANDROID_trackables_object";
 
