@@ -98,11 +98,6 @@ public class VK11 extends VK10 {
         VK_IMAGE_CREATE_PROTECTED_BIT                   = 0x800;
 
     public static final int
-        VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT = 0x8,
-        VK_PIPELINE_CREATE_DISPATCH_BASE_BIT                = 0x10,
-        VK_PIPELINE_CREATE_DISPATCH_BASE                    = 0x10;
-
-    public static final int
         VK_DEPENDENCY_VIEW_LOCAL_BIT   = 0x2,
         VK_DEPENDENCY_DEVICE_GROUP_BIT = 0x4;
 
@@ -123,10 +118,6 @@ public class VK11 extends VK10 {
         VK_FORMAT_FEATURE_DISJOINT_BIT                                                                = 0x400000,
         VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT                                                  = 0x800000;
 
-    public static final int
-        VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL = 1000117000,
-        VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL = 1000117001;
-
     public static final int VK_QUEUE_PROTECTED_BIT = 0x10;
 
     public static final int VK_DEVICE_QUEUE_CREATE_PROTECTED_BIT = 0x1;
@@ -136,10 +127,6 @@ public class VK11 extends VK10 {
     public static final int VK_BUFFER_CREATE_PROTECTED_BIT = 0x8;
 
     public static final int VK_COMMAND_POOL_CREATE_PROTECTED_BIT = 0x4;
-
-    public static final int
-        VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE = 1000085000,
-        VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION   = 1000156000;
 
     public static final int
         VK_FORMAT_G8B8G8R8_422_UNORM                         = 1000156000,
@@ -183,14 +170,17 @@ public class VK11 extends VK10 {
         VK_IMAGE_ASPECT_PLANE_2_BIT = 0x40;
 
     public static final int
-        VK_SUBGROUP_FEATURE_BASIC_BIT            = 0x1,
-        VK_SUBGROUP_FEATURE_VOTE_BIT             = 0x2,
-        VK_SUBGROUP_FEATURE_ARITHMETIC_BIT       = 0x4,
-        VK_SUBGROUP_FEATURE_BALLOT_BIT           = 0x8,
-        VK_SUBGROUP_FEATURE_SHUFFLE_BIT          = 0x10,
-        VK_SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT = 0x20,
-        VK_SUBGROUP_FEATURE_CLUSTERED_BIT        = 0x40,
-        VK_SUBGROUP_FEATURE_QUAD_BIT             = 0x80;
+        VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT = 0x8,
+        VK_PIPELINE_CREATE_DISPATCH_BASE_BIT                = 0x10,
+        VK_PIPELINE_CREATE_DISPATCH_BASE                    = 0x10;
+
+    public static final int
+        VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE = 1000085000,
+        VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION   = 1000156000;
+
+    public static final int
+        VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL = 1000117000,
+        VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL = 1000117001;
 
     public static final int
         VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT    = 0x1,
@@ -199,31 +189,6 @@ public class VK11 extends VK10 {
         VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT = 0x8;
 
     public static final int VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT = 0x1;
-
-    public static final int
-        VK_POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES       = 0,
-        VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY = 1;
-
-    public static final int
-        VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT = 0,
-        VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT = 1;
-
-    public static final int
-        VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY   = 0,
-        VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY = 1,
-        VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709      = 2,
-        VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601      = 3,
-        VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020     = 4;
-
-    public static final int
-        VK_SAMPLER_YCBCR_RANGE_ITU_FULL   = 0,
-        VK_SAMPLER_YCBCR_RANGE_ITU_NARROW = 1;
-
-    public static final int
-        VK_CHROMA_LOCATION_COSITED_EVEN = 0,
-        VK_CHROMA_LOCATION_MIDPOINT     = 1;
-
-    public static final int VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET = 0;
 
     public static final int
         VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT         = 0x1,
@@ -264,6 +229,41 @@ public class VK11 extends VK10 {
     public static final int
         VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT = 0x1,
         VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT = 0x2;
+
+    public static final int
+        VK_SUBGROUP_FEATURE_BASIC_BIT            = 0x1,
+        VK_SUBGROUP_FEATURE_VOTE_BIT             = 0x2,
+        VK_SUBGROUP_FEATURE_ARITHMETIC_BIT       = 0x4,
+        VK_SUBGROUP_FEATURE_BALLOT_BIT           = 0x8,
+        VK_SUBGROUP_FEATURE_SHUFFLE_BIT          = 0x10,
+        VK_SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT = 0x20,
+        VK_SUBGROUP_FEATURE_CLUSTERED_BIT        = 0x40,
+        VK_SUBGROUP_FEATURE_QUAD_BIT             = 0x80;
+
+    public static final int VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET = 0;
+
+    public static final int
+        VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY   = 0,
+        VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY = 1,
+        VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709      = 2,
+        VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601      = 3,
+        VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020     = 4;
+
+    public static final int
+        VK_SAMPLER_YCBCR_RANGE_ITU_FULL   = 0,
+        VK_SAMPLER_YCBCR_RANGE_ITU_NARROW = 1;
+
+    public static final int
+        VK_CHROMA_LOCATION_COSITED_EVEN = 0,
+        VK_CHROMA_LOCATION_MIDPOINT     = 1;
+
+    public static final int
+        VK_POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES       = 0,
+        VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY = 1;
+
+    public static final int
+        VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT = 0,
+        VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT = 1;
 
     public static final int VK_API_VERSION_1_1 = VK_MAKE_API_VERSION(0, 1, 1, 0);
 
@@ -358,17 +358,6 @@ public class VK11 extends VK10 {
             check(__functionAddress);
         }
         callPV(commandBuffer.address(), deviceMask, __functionAddress);
-    }
-
-    // --- [ vkCmdDispatchBase ] ---
-
-    /** {@code void vkCmdDispatchBase(VkCommandBuffer commandBuffer, uint32_t baseGroupX, uint32_t baseGroupY, uint32_t baseGroupZ, uint32_t groupCountX, uint32_t groupCountY, uint32_t groupCountZ)} */
-    public static void vkCmdDispatchBase(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int baseGroupX, @NativeType("uint32_t") int baseGroupY, @NativeType("uint32_t") int baseGroupZ, @NativeType("uint32_t") int groupCountX, @NativeType("uint32_t") int groupCountY, @NativeType("uint32_t") int groupCountZ) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdDispatchBase;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPV(commandBuffer.address(), baseGroupX, baseGroupY, baseGroupZ, groupCountX, groupCountY, groupCountZ, __functionAddress);
     }
 
     // --- [ vkEnumeratePhysicalDeviceGroups ] ---
@@ -595,40 +584,63 @@ public class VK11 extends VK10 {
         nvkGetDeviceQueue2(device, pQueueInfo.address(), memAddress(pQueue));
     }
 
-    // --- [ vkCreateSamplerYcbcrConversion ] ---
+    // --- [ vkGetPhysicalDeviceExternalBufferProperties ] ---
 
-    /** {@code VkResult vkCreateSamplerYcbcrConversion(VkDevice device, VkSamplerYcbcrConversionCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkSamplerYcbcrConversion * pYcbcrConversion)} */
-    public static int nvkCreateSamplerYcbcrConversion(VkDevice device, long pCreateInfo, long pAllocator, long pYcbcrConversion) {
-        long __functionAddress = device.getCapabilities().vkCreateSamplerYcbcrConversion;
+    /** {@code void vkGetPhysicalDeviceExternalBufferProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalBufferInfo const * pExternalBufferInfo, VkExternalBufferProperties * pExternalBufferProperties)} */
+    public static void nvkGetPhysicalDeviceExternalBufferProperties(VkPhysicalDevice physicalDevice, long pExternalBufferInfo, long pExternalBufferProperties) {
+        long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceExternalBufferProperties;
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPPI(device.address(), pCreateInfo, pAllocator, pYcbcrConversion, __functionAddress);
+        callPPPV(physicalDevice.address(), pExternalBufferInfo, pExternalBufferProperties, __functionAddress);
     }
 
-    /** {@code VkResult vkCreateSamplerYcbcrConversion(VkDevice device, VkSamplerYcbcrConversionCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkSamplerYcbcrConversion * pYcbcrConversion)} */
-    @NativeType("VkResult")
-    public static int vkCreateSamplerYcbcrConversion(VkDevice device, @NativeType("VkSamplerYcbcrConversionCreateInfo const *") VkSamplerYcbcrConversionCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkSamplerYcbcrConversion *") LongBuffer pYcbcrConversion) {
-        if (CHECKS) {
-            check(pYcbcrConversion, 1);
-        }
-        return nvkCreateSamplerYcbcrConversion(device, pCreateInfo.address(), memAddressSafe(pAllocator), memAddress(pYcbcrConversion));
+    /** {@code void vkGetPhysicalDeviceExternalBufferProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalBufferInfo const * pExternalBufferInfo, VkExternalBufferProperties * pExternalBufferProperties)} */
+    public static void vkGetPhysicalDeviceExternalBufferProperties(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceExternalBufferInfo const *") VkPhysicalDeviceExternalBufferInfo pExternalBufferInfo, @NativeType("VkExternalBufferProperties *") VkExternalBufferProperties pExternalBufferProperties) {
+        nvkGetPhysicalDeviceExternalBufferProperties(physicalDevice, pExternalBufferInfo.address(), pExternalBufferProperties.address());
     }
 
-    // --- [ vkDestroySamplerYcbcrConversion ] ---
+    // --- [ vkGetPhysicalDeviceExternalFenceProperties ] ---
 
-    /** {@code void vkDestroySamplerYcbcrConversion(VkDevice device, VkSamplerYcbcrConversion ycbcrConversion, VkAllocationCallbacks const * pAllocator)} */
-    public static void nvkDestroySamplerYcbcrConversion(VkDevice device, long ycbcrConversion, long pAllocator) {
-        long __functionAddress = device.getCapabilities().vkDestroySamplerYcbcrConversion;
+    /** {@code void vkGetPhysicalDeviceExternalFenceProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalFenceInfo const * pExternalFenceInfo, VkExternalFenceProperties * pExternalFenceProperties)} */
+    public static void nvkGetPhysicalDeviceExternalFenceProperties(VkPhysicalDevice physicalDevice, long pExternalFenceInfo, long pExternalFenceProperties) {
+        long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceExternalFenceProperties;
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPJPV(device.address(), ycbcrConversion, pAllocator, __functionAddress);
+        callPPPV(physicalDevice.address(), pExternalFenceInfo, pExternalFenceProperties, __functionAddress);
     }
 
-    /** {@code void vkDestroySamplerYcbcrConversion(VkDevice device, VkSamplerYcbcrConversion ycbcrConversion, VkAllocationCallbacks const * pAllocator)} */
-    public static void vkDestroySamplerYcbcrConversion(VkDevice device, @NativeType("VkSamplerYcbcrConversion") long ycbcrConversion, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
-        nvkDestroySamplerYcbcrConversion(device, ycbcrConversion, memAddressSafe(pAllocator));
+    /** {@code void vkGetPhysicalDeviceExternalFenceProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalFenceInfo const * pExternalFenceInfo, VkExternalFenceProperties * pExternalFenceProperties)} */
+    public static void vkGetPhysicalDeviceExternalFenceProperties(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceExternalFenceInfo const *") VkPhysicalDeviceExternalFenceInfo pExternalFenceInfo, @NativeType("VkExternalFenceProperties *") VkExternalFenceProperties pExternalFenceProperties) {
+        nvkGetPhysicalDeviceExternalFenceProperties(physicalDevice, pExternalFenceInfo.address(), pExternalFenceProperties.address());
+    }
+
+    // --- [ vkGetPhysicalDeviceExternalSemaphoreProperties ] ---
+
+    /** {@code void vkGetPhysicalDeviceExternalSemaphoreProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalSemaphoreInfo const * pExternalSemaphoreInfo, VkExternalSemaphoreProperties * pExternalSemaphoreProperties)} */
+    public static void nvkGetPhysicalDeviceExternalSemaphoreProperties(VkPhysicalDevice physicalDevice, long pExternalSemaphoreInfo, long pExternalSemaphoreProperties) {
+        long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceExternalSemaphoreProperties;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPPPV(physicalDevice.address(), pExternalSemaphoreInfo, pExternalSemaphoreProperties, __functionAddress);
+    }
+
+    /** {@code void vkGetPhysicalDeviceExternalSemaphoreProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalSemaphoreInfo const * pExternalSemaphoreInfo, VkExternalSemaphoreProperties * pExternalSemaphoreProperties)} */
+    public static void vkGetPhysicalDeviceExternalSemaphoreProperties(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceExternalSemaphoreInfo const *") VkPhysicalDeviceExternalSemaphoreInfo pExternalSemaphoreInfo, @NativeType("VkExternalSemaphoreProperties *") VkExternalSemaphoreProperties pExternalSemaphoreProperties) {
+        nvkGetPhysicalDeviceExternalSemaphoreProperties(physicalDevice, pExternalSemaphoreInfo.address(), pExternalSemaphoreProperties.address());
+    }
+
+    // --- [ vkCmdDispatchBase ] ---
+
+    /** {@code void vkCmdDispatchBase(VkCommandBuffer commandBuffer, uint32_t baseGroupX, uint32_t baseGroupY, uint32_t baseGroupZ, uint32_t groupCountX, uint32_t groupCountY, uint32_t groupCountZ)} */
+    public static void vkCmdDispatchBase(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int baseGroupX, @NativeType("uint32_t") int baseGroupY, @NativeType("uint32_t") int baseGroupZ, @NativeType("uint32_t") int groupCountX, @NativeType("uint32_t") int groupCountY, @NativeType("uint32_t") int groupCountZ) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdDispatchBase;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(commandBuffer.address(), baseGroupX, baseGroupY, baseGroupZ, groupCountX, groupCountY, groupCountZ, __functionAddress);
     }
 
     // --- [ vkCreateDescriptorUpdateTemplate ] ---
@@ -679,54 +691,6 @@ public class VK11 extends VK10 {
         callPJJPV(device.address(), descriptorSet, descriptorUpdateTemplate, pData, __functionAddress);
     }
 
-    // --- [ vkGetPhysicalDeviceExternalBufferProperties ] ---
-
-    /** {@code void vkGetPhysicalDeviceExternalBufferProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalBufferInfo const * pExternalBufferInfo, VkExternalBufferProperties * pExternalBufferProperties)} */
-    public static void nvkGetPhysicalDeviceExternalBufferProperties(VkPhysicalDevice physicalDevice, long pExternalBufferInfo, long pExternalBufferProperties) {
-        long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceExternalBufferProperties;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPPPV(physicalDevice.address(), pExternalBufferInfo, pExternalBufferProperties, __functionAddress);
-    }
-
-    /** {@code void vkGetPhysicalDeviceExternalBufferProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalBufferInfo const * pExternalBufferInfo, VkExternalBufferProperties * pExternalBufferProperties)} */
-    public static void vkGetPhysicalDeviceExternalBufferProperties(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceExternalBufferInfo const *") VkPhysicalDeviceExternalBufferInfo pExternalBufferInfo, @NativeType("VkExternalBufferProperties *") VkExternalBufferProperties pExternalBufferProperties) {
-        nvkGetPhysicalDeviceExternalBufferProperties(physicalDevice, pExternalBufferInfo.address(), pExternalBufferProperties.address());
-    }
-
-    // --- [ vkGetPhysicalDeviceExternalFenceProperties ] ---
-
-    /** {@code void vkGetPhysicalDeviceExternalFenceProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalFenceInfo const * pExternalFenceInfo, VkExternalFenceProperties * pExternalFenceProperties)} */
-    public static void nvkGetPhysicalDeviceExternalFenceProperties(VkPhysicalDevice physicalDevice, long pExternalFenceInfo, long pExternalFenceProperties) {
-        long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceExternalFenceProperties;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPPPV(physicalDevice.address(), pExternalFenceInfo, pExternalFenceProperties, __functionAddress);
-    }
-
-    /** {@code void vkGetPhysicalDeviceExternalFenceProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalFenceInfo const * pExternalFenceInfo, VkExternalFenceProperties * pExternalFenceProperties)} */
-    public static void vkGetPhysicalDeviceExternalFenceProperties(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceExternalFenceInfo const *") VkPhysicalDeviceExternalFenceInfo pExternalFenceInfo, @NativeType("VkExternalFenceProperties *") VkExternalFenceProperties pExternalFenceProperties) {
-        nvkGetPhysicalDeviceExternalFenceProperties(physicalDevice, pExternalFenceInfo.address(), pExternalFenceProperties.address());
-    }
-
-    // --- [ vkGetPhysicalDeviceExternalSemaphoreProperties ] ---
-
-    /** {@code void vkGetPhysicalDeviceExternalSemaphoreProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalSemaphoreInfo const * pExternalSemaphoreInfo, VkExternalSemaphoreProperties * pExternalSemaphoreProperties)} */
-    public static void nvkGetPhysicalDeviceExternalSemaphoreProperties(VkPhysicalDevice physicalDevice, long pExternalSemaphoreInfo, long pExternalSemaphoreProperties) {
-        long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceExternalSemaphoreProperties;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPPPV(physicalDevice.address(), pExternalSemaphoreInfo, pExternalSemaphoreProperties, __functionAddress);
-    }
-
-    /** {@code void vkGetPhysicalDeviceExternalSemaphoreProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalSemaphoreInfo const * pExternalSemaphoreInfo, VkExternalSemaphoreProperties * pExternalSemaphoreProperties)} */
-    public static void vkGetPhysicalDeviceExternalSemaphoreProperties(VkPhysicalDevice physicalDevice, @NativeType("VkPhysicalDeviceExternalSemaphoreInfo const *") VkPhysicalDeviceExternalSemaphoreInfo pExternalSemaphoreInfo, @NativeType("VkExternalSemaphoreProperties *") VkExternalSemaphoreProperties pExternalSemaphoreProperties) {
-        nvkGetPhysicalDeviceExternalSemaphoreProperties(physicalDevice, pExternalSemaphoreInfo.address(), pExternalSemaphoreProperties.address());
-    }
-
     // --- [ vkGetDescriptorSetLayoutSupport ] ---
 
     /** {@code void vkGetDescriptorSetLayoutSupport(VkDevice device, VkDescriptorSetLayoutCreateInfo const * pCreateInfo, VkDescriptorSetLayoutSupport * pSupport)} */
@@ -742,6 +706,42 @@ public class VK11 extends VK10 {
     /** {@code void vkGetDescriptorSetLayoutSupport(VkDevice device, VkDescriptorSetLayoutCreateInfo const * pCreateInfo, VkDescriptorSetLayoutSupport * pSupport)} */
     public static void vkGetDescriptorSetLayoutSupport(VkDevice device, @NativeType("VkDescriptorSetLayoutCreateInfo const *") VkDescriptorSetLayoutCreateInfo pCreateInfo, @NativeType("VkDescriptorSetLayoutSupport *") VkDescriptorSetLayoutSupport pSupport) {
         nvkGetDescriptorSetLayoutSupport(device, pCreateInfo.address(), pSupport.address());
+    }
+
+    // --- [ vkCreateSamplerYcbcrConversion ] ---
+
+    /** {@code VkResult vkCreateSamplerYcbcrConversion(VkDevice device, VkSamplerYcbcrConversionCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkSamplerYcbcrConversion * pYcbcrConversion)} */
+    public static int nvkCreateSamplerYcbcrConversion(VkDevice device, long pCreateInfo, long pAllocator, long pYcbcrConversion) {
+        long __functionAddress = device.getCapabilities().vkCreateSamplerYcbcrConversion;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPPPPI(device.address(), pCreateInfo, pAllocator, pYcbcrConversion, __functionAddress);
+    }
+
+    /** {@code VkResult vkCreateSamplerYcbcrConversion(VkDevice device, VkSamplerYcbcrConversionCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkSamplerYcbcrConversion * pYcbcrConversion)} */
+    @NativeType("VkResult")
+    public static int vkCreateSamplerYcbcrConversion(VkDevice device, @NativeType("VkSamplerYcbcrConversionCreateInfo const *") VkSamplerYcbcrConversionCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkSamplerYcbcrConversion *") LongBuffer pYcbcrConversion) {
+        if (CHECKS) {
+            check(pYcbcrConversion, 1);
+        }
+        return nvkCreateSamplerYcbcrConversion(device, pCreateInfo.address(), memAddressSafe(pAllocator), memAddress(pYcbcrConversion));
+    }
+
+    // --- [ vkDestroySamplerYcbcrConversion ] ---
+
+    /** {@code void vkDestroySamplerYcbcrConversion(VkDevice device, VkSamplerYcbcrConversion ycbcrConversion, VkAllocationCallbacks const * pAllocator)} */
+    public static void nvkDestroySamplerYcbcrConversion(VkDevice device, long ycbcrConversion, long pAllocator) {
+        long __functionAddress = device.getCapabilities().vkDestroySamplerYcbcrConversion;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPJPV(device.address(), ycbcrConversion, pAllocator, __functionAddress);
+    }
+
+    /** {@code void vkDestroySamplerYcbcrConversion(VkDevice device, VkSamplerYcbcrConversion ycbcrConversion, VkAllocationCallbacks const * pAllocator)} */
+    public static void vkDestroySamplerYcbcrConversion(VkDevice device, @NativeType("VkSamplerYcbcrConversion") long ycbcrConversion, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
+        nvkDestroySamplerYcbcrConversion(device, ycbcrConversion, memAddressSafe(pAllocator));
     }
 
     /** {@code VkResult vkEnumerateInstanceVersion(uint32_t * pApiVersion)} */
@@ -810,17 +810,6 @@ public class VK11 extends VK10 {
         callPPPPV(physicalDevice.address(), pFormatInfo.address(), pPropertyCount, memAddressSafe(pProperties), __functionAddress);
     }
 
-    /** {@code VkResult vkCreateSamplerYcbcrConversion(VkDevice device, VkSamplerYcbcrConversionCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkSamplerYcbcrConversion * pYcbcrConversion)} */
-    @NativeType("VkResult")
-    public static int vkCreateSamplerYcbcrConversion(VkDevice device, @NativeType("VkSamplerYcbcrConversionCreateInfo const *") VkSamplerYcbcrConversionCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkSamplerYcbcrConversion *") long[] pYcbcrConversion) {
-        long __functionAddress = device.getCapabilities().vkCreateSamplerYcbcrConversion;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(pYcbcrConversion, 1);
-        }
-        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pYcbcrConversion, __functionAddress);
-    }
-
     /** {@code VkResult vkCreateDescriptorUpdateTemplate(VkDevice device, VkDescriptorUpdateTemplateCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkDescriptorUpdateTemplate * pDescriptorUpdateTemplate)} */
     @NativeType("VkResult")
     public static int vkCreateDescriptorUpdateTemplate(VkDevice device, @NativeType("VkDescriptorUpdateTemplateCreateInfo const *") VkDescriptorUpdateTemplateCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkDescriptorUpdateTemplate *") long[] pDescriptorUpdateTemplate) {
@@ -831,6 +820,17 @@ public class VK11 extends VK10 {
             VkDescriptorUpdateTemplateCreateInfo.validate(pCreateInfo.address());
         }
         return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pDescriptorUpdateTemplate, __functionAddress);
+    }
+
+    /** {@code VkResult vkCreateSamplerYcbcrConversion(VkDevice device, VkSamplerYcbcrConversionCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkSamplerYcbcrConversion * pYcbcrConversion)} */
+    @NativeType("VkResult")
+    public static int vkCreateSamplerYcbcrConversion(VkDevice device, @NativeType("VkSamplerYcbcrConversionCreateInfo const *") VkSamplerYcbcrConversionCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkSamplerYcbcrConversion *") long[] pYcbcrConversion) {
+        long __functionAddress = device.getCapabilities().vkCreateSamplerYcbcrConversion;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(pYcbcrConversion, 1);
+        }
+        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pYcbcrConversion, __functionAddress);
     }
 
 }

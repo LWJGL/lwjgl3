@@ -82,7 +82,7 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
 
         VkCommandBuffer("commandBuffer"),
         VkSampleCountFlagBits("samples"),
-        Unsafe..VkSampleMask.const.p("pSampleMask")
+        Unsafe..nullable..VkSampleMask.const.p("pSampleMask")
     )
 
     void(

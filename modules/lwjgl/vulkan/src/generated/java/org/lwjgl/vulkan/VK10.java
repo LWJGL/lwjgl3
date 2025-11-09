@@ -93,8 +93,6 @@ public class VK10 {
         VK_STRUCTURE_TYPE_LOADER_INSTANCE_CREATE_INFO               = 47,
         VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO                 = 48;
 
-    public static final int VK_PIPELINE_CACHE_HEADER_VERSION_ONE = 1;
-
     public static final int
         VK_ACCESS_INDIRECT_COMMAND_READ_BIT          = 0x1,
         VK_ACCESS_INDEX_READ_BIT                     = 0x2,
@@ -466,6 +464,11 @@ public class VK10 {
     public static final int VK_FENCE_CREATE_SIGNALED_BIT = 0x1;
 
     public static final int
+        VK_QUERY_TYPE_OCCLUSION           = 0,
+        VK_QUERY_TYPE_PIPELINE_STATISTICS = 1,
+        VK_QUERY_TYPE_TIMESTAMP           = 2;
+
+    public static final int
         VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT                    = 0x1,
         VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT                  = 0x2,
         VK_QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT                  = 0x4,
@@ -477,11 +480,6 @@ public class VK10 {
         VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT        = 0x100,
         VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT = 0x200,
         VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT                 = 0x400;
-
-    public static final int
-        VK_QUERY_TYPE_OCCLUSION           = 0,
-        VK_QUERY_TYPE_PIPELINE_STATISTICS = 1,
-        VK_QUERY_TYPE_TIMESTAMP           = 2;
 
     public static final int
         VK_QUERY_RESULT_64_BIT                = 0x1,
@@ -527,6 +525,99 @@ public class VK10 {
         VK_IMAGE_VIEW_TYPE_2D_ARRAY   = 5,
         VK_IMAGE_VIEW_TYPE_CUBE_ARRAY = 6;
 
+    public static final int VK_DEPENDENCY_BY_REGION_BIT = 0x1;
+
+    public static final int
+        VK_COMMAND_POOL_CREATE_TRANSIENT_BIT            = 0x1,
+        VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT = 0x2;
+
+    public static final int VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT = 0x1;
+
+    public static final int
+        VK_COMMAND_BUFFER_LEVEL_PRIMARY   = 0,
+        VK_COMMAND_BUFFER_LEVEL_SECONDARY = 1;
+
+    public static final int
+        VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT      = 0x1,
+        VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT = 0x2,
+        VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT     = 0x4;
+
+    public static final int VK_QUERY_CONTROL_PRECISE_BIT = 0x1;
+
+    public static final int VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT = 0x1;
+
+    public static final int
+        VK_INDEX_TYPE_UINT16 = 0,
+        VK_INDEX_TYPE_UINT32 = 1;
+
+    public static final int VK_PIPELINE_CACHE_HEADER_VERSION_ONE = 1;
+
+    public static final int
+        VK_PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT = 0x1,
+        VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT    = 0x2,
+        VK_PIPELINE_CREATE_DERIVATIVE_BIT           = 0x4;
+
+    public static final int
+        VK_SHADER_STAGE_VERTEX_BIT                  = 0x1,
+        VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT    = 0x2,
+        VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT = 0x4,
+        VK_SHADER_STAGE_GEOMETRY_BIT                = 0x8,
+        VK_SHADER_STAGE_FRAGMENT_BIT                = 0x10,
+        VK_SHADER_STAGE_ALL_GRAPHICS                = 0x0000001F,
+        VK_SHADER_STAGE_COMPUTE_BIT                 = 0x20,
+        VK_SHADER_STAGE_ALL                         = 0x7FFFFFFF;
+
+    public static final int
+        VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK = 0,
+        VK_BORDER_COLOR_INT_TRANSPARENT_BLACK   = 1,
+        VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK      = 2,
+        VK_BORDER_COLOR_INT_OPAQUE_BLACK        = 3,
+        VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE      = 4,
+        VK_BORDER_COLOR_INT_OPAQUE_WHITE        = 5;
+
+    public static final int
+        VK_FILTER_NEAREST = 0,
+        VK_FILTER_LINEAR  = 1;
+
+    public static final int
+        VK_SAMPLER_ADDRESS_MODE_REPEAT          = 0,
+        VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT = 1,
+        VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE   = 2,
+        VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER = 3;
+
+    public static final int
+        VK_SAMPLER_MIPMAP_MODE_NEAREST = 0,
+        VK_SAMPLER_MIPMAP_MODE_LINEAR  = 1;
+
+    public static final int
+        VK_COMPARE_OP_NEVER            = 0,
+        VK_COMPARE_OP_LESS             = 1,
+        VK_COMPARE_OP_EQUAL            = 2,
+        VK_COMPARE_OP_LESS_OR_EQUAL    = 3,
+        VK_COMPARE_OP_GREATER          = 4,
+        VK_COMPARE_OP_NOT_EQUAL        = 5,
+        VK_COMPARE_OP_GREATER_OR_EQUAL = 6,
+        VK_COMPARE_OP_ALWAYS           = 7;
+
+    public static final int VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT = 0x1;
+
+    public static final int
+        VK_DESCRIPTOR_TYPE_SAMPLER                = 0,
+        VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER = 1,
+        VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE          = 2,
+        VK_DESCRIPTOR_TYPE_STORAGE_IMAGE          = 3,
+        VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER   = 4,
+        VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER   = 5,
+        VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER         = 6,
+        VK_DESCRIPTOR_TYPE_STORAGE_BUFFER         = 7,
+        VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC = 8,
+        VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC = 9,
+        VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT       = 10;
+
+    public static final int
+        VK_PIPELINE_BIND_POINT_GRAPHICS = 0,
+        VK_PIPELINE_BIND_POINT_COMPUTE  = 1;
+
     public static final int
         VK_BLEND_FACTOR_ZERO                     = 0,
         VK_BLEND_FACTOR_ONE                      = 1,
@@ -560,31 +651,6 @@ public class VK10 {
         VK_COLOR_COMPONENT_G_BIT = 0x2,
         VK_COLOR_COMPONENT_B_BIT = 0x4,
         VK_COLOR_COMPONENT_A_BIT = 0x8;
-
-    public static final int
-        VK_COMPARE_OP_NEVER            = 0,
-        VK_COMPARE_OP_LESS             = 1,
-        VK_COMPARE_OP_EQUAL            = 2,
-        VK_COMPARE_OP_LESS_OR_EQUAL    = 3,
-        VK_COMPARE_OP_GREATER          = 4,
-        VK_COMPARE_OP_NOT_EQUAL        = 5,
-        VK_COMPARE_OP_GREATER_OR_EQUAL = 6,
-        VK_COMPARE_OP_ALWAYS           = 7;
-
-    public static final int
-        VK_PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT = 0x1,
-        VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT    = 0x2,
-        VK_PIPELINE_CREATE_DERIVATIVE_BIT           = 0x4;
-
-    public static final int
-        VK_SHADER_STAGE_VERTEX_BIT                  = 0x1,
-        VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT    = 0x2,
-        VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT = 0x4,
-        VK_SHADER_STAGE_GEOMETRY_BIT                = 0x8,
-        VK_SHADER_STAGE_FRAGMENT_BIT                = 0x10,
-        VK_SHADER_STAGE_ALL_GRAPHICS                = 0x0000001F,
-        VK_SHADER_STAGE_COMPUTE_BIT                 = 0x20,
-        VK_SHADER_STAGE_ALL                         = 0x7FFFFFFF;
 
     public static final int
         VK_CULL_MODE_NONE           = 0,
@@ -657,43 +723,6 @@ public class VK10 {
         VK_LOGIC_OP_NAND          = 14,
         VK_LOGIC_OP_SET           = 15;
 
-    public static final int
-        VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK = 0,
-        VK_BORDER_COLOR_INT_TRANSPARENT_BLACK   = 1,
-        VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK      = 2,
-        VK_BORDER_COLOR_INT_OPAQUE_BLACK        = 3,
-        VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE      = 4,
-        VK_BORDER_COLOR_INT_OPAQUE_WHITE        = 5;
-
-    public static final int
-        VK_FILTER_NEAREST = 0,
-        VK_FILTER_LINEAR  = 1;
-
-    public static final int
-        VK_SAMPLER_ADDRESS_MODE_REPEAT          = 0,
-        VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT = 1,
-        VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE   = 2,
-        VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER = 3;
-
-    public static final int
-        VK_SAMPLER_MIPMAP_MODE_NEAREST = 0,
-        VK_SAMPLER_MIPMAP_MODE_LINEAR  = 1;
-
-    public static final int VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT = 0x1;
-
-    public static final int
-        VK_DESCRIPTOR_TYPE_SAMPLER                = 0,
-        VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER = 1,
-        VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE          = 2,
-        VK_DESCRIPTOR_TYPE_STORAGE_IMAGE          = 3,
-        VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER   = 4,
-        VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER   = 5,
-        VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER         = 6,
-        VK_DESCRIPTOR_TYPE_STORAGE_BUFFER         = 7,
-        VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC = 8,
-        VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC = 9,
-        VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT       = 10;
-
     public static final int VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT = 0x1;
 
     public static final int
@@ -704,35 +733,6 @@ public class VK10 {
     public static final int
         VK_ATTACHMENT_STORE_OP_STORE     = 0,
         VK_ATTACHMENT_STORE_OP_DONT_CARE = 1;
-
-    public static final int VK_DEPENDENCY_BY_REGION_BIT = 0x1;
-
-    public static final int
-        VK_PIPELINE_BIND_POINT_GRAPHICS = 0,
-        VK_PIPELINE_BIND_POINT_COMPUTE  = 1;
-
-    public static final int
-        VK_COMMAND_POOL_CREATE_TRANSIENT_BIT            = 0x1,
-        VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT = 0x2;
-
-    public static final int VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT = 0x1;
-
-    public static final int
-        VK_COMMAND_BUFFER_LEVEL_PRIMARY   = 0,
-        VK_COMMAND_BUFFER_LEVEL_SECONDARY = 1;
-
-    public static final int
-        VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT      = 0x1,
-        VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT = 0x2,
-        VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT     = 0x4;
-
-    public static final int VK_QUERY_CONTROL_PRECISE_BIT = 0x1;
-
-    public static final int VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT = 0x1;
-
-    public static final int
-        VK_INDEX_TYPE_UINT16 = 0,
-        VK_INDEX_TYPE_UINT32 = 1;
 
     public static final int
         VK_STENCIL_FACE_FRONT_BIT      = 0x1,
@@ -746,7 +746,7 @@ public class VK10 {
 
     public static final int VK_API_VERSION_1_0 = VK_MAKE_API_VERSION(0, 1, 0, 0);
 
-    public static final int VK_HEADER_VERSION = 328;
+    public static final int VK_HEADER_VERSION = 332;
 
     public static final long VK_NULL_HANDLE = 0x0L;
 
@@ -1498,63 +1498,6 @@ public class VK10 {
         nvkDestroySemaphore(device, semaphore, memAddressSafe(pAllocator));
     }
 
-    // --- [ vkCreateEvent ] ---
-
-    /** {@code VkResult vkCreateEvent(VkDevice device, VkEventCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkEvent * pEvent)} */
-    public static int nvkCreateEvent(VkDevice device, long pCreateInfo, long pAllocator, long pEvent) {
-        long __functionAddress = device.getCapabilities().vkCreateEvent;
-        return callPPPPI(device.address(), pCreateInfo, pAllocator, pEvent, __functionAddress);
-    }
-
-    /** {@code VkResult vkCreateEvent(VkDevice device, VkEventCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkEvent * pEvent)} */
-    @NativeType("VkResult")
-    public static int vkCreateEvent(VkDevice device, @NativeType("VkEventCreateInfo const *") VkEventCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkEvent *") LongBuffer pEvent) {
-        if (CHECKS) {
-            check(pEvent, 1);
-        }
-        return nvkCreateEvent(device, pCreateInfo.address(), memAddressSafe(pAllocator), memAddress(pEvent));
-    }
-
-    // --- [ vkDestroyEvent ] ---
-
-    /** {@code void vkDestroyEvent(VkDevice device, VkEvent event, VkAllocationCallbacks const * pAllocator)} */
-    public static void nvkDestroyEvent(VkDevice device, long event, long pAllocator) {
-        long __functionAddress = device.getCapabilities().vkDestroyEvent;
-        callPJPV(device.address(), event, pAllocator, __functionAddress);
-    }
-
-    /** {@code void vkDestroyEvent(VkDevice device, VkEvent event, VkAllocationCallbacks const * pAllocator)} */
-    public static void vkDestroyEvent(VkDevice device, @NativeType("VkEvent") long event, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
-        nvkDestroyEvent(device, event, memAddressSafe(pAllocator));
-    }
-
-    // --- [ vkGetEventStatus ] ---
-
-    /** {@code VkResult vkGetEventStatus(VkDevice device, VkEvent event)} */
-    @NativeType("VkResult")
-    public static int vkGetEventStatus(VkDevice device, @NativeType("VkEvent") long event) {
-        long __functionAddress = device.getCapabilities().vkGetEventStatus;
-        return callPJI(device.address(), event, __functionAddress);
-    }
-
-    // --- [ vkSetEvent ] ---
-
-    /** {@code VkResult vkSetEvent(VkDevice device, VkEvent event)} */
-    @NativeType("VkResult")
-    public static int vkSetEvent(VkDevice device, @NativeType("VkEvent") long event) {
-        long __functionAddress = device.getCapabilities().vkSetEvent;
-        return callPJI(device.address(), event, __functionAddress);
-    }
-
-    // --- [ vkResetEvent ] ---
-
-    /** {@code VkResult vkResetEvent(VkDevice device, VkEvent event)} */
-    @NativeType("VkResult")
-    public static int vkResetEvent(VkDevice device, @NativeType("VkEvent") long event) {
-        long __functionAddress = device.getCapabilities().vkResetEvent;
-        return callPJI(device.address(), event, __functionAddress);
-    }
-
     // --- [ vkCreateQueryPool ] ---
 
     /** {@code VkResult vkCreateQueryPool(VkDevice device, VkQueryPoolCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkQueryPool * pQueryPool)} */
@@ -1641,36 +1584,6 @@ public class VK10 {
         nvkDestroyBuffer(device, buffer, memAddressSafe(pAllocator));
     }
 
-    // --- [ vkCreateBufferView ] ---
-
-    /** {@code VkResult vkCreateBufferView(VkDevice device, VkBufferViewCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkBufferView * pView)} */
-    public static int nvkCreateBufferView(VkDevice device, long pCreateInfo, long pAllocator, long pView) {
-        long __functionAddress = device.getCapabilities().vkCreateBufferView;
-        return callPPPPI(device.address(), pCreateInfo, pAllocator, pView, __functionAddress);
-    }
-
-    /** {@code VkResult vkCreateBufferView(VkDevice device, VkBufferViewCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkBufferView * pView)} */
-    @NativeType("VkResult")
-    public static int vkCreateBufferView(VkDevice device, @NativeType("VkBufferViewCreateInfo const *") VkBufferViewCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkBufferView *") LongBuffer pView) {
-        if (CHECKS) {
-            check(pView, 1);
-        }
-        return nvkCreateBufferView(device, pCreateInfo.address(), memAddressSafe(pAllocator), memAddress(pView));
-    }
-
-    // --- [ vkDestroyBufferView ] ---
-
-    /** {@code void vkDestroyBufferView(VkDevice device, VkBufferView bufferView, VkAllocationCallbacks const * pAllocator)} */
-    public static void nvkDestroyBufferView(VkDevice device, long bufferView, long pAllocator) {
-        long __functionAddress = device.getCapabilities().vkDestroyBufferView;
-        callPJPV(device.address(), bufferView, pAllocator, __functionAddress);
-    }
-
-    /** {@code void vkDestroyBufferView(VkDevice device, VkBufferView bufferView, VkAllocationCallbacks const * pAllocator)} */
-    public static void vkDestroyBufferView(VkDevice device, @NativeType("VkBufferView") long bufferView, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
-        nvkDestroyBufferView(device, bufferView, memAddressSafe(pAllocator));
-    }
-
     // --- [ vkCreateImage ] ---
 
     /** {@code VkResult vkCreateImage(VkDevice device, VkImageCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkImage * pImage)} */
@@ -1742,6 +1655,380 @@ public class VK10 {
     /** {@code void vkDestroyImageView(VkDevice device, VkImageView imageView, VkAllocationCallbacks const * pAllocator)} */
     public static void vkDestroyImageView(VkDevice device, @NativeType("VkImageView") long imageView, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
         nvkDestroyImageView(device, imageView, memAddressSafe(pAllocator));
+    }
+
+    // --- [ vkCreateCommandPool ] ---
+
+    /** {@code VkResult vkCreateCommandPool(VkDevice device, VkCommandPoolCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkCommandPool * pCommandPool)} */
+    public static int nvkCreateCommandPool(VkDevice device, long pCreateInfo, long pAllocator, long pCommandPool) {
+        long __functionAddress = device.getCapabilities().vkCreateCommandPool;
+        return callPPPPI(device.address(), pCreateInfo, pAllocator, pCommandPool, __functionAddress);
+    }
+
+    /** {@code VkResult vkCreateCommandPool(VkDevice device, VkCommandPoolCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkCommandPool * pCommandPool)} */
+    @NativeType("VkResult")
+    public static int vkCreateCommandPool(VkDevice device, @NativeType("VkCommandPoolCreateInfo const *") VkCommandPoolCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkCommandPool *") LongBuffer pCommandPool) {
+        if (CHECKS) {
+            check(pCommandPool, 1);
+        }
+        return nvkCreateCommandPool(device, pCreateInfo.address(), memAddressSafe(pAllocator), memAddress(pCommandPool));
+    }
+
+    // --- [ vkDestroyCommandPool ] ---
+
+    /** {@code void vkDestroyCommandPool(VkDevice device, VkCommandPool commandPool, VkAllocationCallbacks const * pAllocator)} */
+    public static void nvkDestroyCommandPool(VkDevice device, long commandPool, long pAllocator) {
+        long __functionAddress = device.getCapabilities().vkDestroyCommandPool;
+        callPJPV(device.address(), commandPool, pAllocator, __functionAddress);
+    }
+
+    /** {@code void vkDestroyCommandPool(VkDevice device, VkCommandPool commandPool, VkAllocationCallbacks const * pAllocator)} */
+    public static void vkDestroyCommandPool(VkDevice device, @NativeType("VkCommandPool") long commandPool, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
+        nvkDestroyCommandPool(device, commandPool, memAddressSafe(pAllocator));
+    }
+
+    // --- [ vkResetCommandPool ] ---
+
+    /** {@code VkResult vkResetCommandPool(VkDevice device, VkCommandPool commandPool, VkCommandPoolResetFlags flags)} */
+    @NativeType("VkResult")
+    public static int vkResetCommandPool(VkDevice device, @NativeType("VkCommandPool") long commandPool, @NativeType("VkCommandPoolResetFlags") int flags) {
+        long __functionAddress = device.getCapabilities().vkResetCommandPool;
+        return callPJI(device.address(), commandPool, flags, __functionAddress);
+    }
+
+    // --- [ vkAllocateCommandBuffers ] ---
+
+    /** {@code VkResult vkAllocateCommandBuffers(VkDevice device, VkCommandBufferAllocateInfo const * pAllocateInfo, VkCommandBuffer * pCommandBuffers)} */
+    public static int nvkAllocateCommandBuffers(VkDevice device, long pAllocateInfo, long pCommandBuffers) {
+        long __functionAddress = device.getCapabilities().vkAllocateCommandBuffers;
+        return callPPPI(device.address(), pAllocateInfo, pCommandBuffers, __functionAddress);
+    }
+
+    /** {@code VkResult vkAllocateCommandBuffers(VkDevice device, VkCommandBufferAllocateInfo const * pAllocateInfo, VkCommandBuffer * pCommandBuffers)} */
+    @NativeType("VkResult")
+    public static int vkAllocateCommandBuffers(VkDevice device, @NativeType("VkCommandBufferAllocateInfo const *") VkCommandBufferAllocateInfo pAllocateInfo, @NativeType("VkCommandBuffer *") PointerBuffer pCommandBuffers) {
+        if (CHECKS) {
+            check(pCommandBuffers, pAllocateInfo.commandBufferCount());
+        }
+        return nvkAllocateCommandBuffers(device, pAllocateInfo.address(), memAddress(pCommandBuffers));
+    }
+
+    // --- [ vkFreeCommandBuffers ] ---
+
+    /** {@code void vkFreeCommandBuffers(VkDevice device, VkCommandPool commandPool, uint32_t commandBufferCount, VkCommandBuffer const * pCommandBuffers)} */
+    public static void nvkFreeCommandBuffers(VkDevice device, long commandPool, int commandBufferCount, long pCommandBuffers) {
+        long __functionAddress = device.getCapabilities().vkFreeCommandBuffers;
+        callPJPV(device.address(), commandPool, commandBufferCount, pCommandBuffers, __functionAddress);
+    }
+
+    /** {@code void vkFreeCommandBuffers(VkDevice device, VkCommandPool commandPool, uint32_t commandBufferCount, VkCommandBuffer const * pCommandBuffers)} */
+    public static void vkFreeCommandBuffers(VkDevice device, @NativeType("VkCommandPool") long commandPool, @NativeType("VkCommandBuffer const *") @Nullable PointerBuffer pCommandBuffers) {
+        nvkFreeCommandBuffers(device, commandPool, remainingSafe(pCommandBuffers), memAddressSafe(pCommandBuffers));
+    }
+
+    /** {@code void vkFreeCommandBuffers(VkDevice device, VkCommandPool commandPool, uint32_t commandBufferCount, VkCommandBuffer const * pCommandBuffers)} */
+    public static void vkFreeCommandBuffers(VkDevice device, @NativeType("VkCommandPool") long commandPool, @NativeType("VkCommandBuffer const *") VkCommandBuffer pCommandBuffer) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            PointerBuffer pCommandBuffers = stack.pointers(pCommandBuffer);
+            nvkFreeCommandBuffers(device, commandPool, 1, memAddress(pCommandBuffers));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ vkBeginCommandBuffer ] ---
+
+    /** {@code VkResult vkBeginCommandBuffer(VkCommandBuffer commandBuffer, VkCommandBufferBeginInfo const * pBeginInfo)} */
+    public static int nvkBeginCommandBuffer(VkCommandBuffer commandBuffer, long pBeginInfo) {
+        long __functionAddress = commandBuffer.getCapabilities().vkBeginCommandBuffer;
+        return callPPI(commandBuffer.address(), pBeginInfo, __functionAddress);
+    }
+
+    /** {@code VkResult vkBeginCommandBuffer(VkCommandBuffer commandBuffer, VkCommandBufferBeginInfo const * pBeginInfo)} */
+    @NativeType("VkResult")
+    public static int vkBeginCommandBuffer(VkCommandBuffer commandBuffer, @NativeType("VkCommandBufferBeginInfo const *") VkCommandBufferBeginInfo pBeginInfo) {
+        return nvkBeginCommandBuffer(commandBuffer, pBeginInfo.address());
+    }
+
+    // --- [ vkEndCommandBuffer ] ---
+
+    /** {@code VkResult vkEndCommandBuffer(VkCommandBuffer commandBuffer)} */
+    @NativeType("VkResult")
+    public static int vkEndCommandBuffer(VkCommandBuffer commandBuffer) {
+        long __functionAddress = commandBuffer.getCapabilities().vkEndCommandBuffer;
+        return callPI(commandBuffer.address(), __functionAddress);
+    }
+
+    // --- [ vkResetCommandBuffer ] ---
+
+    /** {@code VkResult vkResetCommandBuffer(VkCommandBuffer commandBuffer, VkCommandBufferResetFlags flags)} */
+    @NativeType("VkResult")
+    public static int vkResetCommandBuffer(VkCommandBuffer commandBuffer, @NativeType("VkCommandBufferResetFlags") int flags) {
+        long __functionAddress = commandBuffer.getCapabilities().vkResetCommandBuffer;
+        return callPI(commandBuffer.address(), flags, __functionAddress);
+    }
+
+    // --- [ vkCmdCopyBuffer ] ---
+
+    /** {@code void vkCmdCopyBuffer(VkCommandBuffer commandBuffer, VkBuffer srcBuffer, VkBuffer dstBuffer, uint32_t regionCount, VkBufferCopy const * pRegions)} */
+    public static void nvkCmdCopyBuffer(VkCommandBuffer commandBuffer, long srcBuffer, long dstBuffer, int regionCount, long pRegions) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdCopyBuffer;
+        callPJJPV(commandBuffer.address(), srcBuffer, dstBuffer, regionCount, pRegions, __functionAddress);
+    }
+
+    /** {@code void vkCmdCopyBuffer(VkCommandBuffer commandBuffer, VkBuffer srcBuffer, VkBuffer dstBuffer, uint32_t regionCount, VkBufferCopy const * pRegions)} */
+    public static void vkCmdCopyBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long srcBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkBufferCopy const *") VkBufferCopy.Buffer pRegions) {
+        nvkCmdCopyBuffer(commandBuffer, srcBuffer, dstBuffer, pRegions.remaining(), pRegions.address());
+    }
+
+    // --- [ vkCmdCopyImage ] ---
+
+    /** {@code void vkCmdCopyImage(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, uint32_t regionCount, VkImageCopy const * pRegions)} */
+    public static void nvkCmdCopyImage(VkCommandBuffer commandBuffer, long srcImage, int srcImageLayout, long dstImage, int dstImageLayout, int regionCount, long pRegions) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdCopyImage;
+        callPJJPV(commandBuffer.address(), srcImage, srcImageLayout, dstImage, dstImageLayout, regionCount, pRegions, __functionAddress);
+    }
+
+    /** {@code void vkCmdCopyImage(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, uint32_t regionCount, VkImageCopy const * pRegions)} */
+    public static void vkCmdCopyImage(VkCommandBuffer commandBuffer, @NativeType("VkImage") long srcImage, @NativeType("VkImageLayout") int srcImageLayout, @NativeType("VkImage") long dstImage, @NativeType("VkImageLayout") int dstImageLayout, @NativeType("VkImageCopy const *") VkImageCopy.Buffer pRegions) {
+        nvkCmdCopyImage(commandBuffer, srcImage, srcImageLayout, dstImage, dstImageLayout, pRegions.remaining(), pRegions.address());
+    }
+
+    // --- [ vkCmdCopyBufferToImage ] ---
+
+    /** {@code void vkCmdCopyBufferToImage(VkCommandBuffer commandBuffer, VkBuffer srcBuffer, VkImage dstImage, VkImageLayout dstImageLayout, uint32_t regionCount, VkBufferImageCopy const * pRegions)} */
+    public static void nvkCmdCopyBufferToImage(VkCommandBuffer commandBuffer, long srcBuffer, long dstImage, int dstImageLayout, int regionCount, long pRegions) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdCopyBufferToImage;
+        callPJJPV(commandBuffer.address(), srcBuffer, dstImage, dstImageLayout, regionCount, pRegions, __functionAddress);
+    }
+
+    /** {@code void vkCmdCopyBufferToImage(VkCommandBuffer commandBuffer, VkBuffer srcBuffer, VkImage dstImage, VkImageLayout dstImageLayout, uint32_t regionCount, VkBufferImageCopy const * pRegions)} */
+    public static void vkCmdCopyBufferToImage(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long srcBuffer, @NativeType("VkImage") long dstImage, @NativeType("VkImageLayout") int dstImageLayout, @NativeType("VkBufferImageCopy const *") VkBufferImageCopy.Buffer pRegions) {
+        nvkCmdCopyBufferToImage(commandBuffer, srcBuffer, dstImage, dstImageLayout, pRegions.remaining(), pRegions.address());
+    }
+
+    // --- [ vkCmdCopyImageToBuffer ] ---
+
+    /** {@code void vkCmdCopyImageToBuffer(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkBuffer dstBuffer, uint32_t regionCount, VkBufferImageCopy const * pRegions)} */
+    public static void nvkCmdCopyImageToBuffer(VkCommandBuffer commandBuffer, long srcImage, int srcImageLayout, long dstBuffer, int regionCount, long pRegions) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdCopyImageToBuffer;
+        callPJJPV(commandBuffer.address(), srcImage, srcImageLayout, dstBuffer, regionCount, pRegions, __functionAddress);
+    }
+
+    /** {@code void vkCmdCopyImageToBuffer(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkBuffer dstBuffer, uint32_t regionCount, VkBufferImageCopy const * pRegions)} */
+    public static void vkCmdCopyImageToBuffer(VkCommandBuffer commandBuffer, @NativeType("VkImage") long srcImage, @NativeType("VkImageLayout") int srcImageLayout, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkBufferImageCopy const *") VkBufferImageCopy.Buffer pRegions) {
+        nvkCmdCopyImageToBuffer(commandBuffer, srcImage, srcImageLayout, dstBuffer, pRegions.remaining(), pRegions.address());
+    }
+
+    // --- [ vkCmdUpdateBuffer ] ---
+
+    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
+    public static void nvkCmdUpdateBuffer(VkCommandBuffer commandBuffer, long dstBuffer, long dstOffset, long dataSize, long pData) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdUpdateBuffer;
+        callPJJJPV(commandBuffer.address(), dstBuffer, dstOffset, dataSize, pData, __functionAddress);
+    }
+
+    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
+    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") ByteBuffer pData) {
+        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, pData.remaining(), memAddress(pData));
+    }
+
+    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
+    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") ShortBuffer pData) {
+        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, Integer.toUnsignedLong(pData.remaining()) << 1, memAddress(pData));
+    }
+
+    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
+    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") IntBuffer pData) {
+        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, Integer.toUnsignedLong(pData.remaining()) << 2, memAddress(pData));
+    }
+
+    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
+    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") LongBuffer pData) {
+        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, Integer.toUnsignedLong(pData.remaining()) << 3, memAddress(pData));
+    }
+
+    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
+    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") FloatBuffer pData) {
+        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, Integer.toUnsignedLong(pData.remaining()) << 2, memAddress(pData));
+    }
+
+    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
+    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") DoubleBuffer pData) {
+        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, Integer.toUnsignedLong(pData.remaining()) << 3, memAddress(pData));
+    }
+
+    // --- [ vkCmdFillBuffer ] ---
+
+    /** {@code void vkCmdFillBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize size, uint32_t data)} */
+    public static void vkCmdFillBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("VkDeviceSize") long size, @NativeType("uint32_t") int data) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdFillBuffer;
+        callPJJJV(commandBuffer.address(), dstBuffer, dstOffset, size, data, __functionAddress);
+    }
+
+    // --- [ vkCmdPipelineBarrier ] ---
+
+    /** {@code void vkCmdPipelineBarrier(VkCommandBuffer commandBuffer, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, VkDependencyFlags dependencyFlags, uint32_t memoryBarrierCount, VkMemoryBarrier const * pMemoryBarriers, uint32_t bufferMemoryBarrierCount, VkBufferMemoryBarrier const * pBufferMemoryBarriers, uint32_t imageMemoryBarrierCount, VkImageMemoryBarrier const * pImageMemoryBarriers)} */
+    public static void nvkCmdPipelineBarrier(VkCommandBuffer commandBuffer, int srcStageMask, int dstStageMask, int dependencyFlags, int memoryBarrierCount, long pMemoryBarriers, int bufferMemoryBarrierCount, long pBufferMemoryBarriers, int imageMemoryBarrierCount, long pImageMemoryBarriers) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdPipelineBarrier;
+        callPPPPV(commandBuffer.address(), srcStageMask, dstStageMask, dependencyFlags, memoryBarrierCount, pMemoryBarriers, bufferMemoryBarrierCount, pBufferMemoryBarriers, imageMemoryBarrierCount, pImageMemoryBarriers, __functionAddress);
+    }
+
+    /** {@code void vkCmdPipelineBarrier(VkCommandBuffer commandBuffer, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, VkDependencyFlags dependencyFlags, uint32_t memoryBarrierCount, VkMemoryBarrier const * pMemoryBarriers, uint32_t bufferMemoryBarrierCount, VkBufferMemoryBarrier const * pBufferMemoryBarriers, uint32_t imageMemoryBarrierCount, VkImageMemoryBarrier const * pImageMemoryBarriers)} */
+    public static void vkCmdPipelineBarrier(VkCommandBuffer commandBuffer, @NativeType("VkPipelineStageFlags") int srcStageMask, @NativeType("VkPipelineStageFlags") int dstStageMask, @NativeType("VkDependencyFlags") int dependencyFlags, @NativeType("VkMemoryBarrier const *") VkMemoryBarrier.@Nullable Buffer pMemoryBarriers, @NativeType("VkBufferMemoryBarrier const *") VkBufferMemoryBarrier.@Nullable Buffer pBufferMemoryBarriers, @NativeType("VkImageMemoryBarrier const *") VkImageMemoryBarrier.@Nullable Buffer pImageMemoryBarriers) {
+        nvkCmdPipelineBarrier(commandBuffer, srcStageMask, dstStageMask, dependencyFlags, remainingSafe(pMemoryBarriers), memAddressSafe(pMemoryBarriers), remainingSafe(pBufferMemoryBarriers), memAddressSafe(pBufferMemoryBarriers), remainingSafe(pImageMemoryBarriers), memAddressSafe(pImageMemoryBarriers));
+    }
+
+    // --- [ vkCmdBeginQuery ] ---
+
+    /** {@code void vkCmdBeginQuery(VkCommandBuffer commandBuffer, VkQueryPool queryPool, uint32_t query, VkQueryControlFlags flags)} */
+    public static void vkCmdBeginQuery(VkCommandBuffer commandBuffer, @NativeType("VkQueryPool") long queryPool, @NativeType("uint32_t") int query, @NativeType("VkQueryControlFlags") int flags) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdBeginQuery;
+        callPJV(commandBuffer.address(), queryPool, query, flags, __functionAddress);
+    }
+
+    // --- [ vkCmdEndQuery ] ---
+
+    /** {@code void vkCmdEndQuery(VkCommandBuffer commandBuffer, VkQueryPool queryPool, uint32_t query)} */
+    public static void vkCmdEndQuery(VkCommandBuffer commandBuffer, @NativeType("VkQueryPool") long queryPool, @NativeType("uint32_t") int query) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdEndQuery;
+        callPJV(commandBuffer.address(), queryPool, query, __functionAddress);
+    }
+
+    // --- [ vkCmdResetQueryPool ] ---
+
+    /** {@code void vkCmdResetQueryPool(VkCommandBuffer commandBuffer, VkQueryPool queryPool, uint32_t firstQuery, uint32_t queryCount)} */
+    public static void vkCmdResetQueryPool(VkCommandBuffer commandBuffer, @NativeType("VkQueryPool") long queryPool, @NativeType("uint32_t") int firstQuery, @NativeType("uint32_t") int queryCount) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdResetQueryPool;
+        callPJV(commandBuffer.address(), queryPool, firstQuery, queryCount, __functionAddress);
+    }
+
+    // --- [ vkCmdWriteTimestamp ] ---
+
+    /** {@code void vkCmdWriteTimestamp(VkCommandBuffer commandBuffer, VkPipelineStageFlagBits pipelineStage, VkQueryPool queryPool, uint32_t query)} */
+    public static void vkCmdWriteTimestamp(VkCommandBuffer commandBuffer, @NativeType("VkPipelineStageFlagBits") int pipelineStage, @NativeType("VkQueryPool") long queryPool, @NativeType("uint32_t") int query) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdWriteTimestamp;
+        callPJV(commandBuffer.address(), pipelineStage, queryPool, query, __functionAddress);
+    }
+
+    // --- [ vkCmdCopyQueryPoolResults ] ---
+
+    /** {@code void vkCmdCopyQueryPoolResults(VkCommandBuffer commandBuffer, VkQueryPool queryPool, uint32_t firstQuery, uint32_t queryCount, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize stride, VkQueryResultFlags flags)} */
+    public static void vkCmdCopyQueryPoolResults(VkCommandBuffer commandBuffer, @NativeType("VkQueryPool") long queryPool, @NativeType("uint32_t") int firstQuery, @NativeType("uint32_t") int queryCount, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("VkDeviceSize") long stride, @NativeType("VkQueryResultFlags") int flags) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdCopyQueryPoolResults;
+        callPJJJJV(commandBuffer.address(), queryPool, firstQuery, queryCount, dstBuffer, dstOffset, stride, flags, __functionAddress);
+    }
+
+    // --- [ vkCmdExecuteCommands ] ---
+
+    /** {@code void vkCmdExecuteCommands(VkCommandBuffer commandBuffer, uint32_t commandBufferCount, VkCommandBuffer const * pCommandBuffers)} */
+    public static void nvkCmdExecuteCommands(VkCommandBuffer commandBuffer, int commandBufferCount, long pCommandBuffers) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdExecuteCommands;
+        callPPV(commandBuffer.address(), commandBufferCount, pCommandBuffers, __functionAddress);
+    }
+
+    /** {@code void vkCmdExecuteCommands(VkCommandBuffer commandBuffer, uint32_t commandBufferCount, VkCommandBuffer const * pCommandBuffers)} */
+    public static void vkCmdExecuteCommands(VkCommandBuffer commandBuffer, @NativeType("VkCommandBuffer const *") PointerBuffer pCommandBuffers) {
+        nvkCmdExecuteCommands(commandBuffer, pCommandBuffers.remaining(), memAddress(pCommandBuffers));
+    }
+
+    /** {@code void vkCmdExecuteCommands(VkCommandBuffer commandBuffer, uint32_t commandBufferCount, VkCommandBuffer const * pCommandBuffers)} */
+    public static void vkCmdExecuteCommands(VkCommandBuffer commandBuffer, @NativeType("VkCommandBuffer const *") VkCommandBuffer pCommandBuffer) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            PointerBuffer pCommandBuffers = stack.pointers(pCommandBuffer);
+            nvkCmdExecuteCommands(commandBuffer, 1, memAddress(pCommandBuffers));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ vkCreateEvent ] ---
+
+    /** {@code VkResult vkCreateEvent(VkDevice device, VkEventCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkEvent * pEvent)} */
+    public static int nvkCreateEvent(VkDevice device, long pCreateInfo, long pAllocator, long pEvent) {
+        long __functionAddress = device.getCapabilities().vkCreateEvent;
+        return callPPPPI(device.address(), pCreateInfo, pAllocator, pEvent, __functionAddress);
+    }
+
+    /** {@code VkResult vkCreateEvent(VkDevice device, VkEventCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkEvent * pEvent)} */
+    @NativeType("VkResult")
+    public static int vkCreateEvent(VkDevice device, @NativeType("VkEventCreateInfo const *") VkEventCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkEvent *") LongBuffer pEvent) {
+        if (CHECKS) {
+            check(pEvent, 1);
+        }
+        return nvkCreateEvent(device, pCreateInfo.address(), memAddressSafe(pAllocator), memAddress(pEvent));
+    }
+
+    // --- [ vkDestroyEvent ] ---
+
+    /** {@code void vkDestroyEvent(VkDevice device, VkEvent event, VkAllocationCallbacks const * pAllocator)} */
+    public static void nvkDestroyEvent(VkDevice device, long event, long pAllocator) {
+        long __functionAddress = device.getCapabilities().vkDestroyEvent;
+        callPJPV(device.address(), event, pAllocator, __functionAddress);
+    }
+
+    /** {@code void vkDestroyEvent(VkDevice device, VkEvent event, VkAllocationCallbacks const * pAllocator)} */
+    public static void vkDestroyEvent(VkDevice device, @NativeType("VkEvent") long event, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
+        nvkDestroyEvent(device, event, memAddressSafe(pAllocator));
+    }
+
+    // --- [ vkGetEventStatus ] ---
+
+    /** {@code VkResult vkGetEventStatus(VkDevice device, VkEvent event)} */
+    @NativeType("VkResult")
+    public static int vkGetEventStatus(VkDevice device, @NativeType("VkEvent") long event) {
+        long __functionAddress = device.getCapabilities().vkGetEventStatus;
+        return callPJI(device.address(), event, __functionAddress);
+    }
+
+    // --- [ vkSetEvent ] ---
+
+    /** {@code VkResult vkSetEvent(VkDevice device, VkEvent event)} */
+    @NativeType("VkResult")
+    public static int vkSetEvent(VkDevice device, @NativeType("VkEvent") long event) {
+        long __functionAddress = device.getCapabilities().vkSetEvent;
+        return callPJI(device.address(), event, __functionAddress);
+    }
+
+    // --- [ vkResetEvent ] ---
+
+    /** {@code VkResult vkResetEvent(VkDevice device, VkEvent event)} */
+    @NativeType("VkResult")
+    public static int vkResetEvent(VkDevice device, @NativeType("VkEvent") long event) {
+        long __functionAddress = device.getCapabilities().vkResetEvent;
+        return callPJI(device.address(), event, __functionAddress);
+    }
+
+    // --- [ vkCreateBufferView ] ---
+
+    /** {@code VkResult vkCreateBufferView(VkDevice device, VkBufferViewCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkBufferView * pView)} */
+    public static int nvkCreateBufferView(VkDevice device, long pCreateInfo, long pAllocator, long pView) {
+        long __functionAddress = device.getCapabilities().vkCreateBufferView;
+        return callPPPPI(device.address(), pCreateInfo, pAllocator, pView, __functionAddress);
+    }
+
+    /** {@code VkResult vkCreateBufferView(VkDevice device, VkBufferViewCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkBufferView * pView)} */
+    @NativeType("VkResult")
+    public static int vkCreateBufferView(VkDevice device, @NativeType("VkBufferViewCreateInfo const *") VkBufferViewCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkBufferView *") LongBuffer pView) {
+        if (CHECKS) {
+            check(pView, 1);
+        }
+        return nvkCreateBufferView(device, pCreateInfo.address(), memAddressSafe(pAllocator), memAddress(pView));
+    }
+
+    // --- [ vkDestroyBufferView ] ---
+
+    /** {@code void vkDestroyBufferView(VkDevice device, VkBufferView bufferView, VkAllocationCallbacks const * pAllocator)} */
+    public static void nvkDestroyBufferView(VkDevice device, long bufferView, long pAllocator) {
+        long __functionAddress = device.getCapabilities().vkDestroyBufferView;
+        callPJPV(device.address(), bufferView, pAllocator, __functionAddress);
+    }
+
+    /** {@code void vkDestroyBufferView(VkDevice device, VkBufferView bufferView, VkAllocationCallbacks const * pAllocator)} */
+    public static void vkDestroyBufferView(VkDevice device, @NativeType("VkBufferView") long bufferView, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
+        nvkDestroyBufferView(device, bufferView, memAddressSafe(pAllocator));
     }
 
     // --- [ vkCreateShaderModule ] ---
@@ -1840,26 +2127,6 @@ public class VK10 {
     @NativeType("VkResult")
     public static int vkMergePipelineCaches(VkDevice device, @NativeType("VkPipelineCache") long dstCache, @NativeType("VkPipelineCache const *") LongBuffer pSrcCaches) {
         return nvkMergePipelineCaches(device, dstCache, pSrcCaches.remaining(), memAddress(pSrcCaches));
-    }
-
-    // --- [ vkCreateGraphicsPipelines ] ---
-
-    /** {@code VkResult vkCreateGraphicsPipelines(VkDevice device, VkPipelineCache pipelineCache, uint32_t createInfoCount, VkGraphicsPipelineCreateInfo const * pCreateInfos, VkAllocationCallbacks const * pAllocator, VkPipeline * pPipelines)} */
-    public static int nvkCreateGraphicsPipelines(VkDevice device, long pipelineCache, int createInfoCount, long pCreateInfos, long pAllocator, long pPipelines) {
-        long __functionAddress = device.getCapabilities().vkCreateGraphicsPipelines;
-        if (CHECKS) {
-            Struct.validate(pCreateInfos, createInfoCount, VkGraphicsPipelineCreateInfo.SIZEOF, VkGraphicsPipelineCreateInfo::validate);
-        }
-        return callPJPPPI(device.address(), pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines, __functionAddress);
-    }
-
-    /** {@code VkResult vkCreateGraphicsPipelines(VkDevice device, VkPipelineCache pipelineCache, uint32_t createInfoCount, VkGraphicsPipelineCreateInfo const * pCreateInfos, VkAllocationCallbacks const * pAllocator, VkPipeline * pPipelines)} */
-    @NativeType("VkResult")
-    public static int vkCreateGraphicsPipelines(VkDevice device, @NativeType("VkPipelineCache") long pipelineCache, @NativeType("VkGraphicsPipelineCreateInfo const *") VkGraphicsPipelineCreateInfo.Buffer pCreateInfos, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkPipeline *") LongBuffer pPipelines) {
-        if (CHECKS) {
-            check(pPipelines, pCreateInfos.remaining());
-        }
-        return nvkCreateGraphicsPipelines(device, pipelineCache, pCreateInfos.remaining(), pCreateInfos.address(), memAddressSafe(pAllocator), memAddress(pPipelines));
     }
 
     // --- [ vkCreateComputePipelines ] ---
@@ -2092,6 +2359,148 @@ public class VK10 {
         nvkUpdateDescriptorSets(device, remainingSafe(pDescriptorWrites), memAddressSafe(pDescriptorWrites), remainingSafe(pDescriptorCopies), memAddressSafe(pDescriptorCopies));
     }
 
+    // --- [ vkCmdBindPipeline ] ---
+
+    /** {@code void vkCmdBindPipeline(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipeline pipeline)} */
+    public static void vkCmdBindPipeline(VkCommandBuffer commandBuffer, @NativeType("VkPipelineBindPoint") int pipelineBindPoint, @NativeType("VkPipeline") long pipeline) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdBindPipeline;
+        callPJV(commandBuffer.address(), pipelineBindPoint, pipeline, __functionAddress);
+    }
+
+    // --- [ vkCmdBindDescriptorSets ] ---
+
+    /** {@code void vkCmdBindDescriptorSets(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t firstSet, uint32_t descriptorSetCount, VkDescriptorSet const * pDescriptorSets, uint32_t dynamicOffsetCount, uint32_t const * pDynamicOffsets)} */
+    public static void nvkCmdBindDescriptorSets(VkCommandBuffer commandBuffer, int pipelineBindPoint, long layout, int firstSet, int descriptorSetCount, long pDescriptorSets, int dynamicOffsetCount, long pDynamicOffsets) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdBindDescriptorSets;
+        callPJPPV(commandBuffer.address(), pipelineBindPoint, layout, firstSet, descriptorSetCount, pDescriptorSets, dynamicOffsetCount, pDynamicOffsets, __functionAddress);
+    }
+
+    /** {@code void vkCmdBindDescriptorSets(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t firstSet, uint32_t descriptorSetCount, VkDescriptorSet const * pDescriptorSets, uint32_t dynamicOffsetCount, uint32_t const * pDynamicOffsets)} */
+    public static void vkCmdBindDescriptorSets(VkCommandBuffer commandBuffer, @NativeType("VkPipelineBindPoint") int pipelineBindPoint, @NativeType("VkPipelineLayout") long layout, @NativeType("uint32_t") int firstSet, @NativeType("VkDescriptorSet const *") LongBuffer pDescriptorSets, @NativeType("uint32_t const *") @Nullable IntBuffer pDynamicOffsets) {
+        nvkCmdBindDescriptorSets(commandBuffer, pipelineBindPoint, layout, firstSet, pDescriptorSets.remaining(), memAddress(pDescriptorSets), remainingSafe(pDynamicOffsets), memAddressSafe(pDynamicOffsets));
+    }
+
+    // --- [ vkCmdClearColorImage ] ---
+
+    /** {@code void vkCmdClearColorImage(VkCommandBuffer commandBuffer, VkImage image, VkImageLayout imageLayout, VkClearColorValue const * pColor, uint32_t rangeCount, VkImageSubresourceRange const * pRanges)} */
+    public static void nvkCmdClearColorImage(VkCommandBuffer commandBuffer, long image, int imageLayout, long pColor, int rangeCount, long pRanges) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdClearColorImage;
+        callPJPPV(commandBuffer.address(), image, imageLayout, pColor, rangeCount, pRanges, __functionAddress);
+    }
+
+    /** {@code void vkCmdClearColorImage(VkCommandBuffer commandBuffer, VkImage image, VkImageLayout imageLayout, VkClearColorValue const * pColor, uint32_t rangeCount, VkImageSubresourceRange const * pRanges)} */
+    public static void vkCmdClearColorImage(VkCommandBuffer commandBuffer, @NativeType("VkImage") long image, @NativeType("VkImageLayout") int imageLayout, @NativeType("VkClearColorValue const *") @Nullable VkClearColorValue pColor, @NativeType("VkImageSubresourceRange const *") VkImageSubresourceRange.Buffer pRanges) {
+        nvkCmdClearColorImage(commandBuffer, image, imageLayout, memAddressSafe(pColor), pRanges.remaining(), pRanges.address());
+    }
+
+    /** {@code void vkCmdClearColorImage(VkCommandBuffer commandBuffer, VkImage image, VkImageLayout imageLayout, VkClearColorValue const * pColor, uint32_t rangeCount, VkImageSubresourceRange const * pRanges)} */
+    public static void vkCmdClearColorImage(VkCommandBuffer commandBuffer, @NativeType("VkImage") long image, @NativeType("VkImageLayout") int imageLayout, @NativeType("VkClearColorValue const *") @Nullable VkClearColorValue pColor, @NativeType("VkImageSubresourceRange const *") VkImageSubresourceRange pRange) {
+        nvkCmdClearColorImage(commandBuffer, image, imageLayout, memAddressSafe(pColor), 1, pRange.address());
+    }
+
+    // --- [ vkCmdDispatch ] ---
+
+    /** {@code void vkCmdDispatch(VkCommandBuffer commandBuffer, uint32_t groupCountX, uint32_t groupCountY, uint32_t groupCountZ)} */
+    public static void vkCmdDispatch(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int groupCountX, @NativeType("uint32_t") int groupCountY, @NativeType("uint32_t") int groupCountZ) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdDispatch;
+        callPV(commandBuffer.address(), groupCountX, groupCountY, groupCountZ, __functionAddress);
+    }
+
+    // --- [ vkCmdDispatchIndirect ] ---
+
+    /** {@code void vkCmdDispatchIndirect(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset)} */
+    public static void vkCmdDispatchIndirect(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long buffer, @NativeType("VkDeviceSize") long offset) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdDispatchIndirect;
+        callPJJV(commandBuffer.address(), buffer, offset, __functionAddress);
+    }
+
+    // --- [ vkCmdSetEvent ] ---
+
+    /** {@code void vkCmdSetEvent(VkCommandBuffer commandBuffer, VkEvent event, VkPipelineStageFlags stageMask)} */
+    public static void vkCmdSetEvent(VkCommandBuffer commandBuffer, @NativeType("VkEvent") long event, @NativeType("VkPipelineStageFlags") int stageMask) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdSetEvent;
+        callPJV(commandBuffer.address(), event, stageMask, __functionAddress);
+    }
+
+    // --- [ vkCmdResetEvent ] ---
+
+    /** {@code void vkCmdResetEvent(VkCommandBuffer commandBuffer, VkEvent event, VkPipelineStageFlags stageMask)} */
+    public static void vkCmdResetEvent(VkCommandBuffer commandBuffer, @NativeType("VkEvent") long event, @NativeType("VkPipelineStageFlags") int stageMask) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdResetEvent;
+        callPJV(commandBuffer.address(), event, stageMask, __functionAddress);
+    }
+
+    // --- [ vkCmdWaitEvents ] ---
+
+    /** {@code void vkCmdWaitEvents(VkCommandBuffer commandBuffer, uint32_t eventCount, VkEvent const * pEvents, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, uint32_t memoryBarrierCount, VkMemoryBarrier const * pMemoryBarriers, uint32_t bufferMemoryBarrierCount, VkBufferMemoryBarrier const * pBufferMemoryBarriers, uint32_t imageMemoryBarrierCount, VkImageMemoryBarrier const * pImageMemoryBarriers)} */
+    public static void nvkCmdWaitEvents(VkCommandBuffer commandBuffer, int eventCount, long pEvents, int srcStageMask, int dstStageMask, int memoryBarrierCount, long pMemoryBarriers, int bufferMemoryBarrierCount, long pBufferMemoryBarriers, int imageMemoryBarrierCount, long pImageMemoryBarriers) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdWaitEvents;
+        callPPPPPV(commandBuffer.address(), eventCount, pEvents, srcStageMask, dstStageMask, memoryBarrierCount, pMemoryBarriers, bufferMemoryBarrierCount, pBufferMemoryBarriers, imageMemoryBarrierCount, pImageMemoryBarriers, __functionAddress);
+    }
+
+    /** {@code void vkCmdWaitEvents(VkCommandBuffer commandBuffer, uint32_t eventCount, VkEvent const * pEvents, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, uint32_t memoryBarrierCount, VkMemoryBarrier const * pMemoryBarriers, uint32_t bufferMemoryBarrierCount, VkBufferMemoryBarrier const * pBufferMemoryBarriers, uint32_t imageMemoryBarrierCount, VkImageMemoryBarrier const * pImageMemoryBarriers)} */
+    public static void vkCmdWaitEvents(VkCommandBuffer commandBuffer, @NativeType("VkEvent const *") LongBuffer pEvents, @NativeType("VkPipelineStageFlags") int srcStageMask, @NativeType("VkPipelineStageFlags") int dstStageMask, @NativeType("VkMemoryBarrier const *") VkMemoryBarrier.@Nullable Buffer pMemoryBarriers, @NativeType("VkBufferMemoryBarrier const *") VkBufferMemoryBarrier.@Nullable Buffer pBufferMemoryBarriers, @NativeType("VkImageMemoryBarrier const *") VkImageMemoryBarrier.@Nullable Buffer pImageMemoryBarriers) {
+        nvkCmdWaitEvents(commandBuffer, pEvents.remaining(), memAddress(pEvents), srcStageMask, dstStageMask, remainingSafe(pMemoryBarriers), memAddressSafe(pMemoryBarriers), remainingSafe(pBufferMemoryBarriers), memAddressSafe(pBufferMemoryBarriers), remainingSafe(pImageMemoryBarriers), memAddressSafe(pImageMemoryBarriers));
+    }
+
+    // --- [ vkCmdPushConstants ] ---
+
+    /** {@code void vkCmdPushConstants(VkCommandBuffer commandBuffer, VkPipelineLayout layout, VkShaderStageFlags stageFlags, uint32_t offset, uint32_t size, void const * pValues)} */
+    public static void nvkCmdPushConstants(VkCommandBuffer commandBuffer, long layout, int stageFlags, int offset, int size, long pValues) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdPushConstants;
+        callPJPV(commandBuffer.address(), layout, stageFlags, offset, size, pValues, __functionAddress);
+    }
+
+    /** {@code void vkCmdPushConstants(VkCommandBuffer commandBuffer, VkPipelineLayout layout, VkShaderStageFlags stageFlags, uint32_t offset, uint32_t size, void const * pValues)} */
+    public static void vkCmdPushConstants(VkCommandBuffer commandBuffer, @NativeType("VkPipelineLayout") long layout, @NativeType("VkShaderStageFlags") int stageFlags, @NativeType("uint32_t") int offset, @NativeType("void const *") ByteBuffer pValues) {
+        nvkCmdPushConstants(commandBuffer, layout, stageFlags, offset, pValues.remaining(), memAddress(pValues));
+    }
+
+    /** {@code void vkCmdPushConstants(VkCommandBuffer commandBuffer, VkPipelineLayout layout, VkShaderStageFlags stageFlags, uint32_t offset, uint32_t size, void const * pValues)} */
+    public static void vkCmdPushConstants(VkCommandBuffer commandBuffer, @NativeType("VkPipelineLayout") long layout, @NativeType("VkShaderStageFlags") int stageFlags, @NativeType("uint32_t") int offset, @NativeType("void const *") ShortBuffer pValues) {
+        nvkCmdPushConstants(commandBuffer, layout, stageFlags, offset, pValues.remaining() << 1, memAddress(pValues));
+    }
+
+    /** {@code void vkCmdPushConstants(VkCommandBuffer commandBuffer, VkPipelineLayout layout, VkShaderStageFlags stageFlags, uint32_t offset, uint32_t size, void const * pValues)} */
+    public static void vkCmdPushConstants(VkCommandBuffer commandBuffer, @NativeType("VkPipelineLayout") long layout, @NativeType("VkShaderStageFlags") int stageFlags, @NativeType("uint32_t") int offset, @NativeType("void const *") IntBuffer pValues) {
+        nvkCmdPushConstants(commandBuffer, layout, stageFlags, offset, pValues.remaining() << 2, memAddress(pValues));
+    }
+
+    /** {@code void vkCmdPushConstants(VkCommandBuffer commandBuffer, VkPipelineLayout layout, VkShaderStageFlags stageFlags, uint32_t offset, uint32_t size, void const * pValues)} */
+    public static void vkCmdPushConstants(VkCommandBuffer commandBuffer, @NativeType("VkPipelineLayout") long layout, @NativeType("VkShaderStageFlags") int stageFlags, @NativeType("uint32_t") int offset, @NativeType("void const *") LongBuffer pValues) {
+        nvkCmdPushConstants(commandBuffer, layout, stageFlags, offset, pValues.remaining() << 3, memAddress(pValues));
+    }
+
+    /** {@code void vkCmdPushConstants(VkCommandBuffer commandBuffer, VkPipelineLayout layout, VkShaderStageFlags stageFlags, uint32_t offset, uint32_t size, void const * pValues)} */
+    public static void vkCmdPushConstants(VkCommandBuffer commandBuffer, @NativeType("VkPipelineLayout") long layout, @NativeType("VkShaderStageFlags") int stageFlags, @NativeType("uint32_t") int offset, @NativeType("void const *") FloatBuffer pValues) {
+        nvkCmdPushConstants(commandBuffer, layout, stageFlags, offset, pValues.remaining() << 2, memAddress(pValues));
+    }
+
+    /** {@code void vkCmdPushConstants(VkCommandBuffer commandBuffer, VkPipelineLayout layout, VkShaderStageFlags stageFlags, uint32_t offset, uint32_t size, void const * pValues)} */
+    public static void vkCmdPushConstants(VkCommandBuffer commandBuffer, @NativeType("VkPipelineLayout") long layout, @NativeType("VkShaderStageFlags") int stageFlags, @NativeType("uint32_t") int offset, @NativeType("void const *") DoubleBuffer pValues) {
+        nvkCmdPushConstants(commandBuffer, layout, stageFlags, offset, pValues.remaining() << 3, memAddress(pValues));
+    }
+
+    // --- [ vkCreateGraphicsPipelines ] ---
+
+    /** {@code VkResult vkCreateGraphicsPipelines(VkDevice device, VkPipelineCache pipelineCache, uint32_t createInfoCount, VkGraphicsPipelineCreateInfo const * pCreateInfos, VkAllocationCallbacks const * pAllocator, VkPipeline * pPipelines)} */
+    public static int nvkCreateGraphicsPipelines(VkDevice device, long pipelineCache, int createInfoCount, long pCreateInfos, long pAllocator, long pPipelines) {
+        long __functionAddress = device.getCapabilities().vkCreateGraphicsPipelines;
+        if (CHECKS) {
+            Struct.validate(pCreateInfos, createInfoCount, VkGraphicsPipelineCreateInfo.SIZEOF, VkGraphicsPipelineCreateInfo::validate);
+        }
+        return callPJPPPI(device.address(), pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines, __functionAddress);
+    }
+
+    /** {@code VkResult vkCreateGraphicsPipelines(VkDevice device, VkPipelineCache pipelineCache, uint32_t createInfoCount, VkGraphicsPipelineCreateInfo const * pCreateInfos, VkAllocationCallbacks const * pAllocator, VkPipeline * pPipelines)} */
+    @NativeType("VkResult")
+    public static int vkCreateGraphicsPipelines(VkDevice device, @NativeType("VkPipelineCache") long pipelineCache, @NativeType("VkGraphicsPipelineCreateInfo const *") VkGraphicsPipelineCreateInfo.Buffer pCreateInfos, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkPipeline *") LongBuffer pPipelines) {
+        if (CHECKS) {
+            check(pPipelines, pCreateInfos.remaining());
+        }
+        return nvkCreateGraphicsPipelines(device, pipelineCache, pCreateInfos.remaining(), pCreateInfos.address(), memAddressSafe(pAllocator), memAddress(pPipelines));
+    }
+
     // --- [ vkCreateFramebuffer ] ---
 
     /** {@code VkResult vkCreateFramebuffer(VkDevice device, VkFramebufferCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkFramebuffer * pFramebuffer)} */
@@ -2166,126 +2575,6 @@ public class VK10 {
     /** {@code void vkGetRenderAreaGranularity(VkDevice device, VkRenderPass renderPass, VkExtent2D * pGranularity)} */
     public static void vkGetRenderAreaGranularity(VkDevice device, @NativeType("VkRenderPass") long renderPass, @NativeType("VkExtent2D *") VkExtent2D pGranularity) {
         nvkGetRenderAreaGranularity(device, renderPass, pGranularity.address());
-    }
-
-    // --- [ vkCreateCommandPool ] ---
-
-    /** {@code VkResult vkCreateCommandPool(VkDevice device, VkCommandPoolCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkCommandPool * pCommandPool)} */
-    public static int nvkCreateCommandPool(VkDevice device, long pCreateInfo, long pAllocator, long pCommandPool) {
-        long __functionAddress = device.getCapabilities().vkCreateCommandPool;
-        return callPPPPI(device.address(), pCreateInfo, pAllocator, pCommandPool, __functionAddress);
-    }
-
-    /** {@code VkResult vkCreateCommandPool(VkDevice device, VkCommandPoolCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkCommandPool * pCommandPool)} */
-    @NativeType("VkResult")
-    public static int vkCreateCommandPool(VkDevice device, @NativeType("VkCommandPoolCreateInfo const *") VkCommandPoolCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkCommandPool *") LongBuffer pCommandPool) {
-        if (CHECKS) {
-            check(pCommandPool, 1);
-        }
-        return nvkCreateCommandPool(device, pCreateInfo.address(), memAddressSafe(pAllocator), memAddress(pCommandPool));
-    }
-
-    // --- [ vkDestroyCommandPool ] ---
-
-    /** {@code void vkDestroyCommandPool(VkDevice device, VkCommandPool commandPool, VkAllocationCallbacks const * pAllocator)} */
-    public static void nvkDestroyCommandPool(VkDevice device, long commandPool, long pAllocator) {
-        long __functionAddress = device.getCapabilities().vkDestroyCommandPool;
-        callPJPV(device.address(), commandPool, pAllocator, __functionAddress);
-    }
-
-    /** {@code void vkDestroyCommandPool(VkDevice device, VkCommandPool commandPool, VkAllocationCallbacks const * pAllocator)} */
-    public static void vkDestroyCommandPool(VkDevice device, @NativeType("VkCommandPool") long commandPool, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator) {
-        nvkDestroyCommandPool(device, commandPool, memAddressSafe(pAllocator));
-    }
-
-    // --- [ vkResetCommandPool ] ---
-
-    /** {@code VkResult vkResetCommandPool(VkDevice device, VkCommandPool commandPool, VkCommandPoolResetFlags flags)} */
-    @NativeType("VkResult")
-    public static int vkResetCommandPool(VkDevice device, @NativeType("VkCommandPool") long commandPool, @NativeType("VkCommandPoolResetFlags") int flags) {
-        long __functionAddress = device.getCapabilities().vkResetCommandPool;
-        return callPJI(device.address(), commandPool, flags, __functionAddress);
-    }
-
-    // --- [ vkAllocateCommandBuffers ] ---
-
-    /** {@code VkResult vkAllocateCommandBuffers(VkDevice device, VkCommandBufferAllocateInfo const * pAllocateInfo, VkCommandBuffer * pCommandBuffers)} */
-    public static int nvkAllocateCommandBuffers(VkDevice device, long pAllocateInfo, long pCommandBuffers) {
-        long __functionAddress = device.getCapabilities().vkAllocateCommandBuffers;
-        return callPPPI(device.address(), pAllocateInfo, pCommandBuffers, __functionAddress);
-    }
-
-    /** {@code VkResult vkAllocateCommandBuffers(VkDevice device, VkCommandBufferAllocateInfo const * pAllocateInfo, VkCommandBuffer * pCommandBuffers)} */
-    @NativeType("VkResult")
-    public static int vkAllocateCommandBuffers(VkDevice device, @NativeType("VkCommandBufferAllocateInfo const *") VkCommandBufferAllocateInfo pAllocateInfo, @NativeType("VkCommandBuffer *") PointerBuffer pCommandBuffers) {
-        if (CHECKS) {
-            check(pCommandBuffers, pAllocateInfo.commandBufferCount());
-        }
-        return nvkAllocateCommandBuffers(device, pAllocateInfo.address(), memAddress(pCommandBuffers));
-    }
-
-    // --- [ vkFreeCommandBuffers ] ---
-
-    /** {@code void vkFreeCommandBuffers(VkDevice device, VkCommandPool commandPool, uint32_t commandBufferCount, VkCommandBuffer const * pCommandBuffers)} */
-    public static void nvkFreeCommandBuffers(VkDevice device, long commandPool, int commandBufferCount, long pCommandBuffers) {
-        long __functionAddress = device.getCapabilities().vkFreeCommandBuffers;
-        callPJPV(device.address(), commandPool, commandBufferCount, pCommandBuffers, __functionAddress);
-    }
-
-    /** {@code void vkFreeCommandBuffers(VkDevice device, VkCommandPool commandPool, uint32_t commandBufferCount, VkCommandBuffer const * pCommandBuffers)} */
-    public static void vkFreeCommandBuffers(VkDevice device, @NativeType("VkCommandPool") long commandPool, @NativeType("VkCommandBuffer const *") @Nullable PointerBuffer pCommandBuffers) {
-        nvkFreeCommandBuffers(device, commandPool, remainingSafe(pCommandBuffers), memAddressSafe(pCommandBuffers));
-    }
-
-    /** {@code void vkFreeCommandBuffers(VkDevice device, VkCommandPool commandPool, uint32_t commandBufferCount, VkCommandBuffer const * pCommandBuffers)} */
-    public static void vkFreeCommandBuffers(VkDevice device, @NativeType("VkCommandPool") long commandPool, @NativeType("VkCommandBuffer const *") VkCommandBuffer pCommandBuffer) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            PointerBuffer pCommandBuffers = stack.pointers(pCommandBuffer);
-            nvkFreeCommandBuffers(device, commandPool, 1, memAddress(pCommandBuffers));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
-    }
-
-    // --- [ vkBeginCommandBuffer ] ---
-
-    /** {@code VkResult vkBeginCommandBuffer(VkCommandBuffer commandBuffer, VkCommandBufferBeginInfo const * pBeginInfo)} */
-    public static int nvkBeginCommandBuffer(VkCommandBuffer commandBuffer, long pBeginInfo) {
-        long __functionAddress = commandBuffer.getCapabilities().vkBeginCommandBuffer;
-        return callPPI(commandBuffer.address(), pBeginInfo, __functionAddress);
-    }
-
-    /** {@code VkResult vkBeginCommandBuffer(VkCommandBuffer commandBuffer, VkCommandBufferBeginInfo const * pBeginInfo)} */
-    @NativeType("VkResult")
-    public static int vkBeginCommandBuffer(VkCommandBuffer commandBuffer, @NativeType("VkCommandBufferBeginInfo const *") VkCommandBufferBeginInfo pBeginInfo) {
-        return nvkBeginCommandBuffer(commandBuffer, pBeginInfo.address());
-    }
-
-    // --- [ vkEndCommandBuffer ] ---
-
-    /** {@code VkResult vkEndCommandBuffer(VkCommandBuffer commandBuffer)} */
-    @NativeType("VkResult")
-    public static int vkEndCommandBuffer(VkCommandBuffer commandBuffer) {
-        long __functionAddress = commandBuffer.getCapabilities().vkEndCommandBuffer;
-        return callPI(commandBuffer.address(), __functionAddress);
-    }
-
-    // --- [ vkResetCommandBuffer ] ---
-
-    /** {@code VkResult vkResetCommandBuffer(VkCommandBuffer commandBuffer, VkCommandBufferResetFlags flags)} */
-    @NativeType("VkResult")
-    public static int vkResetCommandBuffer(VkCommandBuffer commandBuffer, @NativeType("VkCommandBufferResetFlags") int flags) {
-        long __functionAddress = commandBuffer.getCapabilities().vkResetCommandBuffer;
-        return callPI(commandBuffer.address(), flags, __functionAddress);
-    }
-
-    // --- [ vkCmdBindPipeline ] ---
-
-    /** {@code void vkCmdBindPipeline(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipeline pipeline)} */
-    public static void vkCmdBindPipeline(VkCommandBuffer commandBuffer, @NativeType("VkPipelineBindPoint") int pipelineBindPoint, @NativeType("VkPipeline") long pipeline) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdBindPipeline;
-        callPJV(commandBuffer.address(), pipelineBindPoint, pipeline, __functionAddress);
     }
 
     // --- [ vkCmdSetViewport ] ---
@@ -2378,19 +2667,6 @@ public class VK10 {
         callPV(commandBuffer.address(), faceMask, reference, __functionAddress);
     }
 
-    // --- [ vkCmdBindDescriptorSets ] ---
-
-    /** {@code void vkCmdBindDescriptorSets(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t firstSet, uint32_t descriptorSetCount, VkDescriptorSet const * pDescriptorSets, uint32_t dynamicOffsetCount, uint32_t const * pDynamicOffsets)} */
-    public static void nvkCmdBindDescriptorSets(VkCommandBuffer commandBuffer, int pipelineBindPoint, long layout, int firstSet, int descriptorSetCount, long pDescriptorSets, int dynamicOffsetCount, long pDynamicOffsets) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdBindDescriptorSets;
-        callPJPPV(commandBuffer.address(), pipelineBindPoint, layout, firstSet, descriptorSetCount, pDescriptorSets, dynamicOffsetCount, pDynamicOffsets, __functionAddress);
-    }
-
-    /** {@code void vkCmdBindDescriptorSets(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t firstSet, uint32_t descriptorSetCount, VkDescriptorSet const * pDescriptorSets, uint32_t dynamicOffsetCount, uint32_t const * pDynamicOffsets)} */
-    public static void vkCmdBindDescriptorSets(VkCommandBuffer commandBuffer, @NativeType("VkPipelineBindPoint") int pipelineBindPoint, @NativeType("VkPipelineLayout") long layout, @NativeType("uint32_t") int firstSet, @NativeType("VkDescriptorSet const *") LongBuffer pDescriptorSets, @NativeType("uint32_t const *") @Nullable IntBuffer pDynamicOffsets) {
-        nvkCmdBindDescriptorSets(commandBuffer, pipelineBindPoint, layout, firstSet, pDescriptorSets.remaining(), memAddress(pDescriptorSets), remainingSafe(pDynamicOffsets), memAddressSafe(pDynamicOffsets));
-    }
-
     // --- [ vkCmdBindIndexBuffer ] ---
 
     /** {@code void vkCmdBindIndexBuffer(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, VkIndexType indexType)} */
@@ -2447,48 +2723,6 @@ public class VK10 {
         callPJJV(commandBuffer.address(), buffer, offset, drawCount, stride, __functionAddress);
     }
 
-    // --- [ vkCmdDispatch ] ---
-
-    /** {@code void vkCmdDispatch(VkCommandBuffer commandBuffer, uint32_t groupCountX, uint32_t groupCountY, uint32_t groupCountZ)} */
-    public static void vkCmdDispatch(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int groupCountX, @NativeType("uint32_t") int groupCountY, @NativeType("uint32_t") int groupCountZ) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdDispatch;
-        callPV(commandBuffer.address(), groupCountX, groupCountY, groupCountZ, __functionAddress);
-    }
-
-    // --- [ vkCmdDispatchIndirect ] ---
-
-    /** {@code void vkCmdDispatchIndirect(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset)} */
-    public static void vkCmdDispatchIndirect(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long buffer, @NativeType("VkDeviceSize") long offset) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdDispatchIndirect;
-        callPJJV(commandBuffer.address(), buffer, offset, __functionAddress);
-    }
-
-    // --- [ vkCmdCopyBuffer ] ---
-
-    /** {@code void vkCmdCopyBuffer(VkCommandBuffer commandBuffer, VkBuffer srcBuffer, VkBuffer dstBuffer, uint32_t regionCount, VkBufferCopy const * pRegions)} */
-    public static void nvkCmdCopyBuffer(VkCommandBuffer commandBuffer, long srcBuffer, long dstBuffer, int regionCount, long pRegions) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdCopyBuffer;
-        callPJJPV(commandBuffer.address(), srcBuffer, dstBuffer, regionCount, pRegions, __functionAddress);
-    }
-
-    /** {@code void vkCmdCopyBuffer(VkCommandBuffer commandBuffer, VkBuffer srcBuffer, VkBuffer dstBuffer, uint32_t regionCount, VkBufferCopy const * pRegions)} */
-    public static void vkCmdCopyBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long srcBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkBufferCopy const *") VkBufferCopy.Buffer pRegions) {
-        nvkCmdCopyBuffer(commandBuffer, srcBuffer, dstBuffer, pRegions.remaining(), pRegions.address());
-    }
-
-    // --- [ vkCmdCopyImage ] ---
-
-    /** {@code void vkCmdCopyImage(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, uint32_t regionCount, VkImageCopy const * pRegions)} */
-    public static void nvkCmdCopyImage(VkCommandBuffer commandBuffer, long srcImage, int srcImageLayout, long dstImage, int dstImageLayout, int regionCount, long pRegions) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdCopyImage;
-        callPJJPV(commandBuffer.address(), srcImage, srcImageLayout, dstImage, dstImageLayout, regionCount, pRegions, __functionAddress);
-    }
-
-    /** {@code void vkCmdCopyImage(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, uint32_t regionCount, VkImageCopy const * pRegions)} */
-    public static void vkCmdCopyImage(VkCommandBuffer commandBuffer, @NativeType("VkImage") long srcImage, @NativeType("VkImageLayout") int srcImageLayout, @NativeType("VkImage") long dstImage, @NativeType("VkImageLayout") int dstImageLayout, @NativeType("VkImageCopy const *") VkImageCopy.Buffer pRegions) {
-        nvkCmdCopyImage(commandBuffer, srcImage, srcImageLayout, dstImage, dstImageLayout, pRegions.remaining(), pRegions.address());
-    }
-
     // --- [ vkCmdBlitImage ] ---
 
     /** {@code void vkCmdBlitImage(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, uint32_t regionCount, VkImageBlit const * pRegions, VkFilter filter)} */
@@ -2500,96 +2734,6 @@ public class VK10 {
     /** {@code void vkCmdBlitImage(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkImage dstImage, VkImageLayout dstImageLayout, uint32_t regionCount, VkImageBlit const * pRegions, VkFilter filter)} */
     public static void vkCmdBlitImage(VkCommandBuffer commandBuffer, @NativeType("VkImage") long srcImage, @NativeType("VkImageLayout") int srcImageLayout, @NativeType("VkImage") long dstImage, @NativeType("VkImageLayout") int dstImageLayout, @NativeType("VkImageBlit const *") VkImageBlit.Buffer pRegions, @NativeType("VkFilter") int filter) {
         nvkCmdBlitImage(commandBuffer, srcImage, srcImageLayout, dstImage, dstImageLayout, pRegions.remaining(), pRegions.address(), filter);
-    }
-
-    // --- [ vkCmdCopyBufferToImage ] ---
-
-    /** {@code void vkCmdCopyBufferToImage(VkCommandBuffer commandBuffer, VkBuffer srcBuffer, VkImage dstImage, VkImageLayout dstImageLayout, uint32_t regionCount, VkBufferImageCopy const * pRegions)} */
-    public static void nvkCmdCopyBufferToImage(VkCommandBuffer commandBuffer, long srcBuffer, long dstImage, int dstImageLayout, int regionCount, long pRegions) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdCopyBufferToImage;
-        callPJJPV(commandBuffer.address(), srcBuffer, dstImage, dstImageLayout, regionCount, pRegions, __functionAddress);
-    }
-
-    /** {@code void vkCmdCopyBufferToImage(VkCommandBuffer commandBuffer, VkBuffer srcBuffer, VkImage dstImage, VkImageLayout dstImageLayout, uint32_t regionCount, VkBufferImageCopy const * pRegions)} */
-    public static void vkCmdCopyBufferToImage(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long srcBuffer, @NativeType("VkImage") long dstImage, @NativeType("VkImageLayout") int dstImageLayout, @NativeType("VkBufferImageCopy const *") VkBufferImageCopy.Buffer pRegions) {
-        nvkCmdCopyBufferToImage(commandBuffer, srcBuffer, dstImage, dstImageLayout, pRegions.remaining(), pRegions.address());
-    }
-
-    // --- [ vkCmdCopyImageToBuffer ] ---
-
-    /** {@code void vkCmdCopyImageToBuffer(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkBuffer dstBuffer, uint32_t regionCount, VkBufferImageCopy const * pRegions)} */
-    public static void nvkCmdCopyImageToBuffer(VkCommandBuffer commandBuffer, long srcImage, int srcImageLayout, long dstBuffer, int regionCount, long pRegions) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdCopyImageToBuffer;
-        callPJJPV(commandBuffer.address(), srcImage, srcImageLayout, dstBuffer, regionCount, pRegions, __functionAddress);
-    }
-
-    /** {@code void vkCmdCopyImageToBuffer(VkCommandBuffer commandBuffer, VkImage srcImage, VkImageLayout srcImageLayout, VkBuffer dstBuffer, uint32_t regionCount, VkBufferImageCopy const * pRegions)} */
-    public static void vkCmdCopyImageToBuffer(VkCommandBuffer commandBuffer, @NativeType("VkImage") long srcImage, @NativeType("VkImageLayout") int srcImageLayout, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkBufferImageCopy const *") VkBufferImageCopy.Buffer pRegions) {
-        nvkCmdCopyImageToBuffer(commandBuffer, srcImage, srcImageLayout, dstBuffer, pRegions.remaining(), pRegions.address());
-    }
-
-    // --- [ vkCmdUpdateBuffer ] ---
-
-    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
-    public static void nvkCmdUpdateBuffer(VkCommandBuffer commandBuffer, long dstBuffer, long dstOffset, long dataSize, long pData) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdUpdateBuffer;
-        callPJJJPV(commandBuffer.address(), dstBuffer, dstOffset, dataSize, pData, __functionAddress);
-    }
-
-    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
-    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") ByteBuffer pData) {
-        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, pData.remaining(), memAddress(pData));
-    }
-
-    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
-    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") ShortBuffer pData) {
-        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, Integer.toUnsignedLong(pData.remaining()) << 1, memAddress(pData));
-    }
-
-    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
-    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") IntBuffer pData) {
-        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, Integer.toUnsignedLong(pData.remaining()) << 2, memAddress(pData));
-    }
-
-    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
-    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") LongBuffer pData) {
-        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, Integer.toUnsignedLong(pData.remaining()) << 3, memAddress(pData));
-    }
-
-    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
-    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") FloatBuffer pData) {
-        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, Integer.toUnsignedLong(pData.remaining()) << 2, memAddress(pData));
-    }
-
-    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
-    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") DoubleBuffer pData) {
-        nvkCmdUpdateBuffer(commandBuffer, dstBuffer, dstOffset, Integer.toUnsignedLong(pData.remaining()) << 3, memAddress(pData));
-    }
-
-    // --- [ vkCmdFillBuffer ] ---
-
-    /** {@code void vkCmdFillBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize size, uint32_t data)} */
-    public static void vkCmdFillBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("VkDeviceSize") long size, @NativeType("uint32_t") int data) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdFillBuffer;
-        callPJJJV(commandBuffer.address(), dstBuffer, dstOffset, size, data, __functionAddress);
-    }
-
-    // --- [ vkCmdClearColorImage ] ---
-
-    /** {@code void vkCmdClearColorImage(VkCommandBuffer commandBuffer, VkImage image, VkImageLayout imageLayout, VkClearColorValue const * pColor, uint32_t rangeCount, VkImageSubresourceRange const * pRanges)} */
-    public static void nvkCmdClearColorImage(VkCommandBuffer commandBuffer, long image, int imageLayout, long pColor, int rangeCount, long pRanges) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdClearColorImage;
-        callPJPPV(commandBuffer.address(), image, imageLayout, pColor, rangeCount, pRanges, __functionAddress);
-    }
-
-    /** {@code void vkCmdClearColorImage(VkCommandBuffer commandBuffer, VkImage image, VkImageLayout imageLayout, VkClearColorValue const * pColor, uint32_t rangeCount, VkImageSubresourceRange const * pRanges)} */
-    public static void vkCmdClearColorImage(VkCommandBuffer commandBuffer, @NativeType("VkImage") long image, @NativeType("VkImageLayout") int imageLayout, @NativeType("VkClearColorValue const *") @Nullable VkClearColorValue pColor, @NativeType("VkImageSubresourceRange const *") VkImageSubresourceRange.Buffer pRanges) {
-        nvkCmdClearColorImage(commandBuffer, image, imageLayout, memAddressSafe(pColor), pRanges.remaining(), pRanges.address());
-    }
-
-    /** {@code void vkCmdClearColorImage(VkCommandBuffer commandBuffer, VkImage image, VkImageLayout imageLayout, VkClearColorValue const * pColor, uint32_t rangeCount, VkImageSubresourceRange const * pRanges)} */
-    public static void vkCmdClearColorImage(VkCommandBuffer commandBuffer, @NativeType("VkImage") long image, @NativeType("VkImageLayout") int imageLayout, @NativeType("VkClearColorValue const *") @Nullable VkClearColorValue pColor, @NativeType("VkImageSubresourceRange const *") VkImageSubresourceRange pRange) {
-        nvkCmdClearColorImage(commandBuffer, image, imageLayout, memAddressSafe(pColor), 1, pRange.address());
     }
 
     // --- [ vkCmdClearDepthStencilImage ] ---
@@ -2641,126 +2785,6 @@ public class VK10 {
         nvkCmdResolveImage(commandBuffer, srcImage, srcImageLayout, dstImage, dstImageLayout, 1, pRegion.address());
     }
 
-    // --- [ vkCmdSetEvent ] ---
-
-    /** {@code void vkCmdSetEvent(VkCommandBuffer commandBuffer, VkEvent event, VkPipelineStageFlags stageMask)} */
-    public static void vkCmdSetEvent(VkCommandBuffer commandBuffer, @NativeType("VkEvent") long event, @NativeType("VkPipelineStageFlags") int stageMask) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdSetEvent;
-        callPJV(commandBuffer.address(), event, stageMask, __functionAddress);
-    }
-
-    // --- [ vkCmdResetEvent ] ---
-
-    /** {@code void vkCmdResetEvent(VkCommandBuffer commandBuffer, VkEvent event, VkPipelineStageFlags stageMask)} */
-    public static void vkCmdResetEvent(VkCommandBuffer commandBuffer, @NativeType("VkEvent") long event, @NativeType("VkPipelineStageFlags") int stageMask) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdResetEvent;
-        callPJV(commandBuffer.address(), event, stageMask, __functionAddress);
-    }
-
-    // --- [ vkCmdWaitEvents ] ---
-
-    /** {@code void vkCmdWaitEvents(VkCommandBuffer commandBuffer, uint32_t eventCount, VkEvent const * pEvents, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, uint32_t memoryBarrierCount, VkMemoryBarrier const * pMemoryBarriers, uint32_t bufferMemoryBarrierCount, VkBufferMemoryBarrier const * pBufferMemoryBarriers, uint32_t imageMemoryBarrierCount, VkImageMemoryBarrier const * pImageMemoryBarriers)} */
-    public static void nvkCmdWaitEvents(VkCommandBuffer commandBuffer, int eventCount, long pEvents, int srcStageMask, int dstStageMask, int memoryBarrierCount, long pMemoryBarriers, int bufferMemoryBarrierCount, long pBufferMemoryBarriers, int imageMemoryBarrierCount, long pImageMemoryBarriers) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdWaitEvents;
-        callPPPPPV(commandBuffer.address(), eventCount, pEvents, srcStageMask, dstStageMask, memoryBarrierCount, pMemoryBarriers, bufferMemoryBarrierCount, pBufferMemoryBarriers, imageMemoryBarrierCount, pImageMemoryBarriers, __functionAddress);
-    }
-
-    /** {@code void vkCmdWaitEvents(VkCommandBuffer commandBuffer, uint32_t eventCount, VkEvent const * pEvents, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, uint32_t memoryBarrierCount, VkMemoryBarrier const * pMemoryBarriers, uint32_t bufferMemoryBarrierCount, VkBufferMemoryBarrier const * pBufferMemoryBarriers, uint32_t imageMemoryBarrierCount, VkImageMemoryBarrier const * pImageMemoryBarriers)} */
-    public static void vkCmdWaitEvents(VkCommandBuffer commandBuffer, @NativeType("VkEvent const *") LongBuffer pEvents, @NativeType("VkPipelineStageFlags") int srcStageMask, @NativeType("VkPipelineStageFlags") int dstStageMask, @NativeType("VkMemoryBarrier const *") VkMemoryBarrier.@Nullable Buffer pMemoryBarriers, @NativeType("VkBufferMemoryBarrier const *") VkBufferMemoryBarrier.@Nullable Buffer pBufferMemoryBarriers, @NativeType("VkImageMemoryBarrier const *") VkImageMemoryBarrier.@Nullable Buffer pImageMemoryBarriers) {
-        nvkCmdWaitEvents(commandBuffer, pEvents.remaining(), memAddress(pEvents), srcStageMask, dstStageMask, remainingSafe(pMemoryBarriers), memAddressSafe(pMemoryBarriers), remainingSafe(pBufferMemoryBarriers), memAddressSafe(pBufferMemoryBarriers), remainingSafe(pImageMemoryBarriers), memAddressSafe(pImageMemoryBarriers));
-    }
-
-    // --- [ vkCmdPipelineBarrier ] ---
-
-    /** {@code void vkCmdPipelineBarrier(VkCommandBuffer commandBuffer, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, VkDependencyFlags dependencyFlags, uint32_t memoryBarrierCount, VkMemoryBarrier const * pMemoryBarriers, uint32_t bufferMemoryBarrierCount, VkBufferMemoryBarrier const * pBufferMemoryBarriers, uint32_t imageMemoryBarrierCount, VkImageMemoryBarrier const * pImageMemoryBarriers)} */
-    public static void nvkCmdPipelineBarrier(VkCommandBuffer commandBuffer, int srcStageMask, int dstStageMask, int dependencyFlags, int memoryBarrierCount, long pMemoryBarriers, int bufferMemoryBarrierCount, long pBufferMemoryBarriers, int imageMemoryBarrierCount, long pImageMemoryBarriers) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdPipelineBarrier;
-        callPPPPV(commandBuffer.address(), srcStageMask, dstStageMask, dependencyFlags, memoryBarrierCount, pMemoryBarriers, bufferMemoryBarrierCount, pBufferMemoryBarriers, imageMemoryBarrierCount, pImageMemoryBarriers, __functionAddress);
-    }
-
-    /** {@code void vkCmdPipelineBarrier(VkCommandBuffer commandBuffer, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, VkDependencyFlags dependencyFlags, uint32_t memoryBarrierCount, VkMemoryBarrier const * pMemoryBarriers, uint32_t bufferMemoryBarrierCount, VkBufferMemoryBarrier const * pBufferMemoryBarriers, uint32_t imageMemoryBarrierCount, VkImageMemoryBarrier const * pImageMemoryBarriers)} */
-    public static void vkCmdPipelineBarrier(VkCommandBuffer commandBuffer, @NativeType("VkPipelineStageFlags") int srcStageMask, @NativeType("VkPipelineStageFlags") int dstStageMask, @NativeType("VkDependencyFlags") int dependencyFlags, @NativeType("VkMemoryBarrier const *") VkMemoryBarrier.@Nullable Buffer pMemoryBarriers, @NativeType("VkBufferMemoryBarrier const *") VkBufferMemoryBarrier.@Nullable Buffer pBufferMemoryBarriers, @NativeType("VkImageMemoryBarrier const *") VkImageMemoryBarrier.@Nullable Buffer pImageMemoryBarriers) {
-        nvkCmdPipelineBarrier(commandBuffer, srcStageMask, dstStageMask, dependencyFlags, remainingSafe(pMemoryBarriers), memAddressSafe(pMemoryBarriers), remainingSafe(pBufferMemoryBarriers), memAddressSafe(pBufferMemoryBarriers), remainingSafe(pImageMemoryBarriers), memAddressSafe(pImageMemoryBarriers));
-    }
-
-    // --- [ vkCmdBeginQuery ] ---
-
-    /** {@code void vkCmdBeginQuery(VkCommandBuffer commandBuffer, VkQueryPool queryPool, uint32_t query, VkQueryControlFlags flags)} */
-    public static void vkCmdBeginQuery(VkCommandBuffer commandBuffer, @NativeType("VkQueryPool") long queryPool, @NativeType("uint32_t") int query, @NativeType("VkQueryControlFlags") int flags) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdBeginQuery;
-        callPJV(commandBuffer.address(), queryPool, query, flags, __functionAddress);
-    }
-
-    // --- [ vkCmdEndQuery ] ---
-
-    /** {@code void vkCmdEndQuery(VkCommandBuffer commandBuffer, VkQueryPool queryPool, uint32_t query)} */
-    public static void vkCmdEndQuery(VkCommandBuffer commandBuffer, @NativeType("VkQueryPool") long queryPool, @NativeType("uint32_t") int query) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdEndQuery;
-        callPJV(commandBuffer.address(), queryPool, query, __functionAddress);
-    }
-
-    // --- [ vkCmdResetQueryPool ] ---
-
-    /** {@code void vkCmdResetQueryPool(VkCommandBuffer commandBuffer, VkQueryPool queryPool, uint32_t firstQuery, uint32_t queryCount)} */
-    public static void vkCmdResetQueryPool(VkCommandBuffer commandBuffer, @NativeType("VkQueryPool") long queryPool, @NativeType("uint32_t") int firstQuery, @NativeType("uint32_t") int queryCount) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdResetQueryPool;
-        callPJV(commandBuffer.address(), queryPool, firstQuery, queryCount, __functionAddress);
-    }
-
-    // --- [ vkCmdWriteTimestamp ] ---
-
-    /** {@code void vkCmdWriteTimestamp(VkCommandBuffer commandBuffer, VkPipelineStageFlagBits pipelineStage, VkQueryPool queryPool, uint32_t query)} */
-    public static void vkCmdWriteTimestamp(VkCommandBuffer commandBuffer, @NativeType("VkPipelineStageFlagBits") int pipelineStage, @NativeType("VkQueryPool") long queryPool, @NativeType("uint32_t") int query) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdWriteTimestamp;
-        callPJV(commandBuffer.address(), pipelineStage, queryPool, query, __functionAddress);
-    }
-
-    // --- [ vkCmdCopyQueryPoolResults ] ---
-
-    /** {@code void vkCmdCopyQueryPoolResults(VkCommandBuffer commandBuffer, VkQueryPool queryPool, uint32_t firstQuery, uint32_t queryCount, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize stride, VkQueryResultFlags flags)} */
-    public static void vkCmdCopyQueryPoolResults(VkCommandBuffer commandBuffer, @NativeType("VkQueryPool") long queryPool, @NativeType("uint32_t") int firstQuery, @NativeType("uint32_t") int queryCount, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("VkDeviceSize") long stride, @NativeType("VkQueryResultFlags") int flags) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdCopyQueryPoolResults;
-        callPJJJJV(commandBuffer.address(), queryPool, firstQuery, queryCount, dstBuffer, dstOffset, stride, flags, __functionAddress);
-    }
-
-    // --- [ vkCmdPushConstants ] ---
-
-    /** {@code void vkCmdPushConstants(VkCommandBuffer commandBuffer, VkPipelineLayout layout, VkShaderStageFlags stageFlags, uint32_t offset, uint32_t size, void const * pValues)} */
-    public static void nvkCmdPushConstants(VkCommandBuffer commandBuffer, long layout, int stageFlags, int offset, int size, long pValues) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdPushConstants;
-        callPJPV(commandBuffer.address(), layout, stageFlags, offset, size, pValues, __functionAddress);
-    }
-
-    /** {@code void vkCmdPushConstants(VkCommandBuffer commandBuffer, VkPipelineLayout layout, VkShaderStageFlags stageFlags, uint32_t offset, uint32_t size, void const * pValues)} */
-    public static void vkCmdPushConstants(VkCommandBuffer commandBuffer, @NativeType("VkPipelineLayout") long layout, @NativeType("VkShaderStageFlags") int stageFlags, @NativeType("uint32_t") int offset, @NativeType("void const *") ByteBuffer pValues) {
-        nvkCmdPushConstants(commandBuffer, layout, stageFlags, offset, pValues.remaining(), memAddress(pValues));
-    }
-
-    /** {@code void vkCmdPushConstants(VkCommandBuffer commandBuffer, VkPipelineLayout layout, VkShaderStageFlags stageFlags, uint32_t offset, uint32_t size, void const * pValues)} */
-    public static void vkCmdPushConstants(VkCommandBuffer commandBuffer, @NativeType("VkPipelineLayout") long layout, @NativeType("VkShaderStageFlags") int stageFlags, @NativeType("uint32_t") int offset, @NativeType("void const *") ShortBuffer pValues) {
-        nvkCmdPushConstants(commandBuffer, layout, stageFlags, offset, pValues.remaining() << 1, memAddress(pValues));
-    }
-
-    /** {@code void vkCmdPushConstants(VkCommandBuffer commandBuffer, VkPipelineLayout layout, VkShaderStageFlags stageFlags, uint32_t offset, uint32_t size, void const * pValues)} */
-    public static void vkCmdPushConstants(VkCommandBuffer commandBuffer, @NativeType("VkPipelineLayout") long layout, @NativeType("VkShaderStageFlags") int stageFlags, @NativeType("uint32_t") int offset, @NativeType("void const *") IntBuffer pValues) {
-        nvkCmdPushConstants(commandBuffer, layout, stageFlags, offset, pValues.remaining() << 2, memAddress(pValues));
-    }
-
-    /** {@code void vkCmdPushConstants(VkCommandBuffer commandBuffer, VkPipelineLayout layout, VkShaderStageFlags stageFlags, uint32_t offset, uint32_t size, void const * pValues)} */
-    public static void vkCmdPushConstants(VkCommandBuffer commandBuffer, @NativeType("VkPipelineLayout") long layout, @NativeType("VkShaderStageFlags") int stageFlags, @NativeType("uint32_t") int offset, @NativeType("void const *") LongBuffer pValues) {
-        nvkCmdPushConstants(commandBuffer, layout, stageFlags, offset, pValues.remaining() << 3, memAddress(pValues));
-    }
-
-    /** {@code void vkCmdPushConstants(VkCommandBuffer commandBuffer, VkPipelineLayout layout, VkShaderStageFlags stageFlags, uint32_t offset, uint32_t size, void const * pValues)} */
-    public static void vkCmdPushConstants(VkCommandBuffer commandBuffer, @NativeType("VkPipelineLayout") long layout, @NativeType("VkShaderStageFlags") int stageFlags, @NativeType("uint32_t") int offset, @NativeType("void const *") FloatBuffer pValues) {
-        nvkCmdPushConstants(commandBuffer, layout, stageFlags, offset, pValues.remaining() << 2, memAddress(pValues));
-    }
-
-    /** {@code void vkCmdPushConstants(VkCommandBuffer commandBuffer, VkPipelineLayout layout, VkShaderStageFlags stageFlags, uint32_t offset, uint32_t size, void const * pValues)} */
-    public static void vkCmdPushConstants(VkCommandBuffer commandBuffer, @NativeType("VkPipelineLayout") long layout, @NativeType("VkShaderStageFlags") int stageFlags, @NativeType("uint32_t") int offset, @NativeType("void const *") DoubleBuffer pValues) {
-        nvkCmdPushConstants(commandBuffer, layout, stageFlags, offset, pValues.remaining() << 3, memAddress(pValues));
-    }
-
     // --- [ vkCmdBeginRenderPass ] ---
 
     /** {@code void vkCmdBeginRenderPass(VkCommandBuffer commandBuffer, VkRenderPassBeginInfo const * pRenderPassBegin, VkSubpassContents contents)} */
@@ -2788,30 +2812,6 @@ public class VK10 {
     public static void vkCmdEndRenderPass(VkCommandBuffer commandBuffer) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdEndRenderPass;
         callPV(commandBuffer.address(), __functionAddress);
-    }
-
-    // --- [ vkCmdExecuteCommands ] ---
-
-    /** {@code void vkCmdExecuteCommands(VkCommandBuffer commandBuffer, uint32_t commandBufferCount, VkCommandBuffer const * pCommandBuffers)} */
-    public static void nvkCmdExecuteCommands(VkCommandBuffer commandBuffer, int commandBufferCount, long pCommandBuffers) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdExecuteCommands;
-        callPPV(commandBuffer.address(), commandBufferCount, pCommandBuffers, __functionAddress);
-    }
-
-    /** {@code void vkCmdExecuteCommands(VkCommandBuffer commandBuffer, uint32_t commandBufferCount, VkCommandBuffer const * pCommandBuffers)} */
-    public static void vkCmdExecuteCommands(VkCommandBuffer commandBuffer, @NativeType("VkCommandBuffer const *") PointerBuffer pCommandBuffers) {
-        nvkCmdExecuteCommands(commandBuffer, pCommandBuffers.remaining(), memAddress(pCommandBuffers));
-    }
-
-    /** {@code void vkCmdExecuteCommands(VkCommandBuffer commandBuffer, uint32_t commandBufferCount, VkCommandBuffer const * pCommandBuffers)} */
-    public static void vkCmdExecuteCommands(VkCommandBuffer commandBuffer, @NativeType("VkCommandBuffer const *") VkCommandBuffer pCommandBuffer) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            PointerBuffer pCommandBuffers = stack.pointers(pCommandBuffer);
-            nvkCmdExecuteCommands(commandBuffer, 1, memAddress(pCommandBuffers));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
     }
 
     // --- [ VK_MAKE_API_VERSION ] ---
@@ -3062,16 +3062,6 @@ public class VK10 {
         return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pSemaphore, __functionAddress);
     }
 
-    /** {@code VkResult vkCreateEvent(VkDevice device, VkEventCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkEvent * pEvent)} */
-    @NativeType("VkResult")
-    public static int vkCreateEvent(VkDevice device, @NativeType("VkEventCreateInfo const *") VkEventCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkEvent *") long[] pEvent) {
-        long __functionAddress = device.getCapabilities().vkCreateEvent;
-        if (CHECKS) {
-            check(pEvent, 1);
-        }
-        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pEvent, __functionAddress);
-    }
-
     /** {@code VkResult vkCreateQueryPool(VkDevice device, VkQueryPoolCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkQueryPool * pQueryPool)} */
     @NativeType("VkResult")
     public static int vkCreateQueryPool(VkDevice device, @NativeType("VkQueryPoolCreateInfo const *") VkQueryPoolCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkQueryPool *") long[] pQueryPool) {
@@ -3106,16 +3096,6 @@ public class VK10 {
         return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pBuffer, __functionAddress);
     }
 
-    /** {@code VkResult vkCreateBufferView(VkDevice device, VkBufferViewCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkBufferView * pView)} */
-    @NativeType("VkResult")
-    public static int vkCreateBufferView(VkDevice device, @NativeType("VkBufferViewCreateInfo const *") VkBufferViewCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkBufferView *") long[] pView) {
-        long __functionAddress = device.getCapabilities().vkCreateBufferView;
-        if (CHECKS) {
-            check(pView, 1);
-        }
-        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pView, __functionAddress);
-    }
-
     /** {@code VkResult vkCreateImage(VkDevice device, VkImageCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkImage * pImage)} */
     @NativeType("VkResult")
     public static int vkCreateImage(VkDevice device, @NativeType("VkImageCreateInfo const *") VkImageCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkImage *") long[] pImage) {
@@ -3130,6 +3110,66 @@ public class VK10 {
     @NativeType("VkResult")
     public static int vkCreateImageView(VkDevice device, @NativeType("VkImageViewCreateInfo const *") VkImageViewCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkImageView *") long[] pView) {
         long __functionAddress = device.getCapabilities().vkCreateImageView;
+        if (CHECKS) {
+            check(pView, 1);
+        }
+        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pView, __functionAddress);
+    }
+
+    /** {@code VkResult vkCreateCommandPool(VkDevice device, VkCommandPoolCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkCommandPool * pCommandPool)} */
+    @NativeType("VkResult")
+    public static int vkCreateCommandPool(VkDevice device, @NativeType("VkCommandPoolCreateInfo const *") VkCommandPoolCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkCommandPool *") long[] pCommandPool) {
+        long __functionAddress = device.getCapabilities().vkCreateCommandPool;
+        if (CHECKS) {
+            check(pCommandPool, 1);
+        }
+        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pCommandPool, __functionAddress);
+    }
+
+    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
+    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") short[] pData) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdUpdateBuffer;
+        callPJJJPV(commandBuffer.address(), dstBuffer, dstOffset, Integer.toUnsignedLong(pData.length) << 1, pData, __functionAddress);
+    }
+
+    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
+    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") int[] pData) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdUpdateBuffer;
+        callPJJJPV(commandBuffer.address(), dstBuffer, dstOffset, Integer.toUnsignedLong(pData.length) << 2, pData, __functionAddress);
+    }
+
+    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
+    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") long[] pData) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdUpdateBuffer;
+        callPJJJPV(commandBuffer.address(), dstBuffer, dstOffset, Integer.toUnsignedLong(pData.length) << 3, pData, __functionAddress);
+    }
+
+    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
+    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") float[] pData) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdUpdateBuffer;
+        callPJJJPV(commandBuffer.address(), dstBuffer, dstOffset, Integer.toUnsignedLong(pData.length) << 2, pData, __functionAddress);
+    }
+
+    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
+    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") double[] pData) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdUpdateBuffer;
+        callPJJJPV(commandBuffer.address(), dstBuffer, dstOffset, Integer.toUnsignedLong(pData.length) << 3, pData, __functionAddress);
+    }
+
+    /** {@code VkResult vkCreateEvent(VkDevice device, VkEventCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkEvent * pEvent)} */
+    @NativeType("VkResult")
+    public static int vkCreateEvent(VkDevice device, @NativeType("VkEventCreateInfo const *") VkEventCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkEvent *") long[] pEvent) {
+        long __functionAddress = device.getCapabilities().vkCreateEvent;
+        if (CHECKS) {
+            check(pEvent, 1);
+        }
+        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pEvent, __functionAddress);
+    }
+
+    /** {@code VkResult vkCreateBufferView(VkDevice device, VkBufferViewCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkBufferView * pView)} */
+    @NativeType("VkResult")
+    public static int vkCreateBufferView(VkDevice device, @NativeType("VkBufferViewCreateInfo const *") VkBufferViewCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkBufferView *") long[] pView) {
+        long __functionAddress = device.getCapabilities().vkCreateBufferView;
         if (CHECKS) {
             check(pView, 1);
         }
@@ -3163,17 +3203,6 @@ public class VK10 {
     public static int vkMergePipelineCaches(VkDevice device, @NativeType("VkPipelineCache") long dstCache, @NativeType("VkPipelineCache const *") long[] pSrcCaches) {
         long __functionAddress = device.getCapabilities().vkMergePipelineCaches;
         return callPJPI(device.address(), dstCache, pSrcCaches.length, pSrcCaches, __functionAddress);
-    }
-
-    /** {@code VkResult vkCreateGraphicsPipelines(VkDevice device, VkPipelineCache pipelineCache, uint32_t createInfoCount, VkGraphicsPipelineCreateInfo const * pCreateInfos, VkAllocationCallbacks const * pAllocator, VkPipeline * pPipelines)} */
-    @NativeType("VkResult")
-    public static int vkCreateGraphicsPipelines(VkDevice device, @NativeType("VkPipelineCache") long pipelineCache, @NativeType("VkGraphicsPipelineCreateInfo const *") VkGraphicsPipelineCreateInfo.Buffer pCreateInfos, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkPipeline *") long[] pPipelines) {
-        long __functionAddress = device.getCapabilities().vkCreateGraphicsPipelines;
-        if (CHECKS) {
-            check(pPipelines, pCreateInfos.remaining());
-            Struct.validate(pCreateInfos.address(), pCreateInfos.remaining(), VkGraphicsPipelineCreateInfo.SIZEOF, VkGraphicsPipelineCreateInfo::validate);
-        }
-        return callPJPPPI(device.address(), pipelineCache, pCreateInfos.remaining(), pCreateInfos.address(), memAddressSafe(pAllocator), pPipelines, __functionAddress);
     }
 
     /** {@code VkResult vkCreateComputePipelines(VkDevice device, VkPipelineCache pipelineCache, uint32_t createInfoCount, VkComputePipelineCreateInfo const * pCreateInfos, VkAllocationCallbacks const * pAllocator, VkPipeline * pPipelines)} */
@@ -3248,89 +3277,10 @@ public class VK10 {
         return callPJPI(device.address(), descriptorPool, lengthSafe(pDescriptorSets), pDescriptorSets, __functionAddress);
     }
 
-    /** {@code VkResult vkCreateFramebuffer(VkDevice device, VkFramebufferCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkFramebuffer * pFramebuffer)} */
-    @NativeType("VkResult")
-    public static int vkCreateFramebuffer(VkDevice device, @NativeType("VkFramebufferCreateInfo const *") VkFramebufferCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkFramebuffer *") long[] pFramebuffer) {
-        long __functionAddress = device.getCapabilities().vkCreateFramebuffer;
-        if (CHECKS) {
-            check(pFramebuffer, 1);
-        }
-        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pFramebuffer, __functionAddress);
-    }
-
-    /** {@code VkResult vkCreateRenderPass(VkDevice device, VkRenderPassCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkRenderPass * pRenderPass)} */
-    @NativeType("VkResult")
-    public static int vkCreateRenderPass(VkDevice device, @NativeType("VkRenderPassCreateInfo const *") VkRenderPassCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkRenderPass *") long[] pRenderPass) {
-        long __functionAddress = device.getCapabilities().vkCreateRenderPass;
-        if (CHECKS) {
-            check(pRenderPass, 1);
-            VkRenderPassCreateInfo.validate(pCreateInfo.address());
-        }
-        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pRenderPass, __functionAddress);
-    }
-
-    /** {@code VkResult vkCreateCommandPool(VkDevice device, VkCommandPoolCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkCommandPool * pCommandPool)} */
-    @NativeType("VkResult")
-    public static int vkCreateCommandPool(VkDevice device, @NativeType("VkCommandPoolCreateInfo const *") VkCommandPoolCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkCommandPool *") long[] pCommandPool) {
-        long __functionAddress = device.getCapabilities().vkCreateCommandPool;
-        if (CHECKS) {
-            check(pCommandPool, 1);
-        }
-        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pCommandPool, __functionAddress);
-    }
-
-    /** {@code void vkCmdSetBlendConstants(VkCommandBuffer commandBuffer, float const * blendConstants)} */
-    public static void vkCmdSetBlendConstants(VkCommandBuffer commandBuffer, @NativeType("float const *") float[] blendConstants) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdSetBlendConstants;
-        if (CHECKS) {
-            check(blendConstants, 4);
-        }
-        callPPV(commandBuffer.address(), blendConstants, __functionAddress);
-    }
-
     /** {@code void vkCmdBindDescriptorSets(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t firstSet, uint32_t descriptorSetCount, VkDescriptorSet const * pDescriptorSets, uint32_t dynamicOffsetCount, uint32_t const * pDynamicOffsets)} */
     public static void vkCmdBindDescriptorSets(VkCommandBuffer commandBuffer, @NativeType("VkPipelineBindPoint") int pipelineBindPoint, @NativeType("VkPipelineLayout") long layout, @NativeType("uint32_t") int firstSet, @NativeType("VkDescriptorSet const *") long[] pDescriptorSets, @NativeType("uint32_t const *") int @Nullable [] pDynamicOffsets) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdBindDescriptorSets;
         callPJPPV(commandBuffer.address(), pipelineBindPoint, layout, firstSet, pDescriptorSets.length, pDescriptorSets, lengthSafe(pDynamicOffsets), pDynamicOffsets, __functionAddress);
-    }
-
-    /** {@code void vkCmdBindVertexBuffers(VkCommandBuffer commandBuffer, uint32_t firstBinding, uint32_t bindingCount, VkBuffer const * pBuffers, VkDeviceSize const * pOffsets)} */
-    public static void vkCmdBindVertexBuffers(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstBinding, @NativeType("VkBuffer const *") long[] pBuffers, @NativeType("VkDeviceSize const *") long[] pOffsets) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdBindVertexBuffers;
-        if (CHECKS) {
-            check(pOffsets, pBuffers.length);
-        }
-        callPPPV(commandBuffer.address(), firstBinding, pBuffers.length, pBuffers, pOffsets, __functionAddress);
-    }
-
-    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
-    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") short[] pData) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdUpdateBuffer;
-        callPJJJPV(commandBuffer.address(), dstBuffer, dstOffset, Integer.toUnsignedLong(pData.length) << 1, pData, __functionAddress);
-    }
-
-    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
-    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") int[] pData) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdUpdateBuffer;
-        callPJJJPV(commandBuffer.address(), dstBuffer, dstOffset, Integer.toUnsignedLong(pData.length) << 2, pData, __functionAddress);
-    }
-
-    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
-    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") long[] pData) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdUpdateBuffer;
-        callPJJJPV(commandBuffer.address(), dstBuffer, dstOffset, Integer.toUnsignedLong(pData.length) << 3, pData, __functionAddress);
-    }
-
-    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
-    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") float[] pData) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdUpdateBuffer;
-        callPJJJPV(commandBuffer.address(), dstBuffer, dstOffset, Integer.toUnsignedLong(pData.length) << 2, pData, __functionAddress);
-    }
-
-    /** {@code void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, VkBuffer dstBuffer, VkDeviceSize dstOffset, VkDeviceSize dataSize, void const * pData)} */
-    public static void vkCmdUpdateBuffer(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("void const *") double[] pData) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdUpdateBuffer;
-        callPJJJPV(commandBuffer.address(), dstBuffer, dstOffset, Integer.toUnsignedLong(pData.length) << 3, pData, __functionAddress);
     }
 
     /** {@code void vkCmdWaitEvents(VkCommandBuffer commandBuffer, uint32_t eventCount, VkEvent const * pEvents, VkPipelineStageFlags srcStageMask, VkPipelineStageFlags dstStageMask, uint32_t memoryBarrierCount, VkMemoryBarrier const * pMemoryBarriers, uint32_t bufferMemoryBarrierCount, VkBufferMemoryBarrier const * pBufferMemoryBarriers, uint32_t imageMemoryBarrierCount, VkImageMemoryBarrier const * pImageMemoryBarriers)} */
@@ -3367,6 +3317,56 @@ public class VK10 {
     public static void vkCmdPushConstants(VkCommandBuffer commandBuffer, @NativeType("VkPipelineLayout") long layout, @NativeType("VkShaderStageFlags") int stageFlags, @NativeType("uint32_t") int offset, @NativeType("void const *") double[] pValues) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdPushConstants;
         callPJPV(commandBuffer.address(), layout, stageFlags, offset, pValues.length << 3, pValues, __functionAddress);
+    }
+
+    /** {@code VkResult vkCreateGraphicsPipelines(VkDevice device, VkPipelineCache pipelineCache, uint32_t createInfoCount, VkGraphicsPipelineCreateInfo const * pCreateInfos, VkAllocationCallbacks const * pAllocator, VkPipeline * pPipelines)} */
+    @NativeType("VkResult")
+    public static int vkCreateGraphicsPipelines(VkDevice device, @NativeType("VkPipelineCache") long pipelineCache, @NativeType("VkGraphicsPipelineCreateInfo const *") VkGraphicsPipelineCreateInfo.Buffer pCreateInfos, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkPipeline *") long[] pPipelines) {
+        long __functionAddress = device.getCapabilities().vkCreateGraphicsPipelines;
+        if (CHECKS) {
+            check(pPipelines, pCreateInfos.remaining());
+            Struct.validate(pCreateInfos.address(), pCreateInfos.remaining(), VkGraphicsPipelineCreateInfo.SIZEOF, VkGraphicsPipelineCreateInfo::validate);
+        }
+        return callPJPPPI(device.address(), pipelineCache, pCreateInfos.remaining(), pCreateInfos.address(), memAddressSafe(pAllocator), pPipelines, __functionAddress);
+    }
+
+    /** {@code VkResult vkCreateFramebuffer(VkDevice device, VkFramebufferCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkFramebuffer * pFramebuffer)} */
+    @NativeType("VkResult")
+    public static int vkCreateFramebuffer(VkDevice device, @NativeType("VkFramebufferCreateInfo const *") VkFramebufferCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkFramebuffer *") long[] pFramebuffer) {
+        long __functionAddress = device.getCapabilities().vkCreateFramebuffer;
+        if (CHECKS) {
+            check(pFramebuffer, 1);
+        }
+        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pFramebuffer, __functionAddress);
+    }
+
+    /** {@code VkResult vkCreateRenderPass(VkDevice device, VkRenderPassCreateInfo const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkRenderPass * pRenderPass)} */
+    @NativeType("VkResult")
+    public static int vkCreateRenderPass(VkDevice device, @NativeType("VkRenderPassCreateInfo const *") VkRenderPassCreateInfo pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkRenderPass *") long[] pRenderPass) {
+        long __functionAddress = device.getCapabilities().vkCreateRenderPass;
+        if (CHECKS) {
+            check(pRenderPass, 1);
+            VkRenderPassCreateInfo.validate(pCreateInfo.address());
+        }
+        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pRenderPass, __functionAddress);
+    }
+
+    /** {@code void vkCmdSetBlendConstants(VkCommandBuffer commandBuffer, float const * blendConstants)} */
+    public static void vkCmdSetBlendConstants(VkCommandBuffer commandBuffer, @NativeType("float const *") float[] blendConstants) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdSetBlendConstants;
+        if (CHECKS) {
+            check(blendConstants, 4);
+        }
+        callPPV(commandBuffer.address(), blendConstants, __functionAddress);
+    }
+
+    /** {@code void vkCmdBindVertexBuffers(VkCommandBuffer commandBuffer, uint32_t firstBinding, uint32_t bindingCount, VkBuffer const * pBuffers, VkDeviceSize const * pOffsets)} */
+    public static void vkCmdBindVertexBuffers(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstBinding, @NativeType("VkBuffer const *") long[] pBuffers, @NativeType("VkDeviceSize const *") long[] pOffsets) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdBindVertexBuffers;
+        if (CHECKS) {
+            check(pOffsets, pBuffers.length);
+        }
+        callPPPV(commandBuffer.address(), firstBinding, pBuffers.length, pBuffers, pOffsets, __functionAddress);
     }
 
 }

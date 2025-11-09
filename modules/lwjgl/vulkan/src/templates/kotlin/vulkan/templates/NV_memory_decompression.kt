@@ -22,10 +22,6 @@ val NV_memory_decompression = "NVMemoryDecompression".nativeClassVK("NV_memory_d
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_PROPERTIES_NV".."1000427001"
     )
 
-    EnumConstantLong(
-        "MEMORY_DECOMPRESSION_METHOD_GDEFLATE_1_0_BIT_NV".enum(0x00000001L)
-    )
-
     void(
         "CmdDecompressMemoryNV",
 

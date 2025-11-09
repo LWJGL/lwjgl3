@@ -127,6 +127,8 @@ public class VkRenderPassBeginInfo extends Struct<VkRenderPassBeginInfo> impleme
     public VkRenderPassBeginInfo pNext(VkRenderPassAttachmentBeginInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderPassAttachmentBeginInfoKHR} value to the {@code pNext} chain. */
     public VkRenderPassBeginInfo pNext(VkRenderPassAttachmentBeginInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkRenderPassPerformanceCountersByRegionBeginInfoARM} value to the {@code pNext} chain. */
+    public VkRenderPassBeginInfo pNext(VkRenderPassPerformanceCountersByRegionBeginInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderPassSampleLocationsBeginInfoEXT} value to the {@code pNext} chain. */
     public VkRenderPassBeginInfo pNext(VkRenderPassSampleLocationsBeginInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderPassStripeBeginInfoARM} value to the {@code pNext} chain. */
@@ -400,6 +402,8 @@ public class VkRenderPassBeginInfo extends Struct<VkRenderPassBeginInfo> impleme
         public VkRenderPassBeginInfo.Buffer pNext(VkRenderPassAttachmentBeginInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderPassAttachmentBeginInfoKHR} value to the {@code pNext} chain. */
         public VkRenderPassBeginInfo.Buffer pNext(VkRenderPassAttachmentBeginInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkRenderPassPerformanceCountersByRegionBeginInfoARM} value to the {@code pNext} chain. */
+        public VkRenderPassBeginInfo.Buffer pNext(VkRenderPassPerformanceCountersByRegionBeginInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderPassSampleLocationsBeginInfoEXT} value to the {@code pNext} chain. */
         public VkRenderPassBeginInfo.Buffer pNext(VkRenderPassSampleLocationsBeginInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderPassStripeBeginInfoARM} value to the {@code pNext} chain. */

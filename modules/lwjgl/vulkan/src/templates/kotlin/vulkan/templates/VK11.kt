@@ -10,7 +10,7 @@ import vulkan.*
 
 val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK_BINDING_INSTANCE) {
     extends = VK10
-    
+
     EnumConstant(
         "STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO".."1000053000",
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES".."1000053001",
@@ -92,12 +92,6 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
     )
 
     EnumConstant(
-        "PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT".enum(0x00000008),
-        "PIPELINE_CREATE_DISPATCH_BASE_BIT".enum(0x00000010),
-        "PIPELINE_CREATE_DISPATCH_BASE".enum(0x00000010)
-    )
-
-    EnumConstant(
         "DEPENDENCY_VIEW_LOCAL_BIT".enum(0x00000002),
         "DEPENDENCY_DEVICE_GROUP_BIT".enum(0x00000004)
     )
@@ -124,11 +118,6 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
     )
 
     EnumConstant(
-        "IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL".."1000117000",
-        "IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL".."1000117001"
-    )
-
-    EnumConstant(
         "QUEUE_PROTECTED_BIT".enum(0x00000010)
     )
 
@@ -146,11 +135,6 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 
     EnumConstant(
         "COMMAND_POOL_CREATE_PROTECTED_BIT".enum(0x00000004)
-    )
-
-    EnumConstant(
-        "OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE".."1000085000",
-        "OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION".."1000156000"
     )
 
     EnumConstant(
@@ -197,14 +181,19 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
     )
 
     EnumConstant(
-        "SUBGROUP_FEATURE_BASIC_BIT".enum(0x00000001),
-        "SUBGROUP_FEATURE_VOTE_BIT".enum(0x00000002),
-        "SUBGROUP_FEATURE_ARITHMETIC_BIT".enum(0x00000004),
-        "SUBGROUP_FEATURE_BALLOT_BIT".enum(0x00000008),
-        "SUBGROUP_FEATURE_SHUFFLE_BIT".enum(0x00000010),
-        "SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT".enum(0x00000020),
-        "SUBGROUP_FEATURE_CLUSTERED_BIT".enum(0x00000040),
-        "SUBGROUP_FEATURE_QUAD_BIT".enum(0x00000080)
+        "PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT".enum(0x00000008),
+        "PIPELINE_CREATE_DISPATCH_BASE_BIT".enum(0x00000010),
+        "PIPELINE_CREATE_DISPATCH_BASE".enum(0x00000010)
+    )
+
+    EnumConstant(
+        "OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE".."1000085000",
+        "OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION".."1000156000"
+    )
+
+    EnumConstant(
+        "IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL".."1000117000",
+        "IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL".."1000117001"
     )
 
     EnumConstant(
@@ -216,38 +205,6 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 
     EnumConstant(
         "MEMORY_ALLOCATE_DEVICE_MASK_BIT".enum(0x00000001)
-    )
-
-    EnumConstant(
-        "POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES".."0",
-        "POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY".."1"
-    )
-
-    EnumConstant(
-        "TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT".."0",
-        "TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT".."1"
-    )
-
-    EnumConstant(
-        "SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY".."0",
-        "SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY".."1",
-        "SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709".."2",
-        "SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601".."3",
-        "SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020".."4"
-    )
-
-    EnumConstant(
-        "SAMPLER_YCBCR_RANGE_ITU_FULL".."0",
-        "SAMPLER_YCBCR_RANGE_ITU_NARROW".."1"
-    )
-
-    EnumConstant(
-        "CHROMA_LOCATION_COSITED_EVEN".."0",
-        "CHROMA_LOCATION_MIDPOINT".."1"
-    )
-
-    EnumConstant(
-        "DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET".."0"
     )
 
     EnumConstant(
@@ -300,6 +257,49 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         "EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT".enum(0x00000002)
     )
 
+    EnumConstant(
+        "SUBGROUP_FEATURE_BASIC_BIT".enum(0x00000001),
+        "SUBGROUP_FEATURE_VOTE_BIT".enum(0x00000002),
+        "SUBGROUP_FEATURE_ARITHMETIC_BIT".enum(0x00000004),
+        "SUBGROUP_FEATURE_BALLOT_BIT".enum(0x00000008),
+        "SUBGROUP_FEATURE_SHUFFLE_BIT".enum(0x00000010),
+        "SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT".enum(0x00000020),
+        "SUBGROUP_FEATURE_CLUSTERED_BIT".enum(0x00000040),
+        "SUBGROUP_FEATURE_QUAD_BIT".enum(0x00000080)
+    )
+
+    EnumConstant(
+        "DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET".."0"
+    )
+
+    EnumConstant(
+        "SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY".."0",
+        "SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY".."1",
+        "SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709".."2",
+        "SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601".."3",
+        "SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020".."4"
+    )
+
+    EnumConstant(
+        "SAMPLER_YCBCR_RANGE_ITU_FULL".."0",
+        "SAMPLER_YCBCR_RANGE_ITU_NARROW".."1"
+    )
+
+    EnumConstant(
+        "CHROMA_LOCATION_COSITED_EVEN".."0",
+        "CHROMA_LOCATION_MIDPOINT".."1"
+    )
+
+    EnumConstant(
+        "POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES".."0",
+        "POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY".."1"
+    )
+
+    EnumConstant(
+        "TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT".."0",
+        "TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT".."1"
+    )
+
     // Device Initialization
 
     GlobalCommand..VkResult(
@@ -343,18 +343,6 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
 
         VkCommandBuffer("commandBuffer"),
         uint32_t("deviceMask")
-    )
-
-    void(
-        "CmdDispatchBase",
-
-        VkCommandBuffer("commandBuffer"),
-        uint32_t("baseGroupX"),
-        uint32_t("baseGroupY"),
-        uint32_t("baseGroupZ"),
-        uint32_t("groupCountX"),
-        uint32_t("groupCountY"),
-        uint32_t("groupCountZ")
     )
 
     // Promoted from VK_KHR_device_group_creation
@@ -470,53 +458,6 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         Check(1)..VkQueue.p("pQueue")
     )
 
-    // Promoted from VK_KHR_sampler_ycbcr_conversion
-
-    VkResult(
-        "CreateSamplerYcbcrConversion",
-
-        VkDevice("device"),
-        VkSamplerYcbcrConversionCreateInfo.const.p("pCreateInfo"),
-        nullable..VkAllocationCallbacks.const.p("pAllocator"),
-        Check(1)..VkSamplerYcbcrConversion.p("pYcbcrConversion")
-    )
-
-    void(
-        "DestroySamplerYcbcrConversion",
-
-        VkDevice("device"),
-        VkSamplerYcbcrConversion("ycbcrConversion"),
-        nullable..VkAllocationCallbacks.const.p("pAllocator")
-    )
-
-    // Promoted from VK_KHR_descriptor_update_template
-
-    VkResult(
-        "CreateDescriptorUpdateTemplate",
-
-        VkDevice("device"),
-        VkDescriptorUpdateTemplateCreateInfo.const.p("pCreateInfo"),
-        nullable..VkAllocationCallbacks.const.p("pAllocator"),
-        Check(1)..VkDescriptorUpdateTemplate.p("pDescriptorUpdateTemplate")
-    )
-
-    void(
-        "DestroyDescriptorUpdateTemplate",
-
-        VkDevice("device"),
-        VkDescriptorUpdateTemplate("descriptorUpdateTemplate"),
-        nullable..VkAllocationCallbacks.const.p("pAllocator")
-    )
-
-    void(
-        "UpdateDescriptorSetWithTemplate",
-
-        VkDevice("device"),
-        VkDescriptorSet("descriptorSet"),
-        VkDescriptorUpdateTemplate("descriptorUpdateTemplate"),
-        nullable..opaque_const_p("pData")
-    )
-
     // Promoted from VK_KHR_external_memory_capabilities
 
     void(
@@ -547,6 +488,48 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         VkExternalSemaphoreProperties.p("pExternalSemaphoreProperties")
     )
 
+    // Promoted from VK_KHR_device_group
+
+    void(
+        "CmdDispatchBase",
+
+        VkCommandBuffer("commandBuffer"),
+        uint32_t("baseGroupX"),
+        uint32_t("baseGroupY"),
+        uint32_t("baseGroupZ"),
+        uint32_t("groupCountX"),
+        uint32_t("groupCountY"),
+        uint32_t("groupCountZ")
+    )
+
+    // Promoted from VK_KHR_descriptor_update_template
+
+    VkResult(
+        "CreateDescriptorUpdateTemplate",
+
+        VkDevice("device"),
+        VkDescriptorUpdateTemplateCreateInfo.const.p("pCreateInfo"),
+        nullable..VkAllocationCallbacks.const.p("pAllocator"),
+        Check(1)..VkDescriptorUpdateTemplate.p("pDescriptorUpdateTemplate")
+    )
+
+    void(
+        "DestroyDescriptorUpdateTemplate",
+
+        VkDevice("device"),
+        VkDescriptorUpdateTemplate("descriptorUpdateTemplate"),
+        nullable..VkAllocationCallbacks.const.p("pAllocator")
+    )
+
+    void(
+        "UpdateDescriptorSetWithTemplate",
+
+        VkDevice("device"),
+        VkDescriptorSet("descriptorSet"),
+        VkDescriptorUpdateTemplate("descriptorUpdateTemplate"),
+        nullable..opaque_const_p("pData")
+    )
+
     // Promoted from VK_KHR_maintenance3
 
     void(
@@ -555,6 +538,25 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         VkDevice("device"),
         VkDescriptorSetLayoutCreateInfo.const.p("pCreateInfo"),
         VkDescriptorSetLayoutSupport.p("pSupport")
+    )
+
+    // Promoted from VK_KHR_sampler_ycbcr_conversion
+
+    VkResult(
+        "CreateSamplerYcbcrConversion",
+
+        VkDevice("device"),
+        VkSamplerYcbcrConversionCreateInfo.const.p("pCreateInfo"),
+        nullable..VkAllocationCallbacks.const.p("pAllocator"),
+        Check(1)..VkSamplerYcbcrConversion.p("pYcbcrConversion")
+    )
+
+    void(
+        "DestroySamplerYcbcrConversion",
+
+        VkDevice("device"),
+        VkSamplerYcbcrConversion("ycbcrConversion"),
+        nullable..VkAllocationCallbacks.const.p("pAllocator")
     )
 
 }

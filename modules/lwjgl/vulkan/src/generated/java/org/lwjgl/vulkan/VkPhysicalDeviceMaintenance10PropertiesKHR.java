@@ -1,0 +1,326 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: https://www.lwjgl.org/license
+ * MACHINE GENERATED FILE, DO NOT EDIT
+ */
+package org.lwjgl.vulkan;
+
+import org.jspecify.annotations.*;
+
+import java.nio.*;
+
+import org.lwjgl.*;
+import org.lwjgl.system.*;
+
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
+
+/**
+ * <pre>{@code
+ * struct VkPhysicalDeviceMaintenance10PropertiesKHR {
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 rgba4OpaqueBlackSwizzled;
+ *     VkBool32 resolveSrgbFormatAppliesTransferFunction;
+ *     VkBool32 resolveSrgbFormatSupportsTransferFunctionControl;
+ * }}</pre>
+ */
+public class VkPhysicalDeviceMaintenance10PropertiesKHR extends Struct<VkPhysicalDeviceMaintenance10PropertiesKHR> implements NativeResource {
+
+    /** The struct size in bytes. */
+    public static final int SIZEOF;
+
+    /** The struct alignment in bytes. */
+    public static final int ALIGNOF;
+
+    /** The struct member offsets. */
+    public static final int
+        STYPE,
+        PNEXT,
+        RGBA4OPAQUEBLACKSWIZZLED,
+        RESOLVESRGBFORMATAPPLIESTRANSFERFUNCTION,
+        RESOLVESRGBFORMATSUPPORTSTRANSFERFUNCTIONCONTROL;
+
+    static {
+        Layout layout = __struct(
+            __member(4),
+            __member(POINTER_SIZE),
+            __member(4),
+            __member(4),
+            __member(4)
+        );
+
+        SIZEOF = layout.getSize();
+        ALIGNOF = layout.getAlignment();
+
+        STYPE = layout.offsetof(0);
+        PNEXT = layout.offsetof(1);
+        RGBA4OPAQUEBLACKSWIZZLED = layout.offsetof(2);
+        RESOLVESRGBFORMATAPPLIESTRANSFERFUNCTION = layout.offsetof(3);
+        RESOLVESRGBFORMATSUPPORTSTRANSFERFUNCTIONCONTROL = layout.offsetof(4);
+    }
+
+    protected VkPhysicalDeviceMaintenance10PropertiesKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceMaintenance10PropertiesKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceMaintenance10PropertiesKHR(address, container);
+    }
+
+    /**
+     * Creates a {@code VkPhysicalDeviceMaintenance10PropertiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * visible to the struct instance and vice versa.
+     *
+     * <p>The created instance holds a strong reference to the container object.</p>
+     */
+    public VkPhysicalDeviceMaintenance10PropertiesKHR(ByteBuffer container) {
+        super(memAddress(container), __checkContainer(container, SIZEOF));
+    }
+
+    @Override
+    public int sizeof() { return SIZEOF; }
+
+    /** @return the value of the {@code sType} field. */
+    @NativeType("VkStructureType")
+    public int sType() { return nsType(address()); }
+    /** @return the value of the {@code pNext} field. */
+    @NativeType("void *")
+    public long pNext() { return npNext(address()); }
+    /** @return the value of the {@code rgba4OpaqueBlackSwizzled} field. */
+    @NativeType("VkBool32")
+    public boolean rgba4OpaqueBlackSwizzled() { return nrgba4OpaqueBlackSwizzled(address()) != 0; }
+    /** @return the value of the {@code resolveSrgbFormatAppliesTransferFunction} field. */
+    @NativeType("VkBool32")
+    public boolean resolveSrgbFormatAppliesTransferFunction() { return nresolveSrgbFormatAppliesTransferFunction(address()) != 0; }
+    /** @return the value of the {@code resolveSrgbFormatSupportsTransferFunctionControl} field. */
+    @NativeType("VkBool32")
+    public boolean resolveSrgbFormatSupportsTransferFunctionControl() { return nresolveSrgbFormatSupportsTransferFunctionControl(address()) != 0; }
+
+    /** Sets the specified value to the {@code sType} field. */
+    public VkPhysicalDeviceMaintenance10PropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRMaintenance10#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_10_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_10_PROPERTIES_KHR} value to the {@code sType} field. */
+    public VkPhysicalDeviceMaintenance10PropertiesKHR sType$Default() { return sType(KHRMaintenance10.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_10_PROPERTIES_KHR); }
+    /** Sets the specified value to the {@code pNext} field. */
+    public VkPhysicalDeviceMaintenance10PropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+
+    /** Initializes this struct with the specified values. */
+    public VkPhysicalDeviceMaintenance10PropertiesKHR set(
+        int sType,
+        long pNext
+    ) {
+        sType(sType);
+        pNext(pNext);
+
+        return this;
+    }
+
+    /**
+     * Copies the specified struct data to this struct.
+     *
+     * @param src the source struct
+     *
+     * @return this struct
+     */
+    public VkPhysicalDeviceMaintenance10PropertiesKHR set(VkPhysicalDeviceMaintenance10PropertiesKHR src) {
+        memCopy(src.address(), address(), SIZEOF);
+        return this;
+    }
+
+    // -----------------------------------
+
+    /** Returns a new {@code VkPhysicalDeviceMaintenance10PropertiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDeviceMaintenance10PropertiesKHR malloc() {
+        return new VkPhysicalDeviceMaintenance10PropertiesKHR(nmemAllocChecked(SIZEOF), null);
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceMaintenance10PropertiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static VkPhysicalDeviceMaintenance10PropertiesKHR calloc() {
+        return new VkPhysicalDeviceMaintenance10PropertiesKHR(nmemCallocChecked(1, SIZEOF), null);
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceMaintenance10PropertiesKHR} instance allocated with {@link BufferUtils}. */
+    public static VkPhysicalDeviceMaintenance10PropertiesKHR create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return new VkPhysicalDeviceMaintenance10PropertiesKHR(memAddress(container), container);
+    }
+
+    /** Returns a new {@code VkPhysicalDeviceMaintenance10PropertiesKHR} instance for the specified memory address. */
+    public static VkPhysicalDeviceMaintenance10PropertiesKHR create(long address) {
+        return new VkPhysicalDeviceMaintenance10PropertiesKHR(address, null);
+    }
+
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
+    public static @Nullable VkPhysicalDeviceMaintenance10PropertiesKHR createSafe(long address) {
+        return address == NULL ? null : new VkPhysicalDeviceMaintenance10PropertiesKHR(address, null);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceMaintenance10PropertiesKHR.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceMaintenance10PropertiesKHR.Buffer malloc(int capacity) {
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceMaintenance10PropertiesKHR.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceMaintenance10PropertiesKHR.Buffer calloc(int capacity) {
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceMaintenance10PropertiesKHR.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceMaintenance10PropertiesKHR.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
+    }
+
+    /**
+     * Create a {@link VkPhysicalDeviceMaintenance10PropertiesKHR.Buffer} instance at the specified memory.
+     *
+     * @param address  the memory address
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceMaintenance10PropertiesKHR.Buffer create(long address, int capacity) {
+        return new Buffer(address, capacity);
+    }
+
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
+    public static VkPhysicalDeviceMaintenance10PropertiesKHR.@Nullable Buffer createSafe(long address, int capacity) {
+        return address == NULL ? null : new Buffer(address, capacity);
+    }
+
+    /**
+     * Returns a new {@code VkPhysicalDeviceMaintenance10PropertiesKHR} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDeviceMaintenance10PropertiesKHR malloc(MemoryStack stack) {
+        return new VkPhysicalDeviceMaintenance10PropertiesKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
+    }
+
+    /**
+     * Returns a new {@code VkPhysicalDeviceMaintenance10PropertiesKHR} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPhysicalDeviceMaintenance10PropertiesKHR calloc(MemoryStack stack) {
+        return new VkPhysicalDeviceMaintenance10PropertiesKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceMaintenance10PropertiesKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack    the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceMaintenance10PropertiesKHR.Buffer malloc(int capacity, MemoryStack stack) {
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPhysicalDeviceMaintenance10PropertiesKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack    the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPhysicalDeviceMaintenance10PropertiesKHR.Buffer calloc(int capacity, MemoryStack stack) {
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+    }
+
+    // -----------------------------------
+
+    /** Unsafe version of {@link #sType}. */
+    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance10PropertiesKHR.STYPE); }
+    /** Unsafe version of {@link #pNext}. */
+    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMaintenance10PropertiesKHR.PNEXT); }
+    /** Unsafe version of {@link #rgba4OpaqueBlackSwizzled}. */
+    public static int nrgba4OpaqueBlackSwizzled(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance10PropertiesKHR.RGBA4OPAQUEBLACKSWIZZLED); }
+    /** Unsafe version of {@link #resolveSrgbFormatAppliesTransferFunction}. */
+    public static int nresolveSrgbFormatAppliesTransferFunction(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance10PropertiesKHR.RESOLVESRGBFORMATAPPLIESTRANSFERFUNCTION); }
+    /** Unsafe version of {@link #resolveSrgbFormatSupportsTransferFunctionControl}. */
+    public static int nresolveSrgbFormatSupportsTransferFunctionControl(long struct) { return memGetInt(struct + VkPhysicalDeviceMaintenance10PropertiesKHR.RESOLVESRGBFORMATSUPPORTSTRANSFERFUNCTIONCONTROL); }
+
+    /** Unsafe version of {@link #sType(int) sType}. */
+    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMaintenance10PropertiesKHR.STYPE, value); }
+    /** Unsafe version of {@link #pNext(long) pNext}. */
+    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMaintenance10PropertiesKHR.PNEXT, value); }
+
+    // -----------------------------------
+
+    /** An array of {@link VkPhysicalDeviceMaintenance10PropertiesKHR} structs. */
+    public static class Buffer extends StructBuffer<VkPhysicalDeviceMaintenance10PropertiesKHR, Buffer> implements NativeResource {
+
+        private static final VkPhysicalDeviceMaintenance10PropertiesKHR ELEMENT_FACTORY = VkPhysicalDeviceMaintenance10PropertiesKHR.create(-1L);
+
+        /**
+         * Creates a new {@code VkPhysicalDeviceMaintenance10PropertiesKHR.Buffer} instance backed by the specified container.
+         *
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
+         * by {@link VkPhysicalDeviceMaintenance10PropertiesKHR#SIZEOF}, and its mark will be undefined.</p>
+         *
+         * <p>The created buffer instance holds a strong reference to the container object.</p>
+         */
+        public Buffer(ByteBuffer container) {
+            super(container, container.remaining() / SIZEOF);
+        }
+
+        public Buffer(long address, int cap) {
+            super(address, null, -1, 0, cap, cap);
+        }
+
+        Buffer(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
+            super(address, container, mark, pos, lim, cap);
+        }
+
+        @Override
+        protected Buffer self() {
+            return this;
+        }
+
+        @Override
+        protected Buffer create(long address, @Nullable ByteBuffer container, int mark, int position, int limit, int capacity) {
+            return new Buffer(address, container, mark, position, limit, capacity);
+        }
+
+        @Override
+        protected VkPhysicalDeviceMaintenance10PropertiesKHR getElementFactory() {
+            return ELEMENT_FACTORY;
+        }
+
+        /** @return the value of the {@code sType} field. */
+        @NativeType("VkStructureType")
+        public int sType() { return VkPhysicalDeviceMaintenance10PropertiesKHR.nsType(address()); }
+        /** @return the value of the {@code pNext} field. */
+        @NativeType("void *")
+        public long pNext() { return VkPhysicalDeviceMaintenance10PropertiesKHR.npNext(address()); }
+        /** @return the value of the {@code rgba4OpaqueBlackSwizzled} field. */
+        @NativeType("VkBool32")
+        public boolean rgba4OpaqueBlackSwizzled() { return VkPhysicalDeviceMaintenance10PropertiesKHR.nrgba4OpaqueBlackSwizzled(address()) != 0; }
+        /** @return the value of the {@code resolveSrgbFormatAppliesTransferFunction} field. */
+        @NativeType("VkBool32")
+        public boolean resolveSrgbFormatAppliesTransferFunction() { return VkPhysicalDeviceMaintenance10PropertiesKHR.nresolveSrgbFormatAppliesTransferFunction(address()) != 0; }
+        /** @return the value of the {@code resolveSrgbFormatSupportsTransferFunctionControl} field. */
+        @NativeType("VkBool32")
+        public boolean resolveSrgbFormatSupportsTransferFunctionControl() { return VkPhysicalDeviceMaintenance10PropertiesKHR.nresolveSrgbFormatSupportsTransferFunctionControl(address()) != 0; }
+
+        /** Sets the specified value to the {@code sType} field. */
+        public VkPhysicalDeviceMaintenance10PropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMaintenance10PropertiesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRMaintenance10#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_10_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_10_PROPERTIES_KHR} value to the {@code sType} field. */
+        public VkPhysicalDeviceMaintenance10PropertiesKHR.Buffer sType$Default() { return sType(KHRMaintenance10.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_10_PROPERTIES_KHR); }
+        /** Sets the specified value to the {@code pNext} field. */
+        public VkPhysicalDeviceMaintenance10PropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMaintenance10PropertiesKHR.npNext(address(), value); return this; }
+
+    }
+
+}

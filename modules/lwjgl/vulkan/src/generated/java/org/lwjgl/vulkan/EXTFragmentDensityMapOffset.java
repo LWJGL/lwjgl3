@@ -33,7 +33,7 @@ public class EXTFragmentDensityMapOffset {
 
     // --- [ vkCmdEndRendering2EXT ] ---
 
-    /** {@code void vkCmdEndRendering2EXT(VkCommandBuffer commandBuffer, VkRenderingEndInfoEXT const * pRenderingEndInfo)} */
+    /** {@code void vkCmdEndRendering2EXT(VkCommandBuffer commandBuffer, VkRenderingEndInfoKHR const * pRenderingEndInfo)} */
     public static void nvkCmdEndRendering2EXT(VkCommandBuffer commandBuffer, long pRenderingEndInfo) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdEndRendering2EXT;
         if (CHECKS) {
@@ -42,8 +42,8 @@ public class EXTFragmentDensityMapOffset {
         callPPV(commandBuffer.address(), pRenderingEndInfo, __functionAddress);
     }
 
-    /** {@code void vkCmdEndRendering2EXT(VkCommandBuffer commandBuffer, VkRenderingEndInfoEXT const * pRenderingEndInfo)} */
-    public static void vkCmdEndRendering2EXT(VkCommandBuffer commandBuffer, @NativeType("VkRenderingEndInfoEXT const *") @Nullable VkRenderingEndInfoEXT pRenderingEndInfo) {
+    /** {@code void vkCmdEndRendering2EXT(VkCommandBuffer commandBuffer, VkRenderingEndInfoKHR const * pRenderingEndInfo)} */
+    public static void vkCmdEndRendering2EXT(VkCommandBuffer commandBuffer, @NativeType("VkRenderingEndInfoKHR const *") @Nullable VkRenderingEndInfoKHR pRenderingEndInfo) {
         nvkCmdEndRendering2EXT(commandBuffer, memAddressSafe(pRenderingEndInfo));
     }
 

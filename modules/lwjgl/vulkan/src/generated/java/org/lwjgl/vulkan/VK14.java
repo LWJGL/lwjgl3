@@ -69,14 +69,6 @@ public class VK14 extends VK13 {
 
     public static final int VK_ERROR_NOT_PERMITTED = -1000174001;
 
-    public static final int VK_ATTACHMENT_LOAD_OP_NONE = 1000400000;
-
-    public static final int
-        VK_SUBGROUP_FEATURE_ROTATE_BIT           = 0x200,
-        VK_SUBGROUP_FEATURE_ROTATE_CLUSTERED_BIT = 0x400;
-
-    public static final int VK_DYNAMIC_STATE_LINE_STIPPLE = 1000259000;
-
     public static final int VK_INDEX_TYPE_UINT8 = 1000265000;
 
     public static final int
@@ -95,19 +87,27 @@ public class VK14 extends VK13 {
         VK_BUFFER_USAGE_2_INDIRECT_BUFFER_BIT       = 0x100L,
         VK_BUFFER_USAGE_2_SHADER_DEVICE_ADDRESS_BIT = 0x20000L;
 
+    public static final int VK_IMAGE_USAGE_HOST_TRANSFER_BIT = 0x400000;
+
+    public static final long VK_FORMAT_FEATURE_2_HOST_IMAGE_TRANSFER_BIT = 0x400000000000L;
+
+    public static final int
+        VK_SUBGROUP_FEATURE_ROTATE_BIT           = 0x200,
+        VK_SUBGROUP_FEATURE_ROTATE_CLUSTERED_BIT = 0x400;
+
     public static final int VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT = 0x1;
 
     public static final int VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS = 1;
-
-    public static final int VK_IMAGE_LAYOUT_RENDERING_LOCAL_READ = 1000232000;
 
     public static final int
         VK_PIPELINE_CREATE_NO_PROTECTED_ACCESS_BIT   = 0x8000000,
         VK_PIPELINE_CREATE_PROTECTED_ACCESS_ONLY_BIT = 0x40000000;
 
-    public static final int VK_IMAGE_USAGE_HOST_TRANSFER_BIT = 0x400000;
+    public static final int VK_ATTACHMENT_LOAD_OP_NONE = 1000400000;
 
-    public static final long VK_FORMAT_FEATURE_2_HOST_IMAGE_TRANSFER_BIT = 0x400000000000L;
+    public static final int VK_DYNAMIC_STATE_LINE_STIPPLE = 1000259000;
+
+    public static final int VK_IMAGE_LAYOUT_RENDERING_LOCAL_READ = 1000232000;
 
     public static final int
         VK_PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_DEVICE_DEFAULT         = 0,
@@ -128,10 +128,8 @@ public class VK14 extends VK13 {
         VK_QUEUE_GLOBAL_PRIORITY_REALTIME = 1024;
 
     public static final int
-        VK_LINE_RASTERIZATION_MODE_DEFAULT            = 0,
-        VK_LINE_RASTERIZATION_MODE_RECTANGULAR        = 1,
-        VK_LINE_RASTERIZATION_MODE_BRESENHAM          = 2,
-        VK_LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH = 3;
+        VK_HOST_IMAGE_COPY_MEMCPY_BIT = 0x1,
+        VK_HOST_IMAGE_COPY_MEMCPY     = 0x1;
 
     public static final long
         VK_PIPELINE_CREATE_2_DISABLE_OPTIMIZATION_BIT              = 0x1L,
@@ -145,8 +143,10 @@ public class VK14 extends VK13 {
         VK_PIPELINE_CREATE_2_PROTECTED_ACCESS_ONLY_BIT             = 0x40000000L;
 
     public static final int
-        VK_HOST_IMAGE_COPY_MEMCPY_BIT = 0x1,
-        VK_HOST_IMAGE_COPY_MEMCPY     = 0x1;
+        VK_LINE_RASTERIZATION_MODE_DEFAULT            = 0,
+        VK_LINE_RASTERIZATION_MODE_RECTANGULAR        = 1,
+        VK_LINE_RASTERIZATION_MODE_BRESENHAM          = 2,
+        VK_LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH = 3;
 
     public static final int VK_API_VERSION_1_4 = VK_MAKE_API_VERSION(0, 1, 4, 0);
 
@@ -154,17 +154,6 @@ public class VK14 extends VK13 {
 
     protected VK14() {
         throw new UnsupportedOperationException();
-    }
-
-    // --- [ vkCmdSetLineStipple ] ---
-
-    /** {@code void vkCmdSetLineStipple(VkCommandBuffer commandBuffer, uint32_t lineStippleFactor, uint16_t lineStipplePattern)} */
-    public static void vkCmdSetLineStipple(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int lineStippleFactor, @NativeType("uint16_t") short lineStipplePattern) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdSetLineStipple;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPCV(commandBuffer.address(), lineStippleFactor, lineStipplePattern, __functionAddress);
     }
 
     // --- [ vkMapMemory2 ] ---
@@ -204,33 +193,6 @@ public class VK14 extends VK13 {
         return nvkUnmapMemory2(device, pMemoryUnmapInfo.address());
     }
 
-    // --- [ vkCmdBindIndexBuffer2 ] ---
-
-    /** {@code void vkCmdBindIndexBuffer2(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, VkDeviceSize size, VkIndexType indexType)} */
-    public static void vkCmdBindIndexBuffer2(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long buffer, @NativeType("VkDeviceSize") long offset, @NativeType("VkDeviceSize") long size, @NativeType("VkIndexType") int indexType) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdBindIndexBuffer2;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPJJJV(commandBuffer.address(), buffer, offset, size, indexType, __functionAddress);
-    }
-
-    // --- [ vkGetRenderingAreaGranularity ] ---
-
-    /** {@code void vkGetRenderingAreaGranularity(VkDevice device, VkRenderingAreaInfo const * pRenderingAreaInfo, VkExtent2D * pGranularity)} */
-    public static void nvkGetRenderingAreaGranularity(VkDevice device, long pRenderingAreaInfo, long pGranularity) {
-        long __functionAddress = device.getCapabilities().vkGetRenderingAreaGranularity;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPPPV(device.address(), pRenderingAreaInfo, pGranularity, __functionAddress);
-    }
-
-    /** {@code void vkGetRenderingAreaGranularity(VkDevice device, VkRenderingAreaInfo const * pRenderingAreaInfo, VkExtent2D * pGranularity)} */
-    public static void vkGetRenderingAreaGranularity(VkDevice device, @NativeType("VkRenderingAreaInfo const *") VkRenderingAreaInfo pRenderingAreaInfo, @NativeType("VkExtent2D *") VkExtent2D pGranularity) {
-        nvkGetRenderingAreaGranularity(device, pRenderingAreaInfo.address(), pGranularity.address());
-    }
-
     // --- [ vkGetDeviceImageSubresourceLayout ] ---
 
     /** {@code void vkGetDeviceImageSubresourceLayout(VkDevice device, VkDeviceImageSubresourceInfo const * pInfo, VkSubresourceLayout2 * pLayout)} */
@@ -262,133 +224,6 @@ public class VK14 extends VK13 {
     /** {@code void vkGetImageSubresourceLayout2(VkDevice device, VkImage image, VkImageSubresource2 const * pSubresource, VkSubresourceLayout2 * pLayout)} */
     public static void vkGetImageSubresourceLayout2(VkDevice device, @NativeType("VkImage") long image, @NativeType("VkImageSubresource2 const *") VkImageSubresource2 pSubresource, @NativeType("VkSubresourceLayout2 *") VkSubresourceLayout2 pLayout) {
         nvkGetImageSubresourceLayout2(device, image, pSubresource.address(), pLayout.address());
-    }
-
-    // --- [ vkCmdPushDescriptorSet ] ---
-
-    /** {@code void vkCmdPushDescriptorSet(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t set, uint32_t descriptorWriteCount, VkWriteDescriptorSet const * pDescriptorWrites)} */
-    public static void nvkCmdPushDescriptorSet(VkCommandBuffer commandBuffer, int pipelineBindPoint, long layout, int set, int descriptorWriteCount, long pDescriptorWrites) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdPushDescriptorSet;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPJPV(commandBuffer.address(), pipelineBindPoint, layout, set, descriptorWriteCount, pDescriptorWrites, __functionAddress);
-    }
-
-    /** {@code void vkCmdPushDescriptorSet(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t set, uint32_t descriptorWriteCount, VkWriteDescriptorSet const * pDescriptorWrites)} */
-    public static void vkCmdPushDescriptorSet(VkCommandBuffer commandBuffer, @NativeType("VkPipelineBindPoint") int pipelineBindPoint, @NativeType("VkPipelineLayout") long layout, @NativeType("uint32_t") int set, @NativeType("VkWriteDescriptorSet const *") VkWriteDescriptorSet.Buffer pDescriptorWrites) {
-        nvkCmdPushDescriptorSet(commandBuffer, pipelineBindPoint, layout, set, pDescriptorWrites.remaining(), pDescriptorWrites.address());
-    }
-
-    // --- [ vkCmdPushDescriptorSetWithTemplate ] ---
-
-    /** {@code void vkCmdPushDescriptorSetWithTemplate(VkCommandBuffer commandBuffer, VkDescriptorUpdateTemplate descriptorUpdateTemplate, VkPipelineLayout layout, uint32_t set, void const * pData)} */
-    public static void vkCmdPushDescriptorSetWithTemplate(VkCommandBuffer commandBuffer, @NativeType("VkDescriptorUpdateTemplate") long descriptorUpdateTemplate, @NativeType("VkPipelineLayout") long layout, @NativeType("uint32_t") int set, @NativeType("void const *") long pData) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdPushDescriptorSetWithTemplate;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPJJPV(commandBuffer.address(), descriptorUpdateTemplate, layout, set, pData, __functionAddress);
-    }
-
-    // --- [ vkCmdSetRenderingAttachmentLocations ] ---
-
-    /** {@code void vkCmdSetRenderingAttachmentLocations(VkCommandBuffer commandBuffer, VkRenderingAttachmentLocationInfo const * pLocationInfo)} */
-    public static void nvkCmdSetRenderingAttachmentLocations(VkCommandBuffer commandBuffer, long pLocationInfo) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdSetRenderingAttachmentLocations;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPPV(commandBuffer.address(), pLocationInfo, __functionAddress);
-    }
-
-    /** {@code void vkCmdSetRenderingAttachmentLocations(VkCommandBuffer commandBuffer, VkRenderingAttachmentLocationInfo const * pLocationInfo)} */
-    public static void vkCmdSetRenderingAttachmentLocations(VkCommandBuffer commandBuffer, @NativeType("VkRenderingAttachmentLocationInfo const *") VkRenderingAttachmentLocationInfo pLocationInfo) {
-        nvkCmdSetRenderingAttachmentLocations(commandBuffer, pLocationInfo.address());
-    }
-
-    // --- [ vkCmdSetRenderingInputAttachmentIndices ] ---
-
-    /** {@code void vkCmdSetRenderingInputAttachmentIndices(VkCommandBuffer commandBuffer, VkRenderingInputAttachmentIndexInfo const * pInputAttachmentIndexInfo)} */
-    public static void nvkCmdSetRenderingInputAttachmentIndices(VkCommandBuffer commandBuffer, long pInputAttachmentIndexInfo) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdSetRenderingInputAttachmentIndices;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPPV(commandBuffer.address(), pInputAttachmentIndexInfo, __functionAddress);
-    }
-
-    /** {@code void vkCmdSetRenderingInputAttachmentIndices(VkCommandBuffer commandBuffer, VkRenderingInputAttachmentIndexInfo const * pInputAttachmentIndexInfo)} */
-    public static void vkCmdSetRenderingInputAttachmentIndices(VkCommandBuffer commandBuffer, @NativeType("VkRenderingInputAttachmentIndexInfo const *") VkRenderingInputAttachmentIndexInfo pInputAttachmentIndexInfo) {
-        nvkCmdSetRenderingInputAttachmentIndices(commandBuffer, pInputAttachmentIndexInfo.address());
-    }
-
-    // --- [ vkCmdBindDescriptorSets2 ] ---
-
-    /** {@code void vkCmdBindDescriptorSets2(VkCommandBuffer commandBuffer, VkBindDescriptorSetsInfo const * pBindDescriptorSetsInfo)} */
-    public static void nvkCmdBindDescriptorSets2(VkCommandBuffer commandBuffer, long pBindDescriptorSetsInfo) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdBindDescriptorSets2;
-        if (CHECKS) {
-            check(__functionAddress);
-            VkBindDescriptorSetsInfo.validate(pBindDescriptorSetsInfo);
-        }
-        callPPV(commandBuffer.address(), pBindDescriptorSetsInfo, __functionAddress);
-    }
-
-    /** {@code void vkCmdBindDescriptorSets2(VkCommandBuffer commandBuffer, VkBindDescriptorSetsInfo const * pBindDescriptorSetsInfo)} */
-    public static void vkCmdBindDescriptorSets2(VkCommandBuffer commandBuffer, @NativeType("VkBindDescriptorSetsInfo const *") VkBindDescriptorSetsInfo pBindDescriptorSetsInfo) {
-        nvkCmdBindDescriptorSets2(commandBuffer, pBindDescriptorSetsInfo.address());
-    }
-
-    // --- [ vkCmdPushConstants2 ] ---
-
-    /** {@code void vkCmdPushConstants2(VkCommandBuffer commandBuffer, VkPushConstantsInfo const * pPushConstantsInfo)} */
-    public static void nvkCmdPushConstants2(VkCommandBuffer commandBuffer, long pPushConstantsInfo) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdPushConstants2;
-        if (CHECKS) {
-            check(__functionAddress);
-            VkPushConstantsInfo.validate(pPushConstantsInfo);
-        }
-        callPPV(commandBuffer.address(), pPushConstantsInfo, __functionAddress);
-    }
-
-    /** {@code void vkCmdPushConstants2(VkCommandBuffer commandBuffer, VkPushConstantsInfo const * pPushConstantsInfo)} */
-    public static void vkCmdPushConstants2(VkCommandBuffer commandBuffer, @NativeType("VkPushConstantsInfo const *") VkPushConstantsInfo pPushConstantsInfo) {
-        nvkCmdPushConstants2(commandBuffer, pPushConstantsInfo.address());
-    }
-
-    // --- [ vkCmdPushDescriptorSet2 ] ---
-
-    /** {@code void vkCmdPushDescriptorSet2(VkCommandBuffer commandBuffer, VkPushDescriptorSetInfo const * pPushDescriptorSetInfo)} */
-    public static void nvkCmdPushDescriptorSet2(VkCommandBuffer commandBuffer, long pPushDescriptorSetInfo) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdPushDescriptorSet2;
-        if (CHECKS) {
-            check(__functionAddress);
-            VkPushDescriptorSetInfo.validate(pPushDescriptorSetInfo);
-        }
-        callPPV(commandBuffer.address(), pPushDescriptorSetInfo, __functionAddress);
-    }
-
-    /** {@code void vkCmdPushDescriptorSet2(VkCommandBuffer commandBuffer, VkPushDescriptorSetInfo const * pPushDescriptorSetInfo)} */
-    public static void vkCmdPushDescriptorSet2(VkCommandBuffer commandBuffer, @NativeType("VkPushDescriptorSetInfo const *") VkPushDescriptorSetInfo pPushDescriptorSetInfo) {
-        nvkCmdPushDescriptorSet2(commandBuffer, pPushDescriptorSetInfo.address());
-    }
-
-    // --- [ vkCmdPushDescriptorSetWithTemplate2 ] ---
-
-    /** {@code void vkCmdPushDescriptorSetWithTemplate2(VkCommandBuffer commandBuffer, VkPushDescriptorSetWithTemplateInfo const * pPushDescriptorSetWithTemplateInfo)} */
-    public static void nvkCmdPushDescriptorSetWithTemplate2(VkCommandBuffer commandBuffer, long pPushDescriptorSetWithTemplateInfo) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdPushDescriptorSetWithTemplate2;
-        if (CHECKS) {
-            check(__functionAddress);
-            VkPushDescriptorSetWithTemplateInfo.validate(pPushDescriptorSetWithTemplateInfo);
-        }
-        callPPV(commandBuffer.address(), pPushDescriptorSetWithTemplateInfo, __functionAddress);
-    }
-
-    /** {@code void vkCmdPushDescriptorSetWithTemplate2(VkCommandBuffer commandBuffer, VkPushDescriptorSetWithTemplateInfo const * pPushDescriptorSetWithTemplateInfo)} */
-    public static void vkCmdPushDescriptorSetWithTemplate2(VkCommandBuffer commandBuffer, @NativeType("VkPushDescriptorSetWithTemplateInfo const *") VkPushDescriptorSetWithTemplateInfo pPushDescriptorSetWithTemplateInfo) {
-        nvkCmdPushDescriptorSetWithTemplate2(commandBuffer, pPushDescriptorSetWithTemplateInfo.address());
     }
 
     // --- [ vkCopyMemoryToImage ] ---
@@ -460,6 +295,171 @@ public class VK14 extends VK13 {
     @NativeType("VkResult")
     public static int vkTransitionImageLayout(VkDevice device, @NativeType("VkHostImageLayoutTransitionInfo const *") VkHostImageLayoutTransitionInfo.Buffer pTransitions) {
         return nvkTransitionImageLayout(device, pTransitions.remaining(), pTransitions.address());
+    }
+
+    // --- [ vkCmdPushDescriptorSet ] ---
+
+    /** {@code void vkCmdPushDescriptorSet(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t set, uint32_t descriptorWriteCount, VkWriteDescriptorSet const * pDescriptorWrites)} */
+    public static void nvkCmdPushDescriptorSet(VkCommandBuffer commandBuffer, int pipelineBindPoint, long layout, int set, int descriptorWriteCount, long pDescriptorWrites) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdPushDescriptorSet;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPJPV(commandBuffer.address(), pipelineBindPoint, layout, set, descriptorWriteCount, pDescriptorWrites, __functionAddress);
+    }
+
+    /** {@code void vkCmdPushDescriptorSet(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t set, uint32_t descriptorWriteCount, VkWriteDescriptorSet const * pDescriptorWrites)} */
+    public static void vkCmdPushDescriptorSet(VkCommandBuffer commandBuffer, @NativeType("VkPipelineBindPoint") int pipelineBindPoint, @NativeType("VkPipelineLayout") long layout, @NativeType("uint32_t") int set, @NativeType("VkWriteDescriptorSet const *") VkWriteDescriptorSet.Buffer pDescriptorWrites) {
+        nvkCmdPushDescriptorSet(commandBuffer, pipelineBindPoint, layout, set, pDescriptorWrites.remaining(), pDescriptorWrites.address());
+    }
+
+    // --- [ vkCmdPushDescriptorSetWithTemplate ] ---
+
+    /** {@code void vkCmdPushDescriptorSetWithTemplate(VkCommandBuffer commandBuffer, VkDescriptorUpdateTemplate descriptorUpdateTemplate, VkPipelineLayout layout, uint32_t set, void const * pData)} */
+    public static void vkCmdPushDescriptorSetWithTemplate(VkCommandBuffer commandBuffer, @NativeType("VkDescriptorUpdateTemplate") long descriptorUpdateTemplate, @NativeType("VkPipelineLayout") long layout, @NativeType("uint32_t") int set, @NativeType("void const *") long pData) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdPushDescriptorSetWithTemplate;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPJJPV(commandBuffer.address(), descriptorUpdateTemplate, layout, set, pData, __functionAddress);
+    }
+
+    // --- [ vkCmdBindDescriptorSets2 ] ---
+
+    /** {@code void vkCmdBindDescriptorSets2(VkCommandBuffer commandBuffer, VkBindDescriptorSetsInfo const * pBindDescriptorSetsInfo)} */
+    public static void nvkCmdBindDescriptorSets2(VkCommandBuffer commandBuffer, long pBindDescriptorSetsInfo) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdBindDescriptorSets2;
+        if (CHECKS) {
+            check(__functionAddress);
+            VkBindDescriptorSetsInfo.validate(pBindDescriptorSetsInfo);
+        }
+        callPPV(commandBuffer.address(), pBindDescriptorSetsInfo, __functionAddress);
+    }
+
+    /** {@code void vkCmdBindDescriptorSets2(VkCommandBuffer commandBuffer, VkBindDescriptorSetsInfo const * pBindDescriptorSetsInfo)} */
+    public static void vkCmdBindDescriptorSets2(VkCommandBuffer commandBuffer, @NativeType("VkBindDescriptorSetsInfo const *") VkBindDescriptorSetsInfo pBindDescriptorSetsInfo) {
+        nvkCmdBindDescriptorSets2(commandBuffer, pBindDescriptorSetsInfo.address());
+    }
+
+    // --- [ vkCmdPushConstants2 ] ---
+
+    /** {@code void vkCmdPushConstants2(VkCommandBuffer commandBuffer, VkPushConstantsInfo const * pPushConstantsInfo)} */
+    public static void nvkCmdPushConstants2(VkCommandBuffer commandBuffer, long pPushConstantsInfo) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdPushConstants2;
+        if (CHECKS) {
+            check(__functionAddress);
+            VkPushConstantsInfo.validate(pPushConstantsInfo);
+        }
+        callPPV(commandBuffer.address(), pPushConstantsInfo, __functionAddress);
+    }
+
+    /** {@code void vkCmdPushConstants2(VkCommandBuffer commandBuffer, VkPushConstantsInfo const * pPushConstantsInfo)} */
+    public static void vkCmdPushConstants2(VkCommandBuffer commandBuffer, @NativeType("VkPushConstantsInfo const *") VkPushConstantsInfo pPushConstantsInfo) {
+        nvkCmdPushConstants2(commandBuffer, pPushConstantsInfo.address());
+    }
+
+    // --- [ vkCmdPushDescriptorSet2 ] ---
+
+    /** {@code void vkCmdPushDescriptorSet2(VkCommandBuffer commandBuffer, VkPushDescriptorSetInfo const * pPushDescriptorSetInfo)} */
+    public static void nvkCmdPushDescriptorSet2(VkCommandBuffer commandBuffer, long pPushDescriptorSetInfo) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdPushDescriptorSet2;
+        if (CHECKS) {
+            check(__functionAddress);
+            VkPushDescriptorSetInfo.validate(pPushDescriptorSetInfo);
+        }
+        callPPV(commandBuffer.address(), pPushDescriptorSetInfo, __functionAddress);
+    }
+
+    /** {@code void vkCmdPushDescriptorSet2(VkCommandBuffer commandBuffer, VkPushDescriptorSetInfo const * pPushDescriptorSetInfo)} */
+    public static void vkCmdPushDescriptorSet2(VkCommandBuffer commandBuffer, @NativeType("VkPushDescriptorSetInfo const *") VkPushDescriptorSetInfo pPushDescriptorSetInfo) {
+        nvkCmdPushDescriptorSet2(commandBuffer, pPushDescriptorSetInfo.address());
+    }
+
+    // --- [ vkCmdPushDescriptorSetWithTemplate2 ] ---
+
+    /** {@code void vkCmdPushDescriptorSetWithTemplate2(VkCommandBuffer commandBuffer, VkPushDescriptorSetWithTemplateInfo const * pPushDescriptorSetWithTemplateInfo)} */
+    public static void nvkCmdPushDescriptorSetWithTemplate2(VkCommandBuffer commandBuffer, long pPushDescriptorSetWithTemplateInfo) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdPushDescriptorSetWithTemplate2;
+        if (CHECKS) {
+            check(__functionAddress);
+            VkPushDescriptorSetWithTemplateInfo.validate(pPushDescriptorSetWithTemplateInfo);
+        }
+        callPPV(commandBuffer.address(), pPushDescriptorSetWithTemplateInfo, __functionAddress);
+    }
+
+    /** {@code void vkCmdPushDescriptorSetWithTemplate2(VkCommandBuffer commandBuffer, VkPushDescriptorSetWithTemplateInfo const * pPushDescriptorSetWithTemplateInfo)} */
+    public static void vkCmdPushDescriptorSetWithTemplate2(VkCommandBuffer commandBuffer, @NativeType("VkPushDescriptorSetWithTemplateInfo const *") VkPushDescriptorSetWithTemplateInfo pPushDescriptorSetWithTemplateInfo) {
+        nvkCmdPushDescriptorSetWithTemplate2(commandBuffer, pPushDescriptorSetWithTemplateInfo.address());
+    }
+
+    // --- [ vkCmdSetLineStipple ] ---
+
+    /** {@code void vkCmdSetLineStipple(VkCommandBuffer commandBuffer, uint32_t lineStippleFactor, uint16_t lineStipplePattern)} */
+    public static void vkCmdSetLineStipple(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int lineStippleFactor, @NativeType("uint16_t") short lineStipplePattern) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdSetLineStipple;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPCV(commandBuffer.address(), lineStippleFactor, lineStipplePattern, __functionAddress);
+    }
+
+    // --- [ vkCmdBindIndexBuffer2 ] ---
+
+    /** {@code void vkCmdBindIndexBuffer2(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, VkDeviceSize size, VkIndexType indexType)} */
+    public static void vkCmdBindIndexBuffer2(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long buffer, @NativeType("VkDeviceSize") long offset, @NativeType("VkDeviceSize") long size, @NativeType("VkIndexType") int indexType) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdBindIndexBuffer2;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPJJJV(commandBuffer.address(), buffer, offset, size, indexType, __functionAddress);
+    }
+
+    // --- [ vkGetRenderingAreaGranularity ] ---
+
+    /** {@code void vkGetRenderingAreaGranularity(VkDevice device, VkRenderingAreaInfo const * pRenderingAreaInfo, VkExtent2D * pGranularity)} */
+    public static void nvkGetRenderingAreaGranularity(VkDevice device, long pRenderingAreaInfo, long pGranularity) {
+        long __functionAddress = device.getCapabilities().vkGetRenderingAreaGranularity;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPPPV(device.address(), pRenderingAreaInfo, pGranularity, __functionAddress);
+    }
+
+    /** {@code void vkGetRenderingAreaGranularity(VkDevice device, VkRenderingAreaInfo const * pRenderingAreaInfo, VkExtent2D * pGranularity)} */
+    public static void vkGetRenderingAreaGranularity(VkDevice device, @NativeType("VkRenderingAreaInfo const *") VkRenderingAreaInfo pRenderingAreaInfo, @NativeType("VkExtent2D *") VkExtent2D pGranularity) {
+        nvkGetRenderingAreaGranularity(device, pRenderingAreaInfo.address(), pGranularity.address());
+    }
+
+    // --- [ vkCmdSetRenderingAttachmentLocations ] ---
+
+    /** {@code void vkCmdSetRenderingAttachmentLocations(VkCommandBuffer commandBuffer, VkRenderingAttachmentLocationInfo const * pLocationInfo)} */
+    public static void nvkCmdSetRenderingAttachmentLocations(VkCommandBuffer commandBuffer, long pLocationInfo) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdSetRenderingAttachmentLocations;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPPV(commandBuffer.address(), pLocationInfo, __functionAddress);
+    }
+
+    /** {@code void vkCmdSetRenderingAttachmentLocations(VkCommandBuffer commandBuffer, VkRenderingAttachmentLocationInfo const * pLocationInfo)} */
+    public static void vkCmdSetRenderingAttachmentLocations(VkCommandBuffer commandBuffer, @NativeType("VkRenderingAttachmentLocationInfo const *") VkRenderingAttachmentLocationInfo pLocationInfo) {
+        nvkCmdSetRenderingAttachmentLocations(commandBuffer, pLocationInfo.address());
+    }
+
+    // --- [ vkCmdSetRenderingInputAttachmentIndices ] ---
+
+    /** {@code void vkCmdSetRenderingInputAttachmentIndices(VkCommandBuffer commandBuffer, VkRenderingInputAttachmentIndexInfo const * pInputAttachmentIndexInfo)} */
+    public static void nvkCmdSetRenderingInputAttachmentIndices(VkCommandBuffer commandBuffer, long pInputAttachmentIndexInfo) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdSetRenderingInputAttachmentIndices;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPPV(commandBuffer.address(), pInputAttachmentIndexInfo, __functionAddress);
+    }
+
+    /** {@code void vkCmdSetRenderingInputAttachmentIndices(VkCommandBuffer commandBuffer, VkRenderingInputAttachmentIndexInfo const * pInputAttachmentIndexInfo)} */
+    public static void vkCmdSetRenderingInputAttachmentIndices(VkCommandBuffer commandBuffer, @NativeType("VkRenderingInputAttachmentIndexInfo const *") VkRenderingInputAttachmentIndexInfo pInputAttachmentIndexInfo) {
+        nvkCmdSetRenderingInputAttachmentIndices(commandBuffer, pInputAttachmentIndexInfo.address());
     }
 
 }

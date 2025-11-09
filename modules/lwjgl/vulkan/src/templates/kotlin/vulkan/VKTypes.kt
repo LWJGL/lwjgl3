@@ -18,29 +18,28 @@ val VkSemaphore = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkSemaphore")
 val VkCommandBuffer = VK_DEFINE_HANDLE("VkCommandBuffer")
 val VkFence = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkFence")
 val VkDeviceMemory = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkDeviceMemory")
-val VkEvent = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkEvent")
 val VkQueryPool = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkQueryPool")
-val VkBufferView = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkBufferView")
 val VkImageView = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkImageView")
+val VkCommandPool = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkCommandPool")
+val VkRenderPass = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkRenderPass")
+val VkFramebuffer = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkFramebuffer")
+val VkEvent = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkEvent")
+val VkBufferView = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkBufferView")
 val VkShaderModule = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkShaderModule")
 val VkPipelineCache = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkPipelineCache")
 val VkPipelineLayout = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkPipelineLayout")
 val VkPipeline = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkPipeline")
-val VkRenderPass = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkRenderPass")
 val VkDescriptorSetLayout = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkDescriptorSetLayout")
 val VkSampler = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkSampler")
 val VkDescriptorSet = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkDescriptorSet")
 val VkDescriptorPool = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkDescriptorPool")
-val VkFramebuffer = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkFramebuffer")
-val VkCommandPool = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkCommandPool")
-val VkSamplerYcbcrConversion = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkSamplerYcbcrConversion")
 val VkDescriptorUpdateTemplate = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkDescriptorUpdateTemplate")
+val VkSamplerYcbcrConversion = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkSamplerYcbcrConversion")
 val VkPrivateDataSlot = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkPrivateDataSlot")
 
 // Enum types
 val VkResult = "VkResult".enumType
 val VkStructureType = "VkStructureType".enumType
-val VkPipelineCacheHeaderVersion = "VkPipelineCacheHeaderVersion".enumType
 val VkImageLayout = "VkImageLayout".enumType
 val VkObjectType = "VkObjectType".enumType
 val VkVendorId = "VkVendorId".enumType
@@ -64,8 +63,6 @@ val VkImageAspectFlagBits = "VkImageAspectFlagBits".enumType
 val VkSparseImageFormatFlagBits = "VkSparseImageFormatFlagBits".enumType
 val VkSparseMemoryBindFlagBits = "VkSparseMemoryBindFlagBits".enumType
 val VkFenceCreateFlagBits = "VkFenceCreateFlagBits".enumType
-val VkEventCreateFlagBits = "VkEventCreateFlagBits".enumType
-val VkQueryPipelineStatisticFlagBits = "VkQueryPipelineStatisticFlagBits".enumType
 val VkQueryPoolCreateFlagBits = "VkQueryPoolCreateFlagBits".enumType
 val VkQueryType = "VkQueryType".enumType
 val VkQueryResultFlagBits = "VkQueryResultFlagBits".enumType
@@ -75,11 +72,34 @@ val VkBufferUsageFlagBits = "VkBufferUsageFlagBits".enumType
 val VkComponentSwizzle = "VkComponentSwizzle".enumType
 val VkImageViewCreateFlagBits = "VkImageViewCreateFlagBits".enumType
 val VkImageViewType = "VkImageViewType".enumType
+val VkAccessFlagBits = "VkAccessFlagBits".enumType
+val VkDependencyFlagBits = "VkDependencyFlagBits".enumType
+val VkCommandPoolCreateFlagBits = "VkCommandPoolCreateFlagBits".enumType
+val VkCommandPoolResetFlagBits = "VkCommandPoolResetFlagBits".enumType
+val VkCommandBufferLevel = "VkCommandBufferLevel".enumType
+val VkCommandBufferResetFlagBits = "VkCommandBufferResetFlagBits".enumType
+val VkCommandBufferUsageFlagBits = "VkCommandBufferUsageFlagBits".enumType
+val VkQueryControlFlagBits = "VkQueryControlFlagBits".enumType
+val VkIndexType = "VkIndexType".enumType
+val VkPipelineCacheHeaderVersion = "VkPipelineCacheHeaderVersion".enumType
+val VkEventCreateFlagBits = "VkEventCreateFlagBits".enumType
+val VkShaderStageFlagBits = "VkShaderStageFlagBits".enumType
+val VkPipelineCreateFlagBits = "VkPipelineCreateFlagBits".enumType
+val VkPipelineShaderStageCreateFlagBits = "VkPipelineShaderStageCreateFlagBits".enumType
+val VkBorderColor = "VkBorderColor".enumType
+val VkFilter = "VkFilter".enumType
+val VkSamplerAddressMode = "VkSamplerAddressMode".enumType
+val VkSamplerCreateFlagBits = "VkSamplerCreateFlagBits".enumType
+val VkSamplerMipmapMode = "VkSamplerMipmapMode".enumType
+val VkCompareOp = "VkCompareOp".enumType
+val VkDescriptorPoolCreateFlagBits = "VkDescriptorPoolCreateFlagBits".enumType
+val VkDescriptorType = "VkDescriptorType".enumType
+val VkDescriptorSetLayoutCreateFlagBits = "VkDescriptorSetLayoutCreateFlagBits".enumType
+val VkQueryPipelineStatisticFlagBits = "VkQueryPipelineStatisticFlagBits".enumType
+val VkPipelineBindPoint = "VkPipelineBindPoint".enumType
 val VkBlendFactor = "VkBlendFactor".enumType
 val VkBlendOp = "VkBlendOp".enumType
 val VkColorComponentFlagBits = "VkColorComponentFlagBits".enumType
-val VkCompareOp = "VkCompareOp".enumType
-val VkShaderStageFlagBits = "VkShaderStageFlagBits".enumType
 val VkCullModeFlagBits = "VkCullModeFlagBits".enumType
 val VkDynamicState = "VkDynamicState".enumType
 val VkFrontFace = "VkFrontFace".enumType
@@ -88,44 +108,17 @@ val VkPrimitiveTopology = "VkPrimitiveTopology".enumType
 val VkPolygonMode = "VkPolygonMode".enumType
 val VkStencilOp = "VkStencilOp".enumType
 val VkLogicOp = "VkLogicOp".enumType
-val VkPipelineCreateFlagBits = "VkPipelineCreateFlagBits".enumType
-val VkPipelineShaderStageCreateFlagBits = "VkPipelineShaderStageCreateFlagBits".enumType
-val VkBorderColor = "VkBorderColor".enumType
-val VkFilter = "VkFilter".enumType
-val VkSamplerAddressMode = "VkSamplerAddressMode".enumType
-val VkSamplerCreateFlagBits = "VkSamplerCreateFlagBits".enumType
-val VkSamplerMipmapMode = "VkSamplerMipmapMode".enumType
-val VkDescriptorPoolCreateFlagBits = "VkDescriptorPoolCreateFlagBits".enumType
-val VkDescriptorType = "VkDescriptorType".enumType
-val VkDescriptorSetLayoutCreateFlagBits = "VkDescriptorSetLayoutCreateFlagBits".enumType
-val VkAccessFlagBits = "VkAccessFlagBits".enumType
 val VkAttachmentLoadOp = "VkAttachmentLoadOp".enumType
 val VkAttachmentStoreOp = "VkAttachmentStoreOp".enumType
 val VkAttachmentDescriptionFlagBits = "VkAttachmentDescriptionFlagBits".enumType
-val VkDependencyFlagBits = "VkDependencyFlagBits".enumType
 val VkFramebufferCreateFlagBits = "VkFramebufferCreateFlagBits".enumType
-val VkPipelineBindPoint = "VkPipelineBindPoint".enumType
 val VkRenderPassCreateFlagBits = "VkRenderPassCreateFlagBits".enumType
 val VkSubpassDescriptionFlagBits = "VkSubpassDescriptionFlagBits".enumType
-val VkCommandPoolCreateFlagBits = "VkCommandPoolCreateFlagBits".enumType
-val VkCommandPoolResetFlagBits = "VkCommandPoolResetFlagBits".enumType
-val VkCommandBufferLevel = "VkCommandBufferLevel".enumType
-val VkCommandBufferResetFlagBits = "VkCommandBufferResetFlagBits".enumType
-val VkCommandBufferUsageFlagBits = "VkCommandBufferUsageFlagBits".enumType
-val VkQueryControlFlagBits = "VkQueryControlFlagBits".enumType
-val VkIndexType = "VkIndexType".enumType
 val VkStencilFaceFlagBits = "VkStencilFaceFlagBits".enumType
 val VkSubpassContents = "VkSubpassContents".enumType
-val VkSubgroupFeatureFlagBits = "VkSubgroupFeatureFlagBits".enumType
 val VkPeerMemoryFeatureFlagBits = "VkPeerMemoryFeatureFlagBits".enumType
 val VkMemoryAllocateFlagBits = "VkMemoryAllocateFlagBits".enumType
-val VkPointClippingBehavior = "VkPointClippingBehavior".enumType
-val VkTessellationDomainOrigin = "VkTessellationDomainOrigin".enumType
 val VkDeviceQueueCreateFlagBits = "VkDeviceQueueCreateFlagBits".enumType
-val VkSamplerYcbcrModelConversion = "VkSamplerYcbcrModelConversion".enumType
-val VkSamplerYcbcrRange = "VkSamplerYcbcrRange".enumType
-val VkChromaLocation = "VkChromaLocation".enumType
-val VkDescriptorUpdateTemplateType = "VkDescriptorUpdateTemplateType".enumType
 val VkExternalMemoryHandleTypeFlagBits = "VkExternalMemoryHandleTypeFlagBits".enumType
 val VkExternalMemoryFeatureFlagBits = "VkExternalMemoryFeatureFlagBits".enumType
 val VkExternalFenceHandleTypeFlagBits = "VkExternalFenceHandleTypeFlagBits".enumType
@@ -134,29 +127,36 @@ val VkFenceImportFlagBits = "VkFenceImportFlagBits".enumType
 val VkSemaphoreImportFlagBits = "VkSemaphoreImportFlagBits".enumType
 val VkExternalSemaphoreHandleTypeFlagBits = "VkExternalSemaphoreHandleTypeFlagBits".enumType
 val VkExternalSemaphoreFeatureFlagBits = "VkExternalSemaphoreFeatureFlagBits".enumType
+val VkSubgroupFeatureFlagBits = "VkSubgroupFeatureFlagBits".enumType
+val VkDescriptorUpdateTemplateType = "VkDescriptorUpdateTemplateType".enumType
+val VkSamplerYcbcrModelConversion = "VkSamplerYcbcrModelConversion".enumType
+val VkSamplerYcbcrRange = "VkSamplerYcbcrRange".enumType
+val VkChromaLocation = "VkChromaLocation".enumType
+val VkPointClippingBehavior = "VkPointClippingBehavior".enumType
+val VkTessellationDomainOrigin = "VkTessellationDomainOrigin".enumType
 val VkDriverId = "VkDriverId".enumType
 val VkShaderFloatControlsIndependence = "VkShaderFloatControlsIndependence".enumType
-val VkDescriptorBindingFlagBits = "VkDescriptorBindingFlagBits".enumType
-val VkResolveModeFlagBits = "VkResolveModeFlagBits".enumType
-val VkSamplerReductionMode = "VkSamplerReductionMode".enumType
 val VkSemaphoreType = "VkSemaphoreType".enumType
 val VkSemaphoreWaitFlagBits = "VkSemaphoreWaitFlagBits".enumType
-val VkPipelineCreationFeedbackFlagBits = "VkPipelineCreationFeedbackFlagBits".enumType
+val VkDescriptorBindingFlagBits = "VkDescriptorBindingFlagBits".enumType
+val VkSamplerReductionMode = "VkSamplerReductionMode".enumType
+val VkResolveModeFlagBits = "VkResolveModeFlagBits".enumType
 val VkToolPurposeFlagBits = "VkToolPurposeFlagBits".enumType
-val VkPipelineCacheCreateFlagBits = "VkPipelineCacheCreateFlagBits".enumType
 val VkPipelineStageFlagBits2 = "VkPipelineStageFlagBits2".enumType
 val VkAccessFlagBits2 = "VkAccessFlagBits2".enumType
 val VkSubmitFlagBits = "VkSubmitFlagBits".enumType
-val VkRenderingFlagBits = "VkRenderingFlagBits".enumType
 val VkFormatFeatureFlagBits2 = "VkFormatFeatureFlagBits2".enumType
+val VkPipelineCreationFeedbackFlagBits = "VkPipelineCreationFeedbackFlagBits".enumType
+val VkPipelineCacheCreateFlagBits = "VkPipelineCacheCreateFlagBits".enumType
+val VkRenderingFlagBits = "VkRenderingFlagBits".enumType
 val VkPipelineRobustnessBufferBehavior = "VkPipelineRobustnessBufferBehavior".enumType
 val VkPipelineRobustnessImageBehavior = "VkPipelineRobustnessImageBehavior".enumType
 val VkQueueGlobalPriority = "VkQueueGlobalPriority".enumType
-val VkLineRasterizationMode = "VkLineRasterizationMode".enumType
 val VkMemoryUnmapFlagBits = "VkMemoryUnmapFlagBits".enumType
-val VkPipelineCreateFlagBits2 = "VkPipelineCreateFlagBits2".enumType
 val VkBufferUsageFlagBits2 = "VkBufferUsageFlagBits2".enumType
 val VkHostImageCopyFlagBits = "VkHostImageCopyFlagBits".enumType
+val VkPipelineCreateFlagBits2 = "VkPipelineCreateFlagBits2".enumType
+val VkLineRasterizationMode = "VkLineRasterizationMode".enumType
 
 // Bitmask types
 val VkAccessFlags = typedef(VkFlags, "VkAccessFlags")
@@ -177,19 +177,31 @@ val VkSparseMemoryBindFlags = typedef(VkFlags, "VkSparseMemoryBindFlags")
 val VkSparseImageFormatFlags = typedef(VkFlags, "VkSparseImageFormatFlags")
 val VkFenceCreateFlags = typedef(VkFlags, "VkFenceCreateFlags")
 val VkSemaphoreCreateFlags = typedef(VkFlags, "VkSemaphoreCreateFlags")
-val VkEventCreateFlags = typedef(VkFlags, "VkEventCreateFlags")
-val VkQueryPipelineStatisticFlags = typedef(VkFlags, "VkQueryPipelineStatisticFlags")
 val VkQueryPoolCreateFlags = typedef(VkFlags, "VkQueryPoolCreateFlags")
+val VkQueryPipelineStatisticFlags = typedef(VkFlags, "VkQueryPipelineStatisticFlags")
 val VkQueryResultFlags = typedef(VkFlags, "VkQueryResultFlags")
 val VkBufferCreateFlags = typedef(VkFlags, "VkBufferCreateFlags")
 val VkBufferUsageFlags = typedef(VkFlags, "VkBufferUsageFlags")
-val VkBufferViewCreateFlags = typedef(VkFlags, "VkBufferViewCreateFlags")
 val VkImageViewCreateFlags = typedef(VkFlags, "VkImageViewCreateFlags")
+val VkDependencyFlags = typedef(VkFlags, "VkDependencyFlags")
+val VkCommandPoolCreateFlags = typedef(VkFlags, "VkCommandPoolCreateFlags")
+val VkCommandPoolResetFlags = typedef(VkFlags, "VkCommandPoolResetFlags")
+val VkCommandBufferUsageFlags = typedef(VkFlags, "VkCommandBufferUsageFlags")
+val VkQueryControlFlags = typedef(VkFlags, "VkQueryControlFlags")
+val VkCommandBufferResetFlags = typedef(VkFlags, "VkCommandBufferResetFlags")
+val VkEventCreateFlags = typedef(VkFlags, "VkEventCreateFlags")
+val VkBufferViewCreateFlags = typedef(VkFlags, "VkBufferViewCreateFlags")
 val VkShaderModuleCreateFlags = typedef(VkFlags, "VkShaderModuleCreateFlags")
 val VkPipelineCacheCreateFlags = typedef(VkFlags, "VkPipelineCacheCreateFlags")
-val VkColorComponentFlags = typedef(VkFlags, "VkColorComponentFlags")
 val VkPipelineCreateFlags = typedef(VkFlags, "VkPipelineCreateFlags")
 val VkPipelineShaderStageCreateFlags = typedef(VkFlags, "VkPipelineShaderStageCreateFlags")
+val VkPipelineLayoutCreateFlags = typedef(VkFlags, "VkPipelineLayoutCreateFlags")
+val VkShaderStageFlags = typedef(VkFlags, "VkShaderStageFlags")
+val VkSamplerCreateFlags = typedef(VkFlags, "VkSamplerCreateFlags")
+val VkDescriptorPoolCreateFlags = typedef(VkFlags, "VkDescriptorPoolCreateFlags")
+val VkDescriptorPoolResetFlags = typedef(VkFlags, "VkDescriptorPoolResetFlags")
+val VkDescriptorSetLayoutCreateFlags = typedef(VkFlags, "VkDescriptorSetLayoutCreateFlags")
+val VkColorComponentFlags = typedef(VkFlags, "VkColorComponentFlags")
 val VkCullModeFlags = typedef(VkFlags, "VkCullModeFlags")
 val VkPipelineVertexInputStateCreateFlags = typedef(VkFlags, "VkPipelineVertexInputStateCreateFlags")
 val VkPipelineInputAssemblyStateCreateFlags = typedef(VkFlags, "VkPipelineInputAssemblyStateCreateFlags")
@@ -200,28 +212,14 @@ val VkPipelineMultisampleStateCreateFlags = typedef(VkFlags, "VkPipelineMultisam
 val VkPipelineDepthStencilStateCreateFlags = typedef(VkFlags, "VkPipelineDepthStencilStateCreateFlags")
 val VkPipelineColorBlendStateCreateFlags = typedef(VkFlags, "VkPipelineColorBlendStateCreateFlags")
 val VkPipelineDynamicStateCreateFlags = typedef(VkFlags, "VkPipelineDynamicStateCreateFlags")
-val VkPipelineLayoutCreateFlags = typedef(VkFlags, "VkPipelineLayoutCreateFlags")
-val VkShaderStageFlags = typedef(VkFlags, "VkShaderStageFlags")
-val VkSamplerCreateFlags = typedef(VkFlags, "VkSamplerCreateFlags")
-val VkDescriptorPoolCreateFlags = typedef(VkFlags, "VkDescriptorPoolCreateFlags")
-val VkDescriptorPoolResetFlags = typedef(VkFlags, "VkDescriptorPoolResetFlags")
-val VkDescriptorSetLayoutCreateFlags = typedef(VkFlags, "VkDescriptorSetLayoutCreateFlags")
 val VkAttachmentDescriptionFlags = typedef(VkFlags, "VkAttachmentDescriptionFlags")
-val VkDependencyFlags = typedef(VkFlags, "VkDependencyFlags")
 val VkFramebufferCreateFlags = typedef(VkFlags, "VkFramebufferCreateFlags")
 val VkRenderPassCreateFlags = typedef(VkFlags, "VkRenderPassCreateFlags")
 val VkSubpassDescriptionFlags = typedef(VkFlags, "VkSubpassDescriptionFlags")
-val VkCommandPoolCreateFlags = typedef(VkFlags, "VkCommandPoolCreateFlags")
-val VkCommandPoolResetFlags = typedef(VkFlags, "VkCommandPoolResetFlags")
-val VkCommandBufferUsageFlags = typedef(VkFlags, "VkCommandBufferUsageFlags")
-val VkQueryControlFlags = typedef(VkFlags, "VkQueryControlFlags")
-val VkCommandBufferResetFlags = typedef(VkFlags, "VkCommandBufferResetFlags")
 val VkStencilFaceFlags = typedef(VkFlags, "VkStencilFaceFlags")
-val VkSubgroupFeatureFlags = typedef(VkFlags, "VkSubgroupFeatureFlags")
 val VkPeerMemoryFeatureFlags = typedef(VkFlags, "VkPeerMemoryFeatureFlags")
 val VkMemoryAllocateFlags = typedef(VkFlags, "VkMemoryAllocateFlags")
 val VkCommandPoolTrimFlags = typedef(VkFlags, "VkCommandPoolTrimFlags")
-val VkDescriptorUpdateTemplateCreateFlags = typedef(VkFlags, "VkDescriptorUpdateTemplateCreateFlags")
 val VkExternalMemoryHandleTypeFlags = typedef(VkFlags, "VkExternalMemoryHandleTypeFlags")
 val VkExternalMemoryFeatureFlags = typedef(VkFlags, "VkExternalMemoryFeatureFlags")
 val VkExternalFenceHandleTypeFlags = typedef(VkFlags, "VkExternalFenceHandleTypeFlags")
@@ -230,21 +228,23 @@ val VkFenceImportFlags = typedef(VkFlags, "VkFenceImportFlags")
 val VkSemaphoreImportFlags = typedef(VkFlags, "VkSemaphoreImportFlags")
 val VkExternalSemaphoreHandleTypeFlags = typedef(VkFlags, "VkExternalSemaphoreHandleTypeFlags")
 val VkExternalSemaphoreFeatureFlags = typedef(VkFlags, "VkExternalSemaphoreFeatureFlags")
+val VkSubgroupFeatureFlags = typedef(VkFlags, "VkSubgroupFeatureFlags")
+val VkDescriptorUpdateTemplateCreateFlags = typedef(VkFlags, "VkDescriptorUpdateTemplateCreateFlags")
 val VkResolveModeFlags = typedef(VkFlags, "VkResolveModeFlags")
-val VkDescriptorBindingFlags = typedef(VkFlags, "VkDescriptorBindingFlags")
 val VkSemaphoreWaitFlags = typedef(VkFlags, "VkSemaphoreWaitFlags")
-val VkPipelineCreationFeedbackFlags = typedef(VkFlags, "VkPipelineCreationFeedbackFlags")
+val VkDescriptorBindingFlags = typedef(VkFlags, "VkDescriptorBindingFlags")
 val VkToolPurposeFlags = typedef(VkFlags, "VkToolPurposeFlags")
 val VkPrivateDataSlotCreateFlags = typedef(VkFlags, "VkPrivateDataSlotCreateFlags")
 val VkPipelineStageFlags2 = typedef(VkFlags64, "VkPipelineStageFlags2")
 val VkAccessFlags2 = typedef(VkFlags64, "VkAccessFlags2")
 val VkSubmitFlags = typedef(VkFlags, "VkSubmitFlags")
-val VkRenderingFlags = typedef(VkFlags, "VkRenderingFlags")
 val VkFormatFeatureFlags2 = typedef(VkFlags64, "VkFormatFeatureFlags2")
+val VkPipelineCreationFeedbackFlags = typedef(VkFlags, "VkPipelineCreationFeedbackFlags")
+val VkRenderingFlags = typedef(VkFlags, "VkRenderingFlags")
 val VkMemoryUnmapFlags = typedef(VkFlags, "VkMemoryUnmapFlags")
-val VkPipelineCreateFlags2 = typedef(VkFlags64, "VkPipelineCreateFlags2")
 val VkBufferUsageFlags2 = typedef(VkFlags64, "VkBufferUsageFlags2")
 val VkHostImageCopyFlags = typedef(VkFlags, "VkHostImageCopyFlags")
+val VkPipelineCreateFlags2 = typedef(VkFlags64, "VkPipelineCreateFlags2")
 
 // Function pointer types
 val PFN_vkAllocationFunction = Module.VULKAN.callback {
@@ -366,27 +366,6 @@ val VkBufferMemoryBarrier = struct(Module.VULKAN, "VkBufferMemoryBarrier") {
     VkDeviceSize("size")
 }
 
-val VkDispatchIndirectCommand = struct(Module.VULKAN, "VkDispatchIndirectCommand") {
-    uint32_t("x")
-    uint32_t("y")
-    uint32_t("z")
-}
-
-val VkDrawIndexedIndirectCommand = struct(Module.VULKAN, "VkDrawIndexedIndirectCommand") {
-    uint32_t("indexCount")
-    uint32_t("instanceCount")
-    uint32_t("firstIndex")
-    int32_t("vertexOffset")
-    uint32_t("firstInstance")
-}
-
-val VkDrawIndirectCommand = struct(Module.VULKAN, "VkDrawIndirectCommand") {
-    uint32_t("vertexCount")
-    uint32_t("instanceCount")
-    uint32_t("firstVertex")
-    uint32_t("firstInstance")
-}
-
 val VkImageSubresourceRange = struct(Module.VULKAN, "VkImageSubresourceRange") {
     VkImageAspectFlags("aspectMask")
     uint32_t("baseMipLevel")
@@ -416,15 +395,6 @@ val VkMemoryBarrier = struct(Module.VULKAN, "VkMemoryBarrier") {
     nullable..opaque_const_p("pNext")
     VkAccessFlags("srcAccessMask")
     VkAccessFlags("dstAccessMask")
-}
-
-val VkPipelineCacheHeaderVersionOne = struct(Module.VULKAN, "VkPipelineCacheHeaderVersionOne") {
-    javaImport("static org.lwjgl.vulkan.VK10.*")
-    uint32_t("headerSize")
-    VkPipelineCacheHeaderVersion("headerVersion")
-    uint32_t("vendorID")
-    uint32_t("deviceID")
-    uint8_t("pipelineCacheUUID")["VK_UUID_SIZE"]
 }
 
 val VkAllocationCallbacks = struct(Module.VULKAN, "VkAllocationCallbacks") {
@@ -702,7 +672,7 @@ val VkDeviceQueueCreateInfo = struct(Module.VULKAN, "VkDeviceQueueCreateInfo") {
 val VkDeviceCreateInfo = struct(Module.VULKAN, "VkDeviceCreateInfo") {
     Expression("#STRUCTURE_TYPE_DEVICE_CREATE_INFO")..VkStructureType("sType")
     PointerSetter(
-        "VkDeviceDeviceMemoryReportCreateInfoEXT", "VkDeviceDiagnosticsConfigCreateInfoNV", "VkDeviceGroupDeviceCreateInfo", "VkDeviceGroupDeviceCreateInfoKHR", "VkDeviceMemoryOverallocationCreateInfoAMD", "VkDevicePipelineBinaryInternalCacheControlKHR", "VkDevicePrivateDataCreateInfo", "VkDevicePrivateDataCreateInfoEXT", "VkDeviceQueueShaderCoreControlCreateInfoARM", "VkExternalComputeQueueDeviceCreateInfoNV", "VkPhysicalDevice16BitStorageFeatures", "VkPhysicalDevice16BitStorageFeaturesKHR", "VkPhysicalDevice4444FormatsFeaturesEXT", "VkPhysicalDevice8BitStorageFeatures", "VkPhysicalDevice8BitStorageFeaturesKHR", "VkPhysicalDeviceASTCDecodeFeaturesEXT", "VkPhysicalDeviceAccelerationStructureFeaturesKHR", "VkPhysicalDeviceAddressBindingReportFeaturesEXT", "VkPhysicalDeviceAmigoProfilingFeaturesSEC", "VkPhysicalDeviceAntiLagFeaturesAMD", "VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT", "VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT", "VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT", "VkPhysicalDeviceBorderColorSwizzleFeaturesEXT", "VkPhysicalDeviceBufferAddressFeaturesEXT", "VkPhysicalDeviceBufferDeviceAddressFeatures", "VkPhysicalDeviceBufferDeviceAddressFeaturesEXT", "VkPhysicalDeviceBufferDeviceAddressFeaturesKHR", "VkPhysicalDeviceClusterAccelerationStructureFeaturesNV", "VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI", "VkPhysicalDeviceCoherentMemoryFeaturesAMD", "VkPhysicalDeviceColorWriteEnableFeaturesEXT", "VkPhysicalDeviceCommandBufferInheritanceFeaturesNV", "VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR", "VkPhysicalDeviceComputeShaderDerivativesFeaturesNV", "VkPhysicalDeviceConditionalRenderingFeaturesEXT", "VkPhysicalDeviceCooperativeMatrix2FeaturesNV", "VkPhysicalDeviceCooperativeMatrixFeaturesKHR", "VkPhysicalDeviceCooperativeMatrixFeaturesNV", "VkPhysicalDeviceCooperativeVectorFeaturesNV", "VkPhysicalDeviceCopyMemoryIndirectFeaturesKHR", "VkPhysicalDeviceCopyMemoryIndirectFeaturesNV", "VkPhysicalDeviceCornerSampledImageFeaturesNV", "VkPhysicalDeviceCoverageReductionModeFeaturesNV", "VkPhysicalDeviceCubicClampFeaturesQCOM", "VkPhysicalDeviceCubicWeightsFeaturesQCOM", "VkPhysicalDeviceCudaKernelLaunchFeaturesNV", "VkPhysicalDeviceCustomBorderColorFeaturesEXT", "VkPhysicalDeviceDataGraphFeaturesARM", "VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV", "VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX", "VkPhysicalDeviceDepthBiasControlFeaturesEXT", "VkPhysicalDeviceDepthClampControlFeaturesEXT", "VkPhysicalDeviceDepthClampZeroOneFeaturesEXT", "VkPhysicalDeviceDepthClampZeroOneFeaturesKHR", "VkPhysicalDeviceDepthClipControlFeaturesEXT", "VkPhysicalDeviceDepthClipEnableFeaturesEXT", "VkPhysicalDeviceDescriptorBufferFeaturesEXT", "VkPhysicalDeviceDescriptorBufferTensorFeaturesARM", "VkPhysicalDeviceDescriptorIndexingFeatures", "VkPhysicalDeviceDescriptorIndexingFeaturesEXT", "VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV", "VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE", "VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV", "VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT", "VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV", "VkPhysicalDeviceDeviceMemoryReportFeaturesEXT", "VkPhysicalDeviceDiagnosticsConfigFeaturesNV", "VkPhysicalDeviceDisplacementMicromapFeaturesNV", "VkPhysicalDeviceDynamicRenderingFeatures", "VkPhysicalDeviceDynamicRenderingFeaturesKHR", "VkPhysicalDeviceDynamicRenderingLocalReadFeatures", "VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR", "VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT", "VkPhysicalDeviceExclusiveScissorFeaturesNV", "VkPhysicalDeviceExtendedDynamicState2FeaturesEXT", "VkPhysicalDeviceExtendedDynamicState3FeaturesEXT", "VkPhysicalDeviceExtendedDynamicStateFeaturesEXT", "VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV", "VkPhysicalDeviceExternalFormatResolveFeaturesANDROID", "VkPhysicalDeviceExternalMemoryRDMAFeaturesNV", "VkPhysicalDeviceFaultFeaturesEXT", "VkPhysicalDeviceFeatures2", "VkPhysicalDeviceFeatures2KHR", "VkPhysicalDeviceFloat16Int8FeaturesKHR", "VkPhysicalDeviceFormatPackFeaturesARM", "VkPhysicalDeviceFragmentDensityMap2FeaturesEXT", "VkPhysicalDeviceFragmentDensityMapFeaturesEXT", "VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE", "VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT", "VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM", "VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR", "VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV", "VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT", "VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV", "VkPhysicalDeviceFragmentShadingRateFeaturesKHR", "VkPhysicalDeviceFrameBoundaryFeaturesEXT", "VkPhysicalDeviceGlobalPriorityQueryFeatures", "VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT", "VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR", "VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT", "VkPhysicalDeviceHdrVividFeaturesHUAWEI", "VkPhysicalDeviceHostImageCopyFeatures", "VkPhysicalDeviceHostImageCopyFeaturesEXT", "VkPhysicalDeviceHostQueryResetFeatures", "VkPhysicalDeviceHostQueryResetFeaturesEXT", "VkPhysicalDeviceImage2DViewOf3DFeaturesEXT", "VkPhysicalDeviceImageAlignmentControlFeaturesMESA", "VkPhysicalDeviceImageCompressionControlFeaturesEXT", "VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT", "VkPhysicalDeviceImageProcessing2FeaturesQCOM", "VkPhysicalDeviceImageProcessingFeaturesQCOM", "VkPhysicalDeviceImageRobustnessFeatures", "VkPhysicalDeviceImageRobustnessFeaturesEXT", "VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT", "VkPhysicalDeviceImageViewMinLodFeaturesEXT", "VkPhysicalDeviceImagelessFramebufferFeatures", "VkPhysicalDeviceImagelessFramebufferFeaturesKHR", "VkPhysicalDeviceIndexTypeUint8Features", "VkPhysicalDeviceIndexTypeUint8FeaturesEXT", "VkPhysicalDeviceIndexTypeUint8FeaturesKHR", "VkPhysicalDeviceInheritedViewportScissorFeaturesNV", "VkPhysicalDeviceInlineUniformBlockFeatures", "VkPhysicalDeviceInlineUniformBlockFeaturesEXT", "VkPhysicalDeviceInvocationMaskFeaturesHUAWEI", "VkPhysicalDeviceLegacyDitheringFeaturesEXT", "VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT", "VkPhysicalDeviceLineRasterizationFeatures", "VkPhysicalDeviceLineRasterizationFeaturesEXT", "VkPhysicalDeviceLineRasterizationFeaturesKHR", "VkPhysicalDeviceLinearColorAttachmentFeaturesNV", "VkPhysicalDeviceMaintenance4Features", "VkPhysicalDeviceMaintenance4FeaturesKHR", "VkPhysicalDeviceMaintenance5Features", "VkPhysicalDeviceMaintenance5FeaturesKHR", "VkPhysicalDeviceMaintenance6Features", "VkPhysicalDeviceMaintenance6FeaturesKHR", "VkPhysicalDeviceMaintenance7FeaturesKHR", "VkPhysicalDeviceMaintenance8FeaturesKHR", "VkPhysicalDeviceMaintenance9FeaturesKHR", "VkPhysicalDeviceMapMemoryPlacedFeaturesEXT", "VkPhysicalDeviceMemoryDecompressionFeaturesNV", "VkPhysicalDeviceMemoryPriorityFeaturesEXT", "VkPhysicalDeviceMeshShaderFeaturesEXT", "VkPhysicalDeviceMeshShaderFeaturesNV", "VkPhysicalDeviceMultiDrawFeaturesEXT", "VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT", "VkPhysicalDeviceMultiviewFeatures", "VkPhysicalDeviceMultiviewFeaturesKHR", "VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM", "VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM", "VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT", "VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE", "VkPhysicalDeviceNestedCommandBufferFeaturesEXT", "VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT", "VkPhysicalDeviceOpacityMicromapFeaturesEXT", "VkPhysicalDeviceOpticalFlowFeaturesNV", "VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT", "VkPhysicalDevicePartitionedAccelerationStructureFeaturesNV", "VkPhysicalDevicePerStageDescriptorSetFeaturesNV", "VkPhysicalDevicePerformanceQueryFeaturesKHR", "VkPhysicalDevicePipelineBinaryFeaturesKHR", "VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC", "VkPhysicalDevicePipelineCreationCacheControlFeatures", "VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT", "VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR", "VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT", "VkPhysicalDevicePipelineOpacityMicromapFeaturesARM", "VkPhysicalDevicePipelinePropertiesFeaturesEXT", "VkPhysicalDevicePipelineProtectedAccessFeatures", "VkPhysicalDevicePipelineProtectedAccessFeaturesEXT", "VkPhysicalDevicePipelineRobustnessFeatures", "VkPhysicalDevicePipelineRobustnessFeaturesEXT", "VkPhysicalDevicePortabilitySubsetFeaturesKHR", "VkPhysicalDevicePresentBarrierFeaturesNV", "VkPhysicalDevicePresentId2FeaturesKHR", "VkPhysicalDevicePresentIdFeaturesKHR", "VkPhysicalDevicePresentMeteringFeaturesNV", "VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT", "VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR", "VkPhysicalDevicePresentWait2FeaturesKHR", "VkPhysicalDevicePresentWaitFeaturesKHR", "VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT", "VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT", "VkPhysicalDevicePrivateDataFeatures", "VkPhysicalDevicePrivateDataFeaturesEXT", "VkPhysicalDeviceProtectedMemoryFeatures", "VkPhysicalDeviceProvokingVertexFeaturesEXT", "VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT", "VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM", "VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT", "VkPhysicalDeviceRawAccessChainsFeaturesNV", "VkPhysicalDeviceRayQueryFeaturesKHR", "VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV", "VkPhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV", "VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR", "VkPhysicalDeviceRayTracingMotionBlurFeaturesNV", "VkPhysicalDeviceRayTracingPipelineFeaturesKHR", "VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR", "VkPhysicalDeviceRayTracingValidationFeaturesNV", "VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG", "VkPhysicalDeviceRenderPassStripedFeaturesARM", "VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV", "VkPhysicalDeviceRobustness2FeaturesEXT", "VkPhysicalDeviceRobustness2FeaturesKHR", "VkPhysicalDeviceSamplerYcbcrConversionFeatures", "VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR", "VkPhysicalDeviceScalarBlockLayoutFeatures", "VkPhysicalDeviceScalarBlockLayoutFeaturesEXT", "VkPhysicalDeviceSchedulingControlsFeaturesARM", "VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures", "VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR", "VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV", "VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT", "VkPhysicalDeviceShaderAtomicFloatFeaturesEXT", "VkPhysicalDeviceShaderAtomicInt64Features", "VkPhysicalDeviceShaderAtomicInt64FeaturesKHR", "VkPhysicalDeviceShaderBfloat16FeaturesKHR", "VkPhysicalDeviceShaderClockFeaturesKHR", "VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM", "VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures", "VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT", "VkPhysicalDeviceShaderDrawParameterFeatures", "VkPhysicalDeviceShaderDrawParametersFeatures", "VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD", "VkPhysicalDeviceShaderEnqueueFeaturesAMDX", "VkPhysicalDeviceShaderExpectAssumeFeatures", "VkPhysicalDeviceShaderExpectAssumeFeaturesKHR", "VkPhysicalDeviceShaderFloat16Int8Features", "VkPhysicalDeviceShaderFloat16Int8FeaturesKHR", "VkPhysicalDeviceShaderFloat8FeaturesEXT", "VkPhysicalDeviceShaderFloatControls2Features", "VkPhysicalDeviceShaderFloatControls2FeaturesKHR", "VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT", "VkPhysicalDeviceShaderImageFootprintFeaturesNV", "VkPhysicalDeviceShaderIntegerDotProductFeatures", "VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR", "VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL", "VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR", "VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT", "VkPhysicalDeviceShaderObjectFeaturesEXT", "VkPhysicalDeviceShaderQuadControlFeaturesKHR", "VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR", "VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT", "VkPhysicalDeviceShaderSMBuiltinsFeaturesNV", "VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures", "VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR", "VkPhysicalDeviceShaderSubgroupRotateFeatures", "VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR", "VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR", "VkPhysicalDeviceShaderTerminateInvocationFeatures", "VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR", "VkPhysicalDeviceShaderTileImageFeaturesEXT", "VkPhysicalDeviceShaderUntypedPointersFeaturesKHR", "VkPhysicalDeviceShadingRateImageFeaturesNV", "VkPhysicalDeviceSubgroupSizeControlFeatures", "VkPhysicalDeviceSubgroupSizeControlFeaturesEXT", "VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT", "VkPhysicalDeviceSubpassShadingFeaturesHUAWEI", "VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT", "VkPhysicalDeviceSwapchainMaintenance1FeaturesKHR", "VkPhysicalDeviceSynchronization2Features", "VkPhysicalDeviceSynchronization2FeaturesKHR", "VkPhysicalDeviceTensorFeaturesARM", "VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT", "VkPhysicalDeviceTextureCompressionASTCHDRFeatures", "VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT", "VkPhysicalDeviceTileMemoryHeapFeaturesQCOM", "VkPhysicalDeviceTilePropertiesFeaturesQCOM", "VkPhysicalDeviceTileShadingFeaturesQCOM", "VkPhysicalDeviceTimelineSemaphoreFeatures", "VkPhysicalDeviceTimelineSemaphoreFeaturesKHR", "VkPhysicalDeviceTransformFeedbackFeaturesEXT", "VkPhysicalDeviceUnifiedImageLayoutsFeaturesKHR", "VkPhysicalDeviceUniformBufferStandardLayoutFeatures", "VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR", "VkPhysicalDeviceVariablePointerFeatures", "VkPhysicalDeviceVariablePointerFeaturesKHR", "VkPhysicalDeviceVariablePointersFeatures", "VkPhysicalDeviceVariablePointersFeaturesKHR", "VkPhysicalDeviceVertexAttributeDivisorFeatures", "VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT", "VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR", "VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT", "VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT", "VkPhysicalDeviceVideoDecodeVP9FeaturesKHR", "VkPhysicalDeviceVideoEncodeAV1FeaturesKHR", "VkPhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR", "VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR", "VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE", "VkPhysicalDeviceVideoMaintenance1FeaturesKHR", "VkPhysicalDeviceVideoMaintenance2FeaturesKHR", "VkPhysicalDeviceVulkan11Features", "VkPhysicalDeviceVulkan12Features", "VkPhysicalDeviceVulkan13Features", "VkPhysicalDeviceVulkan14Features", "VkPhysicalDeviceVulkanMemoryModelFeatures", "VkPhysicalDeviceVulkanMemoryModelFeaturesKHR", "VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR", "VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT", "VkPhysicalDeviceYcbcrDegammaFeaturesQCOM", "VkPhysicalDeviceYcbcrImageArraysFeaturesEXT", "VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT", "VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures", "VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR",
+        "VkDeviceDeviceMemoryReportCreateInfoEXT", "VkDeviceDiagnosticsConfigCreateInfoNV", "VkDeviceGroupDeviceCreateInfo", "VkDeviceGroupDeviceCreateInfoKHR", "VkDeviceMemoryOverallocationCreateInfoAMD", "VkDevicePipelineBinaryInternalCacheControlKHR", "VkDevicePrivateDataCreateInfo", "VkDevicePrivateDataCreateInfoEXT", "VkDeviceQueueShaderCoreControlCreateInfoARM", "VkExternalComputeQueueDeviceCreateInfoNV", "VkPhysicalDevice16BitStorageFeatures", "VkPhysicalDevice16BitStorageFeaturesKHR", "VkPhysicalDevice4444FormatsFeaturesEXT", "VkPhysicalDevice8BitStorageFeatures", "VkPhysicalDevice8BitStorageFeaturesKHR", "VkPhysicalDeviceASTCDecodeFeaturesEXT", "VkPhysicalDeviceAccelerationStructureFeaturesKHR", "VkPhysicalDeviceAddressBindingReportFeaturesEXT", "VkPhysicalDeviceAmigoProfilingFeaturesSEC", "VkPhysicalDeviceAntiLagFeaturesAMD", "VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT", "VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT", "VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT", "VkPhysicalDeviceBorderColorSwizzleFeaturesEXT", "VkPhysicalDeviceBufferAddressFeaturesEXT", "VkPhysicalDeviceBufferDeviceAddressFeatures", "VkPhysicalDeviceBufferDeviceAddressFeaturesEXT", "VkPhysicalDeviceBufferDeviceAddressFeaturesKHR", "VkPhysicalDeviceClusterAccelerationStructureFeaturesNV", "VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI", "VkPhysicalDeviceCoherentMemoryFeaturesAMD", "VkPhysicalDeviceColorWriteEnableFeaturesEXT", "VkPhysicalDeviceCommandBufferInheritanceFeaturesNV", "VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR", "VkPhysicalDeviceComputeShaderDerivativesFeaturesNV", "VkPhysicalDeviceConditionalRenderingFeaturesEXT", "VkPhysicalDeviceCooperativeMatrix2FeaturesNV", "VkPhysicalDeviceCooperativeMatrixFeaturesKHR", "VkPhysicalDeviceCooperativeMatrixFeaturesNV", "VkPhysicalDeviceCooperativeVectorFeaturesNV", "VkPhysicalDeviceCopyMemoryIndirectFeaturesKHR", "VkPhysicalDeviceCopyMemoryIndirectFeaturesNV", "VkPhysicalDeviceCornerSampledImageFeaturesNV", "VkPhysicalDeviceCoverageReductionModeFeaturesNV", "VkPhysicalDeviceCubicClampFeaturesQCOM", "VkPhysicalDeviceCubicWeightsFeaturesQCOM", "VkPhysicalDeviceCudaKernelLaunchFeaturesNV", "VkPhysicalDeviceCustomBorderColorFeaturesEXT", "VkPhysicalDeviceDataGraphFeaturesARM", "VkPhysicalDeviceDataGraphModelFeaturesQCOM", "VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV", "VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX", "VkPhysicalDeviceDepthBiasControlFeaturesEXT", "VkPhysicalDeviceDepthClampControlFeaturesEXT", "VkPhysicalDeviceDepthClampZeroOneFeaturesEXT", "VkPhysicalDeviceDepthClampZeroOneFeaturesKHR", "VkPhysicalDeviceDepthClipControlFeaturesEXT", "VkPhysicalDeviceDepthClipEnableFeaturesEXT", "VkPhysicalDeviceDescriptorBufferFeaturesEXT", "VkPhysicalDeviceDescriptorBufferTensorFeaturesARM", "VkPhysicalDeviceDescriptorIndexingFeatures", "VkPhysicalDeviceDescriptorIndexingFeaturesEXT", "VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV", "VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE", "VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV", "VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT", "VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV", "VkPhysicalDeviceDeviceMemoryReportFeaturesEXT", "VkPhysicalDeviceDiagnosticsConfigFeaturesNV", "VkPhysicalDeviceDisplacementMicromapFeaturesNV", "VkPhysicalDeviceDynamicRenderingFeatures", "VkPhysicalDeviceDynamicRenderingFeaturesKHR", "VkPhysicalDeviceDynamicRenderingLocalReadFeatures", "VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR", "VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT", "VkPhysicalDeviceExclusiveScissorFeaturesNV", "VkPhysicalDeviceExtendedDynamicState2FeaturesEXT", "VkPhysicalDeviceExtendedDynamicState3FeaturesEXT", "VkPhysicalDeviceExtendedDynamicStateFeaturesEXT", "VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV", "VkPhysicalDeviceExternalFormatResolveFeaturesANDROID", "VkPhysicalDeviceExternalMemoryRDMAFeaturesNV", "VkPhysicalDeviceFaultFeaturesEXT", "VkPhysicalDeviceFeatures2", "VkPhysicalDeviceFeatures2KHR", "VkPhysicalDeviceFloat16Int8FeaturesKHR", "VkPhysicalDeviceFormatPackFeaturesARM", "VkPhysicalDeviceFragmentDensityMap2FeaturesEXT", "VkPhysicalDeviceFragmentDensityMapFeaturesEXT", "VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE", "VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT", "VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM", "VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR", "VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV", "VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT", "VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV", "VkPhysicalDeviceFragmentShadingRateFeaturesKHR", "VkPhysicalDeviceFrameBoundaryFeaturesEXT", "VkPhysicalDeviceGlobalPriorityQueryFeatures", "VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT", "VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR", "VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT", "VkPhysicalDeviceHdrVividFeaturesHUAWEI", "VkPhysicalDeviceHostImageCopyFeatures", "VkPhysicalDeviceHostImageCopyFeaturesEXT", "VkPhysicalDeviceHostQueryResetFeatures", "VkPhysicalDeviceHostQueryResetFeaturesEXT", "VkPhysicalDeviceImage2DViewOf3DFeaturesEXT", "VkPhysicalDeviceImageAlignmentControlFeaturesMESA", "VkPhysicalDeviceImageCompressionControlFeaturesEXT", "VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT", "VkPhysicalDeviceImageProcessing2FeaturesQCOM", "VkPhysicalDeviceImageProcessingFeaturesQCOM", "VkPhysicalDeviceImageRobustnessFeatures", "VkPhysicalDeviceImageRobustnessFeaturesEXT", "VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT", "VkPhysicalDeviceImageViewMinLodFeaturesEXT", "VkPhysicalDeviceImagelessFramebufferFeatures", "VkPhysicalDeviceImagelessFramebufferFeaturesKHR", "VkPhysicalDeviceIndexTypeUint8Features", "VkPhysicalDeviceIndexTypeUint8FeaturesEXT", "VkPhysicalDeviceIndexTypeUint8FeaturesKHR", "VkPhysicalDeviceInheritedViewportScissorFeaturesNV", "VkPhysicalDeviceInlineUniformBlockFeatures", "VkPhysicalDeviceInlineUniformBlockFeaturesEXT", "VkPhysicalDeviceInvocationMaskFeaturesHUAWEI", "VkPhysicalDeviceLegacyDitheringFeaturesEXT", "VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT", "VkPhysicalDeviceLineRasterizationFeatures", "VkPhysicalDeviceLineRasterizationFeaturesEXT", "VkPhysicalDeviceLineRasterizationFeaturesKHR", "VkPhysicalDeviceLinearColorAttachmentFeaturesNV", "VkPhysicalDeviceMaintenance10FeaturesKHR", "VkPhysicalDeviceMaintenance4Features", "VkPhysicalDeviceMaintenance4FeaturesKHR", "VkPhysicalDeviceMaintenance5Features", "VkPhysicalDeviceMaintenance5FeaturesKHR", "VkPhysicalDeviceMaintenance6Features", "VkPhysicalDeviceMaintenance6FeaturesKHR", "VkPhysicalDeviceMaintenance7FeaturesKHR", "VkPhysicalDeviceMaintenance8FeaturesKHR", "VkPhysicalDeviceMaintenance9FeaturesKHR", "VkPhysicalDeviceMapMemoryPlacedFeaturesEXT", "VkPhysicalDeviceMemoryDecompressionFeaturesEXT", "VkPhysicalDeviceMemoryDecompressionFeaturesNV", "VkPhysicalDeviceMemoryPriorityFeaturesEXT", "VkPhysicalDeviceMeshShaderFeaturesEXT", "VkPhysicalDeviceMeshShaderFeaturesNV", "VkPhysicalDeviceMultiDrawFeaturesEXT", "VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT", "VkPhysicalDeviceMultiviewFeatures", "VkPhysicalDeviceMultiviewFeaturesKHR", "VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM", "VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM", "VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT", "VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE", "VkPhysicalDeviceNestedCommandBufferFeaturesEXT", "VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT", "VkPhysicalDeviceOpacityMicromapFeaturesEXT", "VkPhysicalDeviceOpticalFlowFeaturesNV", "VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT", "VkPhysicalDevicePartitionedAccelerationStructureFeaturesNV", "VkPhysicalDevicePerStageDescriptorSetFeaturesNV", "VkPhysicalDevicePerformanceCountersByRegionFeaturesARM", "VkPhysicalDevicePerformanceQueryFeaturesKHR", "VkPhysicalDevicePipelineBinaryFeaturesKHR", "VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC", "VkPhysicalDevicePipelineCreationCacheControlFeatures", "VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT", "VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR", "VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT", "VkPhysicalDevicePipelineOpacityMicromapFeaturesARM", "VkPhysicalDevicePipelinePropertiesFeaturesEXT", "VkPhysicalDevicePipelineProtectedAccessFeatures", "VkPhysicalDevicePipelineProtectedAccessFeaturesEXT", "VkPhysicalDevicePipelineRobustnessFeatures", "VkPhysicalDevicePipelineRobustnessFeaturesEXT", "VkPhysicalDevicePortabilitySubsetFeaturesKHR", "VkPhysicalDevicePresentBarrierFeaturesNV", "VkPhysicalDevicePresentId2FeaturesKHR", "VkPhysicalDevicePresentIdFeaturesKHR", "VkPhysicalDevicePresentMeteringFeaturesNV", "VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT", "VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR", "VkPhysicalDevicePresentWait2FeaturesKHR", "VkPhysicalDevicePresentWaitFeaturesKHR", "VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT", "VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT", "VkPhysicalDevicePrivateDataFeatures", "VkPhysicalDevicePrivateDataFeaturesEXT", "VkPhysicalDeviceProtectedMemoryFeatures", "VkPhysicalDeviceProvokingVertexFeaturesEXT", "VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT", "VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM", "VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT", "VkPhysicalDeviceRawAccessChainsFeaturesNV", "VkPhysicalDeviceRayQueryFeaturesKHR", "VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV", "VkPhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV", "VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR", "VkPhysicalDeviceRayTracingMotionBlurFeaturesNV", "VkPhysicalDeviceRayTracingPipelineFeaturesKHR", "VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR", "VkPhysicalDeviceRayTracingValidationFeaturesNV", "VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG", "VkPhysicalDeviceRenderPassStripedFeaturesARM", "VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV", "VkPhysicalDeviceRobustness2FeaturesEXT", "VkPhysicalDeviceRobustness2FeaturesKHR", "VkPhysicalDeviceSamplerYcbcrConversionFeatures", "VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR", "VkPhysicalDeviceScalarBlockLayoutFeatures", "VkPhysicalDeviceScalarBlockLayoutFeaturesEXT", "VkPhysicalDeviceSchedulingControlsFeaturesARM", "VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures", "VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR", "VkPhysicalDeviceShader64BitIndexingFeaturesEXT", "VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV", "VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT", "VkPhysicalDeviceShaderAtomicFloatFeaturesEXT", "VkPhysicalDeviceShaderAtomicInt64Features", "VkPhysicalDeviceShaderAtomicInt64FeaturesKHR", "VkPhysicalDeviceShaderBfloat16FeaturesKHR", "VkPhysicalDeviceShaderClockFeaturesKHR", "VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM", "VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures", "VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT", "VkPhysicalDeviceShaderDrawParameterFeatures", "VkPhysicalDeviceShaderDrawParametersFeatures", "VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD", "VkPhysicalDeviceShaderEnqueueFeaturesAMDX", "VkPhysicalDeviceShaderExpectAssumeFeatures", "VkPhysicalDeviceShaderExpectAssumeFeaturesKHR", "VkPhysicalDeviceShaderFloat16Int8Features", "VkPhysicalDeviceShaderFloat16Int8FeaturesKHR", "VkPhysicalDeviceShaderFloat8FeaturesEXT", "VkPhysicalDeviceShaderFloatControls2Features", "VkPhysicalDeviceShaderFloatControls2FeaturesKHR", "VkPhysicalDeviceShaderFmaFeaturesKHR", "VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT", "VkPhysicalDeviceShaderImageFootprintFeaturesNV", "VkPhysicalDeviceShaderIntegerDotProductFeatures", "VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR", "VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL", "VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR", "VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT", "VkPhysicalDeviceShaderObjectFeaturesEXT", "VkPhysicalDeviceShaderQuadControlFeaturesKHR", "VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR", "VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT", "VkPhysicalDeviceShaderSMBuiltinsFeaturesNV", "VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures", "VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR", "VkPhysicalDeviceShaderSubgroupRotateFeatures", "VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR", "VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR", "VkPhysicalDeviceShaderTerminateInvocationFeatures", "VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR", "VkPhysicalDeviceShaderTileImageFeaturesEXT", "VkPhysicalDeviceShaderUniformBufferUnsizedArrayFeaturesEXT", "VkPhysicalDeviceShaderUntypedPointersFeaturesKHR", "VkPhysicalDeviceShadingRateImageFeaturesNV", "VkPhysicalDeviceSubgroupSizeControlFeatures", "VkPhysicalDeviceSubgroupSizeControlFeaturesEXT", "VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT", "VkPhysicalDeviceSubpassShadingFeaturesHUAWEI", "VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT", "VkPhysicalDeviceSwapchainMaintenance1FeaturesKHR", "VkPhysicalDeviceSynchronization2Features", "VkPhysicalDeviceSynchronization2FeaturesKHR", "VkPhysicalDeviceTensorFeaturesARM", "VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT", "VkPhysicalDeviceTextureCompressionASTCHDRFeatures", "VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT", "VkPhysicalDeviceTileMemoryHeapFeaturesQCOM", "VkPhysicalDeviceTilePropertiesFeaturesQCOM", "VkPhysicalDeviceTileShadingFeaturesQCOM", "VkPhysicalDeviceTimelineSemaphoreFeatures", "VkPhysicalDeviceTimelineSemaphoreFeaturesKHR", "VkPhysicalDeviceTransformFeedbackFeaturesEXT", "VkPhysicalDeviceUnifiedImageLayoutsFeaturesKHR", "VkPhysicalDeviceUniformBufferStandardLayoutFeatures", "VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR", "VkPhysicalDeviceVariablePointerFeatures", "VkPhysicalDeviceVariablePointerFeaturesKHR", "VkPhysicalDeviceVariablePointersFeatures", "VkPhysicalDeviceVariablePointersFeaturesKHR", "VkPhysicalDeviceVertexAttributeDivisorFeatures", "VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT", "VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR", "VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT", "VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT", "VkPhysicalDeviceVideoDecodeVP9FeaturesKHR", "VkPhysicalDeviceVideoEncodeAV1FeaturesKHR", "VkPhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR", "VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR", "VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE", "VkPhysicalDeviceVideoMaintenance1FeaturesKHR", "VkPhysicalDeviceVideoMaintenance2FeaturesKHR", "VkPhysicalDeviceVulkan11Features", "VkPhysicalDeviceVulkan12Features", "VkPhysicalDeviceVulkan13Features", "VkPhysicalDeviceVulkan14Features", "VkPhysicalDeviceVulkanMemoryModelFeatures", "VkPhysicalDeviceVulkanMemoryModelFeaturesKHR", "VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR", "VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT", "VkPhysicalDeviceYcbcrDegammaFeaturesQCOM", "VkPhysicalDeviceYcbcrImageArraysFeaturesEXT", "VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT", "VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures", "VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR",
         prepend = true
     )..nullable..opaque_const_p("pNext")
     VkDeviceCreateFlags("flags")
@@ -859,15 +829,6 @@ val VkSemaphoreCreateInfo = struct(Module.VULKAN, "VkSemaphoreCreateInfo") {
     VkSemaphoreCreateFlags("flags")
 }
 
-val VkEventCreateInfo = struct(Module.VULKAN, "VkEventCreateInfo") {
-    Expression("#STRUCTURE_TYPE_EVENT_CREATE_INFO")..VkStructureType("sType")
-    PointerSetter(
-        "VkExportMetalObjectCreateInfoEXT", "VkImportMetalSharedEventInfoEXT",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkEventCreateFlags("flags")
-}
-
 val VkQueryPoolCreateInfo = struct(Module.VULKAN, "VkQueryPoolCreateInfo") {
     Expression("#STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO")..VkStructureType("sType")
     PointerSetter(
@@ -892,19 +853,6 @@ val VkBufferCreateInfo = struct(Module.VULKAN, "VkBufferCreateInfo") {
     VkSharingMode("sharingMode")
     AutoSize("pQueueFamilyIndices", optional = true)..uint32_t("queueFamilyIndexCount")
     nullable..uint32_t.const.p("pQueueFamilyIndices")
-}
-
-val VkBufferViewCreateInfo = struct(Module.VULKAN, "VkBufferViewCreateInfo") {
-    Expression("#STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO")..VkStructureType("sType")
-    PointerSetter(
-        "VkBufferUsageFlags2CreateInfo", "VkBufferUsageFlags2CreateInfoKHR", "VkExportMetalObjectCreateInfoEXT",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkBufferViewCreateFlags("flags")
-    VkBuffer("buffer")
-    VkFormat("format")
-    VkDeviceSize("offset")
-    VkDeviceSize("range")
 }
 
 val VkImageCreateInfo = struct(Module.VULKAN, "VkImageCreateInfo") {
@@ -955,6 +903,115 @@ val VkImageViewCreateInfo = struct(Module.VULKAN, "VkImageViewCreateInfo") {
     VkFormat("format")
     VkComponentMapping("components")
     VkImageSubresourceRange("subresourceRange")
+}
+
+val VkCommandPoolCreateInfo = struct(Module.VULKAN, "VkCommandPoolCreateInfo") {
+    Expression("#STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO")..VkStructureType("sType")
+    PointerSetter(
+        "VkDataGraphProcessingEngineCreateInfoARM",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkCommandPoolCreateFlags("flags")
+    uint32_t("queueFamilyIndex")
+}
+
+val VkCommandBufferAllocateInfo = struct(Module.VULKAN, "VkCommandBufferAllocateInfo") {
+    Expression("#STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkCommandPool("commandPool")
+    VkCommandBufferLevel("level")
+    uint32_t("commandBufferCount")
+}
+
+val VkCommandBufferInheritanceInfo = struct(Module.VULKAN, "VkCommandBufferInheritanceInfo") {
+    Expression("#STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO")..VkStructureType("sType")
+    PointerSetter(
+        "VkAttachmentSampleCountInfoAMD", "VkAttachmentSampleCountInfoNV", "VkCommandBufferInheritanceConditionalRenderingInfoEXT", "VkCommandBufferInheritanceRenderPassTransformInfoQCOM", "VkCommandBufferInheritanceRenderingInfo", "VkCommandBufferInheritanceRenderingInfoKHR", "VkCommandBufferInheritanceViewportScissorInfoNV", "VkExternalFormatANDROID", "VkMultiviewPerViewAttributesInfoNVX", "VkRenderPassTileShadingCreateInfoQCOM", "VkRenderingAttachmentLocationInfo", "VkRenderingAttachmentLocationInfoKHR", "VkRenderingInputAttachmentIndexInfo", "VkRenderingInputAttachmentIndexInfoKHR", "VkTileMemoryBindInfoQCOM",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkRenderPass("renderPass")
+    uint32_t("subpass")
+    VkFramebuffer("framebuffer")
+    VkBool32("occlusionQueryEnable")
+    VkQueryControlFlags("queryFlags")
+    VkQueryPipelineStatisticFlags("pipelineStatistics")
+}
+
+val VkCommandBufferBeginInfo = struct(Module.VULKAN, "VkCommandBufferBeginInfo") {
+    Expression("#STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO")..VkStructureType("sType")
+    PointerSetter(
+        "VkDeviceGroupCommandBufferBeginInfo", "VkDeviceGroupCommandBufferBeginInfoKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkCommandBufferUsageFlags("flags")
+    nullable..VkCommandBufferInheritanceInfo.const.p("pInheritanceInfo")
+}
+
+val VkBufferCopy = struct(Module.VULKAN, "VkBufferCopy") {
+    VkDeviceSize("srcOffset")
+    VkDeviceSize("dstOffset")
+    VkDeviceSize("size")
+}
+
+val VkImageSubresourceLayers = struct(Module.VULKAN, "VkImageSubresourceLayers") {
+    VkImageAspectFlags("aspectMask")
+    uint32_t("mipLevel")
+    uint32_t("baseArrayLayer")
+    uint32_t("layerCount")
+}
+
+val VkBufferImageCopy = struct(Module.VULKAN, "VkBufferImageCopy") {
+    VkDeviceSize("bufferOffset")
+    uint32_t("bufferRowLength")
+    uint32_t("bufferImageHeight")
+    VkImageSubresourceLayers("imageSubresource")
+    VkOffset3D("imageOffset")
+    VkExtent3D("imageExtent")
+}
+
+val VkImageCopy = struct(Module.VULKAN, "VkImageCopy") {
+    VkImageSubresourceLayers("srcSubresource")
+    VkOffset3D("srcOffset")
+    VkImageSubresourceLayers("dstSubresource")
+    VkOffset3D("dstOffset")
+    VkExtent3D("extent")
+}
+
+val VkDispatchIndirectCommand = struct(Module.VULKAN, "VkDispatchIndirectCommand") {
+    uint32_t("x")
+    uint32_t("y")
+    uint32_t("z")
+}
+
+val VkPipelineCacheHeaderVersionOne = struct(Module.VULKAN, "VkPipelineCacheHeaderVersionOne") {
+    javaImport("static org.lwjgl.vulkan.VK10.*")
+    uint32_t("headerSize")
+    VkPipelineCacheHeaderVersion("headerVersion")
+    uint32_t("vendorID")
+    uint32_t("deviceID")
+    uint8_t("pipelineCacheUUID")["VK_UUID_SIZE"]
+}
+
+val VkEventCreateInfo = struct(Module.VULKAN, "VkEventCreateInfo") {
+    Expression("#STRUCTURE_TYPE_EVENT_CREATE_INFO")..VkStructureType("sType")
+    PointerSetter(
+        "VkExportMetalObjectCreateInfoEXT", "VkImportMetalSharedEventInfoEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkEventCreateFlags("flags")
+}
+
+val VkBufferViewCreateInfo = struct(Module.VULKAN, "VkBufferViewCreateInfo") {
+    Expression("#STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO")..VkStructureType("sType")
+    PointerSetter(
+        "VkBufferUsageFlags2CreateInfo", "VkBufferUsageFlags2CreateInfoKHR", "VkExportMetalObjectCreateInfoEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkBufferViewCreateFlags("flags")
+    VkBuffer("buffer")
+    VkFormat("format")
+    VkDeviceSize("offset")
+    VkDeviceSize("range")
 }
 
 val VkShaderModuleCreateInfo = struct(Module.VULKAN, "VkShaderModuleCreateInfo") {
@@ -1013,6 +1070,154 @@ val VkComputePipelineCreateInfo = struct(Module.VULKAN, "VkComputePipelineCreate
     VkPipelineLayout("layout")
     VkPipeline("basePipelineHandle")
     int32_t("basePipelineIndex")
+}
+
+val VkPushConstantRange = struct(Module.VULKAN, "VkPushConstantRange") {
+    VkShaderStageFlags("stageFlags")
+    uint32_t("offset")
+    uint32_t("size")
+}
+
+val VkPipelineLayoutCreateInfo = struct(Module.VULKAN, "VkPipelineLayoutCreateInfo") {
+    Expression("#STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkPipelineLayoutCreateFlags("flags")
+    AutoSize("pSetLayouts", optional = true)..uint32_t("setLayoutCount")
+    nullable..VkDescriptorSetLayout.const.p("pSetLayouts")
+    AutoSize("pPushConstantRanges", optional = true)..uint32_t("pushConstantRangeCount")
+    VkPushConstantRange.const.p("pPushConstantRanges")
+}
+
+val VkSamplerCreateInfo = struct(Module.VULKAN, "VkSamplerCreateInfo") {
+    Expression("#STRUCTURE_TYPE_SAMPLER_CREATE_INFO")..VkStructureType("sType")
+    PointerSetter(
+        "VkOpaqueCaptureDescriptorDataCreateInfoEXT", "VkSamplerBlockMatchWindowCreateInfoQCOM", "VkSamplerBorderColorComponentMappingCreateInfoEXT", "VkSamplerCubicWeightsCreateInfoQCOM", "VkSamplerCustomBorderColorCreateInfoEXT", "VkSamplerReductionModeCreateInfo", "VkSamplerReductionModeCreateInfoEXT", "VkSamplerYcbcrConversionInfo", "VkSamplerYcbcrConversionInfoKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkSamplerCreateFlags("flags")
+    VkFilter("magFilter")
+    VkFilter("minFilter")
+    VkSamplerMipmapMode("mipmapMode")
+    VkSamplerAddressMode("addressModeU")
+    VkSamplerAddressMode("addressModeV")
+    VkSamplerAddressMode("addressModeW")
+    float("mipLodBias")
+    VkBool32("anisotropyEnable")
+    float("maxAnisotropy")
+    VkBool32("compareEnable")
+    VkCompareOp("compareOp")
+    float("minLod")
+    float("maxLod")
+    VkBorderColor("borderColor")
+    VkBool32("unnormalizedCoordinates")
+}
+
+val VkCopyDescriptorSet = struct(Module.VULKAN, "VkCopyDescriptorSet") {
+    Expression("#STRUCTURE_TYPE_COPY_DESCRIPTOR_SET")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkDescriptorSet("srcSet")
+    uint32_t("srcBinding")
+    uint32_t("srcArrayElement")
+    VkDescriptorSet("dstSet")
+    uint32_t("dstBinding")
+    uint32_t("dstArrayElement")
+    uint32_t("descriptorCount")
+}
+
+val VkDescriptorBufferInfo = struct(Module.VULKAN, "VkDescriptorBufferInfo") {
+    VkBuffer("buffer")
+    VkDeviceSize("offset")
+    VkDeviceSize("range")
+}
+
+val VkDescriptorImageInfo = struct(Module.VULKAN, "VkDescriptorImageInfo") {
+    VkSampler("sampler")
+    VkImageView("imageView")
+    VkImageLayout("imageLayout")
+}
+
+val VkDescriptorPoolSize = struct(Module.VULKAN, "VkDescriptorPoolSize") {
+    VkDescriptorType("type")
+    uint32_t("descriptorCount")
+}
+
+val VkDescriptorPoolCreateInfo = struct(Module.VULKAN, "VkDescriptorPoolCreateInfo") {
+    Expression("#STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO")..VkStructureType("sType")
+    PointerSetter(
+        "VkDataGraphProcessingEngineCreateInfoARM", "VkDescriptorPoolInlineUniformBlockCreateInfo", "VkDescriptorPoolInlineUniformBlockCreateInfoEXT", "VkMutableDescriptorTypeCreateInfoEXT", "VkMutableDescriptorTypeCreateInfoVALVE",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkDescriptorPoolCreateFlags("flags")
+    uint32_t("maxSets")
+    AutoSize("pPoolSizes", optional = true)..uint32_t("poolSizeCount")
+    VkDescriptorPoolSize.const.p("pPoolSizes")
+}
+
+val VkDescriptorSetAllocateInfo = struct(Module.VULKAN, "VkDescriptorSetAllocateInfo") {
+    Expression("#STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO")..VkStructureType("sType")
+    PointerSetter(
+        "VkDescriptorSetVariableDescriptorCountAllocateInfo", "VkDescriptorSetVariableDescriptorCountAllocateInfoEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkDescriptorPool("descriptorPool")
+    AutoSize("pSetLayouts")..uint32_t("descriptorSetCount")
+    VkDescriptorSetLayout.const.p("pSetLayouts")
+}
+
+val VkDescriptorSetLayoutBinding = struct(Module.VULKAN, "VkDescriptorSetLayoutBinding") {
+    uint32_t("binding")
+    VkDescriptorType("descriptorType")
+    AutoSize("pImmutableSamplers", optional = true)..uint32_t("descriptorCount")
+    VkShaderStageFlags("stageFlags")
+    nullable..VkSampler.const.p("pImmutableSamplers")
+}
+
+val VkDescriptorSetLayoutCreateInfo = struct(Module.VULKAN, "VkDescriptorSetLayoutCreateInfo") {
+    Expression("#STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO")..VkStructureType("sType")
+    PointerSetter(
+        "VkDescriptorSetLayoutBindingFlagsCreateInfo", "VkDescriptorSetLayoutBindingFlagsCreateInfoEXT", "VkMutableDescriptorTypeCreateInfoEXT", "VkMutableDescriptorTypeCreateInfoVALVE",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkDescriptorSetLayoutCreateFlags("flags")
+    AutoSize("pBindings", optional = true)..uint32_t("bindingCount")
+    VkDescriptorSetLayoutBinding.const.p("pBindings")
+}
+
+val VkWriteDescriptorSet = struct(Module.VULKAN, "VkWriteDescriptorSet") {
+    Expression("#STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET")..VkStructureType("sType")
+    PointerSetter(
+        "VkWriteDescriptorSetAccelerationStructureKHR", "VkWriteDescriptorSetAccelerationStructureNV", "VkWriteDescriptorSetInlineUniformBlock", "VkWriteDescriptorSetInlineUniformBlockEXT", "VkWriteDescriptorSetPartitionedAccelerationStructureNV", "VkWriteDescriptorSetTensorARM",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkDescriptorSet("dstSet")
+    uint32_t("dstBinding")
+    uint32_t("dstArrayElement")
+    AutoSize("pImageInfo", "pBufferInfo", "pTexelBufferView", optional = true)..uint32_t("descriptorCount")
+    VkDescriptorType("descriptorType")
+    nullable..VkDescriptorImageInfo.const.p("pImageInfo")
+    nullable..VkDescriptorBufferInfo.const.p("pBufferInfo")
+    nullable..VkBufferView.const.p("pTexelBufferView")
+}
+
+val VkClearColorValue = union(Module.VULKAN, "VkClearColorValue") {
+    float("float32")[4]
+    int32_t("int32")[4]
+    uint32_t("uint32")[4]
+}
+
+val VkDrawIndexedIndirectCommand = struct(Module.VULKAN, "VkDrawIndexedIndirectCommand") {
+    uint32_t("indexCount")
+    uint32_t("instanceCount")
+    uint32_t("firstIndex")
+    int32_t("vertexOffset")
+    uint32_t("firstInstance")
+}
+
+val VkDrawIndirectCommand = struct(Module.VULKAN, "VkDrawIndirectCommand") {
+    uint32_t("vertexCount")
+    uint32_t("instanceCount")
+    uint32_t("firstVertex")
+    uint32_t("firstInstance")
 }
 
 val VkVertexInputBindingDescription = struct(Module.VULKAN, "VkVertexInputBindingDescription") {
@@ -1198,133 +1403,6 @@ val VkGraphicsPipelineCreateInfo = struct(Module.VULKAN, "VkGraphicsPipelineCrea
     int32_t("basePipelineIndex")
 }
 
-val VkPushConstantRange = struct(Module.VULKAN, "VkPushConstantRange") {
-    VkShaderStageFlags("stageFlags")
-    uint32_t("offset")
-    uint32_t("size")
-}
-
-val VkPipelineLayoutCreateInfo = struct(Module.VULKAN, "VkPipelineLayoutCreateInfo") {
-    Expression("#STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    VkPipelineLayoutCreateFlags("flags")
-    AutoSize("pSetLayouts", optional = true)..uint32_t("setLayoutCount")
-    nullable..VkDescriptorSetLayout.const.p("pSetLayouts")
-    AutoSize("pPushConstantRanges", optional = true)..uint32_t("pushConstantRangeCount")
-    VkPushConstantRange.const.p("pPushConstantRanges")
-}
-
-val VkSamplerCreateInfo = struct(Module.VULKAN, "VkSamplerCreateInfo") {
-    Expression("#STRUCTURE_TYPE_SAMPLER_CREATE_INFO")..VkStructureType("sType")
-    PointerSetter(
-        "VkOpaqueCaptureDescriptorDataCreateInfoEXT", "VkSamplerBlockMatchWindowCreateInfoQCOM", "VkSamplerBorderColorComponentMappingCreateInfoEXT", "VkSamplerCubicWeightsCreateInfoQCOM", "VkSamplerCustomBorderColorCreateInfoEXT", "VkSamplerReductionModeCreateInfo", "VkSamplerReductionModeCreateInfoEXT", "VkSamplerYcbcrConversionInfo", "VkSamplerYcbcrConversionInfoKHR",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkSamplerCreateFlags("flags")
-    VkFilter("magFilter")
-    VkFilter("minFilter")
-    VkSamplerMipmapMode("mipmapMode")
-    VkSamplerAddressMode("addressModeU")
-    VkSamplerAddressMode("addressModeV")
-    VkSamplerAddressMode("addressModeW")
-    float("mipLodBias")
-    VkBool32("anisotropyEnable")
-    float("maxAnisotropy")
-    VkBool32("compareEnable")
-    VkCompareOp("compareOp")
-    float("minLod")
-    float("maxLod")
-    VkBorderColor("borderColor")
-    VkBool32("unnormalizedCoordinates")
-}
-
-val VkCopyDescriptorSet = struct(Module.VULKAN, "VkCopyDescriptorSet") {
-    Expression("#STRUCTURE_TYPE_COPY_DESCRIPTOR_SET")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    VkDescriptorSet("srcSet")
-    uint32_t("srcBinding")
-    uint32_t("srcArrayElement")
-    VkDescriptorSet("dstSet")
-    uint32_t("dstBinding")
-    uint32_t("dstArrayElement")
-    uint32_t("descriptorCount")
-}
-
-val VkDescriptorBufferInfo = struct(Module.VULKAN, "VkDescriptorBufferInfo") {
-    VkBuffer("buffer")
-    VkDeviceSize("offset")
-    VkDeviceSize("range")
-}
-
-val VkDescriptorImageInfo = struct(Module.VULKAN, "VkDescriptorImageInfo") {
-    VkSampler("sampler")
-    VkImageView("imageView")
-    VkImageLayout("imageLayout")
-}
-
-val VkDescriptorPoolSize = struct(Module.VULKAN, "VkDescriptorPoolSize") {
-    VkDescriptorType("type")
-    uint32_t("descriptorCount")
-}
-
-val VkDescriptorPoolCreateInfo = struct(Module.VULKAN, "VkDescriptorPoolCreateInfo") {
-    Expression("#STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO")..VkStructureType("sType")
-    PointerSetter(
-        "VkDataGraphProcessingEngineCreateInfoARM", "VkDescriptorPoolInlineUniformBlockCreateInfo", "VkDescriptorPoolInlineUniformBlockCreateInfoEXT", "VkMutableDescriptorTypeCreateInfoEXT", "VkMutableDescriptorTypeCreateInfoVALVE",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkDescriptorPoolCreateFlags("flags")
-    uint32_t("maxSets")
-    AutoSize("pPoolSizes", optional = true)..uint32_t("poolSizeCount")
-    VkDescriptorPoolSize.const.p("pPoolSizes")
-}
-
-val VkDescriptorSetAllocateInfo = struct(Module.VULKAN, "VkDescriptorSetAllocateInfo") {
-    Expression("#STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO")..VkStructureType("sType")
-    PointerSetter(
-        "VkDescriptorSetVariableDescriptorCountAllocateInfo", "VkDescriptorSetVariableDescriptorCountAllocateInfoEXT",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkDescriptorPool("descriptorPool")
-    AutoSize("pSetLayouts")..uint32_t("descriptorSetCount")
-    VkDescriptorSetLayout.const.p("pSetLayouts")
-}
-
-val VkDescriptorSetLayoutBinding = struct(Module.VULKAN, "VkDescriptorSetLayoutBinding") {
-    uint32_t("binding")
-    VkDescriptorType("descriptorType")
-    AutoSize("pImmutableSamplers", optional = true)..uint32_t("descriptorCount")
-    VkShaderStageFlags("stageFlags")
-    nullable..VkSampler.const.p("pImmutableSamplers")
-}
-
-val VkDescriptorSetLayoutCreateInfo = struct(Module.VULKAN, "VkDescriptorSetLayoutCreateInfo") {
-    Expression("#STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO")..VkStructureType("sType")
-    PointerSetter(
-        "VkDescriptorSetLayoutBindingFlagsCreateInfo", "VkDescriptorSetLayoutBindingFlagsCreateInfoEXT", "VkMutableDescriptorTypeCreateInfoEXT", "VkMutableDescriptorTypeCreateInfoVALVE",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkDescriptorSetLayoutCreateFlags("flags")
-    AutoSize("pBindings", optional = true)..uint32_t("bindingCount")
-    VkDescriptorSetLayoutBinding.const.p("pBindings")
-}
-
-val VkWriteDescriptorSet = struct(Module.VULKAN, "VkWriteDescriptorSet") {
-    Expression("#STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET")..VkStructureType("sType")
-    PointerSetter(
-        "VkWriteDescriptorSetAccelerationStructureKHR", "VkWriteDescriptorSetAccelerationStructureNV", "VkWriteDescriptorSetInlineUniformBlock", "VkWriteDescriptorSetInlineUniformBlockEXT", "VkWriteDescriptorSetPartitionedAccelerationStructureNV", "VkWriteDescriptorSetTensorARM",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkDescriptorSet("dstSet")
-    uint32_t("dstBinding")
-    uint32_t("dstArrayElement")
-    AutoSize("pImageInfo", "pBufferInfo", "pTexelBufferView", optional = true)..uint32_t("descriptorCount")
-    VkDescriptorType("descriptorType")
-    nullable..VkDescriptorImageInfo.const.p("pImageInfo")
-    nullable..VkDescriptorBufferInfo.const.p("pBufferInfo")
-    nullable..VkBufferView.const.p("pTexelBufferView")
-}
-
 val VkAttachmentDescription = struct(Module.VULKAN, "VkAttachmentDescription") {
     VkAttachmentDescriptionFlags("flags")
     VkFormat("format")
@@ -1395,76 +1473,6 @@ val VkRenderPassCreateInfo = struct(Module.VULKAN, "VkRenderPassCreateInfo") {
     VkSubpassDependency.const.p("pDependencies")
 }
 
-val VkCommandPoolCreateInfo = struct(Module.VULKAN, "VkCommandPoolCreateInfo") {
-    Expression("#STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO")..VkStructureType("sType")
-    PointerSetter(
-        "VkDataGraphProcessingEngineCreateInfoARM",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkCommandPoolCreateFlags("flags")
-    uint32_t("queueFamilyIndex")
-}
-
-val VkCommandBufferAllocateInfo = struct(Module.VULKAN, "VkCommandBufferAllocateInfo") {
-    Expression("#STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    VkCommandPool("commandPool")
-    VkCommandBufferLevel("level")
-    uint32_t("commandBufferCount")
-}
-
-val VkCommandBufferInheritanceInfo = struct(Module.VULKAN, "VkCommandBufferInheritanceInfo") {
-    Expression("#STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO")..VkStructureType("sType")
-    PointerSetter(
-        "VkAttachmentSampleCountInfoAMD", "VkAttachmentSampleCountInfoNV", "VkCommandBufferInheritanceConditionalRenderingInfoEXT", "VkCommandBufferInheritanceRenderPassTransformInfoQCOM", "VkCommandBufferInheritanceRenderingInfo", "VkCommandBufferInheritanceRenderingInfoKHR", "VkCommandBufferInheritanceViewportScissorInfoNV", "VkExternalFormatANDROID", "VkMultiviewPerViewAttributesInfoNVX", "VkRenderPassTileShadingCreateInfoQCOM", "VkRenderingAttachmentLocationInfo", "VkRenderingAttachmentLocationInfoKHR", "VkRenderingInputAttachmentIndexInfo", "VkRenderingInputAttachmentIndexInfoKHR", "VkTileMemoryBindInfoQCOM",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkRenderPass("renderPass")
-    uint32_t("subpass")
-    VkFramebuffer("framebuffer")
-    VkBool32("occlusionQueryEnable")
-    VkQueryControlFlags("queryFlags")
-    VkQueryPipelineStatisticFlags("pipelineStatistics")
-}
-
-val VkCommandBufferBeginInfo = struct(Module.VULKAN, "VkCommandBufferBeginInfo") {
-    Expression("#STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO")..VkStructureType("sType")
-    PointerSetter(
-        "VkDeviceGroupCommandBufferBeginInfo", "VkDeviceGroupCommandBufferBeginInfoKHR",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkCommandBufferUsageFlags("flags")
-    nullable..VkCommandBufferInheritanceInfo.const.p("pInheritanceInfo")
-}
-
-val VkBufferCopy = struct(Module.VULKAN, "VkBufferCopy") {
-    VkDeviceSize("srcOffset")
-    VkDeviceSize("dstOffset")
-    VkDeviceSize("size")
-}
-
-val VkImageSubresourceLayers = struct(Module.VULKAN, "VkImageSubresourceLayers") {
-    VkImageAspectFlags("aspectMask")
-    uint32_t("mipLevel")
-    uint32_t("baseArrayLayer")
-    uint32_t("layerCount")
-}
-
-val VkBufferImageCopy = struct(Module.VULKAN, "VkBufferImageCopy") {
-    VkDeviceSize("bufferOffset")
-    uint32_t("bufferRowLength")
-    uint32_t("bufferImageHeight")
-    VkImageSubresourceLayers("imageSubresource")
-    VkOffset3D("imageOffset")
-    VkExtent3D("imageExtent")
-}
-
-val VkClearColorValue = union(Module.VULKAN, "VkClearColorValue") {
-    float("float32")[4]
-    int32_t("int32")[4]
-    uint32_t("uint32")[4]
-}
-
 val VkClearDepthStencilValue = struct(Module.VULKAN, "VkClearDepthStencilValue") {
     float("depth")
     uint32_t("stencil")
@@ -1494,14 +1502,6 @@ val VkImageBlit = struct(Module.VULKAN, "VkImageBlit") {
     VkOffset3D("dstOffsets")[2]
 }
 
-val VkImageCopy = struct(Module.VULKAN, "VkImageCopy") {
-    VkImageSubresourceLayers("srcSubresource")
-    VkOffset3D("srcOffset")
-    VkImageSubresourceLayers("dstSubresource")
-    VkOffset3D("dstOffset")
-    VkExtent3D("extent")
-}
-
 val VkImageResolve = struct(Module.VULKAN, "VkImageResolve") {
     VkImageSubresourceLayers("srcSubresource")
     VkOffset3D("srcOffset")
@@ -1513,7 +1513,7 @@ val VkImageResolve = struct(Module.VULKAN, "VkImageResolve") {
 val VkRenderPassBeginInfo = struct(Module.VULKAN, "VkRenderPassBeginInfo") {
     Expression("#STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO")..VkStructureType("sType")
     PointerSetter(
-        "VkDeviceGroupRenderPassBeginInfo", "VkDeviceGroupRenderPassBeginInfoKHR", "VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM", "VkRenderPassAttachmentBeginInfo", "VkRenderPassAttachmentBeginInfoKHR", "VkRenderPassSampleLocationsBeginInfoEXT", "VkRenderPassStripeBeginInfoARM", "VkRenderPassTransformBeginInfoQCOM",
+        "VkDeviceGroupRenderPassBeginInfo", "VkDeviceGroupRenderPassBeginInfoKHR", "VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM", "VkRenderPassAttachmentBeginInfo", "VkRenderPassAttachmentBeginInfoKHR", "VkRenderPassPerformanceCountersByRegionBeginInfoARM", "VkRenderPassSampleLocationsBeginInfoEXT", "VkRenderPassStripeBeginInfoARM", "VkRenderPassTransformBeginInfoQCOM",
         prepend = true
     )..nullable..opaque_const_p("pNext")
     VkRenderPass("renderPass")
@@ -1521,15 +1521,6 @@ val VkRenderPassBeginInfo = struct(Module.VULKAN, "VkRenderPassBeginInfo") {
     VkRect2D("renderArea")
     AutoSize("pClearValues", optional = true)..uint32_t("clearValueCount")
     nullable..VkClearValue.const.p("pClearValues")
-}
-
-val VkPhysicalDeviceSubgroupProperties = struct(Module.VULKAN, "VkPhysicalDeviceSubgroupProperties", mutable = false) {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES")..VkStructureType("sType").mutable()
-    nullable..opaque_p("pNext").mutable()
-    uint32_t("subgroupSize")
-    VkShaderStageFlags("supportedStages")
-    VkSubgroupFeatureFlags("supportedOperations")
-    VkBool32("quadOperationsInAllStages")
 }
 
 val VkBindBufferMemoryInfo = struct(Module.VULKAN, "VkBindBufferMemoryInfo") {
@@ -1554,15 +1545,6 @@ val VkBindImageMemoryInfo = struct(Module.VULKAN, "VkBindImageMemoryInfo") {
     VkDeviceSize("memoryOffset")
 }
 
-val VkPhysicalDevice16BitStorageFeatures = struct(Module.VULKAN, "VkPhysicalDevice16BitStorageFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("storageBuffer16BitAccess")
-    VkBool32("uniformAndStorageBuffer16BitAccess")
-    VkBool32("storagePushConstant16")
-    VkBool32("storageInputOutput16")
-}
-
 val VkMemoryDedicatedRequirements = struct(Module.VULKAN, "VkMemoryDedicatedRequirements", mutable = false) {
     Expression("#STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS")..VkStructureType("sType").mutable()
     nullable..opaque_p("pNext").mutable()
@@ -1582,14 +1564,6 @@ val VkMemoryAllocateFlagsInfo = struct(Module.VULKAN, "VkMemoryAllocateFlagsInfo
     nullable..opaque_const_p("pNext")
     VkMemoryAllocateFlags("flags")
     uint32_t("deviceMask")
-}
-
-val VkDeviceGroupRenderPassBeginInfo = struct(Module.VULKAN, "VkDeviceGroupRenderPassBeginInfo") {
-    Expression("#STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    uint32_t("deviceMask")
-    AutoSize("pDeviceRenderAreas", optional = true)..uint32_t("deviceRenderAreaCount")
-    VkRect2D.const.p("pDeviceRenderAreas")
 }
 
 val VkDeviceGroupCommandBufferBeginInfo = struct(Module.VULKAN, "VkDeviceGroupCommandBufferBeginInfo") {
@@ -1687,7 +1661,7 @@ val VkSparseImageMemoryRequirements2 = struct(Module.VULKAN, "VkSparseImageMemor
 val VkPhysicalDeviceFeatures2 = struct(Module.VULKAN, "VkPhysicalDeviceFeatures2") {
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2")..VkStructureType("sType")
     PointerSetter(
-        "VkPhysicalDevice16BitStorageFeatures", "VkPhysicalDevice16BitStorageFeaturesKHR", "VkPhysicalDevice4444FormatsFeaturesEXT", "VkPhysicalDevice8BitStorageFeatures", "VkPhysicalDevice8BitStorageFeaturesKHR", "VkPhysicalDeviceASTCDecodeFeaturesEXT", "VkPhysicalDeviceAccelerationStructureFeaturesKHR", "VkPhysicalDeviceAddressBindingReportFeaturesEXT", "VkPhysicalDeviceAmigoProfilingFeaturesSEC", "VkPhysicalDeviceAntiLagFeaturesAMD", "VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT", "VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT", "VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT", "VkPhysicalDeviceBorderColorSwizzleFeaturesEXT", "VkPhysicalDeviceBufferAddressFeaturesEXT", "VkPhysicalDeviceBufferDeviceAddressFeatures", "VkPhysicalDeviceBufferDeviceAddressFeaturesEXT", "VkPhysicalDeviceBufferDeviceAddressFeaturesKHR", "VkPhysicalDeviceClusterAccelerationStructureFeaturesNV", "VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI", "VkPhysicalDeviceCoherentMemoryFeaturesAMD", "VkPhysicalDeviceColorWriteEnableFeaturesEXT", "VkPhysicalDeviceCommandBufferInheritanceFeaturesNV", "VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR", "VkPhysicalDeviceComputeShaderDerivativesFeaturesNV", "VkPhysicalDeviceConditionalRenderingFeaturesEXT", "VkPhysicalDeviceCooperativeMatrix2FeaturesNV", "VkPhysicalDeviceCooperativeMatrixFeaturesKHR", "VkPhysicalDeviceCooperativeMatrixFeaturesNV", "VkPhysicalDeviceCooperativeVectorFeaturesNV", "VkPhysicalDeviceCopyMemoryIndirectFeaturesKHR", "VkPhysicalDeviceCopyMemoryIndirectFeaturesNV", "VkPhysicalDeviceCornerSampledImageFeaturesNV", "VkPhysicalDeviceCoverageReductionModeFeaturesNV", "VkPhysicalDeviceCubicClampFeaturesQCOM", "VkPhysicalDeviceCubicWeightsFeaturesQCOM", "VkPhysicalDeviceCudaKernelLaunchFeaturesNV", "VkPhysicalDeviceCustomBorderColorFeaturesEXT", "VkPhysicalDeviceDataGraphFeaturesARM", "VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV", "VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX", "VkPhysicalDeviceDepthBiasControlFeaturesEXT", "VkPhysicalDeviceDepthClampControlFeaturesEXT", "VkPhysicalDeviceDepthClampZeroOneFeaturesEXT", "VkPhysicalDeviceDepthClampZeroOneFeaturesKHR", "VkPhysicalDeviceDepthClipControlFeaturesEXT", "VkPhysicalDeviceDepthClipEnableFeaturesEXT", "VkPhysicalDeviceDescriptorBufferFeaturesEXT", "VkPhysicalDeviceDescriptorBufferTensorFeaturesARM", "VkPhysicalDeviceDescriptorIndexingFeatures", "VkPhysicalDeviceDescriptorIndexingFeaturesEXT", "VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV", "VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE", "VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV", "VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT", "VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV", "VkPhysicalDeviceDeviceMemoryReportFeaturesEXT", "VkPhysicalDeviceDiagnosticsConfigFeaturesNV", "VkPhysicalDeviceDisplacementMicromapFeaturesNV", "VkPhysicalDeviceDynamicRenderingFeatures", "VkPhysicalDeviceDynamicRenderingFeaturesKHR", "VkPhysicalDeviceDynamicRenderingLocalReadFeatures", "VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR", "VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT", "VkPhysicalDeviceExclusiveScissorFeaturesNV", "VkPhysicalDeviceExtendedDynamicState2FeaturesEXT", "VkPhysicalDeviceExtendedDynamicState3FeaturesEXT", "VkPhysicalDeviceExtendedDynamicStateFeaturesEXT", "VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV", "VkPhysicalDeviceExternalFormatResolveFeaturesANDROID", "VkPhysicalDeviceExternalMemoryRDMAFeaturesNV", "VkPhysicalDeviceFaultFeaturesEXT", "VkPhysicalDeviceFloat16Int8FeaturesKHR", "VkPhysicalDeviceFormatPackFeaturesARM", "VkPhysicalDeviceFragmentDensityMap2FeaturesEXT", "VkPhysicalDeviceFragmentDensityMapFeaturesEXT", "VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE", "VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT", "VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM", "VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR", "VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV", "VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT", "VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV", "VkPhysicalDeviceFragmentShadingRateFeaturesKHR", "VkPhysicalDeviceFrameBoundaryFeaturesEXT", "VkPhysicalDeviceGlobalPriorityQueryFeatures", "VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT", "VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR", "VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT", "VkPhysicalDeviceHdrVividFeaturesHUAWEI", "VkPhysicalDeviceHostImageCopyFeatures", "VkPhysicalDeviceHostImageCopyFeaturesEXT", "VkPhysicalDeviceHostQueryResetFeatures", "VkPhysicalDeviceHostQueryResetFeaturesEXT", "VkPhysicalDeviceImage2DViewOf3DFeaturesEXT", "VkPhysicalDeviceImageAlignmentControlFeaturesMESA", "VkPhysicalDeviceImageCompressionControlFeaturesEXT", "VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT", "VkPhysicalDeviceImageProcessing2FeaturesQCOM", "VkPhysicalDeviceImageProcessingFeaturesQCOM", "VkPhysicalDeviceImageRobustnessFeatures", "VkPhysicalDeviceImageRobustnessFeaturesEXT", "VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT", "VkPhysicalDeviceImageViewMinLodFeaturesEXT", "VkPhysicalDeviceImagelessFramebufferFeatures", "VkPhysicalDeviceImagelessFramebufferFeaturesKHR", "VkPhysicalDeviceIndexTypeUint8Features", "VkPhysicalDeviceIndexTypeUint8FeaturesEXT", "VkPhysicalDeviceIndexTypeUint8FeaturesKHR", "VkPhysicalDeviceInheritedViewportScissorFeaturesNV", "VkPhysicalDeviceInlineUniformBlockFeatures", "VkPhysicalDeviceInlineUniformBlockFeaturesEXT", "VkPhysicalDeviceInvocationMaskFeaturesHUAWEI", "VkPhysicalDeviceLegacyDitheringFeaturesEXT", "VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT", "VkPhysicalDeviceLineRasterizationFeatures", "VkPhysicalDeviceLineRasterizationFeaturesEXT", "VkPhysicalDeviceLineRasterizationFeaturesKHR", "VkPhysicalDeviceLinearColorAttachmentFeaturesNV", "VkPhysicalDeviceMaintenance4Features", "VkPhysicalDeviceMaintenance4FeaturesKHR", "VkPhysicalDeviceMaintenance5Features", "VkPhysicalDeviceMaintenance5FeaturesKHR", "VkPhysicalDeviceMaintenance6Features", "VkPhysicalDeviceMaintenance6FeaturesKHR", "VkPhysicalDeviceMaintenance7FeaturesKHR", "VkPhysicalDeviceMaintenance8FeaturesKHR", "VkPhysicalDeviceMaintenance9FeaturesKHR", "VkPhysicalDeviceMapMemoryPlacedFeaturesEXT", "VkPhysicalDeviceMemoryDecompressionFeaturesNV", "VkPhysicalDeviceMemoryPriorityFeaturesEXT", "VkPhysicalDeviceMeshShaderFeaturesEXT", "VkPhysicalDeviceMeshShaderFeaturesNV", "VkPhysicalDeviceMultiDrawFeaturesEXT", "VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT", "VkPhysicalDeviceMultiviewFeatures", "VkPhysicalDeviceMultiviewFeaturesKHR", "VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM", "VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM", "VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT", "VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE", "VkPhysicalDeviceNestedCommandBufferFeaturesEXT", "VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT", "VkPhysicalDeviceOpacityMicromapFeaturesEXT", "VkPhysicalDeviceOpticalFlowFeaturesNV", "VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT", "VkPhysicalDevicePartitionedAccelerationStructureFeaturesNV", "VkPhysicalDevicePerStageDescriptorSetFeaturesNV", "VkPhysicalDevicePerformanceQueryFeaturesKHR", "VkPhysicalDevicePipelineBinaryFeaturesKHR", "VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC", "VkPhysicalDevicePipelineCreationCacheControlFeatures", "VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT", "VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR", "VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT", "VkPhysicalDevicePipelineOpacityMicromapFeaturesARM", "VkPhysicalDevicePipelinePropertiesFeaturesEXT", "VkPhysicalDevicePipelineProtectedAccessFeatures", "VkPhysicalDevicePipelineProtectedAccessFeaturesEXT", "VkPhysicalDevicePipelineRobustnessFeatures", "VkPhysicalDevicePipelineRobustnessFeaturesEXT", "VkPhysicalDevicePortabilitySubsetFeaturesKHR", "VkPhysicalDevicePresentBarrierFeaturesNV", "VkPhysicalDevicePresentId2FeaturesKHR", "VkPhysicalDevicePresentIdFeaturesKHR", "VkPhysicalDevicePresentMeteringFeaturesNV", "VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT", "VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR", "VkPhysicalDevicePresentWait2FeaturesKHR", "VkPhysicalDevicePresentWaitFeaturesKHR", "VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT", "VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT", "VkPhysicalDevicePrivateDataFeatures", "VkPhysicalDevicePrivateDataFeaturesEXT", "VkPhysicalDeviceProtectedMemoryFeatures", "VkPhysicalDeviceProvokingVertexFeaturesEXT", "VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT", "VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM", "VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT", "VkPhysicalDeviceRawAccessChainsFeaturesNV", "VkPhysicalDeviceRayQueryFeaturesKHR", "VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV", "VkPhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV", "VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR", "VkPhysicalDeviceRayTracingMotionBlurFeaturesNV", "VkPhysicalDeviceRayTracingPipelineFeaturesKHR", "VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR", "VkPhysicalDeviceRayTracingValidationFeaturesNV", "VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG", "VkPhysicalDeviceRenderPassStripedFeaturesARM", "VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV", "VkPhysicalDeviceRobustness2FeaturesEXT", "VkPhysicalDeviceRobustness2FeaturesKHR", "VkPhysicalDeviceSamplerYcbcrConversionFeatures", "VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR", "VkPhysicalDeviceScalarBlockLayoutFeatures", "VkPhysicalDeviceScalarBlockLayoutFeaturesEXT", "VkPhysicalDeviceSchedulingControlsFeaturesARM", "VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures", "VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR", "VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV", "VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT", "VkPhysicalDeviceShaderAtomicFloatFeaturesEXT", "VkPhysicalDeviceShaderAtomicInt64Features", "VkPhysicalDeviceShaderAtomicInt64FeaturesKHR", "VkPhysicalDeviceShaderBfloat16FeaturesKHR", "VkPhysicalDeviceShaderClockFeaturesKHR", "VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM", "VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures", "VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT", "VkPhysicalDeviceShaderDrawParameterFeatures", "VkPhysicalDeviceShaderDrawParametersFeatures", "VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD", "VkPhysicalDeviceShaderEnqueueFeaturesAMDX", "VkPhysicalDeviceShaderExpectAssumeFeatures", "VkPhysicalDeviceShaderExpectAssumeFeaturesKHR", "VkPhysicalDeviceShaderFloat16Int8Features", "VkPhysicalDeviceShaderFloat16Int8FeaturesKHR", "VkPhysicalDeviceShaderFloat8FeaturesEXT", "VkPhysicalDeviceShaderFloatControls2Features", "VkPhysicalDeviceShaderFloatControls2FeaturesKHR", "VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT", "VkPhysicalDeviceShaderImageFootprintFeaturesNV", "VkPhysicalDeviceShaderIntegerDotProductFeatures", "VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR", "VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL", "VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR", "VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT", "VkPhysicalDeviceShaderObjectFeaturesEXT", "VkPhysicalDeviceShaderQuadControlFeaturesKHR", "VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR", "VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT", "VkPhysicalDeviceShaderSMBuiltinsFeaturesNV", "VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures", "VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR", "VkPhysicalDeviceShaderSubgroupRotateFeatures", "VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR", "VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR", "VkPhysicalDeviceShaderTerminateInvocationFeatures", "VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR", "VkPhysicalDeviceShaderTileImageFeaturesEXT", "VkPhysicalDeviceShaderUntypedPointersFeaturesKHR", "VkPhysicalDeviceShadingRateImageFeaturesNV", "VkPhysicalDeviceSubgroupSizeControlFeatures", "VkPhysicalDeviceSubgroupSizeControlFeaturesEXT", "VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT", "VkPhysicalDeviceSubpassShadingFeaturesHUAWEI", "VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT", "VkPhysicalDeviceSwapchainMaintenance1FeaturesKHR", "VkPhysicalDeviceSynchronization2Features", "VkPhysicalDeviceSynchronization2FeaturesKHR", "VkPhysicalDeviceTensorFeaturesARM", "VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT", "VkPhysicalDeviceTextureCompressionASTCHDRFeatures", "VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT", "VkPhysicalDeviceTileMemoryHeapFeaturesQCOM", "VkPhysicalDeviceTilePropertiesFeaturesQCOM", "VkPhysicalDeviceTileShadingFeaturesQCOM", "VkPhysicalDeviceTimelineSemaphoreFeatures", "VkPhysicalDeviceTimelineSemaphoreFeaturesKHR", "VkPhysicalDeviceTransformFeedbackFeaturesEXT", "VkPhysicalDeviceUnifiedImageLayoutsFeaturesKHR", "VkPhysicalDeviceUniformBufferStandardLayoutFeatures", "VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR", "VkPhysicalDeviceVariablePointerFeatures", "VkPhysicalDeviceVariablePointerFeaturesKHR", "VkPhysicalDeviceVariablePointersFeatures", "VkPhysicalDeviceVariablePointersFeaturesKHR", "VkPhysicalDeviceVertexAttributeDivisorFeatures", "VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT", "VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR", "VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT", "VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT", "VkPhysicalDeviceVideoDecodeVP9FeaturesKHR", "VkPhysicalDeviceVideoEncodeAV1FeaturesKHR", "VkPhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR", "VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR", "VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE", "VkPhysicalDeviceVideoMaintenance1FeaturesKHR", "VkPhysicalDeviceVideoMaintenance2FeaturesKHR", "VkPhysicalDeviceVulkan11Features", "VkPhysicalDeviceVulkan12Features", "VkPhysicalDeviceVulkan13Features", "VkPhysicalDeviceVulkan14Features", "VkPhysicalDeviceVulkanMemoryModelFeatures", "VkPhysicalDeviceVulkanMemoryModelFeaturesKHR", "VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR", "VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT", "VkPhysicalDeviceYcbcrDegammaFeaturesQCOM", "VkPhysicalDeviceYcbcrImageArraysFeaturesEXT", "VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT", "VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures", "VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR",
+        "VkPhysicalDevice16BitStorageFeatures", "VkPhysicalDevice16BitStorageFeaturesKHR", "VkPhysicalDevice4444FormatsFeaturesEXT", "VkPhysicalDevice8BitStorageFeatures", "VkPhysicalDevice8BitStorageFeaturesKHR", "VkPhysicalDeviceASTCDecodeFeaturesEXT", "VkPhysicalDeviceAccelerationStructureFeaturesKHR", "VkPhysicalDeviceAddressBindingReportFeaturesEXT", "VkPhysicalDeviceAmigoProfilingFeaturesSEC", "VkPhysicalDeviceAntiLagFeaturesAMD", "VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT", "VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT", "VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT", "VkPhysicalDeviceBorderColorSwizzleFeaturesEXT", "VkPhysicalDeviceBufferAddressFeaturesEXT", "VkPhysicalDeviceBufferDeviceAddressFeatures", "VkPhysicalDeviceBufferDeviceAddressFeaturesEXT", "VkPhysicalDeviceBufferDeviceAddressFeaturesKHR", "VkPhysicalDeviceClusterAccelerationStructureFeaturesNV", "VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI", "VkPhysicalDeviceCoherentMemoryFeaturesAMD", "VkPhysicalDeviceColorWriteEnableFeaturesEXT", "VkPhysicalDeviceCommandBufferInheritanceFeaturesNV", "VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR", "VkPhysicalDeviceComputeShaderDerivativesFeaturesNV", "VkPhysicalDeviceConditionalRenderingFeaturesEXT", "VkPhysicalDeviceCooperativeMatrix2FeaturesNV", "VkPhysicalDeviceCooperativeMatrixFeaturesKHR", "VkPhysicalDeviceCooperativeMatrixFeaturesNV", "VkPhysicalDeviceCooperativeVectorFeaturesNV", "VkPhysicalDeviceCopyMemoryIndirectFeaturesKHR", "VkPhysicalDeviceCopyMemoryIndirectFeaturesNV", "VkPhysicalDeviceCornerSampledImageFeaturesNV", "VkPhysicalDeviceCoverageReductionModeFeaturesNV", "VkPhysicalDeviceCubicClampFeaturesQCOM", "VkPhysicalDeviceCubicWeightsFeaturesQCOM", "VkPhysicalDeviceCudaKernelLaunchFeaturesNV", "VkPhysicalDeviceCustomBorderColorFeaturesEXT", "VkPhysicalDeviceDataGraphFeaturesARM", "VkPhysicalDeviceDataGraphModelFeaturesQCOM", "VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV", "VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX", "VkPhysicalDeviceDepthBiasControlFeaturesEXT", "VkPhysicalDeviceDepthClampControlFeaturesEXT", "VkPhysicalDeviceDepthClampZeroOneFeaturesEXT", "VkPhysicalDeviceDepthClampZeroOneFeaturesKHR", "VkPhysicalDeviceDepthClipControlFeaturesEXT", "VkPhysicalDeviceDepthClipEnableFeaturesEXT", "VkPhysicalDeviceDescriptorBufferFeaturesEXT", "VkPhysicalDeviceDescriptorBufferTensorFeaturesARM", "VkPhysicalDeviceDescriptorIndexingFeatures", "VkPhysicalDeviceDescriptorIndexingFeaturesEXT", "VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV", "VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE", "VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV", "VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT", "VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV", "VkPhysicalDeviceDeviceMemoryReportFeaturesEXT", "VkPhysicalDeviceDiagnosticsConfigFeaturesNV", "VkPhysicalDeviceDisplacementMicromapFeaturesNV", "VkPhysicalDeviceDynamicRenderingFeatures", "VkPhysicalDeviceDynamicRenderingFeaturesKHR", "VkPhysicalDeviceDynamicRenderingLocalReadFeatures", "VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR", "VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT", "VkPhysicalDeviceExclusiveScissorFeaturesNV", "VkPhysicalDeviceExtendedDynamicState2FeaturesEXT", "VkPhysicalDeviceExtendedDynamicState3FeaturesEXT", "VkPhysicalDeviceExtendedDynamicStateFeaturesEXT", "VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV", "VkPhysicalDeviceExternalFormatResolveFeaturesANDROID", "VkPhysicalDeviceExternalMemoryRDMAFeaturesNV", "VkPhysicalDeviceFaultFeaturesEXT", "VkPhysicalDeviceFloat16Int8FeaturesKHR", "VkPhysicalDeviceFormatPackFeaturesARM", "VkPhysicalDeviceFragmentDensityMap2FeaturesEXT", "VkPhysicalDeviceFragmentDensityMapFeaturesEXT", "VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE", "VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT", "VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM", "VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR", "VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV", "VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT", "VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV", "VkPhysicalDeviceFragmentShadingRateFeaturesKHR", "VkPhysicalDeviceFrameBoundaryFeaturesEXT", "VkPhysicalDeviceGlobalPriorityQueryFeatures", "VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT", "VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR", "VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT", "VkPhysicalDeviceHdrVividFeaturesHUAWEI", "VkPhysicalDeviceHostImageCopyFeatures", "VkPhysicalDeviceHostImageCopyFeaturesEXT", "VkPhysicalDeviceHostQueryResetFeatures", "VkPhysicalDeviceHostQueryResetFeaturesEXT", "VkPhysicalDeviceImage2DViewOf3DFeaturesEXT", "VkPhysicalDeviceImageAlignmentControlFeaturesMESA", "VkPhysicalDeviceImageCompressionControlFeaturesEXT", "VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT", "VkPhysicalDeviceImageProcessing2FeaturesQCOM", "VkPhysicalDeviceImageProcessingFeaturesQCOM", "VkPhysicalDeviceImageRobustnessFeatures", "VkPhysicalDeviceImageRobustnessFeaturesEXT", "VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT", "VkPhysicalDeviceImageViewMinLodFeaturesEXT", "VkPhysicalDeviceImagelessFramebufferFeatures", "VkPhysicalDeviceImagelessFramebufferFeaturesKHR", "VkPhysicalDeviceIndexTypeUint8Features", "VkPhysicalDeviceIndexTypeUint8FeaturesEXT", "VkPhysicalDeviceIndexTypeUint8FeaturesKHR", "VkPhysicalDeviceInheritedViewportScissorFeaturesNV", "VkPhysicalDeviceInlineUniformBlockFeatures", "VkPhysicalDeviceInlineUniformBlockFeaturesEXT", "VkPhysicalDeviceInvocationMaskFeaturesHUAWEI", "VkPhysicalDeviceLegacyDitheringFeaturesEXT", "VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT", "VkPhysicalDeviceLineRasterizationFeatures", "VkPhysicalDeviceLineRasterizationFeaturesEXT", "VkPhysicalDeviceLineRasterizationFeaturesKHR", "VkPhysicalDeviceLinearColorAttachmentFeaturesNV", "VkPhysicalDeviceMaintenance10FeaturesKHR", "VkPhysicalDeviceMaintenance4Features", "VkPhysicalDeviceMaintenance4FeaturesKHR", "VkPhysicalDeviceMaintenance5Features", "VkPhysicalDeviceMaintenance5FeaturesKHR", "VkPhysicalDeviceMaintenance6Features", "VkPhysicalDeviceMaintenance6FeaturesKHR", "VkPhysicalDeviceMaintenance7FeaturesKHR", "VkPhysicalDeviceMaintenance8FeaturesKHR", "VkPhysicalDeviceMaintenance9FeaturesKHR", "VkPhysicalDeviceMapMemoryPlacedFeaturesEXT", "VkPhysicalDeviceMemoryDecompressionFeaturesEXT", "VkPhysicalDeviceMemoryDecompressionFeaturesNV", "VkPhysicalDeviceMemoryPriorityFeaturesEXT", "VkPhysicalDeviceMeshShaderFeaturesEXT", "VkPhysicalDeviceMeshShaderFeaturesNV", "VkPhysicalDeviceMultiDrawFeaturesEXT", "VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT", "VkPhysicalDeviceMultiviewFeatures", "VkPhysicalDeviceMultiviewFeaturesKHR", "VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM", "VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM", "VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT", "VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE", "VkPhysicalDeviceNestedCommandBufferFeaturesEXT", "VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT", "VkPhysicalDeviceOpacityMicromapFeaturesEXT", "VkPhysicalDeviceOpticalFlowFeaturesNV", "VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT", "VkPhysicalDevicePartitionedAccelerationStructureFeaturesNV", "VkPhysicalDevicePerStageDescriptorSetFeaturesNV", "VkPhysicalDevicePerformanceCountersByRegionFeaturesARM", "VkPhysicalDevicePerformanceQueryFeaturesKHR", "VkPhysicalDevicePipelineBinaryFeaturesKHR", "VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC", "VkPhysicalDevicePipelineCreationCacheControlFeatures", "VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT", "VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR", "VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT", "VkPhysicalDevicePipelineOpacityMicromapFeaturesARM", "VkPhysicalDevicePipelinePropertiesFeaturesEXT", "VkPhysicalDevicePipelineProtectedAccessFeatures", "VkPhysicalDevicePipelineProtectedAccessFeaturesEXT", "VkPhysicalDevicePipelineRobustnessFeatures", "VkPhysicalDevicePipelineRobustnessFeaturesEXT", "VkPhysicalDevicePortabilitySubsetFeaturesKHR", "VkPhysicalDevicePresentBarrierFeaturesNV", "VkPhysicalDevicePresentId2FeaturesKHR", "VkPhysicalDevicePresentIdFeaturesKHR", "VkPhysicalDevicePresentMeteringFeaturesNV", "VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT", "VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR", "VkPhysicalDevicePresentWait2FeaturesKHR", "VkPhysicalDevicePresentWaitFeaturesKHR", "VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT", "VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT", "VkPhysicalDevicePrivateDataFeatures", "VkPhysicalDevicePrivateDataFeaturesEXT", "VkPhysicalDeviceProtectedMemoryFeatures", "VkPhysicalDeviceProvokingVertexFeaturesEXT", "VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT", "VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM", "VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT", "VkPhysicalDeviceRawAccessChainsFeaturesNV", "VkPhysicalDeviceRayQueryFeaturesKHR", "VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV", "VkPhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV", "VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR", "VkPhysicalDeviceRayTracingMotionBlurFeaturesNV", "VkPhysicalDeviceRayTracingPipelineFeaturesKHR", "VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR", "VkPhysicalDeviceRayTracingValidationFeaturesNV", "VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG", "VkPhysicalDeviceRenderPassStripedFeaturesARM", "VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV", "VkPhysicalDeviceRobustness2FeaturesEXT", "VkPhysicalDeviceRobustness2FeaturesKHR", "VkPhysicalDeviceSamplerYcbcrConversionFeatures", "VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR", "VkPhysicalDeviceScalarBlockLayoutFeatures", "VkPhysicalDeviceScalarBlockLayoutFeaturesEXT", "VkPhysicalDeviceSchedulingControlsFeaturesARM", "VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures", "VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR", "VkPhysicalDeviceShader64BitIndexingFeaturesEXT", "VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV", "VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT", "VkPhysicalDeviceShaderAtomicFloatFeaturesEXT", "VkPhysicalDeviceShaderAtomicInt64Features", "VkPhysicalDeviceShaderAtomicInt64FeaturesKHR", "VkPhysicalDeviceShaderBfloat16FeaturesKHR", "VkPhysicalDeviceShaderClockFeaturesKHR", "VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM", "VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures", "VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT", "VkPhysicalDeviceShaderDrawParameterFeatures", "VkPhysicalDeviceShaderDrawParametersFeatures", "VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD", "VkPhysicalDeviceShaderEnqueueFeaturesAMDX", "VkPhysicalDeviceShaderExpectAssumeFeatures", "VkPhysicalDeviceShaderExpectAssumeFeaturesKHR", "VkPhysicalDeviceShaderFloat16Int8Features", "VkPhysicalDeviceShaderFloat16Int8FeaturesKHR", "VkPhysicalDeviceShaderFloat8FeaturesEXT", "VkPhysicalDeviceShaderFloatControls2Features", "VkPhysicalDeviceShaderFloatControls2FeaturesKHR", "VkPhysicalDeviceShaderFmaFeaturesKHR", "VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT", "VkPhysicalDeviceShaderImageFootprintFeaturesNV", "VkPhysicalDeviceShaderIntegerDotProductFeatures", "VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR", "VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL", "VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR", "VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT", "VkPhysicalDeviceShaderObjectFeaturesEXT", "VkPhysicalDeviceShaderQuadControlFeaturesKHR", "VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR", "VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT", "VkPhysicalDeviceShaderSMBuiltinsFeaturesNV", "VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures", "VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR", "VkPhysicalDeviceShaderSubgroupRotateFeatures", "VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR", "VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR", "VkPhysicalDeviceShaderTerminateInvocationFeatures", "VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR", "VkPhysicalDeviceShaderTileImageFeaturesEXT", "VkPhysicalDeviceShaderUniformBufferUnsizedArrayFeaturesEXT", "VkPhysicalDeviceShaderUntypedPointersFeaturesKHR", "VkPhysicalDeviceShadingRateImageFeaturesNV", "VkPhysicalDeviceSubgroupSizeControlFeatures", "VkPhysicalDeviceSubgroupSizeControlFeaturesEXT", "VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT", "VkPhysicalDeviceSubpassShadingFeaturesHUAWEI", "VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT", "VkPhysicalDeviceSwapchainMaintenance1FeaturesKHR", "VkPhysicalDeviceSynchronization2Features", "VkPhysicalDeviceSynchronization2FeaturesKHR", "VkPhysicalDeviceTensorFeaturesARM", "VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT", "VkPhysicalDeviceTextureCompressionASTCHDRFeatures", "VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT", "VkPhysicalDeviceTileMemoryHeapFeaturesQCOM", "VkPhysicalDeviceTilePropertiesFeaturesQCOM", "VkPhysicalDeviceTileShadingFeaturesQCOM", "VkPhysicalDeviceTimelineSemaphoreFeatures", "VkPhysicalDeviceTimelineSemaphoreFeaturesKHR", "VkPhysicalDeviceTransformFeedbackFeaturesEXT", "VkPhysicalDeviceUnifiedImageLayoutsFeaturesKHR", "VkPhysicalDeviceUniformBufferStandardLayoutFeatures", "VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR", "VkPhysicalDeviceVariablePointerFeatures", "VkPhysicalDeviceVariablePointerFeaturesKHR", "VkPhysicalDeviceVariablePointersFeatures", "VkPhysicalDeviceVariablePointersFeaturesKHR", "VkPhysicalDeviceVertexAttributeDivisorFeatures", "VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT", "VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR", "VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT", "VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT", "VkPhysicalDeviceVideoDecodeVP9FeaturesKHR", "VkPhysicalDeviceVideoEncodeAV1FeaturesKHR", "VkPhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR", "VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR", "VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE", "VkPhysicalDeviceVideoMaintenance1FeaturesKHR", "VkPhysicalDeviceVideoMaintenance2FeaturesKHR", "VkPhysicalDeviceVulkan11Features", "VkPhysicalDeviceVulkan12Features", "VkPhysicalDeviceVulkan13Features", "VkPhysicalDeviceVulkan14Features", "VkPhysicalDeviceVulkanMemoryModelFeatures", "VkPhysicalDeviceVulkanMemoryModelFeaturesKHR", "VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR", "VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT", "VkPhysicalDeviceYcbcrDegammaFeaturesQCOM", "VkPhysicalDeviceYcbcrImageArraysFeaturesEXT", "VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT", "VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures", "VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR",
         prepend = true
     )..nullable..opaque_p("pNext")
     VkPhysicalDeviceFeatures("features")
@@ -1696,7 +1670,7 @@ val VkPhysicalDeviceFeatures2 = struct(Module.VULKAN, "VkPhysicalDeviceFeatures2
 val VkPhysicalDeviceProperties2 = struct(Module.VULKAN, "VkPhysicalDeviceProperties2", mutable = false) {
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2")..VkStructureType("sType").mutable()
     PointerSetter(
-        "VkPhysicalDeviceAccelerationStructurePropertiesKHR", "VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT", "VkPhysicalDeviceClusterAccelerationStructurePropertiesNV", "VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI", "VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR", "VkPhysicalDeviceConservativeRasterizationPropertiesEXT", "VkPhysicalDeviceCooperativeMatrix2PropertiesNV", "VkPhysicalDeviceCooperativeMatrixPropertiesKHR", "VkPhysicalDeviceCooperativeMatrixPropertiesNV", "VkPhysicalDeviceCooperativeVectorPropertiesNV", "VkPhysicalDeviceCopyMemoryIndirectPropertiesKHR", "VkPhysicalDeviceCopyMemoryIndirectPropertiesNV", "VkPhysicalDeviceCudaKernelLaunchPropertiesNV", "VkPhysicalDeviceCustomBorderColorPropertiesEXT", "VkPhysicalDeviceDepthStencilResolveProperties", "VkPhysicalDeviceDepthStencilResolvePropertiesKHR", "VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT", "VkPhysicalDeviceDescriptorBufferPropertiesEXT", "VkPhysicalDeviceDescriptorBufferTensorPropertiesARM", "VkPhysicalDeviceDescriptorIndexingProperties", "VkPhysicalDeviceDescriptorIndexingPropertiesEXT", "VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT", "VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV", "VkPhysicalDeviceDiscardRectanglePropertiesEXT", "VkPhysicalDeviceDisplacementMicromapPropertiesNV", "VkPhysicalDeviceDriverProperties", "VkPhysicalDeviceDriverPropertiesKHR", "VkPhysicalDeviceDrmPropertiesEXT", "VkPhysicalDeviceExtendedDynamicState3PropertiesEXT", "VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV", "VkPhysicalDeviceExternalComputeQueuePropertiesNV", "VkPhysicalDeviceExternalFormatResolvePropertiesANDROID", "VkPhysicalDeviceExternalMemoryHostPropertiesEXT", "VkPhysicalDeviceFloatControlsProperties", "VkPhysicalDeviceFloatControlsPropertiesKHR", "VkPhysicalDeviceFragmentDensityMap2PropertiesEXT", "VkPhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE", "VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT", "VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM", "VkPhysicalDeviceFragmentDensityMapPropertiesEXT", "VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR", "VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV", "VkPhysicalDeviceFragmentShadingRatePropertiesKHR", "VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT", "VkPhysicalDeviceHostImageCopyProperties", "VkPhysicalDeviceHostImageCopyPropertiesEXT", "VkPhysicalDeviceIDProperties", "VkPhysicalDeviceIDPropertiesKHR", "VkPhysicalDeviceImageAlignmentControlPropertiesMESA", "VkPhysicalDeviceImageProcessing2PropertiesQCOM", "VkPhysicalDeviceImageProcessingPropertiesQCOM", "VkPhysicalDeviceInlineUniformBlockProperties", "VkPhysicalDeviceInlineUniformBlockPropertiesEXT", "VkPhysicalDeviceLayeredApiPropertiesListKHR", "VkPhysicalDeviceLayeredDriverPropertiesMSFT", "VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT", "VkPhysicalDeviceLineRasterizationProperties", "VkPhysicalDeviceLineRasterizationPropertiesEXT", "VkPhysicalDeviceLineRasterizationPropertiesKHR", "VkPhysicalDeviceMaintenance3Properties", "VkPhysicalDeviceMaintenance3PropertiesKHR", "VkPhysicalDeviceMaintenance4Properties", "VkPhysicalDeviceMaintenance4PropertiesKHR", "VkPhysicalDeviceMaintenance5Properties", "VkPhysicalDeviceMaintenance5PropertiesKHR", "VkPhysicalDeviceMaintenance6Properties", "VkPhysicalDeviceMaintenance6PropertiesKHR", "VkPhysicalDeviceMaintenance7PropertiesKHR", "VkPhysicalDeviceMaintenance9PropertiesKHR", "VkPhysicalDeviceMapMemoryPlacedPropertiesEXT", "VkPhysicalDeviceMemoryDecompressionPropertiesNV", "VkPhysicalDeviceMeshShaderPropertiesEXT", "VkPhysicalDeviceMeshShaderPropertiesNV", "VkPhysicalDeviceMultiDrawPropertiesEXT", "VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX", "VkPhysicalDeviceMultiviewProperties", "VkPhysicalDeviceMultiviewPropertiesKHR", "VkPhysicalDeviceNestedCommandBufferPropertiesEXT", "VkPhysicalDeviceOpacityMicromapPropertiesEXT", "VkPhysicalDeviceOpticalFlowPropertiesNV", "VkPhysicalDevicePCIBusInfoPropertiesEXT", "VkPhysicalDevicePartitionedAccelerationStructurePropertiesNV", "VkPhysicalDevicePerformanceQueryPropertiesKHR", "VkPhysicalDevicePipelineBinaryPropertiesKHR", "VkPhysicalDevicePipelineRobustnessProperties", "VkPhysicalDevicePipelineRobustnessPropertiesEXT", "VkPhysicalDevicePointClippingProperties", "VkPhysicalDevicePointClippingPropertiesKHR", "VkPhysicalDevicePortabilitySubsetPropertiesKHR", "VkPhysicalDeviceProtectedMemoryProperties", "VkPhysicalDeviceProvokingVertexPropertiesEXT", "VkPhysicalDevicePushDescriptorProperties", "VkPhysicalDevicePushDescriptorPropertiesKHR", "VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV", "VkPhysicalDeviceRayTracingPipelinePropertiesKHR", "VkPhysicalDeviceRayTracingPropertiesNV", "VkPhysicalDeviceRenderPassStripedPropertiesARM", "VkPhysicalDeviceRobustness2PropertiesEXT", "VkPhysicalDeviceRobustness2PropertiesKHR", "VkPhysicalDeviceSampleLocationsPropertiesEXT", "VkPhysicalDeviceSamplerFilterMinmaxProperties", "VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT", "VkPhysicalDeviceSchedulingControlsPropertiesARM", "VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM", "VkPhysicalDeviceShaderCoreProperties2AMD", "VkPhysicalDeviceShaderCorePropertiesAMD", "VkPhysicalDeviceShaderCorePropertiesARM", "VkPhysicalDeviceShaderEnqueuePropertiesAMDX", "VkPhysicalDeviceShaderIntegerDotProductProperties", "VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR", "VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT", "VkPhysicalDeviceShaderObjectPropertiesEXT", "VkPhysicalDeviceShaderSMBuiltinsPropertiesNV", "VkPhysicalDeviceShaderTileImagePropertiesEXT", "VkPhysicalDeviceShadingRateImagePropertiesNV", "VkPhysicalDeviceSubgroupProperties", "VkPhysicalDeviceSubgroupSizeControlProperties", "VkPhysicalDeviceSubgroupSizeControlPropertiesEXT", "VkPhysicalDeviceSubpassShadingPropertiesHUAWEI", "VkPhysicalDeviceTensorPropertiesARM", "VkPhysicalDeviceTexelBufferAlignmentProperties", "VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT", "VkPhysicalDeviceTileMemoryHeapPropertiesQCOM", "VkPhysicalDeviceTileShadingPropertiesQCOM", "VkPhysicalDeviceTimelineSemaphoreProperties", "VkPhysicalDeviceTimelineSemaphorePropertiesKHR", "VkPhysicalDeviceTransformFeedbackPropertiesEXT", "VkPhysicalDeviceVertexAttributeDivisorProperties", "VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT", "VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR", "VkPhysicalDeviceVulkan11Properties", "VkPhysicalDeviceVulkan12Properties", "VkPhysicalDeviceVulkan13Properties", "VkPhysicalDeviceVulkan14Properties",
+        "VkPhysicalDeviceAccelerationStructurePropertiesKHR", "VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT", "VkPhysicalDeviceClusterAccelerationStructurePropertiesNV", "VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI", "VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR", "VkPhysicalDeviceConservativeRasterizationPropertiesEXT", "VkPhysicalDeviceCooperativeMatrix2PropertiesNV", "VkPhysicalDeviceCooperativeMatrixPropertiesKHR", "VkPhysicalDeviceCooperativeMatrixPropertiesNV", "VkPhysicalDeviceCooperativeVectorPropertiesNV", "VkPhysicalDeviceCopyMemoryIndirectPropertiesKHR", "VkPhysicalDeviceCopyMemoryIndirectPropertiesNV", "VkPhysicalDeviceCudaKernelLaunchPropertiesNV", "VkPhysicalDeviceCustomBorderColorPropertiesEXT", "VkPhysicalDeviceDepthStencilResolveProperties", "VkPhysicalDeviceDepthStencilResolvePropertiesKHR", "VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT", "VkPhysicalDeviceDescriptorBufferPropertiesEXT", "VkPhysicalDeviceDescriptorBufferTensorPropertiesARM", "VkPhysicalDeviceDescriptorIndexingProperties", "VkPhysicalDeviceDescriptorIndexingPropertiesEXT", "VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT", "VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV", "VkPhysicalDeviceDiscardRectanglePropertiesEXT", "VkPhysicalDeviceDisplacementMicromapPropertiesNV", "VkPhysicalDeviceDriverProperties", "VkPhysicalDeviceDriverPropertiesKHR", "VkPhysicalDeviceDrmPropertiesEXT", "VkPhysicalDeviceExtendedDynamicState3PropertiesEXT", "VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV", "VkPhysicalDeviceExternalComputeQueuePropertiesNV", "VkPhysicalDeviceExternalFormatResolvePropertiesANDROID", "VkPhysicalDeviceExternalMemoryHostPropertiesEXT", "VkPhysicalDeviceFloatControlsProperties", "VkPhysicalDeviceFloatControlsPropertiesKHR", "VkPhysicalDeviceFragmentDensityMap2PropertiesEXT", "VkPhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE", "VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT", "VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM", "VkPhysicalDeviceFragmentDensityMapPropertiesEXT", "VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR", "VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV", "VkPhysicalDeviceFragmentShadingRatePropertiesKHR", "VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT", "VkPhysicalDeviceHostImageCopyProperties", "VkPhysicalDeviceHostImageCopyPropertiesEXT", "VkPhysicalDeviceIDProperties", "VkPhysicalDeviceIDPropertiesKHR", "VkPhysicalDeviceImageAlignmentControlPropertiesMESA", "VkPhysicalDeviceImageProcessing2PropertiesQCOM", "VkPhysicalDeviceImageProcessingPropertiesQCOM", "VkPhysicalDeviceInlineUniformBlockProperties", "VkPhysicalDeviceInlineUniformBlockPropertiesEXT", "VkPhysicalDeviceLayeredApiPropertiesListKHR", "VkPhysicalDeviceLayeredDriverPropertiesMSFT", "VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT", "VkPhysicalDeviceLineRasterizationProperties", "VkPhysicalDeviceLineRasterizationPropertiesEXT", "VkPhysicalDeviceLineRasterizationPropertiesKHR", "VkPhysicalDeviceMaintenance10PropertiesKHR", "VkPhysicalDeviceMaintenance3Properties", "VkPhysicalDeviceMaintenance3PropertiesKHR", "VkPhysicalDeviceMaintenance4Properties", "VkPhysicalDeviceMaintenance4PropertiesKHR", "VkPhysicalDeviceMaintenance5Properties", "VkPhysicalDeviceMaintenance5PropertiesKHR", "VkPhysicalDeviceMaintenance6Properties", "VkPhysicalDeviceMaintenance6PropertiesKHR", "VkPhysicalDeviceMaintenance7PropertiesKHR", "VkPhysicalDeviceMaintenance9PropertiesKHR", "VkPhysicalDeviceMapMemoryPlacedPropertiesEXT", "VkPhysicalDeviceMemoryDecompressionPropertiesEXT", "VkPhysicalDeviceMemoryDecompressionPropertiesNV", "VkPhysicalDeviceMeshShaderPropertiesEXT", "VkPhysicalDeviceMeshShaderPropertiesNV", "VkPhysicalDeviceMultiDrawPropertiesEXT", "VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX", "VkPhysicalDeviceMultiviewProperties", "VkPhysicalDeviceMultiviewPropertiesKHR", "VkPhysicalDeviceNestedCommandBufferPropertiesEXT", "VkPhysicalDeviceOpacityMicromapPropertiesEXT", "VkPhysicalDeviceOpticalFlowPropertiesNV", "VkPhysicalDevicePCIBusInfoPropertiesEXT", "VkPhysicalDevicePartitionedAccelerationStructurePropertiesNV", "VkPhysicalDevicePerformanceCountersByRegionPropertiesARM", "VkPhysicalDevicePerformanceQueryPropertiesKHR", "VkPhysicalDevicePipelineBinaryPropertiesKHR", "VkPhysicalDevicePipelineRobustnessProperties", "VkPhysicalDevicePipelineRobustnessPropertiesEXT", "VkPhysicalDevicePointClippingProperties", "VkPhysicalDevicePointClippingPropertiesKHR", "VkPhysicalDevicePortabilitySubsetPropertiesKHR", "VkPhysicalDeviceProtectedMemoryProperties", "VkPhysicalDeviceProvokingVertexPropertiesEXT", "VkPhysicalDevicePushDescriptorProperties", "VkPhysicalDevicePushDescriptorPropertiesKHR", "VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV", "VkPhysicalDeviceRayTracingPipelinePropertiesKHR", "VkPhysicalDeviceRayTracingPropertiesNV", "VkPhysicalDeviceRenderPassStripedPropertiesARM", "VkPhysicalDeviceRobustness2PropertiesEXT", "VkPhysicalDeviceRobustness2PropertiesKHR", "VkPhysicalDeviceSampleLocationsPropertiesEXT", "VkPhysicalDeviceSamplerFilterMinmaxProperties", "VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT", "VkPhysicalDeviceSchedulingControlsPropertiesARM", "VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM", "VkPhysicalDeviceShaderCoreProperties2AMD", "VkPhysicalDeviceShaderCorePropertiesAMD", "VkPhysicalDeviceShaderCorePropertiesARM", "VkPhysicalDeviceShaderEnqueuePropertiesAMDX", "VkPhysicalDeviceShaderIntegerDotProductProperties", "VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR", "VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT", "VkPhysicalDeviceShaderObjectPropertiesEXT", "VkPhysicalDeviceShaderSMBuiltinsPropertiesNV", "VkPhysicalDeviceShaderTileImagePropertiesEXT", "VkPhysicalDeviceShadingRateImagePropertiesNV", "VkPhysicalDeviceSubgroupProperties", "VkPhysicalDeviceSubgroupSizeControlProperties", "VkPhysicalDeviceSubgroupSizeControlPropertiesEXT", "VkPhysicalDeviceSubpassShadingPropertiesHUAWEI", "VkPhysicalDeviceTensorPropertiesARM", "VkPhysicalDeviceTexelBufferAlignmentProperties", "VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT", "VkPhysicalDeviceTileMemoryHeapPropertiesQCOM", "VkPhysicalDeviceTileShadingPropertiesQCOM", "VkPhysicalDeviceTimelineSemaphoreProperties", "VkPhysicalDeviceTimelineSemaphorePropertiesKHR", "VkPhysicalDeviceTransformFeedbackPropertiesEXT", "VkPhysicalDeviceVertexAttributeDivisorProperties", "VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT", "VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR", "VkPhysicalDeviceVulkan11Properties", "VkPhysicalDeviceVulkan12Properties", "VkPhysicalDeviceVulkan13Properties", "VkPhysicalDeviceVulkan14Properties",
         prepend = true
     )..nullable..opaque_p("pNext").mutable()
     VkPhysicalDeviceProperties("properties")
@@ -1767,76 +1741,10 @@ val VkPhysicalDeviceSparseImageFormatInfo2 = struct(Module.VULKAN, "VkPhysicalDe
     VkImageTiling("tiling")
 }
 
-val VkPhysicalDevicePointClippingProperties = struct(Module.VULKAN, "VkPhysicalDevicePointClippingProperties", mutable = false) {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES")..VkStructureType("sType").mutable()
-    nullable..opaque_p("pNext").mutable()
-    VkPointClippingBehavior("pointClippingBehavior")
-}
-
-val VkInputAttachmentAspectReference = struct(Module.VULKAN, "VkInputAttachmentAspectReference") {
-    uint32_t("subpass")
-    uint32_t("inputAttachmentIndex")
-    VkImageAspectFlags("aspectMask")
-}
-
-val VkRenderPassInputAttachmentAspectCreateInfo = struct(Module.VULKAN, "VkRenderPassInputAttachmentAspectCreateInfo") {
-    Expression("#STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    AutoSize("pAspectReferences")..uint32_t("aspectReferenceCount")
-    VkInputAttachmentAspectReference.const.p("pAspectReferences")
-}
-
 val VkImageViewUsageCreateInfo = struct(Module.VULKAN, "VkImageViewUsageCreateInfo") {
     Expression("#STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO")..VkStructureType("sType")
     nullable..opaque_const_p("pNext")
     VkImageUsageFlags("usage")
-}
-
-val VkPipelineTessellationDomainOriginStateCreateInfo = struct(Module.VULKAN, "VkPipelineTessellationDomainOriginStateCreateInfo") {
-    Expression("#STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    VkTessellationDomainOrigin("domainOrigin")
-}
-
-val VkRenderPassMultiviewCreateInfo = struct(Module.VULKAN, "VkRenderPassMultiviewCreateInfo") {
-    Expression("#STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    AutoSize("pViewMasks", optional = true)..uint32_t("subpassCount")
-    uint32_t.const.p("pViewMasks")
-    AutoSize("pViewOffsets", optional = true)..uint32_t("dependencyCount")
-    int32_t.const.p("pViewOffsets")
-    AutoSize("pCorrelationMasks", optional = true)..uint32_t("correlationMaskCount")
-    uint32_t.const.p("pCorrelationMasks")
-}
-
-val VkPhysicalDeviceMultiviewFeatures = struct(Module.VULKAN, "VkPhysicalDeviceMultiviewFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("multiview")
-    VkBool32("multiviewGeometryShader")
-    VkBool32("multiviewTessellationShader")
-}
-
-val VkPhysicalDeviceMultiviewProperties = struct(Module.VULKAN, "VkPhysicalDeviceMultiviewProperties", mutable = false) {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES")..VkStructureType("sType").mutable()
-    nullable..opaque_p("pNext").mutable()
-    uint32_t("maxMultiviewViewCount")
-    uint32_t("maxMultiviewInstanceIndex")
-}
-
-val _VkPhysicalDeviceVariablePointersFeatures = struct(Module.VULKAN, "VkPhysicalDeviceVariablePointersFeatures")
-val VkPhysicalDeviceVariablePointerFeatures = struct(Module.VULKAN, "VkPhysicalDeviceVariablePointerFeatures", alias = _VkPhysicalDeviceVariablePointersFeatures) {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("variablePointersStorageBuffer")
-    VkBool32("variablePointers")
-}
-
-val VkPhysicalDeviceVariablePointersFeatures = struct(Module.VULKAN, "VkPhysicalDeviceVariablePointersFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("variablePointersStorageBuffer")
-    VkBool32("variablePointers")
 }
 
 val VkPhysicalDeviceProtectedMemoryFeatures = struct(Module.VULKAN, "VkPhysicalDeviceProtectedMemoryFeatures") {
@@ -1865,28 +1773,6 @@ val VkProtectedSubmitInfo = struct(Module.VULKAN, "VkProtectedSubmitInfo") {
     VkBool32("protectedSubmit")
 }
 
-val VkSamplerYcbcrConversionCreateInfo = struct(Module.VULKAN, "VkSamplerYcbcrConversionCreateInfo") {
-    Expression("#STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO")..VkStructureType("sType")
-    PointerSetter(
-        "VkExternalFormatANDROID", "VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkFormat("format")
-    VkSamplerYcbcrModelConversion("ycbcrModel")
-    VkSamplerYcbcrRange("ycbcrRange")
-    VkComponentMapping("components")
-    VkChromaLocation("xChromaOffset")
-    VkChromaLocation("yChromaOffset")
-    VkFilter("chromaFilter")
-    VkBool32("forceExplicitReconstruction")
-}
-
-val VkSamplerYcbcrConversionInfo = struct(Module.VULKAN, "VkSamplerYcbcrConversionInfo") {
-    Expression("#STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    VkSamplerYcbcrConversion("conversion")
-}
-
 val VkBindImagePlaneMemoryInfo = struct(Module.VULKAN, "VkBindImagePlaneMemoryInfo") {
     Expression("#STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO")..VkStructureType("sType")
     nullable..opaque_const_p("pNext")
@@ -1897,40 +1783,6 @@ val VkImagePlaneMemoryRequirementsInfo = struct(Module.VULKAN, "VkImagePlaneMemo
     Expression("#STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO")..VkStructureType("sType")
     nullable..opaque_const_p("pNext")
     VkImageAspectFlagBits("planeAspect")
-}
-
-val VkPhysicalDeviceSamplerYcbcrConversionFeatures = struct(Module.VULKAN, "VkPhysicalDeviceSamplerYcbcrConversionFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("samplerYcbcrConversion")
-}
-
-val VkSamplerYcbcrConversionImageFormatProperties = struct(Module.VULKAN, "VkSamplerYcbcrConversionImageFormatProperties", mutable = false) {
-    Expression("#STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES")..VkStructureType("sType").mutable()
-    nullable..opaque_p("pNext").mutable()
-    uint32_t("combinedImageSamplerDescriptorCount")
-}
-
-val VkDescriptorUpdateTemplateEntry = struct(Module.VULKAN, "VkDescriptorUpdateTemplateEntry") {
-    uint32_t("dstBinding")
-    uint32_t("dstArrayElement")
-    uint32_t("descriptorCount")
-    VkDescriptorType("descriptorType")
-    size_t("offset")
-    size_t("stride")
-}
-
-val VkDescriptorUpdateTemplateCreateInfo = struct(Module.VULKAN, "VkDescriptorUpdateTemplateCreateInfo") {
-    Expression("#STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    VkDescriptorUpdateTemplateCreateFlags("flags")
-    AutoSize("pDescriptorUpdateEntries")..uint32_t("descriptorUpdateEntryCount")
-    VkDescriptorUpdateTemplateEntry.const.p("pDescriptorUpdateEntries")
-    VkDescriptorUpdateTemplateType("templateType")
-    VkDescriptorSetLayout("descriptorSetLayout")
-    VkPipelineBindPoint("pipelineBindPoint")
-    VkPipelineLayout("pipelineLayout")
-    uint32_t("set")
 }
 
 val VkExternalMemoryProperties = struct(Module.VULKAN, "VkExternalMemoryProperties", mutable = false) {
@@ -2041,6 +1893,61 @@ val VkExternalSemaphoreProperties = struct(Module.VULKAN, "VkExternalSemaphorePr
     VkExternalSemaphoreFeatureFlags("externalSemaphoreFeatures")
 }
 
+val VkPhysicalDeviceSubgroupProperties = struct(Module.VULKAN, "VkPhysicalDeviceSubgroupProperties", mutable = false) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
+    uint32_t("subgroupSize")
+    VkShaderStageFlags("supportedStages")
+    VkSubgroupFeatureFlags("supportedOperations")
+    VkBool32("quadOperationsInAllStages")
+}
+
+val VkPhysicalDevice16BitStorageFeatures = struct(Module.VULKAN, "VkPhysicalDevice16BitStorageFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("storageBuffer16BitAccess")
+    VkBool32("uniformAndStorageBuffer16BitAccess")
+    VkBool32("storagePushConstant16")
+    VkBool32("storageInputOutput16")
+}
+
+val _VkPhysicalDeviceVariablePointersFeatures = struct(Module.VULKAN, "VkPhysicalDeviceVariablePointersFeatures")
+val VkPhysicalDeviceVariablePointerFeatures = struct(Module.VULKAN, "VkPhysicalDeviceVariablePointerFeatures", alias = _VkPhysicalDeviceVariablePointersFeatures) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("variablePointersStorageBuffer")
+    VkBool32("variablePointers")
+}
+
+val VkPhysicalDeviceVariablePointersFeatures = struct(Module.VULKAN, "VkPhysicalDeviceVariablePointersFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("variablePointersStorageBuffer")
+    VkBool32("variablePointers")
+}
+
+val VkDescriptorUpdateTemplateEntry = struct(Module.VULKAN, "VkDescriptorUpdateTemplateEntry") {
+    uint32_t("dstBinding")
+    uint32_t("dstArrayElement")
+    uint32_t("descriptorCount")
+    VkDescriptorType("descriptorType")
+    size_t("offset")
+    size_t("stride")
+}
+
+val VkDescriptorUpdateTemplateCreateInfo = struct(Module.VULKAN, "VkDescriptorUpdateTemplateCreateInfo") {
+    Expression("#STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkDescriptorUpdateTemplateCreateFlags("flags")
+    AutoSize("pDescriptorUpdateEntries")..uint32_t("descriptorUpdateEntryCount")
+    VkDescriptorUpdateTemplateEntry.const.p("pDescriptorUpdateEntries")
+    VkDescriptorUpdateTemplateType("templateType")
+    VkDescriptorSetLayout("descriptorSetLayout")
+    VkPipelineBindPoint("pipelineBindPoint")
+    VkPipelineLayout("pipelineLayout")
+    uint32_t("set")
+}
+
 val VkPhysicalDeviceMaintenance3Properties = struct(Module.VULKAN, "VkPhysicalDeviceMaintenance3Properties", mutable = false) {
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES")..VkStructureType("sType").mutable()
     nullable..opaque_p("pNext").mutable()
@@ -2055,6 +1962,99 @@ val VkDescriptorSetLayoutSupport = struct(Module.VULKAN, "VkDescriptorSetLayoutS
         prepend = true
     )..nullable..opaque_p("pNext").mutable()
     VkBool32("supported")
+}
+
+val VkSamplerYcbcrConversionCreateInfo = struct(Module.VULKAN, "VkSamplerYcbcrConversionCreateInfo") {
+    Expression("#STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO")..VkStructureType("sType")
+    PointerSetter(
+        "VkExternalFormatANDROID", "VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkFormat("format")
+    VkSamplerYcbcrModelConversion("ycbcrModel")
+    VkSamplerYcbcrRange("ycbcrRange")
+    VkComponentMapping("components")
+    VkChromaLocation("xChromaOffset")
+    VkChromaLocation("yChromaOffset")
+    VkFilter("chromaFilter")
+    VkBool32("forceExplicitReconstruction")
+}
+
+val VkSamplerYcbcrConversionInfo = struct(Module.VULKAN, "VkSamplerYcbcrConversionInfo") {
+    Expression("#STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkSamplerYcbcrConversion("conversion")
+}
+
+val VkPhysicalDeviceSamplerYcbcrConversionFeatures = struct(Module.VULKAN, "VkPhysicalDeviceSamplerYcbcrConversionFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("samplerYcbcrConversion")
+}
+
+val VkSamplerYcbcrConversionImageFormatProperties = struct(Module.VULKAN, "VkSamplerYcbcrConversionImageFormatProperties", mutable = false) {
+    Expression("#STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
+    uint32_t("combinedImageSamplerDescriptorCount")
+}
+
+val VkDeviceGroupRenderPassBeginInfo = struct(Module.VULKAN, "VkDeviceGroupRenderPassBeginInfo") {
+    Expression("#STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    uint32_t("deviceMask")
+    AutoSize("pDeviceRenderAreas", optional = true)..uint32_t("deviceRenderAreaCount")
+    VkRect2D.const.p("pDeviceRenderAreas")
+}
+
+val VkPhysicalDevicePointClippingProperties = struct(Module.VULKAN, "VkPhysicalDevicePointClippingProperties", mutable = false) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
+    VkPointClippingBehavior("pointClippingBehavior")
+}
+
+val VkInputAttachmentAspectReference = struct(Module.VULKAN, "VkInputAttachmentAspectReference") {
+    uint32_t("subpass")
+    uint32_t("inputAttachmentIndex")
+    VkImageAspectFlags("aspectMask")
+}
+
+val VkRenderPassInputAttachmentAspectCreateInfo = struct(Module.VULKAN, "VkRenderPassInputAttachmentAspectCreateInfo") {
+    Expression("#STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    AutoSize("pAspectReferences")..uint32_t("aspectReferenceCount")
+    VkInputAttachmentAspectReference.const.p("pAspectReferences")
+}
+
+val VkPipelineTessellationDomainOriginStateCreateInfo = struct(Module.VULKAN, "VkPipelineTessellationDomainOriginStateCreateInfo") {
+    Expression("#STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkTessellationDomainOrigin("domainOrigin")
+}
+
+val VkRenderPassMultiviewCreateInfo = struct(Module.VULKAN, "VkRenderPassMultiviewCreateInfo") {
+    Expression("#STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    AutoSize("pViewMasks", optional = true)..uint32_t("subpassCount")
+    uint32_t.const.p("pViewMasks")
+    AutoSize("pViewOffsets", optional = true)..uint32_t("dependencyCount")
+    int32_t.const.p("pViewOffsets")
+    AutoSize("pCorrelationMasks", optional = true)..uint32_t("correlationMaskCount")
+    uint32_t.const.p("pCorrelationMasks")
+}
+
+val VkPhysicalDeviceMultiviewFeatures = struct(Module.VULKAN, "VkPhysicalDeviceMultiviewFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("multiview")
+    VkBool32("multiviewGeometryShader")
+    VkBool32("multiviewTessellationShader")
+}
+
+val VkPhysicalDeviceMultiviewProperties = struct(Module.VULKAN, "VkPhysicalDeviceMultiviewProperties", mutable = false) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
+    uint32_t("maxMultiviewViewCount")
+    uint32_t("maxMultiviewInstanceIndex")
 }
 
 val _VkPhysicalDeviceShaderDrawParametersFeatures = struct(Module.VULKAN, "VkPhysicalDeviceShaderDrawParametersFeatures")
@@ -2233,108 +2233,6 @@ val VkImageFormatListCreateInfo = struct(Module.VULKAN, "VkImageFormatListCreate
     VkFormat.const.p("pViewFormats")
 }
 
-val VkAttachmentDescription2 = struct(Module.VULKAN, "VkAttachmentDescription2") {
-    Expression("#STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2")..VkStructureType("sType")
-    PointerSetter(
-        "VkAttachmentDescriptionStencilLayout", "VkAttachmentDescriptionStencilLayoutKHR", "VkExternalFormatANDROID",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkAttachmentDescriptionFlags("flags")
-    VkFormat("format")
-    VkSampleCountFlagBits("samples")
-    VkAttachmentLoadOp("loadOp")
-    VkAttachmentStoreOp("storeOp")
-    VkAttachmentLoadOp("stencilLoadOp")
-    VkAttachmentStoreOp("stencilStoreOp")
-    VkImageLayout("initialLayout")
-    VkImageLayout("finalLayout")
-}
-
-val VkAttachmentReference2 = struct(Module.VULKAN, "VkAttachmentReference2") {
-    Expression("#STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2")..VkStructureType("sType")
-    PointerSetter(
-        "VkAttachmentReferenceStencilLayout", "VkAttachmentReferenceStencilLayoutKHR",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    uint32_t("attachment")
-    VkImageLayout("layout")
-    VkImageAspectFlags("aspectMask")
-}
-
-val VkSubpassDescription2 = struct(Module.VULKAN, "VkSubpassDescription2") {
-    Expression("#STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2")..VkStructureType("sType")
-    PointerSetter(
-        "VkFragmentShadingRateAttachmentInfoKHR", "VkMultisampledRenderToSingleSampledInfoEXT", "VkRenderPassCreationControlEXT", "VkRenderPassSubpassFeedbackCreateInfoEXT", "VkSubpassDescriptionDepthStencilResolve", "VkSubpassDescriptionDepthStencilResolveKHR",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkSubpassDescriptionFlags("flags")
-    VkPipelineBindPoint("pipelineBindPoint")
-    uint32_t("viewMask")
-    AutoSize("pInputAttachments", optional = true)..uint32_t("inputAttachmentCount")
-    VkAttachmentReference2.const.p("pInputAttachments")
-    AutoSize("pColorAttachments", "pResolveAttachments", optional = true)..uint32_t("colorAttachmentCount")
-    VkAttachmentReference2.const.p("pColorAttachments")
-    nullable..VkAttachmentReference2.const.p("pResolveAttachments")
-    nullable..VkAttachmentReference2.const.p("pDepthStencilAttachment")
-    AutoSize("pPreserveAttachments", optional = true)..uint32_t("preserveAttachmentCount")
-    uint32_t.const.p("pPreserveAttachments")
-}
-
-val VkSubpassDependency2 = struct(Module.VULKAN, "VkSubpassDependency2") {
-    Expression("#STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2")..VkStructureType("sType")
-    PointerSetter(
-        "VkMemoryBarrier2", "VkMemoryBarrier2KHR", "VkMemoryBarrierAccessFlags3KHR",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    uint32_t("srcSubpass")
-    uint32_t("dstSubpass")
-    VkPipelineStageFlags("srcStageMask")
-    VkPipelineStageFlags("dstStageMask")
-    VkAccessFlags("srcAccessMask")
-    VkAccessFlags("dstAccessMask")
-    VkDependencyFlags("dependencyFlags")
-    int32_t("viewOffset")
-}
-
-val VkRenderPassCreateInfo2 = struct(Module.VULKAN, "VkRenderPassCreateInfo2") {
-    Expression("#STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2")..VkStructureType("sType")
-    PointerSetter(
-        "VkRenderPassCreationControlEXT", "VkRenderPassCreationFeedbackCreateInfoEXT", "VkRenderPassFragmentDensityMapCreateInfoEXT", "VkRenderPassTileShadingCreateInfoQCOM", "VkTileMemorySizeInfoQCOM",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkRenderPassCreateFlags("flags")
-    AutoSize("pAttachments", optional = true)..uint32_t("attachmentCount")
-    VkAttachmentDescription2.const.p("pAttachments")
-    AutoSize("pSubpasses")..uint32_t("subpassCount")
-    VkSubpassDescription2.const.p("pSubpasses")
-    AutoSize("pDependencies", optional = true)..uint32_t("dependencyCount")
-    VkSubpassDependency2.const.p("pDependencies")
-    AutoSize("pCorrelatedViewMasks", optional = true)..uint32_t("correlatedViewMaskCount")
-    uint32_t.const.p("pCorrelatedViewMasks")
-}
-
-val VkSubpassBeginInfo = struct(Module.VULKAN, "VkSubpassBeginInfo") {
-    Expression("#STRUCTURE_TYPE_SUBPASS_BEGIN_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    VkSubpassContents("contents")
-}
-
-val VkSubpassEndInfo = struct(Module.VULKAN, "VkSubpassEndInfo") {
-    Expression("#STRUCTURE_TYPE_SUBPASS_END_INFO")..VkStructureType("sType")
-    PointerSetter(
-        "VkRenderPassFragmentDensityMapOffsetEndInfoEXT", "VkSubpassFragmentDensityMapOffsetEndInfoQCOM",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-}
-
-val VkPhysicalDevice8BitStorageFeatures = struct(Module.VULKAN, "VkPhysicalDevice8BitStorageFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("storageBuffer8BitAccess")
-    VkBool32("uniformAndStorageBuffer8BitAccess")
-    VkBool32("storagePushConstant8")
-}
-
 val VkPhysicalDeviceDriverProperties = struct(Module.VULKAN, "VkPhysicalDeviceDriverProperties", mutable = false) {
     javaImport("static org.lwjgl.vulkan.VK12.*")
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES")..VkStructureType("sType").mutable()
@@ -2343,6 +2241,104 @@ val VkPhysicalDeviceDriverProperties = struct(Module.VULKAN, "VkPhysicalDeviceDr
     charUTF8("driverName")["VK_MAX_DRIVER_NAME_SIZE"]
     charUTF8("driverInfo")["VK_MAX_DRIVER_INFO_SIZE"]
     VkConformanceVersion("conformanceVersion")
+}
+
+val VkPhysicalDeviceVulkanMemoryModelFeatures = struct(Module.VULKAN, "VkPhysicalDeviceVulkanMemoryModelFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("vulkanMemoryModel")
+    VkBool32("vulkanMemoryModelDeviceScope")
+    VkBool32("vulkanMemoryModelAvailabilityVisibilityChains")
+}
+
+val VkPhysicalDeviceHostQueryResetFeatures = struct(Module.VULKAN, "VkPhysicalDeviceHostQueryResetFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("hostQueryReset")
+}
+
+val VkPhysicalDeviceTimelineSemaphoreFeatures = struct(Module.VULKAN, "VkPhysicalDeviceTimelineSemaphoreFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("timelineSemaphore")
+}
+
+val VkPhysicalDeviceTimelineSemaphoreProperties = struct(Module.VULKAN, "VkPhysicalDeviceTimelineSemaphoreProperties", mutable = false) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
+    uint64_t("maxTimelineSemaphoreValueDifference")
+}
+
+val VkSemaphoreTypeCreateInfo = struct(Module.VULKAN, "VkSemaphoreTypeCreateInfo") {
+    Expression("#STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkSemaphoreType("semaphoreType")
+    uint64_t("initialValue")
+}
+
+val VkTimelineSemaphoreSubmitInfo = struct(Module.VULKAN, "VkTimelineSemaphoreSubmitInfo") {
+    Expression("#STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    AutoSize("pWaitSemaphoreValues", optional = true)..uint32_t("waitSemaphoreValueCount")
+    nullable..uint64_t.const.p("pWaitSemaphoreValues")
+    AutoSize("pSignalSemaphoreValues", optional = true)..uint32_t("signalSemaphoreValueCount")
+    nullable..uint64_t.const.p("pSignalSemaphoreValues")
+}
+
+val VkSemaphoreWaitInfo = struct(Module.VULKAN, "VkSemaphoreWaitInfo") {
+    Expression("#STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkSemaphoreWaitFlags("flags")
+    AutoSize("pSemaphores", "pValues")..uint32_t("semaphoreCount")
+    VkSemaphore.const.p("pSemaphores")
+    uint64_t.const.p("pValues")
+}
+
+val VkSemaphoreSignalInfo = struct(Module.VULKAN, "VkSemaphoreSignalInfo") {
+    Expression("#STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkSemaphore("semaphore")
+    uint64_t("value")
+}
+
+val VkPhysicalDeviceBufferDeviceAddressFeatures = struct(Module.VULKAN, "VkPhysicalDeviceBufferDeviceAddressFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("bufferDeviceAddress")
+    VkBool32("bufferDeviceAddressCaptureReplay")
+    VkBool32("bufferDeviceAddressMultiDevice")
+}
+
+val VkBufferDeviceAddressInfo = struct(Module.VULKAN, "VkBufferDeviceAddressInfo") {
+    Expression("#STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkBuffer("buffer")
+}
+
+val VkBufferOpaqueCaptureAddressCreateInfo = struct(Module.VULKAN, "VkBufferOpaqueCaptureAddressCreateInfo") {
+    Expression("#STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    uint64_t("opaqueCaptureAddress")
+}
+
+val VkMemoryOpaqueCaptureAddressAllocateInfo = struct(Module.VULKAN, "VkMemoryOpaqueCaptureAddressAllocateInfo") {
+    Expression("#STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    uint64_t("opaqueCaptureAddress")
+}
+
+val VkDeviceMemoryOpaqueCaptureAddressInfo = struct(Module.VULKAN, "VkDeviceMemoryOpaqueCaptureAddressInfo") {
+    Expression("#STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkDeviceMemory("memory")
+}
+
+val VkPhysicalDevice8BitStorageFeatures = struct(Module.VULKAN, "VkPhysicalDevice8BitStorageFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("storageBuffer8BitAccess")
+    VkBool32("uniformAndStorageBuffer8BitAccess")
+    VkBool32("storagePushConstant8")
 }
 
 val VkPhysicalDeviceShaderAtomicInt64Features = struct(Module.VULKAN, "VkPhysicalDeviceShaderAtomicInt64Features") {
@@ -2454,6 +2450,131 @@ val VkDescriptorSetVariableDescriptorCountLayoutSupport = struct(Module.VULKAN, 
     uint32_t("maxVariableDescriptorCount")
 }
 
+val VkPhysicalDeviceScalarBlockLayoutFeatures = struct(Module.VULKAN, "VkPhysicalDeviceScalarBlockLayoutFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("scalarBlockLayout")
+}
+
+val VkSamplerReductionModeCreateInfo = struct(Module.VULKAN, "VkSamplerReductionModeCreateInfo") {
+    Expression("#STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkSamplerReductionMode("reductionMode")
+}
+
+val VkPhysicalDeviceSamplerFilterMinmaxProperties = struct(Module.VULKAN, "VkPhysicalDeviceSamplerFilterMinmaxProperties", mutable = false) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
+    VkBool32("filterMinmaxSingleComponentFormats")
+    VkBool32("filterMinmaxImageComponentMapping")
+}
+
+val VkPhysicalDeviceUniformBufferStandardLayoutFeatures = struct(Module.VULKAN, "VkPhysicalDeviceUniformBufferStandardLayoutFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("uniformBufferStandardLayout")
+}
+
+val VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures = struct(Module.VULKAN, "VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("shaderSubgroupExtendedTypes")
+}
+
+val VkAttachmentDescription2 = struct(Module.VULKAN, "VkAttachmentDescription2") {
+    Expression("#STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2")..VkStructureType("sType")
+    PointerSetter(
+        "VkAttachmentDescriptionStencilLayout", "VkAttachmentDescriptionStencilLayoutKHR", "VkExternalFormatANDROID",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkAttachmentDescriptionFlags("flags")
+    VkFormat("format")
+    VkSampleCountFlagBits("samples")
+    VkAttachmentLoadOp("loadOp")
+    VkAttachmentStoreOp("storeOp")
+    VkAttachmentLoadOp("stencilLoadOp")
+    VkAttachmentStoreOp("stencilStoreOp")
+    VkImageLayout("initialLayout")
+    VkImageLayout("finalLayout")
+}
+
+val VkAttachmentReference2 = struct(Module.VULKAN, "VkAttachmentReference2") {
+    Expression("#STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2")..VkStructureType("sType")
+    PointerSetter(
+        "VkAttachmentReferenceStencilLayout", "VkAttachmentReferenceStencilLayoutKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    uint32_t("attachment")
+    VkImageLayout("layout")
+    VkImageAspectFlags("aspectMask")
+}
+
+val VkSubpassDescription2 = struct(Module.VULKAN, "VkSubpassDescription2") {
+    Expression("#STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2")..VkStructureType("sType")
+    PointerSetter(
+        "VkFragmentShadingRateAttachmentInfoKHR", "VkMultisampledRenderToSingleSampledInfoEXT", "VkRenderPassCreationControlEXT", "VkRenderPassSubpassFeedbackCreateInfoEXT", "VkSubpassDescriptionDepthStencilResolve", "VkSubpassDescriptionDepthStencilResolveKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkSubpassDescriptionFlags("flags")
+    VkPipelineBindPoint("pipelineBindPoint")
+    uint32_t("viewMask")
+    AutoSize("pInputAttachments", optional = true)..uint32_t("inputAttachmentCount")
+    VkAttachmentReference2.const.p("pInputAttachments")
+    AutoSize("pColorAttachments", "pResolveAttachments", optional = true)..uint32_t("colorAttachmentCount")
+    VkAttachmentReference2.const.p("pColorAttachments")
+    nullable..VkAttachmentReference2.const.p("pResolveAttachments")
+    nullable..VkAttachmentReference2.const.p("pDepthStencilAttachment")
+    AutoSize("pPreserveAttachments", optional = true)..uint32_t("preserveAttachmentCount")
+    uint32_t.const.p("pPreserveAttachments")
+}
+
+val VkSubpassDependency2 = struct(Module.VULKAN, "VkSubpassDependency2") {
+    Expression("#STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2")..VkStructureType("sType")
+    PointerSetter(
+        "VkMemoryBarrier2", "VkMemoryBarrier2KHR", "VkMemoryBarrierAccessFlags3KHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    uint32_t("srcSubpass")
+    uint32_t("dstSubpass")
+    VkPipelineStageFlags("srcStageMask")
+    VkPipelineStageFlags("dstStageMask")
+    VkAccessFlags("srcAccessMask")
+    VkAccessFlags("dstAccessMask")
+    VkDependencyFlags("dependencyFlags")
+    int32_t("viewOffset")
+}
+
+val VkRenderPassCreateInfo2 = struct(Module.VULKAN, "VkRenderPassCreateInfo2") {
+    Expression("#STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2")..VkStructureType("sType")
+    PointerSetter(
+        "VkRenderPassCreationControlEXT", "VkRenderPassCreationFeedbackCreateInfoEXT", "VkRenderPassFragmentDensityMapCreateInfoEXT", "VkRenderPassTileShadingCreateInfoQCOM", "VkTileMemorySizeInfoQCOM",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkRenderPassCreateFlags("flags")
+    AutoSize("pAttachments", optional = true)..uint32_t("attachmentCount")
+    VkAttachmentDescription2.const.p("pAttachments")
+    AutoSize("pSubpasses")..uint32_t("subpassCount")
+    VkSubpassDescription2.const.p("pSubpasses")
+    AutoSize("pDependencies", optional = true)..uint32_t("dependencyCount")
+    VkSubpassDependency2.const.p("pDependencies")
+    AutoSize("pCorrelatedViewMasks", optional = true)..uint32_t("correlatedViewMaskCount")
+    uint32_t.const.p("pCorrelatedViewMasks")
+}
+
+val VkSubpassBeginInfo = struct(Module.VULKAN, "VkSubpassBeginInfo") {
+    Expression("#STRUCTURE_TYPE_SUBPASS_BEGIN_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkSubpassContents("contents")
+}
+
+val VkSubpassEndInfo = struct(Module.VULKAN, "VkSubpassEndInfo") {
+    Expression("#STRUCTURE_TYPE_SUBPASS_END_INFO")..VkStructureType("sType")
+    PointerSetter(
+        "VkRenderPassFragmentDensityMapOffsetEndInfoEXT", "VkSubpassFragmentDensityMapOffsetEndInfoQCOM",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+}
+
 val VkSubpassDescriptionDepthStencilResolve = struct(Module.VULKAN, "VkSubpassDescriptionDepthStencilResolve") {
     Expression("#STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE")..VkStructureType("sType")
     nullable..opaque_const_p("pNext")
@@ -2471,37 +2592,10 @@ val VkPhysicalDeviceDepthStencilResolveProperties = struct(Module.VULKAN, "VkPhy
     VkBool32("independentResolve")
 }
 
-val VkPhysicalDeviceScalarBlockLayoutFeatures = struct(Module.VULKAN, "VkPhysicalDeviceScalarBlockLayoutFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("scalarBlockLayout")
-}
-
 val VkImageStencilUsageCreateInfo = struct(Module.VULKAN, "VkImageStencilUsageCreateInfo") {
     Expression("#STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO")..VkStructureType("sType")
     nullable..opaque_const_p("pNext")
     VkImageUsageFlags("stencilUsage")
-}
-
-val VkSamplerReductionModeCreateInfo = struct(Module.VULKAN, "VkSamplerReductionModeCreateInfo") {
-    Expression("#STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    VkSamplerReductionMode("reductionMode")
-}
-
-val VkPhysicalDeviceSamplerFilterMinmaxProperties = struct(Module.VULKAN, "VkPhysicalDeviceSamplerFilterMinmaxProperties", mutable = false) {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES")..VkStructureType("sType").mutable()
-    nullable..opaque_p("pNext").mutable()
-    VkBool32("filterMinmaxSingleComponentFormats")
-    VkBool32("filterMinmaxImageComponentMapping")
-}
-
-val VkPhysicalDeviceVulkanMemoryModelFeatures = struct(Module.VULKAN, "VkPhysicalDeviceVulkanMemoryModelFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("vulkanMemoryModel")
-    VkBool32("vulkanMemoryModelDeviceScope")
-    VkBool32("vulkanMemoryModelAvailabilityVisibilityChains")
 }
 
 val VkPhysicalDeviceImagelessFramebufferFeatures = struct(Module.VULKAN, "VkPhysicalDeviceImagelessFramebufferFeatures") {
@@ -2536,18 +2630,6 @@ val VkRenderPassAttachmentBeginInfo = struct(Module.VULKAN, "VkRenderPassAttachm
     VkImageView.const.p("pAttachments")
 }
 
-val VkPhysicalDeviceUniformBufferStandardLayoutFeatures = struct(Module.VULKAN, "VkPhysicalDeviceUniformBufferStandardLayoutFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("uniformBufferStandardLayout")
-}
-
-val VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures = struct(Module.VULKAN, "VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("shaderSubgroupExtendedTypes")
-}
-
 val VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures = struct(Module.VULKAN, "VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures") {
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES")..VkStructureType("sType")
     nullable..opaque_p("pNext")
@@ -2565,88 +2647,6 @@ val VkAttachmentDescriptionStencilLayout = struct(Module.VULKAN, "VkAttachmentDe
     nullable..opaque_p("pNext")
     VkImageLayout("stencilInitialLayout")
     VkImageLayout("stencilFinalLayout")
-}
-
-val VkPhysicalDeviceHostQueryResetFeatures = struct(Module.VULKAN, "VkPhysicalDeviceHostQueryResetFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("hostQueryReset")
-}
-
-val VkPhysicalDeviceTimelineSemaphoreFeatures = struct(Module.VULKAN, "VkPhysicalDeviceTimelineSemaphoreFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("timelineSemaphore")
-}
-
-val VkPhysicalDeviceTimelineSemaphoreProperties = struct(Module.VULKAN, "VkPhysicalDeviceTimelineSemaphoreProperties", mutable = false) {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES")..VkStructureType("sType").mutable()
-    nullable..opaque_p("pNext").mutable()
-    uint64_t("maxTimelineSemaphoreValueDifference")
-}
-
-val VkSemaphoreTypeCreateInfo = struct(Module.VULKAN, "VkSemaphoreTypeCreateInfo") {
-    Expression("#STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    VkSemaphoreType("semaphoreType")
-    uint64_t("initialValue")
-}
-
-val VkTimelineSemaphoreSubmitInfo = struct(Module.VULKAN, "VkTimelineSemaphoreSubmitInfo") {
-    Expression("#STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    AutoSize("pWaitSemaphoreValues", optional = true)..uint32_t("waitSemaphoreValueCount")
-    nullable..uint64_t.const.p("pWaitSemaphoreValues")
-    AutoSize("pSignalSemaphoreValues", optional = true)..uint32_t("signalSemaphoreValueCount")
-    nullable..uint64_t.const.p("pSignalSemaphoreValues")
-}
-
-val VkSemaphoreWaitInfo = struct(Module.VULKAN, "VkSemaphoreWaitInfo") {
-    Expression("#STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    VkSemaphoreWaitFlags("flags")
-    AutoSize("pSemaphores", "pValues")..uint32_t("semaphoreCount")
-    VkSemaphore.const.p("pSemaphores")
-    uint64_t.const.p("pValues")
-}
-
-val VkSemaphoreSignalInfo = struct(Module.VULKAN, "VkSemaphoreSignalInfo") {
-    Expression("#STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    VkSemaphore("semaphore")
-    uint64_t("value")
-}
-
-val VkPhysicalDeviceBufferDeviceAddressFeatures = struct(Module.VULKAN, "VkPhysicalDeviceBufferDeviceAddressFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("bufferDeviceAddress")
-    VkBool32("bufferDeviceAddressCaptureReplay")
-    VkBool32("bufferDeviceAddressMultiDevice")
-}
-
-val VkBufferDeviceAddressInfo = struct(Module.VULKAN, "VkBufferDeviceAddressInfo") {
-    Expression("#STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    VkBuffer("buffer")
-}
-
-val VkBufferOpaqueCaptureAddressCreateInfo = struct(Module.VULKAN, "VkBufferOpaqueCaptureAddressCreateInfo") {
-    Expression("#STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    uint64_t("opaqueCaptureAddress")
-}
-
-val VkMemoryOpaqueCaptureAddressAllocateInfo = struct(Module.VULKAN, "VkMemoryOpaqueCaptureAddressAllocateInfo") {
-    Expression("#STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    uint64_t("opaqueCaptureAddress")
-}
-
-val VkDeviceMemoryOpaqueCaptureAddressInfo = struct(Module.VULKAN, "VkDeviceMemoryOpaqueCaptureAddressInfo") {
-    Expression("#STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    VkDeviceMemory("memory")
 }
 
 val VkPhysicalDeviceVulkan13Features = struct(Module.VULKAN, "VkPhysicalDeviceVulkan13Features") {
@@ -2719,25 +2719,6 @@ val VkPhysicalDeviceVulkan13Properties = struct(Module.VULKAN, "VkPhysicalDevice
     VkDeviceSize("maxBufferSize")
 }
 
-val VkPipelineCreationFeedback = struct(Module.VULKAN, "VkPipelineCreationFeedback", mutable = false) {
-    VkPipelineCreationFeedbackFlags("flags")
-    uint64_t("duration")
-}
-
-val VkPipelineCreationFeedbackCreateInfo = struct(Module.VULKAN, "VkPipelineCreationFeedbackCreateInfo") {
-    Expression("#STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    VkPipelineCreationFeedback.p("pPipelineCreationFeedback")
-    AutoSize("pPipelineStageCreationFeedbacks", optional = true)..uint32_t("pipelineStageCreationFeedbackCount")
-    VkPipelineCreationFeedback.p("pPipelineStageCreationFeedbacks")
-}
-
-val VkPhysicalDeviceShaderTerminateInvocationFeatures = struct(Module.VULKAN, "VkPhysicalDeviceShaderTerminateInvocationFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("shaderTerminateInvocation")
-}
-
 val VkPhysicalDeviceToolProperties = struct(Module.VULKAN, "VkPhysicalDeviceToolProperties", mutable = false) {
     javaImport("static org.lwjgl.vulkan.VK10.*")
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES")..VkStructureType("sType").mutable()
@@ -2747,12 +2728,6 @@ val VkPhysicalDeviceToolProperties = struct(Module.VULKAN, "VkPhysicalDeviceTool
     VkToolPurposeFlags("purposes")
     charUTF8("description")["VK_MAX_DESCRIPTION_SIZE"]
     charUTF8("layer")["VK_MAX_EXTENSION_NAME_SIZE"]
-}
-
-val VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures = struct(Module.VULKAN, "VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("shaderDemoteToHelperInvocation")
 }
 
 val VkPhysicalDevicePrivateDataFeatures = struct(Module.VULKAN, "VkPhysicalDevicePrivateDataFeatures") {
@@ -2771,12 +2746,6 @@ val VkPrivateDataSlotCreateInfo = struct(Module.VULKAN, "VkPrivateDataSlotCreate
     Expression("#STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO")..VkStructureType("sType")
     nullable..opaque_const_p("pNext")
     VkPrivateDataSlotCreateFlags("flags")
-}
-
-val VkPhysicalDevicePipelineCreationCacheControlFeatures = struct(Module.VULKAN, "VkPhysicalDevicePipelineCreationCacheControlFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("pipelineCreationCacheControl")
 }
 
 val VkMemoryBarrier2 = struct(Module.VULKAN, "VkMemoryBarrier2") {
@@ -2878,18 +2847,6 @@ val VkPhysicalDeviceSynchronization2Features = struct(Module.VULKAN, "VkPhysical
     VkBool32("synchronization2")
 }
 
-val VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures = struct(Module.VULKAN, "VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("shaderZeroInitializeWorkgroupMemory")
-}
-
-val VkPhysicalDeviceImageRobustnessFeatures = struct(Module.VULKAN, "VkPhysicalDeviceImageRobustnessFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("robustImageAccess")
-}
-
 val VkBufferCopy2 = struct(Module.VULKAN, "VkBufferCopy2") {
     Expression("#STRUCTURE_TYPE_BUFFER_COPY_2")..VkStructureType("sType")
     nullable..opaque_const_p("pNext")
@@ -2962,52 +2919,86 @@ val VkCopyImageToBufferInfo2 = struct(Module.VULKAN, "VkCopyImageToBufferInfo2")
     VkBufferImageCopy2.const.p("pRegions")
 }
 
-val VkImageBlit2 = struct(Module.VULKAN, "VkImageBlit2") {
-    Expression("#STRUCTURE_TYPE_IMAGE_BLIT_2")..VkStructureType("sType")
-    PointerSetter(
-        "VkCopyCommandTransformInfoQCOM",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkImageSubresourceLayers("srcSubresource")
-    VkOffset3D("srcOffsets")[2]
-    VkImageSubresourceLayers("dstSubresource")
-    VkOffset3D("dstOffsets")[2]
+val VkPhysicalDeviceTextureCompressionASTCHDRFeatures = struct(Module.VULKAN, "VkPhysicalDeviceTextureCompressionASTCHDRFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("textureCompressionASTC_HDR")
 }
 
-val VkBlitImageInfo2 = struct(Module.VULKAN, "VkBlitImageInfo2") {
-    Expression("#STRUCTURE_TYPE_BLIT_IMAGE_INFO_2")..VkStructureType("sType")
-    PointerSetter(
-        "VkBlitImageCubicWeightsInfoQCOM",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkImage("srcImage")
-    VkImageLayout("srcImageLayout")
-    VkImage("dstImage")
-    VkImageLayout("dstImageLayout")
-    AutoSize("pRegions")..uint32_t("regionCount")
-    VkImageBlit2.const.p("pRegions")
-    VkFilter("filter")
+val VkFormatProperties3 = struct(Module.VULKAN, "VkFormatProperties3", mutable = false) {
+    Expression("#STRUCTURE_TYPE_FORMAT_PROPERTIES_3")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
+    VkFormatFeatureFlags2("linearTilingFeatures")
+    VkFormatFeatureFlags2("optimalTilingFeatures")
+    VkFormatFeatureFlags2("bufferFeatures")
 }
 
-val VkImageResolve2 = struct(Module.VULKAN, "VkImageResolve2") {
-    Expression("#STRUCTURE_TYPE_IMAGE_RESOLVE_2")..VkStructureType("sType")
+val VkPhysicalDeviceMaintenance4Features = struct(Module.VULKAN, "VkPhysicalDeviceMaintenance4Features") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("maintenance4")
+}
+
+val VkPhysicalDeviceMaintenance4Properties = struct(Module.VULKAN, "VkPhysicalDeviceMaintenance4Properties", mutable = false) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
+    VkDeviceSize("maxBufferSize")
+}
+
+val VkDeviceBufferMemoryRequirements = struct(Module.VULKAN, "VkDeviceBufferMemoryRequirements") {
+    Expression("#STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS")..VkStructureType("sType")
     nullable..opaque_const_p("pNext")
-    VkImageSubresourceLayers("srcSubresource")
-    VkOffset3D("srcOffset")
-    VkImageSubresourceLayers("dstSubresource")
-    VkOffset3D("dstOffset")
-    VkExtent3D("extent")
+    VkBufferCreateInfo.const.p("pCreateInfo")
 }
 
-val VkResolveImageInfo2 = struct(Module.VULKAN, "VkResolveImageInfo2") {
-    Expression("#STRUCTURE_TYPE_RESOLVE_IMAGE_INFO_2")..VkStructureType("sType")
+val VkDeviceImageMemoryRequirements = struct(Module.VULKAN, "VkDeviceImageMemoryRequirements") {
+    Expression("#STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS")..VkStructureType("sType")
     nullable..opaque_const_p("pNext")
-    VkImage("srcImage")
-    VkImageLayout("srcImageLayout")
-    VkImage("dstImage")
-    VkImageLayout("dstImageLayout")
-    AutoSize("pRegions")..uint32_t("regionCount")
-    VkImageResolve2.const.p("pRegions")
+    VkImageCreateInfo.const.p("pCreateInfo")
+    VkImageAspectFlagBits("planeAspect")
+}
+
+val VkPipelineCreationFeedback = struct(Module.VULKAN, "VkPipelineCreationFeedback", mutable = false) {
+    VkPipelineCreationFeedbackFlags("flags")
+    uint64_t("duration")
+}
+
+val VkPipelineCreationFeedbackCreateInfo = struct(Module.VULKAN, "VkPipelineCreationFeedbackCreateInfo") {
+    Expression("#STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkPipelineCreationFeedback.p("pPipelineCreationFeedback")
+    AutoSize("pPipelineStageCreationFeedbacks", optional = true)..uint32_t("pipelineStageCreationFeedbackCount")
+    VkPipelineCreationFeedback.p("pPipelineStageCreationFeedbacks")
+}
+
+val VkPhysicalDeviceShaderTerminateInvocationFeatures = struct(Module.VULKAN, "VkPhysicalDeviceShaderTerminateInvocationFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("shaderTerminateInvocation")
+}
+
+val VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures = struct(Module.VULKAN, "VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("shaderDemoteToHelperInvocation")
+}
+
+val VkPhysicalDevicePipelineCreationCacheControlFeatures = struct(Module.VULKAN, "VkPhysicalDevicePipelineCreationCacheControlFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("pipelineCreationCacheControl")
+}
+
+val VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures = struct(Module.VULKAN, "VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("shaderZeroInitializeWorkgroupMemory")
+}
+
+val VkPhysicalDeviceImageRobustnessFeatures = struct(Module.VULKAN, "VkPhysicalDeviceImageRobustnessFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("robustImageAccess")
 }
 
 val VkPhysicalDeviceSubgroupSizeControlFeatures = struct(Module.VULKAN, "VkPhysicalDeviceSubgroupSizeControlFeatures") {
@@ -3062,72 +3053,6 @@ val VkDescriptorPoolInlineUniformBlockCreateInfo = struct(Module.VULKAN, "VkDesc
     uint32_t("maxInlineUniformBlockBindings")
 }
 
-val VkPhysicalDeviceTextureCompressionASTCHDRFeatures = struct(Module.VULKAN, "VkPhysicalDeviceTextureCompressionASTCHDRFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("textureCompressionASTC_HDR")
-}
-
-val VkRenderingAttachmentInfo = struct(Module.VULKAN, "VkRenderingAttachmentInfo") {
-    Expression("#STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO")..VkStructureType("sType")
-    PointerSetter(
-        "VkAttachmentFeedbackLoopInfoEXT",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkImageView("imageView")
-    VkImageLayout("imageLayout")
-    VkResolveModeFlagBits("resolveMode")
-    VkImageView("resolveImageView")
-    VkImageLayout("resolveImageLayout")
-    VkAttachmentLoadOp("loadOp")
-    VkAttachmentStoreOp("storeOp")
-    VkClearValue("clearValue")
-}
-
-val VkRenderingInfo = struct(Module.VULKAN, "VkRenderingInfo") {
-    Expression("#STRUCTURE_TYPE_RENDERING_INFO")..VkStructureType("sType")
-    PointerSetter(
-        "VkDeviceGroupRenderPassBeginInfo", "VkDeviceGroupRenderPassBeginInfoKHR", "VkMultisampledRenderToSingleSampledInfoEXT", "VkMultiviewPerViewAttributesInfoNVX", "VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM", "VkRenderPassStripeBeginInfoARM", "VkRenderPassTileShadingCreateInfoQCOM", "VkRenderingFragmentDensityMapAttachmentInfoEXT", "VkRenderingFragmentShadingRateAttachmentInfoKHR", "VkTileMemorySizeInfoQCOM",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkRenderingFlags("flags")
-    VkRect2D("renderArea")
-    uint32_t("layerCount")
-    uint32_t("viewMask")
-    AutoSize("pColorAttachments", optional = true)..uint32_t("colorAttachmentCount")
-    VkRenderingAttachmentInfo.const.p("pColorAttachments")
-    nullable..VkRenderingAttachmentInfo.const.p("pDepthAttachment")
-    nullable..VkRenderingAttachmentInfo.const.p("pStencilAttachment")
-}
-
-val VkPipelineRenderingCreateInfo = struct(Module.VULKAN, "VkPipelineRenderingCreateInfo") {
-    Expression("#STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    uint32_t("viewMask")
-    AutoSize("pColorAttachmentFormats", optional = true)..uint32_t("colorAttachmentCount")
-    nullable..VkFormat.const.p("pColorAttachmentFormats")
-    VkFormat("depthAttachmentFormat")
-    VkFormat("stencilAttachmentFormat")
-}
-
-val VkPhysicalDeviceDynamicRenderingFeatures = struct(Module.VULKAN, "VkPhysicalDeviceDynamicRenderingFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("dynamicRendering")
-}
-
-val VkCommandBufferInheritanceRenderingInfo = struct(Module.VULKAN, "VkCommandBufferInheritanceRenderingInfo") {
-    Expression("#STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    VkRenderingFlags("flags")
-    uint32_t("viewMask")
-    AutoSize("pColorAttachmentFormats", optional = true)..uint32_t("colorAttachmentCount")
-    VkFormat.const.p("pColorAttachmentFormats")
-    VkFormat("depthAttachmentFormat")
-    VkFormat("stencilAttachmentFormat")
-    VkSampleCountFlagBits("rasterizationSamples")
-}
-
 val VkPhysicalDeviceShaderIntegerDotProductFeatures = struct(Module.VULKAN, "VkPhysicalDeviceShaderIntegerDotProductFeatures") {
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES")..VkStructureType("sType")
     nullable..opaque_p("pNext")
@@ -3178,37 +3103,115 @@ val VkPhysicalDeviceTexelBufferAlignmentProperties = struct(Module.VULKAN, "VkPh
     VkBool32("uniformTexelBufferOffsetSingleTexelAlignment")
 }
 
-val VkFormatProperties3 = struct(Module.VULKAN, "VkFormatProperties3", mutable = false) {
-    Expression("#STRUCTURE_TYPE_FORMAT_PROPERTIES_3")..VkStructureType("sType").mutable()
-    nullable..opaque_p("pNext").mutable()
-    VkFormatFeatureFlags2("linearTilingFeatures")
-    VkFormatFeatureFlags2("optimalTilingFeatures")
-    VkFormatFeatureFlags2("bufferFeatures")
+val VkImageBlit2 = struct(Module.VULKAN, "VkImageBlit2") {
+    Expression("#STRUCTURE_TYPE_IMAGE_BLIT_2")..VkStructureType("sType")
+    PointerSetter(
+        "VkCopyCommandTransformInfoQCOM",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkImageSubresourceLayers("srcSubresource")
+    VkOffset3D("srcOffsets")[2]
+    VkImageSubresourceLayers("dstSubresource")
+    VkOffset3D("dstOffsets")[2]
 }
 
-val VkPhysicalDeviceMaintenance4Features = struct(Module.VULKAN, "VkPhysicalDeviceMaintenance4Features") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES")..VkStructureType("sType")
+val VkBlitImageInfo2 = struct(Module.VULKAN, "VkBlitImageInfo2") {
+    Expression("#STRUCTURE_TYPE_BLIT_IMAGE_INFO_2")..VkStructureType("sType")
+    PointerSetter(
+        "VkBlitImageCubicWeightsInfoQCOM",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkImage("srcImage")
+    VkImageLayout("srcImageLayout")
+    VkImage("dstImage")
+    VkImageLayout("dstImageLayout")
+    AutoSize("pRegions")..uint32_t("regionCount")
+    VkImageBlit2.const.p("pRegions")
+    VkFilter("filter")
+}
+
+val VkImageResolve2 = struct(Module.VULKAN, "VkImageResolve2") {
+    Expression("#STRUCTURE_TYPE_IMAGE_RESOLVE_2")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkImageSubresourceLayers("srcSubresource")
+    VkOffset3D("srcOffset")
+    VkImageSubresourceLayers("dstSubresource")
+    VkOffset3D("dstOffset")
+    VkExtent3D("extent")
+}
+
+val VkResolveImageInfo2 = struct(Module.VULKAN, "VkResolveImageInfo2") {
+    Expression("#STRUCTURE_TYPE_RESOLVE_IMAGE_INFO_2")..VkStructureType("sType")
+    PointerSetter(
+        "VkResolveImageModeInfoKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkImage("srcImage")
+    VkImageLayout("srcImageLayout")
+    VkImage("dstImage")
+    VkImageLayout("dstImageLayout")
+    AutoSize("pRegions")..uint32_t("regionCount")
+    VkImageResolve2.const.p("pRegions")
+}
+
+val VkRenderingAttachmentInfo = struct(Module.VULKAN, "VkRenderingAttachmentInfo") {
+    Expression("#STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO")..VkStructureType("sType")
+    PointerSetter(
+        "VkAttachmentFeedbackLoopInfoEXT", "VkRenderingAttachmentFlagsInfoKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkImageView("imageView")
+    VkImageLayout("imageLayout")
+    VkResolveModeFlagBits("resolveMode")
+    VkImageView("resolveImageView")
+    VkImageLayout("resolveImageLayout")
+    VkAttachmentLoadOp("loadOp")
+    VkAttachmentStoreOp("storeOp")
+    VkClearValue("clearValue")
+}
+
+val VkRenderingInfo = struct(Module.VULKAN, "VkRenderingInfo") {
+    Expression("#STRUCTURE_TYPE_RENDERING_INFO")..VkStructureType("sType")
+    PointerSetter(
+        "VkDeviceGroupRenderPassBeginInfo", "VkDeviceGroupRenderPassBeginInfoKHR", "VkMultisampledRenderToSingleSampledInfoEXT", "VkMultiviewPerViewAttributesInfoNVX", "VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM", "VkRenderPassPerformanceCountersByRegionBeginInfoARM", "VkRenderPassStripeBeginInfoARM", "VkRenderPassTileShadingCreateInfoQCOM", "VkRenderingFragmentDensityMapAttachmentInfoEXT", "VkRenderingFragmentShadingRateAttachmentInfoKHR", "VkTileMemorySizeInfoQCOM",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkRenderingFlags("flags")
+    VkRect2D("renderArea")
+    uint32_t("layerCount")
+    uint32_t("viewMask")
+    AutoSize("pColorAttachments", optional = true)..uint32_t("colorAttachmentCount")
+    VkRenderingAttachmentInfo.const.p("pColorAttachments")
+    nullable..VkRenderingAttachmentInfo.const.p("pDepthAttachment")
+    nullable..VkRenderingAttachmentInfo.const.p("pStencilAttachment")
+}
+
+val VkPipelineRenderingCreateInfo = struct(Module.VULKAN, "VkPipelineRenderingCreateInfo") {
+    Expression("#STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    uint32_t("viewMask")
+    AutoSize("pColorAttachmentFormats", optional = true)..uint32_t("colorAttachmentCount")
+    nullable..VkFormat.const.p("pColorAttachmentFormats")
+    VkFormat("depthAttachmentFormat")
+    VkFormat("stencilAttachmentFormat")
+}
+
+val VkPhysicalDeviceDynamicRenderingFeatures = struct(Module.VULKAN, "VkPhysicalDeviceDynamicRenderingFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES")..VkStructureType("sType")
     nullable..opaque_p("pNext")
-    VkBool32("maintenance4")
+    VkBool32("dynamicRendering")
 }
 
-val VkPhysicalDeviceMaintenance4Properties = struct(Module.VULKAN, "VkPhysicalDeviceMaintenance4Properties", mutable = false) {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES")..VkStructureType("sType").mutable()
-    nullable..opaque_p("pNext").mutable()
-    VkDeviceSize("maxBufferSize")
-}
-
-val VkDeviceBufferMemoryRequirements = struct(Module.VULKAN, "VkDeviceBufferMemoryRequirements") {
-    Expression("#STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS")..VkStructureType("sType")
+val VkCommandBufferInheritanceRenderingInfo = struct(Module.VULKAN, "VkCommandBufferInheritanceRenderingInfo") {
+    Expression("#STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO")..VkStructureType("sType")
     nullable..opaque_const_p("pNext")
-    VkBufferCreateInfo.const.p("pCreateInfo")
-}
-
-val VkDeviceImageMemoryRequirements = struct(Module.VULKAN, "VkDeviceImageMemoryRequirements") {
-    Expression("#STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    VkImageCreateInfo.const.p("pCreateInfo")
-    VkImageAspectFlagBits("planeAspect")
+    VkRenderingFlags("flags")
+    uint32_t("viewMask")
+    AutoSize("pColorAttachmentFormats", optional = true)..uint32_t("colorAttachmentCount")
+    VkFormat.const.p("pColorAttachmentFormats")
+    VkFormat("depthAttachmentFormat")
+    VkFormat("stencilAttachmentFormat")
+    VkSampleCountFlagBits("rasterizationSamples")
 }
 
 val VkPhysicalDeviceVulkan14Features = struct(Module.VULKAN, "VkPhysicalDeviceVulkan14Features") {
@@ -3288,77 +3291,6 @@ val VkQueueFamilyGlobalPriorityProperties = struct(Module.VULKAN, "VkQueueFamily
     VkQueueGlobalPriority("priorities")["VK_MAX_GLOBAL_PRIORITY_SIZE"]
 }
 
-val VkPhysicalDeviceShaderSubgroupRotateFeatures = struct(Module.VULKAN, "VkPhysicalDeviceShaderSubgroupRotateFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("shaderSubgroupRotate")
-    VkBool32("shaderSubgroupRotateClustered")
-}
-
-val VkPhysicalDeviceShaderFloatControls2Features = struct(Module.VULKAN, "VkPhysicalDeviceShaderFloatControls2Features") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("shaderFloatControls2")
-}
-
-val VkPhysicalDeviceShaderExpectAssumeFeatures = struct(Module.VULKAN, "VkPhysicalDeviceShaderExpectAssumeFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("shaderExpectAssume")
-}
-
-val VkPhysicalDeviceLineRasterizationFeatures = struct(Module.VULKAN, "VkPhysicalDeviceLineRasterizationFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("rectangularLines")
-    VkBool32("bresenhamLines")
-    VkBool32("smoothLines")
-    VkBool32("stippledRectangularLines")
-    VkBool32("stippledBresenhamLines")
-    VkBool32("stippledSmoothLines")
-}
-
-val VkPhysicalDeviceLineRasterizationProperties = struct(Module.VULKAN, "VkPhysicalDeviceLineRasterizationProperties", mutable = false) {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES")..VkStructureType("sType").mutable()
-    nullable..opaque_p("pNext").mutable()
-    uint32_t("lineSubPixelPrecisionBits")
-}
-
-val VkPipelineRasterizationLineStateCreateInfo = struct(Module.VULKAN, "VkPipelineRasterizationLineStateCreateInfo") {
-    Expression("#STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    VkLineRasterizationMode("lineRasterizationMode")
-    VkBool32("stippledLineEnable")
-    uint32_t("lineStippleFactor")
-    uint16_t("lineStipplePattern")
-}
-
-val VkPhysicalDeviceVertexAttributeDivisorProperties = struct(Module.VULKAN, "VkPhysicalDeviceVertexAttributeDivisorProperties", mutable = false) {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES")..VkStructureType("sType").mutable()
-    nullable..opaque_p("pNext").mutable()
-    uint32_t("maxVertexAttribDivisor")
-    VkBool32("supportsNonZeroFirstInstance")
-}
-
-val VkVertexInputBindingDivisorDescription = struct(Module.VULKAN, "VkVertexInputBindingDivisorDescription") {
-    uint32_t("binding")
-    uint32_t("divisor")
-}
-
-val VkPipelineVertexInputDivisorStateCreateInfo = struct(Module.VULKAN, "VkPipelineVertexInputDivisorStateCreateInfo") {
-    Expression("#STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    AutoSize("pVertexBindingDivisors")..uint32_t("vertexBindingDivisorCount")
-    VkVertexInputBindingDivisorDescription.const.p("pVertexBindingDivisors")
-}
-
-val VkPhysicalDeviceVertexAttributeDivisorFeatures = struct(Module.VULKAN, "VkPhysicalDeviceVertexAttributeDivisorFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("vertexAttributeInstanceRateDivisor")
-    VkBool32("vertexAttributeInstanceRateZeroDivisor")
-}
-
 val VkPhysicalDeviceIndexTypeUint8Features = struct(Module.VULKAN, "VkPhysicalDeviceIndexTypeUint8Features") {
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES")..VkStructureType("sType")
     nullable..opaque_p("pNext")
@@ -3401,16 +3333,6 @@ val VkPhysicalDeviceMaintenance5Properties = struct(Module.VULKAN, "VkPhysicalDe
     VkBool32("nonStrictWideLinesUseParallelogram")
 }
 
-val VkRenderingAreaInfo = struct(Module.VULKAN, "VkRenderingAreaInfo") {
-    Expression("#STRUCTURE_TYPE_RENDERING_AREA_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    uint32_t("viewMask")
-    AutoSize("pColorAttachmentFormats", optional = true)..uint32_t("colorAttachmentCount")
-    nullable..VkFormat.const.p("pColorAttachmentFormats")
-    VkFormat("depthAttachmentFormat")
-    VkFormat("stencilAttachmentFormat")
-}
-
 val VkImageSubresource2 = struct(Module.VULKAN, "VkImageSubresource2") {
     Expression("#STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2")..VkStructureType("sType")
     nullable..opaque_p("pNext")
@@ -3433,44 +3355,10 @@ val VkSubresourceLayout2 = struct(Module.VULKAN, "VkSubresourceLayout2", mutable
     VkSubresourceLayout("subresourceLayout")
 }
 
-val VkPipelineCreateFlags2CreateInfo = struct(Module.VULKAN, "VkPipelineCreateFlags2CreateInfo") {
-    Expression("#STRUCTURE_TYPE_PIPELINE_CREATE_FLAGS_2_CREATE_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    VkPipelineCreateFlags2("flags")
-}
-
 val VkBufferUsageFlags2CreateInfo = struct(Module.VULKAN, "VkBufferUsageFlags2CreateInfo") {
     Expression("#STRUCTURE_TYPE_BUFFER_USAGE_FLAGS_2_CREATE_INFO")..VkStructureType("sType")
     nullable..opaque_const_p("pNext")
     VkBufferUsageFlags2("usage")
-}
-
-val VkPhysicalDevicePushDescriptorProperties = struct(Module.VULKAN, "VkPhysicalDevicePushDescriptorProperties", mutable = false) {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES")..VkStructureType("sType").mutable()
-    nullable..opaque_p("pNext").mutable()
-    uint32_t("maxPushDescriptors")
-}
-
-val VkPhysicalDeviceDynamicRenderingLocalReadFeatures = struct(Module.VULKAN, "VkPhysicalDeviceDynamicRenderingLocalReadFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("dynamicRenderingLocalRead")
-}
-
-val VkRenderingAttachmentLocationInfo = struct(Module.VULKAN, "VkRenderingAttachmentLocationInfo") {
-    Expression("#STRUCTURE_TYPE_RENDERING_ATTACHMENT_LOCATION_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    AutoSize("pColorAttachmentLocations", optional = true)..uint32_t("colorAttachmentCount")
-    nullable..uint32_t.const.p("pColorAttachmentLocations")
-}
-
-val VkRenderingInputAttachmentIndexInfo = struct(Module.VULKAN, "VkRenderingInputAttachmentIndexInfo") {
-    Expression("#STRUCTURE_TYPE_RENDERING_INPUT_ATTACHMENT_INDEX_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    AutoSize("pColorAttachmentInputIndices", optional = true)..uint32_t("colorAttachmentCount")
-    nullable..uint32_t.const.p("pColorAttachmentInputIndices")
-    nullable..uint32_t.const.p("pDepthInputAttachmentIndex")
-    nullable..uint32_t.const.p("pStencilInputAttachmentIndex")
 }
 
 val VkPhysicalDeviceMaintenance6Features = struct(Module.VULKAN, "VkPhysicalDeviceMaintenance6Features") {
@@ -3491,89 +3379,6 @@ val VkBindMemoryStatus = struct(Module.VULKAN, "VkBindMemoryStatus") {
     Expression("#STRUCTURE_TYPE_BIND_MEMORY_STATUS")..VkStructureType("sType")
     nullable..opaque_const_p("pNext")
     VkResult.p("pResult")
-}
-
-val VkBindDescriptorSetsInfo = struct(Module.VULKAN, "VkBindDescriptorSetsInfo") {
-    Expression("#STRUCTURE_TYPE_BIND_DESCRIPTOR_SETS_INFO")..VkStructureType("sType")
-    PointerSetter(
-        "VkPipelineLayoutCreateInfo",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkShaderStageFlags("stageFlags")
-    VkPipelineLayout("layout")
-    uint32_t("firstSet")
-    AutoSize("pDescriptorSets")..uint32_t("descriptorSetCount")
-    VkDescriptorSet.const.p("pDescriptorSets")
-    AutoSize("pDynamicOffsets", optional = true)..uint32_t("dynamicOffsetCount")
-    nullable..uint32_t.const.p("pDynamicOffsets")
-}
-
-val VkPushConstantsInfo = struct(Module.VULKAN, "VkPushConstantsInfo") {
-    Expression("#STRUCTURE_TYPE_PUSH_CONSTANTS_INFO")..VkStructureType("sType")
-    PointerSetter(
-        "VkPipelineLayoutCreateInfo",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkPipelineLayout("layout")
-    VkShaderStageFlags("stageFlags")
-    uint32_t("offset")
-    AutoSize("pValues")..uint32_t("size")
-    void.const.p("pValues")
-}
-
-val VkPushDescriptorSetInfo = struct(Module.VULKAN, "VkPushDescriptorSetInfo") {
-    Expression("#STRUCTURE_TYPE_PUSH_DESCRIPTOR_SET_INFO")..VkStructureType("sType")
-    PointerSetter(
-        "VkPipelineLayoutCreateInfo",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkShaderStageFlags("stageFlags")
-    VkPipelineLayout("layout")
-    uint32_t("set")
-    AutoSize("pDescriptorWrites")..uint32_t("descriptorWriteCount")
-    VkWriteDescriptorSet.const.p("pDescriptorWrites")
-}
-
-val VkPushDescriptorSetWithTemplateInfo = struct(Module.VULKAN, "VkPushDescriptorSetWithTemplateInfo") {
-    Expression("#STRUCTURE_TYPE_PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO")..VkStructureType("sType")
-    PointerSetter(
-        "VkPipelineLayoutCreateInfo",
-        prepend = true
-    )..nullable..opaque_const_p("pNext")
-    VkDescriptorUpdateTemplate("descriptorUpdateTemplate")
-    VkPipelineLayout("layout")
-    uint32_t("set")
-    opaque_const_p("pData")
-}
-
-val VkPhysicalDevicePipelineProtectedAccessFeatures = struct(Module.VULKAN, "VkPhysicalDevicePipelineProtectedAccessFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("pipelineProtectedAccess")
-}
-
-val VkPhysicalDevicePipelineRobustnessFeatures = struct(Module.VULKAN, "VkPhysicalDevicePipelineRobustnessFeatures") {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
-    VkBool32("pipelineRobustness")
-}
-
-val VkPhysicalDevicePipelineRobustnessProperties = struct(Module.VULKAN, "VkPhysicalDevicePipelineRobustnessProperties", mutable = false) {
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_PROPERTIES")..VkStructureType("sType").mutable()
-    nullable..opaque_p("pNext").mutable()
-    VkPipelineRobustnessBufferBehavior("defaultRobustnessStorageBuffers")
-    VkPipelineRobustnessBufferBehavior("defaultRobustnessUniformBuffers")
-    VkPipelineRobustnessBufferBehavior("defaultRobustnessVertexInputs")
-    VkPipelineRobustnessImageBehavior("defaultRobustnessImages")
-}
-
-val VkPipelineRobustnessCreateInfo = struct(Module.VULKAN, "VkPipelineRobustnessCreateInfo") {
-    Expression("#STRUCTURE_TYPE_PIPELINE_ROBUSTNESS_CREATE_INFO")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
-    VkPipelineRobustnessBufferBehavior("storageBuffers")
-    VkPipelineRobustnessBufferBehavior("uniformBuffers")
-    VkPipelineRobustnessBufferBehavior("vertexInputs")
-    VkPipelineRobustnessImageBehavior("images")
 }
 
 val VkPhysicalDeviceHostImageCopyFeatures = struct(Module.VULKAN, "VkPhysicalDeviceHostImageCopyFeatures") {
@@ -3668,4 +3473,202 @@ val VkHostImageCopyDevicePerformanceQuery = struct(Module.VULKAN, "VkHostImageCo
     nullable..opaque_p("pNext").mutable()
     VkBool32("optimalDeviceAccess")
     VkBool32("identicalMemoryLayout")
+}
+
+val VkPhysicalDeviceShaderSubgroupRotateFeatures = struct(Module.VULKAN, "VkPhysicalDeviceShaderSubgroupRotateFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("shaderSubgroupRotate")
+    VkBool32("shaderSubgroupRotateClustered")
+}
+
+val VkPhysicalDeviceShaderFloatControls2Features = struct(Module.VULKAN, "VkPhysicalDeviceShaderFloatControls2Features") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("shaderFloatControls2")
+}
+
+val VkPhysicalDeviceShaderExpectAssumeFeatures = struct(Module.VULKAN, "VkPhysicalDeviceShaderExpectAssumeFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("shaderExpectAssume")
+}
+
+val VkPipelineCreateFlags2CreateInfo = struct(Module.VULKAN, "VkPipelineCreateFlags2CreateInfo") {
+    Expression("#STRUCTURE_TYPE_PIPELINE_CREATE_FLAGS_2_CREATE_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkPipelineCreateFlags2("flags")
+}
+
+val VkPhysicalDevicePushDescriptorProperties = struct(Module.VULKAN, "VkPhysicalDevicePushDescriptorProperties", mutable = false) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
+    uint32_t("maxPushDescriptors")
+}
+
+val VkBindDescriptorSetsInfo = struct(Module.VULKAN, "VkBindDescriptorSetsInfo") {
+    Expression("#STRUCTURE_TYPE_BIND_DESCRIPTOR_SETS_INFO")..VkStructureType("sType")
+    PointerSetter(
+        "VkPipelineLayoutCreateInfo",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkShaderStageFlags("stageFlags")
+    VkPipelineLayout("layout")
+    uint32_t("firstSet")
+    AutoSize("pDescriptorSets")..uint32_t("descriptorSetCount")
+    VkDescriptorSet.const.p("pDescriptorSets")
+    AutoSize("pDynamicOffsets", optional = true)..uint32_t("dynamicOffsetCount")
+    nullable..uint32_t.const.p("pDynamicOffsets")
+}
+
+val VkPushConstantsInfo = struct(Module.VULKAN, "VkPushConstantsInfo") {
+    Expression("#STRUCTURE_TYPE_PUSH_CONSTANTS_INFO")..VkStructureType("sType")
+    PointerSetter(
+        "VkPipelineLayoutCreateInfo",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkPipelineLayout("layout")
+    VkShaderStageFlags("stageFlags")
+    uint32_t("offset")
+    AutoSize("pValues")..uint32_t("size")
+    void.const.p("pValues")
+}
+
+val VkPushDescriptorSetInfo = struct(Module.VULKAN, "VkPushDescriptorSetInfo") {
+    Expression("#STRUCTURE_TYPE_PUSH_DESCRIPTOR_SET_INFO")..VkStructureType("sType")
+    PointerSetter(
+        "VkPipelineLayoutCreateInfo",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkShaderStageFlags("stageFlags")
+    VkPipelineLayout("layout")
+    uint32_t("set")
+    AutoSize("pDescriptorWrites")..uint32_t("descriptorWriteCount")
+    VkWriteDescriptorSet.const.p("pDescriptorWrites")
+}
+
+val VkPushDescriptorSetWithTemplateInfo = struct(Module.VULKAN, "VkPushDescriptorSetWithTemplateInfo") {
+    Expression("#STRUCTURE_TYPE_PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO")..VkStructureType("sType")
+    PointerSetter(
+        "VkPipelineLayoutCreateInfo",
+        prepend = true
+    )..nullable..opaque_const_p("pNext")
+    VkDescriptorUpdateTemplate("descriptorUpdateTemplate")
+    VkPipelineLayout("layout")
+    uint32_t("set")
+    opaque_const_p("pData")
+}
+
+val VkPhysicalDevicePipelineProtectedAccessFeatures = struct(Module.VULKAN, "VkPhysicalDevicePipelineProtectedAccessFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("pipelineProtectedAccess")
+}
+
+val VkPhysicalDevicePipelineRobustnessFeatures = struct(Module.VULKAN, "VkPhysicalDevicePipelineRobustnessFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("pipelineRobustness")
+}
+
+val VkPhysicalDevicePipelineRobustnessProperties = struct(Module.VULKAN, "VkPhysicalDevicePipelineRobustnessProperties", mutable = false) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_PROPERTIES")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
+    VkPipelineRobustnessBufferBehavior("defaultRobustnessStorageBuffers")
+    VkPipelineRobustnessBufferBehavior("defaultRobustnessUniformBuffers")
+    VkPipelineRobustnessBufferBehavior("defaultRobustnessVertexInputs")
+    VkPipelineRobustnessImageBehavior("defaultRobustnessImages")
+}
+
+val VkPipelineRobustnessCreateInfo = struct(Module.VULKAN, "VkPipelineRobustnessCreateInfo") {
+    Expression("#STRUCTURE_TYPE_PIPELINE_ROBUSTNESS_CREATE_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkPipelineRobustnessBufferBehavior("storageBuffers")
+    VkPipelineRobustnessBufferBehavior("uniformBuffers")
+    VkPipelineRobustnessBufferBehavior("vertexInputs")
+    VkPipelineRobustnessImageBehavior("images")
+}
+
+val VkPhysicalDeviceLineRasterizationFeatures = struct(Module.VULKAN, "VkPhysicalDeviceLineRasterizationFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("rectangularLines")
+    VkBool32("bresenhamLines")
+    VkBool32("smoothLines")
+    VkBool32("stippledRectangularLines")
+    VkBool32("stippledBresenhamLines")
+    VkBool32("stippledSmoothLines")
+}
+
+val VkPhysicalDeviceLineRasterizationProperties = struct(Module.VULKAN, "VkPhysicalDeviceLineRasterizationProperties", mutable = false) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
+    uint32_t("lineSubPixelPrecisionBits")
+}
+
+val VkPipelineRasterizationLineStateCreateInfo = struct(Module.VULKAN, "VkPipelineRasterizationLineStateCreateInfo") {
+    Expression("#STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkLineRasterizationMode("lineRasterizationMode")
+    VkBool32("stippledLineEnable")
+    uint32_t("lineStippleFactor")
+    uint16_t("lineStipplePattern")
+}
+
+val VkPhysicalDeviceVertexAttributeDivisorProperties = struct(Module.VULKAN, "VkPhysicalDeviceVertexAttributeDivisorProperties", mutable = false) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
+    uint32_t("maxVertexAttribDivisor")
+    VkBool32("supportsNonZeroFirstInstance")
+}
+
+val VkVertexInputBindingDivisorDescription = struct(Module.VULKAN, "VkVertexInputBindingDivisorDescription") {
+    uint32_t("binding")
+    uint32_t("divisor")
+}
+
+val VkPipelineVertexInputDivisorStateCreateInfo = struct(Module.VULKAN, "VkPipelineVertexInputDivisorStateCreateInfo") {
+    Expression("#STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    AutoSize("pVertexBindingDivisors")..uint32_t("vertexBindingDivisorCount")
+    VkVertexInputBindingDivisorDescription.const.p("pVertexBindingDivisors")
+}
+
+val VkPhysicalDeviceVertexAttributeDivisorFeatures = struct(Module.VULKAN, "VkPhysicalDeviceVertexAttributeDivisorFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("vertexAttributeInstanceRateDivisor")
+    VkBool32("vertexAttributeInstanceRateZeroDivisor")
+}
+
+val VkRenderingAreaInfo = struct(Module.VULKAN, "VkRenderingAreaInfo") {
+    Expression("#STRUCTURE_TYPE_RENDERING_AREA_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    uint32_t("viewMask")
+    AutoSize("pColorAttachmentFormats", optional = true)..uint32_t("colorAttachmentCount")
+    nullable..VkFormat.const.p("pColorAttachmentFormats")
+    VkFormat("depthAttachmentFormat")
+    VkFormat("stencilAttachmentFormat")
+}
+
+val VkPhysicalDeviceDynamicRenderingLocalReadFeatures = struct(Module.VULKAN, "VkPhysicalDeviceDynamicRenderingLocalReadFeatures") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("dynamicRenderingLocalRead")
+}
+
+val VkRenderingAttachmentLocationInfo = struct(Module.VULKAN, "VkRenderingAttachmentLocationInfo") {
+    Expression("#STRUCTURE_TYPE_RENDERING_ATTACHMENT_LOCATION_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    AutoSize("pColorAttachmentLocations", optional = true)..uint32_t("colorAttachmentCount")
+    nullable..uint32_t.const.p("pColorAttachmentLocations")
+}
+
+val VkRenderingInputAttachmentIndexInfo = struct(Module.VULKAN, "VkRenderingInputAttachmentIndexInfo") {
+    Expression("#STRUCTURE_TYPE_RENDERING_INPUT_ATTACHMENT_INDEX_INFO")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    AutoSize("pColorAttachmentInputIndices", optional = true)..uint32_t("colorAttachmentCount")
+    nullable..uint32_t.const.p("pColorAttachmentInputIndices")
+    nullable..uint32_t.const.p("pDepthInputAttachmentIndex")
+    nullable..uint32_t.const.p("pStencilInputAttachmentIndex")
 }

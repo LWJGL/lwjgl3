@@ -90,14 +90,18 @@ public class VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE extends Stru
     public VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE sType$Default() { return sType(VALVEFragmentDensityMapLayered.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_LAYERED_FEATURES_VALVE); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    /** Sets the specified value to the {@code fragmentDensityMapLayered} field. */
+    public VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE fragmentDensityMapLayered(@NativeType("VkBool32") boolean value) { nfragmentDensityMapLayered(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE set(
         int sType,
-        long pNext
+        long pNext,
+        boolean fragmentDensityMapLayered
     ) {
         sType(sType);
         pNext(pNext);
+        fragmentDensityMapLayered(fragmentDensityMapLayered);
 
         return this;
     }
@@ -236,6 +240,8 @@ public class VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE extends Stru
     public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE.PNEXT, value); }
+    /** Unsafe version of {@link #fragmentDensityMapLayered(boolean) fragmentDensityMapLayered}. */
+    public static void nfragmentDensityMapLayered(long struct, int value) { memPutInt(struct + VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE.FRAGMENTDENSITYMAPLAYERED, value); }
 
     // -----------------------------------
 
@@ -296,6 +302,8 @@ public class VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE extends Stru
         public VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE.Buffer sType$Default() { return sType(VALVEFragmentDensityMapLayered.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_LAYERED_FEATURES_VALVE); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE.npNext(address(), value); return this; }
+        /** Sets the specified value to the {@code fragmentDensityMapLayered} field. */
+        public VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE.Buffer fragmentDensityMapLayered(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE.nfragmentDensityMapLayered(address(), value ? 1 : 0); return this; }
 
     }
 

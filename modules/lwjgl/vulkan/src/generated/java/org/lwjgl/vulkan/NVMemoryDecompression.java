@@ -20,8 +20,6 @@ public class NVMemoryDecompression {
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV   = 1000427000,
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_PROPERTIES_NV = 1000427001;
 
-    public static final long VK_MEMORY_DECOMPRESSION_METHOD_GDEFLATE_1_0_BIT_NV = 0x1L;
-
     protected NVMemoryDecompression() {
         throw new UnsupportedOperationException();
     }

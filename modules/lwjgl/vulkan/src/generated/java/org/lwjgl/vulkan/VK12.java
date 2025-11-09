@@ -71,13 +71,21 @@ public class VK12 extends VK11 {
 
     public static final int VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE = 4;
 
-    public static final int VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT = 0x2;
+    public static final int VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT = 0x20000;
 
-    public static final int VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT = 0x2;
+    public static final int VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT = 0x10;
+
+    public static final int
+        VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT                = 0x2,
+        VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT = 0x4;
 
     public static final int
         VK_ERROR_FRAGMENTATION                  = -1000161000,
         VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS = -1000257000;
+
+    public static final int VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT = 0x2;
+
+    public static final int VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT = 0x2;
 
     public static final int VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT = 0x10000;
 
@@ -88,14 +96,6 @@ public class VK12 extends VK11 {
         VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL    = 1000241001,
         VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL = 1000241002,
         VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL  = 1000241003;
-
-    public static final int VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT = 0x20000;
-
-    public static final int VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT = 0x10;
-
-    public static final int
-        VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT                = 0x2,
-        VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT = 0x4;
 
     public static final int
         VK_DRIVER_ID_AMD_PROPRIETARY               = 1,
@@ -124,7 +124,8 @@ public class VK12 extends VK11 {
         VK_DRIVER_ID_MESA_NVK                      = 24,
         VK_DRIVER_ID_IMAGINATION_OPEN_SOURCE_MESA  = 25,
         VK_DRIVER_ID_MESA_HONEYKRISP               = 26,
-        VK_DRIVER_ID_VULKAN_SC_EMULATION_ON_VULKAN = 27;
+        VK_DRIVER_ID_VULKAN_SC_EMULATION_ON_VULKAN = 27,
+        VK_DRIVER_ID_MESA_KOSMICKRISP              = 28;
 
     public static final int
         VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY = 0,
@@ -139,6 +140,12 @@ public class VK12 extends VK11 {
         VK_RESOLVE_MODE_MAX_BIT         = 0x8;
 
     public static final int
+        VK_SEMAPHORE_TYPE_BINARY   = 0,
+        VK_SEMAPHORE_TYPE_TIMELINE = 1;
+
+    public static final int VK_SEMAPHORE_WAIT_ANY_BIT = 0x1;
+
+    public static final int
         VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT           = 0x1,
         VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT = 0x2,
         VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT             = 0x4,
@@ -149,12 +156,6 @@ public class VK12 extends VK11 {
         VK_SAMPLER_REDUCTION_MODE_MIN              = 1,
         VK_SAMPLER_REDUCTION_MODE_MAX              = 2;
 
-    public static final int
-        VK_SEMAPHORE_TYPE_BINARY   = 0,
-        VK_SEMAPHORE_TYPE_TIMELINE = 1;
-
-    public static final int VK_SEMAPHORE_WAIT_ANY_BIT = 0x1;
-
     public static final int VK_API_VERSION_1_2 = VK_MAKE_API_VERSION(0, 1, 2, 0);
 
     public static final int
@@ -163,97 +164,6 @@ public class VK12 extends VK11 {
 
     protected VK12() {
         throw new UnsupportedOperationException();
-    }
-
-    // --- [ vkCmdDrawIndirectCount ] ---
-
-    /** {@code void vkCmdDrawIndirectCount(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, VkBuffer countBuffer, VkDeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride)} */
-    public static void vkCmdDrawIndirectCount(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long buffer, @NativeType("VkDeviceSize") long offset, @NativeType("VkBuffer") long countBuffer, @NativeType("VkDeviceSize") long countBufferOffset, @NativeType("uint32_t") int maxDrawCount, @NativeType("uint32_t") int stride) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdDrawIndirectCount;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPJJJJV(commandBuffer.address(), buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride, __functionAddress);
-    }
-
-    // --- [ vkCmdDrawIndexedIndirectCount ] ---
-
-    /** {@code void vkCmdDrawIndexedIndirectCount(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, VkBuffer countBuffer, VkDeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride)} */
-    public static void vkCmdDrawIndexedIndirectCount(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long buffer, @NativeType("VkDeviceSize") long offset, @NativeType("VkBuffer") long countBuffer, @NativeType("VkDeviceSize") long countBufferOffset, @NativeType("uint32_t") int maxDrawCount, @NativeType("uint32_t") int stride) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdDrawIndexedIndirectCount;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPJJJJV(commandBuffer.address(), buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride, __functionAddress);
-    }
-
-    // --- [ vkCreateRenderPass2 ] ---
-
-    /** {@code VkResult vkCreateRenderPass2(VkDevice device, VkRenderPassCreateInfo2 const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkRenderPass * pRenderPass)} */
-    public static int nvkCreateRenderPass2(VkDevice device, long pCreateInfo, long pAllocator, long pRenderPass) {
-        long __functionAddress = device.getCapabilities().vkCreateRenderPass2;
-        if (CHECKS) {
-            check(__functionAddress);
-            VkRenderPassCreateInfo2.validate(pCreateInfo);
-        }
-        return callPPPPI(device.address(), pCreateInfo, pAllocator, pRenderPass, __functionAddress);
-    }
-
-    /** {@code VkResult vkCreateRenderPass2(VkDevice device, VkRenderPassCreateInfo2 const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkRenderPass * pRenderPass)} */
-    @NativeType("VkResult")
-    public static int vkCreateRenderPass2(VkDevice device, @NativeType("VkRenderPassCreateInfo2 const *") VkRenderPassCreateInfo2 pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkRenderPass *") LongBuffer pRenderPass) {
-        if (CHECKS) {
-            check(pRenderPass, 1);
-        }
-        return nvkCreateRenderPass2(device, pCreateInfo.address(), memAddressSafe(pAllocator), memAddress(pRenderPass));
-    }
-
-    // --- [ vkCmdBeginRenderPass2 ] ---
-
-    /** {@code void vkCmdBeginRenderPass2(VkCommandBuffer commandBuffer, VkRenderPassBeginInfo const * pRenderPassBegin, VkSubpassBeginInfo const * pSubpassBeginInfo)} */
-    public static void nvkCmdBeginRenderPass2(VkCommandBuffer commandBuffer, long pRenderPassBegin, long pSubpassBeginInfo) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdBeginRenderPass2;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPPPV(commandBuffer.address(), pRenderPassBegin, pSubpassBeginInfo, __functionAddress);
-    }
-
-    /** {@code void vkCmdBeginRenderPass2(VkCommandBuffer commandBuffer, VkRenderPassBeginInfo const * pRenderPassBegin, VkSubpassBeginInfo const * pSubpassBeginInfo)} */
-    public static void vkCmdBeginRenderPass2(VkCommandBuffer commandBuffer, @NativeType("VkRenderPassBeginInfo const *") VkRenderPassBeginInfo pRenderPassBegin, @NativeType("VkSubpassBeginInfo const *") VkSubpassBeginInfo pSubpassBeginInfo) {
-        nvkCmdBeginRenderPass2(commandBuffer, pRenderPassBegin.address(), pSubpassBeginInfo.address());
-    }
-
-    // --- [ vkCmdNextSubpass2 ] ---
-
-    /** {@code void vkCmdNextSubpass2(VkCommandBuffer commandBuffer, VkSubpassBeginInfo const * pSubpassBeginInfo, VkSubpassEndInfo const * pSubpassEndInfo)} */
-    public static void nvkCmdNextSubpass2(VkCommandBuffer commandBuffer, long pSubpassBeginInfo, long pSubpassEndInfo) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdNextSubpass2;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPPPV(commandBuffer.address(), pSubpassBeginInfo, pSubpassEndInfo, __functionAddress);
-    }
-
-    /** {@code void vkCmdNextSubpass2(VkCommandBuffer commandBuffer, VkSubpassBeginInfo const * pSubpassBeginInfo, VkSubpassEndInfo const * pSubpassEndInfo)} */
-    public static void vkCmdNextSubpass2(VkCommandBuffer commandBuffer, @NativeType("VkSubpassBeginInfo const *") VkSubpassBeginInfo pSubpassBeginInfo, @NativeType("VkSubpassEndInfo const *") VkSubpassEndInfo pSubpassEndInfo) {
-        nvkCmdNextSubpass2(commandBuffer, pSubpassBeginInfo.address(), pSubpassEndInfo.address());
-    }
-
-    // --- [ vkCmdEndRenderPass2 ] ---
-
-    /** {@code void vkCmdEndRenderPass2(VkCommandBuffer commandBuffer, VkSubpassEndInfo const * pSubpassEndInfo)} */
-    public static void nvkCmdEndRenderPass2(VkCommandBuffer commandBuffer, long pSubpassEndInfo) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdEndRenderPass2;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPPV(commandBuffer.address(), pSubpassEndInfo, __functionAddress);
-    }
-
-    /** {@code void vkCmdEndRenderPass2(VkCommandBuffer commandBuffer, VkSubpassEndInfo const * pSubpassEndInfo)} */
-    public static void vkCmdEndRenderPass2(VkCommandBuffer commandBuffer, @NativeType("VkSubpassEndInfo const *") VkSubpassEndInfo pSubpassEndInfo) {
-        nvkCmdEndRenderPass2(commandBuffer, pSubpassEndInfo.address());
     }
 
     // --- [ vkResetQueryPool ] ---
@@ -373,16 +283,95 @@ public class VK12 extends VK11 {
         return nvkGetDeviceMemoryOpaqueCaptureAddress(device, pInfo.address());
     }
 
+    // --- [ vkCmdDrawIndirectCount ] ---
+
+    /** {@code void vkCmdDrawIndirectCount(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, VkBuffer countBuffer, VkDeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride)} */
+    public static void vkCmdDrawIndirectCount(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long buffer, @NativeType("VkDeviceSize") long offset, @NativeType("VkBuffer") long countBuffer, @NativeType("VkDeviceSize") long countBufferOffset, @NativeType("uint32_t") int maxDrawCount, @NativeType("uint32_t") int stride) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdDrawIndirectCount;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPJJJJV(commandBuffer.address(), buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride, __functionAddress);
+    }
+
+    // --- [ vkCmdDrawIndexedIndirectCount ] ---
+
+    /** {@code void vkCmdDrawIndexedIndirectCount(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, VkBuffer countBuffer, VkDeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride)} */
+    public static void vkCmdDrawIndexedIndirectCount(VkCommandBuffer commandBuffer, @NativeType("VkBuffer") long buffer, @NativeType("VkDeviceSize") long offset, @NativeType("VkBuffer") long countBuffer, @NativeType("VkDeviceSize") long countBufferOffset, @NativeType("uint32_t") int maxDrawCount, @NativeType("uint32_t") int stride) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdDrawIndexedIndirectCount;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPJJJJV(commandBuffer.address(), buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride, __functionAddress);
+    }
+
+    // --- [ vkCreateRenderPass2 ] ---
+
     /** {@code VkResult vkCreateRenderPass2(VkDevice device, VkRenderPassCreateInfo2 const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkRenderPass * pRenderPass)} */
-    @NativeType("VkResult")
-    public static int vkCreateRenderPass2(VkDevice device, @NativeType("VkRenderPassCreateInfo2 const *") VkRenderPassCreateInfo2 pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkRenderPass *") long[] pRenderPass) {
+    public static int nvkCreateRenderPass2(VkDevice device, long pCreateInfo, long pAllocator, long pRenderPass) {
         long __functionAddress = device.getCapabilities().vkCreateRenderPass2;
         if (CHECKS) {
             check(__functionAddress);
-            check(pRenderPass, 1);
-            VkRenderPassCreateInfo2.validate(pCreateInfo.address());
+            VkRenderPassCreateInfo2.validate(pCreateInfo);
         }
-        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pRenderPass, __functionAddress);
+        return callPPPPI(device.address(), pCreateInfo, pAllocator, pRenderPass, __functionAddress);
+    }
+
+    /** {@code VkResult vkCreateRenderPass2(VkDevice device, VkRenderPassCreateInfo2 const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkRenderPass * pRenderPass)} */
+    @NativeType("VkResult")
+    public static int vkCreateRenderPass2(VkDevice device, @NativeType("VkRenderPassCreateInfo2 const *") VkRenderPassCreateInfo2 pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkRenderPass *") LongBuffer pRenderPass) {
+        if (CHECKS) {
+            check(pRenderPass, 1);
+        }
+        return nvkCreateRenderPass2(device, pCreateInfo.address(), memAddressSafe(pAllocator), memAddress(pRenderPass));
+    }
+
+    // --- [ vkCmdBeginRenderPass2 ] ---
+
+    /** {@code void vkCmdBeginRenderPass2(VkCommandBuffer commandBuffer, VkRenderPassBeginInfo const * pRenderPassBegin, VkSubpassBeginInfo const * pSubpassBeginInfo)} */
+    public static void nvkCmdBeginRenderPass2(VkCommandBuffer commandBuffer, long pRenderPassBegin, long pSubpassBeginInfo) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdBeginRenderPass2;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPPPV(commandBuffer.address(), pRenderPassBegin, pSubpassBeginInfo, __functionAddress);
+    }
+
+    /** {@code void vkCmdBeginRenderPass2(VkCommandBuffer commandBuffer, VkRenderPassBeginInfo const * pRenderPassBegin, VkSubpassBeginInfo const * pSubpassBeginInfo)} */
+    public static void vkCmdBeginRenderPass2(VkCommandBuffer commandBuffer, @NativeType("VkRenderPassBeginInfo const *") VkRenderPassBeginInfo pRenderPassBegin, @NativeType("VkSubpassBeginInfo const *") VkSubpassBeginInfo pSubpassBeginInfo) {
+        nvkCmdBeginRenderPass2(commandBuffer, pRenderPassBegin.address(), pSubpassBeginInfo.address());
+    }
+
+    // --- [ vkCmdNextSubpass2 ] ---
+
+    /** {@code void vkCmdNextSubpass2(VkCommandBuffer commandBuffer, VkSubpassBeginInfo const * pSubpassBeginInfo, VkSubpassEndInfo const * pSubpassEndInfo)} */
+    public static void nvkCmdNextSubpass2(VkCommandBuffer commandBuffer, long pSubpassBeginInfo, long pSubpassEndInfo) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdNextSubpass2;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPPPV(commandBuffer.address(), pSubpassBeginInfo, pSubpassEndInfo, __functionAddress);
+    }
+
+    /** {@code void vkCmdNextSubpass2(VkCommandBuffer commandBuffer, VkSubpassBeginInfo const * pSubpassBeginInfo, VkSubpassEndInfo const * pSubpassEndInfo)} */
+    public static void vkCmdNextSubpass2(VkCommandBuffer commandBuffer, @NativeType("VkSubpassBeginInfo const *") VkSubpassBeginInfo pSubpassBeginInfo, @NativeType("VkSubpassEndInfo const *") VkSubpassEndInfo pSubpassEndInfo) {
+        nvkCmdNextSubpass2(commandBuffer, pSubpassBeginInfo.address(), pSubpassEndInfo.address());
+    }
+
+    // --- [ vkCmdEndRenderPass2 ] ---
+
+    /** {@code void vkCmdEndRenderPass2(VkCommandBuffer commandBuffer, VkSubpassEndInfo const * pSubpassEndInfo)} */
+    public static void nvkCmdEndRenderPass2(VkCommandBuffer commandBuffer, long pSubpassEndInfo) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdEndRenderPass2;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPPV(commandBuffer.address(), pSubpassEndInfo, __functionAddress);
+    }
+
+    /** {@code void vkCmdEndRenderPass2(VkCommandBuffer commandBuffer, VkSubpassEndInfo const * pSubpassEndInfo)} */
+    public static void vkCmdEndRenderPass2(VkCommandBuffer commandBuffer, @NativeType("VkSubpassEndInfo const *") VkSubpassEndInfo pSubpassEndInfo) {
+        nvkCmdEndRenderPass2(commandBuffer, pSubpassEndInfo.address());
     }
 
     /** {@code VkResult vkGetSemaphoreCounterValue(VkDevice device, VkSemaphore semaphore, uint64_t * pValue)} */
@@ -394,6 +383,18 @@ public class VK12 extends VK11 {
             check(pValue, 1);
         }
         return callPJPI(device.address(), semaphore, pValue, __functionAddress);
+    }
+
+    /** {@code VkResult vkCreateRenderPass2(VkDevice device, VkRenderPassCreateInfo2 const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkRenderPass * pRenderPass)} */
+    @NativeType("VkResult")
+    public static int vkCreateRenderPass2(VkDevice device, @NativeType("VkRenderPassCreateInfo2 const *") VkRenderPassCreateInfo2 pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkRenderPass *") long[] pRenderPass) {
+        long __functionAddress = device.getCapabilities().vkCreateRenderPass2;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(pRenderPass, 1);
+            VkRenderPassCreateInfo2.validate(pCreateInfo.address());
+        }
+        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pRenderPass, __functionAddress);
     }
 
 }

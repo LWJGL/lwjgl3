@@ -10,7 +10,7 @@ import vulkan.*
 
 val VK14 = "VK14".nativeClass(Module.VULKAN, "VK14", prefix = "VK", binding = VK_BINDING_INSTANCE) {
     extends = VK13
-    
+
     EnumConstant(
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_FEATURES".."55",
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_PROPERTIES".."56",
@@ -69,19 +69,6 @@ val VK14 = "VK14".nativeClass(Module.VULKAN, "VK14", prefix = "VK", binding = VK
     )
 
     EnumConstant(
-        "ATTACHMENT_LOAD_OP_NONE".."1000400000"
-    )
-
-    EnumConstant(
-        "SUBGROUP_FEATURE_ROTATE_BIT".enum(0x00000200),
-        "SUBGROUP_FEATURE_ROTATE_CLUSTERED_BIT".enum(0x00000400)
-    )
-
-    EnumConstant(
-        "DYNAMIC_STATE_LINE_STIPPLE".."1000259000"
-    )
-
-    EnumConstant(
         "INDEX_TYPE_UINT8".."1000265000"
     )
 
@@ -104,6 +91,19 @@ val VK14 = "VK14".nativeClass(Module.VULKAN, "VK14", prefix = "VK", binding = VK
     )
 
     EnumConstant(
+        "IMAGE_USAGE_HOST_TRANSFER_BIT".enum(0x00400000)
+    )
+
+    EnumConstantLong(
+        "FORMAT_FEATURE_2_HOST_IMAGE_TRANSFER_BIT".enum(0x400000000000L)
+    )
+
+    EnumConstant(
+        "SUBGROUP_FEATURE_ROTATE_BIT".enum(0x00000200),
+        "SUBGROUP_FEATURE_ROTATE_CLUSTERED_BIT".enum(0x00000400)
+    )
+
+    EnumConstant(
         "DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT".enum(0x00000001)
     )
 
@@ -112,20 +112,20 @@ val VK14 = "VK14".nativeClass(Module.VULKAN, "VK14", prefix = "VK", binding = VK
     )
 
     EnumConstant(
-        "IMAGE_LAYOUT_RENDERING_LOCAL_READ".."1000232000"
-    )
-
-    EnumConstant(
         "PIPELINE_CREATE_NO_PROTECTED_ACCESS_BIT".enum(0x08000000),
         "PIPELINE_CREATE_PROTECTED_ACCESS_ONLY_BIT".enum(0x40000000)
     )
 
     EnumConstant(
-        "IMAGE_USAGE_HOST_TRANSFER_BIT".enum(0x00400000)
+        "ATTACHMENT_LOAD_OP_NONE".."1000400000"
     )
 
-    EnumConstantLong(
-        "FORMAT_FEATURE_2_HOST_IMAGE_TRANSFER_BIT".enum(0x400000000000L)
+    EnumConstant(
+        "DYNAMIC_STATE_LINE_STIPPLE".."1000259000"
+    )
+
+    EnumConstant(
+        "IMAGE_LAYOUT_RENDERING_LOCAL_READ".."1000232000"
     )
 
     EnumConstant(
@@ -150,10 +150,8 @@ val VK14 = "VK14".nativeClass(Module.VULKAN, "VK14", prefix = "VK", binding = VK
     )
 
     EnumConstant(
-        "LINE_RASTERIZATION_MODE_DEFAULT".."0",
-        "LINE_RASTERIZATION_MODE_RECTANGULAR".."1",
-        "LINE_RASTERIZATION_MODE_BRESENHAM".."2",
-        "LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH".."3"
+        "HOST_IMAGE_COPY_MEMCPY_BIT".enum(0x00000001),
+        "HOST_IMAGE_COPY_MEMCPY".enum(0x00000001)
     )
 
     EnumConstantLong(
@@ -169,18 +167,10 @@ val VK14 = "VK14".nativeClass(Module.VULKAN, "VK14", prefix = "VK", binding = VK
     )
 
     EnumConstant(
-        "HOST_IMAGE_COPY_MEMCPY_BIT".enum(0x00000001),
-        "HOST_IMAGE_COPY_MEMCPY".enum(0x00000001)
-    )
-
-    // Promoted from VK_KHR_line_rasterization (extension 535) 'Roadmap 2024'
-
-    void(
-        "CmdSetLineStipple",
-
-        VkCommandBuffer("commandBuffer"),
-        uint32_t("lineStippleFactor"),
-        uint16_t("lineStipplePattern")
+        "LINE_RASTERIZATION_MODE_DEFAULT".."0",
+        "LINE_RASTERIZATION_MODE_RECTANGULAR".."1",
+        "LINE_RASTERIZATION_MODE_BRESENHAM".."2",
+        "LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH".."3"
     )
 
     // Promoted from VK_KHR_map_memory2 (extension 272) 'Roadmap 2024'
@@ -203,24 +193,6 @@ val VK14 = "VK14".nativeClass(Module.VULKAN, "VK14", prefix = "VK", binding = VK
     // Promoted from VK_KHR_maintenance5 (extension 471) 'Roadmap 2024'
 
     void(
-        "CmdBindIndexBuffer2",
-
-        VkCommandBuffer("commandBuffer"),
-        VkBuffer("buffer"),
-        VkDeviceSize("offset"),
-        VkDeviceSize("size"),
-        VkIndexType("indexType")
-    )
-
-    void(
-        "GetRenderingAreaGranularity",
-
-        VkDevice("device"),
-        VkRenderingAreaInfo.const.p("pRenderingAreaInfo"),
-        VkExtent2D.p("pGranularity")
-    )
-
-    void(
         "GetDeviceImageSubresourceLayout",
 
         VkDevice("device"),
@@ -235,6 +207,37 @@ val VK14 = "VK14".nativeClass(Module.VULKAN, "VK14", prefix = "VK", binding = VK
         VkImage("image"),
         VkImageSubresource2.const.p("pSubresource"),
         VkSubresourceLayout2.p("pLayout")
+    )
+
+    // Promoted (as optional feature) from VK_EXT_host_image_copy (extension 271) 'streaming transfers'
+
+    VkResult(
+        "CopyMemoryToImage",
+
+        VkDevice("device"),
+        VkCopyMemoryToImageInfo.const.p("pCopyMemoryToImageInfo")
+    )
+
+    VkResult(
+        "CopyImageToMemory",
+
+        VkDevice("device"),
+        VkCopyImageToMemoryInfo.const.p("pCopyImageToMemoryInfo")
+    )
+
+    VkResult(
+        "CopyImageToImage",
+
+        VkDevice("device"),
+        VkCopyImageToImageInfo.const.p("pCopyImageToImageInfo")
+    )
+
+    VkResult(
+        "TransitionImageLayout",
+
+        VkDevice("device"),
+        AutoSize("pTransitions")..uint32_t("transitionCount"),
+        VkHostImageLayoutTransitionInfo.const.p("pTransitions")
     )
 
     // Promoted from VK_KHR_push_descriptor (extension 81) 'Roadmap 2024'
@@ -258,22 +261,6 @@ val VK14 = "VK14".nativeClass(Module.VULKAN, "VK14", prefix = "VK", binding = VK
         VkPipelineLayout("layout"),
         uint32_t("set"),
         nullable..opaque_const_p("pData")
-    )
-
-    // Promoted from VK_KHR_dynamic_rendering_local_read (extension 233) 'Roadmap 2024'
-
-    void(
-        "CmdSetRenderingAttachmentLocations",
-
-        VkCommandBuffer("commandBuffer"),
-        VkRenderingAttachmentLocationInfo.const.p("pLocationInfo")
-    )
-
-    void(
-        "CmdSetRenderingInputAttachmentIndices",
-
-        VkCommandBuffer("commandBuffer"),
-        VkRenderingInputAttachmentIndexInfo.const.p("pInputAttachmentIndexInfo")
     )
 
     // Promoted from VK_KHR_maintenance6 (extension 546) 'additional functionality'
@@ -306,35 +293,50 @@ val VK14 = "VK14".nativeClass(Module.VULKAN, "VK14", prefix = "VK", binding = VK
         VkPushDescriptorSetWithTemplateInfo.const.p("pPushDescriptorSetWithTemplateInfo")
     )
 
-    // Promoted (as optional feature) from VK_EXT_host_image_copy (extension 271) 'streaming transfers'
+    // Promoted from VK_KHR_line_rasterization (extension 535) 'Roadmap 2024'
 
-    VkResult(
-        "CopyMemoryToImage",
+    void(
+        "CmdSetLineStipple",
 
-        VkDevice("device"),
-        VkCopyMemoryToImageInfo.const.p("pCopyMemoryToImageInfo")
+        VkCommandBuffer("commandBuffer"),
+        uint32_t("lineStippleFactor"),
+        uint16_t("lineStipplePattern")
     )
 
-    VkResult(
-        "CopyImageToMemory",
+    // Promoted from VK_KHR_maintenance5 (extension 471) 'Roadmap 2024'
 
-        VkDevice("device"),
-        VkCopyImageToMemoryInfo.const.p("pCopyImageToMemoryInfo")
+    void(
+        "CmdBindIndexBuffer2",
+
+        VkCommandBuffer("commandBuffer"),
+        VkBuffer("buffer"),
+        VkDeviceSize("offset"),
+        VkDeviceSize("size"),
+        VkIndexType("indexType")
     )
 
-    VkResult(
-        "CopyImageToImage",
+    void(
+        "GetRenderingAreaGranularity",
 
         VkDevice("device"),
-        VkCopyImageToImageInfo.const.p("pCopyImageToImageInfo")
+        VkRenderingAreaInfo.const.p("pRenderingAreaInfo"),
+        VkExtent2D.p("pGranularity")
     )
 
-    VkResult(
-        "TransitionImageLayout",
+    // Promoted from VK_KHR_dynamic_rendering_local_read (extension 233) 'Roadmap 2024'
 
-        VkDevice("device"),
-        AutoSize("pTransitions")..uint32_t("transitionCount"),
-        VkHostImageLayoutTransitionInfo.const.p("pTransitions")
+    void(
+        "CmdSetRenderingAttachmentLocations",
+
+        VkCommandBuffer("commandBuffer"),
+        VkRenderingAttachmentLocationInfo.const.p("pLocationInfo")
+    )
+
+    void(
+        "CmdSetRenderingInputAttachmentIndices",
+
+        VkCommandBuffer("commandBuffer"),
+        VkRenderingInputAttachmentIndexInfo.const.p("pInputAttachmentIndexInfo")
     )
 
 }

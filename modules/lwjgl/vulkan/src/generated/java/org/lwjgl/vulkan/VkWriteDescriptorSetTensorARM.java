@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -90,7 +89,7 @@ public class VkWriteDescriptorSetTensorARM extends Struct<VkWriteDescriptorSetTe
     public int tensorViewCount() { return ntensorViewCount(address()); }
     /** @return a {@link LongBuffer} view of the data pointed to by the {@code pTensorViews} field. */
     @NativeType("VkTensorViewARM const *")
-    public LongBuffer pTensorViews() { return npTensorViews(address()); }
+    public @Nullable LongBuffer pTensorViews() { return npTensorViews(address()); }
 
     /** Sets the specified value to the {@code sType} field. */
     public VkWriteDescriptorSetTensorARM sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -98,17 +97,21 @@ public class VkWriteDescriptorSetTensorARM extends Struct<VkWriteDescriptorSetTe
     public VkWriteDescriptorSetTensorARM sType$Default() { return sType(ARMTensors.VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_TENSOR_ARM); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkWriteDescriptorSetTensorARM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the specified value to the {@code tensorViewCount} field. */
+    public VkWriteDescriptorSetTensorARM tensorViewCount(@NativeType("uint32_t") int value) { ntensorViewCount(address(), value); return this; }
     /** Sets the address of the specified {@link LongBuffer} to the {@code pTensorViews} field. */
-    public VkWriteDescriptorSetTensorARM pTensorViews(@NativeType("VkTensorViewARM const *") LongBuffer value) { npTensorViews(address(), value); return this; }
+    public VkWriteDescriptorSetTensorARM pTensorViews(@Nullable @NativeType("VkTensorViewARM const *") LongBuffer value) { npTensorViews(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkWriteDescriptorSetTensorARM set(
         int sType,
         long pNext,
-        LongBuffer pTensorViews
+        int tensorViewCount,
+        @Nullable LongBuffer pTensorViews
     ) {
         sType(sType);
         pNext(pNext);
+        tensorViewCount(tensorViewCount);
         pTensorViews(pTensorViews);
 
         return this;
@@ -244,7 +247,7 @@ public class VkWriteDescriptorSetTensorARM extends Struct<VkWriteDescriptorSetTe
     /** Unsafe version of {@link #tensorViewCount}. */
     public static int ntensorViewCount(long struct) { return memGetInt(struct + VkWriteDescriptorSetTensorARM.TENSORVIEWCOUNT); }
     /** Unsafe version of {@link #pTensorViews() pTensorViews}. */
-    public static LongBuffer npTensorViews(long struct) { return memLongBuffer(memGetAddress(struct + VkWriteDescriptorSetTensorARM.PTENSORVIEWS), ntensorViewCount(struct)); }
+    public static @Nullable LongBuffer npTensorViews(long struct) { return memLongBufferSafe(memGetAddress(struct + VkWriteDescriptorSetTensorARM.PTENSORVIEWS), ntensorViewCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkWriteDescriptorSetTensorARM.STYPE, value); }
@@ -253,16 +256,7 @@ public class VkWriteDescriptorSetTensorARM extends Struct<VkWriteDescriptorSetTe
     /** Sets the specified value to the {@code tensorViewCount} field of the specified {@code struct}. */
     public static void ntensorViewCount(long struct, int value) { memPutInt(struct + VkWriteDescriptorSetTensorARM.TENSORVIEWCOUNT, value); }
     /** Unsafe version of {@link #pTensorViews(LongBuffer) pTensorViews}. */
-    public static void npTensorViews(long struct, LongBuffer value) { memPutAddress(struct + VkWriteDescriptorSetTensorARM.PTENSORVIEWS, memAddress(value)); ntensorViewCount(struct, value.remaining()); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + VkWriteDescriptorSetTensorARM.PTENSORVIEWS));
-    }
+    public static void npTensorViews(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkWriteDescriptorSetTensorARM.PTENSORVIEWS, memAddressSafe(value)); if (value != null) { ntensorViewCount(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -318,7 +312,7 @@ public class VkWriteDescriptorSetTensorARM extends Struct<VkWriteDescriptorSetTe
         public int tensorViewCount() { return VkWriteDescriptorSetTensorARM.ntensorViewCount(address()); }
         /** @return a {@link LongBuffer} view of the data pointed to by the {@code pTensorViews} field. */
         @NativeType("VkTensorViewARM const *")
-        public LongBuffer pTensorViews() { return VkWriteDescriptorSetTensorARM.npTensorViews(address()); }
+        public @Nullable LongBuffer pTensorViews() { return VkWriteDescriptorSetTensorARM.npTensorViews(address()); }
 
         /** Sets the specified value to the {@code sType} field. */
         public VkWriteDescriptorSetTensorARM.Buffer sType(@NativeType("VkStructureType") int value) { VkWriteDescriptorSetTensorARM.nsType(address(), value); return this; }
@@ -326,8 +320,10 @@ public class VkWriteDescriptorSetTensorARM extends Struct<VkWriteDescriptorSetTe
         public VkWriteDescriptorSetTensorARM.Buffer sType$Default() { return sType(ARMTensors.VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_TENSOR_ARM); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkWriteDescriptorSetTensorARM.Buffer pNext(@NativeType("void const *") long value) { VkWriteDescriptorSetTensorARM.npNext(address(), value); return this; }
+        /** Sets the specified value to the {@code tensorViewCount} field. */
+        public VkWriteDescriptorSetTensorARM.Buffer tensorViewCount(@NativeType("uint32_t") int value) { VkWriteDescriptorSetTensorARM.ntensorViewCount(address(), value); return this; }
         /** Sets the address of the specified {@link LongBuffer} to the {@code pTensorViews} field. */
-        public VkWriteDescriptorSetTensorARM.Buffer pTensorViews(@NativeType("VkTensorViewARM const *") LongBuffer value) { VkWriteDescriptorSetTensorARM.npTensorViews(address(), value); return this; }
+        public VkWriteDescriptorSetTensorARM.Buffer pTensorViews(@Nullable @NativeType("VkTensorViewARM const *") LongBuffer value) { VkWriteDescriptorSetTensorARM.npTensorViews(address(), value); return this; }
 
     }
 

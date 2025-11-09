@@ -149,6 +149,8 @@ public class VkRenderingInfo extends Struct<VkRenderingInfo> implements NativeRe
     public VkRenderingInfo pNext(VkMultiviewPerViewAttributesInfoNVX value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM} value to the {@code pNext} chain. */
     public VkRenderingInfo pNext(VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkRenderPassPerformanceCountersByRegionBeginInfoARM} value to the {@code pNext} chain. */
+    public VkRenderingInfo pNext(VkRenderPassPerformanceCountersByRegionBeginInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderPassStripeBeginInfoARM} value to the {@code pNext} chain. */
     public VkRenderingInfo pNext(VkRenderPassStripeBeginInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderPassTileShadingCreateInfoQCOM} value to the {@code pNext} chain. */
@@ -466,6 +468,8 @@ public class VkRenderingInfo extends Struct<VkRenderingInfo> implements NativeRe
         public VkRenderingInfo.Buffer pNext(VkMultiviewPerViewAttributesInfoNVX value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM} value to the {@code pNext} chain. */
         public VkRenderingInfo.Buffer pNext(VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkRenderPassPerformanceCountersByRegionBeginInfoARM} value to the {@code pNext} chain. */
+        public VkRenderingInfo.Buffer pNext(VkRenderPassPerformanceCountersByRegionBeginInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderPassStripeBeginInfoARM} value to the {@code pNext} chain. */
         public VkRenderingInfo.Buffer pNext(VkRenderPassStripeBeginInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderPassTileShadingCreateInfoQCOM} value to the {@code pNext} chain. */

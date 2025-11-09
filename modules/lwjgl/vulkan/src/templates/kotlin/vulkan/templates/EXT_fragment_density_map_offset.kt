@@ -32,6 +32,6 @@ val EXT_fragment_density_map_offset = "EXTFragmentDensityMapOffset".nativeClassV
         "CmdEndRendering2EXT",
 
         VkCommandBuffer("commandBuffer"),
-        nullable..VkRenderingEndInfoEXT.const.p("pRenderingEndInfo")
+        nullable..VkRenderingEndInfoKHR.const.p("pRenderingEndInfo")
     )
 }

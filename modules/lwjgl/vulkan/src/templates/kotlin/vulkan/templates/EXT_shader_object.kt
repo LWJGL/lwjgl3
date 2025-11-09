@@ -264,7 +264,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
 
         VkCommandBuffer("commandBuffer"),
         VkSampleCountFlagBits("samples"),
-        Unsafe..VkSampleMask.const.p("pSampleMask")
+        Unsafe..nullable..VkSampleMask.const.p("pSampleMask")
     )
 
     void(

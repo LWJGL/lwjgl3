@@ -112,6 +112,8 @@ public class VkDataGraphPipelineCreateInfoARM extends Struct<VkDataGraphPipeline
     public VkDataGraphPipelineCreateInfoARM sType$Default() { return sType(ARMDataGraph.VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_CREATE_INFO_ARM); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkDataGraphPipelineCreateInfoARM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkDataGraphPipelineBuiltinModelCreateInfoQCOM} value to the {@code pNext} chain. */
+    public VkDataGraphPipelineCreateInfoARM pNext(VkDataGraphPipelineBuiltinModelCreateInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDataGraphPipelineCompilerControlCreateInfoARM} value to the {@code pNext} chain. */
     public VkDataGraphPipelineCreateInfoARM pNext(VkDataGraphPipelineCompilerControlCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDataGraphPipelineIdentifierCreateInfoARM} value to the {@code pNext} chain. */
@@ -376,6 +378,8 @@ public class VkDataGraphPipelineCreateInfoARM extends Struct<VkDataGraphPipeline
         public VkDataGraphPipelineCreateInfoARM.Buffer sType$Default() { return sType(ARMDataGraph.VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_CREATE_INFO_ARM); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkDataGraphPipelineCreateInfoARM.Buffer pNext(@NativeType("void const *") long value) { VkDataGraphPipelineCreateInfoARM.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkDataGraphPipelineBuiltinModelCreateInfoQCOM} value to the {@code pNext} chain. */
+        public VkDataGraphPipelineCreateInfoARM.Buffer pNext(VkDataGraphPipelineBuiltinModelCreateInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDataGraphPipelineCompilerControlCreateInfoARM} value to the {@code pNext} chain. */
         public VkDataGraphPipelineCreateInfoARM.Buffer pNext(VkDataGraphPipelineCompilerControlCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDataGraphPipelineIdentifierCreateInfoARM} value to the {@code pNext} chain. */

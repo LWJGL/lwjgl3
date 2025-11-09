@@ -9,7 +9,7 @@ import org.lwjgl.generator.*
 import vulkan.*
 
 val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK_BINDING_INSTANCE) {
-    
+
     EnumConstant(
         "SUCCESS".."0",
         "NOT_READY".."1",
@@ -83,10 +83,6 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         "STRUCTURE_TYPE_MEMORY_BARRIER".."46",
         "STRUCTURE_TYPE_LOADER_INSTANCE_CREATE_INFO".."47",
         "STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO".."48"
-    )
-
-    EnumConstant(
-        "PIPELINE_CACHE_HEADER_VERSION_ONE".."1"
     )
 
     EnumConstant(
@@ -486,6 +482,12 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
     )
 
     EnumConstant(
+        "QUERY_TYPE_OCCLUSION".."0",
+        "QUERY_TYPE_PIPELINE_STATISTICS".."1",
+        "QUERY_TYPE_TIMESTAMP".."2"
+    )
+
+    EnumConstant(
         "QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT".enum(0x00000001),
         "QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT".enum(0x00000002),
         "QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT".enum(0x00000004),
@@ -497,12 +499,6 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         "QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT".enum(0x00000100),
         "QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT".enum(0x00000200),
         "QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT".enum(0x00000400)
-    )
-
-    EnumConstant(
-        "QUERY_TYPE_OCCLUSION".."0",
-        "QUERY_TYPE_PIPELINE_STATISTICS".."1",
-        "QUERY_TYPE_TIMESTAMP".."2"
     )
 
     EnumConstant(
@@ -556,6 +552,124 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
     )
 
     EnumConstant(
+        "DEPENDENCY_BY_REGION_BIT".enum(0x00000001)
+    )
+
+    EnumConstant(
+        "COMMAND_POOL_CREATE_TRANSIENT_BIT".enum(0x00000001),
+        "COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT".enum(0x00000002)
+    )
+
+    EnumConstant(
+        "COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT".enum(0x00000001)
+    )
+
+    EnumConstant(
+        "COMMAND_BUFFER_LEVEL_PRIMARY".."0",
+        "COMMAND_BUFFER_LEVEL_SECONDARY".."1"
+    )
+
+    EnumConstant(
+        "COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT".enum(0x00000001),
+        "COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT".enum(0x00000002),
+        "COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT".enum(0x00000004)
+    )
+
+    EnumConstant(
+        "QUERY_CONTROL_PRECISE_BIT".enum(0x00000001)
+    )
+
+    EnumConstant(
+        "COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT".enum(0x00000001)
+    )
+
+    EnumConstant(
+        "INDEX_TYPE_UINT16".."0",
+        "INDEX_TYPE_UINT32".."1"
+    )
+
+    EnumConstant(
+        "PIPELINE_CACHE_HEADER_VERSION_ONE".."1"
+    )
+
+    EnumConstant(
+        "PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT".enum(0x00000001),
+        "PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT".enum(0x00000002),
+        "PIPELINE_CREATE_DERIVATIVE_BIT".enum(0x00000004)
+    )
+
+    EnumConstant(
+        "SHADER_STAGE_VERTEX_BIT".enum(0x00000001),
+        "SHADER_STAGE_TESSELLATION_CONTROL_BIT".enum(0x00000002),
+        "SHADER_STAGE_TESSELLATION_EVALUATION_BIT".enum(0x00000004),
+        "SHADER_STAGE_GEOMETRY_BIT".enum(0x00000008),
+        "SHADER_STAGE_FRAGMENT_BIT".enum(0x00000010),
+        "SHADER_STAGE_ALL_GRAPHICS".."0x0000001F",
+        "SHADER_STAGE_COMPUTE_BIT".enum(0x00000020),
+        "SHADER_STAGE_ALL".."0x7FFFFFFF"
+    )
+
+    EnumConstant(
+        "BORDER_COLOR_FLOAT_TRANSPARENT_BLACK".."0",
+        "BORDER_COLOR_INT_TRANSPARENT_BLACK".."1",
+        "BORDER_COLOR_FLOAT_OPAQUE_BLACK".."2",
+        "BORDER_COLOR_INT_OPAQUE_BLACK".."3",
+        "BORDER_COLOR_FLOAT_OPAQUE_WHITE".."4",
+        "BORDER_COLOR_INT_OPAQUE_WHITE".."5"
+    )
+
+    EnumConstant(
+        "FILTER_NEAREST".."0",
+        "FILTER_LINEAR".."1"
+    )
+
+    EnumConstant(
+        "SAMPLER_ADDRESS_MODE_REPEAT".."0",
+        "SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT".."1",
+        "SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE".."2",
+        "SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER".."3"
+    )
+
+    EnumConstant(
+        "SAMPLER_MIPMAP_MODE_NEAREST".."0",
+        "SAMPLER_MIPMAP_MODE_LINEAR".."1"
+    )
+
+    EnumConstant(
+        "COMPARE_OP_NEVER".."0",
+        "COMPARE_OP_LESS".."1",
+        "COMPARE_OP_EQUAL".."2",
+        "COMPARE_OP_LESS_OR_EQUAL".."3",
+        "COMPARE_OP_GREATER".."4",
+        "COMPARE_OP_NOT_EQUAL".."5",
+        "COMPARE_OP_GREATER_OR_EQUAL".."6",
+        "COMPARE_OP_ALWAYS".."7"
+    )
+
+    EnumConstant(
+        "DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT".enum(0x00000001)
+    )
+
+    EnumConstant(
+        "DESCRIPTOR_TYPE_SAMPLER".."0",
+        "DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER".."1",
+        "DESCRIPTOR_TYPE_SAMPLED_IMAGE".."2",
+        "DESCRIPTOR_TYPE_STORAGE_IMAGE".."3",
+        "DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER".."4",
+        "DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER".."5",
+        "DESCRIPTOR_TYPE_UNIFORM_BUFFER".."6",
+        "DESCRIPTOR_TYPE_STORAGE_BUFFER".."7",
+        "DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC".."8",
+        "DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC".."9",
+        "DESCRIPTOR_TYPE_INPUT_ATTACHMENT".."10"
+    )
+
+    EnumConstant(
+        "PIPELINE_BIND_POINT_GRAPHICS".."0",
+        "PIPELINE_BIND_POINT_COMPUTE".."1"
+    )
+
+    EnumConstant(
         "BLEND_FACTOR_ZERO".."0",
         "BLEND_FACTOR_ONE".."1",
         "BLEND_FACTOR_SRC_COLOR".."2",
@@ -590,34 +704,6 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         "COLOR_COMPONENT_G_BIT".enum(0x00000002),
         "COLOR_COMPONENT_B_BIT".enum(0x00000004),
         "COLOR_COMPONENT_A_BIT".enum(0x00000008)
-    )
-
-    EnumConstant(
-        "COMPARE_OP_NEVER".."0",
-        "COMPARE_OP_LESS".."1",
-        "COMPARE_OP_EQUAL".."2",
-        "COMPARE_OP_LESS_OR_EQUAL".."3",
-        "COMPARE_OP_GREATER".."4",
-        "COMPARE_OP_NOT_EQUAL".."5",
-        "COMPARE_OP_GREATER_OR_EQUAL".."6",
-        "COMPARE_OP_ALWAYS".."7"
-    )
-
-    EnumConstant(
-        "PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT".enum(0x00000001),
-        "PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT".enum(0x00000002),
-        "PIPELINE_CREATE_DERIVATIVE_BIT".enum(0x00000004)
-    )
-
-    EnumConstant(
-        "SHADER_STAGE_VERTEX_BIT".enum(0x00000001),
-        "SHADER_STAGE_TESSELLATION_CONTROL_BIT".enum(0x00000002),
-        "SHADER_STAGE_TESSELLATION_EVALUATION_BIT".enum(0x00000004),
-        "SHADER_STAGE_GEOMETRY_BIT".enum(0x00000008),
-        "SHADER_STAGE_FRAGMENT_BIT".enum(0x00000010),
-        "SHADER_STAGE_ALL_GRAPHICS".."0x0000001F",
-        "SHADER_STAGE_COMPUTE_BIT".enum(0x00000020),
-        "SHADER_STAGE_ALL".."0x7FFFFFFF"
     )
 
     EnumConstant(
@@ -700,50 +786,6 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
     )
 
     EnumConstant(
-        "BORDER_COLOR_FLOAT_TRANSPARENT_BLACK".."0",
-        "BORDER_COLOR_INT_TRANSPARENT_BLACK".."1",
-        "BORDER_COLOR_FLOAT_OPAQUE_BLACK".."2",
-        "BORDER_COLOR_INT_OPAQUE_BLACK".."3",
-        "BORDER_COLOR_FLOAT_OPAQUE_WHITE".."4",
-        "BORDER_COLOR_INT_OPAQUE_WHITE".."5"
-    )
-
-    EnumConstant(
-        "FILTER_NEAREST".."0",
-        "FILTER_LINEAR".."1"
-    )
-
-    EnumConstant(
-        "SAMPLER_ADDRESS_MODE_REPEAT".."0",
-        "SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT".."1",
-        "SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE".."2",
-        "SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER".."3"
-    )
-
-    EnumConstant(
-        "SAMPLER_MIPMAP_MODE_NEAREST".."0",
-        "SAMPLER_MIPMAP_MODE_LINEAR".."1"
-    )
-
-    EnumConstant(
-        "DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT".enum(0x00000001)
-    )
-
-    EnumConstant(
-        "DESCRIPTOR_TYPE_SAMPLER".."0",
-        "DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER".."1",
-        "DESCRIPTOR_TYPE_SAMPLED_IMAGE".."2",
-        "DESCRIPTOR_TYPE_STORAGE_IMAGE".."3",
-        "DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER".."4",
-        "DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER".."5",
-        "DESCRIPTOR_TYPE_UNIFORM_BUFFER".."6",
-        "DESCRIPTOR_TYPE_STORAGE_BUFFER".."7",
-        "DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC".."8",
-        "DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC".."9",
-        "DESCRIPTOR_TYPE_INPUT_ATTACHMENT".."10"
-    )
-
-    EnumConstant(
         "ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT".enum(0x00000001)
     )
 
@@ -756,48 +798,6 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
     EnumConstant(
         "ATTACHMENT_STORE_OP_STORE".."0",
         "ATTACHMENT_STORE_OP_DONT_CARE".."1"
-    )
-
-    EnumConstant(
-        "DEPENDENCY_BY_REGION_BIT".enum(0x00000001)
-    )
-
-    EnumConstant(
-        "PIPELINE_BIND_POINT_GRAPHICS".."0",
-        "PIPELINE_BIND_POINT_COMPUTE".."1"
-    )
-
-    EnumConstant(
-        "COMMAND_POOL_CREATE_TRANSIENT_BIT".enum(0x00000001),
-        "COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT".enum(0x00000002)
-    )
-
-    EnumConstant(
-        "COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT".enum(0x00000001)
-    )
-
-    EnumConstant(
-        "COMMAND_BUFFER_LEVEL_PRIMARY".."0",
-        "COMMAND_BUFFER_LEVEL_SECONDARY".."1"
-    )
-
-    EnumConstant(
-        "COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT".enum(0x00000001),
-        "COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT".enum(0x00000002),
-        "COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT".enum(0x00000004)
-    )
-
-    EnumConstant(
-        "QUERY_CONTROL_PRECISE_BIT".enum(0x00000001)
-    )
-
-    EnumConstant(
-        "COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT".enum(0x00000001)
-    )
-
-    EnumConstant(
-        "INDEX_TYPE_UINT16".."0",
-        "INDEX_TYPE_UINT32".."1"
     )
 
     EnumConstant(
@@ -1083,7 +1083,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkMemoryRequirements.p("pMemoryRequirements")
     )
 
-    // Sparse resource memory management API commands
+    // Sparse resource memory management API commands (optional)
 
     void(
         "GetImageSparseMemoryRequirements",
@@ -1179,46 +1179,6 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         nullable..VkAllocationCallbacks.const.p("pAllocator")
     )
 
-    // Event commands
-
-    VkResult(
-        "CreateEvent",
-
-        VkDevice("device"),
-        VkEventCreateInfo.const.p("pCreateInfo"),
-        nullable..VkAllocationCallbacks.const.p("pAllocator"),
-        Check(1)..VkEvent.p("pEvent")
-    )
-
-    void(
-        "DestroyEvent",
-
-        VkDevice("device"),
-        VkEvent("event"),
-        nullable..VkAllocationCallbacks.const.p("pAllocator")
-    )
-
-    VkResult(
-        "GetEventStatus",
-
-        VkDevice("device"),
-        VkEvent("event")
-    )
-
-    VkResult(
-        "SetEvent",
-
-        VkDevice("device"),
-        VkEvent("event")
-    )
-
-    VkResult(
-        "ResetEvent",
-
-        VkDevice("device"),
-        VkEvent("event")
-    )
-
     // Query commands
 
     VkResult(
@@ -1270,25 +1230,6 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         nullable..VkAllocationCallbacks.const.p("pAllocator")
     )
 
-    // Buffer view commands
-
-    VkResult(
-        "CreateBufferView",
-
-        VkDevice("device"),
-        VkBufferViewCreateInfo.const.p("pCreateInfo"),
-        nullable..VkAllocationCallbacks.const.p("pAllocator"),
-        Check(1)..VkBufferView.p("pView")
-    )
-
-    void(
-        "DestroyBufferView",
-
-        VkDevice("device"),
-        VkBufferView("bufferView"),
-        nullable..VkAllocationCallbacks.const.p("pAllocator")
-    )
-
     // Image commands
 
     VkResult(
@@ -1333,6 +1274,268 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
 
         VkDevice("device"),
         VkImageView("imageView"),
+        nullable..VkAllocationCallbacks.const.p("pAllocator")
+    )
+
+    // Command pool commands
+
+    VkResult(
+        "CreateCommandPool",
+
+        VkDevice("device"),
+        VkCommandPoolCreateInfo.const.p("pCreateInfo"),
+        nullable..VkAllocationCallbacks.const.p("pAllocator"),
+        Check(1)..VkCommandPool.p("pCommandPool")
+    )
+
+    void(
+        "DestroyCommandPool",
+
+        VkDevice("device"),
+        VkCommandPool("commandPool"),
+        nullable..VkAllocationCallbacks.const.p("pAllocator")
+    )
+
+    VkResult(
+        "ResetCommandPool",
+
+        VkDevice("device"),
+        VkCommandPool("commandPool"),
+        VkCommandPoolResetFlags("flags")
+    )
+
+    // Command buffer commands
+
+    VkResult(
+        "AllocateCommandBuffers",
+
+        VkDevice("device"),
+        VkCommandBufferAllocateInfo.const.p("pAllocateInfo"),
+        Check("pAllocateInfo.commandBufferCount()")..VkCommandBuffer.p("pCommandBuffers")
+    )
+
+    void(
+        "FreeCommandBuffers",
+
+        VkDevice("device"),
+        VkCommandPool("commandPool"),
+        AutoSize("pCommandBuffers")..uint32_t("commandBufferCount"),
+        nullable..VkCommandBuffer.const.p("pCommandBuffers")
+    )
+
+    VkResult(
+        "BeginCommandBuffer",
+
+        VkCommandBuffer("commandBuffer"),
+        VkCommandBufferBeginInfo.const.p("pBeginInfo")
+    )
+
+    VkResult(
+        "EndCommandBuffer",
+
+        VkCommandBuffer("commandBuffer")
+    )
+
+    VkResult(
+        "ResetCommandBuffer",
+
+        VkCommandBuffer("commandBuffer"),
+        VkCommandBufferResetFlags("flags")
+    )
+
+    // Command buffer building commands
+
+    void(
+        "CmdCopyBuffer",
+
+        VkCommandBuffer("commandBuffer"),
+        VkBuffer("srcBuffer"),
+        VkBuffer("dstBuffer"),
+        AutoSize("pRegions")..uint32_t("regionCount"),
+        VkBufferCopy.const.p("pRegions")
+    )
+
+    void(
+        "CmdCopyImage",
+
+        VkCommandBuffer("commandBuffer"),
+        VkImage("srcImage"),
+        VkImageLayout("srcImageLayout"),
+        VkImage("dstImage"),
+        VkImageLayout("dstImageLayout"),
+        AutoSize("pRegions")..uint32_t("regionCount"),
+        VkImageCopy.const.p("pRegions")
+    )
+
+    void(
+        "CmdCopyBufferToImage",
+
+        VkCommandBuffer("commandBuffer"),
+        VkBuffer("srcBuffer"),
+        VkImage("dstImage"),
+        VkImageLayout("dstImageLayout"),
+        AutoSize("pRegions")..uint32_t("regionCount"),
+        VkBufferImageCopy.const.p("pRegions")
+    )
+
+    void(
+        "CmdCopyImageToBuffer",
+
+        VkCommandBuffer("commandBuffer"),
+        VkImage("srcImage"),
+        VkImageLayout("srcImageLayout"),
+        VkBuffer("dstBuffer"),
+        AutoSize("pRegions")..uint32_t("regionCount"),
+        VkBufferImageCopy.const.p("pRegions")
+    )
+
+    void(
+        "CmdUpdateBuffer",
+
+        VkCommandBuffer("commandBuffer"),
+        VkBuffer("dstBuffer"),
+        VkDeviceSize("dstOffset"),
+        AutoSize("pData")..VkDeviceSize("dataSize"),
+        void.const.p("pData")
+    )
+
+    void(
+        "CmdFillBuffer",
+
+        VkCommandBuffer("commandBuffer"),
+        VkBuffer("dstBuffer"),
+        VkDeviceSize("dstOffset"),
+        VkDeviceSize("size"),
+        uint32_t("data")
+    )
+
+    void(
+        "CmdPipelineBarrier",
+
+        VkCommandBuffer("commandBuffer"),
+        VkPipelineStageFlags("srcStageMask"),
+        VkPipelineStageFlags("dstStageMask"),
+        VkDependencyFlags("dependencyFlags"),
+        AutoSize("pMemoryBarriers")..uint32_t("memoryBarrierCount"),
+        nullable..VkMemoryBarrier.const.p("pMemoryBarriers"),
+        AutoSize("pBufferMemoryBarriers")..uint32_t("bufferMemoryBarrierCount"),
+        nullable..VkBufferMemoryBarrier.const.p("pBufferMemoryBarriers"),
+        AutoSize("pImageMemoryBarriers")..uint32_t("imageMemoryBarrierCount"),
+        nullable..VkImageMemoryBarrier.const.p("pImageMemoryBarriers")
+    )
+
+    void(
+        "CmdBeginQuery",
+
+        VkCommandBuffer("commandBuffer"),
+        VkQueryPool("queryPool"),
+        uint32_t("query"),
+        VkQueryControlFlags("flags")
+    )
+
+    void(
+        "CmdEndQuery",
+
+        VkCommandBuffer("commandBuffer"),
+        VkQueryPool("queryPool"),
+        uint32_t("query")
+    )
+
+    void(
+        "CmdResetQueryPool",
+
+        VkCommandBuffer("commandBuffer"),
+        VkQueryPool("queryPool"),
+        uint32_t("firstQuery"),
+        uint32_t("queryCount")
+    )
+
+    void(
+        "CmdWriteTimestamp",
+
+        VkCommandBuffer("commandBuffer"),
+        VkPipelineStageFlagBits("pipelineStage"),
+        VkQueryPool("queryPool"),
+        uint32_t("query")
+    )
+
+    void(
+        "CmdCopyQueryPoolResults",
+
+        VkCommandBuffer("commandBuffer"),
+        VkQueryPool("queryPool"),
+        uint32_t("firstQuery"),
+        uint32_t("queryCount"),
+        VkBuffer("dstBuffer"),
+        VkDeviceSize("dstOffset"),
+        VkDeviceSize("stride"),
+        VkQueryResultFlags("flags")
+    )
+
+    void(
+        "CmdExecuteCommands",
+
+        VkCommandBuffer("commandBuffer"),
+        AutoSize("pCommandBuffers")..uint32_t("commandBufferCount"),
+        VkCommandBuffer.const.p("pCommandBuffers")
+    )
+
+    // Event commands
+
+    VkResult(
+        "CreateEvent",
+
+        VkDevice("device"),
+        VkEventCreateInfo.const.p("pCreateInfo"),
+        nullable..VkAllocationCallbacks.const.p("pAllocator"),
+        Check(1)..VkEvent.p("pEvent")
+    )
+
+    void(
+        "DestroyEvent",
+
+        VkDevice("device"),
+        VkEvent("event"),
+        nullable..VkAllocationCallbacks.const.p("pAllocator")
+    )
+
+    VkResult(
+        "GetEventStatus",
+
+        VkDevice("device"),
+        VkEvent("event")
+    )
+
+    VkResult(
+        "SetEvent",
+
+        VkDevice("device"),
+        VkEvent("event")
+    )
+
+    VkResult(
+        "ResetEvent",
+
+        VkDevice("device"),
+        VkEvent("event")
+    )
+
+    // Buffer view commands
+
+    VkResult(
+        "CreateBufferView",
+
+        VkDevice("device"),
+        VkBufferViewCreateInfo.const.p("pCreateInfo"),
+        nullable..VkAllocationCallbacks.const.p("pAllocator"),
+        Check(1)..VkBufferView.p("pView")
+    )
+
+    void(
+        "DestroyBufferView",
+
+        VkDevice("device"),
+        VkBufferView("bufferView"),
         nullable..VkAllocationCallbacks.const.p("pAllocator")
     )
 
@@ -1392,18 +1595,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkPipelineCache.const.p("pSrcCaches")
     )
 
-    // Pipeline commands
-
-    VkResult(
-        "CreateGraphicsPipelines",
-
-        VkDevice("device"),
-        VkPipelineCache("pipelineCache"),
-        AutoSize("pCreateInfos", "pPipelines")..uint32_t("createInfoCount"),
-        VkGraphicsPipelineCreateInfo.const.p("pCreateInfos"),
-        nullable..VkAllocationCallbacks.const.p("pAllocator"),
-        VkPipeline.p("pPipelines")
-    )
+    // Compute Pipeline commands
 
     VkResult(
         "CreateComputePipelines",
@@ -1533,6 +1725,113 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         nullable..VkCopyDescriptorSet.const.p("pDescriptorCopies")
     )
 
+    // Command buffer building commands
+
+    void(
+        "CmdBindPipeline",
+
+        VkCommandBuffer("commandBuffer"),
+        VkPipelineBindPoint("pipelineBindPoint"),
+        VkPipeline("pipeline")
+    )
+
+    void(
+        "CmdBindDescriptorSets",
+
+        VkCommandBuffer("commandBuffer"),
+        VkPipelineBindPoint("pipelineBindPoint"),
+        VkPipelineLayout("layout"),
+        uint32_t("firstSet"),
+        AutoSize("pDescriptorSets")..uint32_t("descriptorSetCount"),
+        VkDescriptorSet.const.p("pDescriptorSets"),
+        AutoSize("pDynamicOffsets")..uint32_t("dynamicOffsetCount"),
+        nullable..uint32_t.const.p("pDynamicOffsets")
+    )
+
+    void(
+        "CmdClearColorImage",
+
+        VkCommandBuffer("commandBuffer"),
+        VkImage("image"),
+        VkImageLayout("imageLayout"),
+        nullable..VkClearColorValue.const.p("pColor"),
+        AutoSize("pRanges")..uint32_t("rangeCount"),
+        VkImageSubresourceRange.const.p("pRanges")
+    )
+
+    void(
+        "CmdDispatch",
+
+        VkCommandBuffer("commandBuffer"),
+        uint32_t("groupCountX"),
+        uint32_t("groupCountY"),
+        uint32_t("groupCountZ")
+    )
+
+    void(
+        "CmdDispatchIndirect",
+
+        VkCommandBuffer("commandBuffer"),
+        VkBuffer("buffer"),
+        VkDeviceSize("offset")
+    )
+
+    void(
+        "CmdSetEvent",
+
+        VkCommandBuffer("commandBuffer"),
+        VkEvent("event"),
+        VkPipelineStageFlags("stageMask")
+    )
+
+    void(
+        "CmdResetEvent",
+
+        VkCommandBuffer("commandBuffer"),
+        VkEvent("event"),
+        VkPipelineStageFlags("stageMask")
+    )
+
+    void(
+        "CmdWaitEvents",
+
+        VkCommandBuffer("commandBuffer"),
+        AutoSize("pEvents")..uint32_t("eventCount"),
+        VkEvent.const.p("pEvents"),
+        VkPipelineStageFlags("srcStageMask"),
+        VkPipelineStageFlags("dstStageMask"),
+        AutoSize("pMemoryBarriers")..uint32_t("memoryBarrierCount"),
+        nullable..VkMemoryBarrier.const.p("pMemoryBarriers"),
+        AutoSize("pBufferMemoryBarriers")..uint32_t("bufferMemoryBarrierCount"),
+        nullable..VkBufferMemoryBarrier.const.p("pBufferMemoryBarriers"),
+        AutoSize("pImageMemoryBarriers")..uint32_t("imageMemoryBarrierCount"),
+        nullable..VkImageMemoryBarrier.const.p("pImageMemoryBarriers")
+    )
+
+    void(
+        "CmdPushConstants",
+
+        VkCommandBuffer("commandBuffer"),
+        VkPipelineLayout("layout"),
+        VkShaderStageFlags("stageFlags"),
+        uint32_t("offset"),
+        AutoSize("pValues")..uint32_t("size"),
+        void.const.p("pValues")
+    )
+
+    // Graphics Pipeline commands
+
+    VkResult(
+        "CreateGraphicsPipelines",
+
+        VkDevice("device"),
+        VkPipelineCache("pipelineCache"),
+        AutoSize("pCreateInfos", "pPipelines")..uint32_t("createInfoCount"),
+        VkGraphicsPipelineCreateInfo.const.p("pCreateInfos"),
+        nullable..VkAllocationCallbacks.const.p("pAllocator"),
+        VkPipeline.p("pPipelines")
+    )
+
     // Pass commands
 
     VkResult(
@@ -1577,81 +1876,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkExtent2D.p("pGranularity")
     )
 
-    // Command pool commands
-
-    VkResult(
-        "CreateCommandPool",
-
-        VkDevice("device"),
-        VkCommandPoolCreateInfo.const.p("pCreateInfo"),
-        nullable..VkAllocationCallbacks.const.p("pAllocator"),
-        Check(1)..VkCommandPool.p("pCommandPool")
-    )
-
-    void(
-        "DestroyCommandPool",
-
-        VkDevice("device"),
-        VkCommandPool("commandPool"),
-        nullable..VkAllocationCallbacks.const.p("pAllocator")
-    )
-
-    VkResult(
-        "ResetCommandPool",
-
-        VkDevice("device"),
-        VkCommandPool("commandPool"),
-        VkCommandPoolResetFlags("flags")
-    )
-
-    // Command buffer commands
-
-    VkResult(
-        "AllocateCommandBuffers",
-
-        VkDevice("device"),
-        VkCommandBufferAllocateInfo.const.p("pAllocateInfo"),
-        Check("pAllocateInfo.commandBufferCount()")..VkCommandBuffer.p("pCommandBuffers")
-    )
-
-    void(
-        "FreeCommandBuffers",
-
-        VkDevice("device"),
-        VkCommandPool("commandPool"),
-        AutoSize("pCommandBuffers")..uint32_t("commandBufferCount"),
-        nullable..VkCommandBuffer.const.p("pCommandBuffers")
-    )
-
-    VkResult(
-        "BeginCommandBuffer",
-
-        VkCommandBuffer("commandBuffer"),
-        VkCommandBufferBeginInfo.const.p("pBeginInfo")
-    )
-
-    VkResult(
-        "EndCommandBuffer",
-
-        VkCommandBuffer("commandBuffer")
-    )
-
-    VkResult(
-        "ResetCommandBuffer",
-
-        VkCommandBuffer("commandBuffer"),
-        VkCommandBufferResetFlags("flags")
-    )
-
     // Command buffer building commands
-
-    void(
-        "CmdBindPipeline",
-
-        VkCommandBuffer("commandBuffer"),
-        VkPipelineBindPoint("pipelineBindPoint"),
-        VkPipeline("pipeline")
-    )
 
     void(
         "CmdSetViewport",
@@ -1727,19 +1952,6 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
     )
 
     void(
-        "CmdBindDescriptorSets",
-
-        VkCommandBuffer("commandBuffer"),
-        VkPipelineBindPoint("pipelineBindPoint"),
-        VkPipelineLayout("layout"),
-        uint32_t("firstSet"),
-        AutoSize("pDescriptorSets")..uint32_t("descriptorSetCount"),
-        VkDescriptorSet.const.p("pDescriptorSets"),
-        AutoSize("pDynamicOffsets")..uint32_t("dynamicOffsetCount"),
-        nullable..uint32_t.const.p("pDynamicOffsets")
-    )
-
-    void(
         "CmdBindIndexBuffer",
 
         VkCommandBuffer("commandBuffer"),
@@ -1800,45 +2012,6 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
     )
 
     void(
-        "CmdDispatch",
-
-        VkCommandBuffer("commandBuffer"),
-        uint32_t("groupCountX"),
-        uint32_t("groupCountY"),
-        uint32_t("groupCountZ")
-    )
-
-    void(
-        "CmdDispatchIndirect",
-
-        VkCommandBuffer("commandBuffer"),
-        VkBuffer("buffer"),
-        VkDeviceSize("offset")
-    )
-
-    void(
-        "CmdCopyBuffer",
-
-        VkCommandBuffer("commandBuffer"),
-        VkBuffer("srcBuffer"),
-        VkBuffer("dstBuffer"),
-        AutoSize("pRegions")..uint32_t("regionCount"),
-        VkBufferCopy.const.p("pRegions")
-    )
-
-    void(
-        "CmdCopyImage",
-
-        VkCommandBuffer("commandBuffer"),
-        VkImage("srcImage"),
-        VkImageLayout("srcImageLayout"),
-        VkImage("dstImage"),
-        VkImageLayout("dstImageLayout"),
-        AutoSize("pRegions")..uint32_t("regionCount"),
-        VkImageCopy.const.p("pRegions")
-    )
-
-    void(
         "CmdBlitImage",
 
         VkCommandBuffer("commandBuffer"),
@@ -1849,59 +2022,6 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         AutoSize("pRegions")..uint32_t("regionCount"),
         VkImageBlit.const.p("pRegions"),
         VkFilter("filter")
-    )
-
-    void(
-        "CmdCopyBufferToImage",
-
-        VkCommandBuffer("commandBuffer"),
-        VkBuffer("srcBuffer"),
-        VkImage("dstImage"),
-        VkImageLayout("dstImageLayout"),
-        AutoSize("pRegions")..uint32_t("regionCount"),
-        VkBufferImageCopy.const.p("pRegions")
-    )
-
-    void(
-        "CmdCopyImageToBuffer",
-
-        VkCommandBuffer("commandBuffer"),
-        VkImage("srcImage"),
-        VkImageLayout("srcImageLayout"),
-        VkBuffer("dstBuffer"),
-        AutoSize("pRegions")..uint32_t("regionCount"),
-        VkBufferImageCopy.const.p("pRegions")
-    )
-
-    void(
-        "CmdUpdateBuffer",
-
-        VkCommandBuffer("commandBuffer"),
-        VkBuffer("dstBuffer"),
-        VkDeviceSize("dstOffset"),
-        AutoSize("pData")..VkDeviceSize("dataSize"),
-        void.const.p("pData")
-    )
-
-    void(
-        "CmdFillBuffer",
-
-        VkCommandBuffer("commandBuffer"),
-        VkBuffer("dstBuffer"),
-        VkDeviceSize("dstOffset"),
-        VkDeviceSize("size"),
-        uint32_t("data")
-    )
-
-    void(
-        "CmdClearColorImage",
-
-        VkCommandBuffer("commandBuffer"),
-        VkImage("image"),
-        VkImageLayout("imageLayout"),
-        nullable..VkClearColorValue.const.p("pColor"),
-        AutoSize("pRanges")..uint32_t("rangeCount"),
-        VkImageSubresourceRange.const.p("pRanges")
     )
 
     void(
@@ -1938,112 +2058,6 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
     )
 
     void(
-        "CmdSetEvent",
-
-        VkCommandBuffer("commandBuffer"),
-        VkEvent("event"),
-        VkPipelineStageFlags("stageMask")
-    )
-
-    void(
-        "CmdResetEvent",
-
-        VkCommandBuffer("commandBuffer"),
-        VkEvent("event"),
-        VkPipelineStageFlags("stageMask")
-    )
-
-    void(
-        "CmdWaitEvents",
-
-        VkCommandBuffer("commandBuffer"),
-        AutoSize("pEvents")..uint32_t("eventCount"),
-        VkEvent.const.p("pEvents"),
-        VkPipelineStageFlags("srcStageMask"),
-        VkPipelineStageFlags("dstStageMask"),
-        AutoSize("pMemoryBarriers")..uint32_t("memoryBarrierCount"),
-        nullable..VkMemoryBarrier.const.p("pMemoryBarriers"),
-        AutoSize("pBufferMemoryBarriers")..uint32_t("bufferMemoryBarrierCount"),
-        nullable..VkBufferMemoryBarrier.const.p("pBufferMemoryBarriers"),
-        AutoSize("pImageMemoryBarriers")..uint32_t("imageMemoryBarrierCount"),
-        nullable..VkImageMemoryBarrier.const.p("pImageMemoryBarriers")
-    )
-
-    void(
-        "CmdPipelineBarrier",
-
-        VkCommandBuffer("commandBuffer"),
-        VkPipelineStageFlags("srcStageMask"),
-        VkPipelineStageFlags("dstStageMask"),
-        VkDependencyFlags("dependencyFlags"),
-        AutoSize("pMemoryBarriers")..uint32_t("memoryBarrierCount"),
-        nullable..VkMemoryBarrier.const.p("pMemoryBarriers"),
-        AutoSize("pBufferMemoryBarriers")..uint32_t("bufferMemoryBarrierCount"),
-        nullable..VkBufferMemoryBarrier.const.p("pBufferMemoryBarriers"),
-        AutoSize("pImageMemoryBarriers")..uint32_t("imageMemoryBarrierCount"),
-        nullable..VkImageMemoryBarrier.const.p("pImageMemoryBarriers")
-    )
-
-    void(
-        "CmdBeginQuery",
-
-        VkCommandBuffer("commandBuffer"),
-        VkQueryPool("queryPool"),
-        uint32_t("query"),
-        VkQueryControlFlags("flags")
-    )
-
-    void(
-        "CmdEndQuery",
-
-        VkCommandBuffer("commandBuffer"),
-        VkQueryPool("queryPool"),
-        uint32_t("query")
-    )
-
-    void(
-        "CmdResetQueryPool",
-
-        VkCommandBuffer("commandBuffer"),
-        VkQueryPool("queryPool"),
-        uint32_t("firstQuery"),
-        uint32_t("queryCount")
-    )
-
-    void(
-        "CmdWriteTimestamp",
-
-        VkCommandBuffer("commandBuffer"),
-        VkPipelineStageFlagBits("pipelineStage"),
-        VkQueryPool("queryPool"),
-        uint32_t("query")
-    )
-
-    void(
-        "CmdCopyQueryPoolResults",
-
-        VkCommandBuffer("commandBuffer"),
-        VkQueryPool("queryPool"),
-        uint32_t("firstQuery"),
-        uint32_t("queryCount"),
-        VkBuffer("dstBuffer"),
-        VkDeviceSize("dstOffset"),
-        VkDeviceSize("stride"),
-        VkQueryResultFlags("flags")
-    )
-
-    void(
-        "CmdPushConstants",
-
-        VkCommandBuffer("commandBuffer"),
-        VkPipelineLayout("layout"),
-        VkShaderStageFlags("stageFlags"),
-        uint32_t("offset"),
-        AutoSize("pValues")..uint32_t("size"),
-        void.const.p("pValues")
-    )
-
-    void(
         "CmdBeginRenderPass",
 
         VkCommandBuffer("commandBuffer"),
@@ -2062,14 +2076,6 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         "CmdEndRenderPass",
 
         VkCommandBuffer("commandBuffer")
-    )
-
-    void(
-        "CmdExecuteCommands",
-
-        VkCommandBuffer("commandBuffer"),
-        AutoSize("pCommandBuffers")..uint32_t("commandBufferCount"),
-        VkCommandBuffer.const.p("pCommandBuffers")
     )
 
 }

@@ -10,7 +10,7 @@ import vulkan.*
 
 val VK12 = "VK12".nativeClass(Module.VULKAN, "VK12", prefix = "VK", binding = VK_BINDING_INSTANCE) {
     extends = VK11
-    
+
     EnumConstant(
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_FEATURES".."49",
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_PROPERTIES".."50",
@@ -69,16 +69,29 @@ val VK12 = "VK12".nativeClass(Module.VULKAN, "VK12", prefix = "VK", binding = VK
     )
 
     EnumConstant(
-        "DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT".enum(0x00000002)
+        "BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT".enum(0x00020000)
     )
 
     EnumConstant(
-        "DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT".enum(0x00000002)
+        "BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT".enum(0x00000010)
+    )
+
+    EnumConstant(
+        "MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT".enum(0x00000002),
+        "MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT".enum(0x00000004)
     )
 
     EnumConstant(
         "ERROR_FRAGMENTATION".."-1000161000",
         "ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS".."-1000257000"
+    )
+
+    EnumConstant(
+        "DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT".enum(0x00000002)
+    )
+
+    EnumConstant(
+        "DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT".enum(0x00000002)
     )
 
     EnumConstant(
@@ -94,19 +107,6 @@ val VK12 = "VK12".nativeClass(Module.VULKAN, "VK12", prefix = "VK", binding = VK
         "IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL".."1000241001",
         "IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL".."1000241002",
         "IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL".."1000241003"
-    )
-
-    EnumConstant(
-        "BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT".enum(0x00020000)
-    )
-
-    EnumConstant(
-        "BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT".enum(0x00000010)
-    )
-
-    EnumConstant(
-        "MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT".enum(0x00000002),
-        "MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT".enum(0x00000004)
     )
 
     EnumConstant(
@@ -136,7 +136,8 @@ val VK12 = "VK12".nativeClass(Module.VULKAN, "VK12", prefix = "VK", binding = VK
         "DRIVER_ID_MESA_NVK".."24",
         "DRIVER_ID_IMAGINATION_OPEN_SOURCE_MESA".."25",
         "DRIVER_ID_MESA_HONEYKRISP".."26",
-        "DRIVER_ID_VULKAN_SC_EMULATION_ON_VULKAN".."27"
+        "DRIVER_ID_VULKAN_SC_EMULATION_ON_VULKAN".."27",
+        "DRIVER_ID_MESA_KOSMICKRISP".."28"
     )
 
     EnumConstant(
@@ -154,6 +155,15 @@ val VK12 = "VK12".nativeClass(Module.VULKAN, "VK12", prefix = "VK", binding = VK
     )
 
     EnumConstant(
+        "SEMAPHORE_TYPE_BINARY".."0",
+        "SEMAPHORE_TYPE_TIMELINE".."1"
+    )
+
+    EnumConstant(
+        "SEMAPHORE_WAIT_ANY_BIT".enum(0x00000001)
+    )
+
+    EnumConstant(
         "DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT".enum(0x00000001),
         "DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT".enum(0x00000002),
         "DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT".enum(0x00000004),
@@ -166,13 +176,63 @@ val VK12 = "VK12".nativeClass(Module.VULKAN, "VK12", prefix = "VK", binding = VK
         "SAMPLER_REDUCTION_MODE_MAX".."2"
     )
 
-    EnumConstant(
-        "SEMAPHORE_TYPE_BINARY".."0",
-        "SEMAPHORE_TYPE_TIMELINE".."1"
+    // Promoted from VK_EXT_host_query_reset (extension 262)
+
+    void(
+        "ResetQueryPool",
+
+        VkDevice("device"),
+        VkQueryPool("queryPool"),
+        uint32_t("firstQuery"),
+        uint32_t("queryCount")
     )
 
-    EnumConstant(
-        "SEMAPHORE_WAIT_ANY_BIT".enum(0x00000001)
+    // Promoted from VK_KHR_timeline_semaphore (extension 208)
+
+    VkResult(
+        "GetSemaphoreCounterValue",
+
+        VkDevice("device"),
+        VkSemaphore("semaphore"),
+        Check(1)..uint64_t.p("pValue")
+    )
+
+    VkResult(
+        "WaitSemaphores",
+
+        VkDevice("device"),
+        VkSemaphoreWaitInfo.const.p("pWaitInfo"),
+        uint64_t("timeout")
+    )
+
+    VkResult(
+        "SignalSemaphore",
+
+        VkDevice("device"),
+        VkSemaphoreSignalInfo.const.p("pSignalInfo")
+    )
+
+    // Promoted from VK_KHR_buffer_device_address (extension 258)
+
+    VkDeviceAddress(
+        "GetBufferDeviceAddress",
+
+        VkDevice("device"),
+        VkBufferDeviceAddressInfo.const.p("pInfo")
+    )
+
+    uint64_t(
+        "GetBufferOpaqueCaptureAddress",
+
+        VkDevice("device"),
+        VkBufferDeviceAddressInfo.const.p("pInfo")
+    )
+
+    uint64_t(
+        "GetDeviceMemoryOpaqueCaptureAddress",
+
+        VkDevice("device"),
+        VkDeviceMemoryOpaqueCaptureAddressInfo.const.p("pInfo")
     )
 
     // Promoted from VK_KHR_draw_indirect_count (extension 170)
@@ -233,65 +293,6 @@ val VK12 = "VK12".nativeClass(Module.VULKAN, "VK12", prefix = "VK", binding = VK
 
         VkCommandBuffer("commandBuffer"),
         VkSubpassEndInfo.const.p("pSubpassEndInfo")
-    )
-
-    // Promoted from VK_EXT_host_query_reset (extension 262)
-
-    void(
-        "ResetQueryPool",
-
-        VkDevice("device"),
-        VkQueryPool("queryPool"),
-        uint32_t("firstQuery"),
-        uint32_t("queryCount")
-    )
-
-    // Promoted from VK_KHR_timeline_semaphore (extension 208)
-
-    VkResult(
-        "GetSemaphoreCounterValue",
-
-        VkDevice("device"),
-        VkSemaphore("semaphore"),
-        Check(1)..uint64_t.p("pValue")
-    )
-
-    VkResult(
-        "WaitSemaphores",
-
-        VkDevice("device"),
-        VkSemaphoreWaitInfo.const.p("pWaitInfo"),
-        uint64_t("timeout")
-    )
-
-    VkResult(
-        "SignalSemaphore",
-
-        VkDevice("device"),
-        VkSemaphoreSignalInfo.const.p("pSignalInfo")
-    )
-
-    // Promoted from VK_KHR_buffer_device_address (extension 258)
-
-    VkDeviceAddress(
-        "GetBufferDeviceAddress",
-
-        VkDevice("device"),
-        VkBufferDeviceAddressInfo.const.p("pInfo")
-    )
-
-    uint64_t(
-        "GetBufferOpaqueCaptureAddress",
-
-        VkDevice("device"),
-        VkBufferDeviceAddressInfo.const.p("pInfo")
-    )
-
-    uint64_t(
-        "GetDeviceMemoryOpaqueCaptureAddress",
-
-        VkDevice("device"),
-        VkDeviceMemoryOpaqueCaptureAddressInfo.const.p("pInfo")
     )
 
 }
