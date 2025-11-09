@@ -3230,6 +3230,12 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1input_1is_1mouse_
     return (jboolean)nk_input_is_mouse_hovering_rect(i, *rect);
 }
 
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1input_1is_1mouse_1moved(JNIEnv *__env, jclass clazz, jlong iAddress) {
+    struct nk_input const *i = (struct nk_input const *)(uintptr_t)iAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jboolean)nk_input_is_mouse_moved(i);
+}
+
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1input_1mouse_1clicked(JNIEnv *__env, jclass clazz, jlong iAddress, jint id, jlong rectAddress) {
     struct nk_input const *i = (struct nk_input const *)(uintptr_t)iAddress;
     struct nk_rect *rect = (struct nk_rect *)(uintptr_t)rectAddress;

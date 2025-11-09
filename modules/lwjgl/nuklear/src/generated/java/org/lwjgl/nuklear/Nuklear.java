@@ -7911,6 +7911,17 @@ public class Nuklear {
         return nnk_input_is_mouse_hovering_rect(i.address(), rect.address());
     }
 
+    // --- [ nk_input_is_mouse_moved ] ---
+
+    /** {@code nk_bool nk_input_is_mouse_moved(struct nk_input const * i)} */
+    public static native boolean nnk_input_is_mouse_moved(long i);
+
+    /** {@code nk_bool nk_input_is_mouse_moved(struct nk_input const * i)} */
+    @NativeType("nk_bool")
+    public static boolean nk_input_is_mouse_moved(@NativeType("struct nk_input const *") NkInput i) {
+        return nnk_input_is_mouse_moved(i.address());
+    }
+
     // --- [ nk_input_mouse_clicked ] ---
 
     /** {@code nk_bool nk_input_mouse_clicked(struct nk_input const * i, enum nk_buttons id, struct nk_rect rect)} */

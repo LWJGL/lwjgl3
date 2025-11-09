@@ -4014,6 +4014,12 @@ ENABLE_WARNINGS()""")
         )
 
         nk_bool(
+            "input_is_mouse_moved",
+
+            nk_input.const.p("i")
+        )
+
+        nk_bool(
             "input_mouse_clicked",
 
             nk_input.const.p("i"),
