@@ -8624,7 +8624,7 @@ mdb_cursor_del0(MDB_cursor *mc)
 						goto fail;
 				}
 				if (m3->mc_xcursor && !(m3->mc_flags & C_EOF)) {
-					MDB_node *node = NODEPTR(m3->mc_pg[m3->mc_top], m3->mc_ki[m3->mc_top]);
+					MDB_node *node = NODEPTR(m3->mc_pg[mc->mc_top], m3->mc_ki[mc->mc_top]);
 					/* If this node has dupdata, it may need to be reinited
 					 * because its data has moved.
 					 * If the xcursor was not initd it must be reinited.
