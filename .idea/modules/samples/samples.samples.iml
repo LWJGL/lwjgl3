@@ -52,6 +52,7 @@
     <orderEntry type="module" module-name="lwjgl.opus" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.par" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.remotery" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.renderdoc" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.rpmalloc" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.sdl" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.shaderc" scope="TEST" />

@@ -89,7 +89,7 @@ abstract class APIBinding(
     ) = Unit
 
     /** Can be overridden to implement a custom condition for checking the function address. */
-    open fun shouldCheckFunctionAddress(function: Func) = apiCapabilities.ordinal > 1
+    open fun shouldCheckFunctionAddress(function: Func) = apiCapabilities.ordinal > 1 && !function.hasExplicitFunctionAddress
 
     /** Can be overridden to add custom parameter checks. */
     open fun addParameterChecks(

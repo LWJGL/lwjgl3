@@ -28,6 +28,7 @@ bin/classes/lwjgl/openxr;\
 bin/classes/lwjgl/opus;\
 bin/classes/lwjgl/par;\
 bin/classes/lwjgl/remotery;\
+bin/classes/lwjgl/renderdoc;\
 bin/classes/lwjgl/rpmalloc;\
 bin/classes/lwjgl/sdl;\
 bin/classes/lwjgl/shaderc;\
