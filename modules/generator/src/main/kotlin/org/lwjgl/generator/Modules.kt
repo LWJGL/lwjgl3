@@ -590,8 +590,8 @@ git branch -D @{-1}""")}"""}()}
         "org.lwjgl.util.renderdoc",
         """
         Contains bindings to the ${url("https://renderdoc.org", "RenderDoc")} in-application API. RenderDoc is a free MIT licensed stand-alone graphics
-        debugger that allows quick and easy single-frame capture and detailed introspection of any application using Vulkan, D3D11, OpenGL & OpenGL ES or D3D12
-        across Windows, Linux, Android, or Nintendo Switch™.
+        debugger that allows quick and easy single-frame capture and detailed introspection of any application using Vulkan, D3D11, OpenGL &amp; OpenGL ES or
+        D3D12 across Windows, Linux, Android, or Nintendo Switch™.
 
         <h3>Resources</h3>
         ${
