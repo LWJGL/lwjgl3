@@ -25,6 +25,11 @@ public class DynamicLinkLoader {
         RTLD_LOCAL  = 0x4,
         RTLD_GLOBAL = 0x8;
 
+    public static final int
+        RTLD_NOLOAD   = 0x10,
+        RTLD_NODELETE = 0x80,
+        RTLD_FIRST    = 0x100;
+
     public static final long
         RTLD_NEXT      = 0xFFFFFFFFFFFFFFFFL,
         RTLD_DEFAULT   = 0xFFFFFFFFFFFFFFFEL,

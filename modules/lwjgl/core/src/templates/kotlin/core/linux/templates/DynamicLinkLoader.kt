@@ -47,5 +47,4 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_LINUX, nativeSubPath = "
 
         opaque_p("handle")
     )
-
 }
