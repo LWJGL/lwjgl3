@@ -71,22 +71,22 @@ MSDF_API int msdf_ft_load_font_data(msdf_ft_handle handle, const void* data, con
     return MSDF_SUCCESS;
 }
 
-MSDF_API int msdf_ft_font_load_glyph(msdf_ft_font_handle font, const unsigned cp, const int coordinateScaling, msdf_shape_handle* shape) {
+MSDF_API int msdf_ft_font_load_glyph(msdf_ft_font_handle font, const unsigned cp, const int coordinateScaling, double *advance, msdf_shape_handle* shape) {
     if(font == nullptr || shape == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
     auto* actual_shape = new msdfgen::Shape();
-    msdfgen::loadGlyph(*actual_shape, reinterpret_cast<msdfgen::FontHandle*>(font), cp, (msdfgen::FontCoordinateScaling)coordinateScaling);
+    msdfgen::loadGlyph(*actual_shape, reinterpret_cast<msdfgen::FontHandle*>(font), cp, (msdfgen::FontCoordinateScaling)coordinateScaling, advance);
     *shape = reinterpret_cast<msdf_shape_handle>(actual_shape);
     return MSDF_SUCCESS;
 }
 
-MSDF_API int msdf_ft_font_load_glyph_by_index(msdf_ft_font_handle font, const unsigned index, const int coordinateScaling, msdf_shape_handle* shape) {
+MSDF_API int msdf_ft_font_load_glyph_by_index(msdf_ft_font_handle font, const unsigned index, const int coordinateScaling, double *advance, msdf_shape_handle* shape) {
     if(font == nullptr || shape == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
     auto* actual_shape = new msdfgen::Shape();
-    msdfgen::loadGlyph(*actual_shape, reinterpret_cast<msdfgen::FontHandle*>(font), msdfgen::GlyphIndex(index), (msdfgen::FontCoordinateScaling)coordinateScaling);
+    msdfgen::loadGlyph(*actual_shape, reinterpret_cast<msdfgen::FontHandle*>(font), msdfgen::GlyphIndex(index), (msdfgen::FontCoordinateScaling)coordinateScaling, advance);
     *shape = reinterpret_cast<msdf_shape_handle>(actual_shape);
     return MSDF_SUCCESS;
 }

@@ -48,18 +48,20 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGenExt_nmsdf_1ft_1load_1f
     return (jint)msdf_ft_load_font_data(handle, data, (size_t)size, font);
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGenExt_nmsdf_1ft_1font_1load_1glyph(JNIEnv *__env, jclass clazz, jlong fontAddress, jint cp, jint coordinateScaling, jlong shapeAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGenExt_nmsdf_1ft_1font_1load_1glyph(JNIEnv *__env, jclass clazz, jlong fontAddress, jint cp, jint coordinateScaling, jlong advanceAddress, jlong shapeAddress) {
     msdf_ft_font_handle font = (msdf_ft_font_handle)(uintptr_t)fontAddress;
+    double *advance = (double *)(uintptr_t)advanceAddress;
     msdf_shape_handle *shape = (msdf_shape_handle *)(uintptr_t)shapeAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)msdf_ft_font_load_glyph(font, (unsigned)cp, coordinateScaling, shape);
+    return (jint)msdf_ft_font_load_glyph(font, (unsigned)cp, coordinateScaling, advance, shape);
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGenExt_nmsdf_1ft_1font_1load_1glyph_1by_1index(JNIEnv *__env, jclass clazz, jlong fontAddress, jint index, jint coordinateScaling, jlong shapeAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGenExt_nmsdf_1ft_1font_1load_1glyph_1by_1index(JNIEnv *__env, jclass clazz, jlong fontAddress, jint index, jint coordinateScaling, jlong advanceAddress, jlong shapeAddress) {
     msdf_ft_font_handle font = (msdf_ft_font_handle)(uintptr_t)fontAddress;
+    double *advance = (double *)(uintptr_t)advanceAddress;
     msdf_shape_handle *shape = (msdf_shape_handle *)(uintptr_t)shapeAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)msdf_ft_font_load_glyph_by_index(font, (unsigned)index, coordinateScaling, shape);
+    return (jint)msdf_ft_font_load_glyph_by_index(font, (unsigned)index, coordinateScaling, advance, shape);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGenExt_nmsdf_1ft_1font_1get_1glyph_1index(JNIEnv *__env, jclass clazz, jlong fontAddress, jint cp, jlong indexAddress) {

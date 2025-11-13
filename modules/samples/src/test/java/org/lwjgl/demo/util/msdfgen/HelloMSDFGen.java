@@ -20,6 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.msdfgen.MSDFGen.*;
 import static org.lwjgl.util.msdfgen.MSDFGenExt.*;
+import static org.testng.Assert.*;
 
 public class HelloMSDFGen {
 
@@ -30,7 +31,8 @@ public class HelloMSDFGen {
         ByteBuffer fontData = ioResourceToByteBuffer("demo/FiraSans.ttf", 512 * 1024);
 
         try (MemoryStack stack = stackPush()) {
-            PointerBuffer pp = stack.mallocPointer(1);
+            PointerBuffer pp = stack.callocPointer(1);
+            DoubleBuffer  dp = stack.callocDouble(1);
 
             check(msdf_ft_set_load_callback(name -> FreeType.getLibrary().getFunctionAddress(memByteBuffer(name, memByteBufferNT1(name).capacity() + 1))));
             check(msdf_ft_init(pp));
@@ -39,7 +41,10 @@ public class HelloMSDFGen {
             check(msdf_ft_load_font_data(ft, fontData, pp));
             long font = pp.get(0);
 
-            check(msdf_ft_font_load_glyph(font, 'A', MSDF_FONT_SCALING_EM_NORMALIZED, pp));
+            assertEquals(dp.get(0), 0.0);
+            check(msdf_ft_font_load_glyph(font, 'A', MSDF_FONT_SCALING_EM_NORMALIZED, dp, pp));
+            assertNotEquals(dp.get(0), 0.0);
+
             long shape = pp.get(0);
 
             check(msdf_shape_normalize(shape));
