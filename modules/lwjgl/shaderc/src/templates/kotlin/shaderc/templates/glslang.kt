@@ -172,7 +172,10 @@ val glslang = "GLSLang".nativeClass(Module.SHADERC, prefix = "GLSLANG", prefixMe
         "RESOURCE_TYPE_IMAGE".enum,
         "RESOURCE_TYPE_UBO".enum,
         "RESOURCE_TYPE_SSBO".enum,
-        "RESOURCE_TYPE_UAV".enum
+        "RESOURCE_TYPE_UAV".enum,
+        "RESOURCE_TYPE_COMBINED_SAMPLER".enum,
+        "RESOURCE_TYPE_AS".enum,
+        "RESOURCE_TYPE_TENSOR".enum
     )
 
     void(

@@ -225,12 +225,15 @@ public class GLSLang {
         GLSLANG_SHADER_VULKAN_RULES_RELAXED = (1 << 2);
 
     public static final int
-        GLSLANG_RESOURCE_TYPE_SAMPLER = 0,
-        GLSLANG_RESOURCE_TYPE_TEXTURE = 1,
-        GLSLANG_RESOURCE_TYPE_IMAGE   = 2,
-        GLSLANG_RESOURCE_TYPE_UBO     = 3,
-        GLSLANG_RESOURCE_TYPE_SSBO    = 4,
-        GLSLANG_RESOURCE_TYPE_UAV     = 5;
+        GLSLANG_RESOURCE_TYPE_SAMPLER          = 0,
+        GLSLANG_RESOURCE_TYPE_TEXTURE          = 1,
+        GLSLANG_RESOURCE_TYPE_IMAGE            = 2,
+        GLSLANG_RESOURCE_TYPE_UBO              = 3,
+        GLSLANG_RESOURCE_TYPE_SSBO             = 4,
+        GLSLANG_RESOURCE_TYPE_UAV              = 5,
+        GLSLANG_RESOURCE_TYPE_COMBINED_SAMPLER = 6,
+        GLSLANG_RESOURCE_TYPE_AS               = 7,
+        GLSLANG_RESOURCE_TYPE_TENSOR           = 8;
 
     protected GLSLang() {
         throw new UnsupportedOperationException();
