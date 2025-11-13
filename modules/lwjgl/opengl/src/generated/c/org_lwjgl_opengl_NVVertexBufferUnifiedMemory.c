@@ -22,73 +22,73 @@ typedef void (APIENTRY *glGetIntegerui64i_vNVPROC) (jint, jint, uintptr_t);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVVertexBufferUnifiedMemory_glBufferAddressRangeNV(JNIEnv *__env, jclass clazz, jint pname, jint index, jlong address, jlong length) {
-    glBufferAddressRangeNVPROC glBufferAddressRangeNV = (glBufferAddressRangeNVPROC)tlsGetFunction(2198);
+    glBufferAddressRangeNVPROC glBufferAddressRangeNV = (glBufferAddressRangeNVPROC)tlsGetFunction(2206);
     UNUSED_PARAM(clazz)
     glBufferAddressRangeNV(pname, index, address, (uintptr_t)length);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVVertexBufferUnifiedMemory_glVertexFormatNV(JNIEnv *__env, jclass clazz, jint size, jint type, jint stride) {
-    glVertexFormatNVPROC glVertexFormatNV = (glVertexFormatNVPROC)tlsGetFunction(2199);
+    glVertexFormatNVPROC glVertexFormatNV = (glVertexFormatNVPROC)tlsGetFunction(2207);
     UNUSED_PARAM(clazz)
     glVertexFormatNV(size, type, stride);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVVertexBufferUnifiedMemory_glNormalFormatNV(JNIEnv *__env, jclass clazz, jint type, jint stride) {
-    glNormalFormatNVPROC glNormalFormatNV = (glNormalFormatNVPROC)tlsGetFunction(2200);
+    glNormalFormatNVPROC glNormalFormatNV = (glNormalFormatNVPROC)tlsGetFunction(2208);
     UNUSED_PARAM(clazz)
     glNormalFormatNV(type, stride);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVVertexBufferUnifiedMemory_glColorFormatNV(JNIEnv *__env, jclass clazz, jint size, jint type, jint stride) {
-    glColorFormatNVPROC glColorFormatNV = (glColorFormatNVPROC)tlsGetFunction(2201);
+    glColorFormatNVPROC glColorFormatNV = (glColorFormatNVPROC)tlsGetFunction(2209);
     UNUSED_PARAM(clazz)
     glColorFormatNV(size, type, stride);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVVertexBufferUnifiedMemory_glIndexFormatNV(JNIEnv *__env, jclass clazz, jint type, jint stride) {
-    glIndexFormatNVPROC glIndexFormatNV = (glIndexFormatNVPROC)tlsGetFunction(2202);
+    glIndexFormatNVPROC glIndexFormatNV = (glIndexFormatNVPROC)tlsGetFunction(2210);
     UNUSED_PARAM(clazz)
     glIndexFormatNV(type, stride);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVVertexBufferUnifiedMemory_glTexCoordFormatNV(JNIEnv *__env, jclass clazz, jint size, jint type, jint stride) {
-    glTexCoordFormatNVPROC glTexCoordFormatNV = (glTexCoordFormatNVPROC)tlsGetFunction(2203);
+    glTexCoordFormatNVPROC glTexCoordFormatNV = (glTexCoordFormatNVPROC)tlsGetFunction(2211);
     UNUSED_PARAM(clazz)
     glTexCoordFormatNV(size, type, stride);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVVertexBufferUnifiedMemory_glEdgeFlagFormatNV(JNIEnv *__env, jclass clazz, jint stride) {
-    glEdgeFlagFormatNVPROC glEdgeFlagFormatNV = (glEdgeFlagFormatNVPROC)tlsGetFunction(2204);
+    glEdgeFlagFormatNVPROC glEdgeFlagFormatNV = (glEdgeFlagFormatNVPROC)tlsGetFunction(2212);
     UNUSED_PARAM(clazz)
     glEdgeFlagFormatNV(stride);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVVertexBufferUnifiedMemory_glSecondaryColorFormatNV(JNIEnv *__env, jclass clazz, jint size, jint type, jint stride) {
-    glSecondaryColorFormatNVPROC glSecondaryColorFormatNV = (glSecondaryColorFormatNVPROC)tlsGetFunction(2205);
+    glSecondaryColorFormatNVPROC glSecondaryColorFormatNV = (glSecondaryColorFormatNVPROC)tlsGetFunction(2213);
     UNUSED_PARAM(clazz)
     glSecondaryColorFormatNV(size, type, stride);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVVertexBufferUnifiedMemory_glFogCoordFormatNV(JNIEnv *__env, jclass clazz, jint type, jint stride) {
-    glFogCoordFormatNVPROC glFogCoordFormatNV = (glFogCoordFormatNVPROC)tlsGetFunction(2206);
+    glFogCoordFormatNVPROC glFogCoordFormatNV = (glFogCoordFormatNVPROC)tlsGetFunction(2214);
     UNUSED_PARAM(clazz)
     glFogCoordFormatNV(type, stride);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVVertexBufferUnifiedMemory_glVertexAttribFormatNV(JNIEnv *__env, jclass clazz, jint index, jint size, jint type, jboolean normalized, jint stride) {
-    glVertexAttribFormatNVPROC glVertexAttribFormatNV = (glVertexAttribFormatNVPROC)tlsGetFunction(2207);
+    glVertexAttribFormatNVPROC glVertexAttribFormatNV = (glVertexAttribFormatNVPROC)tlsGetFunction(2215);
     UNUSED_PARAM(clazz)
     glVertexAttribFormatNV(index, size, type, normalized, stride);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVVertexBufferUnifiedMemory_glVertexAttribIFormatNV(JNIEnv *__env, jclass clazz, jint index, jint size, jint type, jint stride) {
-    glVertexAttribIFormatNVPROC glVertexAttribIFormatNV = (glVertexAttribIFormatNVPROC)tlsGetFunction(2208);
+    glVertexAttribIFormatNVPROC glVertexAttribIFormatNV = (glVertexAttribIFormatNVPROC)tlsGetFunction(2216);
     UNUSED_PARAM(clazz)
     glVertexAttribIFormatNV(index, size, type, stride);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVVertexBufferUnifiedMemory_nglGetIntegerui64i_1vNV__IIJ(JNIEnv *__env, jclass clazz, jint value, jint index, jlong resultAddress) {
-    glGetIntegerui64i_vNVPROC glGetIntegerui64i_vNV = (glGetIntegerui64i_vNVPROC)tlsGetFunction(2209);
+    glGetIntegerui64i_vNVPROC glGetIntegerui64i_vNV = (glGetIntegerui64i_vNVPROC)tlsGetFunction(2217);
     uintptr_t result = (uintptr_t)resultAddress;
     UNUSED_PARAM(clazz)
     glGetIntegerui64i_vNV(value, index, result);
