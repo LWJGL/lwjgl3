@@ -205,7 +205,7 @@ jobs:
       - name: Build Java
         run: ant -emacs compile
       - name: Build & Test
-        uses: cross-platform-actions/action@v0.29.0
+        uses: cross-platform-actions/action@v0.30.0
         with:
           operating_system: freebsd
           architecture: x86-64
