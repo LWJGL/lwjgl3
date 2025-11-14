@@ -115,7 +115,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_GL32C_nglIsSync(JNIEnv *__env, 
     return glIsSync(sync);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL32C_nglDeleteSync(JNIEnv *__env, jclass clazz, jlong syncAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL32C_glDeleteSync(JNIEnv *__env, jclass clazz, jlong syncAddress) {
     glDeleteSyncPROC glDeleteSync = (glDeleteSyncPROC)tlsGetFunction(660);
     uintptr_t sync = (uintptr_t)syncAddress;
     UNUSED_PARAM(clazz)

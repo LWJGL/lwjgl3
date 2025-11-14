@@ -339,15 +339,7 @@ public class GL32C extends GL31C {
     // --- [ glDeleteSync ] ---
 
     /** {@code void glDeleteSync(GLsync sync)} */
-    public static native void nglDeleteSync(long sync);
-
-    /** {@code void glDeleteSync(GLsync sync)} */
-    public static void glDeleteSync(@NativeType("GLsync") long sync) {
-        if (CHECKS) {
-            check(sync);
-        }
-        nglDeleteSync(sync);
-    }
+    public static native void glDeleteSync(@NativeType("GLsync") long sync);
 
     // --- [ glClientWaitSync ] ---
 

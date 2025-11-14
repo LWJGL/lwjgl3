@@ -1381,15 +1381,7 @@ public class GLES30 extends GLES20 {
     // --- [ glDeleteSync ] ---
 
     /** {@code void glDeleteSync(GLsync sync)} */
-    public static native void nglDeleteSync(long sync);
-
-    /** {@code void glDeleteSync(GLsync sync)} */
-    public static void glDeleteSync(@NativeType("GLsync") long sync) {
-        if (CHECKS) {
-            check(sync);
-        }
-        nglDeleteSync(sync);
-    }
+    public static native void glDeleteSync(@NativeType("GLsync") long sync);
 
     // --- [ glClientWaitSync ] ---
 
