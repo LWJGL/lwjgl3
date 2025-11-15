@@ -481,8 +481,8 @@ public class SDLAudio {
 
     /** {@code SDL_AudioStream * SDL_CreateAudioStream(SDL_AudioSpec const * src_spec, SDL_AudioSpec const * dst_spec)} */
     @NativeType("SDL_AudioStream *")
-    public static long SDL_CreateAudioStream(@NativeType("SDL_AudioSpec const *") SDL_AudioSpec src_spec, @NativeType("SDL_AudioSpec const *") SDL_AudioSpec dst_spec) {
-        return nSDL_CreateAudioStream(src_spec.address(), dst_spec.address());
+    public static long SDL_CreateAudioStream(@NativeType("SDL_AudioSpec const *") @Nullable SDL_AudioSpec src_spec, @NativeType("SDL_AudioSpec const *") @Nullable SDL_AudioSpec dst_spec) {
+        return nSDL_CreateAudioStream(memAddressSafe(src_spec), memAddressSafe(dst_spec));
     }
 
     // --- [ SDL_GetAudioStreamProperties ] ---
@@ -955,12 +955,12 @@ public class SDLAudio {
 
     /** {@code bool SDL_ConvertAudioSamples(SDL_AudioSpec const * src_spec, Uint8 const * src_data, int src_len, SDL_AudioSpec const * dst_spec, Uint8 ** dst_data, int * dst_len)} */
     @NativeType("bool")
-    public static boolean SDL_ConvertAudioSamples(@NativeType("SDL_AudioSpec const *") SDL_AudioSpec src_spec, @NativeType("Uint8 const *") ByteBuffer src_data, @NativeType("SDL_AudioSpec const *") SDL_AudioSpec dst_spec, @NativeType("Uint8 **") PointerBuffer dst_data, @NativeType("int *") IntBuffer dst_len) {
+    public static boolean SDL_ConvertAudioSamples(@NativeType("SDL_AudioSpec const *") @Nullable SDL_AudioSpec src_spec, @NativeType("Uint8 const *") ByteBuffer src_data, @NativeType("SDL_AudioSpec const *") @Nullable SDL_AudioSpec dst_spec, @NativeType("Uint8 **") PointerBuffer dst_data, @NativeType("int *") IntBuffer dst_len) {
         if (CHECKS) {
             check(dst_data, 1);
             check(dst_len, 1);
         }
-        return nSDL_ConvertAudioSamples(src_spec.address(), memAddress(src_data), src_data.remaining(), dst_spec.address(), memAddress(dst_data), memAddress(dst_len));
+        return nSDL_ConvertAudioSamples(memAddressSafe(src_spec), memAddress(src_data), src_data.remaining(), memAddressSafe(dst_spec), memAddress(dst_data), memAddress(dst_len));
     }
 
     // --- [ SDL_GetAudioFormatName ] ---

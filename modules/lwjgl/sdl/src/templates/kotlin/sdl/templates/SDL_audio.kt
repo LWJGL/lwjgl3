@@ -180,8 +180,8 @@ val SDL_audio = "SDLAudio".nativeClassSDL("SDL_audio") {
     SDL_AudioStream.p(
         "CreateAudioStream",
 
-        SDL_AudioSpec.const.p("src_spec"),
-        SDL_AudioSpec.const.p("dst_spec")
+        nullable..SDL_AudioSpec.const.p("src_spec"),
+        nullable..SDL_AudioSpec.const.p("dst_spec")
     )
 
     SDL_PropertiesID(
@@ -403,10 +403,10 @@ val SDL_audio = "SDLAudio".nativeClassSDL("SDL_audio") {
     bool(
         "ConvertAudioSamples",
 
-        SDL_AudioSpec.const.p("src_spec"),
+        nullable..SDL_AudioSpec.const.p("src_spec"),
         Uint8.const.p("src_data"),
         AutoSize("src_data")..int("src_len"),
-        SDL_AudioSpec.const.p("dst_spec"),
+        nullable..SDL_AudioSpec.const.p("dst_spec"),
         Check(1)..Uint8.p.p("dst_data"),
         Check(1)..int.p("dst_len")
     )
