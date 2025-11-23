@@ -42,7 +42,7 @@ public class HelloMeshOptimizer {
                 .size(4 * 3)
                 .stride(4 * 3))
             .apply(1, it -> it
-                .data(memByteBuffer(vertexBuffer))
+                .data(memByteBuffer(normalBuffer))
                 .size(4 * 3)
                 .stride(4 * 3));
 
