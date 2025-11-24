@@ -1,0 +1,45 @@
+#log (bool)
+#print (bool)
+#inline (bool)
+#dontinline (bool)
+#blackhole (bool)
+#compileonly (bool)
+#exclude (bool)
+#break (bool)
+#BreakAtExecute (bool)
+#BreakAtCompile (bool)
+#MemLimit (intx)
+#MemStat (uintx)
+#PrintAssembly (bool)
+#PrintCompilation (bool)
+#PrintInlining (bool)
+#PrintIntrinsics (bool)
+#PrintNMethods (bool)
+#PrintOptoAssembly (bool)
+#PrintDebugInfo (bool)
+#PrintRelocations (bool)
+#PrintDependencies (bool)
+#BackgroundCompilation (bool)
+#RepeatCompilation (intx)
+#ReplayInline (bool)
+#DumpReplay (bool)
+#DumpInline (bool)
+#CompileThresholdScaling (double)
+#ControlIntrinsic (ccstrlist)
+#DisableIntrinsic (ccstrlist)
+#BlockLayoutByFrequency (bool)
+#TraceOptoPipelining (bool)
+#TraceOptoOutput (bool)
+#TraceSpilling (bool)
+#Vectorize (bool)
+#CloneMapDebug (bool)
+#IncrementalInlineForceCleanup (bool)
+#MaxNodeLimit (intx)
+
+PrintAssembly,org/lwjgl/*.*
+#PrintAssembly,*.*
+#PrintCompilation,*.*
+#PrintInlining,org/lwjgl/*.*
+#PrintIntrinsics,org/lwjgl/*.*
+#PrintNMethods,org/lwjgl/*.*
+#PrintOptoAssembly,org/lwjgl/*.*

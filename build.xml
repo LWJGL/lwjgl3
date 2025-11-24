@@ -913,17 +913,15 @@
     <target name="demo" description="Runs an LWJGL demo" depends="compile-tests, compile-native, -update-assets">
         <fail message="Please use -Dclass=&lt;class&gt; to specify the demo main class to run." unless="class"/>
 
-        <local name="spawn"/>
-        <condition property="spawn" value="true" else="false">
-            <isset property="jitwatch"/>
+        <local name="withLogFile"/>
+        <condition property="withLogFile" value="true" else="false">
+            <and>
+                <isset property="jitwatch"/>
+                <not><equals arg1="${jitwatch}" arg2="true"/></not>
+            </and>
         </condition>
 
-        <local name="failonerror"/>
-        <condition property="failonerror" value="false" else="true">
-            <istrue value="${spawn}"/>
-        </condition>
-
-        <java classname="${class}" fork="true" failonerror="${failonerror}" spawn="${spawn}" taskname="Demo">
+        <java classname="${class}" fork="true" failonerror="true" taskname="Demo">
             <classpath>
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/17" if:set="core.java17"/>
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/11" if:set="core.java11"/>
@@ -944,9 +942,14 @@
             <jvmarg value="-XstartOnFirstThread" if:set="platform.macos"/>
             <!--<jvmarg value="-Xcheck:jni"/>-->
 
-            <jvmarg line="-XX:+UnlockDiagnosticVMOptions -XX:+LogCompilation" if:set="jitwatch"/>
-            <jvmarg line="-XX:+PrintAssembly -XX:PrintAssemblyOptions=intel -XX:-TieredCompilation -XX:-UseCompressedOops" if:set="jitwatch"/>
-            <jvmarg line="-XX:LogFile=${jitwatch}" if:set="jitwatch"/>
+            <jvmarg line="-XX:+UnlockDiagnosticVMOptions -XX:+LogCompilation -XX:CompileCommandFile=config/cli/CompileCommand.args -XX:PrintAssemblyOptions=intel" if:set="jitwatch"/>
+            <jvmarg value="-Xlog:class+load=info,jit+compilation=debug" if:set="jitwatch"/>
+            <!--<jvmarg line="-XX:-TieredCompilation -XX:-UseCompressedOops" if:set="jitwatch"/>-->
+            <!---
+            -Djitwatch=true : profile, but do not log anything (or log with @Fork in JMH benchmarks)
+            -Djitwatch=<filename> : profile and log to <filename>
+            -->
+            <jvmarg line="-XX:LogFile=${jitwatch}" if:true="${withLogFile}"/>
 
             <!--<jvmarg line="-agentlib:native-image-agent=config-output-dir=META-INF/native-image"/>-->
 
