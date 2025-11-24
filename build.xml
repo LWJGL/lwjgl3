@@ -635,7 +635,7 @@
 
     <target name="compile-tests" description="Compiles the LWJGL test suite" depends="compile">
         <mkdir dir="${bin.test}"/>
-        <forEachModule>
+        <forEachModule core8="true">
             <local name="hasTests"/>
             <available property="hasTests" file="${module.lwjgl}/${module}/src/test/java" type="dir"/>
 
@@ -903,7 +903,10 @@
             <jvmarg value="-Xss256k" if:set="build.arch.x64|x86"/> <!-- for StackTest::testSOE -->
             <jvmarg line="${jvmargs}" if:set="jvmargs"/>
 
-            <xmlfileset dir="${config}" includes="tests.xml,tests_${platform}.xml"/>
+            <xmlfileset dir="${config}">
+                <include name="tests.xml"/>
+                <include name="tests_${platform}.xml"/>
+            </xmlfileset>
         </testng>
     </target>
 

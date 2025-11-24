@@ -128,10 +128,23 @@ This script is included in /config/build-definitions.xml.
     </macrodef>
 
     <macrodef name="forEachModule">
+        <attribute name="core8" default="false"/>
         <element name="body" implicit="yes"/>
         <sequential>
             <sequential>
                 <local name="module"/><property name="module" value="core"/>
+                <body/>
+            </sequential>
+            <sequential unless:true="@{core8}" if:set="jdk11">
+                <local name="module"/><property name="module" value="core11"/>
+                <body/>
+            </sequential>
+            <sequential unless:true="@{core8}" if:set="jdk17">
+                <local name="module"/><property name="module" value="core17"/>
+                <body/>
+            </sequential>
+            <sequential unless:true="@{core8}" if:set="jdk25">
+                <local name="module"/><property name="module" value="core25"/>
                 <body/>
             </sequential>
             <forEachBinding>

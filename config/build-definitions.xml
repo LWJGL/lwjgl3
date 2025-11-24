@@ -179,9 +179,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <detectJDKVersion/>
 
     <!-- May be set in the ant command line to test multi-release implementations. -->
-    <condition property="core.java23"><isset property="core.java24"/></condition>
-    <condition property="core.java22"><isset property="core.java23"/></condition>
-    <condition property="core.java21"><isset property="core.java22"/></condition>
+    <condition property="core.java21"><isset property="core.java25"/></condition>
     <condition property="core.java17"><isset property="core.java21"/></condition>
     <condition property="core.java11"><isset property="core.java17"/></condition>
 
@@ -203,6 +201,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <presetdef name="lwjgl.javac">
         <javac sourcepath="" debug="yes" source="8" target="8" encoding="UTF-8" includeantruntime="false">
             <compilerarg line='--boot-class-path "${env.JAVA8_HOME}/jre/lib/rt.jar"' if:set="set-boot-class-path"/>
+            <compilerarg line="-proc:full" if:set="jdk11"/>
             <compilerarg value="-Xlint:all" unless:set="jdk21"/>
             <compilerarg line="-Xlint:all,-options" if:set="jdk21"/>
             <compilerarg value="-XDignore.symbol.file"/> <!-- Suppresses internal API (e.g. Unsafe) usage warnings -->
@@ -212,6 +211,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <presetdef name="lwjgl.javac11">
         <javac sourcepath="" debug="yes" encoding="UTF-8" includeantruntime="false">
             <compilerarg line="--release 11"/>
+            <compilerarg value="-proc:full"/>
             <compilerarg value="-Xlint:all"/>
             <compilerarg value="-XDignore.symbol.file"/>
         </javac>
@@ -220,6 +220,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <presetdef name="lwjgl.javac17">
         <javac sourcepath="" debug="yes" encoding="UTF-8" includeantruntime="false">
             <compilerarg line="--release 17"/>
+            <compilerarg value="-proc:full"/>
             <compilerarg value="-Xlint:all"/>
             <compilerarg value="-XDignore.symbol.file"/>
         </javac>
@@ -228,7 +229,17 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <presetdef name="lwjgl.javac21">
         <javac sourcepath="" debug="yes" encoding="UTF-8" includeantruntime="false">
             <compilerarg line="--release 21"/>
+            <compilerarg value="-proc:full"/>
             <compilerarg value="-Xlint:all"/>
+            <compilerarg value="-XDignore.symbol.file"/>
+        </javac>
+    </presetdef>
+
+    <presetdef name="lwjgl.javac25">
+        <javac sourcepath="" debug="yes" encoding="UTF-8" includeantruntime="false">
+            <compilerarg line="--release ${jdk.version} --enable-preview"/>
+            <compilerarg line="-proc:full"/>
+            <compilerarg value="-Xlint:all,-restricted,-preview"/>
             <compilerarg value="-XDignore.symbol.file"/>
         </javac>
     </presetdef>

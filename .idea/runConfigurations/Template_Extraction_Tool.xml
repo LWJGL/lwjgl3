@@ -1,11 +1,12 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Template Extraction Tool" type="JetRunConfigurationType">
-    <option name="ALTERNATIVE_JRE_PATH" value="17" />
+    <option name="ALTERNATIVE_JRE_PATH" value="25" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="MAIN_CLASS_NAME" value="org.lwjgl.extract.MainKt" />
     <module name="extract" />
     <shortenClasspath name="NONE" />
-    <option name="VM_PARAMETERS" value="-Dfile.encoding=UTF8 -Dorg.lwjgl.llvm.clang.libname=&quot;C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/Llvm/x64/bin/libclang.dll&quot;" />
+    <option name="VM_PARAMETERS" value="-Dfile.encoding=UTF8 -Dorg.lwjgl.llvm.clang.libname=&quot;C:/Program Files/Microsoft Visual Studio/2026/Community/VC/Tools/Llvm/x64/bin/libclang.dll&quot;" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
     <method v="2">
       <option name="Make" enabled="true" />
