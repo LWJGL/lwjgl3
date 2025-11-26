@@ -8,9 +8,9 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
 import static org.lwjgl.system.libc.LibCString.*;
 
-final class MultiReleaseMemCopy {
+final class MemoryUtilTunables {
 
-    private MultiReleaseMemCopy() {
+    private MemoryUtilTunables() {
     }
 
     static void copy(long src, long dst, long bytes) {

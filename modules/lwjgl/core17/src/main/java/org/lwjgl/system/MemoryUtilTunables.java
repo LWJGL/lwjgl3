@@ -8,13 +8,13 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
 
-final class MultiReleaseMemCopy {
+final class MemoryUtilTunables {
 
     static {
         apiLog("Java 17 memcpy enabled");
     }
 
-    private MultiReleaseMemCopy() {
+    private MemoryUtilTunables() {
     }
 
     static void copy(long src, long dst, long bytes) {
