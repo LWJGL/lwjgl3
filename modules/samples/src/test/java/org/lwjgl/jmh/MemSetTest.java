@@ -64,7 +64,20 @@ public class MemSetTest {
     public void offheap_baseline() {
         for (int i = 0; i < buffers.capacity(); i++) {
             int offset = offsets[i];
-            UNSAFE.setMemory(null, buffers.get(i) + offset, arrays[i].length - offset, value);
+
+            // Much better performance on JDK 23+
+            //UNSAFE.setMemory(null, buffers.get(i) + offset, arrays[i].length - offset, value);
+
+            // On x64, set/copyMemory have degraded performance with even byte counts (>2x slower).
+            // Workaround by setting all but the last byte with setMemory, then setting the last byte separately.
+            // Does not hurt on non-x64.
+            long trg = buffers.get(i) + offset;
+
+            int bytes = arrays[i].length - offset;
+
+            int lastByteIndex = bytes - 1;
+            UNSAFE.setMemory(null, trg, lastByteIndex - (bytes & 1), value);
+            UNSAFE.putByte(null, trg + lastByteIndex, value);
         }
     }
 

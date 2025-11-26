@@ -21,9 +21,9 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MathUtil.*;
 import static org.lwjgl.system.MemoryUtil.LazyInit.*;
+import static org.lwjgl.system.MemoryUtilTunables.*;
 import static org.lwjgl.system.Pointer.*;
 import static org.lwjgl.system.jni.JNINativeInterface.*;
-import static org.lwjgl.system.libc.LibCString.*;
 
 /**
  * This class provides functionality for managing native memory.
@@ -35,7 +35,7 @@ import static org.lwjgl.system.libc.LibCString.*;
  *
  * <h3>Text encoding/decoding</h3>
  *
- * Three codecs are available, each with a different postfix:
+ * <p>Three codecs are available, each with a different postfix:</p>
  * <ul>
  * <li>UTF16 - Direct mapping of 2 bytes to Java char and vice versa</li>
  * <li>UTF8 - custom UTF-8 codec without intermediate allocations</li>
@@ -413,8 +413,8 @@ public final class MemoryUtil {
     /**
      * Unsafe version of {@link #memCalloc} that checks the returned pointer.
      *
-     * @return a pointer to the memory block allocated by the function on success. This pointer will never be {@link #NULL}, even if {@code num} or
-     * {@code size} are zero.
+     * @return a pointer to the memory block allocated by the function on success. This pointer will never be {@link #NULL}, even if {@code num} or {@code size}
+     * are zero.
      *
      * @throws OutOfMemoryError if the function failed to allocate the requested block of memory
      */
@@ -440,8 +440,8 @@ public final class MemoryUtil {
      * <p>Memory allocated with this method must be freed with {@link #memFree}.</p>
      *
      * @param num  the number of elements to allocate.
-     * @param size the size of each element. If {@code size} is zero, the return value depends on the particular library implementation (it may or may not be
-     *             a null pointer), but the returned pointer shall not be dereferenced.
+     * @param size the size of each element. If {@code size} is zero, the return value depends on the particular library implementation (it may or may not be a
+     *             null pointer), but the returned pointer shall not be dereferenced.
      *
      * @return on success, a pointer to the memory block allocated by the function
      *
@@ -721,8 +721,8 @@ public final class MemoryUtil {
             /** Allocations are aggregated over the whole process or thread. */
             ALL,
             /**
-             * Allocations are aggregated based on the first stack trace element. This will return an allocation aggregate per method/line number, regardless
-             * of how many different code paths lead to that specific method and line number.
+             * Allocations are aggregated based on the first stack trace element. This will return an allocation aggregate per method/line number, regardless of
+             * how many different code paths lead to that specific method and line number.
              */
             GROUP_BY_METHOD,
             /** The allocations are aggregated based on the full stack trace chain. */
@@ -1700,7 +1700,7 @@ public final class MemoryUtil {
         if (CHECKS) {
             check(dst, src.remaining());
         }
-        MultiReleaseMemCopy.copy(memAddress(src), memAddress(dst), src.remaining());
+        memcpy(memAddress(src), memAddress(dst), src.remaining());
     }
 
     /**
@@ -1713,7 +1713,7 @@ public final class MemoryUtil {
         if (CHECKS) {
             check(dst, src.remaining());
         }
-        MultiReleaseMemCopy.copy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 1));
+        memcpy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 1));
     }
 
     /**
@@ -1726,7 +1726,7 @@ public final class MemoryUtil {
         if (CHECKS) {
             check((Buffer)dst, src.remaining());
         }
-        MultiReleaseMemCopy.copy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 1));
+        memcpy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 1));
     }
 
     /**
@@ -1739,7 +1739,7 @@ public final class MemoryUtil {
         if (CHECKS) {
             check(dst, src.remaining());
         }
-        MultiReleaseMemCopy.copy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 2));
+        memcpy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 2));
     }
 
     /**
@@ -1752,7 +1752,7 @@ public final class MemoryUtil {
         if (CHECKS) {
             check(dst, src.remaining());
         }
-        MultiReleaseMemCopy.copy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 3));
+        memcpy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 3));
     }
 
     /**
@@ -1765,7 +1765,7 @@ public final class MemoryUtil {
         if (CHECKS) {
             check(dst, src.remaining());
         }
-        MultiReleaseMemCopy.copy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 2));
+        memcpy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 2));
     }
 
     /**
@@ -1778,7 +1778,7 @@ public final class MemoryUtil {
         if (CHECKS) {
             check(dst, src.remaining());
         }
-        MultiReleaseMemCopy.copy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 3));
+        memcpy(memAddress(src), memAddress(dst), apiGetBytes(src.remaining(), 3));
     }
 
     /**
@@ -1792,7 +1792,7 @@ public final class MemoryUtil {
         if (CHECKS) {
             check(dst, src.remaining());
         }
-        MultiReleaseMemCopy.copy(memAddress(src), memAddress(dst), Integer.toUnsignedLong(src.remaining()) * src.sizeof());
+        memcpy(memAddress(src), memAddress(dst), Integer.toUnsignedLong(src.remaining()) * src.sizeof());
     }
 
     /**
@@ -1803,7 +1803,7 @@ public final class MemoryUtil {
      * @param <T> the struct type
      */
     public static <T extends Struct<T>> void memCopy(T src, T dst) {
-        MultiReleaseMemCopy.copy(src.address, dst.address, src.sizeof());
+        memcpy(src.address, dst.address, src.sizeof());
     }
 
     /*  -------------------------------------
@@ -1811,9 +1811,6 @@ public final class MemoryUtil {
                UNSAFE MEMORY ACCESS API
         -------------------------------------
         ------------------------------------- */
-
-    private static final int  FILL_PATTERN_32 = Integer.divideUnsigned(-1, 255);
-    private static final long FILL_PATTERN_64 = Long.divideUnsigned(-1L, 255L);
 
     /**
      * Sets all bytes in a specified block of memory to a fixed value (usually zero).
@@ -1826,59 +1823,7 @@ public final class MemoryUtil {
         if (DEBUG && (ptr == NULL || bytes < 0)) {
             throw new IllegalArgumentException();
         }
-
-        /*
-        - Unsafe.setMemory is very slow.
-        - A custom Java loop is fastest at small sizes, approximately up to 256 bytes.
-        - The native memset becomes fastest at bigger sizes, when the JNI overhead becomes negligible.
-         */
-
-        //UNSAFE.setMemory(ptr, bytes, (byte)(value & 0xFF));
-        if (bytes < 256L) {
-            int p = (int)ptr;
-            if (BITS64) {
-                if ((p & 7) == 0) {
-                    memSet64(ptr, value, (int)bytes & 0xFF);
-                    return;
-                }
-            } else {
-                if ((p & 3) == 0) {
-                    memSet32(p, value, (int)bytes & 0xFF);
-                    return;
-                }
-            }
-        }
-        nmemset(ptr, value, bytes);
-    }
-    private static void memSet64(long ptr, int value, int bytes) {
-        int aligned = bytes & ~7;
-
-        // Aligned body
-        long valuel = (value & 0xFF) * FILL_PATTERN_64;
-        for (int i = 0; i < aligned; i += 8) {
-            UNSAFE.putLong(null, ptr + i, valuel);
-        }
-
-        // Unaligned tail
-        byte valueb = (byte)(value & 0xFF);
-        for (int i = aligned; i < bytes; i++) {
-            UNSAFE.putByte(null, ptr + i, valueb);
-        }
-    }
-    private static void memSet32(int ptr, int value, int bytes) {
-        int aligned = bytes & ~3;
-
-        // Aligned body
-        int vi = (value & 0xFF) * FILL_PATTERN_32;
-        for (int i = 0; i < aligned; i += 4) {
-            UNSAFE.putInt(null, (ptr + i) & 0xFFFF_FFFFL, vi);
-        }
-
-        // Unaligned tail
-        byte vb = (byte)(value & 0xFF);
-        for (int i = aligned; i < bytes; i++) {
-            UNSAFE.putByte(null, (ptr + i) & 0xFFFF_FFFFL, vb);
-        }
+        memset(ptr, value, bytes);
     }
 
     /**
@@ -1892,35 +1837,7 @@ public final class MemoryUtil {
         if (DEBUG && (src == NULL || dst == NULL || bytes < 0)) {
             throw new IllegalArgumentException();
         }
-
-        MultiReleaseMemCopy.copy(src, dst, bytes);
-    }
-
-    static void memCopyAligned64(long src, long dst, int bytes) {
-        int aligned = bytes & ~7;
-
-        // Aligned body
-        for (int i = 0; i < aligned; i += 8) {
-            UNSAFE.putLong(null, dst + i, UNSAFE.getLong(null, src + i));
-        }
-
-        // Unaligned tail
-        for (int i = aligned; i < bytes; i++) {
-            UNSAFE.putByte(null, dst + i, UNSAFE.getByte(null, src + i));
-        }
-    }
-    static void memCopyAligned32(int src, int dst, int bytes) {
-        int aligned = bytes & ~3;
-
-        // Aligned body
-        for (int i = 0; i < aligned; i += 4) {
-            UNSAFE.putInt(null, (dst + i) & 0xFFFF_FFFFL, UNSAFE.getInt(null, (src + i) & 0xFFFF_FFFFL));
-        }
-
-        // Unaligned tail
-        for (int i = aligned; i < bytes; i++) {
-            UNSAFE.putByte(null, (dst + i) & 0xFFFF_FFFFL, UNSAFE.getByte(null, (src + i) & 0xFFFF_FFFFL));
-        }
+        memcpy(src, dst, bytes);
     }
 
     public static boolean memGetBoolean(long ptr) { return UNSAFE.getByte(null, ptr) != 0; }

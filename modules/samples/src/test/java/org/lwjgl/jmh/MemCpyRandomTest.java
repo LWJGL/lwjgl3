@@ -77,15 +77,22 @@ public class MemCpyRandomTest {
     public void offheap_baseline() {
         for (int i = 0; i < ARRAY_COUNT; i++) {
             int o = offsets[i];
-            UNSAFE.copyMemory(null, bufferSRC.get(i) + o, null, bufferTRG.get(i) + o, arraySRC[i].length - o);
-        }
-    }
 
-    @Benchmark
-    public void offheap_java() {
-        for (int i = 0; i < ARRAY_COUNT; i++) {
-            int o = offsets[i];
-            memCopyAligned(bufferSRC.get(i) + o, bufferTRG.get(i) + o, arraySRC[i].length - o);
+            // Much better performance on JDK 23+
+            //UNSAFE.copyMemory(null, bufferSRC.get(i) + o, null, bufferTRG.get(i) + o, arraySRC[i].length - o);
+
+            // On x64, set/copyMemory have degraded performance with even byte counts (>2x slower).
+            // Workaround by setting all but the last byte with setMemory, then setting the last byte separately.
+            // Does not hurt on non-x64.
+
+            long f = bufferSRC.get(i) + o;
+            long t = bufferTRG.get(i) + o;
+
+            int length = arraySRC[i].length - o;
+
+            long lastByteIndex = length - 1L;
+            UNSAFE.copyMemory(null, f + o, null, t + o, lastByteIndex + (length & 1L));
+            UNSAFE.putByte(null, t + o + lastByteIndex, UNSAFE.getByte(null, f + o + lastByteIndex));
         }
     }
 
@@ -102,21 +109,6 @@ public class MemCpyRandomTest {
         for (int i = 0; i < ARRAY_COUNT; i++) {
             int o = offsets[i];
             System.arraycopy(arraySRC[i], o, arrayTRG[i], o, arraySRC[i].length - o);
-        }
-    }
-
-    private static void memCopyAligned(long src, long dst, int bytes) {
-        // Aligned longs for performance
-
-        // if bytes is multiple of 8, bytes & ~7 == bytes, no tail
-        // if bytes is not multiple of 8, bytes & ~7 == bytes - (bytes % 8), bytes % 8 tail
-        int aligned = bytes & ~7;
-        for (int i = 0; i < aligned; i += 8) {
-            UNSAFE.putLong(null, dst + i, UNSAFE.getLong(null, src + i));
-        }
-        // Tail
-        for (int i = aligned; i < bytes; i++) {
-            UNSAFE.putByte(null, dst + i, UNSAFE.getByte(null, src + i));
         }
     }
 
