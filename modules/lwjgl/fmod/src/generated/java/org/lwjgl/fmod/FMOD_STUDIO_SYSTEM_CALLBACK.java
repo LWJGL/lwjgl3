@@ -39,7 +39,7 @@ public abstract class FMOD_STUDIO_SYSTEM_CALLBACK extends Callback implements FM
     }
 
     protected FMOD_STUDIO_SYSTEM_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_STUDIO_SYSTEM_CALLBACK(long functionPointer) {

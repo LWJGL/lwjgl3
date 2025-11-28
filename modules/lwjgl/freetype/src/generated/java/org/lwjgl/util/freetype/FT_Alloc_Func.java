@@ -39,7 +39,7 @@ public abstract class FT_Alloc_Func extends Callback implements FT_Alloc_FuncI {
     }
 
     protected FT_Alloc_Func() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FT_Alloc_Func(long functionPointer) {

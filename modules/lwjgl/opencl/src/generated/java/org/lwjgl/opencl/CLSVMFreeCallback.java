@@ -39,7 +39,7 @@ public abstract class CLSVMFreeCallback extends Callback implements CLSVMFreeCal
     }
 
     protected CLSVMFreeCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     CLSVMFreeCallback(long functionPointer) {

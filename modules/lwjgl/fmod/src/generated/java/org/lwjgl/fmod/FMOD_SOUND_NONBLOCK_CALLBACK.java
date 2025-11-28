@@ -39,7 +39,7 @@ public abstract class FMOD_SOUND_NONBLOCK_CALLBACK extends Callback implements F
     }
 
     protected FMOD_SOUND_NONBLOCK_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_SOUND_NONBLOCK_CALLBACK(long functionPointer) {

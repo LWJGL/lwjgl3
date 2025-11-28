@@ -39,7 +39,7 @@ public abstract class FMOD_DSP_SETPARAM_FLOAT_CALLBACK extends Callback implemen
     }
 
     protected FMOD_DSP_SETPARAM_FLOAT_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_DSP_SETPARAM_FLOAT_CALLBACK(long functionPointer) {

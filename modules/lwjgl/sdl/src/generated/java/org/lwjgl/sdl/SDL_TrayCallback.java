@@ -39,7 +39,7 @@ public abstract class SDL_TrayCallback extends Callback implements SDL_TrayCallb
     }
 
     protected SDL_TrayCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_TrayCallback(long functionPointer) {

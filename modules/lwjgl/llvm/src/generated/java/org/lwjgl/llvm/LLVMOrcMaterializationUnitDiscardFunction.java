@@ -39,7 +39,7 @@ public abstract class LLVMOrcMaterializationUnitDiscardFunction extends Callback
     }
 
     protected LLVMOrcMaterializationUnitDiscardFunction() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LLVMOrcMaterializationUnitDiscardFunction(long functionPointer) {

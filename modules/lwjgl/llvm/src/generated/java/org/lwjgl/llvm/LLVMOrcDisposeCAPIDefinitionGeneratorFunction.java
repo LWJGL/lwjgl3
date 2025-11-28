@@ -39,7 +39,7 @@ public abstract class LLVMOrcDisposeCAPIDefinitionGeneratorFunction extends Call
     }
 
     protected LLVMOrcDisposeCAPIDefinitionGeneratorFunction() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LLVMOrcDisposeCAPIDefinitionGeneratorFunction(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class FMOD_CODEC_METADATA_FUNC extends Callback implements FMOD_
     }
 
     protected FMOD_CODEC_METADATA_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_CODEC_METADATA_FUNC(long functionPointer) {

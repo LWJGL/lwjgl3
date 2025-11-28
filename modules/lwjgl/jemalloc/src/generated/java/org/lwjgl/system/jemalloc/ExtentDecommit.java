@@ -39,7 +39,7 @@ public abstract class ExtentDecommit extends Callback implements ExtentDecommitI
     }
 
     protected ExtentDecommit() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     ExtentDecommit(long functionPointer) {

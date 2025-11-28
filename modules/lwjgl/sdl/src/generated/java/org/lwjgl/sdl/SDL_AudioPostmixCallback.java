@@ -39,7 +39,7 @@ public abstract class SDL_AudioPostmixCallback extends Callback implements SDL_A
     }
 
     protected SDL_AudioPostmixCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_AudioPostmixCallback(long functionPointer) {

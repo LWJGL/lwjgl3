@@ -41,7 +41,7 @@ public abstract class GLFWWindowPosCallback extends Callback implements GLFWWind
     }
 
     protected GLFWWindowPosCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     GLFWWindowPosCallback(long functionPointer) {

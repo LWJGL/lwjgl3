@@ -39,7 +39,7 @@ public abstract class LLVMOrcObjectTransformLayerTransformFunction extends Callb
     }
 
     protected LLVMOrcObjectTransformLayerTransformFunction() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LLVMOrcObjectTransformLayerTransformFunction(long functionPointer) {

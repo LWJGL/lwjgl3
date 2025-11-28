@@ -41,7 +41,7 @@ public abstract class GLFWCursorPosCallback extends Callback implements GLFWCurs
     }
 
     protected GLFWCursorPosCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     GLFWCursorPosCallback(long functionPointer) {

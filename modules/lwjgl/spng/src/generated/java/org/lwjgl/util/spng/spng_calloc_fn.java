@@ -39,7 +39,7 @@ public abstract class spng_calloc_fn extends Callback implements spng_calloc_fnI
     }
 
     protected spng_calloc_fn() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     spng_calloc_fn(long functionPointer) {

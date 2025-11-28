@@ -39,7 +39,7 @@ public abstract class SDL_CleanupPropertyCallback extends Callback implements SD
     }
 
     protected SDL_CleanupPropertyCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_CleanupPropertyCallback(long functionPointer) {

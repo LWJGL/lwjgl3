@@ -39,7 +39,7 @@ public abstract class FMOD_DSP_PAN_SUMSTEREOMATRIX_FUNC extends Callback impleme
     }
 
     protected FMOD_DSP_PAN_SUMSTEREOMATRIX_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_DSP_PAN_SUMSTEREOMATRIX_FUNC(long functionPointer) {

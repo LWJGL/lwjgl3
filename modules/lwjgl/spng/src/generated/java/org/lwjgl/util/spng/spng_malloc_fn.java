@@ -39,7 +39,7 @@ public abstract class spng_malloc_fn extends Callback implements spng_malloc_fnI
     }
 
     protected spng_malloc_fn() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     spng_malloc_fn(long functionPointer) {

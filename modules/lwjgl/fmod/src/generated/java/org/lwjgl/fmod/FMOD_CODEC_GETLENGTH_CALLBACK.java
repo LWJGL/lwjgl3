@@ -39,7 +39,7 @@ public abstract class FMOD_CODEC_GETLENGTH_CALLBACK extends Callback implements 
     }
 
     protected FMOD_CODEC_GETLENGTH_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_CODEC_GETLENGTH_CALLBACK(long functionPointer) {

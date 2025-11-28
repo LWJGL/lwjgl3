@@ -39,7 +39,7 @@ public abstract class GLFWDeallocateCallback extends Callback implements GLFWDea
     }
 
     protected GLFWDeallocateCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     GLFWDeallocateCallback(long functionPointer) {

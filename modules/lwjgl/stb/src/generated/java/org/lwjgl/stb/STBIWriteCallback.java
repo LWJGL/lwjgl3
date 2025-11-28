@@ -41,7 +41,7 @@ public abstract class STBIWriteCallback extends Callback implements STBIWriteCal
     }
 
     protected STBIWriteCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     STBIWriteCallback(long functionPointer) {

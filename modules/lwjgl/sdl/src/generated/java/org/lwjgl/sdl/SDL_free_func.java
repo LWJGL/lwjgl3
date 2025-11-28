@@ -39,7 +39,7 @@ public abstract class SDL_free_func extends Callback implements SDL_free_funcI {
     }
 
     protected SDL_free_func() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_free_func(long functionPointer) {

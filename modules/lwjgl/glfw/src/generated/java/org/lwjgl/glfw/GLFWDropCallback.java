@@ -41,7 +41,7 @@ public abstract class GLFWDropCallback extends Callback implements GLFWDropCallb
     }
 
     protected GLFWDropCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     GLFWDropCallback(long functionPointer) {

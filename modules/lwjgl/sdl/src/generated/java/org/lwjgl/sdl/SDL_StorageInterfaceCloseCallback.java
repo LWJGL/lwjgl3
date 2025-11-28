@@ -39,7 +39,7 @@ public abstract class SDL_StorageInterfaceCloseCallback extends Callback impleme
     }
 
     protected SDL_StorageInterfaceCloseCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_StorageInterfaceCloseCallback(long functionPointer) {

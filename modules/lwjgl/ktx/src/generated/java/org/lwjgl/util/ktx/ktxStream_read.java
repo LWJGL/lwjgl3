@@ -39,7 +39,7 @@ public abstract class ktxStream_read extends Callback implements ktxStream_readI
     }
 
     protected ktxStream_read() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     ktxStream_read(long functionPointer) {

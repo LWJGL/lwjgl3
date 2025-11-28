@@ -39,7 +39,7 @@ public abstract class FMOD_DSP_ALLOC_FUNC extends Callback implements FMOD_DSP_A
     }
 
     protected FMOD_DSP_ALLOC_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_DSP_ALLOC_FUNC(long functionPointer) {

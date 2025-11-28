@@ -39,7 +39,7 @@ public abstract class SDL_X11EventHook extends Callback implements SDL_X11EventH
     }
 
     protected SDL_X11EventHook() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_X11EventHook(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class LLVMMemoryManagerCreateContextCallback extends Callback im
     }
 
     protected LLVMMemoryManagerCreateContextCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LLVMMemoryManagerCreateContextCallback(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class SDL_TimerCallback extends Callback implements SDL_TimerCal
     }
 
     protected SDL_TimerCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_TimerCallback(long functionPointer) {

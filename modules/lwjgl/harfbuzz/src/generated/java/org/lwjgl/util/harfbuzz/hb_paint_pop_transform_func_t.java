@@ -39,7 +39,7 @@ public abstract class hb_paint_pop_transform_func_t extends Callback implements 
     }
 
     protected hb_paint_pop_transform_func_t() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     hb_paint_pop_transform_func_t(long functionPointer) {

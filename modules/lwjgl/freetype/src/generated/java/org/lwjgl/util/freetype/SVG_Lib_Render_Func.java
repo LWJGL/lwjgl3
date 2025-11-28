@@ -39,7 +39,7 @@ public abstract class SVG_Lib_Render_Func extends Callback implements SVG_Lib_Re
     }
 
     protected SVG_Lib_Render_Func() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SVG_Lib_Render_Func(long functionPointer) {

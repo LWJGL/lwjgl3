@@ -39,7 +39,7 @@ public abstract class FMOD_OUTPUT_OBJECT3DFREE_CALLBACK extends Callback impleme
     }
 
     protected FMOD_OUTPUT_OBJECT3DFREE_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_OUTPUT_OBJECT3DFREE_CALLBACK(long functionPointer) {

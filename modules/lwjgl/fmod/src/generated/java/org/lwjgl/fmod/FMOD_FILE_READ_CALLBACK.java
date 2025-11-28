@@ -39,7 +39,7 @@ public abstract class FMOD_FILE_READ_CALLBACK extends Callback implements FMOD_F
     }
 
     protected FMOD_FILE_READ_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_FILE_READ_CALLBACK(long functionPointer) {

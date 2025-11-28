@@ -39,7 +39,7 @@ public abstract class ZSTDSequenceProducer extends Callback implements ZSTDSeque
     }
 
     protected ZSTDSequenceProducer() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     ZSTDSequenceProducer(long functionPointer) {

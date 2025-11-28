@@ -39,7 +39,7 @@ public abstract class SDL_ClipboardCleanupCallback extends Callback implements S
     }
 
     protected SDL_ClipboardCleanupCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_ClipboardCleanupCallback(long functionPointer) {

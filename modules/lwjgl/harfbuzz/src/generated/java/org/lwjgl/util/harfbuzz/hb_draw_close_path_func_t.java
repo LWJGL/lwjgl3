@@ -39,7 +39,7 @@ public abstract class hb_draw_close_path_func_t extends Callback implements hb_d
     }
 
     protected hb_draw_close_path_func_t() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     hb_draw_close_path_func_t(long functionPointer) {

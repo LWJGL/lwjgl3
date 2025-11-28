@@ -39,7 +39,7 @@ public abstract class FMOD_DSP_SETPARAM_INT_CALLBACK extends Callback implements
     }
 
     protected FMOD_DSP_SETPARAM_INT_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_DSP_SETPARAM_INT_CALLBACK(long functionPointer) {

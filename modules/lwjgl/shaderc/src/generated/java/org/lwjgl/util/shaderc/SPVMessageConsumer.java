@@ -39,7 +39,7 @@ public abstract class SPVMessageConsumer extends Callback implements SPVMessageC
     }
 
     protected SPVMessageConsumer() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SPVMessageConsumer(long functionPointer) {

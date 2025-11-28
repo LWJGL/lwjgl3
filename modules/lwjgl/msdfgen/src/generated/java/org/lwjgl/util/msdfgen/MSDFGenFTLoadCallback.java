@@ -39,7 +39,7 @@ public abstract class MSDFGenFTLoadCallback extends Callback implements MSDFGenF
     }
 
     protected MSDFGenFTLoadCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     MSDFGenFTLoadCallback(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class AIFileFlushProc extends Callback implements AIFileFlushPro
     }
 
     protected AIFileFlushProc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     AIFileFlushProc(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class hb_font_paint_glyph_func_t extends Callback implements hb_
     }
 
     protected hb_font_paint_glyph_func_t() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     hb_font_paint_glyph_func_t(long functionPointer) {

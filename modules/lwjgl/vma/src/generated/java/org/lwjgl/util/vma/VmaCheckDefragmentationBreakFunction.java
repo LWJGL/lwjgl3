@@ -39,7 +39,7 @@ public abstract class VmaCheckDefragmentationBreakFunction extends Callback impl
     }
 
     protected VmaCheckDefragmentationBreakFunction() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     VmaCheckDefragmentationBreakFunction(long functionPointer) {

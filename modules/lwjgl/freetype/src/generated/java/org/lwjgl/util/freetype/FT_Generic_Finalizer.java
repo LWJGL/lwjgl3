@@ -39,7 +39,7 @@ public abstract class FT_Generic_Finalizer extends Callback implements FT_Generi
     }
 
     protected FT_Generic_Finalizer() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FT_Generic_Finalizer(long functionPointer) {

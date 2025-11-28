@@ -39,7 +39,7 @@ public abstract class FMOD_OUTPUT_OBJECT3DALLOC_CALLBACK extends Callback implem
     }
 
     protected FMOD_OUTPUT_OBJECT3DALLOC_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_OUTPUT_OBJECT3DALLOC_CALLBACK(long functionPointer) {

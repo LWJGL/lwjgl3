@@ -39,7 +39,7 @@ public abstract class spng_free_fn extends Callback implements spng_free_fnI {
     }
 
     protected spng_free_fn() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     spng_free_fn(long functionPointer) {

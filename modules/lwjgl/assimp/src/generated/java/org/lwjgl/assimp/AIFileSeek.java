@@ -39,7 +39,7 @@ public abstract class AIFileSeek extends Callback implements AIFileSeekI {
     }
 
     protected AIFileSeek() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     AIFileSeek(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class hb_paint_custom_palette_color_func_t extends Callback impl
     }
 
     protected hb_paint_custom_palette_color_func_t() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     hb_paint_custom_palette_color_func_t(long functionPointer) {

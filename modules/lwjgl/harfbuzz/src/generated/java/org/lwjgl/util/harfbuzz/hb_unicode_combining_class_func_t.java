@@ -39,7 +39,7 @@ public abstract class hb_unicode_combining_class_func_t extends Callback impleme
     }
 
     protected hb_unicode_combining_class_func_t() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     hb_unicode_combining_class_func_t(long functionPointer) {

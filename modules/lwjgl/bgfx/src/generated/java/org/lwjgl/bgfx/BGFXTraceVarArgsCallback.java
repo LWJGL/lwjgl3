@@ -39,7 +39,7 @@ public abstract class BGFXTraceVarArgsCallback extends Callback implements BGFXT
     }
 
     protected BGFXTraceVarArgsCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     BGFXTraceVarArgsCallback(long functionPointer) {

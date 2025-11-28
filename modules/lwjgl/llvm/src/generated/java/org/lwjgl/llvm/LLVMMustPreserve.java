@@ -39,7 +39,7 @@ public abstract class LLVMMustPreserve extends Callback implements LLVMMustPrese
     }
 
     protected LLVMMustPreserve() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LLVMMustPreserve(long functionPointer) {

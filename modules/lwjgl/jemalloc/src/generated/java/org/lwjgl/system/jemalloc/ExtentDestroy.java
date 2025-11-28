@@ -39,7 +39,7 @@ public abstract class ExtentDestroy extends Callback implements ExtentDestroyI {
     }
 
     protected ExtentDestroy() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     ExtentDestroy(long functionPointer) {

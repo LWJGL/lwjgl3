@@ -39,7 +39,7 @@ public abstract class NkPluginCopy extends Callback implements NkPluginCopyI {
     }
 
     protected NkPluginCopy() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     NkPluginCopy(long functionPointer) {

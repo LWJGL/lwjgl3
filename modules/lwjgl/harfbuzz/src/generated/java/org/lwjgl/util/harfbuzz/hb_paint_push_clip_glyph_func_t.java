@@ -39,7 +39,7 @@ public abstract class hb_paint_push_clip_glyph_func_t extends Callback implement
     }
 
     protected hb_paint_push_clip_glyph_func_t() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     hb_paint_push_clip_glyph_func_t(long functionPointer) {

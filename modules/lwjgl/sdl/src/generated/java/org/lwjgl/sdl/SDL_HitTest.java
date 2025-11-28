@@ -39,7 +39,7 @@ public abstract class SDL_HitTest extends Callback implements SDL_HitTestI {
     }
 
     protected SDL_HitTest() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_HitTest(long functionPointer) {

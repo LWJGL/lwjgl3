@@ -39,7 +39,7 @@ public abstract class STBIROutputCallback extends Callback implements STBIROutpu
     }
 
     protected STBIROutputCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     STBIROutputCallback(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class SVG_Lib_Preset_Slot_Func extends Callback implements SVG_L
     }
 
     protected SVG_Lib_Preset_Slot_Func() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SVG_Lib_Preset_Slot_Func(long functionPointer) {

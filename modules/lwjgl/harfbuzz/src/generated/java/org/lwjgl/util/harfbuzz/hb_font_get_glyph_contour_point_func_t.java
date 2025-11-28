@@ -39,7 +39,7 @@ public abstract class hb_font_get_glyph_contour_point_func_t extends Callback im
     }
 
     protected hb_font_get_glyph_contour_point_func_t() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     hb_font_get_glyph_contour_point_func_t(long functionPointer) {

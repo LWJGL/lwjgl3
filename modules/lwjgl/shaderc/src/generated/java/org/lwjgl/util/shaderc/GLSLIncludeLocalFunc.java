@@ -39,7 +39,7 @@ public abstract class GLSLIncludeLocalFunc extends Callback implements GLSLInclu
     }
 
     protected GLSLIncludeLocalFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     GLSLIncludeLocalFunc(long functionPointer) {

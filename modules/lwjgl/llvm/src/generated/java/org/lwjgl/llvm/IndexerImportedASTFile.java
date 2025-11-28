@@ -39,7 +39,7 @@ public abstract class IndexerImportedASTFile extends Callback implements Indexer
     }
 
     protected IndexerImportedASTFile() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     IndexerImportedASTFile(long functionPointer) {

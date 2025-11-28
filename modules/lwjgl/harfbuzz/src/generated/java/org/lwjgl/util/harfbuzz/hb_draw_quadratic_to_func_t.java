@@ -39,7 +39,7 @@ public abstract class hb_draw_quadratic_to_func_t extends Callback implements hb
     }
 
     protected hb_draw_quadratic_to_func_t() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     hb_draw_quadratic_to_func_t(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class NkDrawEndCallback extends Callback implements NkDrawEndCal
     }
 
     protected NkDrawEndCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     NkDrawEndCallback(long functionPointer) {

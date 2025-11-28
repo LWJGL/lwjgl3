@@ -39,7 +39,7 @@ public abstract class YGMeasureFunc extends Callback implements YGMeasureFuncI {
     }
 
     protected YGMeasureFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     YGMeasureFunc(long functionPointer) {

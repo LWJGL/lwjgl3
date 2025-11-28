@@ -39,7 +39,7 @@ public abstract class IndexerIndexDeclaration extends Callback implements Indexe
     }
 
     protected IndexerIndexDeclaration() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     IndexerIndexDeclaration(long functionPointer) {

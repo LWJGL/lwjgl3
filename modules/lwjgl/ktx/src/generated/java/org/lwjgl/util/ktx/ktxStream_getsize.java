@@ -39,7 +39,7 @@ public abstract class ktxStream_getsize extends Callback implements ktxStream_ge
     }
 
     protected ktxStream_getsize() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     ktxStream_getsize(long functionPointer) {

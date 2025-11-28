@@ -39,7 +39,7 @@ public abstract class STBISkipCallback extends Callback implements STBISkipCallb
     }
 
     protected STBISkipCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     STBISkipCallback(long functionPointer) {

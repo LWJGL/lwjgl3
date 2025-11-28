@@ -39,7 +39,7 @@ public abstract class LLVMMemoryManagerDestroyCallback extends Callback implemen
     }
 
     protected LLVMMemoryManagerDestroyCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LLVMMemoryManagerDestroyCallback(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class ktxVulkanTexture_subAllocatorBindBufferFuncPtr extends Cal
     }
 
     protected ktxVulkanTexture_subAllocatorBindBufferFuncPtr() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     ktxVulkanTexture_subAllocatorBindBufferFuncPtr(long functionPointer) {

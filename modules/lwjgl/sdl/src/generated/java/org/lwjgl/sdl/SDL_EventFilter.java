@@ -39,7 +39,7 @@ public abstract class SDL_EventFilter extends Callback implements SDL_EventFilte
     }
 
     protected SDL_EventFilter() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_EventFilter(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class FMOD_CODEC_SOUNDCREATE_CALLBACK extends Callback implement
     }
 
     protected FMOD_CODEC_SOUNDCREATE_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_CODEC_SOUNDCREATE_CALLBACK(long functionPointer) {

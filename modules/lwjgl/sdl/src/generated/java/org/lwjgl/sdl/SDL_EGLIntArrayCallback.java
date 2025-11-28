@@ -39,7 +39,7 @@ public abstract class SDL_EGLIntArrayCallback extends Callback implements SDL_EG
     }
 
     protected SDL_EGLIntArrayCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_EGLIntArrayCallback(long functionPointer) {

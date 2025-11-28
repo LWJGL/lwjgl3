@@ -39,7 +39,7 @@ public abstract class STBIZlibCompress extends Callback implements STBIZlibCompr
     }
 
     protected STBIZlibCompress() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     STBIZlibCompress(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class CLNativeKernel extends Callback implements CLNativeKernelI
     }
 
     protected CLNativeKernel() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     CLNativeKernel(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class FT_Stream_IoFunc extends Callback implements FT_Stream_IoF
     }
 
     protected FT_Stream_IoFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FT_Stream_IoFunc(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class FMOD_MEMORY_FREE_CALLBACK extends Callback implements FMOD
     }
 
     protected FMOD_MEMORY_FREE_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_MEMORY_FREE_CALLBACK(long functionPointer) {

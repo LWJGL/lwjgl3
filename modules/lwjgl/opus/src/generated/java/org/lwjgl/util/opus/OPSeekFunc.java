@@ -39,7 +39,7 @@ public abstract class OPSeekFunc extends Callback implements OPSeekFuncI {
     }
 
     protected OPSeekFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     OPSeekFunc(long functionPointer) {

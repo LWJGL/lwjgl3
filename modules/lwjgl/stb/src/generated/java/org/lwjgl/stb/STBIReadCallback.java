@@ -41,7 +41,7 @@ public abstract class STBIReadCallback extends Callback implements STBIReadCallb
     }
 
     protected STBIReadCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     STBIReadCallback(long functionPointer) {

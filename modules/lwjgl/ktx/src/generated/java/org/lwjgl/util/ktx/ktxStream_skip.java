@@ -39,7 +39,7 @@ public abstract class ktxStream_skip extends Callback implements ktxStream_skipI
     }
 
     protected ktxStream_skip() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     ktxStream_skip(long functionPointer) {

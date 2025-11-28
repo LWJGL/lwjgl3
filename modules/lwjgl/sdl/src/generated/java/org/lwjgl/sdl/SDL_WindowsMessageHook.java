@@ -39,7 +39,7 @@ public abstract class SDL_WindowsMessageHook extends Callback implements SDL_Win
     }
 
     protected SDL_WindowsMessageHook() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_WindowsMessageHook(long functionPointer) {

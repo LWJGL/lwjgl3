@@ -39,7 +39,7 @@ public abstract class LZ4FCallocFunction extends Callback implements LZ4FCallocF
     }
 
     protected LZ4FCallocFunction() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LZ4FCallocFunction(long functionPointer) {

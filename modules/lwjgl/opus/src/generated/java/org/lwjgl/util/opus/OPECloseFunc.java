@@ -39,7 +39,7 @@ public abstract class OPECloseFunc extends Callback implements OPECloseFuncI {
     }
 
     protected OPECloseFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     OPECloseFunc(long functionPointer) {

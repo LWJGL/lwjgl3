@@ -41,7 +41,7 @@ public abstract class GLFWWindowRefreshCallback extends Callback implements GLFW
     }
 
     protected GLFWWindowRefreshCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     GLFWWindowRefreshCallback(long functionPointer) {

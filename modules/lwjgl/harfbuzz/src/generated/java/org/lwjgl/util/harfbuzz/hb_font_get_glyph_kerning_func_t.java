@@ -39,7 +39,7 @@ public abstract class hb_font_get_glyph_kerning_func_t extends Callback implemen
     }
 
     protected hb_font_get_glyph_kerning_func_t() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     hb_font_get_glyph_kerning_func_t(long functionPointer) {

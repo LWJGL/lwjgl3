@@ -39,7 +39,7 @@ public abstract class FMOD_OUTPUT_READFROMMIXER_FUNC extends Callback implements
     }
 
     protected FMOD_OUTPUT_READFROMMIXER_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_OUTPUT_READFROMMIXER_FUNC(long functionPointer) {

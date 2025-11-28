@@ -39,7 +39,7 @@ public abstract class SDL_NSTimerCallback extends Callback implements SDL_NSTime
     }
 
     protected SDL_NSTimerCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_NSTimerCallback(long functionPointer) {

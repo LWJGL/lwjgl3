@@ -39,7 +39,7 @@ public abstract class FMOD_STUDIO_EVENT_CALLBACK extends Callback implements FMO
     }
 
     protected FMOD_STUDIO_EVENT_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_STUDIO_EVENT_CALLBACK(long functionPointer) {

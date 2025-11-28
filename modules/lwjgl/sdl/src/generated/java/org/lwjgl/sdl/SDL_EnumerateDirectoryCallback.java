@@ -39,7 +39,7 @@ public abstract class SDL_EnumerateDirectoryCallback extends Callback implements
     }
 
     protected SDL_EnumerateDirectoryCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_EnumerateDirectoryCallback(long functionPointer) {

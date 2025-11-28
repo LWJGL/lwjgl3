@@ -39,7 +39,7 @@ public abstract class SDL_IOStreamInterfaceFlushCallback extends Callback implem
     }
 
     protected SDL_IOStreamInterfaceFlushCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_IOStreamInterfaceFlushCallback(long functionPointer) {

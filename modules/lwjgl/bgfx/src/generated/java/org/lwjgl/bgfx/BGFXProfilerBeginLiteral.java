@@ -39,7 +39,7 @@ public abstract class BGFXProfilerBeginLiteral extends Callback implements BGFXP
     }
 
     protected BGFXProfilerBeginLiteral() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     BGFXProfilerBeginLiteral(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class IndexerAbortQuery extends Callback implements IndexerAbort
     }
 
     protected IndexerAbortQuery() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     IndexerAbortQuery(long functionPointer) {

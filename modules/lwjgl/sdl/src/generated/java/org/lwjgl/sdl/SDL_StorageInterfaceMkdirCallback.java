@@ -39,7 +39,7 @@ public abstract class SDL_StorageInterfaceMkdirCallback extends Callback impleme
     }
 
     protected SDL_StorageInterfaceMkdirCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_StorageInterfaceMkdirCallback(long functionPointer) {

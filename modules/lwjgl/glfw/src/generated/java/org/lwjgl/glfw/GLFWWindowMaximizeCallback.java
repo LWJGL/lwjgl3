@@ -41,7 +41,7 @@ public abstract class GLFWWindowMaximizeCallback extends Callback implements GLF
     }
 
     protected GLFWWindowMaximizeCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     GLFWWindowMaximizeCallback(long functionPointer) {

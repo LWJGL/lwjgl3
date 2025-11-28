@@ -39,7 +39,7 @@ public abstract class SDL_VirtualJoystickDescSetPlayerIndexCallback extends Call
     }
 
     protected SDL_VirtualJoystickDescSetPlayerIndexCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_VirtualJoystickDescSetPlayerIndexCallback(long functionPointer) {

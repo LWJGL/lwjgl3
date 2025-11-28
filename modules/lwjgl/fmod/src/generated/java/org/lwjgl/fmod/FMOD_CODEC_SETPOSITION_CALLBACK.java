@@ -39,7 +39,7 @@ public abstract class FMOD_CODEC_SETPOSITION_CALLBACK extends Callback implement
     }
 
     protected FMOD_CODEC_SETPOSITION_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_CODEC_SETPOSITION_CALLBACK(long functionPointer) {

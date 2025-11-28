@@ -39,7 +39,7 @@ public abstract class MeshoptEquals extends Callback implements MeshoptEqualsI {
     }
 
     protected MeshoptEquals() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     MeshoptEquals(long functionPointer) {

@@ -6,7 +6,8 @@
 package org.lwjgl.util.freetype;
 
 import org.lwjgl.system.*;
-import org.lwjgl.system.libffi.*;
+
+import java.lang.invoke.*;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -17,13 +18,16 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 @NativeType("FT_Raster_ResetFunc")
 public interface FT_Raster_ResetFuncI extends CallbackI {
 
-    FFICIF CIF = apiCreateCIF(
-        ffi_type_void,
-        ffi_type_pointer, ffi_type_pointer, ffi_type_ulong
+    Callback.Descriptor DESCRIPTOR = new Callback.Descriptor(
+        MethodHandles.lookup(),
+        apiCreateCIF(
+            ffi_type_void,
+            ffi_type_pointer, ffi_type_pointer, ffi_type_ulong
+        )
     );
 
     @Override
-    default FFICIF getCallInterface() { return CIF; }
+    default Callback.Descriptor getDescriptor() { return DESCRIPTOR; }
 
     @Override
     default void callback(long ret, long args) {

@@ -39,7 +39,7 @@ public abstract class SPVParsedHeaderFn extends Callback implements SPVParsedHea
     }
 
     protected SPVParsedHeaderFn() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SPVParsedHeaderFn(long functionPointer) {

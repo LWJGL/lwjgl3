@@ -39,7 +39,7 @@ public abstract class SDL_LogOutputFunction extends Callback implements SDL_LogO
     }
 
     protected SDL_LogOutputFunction() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_LogOutputFunction(long functionPointer) {

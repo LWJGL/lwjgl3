@@ -39,7 +39,7 @@ public abstract class topology_set_userdata_export_callback extends Callback imp
     }
 
     protected topology_set_userdata_export_callback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     topology_set_userdata_export_callback(long functionPointer) {

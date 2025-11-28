@@ -39,7 +39,7 @@ public abstract class SDL_AudioStreamCallback extends Callback implements SDL_Au
     }
 
     protected SDL_AudioStreamCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_AudioStreamCallback(long functionPointer) {

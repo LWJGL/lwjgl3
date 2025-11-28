@@ -39,7 +39,7 @@ public abstract class SDL_IOStreamInterfaceWriteCallback extends Callback implem
     }
 
     protected SDL_IOStreamInterfaceWriteCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_IOStreamInterfaceWriteCallback(long functionPointer) {

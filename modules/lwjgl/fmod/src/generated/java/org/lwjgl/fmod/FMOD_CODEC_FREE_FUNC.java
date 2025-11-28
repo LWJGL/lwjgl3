@@ -39,7 +39,7 @@ public abstract class FMOD_CODEC_FREE_FUNC extends Callback implements FMOD_CODE
     }
 
     protected FMOD_CODEC_FREE_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_CODEC_FREE_FUNC(long functionPointer) {

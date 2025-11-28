@@ -39,7 +39,7 @@ public abstract class FMOD_DSP_GETSAMPLERATE_FUNC extends Callback implements FM
     }
 
     protected FMOD_DSP_GETSAMPLERATE_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_DSP_GETSAMPLERATE_FUNC(long functionPointer) {

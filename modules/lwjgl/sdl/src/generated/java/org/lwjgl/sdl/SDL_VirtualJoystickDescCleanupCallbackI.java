@@ -6,7 +6,8 @@
 package org.lwjgl.sdl;
 
 import org.lwjgl.system.*;
-import org.lwjgl.system.libffi.*;
+
+import java.lang.invoke.*;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -17,13 +18,16 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 @NativeType("void (*) (void *)")
 public interface SDL_VirtualJoystickDescCleanupCallbackI extends CallbackI {
 
-    FFICIF CIF = apiCreateCIF(
-        ffi_type_void,
-        ffi_type_pointer
+    Callback.Descriptor DESCRIPTOR = new Callback.Descriptor(
+        MethodHandles.lookup(),
+        apiCreateCIF(
+            ffi_type_void,
+            ffi_type_pointer
+        )
     );
 
     @Override
-    default FFICIF getCallInterface() { return CIF; }
+    default Callback.Descriptor getDescriptor() { return DESCRIPTOR; }
 
     @Override
     default void callback(long ret, long args) {

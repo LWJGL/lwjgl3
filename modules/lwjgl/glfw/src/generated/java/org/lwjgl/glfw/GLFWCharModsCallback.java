@@ -41,7 +41,7 @@ public abstract class GLFWCharModsCallback extends Callback implements GLFWCharM
     }
 
     protected GLFWCharModsCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     GLFWCharModsCallback(long functionPointer) {

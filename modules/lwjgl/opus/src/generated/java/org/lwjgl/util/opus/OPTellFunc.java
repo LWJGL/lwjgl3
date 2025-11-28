@@ -39,7 +39,7 @@ public abstract class OPTellFunc extends Callback implements OPTellFuncI {
     }
 
     protected OPTellFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     OPTellFunc(long functionPointer) {

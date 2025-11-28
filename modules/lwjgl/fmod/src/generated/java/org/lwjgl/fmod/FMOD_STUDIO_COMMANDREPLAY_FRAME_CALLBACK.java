@@ -39,7 +39,7 @@ public abstract class FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK extends Callback 
     }
 
     protected FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class EGLDebugMessageKHRCallback extends Callback implements EGL
     }
 
     protected EGLDebugMessageKHRCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     EGLDebugMessageKHRCallback(long functionPointer) {

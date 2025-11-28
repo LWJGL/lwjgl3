@@ -39,7 +39,7 @@ public abstract class VkFreeFunction extends Callback implements VkFreeFunctionI
     }
 
     protected VkFreeFunction() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     VkFreeFunction(long functionPointer) {

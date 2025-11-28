@@ -39,7 +39,7 @@ public abstract class FMOD_MEMORY_ALLOC_CALLBACK extends Callback implements FMO
     }
 
     protected FMOD_MEMORY_ALLOC_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_MEMORY_ALLOC_CALLBACK(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class FMOD_DSP_FREE_FUNC extends Callback implements FMOD_DSP_FR
     }
 
     protected FMOD_DSP_FREE_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_DSP_FREE_FUNC(long functionPointer) {

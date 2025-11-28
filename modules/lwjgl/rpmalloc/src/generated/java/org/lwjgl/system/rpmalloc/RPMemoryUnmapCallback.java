@@ -39,7 +39,7 @@ public abstract class RPMemoryUnmapCallback extends Callback implements RPMemory
     }
 
     protected RPMemoryUnmapCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     RPMemoryUnmapCallback(long functionPointer) {

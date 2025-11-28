@@ -39,7 +39,7 @@ public abstract class RMTRealloc extends Callback implements RMTReallocI {
     }
 
     protected RMTRealloc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     RMTRealloc(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class SDL_StorageInterfaceReadFileCallback extends Callback impl
     }
 
     protected SDL_StorageInterfaceReadFileCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_StorageInterfaceReadFileCallback(long functionPointer) {

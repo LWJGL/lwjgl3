@@ -39,7 +39,7 @@ public abstract class SDL_malloc_func extends Callback implements SDL_malloc_fun
     }
 
     protected SDL_malloc_func() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_malloc_func(long functionPointer) {

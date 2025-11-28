@@ -39,7 +39,7 @@ public abstract class SDL_VirtualJoystickDescSendEffectCallback extends Callback
     }
 
     protected SDL_VirtualJoystickDescSendEffectCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_VirtualJoystickDescSendEffectCallback(long functionPointer) {

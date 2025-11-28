@@ -39,7 +39,7 @@ public abstract class STBIRKernelCallback extends Callback implements STBIRKerne
     }
 
     protected STBIRKernelCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     STBIRKernelCallback(long functionPointer) {

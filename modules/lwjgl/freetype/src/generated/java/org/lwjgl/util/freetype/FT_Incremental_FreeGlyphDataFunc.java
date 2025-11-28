@@ -39,7 +39,7 @@ public abstract class FT_Incremental_FreeGlyphDataFunc extends Callback implemen
     }
 
     protected FT_Incremental_FreeGlyphDataFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FT_Incremental_FreeGlyphDataFunc(long functionPointer) {

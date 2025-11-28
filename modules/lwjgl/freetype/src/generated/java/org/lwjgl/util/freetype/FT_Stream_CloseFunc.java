@@ -39,7 +39,7 @@ public abstract class FT_Stream_CloseFunc extends Callback implements FT_Stream_
     }
 
     protected FT_Stream_CloseFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FT_Stream_CloseFunc(long functionPointer) {

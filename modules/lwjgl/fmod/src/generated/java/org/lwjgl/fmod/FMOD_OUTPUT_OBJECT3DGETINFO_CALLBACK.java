@@ -39,7 +39,7 @@ public abstract class FMOD_OUTPUT_OBJECT3DGETINFO_CALLBACK extends Callback impl
     }
 
     protected FMOD_OUTPUT_OBJECT3DGETINFO_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_OUTPUT_OBJECT3DGETINFO_CALLBACK(long functionPointer) {

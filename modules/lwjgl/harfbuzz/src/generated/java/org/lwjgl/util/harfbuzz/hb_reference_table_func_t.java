@@ -39,7 +39,7 @@ public abstract class hb_reference_table_func_t extends Callback implements hb_r
     }
 
     protected hb_reference_table_func_t() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     hb_reference_table_func_t(long functionPointer) {

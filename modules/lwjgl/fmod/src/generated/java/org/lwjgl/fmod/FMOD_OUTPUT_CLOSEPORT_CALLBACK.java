@@ -39,7 +39,7 @@ public abstract class FMOD_OUTPUT_CLOSEPORT_CALLBACK extends Callback implements
     }
 
     protected FMOD_OUTPUT_CLOSEPORT_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_OUTPUT_CLOSEPORT_CALLBACK(long functionPointer) {

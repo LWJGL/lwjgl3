@@ -39,7 +39,7 @@ public abstract class LLVMOrcMaterializationUnitMaterializeFunction extends Call
     }
 
     protected LLVMOrcMaterializationUnitMaterializeFunction() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LLVMOrcMaterializationUnitMaterializeFunction(long functionPointer) {

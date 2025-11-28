@@ -39,7 +39,7 @@ public abstract class ParSLAdvectionCallback extends Callback implements ParSLAd
     }
 
     protected ParSLAdvectionCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     ParSLAdvectionCallback(long functionPointer) {

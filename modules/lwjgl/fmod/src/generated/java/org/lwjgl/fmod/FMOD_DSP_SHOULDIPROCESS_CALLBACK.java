@@ -39,7 +39,7 @@ public abstract class FMOD_DSP_SHOULDIPROCESS_CALLBACK extends Callback implemen
     }
 
     protected FMOD_DSP_SHOULDIPROCESS_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_DSP_SHOULDIPROCESS_CALLBACK(long functionPointer) {

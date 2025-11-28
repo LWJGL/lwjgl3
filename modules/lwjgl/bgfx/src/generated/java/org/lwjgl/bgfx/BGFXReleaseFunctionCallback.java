@@ -39,7 +39,7 @@ public abstract class BGFXReleaseFunctionCallback extends Callback implements BG
     }
 
     protected BGFXReleaseFunctionCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     BGFXReleaseFunctionCallback(long functionPointer) {

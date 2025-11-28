@@ -39,7 +39,7 @@ public abstract class FMOD_CODEC_LOG_FUNC extends Callback implements FMOD_CODEC
     }
 
     protected FMOD_CODEC_LOG_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_CODEC_LOG_FUNC(long functionPointer) {

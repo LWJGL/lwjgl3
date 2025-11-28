@@ -39,7 +39,7 @@ public abstract class GLSLIncludeSystemFunc extends Callback implements GLSLIncl
     }
 
     protected GLSLIncludeSystemFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     GLSLIncludeSystemFunc(long functionPointer) {

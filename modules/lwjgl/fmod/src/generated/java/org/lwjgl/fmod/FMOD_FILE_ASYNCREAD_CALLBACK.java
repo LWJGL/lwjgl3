@@ -39,7 +39,7 @@ public abstract class FMOD_FILE_ASYNCREAD_CALLBACK extends Callback implements F
     }
 
     protected FMOD_FILE_ASYNCREAD_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_FILE_ASYNCREAD_CALLBACK(long functionPointer) {

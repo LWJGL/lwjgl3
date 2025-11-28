@@ -39,7 +39,7 @@ public abstract class STBIRInputCallback extends Callback implements STBIRInputC
     }
 
     protected STBIRInputCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     STBIRInputCallback(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class SDL_EnumeratePropertiesCallback extends Callback implement
     }
 
     protected SDL_EnumeratePropertiesCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_EnumeratePropertiesCallback(long functionPointer) {

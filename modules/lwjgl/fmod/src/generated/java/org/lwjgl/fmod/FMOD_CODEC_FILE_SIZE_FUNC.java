@@ -39,7 +39,7 @@ public abstract class FMOD_CODEC_FILE_SIZE_FUNC extends Callback implements FMOD
     }
 
     protected FMOD_CODEC_FILE_SIZE_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_CODEC_FILE_SIZE_FUNC(long functionPointer) {

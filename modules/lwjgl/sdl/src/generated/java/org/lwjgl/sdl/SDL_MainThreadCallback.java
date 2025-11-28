@@ -39,7 +39,7 @@ public abstract class SDL_MainThreadCallback extends Callback implements SDL_Mai
     }
 
     protected SDL_MainThreadCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_MainThreadCallback(long functionPointer) {

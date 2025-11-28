@@ -39,7 +39,7 @@ public abstract class ExtentCommit extends Callback implements ExtentCommitI {
     }
 
     protected ExtentCommit() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     ExtentCommit(long functionPointer) {

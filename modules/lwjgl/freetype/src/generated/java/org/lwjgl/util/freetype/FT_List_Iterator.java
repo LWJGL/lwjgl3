@@ -39,7 +39,7 @@ public abstract class FT_List_Iterator extends Callback implements FT_List_Itera
     }
 
     protected FT_List_Iterator() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FT_List_Iterator(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class SVG_Lib_Init_Func extends Callback implements SVG_Lib_Init
     }
 
     protected SVG_Lib_Init_Func() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SVG_Lib_Init_Func(long functionPointer) {

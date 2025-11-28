@@ -39,7 +39,7 @@ public abstract class SDL_CompareCallback_r extends Callback implements SDL_Comp
     }
 
     protected SDL_CompareCallback_r() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_CompareCallback_r(long functionPointer) {

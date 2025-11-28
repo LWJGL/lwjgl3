@@ -41,7 +41,7 @@ public abstract class GLFWWindowSizeCallback extends Callback implements GLFWWin
     }
 
     protected GLFWWindowSizeCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     GLFWWindowSizeCallback(long functionPointer) {

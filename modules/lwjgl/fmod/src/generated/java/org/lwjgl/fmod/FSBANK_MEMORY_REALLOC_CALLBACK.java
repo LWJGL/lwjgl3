@@ -39,7 +39,7 @@ public abstract class FSBANK_MEMORY_REALLOC_CALLBACK extends Callback implements
     }
 
     protected FSBANK_MEMORY_REALLOC_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FSBANK_MEMORY_REALLOC_CALLBACK(long functionPointer) {

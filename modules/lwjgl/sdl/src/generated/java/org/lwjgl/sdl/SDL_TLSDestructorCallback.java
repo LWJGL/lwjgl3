@@ -39,7 +39,7 @@ public abstract class SDL_TLSDestructorCallback extends Callback implements SDL_
     }
 
     protected SDL_TLSDestructorCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_TLSDestructorCallback(long functionPointer) {

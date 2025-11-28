@@ -39,7 +39,7 @@ public abstract class hb_unicode_general_category_func_t extends Callback implem
     }
 
     protected hb_unicode_general_category_func_t() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     hb_unicode_general_category_func_t(long functionPointer) {

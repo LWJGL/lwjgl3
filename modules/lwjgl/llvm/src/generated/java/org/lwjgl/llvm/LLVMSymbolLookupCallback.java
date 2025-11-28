@@ -39,7 +39,7 @@ public abstract class LLVMSymbolLookupCallback extends Callback implements LLVMS
     }
 
     protected LLVMSymbolLookupCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LLVMSymbolLookupCallback(long functionPointer) {

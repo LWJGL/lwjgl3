@@ -39,7 +39,7 @@ public abstract class ktxVulkanTexture_subAllocatorBindImageFuncPtr extends Call
     }
 
     protected ktxVulkanTexture_subAllocatorBindImageFuncPtr() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     ktxVulkanTexture_subAllocatorBindImageFuncPtr(long functionPointer) {

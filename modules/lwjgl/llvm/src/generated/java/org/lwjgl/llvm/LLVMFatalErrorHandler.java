@@ -39,7 +39,7 @@ public abstract class LLVMFatalErrorHandler extends Callback implements LLVMFata
     }
 
     protected LLVMFatalErrorHandler() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LLVMFatalErrorHandler(long functionPointer) {

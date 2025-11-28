@@ -39,7 +39,7 @@ public abstract class STBIRSupportCallback extends Callback implements STBIRSupp
     }
 
     protected STBIRSupportCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     STBIRSupportCallback(long functionPointer) {

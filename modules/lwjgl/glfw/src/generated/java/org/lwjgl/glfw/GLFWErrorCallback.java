@@ -44,7 +44,7 @@ public abstract class GLFWErrorCallback extends Callback implements GLFWErrorCal
     }
 
     protected GLFWErrorCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     GLFWErrorCallback(long functionPointer) {

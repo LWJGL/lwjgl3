@@ -39,7 +39,7 @@ public abstract class SDL_HintCallback extends Callback implements SDL_HintCallb
     }
 
     protected SDL_HintCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_HintCallback(long functionPointer) {

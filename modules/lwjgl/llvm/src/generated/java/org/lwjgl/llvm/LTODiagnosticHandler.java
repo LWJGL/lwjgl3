@@ -39,7 +39,7 @@ public abstract class LTODiagnosticHandler extends Callback implements LTODiagno
     }
 
     protected LTODiagnosticHandler() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LTODiagnosticHandler(long functionPointer) {

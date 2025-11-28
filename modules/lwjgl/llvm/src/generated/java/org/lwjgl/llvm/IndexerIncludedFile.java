@@ -39,7 +39,7 @@ public abstract class IndexerIncludedFile extends Callback implements IndexerInc
     }
 
     protected IndexerIncludedFile() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     IndexerIncludedFile(long functionPointer) {

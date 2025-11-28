@@ -39,7 +39,7 @@ public abstract class YGLogger extends Callback implements YGLoggerI {
     }
 
     protected YGLogger() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     YGLogger(long functionPointer) {

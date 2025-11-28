@@ -39,7 +39,7 @@ public abstract class IndexerStartedTranslationUnit extends Callback implements 
     }
 
     protected IndexerStartedTranslationUnit() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     IndexerStartedTranslationUnit(long functionPointer) {

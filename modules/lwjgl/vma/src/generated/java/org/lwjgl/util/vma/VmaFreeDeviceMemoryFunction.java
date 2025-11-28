@@ -39,7 +39,7 @@ public abstract class VmaFreeDeviceMemoryFunction extends Callback implements Vm
     }
 
     protected VmaFreeDeviceMemoryFunction() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     VmaFreeDeviceMemoryFunction(long functionPointer) {

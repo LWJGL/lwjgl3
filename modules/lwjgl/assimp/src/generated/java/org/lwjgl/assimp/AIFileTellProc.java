@@ -39,7 +39,7 @@ public abstract class AIFileTellProc extends Callback implements AIFileTellProcI
     }
 
     protected AIFileTellProc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     AIFileTellProc(long functionPointer) {

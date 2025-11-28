@@ -39,7 +39,7 @@ public abstract class FMOD_DSP_SYSTEM_DEREGISTER_CALLBACK extends Callback imple
     }
 
     protected FMOD_DSP_SYSTEM_DEREGISTER_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_DSP_SYSTEM_DEREGISTER_CALLBACK(long functionPointer) {

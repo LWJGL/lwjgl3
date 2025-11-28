@@ -39,7 +39,7 @@ public abstract class SDL_StorageInterfaceWriteFileCallback extends Callback imp
     }
 
     protected SDL_StorageInterfaceWriteFileCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_StorageInterfaceWriteFileCallback(long functionPointer) {

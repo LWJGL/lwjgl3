@@ -39,7 +39,7 @@ public abstract class SDL_VirtualJoystickDescUpdateCallback extends Callback imp
     }
 
     protected SDL_VirtualJoystickDescUpdateCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_VirtualJoystickDescUpdateCallback(long functionPointer) {

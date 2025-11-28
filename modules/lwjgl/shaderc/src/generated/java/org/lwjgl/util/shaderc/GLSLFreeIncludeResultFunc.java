@@ -39,7 +39,7 @@ public abstract class GLSLFreeIncludeResultFunc extends Callback implements GLSL
     }
 
     protected GLSLFreeIncludeResultFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     GLSLFreeIncludeResultFunc(long functionPointer) {

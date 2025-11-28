@@ -39,7 +39,7 @@ public abstract class OPReadFunc extends Callback implements OPReadFuncI {
     }
 
     protected OPReadFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     OPReadFunc(long functionPointer) {

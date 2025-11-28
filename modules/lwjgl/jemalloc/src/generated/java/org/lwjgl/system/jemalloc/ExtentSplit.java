@@ -39,7 +39,7 @@ public abstract class ExtentSplit extends Callback implements ExtentSplitI {
     }
 
     protected ExtentSplit() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     ExtentSplit(long functionPointer) {

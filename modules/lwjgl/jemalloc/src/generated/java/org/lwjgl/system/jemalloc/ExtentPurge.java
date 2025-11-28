@@ -39,7 +39,7 @@ public abstract class ExtentPurge extends Callback implements ExtentPurgeI {
     }
 
     protected ExtentPurge() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     ExtentPurge(long functionPointer) {

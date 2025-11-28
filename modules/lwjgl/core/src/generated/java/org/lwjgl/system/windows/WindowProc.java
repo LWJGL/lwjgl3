@@ -39,7 +39,7 @@ public abstract class WindowProc extends Callback implements WindowProcI {
     }
 
     protected WindowProc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     WindowProc(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class FMOD_OUTPUT_INIT_CALLBACK extends Callback implements FMOD
     }
 
     protected FMOD_OUTPUT_INIT_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_OUTPUT_INIT_CALLBACK(long functionPointer) {

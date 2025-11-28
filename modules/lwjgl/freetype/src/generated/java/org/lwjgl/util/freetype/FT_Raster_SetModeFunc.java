@@ -39,7 +39,7 @@ public abstract class FT_Raster_SetModeFunc extends Callback implements FT_Raste
     }
 
     protected FT_Raster_SetModeFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FT_Raster_SetModeFunc(long functionPointer) {

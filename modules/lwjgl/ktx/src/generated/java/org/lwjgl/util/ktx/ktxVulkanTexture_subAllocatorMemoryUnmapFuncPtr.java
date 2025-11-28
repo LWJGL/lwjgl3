@@ -39,7 +39,7 @@ public abstract class ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr extends Ca
     }
 
     protected ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr(long functionPointer) {

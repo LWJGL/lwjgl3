@@ -39,7 +39,7 @@ public abstract class FT_Raster_NewFunc extends Callback implements FT_Raster_Ne
     }
 
     protected FT_Raster_NewFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FT_Raster_NewFunc(long functionPointer) {

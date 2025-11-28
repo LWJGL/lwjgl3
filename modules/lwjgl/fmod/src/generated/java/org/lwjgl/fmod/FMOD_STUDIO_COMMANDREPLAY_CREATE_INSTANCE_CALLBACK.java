@@ -39,7 +39,7 @@ public abstract class FMOD_STUDIO_COMMANDREPLAY_CREATE_INSTANCE_CALLBACK extends
     }
 
     protected FMOD_STUDIO_COMMANDREPLAY_CREATE_INSTANCE_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_STUDIO_COMMANDREPLAY_CREATE_INSTANCE_CALLBACK(long functionPointer) {

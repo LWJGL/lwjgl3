@@ -39,7 +39,7 @@ public abstract class FMOD_OUTPUT_FREE_FUNC extends Callback implements FMOD_OUT
     }
 
     protected FMOD_OUTPUT_FREE_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_OUTPUT_FREE_FUNC(long functionPointer) {

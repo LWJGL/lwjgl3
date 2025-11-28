@@ -39,7 +39,7 @@ public abstract class LZ4FFreeFunction extends Callback implements LZ4FFreeFunct
     }
 
     protected LZ4FFreeFunction() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LZ4FFreeFunction(long functionPointer) {

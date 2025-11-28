@@ -39,7 +39,7 @@ public abstract class FMOD_CHANNELCONTROL_CALLBACK extends Callback implements F
     }
 
     protected FMOD_CHANNELCONTROL_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_CHANNELCONTROL_CALLBACK(long functionPointer) {

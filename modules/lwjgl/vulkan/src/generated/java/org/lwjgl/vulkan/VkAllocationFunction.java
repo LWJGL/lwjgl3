@@ -39,7 +39,7 @@ public abstract class VkAllocationFunction extends Callback implements VkAllocat
     }
 
     protected VkAllocationFunction() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     VkAllocationFunction(long functionPointer) {

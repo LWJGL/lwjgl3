@@ -39,7 +39,7 @@ public abstract class LLVMOrcMaterializationUnitDestroyFunction extends Callback
     }
 
     protected LLVMOrcMaterializationUnitDestroyFunction() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LLVMOrcMaterializationUnitDestroyFunction(long functionPointer) {

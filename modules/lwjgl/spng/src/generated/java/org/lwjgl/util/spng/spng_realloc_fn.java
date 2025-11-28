@@ -39,7 +39,7 @@ public abstract class spng_realloc_fn extends Callback implements spng_realloc_f
     }
 
     protected spng_realloc_fn() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     spng_realloc_fn(long functionPointer) {

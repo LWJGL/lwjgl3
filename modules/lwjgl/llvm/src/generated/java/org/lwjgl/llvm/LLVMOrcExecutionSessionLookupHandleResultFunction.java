@@ -39,7 +39,7 @@ public abstract class LLVMOrcExecutionSessionLookupHandleResultFunction extends 
     }
 
     protected LLVMOrcExecutionSessionLookupHandleResultFunction() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LLVMOrcExecutionSessionLookupHandleResultFunction(long functionPointer) {

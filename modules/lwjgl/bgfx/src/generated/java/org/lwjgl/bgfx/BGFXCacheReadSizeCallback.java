@@ -39,7 +39,7 @@ public abstract class BGFXCacheReadSizeCallback extends Callback implements BGFX
     }
 
     protected BGFXCacheReadSizeCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     BGFXCacheReadSizeCallback(long functionPointer) {

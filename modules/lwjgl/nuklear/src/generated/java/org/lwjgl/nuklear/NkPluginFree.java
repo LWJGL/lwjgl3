@@ -39,7 +39,7 @@ public abstract class NkPluginFree extends Callback implements NkPluginFreeI {
     }
 
     protected NkPluginFree() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     NkPluginFree(long functionPointer) {

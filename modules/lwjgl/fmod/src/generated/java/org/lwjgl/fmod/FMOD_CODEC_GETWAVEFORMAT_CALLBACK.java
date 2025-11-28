@@ -39,7 +39,7 @@ public abstract class FMOD_CODEC_GETWAVEFORMAT_CALLBACK extends Callback impleme
     }
 
     protected FMOD_CODEC_GETWAVEFORMAT_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_CODEC_GETWAVEFORMAT_CALLBACK(long functionPointer) {

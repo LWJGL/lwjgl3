@@ -39,7 +39,7 @@ public abstract class SOFTCallbackBufferType extends Callback implements SOFTCal
     }
 
     protected SOFTCallbackBufferType() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SOFTCallbackBufferType(long functionPointer) {

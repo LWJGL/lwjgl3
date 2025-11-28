@@ -39,7 +39,7 @@ public abstract class LLVMOrcGenericIRModuleOperationFunction extends Callback i
     }
 
     protected LLVMOrcGenericIRModuleOperationFunction() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LLVMOrcGenericIRModuleOperationFunction(long functionPointer) {

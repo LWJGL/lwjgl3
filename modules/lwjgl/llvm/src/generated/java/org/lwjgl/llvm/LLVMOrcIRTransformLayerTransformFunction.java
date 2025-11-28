@@ -39,7 +39,7 @@ public abstract class LLVMOrcIRTransformLayerTransformFunction extends Callback 
     }
 
     protected LLVMOrcIRTransformLayerTransformFunction() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LLVMOrcIRTransformLayerTransformFunction(long functionPointer) {

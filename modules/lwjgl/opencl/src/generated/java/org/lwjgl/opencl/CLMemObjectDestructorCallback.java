@@ -39,7 +39,7 @@ public abstract class CLMemObjectDestructorCallback extends Callback implements 
     }
 
     protected CLMemObjectDestructorCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     CLMemObjectDestructorCallback(long functionPointer) {

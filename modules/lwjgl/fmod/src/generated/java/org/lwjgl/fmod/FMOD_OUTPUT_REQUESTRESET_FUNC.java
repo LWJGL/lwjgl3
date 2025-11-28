@@ -39,7 +39,7 @@ public abstract class FMOD_OUTPUT_REQUESTRESET_FUNC extends Callback implements 
     }
 
     protected FMOD_OUTPUT_REQUESTRESET_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_OUTPUT_REQUESTRESET_FUNC(long functionPointer) {

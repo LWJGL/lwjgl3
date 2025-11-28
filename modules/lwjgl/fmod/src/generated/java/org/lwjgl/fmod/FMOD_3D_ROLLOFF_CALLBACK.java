@@ -39,7 +39,7 @@ public abstract class FMOD_3D_ROLLOFF_CALLBACK extends Callback implements FMOD_
     }
 
     protected FMOD_3D_ROLLOFF_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_3D_ROLLOFF_CALLBACK(long functionPointer) {

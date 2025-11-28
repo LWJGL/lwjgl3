@@ -39,7 +39,7 @@ public abstract class EXTDebugProc extends Callback implements EXTDebugProcI {
     }
 
     protected EXTDebugProc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     EXTDebugProc(long functionPointer) {

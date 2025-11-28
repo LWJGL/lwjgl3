@@ -39,7 +39,7 @@ public abstract class FTC_Face_Requester extends Callback implements FTC_Face_Re
     }
 
     protected FTC_Face_Requester() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FTC_Face_Requester(long functionPointer) {

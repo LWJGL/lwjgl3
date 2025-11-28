@@ -39,7 +39,7 @@ public abstract class NkPluginAlloc extends Callback implements NkPluginAllocI {
     }
 
     protected NkPluginAlloc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     NkPluginAlloc(long functionPointer) {

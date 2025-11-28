@@ -39,7 +39,7 @@ public abstract class FT_Module_Requester extends Callback implements FT_Module_
     }
 
     protected FT_Module_Requester() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FT_Module_Requester(long functionPointer) {

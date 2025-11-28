@@ -39,7 +39,7 @@ public abstract class MDBMsgFunc extends Callback implements MDBMsgFuncI {
     }
 
     protected MDBMsgFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     MDBMsgFunc(long functionPointer) {

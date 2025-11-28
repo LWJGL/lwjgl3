@@ -39,7 +39,7 @@ public abstract class SDL_StorageInterfaceRenameCallback extends Callback implem
     }
 
     protected SDL_StorageInterfaceRenameCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_StorageInterfaceRenameCallback(long functionPointer) {

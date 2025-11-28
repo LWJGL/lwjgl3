@@ -39,7 +39,7 @@ public abstract class CGEventTapCallBack extends Callback implements CGEventTapC
     }
 
     protected CGEventTapCallBack() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     CGEventTapCallBack(long functionPointer) {

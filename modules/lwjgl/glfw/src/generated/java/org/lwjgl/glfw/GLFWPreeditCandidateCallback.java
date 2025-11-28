@@ -41,7 +41,7 @@ public abstract class GLFWPreeditCandidateCallback extends Callback implements G
     }
 
     protected GLFWPreeditCandidateCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     GLFWPreeditCandidateCallback(long functionPointer) {

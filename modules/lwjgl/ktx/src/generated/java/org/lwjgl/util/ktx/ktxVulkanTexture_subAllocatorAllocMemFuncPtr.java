@@ -39,7 +39,7 @@ public abstract class ktxVulkanTexture_subAllocatorAllocMemFuncPtr extends Callb
     }
 
     protected ktxVulkanTexture_subAllocatorAllocMemFuncPtr() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     ktxVulkanTexture_subAllocatorAllocMemFuncPtr(long functionPointer) {

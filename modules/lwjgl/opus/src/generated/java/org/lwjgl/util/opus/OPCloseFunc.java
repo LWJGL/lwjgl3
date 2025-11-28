@@ -39,7 +39,7 @@ public abstract class OPCloseFunc extends Callback implements OPCloseFuncI {
     }
 
     protected OPCloseFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     OPCloseFunc(long functionPointer) {

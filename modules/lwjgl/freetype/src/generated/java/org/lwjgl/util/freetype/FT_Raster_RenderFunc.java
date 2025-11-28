@@ -39,7 +39,7 @@ public abstract class FT_Raster_RenderFunc extends Callback implements FT_Raster
     }
 
     protected FT_Raster_RenderFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FT_Raster_RenderFunc(long functionPointer) {

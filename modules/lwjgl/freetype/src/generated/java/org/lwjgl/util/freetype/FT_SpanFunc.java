@@ -39,7 +39,7 @@ public abstract class FT_SpanFunc extends Callback implements FT_SpanFuncI {
     }
 
     protected FT_SpanFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FT_SpanFunc(long functionPointer) {

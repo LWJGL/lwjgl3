@@ -39,7 +39,7 @@ public abstract class FMOD_DSP_SYSTEM_MIX_CALLBACK extends Callback implements F
     }
 
     protected FMOD_DSP_SYSTEM_MIX_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_DSP_SYSTEM_MIX_CALLBACK(long functionPointer) {

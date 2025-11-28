@@ -39,7 +39,7 @@ public abstract class LLVMOpInfoCallback extends Callback implements LLVMOpInfoC
     }
 
     protected LLVMOpInfoCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LLVMOpInfoCallback(long functionPointer) {

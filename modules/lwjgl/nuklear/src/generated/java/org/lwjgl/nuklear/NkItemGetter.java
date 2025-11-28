@@ -39,7 +39,7 @@ public abstract class NkItemGetter extends Callback implements NkItemGetterI {
     }
 
     protected NkItemGetter() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     NkItemGetter(long functionPointer) {

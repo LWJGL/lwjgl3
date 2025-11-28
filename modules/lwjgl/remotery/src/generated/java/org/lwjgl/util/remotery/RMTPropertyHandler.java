@@ -39,7 +39,7 @@ public abstract class RMTPropertyHandler extends Callback implements RMTProperty
     }
 
     protected RMTPropertyHandler() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     RMTPropertyHandler(long functionPointer) {

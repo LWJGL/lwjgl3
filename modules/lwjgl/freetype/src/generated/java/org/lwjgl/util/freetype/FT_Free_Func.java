@@ -39,7 +39,7 @@ public abstract class FT_Free_Func extends Callback implements FT_Free_FuncI {
     }
 
     protected FT_Free_Func() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FT_Free_Func(long functionPointer) {

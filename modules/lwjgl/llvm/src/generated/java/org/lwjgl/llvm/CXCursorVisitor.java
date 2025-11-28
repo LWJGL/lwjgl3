@@ -39,7 +39,7 @@ public abstract class CXCursorVisitor extends Callback implements CXCursorVisito
     }
 
     protected CXCursorVisitor() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     CXCursorVisitor(long functionPointer) {

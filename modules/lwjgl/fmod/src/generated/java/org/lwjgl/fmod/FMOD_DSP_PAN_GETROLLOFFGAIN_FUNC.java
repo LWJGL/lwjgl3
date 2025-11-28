@@ -39,7 +39,7 @@ public abstract class FMOD_DSP_PAN_GETROLLOFFGAIN_FUNC extends Callback implemen
     }
 
     protected FMOD_DSP_PAN_GETROLLOFFGAIN_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_DSP_PAN_GETROLLOFFGAIN_FUNC(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class FMOD_DSP_GETSPEAKERMODE_FUNC extends Callback implements F
     }
 
     protected FMOD_DSP_GETSPEAKERMODE_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_DSP_GETSPEAKERMODE_FUNC(long functionPointer) {

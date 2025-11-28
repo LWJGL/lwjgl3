@@ -39,7 +39,7 @@ public abstract class EnumerationMutationHandler extends Callback implements Enu
     }
 
     protected EnumerationMutationHandler() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     EnumerationMutationHandler(long functionPointer) {

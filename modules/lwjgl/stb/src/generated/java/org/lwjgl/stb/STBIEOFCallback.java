@@ -39,7 +39,7 @@ public abstract class STBIEOFCallback extends Callback implements STBIEOFCallbac
     }
 
     protected STBIEOFCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     STBIEOFCallback(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class RMTSampleTreeHandler extends Callback implements RMTSample
     }
 
     protected RMTSampleTreeHandler() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     RMTSampleTreeHandler(long functionPointer) {

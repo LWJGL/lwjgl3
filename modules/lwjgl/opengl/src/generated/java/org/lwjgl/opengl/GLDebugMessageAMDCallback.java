@@ -39,7 +39,7 @@ public abstract class GLDebugMessageAMDCallback extends Callback implements GLDe
     }
 
     protected GLDebugMessageAMDCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     GLDebugMessageAMDCallback(long functionPointer) {

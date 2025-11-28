@@ -39,7 +39,7 @@ public abstract class FT_DebugHook_Func extends Callback implements FT_DebugHook
     }
 
     protected FT_DebugHook_Func() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FT_DebugHook_Func(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class FMOD_SOUND_PCMREAD_CALLBACK extends Callback implements FM
     }
 
     protected FMOD_SOUND_PCMREAD_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_SOUND_PCMREAD_CALLBACK(long functionPointer) {

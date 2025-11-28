@@ -41,7 +41,7 @@ public abstract class GLFWFramebufferSizeCallback extends Callback implements GL
     }
 
     protected GLFWFramebufferSizeCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     GLFWFramebufferSizeCallback(long functionPointer) {

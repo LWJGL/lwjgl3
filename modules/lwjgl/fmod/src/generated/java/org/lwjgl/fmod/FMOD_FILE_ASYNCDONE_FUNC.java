@@ -39,7 +39,7 @@ public abstract class FMOD_FILE_ASYNCDONE_FUNC extends Callback implements FMOD_
     }
 
     protected FMOD_FILE_ASYNCDONE_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_FILE_ASYNCDONE_FUNC(long functionPointer) {

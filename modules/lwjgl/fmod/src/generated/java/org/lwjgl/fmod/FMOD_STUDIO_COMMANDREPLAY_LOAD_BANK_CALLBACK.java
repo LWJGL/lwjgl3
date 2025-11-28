@@ -39,7 +39,7 @@ public abstract class FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK extends Callb
     }
 
     protected FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK(long functionPointer) {

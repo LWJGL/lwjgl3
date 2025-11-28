@@ -39,7 +39,7 @@ public abstract class hb_paint_pop_group_func_t extends Callback implements hb_p
     }
 
     protected hb_paint_pop_group_func_t() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     hb_paint_pop_group_func_t(long functionPointer) {

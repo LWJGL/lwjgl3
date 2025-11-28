@@ -39,7 +39,7 @@ public abstract class hb_color_line_get_extend_func_t extends Callback implement
     }
 
     protected hb_color_line_get_extend_func_t() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     hb_color_line_get_extend_func_t(long functionPointer) {

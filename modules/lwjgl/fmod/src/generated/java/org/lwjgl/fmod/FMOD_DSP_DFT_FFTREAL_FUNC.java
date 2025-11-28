@@ -39,7 +39,7 @@ public abstract class FMOD_DSP_DFT_FFTREAL_FUNC extends Callback implements FMOD
     }
 
     protected FMOD_DSP_DFT_FFTREAL_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_DSP_DFT_FFTREAL_FUNC(long functionPointer) {

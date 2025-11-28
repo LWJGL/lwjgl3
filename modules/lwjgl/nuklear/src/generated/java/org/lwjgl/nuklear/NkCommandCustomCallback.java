@@ -39,7 +39,7 @@ public abstract class NkCommandCustomCallback extends Callback implements NkComm
     }
 
     protected NkCommandCustomCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     NkCommandCustomCallback(long functionPointer) {

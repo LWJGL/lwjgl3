@@ -39,7 +39,7 @@ public abstract class CLEventCallback extends Callback implements CLEventCallbac
     }
 
     protected CLEventCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     CLEventCallback(long functionPointer) {

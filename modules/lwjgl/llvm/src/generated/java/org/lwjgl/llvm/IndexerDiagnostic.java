@@ -39,7 +39,7 @@ public abstract class IndexerDiagnostic extends Callback implements IndexerDiagn
     }
 
     protected IndexerDiagnostic() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     IndexerDiagnostic(long functionPointer) {

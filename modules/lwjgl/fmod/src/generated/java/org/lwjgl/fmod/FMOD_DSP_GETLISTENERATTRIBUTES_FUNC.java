@@ -39,7 +39,7 @@ public abstract class FMOD_DSP_GETLISTENERATTRIBUTES_FUNC extends Callback imple
     }
 
     protected FMOD_DSP_GETLISTENERATTRIBUTES_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_DSP_GETLISTENERATTRIBUTES_FUNC(long functionPointer) {

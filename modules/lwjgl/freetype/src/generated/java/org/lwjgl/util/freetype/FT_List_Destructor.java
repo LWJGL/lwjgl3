@@ -39,7 +39,7 @@ public abstract class FT_List_Destructor extends Callback implements FT_List_Des
     }
 
     protected FT_List_Destructor() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FT_List_Destructor(long functionPointer) {

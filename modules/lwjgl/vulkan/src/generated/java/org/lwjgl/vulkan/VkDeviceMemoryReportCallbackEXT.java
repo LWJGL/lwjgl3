@@ -39,7 +39,7 @@ public abstract class VkDeviceMemoryReportCallbackEXT extends Callback implement
     }
 
     protected VkDeviceMemoryReportCallbackEXT() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     VkDeviceMemoryReportCallbackEXT(long functionPointer) {

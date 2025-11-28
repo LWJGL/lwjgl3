@@ -39,7 +39,7 @@ public abstract class SDL_realloc_func extends Callback implements SDL_realloc_f
     }
 
     protected SDL_realloc_func() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_realloc_func(long functionPointer) {

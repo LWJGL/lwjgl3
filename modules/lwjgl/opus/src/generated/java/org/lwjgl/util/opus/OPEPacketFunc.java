@@ -39,7 +39,7 @@ public abstract class OPEPacketFunc extends Callback implements OPEPacketFuncI {
     }
 
     protected OPEPacketFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     OPEPacketFunc(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class FMOD_MEMORY_REALLOC_CALLBACK extends Callback implements F
     }
 
     protected FMOD_MEMORY_REALLOC_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_MEMORY_REALLOC_CALLBACK(long functionPointer) {

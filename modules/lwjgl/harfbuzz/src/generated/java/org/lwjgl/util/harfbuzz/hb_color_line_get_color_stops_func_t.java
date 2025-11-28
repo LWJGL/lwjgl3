@@ -39,7 +39,7 @@ public abstract class hb_color_line_get_color_stops_func_t extends Callback impl
     }
 
     protected hb_color_line_get_color_stops_func_t() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     hb_color_line_get_color_stops_func_t(long functionPointer) {

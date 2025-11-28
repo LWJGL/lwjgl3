@@ -39,7 +39,7 @@ public abstract class FMOD_DSP_GETUSERDATA_FUNC extends Callback implements FMOD
     }
 
     protected FMOD_DSP_GETUSERDATA_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_DSP_GETUSERDATA_FUNC(long functionPointer) {

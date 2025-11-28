@@ -39,7 +39,7 @@ public abstract class SDL_VirtualJoystickDescRumbleTriggersCallback extends Call
     }
 
     protected SDL_VirtualJoystickDescRumbleTriggersCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_VirtualJoystickDescRumbleTriggersCallback(long functionPointer) {

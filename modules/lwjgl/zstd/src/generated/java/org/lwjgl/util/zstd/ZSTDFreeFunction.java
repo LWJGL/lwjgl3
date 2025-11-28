@@ -39,7 +39,7 @@ public abstract class ZSTDFreeFunction extends Callback implements ZSTDFreeFunct
     }
 
     protected ZSTDFreeFunction() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     ZSTDFreeFunction(long functionPointer) {

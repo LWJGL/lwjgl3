@@ -39,7 +39,7 @@ public abstract class PFNKTXITERCB extends Callback implements PFNKTXITERCBI {
     }
 
     protected PFNKTXITERCB() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     PFNKTXITERCB(long functionPointer) {

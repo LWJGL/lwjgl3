@@ -39,7 +39,7 @@ public abstract class FMOD_OUTPUT_COPYPORT_FUNC extends Callback implements FMOD
     }
 
     protected FMOD_OUTPUT_COPYPORT_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_OUTPUT_COPYPORT_FUNC(long functionPointer) {

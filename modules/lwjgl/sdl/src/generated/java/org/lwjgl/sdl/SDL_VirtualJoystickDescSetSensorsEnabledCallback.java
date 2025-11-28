@@ -39,7 +39,7 @@ public abstract class SDL_VirtualJoystickDescSetSensorsEnabledCallback extends C
     }
 
     protected SDL_VirtualJoystickDescSetSensorsEnabledCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_VirtualJoystickDescSetSensorsEnabledCallback(long functionPointer) {

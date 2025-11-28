@@ -41,7 +41,7 @@ public abstract class GLFWIMEStatusCallback extends Callback implements GLFWIMES
     }
 
     protected GLFWIMEStatusCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     GLFWIMEStatusCallback(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class RPErrorCallback extends Callback implements RPErrorCallbac
     }
 
     protected RPErrorCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     RPErrorCallback(long functionPointer) {

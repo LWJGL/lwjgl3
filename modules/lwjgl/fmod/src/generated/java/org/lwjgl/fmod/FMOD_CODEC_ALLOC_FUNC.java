@@ -39,7 +39,7 @@ public abstract class FMOD_CODEC_ALLOC_FUNC extends Callback implements FMOD_COD
     }
 
     protected FMOD_CODEC_ALLOC_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_CODEC_ALLOC_FUNC(long functionPointer) {

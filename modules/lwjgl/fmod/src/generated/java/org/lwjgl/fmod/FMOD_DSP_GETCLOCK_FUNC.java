@@ -39,7 +39,7 @@ public abstract class FMOD_DSP_GETCLOCK_FUNC extends Callback implements FMOD_DS
     }
 
     protected FMOD_DSP_GETCLOCK_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_DSP_GETCLOCK_FUNC(long functionPointer) {

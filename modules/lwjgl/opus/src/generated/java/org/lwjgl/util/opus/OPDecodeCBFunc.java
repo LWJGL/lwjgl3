@@ -39,7 +39,7 @@ public abstract class OPDecodeCBFunc extends Callback implements OPDecodeCBFuncI
     }
 
     protected OPDecodeCBFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     OPDecodeCBFunc(long functionPointer) {

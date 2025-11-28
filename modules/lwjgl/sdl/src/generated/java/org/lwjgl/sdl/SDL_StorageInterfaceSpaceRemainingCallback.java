@@ -39,7 +39,7 @@ public abstract class SDL_StorageInterfaceSpaceRemainingCallback extends Callbac
     }
 
     protected SDL_StorageInterfaceSpaceRemainingCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_StorageInterfaceSpaceRemainingCallback(long functionPointer) {

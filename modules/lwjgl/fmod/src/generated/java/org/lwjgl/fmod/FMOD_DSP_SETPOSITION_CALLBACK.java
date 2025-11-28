@@ -39,7 +39,7 @@ public abstract class FMOD_DSP_SETPOSITION_CALLBACK extends Callback implements 
     }
 
     protected FMOD_DSP_SETPOSITION_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_DSP_SETPOSITION_CALLBACK(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class SpvcErrorCallback extends Callback implements SpvcErrorCal
     }
 
     protected SpvcErrorCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SpvcErrorCallback(long functionPointer) {

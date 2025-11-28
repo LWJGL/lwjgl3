@@ -39,7 +39,7 @@ public abstract class GLDebugMessageKHRCallback extends Callback implements GLDe
     }
 
     protected GLDebugMessageKHRCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     GLDebugMessageKHRCallback(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class BGFXScreenShotCallback extends Callback implements BGFXScr
     }
 
     protected BGFXScreenShotCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     BGFXScreenShotCallback(long functionPointer) {

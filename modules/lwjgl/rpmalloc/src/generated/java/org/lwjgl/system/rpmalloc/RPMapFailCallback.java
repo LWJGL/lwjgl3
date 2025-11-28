@@ -39,7 +39,7 @@ public abstract class RPMapFailCallback extends Callback implements RPMapFailCal
     }
 
     protected RPMapFailCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     RPMapFailCallback(long functionPointer) {

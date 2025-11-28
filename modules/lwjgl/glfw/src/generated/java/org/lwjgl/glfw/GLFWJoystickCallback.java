@@ -41,7 +41,7 @@ public abstract class GLFWJoystickCallback extends Callback implements GLFWJoyst
     }
 
     protected GLFWJoystickCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     GLFWJoystickCallback(long functionPointer) {

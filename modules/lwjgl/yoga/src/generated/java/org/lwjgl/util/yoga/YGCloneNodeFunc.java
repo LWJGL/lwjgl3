@@ -39,7 +39,7 @@ public abstract class YGCloneNodeFunc extends Callback implements YGCloneNodeFun
     }
 
     protected YGCloneNodeFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     YGCloneNodeFunc(long functionPointer) {

@@ -41,7 +41,7 @@ public abstract class GLFWWindowContentScaleCallback extends Callback implements
     }
 
     protected GLFWWindowContentScaleCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     GLFWWindowContentScaleCallback(long functionPointer) {

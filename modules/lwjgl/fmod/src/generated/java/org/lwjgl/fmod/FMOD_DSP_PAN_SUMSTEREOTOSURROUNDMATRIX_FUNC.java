@@ -39,7 +39,7 @@ public abstract class FMOD_DSP_PAN_SUMSTEREOTOSURROUNDMATRIX_FUNC extends Callba
     }
 
     protected FMOD_DSP_PAN_SUMSTEREOTOSURROUNDMATRIX_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_DSP_PAN_SUMSTEREOTOSURROUNDMATRIX_FUNC(long functionPointer) {

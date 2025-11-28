@@ -39,7 +39,7 @@ public abstract class FMOD_OUTPUT_GETDRIVERINFO_CALLBACK extends Callback implem
     }
 
     protected FMOD_OUTPUT_GETDRIVERINFO_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_OUTPUT_GETDRIVERINFO_CALLBACK(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class SDL_IOStreamInterfaceSizeCallback extends Callback impleme
     }
 
     protected SDL_IOStreamInterfaceSizeCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_IOStreamInterfaceSizeCallback(long functionPointer) {

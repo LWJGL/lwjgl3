@@ -39,7 +39,7 @@ public abstract class LLVMOrcLLJITBuilderObjectLinkingLayerCreatorFunction exten
     }
 
     protected LLVMOrcLLJITBuilderObjectLinkingLayerCreatorFunction() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LLVMOrcLLJITBuilderObjectLinkingLayerCreatorFunction(long functionPointer) {

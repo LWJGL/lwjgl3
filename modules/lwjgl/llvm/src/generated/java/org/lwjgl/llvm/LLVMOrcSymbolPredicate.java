@@ -39,7 +39,7 @@ public abstract class LLVMOrcSymbolPredicate extends Callback implements LLVMOrc
     }
 
     protected LLVMOrcSymbolPredicate() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LLVMOrcSymbolPredicate(long functionPointer) {

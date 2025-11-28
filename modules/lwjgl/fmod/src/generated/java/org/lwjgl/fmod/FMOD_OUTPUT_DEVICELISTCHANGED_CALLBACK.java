@@ -39,7 +39,7 @@ public abstract class FMOD_OUTPUT_DEVICELISTCHANGED_CALLBACK extends Callback im
     }
 
     protected FMOD_OUTPUT_DEVICELISTCHANGED_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_OUTPUT_DEVICELISTCHANGED_CALLBACK(long functionPointer) {

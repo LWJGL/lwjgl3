@@ -39,7 +39,7 @@ public abstract class ExtentMerge extends Callback implements ExtentMergeI {
     }
 
     protected ExtentMerge() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     ExtentMerge(long functionPointer) {

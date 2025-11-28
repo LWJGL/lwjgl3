@@ -39,7 +39,7 @@ public abstract class VkInternalAllocationNotification extends Callback implemen
     }
 
     protected VkInternalAllocationNotification() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     VkInternalAllocationNotification(long functionPointer) {

@@ -39,7 +39,7 @@ public abstract class FMOD_OUTPUT_ALLOC_FUNC extends Callback implements FMOD_OU
     }
 
     protected FMOD_OUTPUT_ALLOC_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_OUTPUT_ALLOC_FUNC(long functionPointer) {

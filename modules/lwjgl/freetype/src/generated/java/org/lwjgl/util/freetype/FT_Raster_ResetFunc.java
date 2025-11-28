@@ -39,7 +39,7 @@ public abstract class FT_Raster_ResetFunc extends Callback implements FT_Raster_
     }
 
     protected FT_Raster_ResetFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FT_Raster_ResetFunc(long functionPointer) {

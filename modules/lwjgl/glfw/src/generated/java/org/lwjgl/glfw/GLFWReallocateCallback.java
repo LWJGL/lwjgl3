@@ -39,7 +39,7 @@ public abstract class GLFWReallocateCallback extends Callback implements GLFWRea
     }
 
     protected GLFWReallocateCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     GLFWReallocateCallback(long functionPointer) {

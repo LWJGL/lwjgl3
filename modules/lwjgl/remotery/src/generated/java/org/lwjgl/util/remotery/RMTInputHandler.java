@@ -39,7 +39,7 @@ public abstract class RMTInputHandler extends Callback implements RMTInputHandle
     }
 
     protected RMTInputHandler() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     RMTInputHandler(long functionPointer) {

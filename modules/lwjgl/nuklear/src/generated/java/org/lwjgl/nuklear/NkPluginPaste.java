@@ -39,7 +39,7 @@ public abstract class NkPluginPaste extends Callback implements NkPluginPasteI {
     }
 
     protected NkPluginPaste() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     NkPluginPaste(long functionPointer) {

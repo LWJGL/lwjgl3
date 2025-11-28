@@ -39,7 +39,7 @@ public abstract class ShadercIncludeResolve extends Callback implements ShadercI
     }
 
     protected ShadercIncludeResolve() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     ShadercIncludeResolve(long functionPointer) {

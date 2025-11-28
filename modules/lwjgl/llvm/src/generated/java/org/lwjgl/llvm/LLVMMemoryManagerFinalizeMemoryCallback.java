@@ -39,7 +39,7 @@ public abstract class LLVMMemoryManagerFinalizeMemoryCallback extends Callback i
     }
 
     protected LLVMMemoryManagerFinalizeMemoryCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LLVMMemoryManagerFinalizeMemoryCallback(long functionPointer) {

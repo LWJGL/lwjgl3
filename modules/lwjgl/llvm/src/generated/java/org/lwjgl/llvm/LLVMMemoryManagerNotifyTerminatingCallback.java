@@ -39,7 +39,7 @@ public abstract class LLVMMemoryManagerNotifyTerminatingCallback extends Callbac
     }
 
     protected LLVMMemoryManagerNotifyTerminatingCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LLVMMemoryManagerNotifyTerminatingCallback(long functionPointer) {

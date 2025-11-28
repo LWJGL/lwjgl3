@@ -39,7 +39,7 @@ public abstract class FT_Outline_CubicToFunc extends Callback implements FT_Outl
     }
 
     protected FT_Outline_CubicToFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FT_Outline_CubicToFunc(long functionPointer) {

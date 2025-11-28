@@ -39,7 +39,7 @@ public abstract class NkPluginFilter extends Callback implements NkPluginFilterI
     }
 
     protected NkPluginFilter() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     NkPluginFilter(long functionPointer) {

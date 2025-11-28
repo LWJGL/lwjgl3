@@ -39,7 +39,7 @@ public abstract class hb_font_get_nominal_glyphs_func_t extends Callback impleme
     }
 
     protected hb_font_get_nominal_glyphs_func_t() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     hb_font_get_nominal_glyphs_func_t(long functionPointer) {

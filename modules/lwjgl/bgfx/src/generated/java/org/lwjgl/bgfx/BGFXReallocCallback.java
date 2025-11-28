@@ -39,7 +39,7 @@ public abstract class BGFXReallocCallback extends Callback implements BGFXReallo
     }
 
     protected BGFXReallocCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     BGFXReallocCallback(long functionPointer) {

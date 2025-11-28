@@ -39,7 +39,7 @@ public abstract class ktxStream_destruct extends Callback implements ktxStream_d
     }
 
     protected ktxStream_destruct() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     ktxStream_destruct(long functionPointer) {

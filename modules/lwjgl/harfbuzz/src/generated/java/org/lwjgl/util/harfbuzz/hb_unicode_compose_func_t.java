@@ -39,7 +39,7 @@ public abstract class hb_unicode_compose_func_t extends Callback implements hb_u
     }
 
     protected hb_unicode_compose_func_t() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     hb_unicode_compose_func_t(long functionPointer) {

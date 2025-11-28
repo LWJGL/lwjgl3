@@ -39,7 +39,7 @@ public abstract class YGDirtiedFunc extends Callback implements YGDirtiedFuncI {
     }
 
     protected YGDirtiedFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     YGDirtiedFunc(long functionPointer) {

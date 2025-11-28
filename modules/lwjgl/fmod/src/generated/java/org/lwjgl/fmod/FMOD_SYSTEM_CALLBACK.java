@@ -39,7 +39,7 @@ public abstract class FMOD_SYSTEM_CALLBACK extends Callback implements FMOD_SYST
     }
 
     protected FMOD_SYSTEM_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_SYSTEM_CALLBACK(long functionPointer) {

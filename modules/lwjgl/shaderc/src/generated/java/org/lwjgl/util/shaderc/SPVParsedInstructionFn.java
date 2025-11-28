@@ -39,7 +39,7 @@ public abstract class SPVParsedInstructionFn extends Callback implements SPVPars
     }
 
     protected SPVParsedInstructionFn() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SPVParsedInstructionFn(long functionPointer) {

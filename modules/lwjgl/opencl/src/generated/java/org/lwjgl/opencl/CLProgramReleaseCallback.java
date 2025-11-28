@@ -39,7 +39,7 @@ public abstract class CLProgramReleaseCallback extends Callback implements CLPro
     }
 
     protected CLProgramReleaseCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     CLProgramReleaseCallback(long functionPointer) {

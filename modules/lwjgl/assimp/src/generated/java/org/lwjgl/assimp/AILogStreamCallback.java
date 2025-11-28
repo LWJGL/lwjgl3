@@ -39,7 +39,7 @@ public abstract class AILogStreamCallback extends Callback implements AILogStrea
     }
 
     protected AILogStreamCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     AILogStreamCallback(long functionPointer) {

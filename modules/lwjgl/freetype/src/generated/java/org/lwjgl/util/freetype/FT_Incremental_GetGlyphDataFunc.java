@@ -39,7 +39,7 @@ public abstract class FT_Incremental_GetGlyphDataFunc extends Callback implement
     }
 
     protected FT_Incremental_GetGlyphDataFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FT_Incremental_GetGlyphDataFunc(long functionPointer) {

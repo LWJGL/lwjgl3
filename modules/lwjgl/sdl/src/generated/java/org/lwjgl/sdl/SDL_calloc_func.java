@@ -39,7 +39,7 @@ public abstract class SDL_calloc_func extends Callback implements SDL_calloc_fun
     }
 
     protected SDL_calloc_func() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_calloc_func(long functionPointer) {

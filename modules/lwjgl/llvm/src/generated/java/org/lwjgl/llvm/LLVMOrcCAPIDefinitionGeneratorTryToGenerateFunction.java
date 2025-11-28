@@ -39,7 +39,7 @@ public abstract class LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction extend
     }
 
     protected LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction(long functionPointer) {

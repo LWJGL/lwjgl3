@@ -39,7 +39,7 @@ public abstract class FMOD_DSP_RESET_CALLBACK extends Callback implements FMOD_D
     }
 
     protected FMOD_DSP_RESET_CALLBACK() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_DSP_RESET_CALLBACK(long functionPointer) {

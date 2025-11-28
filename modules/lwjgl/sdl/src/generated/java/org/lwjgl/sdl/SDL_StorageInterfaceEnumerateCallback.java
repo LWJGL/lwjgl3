@@ -39,7 +39,7 @@ public abstract class SDL_StorageInterfaceEnumerateCallback extends Callback imp
     }
 
     protected SDL_StorageInterfaceEnumerateCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_StorageInterfaceEnumerateCallback(long functionPointer) {

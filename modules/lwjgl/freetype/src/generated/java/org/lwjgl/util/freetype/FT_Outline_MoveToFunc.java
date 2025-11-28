@@ -39,7 +39,7 @@ public abstract class FT_Outline_MoveToFunc extends Callback implements FT_Outli
     }
 
     protected FT_Outline_MoveToFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FT_Outline_MoveToFunc(long functionPointer) {

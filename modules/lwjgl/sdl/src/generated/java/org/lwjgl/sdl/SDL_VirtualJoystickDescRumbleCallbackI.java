@@ -6,7 +6,8 @@
 package org.lwjgl.sdl;
 
 import org.lwjgl.system.*;
-import org.lwjgl.system.libffi.*;
+
+import java.lang.invoke.*;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -17,13 +18,16 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 @NativeType("bool (*) (void *, Uint16, Uint16)")
 public interface SDL_VirtualJoystickDescRumbleCallbackI extends CallbackI {
 
-    FFICIF CIF = apiCreateCIF(
-        ffi_type_uint8,
-        ffi_type_pointer, ffi_type_uint16, ffi_type_uint16
+    Callback.Descriptor DESCRIPTOR = new Callback.Descriptor(
+        MethodHandles.lookup(),
+        apiCreateCIF(
+            ffi_type_uint8,
+            ffi_type_pointer, ffi_type_uint16, ffi_type_uint16
+        )
     );
 
     @Override
-    default FFICIF getCallInterface() { return CIF; }
+    default Callback.Descriptor getDescriptor() { return DESCRIPTOR; }
 
     @Override
     default void callback(long ret, long args) {

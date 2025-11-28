@@ -39,7 +39,7 @@ public abstract class CXFieldVisitor extends Callback implements CXFieldVisitorI
     }
 
     protected CXFieldVisitor() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     CXFieldVisitor(long functionPointer) {

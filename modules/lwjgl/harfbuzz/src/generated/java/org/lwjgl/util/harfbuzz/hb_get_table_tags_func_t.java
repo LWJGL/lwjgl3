@@ -39,7 +39,7 @@ public abstract class hb_get_table_tags_func_t extends Callback implements hb_ge
     }
 
     protected hb_get_table_tags_func_t() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     hb_get_table_tags_func_t(long functionPointer) {

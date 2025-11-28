@@ -39,7 +39,7 @@ public abstract class SOFTEventProc extends Callback implements SOFTEventProcI {
     }
 
     protected SOFTEventProc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SOFTEventProc(long functionPointer) {

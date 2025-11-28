@@ -39,7 +39,7 @@ public abstract class VkDebugReportCallbackEXT extends Callback implements VkDeb
     }
 
     protected VkDebugReportCallbackEXT() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     VkDebugReportCallbackEXT(long functionPointer) {

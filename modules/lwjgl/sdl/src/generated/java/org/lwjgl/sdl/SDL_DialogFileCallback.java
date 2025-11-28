@@ -39,7 +39,7 @@ public abstract class SDL_DialogFileCallback extends Callback implements SDL_Dia
     }
 
     protected SDL_DialogFileCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_DialogFileCallback(long functionPointer) {

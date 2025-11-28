@@ -39,7 +39,7 @@ public abstract class FMOD_DSP_LOG_FUNC extends Callback implements FMOD_DSP_LOG
     }
 
     protected FMOD_DSP_LOG_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_DSP_LOG_FUNC(long functionPointer) {

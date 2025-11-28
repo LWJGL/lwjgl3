@@ -39,7 +39,7 @@ public abstract class FMOD_DSP_PAN_SUMMONOMATRIX_FUNC extends Callback implement
     }
 
     protected FMOD_DSP_PAN_SUMMONOMATRIX_FUNC() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FMOD_DSP_PAN_SUMMONOMATRIX_FUNC(long functionPointer) {

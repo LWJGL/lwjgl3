@@ -39,7 +39,7 @@ public abstract class SDL_VirtualJoystickDescCleanupCallback extends Callback im
     }
 
     protected SDL_VirtualJoystickDescCleanupCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_VirtualJoystickDescCleanupCallback(long functionPointer) {

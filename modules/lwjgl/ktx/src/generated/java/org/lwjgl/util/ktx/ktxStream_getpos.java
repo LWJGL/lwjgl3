@@ -39,7 +39,7 @@ public abstract class ktxStream_getpos extends Callback implements ktxStream_get
     }
 
     protected ktxStream_getpos() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     ktxStream_getpos(long functionPointer) {

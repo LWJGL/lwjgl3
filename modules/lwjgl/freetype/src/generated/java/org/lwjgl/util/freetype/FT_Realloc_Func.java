@@ -39,7 +39,7 @@ public abstract class FT_Realloc_Func extends Callback implements FT_Realloc_Fun
     }
 
     protected FT_Realloc_Func() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     FT_Realloc_Func(long functionPointer) {

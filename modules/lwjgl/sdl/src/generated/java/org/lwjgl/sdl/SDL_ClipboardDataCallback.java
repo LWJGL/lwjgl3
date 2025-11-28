@@ -39,7 +39,7 @@ public abstract class SDL_ClipboardDataCallback extends Callback implements SDL_
     }
 
     protected SDL_ClipboardDataCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     SDL_ClipboardDataCallback(long functionPointer) {

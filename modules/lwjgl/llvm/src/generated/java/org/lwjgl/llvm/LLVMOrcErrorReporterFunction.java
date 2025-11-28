@@ -39,7 +39,7 @@ public abstract class LLVMOrcErrorReporterFunction extends Callback implements L
     }
 
     protected LLVMOrcErrorReporterFunction() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LLVMOrcErrorReporterFunction(long functionPointer) {

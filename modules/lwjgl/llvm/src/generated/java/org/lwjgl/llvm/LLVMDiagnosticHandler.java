@@ -39,7 +39,7 @@ public abstract class LLVMDiagnosticHandler extends Callback implements LLVMDiag
     }
 
     protected LLVMDiagnosticHandler() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     LLVMDiagnosticHandler(long functionPointer) {

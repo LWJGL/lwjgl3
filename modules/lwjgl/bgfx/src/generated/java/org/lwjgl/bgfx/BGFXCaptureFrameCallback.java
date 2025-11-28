@@ -39,7 +39,7 @@ public abstract class BGFXCaptureFrameCallback extends Callback implements BGFXC
     }
 
     protected BGFXCaptureFrameCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     BGFXCaptureFrameCallback(long functionPointer) {

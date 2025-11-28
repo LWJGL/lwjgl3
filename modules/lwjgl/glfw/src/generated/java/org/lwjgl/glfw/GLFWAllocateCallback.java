@@ -39,7 +39,7 @@ public abstract class GLFWAllocateCallback extends Callback implements GLFWAlloc
     }
 
     protected GLFWAllocateCallback() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     GLFWAllocateCallback(long functionPointer) {

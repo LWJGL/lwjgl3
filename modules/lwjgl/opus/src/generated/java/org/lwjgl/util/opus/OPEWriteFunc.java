@@ -39,7 +39,7 @@ public abstract class OPEWriteFunc extends Callback implements OPEWriteFuncI {
     }
 
     protected OPEWriteFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     OPEWriteFunc(long functionPointer) {

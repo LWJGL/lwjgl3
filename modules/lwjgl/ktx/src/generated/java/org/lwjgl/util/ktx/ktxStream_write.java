@@ -39,7 +39,7 @@ public abstract class ktxStream_write extends Callback implements ktxStream_writ
     }
 
     protected ktxStream_write() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     ktxStream_write(long functionPointer) {
