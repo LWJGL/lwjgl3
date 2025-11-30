@@ -120,7 +120,7 @@ import static org.lwjgl.system.MemoryUtil.*;
     }
 
     protected $className() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     $className(long functionPointer) {
@@ -170,8 +170,8 @@ import static org.lwjgl.system.MemoryUtil.*;
         print(HEADER)
         println("package $packageName;\n")
 
-        println("import org.lwjgl.system.*;")
-        println("import org.lwjgl.system.libffi.*;\n")
+        println("import org.lwjgl.system.*;\n")
+        println("import java.lang.invoke.*;\n")
         println("import static org.lwjgl.system.APIUtil.*;")
         if (signature.isNotEmpty()) {
             println("import static org.lwjgl.system.MemoryUtil.*;")
@@ -184,14 +184,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 @NativeType("$nativeType")
 ${access.modifier}interface ${className}I extends CallbackI {
 
-    FFICIF CIF = apiCreateCIF(${if (callingConvention === CallingConvention.STDCALL) """
-        apiStdcall(),""" else ""}
-        ${returns.libffi}${if (signature.isEmpty()) "" else """,
-        ${signature.joinToString(", ") { it.nativeType.libffi }}"""}
+    Callback.Descriptor DESCRIPTOR = new Callback.Descriptor(
+        MethodHandles.lookup(),
+        apiCreateCIF(${if (callingConvention === CallingConvention.STDCALL) """
+            apiStdcall(),""" else ""}
+            ${returns.libffi}${if (signature.isEmpty()) "" else """,
+            ${signature.joinToString(", ") { it.nativeType.libffi }}"""}
+        )
     );
 
     @Override
-    default FFICIF getCallInterface() { return CIF; }
+    default Callback.Descriptor getDescriptor() { return DESCRIPTOR; }
 
     @Override
     default void callback(long ret, long args) {

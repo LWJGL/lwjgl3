@@ -51,7 +51,7 @@ static void cbHandler(ffi_cif *cif, void *ret, void **args, void *user_data) {
 
 EXTERN_C_ENTER
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_Callback_getCallbackHandler(JNIEnv *env, jclass clazz, jobject method) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_Upcalls_getCallbackHandler(JNIEnv *env, jclass clazz, jobject method) {
     UNUSED_PARAMS(env, clazz)
 
     javaCallback = (*env)->FromReflectedMethod(env, method);
