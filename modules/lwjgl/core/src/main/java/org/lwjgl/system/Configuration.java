@@ -24,8 +24,8 @@ public class Configuration<T> {
      * <p>It may contain one or more directory paths, separated by {@link File#pathSeparator}.</p>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.librarypath</b><br>
-     * &nbsp; &nbsp;Usage: Dynamic<br>
+     * Property: <b>org.lwjgl.librarypath</b>
+     * <br>&nbsp; &nbsp;Usage: Dynamic<br>
      */
     public static final Configuration<String> LIBRARY_PATH = new Configuration<>("org.lwjgl.librarypath", StateInit.STRING);
 
@@ -72,11 +72,11 @@ public class Configuration<T> {
     /**
      * Changes the temporary directory name created by LWJGL when extracting shared libraries from JAR files.
      *
-     * <p>If this option is not set, it defaults to <code>lwjgl_&lt;user name&gt;</code>.</p>
+     * <p>If this option is not set, it defaults to {@code lwjgl_<user name>}.</p>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.system.SharedLibraryExtractDirectory</b><br>
-     * &nbsp; &nbsp;Usage: Dynamic<br>
+     * Property: <b>org.lwjgl.system.SharedLibraryExtractDirectory</b>
+     * <br>&nbsp; &nbsp;Usage: Dynamic<br>
      */
     public static final Configuration<String> SHARED_LIBRARY_EXTRACT_DIRECTORY = new Configuration<>(
         "org.lwjgl.system.SharedLibraryExtractDirectory",
@@ -94,16 +94,16 @@ public class Configuration<T> {
      * <li>{@code Files.createTempDirectory("lwjgl", "")}</li>
      * </ul>
      *
-     * where:
+     * <p>where:</p>
      *
-     * <pre><code>
+     * <pre>{@code
      * extractDir = Configuration.SHARED_LIBRARY_EXTRACT_DIRECTORY
      * version = Version.getVersion().replace(' ', '-')
-     * </code></pre>
+     * }</pre>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.system.SharedLibraryExtractPath</b><br>
-     * &nbsp; &nbsp;Usage: Dynamic</p>
+     * Property: <b>org.lwjgl.system.SharedLibraryExtractPath</b>
+     * <br>&nbsp; &nbsp;Usage: Dynamic</p>
      */
     public static final Configuration<String> SHARED_LIBRARY_EXTRACT_PATH = new Configuration<>(
         "org.lwjgl.system.SharedLibraryExtractPath",
@@ -115,8 +115,8 @@ public class Configuration<T> {
      * {@link #SHARED_LIBRARY_EXTRACT_PATH}, then loaded from there.
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.system.SharedLibraryExtractForce</b><br>
-     * &nbsp; &nbsp;Usage: Dynamic</p>
+     * Property: <b>org.lwjgl.system.SharedLibraryExtractForce</b>
+     * <br>&nbsp; &nbsp;Usage: Dynamic</p>
      */
     public static final Configuration<Boolean> SHARED_LIBRARY_EXTRACT_FORCE = new Configuration<>(
         "org.lwjgl.system.SharedLibraryExtractForce",
@@ -127,8 +127,8 @@ public class Configuration<T> {
      * EXPERIMENTAL: Emulates {@link System#loadLibrary} behavior in {@link Library#loadNative(Class, String, String, boolean) Library.loadNative}.
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.system.EmulateSystemLoadLibrary</b><br>
-     * &nbsp; &nbsp;Usage: Dynamic</p>
+     * Property: <b>org.lwjgl.system.EmulateSystemLoadLibrary</b>
+     * <br>&nbsp; &nbsp;Usage: Dynamic</p>
      */
     public static final Configuration<Boolean> EMULATE_SYSTEM_LOADLIBRARY = new Configuration<>(
         "org.lwjgl.system.EmulateSystemLoadLibrary",
@@ -141,8 +141,8 @@ public class Configuration<T> {
      * <p>It can be an absolute path.</p>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.libname</b><br>
-     * &nbsp; &nbsp;Usage: Dynamic</p>
+     * Property: <b>org.lwjgl.libname</b>
+     * <br>&nbsp; &nbsp;Usage: Dynamic</p>
      */
     public static final Configuration<String> LIBRARY_NAME = new Configuration<>("org.lwjgl.libname", StateInit.STRING);
 
@@ -176,8 +176,8 @@ public class Configuration<T> {
      * <p>This value is also used for the LWJGL-managed, thread-local, {@link MemoryStack} instances. If this option is not set, it defaults to 64.</p>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.system.stackSize</b><br>
-     * &nbsp; &nbsp;Usage: Static</p>
+     * Property: <b>org.lwjgl.system.stackSize</b>
+     * <br>&nbsp; &nbsp;Usage: Static</p>
      */
     public static final Configuration<Integer> STACK_SIZE = new Configuration<>("org.lwjgl.system.stackSize", StateInit.INT);
 
@@ -190,8 +190,8 @@ public class Configuration<T> {
      * <p>If this option is not set, it defaults to 8192. Setting the value to 0 will disable the array cache.</p>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.system.arrayTLCSize</b><br>
-     * &nbsp; &nbsp;Usage: Static</p>
+     * Property: <b>org.lwjgl.system.arrayTLCSize</b>
+     * <br>&nbsp; &nbsp;Usage: Static</p>
      */
     public static final Configuration<Integer> ARRAY_TLC_SIZE = new Configuration<>("org.lwjgl.system.arrayTLCSize", StateInit.INT);
 
@@ -205,12 +205,14 @@ public class Configuration<T> {
      * <ul>
      *     <li>229 for Java 8</li>
      *     <li>230 for Java 9 to Java 18</li>
-     *     <li>231 for Java 19 or higher</li>
+     *     <li>231 for Java 19 to Java 20</li>
+     *     <li>232 for Java 21 to Java 23</li>
+     *     <li>233 for Java 24 or higher</li>
      * </ul>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.system.JNINativeInterfaceSize</b><br>
-     * &nbsp; &nbsp;Usage: Static</p>
+     * Property: <b>org.lwjgl.system.JNINativeInterfaceSize</b>
+     * <br>&nbsp; &nbsp;Usage: Static</p>
      */
     public static final Configuration<Integer> JNI_NATIVE_INTERFACE_FUNCTION_COUNT = new Configuration<>("org.lwjgl.system.JNINativeInterfaceSize", StateInit.INT);
 
@@ -221,8 +223,8 @@ public class Configuration<T> {
      * they may be disabled for release builds.</p>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.util.NoChecks</b><br>
-     * &nbsp; &nbsp;Usage: Static</p>
+     * Property: <b>org.lwjgl.util.NoChecks</b>
+     * <br>&nbsp; &nbsp;Usage: Static</p>
      */
     public static final Configuration<Boolean> DISABLE_CHECKS = new Configuration<>("org.lwjgl.util.NoChecks", StateInit.BOOLEAN);
 
@@ -233,8 +235,8 @@ public class Configuration<T> {
      * incompatible library must be loaded.</p>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.util.NoFunctionChecks</b><br>
-     * &nbsp; &nbsp;Usage: Dynamic</p>
+     * Property: <b>org.lwjgl.util.NoFunctionChecks</b>
+     * <br>&nbsp; &nbsp;Usage: Dynamic</p>
      */
     public static final Configuration<Boolean> DISABLE_FUNCTION_CHECKS = new Configuration<>("org.lwjgl.util.NoFunctionChecks", StateInit.BOOLEAN);
 
@@ -247,8 +249,8 @@ public class Configuration<T> {
      * <p>If this option is not set, it defaults to the value of {@link #DISABLE_CHECKS}.</p>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.util.NoLibraryChecks</b><br>
-     * &nbsp; &nbsp;Usage: Dynamic</p>
+     * Property: <b>org.lwjgl.util.NoLibraryChecks</b>
+     * <br>&nbsp; &nbsp;Usage: Dynamic</p>
      */
     public static final Configuration<Boolean> DISABLE_HASH_CHECKS = new Configuration<>("org.lwjgl.util.NoHashChecks", StateInit.BOOLEAN);
 
@@ -259,8 +261,8 @@ public class Configuration<T> {
      * performance-wise).</p>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.util.Debug</b><br>
-     * &nbsp; &nbsp;Usage: Static</p>
+     * Property: <b>org.lwjgl.util.Debug</b>
+     * <br>&nbsp; &nbsp;Usage: Static</p>
      */
     public static final Configuration<Boolean> DEBUG = new Configuration<>("org.lwjgl.util.Debug", StateInit.BOOLEAN);
 
@@ -270,8 +272,8 @@ public class Configuration<T> {
      * <p>This option requires {@link #DEBUG} to be enabled.</p>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.util.DebugLoader</b><br>
-     * &nbsp; &nbsp;Usage: Static</p>
+     * Property: <b>org.lwjgl.util.DebugLoader</b>
+     * <br>&nbsp; &nbsp;Usage: Static</p>
      */
     public static final Configuration<Boolean> DEBUG_LOADER = new Configuration<>("org.lwjgl.util.DebugLoader", StateInit.BOOLEAN);
 
@@ -284,9 +286,9 @@ public class Configuration<T> {
      * <p>When set programmatically, it can also be a {@link PrintStream} instance.</p>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.util.DebugStream</b><br>
-     * &nbsp; &nbsp; Type: String or a {@link PrintStream} instance<br>
-     * &nbsp; &nbsp;Usage: Static</p>
+     * Property: <b>org.lwjgl.util.DebugStream</b>
+     * <br>&nbsp; &nbsp; Type: String or a {@link PrintStream} instance
+     * <br>&nbsp; &nbsp;Usage: Static</p>
      */
     public static final Configuration<Object> DEBUG_STREAM = new Configuration<>("org.lwjgl.util.DebugStream", StateInit.STRING);
 
@@ -300,8 +302,8 @@ public class Configuration<T> {
      * the JVM option {@code -XX:MaxJavaStackTraceDepth=d} (where {@code d >= 6}) can be used to reduce the overhead.</p>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.util.DebugAllocator</b><br>
-     * &nbsp; &nbsp;Usage: Static</p>
+     * Property: <b>org.lwjgl.util.DebugAllocator</b>
+     * <br>&nbsp; &nbsp;Usage: Static</p>
      */
     public static final Configuration<Boolean> DEBUG_MEMORY_ALLOCATOR = new Configuration<>("org.lwjgl.util.DebugAllocator", StateInit.BOOLEAN);
 
@@ -311,8 +313,8 @@ public class Configuration<T> {
      * <p>If this option is not set, it defaults to true.</p>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.util.DebugAllocator.internal</b><br>
-     * &nbsp; &nbsp;Usage: Static</p>
+     * Property: <b>org.lwjgl.util.DebugAllocator.internal</b>
+     * <br>&nbsp; &nbsp;Usage: Static</p>
      */
     public static final Configuration<Boolean> DEBUG_MEMORY_ALLOCATOR_INTERNAL = new Configuration<>("org.lwjgl.util.DebugAllocator.internal", StateInit.BOOLEAN);
 
@@ -332,8 +334,8 @@ public class Configuration<T> {
      * included.</p>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.util.DebugAllocator.fast</b><br>
-     * &nbsp; &nbsp;Usage: Dynamic</p>
+     * Property: <b>org.lwjgl.util.DebugAllocator.fast</b>
+     * <br>&nbsp; &nbsp;Usage: Dynamic</p>
      */
     public static final Configuration<Boolean> DEBUG_MEMORY_ALLOCATOR_FAST = new Configuration<>("org.lwjgl.util.DebugAllocator.fast", StateInit.BOOLEAN);
 
@@ -347,8 +349,8 @@ public class Configuration<T> {
      * serious issue, the JVM option {@code -XX:MaxJavaStackTraceDepth=d} (where {@code d >= 5}) can be used to reduce the overhead.</p>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.util.DebugStack</b><br>
-     * &nbsp; &nbsp;Usage: Static</p>
+     * Property: <b>org.lwjgl.util.DebugStack</b>
+     * <br>&nbsp; &nbsp;Usage: Static</p>
      */
     public static final Configuration<Boolean> DEBUG_STACK = new Configuration<>("org.lwjgl.util.DebugStack", StateInit.BOOLEAN);
 
@@ -360,8 +362,8 @@ public class Configuration<T> {
      * <p>This option requires {@link #DEBUG} to be enabled.</p>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.util.DebugFunctions</b><br>
-     * &nbsp; &nbsp;Usage: Static</p>
+     * Property: <b>org.lwjgl.util.DebugFunctions</b>
+     * <br>&nbsp; &nbsp;Usage: Static</p>
      */
     public static final Configuration<Boolean> DEBUG_FUNCTIONS = new Configuration<>("org.lwjgl.util.DebugFunctions", StateInit.BOOLEAN);
 
@@ -386,8 +388,8 @@ public class Configuration<T> {
      * <p>By default, LWJGL will automatically initialize the EGL library when it is first accessed.</p>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.egl.explicitInit</b><br>
-     * &nbsp; &nbsp;Usage: Static</p>
+     * Property: <b>org.lwjgl.egl.explicitInit</b>
+     * <br>&nbsp; &nbsp;Usage: Static</p>
      */
     public static final Configuration<Boolean> EGL_EXPLICIT_INIT = new Configuration<>("org.lwjgl.egl.explicitInit", StateInit.BOOLEAN);
 
@@ -440,8 +442,8 @@ public class Configuration<T> {
      * <p>The JVM can be launched with {@code -XstartOnFirstThread} to make the main thread the first thread of the process.</p>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.glfw.checkThread0</b><br>
-     * &nbsp; &nbsp;Usage: Dynamic</p>
+     * Property: <b>org.lwjgl.glfw.checkThread0</b>
+     * <br>&nbsp; &nbsp;Usage: Dynamic</p>
      */
     public static final Configuration<Boolean> GLFW_CHECK_THREAD0 = new Configuration<>("org.lwjgl.glfw.checkThread0", StateInit.BOOLEAN);
 
@@ -505,8 +507,8 @@ public class Configuration<T> {
      * Set to true to enable NativeFileDialog's XDG Desktop Portal backend on Linux.
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.nfd.linux.portal</b><br>
-     * &nbsp; &nbsp;Usage: Static</p>
+     * Property: <b>org.lwjgl.nfd.linux.portal</b>
+     * <br>&nbsp; &nbsp;Usage: Static</p>
      */
     public static final Configuration<Boolean> NFD_LINUX_PORTAL = new Configuration<>("org.lwjgl.nfd.linux.portal", StateInit.BOOLEAN);
 
@@ -583,9 +585,10 @@ public class Configuration<T> {
      * programmatically, it can also be an {@link APIUtil.APIVersion} instance.</p>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.opengl.maxVersion</b><br>
-     * &nbsp; &nbsp; Type: String (M.n) or an {@link APIUtil.APIVersion} instance<br>
-     * &nbsp; &nbsp;Usage: Static</p>
+     * Property: <b>org.lwjgl.opengl.maxVersion</b>
+     * <br>&nbsp; &nbsp; Type: String (M.n) or an {@link APIUtil.APIVersion} instance
+     * <br>&nbsp; &nbsp;Usage:
+     * Static</p>
      */
     public static final Configuration<Object> OPENGL_MAXVERSION = new Configuration<>("org.lwjgl.opengl.maxVersion", StateInit.STRING);
 
@@ -734,7 +737,7 @@ public class Configuration<T> {
     /** Similar to {@link #LIBRARY_NAME} for the Vulkan library (<b>org.lwjgl.vulkan.libname</b>). */
     public static final Configuration<String> VULKAN_LIBRARY_NAME = new Configuration<>("org.lwjgl.vulkan.libname", StateInit.STRING);
 
-    private interface StateInit<T> extends Function<String, T> {
+    private interface StateInit<T> extends Function<String, @Nullable T> {
         StateInit<Boolean> BOOLEAN = property -> {
             String value = System.getProperty(property);
             return value == null ? null : Boolean.parseBoolean(value);
