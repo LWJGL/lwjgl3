@@ -40,6 +40,8 @@ configuration options.
 
 ### Getting Started
 
+As of version `3.4.0` and JDK 25, LWJGL supports the FFM API and is fully functional when running with `--sun-misc-unsafe-memory-access=deny`. See the [FFM documentation](https://github.com/LWJGL/lwjgl3/blob/master/doc/FFM.md) for details.
+
 As of version `3.1.0`, LWJGL is distributed as a set of modules. Only the
 core module is required and all bindings are optional (but some bindings
 depend on other bindings). The easiest way to download LWJGL is to use the
