@@ -6,6 +6,7 @@ package org.lwjgl.system.ffm;
 
 import org.jspecify.annotations.*;
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
 import java.lang.classfile.*;
 import java.lang.constant.*;
@@ -517,12 +518,18 @@ public final class FFM {
 
     // TODO: document
     public static <T> UpcallBinder<T> upcall(Class<T> upcallInterface) {
+        return upcall(upcallInterface, null);
+    }
+
+    // LWJGL 3 interop
+    // TODO: document
+    public static <T> UpcallBinder<T> upcall(Class<T> upcallInterface, @Nullable FFICIF cif) {
         var config = getConfig(upcallInterface);
         if (config.debugGenerator) {
             apiLog("BOOTSTRAPPING UPCALL " + upcallInterface);
         }
 
-        return new BCCallUp(config, upcallInterface)
+        return new BCCallUp(config, upcallInterface, cif)
             .bootstrap();
     }
 

@@ -49,6 +49,9 @@ public final class MemoryUtil {
 
     private static final int MAX_BUFFER_SIZE = Integer.MAX_VALUE - 8; // see jdk.internal.util.ArraysSupport.SOFT_MAX_ARRAY_LENGTH
 
+    // FFM
+    static final ScopedValue<Arena> ARENA = ScopedValue.newInstance();
+
     static {
         Library.initialize();
 
@@ -82,6 +85,24 @@ public final class MemoryUtil {
     }
 
     private MemoryUtil() {
+    }
+
+    /*  -------------------------------------
+        -------------------------------------
+                FFM EXTENSIONS API
+        -------------------------------------
+        ------------------------------------- */
+
+    public static void memScopedRun(Arena arena, Runnable runnable) {
+        ScopedValue
+            .where(ARENA, arena)
+            .run(runnable);
+    }
+
+    public static <R, X extends Throwable> R memScopedCall(Arena arena, ScopedValue.CallableOp<? extends R, X> op) throws X {
+        return ScopedValue
+            .where(ARENA, arena)
+            .call(op);
     }
 
     /*  -------------------------------------

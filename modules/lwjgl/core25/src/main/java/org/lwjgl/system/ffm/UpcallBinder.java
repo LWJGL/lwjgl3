@@ -4,6 +4,8 @@
  */
 package org.lwjgl.system.ffm;
 
+import org.jspecify.annotations.*;
+
 import java.lang.foreign.*;
 import java.lang.invoke.*;
 
@@ -13,6 +15,9 @@ public non-sealed interface UpcallBinder<T> extends Binder<T> {
 
     FunctionDescriptor descriptor();
     MethodHandle handle();
+
+    // LWJGL 3 interop
+    @Nullable MemoryLayout stack();
 
     /*default MemorySegment allocate(T upcall) {
         return allocate(Arena.global(), upcall, EMPTY_OPTIONS);
@@ -27,9 +32,17 @@ public non-sealed interface UpcallBinder<T> extends Binder<T> {
     }
 
     default MemorySegment allocate(Arena arena, T upcall, Linker.Option... options) {
+        var handle = handle()
+            .bindTo(upcall);
+
+        var stack = stack();
+        if (stack != null) {
+            handle = handle.bindTo(arena.allocate(stack));
+        }
+
         return Linker.nativeLinker()
             .upcallStub(
-                handle().bindTo(upcall),
+                handle,
                 descriptor(),
                 arena,
                 options
