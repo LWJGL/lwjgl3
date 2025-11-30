@@ -82,6 +82,7 @@ final class BCDescriptors {
         MTD_long_long                                          = MethodTypeDesc.of(CD_long, CD_long),
         MTD_long_Object                                        = MethodTypeDesc.of(CD_long, CD_Object),
         MTD_long_ValueLayout$OfLong_long                       = MethodTypeDesc.of(CD_long, CD_ValueLayout$OfLong, CD_long),
+        MTD_MemoryLayout                                       = MethodTypeDesc.of(CD_MemoryLayout),
         MTD_MemorySegment_AddressLayout_long                   = MethodTypeDesc.of(CD_MemorySegment, CD_AddressLayout, CD_long),
         MTD_MemorySegment_Arena_Object                         = MethodTypeDesc.of(CD_MemorySegment, CD_Arena, CD_Object),
         MTD_MemorySegment_byte                                 = MethodTypeDesc.of(CD_MemorySegment, CD_byte),

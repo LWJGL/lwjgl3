@@ -378,6 +378,66 @@ public class Configuration<T> {
      */
     public static final Configuration<Boolean> DEBUG_FUNCTIONS = new Configuration<>("org.lwjgl.util.DebugFunctions", StateInit.BOOLEAN);
 
+    // -- FFM INTEROP OPTIONS
+
+    /**
+     * Can be set to override the default {@code Arena} type used to allocate upcalls with the FFM backend.
+     *
+     * <p>Supported values:</p>
+     * <ul>
+     * <li><em>auto</em> - The default if not overriden, creates a GC managed arena for each upcall. Upcalls can be used and freed from any thread, but
+     * resource release timing depends on overall GC activity, like managed NIO buffers.</li>
+     * <li><em>confined</em> - Creates a thread-confined arena for each upcall. Upcalls can be used and freed only from the thread that created them, but
+     * resource release happens immediately when the upcall is freed.</li>
+     * <li><em>shared</em> - Creates a thread-shared arena for each upcall. Upcalls can be used and freed from any thread, resource release happens immediately
+     * when the upcall is freed, but the upcall allocation and release process is very expensive.<br>
+     * </ul>
+     *
+     * <p>If this option is not set, it defaults to {@code auto}, which should be acceptable for most existing LWJGL applications that do not instantiate
+     * upcalls in excessive numbers.</p>
+     *
+     * <p>For new applications, it is recommended to use the {@code memScoped*} methods in {@link MemoryUtil} when creating upcalls. Within the scope of such a
+     * call, LWJGL will use the specified arena to allocate upcalls and this option becomes irrelevant.</p>
+     *
+     * <p style="font-family: monospace">
+     * Property: <b>org.lwjgl.system.ffm.upcall.arena</b><br>
+     * &nbsp; &nbsp; Type: String<br>
+     * &nbsp; &nbsp;Usage: Static</p>
+     */
+    public static final Configuration<String> FFM_UPCALL_ARENA = new Configuration<>("org.lwjgl.system.ffm.upcall.arena", StateInit.STRING);
+
+    /**
+     * When set to true, uncaught exceptions from upcalls with the FFM backend will be caught and passed to {@link #FFM_UPCALL_EXCEPTION_HANDLER}.
+     *
+     * <p>If this option is not set, it defaults to true.</p>
+     *
+     * <p>Uncaught exceptions in FFM upcalls will terminate the JVM, but this option may be disabled when creating upcalls that handle exceptions
+     * internally.</p>
+     *
+     * <p style="font-family: monospace">
+     * Property: <b>org.lwjgl.system.fmm.upcall.exception.catch</b>
+     * <br>&nbsp; &nbsp;Usage: Dynamic</p>
+     */
+    public static final Configuration<Boolean> FFM_UPCALL_EXCEPTION_CATCH = new Configuration<>("org.lwjgl.system.ffm.upcall.exception.catch", StateInit.BOOLEAN);
+
+    /**
+     * Can be set to override the exception handler used for uncaught exceptions from upcalls with the FFM backend.
+     *
+     * <p>Supported values:</p>
+     * <ul>
+     * <li><em>default</em> - Prints a warning message and the exception stacktrace to {@link APIUtil#DEBUG_STREAM}.</li>
+     * <li><em>&lt;classpath&gt;</em> - A class that implements the {@link Consumer Consumer&lt;Throwable&gt;} interface. It will be instantiated using reflection.</li>
+     * </ul>
+     *
+     * <p>When set programmatically, it can also be a {@link Consumer Consumer&lt;Throwable&gt;} instance.</p>
+     *
+     * <p style="font-family: monospace">
+     * Property: <b>org.lwjgl.system.ffm.upcall.exception.handler</b><br>
+     * &nbsp; &nbsp; Type: String or a {@link Consumer Consumer&lt;Throwable&gt;} instance<br>
+     * &nbsp; &nbsp;Usage: Dynamic</p>
+     */
+    public static final Configuration<Object> FFM_UPCALL_EXCEPTION_HANDLER = new Configuration<>("org.lwjgl.system.ffm.upcall.exception.handler", StateInit.STRING);
+
     // -- ASSIMP
 
     /** Similar to {@link #LIBRARY_NAME} for the AssImp library (<b>org.lwjgl.assimp.libname</b>). */

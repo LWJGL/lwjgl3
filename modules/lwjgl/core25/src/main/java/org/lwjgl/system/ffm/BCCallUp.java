@@ -4,20 +4,28 @@
  */
 package org.lwjgl.system.ffm;
 
+import org.jspecify.annotations.*;
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
 import java.lang.classfile.*;
+import java.lang.constant.*;
 import java.lang.foreign.*;
 import java.lang.reflect.*;
 import java.util.*;
 
 import static java.lang.classfile.ClassFile.*;
 import static java.lang.constant.ConstantDescs.*;
+import static java.lang.foreign.MemoryLayout.*;
 import static org.lwjgl.system.ffm.BCCall.FeatureFlag.*;
 import static org.lwjgl.system.ffm.BCDescriptors.*;
 import static org.lwjgl.system.ffm.BCUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 final class BCCallUp extends BCCall {
+
+    // TODO: remove in LWJGL 4, used for interop with LWJGL 3 upcalls only
+    private static final int FF_RETURNS_STRUCT_BY_VALUE = 1 << 31;
 
     private final Class<?> upcallInterface;
 
@@ -31,7 +39,7 @@ final class BCCallUp extends BCCall {
 
     final FunctionDescriptor descriptor;
 
-    BCCallUp(FFMConfig config, Class<?> upcallInterface) {
+    BCCallUp(FFMConfig config, Class<?> upcallInterface, @Nullable FFICIF cif) {
         super(config);
 
         this.upcallInterface = upcallInterface;
@@ -79,10 +87,29 @@ final class BCCallUp extends BCCall {
                     featureFlags |= FF_TYPE_CONVERSION.mask;
                     argLayouts.add(booleanInt.value().layout);
                     continue;
+                } else if (cif != null) {
+                    // LWJGL 3 interop
+                    var layout = memoryLayoutFrom(FFIType.create(cif.arg_types().get(i)));
+                    if (layout != ValueLayout.JAVA_BYTE) { // TODO: test
+                        featureFlags |= FF_TYPE_CONVERSION.mask;
+                        argLayouts.add(layout);
+                        continue;
+                    }
                 }
             } else if (needsBinder(type)) {
                 featureFlags |= FF_BINDER.mask;
                 argLayouts.add(ValueLayout.ADDRESS);
+                continue;
+            } else if (Struct.class.isAssignableFrom(type)) {
+                // LWJGL 3 interop
+                if (parameter != parameters[parameters.length - 1]) {
+                    // LWJGL 3 does not support upcall group parameters passed by value, only results
+                    throw new IllegalStateException("Group result parameter must be the last parameter");
+                }
+                if (method.getReturnType() != void.class) {
+                    throw new IllegalStateException("Group result parameter requires a void return type");
+                }
+                featureFlags |= FF_RETURNS_STRUCT_BY_VALUE;
                 continue;
             }
 
@@ -97,6 +124,10 @@ final class BCCallUp extends BCCall {
                 throw new IllegalStateException("String return types are not supported in upcalls: " + method);
             } else if (type == boolean.class) {
                 if (method.isAnnotationPresent(FFMBooleanInt.class)) {
+                    featureFlags |= FF_TYPE_CONVERSION.mask;
+                } else if (cif != null) {
+                    // LWJGL 3 interop
+                    resLayout = memoryLayoutFrom(cif.rtype());
                     featureFlags |= FF_TYPE_CONVERSION.mask;
                 }
             } else if (Platform.getArchitecture().is32Bit() && type == long.class && method.isAnnotationPresent(FFMPointer.class)) {
@@ -121,6 +152,10 @@ final class BCCallUp extends BCCall {
             } else {
                 resLayout = valueLayout(method, method.getReturnType());
             }
+        } else if ((featureFlags & FF_RETURNS_STRUCT_BY_VALUE) != 0) {
+            // LWJGL 3 interop
+            // The group layout must be accurate, because of ABI idiosyncrasies.
+            resLayout = groupLayoutFrom(Objects.requireNonNull(cif).rtype());
         }
 
         this.featureFlags = featureFlags;
@@ -139,9 +174,18 @@ final class BCCallUp extends BCCall {
 
         var bridgeDescriptor = switch (featureFlags) {
             case 0 -> null;
-            default -> descriptor
-                .toMethodType()
-                .insertParameterTypes(0, upcallInterface);
+            default -> {
+                var type = descriptor
+                    .toMethodType()
+                    .insertParameterTypes(0, upcallInterface);
+
+                if ((featureFlags & FF_RETURNS_STRUCT_BY_VALUE) != 0) {
+                    // LWJGL 3 interop
+                    type = type.insertParameterTypes(1, MemorySegment.class);
+                }
+
+                yield type;
+            }
         };
 
         /*
@@ -214,16 +258,36 @@ final class BCCallUp extends BCCall {
                     .areturn())
                 );
 
+            // LWJGL 3 interop
+            classBuilder.withMethod("stack", MTD_MemoryLayout, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> {
+                if ((featureFlags & FF_RETURNS_STRUCT_BY_VALUE) == 0) {
+                    cb
+                        .aconst_null()
+                        .areturn();
+                } else {
+                    cb
+                        .ldc(condyCDataAt(CD_MemoryLayout, 2))
+                        .areturn();
+                }
+            }));
+
             if (featureFlags != 0) {
                 var methodTypeDesc = getMethodTypeDesc(method);
                 classBuilder.withMethod("bridge", bridgeDescriptor.describeConstable().orElseThrow(), ACC_PUBLIC | ACC_STATIC, mb -> mb.withCode(cb -> {
                     cb.aload(cb.parameterSlot(0));
+
+                    var paramOffset = (featureFlags & FF_RETURNS_STRUCT_BY_VALUE) == 0 ? 1 : 2;
                     for (var p = 0; p < methodTypeDesc.parameterCount(); p++) {
                         var parameter = parameters[p];
 
                         var type = parameter.getType();
 
-                        var slot = cb.parameterSlot(p + 1);
+                        if (Struct.class.isAssignableFrom(type)) {
+                            // LWJGL 3 interop (this is the last __result parameter)
+                            continue;
+                        }
+
+                        var slot = cb.parameterSlot(p + paramOffset);
                         if (type == String.class) {
                             cb.aload(slot);
                             if (isNullable(parameter)) {
@@ -260,23 +324,36 @@ final class BCCallUp extends BCCall {
                         }
                     }
 
-                    cb.invokeinterface(upcallInterface.describeConstable().orElseThrow(), method.getName(), methodTypeDesc);
-
-
-                    var type = method.getReturnType();
-                    if (type != void.class) {
-                        // Return result if non-void, transform if necessary
-                        if (Platform.getArchitecture().is32Bit() && type == long.class && method.isAnnotationPresent(FFMPointer.class)) {
-                            // TODO: test
-                            buildPointer64to32(cb);
-                        } else if (needsBinder(type)) {
-                            cb
-                                .ldc(condyCDataAt(CD_GroupBinder, featureFlagOffsets[FF_BINDER.ordinal()] + binders.get(type)))
-                                .swap() // Group, GroupBinder -> GroupBinder, Group
-                                .invokeinterface(CD_GroupBinder, "asSegment", MTD_MemorySegment_Object);
-                        }
+                    if ((featureFlags & FF_RETURNS_STRUCT_BY_VALUE) != 0) {
+                        // LWJGL 3 interop
+                        var groupType = parameters[parameters.length - 1].getType();
+                        var groupDesc = groupType.describeConstable().orElseThrow();
+                        cb
+                            .aload(cb.parameterSlot(1)) // __result
+                            .invokeinterface(CD_MemorySegment, "address", MTD_long)
+                            .invokestatic(groupDesc, "create", MethodTypeDesc.of(groupDesc, CD_long));
                     }
 
+                    cb.invokeinterface(upcallInterface.describeConstable().orElseThrow(), method.getName(), methodTypeDesc);
+
+                    if ((featureFlags & FF_RETURNS_STRUCT_BY_VALUE) != 0) {
+                        // LWJGL 3 interop
+                        cb.aload(cb.parameterSlot(1));
+                    } else {
+                        var type = method.getReturnType();
+                        if (type != void.class) {
+                            // Return result if non-void, transform if necessary
+                            if (Platform.getArchitecture().is32Bit() && type == long.class && method.isAnnotationPresent(FFMPointer.class)) {
+                                // TODO: test
+                                buildPointer64to32(cb);
+                            } else if (needsBinder(type)) {
+                                cb
+                                    .ldc(condyCDataAt(CD_GroupBinder, featureFlagOffsets[FF_BINDER.ordinal()] + binders.get(type)))
+                                    .swap() // Group, GroupBinder -> GroupBinder, Group
+                                    .invokeinterface(CD_GroupBinder, "asSegment", MTD_MemorySegment_Object);
+                            }
+                        }
+                    }
                     // FFMBooleanInt is handled implicitly, boolean returns use ireturn anyway
                     cb.return_(TypeKind.from(bridgeDescriptor.returnType()));
                 }));
@@ -308,6 +385,10 @@ final class BCCallUp extends BCCall {
         list.add(descriptor);
         list.add(method);
 
+        if ((featureFlags & FF_RETURNS_STRUCT_BY_VALUE) != 0) {
+            list.add(descriptor.returnLayout().orElseThrow());
+        }
+
         if (FF_BINDER.isSet(featureFlags)) {
             featureFlagOffsets[FF_BINDER.ordinal()] = list.size();
             for (var type : binders.sequencedKeySet()) {
@@ -316,6 +397,46 @@ final class BCCallUp extends BCCall {
         }
 
         return list;
+    }
+
+    // LWJGL 3 interop
+    private static GroupLayout groupLayoutFrom(FFIType groupType) {
+        // deref: FFIType **elements
+        var elements = MemorySegment
+            .ofAddress(groupType.address() + FFIType.ELEMENTS)
+            .reinterpret(ValueLayout.ADDRESS.byteSize())
+            .get(ValueLayout.ADDRESS, 0L)
+            .reinterpret(Long.MAX_VALUE);
+
+        var members = new ArrayList<MemoryLayout>();
+
+        var index = 0;
+        while (true) {
+            var element = elements.getAtIndex(ValueLayout.ADDRESS, index++);
+            if (MemorySegment.NULL.equals(element)) {
+                break;
+            }
+
+            var elementType = FFIType.create(element.address());
+            members.add(memoryLayoutFrom(elementType));
+        }
+
+        return structLayout(members.toArray(MemoryLayout[]::new));
+    }
+
+    // LWJGL 3 interop
+    private static MemoryLayout memoryLayoutFrom(FFIType type) {
+        return switch (type.type()) {
+            case FFI_TYPE_UINT8, FFI_TYPE_SINT8 -> ValueLayout.JAVA_BYTE;
+            case FFI_TYPE_UINT16, FFI_TYPE_SINT16 -> ValueLayout.JAVA_SHORT;
+            case FFI_TYPE_INT, FFI_TYPE_UINT32, FFI_TYPE_SINT32 -> ValueLayout.JAVA_INT;
+            case FFI_TYPE_UINT64, FFI_TYPE_SINT64 -> ValueLayout.JAVA_LONG;
+            case FFI_TYPE_FLOAT -> ValueLayout.JAVA_FLOAT;
+            case FFI_TYPE_DOUBLE -> ValueLayout.JAVA_DOUBLE;
+            case FFI_TYPE_STRUCT -> groupLayoutFrom(type);
+            case FFI_TYPE_POINTER -> ValueLayout.ADDRESS;
+            default -> throw new IllegalStateException("Unsupported libffi type: " + type.type());
+        };
     }
 
 }
