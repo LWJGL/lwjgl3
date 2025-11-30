@@ -92,7 +92,7 @@ public class FFICIF extends Struct<FFICIF> implements NativeResource {
     public int nargs() { return nnargs(address()); }
     /** @return a {@link PointerBuffer} view of the data pointed to by the {@code arg_types} field. */
     @NativeType("ffi_type **")
-    public PointerBuffer arg_types(int capacity) { return narg_types(address(), capacity); }
+    public PointerBuffer arg_types() { return narg_types(address()); }
     /** @return a {@link FFIType} view of the struct pointed to by the {@code rtype} field. */
     @NativeType("ffi_type *")
     public FFIType rtype() { return nrtype(address()); }
@@ -218,8 +218,8 @@ public class FFICIF extends Struct<FFICIF> implements NativeResource {
     public static int nabi(long struct) { return memGetInt(struct + FFICIF.ABI); }
     /** Unsafe version of {@link #nargs}. */
     public static int nnargs(long struct) { return memGetInt(struct + FFICIF.NARGS); }
-    /** Unsafe version of {@link #arg_types(int) arg_types}. */
-    public static PointerBuffer narg_types(long struct, int capacity) { return memPointerBuffer(memGetAddress(struct + FFICIF.ARG_TYPES), capacity); }
+    /** Unsafe version of {@link #arg_types() arg_types}. */
+    public static PointerBuffer narg_types(long struct) { return memPointerBuffer(memGetAddress(struct + FFICIF.ARG_TYPES), nnargs(struct)); }
     /** Unsafe version of {@link #rtype}. */
     public static FFIType nrtype(long struct) { return FFIType.create(memGetAddress(struct + FFICIF.RTYPE)); }
     /** Unsafe version of {@link #bytes}. */
@@ -278,7 +278,7 @@ public class FFICIF extends Struct<FFICIF> implements NativeResource {
         public int nargs() { return FFICIF.nnargs(address()); }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@code arg_types} field. */
         @NativeType("ffi_type **")
-        public PointerBuffer arg_types(int capacity) { return FFICIF.narg_types(address(), capacity); }
+        public PointerBuffer arg_types() { return FFICIF.narg_types(address()); }
         /** @return a {@link FFIType} view of the struct pointed to by the {@code rtype} field. */
         @NativeType("ffi_type *")
         public FFIType rtype() { return FFICIF.nrtype(address()); }
