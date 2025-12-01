@@ -8,7 +8,8 @@
 
 #define DISABLE_WARNINGS() \
     _Pragma("GCC diagnostic push") \
-    _Pragma("GCC diagnostic ignored \"-Wpedantic\"")
+    _Pragma("GCC diagnostic ignored \"-Wpedantic\"") \
+    _Pragma("GCC diagnostic ignored \"-Wunused-parameter\"")
 
 #define ENABLE_WARNINGS() \
     _Pragma("GCC diagnostic pop")
