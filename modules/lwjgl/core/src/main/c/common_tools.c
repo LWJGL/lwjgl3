@@ -220,13 +220,11 @@ JNIEXPORT void JNICALL org_lwjgl_system_noop_params(void *param0, void *param1, 
     UNUSED_PARAM(param2);
 }
 
-DISABLE_WARNINGS()
 JNIEXPORT void noop_params0(void) {}
-JNIEXPORT void noop_params1(void *param0) {}
-JNIEXPORT void noop_params2(void *param0, void *param1) {}
-JNIEXPORT void noop_params3(void *param0, void *param1, void *param2) {}
-JNIEXPORT void noop_params4(void *param0, void *param1, void *param2, void *param3) {}
-JNIEXPORT void noop_params5(int param0, int param1, void *param2, void *param3, void *param4) {}
-ENABLE_WARNINGS()
+JNIEXPORT void noop_params1(void *param0) { UNUSED_PARAM(param0); }
+JNIEXPORT void noop_params2(void *param0, void *param1) { UNUSED_PARAMS(param0, param1); }
+JNIEXPORT void noop_params3(void *param0, void *param1, void *param2) { UNUSED_PARAMS(param0, param1); UNUSED_PARAM(param2); }
+JNIEXPORT void noop_params4(void *param0, void *param1, void *param2, void *param3) { UNUSED_PARAMS(param0, param1); UNUSED_PARAMS(param2, param3); }
+JNIEXPORT void noop_params5(int param0, int param1, void *param2, void *param3, void *param4) { UNUSED_PARAMS(param0, param1); UNUSED_PARAMS(param2, param3); UNUSED_PARAM(param4); }
 
 EXTERN_C_EXIT
