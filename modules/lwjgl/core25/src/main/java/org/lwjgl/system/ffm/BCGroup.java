@@ -356,12 +356,12 @@ final class BCGroup {
                                         cb.getstatic(returnTypeDesc, binderField.name(), groupDesc(binderField.binder()));
                                         buildMemberAddress(cb, thisClass, memberOffset)
                                             .invokestatic(CD_MemoryUtil, "memGetAddress", MTD_long_long)
-                                            .invokeinterface(CD_GroupBinder, isNullable(method) ? "ofAddressSafe" : "ofAddress", MTD_Object_long)
+                                            .invokeinterface(CD_GroupBinder, isNullable(config, method) ? "ofAddressSafe" : "ofAddress", MTD_Object_long)
                                         /*.checkcast(returnType.describeConstable().orElseThrow())*/
                                         ;
                                     }
                                     case GroupLayout _ -> {
-                                        if (DEBUG && isNullable(method)) {
+                                        if (DEBUG && isNullable(config, method)) {
                                             throw methodException("Nested group members cannot be nullable", method);
                                         }
                                         // nested group, return view of member address
@@ -567,10 +567,10 @@ final class BCGroup {
                                         buildMemberAddress(cb, thisClass, memberOffset)
                                             .getstatic(parameterTypeDesc, binderField.name(), groupDesc(binderField.binder()))
                                             .aload(param0)
-                                            .invokeinterface(CD_GroupBinder, isNullable(parameter) ? "addressOfSafe" : "addressOf", MTD_long_Object)
+                                            .invokeinterface(CD_GroupBinder, isNullable(config, parameter) ? "addressOfSafe" : "addressOf", MTD_long_Object)
                                             .invokestatic(CD_MemoryUtil, "memPutAddress", MTD_void_long_long);
                                     case GroupLayout _ -> {
-                                        if (DEBUG && isNullable(parameter)) {
+                                        if (DEBUG && isNullable(config, parameter)) {
                                             throw methodException("Nested group members cannot be nullable", method);
                                         }
                                         // nested group, copy entire layout

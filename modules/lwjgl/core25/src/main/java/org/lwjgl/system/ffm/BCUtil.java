@@ -4,15 +4,19 @@
  */
 package org.lwjgl.system.ffm;
 
+import org.jspecify.annotations.*;
+
 import java.lang.classfile.*;
 import java.lang.constant.*;
 import java.lang.foreign.*;
 import java.lang.reflect.*;
+import java.util.function.*;
 import java.util.regex.*;
 
 import static java.lang.classfile.ClassFile.*;
 import static java.lang.constant.ConstantDescs.*;
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.ffm.BCDescriptors.*;
 
 final class BCUtil {
@@ -111,52 +115,73 @@ final class BCUtil {
         return name;
     }
 
-    static boolean isNullable(Method method) {
-        var primitive = method.getReturnType().isPrimitive();
-        if (primitive) {
-            return method.isAnnotationPresent(FFMNullable.class);
+    private static void checkFFMNullableOnPrimitive(AnnotatedElement element, Class<?> type) {
+        if (DEBUG && !(element.isAnnotationPresent(FFMPointer.class) && type == long.class)) {
+            throw new IllegalStateException("The FFMNullable annotation can be applied to @FFMPointer long types only");
         }
+    }
 
-        // TODO: this creates a runtime-time dependency to jspecify
-        /*return method
-            .getAnnotatedReturnType()
-            .isAnnotationPresent(org.jspecify.annotations.Nullable.class);*/
+    private static void checkFFMNullableOnReference(AnnotatedElement element, @Nullable Class<? extends java.lang.annotation.Annotation> nullableAnnotation) {
+        if (DEBUG && FFMNullable.class != nullableAnnotation && element.isAnnotationPresent(FFMNullable.class)) {
+            throw new IllegalStateException("The FFMNullable annotation can be applied to @FFMPointer long parameters only");
+        }
+    }
 
-        var annotations = method
-            .getAnnotatedReturnType() // @Nullable is TYPE_USE
-            .getDeclaredAnnotations();
-
-        for (var annotation : annotations) {
-            if ("org.jspecify.annotations.Nullable".equals(annotation.annotationType().getName())) {
-                return true;
+    private static final Pattern NULLABLE_PATTERN = Pattern.compile("null", Pattern.CASE_INSENSITIVE);
+    private static void checkAnnotations(AnnotatedElement element, Class<? extends AnnotatedElement> type) {
+        for (var annotation : element.getDeclaredAnnotations()) {
+            var annotationType = annotation.annotationType();
+            if (!annotationType.getPackageName().startsWith("org.lwjgl.")) {
+                apiLog("Unsupported annotation found on " + type.getSimpleName().toLowerCase() + ": " + element);
+                if (NULLABLE_PATTERN.matcher(annotationType.getSimpleName()).find()) {
+                    apiLog("\tUse FFMConfigBuilder::withNullableAnnotation if applicable.");
+                }
             }
         }
+    }
+    private static <T extends AnnotatedElement> void checkAnnotations(T element, Function<T, AnnotatedType> annotatedTypeProvider) {
+        if (DEBUG) {
+            var type = element.getClass();
+            checkAnnotations(element, type);
+            checkAnnotations(annotatedTypeProvider.apply(element), type);
+        }
+    }
 
+    static <T extends AnnotatedElement> boolean isNullable(FFMConfig config, T element, Class<?> type, Function<T, AnnotatedType> annotatedTypeProvider) {
+        if (type.isPrimitive()) {
+            checkFFMNullableOnPrimitive(element, type);
+            return element.isAnnotationPresent(FFMNullable.class);
+        }
+
+        var nullableAnnotation = config.nullableAnnotation;
+        checkFFMNullableOnReference(element, nullableAnnotation);
+
+        if (nullableAnnotation != null) {
+            return config.nullableAnnotationOnType
+                ? annotatedTypeProvider.apply(element).isAnnotationPresent(nullableAnnotation)
+                : element.isAnnotationPresent(nullableAnnotation);
+        }
+
+        checkAnnotations(element, annotatedTypeProvider);
         return false;
     }
 
-    static boolean isNullable(Parameter parameter) {
-        var primitive = parameter.getType().isPrimitive();
-        if (primitive) {
-            return parameter.isAnnotationPresent(FFMNullable.class);
-        }
+    static boolean isNullable(FFMConfig config, Method method) {
+        return isNullable(
+            config,
+            method,
+            method.getReturnType(),
+            Method::getAnnotatedReturnType
+        );
+    }
 
-        // TODO: this creates a runtime-time dependency to jspecify
-        /*return parameter
-            .getAnnotatedType()
-            .isAnnotationPresent(org.jspecify.annotations.Nullable.class);*/
-
-        var annotations = parameter
-            .getAnnotatedType() // @Nullable is TYPE_USE
-            .getDeclaredAnnotations();
-
-        for (var annotation : annotations) {
-            if ("org.jspecify.annotations.Nullable".equals(annotation.annotationType().getName())) {
-                return true;
-            }
-        }
-
-        return false;
+    static boolean isNullable(FFMConfig config, Parameter parameter) {
+        return isNullable(
+            config,
+            parameter,
+            parameter.getType(),
+            Parameter::getAnnotatedType
+        );
     }
 
     static <T extends CodeBuilder> T buildPointer64to32(T cb) {

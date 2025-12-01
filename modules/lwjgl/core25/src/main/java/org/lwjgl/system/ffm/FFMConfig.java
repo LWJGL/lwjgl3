@@ -6,6 +6,7 @@ package org.lwjgl.system.ffm;
 
 import org.jspecify.annotations.*;
 
+import java.lang.annotation.*;
 import java.lang.foreign.*;
 import java.lang.invoke.*;
 import java.lang.reflect.*;
@@ -24,6 +25,9 @@ public final class FFMConfig {
 
     final HashMap<Class<?>, BinderField> binders = new HashMap<>();
 
+    final @Nullable Class<? extends java.lang.annotation.Annotation>
+                                              nullableAnnotation;
+    final           boolean                   nullableAnnotationOnType;
     final @Nullable SymbolLookup              symbolLookup;
     final @Nullable TraceConsumer             traceConsumer;
     final @Nullable Predicate<Method>         tracingFilter;
@@ -44,6 +48,7 @@ public final class FFMConfig {
      * @param debugGenerator   whether to enable generator debug output.
      */
     FFMConfig(
+        @Nullable Class<? extends java.lang.annotation.Annotation> nullableAnnotation,
         MethodHandles.Lookup lookup,
         @Nullable SymbolLookup symbolLookup,
         // TODO: tracing pre, post, return values, transformed signature, etc.
@@ -53,6 +58,7 @@ public final class FFMConfig {
         boolean checks,
         boolean debugGenerator
     ) {
+        this.nullableAnnotation = nullableAnnotation;
         this.lookup = lookup;
         this.symbolLookup = symbolLookup;
         this.traceConsumer = traceConsumer;
@@ -60,6 +66,28 @@ public final class FFMConfig {
         this.criticalOverride = criticalOverride;
         this.checks = checks;
         this.debugGenerator = debugGenerator;
+
+        if (nullableAnnotation != null) {
+            var retention = nullableAnnotation.getDeclaredAnnotation(Retention.class);
+            if (retention == null || retention.value() != RetentionPolicy.RUNTIME) {
+                throw new IllegalStateException("Nullable annotation " + nullableAnnotation + " must have RUNTIME retention");
+            }
+
+            var target = nullableAnnotation.getDeclaredAnnotation(Target.class);
+            if (target != null) {
+                var elementTypes = List.of(target.value());
+                if (elementTypes.contains(ElementType.TYPE_USE)) {
+                    nullableAnnotationOnType = true;
+                    return;
+                }
+
+                if (!(elementTypes.contains(ElementType.METHOD) && elementTypes.contains(ElementType.PARAMETER))) {
+                    throw new IllegalStateException("Nullable annotation " + nullableAnnotation + " must @Target either TYPE_USE or METHOD+PARAMETER");
+                }
+            }
+        }
+
+        nullableAnnotationOnType = false;
     }
 
     public MethodHandles.Lookup getLookup() {
@@ -85,6 +113,14 @@ public final class FFMConfig {
         return (UpcallBinder<T>)Objects.requireNonNull(binders.get(type)).binder;
     }
 
+    public @Nullable Class<? extends java.lang.annotation.Annotation> getNullableAnnotation() {
+        return nullableAnnotation;
+    }
+
+    public @Nullable SymbolLookup getSymbolLookup() {
+        return symbolLookup;
+    }
+
     public @Nullable TraceConsumer getTraceConsumer() {
         return traceConsumer;
     }
@@ -95,10 +131,6 @@ public final class FFMConfig {
 
     public @Nullable Function<Method, Boolean> getCriticalOverride() {
         return criticalOverride;
-    }
-
-    public @Nullable SymbolLookup getSymbolLookup() {
-        return symbolLookup;
     }
 
     public boolean checks() {

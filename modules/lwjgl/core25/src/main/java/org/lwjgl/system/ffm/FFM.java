@@ -564,6 +564,8 @@ public final class FFM {
     public static final class FFMConfigBuilder {
         private final MethodHandles.Lookup lookup;
 
+        private @Nullable Class<? extends java.lang.annotation.Annotation>
+                                                    nullableAnnotation;
         private @Nullable SymbolLookup              symbolLookup;
         private @Nullable TraceConsumer             traceConsumer;
         private @Nullable Predicate<Method>         tracingFilter;
@@ -574,6 +576,11 @@ public final class FFM {
 
         FFMConfigBuilder(MethodHandles.Lookup lookup) {
             this.lookup = lookup;
+        }
+
+        public FFMConfigBuilder withNullableAnnotation(Class<? extends java.lang.annotation.Annotation> annotation) {
+            this.nullableAnnotation = annotation;
+            return this;
         }
 
         /** Enables function pointer retrieval using a {@link SymbolLookup}. */
@@ -656,6 +663,7 @@ public final class FFM {
         /** Builds the binding configuration instance. */
         public FFMConfig build() {
             return new FFMConfig(
+                nullableAnnotation,
                 lookup,
                 symbolLookup,
                 traceConsumer,

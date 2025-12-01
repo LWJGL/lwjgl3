@@ -36,9 +36,7 @@ This backend is implemented using the new runtime bindings generator in the core
 * If the FFM backend is problematic for an application, it cannot currently be disabled on JDK 25+.
   - Even if reverting to the Unsafe backend would resolve the issue.
   - Could ship two core module artifacts, a default with the FFM backend and an alternative without it.
-* `@Nullable` creates a dependency to `jspecify`.
-  - Can run without it, but the annotation is not detectable at runtime, producing invalid bindings.
-  - Also need to decide on `null` vs `MemorySegment.NULL` at the LWJGL API level.
+* Need to decide on `null` vs `MemorySegment.NULL` at the LWJGL API level.
 * The struct/union DSL needs work.
   - Could wrap FFM layouts to a custom API with helper instance methods.
 

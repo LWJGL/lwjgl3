@@ -109,7 +109,7 @@ final class BCCallDown extends BCCall {
 
             var type = parameter.getType();
             if (isPointerType(parameter, type)) {
-                if (config.checks && !isNullable(parameter)) {
+                if (config.checks && !isNullable(config, parameter)) {
                     featureFlags |= FF_CHECK.mask; // requires null check
                 }
                 if (Platform.getArchitecture().is32Bit() && type == long.class) {
@@ -319,7 +319,7 @@ final class BCCallDown extends BCCall {
                         for (var p = virtualParameterCount; p < methodTypeDesc.parameterCount(); p++) {
                             var parameter = parameters[p];
                             var type      = parameter.getType();
-                            if (isPointerType(parameter, type) && !isNullable(parameter)) {
+                            if (isPointerType(parameter, type) && !isNullable(config, parameter)) {
                                 var slot = cb.parameterSlot(p);
 
                                 Opcode ifThenOpcode;
@@ -403,7 +403,7 @@ final class BCCallDown extends BCCall {
                             }
 
                             if (type == String.class) {
-                                if (isNullable(parameter)) {
+                                if (isNullable(config, parameter)) {
                                     bcb
                                         .aload(slot)
                                         .ifThenElse(
@@ -426,7 +426,7 @@ final class BCCallDown extends BCCall {
                                         .aload(slot)
                                         .invokeinterface(CD_GroupBinder, "asSegment", MTD_MemorySegment_Object);
                                     case UpcallBinder<?> _ -> {
-                                        if (isNullable(parameter)) {
+                                        if (isNullable(config, parameter)) {
                                             bcb
                                                 .aload(slot)
                                                 .ifThenElse(Opcode.IFNULL,

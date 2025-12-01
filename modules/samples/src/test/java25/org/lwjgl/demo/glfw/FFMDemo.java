@@ -4,6 +4,7 @@
  */
 package org.lwjgl.demo.glfw;
 
+import org.jspecify.annotations.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 import org.lwjgl.system.ffm.*;
@@ -41,6 +42,7 @@ public final class FFMDemo {
         ffmConfig(
             MyGLFW.class,
             ffmConfigBuilder(MethodHandles.lookup())
+                .withNullableAnnotation(Nullable.class)
                 .withSymbolLookup(GLFW_LOADER)
                 //.withTracing(TRACER/*, method -> method.getParameterCount() != 0 && method.getParameters()[0].getType() == MemorySegment.class*/)
                 .build()

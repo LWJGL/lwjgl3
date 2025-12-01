@@ -290,7 +290,7 @@ final class BCCallUp extends BCCall {
                         var slot = cb.parameterSlot(p + paramOffset);
                         if (type == String.class) {
                             cb.aload(slot);
-                            if (isNullable(parameter)) {
+                            if (isNullable(config, parameter)) {
                                 cb
                                     .invokeinterface(CD_MemorySegment, "address", MTD_long)
                                     .lconst_0()

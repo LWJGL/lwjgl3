@@ -9,6 +9,7 @@ import org.lwjgl.sdl.*;
 import org.lwjgl.system.*;
 import org.testng.annotations.*;
 
+import java.lang.annotation.*;
 import java.lang.foreign.*;
 import java.lang.invoke.*;
 import java.nio.*;
@@ -27,10 +28,17 @@ import static org.testng.Assert.*;
 @Test
 public class StructTest {
 
+    // Use a custom annotation to test that everything works without jspecify in the classpath
+    @Target({ElementType.METHOD, ElementType.PARAMETER})
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface MyNullable {
+    }
+
     static {
         ffmConfig(
             StructTest.class,
             ffmConfigBuilder(MethodHandles.lookup())
+                .withNullableAnnotation(MyNullable.class)
                 .build());
     }
 
@@ -83,10 +91,11 @@ public class StructTest {
         assertEquals(StructType.$.layout().toString(), "[](AnotherStructType)");
 
         interface Caller {
-            void test(@Nullable StructType s);
+            void test(@MyNullable StructType s);
         }
 
         var caller = ffmGenerate(Caller.class);
+        //noinspection DataFlowIssue
         assertThrows(() -> caller.test(null));
 
         interface StructParent {
@@ -112,10 +121,11 @@ public class StructTest {
         assertThrows(() -> Objects.requireNonNull(StructType.$1));
 
         interface Caller {
-            void test(@Nullable StructType s);
+            void test(@MyNullable StructType s);
         }
 
         var caller = ffmGenerate(Caller.class);
+        //noinspection DataFlowIssue
         assertThrows(() -> caller.test(null));
 
         interface StructParent {
@@ -588,7 +598,7 @@ public class StructTest {
             var offset = 0L;
             for (var member : S.$.layout().memberLayouts()) {
                 if (member instanceof PaddingLayout) {
-                    for (long i = offset; i < offset + member.byteSize(); i++) {
+                    for (var i = offset; i < offset + member.byteSize(); i++) {
                         assertEquals(segment.get(ValueLayout.JAVA_BYTE, i), (byte)0);
                     }
                 }
@@ -797,11 +807,11 @@ public class StructTest {
                     .build();
 
                 float c();
-                @Nullable Inner inner();
+                @MyNullable Inner inner();
                 double d();
 
                 Outer c(float c);
-                Outer inner(@Nullable Inner inner);
+                Outer inner(@MyNullable Inner inner);
                 Outer d(double d);
             }
 
@@ -810,6 +820,7 @@ public class StructTest {
             var outer = Outer.$.get(segment);
 
             assertEquals(outer.c(), 0.0f);
+            //noinspection DataFlowIssue
             assertNull(outer.inner());
             assertEquals(outer.d(), 0.0f);
 
@@ -1741,8 +1752,8 @@ public class StructTest {
 
                     .build();
 
-                @Nullable String pointerNT();
-                @FFMSize("pointerLength") @Nullable String pointer();
+                @MyNullable String pointerNT();
+                @FFMSize("pointerLength") @MyNullable String pointer();
                 int pointerLength();
 
                 String arrayNT();
@@ -1785,6 +1796,7 @@ public class StructTest {
             var world = worldNT.reinterpret(worldNT.byteSize() - 1);
 
             {
+                //noinspection DataFlowIssue
                 assertNull(s.pointerNT());
                 assertNull(s.pointer());
                 assertEquals(s.pointerLength(), 0);
