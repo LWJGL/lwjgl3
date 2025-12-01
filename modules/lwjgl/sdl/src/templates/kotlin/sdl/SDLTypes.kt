@@ -630,10 +630,54 @@ val SDL_HintCallback = Module.SDL.callback {
     )
 }
 
-// SDL_init.h, removed the app callbacks because they're impossible to use from Java
+// SDL_init.h, for app callback usage see https://github.com/libsdl-org/SDL/issues/14513 until the official docs are updated
 val SDL_InitFlags = typedef(Uint32, "SDL_InitFlags")
+val SDL_AppResult = "SDL_AppResult".enumType
 
-//val SDL_AppResult = "SDL_AppResult".enumType
+val SDL_AppInit_func = Module.SDL.callback {
+    SDL_AppResult(
+        "SDL_AppInit_func",
+
+        Check(1)..opaque_p.p("appstate"),
+        AutoSize("argv")..int("argc"),
+        nullable..charUTF8.p.p("argv"),
+
+        nativeType = "SDL_AppInit_func"
+    )
+}
+
+val SDL_AppIterate_func = Module.SDL.callback {
+    SDL_AppResult(
+        "SDL_AppIterate_func",
+
+        nullable..opaque_p("appstate"),
+
+        nativeType = "SDL_AppIterate_func"
+    )
+}
+
+val _SDL_Event = union(Module.SDL, "SDL_Event")
+val SDL_AppEvent_func = Module.SDL.callback {
+    SDL_AppResult(
+        "SDL_AppEvent_func",
+
+        nullable..opaque_p("appstate"),
+        _SDL_Event.p("event"),
+
+        nativeType = "SDL_AppEvent_func"
+    )
+}
+
+val SDL_AppQuit_func = Module.SDL.callback {
+    void(
+        "SDL_AppQuit_func",
+
+        nullable..opaque_p("appstate"),
+        SDL_AppResult("result"),
+
+        nativeType = "SDL_AppQuit_func"
+    )
+}
 
 val SDL_MainThreadCallback = Module.SDL.callback {
     void(
@@ -767,6 +811,18 @@ val SDL_LogOutputFunction = Module.SDL.callback {
         charUTF8.const.p("message"),
 
         nativeType = "SDL_LogOutputFunction"
+    )
+}
+
+// SDL_main.h
+val SDL_main_func = Module.SDL.callback {
+    int(
+        "SDL_main_func",
+
+        AutoSize("argv")..int("argc"),
+        char.p.p("argv"),
+
+        nativeType = "SDL_main_func"
     )
 }
 
