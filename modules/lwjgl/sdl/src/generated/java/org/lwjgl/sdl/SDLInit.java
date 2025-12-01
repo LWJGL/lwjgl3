@@ -49,6 +49,11 @@ public class SDLInit {
         SDL_INIT_SENSOR   = 0x00008000,
         SDL_INIT_CAMERA   = 0x00010000;
 
+    public static final int
+        SDL_APP_CONTINUE = 0,
+        SDL_APP_SUCCESS  = 1,
+        SDL_APP_FAILURE  = 2;
+
     public static final String
         SDL_PROP_APP_METADATA_NAME_STRING       = "SDL.app.metadata.name",
         SDL_PROP_APP_METADATA_VERSION_STRING    = "SDL.app.metadata.version",
