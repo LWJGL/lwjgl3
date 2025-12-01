@@ -202,6 +202,7 @@ public final class JNI {
     public static native int invokePPPNPI(long param0, int param1, long param2, long param3, long param4, long param5, long __functionAddress);
     public static native int invokePPPPNI(long param0, int param1, long param2, long param3, long param4, long param5, long __functionAddress);
     public static native int invokePPPPNI(long param0, long param1, int param2, long param3, long param4, long param5, long __functionAddress);
+    public static native int invokePPPPPI(int param0, long param1, long param2, long param3, long param4, long param5, long __functionAddress);
     public static native int invokePPPPPI(long param0, int param1, long param2, long param3, long param4, long param5, long __functionAddress);
     public static native int invokePPPPPI(long param0, long param1, int param2, long param3, long param4, long param5, long __functionAddress);
     public static native int invokePPPPPI(long param0, long param1, long param2, int param3, long param4, long param5, long __functionAddress);
