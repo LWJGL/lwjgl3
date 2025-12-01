@@ -319,7 +319,7 @@ final class BCCallDown extends BCCall {
                         for (var p = virtualParameterCount; p < methodTypeDesc.parameterCount(); p++) {
                             var parameter = parameters[p];
                             var type      = parameter.getType();
-                            if (isPointerType(parameter, type) && !isNullable(config, parameter)) {
+                            if ((isPointerType(parameter, type) || needsBinder(type)) && !isNullable(config, parameter)) {
                                 var slot = cb.parameterSlot(p);
 
                                 Opcode ifThenOpcode;
@@ -335,6 +335,9 @@ final class BCCallDown extends BCCall {
                                         .lload(slot)
                                         .lcmp();
                                     ifThenOpcode = Opcode.IFEQ;
+                                } else if (needsBinder(type)) {
+                                    cb.aload(slot);
+                                    ifThenOpcode = Opcode.IFNULL;
                                 } else {
                                     // String will throw in allocateFrom
                                     // TODO: add more types
@@ -421,10 +424,18 @@ final class BCCallDown extends BCCall {
                             } else if (needsBinder(type)) {
                                 var binder = config.binders.get(type).binder();
                                 switch (binder) {
-                                    case GroupBinder<?, ?> _ -> bcb
-                                        .ldc(condyCDataAt(CD_GroupBinder, featureFlagOffsets[FF_BINDER.ordinal()] + binders.get(type)))
-                                        .aload(slot)
-                                        .invokeinterface(CD_GroupBinder, "asSegment", MTD_MemorySegment_Object);
+                                    case GroupBinder<?, ?> _ -> {
+                                        if (isNullable(config, parameter)) {
+                                            bcb
+                                                .aload(slot)
+                                                .ifThenElse(Opcode.IFNULL,
+                                                    b0 -> b0.getstatic(CD_MemorySegment, "NULL", CD_MemorySegment),
+                                                    b1 -> buildGroupAsSegment(b1, type, slot)
+                                                );
+                                        } else {
+                                            buildGroupAsSegment(bcb, type, slot);
+                                        }
+                                    }
                                     case UpcallBinder<?> _ -> {
                                         if (isNullable(config, parameter)) {
                                             bcb
@@ -698,20 +709,30 @@ final class BCCallDown extends BCCall {
         return list;
     }
 
-    private static void buildAllocateFrom(CodeBuilder cb, int allocatorSlot, int slot, Parameter parameter) {
+    private static <T extends CodeBuilder> T buildAllocateFrom(T cb, int allocatorSlot, int slot, Parameter parameter) {
         cb
             .aload(allocatorSlot)
             .aload(slot);
         buildCharsetInstance(cb, getCharset(parameter))
             .invokeinterface(CD_SegmentAllocator, "allocateFrom", MTD_MemorySegment_String_Charset);
+        return cb;
     }
 
-    private void buildUpcallBinderAllocation(CodeBuilder bcb, Class<?> type, int parameterSlot) {
-        bcb
+    private <T extends CodeBuilder> T buildGroupAsSegment(T cb, Class<?> type, int parameterSlot) {
+        cb
+            .ldc(condyCDataAt(CD_GroupBinder, featureFlagOffsets[FF_BINDER.ordinal()] + binders.get(type)))
+            .aload(parameterSlot)
+            .invokeinterface(CD_GroupBinder, "asSegment", MTD_MemorySegment_Object);
+        return cb;
+    }
+
+    private <T extends CodeBuilder> T buildUpcallBinderAllocation(T cb, Class<?> type, int parameterSlot) {
+        cb
             .ldc(condyCDataAt(CD_UpcallBinder, featureFlagOffsets[FF_BINDER.ordinal()] + binders.get(type)))
-            .aload(getUpcallArenaSlot(bcb))
+            .aload(getUpcallArenaSlot(cb))
             .aload(parameterSlot)
             .invokeinterface(CD_UpcallBinder, "allocate", MTD_MemorySegment_Arena_Object);
+        return cb;
     }
 
 }

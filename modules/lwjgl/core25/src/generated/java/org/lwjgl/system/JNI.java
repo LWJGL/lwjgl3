@@ -1283,6 +1283,7 @@ public final class JNI {
     private static final JNIBindings jni = ffmGenerate(
         JNIBindings.class,
         ffmConfigBuilder(MethodHandles.lookup())
+            .withChecks(false)
             //.withCriticalOverride(_ -> true)
             //.withTracing(TRACER)
             .build()

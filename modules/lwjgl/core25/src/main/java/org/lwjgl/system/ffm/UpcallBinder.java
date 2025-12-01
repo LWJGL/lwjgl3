@@ -8,6 +8,7 @@ import org.jspecify.annotations.*;
 
 import java.lang.foreign.*;
 import java.lang.invoke.*;
+import java.util.*;
 
 public non-sealed interface UpcallBinder<T> extends Binder<T> {
 
@@ -32,6 +33,8 @@ public non-sealed interface UpcallBinder<T> extends Binder<T> {
     }
 
     default MemorySegment allocate(Arena arena, T upcall, Linker.Option... options) {
+        Objects.requireNonNull(upcall);
+
         var handle = handle()
             .bindTo(upcall);
 

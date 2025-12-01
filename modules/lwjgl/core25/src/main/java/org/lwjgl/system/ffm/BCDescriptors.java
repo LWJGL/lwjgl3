@@ -35,6 +35,7 @@ final class BCDescriptors {
         CD_MemorySegment            = MemorySegment.class.describeConstable().orElseThrow(),
         CD_MemoryUtil               = MemoryUtil.class.describeConstable().orElseThrow(),
         CD_Method                   = Method.class.describeConstable().orElseThrow(),
+        CD_NullPointerException     = NullPointerException.class.describeConstable().orElseThrow(),
         CD_Record                   = Record.class.describeConstable().orElseThrow(),
         CD_SegmentAllocator         = SegmentAllocator.class.describeConstable().orElseThrow(),
         CD_StackAllocator           = StackAllocator.class.describeConstable().orElseThrow(),

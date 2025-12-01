@@ -239,32 +239,36 @@ final class BCGroup {
                             } else if (returnType == MemorySegment.class) {
                                 buildMemberAddress(cb, thisClass, memberOffset);
                                 switch (memberLayout) {
-                                    case AddressLayout addressLayout -> cb
-                                        .invokestatic(CD_MemoryUtil, "memGetAddress", MTD_long_long)
-                                        .dup2()
-                                        .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
-                                        .dup_x2()
-                                        .pop()
-                                        .lconst_0()
-                                        .lcmp()
-                                        // TODO: consider doing only when nullable
-                                        .ifThen(Opcode.IFNE, bcb -> {
-                                            var targetLayout = addressLayout.targetLayout().orElseThrow();
-                                            var autoSize     = method.getAnnotation(FFMSize.class);
-                                            if (autoSize != null) {
-                                                buildAutoSize(bcb, autoSize, groupDesc, memberMap, method, targetLayout)
-                                                    .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long);
-                                            } else {
-                                                bcb
-                                                    .loadConstant(targetLayout.byteSize())
-                                                    .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long);
-                                            }
-                                        });
+                                    case AddressLayout addressLayout -> {
+                                        cb
+                                            .invokestatic(CD_MemoryUtil, "memGetAddress", MTD_long_long)
+                                            .dup2()
+                                            .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
+                                            .dup_x2()
+                                            .pop()
+                                            .lconst_0()
+                                            .lcmp()
+                                            .ifThen(Opcode.IFNE, bcb -> buildMemorySegmentReinterpret(bcb, groupDesc, memberMap, method, addressLayout));
+                                        /*if (isNullable(config, method)) {
+                                            cb
+                                                .dup2()
+                                                .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
+                                                .dup_x2()
+                                                .pop()
+                                                .lconst_0()
+                                                .lcmp()
+                                                .ifThen(Opcode.IFNE, bcb -> buildMemorySegmentReinterpret(bcb, groupDesc, memberMap, method, addressLayout));
+                                        } else {
+                                            buildNullPointerCheck(cb);
+                                            cb.invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true);
+                                            buildMemorySegmentReinterpret(cb, groupDesc, memberMap, method, addressLayout);
+                                        }*/
+                                    }
                                     case SequenceLayout sequenceLayout -> {
                                         cb.invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true);
                                         var autoSize = method.getAnnotation(FFMSize.class);
                                         if (autoSize != null) {
-                                            buildAutoSize(cb, autoSize, groupDesc, memberMap, method, sequenceLayout.elementLayout())
+                                            buildAutoSize(cb, groupDesc, memberMap, method, autoSize, sequenceLayout.elementLayout())
                                                 .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long);
                                         } else {
                                             cb
@@ -282,49 +286,32 @@ final class BCGroup {
                                 buildMemberAddress(cb, thisClass, memberOffset);
                                 switch (memberLayout) {
                                     // pointer to string
-                                    case AddressLayout _ -> cb
-                                        .invokestatic(CD_MemoryUtil, "memGetAddress", MTD_long_long)
-                                        .dup2()
-                                        .lconst_0()
-                                        .lcmp()
-                                        // TODO: consider doing only when nullable
-                                        .ifThenElse(Opcode.IFEQ,
-                                            bcb -> bcb
-                                                .pop2()
-                                                .aconst_null(),
-                                            bcb -> {
-                                                bcb.invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true);
-                                                var autoSize = method.getAnnotation(FFMSize.class);
-                                                if (autoSize != null) {
-                                                    var arraySlot = bcb.allocateLocal(TypeKind.REFERENCE);
-                                                    buildAutoSize(bcb, autoSize, groupDesc, memberMap, method, charset.layout)
-                                                        .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
-                                                        .getstatic(CD_ValueLayout, "JAVA_BYTE", CD_ValueLayout$OfByte)
-                                                        .invokeinterface(CD_MemorySegment, "toArray", MTD_byteArray_ValueLayout$OfByte)
-                                                        .astore(arraySlot)
-                                                        .new_(CD_String)
-                                                        .dup()
-                                                        .aload(arraySlot);
-                                                    buildCharsetInstance(bcb, charset)
-                                                        .invokespecial(CD_String, INIT_NAME, MTD_void_byteArray_Charset);
-                                                } else {
-                                                    bcb
-                                                        .loadConstant(Long.MAX_VALUE)
-                                                        .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
-                                                        .lconst_0();
-                                                    buildCharsetInstance(bcb, charset)
-                                                        .invokeinterface(CD_MemorySegment, "getString", MTD_String_long_Charset);
-                                                }
-                                            }
-                                        )
-                                        .areturn();
+                                    case AddressLayout _ -> {
+                                        cb.invokestatic(CD_MemoryUtil, "memGetAddress", MTD_long_long);
+                                        if (isNullable(config, method)) {
+                                            cb
+                                                .dup2()
+                                                .lconst_0()
+                                                .lcmp()
+                                                .ifThenElse(Opcode.IFEQ,
+                                                    bcb -> bcb
+                                                        .pop2()
+                                                        .aconst_null(),
+                                                    bcb -> buildStringGetter(bcb, groupDesc, memberMap, method, charset)
+                                                )
+                                                .areturn();
+                                        } else {
+                                            buildNullPointerCheck(cb);
+                                            buildStringGetter(cb, groupDesc, memberMap, method, charset);
+                                        }
+                                    }
                                     // character array
                                     case SequenceLayout sequenceLayout -> {
                                         cb.invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true);
                                         var autoSize = method.getAnnotation(FFMSize.class);
                                         if (autoSize != null) {
                                             var arraySlot = cb.allocateLocal(TypeKind.REFERENCE);
-                                            buildAutoSize(cb, autoSize, groupDesc, memberMap, method, sequenceLayout.elementLayout())
+                                            buildAutoSize(cb, groupDesc, memberMap, method, autoSize, sequenceLayout.elementLayout())
                                                 .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
                                                 .getstatic(CD_ValueLayout, "JAVA_BYTE", CD_ValueLayout$OfByte)
                                                 .invokeinterface(CD_MemorySegment, "toArray", MTD_byteArray_ValueLayout$OfByte)
@@ -692,13 +679,24 @@ final class BCGroup {
         }
     }
 
+    private static void buildNullPointerCheck(CodeBuilder cb) {
+        if (DEBUG) {
+            cb
+                .dup2()
+                .lconst_0()
+                .lcmp()
+                .ifThen(Opcode.IFEQ, bcb -> bcb
+                    .new_(CD_NullPointerException)
+                    .dup()
+                    .ldc("Pointer value is NULL")
+                    .invokespecial(CD_NullPointerException, INIT_NAME, MTD_void_String)
+                    .athrow());
+        }
+    }
+
     private static <T extends CodeBuilder> T buildAutoSize(
-        T cb,
-        FFMSize autoSize,
-        ClassDesc groupDesc,
-        SequencedMap<String, List<Method>> memberMap,
-        Method method,
-        MemoryLayout elementLayout
+        T cb, ClassDesc groupDesc, SequencedMap<String, List<Method>> memberMap, Method method,
+        FFMSize autoSize, MemoryLayout elementLayout
     ) {
         // TODO: simplify?
         var sizeGetter = memberMap.get(autoSize.value()).stream()
@@ -738,6 +736,54 @@ final class BCGroup {
         }
         return cb;
     }
+
+
+    private static <T extends CodeBuilder> T buildMemorySegmentReinterpret(
+        T cb, ClassDesc groupDesc, SequencedMap<String, List<Method>> memberMap, Method method,
+        AddressLayout addressLayout
+    ) {
+        var targetLayout = addressLayout.targetLayout().orElseThrow();
+        var autoSize     = method.getAnnotation(FFMSize.class);
+        if (autoSize != null) {
+            buildAutoSize(cb, groupDesc, memberMap, method, autoSize, targetLayout)
+                .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long);
+        } else {
+            cb
+                .loadConstant(targetLayout.byteSize())
+                .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long);
+        }
+        return cb;
+    }
+
+    private static <T extends CodeBuilder> T buildStringGetter(
+        T cb, ClassDesc groupDesc, SequencedMap<String, List<Method>> memberMap, Method method,
+        FFMCharset.Type charset
+    ) {
+        cb.invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true);
+        var autoSize = method.getAnnotation(FFMSize.class);
+        if (autoSize != null) {
+            var arraySlot = cb.allocateLocal(TypeKind.REFERENCE);
+            buildAutoSize(cb, groupDesc, memberMap, method, autoSize, charset.layout)
+                .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
+                .getstatic(CD_ValueLayout, "JAVA_BYTE", CD_ValueLayout$OfByte)
+                .invokeinterface(CD_MemorySegment, "toArray", MTD_byteArray_ValueLayout$OfByte)
+                .astore(arraySlot)
+                .new_(CD_String)
+                .dup()
+                .aload(arraySlot);
+            buildCharsetInstance(cb, charset)
+                .invokespecial(CD_String, INIT_NAME, MTD_void_byteArray_Charset);
+        } else {
+            cb
+                .loadConstant(Long.MAX_VALUE)
+                .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
+                .lconst_0();
+            buildCharsetInstance(cb, charset)
+                .invokeinterface(CD_MemorySegment, "getString", MTD_String_long_Charset);
+        }
+        return cb;
+    }
+
 
     private static String[] getBootstrapArgs(GroupLayout layout, LinkedHashMap<String, Method> getters) {
         var bootstrapNames = getters.sequencedKeySet().stream()
@@ -808,6 +854,13 @@ final class BCGroup {
             implementationConstructor = implementationLookup
                 .findConstructor(implementationLookup.lookupClass(), methodType(void.class, long.class))
                 .asType(methodType(groupInterface, long.class));
+
+            if (DEBUG) {
+                // verify that address passed to constructor is not NULL and correctly aligned
+                implementationConstructor = MethodHandles
+                    .filterArguments(implementationConstructor, 0, MethodHandles
+                        .insertArguments(CHECK_ADDRESS, 1, layout.byteAlignment()));
+            }
 
             implementationAddress = implementationLookup
                 .findGetter(implementationLookup.lookupClass(), "address", long.class)
@@ -1240,6 +1293,25 @@ final class BCGroup {
             printModel(of().parse(bytecode));
             throw new RuntimeException(e);
         }
+    }
+
+    private static final MethodHandle CHECK_ADDRESS;
+    static {
+        try {
+            CHECK_ADDRESS = MethodHandles.lookup()
+                .findStatic(BCGroup.class, "checkAddress", methodType(long.class, long.class, long.class));
+        } catch (NoSuchMethodException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private static long checkAddress(long address, long alignment) {
+        if (address == 0L) {
+            throw new NullPointerException("Group instance cannot be instantiated with a NULL address");
+        }
+        if ((address & (alignment - 1L)) != 0L) {
+            throw new IllegalArgumentException("Group instance address is not properly aligned to " + alignment + " bytes: 0x" + Long.toHexString(address));
+        }
+        return address;
     }
 
     enum Kind {

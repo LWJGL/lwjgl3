@@ -160,6 +160,7 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
     private static final JNIBindings jni = ffmGenerate(
         JNIBindings.class,
         ffmConfigBuilder(MethodHandles.lookup())
+            .withChecks(false)
             //.withCriticalOverride(_ -> true)
             //.withTracing(TRACER)
             .build()

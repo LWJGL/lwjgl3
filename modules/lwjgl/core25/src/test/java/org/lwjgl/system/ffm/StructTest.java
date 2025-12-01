@@ -1036,6 +1036,7 @@ public class StructTest {
             var s       = S8.$.get(segment);
 
             assertEqualsSegment(s.buffer(), MemorySegment.NULL);
+            //assertThrows(NullPointerException.class, s::buffer);
             assertEquals(s.size(), (byte)0);
 
             var buffer = arena.allocate(int8_t, 0xFFL);
@@ -1066,6 +1067,7 @@ public class StructTest {
             var s       = S16.$.get(segment);
 
             assertEqualsSegment(s.buffer(), MemorySegment.NULL);
+            //assertThrows(NullPointerException.class, s::buffer);
             assertEquals(s.size(), (short)0);
 
             var buffer = arena.allocate(int8_t, 0xFFL);
@@ -1096,6 +1098,7 @@ public class StructTest {
             var s       = S32.$.get(segment);
 
             assertEqualsSegment(s.buffer(), MemorySegment.NULL);
+            //assertThrows(NullPointerException.class, s::buffer);
             assertEquals(s.size(), 0);
 
             var buffer = arena.allocate(int8_t, 0xFFL);
@@ -1126,6 +1129,7 @@ public class StructTest {
             var s       = S64.$.get(segment);
 
             assertEqualsSegment(s.buffer(), MemorySegment.NULL);
+            //assertThrows(NullPointerException.class, s::buffer);
             assertEquals(s.size(), 0L);
 
             var buffer = arena.allocate(int8_t, 0xFFL);
@@ -1407,6 +1411,7 @@ public class StructTest {
             assertEquals(s.x(), 0);
             assertEquals(s.y(), 0);
             assertEqualsSegment(s.pointer(), MemorySegment.NULL);
+            //assertThrows(NullPointerException.class, s::pointer);
             assertEquals(s.toString(), "S[x=0, y=0, pointer=0x0]");
 
             s
@@ -1446,6 +1451,7 @@ public class StructTest {
             assertEquals(s.x(), 0);
             assertEquals(s.y(), 0);
             assertEqualsSegment(s.pointer(), MemorySegment.NULL);
+            //assertThrows(NullPointerException.class, s::pointer);
             assertEquals(s.toString(), "My S Rendering: x=0, y=0, pointer=" + MemorySegment.NULL);
 
             var buffer = arena.allocate(int32_t, 16);
@@ -1801,6 +1807,7 @@ public class StructTest {
                 assertNull(s.pointer());
                 assertEquals(s.pointerLength(), 0);
                 assertEqualsSegment(s.pointerSegment(), MemorySegment.NULL);
+                //assertThrows(NullPointerException.class, s::pointerSegment);
 
                 s.pointerNT(helloNT);
 
@@ -1808,6 +1815,7 @@ public class StructTest {
                 assertNull(s.pointer());
                 assertEquals(s.pointerLength(), 0);
                 assertEqualsSegment(s.pointerSegment(), MemorySegment.NULL);
+                //assertThrows(NullPointerException.class, s::pointerSegment);
 
                 s.pointer(hello);
 
