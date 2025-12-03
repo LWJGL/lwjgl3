@@ -1143,6 +1143,92 @@ public class StructTest {
         }
     }
 
+    public void testAliasingObject() {
+        {
+            interface Invalid {
+                StructBinder<Invalid> $ = struct(Invalid.class)
+                    .m("equals", uint8_t)
+                    .build();
+
+                boolean equals();
+                @SuppressWarnings("CovariantEquals")
+                Invalid equals(boolean value);
+            }
+            assertThrows(() -> Objects.requireNonNull(Invalid.$));
+        }
+
+        {
+            interface Valid {
+                StructBinder<Valid> $ = struct(Valid.class)
+                    .m("equals", uint8_t)
+                    .build();
+
+                @FFMName("equals")
+                boolean myEquals();
+
+                @FFMName("equals")
+                Valid myEquals(boolean value);
+            }
+            Objects.requireNonNull(Valid.$);
+        }
+
+        {
+            interface Invalid {
+                StructBinder<Invalid> $ = struct(Invalid.class)
+                    .m("hashCode", int32_t)
+                    .build();
+
+                int hashCode();
+                Invalid hashCode(int value);
+            }
+            assertThrows(() -> Objects.requireNonNull(Invalid.$));
+        }
+
+        {
+            interface Valid {
+                StructBinder<Valid> $ = struct(Valid.class)
+                    .m("hashCode", int32_t)
+                    .build();
+
+                @FFMName("hashCode")
+                int myHashCode();
+
+                @FFMName("hashCode")
+                Valid myHashCode(int value);
+            }
+            Objects.requireNonNull(Valid.$);
+        }
+
+        {
+            @FFMCharset(FFMCharset.Type.UTF8)
+            interface Invalid {
+                StructBinder<Invalid> $ = struct(Invalid.class)
+                    .m("toString", FFM.array(int8_t, 128))
+                    .build();
+
+                String toString();
+                Invalid toString(String value);
+            }
+            assertThrows(() -> Objects.requireNonNull(Invalid.$));
+        }
+
+        {
+            @FFMCharset(FFMCharset.Type.UTF8)
+            interface Valid {
+                StructBinder<Valid> $ = struct(Valid.class)
+                    .m("toString", FFM.array(int8_t, 128))
+                    .build();
+
+                @FFMName("toString")
+                String myToString();
+
+                @FFMName("toString")
+                Valid myToString(String value);
+            }
+            Objects.requireNonNull(Valid.$);
+        }
+    }
+
     public void testEquals() {
         try (var arena = Arena.ofConfined()) {
             interface S {
@@ -1914,14 +2000,41 @@ public class StructTest {
     }
 
     public void testCapabilityPointer() {
-        interface S extends Pointer {
-            StructBinder<S> $ = struct(S.class)
-                .m("a", int32_t)
-                .m("b", int32_t)
-                .build();
+        {
+            // test aliasing
+            interface Invalid extends Pointer {
+                StructBinder<Invalid> $ = struct(Invalid.class)
+                    .m("address", uint64_t)
+                    .build();
+
+                @SuppressWarnings("override")
+                long address();
+                Invalid address(long value);
+            }
+            assertThrows(() -> Objects.requireNonNull(Invalid.$));
+
+            interface Valid extends Pointer {
+                StructBinder<Valid> $ = struct(Valid.class)
+                    .m("address", uint64_t)
+                    .build();
+
+                @FFMName("address")
+                long myAddress();
+
+                @FFMName("address")
+                Valid myAddress(long value);
+            }
+            Objects.requireNonNull(Valid.$);
         }
 
         try (var arena = Arena.ofConfined()) {
+            interface S extends Pointer {
+                StructBinder<S> $ = struct(S.class)
+                    .m("a", int32_t)
+                    .m("b", int32_t)
+                    .build();
+            }
+
             var segment = S.$.allocate(arena);
 
             var s = S.$.get(segment);

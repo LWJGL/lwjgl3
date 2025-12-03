@@ -32,26 +32,13 @@ final class BCGroup {
     private BCGroup() {
     }
 
-    private static ClassDesc groupDesc(Binder<?> binder) {
+    private static ClassDesc groupDesc(FFMConfig.BinderField binderField) {
+        var binder = binderField.binder();
         return switch (binder) {
             case StructBinder<?> _ -> CD_StructBinder;
             case UnionBinder<?> _ -> CD_UnionBinder;
             default -> throw new UnsupportedOperationException("Unsupported binder type: " + binder.getClass());
         };
-    }
-
-    private static CodeBuilder buildMemberAddress(CodeBuilder cb, ClassDesc thisClass, long memberOffset) {
-        cb
-            .aload(cb.receiverSlot())
-            .getfield(thisClass, "address", CD_long);
-
-        if (memberOffset != 0) {
-            cb
-                .loadConstant(memberOffset)
-                .ladd();
-        }
-
-        return cb;
     }
 
     private static RuntimeException memberException(String message, Class<?> groupInterface, String member) {
@@ -92,56 +79,9 @@ final class BCGroup {
                     .return_()
                 ));
 
-            if (Pointer.class.isAssignableFrom(groupInterface)) {
-                classBuilder.withMethod("address", MTD_long, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> cb
-                    .aload(cb.receiverSlot())
-                    .getfield(thisClass, "address", CD_long)
-                    .lreturn()));
-            }
-
-            if (NativeResource.class.isAssignableFrom(groupInterface)) {
-                classBuilder.withMethod("free", MTD_void, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> cb
-                    .aload(cb.receiverSlot())
-                    .getfield(thisClass, "address", CD_long)
-                    .invokestatic(CD_MemoryUtil, "nmemFree", MTD_void_long)
-                    .return_()));
-            }
-
             // member name -> list of methods that access the member
             // sorted by layout member order
-            var memberMap = new LinkedHashMap<String, List<Method>>(layout.memberLayouts().size());
-            {
-                var methods = new HashMap<String, List<Method>>(layout.memberLayouts().size());
-                for (var method : groupInterface.getDeclaredMethods()) {
-                    if (Modifier.isStatic(method.getModifiers()) || method.isDefault()) {
-                        continue; // skip static/default interface methods
-                    }
-
-                    var name = getNativeName(method);
-
-                    methods
-                        .computeIfAbsent(name, _ -> new ArrayList<>(4))
-                        .add(method);
-                }
-
-                for (var member : layout.memberLayouts()) {
-                    var name = member.name().orElse(null);
-                    if (name == null) {
-                        continue;
-                    }
-
-                    var memberAccessors = methods.get(name);
-                    if (memberAccessors != null) {
-                        memberMap.put(name, memberAccessors);
-                    }
-                }
-
-                for (var method : methods.entrySet()) {
-                    if (!memberMap.containsKey(method.getKey())) {
-                        throw memberException("No layout member found with this name", groupInterface, method.getKey());
-                    }
-                }
-            }
+            var memberMap = compileMemberAccessors(groupInterface, layout);
 
             // Don't need canonical getters if all of equals, hashCode, toString are provided
             var hasPrivateGetters =
@@ -166,21 +106,7 @@ final class BCGroup {
                     }
 
                     getterCount++;
-                    if (method.isAnnotationPresent(FFMCanonical.class)) {
-                        var canonical = getters.get(memberName);
-                        if (canonical != null && canonical.isAnnotationPresent(FFMCanonical.class)) {
-                            throw memberException("Multiple canonical getters found", groupInterface, memberName);
-                        }
-                        getters.put(memberName, method);
-                    } else if (memberName.equals(method.getName())) {
-                        var canonical = getters.get(memberName);
-                        if (canonical == null || !canonical.isAnnotationPresent(FFMCanonical.class)) {
-                            getters.put(memberName, method);
-                        }
-                    } else {
-                        nonCanonicalCount++;
-                        getters.putIfAbsent(memberName, method);
-                    }
+                    nonCanonicalCount += registerCanonicalGetter(groupInterface, method, getters, memberName);
 
                     var descriptor = getMethodTypeDesc(method);
                     classBuilder.withMethod(method.getName(), descriptor, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> {
@@ -340,7 +266,7 @@ final class BCGroup {
                                     case AddressLayout _ -> {
                                         // TODO: check actual target of memberLayout
                                         // pointer to group, dereference memory address
-                                        cb.getstatic(returnTypeDesc, binderField.name(), groupDesc(binderField.binder()));
+                                        cb.getstatic(returnTypeDesc, binderField.name(), groupDesc(binderField));
                                         buildMemberAddress(cb, thisClass, memberOffset)
                                             .invokestatic(CD_MemoryUtil, "memGetAddress", MTD_long_long)
                                             .invokeinterface(CD_GroupBinder, isNullable(config, method) ? "ofAddressSafe" : "ofAddress", MTD_Object_long)
@@ -352,7 +278,7 @@ final class BCGroup {
                                             throw methodException("Nested group members cannot be nullable", method);
                                         }
                                         // nested group, return view of member address
-                                        cb.getstatic(returnTypeDesc, binderField.name(), groupDesc(binderField.binder()));
+                                        cb.getstatic(returnTypeDesc, binderField.name(), groupDesc(binderField));
                                         buildMemberAddress(cb, thisClass, memberOffset)
                                             .invokeinterface(CD_GroupBinder, "ofAddress", MTD_Object_long)
                                         /*.checkcast(returnType.describeConstable().orElseThrow())*/
@@ -450,7 +376,7 @@ final class BCGroup {
                     }
                     var descriptor = getMethodTypeDesc(method);
                     classBuilder.withMethod(method.getName(), descriptor, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> {
-                            var memberPath   = groupElement(method.getName());
+                            var memberPath   = groupElement(member.getKey());
                             var memberLayout = layout.select(memberPath);
                             var memberOffset = layout.byteOffset(memberPath);
 
@@ -552,7 +478,7 @@ final class BCGroup {
                                         // TODO: check actual target of memberLayout
                                         // pointer to group, put memory address
                                         buildMemberAddress(cb, thisClass, memberOffset)
-                                            .getstatic(parameterTypeDesc, binderField.name(), groupDesc(binderField.binder()))
+                                            .getstatic(parameterTypeDesc, binderField.name(), groupDesc(binderField))
                                             .aload(param0)
                                             .invokeinterface(CD_GroupBinder, isNullable(config, parameter) ? "addressOfSafe" : "addressOf", MTD_long_Object)
                                             .invokestatic(CD_MemoryUtil, "memPutAddress", MTD_void_long_long);
@@ -562,7 +488,7 @@ final class BCGroup {
                                         }
                                         // nested group, copy entire layout
                                         cb
-                                            .getstatic(parameterTypeDesc, binderField.name(), groupDesc(binderField.binder()))
+                                            .getstatic(parameterTypeDesc, binderField.name(), groupDesc(binderField))
                                             .dup();
                                         buildMemberAddress(cb, thisClass, memberOffset)
                                             .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
@@ -656,6 +582,23 @@ final class BCGroup {
                     }
                     cb.areturn();
                 }));
+
+            // GENERATE optional capabilities
+
+            if (Pointer.class.isAssignableFrom(groupInterface)) {
+                classBuilder.withMethod("address", MTD_long, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> cb
+                    .aload(cb.receiverSlot())
+                    .getfield(thisClass, "address", CD_long)
+                    .lreturn()));
+            }
+
+            if (NativeResource.class.isAssignableFrom(groupInterface)) {
+                classBuilder.withMethod("free", MTD_void, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> cb
+                    .aload(cb.receiverSlot())
+                    .getfield(thisClass, "address", CD_long)
+                    .invokestatic(CD_MemoryUtil, "nmemFree", MTD_void_long)
+                    .return_()));
+            }
         });
 
         if (config.debugGenerator) {
@@ -677,6 +620,89 @@ final class BCGroup {
             printModel(of().parse(bytecode));
             throw new RuntimeException(e);
         }
+    }
+
+    private static SequencedMap<String, List<Method>> compileMemberAccessors(Class<?> groupInterface, GroupLayout layout) {
+        var memberMap = new LinkedHashMap<String, List<Method>>(layout.memberLayouts().size());
+
+        var methods = new HashMap<String, List<Method>>(layout.memberLayouts().size());
+        for (var method : groupInterface.getDeclaredMethods()) {
+            if (Modifier.isStatic(method.getModifiers()) || method.isDefault()) {
+                continue; // skip static/default interface methods
+            }
+
+            checkAccessorAliasing(groupInterface, method);
+            var name = getNativeName(method);
+
+            methods
+                .computeIfAbsent(name, _ -> new ArrayList<>(4))
+                .add(method);
+        }
+
+        for (var member : layout.memberLayouts()) {
+            var name = member.name().orElse(null);
+            if (name == null) {
+                continue;
+            }
+
+            var memberAccessors = methods.get(name);
+            if (memberAccessors != null) {
+                memberMap.put(name, memberAccessors);
+            }
+        }
+
+        for (var method : methods.entrySet()) {
+            if (!memberMap.containsKey(method.getKey())) {
+                throw memberException("No layout member found with this name", groupInterface, method.getKey());
+            }
+        }
+
+        return memberMap;
+    }
+
+    private static int registerCanonicalGetter(Class<?> groupInterface, Method method, LinkedHashMap<String, Method> getters, String memberName) {
+        if (method.isAnnotationPresent(FFMCanonical.class)) {
+            var canonical = getters.get(memberName);
+            if (canonical != null && canonical.isAnnotationPresent(FFMCanonical.class)) {
+                throw memberException("Multiple canonical getters found", groupInterface, memberName);
+            }
+            getters.put(memberName, method);
+        } else if (memberName.equals(method.getName())) {
+            var canonical = getters.get(memberName);
+            if (canonical == null || !canonical.isAnnotationPresent(FFMCanonical.class)) {
+                getters.put(memberName, method);
+            }
+        } else {
+            getters.putIfAbsent(memberName, method);
+            return 1;
+        }
+        return 0;
+    }
+
+    private static void checkAccessorAliasing(Class<?> groupInterface, Method method) {
+        if (switch (method.getName()) {
+            case "equals", "hashCode", "toString" -> true;
+            case "address" -> Pointer.class.isAssignableFrom(groupInterface);
+            // void methods, should be fine
+            //case "close", "free" -> NativeResource.class.isAssignableFrom(groupInterface);
+            default -> false;
+        }) {
+            throw methodException("Group accessor name aliases supertype method and must be changed with @FFMName", method);
+        }
+    }
+
+    private static CodeBuilder buildMemberAddress(CodeBuilder cb, ClassDesc thisClass, long memberOffset) {
+        cb
+            .aload(cb.receiverSlot())
+            .getfield(thisClass, "address", CD_long);
+
+        if (memberOffset != 0) {
+            cb
+                .loadConstant(memberOffset)
+                .ladd();
+        }
+
+        return cb;
     }
 
     private static void buildNullPointerCheck(CodeBuilder cb) {
