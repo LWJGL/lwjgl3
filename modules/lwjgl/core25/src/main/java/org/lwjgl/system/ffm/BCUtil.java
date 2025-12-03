@@ -129,7 +129,7 @@ final class BCUtil {
     private static void checkAnnotations(AnnotatedElement element, Class<? extends AnnotatedElement> type) {
         for (var annotation : element.getDeclaredAnnotations()) {
             var annotationType = annotation.annotationType();
-            if (!annotationType.getPackageName().startsWith("org.lwjgl.")) {
+            if (annotationType.getPackage() != FFM.class.getPackage()) {
                 apiLog("Unsupported annotation found on " + type.getSimpleName().toLowerCase() + ": " + element);
                 if (NULLABLE_PATTERN.matcher(annotationType.getSimpleName()).find()) {
                     apiLog("\tUse FFMConfigBuilder::withNullableAnnotation if applicable.");
