@@ -42,7 +42,6 @@ public final class FFMDemo {
         ffmConfig(
             MyGLFW.class,
             ffmConfigBuilder(MethodHandles.lookup())
-                .withNullableAnnotation(Nullable.class)
                 .withSymbolLookup(GLFW_LOADER)
                 //.withTracing(TRACER/*, method -> method.getParameterCount() != 0 && method.getParameters()[0].getType() == MemorySegment.class*/)
                 .build()

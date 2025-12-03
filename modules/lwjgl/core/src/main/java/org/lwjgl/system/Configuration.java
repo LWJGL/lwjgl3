@@ -283,8 +283,8 @@ public class Configuration<T> {
      * <p>Output will be printed to the {@link #DEBUG_STREAM}. This option requires {@link #DEBUG} to be enabled.</p>
      *
      * <p style="font-family: monospace">
-     * Property: <b>org.lwjgl.util.DebugGenerator</b><br>
-     * &nbsp; &nbsp;Usage: Dynamic</p>
+     * Property: <b>org.lwjgl.util.DebugGenerator</b>
+     * <br> &nbsp; &nbsp;Usage: Dynamic</p>
      */
     public static final Configuration<Boolean> DEBUG_GENERATOR = new Configuration<>("org.lwjgl.util.DebugGenerator", StateInit.BOOLEAN);
 
@@ -381,16 +381,45 @@ public class Configuration<T> {
     // -- FFM INTEROP OPTIONS
 
     /**
+     * Can be set to override the default nullable annotation used by the bindings generator.
+     *
+     * <p>Supported values:</p>
+     * <ul>
+     * <li><em>auto</em> - LWJGL will try calling {@link Class#forName} with a list of popular nullable annotation classes. The first one available will become
+     * the default nullable annotation.</li>
+     * <li><em>none</em> - No nullable annotation will be set by default. If necessary, the {@code FFMConfig} builder can be used to configure a nullable
+     * annotation per binding.</li>
+     * <li><em>&lt;classpath&gt;</em> - An annotation class.</li>
+     * </ul>
+     *
+     * <p>If this option is not set, it defaults to {@code auto}. When set programmatically, it can also be an
+     * {@link java.lang.annotation.Annotation Annotation} {@code class}.</p>
+     *
+     * <p>The configured nullable annotation must also satisfy the following requirements:</p>
+     * <ul>
+     *     <li>It must have a {@link java.lang.annotation.RetentionPolicy#RUNTIME RUNTIME} {@link java.lang.annotation.Retention Retention} policy.</li>
+     *     <li>It must {@link java.lang.annotation.Target Target} either {@link java.lang.annotation.ElementType#TYPE_USE TYPE_USE} or both
+     *     {@link java.lang.annotation.ElementType#METHOD METHOD} and {@link java.lang.annotation.ElementType#PARAMETER PARAMETER}.</li>
+     * </ul>
+     *
+     * <p style="font-family: monospace">
+     * Property: <b>org.lwjgl.system.ffm.nullable</b><br>
+     * &nbsp; &nbsp; Type: String<br>
+     * &nbsp; &nbsp;Usage: Static</p>
+     */
+    public static final Configuration<Object> FFM_DEFAULT_NULLABLE_ANNOTATION = new Configuration<>("org.lwjgl.system.ffm.nullable", StateInit.STRING);
+
+    /**
      * Can be set to override the default {@code Arena} type used to allocate upcalls with the FFM backend.
      *
      * <p>Supported values:</p>
      * <ul>
-     * <li><em>auto</em> - The default if not overriden, creates a GC managed arena for each upcall. Upcalls can be used and freed from any thread, but
-     * resource release timing depends on overall GC activity, like managed NIO buffers.</li>
+     * <li><em>auto</em> - Creates a GC managed arena for each upcall. Upcalls can be used and freed from any thread, but resource release timing depends on
+     * overall GC activity, like managed NIO buffers.</li>
      * <li><em>confined</em> - Creates a thread-confined arena for each upcall. Upcalls can be used and freed only from the thread that created them, but
      * resource release happens immediately when the upcall is freed.</li>
      * <li><em>shared</em> - Creates a thread-shared arena for each upcall. Upcalls can be used and freed from any thread, resource release happens immediately
-     * when the upcall is freed, but the upcall allocation and release process is very expensive.<br>
+     * when the upcall is freed, but the upcall allocation and release process is very expensive.</li>
      * </ul>
      *
      * <p>If this option is not set, it defaults to {@code auto}, which should be acceptable for most existing LWJGL applications that do not instantiate

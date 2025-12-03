@@ -93,7 +93,6 @@ public class FFMOverheadTest {
 
     private static final FFMBindings BINDINGS = ffmGenerate(FFMBindings.class,
         ffmConfigBuilder(MethodHandles.lookup())
-            .withNullableAnnotation(Nullable.class)
             .withSymbolLookup(LOADER)
             .build()
     );

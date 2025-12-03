@@ -25,7 +25,7 @@ public final class FFMConfig {
 
     final HashMap<Class<?>, BinderField> binders = new HashMap<>();
 
-    final @Nullable Class<? extends java.lang.annotation.Annotation>
+    final @Nullable Class<? extends Annotation>
                                               nullableAnnotation;
     final           boolean                   nullableAnnotationOnType;
     final @Nullable SymbolLookup              symbolLookup;
@@ -48,7 +48,7 @@ public final class FFMConfig {
      * @param debugGenerator   whether to enable generator debug output.
      */
     FFMConfig(
-        @Nullable Class<? extends java.lang.annotation.Annotation> nullableAnnotation,
+        @Nullable Class<? extends Annotation> nullableAnnotation,
         MethodHandles.Lookup lookup,
         @Nullable SymbolLookup symbolLookup,
         // TODO: tracing pre, post, return values, transformed signature, etc.
@@ -67,27 +67,7 @@ public final class FFMConfig {
         this.checks = checks;
         this.debugGenerator = debugGenerator;
 
-        if (nullableAnnotation != null) {
-            var retention = nullableAnnotation.getDeclaredAnnotation(Retention.class);
-            if (retention == null || retention.value() != RetentionPolicy.RUNTIME) {
-                throw new IllegalStateException("Nullable annotation " + nullableAnnotation + " must have RUNTIME retention");
-            }
-
-            var target = nullableAnnotation.getDeclaredAnnotation(Target.class);
-            if (target != null) {
-                var elementTypes = List.of(target.value());
-                if (elementTypes.contains(ElementType.TYPE_USE)) {
-                    nullableAnnotationOnType = true;
-                    return;
-                }
-
-                if (!(elementTypes.contains(ElementType.METHOD) && elementTypes.contains(ElementType.PARAMETER))) {
-                    throw new IllegalStateException("Nullable annotation " + nullableAnnotation + " must @Target either TYPE_USE or METHOD+PARAMETER");
-                }
-            }
-        }
-
-        nullableAnnotationOnType = false;
+        this.nullableAnnotationOnType = validateNullableAnnotationClass(nullableAnnotation);
     }
 
     public MethodHandles.Lookup getLookup() {
@@ -113,7 +93,7 @@ public final class FFMConfig {
         return (UpcallBinder<T>)Objects.requireNonNull(binders.get(type)).binder;
     }
 
-    public @Nullable Class<? extends java.lang.annotation.Annotation> getNullableAnnotation() {
+    public @Nullable Class<? extends Annotation> getNullableAnnotation() {
         return nullableAnnotation;
     }
 
@@ -139,6 +119,30 @@ public final class FFMConfig {
 
     public boolean debugGenerator() {
         return debugGenerator;
+    }
+
+    static boolean validateNullableAnnotationClass(@Nullable Class<? extends Annotation> nullableAnnotation) {
+        if (nullableAnnotation == null) {
+            return false;
+        }
+
+        var retention = nullableAnnotation.getDeclaredAnnotation(Retention.class);
+        if (retention == null || retention.value() != RetentionPolicy.RUNTIME) {
+            throw new IllegalStateException("Nullable annotation " + nullableAnnotation + " must have RUNTIME retention");
+        }
+
+        var target = nullableAnnotation.getDeclaredAnnotation(Target.class);
+        if (target != null) {
+            var elementTypes = List.of(target.value());
+            if (elementTypes.contains(ElementType.TYPE_USE)) {
+                return true;
+            }
+
+            if (!(elementTypes.contains(ElementType.METHOD) && elementTypes.contains(ElementType.PARAMETER))) {
+                throw new IllegalStateException("Nullable annotation " + nullableAnnotation + " must @Target either TYPE_USE or METHOD+PARAMETER");
+            }
+        }
+        return false;
     }
 
 }

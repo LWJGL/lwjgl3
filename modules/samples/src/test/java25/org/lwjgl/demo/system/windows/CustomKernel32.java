@@ -64,7 +64,6 @@ public class CustomKernel32 {
     private static final MyKernel32Bindings KERNEL32 = ffmGenerate(
         MyKernel32Bindings.class,
         ffmConfigBuilder(MethodHandles.lookup())
-            .withNullableAnnotation(Nullable.class)
             .withSymbolLookup(LOADER)
             .build()
     );

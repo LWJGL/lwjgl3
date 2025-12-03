@@ -31,7 +31,6 @@ public class YGMeasureFuncTest {
         ffmConfig(
             YGMeasureFuncTest.class,
             ffmConfigBuilder(MethodHandles.lookup())
-                .withNullableAnnotation(Nullable.class)
                 .withSymbolLookup(YOGA)
                 .build()
         );

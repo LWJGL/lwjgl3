@@ -8,6 +8,7 @@ import org.jspecify.annotations.*;
 import org.lwjgl.system.*;
 import org.lwjgl.system.libffi.*;
 
+import java.lang.annotation.Annotation;
 import java.lang.classfile.*;
 import java.lang.constant.*;
 import java.lang.foreign.*;
@@ -562,10 +563,60 @@ public final class FFM {
 
     /** A builder class for {@link FFMConfig}. */
     public static final class FFMConfigBuilder {
+
+        private static final @Nullable Class<? extends Annotation> defaultNullableAnnotation;
+        static {
+            Class<? extends Annotation> nullableAnnotation = null;
+
+            var config = Configuration.FFM_DEFAULT_NULLABLE_ANNOTATION.get("auto");
+            if (!"none".equals(config)) {
+                if (config instanceof String annotationClassName) {
+                    var custom = !"auto".equals(annotationClassName);
+                    var popularNullableAnnotationClasses = custom
+                        ? List.of(annotationClassName)
+                        : List.of(
+                        "org.jspecify.annotations.Nullable",
+                        "javax.annotation.Nullable",
+                        "org.jetbrains.annotations.Nullable",
+                        "org.eclipse.jdt.annotation.Nullable",
+                        "edu.umd.cs.findbugs.annotations.Nullable",
+                        "org.checkerframework.checker.nullness.qual.Nullable"
+                    );
+
+                    for (var className : popularNullableAnnotationClasses) {
+                        try {
+                            var c = Class.forName(className);
+                            if (Annotation.class.isAssignableFrom(c)) {
+                                @SuppressWarnings("unchecked")
+                                var annotationClass = (Class<? extends Annotation>)c;
+
+                                FFMConfig.validateNullableAnnotationClass(annotationClass);
+                                nullableAnnotation = annotationClass;
+                                apiLog("Default nullable annotation: " + annotationClass);
+                                break;
+                            }
+                        } catch (Exception e) {
+                            if (custom) {
+                                throw new IllegalStateException(e); // fail here if custom
+                            }
+                            // ignore
+                        }
+                    }
+                } else if (config instanceof Class<?> annotationClass) {
+                    @SuppressWarnings("unchecked")
+                    var nullableAnnotationClass = (Class<? extends Annotation>)annotationClass;
+                    FFMConfig.validateNullableAnnotationClass(nullableAnnotationClass); // fail here if invalid
+                    nullableAnnotation = nullableAnnotationClass;
+                }
+            }
+
+            defaultNullableAnnotation = nullableAnnotation;
+        }
+
         private final MethodHandles.Lookup lookup;
 
-        private @Nullable Class<? extends java.lang.annotation.Annotation>
-                                                    nullableAnnotation;
+        private @Nullable Class<? extends Annotation>
+                                                    nullableAnnotation = defaultNullableAnnotation;
         private @Nullable SymbolLookup              symbolLookup;
         private @Nullable TraceConsumer             traceConsumer;
         private @Nullable Predicate<Method>         tracingFilter;
@@ -578,7 +629,7 @@ public final class FFM {
             this.lookup = lookup;
         }
 
-        public FFMConfigBuilder withNullableAnnotation(Class<? extends java.lang.annotation.Annotation> annotation) {
+        public FFMConfigBuilder withNullableAnnotation(Class<? extends Annotation> annotation) {
             this.nullableAnnotation = annotation;
             return this;
         }
