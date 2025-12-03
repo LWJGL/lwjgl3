@@ -371,8 +371,8 @@ final class BCGroup {
                     if (method.getParameterCount() != 1) {
                         throw methodException("Setter must accept a single parameter", method);
                     }
-                    if (method.getReturnType() != groupInterface) {
-                        throw methodException("Setter return type must be the group interface", method);
+                    if (method.getReturnType() != method.getDeclaringClass()) {
+                        throw methodException("Setter return type must be its declaring interface", method);
                     }
                     var descriptor = getMethodTypeDesc(method);
                     classBuilder.withMethod(method.getName(), descriptor, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> {
@@ -626,9 +626,18 @@ final class BCGroup {
         var memberMap = new LinkedHashMap<String, List<Method>>(layout.memberLayouts().size());
 
         var methods = new HashMap<String, List<Method>>(layout.memberLayouts().size());
-        for (var method : groupInterface.getDeclaredMethods()) {
+        for (var method : groupInterface.getMethods()) {
             if (Modifier.isStatic(method.getModifiers()) || method.isDefault()) {
                 continue; // skip static/default interface methods
+            }
+
+            var declaringClass = method.getDeclaringClass();
+            if (
+                declaringClass == Object.class ||
+                declaringClass == Pointer.class ||
+                declaringClass == NativeResource.class
+            ) {
+                continue; // skip capability methods
             }
 
             checkAccessorAliasing(groupInterface, method);

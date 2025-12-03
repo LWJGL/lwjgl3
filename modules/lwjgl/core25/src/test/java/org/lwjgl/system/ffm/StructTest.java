@@ -1017,6 +1017,99 @@ public class StructTest {
         }
     }
 
+    public void testUnionInheritance() {
+        interface BaseEvent {
+            int type();
+            BaseEvent type(int value);
+        }
+
+        interface CommonEvent extends BaseEvent {
+            StructBinder<CommonEvent> $ = struct(CommonEvent.class)
+                .m("type", int32_t)
+                .m("timestamp", uint64_t)
+                .build();
+
+            long timestamp();
+            CommonEvent timestamp(long value);
+        }
+
+        interface KeyboardEvent extends CommonEvent {
+            StructBinder<KeyboardEvent> $ = struct(KeyboardEvent.class)
+                .m("type", int32_t)
+                .m("timestamp", uint64_t)
+                .m("key", int32_t)
+                .m("mod", int16_t)
+                .m("down", uint8_t)
+                .build();
+
+            int key();
+            boolean down();
+
+            KeyboardEvent key(int value);
+            KeyboardEvent down(boolean value);
+        }
+
+        interface MouseEvent extends CommonEvent {
+            StructBinder<MouseEvent> $ = struct(MouseEvent.class)
+                .m("type", int32_t)
+                .m("timestamp", uint64_t)
+                .m("button", int32_t)
+                .m("down", uint8_t)
+                .m("x", float32)
+                .m("y", float32)
+                .build();
+
+            int button();
+            boolean down();
+            float x();
+            float y();
+
+            MouseEvent button(int value);
+            MouseEvent down(boolean value);
+            MouseEvent x(float value);
+            MouseEvent y(float value);
+        }
+
+        interface Event extends BaseEvent {
+            UnionBinder<Event> $ = union(Event.class)
+                .m("type", int32_t)
+                .m("common", CommonEvent.$)
+                .m("key", KeyboardEvent.$)
+                .m("mouse", MouseEvent.$)
+                .build();
+
+            CommonEvent common();
+            KeyboardEvent key();
+            MouseEvent mouse();
+
+            Event common(CommonEvent value);
+            Event key(KeyboardEvent value);
+            Event mouse(MouseEvent value);
+        }
+
+        Objects.requireNonNull(Event.$);
+
+        try (var arena = Arena.ofConfined()) {
+            var segment = Event.$.allocate(arena);
+
+            var union = Event.$.get(segment);
+
+            var t = System.currentTimeMillis();
+
+            union.type(0xFEEDBEEF);
+            union.common().timestamp(t);
+
+            assertEquals(union.type(), 0xFEEDBEEF);
+            assertEquals(union.common().timestamp(), t);
+
+            assertEquals(union.key().type(), union.type());
+            assertEquals(union.key().timestamp(), union.common().timestamp());
+
+            assertEquals(union.mouse().type(), union.type());
+            assertEquals(union.mouse().timestamp(), union.common().timestamp());
+        }
+    }
+
     public void testFFMSize() {
         try (var arena = Arena.ofConfined()) {
             interface S8 {
