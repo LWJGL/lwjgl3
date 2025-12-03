@@ -4,8 +4,6 @@
  */
 package org.lwjgl.system.ffm;
 
-import org.jspecify.annotations.*;
-
 import java.lang.classfile.*;
 import java.lang.constant.*;
 import java.lang.foreign.*;
@@ -121,8 +119,8 @@ final class BCUtil {
         }
     }
 
-    private static void checkFFMNullableOnReference(AnnotatedElement element, @Nullable Class<? extends java.lang.annotation.Annotation> nullableAnnotation) {
-        if (DEBUG && FFMNullable.class != nullableAnnotation && element.isAnnotationPresent(FFMNullable.class)) {
+    private static void checkFFMNullableOnReference(AnnotatedElement element) {
+        if (DEBUG && element.isAnnotationPresent(FFMNullable.class)) {
             throw new IllegalStateException("The FFMNullable annotation can be applied to @FFMPointer long parameters only");
         }
     }
@@ -154,7 +152,7 @@ final class BCUtil {
         }
 
         var nullableAnnotation = config.nullableAnnotation;
-        checkFFMNullableOnReference(element, nullableAnnotation);
+        checkFFMNullableOnReference(element);
 
         if (nullableAnnotation != null) {
             return config.nullableAnnotationOnType
