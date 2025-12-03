@@ -47,8 +47,8 @@ public sealed interface GroupBinder<L extends GroupLayout, T>
     default long addressOfSafe(@Nullable T value)   { return value == null ? NULL : addressOf(value); }
 
     GroupBinder<L, T> set(MemorySegment segment, T value);
-    GroupBinder<L, T> set(MemorySegment array, long offset, T value);
-    GroupBinder<L, T> setAtIndex(MemorySegment array, long index, T value);
+    GroupBinder<L, T> set(MemorySegment segment, long offset, T value);
+    GroupBinder<L, T> setAtIndex(MemorySegment segment, long index, T value);
 
     GroupArray<L, T> array(MemorySegment segment);
     GroupArray<L, T> array(MemorySegment segment, long index);

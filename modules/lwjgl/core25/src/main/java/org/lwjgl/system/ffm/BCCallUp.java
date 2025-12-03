@@ -100,7 +100,7 @@ final class BCCallUp extends BCCall {
                 featureFlags |= FF_BINDER.mask;
                 argLayouts.add(ValueLayout.ADDRESS);
                 continue;
-            } else if (Struct.class.isAssignableFrom(type)) {
+            } else if (org.lwjgl.system.Struct.class.isAssignableFrom(type)) {
                 // LWJGL 3 interop
                 if (parameter != parameters[parameters.length - 1]) {
                     // LWJGL 3 does not support upcall group parameters passed by value, only results
@@ -282,7 +282,7 @@ final class BCCallUp extends BCCall {
 
                         var type = parameter.getType();
 
-                        if (Struct.class.isAssignableFrom(type)) {
+                        if (org.lwjgl.system.Struct.class.isAssignableFrom(type)) {
                             // LWJGL 3 interop (this is the last __result parameter)
                             continue;
                         }

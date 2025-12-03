@@ -15,14 +15,14 @@ public non-sealed interface StructBinder<T> extends GroupBinder<StructLayout, T>
     }
 
     @Override
-    default StructBinder<T> set(MemorySegment array, long offset, T value) {
-        copy(value, get(array, offset));
+    default StructBinder<T> set(MemorySegment segment, long offset, T value) {
+        copy(value, get(segment, offset));
         return this;
     }
 
     @Override
-    default StructBinder<T> setAtIndex(MemorySegment array, long index, T value) {
-        copy(value, getAtIndex(array, index));
+    default StructBinder<T> setAtIndex(MemorySegment segment, long index, T value) {
+        copy(value, getAtIndex(segment, index));
         return this;
     }
 
@@ -52,4 +52,5 @@ public non-sealed interface StructBinder<T> extends GroupBinder<StructLayout, T>
     default StructArray<T> array(MemorySegment segment, long index, long elementCount) {
         return new StructArray<>(this, asSlice(segment, index, elementCount));
     }
+
 }

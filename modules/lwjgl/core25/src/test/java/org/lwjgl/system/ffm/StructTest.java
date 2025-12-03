@@ -2161,4 +2161,68 @@ public class StructTest {
         }
     }
 
+    public void testCapabilityBinder() {
+        interface S extends Struct<S> {
+            StructBinder<S> $ = struct(S.class)
+                .m("a", int32_t)
+                .m("b", int32_t)
+                .build();
+
+            int a();
+            int b();
+
+            S a(int a);
+            S b(int b);
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            var segment = S.$.allocate(arena, 2);
+
+            var s = S.$.get(segment);
+            var o = S.$.getAtIndex(segment, 1L);
+
+
+            assertEquals(s.address(), segment.address());
+            assertEquals(s.layout(), S.$.layout());
+            assertEquals(s.sizeof(), S.$.sizeof());
+            assertEquals(s.alignof(), S.$.alignof());
+            assertEqualsSegment(s.asSegment(), S.$.asSegment(s));
+            assertEqualsSegment(s.asSegment(), segment.asSlice(0L, s.sizeof()));
+
+            s
+                .a(0xFEEDBEEF)
+                .b(0xBAADF00D)
+                .clear();
+
+            assertEquals(s.a(), 0);
+            assertEquals(s.b(), 0);
+
+            o
+                .a(0xFEEDBEEF)
+                .b(0xBAADF00D);
+            s.copyFrom(o);
+
+            assertEquals(s.a(), 0xFEEDBEEF);
+            assertEquals(s.b(), 0xBAADF00D);
+
+            s.clear();
+            o.set(segment);
+
+            assertEquals(s.a(), 0xFEEDBEEF);
+            assertEquals(s.b(), 0xBAADF00D);
+
+            s.clear();
+            o.set(segment, 0L);
+
+            assertEquals(s.a(), 0xFEEDBEEF);
+            assertEquals(s.b(), 0xBAADF00D);
+
+            s.clear();
+            o.setAtIndex(segment, 0L);
+
+            assertEquals(s.a(), 0xFEEDBEEF);
+            assertEquals(s.b(), 0xBAADF00D);
+        }
+    }
+
 }

@@ -15,14 +15,14 @@ public non-sealed interface UnionBinder<T> extends GroupBinder<UnionLayout, T> {
     }
 
     @Override
-    default UnionBinder<T> set(MemorySegment array, long offset, T value) {
-        copy(value, get(array, offset));
+    default UnionBinder<T> set(MemorySegment segment, long offset, T value) {
+        copy(value, get(segment, offset));
         return this;
     }
 
     @Override
-    default UnionBinder<T> setAtIndex(MemorySegment array, long index, T value) {
-        copy(value, getAtIndex(array, index));
+    default UnionBinder<T> setAtIndex(MemorySegment segment, long index, T value) {
+        copy(value, getAtIndex(segment, index));
         return this;
     }
 
@@ -52,4 +52,5 @@ public non-sealed interface UnionBinder<T> extends GroupBinder<UnionLayout, T> {
     default UnionArray<T> array(MemorySegment segment, long index, long elementCount) {
         return new UnionArray<>(this, asSlice(segment, index, elementCount));
     }
+
 }

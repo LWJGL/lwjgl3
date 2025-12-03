@@ -13,6 +13,7 @@ import java.lang.foreign.*;
 import java.lang.invoke.*;
 import java.lang.reflect.*;
 import java.util.*;
+import java.util.function.*;
 import java.util.stream.*;
 
 import static java.lang.classfile.ClassFile.*;
@@ -30,15 +31,6 @@ final class BCGroup {
     private static final Collector<CharSequence, ?, String> SEMI_COLON = Collectors.joining(";");
 
     private BCGroup() {
-    }
-
-    private static ClassDesc groupDesc(FFMConfig.BinderField binderField) {
-        var binder = binderField.binder();
-        return switch (binder) {
-            case StructBinder<?> _ -> CD_StructBinder;
-            case UnionBinder<?> _ -> CD_UnionBinder;
-            default -> throw new UnsupportedOperationException("Unsupported binder type: " + binder.getClass());
-        };
     }
 
     private static RuntimeException memberException(String message, Class<?> groupInterface, String member) {
@@ -585,7 +577,84 @@ final class BCGroup {
 
             // GENERATE optional capabilities
 
-            if (Pointer.class.isAssignableFrom(groupInterface)) {
+            if (Group.class.isAssignableFrom(groupInterface)) {
+                var layoutDesc = layout instanceof StructLayout ? CD_StructLayout : CD_UnionLayout;
+
+                classBuilder
+                    .withMethod("layout", MTD_GroupLayout, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> cb
+                        .ldc(condyCDataAt(layoutDesc, 0))
+                        .areturn()))
+                    .withMethod("copyFrom", MTD_Group_Group, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> buildCopy(
+                        cb, layout,
+                        rcb -> rcb
+                            .aload(rcb.parameterSlot(0))
+                            //.getfield(thisClass, "address", CD_long)
+                            .invokeinterface(CD_Group, "address", MTD_long),
+                        rcb -> rcb
+                            .aload(rcb.receiverSlot())
+                            .getfield(thisClass, "address", CD_long),
+                        rcb -> rcb.aload(rcb.receiverSlot())
+                    )))
+                    .withMethod("clear", MTD_Group, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> buildClear(
+                        cb, layout,
+                        rcb -> rcb
+                            .aload(rcb.receiverSlot())
+                            .getfield(thisClass, "address", CD_long),
+                        rcb -> rcb.aload(rcb.receiverSlot())
+                    )))
+                    .withMethod("get", MTD_Group_MemorySegment, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> buildGetMemorySegment(
+                        cb, config, layoutDesc,
+                        ccb -> buildGetFromMemorySegment(ccb, thisClass, acb -> acb
+                            .aload(ccb.parameterSlot(0))
+                            .invokeinterface(CD_MemorySegment, "address", MTD_long))
+                    )))
+                    .withMethod("get", MTD_Group_MemorySegment_long, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> buildGetMemorySegmentAtOffset(
+                        cb, config, layoutDesc,
+                        ccb -> buildGetFromMemorySegment(ccb, thisClass, acb -> acb
+                            .aload(ccb.parameterSlot(0))
+                            .invokeinterface(CD_MemorySegment, "address", MTD_long)
+                            .lload(ccb.parameterSlot(1))
+                            .ladd())
+                    )))
+                    .withMethod("getAtIndex", MTD_Group_MemorySegment_long, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> buildGetMemorySegmentAtIndex(
+                        cb, config, layoutDesc,
+                        ccb -> buildGetFromMemorySegment(ccb, thisClass, acb -> acb
+                            .aload(ccb.parameterSlot(0))
+                            .invokeinterface(CD_MemorySegment, "address", MTD_long)
+                            .lload(cb.parameterSlot(1))
+                            .ldc(condyCDataAt(layoutDesc, 0))
+                            .invokeinterface(CD_GroupLayout, "byteSize", MTD_long)
+                            .lmul()
+                            .ladd())
+                    )))
+                    .withMethod("set", MTD_Group_MemorySegment, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> buildGetMemorySegment(
+                        cb, config, layoutDesc,
+                        ccb -> buildSetFromMemorySegment(ccb, thisClass, acb -> acb
+                            .aload(ccb.parameterSlot(0))
+                            .invokeinterface(CD_MemorySegment, "address", MTD_long))
+                    )))
+                    .withMethod("set", MTD_Group_MemorySegment_long, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> buildGetMemorySegmentAtOffset(
+                        cb, config, layoutDesc,
+                        ccb -> buildSetFromMemorySegment(ccb, thisClass, acb -> acb
+                            .aload(ccb.parameterSlot(0))
+                            .invokeinterface(CD_MemorySegment, "address", MTD_long)
+                            .lload(ccb.parameterSlot(1))
+                            .ladd())
+                    )))
+                    .withMethod("setAtIndex", MTD_Group_MemorySegment_long, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> buildGetMemorySegmentAtIndex(
+                        cb, config, layoutDesc,
+                        ccb -> buildSetFromMemorySegment(ccb, thisClass, acb -> acb
+                            .aload(ccb.parameterSlot(0))
+                            .invokeinterface(CD_MemorySegment, "address", MTD_long)
+                            .lload(cb.parameterSlot(1))
+                            .ldc(condyCDataAt(layoutDesc, 0))
+                            .invokeinterface(CD_GroupLayout, "byteSize", MTD_long)
+                            .lmul()
+                            .ladd())
+                    )));
+            }
+
+            if (Group.class.isAssignableFrom(groupInterface) || Pointer.class.isAssignableFrom(groupInterface)) {
                 classBuilder.withMethod("address", MTD_long, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> cb
                     .aload(cb.receiverSlot())
                     .getfield(thisClass, "address", CD_long)
@@ -634,6 +703,7 @@ final class BCGroup {
             var declaringClass = method.getDeclaringClass();
             if (
                 declaringClass == Object.class ||
+                declaringClass == Group.class ||
                 declaringClass == Pointer.class ||
                 declaringClass == NativeResource.class
             ) {
@@ -691,13 +761,24 @@ final class BCGroup {
     private static void checkAccessorAliasing(Class<?> groupInterface, Method method) {
         if (switch (method.getName()) {
             case "equals", "hashCode", "toString" -> true;
-            case "address" -> Pointer.class.isAssignableFrom(groupInterface);
+            case "address" -> Group.class.isAssignableFrom(groupInterface) || Pointer.class.isAssignableFrom(groupInterface);
+            // TODO: more?
+            case "layout", "clear", "sizeof", "alignof", "asSegment" -> Group.class.isAssignableFrom(groupInterface);
             // void methods, should be fine
             //case "close", "free" -> NativeResource.class.isAssignableFrom(groupInterface);
             default -> false;
         }) {
             throw methodException("Group accessor name aliases supertype method and must be changed with @FFMName", method);
         }
+    }
+
+    private static ClassDesc groupDesc(FFMConfig.BinderField binderField) {
+        var binder = binderField.binder();
+        return switch (binder) {
+            case StructBinder<?> _ -> CD_StructBinder;
+            case UnionBinder<?> _ -> CD_UnionBinder;
+            default -> throw new UnsupportedOperationException("Unsupported binder type: " + binder.getClass());
+        };
     }
 
     private static CodeBuilder buildMemberAddress(CodeBuilder cb, ClassDesc thisClass, long memberOffset) {
@@ -819,32 +900,29 @@ final class BCGroup {
         return cb;
     }
 
+    private static <T extends CodeBuilder> T buildGetFromMemorySegment(T cb, ClassDesc thisClass, Function<T, T> codeAddress) {
+        cb
+            .aload(cb.receiverSlot())
+            .dup()
+            .new_(thisClass)
+            .dup();
+        codeAddress.apply(cb)
+            .invokespecial(thisClass, INIT_NAME, MTD_void_long)
+            .invokevirtual(thisClass, "copyFrom", MTD_Group_Group)
+            .areturn();
+        return cb;
+    }
 
-    private static String[] getBootstrapArgs(GroupLayout layout, LinkedHashMap<String, Method> getters) {
-        var bootstrapNames = getters.sequencedKeySet().stream()
-            .collect(SEMI_COLON);
-
-        var bootstrapArgsBuilder = Stream.<String>builder()
-            .add(bootstrapNames);
-
-        // TODO: handle multiple getters for the same member (e.g. MemorySegment name() + String name())
-
-        getters
-            .sequencedEntrySet()
-            .forEach(member -> {
-                var method = member.getValue();
-
-                var memberPath   = groupElement(member.getKey());
-                var memberLayout = layout.select(memberPath);
-
-                bootstrapArgsBuilder.add(memberLayout instanceof AddressLayout && method.getReturnType() != long.class
-                    ? "__address__" + method.getName()
-                    : method.getName());
-            });
-
-        return bootstrapArgsBuilder
-            .build()
-            .toArray(String[]::new);
+    private static <T extends CodeBuilder> T buildSetFromMemorySegment(T cb, ClassDesc thisClass, Function<T, T> codeAddress) {
+        cb
+            .new_(thisClass)
+            .dup();
+        codeAddress.apply(cb)
+            .invokespecial(thisClass, INIT_NAME, MTD_void_long)
+            .aload(cb.receiverSlot())
+            .invokevirtual(thisClass, "copyFrom", MTD_Group_Group)
+            .areturn();
+        return cb;
     }
 
     @SuppressWarnings("unchecked")
@@ -914,7 +992,8 @@ final class BCGroup {
             startHiddenClass(classBuilder)
                 .withInterfaceSymbols(kind.binderDesc());
 
-            var groupDesc = groupInterface.describeConstable().orElseThrow();
+            var groupDesc       = groupInterface.describeConstable().orElseThrow();
+            var constructorDesc = MethodTypeDesc.of(groupDesc, CD_long);
 
             classBuilder
                 .withMethod("layout", MTD_GroupLayout, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> cb
@@ -926,383 +1005,55 @@ final class BCGroup {
                     .aload(cb.parameterSlot(0))
                     .invokevirtual(CD_MethodHandle, "invokeExact", MethodTypeDesc.of(CD_long, groupDesc))
                     .lreturn()))
-                .withMethod("ofAddress", MTD_Object_long, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> cb
-                    .ldc(condyCDataAt(CD_MethodHandle, 2))
-                    .lload(cb.parameterSlot(0))
-                    .invokevirtual(CD_MethodHandle, "invokeExact", MethodTypeDesc.of(groupDesc, CD_long))
-                    .areturn()))
-                .withMethod("copy", MTD_Object_Object_Object, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> {
-                    var byteSize = layout.byteSize();
-                    // On JDK 26+ the custom loop gets unrolled+vectorized
-                    if (512L < byteSize || JAVA_VERSION == 25) {
-                        // fallback to memcpy
-                        // the following is an inlined version of MemoryUtilTunables::memcpy for JDK 25+
-                        if (byteSize < NATIVE_THRESHOLD_COPY || (byteSize & 1L) != 0L) {
-                            // destination
-                            cb
-                                .aload(cb.receiverSlot())
-                                .aload(cb.parameterSlot(1))
-                                .invokevirtual(binderClass, "addressOf", MTD_long_Object)
-                                .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
-                                .loadConstant(byteSize)
-                                .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long);
-                            // source
-                            cb
-                                .aload(cb.receiverSlot())
-                                .aload(cb.parameterSlot(0))
-                                .invokevirtual(binderClass, "addressOf", MTD_long_Object)
-                                .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
-                                .loadConstant(byteSize)
-                                .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long);
-                            // copy
-                            cb
-                                .invokeinterface(CD_MemorySegment, "copyFrom", MTD_MemorySegment_MemorySegment)
-                                .pop();
-                        } else {
-                            // destination
-                            var dstSlot = cb.allocateLocal(TypeKind.LONG);
-                            cb
-                                .aload(cb.receiverSlot())
-                                .aload(cb.parameterSlot(1))
-                                .invokevirtual(binderClass, "addressOf", MTD_long_Object)
-                                .dup2()
-                                .lstore(dstSlot)
-                                .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
-                                .loadConstant(byteSize - 1L)
-                                .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long);
-                            // source
-                            var srcSlot = cb.allocateLocal(TypeKind.LONG);
-                            cb
-                                .aload(cb.receiverSlot())
-                                .aload(cb.parameterSlot(0))
-                                .invokevirtual(binderClass, "addressOf", MTD_long_Object)
-                                .dup2()
-                                .lstore(srcSlot)
-                                .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
-                                .loadConstant(byteSize - 1L)
-                                .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long);
-                            // copy
-                            cb
-                                .invokeinterface(CD_MemorySegment, "copyFrom", MTD_MemorySegment_MemorySegment)
-                                .pop();
-                            // copy last byte
-                            cb
-                                .lload(dstSlot)
-                                .loadConstant(byteSize - 1L)
-                                .ladd()
-                                .lload(srcSlot)
-                                .loadConstant(byteSize - 1L)
-                                .ladd()
-                                .invokestatic(CD_MemoryUtil, "memGetByte", MTD_byte_long)
-                                .invokestatic(CD_MemoryUtil, "memPutByte", MTD_void_long_byte);
-                        }
-                    } else {
-                        // custom memset with guaranteed correct alignment
-                        var dstSlot = cb.allocateLocal(TypeKind.REFERENCE);
-                        cb
-                            .aload(cb.receiverSlot())
-                            .aload(cb.parameterSlot(1))
-                            .invokevirtual(binderClass, "addressOf", MTD_long_Object)
-                            .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
-                            .loadConstant(byteSize)
-                            .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
-                            .astore(dstSlot);
-
-                        var srcSlot = cb.allocateLocal(TypeKind.REFERENCE);
-                        cb
-                            .aload(cb.receiverSlot())
-                            .aload(cb.parameterSlot(0))
-                            .invokevirtual(binderClass, "addressOf", MTD_long_Object)
-                            .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
-                            .loadConstant(byteSize)
-                            .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
-                            .astore(srcSlot);
-
-
-                        if (16L <= byteSize) {
-                            var offsetSlot = cb.allocateLocal(TypeKind.LONG);
-
-                            cb
-                                .lconst_0()
-                                .lstore(offsetSlot);
-
-                            var loopStart = cb.newBoundLabel();
-                            var loopEnd   = cb.newLabel();
-
-                            cb
-                                .lload(offsetSlot)
-                                .loadConstant(byteSize & ~7L)
-                                .lcmp()
-                                .ifge(loopEnd)
-                                .aload(dstSlot)
-                                .getstatic(CD_ValueLayout, "JAVA_LONG_UNALIGNED", CD_ValueLayout$OfLong)
-                                .lload(offsetSlot)
-                                .aload(srcSlot)
-                                .getstatic(CD_ValueLayout, "JAVA_LONG_UNALIGNED", CD_ValueLayout$OfLong)
-                                .lload(offsetSlot)
-                                .invokeinterface(CD_MemorySegment, "get", MTD_long_ValueLayout$OfLong_long)
-                                .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfLong_long_long)
-                                .lload(offsetSlot)
-                                .loadConstant(8L)
-                                .ladd()
-                                .lstore(offsetSlot)
-                                .goto_(loopStart)
-                                .labelBinding(loopEnd);
-                        } else if (8L <= byteSize) {
-                            cb
-                                .aload(dstSlot)
-                                .getstatic(CD_ValueLayout, "JAVA_LONG_UNALIGNED", CD_ValueLayout$OfLong)
-                                .lconst_0()
-                                .aload(srcSlot)
-                                .getstatic(CD_ValueLayout, "JAVA_LONG_UNALIGNED", CD_ValueLayout$OfLong)
-                                .lconst_0()
-                                .invokeinterface(CD_MemorySegment, "get", MTD_long_ValueLayout$OfLong_long)
-                                .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfLong_long_long);
-                        }
-
-                        var offset = byteSize & ~7L;
-                        if (offset < (byteSize & ~3L)) {
-                            cb
-                                .aload(dstSlot)
-                                .getstatic(CD_ValueLayout, "JAVA_INT_UNALIGNED", CD_ValueLayout$OfInt)
-                                .loadConstant(offset)
-                                .aload(srcSlot)
-                                .getstatic(CD_ValueLayout, "JAVA_INT_UNALIGNED", CD_ValueLayout$OfInt)
-                                .loadConstant(offset)
-                                .invokeinterface(CD_MemorySegment, "get", MTD_int_ValueLayout$OfInt_long)
-                                .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfInt_long_int);
-                            offset += 4L;
-                        }
-
-                        if (offset < (byteSize & ~1L)) {
-                            cb
-                                .aload(dstSlot)
-                                .getstatic(CD_ValueLayout, "JAVA_SHORT_UNALIGNED", CD_ValueLayout$OfShort)
-                                .loadConstant(offset)
-                                .aload(srcSlot)
-                                .getstatic(CD_ValueLayout, "JAVA_SHORT_UNALIGNED", CD_ValueLayout$OfShort)
-                                .loadConstant(offset)
-                                .invokeinterface(CD_MemorySegment, "get", MTD_short_ValueLayout$OfShort_long)
-                                .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfShort_long_short);
-                            offset += 2L;
-                        }
-
-                        if (offset < byteSize) {
-                            cb
-                                .aload(dstSlot)
-                                .getstatic(CD_ValueLayout, "JAVA_BYTE", CD_ValueLayout$OfByte)
-                                .loadConstant(offset)
-                                .aload(srcSlot)
-                                .getstatic(CD_ValueLayout, "JAVA_BYTE", CD_ValueLayout$OfByte)
-                                .loadConstant(offset)
-                                .invokeinterface(CD_MemorySegment, "get", MTD_byte_ValueLayout$OfByte_long)
-                                .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfByte_long_byte);
-                        }
-                    }
-                    cb
+                .withMethod("ofAddress", MTD_Object_long, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> buildConstructor(
+                    cb, constructorDesc,
+                    acb -> acb.lload(cb.parameterSlot(0)
+                    ))))
+                .withMethod("copy", MTD_Object_Object_Object, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> buildCopy(
+                    cb, layout,
+                    rcb -> rcb
+                        .aload(rcb.receiverSlot())
+                        .aload(rcb.parameterSlot(0))
+                        .invokevirtual(binderClass, "addressOf", MTD_long_Object),
+                    rcb -> rcb
+                        .aload(rcb.receiverSlot())
+                        .aload(rcb.parameterSlot(1))
+                        .invokevirtual(binderClass, "addressOf", MTD_long_Object),
+                    rcb -> rcb.aload(rcb.parameterSlot(1))
+                )))
+                .withMethod("clear", MTD_Object_Object, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> buildClear(
+                    cb, layout,
+                    rcb -> rcb
+                        .aload(rcb.receiverSlot())
+                        .aload(rcb.parameterSlot(0))
+                        .invokevirtual(binderClass, "addressOf", MTD_long_Object),
+                    rcb -> rcb.aload(rcb.parameterSlot(0)
+                    ))))
+                .withMethod("get", MTD_Object_MemorySegment, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> buildGetMemorySegment(
+                    cb, config, kind.layoutDesc(),
+                    ccb -> buildConstructor(ccb, constructorDesc, acb -> acb
                         .aload(cb.parameterSlot(0))
-                        .areturn();
-                }))
-                .withMethod("clear", MTD_Object_Object, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> {
-                    var byteSize = layout.byteSize();
-                    // On JDK 26+ the custom loop gets unrolled+vectorized
-                    if (1024L < byteSize || (JAVA_VERSION == 25 && (byteSize <= NATIVE_THRESHOLD_FILL || 64L < byteSize))) {
-                        // fallback to memset
-                        // the following is an inlined version of MemoryUtilTunables::memset for JDK 25+
-                        if (byteSize < NATIVE_THRESHOLD_FILL || (byteSize & 1L) != 0L) {
-                            cb
-                                .aload(cb.receiverSlot())
-                                .aload(cb.parameterSlot(0))
-                                .invokevirtual(binderClass, "addressOf", MTD_long_Object)
-                                .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
-                                .loadConstant(byteSize)
-                                .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
-                                .iconst_0()
-                                .invokeinterface(CD_MemorySegment, "fill", MTD_MemorySegment_byte)
-                                .pop();
-                        } else {
-                            var addressSlot = cb.allocateLocal(TypeKind.LONG);
-                            cb
-                                .aload(cb.receiverSlot())
-                                .aload(cb.parameterSlot(0))
-                                .invokevirtual(binderClass, "addressOf", MTD_long_Object)
-                                .lstore(addressSlot);
-
-                            cb
-                                .lload(addressSlot)
-                                .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
-                                .loadConstant(byteSize - 1L)
-                                .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
-                                .iconst_0()
-                                .invokeinterface(CD_MemorySegment, "fill", MTD_MemorySegment_byte)
-                                .pop();
-
-                            cb
-                                .lload(addressSlot)
-                                .loadConstant(byteSize - 1L)
-                                .ladd()
-                                .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
-                                .lconst_1()
-                                .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
-                                .getstatic(CD_ValueLayout, "JAVA_BYTE", CD_ValueLayout$OfByte)
-                                .lconst_0()
-                                .iconst_0()
-                                .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfByte_long_byte);
-                        }
-                    } else {
-                        // custom memset with guaranteed correct alignment
-                        var segmentSlot = cb.allocateLocal(TypeKind.REFERENCE);
-                        cb
-                            .aload(cb.receiverSlot())
-                            .aload(cb.parameterSlot(0))
-                            .invokevirtual(binderClass, "addressOf", MTD_long_Object)
-                            .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
-                            .loadConstant(byteSize)
-                            .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
-                            .astore(segmentSlot);
-
-
-                        if (16L <= byteSize) {
-                            var offsetSlot = cb.allocateLocal(TypeKind.LONG);
-
-                            cb
-                                .lconst_0()
-                                .lstore(offsetSlot);
-
-                            var loopStart = cb.newBoundLabel();
-                            var loopEnd   = cb.newLabel();
-
-                            cb
-                                .lload(offsetSlot)
-                                .loadConstant(byteSize & ~7L)
-                                .lcmp()
-                                .ifge(loopEnd)
-                                .aload(segmentSlot)
-                                .getstatic(CD_ValueLayout, "JAVA_LONG_UNALIGNED", CD_ValueLayout$OfLong)
-                                .lload(offsetSlot)
-                                .lconst_0()
-                                .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfLong_long_long)
-                                .lload(offsetSlot)
-                                .loadConstant(8L)
-                                .ladd()
-                                .lstore(offsetSlot)
-                                .goto_(loopStart)
-                                .labelBinding(loopEnd);
-                        } else if (8L <= byteSize) {
-                            cb
-                                .aload(segmentSlot)
-                                .getstatic(CD_ValueLayout, "JAVA_LONG_UNALIGNED", CD_ValueLayout$OfLong)
-                                .lconst_0()
-                                .lconst_0()
-                                .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfLong_long_long);
-                        }
-
-                        var offset = byteSize & ~7L;
-                        if (offset < (byteSize & ~3L)) {
-                            cb
-                                .aload(segmentSlot)
-                                .getstatic(CD_ValueLayout, "JAVA_INT_UNALIGNED", CD_ValueLayout$OfInt)
-                                .loadConstant(offset)
-                                .iconst_0()
-                                .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfInt_long_int);
-                            offset += 4L;
-                        }
-
-                        if (offset < (byteSize & ~1L)) {
-                            cb
-                                .aload(segmentSlot)
-                                .getstatic(CD_ValueLayout, "JAVA_SHORT_UNALIGNED", CD_ValueLayout$OfShort)
-                                .loadConstant(offset)
-                                .iconst_0()
-                                .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfShort_long_short);
-                            offset += 2L;
-                        }
-
-                        if (offset < byteSize) {
-                            cb
-                                .aload(segmentSlot)
-                                .getstatic(CD_ValueLayout, "JAVA_BYTE", CD_ValueLayout$OfByte)
-                                .loadConstant(offset)
-                                .iconst_0()
-                                .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfByte_long_byte);
-                        }
-                    }
-                    cb
-                        .aload(cb.parameterSlot(0))
-                        .areturn();
-                }))
-                .withMethod("get", MTD_Object_MemorySegment, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> {
-                    // T get(MemorySegment segment);
-                    if (config.checks) { // TODO: switch to debug?
-                        // bounds check via: segment.asSlice(0L, layout());
-                        cb
-                            .aload(cb.parameterSlot(0))
-                            .lconst_0()
-                            .aload(cb.receiverSlot())
-                            .invokevirtual(binderClass, "layout", MTD_GroupLayout)
-                            .invokeinterface(CD_MemorySegment, "asSlice", MTD_MemorySegment_long_MemoryLayout)
-                            .pop(); // discard, we only want the bounds check
-                    }
-                    cb
-                        .aload(cb.receiverSlot())
-                        .aload(cb.parameterSlot(0))
+                        .invokeinterface(CD_MemorySegment, "address", MTD_long))
+                )))
+                .withMethod("get", MTD_Object_MemorySegment_long, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> buildGetMemorySegmentAtOffset(
+                    cb, config, kind.layoutDesc(),
+                    ccb -> buildConstructor(ccb, constructorDesc, acb -> acb
+                        .aload(ccb.parameterSlot(0))
                         .invokeinterface(CD_MemorySegment, "address", MTD_long)
-                        .invokevirtual(binderClass, "ofAddress", MTD_Object_long)
-                        /*.checkcast(groupDesc)*/
-                        .areturn();
-                }))
-                .withMethod("get", MTD_Object_MemorySegment_long, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> {
-                    // T get(MemorySegment segment, long offset);
-                    if (config.checks) { // TODO: switch to debug?
-                        // bounds check via: segment.asSlice(offset, layout());
-                        cb
-                            .aload(cb.parameterSlot(0))
-                            .lload(cb.parameterSlot(1))
-                            .aload(cb.receiverSlot())
-                            .invokevirtual(binderClass, "layout", MTD_GroupLayout)
-                            .invokeinterface(CD_MemorySegment, "asSlice", MTD_MemorySegment_long_MemoryLayout)
-                            .pop(); // discard, we only want the bounds check
-                    }
-                    cb
-                        .aload(cb.receiverSlot())
+                        .lload(ccb.parameterSlot(1))
+                        .ladd())
+                )))
+                .withMethod("getAtIndex", MTD_Object_MemorySegment_long, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> buildGetMemorySegmentAtIndex(
+                    cb, config, kind.layoutDesc(),
+                    ccb -> buildConstructor(ccb, constructorDesc, acb -> acb
                         .aload(cb.parameterSlot(0))
                         .invokeinterface(CD_MemorySegment, "address", MTD_long)
                         .lload(cb.parameterSlot(1))
-                        .ladd()
-                        .invokevirtual(binderClass, "ofAddress", MTD_Object_long)
-                        /*.checkcast(groupDesc)*/
-                        .areturn();
-                }))
-                .withMethod("getAtIndex", MTD_Object_MemorySegment_long, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> {
-                    // T getAtIndex(MemorySegment segment, long index);
-                    if (config.checks) { // TODO: switch to debug?
-                        // bounds check via: segment.asSlice(index * layout().byteSize(), layout());
-                        cb
-                            .aload(cb.parameterSlot(0))
-                            .lload(cb.parameterSlot(1))
-                            .aload(cb.receiverSlot())
-                            .invokevirtual(binderClass, "layout", MTD_GroupLayout)
-                            .invokeinterface(CD_GroupLayout, "byteSize", MTD_long)
-                            .lmul()
-                            .aload(cb.receiverSlot())
-                            .invokevirtual(binderClass, "layout", MTD_GroupLayout)
-                            .invokeinterface(CD_MemorySegment, "asSlice", MTD_MemorySegment_long_MemoryLayout)
-                            .pop(); // discard, we only want the bounds check
-                    }
-                    cb
-                        .aload(cb.receiverSlot())
-                        .aload(cb.parameterSlot(0))
-                        .invokeinterface(CD_MemorySegment, "address", MTD_long)
-                        .lload(cb.parameterSlot(1))
-                        .aload(cb.receiverSlot())
-                        .invokevirtual(binderClass, "layout", MTD_GroupLayout)
+                        .ldc(condyCDataAt(kind.layoutDesc(), 0))
                         .invokeinterface(CD_GroupLayout, "byteSize", MTD_long)
                         .lmul()
-                        .ladd()
-                        .invokevirtual(binderClass, "ofAddress", MTD_Object_long)
-                        /*.checkcast(groupDesc)*/
-                        .areturn();
-                }));
+                        .ladd())
+                )));
         });
 
         if (config.debugGenerator) {
@@ -1328,6 +1079,390 @@ final class BCGroup {
             printModel(of().parse(bytecode));
             throw new RuntimeException(e);
         }
+    }
+
+    private static String[] getBootstrapArgs(GroupLayout layout, LinkedHashMap<String, Method> getters) {
+        var bootstrapNames = getters.sequencedKeySet().stream()
+            .collect(SEMI_COLON);
+
+        var bootstrapArgsBuilder = Stream.<String>builder()
+            .add(bootstrapNames);
+
+        // TODO: handle multiple getters for the same member (e.g. MemorySegment name() + String name())
+
+        getters
+            .sequencedEntrySet()
+            .forEach(member -> {
+                var method = member.getValue();
+
+                var memberPath   = groupElement(member.getKey());
+                var memberLayout = layout.select(memberPath);
+
+                bootstrapArgsBuilder.add(memberLayout instanceof AddressLayout && method.getReturnType() != long.class
+                    ? "__address__" + method.getName()
+                    : method.getName());
+            });
+
+        return bootstrapArgsBuilder
+            .build()
+            .toArray(String[]::new);
+    }
+
+    private static <T extends CodeBuilder> T buildConstructor(T cb, MethodTypeDesc constructorDesc, Function<T, T> codeAddress) {
+        cb.ldc(condyCDataAt(CD_MethodHandle, 2));
+        codeAddress.apply(cb)
+            .invokevirtual(CD_MethodHandle, "invokeExact", constructorDesc)
+            .areturn();
+        return cb;
+    }
+
+    private static <T extends CodeBuilder> void buildCopy(
+        T cb,
+        GroupLayout layout,
+        Function<T, T> codeSrc,
+        Function<T, T> codeDst,
+        Function<T, T> codeRet
+    ) {
+        codeDst.apply(cb);
+
+        var byteSize = layout.byteSize();
+        // On JDK 26+ the custom loop gets unrolled+vectorized
+        if (512L < byteSize || JAVA_VERSION == 25) {
+            // fallback to memcpy
+            // the following is an inlined version of MemoryUtilTunables::memcpy for JDK 25+
+            if (byteSize < NATIVE_THRESHOLD_COPY || (byteSize & 1L) != 0L) {
+                // destination
+                cb
+                    .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
+                    .loadConstant(byteSize)
+                    .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long);
+                // source
+                codeSrc.apply(cb)
+                    .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
+                    .loadConstant(byteSize)
+                    .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long);
+                // copy
+                cb
+                    .invokeinterface(CD_MemorySegment, "copyFrom", MTD_MemorySegment_MemorySegment)
+                    .pop();
+            } else {
+                // destination
+                var dstSlot = cb.allocateLocal(TypeKind.LONG);
+                cb
+                    .dup2()
+                    .lstore(dstSlot)
+                    .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
+                    .loadConstant(byteSize - 1L)
+                    .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long);
+                // source
+                var srcSlot = cb.allocateLocal(TypeKind.LONG);
+                codeSrc.apply(cb)
+                    .dup2()
+                    .lstore(srcSlot)
+                    .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
+                    .loadConstant(byteSize - 1L)
+                    .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long);
+                // copy
+                cb
+                    .invokeinterface(CD_MemorySegment, "copyFrom", MTD_MemorySegment_MemorySegment)
+                    .pop();
+                // copy last byte
+                cb
+                    .lload(dstSlot)
+                    .loadConstant(byteSize - 1L)
+                    .ladd()
+                    .lload(srcSlot)
+                    .loadConstant(byteSize - 1L)
+                    .ladd()
+                    .invokestatic(CD_MemoryUtil, "memGetByte", MTD_byte_long)
+                    .invokestatic(CD_MemoryUtil, "memPutByte", MTD_void_long_byte);
+            }
+        } else {
+            // custom memset with guaranteed correct alignment
+            var dstSlot = cb.allocateLocal(TypeKind.REFERENCE);
+            cb
+                .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
+                .loadConstant(byteSize)
+                .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
+                .astore(dstSlot);
+
+            var srcSlot = cb.allocateLocal(TypeKind.REFERENCE);
+            codeSrc.apply(cb)
+                .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
+                .loadConstant(byteSize)
+                .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
+                .astore(srcSlot);
+
+
+            if (16L <= byteSize) {
+                var offsetSlot = cb.allocateLocal(TypeKind.LONG);
+
+                cb
+                    .lconst_0()
+                    .lstore(offsetSlot);
+
+                var loopStart = cb.newBoundLabel();
+                var loopEnd   = cb.newLabel();
+
+                cb
+                    .lload(offsetSlot)
+                    .loadConstant(byteSize & ~7L)
+                    .lcmp()
+                    .ifge(loopEnd)
+                    .aload(dstSlot)
+                    .getstatic(CD_ValueLayout, "JAVA_LONG_UNALIGNED", CD_ValueLayout$OfLong)
+                    .lload(offsetSlot)
+                    .aload(srcSlot)
+                    .getstatic(CD_ValueLayout, "JAVA_LONG_UNALIGNED", CD_ValueLayout$OfLong)
+                    .lload(offsetSlot)
+                    .invokeinterface(CD_MemorySegment, "get", MTD_long_ValueLayout$OfLong_long)
+                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfLong_long_long)
+                    .lload(offsetSlot)
+                    .loadConstant(8L)
+                    .ladd()
+                    .lstore(offsetSlot)
+                    .goto_(loopStart)
+                    .labelBinding(loopEnd);
+            } else if (8L <= byteSize) {
+                cb
+                    .aload(dstSlot)
+                    .getstatic(CD_ValueLayout, "JAVA_LONG_UNALIGNED", CD_ValueLayout$OfLong)
+                    .lconst_0()
+                    .aload(srcSlot)
+                    .getstatic(CD_ValueLayout, "JAVA_LONG_UNALIGNED", CD_ValueLayout$OfLong)
+                    .lconst_0()
+                    .invokeinterface(CD_MemorySegment, "get", MTD_long_ValueLayout$OfLong_long)
+                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfLong_long_long);
+            }
+
+            var offset = byteSize & ~7L;
+            if (offset < (byteSize & ~3L)) {
+                cb
+                    .aload(dstSlot)
+                    .getstatic(CD_ValueLayout, "JAVA_INT_UNALIGNED", CD_ValueLayout$OfInt)
+                    .loadConstant(offset)
+                    .aload(srcSlot)
+                    .getstatic(CD_ValueLayout, "JAVA_INT_UNALIGNED", CD_ValueLayout$OfInt)
+                    .loadConstant(offset)
+                    .invokeinterface(CD_MemorySegment, "get", MTD_int_ValueLayout$OfInt_long)
+                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfInt_long_int);
+                offset += 4L;
+            }
+
+            if (offset < (byteSize & ~1L)) {
+                cb
+                    .aload(dstSlot)
+                    .getstatic(CD_ValueLayout, "JAVA_SHORT_UNALIGNED", CD_ValueLayout$OfShort)
+                    .loadConstant(offset)
+                    .aload(srcSlot)
+                    .getstatic(CD_ValueLayout, "JAVA_SHORT_UNALIGNED", CD_ValueLayout$OfShort)
+                    .loadConstant(offset)
+                    .invokeinterface(CD_MemorySegment, "get", MTD_short_ValueLayout$OfShort_long)
+                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfShort_long_short);
+                offset += 2L;
+            }
+
+            if (offset < byteSize) {
+                cb
+                    .aload(dstSlot)
+                    .getstatic(CD_ValueLayout, "JAVA_BYTE", CD_ValueLayout$OfByte)
+                    .loadConstant(offset)
+                    .aload(srcSlot)
+                    .getstatic(CD_ValueLayout, "JAVA_BYTE", CD_ValueLayout$OfByte)
+                    .loadConstant(offset)
+                    .invokeinterface(CD_MemorySegment, "get", MTD_byte_ValueLayout$OfByte_long)
+                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfByte_long_byte);
+            }
+        }
+        codeRet.apply(cb)
+            .areturn();
+    }
+
+    private static <T extends CodeBuilder> void buildClear(
+        T cb,
+        GroupLayout layout,
+        Function<T, T> codeReceiver,
+        Function<T, T> codeReturn
+    ) {
+        codeReceiver.apply(cb);
+
+        var byteSize = layout.byteSize();
+        // On JDK 26+ the custom loop gets unrolled+vectorized
+        if (1024L < byteSize || (JAVA_VERSION == 25 && (byteSize <= NATIVE_THRESHOLD_FILL || 64L < byteSize))) {
+            // fallback to memset
+            // the following is an inlined version of MemoryUtilTunables::memset for JDK 25+
+            if (byteSize < NATIVE_THRESHOLD_FILL || (byteSize & 1L) != 0L) {
+                cb
+                    .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
+                    .loadConstant(byteSize)
+                    .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
+                    .iconst_0()
+                    .invokeinterface(CD_MemorySegment, "fill", MTD_MemorySegment_byte)
+                    .pop();
+            } else {
+                var addressSlot = cb.allocateLocal(TypeKind.LONG);
+                cb
+                    .lstore(addressSlot);
+
+                cb
+                    .lload(addressSlot)
+                    .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
+                    .loadConstant(byteSize - 1L)
+                    .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
+                    .iconst_0()
+                    .invokeinterface(CD_MemorySegment, "fill", MTD_MemorySegment_byte)
+                    .pop();
+
+                cb
+                    .lload(addressSlot)
+                    .loadConstant(byteSize - 1L)
+                    .ladd()
+                    .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
+                    .lconst_1()
+                    .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
+                    .getstatic(CD_ValueLayout, "JAVA_BYTE", CD_ValueLayout$OfByte)
+                    .lconst_0()
+                    .iconst_0()
+                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfByte_long_byte);
+            }
+        } else {
+            // custom memset with guaranteed correct alignment
+            var segmentSlot = cb.allocateLocal(TypeKind.REFERENCE);
+            cb
+                .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
+                .loadConstant(byteSize)
+                .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
+                .astore(segmentSlot);
+
+
+            if (16L <= byteSize) {
+                var offsetSlot = cb.allocateLocal(TypeKind.LONG);
+
+                cb
+                    .lconst_0()
+                    .lstore(offsetSlot);
+
+                var loopStart = cb.newBoundLabel();
+                var loopEnd   = cb.newLabel();
+
+                cb
+                    .lload(offsetSlot)
+                    .loadConstant(byteSize & ~7L)
+                    .lcmp()
+                    .ifge(loopEnd)
+                    .aload(segmentSlot)
+                    .getstatic(CD_ValueLayout, "JAVA_LONG_UNALIGNED", CD_ValueLayout$OfLong)
+                    .lload(offsetSlot)
+                    .lconst_0()
+                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfLong_long_long)
+                    .lload(offsetSlot)
+                    .loadConstant(8L)
+                    .ladd()
+                    .lstore(offsetSlot)
+                    .goto_(loopStart)
+                    .labelBinding(loopEnd);
+            } else if (8L <= byteSize) {
+                cb
+                    .aload(segmentSlot)
+                    .getstatic(CD_ValueLayout, "JAVA_LONG_UNALIGNED", CD_ValueLayout$OfLong)
+                    .lconst_0()
+                    .lconst_0()
+                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfLong_long_long);
+            }
+
+            var offset = byteSize & ~7L;
+            if (offset < (byteSize & ~3L)) {
+                cb
+                    .aload(segmentSlot)
+                    .getstatic(CD_ValueLayout, "JAVA_INT_UNALIGNED", CD_ValueLayout$OfInt)
+                    .loadConstant(offset)
+                    .iconst_0()
+                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfInt_long_int);
+                offset += 4L;
+            }
+
+            if (offset < (byteSize & ~1L)) {
+                cb
+                    .aload(segmentSlot)
+                    .getstatic(CD_ValueLayout, "JAVA_SHORT_UNALIGNED", CD_ValueLayout$OfShort)
+                    .loadConstant(offset)
+                    .iconst_0()
+                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfShort_long_short);
+                offset += 2L;
+            }
+
+            if (offset < byteSize) {
+                cb
+                    .aload(segmentSlot)
+                    .getstatic(CD_ValueLayout, "JAVA_BYTE", CD_ValueLayout$OfByte)
+                    .loadConstant(offset)
+                    .iconst_0()
+                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfByte_long_byte);
+            }
+        }
+
+        codeReturn.apply(cb)
+            .areturn();
+    }
+
+    public static <T extends CodeBuilder> void buildGetMemorySegment(
+        T cb,
+        FFMConfig config,
+        ClassDesc layoutDesc,
+        Function<T, T> constructorCode
+    ) {
+        // T get(MemorySegment segment);
+        if (config.checks) { // TODO: switch to debug?
+            // bounds check via: segment.asSlice(0L, layout());
+            cb
+                .aload(cb.parameterSlot(0))
+                .lconst_0()
+                .ldc(condyCDataAt(layoutDesc, 0))
+                .invokeinterface(CD_MemorySegment, "asSlice", MTD_MemorySegment_long_MemoryLayout)
+                .pop(); // discard, we only want the bounds check
+        }
+        constructorCode.apply(cb);
+    }
+
+    public static <T extends CodeBuilder> void buildGetMemorySegmentAtOffset(
+        T cb,
+        FFMConfig config,
+        ClassDesc layoutDesc,
+        Function<T, T> constructorCode
+    ) {
+        // T get(MemorySegment segment, long offset);
+        if (config.checks) { // TODO: switch to debug?
+            // bounds check via: segment.asSlice(offset, layout());
+            cb
+                .aload(cb.parameterSlot(0))
+                .lload(cb.parameterSlot(1))
+                .ldc(condyCDataAt(layoutDesc, 0))
+                .invokeinterface(CD_MemorySegment, "asSlice", MTD_MemorySegment_long_MemoryLayout)
+                .pop(); // discard, we only want the bounds check
+        }
+        constructorCode.apply(cb);
+    }
+
+    public static <T extends CodeBuilder> void buildGetMemorySegmentAtIndex(
+        T cb,
+        FFMConfig config,
+        ClassDesc layoutDesc,
+        Function<T, T> constructorCode
+    ) {
+        // T getAtIndex(MemorySegment segment, long index);
+        if (config.checks) { // TODO: switch to debug?
+            // bounds check via: segment.asSlice(index * layout().byteSize(), layout());
+            cb
+                .aload(cb.parameterSlot(0))
+                .lload(cb.parameterSlot(1))
+                .ldc(condyCDataAt(layoutDesc, 0))
+                .invokeinterface(CD_GroupLayout, "byteSize", MTD_long)
+                .lmul()
+                .ldc(condyCDataAt(layoutDesc, 0))
+                .invokeinterface(CD_MemorySegment, "asSlice", MTD_MemorySegment_long_MemoryLayout)
+                .pop(); // discard, we only want the bounds check
+        }
+        constructorCode.apply(cb);
     }
 
     private static final MethodHandle CHECK_ADDRESS;
