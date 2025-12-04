@@ -42,6 +42,7 @@ final class BCCallDown extends BCCall {
     private final @Nullable Class<?> allocatorClass;
 
     private final Linker.@Nullable Option captureCallState;
+    private final Linker.@Nullable Option firstVariadicArg;
 
     private final FunctionDescriptor descriptor;
 
@@ -60,8 +61,12 @@ final class BCCallDown extends BCCall {
         featureFlagOffsets = new int[FF_LAST.ordinal()];
         binders = new LinkedHashMap<>();
 
-        Class<?>      allocatorClass   = null;
+        Class<?> allocatorClass = null;
+
         Linker.Option captureCallState = null;
+        var firstVariadicArg = method.isAnnotationPresent(FFMFirstVariadicArg.class)
+            ? Linker.Option.firstVariadicArg(method.getAnnotation(FFMFirstVariadicArg.class).value())
+            : null;
 
         var hasTracing   = config.traceConsumer != null && (config.tracingFilter == null || config.tracingFilter.test(method));
         var featureFlags = hasTracing ? FF_TRACING.mask : 0;
@@ -96,6 +101,13 @@ final class BCCallDown extends BCCall {
                 }
             } else if (i == 0 && hasFunctionAddress) {
                 throw new IllegalStateException("Missing FFMFunctionAddress parameter.");
+            }
+
+            if (parameter.isAnnotationPresent(FFMFirstVariadicArg.class)) {
+                if (firstVariadicArg != null) {
+                    throw new IllegalStateException("Multiple FFMFirstVariadicArg annotations found.");
+                }
+                firstVariadicArg = Linker.Option.firstVariadicArg(i);
             }
 
             if (SegmentAllocator.class.isAssignableFrom(parameter.getType())) {
@@ -147,6 +159,7 @@ final class BCCallDown extends BCCall {
 
         this.allocatorClass = allocatorClass;
         this.captureCallState = captureCallState;
+        this.firstVariadicArg = firstVariadicArg;
 
         MemoryLayout resLayout = null;
 
@@ -247,6 +260,10 @@ final class BCCallDown extends BCCall {
 
         if (captureCallState != null) {
             options.add(captureCallState);
+        }
+
+        if (firstVariadicArg != null) {
+            options.add(firstVariadicArg);
         }
 
         return options.toArray(Linker.Option[]::new);
@@ -688,7 +705,11 @@ final class BCCallDown extends BCCall {
         list.add(ffm);
 
         if (!hasFunctionAddress) {
-            list.add(Objects.requireNonNull(config.symbolLookup)
+            var lookup = config.symbolLookup;
+            if (lookup == null) {
+                throw new IllegalStateException("The registered FFMConfig does not define a SymbolLookup.");
+            }
+            list.add(lookup
                 .find(nativeName)
                 .orElseThrow(() -> new IllegalStateException("Failed to resolve native function: " + nativeName)));
         }

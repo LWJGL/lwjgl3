@@ -14,6 +14,31 @@ val stdio = "LibCStdio".nativeClass(Module.CORE_LIBC) {
 
     nativeImport("<stdio.h>")
 
+    val FILE = "FILE".opaque
+
+    macro..FILE.p("stdin", void())
+    macro..FILE.p("stdout", void())
+    macro..FILE.p("stderr", void())
+
+    int(
+        "fflush",
+
+        FILE.p("stream")
+    )
+
+    int(
+        "feof",
+
+        FILE.p("stream")
+    )
+
+    int(
+        "ferror",
+
+        FILE.p("stream")
+    )
+
+    macro..opaque_p("fscanf", void())
     macro..opaque_p("sscanf", void())
 
     int(
@@ -24,6 +49,7 @@ val stdio = "LibCStdio".nativeClass(Module.CORE_LIBC) {
         va_list("vlist")
     )
 
+    macro..opaque_p("fprintf", void())
     macro..opaque_p("snprintf", void())
 
     int(
