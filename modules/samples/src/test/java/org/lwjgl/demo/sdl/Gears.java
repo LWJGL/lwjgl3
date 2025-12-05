@@ -16,6 +16,7 @@ import static org.lwjgl.sdl.SDLError.*;
 import static org.lwjgl.sdl.SDLEvents.*;
 import static org.lwjgl.sdl.SDLInit.*;
 import static org.lwjgl.sdl.SDLKeycode.*;
+import static org.lwjgl.sdl.SDLMain.*;
 import static org.lwjgl.sdl.SDLMouse.*;
 import static org.lwjgl.sdl.SDLProperties.*;
 import static org.lwjgl.sdl.SDLStdinc.*;
@@ -25,6 +26,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 /** The Gears demo implemented using SDL. */
 public class Gears {
+    private static final boolean useSdlMainCallbacks = Boolean.getBoolean("org.lwjgl.demo.sdl.useSdlMainCallbacks");
     private Callback debugProc;
 
     private long window, glContext;
@@ -33,11 +35,18 @@ public class Gears {
     private int ypos;
     private int width;
     private int height;
+    private boolean continueRunning = true;
+    private long lastFpsUpdate;
+    private int frames;
 
     private GLXGears gears;
 
     public static void main(String[] args) {
-        new Gears().run();
+        if (useSdlMainCallbacks) {
+            new Gears().runAppCallbacks(args);
+        } else {
+            new Gears().run();
+        }
     }
 
     private static void checkSdlError(boolean success) {
@@ -54,6 +63,7 @@ public class Gears {
     }
 
     private void run() {
+        System.out.println("Starting the non-callback version of the demo");
         try {
             init();
 
@@ -64,6 +74,67 @@ public class Gears {
             } catch (Throwable t) {
                 t.printStackTrace();
             }
+        }
+    }
+
+    private void runAppCallbacks(String[] args) {
+        System.out.println("Starting the callback version of the demo");
+        SDL_main_func mainFunc = SDL_main_func.create(this::sdlMain);
+        int result = SDL_RunApp(null, mainFunc, NULL);
+        mainFunc.free();
+        if (result != 0) {
+            System.err.println("main() finished with error code " + result);
+            System.exit(result);
+        }
+    }
+
+    private int sdlMain(int argc, long argv) {
+        SDL_AppInit_func appInit = SDL_AppInit_func.create((_state, _argc, _argv) -> {
+            try {
+                init();
+                return SDL_APP_CONTINUE;
+            } catch (Throwable t) {
+                t.printStackTrace(System.err);
+                return SDL_APP_FAILURE;
+            }
+        });
+        SDL_AppIterate_func appIterate = SDL_AppIterate_func.create((_state) -> {
+            try {
+                renderFrame();
+                return continueRunning ? SDL_APP_CONTINUE : SDL_APP_SUCCESS;
+            } catch (Throwable t) {
+                t.printStackTrace(System.err);
+                return SDL_APP_FAILURE;
+            }
+        });
+        // Avoid allocating new Java heap objects every time we need to process an event
+        SDL_Event cachedEvent = SDL_Event.calloc();
+        SDL_KeyboardEvent cachedKeyEvent = cachedEvent.key();
+        SDL_AppEvent_func appEvent = SDL_AppEvent_func.create((_state, eventPtr) -> {
+            try {
+                memCopy(eventPtr, cachedEvent.address(), cachedEvent.sizeof());
+                handleEvent(cachedEvent, cachedKeyEvent);
+                return continueRunning ? SDL_APP_CONTINUE : SDL_APP_SUCCESS;
+            } catch (Throwable t) {
+                t.printStackTrace(System.err);
+                return SDL_APP_FAILURE;
+            }
+        });
+        SDL_AppQuit_func appQuit = SDL_AppQuit_func.create((_state, _result) -> {
+            try {
+                destroy();
+            } catch (Throwable t) {
+                t.printStackTrace(System.err);
+            }
+        });
+        try {
+            return SDL_EnterAppMainCallbacks(memPointerBuffer(argv, argc), appInit, appIterate, appEvent, appQuit);
+        } finally {
+            appInit.free();
+            appIterate.free();
+            appEvent.free();
+            appQuit.free();
+            cachedEvent.free();
         }
     }
 
@@ -141,6 +212,8 @@ public class Gears {
             checkSdlError(SDL_GetWindowSizeInPixels(window, x, y));
             this.framebufferSizeChanged(window, x.get(0), y.get(0));
         }
+
+        lastFpsUpdate = System.currentTimeMillis();
     }
 
     private void renderFrame() {
@@ -148,10 +221,76 @@ public class Gears {
         gears.animate();
 
         checkSdlError(SDL_GL_SwapWindow(window));
+
+        frames++;
+
+        long time = System.currentTimeMillis();
+
+        int UPDATE_EVERY = 5; // seconds
+        if (UPDATE_EVERY * 1000L <= time - lastFpsUpdate) {
+            lastFpsUpdate = time;
+
+            System.out.printf("%d frames in %d seconds = %.2f fps\n", frames, UPDATE_EVERY, (frames / (float)UPDATE_EVERY));
+            frames = 0;
+        }
+    }
+
+    private void handleEvent(SDL_Event event, SDL_KeyboardEvent keyEvent) {
+        switch (event.type()) {
+            case SDL_EVENT_QUIT:
+                continueRunning = false;
+                break;
+            case SDL_EVENT_KEY_DOWN:
+                switch (keyEvent.key()) {
+                    case SDLK_ESCAPE:
+                        continueRunning = false;
+                        break;
+                    case SDLK_A:
+                        SDL_FlashWindow(window, SDL_FLASH_BRIEFLY);
+                        break;
+                    case SDLK_F:
+                        try (MemoryStack s = stackPush()) {
+                            IntBuffer a = s.ints(0);
+                            IntBuffer b = s.ints(0);
+
+                            SDL_GetWindowPosition(window, a, b);
+                            xpos = a.get(0);
+                            ypos = b.get(0);
+
+                            SDL_GetWindowSize(window, a, b);
+                            width = a.get(0);
+                            height = b.get(0);
+                        }
+                        SDL_SetWindowFullscreen(window, true);
+                        break;
+                    case SDLK_G:
+                        SDL_SetWindowRelativeMouseMode(window, !SDL_GetWindowRelativeMouseMode(window));
+                        break;
+                    case SDLK_O:
+                        float prevOpacity = SDL_GetWindowOpacity(window);
+                        SDL_SetWindowOpacity(window, prevOpacity > 0.75f ? 0.5f : 1.0f);
+                        break;
+                    case SDLK_R:
+                        SDL_SetWindowResizable(window, (SDL_GetWindowFlags(window) & SDL_WINDOW_RESIZABLE) == 0);
+                        break;
+                    case SDLK_U:
+                        SDL_SetWindowBordered(window, (SDL_GetWindowFlags(window) & SDL_WINDOW_BORDERLESS) != 0);
+                        break;
+                    case SDLK_W:
+                        SDL_SetWindowFullscreen(window, false);
+                        SDL_SetWindowPosition(window, xpos, ypos);
+                        SDL_SetWindowSize(window, width, height);
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     private void loop() {
         // This will continue rendering while the event loop below is blocked on window resize
+        // The main callbacks version does not require this code as SDL will call AppIterate() during resizes
         SDL_SetEventFilter((userdata, event) -> {
             SDL_Event e = SDL_Event.create(event);
             switch (e.type()) {
@@ -167,83 +306,17 @@ public class Gears {
         }, NULL);
 
         try (MemoryStack stack = stackPush()) {
-            long lastUpdate = System.currentTimeMillis();
-
-            int frames = 0;
-
             SDL_Event event = SDL_Event.calloc(stack);
 
             // Cache typed event views to avoid allocating memory in the main loop
             SDL_KeyboardEvent keyEvent = event.key();
 
-            boolean continueRunning = true;
             while (continueRunning) {
                 while (SDL_PollEvent(event)) {
-                    switch (event.type()) {
-                        case SDL_EVENT_QUIT:
-                            continueRunning = false;
-                            break;
-                        case SDL_EVENT_KEY_DOWN:
-                            switch (keyEvent.key()) {
-                                case SDLK_ESCAPE:
-                                    continueRunning = false;
-                                    break;
-                                case SDLK_A:
-                                    SDL_FlashWindow(window, SDL_FLASH_BRIEFLY);
-                                    break;
-                                case SDLK_F:
-                                    try (MemoryStack s = stackPush()) {
-                                        IntBuffer a = s.ints(0);
-                                        IntBuffer b = s.ints(0);
-
-                                        SDL_GetWindowPosition(window, a, b);
-                                        xpos = a.get(0);
-                                        ypos = b.get(0);
-
-                                        SDL_GetWindowSize(window, a, b);
-                                        width = a.get(0);
-                                        height = b.get(0);
-                                    }
-                                    SDL_SetWindowFullscreen(window, true);
-                                    break;
-                                case SDLK_G:
-                                    SDL_SetWindowRelativeMouseMode(window, !SDL_GetWindowRelativeMouseMode(window));
-                                    break;
-                                case SDLK_O:
-                                    float prevOpacity = SDL_GetWindowOpacity(window);
-                                    SDL_SetWindowOpacity(window, prevOpacity > 0.75f ? 0.5f : 1.0f);
-                                    break;
-                                case SDLK_R:
-                                    SDL_SetWindowResizable(window, (SDL_GetWindowFlags(window) & SDL_WINDOW_RESIZABLE) == 0);
-                                    break;
-                                case SDLK_U:
-                                    SDL_SetWindowBordered(window, (SDL_GetWindowFlags(window) & SDL_WINDOW_BORDERLESS) != 0);
-                                    break;
-                                case SDLK_W:
-                                    SDL_SetWindowFullscreen(window, false);
-                                    SDL_SetWindowPosition(window, xpos, ypos);
-                                    SDL_SetWindowSize(window, width, height);
-                                    break;
-                            }
-                            break;
-                        default:
-                            break;
-                    }
+                    handleEvent(event, keyEvent);
                 }
 
                 renderFrame();
-
-                frames++;
-
-                long time = System.currentTimeMillis();
-
-                int UPDATE_EVERY = 5; // seconds
-                if (UPDATE_EVERY * 1000L <= time - lastUpdate) {
-                    lastUpdate = time;
-
-                    System.out.printf("%d frames in %d seconds = %.2f fps\n", frames, UPDATE_EVERY, (frames / (float)UPDATE_EVERY));
-                    frames = 0;
-                }
             }
 
         }
