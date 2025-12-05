@@ -1652,6 +1652,606 @@ public final class MemoryUtil {
         memcpy(src.address, dst.address, src.sizeof());
     }
 
+    // --- [ Array to Buffer memcpy ] ---
+
+    /**
+     * Copies the source array to the current position of the destination buffer.
+     *
+     * @param src the source array
+     * @param dst the destination buffer
+     */
+    public static void memCopy(byte[] src, ByteBuffer dst) {
+        if (CHECKS) {
+            check(dst, src.length);
+        }
+        memcpy(src, memAddress(dst), 0, src.length);
+    }
+
+    /**
+     * Copies the source array to the current position of the destination buffer.
+     *
+     * @param src the source array
+     * @param dst the destination buffer
+     */
+    public static void memCopy(short[] src, ByteBuffer dst) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(src.length, 1));
+        }
+        memcpy(src, memAddress(dst), 0, src.length);
+    }
+    /**
+     * Copies the source array to the current position of the destination buffer.
+     *
+     * @param src the source array
+     * @param dst the destination buffer
+     */
+    public static void memCopy(short[] src, ShortBuffer dst) {
+        if (CHECKS) {
+            check(dst, src.length);
+        }
+        memcpy(src, memAddress(dst), 0, src.length);
+    }
+
+    /**
+     * Copies the source array to the current position of the destination buffer.
+     *
+     * @param src the source array
+     * @param dst the destination buffer
+     */
+    public static void memCopy(int[] src, ByteBuffer dst) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(src.length, 2));
+        }
+        memcpy(src, memAddress(dst), 0, src.length);
+    }
+    /**
+     * Copies the source array to the current position of the destination buffer.
+     *
+     * @param src the source array
+     * @param dst the destination buffer
+     */
+    public static void memCopy(int[] src, IntBuffer dst) {
+        if (CHECKS) {
+            check(dst, src.length);
+        }
+        memcpy(src, memAddress(dst), 0, src.length);
+    }
+
+    /**
+     * Copies the source array to the current position of the destination buffer.
+     *
+     * @param src the source array
+     * @param dst the destination buffer
+     */
+    public static void memCopy(long[] src, ByteBuffer dst) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(src.length, 3));
+        }
+        memcpy(src, memAddress(dst), 0, src.length);
+    }
+    /**
+     * Copies the source array to the current position of the destination buffer.
+     *
+     * @param src the source array
+     * @param dst the destination buffer
+     */
+    public static void memCopy(long[] src, LongBuffer dst) {
+        if (CHECKS) {
+            check(dst, src.length);
+        }
+        memcpy(src, memAddress(dst), 0, src.length);
+    }
+
+    /**
+     * Copies the source array to the current position of the destination buffer.
+     *
+     * @param src the source array
+     * @param dst the destination buffer
+     */
+    public static void memCopy(float[] src, ByteBuffer dst) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(src.length, 2));
+        }
+        memcpy(src, memAddress(dst), 0, src.length);
+    }
+    /**
+     * Copies the source array to the current position of the destination buffer.
+     *
+     * @param src the source array
+     * @param dst the destination buffer
+     */
+    public static void memCopy(float[] src, FloatBuffer dst) {
+        if (CHECKS) {
+            check(dst, src.length);
+        }
+        memcpy(src, memAddress(dst), 0, src.length);
+    }
+
+    /**
+     * Copies the source array to the current position of the destination buffer.
+     *
+     * @param src the source array
+     * @param dst the destination buffer
+     */
+    public static void memCopy(double[] src, ByteBuffer dst) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(src.length, 3));
+        }
+        memcpy(src, memAddress(dst), 0, src.length);
+    }
+    /**
+     * Copies the source array to the current position of the destination buffer.
+     *
+     * @param src the source array
+     * @param dst the destination buffer
+     */
+    public static void memCopy(double[] src, DoubleBuffer dst) {
+        if (CHECKS) {
+            check(dst, src.length);
+        }
+        memcpy(src, memAddress(dst), 0, src.length);
+    }
+
+    /**
+     * Copies {@code size} elements from the source array, starting at {@code offset}, to the current position of the destination buffer.
+     *
+     * @param src    the source array
+     * @param dst    the destination buffer
+     * @param offset the offset into the source array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(byte[] src, ByteBuffer dst, int offset, int size) {
+        if (CHECKS) {
+            check(dst, size);
+        }
+        memcpy(src, memAddress(dst), offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source array, starting at {@code offset}, to the current position of the destination buffer.
+     *
+     * @param src    the source array
+     * @param dst    the destination buffer
+     * @param offset the offset into the source array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(short[] src, ByteBuffer dst, int offset, int size) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(size, 1));
+        }
+        memcpy(src, memAddress(dst), offset, size);
+    }
+    /**
+     * Copies {@code size} elements from the source array, starting at {@code offset}, to the current position of the destination buffer.
+     *
+     * @param src    the source array
+     * @param dst    the destination buffer
+     * @param offset the offset into the source array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(short[] src, ShortBuffer dst, int offset, int size) {
+        if (CHECKS) {
+            check(dst, size);
+        }
+        memcpy(src, memAddress(dst), offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source array, starting at {@code offset}, to the current position of the destination buffer.
+     *
+     * @param src    the source array
+     * @param dst    the destination buffer
+     * @param offset the offset into the source array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(int[] src, ByteBuffer dst, int offset, int size) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(size, 2));
+        }
+        memcpy(src, memAddress(dst), offset, size);
+    }
+    /**
+     * Copies {@code size} elements from the source array, starting at {@code offset}, to the current position of the destination buffer.
+     *
+     * @param src    the source array
+     * @param dst    the destination buffer
+     * @param offset the offset into the source array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(int[] src, IntBuffer dst, int offset, int size) {
+        if (CHECKS) {
+            check(dst, size);
+        }
+        memcpy(src, memAddress(dst), offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source array, starting at {@code offset}, to the current position of the destination buffer.
+     *
+     * @param src    the source array
+     * @param dst    the destination buffer
+     * @param offset the offset into the source array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(long[] src, ByteBuffer dst, int offset, int size) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(size, 3));
+        }
+        memcpy(src, memAddress(dst), offset, size);
+    }
+    /**
+     * Copies {@code size} elements from the source array, starting at {@code offset}, to the current position of the destination buffer.
+     *
+     * @param src    the source array
+     * @param dst    the destination buffer
+     * @param offset the offset into the source array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(long[] src, LongBuffer dst, int offset, int size) {
+        if (CHECKS) {
+            check(dst, size);
+        }
+        memcpy(src, memAddress(dst), offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source array, starting at {@code offset}, to the current position of the destination buffer.
+     *
+     * @param src    the source array
+     * @param dst    the destination buffer
+     * @param offset the offset into the source array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(float[] src, ByteBuffer dst, int offset, int size) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(size, 2));
+        }
+        memcpy(src, memAddress(dst), offset, size);
+    }
+    /**
+     * Copies {@code size} elements from the source array, starting at {@code offset}, to the current position of the destination buffer.
+     *
+     * @param src    the source array
+     * @param dst    the destination buffer
+     * @param offset the offset into the source array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(float[] src, FloatBuffer dst, int offset, int size) {
+        if (CHECKS) {
+            check(dst, size);
+        }
+        memcpy(src, memAddress(dst), offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source array, starting at {@code offset}, to the current position of the destination buffer.
+     *
+     * @param src    the source array
+     * @param dst    the destination buffer
+     * @param offset the offset into the source array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(double[] src, ByteBuffer dst, int offset, int size) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(size, 3));
+        }
+        memcpy(src, memAddress(dst), offset, size);
+    }
+    /**
+     * Copies {@code size} elements from the source array, starting at {@code offset}, to the current position of the destination buffer.
+     *
+     * @param src    the source array
+     * @param dst    the destination buffer
+     * @param offset the offset into the source array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(double[] src, DoubleBuffer dst, int offset, int size) {
+        if (CHECKS) {
+            check(dst, size);
+        }
+        memcpy(src, memAddress(dst), offset, size);
+    }
+
+    // --- [ Buffer to Array memcpy ] ---
+
+    /**
+     * Copies the source buffer to the destination array.
+     *
+     * @param src the source buffer
+     * @param dst the destination array
+     */
+    public static void memCopy(ByteBuffer src, byte[] dst) {
+        if (CHECKS) {
+            check(src, dst.length);
+        }
+        memcpy(memAddress(src), dst, 0, dst.length);
+    }
+
+    /**
+     * Copies the source buffer to the destination array.
+     *
+     * @param src the source buffer
+     * @param dst the destination array
+     */
+    public static void memCopy(ByteBuffer src, short[] dst) {
+        if (CHECKS) {
+            check(src, apiGetBytes(dst.length, 1));
+        }
+        memcpy(memAddress(src), dst, 0, dst.length);
+    }
+    /**
+     * Copies the source buffer to the destination array.
+     *
+     * @param src the source buffer
+     * @param dst the destination array
+     */
+    public static void memCopy(ShortBuffer src, short[] dst) {
+        if (CHECKS) {
+            check(src, dst.length);
+        }
+        memcpy(memAddress(src), dst, 0, dst.length);
+    }
+
+    /**
+     * Copies the source buffer to the destination array.
+     *
+     * @param src the source buffer
+     * @param dst the destination array
+     */
+    public static void memCopy(ByteBuffer src, int[] dst) {
+        if (CHECKS) {
+            check(src, apiGetBytes(dst.length, 2));
+        }
+        memcpy(memAddress(src), dst, 0, dst.length);
+    }
+    /**
+     * Copies the source buffer to the destination array.
+     *
+     * @param src the source buffer
+     * @param dst the destination array
+     */
+    public static void memCopy(IntBuffer src, int[] dst) {
+        if (CHECKS) {
+            check(src, dst.length);
+        }
+        memcpy(memAddress(src), dst, 0, dst.length);
+    }
+
+    /**
+     * Copies the source buffer to the destination array.
+     *
+     * @param src the source buffer
+     * @param dst the destination array
+     */
+    public static void memCopy(ByteBuffer src, long[] dst) {
+        if (CHECKS) {
+            check(src, apiGetBytes(dst.length, 3));
+        }
+        memcpy(memAddress(src), dst, 0, dst.length);
+    }
+    /**
+     * Copies the source buffer to the destination array.
+     *
+     * @param src the source buffer
+     * @param dst the destination array
+     */
+    public static void memCopy(LongBuffer src, long[] dst) {
+        if (CHECKS) {
+            check(src, dst.length);
+        }
+        memcpy(memAddress(src), dst, 0, dst.length);
+    }
+
+    /**
+     * Copies the source buffer to the destination array.
+     *
+     * @param src the source buffer
+     * @param dst the destination array
+     */
+    public static void memCopy(ByteBuffer src, float[] dst) {
+        if (CHECKS) {
+            check(src, apiGetBytes(dst.length, 2));
+        }
+        memcpy(memAddress(src), dst, 0, dst.length);
+    }
+    /**
+     * Copies the source buffer to the destination array.
+     *
+     * @param src the source buffer
+     * @param dst the destination array
+     */
+    public static void memCopy(FloatBuffer src, float[] dst) {
+        if (CHECKS) {
+            check(src, dst.length);
+        }
+        memcpy(memAddress(src), dst, 0, dst.length);
+    }
+
+    /**
+     * Copies the source buffer to the destination array.
+     *
+     * @param src the source buffer
+     * @param dst the destination array
+     */
+    public static void memCopy(ByteBuffer src, double[] dst) {
+        if (CHECKS) {
+            check(src, apiGetBytes(dst.length, 3));
+        }
+        memcpy(memAddress(src), dst, 0, dst.length);
+    }
+    /**
+     * Copies the source buffer to the destination array.
+     *
+     * @param src the source buffer
+     * @param dst the destination array
+     */
+    public static void memCopy(DoubleBuffer src, double[] dst) {
+        if (CHECKS) {
+            check(src, dst.length);
+        }
+        memcpy(memAddress(src), dst, 0, dst.length);
+    }
+
+    /**
+     * Copies {@code size} elements from the source buffer to the destination array, starting at {@code offset}.
+     *
+     * @param src    the source buffer
+     * @param dst    the destination array
+     * @param offset the offset into the destination array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(ByteBuffer src, byte[] dst, int offset, int size) {
+        if (CHECKS) {
+            check(src, size);
+        }
+        memcpy(memAddress(src), dst, offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source buffer to the destination array, starting at {@code offset}.
+     *
+     * @param src    the source buffer
+     * @param dst    the destination array
+     * @param offset the offset into the destination array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(ByteBuffer src, short[] dst, int offset, int size) {
+        if (CHECKS) {
+            check(src, apiGetBytes(size, 1));
+        }
+        memcpy(memAddress(src), dst, offset, size);
+    }
+    /**
+     * Copies {@code size} elements from the source buffer to the destination array, starting at {@code offset}.
+     *
+     * @param src    the source buffer
+     * @param dst    the destination array
+     * @param offset the offset into the destination array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(ShortBuffer src, short[] dst, int offset, int size) {
+        if (CHECKS) {
+            check(src, size);
+        }
+        memcpy(memAddress(src), dst, offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source buffer to the destination array, starting at {@code offset}.
+     *
+     * @param src    the source buffer
+     * @param dst    the destination array
+     * @param offset the offset into the destination array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(ByteBuffer src, int[] dst, int offset, int size) {
+        if (CHECKS) {
+            check(src, apiGetBytes(size, 2));
+        }
+        memcpy(memAddress(src), dst, offset, size);
+    }
+    /**
+     * Copies {@code size} elements from the source buffer to the destination array, starting at {@code offset}.
+     *
+     * @param src    the source buffer
+     * @param dst    the destination array
+     * @param offset the offset into the destination array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(IntBuffer src, int[] dst, int offset, int size) {
+        if (CHECKS) {
+            check(src, size);
+        }
+        memcpy(memAddress(src), dst, offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source buffer to the destination array, starting at {@code offset}.
+     *
+     * @param src    the source buffer
+     * @param dst    the destination array
+     * @param offset the offset into the destination array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(ByteBuffer src, long[] dst, int offset, int size) {
+        if (CHECKS) {
+            check(src, apiGetBytes(size, 3));
+        }
+        memcpy(memAddress(src), dst, offset, size);
+    }
+    /**
+     * Copies {@code size} elements from the source buffer to the destination array, starting at {@code offset}.
+     *
+     * @param src    the source buffer
+     * @param dst    the destination array
+     * @param offset the offset into the destination array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(LongBuffer src, long[] dst, int offset, int size) {
+        if (CHECKS) {
+            check(src, size);
+        }
+        memcpy(memAddress(src), dst, offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source buffer to the destination array, starting at {@code offset}.
+     *
+     * @param src    the source buffer
+     * @param dst    the destination array
+     * @param offset the offset into the destination array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(ByteBuffer src, float[] dst, int offset, int size) {
+        if (CHECKS) {
+            check(src, apiGetBytes(size, 2));
+        }
+        memcpy(memAddress(src), dst, offset, size);
+    }
+    /**
+     * Copies {@code size} elements from the source buffer to the destination array, starting at {@code offset}.
+     *
+     * @param src    the source buffer
+     * @param dst    the destination array
+     * @param offset the offset into the destination array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(FloatBuffer src, float[] dst, int offset, int size) {
+        if (CHECKS) {
+            check(src, size);
+        }
+        memcpy(memAddress(src), dst, offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source buffer to the destination array, starting at {@code offset}.
+     *
+     * @param src    the source buffer
+     * @param dst    the destination array
+     * @param offset the offset into the destination array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(ByteBuffer src, double[] dst, int offset, int size) {
+        if (CHECKS) {
+            check(src, apiGetBytes(size, 3));
+        }
+        memcpy(memAddress(src), dst, offset, size);
+    }
+    /**
+     * Copies {@code size} elements from the source buffer to the destination array, starting at {@code offset}.
+     *
+     * @param src    the source buffer
+     * @param dst    the destination array
+     * @param offset the offset into the destination array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(DoubleBuffer src, double[] dst, int offset, int size) {
+        if (CHECKS) {
+            check(src, size);
+        }
+        memcpy(memAddress(src), dst, offset, size);
+    }
+
     /*  -------------------------------------
         -------------------------------------
                UNSAFE MEMORY ACCESS API
@@ -1672,34 +2272,6 @@ public final class MemoryUtil {
         memset(ptr, value, bytes);
     }
 
-/*
-    public static void memSetFFM(long ptr, int value, long bytes) {
-        if (DEBUG && (ptr == NULL || bytes < 0)) {
-            throw new IllegalArgumentException();
-        }
-
-        var b = (byte)(value & 0xFF);
-
-        if (bytes < NATIVE_THRESHOLD_FILL) {
-            MemorySegment.ofAddress(ptr)
-                .reinterpret(bytes)
-                .fill(b);
-        } else {
-            var lastByteIndex = bytes - 1L;
-
-            MemorySegment
-                .ofAddress(ptr)
-                //  odd: bytes (odd)
-                // even: bytes - 1 (odd again)
-                .reinterpret(lastByteIndex + (bytes & 1L))
-                .fill(b);
-
-            // write (or re-write) last byte
-            memPutByte(ptr + lastByteIndex, b);
-        }
-    }
-*/
-
     /**
      * Sets all bytes in a specified block of memory to a copy of another block.
      *
@@ -1713,6 +2285,36 @@ public final class MemoryUtil {
         }
         memcpy(src, dst, bytes);
     }
+
+    public static void memCopy(byte[] src, long dst)                         { memcpy(src, dst, 0, src.length); }
+    public static void memCopy(short[] src, long dst)                        { memcpy(src, dst, 0, src.length); }
+    public static void memCopy(int[] src, long dst)                          { memcpy(src, dst, 0, src.length); }
+    public static void memCopy(long[] src, long dst)                         { memcpy(src, dst, 0, src.length); }
+    public static void memCopy(float[] src, long dst)                        { memcpy(src, dst, 0, src.length); }
+    public static void memCopy(double[] src, long dst)                       { memcpy(src, dst, 0, src.length); }
+
+    public static void memCopy(byte[] src, long dst, int offset, int size)   { memcpy(src, dst, offset, size); }
+    public static void memCopy(short[] src, long dst, int offset, int size)  { memcpy(src, dst, offset, size); }
+    public static void memCopy(int[] src, long dst, int offset, int size)    { memcpy(src, dst, offset, size); }
+    public static void memCopy(long[] src, long dst, int offset, int size)   { memcpy(src, dst, offset, size); }
+    public static void memCopy(float[] src, long dst, int offset, int size)  { memcpy(src, dst, offset, size); }
+    public static void memCopy(double[] src, long dst, int offset, int size) { memcpy(src, dst, offset, size); }
+
+    public static void memCopy(long src, byte[] dst)                         { memcpy(src, dst, 0, dst.length); }
+    public static void memCopy(long src, short[] dst)                        { memcpy(src, dst, 0, dst.length); }
+    public static void memCopy(long src, int[] dst)                          { memcpy(src, dst, 0, dst.length); }
+    public static void memCopy(long src, long[] dst)                         { memcpy(src, dst, 0, dst.length); }
+    public static void memCopy(long src, float[] dst)                        { memcpy(src, dst, 0, dst.length); }
+    public static void memCopy(long src, double[] dst)                       { memcpy(src, dst, 0, dst.length); }
+
+    public static void memCopy(long src, byte[] dst, int offset, int size)   { memcpy(src, dst, offset, size); }
+    public static void memCopy(long src, short[] dst, int offset, int size)  { memcpy(src, dst, offset, size); }
+    public static void memCopy(long src, int[] dst, int offset, int size)    { memcpy(src, dst, offset, size); }
+    public static void memCopy(long src, long[] dst, int offset, int size)   { memcpy(src, dst, offset, size); }
+    public static void memCopy(long src, float[] dst, int offset, int size)  { memcpy(src, dst, offset, size); }
+    public static void memCopy(long src, double[] dst, int offset, int size) { memcpy(src, dst, offset, size); }
+
+    // --
 
     /*
     private static final ValueLayout.OfShort  JAVA_SHORT  = DEBUG ? ValueLayout.JAVA_SHORT : ValueLayout.JAVA_SHORT_UNALIGNED;

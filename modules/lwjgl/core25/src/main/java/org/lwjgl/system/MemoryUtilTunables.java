@@ -7,6 +7,7 @@ package org.lwjgl.system;
 import java.lang.foreign.*;
 
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 final class MemoryUtilTunables {
@@ -222,6 +223,92 @@ final class MemoryUtilTunables {
         if (offset < bytes) {
             memPutByte(dst + offset, memGetByte(src + offset));
         }
+    }
+
+    private static void memcpy(MemorySegment src, long dst, long offset, long bytes) {
+        if (bytes < NATIVE_THRESHOLD_COPY) {
+            var S = src.asSlice(offset, bytes);
+            var D = MemorySegment.ofAddress(dst).reinterpret(bytes);
+
+            D.copyFrom(S);
+        } else {
+            var lastByteIndex = bytes - 1L;
+            var copyBytes     = lastByteIndex + (bytes & 1L);
+
+            var S = src.asSlice(offset, copyBytes);
+            var D = MemorySegment.ofAddress(dst).reinterpret(copyBytes);
+
+            D.copyFrom(S);
+
+            memPutByte(dst + lastByteIndex, src.get(ValueLayout.JAVA_BYTE, offset + lastByteIndex));
+        }
+    }
+    static void memcpy(byte[] src, long dst, int offset, int size) {
+        checkMemcpy(dst, offset, size, src.length);
+        memcpy(MemorySegment.ofArray(src), dst, offset, size);
+    }
+    static void memcpy(short[] src, long dst, int offset, int size) {
+        checkMemcpy(dst, offset, size, src.length);
+        memcpy(MemorySegment.ofArray(src), dst, apiGetBytes(offset, 1), apiGetBytes(size, 1));
+    }
+    static void memcpy(int[] src, long dst, int offset, int size) {
+        checkMemcpy(dst, offset, size, src.length);
+        memcpy(MemorySegment.ofArray(src), dst, apiGetBytes(offset, 2), apiGetBytes(size, 2));
+    }
+    static void memcpy(long[] src, long dst, int offset, int size) {
+        checkMemcpy(dst, offset, size, src.length);
+        memcpy(MemorySegment.ofArray(src), dst, apiGetBytes(offset, 3), apiGetBytes(size, 3));
+    }
+    static void memcpy(float[] src, long dst, int offset, int size) {
+        checkMemcpy(dst, offset, size, src.length);
+        memcpy(MemorySegment.ofArray(src), dst, apiGetBytes(offset, 2), apiGetBytes(size, 2));
+    }
+    static void memcpy(double[] src, long dst, int offset, int size) {
+        checkMemcpy(dst, offset, size, src.length);
+        memcpy(MemorySegment.ofArray(src), dst, apiGetBytes(offset, 3), apiGetBytes(size, 3));
+    }
+
+    private static void memcpy(long src, MemorySegment dst, long offset, long bytes) {
+        if (bytes < NATIVE_THRESHOLD_COPY) {
+            var S = MemorySegment.ofAddress(src).reinterpret(bytes);
+            var D = dst.asSlice(offset, bytes);
+
+            D.copyFrom(S);
+        } else {
+            var lastByteIndex = bytes - 1L;
+            var copyBytes     = lastByteIndex + (bytes & 1L);
+
+            var S = MemorySegment.ofAddress(src).reinterpret(copyBytes);
+            var D = dst.asSlice(offset, copyBytes);
+
+            D.copyFrom(S);
+
+            dst.set(ValueLayout.JAVA_BYTE, offset + lastByteIndex, memGetByte(src + lastByteIndex));
+        }
+    }
+    static void memcpy(long src, byte[] dst, int offset, int size) {
+        checkMemcpy(src, offset, size, dst.length);
+        memcpy(src, MemorySegment.ofArray(dst), offset, size);
+    }
+    static void memcpy(long src, short[] dst, int offset, int size) {
+        checkMemcpy(src, offset, size, dst.length);
+        memcpy(src, MemorySegment.ofArray(dst), apiGetBytes(offset, 1), apiGetBytes(size, 1));
+    }
+    static void memcpy(long src, int[] dst, int offset, int size) {
+        checkMemcpy(src, offset, size, dst.length);
+        memcpy(src, MemorySegment.ofArray(dst), apiGetBytes(offset, 2), apiGetBytes(size, 2));
+    }
+    static void memcpy(long src, long[] dst, int offset, int size) {
+        checkMemcpy(src, offset, size, dst.length);
+        memcpy(src, MemorySegment.ofArray(dst), apiGetBytes(offset, 3), apiGetBytes(size, 3));
+    }
+    static void memcpy(long src, float[] dst, int offset, int size) {
+        checkMemcpy(src, offset, size, dst.length);
+        memcpy(src, MemorySegment.ofArray(dst), apiGetBytes(offset, 2), apiGetBytes(size, 2));
+    }
+    static void memcpy(long src, double[] dst, int offset, int size) {
+        checkMemcpy(src, offset, size, dst.length);
+        memcpy(src, MemorySegment.ofArray(dst), apiGetBytes(offset, 3), apiGetBytes(size, 3));
     }
 
 }

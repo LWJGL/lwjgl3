@@ -898,6 +898,7 @@
 	            <include name="org/lwjgl/demo/stb/**" if:set="test.stb"/>
 
 	            <include name="org/lwjgl/demo/system/jawt/**" if:set="test.jawt"/>
+                <include name="org/lwjgl/demo/system/libc/**"/>
                 <include name="org/lwjgl/demo/system/linux/**"/>
                 <include name="org/lwjgl/demo/system/windows/**"/>
 

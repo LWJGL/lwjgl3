@@ -539,6 +539,15 @@ public final class Checks {
         return Integer.toUnsignedLong(index);
     }
 
+    public static void checkMemcpy(long address, int offset, int size, int length) {
+        if (CHECKS) {
+            if (address == NULL) {
+                throw new NullPointerException();
+            }
+            checkFromIndexSize(offset, size, length);
+        }
+    }
+
     // Separate calls to help inline check.
 
     private static void throwIAE(int bufferSize, int minimumSize) {
