@@ -187,7 +187,6 @@ public sealed interface GroupBinder<L extends GroupLayout, T>
 
         var methodType = (MethodType)type;
 
-        // TODO: handle overloads
         // unreflect the member getters
         var methodHandles = new MethodHandle[getterNames.length];
         for (var i = 0; i < getterNames.length; i++) {

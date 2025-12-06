@@ -1092,21 +1092,21 @@ public class StructTest {
         try (var arena = Arena.ofConfined()) {
             var segment = Event.$.allocate(arena);
 
-            var union = Event.$.get(segment);
+            var event = Event.$.get(segment);
 
             var t = System.currentTimeMillis();
 
-            union.type(0xFEEDBEEF);
-            union.common().timestamp(t);
+            event.type(0xFEEDBEEF);
+            event.common().timestamp(t);
 
-            assertEquals(union.type(), 0xFEEDBEEF);
-            assertEquals(union.common().timestamp(), t);
+            assertEquals(event.type(), 0xFEEDBEEF);
+            assertEquals(event.common().timestamp(), t);
 
-            assertEquals(union.key().type(), union.type());
-            assertEquals(union.key().timestamp(), union.common().timestamp());
+            assertEquals(event.key().type(), event.type());
+            assertEquals(event.key().timestamp(), event.common().timestamp());
 
-            assertEquals(union.mouse().type(), union.type());
-            assertEquals(union.mouse().timestamp(), union.common().timestamp());
+            assertEquals(event.mouse().type(), event.type());
+            assertEquals(event.mouse().timestamp(), event.common().timestamp());
         }
     }
 
@@ -1442,6 +1442,72 @@ public class StructTest {
 
                 assertEquals(a, b);
             }
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            interface S {
+                StructBinder<S> $ = struct(S.class)
+                    .m("x", int32_t)
+                    .padding(8)
+                    .m("y", int32_t)
+                    .build();
+
+                int x();
+                int y();
+            }
+
+            var layout = S.$.layout();
+
+            var paddingOffset = layout.byteOffset(groupElement(1));
+
+            var segment = S.$.allocate(arena, 2);
+
+            // pollute padding bytes with random data
+
+            segment.set(ValueLayout.JAVA_INT, paddingOffset, 0xDEADBEEF);
+            segment.set(ValueLayout.JAVA_INT, paddingOffset + 4, 0xCAFEBABE);
+
+            segment.set(ValueLayout.JAVA_INT, S.$.sizeof() + paddingOffset, 0xFEEDFACE);
+            segment.set(ValueLayout.JAVA_INT, S.$.sizeof() + paddingOffset + 4, 0xBAADF00D);
+
+            // verify that equals uses getters only
+
+            assertEquals(S.$.getAtIndex(segment, 0), S.$.getAtIndex(segment, 1));
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            interface S {
+                StructBinder<S> $ = struct(S.class)
+                    .m("x", int32_t)
+                    .padding(8)
+                    .m("y", int32_t)
+                    .withEquals((it, o) -> {
+                        var ot = (S)o;
+                        return S.$.asSegment(it).mismatch(S.$.asSegment(ot)) == -1L;
+                    })
+                    .build();
+
+                int x();
+                int y();
+            }
+
+            var layout = S.$.layout();
+
+            var paddingOffset = layout.byteOffset(groupElement(1));
+
+            var segment = S.$.allocate(arena, 2);
+
+            // pollute padding bytes with random data
+
+            segment.set(ValueLayout.JAVA_INT, paddingOffset, 0xDEADBEEF);
+            segment.set(ValueLayout.JAVA_INT, paddingOffset + 4, 0xCAFEBABE);
+
+            segment.set(ValueLayout.JAVA_INT, S.$.sizeof() + paddingOffset, 0xFEEDFACE);
+            segment.set(ValueLayout.JAVA_INT, S.$.sizeof() + paddingOffset + 4, 0xBAADF00D);
+
+            // verify that equals fails due to padding mismatch
+
+            assertNotEquals(S.$.getAtIndex(segment, 0), S.$.getAtIndex(segment, 1));
         }
     }
 
@@ -2180,7 +2246,6 @@ public class StructTest {
 
             var s = S.$.get(segment);
             var o = S.$.getAtIndex(segment, 1L);
-
 
             assertEquals(s.address(), segment.address());
             assertEquals(s.layout(), S.$.layout());

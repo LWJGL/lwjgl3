@@ -503,6 +503,8 @@ final class BCGroup {
             }
 
             // GENERATE equals, hashCode, toString
+            // TODO: consider using MemorySegment::mismatch for equals (i.e. all bytes, instead of going through getters, which may be incomplete too)
+            // TODO: consider a custom hashCode loop for hashCode (i.e. all bytes, instead of going through getters, which may be incomplete too)
             var bootstrapArgs = hasPrivateGetters ? getBootstrapArgs(layout, getters) : null;
             classBuilder
                 .withMethod("equals", MTD_boolean_Object, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> {
@@ -1087,8 +1089,6 @@ final class BCGroup {
 
         var bootstrapArgsBuilder = Stream.<String>builder()
             .add(bootstrapNames);
-
-        // TODO: handle multiple getters for the same member (e.g. MemorySegment name() + String name())
 
         getters
             .sequencedEntrySet()

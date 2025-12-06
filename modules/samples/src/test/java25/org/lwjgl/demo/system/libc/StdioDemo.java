@@ -41,7 +41,6 @@ public final class StdioDemo {
         int snprintf(MemorySegment buffer, long size, String format, @FFMFirstVariadicArg int x, int y, double z, String text);
     }
 
-
     private static final MyStdio stdio = ffmGenerate(MyStdio.class);
 
     private StdioDemo() {
