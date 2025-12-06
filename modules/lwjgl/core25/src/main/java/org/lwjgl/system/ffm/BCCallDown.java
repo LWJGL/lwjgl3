@@ -266,6 +266,10 @@ final class BCCallDown extends BCCall {
             options.add(firstVariadicArg);
         }
 
+        if (options.isEmpty()) {
+            return EMPTY_OPTIONS;
+        }
+
         return options.toArray(Linker.Option[]::new);
     }
 

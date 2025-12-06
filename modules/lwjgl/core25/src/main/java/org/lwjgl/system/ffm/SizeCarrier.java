@@ -10,6 +10,7 @@ import java.lang.foreign.*;
 
 import static org.lwjgl.system.ffm.BCDescriptors.*;
 
+/** An enumeration of carrier types for parameters that represent integer sizes. */
 public enum SizeCarrier {
 
     BYTE(ValueLayout.JAVA_BYTE, "JAVA_BYTE", CD_ValueLayout$OfByte, MTD_byte_ValueLayout$OfByte_long),

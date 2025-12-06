@@ -4,9 +4,16 @@
  */
 package org.lwjgl.system.ffm;
 
+import org.lwjgl.system.*;
+
 import java.lang.foreign.*;
 import java.util.function.*;
 
+/**
+ * The binder class for struct interfaces.
+ *
+ * <p>Struct binder implementations can be created using the builder returned by {@link FFM#ffmStruct ffmStruct}.</p>
+ */
 public non-sealed interface StructBinder<T> extends GroupBinder<StructLayout, T> {
     @Override
     default StructBinder<T> set(MemorySegment segment, T value) {
@@ -51,6 +58,21 @@ public non-sealed interface StructBinder<T> extends GroupBinder<StructLayout, T>
     @Override
     default StructArray<T> array(MemorySegment segment, long index, long elementCount) {
         return new StructArray<>(this, asSlice(segment, index, elementCount));
+    }
+
+    @Override
+    default StructArray<T> malloc(SegmentStack stack, long elementCount) {
+        return new StructArray<>(this, stack.allocate(layout(), elementCount));
+    }
+
+    @Override
+    default StructArray<T> allocate(SegmentStack stack, long elementCount) {
+        return new StructArray<>(this, stack.calloc(layout(), elementCount));
+    }
+
+    @Override
+    default StructArray<T> allocate(SegmentAllocator allocator, long elementCount) {
+        return new StructArray<>(this, allocator.allocate(layout(), elementCount));
     }
 
 }

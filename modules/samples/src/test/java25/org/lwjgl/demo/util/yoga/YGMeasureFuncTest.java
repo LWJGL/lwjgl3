@@ -159,7 +159,7 @@ public class YGMeasureFuncTest {
                 System.out.println("measuredWidth = " + measuredWidth);
                 System.out.println("measuredHeight = " + measuredHeight);
 
-                return YGSize.$.get(__result)
+                return __result
                     .width(measuredWidth)
                     .height(measuredHeight);
             });

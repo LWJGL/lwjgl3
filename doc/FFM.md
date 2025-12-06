@@ -39,16 +39,34 @@ This backend is implemented using the new runtime bindings generator in the core
 * Need to decide on `null` vs `MemorySegment.NULL` at the LWJGL API level.
 * The struct/union DSL needs work.
   - Could wrap FFM layouts to a custom API with helper instance methods.
+  - Also consider more explicit support for layout signedness.
+* The API currently uses a naming convention with `ffm` prefixes for methods and `@FFM<Name>` for annotations).
+  - Consider alternatives.
+* Move to a top-level package? (e.g. `org.lwjgl.ffm`)
+  - Or even decouple from LWJGL altogether and ship as a separate library.
 
 ## Using the bindings generator
 
-The bindings generator takes Java interfaces as input and produces implementations of those interfaces for downcalls, upcalls and structs/unions. 
+The bindings generator takes Java interfaces as input and produces implementations of those interfaces for downcalls, upcalls and structs/unions.
+
+The bootstraping methods for each of these may be found in the `org.lwjgl.system.ffm.FFM` class:
+
+* `ffmGenerate` for downcall interfaces
+* `ffmUpcall` for upcall binders
+* `ffmStruct` for struct binders
+* `ffmUnion` for union binders
+
+Binding interfaces must be associated with an `FFMConfig` instance. Use `ffmConfigBuilder` to create `FFMConfig` instances and `ffmConfig` to register them to the appropriate package or class level scope.
+
+It is recommended to use static imports for the `FFM` class or methods.
 
 ### Annotations
 
 Annotations may be used to configure the generated bindings, to produce APIs that are more fluent and convenient to use.
 
-The annotation play the same role as the modifiers in the offline Kotlin generator. More annnotations will be added in the future.
+The annotations play the same role as the modifiers in the offline Kotlin generator. More annnotations will be added in the future.
+
+One of the most important annotations is the nullable annotation, which signals whether a parameter or return value may be a `NULL` pointer. However, LWJGL does not define a custom nullable annotation. Instead, a preferred third-party annotation, such as `org.jspecify.annotations.Nullable`, should be configured if necessary. LWJGL will also try to detect popular nullable annotations, if available in the classpath at runtime. See `Configuration.FFM_DEFAULT_NULLABLE_ANNOTATION` for more details.
 
 ### Binders
 

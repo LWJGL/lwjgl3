@@ -28,12 +28,10 @@ public class FFMDemo {
 
     static void main() {
         try (var arena = Arena.ofConfined()) {
-            var displayEventMem = SDL_DisplayEvent.allocate(arena);
-            var displayEvent    = SDL_DisplayEvent.get(displayEventMem);
+            var displayEvent = SDL_DisplayEvent.allocate(arena);
             System.err.println(displayEvent.displayID());
 
-            var eventMem = SDL_Event.allocate(arena);
-            var event    = SDL_Event.get(eventMem);
+            var event = SDL_Event.allocate(arena);
             System.err.println(event);
             System.err.println(event.display());
         }

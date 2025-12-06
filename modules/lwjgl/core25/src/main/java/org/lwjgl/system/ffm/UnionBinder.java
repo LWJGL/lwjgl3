@@ -4,9 +4,16 @@
  */
 package org.lwjgl.system.ffm;
 
+import org.lwjgl.system.*;
+
 import java.lang.foreign.*;
 import java.util.function.*;
 
+/**
+ * The binder class for union interfaces.
+ *
+ * <p>Union binder implementations can be created using the builder returned by {@link FFM#ffmUnion ffmUnion}.</p>
+ */
 public non-sealed interface UnionBinder<T> extends GroupBinder<UnionLayout, T> {
     @Override
     default UnionBinder<T> set(MemorySegment segment, T value) {
@@ -51,6 +58,21 @@ public non-sealed interface UnionBinder<T> extends GroupBinder<UnionLayout, T> {
     @Override
     default UnionArray<T> array(MemorySegment segment, long index, long elementCount) {
         return new UnionArray<>(this, asSlice(segment, index, elementCount));
+    }
+
+    @Override
+    default UnionArray<T> malloc(SegmentStack stack, long elementCount) {
+        return new UnionArray<>(this, stack.allocate(layout(), elementCount));
+    }
+
+    @Override
+    default UnionArray<T> allocate(SegmentStack stack, long elementCount) {
+        return new UnionArray<>(this, stack.calloc(layout(), elementCount));
+    }
+
+    @Override
+    default UnionArray<T> allocate(SegmentAllocator allocator, long elementCount) {
+        return new UnionArray<>(this, allocator.allocate(layout(), elementCount));
     }
 
 }

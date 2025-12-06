@@ -13,7 +13,11 @@ import java.lang.reflect.*;
 import java.util.*;
 import java.util.function.*;
 
-/** Binding configuration. */
+/**
+ * Binding configuration, used to customize the generation of binding implementations.
+ *
+ * <p>It also acts as a registry for {@link Binder} instances.</p>
+ */
 public final class FFMConfig {
 
     final MethodHandles.Lookup lookup;
@@ -70,53 +74,127 @@ public final class FFMConfig {
         this.nullableAnnotationOnType = validateNullableAnnotationClass(nullableAnnotation);
     }
 
+    /**
+     * Returns the {@link MethodHandles.Lookup} associated with this configuration.
+     *
+     * @return the lookup instance
+     */
     public MethodHandles.Lookup getLookup() {
         return lookup;
     }
 
+    /**
+     * Returns true if a {@link Binder} has been registered for the specified type.
+     *
+     * @param type an upcall, struct or union interface
+     *
+     * @return {@code true} if such a {@code Binder} has been registered
+     */
     public boolean hasBinder(Class<?> type) {
         return binders.containsKey(type);
     }
 
+    /**
+     * Returns the {@link StructBinder} registered for the specified struct interface.
+     *
+     * @param type a struct interface
+     *
+     * @return the registered {@code StructBinder}
+     *
+     * @throws NullPointerException if no {@code StructBinder} is registered for the specified type
+     */
     @SuppressWarnings("unchecked")
     public <T> StructBinder<T> getStructBinder(Class<T> type) {
         return (StructBinder<T>)Objects.requireNonNull(binders.get(type)).binder;
     }
 
+    /**
+     * Returns the {@link UnionBinder} registered for the specified union interface.
+     *
+     * @param type a union interface
+     *
+     * @return the registered {@code UnionBinder}
+     *
+     * @throws NullPointerException if no {@code UnionBinder} is registered for the specified type
+     */
     @SuppressWarnings("unchecked")
     public <T> UnionBinder<T> getUnionBinder(Class<T> type) {
         return (UnionBinder<T>)Objects.requireNonNull(binders.get(type)).binder;
     }
 
+    /**
+     * Returns the {@link UpcallBinder} registered for the specified upcall interface.
+     *
+     * @param type an upcall interface
+     *
+     * @return the registered {@code UpcallBinder}
+     *
+     * @throws NullPointerException if no {@code UpcallBinder} is registered for the specified type
+     */
     @SuppressWarnings("unchecked")
     public <T> UpcallBinder<T> getUpcallBinder(Class<T> type) {
         return (UpcallBinder<T>)Objects.requireNonNull(binders.get(type)).binder;
     }
 
+    /**
+     * Returns the nullable annotation class associated with this configuration.
+     *
+     * @return the nullable annotation class, or {@code null} if none is set
+     */
     public @Nullable Class<? extends Annotation> getNullableAnnotation() {
         return nullableAnnotation;
     }
 
+    /**
+     * Returns the {@link SymbolLookup} associated with this configuration.
+     *
+     * @return the symbol lookup, or {@code null} if none is set
+     */
     public @Nullable SymbolLookup getSymbolLookup() {
         return symbolLookup;
     }
 
+    /**
+     * Returns the {@link TraceConsumer} associated with this configuration.
+     *
+     * @return the trace consumer, or {@code null} if none is set
+     */
     public @Nullable TraceConsumer getTraceConsumer() {
         return traceConsumer;
     }
 
+    /**
+     * Returns the tracing filter {@link Predicate} associated with this configuration.
+     *
+     * @return the trace filter, or {@code null} if none is set
+     */
     public @Nullable Predicate<Method> getTracingFilter() {
         return tracingFilter;
     }
 
+    /**
+     * Returns the critical override {@link Function} associated with this configuration.
+     *
+     * @return the critical override function, or {@code null} if none is set
+     */
     public @Nullable Function<Method, Boolean> getCriticalOverride() {
         return criticalOverride;
     }
 
+    /**
+     * Returns whether runtime checks are enabled.
+     *
+     * @return {@code true} if runtime checks are enabled
+     */
     public boolean checks() {
         return checks;
     }
 
+    /**
+     * Returns whether generator debug output is enabled.
+     *
+     * @return {@code true} if generator debug output is enabled
+     */
     public boolean debugGenerator() {
         return debugGenerator;
     }

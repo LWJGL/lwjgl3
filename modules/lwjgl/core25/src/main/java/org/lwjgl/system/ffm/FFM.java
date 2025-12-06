@@ -29,72 +29,28 @@ import static org.lwjgl.system.ffm.BCDescriptors.*;
 import static org.lwjgl.system.ffm.BCUtil.*;
 
 /**
- * Generates LWJGL bindings from an interface, optionally annotated with {@code FFM*} annotations.
+ * This class is the entry point for the Runtime Bindings Generator API.
  *
- * <p>The objective is to allow users to create their own LWJGL-style bindings, dynamically at run-time, without sacrificing performance.</p>
- *
- * <p>Several modern Java technologies are being utilized to achieve this:</p>
+ * <p>Global configuration options:</p>
  * <ul>
- *     <li>Dynamic Class-File Constants (JEP 309, JDK 11, a.k.a. Condy): Used to lazily initialize bindings, without precompiling a private nested class per function.</li>
- *     <li>Hidden Classes (JEP 371, JDK 15): Used to generate classes with minimal metadata and no interaction with ClassLoaders.</li>
- *     <li>Class data support for hidden classes (JDK-8256214, JDK 16): Used to boostrap Condy values.</li>
- *     <li>Foreign Function & Memory API (JEP 442, JDK 22): Used for native interoperation without JNI.</li>
- *     <li>Class-File API (JEP 457, JDK 24): Used to generate bytecode at runtime, without 3rd-party dependencies.</li>
+ *     <li>{@link Configuration#FFM_DEFAULT_NULLABLE_ANNOTATION}</li>
+ *     <li>{@link Configuration#FFM_UPCALL_ARENA}</li>
+ *     <li>{@link Configuration#FFM_UPCALL_EXCEPTION_CATCH}</li>
+ *     <li>{@link Configuration#FFM_UPCALL_EXCEPTION_HANDLER}</li>
  * </ul>
  *
- * <p>The {@link #ffmGenerate} method is designed to be relatively cheap. The instance returned is lightweight and its methods are never materialized, unless
- * actually used by the application. More specifically:</p>
+ * <p>Configuration methods:</p>
  * <ul>
- *    <li>A minimal class is generated that implements the input interface.</li>
- *    <li>There is no state in the generated class, only methods.</li>
- *    <li>All methods are simple, with minimal bytecode. A method handle is retrieved using Condy and arguments are passed directly to {@link MethodHandle#invokeExact}.</li>
- *    <li>There is no overhead from the Condy {@code ldc} instruction. It is executed only once, if and when the method is called.</li>
- *    <li>
- *        Execution of relatively expensive binding code is deferred to the Condy bootstrap. This includes:
- *        <ul>
- *            <li>lookup of {@code FFM*} annotations and associated logic</li>
- *            <li>function address lookup and creation of FFM method handles</li>
- *            <li>further bytecode generation and wrapping of FFM method handles if necessary</li>
- *        </ul>
- *    </li>
- *    <li>
- *        Hidden class data is used:
- *        <ul>
- *            <li>to pass reflected {@link Method} instances to the Condy bootstrap</li>
- *            <li>to pass FFM {@link MethodHandle}/{@link MemorySegment} instances to generated wrapper methods</li>
- *        </ul>
- *    </li>
+ *     <li>{@link #ffmConfigBuilder}</li>
+ *     <li>{@link #ffmConfig}</li>
  * </ul>
  *
- * <p>When stored in {@code static final} fields, performance of the generated bindings is equivalent to direct FFM calls. The JVM can inline through
- * everything, for the following reasons:</p>
+ * <p>Bootstrapping methods:</p>
  * <ul>
- *     <li>The binding instance is constant.</li>
- *     <li>There is a single implementation of the binding interface.</li>
- *     <li>The {@link MethodHandle} instances created via Condy are also treated as constants by the JVM.</li>
- * </ul>
- *
- * <p>The generator DSL supports the specification of 3 virtual parameters, which must be present in a strict order before other parameters:</p>
- * <ul>
- *     <li>
- *         A {@link MemorySegment} parameter in methods annotated with {@link FFMFunctionAddress}.
- *
- *         <p>It must be specified before any other virtual or normal parameter.</p>
- *     </li>
- *     <li>
- *         A {@link SegmentAllocator} or {@link StackAllocator} parameter. This parameter will be used to allocate storage for struct values passed or returned
- *         by-value and also for temporary storage needed internally by the method call (e.g. for {@link FFMReturn} buffers).
- *
- *         <p>If the parameter is of type {@link StackAllocator}, a stack frame will be pushed & popped inside the method call when temporary storage is
- *         needed.</p>
- *
- *         <p>It must be specified after the {@link FFMFunctionAddress} parameter, if one exists, and before any other virtual or normal parameter.</p>
- *     </li>
- *     <li>
- *         A {@link MemorySegment} parameter annotated with {@link FFMCaptureCallState}.
- *
- *         <p>It must be specified after other virtual parameters and before any normal parameters.</p>
- *     </li>
+ *     <li>{@link #ffmGenerate}</li>
+ *     <li>{@link #ffmUpcall}</li>
+ *     <li>{@link #ffmStruct}</li>
+ *     <li>{@link #ffmUnion}</li>
  * </ul>
  */
 public final class FFM {
@@ -174,7 +130,7 @@ public final class FFM {
             .newInstance();
     }
 
-    // The Condy boostrap method for downcalls, called the first time the LDC bytecode is executed.
+    /** The Condy boostrap method for downcalls, called the first time the LDC bytecode is executed. [INTERNAL API] */
     @SuppressWarnings("unused")
     public static MethodHandle bootstrapDowncall(MethodHandles.Lookup lookup, String name, Class<?> bootstrapClass, int methodIndex) throws IllegalAccessException {
         var config = classDataAt(lookup, DEFAULT_NAME, FFMConfig.class, 0);
@@ -249,71 +205,234 @@ public final class FFM {
 
     // PUBLIC API (DSL)
 
-    public static final ValueLayout.OfByte  int8_t  = typedef("int8_t", ValueLayout.JAVA_BYTE);
+    /** A layout that can be used to map the C {@code int8_t} type. */
+    public static final ValueLayout.OfByte int8_t = typedef("int8_t", ValueLayout.JAVA_BYTE);
+
+    /** A layout that can be used to map the C {@code int16_t} type. */
     public static final ValueLayout.OfShort int16_t = typedef("int16_t", ValueLayout.JAVA_SHORT);
-    public static final ValueLayout.OfInt   int32_t = typedef("int32_t", ValueLayout.JAVA_INT);
-    public static final ValueLayout.OfLong  int64_t = typedef("int64_t", ValueLayout.JAVA_LONG);
 
-    public static final ValueLayout.OfByte  uint8_t  = typedef("uint8_t", ValueLayout.JAVA_BYTE);
+    /** A layout that can be used to map the C {@code int32_t} type. */
+    public static final ValueLayout.OfInt int32_t = typedef("int32_t", ValueLayout.JAVA_INT);
+
+    /** A layout that can be used to map the C {@code int64_t} type. */
+    public static final ValueLayout.OfLong int64_t = typedef("int64_t", ValueLayout.JAVA_LONG);
+
+    /** A layout that can be used to map the C {@code uint8_t} type. */
+    public static final ValueLayout.OfByte uint8_t = typedef("uint8_t", ValueLayout.JAVA_BYTE);
+
+    /** A layout that can be used to map the C {@code uint16_t} type. */
     public static final ValueLayout.OfShort uint16_t = typedef("uint16_t", ValueLayout.JAVA_SHORT);
-    public static final ValueLayout.OfInt   uint32_t = typedef("uint32_t", ValueLayout.JAVA_INT);
-    public static final ValueLayout.OfLong  uint64_t = typedef("uint64_t", ValueLayout.JAVA_LONG);
 
-    public static final AddressLayout size_t    = typedef("size_t", ValueLayout.ADDRESS);
+    /** A layout that can be used to map the C {@code uint32_t} type. */
+    public static final ValueLayout.OfInt uint32_t = typedef("uint32_t", ValueLayout.JAVA_INT);
+
+    /** A layout that can be used to map the C {@code uint64_t} type. */
+    public static final ValueLayout.OfLong uint64_t = typedef("uint64_t", ValueLayout.JAVA_LONG);
+
+    /** A layout that can be used to map the C {@code size_t} type. */
+    public static final AddressLayout size_t = typedef("size_t", ValueLayout.ADDRESS);
+
+    /** A layout that can be used to map the C {@code ssize_t} type. */
     public static final AddressLayout ptrdiff_t = typedef("ptrdiff_t", ValueLayout.ADDRESS);
-    public static final AddressLayout intptr_t  = typedef("iintptr_t", ValueLayout.ADDRESS);
+
+    /** A layout that can be used to map the C {@code intptr_t} type. */
+    public static final AddressLayout intptr_t = typedef("intptr_t", ValueLayout.ADDRESS);
+
+    /** A layout that can be used to map the C {@code uintptr_t} type. */
     public static final AddressLayout uintptr_t = typedef("uintptr_t", ValueLayout.ADDRESS);
 
-    public static final ValueLayout.OfByte  cchar     = typedef("char", int8_t);
-    public static final ValueLayout.OfShort cshort    = typedef("short", int16_t);
-    public static final ValueLayout.OfInt   cint      = typedef("int", int32_t);
-    public static final ValueLayout         clong     = typedef("long", ValueLayout.ADDRESS.byteSize() == 4 || Platform.get() == Platform.WINDOWS ? int32_t : int64_t);
-    public static final ValueLayout.OfLong  long_long = typedef("long long", ValueLayout.JAVA_LONG);
+    /** A layout that can be used to map the C {@code char} type. */
+    public static final ValueLayout.OfByte cchar = typedef("char", int8_t);
 
-    public static final ValueLayout.OfByte  unsigned_char      = typedef("unsigned char", uint8_t);
-    public static final ValueLayout.OfShort unsigned_short     = typedef("unsigned short", uint16_t);
-    public static final ValueLayout.OfInt   unsigned_int       = typedef("unsigned int", uint32_t);
-    public static final ValueLayout         unsigned_clong     = typedef("unsigned long", clong.byteSize() == 4 ? uint32_t : uint64_t);
-    public static final ValueLayout.OfLong  unsigned_long_long = typedef("unsigned long long", long_long);
+    /** A layout that can be used to map the C {@code short} type. */
+    public static final ValueLayout.OfShort cshort = typedef("short", int16_t);
 
-    public static final ValueLayout.OfFloat  float32 = typedef("float32", ValueLayout.JAVA_FLOAT);
+    /** A layout that can be used to map the C {@code int} type. */
+    public static final ValueLayout.OfInt cint = typedef("int", int32_t);
+
+    /** A layout that can be used to map the C {@code long} type. */
+    public static final ValueLayout clong = typedef("long", ValueLayout.ADDRESS.byteSize() == 4 || Platform.get() == Platform.WINDOWS ? int32_t : int64_t);
+
+    /** A layout that can be used to map the C {@code long long} type. */
+    public static final ValueLayout.OfLong long_long = typedef("long long", ValueLayout.JAVA_LONG);
+
+    /** A layout that can be used to map the C {@code unsigned char} type. */
+    public static final ValueLayout.OfByte unsigned_char = typedef("unsigned char", uint8_t);
+
+    /** A layout that can be used to map the C {@code unsigned short} type. */
+    public static final ValueLayout.OfShort unsigned_short = typedef("unsigned short", uint16_t);
+
+    /** A layout that can be used to map the C {@code unsigned int} type. */
+    public static final ValueLayout.OfInt unsigned_int = typedef("unsigned int", uint32_t);
+
+    /** A layout that can be used to map the C {@code unsigned long} type. */
+    public static final ValueLayout unsigned_clong = typedef("unsigned long", clong.byteSize() == 4 ? uint32_t : uint64_t);
+
+    /** A layout that can be used to map the C {@code unsigned long long} type. */
+    public static final ValueLayout.OfLong unsigned_long_long = typedef("unsigned long long", long_long);
+
+    /** A layout that can be used to map the C {@code float} type. */
+    public static final ValueLayout.OfFloat float32 = typedef("float32", ValueLayout.JAVA_FLOAT);
+
+    /** A layout that can be used to map the C {@code double} type. */
     public static final ValueLayout.OfDouble float64 = typedef("float64", ValueLayout.JAVA_DOUBLE);
 
-    // TODO: document
+    /**
+     * Creates an alias of the specified layout with a new name.
+     *
+     * @param name   the new name
+     * @param layout the layout to alias
+     *
+     * @return the new layout
+     */
     public static ValueLayout.OfByte typedef(String name, ValueLayout.OfByte layout) { return layout.withName(name); }
-    public static ValueLayout.OfShort typedef(String name, ValueLayout.OfShort layout)   { return layout.withName(name); }
-    public static ValueLayout.OfInt typedef(String name, ValueLayout.OfInt layout)       { return layout.withName(name); }
-    public static ValueLayout.OfLong typedef(String name, ValueLayout.OfLong layout)     { return layout.withName(name); }
-    public static ValueLayout.OfFloat typedef(String name, ValueLayout.OfFloat layout)   { return layout.withName(name); }
+
+    /**
+     * Creates an alias of the specified layout with a new name.
+     *
+     * @param name   the new name
+     * @param layout the layout to alias
+     *
+     * @return the new layout
+     */
+    public static ValueLayout.OfShort typedef(String name, ValueLayout.OfShort layout) { return layout.withName(name); }
+
+    /**
+     * Creates an alias of the specified layout with a new name.
+     *
+     * @param name   the new name
+     * @param layout the layout to alias
+     *
+     * @return the new layout
+     */
+    public static ValueLayout.OfInt typedef(String name, ValueLayout.OfInt layout) { return layout.withName(name); }
+
+    /**
+     * Creates an alias of the specified layout with a new name.
+     *
+     * @param name   the new name
+     * @param layout the layout to alias
+     *
+     * @return the new layout
+     */
+    public static ValueLayout.OfLong typedef(String name, ValueLayout.OfLong layout) { return layout.withName(name); }
+
+    /**
+     * Creates an alias of the specified layout with a new name.
+     *
+     * @param name   the new name
+     * @param layout the layout to alias
+     *
+     * @return the new layout
+     */
+    public static ValueLayout.OfFloat typedef(String name, ValueLayout.OfFloat layout) { return layout.withName(name); }
+
+    /**
+     * Creates an alias of the specified layout with a new name.
+     *
+     * @param name   the new name
+     * @param layout the layout to alias
+     *
+     * @return the new layout
+     */
     public static ValueLayout.OfDouble typedef(String name, ValueLayout.OfDouble layout) { return layout.withName(name); }
-    public static ValueLayout typedef(String name, ValueLayout layout)                   { return layout.withName(name); }
 
-    // TODO: document
+    /**
+     * Creates an alias of the specified layout with a new name.
+     *
+     * @param name   the new name
+     * @param layout the layout to alias
+     *
+     * @return the new layout
+     */
+    public static ValueLayout typedef(String name, ValueLayout layout) { return layout.withName(name); }
+
+    /**
+     * Creates an alias of the specified layout with a new name.
+     *
+     * @param name   the new name
+     * @param layout the layout to alias
+     *
+     * @return the new layout
+     */
     public static AddressLayout typedef(String name, AddressLayout layout) { return layout.withName(name); }
-    public static SequenceLayout typedef(String name, SequenceLayout layout) { return layout.withName(name); }
-    public static StructLayout typedef(String name, StructLayout layout)     { return layout.withName(name); }
-    public static UnionLayout typedef(String name, UnionLayout layout)       { return layout.withName(name); }
 
-    // TODO: document
+    /**
+     * Creates an alias of the specified layout with a new name.
+     *
+     * @param name   the new name
+     * @param layout the layout to alias
+     *
+     * @return the new layout
+     */
+    public static SequenceLayout typedef(String name, SequenceLayout layout) { return layout.withName(name); }
+
+    /**
+     * Creates an alias of the specified layout with a new name.
+     *
+     * @param name   the new name
+     * @param layout the layout to alias
+     *
+     * @return the new layout
+     */
+    public static StructLayout typedef(String name, StructLayout layout) { return layout.withName(name); }
+
+    /**
+     * Creates an alias of the specified layout with a new name.
+     *
+     * @param name   the new name
+     * @param layout the layout to alias
+     *
+     * @return the new layout
+     */
+    public static UnionLayout typedef(String name, UnionLayout layout) { return layout.withName(name); }
+
+    /**
+     * Creates a {@link SequenceLayout} with the specified named layout and element count.
+     *
+     * @param layout       the element layout, which must be named
+     * @param elementCount the number of elements
+     *
+     * @return the sequence layout
+     */
     public static SequenceLayout array(MemoryLayout layout, long elementCount) {
         return MemoryLayout
             .sequenceLayout(elementCount, layout)
             .withName(layout.name().orElseThrow() + "[" + elementCount + "]");
     }
 
-    // TODO: document
+    /**
+     * Creates an opaque pointer layout with the specified name.
+     *
+     * @param name the opaque pointer name
+     *
+     * @return the opaque pointer layout
+     */
     public static AddressLayout opaque(String name) {
         return ValueLayout.ADDRESS.withName(name);
     }
 
     // TODO: refactor, this would cause conflicts with a member named "p"
-    // TODO: document
+
+    /**
+     * Creates a pointer layout that targets the specified binder's layout.
+     *
+     * @param binder the binder that provides the target layout
+     *
+     * @return the pointer layout
+     */
     public static AddressLayout p(GroupBinder<?, ?> binder) {
         var layout = binder.layout();
         return p(layout);
     }
 
-    // TODO: document
+    /**
+     * Creates a pointer layout that targets the specified layout.
+     *
+     * @param layout the target layout
+     *
+     * @return the pointer layout
+     */
     public static AddressLayout p(MemoryLayout layout) {
         var name = layout.name().orElseThrow();
         return ValueLayout.ADDRESS
@@ -321,17 +440,34 @@ public final class FFM {
             .withName(name + (name.endsWith("*") ? "*" : " *"));
     }
 
-    // TODO: document
+    /**
+     * Creates a {@link StructBinder} builder for the specified struct interface, with the default state.
+     *
+     * @param structInterface the struct interface
+     *
+     * @return the struct binder builder
+     */
     public static <T> StructBinderBuilder<T> ffmStruct(Class<T> structInterface) {
         return new StructBinderBuilder<>(structInterface);
     }
 
-    // TODO: document
+    /**
+     * Creates a {@link UnionBinder} builder for the specified union interface, with the default state.
+     *
+     * @param unionInterface the union interface
+     *
+     * @return the union binder builder
+     */
     public static <T> UnionBinderBuilder<T> ffmUnion(Class<T> unionInterface) {
         return new UnionBinderBuilder<>(unionInterface);
     }
 
-    // TODO: document
+    /**
+     * Base class for struct/union binder builders.
+     *
+     * @see StructBinderBuilder
+     * @see UnionBinderBuilder
+     */
     public abstract static sealed class GroupBinderBuilder<
         T,
         L extends GroupLayout,
@@ -384,7 +520,16 @@ public final class FFM {
         abstract SELF self();
         abstract BCGroup.Kind kind();
 
-        // TODO: document
+        protected static long align(long offset, long alignment) {
+            return ((offset - 1L) | (alignment - 1L)) + 1L;
+        }
+
+        /**
+         * Generates a class that implements the {@link GroupBinder} interface for the group type using the current builder state, then returns a new instance
+         * of that class.
+         *
+         * @return the {@code GroupBinder} implementation
+         */
         public M build() {
             var byteAlignment = max(this.alignof, this.alignas);
 
@@ -399,7 +544,7 @@ public final class FFM {
 
             if (checkPadding) {
                 if (!isAligned(m.layout().byteSize(), m.layout().byteAlignment())) {
-                    throw new IllegalStateException("Struct size is not a multiple of its alignment");
+                    throw new IllegalStateException("Group size is not a multiple of its alignment");
                 }
             }
 
@@ -409,40 +554,85 @@ public final class FFM {
             return (offset & (alignment - 1L)) == 0L;
         }
 
-        // TODO: document
+        /**
+         * Enables automatic padding calculation, based on the natural alignment of the group members.
+         *
+         * <p>This option is enabled by default in new builder instances. It may be disabled for advanced use cases that require fine control of the group
+         * alignment.</p>
+         *
+         * @param enabled whether to enable automatic padding
+         *
+         * @return this builder instance
+         */
         public SELF automaticPadding(boolean enabled) {
             this.automaticPadding = enabled;
             return self();
         }
 
-        // TODO: document
+        /**
+         * Enables validation of the group size with respect to its alignment.
+         *
+         * <p>This option is enabled by default in new builder instances. It may be disabled for advanced use cases that require fine control of the group
+         * size and alignment.</p>
+         *
+         * @param enabled whether to enable size validation
+         *
+         * @return this builder instance
+         */
         public SELF checkPadding(boolean enabled) {
             this.checkPadding = enabled;
             return self();
         }
 
-        // TODO: document (overrides natural member alignment)
+        /**
+         * Configures the group pack alignment.
+         *
+         * <p>By default there's no packing alignment. This option may be used to configure a pack alignment lesser than than the natural member alignment.</p>
+         *
+         * @param alignment the new pack alignment
+         *
+         * @return this builder instance
+         */
         public SELF pack(long alignment) {
             this.packAlignment = alignment;
             return self();
         }
 
-        // TODO: document (overrides natural group alignment)
+        /**
+         * Configures the group alignment.
+         *
+         * <p>By default the group alignment is the maximum natural alignment of its members. This option may be used to configure an alignment greater than
+         * the natural alignment.</p>
+         *
+         * @param alignment the new group alignment. Ignored is less than the natural alignment.
+         *
+         * @return this builder instance
+         */
         public SELF alignas(long alignment) {
             this.alignas = alignment;
             return self();
         }
 
-        // TODO: document
+        /**
+         * Adds a nested group member to this group.
+         *
+         * @param name   the member name
+         * @param binder the member's binder
+         *
+         * @return this builder instance
+         */
         public SELF m(String name, GroupBinder<?, ?> binder) {
             return m(name, binder.layout());
         }
 
-        protected static long align(long offset, long alignment) {
-            return ((offset - 1L) | (alignment - 1L)) + 1L;
-        }
-
-        // TODO: document
+        /**
+         * Adds a new member to this group.
+         *
+         * @param name   the member name
+         * @param layout the member's memory layout
+         *
+         * @return this builder instance
+         */
         public SELF m(String name, MemoryLayout layout) {
             var previous = members.put(name, layout.withName(name));
             if (previous != null) {
@@ -451,32 +641,66 @@ public final class FFM {
             return self();
         }
 
-        // TODO: document
+        /**
+         * Adds padding before the next member of this group.
+         *
+         * @param padding the padding size in bytes
+         *
+         * @return this builder instance
+         */
         public SELF padding(long padding) {
             members.put("__padding__" + paddingIndex++, paddingLayout(padding));
             sizeof += padding;
             return self();
         }
 
-        // TODO: document
+        /**
+         * Sets a custom {@link Object#equals} implementation for the group.
+         *
+         * <p>By default, an {@code equals} method will be generated with the same semantics as {@link Record#equals}, where getters take the place of
+         * components. This means that the default implementation will not consider padding members or members with no corresponding getters.</p>
+         *
+         * @param equals the {@code equals} implementation
+         *
+         * @return this builder instance
+         */
         public SELF withEquals(BiPredicate<T, Object> equals) {
             this.equals = equals;
             return self();
         }
 
-        // TODO: document
+        /**
+         * Sets a custom {@link Object#hashCode} implementation for the group.
+         *
+         * <p>By default, a {@code hashCode} method will be generated with the same semantics as {@link Record#hashCode}, where getters take the place of
+         * components. This means that the default implementation will not consider padding members or members with no corresponding getters.</p>
+         *
+         * @param hashCode the {@code hashCode} implementation
+         *
+         * @return this builder instance
+         */
         public SELF withHashCode(ToIntFunction<T> hashCode) {
             this.hashCode = hashCode;
             return self();
         }
 
-        // TODO: document
+        /**
+         * Sets a custom {@link Object#toString} implementation for the group.
+         *
+         * <p>By default, a {@code toString} method will be generated with the same semantics as {@link Record#toString}, where getters take the place of
+         * components. This means that the default implementation will not consider padding members or members with no corresponding getters.</p>
+         *
+         * @param toString the {@code toString} implementation
+         *
+         * @return this builder instance
+         */
         public SELF withToString(Function<T, String> toString) {
             this.toString = toString;
             return self();
         }
     }
-    // TODO: document
+
+    /** A builder for {@link StructBinder} instances. */
     public static final class StructBinderBuilder<T> extends GroupBinderBuilder<T, StructLayout, StructBinder<T>, StructBinderBuilder<T>> {
         StructBinderBuilder(Class<T> structInterface) { super(structInterface); }
         @Override StructBinderBuilder<T> self()       { return this; }
@@ -500,8 +724,20 @@ public final class FFM {
 
             return super.m(name, layout);
         }
+
+        /**
+         * Generates a class that implements the {@link StructBinder} interface for the struct type using the current builder state, then returns a new instance
+         * of that class.
+         *
+         * @return the {@code StructBinder} implementation
+         */
+        @Override
+        public StructBinder<T> build() {
+            return super.build(); // just to override the javadoc
+        }
     }
-    // TODO: document
+
+    /** A builder for {@link UnionBinder} instances. */
     public static final class UnionBinderBuilder<T> extends GroupBinderBuilder<T, UnionLayout, UnionBinder<T>, UnionBinderBuilder<T>> {
         UnionBinderBuilder(Class<T> UnionInterface) { super(UnionInterface); }
         @Override UnionBinderBuilder<T> self()      { return this; }
@@ -516,26 +752,61 @@ public final class FFM {
 
             return super.m(name, layout);
         }
+
+        /**
+         * Generates a class that implements the {@link UnionBinder} interface for the union type using the current builder state, then returns a new instance
+         * of that class.
+         *
+         * @return the {@code UnionBinder} implementation
+         */
+        @Override
+        public UnionBinder<T> build() {
+            return super.build(); // just to override the javadoc
+        }
     }
 
-    // TODO: document
+    /**
+     * Generates a class that implements the {@link UpcallBinder} interface for the specified upcall interface, then returns a new instance of that class.
+     *
+     * @param upcallInterface the upcall interface
+     *
+     * @return the {@code UpcallBinder} implementation
+     */
     public static <T> UpcallBinder<T> ffmUpcall(Class<T> upcallInterface) {
-        return upcall(upcallInterface, null);
+        return ffmUpcall(upcallInterface, null);
     }
 
-    // LWJGL 3 interop
-    // TODO: document
+    /**
+     * Generates a class that implements the {@link UpcallBinder} interface for the specified upcall interface and associated libffi call interface, then
+     * returns a new instance of that class.
+     *
+     * <p>This method is used for integration with LWJGL 3 callbacks. It should not be used for custom bindings.</p>
+     *
+     * @param upcallInterface the upcall interface
+     * @param cif             the libffi call interface
+     *
+     * @return the {@code UpcallBinder} implementation
+     */
     public static <T> UpcallBinder<T> ffmUpcall(Class<T> upcallInterface, @Nullable FFICIF cif) {
         var config = getConfig(upcallInterface);
         if (config.debugGenerator) {
             apiLog("BOOTSTRAPPING UPCALL " + upcallInterface);
         }
 
+        // LWJGL 3 interop
         return new BCCallUp(config, upcallInterface, cif)
             .bootstrap();
     }
 
-    // TODO: document
+    /**
+     * Generates a class that implements the specified binding interface, using the {@link FFMConfig} registered for this interface.
+     *
+     * @param bindingInterface the binding interface
+     *
+     * @return the generated binding implementation
+     *
+     * @throws IllegalStateException if no {@code FFMConfig} is registered for the specified interface
+     */
     public static <T> T ffmGenerate(Class<T> bindingInterface) {
         try {
             return generate(bindingInterface, getConfig(bindingInterface));
@@ -546,7 +817,14 @@ public final class FFM {
         }
     }
 
-    // TODO: document
+    /**
+     * Generates a class that implements the specified binding interface, using the specified {@link FFMConfig}.
+     *
+     * @param bindingInterface the binding interface
+     * @param config           the binding configuration
+     *
+     * @return the generated binding implementation
+     */
     public static <T> T ffmGenerate(Class<T> bindingInterface, FFMConfig config) {
         // automatically register binding config
         var previous = BINDING_CONFIGS.put(bindingInterface, config);
@@ -727,12 +1005,22 @@ public final class FFM {
         }
     }
 
-    /** Creates an empty binding configuration builder. */
+    /** Creates a builder for {@link FFMConfig} instances, with the default state. */
     public static FFMConfigBuilder ffmConfigBuilder(MethodHandles.Lookup lookup) {
         return new FFMConfigBuilder(lookup);
     }
 
-    // TODO: document
+    /**
+     * Registers a binding configuration for the specified package.
+     *
+     * <p>The specified configuration will be used when generating any interface that belongs to this package, for which a more specific configuration does not
+     * exist.</p>
+     *
+     * @param _package the package
+     * @param config   the binding configuration, or null to unregister the specified package
+     *
+     * @see #ffmConfig(Class, FFMConfig)
+     */
     public static void ffmConfig(Package _package, @Nullable FFMConfig config) {
         if (config == null) {
             BINDING_CONFIGS.remove(_package);
@@ -741,7 +1029,17 @@ public final class FFM {
         }
     }
 
-    // TODO: document
+    /**
+     * Registers a binding configuration for the specified class.
+     *
+     * <p>The specified configuration will be used when generating any interface that is this class or is enclosed by it, for which a more specific
+     * configuration does not exist.</p>
+     *
+     * @param _class the class
+     * @param config the binding configuration, or null to unregister the specified class
+     *
+     * @see #ffmConfig(Package, FFMConfig)
+     */
     public static void ffmConfig(Class<?> _class, @Nullable FFMConfig config) {
         if (config == null) {
             BINDING_CONFIGS.remove(_class);

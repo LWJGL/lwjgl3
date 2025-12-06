@@ -136,8 +136,7 @@ public final class FFMDemo {
                 green.setAtIndex(ValueLayout.JAVA_SHORT, i, (short)(ref.getAtIndex(ValueLayout.JAVA_SHORT, i) * 11 / 10));
             }
 
-            var segment = GLFWgammaramp.allocate(stack);
-            glfw.SetGammaRamp(monitor, GLFWgammaramp.get(segment)
+            glfw.SetGammaRamp(monitor, GLFWgammaramp.allocate(stack)
                 .red(gammaRamp.red())
                 .green(green)
                 .blue(gammaRamp.blue())

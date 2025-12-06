@@ -5,8 +5,21 @@
 package org.lwjgl.system.ffm;
 
 import java.lang.foreign.*;
+import java.util.*;
 import java.util.function.*;
 
+import static org.lwjgl.system.Checks.*;
+
+/**
+ * Can be used to create a {@link MemorySegment} view as an array of unions.
+ *
+ * @param binder  the binder used to access the array elements
+ * @param segment the memory segment to wrap
+ *
+ * @see UnionBinder#array(MemorySegment)
+ * @see UnionBinder#array(MemorySegment, long)
+ * @see UnionBinder#array(MemorySegment, long, long)
+ */
 public record UnionArray<T>(
     UnionBinder<T> binder,
     MemorySegment segment
@@ -29,25 +42,25 @@ public record UnionArray<T>(
     }
 
     @Override
-    public <GA extends GroupArray<UnionLayout, T>> GA copy(long thisIndex, GA other, long otherIndex, long length) {
-        /*if (CHECKS) {
+    public <GA extends GroupArray<UnionLayout, T>> UnionArray<T> copy(long thisIndex, GA other, long otherIndex, long length) {
+        if (DEBUG) {
             Objects.checkFromIndexSize(thisIndex, length, this.length());
             Objects.checkFromIndexSize(otherIndex, length, other.length());
-        }*/
+        }
         for (var i = 0L; i < length; i++) {
             binder.copy(
                 binder.getAtIndex(this.segment, thisIndex + i),
                 binder.getAtIndex(other.segment(), otherIndex + i)
             );
         }
-        return other;
+        return this;
     }
 
     @Override
     public void clear(long fromIndex, long toIndex) {
-        /*if (CHECKS) {
+        if (DEBUG) {
             Objects.checkFromToIndex(fromIndex, toIndex, this.length());
-        }*/
+        }
         for (var i = fromIndex; i < toIndex; i++) {
             binder.clear(
                 binder.getAtIndex(segment, i)
@@ -57,9 +70,9 @@ public record UnionArray<T>(
 
     @Override
     public UnionArray<T> apply(long index, Consumer<T> consumer) {
-        /*if (CHECKS) {
+        if (DEBUG) {
             Objects.checkIndex(index, length());
-        }*/
+        }
         binder.applyAtIndex(segment, index, consumer);
         return this;
     }

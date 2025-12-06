@@ -60,7 +60,7 @@ public class StructTest {
         assertTrue(layout.memberLayouts().isEmpty());
 
         try (var stack = stackPush()) {
-            var empty = Empty.$.allocate(stack);
+            var empty = Empty.$.allocateSegment(stack);
             assertEquals(empty.byteSize(), 0);
         }
     }
@@ -158,7 +158,7 @@ public class StructTest {
             stack.push();
 
             {
-                var simpleMS = Simple.$.allocate(stack); // note zeroing zeroing allocation
+                var simpleMS = Simple.$.allocateSegment(stack); // note zeroing zeroing allocation
                 assertEquals(simpleMS.byteSize(), 4);
 
                 var simple = Simple.$.get(simpleMS);
@@ -170,7 +170,7 @@ public class StructTest {
             stack.pop();
 
             {
-                var simpleMS = Simple.$.malloc(stack); // note non-zeroing allocation
+                var simpleMS = Simple.$.mallocSegment(stack); // note non-zeroing allocation
                 assertEquals(simpleMS.byteSize(), 4);
 
                 var simple = Simple.$.get(simpleMS);
@@ -557,7 +557,7 @@ public class StructTest {
         }
 
         try (var arena = Arena.ofConfined()) {
-            var segment = S.$.allocate(arena);
+            var segment = S.$.allocateSegment(arena);
             var s       = S.$.get(segment);
 
             assertFalse(s.z());
@@ -640,7 +640,7 @@ public class StructTest {
                 long b();
             }
 
-            var segment = S.$.allocate(arena, 10);
+            var segment = S.$.allocateSegment(arena, 10);
 
             Objects.requireNonNull(S.$.get(segment));
             Objects.requireNonNull(S.$.get(segment, 7 * S.$.sizeof()));
@@ -668,7 +668,7 @@ public class StructTest {
 
 
         try (var arena = Arena.ofConfined()) {
-            var segment = S.$.allocate(arena, 10);
+            var segment = S.$.allocateSegment(arena, 10);
             segment.fill((byte)0x01);
 
             var i = 0;
@@ -745,7 +745,7 @@ public class StructTest {
                 Outer d(double d);
             }
 
-            var segment = Outer.$.allocate(arena);
+            var segment = Outer.$.allocateSegment(arena);
 
             var outer       = Outer.$.get(segment);
             var inner       = outer.inner();
@@ -776,8 +776,7 @@ public class StructTest {
             assertEquals(segment.get(int64_t, innerOffset + Inner.$.layout().byteOffset(groupElement("b"))), inner.b());
             assertEquals(segment.get(float64, Outer.$.layout().byteOffset(groupElement("d"))), outer.d());
 
-            var innerBuffer = Inner.$.allocate(arena);
-            var innerOther  = Inner.$.get(innerBuffer);
+            var innerOther = Inner.$.allocate(arena);
 
             innerOther.a(0xDEADBEEF);
             innerOther.b(0xFEEDFACECAFEBABEL);
@@ -815,7 +814,7 @@ public class StructTest {
                 Outer d(double d);
             }
 
-            var segment = Outer.$.allocate(arena);
+            var segment = Outer.$.allocateSegment(arena);
 
             var outer = Outer.$.get(segment);
 
@@ -824,7 +823,7 @@ public class StructTest {
             assertNull(outer.inner());
             assertEquals(outer.d(), 0.0f);
 
-            var innerBuffer = Inner.$.allocate(arena);
+            var innerBuffer = Inner.$.allocateSegment(arena);
             var inner       = Inner.$.get(innerBuffer);
 
             assertEquals(inner.a(), 0);
@@ -957,7 +956,7 @@ public class StructTest {
         }
 
         try (var arena = Arena.ofConfined()) {
-            var segment = U.$.allocate(arena);
+            var segment = U.$.allocateSegment(arena);
 
             var u = U.$.get(segment);
 
@@ -1090,9 +1089,7 @@ public class StructTest {
         Objects.requireNonNull(Event.$);
 
         try (var arena = Arena.ofConfined()) {
-            var segment = Event.$.allocate(arena);
-
-            var event = Event.$.get(segment);
+            var event = Event.$.allocate(arena);
 
             var t = System.currentTimeMillis();
 
@@ -1125,8 +1122,7 @@ public class StructTest {
                 S8 size(byte size);
             }
 
-            var segment = S8.$.allocate(arena);
-            var s       = S8.$.get(segment);
+            var s = S8.$.allocate(arena);
 
             assertEqualsSegment(s.buffer(), MemorySegment.NULL);
             //assertThrows(NullPointerException.class, s::buffer);
@@ -1156,8 +1152,7 @@ public class StructTest {
                 S16 size(short size);
             }
 
-            var segment = S16.$.allocate(arena);
-            var s       = S16.$.get(segment);
+            var s = S16.$.allocate(arena);
 
             assertEqualsSegment(s.buffer(), MemorySegment.NULL);
             //assertThrows(NullPointerException.class, s::buffer);
@@ -1187,8 +1182,7 @@ public class StructTest {
                 S32 size(int size);
             }
 
-            var segment = S32.$.allocate(arena);
-            var s       = S32.$.get(segment);
+            var s = S32.$.allocate(arena);
 
             assertEqualsSegment(s.buffer(), MemorySegment.NULL);
             //assertThrows(NullPointerException.class, s::buffer);
@@ -1218,8 +1212,7 @@ public class StructTest {
                 S64 size(long size);
             }
 
-            var segment = S64.$.allocate(arena);
-            var s       = S64.$.get(segment);
+            var s = S64.$.allocate(arena);
 
             assertEqualsSegment(s.buffer(), MemorySegment.NULL);
             //assertThrows(NullPointerException.class, s::buffer);
@@ -1337,7 +1330,7 @@ public class StructTest {
                 S y(int y);
             }
 
-            var segment = S.$.allocate(arena, 2);
+            var segment = S.$.allocateSegment(arena, 2);
 
             var a = S.$.getAtIndex(segment, 0);
             var b = S.$.getAtIndex(segment, 1);
@@ -1400,7 +1393,7 @@ public class StructTest {
                 S y(int y);
             }
 
-            var segment = S.$.allocate(arena, 2);
+            var segment = S.$.allocateSegment(arena, 2);
 
             var a = S.$.getAtIndex(segment, 0);
             var b = S.$.getAtIndex(segment, 1);
@@ -1460,7 +1453,7 @@ public class StructTest {
 
             var paddingOffset = layout.byteOffset(groupElement(1));
 
-            var segment = S.$.allocate(arena, 2);
+            var segment = S.$.allocateSegment(arena, 2);
 
             // pollute padding bytes with random data
 
@@ -1495,7 +1488,7 @@ public class StructTest {
 
             var paddingOffset = layout.byteOffset(groupElement(1));
 
-            var segment = S.$.allocate(arena, 2);
+            var segment = S.$.allocateSegment(arena, 2);
 
             // pollute padding bytes with random data
 
@@ -1526,7 +1519,7 @@ public class StructTest {
                 S y(int y);
             }
 
-            var segment = S.$.allocate(arena, 2);
+            var segment = S.$.allocateSegment(arena, 2);
 
             var a = S.$.getAtIndex(segment, 0);
             var b = S.$.getAtIndex(segment, 1);
@@ -1586,7 +1579,7 @@ public class StructTest {
                 S y(int y);
             }
 
-            var segment = S.$.allocate(arena, 2);
+            var segment = S.$.allocateSegment(arena, 2);
 
             var a = S.$.getAtIndex(segment, 0);
             var b = S.$.getAtIndex(segment, 1);
@@ -1649,7 +1642,7 @@ public class StructTest {
                 S pointer(MemorySegment pointer);
             }
 
-            var segment = S.$.allocate(arena);
+            var segment = S.$.allocateSegment(arena);
 
             var s = S.$.get(segment);
 
@@ -1689,9 +1682,7 @@ public class StructTest {
                 S pointer(MemorySegment pointer);
             }
 
-            var segment = S.$.allocate(arena);
-
-            var s = S.$.get(segment);
+            var s = S.$.allocate(arena);
 
             assertEquals(s.x(), 0);
             assertEquals(s.y(), 0);
@@ -1765,8 +1756,7 @@ public class StructTest {
             }
             Objects.requireNonNull(S.$);
 
-            var segment = S.$.allocate(arena);
-            assertEquals("S[text=]", S.$.get(segment).toString());
+            assertEquals("S[text=]", S.$.allocate(arena).toString());
         }
         try (var arena = Arena.ofConfined()) {
             // test multiple getters with single FFMCanonical (2)
@@ -1780,7 +1770,7 @@ public class StructTest {
             }
             Objects.requireNonNull(S.$);
 
-            var segment = S.$.allocate(arena);
+            var segment = S.$.allocateSegment(arena);
             assertEquals("S[text=MemorySegment{ kind: native, address: 0x" + Long.toHexString(segment.address()) + ", byteSize: 256 }]", S.$.get(segment).toString());
         }
     }
@@ -1829,7 +1819,7 @@ public class StructTest {
             assertEquals(S.$.alignof(), 4L);
             assertEquals(S.$.sizeof(), 8L);
 
-            var segment = S.$.allocate(arena);
+            var segment = S.$.allocateSegment(arena);
 
             var s = S.$.get(segment);
 
@@ -1903,9 +1893,7 @@ public class StructTest {
             assertEquals(S.$.alignof(), Pointer.CLONG_SIZE);
             assertEquals(S.$.sizeof(), 2 * Pointer.CLONG_SIZE);
 
-            var segment = S.$.allocate(arena);
-
-            var s = S.$.get(segment);
+            var s = S.$.allocate(arena);
 
             assertEquals(s.x(), 0L);
             assertEquals(s.y(), 0L);
@@ -1935,9 +1923,7 @@ public class StructTest {
                 S b(String value);
             }
 
-            var segment = S.$.allocate(arena);
-
-            var s = S.$.get(segment);
+            var s = S.$.allocate(arena);
 
             assertEquals(s.a(), "");
             assertEquals(s.b(), "");
@@ -1970,9 +1956,7 @@ public class StructTest {
                 S b(String value);
             }
 
-            var segment = S.$.allocate(arena);
-
-            var s = S.$.get(segment);
+            var s = S.$.allocate(arena);
 
             assertEquals(s.a(), "");
             assertEquals(s.b(), "");
@@ -2036,9 +2020,7 @@ public class StructTest {
             assertEquals(S.$.sizeof(), uintptr_t.byteSize() * 2 + 4L + 256L + 256L + 4L);
             assertEquals(S.$.alignof(), uintptr_t.byteAlignment());
 
-            var segment = S.$.allocate(arena);
-
-            var s = S.$.get(segment);
+            var s = S.$.allocate(arena);
 
             var helloNT = arena.allocateFrom("γεια σου", StandardCharsets.UTF_8);
             var worldNT = arena.allocateFrom("κόσμε!", StandardCharsets.UTF_8);
@@ -2194,7 +2176,7 @@ public class StructTest {
                     .build();
             }
 
-            var segment = S.$.allocate(arena);
+            var segment = S.$.allocateSegment(arena);
 
             var s = S.$.get(segment);
 
@@ -2242,7 +2224,7 @@ public class StructTest {
         }
 
         try (var arena = Arena.ofConfined()) {
-            var segment = S.$.allocate(arena, 2);
+            var segment = S.$.allocateSegment(arena, 2);
 
             var s = S.$.get(segment);
             var o = S.$.getAtIndex(segment, 1L);

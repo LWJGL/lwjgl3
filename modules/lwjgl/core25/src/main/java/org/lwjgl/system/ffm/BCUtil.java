@@ -37,6 +37,8 @@ final class BCUtil {
     static final long NATIVE_THRESHOLD_FILL = powerOfPropertyOr("fill", 5);
     static final long NATIVE_THRESHOLD_COPY = powerOfPropertyOr("copy", 6);
 
+    static final Linker.Option[] EMPTY_OPTIONS = new Linker.Option[0];
+
     private BCUtil() { }
 
     static final Object EMPTY_SLOT = new Object();

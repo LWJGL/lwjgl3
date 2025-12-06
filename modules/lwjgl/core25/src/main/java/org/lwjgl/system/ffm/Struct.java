@@ -6,7 +6,7 @@ package org.lwjgl.system.ffm;
 
 import java.lang.foreign.*;
 
-// TODO: document
+/** A struct interface may extend this capability interface to expose {@link StructBinder} functionality at the instance level. */
 public non-sealed interface Struct<T extends Struct<T>> extends Group<StructLayout, T> {
 }
 
