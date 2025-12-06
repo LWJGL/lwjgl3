@@ -12,6 +12,7 @@ import java.lang.foreign.*;
 
 import static org.lwjgl.sdl.SDLInit.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.ffm.FFM.*;
 
 @State(Scope.Benchmark)
 public class FFMCallbackOverheadTest {
@@ -84,7 +85,7 @@ public class FFMCallbackOverheadTest {
     //@Benchmark
     public void t3_setup_scoped() {
         try (var arena = Arena.ofConfined()) {
-            var callback = memScopedCall(arena, () -> new SDL_MainThreadCallback() {
+            var callback = ffmScopedCall(arena, () -> new SDL_MainThreadCallback() {
                 @Override
                 public void invoke(long userdata) {
                     // intentionally empty

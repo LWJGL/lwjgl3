@@ -67,6 +67,9 @@ public final class FFM {
     // TODO: make external? i.e. the user provides the AnnotatedElement to FFMConfig mapping and is responsible for its lifecycle.
     static final HashMap<AnnotatedElement, FFMConfig> BINDING_CONFIGS = new HashMap<>();
 
+    // LWJGL 3 interop
+    static final ScopedValue<Arena> ARENA = ScopedValue.newInstance();
+
     private FFM() {
     }
 
@@ -796,6 +799,50 @@ public final class FFM {
         // LWJGL 3 interop
         return new BCCallUp(config, upcallInterface, cif)
             .bootstrap();
+    }
+
+    /**
+     * Returns the scoped arena.
+     *
+     * <p>This method is used for integration with LWJGL 3 callbacks. It should not be used for custom bindings.</p>
+     */
+    public static ScopedValue<Arena> ffmScopedArena() {
+        // LWJGL 3 interop
+        return ARENA;
+    }
+
+    /**
+     * Runs the specified runnable within the scope of the specified arena. If the bindings generator needs to allocate memory before this method returns, it
+     * will use this arena.
+     *
+     * <p>This method is used for integration with LWJGL 3 callbacks. It should not be used for custom bindings.</p>
+     *
+     * @param arena    the arena
+     * @param runnable the runnable
+     */
+    public static void ffmScopedRun(Arena arena, Runnable runnable) {
+        // LWJGL 3 interop
+        ScopedValue
+            .where(ARENA, arena)
+            .run(runnable);
+    }
+
+    /**
+     * Runs the specified operation within the scope of the specified arena. If the bindings generator needs to allocate memory before this method returns, it
+     * will use this arena.
+     *
+     * <p>This method is used for integration with LWJGL 3 callbacks. It should not be used for custom bindings.</p>
+     *
+     * @param arena the arena
+     * @param op    the operation
+     *
+     * @return the result of the operation
+     */
+    public static <R, X extends Throwable> R ffmScopedCall(Arena arena, ScopedValue.CallableOp<? extends R, X> op) throws X {
+        // LWJGL 3 interop
+        return ScopedValue
+            .where(ARENA, arena)
+            .call(op);
     }
 
     /**

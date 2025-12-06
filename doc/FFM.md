@@ -23,7 +23,7 @@ This backend is implemented using the new runtime bindings generator in the core
 * Upcalls must be allocated in an FFM `Arena`.
   - By default, this is done implicitly by LWJGL. Freeing the upcall instance will close the arena, which will release the associated resources.
   - Use `Configuration.FFM_UPCALL_ARENA` to change the implicit arena type.
-  - The new `memScoped*` methods in `MemoryUtil` can be used to specify a user managed arena for upcall allocation, which is highly recommended.
+  - The `ffmScoped*` methods can be used to specify a user managed arena for upcall allocation, which is highly recommended.
 
 ## Known issues with the bindings generator
 

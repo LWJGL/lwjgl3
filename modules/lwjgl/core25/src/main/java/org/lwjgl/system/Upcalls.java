@@ -68,9 +68,9 @@ final class Upcalls {
 
         var descriptor = binder.descriptor();
 
-        var externalArena = MemoryUtil.ARENA.isBound();
-        var arena = externalArena
-            ? MemoryUtil.ARENA.get()
+        var scopedArena = ffmScopedArena();
+        var arena = scopedArena.isBound()
+            ? scopedArena.get()
             : ARENA_TYPE.create();
 
         var handle = binder

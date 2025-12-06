@@ -425,8 +425,8 @@ public class Configuration<T> {
      * <p>If this option is not set, it defaults to {@code auto}, which should be acceptable for most existing LWJGL applications that do not instantiate
      * upcalls in excessive numbers.</p>
      *
-     * <p>For new applications, it is recommended to use the {@code memScoped*} methods in {@link MemoryUtil} when creating upcalls. Within the scope of such a
-     * call, LWJGL will use the specified arena to allocate upcalls and this option becomes irrelevant.</p>
+     * <p>For new applications, it is recommended to use the {@code ffmScoped*} methods when creating upcalls. Within the scope of such a call, LWJGL will use
+     * the specified arena to allocate upcalls and this option becomes irrelevant.</p>
      *
      * <p style="font-family: monospace">
      * Property: <b>org.lwjgl.system.ffm.upcall.arena</b><br>
