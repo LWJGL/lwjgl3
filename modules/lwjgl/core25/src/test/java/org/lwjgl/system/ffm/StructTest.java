@@ -49,7 +49,7 @@ public class StructTest {
 
     public void testEmpty() {
         interface Empty {
-            StructBinder<Empty> $ = struct(Empty.class)
+            StructBinder<Empty> $ = ffmStruct(Empty.class)
                 .build();
         }
 
@@ -67,7 +67,7 @@ public class StructTest {
 
     public void testBinderName() {
         interface StructType {
-            StructBinder<StructType> THIS_CAN_BE_ANYTHING = struct(StructType.class)
+            StructBinder<StructType> THIS_CAN_BE_ANYTHING = ffmStruct(StructType.class)
                 .build();
         }
 
@@ -78,12 +78,12 @@ public class StructTest {
 
     public void testBinderWrongClass() {
         interface AnotherStructType {
-            StructBinder<AnotherStructType> $ = struct(AnotherStructType.class)
+            StructBinder<AnotherStructType> $ = ffmStruct(AnotherStructType.class)
                 .build();
         }
 
         interface StructType {
-            StructBinder<AnotherStructType> $ = struct(AnotherStructType.class)
+            StructBinder<AnotherStructType> $ = ffmStruct(AnotherStructType.class)
                 .build();
         }
 
@@ -99,7 +99,7 @@ public class StructTest {
         assertThrows(() -> caller.test(null));
 
         interface StructParent {
-            StructBinder<StructParent> $ = struct(StructParent.class)
+            StructBinder<StructParent> $ = ffmStruct(StructParent.class)
                 .m("child", StructType.$)
                 .build();
 
@@ -111,9 +111,9 @@ public class StructTest {
 
     public void testBinderMultipleNotAllowed() {
         interface StructType {
-            StructBinder<StructType> $0 = struct(StructType.class)
+            StructBinder<StructType> $0 = ffmStruct(StructType.class)
                 .build();
-            StructBinder<StructType> $1 = struct(StructType.class)
+            StructBinder<StructType> $1 = ffmStruct(StructType.class)
                 .build();
         }
 
@@ -129,7 +129,7 @@ public class StructTest {
         assertThrows(() -> caller.test(null));
 
         interface StructParent {
-            StructBinder<StructParent> $ = struct(StructParent.class)
+            StructBinder<StructParent> $ = ffmStruct(StructParent.class)
                 .m("child", StructType.$0)
                 .build();
         }
@@ -138,7 +138,7 @@ public class StructTest {
 
     public void testSimple() {
         interface Simple {
-            StructBinder<Simple> $ = struct(Simple.class)
+            StructBinder<Simple> $ = ffmStruct(Simple.class)
                 .m("a", int32_t)
                 .build();
 
@@ -184,7 +184,7 @@ public class StructTest {
     public void testFFMName() {
         {
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("a", int32_t)
                     .build();
 
@@ -196,7 +196,7 @@ public class StructTest {
 
         {
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("a", int32_t)
                     .build();
 
@@ -208,7 +208,7 @@ public class StructTest {
 
     public void testLayoutPaddingInvalid() {
         interface StructWithPaddingInternal {
-            StructBinder<StructWithPaddingInternal> $ = struct(StructWithPaddingInternal.class)
+            StructBinder<StructWithPaddingInternal> $ = ffmStruct(StructWithPaddingInternal.class)
                 .automaticPadding(false)
                 .m("a", int32_t)
                 .m("b", int64_t)
@@ -217,7 +217,7 @@ public class StructTest {
         assertThrows(() -> Objects.requireNonNull(StructWithPaddingInternal.$));
 
         interface StructWithPaddingTail {
-            StructBinder<StructWithPaddingTail> $ = struct(StructWithPaddingTail.class)
+            StructBinder<StructWithPaddingTail> $ = ffmStruct(StructWithPaddingTail.class)
                 .automaticPadding(false)
                 .m("a", int64_t)
                 .m("b", int32_t)
@@ -226,7 +226,7 @@ public class StructTest {
         assertThrows(() -> Objects.requireNonNull(StructWithPaddingTail.$));
 
         interface StructWithPaddingTailNoCheck {
-            StructBinder<StructWithPaddingTailNoCheck> $ = struct(StructWithPaddingTailNoCheck.class)
+            StructBinder<StructWithPaddingTailNoCheck> $ = ffmStruct(StructWithPaddingTailNoCheck.class)
                 .automaticPadding(false)
                 .checkPadding(false)
                 .m("a", int64_t)
@@ -243,7 +243,7 @@ public class StructTest {
 
     public void testLayoutPaddingExplicit() {
         interface StructWithPaddingInternal {
-            StructBinder<StructWithPaddingInternal> $ = struct(StructWithPaddingInternal.class)
+            StructBinder<StructWithPaddingInternal> $ = ffmStruct(StructWithPaddingInternal.class)
                 .automaticPadding(false)
                 .m("a", int32_t)
                 .padding(4L)
@@ -253,7 +253,7 @@ public class StructTest {
         assertEquals(StructWithPaddingInternal.$.layout().toString(), "[i4(a)x4j8(b)](StructWithPaddingInternal)");
 
         interface StructWithPaddingTail {
-            StructBinder<StructWithPaddingTail> $ = struct(StructWithPaddingTail.class)
+            StructBinder<StructWithPaddingTail> $ = ffmStruct(StructWithPaddingTail.class)
                 .automaticPadding(false)
                 .m("a", int64_t)
                 .m("b", int32_t)
@@ -277,7 +277,7 @@ public class StructTest {
     public void testLayout() {
         {
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("a", int8_t)
                     .m("b", int16_t)
                     .m("c", int32_t)
@@ -302,7 +302,7 @@ public class StructTest {
 
         {
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("a", int64_t)
                     .m("b", int32_t)
                     .m("c", int16_t)
@@ -329,7 +329,7 @@ public class StructTest {
     public void testLayoutCustomAlignment() {
         {
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .alignas(8L)
                     .m("a", int32_t)
                     .m("b", int32_t)
@@ -354,7 +354,7 @@ public class StructTest {
 
         {
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .alignas(32L)
                     .m("a", int32_t)
                     .m("b", int32_t)
@@ -378,7 +378,7 @@ public class StructTest {
             assertEquals(S.$.sizeof(), 32L);
 
             interface P1 {
-                StructBinder<P1> $ = struct(P1.class)
+                StructBinder<P1> $ = ffmStruct(P1.class)
                     .m("s", S.$)
                     .m("i", int32_t)
                     .build();
@@ -397,7 +397,7 @@ public class StructTest {
             assertEquals(P1.$.sizeof(), 64L);
 
             interface P2 {
-                StructBinder<P1> $ = struct(P1.class)
+                StructBinder<P1> $ = ffmStruct(P1.class)
                     .m("i", int32_t)
                     .m("s", S.$)
                     .build();
@@ -420,7 +420,7 @@ public class StructTest {
     public void testLayoutCustomPackAligment() {
         interface PackUtil {
             static <T> StructBinder<T> struct(Class<T> structClass, long byteAlignment) {
-                return FFM.struct(structClass)
+                return FFM.ffmStruct(structClass)
                     .pack(byteAlignment)
                     .m("a", int8_t)
                     .m("b", int16_t)
@@ -529,7 +529,7 @@ public class StructTest {
 
     public void testFFMInterop() {
         interface S {
-            StructBinder<S> $ = struct(S.class)
+            StructBinder<S> $ = ffmStruct(S.class)
                 .m("z", int8_t)
                 .m("b", int8_t)
                 .m("s", int16_t)
@@ -631,7 +631,7 @@ public class StructTest {
     public void testFFMAlignment() {
         try (var arena = Arena.ofConfined()) {
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("a", int32_t)
                     .m("b", int64_t)
                     .build();
@@ -654,7 +654,7 @@ public class StructTest {
 
     public void testIteration() {
         interface S {
-            StructBinder<S> $ = struct(S.class)
+            StructBinder<S> $ = ffmStruct(S.class)
                 .m("a", int32_t)
                 .m("b", int64_t)
                 .build();
@@ -716,7 +716,7 @@ public class StructTest {
 
     public void testNesting() {
         interface Inner {
-            StructBinder<Inner> $ = struct(Inner.class)
+            StructBinder<Inner> $ = ffmStruct(Inner.class)
                 .m("a", int32_t)
                 .m("b", int64_t)
                 .build();
@@ -730,7 +730,7 @@ public class StructTest {
 
         try (var arena = Arena.ofConfined()) {
             interface Outer {
-                StructBinder<Outer> $ = struct(Outer.class)
+                StructBinder<Outer> $ = ffmStruct(Outer.class)
                     .m("c", float32)
                     .m("inner", Inner.$)
                     .m("d", float64)
@@ -800,7 +800,7 @@ public class StructTest {
 
         try (var arena = Arena.ofConfined()) {
             interface Outer {
-                StructBinder<Outer> $ = struct(Outer.class)
+                StructBinder<Outer> $ = ffmStruct(Outer.class)
                     .m("c", float32)
                     .m("inner", p(Inner.$))
                     .m("d", float64)
@@ -858,7 +858,7 @@ public class StructTest {
 
     public void testUnion() {
         interface A {
-            StructBinder<A> $ = struct(A.class)
+            StructBinder<A> $ = ffmStruct(A.class)
                 .m("a", int8_t)
                 .m("b", int8_t)
                 .m("c", int8_t)
@@ -896,7 +896,7 @@ public class StructTest {
         }
 
         interface B {
-            UnionBinder<B> $ = union(B.class)
+            UnionBinder<B> $ = ffmUnion(B.class)
                 .m("i", int32_t)
                 .m("f", float32)
                 .build();
@@ -930,7 +930,7 @@ public class StructTest {
         }
 
         interface U {
-            UnionBinder<U> $ = union(U.class)
+            UnionBinder<U> $ = ffmUnion(U.class)
                 .m("A", A.$)
                 .m("B", B.$)
                 .build();
@@ -1024,7 +1024,7 @@ public class StructTest {
         }
 
         interface CommonEvent extends BaseEvent {
-            StructBinder<CommonEvent> $ = struct(CommonEvent.class)
+            StructBinder<CommonEvent> $ = ffmStruct(CommonEvent.class)
                 .m("type", int32_t)
                 .m("timestamp", uint64_t)
                 .build();
@@ -1034,7 +1034,7 @@ public class StructTest {
         }
 
         interface KeyboardEvent extends CommonEvent {
-            StructBinder<KeyboardEvent> $ = struct(KeyboardEvent.class)
+            StructBinder<KeyboardEvent> $ = ffmStruct(KeyboardEvent.class)
                 .m("type", int32_t)
                 .m("timestamp", uint64_t)
                 .m("key", int32_t)
@@ -1050,7 +1050,7 @@ public class StructTest {
         }
 
         interface MouseEvent extends CommonEvent {
-            StructBinder<MouseEvent> $ = struct(MouseEvent.class)
+            StructBinder<MouseEvent> $ = ffmStruct(MouseEvent.class)
                 .m("type", int32_t)
                 .m("timestamp", uint64_t)
                 .m("button", int32_t)
@@ -1071,7 +1071,7 @@ public class StructTest {
         }
 
         interface Event extends BaseEvent {
-            UnionBinder<Event> $ = union(Event.class)
+            UnionBinder<Event> $ = ffmUnion(Event.class)
                 .m("type", int32_t)
                 .m("common", CommonEvent.$)
                 .m("key", KeyboardEvent.$)
@@ -1113,7 +1113,7 @@ public class StructTest {
     public void testFFMSize() {
         try (var arena = Arena.ofConfined()) {
             interface S8 {
-                StructBinder<S8> $ = struct(S8.class)
+                StructBinder<S8> $ = ffmStruct(S8.class)
                     .m("buffer", p(int8_t))
                     .m("size", int8_t)
                     .build();
@@ -1144,7 +1144,7 @@ public class StructTest {
 
         try (var arena = Arena.ofConfined()) {
             interface S16 {
-                StructBinder<S16> $ = struct(S16.class)
+                StructBinder<S16> $ = ffmStruct(S16.class)
                     .m("buffer", p(int8_t))
                     .m("size", int16_t)
                     .build();
@@ -1175,7 +1175,7 @@ public class StructTest {
 
         try (var arena = Arena.ofConfined()) {
             interface S32 {
-                StructBinder<S32> $ = struct(S32.class)
+                StructBinder<S32> $ = ffmStruct(S32.class)
                     .m("buffer", p(int8_t))
                     .m("size", int32_t)
                     .build();
@@ -1206,7 +1206,7 @@ public class StructTest {
 
         try (var arena = Arena.ofConfined()) {
             interface S64 {
-                StructBinder<S64> $ = struct(S64.class)
+                StructBinder<S64> $ = ffmStruct(S64.class)
                     .m("buffer", p(int8_t))
                     .m("size", int64_t)
                     .build();
@@ -1239,7 +1239,7 @@ public class StructTest {
     public void testAliasingObject() {
         {
             interface Invalid {
-                StructBinder<Invalid> $ = struct(Invalid.class)
+                StructBinder<Invalid> $ = ffmStruct(Invalid.class)
                     .m("equals", uint8_t)
                     .build();
 
@@ -1252,7 +1252,7 @@ public class StructTest {
 
         {
             interface Valid {
-                StructBinder<Valid> $ = struct(Valid.class)
+                StructBinder<Valid> $ = ffmStruct(Valid.class)
                     .m("equals", uint8_t)
                     .build();
 
@@ -1267,7 +1267,7 @@ public class StructTest {
 
         {
             interface Invalid {
-                StructBinder<Invalid> $ = struct(Invalid.class)
+                StructBinder<Invalid> $ = ffmStruct(Invalid.class)
                     .m("hashCode", int32_t)
                     .build();
 
@@ -1279,7 +1279,7 @@ public class StructTest {
 
         {
             interface Valid {
-                StructBinder<Valid> $ = struct(Valid.class)
+                StructBinder<Valid> $ = ffmStruct(Valid.class)
                     .m("hashCode", int32_t)
                     .build();
 
@@ -1295,7 +1295,7 @@ public class StructTest {
         {
             @FFMCharset(FFMCharset.Type.UTF8)
             interface Invalid {
-                StructBinder<Invalid> $ = struct(Invalid.class)
+                StructBinder<Invalid> $ = ffmStruct(Invalid.class)
                     .m("toString", FFM.array(int8_t, 128))
                     .build();
 
@@ -1308,7 +1308,7 @@ public class StructTest {
         {
             @FFMCharset(FFMCharset.Type.UTF8)
             interface Valid {
-                StructBinder<Valid> $ = struct(Valid.class)
+                StructBinder<Valid> $ = ffmStruct(Valid.class)
                     .m("toString", FFM.array(int8_t, 128))
                     .build();
 
@@ -1325,7 +1325,7 @@ public class StructTest {
     public void testEquals() {
         try (var arena = Arena.ofConfined()) {
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("x", int32_t)
                     .m("y", int32_t)
                     .build();
@@ -1384,7 +1384,7 @@ public class StructTest {
 
         try (var arena = Arena.ofConfined()) {
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("x", int32_t)
                     .m("y", int32_t)
                     .withEquals((s1, o) -> {
@@ -1446,7 +1446,7 @@ public class StructTest {
 
         try (var arena = Arena.ofConfined()) {
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("x", int32_t)
                     .padding(8)
                     .m("y", int32_t)
@@ -1477,7 +1477,7 @@ public class StructTest {
 
         try (var arena = Arena.ofConfined()) {
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("x", int32_t)
                     .padding(8)
                     .m("y", int32_t)
@@ -1514,7 +1514,7 @@ public class StructTest {
     public void testHashCode() {
         try (var arena = Arena.ofConfined()) {
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("x", int32_t)
                     .m("y", int32_t)
                     .build();
@@ -1573,7 +1573,7 @@ public class StructTest {
 
         try (var arena = Arena.ofConfined()) {
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("x", int32_t)
                     .m("y", int32_t)
                     .withHashCode((s) -> Integer.hashCode(s.x())) // intentionally only x
@@ -1634,7 +1634,7 @@ public class StructTest {
     public void testToString() {
         try (var arena = Arena.ofConfined()) {
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("x", int32_t)
                     .m("y", int32_t)
                     .m("pointer", p(int32_t))
@@ -1673,7 +1673,7 @@ public class StructTest {
 
         try (var arena = Arena.ofConfined()) {
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("x", int32_t)
                     .m("y", int32_t)
                     .m("pointer", p(array(int32_t, 16)))
@@ -1714,7 +1714,7 @@ public class StructTest {
         {
             // test multiple getters without FFMCanonical
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("text", array(int8_t, 256))
                     .build();
 
@@ -1726,7 +1726,7 @@ public class StructTest {
         {
             // test multiple getters without FFMCanonical, but custom equals/hashCode/toString
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("text", array(int8_t, 256))
                     .withEquals((s1, o) -> {
                         var s2 = (S)o;
@@ -1744,7 +1744,7 @@ public class StructTest {
         {
             // test multiple getters with multiple FFMCanonical
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("text", array(int8_t, 256))
                     .build();
 
@@ -1756,7 +1756,7 @@ public class StructTest {
         try (var arena = Arena.ofConfined()) {
             // test multiple getters with single FFMCanonical (1)
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("text", array(int8_t, 256))
                     .build();
 
@@ -1771,7 +1771,7 @@ public class StructTest {
         try (var arena = Arena.ofConfined()) {
             // test multiple getters with single FFMCanonical (2)
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("text", array(int8_t, 256))
                     .build();
 
@@ -1788,7 +1788,7 @@ public class StructTest {
     public void testBoolean() {
         {
             interface Invalid {
-                StructBinder<Invalid> $ = struct(Invalid.class)
+                StructBinder<Invalid> $ = ffmStruct(Invalid.class)
                     .m("b", int64_t) // supported up to 32-bits
                     .build();
 
@@ -1800,7 +1800,7 @@ public class StructTest {
 
         try (var arena = Arena.ofConfined()) {
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("a", int8_t)
                     .m("b", int16_t)
                     .m("c", int32_t)
@@ -1878,7 +1878,7 @@ public class StructTest {
 
     public void testCLong() {
         interface S {
-            StructBinder<S> $ = struct(S.class)
+            StructBinder<S> $ = ffmStruct(S.class)
                 .m("x", clong)
                 .m("y", clong)
                 .build();
@@ -1923,7 +1923,7 @@ public class StructTest {
         try (var arena = Arena.ofConfined()) {
             @FFMCharset(FFMCharset.Type.UTF8)
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("a", array(int8_t, 256))
                     .m("b", array(int8_t, 256))
                     .build();
@@ -1957,7 +1957,7 @@ public class StructTest {
         try (var arena = Arena.ofConfined()) {
             @FFMCharset(FFMCharset.Type.UTF8)
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("a", array(int8_t, 256))
                     .m("b", array(int8_t, 256))
                     .withToString(it -> it.a() + " " + it.b())
@@ -1992,7 +1992,7 @@ public class StructTest {
         try (var arena = Arena.ofConfined()) {
             @FFMCharset(FFMCharset.Type.UTF8)
             interface S {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("pointerNT", p(int8_t))
                     .m("pointer", p(int8_t))
                     .m("pointerLength", int32_t)
@@ -2122,7 +2122,7 @@ public class StructTest {
 
     public void testFFMByValue() {
         interface SDL_GUID {
-            StructBinder<SDL_GUID> $ = struct(SDL_GUID.class)
+            StructBinder<SDL_GUID> $ = ffmStruct(SDL_GUID.class)
                 .m("data", array(Uint8, 16))
                 .build();
 
@@ -2162,7 +2162,7 @@ public class StructTest {
         {
             // test aliasing
             interface Invalid extends Pointer {
-                StructBinder<Invalid> $ = struct(Invalid.class)
+                StructBinder<Invalid> $ = ffmStruct(Invalid.class)
                     .m("address", uint64_t)
                     .build();
 
@@ -2173,7 +2173,7 @@ public class StructTest {
             assertThrows(() -> Objects.requireNonNull(Invalid.$));
 
             interface Valid extends Pointer {
-                StructBinder<Valid> $ = struct(Valid.class)
+                StructBinder<Valid> $ = ffmStruct(Valid.class)
                     .m("address", uint64_t)
                     .build();
 
@@ -2188,7 +2188,7 @@ public class StructTest {
 
         try (var arena = Arena.ofConfined()) {
             interface S extends Pointer {
-                StructBinder<S> $ = struct(S.class)
+                StructBinder<S> $ = ffmStruct(S.class)
                     .m("a", int32_t)
                     .m("b", int32_t)
                     .build();
@@ -2204,7 +2204,7 @@ public class StructTest {
 
     public void testCapabilityNativeResource() {
         interface S extends NativeResource {
-            StructBinder<S> $ = struct(S.class)
+            StructBinder<S> $ = ffmStruct(S.class)
                 .m("a", int32_t)
                 .m("b", int32_t)
                 .build();
@@ -2229,7 +2229,7 @@ public class StructTest {
 
     public void testCapabilityBinder() {
         interface S extends Struct<S> {
-            StructBinder<S> $ = struct(S.class)
+            StructBinder<S> $ = ffmStruct(S.class)
                 .m("a", int32_t)
                 .m("b", int32_t)
                 .build();

@@ -20,140 +20,140 @@ public interface MyGLFW {
     @FFMDefinition("void (* GLFWerrorfun)(int error_code, const char* description);")
     @FunctionalInterface
     interface GLFWerrorfun {
-        UpcallBinder<GLFWerrorfun> $ = upcall(GLFWerrorfun.class);
+        UpcallBinder<GLFWerrorfun> $ = ffmUpcall(GLFWerrorfun.class);
         void invoke(int error_code, String description);
     }
 
     @FFMDefinition("void (* GLFWwindowposfun)(GLFWwindow * window, int xpos, int ypos)")
     @FunctionalInterface
     interface GLFWwindowposfun {
-        UpcallBinder<GLFWwindowposfun> $ = upcall(GLFWwindowposfun.class);
+        UpcallBinder<GLFWwindowposfun> $ = ffmUpcall(GLFWwindowposfun.class);
         void invoke(@FFMPointer long window, int xpos, int ypos);
     }
 
     @FFMDefinition("void (* GLFWwindowsizefun)(GLFWwindow* window, int width, int height)")
     @FunctionalInterface
     interface GLFWwindowsizefun {
-        UpcallBinder<GLFWwindowsizefun> $ = upcall(GLFWwindowsizefun.class);
+        UpcallBinder<GLFWwindowsizefun> $ = ffmUpcall(GLFWwindowsizefun.class);
         void invoke(@FFMPointer long window, int width, int height);
     }
 
     @FFMDefinition("void (* GLFWwindowclosefun)(GLFWwindow* window)")
     @FunctionalInterface
     interface GLFWwindowclosefun {
-        UpcallBinder<GLFWwindowclosefun> $ = upcall(GLFWwindowclosefun.class);
+        UpcallBinder<GLFWwindowclosefun> $ = ffmUpcall(GLFWwindowclosefun.class);
         void invoke(@FFMPointer long window);
     }
 
     @FFMDefinition("void (* GLFWwindowrefreshfun)(GLFWwindow* window)")
     @FunctionalInterface
     interface GLFWwindowrefreshfun {
-        UpcallBinder<GLFWwindowrefreshfun> $ = upcall(GLFWwindowrefreshfun.class);
+        UpcallBinder<GLFWwindowrefreshfun> $ = ffmUpcall(GLFWwindowrefreshfun.class);
         void invoke(@FFMPointer long window);
     }
 
     @FFMDefinition("void (* GLFWwindowfocusfun)(GLFWwindow* window, int focused)")
     @FunctionalInterface
     interface GLFWwindowfocusfun {
-        UpcallBinder<GLFWwindowfocusfun> $ = upcall(GLFWwindowfocusfun.class);
+        UpcallBinder<GLFWwindowfocusfun> $ = ffmUpcall(GLFWwindowfocusfun.class);
         void invoke(@FFMPointer long window, @FFMBooleanInt boolean focused);
     }
 
     @FFMDefinition("void (* GLFWwindowiconifyfun)(GLFWwindow* window, int iconified)")
     @FunctionalInterface
     interface GLFWwindowiconifyfun {
-        UpcallBinder<GLFWwindowiconifyfun> $ = upcall(GLFWwindowiconifyfun.class);
+        UpcallBinder<GLFWwindowiconifyfun> $ = ffmUpcall(GLFWwindowiconifyfun.class);
         void invoke(@FFMPointer long window, @FFMBooleanInt boolean iconified);
     }
 
     @FFMDefinition("void (* GLFWwindowmaximizefun)(GLFWwindow* window, int maximized)")
     @FunctionalInterface
     interface GLFWwindowmaximizefun {
-        UpcallBinder<GLFWwindowmaximizefun> $ = upcall(GLFWwindowmaximizefun.class);
+        UpcallBinder<GLFWwindowmaximizefun> $ = ffmUpcall(GLFWwindowmaximizefun.class);
         void invoke(@FFMPointer long window, @FFMBooleanInt boolean maximized);
     }
 
     @FFMDefinition("void (* GLFWframebuffersizefun)(GLFWwindow* window, int width, int height)")
     @FunctionalInterface
     interface GLFWframebuffersizefun {
-        UpcallBinder<GLFWframebuffersizefun> $ = upcall(GLFWframebuffersizefun.class);
+        UpcallBinder<GLFWframebuffersizefun> $ = ffmUpcall(GLFWframebuffersizefun.class);
         void invoke(@FFMPointer long window, int width, int height);
     }
 
     @FFMDefinition("void (* GLFWwindowcontentscalefun)(GLFWwindow* window, float xscale, float yscale)")
     @FunctionalInterface
     interface GLFWwindowcontentscalefun {
-        UpcallBinder<GLFWwindowcontentscalefun> $ = upcall(GLFWwindowcontentscalefun.class);
+        UpcallBinder<GLFWwindowcontentscalefun> $ = ffmUpcall(GLFWwindowcontentscalefun.class);
         void invoke(@FFMPointer long window, float xscale, float yscale);
     }
 
     @FFMDefinition("void (* GLFWmousebuttonfun)(GLFWwindow* window, int button, int action, int mods)")
     @FunctionalInterface
     interface GLFWmousebuttonfun {
-        UpcallBinder<GLFWmousebuttonfun> $ = upcall(GLFWmousebuttonfun.class);
+        UpcallBinder<GLFWmousebuttonfun> $ = ffmUpcall(GLFWmousebuttonfun.class);
         void invoke(@FFMPointer long window, int button, int action, int mods);
     }
 
     @FFMDefinition("void (* GLFWcursorposfun)(GLFWwindow* window, double xpos, double ypos)")
     @FunctionalInterface
     interface GLFWcursorposfun {
-        UpcallBinder<GLFWcursorposfun> $ = upcall(GLFWcursorposfun.class);
+        UpcallBinder<GLFWcursorposfun> $ = ffmUpcall(GLFWcursorposfun.class);
         void invoke(@FFMPointer long window, double xpos, double ypos);
     }
 
     @FFMDefinition("void (* GLFWcursorenterfun)(GLFWwindow* window, int entered)")
     @FunctionalInterface
     interface GLFWcursorenterfun {
-        UpcallBinder<GLFWcursorenterfun> $ = upcall(GLFWcursorenterfun.class);
+        UpcallBinder<GLFWcursorenterfun> $ = ffmUpcall(GLFWcursorenterfun.class);
         void invoke(@FFMPointer long window, @FFMBooleanInt boolean entered);
     }
 
     @FFMDefinition("void (* GLFWscrollfun)(GLFWwindow* window, double xoffset, double yoffset)")
     @FunctionalInterface
     interface GLFWscrollfun {
-        UpcallBinder<GLFWscrollfun> $ = upcall(GLFWscrollfun.class);
+        UpcallBinder<GLFWscrollfun> $ = ffmUpcall(GLFWscrollfun.class);
         void invoke(@FFMPointer long window, double xoffset, double yoffset);
     }
 
     @FFMDefinition("void (* GLFWkeyfun)(GLFWwindow* window, int key, int scancode, int action, int mods)")
     @FunctionalInterface
     interface GLFWkeyfun {
-        UpcallBinder<GLFWkeyfun> $ = upcall(GLFWkeyfun.class);
+        UpcallBinder<GLFWkeyfun> $ = ffmUpcall(GLFWkeyfun.class);
         void invoke(@FFMPointer long window, int key, int scancode, int action, int mods);
     }
 
     @FFMDefinition("void (* GLFWcharfun)(GLFWwindow* window, unsigned int codepoint)")
     @FunctionalInterface
     interface GLFWcharfun {
-        UpcallBinder<GLFWcharfun> $ = upcall(GLFWcharfun.class);
+        UpcallBinder<GLFWcharfun> $ = ffmUpcall(GLFWcharfun.class);
         void invoke(@FFMPointer long window, int codepoint);
     }
 
     @FFMDefinition("void (* GLFWcharmodsfun)(GLFWwindow* window, unsigned int codepoint, int mods)")
     @FunctionalInterface
     interface GLFWcharmodsfun {
-        UpcallBinder<GLFWcharmodsfun> $ = upcall(GLFWcharmodsfun.class);
+        UpcallBinder<GLFWcharmodsfun> $ = ffmUpcall(GLFWcharmodsfun.class);
         void invoke(@FFMPointer long window, int codepoint, int mods);
     }
 
     @FFMDefinition("void (* GLFWdropfun)(GLFWwindow* window, int path_count, const char* paths[])")
     @FunctionalInterface
     interface GLFWdropfun {
-        UpcallBinder<GLFWdropfun> $ = upcall(GLFWdropfun.class);
+        UpcallBinder<GLFWdropfun> $ = ffmUpcall(GLFWdropfun.class);
         void invoke(@FFMPointer long window, int path_count, MemorySegment paths);
     }
 
     @FFMDefinition("void (* GLFWmonitorfun)(GLFWmonitor* monitor, int event)")
     @FunctionalInterface
     interface GLFWmonitorfun {
-        UpcallBinder<GLFWmonitorfun> $ = upcall(GLFWmonitorfun.class);
+        UpcallBinder<GLFWmonitorfun> $ = ffmUpcall(GLFWmonitorfun.class);
         void invoke(@FFMPointer long monitor, int event);
     }
 
     @FFMDefinition("void (* GLFWjoystickfun)(int jid, int event)")
     @FunctionalInterface
     interface GLFWjoystickfun {
-        UpcallBinder<GLFWjoystickfun> $ = upcall(GLFWjoystickfun.class);
+        UpcallBinder<GLFWjoystickfun> $ = ffmUpcall(GLFWjoystickfun.class);
         void invoke(int jid, int event);
     }
 
@@ -167,7 +167,7 @@ public interface MyGLFW {
             int refreshRate;
         }""")
     interface GLFWvidmode {
-        StructBinder<GLFWvidmode> GLFWvidmode = struct(GLFWvidmode.class)
+        StructBinder<GLFWvidmode> GLFWvidmode = ffmStruct(GLFWvidmode.class)
             .m("width", cint)
             .m("height", cint)
             .m("redBits", cint)
@@ -192,7 +192,7 @@ public interface MyGLFW {
             unsigned int size;
         }""")
     interface GLFWgammaramp {
-        StructBinder<GLFWgammaramp> GLFWgammaramp = struct(GLFWgammaramp.class)
+        StructBinder<GLFWgammaramp> GLFWgammaramp = ffmStruct(GLFWgammaramp.class)
             .m("red", p(unsigned_short))
             .m("green", p(unsigned_short))
             .m("blue", p(unsigned_short))

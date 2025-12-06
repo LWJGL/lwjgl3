@@ -26,7 +26,7 @@ public class FFMStructClearTest {
 
     interface S {
         // struct size greater than the default NATIVE_THRESHOLD_FILL
-        StructBinder<@NonNull S> $ = struct(S.class)
+        StructBinder<@NonNull S> $ = ffmStruct(S.class)
             .m("a", array(int32_t, 16))
             .build();
     }

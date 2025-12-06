@@ -26,7 +26,7 @@ public class FFMStructCopyTest {
 
     interface S {
         // struct size greater than the default NATIVE_THRESHOLD_COPY
-        StructBinder<@NonNull S> $ = struct(S.class)
+        StructBinder<@NonNull S> $ = ffmStruct(S.class)
             .m("a", array(int32_t, 32))
             .build();
     }

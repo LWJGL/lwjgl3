@@ -37,7 +37,7 @@ public class YGMeasureFuncTest {
     }
 
     public interface YGSize {
-        StructBinder<YGSize> $ = struct(YGSize.class)
+        StructBinder<YGSize> $ = ffmStruct(YGSize.class)
             .m("width", float32)
             .m("height", float32)
             .build();
@@ -52,7 +52,7 @@ public class YGMeasureFuncTest {
     @FFMDefinition("YGSize (*YGMeasureFunc)( YGNodeConstRef node, float width, YGMeasureMode widthMode, float height, YGMeasureMode heightMode);")
     @FunctionalInterface
     public interface YGMeasureFunc {
-        UpcallBinder<YGMeasureFunc> $ = upcall(YGMeasureFunc.class);
+        UpcallBinder<YGMeasureFunc> $ = ffmUpcall(YGMeasureFunc.class);
         @FFMByValue YGSize invoke(@FFMPointer long node, float width, int widthMode, float height, int heightMode);
     }
 

@@ -322,22 +322,23 @@ public final class FFM {
     }
 
     // TODO: document
-    public static <T> StructBinderBuilder<T> struct(Class<T> structInterface) {
+    public static <T> StructBinderBuilder<T> ffmStruct(Class<T> structInterface) {
         return new StructBinderBuilder<>(structInterface);
     }
 
     // TODO: document
-    public static <T> UnionBinderBuilder<T> union(Class<T> unionInterface) {
+    public static <T> UnionBinderBuilder<T> ffmUnion(Class<T> unionInterface) {
         return new UnionBinderBuilder<>(unionInterface);
     }
 
     // TODO: document
-    public abstract static class GroupBinderBuilder<
+    public abstract static sealed class GroupBinderBuilder<
         T,
         L extends GroupLayout,
         M extends GroupBinder<L, T>,
         SELF extends GroupBinderBuilder<T, L, M, SELF>
-        > {
+        >
+        permits StructBinderBuilder, UnionBinderBuilder {
 
         final Class<T> groupInterface;
 
@@ -518,13 +519,13 @@ public final class FFM {
     }
 
     // TODO: document
-    public static <T> UpcallBinder<T> upcall(Class<T> upcallInterface) {
+    public static <T> UpcallBinder<T> ffmUpcall(Class<T> upcallInterface) {
         return upcall(upcallInterface, null);
     }
 
     // LWJGL 3 interop
     // TODO: document
-    public static <T> UpcallBinder<T> upcall(Class<T> upcallInterface, @Nullable FFICIF cif) {
+    public static <T> UpcallBinder<T> ffmUpcall(Class<T> upcallInterface, @Nullable FFICIF cif) {
         var config = getConfig(upcallInterface);
         if (config.debugGenerator) {
             apiLog("BOOTSTRAPPING UPCALL " + upcallInterface);
@@ -546,11 +547,11 @@ public final class FFM {
     }
 
     // TODO: document
-    public static <T> T ffmGenerate(Class<T> bindingInterface, FFMConfig context) {
+    public static <T> T ffmGenerate(Class<T> bindingInterface, FFMConfig config) {
         // automatically register binding config
-        var previous = BINDING_CONFIGS.put(bindingInterface, context);
+        var previous = BINDING_CONFIGS.put(bindingInterface, config);
         try {
-            return generate(bindingInterface, context);
+            return generate(bindingInterface, config);
         } catch (RuntimeException | Error e) {
             throw e;
         } catch (Throwable t) {

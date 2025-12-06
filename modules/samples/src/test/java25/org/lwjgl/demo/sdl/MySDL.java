@@ -29,7 +29,7 @@ public interface MySDL {
     ValueLayout SDL_DisplayID = typedef("SDL_DisplayID", uint32_t);
 
     interface SDL_CommonEvent {
-        StructBinder<SDL_CommonEvent> SDL_CommonEvent = struct(SDL_CommonEvent.class)
+        StructBinder<SDL_CommonEvent> SDL_CommonEvent = ffmStruct(SDL_CommonEvent.class)
             .m("type", Uint32)
             .m("reserved", Uint32)
             .m("timestamp", Uint64)
@@ -43,7 +43,7 @@ public interface MySDL {
     }
 
     interface SDL_DisplayEvent {
-        StructBinder<SDL_DisplayEvent> SDL_DisplayEvent = struct(SDL_DisplayEvent.class)
+        StructBinder<SDL_DisplayEvent> SDL_DisplayEvent = ffmStruct(SDL_DisplayEvent.class)
             .m("type", SDL_EventType)
             .m("reserved", Uint32)
             .m("timestamp", Uint64)
@@ -68,7 +68,7 @@ public interface MySDL {
     // more struct types here
 
     interface SDL_Event {
-        UnionBinder<SDL_Event> SDL_Event = union(SDL_Event.class)
+        UnionBinder<SDL_Event> SDL_Event = ffmUnion(SDL_Event.class)
             .m("type", Uint32)
             .m("common", SDL_CommonEvent)
             .m("display", SDL_DisplayEvent)

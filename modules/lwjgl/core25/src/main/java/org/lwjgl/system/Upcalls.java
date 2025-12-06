@@ -146,7 +146,7 @@ final class Upcalls {
                 ffmConfig(it, ffmConfigBuilder(descriptor.lookup)
                     .build());
 
-                return upcall(it, descriptor.cif);
+                return ffmUpcall(it, descriptor.cif);
             });
     }
 
