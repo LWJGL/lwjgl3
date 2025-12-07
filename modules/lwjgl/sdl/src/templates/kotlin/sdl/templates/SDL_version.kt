@@ -10,7 +10,7 @@ import sdl.*
 val SDL_version = "SDLVersion".nativeClassSDL("SDL_version") {
     IntConstant("MAJOR_VERSION".."3")
     IntConstant("MINOR_VERSION".."2")
-    IntConstant("MICRO_VERSION".."26")
+    IntConstant("MICRO_VERSION".."28")
 
     int("GetVersion", void())
     charASCII.const.p("GetRevision", void())
