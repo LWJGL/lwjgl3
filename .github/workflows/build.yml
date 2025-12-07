@@ -9,10 +9,12 @@ on:
       - master
 
 env:
+  JAVA8_HOME: jdk8
   JAVA_HOME: jdk8
   ANT_OPTS: -Xmx1G
   LWJGL_BUILD_TYPE: nightly
-  ZULU_BUILD: 88.0.19-ca-jdk8.0.462
+  ZULU_BUILD: 90.0.19-ca-jdk8.0.472
+  ZULU_BUILD25: 30.17-ca-jdk25.0.1
 
 jobs:
   cache-kotlinc:
@@ -64,7 +66,9 @@ jobs:
           DEBIAN_FRONTEND=noninteractive sudo apt-get -yq update
           DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install ant awscli curl zstd gcc g++ make
           mkdir jdk8
+          mkdir jdk25
           curl -L https://cdn.azul.com/zulu/bin/zulu8.${ZULU_BUILD}-linux_x64.tar.gz | tar xz -C jdk8 --strip-components 1
+          curl -L https://cdn.azul.com/zulu/bin/zulu25.${ZULU_BUILD25}-linux_x64.tar.gz | tar xz -C jdk25 --strip-components 1
       - name: Install LWJGL dependencies
         run: DEBIAN_FRONTEND=noninteractive sudo apt-get -yq -f --allow-unauthenticated install libgtk-3-dev libatk-bridge2.0-dev libgdk-pixbuf2.0-dev libglu-dev libgl1-mesa-glx libx11-dev libxt-dev libdbus-1-dev -o Dpkg::Options::="--force-overwrite"
       - name: Restore kotlinc output
@@ -87,12 +91,17 @@ jobs:
       - name: Print test results
         run: cat bin/test/testng-results.xml
         if: failure()
+      - name: Run tests (JDK 25)
+        run: JAVA_HOME=jdk25 ant -emacs tests -Dcore.java25=true
+      - name: Print test results
+        run: cat bin/test/testng-results.xml
+        if: failure()
       - name: Run demo with OpenJDK
         run: ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
       - name: Build GraalVM Native Image
         run: |
           mkdir jdk-graalvm
-          curl -L https://download.oracle.com/graalvm/23/latest/graalvm-jdk-23_linux-x64_bin.tar.gz | tar xz -C jdk-graalvm --strip-components 1
+          curl -L https://download.oracle.com/graalvm/25/latest/graalvm-jdk-25_linux-x64_bin.tar.gz | tar xz -C jdk-graalvm --strip-components 1
           jdk-graalvm/bin/native-image -cp \
           bin/classes/lwjgl/core:\
           bin/classes/lwjgl/lz4:\
@@ -242,7 +251,9 @@ jobs:
       - name: Install dependencies
         run: |
           mkdir jdk8
+          mkdir jdk25
           curl -L https://cdn.azul.com/zulu/bin/zulu8.${ZULU_BUILD}-macosx_${{matrix.JDK}}.tar.gz | tar xz -C jdk8 --strip-components 1
+          curl -L https://cdn.azul.com/zulu/bin/zulu25.${ZULU_BUILD25}-macosx_${{matrix.JDK}}.tar.gz | tar xz -C jdk25 --strip-components 1
       - name: Restore kotlinc output
         uses: actions/cache/restore@v3
         with:
@@ -263,12 +274,17 @@ jobs:
       - name: Print test results
         run: cat bin/test/testng-results.xml
         if: failure()
+      - name: Run tests (JDK25)
+        run: JAVA_HOME=jdk25 ant -emacs tests
+      - name: Print test results
+        run: cat bin/test/testng-results.xml
+        if: failure()
       - name: Run demo with OpenJDK
         run: ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
       - name: Build GraalVM Native Image
         run: |
           mkdir jdk-graalvm
-          curl -L https://download.oracle.com/graalvm/23/latest/graalvm-jdk-23_macos-${{matrix.JDK}}_bin.tar.gz | tar xz -C jdk-graalvm --strip-components 1
+          curl -L https://download.oracle.com/graalvm/25/latest/graalvm-jdk-25_macos-${{matrix.JDK}}_bin.tar.gz | tar xz -C jdk-graalvm --strip-components 1
           jdk-graalvm/Contents/Home/bin/native-image -cp \
           bin/classes/lwjgl/core:\
           bin/classes/lwjgl/lz4:\
@@ -318,6 +334,9 @@ jobs:
           Invoke-WebRequest https://cdn.azul.com/zulu/bin/zulu8.$Env:ZULU_BUILD-win_x64.zip -OutFile jdk.zip
           Expand-Archive -Path jdk.zip -DestinationPath .\
           Rename-Item zulu8.$Env:ZULU_BUILD-win_x64 jdk8
+          Invoke-WebRequest https://cdn.azul.com/zulu/bin/zulu25.$Env:ZULU_BUILD25-win_x64.zip -OutFile jdk25.zip
+          Expand-Archive -Path jdk25.zip -DestinationPath .\
+          Rename-Item zulu25.$Env:ZULU_BUILD25-win_x64 jdk25
         shell: pwsh
       - name: Restore kotlinc output
         uses: actions/cache/restore@v3
@@ -351,14 +370,22 @@ jobs:
       - name: Print test results
         run: type bin\test\testng-results.xml
         if: failure()
+      - name: Run tests (JDK25)
+        run: |
+          set JAVA_HOME=jdk25
+          ant -emacs tests
+        if: matrix.ARCH == 'x64'
+      - name: Print test results
+        run: type bin\test\testng-results.xml
+        if: failure()
       - name: Run demo with OpenJDK
         run: ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
         if: matrix.ARCH == 'x64'
       - name: Download GraalVM
         run: |
-          Invoke-WebRequest https://download.oracle.com/graalvm/23/latest/graalvm-jdk-23_windows-x64_bin.zip -OutFile jdk-graalvm.zip
+          Invoke-WebRequest https://download.oracle.com/graalvm/25/latest/graalvm-jdk-25_windows-x64_bin.zip -OutFile jdk-graalvm.zip
           Expand-Archive -Path jdk-graalvm.zip -DestinationPath .\
-          Get-ChildItem graalvm-jdk-23* | Rename-Item -newname jdk-graalvm
+          Get-ChildItem graalvm-jdk-25* | Rename-Item -newname jdk-graalvm
         shell: pwsh
         if: matrix.ARCH == 'x64'
       - name: Build GraalVM Native Image
