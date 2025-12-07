@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre>{@code
  * struct VkPhysicalDeviceDataGraphModelFeaturesQCOM {
  *     VkStructureType sType;
- *     void const * pNext;
+ *     void * pNext;
  *     VkBool32 dataGraphModel;
  * }}</pre>
  */
@@ -78,7 +78,7 @@ public class VkPhysicalDeviceDataGraphModelFeaturesQCOM extends Struct<VkPhysica
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** @return the value of the {@code pNext} field. */
-    @NativeType("void const *")
+    @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** @return the value of the {@code dataGraphModel} field. */
     @NativeType("VkBool32")
@@ -89,7 +89,7 @@ public class VkPhysicalDeviceDataGraphModelFeaturesQCOM extends Struct<VkPhysica
     /** Sets the {@link QCOMDataGraphModel#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DATA_GRAPH_MODEL_FEATURES_QCOM STRUCTURE_TYPE_PHYSICAL_DEVICE_DATA_GRAPH_MODEL_FEATURES_QCOM} value to the {@code sType} field. */
     public VkPhysicalDeviceDataGraphModelFeaturesQCOM sType$Default() { return sType(QCOMDataGraphModel.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DATA_GRAPH_MODEL_FEATURES_QCOM); }
     /** Sets the specified value to the {@code pNext} field. */
-    public VkPhysicalDeviceDataGraphModelFeaturesQCOM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    public VkPhysicalDeviceDataGraphModelFeaturesQCOM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code dataGraphModel} field. */
     public VkPhysicalDeviceDataGraphModelFeaturesQCOM dataGraphModel(@NativeType("VkBool32") boolean value) { ndataGraphModel(address(), value ? 1 : 0); return this; }
 
@@ -290,7 +290,7 @@ public class VkPhysicalDeviceDataGraphModelFeaturesQCOM extends Struct<VkPhysica
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDataGraphModelFeaturesQCOM.nsType(address()); }
         /** @return the value of the {@code pNext} field. */
-        @NativeType("void const *")
+        @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDataGraphModelFeaturesQCOM.npNext(address()); }
         /** @return the value of the {@code dataGraphModel} field. */
         @NativeType("VkBool32")
@@ -301,7 +301,7 @@ public class VkPhysicalDeviceDataGraphModelFeaturesQCOM extends Struct<VkPhysica
         /** Sets the {@link QCOMDataGraphModel#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DATA_GRAPH_MODEL_FEATURES_QCOM STRUCTURE_TYPE_PHYSICAL_DEVICE_DATA_GRAPH_MODEL_FEATURES_QCOM} value to the {@code sType} field. */
         public VkPhysicalDeviceDataGraphModelFeaturesQCOM.Buffer sType$Default() { return sType(QCOMDataGraphModel.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DATA_GRAPH_MODEL_FEATURES_QCOM); }
         /** Sets the specified value to the {@code pNext} field. */
-        public VkPhysicalDeviceDataGraphModelFeaturesQCOM.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceDataGraphModelFeaturesQCOM.npNext(address(), value); return this; }
+        public VkPhysicalDeviceDataGraphModelFeaturesQCOM.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDataGraphModelFeaturesQCOM.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code dataGraphModel} field. */
         public VkPhysicalDeviceDataGraphModelFeaturesQCOM.Buffer dataGraphModel(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDataGraphModelFeaturesQCOM.ndataGraphModel(address(), value ? 1 : 0); return this; }
 

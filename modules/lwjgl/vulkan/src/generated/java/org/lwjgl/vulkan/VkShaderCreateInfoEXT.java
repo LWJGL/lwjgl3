@@ -171,6 +171,8 @@ public class VkShaderCreateInfoEXT extends Struct<VkShaderCreateInfoEXT> impleme
     public VkShaderCreateInfoEXT sType$Default() { return sType(EXTShaderObject.VK_STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkShaderCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkCustomResolveCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkShaderCreateInfoEXT pNext(VkCustomResolveCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} value to the {@code pNext} chain. */
     public VkShaderCreateInfoEXT pNext(VkPipelineShaderStageRequiredSubgroupSizeCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT} value to the {@code pNext} chain. */
@@ -529,6 +531,8 @@ public class VkShaderCreateInfoEXT extends Struct<VkShaderCreateInfoEXT> impleme
         public VkShaderCreateInfoEXT.Buffer sType$Default() { return sType(EXTShaderObject.VK_STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkShaderCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkShaderCreateInfoEXT.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkCustomResolveCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkShaderCreateInfoEXT.Buffer pNext(VkCustomResolveCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} value to the {@code pNext} chain. */
         public VkShaderCreateInfoEXT.Buffer pNext(VkPipelineShaderStageRequiredSubgroupSizeCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT} value to the {@code pNext} chain. */

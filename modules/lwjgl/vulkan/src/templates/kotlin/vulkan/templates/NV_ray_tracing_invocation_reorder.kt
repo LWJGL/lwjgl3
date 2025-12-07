@@ -24,6 +24,8 @@ val NV_ray_tracing_invocation_reorder = "NVRayTracingInvocationReorder".nativeCl
 
     EnumConstant(
         "RAY_TRACING_INVOCATION_REORDER_MODE_NONE_NV".."0",
-        "RAY_TRACING_INVOCATION_REORDER_MODE_REORDER_NV".."1"
+        "RAY_TRACING_INVOCATION_REORDER_MODE_NONE_EXT".."0",
+        "RAY_TRACING_INVOCATION_REORDER_MODE_REORDER_NV".."1",
+        "RAY_TRACING_INVOCATION_REORDER_MODE_REORDER_EXT".."1"
     )
 }

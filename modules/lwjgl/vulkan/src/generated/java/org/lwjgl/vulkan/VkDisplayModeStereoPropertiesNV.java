@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre>{@code
  * struct VkDisplayModeStereoPropertiesNV {
  *     VkStructureType sType;
- *     void const * pNext;
+ *     void * pNext;
  *     VkBool32 hdmi3DSupported;
  * }}</pre>
  */
@@ -78,7 +78,7 @@ public class VkDisplayModeStereoPropertiesNV extends Struct<VkDisplayModeStereoP
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** @return the value of the {@code pNext} field. */
-    @NativeType("void const *")
+    @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** @return the value of the {@code hdmi3DSupported} field. */
     @NativeType("VkBool32")
@@ -89,7 +89,7 @@ public class VkDisplayModeStereoPropertiesNV extends Struct<VkDisplayModeStereoP
     /** Sets the {@link NVDisplayStereo#VK_STRUCTURE_TYPE_DISPLAY_MODE_STEREO_PROPERTIES_NV STRUCTURE_TYPE_DISPLAY_MODE_STEREO_PROPERTIES_NV} value to the {@code sType} field. */
     public VkDisplayModeStereoPropertiesNV sType$Default() { return sType(NVDisplayStereo.VK_STRUCTURE_TYPE_DISPLAY_MODE_STEREO_PROPERTIES_NV); }
     /** Sets the specified value to the {@code pNext} field. */
-    public VkDisplayModeStereoPropertiesNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    public VkDisplayModeStereoPropertiesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkDisplayModeStereoPropertiesNV set(
@@ -284,7 +284,7 @@ public class VkDisplayModeStereoPropertiesNV extends Struct<VkDisplayModeStereoP
         @NativeType("VkStructureType")
         public int sType() { return VkDisplayModeStereoPropertiesNV.nsType(address()); }
         /** @return the value of the {@code pNext} field. */
-        @NativeType("void const *")
+        @NativeType("void *")
         public long pNext() { return VkDisplayModeStereoPropertiesNV.npNext(address()); }
         /** @return the value of the {@code hdmi3DSupported} field. */
         @NativeType("VkBool32")
@@ -295,7 +295,7 @@ public class VkDisplayModeStereoPropertiesNV extends Struct<VkDisplayModeStereoP
         /** Sets the {@link NVDisplayStereo#VK_STRUCTURE_TYPE_DISPLAY_MODE_STEREO_PROPERTIES_NV STRUCTURE_TYPE_DISPLAY_MODE_STEREO_PROPERTIES_NV} value to the {@code sType} field. */
         public VkDisplayModeStereoPropertiesNV.Buffer sType$Default() { return sType(NVDisplayStereo.VK_STRUCTURE_TYPE_DISPLAY_MODE_STEREO_PROPERTIES_NV); }
         /** Sets the specified value to the {@code pNext} field. */
-        public VkDisplayModeStereoPropertiesNV.Buffer pNext(@NativeType("void const *") long value) { VkDisplayModeStereoPropertiesNV.npNext(address(), value); return this; }
+        public VkDisplayModeStereoPropertiesNV.Buffer pNext(@NativeType("void *") long value) { VkDisplayModeStereoPropertiesNV.npNext(address(), value); return this; }
 
     }
 

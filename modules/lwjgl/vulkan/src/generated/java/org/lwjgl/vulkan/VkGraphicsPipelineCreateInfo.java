@@ -206,6 +206,8 @@ public class VkGraphicsPipelineCreateInfo extends Struct<VkGraphicsPipelineCreat
     public VkGraphicsPipelineCreateInfo pNext(VkAttachmentSampleCountInfoAMD value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkAttachmentSampleCountInfoNV} value to the {@code pNext} chain. */
     public VkGraphicsPipelineCreateInfo pNext(VkAttachmentSampleCountInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkCustomResolveCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkGraphicsPipelineCreateInfo pNext(VkCustomResolveCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkExternalFormatANDROID} value to the {@code pNext} chain. */
     public VkGraphicsPipelineCreateInfo pNext(VkExternalFormatANDROID value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkGraphicsPipelineLibraryCreateInfoEXT} value to the {@code pNext} chain. */
@@ -662,6 +664,8 @@ public class VkGraphicsPipelineCreateInfo extends Struct<VkGraphicsPipelineCreat
         public VkGraphicsPipelineCreateInfo.Buffer pNext(VkAttachmentSampleCountInfoAMD value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkAttachmentSampleCountInfoNV} value to the {@code pNext} chain. */
         public VkGraphicsPipelineCreateInfo.Buffer pNext(VkAttachmentSampleCountInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkCustomResolveCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkGraphicsPipelineCreateInfo.Buffer pNext(VkCustomResolveCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkExternalFormatANDROID} value to the {@code pNext} chain. */
         public VkGraphicsPipelineCreateInfo.Buffer pNext(VkExternalFormatANDROID value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkGraphicsPipelineLibraryCreateInfoEXT} value to the {@code pNext} chain. */

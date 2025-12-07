@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre>{@code
  * struct VkTensorFormatPropertiesARM {
  *     VkStructureType sType;
- *     void const * pNext;
+ *     void * pNext;
  *     VkFormatFeatureFlags2 optimalTilingTensorFeatures;
  *     VkFormatFeatureFlags2 linearTilingTensorFeatures;
  * }}</pre>
@@ -82,7 +82,7 @@ public class VkTensorFormatPropertiesARM extends Struct<VkTensorFormatProperties
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** @return the value of the {@code pNext} field. */
-    @NativeType("void const *")
+    @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** @return the value of the {@code optimalTilingTensorFeatures} field. */
     @NativeType("VkFormatFeatureFlags2")
@@ -96,7 +96,7 @@ public class VkTensorFormatPropertiesARM extends Struct<VkTensorFormatProperties
     /** Sets the {@link ARMTensors#VK_STRUCTURE_TYPE_TENSOR_FORMAT_PROPERTIES_ARM STRUCTURE_TYPE_TENSOR_FORMAT_PROPERTIES_ARM} value to the {@code sType} field. */
     public VkTensorFormatPropertiesARM sType$Default() { return sType(ARMTensors.VK_STRUCTURE_TYPE_TENSOR_FORMAT_PROPERTIES_ARM); }
     /** Sets the specified value to the {@code pNext} field. */
-    public VkTensorFormatPropertiesARM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    public VkTensorFormatPropertiesARM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkTensorFormatPropertiesARM set(
@@ -293,7 +293,7 @@ public class VkTensorFormatPropertiesARM extends Struct<VkTensorFormatProperties
         @NativeType("VkStructureType")
         public int sType() { return VkTensorFormatPropertiesARM.nsType(address()); }
         /** @return the value of the {@code pNext} field. */
-        @NativeType("void const *")
+        @NativeType("void *")
         public long pNext() { return VkTensorFormatPropertiesARM.npNext(address()); }
         /** @return the value of the {@code optimalTilingTensorFeatures} field. */
         @NativeType("VkFormatFeatureFlags2")
@@ -307,7 +307,7 @@ public class VkTensorFormatPropertiesARM extends Struct<VkTensorFormatProperties
         /** Sets the {@link ARMTensors#VK_STRUCTURE_TYPE_TENSOR_FORMAT_PROPERTIES_ARM STRUCTURE_TYPE_TENSOR_FORMAT_PROPERTIES_ARM} value to the {@code sType} field. */
         public VkTensorFormatPropertiesARM.Buffer sType$Default() { return sType(ARMTensors.VK_STRUCTURE_TYPE_TENSOR_FORMAT_PROPERTIES_ARM); }
         /** Sets the specified value to the {@code pNext} field. */
-        public VkTensorFormatPropertiesARM.Buffer pNext(@NativeType("void const *") long value) { VkTensorFormatPropertiesARM.npNext(address(), value); return this; }
+        public VkTensorFormatPropertiesARM.Buffer pNext(@NativeType("void *") long value) { VkTensorFormatPropertiesARM.npNext(address(), value); return this; }
 
     }
 
