@@ -73,13 +73,26 @@ enum class Platforms(val classifier: String) {
     }
 }
 
+data class CustomArtifacts(
+    val classifiersForBOM: List<String>,
+    val publication: MavenPublication.() -> Unit
+)
+
 enum class Module(
     val artifact: String,
     val projectName: String,
     val projectDescription: String,
-    vararg val platforms: Platforms
+    vararg val platforms: Platforms,
+    val custom: CustomArtifacts? = null
 ) {
-    CORE("lwjgl", "LWJGL", "The LWJGL core library.", *Platforms.ALL),
+    CORE("lwjgl", "LWJGL", "The LWJGL core library.", *Platforms.ALL, custom = CustomArtifacts(listOf("unsafe")) {
+        artifact(CORE.artifact("unsafe")) {
+            classifier = "unsafe"
+        }
+        artifact(CORE.artifact("sources-unsafe")) {
+            classifier = "sources-unsafe"
+        }
+    }),
     ASSIMP(
         "lwjgl-assimp", "LWJGL - Assimp bindings",
         "A portable Open Source library to import various well-known 3D model formats in a uniform manner.",
@@ -394,6 +407,9 @@ publishing {
                 create<MavenPublication>("maven${module.name}") {
                     artifactId = module.artifact
                     artifact(module.artifact())
+                    if (module.custom != null) {
+                        module.custom.publication(this)
+                    }
                     if (deployment.type !== BuildType.LOCAL || module.hasArtifact("sources")) {
                         artifact(module.artifact("sources")) {
                             classifier = "sources"
@@ -443,13 +459,36 @@ publishing {
                     asElement().getElementsByTagName("dependencyManagement").item(0).apply {
                         asElement().getElementsByTagName("dependencies").item(0).apply {
                             Module.values().forEach { module ->
-                                module.platforms.forEach {
-                                    ownerDocument.createElement("dependency").also(::appendChild).apply {
-                                        appendChild(ownerDocument.createElement("groupId").also(::appendChild).apply { textContent = "org.lwjgl" })
-                                        appendChild(ownerDocument.createElement("artifactId").also(::appendChild).apply { textContent = module.artifact })
-                                        appendChild(ownerDocument.createElement("version").also(::appendChild).apply { textContent = project.version as String })
-                                        appendChild(ownerDocument.createElement("classifier").also(::appendChild).apply { textContent = it.classifier })
-                                    }
+                                val classifiers =
+                                    (module.custom?.classifiersForBOM?.asSequence() ?: emptySequence()) +
+                                    module.platforms.map { it.classifier }
+
+                                classifiers.forEach {
+                                    appendChild(
+                                        ownerDocument
+                                            .createElement("dependency")
+                                            .apply {
+                                                appendChild(
+                                                    ownerDocument
+                                                        .createElement("groupId")
+                                                        .apply { textContent = "org.lwjgl" }
+                                                )
+                                                appendChild(
+                                                    ownerDocument
+                                                        .createElement("artifactId")
+                                                        .apply { textContent = module.artifact }
+                                                )
+                                                appendChild(
+                                                    ownerDocument
+                                                        .createElement("version")
+                                                        .apply { textContent = project.version as String }
+                                                )
+                                                appendChild(
+                                                    ownerDocument
+                                                        .createElement("classifier")
+                                                        .apply { textContent = it }
+                                                )
+                                            })
                                 }
                             }
                         }

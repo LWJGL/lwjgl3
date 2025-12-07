@@ -25,6 +25,8 @@ This backend is implemented using the new runtime bindings generator in the core
   - Use `Configuration.FFM_UPCALL_ARENA` to change the implicit arena type.
   - The `ffmScoped*` methods can be used to specify a user managed arena for upcall allocation, which is highly recommended.
 
+If an application faces unexpected compatibility or performance issues with the FFM backend, LWJGL publishes an additional core module artifact that is missing the FFM backend. The coordinates are `org.lwjgl:lwjgl:<version>:unsafe`, so simply add the `unsafe` classifier to the core module dependency to revert back to the JNI/Unsafe backend.
+
 ## Known issues with the bindings generator
 
 * The entire API is in preview and subject to change.

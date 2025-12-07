@@ -140,9 +140,6 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <property name="bin.test.html" location="bin/test" relative="true"/>
 
     <property name="release" location="bin/RELEASE" relative="true"/>
-    <property name="release.doc" location="${release}/doc" relative="true"/>
-    <property name="release.jar" location="${release}/jar" relative="true"/>
-    <property name="release.native" location="${release}/native" relative="true"/>
 
     <!--
         Offline build flag. This is useful when working offline, or when custom binary dependencies

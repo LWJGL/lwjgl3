@@ -1665,6 +1665,28 @@
 
             <release-module name="core" native-library="lwjgl" title="Core"/>
 
+            <sequential if:set="jdk25">
+                <!-- Create a copy of the core module without the FFM backend -->
+                <jar destfile="${release}/lwjgl/lwjgl-unsafe.jar" level="9" index="true" indexmetainf="true" filesetmanifest="merge">
+                    <zipfileset src="${release}/lwjgl/lwjgl.jar">
+                        <exclude name="META-INF/INDEX.LIST" />
+                        <exclude name="META-INF/versions/25/org/lwjgl/system/JNI*.class" />
+                        <exclude name="META-INF/versions/25/org/lwjgl/system/MemoryUtil*.class" />
+                        <exclude name="META-INF/versions/25/org/lwjgl/system/MemoryUtilTunables*.class" />
+                        <exclude name="META-INF/versions/25/org/lwjgl/system/Upcalls*.class" />
+                    </zipfileset>
+                </jar>
+
+                <jar destfile="${release}/lwjgl/lwjgl-sources-unsafe.jar" level="9" filesetmanifest="merge">
+                    <zipfileset src="${release}/lwjgl/lwjgl-sources.jar">
+                        <exclude name="META-INF/versions/25/org/lwjgl/system/JNI.java" />
+                        <exclude name="META-INF/versions/25/org/lwjgl/system/MemoryUtil.java" />
+                        <exclude name="META-INF/versions/25/org/lwjgl/system/MemoryUtilTunables.java" />
+                        <exclude name="META-INF/versions/25/org/lwjgl/system/Upcalls.java" />
+                    </zipfileset>
+                </jar>
+            </sequential>
+
             <delete dir="${bin.lwjgl}/core/META-INF/native-image" quiet="true"/>
         </sequential>
 
