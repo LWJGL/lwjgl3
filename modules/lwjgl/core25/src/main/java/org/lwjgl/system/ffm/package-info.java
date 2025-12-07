@@ -13,7 +13,7 @@
  *     <li>Dynamic Class-File Constants (JEP 309, JDK 11, a.k.a. Condy): Used to lazily initialize bindings, without precompiling a private nested class per function.</li>
  *     <li>Hidden Classes (JEP 371, JDK 15): Used to generate classes with minimal metadata and no interaction with ClassLoaders.</li>
  *     <li>Class data support for hidden classes (JDK-8256214, JDK 16): Used to boostrap Condy values.</li>
- *     <li>Foreign Function & Memory API (JEP 442, JDK 22): Used for native interoperation without JNI.</li>
+ *     <li>Foreign Function &amp; Memory API (JEP 442, JDK 22): Used for native interoperation without JNI.</li>
  *     <li>Class-File API (JEP 457, JDK 24): Used to generate bytecode at runtime, without 3rd-party dependencies.</li>
  * </ul>
  *
@@ -60,7 +60,7 @@
  *         A {@link java.lang.foreign.SegmentAllocator} or {@link org.lwjgl.system.ffm.StackAllocator} parameter. This parameter will be used to allocate storage for struct values passed or returned
  *         by-value and also for temporary storage needed internally by the method call (e.g. for {@link org.lwjgl.system.ffm.FFMReturn} buffers).
  *
- *         <p>If the parameter is of type {@code StackAllocator}, a stack frame will be pushed & popped inside the method call when temporary storage is
+ *         <p>If the parameter is of type {@code StackAllocator}, a stack frame will be pushed &amp; popped inside the method call when temporary storage is
  *         needed.</p>
  *
  *         <p>It must be specified after the {@code FFMFunctionAddress} parameter, if one exists, and before any other virtual or normal parameter.</p>
