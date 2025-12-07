@@ -37,7 +37,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 
         By default, os.arch of the JVM that runs ANT is used, but this can be overridden for cross-compiling to another architecture.
 
-        Valid values: x64, x86, arm64, arm32
+        Valid values: x64, x86, arm64, arm32, loongarch64
     -->
     <property name="build.arch" value="${env.LWJGL_BUILD_ARCH}" if:set="env.LWJGL_BUILD_ARCH"/>
 
@@ -67,11 +67,18 @@ This script is included in /build.xml and /config/update-dependencies.xml.
             <contains string="${os.arch}"    substring="riscv"/>
         </or>
     </condition>
+    <condition property="build.arch.loongarch" value="true">
+        <or>
+            <contains string="${build.arch}" substring="loongarch"/>
+            <contains string="${os.arch}"    substring="loongarch"/>
+        </or>
+    </condition>
     <condition property="build.arch.x64|x86" value="true">
         <and>
             <not><isset property="build.arch.arm"/></not>
             <not><isset property="build.arch.ppc"/></not>
             <not><isset property="build.arch.riscv"/></not>
+            <not><isset property="build.arch.loongarch"/></not>
         </and>
     </condition>
 
@@ -80,12 +87,13 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <condition property="build.arch" value="arm32"      unless:set="build.arch"><and><isset property="build.arch.arm"/>    <isfalse value="${is64Bit}"/></and></condition>
     <condition property="build.arch" value="ppc64le"    unless:set="build.arch"><and><isset property="build.arch.ppc"/>    <istrue  value="${is64Bit}"/></and></condition>
     <condition property="build.arch" value="riscv64"    unless:set="build.arch"><and><isset property="build.arch.riscv"/>  <istrue  value="${is64Bit}"/></and></condition>
+    <condition property="build.arch" value="loongarch64"    unless:set="build.arch"><and><isset property="build.arch.loongarch64"/>  <istrue  value="${is64Bit}"/></and></condition>
     <condition property="build.arch" value="x64"        unless:set="build.arch"><and><isset property="build.arch.x64|x86"/><istrue  value="${is64Bit}"/></and></condition>
     <condition property="build.arch" value="x86"        unless:set="build.arch"><and><isset property="build.arch.x64|x86"/><isfalse value="${is64Bit}"/></and></condition>
     <property      name="build.arch" value="${os.arch}" unless:set="build.arch"/>
 
-    <fail message="Invalid or unsupported build architecture: ${build.arch}. Supported: x64, x86, arm64, arm32, ppc64le, riscv64">
-        <condition><not><matches string="${build.arch}" pattern="^(x64|x86|arm64|arm32|ppc64le|riscv64)$"/></not></condition>
+    <fail message="Invalid or unsupported build architecture: ${build.arch}. Supported: x64, x86, arm64, arm32, ppc64le, riscv64, loongarch64">
+        <condition><not><matches string="${build.arch}" pattern="^(x64|x86|arm64|arm32|ppc64le|riscv64|loongarch64)$"/></not></condition>
     </fail>
 
     <property name="build.arch.${build.arch}" value="true"/>
