@@ -1622,7 +1622,7 @@
                     </zipfileset>
                 </jar>
 
-                <jar destfile="${release}/lwjgl/lwjgl-sources-unsafe.jar" level="9" filesetmanifest="merge">
+                <jar destfile="${release}/lwjgl/lwjgl-unsafe-sources.jar" level="9" filesetmanifest="merge">
                     <zipfileset src="${release}/lwjgl/lwjgl-sources.jar">
                         <exclude name="META-INF/versions/25/org/lwjgl/system/JNI.java" />
                         <exclude name="META-INF/versions/25/org/lwjgl/system/MemoryUtil.java" />

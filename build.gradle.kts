@@ -89,8 +89,8 @@ enum class Module(
         artifact(CORE.artifact("unsafe")) {
             classifier = "unsafe"
         }
-        artifact(CORE.artifact("sources-unsafe")) {
-            classifier = "sources-unsafe"
+        artifact(CORE.artifact("unsafe-sources")) {
+            classifier = "unsafe-sources"
         }
     }),
     ASSIMP(
