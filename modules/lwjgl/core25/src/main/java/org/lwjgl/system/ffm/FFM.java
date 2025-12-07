@@ -660,12 +660,14 @@ public final class FFM {
         /**
          * Sets a custom {@link Object#equals} implementation for the group.
          *
-         * <p>By default, an {@code equals} method will be generated with the same semantics as {@link Record#equals}, where getters take the place of
+         * <p>By default, an {@code equals} method will be generated with the same semantics as {@link Record#equals}, where the canonical getters act as
          * components. This means that the default implementation will not consider padding members or members with no corresponding getters.</p>
          *
          * @param equals the {@code equals} implementation
          *
          * @return this builder instance
+         *
+         * @see FFMCanonical
          */
         public SELF withEquals(BiPredicate<T, Object> equals) {
             this.equals = equals;
@@ -675,12 +677,14 @@ public final class FFM {
         /**
          * Sets a custom {@link Object#hashCode} implementation for the group.
          *
-         * <p>By default, a {@code hashCode} method will be generated with the same semantics as {@link Record#hashCode}, where getters take the place of
+         * <p>By default, a {@code hashCode} method will be generated with the same semantics as {@link Record#hashCode}, where the canonical getters act as
          * components. This means that the default implementation will not consider padding members or members with no corresponding getters.</p>
          *
          * @param hashCode the {@code hashCode} implementation
          *
          * @return this builder instance
+         *
+         * @see FFMCanonical
          */
         public SELF withHashCode(ToIntFunction<T> hashCode) {
             this.hashCode = hashCode;
@@ -690,12 +694,14 @@ public final class FFM {
         /**
          * Sets a custom {@link Object#toString} implementation for the group.
          *
-         * <p>By default, a {@code toString} method will be generated with the same semantics as {@link Record#toString}, where getters take the place of
+         * <p>By default, a {@code toString} method will be generated with the same semantics as {@link Record#toString}, where the canonical getters act as
          * components. This means that the default implementation will not consider padding members or members with no corresponding getters.</p>
          *
          * @param toString the {@code toString} implementation
          *
          * @return this builder instance
+         *
+         * @see FFMCanonical
          */
         public SELF withToString(Function<T, String> toString) {
             this.toString = toString;
