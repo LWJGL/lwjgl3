@@ -18,7 +18,7 @@ val sonatypeUsername: String by project
 val sonatypePassword: String by project
 
 defaultTasks = mutableListOf("publish")
-buildDir = file("bin/MAVEN")
+layout.buildDirectory.set(layout.projectDirectory.dir("bin/MAVEN"))
 group = "org.lwjgl"
 version = lwjglVersion
 
@@ -56,24 +56,24 @@ val deployment = when {
 println("${deployment.type.name} BUILD")
 
 enum class Platforms(val classifier: String) {
-    FREEBSD("freebsd"),
-    LINUX("linux"),
-    LINUX_ARM64("linux-arm64"),
-    LINUX_ARM32("linux-arm32"),
-    LINUX_PPC64LE("linux-ppc64le"),
-    LINUX_RISCV64("linux-riscv64"),
-    MACOS("macos"),
-    MACOS_ARM64("macos-arm64"),
-    WINDOWS("windows"),
-    WINDOWS_X86("windows-x86"),
-    WINDOWS_ARM64("windows-arm64");
+    FREEBSD("natives-freebsd"),
+    LINUX("natives-linux"),
+    LINUX_ARM64("natives-linux-arm64"),
+    LINUX_ARM32("natives-linux-arm32"),
+    LINUX_PPC64LE("natives-linux-ppc64le"),
+    LINUX_RISCV64("natives-linux-riscv64"),
+    MACOS("natives-macos"),
+    MACOS_ARM64("natives-macos-arm64"),
+    WINDOWS("natives-windows"),
+    WINDOWS_X86("natives-windows-x86"),
+    WINDOWS_ARM64("natives-windows-arm64");
 
     companion object {
         val ALL = values()
     }
 }
 
-enum class Artifacts(
+enum class Module(
     val artifact: String,
     val projectName: String,
     val projectDescription: String,
@@ -296,7 +296,7 @@ enum class Artifacts(
         *Platforms.ALL
     );
 
-    fun directory(buildDir: String) = "$buildDir/$artifact"
+    private fun directory(buildDir: String) = "$buildDir/$artifact"
 
     private fun path() = "${directory("bin/MAVEN")}/$artifact"
 
@@ -359,7 +359,7 @@ publishing {
         and a whole lot more verbose in Maven. Hopefully, the automation
         is going to alleviate the pain.
          */
-        fun org.gradle.api.publish.maven.MavenPom.setupPom(pomName: String, pomDescription: String, pomPackaging: String) {
+        fun MavenPom.setupPom(pomName: String, pomDescription: String, pomPackaging: String) {
             name.set(pomName)
             description.set(pomDescription)
             url.set("https://www.lwjgl.org")
@@ -389,7 +389,7 @@ publishing {
             }
         }
 
-        Artifacts.values().forEach { module ->
+        Module.values().forEach { module ->
             if (module.isActive) {
                 create<MavenPublication>("maven${module.name}") {
                     artifactId = module.artifact
@@ -405,9 +405,9 @@ publishing {
                         }
                     }
                     module.platforms.forEach {
-                        if (deployment.type !== BuildType.LOCAL || module.hasArtifact("natives-${it.classifier}")) {
-                            artifact(module.artifact("natives-${it.classifier}")) {
-                                classifier = "natives-${it.classifier}"
+                        if (deployment.type !== BuildType.LOCAL || module.hasArtifact(it.classifier)) {
+                            artifact(module.artifact(it.classifier)) {
+                                classifier = it.classifier
                             }
                         }
                     }
@@ -415,7 +415,7 @@ publishing {
                     pom {
                         setupPom(module.projectName, module.projectDescription, "jar")
 
-                        if (module != Artifacts.CORE) {
+                        if (module != Module.CORE) {
                             withXml {
                                 asNode().appendNode("dependencies").apply {
                                     appendNode("dependency").apply {
@@ -442,13 +442,13 @@ publishing {
                 withXml {
                     asElement().getElementsByTagName("dependencyManagement").item(0).apply {
                         asElement().getElementsByTagName("dependencies").item(0).apply {
-                            Artifacts.values().forEach { module ->
+                            Module.values().forEach { module ->
                                 module.platforms.forEach {
                                     ownerDocument.createElement("dependency").also(::appendChild).apply {
                                         appendChild(ownerDocument.createElement("groupId").also(::appendChild).apply { textContent = "org.lwjgl" })
                                         appendChild(ownerDocument.createElement("artifactId").also(::appendChild).apply { textContent = module.artifact })
                                         appendChild(ownerDocument.createElement("version").also(::appendChild).apply { textContent = project.version as String })
-                                        appendChild(ownerDocument.createElement("classifier").also(::appendChild).apply { textContent = "natives-${it.classifier}" })
+                                        appendChild(ownerDocument.createElement("classifier").also(::appendChild).apply { textContent = it.classifier })
                                     }
                                 }
                             }
@@ -472,10 +472,10 @@ signing {
     sign(publishing.publications)
 }
 
-val copyArchives = tasks.create<Copy>("copyArchives") {
+val copyArchives = tasks.register<Copy>("copyArchives") {
     from("bin/RELEASE")
     include("**")
-    destinationDir = buildDir
+    destinationDir = layout.buildDirectory.asFile.get()
 }
 
 tasks.withType<Sign> {
@@ -484,7 +484,7 @@ tasks.withType<Sign> {
 
 dependencies {
     constraints {
-        Artifacts.values().forEach { module ->
+        Module.values().forEach { module ->
             api("org.lwjgl:${module.artifact}:$version")
         }
     }
