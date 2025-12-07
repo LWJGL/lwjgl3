@@ -1448,10 +1448,11 @@
 
             <!-- Bundle javadoc -->
             <!-- This is slow, use -Djavadoc.skip=true for fast local builds -->
+            <property name="javadoc.skip" value="true" unless:set="jdk25"/>
             <mkdir dir="${release}/${module}/javadoc" unless:set="javadoc.skip"/>
             <javadoc
                 destdir="${release}/${module}/javadoc"
-                source="9"
+                source="25"
                 windowtitle="LWJGL ${build.version} - @{title}"
                 encoding="UTF-8"
                 docencoding="UTF-8"
@@ -1479,9 +1480,9 @@
                 <arg line="-Xdoclint:html,reference,syntax"/>
                 <arg line="-Xmaxerrs 1000 -Xmaxwarns 1000"/>
                 <arg line="-notimestamp"/>
-                <arg value="-html5" if:set="jdk11"/>
+                <arg value="-html5"/>
                 <arg line="-J-Dfile.encoding=UTF-8 -J-Dstdout.encoding=UTF-8 -J-Dstderr.encoding=UTF-8 -J-Dline.separator=&#10;"/>
-                <arg line="--add-exports jdk.javadoc/com.sun.tools.doclets=ALL-UNNAMED" if:set="jdk11"/>
+                <arg line="--add-exports jdk.javadoc/com.sun.tools.doclets=ALL-UNNAMED"/>
             </javadoc>
             <get-quiet name="favicon" url="https://www.lwjgl.org/favicon.ico" dest="${release}/${module}/javadoc" unless:set="javadoc.skip"/>
 
@@ -1590,8 +1591,6 @@
             <jvmarg value="-Dmodule.version=${module.version}"/>
         </java>
 
-        <parallel threadcount="4" failonany="true">
-
         <!-- CORE -->
         <sequential>
             <quiet>
@@ -1635,6 +1634,8 @@
 
             <delete dir="${bin.lwjgl}/core/META-INF/native-image" quiet="true"/>
         </sequential>
+
+        <parallel threadcount="4" failonany="true">
 
         <!-- Assimp -->
         <release-module name="assimp" title="assimp" if:true="${binding.assimp}">
