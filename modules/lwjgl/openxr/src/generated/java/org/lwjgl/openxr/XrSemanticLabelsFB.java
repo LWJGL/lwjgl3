@@ -104,6 +104,8 @@ public class XrSemanticLabelsFB extends Struct<XrSemanticLabelsFB> implements Na
     public XrSemanticLabelsFB type$Default() { return type(FBScene.XR_TYPE_SEMANTIC_LABELS_FB); }
     /** Sets the specified value to the {@code next} field. */
     public XrSemanticLabelsFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrSemanticLabelsSupportInfoFB} value to the {@code next} chain. */
+    public XrSemanticLabelsFB next(XrSemanticLabelsSupportInfoFB value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@code bufferCapacityInput} field. */
     public XrSemanticLabelsFB bufferCapacityInput(@NativeType("uint32_t") int value) { nbufferCapacityInput(address(), value); return this; }
     /** Sets the specified value to the {@code bufferCountOutput} field. */
@@ -338,6 +340,8 @@ public class XrSemanticLabelsFB extends Struct<XrSemanticLabelsFB> implements Na
         public XrSemanticLabelsFB.Buffer type$Default() { return type(FBScene.XR_TYPE_SEMANTIC_LABELS_FB); }
         /** Sets the specified value to the {@code next} field. */
         public XrSemanticLabelsFB.Buffer next(@NativeType("void const *") long value) { XrSemanticLabelsFB.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrSemanticLabelsSupportInfoFB} value to the {@code next} chain. */
+        public XrSemanticLabelsFB.Buffer next(XrSemanticLabelsSupportInfoFB value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@code bufferCapacityInput} field. */
         public XrSemanticLabelsFB.Buffer bufferCapacityInput(@NativeType("uint32_t") int value) { XrSemanticLabelsFB.nbufferCapacityInput(address(), value); return this; }
         /** Sets the specified value to the {@code bufferCountOutput} field. */

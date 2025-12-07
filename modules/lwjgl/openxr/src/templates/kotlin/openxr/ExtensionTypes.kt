@@ -1124,7 +1124,10 @@ val XrSceneMeshBuffersGetInfoMSFT = struct(Module.OPENXR, "XrSceneMeshBuffersGet
 
 val XrSceneMeshBuffersMSFT = struct(Module.OPENXR, "XrSceneMeshBuffersMSFT") {
     Expression("#TYPE_SCENE_MESH_BUFFERS_MSFT")..XrStructureType("type")
-    nullable..opaque_p("next")
+    PointerSetter(
+        "XrSceneMeshIndicesUint16MSFT", "XrSceneMeshIndicesUint32MSFT", "XrSceneMeshVertexBufferMSFT",
+        prepend = true
+    )..nullable..opaque_p("next")
 }
 
 val XrSceneMeshVertexBufferMSFT = struct(Module.OPENXR, "XrSceneMeshVertexBufferMSFT") {
@@ -1940,7 +1943,10 @@ val XrSceneMarkerQRCodesMSFT = struct(Module.OPENXR, "XrSceneMarkerQRCodesMSFT")
 
 val XrSpaceQueryInfoBaseHeaderFB = struct(Module.OPENXR, "XrSpaceQueryInfoBaseHeaderFB") {
     XrStructureType("type")
-    nullable..opaque_const_p("next")
+    PointerSetter(
+        "XrSpaceGroupUuidFilterInfoMETA",
+        prepend = true
+    )..nullable..opaque_const_p("next")
 }
 
 val XrSpaceFilterInfoBaseHeaderFB = struct(Module.OPENXR, "XrSpaceFilterInfoBaseHeaderFB") {
@@ -2146,7 +2152,10 @@ val XrRect3DfFB = struct(Module.OPENXR, "XrRect3DfFB") {
 
 val XrSemanticLabelsFB = struct(Module.OPENXR, "XrSemanticLabelsFB") {
     Expression("#TYPE_SEMANTIC_LABELS_FB")..XrStructureType("type")
-    nullable..opaque_const_p("next")
+    PointerSetter(
+        "XrSemanticLabelsSupportInfoFB",
+        prepend = true
+    )..nullable..opaque_const_p("next")
     AutoSize("buffer", optional = true)..uint32_t("bufferCapacityInput")
     uint32_t("bufferCountOutput")
     nullable..char.p("buffer")
@@ -2835,11 +2844,20 @@ val XrEnvironmentDepthImageViewMETA = struct(Module.OPENXR, "XrEnvironmentDepthI
 
 val XrEnvironmentDepthImageMETA = struct(Module.OPENXR, "XrEnvironmentDepthImageMETA") {
     Expression("#TYPE_ENVIRONMENT_DEPTH_IMAGE_META")..XrStructureType("type")
-    nullable..opaque_const_p("next")
+    PointerSetter(
+        "XrEnvironmentDepthImageTimestampMETA",
+        prepend = true
+    )..nullable..opaque_const_p("next")
     uint32_t("swapchainIndex")
     float("nearZ")
     float("farZ")
     XrEnvironmentDepthImageViewMETA("views")[2]
+}
+
+val XrEnvironmentDepthImageTimestampMETA = struct(Module.OPENXR, "XrEnvironmentDepthImageTimestampMETA") {
+    Expression("#TYPE_ENVIRONMENT_DEPTH_IMAGE_TIMESTAMP_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrTime("captureTime")
 }
 
 val XrEnvironmentDepthHandRemovalSetInfoMETA = struct(Module.OPENXR, "XrEnvironmentDepthHandRemovalSetInfoMETA") {
@@ -3170,7 +3188,10 @@ val XrFacialSimulationDataGetInfoBD = struct(Module.OPENXR, "XrFacialSimulationD
 
 val XrFacialSimulationDataBD = struct(Module.OPENXR, "XrFacialSimulationDataBD") {
     Expression("#TYPE_FACIAL_SIMULATION_DATA_BD")..XrStructureType("type")
-    nullable..opaque_p("next")
+    PointerSetter(
+        "XrLipExpressionDataBD",
+        prepend = true
+    )..nullable..opaque_p("next")
     AutoSize("faceExpressionWeights")..uint32_t("faceExpressionWeightCount")
     float.p("faceExpressionWeights")
     XrBool32("isUpperFaceDataValid")
@@ -3193,7 +3214,10 @@ val XrSystemSpatialSensingPropertiesBD = struct(Module.OPENXR, "XrSystemSpatialS
 
 val XrSpatialEntityComponentGetInfoBD = struct(Module.OPENXR, "XrSpatialEntityComponentGetInfoBD") {
     Expression("#TYPE_SPATIAL_ENTITY_COMPONENT_GET_INFO_BD")..XrStructureType("type")
-    nullable..opaque_const_p("next")
+    PointerSetter(
+        "XrSpatialEntityLocationGetInfoBD",
+        prepend = true
+    )..nullable..opaque_const_p("next")
     XrSpatialEntityIdBD("entityId")
     XrSpatialEntityComponentTypeBD("componentType")
 }

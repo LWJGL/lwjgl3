@@ -119,6 +119,8 @@ public class XrFacialSimulationDataBD extends Struct<XrFacialSimulationDataBD> i
     public XrFacialSimulationDataBD type$Default() { return type(BDFacialSimulation.XR_TYPE_FACIAL_SIMULATION_DATA_BD); }
     /** Sets the specified value to the {@code next} field. */
     public XrFacialSimulationDataBD next(@NativeType("void *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrLipExpressionDataBD} value to the {@code next} chain. */
+    public XrFacialSimulationDataBD next(XrLipExpressionDataBD value) { return this.next(value.next(this.next()).address()); }
     /** Sets the address of the specified {@link FloatBuffer} to the {@code faceExpressionWeights} field. */
     public XrFacialSimulationDataBD faceExpressionWeights(@NativeType("float *") FloatBuffer value) { nfaceExpressionWeights(address(), value); return this; }
     /** Sets the specified value to the {@code isUpperFaceDataValid} field. */
@@ -380,6 +382,8 @@ public class XrFacialSimulationDataBD extends Struct<XrFacialSimulationDataBD> i
         public XrFacialSimulationDataBD.Buffer type$Default() { return type(BDFacialSimulation.XR_TYPE_FACIAL_SIMULATION_DATA_BD); }
         /** Sets the specified value to the {@code next} field. */
         public XrFacialSimulationDataBD.Buffer next(@NativeType("void *") long value) { XrFacialSimulationDataBD.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrLipExpressionDataBD} value to the {@code next} chain. */
+        public XrFacialSimulationDataBD.Buffer next(XrLipExpressionDataBD value) { return this.next(value.next(this.next()).address()); }
         /** Sets the address of the specified {@link FloatBuffer} to the {@code faceExpressionWeights} field. */
         public XrFacialSimulationDataBD.Buffer faceExpressionWeights(@NativeType("float *") FloatBuffer value) { XrFacialSimulationDataBD.nfaceExpressionWeights(address(), value); return this; }
         /** Sets the specified value to the {@code isUpperFaceDataValid} field. */

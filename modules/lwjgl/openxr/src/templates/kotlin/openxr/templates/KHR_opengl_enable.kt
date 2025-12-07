@@ -10,7 +10,7 @@ import openxr.*
 
 val KHR_opengl_enable = "KHROpenGLEnable".nativeClassXR("KHR_opengl_enable", type = "instance", postfix = "KHR") {
     IntConstant(
-        "KHR_opengl_enable_SPEC_VERSION".."11"
+        "KHR_opengl_enable_SPEC_VERSION".."12"
     )
 
     StringConstant(

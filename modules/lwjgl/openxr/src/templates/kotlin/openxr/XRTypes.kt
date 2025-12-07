@@ -215,7 +215,7 @@ val XrViewConfigurationView = struct(Module.OPENXR, "XrViewConfigurationView") {
 val XrSwapchainCreateInfo = struct(Module.OPENXR, "XrSwapchainCreateInfo") {
     Expression("#TYPE_SWAPCHAIN_CREATE_INFO")..XrStructureType("type")
     PointerSetter(
-        "XrSecondaryViewConfigurationSwapchainCreateInfoMSFT", "XrSwapchainCreateInfoFoveationFB", "XrVulkanSwapchainCreateInfoMETA",
+        "XrSecondaryViewConfigurationSwapchainCreateInfoMSFT", "XrSwapchainCreateInfoFoveationFB", "XrVulkanSwapchainCreateInfoMETA", "XrVulkanSwapchainFormatListCreateInfoKHR",
         prepend = true
     )..nullable..opaque_const_p("next")
     XrSwapchainCreateFlags("createFlags")

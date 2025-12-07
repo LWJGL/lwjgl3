@@ -10,7 +10,7 @@ import openxr.*
 
 val META_environment_depth = "METAEnvironmentDepth".nativeClassXR("META_environment_depth", type = "instance", postfix = "META") {
     IntConstant(
-        "META_environment_depth_SPEC_VERSION".."1"
+        "META_environment_depth_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -30,7 +30,8 @@ val META_environment_depth = "METAEnvironmentDepth".nativeClassXR("META_environm
         "TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META".."1000291004",
         "TYPE_ENVIRONMENT_DEPTH_IMAGE_META".."1000291005",
         "TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META".."1000291006",
-        "TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META".."1000291007"
+        "TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META".."1000291007",
+        "TYPE_ENVIRONMENT_DEPTH_IMAGE_TIMESTAMP_META".."1000291008"
     )
 
     EnumConstant(

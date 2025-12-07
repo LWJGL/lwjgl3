@@ -21,7 +21,7 @@ import org.lwjgl.vulkan.*;
 
 public class KHRVulkanEnable {
 
-    public static final int XR_KHR_vulkan_enable_SPEC_VERSION = 9;
+    public static final int XR_KHR_vulkan_enable_SPEC_VERSION = 10;
 
     public static final String XR_KHR_VULKAN_ENABLE_EXTENSION_NAME = "XR_KHR_vulkan_enable";
 

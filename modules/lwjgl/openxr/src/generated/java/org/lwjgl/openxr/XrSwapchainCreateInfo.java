@@ -152,6 +152,8 @@ public class XrSwapchainCreateInfo extends Struct<XrSwapchainCreateInfo> impleme
     public XrSwapchainCreateInfo next(XrSwapchainCreateInfoFoveationFB value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrVulkanSwapchainCreateInfoMETA} value to the {@code next} chain. */
     public XrSwapchainCreateInfo next(XrVulkanSwapchainCreateInfoMETA value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrVulkanSwapchainFormatListCreateInfoKHR} value to the {@code next} chain. */
+    public XrSwapchainCreateInfo next(XrVulkanSwapchainFormatListCreateInfoKHR value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@code createFlags} field. */
     public XrSwapchainCreateInfo createFlags(@NativeType("XrSwapchainCreateFlags") long value) { ncreateFlags(address(), value); return this; }
     /** Sets the specified value to the {@code usageFlags} field. */
@@ -458,6 +460,8 @@ public class XrSwapchainCreateInfo extends Struct<XrSwapchainCreateInfo> impleme
         public XrSwapchainCreateInfo.Buffer next(XrSwapchainCreateInfoFoveationFB value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrVulkanSwapchainCreateInfoMETA} value to the {@code next} chain. */
         public XrSwapchainCreateInfo.Buffer next(XrVulkanSwapchainCreateInfoMETA value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrVulkanSwapchainFormatListCreateInfoKHR} value to the {@code next} chain. */
+        public XrSwapchainCreateInfo.Buffer next(XrVulkanSwapchainFormatListCreateInfoKHR value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@code createFlags} field. */
         public XrSwapchainCreateInfo.Buffer createFlags(@NativeType("XrSwapchainCreateFlags") long value) { XrSwapchainCreateInfo.ncreateFlags(address(), value); return this; }
         /** Sets the specified value to the {@code usageFlags} field. */
