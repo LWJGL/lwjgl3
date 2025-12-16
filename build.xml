@@ -467,42 +467,49 @@
             <include name="**"/>
         </lwjgl.javac>
 
-        <mkdir dir="${bin.lwjgl}/core/META-INF/versions/11" if:set="jdk11"/>
-        <delete file="${bin.lwjgl}/core/META-INF/versions/11/module-info.class" quiet="true" if:set="jdk11"/>
-        <lwjgl.javac11 destdir="${bin.lwjgl}/core/META-INF/versions/11" taskname="javac: Core - Java 11" if:set="jdk11">
-            <classpath>
-                <pathelement path="${bin.lwjgl}/core"/>
-                <pathelement path="${lib}/java/jspecify.jar"/>
-            </classpath>
-            <src>
-                <pathelement path="${module.lwjgl}/core11/src/main/java"/>
-            </src>
-            <include name="**"/>
-        </lwjgl.javac11>
+        <sequential if:set="jdk11">
+            <mkdir dir="${bin.lwjgl}/core/META-INF/versions/11"/>
+            <delete file="${bin.lwjgl}/core/META-INF/versions/11/module-info.class" quiet="true"/>
+            <lwjgl.javac11 destdir="${bin.lwjgl}/core/META-INF/versions/11" taskname="javac: Core - Java 11">
+                <classpath>
+                    <pathelement path="${bin.lwjgl}/core"/>
+                    <pathelement path="${lib}/java/jspecify.jar"/>
+                </classpath>
+                <src>
+                    <pathelement path="${module.lwjgl}/core11/src/main/java"/>
+                </src>
+                <include name="**"/>
+            </lwjgl.javac11>
+        </sequential>
 
-        <mkdir dir="${bin.lwjgl}/core/META-INF/versions/17" if:set="jdk17"/>
-        <lwjgl.javac17 destdir="${bin.lwjgl}/core/META-INF/versions/17" taskname="javac: Core - Java 17" if:set="jdk17">
-            <classpath>
-                <pathelement path="${bin.lwjgl}/core"/>
-            </classpath>
-            <src>
-                <pathelement path="${module.lwjgl}/core17/src/main/java"/>
-            </src>
-            <include name="**"/>
-        </lwjgl.javac17>
+        <sequential if:set="jdk17">
+            <mkdir dir="${bin.lwjgl}/core/META-INF/versions/17"/>
+            <lwjgl.javac17 destdir="${bin.lwjgl}/core/META-INF/versions/17" taskname="javac: Core - Java 17">
+                <classpath>
+                    <pathelement path="${bin.lwjgl}/core"/>
+                </classpath>
+                <src>
+                    <pathelement path="${module.lwjgl}/core17/src/main/java"/>
+                </src>
+                <include name="**"/>
+            </lwjgl.javac17>
+        </sequential>
 
-        <mkdir dir="${bin.lwjgl}/core/META-INF/versions/25" if:set="jdk25"/>
-        <lwjgl.javac25 destdir="${bin.lwjgl}/core/META-INF/versions/25" taskname="javac: Core - Java 25" if:set="jdk25">
-            <classpath>
-                <pathelement path="${bin.lwjgl}/core"/>
-                <pathelement path="${lib}/java/jspecify.jar"/>
-            </classpath>
-            <src>
-                <pathelement path="${module.lwjgl}/core25/src/main/java"/>
-                <pathelement path="${module.lwjgl}/core25/src/generated/java/"/>
-            </src>
-            <include name="**"/>
-        </lwjgl.javac25>
+        <sequential if:set="jdk25">
+            <mkdir dir="${bin.lwjgl}/core/META-INF/versions/25"/>
+            <delete file="${bin.lwjgl}/core/META-INF/versions/25/module-info.class" quiet="true"/>
+            <lwjgl.javac25 destdir="${bin.lwjgl}/core/META-INF/versions/25" taskname="javac: Core - Java 25">
+                <classpath>
+                    <pathelement path="${bin.lwjgl}/core"/>
+                    <pathelement path="${lib}/java/jspecify.jar"/>
+                </classpath>
+                <src>
+                    <pathelement path="${module.lwjgl}/core25/src/main/java"/>
+                    <pathelement path="${module.lwjgl}/core25/src/generated/java/"/>
+                </src>
+                <include name="**"/>
+            </lwjgl.javac25>
+        </sequential>
 
         <parallel threadsPerProcessor="1">
             <compileBinding binding="assimp"/>
@@ -1524,13 +1531,13 @@
 
         <local name="input"/>
         <input
-            message="It is recommended to build LWJGL releases on JDK 17 or higher. Continue with current JDK?"
+            message="It is recommended to build LWJGL releases on JDK 25 or higher. Continue with current JDK?"
             validargs="y,n"
             defaultvalue="n"
             addproperty="input"
-            unless:set="jdk17"
+            unless:set="jdk25"
         />
-        <fail message="Cancelled" unless:set="jdk17">
+        <fail message="Cancelled" unless:set="jdk25">
             <condition>
                 <equals arg1="n" arg2="${input}"/>
             </condition>
@@ -1600,21 +1607,68 @@
                 <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/17" if:set="jdk17">
                     <fileset dir="${module.lwjgl}/core17/src/main/java" includes="**"/>
                 </copy>
-                <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/25" if:set="jdk25">
-                    <fileset dir="${module.lwjgl}/core25/src/main/java" includes="**"/>
-                </copy>
                 <copy todir="${bin.lwjgl}/core/META-INF/native-image/org.lwjgl/lwjgl">
                     <fileset dir="config/native-image/META-INF/native-image" includes="**" excludes="resource-config.json"/>
                 </copy>
             </quiet>
 
+            <sequential if:set="jdk25">
+                <!-- Generate module-info override for JDK 25 -->
+                <java
+                        classname="org.lwjgl.system.ffm.FFM"
+                        fork="true"
+                        failonerror="true"
+                        taskname="module-info-gen :: java 25"
+                >
+                    <classpath>
+                        <pathelement path="bin/classes/lwjgl/core/META-INF/versions/25"/>
+                        <pathelement path="bin/classes/lwjgl/core"/>
+                    </classpath>
+                    <jvmarg value="-Dmodule.version=${module.version}"/>
+                    <jvmarg value="--enable-native-access=ALL-UNNAMED"/>
+                </java>
+                <quiet>
+                    <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/25">
+                        <fileset dir="${module.lwjgl}/core25/src/main/java" includes="**"/>
+                    </copy>
+                    <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/25">
+                        <fileset dir="${module.lwjgl}/core25/src/main/resources" includes="module-info.java"/>
+                    </copy>
+                </quiet>
+            </sequential>
+
             <release-module name="core" native-library="lwjgl" title="Core"/>
 
             <sequential if:set="jdk25">
+                <!-- Generate module-info override for JDK 25 without the FFM backend -->
+                <java
+                        classname="org.lwjgl.system.ffm.FFM"
+                        fork="true"
+                        failonerror="true"
+                        taskname="module-info-gen :: java 25 - Unsafe"
+                >
+                    <classpath>
+                        <pathelement path="bin/classes/lwjgl/core/META-INF/versions/25"/>
+                        <pathelement path="bin/classes/lwjgl/core"/>
+                    </classpath>
+                    <jvmarg value="-Dmodule.version=${module.version}"/>
+                    <jvmarg value="-Dunsafe=true"/>
+                    <jvmarg value="--enable-native-access=ALL-UNNAMED"/>
+                </java>
+                <quiet>
+                    <copy todir="${module.lwjgl}/core/src/generated/java/META-INF/versions/25">
+                        <fileset dir="${module.lwjgl}/core25/src/main/resources/unsafe" includes="module-info.java"/>
+                    </copy>
+                </quiet>
+
                 <!-- Create a copy of the core module without the FFM backend -->
                 <jar destfile="${release}/lwjgl/lwjgl-unsafe.jar" level="9" index="true" indexmetainf="true" filesetmanifest="merge">
+                    <fileset dir="bin/classes/lwjgl/core">
+                        <include name="META-INF/versions/25/module-info.class"/>
+                    </fileset>
                     <zipfileset src="${release}/lwjgl/lwjgl.jar">
                         <exclude name="META-INF/INDEX.LIST" />
+                        <exclude name="META-INF/versions/25/module-info.class" />
                         <exclude name="META-INF/versions/25/org/lwjgl/system/JNI*.class" />
                         <exclude name="META-INF/versions/25/org/lwjgl/system/MemoryUtil*.class" />
                         <exclude name="META-INF/versions/25/org/lwjgl/system/MemoryUtilTunables*.class" />
@@ -1623,13 +1677,21 @@
                 </jar>
 
                 <jar destfile="${release}/lwjgl/lwjgl-unsafe-sources.jar" level="9" filesetmanifest="merge">
+                    <fileset dir="${module.lwjgl}/core/src/generated/java/">
+                        <include name="META-INF/versions/25/module-info.java"/>
+                    </fileset>
                     <zipfileset src="${release}/lwjgl/lwjgl-sources.jar">
+                        <exclude name="META-INF/versions/25/module-info.java" />
                         <exclude name="META-INF/versions/25/org/lwjgl/system/JNI.java" />
                         <exclude name="META-INF/versions/25/org/lwjgl/system/MemoryUtil.java" />
                         <exclude name="META-INF/versions/25/org/lwjgl/system/MemoryUtilTunables.java" />
                         <exclude name="META-INF/versions/25/org/lwjgl/system/Upcalls.java" />
                     </zipfileset>
                 </jar>
+
+                <quiet>
+                    <delete dir="${module.lwjgl}/core/src/generated/java/META-INF" quiet="true"/>
+                </quiet>
             </sequential>
 
             <delete dir="${bin.lwjgl}/core/META-INF/native-image" quiet="true"/>

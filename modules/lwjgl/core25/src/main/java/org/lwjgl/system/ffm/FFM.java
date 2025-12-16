@@ -8,13 +8,16 @@ import org.jspecify.annotations.*;
 import org.lwjgl.system.*;
 import org.lwjgl.system.libffi.*;
 
+import java.io.*;
 import java.lang.annotation.Annotation;
 import java.lang.classfile.*;
+import java.lang.classfile.attribute.*;
 import java.lang.constant.*;
 import java.lang.foreign.*;
 import java.lang.invoke.*;
 import java.lang.reflect.*;
 import java.nio.charset.*;
+import java.nio.file.*;
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.*;
@@ -71,6 +74,39 @@ public final class FFM {
     static final ScopedValue<Arena> ARENA = ScopedValue.newInstance();
 
     private FFM() {
+    }
+
+    static void main() {
+        // Generate module-info.class for Java 25+
+        var path = Path.of("bin", "classes", "lwjgl", "core", "META-INF", "versions", "25", "module-info.class");
+
+        // Drop the jdk.unsupported module and export the org.lwjgl.system.ffm package
+        var moduleAttr = ModuleAttribute.of(ModuleDesc.of("org.lwjgl"), mab -> {
+            mab
+                .moduleVersion(System.getProperty("module.version"))
+                .requires(ModuleRequireInfo.of(ModuleDesc.of("java.base"), AccessFlag.MODULE.mask(), "25"))
+                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl"), 0))
+                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system"), 0))
+                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.ffm"), 0))
+                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.freebsd"), 0))
+                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.jni"), 0))
+                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.libc"), 0))
+                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.libffi"), 0))
+                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.linux"), 0))
+                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.macosx"), 0))
+                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.windows"), 0));
+
+            if (Boolean.getBoolean("unsafe")) {
+                mab.requires(ModuleRequireInfo.of(ModuleDesc.of("jdk.unsupported"), AccessFlag.TRANSITIVE.mask(), "25"));
+            }
+        });
+
+        try {
+            ClassFile.of()
+                .buildModuleTo(path, moduleAttr);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     static FFMConfig getConfig(Class<?> bindingInterface) {
