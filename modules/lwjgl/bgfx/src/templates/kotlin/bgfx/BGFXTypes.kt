@@ -24,6 +24,7 @@ val bgfx_shading_rate_t = "bgfx_shading_rate_t".enumType
 val bgfx_texture_format_t = "bgfx_texture_format_t".enumType
 val bgfx_topology_convert_t = "bgfx_topology_convert_t".enumType
 val bgfx_topology_sort_t = "bgfx_topology_sort_t".enumType
+val bgfx_uniform_freq_t = "bgfx_uniform_freq_t".enumType
 val bgfx_uniform_type_t = "bgfx_uniform_type_t".enumType
 val bgfx_view_mode_t = "bgfx_view_mode_t".enumType
 
@@ -444,6 +445,7 @@ val bgfx_init_t = struct(Module.BGFX, "BGFXInit", nativeName = "bgfx_init_t", sk
     uint64_t("capabilities")
     bool("debug")
     bool("profile")
+    bool("fallback")
 
     bgfx_platform_data_t("platformData")
     bgfx_resolution_t("resolution")

@@ -121,6 +121,7 @@ public class BGFX {
             get_texture                                          = apiGetFunctionAddress(BGFX, "bgfx_get_texture"),
             destroy_frame_buffer                                 = apiGetFunctionAddress(BGFX, "bgfx_destroy_frame_buffer"),
             create_uniform                                       = apiGetFunctionAddress(BGFX, "bgfx_create_uniform"),
+            create_uniform_with_freq                             = apiGetFunctionAddress(BGFX, "bgfx_create_uniform_with_freq"),
             get_uniform_info                                     = apiGetFunctionAddress(BGFX, "bgfx_get_uniform_info"),
             destroy_uniform                                      = apiGetFunctionAddress(BGFX, "bgfx_destroy_uniform"),
             create_occlusion_query                               = apiGetFunctionAddress(BGFX, "bgfx_create_occlusion_query"),
@@ -153,6 +154,8 @@ public class BGFX {
             encoder_set_transform_cached                         = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_transform_cached"),
             encoder_alloc_transform                              = apiGetFunctionAddress(BGFX, "bgfx_encoder_alloc_transform"),
             encoder_set_uniform                                  = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_uniform"),
+            set_view_uniform                                     = apiGetFunctionAddress(BGFX, "bgfx_set_view_uniform"),
+            set_frame_uniform                                    = apiGetFunctionAddress(BGFX, "bgfx_set_frame_uniform"),
             encoder_set_index_buffer                             = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_index_buffer"),
             encoder_set_dynamic_index_buffer                     = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_dynamic_index_buffer"),
             encoder_set_transient_index_buffer                   = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_transient_index_buffer"),
@@ -232,7 +235,7 @@ public class BGFX {
         return BGFX;
     }
 
-    public static final int BGFX_API_VERSION = 133;
+    public static final int BGFX_API_VERSION = 136;
 
     public static final short BGFX_INVALID_HANDLE = (short)0xFFFF;
 
@@ -693,91 +696,95 @@ public class BGFX {
         BGFX_TEXTURE_FORMAT_ETC2          = 8,
         BGFX_TEXTURE_FORMAT_ETC2A         = 9,
         BGFX_TEXTURE_FORMAT_ETC2A1        = 10,
-        BGFX_TEXTURE_FORMAT_PTC12         = 11,
-        BGFX_TEXTURE_FORMAT_PTC14         = 12,
-        BGFX_TEXTURE_FORMAT_PTC12A        = 13,
-        BGFX_TEXTURE_FORMAT_PTC14A        = 14,
-        BGFX_TEXTURE_FORMAT_PTC22         = 15,
-        BGFX_TEXTURE_FORMAT_PTC24         = 16,
-        BGFX_TEXTURE_FORMAT_ATC           = 17,
-        BGFX_TEXTURE_FORMAT_ATCE          = 18,
-        BGFX_TEXTURE_FORMAT_ATCI          = 19,
-        BGFX_TEXTURE_FORMAT_ASTC4x4       = 20,
-        BGFX_TEXTURE_FORMAT_ASTC5X4       = 21,
-        BGFX_TEXTURE_FORMAT_ASTC5x5       = 22,
-        BGFX_TEXTURE_FORMAT_ASTC6X5       = 23,
-        BGFX_TEXTURE_FORMAT_ASTC6x6       = 24,
-        BGFX_TEXTURE_FORMAT_ASTC8x5       = 25,
-        BGFX_TEXTURE_FORMAT_ASTC8x6       = 26,
-        BGFX_TEXTURE_FORMAT_ASTC8X8       = 27,
-        BGFX_TEXTURE_FORMAT_ASTC10x5      = 28,
-        BGFX_TEXTURE_FORMAT_ASTC10X6      = 29,
-        BGFX_TEXTURE_FORMAT_ASTC10X8      = 30,
-        BGFX_TEXTURE_FORMAT_ASTC10X10     = 31,
-        BGFX_TEXTURE_FORMAT_ASTC12X10     = 32,
-        BGFX_TEXTURE_FORMAT_ASTC12X12     = 33,
-        BGFX_TEXTURE_FORMAT_UNKNOWN       = 34,
-        BGFX_TEXTURE_FORMAT_R1            = 35,
-        BGFX_TEXTURE_FORMAT_A8            = 36,
-        BGFX_TEXTURE_FORMAT_R8            = 37,
-        BGFX_TEXTURE_FORMAT_R8I           = 38,
-        BGFX_TEXTURE_FORMAT_R8U           = 39,
-        BGFX_TEXTURE_FORMAT_R8S           = 40,
-        BGFX_TEXTURE_FORMAT_R16           = 41,
-        BGFX_TEXTURE_FORMAT_R16I          = 42,
-        BGFX_TEXTURE_FORMAT_R16U          = 43,
-        BGFX_TEXTURE_FORMAT_R16F          = 44,
-        BGFX_TEXTURE_FORMAT_R16S          = 45,
-        BGFX_TEXTURE_FORMAT_R32I          = 46,
-        BGFX_TEXTURE_FORMAT_R32U          = 47,
-        BGFX_TEXTURE_FORMAT_R32F          = 48,
-        BGFX_TEXTURE_FORMAT_RG8           = 49,
-        BGFX_TEXTURE_FORMAT_RG8I          = 50,
-        BGFX_TEXTURE_FORMAT_RG8U          = 51,
-        BGFX_TEXTURE_FORMAT_RG8S          = 52,
-        BGFX_TEXTURE_FORMAT_RG16          = 53,
-        BGFX_TEXTURE_FORMAT_RG16I         = 54,
-        BGFX_TEXTURE_FORMAT_RG16U         = 55,
-        BGFX_TEXTURE_FORMAT_RG16F         = 56,
-        BGFX_TEXTURE_FORMAT_RG16S         = 57,
-        BGFX_TEXTURE_FORMAT_RG32I         = 58,
-        BGFX_TEXTURE_FORMAT_RG32U         = 59,
-        BGFX_TEXTURE_FORMAT_RG32F         = 60,
-        BGFX_TEXTURE_FORMAT_RGB8          = 61,
-        BGFX_TEXTURE_FORMAT_RGB8I         = 62,
-        BGFX_TEXTURE_FORMAT_RGB8U         = 63,
-        BGFX_TEXTURE_FORMAT_RGB8S         = 64,
-        BGFX_TEXTURE_FORMAT_RGB9E5F       = 65,
-        BGFX_TEXTURE_FORMAT_BGRA8         = 66,
-        BGFX_TEXTURE_FORMAT_RGBA8         = 67,
-        BGFX_TEXTURE_FORMAT_RGBA8I        = 68,
-        BGFX_TEXTURE_FORMAT_RGBA8U        = 69,
-        BGFX_TEXTURE_FORMAT_RGBA8S        = 70,
-        BGFX_TEXTURE_FORMAT_RGBA16        = 71,
-        BGFX_TEXTURE_FORMAT_RGBA16I       = 72,
-        BGFX_TEXTURE_FORMAT_RGBA16U       = 73,
-        BGFX_TEXTURE_FORMAT_RGBA16F       = 74,
-        BGFX_TEXTURE_FORMAT_RGBA16S       = 75,
-        BGFX_TEXTURE_FORMAT_RGBA32I       = 76,
-        BGFX_TEXTURE_FORMAT_RGBA32U       = 77,
-        BGFX_TEXTURE_FORMAT_RGBA32F       = 78,
-        BGFX_TEXTURE_FORMAT_B5G6R5        = 79,
-        BGFX_TEXTURE_FORMAT_R5G6B5        = 80,
-        BGFX_TEXTURE_FORMAT_BGRA4         = 81,
-        BGFX_TEXTURE_FORMAT_RGBA4         = 82,
-        BGFX_TEXTURE_FORMAT_BGR5A1        = 83,
-        BGFX_TEXTURE_FORMAT_RGB5A1        = 84,
-        BGFX_TEXTURE_FORMAT_RGB10A2       = 85,
-        BGFX_TEXTURE_FORMAT_RG11B10F      = 86,
-        BGFX_TEXTURE_FORMAT_UNKNOWN_DEPTH = 87,
-        BGFX_TEXTURE_FORMAT_D16           = 88,
-        BGFX_TEXTURE_FORMAT_D24           = 89,
-        BGFX_TEXTURE_FORMAT_D24S8         = 90,
-        BGFX_TEXTURE_FORMAT_D32           = 91,
-        BGFX_TEXTURE_FORMAT_D16F          = 92,
-        BGFX_TEXTURE_FORMAT_D24F          = 93,
-        BGFX_TEXTURE_FORMAT_D32F          = 94,
-        BGFX_TEXTURE_FORMAT_D0S8          = 95,
+        BGFX_TEXTURE_FORMAT_EACR11        = 11,
+        BGFX_TEXTURE_FORMAT_EACR11S       = 12,
+        BGFX_TEXTURE_FORMAT_EACRG11       = 13,
+        BGFX_TEXTURE_FORMAT_EACRG11S      = 14,
+        BGFX_TEXTURE_FORMAT_PTC12         = 15,
+        BGFX_TEXTURE_FORMAT_PTC14         = 16,
+        BGFX_TEXTURE_FORMAT_PTC12A        = 17,
+        BGFX_TEXTURE_FORMAT_PTC14A        = 18,
+        BGFX_TEXTURE_FORMAT_PTC22         = 19,
+        BGFX_TEXTURE_FORMAT_PTC24         = 20,
+        BGFX_TEXTURE_FORMAT_ATC           = 21,
+        BGFX_TEXTURE_FORMAT_ATCE          = 22,
+        BGFX_TEXTURE_FORMAT_ATCI          = 23,
+        BGFX_TEXTURE_FORMAT_ASTC4x4       = 24,
+        BGFX_TEXTURE_FORMAT_ASTC5X4       = 25,
+        BGFX_TEXTURE_FORMAT_ASTC5x5       = 26,
+        BGFX_TEXTURE_FORMAT_ASTC6X5       = 27,
+        BGFX_TEXTURE_FORMAT_ASTC6x6       = 28,
+        BGFX_TEXTURE_FORMAT_ASTC8x5       = 29,
+        BGFX_TEXTURE_FORMAT_ASTC8x6       = 30,
+        BGFX_TEXTURE_FORMAT_ASTC8X8       = 31,
+        BGFX_TEXTURE_FORMAT_ASTC10x5      = 32,
+        BGFX_TEXTURE_FORMAT_ASTC10X6      = 33,
+        BGFX_TEXTURE_FORMAT_ASTC10X8      = 34,
+        BGFX_TEXTURE_FORMAT_ASTC10X10     = 35,
+        BGFX_TEXTURE_FORMAT_ASTC12X10     = 36,
+        BGFX_TEXTURE_FORMAT_ASTC12X12     = 37,
+        BGFX_TEXTURE_FORMAT_UNKNOWN       = 38,
+        BGFX_TEXTURE_FORMAT_R1            = 39,
+        BGFX_TEXTURE_FORMAT_A8            = 40,
+        BGFX_TEXTURE_FORMAT_R8            = 41,
+        BGFX_TEXTURE_FORMAT_R8I           = 42,
+        BGFX_TEXTURE_FORMAT_R8U           = 43,
+        BGFX_TEXTURE_FORMAT_R8S           = 44,
+        BGFX_TEXTURE_FORMAT_R16           = 45,
+        BGFX_TEXTURE_FORMAT_R16I          = 46,
+        BGFX_TEXTURE_FORMAT_R16U          = 47,
+        BGFX_TEXTURE_FORMAT_R16F          = 48,
+        BGFX_TEXTURE_FORMAT_R16S          = 49,
+        BGFX_TEXTURE_FORMAT_R32I          = 50,
+        BGFX_TEXTURE_FORMAT_R32U          = 51,
+        BGFX_TEXTURE_FORMAT_R32F          = 52,
+        BGFX_TEXTURE_FORMAT_RG8           = 53,
+        BGFX_TEXTURE_FORMAT_RG8I          = 54,
+        BGFX_TEXTURE_FORMAT_RG8U          = 55,
+        BGFX_TEXTURE_FORMAT_RG8S          = 56,
+        BGFX_TEXTURE_FORMAT_RG16          = 57,
+        BGFX_TEXTURE_FORMAT_RG16I         = 58,
+        BGFX_TEXTURE_FORMAT_RG16U         = 59,
+        BGFX_TEXTURE_FORMAT_RG16F         = 60,
+        BGFX_TEXTURE_FORMAT_RG16S         = 61,
+        BGFX_TEXTURE_FORMAT_RG32I         = 62,
+        BGFX_TEXTURE_FORMAT_RG32U         = 63,
+        BGFX_TEXTURE_FORMAT_RG32F         = 64,
+        BGFX_TEXTURE_FORMAT_RGB8          = 65,
+        BGFX_TEXTURE_FORMAT_RGB8I         = 66,
+        BGFX_TEXTURE_FORMAT_RGB8U         = 67,
+        BGFX_TEXTURE_FORMAT_RGB8S         = 68,
+        BGFX_TEXTURE_FORMAT_RGB9E5F       = 69,
+        BGFX_TEXTURE_FORMAT_BGRA8         = 70,
+        BGFX_TEXTURE_FORMAT_RGBA8         = 71,
+        BGFX_TEXTURE_FORMAT_RGBA8I        = 72,
+        BGFX_TEXTURE_FORMAT_RGBA8U        = 73,
+        BGFX_TEXTURE_FORMAT_RGBA8S        = 74,
+        BGFX_TEXTURE_FORMAT_RGBA16        = 75,
+        BGFX_TEXTURE_FORMAT_RGBA16I       = 76,
+        BGFX_TEXTURE_FORMAT_RGBA16U       = 77,
+        BGFX_TEXTURE_FORMAT_RGBA16F       = 78,
+        BGFX_TEXTURE_FORMAT_RGBA16S       = 79,
+        BGFX_TEXTURE_FORMAT_RGBA32I       = 80,
+        BGFX_TEXTURE_FORMAT_RGBA32U       = 81,
+        BGFX_TEXTURE_FORMAT_RGBA32F       = 82,
+        BGFX_TEXTURE_FORMAT_B5G6R5        = 83,
+        BGFX_TEXTURE_FORMAT_R5G6B5        = 84,
+        BGFX_TEXTURE_FORMAT_BGRA4         = 85,
+        BGFX_TEXTURE_FORMAT_RGBA4         = 86,
+        BGFX_TEXTURE_FORMAT_BGR5A1        = 87,
+        BGFX_TEXTURE_FORMAT_RGB5A1        = 88,
+        BGFX_TEXTURE_FORMAT_RGB10A2       = 89,
+        BGFX_TEXTURE_FORMAT_RG11B10F      = 90,
+        BGFX_TEXTURE_FORMAT_UNKNOWN_DEPTH = 91,
+        BGFX_TEXTURE_FORMAT_D16           = 92,
+        BGFX_TEXTURE_FORMAT_D24           = 93,
+        BGFX_TEXTURE_FORMAT_D24S8         = 94,
+        BGFX_TEXTURE_FORMAT_D32           = 95,
+        BGFX_TEXTURE_FORMAT_D16F          = 96,
+        BGFX_TEXTURE_FORMAT_D24F          = 97,
+        BGFX_TEXTURE_FORMAT_D32F          = 98,
+        BGFX_TEXTURE_FORMAT_D0S8          = 99,
         BGFX_TEXTURE_FORMAT_COUNT         = BGFX_TEXTURE_FORMAT_D0S8 + 1;
 
     public static final int
@@ -787,6 +794,12 @@ public class BGFX {
         BGFX_UNIFORM_TYPE_MAT3    = 3,
         BGFX_UNIFORM_TYPE_MAT4    = 4,
         BGFX_UNIFORM_TYPE_COUNT   = 5;
+
+    public static final int
+        BGFX_UNIFORM_FREQ_DRAW  = 0,
+        BGFX_UNIFORM_FREQ_VIEW  = 1,
+        BGFX_UNIFORM_FREQ_FRAME = 2,
+        BGFX_UNIFORM_FREQ_COUNT = 3;
 
     public static final int
         BGFX_BACKBUFFER_RATIO_EQUAL     = 0,
@@ -2372,6 +2385,36 @@ public class BGFX {
         }
     }
 
+    // --- [ bgfx_create_uniform_with_freq ] ---
+
+    /** {@code bgfx_uniform_handle_t bgfx_create_uniform_with_freq(char const * _name, bgfx_uniform_freq_t _freq, bgfx_uniform_type_t _type, uint16_t _num)} */
+    public static short nbgfx_create_uniform_with_freq(long _name, int _freq, int _type, short _num) {
+        long __functionAddress = Functions.create_uniform_with_freq;
+        return invokePCC(_name, _freq, _type, _num, __functionAddress);
+    }
+
+    /** {@code bgfx_uniform_handle_t bgfx_create_uniform_with_freq(char const * _name, bgfx_uniform_freq_t _freq, bgfx_uniform_type_t _type, uint16_t _num)} */
+    @NativeType("bgfx_uniform_handle_t")
+    public static short bgfx_create_uniform_with_freq(@NativeType("char const *") ByteBuffer _name, @NativeType("bgfx_uniform_freq_t") int _freq, @NativeType("bgfx_uniform_type_t") int _type, @NativeType("uint16_t") int _num) {
+        if (CHECKS) {
+            checkNT1(_name);
+        }
+        return nbgfx_create_uniform_with_freq(memAddress(_name), _freq, _type, (short)_num);
+    }
+
+    /** {@code bgfx_uniform_handle_t bgfx_create_uniform_with_freq(char const * _name, bgfx_uniform_freq_t _freq, bgfx_uniform_type_t _type, uint16_t _num)} */
+    @NativeType("bgfx_uniform_handle_t")
+    public static short bgfx_create_uniform_with_freq(@NativeType("char const *") CharSequence _name, @NativeType("bgfx_uniform_freq_t") int _freq, @NativeType("bgfx_uniform_type_t") int _type, @NativeType("uint16_t") int _num) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCII(_name, true);
+            long _nameEncoded = stack.getPointerAddress();
+            return nbgfx_create_uniform_with_freq(_nameEncoded, _freq, _type, (short)_num);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ bgfx_get_uniform_info ] ---
 
     /** {@code void bgfx_get_uniform_info(bgfx_uniform_handle_t _handle, bgfx_uniform_info_t * _info)} */
@@ -2862,6 +2905,82 @@ public class BGFX {
     /** {@code void bgfx_encoder_set_uniform(bgfx_encoder_t * _this, bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
     public static void bgfx_encoder_set_uniform(@NativeType("bgfx_encoder_t *") long _this, @NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") DoubleBuffer _value, @NativeType("uint16_t") int _num) {
         nbgfx_encoder_set_uniform(_this, _handle, memAddress(_value), (short)_num);
+    }
+
+    // --- [ bgfx_set_view_uniform ] ---
+
+    /** {@code void bgfx_set_view_uniform(bgfx_view_id_t _id, bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void nbgfx_set_view_uniform(short _id, short _handle, long _value, short _num) {
+        long __functionAddress = Functions.set_view_uniform;
+        invokeCCPCV(_id, _handle, _value, _num, __functionAddress);
+    }
+
+    /** {@code void bgfx_set_view_uniform(bgfx_view_id_t _id, bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_view_uniform(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") ByteBuffer _value, @NativeType("uint16_t") int _num) {
+        nbgfx_set_view_uniform((short)_id, _handle, memAddress(_value), (short)_num);
+    }
+
+    /** {@code void bgfx_set_view_uniform(bgfx_view_id_t _id, bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_view_uniform(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") ShortBuffer _value, @NativeType("uint16_t") int _num) {
+        nbgfx_set_view_uniform((short)_id, _handle, memAddress(_value), (short)_num);
+    }
+
+    /** {@code void bgfx_set_view_uniform(bgfx_view_id_t _id, bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_view_uniform(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") IntBuffer _value, @NativeType("uint16_t") int _num) {
+        nbgfx_set_view_uniform((short)_id, _handle, memAddress(_value), (short)_num);
+    }
+
+    /** {@code void bgfx_set_view_uniform(bgfx_view_id_t _id, bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_view_uniform(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") LongBuffer _value, @NativeType("uint16_t") int _num) {
+        nbgfx_set_view_uniform((short)_id, _handle, memAddress(_value), (short)_num);
+    }
+
+    /** {@code void bgfx_set_view_uniform(bgfx_view_id_t _id, bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_view_uniform(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") FloatBuffer _value, @NativeType("uint16_t") int _num) {
+        nbgfx_set_view_uniform((short)_id, _handle, memAddress(_value), (short)_num);
+    }
+
+    /** {@code void bgfx_set_view_uniform(bgfx_view_id_t _id, bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_view_uniform(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") DoubleBuffer _value, @NativeType("uint16_t") int _num) {
+        nbgfx_set_view_uniform((short)_id, _handle, memAddress(_value), (short)_num);
+    }
+
+    // --- [ bgfx_set_frame_uniform ] ---
+
+    /** {@code void bgfx_set_frame_uniform(bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void nbgfx_set_frame_uniform(short _handle, long _value, short _num) {
+        long __functionAddress = Functions.set_frame_uniform;
+        invokeCPCV(_handle, _value, _num, __functionAddress);
+    }
+
+    /** {@code void bgfx_set_frame_uniform(bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_frame_uniform(@NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") ByteBuffer _value, @NativeType("uint16_t") int _num) {
+        nbgfx_set_frame_uniform(_handle, memAddress(_value), (short)_num);
+    }
+
+    /** {@code void bgfx_set_frame_uniform(bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_frame_uniform(@NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") ShortBuffer _value, @NativeType("uint16_t") int _num) {
+        nbgfx_set_frame_uniform(_handle, memAddress(_value), (short)_num);
+    }
+
+    /** {@code void bgfx_set_frame_uniform(bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_frame_uniform(@NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") IntBuffer _value, @NativeType("uint16_t") int _num) {
+        nbgfx_set_frame_uniform(_handle, memAddress(_value), (short)_num);
+    }
+
+    /** {@code void bgfx_set_frame_uniform(bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_frame_uniform(@NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") LongBuffer _value, @NativeType("uint16_t") int _num) {
+        nbgfx_set_frame_uniform(_handle, memAddress(_value), (short)_num);
+    }
+
+    /** {@code void bgfx_set_frame_uniform(bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_frame_uniform(@NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") FloatBuffer _value, @NativeType("uint16_t") int _num) {
+        nbgfx_set_frame_uniform(_handle, memAddress(_value), (short)_num);
+    }
+
+    /** {@code void bgfx_set_frame_uniform(bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_frame_uniform(@NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") DoubleBuffer _value, @NativeType("uint16_t") int _num) {
+        nbgfx_set_frame_uniform(_handle, memAddress(_value), (short)_num);
     }
 
     // --- [ bgfx_encoder_set_index_buffer ] ---
@@ -4284,6 +4403,66 @@ public class BGFX {
             check(_this);
         }
         invokePCPCV(_this, _handle, _value, (short)_num, __functionAddress);
+    }
+
+    /** {@code void bgfx_set_view_uniform(bgfx_view_id_t _id, bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_view_uniform(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") short[] _value, @NativeType("uint16_t") int _num) {
+        long __functionAddress = Functions.set_view_uniform;
+        invokeCCPCV((short)_id, _handle, _value, (short)_num, __functionAddress);
+    }
+
+    /** {@code void bgfx_set_view_uniform(bgfx_view_id_t _id, bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_view_uniform(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") int[] _value, @NativeType("uint16_t") int _num) {
+        long __functionAddress = Functions.set_view_uniform;
+        invokeCCPCV((short)_id, _handle, _value, (short)_num, __functionAddress);
+    }
+
+    /** {@code void bgfx_set_view_uniform(bgfx_view_id_t _id, bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_view_uniform(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") long[] _value, @NativeType("uint16_t") int _num) {
+        long __functionAddress = Functions.set_view_uniform;
+        invokeCCPCV((short)_id, _handle, _value, (short)_num, __functionAddress);
+    }
+
+    /** {@code void bgfx_set_view_uniform(bgfx_view_id_t _id, bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_view_uniform(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") float[] _value, @NativeType("uint16_t") int _num) {
+        long __functionAddress = Functions.set_view_uniform;
+        invokeCCPCV((short)_id, _handle, _value, (short)_num, __functionAddress);
+    }
+
+    /** {@code void bgfx_set_view_uniform(bgfx_view_id_t _id, bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_view_uniform(@NativeType("bgfx_view_id_t") int _id, @NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") double[] _value, @NativeType("uint16_t") int _num) {
+        long __functionAddress = Functions.set_view_uniform;
+        invokeCCPCV((short)_id, _handle, _value, (short)_num, __functionAddress);
+    }
+
+    /** {@code void bgfx_set_frame_uniform(bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_frame_uniform(@NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") short[] _value, @NativeType("uint16_t") int _num) {
+        long __functionAddress = Functions.set_frame_uniform;
+        invokeCPCV(_handle, _value, (short)_num, __functionAddress);
+    }
+
+    /** {@code void bgfx_set_frame_uniform(bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_frame_uniform(@NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") int[] _value, @NativeType("uint16_t") int _num) {
+        long __functionAddress = Functions.set_frame_uniform;
+        invokeCPCV(_handle, _value, (short)_num, __functionAddress);
+    }
+
+    /** {@code void bgfx_set_frame_uniform(bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_frame_uniform(@NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") long[] _value, @NativeType("uint16_t") int _num) {
+        long __functionAddress = Functions.set_frame_uniform;
+        invokeCPCV(_handle, _value, (short)_num, __functionAddress);
+    }
+
+    /** {@code void bgfx_set_frame_uniform(bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_frame_uniform(@NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") float[] _value, @NativeType("uint16_t") int _num) {
+        long __functionAddress = Functions.set_frame_uniform;
+        invokeCPCV(_handle, _value, (short)_num, __functionAddress);
+    }
+
+    /** {@code void bgfx_set_frame_uniform(bgfx_uniform_handle_t _handle, void const * _value, uint16_t _num)} */
+    public static void bgfx_set_frame_uniform(@NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") double[] _value, @NativeType("uint16_t") int _num) {
+        long __functionAddress = Functions.set_frame_uniform;
+        invokeCPCV(_handle, _value, (short)_num, __functionAddress);
     }
 
     /** {@code uint32_t bgfx_set_transform(void const * _mtx, uint16_t _num)} */

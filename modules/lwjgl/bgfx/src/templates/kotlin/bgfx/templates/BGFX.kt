@@ -9,7 +9,7 @@ import org.lwjgl.generator.*
 
 val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx_", binding = BGFX_BINDING) {
     IntConstant(
-        "API_VERSION".."133"
+        "API_VERSION".."136"
     )
 
     ShortConstant(
@@ -552,6 +552,10 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "TEXTURE_FORMAT_ETC2".enum,
         "TEXTURE_FORMAT_ETC2A".enum,
         "TEXTURE_FORMAT_ETC2A1".enum,
+        "TEXTURE_FORMAT_EACR11".enum,
+        "TEXTURE_FORMAT_EACR11S".enum,
+        "TEXTURE_FORMAT_EACRG11".enum,
+        "TEXTURE_FORMAT_EACRG11S".enum,
         "TEXTURE_FORMAT_PTC12".enum,
         "TEXTURE_FORMAT_PTC14".enum,
         "TEXTURE_FORMAT_PTC12A".enum,
@@ -654,6 +658,14 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "UNIFORM_TYPE_MAT4".enum,
 
         "UNIFORM_TYPE_COUNT".enum
+    )
+
+    EnumConstant(
+        "UNIFORM_FREQ_DRAW".enum,
+        "UNIFORM_FREQ_VIEW".enum,
+        "UNIFORM_FREQ_FRAME".enum,
+
+        "UNIFORM_FREQ_COUNT".enum
     )
 
     EnumConstant(
@@ -1494,6 +1506,15 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         MapToInt..uint16_t("_num")
     )
 
+    bgfx_uniform_handle_t(
+        "create_uniform_with_freq",
+
+        charASCII.const.p("_name"),
+        bgfx_uniform_freq_t("_freq"),
+        bgfx_uniform_type_t("_type"),
+        MapToInt..uint16_t("_num")
+    )
+
     void(
         "get_uniform_info",
 
@@ -1752,6 +1773,35 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "encoder_set_uniform",
 
         bgfx_encoder_t.p("_this"),
+        bgfx_uniform_handle_t("_handle"),
+        MultiType(
+            PointerMapping.DATA_SHORT,
+            PointerMapping.DATA_INT,
+            PointerMapping.DATA_LONG,
+            PointerMapping.DATA_FLOAT,
+            PointerMapping.DATA_DOUBLE
+        )..Unsafe..void.const.p("_value"),
+        MapToInt..uint16_t("_num")
+    )
+
+    void(
+        "set_view_uniform",
+
+        MapToInt..bgfx_view_id_t("_id"),
+        bgfx_uniform_handle_t("_handle"),
+        MultiType(
+            PointerMapping.DATA_SHORT,
+            PointerMapping.DATA_INT,
+            PointerMapping.DATA_LONG,
+            PointerMapping.DATA_FLOAT,
+            PointerMapping.DATA_DOUBLE
+        )..Unsafe..void.const.p("_value"),
+        MapToInt..uint16_t("_num")
+    )
+
+    void(
+        "set_frame_uniform",
+
         bgfx_uniform_handle_t("_handle"),
         MultiType(
             PointerMapping.DATA_SHORT,
