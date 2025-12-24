@@ -218,7 +218,7 @@ static int io_uring_alloc_huge(unsigned entries, struct io_uring_params *p,
 {
 	unsigned long page_size = get_page_size();
 	unsigned sq_entries, cq_entries;
-	size_t ring_mem, sqes_mem;
+	size_t sqes_size = 0, ring_mem, sqes_mem;
 	unsigned long mem_used = 0;
 	void *ptr;
 	int ret;
@@ -227,15 +227,14 @@ static int io_uring_alloc_huge(unsigned entries, struct io_uring_params *p,
 	if (ret)
 		return ret;
 
-	ring_mem = KRING_SIZE;
-
 	sqes_mem = params_sqes_size(p, sq_entries);
 	if (!(p->flags & IORING_SETUP_NO_SQARRAY))
 		sqes_mem += sq_entries * sizeof(unsigned);
 	sqes_mem = (sqes_mem + page_size - 1) & ~(page_size - 1);
 
-	ring_mem += sqes_mem + params_cq_size(p, cq_entries);
-	mem_used = ring_mem;
+	ring_mem = KRING_SIZE;
+	ring_mem += params_cq_size(p, cq_entries);
+	mem_used = sqes_mem + ring_mem;
 	mem_used = (mem_used + page_size - 1) & ~(page_size - 1);
 
 	/*
@@ -260,7 +259,8 @@ static int io_uring_alloc_huge(unsigned entries, struct io_uring_params *p,
 			buf_size = huge_page_size;
 			map_hugetlb = MAP_HUGETLB;
 		}
-		ptr = __sys_mmap(NULL, buf_size, PROT_READ|PROT_WRITE,
+		sqes_size = buf_size;
+		ptr = __sys_mmap(NULL, sqes_size, PROT_READ|PROT_WRITE,
 					MAP_SHARED|MAP_ANONYMOUS|map_hugetlb,
 					-1, 0);
 		if (IS_ERR(ptr))
@@ -285,7 +285,8 @@ static int io_uring_alloc_huge(unsigned entries, struct io_uring_params *p,
 					MAP_SHARED|MAP_ANONYMOUS|map_hugetlb,
 					-1, 0);
 		if (IS_ERR(ptr)) {
-			__sys_munmap(sq->sqes, 1);
+			if (sqes_size)
+				__sys_munmap(sq->sqes, sqes_size);
 			return PTR_ERR(ptr);
 		}
 		sq->ring_ptr = ptr;
@@ -330,7 +331,7 @@ int __io_uring_queue_init_params(unsigned entries, struct io_uring *ring,
 	if (fd < 0) {
 		if ((p->flags & IORING_SETUP_NO_MMAP) &&
 		    !(ring->int_flags & INT_FLAG_APP_MEM)) {
-			__sys_munmap(ring->sq.sqes, 1);
+			__sys_munmap(ring->sq.sqes, ret);
 			io_uring_unmap_rings(&ring->sq, &ring->cq);
 		}
 		return fd;
@@ -630,6 +631,7 @@ static struct io_uring_buf_ring *br_setup(struct io_uring *ring,
 			MAP_SHARED | MAP_POPULATE, ring->ring_fd, off);
 	if (IS_ERR(br)) {
 		*err = PTR_ERR(br);
+		io_uring_unregister_buf_ring(ring, bgid);
 		return NULL;
 	}
 

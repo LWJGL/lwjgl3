@@ -87,6 +87,10 @@ import static org.lwjgl.system.MemoryStack.*;
  *             __u64 addr3;
  *             __u64 __pad2[1];
  *         };
+ *         struct {
+ *             __u64 attr_ptr;
+ *             __u64 attr_type_mask;
+ *         };
  *         __u64 optval;
  *         __u8 cmd[0];
  *     };
@@ -152,6 +156,8 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
         __PAD3,
         ADDR3,
         __PAD2,
+        ATTR_PTR,
+        ATTR_TYPE_MASK,
         OPTVAL,
         CMD;
 
@@ -225,6 +231,10 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
                     __member(8),
                     __array(8, 1)
                 ),
+                __struct(
+                    __member(8),
+                    __member(8)
+                ),
                 __member(8),
                 __array(1, 0)
             )
@@ -282,8 +292,10 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
         __PAD3 = layout.offsetof(54);
         ADDR3 = layout.offsetof(57);
         __PAD2 = layout.offsetof(58);
-        OPTVAL = layout.offsetof(59);
-        CMD = layout.offsetof(60);
+        ATTR_PTR = layout.offsetof(60);
+        ATTR_TYPE_MASK = layout.offsetof(61);
+        OPTVAL = layout.offsetof(62);
+        CMD = layout.offsetof(63);
     }
 
     protected IOURingSQE(long address, @Nullable ByteBuffer container) {
@@ -461,6 +473,12 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     /** @return the value at the specified index of the {@code __pad2} field. */
     @NativeType("__u64")
     public long __pad2(int index) { return n__pad2(address(), index); }
+    /** @return the value of the {@code attr_ptr} field. */
+    @NativeType("__u64")
+    public long attr_ptr() { return nattr_ptr(address()); }
+    /** @return the value of the {@code attr_type_mask} field. */
+    @NativeType("__u64")
+    public long attr_type_mask() { return nattr_type_mask(address()); }
     /** @return the value of the {@code optval} field. */
     @NativeType("__u64")
     public long optval() { return noptval(address()); }
@@ -573,6 +591,10 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     public IOURingSQE __pad2(@NativeType("__u64[1]") LongBuffer value) { n__pad2(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code __pad2} field. */
     public IOURingSQE __pad2(int index, @NativeType("__u64") long value) { n__pad2(address(), index, value); return this; }
+    /** Sets the specified value to the {@code attr_ptr} field. */
+    public IOURingSQE attr_ptr(@NativeType("__u64") long value) { nattr_ptr(address(), value); return this; }
+    /** Sets the specified value to the {@code attr_type_mask} field. */
+    public IOURingSQE attr_type_mask(@NativeType("__u64") long value) { nattr_type_mask(address(), value); return this; }
     /** Sets the specified value to the {@code optval} field. */
     public IOURingSQE optval(@NativeType("__u64") long value) { noptval(address(), value); return this; }
     /** Copies the specified {@link ByteBuffer} to the {@code cmd} field. */
@@ -804,6 +826,10 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     public static long n__pad2(long struct, int index) {
         return memGetLong(struct + IOURingSQE.__PAD2 + check(index, 1) * 8);
     }
+    /** Unsafe version of {@link #attr_ptr}. */
+    public static long nattr_ptr(long struct) { return memGetLong(struct + IOURingSQE.ATTR_PTR); }
+    /** Unsafe version of {@link #attr_type_mask}. */
+    public static long nattr_type_mask(long struct) { return memGetLong(struct + IOURingSQE.ATTR_TYPE_MASK); }
     /** Unsafe version of {@link #optval}. */
     public static long noptval(long struct) { return memGetLong(struct + IOURingSQE.OPTVAL); }
     /** Unsafe version of {@link #cmd}. */
@@ -920,6 +946,10 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     public static void n__pad2(long struct, int index, long value) {
         memPutLong(struct + IOURingSQE.__PAD2 + check(index, 1) * 8, value);
     }
+    /** Unsafe version of {@link #attr_ptr(long) attr_ptr}. */
+    public static void nattr_ptr(long struct, long value) { memPutLong(struct + IOURingSQE.ATTR_PTR, value); }
+    /** Unsafe version of {@link #attr_type_mask(long) attr_type_mask}. */
+    public static void nattr_type_mask(long struct, long value) { memPutLong(struct + IOURingSQE.ATTR_TYPE_MASK, value); }
     /** Unsafe version of {@link #optval(long) optval}. */
     public static void noptval(long struct, long value) { memPutLong(struct + IOURingSQE.OPTVAL, value); }
     /** Unsafe version of {@link #cmd(ByteBuffer) cmd}. */
@@ -1128,6 +1158,12 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
         /** @return the value at the specified index of the {@code __pad2} field. */
         @NativeType("__u64")
         public long __pad2(int index) { return IOURingSQE.n__pad2(address(), index); }
+        /** @return the value of the {@code attr_ptr} field. */
+        @NativeType("__u64")
+        public long attr_ptr() { return IOURingSQE.nattr_ptr(address()); }
+        /** @return the value of the {@code attr_type_mask} field. */
+        @NativeType("__u64")
+        public long attr_type_mask() { return IOURingSQE.nattr_type_mask(address()); }
         /** @return the value of the {@code optval} field. */
         @NativeType("__u64")
         public long optval() { return IOURingSQE.noptval(address()); }
@@ -1240,6 +1276,10 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
         public IOURingSQE.Buffer __pad2(@NativeType("__u64[1]") LongBuffer value) { IOURingSQE.n__pad2(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code __pad2} field. */
         public IOURingSQE.Buffer __pad2(int index, @NativeType("__u64") long value) { IOURingSQE.n__pad2(address(), index, value); return this; }
+        /** Sets the specified value to the {@code attr_ptr} field. */
+        public IOURingSQE.Buffer attr_ptr(@NativeType("__u64") long value) { IOURingSQE.nattr_ptr(address(), value); return this; }
+        /** Sets the specified value to the {@code attr_type_mask} field. */
+        public IOURingSQE.Buffer attr_type_mask(@NativeType("__u64") long value) { IOURingSQE.nattr_type_mask(address(), value); return this; }
         /** Sets the specified value to the {@code optval} field. */
         public IOURingSQE.Buffer optval(@NativeType("__u64") long value) { IOURingSQE.noptval(address(), value); return this; }
         /** Copies the specified {@link ByteBuffer} to the {@code cmd} field. */

@@ -78,10 +78,23 @@ val io_uring_sqe = struct(Module.CORE_LINUX_LIBURING, "IOURingSQE", nativeName =
 			__u64("addr3")
 			__u64("__pad2")[1].private()
 		}
+        struct {
+            __u64("attr_ptr")
+            __u64("attr_type_mask")
+        };
         __u64("optval")
 		__u8("cmd")[0]
 	}
 }
+
+val io_uring_attr_pi = struct(Module.CORE_LINUX_LIBURING, "IOURingAttrPI", nativeName = "struct io_uring_attr_pi") {
+    __u16("flags")
+    __u16("app_tag")
+    __u32("len")
+    __u64("addr")
+    __u64("seed")
+    __u64("rsvd")
+};
 
 val io_uring_cqe = struct(Module.CORE_LINUX_LIBURING, "IOURingCQE", nativeName = "struct io_uring_cqe") {
     __u64("user_data")
@@ -401,4 +414,24 @@ val io_uring_zcrx_rq = struct(Module.CORE_LINUX_LIBURING, "IOURingZCRXRQ", nativ
 
     io_uring_zcrx_rqe.p("rqes")
     opaque_p("ring_ptr")
+}
+
+// query.h
+
+val io_uring_query_hdr = struct(Module.CORE_LINUX_LIBURING, "IOURingQueryHdr", nativeName = "struct io_uring_query_hdr") {
+    __u64("next_entry")
+    __u64("query_data")
+    __u32("query_op")
+    __u32("size")
+    __s32("result")
+    __u32("__resv")[3].private()
+}
+
+val io_uring_query_opcode = struct(Module.CORE_LINUX_LIBURING, "IOURingQueryOpcode", nativeName = "struct io_uring_query_opcode") {
+    __u32("nr_request_opcodes")
+    __u32("nr_register_opcodes")
+    __u64("feature_flags")
+    __u64("ring_setup_flags")
+    __u64("enter_flags")
+    __u64("sqe_flags")
 }

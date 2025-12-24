@@ -16,9 +16,8 @@
 #include <sys/wait.h>
 #include "liburing/compat.h"
 #include "liburing/io_uring.h"
+#include "liburing/io_uring/query.h"
 #include "liburing/io_uring_version.h"
-#include "liburing/barrier.h"
-
 
 #ifndef uring_unlikely
 #define uring_unlikely(cond)	__builtin_expect(!!(cond), 0)
@@ -29,15 +28,45 @@
 #endif
 
 /*
- * NOTE: Only use IOURINGINLINE macro for 'static inline' functions
- *       that are expected to be available in the FFI bindings.
+ * NOTE: Use IOURINGINLINE macro for "static inline" functions that are
+ *       expected to be available in the FFI bindings. They must also
+ *       be included in the liburing-ffi.map file.
  *
- *       Functions that are marked as IOURINGINLINE should be
- *       included in the liburing-ffi.map file.
+ *       Use _LOCAL_INLINE macro for "static inline" functions that are
+ *       not expected to be available in the FFI bindings.
+ *
+ *       Don't use "static inline" directly when defining new functions
+ *       in this header file.
+ *
+ *       Reason:
+ *       The C++20 module export feature fails to operate correctly
+ *       with the "static inline" functions. Use "inline" instead of
+ *       "static inline" when compiling with C++20 or later.
+ *
+ *       See:
+ *         https://github.com/axboe/liburing/issues/1457
+ *         https://lore.kernel.org/io-uring/e0559c10-104d-4da8-9f7f-d2ffd73d8df3@acm.org
  */
 #ifndef IOURINGINLINE
+#if defined(__cplusplus) && __cplusplus >= 202002L
+#define IOURINGINLINE inline
+#else
 #define IOURINGINLINE static inline
 #endif
+#endif
+
+#ifndef _LOCAL_INLINE
+#if defined(__cplusplus) && __cplusplus >= 202002L
+#define _LOCAL_INLINE inline
+#else
+#define _LOCAL_INLINE static inline
+#endif
+#endif
+
+/*
+ * barrier.h needs _LOCAL_INLINE.
+ */
+#include "liburing/barrier.h"
 
 #ifdef __alpha__
 /*
@@ -159,7 +188,7 @@ struct io_uring_zcrx_rq {
  * Library interface
  */
 
-static inline __u64 uring_ptr_to_u64(const void *ptr) LIBURING_NOEXCEPT
+_LOCAL_INLINE __u64 uring_ptr_to_u64(const void *ptr) LIBURING_NOEXCEPT
 {
 	return (__u64) (unsigned long) ptr;
 }
@@ -394,6 +423,11 @@ IOURINGINLINE unsigned io_uring_cqe_shift(const struct io_uring *ring)
 	return io_uring_cqe_shift_from_flags(ring->flags);
 }
 
+IOURINGINLINE unsigned io_uring_cqe_nr(const struct io_uring_cqe *cqe)
+{
+	return 1U << !!(cqe->flags & IORING_CQE_F_32);
+}
+
 struct io_uring_cqe_iter {
 	struct io_uring_cqe *cqes;
 	unsigned mask;
@@ -402,7 +436,7 @@ struct io_uring_cqe_iter {
 	unsigned tail;
 };
 
-static inline struct io_uring_cqe_iter
+_LOCAL_INLINE struct io_uring_cqe_iter
 io_uring_cqe_iter_init(const struct io_uring *ring)
 	LIBURING_NOEXCEPT
 {
@@ -416,7 +450,7 @@ io_uring_cqe_iter_init(const struct io_uring *ring)
 	};
 }
 
-static inline bool io_uring_cqe_iter_next(struct io_uring_cqe_iter *iter,
+_LOCAL_INLINE bool io_uring_cqe_iter_next(struct io_uring_cqe_iter *iter,
 					  struct io_uring_cqe **cqe)
 	LIBURING_NOEXCEPT
 {
@@ -424,6 +458,8 @@ static inline bool io_uring_cqe_iter_next(struct io_uring_cqe_iter *iter,
 		return false;
 
 	*cqe = &iter->cqes[(iter->head++ & iter->mask) << iter->shift];
+	if ((*cqe)->flags & IORING_CQE_F_32)
+		iter->head++;
 	return true;
 }
 
@@ -464,7 +500,7 @@ IOURINGINLINE void io_uring_cqe_seen(struct io_uring *ring,
 	LIBURING_NOEXCEPT
 {
 	if (cqe)
-		io_uring_cq_advance(ring, 1);
+		io_uring_cq_advance(ring, io_uring_cqe_nr(cqe));
 }
 
 /*
@@ -482,6 +518,7 @@ IOURINGINLINE void io_uring_sqe_set_data(struct io_uring_sqe *sqe, void *data)
 }
 
 IOURINGINLINE void *io_uring_cqe_get_data(const struct io_uring_cqe *cqe)
+	LIBURING_NOEXCEPT
 {
 	return (void *) (uintptr_t) cqe->user_data;
 }
@@ -522,7 +559,7 @@ IOURINGINLINE void io_uring_sqe_set_buf_group(struct io_uring_sqe *sqe,
 	sqe->buf_group = (__u16) bgid;
 }
 
-static inline void __io_uring_set_target_fixed_file(struct io_uring_sqe *sqe,
+_LOCAL_INLINE void __io_uring_set_target_fixed_file(struct io_uring_sqe *sqe,
 						    unsigned int file_index)
 	LIBURING_NOEXCEPT
 {
@@ -704,7 +741,7 @@ IOURINGINLINE void io_uring_prep_sendmsg(struct io_uring_sqe *sqe, int fd,
 	sqe->msg_flags = flags;
 }
 
-static inline unsigned __io_uring_prep_poll_mask(unsigned poll_mask)
+_LOCAL_INLINE unsigned __io_uring_prep_poll_mask(unsigned poll_mask)
 	LIBURING_NOEXCEPT
 {
 #if __BYTE_ORDER == __BIG_ENDIAN
@@ -763,8 +800,14 @@ IOURINGINLINE void io_uring_prep_nop(struct io_uring_sqe *sqe)
 	io_uring_prep_rw(IORING_OP_NOP, sqe, -1, NULL, 0, 0);
 }
 
+IOURINGINLINE void io_uring_prep_nop128(struct io_uring_sqe *sqe)
+	LIBURING_NOEXCEPT
+{
+	io_uring_prep_rw(IORING_OP_NOP128, sqe, -1, NULL, 0, 0);
+}
+
 IOURINGINLINE void io_uring_prep_timeout(struct io_uring_sqe *sqe,
-					 struct __kernel_timespec *ts,
+					 const struct __kernel_timespec *ts,
 					 unsigned count, unsigned flags)
 	LIBURING_NOEXCEPT
 {
@@ -782,7 +825,7 @@ IOURINGINLINE void io_uring_prep_timeout_remove(struct io_uring_sqe *sqe,
 }
 
 IOURINGINLINE void io_uring_prep_timeout_update(struct io_uring_sqe *sqe,
-						struct __kernel_timespec *ts,
+						const struct __kernel_timespec *ts,
 						__u64 user_data, unsigned flags)
 	LIBURING_NOEXCEPT
 {
@@ -847,7 +890,7 @@ IOURINGINLINE void io_uring_prep_cancel64(struct io_uring_sqe *sqe,
 }
 
 IOURINGINLINE void io_uring_prep_cancel(struct io_uring_sqe *sqe,
-					void *user_data, int flags)
+					const void *user_data, int flags)
 	LIBURING_NOEXCEPT
 {
 	io_uring_prep_cancel64(sqe, (__u64) (uintptr_t) user_data, flags);
@@ -862,7 +905,7 @@ IOURINGINLINE void io_uring_prep_cancel_fd(struct io_uring_sqe *sqe, int fd,
 }
 
 IOURINGINLINE void io_uring_prep_link_timeout(struct io_uring_sqe *sqe,
-					      struct __kernel_timespec *ts,
+					      const struct __kernel_timespec *ts,
 					      unsigned flags)
 	LIBURING_NOEXCEPT
 {
@@ -879,7 +922,7 @@ IOURINGINLINE void io_uring_prep_connect(struct io_uring_sqe *sqe, int fd,
 }
 
 IOURINGINLINE void io_uring_prep_bind(struct io_uring_sqe *sqe, int fd,
-				      struct sockaddr *addr,
+				      const struct sockaddr *addr,
 				      socklen_t addrlen)
 	LIBURING_NOEXCEPT
 {
@@ -887,7 +930,7 @@ IOURINGINLINE void io_uring_prep_bind(struct io_uring_sqe *sqe, int fd,
 }
 
 IOURINGINLINE void io_uring_prep_listen(struct io_uring_sqe *sqe, int fd,
-				      int backlog)
+					int backlog)
 	LIBURING_NOEXCEPT
 {
 	io_uring_prep_rw(IORING_OP_LISTEN, sqe, fd, 0, backlog, 0);
@@ -904,7 +947,7 @@ IOURINGINLINE void io_uring_prep_epoll_wait(struct io_uring_sqe *sqe, int fd,
 }
 
 IOURINGINLINE void io_uring_prep_files_update(struct io_uring_sqe *sqe,
-					      int *fds, unsigned nr_fds,
+					      const int *fds, unsigned nr_fds,
 					      int offset)
 	LIBURING_NOEXCEPT
 {
@@ -1211,7 +1254,7 @@ io_uring_recvmsg_payload_length(struct io_uring_recvmsg_out *o,
 }
 
 IOURINGINLINE void io_uring_prep_openat2(struct io_uring_sqe *sqe, int dfd,
-					const char *path, struct open_how *how)
+					const char *path, const struct open_how *how)
 	LIBURING_NOEXCEPT
 {
 	io_uring_prep_rw(IORING_OP_OPENAT2, sqe, dfd, path, sizeof(*how),
@@ -1221,7 +1264,7 @@ IOURINGINLINE void io_uring_prep_openat2(struct io_uring_sqe *sqe, int dfd,
 /* open directly into the fixed file table */
 IOURINGINLINE void io_uring_prep_openat2_direct(struct io_uring_sqe *sqe,
 						int dfd, const char *path,
-						struct open_how *how,
+						const struct open_how *how,
 						unsigned file_index)
 	LIBURING_NOEXCEPT
 {
@@ -1235,7 +1278,7 @@ IOURINGINLINE void io_uring_prep_openat2_direct(struct io_uring_sqe *sqe,
 struct epoll_event;
 IOURINGINLINE void io_uring_prep_epoll_ctl(struct io_uring_sqe *sqe, int epfd,
 					   int fd, int op,
-					   struct epoll_event *ev)
+					   const struct epoll_event *ev)
 	LIBURING_NOEXCEPT
 {
 	io_uring_prep_rw(IORING_OP_EPOLL_CTL, sqe, epfd, ev,
@@ -1480,6 +1523,36 @@ IOURINGINLINE void io_uring_prep_socket_direct_alloc(struct io_uring_sqe *sqe,
 	__io_uring_set_target_fixed_file(sqe, IORING_FILE_INDEX_ALLOC - 1);
 }
 
+IOURINGINLINE void __io_uring_prep_uring_cmd(struct io_uring_sqe *sqe,
+					     int op,
+					     __u32 cmd_op,
+					     int fd)
+	LIBURING_NOEXCEPT
+{
+	sqe->opcode = (__u8) op;
+	sqe->fd = fd;
+	sqe->cmd_op = cmd_op;
+	sqe->__pad1 = 0;
+	sqe->addr = 0ul;
+	sqe->len = 0;
+}
+
+IOURINGINLINE void io_uring_prep_uring_cmd(struct io_uring_sqe *sqe,
+					   int cmd_op,
+					   int fd)
+	LIBURING_NOEXCEPT
+{
+	__io_uring_prep_uring_cmd(sqe, IORING_OP_URING_CMD, cmd_op, fd);
+}
+
+IOURINGINLINE void io_uring_prep_uring_cmd128(struct io_uring_sqe *sqe,
+					      int cmd_op,
+					      int fd)
+	LIBURING_NOEXCEPT
+{
+	__io_uring_prep_uring_cmd(sqe, IORING_OP_URING_CMD128, cmd_op, fd);
+}
+
 /*
  * Prepare commands for sockets
  */
@@ -1492,12 +1565,24 @@ IOURINGINLINE void io_uring_prep_cmd_sock(struct io_uring_sqe *sqe,
 					  int optlen)
 	LIBURING_NOEXCEPT
 {
-	io_uring_prep_rw(IORING_OP_URING_CMD, sqe, fd, NULL, 0, 0);
+	io_uring_prep_uring_cmd(sqe, cmd_op, fd);
 	sqe->optval = (unsigned long) (uintptr_t) optval;
 	sqe->optname = optname;
 	sqe->optlen = optlen;
-	sqe->cmd_op = cmd_op;
 	sqe->level = level;
+}
+
+IOURINGINLINE void io_uring_prep_cmd_getsockname(struct io_uring_sqe *sqe,
+						 int fd, struct sockaddr *sockaddr,
+						 socklen_t *sockaddr_len,
+						 int peer)
+	LIBURING_NOEXCEPT
+{
+	io_uring_prep_uring_cmd(sqe, SOCKET_URING_OP_GETSOCKNAME, fd);
+
+	sqe->addr = (uintptr_t) sockaddr;
+	sqe->addr3 = (unsigned long) (uintptr_t) sockaddr_len;
+	sqe->optlen = peer;
 }
 
 IOURINGINLINE void io_uring_prep_waitid(struct io_uring_sqe *sqe,
@@ -1514,7 +1599,7 @@ IOURINGINLINE void io_uring_prep_waitid(struct io_uring_sqe *sqe,
 }
 
 IOURINGINLINE void io_uring_prep_futex_wake(struct io_uring_sqe *sqe,
-					    uint32_t *futex, uint64_t val,
+					    const uint32_t *futex, uint64_t val,
 					    uint64_t mask, uint32_t futex_flags,
 					    unsigned int flags)
 	LIBURING_NOEXCEPT
@@ -1525,7 +1610,7 @@ IOURINGINLINE void io_uring_prep_futex_wake(struct io_uring_sqe *sqe,
 }
 
 IOURINGINLINE void io_uring_prep_futex_wait(struct io_uring_sqe *sqe,
-					    uint32_t *futex, uint64_t val,
+					    const uint32_t *futex, uint64_t val,
 					    uint64_t mask, uint32_t futex_flags,
 					    unsigned int flags)
 	LIBURING_NOEXCEPT
@@ -1537,7 +1622,7 @@ IOURINGINLINE void io_uring_prep_futex_wait(struct io_uring_sqe *sqe,
 
 struct futex_waitv;
 IOURINGINLINE void io_uring_prep_futex_waitv(struct io_uring_sqe *sqe,
-					     struct futex_waitv *futex,
+					     const struct futex_waitv *futex,
 					     uint32_t nr_futex,
 					     unsigned int flags)
 	LIBURING_NOEXCEPT
@@ -1570,8 +1655,7 @@ IOURINGINLINE void io_uring_prep_cmd_discard(struct io_uring_sqe *sqe,
 					     uint64_t offset, uint64_t nbytes)
 	LIBURING_NOEXCEPT
 {
-	io_uring_prep_rw(IORING_OP_URING_CMD, sqe, fd, 0, 0, 0);
-	sqe->cmd_op = BLOCK_URING_CMD_DISCARD;
+	io_uring_prep_uring_cmd(sqe, BLOCK_URING_CMD_DISCARD, fd);
 	sqe->addr = offset;
 	sqe->addr3 = nbytes;
 }
@@ -1737,12 +1821,28 @@ IOURINGINLINE int io_uring_wait_cqe_nr(struct io_uring *ring,
 	return __io_uring_get_cqe(ring, cqe_ptr, 0, wait_nr, NULL);
 }
 
+_LOCAL_INLINE bool io_uring_skip_cqe(struct io_uring *ring,
+				     struct io_uring_cqe *cqe, int *err)
+{
+	if (cqe->flags & IORING_CQE_F_SKIP)
+		goto out;
+	if (ring->features & IORING_FEAT_EXT_ARG)
+		return false;
+	if (cqe->user_data != LIBURING_UDATA_TIMEOUT)
+		return false;
+	if (cqe->res < 0)
+		*err = cqe->res;
+out:
+	io_uring_cq_advance(ring, io_uring_cqe_nr(cqe));
+	return !*err;
+}
+
 /*
  * Internal helper, don't use directly in applications. Use one of the
  * "official" versions of this, io_uring_peek_cqe(), io_uring_wait_cqe(),
  * or io_uring_wait_cqes*().
  */
-static inline int __io_uring_peek_cqe(struct io_uring *ring,
+_LOCAL_INLINE int __io_uring_peek_cqe(struct io_uring *ring,
 				      struct io_uring_cqe **cqe_ptr,
 				      unsigned *nr_available)
 	LIBURING_NOEXCEPT
@@ -1768,17 +1868,9 @@ static inline int __io_uring_peek_cqe(struct io_uring *ring,
 			break;
 
 		cqe = &ring->cq.cqes[(head & mask) << shift];
-		if (!(ring->features & IORING_FEAT_EXT_ARG) &&
-				cqe->user_data == LIBURING_UDATA_TIMEOUT) {
-			if (cqe->res < 0)
-				err = cqe->res;
-			io_uring_cq_advance(ring, 1);
-			if (!err)
-				continue;
-			cqe = NULL;
-		}
-
-		break;
+		if (!io_uring_skip_cqe(ring, cqe, &err))
+			break;
+		cqe = NULL;
 	} while (1);
 
 	*cqe_ptr = cqe;
@@ -1951,6 +2043,48 @@ IOURINGINLINE struct io_uring_sqe *io_uring_get_sqe(struct io_uring *ring)
 struct io_uring_sqe *io_uring_get_sqe(struct io_uring *ring);
 #endif
 
+
+/*
+ * Return a 128B sqe to fill. Applications must later call io_uring_submit()
+ * when it's ready to tell the kernel about it. The caller may call this
+ * function multiple times before calling io_uring_submit().
+ *
+ * Returns a vacant 128B sqe, or NULL if we're full. If the current tail is the
+ * last entry in the ring, this function will insert a nop + skip complete such
+ * that the 128b entry wraps back to the beginning of the queue for a
+ * contiguous big sq entry. It's up to the caller to use a 128b opcode in order
+ * for the kernel to know how to advance its sq head pointer.
+ */
+IOURINGINLINE struct io_uring_sqe *io_uring_get_sqe128(struct io_uring *ring)
+	LIBURING_NOEXCEPT
+{
+	struct io_uring_sq *sq = &ring->sq;
+	unsigned head = io_uring_load_sq_head(ring), tail = sq->sqe_tail;
+	struct io_uring_sqe *sqe;
+
+	if (ring->flags & IORING_SETUP_SQE128)
+		return io_uring_get_sqe(ring);
+	if (!(ring->flags & IORING_SETUP_SQE_MIXED))
+		return NULL;
+
+	if (((tail + 1) & sq->ring_mask) == 0) {
+		if ((tail + 2) - head >= sq->ring_entries)
+			return NULL;
+
+		sqe = _io_uring_get_sqe(ring);
+		io_uring_prep_nop(sqe);
+		sqe->flags |= IOSQE_CQE_SKIP_SUCCESS;
+		tail = sq->sqe_tail;
+	} else if ((tail + 1) - head >= sq->ring_entries) {
+		return NULL;
+	}
+
+	sqe = &sq->sqes[tail & sq->ring_mask];
+	sq->sqe_tail = tail + 2;
+	io_uring_initialize_sqe(sqe);
+	return sqe;
+}
+
 ssize_t io_uring_mlock_size(unsigned entries, unsigned flags)
 	LIBURING_NOEXCEPT;
 ssize_t io_uring_mlock_size_params(unsigned entries, struct io_uring_params *p)
@@ -1985,6 +2119,10 @@ bool io_uring_check_version(int major, int minor) LIBURING_NOEXCEPT;
 
 #ifdef IOURINGINLINE
 #undef IOURINGINLINE
+#endif
+
+#ifdef _LOCAL_INLINE
+#undef _LOCAL_INLINE
 #endif
 
 #endif

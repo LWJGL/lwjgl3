@@ -542,6 +542,31 @@ ENABLE_WARNINGS()""")
         bool("enable_iowait")
     )
 
+    unsigned(
+        "cqe_shift_from_flags",
+
+        unsigned("flags")
+    )
+
+    unsigned(
+        "cqe_shift",
+
+        io_uring.const.p("ring")
+    )
+
+    unsigned(
+        "cqe_nr",
+
+        io_uring_cqe.const.p("cqe")
+    )
+
+    void(
+        "cq_advance",
+
+        io_uring.p("ring"),
+        unsigned("nr")
+    )
+
     void(
         "cqe_seen",
 
@@ -780,10 +805,16 @@ ENABLE_WARNINGS()""")
     )
 
     void(
+        "prep_nop128",
+
+        io_uring_sqe.p("sqe")
+    )
+
+    void(
         "prep_timeout",
 
         io_uring_sqe.p("sqe"),
-        __kernel_timespec.p("ts"),
+        __kernel_timespec.const.p("ts"),
         unsigned("count"),
         unsigned("flags")
     )
@@ -800,7 +831,7 @@ ENABLE_WARNINGS()""")
         "prep_timeout_update",
 
         io_uring_sqe.p("sqe"),
-        __kernel_timespec.p("ts"),
+        __kernel_timespec.const.p("ts"),
         __u64("user_data"),
         unsigned("flags")
     )
@@ -874,7 +905,7 @@ ENABLE_WARNINGS()""")
         "prep_link_timeout",
 
         io_uring_sqe.p("sqe"),
-        __kernel_timespec.p("ts"),
+        __kernel_timespec.const.p("ts"),
         unsigned("flags")
     )
 
@@ -892,7 +923,7 @@ ENABLE_WARNINGS()""")
 
         io_uring_sqe.p("sqe"),
         int("fd"),
-        sockaddr.p("addr"),
+        sockaddr.const.p("addr"),
         socklen_t("addrlen")
     )
 
@@ -918,7 +949,7 @@ ENABLE_WARNINGS()""")
         "prep_files_update",
 
         io_uring_sqe.p("sqe"),
-        int.p("fds"),
+        int.const.p("fds"),
         AutoSize("fds")..unsigned("nr_fds"),
         int("offset")
     )
@@ -1217,7 +1248,7 @@ ENABLE_WARNINGS()""")
         io_uring_sqe.p("sqe"),
         int("dfd"),
         charUTF8.const.p("path"),
-        open_how.p("how")
+        open_how.const.p("how")
     )
 
     void(
@@ -1226,7 +1257,7 @@ ENABLE_WARNINGS()""")
         io_uring_sqe.p("sqe"),
         int("dfd"),
         charUTF8.const.p("path"),
-        open_how.p("how"),
+        open_how.const.p("how"),
         unsigned("file_index")
     )
 
@@ -1237,7 +1268,7 @@ ENABLE_WARNINGS()""")
         int("epfd"),
         int("fd"),
         int("op"),
-        epoll_event.p("ev")
+        epoll_event.const.p("ev")
     )
 
     void(
@@ -1483,6 +1514,22 @@ ENABLE_WARNINGS()""")
     )
 
     void(
+        "prep_uring_cmd",
+
+        io_uring_sqe.p("sqe"),
+        int("cmd_op"),
+        int("fd")
+    )
+
+    void(
+        "prep_uring_cmd128",
+
+        io_uring_sqe.p("sqe"),
+        int("cmd_op"),
+        int("fd")
+    )
+
+    void(
         "prep_cmd_sock",
 
         io_uring_sqe.p("sqe"),
@@ -1492,6 +1539,16 @@ ENABLE_WARNINGS()""")
         int("optname"),
         void.p("optval"),
         AutoSize("optval")..int("optlen")
+    )
+
+    void(
+        "prep_cmd_getsockname",
+
+        io_uring_sqe.p("sqe"),
+        int("fd"),
+        sockaddr.p("sockaddr"),
+        Check(1)..socklen_t.p("sockaddr_len"),
+        int("peer")
     )
 
     void(
@@ -1509,7 +1566,7 @@ ENABLE_WARNINGS()""")
         "prep_futex_wake",
 
         io_uring_sqe.p("sqe"),
-        Check(1)..uint32_t.p("futex"),
+        Check(1)..uint32_t.const.p("futex"),
         uint64_t("val"),
         uint64_t("mask"),
         uint32_t("futex_flags"),
@@ -1520,7 +1577,7 @@ ENABLE_WARNINGS()""")
         "prep_futex_wait",
 
         io_uring_sqe.p("sqe"),
-        Check(1)..uint32_t.p("futex"),
+        Check(1)..uint32_t.const.p("futex"),
         uint64_t("val"),
         uint64_t("mask"),
         uint32_t("futex_flags"),
@@ -1531,7 +1588,7 @@ ENABLE_WARNINGS()""")
         "prep_futex_waitv",
 
         io_uring_sqe.p("sqe"),
-        "struct futex_waitv".handle.p("futex"),
+        "struct futex_waitv".handle.const.p("futex"),
         AutoSize("futex")..unsigned_int("nr_futex"),
         unsigned_int("flags")
     )
@@ -1704,6 +1761,12 @@ ENABLE_WARNINGS()""")
 
     io_uring_sqe.p(
         "get_sqe",
+
+        io_uring.p("ring")
+    )
+
+    io_uring_sqe.p(
+        "get_sqe128",
 
         io_uring.p("ring")
     )

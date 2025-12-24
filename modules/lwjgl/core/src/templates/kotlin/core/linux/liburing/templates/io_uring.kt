@@ -20,6 +20,10 @@ val LibIOURing = "LibIOURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubP
 ENABLE_WARNINGS()""")
 
     IntConstant(
+        "RW_ATTR_FLAG_PI".."1 << 0"
+    )
+
+    IntConstant(
         "FILE_INDEX_ALLOC".."~0"
     )
 
@@ -63,7 +67,9 @@ ENABLE_WARNINGS()""")
         "SETUP_NO_MMAP".enum("1 << 14"),
         "SETUP_REGISTERED_FD_ONLY".enum("1 << 15"),
         "SETUP_NO_SQARRAY".enum("1 << 16"),
-        "SETUP_HYBRID_IOPOLL".enum("1 << 17")
+        "SETUP_HYBRID_IOPOLL".enum("1 << 17"),
+        "SETUP_CQE_MIXED".enum("1 << 18"),
+        "SETUP_SQE_MIXED".enum("1 << 19")
     )
 
     EnumConstantByte(
@@ -130,6 +136,8 @@ ENABLE_WARNINGS()""")
         "OP_READV_FIXED".enumByte,
         "OP_WRITEV_FIXED".enumByte,
         "OP_PIPE".enumByte,
+        "OP_NOP128".enumByte,
+        "OP_URING_CMD128".enumByte,
         "OP_LAST".enumByte
     )
 
@@ -206,7 +214,8 @@ ENABLE_WARNINGS()""")
     )
 
     EnumConstant(
-        "NOP_INJECT_RESULT".enum("1 << 0")
+        "NOP_INJECT_RESULT".enum("1 << 0"),
+        "NOP_CQE32".enum("1 << 5")
     )
 
     EnumConstant(
@@ -215,6 +224,8 @@ ENABLE_WARNINGS()""")
         "CQE_F_SOCK_NONEMPTY".enum("1 << 2"),
         "CQE_F_NOTIF".enum("1 << 3"),
         "CQE_F_BUF_MORE".enum("1 << 4"),
+        "CQE_F_SKIP".enum("1 << 5"),
+        "CQE_F_32".enum("1 << 15")
     )
 
     IntConstant(
@@ -308,6 +319,7 @@ ENABLE_WARNINGS()""")
         "REGISTER_ZCRX_IFQ".enum,
         "REGISTER_RESIZE_RINGS".enum,
         "REGISTER_MEM_REGION".enum,
+        "REGISTER_QUERY".enum,
 
         "REGISTER_LAST".enum,
 
@@ -366,6 +378,8 @@ ENABLE_WARNINGS()""")
         "SOCKET_URING_OP_SIOCOUTQ".enum,
         "SOCKET_URING_OP_GETSOCKOPT".enum,
         "SOCKET_URING_OP_SETSOCKOPT".enum,
+        "SOCKET_URING_OP_TX_TIMESTAMP".enum,
+        "SOCKET_URING_OP_GETSOCKNAME".enum
     ).noPrefix()
 
     IntConstant(
@@ -379,6 +393,12 @@ ENABLE_WARNINGS()""")
 
     EnumConstant(
         "ZCRX_AREA_DMABUF".enum("1")
+    )
+
+    // query.h
+
+    EnumConstant(
+        "QUERY_OPCODES".enum("0")
     )
 
     NativeName("__sys_io_uring_setup")..int(

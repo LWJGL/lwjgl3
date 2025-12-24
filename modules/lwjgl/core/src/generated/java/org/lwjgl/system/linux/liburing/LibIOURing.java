@@ -18,6 +18,8 @@ public class LibIOURing {
 
     static { Library.initialize(); }
 
+    public static final int IORING_RW_ATTR_FLAG_PI = 1 << 0;
+
     public static final int IORING_FILE_INDEX_ALLOC = ~0;
 
     public static final int IORING_MAX_ENTRIES = 4096;
@@ -58,7 +60,9 @@ public class LibIOURing {
         IORING_SETUP_NO_MMAP            = 1 << 14,
         IORING_SETUP_REGISTERED_FD_ONLY = 1 << 15,
         IORING_SETUP_NO_SQARRAY         = 1 << 16,
-        IORING_SETUP_HYBRID_IOPOLL      = 1 << 17;
+        IORING_SETUP_HYBRID_IOPOLL      = 1 << 17,
+        IORING_SETUP_CQE_MIXED          = 1 << 18,
+        IORING_SETUP_SQE_MIXED          = 1 << 19;
 
     public static final byte
         IORING_OP_NOP              = 0,
@@ -124,7 +128,9 @@ public class LibIOURing {
         IORING_OP_READV_FIXED      = 60,
         IORING_OP_WRITEV_FIXED     = 61,
         IORING_OP_PIPE             = 62,
-        IORING_OP_LAST             = 63;
+        IORING_OP_NOP128           = 63,
+        IORING_OP_URING_CMD128     = 64,
+        IORING_OP_LAST             = 65;
 
     public static final int
         IORING_URING_CMD_FIXED = 1 << 0,
@@ -184,14 +190,18 @@ public class LibIOURing {
 
     public static final int IORING_FIXED_FD_NO_CLOEXEC = 1 << 0;
 
-    public static final int IORING_NOP_INJECT_RESULT = 1 << 0;
+    public static final int
+        IORING_NOP_INJECT_RESULT = 1 << 0,
+        IORING_NOP_CQE32         = 1 << 5;
 
     public static final int
         IORING_CQE_F_BUFFER        = 1 << 0,
         IORING_CQE_F_MORE          = 1 << 1,
         IORING_CQE_F_SOCK_NONEMPTY = 1 << 2,
         IORING_CQE_F_NOTIF         = 1 << 3,
-        IORING_CQE_F_BUF_MORE      = 1 << 4;
+        IORING_CQE_F_BUF_MORE      = 1 << 4,
+        IORING_CQE_F_SKIP          = 1 << 5,
+        IORING_CQE_F_32            = 1 << 15;
 
     public static final int IORING_CQE_BUFFER_SHIFT = 16;
 
@@ -276,7 +286,8 @@ public class LibIOURing {
         IORING_REGISTER_ZCRX_IFQ            = 32,
         IORING_REGISTER_RESIZE_RINGS        = 33,
         IORING_REGISTER_MEM_REGION          = 34,
-        IORING_REGISTER_LAST                = 35,
+        IORING_REGISTER_QUERY               = 35,
+        IORING_REGISTER_LAST                = 36,
         IORING_REGISTER_USE_REGISTERED_RING = 1 << 31;
 
     public static final int
@@ -311,10 +322,12 @@ public class LibIOURing {
     public static final int IORING_REG_WAIT_TS = 1 << 0;
 
     public static final int
-        SOCKET_URING_OP_SIOCINQ    = 0,
-        SOCKET_URING_OP_SIOCOUTQ   = 1,
-        SOCKET_URING_OP_GETSOCKOPT = 2,
-        SOCKET_URING_OP_SETSOCKOPT = 3;
+        SOCKET_URING_OP_SIOCINQ      = 0,
+        SOCKET_URING_OP_SIOCOUTQ     = 1,
+        SOCKET_URING_OP_GETSOCKOPT   = 2,
+        SOCKET_URING_OP_SETSOCKOPT   = 3,
+        SOCKET_URING_OP_TX_TIMESTAMP = 4,
+        SOCKET_URING_OP_GETSOCKNAME  = 5;
 
     public static final int
         IORING_TIMESTAMP_HW_SHIFT   = 16,
@@ -326,6 +339,8 @@ public class LibIOURing {
     public static final long IORING_ZCRX_AREA_MASK = ~((1L << IORING_ZCRX_AREA_SHIFT) - 1);
 
     public static final int IORING_ZCRX_AREA_DMABUF = 1;
+
+    public static final int IORING_QUERY_OPCODES = 0;
 
     protected LibIOURing() {
         throw new UnsupportedOperationException();

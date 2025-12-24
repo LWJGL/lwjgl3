@@ -100,6 +100,10 @@ struct io_uring_sqe {
 			__u64	addr3;
 			__u64	__pad2[1];
 		};
+		struct {
+			__u64   attr_ptr; /* pointer to attribute information */
+			__u64   attr_type_mask; /* bit mask of attributes */
+                };
 		__u64	optval;
 		/*
 		 * If the ring is initialized with IORING_SETUP_SQE128, then
@@ -107,6 +111,18 @@ struct io_uring_sqe {
 		 */
 		__u8	cmd[0];
 	};
+};
+
+/* sqe->attr_type_mask flags */
+#define IORING_RW_ATTR_FLAG_PI  (1U << 0)
+/* PI attribute information */
+struct io_uring_attr_pi {
+		__u16	flags;
+		__u16	app_tag;
+		__u32	len;
+		__u64	addr;
+		__u64	seed;
+		__u64	rsvd;
 };
 
 /*
@@ -205,6 +221,18 @@ enum io_uring_sqe_flags_bit {
 /* Use hybrid poll in iopoll process */
 #define IORING_SETUP_HYBRID_IOPOLL	(1U << 17)
 
+/*
+ * Allow both 16b and 32b CQEs. If a 32b CQE is posted, it will have
+ * IORING_CQE_F_32 set in cqe->flags.
+ */
+#define IORING_SETUP_CQE_MIXED		(1U << 18)
+
+/*
+ *  Allow both 64b and 128b SQEs. If a 128b SQE is posted, it will use a 128b
+ *  opcode.
+ */
+#define IORING_SETUP_SQE_MIXED		(1U << 19)
+
 enum io_uring_op {
 	IORING_OP_NOP,
 	IORING_OP_READV,
@@ -269,6 +297,8 @@ enum io_uring_op {
 	IORING_OP_READV_FIXED,
 	IORING_OP_WRITEV_FIXED,
 	IORING_OP_PIPE,
+	IORING_OP_NOP128,
+	IORING_OP_URING_CMD128,
 
 	/* this goes last, obviously */
 	IORING_OP_LAST,
@@ -430,6 +460,7 @@ enum io_uring_msg_ring_flags {
  * IORING_NOP_INJECT_RESULT	Inject result from sqe->result
  */
 #define IORING_NOP_INJECT_RESULT	(1U << 0)
+#define IORING_NOP_CQE32		(1U << 5)
 
 /*
  * IO completion data structure (Completion Queue Entry)
@@ -463,12 +494,22 @@ struct io_uring_cqe {
  *			other provided buffer type, all completions with a
  *			buffer passed back is automatically returned to the
  *			application.
+ * IORING_CQE_F_SKIP	If set, then the application/liburing must ignore this
+ *			CQE. It's only purpose is to fill a gap in the ring,
+ *			if a large CQE is attempted posted when the ring has
+ *			just a single small CQE worth of space left before
+ *			wrapping.
+ * IORING_CQE_F_32	If set, this is a 32b/big-cqe posting. Use with rings
+ *			setup in a mixed CQE mode, where both 16b and 32b
+ *			CQEs may be posted to the CQ ring.
  */
 #define IORING_CQE_F_BUFFER		(1U << 0)
 #define IORING_CQE_F_MORE		(1U << 1)
 #define IORING_CQE_F_SOCK_NONEMPTY	(1U << 2)
 #define IORING_CQE_F_NOTIF		(1U << 3)
 #define IORING_CQE_F_BUF_MORE		(1U << 4)
+#define IORING_CQE_F_SKIP		(1U << 5)
+#define IORING_CQE_F_32			(1U << 15)
 
 #define IORING_CQE_BUFFER_SHIFT		16
 
@@ -640,6 +681,9 @@ enum io_uring_register_op {
 	IORING_REGISTER_RESIZE_RINGS		= 33,
 
 	IORING_REGISTER_MEM_REGION		= 34,
+
+	/* query various aspects of io_uring, see linux/io_uring/query.h */
+	IORING_REGISTER_QUERY			= 35,
 
 	/* this goes last */
 	IORING_REGISTER_LAST,
@@ -922,6 +966,7 @@ enum io_uring_socket_op {
 	SOCKET_URING_OP_GETSOCKOPT,
 	SOCKET_URING_OP_SETSOCKOPT,
 	SOCKET_URING_OP_TX_TIMESTAMP,
+	SOCKET_URING_OP_GETSOCKNAME,
 };
 
 /*
