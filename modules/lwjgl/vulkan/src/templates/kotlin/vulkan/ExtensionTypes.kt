@@ -5339,7 +5339,7 @@ val VkDeviceDeviceMemoryReportCreateInfoEXT = struct(Module.VULKAN, "VkDeviceDev
     nullable..opaque_const_p("pNext")
     VkDeviceMemoryReportFlagsEXT("flags")
     PFN_vkDeviceMemoryReportCallbackEXT("pfnUserCallback")
-    opaque_p("pUserData")
+    nullable..opaque_p("pUserData")
 }
 
 val _VkPhysicalDeviceRobustness2FeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceRobustness2FeaturesKHR")
@@ -5377,6 +5377,12 @@ val VkPhysicalDeviceCustomBorderColorFeaturesEXT = struct(Module.VULKAN, "VkPhys
     nullable..opaque_p("pNext")
     VkBool32("customBorderColors")
     VkBool32("customBorderColorWithoutFormat")
+}
+
+val VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_3D_FEATURES_EXT")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("textureCompressionASTC_3D")
 }
 
 val VkPhysicalDevicePresentBarrierFeaturesNV = struct(Module.VULKAN, "VkPhysicalDevicePresentBarrierFeaturesNV") {
@@ -10190,6 +10196,18 @@ val VkResolveImageModeInfoKHR = struct(Module.VULKAN, "VkResolveImageModeInfoKHR
     VkResolveModeFlagBits("stencilResolveMode")
 }
 
+val VkPhysicalDeviceShaderLongVectorFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceShaderLongVectorFeaturesEXT") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_LONG_VECTOR_FEATURES_EXT")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("longVector")
+}
+
+val VkPhysicalDeviceShaderLongVectorPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceShaderLongVectorPropertiesEXT", mutable = false) {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_LONG_VECTOR_PROPERTIES_EXT")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
+    uint32_t("maxVectorComponents")
+}
+
 val VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC = struct(Module.VULKAN, "VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC") {
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CACHE_INCREMENTAL_MODE_FEATURES_SEC")..VkStructureType("sType")
     nullable..opaque_p("pNext")
@@ -10200,4 +10218,17 @@ val VkPhysicalDeviceShaderUniformBufferUnsizedArrayFeaturesEXT = struct(Module.V
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_UNIFORM_BUFFER_UNSIZED_ARRAY_FEATURES_EXT")..VkStructureType("sType")
     nullable..opaque_p("pNext")
     VkBool32("shaderUniformBufferUnsizedArray")
+}
+
+val VkComputeOccupancyPriorityParametersNV = struct(Module.VULKAN, "VkComputeOccupancyPriorityParametersNV") {
+    Expression("#STRUCTURE_TYPE_COMPUTE_OCCUPANCY_PRIORITY_PARAMETERS_NV")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    float("occupancyPriority")
+    float("occupancyThrottling")
+}
+
+val VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV = struct(Module.VULKAN, "VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_OCCUPANCY_PRIORITY_FEATURES_NV")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("computeOccupancyPriority")
 }

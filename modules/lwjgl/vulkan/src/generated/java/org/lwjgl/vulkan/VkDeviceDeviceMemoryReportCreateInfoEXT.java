@@ -272,7 +272,7 @@ public class VkDeviceDeviceMemoryReportCreateInfoEXT extends Struct<VkDeviceDevi
     /** Unsafe version of {@link #pfnUserCallback(VkDeviceMemoryReportCallbackEXTI) pfnUserCallback}. */
     public static void npfnUserCallback(long struct, VkDeviceMemoryReportCallbackEXTI value) { memPutAddress(struct + VkDeviceDeviceMemoryReportCreateInfoEXT.PFNUSERCALLBACK, value.address()); }
     /** Unsafe version of {@link #pUserData(long) pUserData}. */
-    public static void npUserData(long struct, long value) { memPutAddress(struct + VkDeviceDeviceMemoryReportCreateInfoEXT.PUSERDATA, check(value)); }
+    public static void npUserData(long struct, long value) { memPutAddress(struct + VkDeviceDeviceMemoryReportCreateInfoEXT.PUSERDATA, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -281,7 +281,6 @@ public class VkDeviceDeviceMemoryReportCreateInfoEXT extends Struct<VkDeviceDevi
      */
     public static void validate(long struct) {
         check(memGetAddress(struct + VkDeviceDeviceMemoryReportCreateInfoEXT.PFNUSERCALLBACK));
-        check(memGetAddress(struct + VkDeviceDeviceMemoryReportCreateInfoEXT.PUSERDATA));
     }
 
     // -----------------------------------

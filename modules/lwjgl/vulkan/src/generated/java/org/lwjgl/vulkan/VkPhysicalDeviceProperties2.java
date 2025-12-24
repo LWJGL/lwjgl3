@@ -317,6 +317,8 @@ public class VkPhysicalDeviceProperties2 extends Struct<VkPhysicalDeviceProperti
     public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceShaderIntegerDotProductProperties value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceShaderLongVectorPropertiesEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceShaderLongVectorPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderObjectPropertiesEXT} value to the {@code pNext} chain. */
@@ -798,6 +800,8 @@ public class VkPhysicalDeviceProperties2 extends Struct<VkPhysicalDeviceProperti
         public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceShaderIntegerDotProductProperties value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceShaderLongVectorPropertiesEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceShaderLongVectorPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderObjectPropertiesEXT} value to the {@code pNext} chain. */

@@ -206,6 +206,8 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceColorWriteEnableFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceCommandBufferInheritanceFeaturesNV} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceCommandBufferInheritanceFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV} value to the {@code pNext} chain. */
+    public VkDeviceCreateInfo pNext(VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} value to the {@code pNext} chain. */
@@ -634,6 +636,8 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceShaderLongVectorFeaturesEXT} value to the {@code pNext} chain. */
+    public VkDeviceCreateInfo pNext(VkPhysicalDeviceShaderLongVectorFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT} value to the {@code pNext} chain. */
@@ -690,6 +694,8 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceTensorFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT} value to the {@code pNext} chain. */
+    public VkDeviceCreateInfo pNext(VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceTextureCompressionASTCHDRFeatures} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceTextureCompressionASTCHDRFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT} value to the {@code pNext} chain. */
@@ -1133,6 +1139,8 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceColorWriteEnableFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceCommandBufferInheritanceFeaturesNV} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceCommandBufferInheritanceFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV} value to the {@code pNext} chain. */
+        public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} value to the {@code pNext} chain. */
@@ -1561,6 +1569,8 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceShaderLongVectorFeaturesEXT} value to the {@code pNext} chain. */
+        public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceShaderLongVectorFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT} value to the {@code pNext} chain. */
@@ -1617,6 +1627,8 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceTensorFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT} value to the {@code pNext} chain. */
+        public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceTextureCompressionASTCHDRFeatures} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceTextureCompressionASTCHDRFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT} value to the {@code pNext} chain. */
