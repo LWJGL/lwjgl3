@@ -13,7 +13,7 @@ val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "
 
     cpp = true
 
-    IntConstant("MESHOPTIMIZER_VERSION".."250").noPrefix()
+    IntConstant("MESHOPTIMIZER_VERSION".."1000").noPrefix()
 
     size_t(
         "generateVertexRemap",
