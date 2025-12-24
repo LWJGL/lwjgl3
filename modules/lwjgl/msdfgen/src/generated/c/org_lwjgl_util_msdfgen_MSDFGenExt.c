@@ -4,6 +4,8 @@
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
 #include "common_tools.h"
+
+#define MSDFGEN_DYNAMIC_FREETYPE
 #include "msdfgen-ext-c.h"
 
 EXTERN_C_ENTER

@@ -12,7 +12,7 @@
  *
  */
 
-#include "msdfgen-ext-c.h"
+#include "../msdfgen-ext-c.h"
 #include "import-font.h"
 
 /*
@@ -26,6 +26,8 @@
 
 extern "C" {
 
+#ifdef MSDFGEN_DYNAMIC_FREETYPE // Runtime loader API
+
 MSDF_API int msdf_ft_set_load_callback(msdf_ft_load_callback callback) {
     if(callback == nullptr) {
         return MSDF_ERR_INVALID_ARG;
@@ -37,6 +39,8 @@ MSDF_API int msdf_ft_set_load_callback(msdf_ft_load_callback callback) {
 MSDF_API msdf_ft_load_callback msdf_ft_get_load_callback() {
     return msdfgen::getFreetypeLoadCallback();
 }
+
+#endif
 
 MSDF_API int msdf_ft_init(msdf_ft_handle* handle) {
     if(handle == nullptr) {

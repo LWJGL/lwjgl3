@@ -8,7 +8,9 @@ import msdfgen.*
 import org.lwjgl.generator.*
 
 val msdfGenExt = "MSDFGenExt".nativeClass(Module.MSDFGEN, prefix = "MSDF", prefixMethod = "msdf_") {
-    nativeImport("msdfgen-ext-c.h")
+    nativeDirective("""
+#define MSDFGEN_DYNAMIC_FREETYPE
+#include "msdfgen-ext-c.h"""")
 
     EnumConstant(
         "FONT_SCALING_NONE".enum("0"),

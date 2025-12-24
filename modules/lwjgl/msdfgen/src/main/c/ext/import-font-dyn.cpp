@@ -5,6 +5,8 @@
  * environment like Java (JNI) or C# (P/Invoke).
  */
 
+#ifdef MSDFGEN_DYNAMIC_FREETYPE
+
 #include "import-font.h"
 #include "freetype-loader.h"
 
@@ -636,3 +638,5 @@ bool listFontVariationAxes(std::vector<FontVariationAxis> &axes, FreetypeHandle 
 #endif
 
 }
+
+#endif//MSDFGEN_DYNAMIC_FREETYPE

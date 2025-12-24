@@ -89,11 +89,17 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1get_1ed
     return (jint)msdf_shape_get_edge_count(shape, count);
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1has_1inverse_1y_1axis(JNIEnv *__env, jclass clazz, jlong shapeAddress, jlong inverse_y_axisAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1get_1y_1axis_1orientation(JNIEnv *__env, jclass clazz, jlong shapeAddress, jlong yAxisOrientationAddress) {
     msdf_shape_const_handle shape = (msdf_shape_const_handle)(uintptr_t)shapeAddress;
-    int *inverse_y_axis = (int *)(uintptr_t)inverse_y_axisAddress;
+    int *yAxisOrientation = (int *)(uintptr_t)yAxisOrientationAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)msdf_shape_has_inverse_y_axis(shape, inverse_y_axis);
+    return (jint)msdf_shape_get_y_axis_orientation(shape, yAxisOrientation);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1set_1y_1axis_1orientation(JNIEnv *__env, jclass clazz, jlong shapeAddress, jint yAxisOrientation) {
+    msdf_shape_handle shape = (msdf_shape_handle)(uintptr_t)shapeAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)msdf_shape_set_y_axis_orientation(shape, yAxisOrientation);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_msdfgen_MSDFGen_nmsdf_1shape_1normalize(JNIEnv *__env, jclass clazz, jlong shapeAddress) {

@@ -12,8 +12,9 @@
  *
  */
 
-#include "msdfgen-c.h"
-#include "msdfgen.h"
+#include "../msdfgen-c.h"
+
+#include "../msdfgen.h"
 #include "ShapeDistanceFinder.h"
 
 #include <utility>
@@ -223,11 +224,19 @@ MSDF_API int msdf_shape_get_edge_count(msdf_shape_const_handle shape, size_t* ed
     return MSDF_SUCCESS;
 }
 
-MSDF_API int msdf_shape_has_inverse_y_axis(msdf_shape_const_handle shape, int* inverse_y_axis) {
-    if(shape == nullptr || inverse_y_axis == nullptr) {
+MSDF_API int msdf_shape_get_y_axis_orientation(msdf_shape_const_handle shape, int *yAxisOrientation) {
+    if(shape == nullptr || yAxisOrientation == nullptr) {
         return MSDF_ERR_INVALID_ARG;
     }
-    *inverse_y_axis = reinterpret_cast<const msdfgen::Shape*>(shape)->inverseYAxis ? MSDF_TRUE : MSDF_FALSE;
+    *yAxisOrientation = static_cast<int>(reinterpret_cast<const msdfgen::Shape*>(shape)->getYAxisOrientation());
+    return MSDF_SUCCESS;
+}
+
+MSDF_API int msdf_shape_set_y_axis_orientation(msdf_shape_handle shape, int yAxisOrientation) {
+    if(shape == nullptr) {
+        return MSDF_ERR_INVALID_ARG;
+    }
+    reinterpret_cast<msdfgen::Shape*>(shape)->setYAxisOrientation(static_cast<msdfgen::YAxisOrientation>(yAxisOrientation));
     return MSDF_SUCCESS;
 }
 

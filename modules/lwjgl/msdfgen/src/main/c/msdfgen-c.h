@@ -62,6 +62,9 @@
 #define MSDF_EDGE_COLOR_CYAN 6
 #define MSDF_EDGE_COLOR_WHITE 7
 
+#define MSDF_ORIENTATION_Y_UPWARD 0
+#define MSDF_ORIENTATION_Y_DOWNWARD 1
+
 // Error correction modes for generator config
 #define MSDF_ERROR_CORRECTION_MODE_DISABLED 0
 #define MSDF_ERROR_CORRECTION_MODE_INDISCRIMINATE 1
@@ -243,14 +246,8 @@ MSDF_API int msdf_shape_get_contour(msdf_shape_const_handle shape, size_t index,
  */
 MSDF_API int msdf_shape_get_edge_count(msdf_shape_const_handle shape, size_t* edge_count);
 
-/**
- * Retrieves the inverse-y-axis flag of the given shape.
- * @param shape A pointer to a shape from which to fetch the inverse-y-axis flag.
- * @param inverse_y_axis A pointer to a variable which is populated with @code MSDF_TRUE@endcode when the
- *  y-axis of the given shape is inverted. Otherwise the variable will be set to @code MSDF_FALSE@endcode.
- * @returns @code MSDF_SUCCESS@endcode on success, otherwise one of the constants prefixed with @code MSDF_ERR_@endcode.
- */
-MSDF_API int msdf_shape_has_inverse_y_axis(msdf_shape_const_handle shape, int* inverse_y_axis);
+MSDF_API int msdf_shape_get_y_axis_orientation(msdf_shape_const_handle shape, int *yAxisOrientation);
+MSDF_API int msdf_shape_set_y_axis_orientation(msdf_shape_handle shape, int yAxisOrientation);
 
 /**
  * Normalizes the given shape.

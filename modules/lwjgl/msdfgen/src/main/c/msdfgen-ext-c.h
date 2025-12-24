@@ -31,6 +31,8 @@ extern "C" {
 MSDF_DEFINE_HANDLE_TYPE(msdf_ft);
 MSDF_DEFINE_HANDLE_TYPE(msdf_ft_font);
 
+#ifdef MSDFGEN_DYNAMIC_FREETYPE // Runtime loader API
+
 typedef void* (*msdf_ft_load_callback)(const char* functionName);
 
 /**
@@ -45,6 +47,8 @@ MSDF_API int msdf_ft_set_load_callback(msdf_ft_load_callback callback);
  * @returns A pointer to the current FreeType load callback function.
  */
 MSDF_API msdf_ft_load_callback msdf_ft_get_load_callback();
+
+#endif
 
 /**
  * Initializes a new FreeType instance to be used with msdfgen.

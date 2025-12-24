@@ -49,6 +49,11 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "MSDF", prefixMetho
     )
 
     EnumConstant(
+        "ORIENTATION_Y_UPWARD".enum("0"),
+        "ORIENTATION_Y_DOWNWARD".enum
+    )
+
+    EnumConstant(
         "ERROR_CORRECTION_MODE_DISABLED".enum("0"),
         "ERROR_CORRECTION_MODE_INDISCRIMINATE".enum,
         "ERROR_CORRECTION_MODE_EDGE_PRIORITY".enum,
@@ -151,10 +156,17 @@ val msdfGen = "MSDFGen".nativeClass(Module.MSDFGEN, prefix = "MSDF", prefixMetho
     )
 
     int(
-        "shape_has_inverse_y_axis",
+        "shape_get_y_axis_orientation",
 
         msdf_shape_const_handle("shape"),
-        Check(1)..int.p("inverse_y_axis")
+        Check(1)..int.p("yAxisOrientation")
+    )
+
+    int(
+        "shape_set_y_axis_orientation",
+
+        msdf_shape_handle("shape"),
+        int("yAxisOrientation")
     )
 
     int(
