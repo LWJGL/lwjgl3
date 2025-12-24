@@ -14,8 +14,8 @@ val FMOD = "FMOD".nativeClass(
     binding = simpleBinding(Module.FMOD, libraryName = "FMOD", libraryExpression = "Configuration.FMOD_LIBRARY_NAME, \"fmod\"")
 ) {
 
-    IntConstant("VERSION"..0x00020310)
-    IntConstant("BUILDNUMBER".."157581")
+    IntConstant("VERSION"..0x00020311)
+    IntConstant("BUILDNUMBER".."158528")
 
     IntConstant(
         "DEBUG_LEVEL_NONE"..0x00000000,
@@ -1165,7 +1165,8 @@ val FMOD = "FMOD".nativeClass(
         "DSP_PARAMETER_DATA_TYPE_FFT".enum("-4"),
         "DSP_PARAMETER_DATA_TYPE_3DATTRIBUTES_MULTI".enum("-5"),
         "DSP_PARAMETER_DATA_TYPE_ATTENUATION_RANGE".enum("-6"),
-        "DSP_PARAMETER_DATA_TYPE_DYNAMIC_RESPONSE".enum("-7")
+        "DSP_PARAMETER_DATA_TYPE_DYNAMIC_RESPONSE".enum("-7"),
+        "DSP_PARAMETER_DATA_TYPE_FINITE_LENGTH".enum("-8")
     )
 
     customMethod("""

@@ -423,9 +423,9 @@ public class FMOD {
         return FMOD;
     }
 
-    public static final int FMOD_VERSION = 0x20310;
+    public static final int FMOD_VERSION = 0x20311;
 
-    public static final int FMOD_BUILDNUMBER = 157581;
+    public static final int FMOD_BUILDNUMBER = 158528;
 
     public static final int
         FMOD_DEBUG_LEVEL_NONE          = 0x0,
@@ -1490,7 +1490,8 @@ public class FMOD {
         FMOD_DSP_PARAMETER_DATA_TYPE_FFT                = -4,
         FMOD_DSP_PARAMETER_DATA_TYPE_3DATTRIBUTES_MULTI = -5,
         FMOD_DSP_PARAMETER_DATA_TYPE_ATTENUATION_RANGE  = -6,
-        FMOD_DSP_PARAMETER_DATA_TYPE_DYNAMIC_RESPONSE   = -7;
+        FMOD_DSP_PARAMETER_DATA_TYPE_DYNAMIC_RESPONSE   = -7,
+        FMOD_DSP_PARAMETER_DATA_TYPE_FINITE_LENGTH      = -8;
 
     protected FMOD() {
         throw new UnsupportedOperationException();

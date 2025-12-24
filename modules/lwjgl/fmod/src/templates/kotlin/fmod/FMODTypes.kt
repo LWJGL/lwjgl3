@@ -1308,6 +1308,10 @@ val FMOD_DSP_PARAMETER_DYNAMIC_RESPONSE = struct(Module.FMOD, "FMOD_DSP_PARAMETE
     float("rms")[32]
 }
 
+val FMOD_DSP_PARAMETER_FINITE_LENGTH = struct(Module.FMOD, "FMOD_DSP_PARAMETER_FINITE_LENGTH") {
+    FMOD_BOOL("finite")
+}
+
 val FMOD_DSP_DESCRIPTION = struct(Module.FMOD, "FMOD_DSP_DESCRIPTION") {
     unsigned_int("pluginsdkversion")
     char("name")[32]
