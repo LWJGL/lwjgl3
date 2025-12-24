@@ -835,8 +835,10 @@ static void nsvg__flattenShapeStroke(NSVGrasterizer* r, NSVGshape* shape, float 
 				}
 			}
 			// Stroke any leftover path
-			if (r->npoints > 1 && dashState)
-				nsvg__expandStroke(r, r->points, r->npoints, 0, lineJoin, lineCap, lineWidth);
+			if (r->npoints > 1 && dashState) {
+                nsvg__prepareStroke(r, miterLimit, lineJoin);
+                nsvg__expandStroke(r, r->points, r->npoints, 0, lineJoin, lineCap, lineWidth);
+            }
 		} else {
 			nsvg__prepareStroke(r, miterLimit, lineJoin);
 			nsvg__expandStroke(r, r->points, r->npoints, closed, lineJoin, lineCap, lineWidth);
