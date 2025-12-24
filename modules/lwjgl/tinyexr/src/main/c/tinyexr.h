@@ -6629,6 +6629,7 @@ int LoadEXRFromMemory(float **out_rgba, int *width, int *height,
 
   ret = ParseEXRHeaderFromMemory(&exr_header, &exr_version, memory, size, err);
   if (ret != TINYEXR_SUCCESS) {
+    FreeEXRHeader(&exr_header);
     return ret;
   }
 
@@ -6642,6 +6643,8 @@ int LoadEXRFromMemory(float **out_rgba, int *width, int *height,
   InitEXRImage(&exr_image);
   ret = LoadEXRImageFromMemory(&exr_image, &exr_header, memory, size, err);
   if (ret != TINYEXR_SUCCESS) {
+    FreeEXRHeader(&exr_header);
+    FreeEXRImage(&exr_image);
     return ret;
   }
 
