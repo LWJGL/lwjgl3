@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 3
       - name: Download JDK
@@ -45,7 +45,9 @@ jobs:
   linux:
     name: Linux
     needs: cache-kotlinc
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+    container:
+      image: almalinux:8
     strategy:
       fail-fast: false
       matrix:
@@ -56,21 +58,30 @@ jobs:
       run:
         shell: bash
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 3
-      - name: Install dependencies # make is necessary for -flto=auto
+      - name: Install git
+        run: dnf -y install git
+      - name: Clone repository
+        run: git clone --depth 3 https://github.com/${{ github.repository }}.git .
+      - name: Install build dependencies # make is necessary for -flto=auto
         run: |
-          git config --global --add safe.directory $(pwd)
-          DEBIAN_FRONTEND=noninteractive sudo apt-get -yq update
-          DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install ant awscli curl zstd gcc g++ make
+          dnf -y install epel-release wget
+          wget https://pkgs.sysadmins.ws/el8/base/x86_64/raven-release-1.0.1-1.el8.noarch.rpm
+          rpm -ivh raven-release-1.0.1-1.el8.noarch.rpm
+          dnf config-manager --set-enabled powertools
+          dnf config-manager --set-enabled raven-extras
+          dnf -y update
+          dnf -y install gcc-toolset-15-gcc gcc-toolset-15-gcc-c++ ant awscli curl zstd make
           mkdir jdk8
           mkdir jdk25
           curl -L https://cdn.azul.com/zulu/bin/zulu8.${ZULU_BUILD}-linux_x64.tar.gz | tar xz -C jdk8 --strip-components 1
           curl -L https://cdn.azul.com/zulu/bin/zulu25.${ZULU_BUILD25}-linux_x64.tar.gz | tar xz -C jdk25 --strip-components 1
       - name: Install LWJGL dependencies
-        run: DEBIAN_FRONTEND=noninteractive sudo apt-get -yq -f --allow-unauthenticated install libgtk-3-dev libatk-bridge2.0-dev libgdk-pixbuf2.0-dev libglu-dev libgl1-mesa-glx libx11-dev libxt-dev libdbus-1-dev -o Dpkg::Options::="--force-overwrite"
+        run: |
+          dnf -y install \
+            libX11-devel \
+            libXt-devel \
+            gtk3-devel \
+            dbus-devel
       - name: Restore kotlinc output
         uses: actions/cache/restore@v3
         with:
@@ -85,14 +96,18 @@ jobs:
       - name: Build Java
         run: ant -emacs compile
       - name: Build native
-        run: ant -emacs compile-native
+        run: |
+          source /opt/rh/gcc-toolset-15/enable || true
+          ant -emacs compile-native -Dgcc.version.print=true
       - name: Run tests
         run: ant -emacs tests
       - name: Print test results
         run: cat bin/test/testng-results.xml
         if: failure()
       - name: Run tests (JDK 25)
-        run: JAVA_HOME=jdk25 ant -emacs tests -Dcore.java25=true
+        run: |
+          source /opt/rh/gcc-toolset-15/enable || true
+          JAVA_HOME=jdk25 ant -emacs tests -Dcore.java25=true
       - name: Print test results
         run: cat bin/test/testng-results.xml
         if: failure()
@@ -100,6 +115,7 @@ jobs:
         run: ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
       - name: Build GraalVM Native Image
         run: |
+          source /opt/rh/gcc-toolset-15/enable || true
           mkdir jdk-graalvm
           curl -L https://download.oracle.com/graalvm/25/latest/graalvm-jdk-25_linux-x64_bin.tar.gz | tar xz -C jdk-graalvm --strip-components 1
           jdk-graalvm/bin/native-image -cp \
@@ -148,14 +164,17 @@ jobs:
         shell: bash
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 3
       - name: Install dependencies # make is necessary for -flto=auto
         run: |
           git config --global --add safe.directory $(pwd)
           DEBIAN_FRONTEND=noninteractive sudo apt-get -yq update
-          DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install ant awscli curl zstd gcc-${{matrix.TRIPLET}} g++-${{matrix.TRIPLET}} libc6-dev-${{matrix.CROSS_ARCH}}-cross make
+          DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install ant awscli curl zstd make \
+            gcc-12-${{matrix.TRIPLET}} \
+            g++-12-${{matrix.TRIPLET}} \
+            libc6-dev-${{matrix.CROSS_ARCH}}-cross
           mkdir jdk8
           curl -L https://cdn.azul.com/zulu/bin/zulu8.${ZULU_BUILD}-linux_x64.tar.gz | tar xz -C jdk8 --strip-components 1
       - name: Prepare cross-compilation for ${{matrix.CROSS_ARCH}}
@@ -166,7 +185,16 @@ jobs:
           sudo dpkg --add-architecture ${{matrix.CROSS_ARCH}}
           sudo apt-get update || true
       - name: Install cross-compilation dependencies
-        run: DEBIAN_FRONTEND=noninteractive sudo apt-get -yq -f --allow-unauthenticated install libgtk-3-dev:${{matrix.CROSS_ARCH}} libatk-bridge2.0-dev:${{matrix.CROSS_ARCH}} libgdk-pixbuf2.0-dev:${{matrix.CROSS_ARCH}} libglu-dev:${{matrix.CROSS_ARCH}} libgl1-mesa-glx:${{matrix.CROSS_ARCH}} libx11-dev:${{matrix.CROSS_ARCH}} libxt-dev:${{matrix.CROSS_ARCH}} libdbus-1-dev:${{matrix.CROSS_ARCH}} -o Dpkg::Options::="--force-overwrite"
+        run: |
+          DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install \
+            libgtk-3-dev:${{matrix.CROSS_ARCH}} \
+            libatk-bridge2.0-dev:${{matrix.CROSS_ARCH}} \
+            libgdk-pixbuf2.0-dev:${{matrix.CROSS_ARCH}} \
+            libglu-dev:${{matrix.CROSS_ARCH}} \
+            libgl1-mesa-glx:${{matrix.CROSS_ARCH}} \
+            libx11-dev:${{matrix.CROSS_ARCH}} \
+            libxt-dev:${{matrix.CROSS_ARCH}} \
+            libdbus-1-dev:${{matrix.CROSS_ARCH}}
       - name: Restore kotlinc output
         uses: actions/cache/restore@v3
         with:
@@ -181,7 +209,7 @@ jobs:
       - name: Build Java
         run: ant -emacs compile
       - name: Build native
-        run: ant -emacs compile-native -Dgcc.libpath.opengl=/usr/lib/${{matrix.TRIPLET}}/mesa
+        run: ant -emacs compile-native -Dgcc.version=12 -Dgcc.version.print=true -Dgcc.libpath.opengl=/usr/lib/${{matrix.TRIPLET}}/mesa
 
   freebsd-cross:
     name: FreeBSD Cross
@@ -192,7 +220,7 @@ jobs:
       fail-fast: false
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 3
           fetch-tags: true
@@ -214,7 +242,7 @@ jobs:
       - name: Build Java
         run: ant -emacs compile
       - name: Build & Test
-        uses: cross-platform-actions/action@v0.30.0
+        uses: cross-platform-actions/action@v0.32.0
         with:
           operating_system: freebsd
           architecture: x86-64
@@ -224,7 +252,7 @@ jobs:
           environment_variables: ANT_OPTS LWJGL_BUILD_TYPE
           run: |
             sudo pkg install -y openjdk8 apache-ant git gtk3 dbus
-            ant -emacs compile-native
+            ant -emacs compile-native -Dclang.version.print=true
             ant -emacs tests || (cat bin/test/testng-results.xml ; exit 1) 
             ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
 
@@ -245,7 +273,7 @@ jobs:
       LWJGL_BUILD_ARCH: ${{matrix.ARCH}}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 3
       - name: Install dependencies
@@ -268,7 +296,7 @@ jobs:
       - name: Build Java
         run: ant -emacs compile
       - name: Build native
-        run: ant -emacs compile-native
+        run: ant -emacs compile-native -Dclang.version.print=true
       - name: Run tests
         run: ant -emacs tests
       - name: Print test results
@@ -319,7 +347,7 @@ jobs:
         shell: cmd
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 3
       - name: Configure MSVC
@@ -363,7 +391,7 @@ jobs:
         run: |
           set LWJGL_BUILD_ARCH=${{matrix.ARCH}}
           set PATH=%PATH:C:\Program Files\LLVM\bin;=%
-          ant -emacs compile-native
+          ant -emacs compile-native -Dcl.version.print=true
       - name: Run tests
         run: ant -emacs tests
         if: contains(matrix.ARCH, 'arm') != true

@@ -158,6 +158,14 @@ EXPORTS
 
     <target name="compile-native-platform">
         <mkdir dir="${bin.native}/build"/>
+        <sequential if:set="cl.version.print">
+            <exec executable="cmd" logError="true" failonerror="false">
+                <arg line="/c cl.exe 2>&amp;1 | findstr Version"/>
+            </exec>
+            <exec executable="cmd" logError="true" failonerror="false" >
+                <arg line='/c clang --version | findstr "clang version"'/>
+            </exec>
+        </sequential>
 
         <parallel threadsPerProcessor="1">
 

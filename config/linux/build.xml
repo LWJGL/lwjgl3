@@ -158,12 +158,13 @@
     </macrodef>
 
     <target name="compile-native-platform">
-        <local name="gcc.version.string"/>
-        <exec executable="bash" outputproperty="gcc.version.string" logError="true" failonerror="true">
-            <arg line="-o pipefail -c"/>
-            <arg value="${gcc.prefix}gcc${gcc.suffix} --version | grep ^.*gcc"/>
-        </exec>
-        <echo message='${gcc.prefix}gcc${gcc.suffix} --version: "${gcc.version.string}"' taskname="Compiler"/>
+        <sequential if:set="gcc.version.print">
+            <echo message="GCC executable: ${gcc.prefix}gcc${gcc.suffix}"/>
+            <exec executable="bash" logError="true" failonerror="false" taskname="Compiler">
+                <arg line="-o pipefail -c"/>
+                <arg value="${gcc.prefix}gcc${gcc.suffix} --version | grep ^.*gcc"/>
+            </exec>
+        </sequential>
 
         <parallel threadsPerProcessor="2">
 

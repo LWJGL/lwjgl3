@@ -132,12 +132,10 @@
     </macrodef>
 
     <target name="compile-native-platform">
-        <local name="clang.version.string"/>
-        <exec executable="sh" outputproperty="clang.version.string" logError="true" failonerror="true">
+        <exec executable="sh" logError="true" failonerror="false" taskname="Compiler" if:set="clang.version.print">
             <arg line="-o pipefail -c"/>
             <arg value='clang --version | grep "clang version"'/>
         </exec>
-        <echo message="${clang.version.string}" taskname="Compiler"/>
 
         <parallel threadsPerProcessor="2">
 

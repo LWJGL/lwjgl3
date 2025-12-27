@@ -138,7 +138,13 @@
     </macrodef>
 
     <target name="compile-native-platform">
-        <echo message="${sdkroot}" taskname="SDK Root"/>
+        <sequential if:set="clang.version.print">
+            <echo message="${sdkroot}" taskname="SDK Root"/>
+            <exec executable="sh" logError="true" failonerror="false" taskname="Compiler">
+                <arg line="-o pipefail -c"/>
+                <arg value='clang --version | grep "clang version"'/>
+            </exec>
+        </sequential>
 
         <parallel threadsPerProcessor="2">
 
