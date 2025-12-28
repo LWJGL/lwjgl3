@@ -6,7 +6,7 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../modules/samples">
       <sourceFolder url="file://$MODULE_DIR$/../../../modules/samples/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../modules/samples/src/test/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../modules/samples/src/test/resources" type="java-resource" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
