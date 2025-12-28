@@ -1451,7 +1451,7 @@
             <local name="hasMain"/>
             <available file="${module.lwjgl}/@{name}/src/main/java" type="dir" property="hasMain"/>
             <local name="hasMain.javadoc"/>
-            <available file="${module.lwjgl}/@{name}/src/main/java/org/lwjgl" type="dir" property="hasMain"/>
+            <available file="${module.lwjgl}/@{name}/src/main/java/org/lwjgl" type="dir" property="hasMain.javadoc"/>
 
             <!-- Bundle javadoc -->
             <!-- This is slow, use -Djavadoc.skip=true for fast local builds -->
@@ -1480,7 +1480,7 @@
                 </classpath>
 
                 <fileset dir="${module.lwjgl}/@{name}/src/main/java/org/lwjgl" includes="**" if:set="hasMain.javadoc"/>
-                <fileset dir="${module.lwjgl}/@{name}/src/generated/java" includes="**"/>
+                <fileset dir="${module.lwjgl}/@{name}/src/generated/java" includes="**" excludes="**/module-info.java"/>
 
                 <arg value="-XDignore.symbol.file"/> <!-- Suppresses internal API (e.g. Unsafe) usage warnings -->
 
