@@ -516,6 +516,7 @@ public final class FFM {
         permits StructBinderBuilder, UnionBinderBuilder {
 
         final Class<T> groupInterface;
+        final Field    binderField;
 
         final SequencedMap<String, MemoryLayout> members = new LinkedHashMap<>();
 
@@ -551,9 +552,8 @@ public final class FFM {
                 throw new UnsupportedOperationException("The binder must not be parameterized with a generic interface");
             }
 
-            FFM.findBinderField(groupInterface); // test binder field to report any errors early
-
             this.groupInterface = groupInterface;
+            this.binderField = FFM.findBinderField(groupInterface); // test binder field to report any errors early
         }
 
         abstract SELF self();

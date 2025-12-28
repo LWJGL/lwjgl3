@@ -251,14 +251,25 @@ final class BCGroup {
                                     default -> throw methodException("Unsupported String getter layout: " + memberLayout, method);
                                 }
                             } else {
-                                var binderField = FFM.lookupBinder(config, returnType);
+                                String    name;
+                                ClassDesc type;
+
+                                if (returnType == groupInterface) {
+                                    // recursive member
+                                    name = builder.binderField.getName();
+                                    type = builder.kind().binderDesc();
+                                } else {
+                                    var binderField = FFM.lookupBinder(config, returnType);
+                                    name = binderField.name();
+                                    type = groupDesc(binderField);
+                                }
 
                                 var returnTypeDesc = returnType.describeConstable().orElseThrow();
                                 switch (memberLayout) {
                                     case AddressLayout _ -> {
                                         // TODO: check actual target of memberLayout
                                         // pointer to group, dereference memory address
-                                        cb.getstatic(returnTypeDesc, binderField.name(), groupDesc(binderField));
+                                        cb.getstatic(returnTypeDesc, name, type);
                                         buildMemberAddress(cb, thisClass, memberOffset)
                                             .invokestatic(CD_MemoryUtil, "memGetAddress", MTD_long_long)
                                             .invokeinterface(CD_GroupBinder, isNullable(config, method) ? "ofAddressSafe" : "ofAddress", MTD_Object_long)
@@ -270,7 +281,7 @@ final class BCGroup {
                                             throw methodException("Nested group members cannot be nullable", method);
                                         }
                                         // nested group, return view of member address
-                                        cb.getstatic(returnTypeDesc, binderField.name(), groupDesc(binderField));
+                                        cb.getstatic(returnTypeDesc, name, type);
                                         buildMemberAddress(cb, thisClass, memberOffset)
                                             .invokeinterface(CD_GroupBinder, "ofAddress", MTD_Object_long)
                                         /*.checkcast(returnType.describeConstable().orElseThrow())*/
@@ -462,7 +473,18 @@ final class BCGroup {
                                         .invokeinterface(CD_MemorySegment, "setString", MTD_void_long_String_Charset);
                                 }
                             } else {
-                                var binderField = FFM.lookupBinder(config, parameterType);
+                                String    name;
+                                ClassDesc type;
+
+                                if (parameterType == groupInterface) {
+                                    // recursive member
+                                    name = builder.binderField.getName();
+                                    type = builder.kind().binderDesc();
+                                } else {
+                                    var binderField = FFM.lookupBinder(config, parameterType);
+                                    name = binderField.name();
+                                    type = groupDesc(binderField);
+                                }
 
                                 var parameterTypeDesc = parameterType.describeConstable().orElseThrow();
                                 switch (memberLayout) {
@@ -470,7 +492,7 @@ final class BCGroup {
                                         // TODO: check actual target of memberLayout
                                         // pointer to group, put memory address
                                         buildMemberAddress(cb, thisClass, memberOffset)
-                                            .getstatic(parameterTypeDesc, binderField.name(), groupDesc(binderField))
+                                            .getstatic(parameterTypeDesc, name, type)
                                             .aload(param0)
                                             .invokeinterface(CD_GroupBinder, isNullable(config, parameter) ? "addressOfSafe" : "addressOf", MTD_long_Object)
                                             .invokestatic(CD_MemoryUtil, "memPutAddress", MTD_void_long_long);
@@ -480,7 +502,7 @@ final class BCGroup {
                                         }
                                         // nested group, copy entire layout
                                         cb
-                                            .getstatic(parameterTypeDesc, binderField.name(), groupDesc(binderField))
+                                            .getstatic(parameterTypeDesc, name, type)
                                             .dup();
                                         buildMemberAddress(cb, thisClass, memberOffset)
                                             .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)

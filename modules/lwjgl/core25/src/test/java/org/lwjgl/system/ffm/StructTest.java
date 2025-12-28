@@ -855,6 +855,72 @@ public class StructTest {
         }
     }
 
+    public void testRecursive() {
+        interface addrinfo {
+            StructBinder<addrinfo> $ = ffmStruct(addrinfo.class)
+                .m("ai_flags", cint)
+                .m("ai_family", cint)
+                .m("ai_socktype", cint)
+                .m("ai_protocol", cint)
+                .m("ai_addrlen", unsigned_int)
+                .m("ai_addr", p(opaque("struct sockaddr")))
+                .m("ai_canonname", p(cchar))
+                .m("ai_next", p(opaque("struct addrinfo")))
+                .build();
+
+            int ai_flags();
+            int ai_family();
+            int ai_socktype();
+            int ai_protocol();
+            int ai_addrlen();
+            @FFMPointer long ai_addr();
+            @Nullable String ai_canonname();
+            @Nullable addrinfo ai_next(); // recursive access
+
+            addrinfo ai_flags(int value);
+            addrinfo ai_family(int value);
+            addrinfo ai_socktype(int value);
+            addrinfo ai_protocol(int value);
+            addrinfo ai_addrlen(int value);
+            addrinfo ai_addr(@FFMNullable @FFMPointer long value);
+            addrinfo ai_canonname(@Nullable MemorySegment value);
+            addrinfo ai_next(@Nullable addrinfo value); // recursive access
+        }
+
+        Objects.requireNonNull(addrinfo.$.layout());
+
+        try (var arena = Arena.ofConfined()) {
+            var segment0 = addrinfo.$.allocateSegment(arena);
+            var segment1 = addrinfo.$.allocateSegment(arena);
+
+            var ai0 = addrinfo.$.get(segment0)
+                .ai_flags(0xDEADBEEF)
+                .ai_family(0xFEEDFACE)
+                .ai_socktype(0xBAADF00D)
+                .ai_protocol(0xCAFEBABE)
+                .ai_addrlen(0x8BADF00D)
+                .ai_addr(0x1234_5678_9ABC_DEF0L);
+
+            var ai1 = addrinfo.$.get(segment1)
+                .ai_flags(-1)
+                .ai_family(-1)
+                .ai_socktype(-1)
+                .ai_protocol(-1)
+                .ai_addrlen(-1)
+                .ai_addr(-1L);
+
+            ai0.ai_next(ai1);
+
+            var next = Objects.requireNonNull(ai0.ai_next());
+
+            assertEquals(
+                addrinfo.$.addressOf(next),
+                addrinfo.$.addressOf(ai1)
+            );
+            assertEquals(next, ai1);
+        }
+    }
+
     public void testUnion() {
         interface A {
             StructBinder<A> $ = ffmStruct(A.class)
