@@ -15,7 +15,7 @@ val SPVC_BINDING = simpleBinding(
 val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spvc_", binding = SPVC_BINDING) {
     IntConstant(
         "C_API_VERSION_MAJOR".."0",
-        "C_API_VERSION_MINOR".."67",
+        "C_API_VERSION_MINOR".."68",
         "C_API_VERSION_PATCH".."0"
     )
 
@@ -338,6 +338,7 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         "COMPILER_OPTION_HLSL_PRESERVE_STRUCTURED_BUFFERS".enum("91 | SPVC_COMPILER_OPTION_HLSL_BIT"),
         "COMPILER_OPTION_MSL_AUTO_DISABLE_RASTERIZATION".enum("92 | SPVC_COMPILER_OPTION_MSL_BIT"),
         "COMPILER_OPTION_MSL_ENABLE_POINT_SIZE_DEFAULT".enum("93 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_HLSL_USER_SEMANTIC".enum("94 | SPVC_COMPILER_OPTION_HLSL_BIT"),
     )
 
     void(
