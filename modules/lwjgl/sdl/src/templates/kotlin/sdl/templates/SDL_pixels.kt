@@ -241,7 +241,7 @@ val SDL_pixels = "SDLPixels".nativeClassSDL("SDL_pixels") {
         "COLORSPACE_BT2020_LIMITED".enum("0x21102609"),
         "COLORSPACE_BT2020_FULL".enum("0x22102609"),
         "COLORSPACE_RGB_DEFAULT".enum("SDL_COLORSPACE_SRGB"),
-        "COLORSPACE_YUV_DEFAULT".enum("SDL_COLORSPACE_JPEG")
+        "COLORSPACE_YUV_DEFAULT".enum("SDL_COLORSPACE_BT601_LIMITED")
     )
 
     charASCII.const.p(

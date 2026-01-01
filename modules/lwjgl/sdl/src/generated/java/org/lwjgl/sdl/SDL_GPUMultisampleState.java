@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     SDL_GPUSampleCount sample_count;
  *     Uint32 sample_mask;
  *     bool enable_mask;
- *     Uint8 padding1;
+ *     bool enable_alpha_to_coverage;
  *     Uint8 padding2;
  *     Uint8 padding3;
  * }}</pre>
@@ -39,7 +39,7 @@ public class SDL_GPUMultisampleState extends Struct<SDL_GPUMultisampleState> imp
         SAMPLE_COUNT,
         SAMPLE_MASK,
         ENABLE_MASK,
-        PADDING1,
+        ENABLE_ALPHA_TO_COVERAGE,
         PADDING2,
         PADDING3;
 
@@ -59,7 +59,7 @@ public class SDL_GPUMultisampleState extends Struct<SDL_GPUMultisampleState> imp
         SAMPLE_COUNT = layout.offsetof(0);
         SAMPLE_MASK = layout.offsetof(1);
         ENABLE_MASK = layout.offsetof(2);
-        PADDING1 = layout.offsetof(3);
+        ENABLE_ALPHA_TO_COVERAGE = layout.offsetof(3);
         PADDING2 = layout.offsetof(4);
         PADDING3 = layout.offsetof(5);
     }
@@ -95,6 +95,9 @@ public class SDL_GPUMultisampleState extends Struct<SDL_GPUMultisampleState> imp
     /** @return the value of the {@code enable_mask} field. */
     @NativeType("bool")
     public boolean enable_mask() { return nenable_mask(address()); }
+    /** @return the value of the {@code enable_alpha_to_coverage} field. */
+    @NativeType("bool")
+    public boolean enable_alpha_to_coverage() { return nenable_alpha_to_coverage(address()); }
 
     /** Sets the specified value to the {@code sample_count} field. */
     public SDL_GPUMultisampleState sample_count(@NativeType("SDL_GPUSampleCount") int value) { nsample_count(address(), value); return this; }
@@ -102,16 +105,20 @@ public class SDL_GPUMultisampleState extends Struct<SDL_GPUMultisampleState> imp
     public SDL_GPUMultisampleState sample_mask(@NativeType("Uint32") int value) { nsample_mask(address(), value); return this; }
     /** Sets the specified value to the {@code enable_mask} field. */
     public SDL_GPUMultisampleState enable_mask(@NativeType("bool") boolean value) { nenable_mask(address(), value); return this; }
+    /** Sets the specified value to the {@code enable_alpha_to_coverage} field. */
+    public SDL_GPUMultisampleState enable_alpha_to_coverage(@NativeType("bool") boolean value) { nenable_alpha_to_coverage(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public SDL_GPUMultisampleState set(
         int sample_count,
         int sample_mask,
-        boolean enable_mask
+        boolean enable_mask,
+        boolean enable_alpha_to_coverage
     ) {
         sample_count(sample_count);
         sample_mask(sample_mask);
         enable_mask(enable_mask);
+        enable_alpha_to_coverage(enable_alpha_to_coverage);
 
         return this;
     }
@@ -245,7 +252,8 @@ public class SDL_GPUMultisampleState extends Struct<SDL_GPUMultisampleState> imp
     public static int nsample_mask(long struct) { return memGetInt(struct + SDL_GPUMultisampleState.SAMPLE_MASK); }
     /** Unsafe version of {@link #enable_mask}. */
     public static boolean nenable_mask(long struct) { return memGetByte(struct + SDL_GPUMultisampleState.ENABLE_MASK) != 0; }
-    public static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUMultisampleState.PADDING1); }
+    /** Unsafe version of {@link #enable_alpha_to_coverage}. */
+    public static boolean nenable_alpha_to_coverage(long struct) { return memGetByte(struct + SDL_GPUMultisampleState.ENABLE_ALPHA_TO_COVERAGE) != 0; }
     public static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUMultisampleState.PADDING2); }
     public static byte npadding3(long struct) { return memGetByte(struct + SDL_GPUMultisampleState.PADDING3); }
 
@@ -255,7 +263,8 @@ public class SDL_GPUMultisampleState extends Struct<SDL_GPUMultisampleState> imp
     public static void nsample_mask(long struct, int value) { memPutInt(struct + SDL_GPUMultisampleState.SAMPLE_MASK, value); }
     /** Unsafe version of {@link #enable_mask(boolean) enable_mask}. */
     public static void nenable_mask(long struct, boolean value) { memPutByte(struct + SDL_GPUMultisampleState.ENABLE_MASK, value ? (byte)1 : (byte)0); }
-    public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUMultisampleState.PADDING1, value); }
+    /** Unsafe version of {@link #enable_alpha_to_coverage(boolean) enable_alpha_to_coverage}. */
+    public static void nenable_alpha_to_coverage(long struct, boolean value) { memPutByte(struct + SDL_GPUMultisampleState.ENABLE_ALPHA_TO_COVERAGE, value ? (byte)1 : (byte)0); }
     public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUMultisampleState.PADDING2, value); }
     public static void npadding3(long struct, byte value) { memPutByte(struct + SDL_GPUMultisampleState.PADDING3, value); }
 
@@ -311,6 +320,9 @@ public class SDL_GPUMultisampleState extends Struct<SDL_GPUMultisampleState> imp
         /** @return the value of the {@code enable_mask} field. */
         @NativeType("bool")
         public boolean enable_mask() { return SDL_GPUMultisampleState.nenable_mask(address()); }
+        /** @return the value of the {@code enable_alpha_to_coverage} field. */
+        @NativeType("bool")
+        public boolean enable_alpha_to_coverage() { return SDL_GPUMultisampleState.nenable_alpha_to_coverage(address()); }
 
         /** Sets the specified value to the {@code sample_count} field. */
         public SDL_GPUMultisampleState.Buffer sample_count(@NativeType("SDL_GPUSampleCount") int value) { SDL_GPUMultisampleState.nsample_count(address(), value); return this; }
@@ -318,6 +330,8 @@ public class SDL_GPUMultisampleState extends Struct<SDL_GPUMultisampleState> imp
         public SDL_GPUMultisampleState.Buffer sample_mask(@NativeType("Uint32") int value) { SDL_GPUMultisampleState.nsample_mask(address(), value); return this; }
         /** Sets the specified value to the {@code enable_mask} field. */
         public SDL_GPUMultisampleState.Buffer enable_mask(@NativeType("bool") boolean value) { SDL_GPUMultisampleState.nenable_mask(address(), value); return this; }
+        /** Sets the specified value to the {@code enable_alpha_to_coverage} field. */
+        public SDL_GPUMultisampleState.Buffer enable_alpha_to_coverage(@NativeType("bool") boolean value) { SDL_GPUMultisampleState.nenable_alpha_to_coverage(address(), value); return this; }
 
     }
 

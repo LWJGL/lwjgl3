@@ -27,8 +27,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     SDL_GPUStoreOp stencil_store_op;
  *     bool cycle;
  *     Uint8 clear_stencil;
- *     Uint8 padding1;
- *     Uint8 padding2;
+ *     Uint8 mip_level;
+ *     Uint8 layer;
  * }}</pre>
  */
 public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTargetInfo> implements NativeResource {
@@ -49,8 +49,8 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
         STENCIL_STORE_OP,
         CYCLE,
         CLEAR_STENCIL,
-        PADDING1,
-        PADDING2;
+        MIP_LEVEL,
+        LAYER;
 
     static {
         Layout layout = __struct(
@@ -77,8 +77,8 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
         STENCIL_STORE_OP = layout.offsetof(5);
         CYCLE = layout.offsetof(6);
         CLEAR_STENCIL = layout.offsetof(7);
-        PADDING1 = layout.offsetof(8);
-        PADDING2 = layout.offsetof(9);
+        MIP_LEVEL = layout.offsetof(8);
+        LAYER = layout.offsetof(9);
     }
 
     protected SDL_GPUDepthStencilTargetInfo(long address, @Nullable ByteBuffer container) {
@@ -126,6 +126,12 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
     /** @return the value of the {@code clear_stencil} field. */
     @NativeType("Uint8")
     public byte clear_stencil() { return nclear_stencil(address()); }
+    /** @return the value of the {@code mip_level} field. */
+    @NativeType("Uint8")
+    public byte mip_level() { return nmip_level(address()); }
+    /** @return the value of the {@code layer} field. */
+    @NativeType("Uint8")
+    public byte layer() { return nlayer(address()); }
 
     /** Sets the specified value to the {@code texture} field. */
     public SDL_GPUDepthStencilTargetInfo texture(@NativeType("SDL_GPUTexture *") long value) { ntexture(address(), value); return this; }
@@ -143,6 +149,10 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
     public SDL_GPUDepthStencilTargetInfo cycle(@NativeType("bool") boolean value) { ncycle(address(), value); return this; }
     /** Sets the specified value to the {@code clear_stencil} field. */
     public SDL_GPUDepthStencilTargetInfo clear_stencil(@NativeType("Uint8") byte value) { nclear_stencil(address(), value); return this; }
+    /** Sets the specified value to the {@code mip_level} field. */
+    public SDL_GPUDepthStencilTargetInfo mip_level(@NativeType("Uint8") byte value) { nmip_level(address(), value); return this; }
+    /** Sets the specified value to the {@code layer} field. */
+    public SDL_GPUDepthStencilTargetInfo layer(@NativeType("Uint8") byte value) { nlayer(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public SDL_GPUDepthStencilTargetInfo set(
@@ -153,7 +163,9 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
         int stencil_load_op,
         int stencil_store_op,
         boolean cycle,
-        byte clear_stencil
+        byte clear_stencil,
+        byte mip_level,
+        byte layer
     ) {
         texture(texture);
         clear_depth(clear_depth);
@@ -163,6 +175,8 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
         stencil_store_op(stencil_store_op);
         cycle(cycle);
         clear_stencil(clear_stencil);
+        mip_level(mip_level);
+        layer(layer);
 
         return this;
     }
@@ -306,8 +320,10 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
     public static boolean ncycle(long struct) { return memGetByte(struct + SDL_GPUDepthStencilTargetInfo.CYCLE) != 0; }
     /** Unsafe version of {@link #clear_stencil}. */
     public static byte nclear_stencil(long struct) { return memGetByte(struct + SDL_GPUDepthStencilTargetInfo.CLEAR_STENCIL); }
-    public static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUDepthStencilTargetInfo.PADDING1); }
-    public static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUDepthStencilTargetInfo.PADDING2); }
+    /** Unsafe version of {@link #mip_level}. */
+    public static byte nmip_level(long struct) { return memGetByte(struct + SDL_GPUDepthStencilTargetInfo.MIP_LEVEL); }
+    /** Unsafe version of {@link #layer}. */
+    public static byte nlayer(long struct) { return memGetByte(struct + SDL_GPUDepthStencilTargetInfo.LAYER); }
 
     /** Unsafe version of {@link #texture(long) texture}. */
     public static void ntexture(long struct, long value) { memPutAddress(struct + SDL_GPUDepthStencilTargetInfo.TEXTURE, check(value)); }
@@ -325,8 +341,10 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
     public static void ncycle(long struct, boolean value) { memPutByte(struct + SDL_GPUDepthStencilTargetInfo.CYCLE, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #clear_stencil(byte) clear_stencil}. */
     public static void nclear_stencil(long struct, byte value) { memPutByte(struct + SDL_GPUDepthStencilTargetInfo.CLEAR_STENCIL, value); }
-    public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUDepthStencilTargetInfo.PADDING1, value); }
-    public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUDepthStencilTargetInfo.PADDING2, value); }
+    /** Unsafe version of {@link #mip_level(byte) mip_level}. */
+    public static void nmip_level(long struct, byte value) { memPutByte(struct + SDL_GPUDepthStencilTargetInfo.MIP_LEVEL, value); }
+    /** Unsafe version of {@link #layer(byte) layer}. */
+    public static void nlayer(long struct, byte value) { memPutByte(struct + SDL_GPUDepthStencilTargetInfo.LAYER, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -403,6 +421,12 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
         /** @return the value of the {@code clear_stencil} field. */
         @NativeType("Uint8")
         public byte clear_stencil() { return SDL_GPUDepthStencilTargetInfo.nclear_stencil(address()); }
+        /** @return the value of the {@code mip_level} field. */
+        @NativeType("Uint8")
+        public byte mip_level() { return SDL_GPUDepthStencilTargetInfo.nmip_level(address()); }
+        /** @return the value of the {@code layer} field. */
+        @NativeType("Uint8")
+        public byte layer() { return SDL_GPUDepthStencilTargetInfo.nlayer(address()); }
 
         /** Sets the specified value to the {@code texture} field. */
         public SDL_GPUDepthStencilTargetInfo.Buffer texture(@NativeType("SDL_GPUTexture *") long value) { SDL_GPUDepthStencilTargetInfo.ntexture(address(), value); return this; }
@@ -420,6 +444,10 @@ public class SDL_GPUDepthStencilTargetInfo extends Struct<SDL_GPUDepthStencilTar
         public SDL_GPUDepthStencilTargetInfo.Buffer cycle(@NativeType("bool") boolean value) { SDL_GPUDepthStencilTargetInfo.ncycle(address(), value); return this; }
         /** Sets the specified value to the {@code clear_stencil} field. */
         public SDL_GPUDepthStencilTargetInfo.Buffer clear_stencil(@NativeType("Uint8") byte value) { SDL_GPUDepthStencilTargetInfo.nclear_stencil(address(), value); return this; }
+        /** Sets the specified value to the {@code mip_level} field. */
+        public SDL_GPUDepthStencilTargetInfo.Buffer mip_level(@NativeType("Uint8") byte value) { SDL_GPUDepthStencilTargetInfo.nmip_level(address(), value); return this; }
+        /** Sets the specified value to the {@code layer} field. */
+        public SDL_GPUDepthStencilTargetInfo.Buffer layer(@NativeType("Uint8") byte value) { SDL_GPUDepthStencilTargetInfo.nlayer(address(), value); return this; }
 
     }
 

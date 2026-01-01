@@ -17,6 +17,10 @@ val SDL_properties = "SDLProperties".nativeClassSDL("SDL_properties") {
         "PROPERTY_TYPE_BOOLEAN".enum
     )
 
+    StringConstant(
+        "PROP_NAME_STRING".."SDL.name"
+    )
+
     SDL_PropertiesID("GetGlobalProperties", void())
     SDL_PropertiesID("CreateProperties", void())
 

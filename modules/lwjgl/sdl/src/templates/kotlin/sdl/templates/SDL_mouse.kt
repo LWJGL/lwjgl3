@@ -106,6 +106,13 @@ val SDL_mouse = "SDLMouse".nativeClassSDL("SDL_mouse") {
     )
 
     bool(
+        "SetRelativeMouseTransform",
+
+        SDL_MouseMotionTransformCallback("callback"),
+        nullable..opaque_p("userdata")
+    )
+
+    bool(
         "SetWindowRelativeMouseMode",
 
         SDL_Window.p("window"),
@@ -139,6 +146,15 @@ val SDL_mouse = "SDLMouse".nativeClassSDL("SDL_mouse") {
         "CreateColorCursor",
 
         SDL_Surface.p("surface"),
+        int("hot_x"),
+        int("hot_y")
+    )
+
+    SDL_Cursor.p(
+        "CreateAnimatedCursor",
+
+        SDL_CursorFrameInfo.p("frames"),
+        AutoSize("frames")..int("frame_count"),
         int("hot_x"),
         int("hot_y")
     )

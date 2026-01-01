@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <pre>{@code
  * struct SDL_HapticDirection {
- *     Uint8 type;
+ *     SDL_HapticDirectionType type;
  *     Sint32 dir[3];
  * }}</pre>
  */
@@ -72,7 +72,7 @@ public class SDL_HapticDirection extends Struct<SDL_HapticDirection> implements 
     public int sizeof() { return SIZEOF; }
 
     /** @return the value of the {@code type} field. */
-    @NativeType("Uint8")
+    @NativeType("SDL_HapticDirectionType")
     public byte type() { return ntype(address()); }
     /** @return a {@link IntBuffer} view of the {@code dir} field. */
     @NativeType("Sint32[3]")
@@ -82,7 +82,7 @@ public class SDL_HapticDirection extends Struct<SDL_HapticDirection> implements 
     public int dir(int index) { return ndir(address(), index); }
 
     /** Sets the specified value to the {@code type} field. */
-    public SDL_HapticDirection type(@NativeType("Uint8") byte value) { ntype(address(), value); return this; }
+    public SDL_HapticDirection type(@NativeType("SDL_HapticDirectionType") byte value) { ntype(address(), value); return this; }
     /** Copies the specified {@link IntBuffer} to the {@code dir} field. */
     public SDL_HapticDirection dir(@NativeType("Sint32[3]") IntBuffer value) { ndir(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code dir} field. */
@@ -287,7 +287,7 @@ public class SDL_HapticDirection extends Struct<SDL_HapticDirection> implements 
         }
 
         /** @return the value of the {@code type} field. */
-        @NativeType("Uint8")
+        @NativeType("SDL_HapticDirectionType")
         public byte type() { return SDL_HapticDirection.ntype(address()); }
         /** @return a {@link IntBuffer} view of the {@code dir} field. */
         @NativeType("Sint32[3]")
@@ -297,7 +297,7 @@ public class SDL_HapticDirection extends Struct<SDL_HapticDirection> implements 
         public int dir(int index) { return SDL_HapticDirection.ndir(address(), index); }
 
         /** Sets the specified value to the {@code type} field. */
-        public SDL_HapticDirection.Buffer type(@NativeType("Uint8") byte value) { SDL_HapticDirection.ntype(address(), value); return this; }
+        public SDL_HapticDirection.Buffer type(@NativeType("SDL_HapticDirectionType") byte value) { SDL_HapticDirection.ntype(address(), value); return this; }
         /** Copies the specified {@link IntBuffer} to the {@code dir} field. */
         public SDL_HapticDirection.Buffer dir(@NativeType("Sint32[3]") IntBuffer value) { SDL_HapticDirection.ndir(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code dir} field. */

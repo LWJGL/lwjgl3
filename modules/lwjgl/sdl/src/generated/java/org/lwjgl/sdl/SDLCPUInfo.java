@@ -36,7 +36,8 @@ public class SDLCPUInfo {
             HasLSX                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_HasLSX"),
             HasLASX               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_HasLASX"),
             GetSystemRAM          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetSystemRAM"),
-            GetSIMDAlignment      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetSIMDAlignment");
+            GetSIMDAlignment      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetSIMDAlignment"),
+            GetSystemPageSize     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetSystemPageSize");
 
     }
 
@@ -203,6 +204,14 @@ public class SDLCPUInfo {
     public static long SDL_GetSIMDAlignment() {
         long __functionAddress = Functions.GetSIMDAlignment;
         return invokeP(__functionAddress);
+    }
+
+    // --- [ SDL_GetSystemPageSize ] ---
+
+    /** {@code int SDL_GetSystemPageSize(void)} */
+    public static int SDL_GetSystemPageSize() {
+        long __functionAddress = Functions.GetSystemPageSize;
+        return invokeI(__functionAddress);
     }
 
 }

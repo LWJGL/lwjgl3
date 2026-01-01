@@ -127,7 +127,8 @@ public class SDLGamepad {
         SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_LEFT  = 8,
         SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_RIGHT = 9,
         SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_PAIR  = 10,
-        SDL_GAMEPAD_TYPE_COUNT                        = 11;
+        SDL_GAMEPAD_TYPE_GAMECUBE                     = 11,
+        SDL_GAMEPAD_TYPE_COUNT                        = 12;
 
     public static final int
         SDL_GAMEPAD_BUTTON_INVALID        = -1,

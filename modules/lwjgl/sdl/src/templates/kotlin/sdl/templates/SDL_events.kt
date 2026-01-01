@@ -26,8 +26,9 @@ val SDL_events = "SDLEvents".nativeClassSDL("SDL_events") {
         "EVENT_DISPLAY_DESKTOP_MODE_CHANGED".enum,
         "EVENT_DISPLAY_CURRENT_MODE_CHANGED".enum,
         "EVENT_DISPLAY_CONTENT_SCALE_CHANGED".enum,
+        "EVENT_DISPLAY_USABLE_BOUNDS_CHANGED".enum,
         "EVENT_DISPLAY_FIRST".enum("SDL_EVENT_DISPLAY_ORIENTATION"),
-        "EVENT_DISPLAY_LAST".enum("SDL_EVENT_DISPLAY_CONTENT_SCALE_CHANGED"),
+        "EVENT_DISPLAY_LAST".enum("SDL_EVENT_DISPLAY_USABLE_BOUNDS_CHANGED"),
         "EVENT_WINDOW_SHOWN".enum("0x202"),
         "EVENT_WINDOW_HIDDEN".enum,
         "EVENT_WINDOW_EXPOSED".enum,
@@ -63,6 +64,8 @@ val SDL_events = "SDLEvents".nativeClassSDL("SDL_events") {
         "EVENT_KEYBOARD_ADDED".enum,
         "EVENT_KEYBOARD_REMOVED".enum,
         "EVENT_TEXT_EDITING_CANDIDATES".enum,
+        "EVENT_SCREEN_KEYBOARD_SHOWN".enum,
+        "EVENT_SCREEN_KEYBOARD_HIDDEN".enum,
         "EVENT_MOUSE_MOTION".enum("0x400"),
         "EVENT_MOUSE_BUTTON_DOWN".enum,
         "EVENT_MOUSE_BUTTON_UP".enum,
@@ -94,6 +97,9 @@ val SDL_events = "SDLEvents".nativeClassSDL("SDL_events") {
         "EVENT_FINGER_UP".enum,
         "EVENT_FINGER_MOTION".enum,
         "EVENT_FINGER_CANCELED".enum,
+        "EVENT_PINCH_BEGIN".enum("0x710"),
+        "EVENT_PINCH_UPDATE".enum,
+        "EVENT_PINCH_END".enum,
         "EVENT_CLIPBOARD_UPDATE".enum("0x900"),
         "EVENT_DROP_FILE".enum("0x1000"),
         "EVENT_DROP_TEXT".enum,
@@ -261,5 +267,13 @@ val SDL_events = "SDLEvents".nativeClassSDL("SDL_events") {
         "GetWindowFromEvent",
 
         SDL_Event.const.p("event")
+    )
+
+    int(
+        "GetEventDescription",
+
+        nullable..SDL_Event.const.p("event"),
+        Return(RESULT, "SDL_GetEventDescription(event, null) + 1")..nullable..charASCII.p("buf"),
+        AutoSize("buf")..int("buflen")
     )
 }

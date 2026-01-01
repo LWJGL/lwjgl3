@@ -349,14 +349,22 @@ val SDL_gpu = "SDLGPU".nativeClassSDL("SDL_gpu") {
     StringConstant(
         "PROP_GPU_DEVICE_CREATE_DEBUGMODE_BOOLEAN".."SDL.gpu.device.create.debugmode",
         "PROP_GPU_DEVICE_CREATE_PREFERLOWPOWER_BOOLEAN".."SDL.gpu.device.create.preferlowpower",
+        "PROP_GPU_DEVICE_CREATE_VERBOSE_BOOLEAN".."SDL.gpu.device.create.verbose",
         "PROP_GPU_DEVICE_CREATE_NAME_STRING".."SDL.gpu.device.create.name",
+        "PROP_GPU_DEVICE_CREATE_FEATURE_CLIP_DISTANCE_BOOLEAN".."SDL.gpu.device.create.feature.clip_distance",
+        "PROP_GPU_DEVICE_CREATE_FEATURE_DEPTH_CLAMPING_BOOLEAN".."SDL.gpu.device.create.feature.depth_clamping",
+        "PROP_GPU_DEVICE_CREATE_FEATURE_INDIRECT_DRAW_FIRST_INSTANCE_BOOLEAN".."SDL.gpu.device.create.feature.indirect_draw_first_instance",
+        "PROP_GPU_DEVICE_CREATE_FEATURE_ANISOTROPY_BOOLEAN".."SDL.gpu.device.create.feature.anisotropy",
         "PROP_GPU_DEVICE_CREATE_SHADERS_PRIVATE_BOOLEAN".."SDL.gpu.device.create.shaders.private",
         "PROP_GPU_DEVICE_CREATE_SHADERS_SPIRV_BOOLEAN".."SDL.gpu.device.create.shaders.spirv",
         "PROP_GPU_DEVICE_CREATE_SHADERS_DXBC_BOOLEAN".."SDL.gpu.device.create.shaders.dxbc",
         "PROP_GPU_DEVICE_CREATE_SHADERS_DXIL_BOOLEAN".."SDL.gpu.device.create.shaders.dxil",
         "PROP_GPU_DEVICE_CREATE_SHADERS_MSL_BOOLEAN".."SDL.gpu.device.create.shaders.msl",
         "PROP_GPU_DEVICE_CREATE_SHADERS_METALLIB_BOOLEAN".."SDL.gpu.device.create.shaders.metallib",
-        "PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING".."SDL.gpu.device.create.d3d12.semantic"
+        "PROP_GPU_DEVICE_CREATE_D3D12_ALLOW_FEWER_RESOURCE_SLOTS_BOOLEAN".."SDL.gpu.device.create.d3d12.allowtier1resourcebinding",
+        "PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING".."SDL.gpu.device.create.d3d12.semantic",
+        "PROP_GPU_DEVICE_CREATE_VULKAN_REQUIRE_HARDWARE_ACCELERATION_BOOLEAN".."SDL.gpu.device.create.vulkan.requirehardwareacceleration",
+        "PROP_GPU_DEVICE_CREATE_VULKAN_OPTIONS_POINTER".."SDL.gpu.device.create.vulkan.options"
     )
 
     StringConstant(
@@ -366,6 +374,13 @@ val SDL_gpu = "SDLGPU".nativeClassSDL("SDL_gpu") {
         "PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_A_FLOAT".."SDL.gpu.texture.create.d3d12.clear.a",
         "PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_DEPTH_FLOAT".."SDL.gpu.texture.create.d3d12.clear.depth",
         "PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_STENCIL_NUMBER".."SDL.gpu.texture.create.d3d12.clear.stencil"
+    )
+
+    StringConstant(
+        "PROP_GPU_DEVICE_NAME_STRING".."SDL.gpu.device.name",
+        "PROP_GPU_DEVICE_DRIVER_NAME_STRING".."SDL.gpu.device.driver_name",
+        "PROP_GPU_DEVICE_DRIVER_VERSION_STRING".."SDL.gpu.device.driver_version",
+        "PROP_GPU_DEVICE_DRIVER_INFO_STRING".."SDL.gpu.device.driver_info"
     )
 
     StringConstant(
@@ -431,6 +446,12 @@ val SDL_gpu = "SDLGPU".nativeClassSDL("SDL_gpu") {
 
     SDL_GPUShaderFormat(
         "GetGPUShaderFormats",
+
+        SDL_GPUDevice.p("device")
+    )
+
+    SDL_PropertiesID(
+        "GetGPUDeviceProperties",
 
         SDL_GPUDevice.p("device")
     )
@@ -1084,5 +1105,17 @@ val SDL_gpu = "SDLGPU".nativeClassSDL("SDL_gpu") {
         Uint32("width"),
         Uint32("height"),
         Uint32("depth_or_layer_count")
+    )
+
+    SDL_PixelFormat(
+        "GetPixelFormatFromGPUTextureFormat",
+
+        SDL_GPUTextureFormat("format")
+    )
+
+    SDL_GPUTextureFormat(
+        "GetGPUTextureFormatFromPixelFormat",
+
+        SDL_PixelFormat("format")
     )
 }

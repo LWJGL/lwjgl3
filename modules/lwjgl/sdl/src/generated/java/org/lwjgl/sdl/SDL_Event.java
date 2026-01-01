@@ -49,6 +49,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link SDL_QuitEvent SDL_QuitEvent} quit;
  *     {@link SDL_UserEvent SDL_UserEvent} user;
  *     {@link SDL_TouchFingerEvent SDL_TouchFingerEvent} tfinger;
+ *     {@link SDL_PinchFingerEvent SDL_PinchFingerEvent} pinch;
  *     {@link SDL_PenProximityEvent SDL_PenProximityEvent} pproximity;
  *     {@link SDL_PenTouchEvent SDL_PenTouchEvent} ptouch;
  *     {@link SDL_PenMotionEvent SDL_PenMotionEvent} pmotion;
@@ -100,6 +101,7 @@ public class SDL_Event extends Struct<SDL_Event> implements NativeResource {
         QUIT,
         USER,
         TFINGER,
+        PINCH,
         PPROXIMITY,
         PTOUCH,
         PMOTION,
@@ -142,6 +144,7 @@ public class SDL_Event extends Struct<SDL_Event> implements NativeResource {
             __member(SDL_QuitEvent.SIZEOF, SDL_QuitEvent.ALIGNOF),
             __member(SDL_UserEvent.SIZEOF, SDL_UserEvent.ALIGNOF),
             __member(SDL_TouchFingerEvent.SIZEOF, SDL_TouchFingerEvent.ALIGNOF),
+            __member(SDL_PinchFingerEvent.SIZEOF, SDL_PinchFingerEvent.ALIGNOF),
             __member(SDL_PenProximityEvent.SIZEOF, SDL_PenProximityEvent.ALIGNOF),
             __member(SDL_PenTouchEvent.SIZEOF, SDL_PenTouchEvent.ALIGNOF),
             __member(SDL_PenMotionEvent.SIZEOF, SDL_PenMotionEvent.ALIGNOF),
@@ -186,15 +189,16 @@ public class SDL_Event extends Struct<SDL_Event> implements NativeResource {
         QUIT = layout.offsetof(27);
         USER = layout.offsetof(28);
         TFINGER = layout.offsetof(29);
-        PPROXIMITY = layout.offsetof(30);
-        PTOUCH = layout.offsetof(31);
-        PMOTION = layout.offsetof(32);
-        PBUTTON = layout.offsetof(33);
-        PAXIS = layout.offsetof(34);
-        RENDER = layout.offsetof(35);
-        DROP = layout.offsetof(36);
-        CLIPBOARD = layout.offsetof(37);
-        PADDING = layout.offsetof(38);
+        PINCH = layout.offsetof(30);
+        PPROXIMITY = layout.offsetof(31);
+        PTOUCH = layout.offsetof(32);
+        PMOTION = layout.offsetof(33);
+        PBUTTON = layout.offsetof(34);
+        PAXIS = layout.offsetof(35);
+        RENDER = layout.offsetof(36);
+        DROP = layout.offsetof(37);
+        CLIPBOARD = layout.offsetof(38);
+        PADDING = layout.offsetof(39);
     }
 
     protected SDL_Event(long address, @Nullable ByteBuffer container) {
@@ -280,6 +284,8 @@ public class SDL_Event extends Struct<SDL_Event> implements NativeResource {
     public SDL_UserEvent user() { return nuser(address()); }
     /** @return a {@link SDL_TouchFingerEvent} view of the {@code tfinger} field. */
     public SDL_TouchFingerEvent tfinger() { return ntfinger(address()); }
+    /** @return a {@link SDL_PinchFingerEvent} view of the {@code pinch} field. */
+    public SDL_PinchFingerEvent pinch() { return npinch(address()); }
     /** @return a {@link SDL_PenProximityEvent} view of the {@code pproximity} field. */
     public SDL_PenProximityEvent pproximity() { return npproximity(address()); }
     /** @return a {@link SDL_PenTouchEvent} view of the {@code ptouch} field. */
@@ -415,6 +421,10 @@ public class SDL_Event extends Struct<SDL_Event> implements NativeResource {
     public SDL_Event tfinger(SDL_TouchFingerEvent value) { ntfinger(address(), value); return this; }
     /** Passes the {@code tfinger} field to the specified {@link java.util.function.Consumer Consumer}. */
     public SDL_Event tfinger(java.util.function.Consumer<SDL_TouchFingerEvent> consumer) { consumer.accept(tfinger()); return this; }
+    /** Copies the specified {@link SDL_PinchFingerEvent} to the {@code pinch} field. */
+    public SDL_Event pinch(SDL_PinchFingerEvent value) { npinch(address(), value); return this; }
+    /** Passes the {@code pinch} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public SDL_Event pinch(java.util.function.Consumer<SDL_PinchFingerEvent> consumer) { consumer.accept(pinch()); return this; }
     /** Copies the specified {@link SDL_PenProximityEvent} to the {@code pproximity} field. */
     public SDL_Event pproximity(SDL_PenProximityEvent value) { npproximity(address(), value); return this; }
     /** Passes the {@code pproximity} field to the specified {@link java.util.function.Consumer Consumer}. */
@@ -631,6 +641,8 @@ public class SDL_Event extends Struct<SDL_Event> implements NativeResource {
     public static SDL_UserEvent nuser(long struct) { return SDL_UserEvent.create(struct + SDL_Event.USER); }
     /** Unsafe version of {@link #tfinger}. */
     public static SDL_TouchFingerEvent ntfinger(long struct) { return SDL_TouchFingerEvent.create(struct + SDL_Event.TFINGER); }
+    /** Unsafe version of {@link #pinch}. */
+    public static SDL_PinchFingerEvent npinch(long struct) { return SDL_PinchFingerEvent.create(struct + SDL_Event.PINCH); }
     /** Unsafe version of {@link #pproximity}. */
     public static SDL_PenProximityEvent npproximity(long struct) { return SDL_PenProximityEvent.create(struct + SDL_Event.PPROXIMITY); }
     /** Unsafe version of {@link #ptouch}. */
@@ -712,6 +724,8 @@ public class SDL_Event extends Struct<SDL_Event> implements NativeResource {
     public static void nuser(long struct, SDL_UserEvent value) { memCopy(value.address(), struct + SDL_Event.USER, SDL_UserEvent.SIZEOF); }
     /** Unsafe version of {@link #tfinger(SDL_TouchFingerEvent) tfinger}. */
     public static void ntfinger(long struct, SDL_TouchFingerEvent value) { memCopy(value.address(), struct + SDL_Event.TFINGER, SDL_TouchFingerEvent.SIZEOF); }
+    /** Unsafe version of {@link #pinch(SDL_PinchFingerEvent) pinch}. */
+    public static void npinch(long struct, SDL_PinchFingerEvent value) { memCopy(value.address(), struct + SDL_Event.PINCH, SDL_PinchFingerEvent.SIZEOF); }
     /** Unsafe version of {@link #pproximity(SDL_PenProximityEvent) pproximity}. */
     public static void npproximity(long struct, SDL_PenProximityEvent value) { memCopy(value.address(), struct + SDL_Event.PPROXIMITY, SDL_PenProximityEvent.SIZEOF); }
     /** Unsafe version of {@link #ptouch(SDL_PenTouchEvent) ptouch}. */
@@ -840,6 +854,8 @@ public class SDL_Event extends Struct<SDL_Event> implements NativeResource {
         public SDL_UserEvent user() { return SDL_Event.nuser(address()); }
         /** @return a {@link SDL_TouchFingerEvent} view of the {@code tfinger} field. */
         public SDL_TouchFingerEvent tfinger() { return SDL_Event.ntfinger(address()); }
+        /** @return a {@link SDL_PinchFingerEvent} view of the {@code pinch} field. */
+        public SDL_PinchFingerEvent pinch() { return SDL_Event.npinch(address()); }
         /** @return a {@link SDL_PenProximityEvent} view of the {@code pproximity} field. */
         public SDL_PenProximityEvent pproximity() { return SDL_Event.npproximity(address()); }
         /** @return a {@link SDL_PenTouchEvent} view of the {@code ptouch} field. */
@@ -975,6 +991,10 @@ public class SDL_Event extends Struct<SDL_Event> implements NativeResource {
         public SDL_Event.Buffer tfinger(SDL_TouchFingerEvent value) { SDL_Event.ntfinger(address(), value); return this; }
         /** Passes the {@code tfinger} field to the specified {@link java.util.function.Consumer Consumer}. */
         public SDL_Event.Buffer tfinger(java.util.function.Consumer<SDL_TouchFingerEvent> consumer) { consumer.accept(tfinger()); return this; }
+        /** Copies the specified {@link SDL_PinchFingerEvent} to the {@code pinch} field. */
+        public SDL_Event.Buffer pinch(SDL_PinchFingerEvent value) { SDL_Event.npinch(address(), value); return this; }
+        /** Passes the {@code pinch} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public SDL_Event.Buffer pinch(java.util.function.Consumer<SDL_PinchFingerEvent> consumer) { consumer.accept(pinch()); return this; }
         /** Copies the specified {@link SDL_PenProximityEvent} to the {@code pproximity} field. */
         public SDL_Event.Buffer pproximity(SDL_PenProximityEvent value) { SDL_Event.npproximity(address(), value); return this; }
         /** Passes the {@code pproximity} field to the specified {@link java.util.function.Consumer Consumer}. */

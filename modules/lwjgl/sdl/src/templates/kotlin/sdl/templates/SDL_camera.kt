@@ -14,6 +14,12 @@ val SDL_camera = "SDLCamera".nativeClassSDL("SDL_camera") {
         "CAMERA_POSITION_BACK_FACING".enum
     )
 
+    EnumConstant(
+        "CAMERA_PERMISSION_STATE_DENIED".enum("-1"),
+        "CAMERA_PERMISSION_STATE_PENDING".enum,
+        "CAMERA_PERMISSION_STATE_APPROVED".enum
+    )
+
     int(
         "GetNumCameraDrivers",
 
@@ -64,7 +70,7 @@ val SDL_camera = "SDLCamera".nativeClassSDL("SDL_camera") {
         nullable..SDL_CameraSpec.const.p("spec")
     )
 
-    int(
+    SDL_CameraPermissionState(
         "GetCameraPermissionState",
 
         SDL_Camera.p("camera")

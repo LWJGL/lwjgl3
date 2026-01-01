@@ -35,11 +35,13 @@ public class SDLMouse {
             GetRelativeMouseState      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRelativeMouseState"),
             WarpMouseInWindow          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_WarpMouseInWindow"),
             WarpMouseGlobal            = apiGetFunctionAddress(SDL.getLibrary(), "SDL_WarpMouseGlobal"),
+            SetRelativeMouseTransform  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRelativeMouseTransform"),
             SetWindowRelativeMouseMode = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetWindowRelativeMouseMode"),
             GetWindowRelativeMouseMode = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetWindowRelativeMouseMode"),
             CaptureMouse               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CaptureMouse"),
             CreateCursor               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateCursor"),
             CreateColorCursor          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateColorCursor"),
+            CreateAnimatedCursor       = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateAnimatedCursor"),
             CreateSystemCursor         = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateSystemCursor"),
             SetCursor                  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetCursor"),
             GetCursor                  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetCursor"),
@@ -221,6 +223,20 @@ public class SDLMouse {
         return invokeZ(x, y, __functionAddress);
     }
 
+    // --- [ SDL_SetRelativeMouseTransform ] ---
+
+    /** {@code bool SDL_SetRelativeMouseTransform(SDL_MouseMotionTransformCallback callback, void * userdata)} */
+    public static boolean nSDL_SetRelativeMouseTransform(long callback, long userdata) {
+        long __functionAddress = Functions.SetRelativeMouseTransform;
+        return invokePPZ(callback, userdata, __functionAddress);
+    }
+
+    /** {@code bool SDL_SetRelativeMouseTransform(SDL_MouseMotionTransformCallback callback, void * userdata)} */
+    @NativeType("bool")
+    public static boolean SDL_SetRelativeMouseTransform(@NativeType("SDL_MouseMotionTransformCallback") SDL_MouseMotionTransformCallbackI callback, @NativeType("void *") long userdata) {
+        return nSDL_SetRelativeMouseTransform(callback.address(), userdata);
+    }
+
     // --- [ SDL_SetWindowRelativeMouseMode ] ---
 
     /** {@code bool SDL_SetWindowRelativeMouseMode(SDL_Window * window, bool enabled)} */
@@ -284,6 +300,20 @@ public class SDLMouse {
     @NativeType("SDL_Cursor *")
     public static long SDL_CreateColorCursor(@NativeType("SDL_Surface *") SDL_Surface surface, int hot_x, int hot_y) {
         return nSDL_CreateColorCursor(surface.address(), hot_x, hot_y);
+    }
+
+    // --- [ SDL_CreateAnimatedCursor ] ---
+
+    /** {@code SDL_Cursor * SDL_CreateAnimatedCursor(SDL_CursorFrameInfo * frames, int frame_count, int hot_x, int hot_y)} */
+    public static long nSDL_CreateAnimatedCursor(long frames, int frame_count, int hot_x, int hot_y) {
+        long __functionAddress = Functions.CreateAnimatedCursor;
+        return invokePP(frames, frame_count, hot_x, hot_y, __functionAddress);
+    }
+
+    /** {@code SDL_Cursor * SDL_CreateAnimatedCursor(SDL_CursorFrameInfo * frames, int frame_count, int hot_x, int hot_y)} */
+    @NativeType("SDL_Cursor *")
+    public static long SDL_CreateAnimatedCursor(@NativeType("SDL_CursorFrameInfo *") SDL_CursorFrameInfo.Buffer frames, int hot_x, int hot_y) {
+        return nSDL_CreateAnimatedCursor(frames.address(), frames.remaining(), hot_x, hot_y);
     }
 
     // --- [ SDL_CreateSystemCursor ] ---

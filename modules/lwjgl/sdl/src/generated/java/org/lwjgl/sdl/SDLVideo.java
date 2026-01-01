@@ -82,6 +82,7 @@ public class SDLVideo {
             SetWindowBordered               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetWindowBordered"),
             SetWindowResizable              = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetWindowResizable"),
             SetWindowAlwaysOnTop            = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetWindowAlwaysOnTop"),
+            SetWindowFillDocument           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetWindowFillDocument"),
             ShowWindow                      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_ShowWindow"),
             HideWindow                      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_HideWindow"),
             RaiseWindow                     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RaiseWindow"),
@@ -113,6 +114,10 @@ public class SDLVideo {
             SetWindowHitTest                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetWindowHitTest"),
             SetWindowShape                  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetWindowShape"),
             FlashWindow                     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_FlashWindow"),
+            SetWindowProgressState          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetWindowProgressState"),
+            GetWindowProgressState          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetWindowProgressState"),
+            SetWindowProgressValue          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetWindowProgressValue"),
+            GetWindowProgressValue          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetWindowProgressValue"),
             DestroyWindow                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_DestroyWindow"),
             ScreenSaverEnabled              = apiGetFunctionAddress(SDL.getLibrary(), "SDL_ScreenSaverEnabled"),
             EnableScreenSaver               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_EnableScreenSaver"),
@@ -176,6 +181,7 @@ public class SDLVideo {
         SDL_WINDOW_TOOLTIP             = 0x0000000000040000L,
         SDL_WINDOW_POPUP_MENU          = 0x0000000000080000L,
         SDL_WINDOW_KEYBOARD_GRABBED    = 0x0000000000100000L,
+        SDL_WINDOW_FILL_DOCUMENT       = 0x0000000000200000L,
         SDL_WINDOW_VULKAN              = 0x0000000010000000L,
         SDL_WINDOW_METAL               = 0x0000000020000000L,
         SDL_WINDOW_TRANSPARENT         = 0x0000000040000000L,
@@ -191,6 +197,14 @@ public class SDLVideo {
         SDL_FLASH_CANCEL        = 0,
         SDL_FLASH_BRIEFLY       = 1,
         SDL_FLASH_UNTIL_FOCUSED = 2;
+
+    public static final int
+        SDL_PROGRESS_STATE_INVALID       = -1,
+        SDL_PROGRESS_STATE_NONE          = 0,
+        SDL_PROGRESS_STATE_INDETERMINATE = 1,
+        SDL_PROGRESS_STATE_NORMAL        = 2,
+        SDL_PROGRESS_STATE_PAUSED        = 3,
+        SDL_PROGRESS_STATE_ERROR         = 4;
 
     public static final int
         SDL_GL_RED_SIZE                   = 0,
@@ -243,7 +257,9 @@ public class SDLVideo {
 
     public static final String
         SDL_PROP_DISPLAY_HDR_ENABLED_BOOLEAN             = "SDL.display.HDR_enabled",
-        SDL_PROP_DISPLAY_KMSDRM_PANEL_ORIENTATION_NUMBER = "SDL.display.KMSDRM.panel_orientation";
+        SDL_PROP_DISPLAY_KMSDRM_PANEL_ORIENTATION_NUMBER = "SDL.display.KMSDRM.panel_orientation",
+        SDL_PROP_DISPLAY_WAYLAND_WL_OUTPUT_POINTER       = "SDL.display.wayland.wl_output",
+        SDL_PROP_DISPLAY_WINDOWS_HMONITOR_POINTER        = "SDL.display.windows.hmonitor";
 
     public static final String
         SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN               = "SDL.window.create.always_on_top",
@@ -275,12 +291,15 @@ public class SDLVideo {
         SDL_PROP_WINDOW_CREATE_Y_NUMBER                            = "SDL.window.create.y",
         SDL_PROP_WINDOW_CREATE_COCOA_WINDOW_POINTER                = "SDL.window.create.cocoa.window",
         SDL_PROP_WINDOW_CREATE_COCOA_VIEW_POINTER                  = "SDL.window.create.cocoa.view",
+        SDL_PROP_WINDOW_CREATE_WINDOWSCENE_POINTER                 = "SDL.window.create.uikit.windowscene",
         SDL_PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN = "SDL.window.create.wayland.surface_role_custom",
         SDL_PROP_WINDOW_CREATE_WAYLAND_CREATE_EGL_WINDOW_BOOLEAN   = "SDL.window.create.wayland.create_egl_window",
         SDL_PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER          = "SDL.window.create.wayland.wl_surface",
         SDL_PROP_WINDOW_CREATE_WIN32_HWND_POINTER                  = "SDL.window.create.win32.hwnd",
         SDL_PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER     = "SDL.window.create.win32.pixel_format_hwnd",
-        SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER                   = "SDL.window.create.x11.window";
+        SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER                   = "SDL.window.create.x11.window",
+        SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID_STRING         = "SDL.window.create.emscripten.canvas_id",
+        SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING  = "SDL.window.create.emscripten.keyboard_element";
 
     public static final String
         SDL_PROP_WINDOW_SHAPE_POINTER                             = "SDL.window.shape",
@@ -299,7 +318,7 @@ public class SDLVideo {
         SDL_PROP_WINDOW_KMSDRM_GBM_DEVICE_POINTER                 = "SDL.window.kmsdrm.gbm_dev",
         SDL_PROP_WINDOW_COCOA_WINDOW_POINTER                      = "SDL.window.cocoa.window",
         SDL_PROP_WINDOW_COCOA_METAL_VIEW_TAG_NUMBER               = "SDL.window.cocoa.metal_view_tag",
-        SDL_PROP_WINDOW_OPENVR_OVERLAY_ID                         = "SDL.window.openvr.overlay_id",
+        SDL_PROP_WINDOW_OPENVR_OVERLAY_ID_NUMBER                  = "SDL.window.openvr.overlay_id",
         SDL_PROP_WINDOW_VIVANTE_DISPLAY_POINTER                   = "SDL.window.vivante.display",
         SDL_PROP_WINDOW_VIVANTE_WINDOW_POINTER                    = "SDL.window.vivante.window",
         SDL_PROP_WINDOW_VIVANTE_SURFACE_POINTER                   = "SDL.window.vivante.surface",
@@ -317,7 +336,9 @@ public class SDLVideo {
         SDL_PROP_WINDOW_WAYLAND_XDG_POSITIONER_POINTER            = "SDL.window.wayland.xdg_positioner",
         SDL_PROP_WINDOW_X11_DISPLAY_POINTER                       = "SDL.window.x11.display",
         SDL_PROP_WINDOW_X11_SCREEN_NUMBER                         = "SDL.window.x11.screen",
-        SDL_PROP_WINDOW_X11_WINDOW_NUMBER                         = "SDL.window.x11.window";
+        SDL_PROP_WINDOW_X11_WINDOW_NUMBER                         = "SDL.window.x11.window",
+        SDL_PROP_WINDOW_EMSCRIPTEN_CANVAS_ID_STRING               = "SDL.window.emscripten.canvas_id",
+        SDL_PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING        = "SDL.window.emscripten.keyboard_element";
 
     public static final int
         SDL_WINDOW_SURFACE_VSYNC_DISABLED = 0,
@@ -1152,6 +1173,18 @@ public class SDLVideo {
         return invokePZ(window, on_top, __functionAddress);
     }
 
+    // --- [ SDL_SetWindowFillDocument ] ---
+
+    /** {@code bool SDL_SetWindowFillDocument(SDL_Window * window, bool fill)} */
+    @NativeType("bool")
+    public static boolean SDL_SetWindowFillDocument(@NativeType("SDL_Window *") long window, @NativeType("bool") boolean fill) {
+        long __functionAddress = Functions.SetWindowFillDocument;
+        if (CHECKS) {
+            check(window);
+        }
+        return invokePZ(window, fill, __functionAddress);
+    }
+
     // --- [ SDL_ShowWindow ] ---
 
     /** {@code bool SDL_ShowWindow(SDL_Window * window)} */
@@ -1558,6 +1591,53 @@ public class SDLVideo {
             check(window);
         }
         return invokePZ(window, operation, __functionAddress);
+    }
+
+    // --- [ SDL_SetWindowProgressState ] ---
+
+    /** {@code bool SDL_SetWindowProgressState(SDL_Window * window, SDL_ProgressState state)} */
+    @NativeType("bool")
+    public static boolean SDL_SetWindowProgressState(@NativeType("SDL_Window *") long window, @NativeType("SDL_ProgressState") int state) {
+        long __functionAddress = Functions.SetWindowProgressState;
+        if (CHECKS) {
+            check(window);
+        }
+        return invokePZ(window, state, __functionAddress);
+    }
+
+    // --- [ SDL_GetWindowProgressState ] ---
+
+    /** {@code SDL_ProgressState SDL_GetWindowProgressState(SDL_Window * window)} */
+    @NativeType("SDL_ProgressState")
+    public static int SDL_GetWindowProgressState(@NativeType("SDL_Window *") long window) {
+        long __functionAddress = Functions.GetWindowProgressState;
+        if (CHECKS) {
+            check(window);
+        }
+        return invokePI(window, __functionAddress);
+    }
+
+    // --- [ SDL_SetWindowProgressValue ] ---
+
+    /** {@code bool SDL_SetWindowProgressValue(SDL_Window * window, float value)} */
+    @NativeType("bool")
+    public static boolean SDL_SetWindowProgressValue(@NativeType("SDL_Window *") long window, float value) {
+        long __functionAddress = Functions.SetWindowProgressValue;
+        if (CHECKS) {
+            check(window);
+        }
+        return invokePZ(window, value, __functionAddress);
+    }
+
+    // --- [ SDL_GetWindowProgressValue ] ---
+
+    /** {@code float SDL_GetWindowProgressValue(SDL_Window * window)} */
+    public static float SDL_GetWindowProgressValue(@NativeType("SDL_Window *") long window) {
+        long __functionAddress = Functions.GetWindowProgressValue;
+        if (CHECKS) {
+            check(window);
+        }
+        return invokePF(window, __functionAddress);
     }
 
     // --- [ SDL_DestroyWindow ] ---

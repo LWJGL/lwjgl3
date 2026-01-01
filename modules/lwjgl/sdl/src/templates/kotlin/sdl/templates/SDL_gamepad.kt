@@ -30,6 +30,7 @@ val SDL_gamepad = "SDLGamepad".nativeClassSDL("SDL_gamepad") {
         "GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_LEFT".enum,
         "GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_RIGHT".enum,
         "GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_PAIR".enum,
+        "GAMEPAD_TYPE_GAMECUBE".enum,
         "GAMEPAD_TYPE_COUNT".enum
     )
 

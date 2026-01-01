@@ -63,6 +63,8 @@ public class SDLAudio {
             SetAudioStreamInputChannelMap  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetAudioStreamInputChannelMap"),
             SetAudioStreamOutputChannelMap = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetAudioStreamOutputChannelMap"),
             PutAudioStreamData             = apiGetFunctionAddress(SDL.getLibrary(), "SDL_PutAudioStreamData"),
+            PutAudioStreamDataNoCopy       = apiGetFunctionAddress(SDL.getLibrary(), "SDL_PutAudioStreamDataNoCopy"),
+            PutAudioStreamPlanarData       = apiGetFunctionAddress(SDL.getLibrary(), "SDL_PutAudioStreamPlanarData"),
             GetAudioStreamData             = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetAudioStreamData"),
             GetAudioStreamAvailable        = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetAudioStreamAvailable"),
             GetAudioStreamQueued           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetAudioStreamQueued"),
@@ -110,6 +112,8 @@ public class SDLAudio {
     public static final int
         SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK  = 0xFFFFFFFF,
         SDL_AUDIO_DEVICE_DEFAULT_RECORDING = 0xFFFFFFFE;
+
+    public static final String SDL_PROP_AUDIOSTREAM_AUTO_CLEANUP_BOOLEAN = "SDL.audiostream.auto_cleanup";
 
     protected SDLAudio() {
         throw new UnsupportedOperationException();
@@ -674,6 +678,40 @@ public class SDLAudio {
     @NativeType("bool")
     public static boolean SDL_PutAudioStreamData(@NativeType("SDL_AudioStream *") long stream, @NativeType("void const *") ByteBuffer buf) {
         return nSDL_PutAudioStreamData(stream, memAddress(buf), buf.remaining());
+    }
+
+    // --- [ SDL_PutAudioStreamDataNoCopy ] ---
+
+    /** {@code bool SDL_PutAudioStreamDataNoCopy(SDL_AudioStream * stream, void const * buf, int len, SDL_AudioStreamDataCompleteCallback callback, void * userdata)} */
+    public static boolean nSDL_PutAudioStreamDataNoCopy(long stream, long buf, int len, long callback, long userdata) {
+        long __functionAddress = Functions.PutAudioStreamDataNoCopy;
+        if (CHECKS) {
+            check(stream);
+        }
+        return invokePPPPZ(stream, buf, len, callback, userdata, __functionAddress);
+    }
+
+    /** {@code bool SDL_PutAudioStreamDataNoCopy(SDL_AudioStream * stream, void const * buf, int len, SDL_AudioStreamDataCompleteCallback callback, void * userdata)} */
+    @NativeType("bool")
+    public static boolean SDL_PutAudioStreamDataNoCopy(@NativeType("SDL_AudioStream *") long stream, @NativeType("void const *") ByteBuffer buf, @NativeType("SDL_AudioStreamDataCompleteCallback") @Nullable SDL_AudioStreamDataCompleteCallbackI callback, @NativeType("void *") long userdata) {
+        return nSDL_PutAudioStreamDataNoCopy(stream, memAddress(buf), buf.remaining(), memAddressSafe(callback), userdata);
+    }
+
+    // --- [ SDL_PutAudioStreamPlanarData ] ---
+
+    /** {@code bool SDL_PutAudioStreamPlanarData(SDL_AudioStream * stream, void const * const * channel_buffers, int num_channels, int num_samples)} */
+    public static boolean nSDL_PutAudioStreamPlanarData(long stream, long channel_buffers, int num_channels, int num_samples) {
+        long __functionAddress = Functions.PutAudioStreamPlanarData;
+        if (CHECKS) {
+            check(stream);
+        }
+        return invokePPZ(stream, channel_buffers, num_channels, num_samples, __functionAddress);
+    }
+
+    /** {@code bool SDL_PutAudioStreamPlanarData(SDL_AudioStream * stream, void const * const * channel_buffers, int num_channels, int num_samples)} */
+    @NativeType("bool")
+    public static boolean SDL_PutAudioStreamPlanarData(@NativeType("SDL_AudioStream *") long stream, @NativeType("void const * const *") PointerBuffer channel_buffers, int num_channels, int num_samples) {
+        return nSDL_PutAudioStreamPlanarData(stream, memAddress(channel_buffers), num_channels, num_samples);
     }
 
     // --- [ SDL_GetAudioStreamData ] ---

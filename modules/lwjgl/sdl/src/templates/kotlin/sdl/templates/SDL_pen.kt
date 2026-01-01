@@ -18,7 +18,8 @@ val SDL_pen = "SDLPen".nativeClassSDL("SDL_pen") {
         "PEN_INPUT_BUTTON_3".."(1 << 3)",
         "PEN_INPUT_BUTTON_4".."(1 << 4)",
         "PEN_INPUT_BUTTON_5".."(1 << 5)",
-        "PEN_INPUT_ERASER_TIP".."(1 << 30)"
+        "PEN_INPUT_ERASER_TIP".."(1 << 30)",
+        "PEN_INPUT_IN_PROXIMITY".."(1 << 31)"
     )
 
     EnumConstant(
@@ -30,5 +31,18 @@ val SDL_pen = "SDLPen".nativeClassSDL("SDL_pen") {
         "PEN_AXIS_SLIDER".enum,
         "PEN_AXIS_TANGENTIAL_PRESSURE".enum,
         "PEN_AXIS_COUNT".enum
+    )
+
+    EnumConstant(
+        "PEN_DEVICE_TYPE_INVALID".enum("-1"),
+        "PEN_DEVICE_TYPE_UNKNOWN".enum,
+        "PEN_DEVICE_TYPE_DIRECT".enum,
+        "PEN_DEVICE_TYPE_INDIRECT".enum
+    )
+
+    SDL_PenDeviceType(
+        "GetPenDeviceType",
+
+        SDL_PenID("instance_id")
     )
 }

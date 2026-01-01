@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <pre><code>
  * struct SDL_HapticCondition {
- *     Uint16 type;
+ *     SDL_HapticEffectType type;
  *     {@link SDL_HapticDirection SDL_HapticDirection} direction;
  *     Uint32 length;
  *     Uint16 delay;
@@ -112,7 +112,7 @@ public class SDL_HapticCondition extends Struct<SDL_HapticCondition> implements 
     public int sizeof() { return SIZEOF; }
 
     /** @return the value of the {@code type} field. */
-    @NativeType("Uint16")
+    @NativeType("SDL_HapticEffectType")
     public short type() { return ntype(address()); }
     /** @return a {@link SDL_HapticDirection} view of the {@code direction} field. */
     public SDL_HapticDirection direction() { return ndirection(address()); }
@@ -166,7 +166,7 @@ public class SDL_HapticCondition extends Struct<SDL_HapticCondition> implements 
     public short center(int index) { return ncenter(address(), index); }
 
     /** Sets the specified value to the {@code type} field. */
-    public SDL_HapticCondition type(@NativeType("Uint16") short value) { ntype(address(), value); return this; }
+    public SDL_HapticCondition type(@NativeType("SDL_HapticEffectType") short value) { ntype(address(), value); return this; }
     /** Copies the specified {@link SDL_HapticDirection} to the {@code direction} field. */
     public SDL_HapticCondition direction(SDL_HapticDirection value) { ndirection(address(), value); return this; }
     /** Passes the {@code direction} field to the specified {@link java.util.function.Consumer Consumer}. */
@@ -518,7 +518,7 @@ public class SDL_HapticCondition extends Struct<SDL_HapticCondition> implements 
         }
 
         /** @return the value of the {@code type} field. */
-        @NativeType("Uint16")
+        @NativeType("SDL_HapticEffectType")
         public short type() { return SDL_HapticCondition.ntype(address()); }
         /** @return a {@link SDL_HapticDirection} view of the {@code direction} field. */
         public SDL_HapticDirection direction() { return SDL_HapticCondition.ndirection(address()); }
@@ -572,7 +572,7 @@ public class SDL_HapticCondition extends Struct<SDL_HapticCondition> implements 
         public short center(int index) { return SDL_HapticCondition.ncenter(address(), index); }
 
         /** Sets the specified value to the {@code type} field. */
-        public SDL_HapticCondition.Buffer type(@NativeType("Uint16") short value) { SDL_HapticCondition.ntype(address(), value); return this; }
+        public SDL_HapticCondition.Buffer type(@NativeType("SDL_HapticEffectType") short value) { SDL_HapticCondition.ntype(address(), value); return this; }
         /** Copies the specified {@link SDL_HapticDirection} to the {@code direction} field. */
         public SDL_HapticCondition.Buffer direction(SDL_HapticDirection value) { SDL_HapticCondition.ndirection(address(), value); return this; }
         /** Passes the {@code direction} field to the specified {@link java.util.function.Consumer Consumer}. */

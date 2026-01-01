@@ -99,8 +99,9 @@ public class SDLIOStream {
         SDL_PROP_IOSTREAM_ANDROID_AASSET_POINTER = "SDL.iostream.android.aasset";
 
     public static final String
-        SDL_PROP_IOSTREAM_MEMORY_POINTER     = "SDL.iostream.memory.base",
-        SDL_PROP_IOSTREAM_MEMORY_SIZE_NUMBER = "SDL.iostream.memory.size";
+        SDL_PROP_IOSTREAM_MEMORY_POINTER           = "SDL.iostream.memory.base",
+        SDL_PROP_IOSTREAM_MEMORY_SIZE_NUMBER       = "SDL.iostream.memory.size",
+        SDL_PROP_IOSTREAM_MEMORY_FREE_FUNC_POINTER = "SDL.iostream.memory.free";
 
     public static final String
         SDL_PROP_IOSTREAM_DYNAMIC_MEMORY_POINTER   = "SDL.iostream.dynamic.memory",

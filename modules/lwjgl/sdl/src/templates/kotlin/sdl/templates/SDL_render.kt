@@ -8,12 +8,22 @@ import org.lwjgl.generator.*
 import sdl.*
 
 val SDL_render = "SDLRender".nativeClassSDL("SDL_render") {
-    StringConstant("SOFTWARE_RENDERER".."software")
+    StringConstant(
+        "SOFTWARE_RENDERER".."software",
+        "GPU_RENDERER".."gpu"
+    )
 
     EnumConstant(
         "TEXTUREACCESS_STATIC".enum("0"),
         "TEXTUREACCESS_STREAMING".enum,
         "TEXTUREACCESS_TARGET".enum
+    )
+
+    EnumConstant(
+        "TEXTURE_ADDRESS_INVALID".enum("-1"),
+        "TEXTURE_ADDRESS_AUTO".enum,
+        "TEXTURE_ADDRESS_CLAMP".enum,
+        "TEXTURE_ADDRESS_WRAP".enum
     )
 
     EnumConstant(
@@ -30,6 +40,10 @@ val SDL_render = "SDLRender".nativeClassSDL("SDL_render") {
         "PROP_RENDERER_CREATE_SURFACE_POINTER".."SDL.renderer.create.surface",
         "PROP_RENDERER_CREATE_OUTPUT_COLORSPACE_NUMBER".."SDL.renderer.create.output_colorspace",
         "PROP_RENDERER_CREATE_PRESENT_VSYNC_NUMBER".."SDL.renderer.create.present_vsync",
+        "PROP_RENDERER_CREATE_GPU_DEVICE_POINTER".."SDL.renderer.create.gpu.device",
+        "PROP_RENDERER_CREATE_GPU_SHADERS_SPIRV_BOOLEAN".."SDL.renderer.create.gpu.shaders_spirv",
+        "PROP_RENDERER_CREATE_GPU_SHADERS_DXIL_BOOLEAN".."SDL.renderer.create.gpu.shaders_dxil",
+        "PROP_RENDERER_CREATE_GPU_SHADERS_MSL_BOOLEAN".."SDL.renderer.create.gpu.shaders_msl",
         "PROP_RENDERER_CREATE_VULKAN_INSTANCE_POINTER".."SDL.renderer.create.vulkan.instance",
         "PROP_RENDERER_CREATE_VULKAN_SURFACE_NUMBER".."SDL.renderer.create.vulkan.surface",
         "PROP_RENDERER_CREATE_VULKAN_PHYSICAL_DEVICE_POINTER".."SDL.renderer.create.vulkan.physical_device",
@@ -45,6 +59,7 @@ val SDL_render = "SDLRender".nativeClassSDL("SDL_render") {
         "PROP_RENDERER_VSYNC_NUMBER".."SDL.renderer.vsync",
         "PROP_RENDERER_MAX_TEXTURE_SIZE_NUMBER".."SDL.renderer.max_texture_size",
         "PROP_RENDERER_TEXTURE_FORMATS_POINTER".."SDL.renderer.texture_formats",
+        "PROP_RENDERER_TEXTURE_WRAPPING_BOOLEAN".."SDL.renderer.texture_wrapping",
         "PROP_RENDERER_OUTPUT_COLORSPACE_NUMBER".."SDL.renderer.output_colorspace",
         "PROP_RENDERER_HDR_ENABLED_BOOLEAN".."SDL.renderer.HDR_enabled",
         "PROP_RENDERER_SDR_WHITE_POINT_FLOAT".."SDL.renderer.SDR_white_point",
@@ -71,6 +86,7 @@ val SDL_render = "SDLRender".nativeClassSDL("SDL_render") {
         "PROP_TEXTURE_CREATE_ACCESS_NUMBER".."SDL.texture.create.access",
         "PROP_TEXTURE_CREATE_WIDTH_NUMBER".."SDL.texture.create.width",
         "PROP_TEXTURE_CREATE_HEIGHT_NUMBER".."SDL.texture.create.height",
+        "PROP_TEXTURE_CREATE_PALETTE_POINTER".."SDL.texture.create.palette",
         "PROP_TEXTURE_CREATE_SDR_WHITE_POINT_FLOAT".."SDL.texture.create.SDR_white_point",
         "PROP_TEXTURE_CREATE_HDR_HEADROOM_FLOAT".."SDL.texture.create.HDR_headroom",
         "PROP_TEXTURE_CREATE_D3D11_TEXTURE_POINTER".."SDL.texture.create.d3d11.texture",
@@ -88,7 +104,12 @@ val SDL_render = "SDLRender".nativeClassSDL("SDL_render") {
         "PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_UV_NUMBER".."SDL.texture.create.opengles2.texture_uv",
         "PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_U_NUMBER".."SDL.texture.create.opengles2.texture_u",
         "PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_V_NUMBER".."SDL.texture.create.opengles2.texture_v",
-        "PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER".."SDL.texture.create.vulkan.texture"
+        "PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER".."SDL.texture.create.vulkan.texture",
+        "PROP_TEXTURE_CREATE_VULKAN_LAYOUT_NUMBER".."SDL.texture.create.vulkan.layout",
+        "PROP_TEXTURE_CREATE_GPU_TEXTURE_POINTER".."SDL.texture.create.gpu.texture",
+        "PROP_TEXTURE_CREATE_GPU_TEXTURE_UV_POINTER".."SDL.texture.create.gpu.texture_uv",
+        "PROP_TEXTURE_CREATE_GPU_TEXTURE_U_POINTER".."SDL.texture.create.gpu.texture_u",
+        "PROP_TEXTURE_CREATE_GPU_TEXTURE_V_POINTER".."SDL.texture.create.gpu.texture_v"
     )
 
     StringConstant(
@@ -117,7 +138,11 @@ val SDL_render = "SDLRender".nativeClassSDL("SDL_render") {
         "PROP_TEXTURE_OPENGLES2_TEXTURE_U_NUMBER".."SDL.texture.opengles2.texture_u",
         "PROP_TEXTURE_OPENGLES2_TEXTURE_V_NUMBER".."SDL.texture.opengles2.texture_v",
         "PROP_TEXTURE_OPENGLES2_TEXTURE_TARGET_NUMBER".."SDL.texture.opengles2.target",
-        "PROP_TEXTURE_VULKAN_TEXTURE_NUMBER".."SDL.texture.vulkan.texture"
+        "PROP_TEXTURE_VULKAN_TEXTURE_NUMBER".."SDL.texture.vulkan.texture",
+        "PROP_TEXTURE_GPU_TEXTURE_POINTER".."SDL.texture.gpu.texture",
+        "PROP_TEXTURE_GPU_TEXTURE_UV_POINTER".."SDL.texture.gpu.texture_uv",
+        "PROP_TEXTURE_GPU_TEXTURE_U_POINTER".."SDL.texture.gpu.texture_u",
+        "PROP_TEXTURE_GPU_TEXTURE_V_POINTER".."SDL.texture.gpu.texture_v"
     )
 
     IntConstant(
@@ -157,6 +182,19 @@ val SDL_render = "SDLRender".nativeClassSDL("SDL_render") {
         "CreateRendererWithProperties",
 
         SDL_PropertiesID("props")
+    )
+
+    SDL_Renderer.p(
+        "CreateGPURenderer",
+
+        nullable..SDL_GPUDevice.p("device"),
+        nullable..SDL_Window.p("window")
+    )
+
+    SDL_GPUDevice.p(
+        "GetGPURendererDevice",
+
+        SDL_Renderer.p("renderer")
     )
 
     SDL_Renderer.p(
@@ -238,6 +276,19 @@ val SDL_render = "SDLRender".nativeClassSDL("SDL_render") {
         SDL_Texture.p("texture"),
         Check(1)..nullable..float.p("w"),
         Check(1)..nullable..float.p("h")
+    )
+
+    bool(
+        "SetTexturePalette",
+
+        SDL_Texture.p("texture"),
+        SDL_Palette.p("palette")
+    )
+
+    SDL_Palette.p(
+        "GetTexturePalette",
+
+        SDL_Texture.p("texture")
     )
 
     bool(
@@ -711,6 +762,21 @@ val SDL_render = "SDLRender".nativeClassSDL("SDL_render") {
     )
 
     bool(
+        "RenderTexture9GridTiled",
+
+        SDL_Renderer.p("renderer"),
+        SDL_Texture.p("texture"),
+        nullable..SDL_FRect.const.p("srcrect"),
+        float("left_width"),
+        float("right_width"),
+        float("top_height"),
+        float("bottom_height"),
+        float("scale"),
+        nullable..SDL_FRect.const.p("dstrect"),
+        float("tileScale")
+    )
+
+    bool(
         "RenderGeometry",
 
         SDL_Renderer.p("renderer"),
@@ -739,6 +805,22 @@ val SDL_render = "SDLRender".nativeClassSDL("SDL_render") {
         )..Check("num_indices * size_indices")..nullable..void.const.p("indices"),
         int("num_indices"),
         int("size_indices")
+    )
+
+    bool(
+        "SetRenderTextureAddressMode",
+
+        SDL_Renderer.p("renderer"),
+        SDL_TextureAddressMode("u_mode"),
+        SDL_TextureAddressMode("v_mode")
+    )
+
+    bool(
+        "GetRenderTextureAddressMode",
+
+        SDL_Renderer.p("renderer"),
+        Check(1)..nullable..SDL_TextureAddressMode.p("u_mode"),
+        Check(1)..nullable..SDL_TextureAddressMode.p("v_mode")
     )
 
     SDL_Surface.p(
@@ -805,5 +887,48 @@ val SDL_render = "SDLRender".nativeClassSDL("SDL_render") {
         float("x"),
         float("y"),
         charUTF8.const.p("fmt")
+    )
+
+    bool(
+        "SetDefaultTextureScaleMode",
+
+        SDL_Renderer.p("renderer"),
+        SDL_ScaleMode("scale_mode")
+    )
+
+    bool(
+        "GetDefaultTextureScaleMode",
+
+        SDL_Renderer.p("renderer"),
+        Check(1)..nullable..SDL_ScaleMode.p("scale_mode")
+    )
+
+    SDL_GPURenderState.p(
+        "CreateGPURenderState",
+
+        SDL_Renderer.p("renderer"),
+        SDL_GPURenderStateCreateInfo.p("createinfo")
+    )
+
+    bool(
+        "SetGPURenderStateFragmentUniforms",
+
+        SDL_GPURenderState.p("state"),
+        Uint32("slot_index"),
+        void.const.p("data"),
+        AutoSize("data")..Uint32("length")
+    )
+
+    bool(
+        "SetGPURenderState",
+
+        SDL_Renderer.p("renderer"),
+        SDL_GPURenderState.p("state")
+    )
+
+    void(
+        "DestroyGPURenderState",
+
+        SDL_GPURenderState.p("state")
     )
 }

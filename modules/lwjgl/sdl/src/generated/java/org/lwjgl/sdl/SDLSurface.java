@@ -43,10 +43,16 @@ public class SDLSurface {
             RemoveSurfaceAlternateImages = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RemoveSurfaceAlternateImages"),
             LockSurface                  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_LockSurface"),
             UnlockSurface                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_UnlockSurface"),
+            LoadSurface_IO               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_LoadSurface_IO"),
+            LoadSurface                  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_LoadSurface"),
             LoadBMP_IO                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_LoadBMP_IO"),
             LoadBMP                      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_LoadBMP"),
             SaveBMP_IO                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SaveBMP_IO"),
             SaveBMP                      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SaveBMP"),
+            LoadPNG_IO                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_LoadPNG_IO"),
+            LoadPNG                      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_LoadPNG"),
+            SavePNG_IO                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SavePNG_IO"),
+            SavePNG                      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SavePNG"),
             SetSurfaceRLE                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetSurfaceRLE"),
             SurfaceHasRLE                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SurfaceHasRLE"),
             SetSurfaceColorKey           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetSurfaceColorKey"),
@@ -61,6 +67,7 @@ public class SDLSurface {
             SetSurfaceClipRect           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetSurfaceClipRect"),
             GetSurfaceClipRect           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetSurfaceClipRect"),
             FlipSurface                  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_FlipSurface"),
+            RotateSurface                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RotateSurface"),
             DuplicateSurface             = apiGetFunctionAddress(SDL.getLibrary(), "SDL_DuplicateSurface"),
             ScaleSurface                 = apiGetFunctionAddress(SDL.getLibrary(), "SDL_ScaleSurface"),
             ConvertSurface               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_ConvertSurface"),
@@ -96,21 +103,24 @@ public class SDLSurface {
         SDL_SURFACE_SIMD_ALIGNED = 0x00000008;
 
     public static final int
-        SDL_SCALEMODE_INVALID = -1,
-        SDL_SCALEMODE_NEAREST = 0,
-        SDL_SCALEMODE_LINEAR  = 1;
+        SDL_SCALEMODE_INVALID  = -1,
+        SDL_SCALEMODE_NEAREST  = 0,
+        SDL_SCALEMODE_LINEAR   = 1,
+        SDL_SCALEMODE_PIXELART = 2;
 
     public static final int
-        SDL_FLIP_NONE       = 0,
-        SDL_FLIP_HORIZONTAL = 1,
-        SDL_FLIP_VERTICAL   = 2;
+        SDL_FLIP_NONE                    = 0,
+        SDL_FLIP_HORIZONTAL              = 1,
+        SDL_FLIP_VERTICAL                = 2,
+        SDL_FLIP_HORIZONTAL_AND_VERTICAL = (SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL);
 
     public static final String
         SDL_PROP_SURFACE_SDR_WHITE_POINT_FLOAT   = "SDL.surface.SDR_white_point",
         SDL_PROP_SURFACE_HDR_HEADROOM_FLOAT      = "SDL.surface.HDR_headroom",
         SDL_PROP_SURFACE_TONEMAP_OPERATOR_STRING = "SDL.surface.tonemap",
         SDL_PROP_SURFACE_HOTSPOT_X_NUMBER        = "SDL.surface.hotspot.x",
-        SDL_PROP_SURFACE_HOTSPOT_Y_NUMBER        = "SDL.surface.hotspot.y";
+        SDL_PROP_SURFACE_HOTSPOT_Y_NUMBER        = "SDL.surface.hotspot.y",
+        SDL_PROP_SURFACE_ROTATION_FLOAT          = "SDL.surface.rotation";
 
     protected SDLSurface() {
         throw new UnsupportedOperationException();
@@ -337,6 +347,56 @@ public class SDLSurface {
         nSDL_UnlockSurface(surface.address());
     }
 
+    // --- [ SDL_LoadSurface_IO ] ---
+
+    /** {@code SDL_Surface * SDL_LoadSurface_IO(SDL_IOStream * src, bool closeio)} */
+    public static long nSDL_LoadSurface_IO(long src, boolean closeio) {
+        long __functionAddress = Functions.LoadSurface_IO;
+        if (CHECKS) {
+            check(src);
+        }
+        return invokePP(src, closeio, __functionAddress);
+    }
+
+    /** {@code SDL_Surface * SDL_LoadSurface_IO(SDL_IOStream * src, bool closeio)} */
+    @NativeType("SDL_Surface *")
+    public static @Nullable SDL_Surface SDL_LoadSurface_IO(@NativeType("SDL_IOStream *") long src, @NativeType("bool") boolean closeio) {
+        long __result = nSDL_LoadSurface_IO(src, closeio);
+        return SDL_Surface.createSafe(__result);
+    }
+
+    // --- [ SDL_LoadSurface ] ---
+
+    /** {@code SDL_Surface * SDL_LoadSurface(char const * file)} */
+    public static long nSDL_LoadSurface(long file) {
+        long __functionAddress = Functions.LoadSurface;
+        return invokePP(file, __functionAddress);
+    }
+
+    /** {@code SDL_Surface * SDL_LoadSurface(char const * file)} */
+    @NativeType("SDL_Surface *")
+    public static @Nullable SDL_Surface SDL_LoadSurface(@NativeType("char const *") ByteBuffer file) {
+        if (CHECKS) {
+            checkNT1(file);
+        }
+        long __result = nSDL_LoadSurface(memAddress(file));
+        return SDL_Surface.createSafe(__result);
+    }
+
+    /** {@code SDL_Surface * SDL_LoadSurface(char const * file)} */
+    @NativeType("SDL_Surface *")
+    public static @Nullable SDL_Surface SDL_LoadSurface(@NativeType("char const *") CharSequence file) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(file, true);
+            long fileEncoded = stack.getPointerAddress();
+            long __result = nSDL_LoadSurface(fileEncoded);
+            return SDL_Surface.createSafe(__result);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ SDL_LoadBMP_IO ] ---
 
     /** {@code SDL_Surface * SDL_LoadBMP_IO(SDL_IOStream * src, bool closeio)} */
@@ -429,6 +489,103 @@ public class SDLSurface {
             stack.nUTF8(file, true);
             long fileEncoded = stack.getPointerAddress();
             return nSDL_SaveBMP(surface.address(), fileEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ SDL_LoadPNG_IO ] ---
+
+    /** {@code SDL_Surface * SDL_LoadPNG_IO(SDL_IOStream * src, bool closeio)} */
+    public static long nSDL_LoadPNG_IO(long src, boolean closeio) {
+        long __functionAddress = Functions.LoadPNG_IO;
+        if (CHECKS) {
+            check(src);
+        }
+        return invokePP(src, closeio, __functionAddress);
+    }
+
+    /** {@code SDL_Surface * SDL_LoadPNG_IO(SDL_IOStream * src, bool closeio)} */
+    @NativeType("SDL_Surface *")
+    public static @Nullable SDL_Surface SDL_LoadPNG_IO(@NativeType("SDL_IOStream *") long src, @NativeType("bool") boolean closeio) {
+        long __result = nSDL_LoadPNG_IO(src, closeio);
+        return SDL_Surface.createSafe(__result);
+    }
+
+    // --- [ SDL_LoadPNG ] ---
+
+    /** {@code SDL_Surface * SDL_LoadPNG(char const * file)} */
+    public static long nSDL_LoadPNG(long file) {
+        long __functionAddress = Functions.LoadPNG;
+        return invokePP(file, __functionAddress);
+    }
+
+    /** {@code SDL_Surface * SDL_LoadPNG(char const * file)} */
+    @NativeType("SDL_Surface *")
+    public static @Nullable SDL_Surface SDL_LoadPNG(@NativeType("char const *") ByteBuffer file) {
+        if (CHECKS) {
+            checkNT1(file);
+        }
+        long __result = nSDL_LoadPNG(memAddress(file));
+        return SDL_Surface.createSafe(__result);
+    }
+
+    /** {@code SDL_Surface * SDL_LoadPNG(char const * file)} */
+    @NativeType("SDL_Surface *")
+    public static @Nullable SDL_Surface SDL_LoadPNG(@NativeType("char const *") CharSequence file) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(file, true);
+            long fileEncoded = stack.getPointerAddress();
+            long __result = nSDL_LoadPNG(fileEncoded);
+            return SDL_Surface.createSafe(__result);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ SDL_SavePNG_IO ] ---
+
+    /** {@code bool SDL_SavePNG_IO(SDL_Surface * surface, SDL_IOStream * dst, bool closeio)} */
+    public static boolean nSDL_SavePNG_IO(long surface, long dst, boolean closeio) {
+        long __functionAddress = Functions.SavePNG_IO;
+        if (CHECKS) {
+            check(dst);
+        }
+        return invokePPZ(surface, dst, closeio, __functionAddress);
+    }
+
+    /** {@code bool SDL_SavePNG_IO(SDL_Surface * surface, SDL_IOStream * dst, bool closeio)} */
+    @NativeType("bool")
+    public static boolean SDL_SavePNG_IO(@NativeType("SDL_Surface *") SDL_Surface surface, @NativeType("SDL_IOStream *") long dst, @NativeType("bool") boolean closeio) {
+        return nSDL_SavePNG_IO(surface.address(), dst, closeio);
+    }
+
+    // --- [ SDL_SavePNG ] ---
+
+    /** {@code bool SDL_SavePNG(SDL_Surface * surface, char const * file)} */
+    public static boolean nSDL_SavePNG(long surface, long file) {
+        long __functionAddress = Functions.SavePNG;
+        return invokePPZ(surface, file, __functionAddress);
+    }
+
+    /** {@code bool SDL_SavePNG(SDL_Surface * surface, char const * file)} */
+    @NativeType("bool")
+    public static boolean SDL_SavePNG(@NativeType("SDL_Surface *") SDL_Surface surface, @NativeType("char const *") ByteBuffer file) {
+        if (CHECKS) {
+            checkNT1(file);
+        }
+        return nSDL_SavePNG(surface.address(), memAddress(file));
+    }
+
+    /** {@code bool SDL_SavePNG(SDL_Surface * surface, char const * file)} */
+    @NativeType("bool")
+    public static boolean SDL_SavePNG(@NativeType("SDL_Surface *") SDL_Surface surface, @NativeType("char const *") CharSequence file) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(file, true);
+            long fileEncoded = stack.getPointerAddress();
+            return nSDL_SavePNG(surface.address(), fileEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -642,6 +799,21 @@ public class SDLSurface {
     @NativeType("bool")
     public static boolean SDL_FlipSurface(@NativeType("SDL_Surface *") SDL_Surface surface, @NativeType("SDL_FlipMode") int flip) {
         return nSDL_FlipSurface(surface.address(), flip);
+    }
+
+    // --- [ SDL_RotateSurface ] ---
+
+    /** {@code SDL_Surface * SDL_RotateSurface(SDL_Surface * surface, float angle)} */
+    public static long nSDL_RotateSurface(long surface, float angle) {
+        long __functionAddress = Functions.RotateSurface;
+        return invokePP(surface, angle, __functionAddress);
+    }
+
+    /** {@code SDL_Surface * SDL_RotateSurface(SDL_Surface * surface, float angle)} */
+    @NativeType("SDL_Surface *")
+    public static @Nullable SDL_Surface SDL_RotateSurface(@NativeType("SDL_Surface *") SDL_Surface surface, float angle) {
+        long __result = nSDL_RotateSurface(surface.address(), angle);
+        return SDL_Surface.createSafe(__result);
     }
 
     // --- [ SDL_DuplicateSurface ] ---

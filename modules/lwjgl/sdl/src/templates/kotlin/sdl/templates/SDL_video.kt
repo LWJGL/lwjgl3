@@ -46,6 +46,7 @@ val SDL_video = "SDLVideo".nativeClassSDL("SDL_video") {
         "WINDOW_TOOLTIP"              .."0x0000000000040000L",
         "WINDOW_POPUP_MENU"           .."0x0000000000080000L",
         "WINDOW_KEYBOARD_GRABBED"     .."0x0000000000100000L",
+        "WINDOW_FILL_DOCUMENT"        .."0x0000000000200000L",
         "WINDOW_VULKAN"               .."0x0000000010000000L",
         "WINDOW_METAL"                .."0x0000000020000000L",
         "WINDOW_TRANSPARENT"          .."0x0000000040000000L",
@@ -63,6 +64,15 @@ val SDL_video = "SDLVideo".nativeClassSDL("SDL_video") {
         "FLASH_CANCEL".enum("0"),
         "FLASH_BRIEFLY".enum,
         "FLASH_UNTIL_FOCUSED".enum
+    )
+
+    EnumConstant(
+        "PROGRESS_STATE_INVALID".enum("-1"),
+        "PROGRESS_STATE_NONE".enum,
+        "PROGRESS_STATE_INDETERMINATE".enum,
+        "PROGRESS_STATE_NORMAL".enum,
+        "PROGRESS_STATE_PAUSED".enum,
+        "PROGRESS_STATE_ERROR".enum
     )
 
     EnumConstant(
@@ -121,7 +131,9 @@ val SDL_video = "SDLVideo".nativeClassSDL("SDL_video") {
 
     StringConstant(
         "PROP_DISPLAY_HDR_ENABLED_BOOLEAN".."SDL.display.HDR_enabled",
-        "PROP_DISPLAY_KMSDRM_PANEL_ORIENTATION_NUMBER".."SDL.display.KMSDRM.panel_orientation"
+        "PROP_DISPLAY_KMSDRM_PANEL_ORIENTATION_NUMBER".."SDL.display.KMSDRM.panel_orientation",
+        "PROP_DISPLAY_WAYLAND_WL_OUTPUT_POINTER".."SDL.display.wayland.wl_output",
+        "PROP_DISPLAY_WINDOWS_HMONITOR_POINTER".."SDL.display.windows.hmonitor",
     )
 
     StringConstant(
@@ -154,12 +166,15 @@ val SDL_video = "SDLVideo".nativeClassSDL("SDL_video") {
         "PROP_WINDOW_CREATE_Y_NUMBER".."SDL.window.create.y",
         "PROP_WINDOW_CREATE_COCOA_WINDOW_POINTER".."SDL.window.create.cocoa.window",
         "PROP_WINDOW_CREATE_COCOA_VIEW_POINTER".."SDL.window.create.cocoa.view",
+        "PROP_WINDOW_CREATE_WINDOWSCENE_POINTER".."SDL.window.create.uikit.windowscene",
         "PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN".."SDL.window.create.wayland.surface_role_custom",
         "PROP_WINDOW_CREATE_WAYLAND_CREATE_EGL_WINDOW_BOOLEAN".."SDL.window.create.wayland.create_egl_window",
         "PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER".."SDL.window.create.wayland.wl_surface",
         "PROP_WINDOW_CREATE_WIN32_HWND_POINTER".."SDL.window.create.win32.hwnd",
         "PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER".."SDL.window.create.win32.pixel_format_hwnd",
-        "PROP_WINDOW_CREATE_X11_WINDOW_NUMBER".."SDL.window.create.x11.window"
+        "PROP_WINDOW_CREATE_X11_WINDOW_NUMBER".."SDL.window.create.x11.window",
+        "PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID_STRING".."SDL.window.create.emscripten.canvas_id",
+        "PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING".."SDL.window.create.emscripten.keyboard_element",
     )
 
     StringConstant(
@@ -179,7 +194,7 @@ val SDL_video = "SDLVideo".nativeClassSDL("SDL_video") {
         "PROP_WINDOW_KMSDRM_GBM_DEVICE_POINTER".."SDL.window.kmsdrm.gbm_dev",
         "PROP_WINDOW_COCOA_WINDOW_POINTER".."SDL.window.cocoa.window",
         "PROP_WINDOW_COCOA_METAL_VIEW_TAG_NUMBER".."SDL.window.cocoa.metal_view_tag",
-        "PROP_WINDOW_OPENVR_OVERLAY_ID".."SDL.window.openvr.overlay_id",
+        "PROP_WINDOW_OPENVR_OVERLAY_ID_NUMBER".."SDL.window.openvr.overlay_id",
         "PROP_WINDOW_VIVANTE_DISPLAY_POINTER".."SDL.window.vivante.display",
         "PROP_WINDOW_VIVANTE_WINDOW_POINTER".."SDL.window.vivante.window",
         "PROP_WINDOW_VIVANTE_SURFACE_POINTER".."SDL.window.vivante.surface",
@@ -197,7 +212,9 @@ val SDL_video = "SDLVideo".nativeClassSDL("SDL_video") {
         "PROP_WINDOW_WAYLAND_XDG_POSITIONER_POINTER".."SDL.window.wayland.xdg_positioner",
         "PROP_WINDOW_X11_DISPLAY_POINTER".."SDL.window.x11.display",
         "PROP_WINDOW_X11_SCREEN_NUMBER".."SDL.window.x11.screen",
-        "PROP_WINDOW_X11_WINDOW_NUMBER".."SDL.window.x11.window"
+        "PROP_WINDOW_X11_WINDOW_NUMBER".."SDL.window.x11.window",
+        "PROP_WINDOW_EMSCRIPTEN_CANVAS_ID_STRING".."SDL.window.emscripten.canvas_id",
+        "PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING".."SDL.window.emscripten.keyboard_element",
     )
 
     IntConstant(
@@ -487,6 +504,7 @@ val SDL_video = "SDLVideo".nativeClassSDL("SDL_video") {
     bool("SetWindowBordered", SDL_Window.p("window"), bool("bordered"))
     bool("SetWindowResizable", SDL_Window.p("window"), bool("resizable"))
     bool("SetWindowAlwaysOnTop", SDL_Window.p("window"), bool("on_top"))
+    bool("SetWindowFillDocument", SDL_Window.p("window"), bool("fill"))
 
     bool("ShowWindow", SDL_Window.p("window"))
     bool("HideWindow", SDL_Window.p("window"))
@@ -637,6 +655,32 @@ val SDL_video = "SDLVideo".nativeClassSDL("SDL_video") {
 
         SDL_Window.p("window"),
         SDL_FlashOperation("operation")
+    )
+
+    bool(
+        "SetWindowProgressState",
+
+        SDL_Window.p("window"),
+        SDL_ProgressState("state")
+    )
+
+    SDL_ProgressState(
+        "GetWindowProgressState",
+
+        SDL_Window.p("window")
+    )
+
+    bool(
+        "SetWindowProgressValue",
+
+        SDL_Window.p("window"),
+        float("value")
+    )
+
+    float(
+        "GetWindowProgressValue",
+
+        SDL_Window.p("window")
     )
 
     void(

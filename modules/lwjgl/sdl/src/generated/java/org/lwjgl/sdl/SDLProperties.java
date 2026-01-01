@@ -58,6 +58,8 @@ public class SDLProperties {
         SDL_PROPERTY_TYPE_FLOAT   = 0x4,
         SDL_PROPERTY_TYPE_BOOLEAN = 0x5;
 
+    public static final String SDL_PROP_NAME_STRING = "SDL.name";
+
     protected SDLProperties() {
         throw new UnsupportedOperationException();
     }

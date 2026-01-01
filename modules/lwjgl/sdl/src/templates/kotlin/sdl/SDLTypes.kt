@@ -88,170 +88,25 @@ val SDL_CompareCallback_r = Module.SDL.callback {
     )
 }
 
-// SDL_gamepad.h (early definitions)
-val SDL_Gamepad = "SDL_Gamepad".opaque
+// EARLY DEFINITIONS
 
-val SDL_GamepadAxis = "SDL_GamepadAxis".enumType
-val SDL_GamepadBindingType = "SDL_GamepadBindingType".enumType
-val SDL_GamepadButton = "SDL_GamepadButton".enumType
-val SDL_GamepadButtonLabel = "SDL_GamepadButtonLabel".enumType
-val SDL_GamepadType = "SDL_GamepadType".enumType
+// SDL_properties.h
+val SDL_PropertiesID = typedef(Uint32, "SDL_PropertiesID")
 
-// SDL_guid.h (early definitions)
-val SDL_GUID = struct(Module.SDL, "SDL_GUID") {
-    Uint8("data")[16]
-}
-
-// SDL_joystick.h (early definitions)
-val SDL_Joystick = "SDL_Joystick".opaque
-val SDL_JoystickID = typedef(Uint32, "SDL_JoystickID")
-
-val SDL_JoystickConnectionState = "SDL_JoystickConnectionState".enumType
-val SDL_JoystickType = "SDL_JoystickType".enumType
-
-// SDL_keyboard.h (early definitions)
-val SDL_KeyboardID = typedef(Uint32, "SDL_KeyboardID")
-
-val SDL_Capitalization = "SDL_Capitalization".enumType
-val SDL_TextInputType = "SDL_TextInputType".enumType
-
-// SDL_keycode.h (early definitions)
-val SDL_Keycode = typedef(Uint32, "SDL_Keycode")
-val SDL_Keymod = typedef(Uint16, "SDL_Keymod")
-
-// SDL_pixels.h (early definitions)
-val SDL_ArrayOrder = "SDL_ArrayOrder".enumType
-val SDL_BitmapOrder = "SDL_BitmapOrder".enumType
-val SDL_ChromaLocation = "SDL_ChromaLocation".enumType
-val SDL_ColorPrimaries = "SDL_ColorPrimaries".enumType
-val SDL_ColorRange = "SDL_ColorRange".enumType
-val SDL_ColorType = "SDL_ColorType".enumType
+// SDL_pixels.h
 val SDL_Colorspace = "SDL_Colorspace".enumType
-val SDL_MatrixCoefficients = "SDL_MatrixCoefficients".enumType
-val SDL_PackedLayout = "SDL_PackedLayout".enumType
-val SDL_PackedOrder = "SDL_PackedOrder".enumType
 val SDL_PixelFormat = "SDL_PixelFormat".enumType
-val SDL_PixelType = "SDL_PixelType".enumType
-val SDL_TransferCharacteristics = "SDL_TransferCharacteristics".enumType
 
-val SDL_Color = struct(Module.SDL, "SDL_Color") {
-    Uint8("r")
-    Uint8("g")
-    Uint8("b")
-    Uint8("a")
-}
+// SDL_surface.h
+val SDL_FlipMode = "SDL_FlipMode".enumType
 
-val SDL_FColor = struct(Module.SDL, "SDL_FColor") {
-    float("r")
-    float("g")
-    float("b")
-    float("a")
-}
-
-val SDL_Palette = struct(Module.SDL, "SDL_Palette", mutable = false) {
-    AutoSize("colors")..int("ncolors")
-    SDL_Color.p("colors")
-    Uint32("version").private()
-    int("refcount").private()
-}
-
-val SDL_PixelFormatDetails = struct(Module.SDL, "SDL_PixelFormatDetails", mutable = false) {
-    SDL_PixelFormat("format")
-    Uint8("bits_per_pixel")
-    Uint8("bytes_per_pixel")
-    Uint8("padding")[2].private()
-    Uint32("Rmask")
-    Uint32("Gmask")
-    Uint32("Bmask")
-    Uint32("Amask")
-    Uint8("Rbits")
-    Uint8("Gbits")
-    Uint8("Bbits")
-    Uint8("Abits")
-    Uint8("Rshift")
-    Uint8("Gshift")
-    Uint8("Bshift")
-    Uint8("Ashift")
-}
-
-// SDL_power.h (early definitions)
-val SDL_PowerState = "SDL_PowerState".enumType
-
-// SDL_rect.h (early definitions)
-val SDL_Point = struct(Module.SDL, "SDL_Point") {
-    int("x")
-    int("y")
-}
-
-val SDL_FPoint = struct(Module.SDL, "SDL_FPoint") {
-    float("x")
-    float("y")
-}
-
-val SDL_Rect = struct(Module.SDL, "SDL_Rect") {
-    int("x")
-    int("y")
-    int("w")
-    int("h")
-}
-
-val SDL_FRect = struct(Module.SDL, "SDL_FRect") {
-    float("x")
-    float("y")
-    float("w")
-    float("h")
-}
-
-// SDL_scancode.h (early definitions)
-val SDL_Scancode = "SDL_Scancode".enumType
-
-// SDL_sensor.h (early definitions)
-val SDL_Sensor = "SDL_Sensor".opaque
-val SDL_SensorID = typedef(Uint32, "SDL_SensorID")
-
+// SDL_sensor.h
 val SDL_SensorType = "SDL_SensorType".enumType
 
-// SDL_surface.h (early definitions)
-val SDL_SurfaceFlags = typedef(Uint32, "SDL_SurfaceFlags")
-
-val SDL_FlipMode = "SDL_FlipMode".enumType
-val SDL_ScaleMode = "SDL_ScaleMode".enumType
-
-// TODO: mutable?
-val SDL_Surface = struct(Module.SDL, "SDL_Surface") {
-    SDL_SurfaceFlags("flags")
-    SDL_PixelFormat("format")
-    int("w")
-    int("h")
-    int("pitch")
-    Check("pitch * h")..nullable..void.p("pixels")
-    int("refcount")
-    nullable..opaque_p("reserved").private()
-}
-
-// SDL_video.h (early definitions)
-val SDL_EGLConfig = "SDL_EGLConfig".handle
-val SDL_EGLDisplay = "SDL_EGLDisplay".handle
-val SDL_EGLSurface = "SDL_EGLSurface".handle
-val SDL_GLContext = "SDL_GLContext".handle
-
-val SDL_DisplayID = typedef(Uint32, "SDL_DisplayID")
-val SDL_DisplayModeData = "SDL_DisplayModeData".opaque
-val SDL_EGLAttrib = typedef(intptr_t, "SDL_EGLAttrib")
-val SDL_EGLint = typedef(int, "SDL_EGLint")
-val SDL_GLContextFlag = typedef(Uint32, "SDL_GLContextFlag")
-val SDL_GLContextReleaseFlag = typedef(Uint32, "SDL_GLContextReleaseFlag")
-val SDL_GLContextResetNotification = typedef(Uint32, "SDL_GLContextResetNotification")
-val SDL_GLProfile = typedef(Uint32, "SDL_GLProfile")
+// SDL_video.h
 val SDL_Window = "SDL_Window".opaque
-val SDL_WindowFlags = typedef(Uint64, "SDL_WindowFlags")
-val SDL_WindowID = typedef(Uint32, "SDL_WindowID")
 
-val SDL_DisplayOrientation = "SDL_DisplayOrientation".enumType
-val SDL_FlashOperation = "SDL_FlashOperation".enumType
-val SDL_GLAttr = "SDL_GLAttr".enumType
-val SDL_HitTestResult = "SDL_HitTestResult".enumType
-val SDL_SystemTheme = "SDL_SystemTheme".enumType
+// ALPHABETICAL DEFINITIONS BELOW
 
 // SDL_asyncio.h
 val SDL_AsyncIO = "SDL_AsyncIO".opaque
@@ -309,6 +164,18 @@ val SDL_AudioPostmixCallback = Module.SDL.callback {
     )
 }
 
+val SDL_AudioStreamDataCompleteCallback = Module.SDL.callback {
+    void(
+        "SDL_AudioStreamDataCompleteCallback",
+
+        nullable..opaque_p("userdata"),
+        void.const.p("buf"),
+        AutoSize("buf")..int("buflen"),
+
+        nativeType = "SDL_AudioStreamDataCompleteCallback"
+    )
+}
+
 // SDL_blendmode.h
 val SDL_BlendMode = typedef(Uint32, "SDL_BlendMode")
 
@@ -319,6 +186,7 @@ val SDL_BlendOperation = "SDL_BlendOperation".enumType
 val SDL_Camera = "SDL_Camera".opaque
 val SDL_CameraID = typedef(Uint32, "SDL_CameraID")
 
+val SDL_CameraPermissionState = "SDL_CameraPermissionState".enumType
 val SDL_CameraPosition = "SDL_CameraPosition".enumType
 
 val SDL_CameraSpec = struct(Module.SDL, "SDL_CameraSpec") {
@@ -351,67 +219,6 @@ val SDL_ClipboardCleanupCallback = Module.SDL.callback {
 
         nativeType = "SDL_ClipboardCleanupCallback"
     )
-}
-
-// SDL_iostream.h
-val SDL_IOStream = "SDL_IOStream".opaque
-
-val SDL_IOStatus = "SDL_IOStatus".enumType
-val SDL_IOWhence = "SDL_IOWhence".enumType
-
-val SDL_IOStreamInterface = struct(Module.SDL, "SDL_IOStreamInterface") {
-    Uint32("version")
-    Module.SDL.callback {
-        Sint64(
-            "SDL_IOStreamInterfaceSizeCallback",
-
-            nullable..opaque_p("userdata")
-        ) {}
-    }("size")
-    Module.SDL.callback {
-        Sint64(
-            "SDL_IOStreamInterfaceSeekCallback",
-
-            nullable..opaque_p("userdata"),
-            Sint64("offset"),
-            SDL_IOWhence("whence")
-        ) {}
-    }("seek")
-    Module.SDL.callback {
-        size_t(
-            "SDL_IOStreamInterfaceReadCallback",
-
-            nullable..opaque_p("userdata"),
-            void.p("ptr"),
-            AutoSize("ptr")..size_t("size"),
-            SDL_IOStatus.p("status")
-        ) {}
-    }("read")
-    Module.SDL.callback {
-        size_t(
-            "SDL_IOStreamInterfaceWriteCallback",
-
-            nullable..opaque_p("userdata"),
-            void.const.p("ptr"),
-            AutoSize("ptr")..size_t("size"),
-            SDL_IOStatus.p("status")
-        ) {}
-    }("write")
-    Module.SDL.callback {
-        bool(
-            "SDL_IOStreamInterfaceFlushCallback",
-
-            nullable..opaque_p("userdata"),
-            SDL_IOStatus.p("status")
-        ) {}
-    }("flush")
-    Module.SDL.callback {
-        bool(
-            "SDL_IOStreamInterfaceCloseCallback",
-
-            nullable..opaque_p("userdata")
-        ) {}
-    }("close")
 }
 
 // SDL_dialog.h
@@ -462,6 +269,14 @@ val SDL_EnumerateDirectoryCallback = Module.SDL.callback {
 }
 
 // SDL_gamepad.h
+val SDL_Gamepad = "SDL_Gamepad".opaque
+
+val SDL_GamepadAxis = "SDL_GamepadAxis".enumType
+val SDL_GamepadBindingType = "SDL_GamepadBindingType".enumType
+val SDL_GamepadButton = "SDL_GamepadButton".enumType
+val SDL_GamepadButtonLabel = "SDL_GamepadButtonLabel".enumType
+val SDL_GamepadType = "SDL_GamepadType".enumType
+
 val SDL_GamepadBinding = struct(Module.SDL, "SDL_GamepadBinding") {
     SDL_GamepadBindingType("input_type")
     union {
@@ -487,741 +302,7 @@ val SDL_GamepadBinding = struct(Module.SDL, "SDL_GamepadBinding") {
     }("output")
 }
 
-// SDL_haptic.h
-val SDL_Haptic = "SDL_Haptic".opaque
-val SDL_HapticID = typedef(Uint32, "SDL_HapticID")
-
-val SDL_HapticDirection = struct(Module.SDL, "SDL_HapticDirection") {
-    Uint8("type")
-    Sint32("dir")[3]
-}
-
-val SDL_HapticConstant = struct(Module.SDL, "SDL_HapticConstant") {
-    Uint16("type")
-    SDL_HapticDirection("direction")
-    Uint32("length")
-    Uint16("delay")
-    Uint16("button")
-    Uint16("interval")
-    Sint16("level")
-    Uint16("attack_length")
-    Uint16("attack_level")
-    Uint16("fade_length")
-    Uint16("fade_level")
-}
-
-val SDL_HapticPeriodic = struct(Module.SDL, "SDL_HapticPeriodic") {
-    Uint16("type")
-    SDL_HapticDirection("direction")
-    Uint32("length")
-    Uint16("delay")
-    Uint16("button")
-    Uint16("interval")
-    Uint16("period")
-    Sint16("magnitude")
-    Sint16("offset")
-    Uint16("phase")
-    Uint16("attack_length")
-    Uint16("attack_level")
-    Uint16("fade_length")
-    Uint16("fade_level")
-}
-
-val SDL_HapticCondition = struct(Module.SDL, "SDL_HapticCondition") {
-    Uint16("type")
-    SDL_HapticDirection("direction")
-    Uint32("length")
-    Uint16("delay")
-    Uint16("button")
-    Uint16("interval")
-    Uint16("right_sat")[3]
-    Uint16("left_sat")[3]
-    Sint16("right_coeff")[3]
-    Sint16("left_coeff")[3]
-    Uint16("deadband")[3]
-    Sint16("center")[3]
-}
-
-val SDL_HapticRamp = struct(Module.SDL, "SDL_HapticRamp") {
-    Uint16("type")
-    SDL_HapticDirection("direction")
-    Uint32("length")
-    Uint16("delay")
-    Uint16("button")
-    Uint16("interval")
-    Sint16("start")
-    Sint16("end")
-    Uint16("attack_length")
-    Uint16("attack_level")
-    Uint16("fade_length")
-    Uint16("fade_level")
-}
-
-val SDL_HapticLeftRight = struct(Module.SDL, "SDL_HapticLeftRight") {
-    Uint16("type")
-    Uint32("length")
-    Uint16("large_magnitude")
-    Uint16("small_magnitude")
-}
-
-val SDL_HapticCustom = struct(Module.SDL, "SDL_HapticCustom") {
-    Uint16("type")
-    SDL_HapticDirection("direction")
-    Uint32("length")
-    Uint16("delay")
-    Uint16("button")
-    Uint16("interval")
-    Uint8("channels")
-    Uint16("period")
-    Uint16("samples")
-    Check("channels * samples")..Uint16.p("data")
-    Uint16("attack_length")
-    Uint16("attack_level")
-    Uint16("fade_length")
-    Uint16("fade_level")
-}
-
-val SDL_HapticEffect = union(Module.SDL, "SDL_HapticEffect") {
-    Uint16("type")
-    SDL_HapticConstant("constant")
-    SDL_HapticPeriodic("periodic")
-    SDL_HapticCondition("condition")
-    SDL_HapticRamp("ramp")
-    SDL_HapticLeftRight("leftright")
-    SDL_HapticCustom("custom")
-}
-
-// SDL_hidapi.h
-val SDL_hid_device = "SDL_hid_device".opaque
-
-val SDL_hid_bus_type = "SDL_hid_bus_type".enumType
-
-val SDL_hid_device_info = struct(Module.SDL, "SDL_hid_device_info") {
-    charUTF8.p("path")
-    unsigned_short("vendor_id")
-    unsigned_short("product_id")
-    wchar_t.p("serial_number")
-    unsigned_short("release_number")
-    wchar_t.p("manufacturer_string")
-    wchar_t.p("product_string")
-    unsigned_short("usage_page")
-    unsigned_short("usage")
-    int("interface_number")
-    int("interface_class")
-    int("interface_subclass")
-    int("interface_protocol")
-    SDL_hid_bus_type("bus_type")
-    struct(Module.SDL, "SDL_hid_device_info").p("next")
-}
-
-// SDL_hints.h
-val SDL_HintPriority = "SDL_HintPriority".enumType
-
-val SDL_HintCallback = Module.SDL.callback {
-    void(
-        "SDL_HintCallback",
-
-        nullable..opaque_p("userdata"),
-        charASCII.const.p("name"),
-        nullable..charUTF8.const.p("oldValue"),
-        nullable..charUTF8.const.p("newValue"),
-
-        nativeType = "SDL_HintCallback"
-    )
-}
-
-// SDL_init.h, for app callback usage see https://github.com/libsdl-org/SDL/issues/14513 until the official docs are updated
-val SDL_InitFlags = typedef(Uint32, "SDL_InitFlags")
-val SDL_AppResult = "SDL_AppResult".enumType
-
-val SDL_AppInit_func = Module.SDL.callback {
-    SDL_AppResult(
-        "SDL_AppInit_func",
-
-        Check(1)..opaque_p.p("appstate"),
-        AutoSize("argv")..int("argc"),
-        nullable..charUTF8.p.p("argv"),
-
-        nativeType = "SDL_AppInit_func"
-    )
-}
-
-val SDL_AppIterate_func = Module.SDL.callback {
-    SDL_AppResult(
-        "SDL_AppIterate_func",
-
-        nullable..opaque_p("appstate"),
-
-        nativeType = "SDL_AppIterate_func"
-    )
-}
-
-val _SDL_Event = union(Module.SDL, "SDL_Event")
-val SDL_AppEvent_func = Module.SDL.callback {
-    SDL_AppResult(
-        "SDL_AppEvent_func",
-
-        nullable..opaque_p("appstate"),
-        _SDL_Event.p("event"),
-
-        nativeType = "SDL_AppEvent_func"
-    )
-}
-
-val SDL_AppQuit_func = Module.SDL.callback {
-    void(
-        "SDL_AppQuit_func",
-
-        nullable..opaque_p("appstate"),
-        SDL_AppResult("result"),
-
-        nativeType = "SDL_AppQuit_func"
-    )
-}
-
-val SDL_MainThreadCallback = Module.SDL.callback {
-    void(
-        "SDL_MainThreadCallback",
-
-        nullable..opaque_p("userdata"),
-
-        nativeType = "SDL_MainThreadCallback"
-    )
-}
-
-// SDL_joystick.h (continued)
-val SDL_VirtualJoystickTouchpadDesc = struct(Module.SDL, "SDL_VirtualJoystickTouchpadDesc") {
-    Uint16("nfingers")
-    Uint16("padding")[3].private()
-}
-
-val SDL_VirtualJoystickSensorDesc = struct(Module.SDL, "SDL_VirtualJoystickSensorDesc") {
-    SDL_SensorType("type")
-    float("rate")
-}
-
-val SDL_VirtualJoystickDesc = struct(Module.SDL, "SDL_VirtualJoystickDesc") {
-    Uint32("version")
-    Uint16("type")
-    Uint16("padding").private()
-    Uint16("vendor_id")
-    Uint16("product_id")
-    Uint16("naxes")
-    Uint16("nbuttons")
-    Uint16("nballs")
-    Uint16("nhats")
-    AutoSizeMember("touchpads")..Uint16("ntouchpads")
-    AutoSizeMember("sensors")..Uint16("nsensors")
-    Uint16("padding2")[2].private()
-    Uint32("button_mask")
-    Uint32("axis_mask")
-    charUTF8.const.p("name")
-    nullable..SDL_VirtualJoystickTouchpadDesc.const.p("touchpads")
-    nullable..SDL_VirtualJoystickSensorDesc.const.p("sensors")
-    nullable..opaque_p("userdata")
-    nullable..Module.SDL.callback {
-        void(
-            "SDL_VirtualJoystickDescUpdateCallback",
-
-            nullable..opaque_p("userdata")
-        ) {}
-    }("Update")
-    nullable..Module.SDL.callback {
-        void(
-            "SDL_VirtualJoystickDescSetPlayerIndexCallback",
-
-            nullable..opaque_p("userdata"),
-            int("player_index")
-        ) {}
-    }("SetPlayerIndex")
-    nullable..Module.SDL.callback {
-        bool(
-            "SDL_VirtualJoystickDescRumbleCallback",
-
-            nullable..opaque_p("userdata"),
-            Uint16("low_frequency_rumble"),
-            Uint16("high_frequency_rumble")
-        ) {}
-    }("Rumble")
-    nullable..Module.SDL.callback {
-        bool(
-            "SDL_VirtualJoystickDescRumbleTriggersCallback",
-
-            nullable..opaque_p("userdata"),
-            Uint16("left_rumble"),
-            Uint16("right_rumble")
-        ) {}
-    }("RumbleTriggers")
-    nullable..Module.SDL.callback {
-        bool(
-            "SDL_VirtualJoystickDescSetLEDCallback",
-
-            nullable..opaque_p("userdata"),
-            Uint8("red"),
-            Uint8("green"),
-            Uint8("blue")
-        ) {}
-    }("SetLED")
-    nullable..Module.SDL.callback {
-        bool(
-            "SDL_VirtualJoystickDescSendEffectCallback",
-
-            nullable..opaque_p("userdata"),
-            void.const.p("data"),
-            AutoSize("data")..int("size")
-        ) {}
-    }("SendEffect")
-    nullable..Module.SDL.callback {
-        bool(
-            "SDL_VirtualJoystickDescSetSensorsEnabledCallback",
-
-            nullable..opaque_p("userdata"),
-            bool("enabled")
-        ) {}
-    }("SetSensorsEnabled")
-    nullable..Module.SDL.callback {
-        void(
-            "SDL_VirtualJoystickDescCleanupCallback",
-
-            nullable..opaque_p("userdata")
-        ) {}
-    }("Cleanup")
-}
-
-// SDL_loadso.h
-val SDL_SharedObject = "SDL_SharedObject".opaque
-
-// SDL_locale.h
-val SDL_Locale = struct(Module.SDL, "SDL_Locale") {
-    charASCII.const.p("language")
-    nullable..charASCII.const.p("country")
-}
-
-// SDL_log.h
-val SDL_LogCategory = "SDL_LogCategory".enumType
-val SDL_LogPriority = "SDL_LogPriority".enumType
-
-val SDL_LogOutputFunction = Module.SDL.callback {
-    void(
-        "SDL_LogOutputFunction",
-
-        nullable..opaque_p("userdata"),
-        int("category"),
-        SDL_LogPriority("priority"),
-        charUTF8.const.p("message"),
-
-        nativeType = "SDL_LogOutputFunction"
-    )
-}
-
-// SDL_main.h
-val SDL_main_func = Module.SDL.callback {
-    int(
-        "SDL_main_func",
-
-        AutoSize("argv")..int("argc"),
-        char.p.p("argv"),
-
-        nativeType = "SDL_main_func"
-    )
-}
-
-// SDL_messagebox.h
-val SDL_MessageBoxButtonFlags = typedef(Uint32, "SDL_MessageBoxButtonFlags")
-val SDL_MessageBoxFlags = typedef(Uint32, "SDL_MessageBoxFlags")
-
-val SDL_MessageBoxColorType = "SDL_MessageBoxColorType".enumType
-
-val SDL_MessageBoxButtonData = struct(Module.SDL, "SDL_MessageBoxButtonData") {
-    SDL_MessageBoxButtonFlags("flags")
-    int("buttonID")
-    charUTF8.const.p("text")
-}
-
-val SDL_MessageBoxColor = struct(Module.SDL, "SDL_MessageBoxColor") {
-    Uint8("r")
-    Uint8("g")
-    Uint8("b")
-}
-
-val SDL_MessageBoxColorScheme = struct(Module.SDL, "SDL_MessageBoxColorScheme") {
-    SDL_MessageBoxColor("colors")[5]
-}
-
-val SDL_MessageBoxData = struct(Module.SDL, "SDL_MessageBoxData") {
-    SDL_MessageBoxFlags("flags")
-    nullable..SDL_Window.p("window")
-    charUTF8.const.p("title")
-    charUTF8.const.p("message")
-    AutoSize("buttons")..int("numbuttons")
-    SDL_MessageBoxButtonData.const.p("buttons")
-    nullable..SDL_MessageBoxColorScheme.const.p("colorScheme")
-}
-
-// SDL_metal.h
-val SDL_MetalView = "SDL_MetalView".handle
-
-// SDL_mouse.h
-val SDL_Cursor = "SDL_Cursor".opaque
-val SDL_MouseButtonFlags = typedef(Uint32, "SDL_MouseButtonFlags")
-val SDL_MouseID = typedef(Uint32, "SDL_MouseID")
-
-val SDL_MouseWheelDirection = "SDL_MouseWheelDirection".enumType
-val SDL_SystemCursor = "SDL_SystemCursor".enumType
-
-// SDL_pen.h
-val SDL_PenID = typedef(Uint32, "SDL_PenID")
-val SDL_PenInputFlags = typedef(Uint32, "SDL_PenInputFlags")
-
-val SDL_PenAxis = "SDL_PenAxis".enumType
-
-// SDL_properties.h
-val SDL_PropertiesID = typedef(Uint32, "SDL_PropertiesID")
-
-val SDL_PropertyType = "SDL_PropertyType".enumType
-
-val SDL_CleanupPropertyCallback = Module.SDL.callback {
-    void(
-        "SDL_CleanupPropertyCallback",
-
-        nullable..opaque_p("userdata"),
-        opaque_p("value"),
-
-        nativeType = "SDL_CleanupPropertyCallback"
-    )
-}
-
-val SDL_EnumeratePropertiesCallback = Module.SDL.callback {
-    void(
-        "SDL_EnumeratePropertiesCallback",
-
-        nullable..opaque_p("userdata"),
-        SDL_PropertiesID("props"),
-        charASCII.const.p("name"),
-
-        nativeType = "SDL_EnumeratePropertiesCallback"
-    )
-}
-
-// SDL_render.h
-val SDL_Renderer = "SDL_Renderer".opaque
-
-val SDL_RendererLogicalPresentation = "SDL_RendererLogicalPresentation".enumType
-val SDL_TextureAccess = "SDL_TextureAccess".enumType
-
-val SDL_Vertex = struct(Module.SDL, "SDL_Vertex") {
-    SDL_FPoint("position")
-    SDL_FColor("color")
-    SDL_FPoint("tex_coord")
-}
-
-val SDL_Texture = struct(Module.SDL, "SDL_Texture") {
-    SDL_PixelFormat("format")
-    int("w")
-    int("h")
-    int("refcount")
-}
-
-// SDL_storage.h
-val SDL_Storage = "SDL_Storage".opaque
-
-val SDL_StorageInterface = struct(Module.SDL, "SDL_StorageInterface") {
-    Uint32("version")
-    nullable..Module.SDL.callback {
-        bool(
-            "SDL_StorageInterfaceCloseCallback",
-
-            nullable..opaque_p("userdata")
-        ) {}
-    }("close")
-    nullable..Module.SDL.callback {
-        bool(
-            "SDL_StorageInterfaceReadyCallback",
-
-            nullable..opaque_p("userdata")
-        ) {}
-    }("ready")
-    nullable..Module.SDL.callback {
-        bool(
-            "SDL_StorageInterfaceEnumerateCallback",
-
-            nullable..opaque_p("userdata"),
-            charUTF8.const.p("path"),
-            SDL_EnumerateDirectoryCallback("callback"),
-            nullable..opaque_p("callback_userdata")
-        ) {}
-    }("enumerate")
-    nullable..Module.SDL.callback {
-        bool(
-            "SDL_StorageInterfaceInfoCallback",
-
-            nullable..opaque_p("userdata"),
-            charUTF8.const.p("path"),
-            SDL_PathInfo.p("info")
-        ) {}
-    }("info")
-    nullable..Module.SDL.callback {
-        bool(
-            "SDL_StorageInterfaceReadFileCallback",
-
-            nullable..opaque_p("userdata"),
-            charUTF8.const.p("path"),
-            void.p("destination"),
-            AutoSize("destination")..Uint64("length")
-        ) {}
-    }("read_file")
-    nullable..Module.SDL.callback {
-        bool(
-            "SDL_StorageInterfaceWriteFileCallback",
-
-            nullable..opaque_p("userdata"),
-            charUTF8.const.p("path"),
-            void.const.p("source"),
-            AutoSize("source")..Uint64("length")
-        ) {}
-    }("write_file")
-    nullable..Module.SDL.callback {
-        bool(
-            "SDL_StorageInterfaceMkdirCallback",
-
-            nullable..opaque_p("userdata"),
-            charUTF8.const.p("path")
-        ) {}
-    }("mkdir")
-    nullable..Module.SDL.callback {
-        bool(
-            "SDL_StorageInterfaceRemoveCallback",
-
-            nullable..opaque_p("userdata"),
-            charUTF8.const.p("path")
-        ) {}
-    }("remove")
-    nullable..Module.SDL.callback {
-        bool(
-            "SDL_StorageInterfaceRenameCallback",
-
-            nullable..opaque_p("userdata"),
-            charUTF8.const.p("oldpath"),
-            charUTF8.const.p("newpath")
-        ) {}
-    }("rename")
-    nullable..Module.SDL.callback {
-        bool(
-            "SDL_StorageInterfaceCopyCallback",
-
-            nullable..opaque_p("userdata"),
-            charUTF8.const.p("oldpath"),
-            charUTF8.const.p("newpath")
-        ) {}
-    }("copy")
-    nullable..Module.SDL.callback {
-        Uint64(
-            "SDL_StorageInterfaceSpaceRemainingCallback",
-
-            nullable..opaque_p("userdata")
-        ) {}
-    }("space_remaining")
-}
-
-// SDL_system.h
-//val XTaskQueueHandle = "XTaskQueueHandle".handle
-//val XUserHandle = "XUserHandle".handle
-
-val SDL_Sandbox = "SDL_Sandbox".enumType
-
-val SDL_WindowsMessageHook = Module.SDL.callback {
-    bool(
-        "SDL_WindowsMessageHook",
-
-        nullable..opaque_p("userdata"),
-        MSG.p("msg"),
-
-        nativeType = "SDL_WindowsMessageHook"
-    )
-}
-
-val SDL_X11EventHook = Module.SDL.callback {
-    bool(
-        "SDL_X11EventHook",
-
-        nullable..opaque_p("userdata"),
-        XEvent.p("xevent"),
-
-        nativeType = "SDL_X11EventHook"
-    )
-}
-
-/*val SDL_iOSAnimationCallback = Module.SDL.callback {
-    void(
-        "SDL_iOSAnimationCallback",
-
-        nullable..opaque_p("userdata"),
-
-        nativeType = "SDL_iOSAnimationCallback"
-    )
-}*/
-
-/*val SDL_RequestAndroidPermissionCallback = Module.SDL.callback {
-    void(
-        "SDL_RequestAndroidPermissionCallback",
-
-        nullable..opaque_p("userdata"),
-        charUTF8.const.p("permission"),
-        bool("granted"),
-
-        nativeType = "SDL_RequestAndroidPermissionCallback"
-    )
-}*/
-
-// SDL_touch.h
-val SDL_FingerID = typedef(Uint64, "SDL_FingerID")
-val SDL_TouchID = typedef(Uint64, "SDL_TouchID")
-
-val SDL_TouchDeviceType = "SDL_TouchDeviceType".enumType
-
-val SDL_Finger = struct(Module.SDL, "SDL_Finger") {
-    SDL_FingerID("id")
-    float("x")
-    float("y")
-    float("pressure")
-}
-
-// SDL_thread.h
-val SDL_TLSID = typedef(int, "SDL_TLSID")
-//val SDL_Thread = "SDL_Thread".opaque
-//val SDL_ThreadID = typedef(Uint64, "SDL_ThreadID")
-
-//val SDL_ThreadPriority = "SDL_ThreadPriority".enumType
-//val SDL_ThreadState = "SDL_ThreadState".enumType
-
-/*val SDL_ThreadFunction = Module.SDL.callback {
-    int(
-        "SDL_ThreadFunction",
-
-        nullable..opaque_p("data"),
-
-        nativeType = "SDL_ThreadFunction"
-    )
-}*/
-
-val SDL_TLSDestructorCallback = Module.SDL.callback {
-    void(
-        "SDL_TLSDestructorCallback",
-
-        nullable..opaque_p("value"),
-
-        nativeType = "SDL_TLSDestructorCallback"
-    )
-}
-
-// SDL_time.h
-val SDL_DateFormat = "SDL_DateFormat".enumType
-val SDL_TimeFormat = "SDL_TimeFormat".enumType
-
-val SDL_DateTime = struct(Module.SDL, "SDL_DateTime") {
-    int("year")
-    int("month")
-    int("day")
-    int("hour")
-    int("minute")
-    int("second")
-    int("nanosecond")
-    int("day_of_week")
-    int("utc_offset")
-}
-
-// SDL_timer.h
-val SDL_TimerID = typedef(Uint32, "SDL_TimerID")
-
-val SDL_TimerCallback = Module.SDL.callback {
-    Uint32(
-        "SDL_TimerCallback",
-
-        nullable..opaque_p("userdata"),
-        SDL_TimerID("timerID"),
-        Uint32("interval"),
-
-        nativeType = "SDL_TimerCallback"
-    )
-}
-
-val SDL_NSTimerCallback = Module.SDL.callback {
-    Uint64(
-        "SDL_NSTimerCallback",
-
-        nullable..opaque_p("userdata"),
-        SDL_TimerID("timerID"),
-        Uint64("interval"),
-
-        nativeType = "SDL_NSTimerCallback"
-    )
-}
-
-// SDL_tray.h
-val SDL_Tray = "SDL_Tray".opaque
-val SDL_TrayEntry = "SDL_TrayEntry".opaque
-val SDL_TrayEntryFlags = typedef(Uint32, "SDL_TrayEntryFlags")
-val SDL_TrayMenu = "SDL_TrayMenu".opaque
-
-val SDL_TrayCallback = Module.SDL.callback {
-    void(
-        "SDL_TrayCallback",
-
-        nullable..opaque_p("userdata"),
-        SDL_TrayEntry.p("entry"),
-
-        nativeType = "SDL_TrayCallback"
-    )
-}
-
-// SDL_video.h (late definitions)
-val SDL_DisplayMode = struct(Module.SDL, "SDL_DisplayMode") {
-    SDL_DisplayID("displayID")
-    SDL_PixelFormat("format")
-    int("w")
-    int("h")
-    float("pixel_density")
-    float("refresh_rate")
-    int("refresh_rate_numerator")
-    int("refresh_rate_denominator")
-    SDL_DisplayModeData.p("internal")
-}
-
-val SDL_EGLAttribArrayCallback = Module.SDL.callback {
-    SDL_EGLAttrib.p(
-        "SDL_EGLAttribArrayCallback",
-
-        nullable..opaque_p("userdata"),
-
-        nativeType = "SDL_EGLAttribArrayCallback"
-    )
-}
-
-val SDL_EGLIntArrayCallback = Module.SDL.callback {
-    SDL_EGLint.p(
-        "SDL_EGLIntArrayCallback",
-
-        nullable..opaque_p("userdata"),
-        SDL_EGLDisplay("display"),
-        SDL_EGLConfig("config"),
-
-        nativeType = "SDL_EGLIntArrayCallback"
-    )
-}
-
-val SDL_HitTest = Module.SDL.callback {
-    SDL_HitTestResult(
-        "SDL_HitTest",
-
-        SDL_Window.p("win"),
-        SDL_Point.const.p("area"),
-        nullable..opaque_p("data"),
-
-        nativeType = "SDL_HitTest"
-    )
-}
-
-// SDL_gpu.h (keep after video)
+// SDL_gpu.h
 val SDL_GPUBuffer = "SDL_GPUBuffer".opaque
 val SDL_GPUBufferUsageFlags = typedef(Uint32, "SDL_GPUBufferUsageFlags")
 val SDL_GPUColorComponentFlags = typedef(Uint8, "SDL_GPUColorComponentFlags")
@@ -1464,7 +545,7 @@ val SDL_GPUMultisampleState = struct(Module.SDL, "SDL_GPUMultisampleState") {
     SDL_GPUSampleCount("sample_count")
     Uint32("sample_mask")
     bool("enable_mask")
-    Uint8("padding1").private()
+    bool("enable_alpha_to_coverage")
     Uint8("padding2").private()
     Uint8("padding3").private()
 }
@@ -1527,11 +608,12 @@ val SDL_GPUComputePipelineCreateInfo = struct(Module.SDL, "SDL_GPUComputePipelin
     SDL_PropertiesID("props")
 }
 
+val _SDL_FColor = struct(Module.SDL, "SDL_FColor")
 val SDL_GPUColorTargetInfo = struct(Module.SDL, "SDL_GPUColorTargetInfo") {
     SDL_GPUTexture.p("texture")
     Uint32("mip_level")
     Uint32("layer_or_depth_plane")
-    SDL_FColor("clear_color")
+    _SDL_FColor("clear_color")
     SDL_GPULoadOp("load_op")
     SDL_GPUStoreOp("store_op")
     nullable..SDL_GPUTexture.p("resolve_texture")
@@ -1552,15 +634,15 @@ val SDL_GPUDepthStencilTargetInfo = struct(Module.SDL, "SDL_GPUDepthStencilTarge
     SDL_GPUStoreOp("stencil_store_op")
     bool("cycle")
     Uint8("clear_stencil")
-    Uint8("padding1").private()
-    Uint8("padding2").private()
+    Uint8("mip_level")
+    Uint8("layer")
 }
 
 val SDL_GPUBlitInfo = struct(Module.SDL, "SDL_GPUBlitInfo") {
     SDL_GPUBlitRegion("source")
     SDL_GPUBlitRegion("destination")
     SDL_GPULoadOp("load_op")
-    SDL_FColor("clear_color")
+    _SDL_FColor("clear_color")
     SDL_FlipMode("flip_mode")
     SDL_GPUFilter("filter")
     bool("cycle")
@@ -1595,6 +677,995 @@ val SDL_GPUStorageTextureReadWriteBinding = struct(Module.SDL, "SDL_GPUStorageTe
     Uint8("padding1").private()
     Uint8("padding2").private()
     Uint8("padding3").private()
+}
+
+val SDL_GPUVulkanOptions = struct(Module.SDL, "SDL_GPUVulkanOptions") {
+    Uint32("vulkan_api_version")
+    nullable..opaque_p("feature_list")
+    nullable..opaque_p("vulkan_10_physical_device_features")
+    AutoSize("device_extension_names")..Uint32("device_extension_count")
+    nullable..charUTF8.const.p.p("device_extension_names")
+    AutoSize("instance_extension_names")..Uint32("instance_extension_count")
+    nullable..charUTF8.const.p.p("instance_extension_names")
+}
+
+// SDL_guid.h
+val SDL_GUID = struct(Module.SDL, "SDL_GUID") {
+    Uint8("data")[16]
+}
+
+// SDL_haptic.h
+val SDL_Haptic = "SDL_Haptic".opaque
+val SDL_HapticDirectionType =  typedef(Uint8, "SDL_HapticDirectionType")
+val SDL_HapticEffectType = typedef(Uint16, "SDL_HapticEffectType")
+val SDL_HapticEffectID = typedef(int, "SDL_HapticEffectID")
+val SDL_HapticID = typedef(Uint32, "SDL_HapticID")
+
+val SDL_HapticDirection = struct(Module.SDL, "SDL_HapticDirection") {
+    SDL_HapticDirectionType("type")
+    Sint32("dir")[3]
+}
+
+val SDL_HapticConstant = struct(Module.SDL, "SDL_HapticConstant") {
+    SDL_HapticEffectType("type")
+    SDL_HapticDirection("direction")
+    Uint32("length")
+    Uint16("delay")
+    Uint16("button")
+    Uint16("interval")
+    Sint16("level")
+    Uint16("attack_length")
+    Uint16("attack_level")
+    Uint16("fade_length")
+    Uint16("fade_level")
+}
+
+val SDL_HapticPeriodic = struct(Module.SDL, "SDL_HapticPeriodic") {
+    SDL_HapticEffectType("type")
+    SDL_HapticDirection("direction")
+    Uint32("length")
+    Uint16("delay")
+    Uint16("button")
+    Uint16("interval")
+    Uint16("period")
+    Sint16("magnitude")
+    Sint16("offset")
+    Uint16("phase")
+    Uint16("attack_length")
+    Uint16("attack_level")
+    Uint16("fade_length")
+    Uint16("fade_level")
+}
+
+val SDL_HapticCondition = struct(Module.SDL, "SDL_HapticCondition") {
+    SDL_HapticEffectType("type")
+    SDL_HapticDirection("direction")
+    Uint32("length")
+    Uint16("delay")
+    Uint16("button")
+    Uint16("interval")
+    Uint16("right_sat")[3]
+    Uint16("left_sat")[3]
+    Sint16("right_coeff")[3]
+    Sint16("left_coeff")[3]
+    Uint16("deadband")[3]
+    Sint16("center")[3]
+}
+
+val SDL_HapticRamp = struct(Module.SDL, "SDL_HapticRamp") {
+    SDL_HapticEffectType("type")
+    SDL_HapticDirection("direction")
+    Uint32("length")
+    Uint16("delay")
+    Uint16("button")
+    Uint16("interval")
+    Sint16("start")
+    Sint16("end")
+    Uint16("attack_length")
+    Uint16("attack_level")
+    Uint16("fade_length")
+    Uint16("fade_level")
+}
+
+val SDL_HapticLeftRight = struct(Module.SDL, "SDL_HapticLeftRight") {
+    SDL_HapticEffectType("type")
+    Uint32("length")
+    Uint16("large_magnitude")
+    Uint16("small_magnitude")
+}
+
+val SDL_HapticCustom = struct(Module.SDL, "SDL_HapticCustom") {
+    SDL_HapticEffectType("type")
+    SDL_HapticDirection("direction")
+    Uint32("length")
+    Uint16("delay")
+    Uint16("button")
+    Uint16("interval")
+    Uint8("channels")
+    Uint16("period")
+    Uint16("samples")
+    Check("channels * samples")..Uint16.p("data")
+    Uint16("attack_length")
+    Uint16("attack_level")
+    Uint16("fade_length")
+    Uint16("fade_level")
+}
+
+val SDL_HapticEffect = union(Module.SDL, "SDL_HapticEffect") {
+    SDL_HapticEffectType("type")
+    SDL_HapticConstant("constant")
+    SDL_HapticPeriodic("periodic")
+    SDL_HapticCondition("condition")
+    SDL_HapticRamp("ramp")
+    SDL_HapticLeftRight("leftright")
+    SDL_HapticCustom("custom")
+}
+
+// SDL_hidapi.h
+val SDL_hid_device = "SDL_hid_device".opaque
+
+val SDL_hid_bus_type = "SDL_hid_bus_type".enumType
+
+val SDL_hid_device_info = struct(Module.SDL, "SDL_hid_device_info") {
+    charUTF8.p("path")
+    unsigned_short("vendor_id")
+    unsigned_short("product_id")
+    wchar_t.p("serial_number")
+    unsigned_short("release_number")
+    wchar_t.p("manufacturer_string")
+    wchar_t.p("product_string")
+    unsigned_short("usage_page")
+    unsigned_short("usage")
+    int("interface_number")
+    int("interface_class")
+    int("interface_subclass")
+    int("interface_protocol")
+    SDL_hid_bus_type("bus_type")
+    struct(Module.SDL, "SDL_hid_device_info").p("next")
+}
+
+// SDL_hints.h
+val SDL_HintPriority = "SDL_HintPriority".enumType
+
+val SDL_HintCallback = Module.SDL.callback {
+    void(
+        "SDL_HintCallback",
+
+        nullable..opaque_p("userdata"),
+        charASCII.const.p("name"),
+        nullable..charUTF8.const.p("oldValue"),
+        nullable..charUTF8.const.p("newValue"),
+
+        nativeType = "SDL_HintCallback"
+    )
+}
+
+// SDL_init.h, for app callback usage see https://github.com/libsdl-org/SDL/issues/14513 until the official docs are updated
+val SDL_InitFlags = typedef(Uint32, "SDL_InitFlags")
+val SDL_AppResult = "SDL_AppResult".enumType
+
+val SDL_AppInit_func = Module.SDL.callback {
+    SDL_AppResult(
+        "SDL_AppInit_func",
+
+        Check(1)..opaque_p.p("appstate"),
+        AutoSize("argv")..int("argc"),
+        nullable..charUTF8.p.p("argv"),
+
+        nativeType = "SDL_AppInit_func"
+    )
+}
+
+val SDL_AppIterate_func = Module.SDL.callback {
+    SDL_AppResult(
+        "SDL_AppIterate_func",
+
+        nullable..opaque_p("appstate"),
+
+        nativeType = "SDL_AppIterate_func"
+    )
+}
+
+val _SDL_Event = union(Module.SDL, "SDL_Event")
+val SDL_AppEvent_func = Module.SDL.callback {
+    SDL_AppResult(
+        "SDL_AppEvent_func",
+
+        nullable..opaque_p("appstate"),
+        _SDL_Event.p("event"),
+
+        nativeType = "SDL_AppEvent_func"
+    )
+}
+
+val SDL_AppQuit_func = Module.SDL.callback {
+    void(
+        "SDL_AppQuit_func",
+
+        nullable..opaque_p("appstate"),
+        SDL_AppResult("result"),
+
+        nativeType = "SDL_AppQuit_func"
+    )
+}
+
+val SDL_MainThreadCallback = Module.SDL.callback {
+    void(
+        "SDL_MainThreadCallback",
+
+        nullable..opaque_p("userdata"),
+
+        nativeType = "SDL_MainThreadCallback"
+    )
+}
+
+// SDL_iostream.h
+val SDL_IOStream = "SDL_IOStream".opaque
+
+val SDL_IOStatus = "SDL_IOStatus".enumType
+val SDL_IOWhence = "SDL_IOWhence".enumType
+
+val SDL_IOStreamInterface = struct(Module.SDL, "SDL_IOStreamInterface") {
+    Uint32("version")
+    Module.SDL.callback {
+        Sint64(
+            "SDL_IOStreamInterfaceSizeCallback",
+
+            nullable..opaque_p("userdata")
+        ) {}
+    }("size")
+    Module.SDL.callback {
+        Sint64(
+            "SDL_IOStreamInterfaceSeekCallback",
+
+            nullable..opaque_p("userdata"),
+            Sint64("offset"),
+            SDL_IOWhence("whence")
+        ) {}
+    }("seek")
+    Module.SDL.callback {
+        size_t(
+            "SDL_IOStreamInterfaceReadCallback",
+
+            nullable..opaque_p("userdata"),
+            void.p("ptr"),
+            AutoSize("ptr")..size_t("size"),
+            SDL_IOStatus.p("status")
+        ) {}
+    }("read")
+    Module.SDL.callback {
+        size_t(
+            "SDL_IOStreamInterfaceWriteCallback",
+
+            nullable..opaque_p("userdata"),
+            void.const.p("ptr"),
+            AutoSize("ptr")..size_t("size"),
+            SDL_IOStatus.p("status")
+        ) {}
+    }("write")
+    Module.SDL.callback {
+        bool(
+            "SDL_IOStreamInterfaceFlushCallback",
+
+            nullable..opaque_p("userdata"),
+            SDL_IOStatus.p("status")
+        ) {}
+    }("flush")
+    Module.SDL.callback {
+        bool(
+            "SDL_IOStreamInterfaceCloseCallback",
+
+            nullable..opaque_p("userdata")
+        ) {}
+    }("close")
+}
+
+// SDL_joystick.h
+val SDL_Joystick = "SDL_Joystick".opaque
+val SDL_JoystickID = typedef(Uint32, "SDL_JoystickID")
+
+val SDL_JoystickConnectionState = "SDL_JoystickConnectionState".enumType
+val SDL_JoystickType = "SDL_JoystickType".enumType
+
+val SDL_VirtualJoystickTouchpadDesc = struct(Module.SDL, "SDL_VirtualJoystickTouchpadDesc") {
+    Uint16("nfingers")
+    Uint16("padding")[3].private()
+}
+
+val SDL_VirtualJoystickSensorDesc = struct(Module.SDL, "SDL_VirtualJoystickSensorDesc") {
+    SDL_SensorType("type")
+    float("rate")
+}
+
+val SDL_VirtualJoystickDesc = struct(Module.SDL, "SDL_VirtualJoystickDesc") {
+    Uint32("version")
+    Uint16("type")
+    Uint16("padding").private()
+    Uint16("vendor_id")
+    Uint16("product_id")
+    Uint16("naxes")
+    Uint16("nbuttons")
+    Uint16("nballs")
+    Uint16("nhats")
+    AutoSizeMember("touchpads")..Uint16("ntouchpads")
+    AutoSizeMember("sensors")..Uint16("nsensors")
+    Uint16("padding2")[2].private()
+    Uint32("button_mask")
+    Uint32("axis_mask")
+    charUTF8.const.p("name")
+    nullable..SDL_VirtualJoystickTouchpadDesc.const.p("touchpads")
+    nullable..SDL_VirtualJoystickSensorDesc.const.p("sensors")
+    nullable..opaque_p("userdata")
+    nullable..Module.SDL.callback {
+        void(
+            "SDL_VirtualJoystickDescUpdateCallback",
+
+            nullable..opaque_p("userdata")
+        ) {}
+    }("Update")
+    nullable..Module.SDL.callback {
+        void(
+            "SDL_VirtualJoystickDescSetPlayerIndexCallback",
+
+            nullable..opaque_p("userdata"),
+            int("player_index")
+        ) {}
+    }("SetPlayerIndex")
+    nullable..Module.SDL.callback {
+        bool(
+            "SDL_VirtualJoystickDescRumbleCallback",
+
+            nullable..opaque_p("userdata"),
+            Uint16("low_frequency_rumble"),
+            Uint16("high_frequency_rumble")
+        ) {}
+    }("Rumble")
+    nullable..Module.SDL.callback {
+        bool(
+            "SDL_VirtualJoystickDescRumbleTriggersCallback",
+
+            nullable..opaque_p("userdata"),
+            Uint16("left_rumble"),
+            Uint16("right_rumble")
+        ) {}
+    }("RumbleTriggers")
+    nullable..Module.SDL.callback {
+        bool(
+            "SDL_VirtualJoystickDescSetLEDCallback",
+
+            nullable..opaque_p("userdata"),
+            Uint8("red"),
+            Uint8("green"),
+            Uint8("blue")
+        ) {}
+    }("SetLED")
+    nullable..Module.SDL.callback {
+        bool(
+            "SDL_VirtualJoystickDescSendEffectCallback",
+
+            nullable..opaque_p("userdata"),
+            void.const.p("data"),
+            AutoSize("data")..int("size")
+        ) {}
+    }("SendEffect")
+    nullable..Module.SDL.callback {
+        bool(
+            "SDL_VirtualJoystickDescSetSensorsEnabledCallback",
+
+            nullable..opaque_p("userdata"),
+            bool("enabled")
+        ) {}
+    }("SetSensorsEnabled")
+    nullable..Module.SDL.callback {
+        void(
+            "SDL_VirtualJoystickDescCleanupCallback",
+
+            nullable..opaque_p("userdata")
+        ) {}
+    }("Cleanup")
+}
+
+// SDL_keyboard.h (early definitions)
+val SDL_KeyboardID = typedef(Uint32, "SDL_KeyboardID")
+
+val SDL_Capitalization = "SDL_Capitalization".enumType
+val SDL_TextInputType = "SDL_TextInputType".enumType
+
+// SDL_keycode.h (early definitions)
+val SDL_Keycode = typedef(Uint32, "SDL_Keycode")
+val SDL_Keymod = typedef(Uint16, "SDL_Keymod")
+
+// SDL_loadso.h
+val SDL_SharedObject = "SDL_SharedObject".opaque
+
+// SDL_locale.h
+val SDL_Locale = struct(Module.SDL, "SDL_Locale") {
+    charASCII.const.p("language")
+    nullable..charASCII.const.p("country")
+}
+
+// SDL_log.h
+val SDL_LogCategory = "SDL_LogCategory".enumType
+val SDL_LogPriority = "SDL_LogPriority".enumType
+
+val SDL_LogOutputFunction = Module.SDL.callback {
+    void(
+        "SDL_LogOutputFunction",
+
+        nullable..opaque_p("userdata"),
+        int("category"),
+        SDL_LogPriority("priority"),
+        charUTF8.const.p("message"),
+
+        nativeType = "SDL_LogOutputFunction"
+    )
+}
+
+// SDL_main.h
+val SDL_main_func = Module.SDL.callback {
+    int(
+        "SDL_main_func",
+
+        AutoSize("argv")..int("argc"),
+        char.p.p("argv"),
+
+        nativeType = "SDL_main_func"
+    )
+}
+
+// SDL_messagebox.h
+val SDL_MessageBoxButtonFlags = typedef(Uint32, "SDL_MessageBoxButtonFlags")
+val SDL_MessageBoxFlags = typedef(Uint32, "SDL_MessageBoxFlags")
+
+val SDL_MessageBoxColorType = "SDL_MessageBoxColorType".enumType
+
+val SDL_MessageBoxButtonData = struct(Module.SDL, "SDL_MessageBoxButtonData") {
+    SDL_MessageBoxButtonFlags("flags")
+    int("buttonID")
+    charUTF8.const.p("text")
+}
+
+val SDL_MessageBoxColor = struct(Module.SDL, "SDL_MessageBoxColor") {
+    Uint8("r")
+    Uint8("g")
+    Uint8("b")
+}
+
+val SDL_MessageBoxColorScheme = struct(Module.SDL, "SDL_MessageBoxColorScheme") {
+    SDL_MessageBoxColor("colors")[5]
+}
+
+val SDL_MessageBoxData = struct(Module.SDL, "SDL_MessageBoxData") {
+    SDL_MessageBoxFlags("flags")
+    nullable..SDL_Window.p("window")
+    charUTF8.const.p("title")
+    charUTF8.const.p("message")
+    AutoSize("buttons")..int("numbuttons")
+    SDL_MessageBoxButtonData.const.p("buttons")
+    nullable..SDL_MessageBoxColorScheme.const.p("colorScheme")
+}
+
+// SDL_metal.h
+val SDL_MetalView = "SDL_MetalView".handle
+
+// SDL_mouse.h
+val SDL_Cursor = "SDL_Cursor".opaque
+val SDL_MouseButtonFlags = typedef(Uint32, "SDL_MouseButtonFlags")
+val SDL_MouseID = typedef(Uint32, "SDL_MouseID")
+
+val SDL_MouseWheelDirection = "SDL_MouseWheelDirection".enumType
+val SDL_SystemCursor = "SDL_SystemCursor".enumType
+
+val _SDL_Surface = struct(Module.SDL, "SDL_Surface")
+val SDL_CursorFrameInfo = struct(Module.SDL, "SDL_CursorFrameInfo") {
+    _SDL_Surface.p("surface")
+    Uint32("duration")
+}
+
+val SDL_MouseMotionTransformCallback = Module.SDL.callback {
+    void(
+        "SDL_MouseMotionTransformCallback",
+
+        nullable..opaque_p("userdata"),
+        Uint64("timestamp"),
+        SDL_Window.p("window"),
+        SDL_MouseID("mouseID"),
+        Check(1)..float.p("x"),
+        Check(1)..float.p("y"),
+
+        nativeType = "SDL_MouseMotionTransformCallback"
+    )
+}
+
+// SDL_pen.h
+val SDL_PenID = typedef(Uint32, "SDL_PenID")
+val SDL_PenInputFlags = typedef(Uint32, "SDL_PenInputFlags")
+
+val SDL_PenAxis = "SDL_PenAxis".enumType
+val SDL_PenDeviceType = "SDL_PenDeviceType".enumType
+
+// SDL_pixels.h
+val SDL_ArrayOrder = "SDL_ArrayOrder".enumType
+val SDL_BitmapOrder = "SDL_BitmapOrder".enumType
+val SDL_ChromaLocation = "SDL_ChromaLocation".enumType
+val SDL_ColorPrimaries = "SDL_ColorPrimaries".enumType
+val SDL_ColorRange = "SDL_ColorRange".enumType
+val SDL_ColorType = "SDL_ColorType".enumType
+val SDL_MatrixCoefficients = "SDL_MatrixCoefficients".enumType
+val SDL_PackedLayout = "SDL_PackedLayout".enumType
+val SDL_PackedOrder = "SDL_PackedOrder".enumType
+val SDL_PixelType = "SDL_PixelType".enumType
+val SDL_TransferCharacteristics = "SDL_TransferCharacteristics".enumType
+
+val SDL_Color = struct(Module.SDL, "SDL_Color") {
+    Uint8("r")
+    Uint8("g")
+    Uint8("b")
+    Uint8("a")
+}
+
+val SDL_FColor = struct(Module.SDL, "SDL_FColor") {
+    float("r")
+    float("g")
+    float("b")
+    float("a")
+}
+
+val SDL_Palette = struct(Module.SDL, "SDL_Palette", mutable = false) {
+    AutoSize("colors")..int("ncolors")
+    SDL_Color.p("colors")
+    Uint32("version").private()
+    int("refcount").private()
+}
+
+val SDL_PixelFormatDetails = struct(Module.SDL, "SDL_PixelFormatDetails", mutable = false) {
+    SDL_PixelFormat("format")
+    Uint8("bits_per_pixel")
+    Uint8("bytes_per_pixel")
+    Uint8("padding")[2].private()
+    Uint32("Rmask")
+    Uint32("Gmask")
+    Uint32("Bmask")
+    Uint32("Amask")
+    Uint8("Rbits")
+    Uint8("Gbits")
+    Uint8("Bbits")
+    Uint8("Abits")
+    Uint8("Rshift")
+    Uint8("Gshift")
+    Uint8("Bshift")
+    Uint8("Ashift")
+}
+
+// SDL_properties.h
+val SDL_PropertyType = "SDL_PropertyType".enumType
+
+val SDL_CleanupPropertyCallback = Module.SDL.callback {
+    void(
+        "SDL_CleanupPropertyCallback",
+
+        nullable..opaque_p("userdata"),
+        opaque_p("value"),
+
+        nativeType = "SDL_CleanupPropertyCallback"
+    )
+}
+
+val SDL_EnumeratePropertiesCallback = Module.SDL.callback {
+    void(
+        "SDL_EnumeratePropertiesCallback",
+
+        nullable..opaque_p("userdata"),
+        SDL_PropertiesID("props"),
+        charASCII.const.p("name"),
+
+        nativeType = "SDL_EnumeratePropertiesCallback"
+    )
+}
+
+// SDL_power.h
+val SDL_PowerState = "SDL_PowerState".enumType
+
+// SDL_rect.h (early definitions)
+val SDL_Point = struct(Module.SDL, "SDL_Point") {
+    int("x")
+    int("y")
+}
+
+val SDL_FPoint = struct(Module.SDL, "SDL_FPoint") {
+    float("x")
+    float("y")
+}
+
+val SDL_Rect = struct(Module.SDL, "SDL_Rect") {
+    int("x")
+    int("y")
+    int("w")
+    int("h")
+}
+
+val SDL_FRect = struct(Module.SDL, "SDL_FRect") {
+    float("x")
+    float("y")
+    float("w")
+    float("h")
+}
+
+// SDL_render.h
+val SDL_Renderer = "SDL_Renderer".opaque
+val SDL_GPURenderState = "SDL_GPURenderState".opaque
+
+val SDL_RendererLogicalPresentation = "SDL_RendererLogicalPresentation".enumType
+val SDL_TextureAccess = "SDL_TextureAccess".enumType
+val SDL_TextureAddressMode = "SDL_TextureAddressMode".enumType
+
+val SDL_Vertex = struct(Module.SDL, "SDL_Vertex") {
+    SDL_FPoint("position")
+    SDL_FColor("color")
+    SDL_FPoint("tex_coord")
+}
+
+val SDL_Texture = struct(Module.SDL, "SDL_Texture") {
+    SDL_PixelFormat("format")
+    int("w")
+    int("h")
+    int("refcount")
+}
+
+val SDL_GPURenderStateCreateInfo = struct(Module.SDL, "SDL_GPURenderStateCreateInfo") {
+    SDL_GPUShader.p("fragment_shader")
+    AutoSize("sampler_bindings")..Sint32("num_sampler_bindings")
+    nullable..SDL_GPUTextureSamplerBinding.const.p("sampler_bindings")
+    AutoSize("storage_textures")..Sint32("num_storage_textures")
+    nullable..SDL_GPUTexture.const.p.p("storage_textures")
+    AutoSize("storage_buffers")..Sint32("num_storage_buffers")
+    nullable..SDL_GPUBuffer.const.p.p("storage_buffers")
+    SDL_PropertiesID("props")
+}
+
+// SDL_scancode.h
+val SDL_Scancode = "SDL_Scancode".enumType
+
+// SDL_sensor.h
+val SDL_Sensor = "SDL_Sensor".opaque
+val SDL_SensorID = typedef(Uint32, "SDL_SensorID")
+
+// SDL_storage.h
+val SDL_Storage = "SDL_Storage".opaque
+
+val SDL_StorageInterface = struct(Module.SDL, "SDL_StorageInterface") {
+    Uint32("version")
+    nullable..Module.SDL.callback {
+        bool(
+            "SDL_StorageInterfaceCloseCallback",
+
+            nullable..opaque_p("userdata")
+        ) {}
+    }("close")
+    nullable..Module.SDL.callback {
+        bool(
+            "SDL_StorageInterfaceReadyCallback",
+
+            nullable..opaque_p("userdata")
+        ) {}
+    }("ready")
+    nullable..Module.SDL.callback {
+        bool(
+            "SDL_StorageInterfaceEnumerateCallback",
+
+            nullable..opaque_p("userdata"),
+            charUTF8.const.p("path"),
+            SDL_EnumerateDirectoryCallback("callback"),
+            nullable..opaque_p("callback_userdata")
+        ) {}
+    }("enumerate")
+    nullable..Module.SDL.callback {
+        bool(
+            "SDL_StorageInterfaceInfoCallback",
+
+            nullable..opaque_p("userdata"),
+            charUTF8.const.p("path"),
+            SDL_PathInfo.p("info")
+        ) {}
+    }("info")
+    nullable..Module.SDL.callback {
+        bool(
+            "SDL_StorageInterfaceReadFileCallback",
+
+            nullable..opaque_p("userdata"),
+            charUTF8.const.p("path"),
+            void.p("destination"),
+            AutoSize("destination")..Uint64("length")
+        ) {}
+    }("read_file")
+    nullable..Module.SDL.callback {
+        bool(
+            "SDL_StorageInterfaceWriteFileCallback",
+
+            nullable..opaque_p("userdata"),
+            charUTF8.const.p("path"),
+            void.const.p("source"),
+            AutoSize("source")..Uint64("length")
+        ) {}
+    }("write_file")
+    nullable..Module.SDL.callback {
+        bool(
+            "SDL_StorageInterfaceMkdirCallback",
+
+            nullable..opaque_p("userdata"),
+            charUTF8.const.p("path")
+        ) {}
+    }("mkdir")
+    nullable..Module.SDL.callback {
+        bool(
+            "SDL_StorageInterfaceRemoveCallback",
+
+            nullable..opaque_p("userdata"),
+            charUTF8.const.p("path")
+        ) {}
+    }("remove")
+    nullable..Module.SDL.callback {
+        bool(
+            "SDL_StorageInterfaceRenameCallback",
+
+            nullable..opaque_p("userdata"),
+            charUTF8.const.p("oldpath"),
+            charUTF8.const.p("newpath")
+        ) {}
+    }("rename")
+    nullable..Module.SDL.callback {
+        bool(
+            "SDL_StorageInterfaceCopyCallback",
+
+            nullable..opaque_p("userdata"),
+            charUTF8.const.p("oldpath"),
+            charUTF8.const.p("newpath")
+        ) {}
+    }("copy")
+    nullable..Module.SDL.callback {
+        Uint64(
+            "SDL_StorageInterfaceSpaceRemainingCallback",
+
+            nullable..opaque_p("userdata")
+        ) {}
+    }("space_remaining")
+}
+
+// SDL_surface.h
+val SDL_SurfaceFlags = typedef(Uint32, "SDL_SurfaceFlags")
+
+val SDL_ScaleMode = "SDL_ScaleMode".enumType
+
+val SDL_Surface = struct(Module.SDL, "SDL_Surface") { // TODO: mutable?
+    SDL_SurfaceFlags("flags")
+    SDL_PixelFormat("format")
+    int("w")
+    int("h")
+    int("pitch")
+    Check("pitch * h")..nullable..void.p("pixels")
+    int("refcount")
+    nullable..opaque_p("reserved").private()
+}
+
+// SDL_system.h
+//val XTaskQueueHandle = "XTaskQueueHandle".handle
+//val XUserHandle = "XUserHandle".handle
+
+val SDL_Sandbox = "SDL_Sandbox".enumType
+
+val SDL_WindowsMessageHook = Module.SDL.callback {
+    bool(
+        "SDL_WindowsMessageHook",
+
+        nullable..opaque_p("userdata"),
+        MSG.p("msg"),
+
+        nativeType = "SDL_WindowsMessageHook"
+    )
+}
+
+val SDL_X11EventHook = Module.SDL.callback {
+    bool(
+        "SDL_X11EventHook",
+
+        nullable..opaque_p("userdata"),
+        XEvent.p("xevent"),
+
+        nativeType = "SDL_X11EventHook"
+    )
+}
+
+/*val SDL_iOSAnimationCallback = Module.SDL.callback {
+    void(
+        "SDL_iOSAnimationCallback",
+
+        nullable..opaque_p("userdata"),
+
+        nativeType = "SDL_iOSAnimationCallback"
+    )
+}*/
+
+/*val SDL_RequestAndroidPermissionCallback = Module.SDL.callback {
+    void(
+        "SDL_RequestAndroidPermissionCallback",
+
+        nullable..opaque_p("userdata"),
+        charUTF8.const.p("permission"),
+        bool("granted"),
+
+        nativeType = "SDL_RequestAndroidPermissionCallback"
+    )
+}*/
+
+// SDL_touch.h
+val SDL_FingerID = typedef(Uint64, "SDL_FingerID")
+val SDL_TouchID = typedef(Uint64, "SDL_TouchID")
+
+val SDL_TouchDeviceType = "SDL_TouchDeviceType".enumType
+
+val SDL_Finger = struct(Module.SDL, "SDL_Finger") {
+    SDL_FingerID("id")
+    float("x")
+    float("y")
+    float("pressure")
+}
+
+// SDL_thread.h
+val SDL_TLSID = typedef(int, "SDL_TLSID")
+//val SDL_Thread = "SDL_Thread".opaque
+//val SDL_ThreadID = typedef(Uint64, "SDL_ThreadID")
+
+//val SDL_ThreadPriority = "SDL_ThreadPriority".enumType
+//val SDL_ThreadState = "SDL_ThreadState".enumType
+
+/*val SDL_ThreadFunction = Module.SDL.callback {
+    int(
+        "SDL_ThreadFunction",
+
+        nullable..opaque_p("data"),
+
+        nativeType = "SDL_ThreadFunction"
+    )
+}*/
+
+val SDL_TLSDestructorCallback = Module.SDL.callback {
+    void(
+        "SDL_TLSDestructorCallback",
+
+        nullable..opaque_p("value"),
+
+        nativeType = "SDL_TLSDestructorCallback"
+    )
+}
+
+// SDL_time.h
+val SDL_DateFormat = "SDL_DateFormat".enumType
+val SDL_TimeFormat = "SDL_TimeFormat".enumType
+
+val SDL_DateTime = struct(Module.SDL, "SDL_DateTime") {
+    int("year")
+    int("month")
+    int("day")
+    int("hour")
+    int("minute")
+    int("second")
+    int("nanosecond")
+    int("day_of_week")
+    int("utc_offset")
+}
+
+// SDL_timer.h
+val SDL_TimerID = typedef(Uint32, "SDL_TimerID")
+
+val SDL_TimerCallback = Module.SDL.callback {
+    Uint32(
+        "SDL_TimerCallback",
+
+        nullable..opaque_p("userdata"),
+        SDL_TimerID("timerID"),
+        Uint32("interval"),
+
+        nativeType = "SDL_TimerCallback"
+    )
+}
+
+val SDL_NSTimerCallback = Module.SDL.callback {
+    Uint64(
+        "SDL_NSTimerCallback",
+
+        nullable..opaque_p("userdata"),
+        SDL_TimerID("timerID"),
+        Uint64("interval"),
+
+        nativeType = "SDL_NSTimerCallback"
+    )
+}
+
+// SDL_tray.h
+val SDL_Tray = "SDL_Tray".opaque
+val SDL_TrayEntry = "SDL_TrayEntry".opaque
+val SDL_TrayEntryFlags = typedef(Uint32, "SDL_TrayEntryFlags")
+val SDL_TrayMenu = "SDL_TrayMenu".opaque
+
+val SDL_TrayCallback = Module.SDL.callback {
+    void(
+        "SDL_TrayCallback",
+
+        nullable..opaque_p("userdata"),
+        SDL_TrayEntry.p("entry"),
+
+        nativeType = "SDL_TrayCallback"
+    )
+}
+
+// SDL_video.h
+val SDL_EGLConfig = "SDL_EGLConfig".handle
+val SDL_EGLDisplay = "SDL_EGLDisplay".handle
+val SDL_EGLSurface = "SDL_EGLSurface".handle
+val SDL_GLContext = "SDL_GLContext".handle
+
+val SDL_DisplayID = typedef(Uint32, "SDL_DisplayID")
+val SDL_DisplayModeData = "SDL_DisplayModeData".opaque
+val SDL_EGLAttrib = typedef(intptr_t, "SDL_EGLAttrib")
+val SDL_EGLint = typedef(int, "SDL_EGLint")
+val SDL_GLContextFlag = typedef(Uint32, "SDL_GLContextFlag")
+val SDL_GLContextReleaseFlag = typedef(Uint32, "SDL_GLContextReleaseFlag")
+val SDL_GLContextResetNotification = typedef(Uint32, "SDL_GLContextResetNotification")
+val SDL_GLProfile = typedef(Uint32, "SDL_GLProfile")
+val SDL_WindowFlags = typedef(Uint64, "SDL_WindowFlags")
+val SDL_WindowID = typedef(Uint32, "SDL_WindowID")
+
+val SDL_DisplayOrientation = "SDL_DisplayOrientation".enumType
+val SDL_FlashOperation = "SDL_FlashOperation".enumType
+val SDL_GLAttr = "SDL_GLAttr".enumType
+val SDL_HitTestResult = "SDL_HitTestResult".enumType
+val SDL_ProgressState = "SDL_ProgressState".enumType
+val SDL_SystemTheme = "SDL_SystemTheme".enumType
+
+val SDL_DisplayMode = struct(Module.SDL, "SDL_DisplayMode") {
+    SDL_DisplayID("displayID")
+    SDL_PixelFormat("format")
+    int("w")
+    int("h")
+    float("pixel_density")
+    float("refresh_rate")
+    int("refresh_rate_numerator")
+    int("refresh_rate_denominator")
+    SDL_DisplayModeData.p("internal")
+}
+
+val SDL_EGLAttribArrayCallback = Module.SDL.callback {
+    SDL_EGLAttrib.p(
+        "SDL_EGLAttribArrayCallback",
+
+        nullable..opaque_p("userdata"),
+
+        nativeType = "SDL_EGLAttribArrayCallback"
+    )
+}
+
+val SDL_EGLIntArrayCallback = Module.SDL.callback {
+    SDL_EGLint.p(
+        "SDL_EGLIntArrayCallback",
+
+        nullable..opaque_p("userdata"),
+        SDL_EGLDisplay("display"),
+        SDL_EGLConfig("config"),
+
+        nativeType = "SDL_EGLIntArrayCallback"
+    )
+}
+
+val SDL_HitTest = Module.SDL.callback {
+    SDL_HitTestResult(
+        "SDL_HitTest",
+
+        SDL_Window.p("win"),
+        SDL_Point.const.p("area"),
+        nullable..opaque_p("data"),
+
+        nativeType = "SDL_HitTest"
+    )
 }
 
 // SDL_events.h (last, because it uses types from almost all other headers)
@@ -1883,6 +1954,14 @@ val SDL_TouchFingerEvent = struct(Module.SDL, "SDL_TouchFingerEvent") {
     SDL_WindowID("windowID")
 }
 
+val SDL_PinchFingerEvent = struct(Module.SDL, "SDL_PinchFingerEvent") {
+    SDL_EventType("type")
+    Uint32("reserved").private()
+    Uint64("timestamp")
+    float("scale")
+    SDL_WindowID("windowID")
+}
+
 val SDL_PenProximityEvent = struct(Module.SDL, "SDL_PenProximityEvent") {
     SDL_EventType("type")
     Uint32("reserved").private()
@@ -2017,6 +2096,7 @@ val SDL_Event = union(Module.SDL, "SDL_Event") {
     SDL_QuitEvent("quit")
     SDL_UserEvent("user")
     SDL_TouchFingerEvent("tfinger")
+    SDL_PinchFingerEvent("pinch")
     SDL_PenProximityEvent("pproximity")
     SDL_PenTouchEvent("ptouch")
     SDL_PenMotionEvent("pmotion")

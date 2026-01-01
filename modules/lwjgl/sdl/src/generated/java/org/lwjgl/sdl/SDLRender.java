@@ -28,104 +28,125 @@ public class SDLRender {
 
         /** Function address. */
         public static final long
-            GetNumRenderDrivers              = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetNumRenderDrivers"),
-            GetRenderDriver                  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderDriver"),
-            CreateWindowAndRenderer          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateWindowAndRenderer"),
-            CreateRenderer                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateRenderer"),
-            CreateRendererWithProperties     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateRendererWithProperties"),
-            CreateSoftwareRenderer           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateSoftwareRenderer"),
-            GetRenderer                      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderer"),
-            GetRenderWindow                  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderWindow"),
-            GetRendererName                  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRendererName"),
-            GetRendererProperties            = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRendererProperties"),
-            GetRenderOutputSize              = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderOutputSize"),
-            GetCurrentRenderOutputSize       = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetCurrentRenderOutputSize"),
-            CreateTexture                    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateTexture"),
-            CreateTextureFromSurface         = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateTextureFromSurface"),
-            CreateTextureWithProperties      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateTextureWithProperties"),
-            GetTextureProperties             = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTextureProperties"),
-            GetRendererFromTexture           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRendererFromTexture"),
-            GetTextureSize                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTextureSize"),
-            SetTextureColorMod               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetTextureColorMod"),
-            SetTextureColorModFloat          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetTextureColorModFloat"),
-            GetTextureColorMod               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTextureColorMod"),
-            GetTextureColorModFloat          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTextureColorModFloat"),
-            SetTextureAlphaMod               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetTextureAlphaMod"),
-            SetTextureAlphaModFloat          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetTextureAlphaModFloat"),
-            GetTextureAlphaMod               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTextureAlphaMod"),
-            GetTextureAlphaModFloat          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTextureAlphaModFloat"),
-            SetTextureBlendMode              = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetTextureBlendMode"),
-            GetTextureBlendMode              = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTextureBlendMode"),
-            SetTextureScaleMode              = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetTextureScaleMode"),
-            GetTextureScaleMode              = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTextureScaleMode"),
-            UpdateTexture                    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_UpdateTexture"),
-            UpdateYUVTexture                 = apiGetFunctionAddress(SDL.getLibrary(), "SDL_UpdateYUVTexture"),
-            UpdateNVTexture                  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_UpdateNVTexture"),
-            LockTexture                      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_LockTexture"),
-            LockTextureToSurface             = apiGetFunctionAddress(SDL.getLibrary(), "SDL_LockTextureToSurface"),
-            UnlockTexture                    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_UnlockTexture"),
-            SetRenderTarget                  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRenderTarget"),
-            GetRenderTarget                  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderTarget"),
-            SetRenderLogicalPresentation     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRenderLogicalPresentation"),
-            GetRenderLogicalPresentation     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderLogicalPresentation"),
-            GetRenderLogicalPresentationRect = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderLogicalPresentationRect"),
-            RenderCoordinatesFromWindow      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderCoordinatesFromWindow"),
-            RenderCoordinatesToWindow        = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderCoordinatesToWindow"),
-            ConvertEventToRenderCoordinates  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_ConvertEventToRenderCoordinates"),
-            SetRenderViewport                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRenderViewport"),
-            GetRenderViewport                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderViewport"),
-            RenderViewportSet                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderViewportSet"),
-            GetRenderSafeArea                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderSafeArea"),
-            SetRenderClipRect                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRenderClipRect"),
-            GetRenderClipRect                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderClipRect"),
-            RenderClipEnabled                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderClipEnabled"),
-            SetRenderScale                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRenderScale"),
-            GetRenderScale                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderScale"),
-            SetRenderDrawColor               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRenderDrawColor"),
-            SetRenderDrawColorFloat          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRenderDrawColorFloat"),
-            GetRenderDrawColor               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderDrawColor"),
-            GetRenderDrawColorFloat          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderDrawColorFloat"),
-            SetRenderColorScale              = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRenderColorScale"),
-            GetRenderColorScale              = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderColorScale"),
-            SetRenderDrawBlendMode           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRenderDrawBlendMode"),
-            GetRenderDrawBlendMode           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderDrawBlendMode"),
-            RenderClear                      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderClear"),
-            RenderPoint                      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderPoint"),
-            RenderPoints                     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderPoints"),
-            RenderLine                       = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderLine"),
-            RenderLines                      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderLines"),
-            RenderRect                       = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderRect"),
-            RenderRects                      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderRects"),
-            RenderFillRect                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderFillRect"),
-            RenderFillRects                  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderFillRects"),
-            RenderTexture                    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderTexture"),
-            RenderTextureRotated             = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderTextureRotated"),
-            RenderTextureAffine              = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderTextureAffine"),
-            RenderTextureTiled               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderTextureTiled"),
-            RenderTexture9Grid               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderTexture9Grid"),
-            RenderGeometry                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderGeometry"),
-            RenderGeometryRaw                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderGeometryRaw"),
-            RenderReadPixels                 = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderReadPixels"),
-            RenderPresent                    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderPresent"),
-            DestroyTexture                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_DestroyTexture"),
-            DestroyRenderer                  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_DestroyRenderer"),
-            FlushRenderer                    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_FlushRenderer"),
-            GetRenderMetalLayer              = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderMetalLayer"),
-            GetRenderMetalCommandEncoder     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderMetalCommandEncoder"),
-            AddVulkanRenderSemaphores        = apiGetFunctionAddress(SDL.getLibrary(), "SDL_AddVulkanRenderSemaphores"),
-            SetRenderVSync                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRenderVSync"),
-            GetRenderVSync                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderVSync"),
-            RenderDebugText                  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderDebugText"),
-            RenderDebugTextFormat            = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderDebugTextFormat");
+            GetNumRenderDrivers               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetNumRenderDrivers"),
+            GetRenderDriver                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderDriver"),
+            CreateWindowAndRenderer           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateWindowAndRenderer"),
+            CreateRenderer                    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateRenderer"),
+            CreateRendererWithProperties      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateRendererWithProperties"),
+            CreateGPURenderer                 = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateGPURenderer"),
+            GetGPURendererDevice              = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetGPURendererDevice"),
+            CreateSoftwareRenderer            = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateSoftwareRenderer"),
+            GetRenderer                       = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderer"),
+            GetRenderWindow                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderWindow"),
+            GetRendererName                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRendererName"),
+            GetRendererProperties             = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRendererProperties"),
+            GetRenderOutputSize               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderOutputSize"),
+            GetCurrentRenderOutputSize        = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetCurrentRenderOutputSize"),
+            CreateTexture                     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateTexture"),
+            CreateTextureFromSurface          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateTextureFromSurface"),
+            CreateTextureWithProperties       = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateTextureWithProperties"),
+            GetTextureProperties              = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTextureProperties"),
+            GetRendererFromTexture            = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRendererFromTexture"),
+            GetTextureSize                    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTextureSize"),
+            SetTexturePalette                 = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetTexturePalette"),
+            GetTexturePalette                 = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTexturePalette"),
+            SetTextureColorMod                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetTextureColorMod"),
+            SetTextureColorModFloat           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetTextureColorModFloat"),
+            GetTextureColorMod                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTextureColorMod"),
+            GetTextureColorModFloat           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTextureColorModFloat"),
+            SetTextureAlphaMod                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetTextureAlphaMod"),
+            SetTextureAlphaModFloat           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetTextureAlphaModFloat"),
+            GetTextureAlphaMod                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTextureAlphaMod"),
+            GetTextureAlphaModFloat           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTextureAlphaModFloat"),
+            SetTextureBlendMode               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetTextureBlendMode"),
+            GetTextureBlendMode               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTextureBlendMode"),
+            SetTextureScaleMode               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetTextureScaleMode"),
+            GetTextureScaleMode               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetTextureScaleMode"),
+            UpdateTexture                     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_UpdateTexture"),
+            UpdateYUVTexture                  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_UpdateYUVTexture"),
+            UpdateNVTexture                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_UpdateNVTexture"),
+            LockTexture                       = apiGetFunctionAddress(SDL.getLibrary(), "SDL_LockTexture"),
+            LockTextureToSurface              = apiGetFunctionAddress(SDL.getLibrary(), "SDL_LockTextureToSurface"),
+            UnlockTexture                     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_UnlockTexture"),
+            SetRenderTarget                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRenderTarget"),
+            GetRenderTarget                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderTarget"),
+            SetRenderLogicalPresentation      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRenderLogicalPresentation"),
+            GetRenderLogicalPresentation      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderLogicalPresentation"),
+            GetRenderLogicalPresentationRect  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderLogicalPresentationRect"),
+            RenderCoordinatesFromWindow       = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderCoordinatesFromWindow"),
+            RenderCoordinatesToWindow         = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderCoordinatesToWindow"),
+            ConvertEventToRenderCoordinates   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_ConvertEventToRenderCoordinates"),
+            SetRenderViewport                 = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRenderViewport"),
+            GetRenderViewport                 = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderViewport"),
+            RenderViewportSet                 = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderViewportSet"),
+            GetRenderSafeArea                 = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderSafeArea"),
+            SetRenderClipRect                 = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRenderClipRect"),
+            GetRenderClipRect                 = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderClipRect"),
+            RenderClipEnabled                 = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderClipEnabled"),
+            SetRenderScale                    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRenderScale"),
+            GetRenderScale                    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderScale"),
+            SetRenderDrawColor                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRenderDrawColor"),
+            SetRenderDrawColorFloat           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRenderDrawColorFloat"),
+            GetRenderDrawColor                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderDrawColor"),
+            GetRenderDrawColorFloat           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderDrawColorFloat"),
+            SetRenderColorScale               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRenderColorScale"),
+            GetRenderColorScale               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderColorScale"),
+            SetRenderDrawBlendMode            = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRenderDrawBlendMode"),
+            GetRenderDrawBlendMode            = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderDrawBlendMode"),
+            RenderClear                       = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderClear"),
+            RenderPoint                       = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderPoint"),
+            RenderPoints                      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderPoints"),
+            RenderLine                        = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderLine"),
+            RenderLines                       = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderLines"),
+            RenderRect                        = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderRect"),
+            RenderRects                       = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderRects"),
+            RenderFillRect                    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderFillRect"),
+            RenderFillRects                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderFillRects"),
+            RenderTexture                     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderTexture"),
+            RenderTextureRotated              = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderTextureRotated"),
+            RenderTextureAffine               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderTextureAffine"),
+            RenderTextureTiled                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderTextureTiled"),
+            RenderTexture9Grid                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderTexture9Grid"),
+            RenderTexture9GridTiled           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderTexture9GridTiled"),
+            RenderGeometry                    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderGeometry"),
+            RenderGeometryRaw                 = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderGeometryRaw"),
+            SetRenderTextureAddressMode       = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRenderTextureAddressMode"),
+            GetRenderTextureAddressMode       = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderTextureAddressMode"),
+            RenderReadPixels                  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderReadPixels"),
+            RenderPresent                     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderPresent"),
+            DestroyTexture                    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_DestroyTexture"),
+            DestroyRenderer                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_DestroyRenderer"),
+            FlushRenderer                     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_FlushRenderer"),
+            GetRenderMetalLayer               = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderMetalLayer"),
+            GetRenderMetalCommandEncoder      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderMetalCommandEncoder"),
+            AddVulkanRenderSemaphores         = apiGetFunctionAddress(SDL.getLibrary(), "SDL_AddVulkanRenderSemaphores"),
+            SetRenderVSync                    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetRenderVSync"),
+            GetRenderVSync                    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetRenderVSync"),
+            RenderDebugText                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderDebugText"),
+            RenderDebugTextFormat             = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RenderDebugTextFormat"),
+            SetDefaultTextureScaleMode        = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetDefaultTextureScaleMode"),
+            GetDefaultTextureScaleMode        = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetDefaultTextureScaleMode"),
+            CreateGPURenderState              = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateGPURenderState"),
+            SetGPURenderStateFragmentUniforms = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetGPURenderStateFragmentUniforms"),
+            SetGPURenderState                 = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetGPURenderState"),
+            DestroyGPURenderState             = apiGetFunctionAddress(SDL.getLibrary(), "SDL_DestroyGPURenderState");
 
     }
 
-    public static final String SDL_SOFTWARE_RENDERER = "software";
+    public static final String
+        SDL_SOFTWARE_RENDERER = "software",
+        SDL_GPU_RENDERER      = "gpu";
 
     public static final int
         SDL_TEXTUREACCESS_STATIC    = 0,
         SDL_TEXTUREACCESS_STREAMING = 1,
         SDL_TEXTUREACCESS_TARGET    = 2;
+
+    public static final int
+        SDL_TEXTURE_ADDRESS_INVALID = -1,
+        SDL_TEXTURE_ADDRESS_AUTO    = 0,
+        SDL_TEXTURE_ADDRESS_CLAMP   = 1,
+        SDL_TEXTURE_ADDRESS_WRAP    = 2;
 
     public static final int
         SDL_LOGICAL_PRESENTATION_DISABLED      = 0,
@@ -140,6 +161,10 @@ public class SDLRender {
         SDL_PROP_RENDERER_CREATE_SURFACE_POINTER                           = "SDL.renderer.create.surface",
         SDL_PROP_RENDERER_CREATE_OUTPUT_COLORSPACE_NUMBER                  = "SDL.renderer.create.output_colorspace",
         SDL_PROP_RENDERER_CREATE_PRESENT_VSYNC_NUMBER                      = "SDL.renderer.create.present_vsync",
+        SDL_PROP_RENDERER_CREATE_GPU_DEVICE_POINTER                        = "SDL.renderer.create.gpu.device",
+        SDL_PROP_RENDERER_CREATE_GPU_SHADERS_SPIRV_BOOLEAN                 = "SDL.renderer.create.gpu.shaders_spirv",
+        SDL_PROP_RENDERER_CREATE_GPU_SHADERS_DXIL_BOOLEAN                  = "SDL.renderer.create.gpu.shaders_dxil",
+        SDL_PROP_RENDERER_CREATE_GPU_SHADERS_MSL_BOOLEAN                   = "SDL.renderer.create.gpu.shaders_msl",
         SDL_PROP_RENDERER_CREATE_VULKAN_INSTANCE_POINTER                   = "SDL.renderer.create.vulkan.instance",
         SDL_PROP_RENDERER_CREATE_VULKAN_SURFACE_NUMBER                     = "SDL.renderer.create.vulkan.surface",
         SDL_PROP_RENDERER_CREATE_VULKAN_PHYSICAL_DEVICE_POINTER            = "SDL.renderer.create.vulkan.physical_device",
@@ -154,6 +179,7 @@ public class SDLRender {
         SDL_PROP_RENDERER_VSYNC_NUMBER                              = "SDL.renderer.vsync",
         SDL_PROP_RENDERER_MAX_TEXTURE_SIZE_NUMBER                   = "SDL.renderer.max_texture_size",
         SDL_PROP_RENDERER_TEXTURE_FORMATS_POINTER                   = "SDL.renderer.texture_formats",
+        SDL_PROP_RENDERER_TEXTURE_WRAPPING_BOOLEAN                  = "SDL.renderer.texture_wrapping",
         SDL_PROP_RENDERER_OUTPUT_COLORSPACE_NUMBER                  = "SDL.renderer.output_colorspace",
         SDL_PROP_RENDERER_HDR_ENABLED_BOOLEAN                       = "SDL.renderer.HDR_enabled",
         SDL_PROP_RENDERER_SDR_WHITE_POINT_FLOAT                     = "SDL.renderer.SDR_white_point",
@@ -179,6 +205,7 @@ public class SDLRender {
         SDL_PROP_TEXTURE_CREATE_ACCESS_NUMBER               = "SDL.texture.create.access",
         SDL_PROP_TEXTURE_CREATE_WIDTH_NUMBER                = "SDL.texture.create.width",
         SDL_PROP_TEXTURE_CREATE_HEIGHT_NUMBER               = "SDL.texture.create.height",
+        SDL_PROP_TEXTURE_CREATE_PALETTE_POINTER             = "SDL.texture.create.palette",
         SDL_PROP_TEXTURE_CREATE_SDR_WHITE_POINT_FLOAT       = "SDL.texture.create.SDR_white_point",
         SDL_PROP_TEXTURE_CREATE_HDR_HEADROOM_FLOAT          = "SDL.texture.create.HDR_headroom",
         SDL_PROP_TEXTURE_CREATE_D3D11_TEXTURE_POINTER       = "SDL.texture.create.d3d11.texture",
@@ -196,7 +223,12 @@ public class SDLRender {
         SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_UV_NUMBER = "SDL.texture.create.opengles2.texture_uv",
         SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_U_NUMBER  = "SDL.texture.create.opengles2.texture_u",
         SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_V_NUMBER  = "SDL.texture.create.opengles2.texture_v",
-        SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER       = "SDL.texture.create.vulkan.texture";
+        SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER       = "SDL.texture.create.vulkan.texture",
+        SDL_PROP_TEXTURE_CREATE_VULKAN_LAYOUT_NUMBER        = "SDL.texture.create.vulkan.layout",
+        SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_POINTER         = "SDL.texture.create.gpu.texture",
+        SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_UV_POINTER      = "SDL.texture.create.gpu.texture_uv",
+        SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_U_POINTER       = "SDL.texture.create.gpu.texture_u",
+        SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_V_POINTER       = "SDL.texture.create.gpu.texture_v";
 
     public static final String
         SDL_PROP_TEXTURE_COLORSPACE_NUMBER               = "SDL.texture.colorspace",
@@ -224,7 +256,11 @@ public class SDLRender {
         SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_U_NUMBER      = "SDL.texture.opengles2.texture_u",
         SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_V_NUMBER      = "SDL.texture.opengles2.texture_v",
         SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_TARGET_NUMBER = "SDL.texture.opengles2.target",
-        SDL_PROP_TEXTURE_VULKAN_TEXTURE_NUMBER           = "SDL.texture.vulkan.texture";
+        SDL_PROP_TEXTURE_VULKAN_TEXTURE_NUMBER           = "SDL.texture.vulkan.texture",
+        SDL_PROP_TEXTURE_GPU_TEXTURE_POINTER             = "SDL.texture.gpu.texture",
+        SDL_PROP_TEXTURE_GPU_TEXTURE_UV_POINTER          = "SDL.texture.gpu.texture_uv",
+        SDL_PROP_TEXTURE_GPU_TEXTURE_U_POINTER           = "SDL.texture.gpu.texture_u",
+        SDL_PROP_TEXTURE_GPU_TEXTURE_V_POINTER           = "SDL.texture.gpu.texture_v";
 
     public static final int
         SDL_RENDERER_VSYNC_DISABLED = 0,
@@ -335,6 +371,27 @@ public class SDLRender {
     public static long SDL_CreateRendererWithProperties(@NativeType("SDL_PropertiesID") int props) {
         long __functionAddress = Functions.CreateRendererWithProperties;
         return invokeP(props, __functionAddress);
+    }
+
+    // --- [ SDL_CreateGPURenderer ] ---
+
+    /** {@code SDL_Renderer * SDL_CreateGPURenderer(SDL_GPUDevice * device, SDL_Window * window)} */
+    @NativeType("SDL_Renderer *")
+    public static long SDL_CreateGPURenderer(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_Window *") long window) {
+        long __functionAddress = Functions.CreateGPURenderer;
+        return invokePPP(device, window, __functionAddress);
+    }
+
+    // --- [ SDL_GetGPURendererDevice ] ---
+
+    /** {@code SDL_GPUDevice * SDL_GetGPURendererDevice(SDL_Renderer * renderer)} */
+    @NativeType("SDL_GPUDevice *")
+    public static long SDL_GetGPURendererDevice(@NativeType("SDL_Renderer *") long renderer) {
+        long __functionAddress = Functions.GetGPURendererDevice;
+        if (CHECKS) {
+            check(renderer);
+        }
+        return invokePP(renderer, __functionAddress);
     }
 
     // --- [ SDL_CreateSoftwareRenderer ] ---
@@ -545,6 +602,35 @@ public class SDLRender {
             checkSafe(h, 1);
         }
         return nSDL_GetTextureSize(texture.address(), memAddressSafe(w), memAddressSafe(h));
+    }
+
+    // --- [ SDL_SetTexturePalette ] ---
+
+    /** {@code bool SDL_SetTexturePalette(SDL_Texture * texture, SDL_Palette * palette)} */
+    public static boolean nSDL_SetTexturePalette(long texture, long palette) {
+        long __functionAddress = Functions.SetTexturePalette;
+        return invokePPZ(texture, palette, __functionAddress);
+    }
+
+    /** {@code bool SDL_SetTexturePalette(SDL_Texture * texture, SDL_Palette * palette)} */
+    @NativeType("bool")
+    public static boolean SDL_SetTexturePalette(@NativeType("SDL_Texture *") SDL_Texture texture, @NativeType("SDL_Palette *") SDL_Palette palette) {
+        return nSDL_SetTexturePalette(texture.address(), palette.address());
+    }
+
+    // --- [ SDL_GetTexturePalette ] ---
+
+    /** {@code SDL_Palette * SDL_GetTexturePalette(SDL_Texture * texture)} */
+    public static long nSDL_GetTexturePalette(long texture) {
+        long __functionAddress = Functions.GetTexturePalette;
+        return invokePP(texture, __functionAddress);
+    }
+
+    /** {@code SDL_Palette * SDL_GetTexturePalette(SDL_Texture * texture)} */
+    @NativeType("SDL_Palette *")
+    public static @Nullable SDL_Palette SDL_GetTexturePalette(@NativeType("SDL_Texture *") SDL_Texture texture) {
+        long __result = nSDL_GetTexturePalette(texture.address());
+        return SDL_Palette.createSafe(__result);
     }
 
     // --- [ SDL_SetTextureColorMod ] ---
@@ -1471,6 +1557,23 @@ public class SDLRender {
         return nSDL_RenderTexture9Grid(renderer, texture.address(), memAddressSafe(srcrect), left_width, right_width, top_height, bottom_height, scale, memAddressSafe(dstrect));
     }
 
+    // --- [ SDL_RenderTexture9GridTiled ] ---
+
+    /** {@code bool SDL_RenderTexture9GridTiled(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, SDL_FRect const * dstrect, float tileScale)} */
+    public static boolean nSDL_RenderTexture9GridTiled(long renderer, long texture, long srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, long dstrect, float tileScale) {
+        long __functionAddress = Functions.RenderTexture9GridTiled;
+        if (CHECKS) {
+            check(renderer);
+        }
+        return invokePPPPZ(renderer, texture, srcrect, left_width, right_width, top_height, bottom_height, scale, dstrect, tileScale, __functionAddress);
+    }
+
+    /** {@code bool SDL_RenderTexture9GridTiled(SDL_Renderer * renderer, SDL_Texture * texture, SDL_FRect const * srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, SDL_FRect const * dstrect, float tileScale)} */
+    @NativeType("bool")
+    public static boolean SDL_RenderTexture9GridTiled(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_Texture *") SDL_Texture texture, @NativeType("SDL_FRect const *") @Nullable SDL_FRect srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, @NativeType("SDL_FRect const *") @Nullable SDL_FRect dstrect, float tileScale) {
+        return nSDL_RenderTexture9GridTiled(renderer, texture.address(), memAddressSafe(srcrect), left_width, right_width, top_height, bottom_height, scale, memAddressSafe(dstrect), tileScale);
+    }
+
     // --- [ SDL_RenderGeometry ] ---
 
     /** {@code bool SDL_RenderGeometry(SDL_Renderer * renderer, SDL_Texture * texture, SDL_Vertex const * vertices, int num_vertices, int const * indices, int num_indices)} */
@@ -1533,6 +1636,39 @@ public class SDLRender {
             checkSafe(indices, (num_indices * size_indices) >> 2);
         }
         return nSDL_RenderGeometryRaw(renderer, memAddressSafe(texture), memAddress(xy), xy_stride, color.address(), color_stride, memAddressSafe(uv), uv_stride, num_vertices, memAddressSafe(indices), num_indices, size_indices);
+    }
+
+    // --- [ SDL_SetRenderTextureAddressMode ] ---
+
+    /** {@code bool SDL_SetRenderTextureAddressMode(SDL_Renderer * renderer, SDL_TextureAddressMode u_mode, SDL_TextureAddressMode v_mode)} */
+    @NativeType("bool")
+    public static boolean SDL_SetRenderTextureAddressMode(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_TextureAddressMode") int u_mode, @NativeType("SDL_TextureAddressMode") int v_mode) {
+        long __functionAddress = Functions.SetRenderTextureAddressMode;
+        if (CHECKS) {
+            check(renderer);
+        }
+        return invokePZ(renderer, u_mode, v_mode, __functionAddress);
+    }
+
+    // --- [ SDL_GetRenderTextureAddressMode ] ---
+
+    /** {@code bool SDL_GetRenderTextureAddressMode(SDL_Renderer * renderer, SDL_TextureAddressMode * u_mode, SDL_TextureAddressMode * v_mode)} */
+    public static boolean nSDL_GetRenderTextureAddressMode(long renderer, long u_mode, long v_mode) {
+        long __functionAddress = Functions.GetRenderTextureAddressMode;
+        if (CHECKS) {
+            check(renderer);
+        }
+        return invokePPPZ(renderer, u_mode, v_mode, __functionAddress);
+    }
+
+    /** {@code bool SDL_GetRenderTextureAddressMode(SDL_Renderer * renderer, SDL_TextureAddressMode * u_mode, SDL_TextureAddressMode * v_mode)} */
+    @NativeType("bool")
+    public static boolean SDL_GetRenderTextureAddressMode(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_TextureAddressMode *") @Nullable IntBuffer u_mode, @NativeType("SDL_TextureAddressMode *") @Nullable IntBuffer v_mode) {
+        if (CHECKS) {
+            checkSafe(u_mode, 1);
+            checkSafe(v_mode, 1);
+        }
+        return nSDL_GetRenderTextureAddressMode(renderer, memAddressSafe(u_mode), memAddressSafe(v_mode));
     }
 
     // --- [ SDL_RenderReadPixels ] ---
@@ -1733,6 +1869,96 @@ public class SDLRender {
         } finally {
             stack.setPointer(stackPointer);
         }
+    }
+
+    // --- [ SDL_SetDefaultTextureScaleMode ] ---
+
+    /** {@code bool SDL_SetDefaultTextureScaleMode(SDL_Renderer * renderer, SDL_ScaleMode scale_mode)} */
+    @NativeType("bool")
+    public static boolean SDL_SetDefaultTextureScaleMode(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_ScaleMode") int scale_mode) {
+        long __functionAddress = Functions.SetDefaultTextureScaleMode;
+        if (CHECKS) {
+            check(renderer);
+        }
+        return invokePZ(renderer, scale_mode, __functionAddress);
+    }
+
+    // --- [ SDL_GetDefaultTextureScaleMode ] ---
+
+    /** {@code bool SDL_GetDefaultTextureScaleMode(SDL_Renderer * renderer, SDL_ScaleMode * scale_mode)} */
+    public static boolean nSDL_GetDefaultTextureScaleMode(long renderer, long scale_mode) {
+        long __functionAddress = Functions.GetDefaultTextureScaleMode;
+        if (CHECKS) {
+            check(renderer);
+        }
+        return invokePPZ(renderer, scale_mode, __functionAddress);
+    }
+
+    /** {@code bool SDL_GetDefaultTextureScaleMode(SDL_Renderer * renderer, SDL_ScaleMode * scale_mode)} */
+    @NativeType("bool")
+    public static boolean SDL_GetDefaultTextureScaleMode(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_ScaleMode *") @Nullable IntBuffer scale_mode) {
+        if (CHECKS) {
+            checkSafe(scale_mode, 1);
+        }
+        return nSDL_GetDefaultTextureScaleMode(renderer, memAddressSafe(scale_mode));
+    }
+
+    // --- [ SDL_CreateGPURenderState ] ---
+
+    /** {@code SDL_GPURenderState * SDL_CreateGPURenderState(SDL_Renderer * renderer, SDL_GPURenderStateCreateInfo * createinfo)} */
+    public static long nSDL_CreateGPURenderState(long renderer, long createinfo) {
+        long __functionAddress = Functions.CreateGPURenderState;
+        if (CHECKS) {
+            check(renderer);
+        }
+        return invokePPP(renderer, createinfo, __functionAddress);
+    }
+
+    /** {@code SDL_GPURenderState * SDL_CreateGPURenderState(SDL_Renderer * renderer, SDL_GPURenderStateCreateInfo * createinfo)} */
+    @NativeType("SDL_GPURenderState *")
+    public static long SDL_CreateGPURenderState(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_GPURenderStateCreateInfo *") SDL_GPURenderStateCreateInfo createinfo) {
+        return nSDL_CreateGPURenderState(renderer, createinfo.address());
+    }
+
+    // --- [ SDL_SetGPURenderStateFragmentUniforms ] ---
+
+    /** {@code bool SDL_SetGPURenderStateFragmentUniforms(SDL_GPURenderState * state, Uint32 slot_index, void const * data, Uint32 length)} */
+    public static boolean nSDL_SetGPURenderStateFragmentUniforms(long state, int slot_index, long data, int length) {
+        long __functionAddress = Functions.SetGPURenderStateFragmentUniforms;
+        if (CHECKS) {
+            check(state);
+        }
+        return invokePPZ(state, slot_index, data, length, __functionAddress);
+    }
+
+    /** {@code bool SDL_SetGPURenderStateFragmentUniforms(SDL_GPURenderState * state, Uint32 slot_index, void const * data, Uint32 length)} */
+    @NativeType("bool")
+    public static boolean SDL_SetGPURenderStateFragmentUniforms(@NativeType("SDL_GPURenderState *") long state, @NativeType("Uint32") int slot_index, @NativeType("void const *") ByteBuffer data) {
+        return nSDL_SetGPURenderStateFragmentUniforms(state, slot_index, memAddress(data), data.remaining());
+    }
+
+    // --- [ SDL_SetGPURenderState ] ---
+
+    /** {@code bool SDL_SetGPURenderState(SDL_Renderer * renderer, SDL_GPURenderState * state)} */
+    @NativeType("bool")
+    public static boolean SDL_SetGPURenderState(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_GPURenderState *") long state) {
+        long __functionAddress = Functions.SetGPURenderState;
+        if (CHECKS) {
+            check(renderer);
+            check(state);
+        }
+        return invokePPZ(renderer, state, __functionAddress);
+    }
+
+    // --- [ SDL_DestroyGPURenderState ] ---
+
+    /** {@code void SDL_DestroyGPURenderState(SDL_GPURenderState * state)} */
+    public static void SDL_DestroyGPURenderState(@NativeType("SDL_GPURenderState *") long state) {
+        long __functionAddress = Functions.DestroyGPURenderState;
+        if (CHECKS) {
+            check(state);
+        }
+        invokePV(state, __functionAddress);
     }
 
 }

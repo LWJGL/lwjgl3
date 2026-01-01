@@ -53,6 +53,10 @@ val SDL_audio = "SDLAudio".nativeClassSDL("SDL_audio") {
         "AUDIO_DEVICE_DEFAULT_RECORDING".."0xFFFFFFFE"
     )
 
+    StringConstant(
+        "PROP_AUDIOSTREAM_AUTO_CLEANUP_BOOLEAN".."SDL.audiostream.auto_cleanup"
+    )
+
     macro(expression = "SDL_AUDIO_BYTESIZE(x.format()) * x.channels()")..uint32_t(
         "AUDIO_FRAMESIZE",
 
@@ -268,6 +272,25 @@ val SDL_audio = "SDLAudio".nativeClassSDL("SDL_audio") {
         SDL_AudioStream.p("stream"),
         void.const.p("buf"),
         AutoSize("buf")..int("len")
+    )
+
+    bool(
+        "PutAudioStreamDataNoCopy",
+
+        SDL_AudioStream.p("stream"),
+        void.const.p("buf"),
+        AutoSize("buf")..int("len"),
+        nullable..SDL_AudioStreamDataCompleteCallback("callback"),
+        nullable..opaque_p("userdata")
+    )
+
+    bool(
+        "PutAudioStreamPlanarData",
+
+        SDL_AudioStream.p("stream"),
+        Unsafe..void.const.p.const.p("channel_buffers"),
+        int("num_channels"),
+        int("num_samples")
     )
 
     int(

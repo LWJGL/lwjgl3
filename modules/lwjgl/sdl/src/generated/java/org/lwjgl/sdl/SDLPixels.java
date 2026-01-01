@@ -258,7 +258,7 @@ public class SDLPixels {
         SDL_COLORSPACE_BT2020_LIMITED = 0x21102609,
         SDL_COLORSPACE_BT2020_FULL    = 0x22102609,
         SDL_COLORSPACE_RGB_DEFAULT    = SDL_COLORSPACE_SRGB,
-        SDL_COLORSPACE_YUV_DEFAULT    = SDL_COLORSPACE_JPEG;
+        SDL_COLORSPACE_YUV_DEFAULT    = SDL_COLORSPACE_BT601_LIMITED;
 
     protected SDLPixels() {
         throw new UnsupportedOperationException();

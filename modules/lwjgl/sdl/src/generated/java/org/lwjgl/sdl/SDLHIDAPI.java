@@ -33,6 +33,7 @@ public class SDLHIDAPI {
             hid_free_enumeration         = apiGetFunctionAddress(SDL.getLibrary(), "SDL_hid_free_enumeration"),
             hid_open                     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_hid_open"),
             hid_open_path                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_hid_open_path"),
+            hid_get_properties           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_hid_get_properties"),
             hid_write                    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_hid_write"),
             hid_read_timeout             = apiGetFunctionAddress(SDL.getLibrary(), "SDL_hid_read_timeout"),
             hid_read                     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_hid_read"),
@@ -57,6 +58,8 @@ public class SDLHIDAPI {
         SDL_HID_API_BUS_BLUETOOTH = 0x02,
         SDL_HID_API_BUS_I2C       = 0x03,
         SDL_HID_API_BUS_SPI       = 0x04;
+
+    public static final String SDL_PROP_HIDAPI_LIBUSB_DEVICE_HANDLE_POINTER = "SDL.hidapi.libusb.device.handle";
 
     protected SDLHIDAPI() {
         throw new UnsupportedOperationException();
@@ -173,6 +176,18 @@ public class SDLHIDAPI {
         } finally {
             stack.setPointer(stackPointer);
         }
+    }
+
+    // --- [ SDL_hid_get_properties ] ---
+
+    /** {@code SDL_PropertiesID SDL_hid_get_properties(SDL_hid_device * dev)} */
+    @NativeType("SDL_PropertiesID")
+    public static int SDL_hid_get_properties(@NativeType("SDL_hid_device *") long dev) {
+        long __functionAddress = Functions.hid_get_properties;
+        if (CHECKS) {
+            check(dev);
+        }
+        return invokePI(dev, __functionAddress);
     }
 
     // --- [ SDL_hid_write ] ---

@@ -18,13 +18,15 @@ val SDL_surface = "SDLSurface".nativeClassSDL("SDL_surface") {
     EnumConstant(
         "SCALEMODE_INVALID".enum("-1"),
         "SCALEMODE_NEAREST".enum,
-        "SCALEMODE_LINEAR".enum
+        "SCALEMODE_LINEAR".enum,
+        "SCALEMODE_PIXELART".enum
     )
 
     EnumConstant(
         "FLIP_NONE".enum("0"),
         "FLIP_HORIZONTAL".enum,
-        "FLIP_VERTICAL".enum
+        "FLIP_VERTICAL".enum,
+        "FLIP_HORIZONTAL_AND_VERTICAL".."(SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL)",
     )
 
     StringConstant(
@@ -33,6 +35,7 @@ val SDL_surface = "SDLSurface".nativeClassSDL("SDL_surface") {
         "PROP_SURFACE_TONEMAP_OPERATOR_STRING".."SDL.surface.tonemap",
         "PROP_SURFACE_HOTSPOT_X_NUMBER".."SDL.surface.hotspot.x",
         "PROP_SURFACE_HOTSPOT_Y_NUMBER".."SDL.surface.hotspot.y",
+        "PROP_SURFACE_ROTATION_FLOAT".."SDL.surface.rotation",
     )
 
     SDL_Surface.p(
@@ -136,6 +139,19 @@ val SDL_surface = "SDLSurface".nativeClassSDL("SDL_surface") {
     )
 
     SDL_Surface.p(
+        "LoadSurface_IO",
+
+        SDL_IOStream.p("src"),
+        bool("closeio")
+    )
+
+    SDL_Surface.p(
+        "LoadSurface",
+
+        charUTF8.const.p("file")
+    )
+
+    SDL_Surface.p(
         "LoadBMP_IO",
 
         SDL_IOStream.p("src"),
@@ -158,6 +174,34 @@ val SDL_surface = "SDLSurface".nativeClassSDL("SDL_surface") {
 
     bool(
         "SaveBMP",
+
+        SDL_Surface.p("surface"),
+        charUTF8.const.p("file")
+    )
+
+    SDL_Surface.p(
+        "LoadPNG_IO",
+
+        SDL_IOStream.p("src"),
+        bool("closeio")
+    )
+
+    SDL_Surface.p(
+        "LoadPNG",
+
+        charUTF8.const.p("file")
+    )
+
+    bool(
+        "SavePNG_IO",
+
+        SDL_Surface.p("surface"),
+        SDL_IOStream.p("dst"),
+        bool("closeio")
+    )
+
+    bool(
+        "SavePNG",
 
         SDL_Surface.p("surface"),
         charUTF8.const.p("file")
@@ -262,6 +306,13 @@ val SDL_surface = "SDLSurface".nativeClassSDL("SDL_surface") {
 
         SDL_Surface.p("surface"),
         SDL_FlipMode("flip")
+    )
+
+    SDL_Surface.p(
+        "RotateSurface",
+
+        SDL_Surface.p("surface"),
+        float("angle")
     )
 
     SDL_Surface.p(

@@ -31,4 +31,5 @@ val SDL_cpuinfo = "SDLCPUInfo".nativeClassSDL("SDL_cpuinfo") {
     int("GetSystemRAM", void())
 
     size_t("GetSIMDAlignment", void())
+    int("GetSystemPageSize", void())
 }
