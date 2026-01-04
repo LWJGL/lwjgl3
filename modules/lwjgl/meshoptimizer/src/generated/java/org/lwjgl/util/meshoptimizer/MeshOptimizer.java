@@ -805,8 +805,8 @@ public class MeshOptimizer {
     @NativeType("size_t")
     public static long meshopt_buildMeshlets(@NativeType("struct meshopt_Meshlet *") MeshoptMeshlet.Buffer meshlets, @NativeType("unsigned int *") IntBuffer meshlet_vertices, @NativeType("unsigned char *") ByteBuffer meshlet_triangles, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("size_t") long max_vertices, @NativeType("size_t") long max_triangles, float cone_weight) {
         if (CHECKS) {
-            check(meshlet_vertices, meshlets.remaining() * max_vertices);
-            check(meshlet_triangles, meshlets.remaining() * max_triangles * 3);
+            check(meshlet_vertices, indices.remaining());
+            check(meshlet_triangles, indices.remaining());
             check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
         }
         return nmeshopt_buildMeshlets(meshlets.address(), memAddress(meshlet_vertices), memAddress(meshlet_triangles), memAddress(indices), indices.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride, max_vertices, max_triangles, cone_weight);
@@ -821,8 +821,8 @@ public class MeshOptimizer {
     @NativeType("size_t")
     public static long meshopt_buildMeshletsScan(@NativeType("struct meshopt_Meshlet *") MeshoptMeshlet.Buffer meshlets, @NativeType("unsigned int *") IntBuffer meshlet_vertices, @NativeType("unsigned char *") ByteBuffer meshlet_triangles, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("size_t") long vertex_count, @NativeType("size_t") long max_vertices, @NativeType("size_t") long max_triangles) {
         if (CHECKS) {
-            check(meshlet_vertices, meshlets.remaining() * max_vertices);
-            check(meshlet_triangles, meshlets.remaining() * max_triangles * 3);
+            check(meshlet_vertices, indices.remaining());
+            check(meshlet_triangles, indices.remaining());
         }
         return nmeshopt_buildMeshletsScan(meshlets.address(), memAddress(meshlet_vertices), memAddress(meshlet_triangles), memAddress(indices), indices.remaining(), vertex_count, max_vertices, max_triangles);
     }
@@ -842,8 +842,8 @@ public class MeshOptimizer {
     @NativeType("size_t")
     public static long meshopt_buildMeshletsFlex(@NativeType("struct meshopt_Meshlet *") MeshoptMeshlet.Buffer meshlets, @NativeType("unsigned int *") IntBuffer meshlet_vertices, @NativeType("unsigned char *") ByteBuffer meshlet_triangles, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("size_t") long max_vertices, @NativeType("size_t") long min_triangles, @NativeType("size_t") long max_triangles, float cone_weight, float split_factor) {
         if (CHECKS) {
-            check(meshlet_vertices, meshlets.remaining() * max_vertices);
-            check(meshlet_triangles, meshlets.remaining() * max_triangles * 3);
+            check(meshlet_vertices, indices.remaining());
+            check(meshlet_triangles, indices.remaining());
             check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
         }
         return nmeshopt_buildMeshletsFlex(meshlets.address(), memAddress(meshlet_vertices), memAddress(meshlet_triangles), memAddress(indices), indices.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride, max_vertices, min_triangles, max_triangles, cone_weight, split_factor);
@@ -858,8 +858,8 @@ public class MeshOptimizer {
     @NativeType("size_t")
     public static long meshopt_buildMeshletsSpatial(@NativeType("struct meshopt_Meshlet *") MeshoptMeshlet.Buffer meshlets, @NativeType("unsigned int *") IntBuffer meshlet_vertices, @NativeType("unsigned char *") ByteBuffer meshlet_triangles, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("size_t") long max_vertices, @NativeType("size_t") long min_triangles, @NativeType("size_t") long max_triangles, float fill_weight) {
         if (CHECKS) {
-            check(meshlet_vertices, meshlets.remaining() * max_vertices);
-            check(meshlet_triangles, meshlets.remaining() * max_triangles * 3);
+            check(meshlet_vertices, indices.remaining());
+            check(meshlet_triangles, indices.remaining());
             check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
         }
         return nmeshopt_buildMeshletsSpatial(meshlets.address(), memAddress(meshlet_vertices), memAddress(meshlet_triangles), memAddress(indices), indices.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride, max_vertices, min_triangles, max_triangles, fill_weight);
