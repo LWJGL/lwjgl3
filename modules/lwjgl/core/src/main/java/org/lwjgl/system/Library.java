@@ -498,6 +498,7 @@ public final class Library {
         return null;
     }
 
+    private static final String EXPECTED_MANIFEST_PLATFORM = Platform.get().name().toLowerCase() + '/' + Platform.getArchitecture().name().toLowerCase();
     private static void detectPlatformMismatch(Class<?> context, String module) {
         if (!module.startsWith("org.lwjgl")) {
             return;
@@ -515,7 +516,7 @@ public final class Library {
 
                     if (moduleTitle.equals(attribs.getValue("Implementation-Title"))) {
                         String jarPlatform = attribs.getValue("LWJGL-Platform");
-                        if (jarPlatform != null) {
+                        if (jarPlatform != null && !EXPECTED_MANIFEST_PLATFORM.equals(jarPlatform)) {
                             platforms.add(jarPlatform);
                         }
                     }
