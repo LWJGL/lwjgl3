@@ -351,20 +351,32 @@ public class NativeFileDialog {
 
     // --- [ NFD_PathSet_FreePath ] ---
 
-    /** {@code void NFD_PathSet_FreePath(nfdchar_t * filePath)} */
+    /** {@code void NFD_PathSet_FreePath(nfdchar_t const * filePath)} */
     public static native void nNFD_PathSet_FreePath(long filePath);
 
-    /** {@code void NFD_PathSet_FreePath(nfdchar_t * filePath)} */
-    public static void NFD_PathSet_FreePath(@NativeType("nfdchar_t *") ByteBuffer filePath) {
+    /** {@code void NFD_PathSet_FreePath(nfdchar_t const * filePath)} */
+    public static void NFD_PathSet_FreePath(@NativeType("nfdchar_t const *") ByteBuffer filePath) {
         if (CHECKS) {
             checkNT1(filePath);
         }
         nNFD_PathSet_FreePath(memAddress(filePath));
     }
 
-    /** {@code void NFD_PathSet_FreePath(nfdchar_t * filePath)} */
-    public static void NFD_PathSet_FreePath(@NativeType("nfdchar_t *") long filePath) {
+    /** {@code void NFD_PathSet_FreePath(nfdchar_t const * filePath)} */
+    public static void NFD_PathSet_FreePath(@NativeType("nfdchar_t const *") long filePath) {
         nNFD_PathSet_FreePath(filePath);
+    }
+
+    /** {@code void NFD_PathSet_FreePath(nfdchar_t const * filePath)} */
+    public static void NFD_PathSet_FreePath(@NativeType("nfdchar_t const *") CharSequence filePath) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(filePath, true);
+            long filePathEncoded = stack.getPointerAddress();
+            nNFD_PathSet_FreePath(filePathEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
     }
 
     // --- [ NFD_PathSet_GetEnum ] ---

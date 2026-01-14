@@ -250,13 +250,20 @@ nfdresult_t SetDefaultPath(IFileDialog* dialog, const nfdnchar_t* defaultPath) {
 
     Release_Guard<IShellItem> folderGuard(folder);
 
-    // SetDefaultFolder() might use another recently used folder if available, so the user doesn't
-    // need to keep navigating back to the default folder (recommended by Windows). change to
-    // SetFolder() if you always want to use the default folder
+#ifdef NFD_OVERRIDE_RECENT_WITH_DEFAULT
+    // Use SetFolder() if you always want to use the default folder
+    if (!SUCCEEDED(dialog->SetFolder(folder))) {
+        NFDi_SetError("Failed to set default path.");
+        return NFD_ERROR;
+    }
+#else
+    // SetDefaultFolder() might use another recently used folder if available, so the user
+    // doesn't need to keep navigating back to the default folder (recommended by Windows).
     if (!SUCCEEDED(dialog->SetDefaultFolder(folder))) {
         NFDi_SetError("Failed to set default path.");
         return NFD_ERROR;
     }
+#endif
 
     return NFD_OKAY;
 }
@@ -1150,8 +1157,8 @@ nfdresult_t NFD_PathSet_GetPathU8(const nfdpathset_t* pathSet,
     return res;
 }
 
-void NFD_PathSet_FreePathU8(nfdu8char_t* filePath) {
-    NFD_FreePathU8(filePath);
+void NFD_PathSet_FreePathU8(const nfdu8char_t* filePath) {
+    NFD_FreePathU8(const_cast<nfdu8char_t*>(filePath));
 }
 
 nfdresult_t NFD_PathSet_EnumNextU8(nfdpathsetenum_t* enumerator, nfdu8char_t** outPath) {
