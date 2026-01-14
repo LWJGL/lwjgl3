@@ -495,6 +495,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "RENDERER_TYPE_OPENGLES".enum,
         "RENDERER_TYPE_OPENGL".enum,
         "RENDERER_TYPE_VULKAN".enum,
+        "RENDERER_TYPE_WEBGPU".enum,
 
         "RENDERER_TYPE_COUNT".enum
     )

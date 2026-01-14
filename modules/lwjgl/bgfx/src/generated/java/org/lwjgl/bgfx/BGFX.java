@@ -647,7 +647,8 @@ public class BGFX {
         BGFX_RENDERER_TYPE_OPENGLES   = 7,
         BGFX_RENDERER_TYPE_OPENGL     = 8,
         BGFX_RENDERER_TYPE_VULKAN     = 9,
-        BGFX_RENDERER_TYPE_COUNT      = 10;
+        BGFX_RENDERER_TYPE_WEBGPU     = 10,
+        BGFX_RENDERER_TYPE_COUNT      = 11;
 
     public static final int
         BGFX_ACCESS_READ      = 0,
