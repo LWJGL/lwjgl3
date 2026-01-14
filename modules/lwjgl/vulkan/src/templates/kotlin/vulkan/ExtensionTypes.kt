@@ -4112,9 +4112,9 @@ val VkPhysicalDevicePresentTimingFeaturesEXT = struct(Module.VULKAN, "VkPhysical
     VkBool32("presentAtRelativeTime")
 }
 
-val VkPresentTimingSurfaceCapabilitiesEXT = struct(Module.VULKAN, "VkPresentTimingSurfaceCapabilitiesEXT") {
-    Expression("#STRUCTURE_TYPE_PRESENT_TIMING_SURFACE_CAPABILITIES_EXT")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
+val VkPresentTimingSurfaceCapabilitiesEXT = struct(Module.VULKAN, "VkPresentTimingSurfaceCapabilitiesEXT", mutable = false) {
+    Expression("#STRUCTURE_TYPE_PRESENT_TIMING_SURFACE_CAPABILITIES_EXT")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
     VkBool32("presentTimingSupported")
     VkBool32("presentAtAbsoluteTimeSupported")
     VkBool32("presentAtRelativeTimeSupported")
@@ -4129,16 +4129,16 @@ val VkSwapchainCalibratedTimestampInfoEXT = struct(Module.VULKAN, "VkSwapchainCa
     uint64_t("timeDomainId")
 }
 
-val VkSwapchainTimingPropertiesEXT = struct(Module.VULKAN, "VkSwapchainTimingPropertiesEXT") {
-    Expression("#STRUCTURE_TYPE_SWAPCHAIN_TIMING_PROPERTIES_EXT")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
+val VkSwapchainTimingPropertiesEXT = struct(Module.VULKAN, "VkSwapchainTimingPropertiesEXT", mutable = false) {
+    Expression("#STRUCTURE_TYPE_SWAPCHAIN_TIMING_PROPERTIES_EXT")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
     uint64_t("refreshDuration")
     uint64_t("refreshInterval")
 }
 
-val VkSwapchainTimeDomainPropertiesEXT = struct(Module.VULKAN, "VkSwapchainTimeDomainPropertiesEXT") {
-    Expression("#STRUCTURE_TYPE_SWAPCHAIN_TIME_DOMAIN_PROPERTIES_EXT")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
+val VkSwapchainTimeDomainPropertiesEXT = struct(Module.VULKAN, "VkSwapchainTimeDomainPropertiesEXT", mutable = false) {
+    Expression("#STRUCTURE_TYPE_SWAPCHAIN_TIME_DOMAIN_PROPERTIES_EXT")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
     AutoSize("pTimeDomains", "pTimeDomainIds", optional = true)..uint32_t("timeDomainCount")
     nullable..VkTimeDomainKHR.p("pTimeDomains")
     nullable..uint64_t.p("pTimeDomainIds")
@@ -4151,14 +4151,14 @@ val VkPastPresentationTimingInfoEXT = struct(Module.VULKAN, "VkPastPresentationT
     VkSwapchainKHR("swapchain")
 }
 
-val VkPresentStageTimeEXT = struct(Module.VULKAN, "VkPresentStageTimeEXT") {
+val VkPresentStageTimeEXT = struct(Module.VULKAN, "VkPresentStageTimeEXT", mutable = false) {
     VkPresentStageFlagsEXT("stage")
     uint64_t("time")
 }
 
-val VkPastPresentationTimingEXT = struct(Module.VULKAN, "VkPastPresentationTimingEXT") {
-    Expression("#STRUCTURE_TYPE_PAST_PRESENTATION_TIMING_EXT")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
+val VkPastPresentationTimingEXT = struct(Module.VULKAN, "VkPastPresentationTimingEXT", mutable = false) {
+    Expression("#STRUCTURE_TYPE_PAST_PRESENTATION_TIMING_EXT")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
     uint64_t("presentId")
     uint64_t("targetTime")
     AutoSize("pPresentStages")..uint32_t("presentStageCount")
@@ -4168,9 +4168,9 @@ val VkPastPresentationTimingEXT = struct(Module.VULKAN, "VkPastPresentationTimin
     VkBool32("reportComplete")
 }
 
-val VkPastPresentationTimingPropertiesEXT = struct(Module.VULKAN, "VkPastPresentationTimingPropertiesEXT") {
-    Expression("#STRUCTURE_TYPE_PAST_PRESENTATION_TIMING_PROPERTIES_EXT")..VkStructureType("sType")
-    nullable..opaque_p("pNext")
+val VkPastPresentationTimingPropertiesEXT = struct(Module.VULKAN, "VkPastPresentationTimingPropertiesEXT", mutable = false) {
+    Expression("#STRUCTURE_TYPE_PAST_PRESENTATION_TIMING_PROPERTIES_EXT")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
     uint64_t("timingPropertiesCounter")
     uint64_t("timeDomainsCounter")
     AutoSize("pPresentationTimings")..uint32_t("presentationTimingCount")
@@ -8419,9 +8419,9 @@ val VkDataGraphPipelineSessionBindPointRequirementsInfoARM = struct(Module.VULKA
     VkDataGraphPipelineSessionARM("session")
 }
 
-val VkDataGraphPipelineSessionBindPointRequirementARM = struct(Module.VULKAN, "VkDataGraphPipelineSessionBindPointRequirementARM") {
-    Expression("#STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_REQUIREMENT_ARM")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
+val VkDataGraphPipelineSessionBindPointRequirementARM = struct(Module.VULKAN, "VkDataGraphPipelineSessionBindPointRequirementARM", mutable = false) {
+    Expression("#STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_REQUIREMENT_ARM")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
     VkDataGraphPipelineSessionBindPointARM("bindPoint")
     VkDataGraphPipelineSessionBindPointTypeARM("bindPointType")
     uint32_t("numObjects")
@@ -8453,7 +8453,7 @@ val VkDataGraphPipelineInfoARM = struct(Module.VULKAN, "VkDataGraphPipelineInfoA
 
 val VkDataGraphPipelinePropertyQueryResultARM = struct(Module.VULKAN, "VkDataGraphPipelinePropertyQueryResultARM") {
     Expression("#STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_PROPERTY_QUERY_RESULT_ARM")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
+    nullable..opaque_p("pNext")
     VkDataGraphPipelinePropertyARM("property")
     VkBool32("isText")
     AutoSize("pData", optional = true)..size_t("dataSize")
@@ -8485,9 +8485,9 @@ val VkPhysicalDeviceDataGraphOperationSupportARM = struct(Module.VULKAN, "VkPhys
     uint32_t("version")
 }
 
-val VkQueueFamilyDataGraphPropertiesARM = struct(Module.VULKAN, "VkQueueFamilyDataGraphPropertiesARM") {
-    Expression("#STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROPERTIES_ARM")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
+val VkQueueFamilyDataGraphPropertiesARM = struct(Module.VULKAN, "VkQueueFamilyDataGraphPropertiesARM", mutable = false) {
+    Expression("#STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROPERTIES_ARM")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
     VkPhysicalDeviceDataGraphProcessingEngineARM("engine")
     VkPhysicalDeviceDataGraphOperationSupportARM("operation")
 }
@@ -8506,9 +8506,9 @@ val VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM = struct(Module.
     VkPhysicalDeviceDataGraphProcessingEngineTypeARM("engineType")
 }
 
-val VkQueueFamilyDataGraphProcessingEnginePropertiesARM = struct(Module.VULKAN, "VkQueueFamilyDataGraphProcessingEnginePropertiesARM") {
-    Expression("#STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROCESSING_ENGINE_PROPERTIES_ARM")..VkStructureType("sType")
-    nullable..opaque_const_p("pNext")
+val VkQueueFamilyDataGraphProcessingEnginePropertiesARM = struct(Module.VULKAN, "VkQueueFamilyDataGraphProcessingEnginePropertiesARM", mutable = false) {
+    Expression("#STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROCESSING_ENGINE_PROPERTIES_ARM")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
     VkExternalSemaphoreHandleTypeFlags("foreignSemaphoreHandleTypes")
     VkExternalMemoryHandleTypeFlags("foreignMemoryHandleTypes")
 }

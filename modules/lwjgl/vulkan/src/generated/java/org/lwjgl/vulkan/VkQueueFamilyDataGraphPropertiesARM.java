@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct VkQueueFamilyDataGraphPropertiesARM {
  *     VkStructureType sType;
- *     void const * pNext;
+ *     void * pNext;
  *     {@link VkPhysicalDeviceDataGraphProcessingEngineARM VkPhysicalDeviceDataGraphProcessingEngineARM} engine;
  *     {@link VkPhysicalDeviceDataGraphOperationSupportARM VkPhysicalDeviceDataGraphOperationSupportARM} operation;
  * }</code></pre>
@@ -82,7 +82,7 @@ public class VkQueueFamilyDataGraphPropertiesARM extends Struct<VkQueueFamilyDat
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** @return the value of the {@code pNext} field. */
-    @NativeType("void const *")
+    @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** @return a {@link VkPhysicalDeviceDataGraphProcessingEngineARM} view of the {@code engine} field. */
     public VkPhysicalDeviceDataGraphProcessingEngineARM engine() { return nengine(address()); }
@@ -94,27 +94,15 @@ public class VkQueueFamilyDataGraphPropertiesARM extends Struct<VkQueueFamilyDat
     /** Sets the {@link ARMDataGraph#VK_STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROPERTIES_ARM STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROPERTIES_ARM} value to the {@code sType} field. */
     public VkQueueFamilyDataGraphPropertiesARM sType$Default() { return sType(ARMDataGraph.VK_STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROPERTIES_ARM); }
     /** Sets the specified value to the {@code pNext} field. */
-    public VkQueueFamilyDataGraphPropertiesARM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Copies the specified {@link VkPhysicalDeviceDataGraphProcessingEngineARM} to the {@code engine} field. */
-    public VkQueueFamilyDataGraphPropertiesARM engine(VkPhysicalDeviceDataGraphProcessingEngineARM value) { nengine(address(), value); return this; }
-    /** Passes the {@code engine} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkQueueFamilyDataGraphPropertiesARM engine(java.util.function.Consumer<VkPhysicalDeviceDataGraphProcessingEngineARM> consumer) { consumer.accept(engine()); return this; }
-    /** Copies the specified {@link VkPhysicalDeviceDataGraphOperationSupportARM} to the {@code operation} field. */
-    public VkQueueFamilyDataGraphPropertiesARM operation(VkPhysicalDeviceDataGraphOperationSupportARM value) { noperation(address(), value); return this; }
-    /** Passes the {@code operation} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkQueueFamilyDataGraphPropertiesARM operation(java.util.function.Consumer<VkPhysicalDeviceDataGraphOperationSupportARM> consumer) { consumer.accept(operation()); return this; }
+    public VkQueueFamilyDataGraphPropertiesARM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkQueueFamilyDataGraphPropertiesARM set(
         int sType,
-        long pNext,
-        VkPhysicalDeviceDataGraphProcessingEngineARM engine,
-        VkPhysicalDeviceDataGraphOperationSupportARM operation
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        engine(engine);
-        operation(operation);
 
         return this;
     }
@@ -255,10 +243,6 @@ public class VkQueueFamilyDataGraphPropertiesARM extends Struct<VkQueueFamilyDat
     public static void nsType(long struct, int value) { memPutInt(struct + VkQueueFamilyDataGraphPropertiesARM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkQueueFamilyDataGraphPropertiesARM.PNEXT, value); }
-    /** Unsafe version of {@link #engine(VkPhysicalDeviceDataGraphProcessingEngineARM) engine}. */
-    public static void nengine(long struct, VkPhysicalDeviceDataGraphProcessingEngineARM value) { memCopy(value.address(), struct + VkQueueFamilyDataGraphPropertiesARM.ENGINE, VkPhysicalDeviceDataGraphProcessingEngineARM.SIZEOF); }
-    /** Unsafe version of {@link #operation(VkPhysicalDeviceDataGraphOperationSupportARM) operation}. */
-    public static void noperation(long struct, VkPhysicalDeviceDataGraphOperationSupportARM value) { memCopy(value.address(), struct + VkQueueFamilyDataGraphPropertiesARM.OPERATION, VkPhysicalDeviceDataGraphOperationSupportARM.SIZEOF); }
 
     // -----------------------------------
 
@@ -307,7 +291,7 @@ public class VkQueueFamilyDataGraphPropertiesARM extends Struct<VkQueueFamilyDat
         @NativeType("VkStructureType")
         public int sType() { return VkQueueFamilyDataGraphPropertiesARM.nsType(address()); }
         /** @return the value of the {@code pNext} field. */
-        @NativeType("void const *")
+        @NativeType("void *")
         public long pNext() { return VkQueueFamilyDataGraphPropertiesARM.npNext(address()); }
         /** @return a {@link VkPhysicalDeviceDataGraphProcessingEngineARM} view of the {@code engine} field. */
         public VkPhysicalDeviceDataGraphProcessingEngineARM engine() { return VkQueueFamilyDataGraphPropertiesARM.nengine(address()); }
@@ -319,15 +303,7 @@ public class VkQueueFamilyDataGraphPropertiesARM extends Struct<VkQueueFamilyDat
         /** Sets the {@link ARMDataGraph#VK_STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROPERTIES_ARM STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROPERTIES_ARM} value to the {@code sType} field. */
         public VkQueueFamilyDataGraphPropertiesARM.Buffer sType$Default() { return sType(ARMDataGraph.VK_STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROPERTIES_ARM); }
         /** Sets the specified value to the {@code pNext} field. */
-        public VkQueueFamilyDataGraphPropertiesARM.Buffer pNext(@NativeType("void const *") long value) { VkQueueFamilyDataGraphPropertiesARM.npNext(address(), value); return this; }
-        /** Copies the specified {@link VkPhysicalDeviceDataGraphProcessingEngineARM} to the {@code engine} field. */
-        public VkQueueFamilyDataGraphPropertiesARM.Buffer engine(VkPhysicalDeviceDataGraphProcessingEngineARM value) { VkQueueFamilyDataGraphPropertiesARM.nengine(address(), value); return this; }
-        /** Passes the {@code engine} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkQueueFamilyDataGraphPropertiesARM.Buffer engine(java.util.function.Consumer<VkPhysicalDeviceDataGraphProcessingEngineARM> consumer) { consumer.accept(engine()); return this; }
-        /** Copies the specified {@link VkPhysicalDeviceDataGraphOperationSupportARM} to the {@code operation} field. */
-        public VkQueueFamilyDataGraphPropertiesARM.Buffer operation(VkPhysicalDeviceDataGraphOperationSupportARM value) { VkQueueFamilyDataGraphPropertiesARM.noperation(address(), value); return this; }
-        /** Passes the {@code operation} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkQueueFamilyDataGraphPropertiesARM.Buffer operation(java.util.function.Consumer<VkPhysicalDeviceDataGraphOperationSupportARM> consumer) { consumer.accept(operation()); return this; }
+        public VkQueueFamilyDataGraphPropertiesARM.Buffer pNext(@NativeType("void *") long value) { VkQueueFamilyDataGraphPropertiesARM.npNext(address(), value); return this; }
 
     }
 

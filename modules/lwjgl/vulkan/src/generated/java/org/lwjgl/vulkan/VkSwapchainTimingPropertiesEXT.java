@@ -97,22 +97,14 @@ public class VkSwapchainTimingPropertiesEXT extends Struct<VkSwapchainTimingProp
     public VkSwapchainTimingPropertiesEXT sType$Default() { return sType(EXTPresentTiming.VK_STRUCTURE_TYPE_SWAPCHAIN_TIMING_PROPERTIES_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkSwapchainTimingPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code refreshDuration} field. */
-    public VkSwapchainTimingPropertiesEXT refreshDuration(@NativeType("uint64_t") long value) { nrefreshDuration(address(), value); return this; }
-    /** Sets the specified value to the {@code refreshInterval} field. */
-    public VkSwapchainTimingPropertiesEXT refreshInterval(@NativeType("uint64_t") long value) { nrefreshInterval(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkSwapchainTimingPropertiesEXT set(
         int sType,
-        long pNext,
-        long refreshDuration,
-        long refreshInterval
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        refreshDuration(refreshDuration);
-        refreshInterval(refreshInterval);
 
         return this;
     }
@@ -253,10 +245,6 @@ public class VkSwapchainTimingPropertiesEXT extends Struct<VkSwapchainTimingProp
     public static void nsType(long struct, int value) { memPutInt(struct + VkSwapchainTimingPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSwapchainTimingPropertiesEXT.PNEXT, value); }
-    /** Unsafe version of {@link #refreshDuration(long) refreshDuration}. */
-    public static void nrefreshDuration(long struct, long value) { memPutLong(struct + VkSwapchainTimingPropertiesEXT.REFRESHDURATION, value); }
-    /** Unsafe version of {@link #refreshInterval(long) refreshInterval}. */
-    public static void nrefreshInterval(long struct, long value) { memPutLong(struct + VkSwapchainTimingPropertiesEXT.REFRESHINTERVAL, value); }
 
     // -----------------------------------
 
@@ -320,10 +308,6 @@ public class VkSwapchainTimingPropertiesEXT extends Struct<VkSwapchainTimingProp
         public VkSwapchainTimingPropertiesEXT.Buffer sType$Default() { return sType(EXTPresentTiming.VK_STRUCTURE_TYPE_SWAPCHAIN_TIMING_PROPERTIES_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkSwapchainTimingPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkSwapchainTimingPropertiesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code refreshDuration} field. */
-        public VkSwapchainTimingPropertiesEXT.Buffer refreshDuration(@NativeType("uint64_t") long value) { VkSwapchainTimingPropertiesEXT.nrefreshDuration(address(), value); return this; }
-        /** Sets the specified value to the {@code refreshInterval} field. */
-        public VkSwapchainTimingPropertiesEXT.Buffer refreshInterval(@NativeType("uint64_t") long value) { VkSwapchainTimingPropertiesEXT.nrefreshInterval(address(), value); return this; }
 
     }
 

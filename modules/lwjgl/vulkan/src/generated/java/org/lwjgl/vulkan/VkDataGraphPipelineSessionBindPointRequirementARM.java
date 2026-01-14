@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre>{@code
  * struct VkDataGraphPipelineSessionBindPointRequirementARM {
  *     VkStructureType sType;
- *     void const * pNext;
+ *     void * pNext;
  *     VkDataGraphPipelineSessionBindPointARM bindPoint;
  *     VkDataGraphPipelineSessionBindPointTypeARM bindPointType;
  *     uint32_t numObjects;
@@ -86,7 +86,7 @@ public class VkDataGraphPipelineSessionBindPointRequirementARM extends Struct<Vk
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** @return the value of the {@code pNext} field. */
-    @NativeType("void const *")
+    @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** @return the value of the {@code bindPoint} field. */
     @NativeType("VkDataGraphPipelineSessionBindPointARM")
@@ -103,27 +103,15 @@ public class VkDataGraphPipelineSessionBindPointRequirementARM extends Struct<Vk
     /** Sets the {@link ARMDataGraph#VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_REQUIREMENT_ARM STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_REQUIREMENT_ARM} value to the {@code sType} field. */
     public VkDataGraphPipelineSessionBindPointRequirementARM sType$Default() { return sType(ARMDataGraph.VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_REQUIREMENT_ARM); }
     /** Sets the specified value to the {@code pNext} field. */
-    public VkDataGraphPipelineSessionBindPointRequirementARM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code bindPoint} field. */
-    public VkDataGraphPipelineSessionBindPointRequirementARM bindPoint(@NativeType("VkDataGraphPipelineSessionBindPointARM") int value) { nbindPoint(address(), value); return this; }
-    /** Sets the specified value to the {@code bindPointType} field. */
-    public VkDataGraphPipelineSessionBindPointRequirementARM bindPointType(@NativeType("VkDataGraphPipelineSessionBindPointTypeARM") int value) { nbindPointType(address(), value); return this; }
-    /** Sets the specified value to the {@code numObjects} field. */
-    public VkDataGraphPipelineSessionBindPointRequirementARM numObjects(@NativeType("uint32_t") int value) { nnumObjects(address(), value); return this; }
+    public VkDataGraphPipelineSessionBindPointRequirementARM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkDataGraphPipelineSessionBindPointRequirementARM set(
         int sType,
-        long pNext,
-        int bindPoint,
-        int bindPointType,
-        int numObjects
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        bindPoint(bindPoint);
-        bindPointType(bindPointType);
-        numObjects(numObjects);
 
         return this;
     }
@@ -266,12 +254,6 @@ public class VkDataGraphPipelineSessionBindPointRequirementARM extends Struct<Vk
     public static void nsType(long struct, int value) { memPutInt(struct + VkDataGraphPipelineSessionBindPointRequirementARM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDataGraphPipelineSessionBindPointRequirementARM.PNEXT, value); }
-    /** Unsafe version of {@link #bindPoint(int) bindPoint}. */
-    public static void nbindPoint(long struct, int value) { memPutInt(struct + VkDataGraphPipelineSessionBindPointRequirementARM.BINDPOINT, value); }
-    /** Unsafe version of {@link #bindPointType(int) bindPointType}. */
-    public static void nbindPointType(long struct, int value) { memPutInt(struct + VkDataGraphPipelineSessionBindPointRequirementARM.BINDPOINTTYPE, value); }
-    /** Unsafe version of {@link #numObjects(int) numObjects}. */
-    public static void nnumObjects(long struct, int value) { memPutInt(struct + VkDataGraphPipelineSessionBindPointRequirementARM.NUMOBJECTS, value); }
 
     // -----------------------------------
 
@@ -320,7 +302,7 @@ public class VkDataGraphPipelineSessionBindPointRequirementARM extends Struct<Vk
         @NativeType("VkStructureType")
         public int sType() { return VkDataGraphPipelineSessionBindPointRequirementARM.nsType(address()); }
         /** @return the value of the {@code pNext} field. */
-        @NativeType("void const *")
+        @NativeType("void *")
         public long pNext() { return VkDataGraphPipelineSessionBindPointRequirementARM.npNext(address()); }
         /** @return the value of the {@code bindPoint} field. */
         @NativeType("VkDataGraphPipelineSessionBindPointARM")
@@ -337,13 +319,7 @@ public class VkDataGraphPipelineSessionBindPointRequirementARM extends Struct<Vk
         /** Sets the {@link ARMDataGraph#VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_REQUIREMENT_ARM STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_REQUIREMENT_ARM} value to the {@code sType} field. */
         public VkDataGraphPipelineSessionBindPointRequirementARM.Buffer sType$Default() { return sType(ARMDataGraph.VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_REQUIREMENT_ARM); }
         /** Sets the specified value to the {@code pNext} field. */
-        public VkDataGraphPipelineSessionBindPointRequirementARM.Buffer pNext(@NativeType("void const *") long value) { VkDataGraphPipelineSessionBindPointRequirementARM.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code bindPoint} field. */
-        public VkDataGraphPipelineSessionBindPointRequirementARM.Buffer bindPoint(@NativeType("VkDataGraphPipelineSessionBindPointARM") int value) { VkDataGraphPipelineSessionBindPointRequirementARM.nbindPoint(address(), value); return this; }
-        /** Sets the specified value to the {@code bindPointType} field. */
-        public VkDataGraphPipelineSessionBindPointRequirementARM.Buffer bindPointType(@NativeType("VkDataGraphPipelineSessionBindPointTypeARM") int value) { VkDataGraphPipelineSessionBindPointRequirementARM.nbindPointType(address(), value); return this; }
-        /** Sets the specified value to the {@code numObjects} field. */
-        public VkDataGraphPipelineSessionBindPointRequirementARM.Buffer numObjects(@NativeType("uint32_t") int value) { VkDataGraphPipelineSessionBindPointRequirementARM.nnumObjects(address(), value); return this; }
+        public VkDataGraphPipelineSessionBindPointRequirementARM.Buffer pNext(@NativeType("void *") long value) { VkDataGraphPipelineSessionBindPointRequirementARM.npNext(address(), value); return this; }
 
     }
 

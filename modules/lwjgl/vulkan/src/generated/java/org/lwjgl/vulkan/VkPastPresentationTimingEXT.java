@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -133,38 +132,14 @@ public class VkPastPresentationTimingEXT extends Struct<VkPastPresentationTiming
     public VkPastPresentationTimingEXT sType$Default() { return sType(EXTPresentTiming.VK_STRUCTURE_TYPE_PAST_PRESENTATION_TIMING_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPastPresentationTimingEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code presentId} field. */
-    public VkPastPresentationTimingEXT presentId(@NativeType("uint64_t") long value) { npresentId(address(), value); return this; }
-    /** Sets the specified value to the {@code targetTime} field. */
-    public VkPastPresentationTimingEXT targetTime(@NativeType("uint64_t") long value) { ntargetTime(address(), value); return this; }
-    /** Sets the address of the specified {@link VkPresentStageTimeEXT.Buffer} to the {@code pPresentStages} field. */
-    public VkPastPresentationTimingEXT pPresentStages(@NativeType("VkPresentStageTimeEXT *") VkPresentStageTimeEXT.Buffer value) { npPresentStages(address(), value); return this; }
-    /** Sets the specified value to the {@code timeDomain} field. */
-    public VkPastPresentationTimingEXT timeDomain(@NativeType("VkTimeDomainKHR") int value) { ntimeDomain(address(), value); return this; }
-    /** Sets the specified value to the {@code timeDomainId} field. */
-    public VkPastPresentationTimingEXT timeDomainId(@NativeType("uint64_t") long value) { ntimeDomainId(address(), value); return this; }
-    /** Sets the specified value to the {@code reportComplete} field. */
-    public VkPastPresentationTimingEXT reportComplete(@NativeType("VkBool32") boolean value) { nreportComplete(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPastPresentationTimingEXT set(
         int sType,
-        long pNext,
-        long presentId,
-        long targetTime,
-        VkPresentStageTimeEXT.Buffer pPresentStages,
-        int timeDomain,
-        long timeDomainId,
-        boolean reportComplete
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        presentId(presentId);
-        targetTime(targetTime);
-        pPresentStages(pPresentStages);
-        timeDomain(timeDomain);
-        timeDomainId(timeDomainId);
-        reportComplete(reportComplete);
 
         return this;
     }
@@ -315,29 +290,6 @@ public class VkPastPresentationTimingEXT extends Struct<VkPastPresentationTiming
     public static void nsType(long struct, int value) { memPutInt(struct + VkPastPresentationTimingEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPastPresentationTimingEXT.PNEXT, value); }
-    /** Unsafe version of {@link #presentId(long) presentId}. */
-    public static void npresentId(long struct, long value) { memPutLong(struct + VkPastPresentationTimingEXT.PRESENTID, value); }
-    /** Unsafe version of {@link #targetTime(long) targetTime}. */
-    public static void ntargetTime(long struct, long value) { memPutLong(struct + VkPastPresentationTimingEXT.TARGETTIME, value); }
-    /** Sets the specified value to the {@code presentStageCount} field of the specified {@code struct}. */
-    public static void npresentStageCount(long struct, int value) { memPutInt(struct + VkPastPresentationTimingEXT.PRESENTSTAGECOUNT, value); }
-    /** Unsafe version of {@link #pPresentStages(VkPresentStageTimeEXT.Buffer) pPresentStages}. */
-    public static void npPresentStages(long struct, VkPresentStageTimeEXT.Buffer value) { memPutAddress(struct + VkPastPresentationTimingEXT.PPRESENTSTAGES, value.address()); npresentStageCount(struct, value.remaining()); }
-    /** Unsafe version of {@link #timeDomain(int) timeDomain}. */
-    public static void ntimeDomain(long struct, int value) { memPutInt(struct + VkPastPresentationTimingEXT.TIMEDOMAIN, value); }
-    /** Unsafe version of {@link #timeDomainId(long) timeDomainId}. */
-    public static void ntimeDomainId(long struct, long value) { memPutLong(struct + VkPastPresentationTimingEXT.TIMEDOMAINID, value); }
-    /** Unsafe version of {@link #reportComplete(boolean) reportComplete}. */
-    public static void nreportComplete(long struct, int value) { memPutInt(struct + VkPastPresentationTimingEXT.REPORTCOMPLETE, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + VkPastPresentationTimingEXT.PPRESENTSTAGES));
-    }
 
     // -----------------------------------
 
@@ -416,18 +368,6 @@ public class VkPastPresentationTimingEXT extends Struct<VkPastPresentationTiming
         public VkPastPresentationTimingEXT.Buffer sType$Default() { return sType(EXTPresentTiming.VK_STRUCTURE_TYPE_PAST_PRESENTATION_TIMING_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPastPresentationTimingEXT.Buffer pNext(@NativeType("void *") long value) { VkPastPresentationTimingEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code presentId} field. */
-        public VkPastPresentationTimingEXT.Buffer presentId(@NativeType("uint64_t") long value) { VkPastPresentationTimingEXT.npresentId(address(), value); return this; }
-        /** Sets the specified value to the {@code targetTime} field. */
-        public VkPastPresentationTimingEXT.Buffer targetTime(@NativeType("uint64_t") long value) { VkPastPresentationTimingEXT.ntargetTime(address(), value); return this; }
-        /** Sets the address of the specified {@link VkPresentStageTimeEXT.Buffer} to the {@code pPresentStages} field. */
-        public VkPastPresentationTimingEXT.Buffer pPresentStages(@NativeType("VkPresentStageTimeEXT *") VkPresentStageTimeEXT.Buffer value) { VkPastPresentationTimingEXT.npPresentStages(address(), value); return this; }
-        /** Sets the specified value to the {@code timeDomain} field. */
-        public VkPastPresentationTimingEXT.Buffer timeDomain(@NativeType("VkTimeDomainKHR") int value) { VkPastPresentationTimingEXT.ntimeDomain(address(), value); return this; }
-        /** Sets the specified value to the {@code timeDomainId} field. */
-        public VkPastPresentationTimingEXT.Buffer timeDomainId(@NativeType("uint64_t") long value) { VkPastPresentationTimingEXT.ntimeDomainId(address(), value); return this; }
-        /** Sets the specified value to the {@code reportComplete} field. */
-        public VkPastPresentationTimingEXT.Buffer reportComplete(@NativeType("VkBool32") boolean value) { VkPastPresentationTimingEXT.nreportComplete(address(), value ? 1 : 0); return this; }
 
     }
 

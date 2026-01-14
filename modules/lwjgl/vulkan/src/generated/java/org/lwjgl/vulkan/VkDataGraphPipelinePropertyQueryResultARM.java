@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre>{@code
  * struct VkDataGraphPipelinePropertyQueryResultARM {
  *     VkStructureType sType;
- *     void const * pNext;
+ *     void * pNext;
  *     VkDataGraphPipelinePropertyARM property;
  *     VkBool32 isText;
  *     size_t dataSize;
@@ -90,7 +90,7 @@ public class VkDataGraphPipelinePropertyQueryResultARM extends Struct<VkDataGrap
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** @return the value of the {@code pNext} field. */
-    @NativeType("void const *")
+    @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** @return the value of the {@code property} field. */
     @NativeType("VkDataGraphPipelinePropertyARM")
@@ -110,7 +110,7 @@ public class VkDataGraphPipelinePropertyQueryResultARM extends Struct<VkDataGrap
     /** Sets the {@link ARMDataGraph#VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_PROPERTY_QUERY_RESULT_ARM STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_PROPERTY_QUERY_RESULT_ARM} value to the {@code sType} field. */
     public VkDataGraphPipelinePropertyQueryResultARM sType$Default() { return sType(ARMDataGraph.VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_PROPERTY_QUERY_RESULT_ARM); }
     /** Sets the specified value to the {@code pNext} field. */
-    public VkDataGraphPipelinePropertyQueryResultARM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    public VkDataGraphPipelinePropertyQueryResultARM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code property} field. */
     public VkDataGraphPipelinePropertyQueryResultARM property(@NativeType("VkDataGraphPipelinePropertyARM") int value) { nproperty(address(), value); return this; }
     /** Sets the specified value to the {@code isText} field. */
@@ -335,7 +335,7 @@ public class VkDataGraphPipelinePropertyQueryResultARM extends Struct<VkDataGrap
         @NativeType("VkStructureType")
         public int sType() { return VkDataGraphPipelinePropertyQueryResultARM.nsType(address()); }
         /** @return the value of the {@code pNext} field. */
-        @NativeType("void const *")
+        @NativeType("void *")
         public long pNext() { return VkDataGraphPipelinePropertyQueryResultARM.npNext(address()); }
         /** @return the value of the {@code property} field. */
         @NativeType("VkDataGraphPipelinePropertyARM")
@@ -355,7 +355,7 @@ public class VkDataGraphPipelinePropertyQueryResultARM extends Struct<VkDataGrap
         /** Sets the {@link ARMDataGraph#VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_PROPERTY_QUERY_RESULT_ARM STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_PROPERTY_QUERY_RESULT_ARM} value to the {@code sType} field. */
         public VkDataGraphPipelinePropertyQueryResultARM.Buffer sType$Default() { return sType(ARMDataGraph.VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_PROPERTY_QUERY_RESULT_ARM); }
         /** Sets the specified value to the {@code pNext} field. */
-        public VkDataGraphPipelinePropertyQueryResultARM.Buffer pNext(@NativeType("void const *") long value) { VkDataGraphPipelinePropertyQueryResultARM.npNext(address(), value); return this; }
+        public VkDataGraphPipelinePropertyQueryResultARM.Buffer pNext(@NativeType("void *") long value) { VkDataGraphPipelinePropertyQueryResultARM.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code property} field. */
         public VkDataGraphPipelinePropertyQueryResultARM.Buffer property(@NativeType("VkDataGraphPipelinePropertyARM") int value) { VkDataGraphPipelinePropertyQueryResultARM.nproperty(address(), value); return this; }
         /** Sets the specified value to the {@code isText} field. */

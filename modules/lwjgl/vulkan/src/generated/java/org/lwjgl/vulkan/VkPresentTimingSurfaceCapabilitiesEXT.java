@@ -111,30 +111,14 @@ public class VkPresentTimingSurfaceCapabilitiesEXT extends Struct<VkPresentTimin
     public VkPresentTimingSurfaceCapabilitiesEXT sType$Default() { return sType(EXTPresentTiming.VK_STRUCTURE_TYPE_PRESENT_TIMING_SURFACE_CAPABILITIES_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPresentTimingSurfaceCapabilitiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code presentTimingSupported} field. */
-    public VkPresentTimingSurfaceCapabilitiesEXT presentTimingSupported(@NativeType("VkBool32") boolean value) { npresentTimingSupported(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code presentAtAbsoluteTimeSupported} field. */
-    public VkPresentTimingSurfaceCapabilitiesEXT presentAtAbsoluteTimeSupported(@NativeType("VkBool32") boolean value) { npresentAtAbsoluteTimeSupported(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code presentAtRelativeTimeSupported} field. */
-    public VkPresentTimingSurfaceCapabilitiesEXT presentAtRelativeTimeSupported(@NativeType("VkBool32") boolean value) { npresentAtRelativeTimeSupported(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code presentStageQueries} field. */
-    public VkPresentTimingSurfaceCapabilitiesEXT presentStageQueries(@NativeType("VkPresentStageFlagsEXT") int value) { npresentStageQueries(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPresentTimingSurfaceCapabilitiesEXT set(
         int sType,
-        long pNext,
-        boolean presentTimingSupported,
-        boolean presentAtAbsoluteTimeSupported,
-        boolean presentAtRelativeTimeSupported,
-        int presentStageQueries
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        presentTimingSupported(presentTimingSupported);
-        presentAtAbsoluteTimeSupported(presentAtAbsoluteTimeSupported);
-        presentAtRelativeTimeSupported(presentAtRelativeTimeSupported);
-        presentStageQueries(presentStageQueries);
 
         return this;
     }
@@ -279,14 +263,6 @@ public class VkPresentTimingSurfaceCapabilitiesEXT extends Struct<VkPresentTimin
     public static void nsType(long struct, int value) { memPutInt(struct + VkPresentTimingSurfaceCapabilitiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPresentTimingSurfaceCapabilitiesEXT.PNEXT, value); }
-    /** Unsafe version of {@link #presentTimingSupported(boolean) presentTimingSupported}. */
-    public static void npresentTimingSupported(long struct, int value) { memPutInt(struct + VkPresentTimingSurfaceCapabilitiesEXT.PRESENTTIMINGSUPPORTED, value); }
-    /** Unsafe version of {@link #presentAtAbsoluteTimeSupported(boolean) presentAtAbsoluteTimeSupported}. */
-    public static void npresentAtAbsoluteTimeSupported(long struct, int value) { memPutInt(struct + VkPresentTimingSurfaceCapabilitiesEXT.PRESENTATABSOLUTETIMESUPPORTED, value); }
-    /** Unsafe version of {@link #presentAtRelativeTimeSupported(boolean) presentAtRelativeTimeSupported}. */
-    public static void npresentAtRelativeTimeSupported(long struct, int value) { memPutInt(struct + VkPresentTimingSurfaceCapabilitiesEXT.PRESENTATRELATIVETIMESUPPORTED, value); }
-    /** Unsafe version of {@link #presentStageQueries(int) presentStageQueries}. */
-    public static void npresentStageQueries(long struct, int value) { memPutInt(struct + VkPresentTimingSurfaceCapabilitiesEXT.PRESENTSTAGEQUERIES, value); }
 
     // -----------------------------------
 
@@ -356,14 +332,6 @@ public class VkPresentTimingSurfaceCapabilitiesEXT extends Struct<VkPresentTimin
         public VkPresentTimingSurfaceCapabilitiesEXT.Buffer sType$Default() { return sType(EXTPresentTiming.VK_STRUCTURE_TYPE_PRESENT_TIMING_SURFACE_CAPABILITIES_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPresentTimingSurfaceCapabilitiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPresentTimingSurfaceCapabilitiesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code presentTimingSupported} field. */
-        public VkPresentTimingSurfaceCapabilitiesEXT.Buffer presentTimingSupported(@NativeType("VkBool32") boolean value) { VkPresentTimingSurfaceCapabilitiesEXT.npresentTimingSupported(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code presentAtAbsoluteTimeSupported} field. */
-        public VkPresentTimingSurfaceCapabilitiesEXT.Buffer presentAtAbsoluteTimeSupported(@NativeType("VkBool32") boolean value) { VkPresentTimingSurfaceCapabilitiesEXT.npresentAtAbsoluteTimeSupported(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code presentAtRelativeTimeSupported} field. */
-        public VkPresentTimingSurfaceCapabilitiesEXT.Buffer presentAtRelativeTimeSupported(@NativeType("VkBool32") boolean value) { VkPresentTimingSurfaceCapabilitiesEXT.npresentAtRelativeTimeSupported(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code presentStageQueries} field. */
-        public VkPresentTimingSurfaceCapabilitiesEXT.Buffer presentStageQueries(@NativeType("VkPresentStageFlagsEXT") int value) { VkPresentTimingSurfaceCapabilitiesEXT.npresentStageQueries(address(), value); return this; }
 
     }
 

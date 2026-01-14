@@ -2,7 +2,7 @@
 #define VULKAN_CORE_H_ 1
 
 /*
-** Copyright 2015-2025 The Khronos Group Inc.
+** Copyright 2015-2026 The Khronos Group Inc.
 **
 ** SPDX-License-Identifier: Apache-2.0
 */
@@ -66,7 +66,7 @@ extern "C" {
 //#define VK_API_VERSION VK_MAKE_API_VERSION(0, 1, 0, 0) // Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 337
+#define VK_HEADER_VERSION 338
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 4, VK_HEADER_VERSION)
@@ -22545,7 +22545,7 @@ typedef struct VkDataGraphPipelineSessionBindPointRequirementsInfoARM {
 
 typedef struct VkDataGraphPipelineSessionBindPointRequirementARM {
     VkStructureType                               sType;
-    const void*                                   pNext;
+    void*                                         pNext;
     VkDataGraphPipelineSessionBindPointARM        bindPoint;
     VkDataGraphPipelineSessionBindPointTypeARM    bindPointType;
     uint32_t                                      numObjects;
@@ -22577,7 +22577,7 @@ typedef struct VkDataGraphPipelineInfoARM {
 
 typedef struct VkDataGraphPipelinePropertyQueryResultARM {
     VkStructureType                   sType;
-    const void*                       pNext;
+    void*                             pNext;
     VkDataGraphPipelinePropertyARM    property;
     VkBool32                          isText;
     size_t                            dataSize;
@@ -22610,7 +22610,7 @@ typedef struct VkPhysicalDeviceDataGraphOperationSupportARM {
 
 typedef struct VkQueueFamilyDataGraphPropertiesARM {
     VkStructureType                                 sType;
-    const void*                                     pNext;
+    void*                                           pNext;
     VkPhysicalDeviceDataGraphProcessingEngineARM    engine;
     VkPhysicalDeviceDataGraphOperationSupportARM    operation;
 } VkQueueFamilyDataGraphPropertiesARM;
@@ -22631,7 +22631,7 @@ typedef struct VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM {
 
 typedef struct VkQueueFamilyDataGraphProcessingEnginePropertiesARM {
     VkStructureType                       sType;
-    const void*                           pNext;
+    void*                                 pNext;
     VkExternalSemaphoreHandleTypeFlags    foreignSemaphoreHandleTypes;
     VkExternalMemoryHandleTypeFlags       foreignMemoryHandleTypes;
 } VkQueueFamilyDataGraphProcessingEnginePropertiesARM;

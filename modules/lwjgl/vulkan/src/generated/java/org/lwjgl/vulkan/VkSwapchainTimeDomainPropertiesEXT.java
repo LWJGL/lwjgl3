@@ -104,26 +104,14 @@ public class VkSwapchainTimeDomainPropertiesEXT extends Struct<VkSwapchainTimeDo
     public VkSwapchainTimeDomainPropertiesEXT sType$Default() { return sType(EXTPresentTiming.VK_STRUCTURE_TYPE_SWAPCHAIN_TIME_DOMAIN_PROPERTIES_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkSwapchainTimeDomainPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code timeDomainCount} field. */
-    public VkSwapchainTimeDomainPropertiesEXT timeDomainCount(@NativeType("uint32_t") int value) { ntimeDomainCount(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@code pTimeDomains} field. */
-    public VkSwapchainTimeDomainPropertiesEXT pTimeDomains(@Nullable @NativeType("VkTimeDomainKHR *") IntBuffer value) { npTimeDomains(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@code pTimeDomainIds} field. */
-    public VkSwapchainTimeDomainPropertiesEXT pTimeDomainIds(@Nullable @NativeType("uint64_t *") LongBuffer value) { npTimeDomainIds(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkSwapchainTimeDomainPropertiesEXT set(
         int sType,
-        long pNext,
-        int timeDomainCount,
-        @Nullable IntBuffer pTimeDomains,
-        @Nullable LongBuffer pTimeDomainIds
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        timeDomainCount(timeDomainCount);
-        pTimeDomains(pTimeDomains);
-        pTimeDomainIds(pTimeDomainIds);
 
         return this;
     }
@@ -266,12 +254,6 @@ public class VkSwapchainTimeDomainPropertiesEXT extends Struct<VkSwapchainTimeDo
     public static void nsType(long struct, int value) { memPutInt(struct + VkSwapchainTimeDomainPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkSwapchainTimeDomainPropertiesEXT.PNEXT, value); }
-    /** Sets the specified value to the {@code timeDomainCount} field of the specified {@code struct}. */
-    public static void ntimeDomainCount(long struct, int value) { memPutInt(struct + VkSwapchainTimeDomainPropertiesEXT.TIMEDOMAINCOUNT, value); }
-    /** Unsafe version of {@link #pTimeDomains(IntBuffer) pTimeDomains}. */
-    public static void npTimeDomains(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkSwapchainTimeDomainPropertiesEXT.PTIMEDOMAINS, memAddressSafe(value)); }
-    /** Unsafe version of {@link #pTimeDomainIds(LongBuffer) pTimeDomainIds}. */
-    public static void npTimeDomainIds(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkSwapchainTimeDomainPropertiesEXT.PTIMEDOMAINIDS, memAddressSafe(value)); }
 
     // -----------------------------------
 
@@ -338,12 +320,6 @@ public class VkSwapchainTimeDomainPropertiesEXT extends Struct<VkSwapchainTimeDo
         public VkSwapchainTimeDomainPropertiesEXT.Buffer sType$Default() { return sType(EXTPresentTiming.VK_STRUCTURE_TYPE_SWAPCHAIN_TIME_DOMAIN_PROPERTIES_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkSwapchainTimeDomainPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkSwapchainTimeDomainPropertiesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code timeDomainCount} field. */
-        public VkSwapchainTimeDomainPropertiesEXT.Buffer timeDomainCount(@NativeType("uint32_t") int value) { VkSwapchainTimeDomainPropertiesEXT.ntimeDomainCount(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@code pTimeDomains} field. */
-        public VkSwapchainTimeDomainPropertiesEXT.Buffer pTimeDomains(@Nullable @NativeType("VkTimeDomainKHR *") IntBuffer value) { VkSwapchainTimeDomainPropertiesEXT.npTimeDomains(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@code pTimeDomainIds} field. */
-        public VkSwapchainTimeDomainPropertiesEXT.Buffer pTimeDomainIds(@Nullable @NativeType("uint64_t *") LongBuffer value) { VkSwapchainTimeDomainPropertiesEXT.npTimeDomainIds(address(), value); return this; }
 
     }
 

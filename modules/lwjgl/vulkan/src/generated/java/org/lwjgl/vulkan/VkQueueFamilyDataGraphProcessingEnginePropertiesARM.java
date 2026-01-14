@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre>{@code
  * struct VkQueueFamilyDataGraphProcessingEnginePropertiesARM {
  *     VkStructureType sType;
- *     void const * pNext;
+ *     void * pNext;
  *     VkExternalSemaphoreHandleTypeFlags foreignSemaphoreHandleTypes;
  *     VkExternalMemoryHandleTypeFlags foreignMemoryHandleTypes;
  * }}</pre>
@@ -82,7 +82,7 @@ public class VkQueueFamilyDataGraphProcessingEnginePropertiesARM extends Struct<
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** @return the value of the {@code pNext} field. */
-    @NativeType("void const *")
+    @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** @return the value of the {@code foreignSemaphoreHandleTypes} field. */
     @NativeType("VkExternalSemaphoreHandleTypeFlags")
@@ -96,23 +96,15 @@ public class VkQueueFamilyDataGraphProcessingEnginePropertiesARM extends Struct<
     /** Sets the {@link ARMDataGraph#VK_STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROCESSING_ENGINE_PROPERTIES_ARM STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROCESSING_ENGINE_PROPERTIES_ARM} value to the {@code sType} field. */
     public VkQueueFamilyDataGraphProcessingEnginePropertiesARM sType$Default() { return sType(ARMDataGraph.VK_STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROCESSING_ENGINE_PROPERTIES_ARM); }
     /** Sets the specified value to the {@code pNext} field. */
-    public VkQueueFamilyDataGraphProcessingEnginePropertiesARM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code foreignSemaphoreHandleTypes} field. */
-    public VkQueueFamilyDataGraphProcessingEnginePropertiesARM foreignSemaphoreHandleTypes(@NativeType("VkExternalSemaphoreHandleTypeFlags") int value) { nforeignSemaphoreHandleTypes(address(), value); return this; }
-    /** Sets the specified value to the {@code foreignMemoryHandleTypes} field. */
-    public VkQueueFamilyDataGraphProcessingEnginePropertiesARM foreignMemoryHandleTypes(@NativeType("VkExternalMemoryHandleTypeFlags") int value) { nforeignMemoryHandleTypes(address(), value); return this; }
+    public VkQueueFamilyDataGraphProcessingEnginePropertiesARM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkQueueFamilyDataGraphProcessingEnginePropertiesARM set(
         int sType,
-        long pNext,
-        int foreignSemaphoreHandleTypes,
-        int foreignMemoryHandleTypes
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        foreignSemaphoreHandleTypes(foreignSemaphoreHandleTypes);
-        foreignMemoryHandleTypes(foreignMemoryHandleTypes);
 
         return this;
     }
@@ -253,10 +245,6 @@ public class VkQueueFamilyDataGraphProcessingEnginePropertiesARM extends Struct<
     public static void nsType(long struct, int value) { memPutInt(struct + VkQueueFamilyDataGraphProcessingEnginePropertiesARM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkQueueFamilyDataGraphProcessingEnginePropertiesARM.PNEXT, value); }
-    /** Unsafe version of {@link #foreignSemaphoreHandleTypes(int) foreignSemaphoreHandleTypes}. */
-    public static void nforeignSemaphoreHandleTypes(long struct, int value) { memPutInt(struct + VkQueueFamilyDataGraphProcessingEnginePropertiesARM.FOREIGNSEMAPHOREHANDLETYPES, value); }
-    /** Unsafe version of {@link #foreignMemoryHandleTypes(int) foreignMemoryHandleTypes}. */
-    public static void nforeignMemoryHandleTypes(long struct, int value) { memPutInt(struct + VkQueueFamilyDataGraphProcessingEnginePropertiesARM.FOREIGNMEMORYHANDLETYPES, value); }
 
     // -----------------------------------
 
@@ -305,7 +293,7 @@ public class VkQueueFamilyDataGraphProcessingEnginePropertiesARM extends Struct<
         @NativeType("VkStructureType")
         public int sType() { return VkQueueFamilyDataGraphProcessingEnginePropertiesARM.nsType(address()); }
         /** @return the value of the {@code pNext} field. */
-        @NativeType("void const *")
+        @NativeType("void *")
         public long pNext() { return VkQueueFamilyDataGraphProcessingEnginePropertiesARM.npNext(address()); }
         /** @return the value of the {@code foreignSemaphoreHandleTypes} field. */
         @NativeType("VkExternalSemaphoreHandleTypeFlags")
@@ -319,11 +307,7 @@ public class VkQueueFamilyDataGraphProcessingEnginePropertiesARM extends Struct<
         /** Sets the {@link ARMDataGraph#VK_STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROCESSING_ENGINE_PROPERTIES_ARM STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROCESSING_ENGINE_PROPERTIES_ARM} value to the {@code sType} field. */
         public VkQueueFamilyDataGraphProcessingEnginePropertiesARM.Buffer sType$Default() { return sType(ARMDataGraph.VK_STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROCESSING_ENGINE_PROPERTIES_ARM); }
         /** Sets the specified value to the {@code pNext} field. */
-        public VkQueueFamilyDataGraphProcessingEnginePropertiesARM.Buffer pNext(@NativeType("void const *") long value) { VkQueueFamilyDataGraphProcessingEnginePropertiesARM.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code foreignSemaphoreHandleTypes} field. */
-        public VkQueueFamilyDataGraphProcessingEnginePropertiesARM.Buffer foreignSemaphoreHandleTypes(@NativeType("VkExternalSemaphoreHandleTypeFlags") int value) { VkQueueFamilyDataGraphProcessingEnginePropertiesARM.nforeignSemaphoreHandleTypes(address(), value); return this; }
-        /** Sets the specified value to the {@code foreignMemoryHandleTypes} field. */
-        public VkQueueFamilyDataGraphProcessingEnginePropertiesARM.Buffer foreignMemoryHandleTypes(@NativeType("VkExternalMemoryHandleTypeFlags") int value) { VkQueueFamilyDataGraphProcessingEnginePropertiesARM.nforeignMemoryHandleTypes(address(), value); return this; }
+        public VkQueueFamilyDataGraphProcessingEnginePropertiesARM.Buffer pNext(@NativeType("void *") long value) { VkQueueFamilyDataGraphProcessingEnginePropertiesARM.npNext(address(), value); return this; }
 
     }
 

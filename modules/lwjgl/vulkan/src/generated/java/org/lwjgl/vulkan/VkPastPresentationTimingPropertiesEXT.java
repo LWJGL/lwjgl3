@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -112,26 +111,14 @@ public class VkPastPresentationTimingPropertiesEXT extends Struct<VkPastPresenta
     public VkPastPresentationTimingPropertiesEXT sType$Default() { return sType(EXTPresentTiming.VK_STRUCTURE_TYPE_PAST_PRESENTATION_TIMING_PROPERTIES_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPastPresentationTimingPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code timingPropertiesCounter} field. */
-    public VkPastPresentationTimingPropertiesEXT timingPropertiesCounter(@NativeType("uint64_t") long value) { ntimingPropertiesCounter(address(), value); return this; }
-    /** Sets the specified value to the {@code timeDomainsCounter} field. */
-    public VkPastPresentationTimingPropertiesEXT timeDomainsCounter(@NativeType("uint64_t") long value) { ntimeDomainsCounter(address(), value); return this; }
-    /** Sets the address of the specified {@link VkPastPresentationTimingEXT.Buffer} to the {@code pPresentationTimings} field. */
-    public VkPastPresentationTimingPropertiesEXT pPresentationTimings(@NativeType("VkPastPresentationTimingEXT *") VkPastPresentationTimingEXT.Buffer value) { npPresentationTimings(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPastPresentationTimingPropertiesEXT set(
         int sType,
-        long pNext,
-        long timingPropertiesCounter,
-        long timeDomainsCounter,
-        VkPastPresentationTimingEXT.Buffer pPresentationTimings
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        timingPropertiesCounter(timingPropertiesCounter);
-        timeDomainsCounter(timeDomainsCounter);
-        pPresentationTimings(pPresentationTimings);
 
         return this;
     }
@@ -276,26 +263,6 @@ public class VkPastPresentationTimingPropertiesEXT extends Struct<VkPastPresenta
     public static void nsType(long struct, int value) { memPutInt(struct + VkPastPresentationTimingPropertiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPastPresentationTimingPropertiesEXT.PNEXT, value); }
-    /** Unsafe version of {@link #timingPropertiesCounter(long) timingPropertiesCounter}. */
-    public static void ntimingPropertiesCounter(long struct, long value) { memPutLong(struct + VkPastPresentationTimingPropertiesEXT.TIMINGPROPERTIESCOUNTER, value); }
-    /** Unsafe version of {@link #timeDomainsCounter(long) timeDomainsCounter}. */
-    public static void ntimeDomainsCounter(long struct, long value) { memPutLong(struct + VkPastPresentationTimingPropertiesEXT.TIMEDOMAINSCOUNTER, value); }
-    /** Sets the specified value to the {@code presentationTimingCount} field of the specified {@code struct}. */
-    public static void npresentationTimingCount(long struct, int value) { memPutInt(struct + VkPastPresentationTimingPropertiesEXT.PRESENTATIONTIMINGCOUNT, value); }
-    /** Unsafe version of {@link #pPresentationTimings(VkPastPresentationTimingEXT.Buffer) pPresentationTimings}. */
-    public static void npPresentationTimings(long struct, VkPastPresentationTimingEXT.Buffer value) { memPutAddress(struct + VkPastPresentationTimingPropertiesEXT.PPRESENTATIONTIMINGS, value.address()); npresentationTimingCount(struct, value.remaining()); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        int presentationTimingCount = npresentationTimingCount(struct);
-        long pPresentationTimings = memGetAddress(struct + VkPastPresentationTimingPropertiesEXT.PPRESENTATIONTIMINGS);
-        check(pPresentationTimings);
-        validate(pPresentationTimings, presentationTimingCount, VkPastPresentationTimingEXT.SIZEOF, VkPastPresentationTimingEXT::validate);
-    }
 
     // -----------------------------------
 
@@ -365,12 +332,6 @@ public class VkPastPresentationTimingPropertiesEXT extends Struct<VkPastPresenta
         public VkPastPresentationTimingPropertiesEXT.Buffer sType$Default() { return sType(EXTPresentTiming.VK_STRUCTURE_TYPE_PAST_PRESENTATION_TIMING_PROPERTIES_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPastPresentationTimingPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPastPresentationTimingPropertiesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code timingPropertiesCounter} field. */
-        public VkPastPresentationTimingPropertiesEXT.Buffer timingPropertiesCounter(@NativeType("uint64_t") long value) { VkPastPresentationTimingPropertiesEXT.ntimingPropertiesCounter(address(), value); return this; }
-        /** Sets the specified value to the {@code timeDomainsCounter} field. */
-        public VkPastPresentationTimingPropertiesEXT.Buffer timeDomainsCounter(@NativeType("uint64_t") long value) { VkPastPresentationTimingPropertiesEXT.ntimeDomainsCounter(address(), value); return this; }
-        /** Sets the address of the specified {@link VkPastPresentationTimingEXT.Buffer} to the {@code pPresentationTimings} field. */
-        public VkPastPresentationTimingPropertiesEXT.Buffer pPresentationTimings(@NativeType("VkPastPresentationTimingEXT *") VkPastPresentationTimingEXT.Buffer value) { VkPastPresentationTimingPropertiesEXT.npPresentationTimings(address(), value); return this; }
 
     }
 

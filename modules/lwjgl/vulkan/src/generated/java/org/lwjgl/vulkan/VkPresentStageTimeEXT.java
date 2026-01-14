@@ -77,34 +77,6 @@ public class VkPresentStageTimeEXT extends Struct<VkPresentStageTimeEXT> impleme
     @NativeType("uint64_t")
     public long time() { return ntime(address()); }
 
-    /** Sets the specified value to the {@code stage} field. */
-    public VkPresentStageTimeEXT stage(@NativeType("VkPresentStageFlagsEXT") int value) { nstage(address(), value); return this; }
-    /** Sets the specified value to the {@code time} field. */
-    public VkPresentStageTimeEXT time(@NativeType("uint64_t") long value) { ntime(address(), value); return this; }
-
-    /** Initializes this struct with the specified values. */
-    public VkPresentStageTimeEXT set(
-        int stage,
-        long time
-    ) {
-        stage(stage);
-        time(time);
-
-        return this;
-    }
-
-    /**
-     * Copies the specified struct data to this struct.
-     *
-     * @param src the source struct
-     *
-     * @return this struct
-     */
-    public VkPresentStageTimeEXT set(VkPresentStageTimeEXT src) {
-        memCopy(src.address(), address(), SIZEOF);
-        return this;
-    }
-
     // -----------------------------------
 
     /** Returns a new {@code VkPresentStageTimeEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
@@ -221,11 +193,6 @@ public class VkPresentStageTimeEXT extends Struct<VkPresentStageTimeEXT> impleme
     /** Unsafe version of {@link #time}. */
     public static long ntime(long struct) { return memGetLong(struct + VkPresentStageTimeEXT.TIME); }
 
-    /** Unsafe version of {@link #stage(int) stage}. */
-    public static void nstage(long struct, int value) { memPutInt(struct + VkPresentStageTimeEXT.STAGE, value); }
-    /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { memPutLong(struct + VkPresentStageTimeEXT.TIME, value); }
-
     // -----------------------------------
 
     /** An array of {@link VkPresentStageTimeEXT} structs. */
@@ -275,11 +242,6 @@ public class VkPresentStageTimeEXT extends Struct<VkPresentStageTimeEXT> impleme
         /** @return the value of the {@code time} field. */
         @NativeType("uint64_t")
         public long time() { return VkPresentStageTimeEXT.ntime(address()); }
-
-        /** Sets the specified value to the {@code stage} field. */
-        public VkPresentStageTimeEXT.Buffer stage(@NativeType("VkPresentStageFlagsEXT") int value) { VkPresentStageTimeEXT.nstage(address(), value); return this; }
-        /** Sets the specified value to the {@code time} field. */
-        public VkPresentStageTimeEXT.Buffer time(@NativeType("uint64_t") long value) { VkPresentStageTimeEXT.ntime(address(), value); return this; }
 
     }
 
