@@ -6,8 +6,7 @@ package org.lwjgl.demo.sdl;
 
 import org.jspecify.annotations.*;
 import org.lwjgl.system.ffm.*;
-
-import java.lang.foreign.*;
+import org.lwjgl.system.ffm.mapping.*;
 
 import static org.lwjgl.demo.sdl.MySDL.SDL_CommonEvent.*;
 import static org.lwjgl.demo.sdl.MySDL.SDL_DisplayEvent.*;
@@ -16,17 +15,17 @@ import static org.lwjgl.system.ffm.FFM.*;
 @NullMarked
 public interface MySDL {
 
-    ValueLayout Sint16 = typedef("Sint16", int16_t);
-    ValueLayout Sint32 = typedef("Sint32", int32_t);
-    ValueLayout Sint64 = typedef("Sint64", int64_t);
-    ValueLayout Sint8  = typedef("Sint8", int8_t);
-    ValueLayout Uint16 = typedef("Uint16", uint16_t);
-    ValueLayout Uint32 = typedef("Uint32", uint32_t);
-    ValueLayout Uint64 = typedef("Uint64", uint64_t);
-    ValueLayout Uint8  = typedef("Uint8", uint8_t);
+    Mapping.Short Sint16 = int16_t.typedef("Sint16");
+    Mapping.Int   Sint32 = int32_t.typedef("Sint32");
+    Mapping.Long  Sint64 = int64_t.typedef("Sint64");
+    Mapping.Byte  Sint8  = int8_t.typedef("Sint8");
+    Mapping.Short Uint16 = uint16_t.typedef("Uint16");
+    Mapping.Int   Uint32 = uint32_t.typedef("Uint32");
+    Mapping.Long  Uint64 = uint64_t.typedef("Uint64");
+    Mapping.Byte  Uint8  = uint8_t.typedef("Uint8");
 
-    ValueLayout SDL_EventType = typedef("SDL_EventType", int32_t);
-    ValueLayout SDL_DisplayID = typedef("SDL_DisplayID", uint32_t);
+    Mapping.Int SDL_EventType = int32_t.typedef("SDL_EventType");
+    Mapping.Int SDL_DisplayID = uint32_t.typedef("SDL_DisplayID");
 
     interface SDL_CommonEvent {
         StructBinder<SDL_CommonEvent> SDL_CommonEvent = ffmStruct(SDL_CommonEvent.class)
@@ -106,7 +105,7 @@ public interface MySDL {
 //            .m("render", SDL_RenderEvent.$)
 //            .m("drop", SDL_DropEvent.$)
 //            .m("clipboard", SDL_ClipboardEvent.$)
-            .m("padding", array(Uint8, 128))
+            .m("padding", Uint8.array(128))
             .build();
 
         int type();

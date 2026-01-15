@@ -193,9 +193,9 @@ public interface MyGLFW {
         }""")
     interface GLFWgammaramp {
         StructBinder<GLFWgammaramp> GLFWgammaramp = ffmStruct(GLFWgammaramp.class)
-            .m("red", p(unsigned_short))
-            .m("green", p(unsigned_short))
-            .m("blue", p(unsigned_short))
+            .m("red", unsigned_short.p())
+            .m("green", unsigned_short.p())
+            .m("blue", unsigned_short.p())
             .m("size", cint)
             .build();
 

@@ -6,6 +6,7 @@ package org.lwjgl.system.ffm;
 
 import org.jspecify.annotations.*;
 import org.lwjgl.system.*;
+import org.lwjgl.system.ffm.mapping.*;
 import org.lwjgl.system.libffi.*;
 
 import java.io.*;
@@ -19,6 +20,7 @@ import java.lang.reflect.*;
 import java.nio.charset.*;
 import java.nio.file.*;
 import java.util.*;
+import java.util.concurrent.*;
 import java.util.function.*;
 import java.util.stream.*;
 
@@ -65,10 +67,9 @@ public final class FFM {
         .map(Field::getName)
         .collect(Collectors.toUnmodifiableSet());
 
-    // TODO: consider concurrency issues
     // TODO: consider GC issues (the FFMConfig holds expensive resources), make weak maybe?
     // TODO: make external? i.e. the user provides the AnnotatedElement to FFMConfig mapping and is responsible for its lifecycle.
-    static final HashMap<AnnotatedElement, FFMConfig> BINDING_CONFIGS = new HashMap<>();
+    static final ConcurrentHashMap<AnnotatedElement, FFMConfig> BINDING_CONFIGS = new ConcurrentHashMap<>();
 
     // LWJGL 3 interop
     static final ScopedValue<Arena> ARENA = ScopedValue.newInstance();
@@ -244,240 +245,100 @@ public final class FFM {
 
     // PUBLIC API (DSL)
 
-    /** A layout that can be used to map the C {@code int8_t} type. */
-    public static final ValueLayout.OfByte int8_t = typedef("int8_t", ValueLayout.JAVA_BYTE);
+    /** A mapping that can be used to typedef opaque C types. */
+    public static final Mapping.Opaque opaque = Mapping.createOpaque("void");
 
-    /** A layout that can be used to map the C {@code int16_t} type. */
-    public static final ValueLayout.OfShort int16_t = typedef("int16_t", ValueLayout.JAVA_SHORT);
+    /** The Java {@code boolean} mapping. */
+    public static final Mapping.Boolean jboolean = Mapping.createBoolean("boolean");
+    /** The Java {@code byte} mapping. */
+    public static final Mapping.Byte    jbyte    = Mapping.createByte("byte", true);
+    /** The Java {@code char} mapping. */
+    public static final Mapping.Char    jchar    = Mapping.createChar("char");
+    /** The Java {@code short} mapping. */
+    public static final Mapping.Short   jshort   = Mapping.createShort("short", true);
+    /** The Java {@code int} mapping. */
+    public static final Mapping.Int     jint     = Mapping.createInt("int", true);
+    /** The Java {@code long} mapping. */
+    public static final Mapping.Long    jlong    = Mapping.createLong("long", true);
+    /** The Java {@code float} mapping. */
+    public static final Mapping.Float   jfloat   = Mapping.createFloat("float");
+    /** The Java {@code double} mapping. */
+    public static final Mapping.Double  jdouble  = Mapping.createDouble("double");
 
-    /** A layout that can be used to map the C {@code int32_t} type. */
-    public static final ValueLayout.OfInt int32_t = typedef("int32_t", ValueLayout.JAVA_INT);
+    /** The C {@code int8_t} type mapping. */
+    public static final Mapping.Byte int8_t = jbyte.typedef("int8_t");
 
-    /** A layout that can be used to map the C {@code int64_t} type. */
-    public static final ValueLayout.OfLong int64_t = typedef("int64_t", ValueLayout.JAVA_LONG);
+    /** The C {@code int16_t} type mapping. */
+    public static final Mapping.Short int16_t = jshort.typedef("int16_t");
 
-    /** A layout that can be used to map the C {@code uint8_t} type. */
-    public static final ValueLayout.OfByte uint8_t = typedef("uint8_t", ValueLayout.JAVA_BYTE);
+    /** The C {@code int32_t} type mapping. */
+    public static final Mapping.Int int32_t = jint.typedef("int32_t");
 
-    /** A layout that can be used to map the C {@code uint16_t} type. */
-    public static final ValueLayout.OfShort uint16_t = typedef("uint16_t", ValueLayout.JAVA_SHORT);
+    /** The C {@code int64_t} type mapping. */
+    public static final Mapping.Long int64_t = jlong.typedef("int64_t");
 
-    /** A layout that can be used to map the C {@code uint32_t} type. */
-    public static final ValueLayout.OfInt uint32_t = typedef("uint32_t", ValueLayout.JAVA_INT);
+    /** The C {@code uint8_t} type mapping. */
+    public static final Mapping.Byte uint8_t = Mapping.createByte("uint8_t", false);
 
-    /** A layout that can be used to map the C {@code uint64_t} type. */
-    public static final ValueLayout.OfLong uint64_t = typedef("uint64_t", ValueLayout.JAVA_LONG);
+    /** The C {@code uint16_t} type mapping. */
+    public static final Mapping.Short uint16_t = Mapping.createShort("uint16_t", false);
 
-    /** A layout that can be used to map the C {@code size_t} type. */
-    public static final AddressLayout size_t = typedef("size_t", ValueLayout.ADDRESS);
+    /** The C {@code uint32_t} type mapping. */
+    public static final Mapping.Int uint32_t = Mapping.createInt("uint32_t", false);
 
-    /** A layout that can be used to map the C {@code ssize_t} type. */
-    public static final AddressLayout ptrdiff_t = typedef("ptrdiff_t", ValueLayout.ADDRESS);
+    /** The C {@code uint64_t} type mapping. */
+    public static final Mapping.Long uint64_t = Mapping.createLong("uint64_t", false);
 
-    /** A layout that can be used to map the C {@code intptr_t} type. */
-    public static final AddressLayout intptr_t = typedef("intptr_t", ValueLayout.ADDRESS);
+    /** The C {@code size_t} type mapping. */
+    public static final Mapping.Size size_t = Mapping.createSize("size_t", false);
 
-    /** A layout that can be used to map the C {@code uintptr_t} type. */
-    public static final AddressLayout uintptr_t = typedef("uintptr_t", ValueLayout.ADDRESS);
+    /** The C {@code ssize_t} type mapping. */
+    public static final Mapping.Size ptrdiff_t = Mapping.createSize("ptrdiff_t", true);
 
-    /** A layout that can be used to map the C {@code char} type. */
-    public static final ValueLayout.OfByte cchar = typedef("char", int8_t);
+    /** The C {@code intptr_t} type mapping. */
+    public static final Mapping.Size intptr_t = Mapping.createSize("intptr_t", true);
 
-    /** A layout that can be used to map the C {@code short} type. */
-    public static final ValueLayout.OfShort cshort = typedef("short", int16_t);
+    /** The C {@code uintptr_t} type mapping. */
+    public static final Mapping.Size uintptr_t = Mapping.createSize("uintptr_t", false);
 
-    /** A layout that can be used to map the C {@code int} type. */
-    public static final ValueLayout.OfInt cint = typedef("int", int32_t);
+    /** The C {@code bool} type mapping. */
+    public static final Mapping.Boolean bool = jboolean.typedef("bool");
 
-    /** A layout that can be used to map the C {@code long} type. */
-    public static final ValueLayout clong = typedef("long", ValueLayout.ADDRESS.byteSize() == 4 || Platform.get() == Platform.WINDOWS ? int32_t : int64_t);
+    /** The C {@code char} type mapping. */
+    public static final Mapping.Byte cchar = int8_t.typedef("char");
 
-    /** A layout that can be used to map the C {@code long long} type. */
-    public static final ValueLayout.OfLong long_long = typedef("long long", ValueLayout.JAVA_LONG);
+    /** The C {@code short} type mapping. */
+    public static final Mapping.Short cshort = int16_t.typedef("short");
 
-    /** A layout that can be used to map the C {@code unsigned char} type. */
-    public static final ValueLayout.OfByte unsigned_char = typedef("unsigned char", uint8_t);
+    /** The C {@code int} type mapping. */
+    public static final Mapping.Int cint = int32_t.typedef("int");
 
-    /** A layout that can be used to map the C {@code unsigned short} type. */
-    public static final ValueLayout.OfShort unsigned_short = typedef("unsigned short", uint16_t);
+    /** The C {@code long} type mapping. */
+    public static final Mapping.CLong clong = Mapping.createCLong("long", true);
 
-    /** A layout that can be used to map the C {@code unsigned int} type. */
-    public static final ValueLayout.OfInt unsigned_int = typedef("unsigned int", uint32_t);
+    /** The C {@code long long} type mapping. */
+    public static final Mapping.Long long_long = jlong.typedef("long long");
 
-    /** A layout that can be used to map the C {@code unsigned long} type. */
-    public static final ValueLayout unsigned_clong = typedef("unsigned long", clong.byteSize() == 4 ? uint32_t : uint64_t);
+    /** The C {@code unsigned char} type mapping. */
+    public static final Mapping.Byte unsigned_char = uint8_t.typedef("unsigned char");
 
-    /** A layout that can be used to map the C {@code unsigned long long} type. */
-    public static final ValueLayout.OfLong unsigned_long_long = typedef("unsigned long long", long_long);
+    /** The C {@code unsigned short} type mapping. */
+    public static final Mapping.Short unsigned_short = uint16_t.typedef("unsigned short");
 
-    /** A layout that can be used to map the C {@code float} type. */
-    public static final ValueLayout.OfFloat float32 = typedef("float32", ValueLayout.JAVA_FLOAT);
+    /** The C {@code unsigned int} type mapping. */
+    public static final Mapping.Int unsigned_int = uint32_t.typedef("unsigned int");
 
-    /** A layout that can be used to map the C {@code double} type. */
-    public static final ValueLayout.OfDouble float64 = typedef("float64", ValueLayout.JAVA_DOUBLE);
+    /** The C {@code unsigned long} type mapping. */
+    public static final Mapping.CLong unsigned_long = Mapping.createCLong("unsigned long", false);
 
-    /**
-     * Creates an alias of the specified layout with a new name.
-     *
-     * @param name   the new name
-     * @param layout the layout to alias
-     *
-     * @return the new layout
-     */
-    public static ValueLayout.OfByte typedef(String name, ValueLayout.OfByte layout) { return layout.withName(name); }
+    /** The C {@code unsigned long long} type mapping. */
+    public static final Mapping.Long unsigned_long_long = uint64_t.typedef("unsigned long long");
 
-    /**
-     * Creates an alias of the specified layout with a new name.
-     *
-     * @param name   the new name
-     * @param layout the layout to alias
-     *
-     * @return the new layout
-     */
-    public static ValueLayout.OfShort typedef(String name, ValueLayout.OfShort layout) { return layout.withName(name); }
+    /** The C {@code float} type mapping. */
+    public static final Mapping.Float float32 = jfloat.typedef("float");
 
-    /**
-     * Creates an alias of the specified layout with a new name.
-     *
-     * @param name   the new name
-     * @param layout the layout to alias
-     *
-     * @return the new layout
-     */
-    public static ValueLayout.OfInt typedef(String name, ValueLayout.OfInt layout) { return layout.withName(name); }
-
-    /**
-     * Creates an alias of the specified layout with a new name.
-     *
-     * @param name   the new name
-     * @param layout the layout to alias
-     *
-     * @return the new layout
-     */
-    public static ValueLayout.OfLong typedef(String name, ValueLayout.OfLong layout) { return layout.withName(name); }
-
-    /**
-     * Creates an alias of the specified layout with a new name.
-     *
-     * @param name   the new name
-     * @param layout the layout to alias
-     *
-     * @return the new layout
-     */
-    public static ValueLayout.OfFloat typedef(String name, ValueLayout.OfFloat layout) { return layout.withName(name); }
-
-    /**
-     * Creates an alias of the specified layout with a new name.
-     *
-     * @param name   the new name
-     * @param layout the layout to alias
-     *
-     * @return the new layout
-     */
-    public static ValueLayout.OfDouble typedef(String name, ValueLayout.OfDouble layout) { return layout.withName(name); }
-
-    /**
-     * Creates an alias of the specified layout with a new name.
-     *
-     * @param name   the new name
-     * @param layout the layout to alias
-     *
-     * @return the new layout
-     */
-    public static ValueLayout typedef(String name, ValueLayout layout) { return layout.withName(name); }
-
-    /**
-     * Creates an alias of the specified layout with a new name.
-     *
-     * @param name   the new name
-     * @param layout the layout to alias
-     *
-     * @return the new layout
-     */
-    public static AddressLayout typedef(String name, AddressLayout layout) { return layout.withName(name); }
-
-    /**
-     * Creates an alias of the specified layout with a new name.
-     *
-     * @param name   the new name
-     * @param layout the layout to alias
-     *
-     * @return the new layout
-     */
-    public static SequenceLayout typedef(String name, SequenceLayout layout) { return layout.withName(name); }
-
-    /**
-     * Creates an alias of the specified layout with a new name.
-     *
-     * @param name   the new name
-     * @param layout the layout to alias
-     *
-     * @return the new layout
-     */
-    public static StructLayout typedef(String name, StructLayout layout) { return layout.withName(name); }
-
-    /**
-     * Creates an alias of the specified layout with a new name.
-     *
-     * @param name   the new name
-     * @param layout the layout to alias
-     *
-     * @return the new layout
-     */
-    public static UnionLayout typedef(String name, UnionLayout layout) { return layout.withName(name); }
-
-    /**
-     * Creates a {@link SequenceLayout} with the specified named layout and element count.
-     *
-     * @param layout       the element layout, which must be named
-     * @param elementCount the number of elements
-     *
-     * @return the sequence layout
-     */
-    public static SequenceLayout array(MemoryLayout layout, long elementCount) {
-        return MemoryLayout
-            .sequenceLayout(elementCount, layout)
-            .withName(layout.name().orElseThrow() + "[" + elementCount + "]");
-    }
-
-    /**
-     * Creates an opaque pointer layout with the specified name.
-     *
-     * @param name the opaque pointer name
-     *
-     * @return the opaque pointer layout
-     */
-    public static AddressLayout opaque(String name) {
-        return ValueLayout.ADDRESS.withName(name);
-    }
-
-    // TODO: refactor, this would cause conflicts with a member named "p"
-
-    /**
-     * Creates a pointer layout that targets the specified binder's layout.
-     *
-     * @param binder the binder that provides the target layout
-     *
-     * @return the pointer layout
-     */
-    public static AddressLayout p(GroupBinder<?, ?> binder) {
-        var layout = binder.layout();
-        return p(layout);
-    }
-
-    /**
-     * Creates a pointer layout that targets the specified layout.
-     *
-     * @param layout the target layout
-     *
-     * @return the pointer layout
-     */
-    public static AddressLayout p(MemoryLayout layout) {
-        var name = layout.name().orElseThrow();
-        return ValueLayout.ADDRESS
-            .withTargetLayout(layout)
-            .withName(name + (name.endsWith("*") ? "*" : " *"));
-    }
+    /** The C {@code double} type mapping. */
+    public static final Mapping.Double float64 = jdouble.typedef("double");
 
     /**
      * Creates a {@link StructBinder} builder for the specified struct interface, with the default state.
@@ -653,26 +514,16 @@ public final class FFM {
         }
 
         /**
-         * Adds a nested group member to this group.
-         *
-         * @param name   the member name
-         * @param binder the member's binder
-         *
-         * @return this builder instance
-         */
-        public SELF m(String name, GroupBinder<?, ?> binder) {
-            return m(name, binder.layout());
-        }
-
-        /**
          * Adds a new member to this group.
          *
-         * @param name   the member name
-         * @param layout the member's memory layout
+         * @param name    the member name
+         * @param mapping the member's data mapping
          *
          * @return this builder instance
          */
-        public SELF m(String name, MemoryLayout layout) {
+        public abstract SELF m(String name, DataMapping<?> mapping);
+
+        protected SELF addMember(String name, MemoryLayout layout) {
             var previous = members.put(name, layout.withName(name));
             if (previous != null) {
                 throw new IllegalStateException("struct member '" + name + "' is already defined");
@@ -752,7 +603,9 @@ public final class FFM {
         @Override BCGroup.Kind kind()                 { return BCGroup.Kind.STRUCT; }
 
         @Override
-        public StructBinderBuilder<T> m(String name, MemoryLayout layout) {
+        public StructBinderBuilder<T> m(String name, DataMapping<?> mapping) {
+            var layout = mapping.layout();
+
             var layoutAlignment = layout.byteAlignment();
             if (packAlignment < layoutAlignment) {
                 layoutAlignment = packAlignment;
@@ -767,7 +620,7 @@ public final class FFM {
             alignof = max(alignof, layoutAlignment);
             sizeof += layout.byteSize();
 
-            return super.m(name, layout);
+            return addMember(name, layout);
         }
 
         /**
@@ -789,13 +642,15 @@ public final class FFM {
         @Override BCGroup.Kind kind()               { return BCGroup.Kind.UNION; }
 
         @Override
-        public UnionBinderBuilder<T> m(String name, MemoryLayout layout) {
+        public UnionBinderBuilder<T> m(String name, DataMapping<?> mapping) {
+            var layout = mapping.layout();
+
             var layoutAlignment = min(layout.byteAlignment(), packAlignment);
 
             alignof = max(alignof, layoutAlignment);
             sizeof = max(sizeof, layout.byteSize());
 
-            return super.m(name, layout);
+            return addMember(name, layout);
         }
 
         /**

@@ -112,7 +112,8 @@ final class BCGroup {
                             if (returnType == boolean.class) {
                                 buildMemberAddress(cb, thisClass, memberOffset);
                                 switch (memberLayout) {
-                                    case ValueLayout.OfByte _ -> cb.invokestatic(CD_MemoryUtil, "memGetByte", MTD_byte_long);
+                                    case ValueLayout.OfBoolean _,
+                                         ValueLayout.OfByte _ -> cb.invokestatic(CD_MemoryUtil, "memGetByte", MTD_byte_long);
                                     case ValueLayout.OfShort _ -> cb.invokestatic(CD_MemoryUtil, "memGetShort", MTD_short_long);
                                     case ValueLayout.OfInt _ -> cb.invokestatic(CD_MemoryUtil, "memGetInt", MTD_int_long);
                                     default -> throw methodException("Unsupported boolean getter layout: " + memberLayout, method);
@@ -392,7 +393,8 @@ final class BCGroup {
                                 buildMemberAddress(cb, thisClass, memberOffset)
                                     .iload(param0);
                                 switch (memberLayout) {
-                                    case ValueLayout.OfByte _ -> cb.invokestatic(CD_MemoryUtil, "memPutByte", MTD_void_long_byte);
+                                    case ValueLayout.OfBoolean _,
+                                         ValueLayout.OfByte _ -> cb.invokestatic(CD_MemoryUtil, "memPutByte", MTD_void_long_byte);
                                     case ValueLayout.OfShort _ -> cb.invokestatic(CD_MemoryUtil, "memPutShort", MTD_void_long_short);
                                     case ValueLayout.OfInt _ -> cb.invokestatic(CD_MemoryUtil, "memPutInt", MTD_void_long_int);
                                     default -> throw methodException("Unsupported boolean setter layout: " + memberLayout, method);

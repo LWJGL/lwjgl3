@@ -16,6 +16,9 @@ import java.util.function.*;
  */
 public non-sealed interface UnionBinder<T> extends GroupBinder<UnionLayout, T> {
     @Override
+    UnionBinder<T> withByteAlignment(long byteAlignment);
+
+    @Override
     default UnionBinder<T> set(MemorySegment segment, T value) {
         copy(value, get(segment));
         return this;

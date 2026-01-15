@@ -7,6 +7,7 @@ package org.lwjgl.system.ffm;
 import org.jspecify.annotations.*;
 import org.lwjgl.sdl.*;
 import org.lwjgl.system.*;
+import org.lwjgl.system.ffm.mapping.*;
 import org.testng.annotations.*;
 
 import java.lang.annotation.*;
@@ -151,8 +152,8 @@ public class StructTest {
         assertEquals(Simple.$.sizeof(), 4L);
         assertEquals(Simple.$.alignof(), 4L);
         assertEquals(layout.memberLayouts().size(), 1);
-        assertEquals(layout.select(groupElement(0)), int32_t.withName("a"));
-        assertEquals(layout.select(groupElement("a")), int32_t.withName("a"));
+        assertEquals(layout.select(groupElement(0)), int32_t.layout().withName("a"));
+        assertEquals(layout.select(groupElement("a")), int32_t.layout().withName("a"));
 
         try (var stack = stackPush()) {
             stack.push();
@@ -530,7 +531,7 @@ public class StructTest {
     public void testFFMInterop() {
         interface S {
             StructBinder<S> $ = ffmStruct(S.class)
-                .m("z", int8_t)
+                .m("z", bool)
                 .m("b", int8_t)
                 .m("s", int16_t)
                 .m("i", int32_t)
@@ -587,13 +588,13 @@ public class StructTest {
 
             var layout = S.$.layout();
 
-            assertTrue(segment.get(int8_t, layout.byteOffset(groupElement("z"))) != 0);
-            assertEquals(segment.get(int8_t, layout.byteOffset(groupElement("b"))), s.b());
-            assertEquals(segment.get(int16_t, layout.byteOffset(groupElement("s"))), s.s());
-            assertEquals(segment.get(int32_t, layout.byteOffset(groupElement("i"))), s.i());
-            assertEquals(segment.get(int64_t, layout.byteOffset(groupElement("j"))), s.j());
-            assertEquals(segment.get(float32, layout.byteOffset(groupElement("f"))), s.f());
-            assertEquals(segment.get(float64, layout.byteOffset(groupElement("d"))), s.d());
+            assertTrue(bool.get(segment, layout.byteOffset(groupElement("z"))));
+            assertEquals(int8_t.get(segment, layout.byteOffset(groupElement("b"))), s.b());
+            assertEquals(int16_t.get(segment, layout.byteOffset(groupElement("s"))), s.s());
+            assertEquals(int32_t.get(segment, layout.byteOffset(groupElement("i"))), s.i());
+            assertEquals(int64_t.get(segment, layout.byteOffset(groupElement("j"))), s.j());
+            assertEquals(float32.get(segment, layout.byteOffset(groupElement("f"))), s.f());
+            assertEquals(float64.get(segment, layout.byteOffset(groupElement("d"))), s.d());
 
             var offset = 0L;
             for (var member : S.$.layout().memberLayouts()) {
@@ -771,10 +772,10 @@ public class StructTest {
             assertEquals(inner.b(), 0x7FFFFFFFFFFFFFFFL);
             assertEquals(outer.d(), 2.718281828459045);
 
-            assertEquals(segment.get(float32, Outer.$.layout().byteOffset(groupElement("c"))), outer.c());
-            assertEquals(segment.get(int32_t, innerOffset + Inner.$.layout().byteOffset(groupElement("a"))), inner.a());
-            assertEquals(segment.get(int64_t, innerOffset + Inner.$.layout().byteOffset(groupElement("b"))), inner.b());
-            assertEquals(segment.get(float64, Outer.$.layout().byteOffset(groupElement("d"))), outer.d());
+            assertEquals(float32.get(segment, Outer.$.layout().byteOffset(groupElement("c"))), outer.c());
+            assertEquals(int32_t.get(segment, innerOffset + Inner.$.layout().byteOffset(groupElement("a"))), inner.a());
+            assertEquals(int64_t.get(segment, innerOffset + Inner.$.layout().byteOffset(groupElement("b"))), inner.b());
+            assertEquals(float64.get(segment, Outer.$.layout().byteOffset(groupElement("d"))), outer.d());
 
             var innerOther = Inner.$.allocate(arena);
 
@@ -801,7 +802,7 @@ public class StructTest {
             interface Outer {
                 StructBinder<Outer> $ = ffmStruct(Outer.class)
                     .m("c", float32)
-                    .m("inner", p(Inner.$))
+                    .m("inner", Inner.$.p())
                     .m("d", float64)
                     .build();
 
@@ -842,16 +843,16 @@ public class StructTest {
             assertEquals(inner.a(), 42);
             assertEquals(inner.b(), 0x7FFFFFFFFFFFFFFFL);
 
-            assertEquals(segment.get(float32, Outer.$.layout().byteOffset(groupElement("c"))), outer.c());
-            assertEquals(segment.get(uintptr_t, Outer.$.layout().byteOffset(groupElement("inner"))).address(), Inner.$.addressOf(inner));
-            assertEquals(segment.get(float64, Outer.$.layout().byteOffset(groupElement("d"))), outer.d());
+            assertEquals(float32.get(segment, Outer.$.layout().byteOffset(groupElement("c"))), outer.c());
+            assertEquals(uintptr_t.get(segment, Outer.$.layout().byteOffset(groupElement("inner"))), Inner.$.addressOf(inner));
+            assertEquals(float64.get(segment, Outer.$.layout().byteOffset(groupElement("d"))), outer.d());
 
-            assertEquals(innerBuffer.get(int32_t, Inner.$.layout().byteOffset(groupElement("a"))), inner.a());
-            assertEquals(innerBuffer.get(int64_t, Inner.$.layout().byteOffset(groupElement("b"))), inner.b());
+            assertEquals(int32_t.get(innerBuffer, Inner.$.layout().byteOffset(groupElement("a"))), inner.a());
+            assertEquals(int64_t.get(innerBuffer, Inner.$.layout().byteOffset(groupElement("b"))), inner.b());
 
             outer.inner(null);
             assertNull(outer.inner());
-            assertEquals(segment.get(uintptr_t, Outer.$.layout().byteOffset(groupElement("inner"))).address(), NULL);
+            assertEquals(uintptr_t.get(segment, Outer.$.layout().byteOffset(groupElement("inner"))), NULL);
         }
     }
 
@@ -863,9 +864,9 @@ public class StructTest {
                 .m("ai_socktype", cint)
                 .m("ai_protocol", cint)
                 .m("ai_addrlen", unsigned_int)
-                .m("ai_addr", p(opaque("struct sockaddr")))
-                .m("ai_canonname", p(cchar))
-                .m("ai_next", p(opaque("struct addrinfo")))
+                .m("ai_addr", opaque.typedef("struct sockaddr").p())
+                .m("ai_canonname", cchar.p())
+                .m("ai_next", opaque.typedef("struct addrinfo").p())
                 .build();
 
             int ai_flags();
@@ -974,9 +975,9 @@ public class StructTest {
 
             default void checkValues(MemorySegment segment, int value) {
                 assertEquals(i(), value);
-                assertEquals(segment.get(int32_t, 0), value);
+                assertEquals(int32_t.get(segment, 0), value);
                 assertEquals(f(), Float.intBitsToFloat(value));
-                assertEquals(segment.get(float32, 0), Float.intBitsToFloat(value));
+                assertEquals(float32.get(segment, 0), Float.intBitsToFloat(value));
             }
 
             default void checkf() {
@@ -1177,7 +1178,7 @@ public class StructTest {
         try (var arena = Arena.ofConfined()) {
             interface S8 {
                 StructBinder<S8> $ = ffmStruct(S8.class)
-                    .m("buffer", p(int8_t))
+                    .m("buffer", int8_t.p())
                     .m("size", int8_t)
                     .build();
 
@@ -1194,7 +1195,7 @@ public class StructTest {
             //assertThrows(NullPointerException.class, s::buffer);
             assertEquals(s.size(), (byte)0);
 
-            var buffer = arena.allocate(int8_t, 0xFFL);
+            var buffer = int8_t.allocateSegment(arena, 0xFFL);
 
             s
                 .buffer(buffer)
@@ -1207,7 +1208,7 @@ public class StructTest {
         try (var arena = Arena.ofConfined()) {
             interface S16 {
                 StructBinder<S16> $ = ffmStruct(S16.class)
-                    .m("buffer", p(int8_t))
+                    .m("buffer", int8_t.p())
                     .m("size", int16_t)
                     .build();
 
@@ -1224,7 +1225,7 @@ public class StructTest {
             //assertThrows(NullPointerException.class, s::buffer);
             assertEquals(s.size(), (short)0);
 
-            var buffer = arena.allocate(int8_t, 0xFFL);
+            var buffer = int8_t.allocateSegment(arena, 0xFFL);
 
             s
                 .buffer(buffer)
@@ -1237,7 +1238,7 @@ public class StructTest {
         try (var arena = Arena.ofConfined()) {
             interface S32 {
                 StructBinder<S32> $ = ffmStruct(S32.class)
-                    .m("buffer", p(int8_t))
+                    .m("buffer", int8_t.p())
                     .m("size", int32_t)
                     .build();
 
@@ -1254,7 +1255,7 @@ public class StructTest {
             //assertThrows(NullPointerException.class, s::buffer);
             assertEquals(s.size(), 0);
 
-            var buffer = arena.allocate(int8_t, 0xFFL);
+            var buffer = int8_t.allocateSegment(arena, 0xFFL);
 
             s
                 .buffer(buffer)
@@ -1267,7 +1268,7 @@ public class StructTest {
         try (var arena = Arena.ofConfined()) {
             interface S64 {
                 StructBinder<S64> $ = ffmStruct(S64.class)
-                    .m("buffer", p(int8_t))
+                    .m("buffer", int8_t.p())
                     .m("size", int64_t)
                     .build();
 
@@ -1284,7 +1285,7 @@ public class StructTest {
             //assertThrows(NullPointerException.class, s::buffer);
             assertEquals(s.size(), 0L);
 
-            var buffer = arena.allocate(int8_t, 0xFFL);
+            var buffer = int8_t.allocateSegment(arena, 0xFFL);
 
             s
                 .buffer(buffer)
@@ -1355,7 +1356,7 @@ public class StructTest {
             @FFMCharset(FFMCharset.Type.UTF8)
             interface Invalid {
                 StructBinder<Invalid> $ = ffmStruct(Invalid.class)
-                    .m("toString", FFM.array(int8_t, 128))
+                    .m("toString", int8_t.array(128))
                     .build();
 
                 String toString();
@@ -1368,7 +1369,7 @@ public class StructTest {
             @FFMCharset(FFMCharset.Type.UTF8)
             interface Valid {
                 StructBinder<Valid> $ = ffmStruct(Valid.class)
-                    .m("toString", FFM.array(int8_t, 128))
+                    .m("toString", int8_t.array(128))
                     .build();
 
                 @FFMName("toString")
@@ -1523,11 +1524,11 @@ public class StructTest {
 
             // pollute padding bytes with random data
 
-            segment.set(ValueLayout.JAVA_INT, paddingOffset, 0xDEADBEEF);
-            segment.set(ValueLayout.JAVA_INT, paddingOffset + 4, 0xCAFEBABE);
+            jint.set(segment, paddingOffset, 0xDEADBEEF);
+            jint.set(segment, paddingOffset + 4, 0xCAFEBABE);
 
-            segment.set(ValueLayout.JAVA_INT, S.$.sizeof() + paddingOffset, 0xFEEDFACE);
-            segment.set(ValueLayout.JAVA_INT, S.$.sizeof() + paddingOffset + 4, 0xBAADF00D);
+            jint.set(segment, S.$.sizeof() + paddingOffset, 0xFEEDFACE);
+            jint.set(segment, S.$.sizeof() + paddingOffset + 4, 0xBAADF00D);
 
             // verify that equals uses getters only
 
@@ -1558,11 +1559,11 @@ public class StructTest {
 
             // pollute padding bytes with random data
 
-            segment.set(ValueLayout.JAVA_INT, paddingOffset, 0xDEADBEEF);
-            segment.set(ValueLayout.JAVA_INT, paddingOffset + 4, 0xCAFEBABE);
+            jint.set(segment, paddingOffset, 0xDEADBEEF);
+            jint.set(segment, paddingOffset + 4, 0xCAFEBABE);
 
-            segment.set(ValueLayout.JAVA_INT, S.$.sizeof() + paddingOffset, 0xFEEDFACE);
-            segment.set(ValueLayout.JAVA_INT, S.$.sizeof() + paddingOffset + 4, 0xBAADF00D);
+            jint.set(segment, S.$.sizeof() + paddingOffset, 0xFEEDFACE);
+            jint.set(segment, S.$.sizeof() + paddingOffset + 4, 0xBAADF00D);
 
             // verify that equals fails due to padding mismatch
 
@@ -1696,7 +1697,7 @@ public class StructTest {
                 StructBinder<S> $ = ffmStruct(S.class)
                     .m("x", int32_t)
                     .m("y", int32_t)
-                    .m("pointer", p(int32_t))
+                    .m("pointer", int32_t.p())
                     .build();
 
                 int x();
@@ -1735,7 +1736,7 @@ public class StructTest {
                 StructBinder<S> $ = ffmStruct(S.class)
                     .m("x", int32_t)
                     .m("y", int32_t)
-                    .m("pointer", p(array(int32_t, 16)))
+                    .m("pointer", int32_t.array(16).p())
                     .withToString(s -> "My S Rendering: x=" + s.x() + ", y=" + s.y() + ", pointer=" + s.pointer())
                     .build();
 
@@ -1756,7 +1757,7 @@ public class StructTest {
             //assertThrows(NullPointerException.class, s::pointer);
             assertEquals(s.toString(), "My S Rendering: x=0, y=0, pointer=" + MemorySegment.NULL);
 
-            var buffer = arena.allocate(int32_t, 16);
+            var buffer = int32_t.allocateSegment(arena, 16);
 
             s
                 .x(12345)
@@ -1772,7 +1773,7 @@ public class StructTest {
             // test multiple getters without FFMCanonical
             interface S {
                 StructBinder<S> $ = ffmStruct(S.class)
-                    .m("text", array(int8_t, 256))
+                    .m("text", int8_t.array(256))
                     .build();
 
                 @FFMName("text") String foo();
@@ -1784,7 +1785,7 @@ public class StructTest {
             // test multiple getters without FFMCanonical, but custom equals/hashCode/toString
             interface S {
                 StructBinder<S> $ = ffmStruct(S.class)
-                    .m("text", array(int8_t, 256))
+                    .m("text", int8_t.array(256))
                     .withEquals((s1, o) -> {
                         var s2 = (S)o;
                         return s1.foo().equals(s2.foo());
@@ -1802,7 +1803,7 @@ public class StructTest {
             // test multiple getters with multiple FFMCanonical
             interface S {
                 StructBinder<S> $ = ffmStruct(S.class)
-                    .m("text", array(int8_t, 256))
+                    .m("text", int8_t.array(256))
                     .build();
 
                 @FFMCanonical @FFMName("text") String foo();
@@ -1814,7 +1815,7 @@ public class StructTest {
             // test multiple getters with single FFMCanonical (1)
             interface S {
                 StructBinder<S> $ = ffmStruct(S.class)
-                    .m("text", array(int8_t, 256))
+                    .m("text", int8_t.array(256))
                     .build();
 
                 @FFMCanonical @FFMName("text") String foo();
@@ -1828,7 +1829,7 @@ public class StructTest {
             // test multiple getters with single FFMCanonical (2)
             interface S {
                 StructBinder<S> $ = ffmStruct(S.class)
-                    .m("text", array(int8_t, 256))
+                    .m("text", int8_t.array(256))
                     .build();
 
                 @FFMName("text") String foo();
@@ -1898,11 +1899,11 @@ public class StructTest {
             assertTrue(s.a());
             assertFalse(s.b());
             assertFalse(s.c());
-            assertEquals(segment.get(int64_t, 0L), 0x0000_0000_0000_0001L);
+            assertEquals(int64_t.get(segment, 0L), 0x0000_0000_0000_0001L);
 
-            segment.set(int8_t, 0L, (byte)0xFF); // dirty bits
+            int8_t.set(segment, 0L, (byte)0xFF); // dirty bits
             s.a(true);
-            assertEquals(segment.get(int64_t, 0L), 0x0000_0000_0000_0001L);
+            assertEquals(int64_t.get(segment, 0L), 0x0000_0000_0000_0001L);
 
             s
                 .a(false)
@@ -1911,11 +1912,11 @@ public class StructTest {
             assertFalse(s.a());
             assertTrue(s.b());
             assertFalse(s.c());
-            assertEquals(segment.get(int64_t, 0L), 0x0000_0000_0001_0000L);
+            assertEquals(int64_t.get(segment, 0L), 0x0000_0000_0001_0000L);
 
-            segment.set(int16_t, 2L, (short)0xFFFF); // dirty bits
+            int16_t.set(segment, 2L, (short)0xFFFF); // dirty bits
             s.b(true);
-            assertEquals(segment.get(int64_t, 0L), 0x0000_0000_0001_0000L);
+            assertEquals(int64_t.get(segment, 0L), 0x0000_0000_0001_0000L);
 
             s
                 .b(false)
@@ -1924,11 +1925,11 @@ public class StructTest {
             assertFalse(s.a());
             assertFalse(s.b());
             assertTrue(s.c());
-            assertEquals(segment.get(int64_t, 0L), 0x0000_0001_0000_0000L);
+            assertEquals(int64_t.get(segment, 0L), 0x0000_0001_0000_0000L);
 
-            segment.set(int32_t, 4L, 0xFFFF_FFFF); // dirty bits
+            int32_t.set(segment, 4L, 0xFFFF_FFFF); // dirty bits
             s.c(true);
-            assertEquals(segment.get(int64_t, 0L), 0x0000_0001_0000_0000L);
+            assertEquals(int64_t.get(segment, 0L), 0x0000_0001_0000_0000L);
         }
     }
 
@@ -1978,8 +1979,8 @@ public class StructTest {
             @FFMCharset(FFMCharset.Type.UTF8)
             interface S {
                 StructBinder<S> $ = ffmStruct(S.class)
-                    .m("a", array(int8_t, 256))
-                    .m("b", array(int8_t, 256))
+                    .m("a", int8_t.array(256))
+                    .m("b", int8_t.array(256))
                     .build();
 
                 String a();
@@ -2010,8 +2011,8 @@ public class StructTest {
             @FFMCharset(FFMCharset.Type.UTF8)
             interface S {
                 StructBinder<S> $ = ffmStruct(S.class)
-                    .m("a", array(int8_t, 256))
-                    .m("b", array(int8_t, 256))
+                    .m("a", int8_t.array(256))
+                    .m("b", int8_t.array(256))
                     .withToString(it -> it.a() + " " + it.b())
                     .build();
 
@@ -2043,12 +2044,12 @@ public class StructTest {
             @FFMCharset(FFMCharset.Type.UTF8)
             interface S {
                 StructBinder<S> $ = ffmStruct(S.class)
-                    .m("pointerNT", p(int8_t))
-                    .m("pointer", p(int8_t))
+                    .m("pointerNT", int8_t.p())
+                    .m("pointer", int8_t.p())
                     .m("pointerLength", int32_t)
 
-                    .m("arrayNT", FFM.array(int8_t, 256))
-                    .m("array", FFM.array(int8_t, 256))
+                    .m("arrayNT", int8_t.array(256))
+                    .m("array", int8_t.array(256))
                     .m("arrayLength", int32_t)
 
                     .build();
@@ -2083,8 +2084,8 @@ public class StructTest {
             var members = layout.memberLayouts();
 
             assertEquals(members.size(), 6);
-            assertEquals(S.$.sizeof(), uintptr_t.byteSize() * 2 + 4L + 256L + 256L + 4L);
-            assertEquals(S.$.alignof(), uintptr_t.byteAlignment());
+            assertEquals(S.$.sizeof(), uintptr_t.layout().byteSize() * 2 + 4L + 256L + 256L + 4L);
+            assertEquals(S.$.alignof(), uintptr_t.layout().byteAlignment());
 
             var s = S.$.allocate(arena);
 
@@ -2166,12 +2167,12 @@ public class StructTest {
         }
     }
 
-    private static final ValueLayout.OfByte Uint8 = typedef("Uint8", uint8_t);
+    private static final Mapping.Byte Uint8 = uint8_t.typedef("Uint8");
 
     public void testFFMByValue() {
         interface SDL_GUID {
             StructBinder<SDL_GUID> $ = ffmStruct(SDL_GUID.class)
-                .m("data", array(Uint8, 16))
+                .m("data", Uint8.array(16))
                 .build();
 
             MemorySegment data();
@@ -2194,11 +2195,11 @@ public class StructTest {
             var guid = SDL.StringToGUID(SDL_StringToGUID, arena, "1234567890abcdef1234567890abcdef");
 
             assertEquals(
-                guid.data().get(uint64_t, 0L),
-                guid.data().get(uint64_t, 8L)
+                uint64_t.get(guid.data(), 0L),
+                uint64_t.get(guid.data(), 8L)
             );
 
-            var segment = arena.allocate(Uint8, 33);
+            var segment = Uint8.allocateSegment(arena, 33);
 
             SDL.GUIDToString(SDL_GUIDToString, guid, segment, (int)segment.byteSize());
 

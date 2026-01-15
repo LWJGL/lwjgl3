@@ -16,6 +16,9 @@ import java.util.function.*;
  */
 public non-sealed interface StructBinder<T> extends GroupBinder<StructLayout, T> {
     @Override
+    StructBinder<T> withByteAlignment(long byteAlignment);
+
+    @Override
     default StructBinder<T> set(MemorySegment segment, T value) {
         copy(value, get(segment));
         return this;

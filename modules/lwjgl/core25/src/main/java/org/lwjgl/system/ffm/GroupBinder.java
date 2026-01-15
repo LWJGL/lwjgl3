@@ -6,6 +6,7 @@ package org.lwjgl.system.ffm;
 
 import org.jspecify.annotations.*;
 import org.lwjgl.system.*;
+import org.lwjgl.system.ffm.mapping.*;
 
 import java.lang.foreign.*;
 import java.lang.invoke.*;
@@ -26,7 +27,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * @see UnionBinder
  */
 public sealed interface GroupBinder<L extends GroupLayout, T>
-    extends Binder<T>
+    extends Binder<T>, GroupMapping<L>
     permits StructBinder, UnionBinder {
 
     // core methods, bytecode generated at runtime
@@ -36,6 +37,7 @@ public sealed interface GroupBinder<L extends GroupLayout, T>
      *
      * @return the group layout
      */
+    @Override
     L layout(); // stored in trusted final field (i.e. effectively constant)
 
     /**
@@ -277,75 +279,6 @@ public sealed interface GroupBinder<L extends GroupLayout, T>
      * @return the group array
      */
     GroupArray<L, T> allocate(SegmentAllocator allocator, long elementCount);
-
-    /**
-     * Allocates a memory segment, without zero-initialization, for a single group instance on the specified segment stack.
-     *
-     * @param stack the segment stack
-     *
-     * @return the memory segment
-     */
-    default MemorySegment mallocSegment(SegmentStack stack) { return stack.allocate(layout()); }
-
-    /**
-     * Allocates a memory segment, without zero-initialization, for the specified number of group instances on the specified segment stack.
-     *
-     * @param stack        the segment stack
-     * @param elementCount the number of elements
-     *
-     * @return the memory segment
-     */
-    default MemorySegment mallocSegment(SegmentStack stack, long elementCount) { return stack.allocate(layout(), elementCount); }
-
-    /**
-     * Allocates a memory segment, with zero-initialization, for a single group instance on the specified segment stack.
-     *
-     * @param stack the segment stack
-     *
-     * @return the memory segment
-     */
-    default MemorySegment allocateSegment(SegmentStack stack) { return stack.calloc(layout()); }
-
-    /**
-     * Allocates a memory segment for a single group instance using the specified segment allocator.
-     *
-     * @param allocator the segment allocator
-     *
-     * @return the memory segment
-     */
-    default MemorySegment allocateSegment(SegmentAllocator allocator) {
-        return allocator.allocate(layout()); // TODO: skip 1 inline level?
-        /*var layout = layout();
-        return DEBUG
-            ? allocator.allocate(layout)
-            : allocator.allocate(layout.byteSize(), layout.byteAlignment());*/
-    }
-
-    /**
-     * Allocates a memory segment, with zero-initialization, for the specified number of group instances on the specified segment stack.
-     *
-     * @param stack        the segment stack
-     * @param elementCount the number of elements
-     *
-     * @return the memory segment
-     */
-    default MemorySegment allocateSegment(SegmentStack stack, long elementCount) { return stack.calloc(layout(), elementCount); }
-
-    /**
-     * Allocates a memory segment for the specified number of group instances using the specified segment allocator.
-     *
-     * @param allocator    the segment allocator
-     * @param elementCount the number of elements
-     *
-     * @return the memory segment
-     */
-    default MemorySegment allocateSegment(SegmentAllocator allocator, long elementCount) {
-        return allocator.allocate(layout(), elementCount); // TODO: inefficient?
-        /*var layout = layout();
-        return DEBUG
-            ? allocator.allocate(layout, elementCount)
-            : allocator.allocate(elementCount * layout.byteSize(), layout.byteAlignment());*/
-    }
 
     /**
      * Applies the specified consumer to the group instance mapped to the specified memory segment and offset.
