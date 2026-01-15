@@ -9,7 +9,7 @@
  * <ul>
  *     <li>A cleaner API that doesn't pollute the static FFM API with utility methods.</li>
  *     <li>Consistently named layouts.</li>
- *     <li>Better handling of opaque types & pointer types. Opaque mappings cannot be used directly (they need to be wrapped in pointer mappings) and pointer
+ *     <li>Better handling of opaque types &amp; pointer types. Opaque mappings cannot be used directly (they need to be wrapped in pointer mappings) and pointer
  *     mappings cannot be created without a target mapping.</li>
  *     <li>Enrichment of integer layouts with signedness.</li>
  *     <li>Abstraction of C long types.</li>

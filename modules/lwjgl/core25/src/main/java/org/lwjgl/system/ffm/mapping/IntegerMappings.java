@@ -4,6 +4,8 @@
  */
 package org.lwjgl.system.ffm.mapping;
 
+import org.lwjgl.system.*;
+
 import java.lang.foreign.*;
 
 final class IntegerMappings {
@@ -78,8 +80,9 @@ final class IntegerMappings {
         @Override public boolean signed() { return false; }
     }
 
+    private static final boolean CLONG32 = ValueLayout.ADDRESS.byteSize() == 4 || Platform.get() == Platform.WINDOWS;
     static Mapping.CLong createCLong(String name, boolean signed) {
-        if (org.lwjgl.system.Pointer.CLONG_SIZE == 4) {
+        if (CLONG32) {
             var layout = ValueLayout.JAVA_INT.withName(name);
             var p      = new Mapping.Pointer(layout);
             return signed

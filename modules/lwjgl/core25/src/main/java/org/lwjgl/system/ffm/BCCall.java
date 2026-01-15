@@ -19,6 +19,8 @@ import static org.lwjgl.system.ffm.BCDescriptors.*;
 abstract sealed class BCCall
     permits BCCallDown, BCCallUp {
 
+    protected static final boolean BITS32 = ValueLayout.ADDRESS.byteSize() == 4;
+
     protected final FFMConfig config;
 
     BCCall(FFMConfig config) {
@@ -78,7 +80,7 @@ abstract sealed class BCCall
         } else if (type == int.class) {
             return ValueLayout.JAVA_INT;
         } else if (type == long.class) {
-            return Platform.getArchitecture().is32Bit() && element.isAnnotationPresent(FFMPointer.class)
+            return BITS32 && element.isAnnotationPresent(FFMPointer.class)
                 ? ValueLayout.JAVA_INT
                 : ValueLayout.JAVA_LONG;
         } else if (type == float.class) {

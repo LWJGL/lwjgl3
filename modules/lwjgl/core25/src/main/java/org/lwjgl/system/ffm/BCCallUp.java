@@ -76,7 +76,7 @@ final class BCCallUp extends BCCall {
             var parameter = parameters[i];
             var type      = parameter.getType();
             if (isPointerType(parameter, type)) {
-                if (Platform.getArchitecture().is32Bit() && type == long.class) {
+                if (BITS32 && type == long.class) {
                     featureFlags |= FF_TYPE_CONVERSION.mask;
                 }
             } else if (type == String.class) {
@@ -130,7 +130,7 @@ final class BCCallUp extends BCCall {
                     resLayout = memoryLayoutFrom(cif.rtype());
                     featureFlags |= FF_TYPE_CONVERSION.mask;
                 }
-            } else if (Platform.getArchitecture().is32Bit() && type == long.class && method.isAnnotationPresent(FFMPointer.class)) {
+            } else if (BITS32 && type == long.class && method.isAnnotationPresent(FFMPointer.class)) {
                 featureFlags |= FF_TYPE_CONVERSION.mask;
                 resLayout = ValueLayout.JAVA_INT;
             } else if (needsBinder(type)) {
@@ -307,7 +307,7 @@ final class BCCallUp extends BCCall {
                             if (booleanInt != null && !booleanInt.binary()) {
                                 cb.ifThenElse(Opcode.IFEQ, CodeBuilder::iconst_0, CodeBuilder::iconst_1);
                             }
-                        } else if (Platform.getArchitecture().is32Bit() && type == long.class && parameter.isAnnotationPresent(FFMPointer.class)) {
+                        } else if (BITS32 && type == long.class && parameter.isAnnotationPresent(FFMPointer.class)) {
                             // TODO: test
                             cb.iload(slot);
                             buildPointer32to64(cb);
@@ -343,7 +343,7 @@ final class BCCallUp extends BCCall {
                         var type = method.getReturnType();
                         if (type != void.class) {
                             // Return result if non-void, transform if necessary
-                            if (Platform.getArchitecture().is32Bit() && type == long.class && method.isAnnotationPresent(FFMPointer.class)) {
+                            if (BITS32 && type == long.class && method.isAnnotationPresent(FFMPointer.class)) {
                                 // TODO: test
                                 buildPointer64to32(cb);
                             } else if (needsBinder(type)) {
