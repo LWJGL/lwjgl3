@@ -36,9 +36,6 @@ If an application faces unexpected compatibility or performance issues with the 
 ## Known issues with the design
 
 * Need to decide on `null` vs `MemorySegment.NULL` at the LWJGL API level.
-* The struct/union DSL needs work.
-  - Could wrap FFM layouts to a custom API with helper instance methods.
-  - Also consider more explicit support for layout signedness.
 * The API currently uses a naming convention with `ffm` prefixes for methods and `@FFM<Name>` for annotations).
   - Consider alternatives.
 * Move to a top-level package? (e.g. `org.lwjgl.ffm`)

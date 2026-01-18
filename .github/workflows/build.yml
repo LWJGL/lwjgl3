@@ -347,6 +347,8 @@ jobs:
             #MSVC_ARCH: amd64_arm64
             MSVC_ARCH: arm64
             VCTOOLS: ARM64
+    env:
+      LWJGL_BUILD_ARCH: ${{matrix.ARCH}}
     defaults:
       run:
         shell: cmd
@@ -404,7 +406,6 @@ jobs:
         if: matrix.ARCH == 'x86'
       - name: Build native # TODO: remove old LLVM workaround, see https://github.com/actions/runner-images/issues/10001
         run: |
-          set LWJGL_BUILD_ARCH=${{matrix.ARCH}}
           set PATH=%PATH:C:\Program Files\LLVM\bin;=%
           call "C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\Common7\Tools\VsDevCmd.bat" -host_arch=amd64 -arch=${{matrix.MSVC_ARCH}}
           ant -emacs compile-native -Dcl.version.print=true
