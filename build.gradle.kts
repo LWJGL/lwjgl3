@@ -516,8 +516,14 @@ val copyArchives = tasks.register<Copy>("copyArchives") {
     include("**")
     destinationDir = layout.buildDirectory.asFile.get()
 }
-
-tasks.withType<Sign> {
+// run copyArchives before other tasks
+tasks.withType<GenerateMavenPom>().configureEach {
+    dependsOn(copyArchives)
+}
+tasks.withType<Sign>().configureEach {
+    dependsOn(copyArchives)
+}
+tasks.withType<PublishToMavenRepository>().configureEach {
     dependsOn(copyArchives)
 }
 
