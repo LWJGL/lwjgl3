@@ -219,10 +219,11 @@ public class GLSLang {
         GLSLANG_ES_PROFILE            = (1 << 3);
 
     public static final int
-        GLSLANG_SHADER_DEFAULT_BIT          = 0,
-        GLSLANG_SHADER_AUTO_MAP_BINDINGS    = (1 << 0),
-        GLSLANG_SHADER_AUTO_MAP_LOCATIONS   = (1 << 1),
-        GLSLANG_SHADER_VULKAN_RULES_RELAXED = (1 << 2);
+        GLSLANG_SHADER_DEFAULT_BIT                = 0,
+        GLSLANG_SHADER_AUTO_MAP_BINDINGS          = (1 << 0),
+        GLSLANG_SHADER_AUTO_MAP_LOCATIONS         = (1 << 1),
+        GLSLANG_SHADER_VULKAN_RULES_RELAXED       = (1 << 2),
+        GLSLANG_SHADER_BINDINGS_PER_RESOURCE_TYPE = (1 << 3);
 
     public static final int
         GLSLANG_RESOURCE_TYPE_SAMPLER          = 0,

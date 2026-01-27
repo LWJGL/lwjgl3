@@ -163,7 +163,8 @@ val glslang = "GLSLang".nativeClass(Module.SHADERC, prefix = "GLSLANG", prefixMe
         "SHADER_DEFAULT_BIT".enum("0"),
         "SHADER_AUTO_MAP_BINDINGS".enum("(1 << 0)"),
         "SHADER_AUTO_MAP_LOCATIONS".enum("(1 << 1)"),
-        "SHADER_VULKAN_RULES_RELAXED".enum("(1 << 2)")
+        "SHADER_VULKAN_RULES_RELAXED".enum("(1 << 2)"),
+        "SHADER_BINDINGS_PER_RESOURCE_TYPE".enum("(1 << 3)")
     )
 
     EnumConstant(
