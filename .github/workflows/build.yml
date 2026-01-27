@@ -337,16 +337,16 @@ jobs:
         ARCH: [x86, x64, arm64]
         include:
           - ARCH: x86
-            #MSVC_ARCH: amd64_x86
-            MSVC_ARCH: x86
-            VCTOOLS: x86.x64
+            MSVC_ARCH: amd64_x86
+            #MSVC_ARCH: x86
+            #VCTOOLS: x86.x64
           - ARCH: x64
             MSVC_ARCH: amd64
-            VCTOOLS: x86.x64
+            #VCTOOLS: x86.x64
           - ARCH: arm64
-            #MSVC_ARCH: amd64_arm64
-            MSVC_ARCH: arm64
-            VCTOOLS: ARM64
+            MSVC_ARCH: amd64_arm64
+            #MSVC_ARCH: arm64
+            #VCTOOLS: ARM64
     env:
       LWJGL_BUILD_ARCH: ${{matrix.ARCH}}
     defaults:
@@ -357,10 +357,10 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 3
-#      - name: Configure MSVC
-#        uses: ilammy/msvc-dev-cmd@v1
-#        with:
-#          arch: ${{ matrix.MSVC_ARCH }}
+      - name: Configure MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: ${{ matrix.MSVC_ARCH }}
       - name: Clone Oculus SDK
         run: git clone https://github.com/LWJGL-CI/OculusSDK.git ../OculusSDK
         if: contains(matrix.ARCH, 'arm') != true
@@ -373,16 +373,16 @@ jobs:
           Expand-Archive -Path jdk25.zip -DestinationPath .\
           Rename-Item zulu25.$Env:ZULU_BUILD25-win_x64 jdk25
         shell: pwsh
-      - name: Install Visual Studio 2026 Build Tools
-        shell: pwsh
-        run: |
-          choco install visualstudio2026buildtools --package-parameters "`
-            --add Microsoft.VisualStudio.Workload.VCTools `
-            --add Microsoft.VisualStudio.Component.VC.Tools.${{matrix.VCTOOLS}} `
-            --includeRecommended `
-            --quiet" `
-            -y `
-            --ignore-package-exit-codes=3010
+#      - name: Install Visual Studio 2026 Build Tools
+#        shell: pwsh
+#        run: |
+#          choco install visualstudio2026buildtools --package-parameters "`
+#            --add Microsoft.VisualStudio.Workload.VCTools `
+#            --add Microsoft.VisualStudio.Component.VC.Tools.${{matrix.VCTOOLS}} `
+#            --includeRecommended `
+#            --quiet" `
+#            -y `
+#            --ignore-package-exit-codes=3010
       - name: Restore kotlinc output
         uses: actions/cache/restore@v3
         with:
@@ -405,9 +405,9 @@ jobs:
         shell: pwsh
         if: matrix.ARCH == 'x86'
       - name: Build native # TODO: remove old LLVM workaround, see https://github.com/actions/runner-images/issues/10001
+        #call "C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\Common7\Tools\VsDevCmd.bat" -host_arch=amd64 -arch=${{matrix.MSVC_ARCH}}
         run: |
           set PATH=%PATH:C:\Program Files\LLVM\bin;=%
-          call "C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\Common7\Tools\VsDevCmd.bat" -host_arch=amd64 -arch=${{matrix.MSVC_ARCH}}
           ant -emacs compile-native -Dcl.version.print=true
       - name: Run tests
         run: ant -emacs tests
