@@ -874,8 +874,10 @@ public final class JNI {
         long callJ(MemorySegment __functionAddress, int param0);
         long callJ(MemorySegment __functionAddress, int param0, int param1);
         long callJ(MemorySegment __functionAddress, int param0, int param1, boolean param2, int param3, int param4);
+        long callPJ(MemorySegment __functionAddress, @FFMNullable @FFMPointer long param0, int param1);
         long callPPJ(MemorySegment __functionAddress, @FFMNullable @FFMPointer long param0, @FFMNullable @FFMPointer long param1);
         long callPJJ(MemorySegment __functionAddress, @FFMNullable @FFMPointer long param0, long param1, int param2, int param3);
+        long callPJJJ(MemorySegment __functionAddress, @FFMNullable @FFMPointer long param0, long param1, long param2);
         long callPN(MemorySegment __functionAddress, @FFMNullable @FFMPointer long param0);
         @FFMPointer long callP(MemorySegment __functionAddress);
         @FFMPointer long callP(MemorySegment __functionAddress, int param0);
@@ -2158,8 +2160,10 @@ public final class JNI {
     public static long callJ(int param0, long __functionAddress) { return jni.callJ(MemorySegment.ofAddress(__functionAddress), param0); }
     public static long callJ(int param0, int param1, long __functionAddress) { return jni.callJ(MemorySegment.ofAddress(__functionAddress), param0, param1); }
     public static long callJ(int param0, int param1, boolean param2, int param3, int param4, long __functionAddress) { return jni.callJ(MemorySegment.ofAddress(__functionAddress), param0, param1, param2, param3, param4); }
+    public static long callPJ(long param0, int param1, long __functionAddress) { return jni.callPJ(MemorySegment.ofAddress(__functionAddress), param0, param1); }
     public static long callPPJ(long param0, long param1, long __functionAddress) { return jni.callPPJ(MemorySegment.ofAddress(__functionAddress), param0, param1); }
     public static long callPJJ(long param0, long param1, int param2, int param3, long __functionAddress) { return jni.callPJJ(MemorySegment.ofAddress(__functionAddress), param0, param1, param2, param3); }
+    public static long callPJJJ(long param0, long param1, long param2, long __functionAddress) { return jni.callPJJJ(MemorySegment.ofAddress(__functionAddress), param0, param1, param2); }
     public static long callPN(long param0, long __functionAddress) { return jni.callPN(MemorySegment.ofAddress(__functionAddress), param0); }
     public static long callP(long __functionAddress) { return jni.callP(MemorySegment.ofAddress(__functionAddress)); }
     public static long callP(int param0, long __functionAddress) { return jni.callP(MemorySegment.ofAddress(__functionAddress), param0); }
@@ -2694,6 +2698,7 @@ public final class JNI {
     public static native int callPPPI(long param0, int param1, int @Nullable [] param2, long param3, long __functionAddress);
     public static native int callPPPI(long param0, int param1, int @Nullable [] param2, int @Nullable [] param3, long __functionAddress);
     public static native int callPPPI(long param0, int param1, int @Nullable [] param2, long @Nullable [] param3, long __functionAddress);
+    public static native int callPPPI(long param0, int param1, long @Nullable [] param2, long param3, long __functionAddress);
     public static native int callPPPI(long param0, long param1, int param2, int @Nullable [] param3, long __functionAddress);
     public static native int callPPPI(long param0, long param1, int param2, long @Nullable [] param3, long __functionAddress);
     public static native int callPPPI(long param0, long param1, int @Nullable [] param2, int param3, long __functionAddress);

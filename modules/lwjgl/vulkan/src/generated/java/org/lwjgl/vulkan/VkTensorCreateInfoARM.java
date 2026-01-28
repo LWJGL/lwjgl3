@@ -121,6 +121,8 @@ public class VkTensorCreateInfoARM extends Struct<VkTensorCreateInfoARM> impleme
     public VkTensorCreateInfoARM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkExternalMemoryTensorCreateInfoARM} value to the {@code pNext} chain. */
     public VkTensorCreateInfoARM pNext(VkExternalMemoryTensorCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkOpaqueCaptureDataCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkTensorCreateInfoARM pNext(VkOpaqueCaptureDataCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT} value to the {@code pNext} chain. */
     public VkTensorCreateInfoARM pNext(VkOpaqueCaptureDescriptorDataCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code flags} field. */
@@ -392,6 +394,8 @@ public class VkTensorCreateInfoARM extends Struct<VkTensorCreateInfoARM> impleme
         public VkTensorCreateInfoARM.Buffer pNext(@NativeType("void const *") long value) { VkTensorCreateInfoARM.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkExternalMemoryTensorCreateInfoARM} value to the {@code pNext} chain. */
         public VkTensorCreateInfoARM.Buffer pNext(VkExternalMemoryTensorCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkOpaqueCaptureDataCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkTensorCreateInfoARM.Buffer pNext(VkOpaqueCaptureDataCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT} value to the {@code pNext} chain. */
         public VkTensorCreateInfoARM.Buffer pNext(VkOpaqueCaptureDescriptorDataCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code flags} field. */

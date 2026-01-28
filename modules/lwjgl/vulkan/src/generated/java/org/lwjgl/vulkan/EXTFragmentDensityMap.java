@@ -7,7 +7,7 @@ package org.lwjgl.vulkan;
 
 public final class EXTFragmentDensityMap {
 
-    public static final int VK_EXT_FRAGMENT_DENSITY_MAP_SPEC_VERSION = 2;
+    public static final int VK_EXT_FRAGMENT_DENSITY_MAP_SPEC_VERSION = 3;
 
     public static final String VK_EXT_FRAGMENT_DENSITY_MAP_EXTENSION_NAME = "VK_EXT_fragment_density_map";
 

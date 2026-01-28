@@ -191,6 +191,8 @@ public class VkSamplerCreateInfo extends Struct<VkSamplerCreateInfo> implements 
     public VkSamplerCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkSamplerCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkDebugUtilsObjectNameInfoEXT} value to the {@code pNext} chain. */
+    public VkSamplerCreateInfo pNext(VkDebugUtilsObjectNameInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT} value to the {@code pNext} chain. */
     public VkSamplerCreateInfo pNext(VkOpaqueCaptureDescriptorDataCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSamplerBlockMatchWindowCreateInfoQCOM} value to the {@code pNext} chain. */
@@ -201,6 +203,8 @@ public class VkSamplerCreateInfo extends Struct<VkSamplerCreateInfo> implements 
     public VkSamplerCreateInfo pNext(VkSamplerCubicWeightsCreateInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSamplerCustomBorderColorCreateInfoEXT} value to the {@code pNext} chain. */
     public VkSamplerCreateInfo pNext(VkSamplerCustomBorderColorCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkSamplerCustomBorderColorIndexCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkSamplerCreateInfo pNext(VkSamplerCustomBorderColorIndexCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSamplerReductionModeCreateInfo} value to the {@code pNext} chain. */
     public VkSamplerCreateInfo pNext(VkSamplerReductionModeCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSamplerReductionModeCreateInfoEXT} value to the {@code pNext} chain. */
@@ -582,6 +586,8 @@ public class VkSamplerCreateInfo extends Struct<VkSamplerCreateInfo> implements 
         public VkSamplerCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkSamplerCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkSamplerCreateInfo.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkDebugUtilsObjectNameInfoEXT} value to the {@code pNext} chain. */
+        public VkSamplerCreateInfo.Buffer pNext(VkDebugUtilsObjectNameInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT} value to the {@code pNext} chain. */
         public VkSamplerCreateInfo.Buffer pNext(VkOpaqueCaptureDescriptorDataCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSamplerBlockMatchWindowCreateInfoQCOM} value to the {@code pNext} chain. */
@@ -592,6 +598,8 @@ public class VkSamplerCreateInfo extends Struct<VkSamplerCreateInfo> implements 
         public VkSamplerCreateInfo.Buffer pNext(VkSamplerCubicWeightsCreateInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSamplerCustomBorderColorCreateInfoEXT} value to the {@code pNext} chain. */
         public VkSamplerCreateInfo.Buffer pNext(VkSamplerCustomBorderColorCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkSamplerCustomBorderColorIndexCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkSamplerCreateInfo.Buffer pNext(VkSamplerCustomBorderColorIndexCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSamplerReductionModeCreateInfo} value to the {@code pNext} chain. */
         public VkSamplerCreateInfo.Buffer pNext(VkSamplerReductionModeCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSamplerReductionModeCreateInfoEXT} value to the {@code pNext} chain. */

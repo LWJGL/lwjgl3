@@ -175,6 +175,8 @@ public class VkIndirectCommandsLayoutTokenNV extends Struct<VkIndirectCommandsLa
     public VkIndirectCommandsLayoutTokenNV sType$Default() { return sType(NVDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkIndirectCommandsLayoutTokenNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkIndirectCommandsLayoutPushDataTokenNV} value to the {@code pNext} chain. */
+    public VkIndirectCommandsLayoutTokenNV pNext(VkIndirectCommandsLayoutPushDataTokenNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code tokenType} field. */
     public VkIndirectCommandsLayoutTokenNV tokenType(@NativeType("VkIndirectCommandsTokenTypeNV") int value) { ntokenType(address(), value); return this; }
     /** Sets the specified value to the {@code stream} field. */
@@ -531,6 +533,8 @@ public class VkIndirectCommandsLayoutTokenNV extends Struct<VkIndirectCommandsLa
         public VkIndirectCommandsLayoutTokenNV.Buffer sType$Default() { return sType(NVDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkIndirectCommandsLayoutTokenNV.Buffer pNext(@NativeType("void const *") long value) { VkIndirectCommandsLayoutTokenNV.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkIndirectCommandsLayoutPushDataTokenNV} value to the {@code pNext} chain. */
+        public VkIndirectCommandsLayoutTokenNV.Buffer pNext(VkIndirectCommandsLayoutPushDataTokenNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code tokenType} field. */
         public VkIndirectCommandsLayoutTokenNV.Buffer tokenType(@NativeType("VkIndirectCommandsTokenTypeNV") int value) { VkIndirectCommandsLayoutTokenNV.ntokenType(address(), value); return this; }
         /** Sets the specified value to the {@code stream} field. */

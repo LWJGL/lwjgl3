@@ -107,6 +107,8 @@ public class VkImageFormatProperties2 extends Struct<VkImageFormatProperties2> i
     public VkImageFormatProperties2 pNext(VkSamplerYcbcrConversionImageFormatProperties value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSamplerYcbcrConversionImageFormatPropertiesKHR} value to the {@code pNext} chain. */
     public VkImageFormatProperties2 pNext(VkSamplerYcbcrConversionImageFormatPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkSubsampledImageFormatPropertiesEXT} value to the {@code pNext} chain. */
+    public VkImageFormatProperties2 pNext(VkSubsampledImageFormatPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkTextureLODGatherFormatPropertiesAMD} value to the {@code pNext} chain. */
     public VkImageFormatProperties2 pNext(VkTextureLODGatherFormatPropertiesAMD value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
@@ -332,6 +334,8 @@ public class VkImageFormatProperties2 extends Struct<VkImageFormatProperties2> i
         public VkImageFormatProperties2.Buffer pNext(VkSamplerYcbcrConversionImageFormatProperties value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSamplerYcbcrConversionImageFormatPropertiesKHR} value to the {@code pNext} chain. */
         public VkImageFormatProperties2.Buffer pNext(VkSamplerYcbcrConversionImageFormatPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkSubsampledImageFormatPropertiesEXT} value to the {@code pNext} chain. */
+        public VkImageFormatProperties2.Buffer pNext(VkSubsampledImageFormatPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkTextureLODGatherFormatPropertiesAMD} value to the {@code pNext} chain. */
         public VkImageFormatProperties2.Buffer pNext(VkTextureLODGatherFormatPropertiesAMD value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
