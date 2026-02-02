@@ -116,7 +116,7 @@ static inline void linkEnvData(EnvData* data, JNIEnv *env) {
         return data;
     }
 
-    inline EnvData* tlsGetEnvData(void) {
+    static inline EnvData* tlsGetEnvData(void) {
         EnvData* data = (EnvData*)TlsGetValue(envTLS);
         if (data == NULL) {
             data = tlsCreateEnvData();
@@ -181,7 +181,7 @@ static inline void linkEnvData(EnvData* data, JNIEnv *env) {
         return data;
     }
 
-    inline EnvData* tlsGetEnvData(void) {
+    static inline EnvData* tlsGetEnvData(void) {
         EnvData* data = (EnvData*)pthread_getspecific(envTLS);
         if (data == NULL) {
             data = tlsCreateEnvData();
@@ -190,7 +190,7 @@ static inline void linkEnvData(EnvData* data, JNIEnv *env) {
     }
 #endif
 
-inline JNIEnv* getEnv(jboolean *async) {
+JNIEnv* getEnv(jboolean *async) {
     EnvData* data = tlsGetEnvData();
     *async = data->async;
     return data->env;
