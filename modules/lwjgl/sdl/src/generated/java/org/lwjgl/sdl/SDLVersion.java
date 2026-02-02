@@ -31,7 +31,7 @@ public class SDLVersion {
 
     public static final int SDL_MINOR_VERSION = 4;
 
-    public static final int SDL_MICRO_VERSION = 0;
+    public static final int SDL_MICRO_VERSION = 1;
 
     public static final int SDL_VERSION = SDL_VERSIONNUM(SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_MICRO_VERSION);
 

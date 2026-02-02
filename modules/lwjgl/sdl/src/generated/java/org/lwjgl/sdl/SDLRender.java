@@ -1905,18 +1905,19 @@ public class SDLRender {
 
     // --- [ SDL_CreateGPURenderState ] ---
 
-    /** {@code SDL_GPURenderState * SDL_CreateGPURenderState(SDL_Renderer * renderer, SDL_GPURenderStateCreateInfo * createinfo)} */
+    /** {@code SDL_GPURenderState * SDL_CreateGPURenderState(SDL_Renderer * renderer, SDL_GPURenderStateCreateInfo const * createinfo)} */
     public static long nSDL_CreateGPURenderState(long renderer, long createinfo) {
         long __functionAddress = Functions.CreateGPURenderState;
         if (CHECKS) {
             check(renderer);
+            SDL_GPURenderStateCreateInfo.validate(createinfo);
         }
         return invokePPP(renderer, createinfo, __functionAddress);
     }
 
-    /** {@code SDL_GPURenderState * SDL_CreateGPURenderState(SDL_Renderer * renderer, SDL_GPURenderStateCreateInfo * createinfo)} */
+    /** {@code SDL_GPURenderState * SDL_CreateGPURenderState(SDL_Renderer * renderer, SDL_GPURenderStateCreateInfo const * createinfo)} */
     @NativeType("SDL_GPURenderState *")
-    public static long SDL_CreateGPURenderState(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_GPURenderStateCreateInfo *") SDL_GPURenderStateCreateInfo createinfo) {
+    public static long SDL_CreateGPURenderState(@NativeType("SDL_Renderer *") long renderer, @NativeType("SDL_GPURenderStateCreateInfo const *") SDL_GPURenderStateCreateInfo createinfo) {
         return nSDL_CreateGPURenderState(renderer, createinfo.address());
     }
 

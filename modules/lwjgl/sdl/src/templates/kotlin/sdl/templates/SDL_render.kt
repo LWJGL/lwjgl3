@@ -907,7 +907,7 @@ val SDL_render = "SDLRender".nativeClassSDL("SDL_render") {
         "CreateGPURenderState",
 
         SDL_Renderer.p("renderer"),
-        SDL_GPURenderStateCreateInfo.p("createinfo")
+        SDL_GPURenderStateCreateInfo.const.p("createinfo")
     )
 
     bool(
