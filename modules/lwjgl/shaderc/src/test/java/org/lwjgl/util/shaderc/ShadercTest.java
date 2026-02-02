@@ -16,7 +16,9 @@ import java.util.function.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.shaderc.GLSLang.*;
+import static org.lwjgl.util.shaderc.GLSLangResourceLimits.*;
 import static org.lwjgl.util.shaderc.SPV.*;
+import static org.lwjgl.util.shaderc.SPVOptimizer.*;
 import static org.lwjgl.util.shaderc.Shaderc.*;
 import static org.testng.Assert.*;
 

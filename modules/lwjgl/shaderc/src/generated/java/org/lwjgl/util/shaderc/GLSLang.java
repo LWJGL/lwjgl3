@@ -70,11 +70,7 @@ public class GLSLang {
             glsl_mapper_create                               = apiGetFunctionAddress(SHADERC, "glslang_glsl_mapper_create"),
             glsl_mapper_delete                               = apiGetFunctionAddress(SHADERC, "glslang_glsl_mapper_delete"),
             glsl_resolver_create                             = apiGetFunctionAddress(SHADERC, "glslang_glsl_resolver_create"),
-            glsl_resolver_delete                             = apiGetFunctionAddress(SHADERC, "glslang_glsl_resolver_delete"),
-            resource                                         = apiGetFunctionAddress(SHADERC, "glslang_resource"),
-            default_resource                                 = apiGetFunctionAddress(SHADERC, "glslang_default_resource"),
-            default_resource_string                          = apiGetFunctionAddress(SHADERC, "glslang_default_resource_string"),
-            decode_resource_limits                           = apiGetFunctionAddress(SHADERC, "glslang_decode_resource_limits");
+            glsl_resolver_delete                             = apiGetFunctionAddress(SHADERC, "glslang_glsl_resolver_delete");
 
     }
 
@@ -898,61 +894,6 @@ public class GLSLang {
             check(resolver);
         }
         invokePV(resolver, __functionAddress);
-    }
-
-    // --- [ glslang_resource ] ---
-
-    /** {@code glslang_resource_t * glslang_resource(void)} */
-    public static long nglslang_resource() {
-        long __functionAddress = Functions.resource;
-        return invokeP(__functionAddress);
-    }
-
-    /** {@code glslang_resource_t * glslang_resource(void)} */
-    @NativeType("glslang_resource_t *")
-    public static @Nullable GLSLangResource glslang_resource() {
-        long __result = nglslang_resource();
-        return GLSLangResource.createSafe(__result);
-    }
-
-    // --- [ glslang_default_resource ] ---
-
-    /** {@code glslang_resource_t const * glslang_default_resource(void)} */
-    public static long nglslang_default_resource() {
-        long __functionAddress = Functions.default_resource;
-        return invokeP(__functionAddress);
-    }
-
-    /** {@code glslang_resource_t const * glslang_default_resource(void)} */
-    @NativeType("glslang_resource_t const *")
-    public static @Nullable GLSLangResource glslang_default_resource() {
-        long __result = nglslang_default_resource();
-        return GLSLangResource.createSafe(__result);
-    }
-
-    // --- [ glslang_default_resource_string ] ---
-
-    /** {@code const char * glslang_default_resource_string(void)} */
-    @NativeType("const char *")
-    public static long glslang_default_resource_string() {
-        long __functionAddress = Functions.default_resource_string;
-        return invokeP(__functionAddress);
-    }
-
-    // --- [ glslang_decode_resource_limits ] ---
-
-    /** {@code void glslang_decode_resource_limits(glslang_resource_t * resources, char * config)} */
-    public static void nglslang_decode_resource_limits(long resources, long config) {
-        long __functionAddress = Functions.decode_resource_limits;
-        invokePPV(resources, config, __functionAddress);
-    }
-
-    /** {@code void glslang_decode_resource_limits(glslang_resource_t * resources, char * config)} */
-    public static void glslang_decode_resource_limits(@NativeType("glslang_resource_t *") GLSLangResource resources, @NativeType("char *") ByteBuffer config) {
-        if (CHECKS) {
-            checkNT1(config);
-        }
-        nglslang_decode_resource_limits(resources.address(), memAddress(config));
     }
 
 }

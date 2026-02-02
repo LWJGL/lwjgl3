@@ -456,31 +456,4 @@ val glslang = "GLSLang".nativeClass(Module.SHADERC, prefix = "GLSLANG", prefixMe
 
         glslang_resolver_t.p("resolver")
     )
-
-    // resource_limits_c.h
-
-    glslang_resource_t.p(
-        "resource",
-
-        void()
-    )
-
-    glslang_resource_t.const.p(
-        "default_resource",
-
-        void()
-    )
-
-    "const char *".handle(
-        "default_resource_string",
-
-        void()
-    )
-
-    void(
-        "decode_resource_limits",
-
-        glslang_resource_t.p("resources"),
-        charUTF8.p("config")
-    )
 }

@@ -30,71 +30,61 @@ public class SPV {
 
         /** Function address. */
         public static final long
-            SoftwareVersionString                                       = apiGetFunctionAddress(SHADERC, "spvSoftwareVersionString"),
-            SoftwareVersionDetailsString                                = apiGetFunctionAddress(SHADERC, "spvSoftwareVersionDetailsString"),
-            TargetEnvDescription                                        = apiGetFunctionAddress(SHADERC, "spvTargetEnvDescription"),
-            ParseTargetEnv                                              = apiGetFunctionAddress(SHADERC, "spvParseTargetEnv"),
-            ParseVulkanEnv                                              = apiGetFunctionAddress(SHADERC, "spvParseVulkanEnv"),
-            ContextCreate                                               = apiGetFunctionAddress(SHADERC, "spvContextCreate"),
-            ContextDestroy                                              = apiGetFunctionAddress(SHADERC, "spvContextDestroy"),
-            ValidatorOptionsCreate                                      = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsCreate"),
-            ValidatorOptionsDestroy                                     = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsDestroy"),
-            ValidatorOptionsSetUniversalLimit                           = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetUniversalLimit"),
-            ValidatorOptionsSetRelaxStoreStruct                         = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetRelaxStoreStruct"),
-            ValidatorOptionsSetRelaxLogicalPointer                      = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetRelaxLogicalPointer"),
-            ValidatorOptionsSetBeforeHlslLegalization                   = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetBeforeHlslLegalization"),
-            ValidatorOptionsSetRelaxBlockLayout                         = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetRelaxBlockLayout"),
-            ValidatorOptionsSetUniformBufferStandardLayout              = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetUniformBufferStandardLayout"),
-            ValidatorOptionsSetScalarBlockLayout                        = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetScalarBlockLayout"),
-            ValidatorOptionsSetWorkgroupScalarBlockLayout               = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetWorkgroupScalarBlockLayout"),
-            ValidatorOptionsSetSkipBlockLayout                          = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetSkipBlockLayout"),
-            ValidatorOptionsSetAllowLocalSizeId                         = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetAllowLocalSizeId"),
-            ValidatorOptionsSetAllowOffsetTextureOperand                = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetAllowOffsetTextureOperand"),
-            ValidatorOptionsSetAllowVulkan32BitBitwise                  = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetAllowVulkan32BitBitwise"),
-            ValidatorOptionsSetFriendlyNames                            = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetFriendlyNames"),
-            OptimizerOptionsCreate                                      = apiGetFunctionAddress(SHADERC, "spvOptimizerOptionsCreate"),
-            OptimizerOptionsDestroy                                     = apiGetFunctionAddress(SHADERC, "spvOptimizerOptionsDestroy"),
-            OptimizerOptionsSetRunValidator                             = apiGetFunctionAddress(SHADERC, "spvOptimizerOptionsSetRunValidator"),
-            OptimizerOptionsSetValidatorOptions                         = apiGetFunctionAddress(SHADERC, "spvOptimizerOptionsSetValidatorOptions"),
-            OptimizerOptionsSetMaxIdBound                               = apiGetFunctionAddress(SHADERC, "spvOptimizerOptionsSetMaxIdBound"),
-            OptimizerOptionsSetPreserveBindings                         = apiGetFunctionAddress(SHADERC, "spvOptimizerOptionsSetPreserveBindings"),
-            OptimizerOptionsSetPreserveSpecConstants                    = apiGetFunctionAddress(SHADERC, "spvOptimizerOptionsSetPreserveSpecConstants"),
-            ReducerOptionsCreate                                        = apiGetFunctionAddress(SHADERC, "spvReducerOptionsCreate"),
-            ReducerOptionsDestroy                                       = apiGetFunctionAddress(SHADERC, "spvReducerOptionsDestroy"),
-            ReducerOptionsSetStepLimit                                  = apiGetFunctionAddress(SHADERC, "spvReducerOptionsSetStepLimit"),
-            ReducerOptionsSetFailOnValidationError                      = apiGetFunctionAddress(SHADERC, "spvReducerOptionsSetFailOnValidationError"),
-            ReducerOptionsSetTargetFunction                             = apiGetFunctionAddress(SHADERC, "spvReducerOptionsSetTargetFunction"),
-            FuzzerOptionsCreate                                         = apiGetFunctionAddress(SHADERC, "spvFuzzerOptionsCreate"),
-            FuzzerOptionsDestroy                                        = apiGetFunctionAddress(SHADERC, "spvFuzzerOptionsDestroy"),
-            FuzzerOptionsEnableReplayValidation                         = apiGetFunctionAddress(SHADERC, "spvFuzzerOptionsEnableReplayValidation"),
-            FuzzerOptionsSetRandomSeed                                  = apiGetFunctionAddress(SHADERC, "spvFuzzerOptionsSetRandomSeed"),
-            FuzzerOptionsSetReplayRange                                 = apiGetFunctionAddress(SHADERC, "spvFuzzerOptionsSetReplayRange"),
-            FuzzerOptionsSetShrinkerStepLimit                           = apiGetFunctionAddress(SHADERC, "spvFuzzerOptionsSetShrinkerStepLimit"),
-            FuzzerOptionsEnableFuzzerPassValidation                     = apiGetFunctionAddress(SHADERC, "spvFuzzerOptionsEnableFuzzerPassValidation"),
-            FuzzerOptionsEnableAllPasses                                = apiGetFunctionAddress(SHADERC, "spvFuzzerOptionsEnableAllPasses"),
-            TextToBinary                                                = apiGetFunctionAddress(SHADERC, "spvTextToBinary"),
-            TextToBinaryWithOptions                                     = apiGetFunctionAddress(SHADERC, "spvTextToBinaryWithOptions"),
-            TextDestroy                                                 = apiGetFunctionAddress(SHADERC, "spvTextDestroy"),
-            BinaryToText                                                = apiGetFunctionAddress(SHADERC, "spvBinaryToText"),
-            BinaryDestroy                                               = apiGetFunctionAddress(SHADERC, "spvBinaryDestroy"),
-            Validate                                                    = apiGetFunctionAddress(SHADERC, "spvValidate"),
-            ValidateWithOptions                                         = apiGetFunctionAddress(SHADERC, "spvValidateWithOptions"),
-            ValidateBinary                                              = apiGetFunctionAddress(SHADERC, "spvValidateBinary"),
-            DiagnosticCreate                                            = apiGetFunctionAddress(SHADERC, "spvDiagnosticCreate"),
-            DiagnosticDestroy                                           = apiGetFunctionAddress(SHADERC, "spvDiagnosticDestroy"),
-            DiagnosticPrint                                             = apiGetFunctionAddress(SHADERC, "spvDiagnosticPrint"),
-            OpcodeString                                                = apiGetFunctionAddress(SHADERC, "spvOpcodeString"),
-            BinaryParse                                                 = apiGetFunctionAddress(SHADERC, "spvBinaryParse"),
-            OptimizerCreate                                             = apiGetFunctionAddress(SHADERC, "spvOptimizerCreate"),
-            OptimizerDestroy                                            = apiGetFunctionAddress(SHADERC, "spvOptimizerDestroy"),
-            OptimizerSetMessageConsumer                                 = apiGetFunctionAddress(SHADERC, "spvOptimizerSetMessageConsumer"),
-            OptimizerRegisterLegalizationPasses                         = apiGetFunctionAddress(SHADERC, "spvOptimizerRegisterLegalizationPasses"),
-            OptimizerRegisterPerformancePasses                          = apiGetFunctionAddress(SHADERC, "spvOptimizerRegisterPerformancePasses"),
-            OptimizerRegisterSizePasses                                 = apiGetFunctionAddress(SHADERC, "spvOptimizerRegisterSizePasses"),
-            OptimizerRegisterPassFromFlag                               = apiGetFunctionAddress(SHADERC, "spvOptimizerRegisterPassFromFlag"),
-            OptimizerRegisterPassesFromFlags                            = apiGetFunctionAddress(SHADERC, "spvOptimizerRegisterPassesFromFlags"),
-            OptimizerRegisterPassesFromFlagsWhilePreservingTheInterface = apiGetFunctionAddress(SHADERC, "spvOptimizerRegisterPassesFromFlagsWhilePreservingTheInterface"),
-            OptimizerRun                                                = apiGetFunctionAddress(SHADERC, "spvOptimizerRun");
+            SoftwareVersionString                          = apiGetFunctionAddress(SHADERC, "spvSoftwareVersionString"),
+            SoftwareVersionDetailsString                   = apiGetFunctionAddress(SHADERC, "spvSoftwareVersionDetailsString"),
+            TargetEnvDescription                           = apiGetFunctionAddress(SHADERC, "spvTargetEnvDescription"),
+            ParseTargetEnv                                 = apiGetFunctionAddress(SHADERC, "spvParseTargetEnv"),
+            ParseVulkanEnv                                 = apiGetFunctionAddress(SHADERC, "spvParseVulkanEnv"),
+            ContextCreate                                  = apiGetFunctionAddress(SHADERC, "spvContextCreate"),
+            ContextDestroy                                 = apiGetFunctionAddress(SHADERC, "spvContextDestroy"),
+            ValidatorOptionsCreate                         = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsCreate"),
+            ValidatorOptionsDestroy                        = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsDestroy"),
+            ValidatorOptionsSetUniversalLimit              = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetUniversalLimit"),
+            ValidatorOptionsSetRelaxStoreStruct            = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetRelaxStoreStruct"),
+            ValidatorOptionsSetRelaxLogicalPointer         = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetRelaxLogicalPointer"),
+            ValidatorOptionsSetBeforeHlslLegalization      = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetBeforeHlslLegalization"),
+            ValidatorOptionsSetRelaxBlockLayout            = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetRelaxBlockLayout"),
+            ValidatorOptionsSetUniformBufferStandardLayout = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetUniformBufferStandardLayout"),
+            ValidatorOptionsSetScalarBlockLayout           = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetScalarBlockLayout"),
+            ValidatorOptionsSetWorkgroupScalarBlockLayout  = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetWorkgroupScalarBlockLayout"),
+            ValidatorOptionsSetSkipBlockLayout             = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetSkipBlockLayout"),
+            ValidatorOptionsSetAllowLocalSizeId            = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetAllowLocalSizeId"),
+            ValidatorOptionsSetAllowOffsetTextureOperand   = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetAllowOffsetTextureOperand"),
+            ValidatorOptionsSetAllowVulkan32BitBitwise     = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetAllowVulkan32BitBitwise"),
+            ValidatorOptionsSetFriendlyNames               = apiGetFunctionAddress(SHADERC, "spvValidatorOptionsSetFriendlyNames"),
+            OptimizerOptionsCreate                         = apiGetFunctionAddress(SHADERC, "spvOptimizerOptionsCreate"),
+            OptimizerOptionsDestroy                        = apiGetFunctionAddress(SHADERC, "spvOptimizerOptionsDestroy"),
+            OptimizerOptionsSetRunValidator                = apiGetFunctionAddress(SHADERC, "spvOptimizerOptionsSetRunValidator"),
+            OptimizerOptionsSetValidatorOptions            = apiGetFunctionAddress(SHADERC, "spvOptimizerOptionsSetValidatorOptions"),
+            OptimizerOptionsSetMaxIdBound                  = apiGetFunctionAddress(SHADERC, "spvOptimizerOptionsSetMaxIdBound"),
+            OptimizerOptionsSetPreserveBindings            = apiGetFunctionAddress(SHADERC, "spvOptimizerOptionsSetPreserveBindings"),
+            OptimizerOptionsSetPreserveSpecConstants       = apiGetFunctionAddress(SHADERC, "spvOptimizerOptionsSetPreserveSpecConstants"),
+            ReducerOptionsCreate                           = apiGetFunctionAddress(SHADERC, "spvReducerOptionsCreate"),
+            ReducerOptionsDestroy                          = apiGetFunctionAddress(SHADERC, "spvReducerOptionsDestroy"),
+            ReducerOptionsSetStepLimit                     = apiGetFunctionAddress(SHADERC, "spvReducerOptionsSetStepLimit"),
+            ReducerOptionsSetFailOnValidationError         = apiGetFunctionAddress(SHADERC, "spvReducerOptionsSetFailOnValidationError"),
+            ReducerOptionsSetTargetFunction                = apiGetFunctionAddress(SHADERC, "spvReducerOptionsSetTargetFunction"),
+            FuzzerOptionsCreate                            = apiGetFunctionAddress(SHADERC, "spvFuzzerOptionsCreate"),
+            FuzzerOptionsDestroy                           = apiGetFunctionAddress(SHADERC, "spvFuzzerOptionsDestroy"),
+            FuzzerOptionsEnableReplayValidation            = apiGetFunctionAddress(SHADERC, "spvFuzzerOptionsEnableReplayValidation"),
+            FuzzerOptionsSetRandomSeed                     = apiGetFunctionAddress(SHADERC, "spvFuzzerOptionsSetRandomSeed"),
+            FuzzerOptionsSetReplayRange                    = apiGetFunctionAddress(SHADERC, "spvFuzzerOptionsSetReplayRange"),
+            FuzzerOptionsSetShrinkerStepLimit              = apiGetFunctionAddress(SHADERC, "spvFuzzerOptionsSetShrinkerStepLimit"),
+            FuzzerOptionsEnableFuzzerPassValidation        = apiGetFunctionAddress(SHADERC, "spvFuzzerOptionsEnableFuzzerPassValidation"),
+            FuzzerOptionsEnableAllPasses                   = apiGetFunctionAddress(SHADERC, "spvFuzzerOptionsEnableAllPasses"),
+            TextToBinary                                   = apiGetFunctionAddress(SHADERC, "spvTextToBinary"),
+            TextToBinaryWithOptions                        = apiGetFunctionAddress(SHADERC, "spvTextToBinaryWithOptions"),
+            TextDestroy                                    = apiGetFunctionAddress(SHADERC, "spvTextDestroy"),
+            BinaryToText                                   = apiGetFunctionAddress(SHADERC, "spvBinaryToText"),
+            BinaryDestroy                                  = apiGetFunctionAddress(SHADERC, "spvBinaryDestroy"),
+            Validate                                       = apiGetFunctionAddress(SHADERC, "spvValidate"),
+            ValidateWithOptions                            = apiGetFunctionAddress(SHADERC, "spvValidateWithOptions"),
+            ValidateBinary                                 = apiGetFunctionAddress(SHADERC, "spvValidateBinary"),
+            DiagnosticCreate                               = apiGetFunctionAddress(SHADERC, "spvDiagnosticCreate"),
+            DiagnosticDestroy                              = apiGetFunctionAddress(SHADERC, "spvDiagnosticDestroy"),
+            DiagnosticPrint                                = apiGetFunctionAddress(SHADERC, "spvDiagnosticPrint"),
+            OpcodeString                                   = apiGetFunctionAddress(SHADERC, "spvOpcodeString"),
+            BinaryParse                                    = apiGetFunctionAddress(SHADERC, "spvBinaryParse");
 
     }
 
@@ -840,7 +830,7 @@ public class SPV {
 
     // --- [ spvTextToBinary ] ---
 
-    /** {@code spv_result_t spvTextToBinary(spv_const_context const context, char const * text, size_t const length, spv_binary_t ** binary, spv_diagnostic_t ** diagnostic)} */
+    /** {@code spv_result_t spvTextToBinary(spv_const_context const context, char const * text, size_t const length, spv_binary * binary, spv_diagnostic * diagnostic)} */
     public static int nspvTextToBinary(long context, long text, long length, long binary, long diagnostic) {
         long __functionAddress = Functions.TextToBinary;
         if (CHECKS) {
@@ -849,9 +839,9 @@ public class SPV {
         return invokePPPPPI(context, text, length, binary, diagnostic, __functionAddress);
     }
 
-    /** {@code spv_result_t spvTextToBinary(spv_const_context const context, char const * text, size_t const length, spv_binary_t ** binary, spv_diagnostic_t ** diagnostic)} */
+    /** {@code spv_result_t spvTextToBinary(spv_const_context const context, char const * text, size_t const length, spv_binary * binary, spv_diagnostic * diagnostic)} */
     @NativeType("spv_result_t")
-    public static int spvTextToBinary(@NativeType("spv_const_context const") long context, @NativeType("char const *") ByteBuffer text, @NativeType("spv_binary_t **") PointerBuffer binary, @NativeType("spv_diagnostic_t **") @Nullable PointerBuffer diagnostic) {
+    public static int spvTextToBinary(@NativeType("spv_const_context const") long context, @NativeType("char const *") ByteBuffer text, @NativeType("spv_binary *") PointerBuffer binary, @NativeType("spv_diagnostic *") @Nullable PointerBuffer diagnostic) {
         if (CHECKS) {
             check(binary, 1);
             checkSafe(diagnostic, 1);
@@ -859,9 +849,9 @@ public class SPV {
         return nspvTextToBinary(context, memAddress(text), text.remaining(), memAddress(binary), memAddressSafe(diagnostic));
     }
 
-    /** {@code spv_result_t spvTextToBinary(spv_const_context const context, char const * text, size_t const length, spv_binary_t ** binary, spv_diagnostic_t ** diagnostic)} */
+    /** {@code spv_result_t spvTextToBinary(spv_const_context const context, char const * text, size_t const length, spv_binary * binary, spv_diagnostic * diagnostic)} */
     @NativeType("spv_result_t")
-    public static int spvTextToBinary(@NativeType("spv_const_context const") long context, @NativeType("char const *") CharSequence text, @NativeType("spv_binary_t **") PointerBuffer binary, @NativeType("spv_diagnostic_t **") @Nullable PointerBuffer diagnostic) {
+    public static int spvTextToBinary(@NativeType("spv_const_context const") long context, @NativeType("char const *") CharSequence text, @NativeType("spv_binary *") PointerBuffer binary, @NativeType("spv_diagnostic *") @Nullable PointerBuffer diagnostic) {
         if (CHECKS) {
             check(binary, 1);
             checkSafe(diagnostic, 1);
@@ -878,7 +868,7 @@ public class SPV {
 
     // --- [ spvTextToBinaryWithOptions ] ---
 
-    /** {@code spv_result_t spvTextToBinaryWithOptions(spv_const_context const context, char const * text, size_t const length, uint32_t options, spv_binary_t ** binary, spv_diagnostic_t ** diagnostic)} */
+    /** {@code spv_result_t spvTextToBinaryWithOptions(spv_const_context const context, char const * text, size_t const length, uint32_t options, spv_binary * binary, spv_diagnostic * diagnostic)} */
     public static int nspvTextToBinaryWithOptions(long context, long text, long length, int options, long binary, long diagnostic) {
         long __functionAddress = Functions.TextToBinaryWithOptions;
         if (CHECKS) {
@@ -887,9 +877,9 @@ public class SPV {
         return invokePPPPPI(context, text, length, options, binary, diagnostic, __functionAddress);
     }
 
-    /** {@code spv_result_t spvTextToBinaryWithOptions(spv_const_context const context, char const * text, size_t const length, uint32_t options, spv_binary_t ** binary, spv_diagnostic_t ** diagnostic)} */
+    /** {@code spv_result_t spvTextToBinaryWithOptions(spv_const_context const context, char const * text, size_t const length, uint32_t options, spv_binary * binary, spv_diagnostic * diagnostic)} */
     @NativeType("spv_result_t")
-    public static int spvTextToBinaryWithOptions(@NativeType("spv_const_context const") long context, @NativeType("char const *") ByteBuffer text, @NativeType("uint32_t") int options, @NativeType("spv_binary_t **") PointerBuffer binary, @NativeType("spv_diagnostic_t **") @Nullable PointerBuffer diagnostic) {
+    public static int spvTextToBinaryWithOptions(@NativeType("spv_const_context const") long context, @NativeType("char const *") ByteBuffer text, @NativeType("uint32_t") int options, @NativeType("spv_binary *") PointerBuffer binary, @NativeType("spv_diagnostic *") @Nullable PointerBuffer diagnostic) {
         if (CHECKS) {
             check(binary, 1);
             checkSafe(diagnostic, 1);
@@ -897,9 +887,9 @@ public class SPV {
         return nspvTextToBinaryWithOptions(context, memAddress(text), text.remaining(), options, memAddress(binary), memAddressSafe(diagnostic));
     }
 
-    /** {@code spv_result_t spvTextToBinaryWithOptions(spv_const_context const context, char const * text, size_t const length, uint32_t options, spv_binary_t ** binary, spv_diagnostic_t ** diagnostic)} */
+    /** {@code spv_result_t spvTextToBinaryWithOptions(spv_const_context const context, char const * text, size_t const length, uint32_t options, spv_binary * binary, spv_diagnostic * diagnostic)} */
     @NativeType("spv_result_t")
-    public static int spvTextToBinaryWithOptions(@NativeType("spv_const_context const") long context, @NativeType("char const *") CharSequence text, @NativeType("uint32_t") int options, @NativeType("spv_binary_t **") PointerBuffer binary, @NativeType("spv_diagnostic_t **") @Nullable PointerBuffer diagnostic) {
+    public static int spvTextToBinaryWithOptions(@NativeType("spv_const_context const") long context, @NativeType("char const *") CharSequence text, @NativeType("uint32_t") int options, @NativeType("spv_binary *") PointerBuffer binary, @NativeType("spv_diagnostic *") @Nullable PointerBuffer diagnostic) {
         if (CHECKS) {
             check(binary, 1);
             checkSafe(diagnostic, 1);
@@ -916,20 +906,20 @@ public class SPV {
 
     // --- [ spvTextDestroy ] ---
 
-    /** {@code void spvTextDestroy(spv_text_t * text)} */
+    /** {@code void spvTextDestroy(spv_text text)} */
     public static void nspvTextDestroy(long text) {
         long __functionAddress = Functions.TextDestroy;
         invokePV(text, __functionAddress);
     }
 
-    /** {@code void spvTextDestroy(spv_text_t * text)} */
-    public static void spvTextDestroy(@NativeType("spv_text_t *") @Nullable SPVText text) {
+    /** {@code void spvTextDestroy(spv_text text)} */
+    public static void spvTextDestroy(@NativeType("spv_text") @Nullable SPVText text) {
         nspvTextDestroy(memAddressSafe(text));
     }
 
     // --- [ spvBinaryToText ] ---
 
-    /** {@code spv_result_t spvBinaryToText(spv_const_context const context, uint32_t const * binary, size_t const word_count, uint32_t options, spv_text_t ** text, spv_diagnostic_t ** diagnostic)} */
+    /** {@code spv_result_t spvBinaryToText(spv_const_context const context, uint32_t const * binary, size_t const word_count, uint32_t options, spv_text * text, spv_diagnostic * diagnostic)} */
     public static int nspvBinaryToText(long context, long binary, long word_count, int options, long text, long diagnostic) {
         long __functionAddress = Functions.BinaryToText;
         if (CHECKS) {
@@ -938,9 +928,9 @@ public class SPV {
         return invokePPPPPI(context, binary, word_count, options, text, diagnostic, __functionAddress);
     }
 
-    /** {@code spv_result_t spvBinaryToText(spv_const_context const context, uint32_t const * binary, size_t const word_count, uint32_t options, spv_text_t ** text, spv_diagnostic_t ** diagnostic)} */
+    /** {@code spv_result_t spvBinaryToText(spv_const_context const context, uint32_t const * binary, size_t const word_count, uint32_t options, spv_text * text, spv_diagnostic * diagnostic)} */
     @NativeType("spv_result_t")
-    public static int spvBinaryToText(@NativeType("spv_const_context const") long context, @NativeType("uint32_t const *") IntBuffer binary, @NativeType("uint32_t") int options, @NativeType("spv_text_t **") PointerBuffer text, @NativeType("spv_diagnostic_t **") @Nullable PointerBuffer diagnostic) {
+    public static int spvBinaryToText(@NativeType("spv_const_context const") long context, @NativeType("uint32_t const *") IntBuffer binary, @NativeType("uint32_t") int options, @NativeType("spv_text *") PointerBuffer text, @NativeType("spv_diagnostic *") @Nullable PointerBuffer diagnostic) {
         if (CHECKS) {
             check(text, 1);
             checkSafe(diagnostic, 1);
@@ -950,20 +940,20 @@ public class SPV {
 
     // --- [ spvBinaryDestroy ] ---
 
-    /** {@code void spvBinaryDestroy(spv_binary_t * binary)} */
+    /** {@code void spvBinaryDestroy(spv_binary binary)} */
     public static void nspvBinaryDestroy(long binary) {
         long __functionAddress = Functions.BinaryDestroy;
         invokePV(binary, __functionAddress);
     }
 
-    /** {@code void spvBinaryDestroy(spv_binary_t * binary)} */
-    public static void spvBinaryDestroy(@NativeType("spv_binary_t *") SPVBinary binary) {
+    /** {@code void spvBinaryDestroy(spv_binary binary)} */
+    public static void spvBinaryDestroy(@NativeType("spv_binary") SPVBinary binary) {
         nspvBinaryDestroy(binary.address());
     }
 
     // --- [ spvValidate ] ---
 
-    /** {@code spv_result_t spvValidate(spv_const_context const context, spv_binary_t const * const binary, spv_diagnostic_t ** diagnostic)} */
+    /** {@code spv_result_t spvValidate(spv_const_context const context, spv_const_binary const binary, spv_diagnostic * diagnostic)} */
     public static int nspvValidate(long context, long binary, long diagnostic) {
         long __functionAddress = Functions.Validate;
         if (CHECKS) {
@@ -972,9 +962,9 @@ public class SPV {
         return invokePPPI(context, binary, diagnostic, __functionAddress);
     }
 
-    /** {@code spv_result_t spvValidate(spv_const_context const context, spv_binary_t const * const binary, spv_diagnostic_t ** diagnostic)} */
+    /** {@code spv_result_t spvValidate(spv_const_context const context, spv_const_binary const binary, spv_diagnostic * diagnostic)} */
     @NativeType("spv_result_t")
-    public static int spvValidate(@NativeType("spv_const_context const") long context, @NativeType("spv_binary_t const * const") SPVBinary binary, @NativeType("spv_diagnostic_t **") @Nullable PointerBuffer diagnostic) {
+    public static int spvValidate(@NativeType("spv_const_context const") long context, @NativeType("spv_const_binary const") SPVBinary binary, @NativeType("spv_diagnostic *") @Nullable PointerBuffer diagnostic) {
         if (CHECKS) {
             checkSafe(diagnostic, 1);
         }
@@ -983,7 +973,7 @@ public class SPV {
 
     // --- [ spvValidateWithOptions ] ---
 
-    /** {@code spv_result_t spvValidateWithOptions(spv_const_context const context, spv_const_validator_options const options, spv_binary_t const * const binary, spv_diagnostic_t ** diagnostic)} */
+    /** {@code spv_result_t spvValidateWithOptions(spv_const_context const context, spv_const_validator_options const options, spv_const_binary const binary, spv_diagnostic * diagnostic)} */
     public static int nspvValidateWithOptions(long context, long options, long binary, long diagnostic) {
         long __functionAddress = Functions.ValidateWithOptions;
         if (CHECKS) {
@@ -993,9 +983,9 @@ public class SPV {
         return invokePPPPI(context, options, binary, diagnostic, __functionAddress);
     }
 
-    /** {@code spv_result_t spvValidateWithOptions(spv_const_context const context, spv_const_validator_options const options, spv_binary_t const * const binary, spv_diagnostic_t ** diagnostic)} */
+    /** {@code spv_result_t spvValidateWithOptions(spv_const_context const context, spv_const_validator_options const options, spv_const_binary const binary, spv_diagnostic * diagnostic)} */
     @NativeType("spv_result_t")
-    public static int spvValidateWithOptions(@NativeType("spv_const_context const") long context, @NativeType("spv_const_validator_options const") long options, @NativeType("spv_binary_t const * const") SPVBinary binary, @NativeType("spv_diagnostic_t **") @Nullable PointerBuffer diagnostic) {
+    public static int spvValidateWithOptions(@NativeType("spv_const_context const") long context, @NativeType("spv_const_validator_options const") long options, @NativeType("spv_const_binary const") SPVBinary binary, @NativeType("spv_diagnostic *") @Nullable PointerBuffer diagnostic) {
         if (CHECKS) {
             checkSafe(diagnostic, 1);
         }
@@ -1004,7 +994,7 @@ public class SPV {
 
     // --- [ spvValidateBinary ] ---
 
-    /** {@code spv_result_t spvValidateBinary(spv_const_context const context, uint32_t const * words, size_t const num_words, spv_diagnostic_t ** diagnostic)} */
+    /** {@code spv_result_t spvValidateBinary(spv_const_context const context, uint32_t const * words, size_t const num_words, spv_diagnostic * diagnostic)} */
     public static int nspvValidateBinary(long context, long words, long num_words, long diagnostic) {
         long __functionAddress = Functions.ValidateBinary;
         if (CHECKS) {
@@ -1013,9 +1003,9 @@ public class SPV {
         return invokePPPPI(context, words, num_words, diagnostic, __functionAddress);
     }
 
-    /** {@code spv_result_t spvValidateBinary(spv_const_context const context, uint32_t const * words, size_t const num_words, spv_diagnostic_t ** diagnostic)} */
+    /** {@code spv_result_t spvValidateBinary(spv_const_context const context, uint32_t const * words, size_t const num_words, spv_diagnostic * diagnostic)} */
     @NativeType("spv_result_t")
-    public static int spvValidateBinary(@NativeType("spv_const_context const") long context, @NativeType("uint32_t const *") IntBuffer words, @NativeType("spv_diagnostic_t **") @Nullable PointerBuffer diagnostic) {
+    public static int spvValidateBinary(@NativeType("spv_const_context const") long context, @NativeType("uint32_t const *") IntBuffer words, @NativeType("spv_diagnostic *") @Nullable PointerBuffer diagnostic) {
         if (CHECKS) {
             checkSafe(diagnostic, 1);
         }
@@ -1024,15 +1014,15 @@ public class SPV {
 
     // --- [ spvDiagnosticCreate ] ---
 
-    /** {@code spv_diagnostic_t * spvDiagnosticCreate(spv_position_t * const position, char const * message)} */
+    /** {@code spv_diagnostic spvDiagnosticCreate(spv_position const position, char const * message)} */
     public static long nspvDiagnosticCreate(long position, long message) {
         long __functionAddress = Functions.DiagnosticCreate;
         return invokePPP(position, message, __functionAddress);
     }
 
-    /** {@code spv_diagnostic_t * spvDiagnosticCreate(spv_position_t * const position, char const * message)} */
-    @NativeType("spv_diagnostic_t *")
-    public static @Nullable SPVDiagnostic spvDiagnosticCreate(@NativeType("spv_position_t * const") SPVPosition position, @NativeType("char const *") ByteBuffer message) {
+    /** {@code spv_diagnostic spvDiagnosticCreate(spv_position const position, char const * message)} */
+    @NativeType("spv_diagnostic")
+    public static @Nullable SPVDiagnostic spvDiagnosticCreate(@NativeType("spv_position const") SPVPosition position, @NativeType("char const *") ByteBuffer message) {
         if (CHECKS) {
             checkNT1(message);
         }
@@ -1040,9 +1030,9 @@ public class SPV {
         return SPVDiagnostic.createSafe(__result);
     }
 
-    /** {@code spv_diagnostic_t * spvDiagnosticCreate(spv_position_t * const position, char const * message)} */
-    @NativeType("spv_diagnostic_t *")
-    public static @Nullable SPVDiagnostic spvDiagnosticCreate(@NativeType("spv_position_t * const") SPVPosition position, @NativeType("char const *") CharSequence message) {
+    /** {@code spv_diagnostic spvDiagnosticCreate(spv_position const position, char const * message)} */
+    @NativeType("spv_diagnostic")
+    public static @Nullable SPVDiagnostic spvDiagnosticCreate(@NativeType("spv_position const") SPVPosition position, @NativeType("char const *") CharSequence message) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(message, true);
@@ -1056,28 +1046,28 @@ public class SPV {
 
     // --- [ spvDiagnosticDestroy ] ---
 
-    /** {@code void spvDiagnosticDestroy(spv_diagnostic_t * diagnostic)} */
+    /** {@code void spvDiagnosticDestroy(spv_diagnostic diagnostic)} */
     public static void nspvDiagnosticDestroy(long diagnostic) {
         long __functionAddress = Functions.DiagnosticDestroy;
         invokePV(diagnostic, __functionAddress);
     }
 
-    /** {@code void spvDiagnosticDestroy(spv_diagnostic_t * diagnostic)} */
-    public static void spvDiagnosticDestroy(@NativeType("spv_diagnostic_t *") SPVDiagnostic diagnostic) {
+    /** {@code void spvDiagnosticDestroy(spv_diagnostic diagnostic)} */
+    public static void spvDiagnosticDestroy(@NativeType("spv_diagnostic") SPVDiagnostic diagnostic) {
         nspvDiagnosticDestroy(diagnostic.address());
     }
 
     // --- [ spvDiagnosticPrint ] ---
 
-    /** {@code spv_result_t spvDiagnosticPrint(spv_diagnostic_t * const diagnostic)} */
+    /** {@code spv_result_t spvDiagnosticPrint(spv_diagnostic const diagnostic)} */
     public static int nspvDiagnosticPrint(long diagnostic) {
         long __functionAddress = Functions.DiagnosticPrint;
         return invokePI(diagnostic, __functionAddress);
     }
 
-    /** {@code spv_result_t spvDiagnosticPrint(spv_diagnostic_t * const diagnostic)} */
+    /** {@code spv_result_t spvDiagnosticPrint(spv_diagnostic const diagnostic)} */
     @NativeType("spv_result_t")
-    public static int spvDiagnosticPrint(@NativeType("spv_diagnostic_t * const") SPVDiagnostic diagnostic) {
+    public static int spvDiagnosticPrint(@NativeType("spv_diagnostic const") SPVDiagnostic diagnostic) {
         return nspvDiagnosticPrint(diagnostic.address());
     }
 
@@ -1098,7 +1088,7 @@ public class SPV {
 
     // --- [ spvBinaryParse ] ---
 
-    /** {@code spv_result_t spvBinaryParse(spv_const_context const context, void * user_data, uint32_t const * words, size_t const num_words, spv_parsed_header_fn_t parse_header, spv_parsed_instruction_fn_t parse_instruction, spv_diagnostic_t ** diagnostic)} */
+    /** {@code spv_result_t spvBinaryParse(spv_const_context const context, void * user_data, uint32_t const * words, size_t const num_words, spv_parsed_header_fn_t parse_header, spv_parsed_instruction_fn_t parse_instruction, spv_diagnostic * diagnostic)} */
     public static int nspvBinaryParse(long context, long user_data, long words, long num_words, long parse_header, long parse_instruction, long diagnostic) {
         long __functionAddress = Functions.BinaryParse;
         if (CHECKS) {
@@ -1107,170 +1097,13 @@ public class SPV {
         return invokePPPPPPPI(context, user_data, words, num_words, parse_header, parse_instruction, diagnostic, __functionAddress);
     }
 
-    /** {@code spv_result_t spvBinaryParse(spv_const_context const context, void * user_data, uint32_t const * words, size_t const num_words, spv_parsed_header_fn_t parse_header, spv_parsed_instruction_fn_t parse_instruction, spv_diagnostic_t ** diagnostic)} */
+    /** {@code spv_result_t spvBinaryParse(spv_const_context const context, void * user_data, uint32_t const * words, size_t const num_words, spv_parsed_header_fn_t parse_header, spv_parsed_instruction_fn_t parse_instruction, spv_diagnostic * diagnostic)} */
     @NativeType("spv_result_t")
-    public static int spvBinaryParse(@NativeType("spv_const_context const") long context, @NativeType("void *") long user_data, @NativeType("uint32_t const *") IntBuffer words, @NativeType("spv_parsed_header_fn_t") @Nullable SPVParsedHeaderFnI parse_header, @NativeType("spv_parsed_instruction_fn_t") @Nullable SPVParsedInstructionFnI parse_instruction, @NativeType("spv_diagnostic_t **") @Nullable PointerBuffer diagnostic) {
+    public static int spvBinaryParse(@NativeType("spv_const_context const") long context, @NativeType("void *") long user_data, @NativeType("uint32_t const *") IntBuffer words, @NativeType("spv_parsed_header_fn_t") @Nullable SPVParsedHeaderFnI parse_header, @NativeType("spv_parsed_instruction_fn_t") @Nullable SPVParsedInstructionFnI parse_instruction, @NativeType("spv_diagnostic *") @Nullable PointerBuffer diagnostic) {
         if (CHECKS) {
             checkSafe(diagnostic, 1);
         }
         return nspvBinaryParse(context, user_data, memAddress(words), words.remaining(), memAddressSafe(parse_header), memAddressSafe(parse_instruction), memAddressSafe(diagnostic));
-    }
-
-    // --- [ spvOptimizerCreate ] ---
-
-    /** {@code spv_optimizer_t * spvOptimizerCreate(spv_target_env env)} */
-    @NativeType("spv_optimizer_t *")
-    public static long spvOptimizerCreate(@NativeType("spv_target_env") int env) {
-        long __functionAddress = Functions.OptimizerCreate;
-        return invokeP(env, __functionAddress);
-    }
-
-    // --- [ spvOptimizerDestroy ] ---
-
-    /** {@code void spvOptimizerDestroy(spv_optimizer_t * optimizer)} */
-    public static void spvOptimizerDestroy(@NativeType("spv_optimizer_t *") long optimizer) {
-        long __functionAddress = Functions.OptimizerDestroy;
-        if (CHECKS) {
-            check(optimizer);
-        }
-        invokePV(optimizer, __functionAddress);
-    }
-
-    // --- [ spvOptimizerSetMessageConsumer ] ---
-
-    /** {@code void spvOptimizerSetMessageConsumer(spv_optimizer_t * optimizer, spv_message_consumer consumer)} */
-    public static void nspvOptimizerSetMessageConsumer(long optimizer, long consumer) {
-        long __functionAddress = Functions.OptimizerSetMessageConsumer;
-        if (CHECKS) {
-            check(optimizer);
-        }
-        invokePPV(optimizer, consumer, __functionAddress);
-    }
-
-    /** {@code void spvOptimizerSetMessageConsumer(spv_optimizer_t * optimizer, spv_message_consumer consumer)} */
-    public static void spvOptimizerSetMessageConsumer(@NativeType("spv_optimizer_t *") long optimizer, @NativeType("spv_message_consumer") @Nullable SPVMessageConsumerI consumer) {
-        nspvOptimizerSetMessageConsumer(optimizer, memAddressSafe(consumer));
-    }
-
-    // --- [ spvOptimizerRegisterLegalizationPasses ] ---
-
-    /** {@code void spvOptimizerRegisterLegalizationPasses(spv_optimizer_t * optimizer)} */
-    public static void spvOptimizerRegisterLegalizationPasses(@NativeType("spv_optimizer_t *") long optimizer) {
-        long __functionAddress = Functions.OptimizerRegisterLegalizationPasses;
-        if (CHECKS) {
-            check(optimizer);
-        }
-        invokePV(optimizer, __functionAddress);
-    }
-
-    // --- [ spvOptimizerRegisterPerformancePasses ] ---
-
-    /** {@code void spvOptimizerRegisterPerformancePasses(spv_optimizer_t * optimizer)} */
-    public static void spvOptimizerRegisterPerformancePasses(@NativeType("spv_optimizer_t *") long optimizer) {
-        long __functionAddress = Functions.OptimizerRegisterPerformancePasses;
-        if (CHECKS) {
-            check(optimizer);
-        }
-        invokePV(optimizer, __functionAddress);
-    }
-
-    // --- [ spvOptimizerRegisterSizePasses ] ---
-
-    /** {@code void spvOptimizerRegisterSizePasses(spv_optimizer_t * optimizer)} */
-    public static void spvOptimizerRegisterSizePasses(@NativeType("spv_optimizer_t *") long optimizer) {
-        long __functionAddress = Functions.OptimizerRegisterSizePasses;
-        if (CHECKS) {
-            check(optimizer);
-        }
-        invokePV(optimizer, __functionAddress);
-    }
-
-    // --- [ spvOptimizerRegisterPassFromFlag ] ---
-
-    /** {@code bool spvOptimizerRegisterPassFromFlag(spv_optimizer_t * optimizer, char const * flag)} */
-    public static boolean nspvOptimizerRegisterPassFromFlag(long optimizer, long flag) {
-        long __functionAddress = Functions.OptimizerRegisterPassFromFlag;
-        if (CHECKS) {
-            check(optimizer);
-        }
-        return invokePPZ(optimizer, flag, __functionAddress);
-    }
-
-    /** {@code bool spvOptimizerRegisterPassFromFlag(spv_optimizer_t * optimizer, char const * flag)} */
-    @NativeType("bool")
-    public static boolean spvOptimizerRegisterPassFromFlag(@NativeType("spv_optimizer_t *") long optimizer, @NativeType("char const *") ByteBuffer flag) {
-        if (CHECKS) {
-            checkNT1(flag);
-        }
-        return nspvOptimizerRegisterPassFromFlag(optimizer, memAddress(flag));
-    }
-
-    /** {@code bool spvOptimizerRegisterPassFromFlag(spv_optimizer_t * optimizer, char const * flag)} */
-    @NativeType("bool")
-    public static boolean spvOptimizerRegisterPassFromFlag(@NativeType("spv_optimizer_t *") long optimizer, @NativeType("char const *") CharSequence flag) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            stack.nASCII(flag, true);
-            long flagEncoded = stack.getPointerAddress();
-            return nspvOptimizerRegisterPassFromFlag(optimizer, flagEncoded);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
-    }
-
-    // --- [ spvOptimizerRegisterPassesFromFlags ] ---
-
-    /** {@code bool spvOptimizerRegisterPassesFromFlags(spv_optimizer_t * optimizer, char const ** flags, size_t const flag_count)} */
-    public static boolean nspvOptimizerRegisterPassesFromFlags(long optimizer, long flags, long flag_count) {
-        long __functionAddress = Functions.OptimizerRegisterPassesFromFlags;
-        if (CHECKS) {
-            check(optimizer);
-        }
-        return invokePPPZ(optimizer, flags, flag_count, __functionAddress);
-    }
-
-    /** {@code bool spvOptimizerRegisterPassesFromFlags(spv_optimizer_t * optimizer, char const ** flags, size_t const flag_count)} */
-    @NativeType("bool")
-    public static boolean spvOptimizerRegisterPassesFromFlags(@NativeType("spv_optimizer_t *") long optimizer, @NativeType("char const **") PointerBuffer flags) {
-        return nspvOptimizerRegisterPassesFromFlags(optimizer, memAddress(flags), flags.remaining());
-    }
-
-    // --- [ spvOptimizerRegisterPassesFromFlagsWhilePreservingTheInterface ] ---
-
-    /** {@code bool spvOptimizerRegisterPassesFromFlagsWhilePreservingTheInterface(spv_optimizer_t * optimizer, char const ** flags, size_t const flag_count)} */
-    public static boolean nspvOptimizerRegisterPassesFromFlagsWhilePreservingTheInterface(long optimizer, long flags, long flag_count) {
-        long __functionAddress = Functions.OptimizerRegisterPassesFromFlagsWhilePreservingTheInterface;
-        if (CHECKS) {
-            check(optimizer);
-        }
-        return invokePPPZ(optimizer, flags, flag_count, __functionAddress);
-    }
-
-    /** {@code bool spvOptimizerRegisterPassesFromFlagsWhilePreservingTheInterface(spv_optimizer_t * optimizer, char const ** flags, size_t const flag_count)} */
-    @NativeType("bool")
-    public static boolean spvOptimizerRegisterPassesFromFlagsWhilePreservingTheInterface(@NativeType("spv_optimizer_t *") long optimizer, @NativeType("char const **") PointerBuffer flags) {
-        return nspvOptimizerRegisterPassesFromFlagsWhilePreservingTheInterface(optimizer, memAddress(flags), flags.remaining());
-    }
-
-    // --- [ spvOptimizerRun ] ---
-
-    /** {@code spv_result_t spvOptimizerRun(spv_optimizer_t * optimizer, uint32_t const * binary, size_t const word_count, spv_binary_t ** optimized_binary, spv_optimizer_options const options)} */
-    public static int nspvOptimizerRun(long optimizer, long binary, long word_count, long optimized_binary, long options) {
-        long __functionAddress = Functions.OptimizerRun;
-        if (CHECKS) {
-            check(optimizer);
-            check(options);
-        }
-        return invokePPPPPI(optimizer, binary, word_count, optimized_binary, options, __functionAddress);
-    }
-
-    /** {@code spv_result_t spvOptimizerRun(spv_optimizer_t * optimizer, uint32_t const * binary, size_t const word_count, spv_binary_t ** optimized_binary, spv_optimizer_options const options)} */
-    @NativeType("spv_result_t")
-    public static int spvOptimizerRun(@NativeType("spv_optimizer_t *") long optimizer, @NativeType("uint32_t const *") IntBuffer binary, @NativeType("spv_binary_t **") PointerBuffer optimized_binary, @NativeType("spv_optimizer_options const") long options) {
-        if (CHECKS) {
-            check(optimized_binary, 1);
-        }
-        return nspvOptimizerRun(optimizer, memAddress(binary), binary.remaining(), memAddress(optimized_binary), options);
     }
 
 }

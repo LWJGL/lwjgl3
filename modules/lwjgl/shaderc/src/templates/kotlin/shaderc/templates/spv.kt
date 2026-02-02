@@ -541,12 +541,6 @@ val spv = "SPV".nativeClass(Module.SHADERC, prefix = "SPV", prefixMethod = "spv"
         spv_fuzzer_options("options")
     )
 
-    val spv_diagnostic = spv_diagnostic_t.p
-    val spv_binary = spv_binary_t.p
-    val spv_const_binary = spv_binary_t.const.p
-    val spv_text = spv_text_t.p
-    val spv_position = spv_position_t.p
-
     spv_result_t(
         "TextToBinary",
 
@@ -652,75 +646,5 @@ val spv = "SPV".nativeClass(Module.SHADERC, prefix = "SPV", prefixMethod = "spv"
         nullable..spv_parsed_header_fn_t("parse_header"),
         nullable..spv_parsed_instruction_fn_t("parse_instruction"),
         Check(1)..nullable..spv_diagnostic.p("diagnostic")
-    )
-
-    spv_optimizer_t.p(
-        "OptimizerCreate",
-
-        spv_target_env("env")
-    )
-
-    void(
-        "OptimizerDestroy",
-
-        spv_optimizer_t.p("optimizer")
-    )
-
-    void(
-        "OptimizerSetMessageConsumer",
-
-        spv_optimizer_t.p("optimizer"),
-        nullable..spv_message_consumer("consumer")
-    )
-
-    void(
-        "OptimizerRegisterLegalizationPasses",
-
-        spv_optimizer_t.p("optimizer")
-    )
-
-    void(
-        "OptimizerRegisterPerformancePasses",
-
-        spv_optimizer_t.p("optimizer")
-    )
-
-    void(
-        "OptimizerRegisterSizePasses",
-
-        spv_optimizer_t.p("optimizer")
-    )
-
-    bool(
-        "OptimizerRegisterPassFromFlag",
-
-        spv_optimizer_t.p("optimizer"),
-        charASCII.const.p("flag")
-    )
-
-    bool(
-        "OptimizerRegisterPassesFromFlags",
-
-        spv_optimizer_t.p("optimizer"),
-        charASCII.const.p.p("flags"),
-        AutoSize("flags")..size_t.const("flag_count")
-    )
-
-    bool(
-        "OptimizerRegisterPassesFromFlagsWhilePreservingTheInterface",
-
-        spv_optimizer_t.p("optimizer"),
-        charASCII.const.p.p("flags"),
-        AutoSize("flags")..size_t.const("flag_count")
-    )
-
-    spv_result_t(
-        "OptimizerRun",
-
-        spv_optimizer_t.p("optimizer"),
-        uint32_t.const.p("binary"),
-        AutoSize("binary")..size_t.const("word_count"),
-        Check(1)..spv_binary.p("optimized_binary"),
-        spv_optimizer_options.const("options")
     )
 }

@@ -809,7 +809,7 @@ public class Configuration<T> {
     public static final Configuration<String> SHADERC_LIBRARY_NAME = new Configuration<>("org.lwjgl.shaderc.libname", StateInit.STRING);
 
     /**
-     * Similar to {@link #LIBRARY_NAME} for the Shaderc glslang library (<b>org.lwjgl.shaderc.glslang.libname</b>).
+     * Similar to {@link #LIBRARY_NAME} for the glslang library (<b>org.lwjgl.shaderc.glslang.libname</b>).
      *
      * <p>The Shaderc shared library provided by LWJGL is built with the glslang API exposed. This option can be set to use the glslang bindings with a
      * third-party shared library.</p>
@@ -817,12 +817,28 @@ public class Configuration<T> {
     public static final Configuration<String> GLSLANG_LIBRARY_NAME = new Configuration<>("org.lwjgl.shaderc.glslang.libname", StateInit.STRING);
 
     /**
-     * Similar to {@link #LIBRARY_NAME} for the Shaderc SPIRV Tools library (<b>org.lwjgl.shaderc.spirv_tools.libname</b>).
+     * Similar to {@link #LIBRARY_NAME} for the glslang default resource limits library (<b>org.lwjgl.shaderc.glslang_resource.libname</b>).
+     *
+     * <p>The Shaderc shared library provided by LWJGL is built with the glslang API exposed. This option can be set to use the glslang bindings with a
+     * third-party shared library.</p>
+     */
+    public static final Configuration<String> GLSLANG_RESOURCE_LIBRARY_NAME = new Configuration<>("org.lwjgl.shaderc.glslang_resource.libname", StateInit.STRING);
+
+    /**
+     * Similar to {@link #LIBRARY_NAME} for the SPIRV Tools library (<b>org.lwjgl.shaderc.spirv_tools.libname</b>).
      *
      * <p>The Shaderc shared library provided by LWJGL is built with the SPIRV Tools API exposed. This option can be set to use the SPIRV Tools bindings with a
      * third-party shared library.</p>
      */
     public static final Configuration<String> SPIRV_TOOLS_LIBRARY_NAME = new Configuration<>("org.lwjgl.shaderc.spirv_tools.libname", StateInit.STRING);
+
+    /**
+     * Similar to {@link #LIBRARY_NAME} for the SPIRV Tools Optimizer library (<b>org.lwjgl.shaderc.spirv_tools_optimizer.libname</b>).
+     *
+     * <p>The Shaderc shared library provided by LWJGL is built with the SPIRV Tools API exposed. This option can be set to use the SPIRV Tools bindings with a
+     * third-party shared library.</p>
+     */
+    public static final Configuration<String> SPIRV_TOOLS_OPTIMIZER_LIBRARY_NAME = new Configuration<>("org.lwjgl.shaderc.spirv_tools_optimizer.libname", StateInit.STRING);
 
     // -- SPVC
 

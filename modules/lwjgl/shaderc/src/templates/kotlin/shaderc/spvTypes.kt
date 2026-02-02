@@ -115,3 +115,9 @@ val spv_message_consumer = Module.SHADERC.callback {
         nativeType = "spv_message_consumer"
     )
 }
+
+val spv_diagnostic = typedef(spv_diagnostic_t.p, "spv_diagnostic")
+val spv_binary = typedef(spv_binary_t.p, "spv_binary")
+val spv_const_binary = typedef(spv_binary_t.const.p, "spv_const_binary")
+val spv_text = typedef(spv_text_t.p, "spv_text")
+val spv_position = typedef(spv_position_t.p, "spv_position")
