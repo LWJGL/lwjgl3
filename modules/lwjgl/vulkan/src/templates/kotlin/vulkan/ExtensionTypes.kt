@@ -3968,6 +3968,12 @@ val VkFilterCubicImageViewImageFormatPropertiesEXT = struct(Module.VULKAN, "VkFi
     VkBool32("filterCubicMinmax")
 }
 
+val VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM = struct(Module.VULKAN, "VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_CONVERSION_FEATURES_QCOM")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("cooperativeMatrixConversion")
+}
+
 val VkDeviceQueueGlobalPriorityCreateInfoEXT = struct(Module.VULKAN, "VkDeviceQueueGlobalPriorityCreateInfoEXT", alias = VkDeviceQueueGlobalPriorityCreateInfo) {
     Expression("#STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO")..VkStructureType("sType")
     nullable..opaque_const_p("pNext")

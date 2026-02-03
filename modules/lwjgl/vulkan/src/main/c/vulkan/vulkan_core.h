@@ -66,7 +66,7 @@ extern "C" {
 //#define VK_API_VERSION VK_MAKE_API_VERSION(0, 1, 0, 0) // Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 341
+#define VK_HEADER_VERSION 342
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 4, VK_HEADER_VERSION)
@@ -738,6 +738,7 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV = 1000166001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_IMAGE_FORMAT_INFO_EXT = 1000170000,
     VK_STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT = 1000170001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_CONVERSION_FEATURES_QCOM = 1000172000,
     VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT = 1000178000,
     VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT = 1000178001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT = 1000178002,
@@ -16883,6 +16884,18 @@ typedef struct VkFilterCubicImageViewImageFormatPropertiesEXT {
 #define VK_QCOM_render_pass_shader_resolve 1
 #define VK_QCOM_RENDER_PASS_SHADER_RESOLVE_SPEC_VERSION 4
 #define VK_QCOM_RENDER_PASS_SHADER_RESOLVE_EXTENSION_NAME "VK_QCOM_render_pass_shader_resolve"
+
+
+// VK_QCOM_cooperative_matrix_conversion is a preprocessor guard. Do not pass it to API calls.
+#define VK_QCOM_cooperative_matrix_conversion 1
+#define VK_QCOM_COOPERATIVE_MATRIX_CONVERSION_SPEC_VERSION 1
+#define VK_QCOM_COOPERATIVE_MATRIX_CONVERSION_EXTENSION_NAME "VK_QCOM_cooperative_matrix_conversion"
+typedef struct VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           cooperativeMatrixConversion;
+} VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM;
+
 
 
 // VK_EXT_global_priority is a preprocessor guard. Do not pass it to API calls.

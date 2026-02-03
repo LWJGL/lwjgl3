@@ -1829,6 +1829,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_NVX_image_view_handle;
     /** When true, {@code NVX_multiview_per_view_attributes} is supported. */
     public final boolean VK_NVX_multiview_per_view_attributes;
+    /** When true, {@code QCOM_cooperative_matrix_conversion} is supported. */
+    public final boolean VK_QCOM_cooperative_matrix_conversion;
     /** When true, {@code QCOM_data_graph_model} is supported. */
     public final boolean VK_QCOM_data_graph_model;
     /** When true, {@code QCOM_filter_cubic_clamp} is supported. */
@@ -2265,6 +2267,7 @@ public class VKCapabilitiesDevice {
         VK_NVX_binary_import = check_NVX_binary_import(provider, caps, ext);
         VK_NVX_image_view_handle = check_NVX_image_view_handle(provider, caps, ext);
         VK_NVX_multiview_per_view_attributes = ext.contains("VK_NVX_multiview_per_view_attributes");
+        VK_QCOM_cooperative_matrix_conversion = ext.contains("VK_QCOM_cooperative_matrix_conversion");
         VK_QCOM_data_graph_model = ext.contains("VK_QCOM_data_graph_model");
         VK_QCOM_filter_cubic_clamp = ext.contains("VK_QCOM_filter_cubic_clamp");
         VK_QCOM_filter_cubic_weights = ext.contains("VK_QCOM_filter_cubic_weights");
