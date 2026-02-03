@@ -1,3 +1,31 @@
+### 3.4.1
+
+_Released 2026 Feb 03_
+
+This build includes the following changes:
+
+#### Bindings
+
+- Assimp: Updated to 6.0.3 (up from 6.0.2)
+- harfbuzz: Updated to 12.3.2 (up from 12.3.0)
+- OpenAL Soft: Updated to 1.25.1 (up from 1.25.0)
+- SDL: Updated to pre-release 3.4.1 (up from 3.4.0)
+- Shaderc: Updated to 2026.1 (up from 2025.5)
+  * Updated glslang to 16.2.0 (up from 16.1.0)
+  * Updated SPIRV Tools to 2026.1 (up from 2025.5)
+- Vulkan: Updated to 1.4.342 (up from 1.4.338)
+
+#### Fixes
+
+- Windows: Reverted to building with Visual Studio 2022 to fix another case of #1005.
+
+#### Breaking Changes
+
+- Shaderc/glslang: Extracted the resource limits interface (`resource_limits_c.h`) to a separate class. (#1101)
+  * Added `Configuration.GLSLANG_RESOURCE_LIBRARY_NAME`
+- Shaderc/SPIRV Tools: Extracted the optimizer interface to a separate class. (#1101)
+  * Added `Configuration.SPIRV_TOOLS_OPTIMIZER_LIBRARY_NAME`
+
 ### 3.4.0
 
 _Released 2026 Jan 18_

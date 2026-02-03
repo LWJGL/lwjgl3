@@ -1,103 +1,27 @@
-### 3.4.0
+### 3.4.1
 
-_Released 2026 Jan 18_
+_Released 2026 Feb 03_
 
 This build includes the following changes:
 
 #### Bindings
 
-- Added [RenderDoc](https://renderdoc.org) bindings.
-- Added [SDL 3](https://libsdl.org/) bindings.
-- Added [libspng](https://libspng.org/) bindings.
-- Assimp: Updated to 6.0.2 (up from 5.4.3)
-- bgfx: Updated to API version 136 (up from 129)
-- FMOD: Updated to 2.03.11 (up from 2.03.04)
-- freetype: Updated to 2.14.1 (up from 2.13.3)
-- harfbuzz: Updated to 12.3.0 (up from 10.1.0)
-- hwloc: Updated to 2.12.2 (up from 2.11.2)
-- KTX: Updated to 4.4.2 (up from 4.3.2)
-- libffi: Updated to 3.5.2 (up from 3.4.6)
-- liburing: Updated to 2.13 (up from 2.8)
-- LLVM/Clang: Updated to 21.1.2 (up from 19.1.0)
-- meshoptimizer: Updated to 1.0.0 (up from 0.22)
-- msdfgen: Updated to 1.13.0 (up from 1.11.0)
-  * Added error correction functions.
-  * Added optional `advance` parameter to `msdf_ft_font_load_glyph*`.
-  * Replaced `msdf_shape_has_inverse_y_axis` with `msdf_shape_set/get_y_axis_orientation`.
-- NativeFileDialog: Update to 1.3.0 (up from 1.2.1)
-- Nuklear: Updated to 4.13.0 (up from 4.12.3)
-- OpenAL Soft: Updated to 1.25.0 (up from 1.24.1)
-  * Added `AL_SOFT_bformat_hoa` extension.
-- OpenGL (ES): Added latest extensions.
-  * `EXT_fragment_shading_rate`
-  * `EXT_mesh_shader`
-  * `EXT_shader_realtime_clock`
-  * `EXT_shader_texture_samples`
-- OpenXR: Updated to 1.1.54 (up from 1.1.43)
-- Opus: Updated to 1.6.0 (up from 1.5.2)
-- Shaderc: Updated to 2025.5 (up from 2024.4)
-  * Added bindings to glslang.
-  * Added bindings to SPIRV Tools.
-- SPIRV-Cross: Updated to 0.68.0 (up from 0.64.0)
-- stb
-  * Updated `stb_image_resize` to 2.17 (up from 2.12)
-- tinyexr: Updated to 1.0.12 (up from 1.0.8)
-- tinyfiledialogs: Updated to 3.19.1 (up from 3.18.1)
-- vma: Updated to 3.3.0 (up from 3.2.0)
-- Vulkan: Updated to 1.4.338 (up from 1.4.304)
-  * Includes MoltenVK 1.4.1 (up from 1.2.11)
-- Zstd: Updated to 1.5.7 (up from 1.5.6)
-
-LWJGL bindings no longer include API documentation in javadoc form. What remains: 
-
-- Native struct definitions.
-- Native function signatures for downcalls (new in 3.4.0) and upcalls.
-- The `package-info` javadoc in each module now also includes links to useful resources, such as: 
-  * The official API documentation.
-  * The official source repository.
-  * Guides, tutorials, SDKs, etc.
-
-LWJGL no longer includes the following bindings:
-
-- `lwjgl-cuda`
-- `lwjgl-libdivide`
-- `lwjgl-meow`
-- `lwjgl-nanovg`: the Blendish and OUI bindings only
-- `lwjgl-openvr`
-- `lwjgl-ovr`
-- `lwjgl-sse`
-- `lwjgl-tootle`
-
-#### Improvements
-
-- Core: Added the Runtime Bindings Generator.
-  * A preview API, in `org.lwjgl.system.ffm`, that allows users to define and use custom bindings.
-  * Based on the Foreign Function & Memory (FFM) and ClassFile APIs (requires JDK 25 or later).
-- Core: Added a new backend for downcalls, upcalls and off-heap memory access based on FFM.
-  * Enabled by default on JDK 25 or later.
-  * LWJGL is now fully functional with `--sun-misc-unsafe-memory-access=deny`.
-  * See the [FFM Guide](../FFM.md) for details.
-- Core: Added `memCopy` support for Java arrays. (#972)
-  * Array to buffer
-  * Buffer to array
-  * Corresponding unsafe overloads
-- FreeBSD: LWJGL now requires FreeBSD 13.5 or later. (up from 13.3)
-- Linux: x86_64 shared libraries are now built with GCC 15.1 (up from GCC 11.2)
-  * The minimum GLIBC version is now 2.28. (up from 2.17)
-- Linux: non-x86_64 shared libraries are now built with GCC 12.3 (up from GCC 11.4)
-  * No change to minimum GLIBC version (2.35).
-- Windows: Shared libraries are now built with Visual Studio 2026 (up from 2022)
+- Assimp: Updated to 6.0.3 (up from 6.0.2)
+- harfbuzz: Updated to 12.3.2 (up from 12.3.0)
+- OpenAL Soft: Updated to 1.25.1 (up from 1.25.0)
+- SDL: Updated to pre-release 3.4.1 (up from 3.4.0)
+- Shaderc: Updated to 2026.1 (up from 2025.5)
+  * Updated glslang to 16.2.0 (up from 16.1.0)
+  * Updated SPIRV Tools to 2026.1 (up from 2025.5)
+- Vulkan: Updated to 1.4.342 (up from 1.4.338)
 
 #### Fixes
 
-- Opus: Fixed missing function exports in Windows binaries.
-- tinyfiledialogs: Fixed `tinyfd_messageBox` signature to support the `yesnocancel` dialog type.
-- Vulkan: Fixed stack OOME on VkInstance creation with recent drivers.
-- Vulkan: Fixed support for Vulkan 1.4.
+- Windows: Reverted to building with Visual Studio 2022 to fix another case of #1005.
 
 #### Breaking Changes
 
-- Generator: Removed deprecated `mallocStack`/`callocStack` methods from structs.
-- OpenCL: Fixed the carrier type of `cl_ulong` constants. (#1087)
-  * Now mapped to `long` to avoid unintentional sign extension for negative values.
-- Vulkan: MoltenVK on x64 now requires macOS 11.0 or later. (up from 10.13)
+- Shaderc/glslang: Extracted the resource limits interface (`resource_limits_c.h`) to a separate class. (#1101)
+  * Added `Configuration.GLSLANG_RESOURCE_LIBRARY_NAME`
+- Shaderc/SPIRV Tools: Extracted the optimizer interface to a separate class. (#1101)
+  * Added `Configuration.SPIRV_TOOLS_OPTIMIZER_LIBRARY_NAME`
