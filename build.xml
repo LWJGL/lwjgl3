@@ -29,7 +29,6 @@
 
         <ant antfile="update-dependencies.xml" target="check-dependencies" inheritAll="false"/>
 
-        <taskdef resource="org/jetbrains/kotlin/ant/antlib.xml" classpath="${kotlinc}/lib/kotlin-ant.jar"/>
         <taskdef resource="testngtasks" classpath="${lib}/java/testng.jar;${lib}/java/slf4j-api.jar;${lib}/java/slf4j-jdk14.jar"/>
     </target>
 
@@ -131,18 +130,13 @@
 
         <echo message="Compiling Kotlin generator..." level="info" taskname="Generator" unless:set="generator-uptodate"/>
         <mkdir dir="${bin.generator}"/>
-        <kotlinc moduleName="generator" output="${bin.generator}" printVersion="true" unless:set="generator-uptodate">
-            <compilerarg line="-language-version 2.2"/>
-            <compilerarg line="-api-version 2.2"/>
-            <compilerarg value="-progressive"/>
-            <compilerarg value="-Xno-call-assertions"/>
-            <compilerarg value="-Xno-param-assertions"/>
-            <compilerarg value="-Xlambdas=indy"/>
-            <compilerarg value="-Xreport-perf"/>
-            <compilerarg value="-Xbackend-threads=${backend-threads}" if:set="backend-threads"/>
-            <compilerarg line="-jvm-target 1.8"/>
+        <kotlinc taskname="Generator" unless:set="generator-uptodate">
+            <jvmarg value="-Xmx2G"/>
 
-            <src path="${src.generator}/kotlin"/>
+            <arg line="-module-name generator"/>
+            <arg line="-d ${bin.generator}"/>
+
+            <arg value="${src.generator}/kotlin"/>
         </kotlinc>
         <touch file="${bin.generator}/touch.txt" unless:set="generator-uptodate"/>
 
@@ -195,31 +189,23 @@
 
         <echo message="Compiling Kotlin templates. This will take 1-2 minutes..." level="info" taskname="Templates" unless:set="templates-uptodate"/>
         <mkdir dir="${bin.templates}"/>
-        <kotlinc moduleName="templates" output="${bin.templates}" printVersion="true" unless:set="templates-uptodate">
-            <classpath>
-                <pathelement location="${bin.generator}"/>
-            </classpath>
+        <kotlinc taskname="Templates" unless:set="templates-uptodate">
+            <jvmarg value="-Xmx4G"/>
 
-            <compilerarg line="-language-version 2.2"/>
-            <compilerarg line="-api-version 2.2"/>
-            <compilerarg value="-progressive"/>
-            <compilerarg value="-Xno-call-assertions"/>
-            <compilerarg value="-Xno-param-assertions"/>
-            <compilerarg value="-Xlambdas=indy"/>
-            <compilerarg value="-Xreport-perf"/>
-            <compilerarg value="-Xbackend-threads=${backend-threads}" if:set="backend-threads"/>
-            <compilerarg line="-jvm-target 1.8"/>
+            <arg line="-module-name templates"/>
+            <arg line="-d ${bin.templates}"/>
+            <arg line="-classpath ${bin.generator}"/>
 
-            <src path="${module.templatepath}"/>
+            <arg line="${module.templatepath}"/>
 
-            <src path="${module.lwjgl}/egl/src/templates/kotlin/egl/EGLTypes.kt" if:set="egl_types"/>
-            <src path="${module.lwjgl}/opengl/src/templates/kotlin/opengl/GLTypes.kt" if:set="opengl_types"/>
-            <src path="${module.lwjgl}/opengl/src/templates/kotlin/opengl/GLXTypes.kt" if:set="opengl_types"/>
-            <src path="${module.lwjgl}/opengl/src/templates/kotlin/opengl/WGLTypes.kt" if:set="opengl_types"/>
-            <src path="${module.lwjgl}/vulkan/src/templates/kotlin/vulkan/VKBase.kt" if:set="vulkan_types"/>
-            <src path="${module.lwjgl}/vulkan/src/templates/kotlin/vulkan/VKTypes.kt" if:set="vulkan_types"/>
-            <src path="${module.lwjgl}/vulkan/src/templates/kotlin/vulkan/ExtensionTypes.kt" if:set="vulkan_types"/>
-            <src path="${module.lwjgl}/vulkan/src/templates/kotlin/vulkan/VkVideoTypes.kt" if:set="vulkan_types"/>
+            <arg value="${module.lwjgl}/egl/src/templates/kotlin/egl/EGLTypes.kt" if:set="egl_types"/>
+            <arg value="${module.lwjgl}/opengl/src/templates/kotlin/opengl/GLTypes.kt" if:set="opengl_types"/>
+            <arg value="${module.lwjgl}/opengl/src/templates/kotlin/opengl/GLXTypes.kt" if:set="opengl_types"/>
+            <arg value="${module.lwjgl}/opengl/src/templates/kotlin/opengl/WGLTypes.kt" if:set="opengl_types"/>
+            <arg value="${module.lwjgl}/vulkan/src/templates/kotlin/vulkan/VKBase.kt" if:set="vulkan_types"/>
+            <arg value="${module.lwjgl}/vulkan/src/templates/kotlin/vulkan/VKTypes.kt" if:set="vulkan_types"/>
+            <arg value="${module.lwjgl}/vulkan/src/templates/kotlin/vulkan/ExtensionTypes.kt" if:set="vulkan_types"/>
+            <arg value="${module.lwjgl}/vulkan/src/templates/kotlin/vulkan/VkVideoTypes.kt" if:set="vulkan_types"/>
         </kotlinc>
         <touch file="${bin.templates}/touch.txt" unless:set="templates-uptodate"/>
     </target>
@@ -603,31 +589,16 @@
             <srcfiles dir="${src.extract}/kotlin" includes="**"/>
         </uptodate>
 
-        <echo message="Compiling LWJGL Template Extraction Tool..." level="info" taskname="extract compilation" unless:set="extract-uptodate"/>
+        <echo message="Compiling LWJGL Template Extraction Tool..." level="info" taskname="Extract" unless:set="extract-uptodate"/>
         <mkdir dir="${bin.extract}"/>
-        <kotlinc moduleName="extract" output="${bin.extract}" printVersion="true" unless:set="extract-uptodate">
-            <classpath>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/25" if:set="core.java25"/>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/17" if:set="core.java17"/>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/11" if:set="core.java11"/>
-                <pathelement path="${module.classpath}"/>
-                <pathelement path="${kotlinc}/lib/kotlin-stdlib.jar"/>
-            </classpath>
+        <kotlinc taskname="Extract" unless:set="extract-uptodate">
+            <jvmarg value="-Xmx2G"/>
 
-            <compilerarg line="-language-version 2.2"/>
-            <compilerarg line="-api-version 2.2"/>
-            <compilerarg value="-progressive"/>
-            <compilerarg value="-Xno-call-assertions"/>
-            <compilerarg value="-Xno-param-assertions"/>
-            <compilerarg value="-Xlambdas=indy"/>
-            <compilerarg value="-Xreport-perf"/>
-            <compilerarg value="-Xbackend-threads=${backend-threads}" if:set="backend-threads"/>
-            <compilerarg line="-jvm-target 1.8"/>
+            <arg line="-module-name extract"/>
+            <arg line="-d ${bin.extract}"/>
+            <arg line="-classpath ${module.classpath}"/>
 
-            <!--<compilerarg value="-Xuse-experimental=kotlin.Experimental"/>
-            <compilerarg value="-Xuse-experimental=kotlin.contracts.ExperimentalContracts"/>-->
-
-            <src path="${src.extract}/kotlin"/>
+            <arg value="modules/extract/src/main/kotlin"/>
         </kotlinc>
         <touch file="${bin.extract}/touch.txt" unless:set="extract-uptodate"/>
     </target>
@@ -639,9 +610,6 @@
     <target name="extract" description="Runs the LWJGL Template Extraction tool" depends="compile-native, -compile-extract">
         <java classname="org.lwjgl.extract.MainKt" fork="true" spawn="true" taskname="LWJGL Template Extraction Tool">
             <classpath>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/25" if:set="core.java25"/>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/17" if:set="core.java17"/>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/11" if:set="core.java11"/>
                 <pathelement path="${module.classpath}"/>
                 <pathelement path="${bin.extract}"/>
                 <pathelement path="${test.resources}"/>
@@ -682,7 +650,7 @@
             srcdir="${module.lwjgl}/core25/src/test/java"
             includes="**"
             taskname="javac: core25 tests"
-            if:set="jdk25"
+            if:set="core.java25"
         >
             <classpath>
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/25"/>
@@ -855,7 +823,7 @@
             <src path="modules/samples/src/test/java"/>
         </do-compile-tests>
 
-        <do-compile-tests if:set="jdk25">
+        <do-compile-tests if:set="core.java25">
             <compilerarg line="--release ${jdk.version} --enable-preview"/>
             <src path="modules/samples/src/test/java25"/>
         </do-compile-tests>
@@ -870,10 +838,8 @@
                 <body/>
 
                 <classpath>
-                    <pathelement path="${bin.lwjgl}/core/META-INF/versions/25" if:set="jdk25"/>
                     <pathelement path="${module.classpath}"/>
                     <pathelement path="${bin.test}"/>
-                    <pathelement path="${lib}/java/jspecify.jar"/>
                     <pathelement path="${lib}/java/jmh-core.jar"/>
                     <pathelement path="${lib}/java/jmh-generator-annprocess.jar"/>
                     <pathelement path="${lib}/java/joml.jar"/>
@@ -943,9 +909,6 @@
     <target name="tests" description="Runs the LWJGL test suite" depends="compile-tests, compile-native">
         <testng haltonfailure="true" outputDir="${bin.test.html}" taskname="Tests">
             <classpath>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/25" if:set="core.java25"/>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/17" if:set="core.java17"/>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/11" if:set="core.java11"/>
                 <pathelement path="${module.classpath}"/>
                 <pathelement path="${bin.test}"/>
                 <pathelement path="${lib}/java/jcommander.jar"/>
@@ -987,14 +950,10 @@
 
         <java classname="${class}" fork="true" failonerror="true" taskname="Demo">
             <classpath>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/25" if:set="core.java25"/>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/17" if:set="core.java17"/>
-                <pathelement path="${bin.lwjgl}/core/META-INF/versions/11" if:set="core.java11"/>
                 <pathelement path="${module.classpath}"/>
                 <pathelement path="${bin.test}"/>
                 <pathelement path="${bin.samples}"/>
                 <pathelement path="${test.resources}"/>
-                <pathelement path="${lib}/java/jspecify.jar"/>
                 <pathelement path="${lib}/java/testng.jar"/>
                 <pathelement path="${lib}/java/joml.jar"/>
                 <pathelement path="${lib}/java/jmh-core.jar"/>
@@ -1476,7 +1435,6 @@
 
                 <classpath>
                     <pathelement path="${module.classpath}"/>
-                    <pathelement path="${lib}/java/jspecify.jar"/>
                 </classpath>
 
                 <fileset dir="${module.lwjgl}/@{name}/src/main/java/org/lwjgl" includes="**" if:set="hasMain.javadoc"/>

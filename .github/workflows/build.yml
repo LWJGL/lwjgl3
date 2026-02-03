@@ -32,7 +32,7 @@ jobs:
       - name: Compile templates
         run: |
           git clone https://github.com/LWJGL-CI/OculusSDK.git ../OculusSDK
-          ANT_OPTS=-Xmx4G ant -emacs compile-templates -Dbackend-threads=0
+          ant -emacs compile-templates
       - name: Cache kotlinc output
         uses: actions/cache/save@v3
         with:

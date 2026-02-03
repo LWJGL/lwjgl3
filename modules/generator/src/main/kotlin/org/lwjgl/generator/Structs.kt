@@ -5,7 +5,6 @@
 package org.lwjgl.generator
 
 import java.io.*
-import java.nio.file.*
 
 private const val STRUCT = "struct"
 
@@ -456,7 +455,7 @@ class Struct(
 
     internal val validations: Sequence<String> by lazy(LazyThreadSafetyMode.NONE) {
         if (union)
-            return@lazy emptySequence<String>()
+            return@lazy emptySequence()
 
         val validations = ArrayList<String>()
 
@@ -464,7 +463,7 @@ class Struct(
         fun MutableList<String>.addCount(m: StructMember) {
             val validation = "$t$t${m.nativeType.javaMethodType} ${m.name} = n${m.name}($STRUCT);"
             if (!this.isEmpty()) {
-                for (i in 0 until this.size) {
+                for (i in indices) {
                     if (this[i].contains(m.name)) {
                         this.add(i, validation)
                         return
@@ -523,13 +522,13 @@ $indent}"""
                         // if m != 0, make sure one of the auto-sized members is not null
                         validations.add(
                             "$t${t}if (${if (autoSize.optional) "\n$t$t$t${m.name} != 0 &&" else "\n$t$t$t${m.name} == 0 || ("}${
-                            refs.map { "\n$t$t${t}memGetAddress($STRUCT + $className.${it.offsetField}) == NULL" }.joinToString(" &&")
-                            }\n$t$t${if (autoSize.optional) "" else ")"}) {\n$t$t${t}throw new NullPointerException(\"At least one of ${refs.map { it.name }.joinToString()} must not be null\");\n$t$t}"
+                            refs.joinToString(" &&") { "\n$t$t${t}memGetAddress($STRUCT + $className.${it.offsetField}) == NULL" }
+                            }\n$t$t${if (autoSize.optional) "" else ")"}) {\n$t$t${t}throw new NullPointerException(\"At least one of ${refs.joinToString { it.name }} must not be null\");\n$t$t}"
                         )
                     } else if (autoSize.optional) {
-                        val refValidations = refs.filter { !it.has(nullable) }.map { ref ->
+                        val refValidations = refs.filter { !it.has(nullable) }.joinToString("\n") { ref ->
                             validate(ref, "$t$t$t")
-                        }.joinToString("\n")
+                        }
 
                         if (refValidations.isEmpty())
                             return@let
@@ -655,12 +654,12 @@ ${members.asSequence()
 
                             elementType = elementType.elementType
                         }
-                        when {
-                            elementType is FunctionType && anonymous                 -> it.replace(
+                        when (elementType) {
+                            is FunctionType if anonymous   -> it.replace(
                                 "(*${member.name})",
                                 "(*{@link ${elementType.javaMethodType} ${member.name}})"
                             )
-                            elementType is StructType || elementType is FunctionType -> it.replace(
+                            is StructType, is FunctionType -> it.replace(
                                 elementType.name, "{@link ${elementType.javaMethodType} ${elementType.name.let { name ->
                                     if (name.endsWith(" const")) {
                                         "${name.substring(0, name.length - 6)}} const"
@@ -668,7 +667,7 @@ ${members.asSequence()
                                         "$name}"
                                     }
                                 }}")
-                            else                                                     -> it
+                            else                           -> it
                         }
                     }
                     .let {

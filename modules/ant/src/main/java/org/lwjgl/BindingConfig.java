@@ -54,9 +54,20 @@ public class BindingConfig extends Task {
         LWJGL.setProperty("generator.bindings", join(" ", bindings));
         LWJGL.setProperty("module.list", join(",", modules));
 
-        ArrayList<String> classes   = new ArrayList<>(modules.size());
+        ArrayList<String> classes   = new ArrayList<>(modules.size() + 1);
         ArrayList<String> templates = new ArrayList<>(modules.size());
         ArrayList<String> sources   = new ArrayList<>(modules.size() * 2);
+
+        classes.add("bin/libs/java/jspecify.jar");
+        if (LWJGL.getProperty("core.java25") != null) {
+            classes.add("bin/classes/lwjgl/core/META-INF/versions/25");
+        }
+        if (LWJGL.getProperty("core.java17") != null) {
+            classes.add("bin/classes/lwjgl/core/META-INF/versions/17");
+        }
+        if (LWJGL.getProperty("core.java11") != null) {
+            classes.add("bin/classes/lwjgl/core/META-INF/versions/11");
+        }
 
         modules.forEach(it -> {
             LWJGL.setProperty("module." + it + ".path", it.equals("core") ? "org/lwjgl" : "org/lwjgl/" + it);
@@ -73,7 +84,7 @@ public class BindingConfig extends Task {
         });
 
         LWJGL.setProperty("module.classpath", join(File.pathSeparator, classes));
-        LWJGL.setProperty("module.templatepath", join(File.pathSeparator, templates));
+        LWJGL.setProperty("module.templatepath", join(" ", templates));
         LWJGL.setProperty("module.sourcepath", join(File.pathSeparator, sources));
         LWJGL.setProperty("module.javadocsourcepath", String.join(File.pathSeparator, sources));
     }

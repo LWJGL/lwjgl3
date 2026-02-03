@@ -10,14 +10,14 @@
     <import file="${config}/build-definitions.xml" id="defs"/>
 
     <!-- *********************************** -->
+    <property name="kotlinc-version" value="2.3.0"/>
+
     <property name="jspecify" value="1.0.0"/>
     <property name="testng" value="7.5"/>
         <property name="jcommander" value="1.78"/>
         <property name="jquery" value="3.5.1"/>
         <property name="slf4j" value="1.7.36"/>
     <property name="joml" value="1.10.8"/>
-    <property name="kotlinc-version" value="2.2.21"/>
-    <property name="kotlinc-build" value="2.2.21-release-469"/>
     <property name="jmh-core" value="1.37"/>
         <property name="jmh-generator-annprocess" value="1.37"/>
         <property name="jopt-simple" value="5.0.4"/>
@@ -25,58 +25,25 @@
     <!-- *********************************** -->
 
     <target name="check-dependencies" description="Updates LWJGL dependencies, if required" unless="${build.offline}">
-        <!-- Checks if the Kotlin compiler must be updated -->
-        <local name="kotlinc-build-current"/>
-        <loadfile property="kotlinc-build-current" srcfile="${kotlinc}/build.txt" quiet="true" taskname="kotlinc"/>
-        <condition property="kotlinc-uptodate">
-            <and>
-                <isset property="kotlinc-build-current"/>
-                <equals arg1="${kotlinc-build-current}" arg2="${kotlinc-build}"/>
-            </and>
-        </condition>
-
-        <uptodate property="lib-uptodate" srcfile="update-dependencies.xml" targetfile="${lib}/touch.txt"/>
-
-        <local name="dependencies-uptodate"/>
-        <condition property="dependencies-uptodate">
-            <and>
-                <isset property="kotlinc-uptodate"/>
-                <isset property="lib-uptodate"/>
-            </and>
-        </condition>
-
+        <uptodate property="dependencies-uptodate" srcfile="update-dependencies.xml" targetfile="${lib}/touch.txt"/>
         <antcall target="update-dependencies" unless:set="dependencies-uptodate"/>
     </target>
 
     <target name="update-dependencies" description="Updates LWJGL dependencies" unless="${build.offline}">
         <taskdef name="logLevel" classname="org.lwjgl.SetLogLevel" classpath="${bin.ant}"/>
 
-        <mkdir dir="${lib}"/>
-        <mkdir dir="${lib}/java"/>
-        <antcall target="-lib-download"/>
-        <antcall target="-kotlinc-download"/>
-    </target>
+        <mkdir dir="${lib}/java/kotlinc/lib"/>
 
-    <!-- Downloads and extracts the Kotlin compiler. -->
-    <target name="-kotlinc-download" unless="kotlinc-uptodate">
-        <local name="kotlinc-archive"/>
-        <property name="kotlinc-archive" value="kotlin-compiler-${kotlinc-version}.zip"/>
+        <!-- Kotlin Compiler -->
+        <update-mvn name="Jetbrains Annotations" group="org/jetbrains" artifact="annotations" version="26.0.2-1" subfolder="/kotlinc/lib" sources="false"/>
+        <update-mvn name="Kotlin Stdlib" group="org/jetbrains/kotlin" artifact="kotlin-stdlib" version="${kotlinc-version}" subfolder="/kotlinc/lib" sources="true"/>
+        <update-mvn name="Kotlin Full Reflection" group="org/jetbrains/kotlin" artifact="kotlin-reflect" version="${kotlinc-version}" subfolder="/kotlinc/lib" sources="true"/>
+        <update-mvn name="Kotlin Coroutines Support" group="org/jetbrains/kotlinx" artifact="kotlinx-coroutines-core-jvm" version="1.8.0" subfolder="/kotlinc/lib" sources="false"/>
+        <update-mvn name="Kotlin Script Runtime" group="org/jetbrains/kotlin" artifact="kotlin-script-runtime" version="${kotlinc-version}" subfolder="/kotlinc/lib" sources="false"/>
+        <update-mvn name="Kotlin Compiler" group="org/jetbrains/kotlin" artifact="kotlin-compiler-embeddable" version="${kotlinc-version}" subfolder="/kotlinc" sources="false"/>
+        <!--<update-mvn name="Kotlin Scripting Compiler" group="org/jetbrains/kotlin" artifact="kotlin-scripting-compiler-embeddable" version="${kotlinc-version}" subfolder="kotlinc" sources="false"/>-->
 
-        <!-- Download new build -->
-        <get taskname="kotlinc" src="https://github.com/JetBrains/kotlin/releases/download/v${kotlinc-version}/${kotlinc-archive}" dest="${lib}" verbose="true"/>
-
-        <!-- Delete current build -->
-        <delete dir="${kotlinc}" taskname="kotlinc"/>
-        <!-- Extract build -->
-        <unzip src="${lib}/${kotlinc-archive}" dest="${lib}" taskname="kotlinc"/>
-        <!-- Delete build archive -->
-        <delete file="${lib}/${kotlinc-archive}" taskname="kotlinc"/>
-
-        <echo message="The Kotlin compiler was updated to build: ${kotlinc-version}" taskname="kotlinc"/>
-    </target>
-
-    <!-- Downloads the Java dependencies. -->
-    <target name="-lib-download" unless="lib-uptodate">
+        <!-- Other -->
         <update-mvn name="JSpecify" group="org/jspecify" artifact="jspecify" version="${jspecify}"/>
         <update-mvn name="TestNG" group="org/testng" artifact="testng" version="${testng}"/>
         <update-mvn name="JCommander" group="com/beust" artifact="jcommander" version="${jcommander}" sources="false"/>
@@ -93,7 +60,6 @@
     </target>
 
     <target name="clean" description="Deletes LWJGL dependencies">
-        <delete taskname="kotlinc" dir="${lib}/kotlinc"/>
         <delete taskname="Java dependencies" dir="${lib}/java"/>
     </target>
 

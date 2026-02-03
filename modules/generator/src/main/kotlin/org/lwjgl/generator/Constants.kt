@@ -44,7 +44,7 @@ val DoubleConstant = ConstantType(Double::class) { "%sd".format(it) }
 val StringConstant = ConstantType(String::class) { if (it.contains(" + \"")) it else "\"$it\"" }
 val UnquotedStringConstant = ConstantType(String::class) { it }
 
-abstract class EnumValue()
+abstract class EnumValue
 
 open class EnumIntValue(val value: Int? = null) : EnumValue()
 class EnumIntValueExpression(val expression: String) : EnumIntValue(null)

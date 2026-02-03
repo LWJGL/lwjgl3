@@ -120,8 +120,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <property name="build.output" location="${env.LWJGL_BUILD_OUTPUT}" relative="false" if:set="env.LWJGL_BUILD_OUTPUT"/>
 
     <property name="lib" location="bin/libs" relative="true"/>
-
-    <property name="kotlinc" location="${lib}/kotlinc" relative="true"/>
+    <property name="kotlinc" location="${lib}/java/kotlinc" relative="true"/>
 
     <property name="module.lwjgl" location="modules/lwjgl" relative="true"/>
 
@@ -194,6 +193,28 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 
     <import file="build-bindings.xml"/>
     <bindingConfig/>
+
+    <presetdef name="kotlinc">
+        <java
+            classname="org.jetbrains.kotlin.cli.jvm.K2JVMCompiler"
+            fork="true"
+            failonerror="true"
+        >
+            <classpath>
+                <pathelement path="${kotlinc}/lib/annotations.jar"/>
+                <pathelement path="${kotlinc}/lib/kotlin-stdlib.jar"/>
+                <pathelement path="${kotlinc}/lib/kotlin-reflect.jar"/>
+                <pathelement path="${kotlinc}/lib/kotlinx-coroutines-core-jvm.jar"/>
+                <!--<pathelement path="${kotlinc}/lib/kotlin-script-runtime.jar"/>-->
+                <pathelement path="${kotlinc}/kotlin-compiler-embeddable.jar"/>
+                <!--<pathelement path="${kotlinc}/kotlin-scripting-compiler-embeddable.jar"/>-->
+            </classpath>
+
+            <arg line="-kotlin-home ${kotlinc}"/>
+            <arg line='-jdk-home "${env.JAVA8_HOME}"' if:set="env.JAVA8_HOME"/>
+            <arg value="@config/cli/kotlinc.args"/>
+        </java>
+    </presetdef>
 
     <presetdef name="lwjgl.javac">
         <javac sourcepath="" debug="yes" source="8" target="8" encoding="UTF-8" includeantruntime="false">

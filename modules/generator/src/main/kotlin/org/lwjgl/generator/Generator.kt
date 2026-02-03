@@ -95,7 +95,7 @@ fun main(args: Array<String>) {
                 fun <T : GeneratorTarget> generateRegistered(typeName: String, targets: Iterable<T>) {
                     targets.forEach {
                         try {
-                            generateSimple(it) { it.generateJava() }
+                            generateSimple(it) { target -> target.generateJava() }
                         } catch (e: Exception) {
                             throw RuntimeException("Uncaught exception while generating $typeName: ${it.packageName}.${it.className}", e)
                         }

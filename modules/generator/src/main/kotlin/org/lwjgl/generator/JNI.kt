@@ -184,7 +184,7 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
             print("jni.${it.signature}(MemorySegment.ofAddress(__functionAddress)")
             if (it.arguments.isNotEmpty()) {
                 print(it.arguments.asSequence()
-                    .mapIndexed { i, param -> "param$i" }
+                    .mapIndexed { i, _ -> "param$i" }
                     .joinToString(", ", prefix = ", "))
             }
             println("); }")

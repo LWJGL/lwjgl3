@@ -91,18 +91,22 @@ internal class Preamble {
     }
 
     internal fun printNative(writer: PrintWriter) {
-        nativeDirectives.filter { it.beforeIncludes }.forEach {
-            writer.println(it.expression)
-        }
+        nativeDirectives
+            .filter { (_, beforeIncludes) -> beforeIncludes }
+            .forEach { (expression) ->
+                writer.println(expression)
+            }
 
         writer.println("#include \"common_tools.h\"")
         nativeImports.forEach {
             writer.println("#include $it")
         }
 
-        nativeDirectives.filter { !it.beforeIncludes }.forEach {
-            writer.println(it.expression)
-        }
+        nativeDirectives
+            .filter { (_, beforeIncludes) -> !beforeIncludes }
+            .forEach { (expression) ->
+                writer.println(expression)
+            }
     }
 
 }
@@ -147,8 +151,7 @@ abstract class GeneratorTarget(
             return t.stackTrace.asSequence()
                 .filter { !it.className.startsWith("org.lwjgl.generator.") }
                 .mapNotNull { it.fileName }
-                .filter { it.endsWith(".kt") && !(this is NativeClass && it.endsWith("Binding.kt")) }
-                .firstOrNull()
+                .firstOrNull { it.endsWith(".kt") && !(this is NativeClass && it.endsWith("Binding.kt")) }
         }
     }
 
@@ -328,8 +331,7 @@ abstract class GeneratorTargetNative(
     internal val nativeFileNameJNI = packageName
         .splitToSequence('.')
         .plus(className)
-        .map { it.asJNIName }
-        .joinToString("_")
+        .joinToString("_") { it.asJNIName }
 
     open val skipNative = false
     var cpp = false

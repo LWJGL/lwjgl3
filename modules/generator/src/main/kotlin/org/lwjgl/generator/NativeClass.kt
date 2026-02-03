@@ -120,7 +120,7 @@ abstract class SimpleBinding(
 
         print(javadoc)
 
-        val alignment = bindingFunctions.map { it.simpleName.length }.maxOrNull()!!
+        val alignment = bindingFunctions.maxOf { it.simpleName.length }
 
         println("""
     public static final class Functions {
