@@ -455,6 +455,8 @@ public class SDLGPU {
         SDL_PROP_GPU_DEVICE_CREATE_SHADERS_METALLIB_BOOLEAN                     = "SDL.gpu.device.create.shaders.metallib",
         SDL_PROP_GPU_DEVICE_CREATE_D3D12_ALLOW_FEWER_RESOURCE_SLOTS_BOOLEAN     = "SDL.gpu.device.create.d3d12.allowtier1resourcebinding",
         SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING                   = "SDL.gpu.device.create.d3d12.semantic",
+        SDL_PROP_GPU_DEVICE_CREATE_D3D12_AGILITY_SDK_VERSION_NUMBER             = "SDL.gpu.device.create.d3d12.agility_sdk_version",
+        SDL_PROP_GPU_DEVICE_CREATE_D3D12_AGILITY_SDK_PATH_STRING                = "SDL.gpu.device.create.d3d12.agility_sdk_path",
         SDL_PROP_GPU_DEVICE_CREATE_VULKAN_REQUIRE_HARDWARE_ACCELERATION_BOOLEAN = "SDL.gpu.device.create.vulkan.requirehardwareacceleration",
         SDL_PROP_GPU_DEVICE_CREATE_VULKAN_OPTIONS_POINTER                       = "SDL.gpu.device.create.vulkan.options",
         SDL_PROP_GPU_DEVICE_CREATE_METAL_ALLOW_MACFAMILY1_BOOLEAN               = "SDL.gpu.device.create.metal.allowmacfamily1";
