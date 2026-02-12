@@ -5,7 +5,6 @@
 package org.lwjgl.system.ffm;
 
 import org.jspecify.annotations.*;
-import org.lwjgl.system.*;
 import org.lwjgl.system.libffi.*;
 
 import java.lang.classfile.*;
@@ -25,6 +24,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 final class BCCallUp extends BCCall {
 
     // TODO: remove in LWJGL 4, used for interop with LWJGL 3 upcalls only
+    private static final int FF_ACCEPTS_STRUCT_BY_VALUE = 1 << 30;
     private static final int FF_RETURNS_STRUCT_BY_VALUE = 1 << 31;
 
     private final Class<?> upcallInterface;
@@ -102,14 +102,13 @@ final class BCCallUp extends BCCall {
                 continue;
             } else if (org.lwjgl.system.Struct.class.isAssignableFrom(type)) {
                 // LWJGL 3 interop
-                if (parameter != parameters[parameters.length - 1]) {
-                    // LWJGL 3 does not support upcall group parameters passed by value, only results
-                    throw new IllegalStateException("Group result parameter must be the last parameter");
+                Objects.requireNonNull(cif);
+                if (i == parameters.length - 1 && method.getReturnType() == void.class && cif.rtype().type() == FFI_TYPE_STRUCT) {
+                    featureFlags |= FF_RETURNS_STRUCT_BY_VALUE;
+                } else {
+                    argLayouts.add(memoryLayoutFrom(FFIType.create(cif.arg_types().get(i))));
+                    featureFlags |= FF_ACCEPTS_STRUCT_BY_VALUE;
                 }
-                if (method.getReturnType() != void.class) {
-                    throw new IllegalStateException("Group result parameter requires a void return type");
-                }
-                featureFlags |= FF_RETURNS_STRUCT_BY_VALUE;
                 continue;
             }
 
@@ -282,7 +281,7 @@ final class BCCallUp extends BCCall {
 
                         var type = parameter.getType();
 
-                        if (org.lwjgl.system.Struct.class.isAssignableFrom(type)) {
+                        if (p == methodTypeDesc.parameterCount() - 1 && (featureFlags & FF_RETURNS_STRUCT_BY_VALUE) != 0) {
                             // LWJGL 3 interop (this is the last __result parameter)
                             continue;
                         }
@@ -318,6 +317,13 @@ final class BCCallUp extends BCCall {
                                 .invokeinterface(CD_GroupBinder, "get", MTD_Object_MemorySegment)
                             /*.checkcast(type.describeConstable().orElseThrow())*/
                             ;
+                        } else if (org.lwjgl.system.Struct.class.isAssignableFrom(type)) {
+                            // LWJGL 3 interop (convert bridge's MemorySegment parameter to LWJGL 3 struct instance)
+                            var groupDesc = methodTypeDesc.parameterType(p);
+                            cb
+                                .aload(slot)
+                                .invokeinterface(CD_MemorySegment, "address", MTD_long)
+                                .invokestatic(groupDesc, "create", MethodTypeDesc.of(groupDesc, CD_long));
                         } else {
                             // FFMBooleanInt is handled implicitly, boolean parameters use iload anyway
                             cb.loadLocal(TypeKind.from(methodTypeDesc.parameterType(p)), slot);
@@ -326,8 +332,7 @@ final class BCCallUp extends BCCall {
 
                     if ((featureFlags & FF_RETURNS_STRUCT_BY_VALUE) != 0) {
                         // LWJGL 3 interop
-                        var groupType = parameters[parameters.length - 1].getType();
-                        var groupDesc = groupType.describeConstable().orElseThrow();
+                        var groupDesc = methodTypeDesc.parameterType(parameters.length - 1);
                         cb
                             .aload(cb.parameterSlot(1)) // __result
                             .invokeinterface(CD_MemorySegment, "address", MTD_long)
