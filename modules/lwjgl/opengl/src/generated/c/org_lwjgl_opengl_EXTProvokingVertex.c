@@ -11,7 +11,7 @@ typedef void (APIENTRY *glProvokingVertexEXTPROC) (jint);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTProvokingVertex_glProvokingVertexEXT(JNIEnv *__env, jclass clazz, jint mode) {
-    glProvokingVertexEXTPROC glProvokingVertexEXT = (glProvokingVertexEXTPROC)tlsGetFunction(1826);
+    glProvokingVertexEXTPROC glProvokingVertexEXT = (glProvokingVertexEXTPROC)tlsGetFunction(1860);
     UNUSED_PARAM(clazz)
     glProvokingVertexEXT(mode);
 }

@@ -13,19 +13,19 @@ typedef void (APIENTRY *glFramebufferTextureFaceEXTPROC) (jint, jint, jint, jint
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGeometryShader4_glProgramParameteriEXT(JNIEnv *__env, jclass clazz, jint program, jint pname, jint value) {
-    glProgramParameteriEXTPROC glProgramParameteriEXT = (glProgramParameteriEXTPROC)tlsGetFunction(1757);
+    glProgramParameteriEXTPROC glProgramParameteriEXT = (glProgramParameteriEXTPROC)tlsGetFunction(1791);
     UNUSED_PARAM(clazz)
     glProgramParameteriEXT(program, pname, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGeometryShader4_glFramebufferTextureEXT(JNIEnv *__env, jclass clazz, jint target, jint attachment, jint texture, jint level) {
-    glFramebufferTextureEXTPROC glFramebufferTextureEXT = (glFramebufferTextureEXTPROC)tlsGetFunction(1758);
+    glFramebufferTextureEXTPROC glFramebufferTextureEXT = (glFramebufferTextureEXTPROC)tlsGetFunction(1792);
     UNUSED_PARAM(clazz)
     glFramebufferTextureEXT(target, attachment, texture, level);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGeometryShader4_glFramebufferTextureFaceEXT(JNIEnv *__env, jclass clazz, jint target, jint attachment, jint texture, jint level, jint face) {
-    glFramebufferTextureFaceEXTPROC glFramebufferTextureFaceEXT = (glFramebufferTextureFaceEXTPROC)tlsGetFunction(1760);
+    glFramebufferTextureFaceEXTPROC glFramebufferTextureFaceEXT = (glFramebufferTextureFaceEXTPROC)tlsGetFunction(1794);
     UNUSED_PARAM(clazz)
     glFramebufferTextureFaceEXT(target, attachment, texture, level, face);
 }

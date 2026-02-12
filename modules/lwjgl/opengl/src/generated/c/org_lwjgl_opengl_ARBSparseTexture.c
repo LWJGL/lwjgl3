@@ -12,13 +12,13 @@ typedef void (APIENTRY *glTexturePageCommitmentEXTPROC) (jint, jint, jint, jint,
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBSparseTexture_glTexPageCommitmentARB(JNIEnv *__env, jclass clazz, jint target, jint level, jint xoffset, jint yoffset, jint zoffset, jint width, jint height, jint depth, jboolean commit) {
-    glTexPageCommitmentARBPROC glTexPageCommitmentARB = (glTexPageCommitmentARBPROC)tlsGetFunction(1364);
+    glTexPageCommitmentARBPROC glTexPageCommitmentARB = (glTexPageCommitmentARBPROC)tlsGetFunction(1398);
     UNUSED_PARAM(clazz)
     glTexPageCommitmentARB(target, level, xoffset, yoffset, zoffset, width, height, depth, commit);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBSparseTexture_glTexturePageCommitmentEXT(JNIEnv *__env, jclass clazz, jint texture, jint level, jint xoffset, jint yoffset, jint zoffset, jint width, jint height, jint depth, jboolean commit) {
-    glTexturePageCommitmentEXTPROC glTexturePageCommitmentEXT = (glTexturePageCommitmentEXTPROC)tlsGetFunction(1365);
+    glTexturePageCommitmentEXTPROC glTexturePageCommitmentEXT = (glTexturePageCommitmentEXTPROC)tlsGetFunction(1399);
     UNUSED_PARAM(clazz)
     glTexturePageCommitmentEXT(texture, level, xoffset, yoffset, zoffset, width, height, depth, commit);
 }

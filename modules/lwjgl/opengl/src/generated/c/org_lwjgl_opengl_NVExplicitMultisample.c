@@ -13,20 +13,20 @@ typedef void (APIENTRY *glTexRenderbufferNVPROC) (jint, jint);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVExplicitMultisample_nglGetMultisamplefvNV__IIJ(JNIEnv *__env, jclass clazz, jint pname, jint index, jlong valAddress) {
-    glGetMultisamplefvNVPROC glGetMultisamplefvNV = (glGetMultisamplefvNVPROC)tlsGetFunction(1969);
+    glGetMultisamplefvNVPROC glGetMultisamplefvNV = (glGetMultisamplefvNVPROC)tlsGetFunction(2003);
     uintptr_t val = (uintptr_t)valAddress;
     UNUSED_PARAM(clazz)
     glGetMultisamplefvNV(pname, index, val);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVExplicitMultisample_glSampleMaskIndexedNV(JNIEnv *__env, jclass clazz, jint index, jint mask) {
-    glSampleMaskIndexedNVPROC glSampleMaskIndexedNV = (glSampleMaskIndexedNVPROC)tlsGetFunction(1970);
+    glSampleMaskIndexedNVPROC glSampleMaskIndexedNV = (glSampleMaskIndexedNVPROC)tlsGetFunction(2004);
     UNUSED_PARAM(clazz)
     glSampleMaskIndexedNV(index, mask);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVExplicitMultisample_glTexRenderbufferNV(JNIEnv *__env, jclass clazz, jint target, jint renderbuffer) {
-    glTexRenderbufferNVPROC glTexRenderbufferNV = (glTexRenderbufferNVPROC)tlsGetFunction(1971);
+    glTexRenderbufferNVPROC glTexRenderbufferNV = (glTexRenderbufferNVPROC)tlsGetFunction(2005);
     UNUSED_PARAM(clazz)
     glTexRenderbufferNV(target, renderbuffer);
 }

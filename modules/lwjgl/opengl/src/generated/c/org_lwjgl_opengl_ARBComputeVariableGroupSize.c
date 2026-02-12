@@ -11,7 +11,7 @@ typedef void (APIENTRY *glDispatchComputeGroupSizeARBPROC) (jint, jint, jint, ji
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBComputeVariableGroupSize_glDispatchComputeGroupSizeARB(JNIEnv *__env, jclass clazz, jint num_groups_x, jint num_groups_y, jint num_groups_z, jint group_size_x, jint group_size_y, jint group_size_z) {
-    glDispatchComputeGroupSizeARBPROC glDispatchComputeGroupSizeARB = (glDispatchComputeGroupSizeARBPROC)tlsGetFunction(1132);
+    glDispatchComputeGroupSizeARBPROC glDispatchComputeGroupSizeARB = (glDispatchComputeGroupSizeARBPROC)tlsGetFunction(1166);
     UNUSED_PARAM(clazz)
     glDispatchComputeGroupSizeARB(num_groups_x, num_groups_y, num_groups_z, group_size_x, group_size_y, group_size_z);
 }

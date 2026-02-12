@@ -11,7 +11,7 @@ typedef void (APIENTRY *glSubpixelPrecisionBiasNVPROC) (jint, jint);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVConservativeRaster_glSubpixelPrecisionBiasNV(JNIEnv *__env, jclass clazz, jint xbits, jint ybits) {
-    glSubpixelPrecisionBiasNVPROC glSubpixelPrecisionBiasNV = (glSubpixelPrecisionBiasNVPROC)tlsGetFunction(1956);
+    glSubpixelPrecisionBiasNVPROC glSubpixelPrecisionBiasNV = (glSubpixelPrecisionBiasNVPROC)tlsGetFunction(1990);
     UNUSED_PARAM(clazz)
     glSubpixelPrecisionBiasNV(xbits, ybits);
 }

@@ -56,301 +56,301 @@ typedef void (APIENTRY *glVertexAttribs4hvNVPROC) (jint, jint, uintptr_t);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_glVertex2hNV(JNIEnv *__env, jclass clazz, jshort x, jshort y) {
-    glVertex2hNVPROC glVertex2hNV = (glVertex2hNVPROC)tlsGetFunction(1996);
+    glVertex2hNVPROC glVertex2hNV = (glVertex2hNVPROC)tlsGetFunction(2030);
     UNUSED_PARAM(clazz)
     glVertex2hNV(x, y);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglVertex2hvNV__J(JNIEnv *__env, jclass clazz, jlong vAddress) {
-    glVertex2hvNVPROC glVertex2hvNV = (glVertex2hvNVPROC)tlsGetFunction(1997);
+    glVertex2hvNVPROC glVertex2hvNV = (glVertex2hvNVPROC)tlsGetFunction(2031);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertex2hvNV(v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_glVertex3hNV(JNIEnv *__env, jclass clazz, jshort x, jshort y, jshort z) {
-    glVertex3hNVPROC glVertex3hNV = (glVertex3hNVPROC)tlsGetFunction(1998);
+    glVertex3hNVPROC glVertex3hNV = (glVertex3hNVPROC)tlsGetFunction(2032);
     UNUSED_PARAM(clazz)
     glVertex3hNV(x, y, z);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglVertex3hvNV__J(JNIEnv *__env, jclass clazz, jlong vAddress) {
-    glVertex3hvNVPROC glVertex3hvNV = (glVertex3hvNVPROC)tlsGetFunction(1999);
+    glVertex3hvNVPROC glVertex3hvNV = (glVertex3hvNVPROC)tlsGetFunction(2033);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertex3hvNV(v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_glVertex4hNV(JNIEnv *__env, jclass clazz, jshort x, jshort y, jshort z, jshort w) {
-    glVertex4hNVPROC glVertex4hNV = (glVertex4hNVPROC)tlsGetFunction(2000);
+    glVertex4hNVPROC glVertex4hNV = (glVertex4hNVPROC)tlsGetFunction(2034);
     UNUSED_PARAM(clazz)
     glVertex4hNV(x, y, z, w);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglVertex4hvNV__J(JNIEnv *__env, jclass clazz, jlong vAddress) {
-    glVertex4hvNVPROC glVertex4hvNV = (glVertex4hvNVPROC)tlsGetFunction(2001);
+    glVertex4hvNVPROC glVertex4hvNV = (glVertex4hvNVPROC)tlsGetFunction(2035);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertex4hvNV(v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_glNormal3hNV(JNIEnv *__env, jclass clazz, jshort nx, jshort ny, jshort nz) {
-    glNormal3hNVPROC glNormal3hNV = (glNormal3hNVPROC)tlsGetFunction(2002);
+    glNormal3hNVPROC glNormal3hNV = (glNormal3hNVPROC)tlsGetFunction(2036);
     UNUSED_PARAM(clazz)
     glNormal3hNV(nx, ny, nz);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglNormal3hvNV__J(JNIEnv *__env, jclass clazz, jlong vAddress) {
-    glNormal3hvNVPROC glNormal3hvNV = (glNormal3hvNVPROC)tlsGetFunction(2003);
+    glNormal3hvNVPROC glNormal3hvNV = (glNormal3hvNVPROC)tlsGetFunction(2037);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glNormal3hvNV(v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_glColor3hNV(JNIEnv *__env, jclass clazz, jshort red, jshort green, jshort blue) {
-    glColor3hNVPROC glColor3hNV = (glColor3hNVPROC)tlsGetFunction(2004);
+    glColor3hNVPROC glColor3hNV = (glColor3hNVPROC)tlsGetFunction(2038);
     UNUSED_PARAM(clazz)
     glColor3hNV(red, green, blue);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglColor3hvNV__J(JNIEnv *__env, jclass clazz, jlong vAddress) {
-    glColor3hvNVPROC glColor3hvNV = (glColor3hvNVPROC)tlsGetFunction(2005);
+    glColor3hvNVPROC glColor3hvNV = (glColor3hvNVPROC)tlsGetFunction(2039);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glColor3hvNV(v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_glColor4hNV(JNIEnv *__env, jclass clazz, jshort red, jshort green, jshort blue, jshort alpha) {
-    glColor4hNVPROC glColor4hNV = (glColor4hNVPROC)tlsGetFunction(2006);
+    glColor4hNVPROC glColor4hNV = (glColor4hNVPROC)tlsGetFunction(2040);
     UNUSED_PARAM(clazz)
     glColor4hNV(red, green, blue, alpha);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglColor4hvNV__J(JNIEnv *__env, jclass clazz, jlong vAddress) {
-    glColor4hvNVPROC glColor4hvNV = (glColor4hvNVPROC)tlsGetFunction(2007);
+    glColor4hvNVPROC glColor4hvNV = (glColor4hvNVPROC)tlsGetFunction(2041);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glColor4hvNV(v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_glTexCoord1hNV(JNIEnv *__env, jclass clazz, jshort s) {
-    glTexCoord1hNVPROC glTexCoord1hNV = (glTexCoord1hNVPROC)tlsGetFunction(2008);
+    glTexCoord1hNVPROC glTexCoord1hNV = (glTexCoord1hNVPROC)tlsGetFunction(2042);
     UNUSED_PARAM(clazz)
     glTexCoord1hNV(s);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglTexCoord1hvNV__J(JNIEnv *__env, jclass clazz, jlong vAddress) {
-    glTexCoord1hvNVPROC glTexCoord1hvNV = (glTexCoord1hvNVPROC)tlsGetFunction(2009);
+    glTexCoord1hvNVPROC glTexCoord1hvNV = (glTexCoord1hvNVPROC)tlsGetFunction(2043);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glTexCoord1hvNV(v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_glTexCoord2hNV(JNIEnv *__env, jclass clazz, jshort s, jshort t) {
-    glTexCoord2hNVPROC glTexCoord2hNV = (glTexCoord2hNVPROC)tlsGetFunction(2010);
+    glTexCoord2hNVPROC glTexCoord2hNV = (glTexCoord2hNVPROC)tlsGetFunction(2044);
     UNUSED_PARAM(clazz)
     glTexCoord2hNV(s, t);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglTexCoord2hvNV__J(JNIEnv *__env, jclass clazz, jlong vAddress) {
-    glTexCoord2hvNVPROC glTexCoord2hvNV = (glTexCoord2hvNVPROC)tlsGetFunction(2011);
+    glTexCoord2hvNVPROC glTexCoord2hvNV = (glTexCoord2hvNVPROC)tlsGetFunction(2045);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glTexCoord2hvNV(v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_glTexCoord3hNV(JNIEnv *__env, jclass clazz, jshort s, jshort t, jshort r) {
-    glTexCoord3hNVPROC glTexCoord3hNV = (glTexCoord3hNVPROC)tlsGetFunction(2012);
+    glTexCoord3hNVPROC glTexCoord3hNV = (glTexCoord3hNVPROC)tlsGetFunction(2046);
     UNUSED_PARAM(clazz)
     glTexCoord3hNV(s, t, r);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglTexCoord3hvNV__J(JNIEnv *__env, jclass clazz, jlong vAddress) {
-    glTexCoord3hvNVPROC glTexCoord3hvNV = (glTexCoord3hvNVPROC)tlsGetFunction(2013);
+    glTexCoord3hvNVPROC glTexCoord3hvNV = (glTexCoord3hvNVPROC)tlsGetFunction(2047);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glTexCoord3hvNV(v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_glTexCoord4hNV(JNIEnv *__env, jclass clazz, jshort s, jshort t, jshort r, jshort q) {
-    glTexCoord4hNVPROC glTexCoord4hNV = (glTexCoord4hNVPROC)tlsGetFunction(2014);
+    glTexCoord4hNVPROC glTexCoord4hNV = (glTexCoord4hNVPROC)tlsGetFunction(2048);
     UNUSED_PARAM(clazz)
     glTexCoord4hNV(s, t, r, q);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglTexCoord4hvNV__J(JNIEnv *__env, jclass clazz, jlong vAddress) {
-    glTexCoord4hvNVPROC glTexCoord4hvNV = (glTexCoord4hvNVPROC)tlsGetFunction(2015);
+    glTexCoord4hvNVPROC glTexCoord4hvNV = (glTexCoord4hvNVPROC)tlsGetFunction(2049);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glTexCoord4hvNV(v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_glMultiTexCoord1hNV(JNIEnv *__env, jclass clazz, jint target, jshort s) {
-    glMultiTexCoord1hNVPROC glMultiTexCoord1hNV = (glMultiTexCoord1hNVPROC)tlsGetFunction(2016);
+    glMultiTexCoord1hNVPROC glMultiTexCoord1hNV = (glMultiTexCoord1hNVPROC)tlsGetFunction(2050);
     UNUSED_PARAM(clazz)
     glMultiTexCoord1hNV(target, s);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglMultiTexCoord1hvNV__IJ(JNIEnv *__env, jclass clazz, jint target, jlong vAddress) {
-    glMultiTexCoord1hvNVPROC glMultiTexCoord1hvNV = (glMultiTexCoord1hvNVPROC)tlsGetFunction(2017);
+    glMultiTexCoord1hvNVPROC glMultiTexCoord1hvNV = (glMultiTexCoord1hvNVPROC)tlsGetFunction(2051);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMultiTexCoord1hvNV(target, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_glMultiTexCoord2hNV(JNIEnv *__env, jclass clazz, jint target, jshort s, jshort t) {
-    glMultiTexCoord2hNVPROC glMultiTexCoord2hNV = (glMultiTexCoord2hNVPROC)tlsGetFunction(2018);
+    glMultiTexCoord2hNVPROC glMultiTexCoord2hNV = (glMultiTexCoord2hNVPROC)tlsGetFunction(2052);
     UNUSED_PARAM(clazz)
     glMultiTexCoord2hNV(target, s, t);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglMultiTexCoord2hvNV__IJ(JNIEnv *__env, jclass clazz, jint target, jlong vAddress) {
-    glMultiTexCoord2hvNVPROC glMultiTexCoord2hvNV = (glMultiTexCoord2hvNVPROC)tlsGetFunction(2019);
+    glMultiTexCoord2hvNVPROC glMultiTexCoord2hvNV = (glMultiTexCoord2hvNVPROC)tlsGetFunction(2053);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMultiTexCoord2hvNV(target, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_glMultiTexCoord3hNV(JNIEnv *__env, jclass clazz, jint target, jshort s, jshort t, jshort r) {
-    glMultiTexCoord3hNVPROC glMultiTexCoord3hNV = (glMultiTexCoord3hNVPROC)tlsGetFunction(2020);
+    glMultiTexCoord3hNVPROC glMultiTexCoord3hNV = (glMultiTexCoord3hNVPROC)tlsGetFunction(2054);
     UNUSED_PARAM(clazz)
     glMultiTexCoord3hNV(target, s, t, r);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglMultiTexCoord3hvNV__IJ(JNIEnv *__env, jclass clazz, jint target, jlong vAddress) {
-    glMultiTexCoord3hvNVPROC glMultiTexCoord3hvNV = (glMultiTexCoord3hvNVPROC)tlsGetFunction(2021);
+    glMultiTexCoord3hvNVPROC glMultiTexCoord3hvNV = (glMultiTexCoord3hvNVPROC)tlsGetFunction(2055);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMultiTexCoord3hvNV(target, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_glMultiTexCoord4hNV(JNIEnv *__env, jclass clazz, jint target, jshort s, jshort t, jshort r, jshort q) {
-    glMultiTexCoord4hNVPROC glMultiTexCoord4hNV = (glMultiTexCoord4hNVPROC)tlsGetFunction(2022);
+    glMultiTexCoord4hNVPROC glMultiTexCoord4hNV = (glMultiTexCoord4hNVPROC)tlsGetFunction(2056);
     UNUSED_PARAM(clazz)
     glMultiTexCoord4hNV(target, s, t, r, q);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglMultiTexCoord4hvNV__IJ(JNIEnv *__env, jclass clazz, jint target, jlong vAddress) {
-    glMultiTexCoord4hvNVPROC glMultiTexCoord4hvNV = (glMultiTexCoord4hvNVPROC)tlsGetFunction(2023);
+    glMultiTexCoord4hvNVPROC glMultiTexCoord4hvNV = (glMultiTexCoord4hvNVPROC)tlsGetFunction(2057);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMultiTexCoord4hvNV(target, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_glFogCoordhNV(JNIEnv *__env, jclass clazz, jshort fog) {
-    glFogCoordhNVPROC glFogCoordhNV = (glFogCoordhNVPROC)tlsGetFunction(2024);
+    glFogCoordhNVPROC glFogCoordhNV = (glFogCoordhNVPROC)tlsGetFunction(2058);
     UNUSED_PARAM(clazz)
     glFogCoordhNV(fog);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglFogCoordhvNV__J(JNIEnv *__env, jclass clazz, jlong fogAddress) {
-    glFogCoordhvNVPROC glFogCoordhvNV = (glFogCoordhvNVPROC)tlsGetFunction(2025);
+    glFogCoordhvNVPROC glFogCoordhvNV = (glFogCoordhvNVPROC)tlsGetFunction(2059);
     uintptr_t fog = (uintptr_t)fogAddress;
     UNUSED_PARAM(clazz)
     glFogCoordhvNV(fog);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_glSecondaryColor3hNV(JNIEnv *__env, jclass clazz, jshort red, jshort green, jshort blue) {
-    glSecondaryColor3hNVPROC glSecondaryColor3hNV = (glSecondaryColor3hNVPROC)tlsGetFunction(2026);
+    glSecondaryColor3hNVPROC glSecondaryColor3hNV = (glSecondaryColor3hNVPROC)tlsGetFunction(2060);
     UNUSED_PARAM(clazz)
     glSecondaryColor3hNV(red, green, blue);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglSecondaryColor3hvNV__J(JNIEnv *__env, jclass clazz, jlong vAddress) {
-    glSecondaryColor3hvNVPROC glSecondaryColor3hvNV = (glSecondaryColor3hvNVPROC)tlsGetFunction(2027);
+    glSecondaryColor3hvNVPROC glSecondaryColor3hvNV = (glSecondaryColor3hvNVPROC)tlsGetFunction(2061);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glSecondaryColor3hvNV(v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_glVertexWeighthNV(JNIEnv *__env, jclass clazz, jshort weight) {
-    glVertexWeighthNVPROC glVertexWeighthNV = (glVertexWeighthNVPROC)tlsGetFunction(2028);
+    glVertexWeighthNVPROC glVertexWeighthNV = (glVertexWeighthNVPROC)tlsGetFunction(2062);
     UNUSED_PARAM(clazz)
     glVertexWeighthNV(weight);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglVertexWeighthvNV__J(JNIEnv *__env, jclass clazz, jlong weightAddress) {
-    glVertexWeighthvNVPROC glVertexWeighthvNV = (glVertexWeighthvNVPROC)tlsGetFunction(2029);
+    glVertexWeighthvNVPROC glVertexWeighthvNV = (glVertexWeighthvNVPROC)tlsGetFunction(2063);
     uintptr_t weight = (uintptr_t)weightAddress;
     UNUSED_PARAM(clazz)
     glVertexWeighthvNV(weight);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_glVertexAttrib1hNV(JNIEnv *__env, jclass clazz, jint index, jshort x) {
-    glVertexAttrib1hNVPROC glVertexAttrib1hNV = (glVertexAttrib1hNVPROC)tlsGetFunction(2030);
+    glVertexAttrib1hNVPROC glVertexAttrib1hNV = (glVertexAttrib1hNVPROC)tlsGetFunction(2064);
     UNUSED_PARAM(clazz)
     glVertexAttrib1hNV(index, x);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglVertexAttrib1hvNV__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
-    glVertexAttrib1hvNVPROC glVertexAttrib1hvNV = (glVertexAttrib1hvNVPROC)tlsGetFunction(2031);
+    glVertexAttrib1hvNVPROC glVertexAttrib1hvNV = (glVertexAttrib1hvNVPROC)tlsGetFunction(2065);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttrib1hvNV(index, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_glVertexAttrib2hNV(JNIEnv *__env, jclass clazz, jint index, jshort x, jshort y) {
-    glVertexAttrib2hNVPROC glVertexAttrib2hNV = (glVertexAttrib2hNVPROC)tlsGetFunction(2032);
+    glVertexAttrib2hNVPROC glVertexAttrib2hNV = (glVertexAttrib2hNVPROC)tlsGetFunction(2066);
     UNUSED_PARAM(clazz)
     glVertexAttrib2hNV(index, x, y);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglVertexAttrib2hvNV__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
-    glVertexAttrib2hvNVPROC glVertexAttrib2hvNV = (glVertexAttrib2hvNVPROC)tlsGetFunction(2033);
+    glVertexAttrib2hvNVPROC glVertexAttrib2hvNV = (glVertexAttrib2hvNVPROC)tlsGetFunction(2067);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttrib2hvNV(index, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_glVertexAttrib3hNV(JNIEnv *__env, jclass clazz, jint index, jshort x, jshort y, jshort z) {
-    glVertexAttrib3hNVPROC glVertexAttrib3hNV = (glVertexAttrib3hNVPROC)tlsGetFunction(2034);
+    glVertexAttrib3hNVPROC glVertexAttrib3hNV = (glVertexAttrib3hNVPROC)tlsGetFunction(2068);
     UNUSED_PARAM(clazz)
     glVertexAttrib3hNV(index, x, y, z);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglVertexAttrib3hvNV__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
-    glVertexAttrib3hvNVPROC glVertexAttrib3hvNV = (glVertexAttrib3hvNVPROC)tlsGetFunction(2035);
+    glVertexAttrib3hvNVPROC glVertexAttrib3hvNV = (glVertexAttrib3hvNVPROC)tlsGetFunction(2069);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttrib3hvNV(index, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_glVertexAttrib4hNV(JNIEnv *__env, jclass clazz, jint index, jshort x, jshort y, jshort z, jshort w) {
-    glVertexAttrib4hNVPROC glVertexAttrib4hNV = (glVertexAttrib4hNVPROC)tlsGetFunction(2036);
+    glVertexAttrib4hNVPROC glVertexAttrib4hNV = (glVertexAttrib4hNVPROC)tlsGetFunction(2070);
     UNUSED_PARAM(clazz)
     glVertexAttrib4hNV(index, x, y, z, w);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglVertexAttrib4hvNV__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
-    glVertexAttrib4hvNVPROC glVertexAttrib4hvNV = (glVertexAttrib4hvNVPROC)tlsGetFunction(2037);
+    glVertexAttrib4hvNVPROC glVertexAttrib4hvNV = (glVertexAttrib4hvNVPROC)tlsGetFunction(2071);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttrib4hvNV(index, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglVertexAttribs1hvNV__IIJ(JNIEnv *__env, jclass clazz, jint index, jint n, jlong vAddress) {
-    glVertexAttribs1hvNVPROC glVertexAttribs1hvNV = (glVertexAttribs1hvNVPROC)tlsGetFunction(2038);
+    glVertexAttribs1hvNVPROC glVertexAttribs1hvNV = (glVertexAttribs1hvNVPROC)tlsGetFunction(2072);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttribs1hvNV(index, n, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglVertexAttribs2hvNV__IIJ(JNIEnv *__env, jclass clazz, jint index, jint n, jlong vAddress) {
-    glVertexAttribs2hvNVPROC glVertexAttribs2hvNV = (glVertexAttribs2hvNVPROC)tlsGetFunction(2039);
+    glVertexAttribs2hvNVPROC glVertexAttribs2hvNV = (glVertexAttribs2hvNVPROC)tlsGetFunction(2073);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttribs2hvNV(index, n, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglVertexAttribs3hvNV__IIJ(JNIEnv *__env, jclass clazz, jint index, jint n, jlong vAddress) {
-    glVertexAttribs3hvNVPROC glVertexAttribs3hvNV = (glVertexAttribs3hvNVPROC)tlsGetFunction(2040);
+    glVertexAttribs3hvNVPROC glVertexAttribs3hvNV = (glVertexAttribs3hvNVPROC)tlsGetFunction(2074);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttribs3hvNV(index, n, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVHalfFloat_nglVertexAttribs4hvNV__IIJ(JNIEnv *__env, jclass clazz, jint index, jint n, jlong vAddress) {
-    glVertexAttribs4hvNVPROC glVertexAttribs4hvNV = (glVertexAttribs4hvNVPROC)tlsGetFunction(2041);
+    glVertexAttribs4hvNVPROC glVertexAttribs4hvNV = (glVertexAttribs4hvNVPROC)tlsGetFunction(2075);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttribs4hvNV(index, n, v);

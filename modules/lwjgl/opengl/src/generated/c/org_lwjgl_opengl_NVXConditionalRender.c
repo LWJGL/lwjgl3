@@ -12,13 +12,13 @@ typedef void (APIENTRY *glEndConditionalRenderNVXPROC) (void);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVXConditionalRender_glBeginConditionalRenderNVX(JNIEnv *__env, jclass clazz, jint id) {
-    glBeginConditionalRenderNVXPROC glBeginConditionalRenderNVX = (glBeginConditionalRenderNVXPROC)tlsGetFunction(2219);
+    glBeginConditionalRenderNVXPROC glBeginConditionalRenderNVX = (glBeginConditionalRenderNVXPROC)tlsGetFunction(2253);
     UNUSED_PARAM(clazz)
     glBeginConditionalRenderNVX(id);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVXConditionalRender_glEndConditionalRenderNVX(JNIEnv *__env, jclass clazz) {
-    glEndConditionalRenderNVXPROC glEndConditionalRenderNVX = (glEndConditionalRenderNVXPROC)tlsGetFunction(2220);
+    glEndConditionalRenderNVXPROC glEndConditionalRenderNVX = (glEndConditionalRenderNVXPROC)tlsGetFunction(2254);
     UNUSED_PARAM(clazz)
     glEndConditionalRenderNVX();
 }

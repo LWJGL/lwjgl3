@@ -11,7 +11,7 @@ typedef void (APIENTRY *glMinSampleShadingARBPROC) (jfloat);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBSampleShading_glMinSampleShadingARB(JNIEnv *__env, jclass clazz, jfloat value) {
-    glMinSampleShadingARBPROC glMinSampleShadingARB = (glMinSampleShadingARBPROC)tlsGetFunction(1315);
+    glMinSampleShadingARBPROC glMinSampleShadingARB = (glMinSampleShadingARBPROC)tlsGetFunction(1349);
     UNUSED_PARAM(clazz)
     glMinSampleShadingARB(value);
 }

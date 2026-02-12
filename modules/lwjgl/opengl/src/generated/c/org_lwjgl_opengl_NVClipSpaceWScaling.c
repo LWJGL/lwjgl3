@@ -11,7 +11,7 @@ typedef void (APIENTRY *glViewportPositionWScaleNVPROC) (jint, jfloat, jfloat);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVClipSpaceWScaling_glViewportPositionWScaleNV(JNIEnv *__env, jclass clazz, jint index, jfloat xcoeff, jfloat ycoeff) {
-    glViewportPositionWScaleNVPROC glViewportPositionWScaleNV = (glViewportPositionWScaleNVPROC)tlsGetFunction(1936);
+    glViewportPositionWScaleNVPROC glViewportPositionWScaleNV = (glViewportPositionWScaleNVPROC)tlsGetFunction(1970);
     UNUSED_PARAM(clazz)
     glViewportPositionWScaleNV(index, xcoeff, ycoeff);
 }

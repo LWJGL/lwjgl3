@@ -21,73 +21,73 @@ typedef void (APIENTRY *glGetBufferPointervARBPROC) (jint, jint, uintptr_t);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBVertexBufferObject_glBindBufferARB(JNIEnv *__env, jclass clazz, jint target, jint buffer) {
-    glBindBufferARBPROC glBindBufferARB = (glBindBufferARBPROC)tlsGetFunction(1401);
+    glBindBufferARBPROC glBindBufferARB = (glBindBufferARBPROC)tlsGetFunction(1435);
     UNUSED_PARAM(clazz)
     glBindBufferARB(target, buffer);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBVertexBufferObject_nglDeleteBuffersARB__IJ(JNIEnv *__env, jclass clazz, jint n, jlong buffersAddress) {
-    glDeleteBuffersARBPROC glDeleteBuffersARB = (glDeleteBuffersARBPROC)tlsGetFunction(1402);
+    glDeleteBuffersARBPROC glDeleteBuffersARB = (glDeleteBuffersARBPROC)tlsGetFunction(1436);
     uintptr_t buffers = (uintptr_t)buffersAddress;
     UNUSED_PARAM(clazz)
     glDeleteBuffersARB(n, buffers);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBVertexBufferObject_nglGenBuffersARB__IJ(JNIEnv *__env, jclass clazz, jint n, jlong buffersAddress) {
-    glGenBuffersARBPROC glGenBuffersARB = (glGenBuffersARBPROC)tlsGetFunction(1403);
+    glGenBuffersARBPROC glGenBuffersARB = (glGenBuffersARBPROC)tlsGetFunction(1437);
     uintptr_t buffers = (uintptr_t)buffersAddress;
     UNUSED_PARAM(clazz)
     glGenBuffersARB(n, buffers);
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_ARBVertexBufferObject_glIsBufferARB(JNIEnv *__env, jclass clazz, jint buffer) {
-    glIsBufferARBPROC glIsBufferARB = (glIsBufferARBPROC)tlsGetFunction(1404);
+    glIsBufferARBPROC glIsBufferARB = (glIsBufferARBPROC)tlsGetFunction(1438);
     UNUSED_PARAM(clazz)
     return glIsBufferARB(buffer);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBVertexBufferObject_nglBufferDataARB__IJJI(JNIEnv *__env, jclass clazz, jint target, jlong size, jlong dataAddress, jint usage) {
-    glBufferDataARBPROC glBufferDataARB = (glBufferDataARBPROC)tlsGetFunction(1405);
+    glBufferDataARBPROC glBufferDataARB = (glBufferDataARBPROC)tlsGetFunction(1439);
     uintptr_t data = (uintptr_t)dataAddress;
     UNUSED_PARAM(clazz)
     glBufferDataARB(target, (uintptr_t)size, data, usage);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBVertexBufferObject_nglBufferSubDataARB__IJJJ(JNIEnv *__env, jclass clazz, jint target, jlong offset, jlong size, jlong dataAddress) {
-    glBufferSubDataARBPROC glBufferSubDataARB = (glBufferSubDataARBPROC)tlsGetFunction(1406);
+    glBufferSubDataARBPROC glBufferSubDataARB = (glBufferSubDataARBPROC)tlsGetFunction(1440);
     uintptr_t data = (uintptr_t)dataAddress;
     UNUSED_PARAM(clazz)
     glBufferSubDataARB(target, (uintptr_t)offset, (uintptr_t)size, data);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBVertexBufferObject_nglGetBufferSubDataARB__IJJJ(JNIEnv *__env, jclass clazz, jint target, jlong offset, jlong size, jlong dataAddress) {
-    glGetBufferSubDataARBPROC glGetBufferSubDataARB = (glGetBufferSubDataARBPROC)tlsGetFunction(1407);
+    glGetBufferSubDataARBPROC glGetBufferSubDataARB = (glGetBufferSubDataARBPROC)tlsGetFunction(1441);
     uintptr_t data = (uintptr_t)dataAddress;
     UNUSED_PARAM(clazz)
     glGetBufferSubDataARB(target, (uintptr_t)offset, (uintptr_t)size, data);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_opengl_ARBVertexBufferObject_nglMapBufferARB(JNIEnv *__env, jclass clazz, jint target, jint access) {
-    glMapBufferARBPROC glMapBufferARB = (glMapBufferARBPROC)tlsGetFunction(1408);
+    glMapBufferARBPROC glMapBufferARB = (glMapBufferARBPROC)tlsGetFunction(1442);
     UNUSED_PARAM(clazz)
     return (jlong)glMapBufferARB(target, access);
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_ARBVertexBufferObject_glUnmapBufferARB(JNIEnv *__env, jclass clazz, jint target) {
-    glUnmapBufferARBPROC glUnmapBufferARB = (glUnmapBufferARBPROC)tlsGetFunction(1409);
+    glUnmapBufferARBPROC glUnmapBufferARB = (glUnmapBufferARBPROC)tlsGetFunction(1443);
     UNUSED_PARAM(clazz)
     return glUnmapBufferARB(target);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBVertexBufferObject_nglGetBufferParameterivARB__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
-    glGetBufferParameterivARBPROC glGetBufferParameterivARB = (glGetBufferParameterivARBPROC)tlsGetFunction(1410);
+    glGetBufferParameterivARBPROC glGetBufferParameterivARB = (glGetBufferParameterivARBPROC)tlsGetFunction(1444);
     uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetBufferParameterivARB(target, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBVertexBufferObject_nglGetBufferPointervARB(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
-    glGetBufferPointervARBPROC glGetBufferPointervARB = (glGetBufferPointervARBPROC)tlsGetFunction(1411);
+    glGetBufferPointervARBPROC glGetBufferPointervARB = (glGetBufferPointervARBPROC)tlsGetFunction(1445);
     uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetBufferPointervARB(target, pname, params);

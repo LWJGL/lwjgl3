@@ -11,7 +11,7 @@ typedef uintptr_t (APIENTRY *glImportSyncEXTPROC) (jint, uintptr_t, jint);
 EXTERN_C_ENTER
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_opengl_EXTX11SyncObject_glImportSyncEXT(JNIEnv *__env, jclass clazz, jint external_sync_type, jlong external_sync, jint flags) {
-    glImportSyncEXTPROC glImportSyncEXT = (glImportSyncEXTPROC)tlsGetFunction(1895);
+    glImportSyncEXTPROC glImportSyncEXT = (glImportSyncEXTPROC)tlsGetFunction(1929);
     UNUSED_PARAM(clazz)
     return (jlong)glImportSyncEXT(external_sync_type, (uintptr_t)external_sync, flags);
 }

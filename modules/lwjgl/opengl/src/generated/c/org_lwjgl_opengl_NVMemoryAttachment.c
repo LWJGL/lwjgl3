@@ -16,38 +16,38 @@ typedef void (APIENTRY *glNamedBufferAttachMemoryNVPROC) (jint, jint, jlong);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVMemoryAttachment_nglGetMemoryObjectDetachedResourcesuivNV__IIIIJ(JNIEnv *__env, jclass clazz, jint memory, jint pname, jint first, jint count, jlong paramsAddress) {
-    glGetMemoryObjectDetachedResourcesuivNVPROC glGetMemoryObjectDetachedResourcesuivNV = (glGetMemoryObjectDetachedResourcesuivNVPROC)tlsGetFunction(2043);
+    glGetMemoryObjectDetachedResourcesuivNVPROC glGetMemoryObjectDetachedResourcesuivNV = (glGetMemoryObjectDetachedResourcesuivNVPROC)tlsGetFunction(2077);
     uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetMemoryObjectDetachedResourcesuivNV(memory, pname, first, count, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVMemoryAttachment_glResetMemoryObjectParameterNV(JNIEnv *__env, jclass clazz, jint memory, jint pname) {
-    glResetMemoryObjectParameterNVPROC glResetMemoryObjectParameterNV = (glResetMemoryObjectParameterNVPROC)tlsGetFunction(2044);
+    glResetMemoryObjectParameterNVPROC glResetMemoryObjectParameterNV = (glResetMemoryObjectParameterNVPROC)tlsGetFunction(2078);
     UNUSED_PARAM(clazz)
     glResetMemoryObjectParameterNV(memory, pname);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVMemoryAttachment_glTexAttachMemoryNV(JNIEnv *__env, jclass clazz, jint target, jint memory, jlong offset) {
-    glTexAttachMemoryNVPROC glTexAttachMemoryNV = (glTexAttachMemoryNVPROC)tlsGetFunction(2045);
+    glTexAttachMemoryNVPROC glTexAttachMemoryNV = (glTexAttachMemoryNVPROC)tlsGetFunction(2079);
     UNUSED_PARAM(clazz)
     glTexAttachMemoryNV(target, memory, offset);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVMemoryAttachment_glBufferAttachMemoryNV(JNIEnv *__env, jclass clazz, jint target, jint memory, jlong offset) {
-    glBufferAttachMemoryNVPROC glBufferAttachMemoryNV = (glBufferAttachMemoryNVPROC)tlsGetFunction(2046);
+    glBufferAttachMemoryNVPROC glBufferAttachMemoryNV = (glBufferAttachMemoryNVPROC)tlsGetFunction(2080);
     UNUSED_PARAM(clazz)
     glBufferAttachMemoryNV(target, memory, offset);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVMemoryAttachment_glTextureAttachMemoryNV(JNIEnv *__env, jclass clazz, jint texture, jint memory, jlong offset) {
-    glTextureAttachMemoryNVPROC glTextureAttachMemoryNV = (glTextureAttachMemoryNVPROC)tlsGetFunction(2047);
+    glTextureAttachMemoryNVPROC glTextureAttachMemoryNV = (glTextureAttachMemoryNVPROC)tlsGetFunction(2081);
     UNUSED_PARAM(clazz)
     glTextureAttachMemoryNV(texture, memory, offset);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVMemoryAttachment_glNamedBufferAttachMemoryNV(JNIEnv *__env, jclass clazz, jint buffer, jint memory, jlong offset) {
-    glNamedBufferAttachMemoryNVPROC glNamedBufferAttachMemoryNV = (glNamedBufferAttachMemoryNVPROC)tlsGetFunction(2048);
+    glNamedBufferAttachMemoryNVPROC glNamedBufferAttachMemoryNV = (glNamedBufferAttachMemoryNVPROC)tlsGetFunction(2082);
     UNUSED_PARAM(clazz)
     glNamedBufferAttachMemoryNV(buffer, memory, offset);
 }

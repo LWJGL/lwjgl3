@@ -11,7 +11,7 @@ typedef void (APIENTRY *glRenderbufferStorageMultisampleEXTPROC) (jint, jint, ji
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTFramebufferMultisample_glRenderbufferStorageMultisampleEXT(JNIEnv *__env, jclass clazz, jint target, jint samples, jint internalformat, jint width, jint height) {
-    glRenderbufferStorageMultisampleEXTPROC glRenderbufferStorageMultisampleEXT = (glRenderbufferStorageMultisampleEXTPROC)tlsGetFunction(1739);
+    glRenderbufferStorageMultisampleEXTPROC glRenderbufferStorageMultisampleEXT = (glRenderbufferStorageMultisampleEXTPROC)tlsGetFunction(1773);
     UNUSED_PARAM(clazz)
     glRenderbufferStorageMultisampleEXT(target, samples, internalformat, width, height);
 }

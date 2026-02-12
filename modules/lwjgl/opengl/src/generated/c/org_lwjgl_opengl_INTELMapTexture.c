@@ -13,19 +13,19 @@ typedef uintptr_t (APIENTRY *glMapTexture2DINTELPROC) (jint, jint, jint, uintptr
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_INTELMapTexture_glSyncTextureINTEL(JNIEnv *__env, jclass clazz, jint texture) {
-    glSyncTextureINTELPROC glSyncTextureINTEL = (glSyncTextureINTELPROC)tlsGetFunction(1899);
+    glSyncTextureINTELPROC glSyncTextureINTEL = (glSyncTextureINTELPROC)tlsGetFunction(1933);
     UNUSED_PARAM(clazz)
     glSyncTextureINTEL(texture);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_INTELMapTexture_glUnmapTexture2DINTEL(JNIEnv *__env, jclass clazz, jint texture, jint level) {
-    glUnmapTexture2DINTELPROC glUnmapTexture2DINTEL = (glUnmapTexture2DINTELPROC)tlsGetFunction(1900);
+    glUnmapTexture2DINTELPROC glUnmapTexture2DINTEL = (glUnmapTexture2DINTELPROC)tlsGetFunction(1934);
     UNUSED_PARAM(clazz)
     glUnmapTexture2DINTEL(texture, level);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_opengl_INTELMapTexture_nglMapTexture2DINTEL__IIIJJ(JNIEnv *__env, jclass clazz, jint texture, jint level, jint access, jlong strideAddress, jlong layoutAddress) {
-    glMapTexture2DINTELPROC glMapTexture2DINTEL = (glMapTexture2DINTELPROC)tlsGetFunction(1901);
+    glMapTexture2DINTELPROC glMapTexture2DINTEL = (glMapTexture2DINTELPROC)tlsGetFunction(1935);
     uintptr_t stride = (uintptr_t)strideAddress;
     uintptr_t layout = (uintptr_t)layoutAddress;
     UNUSED_PARAM(clazz)

@@ -12,13 +12,13 @@ typedef void (APIENTRY *glPointParameterfvEXTPROC) (jint, uintptr_t);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTPointParameters_glPointParameterfEXT(JNIEnv *__env, jclass clazz, jint pname, jfloat param) {
-    glPointParameterfEXTPROC glPointParameterfEXT = (glPointParameterfEXTPROC)tlsGetFunction(1823);
+    glPointParameterfEXTPROC glPointParameterfEXT = (glPointParameterfEXTPROC)tlsGetFunction(1857);
     UNUSED_PARAM(clazz)
     glPointParameterfEXT(pname, param);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTPointParameters_nglPointParameterfvEXT__IJ(JNIEnv *__env, jclass clazz, jint pname, jlong paramsAddress) {
-    glPointParameterfvEXTPROC glPointParameterfvEXT = (glPointParameterfvEXTPROC)tlsGetFunction(1824);
+    glPointParameterfvEXTPROC glPointParameterfvEXT = (glPointParameterfvEXTPROC)tlsGetFunction(1858);
     uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glPointParameterfvEXT(pname, params);

@@ -11,7 +11,7 @@ typedef void (APIENTRY *glFramebufferTextureLayerEXTPROC) (jint, jint, jint, jin
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTTextureArray_glFramebufferTextureLayerEXT(JNIEnv *__env, jclass clazz, jint target, jint attachment, jint texture, jint level, jint layer) {
-    glFramebufferTextureLayerEXTPROC glFramebufferTextureLayerEXT = (glFramebufferTextureLayerEXTPROC)tlsGetFunction(1759);
+    glFramebufferTextureLayerEXTPROC glFramebufferTextureLayerEXT = (glFramebufferTextureLayerEXTPROC)tlsGetFunction(1793);
     UNUSED_PARAM(clazz)
     glFramebufferTextureLayerEXT(target, attachment, texture, level, layer);
 }

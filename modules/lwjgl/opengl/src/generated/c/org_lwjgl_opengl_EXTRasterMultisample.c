@@ -11,7 +11,7 @@ typedef void (APIENTRY *glRasterSamplesEXTPROC) (jint, jboolean);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTRasterMultisample_glRasterSamplesEXT(JNIEnv *__env, jclass clazz, jint samples, jboolean fixedsamplelocations) {
-    glRasterSamplesEXTPROC glRasterSamplesEXT = (glRasterSamplesEXTPROC)tlsGetFunction(1827);
+    glRasterSamplesEXTPROC glRasterSamplesEXT = (glRasterSamplesEXTPROC)tlsGetFunction(1861);
     UNUSED_PARAM(clazz)
     glRasterSamplesEXT(samples, fixedsamplelocations);
 }
