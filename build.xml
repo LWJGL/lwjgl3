@@ -618,6 +618,8 @@
             </classpath>
 
             <jvmarg line="-Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8"/>
+            <jvmarg line="--enable-native-access=ALL-UNNAMED" if:set="core.java25"/>
+            <jvmarg line="--enable-preview" if:set="core.java25"/>
             <jvmarg line="${jvmargs}" if:set="jvmargs"/>
             <arg line="${args}" if:set="args"/>
         </java>
@@ -964,7 +966,7 @@
 
             <jvmarg value="-server"/>
             <jvmarg line="-Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8"/>
-            <jvmarg line="--enable-native-access=ALL-UNNAMED" if:set="core.java11"/>
+            <jvmarg line="--enable-native-access=ALL-UNNAMED" if:set="core.java25"/>
             <jvmarg line="--enable-preview" if:set="core.java25"/>
             <jvmarg value="-XstartOnFirstThread" if:set="platform.macos"/>
             <!--<jvmarg value="-Xcheck:jni"/>-->

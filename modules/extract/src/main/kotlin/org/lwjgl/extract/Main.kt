@@ -23,15 +23,6 @@ import javax.swing.plaf.basic.*
 fun main() {
     System.setProperty("line.separator", "\n")
 
-    if (Configuration.LLVM_CLANG_LIBRARY_NAME.get() == null) {
-        try {
-            Library.loadNative(ClangIndex::class.java, "org.lwjgl.llvm", Configuration.LLVM_CLANG_LIBRARY_NAME, "clang", "libclang").use {
-                Configuration.LLVM_CLANG_LIBRARY_NAME.set(it.path)
-            }
-        } catch (_: Throwable) {
-        }
-    }
-
     SwingUtilities.invokeLater {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
 
@@ -301,7 +292,11 @@ class Application {
         extract.toolTipText = "Press to extract LWJGL template definitions from the selected header. [CTRL+Enter]"
         extract.addActionListener {
             if (clangPathListener != null) {
-                Configuration.LLVM_CLANG_LIBRARY_NAME.set(clangPath.text)
+                clangPath.text.let {
+                    if (it.isNotEmpty()) {
+                        Configuration.LLVM_CLANG_LIBRARY_NAME.set(it)
+                    }
+                }
 
                 clangPath.toolTipText = "The Clang shared library path."
                 clangPath.removeMouseListener(clangPathListener)
@@ -483,7 +478,6 @@ class Application {
 
     private fun updateExtractState() {
         extract.isEnabled =
-            clangPath.text.isNotEmpty() &&
             header.text.isNotEmpty() &&
             module.text.isNotEmpty()
     }

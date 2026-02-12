@@ -5,7 +5,7 @@
     <option name="MAIN_CLASS_NAME" value="org.lwjgl.extract.MainKt" />
     <module name="extract" />
     <shortenClasspath name="NONE" />
-    <option name="VM_PARAMETERS" value="-Dfile.encoding=UTF8 -Dorg.lwjgl.llvm.clang.libname=&quot;C:/Program Files/Microsoft Visual Studio/2026/Community/VC/Tools/Llvm/x64/bin/libclang.dll&quot;" />
+    <option name="VM_PARAMETERS" value="--enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF8 -Dorg.lwjgl.llvm.clang.libname=&quot;C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/Llvm/x64/bin/libclang.dll&quot;" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
     <method v="2">

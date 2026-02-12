@@ -11,6 +11,9 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="KotlinRuntime" level="project" />
     <orderEntry type="library" name="JSpecify" level="project" />
+    <orderEntry type="module" module-name="lwjgl.core25" scope="RUNTIME" />
+    <orderEntry type="module" module-name="lwjgl.core17" scope="RUNTIME" />
+    <orderEntry type="module" module-name="lwjgl.core11" scope="RUNTIME" />
     <orderEntry type="module" module-name="lwjgl.core" />
     <orderEntry type="module" module-name="lwjgl.llvm" />
     <orderEntry type="module-library" scope="RUNTIME">
