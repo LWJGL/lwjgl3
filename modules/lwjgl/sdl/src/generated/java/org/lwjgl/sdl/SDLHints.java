@@ -202,6 +202,7 @@ public class SDLHints {
         SDL_HINT_OPENGL_LIBRARY                          = "SDL_OPENGL_LIBRARY",
         SDL_HINT_EGL_LIBRARY                             = "SDL_EGL_LIBRARY",
         SDL_HINT_OPENGL_ES_DRIVER                        = "SDL_OPENGL_ES_DRIVER",
+        SDL_HINT_OPENGL_FORCE_SRGB_CAPABLE               = "SDL_OPENGL_FORCE_SRGB_CAPABLE",
         SDL_HINT_OPENVR_LIBRARY                          = "SDL_OPENVR_LIBRARY",
         SDL_HINT_ORIENTATIONS                            = "SDL_ORIENTATIONS",
         SDL_HINT_POLL_SENTINEL                           = "SDL_POLL_SENTINEL",
