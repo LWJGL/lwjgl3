@@ -39,6 +39,11 @@ val MTLTexture_id = "MTLTexture_id".handle
 val MTLSharedEvent_id = "MTLSharedEvent_id".handle
 val IOSurfaceRef = "IOSurfaceRef".handle
 
+// UBM interop types
+
+val ubm_device = "ubm_device".opaque
+val ubm_surface = "ubm_surface".opaque
+
 // XCB interop types
 val xcb_connection_t = "xcb_connection_t".opaque
 val xcb_visualid_t = typedef(uint32_t, "xcb_visualid_t")

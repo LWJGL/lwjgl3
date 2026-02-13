@@ -10,7 +10,7 @@ import vulkan.*
 
 val ARM_tensors = "ARMTensors".nativeClassVK("ARM_tensors", type = "device", postfix = "ARM") {
     IntConstant(
-        "ARM_TENSORS_SPEC_VERSION".."1"
+        "ARM_TENSORS_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -67,7 +67,10 @@ val ARM_tensors = "ARMTensors".nativeClassVK("ARM_tensors", type = "device", pos
     )
 
     EnumConstant(
-        "FORMAT_R8_BOOL_ARM".."1000460000"
+        "FORMAT_R8_BOOL_ARM".."1000460000",
+        "FORMAT_R16_SFLOAT_FPENCODING_BFLOAT16_ARM".."1000460001",
+        "FORMAT_R8_SFLOAT_FPENCODING_FLOAT8E4M3_ARM".."1000460002",
+        "FORMAT_R8_SFLOAT_FPENCODING_FLOAT8E5M2_ARM".."1000460003"
     )
 
     EnumConstantLong(

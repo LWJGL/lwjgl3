@@ -278,6 +278,11 @@ public class VKCapabilitiesInstance {
     public final long
         vkGetPhysicalDeviceOpticalFlowImageFormatsNV;
 
+    /** Function pointers for SEC_ubm_surface */
+    public final long
+        vkCreateUbmSurfaceSEC,
+        vkGetPhysicalDeviceUbmPresentationSupportSEC;
+
     /** The Vulkan API version number. */
     public final int apiVersion;
 
@@ -363,11 +368,13 @@ public class VKCapabilitiesInstance {
     public final boolean VK_NV_display_stereo;
     /** When true, {@code NV_external_memory_capabilities} is supported. */
     public final boolean VK_NV_external_memory_capabilities;
+    /** When true, {@code SEC_ubm_surface} is supported. */
+    public final boolean VK_SEC_ubm_surface;
 
     VKCapabilitiesInstance(FunctionProvider provider, int apiVersion, Set<String> ext, Set<String> deviceExt) {
         this.apiVersion = apiVersion;
 
-        long[] caps = new long[113];
+        long[] caps = new long[115];
 
         Vulkan10 = check_VK10(provider, caps, ext);
         Vulkan11 = check_VK11(provider, caps, ext);
@@ -432,6 +439,7 @@ public class VKCapabilitiesInstance {
         VK_NV_display_stereo = ext.contains("VK_NV_display_stereo");
         VK_NV_external_memory_capabilities = check_NV_external_memory_capabilities(provider, caps, ext);
         check_NV_optical_flow(provider, caps, deviceExt);
+        VK_SEC_ubm_surface = check_SEC_ubm_surface(provider, caps, ext);
 
         vkDestroyInstance = caps[0];
         vkEnumeratePhysicalDevices = caps[1];
@@ -546,6 +554,8 @@ public class VKCapabilitiesInstance {
         vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV = caps[110];
         vkGetPhysicalDeviceExternalImageFormatPropertiesNV = caps[111];
         vkGetPhysicalDeviceOpticalFlowImageFormatsNV = caps[112];
+        vkCreateUbmSurfaceSEC = caps[113];
+        vkGetPhysicalDeviceUbmPresentationSupportSEC = caps[114];
     }
 
     private static boolean check_VK10(FunctionProvider provider, long[] caps, Set<String> ext) {
@@ -1163,6 +1173,18 @@ public class VKCapabilitiesInstance {
         },
             "vkGetPhysicalDeviceOpticalFlowImageFormatsNV"
         ) || reportMissing("VK", "VK_NV_optical_flow");
+    }
+
+    private static boolean check_SEC_ubm_surface(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_SEC_ubm_surface")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            113, 114
+        },
+            "vkCreateUbmSurfaceSEC", "vkGetPhysicalDeviceUbmPresentationSupportSEC"
+        ) || reportMissing("VK", "VK_SEC_ubm_surface");
     }
 
 }

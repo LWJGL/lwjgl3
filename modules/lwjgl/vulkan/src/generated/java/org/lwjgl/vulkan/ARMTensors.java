@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class ARMTensors {
 
-    public static final int VK_ARM_TENSORS_SPEC_VERSION = 1;
+    public static final int VK_ARM_TENSORS_SPEC_VERSION = 2;
 
     public static final String VK_ARM_TENSORS_EXTENSION_NAME = "VK_ARM_tensors";
 
@@ -61,7 +61,11 @@ public class ARMTensors {
 
     public static final int VK_IMAGE_LAYOUT_TENSOR_ALIASING_ARM = 1000460000;
 
-    public static final int VK_FORMAT_R8_BOOL_ARM = 1000460000;
+    public static final int
+        VK_FORMAT_R8_BOOL_ARM                         = 1000460000,
+        VK_FORMAT_R16_SFLOAT_FPENCODING_BFLOAT16_ARM  = 1000460001,
+        VK_FORMAT_R8_SFLOAT_FPENCODING_FLOAT8E4M3_ARM = 1000460002,
+        VK_FORMAT_R8_SFLOAT_FPENCODING_FLOAT8E5M2_ARM = 1000460003;
 
     public static final long
         VK_TENSOR_CREATE_MUTABLE_FORMAT_BIT_ARM                   = 0x1L,

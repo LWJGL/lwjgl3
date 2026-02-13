@@ -452,6 +452,7 @@ val VkAccessFlags3KHR = typedef(VkFlags64, "VkAccessFlags3KHR")
 val VkPerformanceCounterDescriptionFlagsARM = typedef(VkFlags, "VkPerformanceCounterDescriptionFlagsARM")
 val VkRenderingAttachmentFlagsKHR = typedef(VkFlags, "VkRenderingAttachmentFlagsKHR")
 val VkResolveImageFlagsKHR = typedef(VkFlags, "VkResolveImageFlagsKHR")
+val VkUbmSurfaceCreateFlagsSEC = typedef(VkFlags, "VkUbmSurfaceCreateFlagsSEC")
 
 // Function pointer types
 val PFN_vkDebugReportCallbackEXT = Module.VULKAN.callback {
@@ -8652,7 +8653,7 @@ val VkDataGraphPipelineCreateInfoARM = struct(Module.VULKAN, "VkDataGraphPipelin
     )..nullable..opaque_const_p("pNext")
     VkPipelineCreateFlags2KHR("flags")
     VkPipelineLayout("layout")
-    AutoSize("pResourceInfos")..uint32_t("resourceInfoCount")
+    AutoSize("pResourceInfos", optional = true)..uint32_t("resourceInfoCount")
     VkDataGraphPipelineResourceInfoARM.const.p("pResourceInfos")
 }
 
@@ -10521,4 +10522,12 @@ val VkPhysicalDeviceShaderSubgroupPartitionedFeaturesEXT = struct(Module.VULKAN,
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_PARTITIONED_FEATURES_EXT")..VkStructureType("sType")
     nullable..opaque_p("pNext")
     VkBool32("shaderSubgroupPartitioned")
+}
+
+val VkUbmSurfaceCreateInfoSEC = struct(Module.VULKAN, "VkUbmSurfaceCreateInfoSEC") {
+    Expression("#STRUCTURE_TYPE_UBM_SURFACE_CREATE_INFO_SEC")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    VkUbmSurfaceCreateFlagsSEC("flags")
+    nullable..ubm_device.p("ubm_device")
+    nullable..ubm_surface.p("ubm_surface")
 }
