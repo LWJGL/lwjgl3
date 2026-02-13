@@ -145,12 +145,20 @@ typedef SSIZE_T	ssize_t;
 #elif defined(__APPLE__) || defined (BSD) || defined(__FreeBSD_kernel__)
 # define MDB_USE_POSIX_SEM	1
 # if defined(__APPLE__)
-#  define MDB_FDATASYNC(fd)	fcntl(fd, F_FULLFSYNC)
+#  define MDB_FDATASYNC(fd)		fcntl(fd, F_FULLFSYNC)
 # else
 #  define MDB_FDATASYNC		fsync
 # endif
 #elif defined(ANDROID)
 # define MDB_FDATASYNC		fsync
+#elif defined(__HAIKU__)
+# define MDB_USE_POSIX_SEM	1
+# define MDB_FDATASYNC		fsync
+#endif
+
+/* NetBSD does not define union semun in sys/sem.h */
+#if defined(__NetBSD__) && !defined(_SEM_SEMUN_UNDEFINED)
+# define _SEM_SEMUN_UNDEFINED  1
 #endif
 
 #ifndef _WIN32
