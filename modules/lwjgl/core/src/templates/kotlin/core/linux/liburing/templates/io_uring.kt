@@ -69,7 +69,8 @@ ENABLE_WARNINGS()""")
         "SETUP_NO_SQARRAY".enum("1 << 16"),
         "SETUP_HYBRID_IOPOLL".enum("1 << 17"),
         "SETUP_CQE_MIXED".enum("1 << 18"),
-        "SETUP_SQE_MIXED".enum("1 << 19")
+        "SETUP_SQE_MIXED".enum("1 << 19"),
+        "SETUP_SQ_REWIND".enum("1 << 20")
     )
 
     EnumConstantByte(

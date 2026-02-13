@@ -465,6 +465,7 @@ int io_uring_resize_rings(struct io_uring *ring, struct io_uring_params *p)
 
 	sq_head = ring->sq.sqe_head;
 	sq_tail = ring->sq.sqe_tail;
+	__sys_munmap(ring->sq.sqes, ring->sq.sqes_sz);
 	io_uring_unmap_rings(&ring->sq, &ring->cq);
 	memset(&ring->sq, 0, sizeof(ring->sq));
 	memset(&ring->cq, 0, sizeof(ring->cq));

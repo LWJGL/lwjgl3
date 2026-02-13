@@ -205,6 +205,18 @@ static unsigned __io_uring_flush_sq(struct io_uring *ring)
 	struct io_uring_sq *sq = &ring->sq;
 	unsigned tail = sq->sqe_tail;
 
+	/*
+	 * With IORING_SETUP_SQ_REWIND, the kernel ignores the SQ head / tail
+	 * and submits entries from the beginning of the queue. Continue using
+	 * the indices as before but reset the tail on submission. With the
+	 * head kept to be zero, io_uring_get_sqe() / etc. will work without
+	 * any extra changes.
+	 */
+	if (ring->flags & IORING_SETUP_SQ_REWIND) {
+		sq->sqe_tail = 0;
+		return tail;
+	}
+
 	if (sq->sqe_head != tail) {
 		sq->sqe_head = tail;
 		/*

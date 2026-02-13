@@ -62,7 +62,8 @@ public class LibIOURing {
         IORING_SETUP_NO_SQARRAY         = 1 << 16,
         IORING_SETUP_HYBRID_IOPOLL      = 1 << 17,
         IORING_SETUP_CQE_MIXED          = 1 << 18,
-        IORING_SETUP_SQE_MIXED          = 1 << 19;
+        IORING_SETUP_SQE_MIXED          = 1 << 19,
+        IORING_SETUP_SQ_REWIND          = 1 << 20;
 
     public static final byte
         IORING_OP_NOP              = 0,

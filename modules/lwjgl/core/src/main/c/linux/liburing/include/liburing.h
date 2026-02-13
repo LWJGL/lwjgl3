@@ -138,7 +138,8 @@ struct io_uring_sq {
 	unsigned ring_mask;
 	unsigned ring_entries;
 
-	unsigned pad[2];
+	unsigned sqes_sz;
+	unsigned pad;
 };
 
 struct io_uring_cq {
@@ -947,7 +948,7 @@ IOURINGINLINE void io_uring_prep_epoll_wait(struct io_uring_sqe *sqe, int fd,
 }
 
 IOURINGINLINE void io_uring_prep_files_update(struct io_uring_sqe *sqe,
-					      const int *fds, unsigned nr_fds,
+					      int *fds, unsigned nr_fds,
 					      int offset)
 	LIBURING_NOEXCEPT
 {

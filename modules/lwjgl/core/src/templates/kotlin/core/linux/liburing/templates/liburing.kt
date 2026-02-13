@@ -949,7 +949,7 @@ ENABLE_WARNINGS()""")
         "prep_files_update",
 
         io_uring_sqe.p("sqe"),
-        int.const.p("fds"),
+        int.p("fds"),
         AutoSize("fds")..unsigned("nr_fds"),
         int("offset")
     )

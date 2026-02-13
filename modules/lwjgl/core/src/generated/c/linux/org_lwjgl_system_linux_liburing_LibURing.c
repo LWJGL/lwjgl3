@@ -780,7 +780,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1files_1update(JNIEnv *__env, jclass clazz, jlong sqeAddress, jlong fdsAddress, jint nr_fds, jint offset) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
-    int const *fds = (int const *)(uintptr_t)fdsAddress;
+    int *fds = (int *)(uintptr_t)fdsAddress;
     UNUSED_PARAMS(__env, clazz)
     io_uring_prep_files_update(sqe, fds, (unsigned)nr_fds, offset);
 }

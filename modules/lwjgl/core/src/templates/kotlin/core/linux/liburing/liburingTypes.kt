@@ -372,7 +372,8 @@ val io_uring_sq = struct(Module.CORE_LINUX_LIBURING, "IOURingSQ", nativeName = "
     unsigned("ring_mask")
 	unsigned("ring_entries")
 
-    unsigned("pad")[2].private()
+    unsigned("sqes_sz")
+    unsigned("pad").private()
 }
 
 val io_uring_cq = struct(Module.CORE_LINUX_LIBURING, "IOURingCQ", nativeName = "struct io_uring_cq") {

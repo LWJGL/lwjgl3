@@ -1234,11 +1234,11 @@ public class LibURing {
 
     // --- [ io_uring_prep_files_update ] ---
 
-    /** {@code void io_uring_prep_files_update(struct io_uring_sqe * sqe, int const * fds, unsigned nr_fds, int offset)} */
+    /** {@code void io_uring_prep_files_update(struct io_uring_sqe * sqe, int * fds, unsigned nr_fds, int offset)} */
     public static native void nio_uring_prep_files_update(long sqe, long fds, int nr_fds, int offset);
 
-    /** {@code void io_uring_prep_files_update(struct io_uring_sqe * sqe, int const * fds, unsigned nr_fds, int offset)} */
-    public static void io_uring_prep_files_update(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("int const *") IntBuffer fds, int offset) {
+    /** {@code void io_uring_prep_files_update(struct io_uring_sqe * sqe, int * fds, unsigned nr_fds, int offset)} */
+    public static void io_uring_prep_files_update(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("int *") IntBuffer fds, int offset) {
         nio_uring_prep_files_update(sqe.address(), memAddress(fds), fds.remaining(), offset);
     }
 
