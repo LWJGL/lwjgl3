@@ -71,11 +71,6 @@ val hwloc_pcidev_attr_s = struct(Module.HWLOC, "hwloc_pcidev_attr_s", mutable = 
 val hwloc_obj_attr_u = union(Module.HWLOC, "hwloc_obj_attr_u", nativeName = "struct hwloc_obj_attr_u", mutable = false) {
     struct(Module.HWLOC, "hwloc_numanode_attr_s", mutable = false) {
         hwloc_uint64_t("local_memory")
-        AutoSize("page_types")..unsigned("page_types_len")
-        nullable..struct(Module.HWLOC, "hwloc_memory_page_type_s", mutable = false) {
-            hwloc_uint64_t("size")
-            hwloc_uint64_t("count")
-        }.p("page_types")
     }("numanode")
     struct(Module.HWLOC, "hwloc_cache_attr_s", mutable = false) {
         hwloc_uint64_t("size")

@@ -885,11 +885,11 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
     )*/
     customMethod("""
     public static int hwloc_obj_add_info(@NativeType("hwloc_obj_t") hwloc_obj obj, @NativeType("char const *") ByteBuffer name, @NativeType("char const *") ByteBuffer value) {
-        return hwloc_modify_infos(obj.infos(), HWLOC_MODIFY_INFOS_OP_ADD, name, value);
+        return hwloc_modify_infos(obj.infos(), HWLOC_MODIFY_INFOS_OP_ADD, name, value) >= 0 ? 0 : -1;
     }
 
     public static int hwloc_obj_add_info(@NativeType("hwloc_obj_t") hwloc_obj obj, @NativeType("char const *") CharSequence name, @NativeType("char const *") CharSequence value) {
-        return hwloc_modify_infos(obj.infos(), HWLOC_MODIFY_INFOS_OP_ADD, name, value);
+        return hwloc_modify_infos(obj.infos(), HWLOC_MODIFY_INFOS_OP_ADD, name, value) >= 0 ? 0 : -1;
     }""")
 
     Nonnull..hwloc_infos_s.p(
@@ -2116,8 +2116,7 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
     EnumConstantLong(
         "TOPOLOGY_EXPORT_SYNTHETIC_FLAG_NO_EXTENDED_TYPES".enumLong("1L<<0"),
         "TOPOLOGY_EXPORT_SYNTHETIC_FLAG_NO_ATTRS".enumLong("1L<<1"),
-        "TOPOLOGY_EXPORT_SYNTHETIC_FLAG_V1".enumLong("1L<<2"),
-        "TOPOLOGY_EXPORT_SYNTHETIC_FLAG_IGNORE_MEMORY".enumLong("1L<<3")
+        "TOPOLOGY_EXPORT_SYNTHETIC_FLAG_IGNORE_MEMORY".enumLong("1L<<2")
     )
 
     int(

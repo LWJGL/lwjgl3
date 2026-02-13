@@ -14,12 +14,10 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre><code>
+ * <pre>{@code
  * struct hwloc_numanode_attr_s {
  *     hwloc_uint64_t local_memory;
- *     unsigned page_types_len;
- *     {@link hwloc_memory_page_type_s hwloc_memory_page_type_s} * page_types;
- * }</code></pre>
+ * }}</pre>
  */
 public class hwloc_numanode_attr_s extends Struct<hwloc_numanode_attr_s> {
 
@@ -31,23 +29,17 @@ public class hwloc_numanode_attr_s extends Struct<hwloc_numanode_attr_s> {
 
     /** The struct member offsets. */
     public static final int
-        LOCAL_MEMORY,
-        PAGE_TYPES_LEN,
-        PAGE_TYPES;
+        LOCAL_MEMORY;
 
     static {
         Layout layout = __struct(
-            __member(8),
-            __member(4),
-            __member(POINTER_SIZE)
+            __member(8)
         );
 
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
         LOCAL_MEMORY = layout.offsetof(0);
-        PAGE_TYPES_LEN = layout.offsetof(1);
-        PAGE_TYPES = layout.offsetof(2);
     }
 
     protected hwloc_numanode_attr_s(long address, @Nullable ByteBuffer container) {
@@ -75,12 +67,6 @@ public class hwloc_numanode_attr_s extends Struct<hwloc_numanode_attr_s> {
     /** @return the value of the {@code local_memory} field. */
     @NativeType("hwloc_uint64_t")
     public long local_memory() { return nlocal_memory(address()); }
-    /** @return the value of the {@code page_types_len} field. */
-    @NativeType("unsigned")
-    public int page_types_len() { return npage_types_len(address()); }
-    /** @return a {@link hwloc_memory_page_type_s.Buffer} view of the struct array pointed to by the {@code page_types} field. */
-    @NativeType("hwloc_memory_page_type_s *")
-    public hwloc_memory_page_type_s.@Nullable Buffer page_types() { return npage_types(address()); }
 
     // -----------------------------------
 
@@ -113,10 +99,6 @@ public class hwloc_numanode_attr_s extends Struct<hwloc_numanode_attr_s> {
 
     /** Unsafe version of {@link #local_memory}. */
     public static long nlocal_memory(long struct) { return memGetLong(struct + hwloc_numanode_attr_s.LOCAL_MEMORY); }
-    /** Unsafe version of {@link #page_types_len}. */
-    public static int npage_types_len(long struct) { return memGetInt(struct + hwloc_numanode_attr_s.PAGE_TYPES_LEN); }
-    /** Unsafe version of {@link #page_types}. */
-    public static hwloc_memory_page_type_s.@Nullable Buffer npage_types(long struct) { return hwloc_memory_page_type_s.createSafe(memGetAddress(struct + hwloc_numanode_attr_s.PAGE_TYPES), npage_types_len(struct)); }
 
     // -----------------------------------
 
@@ -164,12 +146,6 @@ public class hwloc_numanode_attr_s extends Struct<hwloc_numanode_attr_s> {
         /** @return the value of the {@code local_memory} field. */
         @NativeType("hwloc_uint64_t")
         public long local_memory() { return hwloc_numanode_attr_s.nlocal_memory(address()); }
-        /** @return the value of the {@code page_types_len} field. */
-        @NativeType("unsigned")
-        public int page_types_len() { return hwloc_numanode_attr_s.npage_types_len(address()); }
-        /** @return a {@link hwloc_memory_page_type_s.Buffer} view of the struct array pointed to by the {@code page_types} field. */
-        @NativeType("hwloc_memory_page_type_s *")
-        public hwloc_memory_page_type_s.@Nullable Buffer page_types() { return hwloc_numanode_attr_s.npage_types(address()); }
 
     }
 

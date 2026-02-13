@@ -386,8 +386,7 @@ public class HWLoc {
     public static final long
         HWLOC_TOPOLOGY_EXPORT_SYNTHETIC_FLAG_NO_EXTENDED_TYPES = 1L<<0,
         HWLOC_TOPOLOGY_EXPORT_SYNTHETIC_FLAG_NO_ATTRS          = 1L<<1,
-        HWLOC_TOPOLOGY_EXPORT_SYNTHETIC_FLAG_V1                = 1L<<2,
-        HWLOC_TOPOLOGY_EXPORT_SYNTHETIC_FLAG_IGNORE_MEMORY     = 1L<<3;
+        HWLOC_TOPOLOGY_EXPORT_SYNTHETIC_FLAG_IGNORE_MEMORY     = 1L<<2;
 
     public static final long
         HWLOC_DISTANCES_KIND_FROM_OS             = 1L<<0,
@@ -3503,11 +3502,11 @@ public class HWLoc {
     }
 
     public static int hwloc_obj_add_info(@NativeType("hwloc_obj_t") hwloc_obj obj, @NativeType("char const *") ByteBuffer name, @NativeType("char const *") ByteBuffer value) {
-        return hwloc_modify_infos(obj.infos(), HWLOC_MODIFY_INFOS_OP_ADD, name, value);
+        return hwloc_modify_infos(obj.infos(), HWLOC_MODIFY_INFOS_OP_ADD, name, value) >= 0 ? 0 : -1;
     }
 
     public static int hwloc_obj_add_info(@NativeType("hwloc_obj_t") hwloc_obj obj, @NativeType("char const *") CharSequence name, @NativeType("char const *") CharSequence value) {
-        return hwloc_modify_infos(obj.infos(), HWLOC_MODIFY_INFOS_OP_ADD, name, value);
+        return hwloc_modify_infos(obj.infos(), HWLOC_MODIFY_INFOS_OP_ADD, name, value) >= 0 ? 0 : -1;
     }
 
     @Nullable
