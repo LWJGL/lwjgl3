@@ -218,7 +218,7 @@ public class XR10 {
         XR_OBJECT_TYPE_ACTION_SET = 5,
         XR_OBJECT_TYPE_ACTION     = 6;
 
-    public static final long XR_CURRENT_API_VERSION = XR_MAKE_VERSION(1, 1, 54);
+    public static final long XR_CURRENT_API_VERSION = XR_MAKE_VERSION(1, 1, 57);
 
     public static final long XR_API_VERSION_1_0 = XR_MAKE_VERSION(1, 0, XR_VERSION_PATCH(XR_CURRENT_API_VERSION));
 

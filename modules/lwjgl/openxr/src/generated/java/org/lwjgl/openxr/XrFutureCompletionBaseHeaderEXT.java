@@ -194,6 +194,11 @@ public class XrFutureCompletionBaseHeaderEXT extends Struct<XrFutureCompletionBa
         return new XrFutureCompletionBaseHeaderEXT(value.address(), __getContainer(value));
     }
 
+    /** Upcasts the specified {@code XrCreateTrackableImageDatabaseCompletionANDROID} instance to {@code XrFutureCompletionBaseHeaderEXT}. */
+    public static XrFutureCompletionBaseHeaderEXT create(XrCreateTrackableImageDatabaseCompletionANDROID value) {
+        return new XrFutureCompletionBaseHeaderEXT(value.address(), __getContainer(value));
+    }
+
     /** Upcasts the specified {@code XrCreateSpatialContextCompletionEXT} instance to {@code XrFutureCompletionBaseHeaderEXT}. */
     public static XrFutureCompletionBaseHeaderEXT create(XrCreateSpatialContextCompletionEXT value) {
         return new XrFutureCompletionBaseHeaderEXT(value.address(), __getContainer(value));
@@ -309,6 +314,11 @@ public class XrFutureCompletionBaseHeaderEXT extends Struct<XrFutureCompletionBa
 
     /** Upcasts the specified {@code XrWorldMeshRequestCompletionML.Buffer} instance to {@code XrFutureCompletionBaseHeaderEXT.Buffer}. */
     public static XrFutureCompletionBaseHeaderEXT.Buffer create(XrWorldMeshRequestCompletionML.Buffer value) {
+        return new XrFutureCompletionBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
+    /** Upcasts the specified {@code XrCreateTrackableImageDatabaseCompletionANDROID.Buffer} instance to {@code XrFutureCompletionBaseHeaderEXT.Buffer}. */
+    public static XrFutureCompletionBaseHeaderEXT.Buffer create(XrCreateTrackableImageDatabaseCompletionANDROID.Buffer value) {
         return new XrFutureCompletionBaseHeaderEXT.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 

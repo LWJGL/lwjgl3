@@ -53,6 +53,7 @@ val XrDeviceAnchorPersistenceANDROID = XR_DEFINE_HANDLE("XrDeviceAnchorPersisten
 val XrFaceTrackerANDROID = XR_DEFINE_HANDLE("XrFaceTrackerANDROID")
 val XrWorldMeshDetectorML = XR_DEFINE_HANDLE("XrWorldMeshDetectorML")
 val XrFacialExpressionClientML = XR_DEFINE_HANDLE("XrFacialExpressionClientML")
+val XrTrackableImageDatabaseANDROID = XR_DEFINE_HANDLE("XrTrackableImageDatabaseANDROID")
 val XrSpatialEntityEXT = XR_DEFINE_HANDLE("XrSpatialEntityEXT")
 val XrSpatialContextEXT = XR_DEFINE_HANDLE("XrSpatialContextEXT")
 val XrSpatialSnapshotEXT = XR_DEFINE_HANDLE("XrSpatialSnapshotEXT")
@@ -181,6 +182,8 @@ val XrWorldMeshBlockResultML = "XrWorldMeshBlockResultML".enumType
 val XrFacialBlendShapeML = "XrFacialBlendShapeML".enumType
 val XrTrackableMarkerTrackingModeANDROID = "XrTrackableMarkerTrackingModeANDROID".enumType
 val XrTrackableMarkerDictionaryANDROID = "XrTrackableMarkerDictionaryANDROID".enumType
+val XrTrackableImageTrackingModeANDROID = "XrTrackableImageTrackingModeANDROID".enumType
+val XrTrackableImageFormatANDROID = "XrTrackableImageFormatANDROID".enumType
 val XrSpatialCapabilityEXT = "XrSpatialCapabilityEXT".enumType
 val XrSpatialCapabilityFeatureEXT = "XrSpatialCapabilityFeatureEXT".enumType
 val XrSpatialComponentTypeEXT = "XrSpatialComponentTypeEXT".enumType
@@ -4099,6 +4102,65 @@ val XrTrackableMarkerANDROID = struct(Module.OPENXR, "XrTrackableMarkerANDROID")
     int32_t("markerId")
     XrPosef("centerPose")
     XrExtent2Df("extents")
+}
+
+val XrSystemImageTrackingPropertiesANDROID = struct(Module.OPENXR, "XrSystemImageTrackingPropertiesANDROID", mutable = false) {
+    Expression("#TYPE_SYSTEM_IMAGE_TRACKING_PROPERTIES_ANDROID")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsImageTracking")
+    XrBool32("supportsPhysicalSizeEstimation")
+    uint32_t("maxTrackedImageCount")
+    uint32_t("maxLoadedImageCount")
+}
+
+val XrTrackableImageDatabaseEntryANDROID = struct(Module.OPENXR, "XrTrackableImageDatabaseEntryANDROID") {
+    Expression("#TYPE_TRACKABLE_IMAGE_DATABASE_ENTRY_ANDROID")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrTrackableImageTrackingModeANDROID("trackingMode")
+    float("physicalWidth")
+    uint32_t("imageWidth")
+    uint32_t("imageHeight")
+    XrTrackableImageFormatANDROID("format")
+    AutoSize("buffer")..uint32_t("bufferSize")
+    uint8_t.const.p("buffer")
+}
+
+val XrTrackableImageDatabaseCreateInfoANDROID = struct(Module.OPENXR, "XrTrackableImageDatabaseCreateInfoANDROID") {
+    Expression("#TYPE_TRACKABLE_IMAGE_DATABASE_CREATE_INFO_ANDROID")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("entries")..uint32_t("entryCount")
+    XrTrackableImageDatabaseEntryANDROID.const.p("entries")
+}
+
+val XrCreateTrackableImageDatabaseCompletionANDROID = struct(Module.OPENXR, "XrCreateTrackableImageDatabaseCompletionANDROID", parentStruct = XrFutureCompletionBaseHeaderEXT) {
+    Expression("#TYPE_CREATE_TRACKABLE_IMAGE_DATABASE_COMPLETION_ANDROID")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrResult("futureResult")
+    XrTrackableImageDatabaseANDROID("database")
+}
+
+val XrTrackableImageConfigurationANDROID = struct(Module.OPENXR, "XrTrackableImageConfigurationANDROID") {
+    Expression("#TYPE_TRACKABLE_IMAGE_CONFIGURATION_ANDROID")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("databases")..uint32_t("databaseCount")
+    XrTrackableImageDatabaseANDROID.const.p("databases")
+}
+
+val XrTrackableImageANDROID = struct(Module.OPENXR, "XrTrackableImageANDROID") {
+    Expression("#TYPE_TRACKABLE_IMAGE_ANDROID")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrTrackingStateANDROID("trackingState")
+    XrTime("lastUpdatedTime")
+    XrTrackableImageDatabaseANDROID("database")
+    uint32_t("databaseEntryIndex")
+    XrPosef("centerPose")
+    XrExtent2Df("extents")
+}
+
+val XrEventDataImageTrackingLostANDROID = struct(Module.OPENXR, "XrEventDataImageTrackingLostANDROID", mutable = false, parentStruct = XrEventDataBaseHeader) {
+    Expression("#TYPE_EVENT_DATA_IMAGE_TRACKING_LOST_ANDROID")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrTime("time")
 }
 
 val XrColor3fKHR = struct(Module.OPENXR, "XrColor3fKHR", alias = XrColor3f) {

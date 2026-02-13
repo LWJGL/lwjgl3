@@ -87,6 +87,7 @@ fun templateCustomization() {
     generateDispatchableHandle(XrSpatialPersistenceContextEXT, XrSession)
     generateDispatchableHandle(XrSpatialSnapshotEXT, XrSpatialContextEXT)
     generateDispatchableHandle(XrSwapchain, XrSession)
+    generateDispatchableHandle(XrTrackableImageDatabaseANDROID, XrSession)
     generateDispatchableHandle(XrTrackableTrackerANDROID, XrSession)
     generateDispatchableHandle(XrTriangleMeshFB, XrSession)
     generateDispatchableHandle(XrVirtualKeyboardMETA, XrSession)
@@ -94,7 +95,7 @@ fun templateCustomization() {
 
     XR10.apply {
         LongConstant(
-            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 1, 54)"
+            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 1, 57)"
         )
 
         LongConstant(
