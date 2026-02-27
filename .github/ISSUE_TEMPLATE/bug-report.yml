@@ -39,9 +39,12 @@ body:
       description: Please select the platform(s) on which the bug is reproducible.
       multiple: true
       options:
+        - FreeBSD x64
         - Linux x64
         - Linux arm64
         - Linux arm32
+        - Linux ppc64le
+        - Linux riscv64
         - macOS x64
         - macOS arm64
         - Windows x64
@@ -54,7 +57,7 @@ body:
     attributes:
       label: JDK
       description: Please type the name and version of the Java Runtime(s) on which the bug is reproducible.
-      placeholder: e.g. Zulu OpenJDK 21.0.5
+      placeholder: e.g. Zulu OpenJDK 25.0.2
     validations:
       required: true
   - type: input

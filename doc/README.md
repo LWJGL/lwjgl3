@@ -5,13 +5,14 @@ LWJGL is organized in modules, described below:
 The LWJGL core.
 * `modules/lwjgl/core/src/main/c`
 * `modules/lwjgl/core/src/main/java`
-* `modules/lwjgl/core/src/main/java9` (multi-release)
-* `modules/lwjgl/core/src/main/java10` (multi-release)
 * `modules/lwjgl/core/src/main/resources` (module-info)
 * `modules/lwjgl/core/src/templates/kotlin` (native binding templates)
 * `modules/lwjgl/core/src/generated/c`
 * `modules/lwjgl/core/src/generated/java`
 * `modules/lwjgl/core/src/test/java`
+* `modules/lwjgl/core11/src/main/java` (multi-release - JDK 11+)
+* `modules/lwjgl/core17/src/main/java` (multi-release - JDK 17+)
+* `modules/lwjgl/core25/src/main/java` (multi-release - JDK 25+)
 
 Module dependencies: n/a (but the Generator has to execute successfully first)  
 Compile dependencies: n/a  
