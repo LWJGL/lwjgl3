@@ -303,8 +303,8 @@ public class SDL_GPURasterizerState extends Struct<SDL_GPURasterizerState> imple
     public static boolean nenable_depth_bias(long struct) { return memGetByte(struct + SDL_GPURasterizerState.ENABLE_DEPTH_BIAS) != 0; }
     /** Unsafe version of {@link #enable_depth_clip}. */
     public static boolean nenable_depth_clip(long struct) { return memGetByte(struct + SDL_GPURasterizerState.ENABLE_DEPTH_CLIP) != 0; }
-    public static byte npadding1(long struct) { return memGetByte(struct + SDL_GPURasterizerState.PADDING1); }
-    public static byte npadding2(long struct) { return memGetByte(struct + SDL_GPURasterizerState.PADDING2); }
+    static byte npadding1(long struct) { return memGetByte(struct + SDL_GPURasterizerState.PADDING1); }
+    static byte npadding2(long struct) { return memGetByte(struct + SDL_GPURasterizerState.PADDING2); }
 
     /** Unsafe version of {@link #fill_mode(int) fill_mode}. */
     public static void nfill_mode(long struct, int value) { memPutInt(struct + SDL_GPURasterizerState.FILL_MODE, value); }
@@ -322,8 +322,8 @@ public class SDL_GPURasterizerState extends Struct<SDL_GPURasterizerState> imple
     public static void nenable_depth_bias(long struct, boolean value) { memPutByte(struct + SDL_GPURasterizerState.ENABLE_DEPTH_BIAS, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #enable_depth_clip(boolean) enable_depth_clip}. */
     public static void nenable_depth_clip(long struct, boolean value) { memPutByte(struct + SDL_GPURasterizerState.ENABLE_DEPTH_CLIP, value ? (byte)1 : (byte)0); }
-    public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPURasterizerState.PADDING1, value); }
-    public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPURasterizerState.PADDING2, value); }
+    static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPURasterizerState.PADDING1, value); }
+    static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPURasterizerState.PADDING2, value); }
 
     // -----------------------------------
 

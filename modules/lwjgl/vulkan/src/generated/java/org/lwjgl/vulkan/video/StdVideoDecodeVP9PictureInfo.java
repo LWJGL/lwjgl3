@@ -417,8 +417,8 @@ public class StdVideoDecodeVP9PictureInfo extends Struct<StdVideoDecodeVP9Pictur
     public static byte ntile_cols_log2(long struct) { return memGetByte(struct + StdVideoDecodeVP9PictureInfo.TILE_COLS_LOG2); }
     /** Unsafe version of {@link #tile_rows_log2}. */
     public static byte ntile_rows_log2(long struct) { return memGetByte(struct + StdVideoDecodeVP9PictureInfo.TILE_ROWS_LOG2); }
-    public static ShortBuffer nreserved1(long struct) { return memShortBuffer(struct + StdVideoDecodeVP9PictureInfo.RESERVED1, 3); }
-    public static short nreserved1(long struct, int index) {
+    static ShortBuffer nreserved1(long struct) { return memShortBuffer(struct + StdVideoDecodeVP9PictureInfo.RESERVED1, 3); }
+    static short nreserved1(long struct, int index) {
         return memGetShort(struct + StdVideoDecodeVP9PictureInfo.RESERVED1 + check(index, 3) * 2);
     }
     /** Unsafe version of {@link #pColorConfig}. */
@@ -456,11 +456,11 @@ public class StdVideoDecodeVP9PictureInfo extends Struct<StdVideoDecodeVP9Pictur
     public static void ntile_cols_log2(long struct, byte value) { memPutByte(struct + StdVideoDecodeVP9PictureInfo.TILE_COLS_LOG2, value); }
     /** Unsafe version of {@link #tile_rows_log2(byte) tile_rows_log2}. */
     public static void ntile_rows_log2(long struct, byte value) { memPutByte(struct + StdVideoDecodeVP9PictureInfo.TILE_ROWS_LOG2, value); }
-    public static void nreserved1(long struct, ShortBuffer value) {
+    static void nreserved1(long struct, ShortBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + StdVideoDecodeVP9PictureInfo.RESERVED1, value.remaining() * 2);
     }
-    public static void nreserved1(long struct, int index, short value) {
+    static void nreserved1(long struct, int index, short value) {
         memPutShort(struct + StdVideoDecodeVP9PictureInfo.RESERVED1 + check(index, 3) * 2, value);
     }
     /** Unsafe version of {@link #pColorConfig(StdVideoVP9ColorConfig) pColorConfig}. */

@@ -233,7 +233,7 @@ public class StdVideoVP9SegmentationFlags extends Struct<StdVideoVP9Segmentation
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoVP9SegmentationFlags.BITFIELD0); }
+    static int nbitfield0(long struct) { return memGetInt(struct + StdVideoVP9SegmentationFlags.BITFIELD0); }
     /** Unsafe version of {@link #segmentation_update_map}. */
     public static int nsegmentation_update_map(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #segmentation_temporal_update}. */
@@ -242,10 +242,10 @@ public class StdVideoVP9SegmentationFlags extends Struct<StdVideoVP9Segmentation
     public static int nsegmentation_update_data(long struct) { return (nbitfield0(struct) & 0x00_00_00_04) >>> 2; }
     /** Unsafe version of {@link #segmentation_abs_or_delta_update}. */
     public static int nsegmentation_abs_or_delta_update(long struct) { return (nbitfield0(struct) & 0x00_00_00_08) >>> 3; }
-    public static int nbitfield1(long struct) { return memGetInt(struct + StdVideoVP9SegmentationFlags.BITFIELD1); }
-    public static int nreserved(long struct) { return nbitfield1(struct) & 0x0F_FF_FF_FF; }
+    static int nbitfield1(long struct) { return memGetInt(struct + StdVideoVP9SegmentationFlags.BITFIELD1); }
+    static int nreserved(long struct) { return nbitfield1(struct) & 0x0F_FF_FF_FF; }
 
-    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoVP9SegmentationFlags.BITFIELD0, value); }
+    static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoVP9SegmentationFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #segmentation_update_map(boolean) segmentation_update_map}. */
     public static void nsegmentation_update_map(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #segmentation_temporal_update(boolean) segmentation_temporal_update}. */
@@ -254,8 +254,8 @@ public class StdVideoVP9SegmentationFlags extends Struct<StdVideoVP9Segmentation
     public static void nsegmentation_update_data(long struct, int value) { nbitfield0(struct, ((value << 2) & 0x00_00_00_04) | (nbitfield0(struct) & 0xFF_FF_FF_FB)); }
     /** Unsafe version of {@link #segmentation_abs_or_delta_update(boolean) segmentation_abs_or_delta_update}. */
     public static void nsegmentation_abs_or_delta_update(long struct, int value) { nbitfield0(struct, ((value << 3) & 0x00_00_00_08) | (nbitfield0(struct) & 0xFF_FF_FF_F7)); }
-    public static void nbitfield1(long struct, int value) { memPutInt(struct + StdVideoVP9SegmentationFlags.BITFIELD1, value); }
-    public static void nreserved(long struct, int value) { nbitfield1(struct, (nbitfield1(struct) & 0xF0_00_00_00) | (value & 0x0F_FF_FF_FF)); }
+    static void nbitfield1(long struct, int value) { memPutInt(struct + StdVideoVP9SegmentationFlags.BITFIELD1, value); }
+    static void nreserved(long struct, int value) { nbitfield1(struct, (nbitfield1(struct) & 0xF0_00_00_00) | (value & 0x0F_FF_FF_FF)); }
 
     // -----------------------------------
 

@@ -266,7 +266,7 @@ public class SDL_UserEvent extends Struct<SDL_UserEvent> implements NativeResour
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_UserEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_UserEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_UserEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_UserEvent.TIMESTAMP); }
     /** Unsafe version of {@link #windowID}. */
@@ -280,7 +280,7 @@ public class SDL_UserEvent extends Struct<SDL_UserEvent> implements NativeResour
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_UserEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_UserEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_UserEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_UserEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #windowID(int) windowID}. */

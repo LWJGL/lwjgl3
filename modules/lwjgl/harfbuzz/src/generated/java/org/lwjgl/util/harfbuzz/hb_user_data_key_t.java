@@ -177,9 +177,9 @@ public class hb_user_data_key_t extends Struct<hb_user_data_key_t> implements Na
 
     // -----------------------------------
 
-    public static byte nunused(long struct) { return memGetByte(struct + hb_user_data_key_t.UNUSED); }
+    static byte nunused(long struct) { return memGetByte(struct + hb_user_data_key_t.UNUSED); }
 
-    public static void nunused(long struct, byte value) { memPutByte(struct + hb_user_data_key_t.UNUSED, value); }
+    static void nunused(long struct, byte value) { memPutByte(struct + hb_user_data_key_t.UNUSED, value); }
 
     // -----------------------------------
 

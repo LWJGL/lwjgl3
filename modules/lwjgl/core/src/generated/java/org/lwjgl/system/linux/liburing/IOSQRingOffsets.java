@@ -301,7 +301,7 @@ public class IOSQRingOffsets extends Struct<IOSQRingOffsets> implements NativeRe
     public static int ndropped(long struct) { return memGetInt(struct + IOSQRingOffsets.DROPPED); }
     /** Unsafe version of {@link #array}. */
     public static int narray(long struct) { return memGetInt(struct + IOSQRingOffsets.ARRAY); }
-    public static int nresv1(long struct) { return memGetInt(struct + IOSQRingOffsets.RESV1); }
+    static int nresv1(long struct) { return memGetInt(struct + IOSQRingOffsets.RESV1); }
     /** Unsafe version of {@link #user_addr}. */
     public static long nuser_addr(long struct) { return memGetLong(struct + IOSQRingOffsets.USER_ADDR); }
 
@@ -319,7 +319,7 @@ public class IOSQRingOffsets extends Struct<IOSQRingOffsets> implements NativeRe
     public static void ndropped(long struct, int value) { memPutInt(struct + IOSQRingOffsets.DROPPED, value); }
     /** Unsafe version of {@link #array(int) array}. */
     public static void narray(long struct, int value) { memPutInt(struct + IOSQRingOffsets.ARRAY, value); }
-    public static void nresv1(long struct, int value) { memPutInt(struct + IOSQRingOffsets.RESV1, value); }
+    static void nresv1(long struct, int value) { memPutInt(struct + IOSQRingOffsets.RESV1, value); }
     /** Unsafe version of {@link #user_addr(long) user_addr}. */
     public static void nuser_addr(long struct, long value) { memPutLong(struct + IOSQRingOffsets.USER_ADDR, value); }
 

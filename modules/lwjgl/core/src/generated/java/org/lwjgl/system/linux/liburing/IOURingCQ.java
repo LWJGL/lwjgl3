@@ -339,8 +339,8 @@ public class IOURingCQ extends Struct<IOURingCQ> implements NativeResource {
     public static int nring_mask(long struct) { return memGetInt(struct + IOURingCQ.RING_MASK); }
     /** Unsafe version of {@link #ring_entries}. */
     public static int nring_entries(long struct) { return memGetInt(struct + IOURingCQ.RING_ENTRIES); }
-    public static IntBuffer npad(long struct) { return memIntBuffer(struct + IOURingCQ.PAD, 2); }
-    public static int npad(long struct, int index) {
+    static IntBuffer npad(long struct) { return memIntBuffer(struct + IOURingCQ.PAD, 2); }
+    static int npad(long struct, int index) {
         return memGetInt(struct + IOURingCQ.PAD + check(index, 2) * 4);
     }
 
@@ -366,11 +366,11 @@ public class IOURingCQ extends Struct<IOURingCQ> implements NativeResource {
     public static void nring_mask(long struct, int value) { memPutInt(struct + IOURingCQ.RING_MASK, value); }
     /** Unsafe version of {@link #ring_entries(int) ring_entries}. */
     public static void nring_entries(long struct, int value) { memPutInt(struct + IOURingCQ.RING_ENTRIES, value); }
-    public static void npad(long struct, IntBuffer value) {
+    static void npad(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 2); }
         memCopy(memAddress(value), struct + IOURingCQ.PAD, value.remaining() * 4);
     }
-    public static void npad(long struct, int index, int value) {
+    static void npad(long struct, int index, int value) {
         memPutInt(struct + IOURingCQ.PAD + check(index, 2) * 4, value);
     }
 

@@ -481,8 +481,8 @@ public class StdVideoH265SequenceParameterSetVui extends Struct<StdVideoH265Sequ
     public static byte nchroma_sample_loc_type_top_field(long struct) { return memGetByte(struct + StdVideoH265SequenceParameterSetVui.CHROMA_SAMPLE_LOC_TYPE_TOP_FIELD); }
     /** Unsafe version of {@link #chroma_sample_loc_type_bottom_field}. */
     public static byte nchroma_sample_loc_type_bottom_field(long struct) { return memGetByte(struct + StdVideoH265SequenceParameterSetVui.CHROMA_SAMPLE_LOC_TYPE_BOTTOM_FIELD); }
-    public static byte nreserved1(long struct) { return memGetByte(struct + StdVideoH265SequenceParameterSetVui.RESERVED1); }
-    public static byte nreserved2(long struct) { return memGetByte(struct + StdVideoH265SequenceParameterSetVui.RESERVED2); }
+    static byte nreserved1(long struct) { return memGetByte(struct + StdVideoH265SequenceParameterSetVui.RESERVED1); }
+    static byte nreserved2(long struct) { return memGetByte(struct + StdVideoH265SequenceParameterSetVui.RESERVED2); }
     /** Unsafe version of {@link #def_disp_win_left_offset}. */
     public static short ndef_disp_win_left_offset(long struct) { return memGetShort(struct + StdVideoH265SequenceParameterSetVui.DEF_DISP_WIN_LEFT_OFFSET); }
     /** Unsafe version of {@link #def_disp_win_right_offset}. */
@@ -499,7 +499,7 @@ public class StdVideoH265SequenceParameterSetVui extends Struct<StdVideoH265Sequ
     public static int nvui_num_ticks_poc_diff_one_minus1(long struct) { return memGetInt(struct + StdVideoH265SequenceParameterSetVui.VUI_NUM_TICKS_POC_DIFF_ONE_MINUS1); }
     /** Unsafe version of {@link #min_spatial_segmentation_idc}. */
     public static short nmin_spatial_segmentation_idc(long struct) { return memGetShort(struct + StdVideoH265SequenceParameterSetVui.MIN_SPATIAL_SEGMENTATION_IDC); }
-    public static short nreserved3(long struct) { return memGetShort(struct + StdVideoH265SequenceParameterSetVui.RESERVED3); }
+    static short nreserved3(long struct) { return memGetShort(struct + StdVideoH265SequenceParameterSetVui.RESERVED3); }
     /** Unsafe version of {@link #max_bytes_per_pic_denom}. */
     public static byte nmax_bytes_per_pic_denom(long struct) { return memGetByte(struct + StdVideoH265SequenceParameterSetVui.MAX_BYTES_PER_PIC_DENOM); }
     /** Unsafe version of {@link #max_bits_per_min_cu_denom}. */
@@ -531,8 +531,8 @@ public class StdVideoH265SequenceParameterSetVui extends Struct<StdVideoH265Sequ
     public static void nchroma_sample_loc_type_top_field(long struct, byte value) { memPutByte(struct + StdVideoH265SequenceParameterSetVui.CHROMA_SAMPLE_LOC_TYPE_TOP_FIELD, value); }
     /** Unsafe version of {@link #chroma_sample_loc_type_bottom_field(byte) chroma_sample_loc_type_bottom_field}. */
     public static void nchroma_sample_loc_type_bottom_field(long struct, byte value) { memPutByte(struct + StdVideoH265SequenceParameterSetVui.CHROMA_SAMPLE_LOC_TYPE_BOTTOM_FIELD, value); }
-    public static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoH265SequenceParameterSetVui.RESERVED1, value); }
-    public static void nreserved2(long struct, byte value) { memPutByte(struct + StdVideoH265SequenceParameterSetVui.RESERVED2, value); }
+    static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoH265SequenceParameterSetVui.RESERVED1, value); }
+    static void nreserved2(long struct, byte value) { memPutByte(struct + StdVideoH265SequenceParameterSetVui.RESERVED2, value); }
     /** Unsafe version of {@link #def_disp_win_left_offset(short) def_disp_win_left_offset}. */
     public static void ndef_disp_win_left_offset(long struct, short value) { memPutShort(struct + StdVideoH265SequenceParameterSetVui.DEF_DISP_WIN_LEFT_OFFSET, value); }
     /** Unsafe version of {@link #def_disp_win_right_offset(short) def_disp_win_right_offset}. */
@@ -549,7 +549,7 @@ public class StdVideoH265SequenceParameterSetVui extends Struct<StdVideoH265Sequ
     public static void nvui_num_ticks_poc_diff_one_minus1(long struct, int value) { memPutInt(struct + StdVideoH265SequenceParameterSetVui.VUI_NUM_TICKS_POC_DIFF_ONE_MINUS1, value); }
     /** Unsafe version of {@link #min_spatial_segmentation_idc(short) min_spatial_segmentation_idc}. */
     public static void nmin_spatial_segmentation_idc(long struct, short value) { memPutShort(struct + StdVideoH265SequenceParameterSetVui.MIN_SPATIAL_SEGMENTATION_IDC, value); }
-    public static void nreserved3(long struct, short value) { memPutShort(struct + StdVideoH265SequenceParameterSetVui.RESERVED3, value); }
+    static void nreserved3(long struct, short value) { memPutShort(struct + StdVideoH265SequenceParameterSetVui.RESERVED3, value); }
     /** Unsafe version of {@link #max_bytes_per_pic_denom(byte) max_bytes_per_pic_denom}. */
     public static void nmax_bytes_per_pic_denom(long struct, byte value) { memPutByte(struct + StdVideoH265SequenceParameterSetVui.MAX_BYTES_PER_PIC_DENOM, value); }
     /** Unsafe version of {@link #max_bits_per_min_cu_denom(byte) max_bits_per_min_cu_denom}. */

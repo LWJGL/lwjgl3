@@ -408,7 +408,7 @@ public class AIScene extends Struct<AIScene> implements NativeResource {
     public static int nmNumSkeletons(long struct) { return memGetInt(struct + AIScene.MNUMSKELETONS); }
     /** Unsafe version of {@link #mSkeletons() mSkeletons}. */
     public static @Nullable PointerBuffer nmSkeletons(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIScene.MSKELETONS), nmNumSkeletons(struct)); }
-    public static ByteBuffer nmPrivate(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + AIScene.MPRIVATE), capacity); }
+    static ByteBuffer nmPrivate(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + AIScene.MPRIVATE), capacity); }
 
     /** Unsafe version of {@link #mFlags(int) mFlags}. */
     public static void nmFlags(long struct, int value) { memPutInt(struct + AIScene.MFLAGS, value); }
@@ -446,7 +446,7 @@ public class AIScene extends Struct<AIScene> implements NativeResource {
     public static void nmNumSkeletons(long struct, int value) { memPutInt(struct + AIScene.MNUMSKELETONS, value); }
     /** Unsafe version of {@link #mSkeletons(PointerBuffer) mSkeletons}. */
     public static void nmSkeletons(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + AIScene.MSKELETONS, memAddressSafe(value)); nmNumSkeletons(struct, value == null ? 0 : value.remaining()); }
-    public static void nmPrivate(long struct, ByteBuffer value) { memPutAddress(struct + AIScene.MPRIVATE, memAddress(value)); }
+    static void nmPrivate(long struct, ByteBuffer value) { memPutAddress(struct + AIScene.MPRIVATE, memAddress(value)); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

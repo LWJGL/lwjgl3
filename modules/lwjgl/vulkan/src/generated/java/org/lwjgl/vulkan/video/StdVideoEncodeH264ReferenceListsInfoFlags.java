@@ -214,19 +214,19 @@ public class StdVideoEncodeH264ReferenceListsInfoFlags extends Struct<StdVideoEn
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoEncodeH264ReferenceListsInfoFlags.BITFIELD0); }
+    static int nbitfield0(long struct) { return memGetInt(struct + StdVideoEncodeH264ReferenceListsInfoFlags.BITFIELD0); }
     /** Unsafe version of {@link #ref_pic_list_modification_l0_flag}. */
     public static int nref_pic_list_modification_l0_flag(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #ref_pic_list_modification_l1_flag}. */
     public static int nref_pic_list_modification_l1_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_02) >>> 1; }
-    public static int nreserved(long struct) { return nbitfield0(struct) >>> 2; }
+    static int nreserved(long struct) { return nbitfield0(struct) >>> 2; }
 
-    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoEncodeH264ReferenceListsInfoFlags.BITFIELD0, value); }
+    static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoEncodeH264ReferenceListsInfoFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #ref_pic_list_modification_l0_flag(boolean) ref_pic_list_modification_l0_flag}. */
     public static void nref_pic_list_modification_l0_flag(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #ref_pic_list_modification_l1_flag(boolean) ref_pic_list_modification_l1_flag}. */
     public static void nref_pic_list_modification_l1_flag(long struct, int value) { nbitfield0(struct, ((value << 1) & 0x00_00_00_02) | (nbitfield0(struct) & 0xFF_FF_FF_FD)); }
-    public static void nreserved(long struct, int value) { nbitfield0(struct, (value << 2) | (nbitfield0(struct) & 0x00_00_00_03)); }
+    static void nreserved(long struct, int value) { nbitfield0(struct, (value << 2) | (nbitfield0(struct) & 0x00_00_00_03)); }
 
     // -----------------------------------
 

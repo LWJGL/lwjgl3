@@ -475,7 +475,7 @@ public class StdVideoDecodeAV1PictureInfo extends Struct<StdVideoDecodeAV1Pictur
     public static byte nprimary_ref_frame(long struct) { return memGetByte(struct + StdVideoDecodeAV1PictureInfo.PRIMARY_REF_FRAME); }
     /** Unsafe version of {@link #refresh_frame_flags}. */
     public static byte nrefresh_frame_flags(long struct) { return memGetByte(struct + StdVideoDecodeAV1PictureInfo.REFRESH_FRAME_FLAGS); }
-    public static byte nreserved1(long struct) { return memGetByte(struct + StdVideoDecodeAV1PictureInfo.RESERVED1); }
+    static byte nreserved1(long struct) { return memGetByte(struct + StdVideoDecodeAV1PictureInfo.RESERVED1); }
     /** Unsafe version of {@link #interpolation_filter}. */
     public static int ninterpolation_filter(long struct) { return memGetInt(struct + StdVideoDecodeAV1PictureInfo.INTERPOLATION_FILTER); }
     /** Unsafe version of {@link #TxMode}. */
@@ -492,8 +492,8 @@ public class StdVideoDecodeAV1PictureInfo extends Struct<StdVideoDecodeAV1Pictur
     }
     /** Unsafe version of {@link #coded_denom}. */
     public static byte ncoded_denom(long struct) { return memGetByte(struct + StdVideoDecodeAV1PictureInfo.CODED_DENOM); }
-    public static ByteBuffer nreserved2(long struct) { return memByteBuffer(struct + StdVideoDecodeAV1PictureInfo.RESERVED2, 3); }
-    public static byte nreserved2(long struct, int index) {
+    static ByteBuffer nreserved2(long struct) { return memByteBuffer(struct + StdVideoDecodeAV1PictureInfo.RESERVED2, 3); }
+    static byte nreserved2(long struct, int index) {
         return memGetByte(struct + StdVideoDecodeAV1PictureInfo.RESERVED2 + check(index, 3) * 1);
     }
     /** Unsafe version of {@link #OrderHints}. */
@@ -537,7 +537,7 @@ public class StdVideoDecodeAV1PictureInfo extends Struct<StdVideoDecodeAV1Pictur
     public static void nprimary_ref_frame(long struct, byte value) { memPutByte(struct + StdVideoDecodeAV1PictureInfo.PRIMARY_REF_FRAME, value); }
     /** Unsafe version of {@link #refresh_frame_flags(byte) refresh_frame_flags}. */
     public static void nrefresh_frame_flags(long struct, byte value) { memPutByte(struct + StdVideoDecodeAV1PictureInfo.REFRESH_FRAME_FLAGS, value); }
-    public static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoDecodeAV1PictureInfo.RESERVED1, value); }
+    static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoDecodeAV1PictureInfo.RESERVED1, value); }
     /** Unsafe version of {@link #interpolation_filter(int) interpolation_filter}. */
     public static void ninterpolation_filter(long struct, int value) { memPutInt(struct + StdVideoDecodeAV1PictureInfo.INTERPOLATION_FILTER, value); }
     /** Unsafe version of {@link #TxMode(int) TxMode}. */
@@ -557,11 +557,11 @@ public class StdVideoDecodeAV1PictureInfo extends Struct<StdVideoDecodeAV1Pictur
     }
     /** Unsafe version of {@link #coded_denom(byte) coded_denom}. */
     public static void ncoded_denom(long struct, byte value) { memPutByte(struct + StdVideoDecodeAV1PictureInfo.CODED_DENOM, value); }
-    public static void nreserved2(long struct, ByteBuffer value) {
+    static void nreserved2(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + StdVideoDecodeAV1PictureInfo.RESERVED2, value.remaining() * 1);
     }
-    public static void nreserved2(long struct, int index, byte value) {
+    static void nreserved2(long struct, int index, byte value) {
         memPutByte(struct + StdVideoDecodeAV1PictureInfo.RESERVED2 + check(index, 3) * 1, value);
     }
     /** Unsafe version of {@link #OrderHints(ByteBuffer) OrderHints}. */

@@ -262,7 +262,7 @@ public class StdVideoVP9ColorConfig extends Struct<StdVideoVP9ColorConfig> imple
     public static byte nsubsampling_x(long struct) { return memGetByte(struct + StdVideoVP9ColorConfig.SUBSAMPLING_X); }
     /** Unsafe version of {@link #subsampling_y}. */
     public static byte nsubsampling_y(long struct) { return memGetByte(struct + StdVideoVP9ColorConfig.SUBSAMPLING_Y); }
-    public static byte nreserved1(long struct) { return memGetByte(struct + StdVideoVP9ColorConfig.RESERVED1); }
+    static byte nreserved1(long struct) { return memGetByte(struct + StdVideoVP9ColorConfig.RESERVED1); }
     /** Unsafe version of {@link #color_space}. */
     public static int ncolor_space(long struct) { return memGetInt(struct + StdVideoVP9ColorConfig.COLOR_SPACE); }
 
@@ -274,7 +274,7 @@ public class StdVideoVP9ColorConfig extends Struct<StdVideoVP9ColorConfig> imple
     public static void nsubsampling_x(long struct, byte value) { memPutByte(struct + StdVideoVP9ColorConfig.SUBSAMPLING_X, value); }
     /** Unsafe version of {@link #subsampling_y(byte) subsampling_y}. */
     public static void nsubsampling_y(long struct, byte value) { memPutByte(struct + StdVideoVP9ColorConfig.SUBSAMPLING_Y, value); }
-    public static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoVP9ColorConfig.RESERVED1, value); }
+    static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoVP9ColorConfig.RESERVED1, value); }
     /** Unsafe version of {@link #color_space(int) color_space}. */
     public static void ncolor_space(long struct, int value) { memPutInt(struct + StdVideoVP9ColorConfig.COLOR_SPACE, value); }
 

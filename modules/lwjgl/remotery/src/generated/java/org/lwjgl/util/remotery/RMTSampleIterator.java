@@ -125,6 +125,6 @@ public class RMTSampleIterator extends Struct<RMTSampleIterator> implements Nati
 
     /** Unsafe version of {@link #sample}. */
     public static long nsample(long struct) { return memGetAddress(struct + RMTSampleIterator.SAMPLE); }
-    public static long ninitial(long struct) { return memGetAddress(struct + RMTSampleIterator.INITIAL); }
+    static long ninitial(long struct) { return memGetAddress(struct + RMTSampleIterator.INITIAL); }
 
 }

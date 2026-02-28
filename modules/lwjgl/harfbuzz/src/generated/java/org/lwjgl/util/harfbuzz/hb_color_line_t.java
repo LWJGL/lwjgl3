@@ -294,15 +294,15 @@ public class hb_color_line_t extends Struct<hb_color_line_t> implements NativeRe
     public static hb_color_line_get_extend_func_t nget_extend(long struct) { return hb_color_line_get_extend_func_t.create(memGetAddress(struct + hb_color_line_t.GET_EXTEND)); }
     /** Unsafe version of {@link #get_extend_user_data}. */
     public static long nget_extend_user_data(long struct) { return memGetAddress(struct + hb_color_line_t.GET_EXTEND_USER_DATA); }
-    public static long nreserved0(long struct) { return memGetAddress(struct + hb_color_line_t.RESERVED0); }
-    public static long nreserved1(long struct) { return memGetAddress(struct + hb_color_line_t.RESERVED1); }
-    public static long nreserved2(long struct) { return memGetAddress(struct + hb_color_line_t.RESERVED2); }
-    public static long nreserved3(long struct) { return memGetAddress(struct + hb_color_line_t.RESERVED3); }
-    public static long nreserved4(long struct) { return memGetAddress(struct + hb_color_line_t.RESERVED4); }
-    public static long nreserved5(long struct) { return memGetAddress(struct + hb_color_line_t.RESERVED5); }
-    public static long nreserved6(long struct) { return memGetAddress(struct + hb_color_line_t.RESERVED6); }
-    public static long nreserved7(long struct) { return memGetAddress(struct + hb_color_line_t.RESERVED7); }
-    public static long nreserved8(long struct) { return memGetAddress(struct + hb_color_line_t.RESERVED8); }
+    static long nreserved0(long struct) { return memGetAddress(struct + hb_color_line_t.RESERVED0); }
+    static long nreserved1(long struct) { return memGetAddress(struct + hb_color_line_t.RESERVED1); }
+    static long nreserved2(long struct) { return memGetAddress(struct + hb_color_line_t.RESERVED2); }
+    static long nreserved3(long struct) { return memGetAddress(struct + hb_color_line_t.RESERVED3); }
+    static long nreserved4(long struct) { return memGetAddress(struct + hb_color_line_t.RESERVED4); }
+    static long nreserved5(long struct) { return memGetAddress(struct + hb_color_line_t.RESERVED5); }
+    static long nreserved6(long struct) { return memGetAddress(struct + hb_color_line_t.RESERVED6); }
+    static long nreserved7(long struct) { return memGetAddress(struct + hb_color_line_t.RESERVED7); }
+    static long nreserved8(long struct) { return memGetAddress(struct + hb_color_line_t.RESERVED8); }
 
     /** Unsafe version of {@link #data(long) data}. */
     public static void ndata(long struct, long value) { memPutAddress(struct + hb_color_line_t.DATA, check(value)); }
@@ -314,15 +314,15 @@ public class hb_color_line_t extends Struct<hb_color_line_t> implements NativeRe
     public static void nget_extend(long struct, hb_color_line_get_extend_func_tI value) { memPutAddress(struct + hb_color_line_t.GET_EXTEND, value.address()); }
     /** Unsafe version of {@link #get_extend_user_data(long) get_extend_user_data}. */
     public static void nget_extend_user_data(long struct, long value) { memPutAddress(struct + hb_color_line_t.GET_EXTEND_USER_DATA, value); }
-    public static void nreserved0(long struct, long value) { memPutAddress(struct + hb_color_line_t.RESERVED0, value); }
-    public static void nreserved1(long struct, long value) { memPutAddress(struct + hb_color_line_t.RESERVED1, value); }
-    public static void nreserved2(long struct, long value) { memPutAddress(struct + hb_color_line_t.RESERVED2, value); }
-    public static void nreserved3(long struct, long value) { memPutAddress(struct + hb_color_line_t.RESERVED3, value); }
-    public static void nreserved4(long struct, long value) { memPutAddress(struct + hb_color_line_t.RESERVED4, value); }
-    public static void nreserved5(long struct, long value) { memPutAddress(struct + hb_color_line_t.RESERVED5, value); }
-    public static void nreserved6(long struct, long value) { memPutAddress(struct + hb_color_line_t.RESERVED6, value); }
-    public static void nreserved7(long struct, long value) { memPutAddress(struct + hb_color_line_t.RESERVED7, value); }
-    public static void nreserved8(long struct, long value) { memPutAddress(struct + hb_color_line_t.RESERVED8, value); }
+    static void nreserved0(long struct, long value) { memPutAddress(struct + hb_color_line_t.RESERVED0, value); }
+    static void nreserved1(long struct, long value) { memPutAddress(struct + hb_color_line_t.RESERVED1, value); }
+    static void nreserved2(long struct, long value) { memPutAddress(struct + hb_color_line_t.RESERVED2, value); }
+    static void nreserved3(long struct, long value) { memPutAddress(struct + hb_color_line_t.RESERVED3, value); }
+    static void nreserved4(long struct, long value) { memPutAddress(struct + hb_color_line_t.RESERVED4, value); }
+    static void nreserved5(long struct, long value) { memPutAddress(struct + hb_color_line_t.RESERVED5, value); }
+    static void nreserved6(long struct, long value) { memPutAddress(struct + hb_color_line_t.RESERVED6, value); }
+    static void nreserved7(long struct, long value) { memPutAddress(struct + hb_color_line_t.RESERVED7, value); }
+    static void nreserved8(long struct, long value) { memPutAddress(struct + hb_color_line_t.RESERVED8, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

@@ -317,8 +317,8 @@ public class IOURingParams extends Struct<IOURingParams> implements NativeResour
     public static int nfeatures(long struct) { return memGetInt(struct + IOURingParams.FEATURES); }
     /** Unsafe version of {@link #wq_fd}. */
     public static int nwq_fd(long struct) { return memGetInt(struct + IOURingParams.WQ_FD); }
-    public static IntBuffer nresv(long struct) { return memIntBuffer(struct + IOURingParams.RESV, 3); }
-    public static int nresv(long struct, int index) {
+    static IntBuffer nresv(long struct) { return memIntBuffer(struct + IOURingParams.RESV, 3); }
+    static int nresv(long struct, int index) {
         return memGetInt(struct + IOURingParams.RESV + check(index, 3) * 4);
     }
     /** Unsafe version of {@link #sq_off}. */
@@ -340,11 +340,11 @@ public class IOURingParams extends Struct<IOURingParams> implements NativeResour
     public static void nfeatures(long struct, int value) { memPutInt(struct + IOURingParams.FEATURES, value); }
     /** Unsafe version of {@link #wq_fd(int) wq_fd}. */
     public static void nwq_fd(long struct, int value) { memPutInt(struct + IOURingParams.WQ_FD, value); }
-    public static void nresv(long struct, IntBuffer value) {
+    static void nresv(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + IOURingParams.RESV, value.remaining() * 4);
     }
-    public static void nresv(long struct, int index, int value) {
+    static void nresv(long struct, int index, int value) {
         memPutInt(struct + IOURingParams.RESV + check(index, 3) * 4, value);
     }
     /** Unsafe version of {@link #sq_off(IOSQRingOffsets) sq_off}. */

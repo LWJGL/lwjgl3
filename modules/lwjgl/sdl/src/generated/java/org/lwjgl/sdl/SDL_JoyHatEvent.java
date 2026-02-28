@@ -263,7 +263,7 @@ public class SDL_JoyHatEvent extends Struct<SDL_JoyHatEvent> implements NativeRe
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_JoyHatEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_JoyHatEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_JoyHatEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_JoyHatEvent.TIMESTAMP); }
     /** Unsafe version of {@link #which}. */
@@ -272,12 +272,12 @@ public class SDL_JoyHatEvent extends Struct<SDL_JoyHatEvent> implements NativeRe
     public static byte nhat(long struct) { return memGetByte(struct + SDL_JoyHatEvent.HAT); }
     /** Unsafe version of {@link #value}. */
     public static byte nvalue(long struct) { return memGetByte(struct + SDL_JoyHatEvent.VALUE); }
-    public static byte npadding1(long struct) { return memGetByte(struct + SDL_JoyHatEvent.PADDING1); }
-    public static byte npadding2(long struct) { return memGetByte(struct + SDL_JoyHatEvent.PADDING2); }
+    static byte npadding1(long struct) { return memGetByte(struct + SDL_JoyHatEvent.PADDING1); }
+    static byte npadding2(long struct) { return memGetByte(struct + SDL_JoyHatEvent.PADDING2); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_JoyHatEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_JoyHatEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_JoyHatEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_JoyHatEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #which(int) which}. */
@@ -286,8 +286,8 @@ public class SDL_JoyHatEvent extends Struct<SDL_JoyHatEvent> implements NativeRe
     public static void nhat(long struct, byte value) { memPutByte(struct + SDL_JoyHatEvent.HAT, value); }
     /** Unsafe version of {@link #value(byte) value}. */
     public static void nvalue(long struct, byte value) { memPutByte(struct + SDL_JoyHatEvent.VALUE, value); }
-    public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_JoyHatEvent.PADDING1, value); }
-    public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_JoyHatEvent.PADDING2, value); }
+    static void npadding1(long struct, byte value) { memPutByte(struct + SDL_JoyHatEvent.PADDING1, value); }
+    static void npadding2(long struct, byte value) { memPutByte(struct + SDL_JoyHatEvent.PADDING2, value); }
 
     // -----------------------------------
 

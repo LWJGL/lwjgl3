@@ -259,9 +259,9 @@ public class SDL_GPUStorageTextureReadWriteBinding extends Struct<SDL_GPUStorage
     public static int nlayer(long struct) { return memGetInt(struct + SDL_GPUStorageTextureReadWriteBinding.LAYER); }
     /** Unsafe version of {@link #cycle}. */
     public static boolean ncycle(long struct) { return memGetByte(struct + SDL_GPUStorageTextureReadWriteBinding.CYCLE) != 0; }
-    public static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUStorageTextureReadWriteBinding.PADDING1); }
-    public static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUStorageTextureReadWriteBinding.PADDING2); }
-    public static byte npadding3(long struct) { return memGetByte(struct + SDL_GPUStorageTextureReadWriteBinding.PADDING3); }
+    static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUStorageTextureReadWriteBinding.PADDING1); }
+    static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUStorageTextureReadWriteBinding.PADDING2); }
+    static byte npadding3(long struct) { return memGetByte(struct + SDL_GPUStorageTextureReadWriteBinding.PADDING3); }
 
     /** Unsafe version of {@link #texture(long) texture}. */
     public static void ntexture(long struct, long value) { memPutAddress(struct + SDL_GPUStorageTextureReadWriteBinding.TEXTURE, check(value)); }
@@ -271,9 +271,9 @@ public class SDL_GPUStorageTextureReadWriteBinding extends Struct<SDL_GPUStorage
     public static void nlayer(long struct, int value) { memPutInt(struct + SDL_GPUStorageTextureReadWriteBinding.LAYER, value); }
     /** Unsafe version of {@link #cycle(boolean) cycle}. */
     public static void ncycle(long struct, boolean value) { memPutByte(struct + SDL_GPUStorageTextureReadWriteBinding.CYCLE, value ? (byte)1 : (byte)0); }
-    public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUStorageTextureReadWriteBinding.PADDING1, value); }
-    public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUStorageTextureReadWriteBinding.PADDING2, value); }
-    public static void npadding3(long struct, byte value) { memPutByte(struct + SDL_GPUStorageTextureReadWriteBinding.PADDING3, value); }
+    static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUStorageTextureReadWriteBinding.PADDING1, value); }
+    static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUStorageTextureReadWriteBinding.PADDING2, value); }
+    static void npadding3(long struct, byte value) { memPutByte(struct + SDL_GPUStorageTextureReadWriteBinding.PADDING3, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

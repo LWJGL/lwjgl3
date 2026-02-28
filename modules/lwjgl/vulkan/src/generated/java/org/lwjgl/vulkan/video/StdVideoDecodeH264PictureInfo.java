@@ -283,8 +283,8 @@ public class StdVideoDecodeH264PictureInfo extends Struct<StdVideoDecodeH264Pict
     public static byte nseq_parameter_set_id(long struct) { return memGetByte(struct + StdVideoDecodeH264PictureInfo.SEQ_PARAMETER_SET_ID); }
     /** Unsafe version of {@link #pic_parameter_set_id}. */
     public static byte npic_parameter_set_id(long struct) { return memGetByte(struct + StdVideoDecodeH264PictureInfo.PIC_PARAMETER_SET_ID); }
-    public static byte nreserved1(long struct) { return memGetByte(struct + StdVideoDecodeH264PictureInfo.RESERVED1); }
-    public static byte nreserved2(long struct) { return memGetByte(struct + StdVideoDecodeH264PictureInfo.RESERVED2); }
+    static byte nreserved1(long struct) { return memGetByte(struct + StdVideoDecodeH264PictureInfo.RESERVED1); }
+    static byte nreserved2(long struct) { return memGetByte(struct + StdVideoDecodeH264PictureInfo.RESERVED2); }
     /** Unsafe version of {@link #frame_num}. */
     public static short nframe_num(long struct) { return memGetShort(struct + StdVideoDecodeH264PictureInfo.FRAME_NUM); }
     /** Unsafe version of {@link #idr_pic_id}. */
@@ -302,8 +302,8 @@ public class StdVideoDecodeH264PictureInfo extends Struct<StdVideoDecodeH264Pict
     public static void nseq_parameter_set_id(long struct, byte value) { memPutByte(struct + StdVideoDecodeH264PictureInfo.SEQ_PARAMETER_SET_ID, value); }
     /** Unsafe version of {@link #pic_parameter_set_id(byte) pic_parameter_set_id}. */
     public static void npic_parameter_set_id(long struct, byte value) { memPutByte(struct + StdVideoDecodeH264PictureInfo.PIC_PARAMETER_SET_ID, value); }
-    public static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoDecodeH264PictureInfo.RESERVED1, value); }
-    public static void nreserved2(long struct, byte value) { memPutByte(struct + StdVideoDecodeH264PictureInfo.RESERVED2, value); }
+    static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoDecodeH264PictureInfo.RESERVED1, value); }
+    static void nreserved2(long struct, byte value) { memPutByte(struct + StdVideoDecodeH264PictureInfo.RESERVED2, value); }
     /** Unsafe version of {@link #frame_num(short) frame_num}. */
     public static void nframe_num(long struct, short value) { memPutShort(struct + StdVideoDecodeH264PictureInfo.FRAME_NUM, value); }
     /** Unsafe version of {@link #idr_pic_id(short) idr_pic_id}. */

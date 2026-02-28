@@ -233,17 +233,17 @@ public class SDL_GPUStorageBufferReadWriteBinding extends Struct<SDL_GPUStorageB
     public static long nbuffer(long struct) { return memGetAddress(struct + SDL_GPUStorageBufferReadWriteBinding.BUFFER); }
     /** Unsafe version of {@link #cycle}. */
     public static boolean ncycle(long struct) { return memGetByte(struct + SDL_GPUStorageBufferReadWriteBinding.CYCLE) != 0; }
-    public static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUStorageBufferReadWriteBinding.PADDING1); }
-    public static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUStorageBufferReadWriteBinding.PADDING2); }
-    public static byte npadding3(long struct) { return memGetByte(struct + SDL_GPUStorageBufferReadWriteBinding.PADDING3); }
+    static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUStorageBufferReadWriteBinding.PADDING1); }
+    static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUStorageBufferReadWriteBinding.PADDING2); }
+    static byte npadding3(long struct) { return memGetByte(struct + SDL_GPUStorageBufferReadWriteBinding.PADDING3); }
 
     /** Unsafe version of {@link #buffer(long) buffer}. */
     public static void nbuffer(long struct, long value) { memPutAddress(struct + SDL_GPUStorageBufferReadWriteBinding.BUFFER, check(value)); }
     /** Unsafe version of {@link #cycle(boolean) cycle}. */
     public static void ncycle(long struct, boolean value) { memPutByte(struct + SDL_GPUStorageBufferReadWriteBinding.CYCLE, value ? (byte)1 : (byte)0); }
-    public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUStorageBufferReadWriteBinding.PADDING1, value); }
-    public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUStorageBufferReadWriteBinding.PADDING2, value); }
-    public static void npadding3(long struct, byte value) { memPutByte(struct + SDL_GPUStorageBufferReadWriteBinding.PADDING3, value); }
+    static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUStorageBufferReadWriteBinding.PADDING1, value); }
+    static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUStorageBufferReadWriteBinding.PADDING2, value); }
+    static void npadding3(long struct, byte value) { memPutByte(struct + SDL_GPUStorageBufferReadWriteBinding.PADDING3, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

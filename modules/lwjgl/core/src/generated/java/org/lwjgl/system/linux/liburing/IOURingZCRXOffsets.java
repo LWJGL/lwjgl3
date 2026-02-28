@@ -243,9 +243,9 @@ public class IOURingZCRXOffsets extends Struct<IOURingZCRXOffsets> implements Na
     public static int ntail(long struct) { return memGetInt(struct + IOURingZCRXOffsets.TAIL); }
     /** Unsafe version of {@link #rqes}. */
     public static int nrqes(long struct) { return memGetInt(struct + IOURingZCRXOffsets.RQES); }
-    public static int n__resv2(long struct) { return memGetInt(struct + IOURingZCRXOffsets.__RESV2); }
-    public static LongBuffer n__resv(long struct) { return memLongBuffer(struct + IOURingZCRXOffsets.__RESV, 2); }
-    public static long n__resv(long struct, int index) {
+    static int n__resv2(long struct) { return memGetInt(struct + IOURingZCRXOffsets.__RESV2); }
+    static LongBuffer n__resv(long struct) { return memLongBuffer(struct + IOURingZCRXOffsets.__RESV, 2); }
+    static long n__resv(long struct, int index) {
         return memGetLong(struct + IOURingZCRXOffsets.__RESV + check(index, 2) * 8);
     }
 
@@ -255,12 +255,12 @@ public class IOURingZCRXOffsets extends Struct<IOURingZCRXOffsets> implements Na
     public static void ntail(long struct, int value) { memPutInt(struct + IOURingZCRXOffsets.TAIL, value); }
     /** Unsafe version of {@link #rqes(int) rqes}. */
     public static void nrqes(long struct, int value) { memPutInt(struct + IOURingZCRXOffsets.RQES, value); }
-    public static void n__resv2(long struct, int value) { memPutInt(struct + IOURingZCRXOffsets.__RESV2, value); }
-    public static void n__resv(long struct, LongBuffer value) {
+    static void n__resv2(long struct, int value) { memPutInt(struct + IOURingZCRXOffsets.__RESV2, value); }
+    static void n__resv(long struct, LongBuffer value) {
         if (CHECKS) { checkGT(value, 2); }
         memCopy(memAddress(value), struct + IOURingZCRXOffsets.__RESV, value.remaining() * 8);
     }
-    public static void n__resv(long struct, int index, long value) {
+    static void n__resv(long struct, int index, long value) {
         memPutLong(struct + IOURingZCRXOffsets.__RESV + check(index, 2) * 8, value);
     }
 

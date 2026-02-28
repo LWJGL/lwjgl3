@@ -243,7 +243,7 @@ public class SDL_PinchFingerEvent extends Struct<SDL_PinchFingerEvent> implement
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_PinchFingerEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_PinchFingerEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_PinchFingerEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_PinchFingerEvent.TIMESTAMP); }
     /** Unsafe version of {@link #scale}. */
@@ -253,7 +253,7 @@ public class SDL_PinchFingerEvent extends Struct<SDL_PinchFingerEvent> implement
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_PinchFingerEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_PinchFingerEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_PinchFingerEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_PinchFingerEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #scale(float) scale}. */

@@ -249,7 +249,7 @@ public class VkClusterAccelerationStructureInstantiateClusterInfoNV extends Stru
 
     /** Unsafe version of {@link #clusterIdOffset}. */
     public static int nclusterIdOffset(long struct) { return memGetInt(struct + VkClusterAccelerationStructureInstantiateClusterInfoNV.CLUSTERIDOFFSET); }
-    public static int nbitfield0(long struct) { return memGetInt(struct + VkClusterAccelerationStructureInstantiateClusterInfoNV.BITFIELD0); }
+    static int nbitfield0(long struct) { return memGetInt(struct + VkClusterAccelerationStructureInstantiateClusterInfoNV.BITFIELD0); }
     /** Unsafe version of {@link #geometryIndexOffset}. */
     public static int ngeometryIndexOffset(long struct) { return nbitfield0(struct) & 0x00_FF_FF_FF; }
     /** Unsafe version of {@link #reserved}. */
@@ -261,7 +261,7 @@ public class VkClusterAccelerationStructureInstantiateClusterInfoNV extends Stru
 
     /** Unsafe version of {@link #clusterIdOffset(int) clusterIdOffset}. */
     public static void nclusterIdOffset(long struct, int value) { memPutInt(struct + VkClusterAccelerationStructureInstantiateClusterInfoNV.CLUSTERIDOFFSET, value); }
-    public static void nbitfield0(long struct, int value) { memPutInt(struct + VkClusterAccelerationStructureInstantiateClusterInfoNV.BITFIELD0, value); }
+    static void nbitfield0(long struct, int value) { memPutInt(struct + VkClusterAccelerationStructureInstantiateClusterInfoNV.BITFIELD0, value); }
     /** Unsafe version of {@link #geometryIndexOffset(int) geometryIndexOffset}. */
     public static void ngeometryIndexOffset(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_00_00_00) | (value & 0x00_FF_FF_FF)); }
     /** Unsafe version of {@link #reserved(int) reserved}. */

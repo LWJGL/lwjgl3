@@ -117,7 +117,7 @@ public class FT_Glyph extends Struct<FT_Glyph> {
 
     /** Unsafe version of {@link #library}. */
     public static long nlibrary(long struct) { return memGetAddress(struct + FT_Glyph.LIBRARY); }
-    public static long nclazz(long struct) { return memGetAddress(struct + FT_Glyph.CLAZZ); }
+    static long nclazz(long struct) { return memGetAddress(struct + FT_Glyph.CLAZZ); }
     /** Unsafe version of {@link #format}. */
     public static int nformat(long struct) { return memGetInt(struct + FT_Glyph.FORMAT); }
     /** Unsafe version of {@link #advance}. */

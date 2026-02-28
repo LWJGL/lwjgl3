@@ -245,9 +245,9 @@ public class IOURingRestriction extends Struct<IOURingRestriction> implements Na
     public static byte nsqe_op(long struct) { return memGetByte(struct + IOURingRestriction.SQE_OP); }
     /** Unsafe version of {@link #sqe_flags}. */
     public static byte nsqe_flags(long struct) { return memGetByte(struct + IOURingRestriction.SQE_FLAGS); }
-    public static byte nresv(long struct) { return memGetByte(struct + IOURingRestriction.RESV); }
-    public static IntBuffer nresv2(long struct) { return memIntBuffer(struct + IOURingRestriction.RESV2, 3); }
-    public static int nresv2(long struct, int index) {
+    static byte nresv(long struct) { return memGetByte(struct + IOURingRestriction.RESV); }
+    static IntBuffer nresv2(long struct) { return memIntBuffer(struct + IOURingRestriction.RESV2, 3); }
+    static int nresv2(long struct, int index) {
         return memGetInt(struct + IOURingRestriction.RESV2 + check(index, 3) * 4);
     }
 
@@ -259,12 +259,12 @@ public class IOURingRestriction extends Struct<IOURingRestriction> implements Na
     public static void nsqe_op(long struct, byte value) { memPutByte(struct + IOURingRestriction.SQE_OP, value); }
     /** Unsafe version of {@link #sqe_flags(byte) sqe_flags}. */
     public static void nsqe_flags(long struct, byte value) { memPutByte(struct + IOURingRestriction.SQE_FLAGS, value); }
-    public static void nresv(long struct, byte value) { memPutByte(struct + IOURingRestriction.RESV, value); }
-    public static void nresv2(long struct, IntBuffer value) {
+    static void nresv(long struct, byte value) { memPutByte(struct + IOURingRestriction.RESV, value); }
+    static void nresv2(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + IOURingRestriction.RESV2, value.remaining() * 4);
     }
-    public static void nresv2(long struct, int index, int value) {
+    static void nresv2(long struct, int index, int value) {
         memPutInt(struct + IOURingRestriction.RESV2 + check(index, 3) * 4, value);
     }
 

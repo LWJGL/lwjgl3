@@ -347,8 +347,8 @@ public class SDL_GPUColorTargetInfo extends Struct<SDL_GPUColorTargetInfo> imple
     public static boolean ncycle(long struct) { return memGetByte(struct + SDL_GPUColorTargetInfo.CYCLE) != 0; }
     /** Unsafe version of {@link #cycle_resolve_texture}. */
     public static boolean ncycle_resolve_texture(long struct) { return memGetByte(struct + SDL_GPUColorTargetInfo.CYCLE_RESOLVE_TEXTURE) != 0; }
-    public static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUColorTargetInfo.PADDING1); }
-    public static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUColorTargetInfo.PADDING2); }
+    static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUColorTargetInfo.PADDING1); }
+    static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUColorTargetInfo.PADDING2); }
 
     /** Unsafe version of {@link #texture(long) texture}. */
     public static void ntexture(long struct, long value) { memPutAddress(struct + SDL_GPUColorTargetInfo.TEXTURE, check(value)); }
@@ -372,8 +372,8 @@ public class SDL_GPUColorTargetInfo extends Struct<SDL_GPUColorTargetInfo> imple
     public static void ncycle(long struct, boolean value) { memPutByte(struct + SDL_GPUColorTargetInfo.CYCLE, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #cycle_resolve_texture(boolean) cycle_resolve_texture}. */
     public static void ncycle_resolve_texture(long struct, boolean value) { memPutByte(struct + SDL_GPUColorTargetInfo.CYCLE_RESOLVE_TEXTURE, value ? (byte)1 : (byte)0); }
-    public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUColorTargetInfo.PADDING1, value); }
-    public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUColorTargetInfo.PADDING2, value); }
+    static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUColorTargetInfo.PADDING1, value); }
+    static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUColorTargetInfo.PADDING2, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

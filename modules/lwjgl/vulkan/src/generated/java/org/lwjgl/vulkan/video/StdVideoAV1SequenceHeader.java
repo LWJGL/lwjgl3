@@ -365,8 +365,8 @@ public class StdVideoAV1SequenceHeader extends Struct<StdVideoAV1SequenceHeader>
     public static byte nseq_force_integer_mv(long struct) { return memGetByte(struct + StdVideoAV1SequenceHeader.SEQ_FORCE_INTEGER_MV); }
     /** Unsafe version of {@link #seq_force_screen_content_tools}. */
     public static byte nseq_force_screen_content_tools(long struct) { return memGetByte(struct + StdVideoAV1SequenceHeader.SEQ_FORCE_SCREEN_CONTENT_TOOLS); }
-    public static ByteBuffer nreserved1(long struct) { return memByteBuffer(struct + StdVideoAV1SequenceHeader.RESERVED1, 5); }
-    public static byte nreserved1(long struct, int index) {
+    static ByteBuffer nreserved1(long struct) { return memByteBuffer(struct + StdVideoAV1SequenceHeader.RESERVED1, 5); }
+    static byte nreserved1(long struct, int index) {
         return memGetByte(struct + StdVideoAV1SequenceHeader.RESERVED1 + check(index, 5) * 1);
     }
     /** Unsafe version of {@link #pColorConfig}. */
@@ -396,11 +396,11 @@ public class StdVideoAV1SequenceHeader extends Struct<StdVideoAV1SequenceHeader>
     public static void nseq_force_integer_mv(long struct, byte value) { memPutByte(struct + StdVideoAV1SequenceHeader.SEQ_FORCE_INTEGER_MV, value); }
     /** Unsafe version of {@link #seq_force_screen_content_tools(byte) seq_force_screen_content_tools}. */
     public static void nseq_force_screen_content_tools(long struct, byte value) { memPutByte(struct + StdVideoAV1SequenceHeader.SEQ_FORCE_SCREEN_CONTENT_TOOLS, value); }
-    public static void nreserved1(long struct, ByteBuffer value) {
+    static void nreserved1(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 5); }
         memCopy(memAddress(value), struct + StdVideoAV1SequenceHeader.RESERVED1, value.remaining() * 1);
     }
-    public static void nreserved1(long struct, int index, byte value) {
+    static void nreserved1(long struct, int index, byte value) {
         memPutByte(struct + StdVideoAV1SequenceHeader.RESERVED1 + check(index, 5) * 1, value);
     }
     /** Unsafe version of {@link #pColorConfig(StdVideoAV1ColorConfig) pColorConfig}. */

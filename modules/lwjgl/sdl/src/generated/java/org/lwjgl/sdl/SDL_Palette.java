@@ -199,8 +199,8 @@ public class SDL_Palette extends Struct<SDL_Palette> implements NativeResource {
     public static int nncolors(long struct) { return memGetInt(struct + SDL_Palette.NCOLORS); }
     /** Unsafe version of {@link #colors}. */
     public static SDL_Color.Buffer ncolors(long struct) { return SDL_Color.create(memGetAddress(struct + SDL_Palette.COLORS), nncolors(struct)); }
-    public static int nversion(long struct) { return memGetInt(struct + SDL_Palette.VERSION); }
-    public static int nrefcount(long struct) { return memGetInt(struct + SDL_Palette.REFCOUNT); }
+    static int nversion(long struct) { return memGetInt(struct + SDL_Palette.VERSION); }
+    static int nrefcount(long struct) { return memGetInt(struct + SDL_Palette.REFCOUNT); }
 
     // -----------------------------------
 

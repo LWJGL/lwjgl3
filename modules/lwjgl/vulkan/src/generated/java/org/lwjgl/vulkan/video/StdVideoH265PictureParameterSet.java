@@ -659,8 +659,8 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
     public static byte nnum_tile_columns_minus1(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.NUM_TILE_COLUMNS_MINUS1); }
     /** Unsafe version of {@link #num_tile_rows_minus1}. */
     public static byte nnum_tile_rows_minus1(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.NUM_TILE_ROWS_MINUS1); }
-    public static byte nreserved1(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.RESERVED1); }
-    public static byte nreserved2(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.RESERVED2); }
+    static byte nreserved1(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.RESERVED1); }
+    static byte nreserved2(long struct) { return memGetByte(struct + StdVideoH265PictureParameterSet.RESERVED2); }
     /** Unsafe version of {@link #column_width_minus1}. */
     public static ShortBuffer ncolumn_width_minus1(long struct) { return memShortBuffer(struct + StdVideoH265PictureParameterSet.COLUMN_WIDTH_MINUS1, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE); }
     /** Unsafe version of {@link #column_width_minus1(int) column_width_minus1}. */
@@ -673,7 +673,7 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
     public static short nrow_height_minus1(long struct, int index) {
         return memGetShort(struct + StdVideoH265PictureParameterSet.ROW_HEIGHT_MINUS1 + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE) * 2);
     }
-    public static int nreserved3(long struct) { return memGetInt(struct + StdVideoH265PictureParameterSet.RESERVED3); }
+    static int nreserved3(long struct) { return memGetInt(struct + StdVideoH265PictureParameterSet.RESERVED3); }
     /** Unsafe version of {@link #pScalingLists}. */
     public static StdVideoH265ScalingLists npScalingLists(long struct) { return StdVideoH265ScalingLists.create(memGetAddress(struct + StdVideoH265PictureParameterSet.PSCALINGLISTS)); }
     /** Unsafe version of {@link #pPredictorPaletteEntries}. */
@@ -751,8 +751,8 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
     public static void nnum_tile_columns_minus1(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.NUM_TILE_COLUMNS_MINUS1, value); }
     /** Unsafe version of {@link #num_tile_rows_minus1(byte) num_tile_rows_minus1}. */
     public static void nnum_tile_rows_minus1(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.NUM_TILE_ROWS_MINUS1, value); }
-    public static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.RESERVED1, value); }
-    public static void nreserved2(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.RESERVED2, value); }
+    static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.RESERVED1, value); }
+    static void nreserved2(long struct, byte value) { memPutByte(struct + StdVideoH265PictureParameterSet.RESERVED2, value); }
     /** Unsafe version of {@link #column_width_minus1(ShortBuffer) column_width_minus1}. */
     public static void ncolumn_width_minus1(long struct, ShortBuffer value) {
         if (CHECKS) { checkGT(value, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE); }
@@ -771,7 +771,7 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
     public static void nrow_height_minus1(long struct, int index, short value) {
         memPutShort(struct + StdVideoH265PictureParameterSet.ROW_HEIGHT_MINUS1 + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE) * 2, value);
     }
-    public static void nreserved3(long struct, int value) { memPutInt(struct + StdVideoH265PictureParameterSet.RESERVED3, value); }
+    static void nreserved3(long struct, int value) { memPutInt(struct + StdVideoH265PictureParameterSet.RESERVED3, value); }
     /** Unsafe version of {@link #pScalingLists(StdVideoH265ScalingLists) pScalingLists}. */
     public static void npScalingLists(long struct, StdVideoH265ScalingLists value) { memPutAddress(struct + StdVideoH265PictureParameterSet.PSCALINGLISTS, value.address()); }
     /** Unsafe version of {@link #pPredictorPaletteEntries(StdVideoH265PredictorPaletteEntries) pPredictorPaletteEntries}. */

@@ -225,13 +225,13 @@ public class IOURingZCRXRQE extends Struct<IOURingZCRXRQE> implements NativeReso
     public static long noff(long struct) { return memGetLong(struct + IOURingZCRXRQE.OFF); }
     /** Unsafe version of {@link #len}. */
     public static int nlen(long struct) { return memGetInt(struct + IOURingZCRXRQE.LEN); }
-    public static int n__pad(long struct) { return memGetInt(struct + IOURingZCRXRQE.__PAD); }
+    static int n__pad(long struct) { return memGetInt(struct + IOURingZCRXRQE.__PAD); }
 
     /** Unsafe version of {@link #off(long) off}. */
     public static void noff(long struct, long value) { memPutLong(struct + IOURingZCRXRQE.OFF, value); }
     /** Unsafe version of {@link #len(int) len}. */
     public static void nlen(long struct, int value) { memPutInt(struct + IOURingZCRXRQE.LEN, value); }
-    public static void n__pad(long struct, int value) { memPutInt(struct + IOURingZCRXRQE.__PAD, value); }
+    static void n__pad(long struct, int value) { memPutInt(struct + IOURingZCRXRQE.__PAD, value); }
 
     // -----------------------------------
 

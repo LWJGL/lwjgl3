@@ -378,8 +378,8 @@ public class SDL_GPUSamplerCreateInfo extends Struct<SDL_GPUSamplerCreateInfo> i
     public static boolean nenable_anisotropy(long struct) { return memGetByte(struct + SDL_GPUSamplerCreateInfo.ENABLE_ANISOTROPY) != 0; }
     /** Unsafe version of {@link #enable_compare}. */
     public static boolean nenable_compare(long struct) { return memGetByte(struct + SDL_GPUSamplerCreateInfo.ENABLE_COMPARE) != 0; }
-    public static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUSamplerCreateInfo.PADDING1); }
-    public static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUSamplerCreateInfo.PADDING2); }
+    static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUSamplerCreateInfo.PADDING1); }
+    static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUSamplerCreateInfo.PADDING2); }
     /** Unsafe version of {@link #props}. */
     public static int nprops(long struct) { return memGetInt(struct + SDL_GPUSamplerCreateInfo.PROPS); }
 
@@ -409,8 +409,8 @@ public class SDL_GPUSamplerCreateInfo extends Struct<SDL_GPUSamplerCreateInfo> i
     public static void nenable_anisotropy(long struct, boolean value) { memPutByte(struct + SDL_GPUSamplerCreateInfo.ENABLE_ANISOTROPY, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #enable_compare(boolean) enable_compare}. */
     public static void nenable_compare(long struct, boolean value) { memPutByte(struct + SDL_GPUSamplerCreateInfo.ENABLE_COMPARE, value ? (byte)1 : (byte)0); }
-    public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUSamplerCreateInfo.PADDING1, value); }
-    public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUSamplerCreateInfo.PADDING2, value); }
+    static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUSamplerCreateInfo.PADDING1, value); }
+    static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUSamplerCreateInfo.PADDING2, value); }
     /** Unsafe version of {@link #props(int) props}. */
     public static void nprops(long struct, int value) { memPutInt(struct + SDL_GPUSamplerCreateInfo.PROPS, value); }
 

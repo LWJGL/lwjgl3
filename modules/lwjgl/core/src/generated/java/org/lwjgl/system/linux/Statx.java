@@ -450,8 +450,8 @@ public class Statx extends Struct<Statx> implements NativeResource {
     public static int nstx_gid(long struct) { return memGetInt(struct + Statx.STX_GID); }
     /** Unsafe version of {@link #stx_mode}. */
     public static short nstx_mode(long struct) { return memGetShort(struct + Statx.STX_MODE); }
-    public static ShortBuffer n__spare0(long struct) { return memShortBuffer(struct + Statx.__SPARE0, 1); }
-    public static short n__spare0(long struct, int index) {
+    static ShortBuffer n__spare0(long struct) { return memShortBuffer(struct + Statx.__SPARE0, 1); }
+    static short n__spare0(long struct, int index) {
         return memGetShort(struct + Statx.__SPARE0 + check(index, 1) * 2);
     }
     /** Unsafe version of {@link #stx_ino}. */
@@ -480,9 +480,9 @@ public class Statx extends Struct<Statx> implements NativeResource {
     public static int nstx_dev_minor(long struct) { return memGetInt(struct + Statx.STX_DEV_MINOR); }
     /** Unsafe version of {@link #stx_mnt_id}. */
     public static long nstx_mnt_id(long struct) { return memGetLong(struct + Statx.STX_MNT_ID); }
-    public static long n__spare2(long struct) { return memGetLong(struct + Statx.__SPARE2); }
-    public static LongBuffer n__spare3(long struct) { return memLongBuffer(struct + Statx.__SPARE3, 12); }
-    public static long n__spare3(long struct, int index) {
+    static long n__spare2(long struct) { return memGetLong(struct + Statx.__SPARE2); }
+    static LongBuffer n__spare3(long struct) { return memLongBuffer(struct + Statx.__SPARE3, 12); }
+    static long n__spare3(long struct, int index) {
         return memGetLong(struct + Statx.__SPARE3 + check(index, 12) * 8);
     }
 
@@ -500,11 +500,11 @@ public class Statx extends Struct<Statx> implements NativeResource {
     public static void nstx_gid(long struct, int value) { memPutInt(struct + Statx.STX_GID, value); }
     /** Unsafe version of {@link #stx_mode(short) stx_mode}. */
     public static void nstx_mode(long struct, short value) { memPutShort(struct + Statx.STX_MODE, value); }
-    public static void n__spare0(long struct, ShortBuffer value) {
+    static void n__spare0(long struct, ShortBuffer value) {
         if (CHECKS) { checkGT(value, 1); }
         memCopy(memAddress(value), struct + Statx.__SPARE0, value.remaining() * 2);
     }
-    public static void n__spare0(long struct, int index, short value) {
+    static void n__spare0(long struct, int index, short value) {
         memPutShort(struct + Statx.__SPARE0 + check(index, 1) * 2, value);
     }
     /** Unsafe version of {@link #stx_ino(long) stx_ino}. */
@@ -533,12 +533,12 @@ public class Statx extends Struct<Statx> implements NativeResource {
     public static void nstx_dev_minor(long struct, int value) { memPutInt(struct + Statx.STX_DEV_MINOR, value); }
     /** Unsafe version of {@link #stx_mnt_id(long) stx_mnt_id}. */
     public static void nstx_mnt_id(long struct, long value) { memPutLong(struct + Statx.STX_MNT_ID, value); }
-    public static void n__spare2(long struct, long value) { memPutLong(struct + Statx.__SPARE2, value); }
-    public static void n__spare3(long struct, LongBuffer value) {
+    static void n__spare2(long struct, long value) { memPutLong(struct + Statx.__SPARE2, value); }
+    static void n__spare3(long struct, LongBuffer value) {
         if (CHECKS) { checkGT(value, 12); }
         memCopy(memAddress(value), struct + Statx.__SPARE3, value.remaining() * 8);
     }
-    public static void n__spare3(long struct, int index, long value) {
+    static void n__spare3(long struct, int index, long value) {
         memPutLong(struct + Statx.__SPARE3 + check(index, 12) * 8, value);
     }
 

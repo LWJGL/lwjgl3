@@ -225,13 +225,13 @@ public class IOURingFileIndexRange extends Struct<IOURingFileIndexRange> impleme
     public static int noff(long struct) { return memGetInt(struct + IOURingFileIndexRange.OFF); }
     /** Unsafe version of {@link #len}. */
     public static int nlen(long struct) { return memGetInt(struct + IOURingFileIndexRange.LEN); }
-    public static long nresv(long struct) { return memGetLong(struct + IOURingFileIndexRange.RESV); }
+    static long nresv(long struct) { return memGetLong(struct + IOURingFileIndexRange.RESV); }
 
     /** Unsafe version of {@link #off(int) off}. */
     public static void noff(long struct, int value) { memPutInt(struct + IOURingFileIndexRange.OFF, value); }
     /** Unsafe version of {@link #len(int) len}. */
     public static void nlen(long struct, int value) { memPutInt(struct + IOURingFileIndexRange.LEN, value); }
-    public static void nresv(long struct, long value) { memPutLong(struct + IOURingFileIndexRange.RESV, value); }
+    static void nresv(long struct, long value) { memPutLong(struct + IOURingFileIndexRange.RESV, value); }
 
     // -----------------------------------
 

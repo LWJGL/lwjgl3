@@ -301,7 +301,7 @@ public class IOCQRingOffsets extends Struct<IOCQRingOffsets> implements NativeRe
     public static int ncqes(long struct) { return memGetInt(struct + IOCQRingOffsets.CQES); }
     /** Unsafe version of {@link #flags}. */
     public static int nflags(long struct) { return memGetInt(struct + IOCQRingOffsets.FLAGS); }
-    public static int nresv1(long struct) { return memGetInt(struct + IOCQRingOffsets.RESV1); }
+    static int nresv1(long struct) { return memGetInt(struct + IOCQRingOffsets.RESV1); }
     /** Unsafe version of {@link #user_addr}. */
     public static long nuser_addr(long struct) { return memGetLong(struct + IOCQRingOffsets.USER_ADDR); }
 
@@ -319,7 +319,7 @@ public class IOCQRingOffsets extends Struct<IOCQRingOffsets> implements NativeRe
     public static void ncqes(long struct, int value) { memPutInt(struct + IOCQRingOffsets.CQES, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { memPutInt(struct + IOCQRingOffsets.FLAGS, value); }
-    public static void nresv1(long struct, int value) { memPutInt(struct + IOCQRingOffsets.RESV1, value); }
+    static void nresv1(long struct, int value) { memPutInt(struct + IOCQRingOffsets.RESV1, value); }
     /** Unsafe version of {@link #user_addr(long) user_addr}. */
     public static void nuser_addr(long struct, long value) { memPutLong(struct + IOCQRingOffsets.USER_ADDR, value); }
 

@@ -315,8 +315,8 @@ public class StdVideoEncodeH264PictureInfo extends Struct<StdVideoEncodeH264Pict
     public static int nPicOrderCnt(long struct) { return memGetInt(struct + StdVideoEncodeH264PictureInfo.PICORDERCNT); }
     /** Unsafe version of {@link #temporal_id}. */
     public static byte ntemporal_id(long struct) { return memGetByte(struct + StdVideoEncodeH264PictureInfo.TEMPORAL_ID); }
-    public static ByteBuffer nreserved1(long struct) { return memByteBuffer(struct + StdVideoEncodeH264PictureInfo.RESERVED1, 3); }
-    public static byte nreserved1(long struct, int index) {
+    static ByteBuffer nreserved1(long struct) { return memByteBuffer(struct + StdVideoEncodeH264PictureInfo.RESERVED1, 3); }
+    static byte nreserved1(long struct, int index) {
         return memGetByte(struct + StdVideoEncodeH264PictureInfo.RESERVED1 + check(index, 3) * 1);
     }
     /** Unsafe version of {@link #pRefLists}. */
@@ -338,11 +338,11 @@ public class StdVideoEncodeH264PictureInfo extends Struct<StdVideoEncodeH264Pict
     public static void nPicOrderCnt(long struct, int value) { memPutInt(struct + StdVideoEncodeH264PictureInfo.PICORDERCNT, value); }
     /** Unsafe version of {@link #temporal_id(byte) temporal_id}. */
     public static void ntemporal_id(long struct, byte value) { memPutByte(struct + StdVideoEncodeH264PictureInfo.TEMPORAL_ID, value); }
-    public static void nreserved1(long struct, ByteBuffer value) {
+    static void nreserved1(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + StdVideoEncodeH264PictureInfo.RESERVED1, value.remaining() * 1);
     }
-    public static void nreserved1(long struct, int index, byte value) {
+    static void nreserved1(long struct, int index, byte value) {
         memPutByte(struct + StdVideoEncodeH264PictureInfo.RESERVED1 + check(index, 3) * 1, value);
     }
     /** Unsafe version of {@link #pRefLists(StdVideoEncodeH264ReferenceListsInfo) pRefLists}. */

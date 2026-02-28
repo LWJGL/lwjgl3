@@ -225,25 +225,25 @@ public class StdVideoEncodeAV1OperatingPointInfoFlags extends Struct<StdVideoEnc
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoEncodeAV1OperatingPointInfoFlags.BITFIELD0); }
+    static int nbitfield0(long struct) { return memGetInt(struct + StdVideoEncodeAV1OperatingPointInfoFlags.BITFIELD0); }
     /** Unsafe version of {@link #decoder_model_present_for_this_op}. */
     public static int ndecoder_model_present_for_this_op(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #low_delay_mode_flag}. */
     public static int nlow_delay_mode_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_02) >>> 1; }
     /** Unsafe version of {@link #initial_display_delay_present_for_this_op}. */
     public static int ninitial_display_delay_present_for_this_op(long struct) { return (nbitfield0(struct) & 0x00_00_00_04) >>> 2; }
-    public static int nbitfield1(long struct) { return memGetInt(struct + StdVideoEncodeAV1OperatingPointInfoFlags.BITFIELD1); }
-    public static int nreserved(long struct) { return nbitfield1(struct) & 0x1F_FF_FF_FF; }
+    static int nbitfield1(long struct) { return memGetInt(struct + StdVideoEncodeAV1OperatingPointInfoFlags.BITFIELD1); }
+    static int nreserved(long struct) { return nbitfield1(struct) & 0x1F_FF_FF_FF; }
 
-    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoEncodeAV1OperatingPointInfoFlags.BITFIELD0, value); }
+    static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoEncodeAV1OperatingPointInfoFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #decoder_model_present_for_this_op(boolean) decoder_model_present_for_this_op}. */
     public static void ndecoder_model_present_for_this_op(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #low_delay_mode_flag(boolean) low_delay_mode_flag}. */
     public static void nlow_delay_mode_flag(long struct, int value) { nbitfield0(struct, ((value << 1) & 0x00_00_00_02) | (nbitfield0(struct) & 0xFF_FF_FF_FD)); }
     /** Unsafe version of {@link #initial_display_delay_present_for_this_op(boolean) initial_display_delay_present_for_this_op}. */
     public static void ninitial_display_delay_present_for_this_op(long struct, int value) { nbitfield0(struct, ((value << 2) & 0x00_00_00_04) | (nbitfield0(struct) & 0xFF_FF_FF_FB)); }
-    public static void nbitfield1(long struct, int value) { memPutInt(struct + StdVideoEncodeAV1OperatingPointInfoFlags.BITFIELD1, value); }
-    public static void nreserved(long struct, int value) { nbitfield1(struct, (nbitfield1(struct) & 0xE0_00_00_00) | (value & 0x1F_FF_FF_FF)); }
+    static void nbitfield1(long struct, int value) { memPutInt(struct + StdVideoEncodeAV1OperatingPointInfoFlags.BITFIELD1, value); }
+    static void nreserved(long struct, int value) { nbitfield1(struct, (nbitfield1(struct) & 0xE0_00_00_00) | (value & 0x1F_FF_FF_FF)); }
 
     // -----------------------------------
 

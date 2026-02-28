@@ -226,8 +226,8 @@ public class IOURingMemRegionReg extends Struct<IOURingMemRegionReg> implements 
     public static long nregion_uptr(long struct) { return memGetLong(struct + IOURingMemRegionReg.REGION_UPTR); }
     /** Unsafe version of {@link #flags}. */
     public static long nflags(long struct) { return memGetLong(struct + IOURingMemRegionReg.FLAGS); }
-    public static LongBuffer n__resv(long struct) { return memLongBuffer(struct + IOURingMemRegionReg.__RESV, 2); }
-    public static long n__resv(long struct, int index) {
+    static LongBuffer n__resv(long struct) { return memLongBuffer(struct + IOURingMemRegionReg.__RESV, 2); }
+    static long n__resv(long struct, int index) {
         return memGetLong(struct + IOURingMemRegionReg.__RESV + check(index, 2) * 8);
     }
 
@@ -235,11 +235,11 @@ public class IOURingMemRegionReg extends Struct<IOURingMemRegionReg> implements 
     public static void nregion_uptr(long struct, long value) { memPutLong(struct + IOURingMemRegionReg.REGION_UPTR, value); }
     /** Unsafe version of {@link #flags(long) flags}. */
     public static void nflags(long struct, long value) { memPutLong(struct + IOURingMemRegionReg.FLAGS, value); }
-    public static void n__resv(long struct, LongBuffer value) {
+    static void n__resv(long struct, LongBuffer value) {
         if (CHECKS) { checkGT(value, 2); }
         memCopy(memAddress(value), struct + IOURingMemRegionReg.__RESV, value.remaining() * 8);
     }
-    public static void n__resv(long struct, int index, long value) {
+    static void n__resv(long struct, int index, long value) {
         memPutLong(struct + IOURingMemRegionReg.__RESV + check(index, 2) * 8, value);
     }
 

@@ -282,7 +282,7 @@ public class SDL_DropEvent extends Struct<SDL_DropEvent> implements NativeResour
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_DropEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_DropEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_DropEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_DropEvent.TIMESTAMP); }
     /** Unsafe version of {@link #windowID}. */
@@ -302,7 +302,7 @@ public class SDL_DropEvent extends Struct<SDL_DropEvent> implements NativeResour
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_DropEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_DropEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_DropEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_DropEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #windowID(int) windowID}. */

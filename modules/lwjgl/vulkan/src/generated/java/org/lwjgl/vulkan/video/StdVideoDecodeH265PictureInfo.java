@@ -328,7 +328,7 @@ public class StdVideoDecodeH265PictureInfo extends Struct<StdVideoDecodeH265Pict
     public static int nPicOrderCntVal(long struct) { return memGetInt(struct + StdVideoDecodeH265PictureInfo.PICORDERCNTVAL); }
     /** Unsafe version of {@link #NumBitsForSTRefPicSetInSlice}. */
     public static short nNumBitsForSTRefPicSetInSlice(long struct) { return memGetShort(struct + StdVideoDecodeH265PictureInfo.NUMBITSFORSTREFPICSETINSLICE); }
-    public static short nreserved(long struct) { return memGetShort(struct + StdVideoDecodeH265PictureInfo.RESERVED); }
+    static short nreserved(long struct) { return memGetShort(struct + StdVideoDecodeH265PictureInfo.RESERVED); }
     /** Unsafe version of {@link #RefPicSetStCurrBefore}. */
     public static ByteBuffer nRefPicSetStCurrBefore(long struct) { return memByteBuffer(struct + StdVideoDecodeH265PictureInfo.REFPICSETSTCURRBEFORE, STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE); }
     /** Unsafe version of {@link #RefPicSetStCurrBefore(int) RefPicSetStCurrBefore}. */
@@ -360,7 +360,7 @@ public class StdVideoDecodeH265PictureInfo extends Struct<StdVideoDecodeH265Pict
     public static void nPicOrderCntVal(long struct, int value) { memPutInt(struct + StdVideoDecodeH265PictureInfo.PICORDERCNTVAL, value); }
     /** Unsafe version of {@link #NumBitsForSTRefPicSetInSlice(short) NumBitsForSTRefPicSetInSlice}. */
     public static void nNumBitsForSTRefPicSetInSlice(long struct, short value) { memPutShort(struct + StdVideoDecodeH265PictureInfo.NUMBITSFORSTREFPICSETINSLICE, value); }
-    public static void nreserved(long struct, short value) { memPutShort(struct + StdVideoDecodeH265PictureInfo.RESERVED, value); }
+    static void nreserved(long struct, short value) { memPutShort(struct + StdVideoDecodeH265PictureInfo.RESERVED, value); }
     /** Unsafe version of {@link #RefPicSetStCurrBefore(ByteBuffer) RefPicSetStCurrBefore}. */
     public static void nRefPicSetStCurrBefore(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE); }

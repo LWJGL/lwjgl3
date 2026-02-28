@@ -221,7 +221,7 @@ public class VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV exten
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return memGetInt(struct + VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV.BITFIELD0); }
+    static int nbitfield0(long struct) { return memGetInt(struct + VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV.BITFIELD0); }
     /** Unsafe version of {@link #geometryIndex}. */
     public static int ngeometryIndex(long struct) { return nbitfield0(struct) & 0x00_FF_FF_FF; }
     /** Unsafe version of {@link #reserved}. */
@@ -229,7 +229,7 @@ public class VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV exten
     /** Unsafe version of {@link #geometryFlags}. */
     public static int ngeometryFlags(long struct) { return nbitfield0(struct) >>> 29; }
 
-    public static void nbitfield0(long struct, int value) { memPutInt(struct + VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV.BITFIELD0, value); }
+    static void nbitfield0(long struct, int value) { memPutInt(struct + VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV.BITFIELD0, value); }
     /** Unsafe version of {@link #geometryIndex(int) geometryIndex}. */
     public static void ngeometryIndex(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_00_00_00) | (value & 0x00_FF_FF_FF)); }
     /** Unsafe version of {@link #reserved(int) reserved}. */

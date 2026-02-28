@@ -659,8 +659,8 @@ public class SDL_Event extends Struct<SDL_Event> implements NativeResource {
     public static SDL_DropEvent ndrop(long struct) { return SDL_DropEvent.create(struct + SDL_Event.DROP); }
     /** Unsafe version of {@link #clipboard}. */
     public static SDL_ClipboardEvent nclipboard(long struct) { return SDL_ClipboardEvent.create(struct + SDL_Event.CLIPBOARD); }
-    public static ByteBuffer npadding(long struct) { return memByteBuffer(struct + SDL_Event.PADDING, 128); }
-    public static byte npadding(long struct, int index) {
+    static ByteBuffer npadding(long struct) { return memByteBuffer(struct + SDL_Event.PADDING, 128); }
+    static byte npadding(long struct, int index) {
         return memGetByte(struct + SDL_Event.PADDING + check(index, 128) * 1);
     }
 
@@ -742,11 +742,11 @@ public class SDL_Event extends Struct<SDL_Event> implements NativeResource {
     public static void ndrop(long struct, SDL_DropEvent value) { memCopy(value.address(), struct + SDL_Event.DROP, SDL_DropEvent.SIZEOF); }
     /** Unsafe version of {@link #clipboard(SDL_ClipboardEvent) clipboard}. */
     public static void nclipboard(long struct, SDL_ClipboardEvent value) { memCopy(value.address(), struct + SDL_Event.CLIPBOARD, SDL_ClipboardEvent.SIZEOF); }
-    public static void npadding(long struct, ByteBuffer value) {
+    static void npadding(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 128); }
         memCopy(memAddress(value), struct + SDL_Event.PADDING, value.remaining() * 1);
     }
-    public static void npadding(long struct, int index, byte value) {
+    static void npadding(long struct, int index, byte value) {
         memPutByte(struct + SDL_Event.PADDING + check(index, 128) * 1, value);
     }
 

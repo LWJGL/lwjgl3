@@ -297,7 +297,7 @@ public class SDL_PenTouchEvent extends Struct<SDL_PenTouchEvent> implements Nati
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_PenTouchEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_PenTouchEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_PenTouchEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_PenTouchEvent.TIMESTAMP); }
     /** Unsafe version of {@link #windowID}. */
@@ -317,7 +317,7 @@ public class SDL_PenTouchEvent extends Struct<SDL_PenTouchEvent> implements Nati
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_PenTouchEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_PenTouchEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_PenTouchEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_PenTouchEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #windowID(int) windowID}. */

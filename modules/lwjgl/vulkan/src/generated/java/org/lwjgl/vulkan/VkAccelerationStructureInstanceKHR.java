@@ -257,12 +257,12 @@ public class VkAccelerationStructureInstanceKHR extends Struct<VkAccelerationStr
 
     /** Unsafe version of {@link #transform}. */
     public static VkTransformMatrixKHR ntransform(long struct) { return VkTransformMatrixKHR.create(struct + VkAccelerationStructureInstanceKHR.TRANSFORM); }
-    public static int nbitfield0(long struct) { return memGetInt(struct + VkAccelerationStructureInstanceKHR.BITFIELD0); }
+    static int nbitfield0(long struct) { return memGetInt(struct + VkAccelerationStructureInstanceKHR.BITFIELD0); }
     /** Unsafe version of {@link #instanceCustomIndex}. */
     public static int ninstanceCustomIndex(long struct) { return nbitfield0(struct) & 0x00_FF_FF_FF; }
     /** Unsafe version of {@link #mask}. */
     public static int nmask(long struct) { return nbitfield0(struct) >>> 24; }
-    public static int nbitfield1(long struct) { return memGetInt(struct + VkAccelerationStructureInstanceKHR.BITFIELD1); }
+    static int nbitfield1(long struct) { return memGetInt(struct + VkAccelerationStructureInstanceKHR.BITFIELD1); }
     /** Unsafe version of {@link #instanceShaderBindingTableRecordOffset}. */
     public static int ninstanceShaderBindingTableRecordOffset(long struct) { return nbitfield1(struct) & 0x00_FF_FF_FF; }
     /** Unsafe version of {@link #flags}. */
@@ -272,12 +272,12 @@ public class VkAccelerationStructureInstanceKHR extends Struct<VkAccelerationStr
 
     /** Unsafe version of {@link #transform(VkTransformMatrixKHR) transform}. */
     public static void ntransform(long struct, VkTransformMatrixKHR value) { memCopy(value.address(), struct + VkAccelerationStructureInstanceKHR.TRANSFORM, VkTransformMatrixKHR.SIZEOF); }
-    public static void nbitfield0(long struct, int value) { memPutInt(struct + VkAccelerationStructureInstanceKHR.BITFIELD0, value); }
+    static void nbitfield0(long struct, int value) { memPutInt(struct + VkAccelerationStructureInstanceKHR.BITFIELD0, value); }
     /** Unsafe version of {@link #instanceCustomIndex(int) instanceCustomIndex}. */
     public static void ninstanceCustomIndex(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_00_00_00) | (value & 0x00_FF_FF_FF)); }
     /** Unsafe version of {@link #mask(int) mask}. */
     public static void nmask(long struct, int value) { nbitfield0(struct, (value << 24) | (nbitfield0(struct) & 0x00_FF_FF_FF)); }
-    public static void nbitfield1(long struct, int value) { memPutInt(struct + VkAccelerationStructureInstanceKHR.BITFIELD1, value); }
+    static void nbitfield1(long struct, int value) { memPutInt(struct + VkAccelerationStructureInstanceKHR.BITFIELD1, value); }
     /** Unsafe version of {@link #instanceShaderBindingTableRecordOffset(int) instanceShaderBindingTableRecordOffset}. */
     public static void ninstanceShaderBindingTableRecordOffset(long struct, int value) { nbitfield1(struct, (nbitfield1(struct) & 0xFF_00_00_00) | (value & 0x00_FF_FF_FF)); }
     /** Unsafe version of {@link #flags(int) flags}. */

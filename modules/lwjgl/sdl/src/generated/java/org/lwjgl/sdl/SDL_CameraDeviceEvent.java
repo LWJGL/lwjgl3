@@ -233,7 +233,7 @@ public class SDL_CameraDeviceEvent extends Struct<SDL_CameraDeviceEvent> impleme
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_CameraDeviceEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_CameraDeviceEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_CameraDeviceEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_CameraDeviceEvent.TIMESTAMP); }
     /** Unsafe version of {@link #which}. */
@@ -241,7 +241,7 @@ public class SDL_CameraDeviceEvent extends Struct<SDL_CameraDeviceEvent> impleme
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_CameraDeviceEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_CameraDeviceEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_CameraDeviceEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_CameraDeviceEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #which(int) which}. */

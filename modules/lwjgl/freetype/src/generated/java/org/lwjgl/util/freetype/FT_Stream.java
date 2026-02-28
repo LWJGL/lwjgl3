@@ -298,9 +298,9 @@ public class FT_Stream extends Struct<FT_Stream> implements NativeResource {
     public static @Nullable FT_Stream_IoFunc nread(long struct) { return FT_Stream_IoFunc.createSafe(memGetAddress(struct + FT_Stream.READ)); }
     /** Unsafe version of {@link #close$}. */
     public static @Nullable FT_Stream_CloseFunc nclose$(long struct) { return FT_Stream_CloseFunc.createSafe(memGetAddress(struct + FT_Stream.CLOSE)); }
-    public static @Nullable FT_Memory nmemory(long struct) { return FT_Memory.createSafe(memGetAddress(struct + FT_Stream.MEMORY)); }
-    public static @Nullable ByteBuffer ncursor(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + FT_Stream.CURSOR), capacity); }
-    public static @Nullable ByteBuffer nlimit$(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + FT_Stream.LIMIT), capacity); }
+    static @Nullable FT_Memory nmemory(long struct) { return FT_Memory.createSafe(memGetAddress(struct + FT_Stream.MEMORY)); }
+    static @Nullable ByteBuffer ncursor(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + FT_Stream.CURSOR), capacity); }
+    static @Nullable ByteBuffer nlimit$(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + FT_Stream.LIMIT), capacity); }
 
     /** Unsafe version of {@link #base(ByteBuffer) base}. */
     public static void nbase(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + FT_Stream.BASE, memAddressSafe(value)); nsize(struct, value == null ? 0 : value.remaining()); }
@@ -316,9 +316,9 @@ public class FT_Stream extends Struct<FT_Stream> implements NativeResource {
     public static void nread(long struct, @Nullable FT_Stream_IoFuncI value) { memPutAddress(struct + FT_Stream.READ, memAddressSafe(value)); }
     /** Unsafe version of {@link #close$(FT_Stream_CloseFuncI) close$}. */
     public static void nclose$(long struct, @Nullable FT_Stream_CloseFuncI value) { memPutAddress(struct + FT_Stream.CLOSE, memAddressSafe(value)); }
-    public static void nmemory(long struct, @Nullable FT_Memory value) { memPutAddress(struct + FT_Stream.MEMORY, memAddressSafe(value)); }
-    public static void ncursor(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + FT_Stream.CURSOR, memAddressSafe(value)); }
-    public static void nlimit$(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + FT_Stream.LIMIT, memAddressSafe(value)); }
+    static void nmemory(long struct, @Nullable FT_Memory value) { memPutAddress(struct + FT_Stream.MEMORY, memAddressSafe(value)); }
+    static void ncursor(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + FT_Stream.CURSOR, memAddressSafe(value)); }
+    static void nlimit$(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + FT_Stream.LIMIT, memAddressSafe(value)); }
 
     // -----------------------------------
 

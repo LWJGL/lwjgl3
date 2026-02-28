@@ -237,7 +237,7 @@ public class hb_aat_layout_feature_selector_info_t extends Struct<hb_aat_layout_
     public static int nenable(long struct) { return memGetInt(struct + hb_aat_layout_feature_selector_info_t.ENABLE); }
     /** Unsafe version of {@link #disable}. */
     public static int ndisable(long struct) { return memGetInt(struct + hb_aat_layout_feature_selector_info_t.DISABLE); }
-    public static int nreserved(long struct) { return memGetInt(struct + hb_aat_layout_feature_selector_info_t.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + hb_aat_layout_feature_selector_info_t.RESERVED); }
 
     /** Unsafe version of {@link #name_id(int) name_id}. */
     public static void nname_id(long struct, int value) { memPutInt(struct + hb_aat_layout_feature_selector_info_t.NAME_ID, value); }
@@ -245,7 +245,7 @@ public class hb_aat_layout_feature_selector_info_t extends Struct<hb_aat_layout_
     public static void nenable(long struct, int value) { memPutInt(struct + hb_aat_layout_feature_selector_info_t.ENABLE, value); }
     /** Unsafe version of {@link #disable(int) disable}. */
     public static void ndisable(long struct, int value) { memPutInt(struct + hb_aat_layout_feature_selector_info_t.DISABLE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + hb_aat_layout_feature_selector_info_t.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + hb_aat_layout_feature_selector_info_t.RESERVED, value); }
 
     // -----------------------------------
 

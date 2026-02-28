@@ -310,9 +310,9 @@ public class IOURingZCRXIfqReg extends Struct<IOURingZCRXIfqReg> implements Nati
     public static IOURingZCRXOffsets noffsets(long struct) { return IOURingZCRXOffsets.create(struct + IOURingZCRXIfqReg.OFFSETS); }
     /** Unsafe version of {@link #zcrx_id}. */
     public static int nzcrx_id(long struct) { return memGetInt(struct + IOURingZCRXIfqReg.ZCRX_ID); }
-    public static int n__resv2(long struct) { return memGetInt(struct + IOURingZCRXIfqReg.__RESV2); }
-    public static LongBuffer n__resv(long struct) { return memLongBuffer(struct + IOURingZCRXIfqReg.__RESV, 3); }
-    public static long n__resv(long struct, int index) {
+    static int n__resv2(long struct) { return memGetInt(struct + IOURingZCRXIfqReg.__RESV2); }
+    static LongBuffer n__resv(long struct) { return memLongBuffer(struct + IOURingZCRXIfqReg.__RESV, 3); }
+    static long n__resv(long struct, int index) {
         return memGetLong(struct + IOURingZCRXIfqReg.__RESV + check(index, 3) * 8);
     }
 
@@ -332,12 +332,12 @@ public class IOURingZCRXIfqReg extends Struct<IOURingZCRXIfqReg> implements Nati
     public static void noffsets(long struct, IOURingZCRXOffsets value) { memCopy(value.address(), struct + IOURingZCRXIfqReg.OFFSETS, IOURingZCRXOffsets.SIZEOF); }
     /** Unsafe version of {@link #zcrx_id(int) zcrx_id}. */
     public static void nzcrx_id(long struct, int value) { memPutInt(struct + IOURingZCRXIfqReg.ZCRX_ID, value); }
-    public static void n__resv2(long struct, int value) { memPutInt(struct + IOURingZCRXIfqReg.__RESV2, value); }
-    public static void n__resv(long struct, LongBuffer value) {
+    static void n__resv2(long struct, int value) { memPutInt(struct + IOURingZCRXIfqReg.__RESV2, value); }
+    static void n__resv(long struct, LongBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + IOURingZCRXIfqReg.__RESV, value.remaining() * 8);
     }
-    public static void n__resv(long struct, int index, long value) {
+    static void n__resv(long struct, int index, long value) {
         memPutLong(struct + IOURingZCRXIfqReg.__RESV + check(index, 3) * 8, value);
     }
 

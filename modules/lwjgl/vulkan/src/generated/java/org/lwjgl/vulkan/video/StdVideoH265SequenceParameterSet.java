@@ -668,8 +668,8 @@ public class StdVideoH265SequenceParameterSet extends Struct<StdVideoH265Sequenc
     public static byte nlog2_min_pcm_luma_coding_block_size_minus3(long struct) { return memGetByte(struct + StdVideoH265SequenceParameterSet.LOG2_MIN_PCM_LUMA_CODING_BLOCK_SIZE_MINUS3); }
     /** Unsafe version of {@link #log2_diff_max_min_pcm_luma_coding_block_size}. */
     public static byte nlog2_diff_max_min_pcm_luma_coding_block_size(long struct) { return memGetByte(struct + StdVideoH265SequenceParameterSet.LOG2_DIFF_MAX_MIN_PCM_LUMA_CODING_BLOCK_SIZE); }
-    public static byte nreserved1(long struct) { return memGetByte(struct + StdVideoH265SequenceParameterSet.RESERVED1); }
-    public static byte nreserved2(long struct) { return memGetByte(struct + StdVideoH265SequenceParameterSet.RESERVED2); }
+    static byte nreserved1(long struct) { return memGetByte(struct + StdVideoH265SequenceParameterSet.RESERVED1); }
+    static byte nreserved2(long struct) { return memGetByte(struct + StdVideoH265SequenceParameterSet.RESERVED2); }
     /** Unsafe version of {@link #palette_max_size}. */
     public static byte npalette_max_size(long struct) { return memGetByte(struct + StdVideoH265SequenceParameterSet.PALETTE_MAX_SIZE); }
     /** Unsafe version of {@link #delta_palette_max_predictor_size}. */
@@ -747,8 +747,8 @@ public class StdVideoH265SequenceParameterSet extends Struct<StdVideoH265Sequenc
     public static void nlog2_min_pcm_luma_coding_block_size_minus3(long struct, byte value) { memPutByte(struct + StdVideoH265SequenceParameterSet.LOG2_MIN_PCM_LUMA_CODING_BLOCK_SIZE_MINUS3, value); }
     /** Unsafe version of {@link #log2_diff_max_min_pcm_luma_coding_block_size(byte) log2_diff_max_min_pcm_luma_coding_block_size}. */
     public static void nlog2_diff_max_min_pcm_luma_coding_block_size(long struct, byte value) { memPutByte(struct + StdVideoH265SequenceParameterSet.LOG2_DIFF_MAX_MIN_PCM_LUMA_CODING_BLOCK_SIZE, value); }
-    public static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoH265SequenceParameterSet.RESERVED1, value); }
-    public static void nreserved2(long struct, byte value) { memPutByte(struct + StdVideoH265SequenceParameterSet.RESERVED2, value); }
+    static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoH265SequenceParameterSet.RESERVED1, value); }
+    static void nreserved2(long struct, byte value) { memPutByte(struct + StdVideoH265SequenceParameterSet.RESERVED2, value); }
     /** Unsafe version of {@link #palette_max_size(byte) palette_max_size}. */
     public static void npalette_max_size(long struct, byte value) { memPutByte(struct + StdVideoH265SequenceParameterSet.PALETTE_MAX_SIZE, value); }
     /** Unsafe version of {@link #delta_palette_max_predictor_size(byte) delta_palette_max_predictor_size}. */

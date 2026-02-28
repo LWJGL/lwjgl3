@@ -227,17 +227,17 @@ public class IOURingProbeOp extends Struct<IOURingProbeOp> implements NativeReso
 
     /** Unsafe version of {@link #op}. */
     public static byte nop(long struct) { return memGetByte(struct + IOURingProbeOp.OP); }
-    public static byte nresv(long struct) { return memGetByte(struct + IOURingProbeOp.RESV); }
+    static byte nresv(long struct) { return memGetByte(struct + IOURingProbeOp.RESV); }
     /** Unsafe version of {@link #flags}. */
     public static short nflags(long struct) { return memGetShort(struct + IOURingProbeOp.FLAGS); }
-    public static int nresv2(long struct) { return memGetInt(struct + IOURingProbeOp.RESV2); }
+    static int nresv2(long struct) { return memGetInt(struct + IOURingProbeOp.RESV2); }
 
     /** Unsafe version of {@link #op(byte) op}. */
     public static void nop(long struct, byte value) { memPutByte(struct + IOURingProbeOp.OP, value); }
-    public static void nresv(long struct, byte value) { memPutByte(struct + IOURingProbeOp.RESV, value); }
+    static void nresv(long struct, byte value) { memPutByte(struct + IOURingProbeOp.RESV, value); }
     /** Unsafe version of {@link #flags(short) flags}. */
     public static void nflags(long struct, short value) { memPutShort(struct + IOURingProbeOp.FLAGS, value); }
-    public static void nresv2(long struct, int value) { memPutInt(struct + IOURingProbeOp.RESV2, value); }
+    static void nresv2(long struct, int value) { memPutInt(struct + IOURingProbeOp.RESV2, value); }
 
     // -----------------------------------
 

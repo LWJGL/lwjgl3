@@ -391,7 +391,7 @@ public class IOURingSQ extends Struct<IOURingSQ> implements NativeResource {
     public static int nring_entries(long struct) { return memGetInt(struct + IOURingSQ.RING_ENTRIES); }
     /** Unsafe version of {@link #sqes_sz}. */
     public static int nsqes_sz(long struct) { return memGetInt(struct + IOURingSQ.SQES_SZ); }
-    public static int npad(long struct) { return memGetInt(struct + IOURingSQ.PAD); }
+    static int npad(long struct) { return memGetInt(struct + IOURingSQ.PAD); }
 
     /** Unsafe version of {@link #khead(IntBuffer) khead}. */
     public static void nkhead(long struct, IntBuffer value) { memPutAddress(struct + IOURingSQ.KHEAD, memAddress(value)); }
@@ -423,7 +423,7 @@ public class IOURingSQ extends Struct<IOURingSQ> implements NativeResource {
     public static void nring_entries(long struct, int value) { memPutInt(struct + IOURingSQ.RING_ENTRIES, value); }
     /** Unsafe version of {@link #sqes_sz(int) sqes_sz}. */
     public static void nsqes_sz(long struct, int value) { memPutInt(struct + IOURingSQ.SQES_SZ, value); }
-    public static void npad(long struct, int value) { memPutInt(struct + IOURingSQ.PAD, value); }
+    static void npad(long struct, int value) { memPutInt(struct + IOURingSQ.PAD, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

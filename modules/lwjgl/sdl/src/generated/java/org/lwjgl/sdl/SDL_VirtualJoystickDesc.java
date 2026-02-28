@@ -474,7 +474,7 @@ public class SDL_VirtualJoystickDesc extends Struct<SDL_VirtualJoystickDesc> imp
     public static int nversion(long struct) { return memGetInt(struct + SDL_VirtualJoystickDesc.VERSION); }
     /** Unsafe version of {@link #type}. */
     public static short ntype(long struct) { return memGetShort(struct + SDL_VirtualJoystickDesc.TYPE); }
-    public static short npadding(long struct) { return memGetShort(struct + SDL_VirtualJoystickDesc.PADDING); }
+    static short npadding(long struct) { return memGetShort(struct + SDL_VirtualJoystickDesc.PADDING); }
     /** Unsafe version of {@link #vendor_id}. */
     public static short nvendor_id(long struct) { return memGetShort(struct + SDL_VirtualJoystickDesc.VENDOR_ID); }
     /** Unsafe version of {@link #product_id}. */
@@ -491,8 +491,8 @@ public class SDL_VirtualJoystickDesc extends Struct<SDL_VirtualJoystickDesc> imp
     public static short nntouchpads(long struct) { return memGetShort(struct + SDL_VirtualJoystickDesc.NTOUCHPADS); }
     /** Unsafe version of {@link #nsensors}. */
     public static short nnsensors(long struct) { return memGetShort(struct + SDL_VirtualJoystickDesc.NSENSORS); }
-    public static ShortBuffer npadding2(long struct) { return memShortBuffer(struct + SDL_VirtualJoystickDesc.PADDING2, 2); }
-    public static short npadding2(long struct, int index) {
+    static ShortBuffer npadding2(long struct) { return memShortBuffer(struct + SDL_VirtualJoystickDesc.PADDING2, 2); }
+    static short npadding2(long struct, int index) {
         return memGetShort(struct + SDL_VirtualJoystickDesc.PADDING2 + check(index, 2) * 2);
     }
     /** Unsafe version of {@link #button_mask}. */
@@ -530,7 +530,7 @@ public class SDL_VirtualJoystickDesc extends Struct<SDL_VirtualJoystickDesc> imp
     public static void nversion(long struct, int value) { memPutInt(struct + SDL_VirtualJoystickDesc.VERSION, value); }
     /** Unsafe version of {@link #type(short) type}. */
     public static void ntype(long struct, short value) { memPutShort(struct + SDL_VirtualJoystickDesc.TYPE, value); }
-    public static void npadding(long struct, short value) { memPutShort(struct + SDL_VirtualJoystickDesc.PADDING, value); }
+    static void npadding(long struct, short value) { memPutShort(struct + SDL_VirtualJoystickDesc.PADDING, value); }
     /** Unsafe version of {@link #vendor_id(short) vendor_id}. */
     public static void nvendor_id(long struct, short value) { memPutShort(struct + SDL_VirtualJoystickDesc.VENDOR_ID, value); }
     /** Unsafe version of {@link #product_id(short) product_id}. */
@@ -547,11 +547,11 @@ public class SDL_VirtualJoystickDesc extends Struct<SDL_VirtualJoystickDesc> imp
     public static void nntouchpads(long struct, short value) { memPutShort(struct + SDL_VirtualJoystickDesc.NTOUCHPADS, value); }
     /** Sets the specified value to the {@code nsensors} field of the specified {@code struct}. */
     public static void nnsensors(long struct, short value) { memPutShort(struct + SDL_VirtualJoystickDesc.NSENSORS, value); }
-    public static void npadding2(long struct, ShortBuffer value) {
+    static void npadding2(long struct, ShortBuffer value) {
         if (CHECKS) { checkGT(value, 2); }
         memCopy(memAddress(value), struct + SDL_VirtualJoystickDesc.PADDING2, value.remaining() * 2);
     }
-    public static void npadding2(long struct, int index, short value) {
+    static void npadding2(long struct, int index, short value) {
         memPutShort(struct + SDL_VirtualJoystickDesc.PADDING2 + check(index, 2) * 2, value);
     }
     /** Unsafe version of {@link #button_mask(int) button_mask}. */

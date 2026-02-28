@@ -263,8 +263,8 @@ public class StdVideoEncodeAV1ReferenceInfo extends Struct<StdVideoEncodeAV1Refe
     public static int nframe_type(long struct) { return memGetInt(struct + StdVideoEncodeAV1ReferenceInfo.FRAME_TYPE); }
     /** Unsafe version of {@link #OrderHint}. */
     public static byte nOrderHint(long struct) { return memGetByte(struct + StdVideoEncodeAV1ReferenceInfo.ORDERHINT); }
-    public static ByteBuffer nreserved1(long struct) { return memByteBuffer(struct + StdVideoEncodeAV1ReferenceInfo.RESERVED1, 3); }
-    public static byte nreserved1(long struct, int index) {
+    static ByteBuffer nreserved1(long struct) { return memByteBuffer(struct + StdVideoEncodeAV1ReferenceInfo.RESERVED1, 3); }
+    static byte nreserved1(long struct, int index) {
         return memGetByte(struct + StdVideoEncodeAV1ReferenceInfo.RESERVED1 + check(index, 3) * 1);
     }
     /** Unsafe version of {@link #pExtensionHeader}. */
@@ -278,11 +278,11 @@ public class StdVideoEncodeAV1ReferenceInfo extends Struct<StdVideoEncodeAV1Refe
     public static void nframe_type(long struct, int value) { memPutInt(struct + StdVideoEncodeAV1ReferenceInfo.FRAME_TYPE, value); }
     /** Unsafe version of {@link #OrderHint(byte) OrderHint}. */
     public static void nOrderHint(long struct, byte value) { memPutByte(struct + StdVideoEncodeAV1ReferenceInfo.ORDERHINT, value); }
-    public static void nreserved1(long struct, ByteBuffer value) {
+    static void nreserved1(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + StdVideoEncodeAV1ReferenceInfo.RESERVED1, value.remaining() * 1);
     }
-    public static void nreserved1(long struct, int index, byte value) {
+    static void nreserved1(long struct, int index, byte value) {
         memPutByte(struct + StdVideoEncodeAV1ReferenceInfo.RESERVED1 + check(index, 3) * 1, value);
     }
     /** Unsafe version of {@link #pExtensionHeader(StdVideoEncodeAV1ExtensionHeader) pExtensionHeader}. */

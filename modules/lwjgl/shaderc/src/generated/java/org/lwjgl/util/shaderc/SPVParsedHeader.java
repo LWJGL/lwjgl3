@@ -131,7 +131,7 @@ public class SPVParsedHeader extends Struct<SPVParsedHeader> {
     public static int ngenerator(long struct) { return memGetInt(struct + SPVParsedHeader.GENERATOR); }
     /** Unsafe version of {@link #bound}. */
     public static int nbound(long struct) { return memGetInt(struct + SPVParsedHeader.BOUND); }
-    public static int nreserved(long struct) { return memGetInt(struct + SPVParsedHeader.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SPVParsedHeader.RESERVED); }
 
     // -----------------------------------
 

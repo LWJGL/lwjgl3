@@ -286,7 +286,7 @@ public class hb_ot_var_axis_info_t extends Struct<hb_ot_var_axis_info_t> impleme
     public static float ndefault_value(long struct) { return memGetFloat(struct + hb_ot_var_axis_info_t.DEFAULT_VALUE); }
     /** Unsafe version of {@link #max_value}. */
     public static float nmax_value(long struct) { return memGetFloat(struct + hb_ot_var_axis_info_t.MAX_VALUE); }
-    public static int nreserved(long struct) { return memGetInt(struct + hb_ot_var_axis_info_t.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + hb_ot_var_axis_info_t.RESERVED); }
 
     /** Unsafe version of {@link #axis_index(int) axis_index}. */
     public static void naxis_index(long struct, int value) { memPutInt(struct + hb_ot_var_axis_info_t.AXIS_INDEX, value); }
@@ -302,7 +302,7 @@ public class hb_ot_var_axis_info_t extends Struct<hb_ot_var_axis_info_t> impleme
     public static void ndefault_value(long struct, float value) { memPutFloat(struct + hb_ot_var_axis_info_t.DEFAULT_VALUE, value); }
     /** Unsafe version of {@link #max_value(float) max_value}. */
     public static void nmax_value(long struct, float value) { memPutFloat(struct + hb_ot_var_axis_info_t.MAX_VALUE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + hb_ot_var_axis_info_t.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + hb_ot_var_axis_info_t.RESERVED, value); }
 
     // -----------------------------------
 

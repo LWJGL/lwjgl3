@@ -278,16 +278,16 @@ public class SDL_JoyBallEvent extends Struct<SDL_JoyBallEvent> implements Native
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_JoyBallEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_JoyBallEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_JoyBallEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_JoyBallEvent.TIMESTAMP); }
     /** Unsafe version of {@link #which}. */
     public static int nwhich(long struct) { return memGetInt(struct + SDL_JoyBallEvent.WHICH); }
     /** Unsafe version of {@link #ball}. */
     public static byte nball(long struct) { return memGetByte(struct + SDL_JoyBallEvent.BALL); }
-    public static byte npadding1(long struct) { return memGetByte(struct + SDL_JoyBallEvent.PADDING1); }
-    public static byte npadding2(long struct) { return memGetByte(struct + SDL_JoyBallEvent.PADDING2); }
-    public static byte npadding3(long struct) { return memGetByte(struct + SDL_JoyBallEvent.PADDING3); }
+    static byte npadding1(long struct) { return memGetByte(struct + SDL_JoyBallEvent.PADDING1); }
+    static byte npadding2(long struct) { return memGetByte(struct + SDL_JoyBallEvent.PADDING2); }
+    static byte npadding3(long struct) { return memGetByte(struct + SDL_JoyBallEvent.PADDING3); }
     /** Unsafe version of {@link #xrel}. */
     public static short nxrel(long struct) { return memGetShort(struct + SDL_JoyBallEvent.XREL); }
     /** Unsafe version of {@link #yrel}. */
@@ -295,16 +295,16 @@ public class SDL_JoyBallEvent extends Struct<SDL_JoyBallEvent> implements Native
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_JoyBallEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_JoyBallEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_JoyBallEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_JoyBallEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #which(int) which}. */
     public static void nwhich(long struct, int value) { memPutInt(struct + SDL_JoyBallEvent.WHICH, value); }
     /** Unsafe version of {@link #ball(byte) ball}. */
     public static void nball(long struct, byte value) { memPutByte(struct + SDL_JoyBallEvent.BALL, value); }
-    public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_JoyBallEvent.PADDING1, value); }
-    public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_JoyBallEvent.PADDING2, value); }
-    public static void npadding3(long struct, byte value) { memPutByte(struct + SDL_JoyBallEvent.PADDING3, value); }
+    static void npadding1(long struct, byte value) { memPutByte(struct + SDL_JoyBallEvent.PADDING1, value); }
+    static void npadding2(long struct, byte value) { memPutByte(struct + SDL_JoyBallEvent.PADDING2, value); }
+    static void npadding3(long struct, byte value) { memPutByte(struct + SDL_JoyBallEvent.PADDING3, value); }
     /** Unsafe version of {@link #xrel(short) xrel}. */
     public static void nxrel(long struct, short value) { memPutShort(struct + SDL_JoyBallEvent.XREL, value); }
     /** Unsafe version of {@link #yrel(short) yrel}. */

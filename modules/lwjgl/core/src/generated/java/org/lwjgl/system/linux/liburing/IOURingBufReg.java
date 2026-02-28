@@ -252,8 +252,8 @@ public class IOURingBufReg extends Struct<IOURingBufReg> implements NativeResour
     public static short nbgid(long struct) { return memGetShort(struct + IOURingBufReg.BGID); }
     /** Unsafe version of {@link #flags}. */
     public static short nflags(long struct) { return memGetShort(struct + IOURingBufReg.FLAGS); }
-    public static LongBuffer nresv(long struct) { return memLongBuffer(struct + IOURingBufReg.RESV, 3); }
-    public static long nresv(long struct, int index) {
+    static LongBuffer nresv(long struct) { return memLongBuffer(struct + IOURingBufReg.RESV, 3); }
+    static long nresv(long struct, int index) {
         return memGetLong(struct + IOURingBufReg.RESV + check(index, 3) * 8);
     }
 
@@ -265,11 +265,11 @@ public class IOURingBufReg extends Struct<IOURingBufReg> implements NativeResour
     public static void nbgid(long struct, short value) { memPutShort(struct + IOURingBufReg.BGID, value); }
     /** Unsafe version of {@link #flags(short) flags}. */
     public static void nflags(long struct, short value) { memPutShort(struct + IOURingBufReg.FLAGS, value); }
-    public static void nresv(long struct, LongBuffer value) {
+    static void nresv(long struct, LongBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + IOURingBufReg.RESV, value.remaining() * 8);
     }
-    public static void nresv(long struct, int index, long value) {
+    static void nresv(long struct, int index, long value) {
         memPutLong(struct + IOURingBufReg.RESV + check(index, 3) * 8, value);
     }
 

@@ -296,7 +296,7 @@ public class SDL_DisplayMode extends Struct<SDL_DisplayMode> implements NativeRe
     public static int nrefresh_rate_numerator(long struct) { return memGetInt(struct + SDL_DisplayMode.REFRESH_RATE_NUMERATOR); }
     /** Unsafe version of {@link #refresh_rate_denominator}. */
     public static int nrefresh_rate_denominator(long struct) { return memGetInt(struct + SDL_DisplayMode.REFRESH_RATE_DENOMINATOR); }
-    public static long ninternal(long struct) { return memGetAddress(struct + SDL_DisplayMode.INTERNAL); }
+    static long ninternal(long struct) { return memGetAddress(struct + SDL_DisplayMode.INTERNAL); }
 
     /** Unsafe version of {@link #displayID(int) displayID}. */
     public static void ndisplayID(long struct, int value) { memPutInt(struct + SDL_DisplayMode.DISPLAYID, value); }
@@ -314,7 +314,7 @@ public class SDL_DisplayMode extends Struct<SDL_DisplayMode> implements NativeRe
     public static void nrefresh_rate_numerator(long struct, int value) { memPutInt(struct + SDL_DisplayMode.REFRESH_RATE_NUMERATOR, value); }
     /** Unsafe version of {@link #refresh_rate_denominator(int) refresh_rate_denominator}. */
     public static void nrefresh_rate_denominator(long struct, int value) { memPutInt(struct + SDL_DisplayMode.REFRESH_RATE_DENOMINATOR, value); }
-    public static void ninternal(long struct, long value) { memPutAddress(struct + SDL_DisplayMode.INTERNAL, value); }
+    static void ninternal(long struct, long value) { memPutAddress(struct + SDL_DisplayMode.INTERNAL, value); }
 
     // -----------------------------------
 

@@ -204,18 +204,18 @@ public class IOURingClockRegister extends Struct<IOURingClockRegister> implement
 
     /** Unsafe version of {@link #clockid}. */
     public static int nclockid(long struct) { return memGetInt(struct + IOURingClockRegister.CLOCKID); }
-    public static IntBuffer n__resv(long struct) { return memIntBuffer(struct + IOURingClockRegister.__RESV, 3); }
-    public static int n__resv(long struct, int index) {
+    static IntBuffer n__resv(long struct) { return memIntBuffer(struct + IOURingClockRegister.__RESV, 3); }
+    static int n__resv(long struct, int index) {
         return memGetInt(struct + IOURingClockRegister.__RESV + check(index, 3) * 4);
     }
 
     /** Unsafe version of {@link #clockid(int) clockid}. */
     public static void nclockid(long struct, int value) { memPutInt(struct + IOURingClockRegister.CLOCKID, value); }
-    public static void n__resv(long struct, IntBuffer value) {
+    static void n__resv(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + IOURingClockRegister.__RESV, value.remaining() * 4);
     }
-    public static void n__resv(long struct, int index, int value) {
+    static void n__resv(long struct, int index, int value) {
         memPutInt(struct + IOURingClockRegister.__RESV + check(index, 3) * 4, value);
     }
 

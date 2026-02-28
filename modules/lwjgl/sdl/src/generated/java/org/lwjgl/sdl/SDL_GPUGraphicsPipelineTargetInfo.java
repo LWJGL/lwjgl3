@@ -258,9 +258,9 @@ public class SDL_GPUGraphicsPipelineTargetInfo extends Struct<SDL_GPUGraphicsPip
     public static int ndepth_stencil_format(long struct) { return memGetInt(struct + SDL_GPUGraphicsPipelineTargetInfo.DEPTH_STENCIL_FORMAT); }
     /** Unsafe version of {@link #has_depth_stencil_target}. */
     public static boolean nhas_depth_stencil_target(long struct) { return memGetByte(struct + SDL_GPUGraphicsPipelineTargetInfo.HAS_DEPTH_STENCIL_TARGET) != 0; }
-    public static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUGraphicsPipelineTargetInfo.PADDING1); }
-    public static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUGraphicsPipelineTargetInfo.PADDING2); }
-    public static byte npadding3(long struct) { return memGetByte(struct + SDL_GPUGraphicsPipelineTargetInfo.PADDING3); }
+    static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUGraphicsPipelineTargetInfo.PADDING1); }
+    static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUGraphicsPipelineTargetInfo.PADDING2); }
+    static byte npadding3(long struct) { return memGetByte(struct + SDL_GPUGraphicsPipelineTargetInfo.PADDING3); }
 
     /** Unsafe version of {@link #color_target_descriptions(SDL_GPUColorTargetDescription.Buffer) color_target_descriptions}. */
     public static void ncolor_target_descriptions(long struct, SDL_GPUColorTargetDescription.@Nullable Buffer value) { memPutAddress(struct + SDL_GPUGraphicsPipelineTargetInfo.COLOR_TARGET_DESCRIPTIONS, memAddressSafe(value)); nnum_color_targets(struct, value == null ? 0 : value.remaining()); }
@@ -270,9 +270,9 @@ public class SDL_GPUGraphicsPipelineTargetInfo extends Struct<SDL_GPUGraphicsPip
     public static void ndepth_stencil_format(long struct, int value) { memPutInt(struct + SDL_GPUGraphicsPipelineTargetInfo.DEPTH_STENCIL_FORMAT, value); }
     /** Unsafe version of {@link #has_depth_stencil_target(boolean) has_depth_stencil_target}. */
     public static void nhas_depth_stencil_target(long struct, boolean value) { memPutByte(struct + SDL_GPUGraphicsPipelineTargetInfo.HAS_DEPTH_STENCIL_TARGET, value ? (byte)1 : (byte)0); }
-    public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUGraphicsPipelineTargetInfo.PADDING1, value); }
-    public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUGraphicsPipelineTargetInfo.PADDING2, value); }
-    public static void npadding3(long struct, byte value) { memPutByte(struct + SDL_GPUGraphicsPipelineTargetInfo.PADDING3, value); }
+    static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUGraphicsPipelineTargetInfo.PADDING1, value); }
+    static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUGraphicsPipelineTargetInfo.PADDING2, value); }
+    static void npadding3(long struct, byte value) { memPutByte(struct + SDL_GPUGraphicsPipelineTargetInfo.PADDING3, value); }
 
     // -----------------------------------
 

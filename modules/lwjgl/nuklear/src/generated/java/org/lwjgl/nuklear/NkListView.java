@@ -215,10 +215,10 @@ public class NkListView extends Struct<NkListView> implements NativeResource {
     public static int nend(long struct) { return memGetInt(struct + NkListView.END); }
     /** Unsafe version of {@link #count}. */
     public static int ncount(long struct) { return memGetInt(struct + NkListView.COUNT); }
-    public static int ntotal_height(long struct) { return memGetInt(struct + NkListView.TOTAL_HEIGHT); }
-    public static NkContext nctx(long struct) { return NkContext.create(memGetAddress(struct + NkListView.CTX)); }
-    public static IntBuffer nscroll_pointer(long struct, int capacity) { return memIntBuffer(memGetAddress(struct + NkListView.SCROLL_POINTER), capacity); }
-    public static int nscroll_value(long struct) { return memGetInt(struct + NkListView.SCROLL_VALUE); }
+    static int ntotal_height(long struct) { return memGetInt(struct + NkListView.TOTAL_HEIGHT); }
+    static NkContext nctx(long struct) { return NkContext.create(memGetAddress(struct + NkListView.CTX)); }
+    static IntBuffer nscroll_pointer(long struct, int capacity) { return memIntBuffer(memGetAddress(struct + NkListView.SCROLL_POINTER), capacity); }
+    static int nscroll_value(long struct) { return memGetInt(struct + NkListView.SCROLL_VALUE); }
 
     // -----------------------------------
 

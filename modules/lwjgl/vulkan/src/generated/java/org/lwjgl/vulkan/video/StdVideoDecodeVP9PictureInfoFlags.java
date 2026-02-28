@@ -265,7 +265,7 @@ public class StdVideoDecodeVP9PictureInfoFlags extends Struct<StdVideoDecodeVP9P
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoDecodeVP9PictureInfoFlags.BITFIELD0); }
+    static int nbitfield0(long struct) { return memGetInt(struct + StdVideoDecodeVP9PictureInfoFlags.BITFIELD0); }
     /** Unsafe version of {@link #error_resilient_mode}. */
     public static int nerror_resilient_mode(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #intra_only}. */
@@ -282,10 +282,10 @@ public class StdVideoDecodeVP9PictureInfoFlags extends Struct<StdVideoDecodeVP9P
     public static int nshow_frame(long struct) { return (nbitfield0(struct) & 0x00_00_00_40) >>> 6; }
     /** Unsafe version of {@link #UsePrevFrameMvs}. */
     public static int nUsePrevFrameMvs(long struct) { return (nbitfield0(struct) & 0x00_00_00_80) >>> 7; }
-    public static int nbitfield1(long struct) { return memGetInt(struct + StdVideoDecodeVP9PictureInfoFlags.BITFIELD1); }
-    public static int nreserved(long struct) { return nbitfield1(struct) & 0x00_FF_FF_FF; }
+    static int nbitfield1(long struct) { return memGetInt(struct + StdVideoDecodeVP9PictureInfoFlags.BITFIELD1); }
+    static int nreserved(long struct) { return nbitfield1(struct) & 0x00_FF_FF_FF; }
 
-    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoDecodeVP9PictureInfoFlags.BITFIELD0, value); }
+    static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoDecodeVP9PictureInfoFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #error_resilient_mode(boolean) error_resilient_mode}. */
     public static void nerror_resilient_mode(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #intra_only(boolean) intra_only}. */
@@ -302,8 +302,8 @@ public class StdVideoDecodeVP9PictureInfoFlags extends Struct<StdVideoDecodeVP9P
     public static void nshow_frame(long struct, int value) { nbitfield0(struct, ((value << 6) & 0x00_00_00_40) | (nbitfield0(struct) & 0xFF_FF_FF_BF)); }
     /** Unsafe version of {@link #UsePrevFrameMvs(boolean) UsePrevFrameMvs}. */
     public static void nUsePrevFrameMvs(long struct, int value) { nbitfield0(struct, ((value << 7) & 0x00_00_00_80) | (nbitfield0(struct) & 0xFF_FF_FF_7F)); }
-    public static void nbitfield1(long struct, int value) { memPutInt(struct + StdVideoDecodeVP9PictureInfoFlags.BITFIELD1, value); }
-    public static void nreserved(long struct, int value) { nbitfield1(struct, (nbitfield1(struct) & 0xFF_00_00_00) | (value & 0x00_FF_FF_FF)); }
+    static void nbitfield1(long struct, int value) { memPutInt(struct + StdVideoDecodeVP9PictureInfoFlags.BITFIELD1, value); }
+    static void nreserved(long struct, int value) { nbitfield1(struct, (nbitfield1(struct) & 0xFF_00_00_00) | (value & 0x00_FF_FF_FF)); }
 
     // -----------------------------------
 

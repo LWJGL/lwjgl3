@@ -285,7 +285,7 @@ public class SDL_GamepadTouchpadEvent extends Struct<SDL_GamepadTouchpadEvent> i
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_GamepadTouchpadEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_GamepadTouchpadEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_GamepadTouchpadEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_GamepadTouchpadEvent.TIMESTAMP); }
     /** Unsafe version of {@link #which}. */
@@ -303,7 +303,7 @@ public class SDL_GamepadTouchpadEvent extends Struct<SDL_GamepadTouchpadEvent> i
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_GamepadTouchpadEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_GamepadTouchpadEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_GamepadTouchpadEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_GamepadTouchpadEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #which(int) which}. */

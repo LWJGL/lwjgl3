@@ -485,7 +485,7 @@ public class StdVideoH264SequenceParameterSet extends Struct<StdVideoH264Sequenc
     public static byte nnum_ref_frames_in_pic_order_cnt_cycle(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSet.NUM_REF_FRAMES_IN_PIC_ORDER_CNT_CYCLE); }
     /** Unsafe version of {@link #max_num_ref_frames}. */
     public static byte nmax_num_ref_frames(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSet.MAX_NUM_REF_FRAMES); }
-    public static byte nreserved1(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSet.RESERVED1); }
+    static byte nreserved1(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSet.RESERVED1); }
     /** Unsafe version of {@link #pic_width_in_mbs_minus1}. */
     public static int npic_width_in_mbs_minus1(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSet.PIC_WIDTH_IN_MBS_MINUS1); }
     /** Unsafe version of {@link #pic_height_in_map_units_minus1}. */
@@ -498,7 +498,7 @@ public class StdVideoH264SequenceParameterSet extends Struct<StdVideoH264Sequenc
     public static int nframe_crop_top_offset(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSet.FRAME_CROP_TOP_OFFSET); }
     /** Unsafe version of {@link #frame_crop_bottom_offset}. */
     public static int nframe_crop_bottom_offset(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSet.FRAME_CROP_BOTTOM_OFFSET); }
-    public static int nreserved2(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSet.RESERVED2); }
+    static int nreserved2(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSet.RESERVED2); }
     /** Unsafe version of {@link #pOffsetForRefFrame() pOffsetForRefFrame}. */
     public static @Nullable IntBuffer npOffsetForRefFrame(long struct) { return memIntBufferSafe(memGetAddress(struct + StdVideoH264SequenceParameterSet.POFFSETFORREFFRAME), Byte.toUnsignedInt(nnum_ref_frames_in_pic_order_cnt_cycle(struct))); }
     /** Unsafe version of {@link #pScalingLists}. */
@@ -534,7 +534,7 @@ public class StdVideoH264SequenceParameterSet extends Struct<StdVideoH264Sequenc
     public static void nnum_ref_frames_in_pic_order_cnt_cycle(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSet.NUM_REF_FRAMES_IN_PIC_ORDER_CNT_CYCLE, value); }
     /** Unsafe version of {@link #max_num_ref_frames(byte) max_num_ref_frames}. */
     public static void nmax_num_ref_frames(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSet.MAX_NUM_REF_FRAMES, value); }
-    public static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSet.RESERVED1, value); }
+    static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSet.RESERVED1, value); }
     /** Unsafe version of {@link #pic_width_in_mbs_minus1(int) pic_width_in_mbs_minus1}. */
     public static void npic_width_in_mbs_minus1(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSet.PIC_WIDTH_IN_MBS_MINUS1, value); }
     /** Unsafe version of {@link #pic_height_in_map_units_minus1(int) pic_height_in_map_units_minus1}. */
@@ -547,7 +547,7 @@ public class StdVideoH264SequenceParameterSet extends Struct<StdVideoH264Sequenc
     public static void nframe_crop_top_offset(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSet.FRAME_CROP_TOP_OFFSET, value); }
     /** Unsafe version of {@link #frame_crop_bottom_offset(int) frame_crop_bottom_offset}. */
     public static void nframe_crop_bottom_offset(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSet.FRAME_CROP_BOTTOM_OFFSET, value); }
-    public static void nreserved2(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSet.RESERVED2, value); }
+    static void nreserved2(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSet.RESERVED2, value); }
     /** Unsafe version of {@link #pOffsetForRefFrame(IntBuffer) pOffsetForRefFrame}. */
     public static void npOffsetForRefFrame(long struct, @Nullable IntBuffer value) { memPutAddress(struct + StdVideoH264SequenceParameterSet.POFFSETFORREFFRAME, memAddressSafe(value)); nnum_ref_frames_in_pic_order_cnt_cycle(struct, value == null ? 0 : (byte)value.remaining()); }
     /** Unsafe version of {@link #pScalingLists(StdVideoH264ScalingLists) pScalingLists}. */

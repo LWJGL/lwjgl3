@@ -223,13 +223,13 @@ public class IOURingRSRCUpdate extends Struct<IOURingRSRCUpdate> implements Nati
 
     /** Unsafe version of {@link #offset}. */
     public static int noffset(long struct) { return memGetInt(struct + IOURingRSRCUpdate.OFFSET); }
-    public static int nresv(long struct) { return memGetInt(struct + IOURingRSRCUpdate.RESV); }
+    static int nresv(long struct) { return memGetInt(struct + IOURingRSRCUpdate.RESV); }
     /** Unsafe version of {@link #data}. */
     public static long ndata(long struct) { return memGetLong(struct + IOURingRSRCUpdate.DATA); }
 
     /** Unsafe version of {@link #offset(int) offset}. */
     public static void noffset(long struct, int value) { memPutInt(struct + IOURingRSRCUpdate.OFFSET, value); }
-    public static void nresv(long struct, int value) { memPutInt(struct + IOURingRSRCUpdate.RESV, value); }
+    static void nresv(long struct, int value) { memPutInt(struct + IOURingRSRCUpdate.RESV, value); }
     /** Unsafe version of {@link #data(long) data}. */
     public static void ndata(long struct, long value) { memPutLong(struct + IOURingRSRCUpdate.DATA, value); }
 

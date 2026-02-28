@@ -250,9 +250,9 @@ public class IOURingProbe extends Struct<IOURingProbe> implements NativeResource
     public static byte nlast_op(long struct) { return memGetByte(struct + IOURingProbe.LAST_OP); }
     /** Unsafe version of {@link #ops_len}. */
     public static byte nops_len(long struct) { return memGetByte(struct + IOURingProbe.OPS_LEN); }
-    public static short nresv(long struct) { return memGetShort(struct + IOURingProbe.RESV); }
-    public static IntBuffer nresv2(long struct) { return memIntBuffer(struct + IOURingProbe.RESV2, 3); }
-    public static int nresv2(long struct, int index) {
+    static short nresv(long struct) { return memGetShort(struct + IOURingProbe.RESV); }
+    static IntBuffer nresv2(long struct) { return memIntBuffer(struct + IOURingProbe.RESV2, 3); }
+    static int nresv2(long struct, int index) {
         return memGetInt(struct + IOURingProbe.RESV2 + check(index, 3) * 4);
     }
     /** Unsafe version of {@link #ops}. */
@@ -266,12 +266,12 @@ public class IOURingProbe extends Struct<IOURingProbe> implements NativeResource
     public static void nlast_op(long struct, byte value) { memPutByte(struct + IOURingProbe.LAST_OP, value); }
     /** Unsafe version of {@link #ops_len(byte) ops_len}. */
     public static void nops_len(long struct, byte value) { memPutByte(struct + IOURingProbe.OPS_LEN, value); }
-    public static void nresv(long struct, short value) { memPutShort(struct + IOURingProbe.RESV, value); }
-    public static void nresv2(long struct, IntBuffer value) {
+    static void nresv(long struct, short value) { memPutShort(struct + IOURingProbe.RESV, value); }
+    static void nresv2(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + IOURingProbe.RESV2, value.remaining() * 4);
     }
-    public static void nresv2(long struct, int index, int value) {
+    static void nresv2(long struct, int index, int value) {
         memPutInt(struct + IOURingProbe.RESV2 + check(index, 3) * 4, value);
     }
     /** Unsafe version of {@link #ops(IOURingProbeOp.Buffer) ops}. */

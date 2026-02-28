@@ -296,7 +296,7 @@ public class SDL_PenAxisEvent extends Struct<SDL_PenAxisEvent> implements Native
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_PenAxisEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_PenAxisEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_PenAxisEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_PenAxisEvent.TIMESTAMP); }
     /** Unsafe version of {@link #windowID}. */
@@ -316,7 +316,7 @@ public class SDL_PenAxisEvent extends Struct<SDL_PenAxisEvent> implements Native
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_PenAxisEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_PenAxisEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_PenAxisEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_PenAxisEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #windowID(int) windowID}. */

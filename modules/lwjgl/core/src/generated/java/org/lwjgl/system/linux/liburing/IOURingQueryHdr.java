@@ -265,8 +265,8 @@ public class IOURingQueryHdr extends Struct<IOURingQueryHdr> implements NativeRe
     public static int nsize(long struct) { return memGetInt(struct + IOURingQueryHdr.SIZE); }
     /** Unsafe version of {@link #result}. */
     public static int nresult(long struct) { return memGetInt(struct + IOURingQueryHdr.RESULT); }
-    public static IntBuffer n__resv(long struct) { return memIntBuffer(struct + IOURingQueryHdr.__RESV, 3); }
-    public static int n__resv(long struct, int index) {
+    static IntBuffer n__resv(long struct) { return memIntBuffer(struct + IOURingQueryHdr.__RESV, 3); }
+    static int n__resv(long struct, int index) {
         return memGetInt(struct + IOURingQueryHdr.__RESV + check(index, 3) * 4);
     }
 
@@ -280,11 +280,11 @@ public class IOURingQueryHdr extends Struct<IOURingQueryHdr> implements NativeRe
     public static void nsize(long struct, int value) { memPutInt(struct + IOURingQueryHdr.SIZE, value); }
     /** Unsafe version of {@link #result(int) result}. */
     public static void nresult(long struct, int value) { memPutInt(struct + IOURingQueryHdr.RESULT, value); }
-    public static void n__resv(long struct, IntBuffer value) {
+    static void n__resv(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + IOURingQueryHdr.__RESV, value.remaining() * 4);
     }
-    public static void n__resv(long struct, int index, int value) {
+    static void n__resv(long struct, int index, int value) {
         memPutInt(struct + IOURingQueryHdr.__RESV + check(index, 3) * 4, value);
     }
 

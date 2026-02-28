@@ -233,7 +233,7 @@ public class SDL_JoyDeviceEvent extends Struct<SDL_JoyDeviceEvent> implements Na
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_JoyDeviceEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_JoyDeviceEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_JoyDeviceEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_JoyDeviceEvent.TIMESTAMP); }
     /** Unsafe version of {@link #which}. */
@@ -241,7 +241,7 @@ public class SDL_JoyDeviceEvent extends Struct<SDL_JoyDeviceEvent> implements Na
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_JoyDeviceEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_JoyDeviceEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_JoyDeviceEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_JoyDeviceEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #which(int) which}. */

@@ -222,13 +222,13 @@ public class SDL_QuitEvent extends Struct<SDL_QuitEvent> implements NativeResour
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_QuitEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_QuitEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_QuitEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_QuitEvent.TIMESTAMP); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_QuitEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_QuitEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_QuitEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_QuitEvent.TIMESTAMP, value); }
 

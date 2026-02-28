@@ -289,7 +289,7 @@ public class SDL_TextEditingCandidatesEvent extends Struct<SDL_TextEditingCandid
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_TextEditingCandidatesEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_TextEditingCandidatesEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_TextEditingCandidatesEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_TextEditingCandidatesEvent.TIMESTAMP); }
     /** Unsafe version of {@link #windowID}. */
@@ -302,13 +302,13 @@ public class SDL_TextEditingCandidatesEvent extends Struct<SDL_TextEditingCandid
     public static int nselected_candidate(long struct) { return memGetInt(struct + SDL_TextEditingCandidatesEvent.SELECTED_CANDIDATE); }
     /** Unsafe version of {@link #horizontal}. */
     public static boolean nhorizontal(long struct) { return memGetByte(struct + SDL_TextEditingCandidatesEvent.HORIZONTAL) != 0; }
-    public static byte npadding1(long struct) { return memGetByte(struct + SDL_TextEditingCandidatesEvent.PADDING1); }
-    public static byte npadding2(long struct) { return memGetByte(struct + SDL_TextEditingCandidatesEvent.PADDING2); }
-    public static byte npadding3(long struct) { return memGetByte(struct + SDL_TextEditingCandidatesEvent.PADDING3); }
+    static byte npadding1(long struct) { return memGetByte(struct + SDL_TextEditingCandidatesEvent.PADDING1); }
+    static byte npadding2(long struct) { return memGetByte(struct + SDL_TextEditingCandidatesEvent.PADDING2); }
+    static byte npadding3(long struct) { return memGetByte(struct + SDL_TextEditingCandidatesEvent.PADDING3); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_TextEditingCandidatesEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_TextEditingCandidatesEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_TextEditingCandidatesEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_TextEditingCandidatesEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #windowID(int) windowID}. */
@@ -321,9 +321,9 @@ public class SDL_TextEditingCandidatesEvent extends Struct<SDL_TextEditingCandid
     public static void nselected_candidate(long struct, int value) { memPutInt(struct + SDL_TextEditingCandidatesEvent.SELECTED_CANDIDATE, value); }
     /** Unsafe version of {@link #horizontal(boolean) horizontal}. */
     public static void nhorizontal(long struct, boolean value) { memPutByte(struct + SDL_TextEditingCandidatesEvent.HORIZONTAL, value ? (byte)1 : (byte)0); }
-    public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_TextEditingCandidatesEvent.PADDING1, value); }
-    public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_TextEditingCandidatesEvent.PADDING2, value); }
-    public static void npadding3(long struct, byte value) { memPutByte(struct + SDL_TextEditingCandidatesEvent.PADDING3, value); }
+    static void npadding1(long struct, byte value) { memPutByte(struct + SDL_TextEditingCandidatesEvent.PADDING1, value); }
+    static void npadding2(long struct, byte value) { memPutByte(struct + SDL_TextEditingCandidatesEvent.PADDING2, value); }
+    static void npadding3(long struct, byte value) { memPutByte(struct + SDL_TextEditingCandidatesEvent.PADDING3, value); }
 
     // -----------------------------------
 

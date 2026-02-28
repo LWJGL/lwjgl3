@@ -305,7 +305,7 @@ public class SDL_TouchFingerEvent extends Struct<SDL_TouchFingerEvent> implement
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_TouchFingerEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_TouchFingerEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_TouchFingerEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_TouchFingerEvent.TIMESTAMP); }
     /** Unsafe version of {@link #touchID}. */
@@ -327,7 +327,7 @@ public class SDL_TouchFingerEvent extends Struct<SDL_TouchFingerEvent> implement
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_TouchFingerEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_TouchFingerEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_TouchFingerEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_TouchFingerEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #touchID(long) touchID}. */

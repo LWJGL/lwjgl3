@@ -108,7 +108,7 @@ open class StructMemberArray(
     override fun copy() = StructMemberArray(arrayType, name, validSize)
 }
 
-private  class StructMemberPadding(arrayType: CArrayType<*>, val condition: String?) : StructMemberArray(arrayType, ANONYMOUS, arrayType.size)
+private class StructMemberPadding(arrayType: CArrayType<*>, val condition: String?) : StructMemberArray(arrayType, ANONYMOUS, arrayType.size)
 {
     init {
         public = false
@@ -1637,6 +1637,7 @@ ${validations.joinToString("\n")}
         members.forEach {
             val setter = it.field(parentMember)
             val field = getFieldOffset(it, parentStruct, parentField)
+            val access = if (it.public) "public " else ""
 
             if (it.isNestedStruct) {
                 val nestedStruct = (it.nativeType as StructType).definition
@@ -1650,7 +1651,7 @@ ${validations.joinToString("\n")}
                 else {
                     if (it.public)
                         println("$t/** Unsafe version of {@link #$setter($structType) $setter}. */")
-                    println("${t}public static void n$setter(long $STRUCT, $structType value) { memCopy(value.$ADDRESS, $STRUCT + $field, $structType.SIZEOF); }")
+                    println("${t}${access}static void n$setter(long $STRUCT, $structType value) { memCopy(value.$ADDRESS, $STRUCT + $field, $structType.SIZEOF); }")
                 }
             } else {
                 // Setter
@@ -1659,7 +1660,7 @@ ${validations.joinToString("\n")}
                     if (it.nativeType is WrappedPointerType) {
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$setter(${it.nativeType.javaMethodType}) $setter}. */")
-                        println("${t}public static void n$setter(long $STRUCT, ${it.nullable(it.nativeType.javaMethodType)} value) { memPutAddress($STRUCT + $field, ${it.addressValue}); }")
+                        println("${t}${access}static void n$setter(long $STRUCT, ${it.nullable(it.nativeType.javaMethodType)} value) { memPutAddress($STRUCT + $field, ${it.addressValue}); }")
                     } else {
                         val javaType = it.nativeType.nativeMethodType
 
@@ -1671,11 +1672,11 @@ ${validations.joinToString("\n")}
                                     "$t/** Unsafe version of {@link #$setter(${if (it.nativeType.mapping.isPseudoBoolean()) "boolean" else javaType}) $setter}. */"
                             )
                         if (it.setter != null) {
-                            println("${t}public static void n$setter(long $STRUCT, $javaType value) { ${it.setter}; }")
+                            println("${t}${access}static void n$setter(long $STRUCT, $javaType value) { ${it.setter}; }")
                         } else if (it.bits != -1) {
-                            println("${t}public static native void n$setter(long $STRUCT, $javaType value);")
+                            println("${t}${access}static native void n$setter(long $STRUCT, $javaType value);")
                         } else {
-                            print("${t}public static void n$setter(long $STRUCT, $javaType value) { ${getBufferMethod("Put", it, javaType)}$STRUCT + $field, ")
+                            print("${t}${access}static void n$setter(long $STRUCT, $javaType value) { ${getBufferMethod("Put", it, javaType)}$STRUCT + $field, ")
                             print(
                                 when {
                                     javaType == "boolean"
@@ -1698,7 +1699,7 @@ ${validations.joinToString("\n")}
                         if (it.nativeType is PointerType<*>) {
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$setter(PointerBuffer) $setter}. */")
-                            println("${t}public static void n$setter(long $STRUCT, PointerBuffer value) {")
+                            println("${t}${access}static void n$setter(long $STRUCT, PointerBuffer value) {")
                             if (Module.CHECKS)
                                 println("$t${t}if (CHECKS) { checkGT(value, ${it.size}); }")
                             println("$t${t}memCopy(memAddress(value), $STRUCT + $field, value.remaining() * POINTER_SIZE);")
@@ -1707,13 +1708,13 @@ ${validations.joinToString("\n")}
                             val structTypeIndexed = "$structType${if (getReferenceMember<AutoSizeIndirect>(it.name) == null) "" else ".Buffer"}"
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$setter(int, $structTypeIndexed) $setter}. */")
-                            println("${t}public static void n$setter(long $STRUCT, int index, ${it.nullable(structTypeIndexed)} value) {")
+                            println("${t}${access}static void n$setter(long $STRUCT, int index, ${it.nullable(structTypeIndexed)} value) {")
                             println("$t${t}memPutAddress($STRUCT + $field + check(index, ${it.size}) * POINTER_SIZE, ${it.addressValue});")
                             println("$t}")
                         } else {
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$setter($structType.Buffer) $setter}. */")
-                            println("${t}public static void n$setter(long $STRUCT, $structType.Buffer value) {")
+                            println("${t}${access}static void n$setter(long $STRUCT, $structType.Buffer value) {")
                             if (Module.CHECKS)
                                 println("$t${t}if (CHECKS) { checkGT(value, ${it.size}); }")
                             println("$t${t}memCopy(value.$ADDRESS, $STRUCT + $field, value.remaining() * $structType.SIZEOF);")
@@ -1721,7 +1722,7 @@ ${validations.joinToString("\n")}
                             println("$t}")
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$setter(int, $structType) $setter}. */")
-                            println("${t}public static void n$setter(long $STRUCT, int index, $structType value) {")
+                            println("${t}${access}static void n$setter(long $STRUCT, int index, $structType value) {")
                             println("$t${t}memCopy(value.$ADDRESS, $STRUCT + $field + check(index, ${it.size}) * $structType.SIZEOF, $structType.SIZEOF);")
                             println("$t}")
                         }
@@ -1732,7 +1733,7 @@ ${validations.joinToString("\n")}
 
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$setter(ByteBuffer) $setter}. */")
-                        println("${t}public static void n$setter(long $STRUCT, ByteBuffer value) {")
+                        println("${t}${access}static void n$setter(long $STRUCT, ByteBuffer value) {")
                         if (Module.CHECKS) {
                             println("$t${t}if (CHECKS) {")
                             if (nullTerminated) {
@@ -1750,7 +1751,7 @@ ${validations.joinToString("\n")}
 
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$setter($bufferType) $setter}. */")
-                        println("${t}public static void n$setter(long $STRUCT, $bufferType value) {")
+                        println("${t}${access}static void n$setter(long $STRUCT, $bufferType value) {")
                         if (Module.CHECKS)
                             println("$t${t}if (CHECKS) { checkGT(value, ${it.size}); }")
                         println("$t${t}memCopy(memAddress(value), $STRUCT + $field, value.remaining() * ${mapping.bytesExpression});")
@@ -1761,7 +1762,7 @@ ${validations.joinToString("\n")}
 
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$setter(int, ${it.nativeType.javaMethodType}) $setter}. */")
-                        println("${t}public static void n$setter(long $STRUCT, int index, $javaType value) {")
+                        println("${t}${access}static void n$setter(long $STRUCT, int index, $javaType value) {")
                         println("$t$t${getBufferMethod("Put", it, javaType)}$STRUCT + $field + check(index, ${it.size}) * ${mapping.bytesExpression}, value);")
                         println("$t}")
                     }
@@ -1771,7 +1772,7 @@ ${validations.joinToString("\n")}
 
                     if (it.public)
                         println("$t/** Unsafe version of {@link #$setter(ByteBuffer) $setter}. */")
-                    println("${t}public static void n$setter(long $STRUCT, ${it.nullable("ByteBuffer")} value) {")
+                    println("${t}${access}static void n$setter(long $STRUCT, ${it.nullable("ByteBuffer")} value) {")
                     if (Module.CHECKS && nullTerminated)
                         println("$t${t}if (CHECKS) { checkNT${mapping.bytes}${if (it.isNullable) "Safe" else ""}(value); }")
                     println("$t${t}memPutAddress($STRUCT + $field, ${it.memAddressValue});")
@@ -1783,18 +1784,18 @@ ${validations.joinToString("\n")}
                         if (it.isStructBuffer) {
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$setter($paramType.Buffer) $setter}. */")
-                            print("${t}public static void n$setter(long $STRUCT, ${it.nullable("$paramType.Buffer")} value) { memPutAddress($STRUCT + $field, ${it.addressValue});")
+                            print("${t}${access}static void n$setter(long $STRUCT, ${it.nullable("$paramType.Buffer")} value) { memPutAddress($STRUCT + $field, ${it.addressValue});")
                             setRemaining(it)
                             println(" }")
                         } else {
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$setter($paramType) $setter}. */")
-                            println("${t}public static void n$setter(long $STRUCT, ${it.nullable(paramType)} value) { memPutAddress($STRUCT + $field, ${it.addressValue}); }")
+                            println("${t}${access}static void n$setter(long $STRUCT, ${it.nullable(paramType)} value) { memPutAddress($STRUCT + $field, ${it.addressValue}); }")
                         }
                     } else {
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$setter($paramType) $setter}. */")
-                        print("${t}public static void n$setter(long $STRUCT, ${it.nullable(paramType)} value) { memPutAddress($STRUCT + $field, ${it.memAddressValue});")
+                        print("${t}${access}static void n$setter(long $STRUCT, ${it.nullable(paramType)} value) { memPutAddress($STRUCT + $field, ${it.memAddressValue});")
                         setRemaining(it)
                         println(" }")
                     }
@@ -2000,6 +2001,7 @@ ${validations.joinToString("\n")}
         members.forEach {
             val getter = it.field(parentGetter)
             val field = getFieldOffset(it, parentStruct, parentField)
+            val access = if (it.public) "public " else ""
 
             if (it.isNestedStruct) {
                 val nestedStruct = (it.nativeType as StructType).definition
@@ -2013,7 +2015,7 @@ ${validations.joinToString("\n")}
                 else {
                     if (it.public)
                         println("$t/** Unsafe version of {@link #$getter}. */")
-                    println("${t}public static $structType n$getter(long $STRUCT) { return $structType.create($STRUCT + $field); }")
+                    println("${t}${access}static $structType n$getter(long $STRUCT) { return $structType.create($STRUCT + $field); }")
                 }
             } else {
                 // Getter
@@ -2022,15 +2024,15 @@ ${validations.joinToString("\n")}
                     if (it.public)
                         println("$t/** Unsafe version of {@link #$getter}. */")
                     if (it.nativeType is FunctionType) {
-                        println("${t}public static ${it.nullable(it.nativeType.className)} n$getter(long $STRUCT) { return ${it.construct(it.nativeType.className)}(memGetAddress($STRUCT + $field)); }")
+                        println("${t}${access}static ${it.nullable(it.nativeType.className)} n$getter(long $STRUCT) { return ${it.construct(it.nativeType.className)}(memGetAddress($STRUCT + $field)); }")
                     } else if (it.getter != null) {
-                        println("${t}public static ${it.nativeType.nativeMethodType} n$getter(long $STRUCT) { return ${it.getter}; }")
+                        println("${t}${access}static ${it.nativeType.nativeMethodType} n$getter(long $STRUCT) { return ${it.getter}; }")
                     } else if (it.bits != -1) {
-                        println("${t}public static native ${it.nativeType.nativeMethodType} n$getter(long $STRUCT);")
+                        println("${t}${access}static native ${it.nativeType.nativeMethodType} n$getter(long $STRUCT);")
                     } else {
                         val javaType = it.nativeType.nativeMethodType
 
-                        print("${t}public static $javaType n$getter(long $STRUCT) { return ${getBufferMethod("Get", it, javaType)}$STRUCT + $field)")
+                        print("${t}${access}static $javaType n$getter(long $STRUCT) { return ${getBufferMethod("Get", it, javaType)}$STRUCT + $field)")
                         if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN)
                             print(" != 0")
                         println("; }")
@@ -2048,10 +2050,10 @@ ${validations.joinToString("\n")}
 
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter}. */")
-                            println("${t}public static PointerBuffer n$getter(long $STRUCT) { return ${it.mem("PointerBuffer")}($STRUCT + $field, $capacity); }")
+                            println("${t}${access}static PointerBuffer n$getter(long $STRUCT) { return ${it.mem("PointerBuffer")}($STRUCT + $field, $capacity); }")
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
-                            println("${t}public static ${it.nullable("$nestedStruct${if (autoSizeIndirect == null) "" else ".Buffer"}")} n$getter(long $STRUCT, int index) {")
+                            println("${t}${access}static ${it.nullable("$nestedStruct${if (autoSizeIndirect == null) "" else ".Buffer"}")} n$getter(long $STRUCT, int index) {")
                             println("$t${t}return ${it.construct(nestedStruct)}(memGetAddress($STRUCT + $field + check(index, $capacity) * POINTER_SIZE)${
                                 if (autoSizeIndirect == null) "" else ", n${autoSizeIndirect.name}($STRUCT)"
                             });")
@@ -2059,10 +2061,10 @@ ${validations.joinToString("\n")}
                         } else {
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter}. */")
-                            println("${t}public static $nestedStruct.Buffer n$getter(long $STRUCT) { return ${it.construct(nestedStruct)}($STRUCT + $field, $capacity); }")
+                            println("${t}${access}static $nestedStruct.Buffer n$getter(long $STRUCT) { return ${it.construct(nestedStruct)}($STRUCT + $field, $capacity); }")
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
-                            println("${t}public static ${it.nullable(nestedStruct)} n$getter(long $STRUCT, int index) {")
+                            println("${t}${access}static ${it.nullable(nestedStruct)} n$getter(long $STRUCT, int index) {")
                             println("$t${t}return ${it.construct(nestedStruct)}($STRUCT + $field + check(index, $capacity) * $nestedStruct.SIZEOF);")
                             println("$t}")
                         }
@@ -2073,23 +2075,23 @@ ${validations.joinToString("\n")}
 
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$getter}. */")
-                        println("${t}public static ByteBuffer n$getter(long $STRUCT) { return memByteBuffer($STRUCT + $field, $byteSize); }")
+                        println("${t}${access}static ByteBuffer n$getter(long $STRUCT) { return memByteBuffer($STRUCT + $field, $byteSize); }")
                         if (it.public)
                             println("$t/** Unsafe version of {@link #${getter}String}. */")
-                        println("${t}public static String n${getter}String(long $STRUCT) { return mem${mapping.charset}(${if (capacity != null) "n$getter($STRUCT)" else "$STRUCT + $field"}); }")
+                        println("${t}${access}static String n${getter}String(long $STRUCT) { return mem${mapping.charset}(${if (capacity != null) "n$getter($STRUCT)" else "$STRUCT + $field"}); }")
                     } else {
                         val mapping = it.primitiveMapping
                         val bufferType = mapping.toPointer.javaMethodName
 
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$getter}. */")
-                        println("${t}public static $bufferType n$getter(long $STRUCT) { return ${it.mem(bufferType)}($STRUCT + $field, ${getAutoSizeExpression(it.name) ?: it.size}); }")
+                        println("${t}${access}static $bufferType n$getter(long $STRUCT) { return ${it.mem(bufferType)}($STRUCT + $field, ${getAutoSizeExpression(it.name) ?: it.size}); }")
 
                         val javaType = it.nativeType.nativeMethodType
 
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
-                        println("${t}public static $javaType n$getter(long $STRUCT, int index) {")
+                        println("${t}${access}static $javaType n$getter(long $STRUCT, int index) {")
                         print("$t${t}return ${getBufferMethod("Get", it, javaType)}$STRUCT + $field + check(index, ${it.size}) * ${mapping.bytesExpression})")
                         if (it.nativeType.mapping === PrimitiveMapping.BOOLEAN)
                             print(" != 0")
@@ -2099,10 +2101,10 @@ ${validations.joinToString("\n")}
                     val mapping = it.nativeType.charMapping
                     if (it.public)
                         println("$t/** Unsafe version of {@link #$getter}. */")
-                    println("${t}public static ${it.nullable("ByteBuffer")} n$getter(long $STRUCT) { return ${it.mem("ByteBufferNT${mapping.bytes}")}(memGetAddress($STRUCT + $field)); }")
+                    println("${t}${access}static ${it.nullable("ByteBuffer")} n$getter(long $STRUCT) { return ${it.mem("ByteBufferNT${mapping.bytes}")}(memGetAddress($STRUCT + $field)); }")
                     if (it.public)
                         println("$t/** Unsafe version of {@link #${getter}String}. */")
-                    println("${t}public static ${it.nullable("String")} n${getter}String(long $STRUCT) { return ${it.mem(mapping.charset)}(memGetAddress($STRUCT + $field)); }")
+                    println("${t}${access}static ${it.nullable("String")} n${getter}String(long $STRUCT) { return ${it.mem(mapping.charset)}(memGetAddress($STRUCT + $field)); }")
                 } else if (it.nativeType.isPointerData) {
                     val returnType = it.nativeType.javaMethodType
                     if (it.nativeType.dereference is StructType) {
@@ -2112,11 +2114,11 @@ ${validations.joinToString("\n")}
                             val capacity = getAutoSizeExpression(it.name) ?: it.getCheckExpression()
 
                             if (capacity == null)
-                                "${t}public static ${it.nullable("$returnType.Buffer")} n$getter(long $STRUCT, int $BUFFER_CAPACITY_PARAM) { return ${it.construct(returnType)}(memGetAddress($STRUCT + $field), $BUFFER_CAPACITY_PARAM); }"
+                                "${t}${access}static ${it.nullable("$returnType.Buffer")} n$getter(long $STRUCT, int $BUFFER_CAPACITY_PARAM) { return ${it.construct(returnType)}(memGetAddress($STRUCT + $field), $BUFFER_CAPACITY_PARAM); }"
                             else
-                                "${t}public static ${it.nullable("$returnType.Buffer")} n$getter(long $STRUCT) { return ${it.construct(returnType)}(memGetAddress($STRUCT + $field), $capacity); }"
+                                "${t}${access}static ${it.nullable("$returnType.Buffer")} n$getter(long $STRUCT) { return ${it.construct(returnType)}(memGetAddress($STRUCT + $field), $capacity); }"
                         } else
-                            "${t}public static ${it.nullable(returnType)} n$getter(long $STRUCT) { return ${it.construct(returnType)}(memGetAddress($STRUCT + $field)); }"
+                            "${t}${access}static ${it.nullable(returnType)} n$getter(long $STRUCT) { return ${it.construct(returnType)}(memGetAddress($STRUCT + $field)); }"
                         )
                     } else {
                         val capacity = getAutoSizeExpression(it.name) ?: it.getCheckExpression()
@@ -2124,11 +2126,11 @@ ${validations.joinToString("\n")}
                         if (capacity == null) {
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter(int) $getter}. */")
-                            println("${t}public static ${it.nullable(returnType)} n$getter(long $STRUCT, int $BUFFER_CAPACITY_PARAM) { return ${it.mem(returnType)}(memGetAddress($STRUCT + $field), $BUFFER_CAPACITY_PARAM); }")
+                            println("${t}${access}static ${it.nullable(returnType)} n$getter(long $STRUCT, int $BUFFER_CAPACITY_PARAM) { return ${it.mem(returnType)}(memGetAddress($STRUCT + $field), $BUFFER_CAPACITY_PARAM); }")
                         } else {
                             if (it.public)
                                 println("$t/** Unsafe version of {@link #$getter() $getter}. */")
-                            println("${t}public static ${it.nullable(returnType)} n$getter(long $STRUCT) { return ${it.mem(returnType)}(memGetAddress($STRUCT + $field), $capacity); }")
+                            println("${t}${access}static ${it.nullable(returnType)} n$getter(long $STRUCT) { return ${it.mem(returnType)}(memGetAddress($STRUCT + $field), $capacity); }")
                         }
                     }
                 }

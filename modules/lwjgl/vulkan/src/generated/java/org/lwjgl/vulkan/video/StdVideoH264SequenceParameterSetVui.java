@@ -393,7 +393,7 @@ public class StdVideoH264SequenceParameterSetVui extends Struct<StdVideoH264Sequ
     public static byte nchroma_sample_loc_type_top_field(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSetVui.CHROMA_SAMPLE_LOC_TYPE_TOP_FIELD); }
     /** Unsafe version of {@link #chroma_sample_loc_type_bottom_field}. */
     public static byte nchroma_sample_loc_type_bottom_field(long struct) { return memGetByte(struct + StdVideoH264SequenceParameterSetVui.CHROMA_SAMPLE_LOC_TYPE_BOTTOM_FIELD); }
-    public static int nreserved1(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSetVui.RESERVED1); }
+    static int nreserved1(long struct) { return memGetInt(struct + StdVideoH264SequenceParameterSetVui.RESERVED1); }
     /** Unsafe version of {@link #pHrdParameters}. */
     public static StdVideoH264HrdParameters npHrdParameters(long struct) { return StdVideoH264HrdParameters.create(memGetAddress(struct + StdVideoH264SequenceParameterSetVui.PHRDPARAMETERS)); }
 
@@ -425,7 +425,7 @@ public class StdVideoH264SequenceParameterSetVui extends Struct<StdVideoH264Sequ
     public static void nchroma_sample_loc_type_top_field(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSetVui.CHROMA_SAMPLE_LOC_TYPE_TOP_FIELD, value); }
     /** Unsafe version of {@link #chroma_sample_loc_type_bottom_field(byte) chroma_sample_loc_type_bottom_field}. */
     public static void nchroma_sample_loc_type_bottom_field(long struct, byte value) { memPutByte(struct + StdVideoH264SequenceParameterSetVui.CHROMA_SAMPLE_LOC_TYPE_BOTTOM_FIELD, value); }
-    public static void nreserved1(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSetVui.RESERVED1, value); }
+    static void nreserved1(long struct, int value) { memPutInt(struct + StdVideoH264SequenceParameterSetVui.RESERVED1, value); }
     /** Unsafe version of {@link #pHrdParameters(StdVideoH264HrdParameters) pHrdParameters}. */
     public static void npHrdParameters(long struct, StdVideoH264HrdParameters value) { memPutAddress(struct + StdVideoH264SequenceParameterSetVui.PHRDPARAMETERS, value.address()); }
 

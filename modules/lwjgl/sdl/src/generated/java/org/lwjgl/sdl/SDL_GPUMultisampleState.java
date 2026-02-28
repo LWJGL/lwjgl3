@@ -254,8 +254,8 @@ public class SDL_GPUMultisampleState extends Struct<SDL_GPUMultisampleState> imp
     public static boolean nenable_mask(long struct) { return memGetByte(struct + SDL_GPUMultisampleState.ENABLE_MASK) != 0; }
     /** Unsafe version of {@link #enable_alpha_to_coverage}. */
     public static boolean nenable_alpha_to_coverage(long struct) { return memGetByte(struct + SDL_GPUMultisampleState.ENABLE_ALPHA_TO_COVERAGE) != 0; }
-    public static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUMultisampleState.PADDING2); }
-    public static byte npadding3(long struct) { return memGetByte(struct + SDL_GPUMultisampleState.PADDING3); }
+    static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUMultisampleState.PADDING2); }
+    static byte npadding3(long struct) { return memGetByte(struct + SDL_GPUMultisampleState.PADDING3); }
 
     /** Unsafe version of {@link #sample_count(int) sample_count}. */
     public static void nsample_count(long struct, int value) { memPutInt(struct + SDL_GPUMultisampleState.SAMPLE_COUNT, value); }
@@ -265,8 +265,8 @@ public class SDL_GPUMultisampleState extends Struct<SDL_GPUMultisampleState> imp
     public static void nenable_mask(long struct, boolean value) { memPutByte(struct + SDL_GPUMultisampleState.ENABLE_MASK, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #enable_alpha_to_coverage(boolean) enable_alpha_to_coverage}. */
     public static void nenable_alpha_to_coverage(long struct, boolean value) { memPutByte(struct + SDL_GPUMultisampleState.ENABLE_ALPHA_TO_COVERAGE, value ? (byte)1 : (byte)0); }
-    public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUMultisampleState.PADDING2, value); }
-    public static void npadding3(long struct, byte value) { memPutByte(struct + SDL_GPUMultisampleState.PADDING3, value); }
+    static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUMultisampleState.PADDING2, value); }
+    static void npadding3(long struct, byte value) { memPutByte(struct + SDL_GPUMultisampleState.PADDING3, value); }
 
     // -----------------------------------
 

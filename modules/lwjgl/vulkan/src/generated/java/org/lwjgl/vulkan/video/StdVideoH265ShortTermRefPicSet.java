@@ -355,9 +355,9 @@ public class StdVideoH265ShortTermRefPicSet extends Struct<StdVideoH265ShortTerm
     public static short nused_by_curr_pic_s0_flag(long struct) { return memGetShort(struct + StdVideoH265ShortTermRefPicSet.USED_BY_CURR_PIC_S0_FLAG); }
     /** Unsafe version of {@link #used_by_curr_pic_s1_flag}. */
     public static short nused_by_curr_pic_s1_flag(long struct) { return memGetShort(struct + StdVideoH265ShortTermRefPicSet.USED_BY_CURR_PIC_S1_FLAG); }
-    public static short nreserved1(long struct) { return memGetShort(struct + StdVideoH265ShortTermRefPicSet.RESERVED1); }
-    public static byte nreserved2(long struct) { return memGetByte(struct + StdVideoH265ShortTermRefPicSet.RESERVED2); }
-    public static byte nreserved3(long struct) { return memGetByte(struct + StdVideoH265ShortTermRefPicSet.RESERVED3); }
+    static short nreserved1(long struct) { return memGetShort(struct + StdVideoH265ShortTermRefPicSet.RESERVED1); }
+    static byte nreserved2(long struct) { return memGetByte(struct + StdVideoH265ShortTermRefPicSet.RESERVED2); }
+    static byte nreserved3(long struct) { return memGetByte(struct + StdVideoH265ShortTermRefPicSet.RESERVED3); }
     /** Unsafe version of {@link #num_negative_pics}. */
     public static byte nnum_negative_pics(long struct) { return memGetByte(struct + StdVideoH265ShortTermRefPicSet.NUM_NEGATIVE_PICS); }
     /** Unsafe version of {@link #num_positive_pics}. */
@@ -389,9 +389,9 @@ public class StdVideoH265ShortTermRefPicSet extends Struct<StdVideoH265ShortTerm
     public static void nused_by_curr_pic_s0_flag(long struct, short value) { memPutShort(struct + StdVideoH265ShortTermRefPicSet.USED_BY_CURR_PIC_S0_FLAG, value); }
     /** Unsafe version of {@link #used_by_curr_pic_s1_flag(short) used_by_curr_pic_s1_flag}. */
     public static void nused_by_curr_pic_s1_flag(long struct, short value) { memPutShort(struct + StdVideoH265ShortTermRefPicSet.USED_BY_CURR_PIC_S1_FLAG, value); }
-    public static void nreserved1(long struct, short value) { memPutShort(struct + StdVideoH265ShortTermRefPicSet.RESERVED1, value); }
-    public static void nreserved2(long struct, byte value) { memPutByte(struct + StdVideoH265ShortTermRefPicSet.RESERVED2, value); }
-    public static void nreserved3(long struct, byte value) { memPutByte(struct + StdVideoH265ShortTermRefPicSet.RESERVED3, value); }
+    static void nreserved1(long struct, short value) { memPutShort(struct + StdVideoH265ShortTermRefPicSet.RESERVED1, value); }
+    static void nreserved2(long struct, byte value) { memPutByte(struct + StdVideoH265ShortTermRefPicSet.RESERVED2, value); }
+    static void nreserved3(long struct, byte value) { memPutByte(struct + StdVideoH265ShortTermRefPicSet.RESERVED3, value); }
     /** Unsafe version of {@link #num_negative_pics(byte) num_negative_pics}. */
     public static void nnum_negative_pics(long struct, byte value) { memPutByte(struct + StdVideoH265ShortTermRefPicSet.NUM_NEGATIVE_PICS, value); }
     /** Unsafe version of {@link #num_positive_pics(byte) num_positive_pics}. */

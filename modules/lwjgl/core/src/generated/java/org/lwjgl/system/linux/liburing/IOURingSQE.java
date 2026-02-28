@@ -739,7 +739,7 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     public static long naddr2(long struct) { return memGetLong(struct + IOURingSQE.ADDR2); }
     /** Unsafe version of {@link #cmd_op}. */
     public static int ncmd_op(long struct) { return memGetInt(struct + IOURingSQE.CMD_OP); }
-    public static int n__pad1(long struct) { return memGetInt(struct + IOURingSQE.__PAD1); }
+    static int n__pad1(long struct) { return memGetInt(struct + IOURingSQE.__PAD1); }
     /** Unsafe version of {@link #addr}. */
     public static long naddr(long struct) { return memGetLong(struct + IOURingSQE.ADDR); }
     /** Unsafe version of {@link #splice_off_in}. */
@@ -816,14 +816,14 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     public static int noptlen(long struct) { return memGetInt(struct + IOURingSQE.OPTLEN); }
     /** Unsafe version of {@link #addr_len}. */
     public static short naddr_len(long struct) { return memGetShort(struct + IOURingSQE.ADDR_LEN); }
-    public static ShortBuffer n__pad3(long struct) { return memShortBuffer(struct + IOURingSQE.__PAD3, 1); }
-    public static short n__pad3(long struct, int index) {
+    static ShortBuffer n__pad3(long struct) { return memShortBuffer(struct + IOURingSQE.__PAD3, 1); }
+    static short n__pad3(long struct, int index) {
         return memGetShort(struct + IOURingSQE.__PAD3 + check(index, 1) * 2);
     }
     /** Unsafe version of {@link #addr3}. */
     public static long naddr3(long struct) { return memGetLong(struct + IOURingSQE.ADDR3); }
-    public static LongBuffer n__pad2(long struct) { return memLongBuffer(struct + IOURingSQE.__PAD2, 1); }
-    public static long n__pad2(long struct, int index) {
+    static LongBuffer n__pad2(long struct) { return memLongBuffer(struct + IOURingSQE.__PAD2, 1); }
+    static long n__pad2(long struct, int index) {
         return memGetLong(struct + IOURingSQE.__PAD2 + check(index, 1) * 8);
     }
     /** Unsafe version of {@link #attr_ptr}. */
@@ -853,7 +853,7 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     public static void naddr2(long struct, long value) { memPutLong(struct + IOURingSQE.ADDR2, value); }
     /** Unsafe version of {@link #cmd_op(int) cmd_op}. */
     public static void ncmd_op(long struct, int value) { memPutInt(struct + IOURingSQE.CMD_OP, value); }
-    public static void n__pad1(long struct, int value) { memPutInt(struct + IOURingSQE.__PAD1, value); }
+    static void n__pad1(long struct, int value) { memPutInt(struct + IOURingSQE.__PAD1, value); }
     /** Unsafe version of {@link #addr(long) addr}. */
     public static void naddr(long struct, long value) { memPutLong(struct + IOURingSQE.ADDR, value); }
     /** Unsafe version of {@link #splice_off_in(long) splice_off_in}. */
@@ -930,20 +930,20 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     public static void noptlen(long struct, int value) { memPutInt(struct + IOURingSQE.OPTLEN, value); }
     /** Unsafe version of {@link #addr_len(short) addr_len}. */
     public static void naddr_len(long struct, short value) { memPutShort(struct + IOURingSQE.ADDR_LEN, value); }
-    public static void n__pad3(long struct, ShortBuffer value) {
+    static void n__pad3(long struct, ShortBuffer value) {
         if (CHECKS) { checkGT(value, 1); }
         memCopy(memAddress(value), struct + IOURingSQE.__PAD3, value.remaining() * 2);
     }
-    public static void n__pad3(long struct, int index, short value) {
+    static void n__pad3(long struct, int index, short value) {
         memPutShort(struct + IOURingSQE.__PAD3 + check(index, 1) * 2, value);
     }
     /** Unsafe version of {@link #addr3(long) addr3}. */
     public static void naddr3(long struct, long value) { memPutLong(struct + IOURingSQE.ADDR3, value); }
-    public static void n__pad2(long struct, LongBuffer value) {
+    static void n__pad2(long struct, LongBuffer value) {
         if (CHECKS) { checkGT(value, 1); }
         memCopy(memAddress(value), struct + IOURingSQE.__PAD2, value.remaining() * 8);
     }
-    public static void n__pad2(long struct, int index, long value) {
+    static void n__pad2(long struct, int index, long value) {
         memPutLong(struct + IOURingSQE.__PAD2 + check(index, 1) * 8, value);
     }
     /** Unsafe version of {@link #attr_ptr(long) attr_ptr}. */

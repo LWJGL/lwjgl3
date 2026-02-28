@@ -403,7 +403,7 @@ public class ktxTexture1 extends Struct<ktxTexture1> implements NativeResource {
     public static int nglBaseInternalformat(long struct) { return memGetInt(struct + ktxTexture1.GLBASEINTERNALFORMAT); }
     /** Unsafe version of {@link #glType}. */
     public static int nglType(long struct) { return memGetInt(struct + ktxTexture1.GLTYPE); }
-    public static PointerBuffer n_private(long struct, int capacity) { return memPointerBuffer(memGetAddress(struct + ktxTexture1._PRIVATE), capacity); }
+    static PointerBuffer n_private(long struct, int capacity) { return memPointerBuffer(memGetAddress(struct + ktxTexture1._PRIVATE), capacity); }
 
     // -----------------------------------
 

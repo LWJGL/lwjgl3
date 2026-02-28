@@ -248,16 +248,16 @@ public class FT_GlyphSlot extends Struct<FT_GlyphSlot> {
     public static int nbitmap_top(long struct) { return memGetInt(struct + FT_GlyphSlot.BITMAP_TOP); }
     /** Unsafe version of {@link #outline}. */
     public static FT_Outline noutline(long struct) { return FT_Outline.create(struct + FT_GlyphSlot.OUTLINE); }
-    public static int nnum_subglyphs(long struct) { return memGetInt(struct + FT_GlyphSlot.NUM_SUBGLYPHS); }
-    public static long nsubglyphs(long struct) { return memGetAddress(struct + FT_GlyphSlot.SUBGLYPHS); }
-    public static @Nullable ByteBuffer ncontrol_data(long struct) { return memByteBufferSafe(memGetAddress(struct + FT_GlyphSlot.CONTROL_DATA), (int)ncontrol_len(struct)); }
-    public static long ncontrol_len(long struct) { return memGetCLong(struct + FT_GlyphSlot.CONTROL_LEN); }
+    static int nnum_subglyphs(long struct) { return memGetInt(struct + FT_GlyphSlot.NUM_SUBGLYPHS); }
+    static long nsubglyphs(long struct) { return memGetAddress(struct + FT_GlyphSlot.SUBGLYPHS); }
+    static @Nullable ByteBuffer ncontrol_data(long struct) { return memByteBufferSafe(memGetAddress(struct + FT_GlyphSlot.CONTROL_DATA), (int)ncontrol_len(struct)); }
+    static long ncontrol_len(long struct) { return memGetCLong(struct + FT_GlyphSlot.CONTROL_LEN); }
     /** Unsafe version of {@link #lsb_delta}. */
     public static long nlsb_delta(long struct) { return memGetCLong(struct + FT_GlyphSlot.LSB_DELTA); }
     /** Unsafe version of {@link #rsb_delta}. */
     public static long nrsb_delta(long struct) { return memGetCLong(struct + FT_GlyphSlot.RSB_DELTA); }
-    public static long nother(long struct) { return memGetAddress(struct + FT_GlyphSlot.OTHER); }
-    public static long ninternal(long struct) { return memGetAddress(struct + FT_GlyphSlot.INTERNAL); }
+    static long nother(long struct) { return memGetAddress(struct + FT_GlyphSlot.OTHER); }
+    static long ninternal(long struct) { return memGetAddress(struct + FT_GlyphSlot.INTERNAL); }
 
     // -----------------------------------
 

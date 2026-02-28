@@ -273,12 +273,12 @@ public class IOURingRegWait extends Struct<IOURingRegWait> implements NativeReso
     public static long nsigmask(long struct) { return memGetLong(struct + IOURingRegWait.SIGMASK); }
     /** Unsafe version of {@link #sigmask_sz}. */
     public static int nsigmask_sz(long struct) { return memGetInt(struct + IOURingRegWait.SIGMASK_SZ); }
-    public static IntBuffer npad(long struct) { return memIntBuffer(struct + IOURingRegWait.PAD, 3); }
-    public static int npad(long struct, int index) {
+    static IntBuffer npad(long struct) { return memIntBuffer(struct + IOURingRegWait.PAD, 3); }
+    static int npad(long struct, int index) {
         return memGetInt(struct + IOURingRegWait.PAD + check(index, 3) * 4);
     }
-    public static LongBuffer npad2(long struct) { return memLongBuffer(struct + IOURingRegWait.PAD2, 2); }
-    public static long npad2(long struct, int index) {
+    static LongBuffer npad2(long struct) { return memLongBuffer(struct + IOURingRegWait.PAD2, 2); }
+    static long npad2(long struct, int index) {
         return memGetLong(struct + IOURingRegWait.PAD2 + check(index, 2) * 8);
     }
 
@@ -292,18 +292,18 @@ public class IOURingRegWait extends Struct<IOURingRegWait> implements NativeReso
     public static void nsigmask(long struct, long value) { memPutLong(struct + IOURingRegWait.SIGMASK, value); }
     /** Unsafe version of {@link #sigmask_sz(int) sigmask_sz}. */
     public static void nsigmask_sz(long struct, int value) { memPutInt(struct + IOURingRegWait.SIGMASK_SZ, value); }
-    public static void npad(long struct, IntBuffer value) {
+    static void npad(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + IOURingRegWait.PAD, value.remaining() * 4);
     }
-    public static void npad(long struct, int index, int value) {
+    static void npad(long struct, int index, int value) {
         memPutInt(struct + IOURingRegWait.PAD + check(index, 3) * 4, value);
     }
-    public static void npad2(long struct, LongBuffer value) {
+    static void npad2(long struct, LongBuffer value) {
         if (CHECKS) { checkGT(value, 2); }
         memCopy(memAddress(value), struct + IOURingRegWait.PAD2, value.remaining() * 8);
     }
-    public static void npad2(long struct, int index, long value) {
+    static void npad2(long struct, int index, long value) {
         memPutLong(struct + IOURingRegWait.PAD2 + check(index, 2) * 8, value);
     }
 

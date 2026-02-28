@@ -246,8 +246,8 @@ public class ZSTDFrameHeader extends Struct<ZSTDFrameHeader> implements NativeRe
     public static int ndictID(long struct) { return memGetInt(struct + ZSTDFrameHeader.DICTID); }
     /** Unsafe version of {@link #checksumFlag}. */
     public static int nchecksumFlag(long struct) { return memGetInt(struct + ZSTDFrameHeader.CHECKSUMFLAG); }
-    public static int n_reserved1(long struct) { return memGetInt(struct + ZSTDFrameHeader._RESERVED1); }
-    public static int n_reserved2(long struct) { return memGetInt(struct + ZSTDFrameHeader._RESERVED2); }
+    static int n_reserved1(long struct) { return memGetInt(struct + ZSTDFrameHeader._RESERVED1); }
+    static int n_reserved2(long struct) { return memGetInt(struct + ZSTDFrameHeader._RESERVED2); }
 
     // -----------------------------------
 

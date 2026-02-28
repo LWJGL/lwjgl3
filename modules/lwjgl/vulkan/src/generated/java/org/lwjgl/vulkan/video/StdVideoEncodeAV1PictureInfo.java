@@ -543,8 +543,8 @@ public class StdVideoEncodeAV1PictureInfo extends Struct<StdVideoEncodeAV1Pictur
     public static byte nref_frame_idx(long struct, int index) {
         return memGetByte(struct + StdVideoEncodeAV1PictureInfo.REF_FRAME_IDX + check(index, STD_VIDEO_AV1_REFS_PER_FRAME) * 1);
     }
-    public static ByteBuffer nreserved1(long struct) { return memByteBuffer(struct + StdVideoEncodeAV1PictureInfo.RESERVED1, 3); }
-    public static byte nreserved1(long struct, int index) {
+    static ByteBuffer nreserved1(long struct) { return memByteBuffer(struct + StdVideoEncodeAV1PictureInfo.RESERVED1, 3); }
+    static byte nreserved1(long struct, int index) {
         return memGetByte(struct + StdVideoEncodeAV1PictureInfo.RESERVED1 + check(index, 3) * 1);
     }
     /** Unsafe version of {@link #delta_frame_id_minus_1}. */
@@ -618,11 +618,11 @@ public class StdVideoEncodeAV1PictureInfo extends Struct<StdVideoEncodeAV1Pictur
     public static void nref_frame_idx(long struct, int index, byte value) {
         memPutByte(struct + StdVideoEncodeAV1PictureInfo.REF_FRAME_IDX + check(index, STD_VIDEO_AV1_REFS_PER_FRAME) * 1, value);
     }
-    public static void nreserved1(long struct, ByteBuffer value) {
+    static void nreserved1(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + StdVideoEncodeAV1PictureInfo.RESERVED1, value.remaining() * 1);
     }
-    public static void nreserved1(long struct, int index, byte value) {
+    static void nreserved1(long struct, int index, byte value) {
         memPutByte(struct + StdVideoEncodeAV1PictureInfo.RESERVED1 + check(index, 3) * 1, value);
     }
     /** Unsafe version of {@link #delta_frame_id_minus_1(IntBuffer) delta_frame_id_minus_1}. */

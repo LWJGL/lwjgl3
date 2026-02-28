@@ -239,19 +239,19 @@ public class NkContext extends Struct<NkContext> implements NativeResource {
     public static NkConfigurationStacks nstacks(long struct) { return NkConfigurationStacks.create(struct + NkContext.STACKS); }
     /** Unsafe version of {@link #delta_time_seconds}. */
     public static float ndelta_time_seconds(long struct) { return memGetFloat(struct + NkContext.DELTA_TIME_SECONDS); }
-    public static NkDrawList ndraw_list(long struct) { return NkDrawList.create(struct + NkContext.DRAW_LIST); }
-    public static NkHandle nuserdata(long struct) { return NkHandle.create(struct + NkContext.USERDATA); }
-    public static NkTextEdit ntext_edit(long struct) { return NkTextEdit.create(struct + NkContext.TEXT_EDIT); }
-    public static NkCommandBuffer noverlay(long struct) { return NkCommandBuffer.create(struct + NkContext.OVERLAY); }
-    public static int nbuild(long struct) { return memGetInt(struct + NkContext.BUILD); }
-    public static int nuse_pool(long struct) { return memGetInt(struct + NkContext.USE_POOL); }
-    public static NkPool npool(long struct) { return NkPool.create(struct + NkContext.POOL); }
-    public static long nbegin(long struct) { return memGetAddress(struct + NkContext.BEGIN); }
-    public static long nend(long struct) { return memGetAddress(struct + NkContext.END); }
-    public static long nactive(long struct) { return memGetAddress(struct + NkContext.ACTIVE); }
-    public static long ncurrent(long struct) { return memGetAddress(struct + NkContext.CURRENT); }
-    public static long nfreelist(long struct) { return memGetAddress(struct + NkContext.FREELIST); }
-    public static int ncount(long struct) { return memGetInt(struct + NkContext.COUNT); }
-    public static int nseq(long struct) { return memGetInt(struct + NkContext.SEQ); }
+    static NkDrawList ndraw_list(long struct) { return NkDrawList.create(struct + NkContext.DRAW_LIST); }
+    static NkHandle nuserdata(long struct) { return NkHandle.create(struct + NkContext.USERDATA); }
+    static NkTextEdit ntext_edit(long struct) { return NkTextEdit.create(struct + NkContext.TEXT_EDIT); }
+    static NkCommandBuffer noverlay(long struct) { return NkCommandBuffer.create(struct + NkContext.OVERLAY); }
+    static int nbuild(long struct) { return memGetInt(struct + NkContext.BUILD); }
+    static int nuse_pool(long struct) { return memGetInt(struct + NkContext.USE_POOL); }
+    static NkPool npool(long struct) { return NkPool.create(struct + NkContext.POOL); }
+    static long nbegin(long struct) { return memGetAddress(struct + NkContext.BEGIN); }
+    static long nend(long struct) { return memGetAddress(struct + NkContext.END); }
+    static long nactive(long struct) { return memGetAddress(struct + NkContext.ACTIVE); }
+    static long ncurrent(long struct) { return memGetAddress(struct + NkContext.CURRENT); }
+    static long nfreelist(long struct) { return memGetAddress(struct + NkContext.FREELIST); }
+    static int ncount(long struct) { return memGetInt(struct + NkContext.COUNT); }
+    static int nseq(long struct) { return memGetInt(struct + NkContext.SEQ); }
 
 }

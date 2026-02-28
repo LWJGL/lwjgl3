@@ -313,15 +313,15 @@ public class StdVideoH265VideoParameterSet extends Struct<StdVideoH265VideoParam
     public static byte nvps_video_parameter_set_id(long struct) { return memGetByte(struct + StdVideoH265VideoParameterSet.VPS_VIDEO_PARAMETER_SET_ID); }
     /** Unsafe version of {@link #vps_max_sub_layers_minus1}. */
     public static byte nvps_max_sub_layers_minus1(long struct) { return memGetByte(struct + StdVideoH265VideoParameterSet.VPS_MAX_SUB_LAYERS_MINUS1); }
-    public static byte nreserved1(long struct) { return memGetByte(struct + StdVideoH265VideoParameterSet.RESERVED1); }
-    public static byte nreserved2(long struct) { return memGetByte(struct + StdVideoH265VideoParameterSet.RESERVED2); }
+    static byte nreserved1(long struct) { return memGetByte(struct + StdVideoH265VideoParameterSet.RESERVED1); }
+    static byte nreserved2(long struct) { return memGetByte(struct + StdVideoH265VideoParameterSet.RESERVED2); }
     /** Unsafe version of {@link #vps_num_units_in_tick}. */
     public static int nvps_num_units_in_tick(long struct) { return memGetInt(struct + StdVideoH265VideoParameterSet.VPS_NUM_UNITS_IN_TICK); }
     /** Unsafe version of {@link #vps_time_scale}. */
     public static int nvps_time_scale(long struct) { return memGetInt(struct + StdVideoH265VideoParameterSet.VPS_TIME_SCALE); }
     /** Unsafe version of {@link #vps_num_ticks_poc_diff_one_minus1}. */
     public static int nvps_num_ticks_poc_diff_one_minus1(long struct) { return memGetInt(struct + StdVideoH265VideoParameterSet.VPS_NUM_TICKS_POC_DIFF_ONE_MINUS1); }
-    public static int nreserved3(long struct) { return memGetInt(struct + StdVideoH265VideoParameterSet.RESERVED3); }
+    static int nreserved3(long struct) { return memGetInt(struct + StdVideoH265VideoParameterSet.RESERVED3); }
     /** Unsafe version of {@link #pDecPicBufMgr}. */
     public static StdVideoH265DecPicBufMgr npDecPicBufMgr(long struct) { return StdVideoH265DecPicBufMgr.create(memGetAddress(struct + StdVideoH265VideoParameterSet.PDECPICBUFMGR)); }
     /** Unsafe version of {@link #pHrdParameters}. */
@@ -335,15 +335,15 @@ public class StdVideoH265VideoParameterSet extends Struct<StdVideoH265VideoParam
     public static void nvps_video_parameter_set_id(long struct, byte value) { memPutByte(struct + StdVideoH265VideoParameterSet.VPS_VIDEO_PARAMETER_SET_ID, value); }
     /** Unsafe version of {@link #vps_max_sub_layers_minus1(byte) vps_max_sub_layers_minus1}. */
     public static void nvps_max_sub_layers_minus1(long struct, byte value) { memPutByte(struct + StdVideoH265VideoParameterSet.VPS_MAX_SUB_LAYERS_MINUS1, value); }
-    public static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoH265VideoParameterSet.RESERVED1, value); }
-    public static void nreserved2(long struct, byte value) { memPutByte(struct + StdVideoH265VideoParameterSet.RESERVED2, value); }
+    static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoH265VideoParameterSet.RESERVED1, value); }
+    static void nreserved2(long struct, byte value) { memPutByte(struct + StdVideoH265VideoParameterSet.RESERVED2, value); }
     /** Unsafe version of {@link #vps_num_units_in_tick(int) vps_num_units_in_tick}. */
     public static void nvps_num_units_in_tick(long struct, int value) { memPutInt(struct + StdVideoH265VideoParameterSet.VPS_NUM_UNITS_IN_TICK, value); }
     /** Unsafe version of {@link #vps_time_scale(int) vps_time_scale}. */
     public static void nvps_time_scale(long struct, int value) { memPutInt(struct + StdVideoH265VideoParameterSet.VPS_TIME_SCALE, value); }
     /** Unsafe version of {@link #vps_num_ticks_poc_diff_one_minus1(int) vps_num_ticks_poc_diff_one_minus1}. */
     public static void nvps_num_ticks_poc_diff_one_minus1(long struct, int value) { memPutInt(struct + StdVideoH265VideoParameterSet.VPS_NUM_TICKS_POC_DIFF_ONE_MINUS1, value); }
-    public static void nreserved3(long struct, int value) { memPutInt(struct + StdVideoH265VideoParameterSet.RESERVED3, value); }
+    static void nreserved3(long struct, int value) { memPutInt(struct + StdVideoH265VideoParameterSet.RESERVED3, value); }
     /** Unsafe version of {@link #pDecPicBufMgr(StdVideoH265DecPicBufMgr) pDecPicBufMgr}. */
     public static void npDecPicBufMgr(long struct, StdVideoH265DecPicBufMgr value) { memPutAddress(struct + StdVideoH265VideoParameterSet.PDECPICBUFMGR, value.address()); }
     /** Unsafe version of {@link #pHrdParameters(StdVideoH265HrdParameters) pHrdParameters}. */

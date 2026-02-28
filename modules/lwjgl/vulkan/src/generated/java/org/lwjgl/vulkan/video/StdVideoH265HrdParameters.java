@@ -398,8 +398,8 @@ public class StdVideoH265HrdParameters extends Struct<StdVideoH265HrdParameters>
     public static short nelemental_duration_in_tc_minus1(long struct, int index) {
         return memGetShort(struct + StdVideoH265HrdParameters.ELEMENTAL_DURATION_IN_TC_MINUS1 + check(index, STD_VIDEO_H265_SUBLAYERS_LIST_SIZE) * 2);
     }
-    public static ShortBuffer nreserved(long struct) { return memShortBuffer(struct + StdVideoH265HrdParameters.RESERVED, 3); }
-    public static short nreserved(long struct, int index) {
+    static ShortBuffer nreserved(long struct) { return memShortBuffer(struct + StdVideoH265HrdParameters.RESERVED, 3); }
+    static short nreserved(long struct, int index) {
         return memGetShort(struct + StdVideoH265HrdParameters.RESERVED + check(index, 3) * 2);
     }
     /** Unsafe version of {@link #pSubLayerHrdParametersNal}. */
@@ -445,11 +445,11 @@ public class StdVideoH265HrdParameters extends Struct<StdVideoH265HrdParameters>
     public static void nelemental_duration_in_tc_minus1(long struct, int index, short value) {
         memPutShort(struct + StdVideoH265HrdParameters.ELEMENTAL_DURATION_IN_TC_MINUS1 + check(index, STD_VIDEO_H265_SUBLAYERS_LIST_SIZE) * 2, value);
     }
-    public static void nreserved(long struct, ShortBuffer value) {
+    static void nreserved(long struct, ShortBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + StdVideoH265HrdParameters.RESERVED, value.remaining() * 2);
     }
-    public static void nreserved(long struct, int index, short value) {
+    static void nreserved(long struct, int index, short value) {
         memPutShort(struct + StdVideoH265HrdParameters.RESERVED + check(index, 3) * 2, value);
     }
     /** Unsafe version of {@link #pSubLayerHrdParametersNal(StdVideoH265SubLayerHrdParameters) pSubLayerHrdParametersNal}. */

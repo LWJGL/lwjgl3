@@ -265,8 +265,8 @@ public class IOURingZCRXAreaReg extends Struct<IOURingZCRXAreaReg> implements Na
     public static int nflags(long struct) { return memGetInt(struct + IOURingZCRXAreaReg.FLAGS); }
     /** Unsafe version of {@link #dmabuf_fd}. */
     public static int ndmabuf_fd(long struct) { return memGetInt(struct + IOURingZCRXAreaReg.DMABUF_FD); }
-    public static LongBuffer n__resv2(long struct) { return memLongBuffer(struct + IOURingZCRXAreaReg.__RESV2, 2); }
-    public static long n__resv2(long struct, int index) {
+    static LongBuffer n__resv2(long struct) { return memLongBuffer(struct + IOURingZCRXAreaReg.__RESV2, 2); }
+    static long n__resv2(long struct, int index) {
         return memGetLong(struct + IOURingZCRXAreaReg.__RESV2 + check(index, 2) * 8);
     }
 
@@ -280,11 +280,11 @@ public class IOURingZCRXAreaReg extends Struct<IOURingZCRXAreaReg> implements Na
     public static void nflags(long struct, int value) { memPutInt(struct + IOURingZCRXAreaReg.FLAGS, value); }
     /** Unsafe version of {@link #dmabuf_fd(int) dmabuf_fd}. */
     public static void ndmabuf_fd(long struct, int value) { memPutInt(struct + IOURingZCRXAreaReg.DMABUF_FD, value); }
-    public static void n__resv2(long struct, LongBuffer value) {
+    static void n__resv2(long struct, LongBuffer value) {
         if (CHECKS) { checkGT(value, 2); }
         memCopy(memAddress(value), struct + IOURingZCRXAreaReg.__RESV2, value.remaining() * 8);
     }
-    public static void n__resv2(long struct, int index, long value) {
+    static void n__resv2(long struct, int index, long value) {
         memPutLong(struct + IOURingZCRXAreaReg.__RESV2 + check(index, 2) * 8, value);
     }
 
