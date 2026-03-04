@@ -143,6 +143,12 @@ val PIXELFORMATDESCRIPTOR = struct(Module.CORE_WINDOWS, "PIXELFORMATDESCRIPTOR")
     DWORD("dwLayerMask")
     DWORD("dwVisibleMask")
     DWORD("dwDamageMask")
+
+    customMethod("""
+    @Deprecated
+    public static PIXELFORMATDESCRIPTOR callocStack(MemoryStack stack) {
+        return calloc(stack);
+    }""")
 }
 val LPPIXELFORMATDESCRIPTOR = typedef(PIXELFORMATDESCRIPTOR.p, "LPPIXELFORMATDESCRIPTOR")
 

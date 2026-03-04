@@ -586,6 +586,11 @@ public class PIXELFORMATDESCRIPTOR extends Struct<PIXELFORMATDESCRIPTOR> impleme
     /** Unsafe version of {@link #dwDamageMask(int) dwDamageMask}. */
     public static void ndwDamageMask(long struct, int value) { memPutInt(struct + PIXELFORMATDESCRIPTOR.DWDAMAGEMASK, value); }
 
+    @Deprecated
+    public static PIXELFORMATDESCRIPTOR callocStack(MemoryStack stack) {
+        return calloc(stack);
+    }
+
     // -----------------------------------
 
     /** An array of {@link PIXELFORMATDESCRIPTOR} structs. */
