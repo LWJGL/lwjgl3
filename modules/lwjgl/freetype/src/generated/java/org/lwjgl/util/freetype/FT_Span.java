@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <pre>{@code
  * struct FT_Span {
- *     short x;
+ *     unsigned short x;
  *     unsigned short len;
  *     unsigned char coverage;
  * }}</pre>
@@ -73,6 +73,7 @@ public class FT_Span extends Struct<FT_Span> {
     public int sizeof() { return SIZEOF; }
 
     /** @return the value of the {@code x} field. */
+    @NativeType("unsigned short")
     public short x() { return nx(address()); }
     /** @return the value of the {@code len} field. */
     @NativeType("unsigned short")
@@ -161,6 +162,7 @@ public class FT_Span extends Struct<FT_Span> {
         }
 
         /** @return the value of the {@code x} field. */
+        @NativeType("unsigned short")
         public short x() { return FT_Span.nx(address()); }
         /** @return the value of the {@code len} field. */
         @NativeType("unsigned short")

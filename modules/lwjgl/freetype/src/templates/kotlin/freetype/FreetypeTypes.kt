@@ -288,7 +288,7 @@ val FT_Outline_Funcs = struct(Module.FREETYPE, "FT_Outline_Funcs") {
 }
 
 val FT_Span = struct(Module.FREETYPE, "FT_Span", mutable = false) {
-    short("x")
+    unsigned_short("x")
     unsigned_short("len")
     unsigned_char("coverage")
 }
@@ -681,7 +681,7 @@ val PS_FontInfoRec = struct(Module.FREETYPE, "PS_FontInfo", nativeName = "PS_Fon
     FT_String.p("full_name")
     FT_String.p("family_name")
     FT_String.p("weight")
-    FT_Long("italic_angle")
+    FT_Fixed("italic_angle")
     FT_Bool("is_fixed_pitch")
     FT_Short("underline_position")
     FT_UShort("underline_thickness")
