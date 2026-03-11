@@ -9,7 +9,7 @@ import org.lwjgl.generator.*
 
 val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx_", binding = BGFX_BINDING) {
     IntConstant(
-        "API_VERSION".."140"
+        "API_VERSION".."142"
     )
 
     ShortConstant(
@@ -481,7 +481,8 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     ByteConstant(
         "FRAME_NONE"..0x00.b,
         "FRAME_DEBUG_CAPTURE"..0x01.b,
-        "FRAME_DISCARD"..0x02.b
+        "FRAME_DISCARD"..0x02.b,
+        "FRAME_FLUSH"..0x04.b
     )
 
     EnumConstant(
@@ -542,9 +543,11 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     )
 
     EnumConstant(
+        "ATTRIB_TYPE_INT8".enum,
         "ATTRIB_TYPE_UINT8".enum,
         "ATTRIB_TYPE_UINT10".enum,
         "ATTRIB_TYPE_INT16".enum,
+        "ATTRIB_TYPE_UINT16".enum,
         "ATTRIB_TYPE_HALF".enum,
         "ATTRIB_TYPE_FLOAT".enum,
 
@@ -1699,7 +1702,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     bgfx_encoder_t.p(
         "encoder_begin",
 
-        bool("_forThread")
+        bool("_forceNewEncoder")
     )
 
     void(

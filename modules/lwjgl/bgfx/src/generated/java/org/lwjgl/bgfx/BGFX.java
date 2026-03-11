@@ -235,7 +235,7 @@ public class BGFX {
         return BGFX;
     }
 
-    public static final int BGFX_API_VERSION = 140;
+    public static final int BGFX_API_VERSION = 142;
 
     public static final short BGFX_INVALID_HANDLE = (short)0xFFFF;
 
@@ -635,7 +635,8 @@ public class BGFX {
     public static final byte
         BGFX_FRAME_NONE          = 0x0,
         BGFX_FRAME_DEBUG_CAPTURE = 0x1,
-        BGFX_FRAME_DISCARD       = 0x2;
+        BGFX_FRAME_DISCARD       = 0x2,
+        BGFX_FRAME_FLUSH         = 0x4;
 
     public static final int
         BGFX_FATAL_DEBUG_CHECK              = 0,
@@ -687,11 +688,13 @@ public class BGFX {
         BGFX_ATTRIB_COUNT     = BGFX_ATTRIB_TEXCOORD7 + 1;
 
     public static final int
-        BGFX_ATTRIB_TYPE_UINT8  = 0,
-        BGFX_ATTRIB_TYPE_UINT10 = 1,
-        BGFX_ATTRIB_TYPE_INT16  = 2,
-        BGFX_ATTRIB_TYPE_HALF   = 3,
-        BGFX_ATTRIB_TYPE_FLOAT  = 4,
+        BGFX_ATTRIB_TYPE_INT8   = 0,
+        BGFX_ATTRIB_TYPE_UINT8  = 1,
+        BGFX_ATTRIB_TYPE_UINT10 = 2,
+        BGFX_ATTRIB_TYPE_INT16  = 3,
+        BGFX_ATTRIB_TYPE_UINT16 = 4,
+        BGFX_ATTRIB_TYPE_HALF   = 5,
+        BGFX_ATTRIB_TYPE_FLOAT  = 6,
         BGFX_ATTRIB_TYPE_COUNT  = BGFX_ATTRIB_TYPE_FLOAT + 1;
 
     public static final int
@@ -2713,11 +2716,11 @@ public class BGFX {
 
     // --- [ bgfx_encoder_begin ] ---
 
-    /** {@code bgfx_encoder_t * bgfx_encoder_begin(bool _forThread)} */
+    /** {@code bgfx_encoder_t * bgfx_encoder_begin(bool _forceNewEncoder)} */
     @NativeType("bgfx_encoder_t *")
-    public static long bgfx_encoder_begin(@NativeType("bool") boolean _forThread) {
+    public static long bgfx_encoder_begin(@NativeType("bool") boolean _forceNewEncoder) {
         long __functionAddress = Functions.encoder_begin;
-        return invokeP(_forThread, __functionAddress);
+        return invokeP(_forceNewEncoder, __functionAddress);
     }
 
     // --- [ bgfx_encoder_end ] ---

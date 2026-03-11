@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     uint32_t maxEncoders;
  *     uint32_t minResourceCbSize;
  *     uint32_t maxTransientVbSize;
- *     uint32_t maxTansientIbSize;
+ *     uint32_t maxTransientIbSize;
  *     uint32_t minUniformBufferSize;
  * }}</pre>
  */
@@ -77,7 +77,7 @@ public class BGFXCapsLimits extends Struct<BGFXCapsLimits> {
         MAXENCODERS,
         MINRESOURCECBSIZE,
         MAXTRANSIENTVBSIZE,
-        MAXTANSIENTIBSIZE,
+        MAXTRANSIENTIBSIZE,
         MINUNIFORMBUFFERSIZE;
 
     static {
@@ -135,7 +135,7 @@ public class BGFXCapsLimits extends Struct<BGFXCapsLimits> {
         MAXENCODERS = layout.offsetof(20);
         MINRESOURCECBSIZE = layout.offsetof(21);
         MAXTRANSIENTVBSIZE = layout.offsetof(22);
-        MAXTANSIENTIBSIZE = layout.offsetof(23);
+        MAXTRANSIENTIBSIZE = layout.offsetof(23);
         MINUNIFORMBUFFERSIZE = layout.offsetof(24);
     }
 
@@ -230,9 +230,9 @@ public class BGFXCapsLimits extends Struct<BGFXCapsLimits> {
     /** @return the value of the {@code maxTransientVbSize} field. */
     @NativeType("uint32_t")
     public int maxTransientVbSize() { return nmaxTransientVbSize(address()); }
-    /** @return the value of the {@code maxTansientIbSize} field. */
+    /** @return the value of the {@code maxTransientIbSize} field. */
     @NativeType("uint32_t")
-    public int maxTansientIbSize() { return nmaxTansientIbSize(address()); }
+    public int maxTransientIbSize() { return nmaxTransientIbSize(address()); }
     /** @return the value of the {@code minUniformBufferSize} field. */
     @NativeType("uint32_t")
     public int minUniformBufferSize() { return nminUniformBufferSize(address()); }
@@ -312,8 +312,8 @@ public class BGFXCapsLimits extends Struct<BGFXCapsLimits> {
     public static int nminResourceCbSize(long struct) { return memGetInt(struct + BGFXCapsLimits.MINRESOURCECBSIZE); }
     /** Unsafe version of {@link #maxTransientVbSize}. */
     public static int nmaxTransientVbSize(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXTRANSIENTVBSIZE); }
-    /** Unsafe version of {@link #maxTansientIbSize}. */
-    public static int nmaxTansientIbSize(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXTANSIENTIBSIZE); }
+    /** Unsafe version of {@link #maxTransientIbSize}. */
+    public static int nmaxTransientIbSize(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXTRANSIENTIBSIZE); }
     /** Unsafe version of {@link #minUniformBufferSize}. */
     public static int nminUniformBufferSize(long struct) { return memGetInt(struct + BGFXCapsLimits.MINUNIFORMBUFFERSIZE); }
 
@@ -429,9 +429,9 @@ public class BGFXCapsLimits extends Struct<BGFXCapsLimits> {
         /** @return the value of the {@code maxTransientVbSize} field. */
         @NativeType("uint32_t")
         public int maxTransientVbSize() { return BGFXCapsLimits.nmaxTransientVbSize(address()); }
-        /** @return the value of the {@code maxTansientIbSize} field. */
+        /** @return the value of the {@code maxTransientIbSize} field. */
         @NativeType("uint32_t")
-        public int maxTansientIbSize() { return BGFXCapsLimits.nmaxTansientIbSize(address()); }
+        public int maxTransientIbSize() { return BGFXCapsLimits.nmaxTransientIbSize(address()); }
         /** @return the value of the {@code minUniformBufferSize} field. */
         @NativeType("uint32_t")
         public int minUniformBufferSize() { return BGFXCapsLimits.nminUniformBufferSize(address()); }

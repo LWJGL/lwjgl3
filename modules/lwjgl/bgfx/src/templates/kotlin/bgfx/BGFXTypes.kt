@@ -232,7 +232,7 @@ val bgfx_caps_limits_t = struct(Module.BGFX, "BGFXCapsLimits", nativeName = "bgf
     uint32_t("maxEncoders")
     uint32_t("minResourceCbSize")
     uint32_t("maxTransientVbSize")
-    uint32_t("maxTansientIbSize")
+    uint32_t("maxTransientIbSize")
     uint32_t("minUniformBufferSize")
 }
 
