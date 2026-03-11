@@ -62,7 +62,8 @@ public class KHRMaintenance5 {
         VK_PIPELINE_CREATE_2_RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV               = 0x10000000L,
         VK_PIPELINE_CREATE_2_DESCRIPTOR_BUFFER_BIT_EXT                              = 0x20000000L,
         VK_PIPELINE_CREATE_2_PROTECTED_ACCESS_ONLY_BIT_EXT                          = 0x40000000L,
-        VK_PIPELINE_CREATE_2_DISALLOW_OPACITY_MICROMAP_BIT_ARM                      = 0x2000000000L;
+        VK_PIPELINE_CREATE_2_DISALLOW_OPACITY_MICROMAP_BIT_ARM                      = 0x2000000000L,
+        VK_PIPELINE_CREATE_2_INSTRUMENT_SHADERS_BIT_ARM                             = 0x8000000000L;
 
     public static final long
         VK_BUFFER_USAGE_2_TRANSFER_SRC_BIT_KHR                                 = 0x1L,
@@ -91,6 +92,8 @@ public class KHRMaintenance5 {
         VK_BUFFER_USAGE_2_MICROMAP_BUILD_INPUT_READ_ONLY_BIT_EXT               = 0x800000L,
         VK_BUFFER_USAGE_2_MICROMAP_STORAGE_BIT_EXT                             = 0x1000000L,
         VK_BUFFER_USAGE_2_PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT           = 0x4000000L;
+
+    public static final int VK_SHADER_CREATE_INSTRUMENT_SHADER_BIT_ARM = 0x800;
 
     protected KHRMaintenance5() {
         throw new UnsupportedOperationException();

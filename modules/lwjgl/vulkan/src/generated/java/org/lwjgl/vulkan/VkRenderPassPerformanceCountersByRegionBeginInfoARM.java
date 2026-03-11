@@ -102,7 +102,7 @@ public class VkRenderPassPerformanceCountersByRegionBeginInfoARM extends Struct<
     public int counterAddressCount() { return ncounterAddressCount(address()); }
     /** @return a {@link LongBuffer} view of the data pointed to by the {@code pCounterAddresses} field. */
     @NativeType("VkDeviceAddress const *")
-    public LongBuffer pCounterAddresses(int capacity) { return npCounterAddresses(address(), capacity); }
+    public LongBuffer pCounterAddresses() { return npCounterAddresses(address()); }
     /** @return the value of the {@code serializeRegions} field. */
     @NativeType("VkBool32")
     public boolean serializeRegions() { return nserializeRegions(address()) != 0; }
@@ -111,7 +111,7 @@ public class VkRenderPassPerformanceCountersByRegionBeginInfoARM extends Struct<
     public int counterIndexCount() { return ncounterIndexCount(address()); }
     /** @return a {@link IntBuffer} view of the data pointed to by the {@code pCounterIndices} field. */
     @NativeType("uint32_t *")
-    public IntBuffer pCounterIndices(int capacity) { return npCounterIndices(address(), capacity); }
+    public IntBuffer pCounterIndices() { return npCounterIndices(address()); }
 
     /** Sets the specified value to the {@code sType} field. */
     public VkRenderPassPerformanceCountersByRegionBeginInfoARM sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -119,14 +119,10 @@ public class VkRenderPassPerformanceCountersByRegionBeginInfoARM extends Struct<
     public VkRenderPassPerformanceCountersByRegionBeginInfoARM sType$Default() { return sType(ARMPerformanceCountersByRegion.VK_STRUCTURE_TYPE_RENDER_PASS_PERFORMANCE_COUNTERS_BY_REGION_BEGIN_INFO_ARM); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkRenderPassPerformanceCountersByRegionBeginInfoARM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code counterAddressCount} field. */
-    public VkRenderPassPerformanceCountersByRegionBeginInfoARM counterAddressCount(@NativeType("uint32_t") int value) { ncounterAddressCount(address(), value); return this; }
     /** Sets the address of the specified {@link LongBuffer} to the {@code pCounterAddresses} field. */
     public VkRenderPassPerformanceCountersByRegionBeginInfoARM pCounterAddresses(@NativeType("VkDeviceAddress const *") LongBuffer value) { npCounterAddresses(address(), value); return this; }
     /** Sets the specified value to the {@code serializeRegions} field. */
     public VkRenderPassPerformanceCountersByRegionBeginInfoARM serializeRegions(@NativeType("VkBool32") boolean value) { nserializeRegions(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code counterIndexCount} field. */
-    public VkRenderPassPerformanceCountersByRegionBeginInfoARM counterIndexCount(@NativeType("uint32_t") int value) { ncounterIndexCount(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@code pCounterIndices} field. */
     public VkRenderPassPerformanceCountersByRegionBeginInfoARM pCounterIndices(@NativeType("uint32_t *") IntBuffer value) { npCounterIndices(address(), value); return this; }
 
@@ -134,18 +130,14 @@ public class VkRenderPassPerformanceCountersByRegionBeginInfoARM extends Struct<
     public VkRenderPassPerformanceCountersByRegionBeginInfoARM set(
         int sType,
         long pNext,
-        int counterAddressCount,
         LongBuffer pCounterAddresses,
         boolean serializeRegions,
-        int counterIndexCount,
         IntBuffer pCounterIndices
     ) {
         sType(sType);
         pNext(pNext);
-        counterAddressCount(counterAddressCount);
         pCounterAddresses(pCounterAddresses);
         serializeRegions(serializeRegions);
-        counterIndexCount(counterIndexCount);
         pCounterIndices(pCounterIndices);
 
         return this;
@@ -280,29 +272,29 @@ public class VkRenderPassPerformanceCountersByRegionBeginInfoARM extends Struct<
     public static long npNext(long struct) { return memGetAddress(struct + VkRenderPassPerformanceCountersByRegionBeginInfoARM.PNEXT); }
     /** Unsafe version of {@link #counterAddressCount}. */
     public static int ncounterAddressCount(long struct) { return memGetInt(struct + VkRenderPassPerformanceCountersByRegionBeginInfoARM.COUNTERADDRESSCOUNT); }
-    /** Unsafe version of {@link #pCounterAddresses(int) pCounterAddresses}. */
-    public static LongBuffer npCounterAddresses(long struct, int capacity) { return memLongBuffer(memGetAddress(struct + VkRenderPassPerformanceCountersByRegionBeginInfoARM.PCOUNTERADDRESSES), capacity); }
+    /** Unsafe version of {@link #pCounterAddresses() pCounterAddresses}. */
+    public static LongBuffer npCounterAddresses(long struct) { return memLongBuffer(memGetAddress(struct + VkRenderPassPerformanceCountersByRegionBeginInfoARM.PCOUNTERADDRESSES), ncounterAddressCount(struct)); }
     /** Unsafe version of {@link #serializeRegions}. */
     public static int nserializeRegions(long struct) { return memGetInt(struct + VkRenderPassPerformanceCountersByRegionBeginInfoARM.SERIALIZEREGIONS); }
     /** Unsafe version of {@link #counterIndexCount}. */
     public static int ncounterIndexCount(long struct) { return memGetInt(struct + VkRenderPassPerformanceCountersByRegionBeginInfoARM.COUNTERINDEXCOUNT); }
-    /** Unsafe version of {@link #pCounterIndices(int) pCounterIndices}. */
-    public static IntBuffer npCounterIndices(long struct, int capacity) { return memIntBuffer(memGetAddress(struct + VkRenderPassPerformanceCountersByRegionBeginInfoARM.PCOUNTERINDICES), capacity); }
+    /** Unsafe version of {@link #pCounterIndices() pCounterIndices}. */
+    public static IntBuffer npCounterIndices(long struct) { return memIntBuffer(memGetAddress(struct + VkRenderPassPerformanceCountersByRegionBeginInfoARM.PCOUNTERINDICES), ncounterIndexCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkRenderPassPerformanceCountersByRegionBeginInfoARM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderPassPerformanceCountersByRegionBeginInfoARM.PNEXT, value); }
-    /** Unsafe version of {@link #counterAddressCount(int) counterAddressCount}. */
+    /** Sets the specified value to the {@code counterAddressCount} field of the specified {@code struct}. */
     public static void ncounterAddressCount(long struct, int value) { memPutInt(struct + VkRenderPassPerformanceCountersByRegionBeginInfoARM.COUNTERADDRESSCOUNT, value); }
     /** Unsafe version of {@link #pCounterAddresses(LongBuffer) pCounterAddresses}. */
-    public static void npCounterAddresses(long struct, LongBuffer value) { memPutAddress(struct + VkRenderPassPerformanceCountersByRegionBeginInfoARM.PCOUNTERADDRESSES, memAddress(value)); }
+    public static void npCounterAddresses(long struct, LongBuffer value) { memPutAddress(struct + VkRenderPassPerformanceCountersByRegionBeginInfoARM.PCOUNTERADDRESSES, memAddress(value)); ncounterAddressCount(struct, value.remaining()); }
     /** Unsafe version of {@link #serializeRegions(boolean) serializeRegions}. */
     public static void nserializeRegions(long struct, int value) { memPutInt(struct + VkRenderPassPerformanceCountersByRegionBeginInfoARM.SERIALIZEREGIONS, value); }
-    /** Unsafe version of {@link #counterIndexCount(int) counterIndexCount}. */
+    /** Sets the specified value to the {@code counterIndexCount} field of the specified {@code struct}. */
     public static void ncounterIndexCount(long struct, int value) { memPutInt(struct + VkRenderPassPerformanceCountersByRegionBeginInfoARM.COUNTERINDEXCOUNT, value); }
     /** Unsafe version of {@link #pCounterIndices(IntBuffer) pCounterIndices}. */
-    public static void npCounterIndices(long struct, IntBuffer value) { memPutAddress(struct + VkRenderPassPerformanceCountersByRegionBeginInfoARM.PCOUNTERINDICES, memAddress(value)); }
+    public static void npCounterIndices(long struct, IntBuffer value) { memPutAddress(struct + VkRenderPassPerformanceCountersByRegionBeginInfoARM.PCOUNTERINDICES, memAddress(value)); ncounterIndexCount(struct, value.remaining()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -368,7 +360,7 @@ public class VkRenderPassPerformanceCountersByRegionBeginInfoARM extends Struct<
         public int counterAddressCount() { return VkRenderPassPerformanceCountersByRegionBeginInfoARM.ncounterAddressCount(address()); }
         /** @return a {@link LongBuffer} view of the data pointed to by the {@code pCounterAddresses} field. */
         @NativeType("VkDeviceAddress const *")
-        public LongBuffer pCounterAddresses(int capacity) { return VkRenderPassPerformanceCountersByRegionBeginInfoARM.npCounterAddresses(address(), capacity); }
+        public LongBuffer pCounterAddresses() { return VkRenderPassPerformanceCountersByRegionBeginInfoARM.npCounterAddresses(address()); }
         /** @return the value of the {@code serializeRegions} field. */
         @NativeType("VkBool32")
         public boolean serializeRegions() { return VkRenderPassPerformanceCountersByRegionBeginInfoARM.nserializeRegions(address()) != 0; }
@@ -377,7 +369,7 @@ public class VkRenderPassPerformanceCountersByRegionBeginInfoARM extends Struct<
         public int counterIndexCount() { return VkRenderPassPerformanceCountersByRegionBeginInfoARM.ncounterIndexCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@code pCounterIndices} field. */
         @NativeType("uint32_t *")
-        public IntBuffer pCounterIndices(int capacity) { return VkRenderPassPerformanceCountersByRegionBeginInfoARM.npCounterIndices(address(), capacity); }
+        public IntBuffer pCounterIndices() { return VkRenderPassPerformanceCountersByRegionBeginInfoARM.npCounterIndices(address()); }
 
         /** Sets the specified value to the {@code sType} field. */
         public VkRenderPassPerformanceCountersByRegionBeginInfoARM.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassPerformanceCountersByRegionBeginInfoARM.nsType(address(), value); return this; }
@@ -385,14 +377,10 @@ public class VkRenderPassPerformanceCountersByRegionBeginInfoARM extends Struct<
         public VkRenderPassPerformanceCountersByRegionBeginInfoARM.Buffer sType$Default() { return sType(ARMPerformanceCountersByRegion.VK_STRUCTURE_TYPE_RENDER_PASS_PERFORMANCE_COUNTERS_BY_REGION_BEGIN_INFO_ARM); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkRenderPassPerformanceCountersByRegionBeginInfoARM.Buffer pNext(@NativeType("void *") long value) { VkRenderPassPerformanceCountersByRegionBeginInfoARM.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code counterAddressCount} field. */
-        public VkRenderPassPerformanceCountersByRegionBeginInfoARM.Buffer counterAddressCount(@NativeType("uint32_t") int value) { VkRenderPassPerformanceCountersByRegionBeginInfoARM.ncounterAddressCount(address(), value); return this; }
         /** Sets the address of the specified {@link LongBuffer} to the {@code pCounterAddresses} field. */
         public VkRenderPassPerformanceCountersByRegionBeginInfoARM.Buffer pCounterAddresses(@NativeType("VkDeviceAddress const *") LongBuffer value) { VkRenderPassPerformanceCountersByRegionBeginInfoARM.npCounterAddresses(address(), value); return this; }
         /** Sets the specified value to the {@code serializeRegions} field. */
         public VkRenderPassPerformanceCountersByRegionBeginInfoARM.Buffer serializeRegions(@NativeType("VkBool32") boolean value) { VkRenderPassPerformanceCountersByRegionBeginInfoARM.nserializeRegions(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code counterIndexCount} field. */
-        public VkRenderPassPerformanceCountersByRegionBeginInfoARM.Buffer counterIndexCount(@NativeType("uint32_t") int value) { VkRenderPassPerformanceCountersByRegionBeginInfoARM.ncounterIndexCount(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@code pCounterIndices} field. */
         public VkRenderPassPerformanceCountersByRegionBeginInfoARM.Buffer pCounterIndices(@NativeType("uint32_t *") IntBuffer value) { VkRenderPassPerformanceCountersByRegionBeginInfoARM.npCounterIndices(address(), value); return this; }
 

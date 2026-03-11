@@ -799,6 +799,7 @@ public final class JNI {
         int callPPPPI(MemorySegment __functionAddress, @FFMNullable @FFMPointer long param0, @FFMNullable @FFMPointer long param1, @FFMNullable @FFMPointer long param2, @FFMNullable @FFMPointer long param3);
         int callPJJJI(MemorySegment __functionAddress, @FFMNullable @FFMPointer long param0, int param1, long param2, long param3, long param4);
         int callPJPPI(MemorySegment __functionAddress, @FFMNullable @FFMPointer long param0, long param1, int param2, @FFMNullable @FFMPointer long param3, @FFMNullable @FFMPointer long param4);
+        int callPJPPI(MemorySegment __functionAddress, @FFMNullable @FFMPointer long param0, long param1, @FFMNullable @FFMPointer long param2, @FFMNullable @FFMPointer long param3, int param4);
         int callPPPPI(MemorySegment __functionAddress, @FFMNullable @FFMPointer long param0, int param1, @FFMNullable @FFMPointer long param2, @FFMNullable @FFMPointer long param3, @FFMNullable @FFMPointer long param4);
         int callPPPPI(MemorySegment __functionAddress, @FFMNullable @FFMPointer long param0, @FFMNullable @FFMPointer long param1, int param2, @FFMNullable @FFMPointer long param3, @FFMNullable @FFMPointer long param4);
         int callPPPPI(MemorySegment __functionAddress, @FFMNullable @FFMPointer long param0, @FFMNullable @FFMPointer long param1, @FFMNullable @FFMPointer long param2, int param3, @FFMNullable @FFMPointer long param4);
@@ -2090,6 +2091,7 @@ public final class JNI {
     public static int callPPPPI(long param0, long param1, long param2, long param3, long __functionAddress) { return jni.callPPPPI(MemorySegment.ofAddress(__functionAddress), param0, param1, param2, param3); }
     public static int callPJJJI(long param0, int param1, long param2, long param3, long param4, long __functionAddress) { return jni.callPJJJI(MemorySegment.ofAddress(__functionAddress), param0, param1, param2, param3, param4); }
     public static int callPJPPI(long param0, long param1, int param2, long param3, long param4, long __functionAddress) { return jni.callPJPPI(MemorySegment.ofAddress(__functionAddress), param0, param1, param2, param3, param4); }
+    public static int callPJPPI(long param0, long param1, long param2, long param3, int param4, long __functionAddress) { return jni.callPJPPI(MemorySegment.ofAddress(__functionAddress), param0, param1, param2, param3, param4); }
     public static int callPPPPI(long param0, int param1, long param2, long param3, long param4, long __functionAddress) { return jni.callPPPPI(MemorySegment.ofAddress(__functionAddress), param0, param1, param2, param3, param4); }
     public static int callPPPPI(long param0, long param1, int param2, long param3, long param4, long __functionAddress) { return jni.callPPPPI(MemorySegment.ofAddress(__functionAddress), param0, param1, param2, param3, param4); }
     public static int callPPPPI(long param0, long param1, long param2, int param3, long param4, long __functionAddress) { return jni.callPPPPI(MemorySegment.ofAddress(__functionAddress), param0, param1, param2, param3, param4); }
@@ -2726,6 +2728,7 @@ public final class JNI {
     public static native int callPPPPI(long param0, long param1, int @Nullable [] param2, long param3, long __functionAddress);
     public static native int callPPPPI(long param0, long param1, int @Nullable [] param2, int @Nullable [] param3, long __functionAddress);
     public static native int callPJPPI(long param0, long param1, int param2, long param3, int @Nullable [] param4, long __functionAddress);
+    public static native int callPJPPI(long param0, long param1, int @Nullable [] param2, long param3, int param4, long __functionAddress);
     public static native int callPPPPI(long param0, int param1, long param2, long param3, long @Nullable [] param4, long __functionAddress);
     public static native int callPPPPI(long param0, int param1, long param2, int @Nullable [] param3, long param4, long __functionAddress);
     public static native int callPPPPI(long param0, int param1, long param2, long @Nullable [] param3, long param4, long __functionAddress);

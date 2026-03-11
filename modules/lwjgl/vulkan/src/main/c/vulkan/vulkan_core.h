@@ -66,7 +66,7 @@ extern "C" {
 //#define VK_API_VERSION VK_MAKE_API_VERSION(0, 1, 0, 0) // Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 344
+#define VK_HEADER_VERSION 345
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 4, VK_HEADER_VERSION)
@@ -1370,6 +1370,10 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_ARM = 1000605002,
     VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_ARM = 1000605003,
     VK_STRUCTURE_TYPE_RENDER_PASS_PERFORMANCE_COUNTERS_BY_REGION_BEGIN_INFO_ARM = 1000605004,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INSTRUMENTATION_FEATURES_ARM = 1000607000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INSTRUMENTATION_PROPERTIES_ARM = 1000607001,
+    VK_STRUCTURE_TYPE_SHADER_INSTRUMENTATION_CREATE_INFO_ARM = 1000607002,
+    VK_STRUCTURE_TYPE_SHADER_INSTRUMENTATION_METRIC_DESCRIPTION_ARM = 1000607003,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_ROBUSTNESS_FEATURES_EXT = 1000608000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FORMAT_PACK_FEATURES_ARM = 1000609000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_LAYERED_FEATURES_VALVE = 1000611000,
@@ -1377,12 +1381,8 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_DENSITY_MAP_LAYERED_CREATE_INFO_VALVE = 1000611002,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_KHR = 1000286000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_KHR = 1000286001,
-#ifdef VK_ENABLE_BETA_EXTENSIONS
     VK_STRUCTURE_TYPE_SET_PRESENT_CONFIG_NV = 1000613000,
-#endif
-#ifdef VK_ENABLE_BETA_EXTENSIONS
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_METERING_FEATURES_NV = 1000613001,
-#endif
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_EXT = 1000425000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_EXT = 1000425001,
     VK_STRUCTURE_TYPE_RENDER_PASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_EXT = 1000425002,
@@ -1729,6 +1729,7 @@ typedef enum VkObjectType {
     VK_OBJECT_TYPE_EXTERNAL_COMPUTE_QUEUE_NV = 1000556000,
     VK_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_EXT = 1000572000,
     VK_OBJECT_TYPE_INDIRECT_EXECUTION_SET_EXT = 1000572001,
+    VK_OBJECT_TYPE_SHADER_INSTRUMENTATION_ARM = 1000607000,
     VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR = VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE,
     VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR = VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION,
     VK_OBJECT_TYPE_PRIVATE_DATA_SLOT_EXT = VK_OBJECT_TYPE_PRIVATE_DATA_SLOT,
@@ -8256,9 +8257,12 @@ static const VkPipelineCreateFlagBits2 VK_PIPELINE_CREATE_2_COLOR_ATTACHMENT_FEE
 static const VkPipelineCreateFlagBits2 VK_PIPELINE_CREATE_2_DEPTH_STENCIL_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT = 0x04000000ULL;
 static const VkPipelineCreateFlagBits2 VK_PIPELINE_CREATE_2_NO_PROTECTED_ACCESS_BIT_EXT = 0x08000000ULL;
 static const VkPipelineCreateFlagBits2 VK_PIPELINE_CREATE_2_PROTECTED_ACCESS_ONLY_BIT_EXT = 0x40000000ULL;
+#ifdef VK_ENABLE_BETA_EXTENSIONS
 static const VkPipelineCreateFlagBits2 VK_PIPELINE_CREATE_2_RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV = 0x10000000ULL;
+#endif
 static const VkPipelineCreateFlagBits2 VK_PIPELINE_CREATE_2_DESCRIPTOR_BUFFER_BIT_EXT = 0x20000000ULL;
 static const VkPipelineCreateFlagBits2 VK_PIPELINE_CREATE_2_DISALLOW_OPACITY_MICROMAP_BIT_ARM = 0x2000000000ULL;
+static const VkPipelineCreateFlagBits2 VK_PIPELINE_CREATE_2_INSTRUMENT_SHADERS_BIT_ARM = 0x8000000000ULL;
 static const VkPipelineCreateFlagBits2 VK_PIPELINE_CREATE_2_CAPTURE_DATA_BIT_KHR = 0x80000000ULL;
 static const VkPipelineCreateFlagBits2 VK_PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_EXT = 0x4000000000ULL;
 static const VkPipelineCreateFlagBits2 VK_PIPELINE_CREATE_2_PER_LAYER_FRAGMENT_DENSITY_BIT_VALVE = 0x10000000000ULL;
@@ -22315,6 +22319,7 @@ typedef enum VkDepthClampModeEXT {
 typedef enum VkShaderCreateFlagBitsEXT {
     VK_SHADER_CREATE_LINK_STAGE_BIT_EXT = 0x00000001,
     VK_SHADER_CREATE_DESCRIPTOR_HEAP_BIT_EXT = 0x00000400,
+    VK_SHADER_CREATE_INSTRUMENT_SHADER_BIT_ARM = 0x00000800,
     VK_SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT = 0x00000002,
     VK_SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT = 0x00000004,
     VK_SHADER_CREATE_NO_TASK_SHADER_BIT_EXT = 0x00000008,
@@ -24482,6 +24487,103 @@ VKAPI_ATTR VkResult VKAPI_CALL vkEnumeratePhysicalDeviceQueueFamilyPerformanceCo
     uint32_t*                                   pCounterCount,
     VkPerformanceCounterARM*                    pCounters,
     VkPerformanceCounterDescriptionARM*         pCounterDescriptions);
+#endif
+#endif
+
+
+// VK_ARM_shader_instrumentation is a preprocessor guard. Do not pass it to API calls.
+#define VK_ARM_shader_instrumentation 1
+VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkShaderInstrumentationARM)
+#define VK_ARM_SHADER_INSTRUMENTATION_SPEC_VERSION 1
+#define VK_ARM_SHADER_INSTRUMENTATION_EXTENSION_NAME "VK_ARM_shader_instrumentation"
+typedef VkFlags VkShaderInstrumentationValuesFlagsARM;
+typedef struct VkPhysicalDeviceShaderInstrumentationFeaturesARM {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           shaderInstrumentation;
+} VkPhysicalDeviceShaderInstrumentationFeaturesARM;
+
+typedef struct VkPhysicalDeviceShaderInstrumentationPropertiesARM {
+    VkStructureType    sType;
+    void*              pNext;
+    uint32_t           numMetrics;
+    VkBool32           perBasicBlockGranularity;
+} VkPhysicalDeviceShaderInstrumentationPropertiesARM;
+
+typedef struct VkShaderInstrumentationCreateInfoARM {
+    VkStructureType    sType;
+    void*              pNext;
+} VkShaderInstrumentationCreateInfoARM;
+
+typedef struct VkShaderInstrumentationMetricDescriptionARM {
+    VkStructureType    sType;
+    void*              pNext;
+    char               name[VK_MAX_DESCRIPTION_SIZE];
+    char               description[VK_MAX_DESCRIPTION_SIZE];
+} VkShaderInstrumentationMetricDescriptionARM;
+
+typedef struct VkShaderInstrumentationMetricDataHeaderARM {
+    uint32_t              resultIndex;
+    uint32_t              resultSubIndex;
+    VkShaderStageFlags    stages;
+    uint32_t              basicBlockIndex;
+} VkShaderInstrumentationMetricDataHeaderARM;
+
+typedef VkResult (VKAPI_PTR *PFN_vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM)(VkPhysicalDevice physicalDevice, uint32_t* pDescriptionCount, VkShaderInstrumentationMetricDescriptionARM* pDescriptions);
+typedef VkResult (VKAPI_PTR *PFN_vkCreateShaderInstrumentationARM)(VkDevice device, const VkShaderInstrumentationCreateInfoARM* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkShaderInstrumentationARM* pInstrumentation);
+typedef void (VKAPI_PTR *PFN_vkDestroyShaderInstrumentationARM)(VkDevice device, VkShaderInstrumentationARM instrumentation, const VkAllocationCallbacks*    pAllocator);
+typedef void (VKAPI_PTR *PFN_vkCmdBeginShaderInstrumentationARM)(VkCommandBuffer commandBuffer, VkShaderInstrumentationARM instrumentation);
+typedef void (VKAPI_PTR *PFN_vkCmdEndShaderInstrumentationARM)(VkCommandBuffer commandBuffer);
+typedef VkResult (VKAPI_PTR *PFN_vkGetShaderInstrumentationValuesARM)(VkDevice device, VkShaderInstrumentationARM instrumentation, uint32_t* pMetricBlockCount, void* pMetricValues, VkShaderInstrumentationValuesFlagsARM flags);
+typedef void (VKAPI_PTR *PFN_vkClearShaderInstrumentationMetricsARM)(VkDevice device, VkShaderInstrumentationARM instrumentation);
+
+#ifndef VK_NO_PROTOTYPES
+#ifndef VK_ONLY_EXPORTED_PROTOTYPES
+VKAPI_ATTR VkResult VKAPI_CALL vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM(
+    VkPhysicalDevice                            physicalDevice,
+    uint32_t*                                   pDescriptionCount,
+    VkShaderInstrumentationMetricDescriptionARM* pDescriptions);
+#endif
+
+#ifndef VK_ONLY_EXPORTED_PROTOTYPES
+VKAPI_ATTR VkResult VKAPI_CALL vkCreateShaderInstrumentationARM(
+    VkDevice                                    device,
+    const VkShaderInstrumentationCreateInfoARM* pCreateInfo,
+    const VkAllocationCallbacks*                pAllocator,
+    VkShaderInstrumentationARM*                 pInstrumentation);
+#endif
+
+#ifndef VK_ONLY_EXPORTED_PROTOTYPES
+VKAPI_ATTR void VKAPI_CALL vkDestroyShaderInstrumentationARM(
+    VkDevice                                    device,
+    VkShaderInstrumentationARM                  instrumentation,
+    const VkAllocationCallbacks*                pAllocator);
+#endif
+
+#ifndef VK_ONLY_EXPORTED_PROTOTYPES
+VKAPI_ATTR void VKAPI_CALL vkCmdBeginShaderInstrumentationARM(
+    VkCommandBuffer                             commandBuffer,
+    VkShaderInstrumentationARM                  instrumentation);
+#endif
+
+#ifndef VK_ONLY_EXPORTED_PROTOTYPES
+VKAPI_ATTR void VKAPI_CALL vkCmdEndShaderInstrumentationARM(
+    VkCommandBuffer                             commandBuffer);
+#endif
+
+#ifndef VK_ONLY_EXPORTED_PROTOTYPES
+VKAPI_ATTR VkResult VKAPI_CALL vkGetShaderInstrumentationValuesARM(
+    VkDevice                                    device,
+    VkShaderInstrumentationARM                  instrumentation,
+    uint32_t*                                   pMetricBlockCount,
+    void*                                       pMetricValues,
+    VkShaderInstrumentationValuesFlagsARM       flags);
+#endif
+
+#ifndef VK_ONLY_EXPORTED_PROTOTYPES
+VKAPI_ATTR void VKAPI_CALL vkClearShaderInstrumentationMetricsARM(
+    VkDevice                                    device,
+    VkShaderInstrumentationARM                  instrumentation);
 #endif
 #endif
 
