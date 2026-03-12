@@ -33,7 +33,8 @@ public class RenderDoc {
         eRENDERDOC_API_Version_1_4_1 = 10401,
         eRENDERDOC_API_Version_1_4_2 = 10402,
         eRENDERDOC_API_Version_1_5_0 = 10500,
-        eRENDERDOC_API_Version_1_6_0 = 10600;
+        eRENDERDOC_API_Version_1_6_0 = 10600,
+        eRENDERDOC_API_Version_1_7_0 = 10700;
 
     public static final int
         eRENDERDOC_Option_AllowVSync                       = 0,
@@ -118,6 +119,28 @@ public class RenderDoc {
         eRENDERDOC_Key_PrtScrn      = 0x119,
         eRENDERDOC_Key_Pause        = 0x11A,
         eRENDERDOC_Key_Max          = 0x11B;
+
+    public static final int
+        eRENDERDOC_Overlay_Enabled     = 0x1,
+        eRENDERDOC_Overlay_FrameRate   = 0x2,
+        eRENDERDOC_Overlay_FrameNumber = 0x4,
+        eRENDERDOC_Overlay_CaptureList = 0x8,
+        eRENDERDOC_Overlay_Default     = eRENDERDOC_Overlay_Enabled | eRENDERDOC_Overlay_FrameRate | eRENDERDOC_Overlay_FrameNumber | eRENDERDOC_Overlay_CaptureList,
+        eRENDERDOC_Overlay_All         = 0x7FFFFFFF,
+        eRENDERDOC_Overlay_None        = 0;
+
+    public static final int
+        eRENDERDOC_Empty         = 0,
+        eRENDERDOC_Bool          = 1,
+        eRENDERDOC_Int32         = 2,
+        eRENDERDOC_UInt32        = 3,
+        eRENDERDOC_Int64         = 4,
+        eRENDERDOC_UInt64        = 5,
+        eRENDERDOC_Float         = 6,
+        eRENDERDOC_Double        = 7,
+        eRENDERDOC_String        = 8,
+        eRENDERDOC_APIObject     = 9,
+        eRENDERDOC_AnnotationMax = 0x7FFFFFFF;
 
     protected RenderDoc() {
         throw new UnsupportedOperationException();
@@ -572,14 +595,84 @@ public class RenderDoc {
         }
     }
 
-    private static final RENDERDOC_API_1_6_0 RENDERDOC = RENDERDOC_API_1_6_0.create();
+    // --- [ RENDERDOC_SetObjectAnnotation ] ---
 
-    public static RENDERDOC_API_1_6_0 getAPI() {
+    /** {@code uint32_t RENDERDOC_SetObjectAnnotation(RENDERDOC_DevicePointer device, void * object, char const * key, RENDERDOC_AnnotationType valueType, uint32_t valueVectorWidth, RENDERDOC_AnnotationValue const * value)} */
+    public static int nRENDERDOC_SetObjectAnnotation(long device, long object, long key, int valueType, int valueVectorWidth, long value) {
+        long __functionAddress = RENDERDOC.SetObjectAnnotation();
+        if (CHECKS) {
+            check(__functionAddress);
+            check(device);
+            check(object);
+        }
+        return invokePPPPI(device, object, key, valueType, valueVectorWidth, value, __functionAddress);
+    }
+
+    /** {@code uint32_t RENDERDOC_SetObjectAnnotation(RENDERDOC_DevicePointer device, void * object, char const * key, RENDERDOC_AnnotationType valueType, uint32_t valueVectorWidth, RENDERDOC_AnnotationValue const * value)} */
+    @NativeType("uint32_t")
+    public static int RENDERDOC_SetObjectAnnotation(@NativeType("RENDERDOC_DevicePointer") long device, @NativeType("void *") long object, @NativeType("char const *") ByteBuffer key, @NativeType("RENDERDOC_AnnotationType") int valueType, @NativeType("RENDERDOC_AnnotationValue const *") RENDERDOC_AnnotationValue.@Nullable Buffer value) {
+        if (CHECKS) {
+            checkNT1(key);
+        }
+        return nRENDERDOC_SetObjectAnnotation(device, object, memAddress(key), valueType, remainingSafe(value), memAddressSafe(value));
+    }
+
+    /** {@code uint32_t RENDERDOC_SetObjectAnnotation(RENDERDOC_DevicePointer device, void * object, char const * key, RENDERDOC_AnnotationType valueType, uint32_t valueVectorWidth, RENDERDOC_AnnotationValue const * value)} */
+    @NativeType("uint32_t")
+    public static int RENDERDOC_SetObjectAnnotation(@NativeType("RENDERDOC_DevicePointer") long device, @NativeType("void *") long object, @NativeType("char const *") CharSequence key, @NativeType("RENDERDOC_AnnotationType") int valueType, @NativeType("RENDERDOC_AnnotationValue const *") RENDERDOC_AnnotationValue.@Nullable Buffer value) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(key, true);
+            long keyEncoded = stack.getPointerAddress();
+            return nRENDERDOC_SetObjectAnnotation(device, object, keyEncoded, valueType, remainingSafe(value), memAddressSafe(value));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ RENDERDOC_SetCommandAnnotation ] ---
+
+    /** {@code uint32_t RENDERDOC_SetCommandAnnotation(RENDERDOC_DevicePointer device, void * queueOrCommandBuffer, char const * key, RENDERDOC_AnnotationType valueType, uint32_t valueVectorWidth, RENDERDOC_AnnotationValue const * value)} */
+    public static int nRENDERDOC_SetCommandAnnotation(long device, long queueOrCommandBuffer, long key, int valueType, int valueVectorWidth, long value) {
+        long __functionAddress = RENDERDOC.SetCommandAnnotation();
+        if (CHECKS) {
+            check(__functionAddress);
+            check(device);
+            check(queueOrCommandBuffer);
+        }
+        return invokePPPPI(device, queueOrCommandBuffer, key, valueType, valueVectorWidth, value, __functionAddress);
+    }
+
+    /** {@code uint32_t RENDERDOC_SetCommandAnnotation(RENDERDOC_DevicePointer device, void * queueOrCommandBuffer, char const * key, RENDERDOC_AnnotationType valueType, uint32_t valueVectorWidth, RENDERDOC_AnnotationValue const * value)} */
+    @NativeType("uint32_t")
+    public static int RENDERDOC_SetCommandAnnotation(@NativeType("RENDERDOC_DevicePointer") long device, @NativeType("void *") long queueOrCommandBuffer, @NativeType("char const *") ByteBuffer key, @NativeType("RENDERDOC_AnnotationType") int valueType, @NativeType("RENDERDOC_AnnotationValue const *") RENDERDOC_AnnotationValue.@Nullable Buffer value) {
+        if (CHECKS) {
+            checkNT1(key);
+        }
+        return nRENDERDOC_SetCommandAnnotation(device, queueOrCommandBuffer, memAddress(key), valueType, remainingSafe(value), memAddressSafe(value));
+    }
+
+    /** {@code uint32_t RENDERDOC_SetCommandAnnotation(RENDERDOC_DevicePointer device, void * queueOrCommandBuffer, char const * key, RENDERDOC_AnnotationType valueType, uint32_t valueVectorWidth, RENDERDOC_AnnotationValue const * value)} */
+    @NativeType("uint32_t")
+    public static int RENDERDOC_SetCommandAnnotation(@NativeType("RENDERDOC_DevicePointer") long device, @NativeType("void *") long queueOrCommandBuffer, @NativeType("char const *") CharSequence key, @NativeType("RENDERDOC_AnnotationType") int valueType, @NativeType("RENDERDOC_AnnotationValue const *") RENDERDOC_AnnotationValue.@Nullable Buffer value) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(key, true);
+            long keyEncoded = stack.getPointerAddress();
+            return nRENDERDOC_SetCommandAnnotation(device, queueOrCommandBuffer, keyEncoded, valueType, remainingSafe(value), memAddressSafe(value));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    private static final RENDERDOC_API_1_7_0 RENDERDOC = RENDERDOC_API_1_7_0.create();
+
+    public static RENDERDOC_API_1_7_0 getAPI() {
         return RENDERDOC;
     }
 
     /**
-     * Loads the RenderDoc API pointers into the {@link RENDERDOC_API_1_6_0} struct returned by {@link #getAPI() getAPI}.
+     * Loads the RenderDoc API pointers into the {@link RENDERDOC_API_1_7_0} struct returned by {@link #getAPI() getAPI}.
      *
      * <p>This method does not allocate resources that must be freed and may be called multiple times if necessary.</p>
      *
@@ -643,11 +736,11 @@ public class RenderDoc {
         try (MemoryStack stack = MemoryStack.stackPush()) {
             PointerBuffer pp = stack.callocPointer(1);
 
-            if (!RENDERDOC_GetAPI(eRENDERDOC_API_Version_1_6_0, pp, GetAPI)) {
+            if (!RENDERDOC_GetAPI(eRENDERDOC_API_Version_1_7_0, pp, GetAPI)) {
                 throw new IllegalStateException("The RENDERDOC_GetAPI function failed.");
             }
 
-            memCopy(pp.get(0), RENDERDOC.address(), RENDERDOC_API_1_6_0.SIZEOF);
+            memCopy(pp.get(0), RENDERDOC.address(), RENDERDOC_API_1_7_0.SIZEOF);
         }
     }
 

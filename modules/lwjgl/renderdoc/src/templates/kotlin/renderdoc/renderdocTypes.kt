@@ -24,6 +24,7 @@ val RENDERDOC_BINDING = object : APIBinding(
 
 val uint32_tb = PrimitiveType("uint32_t", PrimitiveMapping.BOOLEAN4)
 
+val RENDERDOC_AnnotationType = "RENDERDOC_AnnotationType".enumType
 val RENDERDOC_CaptureOption = "RENDERDOC_CaptureOption".enumType
 val RENDERDOC_InputButton = "RENDERDOC_InputButton".enumType
 val RENDERDOC_Version = "RENDERDOC_Version".enumType
@@ -31,7 +32,7 @@ val RENDERDOC_Version = "RENDERDOC_Version".enumType
 val RENDERDOC_DevicePointer = "RENDERDOC_DevicePointer".handle
 val RENDERDOC_WindowHandle = "RENDERDOC_WindowHandle".handle
 
-val RENDERDOC_API_1_6_0 = struct(Module.RENDERDOC, "RENDERDOC_API_1_6_0", mutable = false) {
+val RENDERDOC_API_1_7_0 = struct(Module.RENDERDOC, "RENDERDOC_API_1_7_0", mutable = false) {
     setUsageInput()
 
     opaque_p("GetAPIVersion")
@@ -61,4 +62,36 @@ val RENDERDOC_API_1_6_0 = struct(Module.RENDERDOC, "RENDERDOC_API_1_6_0", mutabl
     nullable..opaque_p("DiscardFrameCapture")
     nullable..opaque_p("ShowReplayUI")
     nullable..opaque_p("SetCaptureTitle")
+    nullable..opaque_p("SetObjectAnnotation")
+    nullable..opaque_p("SetCommandAnnotation")
+}
+
+val RENDERDOC_AnnotationVectorValue = union(Module.RENDERDOC, "RENDERDOC_AnnotationVectorValue") {
+    bool("boolean")[4]
+    int32_t("int32")[4]
+    int64_t("int64")[4]
+    uint32_t("uint32")[4]
+    uint64_t("uint64")[4]
+    float("float32")[4]
+    double("float64")[4]
+}
+
+val RENDERDOC_AnnotationValue = union(Module.RENDERDOC, "RENDERDOC_AnnotationValue") {
+    bool("boolean")
+    int32_t("int32")
+    int64_t("int64")
+    uint32_t("uint32")
+    uint64_t("uint64")
+    float("float32")
+    double("float64")
+
+    RENDERDOC_AnnotationVectorValue("vector")
+
+    charUTF8.const.p("string")
+    opaque_p("apiObject")
+}
+
+val GLResourceReference = struct(Module.RENDERDOC, "GLResourceReference") {
+    uint32_t("identifier")
+    uint32_t("name")
 }

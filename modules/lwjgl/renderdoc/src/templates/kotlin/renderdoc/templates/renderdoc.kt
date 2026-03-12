@@ -23,6 +23,7 @@ val renderdoc = "RenderDoc".nativeClass(Module.RENDERDOC, prefixConstant = "eREN
         "API_Version_1_4_2".enum("10402"),
         "API_Version_1_5_0".enum("10500"),
         "API_Version_1_6_0".enum("10600"),
+        "API_Version_1_7_0".enum("10700"),
     )
 
     EnumConstant(
@@ -122,15 +123,39 @@ val renderdoc = "RenderDoc".nativeClass(Module.RENDERDOC, prefixConstant = "eREN
         "Key_Max".enum,
     )
 
-    customMethod("""
-    private static final RENDERDOC_API_1_6_0 RENDERDOC = RENDERDOC_API_1_6_0.create();
+    EnumConstant(
+        "Overlay_Enabled".enum("0x1"),
+        "Overlay_FrameRate".enum("0x2"),
+        "Overlay_FrameNumber".enum("0x4"),
+        "Overlay_CaptureList".enum("0x8"),
+        "Overlay_Default".enum("eRENDERDOC_Overlay_Enabled | eRENDERDOC_Overlay_FrameRate | eRENDERDOC_Overlay_FrameNumber | eRENDERDOC_Overlay_CaptureList"),
+        "Overlay_All".enum("0x7FFFFFFF"),
+        "Overlay_None".enum("0")
+    )
 
-    public static RENDERDOC_API_1_6_0 getAPI() {
+    EnumConstant(
+        "Empty".enum("0"),
+        "Bool".enum,
+        "Int32".enum,
+        "UInt32".enum,
+        "Int64".enum,
+        "UInt64".enum,
+        "Float".enum,
+        "Double".enum,
+        "String".enum,
+        "APIObject".enum,
+        "AnnotationMax".enum("0x7FFFFFFF")
+    )
+
+    customMethod("""
+    private static final RENDERDOC_API_1_7_0 RENDERDOC = RENDERDOC_API_1_7_0.create();
+
+    public static RENDERDOC_API_1_7_0 getAPI() {
         return RENDERDOC;
     }
 
     /**
-     * Loads the RenderDoc API pointers into the {@link RENDERDOC_API_1_6_0} struct returned by {@link #getAPI() getAPI}.
+     * Loads the RenderDoc API pointers into the {@link RENDERDOC_API_1_7_0} struct returned by {@link #getAPI() getAPI}.
      *
      * <p>This method does not allocate resources that must be freed and may be called multiple times if necessary.</p>
      *
@@ -194,11 +219,11 @@ val renderdoc = "RenderDoc".nativeClass(Module.RENDERDOC, prefixConstant = "eREN
         try (MemoryStack stack = MemoryStack.stackPush()) {
             PointerBuffer pp = stack.callocPointer(1);
 
-            if (!RENDERDOC_GetAPI(eRENDERDOC_API_Version_1_6_0, pp, GetAPI)) {
+            if (!RENDERDOC_GetAPI(eRENDERDOC_API_Version_1_7_0, pp, GetAPI)) {
                 throw new IllegalStateException("The RENDERDOC_GetAPI function failed.");
             }
 
-            memCopy(pp.get(0), RENDERDOC.address(), RENDERDOC_API_1_6_0.SIZEOF);
+            memCopy(pp.get(0), RENDERDOC.address(), RENDERDOC_API_1_7_0.SIZEOF);
         }
     }""")
 
@@ -385,5 +410,27 @@ val renderdoc = "RenderDoc".nativeClass(Module.RENDERDOC, prefixConstant = "eREN
         "SetCaptureTitle",
 
         charUTF8.const.p("title")
+    )
+
+    uint32_t(
+        "SetObjectAnnotation",
+
+        RENDERDOC_DevicePointer("device"),
+        opaque_p("object"),
+        charUTF8.const.p("key"),
+        RENDERDOC_AnnotationType("valueType"),
+        AutoSize("value")..uint32_t("valueVectorWidth"),
+        nullable..RENDERDOC_AnnotationValue.const.p("value")
+    )
+
+    uint32_t(
+        "SetCommandAnnotation",
+
+        RENDERDOC_DevicePointer("device"),
+        opaque_p("queueOrCommandBuffer"),
+        charUTF8.const.p("key"),
+        RENDERDOC_AnnotationType("valueType"),
+        AutoSize("value")..uint32_t("valueVectorWidth"),
+        nullable..RENDERDOC_AnnotationValue.const.p("value")
     )
 }
