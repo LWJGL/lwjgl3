@@ -48,6 +48,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkVec2 struct nk_vec2} contextual_padding;
  *     {@link NkVec2 struct nk_vec2} menu_padding;
  *     {@link NkVec2 struct nk_vec2} tooltip_padding;
+ *     enum nk_tooltip_pos tooltip_origin;
+ *     {@link NkVec2 struct nk_vec2} tooltip_offset;
  * }</code></pre>
  */
 @NativeType("struct nk_style_window")
@@ -90,7 +92,9 @@ public class NkStyleWindow extends Struct<NkStyleWindow> implements NativeResour
         COMBO_PADDING,
         CONTEXTUAL_PADDING,
         MENU_PADDING,
-        TOOLTIP_PADDING;
+        TOOLTIP_PADDING,
+        TOOLTIP_ORIGIN,
+        TOOLTIP_OFFSET;
 
     static {
         Layout layout = __struct(
@@ -123,6 +127,8 @@ public class NkStyleWindow extends Struct<NkStyleWindow> implements NativeResour
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),
+            __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),
+            __member(4),
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF)
         );
 
@@ -159,6 +165,8 @@ public class NkStyleWindow extends Struct<NkStyleWindow> implements NativeResour
         CONTEXTUAL_PADDING = layout.offsetof(27);
         MENU_PADDING = layout.offsetof(28);
         TOOLTIP_PADDING = layout.offsetof(29);
+        TOOLTIP_ORIGIN = layout.offsetof(30);
+        TOOLTIP_OFFSET = layout.offsetof(31);
     }
 
     protected NkStyleWindow(long address, @Nullable ByteBuffer container) {
@@ -264,6 +272,12 @@ public class NkStyleWindow extends Struct<NkStyleWindow> implements NativeResour
     /** @return a {@link NkVec2} view of the {@code tooltip_padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 tooltip_padding() { return ntooltip_padding(address()); }
+    /** @return the value of the {@code tooltip_origin} field. */
+    @NativeType("enum nk_tooltip_pos")
+    public int tooltip_origin() { return ntooltip_origin(address()); }
+    /** @return a {@link NkVec2} view of the {@code tooltip_offset} field. */
+    @NativeType("struct nk_vec2")
+    public NkVec2 tooltip_offset() { return ntooltip_offset(address()); }
 
     /** Copies the specified {@link NkStyleWindowHeader} to the {@code header} field. */
     public NkStyleWindow header(@NativeType("struct nk_style_window_header") NkStyleWindowHeader value) { nheader(address(), value); return this; }
@@ -367,6 +381,12 @@ public class NkStyleWindow extends Struct<NkStyleWindow> implements NativeResour
     public NkStyleWindow tooltip_padding(@NativeType("struct nk_vec2") NkVec2 value) { ntooltip_padding(address(), value); return this; }
     /** Passes the {@code tooltip_padding} field to the specified {@link java.util.function.Consumer Consumer}. */
     public NkStyleWindow tooltip_padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(tooltip_padding()); return this; }
+    /** Sets the specified value to the {@code tooltip_origin} field. */
+    public NkStyleWindow tooltip_origin(@NativeType("enum nk_tooltip_pos") int value) { ntooltip_origin(address(), value); return this; }
+    /** Copies the specified {@link NkVec2} to the {@code tooltip_offset} field. */
+    public NkStyleWindow tooltip_offset(@NativeType("struct nk_vec2") NkVec2 value) { ntooltip_offset(address(), value); return this; }
+    /** Passes the {@code tooltip_offset} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleWindow tooltip_offset(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(tooltip_offset()); return this; }
 
     /** Initializes this struct with the specified values. */
     public NkStyleWindow set(
@@ -399,7 +419,9 @@ public class NkStyleWindow extends Struct<NkStyleWindow> implements NativeResour
         NkVec2 combo_padding,
         NkVec2 contextual_padding,
         NkVec2 menu_padding,
-        NkVec2 tooltip_padding
+        NkVec2 tooltip_padding,
+        int tooltip_origin,
+        NkVec2 tooltip_offset
     ) {
         header(header);
         fixed_background(fixed_background);
@@ -431,6 +453,8 @@ public class NkStyleWindow extends Struct<NkStyleWindow> implements NativeResour
         contextual_padding(contextual_padding);
         menu_padding(menu_padding);
         tooltip_padding(tooltip_padding);
+        tooltip_origin(tooltip_origin);
+        tooltip_offset(tooltip_offset);
 
         return this;
     }
@@ -618,6 +642,10 @@ public class NkStyleWindow extends Struct<NkStyleWindow> implements NativeResour
     public static NkVec2 nmenu_padding(long struct) { return NkVec2.create(struct + NkStyleWindow.MENU_PADDING); }
     /** Unsafe version of {@link #tooltip_padding}. */
     public static NkVec2 ntooltip_padding(long struct) { return NkVec2.create(struct + NkStyleWindow.TOOLTIP_PADDING); }
+    /** Unsafe version of {@link #tooltip_origin}. */
+    public static int ntooltip_origin(long struct) { return memGetInt(struct + NkStyleWindow.TOOLTIP_ORIGIN); }
+    /** Unsafe version of {@link #tooltip_offset}. */
+    public static NkVec2 ntooltip_offset(long struct) { return NkVec2.create(struct + NkStyleWindow.TOOLTIP_OFFSET); }
 
     /** Unsafe version of {@link #header(NkStyleWindowHeader) header}. */
     public static void nheader(long struct, NkStyleWindowHeader value) { memCopy(value.address(), struct + NkStyleWindow.HEADER, NkStyleWindowHeader.SIZEOF); }
@@ -679,6 +707,10 @@ public class NkStyleWindow extends Struct<NkStyleWindow> implements NativeResour
     public static void nmenu_padding(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleWindow.MENU_PADDING, NkVec2.SIZEOF); }
     /** Unsafe version of {@link #tooltip_padding(NkVec2) tooltip_padding}. */
     public static void ntooltip_padding(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleWindow.TOOLTIP_PADDING, NkVec2.SIZEOF); }
+    /** Unsafe version of {@link #tooltip_origin(int) tooltip_origin}. */
+    public static void ntooltip_origin(long struct, int value) { memPutInt(struct + NkStyleWindow.TOOLTIP_ORIGIN, value); }
+    /** Unsafe version of {@link #tooltip_offset(NkVec2) tooltip_offset}. */
+    public static void ntooltip_offset(long struct, NkVec2 value) { memCopy(value.address(), struct + NkStyleWindow.TOOLTIP_OFFSET, NkVec2.SIZEOF); }
 
     // -----------------------------------
 
@@ -804,6 +836,12 @@ public class NkStyleWindow extends Struct<NkStyleWindow> implements NativeResour
         /** @return a {@link NkVec2} view of the {@code tooltip_padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 tooltip_padding() { return NkStyleWindow.ntooltip_padding(address()); }
+        /** @return the value of the {@code tooltip_origin} field. */
+        @NativeType("enum nk_tooltip_pos")
+        public int tooltip_origin() { return NkStyleWindow.ntooltip_origin(address()); }
+        /** @return a {@link NkVec2} view of the {@code tooltip_offset} field. */
+        @NativeType("struct nk_vec2")
+        public NkVec2 tooltip_offset() { return NkStyleWindow.ntooltip_offset(address()); }
 
         /** Copies the specified {@link NkStyleWindowHeader} to the {@code header} field. */
         public NkStyleWindow.Buffer header(@NativeType("struct nk_style_window_header") NkStyleWindowHeader value) { NkStyleWindow.nheader(address(), value); return this; }
@@ -907,6 +945,12 @@ public class NkStyleWindow extends Struct<NkStyleWindow> implements NativeResour
         public NkStyleWindow.Buffer tooltip_padding(@NativeType("struct nk_vec2") NkVec2 value) { NkStyleWindow.ntooltip_padding(address(), value); return this; }
         /** Passes the {@code tooltip_padding} field to the specified {@link java.util.function.Consumer Consumer}. */
         public NkStyleWindow.Buffer tooltip_padding(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(tooltip_padding()); return this; }
+        /** Sets the specified value to the {@code tooltip_origin} field. */
+        public NkStyleWindow.Buffer tooltip_origin(@NativeType("enum nk_tooltip_pos") int value) { NkStyleWindow.ntooltip_origin(address(), value); return this; }
+        /** Copies the specified {@link NkVec2} to the {@code tooltip_offset} field. */
+        public NkStyleWindow.Buffer tooltip_offset(@NativeType("struct nk_vec2") NkVec2 value) { NkStyleWindow.ntooltip_offset(address(), value); return this; }
+        /** Passes the {@code tooltip_offset} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleWindow.Buffer tooltip_offset(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(tooltip_offset()); return this; }
 
     }
 

@@ -113,6 +113,17 @@ public class Nuklear {
         NK_CONVERT_ELEMENT_BUFFER_FULL = 1 << 3;
 
     public static final int
+        NK_TOP_LEFT      = 0,
+        NK_TOP_CENTER    = 1,
+        NK_TOP_RIGHT     = 2,
+        NK_MIDDLE_LEFT   = 3,
+        NK_MIDDLE_CENTER = 4,
+        NK_MIDDLE_RIGHT  = 5,
+        NK_BOTTOM_LEFT   = 6,
+        NK_BOTTOM_CENTER = 7,
+        NK_BOTTOM_RIGHT  = 8;
+
+    public static final int
         NK_SYMBOL_NONE                   = 0,
         NK_SYMBOL_X                      = 1,
         NK_SYMBOL_UNDERSCORE             = 2,
@@ -3427,20 +3438,22 @@ public class Nuklear {
 
     // --- [ nk_property_int ] ---
 
-    /** {@code void nk_property_int(struct nk_context * ctx, char const * name, int min, int * val, int max, int step, float inc_per_pixel)} */
-    public static native void nnk_property_int(long ctx, long name, int min, long val, int max, int step, float inc_per_pixel);
+    /** {@code nk_bool nk_property_int(struct nk_context * ctx, char const * name, int min, int * val, int max, int step, float inc_per_pixel)} */
+    public static native boolean nnk_property_int(long ctx, long name, int min, long val, int max, int step, float inc_per_pixel);
 
-    /** {@code void nk_property_int(struct nk_context * ctx, char const * name, int min, int * val, int max, int step, float inc_per_pixel)} */
-    public static void nk_property_int(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer name, int min, @NativeType("int *") IntBuffer val, int max, int step, float inc_per_pixel) {
+    /** {@code nk_bool nk_property_int(struct nk_context * ctx, char const * name, int min, int * val, int max, int step, float inc_per_pixel)} */
+    @NativeType("nk_bool")
+    public static boolean nk_property_int(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer name, int min, @NativeType("int *") IntBuffer val, int max, int step, float inc_per_pixel) {
         if (CHECKS) {
             checkNT1(name);
             check(val, 1);
         }
-        nnk_property_int(ctx.address(), memAddress(name), min, memAddress(val), max, step, inc_per_pixel);
+        return nnk_property_int(ctx.address(), memAddress(name), min, memAddress(val), max, step, inc_per_pixel);
     }
 
-    /** {@code void nk_property_int(struct nk_context * ctx, char const * name, int min, int * val, int max, int step, float inc_per_pixel)} */
-    public static void nk_property_int(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence name, int min, @NativeType("int *") IntBuffer val, int max, int step, float inc_per_pixel) {
+    /** {@code nk_bool nk_property_int(struct nk_context * ctx, char const * name, int min, int * val, int max, int step, float inc_per_pixel)} */
+    @NativeType("nk_bool")
+    public static boolean nk_property_int(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence name, int min, @NativeType("int *") IntBuffer val, int max, int step, float inc_per_pixel) {
         if (CHECKS) {
             check(val, 1);
         }
@@ -3448,7 +3461,7 @@ public class Nuklear {
         try {
             stack.nUTF8(name, true);
             long nameEncoded = stack.getPointerAddress();
-            nnk_property_int(ctx.address(), nameEncoded, min, memAddress(val), max, step, inc_per_pixel);
+            return nnk_property_int(ctx.address(), nameEncoded, min, memAddress(val), max, step, inc_per_pixel);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3456,20 +3469,22 @@ public class Nuklear {
 
     // --- [ nk_property_float ] ---
 
-    /** {@code void nk_property_float(struct nk_context * ctx, char const * name, float min, float * val, float max, float step, float inc_per_pixel)} */
-    public static native void nnk_property_float(long ctx, long name, float min, long val, float max, float step, float inc_per_pixel);
+    /** {@code nk_bool nk_property_float(struct nk_context * ctx, char const * name, float min, float * val, float max, float step, float inc_per_pixel)} */
+    public static native boolean nnk_property_float(long ctx, long name, float min, long val, float max, float step, float inc_per_pixel);
 
-    /** {@code void nk_property_float(struct nk_context * ctx, char const * name, float min, float * val, float max, float step, float inc_per_pixel)} */
-    public static void nk_property_float(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer name, float min, @NativeType("float *") FloatBuffer val, float max, float step, float inc_per_pixel) {
+    /** {@code nk_bool nk_property_float(struct nk_context * ctx, char const * name, float min, float * val, float max, float step, float inc_per_pixel)} */
+    @NativeType("nk_bool")
+    public static boolean nk_property_float(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer name, float min, @NativeType("float *") FloatBuffer val, float max, float step, float inc_per_pixel) {
         if (CHECKS) {
             checkNT1(name);
             check(val, 1);
         }
-        nnk_property_float(ctx.address(), memAddress(name), min, memAddress(val), max, step, inc_per_pixel);
+        return nnk_property_float(ctx.address(), memAddress(name), min, memAddress(val), max, step, inc_per_pixel);
     }
 
-    /** {@code void nk_property_float(struct nk_context * ctx, char const * name, float min, float * val, float max, float step, float inc_per_pixel)} */
-    public static void nk_property_float(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence name, float min, @NativeType("float *") FloatBuffer val, float max, float step, float inc_per_pixel) {
+    /** {@code nk_bool nk_property_float(struct nk_context * ctx, char const * name, float min, float * val, float max, float step, float inc_per_pixel)} */
+    @NativeType("nk_bool")
+    public static boolean nk_property_float(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence name, float min, @NativeType("float *") FloatBuffer val, float max, float step, float inc_per_pixel) {
         if (CHECKS) {
             check(val, 1);
         }
@@ -3477,7 +3492,7 @@ public class Nuklear {
         try {
             stack.nUTF8(name, true);
             long nameEncoded = stack.getPointerAddress();
-            nnk_property_float(ctx.address(), nameEncoded, min, memAddress(val), max, step, inc_per_pixel);
+            return nnk_property_float(ctx.address(), nameEncoded, min, memAddress(val), max, step, inc_per_pixel);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3485,20 +3500,22 @@ public class Nuklear {
 
     // --- [ nk_property_double ] ---
 
-    /** {@code void nk_property_double(struct nk_context * ctx, char const * name, double min, double * val, double max, double step, float inc_per_pixel)} */
-    public static native void nnk_property_double(long ctx, long name, double min, long val, double max, double step, float inc_per_pixel);
+    /** {@code nk_bool nk_property_double(struct nk_context * ctx, char const * name, double min, double * val, double max, double step, float inc_per_pixel)} */
+    public static native boolean nnk_property_double(long ctx, long name, double min, long val, double max, double step, float inc_per_pixel);
 
-    /** {@code void nk_property_double(struct nk_context * ctx, char const * name, double min, double * val, double max, double step, float inc_per_pixel)} */
-    public static void nk_property_double(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer name, double min, @NativeType("double *") DoubleBuffer val, double max, double step, float inc_per_pixel) {
+    /** {@code nk_bool nk_property_double(struct nk_context * ctx, char const * name, double min, double * val, double max, double step, float inc_per_pixel)} */
+    @NativeType("nk_bool")
+    public static boolean nk_property_double(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer name, double min, @NativeType("double *") DoubleBuffer val, double max, double step, float inc_per_pixel) {
         if (CHECKS) {
             checkNT1(name);
             check(val, 1);
         }
-        nnk_property_double(ctx.address(), memAddress(name), min, memAddress(val), max, step, inc_per_pixel);
+        return nnk_property_double(ctx.address(), memAddress(name), min, memAddress(val), max, step, inc_per_pixel);
     }
 
-    /** {@code void nk_property_double(struct nk_context * ctx, char const * name, double min, double * val, double max, double step, float inc_per_pixel)} */
-    public static void nk_property_double(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence name, double min, @NativeType("double *") DoubleBuffer val, double max, double step, float inc_per_pixel) {
+    /** {@code nk_bool nk_property_double(struct nk_context * ctx, char const * name, double min, double * val, double max, double step, float inc_per_pixel)} */
+    @NativeType("nk_bool")
+    public static boolean nk_property_double(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence name, double min, @NativeType("double *") DoubleBuffer val, double max, double step, float inc_per_pixel) {
         if (CHECKS) {
             check(val, 1);
         }
@@ -3506,7 +3523,7 @@ public class Nuklear {
         try {
             stack.nUTF8(name, true);
             long nameEncoded = stack.getPointerAddress();
-            nnk_property_double(ctx.address(), nameEncoded, min, memAddress(val), max, step, inc_per_pixel);
+            return nnk_property_double(ctx.address(), nameEncoded, min, memAddress(val), max, step, inc_per_pixel);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3922,33 +3939,36 @@ public class Nuklear {
 
     // --- [ nk_combobox ] ---
 
-    /** {@code void nk_combobox(struct nk_context * ctx, char const * const * items, int count, int * selected, int item_height, struct nk_vec2 size)} */
-    public static native void nnk_combobox(long ctx, long items, int count, long selected, int item_height, long size);
+    /** {@code nk_bool nk_combobox(struct nk_context * ctx, char const * const * items, int count, int * selected, int item_height, struct nk_vec2 size)} */
+    public static native boolean nnk_combobox(long ctx, long items, int count, long selected, int item_height, long size);
 
-    /** {@code void nk_combobox(struct nk_context * ctx, char const * const * items, int count, int * selected, int item_height, struct nk_vec2 size)} */
-    public static void nk_combobox(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const * const *") PointerBuffer items, @NativeType("int *") IntBuffer selected, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    /** {@code nk_bool nk_combobox(struct nk_context * ctx, char const * const * items, int count, int * selected, int item_height, struct nk_vec2 size)} */
+    @NativeType("nk_bool")
+    public static boolean nk_combobox(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const * const *") PointerBuffer items, @NativeType("int *") IntBuffer selected, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         if (CHECKS) {
             check(selected, 1);
         }
-        nnk_combobox(ctx.address(), memAddress(items), items.remaining(), memAddress(selected), item_height, size.address());
+        return nnk_combobox(ctx.address(), memAddress(items), items.remaining(), memAddress(selected), item_height, size.address());
     }
 
     // --- [ nk_combobox_string ] ---
 
-    /** {@code void nk_combobox_string(struct nk_context * ctx, char const * items_separated_by_zeros, int * selected, int count, int item_height, struct nk_vec2 size)} */
-    public static native void nnk_combobox_string(long ctx, long items_separated_by_zeros, long selected, int count, int item_height, long size);
+    /** {@code nk_bool nk_combobox_string(struct nk_context * ctx, char const * items_separated_by_zeros, int * selected, int count, int item_height, struct nk_vec2 size)} */
+    public static native boolean nnk_combobox_string(long ctx, long items_separated_by_zeros, long selected, int count, int item_height, long size);
 
-    /** {@code void nk_combobox_string(struct nk_context * ctx, char const * items_separated_by_zeros, int * selected, int count, int item_height, struct nk_vec2 size)} */
-    public static void nk_combobox_string(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer items_separated_by_zeros, @NativeType("int *") IntBuffer selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    /** {@code nk_bool nk_combobox_string(struct nk_context * ctx, char const * items_separated_by_zeros, int * selected, int count, int item_height, struct nk_vec2 size)} */
+    @NativeType("nk_bool")
+    public static boolean nk_combobox_string(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer items_separated_by_zeros, @NativeType("int *") IntBuffer selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         if (CHECKS) {
             checkNT1(items_separated_by_zeros);
             check(selected, 1);
         }
-        nnk_combobox_string(ctx.address(), memAddress(items_separated_by_zeros), memAddress(selected), count, item_height, size.address());
+        return nnk_combobox_string(ctx.address(), memAddress(items_separated_by_zeros), memAddress(selected), count, item_height, size.address());
     }
 
-    /** {@code void nk_combobox_string(struct nk_context * ctx, char const * items_separated_by_zeros, int * selected, int count, int item_height, struct nk_vec2 size)} */
-    public static void nk_combobox_string(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence items_separated_by_zeros, @NativeType("int *") IntBuffer selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    /** {@code nk_bool nk_combobox_string(struct nk_context * ctx, char const * items_separated_by_zeros, int * selected, int count, int item_height, struct nk_vec2 size)} */
+    @NativeType("nk_bool")
+    public static boolean nk_combobox_string(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence items_separated_by_zeros, @NativeType("int *") IntBuffer selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         if (CHECKS) {
             check(selected, 1);
         }
@@ -3956,7 +3976,7 @@ public class Nuklear {
         try {
             stack.nUTF8(items_separated_by_zeros, true);
             long items_separated_by_zerosEncoded = stack.getPointerAddress();
-            nnk_combobox_string(ctx.address(), items_separated_by_zerosEncoded, memAddress(selected), count, item_height, size.address());
+            return nnk_combobox_string(ctx.address(), items_separated_by_zerosEncoded, memAddress(selected), count, item_height, size.address());
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3964,20 +3984,22 @@ public class Nuklear {
 
     // --- [ nk_combobox_separator ] ---
 
-    /** {@code void nk_combobox_separator(struct nk_context * ctx, char const * items_separated_by_separator, int separator, int * selected, int count, int item_height, struct nk_vec2 size)} */
-    public static native void nnk_combobox_separator(long ctx, long items_separated_by_separator, int separator, long selected, int count, int item_height, long size);
+    /** {@code nk_bool nk_combobox_separator(struct nk_context * ctx, char const * items_separated_by_separator, int separator, int * selected, int count, int item_height, struct nk_vec2 size)} */
+    public static native boolean nnk_combobox_separator(long ctx, long items_separated_by_separator, int separator, long selected, int count, int item_height, long size);
 
-    /** {@code void nk_combobox_separator(struct nk_context * ctx, char const * items_separated_by_separator, int separator, int * selected, int count, int item_height, struct nk_vec2 size)} */
-    public static void nk_combobox_separator(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer items_separated_by_separator, int separator, @NativeType("int *") IntBuffer selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    /** {@code nk_bool nk_combobox_separator(struct nk_context * ctx, char const * items_separated_by_separator, int separator, int * selected, int count, int item_height, struct nk_vec2 size)} */
+    @NativeType("nk_bool")
+    public static boolean nk_combobox_separator(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer items_separated_by_separator, int separator, @NativeType("int *") IntBuffer selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         if (CHECKS) {
             checkNT1(items_separated_by_separator);
             check(selected, 1);
         }
-        nnk_combobox_separator(ctx.address(), memAddress(items_separated_by_separator), separator, memAddress(selected), count, item_height, size.address());
+        return nnk_combobox_separator(ctx.address(), memAddress(items_separated_by_separator), separator, memAddress(selected), count, item_height, size.address());
     }
 
-    /** {@code void nk_combobox_separator(struct nk_context * ctx, char const * items_separated_by_separator, int separator, int * selected, int count, int item_height, struct nk_vec2 size)} */
-    public static void nk_combobox_separator(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence items_separated_by_separator, int separator, @NativeType("int *") IntBuffer selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    /** {@code nk_bool nk_combobox_separator(struct nk_context * ctx, char const * items_separated_by_separator, int separator, int * selected, int count, int item_height, struct nk_vec2 size)} */
+    @NativeType("nk_bool")
+    public static boolean nk_combobox_separator(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence items_separated_by_separator, int separator, @NativeType("int *") IntBuffer selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         if (CHECKS) {
             check(selected, 1);
         }
@@ -3985,7 +4007,7 @@ public class Nuklear {
         try {
             stack.nUTF8(items_separated_by_separator, true);
             long items_separated_by_separatorEncoded = stack.getPointerAddress();
-            nnk_combobox_separator(ctx.address(), items_separated_by_separatorEncoded, separator, memAddress(selected), count, item_height, size.address());
+            return nnk_combobox_separator(ctx.address(), items_separated_by_separatorEncoded, separator, memAddress(selected), count, item_height, size.address());
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -3993,16 +4015,17 @@ public class Nuklear {
 
     // --- [ nk_combobox_callback ] ---
 
-    /** {@code void nk_combobox_callback(struct nk_context * ctx, nk_item_getter item_getter, void * userdata, int * selected, int count, int item_height, struct nk_vec2 size)} */
-    public static native void nnk_combobox_callback(long ctx, long item_getter, long userdata, long selected, int count, int item_height, long size);
+    /** {@code nk_bool nk_combobox_callback(struct nk_context * ctx, nk_item_getter item_getter, void * userdata, int * selected, int count, int item_height, struct nk_vec2 size)} */
+    public static native boolean nnk_combobox_callback(long ctx, long item_getter, long userdata, long selected, int count, int item_height, long size);
 
-    /** {@code void nk_combobox_callback(struct nk_context * ctx, nk_item_getter item_getter, void * userdata, int * selected, int count, int item_height, struct nk_vec2 size)} */
-    public static void nk_combobox_callback(@NativeType("struct nk_context *") NkContext ctx, @NativeType("nk_item_getter") NkItemGetterI item_getter, @NativeType("void *") long userdata, @NativeType("int *") IntBuffer selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    /** {@code nk_bool nk_combobox_callback(struct nk_context * ctx, nk_item_getter item_getter, void * userdata, int * selected, int count, int item_height, struct nk_vec2 size)} */
+    @NativeType("nk_bool")
+    public static boolean nk_combobox_callback(@NativeType("struct nk_context *") NkContext ctx, @NativeType("nk_item_getter") NkItemGetterI item_getter, @NativeType("void *") long userdata, @NativeType("int *") IntBuffer selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         if (CHECKS) {
             check(userdata);
             check(selected, 1);
         }
-        nnk_combobox_callback(ctx.address(), item_getter.address(), userdata, memAddress(selected), count, item_height, size.address());
+        return nnk_combobox_callback(ctx.address(), item_getter.address(), userdata, memAddress(selected), count, item_height, size.address());
     }
 
     // --- [ nk_combo_begin_text ] ---
@@ -4573,6 +4596,31 @@ public class Nuklear {
         }
     }
 
+    // --- [ nk_tooltip_offset ] ---
+
+    /** {@code void nk_tooltip_offset(struct nk_context * ctx, char const * text, enum nk_tooltip_pos position, struct nk_vec2 offset)} */
+    public static native void nnk_tooltip_offset(long ctx, long text, int position, long offset);
+
+    /** {@code void nk_tooltip_offset(struct nk_context * ctx, char const * text, enum nk_tooltip_pos position, struct nk_vec2 offset)} */
+    public static void nk_tooltip_offset(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer text, @NativeType("enum nk_tooltip_pos") int position, @NativeType("struct nk_vec2") NkVec2 offset) {
+        if (CHECKS) {
+            checkNT1(text);
+        }
+        nnk_tooltip_offset(ctx.address(), memAddress(text), position, offset.address());
+    }
+
+    /** {@code void nk_tooltip_offset(struct nk_context * ctx, char const * text, enum nk_tooltip_pos position, struct nk_vec2 offset)} */
+    public static void nk_tooltip_offset(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence text, @NativeType("enum nk_tooltip_pos") int position, @NativeType("struct nk_vec2") NkVec2 offset) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(text, true);
+            long textEncoded = stack.getPointerAddress();
+            nnk_tooltip_offset(ctx.address(), textEncoded, position, offset.address());
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ nk_tooltip_begin ] ---
 
     /** {@code nk_bool nk_tooltip_begin(struct nk_context * ctx, float width)} */
@@ -4582,6 +4630,17 @@ public class Nuklear {
     @NativeType("nk_bool")
     public static boolean nk_tooltip_begin(@NativeType("struct nk_context *") NkContext ctx, float width) {
         return nnk_tooltip_begin(ctx.address(), width);
+    }
+
+    // --- [ nk_tooltip_begin_offset ] ---
+
+    /** {@code nk_bool nk_tooltip_begin_offset(struct nk_context * ctx, float width, enum nk_tooltip_pos position, struct nk_vec2 offset)} */
+    public static native boolean nnk_tooltip_begin_offset(long ctx, float width, int position, long offset);
+
+    /** {@code nk_bool nk_tooltip_begin_offset(struct nk_context * ctx, float width, enum nk_tooltip_pos position, struct nk_vec2 offset)} */
+    @NativeType("nk_bool")
+    public static boolean nk_tooltip_begin_offset(@NativeType("struct nk_context *") NkContext ctx, float width, @NativeType("enum nk_tooltip_pos") int position, @NativeType("struct nk_vec2") NkVec2 offset) {
+        return nnk_tooltip_begin_offset(ctx.address(), width, position, offset.address());
     }
 
     // --- [ nk_tooltip_end ] ---
@@ -6717,35 +6776,6 @@ public class Nuklear {
             stack.nUTF8(str, true);
             long strEncoded = stack.getPointerAddress();
             return nnk_strtof(strEncoded, memAddress(endptr));
-        } finally {
-            stack.setPointer(stackPointer);
-        }
-    }
-
-    // --- [ nk_strtod ] ---
-
-    /** {@code double nk_strtod(char const * str, char ** endptr)} */
-    public static native double nnk_strtod(long str, long endptr);
-
-    /** {@code double nk_strtod(char const * str, char ** endptr)} */
-    public static double nk_strtod(@NativeType("char const *") ByteBuffer str, @NativeType("char **") PointerBuffer endptr) {
-        if (CHECKS) {
-            checkNT1(str);
-            check(endptr, 1);
-        }
-        return nnk_strtod(memAddress(str), memAddress(endptr));
-    }
-
-    /** {@code double nk_strtod(char const * str, char ** endptr)} */
-    public static double nk_strtod(@NativeType("char const *") CharSequence str, @NativeType("char **") PointerBuffer endptr) {
-        if (CHECKS) {
-            check(endptr, 1);
-        }
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            stack.nUTF8(str, true);
-            long strEncoded = stack.getPointerAddress();
-            return nnk_strtod(strEncoded, memAddress(endptr));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -8887,20 +8917,22 @@ public class Nuklear {
         return nnk_knob_int(ctx.address(), min, val, max, step, zero_direction, dead_zone_degrees);
     }
 
-    /** {@code void nk_property_int(struct nk_context * ctx, char const * name, int min, int * val, int max, int step, float inc_per_pixel)} */
-    public static native void nnk_property_int(long ctx, long name, int min, int[] val, int max, int step, float inc_per_pixel);
+    /** {@code nk_bool nk_property_int(struct nk_context * ctx, char const * name, int min, int * val, int max, int step, float inc_per_pixel)} */
+    public static native boolean nnk_property_int(long ctx, long name, int min, int[] val, int max, int step, float inc_per_pixel);
 
-    /** {@code void nk_property_int(struct nk_context * ctx, char const * name, int min, int * val, int max, int step, float inc_per_pixel)} */
-    public static void nk_property_int(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer name, int min, @NativeType("int *") int[] val, int max, int step, float inc_per_pixel) {
+    /** {@code nk_bool nk_property_int(struct nk_context * ctx, char const * name, int min, int * val, int max, int step, float inc_per_pixel)} */
+    @NativeType("nk_bool")
+    public static boolean nk_property_int(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer name, int min, @NativeType("int *") int[] val, int max, int step, float inc_per_pixel) {
         if (CHECKS) {
             checkNT1(name);
             check(val, 1);
         }
-        nnk_property_int(ctx.address(), memAddress(name), min, val, max, step, inc_per_pixel);
+        return nnk_property_int(ctx.address(), memAddress(name), min, val, max, step, inc_per_pixel);
     }
 
-    /** {@code void nk_property_int(struct nk_context * ctx, char const * name, int min, int * val, int max, int step, float inc_per_pixel)} */
-    public static void nk_property_int(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence name, int min, @NativeType("int *") int[] val, int max, int step, float inc_per_pixel) {
+    /** {@code nk_bool nk_property_int(struct nk_context * ctx, char const * name, int min, int * val, int max, int step, float inc_per_pixel)} */
+    @NativeType("nk_bool")
+    public static boolean nk_property_int(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence name, int min, @NativeType("int *") int[] val, int max, int step, float inc_per_pixel) {
         if (CHECKS) {
             check(val, 1);
         }
@@ -8908,26 +8940,28 @@ public class Nuklear {
         try {
             stack.nUTF8(name, true);
             long nameEncoded = stack.getPointerAddress();
-            nnk_property_int(ctx.address(), nameEncoded, min, val, max, step, inc_per_pixel);
+            return nnk_property_int(ctx.address(), nameEncoded, min, val, max, step, inc_per_pixel);
         } finally {
             stack.setPointer(stackPointer);
         }
     }
 
-    /** {@code void nk_property_float(struct nk_context * ctx, char const * name, float min, float * val, float max, float step, float inc_per_pixel)} */
-    public static native void nnk_property_float(long ctx, long name, float min, float[] val, float max, float step, float inc_per_pixel);
+    /** {@code nk_bool nk_property_float(struct nk_context * ctx, char const * name, float min, float * val, float max, float step, float inc_per_pixel)} */
+    public static native boolean nnk_property_float(long ctx, long name, float min, float[] val, float max, float step, float inc_per_pixel);
 
-    /** {@code void nk_property_float(struct nk_context * ctx, char const * name, float min, float * val, float max, float step, float inc_per_pixel)} */
-    public static void nk_property_float(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer name, float min, @NativeType("float *") float[] val, float max, float step, float inc_per_pixel) {
+    /** {@code nk_bool nk_property_float(struct nk_context * ctx, char const * name, float min, float * val, float max, float step, float inc_per_pixel)} */
+    @NativeType("nk_bool")
+    public static boolean nk_property_float(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer name, float min, @NativeType("float *") float[] val, float max, float step, float inc_per_pixel) {
         if (CHECKS) {
             checkNT1(name);
             check(val, 1);
         }
-        nnk_property_float(ctx.address(), memAddress(name), min, val, max, step, inc_per_pixel);
+        return nnk_property_float(ctx.address(), memAddress(name), min, val, max, step, inc_per_pixel);
     }
 
-    /** {@code void nk_property_float(struct nk_context * ctx, char const * name, float min, float * val, float max, float step, float inc_per_pixel)} */
-    public static void nk_property_float(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence name, float min, @NativeType("float *") float[] val, float max, float step, float inc_per_pixel) {
+    /** {@code nk_bool nk_property_float(struct nk_context * ctx, char const * name, float min, float * val, float max, float step, float inc_per_pixel)} */
+    @NativeType("nk_bool")
+    public static boolean nk_property_float(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence name, float min, @NativeType("float *") float[] val, float max, float step, float inc_per_pixel) {
         if (CHECKS) {
             check(val, 1);
         }
@@ -8935,26 +8969,28 @@ public class Nuklear {
         try {
             stack.nUTF8(name, true);
             long nameEncoded = stack.getPointerAddress();
-            nnk_property_float(ctx.address(), nameEncoded, min, val, max, step, inc_per_pixel);
+            return nnk_property_float(ctx.address(), nameEncoded, min, val, max, step, inc_per_pixel);
         } finally {
             stack.setPointer(stackPointer);
         }
     }
 
-    /** {@code void nk_property_double(struct nk_context * ctx, char const * name, double min, double * val, double max, double step, float inc_per_pixel)} */
-    public static native void nnk_property_double(long ctx, long name, double min, double[] val, double max, double step, float inc_per_pixel);
+    /** {@code nk_bool nk_property_double(struct nk_context * ctx, char const * name, double min, double * val, double max, double step, float inc_per_pixel)} */
+    public static native boolean nnk_property_double(long ctx, long name, double min, double[] val, double max, double step, float inc_per_pixel);
 
-    /** {@code void nk_property_double(struct nk_context * ctx, char const * name, double min, double * val, double max, double step, float inc_per_pixel)} */
-    public static void nk_property_double(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer name, double min, @NativeType("double *") double[] val, double max, double step, float inc_per_pixel) {
+    /** {@code nk_bool nk_property_double(struct nk_context * ctx, char const * name, double min, double * val, double max, double step, float inc_per_pixel)} */
+    @NativeType("nk_bool")
+    public static boolean nk_property_double(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer name, double min, @NativeType("double *") double[] val, double max, double step, float inc_per_pixel) {
         if (CHECKS) {
             checkNT1(name);
             check(val, 1);
         }
-        nnk_property_double(ctx.address(), memAddress(name), min, val, max, step, inc_per_pixel);
+        return nnk_property_double(ctx.address(), memAddress(name), min, val, max, step, inc_per_pixel);
     }
 
-    /** {@code void nk_property_double(struct nk_context * ctx, char const * name, double min, double * val, double max, double step, float inc_per_pixel)} */
-    public static void nk_property_double(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence name, double min, @NativeType("double *") double[] val, double max, double step, float inc_per_pixel) {
+    /** {@code nk_bool nk_property_double(struct nk_context * ctx, char const * name, double min, double * val, double max, double step, float inc_per_pixel)} */
+    @NativeType("nk_bool")
+    public static boolean nk_property_double(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence name, double min, @NativeType("double *") double[] val, double max, double step, float inc_per_pixel) {
         if (CHECKS) {
             check(val, 1);
         }
@@ -8962,7 +8998,7 @@ public class Nuklear {
         try {
             stack.nUTF8(name, true);
             long nameEncoded = stack.getPointerAddress();
-            nnk_property_double(ctx.address(), nameEncoded, min, val, max, step, inc_per_pixel);
+            return nnk_property_double(ctx.address(), nameEncoded, min, val, max, step, inc_per_pixel);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -9020,31 +9056,34 @@ public class Nuklear {
         nnk_popup_get_scroll(ctx.address(), offset_x, offset_y);
     }
 
-    /** {@code void nk_combobox(struct nk_context * ctx, char const * const * items, int count, int * selected, int item_height, struct nk_vec2 size)} */
-    public static native void nnk_combobox(long ctx, long items, int count, int[] selected, int item_height, long size);
+    /** {@code nk_bool nk_combobox(struct nk_context * ctx, char const * const * items, int count, int * selected, int item_height, struct nk_vec2 size)} */
+    public static native boolean nnk_combobox(long ctx, long items, int count, int[] selected, int item_height, long size);
 
-    /** {@code void nk_combobox(struct nk_context * ctx, char const * const * items, int count, int * selected, int item_height, struct nk_vec2 size)} */
-    public static void nk_combobox(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const * const *") PointerBuffer items, @NativeType("int *") int[] selected, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    /** {@code nk_bool nk_combobox(struct nk_context * ctx, char const * const * items, int count, int * selected, int item_height, struct nk_vec2 size)} */
+    @NativeType("nk_bool")
+    public static boolean nk_combobox(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const * const *") PointerBuffer items, @NativeType("int *") int[] selected, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         if (CHECKS) {
             check(selected, 1);
         }
-        nnk_combobox(ctx.address(), memAddress(items), items.remaining(), selected, item_height, size.address());
+        return nnk_combobox(ctx.address(), memAddress(items), items.remaining(), selected, item_height, size.address());
     }
 
-    /** {@code void nk_combobox_string(struct nk_context * ctx, char const * items_separated_by_zeros, int * selected, int count, int item_height, struct nk_vec2 size)} */
-    public static native void nnk_combobox_string(long ctx, long items_separated_by_zeros, int[] selected, int count, int item_height, long size);
+    /** {@code nk_bool nk_combobox_string(struct nk_context * ctx, char const * items_separated_by_zeros, int * selected, int count, int item_height, struct nk_vec2 size)} */
+    public static native boolean nnk_combobox_string(long ctx, long items_separated_by_zeros, int[] selected, int count, int item_height, long size);
 
-    /** {@code void nk_combobox_string(struct nk_context * ctx, char const * items_separated_by_zeros, int * selected, int count, int item_height, struct nk_vec2 size)} */
-    public static void nk_combobox_string(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer items_separated_by_zeros, @NativeType("int *") int[] selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    /** {@code nk_bool nk_combobox_string(struct nk_context * ctx, char const * items_separated_by_zeros, int * selected, int count, int item_height, struct nk_vec2 size)} */
+    @NativeType("nk_bool")
+    public static boolean nk_combobox_string(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer items_separated_by_zeros, @NativeType("int *") int[] selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         if (CHECKS) {
             checkNT1(items_separated_by_zeros);
             check(selected, 1);
         }
-        nnk_combobox_string(ctx.address(), memAddress(items_separated_by_zeros), selected, count, item_height, size.address());
+        return nnk_combobox_string(ctx.address(), memAddress(items_separated_by_zeros), selected, count, item_height, size.address());
     }
 
-    /** {@code void nk_combobox_string(struct nk_context * ctx, char const * items_separated_by_zeros, int * selected, int count, int item_height, struct nk_vec2 size)} */
-    public static void nk_combobox_string(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence items_separated_by_zeros, @NativeType("int *") int[] selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    /** {@code nk_bool nk_combobox_string(struct nk_context * ctx, char const * items_separated_by_zeros, int * selected, int count, int item_height, struct nk_vec2 size)} */
+    @NativeType("nk_bool")
+    public static boolean nk_combobox_string(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence items_separated_by_zeros, @NativeType("int *") int[] selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         if (CHECKS) {
             check(selected, 1);
         }
@@ -9052,26 +9091,28 @@ public class Nuklear {
         try {
             stack.nUTF8(items_separated_by_zeros, true);
             long items_separated_by_zerosEncoded = stack.getPointerAddress();
-            nnk_combobox_string(ctx.address(), items_separated_by_zerosEncoded, selected, count, item_height, size.address());
+            return nnk_combobox_string(ctx.address(), items_separated_by_zerosEncoded, selected, count, item_height, size.address());
         } finally {
             stack.setPointer(stackPointer);
         }
     }
 
-    /** {@code void nk_combobox_separator(struct nk_context * ctx, char const * items_separated_by_separator, int separator, int * selected, int count, int item_height, struct nk_vec2 size)} */
-    public static native void nnk_combobox_separator(long ctx, long items_separated_by_separator, int separator, int[] selected, int count, int item_height, long size);
+    /** {@code nk_bool nk_combobox_separator(struct nk_context * ctx, char const * items_separated_by_separator, int separator, int * selected, int count, int item_height, struct nk_vec2 size)} */
+    public static native boolean nnk_combobox_separator(long ctx, long items_separated_by_separator, int separator, int[] selected, int count, int item_height, long size);
 
-    /** {@code void nk_combobox_separator(struct nk_context * ctx, char const * items_separated_by_separator, int separator, int * selected, int count, int item_height, struct nk_vec2 size)} */
-    public static void nk_combobox_separator(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer items_separated_by_separator, int separator, @NativeType("int *") int[] selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    /** {@code nk_bool nk_combobox_separator(struct nk_context * ctx, char const * items_separated_by_separator, int separator, int * selected, int count, int item_height, struct nk_vec2 size)} */
+    @NativeType("nk_bool")
+    public static boolean nk_combobox_separator(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer items_separated_by_separator, int separator, @NativeType("int *") int[] selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         if (CHECKS) {
             checkNT1(items_separated_by_separator);
             check(selected, 1);
         }
-        nnk_combobox_separator(ctx.address(), memAddress(items_separated_by_separator), separator, selected, count, item_height, size.address());
+        return nnk_combobox_separator(ctx.address(), memAddress(items_separated_by_separator), separator, selected, count, item_height, size.address());
     }
 
-    /** {@code void nk_combobox_separator(struct nk_context * ctx, char const * items_separated_by_separator, int separator, int * selected, int count, int item_height, struct nk_vec2 size)} */
-    public static void nk_combobox_separator(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence items_separated_by_separator, int separator, @NativeType("int *") int[] selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    /** {@code nk_bool nk_combobox_separator(struct nk_context * ctx, char const * items_separated_by_separator, int separator, int * selected, int count, int item_height, struct nk_vec2 size)} */
+    @NativeType("nk_bool")
+    public static boolean nk_combobox_separator(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence items_separated_by_separator, int separator, @NativeType("int *") int[] selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         if (CHECKS) {
             check(selected, 1);
         }
@@ -9079,22 +9120,23 @@ public class Nuklear {
         try {
             stack.nUTF8(items_separated_by_separator, true);
             long items_separated_by_separatorEncoded = stack.getPointerAddress();
-            nnk_combobox_separator(ctx.address(), items_separated_by_separatorEncoded, separator, selected, count, item_height, size.address());
+            return nnk_combobox_separator(ctx.address(), items_separated_by_separatorEncoded, separator, selected, count, item_height, size.address());
         } finally {
             stack.setPointer(stackPointer);
         }
     }
 
-    /** {@code void nk_combobox_callback(struct nk_context * ctx, nk_item_getter item_getter, void * userdata, int * selected, int count, int item_height, struct nk_vec2 size)} */
-    public static native void nnk_combobox_callback(long ctx, long item_getter, long userdata, int[] selected, int count, int item_height, long size);
+    /** {@code nk_bool nk_combobox_callback(struct nk_context * ctx, nk_item_getter item_getter, void * userdata, int * selected, int count, int item_height, struct nk_vec2 size)} */
+    public static native boolean nnk_combobox_callback(long ctx, long item_getter, long userdata, int[] selected, int count, int item_height, long size);
 
-    /** {@code void nk_combobox_callback(struct nk_context * ctx, nk_item_getter item_getter, void * userdata, int * selected, int count, int item_height, struct nk_vec2 size)} */
-    public static void nk_combobox_callback(@NativeType("struct nk_context *") NkContext ctx, @NativeType("nk_item_getter") NkItemGetterI item_getter, @NativeType("void *") long userdata, @NativeType("int *") int[] selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    /** {@code nk_bool nk_combobox_callback(struct nk_context * ctx, nk_item_getter item_getter, void * userdata, int * selected, int count, int item_height, struct nk_vec2 size)} */
+    @NativeType("nk_bool")
+    public static boolean nk_combobox_callback(@NativeType("struct nk_context *") NkContext ctx, @NativeType("nk_item_getter") NkItemGetterI item_getter, @NativeType("void *") long userdata, @NativeType("int *") int[] selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         if (CHECKS) {
             check(userdata);
             check(selected, 1);
         }
-        nnk_combobox_callback(ctx.address(), item_getter.address(), userdata, selected, count, item_height, size.address());
+        return nnk_combobox_callback(ctx.address(), item_getter.address(), userdata, selected, count, item_height, size.address());
     }
 
     /** {@code nk_bool nk_style_push_float(struct nk_context * ctx, float * address, float value)} */

@@ -57,6 +57,7 @@ val nk_style_header_align = "enum nk_style_header_align".enumType
 val nk_style_item_type = "enum nk_style_item_type".enumType
 val nk_symbol_type = "enum nk_symbol_type".enumType
 val nk_tree_type = "enum nk_tree_type".enumType
+val nk_tooltip_pos = "enum nk_tooltip_pos".enumType
 val nk_widget_layout_states = "enum nk_widget_layout_states".enumType
 
 // API
@@ -1114,6 +1115,9 @@ val nk_style_window = struct(Module.NUKLEAR, "NkStyleWindow", nativeName = "stru
     nk_vec2("contextual_padding")
     nk_vec2("menu_padding")
     nk_vec2("tooltip_padding")
+
+    nk_tooltip_pos("tooltip_origin")
+    nk_vec2("tooltip_offset")
 }
 
 val nk_style = struct(Module.NUKLEAR, "NkStyle", nativeName = "struct nk_style") {
@@ -1272,6 +1276,10 @@ val nk_property_state = struct(Module.NUKLEAR, "NkPropertyState", nativeName = "
     unsigned_int("seq")
     unsigned_int("old")
     int("state")
+    int("prev_state")
+    nk_hash("prev_name")
+    char("prev_buffer")["NK_MAX_NUMBER_BUFFER"]
+    int("prev_length")
 }
 
 val nk_window = struct(Module.NUKLEAR, "NkWindow", nativeName = "struct nk_window", mutable = false) {
