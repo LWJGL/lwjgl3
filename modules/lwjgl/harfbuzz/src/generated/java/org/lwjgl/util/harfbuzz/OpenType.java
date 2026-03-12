@@ -39,6 +39,9 @@ public class OpenType {
             color_has_layers                              = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_color_has_layers"),
             color_glyph_get_layers                        = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_color_glyph_get_layers"),
             color_has_svg                                 = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_color_has_svg"),
+            color_get_svg_document_count                  = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_color_get_svg_document_count"),
+            color_glyph_get_svg_document_index            = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_color_glyph_get_svg_document_index"),
+            color_get_svg_document_glyph_range            = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_color_get_svg_document_glyph_range"),
             color_glyph_reference_svg                     = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_color_glyph_reference_svg"),
             color_has_png                                 = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_color_has_png"),
             color_glyph_reference_png                     = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_color_glyph_reference_png"),
@@ -437,6 +440,59 @@ public class OpenType {
             check(face);
         }
         return invokePI(face, __functionAddress) != 0;
+    }
+
+    // --- [ hb_ot_color_get_svg_document_count ] ---
+
+    /** {@code unsigned int hb_ot_color_get_svg_document_count(hb_face_t * face)} */
+    @NativeType("unsigned int")
+    public static int hb_ot_color_get_svg_document_count(@NativeType("hb_face_t *") long face) {
+        long __functionAddress = Functions.color_get_svg_document_count;
+        if (CHECKS) {
+            check(face);
+        }
+        return invokePI(face, __functionAddress);
+    }
+
+    // --- [ hb_ot_color_glyph_get_svg_document_index ] ---
+
+    /** {@code hb_bool_t hb_ot_color_glyph_get_svg_document_index(hb_face_t * face, hb_codepoint_t glyph, unsigned int * svg_document_index)} */
+    public static int nhb_ot_color_glyph_get_svg_document_index(long face, int glyph, long svg_document_index) {
+        long __functionAddress = Functions.color_glyph_get_svg_document_index;
+        if (CHECKS) {
+            check(face);
+        }
+        return invokePPI(face, glyph, svg_document_index, __functionAddress);
+    }
+
+    /** {@code hb_bool_t hb_ot_color_glyph_get_svg_document_index(hb_face_t * face, hb_codepoint_t glyph, unsigned int * svg_document_index)} */
+    @NativeType("hb_bool_t")
+    public static boolean hb_ot_color_glyph_get_svg_document_index(@NativeType("hb_face_t *") long face, @NativeType("hb_codepoint_t") int glyph, @NativeType("unsigned int *") @Nullable IntBuffer svg_document_index) {
+        if (CHECKS) {
+            checkSafe(svg_document_index, 1);
+        }
+        return nhb_ot_color_glyph_get_svg_document_index(face, glyph, memAddressSafe(svg_document_index)) != 0;
+    }
+
+    // --- [ hb_ot_color_get_svg_document_glyph_range ] ---
+
+    /** {@code hb_bool_t hb_ot_color_get_svg_document_glyph_range(hb_face_t * face, unsigned int svg_document_index, hb_codepoint_t * start_glyph_id, hb_codepoint_t * end_glyph_id)} */
+    public static int nhb_ot_color_get_svg_document_glyph_range(long face, int svg_document_index, long start_glyph_id, long end_glyph_id) {
+        long __functionAddress = Functions.color_get_svg_document_glyph_range;
+        if (CHECKS) {
+            check(face);
+        }
+        return invokePPPI(face, svg_document_index, start_glyph_id, end_glyph_id, __functionAddress);
+    }
+
+    /** {@code hb_bool_t hb_ot_color_get_svg_document_glyph_range(hb_face_t * face, unsigned int svg_document_index, hb_codepoint_t * start_glyph_id, hb_codepoint_t * end_glyph_id)} */
+    @NativeType("hb_bool_t")
+    public static boolean hb_ot_color_get_svg_document_glyph_range(@NativeType("hb_face_t *") long face, @NativeType("unsigned int") int svg_document_index, @NativeType("hb_codepoint_t *") @Nullable IntBuffer start_glyph_id, @NativeType("hb_codepoint_t *") @Nullable IntBuffer end_glyph_id) {
+        if (CHECKS) {
+            checkSafe(start_glyph_id, 1);
+            checkSafe(end_glyph_id, 1);
+        }
+        return nhb_ot_color_get_svg_document_glyph_range(face, svg_document_index, memAddressSafe(start_glyph_id), memAddressSafe(end_glyph_id)) != 0;
     }
 
     // --- [ hb_ot_color_glyph_reference_svg ] ---

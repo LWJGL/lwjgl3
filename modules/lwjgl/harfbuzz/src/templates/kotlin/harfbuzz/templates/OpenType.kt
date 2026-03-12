@@ -83,6 +83,29 @@ val hb_ot = "OpenType".nativeClass(Module.HARFBUZZ, prefix = "HB_OT", prefixMeth
         hb_face_t.p("face")
     )
 
+    unsigned_int(
+        "color_get_svg_document_count",
+
+        hb_face_t.p("face")
+    )
+
+    hb_bool_t(
+        "color_glyph_get_svg_document_index",
+
+        hb_face_t.p("face"),
+        hb_codepoint_t("glyph"),
+        Check(1)..nullable..unsigned_int.p("svg_document_index")
+    )
+
+    hb_bool_t(
+        "color_get_svg_document_glyph_range",
+
+        hb_face_t.p("face"),
+        unsigned_int("svg_document_index"),
+        Check(1)..nullable..hb_codepoint_t.p("start_glyph_id"),
+        Check(1)..nullable..hb_codepoint_t.p("end_glyph_id")
+    )
+
     hb_blob_t.p(
         "color_glyph_reference_svg",
 

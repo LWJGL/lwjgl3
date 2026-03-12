@@ -571,6 +571,12 @@ public class Configuration<T> {
      */
     public static final Configuration<Object> HARFBUZZ_LIBRARY_NAME = new Configuration<>("org.lwjgl.harfbuzz.libname", StateInit.STRING);
 
+    /** Similar to {@link #LIBRARY_NAME} for the HarfBuzz raster library (<b>org.lwjgl.harfbuzz.raster.libname</b>). */
+    public static final Configuration<String> HARFBUZZ_RASTER_LIBRARY_NAME = new Configuration<>("org.lwjgl.harfbuzz.raster.libname", StateInit.STRING);
+
+    /** Similar to {@link #LIBRARY_NAME} for the HarfBuzz vector library (<b>org.lwjgl.harfbuzz.vector.libname</b>). */
+    public static final Configuration<String> HARFBUZZ_VECTOR_LIBRARY_NAME = new Configuration<>("org.lwjgl.harfbuzz.vector.libname", StateInit.STRING);
+
     // -- HWLOC
 
     /** Similar to {@link #LIBRARY_NAME} for the hwloc library (<b>org.lwjgl.hwloc.libname</b>). */

@@ -48,6 +48,18 @@ $t}""")
 }
 val HARFBUZZ_BINDING_DELEGATE = HARFBUZZ_BINDING.delegate("HarfBuzz.getLibrary()")
 
+val HARFBUZZ_RASTER_BINDING = simpleBinding(
+    Module.HARFBUZZ,
+    libraryExpression = """Configuration.HARFBUZZ_RASTER_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("harfbuzz-raster"))""",
+    bundledWithLWJGL = true
+)
+
+val HARFBUZZ_VECTOR_BINDING = simpleBinding(
+    Module.HARFBUZZ,
+    libraryExpression = """Configuration.HARFBUZZ_VECTOR_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("harfbuzz-vector"))""",
+    bundledWithLWJGL = true
+)
+
 val hb_language_t = "hb_language_t".handle
 
 val hb_blob_t = "hb_blob_t".opaque
@@ -926,4 +938,35 @@ val hb_get_table_tags_func_t = Module.HARFBUZZ.callback {
 
         nativeType = "hb_get_table_tags_func_t"
     )
+}
+
+// hb-raster.h
+
+val hb_raster_draw_t = "hb_raster_draw_t".opaque
+val hb_raster_image_t = "hb_raster_image_t".opaque
+val hb_raster_paint_t = "hb_raster_paint_t".opaque
+
+val hb_raster_format_t = "hb_raster_format_t".enumType
+
+val hb_raster_extents_t = struct(Module.HARFBUZZ, "hb_raster_extents_t") {
+    int("x_origin")
+    int("y_origin")
+    unsigned_int("width")
+    unsigned_int("height")
+    unsigned_int("stride")
+}
+
+// hb-vector.h
+
+val hb_vector_draw_t = "hb_vector_draw_t".opaque
+val hb_vector_paint_t = "hb_vector_paint_t".opaque
+
+val hb_vector_format_t = "hb_vector_format_t".enumType
+val hb_vector_extents_mode_t = "hb_vector_extents_mode_t".enumType
+
+val hb_vector_extents_t = struct(Module.HARFBUZZ, "hb_vector_extents_t") {
+    float("x")
+    float("y")
+    float("width")
+    float("height")
 }

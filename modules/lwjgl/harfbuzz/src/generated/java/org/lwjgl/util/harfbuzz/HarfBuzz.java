@@ -157,6 +157,7 @@ public class HarfBuzz {
             buffer_deserialize_unicode                    = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_deserialize_unicode"),
             buffer_diff                                   = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_diff"),
             buffer_set_message_func                       = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_message_func"),
+            buffer_changed                                = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_changed"),
             draw_funcs_set_move_to_func                   = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_set_move_to_func"),
             draw_funcs_set_line_to_func                   = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_set_line_to_func"),
             draw_funcs_set_quadratic_to_func              = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_set_quadratic_to_func"),
@@ -879,13 +880,13 @@ public class HarfBuzz {
         HB_UNICODE_COMBINING_CLASS_IOTA_SUBSCRIPT       = 240,
         HB_UNICODE_COMBINING_CLASS_INVALID              = 255;
 
-    public static final int HB_VERSION_MAJOR = 12;
+    public static final int HB_VERSION_MAJOR = 13;
 
-    public static final int HB_VERSION_MINOR = 3;
+    public static final int HB_VERSION_MINOR = 1;
 
-    public static final int HB_VERSION_MICRO = 2;
+    public static final int HB_VERSION_MICRO = 0;
 
-    public static final String HB_VERSION_STRING = "12.3.2";
+    public static final String HB_VERSION_STRING = "13.1.0";
 
     protected HarfBuzz() {
         throw new UnsupportedOperationException();
@@ -2414,6 +2415,17 @@ public class HarfBuzz {
     /** {@code void hb_buffer_set_message_func(hb_buffer_t * buffer, hb_buffer_message_func_t func, void * user_data, hb_destroy_func_t destroy)} */
     public static void hb_buffer_set_message_func(@NativeType("hb_buffer_t *") long buffer, @NativeType("hb_buffer_message_func_t") hb_buffer_message_func_tI func, @NativeType("void *") long user_data, @NativeType("hb_destroy_func_t") @Nullable hb_destroy_func_tI destroy) {
         nhb_buffer_set_message_func(buffer, func.address(), user_data, memAddressSafe(destroy));
+    }
+
+    // --- [ hb_buffer_changed ] ---
+
+    /** {@code void hb_buffer_changed(hb_buffer_t * buffer)} */
+    public static void hb_buffer_changed(@NativeType("hb_buffer_t *") long buffer) {
+        long __functionAddress = Functions.buffer_changed;
+        if (CHECKS) {
+            check(buffer);
+        }
+        invokePV(buffer, __functionAddress);
     }
 
     // --- [ hb_draw_funcs_set_move_to_func ] ---

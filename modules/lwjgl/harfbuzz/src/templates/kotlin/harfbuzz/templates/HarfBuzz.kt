@@ -1143,6 +1143,12 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         nullable..hb_destroy_func_t("destroy")
     )
 
+    void(
+        "buffer_changed",
+
+        hb_buffer_t.p("buffer")
+    )
+
     // hb-draw.h
 
     customMethod("""
@@ -3715,11 +3721,11 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
 
     // hb-version.h
 
-    IntConstant("VERSION_MAJOR".."12")
-    IntConstant("VERSION_MINOR".."3")
-    IntConstant("VERSION_MICRO".."2")
+    IntConstant("VERSION_MAJOR".."13")
+    IntConstant("VERSION_MINOR".."1")
+    IntConstant("VERSION_MICRO".."0")
 
-    StringConstant("VERSION_STRING".."12.3.2")
+    StringConstant("VERSION_STRING".."13.1.0")
 
     customMethod("""
     public static boolean HB_VERSION_ATLEAST(int major, int minor, int micro) {
