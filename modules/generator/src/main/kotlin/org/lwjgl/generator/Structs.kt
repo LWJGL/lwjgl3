@@ -1763,7 +1763,13 @@ ${validations.joinToString("\n")}
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$setter(int, ${it.nativeType.javaMethodType}) $setter}. */")
                         println("${t}${access}static void n$setter(long $STRUCT, int index, $javaType value) {")
-                        println("$t$t${getBufferMethod("Put", it, javaType)}$STRUCT + $field + check(index, ${it.size}) * ${mapping.bytesExpression}, value);")
+                        println("$t$t${getBufferMethod("Put", it, javaType)}$STRUCT + $field + check(index, ${it.size}) * ${mapping.bytesExpression}, ${
+                            when {
+                                javaType == "boolean"
+                                     -> "value ? (byte)1 : (byte)0"
+                                else -> "value"
+                            }
+                        });")
                         println("$t}")
                     }
                 } else if (it.nativeType is CharSequenceType) {
