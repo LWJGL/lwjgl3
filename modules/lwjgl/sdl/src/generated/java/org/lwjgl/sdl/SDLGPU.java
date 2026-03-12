@@ -1543,7 +1543,7 @@ public class SDLGPU {
 
     // --- [ SDL_MapGPUTransferBuffer ] ---
 
-    /** {@code void * SDL_MapGPUTransferBuffer(SDL_GPUDevice * device, SDL_GPUTransferBuffer * transfer_buffer, bool cycle, size_t buffer_size)} */
+    /** {@code void * SDL_MapGPUTransferBuffer(SDL_GPUDevice * device, SDL_GPUTransferBuffer * transfer_buffer, bool cycle)} */
     public static long nSDL_MapGPUTransferBuffer(long device, long transfer_buffer, boolean cycle) {
         long __functionAddress = Functions.MapGPUTransferBuffer;
         if (CHECKS) {
@@ -1553,7 +1553,7 @@ public class SDLGPU {
         return invokePPP(device, transfer_buffer, cycle, __functionAddress);
     }
 
-    /** {@code void * SDL_MapGPUTransferBuffer(SDL_GPUDevice * device, SDL_GPUTransferBuffer * transfer_buffer, bool cycle, size_t buffer_size)} */
+    /** {@code void * SDL_MapGPUTransferBuffer(SDL_GPUDevice * device, SDL_GPUTransferBuffer * transfer_buffer, bool cycle)} */
     @NativeType("void *")
     public static @Nullable ByteBuffer SDL_MapGPUTransferBuffer(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUTransferBuffer *") long transfer_buffer, @NativeType("bool") boolean cycle, @NativeType("size_t") long buffer_size) {
         long __result = nSDL_MapGPUTransferBuffer(device, transfer_buffer, cycle);

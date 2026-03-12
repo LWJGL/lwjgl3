@@ -10383,7 +10383,7 @@ public class LLVMCore {
 
     // --- [ LLVMGetIndices ] ---
 
-    /** {@code unsigned int const * LLVMGetIndices(LLVMValueRef Inst, unsigned int Count)} */
+    /** {@code unsigned int const * LLVMGetIndices(LLVMValueRef Inst)} */
     public static long nLLVMGetIndices(long Inst) {
         long __functionAddress = Functions.GetIndices;
         if (CHECKS) {
@@ -10392,7 +10392,7 @@ public class LLVMCore {
         return invokePP(Inst, __functionAddress);
     }
 
-    /** {@code unsigned int const * LLVMGetIndices(LLVMValueRef Inst, unsigned int Count)} */
+    /** {@code unsigned int const * LLVMGetIndices(LLVMValueRef Inst)} */
     @NativeType("unsigned int const *")
     public static IntBuffer LLVMGetIndices(@NativeType("LLVMValueRef") long Inst, @NativeType("unsigned int") int Count) {
         long __result = nLLVMGetIndices(Inst);

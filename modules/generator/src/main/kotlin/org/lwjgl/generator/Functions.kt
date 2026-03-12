@@ -615,7 +615,7 @@ class Func(
     }
 
     private fun PrintWriter.printDocumentation() {
-        println(parameters.filter { it !== JNI_ENV && !CaptureCallState.matches(it) }.let { params ->
+        println(parameters.filter { it !== JNI_ENV && !CaptureCallState.matches(it) && !it.has<Virtual>() }.let { params ->
             "{@code ${returns.nativeType.name} $name(${
                 if (params.isEmpty()) "void" else params.asSequence()
                     .joinToString(", ") { "${it.toNativeType(null)} ${it.name}" }
