@@ -22,31 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkDeviceSize size;
  * }}</pre>
  */
-public class VkDeviceAddressRangeEXT extends Struct<VkDeviceAddressRangeEXT> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        ADDRESS,
-        SIZE;
-
-    static {
-        Layout layout = __struct(
-            __member(8),
-            __member(8)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        ADDRESS = layout.offsetof(0);
-        SIZE = layout.offsetof(1);
-    }
+public class VkDeviceAddressRangeEXT extends VkDeviceAddressRangeKHR {
 
     protected VkDeviceAddressRangeEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -64,25 +40,18 @@ public class VkDeviceAddressRangeEXT extends Struct<VkDeviceAddressRangeEXT> imp
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDeviceAddressRangeEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** @return the value of the {@code address} field. */
-    @NativeType("VkDeviceAddress")
-    public long address$() { return naddress$(address()); }
-    /** @return the value of the {@code size} field. */
-    @NativeType("VkDeviceSize")
-    public long size() { return nsize(address()); }
-
     /** Sets the specified value to the {@code address} field. */
+    @Override
     public VkDeviceAddressRangeEXT address$(@NativeType("VkDeviceAddress") long value) { naddress$(address(), value); return this; }
     /** Sets the specified value to the {@code size} field. */
+    @Override
     public VkDeviceAddressRangeEXT size(@NativeType("VkDeviceSize") long value) { nsize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkDeviceAddressRangeEXT set(
         long address$,
         long size
@@ -216,20 +185,8 @@ public class VkDeviceAddressRangeEXT extends Struct<VkDeviceAddressRangeEXT> imp
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #address$}. */
-    public static long naddress$(long struct) { return memGetLong(struct + VkDeviceAddressRangeEXT.ADDRESS); }
-    /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return memGetLong(struct + VkDeviceAddressRangeEXT.SIZE); }
-
-    /** Unsafe version of {@link #address$(long) address$}. */
-    public static void naddress$(long struct, long value) { memPutLong(struct + VkDeviceAddressRangeEXT.ADDRESS, value); }
-    /** Unsafe version of {@link #size(long) size}. */
-    public static void nsize(long struct, long value) { memPutLong(struct + VkDeviceAddressRangeEXT.SIZE, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkDeviceAddressRangeEXT} structs. */
-    public static class Buffer extends StructBuffer<VkDeviceAddressRangeEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkDeviceAddressRangeKHR.Buffer {
 
         private static final VkDeviceAddressRangeEXT ELEMENT_FACTORY = VkDeviceAddressRangeEXT.create(-1L);
 
@@ -243,7 +200,7 @@ public class VkDeviceAddressRangeEXT extends Struct<VkDeviceAddressRangeEXT> imp
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -269,16 +226,11 @@ public class VkDeviceAddressRangeEXT extends Struct<VkDeviceAddressRangeEXT> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code address} field. */
-        @NativeType("VkDeviceAddress")
-        public long address$() { return VkDeviceAddressRangeEXT.naddress$(address()); }
-        /** @return the value of the {@code size} field. */
-        @NativeType("VkDeviceSize")
-        public long size() { return VkDeviceAddressRangeEXT.nsize(address()); }
-
         /** Sets the specified value to the {@code address} field. */
+        @Override
         public VkDeviceAddressRangeEXT.Buffer address$(@NativeType("VkDeviceAddress") long value) { VkDeviceAddressRangeEXT.naddress$(address(), value); return this; }
         /** Sets the specified value to the {@code size} field. */
+        @Override
         public VkDeviceAddressRangeEXT.Buffer size(@NativeType("VkDeviceSize") long value) { VkDeviceAddressRangeEXT.nsize(address(), value); return this; }
 
     }

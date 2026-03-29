@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -26,34 +25,7 @@ import static org.lwjgl.vulkan.VK10.*;
  *     uint64_t vendorFaultData;
  * }}</pre>
  */
-public class VkDeviceFaultVendorInfoEXT extends Struct<VkDeviceFaultVendorInfoEXT> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        DESCRIPTION,
-        VENDORFAULTCODE,
-        VENDORFAULTDATA;
-
-    static {
-        Layout layout = __struct(
-            __array(1, VK_MAX_DESCRIPTION_SIZE),
-            __member(8),
-            __member(8)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        DESCRIPTION = layout.offsetof(0);
-        VENDORFAULTCODE = layout.offsetof(1);
-        VENDORFAULTDATA = layout.offsetof(2);
-    }
+public class VkDeviceFaultVendorInfoEXT extends VkDeviceFaultVendorInfoKHR {
 
     protected VkDeviceFaultVendorInfoEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -71,55 +43,7 @@ public class VkDeviceFaultVendorInfoEXT extends Struct<VkDeviceFaultVendorInfoEX
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDeviceFaultVendorInfoEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
-    }
-
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** @return a {@link ByteBuffer} view of the {@code description} field. */
-    @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
-    public ByteBuffer description() { return ndescription(address()); }
-    /** @return the null-terminated string stored in the {@code description} field. */
-    @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
-    public String descriptionString() { return ndescriptionString(address()); }
-    /** @return the value of the {@code vendorFaultCode} field. */
-    @NativeType("uint64_t")
-    public long vendorFaultCode() { return nvendorFaultCode(address()); }
-    /** @return the value of the {@code vendorFaultData} field. */
-    @NativeType("uint64_t")
-    public long vendorFaultData() { return nvendorFaultData(address()); }
-
-    /** Copies the specified encoded string to the {@code description} field. */
-    public VkDeviceFaultVendorInfoEXT description(@NativeType("char[VK_MAX_DESCRIPTION_SIZE]") ByteBuffer value) { ndescription(address(), value); return this; }
-    /** Sets the specified value to the {@code vendorFaultCode} field. */
-    public VkDeviceFaultVendorInfoEXT vendorFaultCode(@NativeType("uint64_t") long value) { nvendorFaultCode(address(), value); return this; }
-    /** Sets the specified value to the {@code vendorFaultData} field. */
-    public VkDeviceFaultVendorInfoEXT vendorFaultData(@NativeType("uint64_t") long value) { nvendorFaultData(address(), value); return this; }
-
-    /** Initializes this struct with the specified values. */
-    public VkDeviceFaultVendorInfoEXT set(
-        ByteBuffer description,
-        long vendorFaultCode,
-        long vendorFaultData
-    ) {
-        description(description);
-        vendorFaultCode(vendorFaultCode);
-        vendorFaultData(vendorFaultData);
-
-        return this;
-    }
-
-    /**
-     * Copies the specified struct data to this struct.
-     *
-     * @param src the source struct
-     *
-     * @return this struct
-     */
-    public VkDeviceFaultVendorInfoEXT set(VkDeviceFaultVendorInfoEXT src) {
-        memCopy(src.address(), address(), SIZEOF);
-        return this;
+        super(container);
     }
 
     // -----------------------------------
@@ -233,32 +157,8 @@ public class VkDeviceFaultVendorInfoEXT extends Struct<VkDeviceFaultVendorInfoEX
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #description}. */
-    public static ByteBuffer ndescription(long struct) { return memByteBuffer(struct + VkDeviceFaultVendorInfoEXT.DESCRIPTION, VK_MAX_DESCRIPTION_SIZE); }
-    /** Unsafe version of {@link #descriptionString}. */
-    public static String ndescriptionString(long struct) { return memUTF8(struct + VkDeviceFaultVendorInfoEXT.DESCRIPTION); }
-    /** Unsafe version of {@link #vendorFaultCode}. */
-    public static long nvendorFaultCode(long struct) { return memGetLong(struct + VkDeviceFaultVendorInfoEXT.VENDORFAULTCODE); }
-    /** Unsafe version of {@link #vendorFaultData}. */
-    public static long nvendorFaultData(long struct) { return memGetLong(struct + VkDeviceFaultVendorInfoEXT.VENDORFAULTDATA); }
-
-    /** Unsafe version of {@link #description(ByteBuffer) description}. */
-    public static void ndescription(long struct, ByteBuffer value) {
-        if (CHECKS) {
-            checkNT1(value);
-            checkGT(value, VK_MAX_DESCRIPTION_SIZE);
-        }
-        memCopy(memAddress(value), struct + VkDeviceFaultVendorInfoEXT.DESCRIPTION, value.remaining());
-    }
-    /** Unsafe version of {@link #vendorFaultCode(long) vendorFaultCode}. */
-    public static void nvendorFaultCode(long struct, long value) { memPutLong(struct + VkDeviceFaultVendorInfoEXT.VENDORFAULTCODE, value); }
-    /** Unsafe version of {@link #vendorFaultData(long) vendorFaultData}. */
-    public static void nvendorFaultData(long struct, long value) { memPutLong(struct + VkDeviceFaultVendorInfoEXT.VENDORFAULTDATA, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkDeviceFaultVendorInfoEXT} structs. */
-    public static class Buffer extends StructBuffer<VkDeviceFaultVendorInfoEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkDeviceFaultVendorInfoKHR.Buffer {
 
         private static final VkDeviceFaultVendorInfoEXT ELEMENT_FACTORY = VkDeviceFaultVendorInfoEXT.create(-1L);
 
@@ -272,7 +172,7 @@ public class VkDeviceFaultVendorInfoEXT extends Struct<VkDeviceFaultVendorInfoEX
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -297,26 +197,6 @@ public class VkDeviceFaultVendorInfoEXT extends Struct<VkDeviceFaultVendorInfoEX
         protected VkDeviceFaultVendorInfoEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }
-
-        /** @return a {@link ByteBuffer} view of the {@code description} field. */
-        @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
-        public ByteBuffer description() { return VkDeviceFaultVendorInfoEXT.ndescription(address()); }
-        /** @return the null-terminated string stored in the {@code description} field. */
-        @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
-        public String descriptionString() { return VkDeviceFaultVendorInfoEXT.ndescriptionString(address()); }
-        /** @return the value of the {@code vendorFaultCode} field. */
-        @NativeType("uint64_t")
-        public long vendorFaultCode() { return VkDeviceFaultVendorInfoEXT.nvendorFaultCode(address()); }
-        /** @return the value of the {@code vendorFaultData} field. */
-        @NativeType("uint64_t")
-        public long vendorFaultData() { return VkDeviceFaultVendorInfoEXT.nvendorFaultData(address()); }
-
-        /** Copies the specified encoded string to the {@code description} field. */
-        public VkDeviceFaultVendorInfoEXT.Buffer description(@NativeType("char[VK_MAX_DESCRIPTION_SIZE]") ByteBuffer value) { VkDeviceFaultVendorInfoEXT.ndescription(address(), value); return this; }
-        /** Sets the specified value to the {@code vendorFaultCode} field. */
-        public VkDeviceFaultVendorInfoEXT.Buffer vendorFaultCode(@NativeType("uint64_t") long value) { VkDeviceFaultVendorInfoEXT.nvendorFaultCode(address(), value); return this; }
-        /** Sets the specified value to the {@code vendorFaultData} field. */
-        public VkDeviceFaultVendorInfoEXT.Buffer vendorFaultData(@NativeType("uint64_t") long value) { VkDeviceFaultVendorInfoEXT.nvendorFaultData(address(), value); return this; }
 
     }
 

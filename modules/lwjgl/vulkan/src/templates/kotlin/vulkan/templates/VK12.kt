@@ -65,10 +65,6 @@ val VK12 = "VK12".nativeClass(Module.VULKAN, "VK12", prefix = "VK", binding = VK
     )
 
     EnumConstant(
-        "SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE".."4"
-    )
-
-    EnumConstant(
         "BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT".enum(0x00020000)
     )
 
@@ -84,6 +80,10 @@ val VK12 = "VK12".nativeClass(Module.VULKAN, "VK12", prefix = "VK", binding = VK
     EnumConstant(
         "ERROR_FRAGMENTATION".."-1000161000",
         "ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS".."-1000257000"
+    )
+
+    EnumConstant(
+        "SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE".."4"
     )
 
     EnumConstant(

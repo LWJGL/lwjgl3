@@ -23,8 +23,8 @@ import static org.lwjgl.vulkan.VK10.*;
  *     VkStructureType sType;
  *     void * pNext;
  *     char description[VK_MAX_DESCRIPTION_SIZE];
- *     {@link VkDeviceFaultAddressInfoEXT VkDeviceFaultAddressInfoEXT} * pAddressInfos;
- *     {@link VkDeviceFaultVendorInfoEXT VkDeviceFaultVendorInfoEXT} * pVendorInfos;
+ *     {@link VkDeviceFaultAddressInfoKHR VkDeviceFaultAddressInfoKHR} * pAddressInfos;
+ *     {@link VkDeviceFaultVendorInfoKHR VkDeviceFaultVendorInfoKHR} * pVendorInfos;
  *     void * pVendorBinaryData;
  * }</code></pre>
  */
@@ -100,12 +100,12 @@ public class VkDeviceFaultInfoEXT extends Struct<VkDeviceFaultInfoEXT> implement
     /** @return the null-terminated string stored in the {@code description} field. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public String descriptionString() { return ndescriptionString(address()); }
-    /** @return a {@link VkDeviceFaultAddressInfoEXT} view of the struct pointed to by the {@code pAddressInfos} field. */
-    @NativeType("VkDeviceFaultAddressInfoEXT *")
-    public @Nullable VkDeviceFaultAddressInfoEXT pAddressInfos() { return npAddressInfos(address()); }
-    /** @return a {@link VkDeviceFaultVendorInfoEXT} view of the struct pointed to by the {@code pVendorInfos} field. */
-    @NativeType("VkDeviceFaultVendorInfoEXT *")
-    public @Nullable VkDeviceFaultVendorInfoEXT pVendorInfos() { return npVendorInfos(address()); }
+    /** @return a {@link VkDeviceFaultAddressInfoKHR} view of the struct pointed to by the {@code pAddressInfos} field. */
+    @NativeType("VkDeviceFaultAddressInfoKHR *")
+    public @Nullable VkDeviceFaultAddressInfoKHR pAddressInfos() { return npAddressInfos(address()); }
+    /** @return a {@link VkDeviceFaultVendorInfoKHR} view of the struct pointed to by the {@code pVendorInfos} field. */
+    @NativeType("VkDeviceFaultVendorInfoKHR *")
+    public @Nullable VkDeviceFaultVendorInfoKHR pVendorInfos() { return npVendorInfos(address()); }
     /** @return the value of the {@code pVendorBinaryData} field. */
     @NativeType("void *")
     public long pVendorBinaryData() { return npVendorBinaryData(address()); }
@@ -260,9 +260,9 @@ public class VkDeviceFaultInfoEXT extends Struct<VkDeviceFaultInfoEXT> implement
     /** Unsafe version of {@link #descriptionString}. */
     public static String ndescriptionString(long struct) { return memUTF8(struct + VkDeviceFaultInfoEXT.DESCRIPTION); }
     /** Unsafe version of {@link #pAddressInfos}. */
-    public static @Nullable VkDeviceFaultAddressInfoEXT npAddressInfos(long struct) { return VkDeviceFaultAddressInfoEXT.createSafe(memGetAddress(struct + VkDeviceFaultInfoEXT.PADDRESSINFOS)); }
+    public static @Nullable VkDeviceFaultAddressInfoKHR npAddressInfos(long struct) { return VkDeviceFaultAddressInfoKHR.createSafe(memGetAddress(struct + VkDeviceFaultInfoEXT.PADDRESSINFOS)); }
     /** Unsafe version of {@link #pVendorInfos}. */
-    public static @Nullable VkDeviceFaultVendorInfoEXT npVendorInfos(long struct) { return VkDeviceFaultVendorInfoEXT.createSafe(memGetAddress(struct + VkDeviceFaultInfoEXT.PVENDORINFOS)); }
+    public static @Nullable VkDeviceFaultVendorInfoKHR npVendorInfos(long struct) { return VkDeviceFaultVendorInfoKHR.createSafe(memGetAddress(struct + VkDeviceFaultInfoEXT.PVENDORINFOS)); }
     /** Unsafe version of {@link #pVendorBinaryData}. */
     public static long npVendorBinaryData(long struct) { return memGetAddress(struct + VkDeviceFaultInfoEXT.PVENDORBINARYDATA); }
 
@@ -326,12 +326,12 @@ public class VkDeviceFaultInfoEXT extends Struct<VkDeviceFaultInfoEXT> implement
         /** @return the null-terminated string stored in the {@code description} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public String descriptionString() { return VkDeviceFaultInfoEXT.ndescriptionString(address()); }
-        /** @return a {@link VkDeviceFaultAddressInfoEXT} view of the struct pointed to by the {@code pAddressInfos} field. */
-        @NativeType("VkDeviceFaultAddressInfoEXT *")
-        public @Nullable VkDeviceFaultAddressInfoEXT pAddressInfos() { return VkDeviceFaultInfoEXT.npAddressInfos(address()); }
-        /** @return a {@link VkDeviceFaultVendorInfoEXT} view of the struct pointed to by the {@code pVendorInfos} field. */
-        @NativeType("VkDeviceFaultVendorInfoEXT *")
-        public @Nullable VkDeviceFaultVendorInfoEXT pVendorInfos() { return VkDeviceFaultInfoEXT.npVendorInfos(address()); }
+        /** @return a {@link VkDeviceFaultAddressInfoKHR} view of the struct pointed to by the {@code pAddressInfos} field. */
+        @NativeType("VkDeviceFaultAddressInfoKHR *")
+        public @Nullable VkDeviceFaultAddressInfoKHR pAddressInfos() { return VkDeviceFaultInfoEXT.npAddressInfos(address()); }
+        /** @return a {@link VkDeviceFaultVendorInfoKHR} view of the struct pointed to by the {@code pVendorInfos} field. */
+        @NativeType("VkDeviceFaultVendorInfoKHR *")
+        public @Nullable VkDeviceFaultVendorInfoKHR pVendorInfos() { return VkDeviceFaultInfoEXT.npVendorInfos(address()); }
         /** @return the value of the {@code pVendorBinaryData} field. */
         @NativeType("void *")
         public long pVendorBinaryData() { return VkDeviceFaultInfoEXT.npVendorBinaryData(address()); }

@@ -1181,6 +1181,7 @@ public final class JNI {
     public static native void callPPV(int param0, int param1, long param2, int param3, int param4, long param5, long __functionAddress);
     public static native void callPPV(int param0, int param1, long param2, long param3, int param4, int param5, long __functionAddress);
     public static native void callPPV(int param0, long param1, long param2, int param3, int param4, int param5, long __functionAddress);
+    public static native void callPPV(long param0, int param1, int param2, long param3, int param4, int param5, long __functionAddress);
     public static native void callPPV(long param0, int param1, long param2, int param3, int param4, int param5, long __functionAddress);
     public static native void callPPV(int param0, int param1, int param2, int param3, int param4, long param5, long param6, long __functionAddress);
     public static native void callPPV(int param0, int param1, int param2, long param3, int param4, int param5, long param6, long __functionAddress);
@@ -1225,6 +1226,7 @@ public final class JNI {
     public static native void callPPPV(int param0, int param1, long param2, int param3, long param4, long param5, long __functionAddress);
     public static native void callPPPV(int param0, long param1, int param2, long param3, int param4, long param5, long __functionAddress);
     public static native void callPJJV(long param0, int param1, int param2, long param3, long param4, int param5, int param6, long __functionAddress);
+    public static native void callPJPV(long param0, long param1, int param2, int param3, long param4, int param5, int param6, long __functionAddress);
     public static native void callPPPV(int param0, int param1, int param2, int param3, long param4, long param5, long param6, long __functionAddress);
     public static native void callPPPV(int param0, int param1, long param2, long param3, int param4, int param5, long param6, long __functionAddress);
     public static native void callPPPV(long param0, int param1, long param2, int param3, int param4, int param5, long param6, long __functionAddress);
@@ -1244,6 +1246,7 @@ public final class JNI {
     public static native void callPJJJV(long param0, long param1, long param2, long param3, int param4, long __functionAddress);
     public static native void callPJJPV(long param0, int param1, long param2, long param3, long param4, long __functionAddress);
     public static native void callPJJPV(long param0, long param1, long param2, int param3, long param4, long __functionAddress);
+    public static native void callPPJPV(long param0, long param1, int param2, long param3, long param4, long __functionAddress);
     public static native void callPPPPV(long param0, int param1, long param2, long param3, long param4, long __functionAddress);
     public static native void callPPPPV(long param0, long param1, long param2, long param3, int param4, long __functionAddress);
     public static native void callSSSSV(int param0, short param1, short param2, short param3, short param4, long __functionAddress);

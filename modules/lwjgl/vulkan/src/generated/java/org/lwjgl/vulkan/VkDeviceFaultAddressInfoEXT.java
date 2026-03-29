@@ -18,39 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <pre>{@code
  * struct VkDeviceFaultAddressInfoEXT {
- *     VkDeviceFaultAddressTypeEXT addressType;
+ *     VkDeviceFaultAddressTypeKHR addressType;
  *     VkDeviceAddress reportedAddress;
  *     VkDeviceSize addressPrecision;
  * }}</pre>
  */
-public class VkDeviceFaultAddressInfoEXT extends Struct<VkDeviceFaultAddressInfoEXT> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        ADDRESSTYPE,
-        REPORTEDADDRESS,
-        ADDRESSPRECISION;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(8),
-            __member(8)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        ADDRESSTYPE = layout.offsetof(0);
-        REPORTEDADDRESS = layout.offsetof(1);
-        ADDRESSPRECISION = layout.offsetof(2);
-    }
+public class VkDeviceFaultAddressInfoEXT extends VkDeviceFaultAddressInfoKHR {
 
     protected VkDeviceFaultAddressInfoEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -68,52 +41,7 @@ public class VkDeviceFaultAddressInfoEXT extends Struct<VkDeviceFaultAddressInfo
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDeviceFaultAddressInfoEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
-    }
-
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** @return the value of the {@code addressType} field. */
-    @NativeType("VkDeviceFaultAddressTypeEXT")
-    public int addressType() { return naddressType(address()); }
-    /** @return the value of the {@code reportedAddress} field. */
-    @NativeType("VkDeviceAddress")
-    public long reportedAddress() { return nreportedAddress(address()); }
-    /** @return the value of the {@code addressPrecision} field. */
-    @NativeType("VkDeviceSize")
-    public long addressPrecision() { return naddressPrecision(address()); }
-
-    /** Sets the specified value to the {@code addressType} field. */
-    public VkDeviceFaultAddressInfoEXT addressType(@NativeType("VkDeviceFaultAddressTypeEXT") int value) { naddressType(address(), value); return this; }
-    /** Sets the specified value to the {@code reportedAddress} field. */
-    public VkDeviceFaultAddressInfoEXT reportedAddress(@NativeType("VkDeviceAddress") long value) { nreportedAddress(address(), value); return this; }
-    /** Sets the specified value to the {@code addressPrecision} field. */
-    public VkDeviceFaultAddressInfoEXT addressPrecision(@NativeType("VkDeviceSize") long value) { naddressPrecision(address(), value); return this; }
-
-    /** Initializes this struct with the specified values. */
-    public VkDeviceFaultAddressInfoEXT set(
-        int addressType,
-        long reportedAddress,
-        long addressPrecision
-    ) {
-        addressType(addressType);
-        reportedAddress(reportedAddress);
-        addressPrecision(addressPrecision);
-
-        return this;
-    }
-
-    /**
-     * Copies the specified struct data to this struct.
-     *
-     * @param src the source struct
-     *
-     * @return this struct
-     */
-    public VkDeviceFaultAddressInfoEXT set(VkDeviceFaultAddressInfoEXT src) {
-        memCopy(src.address(), address(), SIZEOF);
-        return this;
+        super(container);
     }
 
     // -----------------------------------
@@ -227,24 +155,8 @@ public class VkDeviceFaultAddressInfoEXT extends Struct<VkDeviceFaultAddressInfo
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #addressType}. */
-    public static int naddressType(long struct) { return memGetInt(struct + VkDeviceFaultAddressInfoEXT.ADDRESSTYPE); }
-    /** Unsafe version of {@link #reportedAddress}. */
-    public static long nreportedAddress(long struct) { return memGetLong(struct + VkDeviceFaultAddressInfoEXT.REPORTEDADDRESS); }
-    /** Unsafe version of {@link #addressPrecision}. */
-    public static long naddressPrecision(long struct) { return memGetLong(struct + VkDeviceFaultAddressInfoEXT.ADDRESSPRECISION); }
-
-    /** Unsafe version of {@link #addressType(int) addressType}. */
-    public static void naddressType(long struct, int value) { memPutInt(struct + VkDeviceFaultAddressInfoEXT.ADDRESSTYPE, value); }
-    /** Unsafe version of {@link #reportedAddress(long) reportedAddress}. */
-    public static void nreportedAddress(long struct, long value) { memPutLong(struct + VkDeviceFaultAddressInfoEXT.REPORTEDADDRESS, value); }
-    /** Unsafe version of {@link #addressPrecision(long) addressPrecision}. */
-    public static void naddressPrecision(long struct, long value) { memPutLong(struct + VkDeviceFaultAddressInfoEXT.ADDRESSPRECISION, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkDeviceFaultAddressInfoEXT} structs. */
-    public static class Buffer extends StructBuffer<VkDeviceFaultAddressInfoEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkDeviceFaultAddressInfoKHR.Buffer {
 
         private static final VkDeviceFaultAddressInfoEXT ELEMENT_FACTORY = VkDeviceFaultAddressInfoEXT.create(-1L);
 
@@ -258,7 +170,7 @@ public class VkDeviceFaultAddressInfoEXT extends Struct<VkDeviceFaultAddressInfo
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -283,23 +195,6 @@ public class VkDeviceFaultAddressInfoEXT extends Struct<VkDeviceFaultAddressInfo
         protected VkDeviceFaultAddressInfoEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }
-
-        /** @return the value of the {@code addressType} field. */
-        @NativeType("VkDeviceFaultAddressTypeEXT")
-        public int addressType() { return VkDeviceFaultAddressInfoEXT.naddressType(address()); }
-        /** @return the value of the {@code reportedAddress} field. */
-        @NativeType("VkDeviceAddress")
-        public long reportedAddress() { return VkDeviceFaultAddressInfoEXT.nreportedAddress(address()); }
-        /** @return the value of the {@code addressPrecision} field. */
-        @NativeType("VkDeviceSize")
-        public long addressPrecision() { return VkDeviceFaultAddressInfoEXT.naddressPrecision(address()); }
-
-        /** Sets the specified value to the {@code addressType} field. */
-        public VkDeviceFaultAddressInfoEXT.Buffer addressType(@NativeType("VkDeviceFaultAddressTypeEXT") int value) { VkDeviceFaultAddressInfoEXT.naddressType(address(), value); return this; }
-        /** Sets the specified value to the {@code reportedAddress} field. */
-        public VkDeviceFaultAddressInfoEXT.Buffer reportedAddress(@NativeType("VkDeviceAddress") long value) { VkDeviceFaultAddressInfoEXT.nreportedAddress(address(), value); return this; }
-        /** Sets the specified value to the {@code addressPrecision} field. */
-        public VkDeviceFaultAddressInfoEXT.Buffer addressPrecision(@NativeType("VkDeviceSize") long value) { VkDeviceFaultAddressInfoEXT.naddressPrecision(address(), value); return this; }
 
     }
 

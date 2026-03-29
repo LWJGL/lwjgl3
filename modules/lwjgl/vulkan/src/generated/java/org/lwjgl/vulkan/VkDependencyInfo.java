@@ -133,6 +133,8 @@ public class VkDependencyInfo extends Struct<VkDependencyInfo> implements Native
     public VkDependencyInfo sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_DEPENDENCY_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkDependencyInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkMemoryRangeBarriersInfoKHR} value to the {@code pNext} chain. */
+    public VkDependencyInfo pNext(VkMemoryRangeBarriersInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkTensorDependencyInfoARM} value to the {@code pNext} chain. */
     public VkDependencyInfo pNext(VkTensorDependencyInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkTensorMemoryBarrierARM} value to the {@code pNext} chain. */
@@ -420,6 +422,8 @@ public class VkDependencyInfo extends Struct<VkDependencyInfo> implements Native
         public VkDependencyInfo.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_DEPENDENCY_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkDependencyInfo.Buffer pNext(@NativeType("void const *") long value) { VkDependencyInfo.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkMemoryRangeBarriersInfoKHR} value to the {@code pNext} chain. */
+        public VkDependencyInfo.Buffer pNext(VkMemoryRangeBarriersInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkTensorDependencyInfoARM} value to the {@code pNext} chain. */
         public VkDependencyInfo.Buffer pNext(VkTensorDependencyInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkTensorMemoryBarrierARM} value to the {@code pNext} chain. */
