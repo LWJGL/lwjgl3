@@ -2342,25 +2342,21 @@ public final class MemoryUtil {
         try {
             var lookup = MethodHandles.lookup();
 
-            var ofAddress = lookup
-                .findStatic(MemorySegment.class, "ofAddress", MethodType.methodType(MemorySegment.class, long.class));
+            var memorySegmentFull = MemorySegment.NULL.reinterpret(Long.MAX_VALUE);
 
-            var reinterpret = lookup
-                .findVirtual(MemorySegment.class, "reinterpret", MethodType.methodType(MemorySegment.class, long.class));
-
-            VH_JAVA_BYTE = createMemoryAccessVH(ValueLayout.JAVA_BYTE, ofAddress, reinterpret)
+            VH_JAVA_BYTE = createMemoryAccessVH(ValueLayout.JAVA_BYTE, memorySegmentFull)
                 .withInvokeExactBehavior();
 
-            VH_JAVA_SHORT_UNALIGNED = createMemoryAccessVH(ValueLayout.JAVA_SHORT_UNALIGNED, ofAddress, reinterpret).withInvokeExactBehavior();
-            VH_JAVA_INT_UNALIGNED = createMemoryAccessVH(ValueLayout.JAVA_INT_UNALIGNED, ofAddress, reinterpret).withInvokeExactBehavior();
-            VH_JAVA_LONG_UNALIGNED = createMemoryAccessVH(ValueLayout.JAVA_LONG_UNALIGNED, ofAddress, reinterpret).withInvokeExactBehavior();
-            VH_JAVA_FLOAT_UNALIGNED = createMemoryAccessVH(ValueLayout.JAVA_FLOAT_UNALIGNED, ofAddress, reinterpret).withInvokeExactBehavior();
-            VH_JAVA_DOUBLE_UNALIGNED = createMemoryAccessVH(ValueLayout.JAVA_DOUBLE_UNALIGNED, ofAddress, reinterpret).withInvokeExactBehavior();
+            VH_JAVA_SHORT_UNALIGNED = createMemoryAccessVH(ValueLayout.JAVA_SHORT_UNALIGNED, memorySegmentFull).withInvokeExactBehavior();
+            VH_JAVA_INT_UNALIGNED = createMemoryAccessVH(ValueLayout.JAVA_INT_UNALIGNED, memorySegmentFull).withInvokeExactBehavior();
+            VH_JAVA_LONG_UNALIGNED = createMemoryAccessVH(ValueLayout.JAVA_LONG_UNALIGNED, memorySegmentFull).withInvokeExactBehavior();
+            VH_JAVA_FLOAT_UNALIGNED = createMemoryAccessVH(ValueLayout.JAVA_FLOAT_UNALIGNED, memorySegmentFull).withInvokeExactBehavior();
+            VH_JAVA_DOUBLE_UNALIGNED = createMemoryAccessVH(ValueLayout.JAVA_DOUBLE_UNALIGNED, memorySegmentFull).withInvokeExactBehavior();
 
             var vh = createMemoryAccessVH(
                 CLONG_SIZE == 8
                     ? (ValueLayout.JAVA_LONG_UNALIGNED)
-                    : (ValueLayout.JAVA_INT_UNALIGNED), ofAddress, reinterpret);
+                    : (ValueLayout.JAVA_INT_UNALIGNED), memorySegmentFull);
 
             if (CLONG_SIZE == 4) {
                 vh = MethodHandles.filterValue(vh,
@@ -2379,7 +2375,7 @@ public final class MemoryUtil {
 
             vh = createMemoryAccessVH(BITS64
                 ? (ValueLayout.JAVA_LONG_UNALIGNED)
-                : (ValueLayout.JAVA_INT_UNALIGNED), ofAddress, reinterpret);
+                : (ValueLayout.JAVA_INT_UNALIGNED), memorySegmentFull);
 
             if (BITS32) {
                 vh = MethodHandles.filterValue(vh,
@@ -2397,16 +2393,16 @@ public final class MemoryUtil {
             VH_ADDRESS_UNALIGNED = vh.withInvokeExactBehavior();
 
             if (DEBUG) {
-                VH_JAVA_SHORT = createMemoryAccessVH(ValueLayout.JAVA_SHORT, ofAddress, reinterpret).withInvokeExactBehavior();
-                VH_JAVA_INT = createMemoryAccessVH(ValueLayout.JAVA_INT, ofAddress, reinterpret).withInvokeExactBehavior();
-                VH_JAVA_LONG = createMemoryAccessVH(ValueLayout.JAVA_LONG, ofAddress, reinterpret).withInvokeExactBehavior();
-                VH_JAVA_FLOAT = createMemoryAccessVH(ValueLayout.JAVA_FLOAT, ofAddress, reinterpret).withInvokeExactBehavior();
-                VH_JAVA_DOUBLE = createMemoryAccessVH(ValueLayout.JAVA_DOUBLE, ofAddress, reinterpret).withInvokeExactBehavior();
+                VH_JAVA_SHORT = createMemoryAccessVH(ValueLayout.JAVA_SHORT, memorySegmentFull).withInvokeExactBehavior();
+                VH_JAVA_INT = createMemoryAccessVH(ValueLayout.JAVA_INT, memorySegmentFull).withInvokeExactBehavior();
+                VH_JAVA_LONG = createMemoryAccessVH(ValueLayout.JAVA_LONG, memorySegmentFull).withInvokeExactBehavior();
+                VH_JAVA_FLOAT = createMemoryAccessVH(ValueLayout.JAVA_FLOAT, memorySegmentFull).withInvokeExactBehavior();
+                VH_JAVA_DOUBLE = createMemoryAccessVH(ValueLayout.JAVA_DOUBLE, memorySegmentFull).withInvokeExactBehavior();
 
                 vh = createMemoryAccessVH(
                     CLONG_SIZE == 8
                         ? ValueLayout.JAVA_LONG
-                        : ValueLayout.JAVA_INT, ofAddress, reinterpret);
+                        : ValueLayout.JAVA_INT, memorySegmentFull);
 
                 if (CLONG_SIZE == 4) {
                     vh = MethodHandles.filterValue(vh,
@@ -2425,7 +2421,7 @@ public final class MemoryUtil {
 
                 vh = createMemoryAccessVH(BITS64
                     ? ValueLayout.JAVA_LONG
-                    : ValueLayout.JAVA_INT, ofAddress, reinterpret);
+                    : ValueLayout.JAVA_INT, memorySegmentFull);
 
                 if (BITS32) {
                     vh = MethodHandles.filterValue(vh,
@@ -2457,14 +2453,13 @@ public final class MemoryUtil {
         }
     }
 
-    private static VarHandle createMemoryAccessVH(ValueLayout layout, MethodHandle ofAddress, MethodHandle reinterpret) {
+    private static VarHandle createMemoryAccessVH(ValueLayout layout, MemorySegment memorySegmentFull) {
+        // The resulting VarHandle is of type (MemorySegment base, long offset)TResult.
+        // When using MemorySegment(address=0, size=max) to fill the first parameter, the second parameter is the target address.
+
         var vh = layout.varHandle();
 
-        vh = MethodHandles.insertCoordinates(vh, 1, 0L);
-        vh = MethodHandles.filterCoordinates(vh, 0, MethodHandles.filterReturnValue(
-            ofAddress,
-            MethodHandles.insertArguments(reinterpret, 1, layout.byteSize())
-        ));
+        vh = MethodHandles.insertCoordinates(vh, 0, memorySegmentFull);
 
         return vh;
     }
