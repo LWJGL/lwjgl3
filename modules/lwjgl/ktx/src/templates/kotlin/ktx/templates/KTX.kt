@@ -201,7 +201,7 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
     IgnoreMissing..ktx_error_code_e(
         "LoadOpenGL",
 
-        "PFNGLGETPROCADDRESS".handle("pfnGLGetProcAddress")
+        nullable.."PFNGLGETPROCADDRESS".handle("pfnGLGetProcAddress")
     )
 
     /*ktx_error_code_e(

@@ -313,7 +313,6 @@ public class KTX {
         long __functionAddress = Functions.LoadOpenGL;
         if (CHECKS) {
             check(__functionAddress);
-            check(pfnGLGetProcAddress);
         }
         return callPI(pfnGLGetProcAddress, __functionAddress);
     }
