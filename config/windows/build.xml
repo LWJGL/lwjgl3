@@ -421,6 +421,7 @@ EXPORTS
             <update-dependency module="freetype" artifact="freetype.dll"/>
             <update-dependency module="glfw" artifact="glfw.dll"/>
             <update-dependency module="harfbuzz" artifact="harfbuzz.dll"/>
+                <update-dependency module="harfbuzz" artifact="harfbuzz-gpu.dll"/>
                 <update-dependency module="harfbuzz" artifact="harfbuzz-raster.dll"/>
                 <update-dependency module="harfbuzz" artifact="harfbuzz-vector.dll"/>
             <update-dependency module="hwloc" artifact="hwloc.dll"/>

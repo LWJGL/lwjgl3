@@ -367,6 +367,7 @@
             <update-dependency module="glfw" artifact="libglfw.dylib"/>
             <update-dependency module="glfw" artifact="libglfw_async.dylib"/>
             <update-dependency module="harfbuzz" artifact="libharfbuzz.dylib"/>
+                <update-dependency module="harfbuzz" artifact="libharfbuzz-gpu.dylib"/>
                 <update-dependency module="harfbuzz" artifact="libharfbuzz-raster.dylib"/>
                 <update-dependency module="harfbuzz" artifact="libharfbuzz-vector.dylib"/>
             <update-dependency module="hwloc" artifact="libhwloc.dylib"/>

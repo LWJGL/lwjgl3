@@ -571,6 +571,9 @@ public class Configuration<T> {
      */
     public static final Configuration<Object> HARFBUZZ_LIBRARY_NAME = new Configuration<>("org.lwjgl.harfbuzz.libname", StateInit.STRING);
 
+    /** Similar to {@link #LIBRARY_NAME} for the HarfBuzz gpu library (<b>org.lwjgl.harfbuzz.gpu.libname</b>). */
+    public static final Configuration<String> HARFBUZZ_GPU_LIBRARY_NAME = new Configuration<>("org.lwjgl.harfbuzz.gpu.libname", StateInit.STRING);
+
     /** Similar to {@link #LIBRARY_NAME} for the HarfBuzz raster library (<b>org.lwjgl.harfbuzz.raster.libname</b>). */
     public static final Configuration<String> HARFBUZZ_RASTER_LIBRARY_NAME = new Configuration<>("org.lwjgl.harfbuzz.raster.libname", StateInit.STRING);
 

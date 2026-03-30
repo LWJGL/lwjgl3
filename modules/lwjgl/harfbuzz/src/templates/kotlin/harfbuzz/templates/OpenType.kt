@@ -557,7 +557,7 @@ val hb_ot = "OpenType".nativeClass(Module.HARFBUZZ, prefix = "HB_OT", prefixMeth
     )
 
     hb_bool_t(
-        "ot_layout_get_font_extents",
+        "layout_get_font_extents",
 
         hb_font_t.p("font"),
         hb_direction_t("direction"),
@@ -567,7 +567,7 @@ val hb_ot = "OpenType".nativeClass(Module.HARFBUZZ, prefix = "HB_OT", prefixMeth
     )
 
     hb_bool_t(
-        "ot_layout_get_font_extents2",
+        "layout_get_font_extents2",
 
         hb_font_t.p("font"),
         hb_direction_t("direction"),
@@ -594,7 +594,7 @@ val hb_ot = "OpenType".nativeClass(Module.HARFBUZZ, prefix = "HB_OT", prefixMeth
     )
 
     hb_bool_t(
-        "ot_layout_get_baseline2",
+        "layout_get_baseline2",
 
         hb_font_t.p("font"),
         hb_ot_layout_baseline_tag_t("baseline_tag"),
@@ -952,6 +952,10 @@ val hb_ot = "OpenType".nativeClass(Module.HARFBUZZ, prefix = "HB_OT", prefixMeth
 
     // hb-ot-shape.h
 
+    IntConstant(
+        "SHAPE_BUFFER_FORMAT_SERIAL".."1"
+    )
+
     void(
         "shape_glyphs_closure",
 
@@ -977,6 +981,12 @@ val hb_ot = "OpenType".nativeClass(Module.HARFBUZZ, prefix = "HB_OT", prefixMeth
         unsigned_int("start_offset"),
         AutoSize("tags")..Check(1)..unsigned_int.p("tag_count"),
         hb_tag_t.p("tags")
+    )
+
+    unsigned_int(
+        "shape_get_buffer_format_serial",
+
+        void()
     )
 
     // hb-ot-var.h

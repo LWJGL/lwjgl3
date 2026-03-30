@@ -85,11 +85,11 @@ public class OpenType {
             layout_lookup_get_optical_bound               = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_layout_lookup_get_optical_bound"),
             layout_feature_get_name_ids                   = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_layout_feature_get_name_ids"),
             layout_feature_get_characters                 = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_layout_feature_get_characters"),
-            ot_layout_get_font_extents                    = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_ot_layout_get_font_extents"),
-            ot_layout_get_font_extents2                   = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_ot_layout_get_font_extents2"),
+            layout_get_font_extents                       = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_layout_get_font_extents"),
+            layout_get_font_extents2                      = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_layout_get_font_extents2"),
             layout_get_horizontal_baseline_tag_for_script = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_layout_get_horizontal_baseline_tag_for_script"),
             layout_get_baseline                           = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_layout_get_baseline"),
-            ot_layout_get_baseline2                       = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_ot_layout_get_baseline2"),
+            layout_get_baseline2                          = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_layout_get_baseline2"),
             layout_get_baseline_with_fallback             = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_layout_get_baseline_with_fallback"),
             layout_get_baseline_with_fallback2            = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_layout_get_baseline_with_fallback2"),
             math_has_data                                 = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_math_has_data"),
@@ -116,6 +116,7 @@ public class OpenType {
             shape_glyphs_closure                          = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_shape_glyphs_closure"),
             shape_plan_collect_lookups                    = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_shape_plan_collect_lookups"),
             shape_plan_get_feature_tags                   = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_shape_plan_get_feature_tags"),
+            shape_get_buffer_format_serial                = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_shape_get_buffer_format_serial"),
             var_has_data                                  = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_var_has_data"),
             var_get_axis_count                            = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_var_get_axis_count"),
             var_get_axis_infos                            = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_var_get_axis_infos"),
@@ -302,6 +303,8 @@ public class OpenType {
         HB_OT_NAME_ID_DARK_BACKGROUND       = 24,
         HB_OT_NAME_ID_VARIATIONS_PS_PREFIX  = 25,
         HB_OT_NAME_ID_INVALID               = 0xFFFF;
+
+    public static final int HB_OT_SHAPE_BUFFER_FORMAT_SERIAL = 1;
 
     public static final int
         HB_OT_TAG_VAR_AXIS_ITALIC       = HB_TAG('i','t','a','l'),
@@ -1227,28 +1230,28 @@ public class OpenType {
         return nhb_ot_layout_feature_get_characters(face, table_tag, feature_index, start_offset, memAddressSafe(char_count), memAddressSafe(characters));
     }
 
-    // --- [ hb_ot_ot_layout_get_font_extents ] ---
+    // --- [ hb_ot_layout_get_font_extents ] ---
 
-    /** {@code hb_bool_t hb_ot_ot_layout_get_font_extents(hb_font_t * font, hb_direction_t direction, hb_tag_t script_tag, hb_tag_t language_tag, hb_font_extents_t * extents)} */
-    public static int nhb_ot_ot_layout_get_font_extents(long font, int direction, int script_tag, int language_tag, long extents) {
-        long __functionAddress = Functions.ot_layout_get_font_extents;
+    /** {@code hb_bool_t hb_ot_layout_get_font_extents(hb_font_t * font, hb_direction_t direction, hb_tag_t script_tag, hb_tag_t language_tag, hb_font_extents_t * extents)} */
+    public static int nhb_ot_layout_get_font_extents(long font, int direction, int script_tag, int language_tag, long extents) {
+        long __functionAddress = Functions.layout_get_font_extents;
         if (CHECKS) {
             check(font);
         }
         return invokePPI(font, direction, script_tag, language_tag, extents, __functionAddress);
     }
 
-    /** {@code hb_bool_t hb_ot_ot_layout_get_font_extents(hb_font_t * font, hb_direction_t direction, hb_tag_t script_tag, hb_tag_t language_tag, hb_font_extents_t * extents)} */
+    /** {@code hb_bool_t hb_ot_layout_get_font_extents(hb_font_t * font, hb_direction_t direction, hb_tag_t script_tag, hb_tag_t language_tag, hb_font_extents_t * extents)} */
     @NativeType("hb_bool_t")
-    public static boolean hb_ot_ot_layout_get_font_extents(@NativeType("hb_font_t *") long font, @NativeType("hb_direction_t") int direction, @NativeType("hb_tag_t") int script_tag, @NativeType("hb_tag_t") int language_tag, @NativeType("hb_font_extents_t *") hb_font_extents_t extents) {
-        return nhb_ot_ot_layout_get_font_extents(font, direction, script_tag, language_tag, extents.address()) != 0;
+    public static boolean hb_ot_layout_get_font_extents(@NativeType("hb_font_t *") long font, @NativeType("hb_direction_t") int direction, @NativeType("hb_tag_t") int script_tag, @NativeType("hb_tag_t") int language_tag, @NativeType("hb_font_extents_t *") hb_font_extents_t extents) {
+        return nhb_ot_layout_get_font_extents(font, direction, script_tag, language_tag, extents.address()) != 0;
     }
 
-    // --- [ hb_ot_ot_layout_get_font_extents2 ] ---
+    // --- [ hb_ot_layout_get_font_extents2 ] ---
 
-    /** {@code hb_bool_t hb_ot_ot_layout_get_font_extents2(hb_font_t * font, hb_direction_t direction, hb_script_t script, hb_language_t language, hb_font_extents_t * extents)} */
-    public static int nhb_ot_ot_layout_get_font_extents2(long font, int direction, int script, long language, long extents) {
-        long __functionAddress = Functions.ot_layout_get_font_extents2;
+    /** {@code hb_bool_t hb_ot_layout_get_font_extents2(hb_font_t * font, hb_direction_t direction, hb_script_t script, hb_language_t language, hb_font_extents_t * extents)} */
+    public static int nhb_ot_layout_get_font_extents2(long font, int direction, int script, long language, long extents) {
+        long __functionAddress = Functions.layout_get_font_extents2;
         if (CHECKS) {
             check(font);
             check(language);
@@ -1256,10 +1259,10 @@ public class OpenType {
         return invokePPPI(font, direction, script, language, extents, __functionAddress);
     }
 
-    /** {@code hb_bool_t hb_ot_ot_layout_get_font_extents2(hb_font_t * font, hb_direction_t direction, hb_script_t script, hb_language_t language, hb_font_extents_t * extents)} */
+    /** {@code hb_bool_t hb_ot_layout_get_font_extents2(hb_font_t * font, hb_direction_t direction, hb_script_t script, hb_language_t language, hb_font_extents_t * extents)} */
     @NativeType("hb_bool_t")
-    public static boolean hb_ot_ot_layout_get_font_extents2(@NativeType("hb_font_t *") long font, @NativeType("hb_direction_t") int direction, @NativeType("hb_script_t") int script, @NativeType("hb_language_t") long language, @NativeType("hb_font_extents_t *") hb_font_extents_t extents) {
-        return nhb_ot_ot_layout_get_font_extents2(font, direction, script, language, extents.address()) != 0;
+    public static boolean hb_ot_layout_get_font_extents2(@NativeType("hb_font_t *") long font, @NativeType("hb_direction_t") int direction, @NativeType("hb_script_t") int script, @NativeType("hb_language_t") long language, @NativeType("hb_font_extents_t *") hb_font_extents_t extents) {
+        return nhb_ot_layout_get_font_extents2(font, direction, script, language, extents.address()) != 0;
     }
 
     // --- [ hb_ot_layout_get_horizontal_baseline_tag_for_script ] ---
@@ -1291,11 +1294,11 @@ public class OpenType {
         return nhb_ot_layout_get_baseline(font, baseline_tag, direction, script_tag, language_tag, memAddressSafe(coord)) != 0;
     }
 
-    // --- [ hb_ot_ot_layout_get_baseline2 ] ---
+    // --- [ hb_ot_layout_get_baseline2 ] ---
 
-    /** {@code hb_bool_t hb_ot_ot_layout_get_baseline2(hb_font_t * font, hb_ot_layout_baseline_tag_t baseline_tag, hb_direction_t direction, hb_script_t script, hb_language_t language, hb_position_t * coord)} */
-    public static int nhb_ot_ot_layout_get_baseline2(long font, int baseline_tag, int direction, int script, long language, long coord) {
-        long __functionAddress = Functions.ot_layout_get_baseline2;
+    /** {@code hb_bool_t hb_ot_layout_get_baseline2(hb_font_t * font, hb_ot_layout_baseline_tag_t baseline_tag, hb_direction_t direction, hb_script_t script, hb_language_t language, hb_position_t * coord)} */
+    public static int nhb_ot_layout_get_baseline2(long font, int baseline_tag, int direction, int script, long language, long coord) {
+        long __functionAddress = Functions.layout_get_baseline2;
         if (CHECKS) {
             check(font);
             check(language);
@@ -1303,13 +1306,13 @@ public class OpenType {
         return invokePPPI(font, baseline_tag, direction, script, language, coord, __functionAddress);
     }
 
-    /** {@code hb_bool_t hb_ot_ot_layout_get_baseline2(hb_font_t * font, hb_ot_layout_baseline_tag_t baseline_tag, hb_direction_t direction, hb_script_t script, hb_language_t language, hb_position_t * coord)} */
+    /** {@code hb_bool_t hb_ot_layout_get_baseline2(hb_font_t * font, hb_ot_layout_baseline_tag_t baseline_tag, hb_direction_t direction, hb_script_t script, hb_language_t language, hb_position_t * coord)} */
     @NativeType("hb_bool_t")
-    public static boolean hb_ot_ot_layout_get_baseline2(@NativeType("hb_font_t *") long font, @NativeType("hb_ot_layout_baseline_tag_t") int baseline_tag, @NativeType("hb_direction_t") int direction, @NativeType("hb_script_t") int script, @NativeType("hb_language_t") long language, @NativeType("hb_position_t *") @Nullable IntBuffer coord) {
+    public static boolean hb_ot_layout_get_baseline2(@NativeType("hb_font_t *") long font, @NativeType("hb_ot_layout_baseline_tag_t") int baseline_tag, @NativeType("hb_direction_t") int direction, @NativeType("hb_script_t") int script, @NativeType("hb_language_t") long language, @NativeType("hb_position_t *") @Nullable IntBuffer coord) {
         if (CHECKS) {
             checkSafe(coord, 1);
         }
-        return nhb_ot_ot_layout_get_baseline2(font, baseline_tag, direction, script, language, memAddressSafe(coord)) != 0;
+        return nhb_ot_layout_get_baseline2(font, baseline_tag, direction, script, language, memAddressSafe(coord)) != 0;
     }
 
     // --- [ hb_ot_layout_get_baseline_with_fallback ] ---
@@ -1745,6 +1748,15 @@ public class OpenType {
             check(tags, tag_count.get(tag_count.position()));
         }
         return nhb_ot_shape_plan_get_feature_tags(shape_plan, start_offset, memAddress(tag_count), memAddress(tags));
+    }
+
+    // --- [ hb_ot_shape_get_buffer_format_serial ] ---
+
+    /** {@code unsigned int hb_ot_shape_get_buffer_format_serial(void)} */
+    @NativeType("unsigned int")
+    public static int hb_ot_shape_get_buffer_format_serial() {
+        long __functionAddress = Functions.shape_get_buffer_format_serial;
+        return invokeI(__functionAddress);
     }
 
     // --- [ hb_ot_var_has_data ] ---

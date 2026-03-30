@@ -29,48 +29,48 @@ public class HarfBuzzVector {
 
         /** Function address. */
         public static final long
-            vector_draw_create_or_fail               = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_create_or_fail"),
-            vector_draw_reference                    = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_reference"),
-            vector_draw_destroy                      = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_destroy"),
-            vector_draw_set_user_data                = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_set_user_data"),
-            vector_draw_get_user_data                = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_get_user_data"),
-            vector_draw_set_transform                = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_set_transform"),
-            vector_draw_get_transform                = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_get_transform"),
-            vector_draw_set_scale_factor             = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_set_scale_factor"),
-            vector_draw_get_scale_factor             = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_get_scale_factor"),
-            vector_draw_set_extents                  = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_set_extents"),
-            vector_draw_get_extents                  = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_get_extents"),
-            vector_draw_set_glyph_extents            = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_set_glyph_extents"),
-            vector_draw_get_funcs                    = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_get_funcs"),
-            vector_draw_glyph                        = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_glyph"),
-            vector_svg_set_flat                      = apiGetFunctionAddress(HARFBUZZ, "hb_vector_svg_set_flat"),
-            vector_svg_set_precision                 = apiGetFunctionAddress(HARFBUZZ, "hb_vector_svg_set_precision"),
-            vector_draw_render                       = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_render"),
-            vector_draw_reset                        = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_reset"),
-            vector_draw_recycle_blob                 = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_recycle_blob"),
-            vector_paint_create_or_fail              = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_create_or_fail"),
-            vector_paint_reference                   = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_reference"),
-            vector_paint_destroy                     = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_destroy"),
-            vector_paint_set_user_data               = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_set_user_data"),
-            vector_paint_get_user_data               = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_get_user_data"),
-            vector_paint_set_transform               = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_set_transform"),
-            vector_paint_get_transform               = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_get_transform"),
-            vector_paint_set_scale_factor            = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_set_scale_factor"),
-            vector_paint_get_scale_factor            = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_get_scale_factor"),
-            vector_paint_set_extents                 = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_set_extents"),
-            vector_paint_get_extents                 = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_get_extents"),
-            vector_paint_set_glyph_extents           = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_set_glyph_extents"),
-            vector_paint_set_foreground              = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_set_foreground"),
-            vector_paint_set_palette                 = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_set_palette"),
-            vector_paint_set_custom_palette_color    = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_set_custom_palette_color"),
-            vector_paint_clear_custom_palette_colors = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_clear_custom_palette_colors"),
-            vector_paint_get_funcs                   = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_get_funcs"),
-            vector_paint_glyph                       = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_glyph"),
-            vector_svg_paint_set_flat                = apiGetFunctionAddress(HARFBUZZ, "hb_vector_svg_paint_set_flat"),
-            vector_svg_paint_set_precision           = apiGetFunctionAddress(HARFBUZZ, "hb_vector_svg_paint_set_precision"),
-            vector_paint_render                      = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_render"),
-            vector_paint_reset                       = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_reset"),
-            vector_paint_recycle_blob                = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_recycle_blob");
+            draw_create_or_fail               = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_create_or_fail"),
+            draw_reference                    = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_reference"),
+            draw_destroy                      = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_destroy"),
+            draw_set_user_data                = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_set_user_data"),
+            draw_get_user_data                = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_get_user_data"),
+            draw_set_transform                = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_set_transform"),
+            draw_get_transform                = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_get_transform"),
+            draw_set_scale_factor             = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_set_scale_factor"),
+            draw_get_scale_factor             = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_get_scale_factor"),
+            draw_set_extents                  = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_set_extents"),
+            draw_get_extents                  = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_get_extents"),
+            draw_set_glyph_extents            = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_set_glyph_extents"),
+            draw_get_funcs                    = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_get_funcs"),
+            draw_glyph                        = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_glyph"),
+            svg_set_flat                      = apiGetFunctionAddress(HARFBUZZ, "hb_vector_svg_set_flat"),
+            svg_set_precision                 = apiGetFunctionAddress(HARFBUZZ, "hb_vector_svg_set_precision"),
+            draw_render                       = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_render"),
+            draw_reset                        = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_reset"),
+            draw_recycle_blob                 = apiGetFunctionAddress(HARFBUZZ, "hb_vector_draw_recycle_blob"),
+            paint_create_or_fail              = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_create_or_fail"),
+            paint_reference                   = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_reference"),
+            paint_destroy                     = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_destroy"),
+            paint_set_user_data               = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_set_user_data"),
+            paint_get_user_data               = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_get_user_data"),
+            paint_set_transform               = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_set_transform"),
+            paint_get_transform               = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_get_transform"),
+            paint_set_scale_factor            = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_set_scale_factor"),
+            paint_get_scale_factor            = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_get_scale_factor"),
+            paint_set_extents                 = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_set_extents"),
+            paint_get_extents                 = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_get_extents"),
+            paint_set_glyph_extents           = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_set_glyph_extents"),
+            paint_set_foreground              = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_set_foreground"),
+            paint_set_palette                 = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_set_palette"),
+            paint_set_custom_palette_color    = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_set_custom_palette_color"),
+            paint_clear_custom_palette_colors = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_clear_custom_palette_colors"),
+            paint_get_funcs                   = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_get_funcs"),
+            paint_glyph                       = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_glyph"),
+            svg_paint_set_flat                = apiGetFunctionAddress(HARFBUZZ, "hb_vector_svg_paint_set_flat"),
+            svg_paint_set_precision           = apiGetFunctionAddress(HARFBUZZ, "hb_vector_svg_paint_set_precision"),
+            paint_render                      = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_render"),
+            paint_reset                       = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_reset"),
+            paint_recycle_blob                = apiGetFunctionAddress(HARFBUZZ, "hb_vector_paint_recycle_blob");
 
     }
 
@@ -96,7 +96,7 @@ public class HarfBuzzVector {
     /** {@code hb_vector_draw_t * hb_vector_draw_create_or_fail(hb_vector_format_t format)} */
     @NativeType("hb_vector_draw_t *")
     public static long hb_vector_draw_create_or_fail(@NativeType("hb_vector_format_t") int format) {
-        long __functionAddress = Functions.vector_draw_create_or_fail;
+        long __functionAddress = Functions.draw_create_or_fail;
         return invokeP(format, __functionAddress);
     }
 
@@ -105,7 +105,7 @@ public class HarfBuzzVector {
     /** {@code hb_vector_draw_t * hb_vector_draw_reference(hb_vector_draw_t * draw)} */
     @NativeType("hb_vector_draw_t *")
     public static long hb_vector_draw_reference(@NativeType("hb_vector_draw_t *") long draw) {
-        long __functionAddress = Functions.vector_draw_reference;
+        long __functionAddress = Functions.draw_reference;
         if (CHECKS) {
             check(draw);
         }
@@ -116,7 +116,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_draw_destroy(hb_vector_draw_t * draw)} */
     public static void hb_vector_draw_destroy(@NativeType("hb_vector_draw_t *") long draw) {
-        long __functionAddress = Functions.vector_draw_destroy;
+        long __functionAddress = Functions.draw_destroy;
         if (CHECKS) {
             check(draw);
         }
@@ -127,7 +127,7 @@ public class HarfBuzzVector {
 
     /** {@code hb_bool_t hb_vector_draw_set_user_data(hb_vector_draw_t * draw, hb_user_data_key_t * key, void * data, hb_destroy_func_t destroy, hb_bool_t replace)} */
     public static int nhb_vector_draw_set_user_data(long draw, long key, long data, long destroy, int replace) {
-        long __functionAddress = Functions.vector_draw_set_user_data;
+        long __functionAddress = Functions.draw_set_user_data;
         if (CHECKS) {
             check(draw);
         }
@@ -144,7 +144,7 @@ public class HarfBuzzVector {
 
     /** {@code void * hb_vector_draw_get_user_data(hb_vector_draw_t * draw, hb_user_data_key_t * key)} */
     public static long nhb_vector_draw_get_user_data(long draw, long key) {
-        long __functionAddress = Functions.vector_draw_get_user_data;
+        long __functionAddress = Functions.draw_get_user_data;
         if (CHECKS) {
             check(draw);
         }
@@ -161,7 +161,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_draw_set_transform(hb_vector_draw_t * draw, float xx, float yx, float xy, float yy, float dx, float dy)} */
     public static void hb_vector_draw_set_transform(@NativeType("hb_vector_draw_t *") long draw, float xx, float yx, float xy, float yy, float dx, float dy) {
-        long __functionAddress = Functions.vector_draw_set_transform;
+        long __functionAddress = Functions.draw_set_transform;
         if (CHECKS) {
             check(draw);
         }
@@ -172,7 +172,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_draw_get_transform(hb_vector_draw_t * draw, float * xx, float * yx, float * xy, float * yy, float * dx, float * dy)} */
     public static void nhb_vector_draw_get_transform(long draw, long xx, long yx, long xy, long yy, long dx, long dy) {
-        long __functionAddress = Functions.vector_draw_get_transform;
+        long __functionAddress = Functions.draw_get_transform;
         if (CHECKS) {
             check(draw);
         }
@@ -196,7 +196,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_draw_set_scale_factor(hb_vector_draw_t * draw, float x_scale_factor, float y_scale_factor)} */
     public static void hb_vector_draw_set_scale_factor(@NativeType("hb_vector_draw_t *") long draw, float x_scale_factor, float y_scale_factor) {
-        long __functionAddress = Functions.vector_draw_set_scale_factor;
+        long __functionAddress = Functions.draw_set_scale_factor;
         if (CHECKS) {
             check(draw);
         }
@@ -207,7 +207,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_draw_get_scale_factor(hb_vector_draw_t * draw, float * x_scale_factor, float * y_scale_factor)} */
     public static void nhb_vector_draw_get_scale_factor(long draw, long x_scale_factor, long y_scale_factor) {
-        long __functionAddress = Functions.vector_draw_get_scale_factor;
+        long __functionAddress = Functions.draw_get_scale_factor;
         if (CHECKS) {
             check(draw);
         }
@@ -227,7 +227,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_draw_set_extents(hb_vector_draw_t * draw, hb_vector_extents_t const * extents)} */
     public static void nhb_vector_draw_set_extents(long draw, long extents) {
-        long __functionAddress = Functions.vector_draw_set_extents;
+        long __functionAddress = Functions.draw_set_extents;
         if (CHECKS) {
             check(draw);
         }
@@ -243,7 +243,7 @@ public class HarfBuzzVector {
 
     /** {@code hb_bool_t hb_vector_draw_get_extents(hb_vector_draw_t * draw, hb_vector_extents_t * extents)} */
     public static int nhb_vector_draw_get_extents(long draw, long extents) {
-        long __functionAddress = Functions.vector_draw_get_extents;
+        long __functionAddress = Functions.draw_get_extents;
         if (CHECKS) {
             check(draw);
         }
@@ -260,7 +260,7 @@ public class HarfBuzzVector {
 
     /** {@code hb_bool_t hb_vector_draw_set_glyph_extents(hb_vector_draw_t * draw, hb_glyph_extents_t const * glyph_extents)} */
     public static int nhb_vector_draw_set_glyph_extents(long draw, long glyph_extents) {
-        long __functionAddress = Functions.vector_draw_set_glyph_extents;
+        long __functionAddress = Functions.draw_set_glyph_extents;
         if (CHECKS) {
             check(draw);
         }
@@ -278,7 +278,7 @@ public class HarfBuzzVector {
     /** {@code hb_draw_funcs_t * hb_vector_draw_get_funcs(void)} */
     @NativeType("hb_draw_funcs_t *")
     public static long hb_vector_draw_get_funcs() {
-        long __functionAddress = Functions.vector_draw_get_funcs;
+        long __functionAddress = Functions.draw_get_funcs;
         return invokeP(__functionAddress);
     }
 
@@ -287,7 +287,7 @@ public class HarfBuzzVector {
     /** {@code hb_bool_t hb_vector_draw_glyph(hb_vector_draw_t * draw, hb_font_t * font, hb_codepoint_t glyph, float pen_x, float pen_y, hb_vector_extents_mode_t extents_mode)} */
     @NativeType("hb_bool_t")
     public static boolean hb_vector_draw_glyph(@NativeType("hb_vector_draw_t *") long draw, @NativeType("hb_font_t *") long font, @NativeType("hb_codepoint_t") int glyph, float pen_x, float pen_y, @NativeType("hb_vector_extents_mode_t") int extents_mode) {
-        long __functionAddress = Functions.vector_draw_glyph;
+        long __functionAddress = Functions.draw_glyph;
         if (CHECKS) {
             check(draw);
             check(font);
@@ -299,7 +299,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_svg_set_flat(hb_vector_draw_t * draw, hb_bool_t flat)} */
     public static void hb_vector_svg_set_flat(@NativeType("hb_vector_draw_t *") long draw, @NativeType("hb_bool_t") boolean flat) {
-        long __functionAddress = Functions.vector_svg_set_flat;
+        long __functionAddress = Functions.svg_set_flat;
         if (CHECKS) {
             check(draw);
         }
@@ -310,7 +310,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_svg_set_precision(hb_vector_draw_t * draw, unsigned int precision)} */
     public static void hb_vector_svg_set_precision(@NativeType("hb_vector_draw_t *") long draw, @NativeType("unsigned int") int precision) {
-        long __functionAddress = Functions.vector_svg_set_precision;
+        long __functionAddress = Functions.svg_set_precision;
         if (CHECKS) {
             check(draw);
         }
@@ -322,7 +322,7 @@ public class HarfBuzzVector {
     /** {@code hb_blob_t * hb_vector_draw_render(hb_vector_draw_t * draw)} */
     @NativeType("hb_blob_t *")
     public static long hb_vector_draw_render(@NativeType("hb_vector_draw_t *") long draw) {
-        long __functionAddress = Functions.vector_draw_render;
+        long __functionAddress = Functions.draw_render;
         if (CHECKS) {
             check(draw);
         }
@@ -333,7 +333,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_draw_reset(hb_vector_draw_t * draw)} */
     public static void hb_vector_draw_reset(@NativeType("hb_vector_draw_t *") long draw) {
-        long __functionAddress = Functions.vector_draw_reset;
+        long __functionAddress = Functions.draw_reset;
         if (CHECKS) {
             check(draw);
         }
@@ -344,7 +344,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_draw_recycle_blob(hb_vector_draw_t * draw, hb_blob_t * blob)} */
     public static void hb_vector_draw_recycle_blob(@NativeType("hb_vector_draw_t *") long draw, @NativeType("hb_blob_t *") long blob) {
-        long __functionAddress = Functions.vector_draw_recycle_blob;
+        long __functionAddress = Functions.draw_recycle_blob;
         if (CHECKS) {
             check(draw);
             check(blob);
@@ -357,7 +357,7 @@ public class HarfBuzzVector {
     /** {@code hb_vector_paint_t * hb_vector_paint_create_or_fail(hb_vector_format_t format)} */
     @NativeType("hb_vector_paint_t *")
     public static long hb_vector_paint_create_or_fail(@NativeType("hb_vector_format_t") int format) {
-        long __functionAddress = Functions.vector_paint_create_or_fail;
+        long __functionAddress = Functions.paint_create_or_fail;
         return invokeP(format, __functionAddress);
     }
 
@@ -366,7 +366,7 @@ public class HarfBuzzVector {
     /** {@code hb_vector_paint_t * hb_vector_paint_reference(hb_vector_paint_t * paint)} */
     @NativeType("hb_vector_paint_t *")
     public static long hb_vector_paint_reference(@NativeType("hb_vector_paint_t *") long paint) {
-        long __functionAddress = Functions.vector_paint_reference;
+        long __functionAddress = Functions.paint_reference;
         if (CHECKS) {
             check(paint);
         }
@@ -377,7 +377,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_paint_destroy(hb_vector_paint_t * paint)} */
     public static void hb_vector_paint_destroy(@NativeType("hb_vector_paint_t *") long paint) {
-        long __functionAddress = Functions.vector_paint_destroy;
+        long __functionAddress = Functions.paint_destroy;
         if (CHECKS) {
             check(paint);
         }
@@ -388,7 +388,7 @@ public class HarfBuzzVector {
 
     /** {@code hb_bool_t hb_vector_paint_set_user_data(hb_vector_paint_t * paint, hb_user_data_key_t * key, void * data, hb_destroy_func_t destroy, hb_bool_t replace)} */
     public static int nhb_vector_paint_set_user_data(long paint, long key, long data, long destroy, int replace) {
-        long __functionAddress = Functions.vector_paint_set_user_data;
+        long __functionAddress = Functions.paint_set_user_data;
         if (CHECKS) {
             check(paint);
         }
@@ -405,7 +405,7 @@ public class HarfBuzzVector {
 
     /** {@code void * hb_vector_paint_get_user_data(hb_vector_paint_t * paint, hb_user_data_key_t * key)} */
     public static long nhb_vector_paint_get_user_data(long paint, long key) {
-        long __functionAddress = Functions.vector_paint_get_user_data;
+        long __functionAddress = Functions.paint_get_user_data;
         if (CHECKS) {
             check(paint);
         }
@@ -422,7 +422,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_paint_set_transform(hb_vector_paint_t * paint, float xx, float yx, float xy, float yy, float dx, float dy)} */
     public static void hb_vector_paint_set_transform(@NativeType("hb_vector_paint_t *") long paint, float xx, float yx, float xy, float yy, float dx, float dy) {
-        long __functionAddress = Functions.vector_paint_set_transform;
+        long __functionAddress = Functions.paint_set_transform;
         if (CHECKS) {
             check(paint);
         }
@@ -433,7 +433,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_paint_get_transform(hb_vector_paint_t * paint, float * xx, float * yx, float * xy, float * yy, float * dx, float * dy)} */
     public static void nhb_vector_paint_get_transform(long paint, long xx, long yx, long xy, long yy, long dx, long dy) {
-        long __functionAddress = Functions.vector_paint_get_transform;
+        long __functionAddress = Functions.paint_get_transform;
         if (CHECKS) {
             check(paint);
         }
@@ -457,7 +457,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_paint_set_scale_factor(hb_vector_paint_t * paint, float x_scale_factor, float y_scale_factor)} */
     public static void hb_vector_paint_set_scale_factor(@NativeType("hb_vector_paint_t *") long paint, float x_scale_factor, float y_scale_factor) {
-        long __functionAddress = Functions.vector_paint_set_scale_factor;
+        long __functionAddress = Functions.paint_set_scale_factor;
         if (CHECKS) {
             check(paint);
         }
@@ -468,7 +468,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_paint_get_scale_factor(hb_vector_paint_t * paint, float * x_scale_factor, float * y_scale_factor)} */
     public static void nhb_vector_paint_get_scale_factor(long paint, long x_scale_factor, long y_scale_factor) {
-        long __functionAddress = Functions.vector_paint_get_scale_factor;
+        long __functionAddress = Functions.paint_get_scale_factor;
         if (CHECKS) {
             check(paint);
         }
@@ -488,7 +488,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_paint_set_extents(hb_vector_paint_t * paint, hb_vector_extents_t const * extents)} */
     public static void nhb_vector_paint_set_extents(long paint, long extents) {
-        long __functionAddress = Functions.vector_paint_set_extents;
+        long __functionAddress = Functions.paint_set_extents;
         if (CHECKS) {
             check(paint);
         }
@@ -504,7 +504,7 @@ public class HarfBuzzVector {
 
     /** {@code hb_bool_t hb_vector_paint_get_extents(hb_vector_paint_t * paint, hb_vector_extents_t * extents)} */
     public static int nhb_vector_paint_get_extents(long paint, long extents) {
-        long __functionAddress = Functions.vector_paint_get_extents;
+        long __functionAddress = Functions.paint_get_extents;
         if (CHECKS) {
             check(paint);
         }
@@ -521,7 +521,7 @@ public class HarfBuzzVector {
 
     /** {@code hb_bool_t hb_vector_paint_set_glyph_extents(hb_vector_paint_t * paint, hb_glyph_extents_t const * glyph_extents)} */
     public static int nhb_vector_paint_set_glyph_extents(long paint, long glyph_extents) {
-        long __functionAddress = Functions.vector_paint_set_glyph_extents;
+        long __functionAddress = Functions.paint_set_glyph_extents;
         if (CHECKS) {
             check(paint);
         }
@@ -538,7 +538,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_paint_set_foreground(hb_vector_paint_t * paint, hb_color_t foreground)} */
     public static void hb_vector_paint_set_foreground(@NativeType("hb_vector_paint_t *") long paint, @NativeType("hb_color_t") int foreground) {
-        long __functionAddress = Functions.vector_paint_set_foreground;
+        long __functionAddress = Functions.paint_set_foreground;
         if (CHECKS) {
             check(paint);
         }
@@ -549,7 +549,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_paint_set_palette(hb_vector_paint_t * paint, int palette)} */
     public static void hb_vector_paint_set_palette(@NativeType("hb_vector_paint_t *") long paint, int palette) {
-        long __functionAddress = Functions.vector_paint_set_palette;
+        long __functionAddress = Functions.paint_set_palette;
         if (CHECKS) {
             check(paint);
         }
@@ -560,7 +560,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_paint_set_custom_palette_color(hb_vector_paint_t * paint, unsigned int color_index, hb_color_t color)} */
     public static void hb_vector_paint_set_custom_palette_color(@NativeType("hb_vector_paint_t *") long paint, @NativeType("unsigned int") int color_index, @NativeType("hb_color_t") int color) {
-        long __functionAddress = Functions.vector_paint_set_custom_palette_color;
+        long __functionAddress = Functions.paint_set_custom_palette_color;
         if (CHECKS) {
             check(paint);
         }
@@ -571,7 +571,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_paint_clear_custom_palette_colors(hb_vector_paint_t * paint)} */
     public static void hb_vector_paint_clear_custom_palette_colors(@NativeType("hb_vector_paint_t *") long paint) {
-        long __functionAddress = Functions.vector_paint_clear_custom_palette_colors;
+        long __functionAddress = Functions.paint_clear_custom_palette_colors;
         if (CHECKS) {
             check(paint);
         }
@@ -583,7 +583,7 @@ public class HarfBuzzVector {
     /** {@code hb_paint_funcs_t * hb_vector_paint_get_funcs(void)} */
     @NativeType("hb_paint_funcs_t *")
     public static long hb_vector_paint_get_funcs() {
-        long __functionAddress = Functions.vector_paint_get_funcs;
+        long __functionAddress = Functions.paint_get_funcs;
         return invokeP(__functionAddress);
     }
 
@@ -592,7 +592,7 @@ public class HarfBuzzVector {
     /** {@code hb_bool_t hb_vector_paint_glyph(hb_vector_paint_t * paint, hb_font_t * font, hb_codepoint_t glyph, float pen_x, float pen_y, hb_vector_extents_mode_t extents_mode)} */
     @NativeType("hb_bool_t")
     public static boolean hb_vector_paint_glyph(@NativeType("hb_vector_paint_t *") long paint, @NativeType("hb_font_t *") long font, @NativeType("hb_codepoint_t") int glyph, float pen_x, float pen_y, @NativeType("hb_vector_extents_mode_t") int extents_mode) {
-        long __functionAddress = Functions.vector_paint_glyph;
+        long __functionAddress = Functions.paint_glyph;
         if (CHECKS) {
             check(paint);
             check(font);
@@ -604,7 +604,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_svg_paint_set_flat(hb_vector_paint_t * paint, hb_bool_t flat)} */
     public static void hb_vector_svg_paint_set_flat(@NativeType("hb_vector_paint_t *") long paint, @NativeType("hb_bool_t") boolean flat) {
-        long __functionAddress = Functions.vector_svg_paint_set_flat;
+        long __functionAddress = Functions.svg_paint_set_flat;
         if (CHECKS) {
             check(paint);
         }
@@ -615,7 +615,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_svg_paint_set_precision(hb_vector_paint_t * paint, unsigned int precision)} */
     public static void hb_vector_svg_paint_set_precision(@NativeType("hb_vector_paint_t *") long paint, @NativeType("unsigned int") int precision) {
-        long __functionAddress = Functions.vector_svg_paint_set_precision;
+        long __functionAddress = Functions.svg_paint_set_precision;
         if (CHECKS) {
             check(paint);
         }
@@ -627,7 +627,7 @@ public class HarfBuzzVector {
     /** {@code hb_blob_t * hb_vector_paint_render(hb_vector_paint_t * paint)} */
     @NativeType("hb_blob_t *")
     public static long hb_vector_paint_render(@NativeType("hb_vector_paint_t *") long paint) {
-        long __functionAddress = Functions.vector_paint_render;
+        long __functionAddress = Functions.paint_render;
         if (CHECKS) {
             check(paint);
         }
@@ -638,7 +638,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_paint_reset(hb_vector_paint_t * paint)} */
     public static void hb_vector_paint_reset(@NativeType("hb_vector_paint_t *") long paint) {
-        long __functionAddress = Functions.vector_paint_reset;
+        long __functionAddress = Functions.paint_reset;
         if (CHECKS) {
             check(paint);
         }
@@ -649,7 +649,7 @@ public class HarfBuzzVector {
 
     /** {@code void hb_vector_paint_recycle_blob(hb_vector_paint_t * paint, hb_blob_t * blob)} */
     public static void hb_vector_paint_recycle_blob(@NativeType("hb_vector_paint_t *") long paint, @NativeType("hb_blob_t *") long blob) {
-        long __functionAddress = Functions.vector_paint_recycle_blob;
+        long __functionAddress = Functions.paint_recycle_blob;
         if (CHECKS) {
             check(paint);
             check(blob);

@@ -27,55 +27,55 @@ public class HarfBuzzRaster {
 
         /** Function address. */
         public static final long
-            raster_image_create_or_fail               = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_create_or_fail"),
-            raster_image_reference                    = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_reference"),
-            raster_image_destroy                      = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_destroy"),
-            raster_image_set_user_data                = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_set_user_data"),
-            raster_image_get_user_data                = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_get_user_data"),
-            raster_image_configure                    = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_configure"),
-            raster_image_clear                        = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_clear"),
-            raster_image_get_buffer                   = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_get_buffer"),
-            raster_image_get_extents                  = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_get_extents"),
-            raster_image_get_format                   = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_get_format"),
-            raster_image_deserialize_from_png_or_fail = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_deserialize_from_png_or_fail"),
-            raster_image_serialize_to_png_or_fail     = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_serialize_to_png_or_fail"),
-            raster_draw_create_or_fail                = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_create_or_fail"),
-            raster_draw_reference                     = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_reference"),
-            raster_draw_destroy                       = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_destroy"),
-            raster_draw_set_user_data                 = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_set_user_data"),
-            raster_draw_get_user_data                 = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_get_user_data"),
-            raster_draw_set_transform                 = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_set_transform"),
-            raster_draw_set_scale_factor              = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_set_scale_factor"),
-            raster_draw_get_scale_factor              = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_get_scale_factor"),
-            raster_draw_get_transform                 = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_get_transform"),
-            raster_draw_set_extents                   = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_set_extents"),
-            raster_draw_get_extents                   = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_get_extents"),
-            raster_draw_set_glyph_extents             = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_set_glyph_extents"),
-            raster_draw_get_funcs                     = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_get_funcs"),
-            raster_draw_glyph                         = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_glyph"),
-            raster_draw_render                        = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_render"),
-            raster_draw_reset                         = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_reset"),
-            raster_draw_recycle_image                 = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_recycle_image"),
-            raster_paint_create_or_fail               = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_create_or_fail"),
-            raster_paint_reference                    = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_reference"),
-            raster_paint_destroy                      = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_destroy"),
-            raster_paint_set_user_data                = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_set_user_data"),
-            raster_paint_get_user_data                = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_get_user_data"),
-            raster_paint_set_transform                = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_set_transform"),
-            raster_paint_get_transform                = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_get_transform"),
-            raster_paint_set_scale_factor             = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_set_scale_factor"),
-            raster_paint_get_scale_factor             = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_get_scale_factor"),
-            raster_paint_set_extents                  = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_set_extents"),
-            raster_paint_get_extents                  = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_get_extents"),
-            raster_paint_set_glyph_extents            = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_set_glyph_extents"),
-            raster_paint_set_foreground               = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_set_foreground"),
-            raster_paint_clear_custom_palette_colors  = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_clear_custom_palette_colors"),
-            raster_paint_set_custom_palette_color     = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_set_custom_palette_color"),
-            raster_paint_get_funcs                    = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_get_funcs"),
-            raster_paint_glyph                        = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_glyph"),
-            raster_paint_render                       = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_render"),
-            raster_paint_reset                        = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_reset"),
-            raster_paint_recycle_image                = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_recycle_image");
+            image_create_or_fail               = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_create_or_fail"),
+            image_reference                    = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_reference"),
+            image_destroy                      = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_destroy"),
+            image_set_user_data                = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_set_user_data"),
+            image_get_user_data                = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_get_user_data"),
+            image_configure                    = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_configure"),
+            image_clear                        = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_clear"),
+            image_get_buffer                   = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_get_buffer"),
+            image_get_extents                  = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_get_extents"),
+            image_get_format                   = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_get_format"),
+            image_deserialize_from_png_or_fail = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_deserialize_from_png_or_fail"),
+            image_serialize_to_png_or_fail     = apiGetFunctionAddress(HARFBUZZ, "hb_raster_image_serialize_to_png_or_fail"),
+            draw_create_or_fail                = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_create_or_fail"),
+            draw_reference                     = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_reference"),
+            draw_destroy                       = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_destroy"),
+            draw_set_user_data                 = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_set_user_data"),
+            draw_get_user_data                 = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_get_user_data"),
+            draw_set_transform                 = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_set_transform"),
+            draw_set_scale_factor              = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_set_scale_factor"),
+            draw_get_scale_factor              = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_get_scale_factor"),
+            draw_get_transform                 = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_get_transform"),
+            draw_set_extents                   = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_set_extents"),
+            draw_get_extents                   = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_get_extents"),
+            draw_set_glyph_extents             = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_set_glyph_extents"),
+            draw_get_funcs                     = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_get_funcs"),
+            draw_glyph                         = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_glyph"),
+            draw_render                        = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_render"),
+            draw_reset                         = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_reset"),
+            draw_recycle_image                 = apiGetFunctionAddress(HARFBUZZ, "hb_raster_draw_recycle_image"),
+            paint_create_or_fail               = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_create_or_fail"),
+            paint_reference                    = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_reference"),
+            paint_destroy                      = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_destroy"),
+            paint_set_user_data                = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_set_user_data"),
+            paint_get_user_data                = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_get_user_data"),
+            paint_set_transform                = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_set_transform"),
+            paint_get_transform                = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_get_transform"),
+            paint_set_scale_factor             = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_set_scale_factor"),
+            paint_get_scale_factor             = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_get_scale_factor"),
+            paint_set_extents                  = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_set_extents"),
+            paint_get_extents                  = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_get_extents"),
+            paint_set_glyph_extents            = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_set_glyph_extents"),
+            paint_set_foreground               = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_set_foreground"),
+            paint_clear_custom_palette_colors  = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_clear_custom_palette_colors"),
+            paint_set_custom_palette_color     = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_set_custom_palette_color"),
+            paint_get_funcs                    = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_get_funcs"),
+            paint_glyph                        = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_glyph"),
+            paint_render                       = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_render"),
+            paint_reset                        = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_reset"),
+            paint_recycle_image                = apiGetFunctionAddress(HARFBUZZ, "hb_raster_paint_recycle_image");
 
     }
 
@@ -97,7 +97,7 @@ public class HarfBuzzRaster {
     /** {@code hb_raster_image_t * hb_raster_image_create_or_fail(void)} */
     @NativeType("hb_raster_image_t *")
     public static long hb_raster_image_create_or_fail() {
-        long __functionAddress = Functions.raster_image_create_or_fail;
+        long __functionAddress = Functions.image_create_or_fail;
         return invokeP(__functionAddress);
     }
 
@@ -106,7 +106,7 @@ public class HarfBuzzRaster {
     /** {@code hb_raster_image_t * hb_raster_image_reference(hb_raster_image_t * image)} */
     @NativeType("hb_raster_image_t *")
     public static long hb_raster_image_reference(@NativeType("hb_raster_image_t *") long image) {
-        long __functionAddress = Functions.raster_image_reference;
+        long __functionAddress = Functions.image_reference;
         if (CHECKS) {
             check(image);
         }
@@ -117,7 +117,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_image_destroy(hb_raster_image_t * image)} */
     public static void hb_raster_image_destroy(@NativeType("hb_raster_image_t *") long image) {
-        long __functionAddress = Functions.raster_image_destroy;
+        long __functionAddress = Functions.image_destroy;
         if (CHECKS) {
             check(image);
         }
@@ -128,7 +128,7 @@ public class HarfBuzzRaster {
 
     /** {@code hb_bool_t hb_raster_image_set_user_data(hb_raster_image_t * image, hb_user_data_key_t * key, void * data, hb_destroy_func_t destroy, hb_bool_t replace)} */
     public static int nhb_raster_image_set_user_data(long image, long key, long data, long destroy, int replace) {
-        long __functionAddress = Functions.raster_image_set_user_data;
+        long __functionAddress = Functions.image_set_user_data;
         if (CHECKS) {
             check(image);
         }
@@ -145,7 +145,7 @@ public class HarfBuzzRaster {
 
     /** {@code void * hb_raster_image_get_user_data(hb_raster_image_t * image, hb_user_data_key_t * key)} */
     public static long nhb_raster_image_get_user_data(long image, long key) {
-        long __functionAddress = Functions.raster_image_get_user_data;
+        long __functionAddress = Functions.image_get_user_data;
         if (CHECKS) {
             check(image);
         }
@@ -162,7 +162,7 @@ public class HarfBuzzRaster {
 
     /** {@code hb_bool_t hb_raster_image_configure(hb_raster_image_t * image, hb_raster_format_t format, hb_raster_extents_t const * extents)} */
     public static int nhb_raster_image_configure(long image, int format, long extents) {
-        long __functionAddress = Functions.raster_image_configure;
+        long __functionAddress = Functions.image_configure;
         if (CHECKS) {
             check(image);
         }
@@ -179,7 +179,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_image_clear(hb_raster_image_t * image)} */
     public static void hb_raster_image_clear(@NativeType("hb_raster_image_t *") long image) {
-        long __functionAddress = Functions.raster_image_clear;
+        long __functionAddress = Functions.image_clear;
         if (CHECKS) {
             check(image);
         }
@@ -190,7 +190,7 @@ public class HarfBuzzRaster {
 
     /** {@code uint8_t const * hb_raster_image_get_buffer(hb_raster_image_t * image)} */
     public static long nhb_raster_image_get_buffer(long image) {
-        long __functionAddress = Functions.raster_image_get_buffer;
+        long __functionAddress = Functions.image_get_buffer;
         if (CHECKS) {
             check(image);
         }
@@ -208,7 +208,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_image_get_extents(hb_raster_image_t * image, hb_raster_extents_t * extents)} */
     public static void nhb_raster_image_get_extents(long image, long extents) {
-        long __functionAddress = Functions.raster_image_get_extents;
+        long __functionAddress = Functions.image_get_extents;
         if (CHECKS) {
             check(image);
         }
@@ -225,7 +225,7 @@ public class HarfBuzzRaster {
     /** {@code hb_raster_format_t hb_raster_image_get_format(hb_raster_image_t * image)} */
     @NativeType("hb_raster_format_t")
     public static int hb_raster_image_get_format(@NativeType("hb_raster_image_t *") long image) {
-        long __functionAddress = Functions.raster_image_get_format;
+        long __functionAddress = Functions.image_get_format;
         if (CHECKS) {
             check(image);
         }
@@ -237,7 +237,7 @@ public class HarfBuzzRaster {
     /** {@code hb_bool_t hb_raster_image_deserialize_from_png_or_fail(hb_raster_image_t * image, hb_blob_t * png)} */
     @NativeType("hb_bool_t")
     public static boolean hb_raster_image_deserialize_from_png_or_fail(@NativeType("hb_raster_image_t *") long image, @NativeType("hb_blob_t *") long png) {
-        long __functionAddress = Functions.raster_image_deserialize_from_png_or_fail;
+        long __functionAddress = Functions.image_deserialize_from_png_or_fail;
         if (CHECKS) {
             check(image);
             check(png);
@@ -250,7 +250,7 @@ public class HarfBuzzRaster {
     /** {@code hb_blob_t * hb_raster_image_serialize_to_png_or_fail(hb_raster_image_t * image)} */
     @NativeType("hb_blob_t *")
     public static long hb_raster_image_serialize_to_png_or_fail(@NativeType("hb_raster_image_t *") long image) {
-        long __functionAddress = Functions.raster_image_serialize_to_png_or_fail;
+        long __functionAddress = Functions.image_serialize_to_png_or_fail;
         if (CHECKS) {
             check(image);
         }
@@ -262,7 +262,7 @@ public class HarfBuzzRaster {
     /** {@code hb_raster_draw_t * hb_raster_draw_create_or_fail(void)} */
     @NativeType("hb_raster_draw_t *")
     public static long hb_raster_draw_create_or_fail() {
-        long __functionAddress = Functions.raster_draw_create_or_fail;
+        long __functionAddress = Functions.draw_create_or_fail;
         return invokeP(__functionAddress);
     }
 
@@ -271,7 +271,7 @@ public class HarfBuzzRaster {
     /** {@code hb_raster_draw_t * hb_raster_draw_reference(hb_raster_draw_t * draw)} */
     @NativeType("hb_raster_draw_t *")
     public static long hb_raster_draw_reference(@NativeType("hb_raster_draw_t *") long draw) {
-        long __functionAddress = Functions.raster_draw_reference;
+        long __functionAddress = Functions.draw_reference;
         if (CHECKS) {
             check(draw);
         }
@@ -282,7 +282,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_draw_destroy(hb_raster_draw_t * draw)} */
     public static void hb_raster_draw_destroy(@NativeType("hb_raster_draw_t *") long draw) {
-        long __functionAddress = Functions.raster_draw_destroy;
+        long __functionAddress = Functions.draw_destroy;
         if (CHECKS) {
             check(draw);
         }
@@ -293,7 +293,7 @@ public class HarfBuzzRaster {
 
     /** {@code hb_bool_t hb_raster_draw_set_user_data(hb_raster_draw_t * draw, hb_user_data_key_t * key, void * data, hb_destroy_func_t destroy, hb_bool_t replace)} */
     public static int nhb_raster_draw_set_user_data(long draw, long key, long data, long destroy, int replace) {
-        long __functionAddress = Functions.raster_draw_set_user_data;
+        long __functionAddress = Functions.draw_set_user_data;
         if (CHECKS) {
             check(draw);
         }
@@ -310,7 +310,7 @@ public class HarfBuzzRaster {
 
     /** {@code void * hb_raster_draw_get_user_data(hb_raster_draw_t * draw, hb_user_data_key_t * key)} */
     public static long nhb_raster_draw_get_user_data(long draw, long key) {
-        long __functionAddress = Functions.raster_draw_get_user_data;
+        long __functionAddress = Functions.draw_get_user_data;
         if (CHECKS) {
             check(draw);
         }
@@ -327,7 +327,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_draw_set_transform(hb_raster_draw_t * draw, float xx, float yx, float xy, float yy, float dx, float dy)} */
     public static void hb_raster_draw_set_transform(@NativeType("hb_raster_draw_t *") long draw, float xx, float yx, float xy, float yy, float dx, float dy) {
-        long __functionAddress = Functions.raster_draw_set_transform;
+        long __functionAddress = Functions.draw_set_transform;
         if (CHECKS) {
             check(draw);
         }
@@ -338,7 +338,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_draw_set_scale_factor(hb_raster_draw_t * draw, float x_scale_factor, float y_scale_factor)} */
     public static void hb_raster_draw_set_scale_factor(@NativeType("hb_raster_draw_t *") long draw, float x_scale_factor, float y_scale_factor) {
-        long __functionAddress = Functions.raster_draw_set_scale_factor;
+        long __functionAddress = Functions.draw_set_scale_factor;
         if (CHECKS) {
             check(draw);
         }
@@ -349,7 +349,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_draw_get_scale_factor(hb_raster_draw_t * draw, float * x_scale_factor, float * y_scale_factor)} */
     public static void nhb_raster_draw_get_scale_factor(long draw, long x_scale_factor, long y_scale_factor) {
-        long __functionAddress = Functions.raster_draw_get_scale_factor;
+        long __functionAddress = Functions.draw_get_scale_factor;
         if (CHECKS) {
             check(draw);
         }
@@ -369,7 +369,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_draw_get_transform(hb_raster_draw_t * draw, float * xx, float * yx, float * xy, float * yy, float * dx, float * dy)} */
     public static void nhb_raster_draw_get_transform(long draw, long xx, long yx, long xy, long yy, long dx, long dy) {
-        long __functionAddress = Functions.raster_draw_get_transform;
+        long __functionAddress = Functions.draw_get_transform;
         if (CHECKS) {
             check(draw);
         }
@@ -393,7 +393,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_draw_set_extents(hb_raster_draw_t * draw, hb_raster_extents_t const * extents)} */
     public static void nhb_raster_draw_set_extents(long draw, long extents) {
-        long __functionAddress = Functions.raster_draw_set_extents;
+        long __functionAddress = Functions.draw_set_extents;
         if (CHECKS) {
             check(draw);
         }
@@ -409,7 +409,7 @@ public class HarfBuzzRaster {
 
     /** {@code hb_bool_t hb_raster_draw_get_extents(hb_raster_draw_t * draw, hb_raster_extents_t * extents)} */
     public static int nhb_raster_draw_get_extents(long draw, long extents) {
-        long __functionAddress = Functions.raster_draw_get_extents;
+        long __functionAddress = Functions.draw_get_extents;
         if (CHECKS) {
             check(draw);
         }
@@ -426,7 +426,7 @@ public class HarfBuzzRaster {
 
     /** {@code hb_bool_t hb_raster_draw_set_glyph_extents(hb_raster_draw_t * draw, hb_glyph_extents_t const * glyph_extents)} */
     public static int nhb_raster_draw_set_glyph_extents(long draw, long glyph_extents) {
-        long __functionAddress = Functions.raster_draw_set_glyph_extents;
+        long __functionAddress = Functions.draw_set_glyph_extents;
         if (CHECKS) {
             check(draw);
         }
@@ -444,7 +444,7 @@ public class HarfBuzzRaster {
     /** {@code hb_draw_funcs_t * hb_raster_draw_get_funcs(void)} */
     @NativeType("hb_draw_funcs_t *")
     public static long hb_raster_draw_get_funcs() {
-        long __functionAddress = Functions.raster_draw_get_funcs;
+        long __functionAddress = Functions.draw_get_funcs;
         return invokeP(__functionAddress);
     }
 
@@ -452,7 +452,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_draw_glyph(hb_raster_draw_t * draw, hb_font_t * font, hb_codepoint_t glyph, float pen_x, float pen_y)} */
     public static void hb_raster_draw_glyph(@NativeType("hb_raster_draw_t *") long draw, @NativeType("hb_font_t *") long font, @NativeType("hb_codepoint_t") int glyph, float pen_x, float pen_y) {
-        long __functionAddress = Functions.raster_draw_glyph;
+        long __functionAddress = Functions.draw_glyph;
         if (CHECKS) {
             check(draw);
             check(font);
@@ -465,7 +465,7 @@ public class HarfBuzzRaster {
     /** {@code hb_raster_image_t * hb_raster_draw_render(hb_raster_draw_t * draw)} */
     @NativeType("hb_raster_image_t *")
     public static long hb_raster_draw_render(@NativeType("hb_raster_draw_t *") long draw) {
-        long __functionAddress = Functions.raster_draw_render;
+        long __functionAddress = Functions.draw_render;
         if (CHECKS) {
             check(draw);
         }
@@ -476,7 +476,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_draw_reset(hb_raster_draw_t * draw)} */
     public static void hb_raster_draw_reset(@NativeType("hb_raster_draw_t *") long draw) {
-        long __functionAddress = Functions.raster_draw_reset;
+        long __functionAddress = Functions.draw_reset;
         if (CHECKS) {
             check(draw);
         }
@@ -487,7 +487,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_draw_recycle_image(hb_raster_draw_t * draw, hb_raster_image_t * image)} */
     public static void hb_raster_draw_recycle_image(@NativeType("hb_raster_draw_t *") long draw, @NativeType("hb_raster_image_t *") long image) {
-        long __functionAddress = Functions.raster_draw_recycle_image;
+        long __functionAddress = Functions.draw_recycle_image;
         if (CHECKS) {
             check(draw);
             check(image);
@@ -500,7 +500,7 @@ public class HarfBuzzRaster {
     /** {@code hb_raster_paint_t * hb_raster_paint_create_or_fail(void)} */
     @NativeType("hb_raster_paint_t *")
     public static long hb_raster_paint_create_or_fail() {
-        long __functionAddress = Functions.raster_paint_create_or_fail;
+        long __functionAddress = Functions.paint_create_or_fail;
         return invokeP(__functionAddress);
     }
 
@@ -509,7 +509,7 @@ public class HarfBuzzRaster {
     /** {@code hb_raster_paint_t * hb_raster_paint_reference(hb_raster_paint_t * paint)} */
     @NativeType("hb_raster_paint_t *")
     public static long hb_raster_paint_reference(@NativeType("hb_raster_paint_t *") long paint) {
-        long __functionAddress = Functions.raster_paint_reference;
+        long __functionAddress = Functions.paint_reference;
         if (CHECKS) {
             check(paint);
         }
@@ -520,7 +520,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_paint_destroy(hb_raster_paint_t * paint)} */
     public static void hb_raster_paint_destroy(@NativeType("hb_raster_paint_t *") long paint) {
-        long __functionAddress = Functions.raster_paint_destroy;
+        long __functionAddress = Functions.paint_destroy;
         if (CHECKS) {
             check(paint);
         }
@@ -531,7 +531,7 @@ public class HarfBuzzRaster {
 
     /** {@code hb_bool_t hb_raster_paint_set_user_data(hb_raster_paint_t * paint, hb_user_data_key_t * key, void * data, hb_destroy_func_t destroy, hb_bool_t replace)} */
     public static int nhb_raster_paint_set_user_data(long paint, long key, long data, long destroy, int replace) {
-        long __functionAddress = Functions.raster_paint_set_user_data;
+        long __functionAddress = Functions.paint_set_user_data;
         if (CHECKS) {
             check(paint);
         }
@@ -548,7 +548,7 @@ public class HarfBuzzRaster {
 
     /** {@code void * hb_raster_paint_get_user_data(hb_raster_paint_t * paint, hb_user_data_key_t * key)} */
     public static long nhb_raster_paint_get_user_data(long paint, long key) {
-        long __functionAddress = Functions.raster_paint_get_user_data;
+        long __functionAddress = Functions.paint_get_user_data;
         if (CHECKS) {
             check(paint);
         }
@@ -565,7 +565,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_paint_set_transform(hb_raster_paint_t * paint, float xx, float yx, float xy, float yy, float dx, float dy)} */
     public static void hb_raster_paint_set_transform(@NativeType("hb_raster_paint_t *") long paint, float xx, float yx, float xy, float yy, float dx, float dy) {
-        long __functionAddress = Functions.raster_paint_set_transform;
+        long __functionAddress = Functions.paint_set_transform;
         if (CHECKS) {
             check(paint);
         }
@@ -576,7 +576,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_paint_get_transform(hb_raster_paint_t * paint, float * xx, float * yx, float * xy, float * yy, float * dx, float * dy)} */
     public static void nhb_raster_paint_get_transform(long paint, long xx, long yx, long xy, long yy, long dx, long dy) {
-        long __functionAddress = Functions.raster_paint_get_transform;
+        long __functionAddress = Functions.paint_get_transform;
         if (CHECKS) {
             check(paint);
         }
@@ -600,7 +600,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_paint_set_scale_factor(hb_raster_paint_t * paint, float x_scale_factor, float y_scale_factor)} */
     public static void hb_raster_paint_set_scale_factor(@NativeType("hb_raster_paint_t *") long paint, float x_scale_factor, float y_scale_factor) {
-        long __functionAddress = Functions.raster_paint_set_scale_factor;
+        long __functionAddress = Functions.paint_set_scale_factor;
         if (CHECKS) {
             check(paint);
         }
@@ -611,7 +611,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_paint_get_scale_factor(hb_raster_paint_t * paint, float * x_scale_factor, float * y_scale_factor)} */
     public static void nhb_raster_paint_get_scale_factor(long paint, long x_scale_factor, long y_scale_factor) {
-        long __functionAddress = Functions.raster_paint_get_scale_factor;
+        long __functionAddress = Functions.paint_get_scale_factor;
         if (CHECKS) {
             check(paint);
         }
@@ -631,7 +631,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_paint_set_extents(hb_raster_paint_t * paint, hb_raster_extents_t const * extents)} */
     public static void nhb_raster_paint_set_extents(long paint, long extents) {
-        long __functionAddress = Functions.raster_paint_set_extents;
+        long __functionAddress = Functions.paint_set_extents;
         if (CHECKS) {
             check(paint);
         }
@@ -647,7 +647,7 @@ public class HarfBuzzRaster {
 
     /** {@code hb_bool_t hb_raster_paint_get_extents(hb_raster_paint_t * paint, hb_raster_extents_t * extents)} */
     public static int nhb_raster_paint_get_extents(long paint, long extents) {
-        long __functionAddress = Functions.raster_paint_get_extents;
+        long __functionAddress = Functions.paint_get_extents;
         if (CHECKS) {
             check(paint);
         }
@@ -664,7 +664,7 @@ public class HarfBuzzRaster {
 
     /** {@code hb_bool_t hb_raster_paint_set_glyph_extents(hb_raster_paint_t * paint, hb_glyph_extents_t const * glyph_extents)} */
     public static int nhb_raster_paint_set_glyph_extents(long paint, long glyph_extents) {
-        long __functionAddress = Functions.raster_paint_set_glyph_extents;
+        long __functionAddress = Functions.paint_set_glyph_extents;
         if (CHECKS) {
             check(paint);
         }
@@ -681,7 +681,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_paint_set_foreground(hb_raster_paint_t * paint, hb_color_t foreground)} */
     public static void hb_raster_paint_set_foreground(@NativeType("hb_raster_paint_t *") long paint, @NativeType("hb_color_t") int foreground) {
-        long __functionAddress = Functions.raster_paint_set_foreground;
+        long __functionAddress = Functions.paint_set_foreground;
         if (CHECKS) {
             check(paint);
         }
@@ -692,7 +692,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_paint_clear_custom_palette_colors(hb_raster_paint_t * paint)} */
     public static void hb_raster_paint_clear_custom_palette_colors(@NativeType("hb_raster_paint_t *") long paint) {
-        long __functionAddress = Functions.raster_paint_clear_custom_palette_colors;
+        long __functionAddress = Functions.paint_clear_custom_palette_colors;
         if (CHECKS) {
             check(paint);
         }
@@ -704,7 +704,7 @@ public class HarfBuzzRaster {
     /** {@code hb_bool_t hb_raster_paint_set_custom_palette_color(hb_raster_paint_t * paint, unsigned int color_index, hb_color_t color)} */
     @NativeType("hb_bool_t")
     public static boolean hb_raster_paint_set_custom_palette_color(@NativeType("hb_raster_paint_t *") long paint, @NativeType("unsigned int") int color_index, @NativeType("hb_color_t") int color) {
-        long __functionAddress = Functions.raster_paint_set_custom_palette_color;
+        long __functionAddress = Functions.paint_set_custom_palette_color;
         if (CHECKS) {
             check(paint);
         }
@@ -716,7 +716,7 @@ public class HarfBuzzRaster {
     /** {@code hb_paint_funcs_t * hb_raster_paint_get_funcs(void)} */
     @NativeType("hb_paint_funcs_t *")
     public static long hb_raster_paint_get_funcs() {
-        long __functionAddress = Functions.raster_paint_get_funcs;
+        long __functionAddress = Functions.paint_get_funcs;
         return invokeP(__functionAddress);
     }
 
@@ -725,7 +725,7 @@ public class HarfBuzzRaster {
     /** {@code hb_bool_t hb_raster_paint_glyph(hb_raster_paint_t * paint, hb_font_t * font, hb_codepoint_t glyph, float pen_x, float pen_y, unsigned int palette, hb_color_t foreground)} */
     @NativeType("hb_bool_t")
     public static boolean hb_raster_paint_glyph(@NativeType("hb_raster_paint_t *") long paint, @NativeType("hb_font_t *") long font, @NativeType("hb_codepoint_t") int glyph, float pen_x, float pen_y, @NativeType("unsigned int") int palette, @NativeType("hb_color_t") int foreground) {
-        long __functionAddress = Functions.raster_paint_glyph;
+        long __functionAddress = Functions.paint_glyph;
         if (CHECKS) {
             check(paint);
             check(font);
@@ -738,7 +738,7 @@ public class HarfBuzzRaster {
     /** {@code hb_raster_image_t * hb_raster_paint_render(hb_raster_paint_t * paint)} */
     @NativeType("hb_raster_image_t *")
     public static long hb_raster_paint_render(@NativeType("hb_raster_paint_t *") long paint) {
-        long __functionAddress = Functions.raster_paint_render;
+        long __functionAddress = Functions.paint_render;
         if (CHECKS) {
             check(paint);
         }
@@ -749,7 +749,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_paint_reset(hb_raster_paint_t * paint)} */
     public static void hb_raster_paint_reset(@NativeType("hb_raster_paint_t *") long paint) {
-        long __functionAddress = Functions.raster_paint_reset;
+        long __functionAddress = Functions.paint_reset;
         if (CHECKS) {
             check(paint);
         }
@@ -760,7 +760,7 @@ public class HarfBuzzRaster {
 
     /** {@code void hb_raster_paint_recycle_image(hb_raster_paint_t * paint, hb_raster_image_t * image)} */
     public static void hb_raster_paint_recycle_image(@NativeType("hb_raster_paint_t *") long paint, @NativeType("hb_raster_image_t *") long image) {
-        long __functionAddress = Functions.raster_paint_recycle_image;
+        long __functionAddress = Functions.paint_recycle_image;
         if (CHECKS) {
             check(paint);
             check(image);

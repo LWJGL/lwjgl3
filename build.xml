@@ -1798,56 +1798,67 @@
         <release-module name="harfbuzz" native-library="harfbuzz" title="HarfBuzz" if:true="${binding.harfbuzz}">
             <natives>
                 <get-release platform="freebsd" arch="x64" file="libharfbuzz.so"/>
+                <get-release platform="freebsd" arch="x64" file="libharfbuzz-gpu.so"/>
                 <get-release platform="freebsd" arch="x64" file="libharfbuzz-raster.so"/>
                 <get-release platform="freebsd" arch="x64" file="libharfbuzz-vector.so"/>
                 <get-release platform="freebsd" arch="x64" file="libharfbuzz.so.git"/>
 
                 <get-release platform="linux" arch="x64" file="libharfbuzz.so"/>
+                <get-release platform="linux" arch="x64" file="libharfbuzz-gpu.so"/>
                 <get-release platform="linux" arch="x64" file="libharfbuzz-raster.so"/>
                 <get-release platform="linux" arch="x64" file="libharfbuzz-vector.so"/>
                 <get-release platform="linux" arch="x64" file="libharfbuzz.so.git"/>
 
                 <get-release platform="linux" arch="arm64" file="libharfbuzz.so"/>
+                <get-release platform="linux" arch="arm64" file="libharfbuzz-gpu.so"/>
                 <get-release platform="linux" arch="arm64" file="libharfbuzz-raster.so"/>
                 <get-release platform="linux" arch="arm64" file="libharfbuzz-vector.so"/>
                 <get-release platform="linux" arch="arm64" file="libharfbuzz.so.git"/>
 
                 <get-release platform="linux" arch="arm32" file="libharfbuzz.so"/>
+                <get-release platform="linux" arch="arm32" file="libharfbuzz-gpu.so"/>
                 <get-release platform="linux" arch="arm32" file="libharfbuzz-raster.so"/>
                 <get-release platform="linux" arch="arm32" file="libharfbuzz-vector.so"/>
                 <get-release platform="linux" arch="arm32" file="libharfbuzz.so.git"/>
 
                 <get-release platform="linux" arch="ppc64le" file="libharfbuzz.so"/>
+                <get-release platform="linux" arch="ppc64le" file="libharfbuzz-gpu.so"/>
                 <get-release platform="linux" arch="ppc64le" file="libharfbuzz-raster.so"/>
                 <get-release platform="linux" arch="ppc64le" file="libharfbuzz-vector.so"/>
                 <get-release platform="linux" arch="ppc64le" file="libharfbuzz.so.git"/>
 
                 <get-release platform="linux" arch="riscv64" file="libharfbuzz.so"/>
+                <get-release platform="linux" arch="riscv64" file="libharfbuzz-gpu.so"/>
                 <get-release platform="linux" arch="riscv64" file="libharfbuzz-raster.so"/>
                 <get-release platform="linux" arch="riscv64" file="libharfbuzz-vector.so"/>
                 <get-release platform="linux" arch="riscv64" file="libharfbuzz.so.git"/>
 
                 <get-release platform="macos" arch="x64" file="libharfbuzz.dylib"/>
+                <get-release platform="macos" arch="x64" file="libharfbuzz-gpu.dylib"/>
                 <get-release platform="macos" arch="x64" file="libharfbuzz-raster.dylib"/>
                 <get-release platform="macos" arch="x64" file="libharfbuzz-vector.dylib"/>
                 <get-release platform="macos" arch="x64" file="libharfbuzz.dylib.git"/>
 
                 <get-release platform="macos" arch="arm64" file="libharfbuzz.dylib"/>
+                <get-release platform="macos" arch="arm64" file="libharfbuzz-gpu.dylib"/>
                 <get-release platform="macos" arch="arm64" file="libharfbuzz-raster.dylib"/>
                 <get-release platform="macos" arch="arm64" file="libharfbuzz-vector.dylib"/>
                 <get-release platform="macos" arch="arm64" file="libharfbuzz.dylib.git"/>
 
                 <get-release platform="windows" arch="x64" file="harfbuzz.dll"/>
+                <get-release platform="windows" arch="x64" file="harfbuzz-gpu.dll"/>
                 <get-release platform="windows" arch="x64" file="harfbuzz-raster.dll"/>
                 <get-release platform="windows" arch="x64" file="harfbuzz-vector.dll"/>
                 <get-release platform="windows" arch="x64" file="harfbuzz.dll.git"/>
 
                 <get-release platform="windows" arch="x86" file="harfbuzz.dll"/>
+                <get-release platform="windows" arch="x86" file="harfbuzz-gpu.dll"/>
                 <get-release platform="windows" arch="x86" file="harfbuzz-raster.dll"/>
                 <get-release platform="windows" arch="x86" file="harfbuzz-vector.dll"/>
                 <get-release platform="windows" arch="x86" file="harfbuzz.dll.git"/>
 
                 <get-release platform="windows" arch="arm64" file="harfbuzz.dll"/>
+                <get-release platform="windows" arch="arm64" file="harfbuzz-gpu.dll"/>
                 <get-release platform="windows" arch="arm64" file="harfbuzz-raster.dll"/>
                 <get-release platform="windows" arch="arm64" file="harfbuzz-vector.dll"/>
                 <get-release platform="windows" arch="arm64" file="harfbuzz.dll.git"/>

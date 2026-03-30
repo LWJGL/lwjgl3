@@ -48,6 +48,12 @@ $t}""")
 }
 val HARFBUZZ_BINDING_DELEGATE = HARFBUZZ_BINDING.delegate("HarfBuzz.getLibrary()")
 
+val HARFBUZZ_GPU_BINDING = simpleBinding(
+    Module.HARFBUZZ,
+    libraryExpression = """Configuration.HARFBUZZ_GPU_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("harfbuzz-gpu"))""",
+    bundledWithLWJGL = true
+)
+
 val HARFBUZZ_RASTER_BINDING = simpleBinding(
     Module.HARFBUZZ,
     libraryExpression = """Configuration.HARFBUZZ_RASTER_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("harfbuzz-raster"))""",
@@ -939,6 +945,12 @@ val hb_get_table_tags_func_t = Module.HARFBUZZ.callback {
         nativeType = "hb_get_table_tags_func_t"
     )
 }
+
+// hb-gpu.h
+
+val hb_gpu_draw_t = "hb_gpu_draw_t".opaque
+
+val hb_gpu_shader_lang_t = "hb_gpu_shader_lang_t".enumType
 
 // hb-raster.h
 
