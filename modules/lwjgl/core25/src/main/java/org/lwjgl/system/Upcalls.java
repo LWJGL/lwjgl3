@@ -18,6 +18,8 @@ import static org.lwjgl.system.ffm.FFM.*;
 /** FFM backend for upcalls. */
 final class Upcalls {
 
+    private static final boolean DEBUG_ALLOCATOR = Configuration.DEBUG_MEMORY_ALLOCATOR.get(false);
+
     private static final ConcurrentHashMap<Class<?>, Class<?>>        CALLBACK_INTERFACE_CACHE = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<Class<?>, UpcallBinder<?>> BINDER_CACHE             = new ConcurrentHashMap<>();
 
@@ -105,6 +107,16 @@ final class Upcalls {
         //t = System.nanoTime() - t;
         //System.err.println(t);
 
+        if (DEBUG_ALLOCATOR) {
+            /*
+            AI estimations based on HotSpot code analysis:
+
+            x86_64 : about 1.3-1.4   KiB persistent per stub, plus one JNI global handle.
+            aarch64: about 1.15-1.25 KiB persistent per stub, plus one JNI global handle.
+             */
+            MemoryManage.DebugAllocator.track(upcall.address(), 1024L); // underestimated, but roughly accurate
+        }
+
         UPCALL_REGISTRY.put(upcall.address(), new Upcall(arena, instance));
 
         return upcall.address();
@@ -116,6 +128,10 @@ final class Upcalls {
     }
 
     static void upcallFree(long functionPointer) {
+        if (DEBUG_ALLOCATOR) {
+            MemoryManage.DebugAllocator.untrack(functionPointer);
+        }
+
         var upcall = UPCALL_REGISTRY.remove(functionPointer);
         if (upcall != null && ARENA_TYPE.isCloseable()) {
             upcall.arena.close();
