@@ -212,4 +212,78 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nLoadDeepEXR(JNIEnv *
     return (jint)LoadDeepEXR(out_image, filename, err);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nIsSpectralEXR(JNIEnv *__env, jclass clazz, jlong filenameAddress) {
+    char const *filename = (char const *)(uintptr_t)filenameAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)IsSpectralEXR(filename);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nIsSpectralEXRFromMemory(JNIEnv *__env, jclass clazz, jlong memoryAddress, jlong size) {
+    unsigned char const *memory = (unsigned char const *)(uintptr_t)memoryAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)IsSpectralEXRFromMemory(memory, (size_t)size);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nEXRGetSpectrumType(JNIEnv *__env, jclass clazz, jlong exr_headerAddress) {
+    EXRHeader const *exr_header = (EXRHeader const *)(uintptr_t)exr_headerAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)EXRGetSpectrumType(exr_header);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nEXRFormatWavelength(JNIEnv *__env, jclass clazz, jlong bufferAddress, jlong buffer_size, jfloat wavelength_nm) {
+    char *buffer = (char *)(uintptr_t)bufferAddress;
+    UNUSED_PARAMS(__env, clazz)
+    EXRFormatWavelength(buffer, (size_t)buffer_size, wavelength_nm);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nEXRSpectralChannelName(JNIEnv *__env, jclass clazz, jlong bufferAddress, jlong buffer_size, jfloat wavelength_nm, jint stokes_component) {
+    char *buffer = (char *)(uintptr_t)bufferAddress;
+    UNUSED_PARAMS(__env, clazz)
+    EXRSpectralChannelName(buffer, (size_t)buffer_size, wavelength_nm, stokes_component);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nEXRReflectiveChannelName(JNIEnv *__env, jclass clazz, jlong bufferAddress, jlong buffer_size, jfloat wavelength_nm) {
+    char *buffer = (char *)(uintptr_t)bufferAddress;
+    UNUSED_PARAMS(__env, clazz)
+    EXRReflectiveChannelName(buffer, (size_t)buffer_size, wavelength_nm);
+}
+
+JNIEXPORT jfloat JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nEXRParseSpectralChannelWavelength(JNIEnv *__env, jclass clazz, jlong channel_nameAddress) {
+    char const *channel_name = (char const *)(uintptr_t)channel_nameAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jfloat)EXRParseSpectralChannelWavelength(channel_name);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nEXRGetStokesComponent(JNIEnv *__env, jclass clazz, jlong channel_nameAddress) {
+    char const *channel_name = (char const *)(uintptr_t)channel_nameAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)EXRGetStokesComponent(channel_name);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nEXRIsSpectralChannel(JNIEnv *__env, jclass clazz, jlong channel_nameAddress) {
+    char const *channel_name = (char const *)(uintptr_t)channel_nameAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)EXRIsSpectralChannel(channel_name);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nEXRGetWavelengths(JNIEnv *__env, jclass clazz, jlong exr_headerAddress, jlong wavelengthsAddress, jint max_wavelengths) {
+    EXRHeader const *exr_header = (EXRHeader const *)(uintptr_t)exr_headerAddress;
+    float *wavelengths = (float *)(uintptr_t)wavelengthsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)EXRGetWavelengths(exr_header, wavelengths, max_wavelengths);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nEXRSetSpectralAttributes(JNIEnv *__env, jclass clazz, jlong exr_headerAddress, jint spectrum_type, jlong unitsAddress) {
+    EXRHeader *exr_header = (EXRHeader *)(uintptr_t)exr_headerAddress;
+    char const *units = (char const *)(uintptr_t)unitsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)EXRSetSpectralAttributes(exr_header, spectrum_type, units);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nEXRGetSpectralUnits(JNIEnv *__env, jclass clazz, jlong exr_headerAddress) {
+    EXRHeader const *exr_header = (EXRHeader const *)(uintptr_t)exr_headerAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)EXRGetSpectralUnits(exr_header);
+}
+
 EXTERN_C_EXIT
