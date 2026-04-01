@@ -11,43 +11,49 @@ import java.lang.invoke.*;
 import java.util.*;
 
 /*
-Results on AMD 7950X3D, Windows 11, JDK 24-beta+20:
+Results on AMD 7950X3D, Windows 11, JDK 26+35:
 
 level0 -> custom VarHandle
 ----------------------------------------------------------------------------------------------------------------------------
 Benchmark                                               (offsetCount)  (segmentSize)  Mode  Cnt      Score     Error   Units
-FFMVarHandleInlineTest.t0_reference                              2048           1024  avgt    3    389,660 ±  18,120   ns/op
+FFMVarHandleInlineTest.t0_reference                              2048           1024  avgt    3    389,724 ±  68,161   ns/op
 FFMVarHandleInlineTest.t0_reference:gc.alloc.rate                2048           1024  avgt    3      0,007 ±   0,001  MB/sec
 
-FFMVarHandleInlineTest.t1_level8                                 2048           1024  avgt    3    387,465 ±  22,382   ns/op
+FFMVarHandleInlineTest.t1_level8                                 2048           1024  avgt    3    389,396 ±  15,902   ns/op
 FFMVarHandleInlineTest.t1_level8:gc.alloc.rate                   2048           1024  avgt    3      0,007 ±   0,001  MB/sec
 
-FFMVarHandleInlineTest.t2_level9                                 2048           1024  avgt    3    387,085 ±   7,508   ns/op
+FFMVarHandleInlineTest.t2_level9                                 2048           1024  avgt    3    387,224 ±   0,617   ns/op
 FFMVarHandleInlineTest.t2_level9:gc.alloc.rate                   2048           1024  avgt    3      0,007 ±   0,001  MB/sec
 
-FFMVarHandleInlineTest.t3_level10                                2048           1024  avgt    3   2749,172 ± 354,239   ns/op
-FFMVarHandleInlineTest.t3_level10:gc.alloc.rate                  2048           1024  avgt    3      0,007 ±   0,001  MB/sec
+FFMVarHandleInlineTest.t3_level10                                2048           1024  avgt    3   7270,966 ± 350,820   ns/op
+FFMVarHandleInlineTest.t3_level10:gc.alloc.rate                  2048           1024  avgt    3  10743,097 ± 517,756  MB/sec
 
-FFMVarHandleInlineTest.t4_level11                                2048           1024  avgt    3  13498,048 ± 743,625   ns/op
-FFMVarHandleInlineTest.t4_level11:gc.alloc.rate                  2048           1024  avgt    3   5786,865 ± 318,257  MB/sec
+FFMVarHandleInlineTest.t4_level11                                2048           1024  avgt    3  14752,415 ± 601,688   ns/op
+FFMVarHandleInlineTest.t4_level11:gc.alloc.rate                  2048           1024  avgt    3   5294,881 ± 215,937  MB/sec
 
 level0 -> MemorySegment.ofAddress(offset).reinterpret(8L).get(ValueLayout.JAVA_INT_UNALIGNED, 0L);
-------------------------------------------------------------------------------------------------------------------------------
-Benchmark                                               (offsetCount)  (segmentSize)  Mode  Cnt       Score      Error   Units
-FFMVarHandleInlineTest.t0_reference                              2048           1024  avgt    3     386,291 ±   11,559   ns/op
-FFMVarHandleInlineTest.t0_reference:gc.alloc.rate                2048           1024  avgt    3       0,007 ±    0,001  MB/sec
+-----------------------------------------------------------------------------------------------------------------------------
+Benchmark                                               (offsetCount)  (segmentSize)  Mode  Cnt       Score     Error   Units
+FFMVarHandleInlineTest.t0_reference                              2048           1024  avgt    3     385,951 ±   7,583   ns/op
+FFMVarHandleInlineTest.t0_reference:gc.alloc.rate                2048           1024  avgt    3       0,007 ±   0,001  MB/sec
 
-FFMVarHandleInlineTest.t1_level8                                 2048           1024  avgt    3     387,180 ±   35,284   ns/op
-FFMVarHandleInlineTest.t1_level8:gc.alloc.rate                   2048           1024  avgt    3       0,007 ±    0,001  MB/sec
+FFMVarHandleInlineTest.t1_level8                                 2048           1024  avgt    3     386,355 ±   2,966   ns/op
+FFMVarHandleInlineTest.t1_level8:gc.alloc.rate                   2048           1024  avgt    3       0,007 ±   0,001  MB/sec
 
-FFMVarHandleInlineTest.t2_level9                                 2048           1024  avgt    3    2745,906 ±  362,782   ns/op
-FFMVarHandleInlineTest.t2_level9:gc.alloc.rate                   2048           1024  avgt    3       0,007 ±    0,001  MB/sec
+FFMVarHandleInlineTest.t2_level9                                 2048           1024  avgt    3    7203,609 ±  29,192   ns/op
+FFMVarHandleInlineTest.t2_level9:gc.alloc.rate                   2048           1024  avgt    3   10843,468 ±  47,051  MB/sec
 
-FFMVarHandleInlineTest.t3_level10                                2048           1024  avgt    3   13471,218 ±  437,291   ns/op
-FFMVarHandleInlineTest.t3_level10:gc.alloc.rate                  2048           1024  avgt    3    5798,397 ±  186,942  MB/sec
+FFMVarHandleInlineTest.t3_level10                                2048           1024  avgt    3   14792,473 ± 603,733   ns/op
+FFMVarHandleInlineTest.t3_level10:gc.alloc.rate                  2048           1024  avgt    3    5280,540 ± 215,239  MB/sec
 
-FFMVarHandleInlineTest.t4_level11                                2048           1024  avgt    3   20682,162 ± 1826,771   ns/op
-FFMVarHandleInlineTest.t4_level11:gc.alloc.rate                  2048           1024  avgt    3    7553,335 ±  664,258  MB/sec
+FFMVarHandleInlineTest.t4_level11                                2048           1024  avgt    3   19969,408 ± 366,820   ns/op
+FFMVarHandleInlineTest.t4_level11:gc.alloc.rate                  2048           1024  avgt    3    7823,177 ± 139,066  MB/sec
+
+Even though the VarHandle implementation can handle 1 extra level in this test, it is more common to hit the NodeCountInliningCutoff in real code. When that
+happens, HotSpot can cope much better with the reference implementation.
+
+Note: GraalVM does not have any trouble in this test, but when it hits limits like NodeCountInliningCutoff, it has catastrophic performance with the VarHandle
+implementation.
  */
 
 @State(Scope.Benchmark)
@@ -113,7 +119,7 @@ public class FFMVarHandleInlineTest {
 
         // initialize segment with random values
         segment = Arena.ofAuto().allocate(segmentSize);
-        for (int i = 0; i < segment.byteSize() / 8; i++) {
+        for (var i = 0; i < segment.byteSize() / 8; i++) {
             segment.set(ValueLayout.JAVA_LONG, i * 8, rand.nextLong());
         }
 
@@ -121,7 +127,7 @@ public class FFMVarHandleInlineTest {
 
         // initialize offset array
         offsets = new long[offsetCount];
-        for (int i = 0; i < offsets.length; i++) {
+        for (var i = 0; i < offsets.length; i++) {
             offsets[i] = segment.address() + (rand.nextInt(ints) << 2); // random
             //offsets[i] = segment.address() + ((i % ints) << 2); // sequential
         }
@@ -141,8 +147,11 @@ public class FFMVarHandleInlineTest {
     @Benchmark
     public int t0_reference() {
         var s = 0;
-        for (long offset : offsets) {
-            s += (int)JAVA_INT_UNALIGNED.get(offset);
+        for (var offset : offsets) {
+            s += MemorySegment
+                .ofAddress(offset)
+                .reinterpret(8L)
+                .get(ValueLayout.JAVA_INT_UNALIGNED, 0L);
         }
         return s;
     }
@@ -151,7 +160,7 @@ public class FFMVarHandleInlineTest {
     @Benchmark
     public int t1_level8() {
         var s = 0;
-        for (long offset : offsets) {
+        for (var offset : offsets) {
             s += level8(offset);
         }
         return s;
@@ -161,7 +170,7 @@ public class FFMVarHandleInlineTest {
     @Benchmark
     public int t2_level9() {
         var s = 0;
-        for (long offset : offsets) {
+        for (var offset : offsets) {
             s += level9(offset);
         }
         return s;
@@ -171,7 +180,7 @@ public class FFMVarHandleInlineTest {
     @Benchmark
     public int t3_level10() {
         var s = 0;
-        for (long offset : offsets) {
+        for (var offset : offsets) {
             s += level10(offset);
         }
         return s;
@@ -181,7 +190,7 @@ public class FFMVarHandleInlineTest {
     @Benchmark
     public int t4_level11() {
         var s = 0;
-        for (long offset : offsets) {
+        for (var offset : offsets) {
             s += level11(offset);
         }
         return s;
