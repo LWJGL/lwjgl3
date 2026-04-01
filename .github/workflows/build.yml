@@ -65,10 +65,7 @@ jobs:
       - name: Install build dependencies # make is necessary for -flto=auto
         run: |
           dnf -y install epel-release wget
-          wget https://pkgs.sysadmins.ws/el8/base/x86_64/raven-release-1.0.1-1.el8.noarch.rpm
-          rpm -ivh raven-release-1.0.1-1.el8.noarch.rpm
           dnf config-manager --set-enabled powertools
-          dnf config-manager --set-enabled raven-extras
           dnf -y update
           dnf -y install gcc-toolset-15-gcc gcc-toolset-15-gcc-c++ ant awscli curl zstd make
           mkdir jdk8
