@@ -137,6 +137,8 @@ public class XrSpatialComponentDataQueryResultEXT extends Struct<XrSpatialCompon
     public XrSpatialComponentDataQueryResultEXT next(XrSpatialComponentMesh2DListEXT value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSpatialComponentMesh3DListEXT} value to the {@code next} chain. */
     public XrSpatialComponentDataQueryResultEXT next(XrSpatialComponentMesh3DListEXT value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrSpatialComponentObjectSemanticLabelListANDROID} value to the {@code next} chain. */
+    public XrSpatialComponentDataQueryResultEXT next(XrSpatialComponentObjectSemanticLabelListANDROID value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSpatialComponentParentListEXT} value to the {@code next} chain. */
     public XrSpatialComponentDataQueryResultEXT next(XrSpatialComponentParentListEXT value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSpatialComponentPersistenceListEXT} value to the {@code next} chain. */
@@ -147,6 +149,10 @@ public class XrSpatialComponentDataQueryResultEXT extends Struct<XrSpatialCompon
     public XrSpatialComponentDataQueryResultEXT next(XrSpatialComponentPlaneSemanticLabelListEXT value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSpatialComponentPolygon2DListEXT} value to the {@code next} chain. */
     public XrSpatialComponentDataQueryResultEXT next(XrSpatialComponentPolygon2DListEXT value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrSpatialComponentRaycastResultListANDROID} value to the {@code next} chain. */
+    public XrSpatialComponentDataQueryResultEXT next(XrSpatialComponentRaycastResultListANDROID value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrSpatialComponentSubsumedByListANDROID} value to the {@code next} chain. */
+    public XrSpatialComponentDataQueryResultEXT next(XrSpatialComponentSubsumedByListANDROID value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@code entityIdCapacityInput} field. */
     public XrSpatialComponentDataQueryResultEXT entityIdCapacityInput(@NativeType("uint32_t") int value) { nentityIdCapacityInput(address(), value); return this; }
     /** Sets the specified value to the {@code entityIdCountOutput} field. */
@@ -426,6 +432,8 @@ public class XrSpatialComponentDataQueryResultEXT extends Struct<XrSpatialCompon
         public XrSpatialComponentDataQueryResultEXT.Buffer next(XrSpatialComponentMesh2DListEXT value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSpatialComponentMesh3DListEXT} value to the {@code next} chain. */
         public XrSpatialComponentDataQueryResultEXT.Buffer next(XrSpatialComponentMesh3DListEXT value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrSpatialComponentObjectSemanticLabelListANDROID} value to the {@code next} chain. */
+        public XrSpatialComponentDataQueryResultEXT.Buffer next(XrSpatialComponentObjectSemanticLabelListANDROID value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSpatialComponentParentListEXT} value to the {@code next} chain. */
         public XrSpatialComponentDataQueryResultEXT.Buffer next(XrSpatialComponentParentListEXT value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSpatialComponentPersistenceListEXT} value to the {@code next} chain. */
@@ -436,6 +444,10 @@ public class XrSpatialComponentDataQueryResultEXT extends Struct<XrSpatialCompon
         public XrSpatialComponentDataQueryResultEXT.Buffer next(XrSpatialComponentPlaneSemanticLabelListEXT value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSpatialComponentPolygon2DListEXT} value to the {@code next} chain. */
         public XrSpatialComponentDataQueryResultEXT.Buffer next(XrSpatialComponentPolygon2DListEXT value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrSpatialComponentRaycastResultListANDROID} value to the {@code next} chain. */
+        public XrSpatialComponentDataQueryResultEXT.Buffer next(XrSpatialComponentRaycastResultListANDROID value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrSpatialComponentSubsumedByListANDROID} value to the {@code next} chain. */
+        public XrSpatialComponentDataQueryResultEXT.Buffer next(XrSpatialComponentSubsumedByListANDROID value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@code entityIdCapacityInput} field. */
         public XrSpatialComponentDataQueryResultEXT.Buffer entityIdCapacityInput(@NativeType("uint32_t") int value) { XrSpatialComponentDataQueryResultEXT.nentityIdCapacityInput(address(), value); return this; }
         /** Sets the specified value to the {@code entityIdCountOutput} field. */

@@ -126,6 +126,8 @@ public class XrBodyJointLocationsFB extends Struct<XrBodyJointLocationsFB> imple
     public XrBodyJointLocationsFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrBodyTrackingCalibrationStatusMETA} value to the {@code next} chain. */
     public XrBodyJointLocationsFB next(XrBodyTrackingCalibrationStatusMETA value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrBodyTrackingFidelityStatusMETA} value to the {@code next} chain. */
+    public XrBodyJointLocationsFB next(XrBodyTrackingFidelityStatusMETA value) { return this.next(value.next(this.next()).address()); }
 
     /** Initializes this struct with the specified values. */
     public XrBodyJointLocationsFB set(
@@ -358,6 +360,8 @@ public class XrBodyJointLocationsFB extends Struct<XrBodyJointLocationsFB> imple
         public XrBodyJointLocationsFB.Buffer next(@NativeType("void *") long value) { XrBodyJointLocationsFB.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrBodyTrackingCalibrationStatusMETA} value to the {@code next} chain. */
         public XrBodyJointLocationsFB.Buffer next(XrBodyTrackingCalibrationStatusMETA value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrBodyTrackingFidelityStatusMETA} value to the {@code next} chain. */
+        public XrBodyJointLocationsFB.Buffer next(XrBodyTrackingFidelityStatusMETA value) { return this.next(value.next(this.next()).address()); }
 
     }
 

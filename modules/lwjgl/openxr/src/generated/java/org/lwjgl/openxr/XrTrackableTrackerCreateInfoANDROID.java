@@ -94,6 +94,8 @@ public class XrTrackableTrackerCreateInfoANDROID extends Struct<XrTrackableTrack
     public XrTrackableTrackerCreateInfoANDROID next(XrTrackableMarkerConfigurationANDROID value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrTrackableObjectConfigurationANDROID} value to the {@code next} chain. */
     public XrTrackableTrackerCreateInfoANDROID next(XrTrackableObjectConfigurationANDROID value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrTrackableQrCodeConfigurationANDROID} value to the {@code next} chain. */
+    public XrTrackableTrackerCreateInfoANDROID next(XrTrackableQrCodeConfigurationANDROID value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@code trackableType} field. */
     public XrTrackableTrackerCreateInfoANDROID trackableType(@NativeType("XrTrackableTypeANDROID") int value) { ntrackableType(address(), value); return this; }
 
@@ -310,6 +312,8 @@ public class XrTrackableTrackerCreateInfoANDROID extends Struct<XrTrackableTrack
         public XrTrackableTrackerCreateInfoANDROID.Buffer next(XrTrackableMarkerConfigurationANDROID value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrTrackableObjectConfigurationANDROID} value to the {@code next} chain. */
         public XrTrackableTrackerCreateInfoANDROID.Buffer next(XrTrackableObjectConfigurationANDROID value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrTrackableQrCodeConfigurationANDROID} value to the {@code next} chain. */
+        public XrTrackableTrackerCreateInfoANDROID.Buffer next(XrTrackableQrCodeConfigurationANDROID value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@code trackableType} field. */
         public XrTrackableTrackerCreateInfoANDROID.Buffer trackableType(@NativeType("XrTrackableTypeANDROID") int value) { XrTrackableTrackerCreateInfoANDROID.ntrackableType(address(), value); return this; }
 

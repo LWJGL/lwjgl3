@@ -47,13 +47,22 @@ val XrFaceTrackerBD = XR_DEFINE_HANDLE("XrFaceTrackerBD")
 val XrSenseDataProviderBD = XR_DEFINE_HANDLE("XrSenseDataProviderBD")
 val XrSenseDataSnapshotBD = XR_DEFINE_HANDLE("XrSenseDataSnapshotBD")
 val XrAnchorBD = XR_DEFINE_HANDLE("XrAnchorBD")
+val XrSpatialAudioRendererBD = XR_DEFINE_HANDLE("XrSpatialAudioRendererBD")
+val XrSoundFieldBD = XR_DEFINE_HANDLE("XrSoundFieldBD")
+val XrSoundObjectBD = XR_DEFINE_HANDLE("XrSoundObjectBD")
+val XrSoundObstacleBD = XR_DEFINE_HANDLE("XrSoundObstacleBD")
+val XrSoundObstacleMaterialBD = XR_DEFINE_HANDLE("XrSoundObstacleMaterialBD")
 val XrPlaneDetectorEXT = XR_DEFINE_HANDLE("XrPlaneDetectorEXT")
 val XrTrackableTrackerANDROID = XR_DEFINE_HANDLE("XrTrackableTrackerANDROID")
 val XrDeviceAnchorPersistenceANDROID = XR_DEFINE_HANDLE("XrDeviceAnchorPersistenceANDROID")
 val XrFaceTrackerANDROID = XR_DEFINE_HANDLE("XrFaceTrackerANDROID")
+val XrPassthroughLayerANDROID = XR_DEFINE_HANDLE("XrPassthroughLayerANDROID")
 val XrWorldMeshDetectorML = XR_DEFINE_HANDLE("XrWorldMeshDetectorML")
 val XrFacialExpressionClientML = XR_DEFINE_HANDLE("XrFacialExpressionClientML")
+val XrEnvironmentRaycasterMETA = XR_DEFINE_HANDLE("XrEnvironmentRaycasterMETA")
 val XrTrackableImageDatabaseANDROID = XR_DEFINE_HANDLE("XrTrackableImageDatabaseANDROID")
+val XrSceneMeshingTrackerANDROID = XR_DEFINE_HANDLE("XrSceneMeshingTrackerANDROID")
+val XrSceneMeshSnapshotANDROID = XR_DEFINE_HANDLE("XrSceneMeshSnapshotANDROID")
 val XrSpatialEntityEXT = XR_DEFINE_HANDLE("XrSpatialEntityEXT")
 val XrSpatialContextEXT = XR_DEFINE_HANDLE("XrSpatialContextEXT")
 val XrSpatialSnapshotEXT = XR_DEFINE_HANDLE("XrSpatialSnapshotEXT")
@@ -132,6 +141,7 @@ val XrPerformanceMetricsCounterUnitMETA = "XrPerformanceMetricsCounterUnitMETA".
 val XrPassthroughColorLutChannelsMETA = "XrPassthroughColorLutChannelsMETA".enumType
 val XrFullBodyJointMETA = "XrFullBodyJointMETA".enumType
 val XrBodyTrackingCalibrationStateMETA = "XrBodyTrackingCalibrationStateMETA".enumType
+val XrBodyTrackingFidelityMETA = "XrBodyTrackingFidelityMETA".enumType
 val XrFaceExpression2FB = "XrFaceExpression2FB".enumType
 val XrFaceExpressionSet2FB = "XrFaceExpressionSet2FB".enumType
 val XrFaceTrackingDataSource2FB = "XrFaceTrackingDataSource2FB".enumType
@@ -140,6 +150,7 @@ val XrEnvironmentDepthProviderCreateFlagBitsMETA = "XrEnvironmentDepthProviderCr
 val XrEnvironmentDepthSwapchainCreateFlagBitsMETA = "XrEnvironmentDepthSwapchainCreateFlagBitsMETA".enumType
 val XrTrackingOptimizationSettingsDomainQCOM = "XrTrackingOptimizationSettingsDomainQCOM".enumType
 val XrTrackingOptimizationSettingsHintQCOM = "XrTrackingOptimizationSettingsHintQCOM".enumType
+val XrHandGestureTypeQCOM = "XrHandGestureTypeQCOM".enumType
 val XrPassthroughFormHTC = "XrPassthroughFormHTC".enumType
 val XrFoveationModeHTC = "XrFoveationModeHTC".enumType
 val XrFoveationLevelHTC = "XrFoveationLevelHTC".enumType
@@ -160,6 +171,13 @@ val XrPersistenceLocationBD = "XrPersistenceLocationBD".enumType
 val XrSpatialMeshLodBD = "XrSpatialMeshLodBD".enumType
 val XrSpatialMeshConfigFlagBitsBD = "XrSpatialMeshConfigFlagBitsBD".enumType
 val XrPlaneOrientationBD = "XrPlaneOrientationBD".enumType
+val XrAudioSampleRateBD = "XrAudioSampleRateBD".enumType
+val XrAudioBufferChannelLayoutBD = "XrAudioBufferChannelLayoutBD".enumType
+val XrSoundObjectDistanceAttenuationTypeBD = "XrSoundObjectDistanceAttenuationTypeBD".enumType
+val XrSoundFieldChannelMaskSurroundBD = "XrSoundFieldChannelMaskSurroundBD".enumType
+val XrSoundFieldChannelMaskAmbixBD = "XrSoundFieldChannelMaskAmbixBD".enumType
+val XrSoundFieldChannelMaskFumaBD = "XrSoundFieldChannelMaskFumaBD".enumType
+val XrSoundObstacleMaterialTypeBD = "XrSoundObstacleMaterialTypeBD".enumType
 val XrHandTrackingDataSourceEXT = "XrHandTrackingDataSourceEXT".enumType
 val XrPlaneDetectorOrientationEXT = "XrPlaneDetectorOrientationEXT".enumType
 val XrPlaneDetectorSemanticTypeEXT = "XrPlaneDetectorSemanticTypeEXT".enumType
@@ -173,6 +191,9 @@ val XrFaceParameterIndicesANDROID = "XrFaceParameterIndicesANDROID".enumType
 val XrFaceTrackingStateANDROID = "XrFaceTrackingStateANDROID".enumType
 val XrFaceConfidenceRegionsANDROID = "XrFaceConfidenceRegionsANDROID".enumType
 val XrPassthroughCameraStateANDROID = "XrPassthroughCameraStateANDROID".enumType
+val XrWindingOrderANDROID = "XrWindingOrderANDROID".enumType
+val XrPerformanceMetricsCounterUnitANDROID = "XrPerformanceMetricsCounterUnitANDROID".enumType
+val XrPerformanceMetricsCounterFlagBitsANDROID = "XrPerformanceMetricsCounterFlagBitsANDROID".enumType
 val XrObjectLabelANDROID = "XrObjectLabelANDROID".enumType
 val XrFutureStateEXT = "XrFutureStateEXT".enumType
 val XrWorldMeshDetectorFlagBitsML = "XrWorldMeshDetectorFlagBitsML".enumType
@@ -180,10 +201,16 @@ val XrWorldMeshDetectorLodML = "XrWorldMeshDetectorLodML".enumType
 val XrWorldMeshBlockStatusML = "XrWorldMeshBlockStatusML".enumType
 val XrWorldMeshBlockResultML = "XrWorldMeshBlockResultML".enumType
 val XrFacialBlendShapeML = "XrFacialBlendShapeML".enumType
+val XrSemanticLabelMETA = "XrSemanticLabelMETA".enumType
+val XrEnvironmentRaycastHitStatusMETA = "XrEnvironmentRaycastHitStatusMETA".enumType
 val XrTrackableMarkerTrackingModeANDROID = "XrTrackableMarkerTrackingModeANDROID".enumType
 val XrTrackableMarkerDictionaryANDROID = "XrTrackableMarkerDictionaryANDROID".enumType
+val XrQrCodeTrackingModeANDROID = "XrQrCodeTrackingModeANDROID".enumType
 val XrTrackableImageTrackingModeANDROID = "XrTrackableImageTrackingModeANDROID".enumType
 val XrTrackableImageFormatANDROID = "XrTrackableImageFormatANDROID".enumType
+val XrSceneMeshSemanticLabelSetANDROID = "XrSceneMeshSemanticLabelSetANDROID".enumType
+val XrSceneMeshTrackingStateANDROID = "XrSceneMeshTrackingStateANDROID".enumType
+val XrSceneMeshSemanticLabelANDROID = "XrSceneMeshSemanticLabelANDROID".enumType
 val XrSpatialCapabilityEXT = "XrSpatialCapabilityEXT".enumType
 val XrSpatialCapabilityFeatureEXT = "XrSpatialCapabilityFeatureEXT".enumType
 val XrSpatialComponentTypeEXT = "XrSpatialComponentTypeEXT".enumType
@@ -196,6 +223,8 @@ val XrSpatialMarkerAprilTagDictEXT = "XrSpatialMarkerAprilTagDictEXT".enumType
 val XrSpatialPersistenceScopeEXT = "XrSpatialPersistenceScopeEXT".enumType
 val XrSpatialPersistenceContextResultEXT = "XrSpatialPersistenceContextResultEXT".enumType
 val XrSpatialPersistenceStateEXT = "XrSpatialPersistenceStateEXT".enumType
+val XrSpatialObjectSemanticLabelANDROID = "XrSpatialObjectSemanticLabelANDROID".enumType
+val XrBatteryStateDisplayStateFlagBitsEXT = "XrBatteryStateDisplayStateFlagBitsEXT".enumType
 
 // Bitmask types
 val XrDebugUtilsMessageSeverityFlagsEXT = typedef(XrFlags64, "XrDebugUtilsMessageSeverityFlagsEXT")
@@ -234,10 +263,15 @@ val XrEnvironmentDepthProviderCreateFlagsMETA = typedef(XrFlags64, "XrEnvironmen
 val XrEnvironmentDepthSwapchainCreateFlagsMETA = typedef(XrFlags64, "XrEnvironmentDepthSwapchainCreateFlagsMETA")
 val XrFoveationDynamicFlagsHTC = typedef(XrFlags64, "XrFoveationDynamicFlagsHTC")
 val XrSpatialMeshConfigFlagsBD = typedef(XrFlags64, "XrSpatialMeshConfigFlagsBD")
+val XrSoundObstacleFlagsBD = typedef(XrFlags64, "XrSoundObstacleFlagsBD")
+val XrSoundObjectFlagsBD = typedef(XrFlags64, "XrSoundObjectFlagsBD")
+val XrSoundFieldFlagsBD = typedef(XrFlags64, "XrSoundFieldFlagsBD")
 val XrPlaneDetectionCapabilityFlagsEXT = typedef(XrFlags64, "XrPlaneDetectionCapabilityFlagsEXT")
 val XrPlaneDetectorFlagsEXT = typedef(XrFlags64, "XrPlaneDetectorFlagsEXT")
+val XrPerformanceMetricsCounterFlagsANDROID = typedef(XrFlags64, "XrPerformanceMetricsCounterFlagsANDROID")
 val XrWorldMeshDetectorFlagsML = typedef(XrFlags64, "XrWorldMeshDetectorFlagsML")
 val XrFacialExpressionBlendShapePropertiesFlagsML = typedef(XrFlags64, "XrFacialExpressionBlendShapePropertiesFlagsML")
+val XrBatteryStateDisplayStateFlagsEXT = typedef(XrFlags64, "XrBatteryStateDisplayStateFlagsEXT")
 
 // Function pointer types
 val _XrDebugUtilsMessengerCallbackDataEXT = struct(Module.OPENXR, "XrDebugUtilsMessengerCallbackDataEXT")
@@ -834,7 +868,7 @@ val XrBodyJointsLocateInfoFB = struct(Module.OPENXR, "XrBodyJointsLocateInfoFB")
 val XrBodyJointLocationsFB = struct(Module.OPENXR, "XrBodyJointLocationsFB", mutable = false) {
     Expression("#TYPE_BODY_JOINT_LOCATIONS_FB")..XrStructureType("type").mutable()
     PointerSetter(
-        "XrBodyTrackingCalibrationStatusMETA",
+        "XrBodyTrackingCalibrationStatusMETA", "XrBodyTrackingFidelityStatusMETA",
         prepend = true
     )..nullable..opaque_p("next").mutable()
     XrBool32("isActive")
@@ -2752,6 +2786,18 @@ val XrSystemPropertiesBodyTrackingCalibrationMETA = struct(Module.OPENXR, "XrSys
     XrBool32("supportsHeightOverride")
 }
 
+val XrSystemPropertiesBodyTrackingFidelityMETA = struct(Module.OPENXR, "XrSystemPropertiesBodyTrackingFidelityMETA", mutable = false) {
+    Expression("#TYPE_SYSTEM_PROPERTIES_BODY_TRACKING_FIDELITY_META")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsBodyTrackingFidelity")
+}
+
+val XrBodyTrackingFidelityStatusMETA = struct(Module.OPENXR, "XrBodyTrackingFidelityStatusMETA", mutable = false) {
+    Expression("#TYPE_BODY_TRACKING_FIDELITY_STATUS_META")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBodyTrackingFidelityMETA("fidelity")
+}
+
 val XrSystemFaceTrackingProperties2FB = struct(Module.OPENXR, "XrSystemFaceTrackingProperties2FB", mutable = false) {
     Expression("#TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB")..XrStructureType("type").mutable()
     nullable..opaque_p("next").mutable()
@@ -2976,6 +3022,12 @@ val XrInteractionRenderModelTopLevelUserPathGetInfoEXT = struct(Module.OPENXR, "
 val XrEventDataInteractionRenderModelsChangedEXT = struct(Module.OPENXR, "XrEventDataInteractionRenderModelsChangedEXT", mutable = false, parentStruct = XrEventDataBaseHeader) {
     Expression("#TYPE_EVENT_DATA_INTERACTION_RENDER_MODELS_CHANGED_EXT")..XrStructureType("type").mutable()
     nullable..opaque_const_p("next").mutable()
+}
+
+val XrHandGestureQCOM = struct(Module.OPENXR, "XrHandGestureQCOM") {
+    XrHandGestureTypeQCOM("gesture")
+    float("gestureRatio")
+    float("flipRatio")
 }
 
 val XrPassthroughCreateInfoHTC = struct(Module.OPENXR, "XrPassthroughCreateInfoHTC") {
@@ -3485,6 +3537,135 @@ val XrSenseDataFilterPlaneOrientationBD = struct(Module.OPENXR, "XrSenseDataFilt
     XrPlaneOrientationBD.p("orientations")
 }
 
+val XrSpatialAudioRendererCreateInfoBD = struct(Module.OPENXR, "XrSpatialAudioRendererCreateInfoBD") {
+    Expression("#TYPE_SPATIAL_AUDIO_RENDERER_CREATE_INFO_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    uint32_t("framesPerBuffer")
+    XrAudioSampleRateBD("sampleRate")
+}
+
+val XrAudioBufferBD = struct(Module.OPENXR, "XrAudioBufferBD") {
+    Expression("#TYPE_AUDIO_BUFFER_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrAudioBufferChannelLayoutBD("channelLayout")
+    uint32_t("bufferChannels")
+    AutoSize("buffer")..uint32_t("bufferLength")
+    float.p("buffer")
+}
+
+val XrSoundObjectDirectivityCardioidBD = struct(Module.OPENXR, "XrSoundObjectDirectivityCardioidBD") {
+    Expression("#TYPE_SOUND_OBJECT_DIRECTIVITY_CARDIOID_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    float("alpha")
+    float("order")
+}
+
+val XrSoundObjectShapeSphereBD = struct(Module.OPENXR, "XrSoundObjectShapeSphereBD") {
+    Expression("#TYPE_SOUND_OBJECT_SHAPE_SPHERE_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    float("radius")
+}
+
+val XrAttenuationCurvePointBD = struct(Module.OPENXR, "XrAttenuationCurvePointBD") {
+    float("distance")
+    float("gain")
+}
+
+val XrSoundObjectDistanceAttenuationCurveBD = struct(Module.OPENXR, "XrSoundObjectDistanceAttenuationCurveBD") {
+    Expression("#TYPE_SOUND_OBJECT_DISTANCE_ATTENUATION_CURVE_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("curvePoints")..uint32_t("curvePointCount")
+    XrAttenuationCurvePointBD.p("curvePoints")
+}
+
+val XrSoundObjectDistanceAttenuationBD = struct(Module.OPENXR, "XrSoundObjectDistanceAttenuationBD") {
+    Expression("#TYPE_SOUND_OBJECT_DISTANCE_ATTENUATION_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSoundObjectDistanceAttenuationTypeBD("distanceAttenuationType")
+    float("minAttenuationRange")
+    float("maxAttenuationRange")
+    float("referenceDistance")
+    float("rolloffFactor")
+    nullable..XrSoundObjectDistanceAttenuationCurveBD.p("customDistanceAttenuationCurve")
+}
+
+val XrSoundObjectConfigBD = struct(Module.OPENXR, "XrSoundObjectConfigBD") {
+    Expression("#TYPE_SOUND_OBJECT_CONFIG_BD")..XrStructureType("type")
+    PointerSetter(
+        "XrSoundObjectDirectivityCardioidBD", "XrSoundObjectShapeSphereBD",
+        prepend = true
+    )..nullable..opaque_const_p("next")
+    XrBool32("enabled")
+    XrPosef("pose")
+    XrSpace("baseSpace")
+    float("mainVolume")
+    float("reflectionGain")
+    XrBool32("enableDoppler")
+    XrSoundObjectDistanceAttenuationBD.const.p("directSoundAttenuation")
+    XrSoundObjectDistanceAttenuationBD.const.p("indirectSoundAttenuation")
+}
+
+val XrSoundFieldConfigBD = struct(Module.OPENXR, "XrSoundFieldConfigBD") {
+    Expression("#TYPE_SOUND_FIELD_CONFIG_BD")..XrStructureType("type")
+    PointerSetter(
+        "XrSoundFieldChannelDefinitionAmbixBD", "XrSoundFieldChannelDefinitionFumaBD", "XrSoundFieldChannelDefinitionSurroundBD",
+        prepend = true
+    )..nullable..opaque_const_p("next")
+    XrBool32("enabled")
+    XrQuaternionf("orientation")
+    XrSpace("baseSpace")
+    float("mainVolume")
+    float("lfeGain")
+}
+
+val XrSoundFieldChannelDefinitionSurroundBD = struct(Module.OPENXR, "XrSoundFieldChannelDefinitionSurroundBD") {
+    Expression("#TYPE_SOUND_FIELD_CHANNEL_DEFINITION_SURROUND_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSoundFieldChannelMaskSurroundBD("channelMask")
+}
+
+val XrSoundFieldChannelDefinitionAmbixBD = struct(Module.OPENXR, "XrSoundFieldChannelDefinitionAmbixBD") {
+    Expression("#TYPE_SOUND_FIELD_CHANNEL_DEFINITION_AMBIX_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSoundFieldChannelMaskAmbixBD("channelMask")
+}
+
+val XrSoundFieldChannelDefinitionFumaBD = struct(Module.OPENXR, "XrSoundFieldChannelDefinitionFumaBD") {
+    Expression("#TYPE_SOUND_FIELD_CHANNEL_DEFINITION_FUMA_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSoundFieldChannelMaskFumaBD("channelMask")
+}
+
+val XrSoundTriangleMeshBD = struct(Module.OPENXR, "XrSoundTriangleMeshBD") {
+    Expression("#TYPE_SOUND_TRIANGLE_MESH_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("vertices")..uint32_t("vertexCount")
+    XrVector3f.p("vertices")
+    AutoSize("indices")..uint32_t("indexCount")
+    uint32_t.p("indices")
+}
+
+val XrSoundObstacleConfigBD = struct(Module.OPENXR, "XrSoundObstacleConfigBD") {
+    Expression("#TYPE_SOUND_OBSTACLE_CONFIG_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrBool32("enabled")
+    XrPosef("pose")
+    XrSpace("baseSpace")
+    AutoSize("materials")..uint32_t("materialCount")
+    XrSoundObstacleMaterialBD.p("materials")
+}
+
+val XrSoundObstacleMaterialConfigBD = struct(Module.OPENXR, "XrSoundObstacleMaterialConfigBD") {
+    Expression("#TYPE_SOUND_OBSTACLE_MATERIAL_CONFIG_BD")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSoundObstacleMaterialTypeBD("materialType")
+    AutoSize("bandFrequencies", "bandAbsorptions", "bandScatterings", "bandTransmissions")..uint32_t("bandCount")
+    float.p("bandFrequencies")
+    float.p("bandAbsorptions")
+    float.p("bandScatterings")
+    float.p("bandTransmissions")
+}
+
 val XrHandTrackingDataSourceInfoEXT = struct(Module.OPENXR, "XrHandTrackingDataSourceInfoEXT") {
     Expression("#TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT")..XrStructureType("type")
     nullable..opaque_const_p("next")
@@ -3570,7 +3751,7 @@ val XrPlaneDetectorPolygonBufferEXT = struct(Module.OPENXR, "XrPlaneDetectorPoly
 val XrTrackableTrackerCreateInfoANDROID = struct(Module.OPENXR, "XrTrackableTrackerCreateInfoANDROID") {
     Expression("#TYPE_TRACKABLE_TRACKER_CREATE_INFO_ANDROID")..XrStructureType("type")
     PointerSetter(
-        "XrTrackableMarkerConfigurationANDROID", "XrTrackableObjectConfigurationANDROID",
+        "XrTrackableMarkerConfigurationANDROID", "XrTrackableObjectConfigurationANDROID", "XrTrackableQrCodeConfigurationANDROID",
         prepend = true
     )..nullable..opaque_const_p("next")
     XrTrackableTypeANDROID("trackableType")
@@ -3680,6 +3861,45 @@ val XrPassthroughCameraStateGetInfoANDROID = struct(Module.OPENXR, "XrPassthroug
     nullable..opaque_const_p("next")
 }
 
+val XrPassthroughLayerCreateInfoANDROID = struct(Module.OPENXR, "XrPassthroughLayerCreateInfoANDROID") {
+    Expression("#TYPE_PASSTHROUGH_LAYER_CREATE_INFO_ANDROID")..XrStructureType("type")
+    PointerSetter(
+        "XrPassthroughLayerMeshANDROID",
+        prepend = true
+    )..nullable..opaque_const_p("next")
+    uint32_t("vertexCapacity")
+    uint32_t("indexCapacity")
+}
+
+val XrPassthroughLayerMeshANDROID = struct(Module.OPENXR, "XrPassthroughLayerMeshANDROID") {
+    Expression("#TYPE_PASSTHROUGH_LAYER_MESH_ANDROID")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrWindingOrderANDROID("windingOrder")
+    AutoSize("vertices", optional = true)..uint32_t("vertexCount")
+    XrVector3f.const.p("vertices")
+    AutoSize("indices", optional = true)..uint32_t("indexCount")
+    uint16_t.const.p("indices")
+}
+
+val XrCompositionLayerPassthroughANDROID = struct(Module.OPENXR, "XrCompositionLayerPassthroughANDROID", parentStruct = XrCompositionLayerBaseHeader) {
+    Expression("#TYPE_COMPOSITION_LAYER_PASSTHROUGH_ANDROID")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrCompositionLayerFlags("layerFlags")
+    XrSpace("space")
+    XrPosef("pose")
+    XrVector3f("scale")
+    float("opacity")
+    XrPassthroughLayerANDROID("layer")
+}
+
+val XrSystemPassthroughLayerPropertiesANDROID = struct(Module.OPENXR, "XrSystemPassthroughLayerPropertiesANDROID", mutable = false) {
+    Expression("#TYPE_SYSTEM_PASSTHROUGH_LAYER_PROPERTIES_ANDROID")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsPassthroughLayer")
+    uint32_t("maxMeshIndexCount")
+    uint32_t("maxMeshVertexCount")
+}
+
 val XrRaycastInfoANDROID = struct(Module.OPENXR, "XrRaycastInfoANDROID") {
     Expression("#TYPE_RAYCAST_INFO_ANDROID")..XrStructureType("type")
     nullable..opaque_const_p("next")
@@ -3704,6 +3924,21 @@ val XrRaycastHitResultsANDROID = struct(Module.OPENXR, "XrRaycastHitResultsANDRO
     AutoSize("results", optional = true)..uint32_t("resultsCapacityInput")
     uint32_t("resultsCountOutput")
     nullable..XrRaycastHitResultANDROID.p("results")
+}
+
+val XrPerformanceMetricsStateANDROID = struct(Module.OPENXR, "XrPerformanceMetricsStateANDROID") {
+    Expression("#TYPE_PERFORMANCE_METRICS_STATE_ANDROID")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrBool32("enabled")
+}
+
+val XrPerformanceMetricsCounterANDROID = struct(Module.OPENXR, "XrPerformanceMetricsCounterANDROID", mutable = false) {
+    Expression("#TYPE_PERFORMANCE_METRICS_COUNTER_ANDROID")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrPerformanceMetricsCounterFlagsANDROID("counterFlags")
+    XrPerformanceMetricsCounterUnitANDROID("counterUnit")
+    uint32_t("uintValue")
+    float("floatValue")
 }
 
 val XrTrackableObjectANDROID = struct(Module.OPENXR, "XrTrackableObjectANDROID") {
@@ -4048,6 +4283,74 @@ val XrSpaceGroupUuidFilterInfoMETA = struct(Module.OPENXR, "XrSpaceGroupUuidFilt
     XrUuid("groupUuid")
 }
 
+val XrSystemEnvironmentRaycastPropertiesMETA = struct(Module.OPENXR, "XrSystemEnvironmentRaycastPropertiesMETA", mutable = false) {
+    Expression("#TYPE_SYSTEM_ENVIRONMENT_RAYCAST_PROPERTIES_META")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsEnvironmentRaycast")
+}
+
+val XrEnvironmentRaycasterCreateInfoMETA = struct(Module.OPENXR, "XrEnvironmentRaycasterCreateInfoMETA") {
+    Expression("#TYPE_ENVIRONMENT_RAYCASTER_CREATE_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+}
+
+val XrEnvironmentRaycasterCreateCompletionMETA = struct(Module.OPENXR, "XrEnvironmentRaycasterCreateCompletionMETA", parentStruct = XrFutureCompletionBaseHeaderEXT) {
+    Expression("#TYPE_ENVIRONMENT_RAYCASTER_CREATE_COMPLETION_META")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrResult("futureResult")
+    XrEnvironmentRaycasterMETA("environmentRaycaster")
+}
+
+val XrEnvironmentRaycastFilterBaseHeaderMETA = struct(Module.OPENXR, "XrEnvironmentRaycastFilterBaseHeaderMETA") {
+    XrStructureType("type")
+    nullable..opaque_const_p("next")
+}
+
+val XrEnvironmentRaycastHitGetInfoMETA = struct(Module.OPENXR, "XrEnvironmentRaycastHitGetInfoMETA") {
+    Expression("#TYPE_ENVIRONMENT_RAYCAST_HIT_GET_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("baseSpace")
+    XrTime("time")
+    XrVector3f("origin")
+    XrVector3f("direction")
+    AutoSize("filters", optional = true)..uint32_t("filterCount")
+    nullable..XrEnvironmentRaycastFilterBaseHeaderMETA.const.p.const.p("filters")
+}
+
+val XrEnvironmentRaycastHitMETA = struct(Module.OPENXR, "XrEnvironmentRaycastHitMETA") {
+    Expression("#TYPE_ENVIRONMENT_RAYCAST_HIT_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrEnvironmentRaycastHitStatusMETA("status")
+    XrPosef("pose")
+}
+
+val XrEnvironmentRaycastFilterDistanceMETA = struct(Module.OPENXR, "XrEnvironmentRaycastFilterDistanceMETA", parentStruct = XrEnvironmentRaycastFilterBaseHeaderMETA) {
+    Expression("#TYPE_ENVIRONMENT_RAYCAST_FILTER_DISTANCE_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    float("maxDistance")
+}
+
+val XrExtent3DiMETA = struct(Module.OPENXR, "XrExtent3DiMETA") {
+    int32_t("width")
+    int32_t("height")
+    int32_t("depth")
+}
+
+val XrTilePropertiesMETA = struct(Module.OPENXR, "XrTilePropertiesMETA") {
+    Expression("#TYPE_TILE_PROPERTIES_META")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrExtent3DiMETA("tileDimensions")
+    XrExtent2Di("apronDimensions")
+    XrOffset2Di("origin")
+}
+
+val XrTilePropertiesHintMETA = struct(Module.OPENXR, "XrTilePropertiesHintMETA") {
+    Expression("#TYPE_TILE_PROPERTIES_HINT_META")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("properties")..uint32_t("propertiesCount")
+    XrTilePropertiesMETA.const.p("properties")
+}
+
 val XrAnchorSharingInfoANDROID = struct(Module.OPENXR, "XrAnchorSharingInfoANDROID") {
     Expression("#TYPE_ANCHOR_SHARING_INFO_ANDROID")..XrStructureType("type")
     nullable..opaque_const_p("next")
@@ -4102,6 +4405,33 @@ val XrTrackableMarkerANDROID = struct(Module.OPENXR, "XrTrackableMarkerANDROID")
     int32_t("markerId")
     XrPosef("centerPose")
     XrExtent2Df("extents")
+}
+
+val XrSystemQrCodeTrackingPropertiesANDROID = struct(Module.OPENXR, "XrSystemQrCodeTrackingPropertiesANDROID", mutable = false) {
+    Expression("#TYPE_SYSTEM_QR_CODE_TRACKING_PROPERTIES_ANDROID")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsQrCodeTracking")
+    XrBool32("supportsQrCodeSizeEstimation")
+    uint16_t("maxQrCodeCount")
+}
+
+val XrTrackableQrCodeConfigurationANDROID = struct(Module.OPENXR, "XrTrackableQrCodeConfigurationANDROID") {
+    Expression("#TYPE_TRACKABLE_QR_CODE_CONFIGURATION_ANDROID")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrQrCodeTrackingModeANDROID("trackingMode")
+    float("qrCodeEdgeSize")
+}
+
+val XrTrackableQrCodeANDROID = struct(Module.OPENXR, "XrTrackableQrCodeANDROID") {
+    Expression("#TYPE_TRACKABLE_QR_CODE_ANDROID")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrTrackingStateANDROID("trackingState")
+    XrTime("lastUpdatedTime")
+    XrPosef("centerPose")
+    XrExtent2Df("extents")
+    AutoSize("buffer", optional = true)..uint32_t("bufferCapacityInput")
+    uint32_t("bufferCountOutput")
+    nullable..char.p("buffer")
 }
 
 val XrSystemImageTrackingPropertiesANDROID = struct(Module.OPENXR, "XrSystemImageTrackingPropertiesANDROID", mutable = false) {
@@ -4192,6 +4522,57 @@ val XrFrustumfKHR = struct(Module.OPENXR, "XrFrustumfKHR", alias = XrFrustumf) {
     float("farZ")
 }
 
+val XrSystemSceneMeshingPropertiesANDROID = struct(Module.OPENXR, "XrSystemSceneMeshingPropertiesANDROID", mutable = false) {
+    Expression("#TYPE_SYSTEM_SCENE_MESHING_PROPERTIES_ANDROID")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsSceneMeshing")
+}
+
+val XrSceneMeshingTrackerCreateInfoANDROID = struct(Module.OPENXR, "XrSceneMeshingTrackerCreateInfoANDROID") {
+    Expression("#TYPE_SCENE_MESHING_TRACKER_CREATE_INFO_ANDROID")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSceneMeshSemanticLabelSetANDROID("semanticLabelSet")
+    XrBool32("enableNormals")
+}
+
+val XrSceneMeshSnapshotCreateInfoANDROID = struct(Module.OPENXR, "XrSceneMeshSnapshotCreateInfoANDROID") {
+    Expression("#TYPE_SCENE_MESH_SNAPSHOT_CREATE_INFO_ANDROID")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("baseSpace")
+    XrTime("time")
+    XrBoxf("boundingBox")
+}
+
+val XrSceneMeshSnapshotCreationResultANDROID = struct(Module.OPENXR, "XrSceneMeshSnapshotCreationResultANDROID") {
+    Expression("#TYPE_SCENE_MESH_SNAPSHOT_CREATION_RESULT_ANDROID")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSceneMeshSnapshotANDROID("snapshot")
+    XrSceneMeshTrackingStateANDROID("trackingState")
+}
+
+val XrSceneSubmeshStateANDROID = struct(Module.OPENXR, "XrSceneSubmeshStateANDROID") {
+    Expression("#TYPE_SCENE_SUBMESH_STATE_ANDROID")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrUuid("submeshId")
+    XrTime("lastUpdatedTime")
+    XrPosef("submeshPoseInBaseSpace")
+    XrExtent3Df("bounds")
+}
+
+val XrSceneSubmeshDataANDROID = struct(Module.OPENXR, "XrSceneSubmeshDataANDROID") {
+    Expression("#TYPE_SCENE_SUBMESH_DATA_ANDROID")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrUuid("submeshId")
+    AutoSize("vertexPositions", "vertexNormals", "vertexSemantics", optional = true)..uint32_t("vertexCapacityInput")
+    uint32_t("vertexCountOutput")
+    nullable..XrVector3f.p("vertexPositions")
+    nullable..XrVector3f.p("vertexNormals")
+    nullable..uint8_t.p("vertexSemantics")
+    AutoSize("indices", optional = true)..uint32_t("indexCapacityInput")
+    uint32_t("indexCountOutput")
+    nullable..uint32_t.p("indices")
+}
+
 val XrSpatialCapabilityComponentTypesEXT = struct(Module.OPENXR, "XrSpatialCapabilityComponentTypesEXT") {
     Expression("#TYPE_SPATIAL_CAPABILITY_COMPONENT_TYPES_EXT")..XrStructureType("type")
     nullable..opaque_p("next")
@@ -4228,7 +4609,7 @@ val XrCreateSpatialContextCompletionEXT = struct(Module.OPENXR, "XrCreateSpatial
 val XrSpatialDiscoverySnapshotCreateInfoEXT = struct(Module.OPENXR, "XrSpatialDiscoverySnapshotCreateInfoEXT") {
     Expression("#TYPE_SPATIAL_DISCOVERY_SNAPSHOT_CREATE_INFO_EXT")..XrStructureType("type")
     PointerSetter(
-        "XrSpatialDiscoveryPersistenceUuidFilterEXT", "XrSpatialFilterTrackingStateEXT",
+        "XrSpatialDiscoveryPersistenceUuidFilterEXT", "XrSpatialDiscoveryUniqueEntitiesFilterANDROID", "XrSpatialFilterTrackingStateEXT", "XrSpatialRaycastInfoANDROID",
         prepend = true
     )..nullable..opaque_const_p("next")
     AutoSize("componentTypes", optional = true)..uint32_t("componentTypeCount")
@@ -4263,7 +4644,7 @@ val XrSpatialComponentDataQueryConditionEXT = struct(Module.OPENXR, "XrSpatialCo
 val XrSpatialComponentDataQueryResultEXT = struct(Module.OPENXR, "XrSpatialComponentDataQueryResultEXT") {
     Expression("#TYPE_SPATIAL_COMPONENT_DATA_QUERY_RESULT_EXT")..XrStructureType("type")
     PointerSetter(
-        "XrSpatialComponentAnchorListEXT", "XrSpatialComponentBounded2DListEXT", "XrSpatialComponentBounded3DListEXT", "XrSpatialComponentMarkerListEXT", "XrSpatialComponentMesh2DListEXT", "XrSpatialComponentMesh3DListEXT", "XrSpatialComponentParentListEXT", "XrSpatialComponentPersistenceListEXT", "XrSpatialComponentPlaneAlignmentListEXT", "XrSpatialComponentPlaneSemanticLabelListEXT", "XrSpatialComponentPolygon2DListEXT",
+        "XrSpatialComponentAnchorListEXT", "XrSpatialComponentBounded2DListEXT", "XrSpatialComponentBounded3DListEXT", "XrSpatialComponentMarkerListEXT", "XrSpatialComponentMesh2DListEXT", "XrSpatialComponentMesh3DListEXT", "XrSpatialComponentObjectSemanticLabelListANDROID", "XrSpatialComponentParentListEXT", "XrSpatialComponentPersistenceListEXT", "XrSpatialComponentPlaneAlignmentListEXT", "XrSpatialComponentPlaneSemanticLabelListEXT", "XrSpatialComponentPolygon2DListEXT", "XrSpatialComponentRaycastResultListANDROID", "XrSpatialComponentSubsumedByListANDROID",
         prepend = true
     )..nullable..opaque_p("next")
     AutoSize("entityIds", optional = true)..uint32_t("entityIdCapacityInput")
@@ -4482,7 +4863,10 @@ val XrSpatialComponentAnchorListEXT = struct(Module.OPENXR, "XrSpatialComponentA
 
 val XrSpatialAnchorCreateInfoEXT = struct(Module.OPENXR, "XrSpatialAnchorCreateInfoEXT") {
     Expression("#TYPE_SPATIAL_ANCHOR_CREATE_INFO_EXT")..XrStructureType("type")
-    nullable..opaque_const_p("next")
+    PointerSetter(
+        "XrSpatialAnchorParentANDROID",
+        prepend = true
+    )..nullable..opaque_const_p("next")
     XrSpace("baseSpace")
     XrTime("time")
     XrPosef("pose")
@@ -4556,6 +4940,92 @@ val XrUnpersistSpatialEntityCompletionEXT = struct(Module.OPENXR, "XrUnpersistSp
     XrSpatialPersistenceContextResultEXT("unpersistResult")
 }
 
+val XrSpatialCapabilityConfigurationObjectTrackingANDROID = struct(Module.OPENXR, "XrSpatialCapabilityConfigurationObjectTrackingANDROID", parentStruct = XrSpatialCapabilityConfigurationBaseHeaderEXT) {
+    Expression("#TYPE_SPATIAL_CAPABILITY_CONFIGURATION_OBJECT_TRACKING_ANDROID")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpatialCapabilityEXT("capability")
+    AutoSize("enabledComponents")..uint32_t("enabledComponentCount")
+    XrSpatialComponentTypeEXT.const.p("enabledComponents")
+    AutoSize("activeSemanticLabels")..uint32_t("activeSemanticLabelCount")
+    XrSpatialObjectSemanticLabelANDROID.const.p("activeSemanticLabels")
+}
+
+val XrSpatialComponentObjectSemanticLabelListANDROID = struct(Module.OPENXR, "XrSpatialComponentObjectSemanticLabelListANDROID") {
+    Expression("#TYPE_SPATIAL_COMPONENT_OBJECT_SEMANTIC_LABEL_LIST_ANDROID")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("semanticLabels")..uint32_t("semanticLabelCount")
+    XrSpatialObjectSemanticLabelANDROID.p("semanticLabels")
+}
+
+val XrSpatialRaycastResultDataANDROID = struct(Module.OPENXR, "XrSpatialRaycastResultDataANDROID") {
+    XrPosef("hitPose")
+    float("distanceSquared")
+}
+
+val XrSpatialCapabilityConfigurationDepthRaycastANDROID = struct(Module.OPENXR, "XrSpatialCapabilityConfigurationDepthRaycastANDROID", parentStruct = XrSpatialCapabilityConfigurationBaseHeaderEXT) {
+    Expression("#TYPE_SPATIAL_CAPABILITY_CONFIGURATION_DEPTH_RAYCAST_ANDROID")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpatialCapabilityEXT("capability")
+    AutoSize("enabledComponents")..uint32_t("enabledComponentCount")
+    XrSpatialComponentTypeEXT.const.p("enabledComponents")
+}
+
+val XrSpatialRaycastInfoANDROID = struct(Module.OPENXR, "XrSpatialRaycastInfoANDROID") {
+    Expression("#TYPE_SPATIAL_RAYCAST_INFO_ANDROID")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("space")
+    XrTime("time")
+    XrVector3f("origin")
+    XrVector3f("direction")
+    float("maxDistance")
+}
+
+val XrSpatialComponentRaycastResultListANDROID = struct(Module.OPENXR, "XrSpatialComponentRaycastResultListANDROID") {
+    Expression("#TYPE_SPATIAL_COMPONENT_RAYCAST_RESULT_LIST_ANDROID")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("raycastResults")..uint32_t("raycastResultCount")
+    XrSpatialRaycastResultDataANDROID.p("raycastResults")
+}
+
+val XrSpatialRaycastSnapshotCreateInfoANDROID = struct(Module.OPENXR, "XrSpatialRaycastSnapshotCreateInfoANDROID") {
+    Expression("#TYPE_SPATIAL_RAYCAST_SNAPSHOT_CREATE_INFO_ANDROID")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("componentTypes", optional = true)..uint32_t("componentTypeCount")
+    nullable..XrSpatialComponentTypeEXT.const.p("componentTypes")
+    XrSpatialRaycastInfoANDROID.const.p("raycastInfo")
+}
+
+val XrSpatialAnchorParentANDROID = struct(Module.OPENXR, "XrSpatialAnchorParentANDROID") {
+    Expression("#TYPE_SPATIAL_ANCHOR_PARENT_ANDROID")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpatialEntityIdEXT("parentId")
+}
+
+val XrSpatialDiscoveryUniqueEntitiesFilterANDROID = struct(Module.OPENXR, "XrSpatialDiscoveryUniqueEntitiesFilterANDROID") {
+    Expression("#TYPE_SPATIAL_DISCOVERY_UNIQUE_ENTITIES_FILTER_ANDROID")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+}
+
+val XrSpatialComponentSubsumedByListANDROID = struct(Module.OPENXR, "XrSpatialComponentSubsumedByListANDROID") {
+    Expression("#TYPE_SPATIAL_COMPONENT_SUBSUMED_BY_LIST_ANDROID")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("subsumedUniqueIds")..uint32_t("subsumedUniqueIdCount")
+    XrSpatialEntityIdEXT.p("subsumedUniqueIds")
+}
+
+val XrSpatialAnchorSpaceFromIdCreateInfoANDROID = struct(Module.OPENXR, "XrSpatialAnchorSpaceFromIdCreateInfoANDROID") {
+    Expression("#TYPE_SPATIAL_ANCHOR_SPACE_FROM_ID_CREATE_INFO_ANDROID")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpatialEntityIdEXT("anchorEntityId")
+}
+
+val XrBatteryStateDisplayEXT = struct(Module.OPENXR, "XrBatteryStateDisplayEXT") {
+    Expression("#TYPE_BATTERY_STATE_DISPLAY_EXT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrBatteryStateDisplayStateFlagsEXT("stateFlags")
+    float("batteryLevel")
+}
+
 val XrLoaderInitPropertyValueEXT = struct(Module.OPENXR, "XrLoaderInitPropertyValueEXT") {
     charUTF8.const.p("name")
     charUTF8.const.p("value")
@@ -4566,4 +5036,11 @@ val XrLoaderInitInfoPropertiesEXT = struct(Module.OPENXR, "XrLoaderInitInfoPrope
     nullable..opaque_const_p("next")
     AutoSize("propertyValues")..uint32_t("propertyValueCount")
     XrLoaderInitPropertyValueEXT.const.p("propertyValues")
+}
+
+val XrEventDataViewConfigurationViewsChangedEXT = struct(Module.OPENXR, "XrEventDataViewConfigurationViewsChangedEXT", mutable = false, parentStruct = XrEventDataBaseHeader) {
+    Expression("#TYPE_EVENT_DATA_VIEW_CONFIGURATION_VIEWS_CHANGED_EXT")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrSystemId("systemId")
+    XrViewConfigurationType("viewConfigurationType")
 }

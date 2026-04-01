@@ -99,8 +99,12 @@ public class XrSpatialDiscoverySnapshotCreateInfoEXT extends Struct<XrSpatialDis
     public XrSpatialDiscoverySnapshotCreateInfoEXT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrSpatialDiscoveryPersistenceUuidFilterEXT} value to the {@code next} chain. */
     public XrSpatialDiscoverySnapshotCreateInfoEXT next(XrSpatialDiscoveryPersistenceUuidFilterEXT value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrSpatialDiscoveryUniqueEntitiesFilterANDROID} value to the {@code next} chain. */
+    public XrSpatialDiscoverySnapshotCreateInfoEXT next(XrSpatialDiscoveryUniqueEntitiesFilterANDROID value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSpatialFilterTrackingStateEXT} value to the {@code next} chain. */
     public XrSpatialDiscoverySnapshotCreateInfoEXT next(XrSpatialFilterTrackingStateEXT value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrSpatialRaycastInfoANDROID} value to the {@code next} chain. */
+    public XrSpatialDiscoverySnapshotCreateInfoEXT next(XrSpatialRaycastInfoANDROID value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@code componentTypeCount} field. */
     public XrSpatialDiscoverySnapshotCreateInfoEXT componentTypeCount(@NativeType("uint32_t") int value) { ncomponentTypeCount(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@code componentTypes} field. */
@@ -326,8 +330,12 @@ public class XrSpatialDiscoverySnapshotCreateInfoEXT extends Struct<XrSpatialDis
         public XrSpatialDiscoverySnapshotCreateInfoEXT.Buffer next(@NativeType("void const *") long value) { XrSpatialDiscoverySnapshotCreateInfoEXT.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrSpatialDiscoveryPersistenceUuidFilterEXT} value to the {@code next} chain. */
         public XrSpatialDiscoverySnapshotCreateInfoEXT.Buffer next(XrSpatialDiscoveryPersistenceUuidFilterEXT value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrSpatialDiscoveryUniqueEntitiesFilterANDROID} value to the {@code next} chain. */
+        public XrSpatialDiscoverySnapshotCreateInfoEXT.Buffer next(XrSpatialDiscoveryUniqueEntitiesFilterANDROID value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSpatialFilterTrackingStateEXT} value to the {@code next} chain. */
         public XrSpatialDiscoverySnapshotCreateInfoEXT.Buffer next(XrSpatialFilterTrackingStateEXT value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrSpatialRaycastInfoANDROID} value to the {@code next} chain. */
+        public XrSpatialDiscoverySnapshotCreateInfoEXT.Buffer next(XrSpatialRaycastInfoANDROID value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@code componentTypeCount} field. */
         public XrSpatialDiscoverySnapshotCreateInfoEXT.Buffer componentTypeCount(@NativeType("uint32_t") int value) { XrSpatialDiscoverySnapshotCreateInfoEXT.ncomponentTypeCount(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@code componentTypes} field. */

@@ -52,6 +52,7 @@ fun templateCustomization() {
     generateDispatchableHandle(XrDeviceAnchorPersistenceANDROID, XrSession)
     generateDispatchableHandle(XrEnvironmentDepthProviderMETA, XrSession)
     generateDispatchableHandle(XrEnvironmentDepthSwapchainMETA, XrEnvironmentDepthProviderMETA)
+    generateDispatchableHandle(XrEnvironmentRaycasterMETA, XrSession)
     generateDispatchableHandle(XrEyeTrackerFB, XrSession)
     generateDispatchableHandle(XrExportedLocalizationMapML, XrSession)
     generateDispatchableHandle(XrFaceTrackerANDROID, XrSession)
@@ -67,20 +68,28 @@ fun templateCustomization() {
     generateDispatchableHandle(XrPassthroughColorLutMETA, XrPassthroughFB)
     generateDispatchableHandle(XrPassthroughFB, XrSession)
     generateDispatchableHandle(XrPassthroughHTC, XrSession)
+    generateDispatchableHandle(XrPassthroughLayerANDROID, XrSession)
     generateDispatchableHandle(XrPassthroughLayerFB, XrSession)
     generateDispatchableHandle(XrPlaneDetectorEXT, XrSession)
     generateDispatchableHandle(XrRenderModelEXT, XrSession)
     generateDispatchableHandle(XrRenderModelAssetEXT, XrSession)
+    generateDispatchableHandle(XrSceneMeshingTrackerANDROID, XrSession)
+    generateDispatchableHandle(XrSceneMeshSnapshotANDROID, XrSceneMeshingTrackerANDROID)
     generateDispatchableHandle(XrSceneMSFT, XrSceneObserverMSFT)
     generateDispatchableHandle(XrSceneObserverMSFT, XrSession)
     generateDispatchableHandle(XrSenseDataProviderBD, XrSession)
     generateDispatchableHandle(XrSenseDataSnapshotBD, XrSenseDataProviderBD)
     generateDispatchableHandle(XrSession, XrInstance)
+    generateDispatchableHandle(XrSoundFieldBD, XrSpatialAudioRendererBD)
+    generateDispatchableHandle(XrSoundObjectBD, XrSpatialAudioRendererBD)
+    generateDispatchableHandle(XrSoundObstacleBD, XrSpatialAudioRendererBD)
+    generateDispatchableHandle(XrSoundObstacleMaterialBD, XrSpatialAudioRendererBD)
     generateDispatchableHandle(XrSpace, XrSession)
     generateDispatchableHandle(XrSpaceUserFB, XrSession)
     generateDispatchableHandle(XrSpatialAnchorMSFT, XrSession)
     generateDispatchableHandle(XrSpatialAnchorStoreConnectionMSFT, XrSession)
     generateDispatchableHandle(XrSpatialAnchorsStorageML, XrSession)
+    generateDispatchableHandle(XrSpatialAudioRendererBD, XrSession)
     generateDispatchableHandle(XrSpatialContextEXT, XrSession)
     generateDispatchableHandle(XrSpatialEntityEXT, XrSpatialContextEXT)
     generateDispatchableHandle(XrSpatialGraphNodeBindingMSFT, XrSession)
@@ -95,7 +104,7 @@ fun templateCustomization() {
 
     XR10.apply {
         LongConstant(
-            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 1, 57)"
+            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 1, 58)"
         )
 
         LongConstant(

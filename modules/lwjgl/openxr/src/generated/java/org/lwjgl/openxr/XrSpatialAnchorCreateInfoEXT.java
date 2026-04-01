@@ -104,6 +104,8 @@ public class XrSpatialAnchorCreateInfoEXT extends Struct<XrSpatialAnchorCreateIn
     public XrSpatialAnchorCreateInfoEXT type$Default() { return type(EXTSpatialAnchor.XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@code next} field. */
     public XrSpatialAnchorCreateInfoEXT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrSpatialAnchorParentANDROID} value to the {@code next} chain. */
+    public XrSpatialAnchorCreateInfoEXT next(XrSpatialAnchorParentANDROID value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@code baseSpace} field. */
     public XrSpatialAnchorCreateInfoEXT baseSpace(XrSpace value) { nbaseSpace(address(), value); return this; }
     /** Sets the specified value to the {@code time} field. */
@@ -348,6 +350,8 @@ public class XrSpatialAnchorCreateInfoEXT extends Struct<XrSpatialAnchorCreateIn
         public XrSpatialAnchorCreateInfoEXT.Buffer type$Default() { return type(EXTSpatialAnchor.XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@code next} field. */
         public XrSpatialAnchorCreateInfoEXT.Buffer next(@NativeType("void const *") long value) { XrSpatialAnchorCreateInfoEXT.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrSpatialAnchorParentANDROID} value to the {@code next} chain. */
+        public XrSpatialAnchorCreateInfoEXT.Buffer next(XrSpatialAnchorParentANDROID value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@code baseSpace} field. */
         public XrSpatialAnchorCreateInfoEXT.Buffer baseSpace(XrSpace value) { XrSpatialAnchorCreateInfoEXT.nbaseSpace(address(), value); return this; }
         /** Sets the specified value to the {@code time} field. */

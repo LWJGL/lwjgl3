@@ -90,6 +90,8 @@ public class XrInteractionProfileState extends Struct<XrInteractionProfileState>
     public XrInteractionProfileState type$Default() { return type(XR10.XR_TYPE_INTERACTION_PROFILE_STATE); }
     /** Sets the specified value to the {@code next} field. */
     public XrInteractionProfileState next(@NativeType("void *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrBatteryStateDisplayEXT} value to the {@code next} chain. */
+    public XrInteractionProfileState next(XrBatteryStateDisplayEXT value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@code interactionProfile} field. */
     public XrInteractionProfileState interactionProfile(@NativeType("XrPath") long value) { ninteractionProfile(address(), value); return this; }
 
@@ -302,6 +304,8 @@ public class XrInteractionProfileState extends Struct<XrInteractionProfileState>
         public XrInteractionProfileState.Buffer type$Default() { return type(XR10.XR_TYPE_INTERACTION_PROFILE_STATE); }
         /** Sets the specified value to the {@code next} field. */
         public XrInteractionProfileState.Buffer next(@NativeType("void *") long value) { XrInteractionProfileState.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrBatteryStateDisplayEXT} value to the {@code next} chain. */
+        public XrInteractionProfileState.Buffer next(XrBatteryStateDisplayEXT value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@code interactionProfile} field. */
         public XrInteractionProfileState.Buffer interactionProfile(@NativeType("XrPath") long value) { XrInteractionProfileState.ninteractionProfile(address(), value); return this; }
 
