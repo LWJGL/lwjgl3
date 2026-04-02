@@ -255,9 +255,9 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 
     <presetdef name="lwjgl.javac25">
         <javac sourcepath="" debug="yes" encoding="UTF-8" includeantruntime="false">
-            <compilerarg line="--release ${jdk.version} --enable-preview"/>
+            <compilerarg line="--release 25"/>
             <compilerarg line="-proc:full"/>
-            <compilerarg value="-Xlint:all,-restricted,-preview"/>
+            <compilerarg value="-Xlint:all,-restricted"/>
             <compilerarg value="-XDignore.symbol.file"/>
         </javac>
     </presetdef>
