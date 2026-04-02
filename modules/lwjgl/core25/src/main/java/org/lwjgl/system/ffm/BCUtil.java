@@ -4,6 +4,8 @@
  */
 package org.lwjgl.system.ffm;
 
+import org.lwjgl.system.*;
+
 import java.lang.classfile.*;
 import java.lang.constant.*;
 import java.lang.foreign.*;
@@ -20,6 +22,8 @@ import static org.lwjgl.system.ffm.BCDescriptors.*;
 final class BCUtil {
 
     static final int JAVA_VERSION;
+    static final boolean UNSAFE_BACKEND;
+
     static {
         var javaVersion = System.getProperty("java.version");
 
@@ -32,6 +36,14 @@ final class BCUtil {
         }
 
         JAVA_VERSION = Integer.parseInt(matcher.group(1));
+
+        var unsafeBackend = false;
+        try {
+            MemoryUtil.class.getDeclaredMethod("memGetIntUnaligned", long.class);
+        } catch (NoSuchMethodException _) {
+            unsafeBackend = true;
+        }
+        UNSAFE_BACKEND = unsafeBackend;
     }
 
     static final long NATIVE_THRESHOLD_FILL = powerOfPropertyOr("fill", 5);

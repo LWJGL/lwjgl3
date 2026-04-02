@@ -836,7 +836,7 @@ final class BCGroup {
     }
 
     private static CodeBuilder buildAccessor(CodeBuilder cb, ValueLayout naturalLayout, MemoryLayout layout, String accessor, MethodTypeDesc type) {
-        return cb.invokestatic(CD_MemoryUtil, naturalLayout.byteAlignment() <= layout.byteAlignment() ? accessor : accessor + "Unaligned", type);
+        return cb.invokestatic(CD_MemoryUtil, UNSAFE_BACKEND || naturalLayout.byteAlignment() <= layout.byteAlignment() ? accessor : accessor + "Unaligned", type);
     }
 
     private static void buildNullPointerCheck(CodeBuilder cb) {
