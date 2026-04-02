@@ -20,7 +20,7 @@ public class MeshOptimizer {
 
     static { LibMeshOptimizer.initialize(); }
 
-    public static final int MESHOPTIMIZER_VERSION = 1000;
+    public static final int MESHOPTIMIZER_VERSION = 1010;
 
     public static final int
         meshopt_EncodeExpSeparate        = 0,
@@ -29,16 +29,18 @@ public class MeshOptimizer {
         meshopt_EncodeExpClamped         = 3;
 
     public static final int
-        meshopt_SimplifyLockBorder    = 1 << 0,
-        meshopt_SimplifySparse        = 1 << 1,
-        meshopt_SimplifyErrorAbsolute = 1 << 2,
-        meshopt_SimplifyPrune         = 1 << 3,
-        meshopt_SimplifyRegularize    = 1 << 4,
-        meshopt_SimplifyPermissive    = 1 << 5;
+        meshopt_SimplifyLockBorder      = 1 << 0,
+        meshopt_SimplifySparse          = 1 << 1,
+        meshopt_SimplifyErrorAbsolute   = 1 << 2,
+        meshopt_SimplifyPrune           = 1 << 3,
+        meshopt_SimplifyRegularize      = 1 << 4,
+        meshopt_SimplifyPermissive      = 1 << 5,
+        meshopt_SimplifyRegularizeLight = 1 << 6;
 
     public static final int
-        meshopt_SimplifyVertex_Lock    = 1 << 0,
-        meshopt_SimplifyVertex_Protect = 1 << 1;
+        meshopt_SimplifyVertex_Lock     = 1 << 0,
+        meshopt_SimplifyVertex_Protect  = 1 << 1,
+        meshopt_SimplifyVertex_Priority = 1 << 2;
 
     protected MeshOptimizer() {
         throw new UnsupportedOperationException();
@@ -356,6 +358,47 @@ public class MeshOptimizer {
             check(destination, index_count * index_size);
         }
         return nmeshopt_decodeIndexSequence(memAddress(destination), index_count, index_size, memAddress(buffer), buffer.remaining());
+    }
+
+    // --- [ meshopt_encodeMeshlet ] ---
+
+    /** {@code size_t meshopt_encodeMeshlet(unsigned char * buffer, size_t buffer_size, unsigned int const * vertices, size_t vertex_count, unsigned char const * triangles, size_t triangle_count)} */
+    public static native long nmeshopt_encodeMeshlet(long buffer, long buffer_size, long vertices, long vertex_count, long triangles, long triangle_count);
+
+    /** {@code size_t meshopt_encodeMeshlet(unsigned char * buffer, size_t buffer_size, unsigned int const * vertices, size_t vertex_count, unsigned char const * triangles, size_t triangle_count)} */
+    @NativeType("size_t")
+    public static long meshopt_encodeMeshlet(@NativeType("unsigned char *") ByteBuffer buffer, @NativeType("unsigned int const *") @Nullable IntBuffer vertices, @NativeType("unsigned char const *") ByteBuffer triangles) {
+        return nmeshopt_encodeMeshlet(memAddress(buffer), buffer.remaining(), memAddressSafe(vertices), remainingSafe(vertices), memAddress(triangles), triangles.remaining());
+    }
+
+    // --- [ meshopt_encodeMeshletBound ] ---
+
+    /** {@code size_t meshopt_encodeMeshletBound(size_t max_vertices, size_t max_triangles)} */
+    @NativeType("size_t")
+    public static native long meshopt_encodeMeshletBound(@NativeType("size_t") long max_vertices, @NativeType("size_t") long max_triangles);
+
+    // --- [ meshopt_decodeMeshlet ] ---
+
+    /** {@code int meshopt_decodeMeshlet(void * vertices, size_t vertex_count, size_t vertex_size, void * triangles, size_t triangle_count, size_t triangle_size, unsigned char const * buffer, size_t buffer_size)} */
+    public static native int nmeshopt_decodeMeshlet(long vertices, long vertex_count, long vertex_size, long triangles, long triangle_count, long triangle_size, long buffer, long buffer_size);
+
+    /** {@code int meshopt_decodeMeshlet(void * vertices, size_t vertex_count, size_t vertex_size, void * triangles, size_t triangle_count, size_t triangle_size, unsigned char const * buffer, size_t buffer_size)} */
+    public static int meshopt_decodeMeshlet(@NativeType("void *") @Nullable ByteBuffer vertices, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_size, @NativeType("void *") ByteBuffer triangles, @NativeType("size_t") long triangle_count, @NativeType("size_t") long triangle_size, @NativeType("unsigned char const *") ByteBuffer buffer) {
+        if (CHECKS) {
+            checkSafe(vertices, vertex_count * vertex_size);
+            check(triangles, triangle_count * triangle_size);
+        }
+        return nmeshopt_decodeMeshlet(memAddressSafe(vertices), vertex_count, vertex_size, memAddress(triangles), triangle_count, triangle_size, memAddress(buffer), buffer.remaining());
+    }
+
+    // --- [ meshopt_decodeMeshletRaw ] ---
+
+    /** {@code int meshopt_decodeMeshletRaw(unsigned int * vertices, size_t vertex_count, unsigned int * triangles, size_t triangle_count, unsigned char const * buffer, size_t buffer_size)} */
+    public static native int nmeshopt_decodeMeshletRaw(long vertices, long vertex_count, long triangles, long triangle_count, long buffer, long buffer_size);
+
+    /** {@code int meshopt_decodeMeshletRaw(unsigned int * vertices, size_t vertex_count, unsigned int * triangles, size_t triangle_count, unsigned char const * buffer, size_t buffer_size)} */
+    public static int meshopt_decodeMeshletRaw(@NativeType("unsigned int *") @Nullable IntBuffer vertices, @NativeType("unsigned int *") IntBuffer triangles, @NativeType("unsigned char const *") ByteBuffer buffer) {
+        return nmeshopt_decodeMeshletRaw(memAddressSafe(vertices), remainingSafe(vertices), memAddress(triangles), triangles.remaining(), memAddress(buffer), buffer.remaining());
     }
 
     // --- [ meshopt_encodeVertexBuffer ] ---
@@ -875,6 +918,16 @@ public class MeshOptimizer {
         nmeshopt_optimizeMeshlet(memAddress(meshlet_vertices), memAddress(meshlet_triangles), Integer.toUnsignedLong(meshlet_triangles.remaining()) / 3, meshlet_vertices.remaining());
     }
 
+    // --- [ meshopt_optimizeMeshletLevel ] ---
+
+    /** {@code void meshopt_optimizeMeshletLevel(unsigned int * meshlet_vertices, size_t vertex_count, unsigned char * meshlet_triangles, size_t triangle_count, int level)} */
+    public static native void nmeshopt_optimizeMeshletLevel(long meshlet_vertices, long vertex_count, long meshlet_triangles, long triangle_count, int level);
+
+    /** {@code void meshopt_optimizeMeshletLevel(unsigned int * meshlet_vertices, size_t vertex_count, unsigned char * meshlet_triangles, size_t triangle_count, int level)} */
+    public static void meshopt_optimizeMeshletLevel(@NativeType("unsigned int *") IntBuffer meshlet_vertices, @NativeType("unsigned char *") ByteBuffer meshlet_triangles, int level) {
+        nmeshopt_optimizeMeshletLevel(memAddress(meshlet_vertices), meshlet_vertices.remaining(), memAddress(meshlet_triangles), Integer.toUnsignedLong(meshlet_triangles.remaining()) / 3, level);
+    }
+
     // --- [ meshopt_computeClusterBounds ] ---
 
     /** {@code struct meshopt_Bounds meshopt_computeClusterBounds(unsigned int const * indices, size_t index_count, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride)} */
@@ -919,6 +972,20 @@ public class MeshOptimizer {
         }
         nmeshopt_computeSphereBounds(memAddress(positions), count, positions_stride, memAddressSafe(radii), radii_stride, __result.address());
         return __result;
+    }
+
+    // --- [ meshopt_extractMeshletIndices ] ---
+
+    /** {@code size_t meshopt_extractMeshletIndices(unsigned int * vertices, unsigned char * triangles, unsigned int const * indices, size_t index_count)} */
+    public static native long nmeshopt_extractMeshletIndices(long vertices, long triangles, long indices, long index_count);
+
+    /** {@code size_t meshopt_extractMeshletIndices(unsigned int * vertices, unsigned char * triangles, unsigned int const * indices, size_t index_count)} */
+    @NativeType("size_t")
+    public static long meshopt_extractMeshletIndices(@NativeType("unsigned int *") IntBuffer vertices, @NativeType("unsigned char *") ByteBuffer triangles, @NativeType("unsigned int const *") IntBuffer indices) {
+        if (CHECKS) {
+            check(triangles, indices.remaining());
+        }
+        return nmeshopt_extractMeshletIndices(memAddress(vertices), memAddress(triangles), memAddress(indices), indices.remaining());
     }
 
     // --- [ meshopt_partitionClusters ] ---
@@ -976,6 +1043,56 @@ public class MeshOptimizer {
             check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
         }
         nmeshopt_spatialClusterPoints(memAddress(destination), memAddress(vertex_positions), vertex_count, vertex_positions_stride, cluster_size);
+    }
+
+    // --- [ meshopt_opacityMapMeasure ] ---
+
+    /** {@code size_t meshopt_opacityMapMeasure(unsigned char * levels, unsigned int * sources, int * omm_indices, unsigned int const * indices, size_t index_count, float const * vertex_uvs, size_t vertex_count, size_t vertex_uvs_stride, unsigned int texture_width, unsigned int texture_height, int max_level, float target_edge)} */
+    public static native long nmeshopt_opacityMapMeasure(long levels, long sources, long omm_indices, long indices, long index_count, long vertex_uvs, long vertex_count, long vertex_uvs_stride, int texture_width, int texture_height, int max_level, float target_edge);
+
+    /** {@code size_t meshopt_opacityMapMeasure(unsigned char * levels, unsigned int * sources, int * omm_indices, unsigned int const * indices, size_t index_count, float const * vertex_uvs, size_t vertex_count, size_t vertex_uvs_stride, unsigned int texture_width, unsigned int texture_height, int max_level, float target_edge)} */
+    @NativeType("size_t")
+    public static long meshopt_opacityMapMeasure(@NativeType("unsigned char *") ByteBuffer levels, @NativeType("unsigned int *") IntBuffer sources, @NativeType("int *") IntBuffer omm_indices, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_uvs, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_uvs_stride, @NativeType("unsigned int") int texture_width, @NativeType("unsigned int") int texture_height, int max_level, float target_edge) {
+        if (CHECKS) {
+            check(vertex_uvs, vertex_count * vertex_uvs_stride);
+        }
+        return nmeshopt_opacityMapMeasure(memAddress(levels), memAddress(sources), memAddress(omm_indices), memAddress(indices), indices.remaining(), memAddress(vertex_uvs), vertex_count, vertex_uvs_stride, texture_width, texture_height, max_level, target_edge);
+    }
+
+    // --- [ meshopt_opacityMapRasterize ] ---
+
+    /** {@code void meshopt_opacityMapRasterize(unsigned char * result, int level, int states, float const * uv0, float const * uv1, float const * uv2, unsigned char const * texture_data, size_t texture_stride, size_t texture_pitch, unsigned int texture_width, unsigned int texture_height)} */
+    public static native void nmeshopt_opacityMapRasterize(long result, int level, int states, long uv0, long uv1, long uv2, long texture_data, long texture_stride, long texture_pitch, int texture_width, int texture_height);
+
+    /** {@code void meshopt_opacityMapRasterize(unsigned char * result, int level, int states, float const * uv0, float const * uv1, float const * uv2, unsigned char const * texture_data, size_t texture_stride, size_t texture_pitch, unsigned int texture_width, unsigned int texture_height)} */
+    public static void meshopt_opacityMapRasterize(@NativeType("unsigned char *") ByteBuffer result, int level, int states, @NativeType("float const *") FloatBuffer uv0, @NativeType("float const *") FloatBuffer uv1, @NativeType("float const *") FloatBuffer uv2, @NativeType("unsigned char const *") ByteBuffer texture_data, @NativeType("size_t") long texture_stride, @NativeType("size_t") long texture_pitch, @NativeType("unsigned int") int texture_width, @NativeType("unsigned int") int texture_height) {
+        if (CHECKS) {
+            check(uv0, 2);
+            check(uv1, 2);
+            check(uv2, 2);
+            check(texture_data, texture_pitch * texture_height);
+        }
+        nmeshopt_opacityMapRasterize(memAddress(result), level, states, memAddress(uv0), memAddress(uv1), memAddress(uv2), memAddress(texture_data), texture_stride, texture_pitch, texture_width, texture_height);
+    }
+
+    // --- [ meshopt_opacityMapEntrySize ] ---
+
+    /** {@code size_t meshopt_opacityMapEntrySize(int level, int states)} */
+    @NativeType("size_t")
+    public static native long meshopt_opacityMapEntrySize(int level, int states);
+
+    // --- [ meshopt_opacityMapCompact ] ---
+
+    /** {@code size_t meshopt_opacityMapCompact(unsigned char * data, size_t data_size, unsigned char * levels, unsigned int * offsets, size_t omm_count, int * omm_indices, size_t triangle_count, int states)} */
+    public static native long nmeshopt_opacityMapCompact(long data, long data_size, long levels, long offsets, long omm_count, long omm_indices, long triangle_count, int states);
+
+    /** {@code size_t meshopt_opacityMapCompact(unsigned char * data, size_t data_size, unsigned char * levels, unsigned int * offsets, size_t omm_count, int * omm_indices, size_t triangle_count, int states)} */
+    @NativeType("size_t")
+    public static long meshopt_opacityMapCompact(@NativeType("unsigned char *") ByteBuffer data, @NativeType("unsigned char *") ByteBuffer levels, @NativeType("unsigned int *") IntBuffer offsets, @NativeType("int *") IntBuffer omm_indices, int states) {
+        if (CHECKS) {
+            check(offsets, levels.remaining());
+        }
+        return nmeshopt_opacityMapCompact(memAddress(data), data.remaining(), memAddress(levels), memAddress(offsets), levels.remaining(), memAddress(omm_indices), omm_indices.remaining(), states);
     }
 
     // --- [ meshopt_quantizeUnorm_ref ] ---
