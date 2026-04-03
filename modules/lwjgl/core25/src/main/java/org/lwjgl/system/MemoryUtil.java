@@ -2397,40 +2397,88 @@ public final class MemoryUtil {
         -------------------------------------
         ------------------------------------- */
 
-    public static boolean memGetBoolean(MemorySegment segment, long offset)                 { return memGetBoolean(segment.address() + offset); }
-    public static byte memGetByte(MemorySegment segment, long offset)                       { return memGetByte(segment.address() + offset); }
-    public static short memGetShort(MemorySegment segment, long offset)                     { return memGetShort(segment.address() + offset); }
-    public static int memGetInt(MemorySegment segment, long offset)                         { return memGetInt(segment.address() + offset); }
-    public static long memGetLong(MemorySegment segment, long offset)                       { return memGetLong(segment.address() + offset); }
-    public static float memGetFloat(MemorySegment segment, long offset)                     { return memGetFloat(segment.address() + offset); }
-    public static double memGetDouble(MemorySegment segment, long offset)                   { return memGetDouble(segment.address() + offset); }
-    public static long memGetCLong(MemorySegment segment, long offset)                      { return memGetCLong(segment.address() + offset); }
-    public static long memGetAddress(MemorySegment segment, long offset)                    { return memGetAddress(segment.address() + offset); }
+    public static boolean memGetBoolean(MemorySegment segment, long offset)           { return segment.get(ValueLayout.JAVA_BYTE, offset) != 0; }
+    public static byte memGetByte(MemorySegment segment, long offset)                 { return segment.get(ValueLayout.JAVA_BYTE, offset); }
+    public static short memGetShort(MemorySegment segment, long offset)               { return segment.get(JAVA_SHORT, offset); }
+    public static int memGetInt(MemorySegment segment, long offset)                   { return segment.get(JAVA_INT, offset); }
+    public static long memGetLong(MemorySegment segment, long offset)                 { return segment.get(JAVA_LONG, offset); }
+    public static float memGetFloat(MemorySegment segment, long offset)               { return segment.get(JAVA_FLOAT, offset); }
+    public static double memGetDouble(MemorySegment segment, long offset)             { return segment.get(JAVA_DOUBLE, offset); }
 
-    public static void memPutByte(MemorySegment segment, long offset, byte value)           { memPutByte(segment.address() + offset, value); }
-    public static void memPutShort(MemorySegment segment, long offset, short value)         { memPutShort(segment.address() + offset, value); }
-    public static void memPutInt(MemorySegment segment, long offset, int value)             { memPutInt(segment.address() + offset, value); }
-    public static void memPutLong(MemorySegment segment, long offset, long value)           { memPutLong(segment.address() + offset, value); }
-    public static void memPutFloat(MemorySegment segment, long offset, float value)         { memPutFloat(segment.address() + offset, value); }
-    public static void memPutDouble(MemorySegment segment, long offset, double value)       { memPutDouble(segment.address() + offset, value); }
-    public static void memPutCLong(MemorySegment segment, long offset, long value)          { memPutCLong(segment.address() + offset, value); }
-    public static void memPutAddress(MemorySegment segment, long offset, long value)        { memPutAddress(segment.address() + offset, value); }
+    public static void memPutByte(MemorySegment segment, long offset, byte value)     { segment.set(ValueLayout.JAVA_BYTE, offset, value); }
+    public static void memPutShort(MemorySegment segment, long offset, short value)   { segment.set(JAVA_SHORT, offset, value); }
+    public static void memPutInt(MemorySegment segment, long offset, int value)       { segment.set(JAVA_INT, offset, value); }
+    public static void memPutLong(MemorySegment segment, long offset, long value)     { segment.set(JAVA_LONG, offset, value); }
+    public static void memPutFloat(MemorySegment segment, long offset, float value)   { segment.set(JAVA_FLOAT, offset, value); }
+    public static void memPutDouble(MemorySegment segment, long offset, double value) { segment.set(JAVA_DOUBLE, offset, value); }
 
-    public static short memGetShortAtIndex(MemorySegment segment, long index)               { return memGetShort(segment.address() + (index << 1)); }
-    public static int memGetIntAtIndex(MemorySegment segment, long index)                   { return memGetInt(segment.address() + (index << 2)); }
-    public static long memGetLongAtIndex(MemorySegment segment, long index)                 { return memGetLong(segment.address() + (index << 3)); }
-    public static float memGetFloatAtIndex(MemorySegment segment, long index)               { return memGetFloat(segment.address() + (index << 2)); }
-    public static double memGetDoubleAtIndex(MemorySegment segment, long index)             { return memGetDouble(segment.address() + (index << 3)); }
-    public static long memGetCLongAtIndex(MemorySegment segment, long index)                { return memGetCLong(segment.address() + (index << CLONG_SHIFT)); }
-    public static long memGetAddressAtIndex(MemorySegment segment, long index)              { return memGetAddress(segment.address() + (index << POINTER_SHIFT)); }
+    public static long memGetCLong(MemorySegment segment, long offset) {
+        return CLONG_SIZE == 8
+            ? segment.get(JAVA_LONG, offset)
+            : segment.get(JAVA_INT, offset);
+    }
+    public static long memGetAddress(MemorySegment segment, long offset) {
+        //return segment.get(ADDRESS, offset).address();
+        return BITS64
+            ? segment.get(JAVA_LONG, offset)
+            : segment.get(JAVA_INT, offset) & 0xFFFF_FFFFL;
+    }
 
-    public static void memPutShortAtIndex(MemorySegment segment, long index, short value)   { memPutShort(segment.address() + (index << 1), value); }
-    public static void memPutIntAtIndex(MemorySegment segment, long index, int value)       { memPutInt(segment.address() + (index << 2), value); }
-    public static void memPutLongAtIndex(MemorySegment segment, long index, long value)     { memPutLong(segment.address() + (index << 3), value); }
-    public static void memPutFloatAtIndex(MemorySegment segment, long index, float value)   { memPutFloat(segment.address() + (index << 2), value); }
-    public static void memPutDoubleAtIndex(MemorySegment segment, long index, double value) { memPutDouble(segment.address() + (index << 3), value); }
-    public static void memPutCLongAtIndex(MemorySegment segment, long index, long value)    { memPutCLong(segment.address() + (index << CLONG_SHIFT), value); }
-    public static void memPutAddressAtIndex(MemorySegment segment, long index, long value)  { memPutAddress(segment.address() + (index << POINTER_SHIFT), value); }
+    public static void memPutCLong(MemorySegment segment, long offset, long value) {
+        if (CLONG_SIZE == 8) {
+            segment.set(JAVA_LONG, offset, value);
+        } else {
+            segment.set(JAVA_INT, offset, (int)value);
+        }
+    }
+    public static void memPutAddress(MemorySegment segment, long offset, long value) {
+        //segment.set(ADDRESS, offset, MemorySegment.ofAddress(value));
+        if (BITS64) {
+            segment.set(JAVA_LONG, offset, value);
+        } else {
+            segment.set(JAVA_INT, offset, (int)value);
+        }
+    }
+
+    public static short memGetShortAtIndex(MemorySegment segment, long index)               { return segment.getAtIndex(JAVA_SHORT, index); }
+    public static int memGetIntAtIndex(MemorySegment segment, long index)                   { return segment.getAtIndex(JAVA_INT, index); }
+    public static long memGetLongAtIndex(MemorySegment segment, long index)                 { return segment.getAtIndex(JAVA_LONG, index); }
+    public static float memGetFloatAtIndex(MemorySegment segment, long index)               { return segment.getAtIndex(JAVA_FLOAT, index); }
+    public static double memGetDoubleAtIndex(MemorySegment segment, long index)             { return segment.getAtIndex(JAVA_DOUBLE, index); }
+
+    public static void memPutShortAtIndex(MemorySegment segment, long index, short value)   { segment.setAtIndex(JAVA_SHORT, index, value); }
+    public static void memPutIntAtIndex(MemorySegment segment, long index, int value)       { segment.setAtIndex(JAVA_INT, index, value); }
+    public static void memPutLongAtIndex(MemorySegment segment, long index, long value)     { segment.setAtIndex(JAVA_LONG, index, value); }
+    public static void memPutFloatAtIndex(MemorySegment segment, long index, float value)   { segment.setAtIndex(JAVA_FLOAT, index, value); }
+    public static void memPutDoubleAtIndex(MemorySegment segment, long index, double value) { segment.setAtIndex(JAVA_DOUBLE, index, value); }
+
+    public static long memGetCLongAtIndex(MemorySegment segment, long index) {
+        return CLONG_SIZE == 8
+            ? segment.getAtIndex(JAVA_LONG, index)
+            : segment.getAtIndex(JAVA_INT, index);
+    }
+    public static long memGetAddressAtIndex(MemorySegment segment, long index) {
+        //return segment.getAtIndex(ADDRESS, index).address();
+        return BITS64
+            ? segment.getAtIndex(JAVA_LONG, index)
+            : segment.getAtIndex(JAVA_INT, index) & 0xFFFF_FFFFL;
+    }
+
+    public static void memPutCLongAtIndex(MemorySegment segment, long index, long value) {
+        if (CLONG_SIZE == 8) {
+            segment.setAtIndex(JAVA_LONG, index, value);
+        } else {
+            segment.setAtIndex(JAVA_INT, index, (int)value);
+        }
+    }
+    public static void memPutAddressAtIndex(MemorySegment segment, long index, long value) {
+        //segment.setAtIndex(ADDRESS, index, MemorySegment.ofAddress(value));
+        if (BITS64) {
+            segment.setAtIndex(JAVA_LONG, index, value);
+        } else {
+            segment.setAtIndex(JAVA_INT, index, (int)value);
+        }
+    }
 
     /*  -------------------------------------
         -------------------------------------
