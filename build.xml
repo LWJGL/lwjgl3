@@ -825,7 +825,7 @@
         </do-compile-tests>
 
         <do-compile-tests if:set="core.java25">
-            <compilerarg line="--release ${jdk.version} --enable-preview"/>
+            <compilerarg line="--release 25"/>
             <src path="modules/samples/src/test/java25"/>
         </do-compile-tests>
     </target>
