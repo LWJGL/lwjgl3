@@ -10,7 +10,6 @@ import org.lwjgl.system.MemoryManage.*;
 import org.lwjgl.system.MemoryUtil.MemoryAllocationReport.*;
 
 import java.lang.foreign.*;
-import java.lang.invoke.*;
 import java.nio.*;
 import java.nio.charset.*;
 
@@ -2302,92 +2301,104 @@ public final class MemoryUtil {
     private static final ValueLayout.OfDouble JAVA_DOUBLE = DEBUG ? ValueLayout.JAVA_DOUBLE : ValueLayout.JAVA_DOUBLE_UNALIGNED;
     private static final AddressLayout        ADDRESS     = DEBUG ? ValueLayout.ADDRESS : ValueLayout.ADDRESS_UNALIGNED;
 
-    public static boolean memGetBoolean(long ptr)           { return MemorySegment.ofAddress(ptr).reinterpret(1L).get(ValueLayout.JAVA_BYTE, 0L) != 0; }
-    public static byte memGetByte(long ptr)                 { return MemorySegment.ofAddress(ptr).reinterpret(1L).get(ValueLayout.JAVA_BYTE, 0L); }
-    public static short memGetShort(long ptr)               { return MemorySegment.ofAddress(ptr).reinterpret(2L).get(JAVA_SHORT, 0L); }
-    public static int memGetInt(long ptr)                   { return MemorySegment.ofAddress(ptr).reinterpret(4L).get(JAVA_INT, 0L); }
-    public static long memGetLong(long ptr)                 { return MemorySegment.ofAddress(ptr).reinterpret(8L).get(JAVA_LONG, 0L); }
-    public static float memGetFloat(long ptr)               { return MemorySegment.ofAddress(ptr).reinterpret(4L).get(JAVA_FLOAT, 0L); }
-    public static double memGetDouble(long ptr)             { return MemorySegment.ofAddress(ptr).reinterpret(8L).get(JAVA_DOUBLE, 0L); }
+    private static MemorySegment asSegment(long ptr) {
+        return MemorySegment.ofAddress(ptr).reinterpret(8L);
+    }
 
-    public static void memPutByte(long ptr, byte value)     { MemorySegment.ofAddress(ptr).reinterpret(1L).set(ValueLayout.JAVA_BYTE, 0L, value); }
-    public static void memPutShort(long ptr, short value)   { MemorySegment.ofAddress(ptr).reinterpret(2L).set(JAVA_SHORT, 0L, value); }
-    public static void memPutInt(long ptr, int value)       { MemorySegment.ofAddress(ptr).reinterpret(4L).set(JAVA_INT, 0L, value); }
-    public static void memPutLong(long ptr, long value)     { MemorySegment.ofAddress(ptr).reinterpret(8L).set(JAVA_LONG, 0L, value); }
-    public static void memPutFloat(long ptr, float value)   { MemorySegment.ofAddress(ptr).reinterpret(4L).set(JAVA_FLOAT, 0L, value); }
-    public static void memPutDouble(long ptr, double value) { MemorySegment.ofAddress(ptr).reinterpret(8L).set(JAVA_DOUBLE, 0L, value); }
+    public static boolean memGetBoolean(long ptr)           { return asSegment(ptr).get(ValueLayout.JAVA_BYTE, 0L) != 0; }
+    public static byte memGetByte(long ptr)                 { return asSegment(ptr).get(ValueLayout.JAVA_BYTE, 0L); }
+    public static short memGetShort(long ptr)               { return asSegment(ptr).get(JAVA_SHORT, 0L); }
+    public static int memGetInt(long ptr)                   { return asSegment(ptr).get(JAVA_INT, 0L); }
+    public static long memGetLong(long ptr)                 { return asSegment(ptr).get(JAVA_LONG, 0L); }
+    public static float memGetFloat(long ptr)               { return asSegment(ptr).get(JAVA_FLOAT, 0L); }
+    public static double memGetDouble(long ptr)             { return asSegment(ptr).get(JAVA_DOUBLE, 0L); }
+
+    public static void memPutByte(long ptr, byte value)     { asSegment(ptr).set(ValueLayout.JAVA_BYTE, 0L, value); }
+    public static void memPutShort(long ptr, short value)   { asSegment(ptr).set(JAVA_SHORT, 0L, value); }
+
+    public static void memPutInt(long ptr, int value)       { asSegment(ptr).set(JAVA_INT, 0L, value); }
+    public static void memPutLong(long ptr, long value)     { asSegment(ptr).set(JAVA_LONG, 0L, value); }
+    public static void memPutFloat(long ptr, float value)   { asSegment(ptr).set(JAVA_FLOAT, 0L, value); }
+    public static void memPutDouble(long ptr, double value) { asSegment(ptr).set(JAVA_DOUBLE, 0L, value); }
 
     public static long memGetCLong(long ptr) {
+        var segment = asSegment(ptr);
         return CLONG_SIZE == 8
-            ? memGetLong(ptr)
-            : memGetInt(ptr);
+            ? segment.get(JAVA_LONG, 0L)
+            : segment.get(JAVA_INT, 0L);
     }
 
     public static long memGetAddress(long ptr) {
         //return MemorySegment.ofAddress(ptr).reinterpret(ADDRESS.byteSize()).get(ADDRESS, 0L).address();
+        var segment = asSegment(ptr);
         return BITS64
-            ? memGetLong(ptr)
-            : memGetInt(ptr) & 0xFFFF_FFFFL;
+            ? segment.get(JAVA_LONG, 0L)
+            : segment.get(JAVA_INT, 0L) & 0xFFFF_FFFFL;
     }
 
     public static void memPutCLong(long ptr, long value) {
+        var segment = asSegment(ptr);
         if (CLONG_SIZE == 8) {
-            memPutLong(ptr, value);
+            segment.set(JAVA_LONG, 0L, value);
         } else {
-            memPutInt(ptr, (int)value);
+            segment.set(JAVA_INT, 0L, (int)value);
         }
     }
 
     public static void memPutAddress(long ptr, long value) {
-        //MemorySegment.ofAddress(ptr).reinterpret(ADDRESS.byteSize()).set(ADDRESS, 0L, MemorySegment.ofAddress(value));
+        var segment = asSegment(ptr);
         if (BITS64) {
-            memPutLong(ptr, value);
+            segment.set(JAVA_LONG, 0L, value);
         } else {
-            memPutInt(ptr, (int)value);
+            segment.set(JAVA_INT, 0L, (int)value);
         }
     }
 
     // Used internally for packed struct member access
 
-    public static short memGetShortUnaligned(long ptr)               { return MemorySegment.ofAddress(ptr).reinterpret(2L).get(ValueLayout.JAVA_SHORT_UNALIGNED, 0L); }
-    public static int memGetIntUnaligned(long ptr)                   { return MemorySegment.ofAddress(ptr).reinterpret(4L).get(ValueLayout.JAVA_INT_UNALIGNED, 0L); }
-    public static long memGetLongUnaligned(long ptr)                 { return MemorySegment.ofAddress(ptr).reinterpret(8L).get(ValueLayout.JAVA_LONG_UNALIGNED, 0L); }
-    public static float memGetFloatUnaligned(long ptr)               { return MemorySegment.ofAddress(ptr).reinterpret(4L).get(ValueLayout.JAVA_FLOAT_UNALIGNED, 0L); }
-    public static double memGetDoubleUnaligned(long ptr)             { return MemorySegment.ofAddress(ptr).reinterpret(8L).get(ValueLayout.JAVA_DOUBLE_UNALIGNED, 0L); }
+    public static short memGetShortUnaligned(long ptr)               { return asSegment(ptr).get(ValueLayout.JAVA_SHORT_UNALIGNED, 0L); }
+    public static int memGetIntUnaligned(long ptr)                   { return asSegment(ptr).get(ValueLayout.JAVA_INT_UNALIGNED, 0L); }
+    public static long memGetLongUnaligned(long ptr)                 { return asSegment(ptr).get(ValueLayout.JAVA_LONG_UNALIGNED, 0L); }
+    public static float memGetFloatUnaligned(long ptr)               { return asSegment(ptr).get(ValueLayout.JAVA_FLOAT_UNALIGNED, 0L); }
+    public static double memGetDoubleUnaligned(long ptr)             { return asSegment(ptr).get(ValueLayout.JAVA_DOUBLE_UNALIGNED, 0L); }
 
-    public static void memPutShortUnaligned(long ptr, short value)   { MemorySegment.ofAddress(ptr).reinterpret(2L).set(ValueLayout.JAVA_SHORT_UNALIGNED, 0L, value); }
-    public static void memPutIntUnaligned(long ptr, int value)       { MemorySegment.ofAddress(ptr).reinterpret(4L).set(ValueLayout.JAVA_INT_UNALIGNED, 0L, value); }
-    public static void memPutLongUnaligned(long ptr, long value)     { MemorySegment.ofAddress(ptr).reinterpret(8L).set(ValueLayout.JAVA_LONG_UNALIGNED, 0L, value); }
-    public static void memPutFloatUnaligned(long ptr, float value)   { MemorySegment.ofAddress(ptr).reinterpret(4L).set(ValueLayout.JAVA_FLOAT_UNALIGNED, 0L, value); }
-    public static void memPutDoubleUnaligned(long ptr, double value) { MemorySegment.ofAddress(ptr).reinterpret(8L).set(ValueLayout.JAVA_DOUBLE_UNALIGNED, 0L, value); }
+    public static void memPutShortUnaligned(long ptr, short value)   { asSegment(ptr).set(ValueLayout.JAVA_SHORT_UNALIGNED, 0L, value); }
+    public static void memPutIntUnaligned(long ptr, int value)       { asSegment(ptr).set(ValueLayout.JAVA_INT_UNALIGNED, 0L, value); }
+    public static void memPutLongUnaligned(long ptr, long value)     { asSegment(ptr).set(ValueLayout.JAVA_LONG_UNALIGNED, 0L, value); }
+    public static void memPutFloatUnaligned(long ptr, float value)   { asSegment(ptr).set(ValueLayout.JAVA_FLOAT_UNALIGNED, 0L, value); }
+    public static void memPutDoubleUnaligned(long ptr, double value) { asSegment(ptr).set(ValueLayout.JAVA_DOUBLE_UNALIGNED, 0L, value); }
 
     public static long memGetCLongUnaligned(long ptr) {
+        var segment = asSegment(ptr);
         return CLONG_SIZE == 8
-            ? memGetLongUnaligned(ptr)
-            : memGetIntUnaligned(ptr);
+            ? segment.get(ValueLayout.JAVA_LONG_UNALIGNED, 0L)
+            : segment.get(ValueLayout.JAVA_INT_UNALIGNED, 0L);
     }
 
     public static long memGetAddressUnaligned(long ptr) {
         //return MemorySegment.ofAddress(ptr).reinterpret(ValueLayout.ADDRESS_UNALIGNED.byteSize()).get(ValueLayout.ADDRESS_UNALIGNED, 0L).address();
+        var segment = asSegment(ptr);
         return BITS64
-            ? memGetLongUnaligned(ptr)
-            : memGetIntUnaligned(ptr) & 0xFFFF_FFFFL;
+            ? segment.get(ValueLayout.JAVA_LONG_UNALIGNED, 0L)
+            : segment.get(ValueLayout.JAVA_INT_UNALIGNED, 0L) & 0xFFFF_FFFFL;
     }
 
     public static void memPutCLongUnaligned(long ptr, long value) {
+        var segment = asSegment(ptr);
         if (CLONG_SIZE == 8) {
-            memPutLongUnaligned(ptr, value);
+            segment.set(ValueLayout.JAVA_LONG_UNALIGNED, 0L, value);
         } else {
-            memPutIntUnaligned(ptr, (int)value);
+            segment.set(ValueLayout.JAVA_INT_UNALIGNED, 0L, (int)value);
         }
     }
 
     public static void memPutAddressUnaligned(long ptr, long value) {
         //MemorySegment.ofAddress(ptr).reinterpret(ValueLayout.ADDRESS_UNALIGNED.byteSize()).set(ValueLayout.ADDRESS_UNALIGNED, 0L, MemorySegment.ofAddress(value));
+        var segment = asSegment(ptr);
         if (BITS64) {
-            memPutLongUnaligned(ptr, value);
+            segment.set(ValueLayout.JAVA_LONG_UNALIGNED, 0L, value);
         } else {
-            memPutIntUnaligned(ptr, (int)value);
+            segment.set(ValueLayout.JAVA_INT_UNALIGNED, 0L, (int)value);
         }
     }
 
