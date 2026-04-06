@@ -32,6 +32,7 @@ public class HarfBuzzGPU {
             draw_destroy           = apiGetFunctionAddress(HARFBUZZ, "hb_gpu_draw_destroy"),
             draw_set_user_data     = apiGetFunctionAddress(HARFBUZZ, "hb_gpu_draw_set_user_data"),
             draw_get_user_data     = apiGetFunctionAddress(HARFBUZZ, "hb_gpu_draw_get_user_data"),
+            draw_set_scale         = apiGetFunctionAddress(HARFBUZZ, "hb_gpu_draw_set_scale"),
             draw_get_funcs         = apiGetFunctionAddress(HARFBUZZ, "hb_gpu_draw_get_funcs"),
             draw_glyph             = apiGetFunctionAddress(HARFBUZZ, "hb_gpu_draw_glyph"),
             draw_encode            = apiGetFunctionAddress(HARFBUZZ, "hb_gpu_draw_encode"),
@@ -150,6 +151,17 @@ public class HarfBuzzGPU {
     @NativeType("void *")
     public static long hb_gpu_draw_get_user_data(@NativeType("hb_gpu_draw_t *") long draw, @NativeType("hb_user_data_key_t *") hb_user_data_key_t key) {
         return nhb_gpu_draw_get_user_data(draw, key.address());
+    }
+
+    // --- [ hb_gpu_draw_set_scale ] ---
+
+    /** {@code void hb_gpu_draw_set_scale(hb_gpu_draw_t * draw, int x_scale, int y_scale)} */
+    public static void hb_gpu_draw_set_scale(@NativeType("hb_gpu_draw_t *") long draw, int x_scale, int y_scale) {
+        long __functionAddress = Functions.draw_set_scale;
+        if (CHECKS) {
+            check(draw);
+        }
+        invokePV(draw, x_scale, y_scale, __functionAddress);
     }
 
     // --- [ hb_gpu_draw_get_funcs ] ---

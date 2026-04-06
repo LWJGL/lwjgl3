@@ -62,6 +62,14 @@ val hb_gpu = "HarfBuzzGPU".nativeClass(Module.HARFBUZZ, prefix = "HB_GPU", prefi
         hb_user_data_key_t.p("key")
     )
 
+    void(
+        "draw_set_scale",
+
+        hb_gpu_draw_t.p("draw"),
+        int("x_scale"),
+        int("y_scale")
+    )
+
     hb_draw_funcs_t.p(
         "draw_get_funcs",
 
