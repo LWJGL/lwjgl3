@@ -264,7 +264,8 @@ enum class Module(
             url("https://jemalloc.net/jemalloc.3.html", "Documentation"),
             url("https://github.com/jemalloc/jemalloc", "Source Repository")
         )}
-        """
+        """,
+        arrayOverloads = false
     ),
     KTX(
         "ktx",

@@ -131,20 +131,20 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
         AutoSizeResult..size_t("size")
     )
 
-    OffHeapOnly..void(
+    void(
         "free",
 
         MultiTypeAll..Unsafe..nullable..void.p("ptr")
     )
 
-    OffHeapOnly..void(
+    void(
         "free_sized",
 
         MultiTypeAll..nullable..void.p("ptr"),
         AutoSize("ptr")..size_t("size")
     )
 
-    OffHeapOnly..void(
+    void(
         "free_aligned_sized",
 
         MultiTypeAll..nullable..void.p("ptr"),
@@ -187,14 +187,14 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
         flags
     )
 
-    OffHeapOnly..void(
+    void(
         "dallocx",
 
         Unsafe..MultiTypeAll..void.p("ptr"),
         flags
     )
 
-    OffHeapOnly..void(
+    void(
         "sdallocx",
 
         MultiTypeAll..void.p("ptr"),
