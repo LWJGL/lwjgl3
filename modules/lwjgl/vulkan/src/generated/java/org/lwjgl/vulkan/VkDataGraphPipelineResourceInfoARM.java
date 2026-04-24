@@ -104,6 +104,8 @@ public class VkDataGraphPipelineResourceInfoARM extends Struct<VkDataGraphPipeli
     public VkDataGraphPipelineResourceInfoARM sType$Default() { return sType(ARMDataGraph.VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_RESOURCE_INFO_ARM); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkDataGraphPipelineResourceInfoARM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkDataGraphPipelineResourceInfoImageLayoutARM} value to the {@code pNext} chain. */
+    public VkDataGraphPipelineResourceInfoARM pNext(VkDataGraphPipelineResourceInfoImageLayoutARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkTensorDescriptionARM} value to the {@code pNext} chain. */
     public VkDataGraphPipelineResourceInfoARM pNext(VkTensorDescriptionARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code descriptorSet} field. */
@@ -340,6 +342,8 @@ public class VkDataGraphPipelineResourceInfoARM extends Struct<VkDataGraphPipeli
         public VkDataGraphPipelineResourceInfoARM.Buffer sType$Default() { return sType(ARMDataGraph.VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_RESOURCE_INFO_ARM); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkDataGraphPipelineResourceInfoARM.Buffer pNext(@NativeType("void const *") long value) { VkDataGraphPipelineResourceInfoARM.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkDataGraphPipelineResourceInfoImageLayoutARM} value to the {@code pNext} chain. */
+        public VkDataGraphPipelineResourceInfoARM.Buffer pNext(VkDataGraphPipelineResourceInfoImageLayoutARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkTensorDescriptionARM} value to the {@code pNext} chain. */
         public VkDataGraphPipelineResourceInfoARM.Buffer pNext(VkTensorDescriptionARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code descriptorSet} field. */

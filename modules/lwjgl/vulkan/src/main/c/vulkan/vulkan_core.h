@@ -66,7 +66,7 @@ extern "C" {
 //#define VK_API_VERSION VK_MAKE_API_VERSION(0, 1, 0, 0) // Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 347
+#define VK_HEADER_VERSION 349
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 4, VK_HEADER_VERSION)
@@ -881,6 +881,9 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_VIDEO_ENCODE_SESSION_PARAMETERS_FEEDBACK_INFO_KHR = 1000299010,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV = 1000300000,
     VK_STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV = 1000300001,
+    VK_STRUCTURE_TYPE_PERF_HINT_INFO_QCOM = 1000302000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_QUEUE_PERF_HINT_FEATURES_QCOM = 1000302001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_QUEUE_PERF_HINT_PROPERTIES_QCOM = 1000302002,
 #ifdef VK_ENABLE_BETA_EXTENSIONS
     VK_STRUCTURE_TYPE_CUDA_MODULE_CREATE_INFO_NV = 1000307000,
 #endif
@@ -1058,6 +1061,8 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_DEVICE_QUEUE_SHADER_CORE_CONTROL_CREATE_INFO_ARM = 1000417000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_FEATURES_ARM = 1000417001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_PROPERTIES_ARM = 1000417002,
+    VK_STRUCTURE_TYPE_DISPATCH_PARAMETERS_ARM = 1000417003,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_DISPATCH_PARAMETERS_PROPERTIES_ARM = 1000417004,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_SLICED_VIEW_OF_3D_FEATURES_EXT = 1000418000,
     VK_STRUCTURE_TYPE_IMAGE_VIEW_SLICED_CREATE_INFO_EXT = 1000418001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_SET_HOST_MAPPING_FEATURES_VALVE = 1000420000,
@@ -1232,6 +1237,7 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROPERTIES_ARM = 1000507018,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_QUEUE_FAMILY_DATA_GRAPH_PROCESSING_ENGINE_INFO_ARM = 1000507019,
     VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_CONSTANT_TENSOR_SEMI_STRUCTURED_SPARSITY_INFO_ARM = 1000507015,
+    VK_STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_TOSA_PROPERTIES_ARM = 1000508000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_RENDER_AREAS_FEATURES_QCOM = 1000510000,
     VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_RENDER_AREAS_RENDER_PASS_BEGIN_INFO_QCOM = 1000510001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_KHR = 1000201000,
@@ -1423,6 +1429,15 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_FLAGS_INFO_KHR = 1000630002,
     VK_STRUCTURE_TYPE_RENDERING_END_INFO_KHR = 1000619003,
     VK_STRUCTURE_TYPE_RESOLVE_IMAGE_MODE_INFO_KHR = 1000630004,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DATA_GRAPH_OPTICAL_FLOW_FEATURES_ARM = 1000631000,
+    VK_STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_OPTICAL_FLOW_PROPERTIES_ARM = 1000631001,
+    VK_STRUCTURE_TYPE_DATA_GRAPH_OPTICAL_FLOW_IMAGE_FORMAT_INFO_ARM = 1000631003,
+    VK_STRUCTURE_TYPE_DATA_GRAPH_OPTICAL_FLOW_IMAGE_FORMAT_PROPERTIES_ARM = 1000631004,
+    VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_OPTICAL_FLOW_DISPATCH_INFO_ARM = 1000631005,
+    VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_OPTICAL_FLOW_CREATE_INFO_ARM = 1000631002,
+    VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_RESOURCE_INFO_IMAGE_LAYOUT_ARM = 1000631006,
+    VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SINGLE_NODE_CREATE_INFO_ARM = 1000631007,
+    VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SINGLE_NODE_CONNECTION_ARM = 1000631008,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_LONG_VECTOR_FEATURES_EXT = 1000635000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_LONG_VECTOR_PROPERTIES_EXT = 1000635001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CACHE_INCREMENTAL_MODE_FEATURES_SEC = 1000637000,
@@ -1432,6 +1447,7 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_PARTITIONED_FEATURES_EXT = 1000662000,
     VK_STRUCTURE_TYPE_UBM_SURFACE_CREATE_INFO_SEC = 1000664000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MIXED_FLOAT_DOT_PRODUCT_FEATURES_VALVE = 1000673000,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_RESTART_INDEX_FEATURES_EXT = 1000678000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES,
   // VK_STRUCTURE_TYPE_DEBUG_REPORT_CREATE_INFO_EXT is a legacy alias
@@ -7319,6 +7335,9 @@ static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_DEPTH_COPY_ON_COMPUTE_
 static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_DEPTH_COPY_ON_TRANSFER_QUEUE_BIT_KHR = 0x20000000000000ULL;
 static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_STENCIL_COPY_ON_COMPUTE_QUEUE_BIT_KHR = 0x40000000000000ULL;
 static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_STENCIL_COPY_ON_TRANSFER_QUEUE_BIT_KHR = 0x80000000000000ULL;
+static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_DATA_GRAPH_OPTICAL_FLOW_IMAGE_BIT_ARM = 0x100000000000000ULL;
+static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_DATA_GRAPH_OPTICAL_FLOW_VECTOR_BIT_ARM = 0x200000000000000ULL;
+static const VkFormatFeatureFlagBits2 VK_FORMAT_FEATURE_2_DATA_GRAPH_OPTICAL_FLOW_COST_BIT_ARM = 0x400000000000000ULL;
 
 
 typedef enum VkPipelineCreationFeedbackFlagBits {
@@ -8901,6 +8920,7 @@ typedef enum VkSurfaceTransformFlagBitsKHR {
     VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR = 0x00000100,
     VK_SURFACE_TRANSFORM_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
 } VkSurfaceTransformFlagBitsKHR;
+typedef VkFlags VkSurfaceTransformFlagsKHR;
 
 typedef enum VkCompositeAlphaFlagBitsKHR {
     VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR = 0x00000001,
@@ -8910,7 +8930,6 @@ typedef enum VkCompositeAlphaFlagBitsKHR {
     VK_COMPOSITE_ALPHA_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
 } VkCompositeAlphaFlagBitsKHR;
 typedef VkFlags VkCompositeAlphaFlagsKHR;
-typedef VkFlags VkSurfaceTransformFlagsKHR;
 typedef struct VkSurfaceCapabilitiesKHR {
     uint32_t                         minImageCount;
     uint32_t                         maxImageCount;
@@ -17087,9 +17106,9 @@ typedef enum VkBuildAccelerationStructureFlagBitsKHR {
     VK_BUILD_ACCELERATION_STRUCTURE_FLAG_BITS_MAX_ENUM_KHR = 0x7FFFFFFF
 } VkBuildAccelerationStructureFlagBitsKHR;
 typedef VkFlags VkBuildAccelerationStructureFlagsKHR;
-typedef VkBuildAccelerationStructureFlagsKHR VkBuildAccelerationStructureFlagsNV;
-
 typedef VkBuildAccelerationStructureFlagBitsKHR VkBuildAccelerationStructureFlagBitsNV;
+
+typedef VkBuildAccelerationStructureFlagsKHR VkBuildAccelerationStructureFlagsNV;
 
 typedef struct VkRayTracingShaderGroupCreateInfoNV {
     VkStructureType                   sType;
@@ -17154,13 +17173,13 @@ typedef struct VkGeometryNV {
 } VkGeometryNV;
 
 typedef struct VkAccelerationStructureInfoNV {
-    VkStructureType                        sType;
-    const void*                            pNext;
-    VkAccelerationStructureTypeNV          type;
-    VkBuildAccelerationStructureFlagsNV    flags;
-    uint32_t                               instanceCount;
-    uint32_t                               geometryCount;
-    const VkGeometryNV*                    pGeometries;
+    VkStructureType                         sType;
+    const void*                             pNext;
+    VkAccelerationStructureTypeNV           type;
+    VkBuildAccelerationStructureFlagsKHR    flags;
+    uint32_t                                instanceCount;
+    uint32_t                                geometryCount;
+    const VkGeometryNV*                     pGeometries;
 } VkAccelerationStructureInfoNV;
 
 typedef struct VkAccelerationStructureCreateInfoNV {
@@ -17237,7 +17256,7 @@ typedef VkAccelerationStructureInstanceKHR VkAccelerationStructureInstanceNV;
 
 typedef VkResult (VKAPI_PTR *PFN_vkCreateAccelerationStructureNV)(VkDevice device, const VkAccelerationStructureCreateInfoNV* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkAccelerationStructureNV* pAccelerationStructure);
 typedef void (VKAPI_PTR *PFN_vkDestroyAccelerationStructureNV)(VkDevice device, VkAccelerationStructureNV accelerationStructure, const VkAllocationCallbacks* pAllocator);
-typedef void (VKAPI_PTR *PFN_vkGetAccelerationStructureMemoryRequirementsNV)(VkDevice device, const VkAccelerationStructureMemoryRequirementsInfoNV* pInfo, VkMemoryRequirements2KHR* pMemoryRequirements);
+typedef void (VKAPI_PTR *PFN_vkGetAccelerationStructureMemoryRequirementsNV)(VkDevice device, const VkAccelerationStructureMemoryRequirementsInfoNV* pInfo, VkMemoryRequirements2* pMemoryRequirements);
 typedef VkResult (VKAPI_PTR *PFN_vkBindAccelerationStructureMemoryNV)(VkDevice device, uint32_t bindInfoCount, const VkBindAccelerationStructureMemoryInfoNV* pBindInfos);
 typedef void (VKAPI_PTR *PFN_vkCmdBuildAccelerationStructureNV)(VkCommandBuffer commandBuffer, const VkAccelerationStructureInfoNV* pInfo, VkBuffer instanceData, VkDeviceSize instanceOffset, VkBool32 update, VkAccelerationStructureNV dst, VkAccelerationStructureNV src, VkBuffer scratch, VkDeviceSize scratchOffset);
 typedef void (VKAPI_PTR *PFN_vkCmdCopyAccelerationStructureNV)(VkCommandBuffer commandBuffer, VkAccelerationStructureNV dst, VkAccelerationStructureNV src, VkCopyAccelerationStructureModeKHR mode);
@@ -17269,7 +17288,7 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyAccelerationStructureNV(
 VKAPI_ATTR void VKAPI_CALL vkGetAccelerationStructureMemoryRequirementsNV(
     VkDevice                                    device,
     const VkAccelerationStructureMemoryRequirementsInfoNV* pInfo,
-    VkMemoryRequirements2KHR*                   pMemoryRequirements);
+    VkMemoryRequirements2*                      pMemoryRequirements);
 #endif
 
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
@@ -19527,6 +19546,48 @@ typedef struct VkDeviceDiagnosticsConfigCreateInfoNV {
 #define VK_QCOM_RENDER_PASS_STORE_OPS_EXTENSION_NAME "VK_QCOM_render_pass_store_ops"
 
 
+// VK_QCOM_queue_perf_hint is a preprocessor guard. Do not pass it to API calls.
+#define VK_QCOM_queue_perf_hint 1
+#define VK_QCOM_QUEUE_PERF_HINT_SPEC_VERSION 1
+#define VK_QCOM_QUEUE_PERF_HINT_EXTENSION_NAME "VK_QCOM_queue_perf_hint"
+
+typedef enum VkPerfHintTypeQCOM {
+    VK_PERF_HINT_TYPE_DEFAULT_QCOM = 0,
+    VK_PERF_HINT_TYPE_FREQUENCY_MIN_QCOM = 1,
+    VK_PERF_HINT_TYPE_FREQUENCY_MAX_QCOM = 2,
+    VK_PERF_HINT_TYPE_FREQUENCY_SCALED_QCOM = 3,
+    VK_PERF_HINT_TYPE_MAX_ENUM_QCOM = 0x7FFFFFFF
+} VkPerfHintTypeQCOM;
+typedef struct VkPerfHintInfoQCOM {
+    VkStructureType       sType;
+    void*                 pNext;
+    VkPerfHintTypeQCOM    type;
+    uint32_t              scale;
+} VkPerfHintInfoQCOM;
+
+typedef struct VkPhysicalDeviceQueuePerfHintFeaturesQCOM {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           queuePerfHint;
+} VkPhysicalDeviceQueuePerfHintFeaturesQCOM;
+
+typedef struct VkPhysicalDeviceQueuePerfHintPropertiesQCOM {
+    VkStructureType    sType;
+    void*              pNext;
+    VkQueueFlags       supportedQueues;
+} VkPhysicalDeviceQueuePerfHintPropertiesQCOM;
+
+typedef VkResult                   (VKAPI_PTR *PFN_vkQueueSetPerfHintQCOM)(VkQueue queue, const VkPerfHintInfoQCOM*  pPerfHintInfo);
+
+#ifndef VK_NO_PROTOTYPES
+#ifndef VK_ONLY_EXPORTED_PROTOTYPES
+VKAPI_ATTR VkResult                   VKAPI_CALL vkQueueSetPerfHintQCOM(
+    VkQueue                                     queue,
+    const VkPerfHintInfoQCOM*                   pPerfHintInfo);
+#endif
+#endif
+
+
 // VK_QCOM_tile_shading is a preprocessor guard. Do not pass it to API calls.
 #define VK_QCOM_tile_shading 1
 #define VK_QCOM_TILE_SHADING_SPEC_VERSION 2
@@ -19667,12 +19728,6 @@ typedef struct VkPhysicalDeviceDescriptorBufferPropertiesEXT {
     VkDeviceSize       descriptorBufferAddressSpaceSize;
 } VkPhysicalDeviceDescriptorBufferPropertiesEXT;
 
-typedef struct VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT {
-    VkStructureType    sType;
-    void*              pNext;
-    size_t             combinedImageSamplerDensityMapDescriptorSize;
-} VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT;
-
 typedef struct VkPhysicalDeviceDescriptorBufferFeaturesEXT {
     VkStructureType    sType;
     void*              pNext;
@@ -19759,6 +19814,12 @@ typedef struct VkAccelerationStructureCaptureDescriptorDataInfoEXT {
     VkAccelerationStructureKHR    accelerationStructure;
     VkAccelerationStructureNV     accelerationStructureNV;
 } VkAccelerationStructureCaptureDescriptorDataInfoEXT;
+
+typedef struct VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    size_t             combinedImageSamplerDensityMapDescriptorSize;
+} VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT;
 
 typedef void (VKAPI_PTR *PFN_vkGetDescriptorSetLayoutSizeEXT)(VkDevice device, VkDescriptorSetLayout layout, VkDeviceSize* pLayoutSizeInBytes);
 typedef void (VKAPI_PTR *PFN_vkGetDescriptorSetLayoutBindingOffsetEXT)(VkDevice device, VkDescriptorSetLayout layout, uint32_t binding, VkDeviceSize* pOffset);
@@ -20550,13 +20611,13 @@ typedef struct VkPhysicalDevicePipelinePropertiesFeaturesEXT {
     VkBool32           pipelinePropertiesIdentifier;
 } VkPhysicalDevicePipelinePropertiesFeaturesEXT;
 
-typedef VkResult (VKAPI_PTR *PFN_vkGetPipelinePropertiesEXT)(VkDevice device, const VkPipelineInfoEXT* pPipelineInfo, VkBaseOutStructure* pPipelineProperties);
+typedef VkResult (VKAPI_PTR *PFN_vkGetPipelinePropertiesEXT)(VkDevice device, const VkPipelineInfoKHR* pPipelineInfo, VkBaseOutStructure* pPipelineProperties);
 
 #ifndef VK_NO_PROTOTYPES
 #ifndef VK_ONLY_EXPORTED_PROTOTYPES
 VKAPI_ATTR VkResult VKAPI_CALL vkGetPipelinePropertiesEXT(
     VkDevice                                    device,
-    const VkPipelineInfoEXT*                    pPipelineInfo,
+    const VkPipelineInfoKHR*                    pPipelineInfo,
     VkBaseOutStructure*                         pPipelineProperties);
 #endif
 #endif
@@ -21303,13 +21364,14 @@ typedef struct VkPhysicalDeviceShaderCorePropertiesARM {
 
 // VK_ARM_scheduling_controls is a preprocessor guard. Do not pass it to API calls.
 #define VK_ARM_scheduling_controls 1
-#define VK_ARM_SCHEDULING_CONTROLS_SPEC_VERSION 1
+#define VK_ARM_SCHEDULING_CONTROLS_SPEC_VERSION 2
 #define VK_ARM_SCHEDULING_CONTROLS_EXTENSION_NAME "VK_ARM_scheduling_controls"
 typedef VkFlags64 VkPhysicalDeviceSchedulingControlsFlagsARM;
 
 // Flag bits for VkPhysicalDeviceSchedulingControlsFlagBitsARM
 typedef VkFlags64 VkPhysicalDeviceSchedulingControlsFlagBitsARM;
 static const VkPhysicalDeviceSchedulingControlsFlagBitsARM VK_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_SHADER_CORE_COUNT_ARM = 0x00000001ULL;
+static const VkPhysicalDeviceSchedulingControlsFlagBitsARM VK_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_DISPATCH_PARAMETERS_ARM = 0x00000002ULL;
 
 typedef struct VkDeviceQueueShaderCoreControlCreateInfoARM {
     VkStructureType    sType;
@@ -21329,6 +21391,31 @@ typedef struct VkPhysicalDeviceSchedulingControlsPropertiesARM {
     VkPhysicalDeviceSchedulingControlsFlagsARM    schedulingControlsFlags;
 } VkPhysicalDeviceSchedulingControlsPropertiesARM;
 
+typedef struct VkDispatchParametersARM {
+    VkStructureType    sType;
+    void*              pNext;
+    uint32_t           workGroupBatchSize;
+    uint32_t           maxQueuedWorkGroupBatches;
+    uint32_t           maxWarpsPerShaderCore;
+} VkDispatchParametersARM;
+
+typedef struct VkPhysicalDeviceSchedulingControlsDispatchParametersPropertiesARM {
+    VkStructureType    sType;
+    void*              pNext;
+    uint32_t           schedulingControlsMaxWarpsCount;
+    uint32_t           schedulingControlsMaxQueuedBatchesCount;
+    uint32_t           schedulingControlsMaxWorkGroupBatchSize;
+} VkPhysicalDeviceSchedulingControlsDispatchParametersPropertiesARM;
+
+typedef void (VKAPI_PTR *PFN_vkCmdSetDispatchParametersARM)(VkCommandBuffer commandBuffer, const VkDispatchParametersARM*    pDispatchParameters);
+
+#ifndef VK_NO_PROTOTYPES
+#ifndef VK_ONLY_EXPORTED_PROTOTYPES
+VKAPI_ATTR void VKAPI_CALL vkCmdSetDispatchParametersARM(
+    VkCommandBuffer                             commandBuffer,
+    const VkDispatchParametersARM*              pDispatchParameters);
+#endif
+#endif
 
 
 // VK_EXT_image_sliced_view_of_3d is a preprocessor guard. Do not pass it to API calls.
@@ -21542,11 +21629,11 @@ typedef VkFlags64 VkMemoryDecompressionMethodFlagsEXT;
 typedef VkMemoryDecompressionMethodFlagsEXT VkMemoryDecompressionMethodFlagsNV;
 
 typedef struct VkDecompressMemoryRegionNV {
-    VkDeviceAddress                       srcAddress;
-    VkDeviceAddress                       dstAddress;
-    VkDeviceSize                          compressedSize;
-    VkDeviceSize                          decompressedSize;
-    VkMemoryDecompressionMethodFlagsNV    decompressionMethod;
+    VkDeviceAddress                        srcAddress;
+    VkDeviceAddress                        dstAddress;
+    VkDeviceSize                           compressedSize;
+    VkDeviceSize                           decompressedSize;
+    VkMemoryDecompressionMethodFlagsEXT    decompressionMethod;
 } VkDecompressMemoryRegionNV;
 
 typedef struct VkPhysicalDeviceMemoryDecompressionFeaturesEXT {
@@ -23360,6 +23447,7 @@ VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDataGraphPipelineSessionARM)
 
 typedef enum VkDataGraphPipelineSessionBindPointARM {
     VK_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_TRANSIENT_ARM = 0,
+    VK_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_OPTICAL_FLOW_CACHE_ARM = 1000631001,
     VK_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_MAX_ENUM_ARM = 0x7FFFFFFF
 } VkDataGraphPipelineSessionBindPointARM;
 
@@ -23385,6 +23473,7 @@ typedef enum VkPhysicalDeviceDataGraphOperationTypeARM {
     VK_PHYSICAL_DEVICE_DATA_GRAPH_OPERATION_TYPE_SPIRV_EXTENDED_INSTRUCTION_SET_ARM = 0,
     VK_PHYSICAL_DEVICE_DATA_GRAPH_OPERATION_TYPE_NEURAL_MODEL_QCOM = 1000629000,
     VK_PHYSICAL_DEVICE_DATA_GRAPH_OPERATION_TYPE_BUILTIN_MODEL_QCOM = 1000629001,
+    VK_PHYSICAL_DEVICE_DATA_GRAPH_OPERATION_TYPE_OPTICAL_FLOW_ARM = 1000631000,
     VK_PHYSICAL_DEVICE_DATA_GRAPH_OPERATION_TYPE_MAX_ENUM_ARM = 0x7FFFFFFF
 } VkPhysicalDeviceDataGraphOperationTypeARM;
 typedef VkFlags64 VkDataGraphPipelineSessionCreateFlagsARM;
@@ -23392,6 +23481,7 @@ typedef VkFlags64 VkDataGraphPipelineSessionCreateFlagsARM;
 // Flag bits for VkDataGraphPipelineSessionCreateFlagBitsARM
 typedef VkFlags64 VkDataGraphPipelineSessionCreateFlagBitsARM;
 static const VkDataGraphPipelineSessionCreateFlagBitsARM VK_DATA_GRAPH_PIPELINE_SESSION_CREATE_PROTECTED_BIT_ARM = 0x00000001ULL;
+static const VkDataGraphPipelineSessionCreateFlagBitsARM VK_DATA_GRAPH_PIPELINE_SESSION_CREATE_OPTICAL_FLOW_CACHE_BIT_ARM = 0x00000002ULL;
 
 typedef VkFlags64 VkDataGraphPipelineDispatchFlagsARM;
 
@@ -23432,7 +23522,7 @@ typedef struct VkDataGraphPipelineCompilerControlCreateInfoARM {
 typedef struct VkDataGraphPipelineCreateInfoARM {
     VkStructureType                              sType;
     const void*                                  pNext;
-    VkPipelineCreateFlags2KHR                    flags;
+    VkPipelineCreateFlags2                       flags;
     VkPipelineLayout                             layout;
     uint32_t                                     resourceInfoCount;
     const VkDataGraphPipelineResourceInfoARM*    pResourceInfos;
@@ -23659,6 +23749,54 @@ VKAPI_ATTR void VKAPI_CALL vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEngi
     VkPhysicalDevice                            physicalDevice,
     const VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM* pQueueFamilyDataGraphProcessingEngineInfo,
     VkQueueFamilyDataGraphProcessingEnginePropertiesARM* pQueueFamilyDataGraphProcessingEngineProperties);
+#endif
+#endif
+
+
+// VK_ARM_data_graph_instruction_set_tosa is a preprocessor guard. Do not pass it to API calls.
+#define VK_ARM_data_graph_instruction_set_tosa 1
+#define VK_MAX_DATA_GRAPH_TOSA_NAME_SIZE_ARM 128U
+#define VK_ARM_DATA_GRAPH_INSTRUCTION_SET_TOSA_SPEC_VERSION 1
+#define VK_ARM_DATA_GRAPH_INSTRUCTION_SET_TOSA_EXTENSION_NAME "VK_ARM_data_graph_instruction_set_tosa"
+
+typedef enum VkDataGraphTOSALevelARM {
+    VK_DATA_GRAPH_TOSA_LEVEL_NONE_ARM = 0,
+    VK_DATA_GRAPH_TOSA_LEVEL_8K_ARM = 1,
+    VK_DATA_GRAPH_TOSALEVEL_MAX_ENUM_ARM = 0x7FFFFFFF
+} VkDataGraphTOSALevelARM;
+
+typedef enum VkDataGraphTOSAQualityFlagBitsARM {
+    VK_DATA_GRAPH_TOSA_QUALITY_ACCELERATED_ARM = 0x00000001,
+    VK_DATA_GRAPH_TOSA_QUALITY_CONFORMANT_ARM = 0x00000002,
+    VK_DATA_GRAPH_TOSA_QUALITY_EXPERIMENTAL_ARM = 0x00000004,
+    VK_DATA_GRAPH_TOSA_QUALITY_DEPRECATED_ARM = 0x00000008,
+    VK_DATA_GRAPH_TOSAQUALITY_FLAG_BITS_MAX_ENUM_ARM = 0x7FFFFFFF
+} VkDataGraphTOSAQualityFlagBitsARM;
+typedef VkFlags   VkDataGraphTOSAQualityFlagsARM;
+typedef struct VkDataGraphTOSANameQualityARM {
+    char                              name[VK_MAX_DATA_GRAPH_TOSA_NAME_SIZE_ARM];
+    VkDataGraphTOSAQualityFlagsARM    qualityFlags;
+} VkDataGraphTOSANameQualityARM;
+
+typedef struct VkQueueFamilyDataGraphTOSAPropertiesARM {
+    VkStructureType                         sType;
+    void*                                   pNext;
+    uint32_t                                profileCount;
+    const VkDataGraphTOSANameQualityARM*    pProfiles;
+    uint32_t                                extensionCount;
+    const VkDataGraphTOSANameQualityARM*    pExtensions;
+    VkDataGraphTOSALevelARM                 level;
+} VkQueueFamilyDataGraphTOSAPropertiesARM;
+
+typedef VkResult (VKAPI_PTR *PFN_vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM)(VkPhysicalDevice                                 physicalDevice, uint32_t                                         queueFamilyIndex, const VkQueueFamilyDataGraphPropertiesARM*       pQueueFamilyDataGraphProperties, VkBaseOutStructure*        pProperties);
+
+#ifndef VK_NO_PROTOTYPES
+#ifndef VK_ONLY_EXPORTED_PROTOTYPES
+VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM(
+    VkPhysicalDevice                            physicalDevice,
+    uint32_t                                    queueFamilyIndex,
+    const VkQueueFamilyDataGraphPropertiesARM*  pQueueFamilyDataGraphProperties,
+    VkBaseOutStructure*                         pProperties);
 #endif
 #endif
 
@@ -25255,6 +25393,159 @@ typedef struct VkPhysicalDeviceDataGraphModelFeaturesQCOM {
 
 
 
+// VK_ARM_data_graph_optical_flow is a preprocessor guard. Do not pass it to API calls.
+#define VK_ARM_data_graph_optical_flow 1
+#define VK_ARM_DATA_GRAPH_OPTICAL_FLOW_SPEC_VERSION 1
+#define VK_ARM_DATA_GRAPH_OPTICAL_FLOW_EXTENSION_NAME "VK_ARM_data_graph_optical_flow"
+
+typedef enum VkDataGraphOpticalFlowPerformanceLevelARM {
+    VK_DATA_GRAPH_OPTICAL_FLOW_PERFORMANCE_LEVEL_UNKNOWN_ARM = 0,
+    VK_DATA_GRAPH_OPTICAL_FLOW_PERFORMANCE_LEVEL_SLOW_ARM = 1,
+    VK_DATA_GRAPH_OPTICAL_FLOW_PERFORMANCE_LEVEL_MEDIUM_ARM = 2,
+    VK_DATA_GRAPH_OPTICAL_FLOW_PERFORMANCE_LEVEL_FAST_ARM = 3,
+    VK_DATA_GRAPH_OPTICAL_FLOW_PERFORMANCE_LEVEL_MAX_ENUM_ARM = 0x7FFFFFFF
+} VkDataGraphOpticalFlowPerformanceLevelARM;
+
+typedef enum VkDataGraphPipelineNodeTypeARM {
+    VK_DATA_GRAPH_PIPELINE_NODE_TYPE_OPTICAL_FLOW_ARM = 1000631000,
+    VK_DATA_GRAPH_PIPELINE_NODE_TYPE_MAX_ENUM_ARM = 0x7FFFFFFF
+} VkDataGraphPipelineNodeTypeARM;
+
+typedef enum VkDataGraphPipelineNodeConnectionTypeARM {
+    VK_DATA_GRAPH_PIPELINE_NODE_CONNECTION_TYPE_OPTICAL_FLOW_INPUT_ARM = 1000631000,
+    VK_DATA_GRAPH_PIPELINE_NODE_CONNECTION_TYPE_OPTICAL_FLOW_REFERENCE_ARM = 1000631001,
+    VK_DATA_GRAPH_PIPELINE_NODE_CONNECTION_TYPE_OPTICAL_FLOW_HINT_ARM = 1000631002,
+    VK_DATA_GRAPH_PIPELINE_NODE_CONNECTION_TYPE_OPTICAL_FLOW_FLOW_VECTOR_ARM = 1000631003,
+    VK_DATA_GRAPH_PIPELINE_NODE_CONNECTION_TYPE_OPTICAL_FLOW_COST_ARM = 1000631004,
+    VK_DATA_GRAPH_PIPELINE_NODE_CONNECTION_TYPE_MAX_ENUM_ARM = 0x7FFFFFFF
+} VkDataGraphPipelineNodeConnectionTypeARM;
+
+typedef enum VkDataGraphOpticalFlowGridSizeFlagBitsARM {
+    VK_DATA_GRAPH_OPTICAL_FLOW_GRID_SIZE_UNKNOWN_ARM = 0,
+    VK_DATA_GRAPH_OPTICAL_FLOW_GRID_SIZE_1X1_BIT_ARM = 0x00000001,
+    VK_DATA_GRAPH_OPTICAL_FLOW_GRID_SIZE_2X2_BIT_ARM = 0x00000002,
+    VK_DATA_GRAPH_OPTICAL_FLOW_GRID_SIZE_4X4_BIT_ARM = 0x00000004,
+    VK_DATA_GRAPH_OPTICAL_FLOW_GRID_SIZE_8X8_BIT_ARM = 0x00000008,
+    VK_DATA_GRAPH_OPTICAL_FLOW_GRID_SIZE_FLAG_BITS_MAX_ENUM_ARM = 0x7FFFFFFF
+} VkDataGraphOpticalFlowGridSizeFlagBitsARM;
+typedef VkFlags   VkDataGraphOpticalFlowGridSizeFlagsARM;
+
+typedef enum VkDataGraphOpticalFlowCreateFlagBitsARM {
+    VK_DATA_GRAPH_OPTICAL_FLOW_CREATE_ENABLE_HINT_BIT_ARM = 0x00000001,
+    VK_DATA_GRAPH_OPTICAL_FLOW_CREATE_ENABLE_COST_BIT_ARM = 0x00000002,
+    VK_DATA_GRAPH_OPTICAL_FLOW_CREATE_RESERVED_30_BIT_ARM = 0x40000000,
+    VK_DATA_GRAPH_OPTICAL_FLOW_CREATE_FLAG_BITS_MAX_ENUM_ARM = 0x7FFFFFFF
+} VkDataGraphOpticalFlowCreateFlagBitsARM;
+typedef VkFlags   VkDataGraphOpticalFlowCreateFlagsARM;
+
+typedef enum VkDataGraphOpticalFlowImageUsageFlagBitsARM {
+    VK_DATA_GRAPH_OPTICAL_FLOW_IMAGE_USAGE_UNKNOWN_ARM = 0,
+    VK_DATA_GRAPH_OPTICAL_FLOW_IMAGE_USAGE_INPUT_BIT_ARM = 0x00000001,
+    VK_DATA_GRAPH_OPTICAL_FLOW_IMAGE_USAGE_OUTPUT_BIT_ARM = 0x00000002,
+    VK_DATA_GRAPH_OPTICAL_FLOW_IMAGE_USAGE_HINT_BIT_ARM = 0x00000004,
+    VK_DATA_GRAPH_OPTICAL_FLOW_IMAGE_USAGE_COST_BIT_ARM = 0x00000008,
+    VK_DATA_GRAPH_OPTICAL_FLOW_IMAGE_USAGE_FLAG_BITS_MAX_ENUM_ARM = 0x7FFFFFFF
+} VkDataGraphOpticalFlowImageUsageFlagBitsARM;
+typedef VkFlags   VkDataGraphOpticalFlowImageUsageFlagsARM;
+
+typedef enum VkDataGraphOpticalFlowExecuteFlagBitsARM {
+    VK_DATA_GRAPH_OPTICAL_FLOW_EXECUTE_DISABLE_TEMPORAL_HINTS_BIT_ARM = 0x00000001,
+    VK_DATA_GRAPH_OPTICAL_FLOW_EXECUTE_INPUT_UNCHANGED_BIT_ARM = 0x00000002,
+    VK_DATA_GRAPH_OPTICAL_FLOW_EXECUTE_REFERENCE_UNCHANGED_BIT_ARM = 0x00000004,
+    VK_DATA_GRAPH_OPTICAL_FLOW_EXECUTE_INPUT_IS_PREVIOUS_REFERENCE_BIT_ARM = 0x00000008,
+    VK_DATA_GRAPH_OPTICAL_FLOW_EXECUTE_REFERENCE_IS_PREVIOUS_INPUT_BIT_ARM = 0x00000010,
+    VK_DATA_GRAPH_OPTICAL_FLOW_EXECUTE_FLAG_BITS_MAX_ENUM_ARM = 0x7FFFFFFF
+} VkDataGraphOpticalFlowExecuteFlagBitsARM;
+typedef VkFlags   VkDataGraphOpticalFlowExecuteFlagsARM;
+typedef struct VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           dataGraphOpticalFlow;
+} VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM;
+
+typedef struct VkQueueFamilyDataGraphOpticalFlowPropertiesARM {
+    VkStructureType                           sType;
+    void*                                     pNext;
+    VkDataGraphOpticalFlowGridSizeFlagsARM    supportedOutputGridSizes;
+    VkDataGraphOpticalFlowGridSizeFlagsARM    supportedHintGridSizes;
+    VkBool32                                  hintSupported;
+    VkBool32                                  costSupported;
+    uint32_t                                  minWidth;
+    uint32_t                                  minHeight;
+    uint32_t                                  maxWidth;
+    uint32_t                                  maxHeight;
+} VkQueueFamilyDataGraphOpticalFlowPropertiesARM;
+
+typedef struct VkDataGraphPipelineOpticalFlowCreateInfoARM {
+    VkStructureType                              sType;
+    void*                                        pNext;
+    uint32_t                                     width;
+    uint32_t                                     height;
+    VkFormat                                     imageFormat;
+    VkFormat                                     flowVectorFormat;
+    VkFormat                                     costFormat;
+    VkDataGraphOpticalFlowGridSizeFlagsARM       outputGridSize;
+    VkDataGraphOpticalFlowGridSizeFlagsARM       hintGridSize;
+    VkDataGraphOpticalFlowPerformanceLevelARM    performanceLevel;
+    VkDataGraphOpticalFlowCreateFlagsARM         flags;
+} VkDataGraphPipelineOpticalFlowCreateInfoARM;
+
+typedef struct VkDataGraphOpticalFlowImageFormatPropertiesARM {
+    VkStructureType    sType;
+    void*              pNext;
+    VkFormat           format;
+} VkDataGraphOpticalFlowImageFormatPropertiesARM;
+
+typedef struct VkDataGraphOpticalFlowImageFormatInfoARM {
+    VkStructureType                             sType;
+    const void*                                 pNext;
+    VkDataGraphOpticalFlowImageUsageFlagsARM    usage;
+} VkDataGraphOpticalFlowImageFormatInfoARM;
+
+typedef struct VkDataGraphPipelineOpticalFlowDispatchInfoARM {
+    VkStructureType                          sType;
+    void*                                    pNext;
+    VkDataGraphOpticalFlowExecuteFlagsARM    flags;
+    uint32_t                                 meanFlowL1NormHint;
+} VkDataGraphPipelineOpticalFlowDispatchInfoARM;
+
+typedef struct VkDataGraphPipelineResourceInfoImageLayoutARM {
+    VkStructureType    sType;
+    const void*        pNext;
+    VkImageLayout      layout;
+} VkDataGraphPipelineResourceInfoImageLayoutARM;
+
+typedef struct VkDataGraphPipelineSingleNodeConnectionARM {
+    VkStructureType                             sType;
+    void*                                       pNext;
+    uint32_t                                    set;
+    uint32_t                                    binding;
+    VkDataGraphPipelineNodeConnectionTypeARM    connection;
+} VkDataGraphPipelineSingleNodeConnectionARM;
+
+typedef struct VkDataGraphPipelineSingleNodeCreateInfoARM {
+    VkStructureType                                      sType;
+    void*                                                pNext;
+    VkDataGraphPipelineNodeTypeARM                       nodeType;
+    uint32_t                                             connectionCount;
+    const VkDataGraphPipelineSingleNodeConnectionARM*    pConnections;
+} VkDataGraphPipelineSingleNodeCreateInfoARM;
+
+typedef VkResult (VKAPI_PTR *PFN_vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM)(VkPhysicalDevice                                physicalDevice, uint32_t                                        queueFamilyIndex, const VkQueueFamilyDataGraphPropertiesARM*      pQueueFamilyDataGraphProperties, const VkDataGraphOpticalFlowImageFormatInfoARM* pOpticalFlowImageFormatInfo, uint32_t*                 pFormatCount, VkDataGraphOpticalFlowImageFormatPropertiesARM* pImageFormatProperties);
+
+#ifndef VK_NO_PROTOTYPES
+#ifndef VK_ONLY_EXPORTED_PROTOTYPES
+VKAPI_ATTR VkResult VKAPI_CALL vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM(
+    VkPhysicalDevice                            physicalDevice,
+    uint32_t                                    queueFamilyIndex,
+    const VkQueueFamilyDataGraphPropertiesARM*  pQueueFamilyDataGraphProperties,
+    const VkDataGraphOpticalFlowImageFormatInfoARM* pOpticalFlowImageFormatInfo,
+    uint32_t*                                   pFormatCount,
+    VkDataGraphOpticalFlowImageFormatPropertiesARM* pImageFormatProperties);
+#endif
+#endif
+
+
 // VK_EXT_shader_long_vector is a preprocessor guard. Do not pass it to API calls.
 #define VK_EXT_shader_long_vector 1
 #define VK_EXT_SHADER_LONG_VECTOR_SPEC_VERSION 1
@@ -25353,6 +25644,27 @@ typedef struct VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE {
     VkBool32           shaderMixedFloatDotProductFloat8AccFloat32;
 } VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE;
 
+
+
+// VK_EXT_primitive_restart_index is a preprocessor guard. Do not pass it to API calls.
+#define VK_EXT_primitive_restart_index 1
+#define VK_EXT_PRIMITIVE_RESTART_INDEX_SPEC_VERSION 1
+#define VK_EXT_PRIMITIVE_RESTART_INDEX_EXTENSION_NAME "VK_EXT_primitive_restart_index"
+typedef struct VkPhysicalDevicePrimitiveRestartIndexFeaturesEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           primitiveRestartIndex;
+} VkPhysicalDevicePrimitiveRestartIndexFeaturesEXT;
+
+typedef void (VKAPI_PTR *PFN_vkCmdSetPrimitiveRestartIndexEXT)(VkCommandBuffer commandBuffer, uint32_t primitiveRestartIndex);
+
+#ifndef VK_NO_PROTOTYPES
+#ifndef VK_ONLY_EXPORTED_PROTOTYPES
+VKAPI_ATTR void VKAPI_CALL vkCmdSetPrimitiveRestartIndexEXT(
+    VkCommandBuffer                             commandBuffer,
+    uint32_t                                    primitiveRestartIndex);
+#endif
+#endif
 
 
 // VK_KHR_acceleration_structure is a preprocessor guard. Do not pass it to API calls.

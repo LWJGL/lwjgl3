@@ -30,7 +30,7 @@ public class EXTPipelineProperties {
 
     // --- [ vkGetPipelinePropertiesEXT ] ---
 
-    /** {@code VkResult vkGetPipelinePropertiesEXT(VkDevice device, VkPipelineInfoEXT const * pPipelineInfo, VkBaseOutStructure * pPipelineProperties)} */
+    /** {@code VkResult vkGetPipelinePropertiesEXT(VkDevice device, VkPipelineInfoKHR const * pPipelineInfo, VkBaseOutStructure * pPipelineProperties)} */
     public static int nvkGetPipelinePropertiesEXT(VkDevice device, long pPipelineInfo, long pPipelineProperties) {
         long __functionAddress = device.getCapabilities().vkGetPipelinePropertiesEXT;
         if (CHECKS) {
@@ -39,9 +39,9 @@ public class EXTPipelineProperties {
         return callPPPI(device.address(), pPipelineInfo, pPipelineProperties, __functionAddress);
     }
 
-    /** {@code VkResult vkGetPipelinePropertiesEXT(VkDevice device, VkPipelineInfoEXT const * pPipelineInfo, VkBaseOutStructure * pPipelineProperties)} */
+    /** {@code VkResult vkGetPipelinePropertiesEXT(VkDevice device, VkPipelineInfoKHR const * pPipelineInfo, VkBaseOutStructure * pPipelineProperties)} */
     @NativeType("VkResult")
-    public static int vkGetPipelinePropertiesEXT(VkDevice device, @NativeType("VkPipelineInfoEXT const *") VkPipelineInfoEXT pPipelineInfo, @NativeType("VkBaseOutStructure *") @Nullable VkBaseOutStructure pPipelineProperties) {
+    public static int vkGetPipelinePropertiesEXT(VkDevice device, @NativeType("VkPipelineInfoKHR const *") VkPipelineInfoKHR pPipelineInfo, @NativeType("VkBaseOutStructure *") @Nullable VkBaseOutStructure pPipelineProperties) {
         return nvkGetPipelinePropertiesEXT(device, pPipelineInfo.address(), memAddressSafe(pPipelineProperties));
     }
 

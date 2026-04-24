@@ -155,7 +155,7 @@ val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "devi
 
         VkDevice("device"),
         VkAccelerationStructureMemoryRequirementsInfoNV.const.p("pInfo"),
-        VkMemoryRequirements2KHR.p("pMemoryRequirements")
+        VkMemoryRequirements2.p("pMemoryRequirements")
     )
 
     VkResult(

@@ -88,9 +88,9 @@ public class VkTensorDependencyInfoARM extends Struct<VkTensorDependencyInfoARM>
     /** @return the value of the {@code tensorMemoryBarrierCount} field. */
     @NativeType("uint32_t")
     public int tensorMemoryBarrierCount() { return ntensorMemoryBarrierCount(address()); }
-    /** @return a {@link VkTensorMemoryBarrierARM} view of the struct pointed to by the {@code pTensorMemoryBarriers} field. */
+    /** @return a {@link VkTensorMemoryBarrierARM.Buffer} view of the struct array pointed to by the {@code pTensorMemoryBarriers} field. */
     @NativeType("VkTensorMemoryBarrierARM const *")
-    public VkTensorMemoryBarrierARM pTensorMemoryBarriers() { return npTensorMemoryBarriers(address()); }
+    public VkTensorMemoryBarrierARM.Buffer pTensorMemoryBarriers() { return npTensorMemoryBarriers(address()); }
 
     /** Sets the specified value to the {@code sType} field. */
     public VkTensorDependencyInfoARM sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -98,21 +98,17 @@ public class VkTensorDependencyInfoARM extends Struct<VkTensorDependencyInfoARM>
     public VkTensorDependencyInfoARM sType$Default() { return sType(ARMTensors.VK_STRUCTURE_TYPE_TENSOR_DEPENDENCY_INFO_ARM); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkTensorDependencyInfoARM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code tensorMemoryBarrierCount} field. */
-    public VkTensorDependencyInfoARM tensorMemoryBarrierCount(@NativeType("uint32_t") int value) { ntensorMemoryBarrierCount(address(), value); return this; }
-    /** Sets the address of the specified {@link VkTensorMemoryBarrierARM} to the {@code pTensorMemoryBarriers} field. */
-    public VkTensorDependencyInfoARM pTensorMemoryBarriers(@NativeType("VkTensorMemoryBarrierARM const *") VkTensorMemoryBarrierARM value) { npTensorMemoryBarriers(address(), value); return this; }
+    /** Sets the address of the specified {@link VkTensorMemoryBarrierARM.Buffer} to the {@code pTensorMemoryBarriers} field. */
+    public VkTensorDependencyInfoARM pTensorMemoryBarriers(@NativeType("VkTensorMemoryBarrierARM const *") VkTensorMemoryBarrierARM.Buffer value) { npTensorMemoryBarriers(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkTensorDependencyInfoARM set(
         int sType,
         long pNext,
-        int tensorMemoryBarrierCount,
-        VkTensorMemoryBarrierARM pTensorMemoryBarriers
+        VkTensorMemoryBarrierARM.Buffer pTensorMemoryBarriers
     ) {
         sType(sType);
         pNext(pNext);
-        tensorMemoryBarrierCount(tensorMemoryBarrierCount);
         pTensorMemoryBarriers(pTensorMemoryBarriers);
 
         return this;
@@ -248,16 +244,16 @@ public class VkTensorDependencyInfoARM extends Struct<VkTensorDependencyInfoARM>
     /** Unsafe version of {@link #tensorMemoryBarrierCount}. */
     public static int ntensorMemoryBarrierCount(long struct) { return memGetInt(struct + VkTensorDependencyInfoARM.TENSORMEMORYBARRIERCOUNT); }
     /** Unsafe version of {@link #pTensorMemoryBarriers}. */
-    public static VkTensorMemoryBarrierARM npTensorMemoryBarriers(long struct) { return VkTensorMemoryBarrierARM.create(memGetAddress(struct + VkTensorDependencyInfoARM.PTENSORMEMORYBARRIERS)); }
+    public static VkTensorMemoryBarrierARM.Buffer npTensorMemoryBarriers(long struct) { return VkTensorMemoryBarrierARM.create(memGetAddress(struct + VkTensorDependencyInfoARM.PTENSORMEMORYBARRIERS), ntensorMemoryBarrierCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkTensorDependencyInfoARM.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkTensorDependencyInfoARM.PNEXT, value); }
-    /** Unsafe version of {@link #tensorMemoryBarrierCount(int) tensorMemoryBarrierCount}. */
+    /** Sets the specified value to the {@code tensorMemoryBarrierCount} field of the specified {@code struct}. */
     public static void ntensorMemoryBarrierCount(long struct, int value) { memPutInt(struct + VkTensorDependencyInfoARM.TENSORMEMORYBARRIERCOUNT, value); }
-    /** Unsafe version of {@link #pTensorMemoryBarriers(VkTensorMemoryBarrierARM) pTensorMemoryBarriers}. */
-    public static void npTensorMemoryBarriers(long struct, VkTensorMemoryBarrierARM value) { memPutAddress(struct + VkTensorDependencyInfoARM.PTENSORMEMORYBARRIERS, value.address()); }
+    /** Unsafe version of {@link #pTensorMemoryBarriers(VkTensorMemoryBarrierARM.Buffer) pTensorMemoryBarriers}. */
+    public static void npTensorMemoryBarriers(long struct, VkTensorMemoryBarrierARM.Buffer value) { memPutAddress(struct + VkTensorDependencyInfoARM.PTENSORMEMORYBARRIERS, value.address()); ntensorMemoryBarrierCount(struct, value.remaining()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -320,9 +316,9 @@ public class VkTensorDependencyInfoARM extends Struct<VkTensorDependencyInfoARM>
         /** @return the value of the {@code tensorMemoryBarrierCount} field. */
         @NativeType("uint32_t")
         public int tensorMemoryBarrierCount() { return VkTensorDependencyInfoARM.ntensorMemoryBarrierCount(address()); }
-        /** @return a {@link VkTensorMemoryBarrierARM} view of the struct pointed to by the {@code pTensorMemoryBarriers} field. */
+        /** @return a {@link VkTensorMemoryBarrierARM.Buffer} view of the struct array pointed to by the {@code pTensorMemoryBarriers} field. */
         @NativeType("VkTensorMemoryBarrierARM const *")
-        public VkTensorMemoryBarrierARM pTensorMemoryBarriers() { return VkTensorDependencyInfoARM.npTensorMemoryBarriers(address()); }
+        public VkTensorMemoryBarrierARM.Buffer pTensorMemoryBarriers() { return VkTensorDependencyInfoARM.npTensorMemoryBarriers(address()); }
 
         /** Sets the specified value to the {@code sType} field. */
         public VkTensorDependencyInfoARM.Buffer sType(@NativeType("VkStructureType") int value) { VkTensorDependencyInfoARM.nsType(address(), value); return this; }
@@ -330,10 +326,8 @@ public class VkTensorDependencyInfoARM extends Struct<VkTensorDependencyInfoARM>
         public VkTensorDependencyInfoARM.Buffer sType$Default() { return sType(ARMTensors.VK_STRUCTURE_TYPE_TENSOR_DEPENDENCY_INFO_ARM); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkTensorDependencyInfoARM.Buffer pNext(@NativeType("void const *") long value) { VkTensorDependencyInfoARM.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code tensorMemoryBarrierCount} field. */
-        public VkTensorDependencyInfoARM.Buffer tensorMemoryBarrierCount(@NativeType("uint32_t") int value) { VkTensorDependencyInfoARM.ntensorMemoryBarrierCount(address(), value); return this; }
-        /** Sets the address of the specified {@link VkTensorMemoryBarrierARM} to the {@code pTensorMemoryBarriers} field. */
-        public VkTensorDependencyInfoARM.Buffer pTensorMemoryBarriers(@NativeType("VkTensorMemoryBarrierARM const *") VkTensorMemoryBarrierARM value) { VkTensorDependencyInfoARM.npTensorMemoryBarriers(address(), value); return this; }
+        /** Sets the address of the specified {@link VkTensorMemoryBarrierARM.Buffer} to the {@code pTensorMemoryBarriers} field. */
+        public VkTensorDependencyInfoARM.Buffer pTensorMemoryBarriers(@NativeType("VkTensorMemoryBarrierARM const *") VkTensorMemoryBarrierARM.Buffer value) { VkTensorDependencyInfoARM.npTensorMemoryBarriers(address(), value); return this; }
 
     }
 

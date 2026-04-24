@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkDataGraphPipelineCreateInfoARM {
  *     VkStructureType sType;
  *     void const * pNext;
- *     VkPipelineCreateFlags2KHR flags;
+ *     VkPipelineCreateFlags2 flags;
  *     VkPipelineLayout layout;
  *     uint32_t resourceInfoCount;
  *     {@link VkDataGraphPipelineResourceInfoARM VkDataGraphPipelineResourceInfoARM} const * pResourceInfos;
@@ -94,7 +94,7 @@ public class VkDataGraphPipelineCreateInfoARM extends Struct<VkDataGraphPipeline
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /** @return the value of the {@code flags} field. */
-    @NativeType("VkPipelineCreateFlags2KHR")
+    @NativeType("VkPipelineCreateFlags2")
     public long flags() { return nflags(address()); }
     /** @return the value of the {@code layout} field. */
     @NativeType("VkPipelineLayout")
@@ -118,8 +118,12 @@ public class VkDataGraphPipelineCreateInfoARM extends Struct<VkDataGraphPipeline
     public VkDataGraphPipelineCreateInfoARM pNext(VkDataGraphPipelineCompilerControlCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDataGraphPipelineIdentifierCreateInfoARM} value to the {@code pNext} chain. */
     public VkDataGraphPipelineCreateInfoARM pNext(VkDataGraphPipelineIdentifierCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkDataGraphPipelineOpticalFlowCreateInfoARM} value to the {@code pNext} chain. */
+    public VkDataGraphPipelineCreateInfoARM pNext(VkDataGraphPipelineOpticalFlowCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDataGraphPipelineShaderModuleCreateInfoARM} value to the {@code pNext} chain. */
     public VkDataGraphPipelineCreateInfoARM pNext(VkDataGraphPipelineShaderModuleCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkDataGraphPipelineSingleNodeCreateInfoARM} value to the {@code pNext} chain. */
+    public VkDataGraphPipelineCreateInfoARM pNext(VkDataGraphPipelineSingleNodeCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDataGraphProcessingEngineCreateInfoARM} value to the {@code pNext} chain. */
     public VkDataGraphPipelineCreateInfoARM pNext(VkDataGraphProcessingEngineCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineCreationFeedbackCreateInfo} value to the {@code pNext} chain. */
@@ -129,7 +133,7 @@ public class VkDataGraphPipelineCreateInfoARM extends Struct<VkDataGraphPipeline
     /** Prepends the specified {@link VkShaderModuleCreateInfo} value to the {@code pNext} chain. */
     public VkDataGraphPipelineCreateInfoARM pNext(VkShaderModuleCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code flags} field. */
-    public VkDataGraphPipelineCreateInfoARM flags(@NativeType("VkPipelineCreateFlags2KHR") long value) { nflags(address(), value); return this; }
+    public VkDataGraphPipelineCreateInfoARM flags(@NativeType("VkPipelineCreateFlags2") long value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@code layout} field. */
     public VkDataGraphPipelineCreateInfoARM layout(@NativeType("VkPipelineLayout") long value) { nlayout(address(), value); return this; }
     /** Sets the address of the specified {@link VkDataGraphPipelineResourceInfoARM.Buffer} to the {@code pResourceInfos} field. */
@@ -362,7 +366,7 @@ public class VkDataGraphPipelineCreateInfoARM extends Struct<VkDataGraphPipeline
         @NativeType("void const *")
         public long pNext() { return VkDataGraphPipelineCreateInfoARM.npNext(address()); }
         /** @return the value of the {@code flags} field. */
-        @NativeType("VkPipelineCreateFlags2KHR")
+        @NativeType("VkPipelineCreateFlags2")
         public long flags() { return VkDataGraphPipelineCreateInfoARM.nflags(address()); }
         /** @return the value of the {@code layout} field. */
         @NativeType("VkPipelineLayout")
@@ -386,8 +390,12 @@ public class VkDataGraphPipelineCreateInfoARM extends Struct<VkDataGraphPipeline
         public VkDataGraphPipelineCreateInfoARM.Buffer pNext(VkDataGraphPipelineCompilerControlCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDataGraphPipelineIdentifierCreateInfoARM} value to the {@code pNext} chain. */
         public VkDataGraphPipelineCreateInfoARM.Buffer pNext(VkDataGraphPipelineIdentifierCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkDataGraphPipelineOpticalFlowCreateInfoARM} value to the {@code pNext} chain. */
+        public VkDataGraphPipelineCreateInfoARM.Buffer pNext(VkDataGraphPipelineOpticalFlowCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDataGraphPipelineShaderModuleCreateInfoARM} value to the {@code pNext} chain. */
         public VkDataGraphPipelineCreateInfoARM.Buffer pNext(VkDataGraphPipelineShaderModuleCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkDataGraphPipelineSingleNodeCreateInfoARM} value to the {@code pNext} chain. */
+        public VkDataGraphPipelineCreateInfoARM.Buffer pNext(VkDataGraphPipelineSingleNodeCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDataGraphProcessingEngineCreateInfoARM} value to the {@code pNext} chain. */
         public VkDataGraphPipelineCreateInfoARM.Buffer pNext(VkDataGraphProcessingEngineCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineCreationFeedbackCreateInfo} value to the {@code pNext} chain. */
@@ -397,7 +405,7 @@ public class VkDataGraphPipelineCreateInfoARM extends Struct<VkDataGraphPipeline
         /** Prepends the specified {@link VkShaderModuleCreateInfo} value to the {@code pNext} chain. */
         public VkDataGraphPipelineCreateInfoARM.Buffer pNext(VkShaderModuleCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code flags} field. */
-        public VkDataGraphPipelineCreateInfoARM.Buffer flags(@NativeType("VkPipelineCreateFlags2KHR") long value) { VkDataGraphPipelineCreateInfoARM.nflags(address(), value); return this; }
+        public VkDataGraphPipelineCreateInfoARM.Buffer flags(@NativeType("VkPipelineCreateFlags2") long value) { VkDataGraphPipelineCreateInfoARM.nflags(address(), value); return this; }
         /** Sets the specified value to the {@code layout} field. */
         public VkDataGraphPipelineCreateInfoARM.Buffer layout(@NativeType("VkPipelineLayout") long value) { VkDataGraphPipelineCreateInfoARM.nlayout(address(), value); return this; }
         /** Sets the address of the specified {@link VkDataGraphPipelineResourceInfoARM.Buffer} to the {@code pResourceInfos} field. */

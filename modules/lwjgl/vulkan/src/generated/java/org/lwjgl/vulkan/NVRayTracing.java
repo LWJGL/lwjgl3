@@ -150,7 +150,7 @@ public class NVRayTracing {
 
     // --- [ vkGetAccelerationStructureMemoryRequirementsNV ] ---
 
-    /** {@code void vkGetAccelerationStructureMemoryRequirementsNV(VkDevice device, VkAccelerationStructureMemoryRequirementsInfoNV const * pInfo, VkMemoryRequirements2KHR * pMemoryRequirements)} */
+    /** {@code void vkGetAccelerationStructureMemoryRequirementsNV(VkDevice device, VkAccelerationStructureMemoryRequirementsInfoNV const * pInfo, VkMemoryRequirements2 * pMemoryRequirements)} */
     public static void nvkGetAccelerationStructureMemoryRequirementsNV(VkDevice device, long pInfo, long pMemoryRequirements) {
         long __functionAddress = device.getCapabilities().vkGetAccelerationStructureMemoryRequirementsNV;
         if (CHECKS) {
@@ -159,8 +159,8 @@ public class NVRayTracing {
         callPPPV(device.address(), pInfo, pMemoryRequirements, __functionAddress);
     }
 
-    /** {@code void vkGetAccelerationStructureMemoryRequirementsNV(VkDevice device, VkAccelerationStructureMemoryRequirementsInfoNV const * pInfo, VkMemoryRequirements2KHR * pMemoryRequirements)} */
-    public static void vkGetAccelerationStructureMemoryRequirementsNV(VkDevice device, @NativeType("VkAccelerationStructureMemoryRequirementsInfoNV const *") VkAccelerationStructureMemoryRequirementsInfoNV pInfo, @NativeType("VkMemoryRequirements2KHR *") VkMemoryRequirements2KHR pMemoryRequirements) {
+    /** {@code void vkGetAccelerationStructureMemoryRequirementsNV(VkDevice device, VkAccelerationStructureMemoryRequirementsInfoNV const * pInfo, VkMemoryRequirements2 * pMemoryRequirements)} */
+    public static void vkGetAccelerationStructureMemoryRequirementsNV(VkDevice device, @NativeType("VkAccelerationStructureMemoryRequirementsInfoNV const *") VkAccelerationStructureMemoryRequirementsInfoNV pInfo, @NativeType("VkMemoryRequirements2 *") VkMemoryRequirements2 pMemoryRequirements) {
         nvkGetAccelerationStructureMemoryRequirementsNV(device, pInfo.address(), pMemoryRequirements.address());
     }
 

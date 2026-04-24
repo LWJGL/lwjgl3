@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkDeviceAddress dstAddress;
  *     VkDeviceSize compressedSize;
  *     VkDeviceSize decompressedSize;
- *     VkMemoryDecompressionMethodFlagsNV decompressionMethod;
+ *     VkMemoryDecompressionMethodFlagsEXT decompressionMethod;
  * }}</pre>
  */
 public class VkDecompressMemoryRegionNV extends Struct<VkDecompressMemoryRegionNV> implements NativeResource {
@@ -95,7 +95,7 @@ public class VkDecompressMemoryRegionNV extends Struct<VkDecompressMemoryRegionN
     @NativeType("VkDeviceSize")
     public long decompressedSize() { return ndecompressedSize(address()); }
     /** @return the value of the {@code decompressionMethod} field. */
-    @NativeType("VkMemoryDecompressionMethodFlagsNV")
+    @NativeType("VkMemoryDecompressionMethodFlagsEXT")
     public long decompressionMethod() { return ndecompressionMethod(address()); }
 
     /** Sets the specified value to the {@code srcAddress} field. */
@@ -107,7 +107,7 @@ public class VkDecompressMemoryRegionNV extends Struct<VkDecompressMemoryRegionN
     /** Sets the specified value to the {@code decompressedSize} field. */
     public VkDecompressMemoryRegionNV decompressedSize(@NativeType("VkDeviceSize") long value) { ndecompressedSize(address(), value); return this; }
     /** Sets the specified value to the {@code decompressionMethod} field. */
-    public VkDecompressMemoryRegionNV decompressionMethod(@NativeType("VkMemoryDecompressionMethodFlagsNV") long value) { ndecompressionMethod(address(), value); return this; }
+    public VkDecompressMemoryRegionNV decompressionMethod(@NativeType("VkMemoryDecompressionMethodFlagsEXT") long value) { ndecompressionMethod(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkDecompressMemoryRegionNV set(
@@ -327,7 +327,7 @@ public class VkDecompressMemoryRegionNV extends Struct<VkDecompressMemoryRegionN
         @NativeType("VkDeviceSize")
         public long decompressedSize() { return VkDecompressMemoryRegionNV.ndecompressedSize(address()); }
         /** @return the value of the {@code decompressionMethod} field. */
-        @NativeType("VkMemoryDecompressionMethodFlagsNV")
+        @NativeType("VkMemoryDecompressionMethodFlagsEXT")
         public long decompressionMethod() { return VkDecompressMemoryRegionNV.ndecompressionMethod(address()); }
 
         /** Sets the specified value to the {@code srcAddress} field. */
@@ -339,7 +339,7 @@ public class VkDecompressMemoryRegionNV extends Struct<VkDecompressMemoryRegionN
         /** Sets the specified value to the {@code decompressedSize} field. */
         public VkDecompressMemoryRegionNV.Buffer decompressedSize(@NativeType("VkDeviceSize") long value) { VkDecompressMemoryRegionNV.ndecompressedSize(address(), value); return this; }
         /** Sets the specified value to the {@code decompressionMethod} field. */
-        public VkDecompressMemoryRegionNV.Buffer decompressionMethod(@NativeType("VkMemoryDecompressionMethodFlagsNV") long value) { VkDecompressMemoryRegionNV.ndecompressionMethod(address(), value); return this; }
+        public VkDecompressMemoryRegionNV.Buffer decompressionMethod(@NativeType("VkMemoryDecompressionMethodFlagsEXT") long value) { VkDecompressMemoryRegionNV.ndecompressionMethod(address(), value); return this; }
 
     }
 

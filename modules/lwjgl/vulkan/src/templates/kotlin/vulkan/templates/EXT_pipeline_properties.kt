@@ -27,7 +27,7 @@ val EXT_pipeline_properties = "EXTPipelineProperties".nativeClassVK("EXT_pipelin
         "GetPipelinePropertiesEXT",
 
         VkDevice("device"),
-        VkPipelineInfoEXT.const.p("pPipelineInfo"),
+        VkPipelineInfoKHR.const.p("pPipelineInfo"),
         nullable..VkBaseOutStructure.p("pPipelineProperties")
     )
 }

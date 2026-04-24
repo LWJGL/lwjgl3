@@ -98,6 +98,8 @@ public class VkMemoryRangeBarriersInfoKHR extends Struct<VkMemoryRangeBarriersIn
     public VkMemoryRangeBarriersInfoKHR sType$Default() { return sType(KHRDeviceAddressCommands.VK_STRUCTURE_TYPE_MEMORY_RANGE_BARRIERS_INFO_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkMemoryRangeBarriersInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkMemoryBarrierAccessFlags3KHR} value to the {@code pNext} chain. */
+    public VkMemoryRangeBarriersInfoKHR pNext(VkMemoryBarrierAccessFlags3KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the address of the specified {@link VkMemoryRangeBarrierKHR.Buffer} to the {@code pMemoryRangeBarriers} field. */
     public VkMemoryRangeBarriersInfoKHR pMemoryRangeBarriers(@NativeType("VkMemoryRangeBarrierKHR const *") VkMemoryRangeBarrierKHR.@Nullable Buffer value) { npMemoryRangeBarriers(address(), value); return this; }
 
@@ -328,6 +330,8 @@ public class VkMemoryRangeBarriersInfoKHR extends Struct<VkMemoryRangeBarriersIn
         public VkMemoryRangeBarriersInfoKHR.Buffer sType$Default() { return sType(KHRDeviceAddressCommands.VK_STRUCTURE_TYPE_MEMORY_RANGE_BARRIERS_INFO_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkMemoryRangeBarriersInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkMemoryRangeBarriersInfoKHR.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkMemoryBarrierAccessFlags3KHR} value to the {@code pNext} chain. */
+        public VkMemoryRangeBarriersInfoKHR.Buffer pNext(VkMemoryBarrierAccessFlags3KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the address of the specified {@link VkMemoryRangeBarrierKHR.Buffer} to the {@code pMemoryRangeBarriers} field. */
         public VkMemoryRangeBarriersInfoKHR.Buffer pMemoryRangeBarriers(@NativeType("VkMemoryRangeBarrierKHR const *") VkMemoryRangeBarrierKHR.@Nullable Buffer value) { VkMemoryRangeBarriersInfoKHR.npMemoryRangeBarriers(address(), value); return this; }
 

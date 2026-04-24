@@ -90,6 +90,8 @@ public class VkDataGraphPipelineDispatchInfoARM extends Struct<VkDataGraphPipeli
     public VkDataGraphPipelineDispatchInfoARM sType$Default() { return sType(ARMDataGraph.VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_DISPATCH_INFO_ARM); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkDataGraphPipelineDispatchInfoARM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkDataGraphPipelineOpticalFlowDispatchInfoARM} value to the {@code pNext} chain. */
+    public VkDataGraphPipelineDispatchInfoARM pNext(VkDataGraphPipelineOpticalFlowDispatchInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code flags} field. */
     public VkDataGraphPipelineDispatchInfoARM flags(@NativeType("VkDataGraphPipelineDispatchFlagsARM") long value) { nflags(address(), value); return this; }
 
@@ -302,6 +304,8 @@ public class VkDataGraphPipelineDispatchInfoARM extends Struct<VkDataGraphPipeli
         public VkDataGraphPipelineDispatchInfoARM.Buffer sType$Default() { return sType(ARMDataGraph.VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_DISPATCH_INFO_ARM); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkDataGraphPipelineDispatchInfoARM.Buffer pNext(@NativeType("void *") long value) { VkDataGraphPipelineDispatchInfoARM.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkDataGraphPipelineOpticalFlowDispatchInfoARM} value to the {@code pNext} chain. */
+        public VkDataGraphPipelineDispatchInfoARM.Buffer pNext(VkDataGraphPipelineOpticalFlowDispatchInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code flags} field. */
         public VkDataGraphPipelineDispatchInfoARM.Buffer flags(@NativeType("VkDataGraphPipelineDispatchFlagsARM") long value) { VkDataGraphPipelineDispatchInfoARM.nflags(address(), value); return this; }
 

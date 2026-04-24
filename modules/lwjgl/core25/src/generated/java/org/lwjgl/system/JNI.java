@@ -2769,6 +2769,7 @@ public final class JNI {
     public static native int callPPPPPI(long param0, long param1, int @Nullable [] param2, int @Nullable [] param3, long @Nullable [] param4, long __functionAddress);
     public static native int callPPPPPI(long param0, int @Nullable [] param1, int @Nullable [] param2, int @Nullable [] param3, long param4, long __functionAddress);
     public static native int callPJPPPI(long param0, long param1, int param2, long param3, long param4, long @Nullable [] param5, long __functionAddress);
+    public static native int callPPPPPI(long param0, int param1, long param2, long param3, int @Nullable [] param4, long param5, long __functionAddress);
     public static native int callPPPPPI(long param0, long param1, int param2, long param3, int @Nullable [] param4, long param5, long __functionAddress);
     public static native int callPPPPPI(long param0, long param1, int param2, long param3, long @Nullable [] param4, long param5, long __functionAddress);
     public static native int callPPPPPI(long param0, long param1, long param2, int @Nullable [] param3, int param4, int @Nullable [] param5, long __functionAddress);

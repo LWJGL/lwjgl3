@@ -87,9 +87,9 @@ public class VkDeviceFaultShaderAbortMessageInfoKHR extends Struct<VkDeviceFault
     /** @return the value of the {@code messageDataSize} field. */
     @NativeType("uint64_t")
     public long messageDataSize() { return nmessageDataSize(address()); }
-    /** @return the value of the {@code pMessageData} field. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pMessageData} field. */
     @NativeType("void *")
-    public long pMessageData() { return npMessageData(address()); }
+    public @Nullable ByteBuffer pMessageData() { return npMessageData(address()); }
 
     /** Sets the specified value to the {@code sType} field. */
     public VkDeviceFaultShaderAbortMessageInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -238,8 +238,8 @@ public class VkDeviceFaultShaderAbortMessageInfoKHR extends Struct<VkDeviceFault
     public static long npNext(long struct) { return memGetAddress(struct + VkDeviceFaultShaderAbortMessageInfoKHR.PNEXT); }
     /** Unsafe version of {@link #messageDataSize}. */
     public static long nmessageDataSize(long struct) { return memGetLong(struct + VkDeviceFaultShaderAbortMessageInfoKHR.MESSAGEDATASIZE); }
-    /** Unsafe version of {@link #pMessageData}. */
-    public static long npMessageData(long struct) { return memGetAddress(struct + VkDeviceFaultShaderAbortMessageInfoKHR.PMESSAGEDATA); }
+    /** Unsafe version of {@link #pMessageData() pMessageData}. */
+    public static @Nullable ByteBuffer npMessageData(long struct) { return memByteBufferSafe(memGetAddress(struct + VkDeviceFaultShaderAbortMessageInfoKHR.PMESSAGEDATA), (int)nmessageDataSize(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceFaultShaderAbortMessageInfoKHR.STYPE, value); }
@@ -298,9 +298,9 @@ public class VkDeviceFaultShaderAbortMessageInfoKHR extends Struct<VkDeviceFault
         /** @return the value of the {@code messageDataSize} field. */
         @NativeType("uint64_t")
         public long messageDataSize() { return VkDeviceFaultShaderAbortMessageInfoKHR.nmessageDataSize(address()); }
-        /** @return the value of the {@code pMessageData} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pMessageData} field. */
         @NativeType("void *")
-        public long pMessageData() { return VkDeviceFaultShaderAbortMessageInfoKHR.npMessageData(address()); }
+        public @Nullable ByteBuffer pMessageData() { return VkDeviceFaultShaderAbortMessageInfoKHR.npMessageData(address()); }
 
         /** Sets the specified value to the {@code sType} field. */
         public VkDeviceFaultShaderAbortMessageInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceFaultShaderAbortMessageInfoKHR.nsType(address(), value); return this; }

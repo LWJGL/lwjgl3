@@ -173,6 +173,8 @@ public class VkImageCreateInfo extends Struct<VkImageCreateInfo> implements Nati
     public VkImageCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkImageCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkDataGraphOpticalFlowImageFormatInfoARM} value to the {@code pNext} chain. */
+    public VkImageCreateInfo pNext(VkDataGraphOpticalFlowImageFormatInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDedicatedAllocationImageCreateInfoNV} value to the {@code pNext} chain. */
     public VkImageCreateInfo pNext(VkDedicatedAllocationImageCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkExportMetalObjectCreateInfoEXT} value to the {@code pNext} chain. */
@@ -560,6 +562,8 @@ public class VkImageCreateInfo extends Struct<VkImageCreateInfo> implements Nati
         public VkImageCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkImageCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkImageCreateInfo.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkDataGraphOpticalFlowImageFormatInfoARM} value to the {@code pNext} chain. */
+        public VkImageCreateInfo.Buffer pNext(VkDataGraphOpticalFlowImageFormatInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDedicatedAllocationImageCreateInfoNV} value to the {@code pNext} chain. */
         public VkImageCreateInfo.Buffer pNext(VkDedicatedAllocationImageCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkExportMetalObjectCreateInfoEXT} value to the {@code pNext} chain. */

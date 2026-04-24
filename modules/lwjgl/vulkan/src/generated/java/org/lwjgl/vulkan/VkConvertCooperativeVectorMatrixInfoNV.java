@@ -24,8 +24,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} srcData;
  *     size_t * pDstSize;
  *     {@link VkDeviceOrHostAddressKHR VkDeviceOrHostAddressKHR} dstData;
- *     VkComponentTypeNV srcComponentType;
- *     VkComponentTypeNV dstComponentType;
+ *     VkComponentTypeKHR srcComponentType;
+ *     VkComponentTypeKHR dstComponentType;
  *     uint32_t numRows;
  *     uint32_t numColumns;
  *     VkCooperativeVectorMatrixLayoutNV srcLayout;
@@ -135,10 +135,10 @@ public class VkConvertCooperativeVectorMatrixInfoNV extends Struct<VkConvertCoop
     /** @return a {@link VkDeviceOrHostAddressKHR} view of the {@code dstData} field. */
     public VkDeviceOrHostAddressKHR dstData() { return ndstData(address()); }
     /** @return the value of the {@code srcComponentType} field. */
-    @NativeType("VkComponentTypeNV")
+    @NativeType("VkComponentTypeKHR")
     public int srcComponentType() { return nsrcComponentType(address()); }
     /** @return the value of the {@code dstComponentType} field. */
-    @NativeType("VkComponentTypeNV")
+    @NativeType("VkComponentTypeKHR")
     public int dstComponentType() { return ndstComponentType(address()); }
     /** @return the value of the {@code numRows} field. */
     @NativeType("uint32_t")
@@ -178,9 +178,9 @@ public class VkConvertCooperativeVectorMatrixInfoNV extends Struct<VkConvertCoop
     /** Passes the {@code dstData} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkConvertCooperativeVectorMatrixInfoNV dstData(java.util.function.Consumer<VkDeviceOrHostAddressKHR> consumer) { consumer.accept(dstData()); return this; }
     /** Sets the specified value to the {@code srcComponentType} field. */
-    public VkConvertCooperativeVectorMatrixInfoNV srcComponentType(@NativeType("VkComponentTypeNV") int value) { nsrcComponentType(address(), value); return this; }
+    public VkConvertCooperativeVectorMatrixInfoNV srcComponentType(@NativeType("VkComponentTypeKHR") int value) { nsrcComponentType(address(), value); return this; }
     /** Sets the specified value to the {@code dstComponentType} field. */
-    public VkConvertCooperativeVectorMatrixInfoNV dstComponentType(@NativeType("VkComponentTypeNV") int value) { ndstComponentType(address(), value); return this; }
+    public VkConvertCooperativeVectorMatrixInfoNV dstComponentType(@NativeType("VkComponentTypeKHR") int value) { ndstComponentType(address(), value); return this; }
     /** Sets the specified value to the {@code numRows} field. */
     public VkConvertCooperativeVectorMatrixInfoNV numRows(@NativeType("uint32_t") int value) { nnumRows(address(), value); return this; }
     /** Sets the specified value to the {@code numColumns} field. */
@@ -470,10 +470,10 @@ public class VkConvertCooperativeVectorMatrixInfoNV extends Struct<VkConvertCoop
         /** @return a {@link VkDeviceOrHostAddressKHR} view of the {@code dstData} field. */
         public VkDeviceOrHostAddressKHR dstData() { return VkConvertCooperativeVectorMatrixInfoNV.ndstData(address()); }
         /** @return the value of the {@code srcComponentType} field. */
-        @NativeType("VkComponentTypeNV")
+        @NativeType("VkComponentTypeKHR")
         public int srcComponentType() { return VkConvertCooperativeVectorMatrixInfoNV.nsrcComponentType(address()); }
         /** @return the value of the {@code dstComponentType} field. */
-        @NativeType("VkComponentTypeNV")
+        @NativeType("VkComponentTypeKHR")
         public int dstComponentType() { return VkConvertCooperativeVectorMatrixInfoNV.ndstComponentType(address()); }
         /** @return the value of the {@code numRows} field. */
         @NativeType("uint32_t")
@@ -513,9 +513,9 @@ public class VkConvertCooperativeVectorMatrixInfoNV extends Struct<VkConvertCoop
         /** Passes the {@code dstData} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkConvertCooperativeVectorMatrixInfoNV.Buffer dstData(java.util.function.Consumer<VkDeviceOrHostAddressKHR> consumer) { consumer.accept(dstData()); return this; }
         /** Sets the specified value to the {@code srcComponentType} field. */
-        public VkConvertCooperativeVectorMatrixInfoNV.Buffer srcComponentType(@NativeType("VkComponentTypeNV") int value) { VkConvertCooperativeVectorMatrixInfoNV.nsrcComponentType(address(), value); return this; }
+        public VkConvertCooperativeVectorMatrixInfoNV.Buffer srcComponentType(@NativeType("VkComponentTypeKHR") int value) { VkConvertCooperativeVectorMatrixInfoNV.nsrcComponentType(address(), value); return this; }
         /** Sets the specified value to the {@code dstComponentType} field. */
-        public VkConvertCooperativeVectorMatrixInfoNV.Buffer dstComponentType(@NativeType("VkComponentTypeNV") int value) { VkConvertCooperativeVectorMatrixInfoNV.ndstComponentType(address(), value); return this; }
+        public VkConvertCooperativeVectorMatrixInfoNV.Buffer dstComponentType(@NativeType("VkComponentTypeKHR") int value) { VkConvertCooperativeVectorMatrixInfoNV.ndstComponentType(address(), value); return this; }
         /** Sets the specified value to the {@code numRows} field. */
         public VkConvertCooperativeVectorMatrixInfoNV.Buffer numRows(@NativeType("uint32_t") int value) { VkConvertCooperativeVectorMatrixInfoNV.nnumRows(address(), value); return this; }
         /** Sets the specified value to the {@code numColumns} field. */
