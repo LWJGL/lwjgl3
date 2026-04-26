@@ -50,11 +50,6 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         "SHADER_CODE_TYPE_SPIRV_EXT".."1"
     )
 
-    EnumConstant(
-        "DEPTH_CLAMP_MODE_VIEWPORT_RANGE_EXT".."0",
-        "DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT".."1"
-    )
-
     VkResult(
         "CreateShadersEXT",
 

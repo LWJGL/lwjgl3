@@ -55,6 +55,12 @@ public class KHRDeviceGroup {
 
     public static final int VK_SWAPCHAIN_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR = 0x1;
 
+    public static final int
+        VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR              = 0x1,
+        VK_DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR             = 0x2,
+        VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR                = 0x4,
+        VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR = 0x8;
+
     protected KHRDeviceGroup() {
         throw new UnsupportedOperationException();
     }

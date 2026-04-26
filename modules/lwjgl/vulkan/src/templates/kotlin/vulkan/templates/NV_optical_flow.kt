@@ -56,20 +56,20 @@ val NV_optical_flow = "NVOpticalFlow".nativeClassVK("NV_optical_flow", type = "d
     )
 
     EnumConstant(
-        "OPTICAL_FLOW_GRID_SIZE_UNKNOWN_NV".."0",
-        "OPTICAL_FLOW_GRID_SIZE_1X1_BIT_NV".enum(0x00000001),
-        "OPTICAL_FLOW_GRID_SIZE_2X2_BIT_NV".enum(0x00000002),
-        "OPTICAL_FLOW_GRID_SIZE_4X4_BIT_NV".enum(0x00000004),
-        "OPTICAL_FLOW_GRID_SIZE_8X8_BIT_NV".enum(0x00000008)
-    )
-
-    EnumConstant(
         "OPTICAL_FLOW_USAGE_UNKNOWN_NV".."0",
         "OPTICAL_FLOW_USAGE_INPUT_BIT_NV".enum(0x00000001),
         "OPTICAL_FLOW_USAGE_OUTPUT_BIT_NV".enum(0x00000002),
         "OPTICAL_FLOW_USAGE_HINT_BIT_NV".enum(0x00000004),
         "OPTICAL_FLOW_USAGE_COST_BIT_NV".enum(0x00000008),
         "OPTICAL_FLOW_USAGE_GLOBAL_FLOW_BIT_NV".enum(0x00000010)
+    )
+
+    EnumConstant(
+        "OPTICAL_FLOW_GRID_SIZE_UNKNOWN_NV".."0",
+        "OPTICAL_FLOW_GRID_SIZE_1X1_BIT_NV".enum(0x00000001),
+        "OPTICAL_FLOW_GRID_SIZE_2X2_BIT_NV".enum(0x00000002),
+        "OPTICAL_FLOW_GRID_SIZE_4X4_BIT_NV".enum(0x00000004),
+        "OPTICAL_FLOW_GRID_SIZE_8X8_BIT_NV".enum(0x00000008)
     )
 
     EnumConstant(

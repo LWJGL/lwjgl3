@@ -50,10 +50,6 @@ public class EXTShaderObject {
         VK_SHADER_CODE_TYPE_BINARY_EXT = 0,
         VK_SHADER_CODE_TYPE_SPIRV_EXT  = 1;
 
-    public static final int
-        VK_DEPTH_CLAMP_MODE_VIEWPORT_RANGE_EXT     = 0,
-        VK_DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT = 1;
-
     protected EXTShaderObject() {
         throw new UnsupportedOperationException();
     }

@@ -62,6 +62,13 @@ val KHR_device_group = "KHRDeviceGroup".nativeClassVK("KHR_device_group", type =
         "SWAPCHAIN_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR".enum(0x00000001)
     )
 
+    EnumConstant(
+        "DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR".enum(0x00000001),
+        "DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR".enum(0x00000002),
+        "DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR".enum(0x00000004),
+        "DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR".enum(0x00000008)
+    )
+
     void(
         "GetDeviceGroupPeerMemoryFeaturesKHR",
 

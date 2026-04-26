@@ -37,8 +37,7 @@ val EXT_memory_decompression = "EXTMemoryDecompression".nativeClassVK("EXT_memor
     )
 
     EnumConstantLong(
-        "MEMORY_DECOMPRESSION_METHOD_GDEFLATE_1_0_BIT_EXT".enum(0x00000001L),
-        "MEMORY_DECOMPRESSION_METHOD_GDEFLATE_1_0_BIT_NV".enum(0x00000001L)
+        "MEMORY_DECOMPRESSION_METHOD_GDEFLATE_1_0_BIT_EXT".enum(0x00000001L)
     )
 
     void(

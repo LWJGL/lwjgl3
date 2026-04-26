@@ -72,15 +72,15 @@ public class EXTOpacityMicromap {
         VK_BUILD_MICROMAP_PREFER_FAST_BUILD_BIT_EXT = 0x2,
         VK_BUILD_MICROMAP_ALLOW_COMPACTION_BIT_EXT  = 0x4;
 
-    public static final int VK_BUILD_MICROMAP_MODE_BUILD_EXT = 0;
-
-    public static final int VK_MICROMAP_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT = 0x1;
-
     public static final int
         VK_COPY_MICROMAP_MODE_CLONE_EXT       = 0,
         VK_COPY_MICROMAP_MODE_SERIALIZE_EXT   = 1,
         VK_COPY_MICROMAP_MODE_DESERIALIZE_EXT = 2,
         VK_COPY_MICROMAP_MODE_COMPACT_EXT     = 3;
+
+    public static final int VK_MICROMAP_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT = 0x1;
+
+    public static final int VK_BUILD_MICROMAP_MODE_BUILD_EXT = 0;
 
     public static final int
         VK_OPACITY_MICROMAP_FORMAT_2_STATE_EXT = 1,

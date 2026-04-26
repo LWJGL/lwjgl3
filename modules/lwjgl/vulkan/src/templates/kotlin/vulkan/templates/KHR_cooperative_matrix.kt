@@ -24,6 +24,13 @@ val KHR_cooperative_matrix = "KHRCooperativeMatrix".nativeClassVK("KHR_cooperati
     )
 
     EnumConstant(
+        "SCOPE_DEVICE_KHR".."1",
+        "SCOPE_WORKGROUP_KHR".."2",
+        "SCOPE_SUBGROUP_KHR".."3",
+        "SCOPE_QUEUE_FAMILY_KHR".."5"
+    )
+
+    EnumConstant(
         "COMPONENT_TYPE_FLOAT16_KHR".."0",
         "COMPONENT_TYPE_FLOAT32_KHR".."1",
         "COMPONENT_TYPE_FLOAT64_KHR".."2",
@@ -35,13 +42,6 @@ val KHR_cooperative_matrix = "KHRCooperativeMatrix".nativeClassVK("KHR_cooperati
         "COMPONENT_TYPE_UINT16_KHR".."8",
         "COMPONENT_TYPE_UINT32_KHR".."9",
         "COMPONENT_TYPE_UINT64_KHR".."10"
-    )
-
-    EnumConstant(
-        "SCOPE_DEVICE_KHR".."1",
-        "SCOPE_WORKGROUP_KHR".."2",
-        "SCOPE_SUBGROUP_KHR".."3",
-        "SCOPE_QUEUE_FAMILY_KHR".."5"
     )
 
     VkResult(

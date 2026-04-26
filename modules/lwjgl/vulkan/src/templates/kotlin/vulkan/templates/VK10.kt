@@ -126,18 +126,6 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
     )
 
     EnumConstant(
-        "SYSTEM_ALLOCATION_SCOPE_COMMAND".."0",
-        "SYSTEM_ALLOCATION_SCOPE_OBJECT".."1",
-        "SYSTEM_ALLOCATION_SCOPE_CACHE".."2",
-        "SYSTEM_ALLOCATION_SCOPE_DEVICE".."3",
-        "SYSTEM_ALLOCATION_SCOPE_INSTANCE".."4"
-    )
-
-    EnumConstant(
-        "INTERNAL_ALLOCATION_TYPE_EXECUTABLE".."0"
-    )
-
-    EnumConstant(
         "FORMAT_UNDEFINED".."0",
         "FORMAT_R4G4_UNORM_PACK8".."1",
         "FORMAT_R4G4B4A4_UNORM_PACK16".."2",
@@ -350,16 +338,6 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
     )
 
     EnumConstant(
-        "SAMPLE_COUNT_1_BIT".enum(0x00000001),
-        "SAMPLE_COUNT_2_BIT".enum(0x00000002),
-        "SAMPLE_COUNT_4_BIT".enum(0x00000004),
-        "SAMPLE_COUNT_8_BIT".enum(0x00000008),
-        "SAMPLE_COUNT_16_BIT".enum(0x00000010),
-        "SAMPLE_COUNT_32_BIT".enum(0x00000020),
-        "SAMPLE_COUNT_64_BIT".enum(0x00000040)
-    )
-
-    EnumConstant(
         "IMAGE_TILING_OPTIMAL".."0",
         "IMAGE_TILING_LINEAR".."1"
     )
@@ -379,6 +357,10 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         "IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT".enum(0x00000020),
         "IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT".enum(0x00000040),
         "IMAGE_USAGE_INPUT_ATTACHMENT_BIT".enum(0x00000080)
+    )
+
+    EnumConstant(
+        "INTERNAL_ALLOCATION_TYPE_EXECUTABLE".."0"
     )
 
     EnumConstant(
@@ -406,6 +388,24 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         "QUEUE_COMPUTE_BIT".enum(0x00000002),
         "QUEUE_TRANSFER_BIT".enum(0x00000004),
         "QUEUE_SPARSE_BINDING_BIT".enum(0x00000008)
+    )
+
+    EnumConstant(
+        "SAMPLE_COUNT_1_BIT".enum(0x00000001),
+        "SAMPLE_COUNT_2_BIT".enum(0x00000002),
+        "SAMPLE_COUNT_4_BIT".enum(0x00000004),
+        "SAMPLE_COUNT_8_BIT".enum(0x00000008),
+        "SAMPLE_COUNT_16_BIT".enum(0x00000010),
+        "SAMPLE_COUNT_32_BIT".enum(0x00000020),
+        "SAMPLE_COUNT_64_BIT".enum(0x00000040)
+    )
+
+    EnumConstant(
+        "SYSTEM_ALLOCATION_SCOPE_COMMAND".."0",
+        "SYSTEM_ALLOCATION_SCOPE_OBJECT".."1",
+        "SYSTEM_ALLOCATION_SCOPE_CACHE".."2",
+        "SYSTEM_ALLOCATION_SCOPE_DEVICE".."3",
+        "SYSTEM_ALLOCATION_SCOPE_INSTANCE".."4"
     )
 
     EnumConstant(
@@ -475,16 +475,16 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
     )
 
     EnumConstant(
-        "QUERY_TYPE_OCCLUSION".."0",
-        "QUERY_TYPE_PIPELINE_STATISTICS".."1",
-        "QUERY_TYPE_TIMESTAMP".."2"
-    )
-
-    EnumConstant(
         "QUERY_RESULT_64_BIT".enum(0x00000001),
         "QUERY_RESULT_WAIT_BIT".enum(0x00000002),
         "QUERY_RESULT_WITH_AVAILABILITY_BIT".enum(0x00000004),
         "QUERY_RESULT_PARTIAL_BIT".enum(0x00000008)
+    )
+
+    EnumConstant(
+        "QUERY_TYPE_OCCLUSION".."0",
+        "QUERY_TYPE_PIPELINE_STATISTICS".."1",
+        "QUERY_TYPE_TIMESTAMP".."2"
     )
 
     EnumConstant(
@@ -581,7 +581,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
     )
 
     EnumConstant(
-        "QUERY_CONTROL_PRECISE_BIT".enum(0x00000001)
+        "COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT".enum(0x00000001)
     )
 
     EnumConstant(
@@ -591,7 +591,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
     )
 
     EnumConstant(
-        "COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT".enum(0x00000001)
+        "QUERY_CONTROL_PRECISE_BIT".enum(0x00000001)
     )
 
     EnumConstant(
@@ -647,6 +647,10 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
     )
 
     EnumConstant(
+        "DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT".enum(0x00000001)
+    )
+
+    EnumConstant(
         "DESCRIPTOR_TYPE_SAMPLER".."0",
         "DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER".."1",
         "DESCRIPTOR_TYPE_SAMPLED_IMAGE".."2",
@@ -658,10 +662,6 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         "DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC".."8",
         "DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC".."9",
         "DESCRIPTOR_TYPE_INPUT_ATTACHMENT".."10"
-    )
-
-    EnumConstant(
-        "DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT".enum(0x00000001)
     )
 
     EnumConstant(
@@ -766,6 +766,12 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
     )
 
     EnumConstant(
+        "POLYGON_MODE_FILL".."0",
+        "POLYGON_MODE_LINE".."1",
+        "POLYGON_MODE_POINT".."2"
+    )
+
+    EnumConstant(
         "PRIMITIVE_TOPOLOGY_POINT_LIST".."0",
         "PRIMITIVE_TOPOLOGY_LINE_LIST".."1",
         "PRIMITIVE_TOPOLOGY_LINE_STRIP".."2",
@@ -777,12 +783,6 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         "PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY".."8",
         "PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY".."9",
         "PRIMITIVE_TOPOLOGY_PATCH_LIST".."10"
-    )
-
-    EnumConstant(
-        "POLYGON_MODE_FILL".."0",
-        "POLYGON_MODE_LINE".."1",
-        "POLYGON_MODE_POINT".."2"
     )
 
     EnumConstant(

@@ -132,15 +132,6 @@ public class VK10 {
         VK_VENDOR_ID_MOBILEYE = 0x10007;
 
     public static final int
-        VK_SYSTEM_ALLOCATION_SCOPE_COMMAND  = 0,
-        VK_SYSTEM_ALLOCATION_SCOPE_OBJECT   = 1,
-        VK_SYSTEM_ALLOCATION_SCOPE_CACHE    = 2,
-        VK_SYSTEM_ALLOCATION_SCOPE_DEVICE   = 3,
-        VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE = 4;
-
-    public static final int VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE = 0;
-
-    public static final int
         VK_FORMAT_UNDEFINED                  = 0,
         VK_FORMAT_R4G4_UNORM_PACK8           = 1,
         VK_FORMAT_R4G4B4A4_UNORM_PACK16      = 2,
@@ -350,15 +341,6 @@ public class VK10 {
         VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT  = 0x10;
 
     public static final int
-        VK_SAMPLE_COUNT_1_BIT  = 0x1,
-        VK_SAMPLE_COUNT_2_BIT  = 0x2,
-        VK_SAMPLE_COUNT_4_BIT  = 0x4,
-        VK_SAMPLE_COUNT_8_BIT  = 0x8,
-        VK_SAMPLE_COUNT_16_BIT = 0x10,
-        VK_SAMPLE_COUNT_32_BIT = 0x20,
-        VK_SAMPLE_COUNT_64_BIT = 0x40;
-
-    public static final int
         VK_IMAGE_TILING_OPTIMAL = 0,
         VK_IMAGE_TILING_LINEAR  = 1;
 
@@ -376,6 +358,8 @@ public class VK10 {
         VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT = 0x20,
         VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT     = 0x40,
         VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT         = 0x80;
+
+    public static final int VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE = 0;
 
     public static final int VK_MEMORY_HEAP_DEVICE_LOCAL_BIT = 0x1;
 
@@ -398,6 +382,22 @@ public class VK10 {
         VK_QUEUE_COMPUTE_BIT        = 0x2,
         VK_QUEUE_TRANSFER_BIT       = 0x4,
         VK_QUEUE_SPARSE_BINDING_BIT = 0x8;
+
+    public static final int
+        VK_SAMPLE_COUNT_1_BIT  = 0x1,
+        VK_SAMPLE_COUNT_2_BIT  = 0x2,
+        VK_SAMPLE_COUNT_4_BIT  = 0x4,
+        VK_SAMPLE_COUNT_8_BIT  = 0x8,
+        VK_SAMPLE_COUNT_16_BIT = 0x10,
+        VK_SAMPLE_COUNT_32_BIT = 0x20,
+        VK_SAMPLE_COUNT_64_BIT = 0x40;
+
+    public static final int
+        VK_SYSTEM_ALLOCATION_SCOPE_COMMAND  = 0,
+        VK_SYSTEM_ALLOCATION_SCOPE_OBJECT   = 1,
+        VK_SYSTEM_ALLOCATION_SCOPE_CACHE    = 2,
+        VK_SYSTEM_ALLOCATION_SCOPE_DEVICE   = 3,
+        VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE = 4;
 
     public static final int
         VK_SHADER_STAGE_VERTEX_BIT                  = 0x1,
@@ -457,15 +457,15 @@ public class VK10 {
         VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT                 = 0x400;
 
     public static final int
-        VK_QUERY_TYPE_OCCLUSION           = 0,
-        VK_QUERY_TYPE_PIPELINE_STATISTICS = 1,
-        VK_QUERY_TYPE_TIMESTAMP           = 2;
-
-    public static final int
         VK_QUERY_RESULT_64_BIT                = 0x1,
         VK_QUERY_RESULT_WAIT_BIT              = 0x2,
         VK_QUERY_RESULT_WITH_AVAILABILITY_BIT = 0x4,
         VK_QUERY_RESULT_PARTIAL_BIT           = 0x8;
+
+    public static final int
+        VK_QUERY_TYPE_OCCLUSION           = 0,
+        VK_QUERY_TYPE_PIPELINE_STATISTICS = 1,
+        VK_QUERY_TYPE_TIMESTAMP           = 2;
 
     public static final int
         VK_BUFFER_CREATE_SPARSE_BINDING_BIT   = 0x1,
@@ -547,14 +547,14 @@ public class VK10 {
         VK_COMMAND_BUFFER_LEVEL_PRIMARY   = 0,
         VK_COMMAND_BUFFER_LEVEL_SECONDARY = 1;
 
-    public static final int VK_QUERY_CONTROL_PRECISE_BIT = 0x1;
+    public static final int VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT = 0x1;
 
     public static final int
         VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT      = 0x1,
         VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT = 0x2,
         VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT     = 0x4;
 
-    public static final int VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT = 0x1;
+    public static final int VK_QUERY_CONTROL_PRECISE_BIT = 0x1;
 
     public static final int
         VK_INDEX_TYPE_UINT16 = 0,
@@ -599,6 +599,8 @@ public class VK10 {
         VK_SAMPLER_MIPMAP_MODE_NEAREST = 0,
         VK_SAMPLER_MIPMAP_MODE_LINEAR  = 1;
 
+    public static final int VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT = 0x1;
+
     public static final int
         VK_DESCRIPTOR_TYPE_SAMPLER                = 0,
         VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER = 1,
@@ -611,8 +613,6 @@ public class VK10 {
         VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC = 8,
         VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC = 9,
         VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT       = 10;
-
-    public static final int VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT = 0x1;
 
     public static final int
         VK_PIPELINE_BIND_POINT_GRAPHICS = 0,
@@ -706,6 +706,11 @@ public class VK10 {
         VK_VERTEX_INPUT_RATE_INSTANCE = 1;
 
     public static final int
+        VK_POLYGON_MODE_FILL  = 0,
+        VK_POLYGON_MODE_LINE  = 1,
+        VK_POLYGON_MODE_POINT = 2;
+
+    public static final int
         VK_PRIMITIVE_TOPOLOGY_POINT_LIST                    = 0,
         VK_PRIMITIVE_TOPOLOGY_LINE_LIST                     = 1,
         VK_PRIMITIVE_TOPOLOGY_LINE_STRIP                    = 2,
@@ -717,11 +722,6 @@ public class VK10 {
         VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY  = 8,
         VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY = 9,
         VK_PRIMITIVE_TOPOLOGY_PATCH_LIST                    = 10;
-
-    public static final int
-        VK_POLYGON_MODE_FILL  = 0,
-        VK_POLYGON_MODE_LINE  = 1,
-        VK_POLYGON_MODE_POINT = 2;
 
     public static final int VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT = 0x1;
 

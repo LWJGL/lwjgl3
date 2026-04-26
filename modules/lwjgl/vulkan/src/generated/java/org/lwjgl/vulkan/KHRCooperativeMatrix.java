@@ -27,6 +27,12 @@ public class KHRCooperativeMatrix {
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR = 1000506002;
 
     public static final int
+        VK_SCOPE_DEVICE_KHR       = 1,
+        VK_SCOPE_WORKGROUP_KHR    = 2,
+        VK_SCOPE_SUBGROUP_KHR     = 3,
+        VK_SCOPE_QUEUE_FAMILY_KHR = 5;
+
+    public static final int
         VK_COMPONENT_TYPE_FLOAT16_KHR = 0,
         VK_COMPONENT_TYPE_FLOAT32_KHR = 1,
         VK_COMPONENT_TYPE_FLOAT64_KHR = 2,
@@ -38,12 +44,6 @@ public class KHRCooperativeMatrix {
         VK_COMPONENT_TYPE_UINT16_KHR  = 8,
         VK_COMPONENT_TYPE_UINT32_KHR  = 9,
         VK_COMPONENT_TYPE_UINT64_KHR  = 10;
-
-    public static final int
-        VK_SCOPE_DEVICE_KHR       = 1,
-        VK_SCOPE_WORKGROUP_KHR    = 2,
-        VK_SCOPE_SUBGROUP_KHR     = 3,
-        VK_SCOPE_QUEUE_FAMILY_KHR = 5;
 
     protected KHRCooperativeMatrix() {
         throw new UnsupportedOperationException();

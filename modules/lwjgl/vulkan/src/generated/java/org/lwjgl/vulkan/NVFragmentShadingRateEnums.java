@@ -25,10 +25,6 @@ public class NVFragmentShadingRateEnums {
         VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV  = 1000326002;
 
     public static final int
-        VK_FRAGMENT_SHADING_RATE_TYPE_FRAGMENT_SIZE_NV = 0,
-        VK_FRAGMENT_SHADING_RATE_TYPE_ENUMS_NV         = 1;
-
-    public static final int
         VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_PIXEL_NV      = 0,
         VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_1X2_PIXELS_NV = 1,
         VK_FRAGMENT_SHADING_RATE_1_INVOCATION_PER_2X1_PIXELS_NV = 4,
@@ -41,6 +37,10 @@ public class NVFragmentShadingRateEnums {
         VK_FRAGMENT_SHADING_RATE_8_INVOCATIONS_PER_PIXEL_NV     = 13,
         VK_FRAGMENT_SHADING_RATE_16_INVOCATIONS_PER_PIXEL_NV    = 14,
         VK_FRAGMENT_SHADING_RATE_NO_INVOCATIONS_NV              = 15;
+
+    public static final int
+        VK_FRAGMENT_SHADING_RATE_TYPE_FRAGMENT_SIZE_NV = 0,
+        VK_FRAGMENT_SHADING_RATE_TYPE_ENUMS_NV         = 1;
 
     protected NVFragmentShadingRateEnums() {
         throw new UnsupportedOperationException();

@@ -29,9 +29,7 @@ public class EXTMemoryDecompression {
 
     public static final long VK_BUFFER_USAGE_2_MEMORY_DECOMPRESSION_BIT_EXT = 0x100000000L;
 
-    public static final long
-        VK_MEMORY_DECOMPRESSION_METHOD_GDEFLATE_1_0_BIT_EXT = 0x1L,
-        VK_MEMORY_DECOMPRESSION_METHOD_GDEFLATE_1_0_BIT_NV  = 0x1L;
+    public static final long VK_MEMORY_DECOMPRESSION_METHOD_GDEFLATE_1_0_BIT_EXT = 0x1L;
 
     protected EXTMemoryDecompression() {
         throw new UnsupportedOperationException();

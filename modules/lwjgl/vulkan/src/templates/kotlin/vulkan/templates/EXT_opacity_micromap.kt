@@ -84,7 +84,10 @@ val EXT_opacity_micromap = "EXTOpacityMicromap".nativeClassVK("EXT_opacity_micro
     )
 
     EnumConstant(
-        "BUILD_MICROMAP_MODE_BUILD_EXT".."0"
+        "COPY_MICROMAP_MODE_CLONE_EXT".."0",
+        "COPY_MICROMAP_MODE_SERIALIZE_EXT".."1",
+        "COPY_MICROMAP_MODE_DESERIALIZE_EXT".."2",
+        "COPY_MICROMAP_MODE_COMPACT_EXT".."3"
     )
 
     EnumConstant(
@@ -92,10 +95,7 @@ val EXT_opacity_micromap = "EXTOpacityMicromap".nativeClassVK("EXT_opacity_micro
     )
 
     EnumConstant(
-        "COPY_MICROMAP_MODE_CLONE_EXT".."0",
-        "COPY_MICROMAP_MODE_SERIALIZE_EXT".."1",
-        "COPY_MICROMAP_MODE_DESERIALIZE_EXT".."2",
-        "COPY_MICROMAP_MODE_COMPACT_EXT".."3"
+        "BUILD_MICROMAP_MODE_BUILD_EXT".."0"
     )
 
     EnumConstant(
