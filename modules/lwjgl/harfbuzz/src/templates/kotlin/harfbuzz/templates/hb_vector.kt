@@ -12,7 +12,8 @@ val hb_vector = "HarfBuzzVector".nativeClass(Module.HARFBUZZ, prefix = "HB_VECTO
 
 	EnumConstant(
 		"FORMAT_INVALID".enum("HB_TAG_NONE"),
-		"FORMAT_SVG".enum("HB_TAG ('s','v','g',' ')")
+		"FORMAT_SVG".enum("HB_TAG ('s','v','g',' ')"),
+		"FORMAT_PDF".enum("HB_TAG ('p','d','f',' ')")
 	)
 
 	EnumConstant(
@@ -51,7 +52,7 @@ val hb_vector = "HarfBuzzVector".nativeClass(Module.HARFBUZZ, prefix = "HB_VECTO
 	opaque_p(
 		"draw_get_user_data",
 
-		hb_vector_draw_t.p("draw"),
+		hb_vector_draw_t.const.p("draw"),
 		hb_user_data_key_t.p("key")
 	)
 
@@ -67,7 +68,7 @@ val hb_vector = "HarfBuzzVector".nativeClass(Module.HARFBUZZ, prefix = "HB_VECTO
 	void(
 		"draw_get_transform",
 
-		hb_vector_draw_t.p("draw"),
+		hb_vector_draw_t.const.p("draw"),
 		Check(1)..nullable..float.p("xx"), Check(1)..nullable..float.p("yx"),
 		Check(1)..nullable..float.p("xy"), Check(1)..nullable..float.p("yy"),
 		Check(1)..nullable..float.p("dx"), Check(1)..nullable..float.p("dy")
@@ -84,7 +85,7 @@ val hb_vector = "HarfBuzzVector".nativeClass(Module.HARFBUZZ, prefix = "HB_VECTO
 	void(
 		"draw_get_scale_factor",
 
-		hb_vector_draw_t.p("draw"),
+		hb_vector_draw_t.const.p("draw"),
 		Check(1)..nullable..float.p("x_scale_factor"),
 		Check(1)..nullable..float.p("y_scale_factor")
 	)
@@ -99,7 +100,7 @@ val hb_vector = "HarfBuzzVector".nativeClass(Module.HARFBUZZ, prefix = "HB_VECTO
 	hb_bool_t(
 		"draw_get_extents",
 
-		hb_vector_draw_t.p("draw"),
+		hb_vector_draw_t.const.p("draw"),
 		hb_vector_extents_t.p("extents")
 	)
 
@@ -110,39 +111,89 @@ val hb_vector = "HarfBuzzVector".nativeClass(Module.HARFBUZZ, prefix = "HB_VECTO
 		hb_glyph_extents_t.const.p("glyph_extents")
 	)
 
+	hb_vector_format_t(
+		"draw_get_format",
+
+		hb_vector_draw_t.const.p("draw")
+	)
+
 	hb_draw_funcs_t.p(
 		"draw_get_funcs",
 
-		void()
+		hb_vector_draw_t.const.p("draw")
 	)
 
-	hb_bool_t(
+	void(
+		"draw_new_path",
+
+		hb_vector_draw_t.p("draw")
+	)
+
+	void(
 		"draw_glyph",
 
 		hb_vector_draw_t.p("draw"),
 		hb_font_t.p("font"),
 		hb_codepoint_t("glyph"),
-		float("pen_x"),
-		float("pen_y"),
+		hb_vector_extents_mode_t("extents_mode")
+	)
+
+	hb_bool_t(
+		"draw_glyph_or_fail",
+
+		hb_vector_draw_t.p("draw"),
+		hb_font_t.p("font"),
+		hb_codepoint_t("glyph"),
 		hb_vector_extents_mode_t("extents_mode")
 	)
 
 	void(
-		"svg_set_flat",
+		"draw_set_precision",
 
 		hb_vector_draw_t.p("draw"),
-		hb_bool_t("flat")
+		unsigned("precision")
+	)
+
+	unsigned(
+		"draw_get_precision",
+
+		hb_vector_draw_t.const.p("draw")
 	)
 
 	void(
-		"svg_set_precision",
+		"draw_set_foreground",
 
 		hb_vector_draw_t.p("draw"),
-		unsigned_int("precision")
+		hb_color_t("foreground")
+	)
+
+	hb_color_t(
+		"draw_get_foreground",
+
+		hb_vector_draw_t.const.p("draw")
+	)
+
+	void(
+		"draw_set_background",
+
+		hb_vector_draw_t.p("draw"),
+		hb_color_t("background")
+	)
+
+	hb_color_t(
+		"draw_get_background",
+
+		hb_vector_draw_t.const.p("draw")
 	)
 
 	hb_blob_t.p(
 		"draw_render",
+
+		hb_vector_draw_t.p("draw")
+	)
+
+	void(
+		"draw_clear",
 
 		hb_vector_draw_t.p("draw")
 	)
@@ -191,7 +242,7 @@ val hb_vector = "HarfBuzzVector".nativeClass(Module.HARFBUZZ, prefix = "HB_VECTO
 	opaque_p(
 		"paint_get_user_data",
 
-		hb_vector_paint_t.p("paint"),
+		hb_vector_paint_t.const.p("paint"),
 		hb_user_data_key_t.p("key")
 	)
 
@@ -207,7 +258,7 @@ val hb_vector = "HarfBuzzVector".nativeClass(Module.HARFBUZZ, prefix = "HB_VECTO
 	void(
 		"paint_get_transform",
 
-		hb_vector_paint_t.p("paint"),
+		hb_vector_paint_t.const.p("paint"),
 		Check(1)..nullable..float.p("xx"), Check(1)..nullable..float.p("yx"),
 		Check(1)..nullable..float.p("xy"), Check(1)..nullable..float.p("yy"),
 		Check(1)..nullable..float.p("dx"), Check(1)..nullable..float.p("dy")
@@ -224,7 +275,7 @@ val hb_vector = "HarfBuzzVector".nativeClass(Module.HARFBUZZ, prefix = "HB_VECTO
 	void(
 		"paint_get_scale_factor",
 
-		hb_vector_paint_t.p("paint"),
+		hb_vector_paint_t.const.p("paint"),
 		Check(1)..nullable..float.p("x_scale_factor"),
 		Check(1)..nullable..float.p("y_scale_factor")
 	)
@@ -239,7 +290,7 @@ val hb_vector = "HarfBuzzVector".nativeClass(Module.HARFBUZZ, prefix = "HB_VECTO
 	hb_bool_t(
 		"paint_get_extents",
 
-		hb_vector_paint_t.p("paint"),
+		hb_vector_paint_t.const.p("paint"),
 		hb_vector_extents_t.p("extents")
 	)
 
@@ -257,11 +308,36 @@ val hb_vector = "HarfBuzzVector".nativeClass(Module.HARFBUZZ, prefix = "HB_VECTO
 		hb_color_t("foreground")
 	)
 
+	hb_color_t(
+		"paint_get_foreground",
+
+		hb_vector_paint_t.const.p("paint")
+	)
+
+	void(
+		"paint_set_background",
+
+		hb_vector_paint_t.p("paint"),
+		hb_color_t("background")
+	)
+
+	hb_color_t(
+		"paint_get_background",
+
+		hb_vector_paint_t.const.p("paint")
+	)
+
 	void(
 		"paint_set_palette",
 
 		hb_vector_paint_t.p("paint"),
 		int("palette")
+	)
+
+	int(
+		"paint_get_palette",
+
+		hb_vector_paint_t.const.p("paint")
 	)
 
 	void(
@@ -278,39 +354,70 @@ val hb_vector = "HarfBuzzVector".nativeClass(Module.HARFBUZZ, prefix = "HB_VECTO
 		hb_vector_paint_t.p("paint")
 	)
 
+	hb_vector_format_t(
+		"paint_get_format",
+
+		hb_vector_paint_t.const.p("paint")
+	)
+
 	hb_paint_funcs_t.p(
 		"paint_get_funcs",
 
-		void()
+		hb_vector_paint_t.const.p("paint")
 	)
 
-	hb_bool_t(
+	void(
 		"paint_glyph",
 
 		hb_vector_paint_t.p("paint"),
 		hb_font_t.p("font"),
 		hb_codepoint_t("glyph"),
-		float("pen_x"),
-		float("pen_y"),
+		hb_vector_extents_mode_t("extents_mode")
+	)
+
+	hb_bool_t(
+		"paint_glyph_or_fail",
+
+		hb_vector_paint_t.p("paint"),
+		hb_font_t.p("font"),
+		hb_codepoint_t("glyph"),
 		hb_vector_extents_mode_t("extents_mode")
 	)
 
 	void(
-		"svg_paint_set_flat",
+		"paint_set_precision",
 
 		hb_vector_paint_t.p("paint"),
-		hb_bool_t("flat")
+		unsigned("precision")
+	)
+
+	unsigned(
+		"paint_get_precision",
+
+		hb_vector_paint_t.const.p("paint")
 	)
 
 	void(
-		"svg_paint_set_precision",
+		"paint_set_svg_prefix",
 
 		hb_vector_paint_t.p("paint"),
-		unsigned_int("precision")
+		nullable..charASCII.const.p("prefix")
+	)
+
+	charASCII.const.p(
+		"paint_get_svg_prefix",
+
+		hb_vector_paint_t.const.p("paint")
 	)
 
 	hb_blob_t.p(
 		"paint_render",
+
+		hb_vector_paint_t.p("paint")
+	)
+
+	void(
+		"paint_clear",
 
 		hb_vector_paint_t.p("paint")
 	)

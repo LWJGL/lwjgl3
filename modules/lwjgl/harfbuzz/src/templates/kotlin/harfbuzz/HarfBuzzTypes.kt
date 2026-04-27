@@ -690,6 +690,31 @@ val hb_paint_push_clip_rectangle_func_t = Module.HARFBUZZ.callback {
     )
 }
 
+val hb_paint_push_clip_path_start_func_t = Module.HARFBUZZ.callback {
+    hb_draw_funcs_t.p(
+        "hb_paint_push_clip_path_start_func_t",
+
+        hb_paint_funcs_t.p("funcs"),
+        nullable..opaque_p("paint_data"),
+        Check(1)..opaque_p.p("draw_data"),
+        nullable..opaque_p("user_data"),
+
+        nativeType = "hb_paint_push_clip_path_start_func_t"
+    )
+}
+
+val hb_paint_push_clip_path_end_func_t = Module.HARFBUZZ.callback {
+    void(
+        "hb_paint_push_clip_path_end_func_t",
+
+        hb_paint_funcs_t.p("funcs"),
+        nullable..opaque_p("paint_data"),
+        nullable..opaque_p("user_data"),
+
+        nativeType = "hb_paint_push_clip_path_end_func_t"
+    )
+}
+
 val hb_paint_pop_clip_func_t = Module.HARFBUZZ.callback {
     void(
         "hb_paint_pop_clip_func_t",
@@ -855,6 +880,19 @@ val hb_paint_push_group_func_t = Module.HARFBUZZ.callback {
     )
 }
 
+val hb_paint_push_group_for_func_t = Module.HARFBUZZ.callback {
+    void(
+        "hb_paint_push_group_for_func_t",
+
+        hb_paint_funcs_t.p("funcs"),
+        nullable..opaque_p("paint_data"),
+        hb_paint_composite_mode_t("mode"),
+        nullable..opaque_p("user_data"),
+
+        nativeType = "hb_paint_push_group_for_func_t"
+    )
+}
+
 val hb_paint_pop_group_func_t = Module.HARFBUZZ.callback {
     void(
         "hb_paint_pop_group_func_t",
@@ -879,6 +917,20 @@ val hb_paint_custom_palette_color_func_t = Module.HARFBUZZ.callback {
         nullable..opaque_p("user_data"),
 
         nativeType = "hb_paint_custom_palette_color_func_t"
+    )
+}
+
+val hb_paint_sweep_gradient_tile_func_t = Module.HARFBUZZ.callback {
+    void(
+        "hb_paint_sweep_gradient_tile_func_t",
+
+        float("a0"),
+        hb_color_t.p("c0"),
+        float("a1"),
+        hb_color_t.p("c1"),
+        nullable..opaque_p("user_data"),
+
+        nativeType = "hb_paint_sweep_gradient_tile_func_t"
     )
 }
 
@@ -946,11 +998,17 @@ val hb_get_table_tags_func_t = Module.HARFBUZZ.callback {
     )
 }
 
+// hb-draw.h
+
+val hb_draw_line_cap_t = "hb_draw_line_cap_t".enumType
+
 // hb-gpu.h
 
 val hb_gpu_draw_t = "hb_gpu_draw_t".opaque
+val hb_gpu_paint_t = "hb_gpu_paint_t".opaque
 
 val hb_gpu_shader_lang_t = "hb_gpu_shader_lang_t".enumType
+val hb_gpu_shader_stage_t = "hb_gpu_shader_stage_t".enumType
 
 // hb-raster.h
 

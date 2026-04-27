@@ -176,6 +176,9 @@ public class HarfBuzz {
             draw_quadratic_to                             = apiGetFunctionAddress(HARFBUZZ, "hb_draw_quadratic_to"),
             draw_cubic_to                                 = apiGetFunctionAddress(HARFBUZZ, "hb_draw_cubic_to"),
             draw_close_path                               = apiGetFunctionAddress(HARFBUZZ, "hb_draw_close_path"),
+            draw_line                                     = apiGetFunctionAddress(HARFBUZZ, "hb_draw_line"),
+            draw_rectangle                                = apiGetFunctionAddress(HARFBUZZ, "hb_draw_rectangle"),
+            draw_circle                                   = apiGetFunctionAddress(HARFBUZZ, "hb_draw_circle"),
             face_count                                    = apiGetFunctionAddress(HARFBUZZ, "hb_face_count"),
             face_create                                   = apiGetFunctionAddress(HARFBUZZ, "hb_face_create"),
             face_create_or_fail                           = apiGetFunctionAddress(HARFBUZZ, "hb_face_create_or_fail"),
@@ -361,6 +364,8 @@ public class HarfBuzz {
             paint_funcs_set_color_glyph_func              = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_color_glyph_func"),
             paint_funcs_set_push_clip_glyph_func          = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_push_clip_glyph_func"),
             paint_funcs_set_push_clip_rectangle_func      = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_push_clip_rectangle_func"),
+            paint_funcs_set_push_clip_path_start_func     = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_push_clip_path_start_func"),
+            paint_funcs_set_push_clip_path_end_func       = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_push_clip_path_end_func"),
             paint_funcs_set_pop_clip_func                 = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_pop_clip_func"),
             paint_funcs_set_color_func                    = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_color_func"),
             paint_funcs_set_image_func                    = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_image_func"),
@@ -368,6 +373,7 @@ public class HarfBuzz {
             paint_funcs_set_radial_gradient_func          = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_radial_gradient_func"),
             paint_funcs_set_sweep_gradient_func           = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_sweep_gradient_func"),
             paint_funcs_set_push_group_func               = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_push_group_func"),
+            paint_funcs_set_push_group_for_func           = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_push_group_for_func"),
             paint_funcs_set_pop_group_func                = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_pop_group_func"),
             paint_funcs_set_custom_palette_color_func     = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_custom_palette_color_func"),
             paint_push_transform                          = apiGetFunctionAddress(HARFBUZZ, "hb_paint_push_transform"),
@@ -377,6 +383,8 @@ public class HarfBuzz {
             paint_color_glyph                             = apiGetFunctionAddress(HARFBUZZ, "hb_paint_color_glyph"),
             paint_push_clip_glyph                         = apiGetFunctionAddress(HARFBUZZ, "hb_paint_push_clip_glyph"),
             paint_push_clip_rectangle                     = apiGetFunctionAddress(HARFBUZZ, "hb_paint_push_clip_rectangle"),
+            paint_push_clip_path_start                    = apiGetFunctionAddress(HARFBUZZ, "hb_paint_push_clip_path_start"),
+            paint_push_clip_path_end                      = apiGetFunctionAddress(HARFBUZZ, "hb_paint_push_clip_path_end"),
             paint_pop_clip                                = apiGetFunctionAddress(HARFBUZZ, "hb_paint_pop_clip"),
             paint_color                                   = apiGetFunctionAddress(HARFBUZZ, "hb_paint_color"),
             paint_image                                   = apiGetFunctionAddress(HARFBUZZ, "hb_paint_image"),
@@ -384,8 +392,12 @@ public class HarfBuzz {
             paint_radial_gradient                         = apiGetFunctionAddress(HARFBUZZ, "hb_paint_radial_gradient"),
             paint_sweep_gradient                          = apiGetFunctionAddress(HARFBUZZ, "hb_paint_sweep_gradient"),
             paint_push_group                              = apiGetFunctionAddress(HARFBUZZ, "hb_paint_push_group"),
+            paint_push_group_for                          = apiGetFunctionAddress(HARFBUZZ, "hb_paint_push_group_for"),
             paint_pop_group                               = apiGetFunctionAddress(HARFBUZZ, "hb_paint_pop_group"),
             paint_custom_palette_color                    = apiGetFunctionAddress(HARFBUZZ, "hb_paint_custom_palette_color"),
+            paint_reduce_linear_anchors                   = apiGetFunctionAddress(HARFBUZZ, "hb_paint_reduce_linear_anchors"),
+            paint_normalize_color_line                    = apiGetFunctionAddress(HARFBUZZ, "hb_paint_normalize_color_line"),
+            paint_sweep_gradient_tiles                    = apiGetFunctionAddress(HARFBUZZ, "hb_paint_sweep_gradient_tiles"),
             set_create                                    = apiGetFunctionAddress(HARFBUZZ, "hb_set_create"),
             set_get_empty                                 = apiGetFunctionAddress(HARFBUZZ, "hb_set_get_empty"),
             set_reference                                 = apiGetFunctionAddress(HARFBUZZ, "hb_set_reference"),
@@ -733,6 +745,10 @@ public class HarfBuzz {
         HB_BUFFER_DIFF_FLAG_GLYPH_FLAGS_MISMATCH  = 0x40,
         HB_BUFFER_DIFF_FLAG_POSITION_MISMATCH     = 0x80;
 
+    public static final int
+        HB_DRAW_LINE_CAP_BUTT   = 0,
+        HB_DRAW_LINE_CAP_SQUARE = 1;
+
     public static final int HB_FONT_NO_VAR_NAMED_INSTANCE = 0xFFFFFFFF;
 
     public static final int HB_MAP_VALUE_INVALID = HB_CODEPOINT_INVALID;
@@ -882,11 +898,11 @@ public class HarfBuzz {
 
     public static final int HB_VERSION_MAJOR = 14;
 
-    public static final int HB_VERSION_MINOR = 1;
+    public static final int HB_VERSION_MINOR = 2;
 
     public static final int HB_VERSION_MICRO = 0;
 
-    public static final String HB_VERSION_STRING = "14.1.0";
+    public static final String HB_VERSION_STRING = "14.2.0";
 
     protected HarfBuzz() {
         throw new UnsupportedOperationException();
@@ -2684,6 +2700,54 @@ public class HarfBuzz {
     /** {@code void hb_draw_close_path(hb_draw_funcs_t * dfuncs, void * draw_data, hb_draw_state_t * st)} */
     public static void hb_draw_close_path(@NativeType("hb_draw_funcs_t *") long dfuncs, @NativeType("void *") ByteBuffer draw_data, @NativeType("hb_draw_state_t *") hb_draw_state_t st) {
         nhb_draw_close_path(dfuncs, memAddress(draw_data), st.address());
+    }
+
+    // --- [ hb_draw_line ] ---
+
+    /** {@code void hb_draw_line(hb_draw_funcs_t * dfuncs, void * draw_data, hb_draw_state_t * st, float x0, float y0, float w0, float x1, float y1, float w1, hb_draw_line_cap_t cap)} */
+    public static void nhb_draw_line(long dfuncs, long draw_data, long st, float x0, float y0, float w0, float x1, float y1, float w1, int cap) {
+        long __functionAddress = Functions.draw_line;
+        if (CHECKS) {
+            check(dfuncs);
+        }
+        invokePPPV(dfuncs, draw_data, st, x0, y0, w0, x1, y1, w1, cap, __functionAddress);
+    }
+
+    /** {@code void hb_draw_line(hb_draw_funcs_t * dfuncs, void * draw_data, hb_draw_state_t * st, float x0, float y0, float w0, float x1, float y1, float w1, hb_draw_line_cap_t cap)} */
+    public static void hb_draw_line(@NativeType("hb_draw_funcs_t *") long dfuncs, @NativeType("void *") ByteBuffer draw_data, @NativeType("hb_draw_state_t *") hb_draw_state_t st, float x0, float y0, float w0, float x1, float y1, float w1, @NativeType("hb_draw_line_cap_t") int cap) {
+        nhb_draw_line(dfuncs, memAddress(draw_data), st.address(), x0, y0, w0, x1, y1, w1, cap);
+    }
+
+    // --- [ hb_draw_rectangle ] ---
+
+    /** {@code void hb_draw_rectangle(hb_draw_funcs_t * dfuncs, void * draw_data, hb_draw_state_t * st, float x, float y, float w, float h, float stroke_width)} */
+    public static void nhb_draw_rectangle(long dfuncs, long draw_data, long st, float x, float y, float w, float h, float stroke_width) {
+        long __functionAddress = Functions.draw_rectangle;
+        if (CHECKS) {
+            check(dfuncs);
+        }
+        invokePPPV(dfuncs, draw_data, st, x, y, w, h, stroke_width, __functionAddress);
+    }
+
+    /** {@code void hb_draw_rectangle(hb_draw_funcs_t * dfuncs, void * draw_data, hb_draw_state_t * st, float x, float y, float w, float h, float stroke_width)} */
+    public static void hb_draw_rectangle(@NativeType("hb_draw_funcs_t *") long dfuncs, @NativeType("void *") ByteBuffer draw_data, @NativeType("hb_draw_state_t *") hb_draw_state_t st, float x, float y, float w, float h, float stroke_width) {
+        nhb_draw_rectangle(dfuncs, memAddress(draw_data), st.address(), x, y, w, h, stroke_width);
+    }
+
+    // --- [ hb_draw_circle ] ---
+
+    /** {@code void hb_draw_circle(hb_draw_funcs_t * dfuncs, void * draw_data, hb_draw_state_t * st, float cx, float cy, float r, float stroke_width)} */
+    public static void nhb_draw_circle(long dfuncs, long draw_data, long st, float cx, float cy, float r, float stroke_width) {
+        long __functionAddress = Functions.draw_circle;
+        if (CHECKS) {
+            check(dfuncs);
+        }
+        invokePPPV(dfuncs, draw_data, st, cx, cy, r, stroke_width, __functionAddress);
+    }
+
+    /** {@code void hb_draw_circle(hb_draw_funcs_t * dfuncs, void * draw_data, hb_draw_state_t * st, float cx, float cy, float r, float stroke_width)} */
+    public static void hb_draw_circle(@NativeType("hb_draw_funcs_t *") long dfuncs, @NativeType("void *") ByteBuffer draw_data, @NativeType("hb_draw_state_t *") hb_draw_state_t st, float cx, float cy, float r, float stroke_width) {
+        nhb_draw_circle(dfuncs, memAddress(draw_data), st.address(), cx, cy, r, stroke_width);
     }
 
     // --- [ hb_face_count ] ---
@@ -5497,6 +5561,38 @@ public class HarfBuzz {
         nhb_paint_funcs_set_push_clip_rectangle_func(funcs, func.address(), user_data, memAddressSafe(destroy));
     }
 
+    // --- [ hb_paint_funcs_set_push_clip_path_start_func ] ---
+
+    /** {@code void hb_paint_funcs_set_push_clip_path_start_func(hb_paint_funcs_t * funcs, hb_paint_push_clip_path_start_func_t func, void * user_data, hb_destroy_func_t destroy)} */
+    public static void nhb_paint_funcs_set_push_clip_path_start_func(long funcs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.paint_funcs_set_push_clip_path_start_func;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPPPV(funcs, func, user_data, destroy, __functionAddress);
+    }
+
+    /** {@code void hb_paint_funcs_set_push_clip_path_start_func(hb_paint_funcs_t * funcs, hb_paint_push_clip_path_start_func_t func, void * user_data, hb_destroy_func_t destroy)} */
+    public static void hb_paint_funcs_set_push_clip_path_start_func(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("hb_paint_push_clip_path_start_func_t") hb_paint_push_clip_path_start_func_tI func, @NativeType("void *") long user_data, @NativeType("hb_destroy_func_t") @Nullable hb_destroy_func_tI destroy) {
+        nhb_paint_funcs_set_push_clip_path_start_func(funcs, func.address(), user_data, memAddressSafe(destroy));
+    }
+
+    // --- [ hb_paint_funcs_set_push_clip_path_end_func ] ---
+
+    /** {@code void hb_paint_funcs_set_push_clip_path_end_func(hb_paint_funcs_t * funcs, hb_paint_push_clip_path_end_func_t func, void * user_data, hb_destroy_func_t destroy)} */
+    public static void nhb_paint_funcs_set_push_clip_path_end_func(long funcs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.paint_funcs_set_push_clip_path_end_func;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPPPV(funcs, func, user_data, destroy, __functionAddress);
+    }
+
+    /** {@code void hb_paint_funcs_set_push_clip_path_end_func(hb_paint_funcs_t * funcs, hb_paint_push_clip_path_end_func_t func, void * user_data, hb_destroy_func_t destroy)} */
+    public static void hb_paint_funcs_set_push_clip_path_end_func(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("hb_paint_push_clip_path_end_func_t") hb_paint_push_clip_path_end_func_tI func, @NativeType("void *") long user_data, @NativeType("hb_destroy_func_t") @Nullable hb_destroy_func_tI destroy) {
+        nhb_paint_funcs_set_push_clip_path_end_func(funcs, func.address(), user_data, memAddressSafe(destroy));
+    }
+
     // --- [ hb_paint_funcs_set_pop_clip_func ] ---
 
     /** {@code void hb_paint_funcs_set_pop_clip_func(hb_paint_funcs_t * funcs, hb_paint_pop_clip_func_t func, void * user_data, hb_destroy_func_t destroy)} */
@@ -5607,6 +5703,22 @@ public class HarfBuzz {
     /** {@code void hb_paint_funcs_set_push_group_func(hb_paint_funcs_t * funcs, hb_paint_push_group_func_t func, void * user_data, hb_destroy_func_t destroy)} */
     public static void hb_paint_funcs_set_push_group_func(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("hb_paint_push_group_func_t") hb_paint_push_group_func_tI func, @NativeType("void *") long user_data, @NativeType("hb_destroy_func_t") @Nullable hb_destroy_func_tI destroy) {
         nhb_paint_funcs_set_push_group_func(funcs, func.address(), user_data, memAddressSafe(destroy));
+    }
+
+    // --- [ hb_paint_funcs_set_push_group_for_func ] ---
+
+    /** {@code void hb_paint_funcs_set_push_group_for_func(hb_paint_funcs_t * funcs, hb_paint_push_group_for_func_t func, void * user_data, hb_destroy_func_t destroy)} */
+    public static void nhb_paint_funcs_set_push_group_for_func(long funcs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.paint_funcs_set_push_group_for_func;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPPPV(funcs, func, user_data, destroy, __functionAddress);
+    }
+
+    /** {@code void hb_paint_funcs_set_push_group_for_func(hb_paint_funcs_t * funcs, hb_paint_push_group_for_func_t func, void * user_data, hb_destroy_func_t destroy)} */
+    public static void hb_paint_funcs_set_push_group_for_func(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("hb_paint_push_group_for_func_t") hb_paint_push_group_for_func_tI func, @NativeType("void *") long user_data, @NativeType("hb_destroy_func_t") @Nullable hb_destroy_func_tI destroy) {
+        nhb_paint_funcs_set_push_group_for_func(funcs, func.address(), user_data, memAddressSafe(destroy));
     }
 
     // --- [ hb_paint_funcs_set_pop_group_func ] ---
@@ -5722,6 +5834,37 @@ public class HarfBuzz {
         invokePPV(funcs, paint_data, xmin, ymin, xmax, ymax, __functionAddress);
     }
 
+    // --- [ hb_paint_push_clip_path_start ] ---
+
+    /** {@code hb_draw_funcs_t * hb_paint_push_clip_path_start(hb_paint_funcs_t * funcs, void * paint_data, void ** draw_data)} */
+    public static long nhb_paint_push_clip_path_start(long funcs, long paint_data, long draw_data) {
+        long __functionAddress = Functions.paint_push_clip_path_start;
+        if (CHECKS) {
+            check(funcs);
+        }
+        return invokePPPP(funcs, paint_data, draw_data, __functionAddress);
+    }
+
+    /** {@code hb_draw_funcs_t * hb_paint_push_clip_path_start(hb_paint_funcs_t * funcs, void * paint_data, void ** draw_data)} */
+    @NativeType("hb_draw_funcs_t *")
+    public static long hb_paint_push_clip_path_start(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("void *") long paint_data, @NativeType("void **") PointerBuffer draw_data) {
+        if (CHECKS) {
+            check(draw_data, 1);
+        }
+        return nhb_paint_push_clip_path_start(funcs, paint_data, memAddress(draw_data));
+    }
+
+    // --- [ hb_paint_push_clip_path_end ] ---
+
+    /** {@code void hb_paint_push_clip_path_end(hb_paint_funcs_t * funcs, void * paint_data)} */
+    public static void hb_paint_push_clip_path_end(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("void *") long paint_data) {
+        long __functionAddress = Functions.paint_push_clip_path_end;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPV(funcs, paint_data, __functionAddress);
+    }
+
     // --- [ hb_paint_pop_clip ] ---
 
     /** {@code void hb_paint_pop_clip(hb_paint_funcs_t * funcs, void * paint_data)} */
@@ -5820,6 +5963,17 @@ public class HarfBuzz {
         invokePPV(funcs, paint_data, __functionAddress);
     }
 
+    // --- [ hb_paint_push_group_for ] ---
+
+    /** {@code void hb_paint_push_group_for(hb_paint_funcs_t * funcs, void * paint_data, hb_paint_composite_mode_t mode)} */
+    public static void hb_paint_push_group_for(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("void *") long paint_data, @NativeType("hb_paint_composite_mode_t") int mode) {
+        long __functionAddress = Functions.paint_push_group_for;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPV(funcs, paint_data, mode, __functionAddress);
+    }
+
     // --- [ hb_paint_pop_group ] ---
 
     /** {@code void hb_paint_pop_group(hb_paint_funcs_t * funcs, void * paint_data, hb_paint_composite_mode_t mode)} */
@@ -5849,6 +6003,55 @@ public class HarfBuzz {
             check(color, 1);
         }
         return nhb_paint_custom_palette_color(funcs, paint_data, color_index, memAddress(color)) != 0;
+    }
+
+    // --- [ hb_paint_reduce_linear_anchors ] ---
+
+    /** {@code void hb_paint_reduce_linear_anchors(float x0, float y0, float x1, float y1, float x2, float y2, float * xx0, float * yy0, float * xx1, float * yy1)} */
+    public static void nhb_paint_reduce_linear_anchors(float x0, float y0, float x1, float y1, float x2, float y2, long xx0, long yy0, long xx1, long yy1) {
+        long __functionAddress = Functions.paint_reduce_linear_anchors;
+        invokePPPPV(x0, y0, x1, y1, x2, y2, xx0, yy0, xx1, yy1, __functionAddress);
+    }
+
+    /** {@code void hb_paint_reduce_linear_anchors(float x0, float y0, float x1, float y1, float x2, float y2, float * xx0, float * yy0, float * xx1, float * yy1)} */
+    public static void hb_paint_reduce_linear_anchors(float x0, float y0, float x1, float y1, float x2, float y2, @NativeType("float *") FloatBuffer xx0, @NativeType("float *") FloatBuffer yy0, @NativeType("float *") FloatBuffer xx1, @NativeType("float *") FloatBuffer yy1) {
+        if (CHECKS) {
+            check(xx0, 1);
+            check(yy0, 1);
+            check(xx1, 1);
+            check(yy1, 1);
+        }
+        nhb_paint_reduce_linear_anchors(x0, y0, x1, y1, x2, y2, memAddress(xx0), memAddress(yy0), memAddress(xx1), memAddress(yy1));
+    }
+
+    // --- [ hb_paint_normalize_color_line ] ---
+
+    /** {@code void hb_paint_normalize_color_line(hb_color_stop_t * stops, unsigned int len, float * min, float * max)} */
+    public static void nhb_paint_normalize_color_line(long stops, int len, long min, long max) {
+        long __functionAddress = Functions.paint_normalize_color_line;
+        invokePPPV(stops, len, min, max, __functionAddress);
+    }
+
+    /** {@code void hb_paint_normalize_color_line(hb_color_stop_t * stops, unsigned int len, float * min, float * max)} */
+    public static void hb_paint_normalize_color_line(@NativeType("hb_color_stop_t *") hb_color_stop_t.Buffer stops, @NativeType("float *") FloatBuffer min, @NativeType("float *") FloatBuffer max) {
+        if (CHECKS) {
+            check(min, 1);
+            check(max, 1);
+        }
+        nhb_paint_normalize_color_line(stops.address(), stops.remaining(), memAddress(min), memAddress(max));
+    }
+
+    // --- [ hb_paint_sweep_gradient_tiles ] ---
+
+    /** {@code void hb_paint_sweep_gradient_tiles(hb_color_stop_t * stops, unsigned int n_stops, hb_paint_extend_t extend, float start_angle, float end_angle, hb_paint_sweep_gradient_tile_func_t emit_patch, void * user_data)} */
+    public static void nhb_paint_sweep_gradient_tiles(long stops, int n_stops, int extend, float start_angle, float end_angle, long emit_patch, long user_data) {
+        long __functionAddress = Functions.paint_sweep_gradient_tiles;
+        invokePPPV(stops, n_stops, extend, start_angle, end_angle, emit_patch, user_data, __functionAddress);
+    }
+
+    /** {@code void hb_paint_sweep_gradient_tiles(hb_color_stop_t * stops, unsigned int n_stops, hb_paint_extend_t extend, float start_angle, float end_angle, hb_paint_sweep_gradient_tile_func_t emit_patch, void * user_data)} */
+    public static void hb_paint_sweep_gradient_tiles(@NativeType("hb_color_stop_t *") hb_color_stop_t.Buffer stops, @NativeType("hb_paint_extend_t") int extend, float start_angle, float end_angle, @NativeType("hb_paint_sweep_gradient_tile_func_t") hb_paint_sweep_gradient_tile_func_tI emit_patch, @NativeType("void *") long user_data) {
+        nhb_paint_sweep_gradient_tiles(stops.address(), stops.remaining(), extend, start_angle, end_angle, emit_patch.address(), user_data);
     }
 
     // --- [ hb_set_create ] ---

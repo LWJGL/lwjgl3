@@ -55,16 +55,15 @@ public class HelloHarfBuzz {
         assertNotEquals(draw, NULL);
 
         /* Encode with no curves should return empty blob. */
-        long blob = hb_gpu_draw_encode(draw);
-        assertNotEquals(blob, NULL);
-        assertEquals(hb_blob_get_length(blob), 0);
-        hb_blob_destroy(blob);
-
-        /* Extents should be zero. */
         try (MemoryStack stack = stackPush()) {
             hb_glyph_extents_t ext = hb_glyph_extents_t.malloc(stack);
-            hb_gpu_draw_get_extents(draw, ext);
 
+            long blob = hb_gpu_draw_encode(draw, ext);
+            assertNotEquals(blob, NULL);
+            assertEquals(hb_blob_get_length(blob), 0);
+            hb_blob_destroy(blob);
+
+            /* Extents should be zero. */
             assertEquals(ext.x_bearing(), 0);
             assertEquals(ext.y_bearing(), 0);
             assertEquals(ext.width(), 0);
@@ -97,25 +96,25 @@ public class HelloHarfBuzz {
 
         hb_gpu_draw_glyph(draw, font, gid);
 
-        // Encode should produce non -empty blob.
-        long blob = hb_gpu_draw_encode(draw);
-        assertNotEquals(blob, NULL);
-        assertTrue(hb_blob_get_length(blob) > 0);
-
-        // Blob size should be a multiple of 8 (RGBA16I texels).
-        assertEquals(hb_blob_get_length(blob) % 8, 0);
-
-        // Extents should be non -zero.
-        /* Extents should be zero. */
         try (MemoryStack stack = stackPush()) {
             hb_glyph_extents_t ext = hb_glyph_extents_t.malloc(stack);
-            hb_gpu_draw_get_extents(draw, ext);
 
+            // Encode should produce non -empty blob.
+            long blob = hb_gpu_draw_encode(draw, ext);
+            assertNotEquals(blob, NULL);
+            assertTrue(hb_blob_get_length(blob) > 0);
+
+            // Blob size should be a multiple of 8 (RGBA16I texels).
+            assertEquals(hb_blob_get_length(blob) % 8, 0);
+
+            // Extents should be non -zero.
+            /* Extents should be zero. */
             assertTrue(ext.width() > 0);
             assertTrue(ext.height() < 0); // height is negative(y - down)
+
+            hb_blob_destroy(blob);
         }
 
-        hb_blob_destroy(blob);
         hb_gpu_draw_destroy(draw);
         hb_font_destroy(font);
         hb_face_destroy(face);
@@ -135,20 +134,20 @@ public class HelloHarfBuzz {
 
             // Draw, encode, reset, encode again —should work.
             hb_gpu_draw_glyph(draw, font, gid);
-            long blob1 = hb_gpu_draw_encode(draw);
+            long blob1 = hb_gpu_draw_encode(draw, null);
             assertTrue(hb_blob_get_length(blob1) > 0);
             hb_blob_destroy(blob1);
 
             hb_gpu_draw_reset(draw);
 
             // After reset, encode should be empty.
-            long blob2 = hb_gpu_draw_encode(draw);
+            long blob2 = hb_gpu_draw_encode(draw, null);
             assertTrue(hb_blob_get_length(blob2) == 0);
             hb_blob_destroy(blob2);
 
             // Draw again after reset.
             hb_gpu_draw_glyph(draw, font, gid);
-            long blob3 = hb_gpu_draw_encode(draw);
+            long blob3 = hb_gpu_draw_encode(draw, null);
             assertTrue(hb_blob_get_length(blob3) > 0);
             hb_blob_destroy(blob3);
         }
@@ -159,16 +158,27 @@ public class HelloHarfBuzz {
     }
 
     private static void test_draw_funcs() {
-        long funcs = hb_gpu_draw_get_funcs();
+        long draw = hb_gpu_draw_create_or_fail();
+        assertNotEquals(draw, NULL);
+
+        long funcs = hb_gpu_draw_get_funcs(draw);
         assertNotEquals(funcs, NULL);
 
         // Should be the same singleton each time.
-        assertEquals(hb_gpu_draw_get_funcs(), funcs);
+        assertEquals(hb_gpu_draw_get_funcs(draw), funcs);
+
+        hb_gpu_draw_destroy(draw);
     }
 
     private static void test_shader_sources() {
-        assertNotEquals(hb_gpu_shader_fragment_source(HB_GPU_SHADER_LANG_GLSL), NULL);
-        assertNotEquals(hb_gpu_shader_vertex_source(HB_GPU_SHADER_LANG_GLSL), NULL);
+        assertNotEquals(hb_gpu_shader_source(HB_GPU_SHADER_STAGE_FRAGMENT, HB_GPU_SHADER_LANG_GLSL), NULL);
+        assertNotEquals(hb_gpu_shader_source(HB_GPU_SHADER_STAGE_VERTEX, HB_GPU_SHADER_LANG_GLSL), NULL);
+
+        assertNotEquals(hb_gpu_draw_shader_source(HB_GPU_SHADER_STAGE_FRAGMENT, HB_GPU_SHADER_LANG_GLSL), NULL);
+        assertNotEquals(hb_gpu_draw_shader_source(HB_GPU_SHADER_STAGE_VERTEX, HB_GPU_SHADER_LANG_GLSL), NULL);
+
+        assertNotEquals(hb_gpu_paint_shader_source(HB_GPU_SHADER_STAGE_FRAGMENT, HB_GPU_SHADER_LANG_GLSL), NULL);
+        assertNotEquals(hb_gpu_paint_shader_source(HB_GPU_SHADER_STAGE_VERTEX, HB_GPU_SHADER_LANG_GLSL), NULL);
     }
 
     private static void test_recycle_blob() {
@@ -184,7 +194,7 @@ public class HelloHarfBuzz {
             hb_gpu_draw_glyph(draw, font, gid);
         }
 
-        long blob = hb_gpu_draw_encode(draw);
+        long blob = hb_gpu_draw_encode(draw, null);
         assertNotEquals(blob, NULL);
 
         // Recycle should not crash.
