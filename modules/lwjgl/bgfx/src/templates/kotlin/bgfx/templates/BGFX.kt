@@ -9,7 +9,7 @@ import org.lwjgl.generator.*
 
 val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx_", binding = BGFX_BINDING) {
     IntConstant(
-        "API_VERSION".."142"
+        "API_VERSION".."143"
     )
 
     ShortConstant(
@@ -876,20 +876,6 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         bgfx_vertex_layout_t.const.p("_srcLayout"),
         Unsafe..void.const.p("_srcData"),
         uint32_t("_num")
-    )
-
-    uint32_t(
-        "weld_vertices",
-
-        MultiType(
-            PointerMapping.DATA_SHORT,
-            PointerMapping.DATA_INT
-        )..void.p("_output"),
-        bgfx_vertex_layout_t.const.p("_layout"),
-        Unsafe..void.const.p("_data"),
-        AutoSizeShr("_index32 ? 2 : 1", "_output")..uint32_t("_num"),
-        bool("_index32"),
-        float("_epsilon")
     )
 
     uint32_t(

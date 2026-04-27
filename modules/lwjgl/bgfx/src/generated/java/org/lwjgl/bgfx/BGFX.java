@@ -43,7 +43,6 @@ public class BGFX {
             vertex_pack                                          = apiGetFunctionAddress(BGFX, "bgfx_vertex_pack"),
             vertex_unpack                                        = apiGetFunctionAddress(BGFX, "bgfx_vertex_unpack"),
             vertex_convert                                       = apiGetFunctionAddress(BGFX, "bgfx_vertex_convert"),
-            weld_vertices                                        = apiGetFunctionAddress(BGFX, "bgfx_weld_vertices"),
             topology_convert                                     = apiGetFunctionAddress(BGFX, "bgfx_topology_convert"),
             topology_sort_tri_list                               = apiGetFunctionAddress(BGFX, "bgfx_topology_sort_tri_list"),
             get_supported_renderers                              = apiGetFunctionAddress(BGFX, "bgfx_get_supported_renderers"),
@@ -235,7 +234,7 @@ public class BGFX {
         return BGFX;
     }
 
-    public static final int BGFX_API_VERSION = 142;
+    public static final int BGFX_API_VERSION = 143;
 
     public static final short BGFX_INVALID_HANDLE = (short)0xFFFF;
 
@@ -1085,32 +1084,6 @@ public class BGFX {
     /** {@code void bgfx_vertex_convert(bgfx_vertex_layout_t const * _dstLayout, void * _dstData, bgfx_vertex_layout_t const * _srcLayout, void const * _srcData, uint32_t _num)} */
     public static void bgfx_vertex_convert(@NativeType("bgfx_vertex_layout_t const *") BGFXVertexLayout _dstLayout, @NativeType("void *") ByteBuffer _dstData, @NativeType("bgfx_vertex_layout_t const *") BGFXVertexLayout _srcLayout, @NativeType("void const *") ByteBuffer _srcData, @NativeType("uint32_t") int _num) {
         nbgfx_vertex_convert(_dstLayout.address(), memAddress(_dstData), _srcLayout.address(), memAddress(_srcData), _num);
-    }
-
-    // --- [ bgfx_weld_vertices ] ---
-
-    /** {@code uint32_t bgfx_weld_vertices(void * _output, bgfx_vertex_layout_t const * _layout, void const * _data, uint32_t _num, bool _index32, float _epsilon)} */
-    public static int nbgfx_weld_vertices(long _output, long _layout, long _data, int _num, boolean _index32, float _epsilon) {
-        long __functionAddress = Functions.weld_vertices;
-        return invokePPPI(_output, _layout, _data, _num, _index32, _epsilon, __functionAddress);
-    }
-
-    /** {@code uint32_t bgfx_weld_vertices(void * _output, bgfx_vertex_layout_t const * _layout, void const * _data, uint32_t _num, bool _index32, float _epsilon)} */
-    @NativeType("uint32_t")
-    public static int bgfx_weld_vertices(@NativeType("void *") ByteBuffer _output, @NativeType("bgfx_vertex_layout_t const *") BGFXVertexLayout _layout, @NativeType("void const *") ByteBuffer _data, @NativeType("bool") boolean _index32, float _epsilon) {
-        return nbgfx_weld_vertices(memAddress(_output), _layout.address(), memAddress(_data), _output.remaining() >> (_index32 ? 2 : 1), _index32, _epsilon);
-    }
-
-    /** {@code uint32_t bgfx_weld_vertices(void * _output, bgfx_vertex_layout_t const * _layout, void const * _data, uint32_t _num, bool _index32, float _epsilon)} */
-    @NativeType("uint32_t")
-    public static int bgfx_weld_vertices(@NativeType("void *") ShortBuffer _output, @NativeType("bgfx_vertex_layout_t const *") BGFXVertexLayout _layout, @NativeType("void const *") ByteBuffer _data, @NativeType("bool") boolean _index32, float _epsilon) {
-        return nbgfx_weld_vertices(memAddress(_output), _layout.address(), memAddress(_data), (int)(((long)_output.remaining() << 1) >> (_index32 ? 2 : 1)), _index32, _epsilon);
-    }
-
-    /** {@code uint32_t bgfx_weld_vertices(void * _output, bgfx_vertex_layout_t const * _layout, void const * _data, uint32_t _num, bool _index32, float _epsilon)} */
-    @NativeType("uint32_t")
-    public static int bgfx_weld_vertices(@NativeType("void *") IntBuffer _output, @NativeType("bgfx_vertex_layout_t const *") BGFXVertexLayout _layout, @NativeType("void const *") ByteBuffer _data, @NativeType("bool") boolean _index32, float _epsilon) {
-        return nbgfx_weld_vertices(memAddress(_output), _layout.address(), memAddress(_data), (int)(((long)_output.remaining() << 2) >> (_index32 ? 2 : 1)), _index32, _epsilon);
     }
 
     // --- [ bgfx_topology_convert ] ---
@@ -4188,20 +4161,6 @@ public class BGFX {
             check(_output, 4);
         }
         invokePPPV(_output, _attr, _layout.address(), memAddress(_data), _index, __functionAddress);
-    }
-
-    /** {@code uint32_t bgfx_weld_vertices(void * _output, bgfx_vertex_layout_t const * _layout, void const * _data, uint32_t _num, bool _index32, float _epsilon)} */
-    @NativeType("uint32_t")
-    public static int bgfx_weld_vertices(@NativeType("void *") short[] _output, @NativeType("bgfx_vertex_layout_t const *") BGFXVertexLayout _layout, @NativeType("void const *") ByteBuffer _data, @NativeType("bool") boolean _index32, float _epsilon) {
-        long __functionAddress = Functions.weld_vertices;
-        return invokePPPI(_output, _layout.address(), memAddress(_data), _output.length, _index32, _epsilon, __functionAddress);
-    }
-
-    /** {@code uint32_t bgfx_weld_vertices(void * _output, bgfx_vertex_layout_t const * _layout, void const * _data, uint32_t _num, bool _index32, float _epsilon)} */
-    @NativeType("uint32_t")
-    public static int bgfx_weld_vertices(@NativeType("void *") int[] _output, @NativeType("bgfx_vertex_layout_t const *") BGFXVertexLayout _layout, @NativeType("void const *") ByteBuffer _data, @NativeType("bool") boolean _index32, float _epsilon) {
-        long __functionAddress = Functions.weld_vertices;
-        return invokePPPI(_output, _layout.address(), memAddress(_data), _output.length, _index32, _epsilon, __functionAddress);
     }
 
     /** {@code uint32_t bgfx_topology_convert(bgfx_topology_convert_t _conversion, void * _dst, uint32_t _dstSize, void const * _indices, uint32_t _numIndices, bool _index32)} */
