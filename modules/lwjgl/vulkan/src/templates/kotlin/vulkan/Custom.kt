@@ -25,6 +25,7 @@ fun templateCustomization() {
     """
     }
 
+    // Used as input in VMA
     VkMemoryRequirements.definition.apply {
         this["size"].mutable()
         this["alignment"].mutable()
@@ -37,8 +38,18 @@ fun templateCustomization() {
             .replace(this["pCode"])
     }
 
+    // The buffer has a polymorphic type based on the type member and valueCount specifies the number of values, not the byte size.
     VkLayerSettingEXT.definition.apply {
         this["valueCount"].clearModifiers()
+    }
+
+    // weird API (vk.xml has returnedonly="true" and no len)
+    VkDeviceFaultInfoEXT.definition.apply {
+        Unsafe..this["pAddressInfos"].mutable()
+        Unsafe..this["pVendorInfos"].mutable()
+        nullable..void.p("pVendorBinaryData")
+            .replace(this["pVendorBinaryData"])
+            .mutable()
     }
 
     VK10.apply {

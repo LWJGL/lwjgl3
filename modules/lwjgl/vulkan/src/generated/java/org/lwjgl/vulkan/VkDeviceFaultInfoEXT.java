@@ -100,15 +100,15 @@ public class VkDeviceFaultInfoEXT extends Struct<VkDeviceFaultInfoEXT> implement
     /** @return the null-terminated string stored in the {@code description} field. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public String descriptionString() { return ndescriptionString(address()); }
-    /** @return a {@link VkDeviceFaultAddressInfoKHR} view of the struct pointed to by the {@code pAddressInfos} field. */
+    /** @return a {@link VkDeviceFaultAddressInfoKHR.Buffer} view of the struct array pointed to by the {@code pAddressInfos} field. */
     @NativeType("VkDeviceFaultAddressInfoKHR *")
-    public @Nullable VkDeviceFaultAddressInfoKHR pAddressInfos() { return npAddressInfos(address()); }
-    /** @return a {@link VkDeviceFaultVendorInfoKHR} view of the struct pointed to by the {@code pVendorInfos} field. */
+    public VkDeviceFaultAddressInfoKHR.@Nullable Buffer pAddressInfos(int capacity) { return npAddressInfos(address(), capacity); }
+    /** @return a {@link VkDeviceFaultVendorInfoKHR.Buffer} view of the struct array pointed to by the {@code pVendorInfos} field. */
     @NativeType("VkDeviceFaultVendorInfoKHR *")
-    public @Nullable VkDeviceFaultVendorInfoKHR pVendorInfos() { return npVendorInfos(address()); }
-    /** @return the value of the {@code pVendorBinaryData} field. */
+    public VkDeviceFaultVendorInfoKHR.@Nullable Buffer pVendorInfos(int capacity) { return npVendorInfos(address(), capacity); }
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pVendorBinaryData} field. */
     @NativeType("void *")
-    public long pVendorBinaryData() { return npVendorBinaryData(address()); }
+    public @Nullable ByteBuffer pVendorBinaryData(int capacity) { return npVendorBinaryData(address(), capacity); }
 
     /** Sets the specified value to the {@code sType} field. */
     public VkDeviceFaultInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -116,14 +116,26 @@ public class VkDeviceFaultInfoEXT extends Struct<VkDeviceFaultInfoEXT> implement
     public VkDeviceFaultInfoEXT sType$Default() { return sType(EXTDeviceFault.VK_STRUCTURE_TYPE_DEVICE_FAULT_INFO_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkDeviceFaultInfoEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified {@link VkDeviceFaultAddressInfoKHR.Buffer} to the {@code pAddressInfos} field. */
+    public VkDeviceFaultInfoEXT pAddressInfos(@NativeType("VkDeviceFaultAddressInfoKHR *") VkDeviceFaultAddressInfoKHR.@Nullable Buffer value) { npAddressInfos(address(), value); return this; }
+    /** Sets the address of the specified {@link VkDeviceFaultVendorInfoKHR.Buffer} to the {@code pVendorInfos} field. */
+    public VkDeviceFaultInfoEXT pVendorInfos(@NativeType("VkDeviceFaultVendorInfoKHR *") VkDeviceFaultVendorInfoKHR.@Nullable Buffer value) { npVendorInfos(address(), value); return this; }
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code pVendorBinaryData} field. */
+    public VkDeviceFaultInfoEXT pVendorBinaryData(@Nullable @NativeType("void *") ByteBuffer value) { npVendorBinaryData(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkDeviceFaultInfoEXT set(
         int sType,
-        long pNext
+        long pNext,
+        VkDeviceFaultAddressInfoKHR.@Nullable Buffer pAddressInfos,
+        VkDeviceFaultVendorInfoKHR.@Nullable Buffer pVendorInfos,
+        @Nullable ByteBuffer pVendorBinaryData
     ) {
         sType(sType);
         pNext(pNext);
+        pAddressInfos(pAddressInfos);
+        pVendorInfos(pVendorInfos);
+        pVendorBinaryData(pVendorBinaryData);
 
         return this;
     }
@@ -260,16 +272,22 @@ public class VkDeviceFaultInfoEXT extends Struct<VkDeviceFaultInfoEXT> implement
     /** Unsafe version of {@link #descriptionString}. */
     public static String ndescriptionString(long struct) { return memUTF8(struct + VkDeviceFaultInfoEXT.DESCRIPTION); }
     /** Unsafe version of {@link #pAddressInfos}. */
-    public static @Nullable VkDeviceFaultAddressInfoKHR npAddressInfos(long struct) { return VkDeviceFaultAddressInfoKHR.createSafe(memGetAddress(struct + VkDeviceFaultInfoEXT.PADDRESSINFOS)); }
+    public static VkDeviceFaultAddressInfoKHR.@Nullable Buffer npAddressInfos(long struct, int capacity) { return VkDeviceFaultAddressInfoKHR.createSafe(memGetAddress(struct + VkDeviceFaultInfoEXT.PADDRESSINFOS), capacity); }
     /** Unsafe version of {@link #pVendorInfos}. */
-    public static @Nullable VkDeviceFaultVendorInfoKHR npVendorInfos(long struct) { return VkDeviceFaultVendorInfoKHR.createSafe(memGetAddress(struct + VkDeviceFaultInfoEXT.PVENDORINFOS)); }
-    /** Unsafe version of {@link #pVendorBinaryData}. */
-    public static long npVendorBinaryData(long struct) { return memGetAddress(struct + VkDeviceFaultInfoEXT.PVENDORBINARYDATA); }
+    public static VkDeviceFaultVendorInfoKHR.@Nullable Buffer npVendorInfos(long struct, int capacity) { return VkDeviceFaultVendorInfoKHR.createSafe(memGetAddress(struct + VkDeviceFaultInfoEXT.PVENDORINFOS), capacity); }
+    /** Unsafe version of {@link #pVendorBinaryData(int) pVendorBinaryData}. */
+    public static @Nullable ByteBuffer npVendorBinaryData(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + VkDeviceFaultInfoEXT.PVENDORBINARYDATA), capacity); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { memPutInt(struct + VkDeviceFaultInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceFaultInfoEXT.PNEXT, value); }
+    /** Unsafe version of {@link #pAddressInfos(VkDeviceFaultAddressInfoKHR.Buffer) pAddressInfos}. */
+    public static void npAddressInfos(long struct, VkDeviceFaultAddressInfoKHR.@Nullable Buffer value) { memPutAddress(struct + VkDeviceFaultInfoEXT.PADDRESSINFOS, memAddressSafe(value)); }
+    /** Unsafe version of {@link #pVendorInfos(VkDeviceFaultVendorInfoKHR.Buffer) pVendorInfos}. */
+    public static void npVendorInfos(long struct, VkDeviceFaultVendorInfoKHR.@Nullable Buffer value) { memPutAddress(struct + VkDeviceFaultInfoEXT.PVENDORINFOS, memAddressSafe(value)); }
+    /** Unsafe version of {@link #pVendorBinaryData(ByteBuffer) pVendorBinaryData}. */
+    public static void npVendorBinaryData(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + VkDeviceFaultInfoEXT.PVENDORBINARYDATA, memAddressSafe(value)); }
 
     // -----------------------------------
 
@@ -326,15 +344,15 @@ public class VkDeviceFaultInfoEXT extends Struct<VkDeviceFaultInfoEXT> implement
         /** @return the null-terminated string stored in the {@code description} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public String descriptionString() { return VkDeviceFaultInfoEXT.ndescriptionString(address()); }
-        /** @return a {@link VkDeviceFaultAddressInfoKHR} view of the struct pointed to by the {@code pAddressInfos} field. */
+        /** @return a {@link VkDeviceFaultAddressInfoKHR.Buffer} view of the struct array pointed to by the {@code pAddressInfos} field. */
         @NativeType("VkDeviceFaultAddressInfoKHR *")
-        public @Nullable VkDeviceFaultAddressInfoKHR pAddressInfos() { return VkDeviceFaultInfoEXT.npAddressInfos(address()); }
-        /** @return a {@link VkDeviceFaultVendorInfoKHR} view of the struct pointed to by the {@code pVendorInfos} field. */
+        public VkDeviceFaultAddressInfoKHR.@Nullable Buffer pAddressInfos(int capacity) { return VkDeviceFaultInfoEXT.npAddressInfos(address(), capacity); }
+        /** @return a {@link VkDeviceFaultVendorInfoKHR.Buffer} view of the struct array pointed to by the {@code pVendorInfos} field. */
         @NativeType("VkDeviceFaultVendorInfoKHR *")
-        public @Nullable VkDeviceFaultVendorInfoKHR pVendorInfos() { return VkDeviceFaultInfoEXT.npVendorInfos(address()); }
-        /** @return the value of the {@code pVendorBinaryData} field. */
+        public VkDeviceFaultVendorInfoKHR.@Nullable Buffer pVendorInfos(int capacity) { return VkDeviceFaultInfoEXT.npVendorInfos(address(), capacity); }
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pVendorBinaryData} field. */
         @NativeType("void *")
-        public long pVendorBinaryData() { return VkDeviceFaultInfoEXT.npVendorBinaryData(address()); }
+        public @Nullable ByteBuffer pVendorBinaryData(int capacity) { return VkDeviceFaultInfoEXT.npVendorBinaryData(address(), capacity); }
 
         /** Sets the specified value to the {@code sType} field. */
         public VkDeviceFaultInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceFaultInfoEXT.nsType(address(), value); return this; }
@@ -342,6 +360,12 @@ public class VkDeviceFaultInfoEXT extends Struct<VkDeviceFaultInfoEXT> implement
         public VkDeviceFaultInfoEXT.Buffer sType$Default() { return sType(EXTDeviceFault.VK_STRUCTURE_TYPE_DEVICE_FAULT_INFO_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkDeviceFaultInfoEXT.Buffer pNext(@NativeType("void *") long value) { VkDeviceFaultInfoEXT.npNext(address(), value); return this; }
+        /** Sets the address of the specified {@link VkDeviceFaultAddressInfoKHR.Buffer} to the {@code pAddressInfos} field. */
+        public VkDeviceFaultInfoEXT.Buffer pAddressInfos(@NativeType("VkDeviceFaultAddressInfoKHR *") VkDeviceFaultAddressInfoKHR.@Nullable Buffer value) { VkDeviceFaultInfoEXT.npAddressInfos(address(), value); return this; }
+        /** Sets the address of the specified {@link VkDeviceFaultVendorInfoKHR.Buffer} to the {@code pVendorInfos} field. */
+        public VkDeviceFaultInfoEXT.Buffer pVendorInfos(@NativeType("VkDeviceFaultVendorInfoKHR *") VkDeviceFaultVendorInfoKHR.@Nullable Buffer value) { VkDeviceFaultInfoEXT.npVendorInfos(address(), value); return this; }
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code pVendorBinaryData} field. */
+        public VkDeviceFaultInfoEXT.Buffer pVendorBinaryData(@Nullable @NativeType("void *") ByteBuffer value) { VkDeviceFaultInfoEXT.npVendorBinaryData(address(), value); return this; }
 
     }
 
