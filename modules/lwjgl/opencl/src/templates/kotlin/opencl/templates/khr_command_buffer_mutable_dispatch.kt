@@ -9,7 +9,12 @@ import opencl.*
 
 val khr_command_buffer_mutable_dispatch = "KHRCommandBufferMutableDispatch".nativeClassCL("khr_command_buffer_mutable_dispatch", KHR) {
     LongConstant(
+        "COMMAND_BUFFER_SIMULTANEOUS_USE_KHR".."1L << 0",
         "COMMAND_BUFFER_MUTABLE_KHR".."1L << 1"
+    )
+
+    LongConstant(
+        "COMMAND_BUFFER_CAPABILITY_SIMULTANEOUS_USE_KHR".."1L << 2"
     )
 
     IntConstant(
@@ -58,6 +63,10 @@ val khr_command_buffer_mutable_dispatch = "KHRCommandBufferMutableDispatch".nati
 
     LongConstant(
         "MUTABLE_DISPATCH_ASSERT_NO_ADDITIONAL_WORK_GROUPS_KHR".."1L << 0"
+    )
+
+    IntConstant(
+        "COMMAND_BUFFER_STATE_FINALIZED_KHR".."2"
     )
 
     cl_int(

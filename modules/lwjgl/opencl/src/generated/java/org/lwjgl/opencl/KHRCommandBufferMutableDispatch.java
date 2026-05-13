@@ -20,7 +20,11 @@ import static org.lwjgl.system.Pointer.*;
 
 public class KHRCommandBufferMutableDispatch {
 
-    public static final long CL_COMMAND_BUFFER_MUTABLE_KHR = 1L << 1;
+    public static final long
+        CL_COMMAND_BUFFER_SIMULTANEOUS_USE_KHR = 1L << 0,
+        CL_COMMAND_BUFFER_MUTABLE_KHR          = 1L << 1;
+
+    public static final long CL_COMMAND_BUFFER_CAPABILITY_SIMULTANEOUS_USE_KHR = 1L << 2;
 
     public static final int CL_INVALID_MUTABLE_COMMAND_KHR = -1141;
 
@@ -53,6 +57,8 @@ public class KHRCommandBufferMutableDispatch {
     public static final int CL_MUTABLE_DISPATCH_ASSERTS_KHR = 0x12B8;
 
     public static final long CL_MUTABLE_DISPATCH_ASSERT_NO_ADDITIONAL_WORK_GROUPS_KHR = 1L << 0;
+
+    public static final int CL_COMMAND_BUFFER_STATE_FINALIZED_KHR = 2;
 
     protected KHRCommandBufferMutableDispatch() {
         throw new UnsupportedOperationException();

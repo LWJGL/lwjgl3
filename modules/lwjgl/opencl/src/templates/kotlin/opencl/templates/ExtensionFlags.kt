@@ -45,8 +45,8 @@ val khr_subgroup_extended_types = EXT_FLAG.nativeClassCL("khr_subgroup_extended_
 val khr_subgroup_non_uniform_arithmetic = EXT_FLAG.nativeClassCL("khr_subgroup_non_uniform_arithmetic", KHR)
 val khr_subgroup_non_uniform_vote = EXT_FLAG.nativeClassCL("khr_subgroup_non_uniform_vote", KHR)
 val khr_subgroup_rotate = EXT_FLAG.nativeClassCL("khr_subgroup_rotate", KHR)
-val khr_subgroup_shuffle_relative = EXT_FLAG.nativeClassCL("khr_subgroup_shuffle_relative", KHR)
 val khr_subgroup_shuffle = EXT_FLAG.nativeClassCL("khr_subgroup_shuffle", KHR)
+val khr_subgroup_shuffle_relative = EXT_FLAG.nativeClassCL("khr_subgroup_shuffle_relative", KHR)
 val khr_work_group_uniform_arithmetic = EXT_FLAG.nativeClassCL("khr_work_group_uniform_arithmetic", KHR)
 
 val amd_compile_options = EXT_FLAG.nativeClassCL("amd_compile_options", AMD)
@@ -88,6 +88,7 @@ val intel_subgroup_2d_block_io = EXT_FLAG.nativeClassCL("intel_subgroup_2d_block
 val intel_subgroup_buffer_prefetch = EXT_FLAG.nativeClassCL("intel_subgroup_buffer_prefetch", INTEL)
 val intel_subgroup_local_block_io = EXT_FLAG.nativeClassCL("intel_subgroup_local_block_io", INTEL)
 val intel_subgroup_matrix_multiply_accumulate = EXT_FLAG.nativeClassCL("intel_subgroup_matrix_multiply_accumulate", INTEL)
+val intel_subgroup_matrix_multiply_accumulate_tf32 = EXT_FLAG.nativeClassCL("intel_subgroup_matrix_multiply_accumulate_tf32", INTEL)
 val intel_subgroup_split_matrix_multiply_accumulate = EXT_FLAG.nativeClassCL("intel_subgroup_split_matrix_multiply_accumulate", INTEL)
 val intel_subgroups_char = EXT_FLAG.nativeClassCL("intel_subgroups_char", INTEL)
 val intel_subgroups_long = EXT_FLAG.nativeClassCL("intel_subgroups_long", INTEL)

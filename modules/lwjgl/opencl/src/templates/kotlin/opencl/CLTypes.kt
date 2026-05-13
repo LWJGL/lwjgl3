@@ -88,6 +88,7 @@ val cl_device_atomic_capabilities = typedef(cl_bitfield, "cl_device_atomic_capab
 val cl_device_device_enqueue_capabilities = typedef(cl_bitfield, "cl_device_device_enqueue_capabilities")
 val cl_khronos_vendor_id = typedef(cl_uint, "cl_khronos_vendor_id")
 val cl_mem_properties = typedef(cl_properties, "cl_mem_properties")
+val cl_device_integer_dot_product_capabilities = typedef(cl_bitfield, "cl_device_integer_dot_product_capabilities")
 val cl_version = typedef(cl_uint, "cl_version")
 
 val cl_icdl_info = typedef(cl_uint, "cl_icdl_info")
@@ -123,6 +124,15 @@ val cl_image_desc = struct(Module.OPENCL, "CLImageDesc", nativeName = "cl_image_
 val cl_bus_address_amd = struct(Module.OPENCL, "CLBusAddressAMD", nativeName = "cl_bus_address_amd") {
     cl_long("surfbusaddress")
     cl_long("signalbusaddress")
+}
+
+val cl_device_integer_dot_product_acceleration_properties = struct(Module.OPENCL, "CLDeviceIntegerDotProductAccelerationProperties", nativeName = "cl_device_integer_dot_product_acceleration_properties") {
+    cl_bool("signed_accelerated")
+    cl_bool("unsigned_accelerated")
+    cl_bool("mixed_signedness_accelerated")
+    cl_bool("accumulating_saturating_signed_accelerated")
+    cl_bool("accumulating_saturating_unsigned_accelerated")
+    cl_bool("accumulating_saturating_mixed_signedness_accelerated")
 }
 
 fun config() {
@@ -340,6 +350,15 @@ val VASurfaceID = typedef(unsigned_int, "VASurfaceID")
 val VAImageFormat = "VAImageFormat".handle // struct
 val cl_command_queue_capabilities_intel = typedef(cl_bitfield, "cl_command_queue_capabilities_intel")
 
+val cl_unified_shared_memory_type_intel = typedef(cl_uint, "cl_unified_shared_memory_type_intel")
+
+val cl_kernel_allocation_info_intel = struct(Module.OPENCL, "CLKernelAllocationInfoINTEL", nativeName = "cl_kernel_allocation_info_intel") {
+    void.p("base")
+    AutoSize("base")..size_t("size")
+    cl_unified_shared_memory_type_intel("type")
+    cl_int("arg_index")
+}
+
 // KHR
 
 val cl_command_buffer_khr = "cl_command_buffer_khr".handle
@@ -365,6 +384,14 @@ val cl_mutable_command_info_khr = typedef(cl_uint, "cl_mutable_command_info_khr"
 val cl_mutable_dispatch_asserts_khr = typedef(cl_bitfield, "cl_mutable_dispatch_asserts_khr")
 
 val cl_semaphore_reimport_properties_khr = typedef(cl_properties, "cl_semaphore_reimport_properties_khr")
+
+val cl_svm_capabilities_khr = typedef(cl_bitfield, "cl_svm_capabilities_khr")
+
+val cl_svm_alloc_properties_khr = typedef(cl_properties, "cl_svm_alloc_properties_khr")
+val cl_svm_alloc_access_flags_khr = typedef(cl_bitfield, "cl_svm_alloc_access_flags_khr")
+val cl_svm_free_properties_khr = typedef(cl_properties, "cl_svm_free_properties_khr")
+val cl_svm_free_flags_khr = typedef(cl_bitfield, "cl_svm_free_flags_khr")
+val cl_svm_pointer_info_khr = typedef(cl_uint, "cl_svm_pointer_info_khr")
 
 val cl_mutable_dispatch_arg_khr = struct(Module.OPENCL, "CLMutableDispatchArgKHR", nativeName = "cl_mutable_dispatch_arg_khr") {
     cl_uint("arg_index")
