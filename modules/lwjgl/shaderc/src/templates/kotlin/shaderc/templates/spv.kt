@@ -212,7 +212,8 @@ val spv = "SPV".nativeClass(Module.SHADERC, prefix = "SPV", prefixMethod = "spv"
         "BINARY_TO_TEXT_OPTION_FRIENDLY_NAMES".enum("1 << 6"),
         "BINARY_TO_TEXT_OPTION_COMMENT".enum("1 << 7"),
         "BINARY_TO_TEXT_OPTION_NESTED_INDENT".enum("1 << 8"),
-        "BINARY_TO_TEXT_OPTION_REORDER_BLOCKS".enum("1 << 9")
+        "BINARY_TO_TEXT_OPTION_REORDER_BLOCKS".enum("1 << 9"),
+        "BINARY_TO_TEXT_OPTION_HANDLE_UNKNOWN_OPCODES".enum("1 << 10")
     )
 
     IntConstant(

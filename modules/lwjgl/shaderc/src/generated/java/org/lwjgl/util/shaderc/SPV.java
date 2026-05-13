@@ -277,16 +277,17 @@ public class SPV {
         SPV_TEXT_TO_BINARY_OPTION_PRESERVE_NUMERIC_IDS = 1 << 1;
 
     public static final int
-        SPV_BINARY_TO_TEXT_OPTION_NONE             = 1 << 0,
-        SPV_BINARY_TO_TEXT_OPTION_PRINT            = 1 << 1,
-        SPV_BINARY_TO_TEXT_OPTION_COLOR            = 1 << 2,
-        SPV_BINARY_TO_TEXT_OPTION_INDENT           = 1 << 3,
-        SPV_BINARY_TO_TEXT_OPTION_SHOW_BYTE_OFFSET = 1 << 4,
-        SPV_BINARY_TO_TEXT_OPTION_NO_HEADER        = 1 << 5,
-        SPV_BINARY_TO_TEXT_OPTION_FRIENDLY_NAMES   = 1 << 6,
-        SPV_BINARY_TO_TEXT_OPTION_COMMENT          = 1 << 7,
-        SPV_BINARY_TO_TEXT_OPTION_NESTED_INDENT    = 1 << 8,
-        SPV_BINARY_TO_TEXT_OPTION_REORDER_BLOCKS   = 1 << 9;
+        SPV_BINARY_TO_TEXT_OPTION_NONE                   = 1 << 0,
+        SPV_BINARY_TO_TEXT_OPTION_PRINT                  = 1 << 1,
+        SPV_BINARY_TO_TEXT_OPTION_COLOR                  = 1 << 2,
+        SPV_BINARY_TO_TEXT_OPTION_INDENT                 = 1 << 3,
+        SPV_BINARY_TO_TEXT_OPTION_SHOW_BYTE_OFFSET       = 1 << 4,
+        SPV_BINARY_TO_TEXT_OPTION_NO_HEADER              = 1 << 5,
+        SPV_BINARY_TO_TEXT_OPTION_FRIENDLY_NAMES         = 1 << 6,
+        SPV_BINARY_TO_TEXT_OPTION_COMMENT                = 1 << 7,
+        SPV_BINARY_TO_TEXT_OPTION_NESTED_INDENT          = 1 << 8,
+        SPV_BINARY_TO_TEXT_OPTION_REORDER_BLOCKS         = 1 << 9,
+        SPV_BINARY_TO_TEXT_OPTION_HANDLE_UNKNOWN_OPCODES = 1 << 10;
 
     public static final int kDefaultMaxIdBound = 0x3FFFFF;
 
