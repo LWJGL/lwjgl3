@@ -38,6 +38,7 @@ public class LLVMDebugInfo {
             DIBuilderFinalizeSubprogram                   = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderFinalizeSubprogram"),
             DIBuilderCreateCompileUnit                    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateCompileUnit"),
             DIBuilderCreateFile                           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateFile"),
+            DIBuilderCreateFileWithChecksum               = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderCreateFileWithChecksum"),
             DIBuilderCreateModule                         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateModule"),
             DIBuilderCreateNameSpace                      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateNameSpace"),
             DIBuilderCreateFunction                       = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateFunction"),
@@ -282,6 +283,11 @@ public class LLVMDebugInfo {
         LLVMDIFixedPointTypeMetadataKind             = 37;
 
     public static final int
+        LLVMCSK_MD5    = 0,
+        LLVMCSK_SHA1   = 1,
+        LLVMCSK_SHA256 = 2;
+
+    public static final int
         LLVMDWARFMacinfoRecordTypeDefine    = 0x01,
         LLVMDWARFMacinfoRecordTypeMacro     = 0x02,
         LLVMDWARFMacinfoRecordTypeStartFile = 0x03,
@@ -450,6 +456,41 @@ public class LLVMDebugInfo {
             int DirectoryEncodedLength = stack.nUTF8(Directory, false);
             long DirectoryEncoded = stack.getPointerAddress();
             return nLLVMDIBuilderCreateFile(Builder, FilenameEncoded, FilenameEncodedLength, DirectoryEncoded, DirectoryEncodedLength);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ LLVMDIBuilderCreateFileWithChecksum ] ---
+
+    /** {@code LLVMMetadataRef LLVMDIBuilderCreateFileWithChecksum(LLVMDIBuilderRef Builder, char const * Filename, size_t FilenameLen, char const * Directory, size_t DirectoryLen, LLVMChecksumKind ChecksumKind, char const * Checksum, size_t ChecksumLen, char const * Source, size_t SourceLen)} */
+    public static long nLLVMDIBuilderCreateFileWithChecksum(long Builder, long Filename, long FilenameLen, long Directory, long DirectoryLen, int ChecksumKind, long Checksum, long ChecksumLen, long Source, long SourceLen) {
+        long __functionAddress = Functions.DIBuilderCreateFileWithChecksum;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Builder);
+        }
+        return invokePPPPPPPPPP(Builder, Filename, FilenameLen, Directory, DirectoryLen, ChecksumKind, Checksum, ChecksumLen, Source, SourceLen, __functionAddress);
+    }
+
+    /** {@code LLVMMetadataRef LLVMDIBuilderCreateFileWithChecksum(LLVMDIBuilderRef Builder, char const * Filename, size_t FilenameLen, char const * Directory, size_t DirectoryLen, LLVMChecksumKind ChecksumKind, char const * Checksum, size_t ChecksumLen, char const * Source, size_t SourceLen)} */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDIBuilderCreateFileWithChecksum(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("char const *") ByteBuffer Filename, @NativeType("char const *") ByteBuffer Directory, @NativeType("LLVMChecksumKind") int ChecksumKind, @NativeType("char const *") ByteBuffer Checksum, @NativeType("char const *") ByteBuffer Source) {
+        return nLLVMDIBuilderCreateFileWithChecksum(Builder, memAddress(Filename), Filename.remaining(), memAddress(Directory), Directory.remaining(), ChecksumKind, memAddress(Checksum), Checksum.remaining(), memAddress(Source), Source.remaining());
+    }
+
+    /** {@code LLVMMetadataRef LLVMDIBuilderCreateFileWithChecksum(LLVMDIBuilderRef Builder, char const * Filename, size_t FilenameLen, char const * Directory, size_t DirectoryLen, LLVMChecksumKind ChecksumKind, char const * Checksum, size_t ChecksumLen, char const * Source, size_t SourceLen)} */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDIBuilderCreateFileWithChecksum(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("char const *") CharSequence Filename, @NativeType("char const *") CharSequence Directory, @NativeType("LLVMChecksumKind") int ChecksumKind, @NativeType("char const *") ByteBuffer Checksum, @NativeType("char const *") CharSequence Source) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            int FilenameEncodedLength = stack.nUTF8(Filename, false);
+            long FilenameEncoded = stack.getPointerAddress();
+            int DirectoryEncodedLength = stack.nUTF8(Directory, false);
+            long DirectoryEncoded = stack.getPointerAddress();
+            int SourceEncodedLength = stack.nUTF8(Source, false);
+            long SourceEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateFileWithChecksum(Builder, FilenameEncoded, FilenameEncodedLength, DirectoryEncoded, DirectoryEncodedLength, ChecksumKind, memAddress(Checksum), Checksum.remaining(), SourceEncoded, SourceEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }

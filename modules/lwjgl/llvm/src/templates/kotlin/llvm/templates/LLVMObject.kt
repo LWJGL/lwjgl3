@@ -29,7 +29,8 @@ val LLVMObject = "LLVMObject".nativeClass(
         "BinaryTypeMachO64L".enum,
         "BinaryTypeMachO64B".enum,
         "BinaryTypeWasm".enum,
-        "BinaryTypeOffload".enum
+        "BinaryTypeOffload".enum,
+        "BinaryTypeDXcontainer".enum
     )
 
     IgnoreMissing..LLVMBinaryRef(

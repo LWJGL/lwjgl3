@@ -54,7 +54,8 @@ val LLVMCore = "LLVMCore".nativeClass(
         "FPTrunc".enum,
         "FPExt".enum,
         "PtrToInt".enum,
-        "IntToPtr".enum,
+        "PtrToAddr".enum("69"),
+        "IntToPtr".enum("40"),
         "BitCast".enum,
         "AddrSpaceCast".enum("60"),
         "ICmp".enum("42"),
@@ -347,6 +348,13 @@ val LLVMCore = "LLVMCore".nativeClass(
         "GEPFlagInBounds".enum("1 << 0"),
         "GEPFlagNUSW".enum("1 << 1"),
         "GEPFlagNUW".enum("1 << 2"),
+    )
+
+    EnumConstant(
+        "DbgRecordLabel".enum("0"),
+        "DbgRecordDeclare".enum,
+        "DbgRecordValue".enum,
+        "DbgRecordAssign".enum,
     )
 
     split {
@@ -948,6 +956,15 @@ val LLVMCore = "LLVMCore".nativeClass(
 
             LLVMModuleRef("M"),
             charUTF8.const.p("Name"),
+            LLVMTypeRef("FunctionTy")
+        )
+
+        IgnoreMissing..LLVMValueRef(
+            "GetOrInsertFunction",
+
+            LLVMModuleRef("M"),
+            charUTF8.const.p("Name"),
+            AutoSize("Name")..size_t("NameLen"),
             LLVMTypeRef("FunctionTy")
         )
 
@@ -1816,6 +1833,13 @@ val LLVMCore = "LLVMCore".nativeClass(
             AutoSize("Text")..unsigned_int("SLen")
         )
 
+        IgnoreMissing..LLVMValueRef(
+            "ConstFPFromBits",
+
+            LLVMTypeRef("Ty"),
+            Unsafe..uint64_t.const.p("N")
+        )
+
         unsigned_long_long(
             "ConstIntGetZExtValue",
 
@@ -2582,6 +2606,14 @@ val LLVMCore = "LLVMCore".nativeClass(
         )
 
         IgnoreMissing..void(
+            "GlobalAddMetadata",
+
+            LLVMValueRef("Global"),
+            unsigned("Kind"),
+            LLVMMetadataRef("MD")
+        )
+
+        IgnoreMissing..void(
             "GlobalEraseMetadata",
 
             LLVMValueRef("Global"),
@@ -2592,6 +2624,13 @@ val LLVMCore = "LLVMCore".nativeClass(
             "GlobalClearMetadata",
 
             LLVMValueRef("Global")
+        )
+
+        IgnoreMissing..void(
+            "GlobalAddDebugInfo",
+
+            LLVMValueRef("Global"),
+            LLVMMetadataRef("GVE")
         )
 
         IgnoreMissing..LLVMValueMetadataEntry.p(
@@ -3565,6 +3604,12 @@ val LLVMCore = "LLVMCore".nativeClass(
         IgnoreMissing..LLVMDbgRecordRef("GetNextDbgRecord",     LLVMDbgRecordRef("DbgRecord"))
         IgnoreMissing..LLVMDbgRecordRef("GetPreviousDbgRecord", LLVMDbgRecordRef("DbgRecord"))
 
+        IgnoreMissing..LLVMMetadataRef("DbgRecordGetDebugLoc", LLVMDbgRecordRef("Rec"))
+        IgnoreMissing..LLVMDbgRecordKind("DbgRecordGetKind", LLVMDbgRecordRef("Rec"))
+        IgnoreMissing..LLVMValueRef("DbgVariableRecordGetValue", LLVMDbgRecordRef("Rec"), unsigned("OpIdx"))
+        IgnoreMissing..LLVMMetadataRef("DbgVariableRecordGetVariable", LLVMDbgRecordRef("Rec"))
+        IgnoreMissing..LLVMMetadataRef("DbgVariableRecordGetExpression", LLVMDbgRecordRef("Rec"))
+
         unsigned_int(
             "GetNumArgOperands",
 
@@ -3791,6 +3836,21 @@ val LLVMCore = "LLVMCore".nativeClass(
             "GetSwitchDefaultDest",
 
             LLVMValueRef("SwitchInstr")
+        )
+
+        IgnoreMissing..LLVMValueRef(
+            "GetSwitchCaseValue",
+
+            LLVMValueRef("SwitchInstr"),
+            unsigned("i")
+        )
+
+        IgnoreMissing..void(
+            "SetSwitchCaseValue",
+
+            LLVMValueRef("SwitchInstr"),
+            unsigned("i"),
+            LLVMValueRef("CaseValue")
         )
 
         LLVMTypeRef(
@@ -4809,7 +4869,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMBool(
             "GetVolatile",
 
-            LLVMValueRef("MemoryAccessInst")
+            LLVMValueRef("Inst")
         )
 
         void(

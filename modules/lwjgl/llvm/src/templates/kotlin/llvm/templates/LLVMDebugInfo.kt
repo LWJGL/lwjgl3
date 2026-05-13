@@ -165,6 +165,12 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
     )
 
     EnumConstant(
+        "CSK_MD5".enum("0"),
+        "CSK_SHA1".enum,
+        "CSK_SHA256".enum
+    )
+
+    EnumConstant(
         "DWARFMacinfoRecordTypeDefine".enum("0x01"),
         "DWARFMacinfoRecordTypeMacro".enum("0x02"),
         "DWARFMacinfoRecordTypeStartFile".enum("0x03"),
@@ -252,6 +258,21 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         AutoSize("Filename")..size_t("FilenameLen"),
         charUTF8.const.p("Directory"),
         AutoSize("Directory")..size_t("DirectoryLen")
+    )
+
+    IgnoreMissing..LLVMMetadataRef(
+        "DIBuilderCreateFileWithChecksum",
+
+        LLVMDIBuilderRef("Builder"),
+        charUTF8.const.p("Filename"),
+        AutoSize("Filename")..size_t("FilenameLen"),
+        charUTF8.const.p("Directory"),
+        AutoSize("Directory")..size_t("DirectoryLen"),
+        LLVMChecksumKind("ChecksumKind"),
+        char.const.p("Checksum"),
+        AutoSize("Checksum")..size_t("ChecksumLen"),
+        charUTF8.const.p("Source"),
+        AutoSize("Source")..size_t("SourceLen")
     )
 
     LLVMMetadataRef(

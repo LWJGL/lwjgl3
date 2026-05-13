@@ -379,6 +379,7 @@ val ClangIndex = "ClangIndex".nativeClass(
         "Cursor_OMPInterchangeDirective".enum,
         "Cursor_OMPAssumeDirective".enum,
         "Cursor_OMPStripeDirective".enum,
+        "Cursor_OMPFuseDirective".enum,
         "Cursor_OpenACCComputeConstruct".enum("320"),
         "Cursor_OpenACCLoopConstruct".enum,
         "Cursor_OpenACCCombinedConstruct".enum,

@@ -21,4 +21,13 @@ val LLVMIRReader = "LLVMIRReader".nativeClass(
         Check(1)..LLVMModuleRef.p("OutM"),
         Check(1)..charUTF8.p.p("OutMessage")
     )
+
+    IgnoreMissing..LLVMBool(
+        "ParseIRInContext2",
+
+        LLVMContextRef("ContextRef"),
+        LLVMMemoryBufferRef("MemBuf"),
+        Check(1)..LLVMModuleRef.p("OutM"),
+        Check(1)..char.p.p("OutMessage")
+    )
 }

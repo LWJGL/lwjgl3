@@ -116,6 +116,7 @@ public class LLVMCore {
             GetDebugLocLine                            = apiGetFunctionAddressOptional(LLVM, "LLVMGetDebugLocLine"),
             GetDebugLocColumn                          = apiGetFunctionAddressOptional(LLVM, "LLVMGetDebugLocColumn"),
             AddFunction                                = apiGetFunctionAddress(LLVM, "LLVMAddFunction"),
+            GetOrInsertFunction                        = apiGetFunctionAddressOptional(LLVM, "LLVMGetOrInsertFunction"),
             GetNamedFunction                           = apiGetFunctionAddress(LLVM, "LLVMGetNamedFunction"),
             GetNamedFunctionWithLength                 = apiGetFunctionAddressOptional(LLVM, "LLVMGetNamedFunctionWithLength"),
             GetFirstFunction                           = apiGetFunctionAddress(LLVM, "LLVMGetFirstFunction"),
@@ -333,6 +334,7 @@ public class LLVMCore {
             ConstReal                                  = apiGetFunctionAddress(LLVM, "LLVMConstReal"),
             ConstRealOfString                          = apiGetFunctionAddress(LLVM, "LLVMConstRealOfString"),
             ConstRealOfStringAndSize                   = apiGetFunctionAddress(LLVM, "LLVMConstRealOfStringAndSize"),
+            ConstFPFromBits                            = apiGetFunctionAddressOptional(LLVM, "LLVMConstFPFromBits"),
             ConstIntGetZExtValue                       = apiGetFunctionAddress(LLVM, "LLVMConstIntGetZExtValue"),
             ConstIntGetSExtValue                       = apiGetFunctionAddress(LLVM, "LLVMConstIntGetSExtValue"),
             ConstRealGetDouble                         = apiGetFunctionAddress(LLVM, "LLVMConstRealGetDouble"),
@@ -440,8 +442,10 @@ public class LLVMCore {
             GetAlignment                               = apiGetFunctionAddress(LLVM, "LLVMGetAlignment"),
             SetAlignment                               = apiGetFunctionAddress(LLVM, "LLVMSetAlignment"),
             GlobalSetMetadata                          = apiGetFunctionAddressOptional(LLVM, "LLVMGlobalSetMetadata"),
+            GlobalAddMetadata                          = apiGetFunctionAddressOptional(LLVM, "LLVMGlobalAddMetadata"),
             GlobalEraseMetadata                        = apiGetFunctionAddressOptional(LLVM, "LLVMGlobalEraseMetadata"),
             GlobalClearMetadata                        = apiGetFunctionAddressOptional(LLVM, "LLVMGlobalClearMetadata"),
+            GlobalAddDebugInfo                         = apiGetFunctionAddressOptional(LLVM, "LLVMGlobalAddDebugInfo"),
             GlobalCopyAllMetadata                      = apiGetFunctionAddressOptional(LLVM, "LLVMGlobalCopyAllMetadata"),
             DisposeValueMetadataEntries                = apiGetFunctionAddressOptional(LLVM, "LLVMDisposeValueMetadataEntries"),
             ValueMetadataEntriesGetKind                = apiGetFunctionAddressOptional(LLVM, "LLVMValueMetadataEntriesGetKind"),
@@ -587,6 +591,11 @@ public class LLVMCore {
             GetLastDbgRecord                           = apiGetFunctionAddressOptional(LLVM, "LLVMGetLastDbgRecord"),
             GetNextDbgRecord                           = apiGetFunctionAddressOptional(LLVM, "LLVMGetNextDbgRecord"),
             GetPreviousDbgRecord                       = apiGetFunctionAddressOptional(LLVM, "LLVMGetPreviousDbgRecord"),
+            DbgRecordGetDebugLoc                       = apiGetFunctionAddressOptional(LLVM, "LLVMDbgRecordGetDebugLoc"),
+            DbgRecordGetKind                           = apiGetFunctionAddressOptional(LLVM, "LLVMDbgRecordGetKind"),
+            DbgVariableRecordGetValue                  = apiGetFunctionAddressOptional(LLVM, "LLVMDbgVariableRecordGetValue"),
+            DbgVariableRecordGetVariable               = apiGetFunctionAddressOptional(LLVM, "LLVMDbgVariableRecordGetVariable"),
+            DbgVariableRecordGetExpression             = apiGetFunctionAddressOptional(LLVM, "LLVMDbgVariableRecordGetExpression"),
             GetNumArgOperands                          = apiGetFunctionAddress(LLVM, "LLVMGetNumArgOperands"),
             SetInstructionCallConv                     = apiGetFunctionAddress(LLVM, "LLVMSetInstructionCallConv"),
             GetInstructionCallConv                     = apiGetFunctionAddress(LLVM, "LLVMGetInstructionCallConv"),
@@ -620,6 +629,8 @@ public class LLVMCore {
             GetCondition                               = apiGetFunctionAddress(LLVM, "LLVMGetCondition"),
             SetCondition                               = apiGetFunctionAddress(LLVM, "LLVMSetCondition"),
             GetSwitchDefaultDest                       = apiGetFunctionAddress(LLVM, "LLVMGetSwitchDefaultDest"),
+            GetSwitchCaseValue                         = apiGetFunctionAddressOptional(LLVM, "LLVMGetSwitchCaseValue"),
+            SetSwitchCaseValue                         = apiGetFunctionAddressOptional(LLVM, "LLVMSetSwitchCaseValue"),
             GetAllocatedType                           = apiGetFunctionAddress(LLVM, "LLVMGetAllocatedType"),
             IsInBounds                                 = apiGetFunctionAddress(LLVM, "LLVMIsInBounds"),
             SetIsInBounds                              = apiGetFunctionAddress(LLVM, "LLVMSetIsInBounds"),
@@ -887,6 +898,7 @@ public class LLVMCore {
         LLVMFPTrunc        = 37,
         LLVMFPExt          = 38,
         LLVMPtrToInt       = 39,
+        LLVMPtrToAddr      = 69,
         LLVMIntToPtr       = 40,
         LLVMBitCast        = 41,
         LLVMAddrSpaceCast  = 60,
@@ -1160,6 +1172,12 @@ public class LLVMCore {
         LLVMGEPFlagInBounds = 1 << 0,
         LLVMGEPFlagNUSW     = 1 << 1,
         LLVMGEPFlagNUW      = 1 << 2;
+
+    public static final int
+        LLVMDbgRecordLabel   = 0,
+        LLVMDbgRecordDeclare = 1,
+        LLVMDbgRecordValue   = 2,
+        LLVMDbgRecordAssign  = 3;
 
     protected LLVMCore() {
         throw new UnsupportedOperationException();
@@ -2910,6 +2928,38 @@ public class LLVMCore {
             stack.nUTF8(Name, true);
             long NameEncoded = stack.getPointerAddress();
             return nLLVMAddFunction(M, NameEncoded, FunctionTy);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ LLVMGetOrInsertFunction ] ---
+
+    /** {@code LLVMValueRef LLVMGetOrInsertFunction(LLVMModuleRef M, char const * Name, size_t NameLen, LLVMTypeRef FunctionTy)} */
+    public static long nLLVMGetOrInsertFunction(long M, long Name, long NameLen, long FunctionTy) {
+        long __functionAddress = Functions.GetOrInsertFunction;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(M);
+            check(FunctionTy);
+        }
+        return invokePPPPP(M, Name, NameLen, FunctionTy, __functionAddress);
+    }
+
+    /** {@code LLVMValueRef LLVMGetOrInsertFunction(LLVMModuleRef M, char const * Name, size_t NameLen, LLVMTypeRef FunctionTy)} */
+    @NativeType("LLVMValueRef")
+    public static long LLVMGetOrInsertFunction(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") ByteBuffer Name, @NativeType("LLVMTypeRef") long FunctionTy) {
+        return nLLVMGetOrInsertFunction(M, memAddress(Name), Name.remaining(), FunctionTy);
+    }
+
+    /** {@code LLVMValueRef LLVMGetOrInsertFunction(LLVMModuleRef M, char const * Name, size_t NameLen, LLVMTypeRef FunctionTy)} */
+    @NativeType("LLVMValueRef")
+    public static long LLVMGetOrInsertFunction(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Name, @NativeType("LLVMTypeRef") long FunctionTy) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMGetOrInsertFunction(M, NameEncoded, NameEncodedLength, FunctionTy);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -5815,6 +5865,24 @@ public class LLVMCore {
         }
     }
 
+    // --- [ LLVMConstFPFromBits ] ---
+
+    /** {@code LLVMValueRef LLVMConstFPFromBits(LLVMTypeRef Ty, uint64_t const * N)} */
+    public static long nLLVMConstFPFromBits(long Ty, long N) {
+        long __functionAddress = Functions.ConstFPFromBits;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Ty);
+        }
+        return invokePPP(Ty, N, __functionAddress);
+    }
+
+    /** {@code LLVMValueRef LLVMConstFPFromBits(LLVMTypeRef Ty, uint64_t const * N)} */
+    @NativeType("LLVMValueRef")
+    public static long LLVMConstFPFromBits(@NativeType("LLVMTypeRef") long Ty, @NativeType("uint64_t const *") LongBuffer N) {
+        return nLLVMConstFPFromBits(Ty, memAddress(N));
+    }
+
     // --- [ LLVMConstIntGetZExtValue ] ---
 
     /** {@code unsigned long long LLVMConstIntGetZExtValue(LLVMValueRef ConstantVal)} */
@@ -7404,6 +7472,19 @@ public class LLVMCore {
         invokePPV(Global, Kind, MD, __functionAddress);
     }
 
+    // --- [ LLVMGlobalAddMetadata ] ---
+
+    /** {@code void LLVMGlobalAddMetadata(LLVMValueRef Global, unsigned Kind, LLVMMetadataRef MD)} */
+    public static void LLVMGlobalAddMetadata(@NativeType("LLVMValueRef") long Global, @NativeType("unsigned") int Kind, @NativeType("LLVMMetadataRef") long MD) {
+        long __functionAddress = Functions.GlobalAddMetadata;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Global);
+            check(MD);
+        }
+        invokePPV(Global, Kind, MD, __functionAddress);
+    }
+
     // --- [ LLVMGlobalEraseMetadata ] ---
 
     /** {@code void LLVMGlobalEraseMetadata(LLVMValueRef Global, unsigned int Kind)} */
@@ -7426,6 +7507,19 @@ public class LLVMCore {
             check(Global);
         }
         invokePV(Global, __functionAddress);
+    }
+
+    // --- [ LLVMGlobalAddDebugInfo ] ---
+
+    /** {@code void LLVMGlobalAddDebugInfo(LLVMValueRef Global, LLVMMetadataRef GVE)} */
+    public static void LLVMGlobalAddDebugInfo(@NativeType("LLVMValueRef") long Global, @NativeType("LLVMMetadataRef") long GVE) {
+        long __functionAddress = Functions.GlobalAddDebugInfo;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Global);
+            check(GVE);
+        }
+        invokePPV(Global, GVE, __functionAddress);
     }
 
     // --- [ LLVMGlobalCopyAllMetadata ] ---
@@ -9799,6 +9893,71 @@ public class LLVMCore {
         return invokePP(DbgRecord, __functionAddress);
     }
 
+    // --- [ LLVMDbgRecordGetDebugLoc ] ---
+
+    /** {@code LLVMMetadataRef LLVMDbgRecordGetDebugLoc(LLVMDbgRecordRef Rec)} */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDbgRecordGetDebugLoc(@NativeType("LLVMDbgRecordRef") long Rec) {
+        long __functionAddress = Functions.DbgRecordGetDebugLoc;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Rec);
+        }
+        return invokePP(Rec, __functionAddress);
+    }
+
+    // --- [ LLVMDbgRecordGetKind ] ---
+
+    /** {@code LLVMDbgRecordKind LLVMDbgRecordGetKind(LLVMDbgRecordRef Rec)} */
+    @NativeType("LLVMDbgRecordKind")
+    public static int LLVMDbgRecordGetKind(@NativeType("LLVMDbgRecordRef") long Rec) {
+        long __functionAddress = Functions.DbgRecordGetKind;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Rec);
+        }
+        return invokePI(Rec, __functionAddress);
+    }
+
+    // --- [ LLVMDbgVariableRecordGetValue ] ---
+
+    /** {@code LLVMValueRef LLVMDbgVariableRecordGetValue(LLVMDbgRecordRef Rec, unsigned OpIdx)} */
+    @NativeType("LLVMValueRef")
+    public static long LLVMDbgVariableRecordGetValue(@NativeType("LLVMDbgRecordRef") long Rec, @NativeType("unsigned") int OpIdx) {
+        long __functionAddress = Functions.DbgVariableRecordGetValue;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Rec);
+        }
+        return invokePP(Rec, OpIdx, __functionAddress);
+    }
+
+    // --- [ LLVMDbgVariableRecordGetVariable ] ---
+
+    /** {@code LLVMMetadataRef LLVMDbgVariableRecordGetVariable(LLVMDbgRecordRef Rec)} */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDbgVariableRecordGetVariable(@NativeType("LLVMDbgRecordRef") long Rec) {
+        long __functionAddress = Functions.DbgVariableRecordGetVariable;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Rec);
+        }
+        return invokePP(Rec, __functionAddress);
+    }
+
+    // --- [ LLVMDbgVariableRecordGetExpression ] ---
+
+    /** {@code LLVMMetadataRef LLVMDbgVariableRecordGetExpression(LLVMDbgRecordRef Rec)} */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDbgVariableRecordGetExpression(@NativeType("LLVMDbgRecordRef") long Rec) {
+        long __functionAddress = Functions.DbgVariableRecordGetExpression;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Rec);
+        }
+        return invokePP(Rec, __functionAddress);
+    }
+
     // --- [ LLVMGetNumArgOperands ] ---
 
     /** {@code unsigned int LLVMGetNumArgOperands(LLVMValueRef Instr)} */
@@ -10239,6 +10398,32 @@ public class LLVMCore {
             check(SwitchInstr);
         }
         return invokePP(SwitchInstr, __functionAddress);
+    }
+
+    // --- [ LLVMGetSwitchCaseValue ] ---
+
+    /** {@code LLVMValueRef LLVMGetSwitchCaseValue(LLVMValueRef SwitchInstr, unsigned i)} */
+    @NativeType("LLVMValueRef")
+    public static long LLVMGetSwitchCaseValue(@NativeType("LLVMValueRef") long SwitchInstr, @NativeType("unsigned") int i) {
+        long __functionAddress = Functions.GetSwitchCaseValue;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(SwitchInstr);
+        }
+        return invokePP(SwitchInstr, i, __functionAddress);
+    }
+
+    // --- [ LLVMSetSwitchCaseValue ] ---
+
+    /** {@code void LLVMSetSwitchCaseValue(LLVMValueRef SwitchInstr, unsigned i, LLVMValueRef CaseValue)} */
+    public static void LLVMSetSwitchCaseValue(@NativeType("LLVMValueRef") long SwitchInstr, @NativeType("unsigned") int i, @NativeType("LLVMValueRef") long CaseValue) {
+        long __functionAddress = Functions.SetSwitchCaseValue;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(SwitchInstr);
+            check(CaseValue);
+        }
+        invokePPV(SwitchInstr, i, CaseValue, __functionAddress);
     }
 
     // --- [ LLVMGetAllocatedType ] ---
@@ -13179,14 +13364,14 @@ public class LLVMCore {
 
     // --- [ LLVMGetVolatile ] ---
 
-    /** {@code LLVMBool LLVMGetVolatile(LLVMValueRef MemoryAccessInst)} */
+    /** {@code LLVMBool LLVMGetVolatile(LLVMValueRef Inst)} */
     @NativeType("LLVMBool")
-    public static boolean LLVMGetVolatile(@NativeType("LLVMValueRef") long MemoryAccessInst) {
+    public static boolean LLVMGetVolatile(@NativeType("LLVMValueRef") long Inst) {
         long __functionAddress = Functions.GetVolatile;
         if (CHECKS) {
-            check(MemoryAccessInst);
+            check(Inst);
         }
-        return invokePI(MemoryAccessInst, __functionAddress) != 0;
+        return invokePI(Inst, __functionAddress) != 0;
     }
 
     // --- [ LLVMSetVolatile ] ---
