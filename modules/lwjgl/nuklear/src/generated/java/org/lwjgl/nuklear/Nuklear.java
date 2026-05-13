@@ -181,7 +181,9 @@ public class Nuklear {
         NK_BUTTON_MIDDLE = 1,
         NK_BUTTON_RIGHT  = 2,
         NK_BUTTON_DOUBLE = 3,
-        NK_BUTTON_MAX    = 4;
+        NK_BUTTON_X1     = 4,
+        NK_BUTTON_X2     = 5,
+        NK_BUTTON_MAX    = 6;
 
     public static final int
         NK_COLOR_TEXT                    = 0,
@@ -283,7 +285,7 @@ public class Nuklear {
         NK_EDIT_INACTIVE    = 1 << 1,
         NK_EDIT_ACTIVATED   = 1 << 2,
         NK_EDIT_DEACTIVATED = 1 << 3,
-        NK_EDIT_COMMITED    = 1 << 4;
+        NK_EDIT_COMMITTED   = 1 << 4;
 
     public static final int
         NK_WINDOW_BORDER           = 1 << 0,

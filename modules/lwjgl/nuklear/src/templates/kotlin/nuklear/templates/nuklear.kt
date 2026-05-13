@@ -221,6 +221,8 @@ ENABLE_WARNINGS()""")
         "BUTTON_MIDDLE".enum,
         "BUTTON_RIGHT".enum,
         "BUTTON_DOUBLE".enum,
+        "BUTTON_X1".enum,
+        "BUTTON_X2".enum,
 
         "BUTTON_MAX".enum
     )
@@ -335,7 +337,7 @@ ENABLE_WARNINGS()""")
         "EDIT_INACTIVE".enum(1.NK_FLAG),
         "EDIT_ACTIVATED".enum(2.NK_FLAG),
         "EDIT_DEACTIVATED".enum(3.NK_FLAG),
-        "EDIT_COMMITED".enum(4.NK_FLAG)
+        "EDIT_COMMITTED".enum(4.NK_FLAG)
     )
 
     EnumConstant(
