@@ -10,7 +10,7 @@
     <import file="${config}/build-definitions.xml" id="defs"/>
 
     <!-- *********************************** -->
-    <property name="kotlinc-version" value="2.3.0"/>
+    <property name="kotlinc-version" value="2.4.0-RC"/>
 
     <property name="jspecify" value="1.0.0"/>
     <property name="testng" value="7.5"/>

@@ -1,5 +1,5 @@
 -version
--api-version 2.3
+-api-version 2.4
 -jvm-target 1.8
 -progressive
 -Xdisable-default-scripting-plugin
@@ -7,5 +7,5 @@
 -Xno-param-assertions
 -Xno-receiver-assertions
 -Xreport-perf
--Xbackend-threads=0
+-Xbackend-threads=1
 -verbose
