@@ -118,6 +118,8 @@ public class VkDataGraphPipelineCreateInfoARM extends Struct<VkDataGraphPipeline
     public VkDataGraphPipelineCreateInfoARM pNext(VkDataGraphPipelineCompilerControlCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDataGraphPipelineIdentifierCreateInfoARM} value to the {@code pNext} chain. */
     public VkDataGraphPipelineCreateInfoARM pNext(VkDataGraphPipelineIdentifierCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkDataGraphPipelineNeuralStatisticsCreateInfoARM} value to the {@code pNext} chain. */
+    public VkDataGraphPipelineCreateInfoARM pNext(VkDataGraphPipelineNeuralStatisticsCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDataGraphPipelineOpticalFlowCreateInfoARM} value to the {@code pNext} chain. */
     public VkDataGraphPipelineCreateInfoARM pNext(VkDataGraphPipelineOpticalFlowCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDataGraphPipelineShaderModuleCreateInfoARM} value to the {@code pNext} chain. */
@@ -390,6 +392,8 @@ public class VkDataGraphPipelineCreateInfoARM extends Struct<VkDataGraphPipeline
         public VkDataGraphPipelineCreateInfoARM.Buffer pNext(VkDataGraphPipelineCompilerControlCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDataGraphPipelineIdentifierCreateInfoARM} value to the {@code pNext} chain. */
         public VkDataGraphPipelineCreateInfoARM.Buffer pNext(VkDataGraphPipelineIdentifierCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkDataGraphPipelineNeuralStatisticsCreateInfoARM} value to the {@code pNext} chain. */
+        public VkDataGraphPipelineCreateInfoARM.Buffer pNext(VkDataGraphPipelineNeuralStatisticsCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDataGraphPipelineOpticalFlowCreateInfoARM} value to the {@code pNext} chain. */
         public VkDataGraphPipelineCreateInfoARM.Buffer pNext(VkDataGraphPipelineOpticalFlowCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDataGraphPipelineShaderModuleCreateInfoARM} value to the {@code pNext} chain. */

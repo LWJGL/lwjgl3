@@ -107,6 +107,8 @@ public class VkAccelerationStructureGeometryKHR extends Struct<VkAccelerationStr
     public VkAccelerationStructureGeometryKHR pNext(VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkAccelerationStructureGeometryLinearSweptSpheresDataNV} value to the {@code pNext} chain. */
     public VkAccelerationStructureGeometryKHR pNext(VkAccelerationStructureGeometryLinearSweptSpheresDataNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkAccelerationStructureGeometryMicromapDataKHR} value to the {@code pNext} chain. */
+    public VkAccelerationStructureGeometryKHR pNext(VkAccelerationStructureGeometryMicromapDataKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkAccelerationStructureGeometrySpheresDataNV} value to the {@code pNext} chain. */
     public VkAccelerationStructureGeometryKHR pNext(VkAccelerationStructureGeometrySpheresDataNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code geometryType} field. */
@@ -348,6 +350,8 @@ public class VkAccelerationStructureGeometryKHR extends Struct<VkAccelerationStr
         public VkAccelerationStructureGeometryKHR.Buffer pNext(VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkAccelerationStructureGeometryLinearSweptSpheresDataNV} value to the {@code pNext} chain. */
         public VkAccelerationStructureGeometryKHR.Buffer pNext(VkAccelerationStructureGeometryLinearSweptSpheresDataNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkAccelerationStructureGeometryMicromapDataKHR} value to the {@code pNext} chain. */
+        public VkAccelerationStructureGeometryKHR.Buffer pNext(VkAccelerationStructureGeometryMicromapDataKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkAccelerationStructureGeometrySpheresDataNV} value to the {@code pNext} chain. */
         public VkAccelerationStructureGeometryKHR.Buffer pNext(VkAccelerationStructureGeometrySpheresDataNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code geometryType} field. */

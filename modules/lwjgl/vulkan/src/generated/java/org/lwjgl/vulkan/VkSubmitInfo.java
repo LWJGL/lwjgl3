@@ -151,6 +151,8 @@ public class VkSubmitInfo extends Struct<VkSubmitInfo> implements NativeResource
     public VkSubmitInfo pNext(VkPerformanceQuerySubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkProtectedSubmitInfo} value to the {@code pNext} chain. */
     public VkSubmitInfo pNext(VkProtectedSubmitInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkThrottleHintSubmitInfoSEC} value to the {@code pNext} chain. */
+    public VkSubmitInfo pNext(VkThrottleHintSubmitInfoSEC value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkTimelineSemaphoreSubmitInfo} value to the {@code pNext} chain. */
     public VkSubmitInfo pNext(VkTimelineSemaphoreSubmitInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkTimelineSemaphoreSubmitInfoKHR} value to the {@code pNext} chain. */
@@ -464,6 +466,8 @@ public class VkSubmitInfo extends Struct<VkSubmitInfo> implements NativeResource
         public VkSubmitInfo.Buffer pNext(VkPerformanceQuerySubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkProtectedSubmitInfo} value to the {@code pNext} chain. */
         public VkSubmitInfo.Buffer pNext(VkProtectedSubmitInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkThrottleHintSubmitInfoSEC} value to the {@code pNext} chain. */
+        public VkSubmitInfo.Buffer pNext(VkThrottleHintSubmitInfoSEC value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkTimelineSemaphoreSubmitInfo} value to the {@code pNext} chain. */
         public VkSubmitInfo.Buffer pNext(VkTimelineSemaphoreSubmitInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkTimelineSemaphoreSubmitInfoKHR} value to the {@code pNext} chain. */

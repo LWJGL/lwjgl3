@@ -10,7 +10,7 @@ import vulkan.*
 
 val EXT_ray_tracing_invocation_reorder = "EXTRayTracingInvocationReorder".nativeClassVK("EXT_ray_tracing_invocation_reorder", type = "device", postfix = "EXT") {
     IntConstant(
-        "EXT_RAY_TRACING_INVOCATION_REORDER_SPEC_VERSION".."1"
+        "EXT_RAY_TRACING_INVOCATION_REORDER_SPEC_VERSION".."2"
     )
 
     StringConstant(

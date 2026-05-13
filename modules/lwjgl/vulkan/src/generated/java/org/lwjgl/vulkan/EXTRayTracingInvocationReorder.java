@@ -7,7 +7,7 @@ package org.lwjgl.vulkan;
 
 public final class EXTRayTracingInvocationReorder {
 
-    public static final int VK_EXT_RAY_TRACING_INVOCATION_REORDER_SPEC_VERSION = 1;
+    public static final int VK_EXT_RAY_TRACING_INVOCATION_REORDER_SPEC_VERSION = 2;
 
     public static final String VK_EXT_RAY_TRACING_INVOCATION_REORDER_EXTENSION_NAME = "VK_EXT_ray_tracing_invocation_reorder";
 

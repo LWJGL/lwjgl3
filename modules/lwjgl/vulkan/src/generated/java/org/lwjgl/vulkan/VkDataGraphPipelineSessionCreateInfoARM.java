@@ -97,6 +97,8 @@ public class VkDataGraphPipelineSessionCreateInfoARM extends Struct<VkDataGraphP
     public VkDataGraphPipelineSessionCreateInfoARM sType$Default() { return sType(ARMDataGraph.VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SESSION_CREATE_INFO_ARM); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkDataGraphPipelineSessionCreateInfoARM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkDataGraphPipelineSessionNeuralStatisticsCreateInfoARM} value to the {@code pNext} chain. */
+    public VkDataGraphPipelineSessionCreateInfoARM pNext(VkDataGraphPipelineSessionNeuralStatisticsCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code flags} field. */
     public VkDataGraphPipelineSessionCreateInfoARM flags(@NativeType("VkDataGraphPipelineSessionCreateFlagsARM") long value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@code dataGraphPipeline} field. */
@@ -320,6 +322,8 @@ public class VkDataGraphPipelineSessionCreateInfoARM extends Struct<VkDataGraphP
         public VkDataGraphPipelineSessionCreateInfoARM.Buffer sType$Default() { return sType(ARMDataGraph.VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SESSION_CREATE_INFO_ARM); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkDataGraphPipelineSessionCreateInfoARM.Buffer pNext(@NativeType("void const *") long value) { VkDataGraphPipelineSessionCreateInfoARM.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkDataGraphPipelineSessionNeuralStatisticsCreateInfoARM} value to the {@code pNext} chain. */
+        public VkDataGraphPipelineSessionCreateInfoARM.Buffer pNext(VkDataGraphPipelineSessionNeuralStatisticsCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code flags} field. */
         public VkDataGraphPipelineSessionCreateInfoARM.Buffer flags(@NativeType("VkDataGraphPipelineSessionCreateFlagsARM") long value) { VkDataGraphPipelineSessionCreateInfoARM.nflags(address(), value); return this; }
         /** Sets the specified value to the {@code dataGraphPipeline} field. */
