@@ -313,11 +313,11 @@ val freetype = "FreeType".nativeClass(Module.FREETYPE, prefix = "FT", prefixMeth
     )
 
     EnumConstant(
-        "FT_LOAD_TARGET_NORMAL".enum("FT_LOAD_TARGET_( FT_RENDER_MODE_NORMAL )"),
-        "FT_LOAD_TARGET_LIGHT".enum("FT_LOAD_TARGET_( FT_RENDER_MODE_LIGHT )"),
-        "FT_LOAD_TARGET_MONO".enum("FT_LOAD_TARGET_( FT_RENDER_MODE_MONO )"),
-        "FT_LOAD_TARGET_LCD".enum("FT_LOAD_TARGET_( FT_RENDER_MODE_LCD )"),
-        "FT_LOAD_TARGET_LCD_V".enum("FT_LOAD_TARGET_( FT_RENDER_MODE_LCD_V )"),
+        "LOAD_TARGET_NORMAL".enum("FT_LOAD_TARGET_( FT_RENDER_MODE_NORMAL )"),
+        "LOAD_TARGET_LIGHT".enum("FT_LOAD_TARGET_( FT_RENDER_MODE_LIGHT )"),
+        "LOAD_TARGET_MONO".enum("FT_LOAD_TARGET_( FT_RENDER_MODE_MONO )"),
+        "LOAD_TARGET_LCD".enum("FT_LOAD_TARGET_( FT_RENDER_MODE_LCD )"),
+        "LOAD_TARGET_LCD_V".enum("FT_LOAD_TARGET_( FT_RENDER_MODE_LCD_V )"),
     )
 
     void(
