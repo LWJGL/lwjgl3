@@ -11,6 +11,7 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
     StringConstant("ANIMDATA_KEY".."KTXanimData")
     StringConstant("ORIENTATION_KEY".."KTXorientation")
     StringConstant("SWIZZLE_KEY".."KTXswizzle")
+    StringConstant("MAP_RANGE_KEY".."KTXmapRange")
     StringConstant("WRITER_KEY".."KTXwriter")
     StringConstant("WRITER_SCPARAMS_KEY".."KTXwriterScParams")
     StringConstant("ORIENTATION1_FMT".."S=%c")
@@ -83,8 +84,9 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
         "SS_BASIS_LZ".enum,
         "SS_ZSTD".enum,
         "SS_ZLIB".enum,
+        "SS_UASTC_HDR_6x6_INTERMEDIATE".enum,
         "SS_BEGIN_RANGE".enum("KTX_SS_NONE"),
-        "SS_END_RANGE".enum("KTX_SS_ZLIB"),
+        "SS_END_RANGE".enum("KTX_SS_UASTC_HDR_6x6_INTERMEDIATE"),
         "SS_BEGIN_VENDOR_RANGE".enum("0x10000"),
         "SS_END_VENDOR_RANGE".enum("0x1ffff"),
         "SS_BEGIN_RESERVED".enum("0x20000")
@@ -169,6 +171,14 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
     )
 
     EnumConstant(
+        "BASIS_CODEC_NONE".enum("0"),
+        "BASIS_CODEC_ETC1S".enum,
+        "BASIS_CODEC_UASTC_LDR_4x4".enum,
+        "BASIS_CODEC_UASTC_HDR_4x4".enum,
+        "BASIS_CODEC_UASTC_HDR_6x6_INTERMEDIATE".enum
+    )
+
+    EnumConstant(
         "TTF_ETC1_RGB".enum("0"),
         "TTF_ETC2_RGBA".enum,
         "TTF_BC1_RGB".enum,
@@ -189,6 +199,10 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
         "TTF_RGBA4444".enum,
         "TTF_ETC".enum("22"),
         "TTF_BC1_OR_3".enum,
+        "TTF_RGBA_HALF".enum("25"),
+        "TTF_ASTC_HDR_4x4_RGBA".enum("29"),
+        "TTF_ASTC_HDR_6x6_RGBA".enum,
+        "TTF_BC6HU".enum,
         "TTF_NOSELECTION".enum(0x7fffffff)
     )
 
@@ -329,7 +343,19 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
     )
 
     ktx_bool_t(
+        "Texture1_IsHDR",
+
+        ktxTexture1.p("This")
+    )
+
+    ktx_bool_t(
         "Texture1_NeedsTranscoding",
+
+        ktxTexture1.p("This")
+    )
+
+    ktx_bool_t(
+        "Texture1_IsTranscodable",
 
         ktxTexture1.p("This")
     )
@@ -538,7 +564,19 @@ val ktx = "KTX".nativeClass(Module.KTX, prefix = "KTX", binding = KTX_BINDING) {
     )
 
     ktx_bool_t(
+        "Texture2_IsHDR",
+
+        ktxTexture2.p("This")
+    )
+
+    ktx_bool_t(
         "Texture2_NeedsTranscoding",
+
+        ktxTexture2.p("This")
+    )
+
+    ktx_bool_t(
+        "Texture2_IsTranscodable",
 
         ktxTexture2.p("This")
     )

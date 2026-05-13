@@ -45,7 +45,9 @@ public class KTX {
             Texture1_CreateFromMemory      = apiGetFunctionAddress(KTX, "ktxTexture1_CreateFromMemory"),
             Texture1_CreateFromStream      = apiGetFunctionAddress(KTX, "ktxTexture1_CreateFromStream"),
             Texture1_Destroy               = apiGetFunctionAddressOptional(KTX, "ktxTexture1_Destroy"),
+            Texture1_IsHDR                 = apiGetFunctionAddress(KTX, "ktxTexture1_IsHDR"),
             Texture1_NeedsTranscoding      = apiGetFunctionAddress(KTX, "ktxTexture1_NeedsTranscoding"),
+            Texture1_IsTranscodable        = apiGetFunctionAddress(KTX, "ktxTexture1_IsTranscodable"),
             Texture1_LoadImageData         = apiGetFunctionAddressOptional(KTX, "ktxTexture1_LoadImageData"),
             Texture1_WriteToNamedFile      = apiGetFunctionAddressOptional(KTX, "ktxTexture1_WriteToNamedFile"),
             Texture1_WriteToMemory         = apiGetFunctionAddressOptional(KTX, "ktxTexture1_WriteToMemory"),
@@ -71,7 +73,9 @@ public class KTX {
             Texture2_GetColorModel_e       = apiGetFunctionAddress(KTX, "ktxTexture2_GetColorModel_e"),
             Texture2_GetPremultipliedAlpha = apiGetFunctionAddress(KTX, "ktxTexture2_GetPremultipliedAlpha"),
             Texture2_GetPrimaries_e        = apiGetFunctionAddressOptional(KTX, "ktxTexture2_GetPrimaries_e"),
+            Texture2_IsHDR                 = apiGetFunctionAddress(KTX, "ktxTexture2_IsHDR"),
             Texture2_NeedsTranscoding      = apiGetFunctionAddress(KTX, "ktxTexture2_NeedsTranscoding"),
+            Texture2_IsTranscodable        = apiGetFunctionAddress(KTX, "ktxTexture2_IsTranscodable"),
             Texture2_SetTransferFunction   = apiGetFunctionAddress(KTX, "ktxTexture2_SetTransferFunction"),
             Texture2_SetOETF               = apiGetFunctionAddress(KTX, "ktxTexture2_SetOETF"),
             Texture2_SetPrimaries          = apiGetFunctionAddress(KTX, "ktxTexture2_SetPrimaries"),
@@ -127,6 +131,8 @@ public class KTX {
     public static final String KTX_ORIENTATION_KEY = "KTXorientation";
 
     public static final String KTX_SWIZZLE_KEY = "KTXswizzle";
+
+    public static final String KTX_MAP_RANGE_KEY = "KTXmapRange";
 
     public static final String KTX_WRITER_KEY = "KTXwriter";
 
@@ -192,15 +198,16 @@ public class KTX {
         ktxTexture2_c = 2;
 
     public static final int
-        KTX_SS_NONE               = 0,
-        KTX_SS_BASIS_LZ           = 1,
-        KTX_SS_ZSTD               = 2,
-        KTX_SS_ZLIB               = 3,
-        KTX_SS_BEGIN_RANGE        = KTX_SS_NONE,
-        KTX_SS_END_RANGE          = KTX_SS_ZLIB,
-        KTX_SS_BEGIN_VENDOR_RANGE = 0x10000,
-        KTX_SS_END_VENDOR_RANGE   = 0x1ffff,
-        KTX_SS_BEGIN_RESERVED     = 0x20000;
+        KTX_SS_NONE                       = 0,
+        KTX_SS_BASIS_LZ                   = 1,
+        KTX_SS_ZSTD                       = 2,
+        KTX_SS_ZLIB                       = 3,
+        KTX_SS_UASTC_HDR_6x6_INTERMEDIATE = 4,
+        KTX_SS_BEGIN_RANGE                = KTX_SS_NONE,
+        KTX_SS_END_RANGE                  = KTX_SS_UASTC_HDR_6x6_INTERMEDIATE,
+        KTX_SS_BEGIN_VENDOR_RANGE         = 0x10000,
+        KTX_SS_END_VENDOR_RANGE           = 0x1ffff,
+        KTX_SS_BEGIN_RESERVED             = 0x20000;
 
     public static final int
         KTX_TEXTURE_CREATE_NO_STORAGE    = 0,
@@ -274,27 +281,38 @@ public class KTX {
         KTX_PACK_ASTC_ENCODER_MODE_MAX     = KTX_PACK_ASTC_ENCODER_MODE_HDR;
 
     public static final int
-        KTX_TTF_ETC1_RGB      = 0,
-        KTX_TTF_ETC2_RGBA     = 1,
-        KTX_TTF_BC1_RGB       = 2,
-        KTX_TTF_BC3_RGBA      = 3,
-        KTX_TTF_BC4_R         = 4,
-        KTX_TTF_BC5_RG        = 5,
-        KTX_TTF_BC7_RGBA      = 6,
-        KTX_TTF_PVRTC1_4_RGB  = 8,
-        KTX_TTF_PVRTC1_4_RGBA = 9,
-        KTX_TTF_ASTC_4x4_RGBA = 10,
-        KTX_TTF_PVRTC2_4_RGB  = 18,
-        KTX_TTF_PVRTC2_4_RGBA = 19,
-        KTX_TTF_ETC2_EAC_R11  = 20,
-        KTX_TTF_ETC2_EAC_RG11 = 21,
-        KTX_TTF_RGBA32        = 13,
-        KTX_TTF_RGB565        = 14,
-        KTX_TTF_BGR565        = 15,
-        KTX_TTF_RGBA4444      = 16,
-        KTX_TTF_ETC           = 22,
-        KTX_TTF_BC1_OR_3      = 23,
-        KTX_TTF_NOSELECTION   = 0x7FFFFFFF;
+        KTX_BASIS_CODEC_NONE                       = 0,
+        KTX_BASIS_CODEC_ETC1S                      = 1,
+        KTX_BASIS_CODEC_UASTC_LDR_4x4              = 2,
+        KTX_BASIS_CODEC_UASTC_HDR_4x4              = 3,
+        KTX_BASIS_CODEC_UASTC_HDR_6x6_INTERMEDIATE = 4;
+
+    public static final int
+        KTX_TTF_ETC1_RGB          = 0,
+        KTX_TTF_ETC2_RGBA         = 1,
+        KTX_TTF_BC1_RGB           = 2,
+        KTX_TTF_BC3_RGBA          = 3,
+        KTX_TTF_BC4_R             = 4,
+        KTX_TTF_BC5_RG            = 5,
+        KTX_TTF_BC7_RGBA          = 6,
+        KTX_TTF_PVRTC1_4_RGB      = 8,
+        KTX_TTF_PVRTC1_4_RGBA     = 9,
+        KTX_TTF_ASTC_4x4_RGBA     = 10,
+        KTX_TTF_PVRTC2_4_RGB      = 18,
+        KTX_TTF_PVRTC2_4_RGBA     = 19,
+        KTX_TTF_ETC2_EAC_R11      = 20,
+        KTX_TTF_ETC2_EAC_RG11     = 21,
+        KTX_TTF_RGBA32            = 13,
+        KTX_TTF_RGB565            = 14,
+        KTX_TTF_BGR565            = 15,
+        KTX_TTF_RGBA4444          = 16,
+        KTX_TTF_ETC               = 22,
+        KTX_TTF_BC1_OR_3          = 23,
+        KTX_TTF_RGBA_HALF         = 25,
+        KTX_TTF_ASTC_HDR_4x4_RGBA = 29,
+        KTX_TTF_ASTC_HDR_6x6_RGBA = 30,
+        KTX_TTF_BC6HU             = 31,
+        KTX_TTF_NOSELECTION       = 0x7FFFFFFF;
 
     public static final int
         KTX_TF_PVRTC_DECODE_TO_NEXT_POW2              = 2,
@@ -583,6 +601,20 @@ public class KTX {
         nktxTexture1_Destroy(This.address());
     }
 
+    // --- [ ktxTexture1_IsHDR ] ---
+
+    /** {@code ktx_bool_t ktxTexture1_IsHDR(ktxTexture1 * This)} */
+    public static boolean nktxTexture1_IsHDR(long This) {
+        long __functionAddress = Functions.Texture1_IsHDR;
+        return callPZ(This, __functionAddress);
+    }
+
+    /** {@code ktx_bool_t ktxTexture1_IsHDR(ktxTexture1 * This)} */
+    @NativeType("ktx_bool_t")
+    public static boolean ktxTexture1_IsHDR(@NativeType("ktxTexture1 *") ktxTexture1 This) {
+        return nktxTexture1_IsHDR(This.address());
+    }
+
     // --- [ ktxTexture1_NeedsTranscoding ] ---
 
     /** {@code ktx_bool_t ktxTexture1_NeedsTranscoding(ktxTexture1 * This)} */
@@ -595,6 +627,20 @@ public class KTX {
     @NativeType("ktx_bool_t")
     public static boolean ktxTexture1_NeedsTranscoding(@NativeType("ktxTexture1 *") ktxTexture1 This) {
         return nktxTexture1_NeedsTranscoding(This.address());
+    }
+
+    // --- [ ktxTexture1_IsTranscodable ] ---
+
+    /** {@code ktx_bool_t ktxTexture1_IsTranscodable(ktxTexture1 * This)} */
+    public static boolean nktxTexture1_IsTranscodable(long This) {
+        long __functionAddress = Functions.Texture1_IsTranscodable;
+        return callPZ(This, __functionAddress);
+    }
+
+    /** {@code ktx_bool_t ktxTexture1_IsTranscodable(ktxTexture1 * This)} */
+    @NativeType("ktx_bool_t")
+    public static boolean ktxTexture1_IsTranscodable(@NativeType("ktxTexture1 *") ktxTexture1 This) {
+        return nktxTexture1_IsTranscodable(This.address());
     }
 
     // --- [ ktxTexture1_LoadImageData ] ---
@@ -1063,6 +1109,20 @@ public class KTX {
         return nktxTexture2_GetPrimaries_e(This.address());
     }
 
+    // --- [ ktxTexture2_IsHDR ] ---
+
+    /** {@code ktx_bool_t ktxTexture2_IsHDR(ktxTexture2 * This)} */
+    public static boolean nktxTexture2_IsHDR(long This) {
+        long __functionAddress = Functions.Texture2_IsHDR;
+        return callPZ(This, __functionAddress);
+    }
+
+    /** {@code ktx_bool_t ktxTexture2_IsHDR(ktxTexture2 * This)} */
+    @NativeType("ktx_bool_t")
+    public static boolean ktxTexture2_IsHDR(@NativeType("ktxTexture2 *") ktxTexture2 This) {
+        return nktxTexture2_IsHDR(This.address());
+    }
+
     // --- [ ktxTexture2_NeedsTranscoding ] ---
 
     /** {@code ktx_bool_t ktxTexture2_NeedsTranscoding(ktxTexture2 * This)} */
@@ -1075,6 +1135,20 @@ public class KTX {
     @NativeType("ktx_bool_t")
     public static boolean ktxTexture2_NeedsTranscoding(@NativeType("ktxTexture2 *") ktxTexture2 This) {
         return nktxTexture2_NeedsTranscoding(This.address());
+    }
+
+    // --- [ ktxTexture2_IsTranscodable ] ---
+
+    /** {@code ktx_bool_t ktxTexture2_IsTranscodable(ktxTexture2 * This)} */
+    public static boolean nktxTexture2_IsTranscodable(long This) {
+        long __functionAddress = Functions.Texture2_IsTranscodable;
+        return callPZ(This, __functionAddress);
+    }
+
+    /** {@code ktx_bool_t ktxTexture2_IsTranscodable(ktxTexture2 * This)} */
+    @NativeType("ktx_bool_t")
+    public static boolean ktxTexture2_IsTranscodable(@NativeType("ktxTexture2 *") ktxTexture2 This) {
+        return nktxTexture2_IsTranscodable(This.address());
     }
 
     // --- [ ktxTexture2_SetTransferFunction ] ---

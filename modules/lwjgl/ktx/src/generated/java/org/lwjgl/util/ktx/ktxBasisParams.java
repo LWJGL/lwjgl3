@@ -20,11 +20,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre>{@code
  * struct ktxBasisParams {
  *     ktx_uint32_t structSize;
- *     ktx_bool_t uastc;
+ *     ktx_basis_codec codec;
  *     ktx_bool_t verbose;
  *     ktx_bool_t noSSE;
  *     ktx_uint32_t threadCount;
- *     ktx_uint32_t compressionLevel;
+ *     ktx_uint32_t etc1sCompressionLevel;
  *     ktx_uint32_t qualityLevel;
  *     ktx_uint32_t maxEndpoints;
  *     float endpointRDOThreshold;
@@ -44,6 +44,12 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float uastcRDOMaxSmoothBlockStdDev;
  *     ktx_bool_t uastcRDODontFavorSimplerModes;
  *     ktx_bool_t uastcRDONoMultithreading;
+ *     ktx_uint32_t uastcHDRQuality;
+ *     ktx_bool_t uastcHDRUberMode;
+ *     ktx_bool_t uastcHDRUltraQuant;
+ *     ktx_bool_t uastcHDRFavorAstc;
+ *     float uastcHDRLambda;
+ *     ktx_uint32_t uastcHDRLevel;
  * }}</pre>
  */
 public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeResource {
@@ -57,11 +63,11 @@ public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeReso
     /** The struct member offsets. */
     public static final int
         STRUCTSIZE,
-        UASTC,
+        CODEC,
         VERBOSE,
         NOSSE,
         THREADCOUNT,
-        COMPRESSIONLEVEL,
+        ETC1SCOMPRESSIONLEVEL,
         QUALITYLEVEL,
         MAXENDPOINTS,
         ENDPOINTRDOTHRESHOLD,
@@ -80,12 +86,18 @@ public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeReso
         UASTCRDOMAXSMOOTHBLOCKERRORSCALE,
         UASTCRDOMAXSMOOTHBLOCKSTDDEV,
         UASTCRDODONTFAVORSIMPLERMODES,
-        UASTCRDONOMULTITHREADING;
+        UASTCRDONOMULTITHREADING,
+        UASTCHDRQUALITY,
+        UASTCHDRUBERMODE,
+        UASTCHDRULTRAQUANT,
+        UASTCHDRFAVORASTC,
+        UASTCHDRLAMBDA,
+        UASTCHDRLEVEL;
 
     static {
         Layout layout = __struct(
             __member(4),
-            __member(1),
+            __member(4),
             __member(1),
             __member(1),
             __member(4),
@@ -108,18 +120,24 @@ public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeReso
             __member(4),
             __member(4),
             __member(1),
-            __member(1)
+            __member(1),
+            __member(4),
+            __member(1),
+            __member(1),
+            __member(1),
+            __member(4),
+            __member(4)
         );
 
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
         STRUCTSIZE = layout.offsetof(0);
-        UASTC = layout.offsetof(1);
+        CODEC = layout.offsetof(1);
         VERBOSE = layout.offsetof(2);
         NOSSE = layout.offsetof(3);
         THREADCOUNT = layout.offsetof(4);
-        COMPRESSIONLEVEL = layout.offsetof(5);
+        ETC1SCOMPRESSIONLEVEL = layout.offsetof(5);
         QUALITYLEVEL = layout.offsetof(6);
         MAXENDPOINTS = layout.offsetof(7);
         ENDPOINTRDOTHRESHOLD = layout.offsetof(8);
@@ -139,6 +157,12 @@ public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeReso
         UASTCRDOMAXSMOOTHBLOCKSTDDEV = layout.offsetof(22);
         UASTCRDODONTFAVORSIMPLERMODES = layout.offsetof(23);
         UASTCRDONOMULTITHREADING = layout.offsetof(24);
+        UASTCHDRQUALITY = layout.offsetof(25);
+        UASTCHDRUBERMODE = layout.offsetof(26);
+        UASTCHDRULTRAQUANT = layout.offsetof(27);
+        UASTCHDRFAVORASTC = layout.offsetof(28);
+        UASTCHDRLAMBDA = layout.offsetof(29);
+        UASTCHDRLEVEL = layout.offsetof(30);
     }
 
     protected ktxBasisParams(long address, @Nullable ByteBuffer container) {
@@ -166,9 +190,9 @@ public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeReso
     /** @return the value of the {@code structSize} field. */
     @NativeType("ktx_uint32_t")
     public int structSize() { return nstructSize(address()); }
-    /** @return the value of the {@code uastc} field. */
-    @NativeType("ktx_bool_t")
-    public boolean uastc() { return nuastc(address()); }
+    /** @return the value of the {@code codec} field. */
+    @NativeType("ktx_basis_codec")
+    public int codec() { return ncodec(address()); }
     /** @return the value of the {@code verbose} field. */
     @NativeType("ktx_bool_t")
     public boolean verbose() { return nverbose(address()); }
@@ -178,9 +202,9 @@ public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeReso
     /** @return the value of the {@code threadCount} field. */
     @NativeType("ktx_uint32_t")
     public int threadCount() { return nthreadCount(address()); }
-    /** @return the value of the {@code compressionLevel} field. */
+    /** @return the value of the {@code etc1sCompressionLevel} field. */
     @NativeType("ktx_uint32_t")
-    public int compressionLevel() { return ncompressionLevel(address()); }
+    public int etc1sCompressionLevel() { return netc1sCompressionLevel(address()); }
     /** @return the value of the {@code qualityLevel} field. */
     @NativeType("ktx_uint32_t")
     public int qualityLevel() { return nqualityLevel(address()); }
@@ -236,19 +260,36 @@ public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeReso
     /** @return the value of the {@code uastcRDONoMultithreading} field. */
     @NativeType("ktx_bool_t")
     public boolean uastcRDONoMultithreading() { return nuastcRDONoMultithreading(address()); }
+    /** @return the value of the {@code uastcHDRQuality} field. */
+    @NativeType("ktx_uint32_t")
+    public int uastcHDRQuality() { return nuastcHDRQuality(address()); }
+    /** @return the value of the {@code uastcHDRUberMode} field. */
+    @NativeType("ktx_bool_t")
+    public boolean uastcHDRUberMode() { return nuastcHDRUberMode(address()); }
+    /** @return the value of the {@code uastcHDRUltraQuant} field. */
+    @NativeType("ktx_bool_t")
+    public boolean uastcHDRUltraQuant() { return nuastcHDRUltraQuant(address()); }
+    /** @return the value of the {@code uastcHDRFavorAstc} field. */
+    @NativeType("ktx_bool_t")
+    public boolean uastcHDRFavorAstc() { return nuastcHDRFavorAstc(address()); }
+    /** @return the value of the {@code uastcHDRLambda} field. */
+    public float uastcHDRLambda() { return nuastcHDRLambda(address()); }
+    /** @return the value of the {@code uastcHDRLevel} field. */
+    @NativeType("ktx_uint32_t")
+    public int uastcHDRLevel() { return nuastcHDRLevel(address()); }
 
     /** Sets the specified value to the {@code structSize} field. */
     public ktxBasisParams structSize(@NativeType("ktx_uint32_t") int value) { nstructSize(address(), value); return this; }
-    /** Sets the specified value to the {@code uastc} field. */
-    public ktxBasisParams uastc(@NativeType("ktx_bool_t") boolean value) { nuastc(address(), value); return this; }
+    /** Sets the specified value to the {@code codec} field. */
+    public ktxBasisParams codec(@NativeType("ktx_basis_codec") int value) { ncodec(address(), value); return this; }
     /** Sets the specified value to the {@code verbose} field. */
     public ktxBasisParams verbose(@NativeType("ktx_bool_t") boolean value) { nverbose(address(), value); return this; }
     /** Sets the specified value to the {@code noSSE} field. */
     public ktxBasisParams noSSE(@NativeType("ktx_bool_t") boolean value) { nnoSSE(address(), value); return this; }
     /** Sets the specified value to the {@code threadCount} field. */
     public ktxBasisParams threadCount(@NativeType("ktx_uint32_t") int value) { nthreadCount(address(), value); return this; }
-    /** Sets the specified value to the {@code compressionLevel} field. */
-    public ktxBasisParams compressionLevel(@NativeType("ktx_uint32_t") int value) { ncompressionLevel(address(), value); return this; }
+    /** Sets the specified value to the {@code etc1sCompressionLevel} field. */
+    public ktxBasisParams etc1sCompressionLevel(@NativeType("ktx_uint32_t") int value) { netc1sCompressionLevel(address(), value); return this; }
     /** Sets the specified value to the {@code qualityLevel} field. */
     public ktxBasisParams qualityLevel(@NativeType("ktx_uint32_t") int value) { nqualityLevel(address(), value); return this; }
     /** Sets the specified value to the {@code maxEndpoints} field. */
@@ -289,15 +330,27 @@ public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeReso
     public ktxBasisParams uastcRDODontFavorSimplerModes(@NativeType("ktx_bool_t") boolean value) { nuastcRDODontFavorSimplerModes(address(), value); return this; }
     /** Sets the specified value to the {@code uastcRDONoMultithreading} field. */
     public ktxBasisParams uastcRDONoMultithreading(@NativeType("ktx_bool_t") boolean value) { nuastcRDONoMultithreading(address(), value); return this; }
+    /** Sets the specified value to the {@code uastcHDRQuality} field. */
+    public ktxBasisParams uastcHDRQuality(@NativeType("ktx_uint32_t") int value) { nuastcHDRQuality(address(), value); return this; }
+    /** Sets the specified value to the {@code uastcHDRUberMode} field. */
+    public ktxBasisParams uastcHDRUberMode(@NativeType("ktx_bool_t") boolean value) { nuastcHDRUberMode(address(), value); return this; }
+    /** Sets the specified value to the {@code uastcHDRUltraQuant} field. */
+    public ktxBasisParams uastcHDRUltraQuant(@NativeType("ktx_bool_t") boolean value) { nuastcHDRUltraQuant(address(), value); return this; }
+    /** Sets the specified value to the {@code uastcHDRFavorAstc} field. */
+    public ktxBasisParams uastcHDRFavorAstc(@NativeType("ktx_bool_t") boolean value) { nuastcHDRFavorAstc(address(), value); return this; }
+    /** Sets the specified value to the {@code uastcHDRLambda} field. */
+    public ktxBasisParams uastcHDRLambda(float value) { nuastcHDRLambda(address(), value); return this; }
+    /** Sets the specified value to the {@code uastcHDRLevel} field. */
+    public ktxBasisParams uastcHDRLevel(@NativeType("ktx_uint32_t") int value) { nuastcHDRLevel(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public ktxBasisParams set(
         int structSize,
-        boolean uastc,
+        int codec,
         boolean verbose,
         boolean noSSE,
         int threadCount,
-        int compressionLevel,
+        int etc1sCompressionLevel,
         int qualityLevel,
         int maxEndpoints,
         float endpointRDOThreshold,
@@ -316,14 +369,20 @@ public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeReso
         float uastcRDOMaxSmoothBlockErrorScale,
         float uastcRDOMaxSmoothBlockStdDev,
         boolean uastcRDODontFavorSimplerModes,
-        boolean uastcRDONoMultithreading
+        boolean uastcRDONoMultithreading,
+        int uastcHDRQuality,
+        boolean uastcHDRUberMode,
+        boolean uastcHDRUltraQuant,
+        boolean uastcHDRFavorAstc,
+        float uastcHDRLambda,
+        int uastcHDRLevel
     ) {
         structSize(structSize);
-        uastc(uastc);
+        codec(codec);
         verbose(verbose);
         noSSE(noSSE);
         threadCount(threadCount);
-        compressionLevel(compressionLevel);
+        etc1sCompressionLevel(etc1sCompressionLevel);
         qualityLevel(qualityLevel);
         maxEndpoints(maxEndpoints);
         endpointRDOThreshold(endpointRDOThreshold);
@@ -343,6 +402,12 @@ public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeReso
         uastcRDOMaxSmoothBlockStdDev(uastcRDOMaxSmoothBlockStdDev);
         uastcRDODontFavorSimplerModes(uastcRDODontFavorSimplerModes);
         uastcRDONoMultithreading(uastcRDONoMultithreading);
+        uastcHDRQuality(uastcHDRQuality);
+        uastcHDRUberMode(uastcHDRUberMode);
+        uastcHDRUltraQuant(uastcHDRUltraQuant);
+        uastcHDRFavorAstc(uastcHDRFavorAstc);
+        uastcHDRLambda(uastcHDRLambda);
+        uastcHDRLevel(uastcHDRLevel);
 
         return this;
     }
@@ -472,16 +537,16 @@ public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeReso
 
     /** Unsafe version of {@link #structSize}. */
     public static int nstructSize(long struct) { return memGetInt(struct + ktxBasisParams.STRUCTSIZE); }
-    /** Unsafe version of {@link #uastc}. */
-    public static boolean nuastc(long struct) { return memGetByte(struct + ktxBasisParams.UASTC) != 0; }
+    /** Unsafe version of {@link #codec}. */
+    public static int ncodec(long struct) { return memGetInt(struct + ktxBasisParams.CODEC); }
     /** Unsafe version of {@link #verbose}. */
     public static boolean nverbose(long struct) { return memGetByte(struct + ktxBasisParams.VERBOSE) != 0; }
     /** Unsafe version of {@link #noSSE}. */
     public static boolean nnoSSE(long struct) { return memGetByte(struct + ktxBasisParams.NOSSE) != 0; }
     /** Unsafe version of {@link #threadCount}. */
     public static int nthreadCount(long struct) { return memGetInt(struct + ktxBasisParams.THREADCOUNT); }
-    /** Unsafe version of {@link #compressionLevel}. */
-    public static int ncompressionLevel(long struct) { return memGetInt(struct + ktxBasisParams.COMPRESSIONLEVEL); }
+    /** Unsafe version of {@link #etc1sCompressionLevel}. */
+    public static int netc1sCompressionLevel(long struct) { return memGetInt(struct + ktxBasisParams.ETC1SCOMPRESSIONLEVEL); }
     /** Unsafe version of {@link #qualityLevel}. */
     public static int nqualityLevel(long struct) { return memGetInt(struct + ktxBasisParams.QUALITYLEVEL); }
     /** Unsafe version of {@link #maxEndpoints}. */
@@ -524,19 +589,31 @@ public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeReso
     public static boolean nuastcRDODontFavorSimplerModes(long struct) { return memGetByte(struct + ktxBasisParams.UASTCRDODONTFAVORSIMPLERMODES) != 0; }
     /** Unsafe version of {@link #uastcRDONoMultithreading}. */
     public static boolean nuastcRDONoMultithreading(long struct) { return memGetByte(struct + ktxBasisParams.UASTCRDONOMULTITHREADING) != 0; }
+    /** Unsafe version of {@link #uastcHDRQuality}. */
+    public static int nuastcHDRQuality(long struct) { return memGetInt(struct + ktxBasisParams.UASTCHDRQUALITY); }
+    /** Unsafe version of {@link #uastcHDRUberMode}. */
+    public static boolean nuastcHDRUberMode(long struct) { return memGetByte(struct + ktxBasisParams.UASTCHDRUBERMODE) != 0; }
+    /** Unsafe version of {@link #uastcHDRUltraQuant}. */
+    public static boolean nuastcHDRUltraQuant(long struct) { return memGetByte(struct + ktxBasisParams.UASTCHDRULTRAQUANT) != 0; }
+    /** Unsafe version of {@link #uastcHDRFavorAstc}. */
+    public static boolean nuastcHDRFavorAstc(long struct) { return memGetByte(struct + ktxBasisParams.UASTCHDRFAVORASTC) != 0; }
+    /** Unsafe version of {@link #uastcHDRLambda}. */
+    public static float nuastcHDRLambda(long struct) { return memGetFloat(struct + ktxBasisParams.UASTCHDRLAMBDA); }
+    /** Unsafe version of {@link #uastcHDRLevel}. */
+    public static int nuastcHDRLevel(long struct) { return memGetInt(struct + ktxBasisParams.UASTCHDRLEVEL); }
 
     /** Unsafe version of {@link #structSize(int) structSize}. */
     public static void nstructSize(long struct, int value) { memPutInt(struct + ktxBasisParams.STRUCTSIZE, value); }
-    /** Unsafe version of {@link #uastc(boolean) uastc}. */
-    public static void nuastc(long struct, boolean value) { memPutByte(struct + ktxBasisParams.UASTC, value ? (byte)1 : (byte)0); }
+    /** Unsafe version of {@link #codec(int) codec}. */
+    public static void ncodec(long struct, int value) { memPutInt(struct + ktxBasisParams.CODEC, value); }
     /** Unsafe version of {@link #verbose(boolean) verbose}. */
     public static void nverbose(long struct, boolean value) { memPutByte(struct + ktxBasisParams.VERBOSE, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #noSSE(boolean) noSSE}. */
     public static void nnoSSE(long struct, boolean value) { memPutByte(struct + ktxBasisParams.NOSSE, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #threadCount(int) threadCount}. */
     public static void nthreadCount(long struct, int value) { memPutInt(struct + ktxBasisParams.THREADCOUNT, value); }
-    /** Unsafe version of {@link #compressionLevel(int) compressionLevel}. */
-    public static void ncompressionLevel(long struct, int value) { memPutInt(struct + ktxBasisParams.COMPRESSIONLEVEL, value); }
+    /** Unsafe version of {@link #etc1sCompressionLevel(int) etc1sCompressionLevel}. */
+    public static void netc1sCompressionLevel(long struct, int value) { memPutInt(struct + ktxBasisParams.ETC1SCOMPRESSIONLEVEL, value); }
     /** Unsafe version of {@link #qualityLevel(int) qualityLevel}. */
     public static void nqualityLevel(long struct, int value) { memPutInt(struct + ktxBasisParams.QUALITYLEVEL, value); }
     /** Unsafe version of {@link #maxEndpoints(int) maxEndpoints}. */
@@ -582,6 +659,18 @@ public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeReso
     public static void nuastcRDODontFavorSimplerModes(long struct, boolean value) { memPutByte(struct + ktxBasisParams.UASTCRDODONTFAVORSIMPLERMODES, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #uastcRDONoMultithreading(boolean) uastcRDONoMultithreading}. */
     public static void nuastcRDONoMultithreading(long struct, boolean value) { memPutByte(struct + ktxBasisParams.UASTCRDONOMULTITHREADING, value ? (byte)1 : (byte)0); }
+    /** Unsafe version of {@link #uastcHDRQuality(int) uastcHDRQuality}. */
+    public static void nuastcHDRQuality(long struct, int value) { memPutInt(struct + ktxBasisParams.UASTCHDRQUALITY, value); }
+    /** Unsafe version of {@link #uastcHDRUberMode(boolean) uastcHDRUberMode}. */
+    public static void nuastcHDRUberMode(long struct, boolean value) { memPutByte(struct + ktxBasisParams.UASTCHDRUBERMODE, value ? (byte)1 : (byte)0); }
+    /** Unsafe version of {@link #uastcHDRUltraQuant(boolean) uastcHDRUltraQuant}. */
+    public static void nuastcHDRUltraQuant(long struct, boolean value) { memPutByte(struct + ktxBasisParams.UASTCHDRULTRAQUANT, value ? (byte)1 : (byte)0); }
+    /** Unsafe version of {@link #uastcHDRFavorAstc(boolean) uastcHDRFavorAstc}. */
+    public static void nuastcHDRFavorAstc(long struct, boolean value) { memPutByte(struct + ktxBasisParams.UASTCHDRFAVORASTC, value ? (byte)1 : (byte)0); }
+    /** Unsafe version of {@link #uastcHDRLambda(float) uastcHDRLambda}. */
+    public static void nuastcHDRLambda(long struct, float value) { memPutFloat(struct + ktxBasisParams.UASTCHDRLAMBDA, value); }
+    /** Unsafe version of {@link #uastcHDRLevel(int) uastcHDRLevel}. */
+    public static void nuastcHDRLevel(long struct, int value) { memPutInt(struct + ktxBasisParams.UASTCHDRLEVEL, value); }
 
     // -----------------------------------
 
@@ -629,9 +718,9 @@ public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeReso
         /** @return the value of the {@code structSize} field. */
         @NativeType("ktx_uint32_t")
         public int structSize() { return ktxBasisParams.nstructSize(address()); }
-        /** @return the value of the {@code uastc} field. */
-        @NativeType("ktx_bool_t")
-        public boolean uastc() { return ktxBasisParams.nuastc(address()); }
+        /** @return the value of the {@code codec} field. */
+        @NativeType("ktx_basis_codec")
+        public int codec() { return ktxBasisParams.ncodec(address()); }
         /** @return the value of the {@code verbose} field. */
         @NativeType("ktx_bool_t")
         public boolean verbose() { return ktxBasisParams.nverbose(address()); }
@@ -641,9 +730,9 @@ public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeReso
         /** @return the value of the {@code threadCount} field. */
         @NativeType("ktx_uint32_t")
         public int threadCount() { return ktxBasisParams.nthreadCount(address()); }
-        /** @return the value of the {@code compressionLevel} field. */
+        /** @return the value of the {@code etc1sCompressionLevel} field. */
         @NativeType("ktx_uint32_t")
-        public int compressionLevel() { return ktxBasisParams.ncompressionLevel(address()); }
+        public int etc1sCompressionLevel() { return ktxBasisParams.netc1sCompressionLevel(address()); }
         /** @return the value of the {@code qualityLevel} field. */
         @NativeType("ktx_uint32_t")
         public int qualityLevel() { return ktxBasisParams.nqualityLevel(address()); }
@@ -699,19 +788,36 @@ public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeReso
         /** @return the value of the {@code uastcRDONoMultithreading} field. */
         @NativeType("ktx_bool_t")
         public boolean uastcRDONoMultithreading() { return ktxBasisParams.nuastcRDONoMultithreading(address()); }
+        /** @return the value of the {@code uastcHDRQuality} field. */
+        @NativeType("ktx_uint32_t")
+        public int uastcHDRQuality() { return ktxBasisParams.nuastcHDRQuality(address()); }
+        /** @return the value of the {@code uastcHDRUberMode} field. */
+        @NativeType("ktx_bool_t")
+        public boolean uastcHDRUberMode() { return ktxBasisParams.nuastcHDRUberMode(address()); }
+        /** @return the value of the {@code uastcHDRUltraQuant} field. */
+        @NativeType("ktx_bool_t")
+        public boolean uastcHDRUltraQuant() { return ktxBasisParams.nuastcHDRUltraQuant(address()); }
+        /** @return the value of the {@code uastcHDRFavorAstc} field. */
+        @NativeType("ktx_bool_t")
+        public boolean uastcHDRFavorAstc() { return ktxBasisParams.nuastcHDRFavorAstc(address()); }
+        /** @return the value of the {@code uastcHDRLambda} field. */
+        public float uastcHDRLambda() { return ktxBasisParams.nuastcHDRLambda(address()); }
+        /** @return the value of the {@code uastcHDRLevel} field. */
+        @NativeType("ktx_uint32_t")
+        public int uastcHDRLevel() { return ktxBasisParams.nuastcHDRLevel(address()); }
 
         /** Sets the specified value to the {@code structSize} field. */
         public ktxBasisParams.Buffer structSize(@NativeType("ktx_uint32_t") int value) { ktxBasisParams.nstructSize(address(), value); return this; }
-        /** Sets the specified value to the {@code uastc} field. */
-        public ktxBasisParams.Buffer uastc(@NativeType("ktx_bool_t") boolean value) { ktxBasisParams.nuastc(address(), value); return this; }
+        /** Sets the specified value to the {@code codec} field. */
+        public ktxBasisParams.Buffer codec(@NativeType("ktx_basis_codec") int value) { ktxBasisParams.ncodec(address(), value); return this; }
         /** Sets the specified value to the {@code verbose} field. */
         public ktxBasisParams.Buffer verbose(@NativeType("ktx_bool_t") boolean value) { ktxBasisParams.nverbose(address(), value); return this; }
         /** Sets the specified value to the {@code noSSE} field. */
         public ktxBasisParams.Buffer noSSE(@NativeType("ktx_bool_t") boolean value) { ktxBasisParams.nnoSSE(address(), value); return this; }
         /** Sets the specified value to the {@code threadCount} field. */
         public ktxBasisParams.Buffer threadCount(@NativeType("ktx_uint32_t") int value) { ktxBasisParams.nthreadCount(address(), value); return this; }
-        /** Sets the specified value to the {@code compressionLevel} field. */
-        public ktxBasisParams.Buffer compressionLevel(@NativeType("ktx_uint32_t") int value) { ktxBasisParams.ncompressionLevel(address(), value); return this; }
+        /** Sets the specified value to the {@code etc1sCompressionLevel} field. */
+        public ktxBasisParams.Buffer etc1sCompressionLevel(@NativeType("ktx_uint32_t") int value) { ktxBasisParams.netc1sCompressionLevel(address(), value); return this; }
         /** Sets the specified value to the {@code qualityLevel} field. */
         public ktxBasisParams.Buffer qualityLevel(@NativeType("ktx_uint32_t") int value) { ktxBasisParams.nqualityLevel(address(), value); return this; }
         /** Sets the specified value to the {@code maxEndpoints} field. */
@@ -752,6 +858,18 @@ public class ktxBasisParams extends Struct<ktxBasisParams> implements NativeReso
         public ktxBasisParams.Buffer uastcRDODontFavorSimplerModes(@NativeType("ktx_bool_t") boolean value) { ktxBasisParams.nuastcRDODontFavorSimplerModes(address(), value); return this; }
         /** Sets the specified value to the {@code uastcRDONoMultithreading} field. */
         public ktxBasisParams.Buffer uastcRDONoMultithreading(@NativeType("ktx_bool_t") boolean value) { ktxBasisParams.nuastcRDONoMultithreading(address(), value); return this; }
+        /** Sets the specified value to the {@code uastcHDRQuality} field. */
+        public ktxBasisParams.Buffer uastcHDRQuality(@NativeType("ktx_uint32_t") int value) { ktxBasisParams.nuastcHDRQuality(address(), value); return this; }
+        /** Sets the specified value to the {@code uastcHDRUberMode} field. */
+        public ktxBasisParams.Buffer uastcHDRUberMode(@NativeType("ktx_bool_t") boolean value) { ktxBasisParams.nuastcHDRUberMode(address(), value); return this; }
+        /** Sets the specified value to the {@code uastcHDRUltraQuant} field. */
+        public ktxBasisParams.Buffer uastcHDRUltraQuant(@NativeType("ktx_bool_t") boolean value) { ktxBasisParams.nuastcHDRUltraQuant(address(), value); return this; }
+        /** Sets the specified value to the {@code uastcHDRFavorAstc} field. */
+        public ktxBasisParams.Buffer uastcHDRFavorAstc(@NativeType("ktx_bool_t") boolean value) { ktxBasisParams.nuastcHDRFavorAstc(address(), value); return this; }
+        /** Sets the specified value to the {@code uastcHDRLambda} field. */
+        public ktxBasisParams.Buffer uastcHDRLambda(float value) { ktxBasisParams.nuastcHDRLambda(address(), value); return this; }
+        /** Sets the specified value to the {@code uastcHDRLevel} field. */
+        public ktxBasisParams.Buffer uastcHDRLevel(@NativeType("ktx_uint32_t") int value) { ktxBasisParams.nuastcHDRLevel(address(), value); return this; }
 
     }
 

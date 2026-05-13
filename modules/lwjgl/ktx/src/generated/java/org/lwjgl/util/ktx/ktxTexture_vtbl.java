@@ -24,6 +24,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     PFNKTEXITERATELEVELS IterateLevels;
  *     PFNKTEXITERATELOADLEVELFACES IterateLoadLevelFaces;
  *     PFNKTEXNEEDSTRANSCODING NeedsTranscoding;
+ *     PFNKTEXISTRANSCODABLE IsTranscodable;
+ *     PFNKTEXISHDR IsHDR;
  *     PFNKTEXLOADIMAGEDATA LoadImageData;
  *     PFNKTEXSETIMAGEFROMMEMORY SetImageFromMemory;
  *     PFNKTEXSETIMAGEFROMSTDIOSTREAM SetImageFromStdioStream;
@@ -52,6 +54,8 @@ public class ktxTexture_vtbl extends Struct<ktxTexture_vtbl> {
         ITERATELEVELS,
         ITERATELOADLEVELFACES,
         NEEDSTRANSCODING,
+        ISTRANSCODABLE,
+        ISHDR,
         LOADIMAGEDATA,
         SETIMAGEFROMMEMORY,
         SETIMAGEFROMSTDIOSTREAM,
@@ -62,6 +66,8 @@ public class ktxTexture_vtbl extends Struct<ktxTexture_vtbl> {
 
     static {
         Layout layout = __struct(
+            __member(POINTER_SIZE),
+            __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
@@ -90,13 +96,15 @@ public class ktxTexture_vtbl extends Struct<ktxTexture_vtbl> {
         ITERATELEVELS = layout.offsetof(5);
         ITERATELOADLEVELFACES = layout.offsetof(6);
         NEEDSTRANSCODING = layout.offsetof(7);
-        LOADIMAGEDATA = layout.offsetof(8);
-        SETIMAGEFROMMEMORY = layout.offsetof(9);
-        SETIMAGEFROMSTDIOSTREAM = layout.offsetof(10);
-        WRITETOSTDIOSTREAM = layout.offsetof(11);
-        WRITETONAMEDFILE = layout.offsetof(12);
-        WRITETOMEMORY = layout.offsetof(13);
-        WRITETOSTREAM = layout.offsetof(14);
+        ISTRANSCODABLE = layout.offsetof(8);
+        ISHDR = layout.offsetof(9);
+        LOADIMAGEDATA = layout.offsetof(10);
+        SETIMAGEFROMMEMORY = layout.offsetof(11);
+        SETIMAGEFROMSTDIOSTREAM = layout.offsetof(12);
+        WRITETOSTDIOSTREAM = layout.offsetof(13);
+        WRITETONAMEDFILE = layout.offsetof(14);
+        WRITETOMEMORY = layout.offsetof(15);
+        WRITETOSTREAM = layout.offsetof(16);
     }
 
     protected ktxTexture_vtbl(long address, @Nullable ByteBuffer container) {
@@ -145,6 +153,12 @@ public class ktxTexture_vtbl extends Struct<ktxTexture_vtbl> {
     /** @return the value of the {@code NeedsTranscoding} field. */
     @NativeType("PFNKTEXNEEDSTRANSCODING")
     public long NeedsTranscoding() { return nNeedsTranscoding(address()); }
+    /** @return the value of the {@code IsTranscodable} field. */
+    @NativeType("PFNKTEXISTRANSCODABLE")
+    public long IsTranscodable() { return nIsTranscodable(address()); }
+    /** @return the value of the {@code IsHDR} field. */
+    @NativeType("PFNKTEXISHDR")
+    public long IsHDR() { return nIsHDR(address()); }
     /** @return the value of the {@code LoadImageData} field. */
     @NativeType("PFNKTEXLOADIMAGEDATA")
     public long LoadImageData() { return nLoadImageData(address()); }
@@ -212,6 +226,10 @@ public class ktxTexture_vtbl extends Struct<ktxTexture_vtbl> {
     public static long nIterateLoadLevelFaces(long struct) { return memGetAddress(struct + ktxTexture_vtbl.ITERATELOADLEVELFACES); }
     /** Unsafe version of {@link #NeedsTranscoding}. */
     public static long nNeedsTranscoding(long struct) { return memGetAddress(struct + ktxTexture_vtbl.NEEDSTRANSCODING); }
+    /** Unsafe version of {@link #IsTranscodable}. */
+    public static long nIsTranscodable(long struct) { return memGetAddress(struct + ktxTexture_vtbl.ISTRANSCODABLE); }
+    /** Unsafe version of {@link #IsHDR}. */
+    public static long nIsHDR(long struct) { return memGetAddress(struct + ktxTexture_vtbl.ISHDR); }
     /** Unsafe version of {@link #LoadImageData}. */
     public static long nLoadImageData(long struct) { return memGetAddress(struct + ktxTexture_vtbl.LOADIMAGEDATA); }
     /** Unsafe version of {@link #SetImageFromMemory}. */
@@ -294,6 +312,12 @@ public class ktxTexture_vtbl extends Struct<ktxTexture_vtbl> {
         /** @return the value of the {@code NeedsTranscoding} field. */
         @NativeType("PFNKTEXNEEDSTRANSCODING")
         public long NeedsTranscoding() { return ktxTexture_vtbl.nNeedsTranscoding(address()); }
+        /** @return the value of the {@code IsTranscodable} field. */
+        @NativeType("PFNKTEXISTRANSCODABLE")
+        public long IsTranscodable() { return ktxTexture_vtbl.nIsTranscodable(address()); }
+        /** @return the value of the {@code IsHDR} field. */
+        @NativeType("PFNKTEXISHDR")
+        public long IsHDR() { return ktxTexture_vtbl.nIsHDR(address()); }
         /** @return the value of the {@code LoadImageData} field. */
         @NativeType("PFNKTEXLOADIMAGEDATA")
         public long LoadImageData() { return ktxTexture_vtbl.nLoadImageData(address()); }
