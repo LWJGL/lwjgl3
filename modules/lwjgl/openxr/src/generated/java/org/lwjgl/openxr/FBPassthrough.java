@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class FBPassthrough {
 
-    public static final int XR_FB_passthrough_SPEC_VERSION = 4;
+    public static final int XR_FB_passthrough_SPEC_VERSION = 5;
 
     public static final String XR_FB_PASSTHROUGH_EXTENSION_NAME = "XR_FB_passthrough";
 

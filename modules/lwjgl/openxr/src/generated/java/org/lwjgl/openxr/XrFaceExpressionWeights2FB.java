@@ -140,6 +140,8 @@ public class XrFaceExpressionWeights2FB extends Struct<XrFaceExpressionWeights2F
     public XrFaceExpressionWeights2FB type$Default() { return type(FBFaceTracking2.XR_TYPE_FACE_EXPRESSION_WEIGHTS2_FB); }
     /** Sets the specified value to the {@code next} field. */
     public XrFaceExpressionWeights2FB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrFaceTrackingVisemesMETA} value to the {@code next} chain. */
+    public XrFaceExpressionWeights2FB next(XrFaceTrackingVisemesMETA value) { return this.next(value.next(this.next()).address()); }
     /** Sets the address of the specified {@link FloatBuffer} to the {@code weights} field. */
     public XrFaceExpressionWeights2FB weights(@NativeType("float *") FloatBuffer value) { nweights(address(), value); return this; }
     /** Sets the address of the specified {@link FloatBuffer} to the {@code confidences} field. */
@@ -431,6 +433,8 @@ public class XrFaceExpressionWeights2FB extends Struct<XrFaceExpressionWeights2F
         public XrFaceExpressionWeights2FB.Buffer type$Default() { return type(FBFaceTracking2.XR_TYPE_FACE_EXPRESSION_WEIGHTS2_FB); }
         /** Sets the specified value to the {@code next} field. */
         public XrFaceExpressionWeights2FB.Buffer next(@NativeType("void *") long value) { XrFaceExpressionWeights2FB.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrFaceTrackingVisemesMETA} value to the {@code next} chain. */
+        public XrFaceExpressionWeights2FB.Buffer next(XrFaceTrackingVisemesMETA value) { return this.next(value.next(this.next()).address()); }
         /** Sets the address of the specified {@link FloatBuffer} to the {@code weights} field. */
         public XrFaceExpressionWeights2FB.Buffer weights(@NativeType("float *") FloatBuffer value) { XrFaceExpressionWeights2FB.nweights(address(), value); return this; }
         /** Sets the address of the specified {@link FloatBuffer} to the {@code confidences} field. */
