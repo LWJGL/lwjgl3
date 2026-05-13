@@ -52,7 +52,7 @@ val SDL_clipboard = "SDLClipboard".nativeClassSDL("SDL_clipboard") {
         SDL_ClipboardDataCallback("callback"),
         SDL_ClipboardCleanupCallback("cleanup"),
         nullable..opaque_p("userdata"),
-        charASCII.const.p.p("mime_types"),
+        charASCII.const.p.const.p("mime_types"),
         AutoSize("mime_types")..size_t("num_mime_types")
     )
 
