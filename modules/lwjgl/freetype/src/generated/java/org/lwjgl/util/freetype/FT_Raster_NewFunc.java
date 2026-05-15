@@ -19,23 +19,22 @@ public abstract class FT_Raster_NewFunc extends Callback implements FT_Raster_Ne
      *
      * @return the new {@code FT_Raster_NewFunc}
      */
-    public static FT_Raster_NewFunc create(long functionPointer) {
-        FT_Raster_NewFuncI instance = Callback.get(functionPointer);
-        return instance instanceof FT_Raster_NewFunc
-            ? (FT_Raster_NewFunc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FT_Raster_NewFunc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FT_Raster_NewFunc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FT_Raster_NewFunc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FT_Raster_NewFunc} instance that delegates to the specified {@code FT_Raster_NewFuncI} instance. */
-    public static FT_Raster_NewFunc create(FT_Raster_NewFuncI instance) {
+    public static FT_Raster_NewFunc create(FT_Raster_NewFuncI instance) { return create(instance, instance.address()); }
+
+    private static FT_Raster_NewFunc create(FT_Raster_NewFuncI instance, long functionPointer) {
         return instance instanceof FT_Raster_NewFunc
             ? (FT_Raster_NewFunc)instance
-            : new Container(instance.address(), instance);
+            : new FT_Raster_NewFunc(functionPointer) {
+                @Override public int invoke(long memory, long raster) {
+                    return instance.invoke(memory, raster);
+                }
+            };
     }
 
     protected FT_Raster_NewFunc() {
@@ -44,22 +43,6 @@ public abstract class FT_Raster_NewFunc extends Callback implements FT_Raster_Ne
 
     FT_Raster_NewFunc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FT_Raster_NewFunc {
-
-        private final FT_Raster_NewFuncI delegate;
-
-        Container(long functionPointer, FT_Raster_NewFuncI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long memory, long raster) {
-            return delegate.invoke(memory, raster);
-        }
-
     }
 
 }

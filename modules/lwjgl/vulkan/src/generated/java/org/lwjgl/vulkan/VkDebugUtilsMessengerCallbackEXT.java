@@ -19,23 +19,22 @@ public abstract class VkDebugUtilsMessengerCallbackEXT extends Callback implemen
      *
      * @return the new {@code VkDebugUtilsMessengerCallbackEXT}
      */
-    public static VkDebugUtilsMessengerCallbackEXT create(long functionPointer) {
-        VkDebugUtilsMessengerCallbackEXTI instance = Callback.get(functionPointer);
-        return instance instanceof VkDebugUtilsMessengerCallbackEXT
-            ? (VkDebugUtilsMessengerCallbackEXT)instance
-            : new Container(functionPointer, instance);
-    }
+    public static VkDebugUtilsMessengerCallbackEXT create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable VkDebugUtilsMessengerCallbackEXT createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable VkDebugUtilsMessengerCallbackEXT createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code VkDebugUtilsMessengerCallbackEXT} instance that delegates to the specified {@code VkDebugUtilsMessengerCallbackEXTI} instance. */
-    public static VkDebugUtilsMessengerCallbackEXT create(VkDebugUtilsMessengerCallbackEXTI instance) {
+    public static VkDebugUtilsMessengerCallbackEXT create(VkDebugUtilsMessengerCallbackEXTI instance) { return create(instance, instance.address()); }
+
+    private static VkDebugUtilsMessengerCallbackEXT create(VkDebugUtilsMessengerCallbackEXTI instance, long functionPointer) {
         return instance instanceof VkDebugUtilsMessengerCallbackEXT
             ? (VkDebugUtilsMessengerCallbackEXT)instance
-            : new Container(instance.address(), instance);
+            : new VkDebugUtilsMessengerCallbackEXT(functionPointer) {
+                @Override public int invoke(int messageSeverity, int messageTypes, long pCallbackData, long pUserData) {
+                    return instance.invoke(messageSeverity, messageTypes, pCallbackData, pUserData);
+                }
+            };
     }
 
     protected VkDebugUtilsMessengerCallbackEXT() {
@@ -44,22 +43,6 @@ public abstract class VkDebugUtilsMessengerCallbackEXT extends Callback implemen
 
     VkDebugUtilsMessengerCallbackEXT(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends VkDebugUtilsMessengerCallbackEXT {
-
-        private final VkDebugUtilsMessengerCallbackEXTI delegate;
-
-        Container(long functionPointer, VkDebugUtilsMessengerCallbackEXTI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(int messageSeverity, int messageTypes, long pCallbackData, long pUserData) {
-            return delegate.invoke(messageSeverity, messageTypes, pCallbackData, pUserData);
-        }
-
     }
 
 }

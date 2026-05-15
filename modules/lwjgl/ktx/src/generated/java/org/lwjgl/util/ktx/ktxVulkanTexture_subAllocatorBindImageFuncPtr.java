@@ -19,23 +19,22 @@ public abstract class ktxVulkanTexture_subAllocatorBindImageFuncPtr extends Call
      *
      * @return the new {@code ktxVulkanTexture_subAllocatorBindImageFuncPtr}
      */
-    public static ktxVulkanTexture_subAllocatorBindImageFuncPtr create(long functionPointer) {
-        ktxVulkanTexture_subAllocatorBindImageFuncPtrI instance = Callback.get(functionPointer);
-        return instance instanceof ktxVulkanTexture_subAllocatorBindImageFuncPtr
-            ? (ktxVulkanTexture_subAllocatorBindImageFuncPtr)instance
-            : new Container(functionPointer, instance);
-    }
+    public static ktxVulkanTexture_subAllocatorBindImageFuncPtr create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable ktxVulkanTexture_subAllocatorBindImageFuncPtr createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable ktxVulkanTexture_subAllocatorBindImageFuncPtr createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code ktxVulkanTexture_subAllocatorBindImageFuncPtr} instance that delegates to the specified {@code ktxVulkanTexture_subAllocatorBindImageFuncPtrI} instance. */
-    public static ktxVulkanTexture_subAllocatorBindImageFuncPtr create(ktxVulkanTexture_subAllocatorBindImageFuncPtrI instance) {
+    public static ktxVulkanTexture_subAllocatorBindImageFuncPtr create(ktxVulkanTexture_subAllocatorBindImageFuncPtrI instance) { return create(instance, instance.address()); }
+
+    private static ktxVulkanTexture_subAllocatorBindImageFuncPtr create(ktxVulkanTexture_subAllocatorBindImageFuncPtrI instance, long functionPointer) {
         return instance instanceof ktxVulkanTexture_subAllocatorBindImageFuncPtr
             ? (ktxVulkanTexture_subAllocatorBindImageFuncPtr)instance
-            : new Container(instance.address(), instance);
+            : new ktxVulkanTexture_subAllocatorBindImageFuncPtr(functionPointer) {
+                @Override public long invoke(long image, long allocId) {
+                    return instance.invoke(image, allocId);
+                }
+            };
     }
 
     protected ktxVulkanTexture_subAllocatorBindImageFuncPtr() {
@@ -44,22 +43,6 @@ public abstract class ktxVulkanTexture_subAllocatorBindImageFuncPtr extends Call
 
     ktxVulkanTexture_subAllocatorBindImageFuncPtr(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends ktxVulkanTexture_subAllocatorBindImageFuncPtr {
-
-        private final ktxVulkanTexture_subAllocatorBindImageFuncPtrI delegate;
-
-        Container(long functionPointer, ktxVulkanTexture_subAllocatorBindImageFuncPtrI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long image, long allocId) {
-            return delegate.invoke(image, allocId);
-        }
-
     }
 
 }

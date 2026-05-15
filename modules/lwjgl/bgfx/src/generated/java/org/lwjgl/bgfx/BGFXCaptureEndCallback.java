@@ -19,23 +19,22 @@ public abstract class BGFXCaptureEndCallback extends Callback implements BGFXCap
      *
      * @return the new {@code BGFXCaptureEndCallback}
      */
-    public static BGFXCaptureEndCallback create(long functionPointer) {
-        BGFXCaptureEndCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof BGFXCaptureEndCallback
-            ? (BGFXCaptureEndCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static BGFXCaptureEndCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable BGFXCaptureEndCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable BGFXCaptureEndCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code BGFXCaptureEndCallback} instance that delegates to the specified {@code BGFXCaptureEndCallbackI} instance. */
-    public static BGFXCaptureEndCallback create(BGFXCaptureEndCallbackI instance) {
+    public static BGFXCaptureEndCallback create(BGFXCaptureEndCallbackI instance) { return create(instance, instance.address()); }
+
+    private static BGFXCaptureEndCallback create(BGFXCaptureEndCallbackI instance, long functionPointer) {
         return instance instanceof BGFXCaptureEndCallback
             ? (BGFXCaptureEndCallback)instance
-            : new Container(instance.address(), instance);
+            : new BGFXCaptureEndCallback(functionPointer) {
+                @Override public void invoke(long _this) {
+                    instance.invoke(_this);
+                }
+            };
     }
 
     protected BGFXCaptureEndCallback() {
@@ -44,22 +43,6 @@ public abstract class BGFXCaptureEndCallback extends Callback implements BGFXCap
 
     BGFXCaptureEndCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends BGFXCaptureEndCallback {
-
-        private final BGFXCaptureEndCallbackI delegate;
-
-        Container(long functionPointer, BGFXCaptureEndCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long _this) {
-            delegate.invoke(_this);
-        }
-
     }
 
 }

@@ -19,23 +19,22 @@ public abstract class FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK extends Callb
      *
      * @return the new {@code FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK}
      */
-    public static FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK create(long functionPointer) {
-        FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACKI instance = Callback.get(functionPointer);
-        return instance instanceof FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK
-            ? (FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK} instance that delegates to the specified {@code FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACKI} instance. */
-    public static FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK create(FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACKI instance) {
+    public static FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK create(FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACKI instance) { return create(instance, instance.address()); }
+
+    private static FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK create(FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACKI instance, long functionPointer) {
         return instance instanceof FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK
             ? (FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK)instance
-            : new Container(instance.address(), instance);
+            : new FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK(functionPointer) {
+                @Override public int invoke(long replay, int commandindex, long bankguid, long bankfilename, int flags, long bank, long userdata) {
+                    return instance.invoke(replay, commandindex, bankguid, bankfilename, flags, bank, userdata);
+                }
+            };
     }
 
     protected FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK() {
@@ -44,22 +43,6 @@ public abstract class FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK extends Callb
 
     FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK {
-
-        private final FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACKI delegate;
-
-        Container(long functionPointer, FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACKI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long replay, int commandindex, long bankguid, long bankfilename, int flags, long bank, long userdata) {
-            return delegate.invoke(replay, commandindex, bankguid, bankfilename, flags, bank, userdata);
-        }
-
     }
 
 }

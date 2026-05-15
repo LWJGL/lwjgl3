@@ -19,23 +19,22 @@ public abstract class SDL_StorageInterfaceEnumerateCallback extends Callback imp
      *
      * @return the new {@code SDL_StorageInterfaceEnumerateCallback}
      */
-    public static SDL_StorageInterfaceEnumerateCallback create(long functionPointer) {
-        SDL_StorageInterfaceEnumerateCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof SDL_StorageInterfaceEnumerateCallback
-            ? (SDL_StorageInterfaceEnumerateCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SDL_StorageInterfaceEnumerateCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SDL_StorageInterfaceEnumerateCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SDL_StorageInterfaceEnumerateCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SDL_StorageInterfaceEnumerateCallback} instance that delegates to the specified {@code SDL_StorageInterfaceEnumerateCallbackI} instance. */
-    public static SDL_StorageInterfaceEnumerateCallback create(SDL_StorageInterfaceEnumerateCallbackI instance) {
+    public static SDL_StorageInterfaceEnumerateCallback create(SDL_StorageInterfaceEnumerateCallbackI instance) { return create(instance, instance.address()); }
+
+    private static SDL_StorageInterfaceEnumerateCallback create(SDL_StorageInterfaceEnumerateCallbackI instance, long functionPointer) {
         return instance instanceof SDL_StorageInterfaceEnumerateCallback
             ? (SDL_StorageInterfaceEnumerateCallback)instance
-            : new Container(instance.address(), instance);
+            : new SDL_StorageInterfaceEnumerateCallback(functionPointer) {
+                @Override public boolean invoke(long userdata, long path, long callback, long callback_userdata) {
+                    return instance.invoke(userdata, path, callback, callback_userdata);
+                }
+            };
     }
 
     protected SDL_StorageInterfaceEnumerateCallback() {
@@ -44,22 +43,6 @@ public abstract class SDL_StorageInterfaceEnumerateCallback extends Callback imp
 
     SDL_StorageInterfaceEnumerateCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SDL_StorageInterfaceEnumerateCallback {
-
-        private final SDL_StorageInterfaceEnumerateCallbackI delegate;
-
-        Container(long functionPointer, SDL_StorageInterfaceEnumerateCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public boolean invoke(long userdata, long path, long callback, long callback_userdata) {
-            return delegate.invoke(userdata, path, callback, callback_userdata);
-        }
-
     }
 
 }

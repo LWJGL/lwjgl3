@@ -19,23 +19,22 @@ public abstract class hb_font_get_glyph_advances_func_t extends Callback impleme
      *
      * @return the new {@code hb_font_get_glyph_advances_func_t}
      */
-    public static hb_font_get_glyph_advances_func_t create(long functionPointer) {
-        hb_font_get_glyph_advances_func_tI instance = Callback.get(functionPointer);
-        return instance instanceof hb_font_get_glyph_advances_func_t
-            ? (hb_font_get_glyph_advances_func_t)instance
-            : new Container(functionPointer, instance);
-    }
+    public static hb_font_get_glyph_advances_func_t create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable hb_font_get_glyph_advances_func_t createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable hb_font_get_glyph_advances_func_t createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code hb_font_get_glyph_advances_func_t} instance that delegates to the specified {@code hb_font_get_glyph_advances_func_tI} instance. */
-    public static hb_font_get_glyph_advances_func_t create(hb_font_get_glyph_advances_func_tI instance) {
+    public static hb_font_get_glyph_advances_func_t create(hb_font_get_glyph_advances_func_tI instance) { return create(instance, instance.address()); }
+
+    private static hb_font_get_glyph_advances_func_t create(hb_font_get_glyph_advances_func_tI instance, long functionPointer) {
         return instance instanceof hb_font_get_glyph_advances_func_t
             ? (hb_font_get_glyph_advances_func_t)instance
-            : new Container(instance.address(), instance);
+            : new hb_font_get_glyph_advances_func_t(functionPointer) {
+                @Override public void invoke(long font, long font_data, int count, long first_glyph, int glyph_stride, long first_advance, int advance_stride, long user_data) {
+                    instance.invoke(font, font_data, count, first_glyph, glyph_stride, first_advance, advance_stride, user_data);
+                }
+            };
     }
 
     protected hb_font_get_glyph_advances_func_t() {
@@ -44,22 +43,6 @@ public abstract class hb_font_get_glyph_advances_func_t extends Callback impleme
 
     hb_font_get_glyph_advances_func_t(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends hb_font_get_glyph_advances_func_t {
-
-        private final hb_font_get_glyph_advances_func_tI delegate;
-
-        Container(long functionPointer, hb_font_get_glyph_advances_func_tI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long font, long font_data, int count, long first_glyph, int glyph_stride, long first_advance, int advance_stride, long user_data) {
-            delegate.invoke(font, font_data, count, first_glyph, glyph_stride, first_advance, advance_stride, user_data);
-        }
-
     }
 
 }

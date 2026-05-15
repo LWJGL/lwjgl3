@@ -19,23 +19,22 @@ public abstract class SOFTCallbackBufferType extends Callback implements SOFTCal
      *
      * @return the new {@code SOFTCallbackBufferType}
      */
-    public static SOFTCallbackBufferType create(long functionPointer) {
-        SOFTCallbackBufferTypeI instance = Callback.get(functionPointer);
-        return instance instanceof SOFTCallbackBufferType
-            ? (SOFTCallbackBufferType)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SOFTCallbackBufferType create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SOFTCallbackBufferType createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SOFTCallbackBufferType createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SOFTCallbackBufferType} instance that delegates to the specified {@code SOFTCallbackBufferTypeI} instance. */
-    public static SOFTCallbackBufferType create(SOFTCallbackBufferTypeI instance) {
+    public static SOFTCallbackBufferType create(SOFTCallbackBufferTypeI instance) { return create(instance, instance.address()); }
+
+    private static SOFTCallbackBufferType create(SOFTCallbackBufferTypeI instance, long functionPointer) {
         return instance instanceof SOFTCallbackBufferType
             ? (SOFTCallbackBufferType)instance
-            : new Container(instance.address(), instance);
+            : new SOFTCallbackBufferType(functionPointer) {
+                @Override public int invoke(long userptr, long sampledata, int numbytes) {
+                    return instance.invoke(userptr, sampledata, numbytes);
+                }
+            };
     }
 
     protected SOFTCallbackBufferType() {
@@ -44,22 +43,6 @@ public abstract class SOFTCallbackBufferType extends Callback implements SOFTCal
 
     SOFTCallbackBufferType(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SOFTCallbackBufferType {
-
-        private final SOFTCallbackBufferTypeI delegate;
-
-        Container(long functionPointer, SOFTCallbackBufferTypeI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long userptr, long sampledata, int numbytes) {
-            return delegate.invoke(userptr, sampledata, numbytes);
-        }
-
     }
 
 }

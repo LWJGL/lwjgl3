@@ -19,23 +19,22 @@ public abstract class VkFreeFunction extends Callback implements VkFreeFunctionI
      *
      * @return the new {@code VkFreeFunction}
      */
-    public static VkFreeFunction create(long functionPointer) {
-        VkFreeFunctionI instance = Callback.get(functionPointer);
-        return instance instanceof VkFreeFunction
-            ? (VkFreeFunction)instance
-            : new Container(functionPointer, instance);
-    }
+    public static VkFreeFunction create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable VkFreeFunction createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable VkFreeFunction createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code VkFreeFunction} instance that delegates to the specified {@code VkFreeFunctionI} instance. */
-    public static VkFreeFunction create(VkFreeFunctionI instance) {
+    public static VkFreeFunction create(VkFreeFunctionI instance) { return create(instance, instance.address()); }
+
+    private static VkFreeFunction create(VkFreeFunctionI instance, long functionPointer) {
         return instance instanceof VkFreeFunction
             ? (VkFreeFunction)instance
-            : new Container(instance.address(), instance);
+            : new VkFreeFunction(functionPointer) {
+                @Override public void invoke(long pUserData, long pMemory) {
+                    instance.invoke(pUserData, pMemory);
+                }
+            };
     }
 
     protected VkFreeFunction() {
@@ -44,22 +43,6 @@ public abstract class VkFreeFunction extends Callback implements VkFreeFunctionI
 
     VkFreeFunction(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends VkFreeFunction {
-
-        private final VkFreeFunctionI delegate;
-
-        Container(long functionPointer, VkFreeFunctionI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long pUserData, long pMemory) {
-            delegate.invoke(pUserData, pMemory);
-        }
-
     }
 
 }

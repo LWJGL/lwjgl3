@@ -19,23 +19,22 @@ public abstract class SDL_TLSDestructorCallback extends Callback implements SDL_
      *
      * @return the new {@code SDL_TLSDestructorCallback}
      */
-    public static SDL_TLSDestructorCallback create(long functionPointer) {
-        SDL_TLSDestructorCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof SDL_TLSDestructorCallback
-            ? (SDL_TLSDestructorCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SDL_TLSDestructorCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SDL_TLSDestructorCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SDL_TLSDestructorCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SDL_TLSDestructorCallback} instance that delegates to the specified {@code SDL_TLSDestructorCallbackI} instance. */
-    public static SDL_TLSDestructorCallback create(SDL_TLSDestructorCallbackI instance) {
+    public static SDL_TLSDestructorCallback create(SDL_TLSDestructorCallbackI instance) { return create(instance, instance.address()); }
+
+    private static SDL_TLSDestructorCallback create(SDL_TLSDestructorCallbackI instance, long functionPointer) {
         return instance instanceof SDL_TLSDestructorCallback
             ? (SDL_TLSDestructorCallback)instance
-            : new Container(instance.address(), instance);
+            : new SDL_TLSDestructorCallback(functionPointer) {
+                @Override public void invoke(long value) {
+                    instance.invoke(value);
+                }
+            };
     }
 
     protected SDL_TLSDestructorCallback() {
@@ -44,22 +43,6 @@ public abstract class SDL_TLSDestructorCallback extends Callback implements SDL_
 
     SDL_TLSDestructorCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SDL_TLSDestructorCallback {
-
-        private final SDL_TLSDestructorCallbackI delegate;
-
-        Container(long functionPointer, SDL_TLSDestructorCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long value) {
-            delegate.invoke(value);
-        }
-
     }
 
 }

@@ -19,23 +19,22 @@ public abstract class SDL_StorageInterfaceReadFileCallback extends Callback impl
      *
      * @return the new {@code SDL_StorageInterfaceReadFileCallback}
      */
-    public static SDL_StorageInterfaceReadFileCallback create(long functionPointer) {
-        SDL_StorageInterfaceReadFileCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof SDL_StorageInterfaceReadFileCallback
-            ? (SDL_StorageInterfaceReadFileCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SDL_StorageInterfaceReadFileCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SDL_StorageInterfaceReadFileCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SDL_StorageInterfaceReadFileCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SDL_StorageInterfaceReadFileCallback} instance that delegates to the specified {@code SDL_StorageInterfaceReadFileCallbackI} instance. */
-    public static SDL_StorageInterfaceReadFileCallback create(SDL_StorageInterfaceReadFileCallbackI instance) {
+    public static SDL_StorageInterfaceReadFileCallback create(SDL_StorageInterfaceReadFileCallbackI instance) { return create(instance, instance.address()); }
+
+    private static SDL_StorageInterfaceReadFileCallback create(SDL_StorageInterfaceReadFileCallbackI instance, long functionPointer) {
         return instance instanceof SDL_StorageInterfaceReadFileCallback
             ? (SDL_StorageInterfaceReadFileCallback)instance
-            : new Container(instance.address(), instance);
+            : new SDL_StorageInterfaceReadFileCallback(functionPointer) {
+                @Override public boolean invoke(long userdata, long path, long destination, long length) {
+                    return instance.invoke(userdata, path, destination, length);
+                }
+            };
     }
 
     protected SDL_StorageInterfaceReadFileCallback() {
@@ -44,22 +43,6 @@ public abstract class SDL_StorageInterfaceReadFileCallback extends Callback impl
 
     SDL_StorageInterfaceReadFileCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SDL_StorageInterfaceReadFileCallback {
-
-        private final SDL_StorageInterfaceReadFileCallbackI delegate;
-
-        Container(long functionPointer, SDL_StorageInterfaceReadFileCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public boolean invoke(long userdata, long path, long destination, long length) {
-            return delegate.invoke(userdata, path, destination, length);
-        }
-
     }
 
 }

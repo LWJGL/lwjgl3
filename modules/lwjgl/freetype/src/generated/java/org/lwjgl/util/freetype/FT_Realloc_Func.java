@@ -19,23 +19,22 @@ public abstract class FT_Realloc_Func extends Callback implements FT_Realloc_Fun
      *
      * @return the new {@code FT_Realloc_Func}
      */
-    public static FT_Realloc_Func create(long functionPointer) {
-        FT_Realloc_FuncI instance = Callback.get(functionPointer);
-        return instance instanceof FT_Realloc_Func
-            ? (FT_Realloc_Func)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FT_Realloc_Func create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FT_Realloc_Func createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FT_Realloc_Func createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FT_Realloc_Func} instance that delegates to the specified {@code FT_Realloc_FuncI} instance. */
-    public static FT_Realloc_Func create(FT_Realloc_FuncI instance) {
+    public static FT_Realloc_Func create(FT_Realloc_FuncI instance) { return create(instance, instance.address()); }
+
+    private static FT_Realloc_Func create(FT_Realloc_FuncI instance, long functionPointer) {
         return instance instanceof FT_Realloc_Func
             ? (FT_Realloc_Func)instance
-            : new Container(instance.address(), instance);
+            : new FT_Realloc_Func(functionPointer) {
+                @Override public long invoke(long memory, long cur_size, long new_size, long block) {
+                    return instance.invoke(memory, cur_size, new_size, block);
+                }
+            };
     }
 
     protected FT_Realloc_Func() {
@@ -44,22 +43,6 @@ public abstract class FT_Realloc_Func extends Callback implements FT_Realloc_Fun
 
     FT_Realloc_Func(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FT_Realloc_Func {
-
-        private final FT_Realloc_FuncI delegate;
-
-        Container(long functionPointer, FT_Realloc_FuncI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long memory, long cur_size, long new_size, long block) {
-            return delegate.invoke(memory, cur_size, new_size, block);
-        }
-
     }
 
 }

@@ -19,23 +19,22 @@ public abstract class OPTellFunc extends Callback implements OPTellFuncI {
      *
      * @return the new {@code OPTellFunc}
      */
-    public static OPTellFunc create(long functionPointer) {
-        OPTellFuncI instance = Callback.get(functionPointer);
-        return instance instanceof OPTellFunc
-            ? (OPTellFunc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static OPTellFunc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable OPTellFunc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable OPTellFunc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code OPTellFunc} instance that delegates to the specified {@code OPTellFuncI} instance. */
-    public static OPTellFunc create(OPTellFuncI instance) {
+    public static OPTellFunc create(OPTellFuncI instance) { return create(instance, instance.address()); }
+
+    private static OPTellFunc create(OPTellFuncI instance, long functionPointer) {
         return instance instanceof OPTellFunc
             ? (OPTellFunc)instance
-            : new Container(instance.address(), instance);
+            : new OPTellFunc(functionPointer) {
+                @Override public long invoke(long _stream) {
+                    return instance.invoke(_stream);
+                }
+            };
     }
 
     protected OPTellFunc() {
@@ -44,22 +43,6 @@ public abstract class OPTellFunc extends Callback implements OPTellFuncI {
 
     OPTellFunc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends OPTellFunc {
-
-        private final OPTellFuncI delegate;
-
-        Container(long functionPointer, OPTellFuncI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long _stream) {
-            return delegate.invoke(_stream);
-        }
-
     }
 
 }

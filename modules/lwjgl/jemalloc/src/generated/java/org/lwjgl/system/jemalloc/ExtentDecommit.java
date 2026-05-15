@@ -19,23 +19,22 @@ public abstract class ExtentDecommit extends Callback implements ExtentDecommitI
      *
      * @return the new {@code ExtentDecommit}
      */
-    public static ExtentDecommit create(long functionPointer) {
-        ExtentDecommitI instance = Callback.get(functionPointer);
-        return instance instanceof ExtentDecommit
-            ? (ExtentDecommit)instance
-            : new Container(functionPointer, instance);
-    }
+    public static ExtentDecommit create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable ExtentDecommit createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable ExtentDecommit createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code ExtentDecommit} instance that delegates to the specified {@code ExtentDecommitI} instance. */
-    public static ExtentDecommit create(ExtentDecommitI instance) {
+    public static ExtentDecommit create(ExtentDecommitI instance) { return create(instance, instance.address()); }
+
+    private static ExtentDecommit create(ExtentDecommitI instance, long functionPointer) {
         return instance instanceof ExtentDecommit
             ? (ExtentDecommit)instance
-            : new Container(instance.address(), instance);
+            : new ExtentDecommit(functionPointer) {
+                @Override public boolean invoke(long extent_hooks, long addr, long size, long offset, long length, int arena_ind) {
+                    return instance.invoke(extent_hooks, addr, size, offset, length, arena_ind);
+                }
+            };
     }
 
     protected ExtentDecommit() {
@@ -44,22 +43,6 @@ public abstract class ExtentDecommit extends Callback implements ExtentDecommitI
 
     ExtentDecommit(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends ExtentDecommit {
-
-        private final ExtentDecommitI delegate;
-
-        Container(long functionPointer, ExtentDecommitI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public boolean invoke(long extent_hooks, long addr, long size, long offset, long length, int arena_ind) {
-            return delegate.invoke(extent_hooks, addr, size, offset, length, arena_ind);
-        }
-
     }
 
 }

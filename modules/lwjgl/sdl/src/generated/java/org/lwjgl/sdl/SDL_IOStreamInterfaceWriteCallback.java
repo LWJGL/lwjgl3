@@ -19,23 +19,22 @@ public abstract class SDL_IOStreamInterfaceWriteCallback extends Callback implem
      *
      * @return the new {@code SDL_IOStreamInterfaceWriteCallback}
      */
-    public static SDL_IOStreamInterfaceWriteCallback create(long functionPointer) {
-        SDL_IOStreamInterfaceWriteCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof SDL_IOStreamInterfaceWriteCallback
-            ? (SDL_IOStreamInterfaceWriteCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SDL_IOStreamInterfaceWriteCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SDL_IOStreamInterfaceWriteCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SDL_IOStreamInterfaceWriteCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SDL_IOStreamInterfaceWriteCallback} instance that delegates to the specified {@code SDL_IOStreamInterfaceWriteCallbackI} instance. */
-    public static SDL_IOStreamInterfaceWriteCallback create(SDL_IOStreamInterfaceWriteCallbackI instance) {
+    public static SDL_IOStreamInterfaceWriteCallback create(SDL_IOStreamInterfaceWriteCallbackI instance) { return create(instance, instance.address()); }
+
+    private static SDL_IOStreamInterfaceWriteCallback create(SDL_IOStreamInterfaceWriteCallbackI instance, long functionPointer) {
         return instance instanceof SDL_IOStreamInterfaceWriteCallback
             ? (SDL_IOStreamInterfaceWriteCallback)instance
-            : new Container(instance.address(), instance);
+            : new SDL_IOStreamInterfaceWriteCallback(functionPointer) {
+                @Override public long invoke(long userdata, long ptr, long size, long status) {
+                    return instance.invoke(userdata, ptr, size, status);
+                }
+            };
     }
 
     protected SDL_IOStreamInterfaceWriteCallback() {
@@ -44,22 +43,6 @@ public abstract class SDL_IOStreamInterfaceWriteCallback extends Callback implem
 
     SDL_IOStreamInterfaceWriteCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SDL_IOStreamInterfaceWriteCallback {
-
-        private final SDL_IOStreamInterfaceWriteCallbackI delegate;
-
-        Container(long functionPointer, SDL_IOStreamInterfaceWriteCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long userdata, long ptr, long size, long status) {
-            return delegate.invoke(userdata, ptr, size, status);
-        }
-
     }
 
 }

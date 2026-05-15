@@ -19,23 +19,22 @@ public abstract class ZSTDAllocFunction extends Callback implements ZSTDAllocFun
      *
      * @return the new {@code ZSTDAllocFunction}
      */
-    public static ZSTDAllocFunction create(long functionPointer) {
-        ZSTDAllocFunctionI instance = Callback.get(functionPointer);
-        return instance instanceof ZSTDAllocFunction
-            ? (ZSTDAllocFunction)instance
-            : new Container(functionPointer, instance);
-    }
+    public static ZSTDAllocFunction create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable ZSTDAllocFunction createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable ZSTDAllocFunction createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code ZSTDAllocFunction} instance that delegates to the specified {@code ZSTDAllocFunctionI} instance. */
-    public static ZSTDAllocFunction create(ZSTDAllocFunctionI instance) {
+    public static ZSTDAllocFunction create(ZSTDAllocFunctionI instance) { return create(instance, instance.address()); }
+
+    private static ZSTDAllocFunction create(ZSTDAllocFunctionI instance, long functionPointer) {
         return instance instanceof ZSTDAllocFunction
             ? (ZSTDAllocFunction)instance
-            : new Container(instance.address(), instance);
+            : new ZSTDAllocFunction(functionPointer) {
+                @Override public long invoke(long opaque, long size) {
+                    return instance.invoke(opaque, size);
+                }
+            };
     }
 
     protected ZSTDAllocFunction() {
@@ -44,22 +43,6 @@ public abstract class ZSTDAllocFunction extends Callback implements ZSTDAllocFun
 
     ZSTDAllocFunction(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends ZSTDAllocFunction {
-
-        private final ZSTDAllocFunctionI delegate;
-
-        Container(long functionPointer, ZSTDAllocFunctionI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long opaque, long size) {
-            return delegate.invoke(opaque, size);
-        }
-
     }
 
 }

@@ -19,23 +19,22 @@ public abstract class CXFieldVisitor extends Callback implements CXFieldVisitorI
      *
      * @return the new {@code CXFieldVisitor}
      */
-    public static CXFieldVisitor create(long functionPointer) {
-        CXFieldVisitorI instance = Callback.get(functionPointer);
-        return instance instanceof CXFieldVisitor
-            ? (CXFieldVisitor)instance
-            : new Container(functionPointer, instance);
-    }
+    public static CXFieldVisitor create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable CXFieldVisitor createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable CXFieldVisitor createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code CXFieldVisitor} instance that delegates to the specified {@code CXFieldVisitorI} instance. */
-    public static CXFieldVisitor create(CXFieldVisitorI instance) {
+    public static CXFieldVisitor create(CXFieldVisitorI instance) { return create(instance, instance.address()); }
+
+    private static CXFieldVisitor create(CXFieldVisitorI instance, long functionPointer) {
         return instance instanceof CXFieldVisitor
             ? (CXFieldVisitor)instance
-            : new Container(instance.address(), instance);
+            : new CXFieldVisitor(functionPointer) {
+                @Override public int invoke(CXCursor C, long client_data) {
+                    return instance.invoke(C, client_data);
+                }
+            };
     }
 
     protected CXFieldVisitor() {
@@ -44,22 +43,6 @@ public abstract class CXFieldVisitor extends Callback implements CXFieldVisitorI
 
     CXFieldVisitor(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends CXFieldVisitor {
-
-        private final CXFieldVisitorI delegate;
-
-        Container(long functionPointer, CXFieldVisitorI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(CXCursor C, long client_data) {
-            return delegate.invoke(C, client_data);
-        }
-
     }
 
 }

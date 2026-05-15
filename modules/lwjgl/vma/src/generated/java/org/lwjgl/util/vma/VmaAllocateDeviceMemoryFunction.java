@@ -19,23 +19,22 @@ public abstract class VmaAllocateDeviceMemoryFunction extends Callback implement
      *
      * @return the new {@code VmaAllocateDeviceMemoryFunction}
      */
-    public static VmaAllocateDeviceMemoryFunction create(long functionPointer) {
-        VmaAllocateDeviceMemoryFunctionI instance = Callback.get(functionPointer);
-        return instance instanceof VmaAllocateDeviceMemoryFunction
-            ? (VmaAllocateDeviceMemoryFunction)instance
-            : new Container(functionPointer, instance);
-    }
+    public static VmaAllocateDeviceMemoryFunction create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable VmaAllocateDeviceMemoryFunction createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable VmaAllocateDeviceMemoryFunction createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code VmaAllocateDeviceMemoryFunction} instance that delegates to the specified {@code VmaAllocateDeviceMemoryFunctionI} instance. */
-    public static VmaAllocateDeviceMemoryFunction create(VmaAllocateDeviceMemoryFunctionI instance) {
+    public static VmaAllocateDeviceMemoryFunction create(VmaAllocateDeviceMemoryFunctionI instance) { return create(instance, instance.address()); }
+
+    private static VmaAllocateDeviceMemoryFunction create(VmaAllocateDeviceMemoryFunctionI instance, long functionPointer) {
         return instance instanceof VmaAllocateDeviceMemoryFunction
             ? (VmaAllocateDeviceMemoryFunction)instance
-            : new Container(instance.address(), instance);
+            : new VmaAllocateDeviceMemoryFunction(functionPointer) {
+                @Override public void invoke(long allocator, int memoryType, long memory, long size, long pUserData) {
+                    instance.invoke(allocator, memoryType, memory, size, pUserData);
+                }
+            };
     }
 
     protected VmaAllocateDeviceMemoryFunction() {
@@ -44,22 +43,6 @@ public abstract class VmaAllocateDeviceMemoryFunction extends Callback implement
 
     VmaAllocateDeviceMemoryFunction(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends VmaAllocateDeviceMemoryFunction {
-
-        private final VmaAllocateDeviceMemoryFunctionI delegate;
-
-        Container(long functionPointer, VmaAllocateDeviceMemoryFunctionI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long allocator, int memoryType, long memory, long size, long pUserData) {
-            delegate.invoke(allocator, memoryType, memory, size, pUserData);
-        }
-
     }
 
 }

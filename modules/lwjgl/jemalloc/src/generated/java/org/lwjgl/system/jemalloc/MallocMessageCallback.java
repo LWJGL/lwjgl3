@@ -19,23 +19,22 @@ public abstract class MallocMessageCallback extends Callback implements MallocMe
      *
      * @return the new {@code MallocMessageCallback}
      */
-    public static MallocMessageCallback create(long functionPointer) {
-        MallocMessageCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof MallocMessageCallback
-            ? (MallocMessageCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static MallocMessageCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable MallocMessageCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable MallocMessageCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code MallocMessageCallback} instance that delegates to the specified {@code MallocMessageCallbackI} instance. */
-    public static MallocMessageCallback create(MallocMessageCallbackI instance) {
+    public static MallocMessageCallback create(MallocMessageCallbackI instance) { return create(instance, instance.address()); }
+
+    private static MallocMessageCallback create(MallocMessageCallbackI instance, long functionPointer) {
         return instance instanceof MallocMessageCallback
             ? (MallocMessageCallback)instance
-            : new Container(instance.address(), instance);
+            : new MallocMessageCallback(functionPointer) {
+                @Override public void invoke(long cbopaque, long s) {
+                    instance.invoke(cbopaque, s);
+                }
+            };
     }
 
     protected MallocMessageCallback() {
@@ -57,22 +56,6 @@ public abstract class MallocMessageCallback extends Callback implements MallocMe
      */
     public static String getMessage(long s) {
         return memASCII(s);
-    }
-
-    private static final class Container extends MallocMessageCallback {
-
-        private final MallocMessageCallbackI delegate;
-
-        Container(long functionPointer, MallocMessageCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long cbopaque, long s) {
-            delegate.invoke(cbopaque, s);
-        }
-
     }
 
 }

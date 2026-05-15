@@ -21,23 +21,22 @@ public abstract class GLFWFramebufferSizeCallback extends Callback implements GL
      *
      * @return the new {@code GLFWFramebufferSizeCallback}
      */
-    public static GLFWFramebufferSizeCallback create(long functionPointer) {
-        GLFWFramebufferSizeCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLFWFramebufferSizeCallback
-            ? (GLFWFramebufferSizeCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLFWFramebufferSizeCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLFWFramebufferSizeCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLFWFramebufferSizeCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLFWFramebufferSizeCallback} instance that delegates to the specified {@code GLFWFramebufferSizeCallbackI} instance. */
-    public static GLFWFramebufferSizeCallback create(GLFWFramebufferSizeCallbackI instance) {
+    public static GLFWFramebufferSizeCallback create(GLFWFramebufferSizeCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLFWFramebufferSizeCallback create(GLFWFramebufferSizeCallbackI instance, long functionPointer) {
         return instance instanceof GLFWFramebufferSizeCallback
             ? (GLFWFramebufferSizeCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLFWFramebufferSizeCallback(functionPointer) {
+                @Override public void invoke(long window, int width, int height) {
+                    instance.invoke(window, width, height);
+                }
+            };
     }
 
     protected GLFWFramebufferSizeCallback() {
@@ -52,22 +51,6 @@ public abstract class GLFWFramebufferSizeCallback extends Callback implements GL
     public GLFWFramebufferSizeCallback set(long window) {
         glfwSetFramebufferSizeCallback(window, this);
         return this;
-    }
-
-    private static final class Container extends GLFWFramebufferSizeCallback {
-
-        private final GLFWFramebufferSizeCallbackI delegate;
-
-        Container(long functionPointer, GLFWFramebufferSizeCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long window, int width, int height) {
-            delegate.invoke(window, width, height);
-        }
-
     }
 
 }

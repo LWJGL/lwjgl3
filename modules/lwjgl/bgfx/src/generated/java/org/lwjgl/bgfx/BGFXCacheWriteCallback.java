@@ -19,23 +19,22 @@ public abstract class BGFXCacheWriteCallback extends Callback implements BGFXCac
      *
      * @return the new {@code BGFXCacheWriteCallback}
      */
-    public static BGFXCacheWriteCallback create(long functionPointer) {
-        BGFXCacheWriteCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof BGFXCacheWriteCallback
-            ? (BGFXCacheWriteCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static BGFXCacheWriteCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable BGFXCacheWriteCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable BGFXCacheWriteCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code BGFXCacheWriteCallback} instance that delegates to the specified {@code BGFXCacheWriteCallbackI} instance. */
-    public static BGFXCacheWriteCallback create(BGFXCacheWriteCallbackI instance) {
+    public static BGFXCacheWriteCallback create(BGFXCacheWriteCallbackI instance) { return create(instance, instance.address()); }
+
+    private static BGFXCacheWriteCallback create(BGFXCacheWriteCallbackI instance, long functionPointer) {
         return instance instanceof BGFXCacheWriteCallback
             ? (BGFXCacheWriteCallback)instance
-            : new Container(instance.address(), instance);
+            : new BGFXCacheWriteCallback(functionPointer) {
+                @Override public void invoke(long _this, long _id, long _data, int _size) {
+                    instance.invoke(_this, _id, _data, _size);
+                }
+            };
     }
 
     protected BGFXCacheWriteCallback() {
@@ -44,22 +43,6 @@ public abstract class BGFXCacheWriteCallback extends Callback implements BGFXCac
 
     BGFXCacheWriteCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends BGFXCacheWriteCallback {
-
-        private final BGFXCacheWriteCallbackI delegate;
-
-        Container(long functionPointer, BGFXCacheWriteCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long _this, long _id, long _data, int _size) {
-            delegate.invoke(_this, _id, _data, _size);
-        }
-
     }
 
 }

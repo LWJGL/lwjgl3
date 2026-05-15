@@ -19,23 +19,22 @@ public abstract class ParSLAdvectionCallback extends Callback implements ParSLAd
      *
      * @return the new {@code ParSLAdvectionCallback}
      */
-    public static ParSLAdvectionCallback create(long functionPointer) {
-        ParSLAdvectionCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof ParSLAdvectionCallback
-            ? (ParSLAdvectionCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static ParSLAdvectionCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable ParSLAdvectionCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable ParSLAdvectionCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code ParSLAdvectionCallback} instance that delegates to the specified {@code ParSLAdvectionCallbackI} instance. */
-    public static ParSLAdvectionCallback create(ParSLAdvectionCallbackI instance) {
+    public static ParSLAdvectionCallback create(ParSLAdvectionCallbackI instance) { return create(instance, instance.address()); }
+
+    private static ParSLAdvectionCallback create(ParSLAdvectionCallbackI instance, long functionPointer) {
         return instance instanceof ParSLAdvectionCallback
             ? (ParSLAdvectionCallback)instance
-            : new Container(instance.address(), instance);
+            : new ParSLAdvectionCallback(functionPointer) {
+                @Override public void invoke(long point, long userdata) {
+                    instance.invoke(point, userdata);
+                }
+            };
     }
 
     protected ParSLAdvectionCallback() {
@@ -44,22 +43,6 @@ public abstract class ParSLAdvectionCallback extends Callback implements ParSLAd
 
     ParSLAdvectionCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends ParSLAdvectionCallback {
-
-        private final ParSLAdvectionCallbackI delegate;
-
-        Container(long functionPointer, ParSLAdvectionCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long point, long userdata) {
-            delegate.invoke(point, userdata);
-        }
-
     }
 
 }

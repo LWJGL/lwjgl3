@@ -19,23 +19,22 @@ public abstract class FT_Incremental_GetGlyphMetricsFunc extends Callback implem
      *
      * @return the new {@code FT_Incremental_GetGlyphMetricsFunc}
      */
-    public static FT_Incremental_GetGlyphMetricsFunc create(long functionPointer) {
-        FT_Incremental_GetGlyphMetricsFuncI instance = Callback.get(functionPointer);
-        return instance instanceof FT_Incremental_GetGlyphMetricsFunc
-            ? (FT_Incremental_GetGlyphMetricsFunc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FT_Incremental_GetGlyphMetricsFunc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FT_Incremental_GetGlyphMetricsFunc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FT_Incremental_GetGlyphMetricsFunc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FT_Incremental_GetGlyphMetricsFunc} instance that delegates to the specified {@code FT_Incremental_GetGlyphMetricsFuncI} instance. */
-    public static FT_Incremental_GetGlyphMetricsFunc create(FT_Incremental_GetGlyphMetricsFuncI instance) {
+    public static FT_Incremental_GetGlyphMetricsFunc create(FT_Incremental_GetGlyphMetricsFuncI instance) { return create(instance, instance.address()); }
+
+    private static FT_Incremental_GetGlyphMetricsFunc create(FT_Incremental_GetGlyphMetricsFuncI instance, long functionPointer) {
         return instance instanceof FT_Incremental_GetGlyphMetricsFunc
             ? (FT_Incremental_GetGlyphMetricsFunc)instance
-            : new Container(instance.address(), instance);
+            : new FT_Incremental_GetGlyphMetricsFunc(functionPointer) {
+                @Override public int invoke(long incremental, int glyph_index, boolean vertical, long ametrics) {
+                    return instance.invoke(incremental, glyph_index, vertical, ametrics);
+                }
+            };
     }
 
     protected FT_Incremental_GetGlyphMetricsFunc() {
@@ -44,22 +43,6 @@ public abstract class FT_Incremental_GetGlyphMetricsFunc extends Callback implem
 
     FT_Incremental_GetGlyphMetricsFunc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FT_Incremental_GetGlyphMetricsFunc {
-
-        private final FT_Incremental_GetGlyphMetricsFuncI delegate;
-
-        Container(long functionPointer, FT_Incremental_GetGlyphMetricsFuncI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long incremental, int glyph_index, boolean vertical, long ametrics) {
-            return delegate.invoke(incremental, glyph_index, vertical, ametrics);
-        }
-
     }
 
 }

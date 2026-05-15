@@ -19,23 +19,22 @@ public abstract class ktxStream_skip extends Callback implements ktxStream_skipI
      *
      * @return the new {@code ktxStream_skip}
      */
-    public static ktxStream_skip create(long functionPointer) {
-        ktxStream_skipI instance = Callback.get(functionPointer);
-        return instance instanceof ktxStream_skip
-            ? (ktxStream_skip)instance
-            : new Container(functionPointer, instance);
-    }
+    public static ktxStream_skip create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable ktxStream_skip createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable ktxStream_skip createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code ktxStream_skip} instance that delegates to the specified {@code ktxStream_skipI} instance. */
-    public static ktxStream_skip create(ktxStream_skipI instance) {
+    public static ktxStream_skip create(ktxStream_skipI instance) { return create(instance, instance.address()); }
+
+    private static ktxStream_skip create(ktxStream_skipI instance, long functionPointer) {
         return instance instanceof ktxStream_skip
             ? (ktxStream_skip)instance
-            : new Container(instance.address(), instance);
+            : new ktxStream_skip(functionPointer) {
+                @Override public int invoke(long str, long count) {
+                    return instance.invoke(str, count);
+                }
+            };
     }
 
     protected ktxStream_skip() {
@@ -44,22 +43,6 @@ public abstract class ktxStream_skip extends Callback implements ktxStream_skipI
 
     ktxStream_skip(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends ktxStream_skip {
-
-        private final ktxStream_skipI delegate;
-
-        Container(long functionPointer, ktxStream_skipI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long str, long count) {
-            return delegate.invoke(str, count);
-        }
-
     }
 
 }

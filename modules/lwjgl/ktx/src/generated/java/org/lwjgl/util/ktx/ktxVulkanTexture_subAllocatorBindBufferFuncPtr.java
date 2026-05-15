@@ -19,23 +19,22 @@ public abstract class ktxVulkanTexture_subAllocatorBindBufferFuncPtr extends Cal
      *
      * @return the new {@code ktxVulkanTexture_subAllocatorBindBufferFuncPtr}
      */
-    public static ktxVulkanTexture_subAllocatorBindBufferFuncPtr create(long functionPointer) {
-        ktxVulkanTexture_subAllocatorBindBufferFuncPtrI instance = Callback.get(functionPointer);
-        return instance instanceof ktxVulkanTexture_subAllocatorBindBufferFuncPtr
-            ? (ktxVulkanTexture_subAllocatorBindBufferFuncPtr)instance
-            : new Container(functionPointer, instance);
-    }
+    public static ktxVulkanTexture_subAllocatorBindBufferFuncPtr create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable ktxVulkanTexture_subAllocatorBindBufferFuncPtr createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable ktxVulkanTexture_subAllocatorBindBufferFuncPtr createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code ktxVulkanTexture_subAllocatorBindBufferFuncPtr} instance that delegates to the specified {@code ktxVulkanTexture_subAllocatorBindBufferFuncPtrI} instance. */
-    public static ktxVulkanTexture_subAllocatorBindBufferFuncPtr create(ktxVulkanTexture_subAllocatorBindBufferFuncPtrI instance) {
+    public static ktxVulkanTexture_subAllocatorBindBufferFuncPtr create(ktxVulkanTexture_subAllocatorBindBufferFuncPtrI instance) { return create(instance, instance.address()); }
+
+    private static ktxVulkanTexture_subAllocatorBindBufferFuncPtr create(ktxVulkanTexture_subAllocatorBindBufferFuncPtrI instance, long functionPointer) {
         return instance instanceof ktxVulkanTexture_subAllocatorBindBufferFuncPtr
             ? (ktxVulkanTexture_subAllocatorBindBufferFuncPtr)instance
-            : new Container(instance.address(), instance);
+            : new ktxVulkanTexture_subAllocatorBindBufferFuncPtr(functionPointer) {
+                @Override public long invoke(long buffer, long allocId) {
+                    return instance.invoke(buffer, allocId);
+                }
+            };
     }
 
     protected ktxVulkanTexture_subAllocatorBindBufferFuncPtr() {
@@ -44,22 +43,6 @@ public abstract class ktxVulkanTexture_subAllocatorBindBufferFuncPtr extends Cal
 
     ktxVulkanTexture_subAllocatorBindBufferFuncPtr(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends ktxVulkanTexture_subAllocatorBindBufferFuncPtr {
-
-        private final ktxVulkanTexture_subAllocatorBindBufferFuncPtrI delegate;
-
-        Container(long functionPointer, ktxVulkanTexture_subAllocatorBindBufferFuncPtrI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long buffer, long allocId) {
-            return delegate.invoke(buffer, allocId);
-        }
-
     }
 
 }

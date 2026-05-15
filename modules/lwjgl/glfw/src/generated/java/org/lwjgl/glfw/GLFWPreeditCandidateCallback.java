@@ -21,23 +21,22 @@ public abstract class GLFWPreeditCandidateCallback extends Callback implements G
      *
      * @return the new {@code GLFWPreeditCandidateCallback}
      */
-    public static GLFWPreeditCandidateCallback create(long functionPointer) {
-        GLFWPreeditCandidateCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLFWPreeditCandidateCallback
-            ? (GLFWPreeditCandidateCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLFWPreeditCandidateCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLFWPreeditCandidateCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLFWPreeditCandidateCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLFWPreeditCandidateCallback} instance that delegates to the specified {@code GLFWPreeditCandidateCallbackI} instance. */
-    public static GLFWPreeditCandidateCallback create(GLFWPreeditCandidateCallbackI instance) {
+    public static GLFWPreeditCandidateCallback create(GLFWPreeditCandidateCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLFWPreeditCandidateCallback create(GLFWPreeditCandidateCallbackI instance, long functionPointer) {
         return instance instanceof GLFWPreeditCandidateCallback
             ? (GLFWPreeditCandidateCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLFWPreeditCandidateCallback(functionPointer) {
+                @Override public void invoke(long window, int candidates_count, int selected_index, int page_start, int page_size) {
+                    instance.invoke(window, candidates_count, selected_index, page_start, page_size);
+                }
+            };
     }
 
     protected GLFWPreeditCandidateCallback() {
@@ -52,22 +51,6 @@ public abstract class GLFWPreeditCandidateCallback extends Callback implements G
     public GLFWPreeditCandidateCallback set(long window) {
         glfwSetPreeditCandidateCallback(window, this);
         return this;
-    }
-
-    private static final class Container extends GLFWPreeditCandidateCallback {
-
-        private final GLFWPreeditCandidateCallbackI delegate;
-
-        Container(long functionPointer, GLFWPreeditCandidateCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long window, int candidates_count, int selected_index, int page_start, int page_size) {
-            delegate.invoke(window, candidates_count, selected_index, page_start, page_size);
-        }
-
     }
 
 }

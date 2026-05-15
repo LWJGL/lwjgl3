@@ -19,23 +19,22 @@ public abstract class IndexerIndexDeclaration extends Callback implements Indexe
      *
      * @return the new {@code IndexerIndexDeclaration}
      */
-    public static IndexerIndexDeclaration create(long functionPointer) {
-        IndexerIndexDeclarationI instance = Callback.get(functionPointer);
-        return instance instanceof IndexerIndexDeclaration
-            ? (IndexerIndexDeclaration)instance
-            : new Container(functionPointer, instance);
-    }
+    public static IndexerIndexDeclaration create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable IndexerIndexDeclaration createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable IndexerIndexDeclaration createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code IndexerIndexDeclaration} instance that delegates to the specified {@code IndexerIndexDeclarationI} instance. */
-    public static IndexerIndexDeclaration create(IndexerIndexDeclarationI instance) {
+    public static IndexerIndexDeclaration create(IndexerIndexDeclarationI instance) { return create(instance, instance.address()); }
+
+    private static IndexerIndexDeclaration create(IndexerIndexDeclarationI instance, long functionPointer) {
         return instance instanceof IndexerIndexDeclaration
             ? (IndexerIndexDeclaration)instance
-            : new Container(instance.address(), instance);
+            : new IndexerIndexDeclaration(functionPointer) {
+                @Override public void invoke(long client_data, long info) {
+                    instance.invoke(client_data, info);
+                }
+            };
     }
 
     protected IndexerIndexDeclaration() {
@@ -44,22 +43,6 @@ public abstract class IndexerIndexDeclaration extends Callback implements Indexe
 
     IndexerIndexDeclaration(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends IndexerIndexDeclaration {
-
-        private final IndexerIndexDeclarationI delegate;
-
-        Container(long functionPointer, IndexerIndexDeclarationI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long client_data, long info) {
-            delegate.invoke(client_data, info);
-        }
-
     }
 
 }

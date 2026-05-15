@@ -19,23 +19,22 @@ public abstract class SPVParsedHeaderFn extends Callback implements SPVParsedHea
      *
      * @return the new {@code SPVParsedHeaderFn}
      */
-    public static SPVParsedHeaderFn create(long functionPointer) {
-        SPVParsedHeaderFnI instance = Callback.get(functionPointer);
-        return instance instanceof SPVParsedHeaderFn
-            ? (SPVParsedHeaderFn)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SPVParsedHeaderFn create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SPVParsedHeaderFn createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SPVParsedHeaderFn createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SPVParsedHeaderFn} instance that delegates to the specified {@code SPVParsedHeaderFnI} instance. */
-    public static SPVParsedHeaderFn create(SPVParsedHeaderFnI instance) {
+    public static SPVParsedHeaderFn create(SPVParsedHeaderFnI instance) { return create(instance, instance.address()); }
+
+    private static SPVParsedHeaderFn create(SPVParsedHeaderFnI instance, long functionPointer) {
         return instance instanceof SPVParsedHeaderFn
             ? (SPVParsedHeaderFn)instance
-            : new Container(instance.address(), instance);
+            : new SPVParsedHeaderFn(functionPointer) {
+                @Override public int invoke(long user_data, int endian, int magic, int version, int generator, int id_bound, int reserved) {
+                    return instance.invoke(user_data, endian, magic, version, generator, id_bound, reserved);
+                }
+            };
     }
 
     protected SPVParsedHeaderFn() {
@@ -44,22 +43,6 @@ public abstract class SPVParsedHeaderFn extends Callback implements SPVParsedHea
 
     SPVParsedHeaderFn(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SPVParsedHeaderFn {
-
-        private final SPVParsedHeaderFnI delegate;
-
-        Container(long functionPointer, SPVParsedHeaderFnI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long user_data, int endian, int magic, int version, int generator, int id_bound, int reserved) {
-            return delegate.invoke(user_data, endian, magic, version, generator, id_bound, reserved);
-        }
-
     }
 
 }

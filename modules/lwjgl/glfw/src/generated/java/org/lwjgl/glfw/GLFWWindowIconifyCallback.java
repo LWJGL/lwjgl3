@@ -21,23 +21,22 @@ public abstract class GLFWWindowIconifyCallback extends Callback implements GLFW
      *
      * @return the new {@code GLFWWindowIconifyCallback}
      */
-    public static GLFWWindowIconifyCallback create(long functionPointer) {
-        GLFWWindowIconifyCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLFWWindowIconifyCallback
-            ? (GLFWWindowIconifyCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLFWWindowIconifyCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLFWWindowIconifyCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLFWWindowIconifyCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLFWWindowIconifyCallback} instance that delegates to the specified {@code GLFWWindowIconifyCallbackI} instance. */
-    public static GLFWWindowIconifyCallback create(GLFWWindowIconifyCallbackI instance) {
+    public static GLFWWindowIconifyCallback create(GLFWWindowIconifyCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLFWWindowIconifyCallback create(GLFWWindowIconifyCallbackI instance, long functionPointer) {
         return instance instanceof GLFWWindowIconifyCallback
             ? (GLFWWindowIconifyCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLFWWindowIconifyCallback(functionPointer) {
+                @Override public void invoke(long window, boolean iconified) {
+                    instance.invoke(window, iconified);
+                }
+            };
     }
 
     protected GLFWWindowIconifyCallback() {
@@ -52,22 +51,6 @@ public abstract class GLFWWindowIconifyCallback extends Callback implements GLFW
     public GLFWWindowIconifyCallback set(long window) {
         glfwSetWindowIconifyCallback(window, this);
         return this;
-    }
-
-    private static final class Container extends GLFWWindowIconifyCallback {
-
-        private final GLFWWindowIconifyCallbackI delegate;
-
-        Container(long functionPointer, GLFWWindowIconifyCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long window, boolean iconified) {
-            delegate.invoke(window, iconified);
-        }
-
     }
 
 }

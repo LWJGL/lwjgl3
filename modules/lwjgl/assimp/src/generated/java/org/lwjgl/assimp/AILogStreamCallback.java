@@ -19,23 +19,22 @@ public abstract class AILogStreamCallback extends Callback implements AILogStrea
      *
      * @return the new {@code AILogStreamCallback}
      */
-    public static AILogStreamCallback create(long functionPointer) {
-        AILogStreamCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof AILogStreamCallback
-            ? (AILogStreamCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static AILogStreamCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable AILogStreamCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable AILogStreamCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code AILogStreamCallback} instance that delegates to the specified {@code AILogStreamCallbackI} instance. */
-    public static AILogStreamCallback create(AILogStreamCallbackI instance) {
+    public static AILogStreamCallback create(AILogStreamCallbackI instance) { return create(instance, instance.address()); }
+
+    private static AILogStreamCallback create(AILogStreamCallbackI instance, long functionPointer) {
         return instance instanceof AILogStreamCallback
             ? (AILogStreamCallback)instance
-            : new Container(instance.address(), instance);
+            : new AILogStreamCallback(functionPointer) {
+                @Override public void invoke(long message, long user) {
+                    instance.invoke(message, user);
+                }
+            };
     }
 
     protected AILogStreamCallback() {
@@ -44,22 +43,6 @@ public abstract class AILogStreamCallback extends Callback implements AILogStrea
 
     AILogStreamCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends AILogStreamCallback {
-
-        private final AILogStreamCallbackI delegate;
-
-        Container(long functionPointer, AILogStreamCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long message, long user) {
-            delegate.invoke(message, user);
-        }
-
     }
 
 }

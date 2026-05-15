@@ -19,23 +19,22 @@ public abstract class XrDebugUtilsMessengerCallbackEXT extends Callback implemen
      *
      * @return the new {@code XrDebugUtilsMessengerCallbackEXT}
      */
-    public static XrDebugUtilsMessengerCallbackEXT create(long functionPointer) {
-        XrDebugUtilsMessengerCallbackEXTI instance = Callback.get(functionPointer);
-        return instance instanceof XrDebugUtilsMessengerCallbackEXT
-            ? (XrDebugUtilsMessengerCallbackEXT)instance
-            : new Container(functionPointer, instance);
-    }
+    public static XrDebugUtilsMessengerCallbackEXT create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable XrDebugUtilsMessengerCallbackEXT createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable XrDebugUtilsMessengerCallbackEXT createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code XrDebugUtilsMessengerCallbackEXT} instance that delegates to the specified {@code XrDebugUtilsMessengerCallbackEXTI} instance. */
-    public static XrDebugUtilsMessengerCallbackEXT create(XrDebugUtilsMessengerCallbackEXTI instance) {
+    public static XrDebugUtilsMessengerCallbackEXT create(XrDebugUtilsMessengerCallbackEXTI instance) { return create(instance, instance.address()); }
+
+    private static XrDebugUtilsMessengerCallbackEXT create(XrDebugUtilsMessengerCallbackEXTI instance, long functionPointer) {
         return instance instanceof XrDebugUtilsMessengerCallbackEXT
             ? (XrDebugUtilsMessengerCallbackEXT)instance
-            : new Container(instance.address(), instance);
+            : new XrDebugUtilsMessengerCallbackEXT(functionPointer) {
+                @Override public int invoke(long messageSeverity, long messageTypes, long callbackData, long userData) {
+                    return instance.invoke(messageSeverity, messageTypes, callbackData, userData);
+                }
+            };
     }
 
     protected XrDebugUtilsMessengerCallbackEXT() {
@@ -44,22 +43,6 @@ public abstract class XrDebugUtilsMessengerCallbackEXT extends Callback implemen
 
     XrDebugUtilsMessengerCallbackEXT(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends XrDebugUtilsMessengerCallbackEXT {
-
-        private final XrDebugUtilsMessengerCallbackEXTI delegate;
-
-        Container(long functionPointer, XrDebugUtilsMessengerCallbackEXTI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long messageSeverity, long messageTypes, long callbackData, long userData) {
-            return delegate.invoke(messageSeverity, messageTypes, callbackData, userData);
-        }
-
     }
 
 }

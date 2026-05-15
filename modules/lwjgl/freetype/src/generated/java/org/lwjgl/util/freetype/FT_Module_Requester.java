@@ -19,23 +19,22 @@ public abstract class FT_Module_Requester extends Callback implements FT_Module_
      *
      * @return the new {@code FT_Module_Requester}
      */
-    public static FT_Module_Requester create(long functionPointer) {
-        FT_Module_RequesterI instance = Callback.get(functionPointer);
-        return instance instanceof FT_Module_Requester
-            ? (FT_Module_Requester)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FT_Module_Requester create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FT_Module_Requester createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FT_Module_Requester createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FT_Module_Requester} instance that delegates to the specified {@code FT_Module_RequesterI} instance. */
-    public static FT_Module_Requester create(FT_Module_RequesterI instance) {
+    public static FT_Module_Requester create(FT_Module_RequesterI instance) { return create(instance, instance.address()); }
+
+    private static FT_Module_Requester create(FT_Module_RequesterI instance, long functionPointer) {
         return instance instanceof FT_Module_Requester
             ? (FT_Module_Requester)instance
-            : new Container(instance.address(), instance);
+            : new FT_Module_Requester(functionPointer) {
+                @Override public long invoke(long module, long name) {
+                    return instance.invoke(module, name);
+                }
+            };
     }
 
     protected FT_Module_Requester() {
@@ -44,22 +43,6 @@ public abstract class FT_Module_Requester extends Callback implements FT_Module_
 
     FT_Module_Requester(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FT_Module_Requester {
-
-        private final FT_Module_RequesterI delegate;
-
-        Container(long functionPointer, FT_Module_RequesterI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long module, long name) {
-            return delegate.invoke(module, name);
-        }
-
     }
 
 }

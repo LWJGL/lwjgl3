@@ -19,23 +19,22 @@ public abstract class YGBaselineFunc extends Callback implements YGBaselineFuncI
      *
      * @return the new {@code YGBaselineFunc}
      */
-    public static YGBaselineFunc create(long functionPointer) {
-        YGBaselineFuncI instance = Callback.get(functionPointer);
-        return instance instanceof YGBaselineFunc
-            ? (YGBaselineFunc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static YGBaselineFunc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable YGBaselineFunc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable YGBaselineFunc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code YGBaselineFunc} instance that delegates to the specified {@code YGBaselineFuncI} instance. */
-    public static YGBaselineFunc create(YGBaselineFuncI instance) {
+    public static YGBaselineFunc create(YGBaselineFuncI instance) { return create(instance, instance.address()); }
+
+    private static YGBaselineFunc create(YGBaselineFuncI instance, long functionPointer) {
         return instance instanceof YGBaselineFunc
             ? (YGBaselineFunc)instance
-            : new Container(instance.address(), instance);
+            : new YGBaselineFunc(functionPointer) {
+                @Override public float invoke(long node, float width, float height) {
+                    return instance.invoke(node, width, height);
+                }
+            };
     }
 
     protected YGBaselineFunc() {
@@ -44,22 +43,6 @@ public abstract class YGBaselineFunc extends Callback implements YGBaselineFuncI
 
     YGBaselineFunc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends YGBaselineFunc {
-
-        private final YGBaselineFuncI delegate;
-
-        Container(long functionPointer, YGBaselineFuncI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public float invoke(long node, float width, float height) {
-            return delegate.invoke(node, width, height);
-        }
-
     }
 
 }

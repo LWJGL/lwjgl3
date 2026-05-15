@@ -19,23 +19,22 @@ public abstract class BGFXCaptureFrameCallback extends Callback implements BGFXC
      *
      * @return the new {@code BGFXCaptureFrameCallback}
      */
-    public static BGFXCaptureFrameCallback create(long functionPointer) {
-        BGFXCaptureFrameCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof BGFXCaptureFrameCallback
-            ? (BGFXCaptureFrameCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static BGFXCaptureFrameCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable BGFXCaptureFrameCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable BGFXCaptureFrameCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code BGFXCaptureFrameCallback} instance that delegates to the specified {@code BGFXCaptureFrameCallbackI} instance. */
-    public static BGFXCaptureFrameCallback create(BGFXCaptureFrameCallbackI instance) {
+    public static BGFXCaptureFrameCallback create(BGFXCaptureFrameCallbackI instance) { return create(instance, instance.address()); }
+
+    private static BGFXCaptureFrameCallback create(BGFXCaptureFrameCallbackI instance, long functionPointer) {
         return instance instanceof BGFXCaptureFrameCallback
             ? (BGFXCaptureFrameCallback)instance
-            : new Container(instance.address(), instance);
+            : new BGFXCaptureFrameCallback(functionPointer) {
+                @Override public void invoke(long _this, long _data, int _size) {
+                    instance.invoke(_this, _data, _size);
+                }
+            };
     }
 
     protected BGFXCaptureFrameCallback() {
@@ -44,22 +43,6 @@ public abstract class BGFXCaptureFrameCallback extends Callback implements BGFXC
 
     BGFXCaptureFrameCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends BGFXCaptureFrameCallback {
-
-        private final BGFXCaptureFrameCallbackI delegate;
-
-        Container(long functionPointer, BGFXCaptureFrameCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long _this, long _data, int _size) {
-            delegate.invoke(_this, _data, _size);
-        }
-
     }
 
 }

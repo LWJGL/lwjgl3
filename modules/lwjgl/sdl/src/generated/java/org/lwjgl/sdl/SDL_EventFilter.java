@@ -19,23 +19,22 @@ public abstract class SDL_EventFilter extends Callback implements SDL_EventFilte
      *
      * @return the new {@code SDL_EventFilter}
      */
-    public static SDL_EventFilter create(long functionPointer) {
-        SDL_EventFilterI instance = Callback.get(functionPointer);
-        return instance instanceof SDL_EventFilter
-            ? (SDL_EventFilter)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SDL_EventFilter create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SDL_EventFilter createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SDL_EventFilter createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SDL_EventFilter} instance that delegates to the specified {@code SDL_EventFilterI} instance. */
-    public static SDL_EventFilter create(SDL_EventFilterI instance) {
+    public static SDL_EventFilter create(SDL_EventFilterI instance) { return create(instance, instance.address()); }
+
+    private static SDL_EventFilter create(SDL_EventFilterI instance, long functionPointer) {
         return instance instanceof SDL_EventFilter
             ? (SDL_EventFilter)instance
-            : new Container(instance.address(), instance);
+            : new SDL_EventFilter(functionPointer) {
+                @Override public boolean invoke(long userdata, long event) {
+                    return instance.invoke(userdata, event);
+                }
+            };
     }
 
     protected SDL_EventFilter() {
@@ -44,22 +43,6 @@ public abstract class SDL_EventFilter extends Callback implements SDL_EventFilte
 
     SDL_EventFilter(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SDL_EventFilter {
-
-        private final SDL_EventFilterI delegate;
-
-        Container(long functionPointer, SDL_EventFilterI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public boolean invoke(long userdata, long event) {
-            return delegate.invoke(userdata, event);
-        }
-
     }
 
 }

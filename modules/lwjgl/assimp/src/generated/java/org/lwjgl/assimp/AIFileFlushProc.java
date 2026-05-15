@@ -19,23 +19,22 @@ public abstract class AIFileFlushProc extends Callback implements AIFileFlushPro
      *
      * @return the new {@code AIFileFlushProc}
      */
-    public static AIFileFlushProc create(long functionPointer) {
-        AIFileFlushProcI instance = Callback.get(functionPointer);
-        return instance instanceof AIFileFlushProc
-            ? (AIFileFlushProc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static AIFileFlushProc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable AIFileFlushProc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable AIFileFlushProc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code AIFileFlushProc} instance that delegates to the specified {@code AIFileFlushProcI} instance. */
-    public static AIFileFlushProc create(AIFileFlushProcI instance) {
+    public static AIFileFlushProc create(AIFileFlushProcI instance) { return create(instance, instance.address()); }
+
+    private static AIFileFlushProc create(AIFileFlushProcI instance, long functionPointer) {
         return instance instanceof AIFileFlushProc
             ? (AIFileFlushProc)instance
-            : new Container(instance.address(), instance);
+            : new AIFileFlushProc(functionPointer) {
+                @Override public void invoke(long pFile) {
+                    instance.invoke(pFile);
+                }
+            };
     }
 
     protected AIFileFlushProc() {
@@ -44,22 +43,6 @@ public abstract class AIFileFlushProc extends Callback implements AIFileFlushPro
 
     AIFileFlushProc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends AIFileFlushProc {
-
-        private final AIFileFlushProcI delegate;
-
-        Container(long functionPointer, AIFileFlushProcI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long pFile) {
-            delegate.invoke(pFile);
-        }
-
     }
 
 }

@@ -19,23 +19,22 @@ public abstract class NkPluginFilter extends Callback implements NkPluginFilterI
      *
      * @return the new {@code NkPluginFilter}
      */
-    public static NkPluginFilter create(long functionPointer) {
-        NkPluginFilterI instance = Callback.get(functionPointer);
-        return instance instanceof NkPluginFilter
-            ? (NkPluginFilter)instance
-            : new Container(functionPointer, instance);
-    }
+    public static NkPluginFilter create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable NkPluginFilter createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable NkPluginFilter createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code NkPluginFilter} instance that delegates to the specified {@code NkPluginFilterI} instance. */
-    public static NkPluginFilter create(NkPluginFilterI instance) {
+    public static NkPluginFilter create(NkPluginFilterI instance) { return create(instance, instance.address()); }
+
+    private static NkPluginFilter create(NkPluginFilterI instance, long functionPointer) {
         return instance instanceof NkPluginFilter
             ? (NkPluginFilter)instance
-            : new Container(instance.address(), instance);
+            : new NkPluginFilter(functionPointer) {
+                @Override public boolean invoke(long edit, int unicode) {
+                    return instance.invoke(edit, unicode);
+                }
+            };
     }
 
     protected NkPluginFilter() {
@@ -44,22 +43,6 @@ public abstract class NkPluginFilter extends Callback implements NkPluginFilterI
 
     NkPluginFilter(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends NkPluginFilter {
-
-        private final NkPluginFilterI delegate;
-
-        Container(long functionPointer, NkPluginFilterI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public boolean invoke(long edit, int unicode) {
-            return delegate.invoke(edit, unicode);
-        }
-
     }
 
 }

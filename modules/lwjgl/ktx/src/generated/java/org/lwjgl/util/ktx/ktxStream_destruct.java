@@ -19,23 +19,22 @@ public abstract class ktxStream_destruct extends Callback implements ktxStream_d
      *
      * @return the new {@code ktxStream_destruct}
      */
-    public static ktxStream_destruct create(long functionPointer) {
-        ktxStream_destructI instance = Callback.get(functionPointer);
-        return instance instanceof ktxStream_destruct
-            ? (ktxStream_destruct)instance
-            : new Container(functionPointer, instance);
-    }
+    public static ktxStream_destruct create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable ktxStream_destruct createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable ktxStream_destruct createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code ktxStream_destruct} instance that delegates to the specified {@code ktxStream_destructI} instance. */
-    public static ktxStream_destruct create(ktxStream_destructI instance) {
+    public static ktxStream_destruct create(ktxStream_destructI instance) { return create(instance, instance.address()); }
+
+    private static ktxStream_destruct create(ktxStream_destructI instance, long functionPointer) {
         return instance instanceof ktxStream_destruct
             ? (ktxStream_destruct)instance
-            : new Container(instance.address(), instance);
+            : new ktxStream_destruct(functionPointer) {
+                @Override public void invoke(long str) {
+                    instance.invoke(str);
+                }
+            };
     }
 
     protected ktxStream_destruct() {
@@ -44,22 +43,6 @@ public abstract class ktxStream_destruct extends Callback implements ktxStream_d
 
     ktxStream_destruct(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends ktxStream_destruct {
-
-        private final ktxStream_destructI delegate;
-
-        Container(long functionPointer, ktxStream_destructI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long str) {
-            delegate.invoke(str);
-        }
-
     }
 
 }

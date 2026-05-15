@@ -19,23 +19,22 @@ public abstract class WindowProc extends Callback implements WindowProcI {
      *
      * @return the new {@code WindowProc}
      */
-    public static WindowProc create(long functionPointer) {
-        WindowProcI instance = Callback.get(functionPointer);
-        return instance instanceof WindowProc
-            ? (WindowProc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static WindowProc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable WindowProc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable WindowProc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code WindowProc} instance that delegates to the specified {@code WindowProcI} instance. */
-    public static WindowProc create(WindowProcI instance) {
+    public static WindowProc create(WindowProcI instance) { return create(instance, instance.address()); }
+
+    private static WindowProc create(WindowProcI instance, long functionPointer) {
         return instance instanceof WindowProc
             ? (WindowProc)instance
-            : new Container(instance.address(), instance);
+            : new WindowProc(functionPointer) {
+                @Override public long invoke(long hwnd, int uMsg, long wParam, long lParam) {
+                    return instance.invoke(hwnd, uMsg, wParam, lParam);
+                }
+            };
     }
 
     protected WindowProc() {
@@ -44,22 +43,6 @@ public abstract class WindowProc extends Callback implements WindowProcI {
 
     WindowProc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends WindowProc {
-
-        private final WindowProcI delegate;
-
-        Container(long functionPointer, WindowProcI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long hwnd, int uMsg, long wParam, long lParam) {
-            return delegate.invoke(hwnd, uMsg, wParam, lParam);
-        }
-
     }
 
 }

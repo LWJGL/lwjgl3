@@ -19,23 +19,22 @@ public abstract class VkInternalAllocationNotification extends Callback implemen
      *
      * @return the new {@code VkInternalAllocationNotification}
      */
-    public static VkInternalAllocationNotification create(long functionPointer) {
-        VkInternalAllocationNotificationI instance = Callback.get(functionPointer);
-        return instance instanceof VkInternalAllocationNotification
-            ? (VkInternalAllocationNotification)instance
-            : new Container(functionPointer, instance);
-    }
+    public static VkInternalAllocationNotification create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable VkInternalAllocationNotification createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable VkInternalAllocationNotification createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code VkInternalAllocationNotification} instance that delegates to the specified {@code VkInternalAllocationNotificationI} instance. */
-    public static VkInternalAllocationNotification create(VkInternalAllocationNotificationI instance) {
+    public static VkInternalAllocationNotification create(VkInternalAllocationNotificationI instance) { return create(instance, instance.address()); }
+
+    private static VkInternalAllocationNotification create(VkInternalAllocationNotificationI instance, long functionPointer) {
         return instance instanceof VkInternalAllocationNotification
             ? (VkInternalAllocationNotification)instance
-            : new Container(instance.address(), instance);
+            : new VkInternalAllocationNotification(functionPointer) {
+                @Override public void invoke(long pUserData, long size, int allocationType, int allocationScope) {
+                    instance.invoke(pUserData, size, allocationType, allocationScope);
+                }
+            };
     }
 
     protected VkInternalAllocationNotification() {
@@ -44,22 +43,6 @@ public abstract class VkInternalAllocationNotification extends Callback implemen
 
     VkInternalAllocationNotification(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends VkInternalAllocationNotification {
-
-        private final VkInternalAllocationNotificationI delegate;
-
-        Container(long functionPointer, VkInternalAllocationNotificationI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long pUserData, long size, int allocationType, int allocationScope) {
-            delegate.invoke(pUserData, size, allocationType, allocationScope);
-        }
-
     }
 
 }

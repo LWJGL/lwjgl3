@@ -19,23 +19,22 @@ public abstract class RMTMalloc extends Callback implements RMTMallocI {
      *
      * @return the new {@code RMTMalloc}
      */
-    public static RMTMalloc create(long functionPointer) {
-        RMTMallocI instance = Callback.get(functionPointer);
-        return instance instanceof RMTMalloc
-            ? (RMTMalloc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static RMTMalloc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable RMTMalloc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable RMTMalloc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code RMTMalloc} instance that delegates to the specified {@code RMTMallocI} instance. */
-    public static RMTMalloc create(RMTMallocI instance) {
+    public static RMTMalloc create(RMTMallocI instance) { return create(instance, instance.address()); }
+
+    private static RMTMalloc create(RMTMallocI instance, long functionPointer) {
         return instance instanceof RMTMalloc
             ? (RMTMalloc)instance
-            : new Container(instance.address(), instance);
+            : new RMTMalloc(functionPointer) {
+                @Override public long invoke(long mm_context, int size) {
+                    return instance.invoke(mm_context, size);
+                }
+            };
     }
 
     protected RMTMalloc() {
@@ -44,22 +43,6 @@ public abstract class RMTMalloc extends Callback implements RMTMallocI {
 
     RMTMalloc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends RMTMalloc {
-
-        private final RMTMallocI delegate;
-
-        Container(long functionPointer, RMTMallocI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long mm_context, int size) {
-            return delegate.invoke(mm_context, size);
-        }
-
     }
 
 }

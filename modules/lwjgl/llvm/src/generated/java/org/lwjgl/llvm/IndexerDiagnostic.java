@@ -19,23 +19,22 @@ public abstract class IndexerDiagnostic extends Callback implements IndexerDiagn
      *
      * @return the new {@code IndexerDiagnostic}
      */
-    public static IndexerDiagnostic create(long functionPointer) {
-        IndexerDiagnosticI instance = Callback.get(functionPointer);
-        return instance instanceof IndexerDiagnostic
-            ? (IndexerDiagnostic)instance
-            : new Container(functionPointer, instance);
-    }
+    public static IndexerDiagnostic create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable IndexerDiagnostic createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable IndexerDiagnostic createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code IndexerDiagnostic} instance that delegates to the specified {@code IndexerDiagnosticI} instance. */
-    public static IndexerDiagnostic create(IndexerDiagnosticI instance) {
+    public static IndexerDiagnostic create(IndexerDiagnosticI instance) { return create(instance, instance.address()); }
+
+    private static IndexerDiagnostic create(IndexerDiagnosticI instance, long functionPointer) {
         return instance instanceof IndexerDiagnostic
             ? (IndexerDiagnostic)instance
-            : new Container(instance.address(), instance);
+            : new IndexerDiagnostic(functionPointer) {
+                @Override public void invoke(long client_data, long diagnosticSet, long reserved) {
+                    instance.invoke(client_data, diagnosticSet, reserved);
+                }
+            };
     }
 
     protected IndexerDiagnostic() {
@@ -44,22 +43,6 @@ public abstract class IndexerDiagnostic extends Callback implements IndexerDiagn
 
     IndexerDiagnostic(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends IndexerDiagnostic {
-
-        private final IndexerDiagnosticI delegate;
-
-        Container(long functionPointer, IndexerDiagnosticI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long client_data, long diagnosticSet, long reserved) {
-            delegate.invoke(client_data, diagnosticSet, reserved);
-        }
-
     }
 
 }

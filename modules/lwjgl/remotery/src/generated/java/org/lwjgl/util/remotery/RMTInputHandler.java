@@ -19,23 +19,22 @@ public abstract class RMTInputHandler extends Callback implements RMTInputHandle
      *
      * @return the new {@code RMTInputHandler}
      */
-    public static RMTInputHandler create(long functionPointer) {
-        RMTInputHandlerI instance = Callback.get(functionPointer);
-        return instance instanceof RMTInputHandler
-            ? (RMTInputHandler)instance
-            : new Container(functionPointer, instance);
-    }
+    public static RMTInputHandler create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable RMTInputHandler createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable RMTInputHandler createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code RMTInputHandler} instance that delegates to the specified {@code RMTInputHandlerI} instance. */
-    public static RMTInputHandler create(RMTInputHandlerI instance) {
+    public static RMTInputHandler create(RMTInputHandlerI instance) { return create(instance, instance.address()); }
+
+    private static RMTInputHandler create(RMTInputHandlerI instance, long functionPointer) {
         return instance instanceof RMTInputHandler
             ? (RMTInputHandler)instance
-            : new Container(instance.address(), instance);
+            : new RMTInputHandler(functionPointer) {
+                @Override public long invoke(long text, long context) {
+                    return instance.invoke(text, context);
+                }
+            };
     }
 
     protected RMTInputHandler() {
@@ -44,22 +43,6 @@ public abstract class RMTInputHandler extends Callback implements RMTInputHandle
 
     RMTInputHandler(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends RMTInputHandler {
-
-        private final RMTInputHandlerI delegate;
-
-        Container(long functionPointer, RMTInputHandlerI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long text, long context) {
-            return delegate.invoke(text, context);
-        }
-
     }
 
 }

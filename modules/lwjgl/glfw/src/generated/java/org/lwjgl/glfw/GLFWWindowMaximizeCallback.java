@@ -21,23 +21,22 @@ public abstract class GLFWWindowMaximizeCallback extends Callback implements GLF
      *
      * @return the new {@code GLFWWindowMaximizeCallback}
      */
-    public static GLFWWindowMaximizeCallback create(long functionPointer) {
-        GLFWWindowMaximizeCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLFWWindowMaximizeCallback
-            ? (GLFWWindowMaximizeCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLFWWindowMaximizeCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLFWWindowMaximizeCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLFWWindowMaximizeCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLFWWindowMaximizeCallback} instance that delegates to the specified {@code GLFWWindowMaximizeCallbackI} instance. */
-    public static GLFWWindowMaximizeCallback create(GLFWWindowMaximizeCallbackI instance) {
+    public static GLFWWindowMaximizeCallback create(GLFWWindowMaximizeCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLFWWindowMaximizeCallback create(GLFWWindowMaximizeCallbackI instance, long functionPointer) {
         return instance instanceof GLFWWindowMaximizeCallback
             ? (GLFWWindowMaximizeCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLFWWindowMaximizeCallback(functionPointer) {
+                @Override public void invoke(long window, boolean maximized) {
+                    instance.invoke(window, maximized);
+                }
+            };
     }
 
     protected GLFWWindowMaximizeCallback() {
@@ -52,22 +51,6 @@ public abstract class GLFWWindowMaximizeCallback extends Callback implements GLF
     public GLFWWindowMaximizeCallback set(long window) {
         glfwSetWindowMaximizeCallback(window, this);
         return this;
-    }
-
-    private static final class Container extends GLFWWindowMaximizeCallback {
-
-        private final GLFWWindowMaximizeCallbackI delegate;
-
-        Container(long functionPointer, GLFWWindowMaximizeCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long window, boolean maximized) {
-            delegate.invoke(window, maximized);
-        }
-
     }
 
 }

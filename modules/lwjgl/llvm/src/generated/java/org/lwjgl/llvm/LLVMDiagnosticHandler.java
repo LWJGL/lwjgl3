@@ -19,23 +19,22 @@ public abstract class LLVMDiagnosticHandler extends Callback implements LLVMDiag
      *
      * @return the new {@code LLVMDiagnosticHandler}
      */
-    public static LLVMDiagnosticHandler create(long functionPointer) {
-        LLVMDiagnosticHandlerI instance = Callback.get(functionPointer);
-        return instance instanceof LLVMDiagnosticHandler
-            ? (LLVMDiagnosticHandler)instance
-            : new Container(functionPointer, instance);
-    }
+    public static LLVMDiagnosticHandler create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable LLVMDiagnosticHandler createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable LLVMDiagnosticHandler createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code LLVMDiagnosticHandler} instance that delegates to the specified {@code LLVMDiagnosticHandlerI} instance. */
-    public static LLVMDiagnosticHandler create(LLVMDiagnosticHandlerI instance) {
+    public static LLVMDiagnosticHandler create(LLVMDiagnosticHandlerI instance) { return create(instance, instance.address()); }
+
+    private static LLVMDiagnosticHandler create(LLVMDiagnosticHandlerI instance, long functionPointer) {
         return instance instanceof LLVMDiagnosticHandler
             ? (LLVMDiagnosticHandler)instance
-            : new Container(instance.address(), instance);
+            : new LLVMDiagnosticHandler(functionPointer) {
+                @Override public void invoke(long DiagnosticInfo, long DiagnosticContext) {
+                    instance.invoke(DiagnosticInfo, DiagnosticContext);
+                }
+            };
     }
 
     protected LLVMDiagnosticHandler() {
@@ -44,22 +43,6 @@ public abstract class LLVMDiagnosticHandler extends Callback implements LLVMDiag
 
     LLVMDiagnosticHandler(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends LLVMDiagnosticHandler {
-
-        private final LLVMDiagnosticHandlerI delegate;
-
-        Container(long functionPointer, LLVMDiagnosticHandlerI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long DiagnosticInfo, long DiagnosticContext) {
-            delegate.invoke(DiagnosticInfo, DiagnosticContext);
-        }
-
     }
 
 }

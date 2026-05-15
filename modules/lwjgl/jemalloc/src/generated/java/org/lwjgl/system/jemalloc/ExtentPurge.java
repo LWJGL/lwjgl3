@@ -19,23 +19,22 @@ public abstract class ExtentPurge extends Callback implements ExtentPurgeI {
      *
      * @return the new {@code ExtentPurge}
      */
-    public static ExtentPurge create(long functionPointer) {
-        ExtentPurgeI instance = Callback.get(functionPointer);
-        return instance instanceof ExtentPurge
-            ? (ExtentPurge)instance
-            : new Container(functionPointer, instance);
-    }
+    public static ExtentPurge create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable ExtentPurge createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable ExtentPurge createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code ExtentPurge} instance that delegates to the specified {@code ExtentPurgeI} instance. */
-    public static ExtentPurge create(ExtentPurgeI instance) {
+    public static ExtentPurge create(ExtentPurgeI instance) { return create(instance, instance.address()); }
+
+    private static ExtentPurge create(ExtentPurgeI instance, long functionPointer) {
         return instance instanceof ExtentPurge
             ? (ExtentPurge)instance
-            : new Container(instance.address(), instance);
+            : new ExtentPurge(functionPointer) {
+                @Override public boolean invoke(long extent_hooks, long addr, long size, long offset, long length, int arena_ind) {
+                    return instance.invoke(extent_hooks, addr, size, offset, length, arena_ind);
+                }
+            };
     }
 
     protected ExtentPurge() {
@@ -44,22 +43,6 @@ public abstract class ExtentPurge extends Callback implements ExtentPurgeI {
 
     ExtentPurge(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends ExtentPurge {
-
-        private final ExtentPurgeI delegate;
-
-        Container(long functionPointer, ExtentPurgeI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public boolean invoke(long extent_hooks, long addr, long size, long offset, long length, int arena_ind) {
-            return delegate.invoke(extent_hooks, addr, size, offset, length, arena_ind);
-        }
-
     }
 
 }

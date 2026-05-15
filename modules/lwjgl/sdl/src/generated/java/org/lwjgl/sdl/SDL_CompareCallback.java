@@ -19,23 +19,22 @@ public abstract class SDL_CompareCallback extends Callback implements SDL_Compar
      *
      * @return the new {@code SDL_CompareCallback}
      */
-    public static SDL_CompareCallback create(long functionPointer) {
-        SDL_CompareCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof SDL_CompareCallback
-            ? (SDL_CompareCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SDL_CompareCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SDL_CompareCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SDL_CompareCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SDL_CompareCallback} instance that delegates to the specified {@code SDL_CompareCallbackI} instance. */
-    public static SDL_CompareCallback create(SDL_CompareCallbackI instance) {
+    public static SDL_CompareCallback create(SDL_CompareCallbackI instance) { return create(instance, instance.address()); }
+
+    private static SDL_CompareCallback create(SDL_CompareCallbackI instance, long functionPointer) {
         return instance instanceof SDL_CompareCallback
             ? (SDL_CompareCallback)instance
-            : new Container(instance.address(), instance);
+            : new SDL_CompareCallback(functionPointer) {
+                @Override public int invoke(long a, long b) {
+                    return instance.invoke(a, b);
+                }
+            };
     }
 
     protected SDL_CompareCallback() {
@@ -44,22 +43,6 @@ public abstract class SDL_CompareCallback extends Callback implements SDL_Compar
 
     SDL_CompareCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SDL_CompareCallback {
-
-        private final SDL_CompareCallbackI delegate;
-
-        Container(long functionPointer, SDL_CompareCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long a, long b) {
-            return delegate.invoke(a, b);
-        }
-
     }
 
 }

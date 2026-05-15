@@ -19,23 +19,22 @@ public abstract class BGFXReleaseFunctionCallback extends Callback implements BG
      *
      * @return the new {@code BGFXReleaseFunctionCallback}
      */
-    public static BGFXReleaseFunctionCallback create(long functionPointer) {
-        BGFXReleaseFunctionCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof BGFXReleaseFunctionCallback
-            ? (BGFXReleaseFunctionCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static BGFXReleaseFunctionCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable BGFXReleaseFunctionCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable BGFXReleaseFunctionCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code BGFXReleaseFunctionCallback} instance that delegates to the specified {@code BGFXReleaseFunctionCallbackI} instance. */
-    public static BGFXReleaseFunctionCallback create(BGFXReleaseFunctionCallbackI instance) {
+    public static BGFXReleaseFunctionCallback create(BGFXReleaseFunctionCallbackI instance) { return create(instance, instance.address()); }
+
+    private static BGFXReleaseFunctionCallback create(BGFXReleaseFunctionCallbackI instance, long functionPointer) {
         return instance instanceof BGFXReleaseFunctionCallback
             ? (BGFXReleaseFunctionCallback)instance
-            : new Container(instance.address(), instance);
+            : new BGFXReleaseFunctionCallback(functionPointer) {
+                @Override public void invoke(long _ptr, long _userData) {
+                    instance.invoke(_ptr, _userData);
+                }
+            };
     }
 
     protected BGFXReleaseFunctionCallback() {
@@ -44,22 +43,6 @@ public abstract class BGFXReleaseFunctionCallback extends Callback implements BG
 
     BGFXReleaseFunctionCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends BGFXReleaseFunctionCallback {
-
-        private final BGFXReleaseFunctionCallbackI delegate;
-
-        Container(long functionPointer, BGFXReleaseFunctionCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long _ptr, long _userData) {
-            delegate.invoke(_ptr, _userData);
-        }
-
     }
 
 }

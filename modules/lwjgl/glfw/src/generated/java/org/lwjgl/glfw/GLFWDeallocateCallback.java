@@ -19,23 +19,22 @@ public abstract class GLFWDeallocateCallback extends Callback implements GLFWDea
      *
      * @return the new {@code GLFWDeallocateCallback}
      */
-    public static GLFWDeallocateCallback create(long functionPointer) {
-        GLFWDeallocateCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLFWDeallocateCallback
-            ? (GLFWDeallocateCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLFWDeallocateCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLFWDeallocateCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLFWDeallocateCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLFWDeallocateCallback} instance that delegates to the specified {@code GLFWDeallocateCallbackI} instance. */
-    public static GLFWDeallocateCallback create(GLFWDeallocateCallbackI instance) {
+    public static GLFWDeallocateCallback create(GLFWDeallocateCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLFWDeallocateCallback create(GLFWDeallocateCallbackI instance, long functionPointer) {
         return instance instanceof GLFWDeallocateCallback
             ? (GLFWDeallocateCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLFWDeallocateCallback(functionPointer) {
+                @Override public void invoke(long block, long user) {
+                    instance.invoke(block, user);
+                }
+            };
     }
 
     protected GLFWDeallocateCallback() {
@@ -44,22 +43,6 @@ public abstract class GLFWDeallocateCallback extends Callback implements GLFWDea
 
     GLFWDeallocateCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends GLFWDeallocateCallback {
-
-        private final GLFWDeallocateCallbackI delegate;
-
-        Container(long functionPointer, GLFWDeallocateCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long block, long user) {
-            delegate.invoke(block, user);
-        }
-
     }
 
 }

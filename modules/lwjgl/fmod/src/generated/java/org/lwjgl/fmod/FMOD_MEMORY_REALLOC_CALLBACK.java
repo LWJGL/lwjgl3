@@ -19,23 +19,22 @@ public abstract class FMOD_MEMORY_REALLOC_CALLBACK extends Callback implements F
      *
      * @return the new {@code FMOD_MEMORY_REALLOC_CALLBACK}
      */
-    public static FMOD_MEMORY_REALLOC_CALLBACK create(long functionPointer) {
-        FMOD_MEMORY_REALLOC_CALLBACKI instance = Callback.get(functionPointer);
-        return instance instanceof FMOD_MEMORY_REALLOC_CALLBACK
-            ? (FMOD_MEMORY_REALLOC_CALLBACK)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FMOD_MEMORY_REALLOC_CALLBACK create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FMOD_MEMORY_REALLOC_CALLBACK createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FMOD_MEMORY_REALLOC_CALLBACK createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FMOD_MEMORY_REALLOC_CALLBACK} instance that delegates to the specified {@code FMOD_MEMORY_REALLOC_CALLBACKI} instance. */
-    public static FMOD_MEMORY_REALLOC_CALLBACK create(FMOD_MEMORY_REALLOC_CALLBACKI instance) {
+    public static FMOD_MEMORY_REALLOC_CALLBACK create(FMOD_MEMORY_REALLOC_CALLBACKI instance) { return create(instance, instance.address()); }
+
+    private static FMOD_MEMORY_REALLOC_CALLBACK create(FMOD_MEMORY_REALLOC_CALLBACKI instance, long functionPointer) {
         return instance instanceof FMOD_MEMORY_REALLOC_CALLBACK
             ? (FMOD_MEMORY_REALLOC_CALLBACK)instance
-            : new Container(instance.address(), instance);
+            : new FMOD_MEMORY_REALLOC_CALLBACK(functionPointer) {
+                @Override public long invoke(long ptr, int size, int type, long sourcestr) {
+                    return instance.invoke(ptr, size, type, sourcestr);
+                }
+            };
     }
 
     protected FMOD_MEMORY_REALLOC_CALLBACK() {
@@ -44,22 +43,6 @@ public abstract class FMOD_MEMORY_REALLOC_CALLBACK extends Callback implements F
 
     FMOD_MEMORY_REALLOC_CALLBACK(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FMOD_MEMORY_REALLOC_CALLBACK {
-
-        private final FMOD_MEMORY_REALLOC_CALLBACKI delegate;
-
-        Container(long functionPointer, FMOD_MEMORY_REALLOC_CALLBACKI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long ptr, int size, int type, long sourcestr) {
-            return delegate.invoke(ptr, size, type, sourcestr);
-        }
-
     }
 
 }

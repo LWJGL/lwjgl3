@@ -21,23 +21,22 @@ public abstract class GLFWMonitorCallback extends Callback implements GLFWMonito
      *
      * @return the new {@code GLFWMonitorCallback}
      */
-    public static GLFWMonitorCallback create(long functionPointer) {
-        GLFWMonitorCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLFWMonitorCallback
-            ? (GLFWMonitorCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLFWMonitorCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLFWMonitorCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLFWMonitorCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLFWMonitorCallback} instance that delegates to the specified {@code GLFWMonitorCallbackI} instance. */
-    public static GLFWMonitorCallback create(GLFWMonitorCallbackI instance) {
+    public static GLFWMonitorCallback create(GLFWMonitorCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLFWMonitorCallback create(GLFWMonitorCallbackI instance, long functionPointer) {
         return instance instanceof GLFWMonitorCallback
             ? (GLFWMonitorCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLFWMonitorCallback(functionPointer) {
+                @Override public void invoke(long monitor, int event) {
+                    instance.invoke(monitor, event);
+                }
+            };
     }
 
     protected GLFWMonitorCallback() {
@@ -52,22 +51,6 @@ public abstract class GLFWMonitorCallback extends Callback implements GLFWMonito
     public GLFWMonitorCallback set() {
         glfwSetMonitorCallback(this);
         return this;
-    }
-
-    private static final class Container extends GLFWMonitorCallback {
-
-        private final GLFWMonitorCallbackI delegate;
-
-        Container(long functionPointer, GLFWMonitorCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long monitor, int event) {
-            delegate.invoke(monitor, event);
-        }
-
     }
 
 }

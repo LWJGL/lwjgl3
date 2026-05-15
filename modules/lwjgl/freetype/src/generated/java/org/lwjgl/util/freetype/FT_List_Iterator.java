@@ -19,23 +19,22 @@ public abstract class FT_List_Iterator extends Callback implements FT_List_Itera
      *
      * @return the new {@code FT_List_Iterator}
      */
-    public static FT_List_Iterator create(long functionPointer) {
-        FT_List_IteratorI instance = Callback.get(functionPointer);
-        return instance instanceof FT_List_Iterator
-            ? (FT_List_Iterator)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FT_List_Iterator create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FT_List_Iterator createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FT_List_Iterator createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FT_List_Iterator} instance that delegates to the specified {@code FT_List_IteratorI} instance. */
-    public static FT_List_Iterator create(FT_List_IteratorI instance) {
+    public static FT_List_Iterator create(FT_List_IteratorI instance) { return create(instance, instance.address()); }
+
+    private static FT_List_Iterator create(FT_List_IteratorI instance, long functionPointer) {
         return instance instanceof FT_List_Iterator
             ? (FT_List_Iterator)instance
-            : new Container(instance.address(), instance);
+            : new FT_List_Iterator(functionPointer) {
+                @Override public int invoke(long node, long user) {
+                    return instance.invoke(node, user);
+                }
+            };
     }
 
     protected FT_List_Iterator() {
@@ -44,22 +43,6 @@ public abstract class FT_List_Iterator extends Callback implements FT_List_Itera
 
     FT_List_Iterator(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FT_List_Iterator {
-
-        private final FT_List_IteratorI delegate;
-
-        Container(long functionPointer, FT_List_IteratorI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long node, long user) {
-            return delegate.invoke(node, user);
-        }
-
     }
 
 }

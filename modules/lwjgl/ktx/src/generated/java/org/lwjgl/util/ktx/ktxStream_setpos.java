@@ -19,23 +19,22 @@ public abstract class ktxStream_setpos extends Callback implements ktxStream_set
      *
      * @return the new {@code ktxStream_setpos}
      */
-    public static ktxStream_setpos create(long functionPointer) {
-        ktxStream_setposI instance = Callback.get(functionPointer);
-        return instance instanceof ktxStream_setpos
-            ? (ktxStream_setpos)instance
-            : new Container(functionPointer, instance);
-    }
+    public static ktxStream_setpos create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable ktxStream_setpos createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable ktxStream_setpos createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code ktxStream_setpos} instance that delegates to the specified {@code ktxStream_setposI} instance. */
-    public static ktxStream_setpos create(ktxStream_setposI instance) {
+    public static ktxStream_setpos create(ktxStream_setposI instance) { return create(instance, instance.address()); }
+
+    private static ktxStream_setpos create(ktxStream_setposI instance, long functionPointer) {
         return instance instanceof ktxStream_setpos
             ? (ktxStream_setpos)instance
-            : new Container(instance.address(), instance);
+            : new ktxStream_setpos(functionPointer) {
+                @Override public int invoke(long str, long offset) {
+                    return instance.invoke(str, offset);
+                }
+            };
     }
 
     protected ktxStream_setpos() {
@@ -44,22 +43,6 @@ public abstract class ktxStream_setpos extends Callback implements ktxStream_set
 
     ktxStream_setpos(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends ktxStream_setpos {
-
-        private final ktxStream_setposI delegate;
-
-        Container(long functionPointer, ktxStream_setposI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long str, long offset) {
-            return delegate.invoke(str, offset);
-        }
-
     }
 
 }

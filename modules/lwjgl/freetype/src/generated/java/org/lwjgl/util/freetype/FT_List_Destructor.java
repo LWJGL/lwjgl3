@@ -19,23 +19,22 @@ public abstract class FT_List_Destructor extends Callback implements FT_List_Des
      *
      * @return the new {@code FT_List_Destructor}
      */
-    public static FT_List_Destructor create(long functionPointer) {
-        FT_List_DestructorI instance = Callback.get(functionPointer);
-        return instance instanceof FT_List_Destructor
-            ? (FT_List_Destructor)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FT_List_Destructor create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FT_List_Destructor createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FT_List_Destructor createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FT_List_Destructor} instance that delegates to the specified {@code FT_List_DestructorI} instance. */
-    public static FT_List_Destructor create(FT_List_DestructorI instance) {
+    public static FT_List_Destructor create(FT_List_DestructorI instance) { return create(instance, instance.address()); }
+
+    private static FT_List_Destructor create(FT_List_DestructorI instance, long functionPointer) {
         return instance instanceof FT_List_Destructor
             ? (FT_List_Destructor)instance
-            : new Container(instance.address(), instance);
+            : new FT_List_Destructor(functionPointer) {
+                @Override public void invoke(long memory, long data, long user) {
+                    instance.invoke(memory, data, user);
+                }
+            };
     }
 
     protected FT_List_Destructor() {
@@ -44,22 +43,6 @@ public abstract class FT_List_Destructor extends Callback implements FT_List_Des
 
     FT_List_Destructor(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FT_List_Destructor {
-
-        private final FT_List_DestructorI delegate;
-
-        Container(long functionPointer, FT_List_DestructorI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long memory, long data, long user) {
-            delegate.invoke(memory, data, user);
-        }
-
     }
 
 }

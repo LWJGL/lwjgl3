@@ -19,23 +19,22 @@ public abstract class FT_Alloc_Func extends Callback implements FT_Alloc_FuncI {
      *
      * @return the new {@code FT_Alloc_Func}
      */
-    public static FT_Alloc_Func create(long functionPointer) {
-        FT_Alloc_FuncI instance = Callback.get(functionPointer);
-        return instance instanceof FT_Alloc_Func
-            ? (FT_Alloc_Func)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FT_Alloc_Func create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FT_Alloc_Func createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FT_Alloc_Func createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FT_Alloc_Func} instance that delegates to the specified {@code FT_Alloc_FuncI} instance. */
-    public static FT_Alloc_Func create(FT_Alloc_FuncI instance) {
+    public static FT_Alloc_Func create(FT_Alloc_FuncI instance) { return create(instance, instance.address()); }
+
+    private static FT_Alloc_Func create(FT_Alloc_FuncI instance, long functionPointer) {
         return instance instanceof FT_Alloc_Func
             ? (FT_Alloc_Func)instance
-            : new Container(instance.address(), instance);
+            : new FT_Alloc_Func(functionPointer) {
+                @Override public long invoke(long memory, long size) {
+                    return instance.invoke(memory, size);
+                }
+            };
     }
 
     protected FT_Alloc_Func() {
@@ -44,22 +43,6 @@ public abstract class FT_Alloc_Func extends Callback implements FT_Alloc_FuncI {
 
     FT_Alloc_Func(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FT_Alloc_Func {
-
-        private final FT_Alloc_FuncI delegate;
-
-        Container(long functionPointer, FT_Alloc_FuncI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long memory, long size) {
-            return delegate.invoke(memory, size);
-        }
-
     }
 
 }

@@ -19,23 +19,22 @@ public abstract class FMOD_DSP_GETSAMPLERATE_FUNC extends Callback implements FM
      *
      * @return the new {@code FMOD_DSP_GETSAMPLERATE_FUNC}
      */
-    public static FMOD_DSP_GETSAMPLERATE_FUNC create(long functionPointer) {
-        FMOD_DSP_GETSAMPLERATE_FUNCI instance = Callback.get(functionPointer);
-        return instance instanceof FMOD_DSP_GETSAMPLERATE_FUNC
-            ? (FMOD_DSP_GETSAMPLERATE_FUNC)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FMOD_DSP_GETSAMPLERATE_FUNC create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FMOD_DSP_GETSAMPLERATE_FUNC createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FMOD_DSP_GETSAMPLERATE_FUNC createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FMOD_DSP_GETSAMPLERATE_FUNC} instance that delegates to the specified {@code FMOD_DSP_GETSAMPLERATE_FUNCI} instance. */
-    public static FMOD_DSP_GETSAMPLERATE_FUNC create(FMOD_DSP_GETSAMPLERATE_FUNCI instance) {
+    public static FMOD_DSP_GETSAMPLERATE_FUNC create(FMOD_DSP_GETSAMPLERATE_FUNCI instance) { return create(instance, instance.address()); }
+
+    private static FMOD_DSP_GETSAMPLERATE_FUNC create(FMOD_DSP_GETSAMPLERATE_FUNCI instance, long functionPointer) {
         return instance instanceof FMOD_DSP_GETSAMPLERATE_FUNC
             ? (FMOD_DSP_GETSAMPLERATE_FUNC)instance
-            : new Container(instance.address(), instance);
+            : new FMOD_DSP_GETSAMPLERATE_FUNC(functionPointer) {
+                @Override public int invoke(long dsp_state, long rate) {
+                    return instance.invoke(dsp_state, rate);
+                }
+            };
     }
 
     protected FMOD_DSP_GETSAMPLERATE_FUNC() {
@@ -44,22 +43,6 @@ public abstract class FMOD_DSP_GETSAMPLERATE_FUNC extends Callback implements FM
 
     FMOD_DSP_GETSAMPLERATE_FUNC(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FMOD_DSP_GETSAMPLERATE_FUNC {
-
-        private final FMOD_DSP_GETSAMPLERATE_FUNCI delegate;
-
-        Container(long functionPointer, FMOD_DSP_GETSAMPLERATE_FUNCI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long dsp_state, long rate) {
-            return delegate.invoke(dsp_state, rate);
-        }
-
     }
 
 }

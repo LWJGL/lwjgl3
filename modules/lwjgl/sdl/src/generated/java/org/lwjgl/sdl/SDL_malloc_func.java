@@ -19,23 +19,22 @@ public abstract class SDL_malloc_func extends Callback implements SDL_malloc_fun
      *
      * @return the new {@code SDL_malloc_func}
      */
-    public static SDL_malloc_func create(long functionPointer) {
-        SDL_malloc_funcI instance = Callback.get(functionPointer);
-        return instance instanceof SDL_malloc_func
-            ? (SDL_malloc_func)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SDL_malloc_func create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SDL_malloc_func createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SDL_malloc_func createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SDL_malloc_func} instance that delegates to the specified {@code SDL_malloc_funcI} instance. */
-    public static SDL_malloc_func create(SDL_malloc_funcI instance) {
+    public static SDL_malloc_func create(SDL_malloc_funcI instance) { return create(instance, instance.address()); }
+
+    private static SDL_malloc_func create(SDL_malloc_funcI instance, long functionPointer) {
         return instance instanceof SDL_malloc_func
             ? (SDL_malloc_func)instance
-            : new Container(instance.address(), instance);
+            : new SDL_malloc_func(functionPointer) {
+                @Override public long invoke(long size) {
+                    return instance.invoke(size);
+                }
+            };
     }
 
     protected SDL_malloc_func() {
@@ -44,22 +43,6 @@ public abstract class SDL_malloc_func extends Callback implements SDL_malloc_fun
 
     SDL_malloc_func(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SDL_malloc_func {
-
-        private final SDL_malloc_funcI delegate;
-
-        Container(long functionPointer, SDL_malloc_funcI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long size) {
-            return delegate.invoke(size);
-        }
-
     }
 
 }

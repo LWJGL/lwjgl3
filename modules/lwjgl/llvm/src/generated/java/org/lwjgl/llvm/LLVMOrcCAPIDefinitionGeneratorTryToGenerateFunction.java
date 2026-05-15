@@ -19,23 +19,22 @@ public abstract class LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction extend
      *
      * @return the new {@code LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction}
      */
-    public static LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction create(long functionPointer) {
-        LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunctionI instance = Callback.get(functionPointer);
-        return instance instanceof LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction
-            ? (LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction)instance
-            : new Container(functionPointer, instance);
-    }
+    public static LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction} instance that delegates to the specified {@code LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunctionI} instance. */
-    public static LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction create(LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunctionI instance) {
+    public static LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction create(LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunctionI instance) { return create(instance, instance.address()); }
+
+    private static LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction create(LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunctionI instance, long functionPointer) {
         return instance instanceof LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction
             ? (LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction)instance
-            : new Container(instance.address(), instance);
+            : new LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction(functionPointer) {
+                @Override public long invoke(long GeneratorObj, long Ctx, long LookupState, int Kind, long JD, int JDLookupFlags, long LookupSet, long LookupSetSize) {
+                    return instance.invoke(GeneratorObj, Ctx, LookupState, Kind, JD, JDLookupFlags, LookupSet, LookupSetSize);
+                }
+            };
     }
 
     protected LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction() {
@@ -44,22 +43,6 @@ public abstract class LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction extend
 
     LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction {
-
-        private final LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunctionI delegate;
-
-        Container(long functionPointer, LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunctionI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long GeneratorObj, long Ctx, long LookupState, int Kind, long JD, int JDLookupFlags, long LookupSet, long LookupSetSize) {
-            return delegate.invoke(GeneratorObj, Ctx, LookupState, Kind, JD, JDLookupFlags, LookupSet, LookupSetSize);
-        }
-
     }
 
 }

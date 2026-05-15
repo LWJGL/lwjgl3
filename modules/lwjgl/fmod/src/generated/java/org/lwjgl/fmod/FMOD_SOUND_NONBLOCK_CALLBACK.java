@@ -19,23 +19,22 @@ public abstract class FMOD_SOUND_NONBLOCK_CALLBACK extends Callback implements F
      *
      * @return the new {@code FMOD_SOUND_NONBLOCK_CALLBACK}
      */
-    public static FMOD_SOUND_NONBLOCK_CALLBACK create(long functionPointer) {
-        FMOD_SOUND_NONBLOCK_CALLBACKI instance = Callback.get(functionPointer);
-        return instance instanceof FMOD_SOUND_NONBLOCK_CALLBACK
-            ? (FMOD_SOUND_NONBLOCK_CALLBACK)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FMOD_SOUND_NONBLOCK_CALLBACK create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FMOD_SOUND_NONBLOCK_CALLBACK createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FMOD_SOUND_NONBLOCK_CALLBACK createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FMOD_SOUND_NONBLOCK_CALLBACK} instance that delegates to the specified {@code FMOD_SOUND_NONBLOCK_CALLBACKI} instance. */
-    public static FMOD_SOUND_NONBLOCK_CALLBACK create(FMOD_SOUND_NONBLOCK_CALLBACKI instance) {
+    public static FMOD_SOUND_NONBLOCK_CALLBACK create(FMOD_SOUND_NONBLOCK_CALLBACKI instance) { return create(instance, instance.address()); }
+
+    private static FMOD_SOUND_NONBLOCK_CALLBACK create(FMOD_SOUND_NONBLOCK_CALLBACKI instance, long functionPointer) {
         return instance instanceof FMOD_SOUND_NONBLOCK_CALLBACK
             ? (FMOD_SOUND_NONBLOCK_CALLBACK)instance
-            : new Container(instance.address(), instance);
+            : new FMOD_SOUND_NONBLOCK_CALLBACK(functionPointer) {
+                @Override public int invoke(long sound, int result) {
+                    return instance.invoke(sound, result);
+                }
+            };
     }
 
     protected FMOD_SOUND_NONBLOCK_CALLBACK() {
@@ -44,22 +43,6 @@ public abstract class FMOD_SOUND_NONBLOCK_CALLBACK extends Callback implements F
 
     FMOD_SOUND_NONBLOCK_CALLBACK(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FMOD_SOUND_NONBLOCK_CALLBACK {
-
-        private final FMOD_SOUND_NONBLOCK_CALLBACKI delegate;
-
-        Container(long functionPointer, FMOD_SOUND_NONBLOCK_CALLBACKI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long sound, int result) {
-            return delegate.invoke(sound, result);
-        }
-
     }
 
 }

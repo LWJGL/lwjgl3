@@ -19,23 +19,22 @@ public abstract class CLProgramReleaseCallback extends Callback implements CLPro
      *
      * @return the new {@code CLProgramReleaseCallback}
      */
-    public static CLProgramReleaseCallback create(long functionPointer) {
-        CLProgramReleaseCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof CLProgramReleaseCallback
-            ? (CLProgramReleaseCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static CLProgramReleaseCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable CLProgramReleaseCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable CLProgramReleaseCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code CLProgramReleaseCallback} instance that delegates to the specified {@code CLProgramReleaseCallbackI} instance. */
-    public static CLProgramReleaseCallback create(CLProgramReleaseCallbackI instance) {
+    public static CLProgramReleaseCallback create(CLProgramReleaseCallbackI instance) { return create(instance, instance.address()); }
+
+    private static CLProgramReleaseCallback create(CLProgramReleaseCallbackI instance, long functionPointer) {
         return instance instanceof CLProgramReleaseCallback
             ? (CLProgramReleaseCallback)instance
-            : new Container(instance.address(), instance);
+            : new CLProgramReleaseCallback(functionPointer) {
+                @Override public void invoke(long program, long user_data) {
+                    instance.invoke(program, user_data);
+                }
+            };
     }
 
     protected CLProgramReleaseCallback() {
@@ -44,22 +43,6 @@ public abstract class CLProgramReleaseCallback extends Callback implements CLPro
 
     CLProgramReleaseCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends CLProgramReleaseCallback {
-
-        private final CLProgramReleaseCallbackI delegate;
-
-        Container(long functionPointer, CLProgramReleaseCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long program, long user_data) {
-            delegate.invoke(program, user_data);
-        }
-
     }
 
 }

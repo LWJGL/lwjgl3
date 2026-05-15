@@ -19,23 +19,22 @@ public abstract class SDL_AppEvent_func extends Callback implements SDL_AppEvent
      *
      * @return the new {@code SDL_AppEvent_func}
      */
-    public static SDL_AppEvent_func create(long functionPointer) {
-        SDL_AppEvent_funcI instance = Callback.get(functionPointer);
-        return instance instanceof SDL_AppEvent_func
-            ? (SDL_AppEvent_func)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SDL_AppEvent_func create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SDL_AppEvent_func createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SDL_AppEvent_func createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SDL_AppEvent_func} instance that delegates to the specified {@code SDL_AppEvent_funcI} instance. */
-    public static SDL_AppEvent_func create(SDL_AppEvent_funcI instance) {
+    public static SDL_AppEvent_func create(SDL_AppEvent_funcI instance) { return create(instance, instance.address()); }
+
+    private static SDL_AppEvent_func create(SDL_AppEvent_funcI instance, long functionPointer) {
         return instance instanceof SDL_AppEvent_func
             ? (SDL_AppEvent_func)instance
-            : new Container(instance.address(), instance);
+            : new SDL_AppEvent_func(functionPointer) {
+                @Override public int invoke(long appstate, long event) {
+                    return instance.invoke(appstate, event);
+                }
+            };
     }
 
     protected SDL_AppEvent_func() {
@@ -44,22 +43,6 @@ public abstract class SDL_AppEvent_func extends Callback implements SDL_AppEvent
 
     SDL_AppEvent_func(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SDL_AppEvent_func {
-
-        private final SDL_AppEvent_funcI delegate;
-
-        Container(long functionPointer, SDL_AppEvent_funcI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long appstate, long event) {
-            return delegate.invoke(appstate, event);
-        }
-
     }
 
 }

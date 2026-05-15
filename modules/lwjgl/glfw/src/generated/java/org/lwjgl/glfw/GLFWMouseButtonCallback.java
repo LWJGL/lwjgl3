@@ -21,23 +21,22 @@ public abstract class GLFWMouseButtonCallback extends Callback implements GLFWMo
      *
      * @return the new {@code GLFWMouseButtonCallback}
      */
-    public static GLFWMouseButtonCallback create(long functionPointer) {
-        GLFWMouseButtonCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLFWMouseButtonCallback
-            ? (GLFWMouseButtonCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLFWMouseButtonCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLFWMouseButtonCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLFWMouseButtonCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLFWMouseButtonCallback} instance that delegates to the specified {@code GLFWMouseButtonCallbackI} instance. */
-    public static GLFWMouseButtonCallback create(GLFWMouseButtonCallbackI instance) {
+    public static GLFWMouseButtonCallback create(GLFWMouseButtonCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLFWMouseButtonCallback create(GLFWMouseButtonCallbackI instance, long functionPointer) {
         return instance instanceof GLFWMouseButtonCallback
             ? (GLFWMouseButtonCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLFWMouseButtonCallback(functionPointer) {
+                @Override public void invoke(long window, int button, int action, int mods) {
+                    instance.invoke(window, button, action, mods);
+                }
+            };
     }
 
     protected GLFWMouseButtonCallback() {
@@ -52,22 +51,6 @@ public abstract class GLFWMouseButtonCallback extends Callback implements GLFWMo
     public GLFWMouseButtonCallback set(long window) {
         glfwSetMouseButtonCallback(window, this);
         return this;
-    }
-
-    private static final class Container extends GLFWMouseButtonCallback {
-
-        private final GLFWMouseButtonCallbackI delegate;
-
-        Container(long functionPointer, GLFWMouseButtonCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long window, int button, int action, int mods) {
-            delegate.invoke(window, button, action, mods);
-        }
-
     }
 
 }

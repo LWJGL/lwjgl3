@@ -21,23 +21,22 @@ public abstract class GLFWCursorEnterCallback extends Callback implements GLFWCu
      *
      * @return the new {@code GLFWCursorEnterCallback}
      */
-    public static GLFWCursorEnterCallback create(long functionPointer) {
-        GLFWCursorEnterCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLFWCursorEnterCallback
-            ? (GLFWCursorEnterCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLFWCursorEnterCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLFWCursorEnterCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLFWCursorEnterCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLFWCursorEnterCallback} instance that delegates to the specified {@code GLFWCursorEnterCallbackI} instance. */
-    public static GLFWCursorEnterCallback create(GLFWCursorEnterCallbackI instance) {
+    public static GLFWCursorEnterCallback create(GLFWCursorEnterCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLFWCursorEnterCallback create(GLFWCursorEnterCallbackI instance, long functionPointer) {
         return instance instanceof GLFWCursorEnterCallback
             ? (GLFWCursorEnterCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLFWCursorEnterCallback(functionPointer) {
+                @Override public void invoke(long window, boolean entered) {
+                    instance.invoke(window, entered);
+                }
+            };
     }
 
     protected GLFWCursorEnterCallback() {
@@ -52,22 +51,6 @@ public abstract class GLFWCursorEnterCallback extends Callback implements GLFWCu
     public GLFWCursorEnterCallback set(long window) {
         glfwSetCursorEnterCallback(window, this);
         return this;
-    }
-
-    private static final class Container extends GLFWCursorEnterCallback {
-
-        private final GLFWCursorEnterCallbackI delegate;
-
-        Container(long functionPointer, GLFWCursorEnterCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long window, boolean entered) {
-            delegate.invoke(window, entered);
-        }
-
     }
 
 }

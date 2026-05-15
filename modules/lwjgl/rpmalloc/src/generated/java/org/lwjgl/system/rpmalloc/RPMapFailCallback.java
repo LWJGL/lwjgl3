@@ -19,23 +19,22 @@ public abstract class RPMapFailCallback extends Callback implements RPMapFailCal
      *
      * @return the new {@code RPMapFailCallback}
      */
-    public static RPMapFailCallback create(long functionPointer) {
-        RPMapFailCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof RPMapFailCallback
-            ? (RPMapFailCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static RPMapFailCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable RPMapFailCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable RPMapFailCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code RPMapFailCallback} instance that delegates to the specified {@code RPMapFailCallbackI} instance. */
-    public static RPMapFailCallback create(RPMapFailCallbackI instance) {
+    public static RPMapFailCallback create(RPMapFailCallbackI instance) { return create(instance, instance.address()); }
+
+    private static RPMapFailCallback create(RPMapFailCallbackI instance, long functionPointer) {
         return instance instanceof RPMapFailCallback
             ? (RPMapFailCallback)instance
-            : new Container(instance.address(), instance);
+            : new RPMapFailCallback(functionPointer) {
+                @Override public int invoke(long size) {
+                    return instance.invoke(size);
+                }
+            };
     }
 
     protected RPMapFailCallback() {
@@ -44,22 +43,6 @@ public abstract class RPMapFailCallback extends Callback implements RPMapFailCal
 
     RPMapFailCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends RPMapFailCallback {
-
-        private final RPMapFailCallbackI delegate;
-
-        Container(long functionPointer, RPMapFailCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long size) {
-            return delegate.invoke(size);
-        }
-
     }
 
 }

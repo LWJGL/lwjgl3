@@ -19,23 +19,22 @@ public abstract class STBIZlibCompress extends Callback implements STBIZlibCompr
      *
      * @return the new {@code STBIZlibCompress}
      */
-    public static STBIZlibCompress create(long functionPointer) {
-        STBIZlibCompressI instance = Callback.get(functionPointer);
-        return instance instanceof STBIZlibCompress
-            ? (STBIZlibCompress)instance
-            : new Container(functionPointer, instance);
-    }
+    public static STBIZlibCompress create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable STBIZlibCompress createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable STBIZlibCompress createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code STBIZlibCompress} instance that delegates to the specified {@code STBIZlibCompressI} instance. */
-    public static STBIZlibCompress create(STBIZlibCompressI instance) {
+    public static STBIZlibCompress create(STBIZlibCompressI instance) { return create(instance, instance.address()); }
+
+    private static STBIZlibCompress create(STBIZlibCompressI instance, long functionPointer) {
         return instance instanceof STBIZlibCompress
             ? (STBIZlibCompress)instance
-            : new Container(instance.address(), instance);
+            : new STBIZlibCompress(functionPointer) {
+                @Override public long invoke(long data, int data_len, long out_len, int quality) {
+                    return instance.invoke(data, data_len, out_len, quality);
+                }
+            };
     }
 
     protected STBIZlibCompress() {
@@ -44,22 +43,6 @@ public abstract class STBIZlibCompress extends Callback implements STBIZlibCompr
 
     STBIZlibCompress(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends STBIZlibCompress {
-
-        private final STBIZlibCompressI delegate;
-
-        Container(long functionPointer, STBIZlibCompressI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long data, int data_len, long out_len, int quality) {
-            return delegate.invoke(data, data_len, out_len, quality);
-        }
-
     }
 
 }

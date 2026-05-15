@@ -19,23 +19,22 @@ public abstract class FMOD_CODEC_CLOSE_CALLBACK extends Callback implements FMOD
      *
      * @return the new {@code FMOD_CODEC_CLOSE_CALLBACK}
      */
-    public static FMOD_CODEC_CLOSE_CALLBACK create(long functionPointer) {
-        FMOD_CODEC_CLOSE_CALLBACKI instance = Callback.get(functionPointer);
-        return instance instanceof FMOD_CODEC_CLOSE_CALLBACK
-            ? (FMOD_CODEC_CLOSE_CALLBACK)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FMOD_CODEC_CLOSE_CALLBACK create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FMOD_CODEC_CLOSE_CALLBACK createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FMOD_CODEC_CLOSE_CALLBACK createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FMOD_CODEC_CLOSE_CALLBACK} instance that delegates to the specified {@code FMOD_CODEC_CLOSE_CALLBACKI} instance. */
-    public static FMOD_CODEC_CLOSE_CALLBACK create(FMOD_CODEC_CLOSE_CALLBACKI instance) {
+    public static FMOD_CODEC_CLOSE_CALLBACK create(FMOD_CODEC_CLOSE_CALLBACKI instance) { return create(instance, instance.address()); }
+
+    private static FMOD_CODEC_CLOSE_CALLBACK create(FMOD_CODEC_CLOSE_CALLBACKI instance, long functionPointer) {
         return instance instanceof FMOD_CODEC_CLOSE_CALLBACK
             ? (FMOD_CODEC_CLOSE_CALLBACK)instance
-            : new Container(instance.address(), instance);
+            : new FMOD_CODEC_CLOSE_CALLBACK(functionPointer) {
+                @Override public int invoke(long codec_state) {
+                    return instance.invoke(codec_state);
+                }
+            };
     }
 
     protected FMOD_CODEC_CLOSE_CALLBACK() {
@@ -44,22 +43,6 @@ public abstract class FMOD_CODEC_CLOSE_CALLBACK extends Callback implements FMOD
 
     FMOD_CODEC_CLOSE_CALLBACK(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FMOD_CODEC_CLOSE_CALLBACK {
-
-        private final FMOD_CODEC_CLOSE_CALLBACKI delegate;
-
-        Container(long functionPointer, FMOD_CODEC_CLOSE_CALLBACKI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long codec_state) {
-            return delegate.invoke(codec_state);
-        }
-
     }
 
 }

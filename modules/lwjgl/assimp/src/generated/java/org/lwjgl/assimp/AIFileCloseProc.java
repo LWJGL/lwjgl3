@@ -19,23 +19,22 @@ public abstract class AIFileCloseProc extends Callback implements AIFileClosePro
      *
      * @return the new {@code AIFileCloseProc}
      */
-    public static AIFileCloseProc create(long functionPointer) {
-        AIFileCloseProcI instance = Callback.get(functionPointer);
-        return instance instanceof AIFileCloseProc
-            ? (AIFileCloseProc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static AIFileCloseProc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable AIFileCloseProc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable AIFileCloseProc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code AIFileCloseProc} instance that delegates to the specified {@code AIFileCloseProcI} instance. */
-    public static AIFileCloseProc create(AIFileCloseProcI instance) {
+    public static AIFileCloseProc create(AIFileCloseProcI instance) { return create(instance, instance.address()); }
+
+    private static AIFileCloseProc create(AIFileCloseProcI instance, long functionPointer) {
         return instance instanceof AIFileCloseProc
             ? (AIFileCloseProc)instance
-            : new Container(instance.address(), instance);
+            : new AIFileCloseProc(functionPointer) {
+                @Override public void invoke(long pFileIO, long pFile) {
+                    instance.invoke(pFileIO, pFile);
+                }
+            };
     }
 
     protected AIFileCloseProc() {
@@ -44,22 +43,6 @@ public abstract class AIFileCloseProc extends Callback implements AIFileClosePro
 
     AIFileCloseProc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends AIFileCloseProc {
-
-        private final AIFileCloseProcI delegate;
-
-        Container(long functionPointer, AIFileCloseProcI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long pFileIO, long pFile) {
-            delegate.invoke(pFileIO, pFile);
-        }
-
     }
 
 }

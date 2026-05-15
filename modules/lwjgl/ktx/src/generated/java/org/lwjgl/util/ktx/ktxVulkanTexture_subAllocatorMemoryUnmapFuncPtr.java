@@ -19,23 +19,22 @@ public abstract class ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr extends Ca
      *
      * @return the new {@code ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr}
      */
-    public static ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr create(long functionPointer) {
-        ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtrI instance = Callback.get(functionPointer);
-        return instance instanceof ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr
-            ? (ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr)instance
-            : new Container(functionPointer, instance);
-    }
+    public static ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr} instance that delegates to the specified {@code ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtrI} instance. */
-    public static ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr create(ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtrI instance) {
+    public static ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr create(ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtrI instance) { return create(instance, instance.address()); }
+
+    private static ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr create(ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtrI instance, long functionPointer) {
         return instance instanceof ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr
             ? (ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr)instance
-            : new Container(instance.address(), instance);
+            : new ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr(functionPointer) {
+                @Override public long invoke(long allocId, long pageNumber) {
+                    return instance.invoke(allocId, pageNumber);
+                }
+            };
     }
 
     protected ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr() {
@@ -44,22 +43,6 @@ public abstract class ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr extends Ca
 
     ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr {
-
-        private final ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtrI delegate;
-
-        Container(long functionPointer, ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtrI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long allocId, long pageNumber) {
-            return delegate.invoke(allocId, pageNumber);
-        }
-
     }
 
 }

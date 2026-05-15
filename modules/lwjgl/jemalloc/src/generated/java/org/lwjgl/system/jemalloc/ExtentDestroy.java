@@ -19,23 +19,22 @@ public abstract class ExtentDestroy extends Callback implements ExtentDestroyI {
      *
      * @return the new {@code ExtentDestroy}
      */
-    public static ExtentDestroy create(long functionPointer) {
-        ExtentDestroyI instance = Callback.get(functionPointer);
-        return instance instanceof ExtentDestroy
-            ? (ExtentDestroy)instance
-            : new Container(functionPointer, instance);
-    }
+    public static ExtentDestroy create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable ExtentDestroy createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable ExtentDestroy createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code ExtentDestroy} instance that delegates to the specified {@code ExtentDestroyI} instance. */
-    public static ExtentDestroy create(ExtentDestroyI instance) {
+    public static ExtentDestroy create(ExtentDestroyI instance) { return create(instance, instance.address()); }
+
+    private static ExtentDestroy create(ExtentDestroyI instance, long functionPointer) {
         return instance instanceof ExtentDestroy
             ? (ExtentDestroy)instance
-            : new Container(instance.address(), instance);
+            : new ExtentDestroy(functionPointer) {
+                @Override public boolean invoke(long extent_hooks, long addr, long size, boolean committed, int arena_ind) {
+                    return instance.invoke(extent_hooks, addr, size, committed, arena_ind);
+                }
+            };
     }
 
     protected ExtentDestroy() {
@@ -44,22 +43,6 @@ public abstract class ExtentDestroy extends Callback implements ExtentDestroyI {
 
     ExtentDestroy(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends ExtentDestroy {
-
-        private final ExtentDestroyI delegate;
-
-        Container(long functionPointer, ExtentDestroyI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public boolean invoke(long extent_hooks, long addr, long size, boolean committed, int arena_ind) {
-            return delegate.invoke(extent_hooks, addr, size, committed, arena_ind);
-        }
-
     }
 
 }

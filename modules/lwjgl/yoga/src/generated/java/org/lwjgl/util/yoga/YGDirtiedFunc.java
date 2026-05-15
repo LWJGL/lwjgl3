@@ -19,23 +19,22 @@ public abstract class YGDirtiedFunc extends Callback implements YGDirtiedFuncI {
      *
      * @return the new {@code YGDirtiedFunc}
      */
-    public static YGDirtiedFunc create(long functionPointer) {
-        YGDirtiedFuncI instance = Callback.get(functionPointer);
-        return instance instanceof YGDirtiedFunc
-            ? (YGDirtiedFunc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static YGDirtiedFunc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable YGDirtiedFunc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable YGDirtiedFunc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code YGDirtiedFunc} instance that delegates to the specified {@code YGDirtiedFuncI} instance. */
-    public static YGDirtiedFunc create(YGDirtiedFuncI instance) {
+    public static YGDirtiedFunc create(YGDirtiedFuncI instance) { return create(instance, instance.address()); }
+
+    private static YGDirtiedFunc create(YGDirtiedFuncI instance, long functionPointer) {
         return instance instanceof YGDirtiedFunc
             ? (YGDirtiedFunc)instance
-            : new Container(instance.address(), instance);
+            : new YGDirtiedFunc(functionPointer) {
+                @Override public void invoke(long node) {
+                    instance.invoke(node);
+                }
+            };
     }
 
     protected YGDirtiedFunc() {
@@ -44,22 +43,6 @@ public abstract class YGDirtiedFunc extends Callback implements YGDirtiedFuncI {
 
     YGDirtiedFunc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends YGDirtiedFunc {
-
-        private final YGDirtiedFuncI delegate;
-
-        Container(long functionPointer, YGDirtiedFuncI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long node) {
-            delegate.invoke(node);
-        }
-
     }
 
 }

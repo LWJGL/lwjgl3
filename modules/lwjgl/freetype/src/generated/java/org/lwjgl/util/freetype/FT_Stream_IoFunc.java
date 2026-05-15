@@ -19,23 +19,22 @@ public abstract class FT_Stream_IoFunc extends Callback implements FT_Stream_IoF
      *
      * @return the new {@code FT_Stream_IoFunc}
      */
-    public static FT_Stream_IoFunc create(long functionPointer) {
-        FT_Stream_IoFuncI instance = Callback.get(functionPointer);
-        return instance instanceof FT_Stream_IoFunc
-            ? (FT_Stream_IoFunc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FT_Stream_IoFunc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FT_Stream_IoFunc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FT_Stream_IoFunc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FT_Stream_IoFunc} instance that delegates to the specified {@code FT_Stream_IoFuncI} instance. */
-    public static FT_Stream_IoFunc create(FT_Stream_IoFuncI instance) {
+    public static FT_Stream_IoFunc create(FT_Stream_IoFuncI instance) { return create(instance, instance.address()); }
+
+    private static FT_Stream_IoFunc create(FT_Stream_IoFuncI instance, long functionPointer) {
         return instance instanceof FT_Stream_IoFunc
             ? (FT_Stream_IoFunc)instance
-            : new Container(instance.address(), instance);
+            : new FT_Stream_IoFunc(functionPointer) {
+                @Override public long invoke(long stream, long offset, long buffer, long count) {
+                    return instance.invoke(stream, offset, buffer, count);
+                }
+            };
     }
 
     protected FT_Stream_IoFunc() {
@@ -44,22 +43,6 @@ public abstract class FT_Stream_IoFunc extends Callback implements FT_Stream_IoF
 
     FT_Stream_IoFunc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FT_Stream_IoFunc {
-
-        private final FT_Stream_IoFuncI delegate;
-
-        Container(long functionPointer, FT_Stream_IoFuncI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long stream, long offset, long buffer, long count) {
-            return delegate.invoke(stream, offset, buffer, count);
-        }
-
     }
 
 }

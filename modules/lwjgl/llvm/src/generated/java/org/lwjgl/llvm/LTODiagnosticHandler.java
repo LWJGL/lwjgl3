@@ -19,23 +19,22 @@ public abstract class LTODiagnosticHandler extends Callback implements LTODiagno
      *
      * @return the new {@code LTODiagnosticHandler}
      */
-    public static LTODiagnosticHandler create(long functionPointer) {
-        LTODiagnosticHandlerI instance = Callback.get(functionPointer);
-        return instance instanceof LTODiagnosticHandler
-            ? (LTODiagnosticHandler)instance
-            : new Container(functionPointer, instance);
-    }
+    public static LTODiagnosticHandler create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable LTODiagnosticHandler createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable LTODiagnosticHandler createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code LTODiagnosticHandler} instance that delegates to the specified {@code LTODiagnosticHandlerI} instance. */
-    public static LTODiagnosticHandler create(LTODiagnosticHandlerI instance) {
+    public static LTODiagnosticHandler create(LTODiagnosticHandlerI instance) { return create(instance, instance.address()); }
+
+    private static LTODiagnosticHandler create(LTODiagnosticHandlerI instance, long functionPointer) {
         return instance instanceof LTODiagnosticHandler
             ? (LTODiagnosticHandler)instance
-            : new Container(instance.address(), instance);
+            : new LTODiagnosticHandler(functionPointer) {
+                @Override public void invoke(int severity, long diag, long ctxt) {
+                    instance.invoke(severity, diag, ctxt);
+                }
+            };
     }
 
     protected LTODiagnosticHandler() {
@@ -44,22 +43,6 @@ public abstract class LTODiagnosticHandler extends Callback implements LTODiagno
 
     LTODiagnosticHandler(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends LTODiagnosticHandler {
-
-        private final LTODiagnosticHandlerI delegate;
-
-        Container(long functionPointer, LTODiagnosticHandlerI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(int severity, long diag, long ctxt) {
-            delegate.invoke(severity, diag, ctxt);
-        }
-
     }
 
 }

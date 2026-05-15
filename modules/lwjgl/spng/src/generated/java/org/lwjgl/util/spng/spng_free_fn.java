@@ -19,23 +19,22 @@ public abstract class spng_free_fn extends Callback implements spng_free_fnI {
      *
      * @return the new {@code spng_free_fn}
      */
-    public static spng_free_fn create(long functionPointer) {
-        spng_free_fnI instance = Callback.get(functionPointer);
-        return instance instanceof spng_free_fn
-            ? (spng_free_fn)instance
-            : new Container(functionPointer, instance);
-    }
+    public static spng_free_fn create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable spng_free_fn createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable spng_free_fn createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code spng_free_fn} instance that delegates to the specified {@code spng_free_fnI} instance. */
-    public static spng_free_fn create(spng_free_fnI instance) {
+    public static spng_free_fn create(spng_free_fnI instance) { return create(instance, instance.address()); }
+
+    private static spng_free_fn create(spng_free_fnI instance, long functionPointer) {
         return instance instanceof spng_free_fn
             ? (spng_free_fn)instance
-            : new Container(instance.address(), instance);
+            : new spng_free_fn(functionPointer) {
+                @Override public void invoke(long ptr) {
+                    instance.invoke(ptr);
+                }
+            };
     }
 
     protected spng_free_fn() {
@@ -44,22 +43,6 @@ public abstract class spng_free_fn extends Callback implements spng_free_fnI {
 
     spng_free_fn(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends spng_free_fn {
-
-        private final spng_free_fnI delegate;
-
-        Container(long functionPointer, spng_free_fnI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long ptr) {
-            delegate.invoke(ptr);
-        }
-
     }
 
 }

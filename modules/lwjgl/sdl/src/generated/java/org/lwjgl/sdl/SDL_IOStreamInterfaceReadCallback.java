@@ -19,23 +19,22 @@ public abstract class SDL_IOStreamInterfaceReadCallback extends Callback impleme
      *
      * @return the new {@code SDL_IOStreamInterfaceReadCallback}
      */
-    public static SDL_IOStreamInterfaceReadCallback create(long functionPointer) {
-        SDL_IOStreamInterfaceReadCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof SDL_IOStreamInterfaceReadCallback
-            ? (SDL_IOStreamInterfaceReadCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SDL_IOStreamInterfaceReadCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SDL_IOStreamInterfaceReadCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SDL_IOStreamInterfaceReadCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SDL_IOStreamInterfaceReadCallback} instance that delegates to the specified {@code SDL_IOStreamInterfaceReadCallbackI} instance. */
-    public static SDL_IOStreamInterfaceReadCallback create(SDL_IOStreamInterfaceReadCallbackI instance) {
+    public static SDL_IOStreamInterfaceReadCallback create(SDL_IOStreamInterfaceReadCallbackI instance) { return create(instance, instance.address()); }
+
+    private static SDL_IOStreamInterfaceReadCallback create(SDL_IOStreamInterfaceReadCallbackI instance, long functionPointer) {
         return instance instanceof SDL_IOStreamInterfaceReadCallback
             ? (SDL_IOStreamInterfaceReadCallback)instance
-            : new Container(instance.address(), instance);
+            : new SDL_IOStreamInterfaceReadCallback(functionPointer) {
+                @Override public long invoke(long userdata, long ptr, long size, long status) {
+                    return instance.invoke(userdata, ptr, size, status);
+                }
+            };
     }
 
     protected SDL_IOStreamInterfaceReadCallback() {
@@ -44,22 +43,6 @@ public abstract class SDL_IOStreamInterfaceReadCallback extends Callback impleme
 
     SDL_IOStreamInterfaceReadCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SDL_IOStreamInterfaceReadCallback {
-
-        private final SDL_IOStreamInterfaceReadCallbackI delegate;
-
-        Container(long functionPointer, SDL_IOStreamInterfaceReadCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long userdata, long ptr, long size, long status) {
-            return delegate.invoke(userdata, ptr, size, status);
-        }
-
     }
 
 }

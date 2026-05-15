@@ -21,23 +21,22 @@ public abstract class GLFWPreeditCallback extends Callback implements GLFWPreedi
      *
      * @return the new {@code GLFWPreeditCallback}
      */
-    public static GLFWPreeditCallback create(long functionPointer) {
-        GLFWPreeditCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLFWPreeditCallback
-            ? (GLFWPreeditCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLFWPreeditCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLFWPreeditCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLFWPreeditCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLFWPreeditCallback} instance that delegates to the specified {@code GLFWPreeditCallbackI} instance. */
-    public static GLFWPreeditCallback create(GLFWPreeditCallbackI instance) {
+    public static GLFWPreeditCallback create(GLFWPreeditCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLFWPreeditCallback create(GLFWPreeditCallbackI instance, long functionPointer) {
         return instance instanceof GLFWPreeditCallback
             ? (GLFWPreeditCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLFWPreeditCallback(functionPointer) {
+                @Override public void invoke(long window, int preedit_count, long preedit_string, int block_count, long block_sizes, int focused_block, int caret) {
+                    instance.invoke(window, preedit_count, preedit_string, block_count, block_sizes, focused_block, caret);
+                }
+            };
     }
 
     protected GLFWPreeditCallback() {
@@ -52,22 +51,6 @@ public abstract class GLFWPreeditCallback extends Callback implements GLFWPreedi
     public GLFWPreeditCallback set(long window) {
         glfwSetPreeditCallback(window, this);
         return this;
-    }
-
-    private static final class Container extends GLFWPreeditCallback {
-
-        private final GLFWPreeditCallbackI delegate;
-
-        Container(long functionPointer, GLFWPreeditCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long window, int preedit_count, long preedit_string, int block_count, long block_sizes, int focused_block, int caret) {
-            delegate.invoke(window, preedit_count, preedit_string, block_count, block_sizes, focused_block, caret);
-        }
-
     }
 
 }

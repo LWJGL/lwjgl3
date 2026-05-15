@@ -19,23 +19,22 @@ public abstract class FMOD_OUTPUT_GETDRIVERINFO_CALLBACK extends Callback implem
      *
      * @return the new {@code FMOD_OUTPUT_GETDRIVERINFO_CALLBACK}
      */
-    public static FMOD_OUTPUT_GETDRIVERINFO_CALLBACK create(long functionPointer) {
-        FMOD_OUTPUT_GETDRIVERINFO_CALLBACKI instance = Callback.get(functionPointer);
-        return instance instanceof FMOD_OUTPUT_GETDRIVERINFO_CALLBACK
-            ? (FMOD_OUTPUT_GETDRIVERINFO_CALLBACK)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FMOD_OUTPUT_GETDRIVERINFO_CALLBACK create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FMOD_OUTPUT_GETDRIVERINFO_CALLBACK createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FMOD_OUTPUT_GETDRIVERINFO_CALLBACK createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FMOD_OUTPUT_GETDRIVERINFO_CALLBACK} instance that delegates to the specified {@code FMOD_OUTPUT_GETDRIVERINFO_CALLBACKI} instance. */
-    public static FMOD_OUTPUT_GETDRIVERINFO_CALLBACK create(FMOD_OUTPUT_GETDRIVERINFO_CALLBACKI instance) {
+    public static FMOD_OUTPUT_GETDRIVERINFO_CALLBACK create(FMOD_OUTPUT_GETDRIVERINFO_CALLBACKI instance) { return create(instance, instance.address()); }
+
+    private static FMOD_OUTPUT_GETDRIVERINFO_CALLBACK create(FMOD_OUTPUT_GETDRIVERINFO_CALLBACKI instance, long functionPointer) {
         return instance instanceof FMOD_OUTPUT_GETDRIVERINFO_CALLBACK
             ? (FMOD_OUTPUT_GETDRIVERINFO_CALLBACK)instance
-            : new Container(instance.address(), instance);
+            : new FMOD_OUTPUT_GETDRIVERINFO_CALLBACK(functionPointer) {
+                @Override public int invoke(long output_state, int id, long name, int namelen, long guid, long systemrate, long speakermode, long speakermodechannels) {
+                    return instance.invoke(output_state, id, name, namelen, guid, systemrate, speakermode, speakermodechannels);
+                }
+            };
     }
 
     protected FMOD_OUTPUT_GETDRIVERINFO_CALLBACK() {
@@ -44,22 +43,6 @@ public abstract class FMOD_OUTPUT_GETDRIVERINFO_CALLBACK extends Callback implem
 
     FMOD_OUTPUT_GETDRIVERINFO_CALLBACK(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FMOD_OUTPUT_GETDRIVERINFO_CALLBACK {
-
-        private final FMOD_OUTPUT_GETDRIVERINFO_CALLBACKI delegate;
-
-        Container(long functionPointer, FMOD_OUTPUT_GETDRIVERINFO_CALLBACKI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long output_state, int id, long name, int namelen, long guid, long systemrate, long speakermode, long speakermodechannels) {
-            return delegate.invoke(output_state, id, name, namelen, guid, systemrate, speakermode, speakermodechannels);
-        }
-
     }
 
 }

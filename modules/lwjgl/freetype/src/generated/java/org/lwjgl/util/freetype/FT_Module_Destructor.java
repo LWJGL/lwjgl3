@@ -19,23 +19,22 @@ public abstract class FT_Module_Destructor extends Callback implements FT_Module
      *
      * @return the new {@code FT_Module_Destructor}
      */
-    public static FT_Module_Destructor create(long functionPointer) {
-        FT_Module_DestructorI instance = Callback.get(functionPointer);
-        return instance instanceof FT_Module_Destructor
-            ? (FT_Module_Destructor)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FT_Module_Destructor create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FT_Module_Destructor createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FT_Module_Destructor createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FT_Module_Destructor} instance that delegates to the specified {@code FT_Module_DestructorI} instance. */
-    public static FT_Module_Destructor create(FT_Module_DestructorI instance) {
+    public static FT_Module_Destructor create(FT_Module_DestructorI instance) { return create(instance, instance.address()); }
+
+    private static FT_Module_Destructor create(FT_Module_DestructorI instance, long functionPointer) {
         return instance instanceof FT_Module_Destructor
             ? (FT_Module_Destructor)instance
-            : new Container(instance.address(), instance);
+            : new FT_Module_Destructor(functionPointer) {
+                @Override public void invoke(long module) {
+                    instance.invoke(module);
+                }
+            };
     }
 
     protected FT_Module_Destructor() {
@@ -44,22 +43,6 @@ public abstract class FT_Module_Destructor extends Callback implements FT_Module
 
     FT_Module_Destructor(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FT_Module_Destructor {
-
-        private final FT_Module_DestructorI delegate;
-
-        Container(long functionPointer, FT_Module_DestructorI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long module) {
-            delegate.invoke(module);
-        }
-
     }
 
 }

@@ -19,23 +19,22 @@ public abstract class hb_unicode_combining_class_func_t extends Callback impleme
      *
      * @return the new {@code hb_unicode_combining_class_func_t}
      */
-    public static hb_unicode_combining_class_func_t create(long functionPointer) {
-        hb_unicode_combining_class_func_tI instance = Callback.get(functionPointer);
-        return instance instanceof hb_unicode_combining_class_func_t
-            ? (hb_unicode_combining_class_func_t)instance
-            : new Container(functionPointer, instance);
-    }
+    public static hb_unicode_combining_class_func_t create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable hb_unicode_combining_class_func_t createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable hb_unicode_combining_class_func_t createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code hb_unicode_combining_class_func_t} instance that delegates to the specified {@code hb_unicode_combining_class_func_tI} instance. */
-    public static hb_unicode_combining_class_func_t create(hb_unicode_combining_class_func_tI instance) {
+    public static hb_unicode_combining_class_func_t create(hb_unicode_combining_class_func_tI instance) { return create(instance, instance.address()); }
+
+    private static hb_unicode_combining_class_func_t create(hb_unicode_combining_class_func_tI instance, long functionPointer) {
         return instance instanceof hb_unicode_combining_class_func_t
             ? (hb_unicode_combining_class_func_t)instance
-            : new Container(instance.address(), instance);
+            : new hb_unicode_combining_class_func_t(functionPointer) {
+                @Override public int invoke(long ufuncs, int unicode, long user_data) {
+                    return instance.invoke(ufuncs, unicode, user_data);
+                }
+            };
     }
 
     protected hb_unicode_combining_class_func_t() {
@@ -44,22 +43,6 @@ public abstract class hb_unicode_combining_class_func_t extends Callback impleme
 
     hb_unicode_combining_class_func_t(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends hb_unicode_combining_class_func_t {
-
-        private final hb_unicode_combining_class_func_tI delegate;
-
-        Container(long functionPointer, hb_unicode_combining_class_func_tI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long ufuncs, int unicode, long user_data) {
-            return delegate.invoke(ufuncs, unicode, user_data);
-        }
-
     }
 
 }

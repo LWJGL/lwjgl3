@@ -19,23 +19,22 @@ public abstract class CLProgramCallback extends Callback implements CLProgramCal
      *
      * @return the new {@code CLProgramCallback}
      */
-    public static CLProgramCallback create(long functionPointer) {
-        CLProgramCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof CLProgramCallback
-            ? (CLProgramCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static CLProgramCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable CLProgramCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable CLProgramCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code CLProgramCallback} instance that delegates to the specified {@code CLProgramCallbackI} instance. */
-    public static CLProgramCallback create(CLProgramCallbackI instance) {
+    public static CLProgramCallback create(CLProgramCallbackI instance) { return create(instance, instance.address()); }
+
+    private static CLProgramCallback create(CLProgramCallbackI instance, long functionPointer) {
         return instance instanceof CLProgramCallback
             ? (CLProgramCallback)instance
-            : new Container(instance.address(), instance);
+            : new CLProgramCallback(functionPointer) {
+                @Override public void invoke(long program, long user_data) {
+                    instance.invoke(program, user_data);
+                }
+            };
     }
 
     protected CLProgramCallback() {
@@ -44,22 +43,6 @@ public abstract class CLProgramCallback extends Callback implements CLProgramCal
 
     CLProgramCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends CLProgramCallback {
-
-        private final CLProgramCallbackI delegate;
-
-        Container(long functionPointer, CLProgramCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long program, long user_data) {
-            delegate.invoke(program, user_data);
-        }
-
     }
 
 }

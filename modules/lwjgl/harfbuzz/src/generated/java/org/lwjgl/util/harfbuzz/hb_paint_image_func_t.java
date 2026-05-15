@@ -19,23 +19,22 @@ public abstract class hb_paint_image_func_t extends Callback implements hb_paint
      *
      * @return the new {@code hb_paint_image_func_t}
      */
-    public static hb_paint_image_func_t create(long functionPointer) {
-        hb_paint_image_func_tI instance = Callback.get(functionPointer);
-        return instance instanceof hb_paint_image_func_t
-            ? (hb_paint_image_func_t)instance
-            : new Container(functionPointer, instance);
-    }
+    public static hb_paint_image_func_t create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable hb_paint_image_func_t createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable hb_paint_image_func_t createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code hb_paint_image_func_t} instance that delegates to the specified {@code hb_paint_image_func_tI} instance. */
-    public static hb_paint_image_func_t create(hb_paint_image_func_tI instance) {
+    public static hb_paint_image_func_t create(hb_paint_image_func_tI instance) { return create(instance, instance.address()); }
+
+    private static hb_paint_image_func_t create(hb_paint_image_func_tI instance, long functionPointer) {
         return instance instanceof hb_paint_image_func_t
             ? (hb_paint_image_func_t)instance
-            : new Container(instance.address(), instance);
+            : new hb_paint_image_func_t(functionPointer) {
+                @Override public int invoke(long funcs, long paint_data, long image, int width, int height, int format, float slant, long extents, long user_data) {
+                    return instance.invoke(funcs, paint_data, image, width, height, format, slant, extents, user_data);
+                }
+            };
     }
 
     protected hb_paint_image_func_t() {
@@ -44,22 +43,6 @@ public abstract class hb_paint_image_func_t extends Callback implements hb_paint
 
     hb_paint_image_func_t(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends hb_paint_image_func_t {
-
-        private final hb_paint_image_func_tI delegate;
-
-        Container(long functionPointer, hb_paint_image_func_tI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long funcs, long paint_data, long image, int width, int height, int format, float slant, long extents, long user_data) {
-            return delegate.invoke(funcs, paint_data, image, width, height, format, slant, extents, user_data);
-        }
-
     }
 
 }

@@ -19,23 +19,22 @@ public abstract class FMOD_FILE_ASYNCREAD_CALLBACK extends Callback implements F
      *
      * @return the new {@code FMOD_FILE_ASYNCREAD_CALLBACK}
      */
-    public static FMOD_FILE_ASYNCREAD_CALLBACK create(long functionPointer) {
-        FMOD_FILE_ASYNCREAD_CALLBACKI instance = Callback.get(functionPointer);
-        return instance instanceof FMOD_FILE_ASYNCREAD_CALLBACK
-            ? (FMOD_FILE_ASYNCREAD_CALLBACK)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FMOD_FILE_ASYNCREAD_CALLBACK create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FMOD_FILE_ASYNCREAD_CALLBACK createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FMOD_FILE_ASYNCREAD_CALLBACK createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FMOD_FILE_ASYNCREAD_CALLBACK} instance that delegates to the specified {@code FMOD_FILE_ASYNCREAD_CALLBACKI} instance. */
-    public static FMOD_FILE_ASYNCREAD_CALLBACK create(FMOD_FILE_ASYNCREAD_CALLBACKI instance) {
+    public static FMOD_FILE_ASYNCREAD_CALLBACK create(FMOD_FILE_ASYNCREAD_CALLBACKI instance) { return create(instance, instance.address()); }
+
+    private static FMOD_FILE_ASYNCREAD_CALLBACK create(FMOD_FILE_ASYNCREAD_CALLBACKI instance, long functionPointer) {
         return instance instanceof FMOD_FILE_ASYNCREAD_CALLBACK
             ? (FMOD_FILE_ASYNCREAD_CALLBACK)instance
-            : new Container(instance.address(), instance);
+            : new FMOD_FILE_ASYNCREAD_CALLBACK(functionPointer) {
+                @Override public int invoke(long info, long userdata) {
+                    return instance.invoke(info, userdata);
+                }
+            };
     }
 
     protected FMOD_FILE_ASYNCREAD_CALLBACK() {
@@ -44,22 +43,6 @@ public abstract class FMOD_FILE_ASYNCREAD_CALLBACK extends Callback implements F
 
     FMOD_FILE_ASYNCREAD_CALLBACK(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FMOD_FILE_ASYNCREAD_CALLBACK {
-
-        private final FMOD_FILE_ASYNCREAD_CALLBACKI delegate;
-
-        Container(long functionPointer, FMOD_FILE_ASYNCREAD_CALLBACKI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long info, long userdata) {
-            return delegate.invoke(info, userdata);
-        }
-
     }
 
 }

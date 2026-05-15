@@ -19,23 +19,22 @@ public abstract class SDL_DialogFileCallback extends Callback implements SDL_Dia
      *
      * @return the new {@code SDL_DialogFileCallback}
      */
-    public static SDL_DialogFileCallback create(long functionPointer) {
-        SDL_DialogFileCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof SDL_DialogFileCallback
-            ? (SDL_DialogFileCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SDL_DialogFileCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SDL_DialogFileCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SDL_DialogFileCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SDL_DialogFileCallback} instance that delegates to the specified {@code SDL_DialogFileCallbackI} instance. */
-    public static SDL_DialogFileCallback create(SDL_DialogFileCallbackI instance) {
+    public static SDL_DialogFileCallback create(SDL_DialogFileCallbackI instance) { return create(instance, instance.address()); }
+
+    private static SDL_DialogFileCallback create(SDL_DialogFileCallbackI instance, long functionPointer) {
         return instance instanceof SDL_DialogFileCallback
             ? (SDL_DialogFileCallback)instance
-            : new Container(instance.address(), instance);
+            : new SDL_DialogFileCallback(functionPointer) {
+                @Override public void invoke(long userdata, long filelist, int filter) {
+                    instance.invoke(userdata, filelist, filter);
+                }
+            };
     }
 
     protected SDL_DialogFileCallback() {
@@ -44,22 +43,6 @@ public abstract class SDL_DialogFileCallback extends Callback implements SDL_Dia
 
     SDL_DialogFileCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SDL_DialogFileCallback {
-
-        private final SDL_DialogFileCallbackI delegate;
-
-        Container(long functionPointer, SDL_DialogFileCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long userdata, long filelist, int filter) {
-            delegate.invoke(userdata, filelist, filter);
-        }
-
     }
 
 }

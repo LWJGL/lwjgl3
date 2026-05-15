@@ -19,23 +19,22 @@ public abstract class SVG_Lib_Free_Func extends Callback implements SVG_Lib_Free
      *
      * @return the new {@code SVG_Lib_Free_Func}
      */
-    public static SVG_Lib_Free_Func create(long functionPointer) {
-        SVG_Lib_Free_FuncI instance = Callback.get(functionPointer);
-        return instance instanceof SVG_Lib_Free_Func
-            ? (SVG_Lib_Free_Func)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SVG_Lib_Free_Func create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SVG_Lib_Free_Func createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SVG_Lib_Free_Func createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SVG_Lib_Free_Func} instance that delegates to the specified {@code SVG_Lib_Free_FuncI} instance. */
-    public static SVG_Lib_Free_Func create(SVG_Lib_Free_FuncI instance) {
+    public static SVG_Lib_Free_Func create(SVG_Lib_Free_FuncI instance) { return create(instance, instance.address()); }
+
+    private static SVG_Lib_Free_Func create(SVG_Lib_Free_FuncI instance, long functionPointer) {
         return instance instanceof SVG_Lib_Free_Func
             ? (SVG_Lib_Free_Func)instance
-            : new Container(instance.address(), instance);
+            : new SVG_Lib_Free_Func(functionPointer) {
+                @Override public void invoke(long data_pointer) {
+                    instance.invoke(data_pointer);
+                }
+            };
     }
 
     protected SVG_Lib_Free_Func() {
@@ -44,22 +43,6 @@ public abstract class SVG_Lib_Free_Func extends Callback implements SVG_Lib_Free
 
     SVG_Lib_Free_Func(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SVG_Lib_Free_Func {
-
-        private final SVG_Lib_Free_FuncI delegate;
-
-        Container(long functionPointer, SVG_Lib_Free_FuncI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long data_pointer) {
-            delegate.invoke(data_pointer);
-        }
-
     }
 
 }

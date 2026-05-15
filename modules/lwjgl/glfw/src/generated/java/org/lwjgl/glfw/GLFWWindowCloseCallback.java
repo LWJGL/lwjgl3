@@ -21,23 +21,22 @@ public abstract class GLFWWindowCloseCallback extends Callback implements GLFWWi
      *
      * @return the new {@code GLFWWindowCloseCallback}
      */
-    public static GLFWWindowCloseCallback create(long functionPointer) {
-        GLFWWindowCloseCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLFWWindowCloseCallback
-            ? (GLFWWindowCloseCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLFWWindowCloseCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLFWWindowCloseCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLFWWindowCloseCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLFWWindowCloseCallback} instance that delegates to the specified {@code GLFWWindowCloseCallbackI} instance. */
-    public static GLFWWindowCloseCallback create(GLFWWindowCloseCallbackI instance) {
+    public static GLFWWindowCloseCallback create(GLFWWindowCloseCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLFWWindowCloseCallback create(GLFWWindowCloseCallbackI instance, long functionPointer) {
         return instance instanceof GLFWWindowCloseCallback
             ? (GLFWWindowCloseCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLFWWindowCloseCallback(functionPointer) {
+                @Override public void invoke(long window) {
+                    instance.invoke(window);
+                }
+            };
     }
 
     protected GLFWWindowCloseCallback() {
@@ -52,22 +51,6 @@ public abstract class GLFWWindowCloseCallback extends Callback implements GLFWWi
     public GLFWWindowCloseCallback set(long window) {
         glfwSetWindowCloseCallback(window, this);
         return this;
-    }
-
-    private static final class Container extends GLFWWindowCloseCallback {
-
-        private final GLFWWindowCloseCallbackI delegate;
-
-        Container(long functionPointer, GLFWWindowCloseCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long window) {
-            delegate.invoke(window);
-        }
-
     }
 
 }

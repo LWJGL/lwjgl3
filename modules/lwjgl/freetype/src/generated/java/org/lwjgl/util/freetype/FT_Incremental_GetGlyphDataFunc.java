@@ -19,23 +19,22 @@ public abstract class FT_Incremental_GetGlyphDataFunc extends Callback implement
      *
      * @return the new {@code FT_Incremental_GetGlyphDataFunc}
      */
-    public static FT_Incremental_GetGlyphDataFunc create(long functionPointer) {
-        FT_Incremental_GetGlyphDataFuncI instance = Callback.get(functionPointer);
-        return instance instanceof FT_Incremental_GetGlyphDataFunc
-            ? (FT_Incremental_GetGlyphDataFunc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FT_Incremental_GetGlyphDataFunc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FT_Incremental_GetGlyphDataFunc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FT_Incremental_GetGlyphDataFunc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FT_Incremental_GetGlyphDataFunc} instance that delegates to the specified {@code FT_Incremental_GetGlyphDataFuncI} instance. */
-    public static FT_Incremental_GetGlyphDataFunc create(FT_Incremental_GetGlyphDataFuncI instance) {
+    public static FT_Incremental_GetGlyphDataFunc create(FT_Incremental_GetGlyphDataFuncI instance) { return create(instance, instance.address()); }
+
+    private static FT_Incremental_GetGlyphDataFunc create(FT_Incremental_GetGlyphDataFuncI instance, long functionPointer) {
         return instance instanceof FT_Incremental_GetGlyphDataFunc
             ? (FT_Incremental_GetGlyphDataFunc)instance
-            : new Container(instance.address(), instance);
+            : new FT_Incremental_GetGlyphDataFunc(functionPointer) {
+                @Override public int invoke(long incremental, int glyph_index, long adata) {
+                    return instance.invoke(incremental, glyph_index, adata);
+                }
+            };
     }
 
     protected FT_Incremental_GetGlyphDataFunc() {
@@ -44,22 +43,6 @@ public abstract class FT_Incremental_GetGlyphDataFunc extends Callback implement
 
     FT_Incremental_GetGlyphDataFunc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FT_Incremental_GetGlyphDataFunc {
-
-        private final FT_Incremental_GetGlyphDataFuncI delegate;
-
-        Container(long functionPointer, FT_Incremental_GetGlyphDataFuncI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long incremental, int glyph_index, long adata) {
-            return delegate.invoke(incremental, glyph_index, adata);
-        }
-
     }
 
 }

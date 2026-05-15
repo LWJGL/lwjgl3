@@ -19,23 +19,22 @@ public abstract class SDL_LogOutputFunction extends Callback implements SDL_LogO
      *
      * @return the new {@code SDL_LogOutputFunction}
      */
-    public static SDL_LogOutputFunction create(long functionPointer) {
-        SDL_LogOutputFunctionI instance = Callback.get(functionPointer);
-        return instance instanceof SDL_LogOutputFunction
-            ? (SDL_LogOutputFunction)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SDL_LogOutputFunction create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SDL_LogOutputFunction createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SDL_LogOutputFunction createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SDL_LogOutputFunction} instance that delegates to the specified {@code SDL_LogOutputFunctionI} instance. */
-    public static SDL_LogOutputFunction create(SDL_LogOutputFunctionI instance) {
+    public static SDL_LogOutputFunction create(SDL_LogOutputFunctionI instance) { return create(instance, instance.address()); }
+
+    private static SDL_LogOutputFunction create(SDL_LogOutputFunctionI instance, long functionPointer) {
         return instance instanceof SDL_LogOutputFunction
             ? (SDL_LogOutputFunction)instance
-            : new Container(instance.address(), instance);
+            : new SDL_LogOutputFunction(functionPointer) {
+                @Override public void invoke(long userdata, int category, int priority, long message) {
+                    instance.invoke(userdata, category, priority, message);
+                }
+            };
     }
 
     protected SDL_LogOutputFunction() {
@@ -44,22 +43,6 @@ public abstract class SDL_LogOutputFunction extends Callback implements SDL_LogO
 
     SDL_LogOutputFunction(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SDL_LogOutputFunction {
-
-        private final SDL_LogOutputFunctionI delegate;
-
-        Container(long functionPointer, SDL_LogOutputFunctionI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long userdata, int category, int priority, long message) {
-            delegate.invoke(userdata, category, priority, message);
-        }
-
     }
 
 }

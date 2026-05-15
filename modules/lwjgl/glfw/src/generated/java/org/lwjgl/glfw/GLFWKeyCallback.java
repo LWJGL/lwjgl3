@@ -21,23 +21,22 @@ public abstract class GLFWKeyCallback extends Callback implements GLFWKeyCallbac
      *
      * @return the new {@code GLFWKeyCallback}
      */
-    public static GLFWKeyCallback create(long functionPointer) {
-        GLFWKeyCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLFWKeyCallback
-            ? (GLFWKeyCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLFWKeyCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLFWKeyCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLFWKeyCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLFWKeyCallback} instance that delegates to the specified {@code GLFWKeyCallbackI} instance. */
-    public static GLFWKeyCallback create(GLFWKeyCallbackI instance) {
+    public static GLFWKeyCallback create(GLFWKeyCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLFWKeyCallback create(GLFWKeyCallbackI instance, long functionPointer) {
         return instance instanceof GLFWKeyCallback
             ? (GLFWKeyCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLFWKeyCallback(functionPointer) {
+                @Override public void invoke(long window, int key, int scancode, int action, int mods) {
+                    instance.invoke(window, key, scancode, action, mods);
+                }
+            };
     }
 
     protected GLFWKeyCallback() {
@@ -52,22 +51,6 @@ public abstract class GLFWKeyCallback extends Callback implements GLFWKeyCallbac
     public GLFWKeyCallback set(long window) {
         glfwSetKeyCallback(window, this);
         return this;
-    }
-
-    private static final class Container extends GLFWKeyCallback {
-
-        private final GLFWKeyCallbackI delegate;
-
-        Container(long functionPointer, GLFWKeyCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long window, int key, int scancode, int action, int mods) {
-            delegate.invoke(window, key, scancode, action, mods);
-        }
-
     }
 
 }

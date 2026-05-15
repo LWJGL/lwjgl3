@@ -19,23 +19,22 @@ public abstract class OPSeekFunc extends Callback implements OPSeekFuncI {
      *
      * @return the new {@code OPSeekFunc}
      */
-    public static OPSeekFunc create(long functionPointer) {
-        OPSeekFuncI instance = Callback.get(functionPointer);
-        return instance instanceof OPSeekFunc
-            ? (OPSeekFunc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static OPSeekFunc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable OPSeekFunc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable OPSeekFunc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code OPSeekFunc} instance that delegates to the specified {@code OPSeekFuncI} instance. */
-    public static OPSeekFunc create(OPSeekFuncI instance) {
+    public static OPSeekFunc create(OPSeekFuncI instance) { return create(instance, instance.address()); }
+
+    private static OPSeekFunc create(OPSeekFuncI instance, long functionPointer) {
         return instance instanceof OPSeekFunc
             ? (OPSeekFunc)instance
-            : new Container(instance.address(), instance);
+            : new OPSeekFunc(functionPointer) {
+                @Override public int invoke(long _stream, long _offset, int _whence) {
+                    return instance.invoke(_stream, _offset, _whence);
+                }
+            };
     }
 
     protected OPSeekFunc() {
@@ -44,22 +43,6 @@ public abstract class OPSeekFunc extends Callback implements OPSeekFuncI {
 
     OPSeekFunc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends OPSeekFunc {
-
-        private final OPSeekFuncI delegate;
-
-        Container(long functionPointer, OPSeekFuncI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long _stream, long _offset, int _whence) {
-            return delegate.invoke(_stream, _offset, _whence);
-        }
-
     }
 
 }

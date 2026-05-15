@@ -19,23 +19,22 @@ public abstract class ParShapesRandFn extends Callback implements ParShapesRandF
      *
      * @return the new {@code ParShapesRandFn}
      */
-    public static ParShapesRandFn create(long functionPointer) {
-        ParShapesRandFnI instance = Callback.get(functionPointer);
-        return instance instanceof ParShapesRandFn
-            ? (ParShapesRandFn)instance
-            : new Container(functionPointer, instance);
-    }
+    public static ParShapesRandFn create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable ParShapesRandFn createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable ParShapesRandFn createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code ParShapesRandFn} instance that delegates to the specified {@code ParShapesRandFnI} instance. */
-    public static ParShapesRandFn create(ParShapesRandFnI instance) {
+    public static ParShapesRandFn create(ParShapesRandFnI instance) { return create(instance, instance.address()); }
+
+    private static ParShapesRandFn create(ParShapesRandFnI instance, long functionPointer) {
         return instance instanceof ParShapesRandFn
             ? (ParShapesRandFn)instance
-            : new Container(instance.address(), instance);
+            : new ParShapesRandFn(functionPointer) {
+                @Override public float invoke(long context) {
+                    return instance.invoke(context);
+                }
+            };
     }
 
     protected ParShapesRandFn() {
@@ -44,22 +43,6 @@ public abstract class ParShapesRandFn extends Callback implements ParShapesRandF
 
     ParShapesRandFn(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends ParShapesRandFn {
-
-        private final ParShapesRandFnI delegate;
-
-        Container(long functionPointer, ParShapesRandFnI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public float invoke(long context) {
-            return delegate.invoke(context);
-        }
-
     }
 
 }

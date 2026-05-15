@@ -19,23 +19,22 @@ public abstract class IndexerAbortQuery extends Callback implements IndexerAbort
      *
      * @return the new {@code IndexerAbortQuery}
      */
-    public static IndexerAbortQuery create(long functionPointer) {
-        IndexerAbortQueryI instance = Callback.get(functionPointer);
-        return instance instanceof IndexerAbortQuery
-            ? (IndexerAbortQuery)instance
-            : new Container(functionPointer, instance);
-    }
+    public static IndexerAbortQuery create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable IndexerAbortQuery createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable IndexerAbortQuery createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code IndexerAbortQuery} instance that delegates to the specified {@code IndexerAbortQueryI} instance. */
-    public static IndexerAbortQuery create(IndexerAbortQueryI instance) {
+    public static IndexerAbortQuery create(IndexerAbortQueryI instance) { return create(instance, instance.address()); }
+
+    private static IndexerAbortQuery create(IndexerAbortQueryI instance, long functionPointer) {
         return instance instanceof IndexerAbortQuery
             ? (IndexerAbortQuery)instance
-            : new Container(instance.address(), instance);
+            : new IndexerAbortQuery(functionPointer) {
+                @Override public int invoke(long client_data, long reserved) {
+                    return instance.invoke(client_data, reserved);
+                }
+            };
     }
 
     protected IndexerAbortQuery() {
@@ -44,22 +43,6 @@ public abstract class IndexerAbortQuery extends Callback implements IndexerAbort
 
     IndexerAbortQuery(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends IndexerAbortQuery {
-
-        private final IndexerAbortQueryI delegate;
-
-        Container(long functionPointer, IndexerAbortQueryI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long client_data, long reserved) {
-            return delegate.invoke(client_data, reserved);
-        }
-
     }
 
 }

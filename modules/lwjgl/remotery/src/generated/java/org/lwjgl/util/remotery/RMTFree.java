@@ -19,23 +19,22 @@ public abstract class RMTFree extends Callback implements RMTFreeI {
      *
      * @return the new {@code RMTFree}
      */
-    public static RMTFree create(long functionPointer) {
-        RMTFreeI instance = Callback.get(functionPointer);
-        return instance instanceof RMTFree
-            ? (RMTFree)instance
-            : new Container(functionPointer, instance);
-    }
+    public static RMTFree create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable RMTFree createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable RMTFree createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code RMTFree} instance that delegates to the specified {@code RMTFreeI} instance. */
-    public static RMTFree create(RMTFreeI instance) {
+    public static RMTFree create(RMTFreeI instance) { return create(instance, instance.address()); }
+
+    private static RMTFree create(RMTFreeI instance, long functionPointer) {
         return instance instanceof RMTFree
             ? (RMTFree)instance
-            : new Container(instance.address(), instance);
+            : new RMTFree(functionPointer) {
+                @Override public void invoke(long mm_context, long ptr) {
+                    instance.invoke(mm_context, ptr);
+                }
+            };
     }
 
     protected RMTFree() {
@@ -44,22 +43,6 @@ public abstract class RMTFree extends Callback implements RMTFreeI {
 
     RMTFree(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends RMTFree {
-
-        private final RMTFreeI delegate;
-
-        Container(long functionPointer, RMTFreeI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long mm_context, long ptr) {
-            delegate.invoke(mm_context, ptr);
-        }
-
     }
 
 }

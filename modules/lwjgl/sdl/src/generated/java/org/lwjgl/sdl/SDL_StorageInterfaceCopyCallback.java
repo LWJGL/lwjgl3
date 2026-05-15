@@ -19,23 +19,22 @@ public abstract class SDL_StorageInterfaceCopyCallback extends Callback implemen
      *
      * @return the new {@code SDL_StorageInterfaceCopyCallback}
      */
-    public static SDL_StorageInterfaceCopyCallback create(long functionPointer) {
-        SDL_StorageInterfaceCopyCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof SDL_StorageInterfaceCopyCallback
-            ? (SDL_StorageInterfaceCopyCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SDL_StorageInterfaceCopyCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SDL_StorageInterfaceCopyCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SDL_StorageInterfaceCopyCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SDL_StorageInterfaceCopyCallback} instance that delegates to the specified {@code SDL_StorageInterfaceCopyCallbackI} instance. */
-    public static SDL_StorageInterfaceCopyCallback create(SDL_StorageInterfaceCopyCallbackI instance) {
+    public static SDL_StorageInterfaceCopyCallback create(SDL_StorageInterfaceCopyCallbackI instance) { return create(instance, instance.address()); }
+
+    private static SDL_StorageInterfaceCopyCallback create(SDL_StorageInterfaceCopyCallbackI instance, long functionPointer) {
         return instance instanceof SDL_StorageInterfaceCopyCallback
             ? (SDL_StorageInterfaceCopyCallback)instance
-            : new Container(instance.address(), instance);
+            : new SDL_StorageInterfaceCopyCallback(functionPointer) {
+                @Override public boolean invoke(long userdata, long oldpath, long newpath) {
+                    return instance.invoke(userdata, oldpath, newpath);
+                }
+            };
     }
 
     protected SDL_StorageInterfaceCopyCallback() {
@@ -44,22 +43,6 @@ public abstract class SDL_StorageInterfaceCopyCallback extends Callback implemen
 
     SDL_StorageInterfaceCopyCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SDL_StorageInterfaceCopyCallback {
-
-        private final SDL_StorageInterfaceCopyCallbackI delegate;
-
-        Container(long functionPointer, SDL_StorageInterfaceCopyCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public boolean invoke(long userdata, long oldpath, long newpath) {
-            return delegate.invoke(userdata, oldpath, newpath);
-        }
-
     }
 
 }

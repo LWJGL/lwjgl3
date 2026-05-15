@@ -19,23 +19,22 @@ public abstract class EGLDebugMessageKHRCallback extends Callback implements EGL
      *
      * @return the new {@code EGLDebugMessageKHRCallback}
      */
-    public static EGLDebugMessageKHRCallback create(long functionPointer) {
-        EGLDebugMessageKHRCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof EGLDebugMessageKHRCallback
-            ? (EGLDebugMessageKHRCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static EGLDebugMessageKHRCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable EGLDebugMessageKHRCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable EGLDebugMessageKHRCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code EGLDebugMessageKHRCallback} instance that delegates to the specified {@code EGLDebugMessageKHRCallbackI} instance. */
-    public static EGLDebugMessageKHRCallback create(EGLDebugMessageKHRCallbackI instance) {
+    public static EGLDebugMessageKHRCallback create(EGLDebugMessageKHRCallbackI instance) { return create(instance, instance.address()); }
+
+    private static EGLDebugMessageKHRCallback create(EGLDebugMessageKHRCallbackI instance, long functionPointer) {
         return instance instanceof EGLDebugMessageKHRCallback
             ? (EGLDebugMessageKHRCallback)instance
-            : new Container(instance.address(), instance);
+            : new EGLDebugMessageKHRCallback(functionPointer) {
+                @Override public void invoke(int error, long command, int messageType, long threadLabel, long objectLabel, long message) {
+                    instance.invoke(error, command, messageType, threadLabel, objectLabel, message);
+                }
+            };
     }
 
     protected EGLDebugMessageKHRCallback() {
@@ -70,22 +69,6 @@ public abstract class EGLDebugMessageKHRCallback extends Callback implements EGL
      */
     public static String getMessage(long message) {
         return memUTF8(message);
-    }
-
-    private static final class Container extends EGLDebugMessageKHRCallback {
-
-        private final EGLDebugMessageKHRCallbackI delegate;
-
-        Container(long functionPointer, EGLDebugMessageKHRCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(int error, long command, int messageType, long threadLabel, long objectLabel, long message) {
-            delegate.invoke(error, command, messageType, threadLabel, objectLabel, message);
-        }
-
     }
 
 }

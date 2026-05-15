@@ -19,23 +19,22 @@ public abstract class AIFileWriteProc extends Callback implements AIFileWritePro
      *
      * @return the new {@code AIFileWriteProc}
      */
-    public static AIFileWriteProc create(long functionPointer) {
-        AIFileWriteProcI instance = Callback.get(functionPointer);
-        return instance instanceof AIFileWriteProc
-            ? (AIFileWriteProc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static AIFileWriteProc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable AIFileWriteProc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable AIFileWriteProc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code AIFileWriteProc} instance that delegates to the specified {@code AIFileWriteProcI} instance. */
-    public static AIFileWriteProc create(AIFileWriteProcI instance) {
+    public static AIFileWriteProc create(AIFileWriteProcI instance) { return create(instance, instance.address()); }
+
+    private static AIFileWriteProc create(AIFileWriteProcI instance, long functionPointer) {
         return instance instanceof AIFileWriteProc
             ? (AIFileWriteProc)instance
-            : new Container(instance.address(), instance);
+            : new AIFileWriteProc(functionPointer) {
+                @Override public long invoke(long pFile, long pBuffer, long memB, long count) {
+                    return instance.invoke(pFile, pBuffer, memB, count);
+                }
+            };
     }
 
     protected AIFileWriteProc() {
@@ -44,22 +43,6 @@ public abstract class AIFileWriteProc extends Callback implements AIFileWritePro
 
     AIFileWriteProc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends AIFileWriteProc {
-
-        private final AIFileWriteProcI delegate;
-
-        Container(long functionPointer, AIFileWriteProcI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long pFile, long pBuffer, long memB, long count) {
-            return delegate.invoke(pFile, pBuffer, memB, count);
-        }
-
     }
 
 }

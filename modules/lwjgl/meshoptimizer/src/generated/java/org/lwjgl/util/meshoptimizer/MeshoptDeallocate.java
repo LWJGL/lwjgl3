@@ -19,23 +19,22 @@ public abstract class MeshoptDeallocate extends Callback implements MeshoptDeall
      *
      * @return the new {@code MeshoptDeallocate}
      */
-    public static MeshoptDeallocate create(long functionPointer) {
-        MeshoptDeallocateI instance = Callback.get(functionPointer);
-        return instance instanceof MeshoptDeallocate
-            ? (MeshoptDeallocate)instance
-            : new Container(functionPointer, instance);
-    }
+    public static MeshoptDeallocate create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable MeshoptDeallocate createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable MeshoptDeallocate createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code MeshoptDeallocate} instance that delegates to the specified {@code MeshoptDeallocateI} instance. */
-    public static MeshoptDeallocate create(MeshoptDeallocateI instance) {
+    public static MeshoptDeallocate create(MeshoptDeallocateI instance) { return create(instance, instance.address()); }
+
+    private static MeshoptDeallocate create(MeshoptDeallocateI instance, long functionPointer) {
         return instance instanceof MeshoptDeallocate
             ? (MeshoptDeallocate)instance
-            : new Container(instance.address(), instance);
+            : new MeshoptDeallocate(functionPointer) {
+                @Override public void invoke(long ptr) {
+                    instance.invoke(ptr);
+                }
+            };
     }
 
     protected MeshoptDeallocate() {
@@ -44,22 +43,6 @@ public abstract class MeshoptDeallocate extends Callback implements MeshoptDeall
 
     MeshoptDeallocate(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends MeshoptDeallocate {
-
-        private final MeshoptDeallocateI delegate;
-
-        Container(long functionPointer, MeshoptDeallocateI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long ptr) {
-            delegate.invoke(ptr);
-        }
-
     }
 
 }

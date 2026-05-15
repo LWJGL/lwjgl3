@@ -19,23 +19,22 @@ public abstract class FMOD_DSP_SETPARAM_INT_CALLBACK extends Callback implements
      *
      * @return the new {@code FMOD_DSP_SETPARAM_INT_CALLBACK}
      */
-    public static FMOD_DSP_SETPARAM_INT_CALLBACK create(long functionPointer) {
-        FMOD_DSP_SETPARAM_INT_CALLBACKI instance = Callback.get(functionPointer);
-        return instance instanceof FMOD_DSP_SETPARAM_INT_CALLBACK
-            ? (FMOD_DSP_SETPARAM_INT_CALLBACK)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FMOD_DSP_SETPARAM_INT_CALLBACK create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FMOD_DSP_SETPARAM_INT_CALLBACK createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FMOD_DSP_SETPARAM_INT_CALLBACK createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FMOD_DSP_SETPARAM_INT_CALLBACK} instance that delegates to the specified {@code FMOD_DSP_SETPARAM_INT_CALLBACKI} instance. */
-    public static FMOD_DSP_SETPARAM_INT_CALLBACK create(FMOD_DSP_SETPARAM_INT_CALLBACKI instance) {
+    public static FMOD_DSP_SETPARAM_INT_CALLBACK create(FMOD_DSP_SETPARAM_INT_CALLBACKI instance) { return create(instance, instance.address()); }
+
+    private static FMOD_DSP_SETPARAM_INT_CALLBACK create(FMOD_DSP_SETPARAM_INT_CALLBACKI instance, long functionPointer) {
         return instance instanceof FMOD_DSP_SETPARAM_INT_CALLBACK
             ? (FMOD_DSP_SETPARAM_INT_CALLBACK)instance
-            : new Container(instance.address(), instance);
+            : new FMOD_DSP_SETPARAM_INT_CALLBACK(functionPointer) {
+                @Override public int invoke(long dsp_state, int index, int value) {
+                    return instance.invoke(dsp_state, index, value);
+                }
+            };
     }
 
     protected FMOD_DSP_SETPARAM_INT_CALLBACK() {
@@ -44,22 +43,6 @@ public abstract class FMOD_DSP_SETPARAM_INT_CALLBACK extends Callback implements
 
     FMOD_DSP_SETPARAM_INT_CALLBACK(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FMOD_DSP_SETPARAM_INT_CALLBACK {
-
-        private final FMOD_DSP_SETPARAM_INT_CALLBACKI delegate;
-
-        Container(long functionPointer, FMOD_DSP_SETPARAM_INT_CALLBACKI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long dsp_state, int index, int value) {
-            return delegate.invoke(dsp_state, index, value);
-        }
-
     }
 
 }

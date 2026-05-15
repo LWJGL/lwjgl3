@@ -19,23 +19,22 @@ public abstract class FT_Outline_MoveToFunc extends Callback implements FT_Outli
      *
      * @return the new {@code FT_Outline_MoveToFunc}
      */
-    public static FT_Outline_MoveToFunc create(long functionPointer) {
-        FT_Outline_MoveToFuncI instance = Callback.get(functionPointer);
-        return instance instanceof FT_Outline_MoveToFunc
-            ? (FT_Outline_MoveToFunc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FT_Outline_MoveToFunc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FT_Outline_MoveToFunc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FT_Outline_MoveToFunc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FT_Outline_MoveToFunc} instance that delegates to the specified {@code FT_Outline_MoveToFuncI} instance. */
-    public static FT_Outline_MoveToFunc create(FT_Outline_MoveToFuncI instance) {
+    public static FT_Outline_MoveToFunc create(FT_Outline_MoveToFuncI instance) { return create(instance, instance.address()); }
+
+    private static FT_Outline_MoveToFunc create(FT_Outline_MoveToFuncI instance, long functionPointer) {
         return instance instanceof FT_Outline_MoveToFunc
             ? (FT_Outline_MoveToFunc)instance
-            : new Container(instance.address(), instance);
+            : new FT_Outline_MoveToFunc(functionPointer) {
+                @Override public int invoke(long to, long user) {
+                    return instance.invoke(to, user);
+                }
+            };
     }
 
     protected FT_Outline_MoveToFunc() {
@@ -44,22 +43,6 @@ public abstract class FT_Outline_MoveToFunc extends Callback implements FT_Outli
 
     FT_Outline_MoveToFunc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FT_Outline_MoveToFunc {
-
-        private final FT_Outline_MoveToFuncI delegate;
-
-        Container(long functionPointer, FT_Outline_MoveToFuncI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long to, long user) {
-            return delegate.invoke(to, user);
-        }
-
     }
 
 }

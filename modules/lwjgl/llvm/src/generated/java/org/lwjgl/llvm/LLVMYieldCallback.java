@@ -19,23 +19,22 @@ public abstract class LLVMYieldCallback extends Callback implements LLVMYieldCal
      *
      * @return the new {@code LLVMYieldCallback}
      */
-    public static LLVMYieldCallback create(long functionPointer) {
-        LLVMYieldCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof LLVMYieldCallback
-            ? (LLVMYieldCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static LLVMYieldCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable LLVMYieldCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable LLVMYieldCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code LLVMYieldCallback} instance that delegates to the specified {@code LLVMYieldCallbackI} instance. */
-    public static LLVMYieldCallback create(LLVMYieldCallbackI instance) {
+    public static LLVMYieldCallback create(LLVMYieldCallbackI instance) { return create(instance, instance.address()); }
+
+    private static LLVMYieldCallback create(LLVMYieldCallbackI instance, long functionPointer) {
         return instance instanceof LLVMYieldCallback
             ? (LLVMYieldCallback)instance
-            : new Container(instance.address(), instance);
+            : new LLVMYieldCallback(functionPointer) {
+                @Override public void invoke(long Context, long OpaqueHandle) {
+                    instance.invoke(Context, OpaqueHandle);
+                }
+            };
     }
 
     protected LLVMYieldCallback() {
@@ -44,22 +43,6 @@ public abstract class LLVMYieldCallback extends Callback implements LLVMYieldCal
 
     LLVMYieldCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends LLVMYieldCallback {
-
-        private final LLVMYieldCallbackI delegate;
-
-        Container(long functionPointer, LLVMYieldCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long Context, long OpaqueHandle) {
-            delegate.invoke(Context, OpaqueHandle);
-        }
-
     }
 
 }

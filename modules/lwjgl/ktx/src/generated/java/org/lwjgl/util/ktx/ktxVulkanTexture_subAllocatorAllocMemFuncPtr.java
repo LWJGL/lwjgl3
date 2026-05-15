@@ -19,23 +19,22 @@ public abstract class ktxVulkanTexture_subAllocatorAllocMemFuncPtr extends Callb
      *
      * @return the new {@code ktxVulkanTexture_subAllocatorAllocMemFuncPtr}
      */
-    public static ktxVulkanTexture_subAllocatorAllocMemFuncPtr create(long functionPointer) {
-        ktxVulkanTexture_subAllocatorAllocMemFuncPtrI instance = Callback.get(functionPointer);
-        return instance instanceof ktxVulkanTexture_subAllocatorAllocMemFuncPtr
-            ? (ktxVulkanTexture_subAllocatorAllocMemFuncPtr)instance
-            : new Container(functionPointer, instance);
-    }
+    public static ktxVulkanTexture_subAllocatorAllocMemFuncPtr create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable ktxVulkanTexture_subAllocatorAllocMemFuncPtr createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable ktxVulkanTexture_subAllocatorAllocMemFuncPtr createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code ktxVulkanTexture_subAllocatorAllocMemFuncPtr} instance that delegates to the specified {@code ktxVulkanTexture_subAllocatorAllocMemFuncPtrI} instance. */
-    public static ktxVulkanTexture_subAllocatorAllocMemFuncPtr create(ktxVulkanTexture_subAllocatorAllocMemFuncPtrI instance) {
+    public static ktxVulkanTexture_subAllocatorAllocMemFuncPtr create(ktxVulkanTexture_subAllocatorAllocMemFuncPtrI instance) { return create(instance, instance.address()); }
+
+    private static ktxVulkanTexture_subAllocatorAllocMemFuncPtr create(ktxVulkanTexture_subAllocatorAllocMemFuncPtrI instance, long functionPointer) {
         return instance instanceof ktxVulkanTexture_subAllocatorAllocMemFuncPtr
             ? (ktxVulkanTexture_subAllocatorAllocMemFuncPtr)instance
-            : new Container(instance.address(), instance);
+            : new ktxVulkanTexture_subAllocatorAllocMemFuncPtr(functionPointer) {
+                @Override public long invoke(long allocInfo, long memReq, long pageCount) {
+                    return instance.invoke(allocInfo, memReq, pageCount);
+                }
+            };
     }
 
     protected ktxVulkanTexture_subAllocatorAllocMemFuncPtr() {
@@ -44,22 +43,6 @@ public abstract class ktxVulkanTexture_subAllocatorAllocMemFuncPtr extends Callb
 
     ktxVulkanTexture_subAllocatorAllocMemFuncPtr(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends ktxVulkanTexture_subAllocatorAllocMemFuncPtr {
-
-        private final ktxVulkanTexture_subAllocatorAllocMemFuncPtrI delegate;
-
-        Container(long functionPointer, ktxVulkanTexture_subAllocatorAllocMemFuncPtrI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long allocInfo, long memReq, long pageCount) {
-            return delegate.invoke(allocInfo, memReq, pageCount);
-        }
-
     }
 
 }

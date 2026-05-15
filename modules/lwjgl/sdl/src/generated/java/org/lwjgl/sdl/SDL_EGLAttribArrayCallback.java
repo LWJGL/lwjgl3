@@ -19,23 +19,22 @@ public abstract class SDL_EGLAttribArrayCallback extends Callback implements SDL
      *
      * @return the new {@code SDL_EGLAttribArrayCallback}
      */
-    public static SDL_EGLAttribArrayCallback create(long functionPointer) {
-        SDL_EGLAttribArrayCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof SDL_EGLAttribArrayCallback
-            ? (SDL_EGLAttribArrayCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SDL_EGLAttribArrayCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SDL_EGLAttribArrayCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SDL_EGLAttribArrayCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SDL_EGLAttribArrayCallback} instance that delegates to the specified {@code SDL_EGLAttribArrayCallbackI} instance. */
-    public static SDL_EGLAttribArrayCallback create(SDL_EGLAttribArrayCallbackI instance) {
+    public static SDL_EGLAttribArrayCallback create(SDL_EGLAttribArrayCallbackI instance) { return create(instance, instance.address()); }
+
+    private static SDL_EGLAttribArrayCallback create(SDL_EGLAttribArrayCallbackI instance, long functionPointer) {
         return instance instanceof SDL_EGLAttribArrayCallback
             ? (SDL_EGLAttribArrayCallback)instance
-            : new Container(instance.address(), instance);
+            : new SDL_EGLAttribArrayCallback(functionPointer) {
+                @Override public long invoke(long userdata) {
+                    return instance.invoke(userdata);
+                }
+            };
     }
 
     protected SDL_EGLAttribArrayCallback() {
@@ -44,22 +43,6 @@ public abstract class SDL_EGLAttribArrayCallback extends Callback implements SDL
 
     SDL_EGLAttribArrayCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SDL_EGLAttribArrayCallback {
-
-        private final SDL_EGLAttribArrayCallbackI delegate;
-
-        Container(long functionPointer, SDL_EGLAttribArrayCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long userdata) {
-            return delegate.invoke(userdata);
-        }
-
     }
 
 }

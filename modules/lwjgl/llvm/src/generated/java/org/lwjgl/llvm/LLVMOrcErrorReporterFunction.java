@@ -19,23 +19,22 @@ public abstract class LLVMOrcErrorReporterFunction extends Callback implements L
      *
      * @return the new {@code LLVMOrcErrorReporterFunction}
      */
-    public static LLVMOrcErrorReporterFunction create(long functionPointer) {
-        LLVMOrcErrorReporterFunctionI instance = Callback.get(functionPointer);
-        return instance instanceof LLVMOrcErrorReporterFunction
-            ? (LLVMOrcErrorReporterFunction)instance
-            : new Container(functionPointer, instance);
-    }
+    public static LLVMOrcErrorReporterFunction create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable LLVMOrcErrorReporterFunction createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable LLVMOrcErrorReporterFunction createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code LLVMOrcErrorReporterFunction} instance that delegates to the specified {@code LLVMOrcErrorReporterFunctionI} instance. */
-    public static LLVMOrcErrorReporterFunction create(LLVMOrcErrorReporterFunctionI instance) {
+    public static LLVMOrcErrorReporterFunction create(LLVMOrcErrorReporterFunctionI instance) { return create(instance, instance.address()); }
+
+    private static LLVMOrcErrorReporterFunction create(LLVMOrcErrorReporterFunctionI instance, long functionPointer) {
         return instance instanceof LLVMOrcErrorReporterFunction
             ? (LLVMOrcErrorReporterFunction)instance
-            : new Container(instance.address(), instance);
+            : new LLVMOrcErrorReporterFunction(functionPointer) {
+                @Override public void invoke(long Ctx, long Err) {
+                    instance.invoke(Ctx, Err);
+                }
+            };
     }
 
     protected LLVMOrcErrorReporterFunction() {
@@ -44,22 +43,6 @@ public abstract class LLVMOrcErrorReporterFunction extends Callback implements L
 
     LLVMOrcErrorReporterFunction(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends LLVMOrcErrorReporterFunction {
-
-        private final LLVMOrcErrorReporterFunctionI delegate;
-
-        Container(long functionPointer, LLVMOrcErrorReporterFunctionI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long Ctx, long Err) {
-            delegate.invoke(Ctx, Err);
-        }
-
     }
 
 }

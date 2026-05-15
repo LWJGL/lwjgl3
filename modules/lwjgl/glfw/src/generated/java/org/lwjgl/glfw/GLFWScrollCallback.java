@@ -21,23 +21,22 @@ public abstract class GLFWScrollCallback extends Callback implements GLFWScrollC
      *
      * @return the new {@code GLFWScrollCallback}
      */
-    public static GLFWScrollCallback create(long functionPointer) {
-        GLFWScrollCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLFWScrollCallback
-            ? (GLFWScrollCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLFWScrollCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLFWScrollCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLFWScrollCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLFWScrollCallback} instance that delegates to the specified {@code GLFWScrollCallbackI} instance. */
-    public static GLFWScrollCallback create(GLFWScrollCallbackI instance) {
+    public static GLFWScrollCallback create(GLFWScrollCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLFWScrollCallback create(GLFWScrollCallbackI instance, long functionPointer) {
         return instance instanceof GLFWScrollCallback
             ? (GLFWScrollCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLFWScrollCallback(functionPointer) {
+                @Override public void invoke(long window, double xoffset, double yoffset) {
+                    instance.invoke(window, xoffset, yoffset);
+                }
+            };
     }
 
     protected GLFWScrollCallback() {
@@ -52,22 +51,6 @@ public abstract class GLFWScrollCallback extends Callback implements GLFWScrollC
     public GLFWScrollCallback set(long window) {
         glfwSetScrollCallback(window, this);
         return this;
-    }
-
-    private static final class Container extends GLFWScrollCallback {
-
-        private final GLFWScrollCallbackI delegate;
-
-        Container(long functionPointer, GLFWScrollCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long window, double xoffset, double yoffset) {
-            delegate.invoke(window, xoffset, yoffset);
-        }
-
     }
 
 }

@@ -19,23 +19,22 @@ public abstract class ExtentAlloc extends Callback implements ExtentAllocI {
      *
      * @return the new {@code ExtentAlloc}
      */
-    public static ExtentAlloc create(long functionPointer) {
-        ExtentAllocI instance = Callback.get(functionPointer);
-        return instance instanceof ExtentAlloc
-            ? (ExtentAlloc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static ExtentAlloc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable ExtentAlloc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable ExtentAlloc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code ExtentAlloc} instance that delegates to the specified {@code ExtentAllocI} instance. */
-    public static ExtentAlloc create(ExtentAllocI instance) {
+    public static ExtentAlloc create(ExtentAllocI instance) { return create(instance, instance.address()); }
+
+    private static ExtentAlloc create(ExtentAllocI instance, long functionPointer) {
         return instance instanceof ExtentAlloc
             ? (ExtentAlloc)instance
-            : new Container(instance.address(), instance);
+            : new ExtentAlloc(functionPointer) {
+                @Override public long invoke(long extent_hooks, long new_addr, long size, long alignment, long zero, long commit, int arena_ind) {
+                    return instance.invoke(extent_hooks, new_addr, size, alignment, zero, commit, arena_ind);
+                }
+            };
     }
 
     protected ExtentAlloc() {
@@ -44,22 +43,6 @@ public abstract class ExtentAlloc extends Callback implements ExtentAllocI {
 
     ExtentAlloc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends ExtentAlloc {
-
-        private final ExtentAllocI delegate;
-
-        Container(long functionPointer, ExtentAllocI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long extent_hooks, long new_addr, long size, long alignment, long zero, long commit, int arena_ind) {
-            return delegate.invoke(extent_hooks, new_addr, size, alignment, zero, commit, arena_ind);
-        }
-
     }
 
 }

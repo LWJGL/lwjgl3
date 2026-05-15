@@ -19,23 +19,22 @@ public abstract class PFNKTXITERCB extends Callback implements PFNKTXITERCBI {
      *
      * @return the new {@code PFNKTXITERCB}
      */
-    public static PFNKTXITERCB create(long functionPointer) {
-        PFNKTXITERCBI instance = Callback.get(functionPointer);
-        return instance instanceof PFNKTXITERCB
-            ? (PFNKTXITERCB)instance
-            : new Container(functionPointer, instance);
-    }
+    public static PFNKTXITERCB create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable PFNKTXITERCB createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable PFNKTXITERCB createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code PFNKTXITERCB} instance that delegates to the specified {@code PFNKTXITERCBI} instance. */
-    public static PFNKTXITERCB create(PFNKTXITERCBI instance) {
+    public static PFNKTXITERCB create(PFNKTXITERCBI instance) { return create(instance, instance.address()); }
+
+    private static PFNKTXITERCB create(PFNKTXITERCBI instance, long functionPointer) {
         return instance instanceof PFNKTXITERCB
             ? (PFNKTXITERCB)instance
-            : new Container(instance.address(), instance);
+            : new PFNKTXITERCB(functionPointer) {
+                @Override public int invoke(int miplevel, int face, int width, int height, int depth, long faceLodSize, long pixels, long userdata) {
+                    return instance.invoke(miplevel, face, width, height, depth, faceLodSize, pixels, userdata);
+                }
+            };
     }
 
     protected PFNKTXITERCB() {
@@ -44,22 +43,6 @@ public abstract class PFNKTXITERCB extends Callback implements PFNKTXITERCBI {
 
     PFNKTXITERCB(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends PFNKTXITERCB {
-
-        private final PFNKTXITERCBI delegate;
-
-        Container(long functionPointer, PFNKTXITERCBI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(int miplevel, int face, int width, int height, int depth, long faceLodSize, long pixels, long userdata) {
-            return delegate.invoke(miplevel, face, width, height, depth, faceLodSize, pixels, userdata);
-        }
-
     }
 
 }

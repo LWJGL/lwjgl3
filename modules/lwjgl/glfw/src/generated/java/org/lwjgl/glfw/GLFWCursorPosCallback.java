@@ -21,23 +21,22 @@ public abstract class GLFWCursorPosCallback extends Callback implements GLFWCurs
      *
      * @return the new {@code GLFWCursorPosCallback}
      */
-    public static GLFWCursorPosCallback create(long functionPointer) {
-        GLFWCursorPosCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLFWCursorPosCallback
-            ? (GLFWCursorPosCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLFWCursorPosCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLFWCursorPosCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLFWCursorPosCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLFWCursorPosCallback} instance that delegates to the specified {@code GLFWCursorPosCallbackI} instance. */
-    public static GLFWCursorPosCallback create(GLFWCursorPosCallbackI instance) {
+    public static GLFWCursorPosCallback create(GLFWCursorPosCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLFWCursorPosCallback create(GLFWCursorPosCallbackI instance, long functionPointer) {
         return instance instanceof GLFWCursorPosCallback
             ? (GLFWCursorPosCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLFWCursorPosCallback(functionPointer) {
+                @Override public void invoke(long window, double xpos, double ypos) {
+                    instance.invoke(window, xpos, ypos);
+                }
+            };
     }
 
     protected GLFWCursorPosCallback() {
@@ -52,22 +51,6 @@ public abstract class GLFWCursorPosCallback extends Callback implements GLFWCurs
     public GLFWCursorPosCallback set(long window) {
         glfwSetCursorPosCallback(window, this);
         return this;
-    }
-
-    private static final class Container extends GLFWCursorPosCallback {
-
-        private final GLFWCursorPosCallbackI delegate;
-
-        Container(long functionPointer, GLFWCursorPosCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long window, double xpos, double ypos) {
-            delegate.invoke(window, xpos, ypos);
-        }
-
     }
 
 }

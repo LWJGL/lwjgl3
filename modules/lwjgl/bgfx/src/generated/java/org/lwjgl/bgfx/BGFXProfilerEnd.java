@@ -19,23 +19,22 @@ public abstract class BGFXProfilerEnd extends Callback implements BGFXProfilerEn
      *
      * @return the new {@code BGFXProfilerEnd}
      */
-    public static BGFXProfilerEnd create(long functionPointer) {
-        BGFXProfilerEndI instance = Callback.get(functionPointer);
-        return instance instanceof BGFXProfilerEnd
-            ? (BGFXProfilerEnd)instance
-            : new Container(functionPointer, instance);
-    }
+    public static BGFXProfilerEnd create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable BGFXProfilerEnd createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable BGFXProfilerEnd createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code BGFXProfilerEnd} instance that delegates to the specified {@code BGFXProfilerEndI} instance. */
-    public static BGFXProfilerEnd create(BGFXProfilerEndI instance) {
+    public static BGFXProfilerEnd create(BGFXProfilerEndI instance) { return create(instance, instance.address()); }
+
+    private static BGFXProfilerEnd create(BGFXProfilerEndI instance, long functionPointer) {
         return instance instanceof BGFXProfilerEnd
             ? (BGFXProfilerEnd)instance
-            : new Container(instance.address(), instance);
+            : new BGFXProfilerEnd(functionPointer) {
+                @Override public void invoke(long _this) {
+                    instance.invoke(_this);
+                }
+            };
     }
 
     protected BGFXProfilerEnd() {
@@ -44,22 +43,6 @@ public abstract class BGFXProfilerEnd extends Callback implements BGFXProfilerEn
 
     BGFXProfilerEnd(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends BGFXProfilerEnd {
-
-        private final BGFXProfilerEndI delegate;
-
-        Container(long functionPointer, BGFXProfilerEndI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long _this) {
-            delegate.invoke(_this);
-        }
-
     }
 
 }

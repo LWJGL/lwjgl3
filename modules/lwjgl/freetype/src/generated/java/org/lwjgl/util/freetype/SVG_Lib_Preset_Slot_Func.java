@@ -19,23 +19,22 @@ public abstract class SVG_Lib_Preset_Slot_Func extends Callback implements SVG_L
      *
      * @return the new {@code SVG_Lib_Preset_Slot_Func}
      */
-    public static SVG_Lib_Preset_Slot_Func create(long functionPointer) {
-        SVG_Lib_Preset_Slot_FuncI instance = Callback.get(functionPointer);
-        return instance instanceof SVG_Lib_Preset_Slot_Func
-            ? (SVG_Lib_Preset_Slot_Func)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SVG_Lib_Preset_Slot_Func create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SVG_Lib_Preset_Slot_Func createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SVG_Lib_Preset_Slot_Func createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SVG_Lib_Preset_Slot_Func} instance that delegates to the specified {@code SVG_Lib_Preset_Slot_FuncI} instance. */
-    public static SVG_Lib_Preset_Slot_Func create(SVG_Lib_Preset_Slot_FuncI instance) {
+    public static SVG_Lib_Preset_Slot_Func create(SVG_Lib_Preset_Slot_FuncI instance) { return create(instance, instance.address()); }
+
+    private static SVG_Lib_Preset_Slot_Func create(SVG_Lib_Preset_Slot_FuncI instance, long functionPointer) {
         return instance instanceof SVG_Lib_Preset_Slot_Func
             ? (SVG_Lib_Preset_Slot_Func)instance
-            : new Container(instance.address(), instance);
+            : new SVG_Lib_Preset_Slot_Func(functionPointer) {
+                @Override public int invoke(long slot, boolean cache, long state) {
+                    return instance.invoke(slot, cache, state);
+                }
+            };
     }
 
     protected SVG_Lib_Preset_Slot_Func() {
@@ -44,22 +43,6 @@ public abstract class SVG_Lib_Preset_Slot_Func extends Callback implements SVG_L
 
     SVG_Lib_Preset_Slot_Func(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SVG_Lib_Preset_Slot_Func {
-
-        private final SVG_Lib_Preset_Slot_FuncI delegate;
-
-        Container(long functionPointer, SVG_Lib_Preset_Slot_FuncI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long slot, boolean cache, long state) {
-            return delegate.invoke(slot, cache, state);
-        }
-
     }
 
 }

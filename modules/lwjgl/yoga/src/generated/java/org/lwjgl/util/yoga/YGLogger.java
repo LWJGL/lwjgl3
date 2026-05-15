@@ -19,23 +19,22 @@ public abstract class YGLogger extends Callback implements YGLoggerI {
      *
      * @return the new {@code YGLogger}
      */
-    public static YGLogger create(long functionPointer) {
-        YGLoggerI instance = Callback.get(functionPointer);
-        return instance instanceof YGLogger
-            ? (YGLogger)instance
-            : new Container(functionPointer, instance);
-    }
+    public static YGLogger create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable YGLogger createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable YGLogger createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code YGLogger} instance that delegates to the specified {@code YGLoggerI} instance. */
-    public static YGLogger create(YGLoggerI instance) {
+    public static YGLogger create(YGLoggerI instance) { return create(instance, instance.address()); }
+
+    private static YGLogger create(YGLoggerI instance, long functionPointer) {
         return instance instanceof YGLogger
             ? (YGLogger)instance
-            : new Container(instance.address(), instance);
+            : new YGLogger(functionPointer) {
+                @Override public int invoke(long config, long node, int level, long format, long args) {
+                    return instance.invoke(config, node, level, format, args);
+                }
+            };
     }
 
     protected YGLogger() {
@@ -44,22 +43,6 @@ public abstract class YGLogger extends Callback implements YGLoggerI {
 
     YGLogger(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends YGLogger {
-
-        private final YGLoggerI delegate;
-
-        Container(long functionPointer, YGLoggerI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long config, long node, int level, long format, long args) {
-            return delegate.invoke(config, node, level, format, args);
-        }
-
     }
 
 }

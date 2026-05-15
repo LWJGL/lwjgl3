@@ -19,23 +19,22 @@ public abstract class MSDFGenFTLoadCallback extends Callback implements MSDFGenF
      *
      * @return the new {@code MSDFGenFTLoadCallback}
      */
-    public static MSDFGenFTLoadCallback create(long functionPointer) {
-        MSDFGenFTLoadCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof MSDFGenFTLoadCallback
-            ? (MSDFGenFTLoadCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static MSDFGenFTLoadCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable MSDFGenFTLoadCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable MSDFGenFTLoadCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code MSDFGenFTLoadCallback} instance that delegates to the specified {@code MSDFGenFTLoadCallbackI} instance. */
-    public static MSDFGenFTLoadCallback create(MSDFGenFTLoadCallbackI instance) {
+    public static MSDFGenFTLoadCallback create(MSDFGenFTLoadCallbackI instance) { return create(instance, instance.address()); }
+
+    private static MSDFGenFTLoadCallback create(MSDFGenFTLoadCallbackI instance, long functionPointer) {
         return instance instanceof MSDFGenFTLoadCallback
             ? (MSDFGenFTLoadCallback)instance
-            : new Container(instance.address(), instance);
+            : new MSDFGenFTLoadCallback(functionPointer) {
+                @Override public long invoke(long name) {
+                    return instance.invoke(name);
+                }
+            };
     }
 
     protected MSDFGenFTLoadCallback() {
@@ -44,22 +43,6 @@ public abstract class MSDFGenFTLoadCallback extends Callback implements MSDFGenF
 
     MSDFGenFTLoadCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends MSDFGenFTLoadCallback {
-
-        private final MSDFGenFTLoadCallbackI delegate;
-
-        Container(long functionPointer, MSDFGenFTLoadCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long name) {
-            return delegate.invoke(name);
-        }
-
     }
 
 }

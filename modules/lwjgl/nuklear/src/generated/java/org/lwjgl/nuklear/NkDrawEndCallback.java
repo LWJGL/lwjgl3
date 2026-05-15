@@ -19,23 +19,22 @@ public abstract class NkDrawEndCallback extends Callback implements NkDrawEndCal
      *
      * @return the new {@code NkDrawEndCallback}
      */
-    public static NkDrawEndCallback create(long functionPointer) {
-        NkDrawEndCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof NkDrawEndCallback
-            ? (NkDrawEndCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static NkDrawEndCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable NkDrawEndCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable NkDrawEndCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code NkDrawEndCallback} instance that delegates to the specified {@code NkDrawEndCallbackI} instance. */
-    public static NkDrawEndCallback create(NkDrawEndCallbackI instance) {
+    public static NkDrawEndCallback create(NkDrawEndCallbackI instance) { return create(instance, instance.address()); }
+
+    private static NkDrawEndCallback create(NkDrawEndCallbackI instance, long functionPointer) {
         return instance instanceof NkDrawEndCallback
             ? (NkDrawEndCallback)instance
-            : new Container(instance.address(), instance);
+            : new NkDrawEndCallback(functionPointer) {
+                @Override public float invoke(long buffer, long userdata) {
+                    return instance.invoke(buffer, userdata);
+                }
+            };
     }
 
     protected NkDrawEndCallback() {
@@ -44,22 +43,6 @@ public abstract class NkDrawEndCallback extends Callback implements NkDrawEndCal
 
     NkDrawEndCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends NkDrawEndCallback {
-
-        private final NkDrawEndCallbackI delegate;
-
-        Container(long functionPointer, NkDrawEndCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public float invoke(long buffer, long userdata) {
-            return delegate.invoke(buffer, userdata);
-        }
-
     }
 
 }

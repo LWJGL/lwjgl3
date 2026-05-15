@@ -19,23 +19,22 @@ public abstract class FT_Stream_CloseFunc extends Callback implements FT_Stream_
      *
      * @return the new {@code FT_Stream_CloseFunc}
      */
-    public static FT_Stream_CloseFunc create(long functionPointer) {
-        FT_Stream_CloseFuncI instance = Callback.get(functionPointer);
-        return instance instanceof FT_Stream_CloseFunc
-            ? (FT_Stream_CloseFunc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FT_Stream_CloseFunc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FT_Stream_CloseFunc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FT_Stream_CloseFunc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FT_Stream_CloseFunc} instance that delegates to the specified {@code FT_Stream_CloseFuncI} instance. */
-    public static FT_Stream_CloseFunc create(FT_Stream_CloseFuncI instance) {
+    public static FT_Stream_CloseFunc create(FT_Stream_CloseFuncI instance) { return create(instance, instance.address()); }
+
+    private static FT_Stream_CloseFunc create(FT_Stream_CloseFuncI instance, long functionPointer) {
         return instance instanceof FT_Stream_CloseFunc
             ? (FT_Stream_CloseFunc)instance
-            : new Container(instance.address(), instance);
+            : new FT_Stream_CloseFunc(functionPointer) {
+                @Override public void invoke(long stream) {
+                    instance.invoke(stream);
+                }
+            };
     }
 
     protected FT_Stream_CloseFunc() {
@@ -44,22 +43,6 @@ public abstract class FT_Stream_CloseFunc extends Callback implements FT_Stream_
 
     FT_Stream_CloseFunc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FT_Stream_CloseFunc {
-
-        private final FT_Stream_CloseFuncI delegate;
-
-        Container(long functionPointer, FT_Stream_CloseFuncI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long stream) {
-            delegate.invoke(stream);
-        }
-
     }
 
 }

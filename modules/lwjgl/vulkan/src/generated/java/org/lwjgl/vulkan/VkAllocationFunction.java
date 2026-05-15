@@ -19,23 +19,22 @@ public abstract class VkAllocationFunction extends Callback implements VkAllocat
      *
      * @return the new {@code VkAllocationFunction}
      */
-    public static VkAllocationFunction create(long functionPointer) {
-        VkAllocationFunctionI instance = Callback.get(functionPointer);
-        return instance instanceof VkAllocationFunction
-            ? (VkAllocationFunction)instance
-            : new Container(functionPointer, instance);
-    }
+    public static VkAllocationFunction create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable VkAllocationFunction createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable VkAllocationFunction createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code VkAllocationFunction} instance that delegates to the specified {@code VkAllocationFunctionI} instance. */
-    public static VkAllocationFunction create(VkAllocationFunctionI instance) {
+    public static VkAllocationFunction create(VkAllocationFunctionI instance) { return create(instance, instance.address()); }
+
+    private static VkAllocationFunction create(VkAllocationFunctionI instance, long functionPointer) {
         return instance instanceof VkAllocationFunction
             ? (VkAllocationFunction)instance
-            : new Container(instance.address(), instance);
+            : new VkAllocationFunction(functionPointer) {
+                @Override public long invoke(long pUserData, long size, long alignment, int allocationScope) {
+                    return instance.invoke(pUserData, size, alignment, allocationScope);
+                }
+            };
     }
 
     protected VkAllocationFunction() {
@@ -44,22 +43,6 @@ public abstract class VkAllocationFunction extends Callback implements VkAllocat
 
     VkAllocationFunction(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends VkAllocationFunction {
-
-        private final VkAllocationFunctionI delegate;
-
-        Container(long functionPointer, VkAllocationFunctionI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long pUserData, long size, long alignment, int allocationScope) {
-            return delegate.invoke(pUserData, size, alignment, allocationScope);
-        }
-
     }
 
 }

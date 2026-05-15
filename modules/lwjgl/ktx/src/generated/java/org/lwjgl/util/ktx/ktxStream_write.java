@@ -19,23 +19,22 @@ public abstract class ktxStream_write extends Callback implements ktxStream_writ
      *
      * @return the new {@code ktxStream_write}
      */
-    public static ktxStream_write create(long functionPointer) {
-        ktxStream_writeI instance = Callback.get(functionPointer);
-        return instance instanceof ktxStream_write
-            ? (ktxStream_write)instance
-            : new Container(functionPointer, instance);
-    }
+    public static ktxStream_write create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable ktxStream_write createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable ktxStream_write createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code ktxStream_write} instance that delegates to the specified {@code ktxStream_writeI} instance. */
-    public static ktxStream_write create(ktxStream_writeI instance) {
+    public static ktxStream_write create(ktxStream_writeI instance) { return create(instance, instance.address()); }
+
+    private static ktxStream_write create(ktxStream_writeI instance, long functionPointer) {
         return instance instanceof ktxStream_write
             ? (ktxStream_write)instance
-            : new Container(instance.address(), instance);
+            : new ktxStream_write(functionPointer) {
+                @Override public int invoke(long str, long src, long size, long count) {
+                    return instance.invoke(str, src, size, count);
+                }
+            };
     }
 
     protected ktxStream_write() {
@@ -44,22 +43,6 @@ public abstract class ktxStream_write extends Callback implements ktxStream_writ
 
     ktxStream_write(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends ktxStream_write {
-
-        private final ktxStream_writeI delegate;
-
-        Container(long functionPointer, ktxStream_writeI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long str, long src, long size, long count) {
-            return delegate.invoke(str, src, size, count);
-        }
-
     }
 
 }

@@ -19,23 +19,22 @@ public abstract class LLVMMemoryManagerAllocateCodeSectionCallback extends Callb
      *
      * @return the new {@code LLVMMemoryManagerAllocateCodeSectionCallback}
      */
-    public static LLVMMemoryManagerAllocateCodeSectionCallback create(long functionPointer) {
-        LLVMMemoryManagerAllocateCodeSectionCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof LLVMMemoryManagerAllocateCodeSectionCallback
-            ? (LLVMMemoryManagerAllocateCodeSectionCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static LLVMMemoryManagerAllocateCodeSectionCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable LLVMMemoryManagerAllocateCodeSectionCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable LLVMMemoryManagerAllocateCodeSectionCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code LLVMMemoryManagerAllocateCodeSectionCallback} instance that delegates to the specified {@code LLVMMemoryManagerAllocateCodeSectionCallbackI} instance. */
-    public static LLVMMemoryManagerAllocateCodeSectionCallback create(LLVMMemoryManagerAllocateCodeSectionCallbackI instance) {
+    public static LLVMMemoryManagerAllocateCodeSectionCallback create(LLVMMemoryManagerAllocateCodeSectionCallbackI instance) { return create(instance, instance.address()); }
+
+    private static LLVMMemoryManagerAllocateCodeSectionCallback create(LLVMMemoryManagerAllocateCodeSectionCallbackI instance, long functionPointer) {
         return instance instanceof LLVMMemoryManagerAllocateCodeSectionCallback
             ? (LLVMMemoryManagerAllocateCodeSectionCallback)instance
-            : new Container(instance.address(), instance);
+            : new LLVMMemoryManagerAllocateCodeSectionCallback(functionPointer) {
+                @Override public long invoke(long Opaque, long Size, int Alignment, int SectionID, long SectionName) {
+                    return instance.invoke(Opaque, Size, Alignment, SectionID, SectionName);
+                }
+            };
     }
 
     protected LLVMMemoryManagerAllocateCodeSectionCallback() {
@@ -44,22 +43,6 @@ public abstract class LLVMMemoryManagerAllocateCodeSectionCallback extends Callb
 
     LLVMMemoryManagerAllocateCodeSectionCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends LLVMMemoryManagerAllocateCodeSectionCallback {
-
-        private final LLVMMemoryManagerAllocateCodeSectionCallbackI delegate;
-
-        Container(long functionPointer, LLVMMemoryManagerAllocateCodeSectionCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long Opaque, long Size, int Alignment, int SectionID, long SectionName) {
-            return delegate.invoke(Opaque, Size, Alignment, SectionID, SectionName);
-        }
-
     }
 
 }

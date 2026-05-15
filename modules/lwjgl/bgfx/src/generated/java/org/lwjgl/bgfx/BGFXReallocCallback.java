@@ -19,23 +19,22 @@ public abstract class BGFXReallocCallback extends Callback implements BGFXReallo
      *
      * @return the new {@code BGFXReallocCallback}
      */
-    public static BGFXReallocCallback create(long functionPointer) {
-        BGFXReallocCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof BGFXReallocCallback
-            ? (BGFXReallocCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static BGFXReallocCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable BGFXReallocCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable BGFXReallocCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code BGFXReallocCallback} instance that delegates to the specified {@code BGFXReallocCallbackI} instance. */
-    public static BGFXReallocCallback create(BGFXReallocCallbackI instance) {
+    public static BGFXReallocCallback create(BGFXReallocCallbackI instance) { return create(instance, instance.address()); }
+
+    private static BGFXReallocCallback create(BGFXReallocCallbackI instance, long functionPointer) {
         return instance instanceof BGFXReallocCallback
             ? (BGFXReallocCallback)instance
-            : new Container(instance.address(), instance);
+            : new BGFXReallocCallback(functionPointer) {
+                @Override public long invoke(long _this, long _ptr, long _size, long _align, long _file, int _line) {
+                    return instance.invoke(_this, _ptr, _size, _align, _file, _line);
+                }
+            };
     }
 
     protected BGFXReallocCallback() {
@@ -44,22 +43,6 @@ public abstract class BGFXReallocCallback extends Callback implements BGFXReallo
 
     BGFXReallocCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends BGFXReallocCallback {
-
-        private final BGFXReallocCallbackI delegate;
-
-        Container(long functionPointer, BGFXReallocCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long _this, long _ptr, long _size, long _align, long _file, int _line) {
-            return delegate.invoke(_this, _ptr, _size, _align, _file, _line);
-        }
-
     }
 
 }

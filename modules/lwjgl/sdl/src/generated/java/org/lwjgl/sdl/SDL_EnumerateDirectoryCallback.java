@@ -19,23 +19,22 @@ public abstract class SDL_EnumerateDirectoryCallback extends Callback implements
      *
      * @return the new {@code SDL_EnumerateDirectoryCallback}
      */
-    public static SDL_EnumerateDirectoryCallback create(long functionPointer) {
-        SDL_EnumerateDirectoryCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof SDL_EnumerateDirectoryCallback
-            ? (SDL_EnumerateDirectoryCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SDL_EnumerateDirectoryCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SDL_EnumerateDirectoryCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SDL_EnumerateDirectoryCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SDL_EnumerateDirectoryCallback} instance that delegates to the specified {@code SDL_EnumerateDirectoryCallbackI} instance. */
-    public static SDL_EnumerateDirectoryCallback create(SDL_EnumerateDirectoryCallbackI instance) {
+    public static SDL_EnumerateDirectoryCallback create(SDL_EnumerateDirectoryCallbackI instance) { return create(instance, instance.address()); }
+
+    private static SDL_EnumerateDirectoryCallback create(SDL_EnumerateDirectoryCallbackI instance, long functionPointer) {
         return instance instanceof SDL_EnumerateDirectoryCallback
             ? (SDL_EnumerateDirectoryCallback)instance
-            : new Container(instance.address(), instance);
+            : new SDL_EnumerateDirectoryCallback(functionPointer) {
+                @Override public int invoke(long userdata, long dirname, long fname) {
+                    return instance.invoke(userdata, dirname, fname);
+                }
+            };
     }
 
     protected SDL_EnumerateDirectoryCallback() {
@@ -44,22 +43,6 @@ public abstract class SDL_EnumerateDirectoryCallback extends Callback implements
 
     SDL_EnumerateDirectoryCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SDL_EnumerateDirectoryCallback {
-
-        private final SDL_EnumerateDirectoryCallbackI delegate;
-
-        Container(long functionPointer, SDL_EnumerateDirectoryCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long userdata, long dirname, long fname) {
-            return delegate.invoke(userdata, dirname, fname);
-        }
-
     }
 
 }

@@ -19,23 +19,22 @@ public abstract class MDBCmpFunc extends Callback implements MDBCmpFuncI {
      *
      * @return the new {@code MDBCmpFunc}
      */
-    public static MDBCmpFunc create(long functionPointer) {
-        MDBCmpFuncI instance = Callback.get(functionPointer);
-        return instance instanceof MDBCmpFunc
-            ? (MDBCmpFunc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static MDBCmpFunc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable MDBCmpFunc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable MDBCmpFunc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code MDBCmpFunc} instance that delegates to the specified {@code MDBCmpFuncI} instance. */
-    public static MDBCmpFunc create(MDBCmpFuncI instance) {
+    public static MDBCmpFunc create(MDBCmpFuncI instance) { return create(instance, instance.address()); }
+
+    private static MDBCmpFunc create(MDBCmpFuncI instance, long functionPointer) {
         return instance instanceof MDBCmpFunc
             ? (MDBCmpFunc)instance
-            : new Container(instance.address(), instance);
+            : new MDBCmpFunc(functionPointer) {
+                @Override public int invoke(long a, long b) {
+                    return instance.invoke(a, b);
+                }
+            };
     }
 
     protected MDBCmpFunc() {
@@ -44,22 +43,6 @@ public abstract class MDBCmpFunc extends Callback implements MDBCmpFuncI {
 
     MDBCmpFunc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends MDBCmpFunc {
-
-        private final MDBCmpFuncI delegate;
-
-        Container(long functionPointer, MDBCmpFuncI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long a, long b) {
-            return delegate.invoke(a, b);
-        }
-
     }
 
 }

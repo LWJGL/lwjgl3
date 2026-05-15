@@ -19,23 +19,22 @@ public abstract class spng_calloc_fn extends Callback implements spng_calloc_fnI
      *
      * @return the new {@code spng_calloc_fn}
      */
-    public static spng_calloc_fn create(long functionPointer) {
-        spng_calloc_fnI instance = Callback.get(functionPointer);
-        return instance instanceof spng_calloc_fn
-            ? (spng_calloc_fn)instance
-            : new Container(functionPointer, instance);
-    }
+    public static spng_calloc_fn create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable spng_calloc_fn createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable spng_calloc_fn createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code spng_calloc_fn} instance that delegates to the specified {@code spng_calloc_fnI} instance. */
-    public static spng_calloc_fn create(spng_calloc_fnI instance) {
+    public static spng_calloc_fn create(spng_calloc_fnI instance) { return create(instance, instance.address()); }
+
+    private static spng_calloc_fn create(spng_calloc_fnI instance, long functionPointer) {
         return instance instanceof spng_calloc_fn
             ? (spng_calloc_fn)instance
-            : new Container(instance.address(), instance);
+            : new spng_calloc_fn(functionPointer) {
+                @Override public long invoke(long count, long size) {
+                    return instance.invoke(count, size);
+                }
+            };
     }
 
     protected spng_calloc_fn() {
@@ -44,22 +43,6 @@ public abstract class spng_calloc_fn extends Callback implements spng_calloc_fnI
 
     spng_calloc_fn(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends spng_calloc_fn {
-
-        private final spng_calloc_fnI delegate;
-
-        Container(long functionPointer, spng_calloc_fnI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long count, long size) {
-            return delegate.invoke(count, size);
-        }
-
     }
 
 }

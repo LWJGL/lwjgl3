@@ -19,23 +19,22 @@ public abstract class BGFXProfilerBeginLiteral extends Callback implements BGFXP
      *
      * @return the new {@code BGFXProfilerBeginLiteral}
      */
-    public static BGFXProfilerBeginLiteral create(long functionPointer) {
-        BGFXProfilerBeginLiteralI instance = Callback.get(functionPointer);
-        return instance instanceof BGFXProfilerBeginLiteral
-            ? (BGFXProfilerBeginLiteral)instance
-            : new Container(functionPointer, instance);
-    }
+    public static BGFXProfilerBeginLiteral create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable BGFXProfilerBeginLiteral createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable BGFXProfilerBeginLiteral createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code BGFXProfilerBeginLiteral} instance that delegates to the specified {@code BGFXProfilerBeginLiteralI} instance. */
-    public static BGFXProfilerBeginLiteral create(BGFXProfilerBeginLiteralI instance) {
+    public static BGFXProfilerBeginLiteral create(BGFXProfilerBeginLiteralI instance) { return create(instance, instance.address()); }
+
+    private static BGFXProfilerBeginLiteral create(BGFXProfilerBeginLiteralI instance, long functionPointer) {
         return instance instanceof BGFXProfilerBeginLiteral
             ? (BGFXProfilerBeginLiteral)instance
-            : new Container(instance.address(), instance);
+            : new BGFXProfilerBeginLiteral(functionPointer) {
+                @Override public void invoke(long _this, long _name, int _abgr, long _filePath, short _line) {
+                    instance.invoke(_this, _name, _abgr, _filePath, _line);
+                }
+            };
     }
 
     protected BGFXProfilerBeginLiteral() {
@@ -44,22 +43,6 @@ public abstract class BGFXProfilerBeginLiteral extends Callback implements BGFXP
 
     BGFXProfilerBeginLiteral(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends BGFXProfilerBeginLiteral {
-
-        private final BGFXProfilerBeginLiteralI delegate;
-
-        Container(long functionPointer, BGFXProfilerBeginLiteralI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long _this, long _name, int _abgr, long _filePath, short _line) {
-            delegate.invoke(_this, _name, _abgr, _filePath, _line);
-        }
-
     }
 
 }

@@ -19,23 +19,22 @@ public abstract class hb_color_line_get_color_stops_func_t extends Callback impl
      *
      * @return the new {@code hb_color_line_get_color_stops_func_t}
      */
-    public static hb_color_line_get_color_stops_func_t create(long functionPointer) {
-        hb_color_line_get_color_stops_func_tI instance = Callback.get(functionPointer);
-        return instance instanceof hb_color_line_get_color_stops_func_t
-            ? (hb_color_line_get_color_stops_func_t)instance
-            : new Container(functionPointer, instance);
-    }
+    public static hb_color_line_get_color_stops_func_t create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable hb_color_line_get_color_stops_func_t createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable hb_color_line_get_color_stops_func_t createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code hb_color_line_get_color_stops_func_t} instance that delegates to the specified {@code hb_color_line_get_color_stops_func_tI} instance. */
-    public static hb_color_line_get_color_stops_func_t create(hb_color_line_get_color_stops_func_tI instance) {
+    public static hb_color_line_get_color_stops_func_t create(hb_color_line_get_color_stops_func_tI instance) { return create(instance, instance.address()); }
+
+    private static hb_color_line_get_color_stops_func_t create(hb_color_line_get_color_stops_func_tI instance, long functionPointer) {
         return instance instanceof hb_color_line_get_color_stops_func_t
             ? (hb_color_line_get_color_stops_func_t)instance
-            : new Container(instance.address(), instance);
+            : new hb_color_line_get_color_stops_func_t(functionPointer) {
+                @Override public int invoke(long color_line, long color_line_data, int start, long count, long color_stops, long user_data) {
+                    return instance.invoke(color_line, color_line_data, start, count, color_stops, user_data);
+                }
+            };
     }
 
     protected hb_color_line_get_color_stops_func_t() {
@@ -44,22 +43,6 @@ public abstract class hb_color_line_get_color_stops_func_t extends Callback impl
 
     hb_color_line_get_color_stops_func_t(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends hb_color_line_get_color_stops_func_t {
-
-        private final hb_color_line_get_color_stops_func_tI delegate;
-
-        Container(long functionPointer, hb_color_line_get_color_stops_func_tI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long color_line, long color_line_data, int start, long count, long color_stops, long user_data) {
-            return delegate.invoke(color_line, color_line_data, start, count, color_stops, user_data);
-        }
-
     }
 
 }

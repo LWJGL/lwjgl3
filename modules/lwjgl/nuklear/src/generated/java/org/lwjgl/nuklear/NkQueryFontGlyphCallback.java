@@ -19,23 +19,22 @@ public abstract class NkQueryFontGlyphCallback extends Callback implements NkQue
      *
      * @return the new {@code NkQueryFontGlyphCallback}
      */
-    public static NkQueryFontGlyphCallback create(long functionPointer) {
-        NkQueryFontGlyphCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof NkQueryFontGlyphCallback
-            ? (NkQueryFontGlyphCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static NkQueryFontGlyphCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable NkQueryFontGlyphCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable NkQueryFontGlyphCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code NkQueryFontGlyphCallback} instance that delegates to the specified {@code NkQueryFontGlyphCallbackI} instance. */
-    public static NkQueryFontGlyphCallback create(NkQueryFontGlyphCallbackI instance) {
+    public static NkQueryFontGlyphCallback create(NkQueryFontGlyphCallbackI instance) { return create(instance, instance.address()); }
+
+    private static NkQueryFontGlyphCallback create(NkQueryFontGlyphCallbackI instance, long functionPointer) {
         return instance instanceof NkQueryFontGlyphCallback
             ? (NkQueryFontGlyphCallback)instance
-            : new Container(instance.address(), instance);
+            : new NkQueryFontGlyphCallback(functionPointer) {
+                @Override public void invoke(long handle, float font_height, long glyph, int codepoint, int next_codepoint) {
+                    instance.invoke(handle, font_height, glyph, codepoint, next_codepoint);
+                }
+            };
     }
 
     protected NkQueryFontGlyphCallback() {
@@ -44,22 +43,6 @@ public abstract class NkQueryFontGlyphCallback extends Callback implements NkQue
 
     NkQueryFontGlyphCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends NkQueryFontGlyphCallback {
-
-        private final NkQueryFontGlyphCallbackI delegate;
-
-        Container(long functionPointer, NkQueryFontGlyphCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long handle, float font_height, long glyph, int codepoint, int next_codepoint) {
-            delegate.invoke(handle, font_height, glyph, codepoint, next_codepoint);
-        }
-
     }
 
 }

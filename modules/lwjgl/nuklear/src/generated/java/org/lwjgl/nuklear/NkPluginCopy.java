@@ -19,23 +19,22 @@ public abstract class NkPluginCopy extends Callback implements NkPluginCopyI {
      *
      * @return the new {@code NkPluginCopy}
      */
-    public static NkPluginCopy create(long functionPointer) {
-        NkPluginCopyI instance = Callback.get(functionPointer);
-        return instance instanceof NkPluginCopy
-            ? (NkPluginCopy)instance
-            : new Container(functionPointer, instance);
-    }
+    public static NkPluginCopy create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable NkPluginCopy createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable NkPluginCopy createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code NkPluginCopy} instance that delegates to the specified {@code NkPluginCopyI} instance. */
-    public static NkPluginCopy create(NkPluginCopyI instance) {
+    public static NkPluginCopy create(NkPluginCopyI instance) { return create(instance, instance.address()); }
+
+    private static NkPluginCopy create(NkPluginCopyI instance, long functionPointer) {
         return instance instanceof NkPluginCopy
             ? (NkPluginCopy)instance
-            : new Container(instance.address(), instance);
+            : new NkPluginCopy(functionPointer) {
+                @Override public void invoke(long handle, long text, int len) {
+                    instance.invoke(handle, text, len);
+                }
+            };
     }
 
     protected NkPluginCopy() {
@@ -44,22 +43,6 @@ public abstract class NkPluginCopy extends Callback implements NkPluginCopyI {
 
     NkPluginCopy(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends NkPluginCopy {
-
-        private final NkPluginCopyI delegate;
-
-        Container(long functionPointer, NkPluginCopyI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long handle, long text, int len) {
-            delegate.invoke(handle, text, len);
-        }
-
     }
 
 }

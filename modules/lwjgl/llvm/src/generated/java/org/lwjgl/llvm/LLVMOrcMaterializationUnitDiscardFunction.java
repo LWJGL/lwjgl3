@@ -19,23 +19,22 @@ public abstract class LLVMOrcMaterializationUnitDiscardFunction extends Callback
      *
      * @return the new {@code LLVMOrcMaterializationUnitDiscardFunction}
      */
-    public static LLVMOrcMaterializationUnitDiscardFunction create(long functionPointer) {
-        LLVMOrcMaterializationUnitDiscardFunctionI instance = Callback.get(functionPointer);
-        return instance instanceof LLVMOrcMaterializationUnitDiscardFunction
-            ? (LLVMOrcMaterializationUnitDiscardFunction)instance
-            : new Container(functionPointer, instance);
-    }
+    public static LLVMOrcMaterializationUnitDiscardFunction create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable LLVMOrcMaterializationUnitDiscardFunction createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable LLVMOrcMaterializationUnitDiscardFunction createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code LLVMOrcMaterializationUnitDiscardFunction} instance that delegates to the specified {@code LLVMOrcMaterializationUnitDiscardFunctionI} instance. */
-    public static LLVMOrcMaterializationUnitDiscardFunction create(LLVMOrcMaterializationUnitDiscardFunctionI instance) {
+    public static LLVMOrcMaterializationUnitDiscardFunction create(LLVMOrcMaterializationUnitDiscardFunctionI instance) { return create(instance, instance.address()); }
+
+    private static LLVMOrcMaterializationUnitDiscardFunction create(LLVMOrcMaterializationUnitDiscardFunctionI instance, long functionPointer) {
         return instance instanceof LLVMOrcMaterializationUnitDiscardFunction
             ? (LLVMOrcMaterializationUnitDiscardFunction)instance
-            : new Container(instance.address(), instance);
+            : new LLVMOrcMaterializationUnitDiscardFunction(functionPointer) {
+                @Override public void invoke(long Ctx, long JD, long Symbol) {
+                    instance.invoke(Ctx, JD, Symbol);
+                }
+            };
     }
 
     protected LLVMOrcMaterializationUnitDiscardFunction() {
@@ -44,22 +43,6 @@ public abstract class LLVMOrcMaterializationUnitDiscardFunction extends Callback
 
     LLVMOrcMaterializationUnitDiscardFunction(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends LLVMOrcMaterializationUnitDiscardFunction {
-
-        private final LLVMOrcMaterializationUnitDiscardFunctionI delegate;
-
-        Container(long functionPointer, LLVMOrcMaterializationUnitDiscardFunctionI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long Ctx, long JD, long Symbol) {
-            delegate.invoke(Ctx, JD, Symbol);
-        }
-
     }
 
 }

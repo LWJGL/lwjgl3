@@ -19,23 +19,22 @@ public abstract class IndexerEnteredMainFile extends Callback implements Indexer
      *
      * @return the new {@code IndexerEnteredMainFile}
      */
-    public static IndexerEnteredMainFile create(long functionPointer) {
-        IndexerEnteredMainFileI instance = Callback.get(functionPointer);
-        return instance instanceof IndexerEnteredMainFile
-            ? (IndexerEnteredMainFile)instance
-            : new Container(functionPointer, instance);
-    }
+    public static IndexerEnteredMainFile create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable IndexerEnteredMainFile createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable IndexerEnteredMainFile createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code IndexerEnteredMainFile} instance that delegates to the specified {@code IndexerEnteredMainFileI} instance. */
-    public static IndexerEnteredMainFile create(IndexerEnteredMainFileI instance) {
+    public static IndexerEnteredMainFile create(IndexerEnteredMainFileI instance) { return create(instance, instance.address()); }
+
+    private static IndexerEnteredMainFile create(IndexerEnteredMainFileI instance, long functionPointer) {
         return instance instanceof IndexerEnteredMainFile
             ? (IndexerEnteredMainFile)instance
-            : new Container(instance.address(), instance);
+            : new IndexerEnteredMainFile(functionPointer) {
+                @Override public long invoke(long client_data, long mainFile, long reserved) {
+                    return instance.invoke(client_data, mainFile, reserved);
+                }
+            };
     }
 
     protected IndexerEnteredMainFile() {
@@ -44,22 +43,6 @@ public abstract class IndexerEnteredMainFile extends Callback implements Indexer
 
     IndexerEnteredMainFile(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends IndexerEnteredMainFile {
-
-        private final IndexerEnteredMainFileI delegate;
-
-        Container(long functionPointer, IndexerEnteredMainFileI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long client_data, long mainFile, long reserved) {
-            return delegate.invoke(client_data, mainFile, reserved);
-        }
-
     }
 
 }

@@ -21,23 +21,22 @@ public abstract class GLFWWindowFocusCallback extends Callback implements GLFWWi
      *
      * @return the new {@code GLFWWindowFocusCallback}
      */
-    public static GLFWWindowFocusCallback create(long functionPointer) {
-        GLFWWindowFocusCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLFWWindowFocusCallback
-            ? (GLFWWindowFocusCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLFWWindowFocusCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLFWWindowFocusCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLFWWindowFocusCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLFWWindowFocusCallback} instance that delegates to the specified {@code GLFWWindowFocusCallbackI} instance. */
-    public static GLFWWindowFocusCallback create(GLFWWindowFocusCallbackI instance) {
+    public static GLFWWindowFocusCallback create(GLFWWindowFocusCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLFWWindowFocusCallback create(GLFWWindowFocusCallbackI instance, long functionPointer) {
         return instance instanceof GLFWWindowFocusCallback
             ? (GLFWWindowFocusCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLFWWindowFocusCallback(functionPointer) {
+                @Override public void invoke(long window, boolean focused) {
+                    instance.invoke(window, focused);
+                }
+            };
     }
 
     protected GLFWWindowFocusCallback() {
@@ -52,22 +51,6 @@ public abstract class GLFWWindowFocusCallback extends Callback implements GLFWWi
     public GLFWWindowFocusCallback set(long window) {
         glfwSetWindowFocusCallback(window, this);
         return this;
-    }
-
-    private static final class Container extends GLFWWindowFocusCallback {
-
-        private final GLFWWindowFocusCallbackI delegate;
-
-        Container(long functionPointer, GLFWWindowFocusCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long window, boolean focused) {
-            delegate.invoke(window, focused);
-        }
-
     }
 
 }

@@ -100,23 +100,40 @@ import static org.lwjgl.system.MemoryUtil.*;
      *
      * @return the new {@code $className}
      */
-    public static $className create(long functionPointer) {
-        ${className}I instance = Callback.get(functionPointer);
-        return instance instanceof $className
-            ? ($className)instance
-            : new Container(functionPointer, instance);
-    }
+    public static $className create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable $className createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable $className createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code $className} instance that delegates to the specified {@code ${className}I} instance. */
-    public static $className create(${className}I instance) {
+    public static $className create(${className}I instance) { return create(instance, instance.address()); }
+
+    private static $className create(${className}I instance, long functionPointer) {
         return instance instanceof $className
             ? ($className)instance
-            : new Container(instance.address(), instance);
+            : new $className(functionPointer) {
+                @Override public ${if (returns is StructType) "void" else returns.nativeMethodType} invoke(${
+            signature.asSequence()
+                .map {
+                    "${
+                        if (it.nativeType.mapping.isPseudoBoolean()) "boolean"
+                        else if (it.nativeType is StructType)
+                            it.nativeType.definition.className
+                        else
+                            it.nativeType.nativeMethodType
+                    } ${if (it.name == "instance") "_instance" else it.name}"
+                }
+                .let { if (returns is StructType) it + "${returns.javaMethodType} $RESULT" else it }
+                .joinToString(", ")
+        }) {
+                    ${if (returns.mapping !== TypeMapping.VOID && returns !is StructType) "return " else ""}instance.invoke(${
+            signature.asSequence()
+                .map { if (it.name == "instance") "_instance" else it.name }
+                .let { if (returns is StructType) it + RESULT else it }
+                .joinToString(", ")
+        });
+                }
+            };
     }
 
     protected $className() {
@@ -134,35 +151,6 @@ import static org.lwjgl.system.MemoryUtil.*;
         }
 
         print("""
-    private static final class Container extends $className {
-
-        private final ${className}I delegate;
-
-        Container(long functionPointer, ${className}I delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public ${if (returns is StructType) "void" else returns.nativeMethodType} invoke(${signature.asSequence()
-            .map {
-                "${if (it.nativeType.mapping.isPseudoBoolean()) "boolean"
-                else if (it.nativeType is StructType)
-                    it.nativeType.definition.className
-                else
-                    it.nativeType.nativeMethodType} ${it.name}"
-            }
-            .let { if (returns is StructType) it + "${returns.javaMethodType} $RESULT" else it }
-            .joinToString(", ")}) {
-            ${if (returns.mapping !== TypeMapping.VOID && returns !is StructType) "return " else ""}delegate.invoke(${signature.asSequence()
-                .map { it.name }
-                .let { if (returns is StructType) it + RESULT else it }
-                .joinToString(", ")
-            });
-        }
-
-    }
-
 }""")
     }
 

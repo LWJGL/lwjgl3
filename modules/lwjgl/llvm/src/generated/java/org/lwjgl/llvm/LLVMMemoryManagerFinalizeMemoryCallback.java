@@ -19,23 +19,22 @@ public abstract class LLVMMemoryManagerFinalizeMemoryCallback extends Callback i
      *
      * @return the new {@code LLVMMemoryManagerFinalizeMemoryCallback}
      */
-    public static LLVMMemoryManagerFinalizeMemoryCallback create(long functionPointer) {
-        LLVMMemoryManagerFinalizeMemoryCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof LLVMMemoryManagerFinalizeMemoryCallback
-            ? (LLVMMemoryManagerFinalizeMemoryCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static LLVMMemoryManagerFinalizeMemoryCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable LLVMMemoryManagerFinalizeMemoryCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable LLVMMemoryManagerFinalizeMemoryCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code LLVMMemoryManagerFinalizeMemoryCallback} instance that delegates to the specified {@code LLVMMemoryManagerFinalizeMemoryCallbackI} instance. */
-    public static LLVMMemoryManagerFinalizeMemoryCallback create(LLVMMemoryManagerFinalizeMemoryCallbackI instance) {
+    public static LLVMMemoryManagerFinalizeMemoryCallback create(LLVMMemoryManagerFinalizeMemoryCallbackI instance) { return create(instance, instance.address()); }
+
+    private static LLVMMemoryManagerFinalizeMemoryCallback create(LLVMMemoryManagerFinalizeMemoryCallbackI instance, long functionPointer) {
         return instance instanceof LLVMMemoryManagerFinalizeMemoryCallback
             ? (LLVMMemoryManagerFinalizeMemoryCallback)instance
-            : new Container(instance.address(), instance);
+            : new LLVMMemoryManagerFinalizeMemoryCallback(functionPointer) {
+                @Override public int invoke(long Opaque, long ErrMsg) {
+                    return instance.invoke(Opaque, ErrMsg);
+                }
+            };
     }
 
     protected LLVMMemoryManagerFinalizeMemoryCallback() {
@@ -44,22 +43,6 @@ public abstract class LLVMMemoryManagerFinalizeMemoryCallback extends Callback i
 
     LLVMMemoryManagerFinalizeMemoryCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends LLVMMemoryManagerFinalizeMemoryCallback {
-
-        private final LLVMMemoryManagerFinalizeMemoryCallbackI delegate;
-
-        Container(long functionPointer, LLVMMemoryManagerFinalizeMemoryCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long Opaque, long ErrMsg) {
-            return delegate.invoke(Opaque, ErrMsg);
-        }
-
     }
 
 }

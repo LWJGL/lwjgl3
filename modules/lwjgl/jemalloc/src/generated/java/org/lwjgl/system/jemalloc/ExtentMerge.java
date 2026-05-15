@@ -19,23 +19,22 @@ public abstract class ExtentMerge extends Callback implements ExtentMergeI {
      *
      * @return the new {@code ExtentMerge}
      */
-    public static ExtentMerge create(long functionPointer) {
-        ExtentMergeI instance = Callback.get(functionPointer);
-        return instance instanceof ExtentMerge
-            ? (ExtentMerge)instance
-            : new Container(functionPointer, instance);
-    }
+    public static ExtentMerge create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable ExtentMerge createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable ExtentMerge createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code ExtentMerge} instance that delegates to the specified {@code ExtentMergeI} instance. */
-    public static ExtentMerge create(ExtentMergeI instance) {
+    public static ExtentMerge create(ExtentMergeI instance) { return create(instance, instance.address()); }
+
+    private static ExtentMerge create(ExtentMergeI instance, long functionPointer) {
         return instance instanceof ExtentMerge
             ? (ExtentMerge)instance
-            : new Container(instance.address(), instance);
+            : new ExtentMerge(functionPointer) {
+                @Override public boolean invoke(long extent_hooks, long addr_a, long size_a, long addr_b, long size_b, boolean committed, int arena_ind) {
+                    return instance.invoke(extent_hooks, addr_a, size_a, addr_b, size_b, committed, arena_ind);
+                }
+            };
     }
 
     protected ExtentMerge() {
@@ -44,22 +43,6 @@ public abstract class ExtentMerge extends Callback implements ExtentMergeI {
 
     ExtentMerge(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends ExtentMerge {
-
-        private final ExtentMergeI delegate;
-
-        Container(long functionPointer, ExtentMergeI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public boolean invoke(long extent_hooks, long addr_a, long size_a, long addr_b, long size_b, boolean committed, int arena_ind) {
-            return delegate.invoke(extent_hooks, addr_a, size_a, addr_b, size_b, committed, arena_ind);
-        }
-
     }
 
 }

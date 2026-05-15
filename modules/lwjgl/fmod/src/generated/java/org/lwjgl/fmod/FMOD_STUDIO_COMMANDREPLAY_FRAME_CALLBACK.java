@@ -19,23 +19,22 @@ public abstract class FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK extends Callback 
      *
      * @return the new {@code FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK}
      */
-    public static FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK create(long functionPointer) {
-        FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACKI instance = Callback.get(functionPointer);
-        return instance instanceof FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK
-            ? (FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK} instance that delegates to the specified {@code FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACKI} instance. */
-    public static FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK create(FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACKI instance) {
+    public static FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK create(FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACKI instance) { return create(instance, instance.address()); }
+
+    private static FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK create(FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACKI instance, long functionPointer) {
         return instance instanceof FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK
             ? (FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK)instance
-            : new Container(instance.address(), instance);
+            : new FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK(functionPointer) {
+                @Override public int invoke(long replay, int commandindex, float currenttime, long userdata) {
+                    return instance.invoke(replay, commandindex, currenttime, userdata);
+                }
+            };
     }
 
     protected FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK() {
@@ -44,22 +43,6 @@ public abstract class FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK extends Callback 
 
     FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACK {
-
-        private final FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACKI delegate;
-
-        Container(long functionPointer, FMOD_STUDIO_COMMANDREPLAY_FRAME_CALLBACKI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long replay, int commandindex, float currenttime, long userdata) {
-            return delegate.invoke(replay, commandindex, currenttime, userdata);
-        }
-
     }
 
 }

@@ -19,23 +19,22 @@ public abstract class NkValueGetter extends Callback implements NkValueGetterI {
      *
      * @return the new {@code NkValueGetter}
      */
-    public static NkValueGetter create(long functionPointer) {
-        NkValueGetterI instance = Callback.get(functionPointer);
-        return instance instanceof NkValueGetter
-            ? (NkValueGetter)instance
-            : new Container(functionPointer, instance);
-    }
+    public static NkValueGetter create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable NkValueGetter createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable NkValueGetter createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code NkValueGetter} instance that delegates to the specified {@code NkValueGetterI} instance. */
-    public static NkValueGetter create(NkValueGetterI instance) {
+    public static NkValueGetter create(NkValueGetterI instance) { return create(instance, instance.address()); }
+
+    private static NkValueGetter create(NkValueGetterI instance, long functionPointer) {
         return instance instanceof NkValueGetter
             ? (NkValueGetter)instance
-            : new Container(instance.address(), instance);
+            : new NkValueGetter(functionPointer) {
+                @Override public float invoke(long userdata, int index) {
+                    return instance.invoke(userdata, index);
+                }
+            };
     }
 
     protected NkValueGetter() {
@@ -44,22 +43,6 @@ public abstract class NkValueGetter extends Callback implements NkValueGetterI {
 
     NkValueGetter(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends NkValueGetter {
-
-        private final NkValueGetterI delegate;
-
-        Container(long functionPointer, NkValueGetterI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public float invoke(long userdata, int index) {
-            return delegate.invoke(userdata, index);
-        }
-
     }
 
 }

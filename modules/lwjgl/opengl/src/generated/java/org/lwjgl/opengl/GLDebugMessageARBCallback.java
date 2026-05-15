@@ -19,23 +19,22 @@ public abstract class GLDebugMessageARBCallback extends Callback implements GLDe
      *
      * @return the new {@code GLDebugMessageARBCallback}
      */
-    public static GLDebugMessageARBCallback create(long functionPointer) {
-        GLDebugMessageARBCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLDebugMessageARBCallback
-            ? (GLDebugMessageARBCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLDebugMessageARBCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLDebugMessageARBCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLDebugMessageARBCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLDebugMessageARBCallback} instance that delegates to the specified {@code GLDebugMessageARBCallbackI} instance. */
-    public static GLDebugMessageARBCallback create(GLDebugMessageARBCallbackI instance) {
+    public static GLDebugMessageARBCallback create(GLDebugMessageARBCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLDebugMessageARBCallback create(GLDebugMessageARBCallbackI instance, long functionPointer) {
         return instance instanceof GLDebugMessageARBCallback
             ? (GLDebugMessageARBCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLDebugMessageARBCallback(functionPointer) {
+                @Override public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {
+                    instance.invoke(source, type, id, severity, length, message, userParam);
+                }
+            };
     }
 
     protected GLDebugMessageARBCallback() {
@@ -58,22 +57,6 @@ public abstract class GLDebugMessageARBCallback extends Callback implements GLDe
      */
     public static String getMessage(int length, long message) {
         return memUTF8(memByteBuffer(message, length));
-    }
-
-    private static final class Container extends GLDebugMessageARBCallback {
-
-        private final GLDebugMessageARBCallbackI delegate;
-
-        Container(long functionPointer, GLDebugMessageARBCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {
-            delegate.invoke(source, type, id, severity, length, message, userParam);
-        }
-
     }
 
 }

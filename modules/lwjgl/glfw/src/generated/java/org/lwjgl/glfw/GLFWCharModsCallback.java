@@ -21,23 +21,22 @@ public abstract class GLFWCharModsCallback extends Callback implements GLFWCharM
      *
      * @return the new {@code GLFWCharModsCallback}
      */
-    public static GLFWCharModsCallback create(long functionPointer) {
-        GLFWCharModsCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLFWCharModsCallback
-            ? (GLFWCharModsCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLFWCharModsCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLFWCharModsCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLFWCharModsCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLFWCharModsCallback} instance that delegates to the specified {@code GLFWCharModsCallbackI} instance. */
-    public static GLFWCharModsCallback create(GLFWCharModsCallbackI instance) {
+    public static GLFWCharModsCallback create(GLFWCharModsCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLFWCharModsCallback create(GLFWCharModsCallbackI instance, long functionPointer) {
         return instance instanceof GLFWCharModsCallback
             ? (GLFWCharModsCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLFWCharModsCallback(functionPointer) {
+                @Override public void invoke(long window, int codepoint, int mods) {
+                    instance.invoke(window, codepoint, mods);
+                }
+            };
     }
 
     protected GLFWCharModsCallback() {
@@ -52,22 +51,6 @@ public abstract class GLFWCharModsCallback extends Callback implements GLFWCharM
     public GLFWCharModsCallback set(long window) {
         glfwSetCharModsCallback(window, this);
         return this;
-    }
-
-    private static final class Container extends GLFWCharModsCallback {
-
-        private final GLFWCharModsCallbackI delegate;
-
-        Container(long functionPointer, GLFWCharModsCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long window, int codepoint, int mods) {
-            delegate.invoke(window, codepoint, mods);
-        }
-
     }
 
 }

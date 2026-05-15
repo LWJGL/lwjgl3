@@ -19,23 +19,22 @@ public abstract class SDL_TrayCallback extends Callback implements SDL_TrayCallb
      *
      * @return the new {@code SDL_TrayCallback}
      */
-    public static SDL_TrayCallback create(long functionPointer) {
-        SDL_TrayCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof SDL_TrayCallback
-            ? (SDL_TrayCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SDL_TrayCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SDL_TrayCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SDL_TrayCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SDL_TrayCallback} instance that delegates to the specified {@code SDL_TrayCallbackI} instance. */
-    public static SDL_TrayCallback create(SDL_TrayCallbackI instance) {
+    public static SDL_TrayCallback create(SDL_TrayCallbackI instance) { return create(instance, instance.address()); }
+
+    private static SDL_TrayCallback create(SDL_TrayCallbackI instance, long functionPointer) {
         return instance instanceof SDL_TrayCallback
             ? (SDL_TrayCallback)instance
-            : new Container(instance.address(), instance);
+            : new SDL_TrayCallback(functionPointer) {
+                @Override public void invoke(long userdata, long entry) {
+                    instance.invoke(userdata, entry);
+                }
+            };
     }
 
     protected SDL_TrayCallback() {
@@ -44,22 +43,6 @@ public abstract class SDL_TrayCallback extends Callback implements SDL_TrayCallb
 
     SDL_TrayCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SDL_TrayCallback {
-
-        private final SDL_TrayCallbackI delegate;
-
-        Container(long functionPointer, SDL_TrayCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long userdata, long entry) {
-            delegate.invoke(userdata, entry);
-        }
-
     }
 
 }

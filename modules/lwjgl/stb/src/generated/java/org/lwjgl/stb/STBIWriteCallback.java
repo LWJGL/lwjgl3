@@ -21,23 +21,22 @@ public abstract class STBIWriteCallback extends Callback implements STBIWriteCal
      *
      * @return the new {@code STBIWriteCallback}
      */
-    public static STBIWriteCallback create(long functionPointer) {
-        STBIWriteCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof STBIWriteCallback
-            ? (STBIWriteCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static STBIWriteCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable STBIWriteCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable STBIWriteCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code STBIWriteCallback} instance that delegates to the specified {@code STBIWriteCallbackI} instance. */
-    public static STBIWriteCallback create(STBIWriteCallbackI instance) {
+    public static STBIWriteCallback create(STBIWriteCallbackI instance) { return create(instance, instance.address()); }
+
+    private static STBIWriteCallback create(STBIWriteCallbackI instance, long functionPointer) {
         return instance instanceof STBIWriteCallback
             ? (STBIWriteCallback)instance
-            : new Container(instance.address(), instance);
+            : new STBIWriteCallback(functionPointer) {
+                @Override public void invoke(long context, long data, int size) {
+                    instance.invoke(context, data, size);
+                }
+            };
     }
 
     protected STBIWriteCallback() {
@@ -60,22 +59,6 @@ public abstract class STBIWriteCallback extends Callback implements STBIWriteCal
      */
     public static ByteBuffer getData(long data, int size) {
         return memByteBuffer(data, size);
-    }
-
-    private static final class Container extends STBIWriteCallback {
-
-        private final STBIWriteCallbackI delegate;
-
-        Container(long functionPointer, STBIWriteCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long context, long data, int size) {
-            delegate.invoke(context, data, size);
-        }
-
     }
 
 }

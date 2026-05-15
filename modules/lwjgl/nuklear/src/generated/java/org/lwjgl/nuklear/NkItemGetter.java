@@ -19,23 +19,22 @@ public abstract class NkItemGetter extends Callback implements NkItemGetterI {
      *
      * @return the new {@code NkItemGetter}
      */
-    public static NkItemGetter create(long functionPointer) {
-        NkItemGetterI instance = Callback.get(functionPointer);
-        return instance instanceof NkItemGetter
-            ? (NkItemGetter)instance
-            : new Container(functionPointer, instance);
-    }
+    public static NkItemGetter create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable NkItemGetter createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable NkItemGetter createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code NkItemGetter} instance that delegates to the specified {@code NkItemGetterI} instance. */
-    public static NkItemGetter create(NkItemGetterI instance) {
+    public static NkItemGetter create(NkItemGetterI instance) { return create(instance, instance.address()); }
+
+    private static NkItemGetter create(NkItemGetterI instance, long functionPointer) {
         return instance instanceof NkItemGetter
             ? (NkItemGetter)instance
-            : new Container(instance.address(), instance);
+            : new NkItemGetter(functionPointer) {
+                @Override public float invoke(long userdata, int selected, long item) {
+                    return instance.invoke(userdata, selected, item);
+                }
+            };
     }
 
     protected NkItemGetter() {
@@ -44,22 +43,6 @@ public abstract class NkItemGetter extends Callback implements NkItemGetterI {
 
     NkItemGetter(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends NkItemGetter {
-
-        private final NkItemGetterI delegate;
-
-        Container(long functionPointer, NkItemGetterI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public float invoke(long userdata, int selected, long item) {
-            return delegate.invoke(userdata, selected, item);
-        }
-
     }
 
 }

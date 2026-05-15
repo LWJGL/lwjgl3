@@ -19,23 +19,22 @@ public abstract class OPReadFunc extends Callback implements OPReadFuncI {
      *
      * @return the new {@code OPReadFunc}
      */
-    public static OPReadFunc create(long functionPointer) {
-        OPReadFuncI instance = Callback.get(functionPointer);
-        return instance instanceof OPReadFunc
-            ? (OPReadFunc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static OPReadFunc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable OPReadFunc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable OPReadFunc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code OPReadFunc} instance that delegates to the specified {@code OPReadFuncI} instance. */
-    public static OPReadFunc create(OPReadFuncI instance) {
+    public static OPReadFunc create(OPReadFuncI instance) { return create(instance, instance.address()); }
+
+    private static OPReadFunc create(OPReadFuncI instance, long functionPointer) {
         return instance instanceof OPReadFunc
             ? (OPReadFunc)instance
-            : new Container(instance.address(), instance);
+            : new OPReadFunc(functionPointer) {
+                @Override public int invoke(long _stream, long _ptr, int _nbytes) {
+                    return instance.invoke(_stream, _ptr, _nbytes);
+                }
+            };
     }
 
     protected OPReadFunc() {
@@ -44,22 +43,6 @@ public abstract class OPReadFunc extends Callback implements OPReadFuncI {
 
     OPReadFunc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends OPReadFunc {
-
-        private final OPReadFuncI delegate;
-
-        Container(long functionPointer, OPReadFuncI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long _stream, long _ptr, int _nbytes) {
-            return delegate.invoke(_stream, _ptr, _nbytes);
-        }
-
     }
 
 }

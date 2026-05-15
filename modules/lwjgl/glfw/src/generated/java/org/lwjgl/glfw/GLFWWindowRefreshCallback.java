@@ -21,23 +21,22 @@ public abstract class GLFWWindowRefreshCallback extends Callback implements GLFW
      *
      * @return the new {@code GLFWWindowRefreshCallback}
      */
-    public static GLFWWindowRefreshCallback create(long functionPointer) {
-        GLFWWindowRefreshCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLFWWindowRefreshCallback
-            ? (GLFWWindowRefreshCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLFWWindowRefreshCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLFWWindowRefreshCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLFWWindowRefreshCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLFWWindowRefreshCallback} instance that delegates to the specified {@code GLFWWindowRefreshCallbackI} instance. */
-    public static GLFWWindowRefreshCallback create(GLFWWindowRefreshCallbackI instance) {
+    public static GLFWWindowRefreshCallback create(GLFWWindowRefreshCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLFWWindowRefreshCallback create(GLFWWindowRefreshCallbackI instance, long functionPointer) {
         return instance instanceof GLFWWindowRefreshCallback
             ? (GLFWWindowRefreshCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLFWWindowRefreshCallback(functionPointer) {
+                @Override public void invoke(long window) {
+                    instance.invoke(window);
+                }
+            };
     }
 
     protected GLFWWindowRefreshCallback() {
@@ -52,22 +51,6 @@ public abstract class GLFWWindowRefreshCallback extends Callback implements GLFW
     public GLFWWindowRefreshCallback set(long window) {
         glfwSetWindowRefreshCallback(window, this);
         return this;
-    }
-
-    private static final class Container extends GLFWWindowRefreshCallback {
-
-        private final GLFWWindowRefreshCallbackI delegate;
-
-        Container(long functionPointer, GLFWWindowRefreshCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long window) {
-            delegate.invoke(window);
-        }
-
     }
 
 }

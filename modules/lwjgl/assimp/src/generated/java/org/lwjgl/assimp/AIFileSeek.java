@@ -19,23 +19,22 @@ public abstract class AIFileSeek extends Callback implements AIFileSeekI {
      *
      * @return the new {@code AIFileSeek}
      */
-    public static AIFileSeek create(long functionPointer) {
-        AIFileSeekI instance = Callback.get(functionPointer);
-        return instance instanceof AIFileSeek
-            ? (AIFileSeek)instance
-            : new Container(functionPointer, instance);
-    }
+    public static AIFileSeek create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable AIFileSeek createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable AIFileSeek createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code AIFileSeek} instance that delegates to the specified {@code AIFileSeekI} instance. */
-    public static AIFileSeek create(AIFileSeekI instance) {
+    public static AIFileSeek create(AIFileSeekI instance) { return create(instance, instance.address()); }
+
+    private static AIFileSeek create(AIFileSeekI instance, long functionPointer) {
         return instance instanceof AIFileSeek
             ? (AIFileSeek)instance
-            : new Container(instance.address(), instance);
+            : new AIFileSeek(functionPointer) {
+                @Override public int invoke(long pFile, long offset, int origin) {
+                    return instance.invoke(pFile, offset, origin);
+                }
+            };
     }
 
     protected AIFileSeek() {
@@ -44,22 +43,6 @@ public abstract class AIFileSeek extends Callback implements AIFileSeekI {
 
     AIFileSeek(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends AIFileSeek {
-
-        private final AIFileSeekI delegate;
-
-        Container(long functionPointer, AIFileSeekI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long pFile, long offset, int origin) {
-            return delegate.invoke(pFile, offset, origin);
-        }
-
     }
 
 }

@@ -19,23 +19,22 @@ public abstract class ExtentDalloc extends Callback implements ExtentDallocI {
      *
      * @return the new {@code ExtentDalloc}
      */
-    public static ExtentDalloc create(long functionPointer) {
-        ExtentDallocI instance = Callback.get(functionPointer);
-        return instance instanceof ExtentDalloc
-            ? (ExtentDalloc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static ExtentDalloc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable ExtentDalloc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable ExtentDalloc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code ExtentDalloc} instance that delegates to the specified {@code ExtentDallocI} instance. */
-    public static ExtentDalloc create(ExtentDallocI instance) {
+    public static ExtentDalloc create(ExtentDallocI instance) { return create(instance, instance.address()); }
+
+    private static ExtentDalloc create(ExtentDallocI instance, long functionPointer) {
         return instance instanceof ExtentDalloc
             ? (ExtentDalloc)instance
-            : new Container(instance.address(), instance);
+            : new ExtentDalloc(functionPointer) {
+                @Override public boolean invoke(long extent_hooks, long addr, long size, boolean committed, int arena_ind) {
+                    return instance.invoke(extent_hooks, addr, size, committed, arena_ind);
+                }
+            };
     }
 
     protected ExtentDalloc() {
@@ -44,22 +43,6 @@ public abstract class ExtentDalloc extends Callback implements ExtentDallocI {
 
     ExtentDalloc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends ExtentDalloc {
-
-        private final ExtentDallocI delegate;
-
-        Container(long functionPointer, ExtentDallocI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public boolean invoke(long extent_hooks, long addr, long size, boolean committed, int arena_ind) {
-            return delegate.invoke(extent_hooks, addr, size, committed, arena_ind);
-        }
-
     }
 
 }

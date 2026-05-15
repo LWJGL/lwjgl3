@@ -19,23 +19,22 @@ public abstract class STBIRInputCallback extends Callback implements STBIRInputC
      *
      * @return the new {@code STBIRInputCallback}
      */
-    public static STBIRInputCallback create(long functionPointer) {
-        STBIRInputCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof STBIRInputCallback
-            ? (STBIRInputCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static STBIRInputCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable STBIRInputCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable STBIRInputCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code STBIRInputCallback} instance that delegates to the specified {@code STBIRInputCallbackI} instance. */
-    public static STBIRInputCallback create(STBIRInputCallbackI instance) {
+    public static STBIRInputCallback create(STBIRInputCallbackI instance) { return create(instance, instance.address()); }
+
+    private static STBIRInputCallback create(STBIRInputCallbackI instance, long functionPointer) {
         return instance instanceof STBIRInputCallback
             ? (STBIRInputCallback)instance
-            : new Container(instance.address(), instance);
+            : new STBIRInputCallback(functionPointer) {
+                @Override public void invoke(long optional_output, long input_ptr, int num_pixels, int x, int y, long context) {
+                    instance.invoke(optional_output, input_ptr, num_pixels, x, y, context);
+                }
+            };
     }
 
     protected STBIRInputCallback() {
@@ -44,22 +43,6 @@ public abstract class STBIRInputCallback extends Callback implements STBIRInputC
 
     STBIRInputCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends STBIRInputCallback {
-
-        private final STBIRInputCallbackI delegate;
-
-        Container(long functionPointer, STBIRInputCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long optional_output, long input_ptr, int num_pixels, int x, int y, long context) {
-            delegate.invoke(optional_output, input_ptr, num_pixels, x, y, context);
-        }
-
     }
 
 }

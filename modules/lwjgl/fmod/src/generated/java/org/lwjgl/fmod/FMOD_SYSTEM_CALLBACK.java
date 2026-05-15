@@ -19,23 +19,22 @@ public abstract class FMOD_SYSTEM_CALLBACK extends Callback implements FMOD_SYST
      *
      * @return the new {@code FMOD_SYSTEM_CALLBACK}
      */
-    public static FMOD_SYSTEM_CALLBACK create(long functionPointer) {
-        FMOD_SYSTEM_CALLBACKI instance = Callback.get(functionPointer);
-        return instance instanceof FMOD_SYSTEM_CALLBACK
-            ? (FMOD_SYSTEM_CALLBACK)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FMOD_SYSTEM_CALLBACK create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FMOD_SYSTEM_CALLBACK createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FMOD_SYSTEM_CALLBACK createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FMOD_SYSTEM_CALLBACK} instance that delegates to the specified {@code FMOD_SYSTEM_CALLBACKI} instance. */
-    public static FMOD_SYSTEM_CALLBACK create(FMOD_SYSTEM_CALLBACKI instance) {
+    public static FMOD_SYSTEM_CALLBACK create(FMOD_SYSTEM_CALLBACKI instance) { return create(instance, instance.address()); }
+
+    private static FMOD_SYSTEM_CALLBACK create(FMOD_SYSTEM_CALLBACKI instance, long functionPointer) {
         return instance instanceof FMOD_SYSTEM_CALLBACK
             ? (FMOD_SYSTEM_CALLBACK)instance
-            : new Container(instance.address(), instance);
+            : new FMOD_SYSTEM_CALLBACK(functionPointer) {
+                @Override public int invoke(long system, int type, long commanddata1, long commanddata2, long userdata) {
+                    return instance.invoke(system, type, commanddata1, commanddata2, userdata);
+                }
+            };
     }
 
     protected FMOD_SYSTEM_CALLBACK() {
@@ -44,22 +43,6 @@ public abstract class FMOD_SYSTEM_CALLBACK extends Callback implements FMOD_SYST
 
     FMOD_SYSTEM_CALLBACK(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FMOD_SYSTEM_CALLBACK {
-
-        private final FMOD_SYSTEM_CALLBACKI delegate;
-
-        Container(long functionPointer, FMOD_SYSTEM_CALLBACKI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long system, int type, long commanddata1, long commanddata2, long userdata) {
-            return delegate.invoke(system, type, commanddata1, commanddata2, userdata);
-        }
-
     }
 
 }

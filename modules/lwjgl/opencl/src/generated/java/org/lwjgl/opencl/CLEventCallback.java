@@ -19,23 +19,22 @@ public abstract class CLEventCallback extends Callback implements CLEventCallbac
      *
      * @return the new {@code CLEventCallback}
      */
-    public static CLEventCallback create(long functionPointer) {
-        CLEventCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof CLEventCallback
-            ? (CLEventCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static CLEventCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable CLEventCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable CLEventCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code CLEventCallback} instance that delegates to the specified {@code CLEventCallbackI} instance. */
-    public static CLEventCallback create(CLEventCallbackI instance) {
+    public static CLEventCallback create(CLEventCallbackI instance) { return create(instance, instance.address()); }
+
+    private static CLEventCallback create(CLEventCallbackI instance, long functionPointer) {
         return instance instanceof CLEventCallback
             ? (CLEventCallback)instance
-            : new Container(instance.address(), instance);
+            : new CLEventCallback(functionPointer) {
+                @Override public void invoke(long event, int event_command_exec_status, long user_data) {
+                    instance.invoke(event, event_command_exec_status, user_data);
+                }
+            };
     }
 
     protected CLEventCallback() {
@@ -44,22 +43,6 @@ public abstract class CLEventCallback extends Callback implements CLEventCallbac
 
     CLEventCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends CLEventCallback {
-
-        private final CLEventCallbackI delegate;
-
-        Container(long functionPointer, CLEventCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long event, int event_command_exec_status, long user_data) {
-            delegate.invoke(event, event_command_exec_status, user_data);
-        }
-
     }
 
 }

@@ -19,23 +19,22 @@ public abstract class SDL_StorageInterfaceRemoveCallback extends Callback implem
      *
      * @return the new {@code SDL_StorageInterfaceRemoveCallback}
      */
-    public static SDL_StorageInterfaceRemoveCallback create(long functionPointer) {
-        SDL_StorageInterfaceRemoveCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof SDL_StorageInterfaceRemoveCallback
-            ? (SDL_StorageInterfaceRemoveCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SDL_StorageInterfaceRemoveCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SDL_StorageInterfaceRemoveCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SDL_StorageInterfaceRemoveCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SDL_StorageInterfaceRemoveCallback} instance that delegates to the specified {@code SDL_StorageInterfaceRemoveCallbackI} instance. */
-    public static SDL_StorageInterfaceRemoveCallback create(SDL_StorageInterfaceRemoveCallbackI instance) {
+    public static SDL_StorageInterfaceRemoveCallback create(SDL_StorageInterfaceRemoveCallbackI instance) { return create(instance, instance.address()); }
+
+    private static SDL_StorageInterfaceRemoveCallback create(SDL_StorageInterfaceRemoveCallbackI instance, long functionPointer) {
         return instance instanceof SDL_StorageInterfaceRemoveCallback
             ? (SDL_StorageInterfaceRemoveCallback)instance
-            : new Container(instance.address(), instance);
+            : new SDL_StorageInterfaceRemoveCallback(functionPointer) {
+                @Override public boolean invoke(long userdata, long path) {
+                    return instance.invoke(userdata, path);
+                }
+            };
     }
 
     protected SDL_StorageInterfaceRemoveCallback() {
@@ -44,22 +43,6 @@ public abstract class SDL_StorageInterfaceRemoveCallback extends Callback implem
 
     SDL_StorageInterfaceRemoveCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SDL_StorageInterfaceRemoveCallback {
-
-        private final SDL_StorageInterfaceRemoveCallbackI delegate;
-
-        Container(long functionPointer, SDL_StorageInterfaceRemoveCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public boolean invoke(long userdata, long path) {
-            return delegate.invoke(userdata, path);
-        }
-
     }
 
 }

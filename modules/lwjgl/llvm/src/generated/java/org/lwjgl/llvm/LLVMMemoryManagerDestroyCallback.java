@@ -19,23 +19,22 @@ public abstract class LLVMMemoryManagerDestroyCallback extends Callback implemen
      *
      * @return the new {@code LLVMMemoryManagerDestroyCallback}
      */
-    public static LLVMMemoryManagerDestroyCallback create(long functionPointer) {
-        LLVMMemoryManagerDestroyCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof LLVMMemoryManagerDestroyCallback
-            ? (LLVMMemoryManagerDestroyCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static LLVMMemoryManagerDestroyCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable LLVMMemoryManagerDestroyCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable LLVMMemoryManagerDestroyCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code LLVMMemoryManagerDestroyCallback} instance that delegates to the specified {@code LLVMMemoryManagerDestroyCallbackI} instance. */
-    public static LLVMMemoryManagerDestroyCallback create(LLVMMemoryManagerDestroyCallbackI instance) {
+    public static LLVMMemoryManagerDestroyCallback create(LLVMMemoryManagerDestroyCallbackI instance) { return create(instance, instance.address()); }
+
+    private static LLVMMemoryManagerDestroyCallback create(LLVMMemoryManagerDestroyCallbackI instance, long functionPointer) {
         return instance instanceof LLVMMemoryManagerDestroyCallback
             ? (LLVMMemoryManagerDestroyCallback)instance
-            : new Container(instance.address(), instance);
+            : new LLVMMemoryManagerDestroyCallback(functionPointer) {
+                @Override public void invoke(long Opaque) {
+                    instance.invoke(Opaque);
+                }
+            };
     }
 
     protected LLVMMemoryManagerDestroyCallback() {
@@ -44,22 +43,6 @@ public abstract class LLVMMemoryManagerDestroyCallback extends Callback implemen
 
     LLVMMemoryManagerDestroyCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends LLVMMemoryManagerDestroyCallback {
-
-        private final LLVMMemoryManagerDestroyCallbackI delegate;
-
-        Container(long functionPointer, LLVMMemoryManagerDestroyCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long Opaque) {
-            delegate.invoke(Opaque);
-        }
-
     }
 
 }

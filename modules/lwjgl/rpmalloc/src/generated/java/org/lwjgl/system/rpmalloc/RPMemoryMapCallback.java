@@ -19,23 +19,22 @@ public abstract class RPMemoryMapCallback extends Callback implements RPMemoryMa
      *
      * @return the new {@code RPMemoryMapCallback}
      */
-    public static RPMemoryMapCallback create(long functionPointer) {
-        RPMemoryMapCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof RPMemoryMapCallback
-            ? (RPMemoryMapCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static RPMemoryMapCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable RPMemoryMapCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable RPMemoryMapCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code RPMemoryMapCallback} instance that delegates to the specified {@code RPMemoryMapCallbackI} instance. */
-    public static RPMemoryMapCallback create(RPMemoryMapCallbackI instance) {
+    public static RPMemoryMapCallback create(RPMemoryMapCallbackI instance) { return create(instance, instance.address()); }
+
+    private static RPMemoryMapCallback create(RPMemoryMapCallbackI instance, long functionPointer) {
         return instance instanceof RPMemoryMapCallback
             ? (RPMemoryMapCallback)instance
-            : new Container(instance.address(), instance);
+            : new RPMemoryMapCallback(functionPointer) {
+                @Override public long invoke(long size, long offset) {
+                    return instance.invoke(size, offset);
+                }
+            };
     }
 
     protected RPMemoryMapCallback() {
@@ -44,22 +43,6 @@ public abstract class RPMemoryMapCallback extends Callback implements RPMemoryMa
 
     RPMemoryMapCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends RPMemoryMapCallback {
-
-        private final RPMemoryMapCallbackI delegate;
-
-        Container(long functionPointer, RPMemoryMapCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long size, long offset) {
-            return delegate.invoke(size, offset);
-        }
-
     }
 
 }

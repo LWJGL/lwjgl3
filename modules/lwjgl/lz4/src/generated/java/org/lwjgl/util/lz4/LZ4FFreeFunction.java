@@ -19,23 +19,22 @@ public abstract class LZ4FFreeFunction extends Callback implements LZ4FFreeFunct
      *
      * @return the new {@code LZ4FFreeFunction}
      */
-    public static LZ4FFreeFunction create(long functionPointer) {
-        LZ4FFreeFunctionI instance = Callback.get(functionPointer);
-        return instance instanceof LZ4FFreeFunction
-            ? (LZ4FFreeFunction)instance
-            : new Container(functionPointer, instance);
-    }
+    public static LZ4FFreeFunction create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable LZ4FFreeFunction createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable LZ4FFreeFunction createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code LZ4FFreeFunction} instance that delegates to the specified {@code LZ4FFreeFunctionI} instance. */
-    public static LZ4FFreeFunction create(LZ4FFreeFunctionI instance) {
+    public static LZ4FFreeFunction create(LZ4FFreeFunctionI instance) { return create(instance, instance.address()); }
+
+    private static LZ4FFreeFunction create(LZ4FFreeFunctionI instance, long functionPointer) {
         return instance instanceof LZ4FFreeFunction
             ? (LZ4FFreeFunction)instance
-            : new Container(instance.address(), instance);
+            : new LZ4FFreeFunction(functionPointer) {
+                @Override public long invoke(long opaqueState, long address) {
+                    return instance.invoke(opaqueState, address);
+                }
+            };
     }
 
     protected LZ4FFreeFunction() {
@@ -44,22 +43,6 @@ public abstract class LZ4FFreeFunction extends Callback implements LZ4FFreeFunct
 
     LZ4FFreeFunction(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends LZ4FFreeFunction {
-
-        private final LZ4FFreeFunctionI delegate;
-
-        Container(long functionPointer, LZ4FFreeFunctionI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long opaqueState, long address) {
-            return delegate.invoke(opaqueState, address);
-        }
-
     }
 
 }

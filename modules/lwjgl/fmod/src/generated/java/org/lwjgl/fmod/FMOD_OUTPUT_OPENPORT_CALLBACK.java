@@ -19,23 +19,22 @@ public abstract class FMOD_OUTPUT_OPENPORT_CALLBACK extends Callback implements 
      *
      * @return the new {@code FMOD_OUTPUT_OPENPORT_CALLBACK}
      */
-    public static FMOD_OUTPUT_OPENPORT_CALLBACK create(long functionPointer) {
-        FMOD_OUTPUT_OPENPORT_CALLBACKI instance = Callback.get(functionPointer);
-        return instance instanceof FMOD_OUTPUT_OPENPORT_CALLBACK
-            ? (FMOD_OUTPUT_OPENPORT_CALLBACK)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FMOD_OUTPUT_OPENPORT_CALLBACK create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FMOD_OUTPUT_OPENPORT_CALLBACK createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FMOD_OUTPUT_OPENPORT_CALLBACK createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FMOD_OUTPUT_OPENPORT_CALLBACK} instance that delegates to the specified {@code FMOD_OUTPUT_OPENPORT_CALLBACKI} instance. */
-    public static FMOD_OUTPUT_OPENPORT_CALLBACK create(FMOD_OUTPUT_OPENPORT_CALLBACKI instance) {
+    public static FMOD_OUTPUT_OPENPORT_CALLBACK create(FMOD_OUTPUT_OPENPORT_CALLBACKI instance) { return create(instance, instance.address()); }
+
+    private static FMOD_OUTPUT_OPENPORT_CALLBACK create(FMOD_OUTPUT_OPENPORT_CALLBACKI instance, long functionPointer) {
         return instance instanceof FMOD_OUTPUT_OPENPORT_CALLBACK
             ? (FMOD_OUTPUT_OPENPORT_CALLBACK)instance
-            : new Container(instance.address(), instance);
+            : new FMOD_OUTPUT_OPENPORT_CALLBACK(functionPointer) {
+                @Override public int invoke(long output_state, int portType, long portIndex, long portId, long portRate, long portChannels, long portFormat) {
+                    return instance.invoke(output_state, portType, portIndex, portId, portRate, portChannels, portFormat);
+                }
+            };
     }
 
     protected FMOD_OUTPUT_OPENPORT_CALLBACK() {
@@ -44,22 +43,6 @@ public abstract class FMOD_OUTPUT_OPENPORT_CALLBACK extends Callback implements 
 
     FMOD_OUTPUT_OPENPORT_CALLBACK(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FMOD_OUTPUT_OPENPORT_CALLBACK {
-
-        private final FMOD_OUTPUT_OPENPORT_CALLBACKI delegate;
-
-        Container(long functionPointer, FMOD_OUTPUT_OPENPORT_CALLBACKI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long output_state, int portType, long portIndex, long portId, long portRate, long portChannels, long portFormat) {
-            return delegate.invoke(output_state, portType, portIndex, portId, portRate, portChannels, portFormat);
-        }
-
     }
 
 }

@@ -19,23 +19,22 @@ public abstract class SDL_HitTest extends Callback implements SDL_HitTestI {
      *
      * @return the new {@code SDL_HitTest}
      */
-    public static SDL_HitTest create(long functionPointer) {
-        SDL_HitTestI instance = Callback.get(functionPointer);
-        return instance instanceof SDL_HitTest
-            ? (SDL_HitTest)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SDL_HitTest create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SDL_HitTest createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SDL_HitTest createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SDL_HitTest} instance that delegates to the specified {@code SDL_HitTestI} instance. */
-    public static SDL_HitTest create(SDL_HitTestI instance) {
+    public static SDL_HitTest create(SDL_HitTestI instance) { return create(instance, instance.address()); }
+
+    private static SDL_HitTest create(SDL_HitTestI instance, long functionPointer) {
         return instance instanceof SDL_HitTest
             ? (SDL_HitTest)instance
-            : new Container(instance.address(), instance);
+            : new SDL_HitTest(functionPointer) {
+                @Override public int invoke(long win, long area, long data) {
+                    return instance.invoke(win, area, data);
+                }
+            };
     }
 
     protected SDL_HitTest() {
@@ -44,22 +43,6 @@ public abstract class SDL_HitTest extends Callback implements SDL_HitTestI {
 
     SDL_HitTest(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SDL_HitTest {
-
-        private final SDL_HitTestI delegate;
-
-        Container(long functionPointer, SDL_HitTestI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long win, long area, long data) {
-            return delegate.invoke(win, area, data);
-        }
-
     }
 
 }

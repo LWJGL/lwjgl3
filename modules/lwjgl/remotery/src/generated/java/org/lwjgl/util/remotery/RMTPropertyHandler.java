@@ -19,23 +19,22 @@ public abstract class RMTPropertyHandler extends Callback implements RMTProperty
      *
      * @return the new {@code RMTPropertyHandler}
      */
-    public static RMTPropertyHandler create(long functionPointer) {
-        RMTPropertyHandlerI instance = Callback.get(functionPointer);
-        return instance instanceof RMTPropertyHandler
-            ? (RMTPropertyHandler)instance
-            : new Container(functionPointer, instance);
-    }
+    public static RMTPropertyHandler create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable RMTPropertyHandler createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable RMTPropertyHandler createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code RMTPropertyHandler} instance that delegates to the specified {@code RMTPropertyHandlerI} instance. */
-    public static RMTPropertyHandler create(RMTPropertyHandlerI instance) {
+    public static RMTPropertyHandler create(RMTPropertyHandlerI instance) { return create(instance, instance.address()); }
+
+    private static RMTPropertyHandler create(RMTPropertyHandlerI instance, long functionPointer) {
         return instance instanceof RMTPropertyHandler
             ? (RMTPropertyHandler)instance
-            : new Container(instance.address(), instance);
+            : new RMTPropertyHandler(functionPointer) {
+                @Override public void invoke(long cbk_context, long root) {
+                    instance.invoke(cbk_context, root);
+                }
+            };
     }
 
     protected RMTPropertyHandler() {
@@ -44,22 +43,6 @@ public abstract class RMTPropertyHandler extends Callback implements RMTProperty
 
     RMTPropertyHandler(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends RMTPropertyHandler {
-
-        private final RMTPropertyHandlerI delegate;
-
-        Container(long functionPointer, RMTPropertyHandlerI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long cbk_context, long root) {
-            delegate.invoke(cbk_context, root);
-        }
-
     }
 
 }

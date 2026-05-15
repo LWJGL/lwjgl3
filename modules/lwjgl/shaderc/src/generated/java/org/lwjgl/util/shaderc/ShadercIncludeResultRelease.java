@@ -19,23 +19,22 @@ public abstract class ShadercIncludeResultRelease extends Callback implements Sh
      *
      * @return the new {@code ShadercIncludeResultRelease}
      */
-    public static ShadercIncludeResultRelease create(long functionPointer) {
-        ShadercIncludeResultReleaseI instance = Callback.get(functionPointer);
-        return instance instanceof ShadercIncludeResultRelease
-            ? (ShadercIncludeResultRelease)instance
-            : new Container(functionPointer, instance);
-    }
+    public static ShadercIncludeResultRelease create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable ShadercIncludeResultRelease createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable ShadercIncludeResultRelease createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code ShadercIncludeResultRelease} instance that delegates to the specified {@code ShadercIncludeResultReleaseI} instance. */
-    public static ShadercIncludeResultRelease create(ShadercIncludeResultReleaseI instance) {
+    public static ShadercIncludeResultRelease create(ShadercIncludeResultReleaseI instance) { return create(instance, instance.address()); }
+
+    private static ShadercIncludeResultRelease create(ShadercIncludeResultReleaseI instance, long functionPointer) {
         return instance instanceof ShadercIncludeResultRelease
             ? (ShadercIncludeResultRelease)instance
-            : new Container(instance.address(), instance);
+            : new ShadercIncludeResultRelease(functionPointer) {
+                @Override public void invoke(long user_data, long include_result) {
+                    instance.invoke(user_data, include_result);
+                }
+            };
     }
 
     protected ShadercIncludeResultRelease() {
@@ -44,22 +43,6 @@ public abstract class ShadercIncludeResultRelease extends Callback implements Sh
 
     ShadercIncludeResultRelease(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends ShadercIncludeResultRelease {
-
-        private final ShadercIncludeResultReleaseI delegate;
-
-        Container(long functionPointer, ShadercIncludeResultReleaseI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long user_data, long include_result) {
-            delegate.invoke(user_data, include_result);
-        }
-
     }
 
 }

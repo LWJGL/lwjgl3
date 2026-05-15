@@ -19,23 +19,22 @@ public abstract class SDL_ClipboardCleanupCallback extends Callback implements S
      *
      * @return the new {@code SDL_ClipboardCleanupCallback}
      */
-    public static SDL_ClipboardCleanupCallback create(long functionPointer) {
-        SDL_ClipboardCleanupCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof SDL_ClipboardCleanupCallback
-            ? (SDL_ClipboardCleanupCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SDL_ClipboardCleanupCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SDL_ClipboardCleanupCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SDL_ClipboardCleanupCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SDL_ClipboardCleanupCallback} instance that delegates to the specified {@code SDL_ClipboardCleanupCallbackI} instance. */
-    public static SDL_ClipboardCleanupCallback create(SDL_ClipboardCleanupCallbackI instance) {
+    public static SDL_ClipboardCleanupCallback create(SDL_ClipboardCleanupCallbackI instance) { return create(instance, instance.address()); }
+
+    private static SDL_ClipboardCleanupCallback create(SDL_ClipboardCleanupCallbackI instance, long functionPointer) {
         return instance instanceof SDL_ClipboardCleanupCallback
             ? (SDL_ClipboardCleanupCallback)instance
-            : new Container(instance.address(), instance);
+            : new SDL_ClipboardCleanupCallback(functionPointer) {
+                @Override public void invoke(long userdata) {
+                    instance.invoke(userdata);
+                }
+            };
     }
 
     protected SDL_ClipboardCleanupCallback() {
@@ -44,22 +43,6 @@ public abstract class SDL_ClipboardCleanupCallback extends Callback implements S
 
     SDL_ClipboardCleanupCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SDL_ClipboardCleanupCallback {
-
-        private final SDL_ClipboardCleanupCallbackI delegate;
-
-        Container(long functionPointer, SDL_ClipboardCleanupCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long userdata) {
-            delegate.invoke(userdata);
-        }
-
     }
 
 }

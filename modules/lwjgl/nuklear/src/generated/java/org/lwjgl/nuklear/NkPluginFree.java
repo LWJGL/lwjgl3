@@ -19,23 +19,22 @@ public abstract class NkPluginFree extends Callback implements NkPluginFreeI {
      *
      * @return the new {@code NkPluginFree}
      */
-    public static NkPluginFree create(long functionPointer) {
-        NkPluginFreeI instance = Callback.get(functionPointer);
-        return instance instanceof NkPluginFree
-            ? (NkPluginFree)instance
-            : new Container(functionPointer, instance);
-    }
+    public static NkPluginFree create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable NkPluginFree createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable NkPluginFree createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code NkPluginFree} instance that delegates to the specified {@code NkPluginFreeI} instance. */
-    public static NkPluginFree create(NkPluginFreeI instance) {
+    public static NkPluginFree create(NkPluginFreeI instance) { return create(instance, instance.address()); }
+
+    private static NkPluginFree create(NkPluginFreeI instance, long functionPointer) {
         return instance instanceof NkPluginFree
             ? (NkPluginFree)instance
-            : new Container(instance.address(), instance);
+            : new NkPluginFree(functionPointer) {
+                @Override public void invoke(long handle, long old) {
+                    instance.invoke(handle, old);
+                }
+            };
     }
 
     protected NkPluginFree() {
@@ -44,22 +43,6 @@ public abstract class NkPluginFree extends Callback implements NkPluginFreeI {
 
     NkPluginFree(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends NkPluginFree {
-
-        private final NkPluginFreeI delegate;
-
-        Container(long functionPointer, NkPluginFreeI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long handle, long old) {
-            delegate.invoke(handle, old);
-        }
-
     }
 
 }

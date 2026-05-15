@@ -19,23 +19,22 @@ public abstract class SOFTEventProc extends Callback implements SOFTEventProcI {
      *
      * @return the new {@code SOFTEventProc}
      */
-    public static SOFTEventProc create(long functionPointer) {
-        SOFTEventProcI instance = Callback.get(functionPointer);
-        return instance instanceof SOFTEventProc
-            ? (SOFTEventProc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SOFTEventProc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SOFTEventProc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SOFTEventProc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SOFTEventProc} instance that delegates to the specified {@code SOFTEventProcI} instance. */
-    public static SOFTEventProc create(SOFTEventProcI instance) {
+    public static SOFTEventProc create(SOFTEventProcI instance) { return create(instance, instance.address()); }
+
+    private static SOFTEventProc create(SOFTEventProcI instance, long functionPointer) {
         return instance instanceof SOFTEventProc
             ? (SOFTEventProc)instance
-            : new Container(instance.address(), instance);
+            : new SOFTEventProc(functionPointer) {
+                @Override public void invoke(int eventType, int object, int param, int length, long message, long userParam) {
+                    instance.invoke(eventType, object, param, length, message, userParam);
+                }
+            };
     }
 
     protected SOFTEventProc() {
@@ -44,22 +43,6 @@ public abstract class SOFTEventProc extends Callback implements SOFTEventProcI {
 
     SOFTEventProc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SOFTEventProc {
-
-        private final SOFTEventProcI delegate;
-
-        Container(long functionPointer, SOFTEventProcI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(int eventType, int object, int param, int length, long message, long userParam) {
-            delegate.invoke(eventType, object, param, length, message, userParam);
-        }
-
     }
 
 }

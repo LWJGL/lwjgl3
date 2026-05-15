@@ -19,23 +19,22 @@ public abstract class SOFTSystemEventProc extends Callback implements SOFTSystem
      *
      * @return the new {@code SOFTSystemEventProc}
      */
-    public static SOFTSystemEventProc create(long functionPointer) {
-        SOFTSystemEventProcI instance = Callback.get(functionPointer);
-        return instance instanceof SOFTSystemEventProc
-            ? (SOFTSystemEventProc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SOFTSystemEventProc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SOFTSystemEventProc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SOFTSystemEventProc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SOFTSystemEventProc} instance that delegates to the specified {@code SOFTSystemEventProcI} instance. */
-    public static SOFTSystemEventProc create(SOFTSystemEventProcI instance) {
+    public static SOFTSystemEventProc create(SOFTSystemEventProcI instance) { return create(instance, instance.address()); }
+
+    private static SOFTSystemEventProc create(SOFTSystemEventProcI instance, long functionPointer) {
         return instance instanceof SOFTSystemEventProc
             ? (SOFTSystemEventProc)instance
-            : new Container(instance.address(), instance);
+            : new SOFTSystemEventProc(functionPointer) {
+                @Override public void invoke(int eventType, int deviceType, long device, int length, long message, long userParam) {
+                    instance.invoke(eventType, deviceType, device, length, message, userParam);
+                }
+            };
     }
 
     protected SOFTSystemEventProc() {
@@ -44,22 +43,6 @@ public abstract class SOFTSystemEventProc extends Callback implements SOFTSystem
 
     SOFTSystemEventProc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SOFTSystemEventProc {
-
-        private final SOFTSystemEventProcI delegate;
-
-        Container(long functionPointer, SOFTSystemEventProcI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(int eventType, int deviceType, long device, int length, long message, long userParam) {
-            delegate.invoke(eventType, deviceType, device, length, message, userParam);
-        }
-
     }
 
 }

@@ -19,23 +19,22 @@ public abstract class FTC_Face_Requester extends Callback implements FTC_Face_Re
      *
      * @return the new {@code FTC_Face_Requester}
      */
-    public static FTC_Face_Requester create(long functionPointer) {
-        FTC_Face_RequesterI instance = Callback.get(functionPointer);
-        return instance instanceof FTC_Face_Requester
-            ? (FTC_Face_Requester)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FTC_Face_Requester create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FTC_Face_Requester createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FTC_Face_Requester createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FTC_Face_Requester} instance that delegates to the specified {@code FTC_Face_RequesterI} instance. */
-    public static FTC_Face_Requester create(FTC_Face_RequesterI instance) {
+    public static FTC_Face_Requester create(FTC_Face_RequesterI instance) { return create(instance, instance.address()); }
+
+    private static FTC_Face_Requester create(FTC_Face_RequesterI instance, long functionPointer) {
         return instance instanceof FTC_Face_Requester
             ? (FTC_Face_Requester)instance
-            : new Container(instance.address(), instance);
+            : new FTC_Face_Requester(functionPointer) {
+                @Override public int invoke(long face_id, long library, long req_data, long aface) {
+                    return instance.invoke(face_id, library, req_data, aface);
+                }
+            };
     }
 
     protected FTC_Face_Requester() {
@@ -44,22 +43,6 @@ public abstract class FTC_Face_Requester extends Callback implements FTC_Face_Re
 
     FTC_Face_Requester(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FTC_Face_Requester {
-
-        private final FTC_Face_RequesterI delegate;
-
-        Container(long functionPointer, FTC_Face_RequesterI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long face_id, long library, long req_data, long aface) {
-            return delegate.invoke(face_id, library, req_data, aface);
-        }
-
     }
 
 }

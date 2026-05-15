@@ -19,23 +19,22 @@ public abstract class SDL_StorageInterfaceMkdirCallback extends Callback impleme
      *
      * @return the new {@code SDL_StorageInterfaceMkdirCallback}
      */
-    public static SDL_StorageInterfaceMkdirCallback create(long functionPointer) {
-        SDL_StorageInterfaceMkdirCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof SDL_StorageInterfaceMkdirCallback
-            ? (SDL_StorageInterfaceMkdirCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SDL_StorageInterfaceMkdirCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SDL_StorageInterfaceMkdirCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SDL_StorageInterfaceMkdirCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SDL_StorageInterfaceMkdirCallback} instance that delegates to the specified {@code SDL_StorageInterfaceMkdirCallbackI} instance. */
-    public static SDL_StorageInterfaceMkdirCallback create(SDL_StorageInterfaceMkdirCallbackI instance) {
+    public static SDL_StorageInterfaceMkdirCallback create(SDL_StorageInterfaceMkdirCallbackI instance) { return create(instance, instance.address()); }
+
+    private static SDL_StorageInterfaceMkdirCallback create(SDL_StorageInterfaceMkdirCallbackI instance, long functionPointer) {
         return instance instanceof SDL_StorageInterfaceMkdirCallback
             ? (SDL_StorageInterfaceMkdirCallback)instance
-            : new Container(instance.address(), instance);
+            : new SDL_StorageInterfaceMkdirCallback(functionPointer) {
+                @Override public boolean invoke(long userdata, long path) {
+                    return instance.invoke(userdata, path);
+                }
+            };
     }
 
     protected SDL_StorageInterfaceMkdirCallback() {
@@ -44,22 +43,6 @@ public abstract class SDL_StorageInterfaceMkdirCallback extends Callback impleme
 
     SDL_StorageInterfaceMkdirCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SDL_StorageInterfaceMkdirCallback {
-
-        private final SDL_StorageInterfaceMkdirCallbackI delegate;
-
-        Container(long functionPointer, SDL_StorageInterfaceMkdirCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public boolean invoke(long userdata, long path) {
-            return delegate.invoke(userdata, path);
-        }
-
     }
 
 }

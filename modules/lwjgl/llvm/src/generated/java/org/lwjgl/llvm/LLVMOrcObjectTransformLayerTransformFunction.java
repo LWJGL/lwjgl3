@@ -19,23 +19,22 @@ public abstract class LLVMOrcObjectTransformLayerTransformFunction extends Callb
      *
      * @return the new {@code LLVMOrcObjectTransformLayerTransformFunction}
      */
-    public static LLVMOrcObjectTransformLayerTransformFunction create(long functionPointer) {
-        LLVMOrcObjectTransformLayerTransformFunctionI instance = Callback.get(functionPointer);
-        return instance instanceof LLVMOrcObjectTransformLayerTransformFunction
-            ? (LLVMOrcObjectTransformLayerTransformFunction)instance
-            : new Container(functionPointer, instance);
-    }
+    public static LLVMOrcObjectTransformLayerTransformFunction create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable LLVMOrcObjectTransformLayerTransformFunction createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable LLVMOrcObjectTransformLayerTransformFunction createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code LLVMOrcObjectTransformLayerTransformFunction} instance that delegates to the specified {@code LLVMOrcObjectTransformLayerTransformFunctionI} instance. */
-    public static LLVMOrcObjectTransformLayerTransformFunction create(LLVMOrcObjectTransformLayerTransformFunctionI instance) {
+    public static LLVMOrcObjectTransformLayerTransformFunction create(LLVMOrcObjectTransformLayerTransformFunctionI instance) { return create(instance, instance.address()); }
+
+    private static LLVMOrcObjectTransformLayerTransformFunction create(LLVMOrcObjectTransformLayerTransformFunctionI instance, long functionPointer) {
         return instance instanceof LLVMOrcObjectTransformLayerTransformFunction
             ? (LLVMOrcObjectTransformLayerTransformFunction)instance
-            : new Container(instance.address(), instance);
+            : new LLVMOrcObjectTransformLayerTransformFunction(functionPointer) {
+                @Override public long invoke(long Ctx, long ObjInOut) {
+                    return instance.invoke(Ctx, ObjInOut);
+                }
+            };
     }
 
     protected LLVMOrcObjectTransformLayerTransformFunction() {
@@ -44,22 +43,6 @@ public abstract class LLVMOrcObjectTransformLayerTransformFunction extends Callb
 
     LLVMOrcObjectTransformLayerTransformFunction(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends LLVMOrcObjectTransformLayerTransformFunction {
-
-        private final LLVMOrcObjectTransformLayerTransformFunctionI delegate;
-
-        Container(long functionPointer, LLVMOrcObjectTransformLayerTransformFunctionI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long Ctx, long ObjInOut) {
-            return delegate.invoke(Ctx, ObjInOut);
-        }
-
     }
 
 }

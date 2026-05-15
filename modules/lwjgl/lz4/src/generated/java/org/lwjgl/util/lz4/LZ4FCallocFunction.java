@@ -19,23 +19,22 @@ public abstract class LZ4FCallocFunction extends Callback implements LZ4FCallocF
      *
      * @return the new {@code LZ4FCallocFunction}
      */
-    public static LZ4FCallocFunction create(long functionPointer) {
-        LZ4FCallocFunctionI instance = Callback.get(functionPointer);
-        return instance instanceof LZ4FCallocFunction
-            ? (LZ4FCallocFunction)instance
-            : new Container(functionPointer, instance);
-    }
+    public static LZ4FCallocFunction create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable LZ4FCallocFunction createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable LZ4FCallocFunction createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code LZ4FCallocFunction} instance that delegates to the specified {@code LZ4FCallocFunctionI} instance. */
-    public static LZ4FCallocFunction create(LZ4FCallocFunctionI instance) {
+    public static LZ4FCallocFunction create(LZ4FCallocFunctionI instance) { return create(instance, instance.address()); }
+
+    private static LZ4FCallocFunction create(LZ4FCallocFunctionI instance, long functionPointer) {
         return instance instanceof LZ4FCallocFunction
             ? (LZ4FCallocFunction)instance
-            : new Container(instance.address(), instance);
+            : new LZ4FCallocFunction(functionPointer) {
+                @Override public long invoke(long opaqueState, long size) {
+                    return instance.invoke(opaqueState, size);
+                }
+            };
     }
 
     protected LZ4FCallocFunction() {
@@ -44,22 +43,6 @@ public abstract class LZ4FCallocFunction extends Callback implements LZ4FCallocF
 
     LZ4FCallocFunction(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends LZ4FCallocFunction {
-
-        private final LZ4FCallocFunctionI delegate;
-
-        Container(long functionPointer, LZ4FCallocFunctionI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long opaqueState, long size) {
-            return delegate.invoke(opaqueState, size);
-        }
-
     }
 
 }

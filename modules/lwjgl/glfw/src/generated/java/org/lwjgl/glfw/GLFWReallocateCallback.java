@@ -19,23 +19,22 @@ public abstract class GLFWReallocateCallback extends Callback implements GLFWRea
      *
      * @return the new {@code GLFWReallocateCallback}
      */
-    public static GLFWReallocateCallback create(long functionPointer) {
-        GLFWReallocateCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLFWReallocateCallback
-            ? (GLFWReallocateCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLFWReallocateCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLFWReallocateCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLFWReallocateCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLFWReallocateCallback} instance that delegates to the specified {@code GLFWReallocateCallbackI} instance. */
-    public static GLFWReallocateCallback create(GLFWReallocateCallbackI instance) {
+    public static GLFWReallocateCallback create(GLFWReallocateCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLFWReallocateCallback create(GLFWReallocateCallbackI instance, long functionPointer) {
         return instance instanceof GLFWReallocateCallback
             ? (GLFWReallocateCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLFWReallocateCallback(functionPointer) {
+                @Override public long invoke(long block, long size, long user) {
+                    return instance.invoke(block, size, user);
+                }
+            };
     }
 
     protected GLFWReallocateCallback() {
@@ -44,22 +43,6 @@ public abstract class GLFWReallocateCallback extends Callback implements GLFWRea
 
     GLFWReallocateCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends GLFWReallocateCallback {
-
-        private final GLFWReallocateCallbackI delegate;
-
-        Container(long functionPointer, GLFWReallocateCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long block, long size, long user) {
-            return delegate.invoke(block, size, user);
-        }
-
     }
 
 }

@@ -19,23 +19,22 @@ public abstract class STBISkipCallback extends Callback implements STBISkipCallb
      *
      * @return the new {@code STBISkipCallback}
      */
-    public static STBISkipCallback create(long functionPointer) {
-        STBISkipCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof STBISkipCallback
-            ? (STBISkipCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static STBISkipCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable STBISkipCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable STBISkipCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code STBISkipCallback} instance that delegates to the specified {@code STBISkipCallbackI} instance. */
-    public static STBISkipCallback create(STBISkipCallbackI instance) {
+    public static STBISkipCallback create(STBISkipCallbackI instance) { return create(instance, instance.address()); }
+
+    private static STBISkipCallback create(STBISkipCallbackI instance, long functionPointer) {
         return instance instanceof STBISkipCallback
             ? (STBISkipCallback)instance
-            : new Container(instance.address(), instance);
+            : new STBISkipCallback(functionPointer) {
+                @Override public void invoke(long user, int n) {
+                    instance.invoke(user, n);
+                }
+            };
     }
 
     protected STBISkipCallback() {
@@ -44,22 +43,6 @@ public abstract class STBISkipCallback extends Callback implements STBISkipCallb
 
     STBISkipCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends STBISkipCallback {
-
-        private final STBISkipCallbackI delegate;
-
-        Container(long functionPointer, STBISkipCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long user, int n) {
-            delegate.invoke(user, n);
-        }
-
     }
 
 }

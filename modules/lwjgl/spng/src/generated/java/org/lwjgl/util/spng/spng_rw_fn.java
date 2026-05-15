@@ -19,23 +19,22 @@ public abstract class spng_rw_fn extends Callback implements spng_rw_fnI {
      *
      * @return the new {@code spng_rw_fn}
      */
-    public static spng_rw_fn create(long functionPointer) {
-        spng_rw_fnI instance = Callback.get(functionPointer);
-        return instance instanceof spng_rw_fn
-            ? (spng_rw_fn)instance
-            : new Container(functionPointer, instance);
-    }
+    public static spng_rw_fn create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable spng_rw_fn createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable spng_rw_fn createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code spng_rw_fn} instance that delegates to the specified {@code spng_rw_fnI} instance. */
-    public static spng_rw_fn create(spng_rw_fnI instance) {
+    public static spng_rw_fn create(spng_rw_fnI instance) { return create(instance, instance.address()); }
+
+    private static spng_rw_fn create(spng_rw_fnI instance, long functionPointer) {
         return instance instanceof spng_rw_fn
             ? (spng_rw_fn)instance
-            : new Container(instance.address(), instance);
+            : new spng_rw_fn(functionPointer) {
+                @Override public void invoke(long ctx, long user, long dest, long length) {
+                    instance.invoke(ctx, user, dest, length);
+                }
+            };
     }
 
     protected spng_rw_fn() {
@@ -44,22 +43,6 @@ public abstract class spng_rw_fn extends Callback implements spng_rw_fnI {
 
     spng_rw_fn(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends spng_rw_fn {
-
-        private final spng_rw_fnI delegate;
-
-        Container(long functionPointer, spng_rw_fnI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long ctx, long user, long dest, long length) {
-            delegate.invoke(ctx, user, dest, length);
-        }
-
     }
 
 }

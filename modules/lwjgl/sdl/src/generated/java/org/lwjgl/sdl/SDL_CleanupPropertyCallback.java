@@ -19,23 +19,22 @@ public abstract class SDL_CleanupPropertyCallback extends Callback implements SD
      *
      * @return the new {@code SDL_CleanupPropertyCallback}
      */
-    public static SDL_CleanupPropertyCallback create(long functionPointer) {
-        SDL_CleanupPropertyCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof SDL_CleanupPropertyCallback
-            ? (SDL_CleanupPropertyCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SDL_CleanupPropertyCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SDL_CleanupPropertyCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SDL_CleanupPropertyCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SDL_CleanupPropertyCallback} instance that delegates to the specified {@code SDL_CleanupPropertyCallbackI} instance. */
-    public static SDL_CleanupPropertyCallback create(SDL_CleanupPropertyCallbackI instance) {
+    public static SDL_CleanupPropertyCallback create(SDL_CleanupPropertyCallbackI instance) { return create(instance, instance.address()); }
+
+    private static SDL_CleanupPropertyCallback create(SDL_CleanupPropertyCallbackI instance, long functionPointer) {
         return instance instanceof SDL_CleanupPropertyCallback
             ? (SDL_CleanupPropertyCallback)instance
-            : new Container(instance.address(), instance);
+            : new SDL_CleanupPropertyCallback(functionPointer) {
+                @Override public void invoke(long userdata, long value) {
+                    instance.invoke(userdata, value);
+                }
+            };
     }
 
     protected SDL_CleanupPropertyCallback() {
@@ -44,22 +43,6 @@ public abstract class SDL_CleanupPropertyCallback extends Callback implements SD
 
     SDL_CleanupPropertyCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends SDL_CleanupPropertyCallback {
-
-        private final SDL_CleanupPropertyCallbackI delegate;
-
-        Container(long functionPointer, SDL_CleanupPropertyCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long userdata, long value) {
-            delegate.invoke(userdata, value);
-        }
-
     }
 
 }

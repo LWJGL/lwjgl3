@@ -21,23 +21,22 @@ public abstract class GLFWWindowPosCallback extends Callback implements GLFWWind
      *
      * @return the new {@code GLFWWindowPosCallback}
      */
-    public static GLFWWindowPosCallback create(long functionPointer) {
-        GLFWWindowPosCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLFWWindowPosCallback
-            ? (GLFWWindowPosCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLFWWindowPosCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLFWWindowPosCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLFWWindowPosCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLFWWindowPosCallback} instance that delegates to the specified {@code GLFWWindowPosCallbackI} instance. */
-    public static GLFWWindowPosCallback create(GLFWWindowPosCallbackI instance) {
+    public static GLFWWindowPosCallback create(GLFWWindowPosCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLFWWindowPosCallback create(GLFWWindowPosCallbackI instance, long functionPointer) {
         return instance instanceof GLFWWindowPosCallback
             ? (GLFWWindowPosCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLFWWindowPosCallback(functionPointer) {
+                @Override public void invoke(long window, int xpos, int ypos) {
+                    instance.invoke(window, xpos, ypos);
+                }
+            };
     }
 
     protected GLFWWindowPosCallback() {
@@ -52,22 +51,6 @@ public abstract class GLFWWindowPosCallback extends Callback implements GLFWWind
     public GLFWWindowPosCallback set(long window) {
         glfwSetWindowPosCallback(window, this);
         return this;
-    }
-
-    private static final class Container extends GLFWWindowPosCallback {
-
-        private final GLFWWindowPosCallbackI delegate;
-
-        Container(long functionPointer, GLFWWindowPosCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long window, int xpos, int ypos) {
-            delegate.invoke(window, xpos, ypos);
-        }
-
     }
 
 }

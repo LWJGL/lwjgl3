@@ -21,23 +21,22 @@ public abstract class GLFWJoystickCallback extends Callback implements GLFWJoyst
      *
      * @return the new {@code GLFWJoystickCallback}
      */
-    public static GLFWJoystickCallback create(long functionPointer) {
-        GLFWJoystickCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLFWJoystickCallback
-            ? (GLFWJoystickCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLFWJoystickCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLFWJoystickCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLFWJoystickCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLFWJoystickCallback} instance that delegates to the specified {@code GLFWJoystickCallbackI} instance. */
-    public static GLFWJoystickCallback create(GLFWJoystickCallbackI instance) {
+    public static GLFWJoystickCallback create(GLFWJoystickCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLFWJoystickCallback create(GLFWJoystickCallbackI instance, long functionPointer) {
         return instance instanceof GLFWJoystickCallback
             ? (GLFWJoystickCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLFWJoystickCallback(functionPointer) {
+                @Override public void invoke(int jid, int event) {
+                    instance.invoke(jid, event);
+                }
+            };
     }
 
     protected GLFWJoystickCallback() {
@@ -52,22 +51,6 @@ public abstract class GLFWJoystickCallback extends Callback implements GLFWJoyst
     public GLFWJoystickCallback set() {
         glfwSetJoystickCallback(this);
         return this;
-    }
-
-    private static final class Container extends GLFWJoystickCallback {
-
-        private final GLFWJoystickCallbackI delegate;
-
-        Container(long functionPointer, GLFWJoystickCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(int jid, int event) {
-            delegate.invoke(jid, event);
-        }
-
     }
 
 }

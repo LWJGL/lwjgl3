@@ -19,23 +19,22 @@ public abstract class FT_SpanFunc extends Callback implements FT_SpanFuncI {
      *
      * @return the new {@code FT_SpanFunc}
      */
-    public static FT_SpanFunc create(long functionPointer) {
-        FT_SpanFuncI instance = Callback.get(functionPointer);
-        return instance instanceof FT_SpanFunc
-            ? (FT_SpanFunc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FT_SpanFunc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FT_SpanFunc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FT_SpanFunc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FT_SpanFunc} instance that delegates to the specified {@code FT_SpanFuncI} instance. */
-    public static FT_SpanFunc create(FT_SpanFuncI instance) {
+    public static FT_SpanFunc create(FT_SpanFuncI instance) { return create(instance, instance.address()); }
+
+    private static FT_SpanFunc create(FT_SpanFuncI instance, long functionPointer) {
         return instance instanceof FT_SpanFunc
             ? (FT_SpanFunc)instance
-            : new Container(instance.address(), instance);
+            : new FT_SpanFunc(functionPointer) {
+                @Override public void invoke(int y, int count, long spans, long user) {
+                    instance.invoke(y, count, spans, user);
+                }
+            };
     }
 
     protected FT_SpanFunc() {
@@ -44,22 +43,6 @@ public abstract class FT_SpanFunc extends Callback implements FT_SpanFuncI {
 
     FT_SpanFunc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FT_SpanFunc {
-
-        private final FT_SpanFuncI delegate;
-
-        Container(long functionPointer, FT_SpanFuncI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(int y, int count, long spans, long user) {
-            delegate.invoke(y, count, spans, user);
-        }
-
     }
 
 }

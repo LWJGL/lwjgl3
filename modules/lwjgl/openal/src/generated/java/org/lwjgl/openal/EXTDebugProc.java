@@ -19,23 +19,22 @@ public abstract class EXTDebugProc extends Callback implements EXTDebugProcI {
      *
      * @return the new {@code EXTDebugProc}
      */
-    public static EXTDebugProc create(long functionPointer) {
-        EXTDebugProcI instance = Callback.get(functionPointer);
-        return instance instanceof EXTDebugProc
-            ? (EXTDebugProc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static EXTDebugProc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable EXTDebugProc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable EXTDebugProc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code EXTDebugProc} instance that delegates to the specified {@code EXTDebugProcI} instance. */
-    public static EXTDebugProc create(EXTDebugProcI instance) {
+    public static EXTDebugProc create(EXTDebugProcI instance) { return create(instance, instance.address()); }
+
+    private static EXTDebugProc create(EXTDebugProcI instance, long functionPointer) {
         return instance instanceof EXTDebugProc
             ? (EXTDebugProc)instance
-            : new Container(instance.address(), instance);
+            : new EXTDebugProc(functionPointer) {
+                @Override public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {
+                    instance.invoke(source, type, id, severity, length, message, userParam);
+                }
+            };
     }
 
     protected EXTDebugProc() {
@@ -44,22 +43,6 @@ public abstract class EXTDebugProc extends Callback implements EXTDebugProcI {
 
     EXTDebugProc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends EXTDebugProc {
-
-        private final EXTDebugProcI delegate;
-
-        Container(long functionPointer, EXTDebugProcI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {
-            delegate.invoke(source, type, id, severity, length, message, userParam);
-        }
-
     }
 
 }

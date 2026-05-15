@@ -19,23 +19,22 @@ public abstract class FMOD_CHANNELCONTROL_CALLBACK extends Callback implements F
      *
      * @return the new {@code FMOD_CHANNELCONTROL_CALLBACK}
      */
-    public static FMOD_CHANNELCONTROL_CALLBACK create(long functionPointer) {
-        FMOD_CHANNELCONTROL_CALLBACKI instance = Callback.get(functionPointer);
-        return instance instanceof FMOD_CHANNELCONTROL_CALLBACK
-            ? (FMOD_CHANNELCONTROL_CALLBACK)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FMOD_CHANNELCONTROL_CALLBACK create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FMOD_CHANNELCONTROL_CALLBACK createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FMOD_CHANNELCONTROL_CALLBACK createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FMOD_CHANNELCONTROL_CALLBACK} instance that delegates to the specified {@code FMOD_CHANNELCONTROL_CALLBACKI} instance. */
-    public static FMOD_CHANNELCONTROL_CALLBACK create(FMOD_CHANNELCONTROL_CALLBACKI instance) {
+    public static FMOD_CHANNELCONTROL_CALLBACK create(FMOD_CHANNELCONTROL_CALLBACKI instance) { return create(instance, instance.address()); }
+
+    private static FMOD_CHANNELCONTROL_CALLBACK create(FMOD_CHANNELCONTROL_CALLBACKI instance, long functionPointer) {
         return instance instanceof FMOD_CHANNELCONTROL_CALLBACK
             ? (FMOD_CHANNELCONTROL_CALLBACK)instance
-            : new Container(instance.address(), instance);
+            : new FMOD_CHANNELCONTROL_CALLBACK(functionPointer) {
+                @Override public int invoke(long channelcontrol, int controltype, int callbacktype, long commanddata1, long commanddata2) {
+                    return instance.invoke(channelcontrol, controltype, callbacktype, commanddata1, commanddata2);
+                }
+            };
     }
 
     protected FMOD_CHANNELCONTROL_CALLBACK() {
@@ -44,22 +43,6 @@ public abstract class FMOD_CHANNELCONTROL_CALLBACK extends Callback implements F
 
     FMOD_CHANNELCONTROL_CALLBACK(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FMOD_CHANNELCONTROL_CALLBACK {
-
-        private final FMOD_CHANNELCONTROL_CALLBACKI delegate;
-
-        Container(long functionPointer, FMOD_CHANNELCONTROL_CALLBACKI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long channelcontrol, int controltype, int callbacktype, long commanddata1, long commanddata2) {
-            return delegate.invoke(channelcontrol, controltype, callbacktype, commanddata1, commanddata2);
-        }
-
     }
 
 }

@@ -19,23 +19,22 @@ public abstract class BGFXCacheReadSizeCallback extends Callback implements BGFX
      *
      * @return the new {@code BGFXCacheReadSizeCallback}
      */
-    public static BGFXCacheReadSizeCallback create(long functionPointer) {
-        BGFXCacheReadSizeCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof BGFXCacheReadSizeCallback
-            ? (BGFXCacheReadSizeCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static BGFXCacheReadSizeCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable BGFXCacheReadSizeCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable BGFXCacheReadSizeCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code BGFXCacheReadSizeCallback} instance that delegates to the specified {@code BGFXCacheReadSizeCallbackI} instance. */
-    public static BGFXCacheReadSizeCallback create(BGFXCacheReadSizeCallbackI instance) {
+    public static BGFXCacheReadSizeCallback create(BGFXCacheReadSizeCallbackI instance) { return create(instance, instance.address()); }
+
+    private static BGFXCacheReadSizeCallback create(BGFXCacheReadSizeCallbackI instance, long functionPointer) {
         return instance instanceof BGFXCacheReadSizeCallback
             ? (BGFXCacheReadSizeCallback)instance
-            : new Container(instance.address(), instance);
+            : new BGFXCacheReadSizeCallback(functionPointer) {
+                @Override public int invoke(long _this, long _id) {
+                    return instance.invoke(_this, _id);
+                }
+            };
     }
 
     protected BGFXCacheReadSizeCallback() {
@@ -44,22 +43,6 @@ public abstract class BGFXCacheReadSizeCallback extends Callback implements BGFX
 
     BGFXCacheReadSizeCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends BGFXCacheReadSizeCallback {
-
-        private final BGFXCacheReadSizeCallbackI delegate;
-
-        Container(long functionPointer, BGFXCacheReadSizeCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long _this, long _id) {
-            return delegate.invoke(_this, _id);
-        }
-
     }
 
 }

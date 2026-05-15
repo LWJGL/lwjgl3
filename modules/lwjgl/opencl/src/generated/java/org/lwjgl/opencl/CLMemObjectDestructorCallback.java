@@ -19,23 +19,22 @@ public abstract class CLMemObjectDestructorCallback extends Callback implements 
      *
      * @return the new {@code CLMemObjectDestructorCallback}
      */
-    public static CLMemObjectDestructorCallback create(long functionPointer) {
-        CLMemObjectDestructorCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof CLMemObjectDestructorCallback
-            ? (CLMemObjectDestructorCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static CLMemObjectDestructorCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable CLMemObjectDestructorCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable CLMemObjectDestructorCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code CLMemObjectDestructorCallback} instance that delegates to the specified {@code CLMemObjectDestructorCallbackI} instance. */
-    public static CLMemObjectDestructorCallback create(CLMemObjectDestructorCallbackI instance) {
+    public static CLMemObjectDestructorCallback create(CLMemObjectDestructorCallbackI instance) { return create(instance, instance.address()); }
+
+    private static CLMemObjectDestructorCallback create(CLMemObjectDestructorCallbackI instance, long functionPointer) {
         return instance instanceof CLMemObjectDestructorCallback
             ? (CLMemObjectDestructorCallback)instance
-            : new Container(instance.address(), instance);
+            : new CLMemObjectDestructorCallback(functionPointer) {
+                @Override public void invoke(long memobj, long user_data) {
+                    instance.invoke(memobj, user_data);
+                }
+            };
     }
 
     protected CLMemObjectDestructorCallback() {
@@ -44,22 +43,6 @@ public abstract class CLMemObjectDestructorCallback extends Callback implements 
 
     CLMemObjectDestructorCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends CLMemObjectDestructorCallback {
-
-        private final CLMemObjectDestructorCallbackI delegate;
-
-        Container(long functionPointer, CLMemObjectDestructorCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long memobj, long user_data) {
-            delegate.invoke(memobj, user_data);
-        }
-
     }
 
 }

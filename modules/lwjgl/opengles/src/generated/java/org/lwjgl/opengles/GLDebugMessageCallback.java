@@ -19,23 +19,22 @@ public abstract class GLDebugMessageCallback extends Callback implements GLDebug
      *
      * @return the new {@code GLDebugMessageCallback}
      */
-    public static GLDebugMessageCallback create(long functionPointer) {
-        GLDebugMessageCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLDebugMessageCallback
-            ? (GLDebugMessageCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLDebugMessageCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLDebugMessageCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLDebugMessageCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLDebugMessageCallback} instance that delegates to the specified {@code GLDebugMessageCallbackI} instance. */
-    public static GLDebugMessageCallback create(GLDebugMessageCallbackI instance) {
+    public static GLDebugMessageCallback create(GLDebugMessageCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLDebugMessageCallback create(GLDebugMessageCallbackI instance, long functionPointer) {
         return instance instanceof GLDebugMessageCallback
             ? (GLDebugMessageCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLDebugMessageCallback(functionPointer) {
+                @Override public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {
+                    instance.invoke(source, type, id, severity, length, message, userParam);
+                }
+            };
     }
 
     protected GLDebugMessageCallback() {
@@ -58,22 +57,6 @@ public abstract class GLDebugMessageCallback extends Callback implements GLDebug
      */
     public static String getMessage(int length, long message) {
         return memUTF8(memByteBuffer(message, length));
-    }
-
-    private static final class Container extends GLDebugMessageCallback {
-
-        private final GLDebugMessageCallbackI delegate;
-
-        Container(long functionPointer, GLDebugMessageCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {
-            delegate.invoke(source, type, id, severity, length, message, userParam);
-        }
-
     }
 
 }

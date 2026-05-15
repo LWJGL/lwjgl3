@@ -19,23 +19,22 @@ public abstract class LLVMOrcDisposeCAPIDefinitionGeneratorFunction extends Call
      *
      * @return the new {@code LLVMOrcDisposeCAPIDefinitionGeneratorFunction}
      */
-    public static LLVMOrcDisposeCAPIDefinitionGeneratorFunction create(long functionPointer) {
-        LLVMOrcDisposeCAPIDefinitionGeneratorFunctionI instance = Callback.get(functionPointer);
-        return instance instanceof LLVMOrcDisposeCAPIDefinitionGeneratorFunction
-            ? (LLVMOrcDisposeCAPIDefinitionGeneratorFunction)instance
-            : new Container(functionPointer, instance);
-    }
+    public static LLVMOrcDisposeCAPIDefinitionGeneratorFunction create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable LLVMOrcDisposeCAPIDefinitionGeneratorFunction createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable LLVMOrcDisposeCAPIDefinitionGeneratorFunction createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code LLVMOrcDisposeCAPIDefinitionGeneratorFunction} instance that delegates to the specified {@code LLVMOrcDisposeCAPIDefinitionGeneratorFunctionI} instance. */
-    public static LLVMOrcDisposeCAPIDefinitionGeneratorFunction create(LLVMOrcDisposeCAPIDefinitionGeneratorFunctionI instance) {
+    public static LLVMOrcDisposeCAPIDefinitionGeneratorFunction create(LLVMOrcDisposeCAPIDefinitionGeneratorFunctionI instance) { return create(instance, instance.address()); }
+
+    private static LLVMOrcDisposeCAPIDefinitionGeneratorFunction create(LLVMOrcDisposeCAPIDefinitionGeneratorFunctionI instance, long functionPointer) {
         return instance instanceof LLVMOrcDisposeCAPIDefinitionGeneratorFunction
             ? (LLVMOrcDisposeCAPIDefinitionGeneratorFunction)instance
-            : new Container(instance.address(), instance);
+            : new LLVMOrcDisposeCAPIDefinitionGeneratorFunction(functionPointer) {
+                @Override public void invoke(long Ctx) {
+                    instance.invoke(Ctx);
+                }
+            };
     }
 
     protected LLVMOrcDisposeCAPIDefinitionGeneratorFunction() {
@@ -44,22 +43,6 @@ public abstract class LLVMOrcDisposeCAPIDefinitionGeneratorFunction extends Call
 
     LLVMOrcDisposeCAPIDefinitionGeneratorFunction(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends LLVMOrcDisposeCAPIDefinitionGeneratorFunction {
-
-        private final LLVMOrcDisposeCAPIDefinitionGeneratorFunctionI delegate;
-
-        Container(long functionPointer, LLVMOrcDisposeCAPIDefinitionGeneratorFunctionI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long Ctx) {
-            delegate.invoke(Ctx);
-        }
-
     }
 
 }

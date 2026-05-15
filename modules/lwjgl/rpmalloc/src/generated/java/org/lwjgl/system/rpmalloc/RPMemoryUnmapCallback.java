@@ -19,23 +19,22 @@ public abstract class RPMemoryUnmapCallback extends Callback implements RPMemory
      *
      * @return the new {@code RPMemoryUnmapCallback}
      */
-    public static RPMemoryUnmapCallback create(long functionPointer) {
-        RPMemoryUnmapCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof RPMemoryUnmapCallback
-            ? (RPMemoryUnmapCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static RPMemoryUnmapCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable RPMemoryUnmapCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable RPMemoryUnmapCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code RPMemoryUnmapCallback} instance that delegates to the specified {@code RPMemoryUnmapCallbackI} instance. */
-    public static RPMemoryUnmapCallback create(RPMemoryUnmapCallbackI instance) {
+    public static RPMemoryUnmapCallback create(RPMemoryUnmapCallbackI instance) { return create(instance, instance.address()); }
+
+    private static RPMemoryUnmapCallback create(RPMemoryUnmapCallbackI instance, long functionPointer) {
         return instance instanceof RPMemoryUnmapCallback
             ? (RPMemoryUnmapCallback)instance
-            : new Container(instance.address(), instance);
+            : new RPMemoryUnmapCallback(functionPointer) {
+                @Override public void invoke(long address, long size, long offset, boolean release) {
+                    instance.invoke(address, size, offset, release);
+                }
+            };
     }
 
     protected RPMemoryUnmapCallback() {
@@ -44,22 +43,6 @@ public abstract class RPMemoryUnmapCallback extends Callback implements RPMemory
 
     RPMemoryUnmapCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends RPMemoryUnmapCallback {
-
-        private final RPMemoryUnmapCallbackI delegate;
-
-        Container(long functionPointer, RPMemoryUnmapCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long address, long size, long offset, boolean release) {
-            delegate.invoke(address, size, offset, release);
-        }
-
     }
 
 }

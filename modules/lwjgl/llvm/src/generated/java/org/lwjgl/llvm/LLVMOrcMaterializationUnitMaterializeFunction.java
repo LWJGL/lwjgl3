@@ -19,23 +19,22 @@ public abstract class LLVMOrcMaterializationUnitMaterializeFunction extends Call
      *
      * @return the new {@code LLVMOrcMaterializationUnitMaterializeFunction}
      */
-    public static LLVMOrcMaterializationUnitMaterializeFunction create(long functionPointer) {
-        LLVMOrcMaterializationUnitMaterializeFunctionI instance = Callback.get(functionPointer);
-        return instance instanceof LLVMOrcMaterializationUnitMaterializeFunction
-            ? (LLVMOrcMaterializationUnitMaterializeFunction)instance
-            : new Container(functionPointer, instance);
-    }
+    public static LLVMOrcMaterializationUnitMaterializeFunction create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable LLVMOrcMaterializationUnitMaterializeFunction createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable LLVMOrcMaterializationUnitMaterializeFunction createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code LLVMOrcMaterializationUnitMaterializeFunction} instance that delegates to the specified {@code LLVMOrcMaterializationUnitMaterializeFunctionI} instance. */
-    public static LLVMOrcMaterializationUnitMaterializeFunction create(LLVMOrcMaterializationUnitMaterializeFunctionI instance) {
+    public static LLVMOrcMaterializationUnitMaterializeFunction create(LLVMOrcMaterializationUnitMaterializeFunctionI instance) { return create(instance, instance.address()); }
+
+    private static LLVMOrcMaterializationUnitMaterializeFunction create(LLVMOrcMaterializationUnitMaterializeFunctionI instance, long functionPointer) {
         return instance instanceof LLVMOrcMaterializationUnitMaterializeFunction
             ? (LLVMOrcMaterializationUnitMaterializeFunction)instance
-            : new Container(instance.address(), instance);
+            : new LLVMOrcMaterializationUnitMaterializeFunction(functionPointer) {
+                @Override public void invoke(long Ctx, long MR) {
+                    instance.invoke(Ctx, MR);
+                }
+            };
     }
 
     protected LLVMOrcMaterializationUnitMaterializeFunction() {
@@ -44,22 +43,6 @@ public abstract class LLVMOrcMaterializationUnitMaterializeFunction extends Call
 
     LLVMOrcMaterializationUnitMaterializeFunction(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends LLVMOrcMaterializationUnitMaterializeFunction {
-
-        private final LLVMOrcMaterializationUnitMaterializeFunctionI delegate;
-
-        Container(long functionPointer, LLVMOrcMaterializationUnitMaterializeFunctionI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long Ctx, long MR) {
-            delegate.invoke(Ctx, MR);
-        }
-
     }
 
 }

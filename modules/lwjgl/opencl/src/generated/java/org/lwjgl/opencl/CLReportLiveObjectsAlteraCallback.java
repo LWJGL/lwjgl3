@@ -19,23 +19,22 @@ public abstract class CLReportLiveObjectsAlteraCallback extends Callback impleme
      *
      * @return the new {@code CLReportLiveObjectsAlteraCallback}
      */
-    public static CLReportLiveObjectsAlteraCallback create(long functionPointer) {
-        CLReportLiveObjectsAlteraCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof CLReportLiveObjectsAlteraCallback
-            ? (CLReportLiveObjectsAlteraCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static CLReportLiveObjectsAlteraCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable CLReportLiveObjectsAlteraCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable CLReportLiveObjectsAlteraCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code CLReportLiveObjectsAlteraCallback} instance that delegates to the specified {@code CLReportLiveObjectsAlteraCallbackI} instance. */
-    public static CLReportLiveObjectsAlteraCallback create(CLReportLiveObjectsAlteraCallbackI instance) {
+    public static CLReportLiveObjectsAlteraCallback create(CLReportLiveObjectsAlteraCallbackI instance) { return create(instance, instance.address()); }
+
+    private static CLReportLiveObjectsAlteraCallback create(CLReportLiveObjectsAlteraCallbackI instance, long functionPointer) {
         return instance instanceof CLReportLiveObjectsAlteraCallback
             ? (CLReportLiveObjectsAlteraCallback)instance
-            : new Container(instance.address(), instance);
+            : new CLReportLiveObjectsAlteraCallback(functionPointer) {
+                @Override public void invoke(long user_data, long obj_ptr, long type_name, int refcount) {
+                    instance.invoke(user_data, obj_ptr, type_name, refcount);
+                }
+            };
     }
 
     protected CLReportLiveObjectsAlteraCallback() {
@@ -44,22 +43,6 @@ public abstract class CLReportLiveObjectsAlteraCallback extends Callback impleme
 
     CLReportLiveObjectsAlteraCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends CLReportLiveObjectsAlteraCallback {
-
-        private final CLReportLiveObjectsAlteraCallbackI delegate;
-
-        Container(long functionPointer, CLReportLiveObjectsAlteraCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long user_data, long obj_ptr, long type_name, int refcount) {
-            delegate.invoke(user_data, obj_ptr, type_name, refcount);
-        }
-
     }
 
 }

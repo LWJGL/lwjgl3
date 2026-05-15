@@ -19,23 +19,22 @@ public abstract class STBIRSupportCallback extends Callback implements STBIRSupp
      *
      * @return the new {@code STBIRSupportCallback}
      */
-    public static STBIRSupportCallback create(long functionPointer) {
-        STBIRSupportCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof STBIRSupportCallback
-            ? (STBIRSupportCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static STBIRSupportCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable STBIRSupportCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable STBIRSupportCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code STBIRSupportCallback} instance that delegates to the specified {@code STBIRSupportCallbackI} instance. */
-    public static STBIRSupportCallback create(STBIRSupportCallbackI instance) {
+    public static STBIRSupportCallback create(STBIRSupportCallbackI instance) { return create(instance, instance.address()); }
+
+    private static STBIRSupportCallback create(STBIRSupportCallbackI instance, long functionPointer) {
         return instance instanceof STBIRSupportCallback
             ? (STBIRSupportCallback)instance
-            : new Container(instance.address(), instance);
+            : new STBIRSupportCallback(functionPointer) {
+                @Override public float invoke(float scale, long user_data) {
+                    return instance.invoke(scale, user_data);
+                }
+            };
     }
 
     protected STBIRSupportCallback() {
@@ -44,22 +43,6 @@ public abstract class STBIRSupportCallback extends Callback implements STBIRSupp
 
     STBIRSupportCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends STBIRSupportCallback {
-
-        private final STBIRSupportCallbackI delegate;
-
-        Container(long functionPointer, STBIRSupportCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public float invoke(float scale, long user_data) {
-            return delegate.invoke(scale, user_data);
-        }
-
     }
 
 }

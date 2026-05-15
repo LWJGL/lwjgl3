@@ -19,23 +19,22 @@ public abstract class FMOD_OUTPUT_CLOSEPORT_CALLBACK extends Callback implements
      *
      * @return the new {@code FMOD_OUTPUT_CLOSEPORT_CALLBACK}
      */
-    public static FMOD_OUTPUT_CLOSEPORT_CALLBACK create(long functionPointer) {
-        FMOD_OUTPUT_CLOSEPORT_CALLBACKI instance = Callback.get(functionPointer);
-        return instance instanceof FMOD_OUTPUT_CLOSEPORT_CALLBACK
-            ? (FMOD_OUTPUT_CLOSEPORT_CALLBACK)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FMOD_OUTPUT_CLOSEPORT_CALLBACK create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FMOD_OUTPUT_CLOSEPORT_CALLBACK createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FMOD_OUTPUT_CLOSEPORT_CALLBACK createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FMOD_OUTPUT_CLOSEPORT_CALLBACK} instance that delegates to the specified {@code FMOD_OUTPUT_CLOSEPORT_CALLBACKI} instance. */
-    public static FMOD_OUTPUT_CLOSEPORT_CALLBACK create(FMOD_OUTPUT_CLOSEPORT_CALLBACKI instance) {
+    public static FMOD_OUTPUT_CLOSEPORT_CALLBACK create(FMOD_OUTPUT_CLOSEPORT_CALLBACKI instance) { return create(instance, instance.address()); }
+
+    private static FMOD_OUTPUT_CLOSEPORT_CALLBACK create(FMOD_OUTPUT_CLOSEPORT_CALLBACKI instance, long functionPointer) {
         return instance instanceof FMOD_OUTPUT_CLOSEPORT_CALLBACK
             ? (FMOD_OUTPUT_CLOSEPORT_CALLBACK)instance
-            : new Container(instance.address(), instance);
+            : new FMOD_OUTPUT_CLOSEPORT_CALLBACK(functionPointer) {
+                @Override public int invoke(long output_state, int portId) {
+                    return instance.invoke(output_state, portId);
+                }
+            };
     }
 
     protected FMOD_OUTPUT_CLOSEPORT_CALLBACK() {
@@ -44,22 +43,6 @@ public abstract class FMOD_OUTPUT_CLOSEPORT_CALLBACK extends Callback implements
 
     FMOD_OUTPUT_CLOSEPORT_CALLBACK(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FMOD_OUTPUT_CLOSEPORT_CALLBACK {
-
-        private final FMOD_OUTPUT_CLOSEPORT_CALLBACKI delegate;
-
-        Container(long functionPointer, FMOD_OUTPUT_CLOSEPORT_CALLBACKI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long output_state, int portId) {
-            return delegate.invoke(output_state, portId);
-        }
-
     }
 
 }

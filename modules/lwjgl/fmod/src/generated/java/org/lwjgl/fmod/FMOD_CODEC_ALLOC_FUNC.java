@@ -19,23 +19,22 @@ public abstract class FMOD_CODEC_ALLOC_FUNC extends Callback implements FMOD_COD
      *
      * @return the new {@code FMOD_CODEC_ALLOC_FUNC}
      */
-    public static FMOD_CODEC_ALLOC_FUNC create(long functionPointer) {
-        FMOD_CODEC_ALLOC_FUNCI instance = Callback.get(functionPointer);
-        return instance instanceof FMOD_CODEC_ALLOC_FUNC
-            ? (FMOD_CODEC_ALLOC_FUNC)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FMOD_CODEC_ALLOC_FUNC create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FMOD_CODEC_ALLOC_FUNC createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FMOD_CODEC_ALLOC_FUNC createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FMOD_CODEC_ALLOC_FUNC} instance that delegates to the specified {@code FMOD_CODEC_ALLOC_FUNCI} instance. */
-    public static FMOD_CODEC_ALLOC_FUNC create(FMOD_CODEC_ALLOC_FUNCI instance) {
+    public static FMOD_CODEC_ALLOC_FUNC create(FMOD_CODEC_ALLOC_FUNCI instance) { return create(instance, instance.address()); }
+
+    private static FMOD_CODEC_ALLOC_FUNC create(FMOD_CODEC_ALLOC_FUNCI instance, long functionPointer) {
         return instance instanceof FMOD_CODEC_ALLOC_FUNC
             ? (FMOD_CODEC_ALLOC_FUNC)instance
-            : new Container(instance.address(), instance);
+            : new FMOD_CODEC_ALLOC_FUNC(functionPointer) {
+                @Override public long invoke(int size, int align, long file, int line) {
+                    return instance.invoke(size, align, file, line);
+                }
+            };
     }
 
     protected FMOD_CODEC_ALLOC_FUNC() {
@@ -44,22 +43,6 @@ public abstract class FMOD_CODEC_ALLOC_FUNC extends Callback implements FMOD_COD
 
     FMOD_CODEC_ALLOC_FUNC(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FMOD_CODEC_ALLOC_FUNC {
-
-        private final FMOD_CODEC_ALLOC_FUNCI delegate;
-
-        Container(long functionPointer, FMOD_CODEC_ALLOC_FUNCI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(int size, int align, long file, int line) {
-            return delegate.invoke(size, align, file, line);
-        }
-
     }
 
 }

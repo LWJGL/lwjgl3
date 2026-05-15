@@ -19,23 +19,22 @@ public abstract class VmaCheckDefragmentationBreakFunction extends Callback impl
      *
      * @return the new {@code VmaCheckDefragmentationBreakFunction}
      */
-    public static VmaCheckDefragmentationBreakFunction create(long functionPointer) {
-        VmaCheckDefragmentationBreakFunctionI instance = Callback.get(functionPointer);
-        return instance instanceof VmaCheckDefragmentationBreakFunction
-            ? (VmaCheckDefragmentationBreakFunction)instance
-            : new Container(functionPointer, instance);
-    }
+    public static VmaCheckDefragmentationBreakFunction create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable VmaCheckDefragmentationBreakFunction createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable VmaCheckDefragmentationBreakFunction createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code VmaCheckDefragmentationBreakFunction} instance that delegates to the specified {@code VmaCheckDefragmentationBreakFunctionI} instance. */
-    public static VmaCheckDefragmentationBreakFunction create(VmaCheckDefragmentationBreakFunctionI instance) {
+    public static VmaCheckDefragmentationBreakFunction create(VmaCheckDefragmentationBreakFunctionI instance) { return create(instance, instance.address()); }
+
+    private static VmaCheckDefragmentationBreakFunction create(VmaCheckDefragmentationBreakFunctionI instance, long functionPointer) {
         return instance instanceof VmaCheckDefragmentationBreakFunction
             ? (VmaCheckDefragmentationBreakFunction)instance
-            : new Container(instance.address(), instance);
+            : new VmaCheckDefragmentationBreakFunction(functionPointer) {
+                @Override public int invoke(long pUserData) {
+                    return instance.invoke(pUserData);
+                }
+            };
     }
 
     protected VmaCheckDefragmentationBreakFunction() {
@@ -44,22 +43,6 @@ public abstract class VmaCheckDefragmentationBreakFunction extends Callback impl
 
     VmaCheckDefragmentationBreakFunction(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends VmaCheckDefragmentationBreakFunction {
-
-        private final VmaCheckDefragmentationBreakFunctionI delegate;
-
-        Container(long functionPointer, VmaCheckDefragmentationBreakFunctionI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long pUserData) {
-            return delegate.invoke(pUserData);
-        }
-
     }
 
 }

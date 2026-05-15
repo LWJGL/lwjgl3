@@ -19,23 +19,22 @@ public abstract class FT_Free_Func extends Callback implements FT_Free_FuncI {
      *
      * @return the new {@code FT_Free_Func}
      */
-    public static FT_Free_Func create(long functionPointer) {
-        FT_Free_FuncI instance = Callback.get(functionPointer);
-        return instance instanceof FT_Free_Func
-            ? (FT_Free_Func)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FT_Free_Func create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FT_Free_Func createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FT_Free_Func createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FT_Free_Func} instance that delegates to the specified {@code FT_Free_FuncI} instance. */
-    public static FT_Free_Func create(FT_Free_FuncI instance) {
+    public static FT_Free_Func create(FT_Free_FuncI instance) { return create(instance, instance.address()); }
+
+    private static FT_Free_Func create(FT_Free_FuncI instance, long functionPointer) {
         return instance instanceof FT_Free_Func
             ? (FT_Free_Func)instance
-            : new Container(instance.address(), instance);
+            : new FT_Free_Func(functionPointer) {
+                @Override public void invoke(long memory, long block) {
+                    instance.invoke(memory, block);
+                }
+            };
     }
 
     protected FT_Free_Func() {
@@ -44,22 +43,6 @@ public abstract class FT_Free_Func extends Callback implements FT_Free_FuncI {
 
     FT_Free_Func(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FT_Free_Func {
-
-        private final FT_Free_FuncI delegate;
-
-        Container(long functionPointer, FT_Free_FuncI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long memory, long block) {
-            delegate.invoke(memory, block);
-        }
-
     }
 
 }

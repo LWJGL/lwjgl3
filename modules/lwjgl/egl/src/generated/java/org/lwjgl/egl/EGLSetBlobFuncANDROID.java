@@ -19,23 +19,22 @@ public abstract class EGLSetBlobFuncANDROID extends Callback implements EGLSetBl
      *
      * @return the new {@code EGLSetBlobFuncANDROID}
      */
-    public static EGLSetBlobFuncANDROID create(long functionPointer) {
-        EGLSetBlobFuncANDROIDI instance = Callback.get(functionPointer);
-        return instance instanceof EGLSetBlobFuncANDROID
-            ? (EGLSetBlobFuncANDROID)instance
-            : new Container(functionPointer, instance);
-    }
+    public static EGLSetBlobFuncANDROID create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable EGLSetBlobFuncANDROID createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable EGLSetBlobFuncANDROID createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code EGLSetBlobFuncANDROID} instance that delegates to the specified {@code EGLSetBlobFuncANDROIDI} instance. */
-    public static EGLSetBlobFuncANDROID create(EGLSetBlobFuncANDROIDI instance) {
+    public static EGLSetBlobFuncANDROID create(EGLSetBlobFuncANDROIDI instance) { return create(instance, instance.address()); }
+
+    private static EGLSetBlobFuncANDROID create(EGLSetBlobFuncANDROIDI instance, long functionPointer) {
         return instance instanceof EGLSetBlobFuncANDROID
             ? (EGLSetBlobFuncANDROID)instance
-            : new Container(instance.address(), instance);
+            : new EGLSetBlobFuncANDROID(functionPointer) {
+                @Override public void invoke(long key, long keySize, long value, long valueSize) {
+                    instance.invoke(key, keySize, value, valueSize);
+                }
+            };
     }
 
     protected EGLSetBlobFuncANDROID() {
@@ -44,22 +43,6 @@ public abstract class EGLSetBlobFuncANDROID extends Callback implements EGLSetBl
 
     EGLSetBlobFuncANDROID(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends EGLSetBlobFuncANDROID {
-
-        private final EGLSetBlobFuncANDROIDI delegate;
-
-        Container(long functionPointer, EGLSetBlobFuncANDROIDI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long key, long keySize, long value, long valueSize) {
-            delegate.invoke(key, keySize, value, valueSize);
-        }
-
     }
 
 }

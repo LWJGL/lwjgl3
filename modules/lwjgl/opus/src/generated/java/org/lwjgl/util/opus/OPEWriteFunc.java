@@ -19,23 +19,22 @@ public abstract class OPEWriteFunc extends Callback implements OPEWriteFuncI {
      *
      * @return the new {@code OPEWriteFunc}
      */
-    public static OPEWriteFunc create(long functionPointer) {
-        OPEWriteFuncI instance = Callback.get(functionPointer);
-        return instance instanceof OPEWriteFunc
-            ? (OPEWriteFunc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static OPEWriteFunc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable OPEWriteFunc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable OPEWriteFunc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code OPEWriteFunc} instance that delegates to the specified {@code OPEWriteFuncI} instance. */
-    public static OPEWriteFunc create(OPEWriteFuncI instance) {
+    public static OPEWriteFunc create(OPEWriteFuncI instance) { return create(instance, instance.address()); }
+
+    private static OPEWriteFunc create(OPEWriteFuncI instance, long functionPointer) {
         return instance instanceof OPEWriteFunc
             ? (OPEWriteFunc)instance
-            : new Container(instance.address(), instance);
+            : new OPEWriteFunc(functionPointer) {
+                @Override public int invoke(long user_data, long ptr, int len) {
+                    return instance.invoke(user_data, ptr, len);
+                }
+            };
     }
 
     protected OPEWriteFunc() {
@@ -44,22 +43,6 @@ public abstract class OPEWriteFunc extends Callback implements OPEWriteFuncI {
 
     OPEWriteFunc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends OPEWriteFunc {
-
-        private final OPEWriteFuncI delegate;
-
-        Container(long functionPointer, OPEWriteFuncI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long user_data, long ptr, int len) {
-            return delegate.invoke(user_data, ptr, len);
-        }
-
     }
 
 }

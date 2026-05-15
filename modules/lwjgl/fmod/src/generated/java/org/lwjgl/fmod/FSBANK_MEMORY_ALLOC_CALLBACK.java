@@ -19,23 +19,22 @@ public abstract class FSBANK_MEMORY_ALLOC_CALLBACK extends Callback implements F
      *
      * @return the new {@code FSBANK_MEMORY_ALLOC_CALLBACK}
      */
-    public static FSBANK_MEMORY_ALLOC_CALLBACK create(long functionPointer) {
-        FSBANK_MEMORY_ALLOC_CALLBACKI instance = Callback.get(functionPointer);
-        return instance instanceof FSBANK_MEMORY_ALLOC_CALLBACK
-            ? (FSBANK_MEMORY_ALLOC_CALLBACK)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FSBANK_MEMORY_ALLOC_CALLBACK create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FSBANK_MEMORY_ALLOC_CALLBACK createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FSBANK_MEMORY_ALLOC_CALLBACK createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FSBANK_MEMORY_ALLOC_CALLBACK} instance that delegates to the specified {@code FSBANK_MEMORY_ALLOC_CALLBACKI} instance. */
-    public static FSBANK_MEMORY_ALLOC_CALLBACK create(FSBANK_MEMORY_ALLOC_CALLBACKI instance) {
+    public static FSBANK_MEMORY_ALLOC_CALLBACK create(FSBANK_MEMORY_ALLOC_CALLBACKI instance) { return create(instance, instance.address()); }
+
+    private static FSBANK_MEMORY_ALLOC_CALLBACK create(FSBANK_MEMORY_ALLOC_CALLBACKI instance, long functionPointer) {
         return instance instanceof FSBANK_MEMORY_ALLOC_CALLBACK
             ? (FSBANK_MEMORY_ALLOC_CALLBACK)instance
-            : new Container(instance.address(), instance);
+            : new FSBANK_MEMORY_ALLOC_CALLBACK(functionPointer) {
+                @Override public long invoke(int size, int type, long sourceStr) {
+                    return instance.invoke(size, type, sourceStr);
+                }
+            };
     }
 
     protected FSBANK_MEMORY_ALLOC_CALLBACK() {
@@ -44,22 +43,6 @@ public abstract class FSBANK_MEMORY_ALLOC_CALLBACK extends Callback implements F
 
     FSBANK_MEMORY_ALLOC_CALLBACK(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FSBANK_MEMORY_ALLOC_CALLBACK {
-
-        private final FSBANK_MEMORY_ALLOC_CALLBACKI delegate;
-
-        Container(long functionPointer, FSBANK_MEMORY_ALLOC_CALLBACKI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(int size, int type, long sourceStr) {
-            return delegate.invoke(size, type, sourceStr);
-        }
-
     }
 
 }

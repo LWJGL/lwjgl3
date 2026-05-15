@@ -19,23 +19,22 @@ public abstract class RMTRealloc extends Callback implements RMTReallocI {
      *
      * @return the new {@code RMTRealloc}
      */
-    public static RMTRealloc create(long functionPointer) {
-        RMTReallocI instance = Callback.get(functionPointer);
-        return instance instanceof RMTRealloc
-            ? (RMTRealloc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static RMTRealloc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable RMTRealloc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable RMTRealloc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code RMTRealloc} instance that delegates to the specified {@code RMTReallocI} instance. */
-    public static RMTRealloc create(RMTReallocI instance) {
+    public static RMTRealloc create(RMTReallocI instance) { return create(instance, instance.address()); }
+
+    private static RMTRealloc create(RMTReallocI instance, long functionPointer) {
         return instance instanceof RMTRealloc
             ? (RMTRealloc)instance
-            : new Container(instance.address(), instance);
+            : new RMTRealloc(functionPointer) {
+                @Override public long invoke(long mm_context, long ptr, int size) {
+                    return instance.invoke(mm_context, ptr, size);
+                }
+            };
     }
 
     protected RMTRealloc() {
@@ -44,22 +43,6 @@ public abstract class RMTRealloc extends Callback implements RMTReallocI {
 
     RMTRealloc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends RMTRealloc {
-
-        private final RMTReallocI delegate;
-
-        Container(long functionPointer, RMTReallocI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long mm_context, long ptr, int size) {
-            return delegate.invoke(mm_context, ptr, size);
-        }
-
     }
 
 }

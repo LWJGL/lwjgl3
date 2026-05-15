@@ -19,23 +19,22 @@ public abstract class FMOD_OUTPUT_COPYPORT_FUNC extends Callback implements FMOD
      *
      * @return the new {@code FMOD_OUTPUT_COPYPORT_FUNC}
      */
-    public static FMOD_OUTPUT_COPYPORT_FUNC create(long functionPointer) {
-        FMOD_OUTPUT_COPYPORT_FUNCI instance = Callback.get(functionPointer);
-        return instance instanceof FMOD_OUTPUT_COPYPORT_FUNC
-            ? (FMOD_OUTPUT_COPYPORT_FUNC)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FMOD_OUTPUT_COPYPORT_FUNC create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FMOD_OUTPUT_COPYPORT_FUNC createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FMOD_OUTPUT_COPYPORT_FUNC createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FMOD_OUTPUT_COPYPORT_FUNC} instance that delegates to the specified {@code FMOD_OUTPUT_COPYPORT_FUNCI} instance. */
-    public static FMOD_OUTPUT_COPYPORT_FUNC create(FMOD_OUTPUT_COPYPORT_FUNCI instance) {
+    public static FMOD_OUTPUT_COPYPORT_FUNC create(FMOD_OUTPUT_COPYPORT_FUNCI instance) { return create(instance, instance.address()); }
+
+    private static FMOD_OUTPUT_COPYPORT_FUNC create(FMOD_OUTPUT_COPYPORT_FUNCI instance, long functionPointer) {
         return instance instanceof FMOD_OUTPUT_COPYPORT_FUNC
             ? (FMOD_OUTPUT_COPYPORT_FUNC)instance
-            : new Container(instance.address(), instance);
+            : new FMOD_OUTPUT_COPYPORT_FUNC(functionPointer) {
+                @Override public int invoke(long output_state, int portId, long buffer, int length) {
+                    return instance.invoke(output_state, portId, buffer, length);
+                }
+            };
     }
 
     protected FMOD_OUTPUT_COPYPORT_FUNC() {
@@ -44,22 +43,6 @@ public abstract class FMOD_OUTPUT_COPYPORT_FUNC extends Callback implements FMOD
 
     FMOD_OUTPUT_COPYPORT_FUNC(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FMOD_OUTPUT_COPYPORT_FUNC {
-
-        private final FMOD_OUTPUT_COPYPORT_FUNCI delegate;
-
-        Container(long functionPointer, FMOD_OUTPUT_COPYPORT_FUNCI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long output_state, int portId, long buffer, int length) {
-            return delegate.invoke(output_state, portId, buffer, length);
-        }
-
     }
 
 }

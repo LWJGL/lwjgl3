@@ -21,23 +21,22 @@ public abstract class GLFWWindowContentScaleCallback extends Callback implements
      *
      * @return the new {@code GLFWWindowContentScaleCallback}
      */
-    public static GLFWWindowContentScaleCallback create(long functionPointer) {
-        GLFWWindowContentScaleCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof GLFWWindowContentScaleCallback
-            ? (GLFWWindowContentScaleCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static GLFWWindowContentScaleCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable GLFWWindowContentScaleCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable GLFWWindowContentScaleCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code GLFWWindowContentScaleCallback} instance that delegates to the specified {@code GLFWWindowContentScaleCallbackI} instance. */
-    public static GLFWWindowContentScaleCallback create(GLFWWindowContentScaleCallbackI instance) {
+    public static GLFWWindowContentScaleCallback create(GLFWWindowContentScaleCallbackI instance) { return create(instance, instance.address()); }
+
+    private static GLFWWindowContentScaleCallback create(GLFWWindowContentScaleCallbackI instance, long functionPointer) {
         return instance instanceof GLFWWindowContentScaleCallback
             ? (GLFWWindowContentScaleCallback)instance
-            : new Container(instance.address(), instance);
+            : new GLFWWindowContentScaleCallback(functionPointer) {
+                @Override public void invoke(long window, float xscale, float yscale) {
+                    instance.invoke(window, xscale, yscale);
+                }
+            };
     }
 
     protected GLFWWindowContentScaleCallback() {
@@ -52,22 +51,6 @@ public abstract class GLFWWindowContentScaleCallback extends Callback implements
     public GLFWWindowContentScaleCallback set(long window) {
         glfwSetWindowContentScaleCallback(window, this);
         return this;
-    }
-
-    private static final class Container extends GLFWWindowContentScaleCallback {
-
-        private final GLFWWindowContentScaleCallbackI delegate;
-
-        Container(long functionPointer, GLFWWindowContentScaleCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long window, float xscale, float yscale) {
-            delegate.invoke(window, xscale, yscale);
-        }
-
     }
 
 }

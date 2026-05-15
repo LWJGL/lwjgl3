@@ -19,23 +19,22 @@ public abstract class RMTSampleTreeHandler extends Callback implements RMTSample
      *
      * @return the new {@code RMTSampleTreeHandler}
      */
-    public static RMTSampleTreeHandler create(long functionPointer) {
-        RMTSampleTreeHandlerI instance = Callback.get(functionPointer);
-        return instance instanceof RMTSampleTreeHandler
-            ? (RMTSampleTreeHandler)instance
-            : new Container(functionPointer, instance);
-    }
+    public static RMTSampleTreeHandler create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable RMTSampleTreeHandler createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable RMTSampleTreeHandler createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code RMTSampleTreeHandler} instance that delegates to the specified {@code RMTSampleTreeHandlerI} instance. */
-    public static RMTSampleTreeHandler create(RMTSampleTreeHandlerI instance) {
+    public static RMTSampleTreeHandler create(RMTSampleTreeHandlerI instance) { return create(instance, instance.address()); }
+
+    private static RMTSampleTreeHandler create(RMTSampleTreeHandlerI instance, long functionPointer) {
         return instance instanceof RMTSampleTreeHandler
             ? (RMTSampleTreeHandler)instance
-            : new Container(instance.address(), instance);
+            : new RMTSampleTreeHandler(functionPointer) {
+                @Override public void invoke(long cbk_context, long sample_tree) {
+                    instance.invoke(cbk_context, sample_tree);
+                }
+            };
     }
 
     protected RMTSampleTreeHandler() {
@@ -44,22 +43,6 @@ public abstract class RMTSampleTreeHandler extends Callback implements RMTSample
 
     RMTSampleTreeHandler(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends RMTSampleTreeHandler {
-
-        private final RMTSampleTreeHandlerI delegate;
-
-        Container(long functionPointer, RMTSampleTreeHandlerI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long cbk_context, long sample_tree) {
-            delegate.invoke(cbk_context, sample_tree);
-        }
-
     }
 
 }

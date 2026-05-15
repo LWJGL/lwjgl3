@@ -19,23 +19,22 @@ public abstract class FT_Incremental_FreeGlyphDataFunc extends Callback implemen
      *
      * @return the new {@code FT_Incremental_FreeGlyphDataFunc}
      */
-    public static FT_Incremental_FreeGlyphDataFunc create(long functionPointer) {
-        FT_Incremental_FreeGlyphDataFuncI instance = Callback.get(functionPointer);
-        return instance instanceof FT_Incremental_FreeGlyphDataFunc
-            ? (FT_Incremental_FreeGlyphDataFunc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FT_Incremental_FreeGlyphDataFunc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FT_Incremental_FreeGlyphDataFunc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FT_Incremental_FreeGlyphDataFunc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FT_Incremental_FreeGlyphDataFunc} instance that delegates to the specified {@code FT_Incremental_FreeGlyphDataFuncI} instance. */
-    public static FT_Incremental_FreeGlyphDataFunc create(FT_Incremental_FreeGlyphDataFuncI instance) {
+    public static FT_Incremental_FreeGlyphDataFunc create(FT_Incremental_FreeGlyphDataFuncI instance) { return create(instance, instance.address()); }
+
+    private static FT_Incremental_FreeGlyphDataFunc create(FT_Incremental_FreeGlyphDataFuncI instance, long functionPointer) {
         return instance instanceof FT_Incremental_FreeGlyphDataFunc
             ? (FT_Incremental_FreeGlyphDataFunc)instance
-            : new Container(instance.address(), instance);
+            : new FT_Incremental_FreeGlyphDataFunc(functionPointer) {
+                @Override public void invoke(long incremental, long data) {
+                    instance.invoke(incremental, data);
+                }
+            };
     }
 
     protected FT_Incremental_FreeGlyphDataFunc() {
@@ -44,22 +43,6 @@ public abstract class FT_Incremental_FreeGlyphDataFunc extends Callback implemen
 
     FT_Incremental_FreeGlyphDataFunc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FT_Incremental_FreeGlyphDataFunc {
-
-        private final FT_Incremental_FreeGlyphDataFuncI delegate;
-
-        Container(long functionPointer, FT_Incremental_FreeGlyphDataFuncI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long incremental, long data) {
-            delegate.invoke(incremental, data);
-        }
-
     }
 
 }

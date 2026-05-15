@@ -19,23 +19,22 @@ public abstract class EnumerationMutationHandler extends Callback implements Enu
      *
      * @return the new {@code EnumerationMutationHandler}
      */
-    public static EnumerationMutationHandler create(long functionPointer) {
-        EnumerationMutationHandlerI instance = Callback.get(functionPointer);
-        return instance instanceof EnumerationMutationHandler
-            ? (EnumerationMutationHandler)instance
-            : new Container(functionPointer, instance);
-    }
+    public static EnumerationMutationHandler create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable EnumerationMutationHandler createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable EnumerationMutationHandler createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code EnumerationMutationHandler} instance that delegates to the specified {@code EnumerationMutationHandlerI} instance. */
-    public static EnumerationMutationHandler create(EnumerationMutationHandlerI instance) {
+    public static EnumerationMutationHandler create(EnumerationMutationHandlerI instance) { return create(instance, instance.address()); }
+
+    private static EnumerationMutationHandler create(EnumerationMutationHandlerI instance, long functionPointer) {
         return instance instanceof EnumerationMutationHandler
             ? (EnumerationMutationHandler)instance
-            : new Container(instance.address(), instance);
+            : new EnumerationMutationHandler(functionPointer) {
+                @Override public void invoke(long id) {
+                    instance.invoke(id);
+                }
+            };
     }
 
     protected EnumerationMutationHandler() {
@@ -44,22 +43,6 @@ public abstract class EnumerationMutationHandler extends Callback implements Enu
 
     EnumerationMutationHandler(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends EnumerationMutationHandler {
-
-        private final EnumerationMutationHandlerI delegate;
-
-        Container(long functionPointer, EnumerationMutationHandlerI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long id) {
-            delegate.invoke(id);
-        }
-
     }
 
 }

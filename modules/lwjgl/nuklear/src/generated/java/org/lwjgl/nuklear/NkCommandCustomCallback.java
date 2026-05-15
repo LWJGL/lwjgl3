@@ -19,23 +19,22 @@ public abstract class NkCommandCustomCallback extends Callback implements NkComm
      *
      * @return the new {@code NkCommandCustomCallback}
      */
-    public static NkCommandCustomCallback create(long functionPointer) {
-        NkCommandCustomCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof NkCommandCustomCallback
-            ? (NkCommandCustomCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static NkCommandCustomCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable NkCommandCustomCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable NkCommandCustomCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code NkCommandCustomCallback} instance that delegates to the specified {@code NkCommandCustomCallbackI} instance. */
-    public static NkCommandCustomCallback create(NkCommandCustomCallbackI instance) {
+    public static NkCommandCustomCallback create(NkCommandCustomCallbackI instance) { return create(instance, instance.address()); }
+
+    private static NkCommandCustomCallback create(NkCommandCustomCallbackI instance, long functionPointer) {
         return instance instanceof NkCommandCustomCallback
             ? (NkCommandCustomCallback)instance
-            : new Container(instance.address(), instance);
+            : new NkCommandCustomCallback(functionPointer) {
+                @Override public long invoke(long canvas, short x, short y, short w, short h, long callback_data) {
+                    return instance.invoke(canvas, x, y, w, h, callback_data);
+                }
+            };
     }
 
     protected NkCommandCustomCallback() {
@@ -44,22 +43,6 @@ public abstract class NkCommandCustomCallback extends Callback implements NkComm
 
     NkCommandCustomCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends NkCommandCustomCallback {
-
-        private final NkCommandCustomCallbackI delegate;
-
-        Container(long functionPointer, NkCommandCustomCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public long invoke(long canvas, short x, short y, short w, short h, long callback_data) {
-            return delegate.invoke(canvas, x, y, w, h, callback_data);
-        }
-
     }
 
 }

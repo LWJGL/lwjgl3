@@ -21,23 +21,22 @@ public abstract class STBIReadCallback extends Callback implements STBIReadCallb
      *
      * @return the new {@code STBIReadCallback}
      */
-    public static STBIReadCallback create(long functionPointer) {
-        STBIReadCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof STBIReadCallback
-            ? (STBIReadCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static STBIReadCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable STBIReadCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable STBIReadCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code STBIReadCallback} instance that delegates to the specified {@code STBIReadCallbackI} instance. */
-    public static STBIReadCallback create(STBIReadCallbackI instance) {
+    public static STBIReadCallback create(STBIReadCallbackI instance) { return create(instance, instance.address()); }
+
+    private static STBIReadCallback create(STBIReadCallbackI instance, long functionPointer) {
         return instance instanceof STBIReadCallback
             ? (STBIReadCallback)instance
-            : new Container(instance.address(), instance);
+            : new STBIReadCallback(functionPointer) {
+                @Override public int invoke(long user, long data, int size) {
+                    return instance.invoke(user, data, size);
+                }
+            };
     }
 
     protected STBIReadCallback() {
@@ -60,22 +59,6 @@ public abstract class STBIReadCallback extends Callback implements STBIReadCallb
      */
     public static ByteBuffer getData(long data, int size) {
         return memByteBuffer(data, size);
-    }
-
-    private static final class Container extends STBIReadCallback {
-
-        private final STBIReadCallbackI delegate;
-
-        Container(long functionPointer, STBIReadCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long user, long data, int size) {
-            return delegate.invoke(user, data, size);
-        }
-
     }
 
 }

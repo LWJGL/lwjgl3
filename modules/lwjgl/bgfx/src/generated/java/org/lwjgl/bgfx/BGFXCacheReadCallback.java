@@ -19,23 +19,22 @@ public abstract class BGFXCacheReadCallback extends Callback implements BGFXCach
      *
      * @return the new {@code BGFXCacheReadCallback}
      */
-    public static BGFXCacheReadCallback create(long functionPointer) {
-        BGFXCacheReadCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof BGFXCacheReadCallback
-            ? (BGFXCacheReadCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static BGFXCacheReadCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable BGFXCacheReadCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable BGFXCacheReadCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code BGFXCacheReadCallback} instance that delegates to the specified {@code BGFXCacheReadCallbackI} instance. */
-    public static BGFXCacheReadCallback create(BGFXCacheReadCallbackI instance) {
+    public static BGFXCacheReadCallback create(BGFXCacheReadCallbackI instance) { return create(instance, instance.address()); }
+
+    private static BGFXCacheReadCallback create(BGFXCacheReadCallbackI instance, long functionPointer) {
         return instance instanceof BGFXCacheReadCallback
             ? (BGFXCacheReadCallback)instance
-            : new Container(instance.address(), instance);
+            : new BGFXCacheReadCallback(functionPointer) {
+                @Override public boolean invoke(long _this, long _id, long _data, int _size) {
+                    return instance.invoke(_this, _id, _data, _size);
+                }
+            };
     }
 
     protected BGFXCacheReadCallback() {
@@ -44,22 +43,6 @@ public abstract class BGFXCacheReadCallback extends Callback implements BGFXCach
 
     BGFXCacheReadCallback(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends BGFXCacheReadCallback {
-
-        private final BGFXCacheReadCallbackI delegate;
-
-        Container(long functionPointer, BGFXCacheReadCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public boolean invoke(long _this, long _id, long _data, int _size) {
-            return delegate.invoke(_this, _id, _data, _size);
-        }
-
     }
 
 }

@@ -19,23 +19,22 @@ public abstract class FMOD_OUTPUT_FREE_FUNC extends Callback implements FMOD_OUT
      *
      * @return the new {@code FMOD_OUTPUT_FREE_FUNC}
      */
-    public static FMOD_OUTPUT_FREE_FUNC create(long functionPointer) {
-        FMOD_OUTPUT_FREE_FUNCI instance = Callback.get(functionPointer);
-        return instance instanceof FMOD_OUTPUT_FREE_FUNC
-            ? (FMOD_OUTPUT_FREE_FUNC)instance
-            : new Container(functionPointer, instance);
-    }
+    public static FMOD_OUTPUT_FREE_FUNC create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable FMOD_OUTPUT_FREE_FUNC createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable FMOD_OUTPUT_FREE_FUNC createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code FMOD_OUTPUT_FREE_FUNC} instance that delegates to the specified {@code FMOD_OUTPUT_FREE_FUNCI} instance. */
-    public static FMOD_OUTPUT_FREE_FUNC create(FMOD_OUTPUT_FREE_FUNCI instance) {
+    public static FMOD_OUTPUT_FREE_FUNC create(FMOD_OUTPUT_FREE_FUNCI instance) { return create(instance, instance.address()); }
+
+    private static FMOD_OUTPUT_FREE_FUNC create(FMOD_OUTPUT_FREE_FUNCI instance, long functionPointer) {
         return instance instanceof FMOD_OUTPUT_FREE_FUNC
             ? (FMOD_OUTPUT_FREE_FUNC)instance
-            : new Container(instance.address(), instance);
+            : new FMOD_OUTPUT_FREE_FUNC(functionPointer) {
+                @Override public void invoke(long ptr, long file, int line) {
+                    instance.invoke(ptr, file, line);
+                }
+            };
     }
 
     protected FMOD_OUTPUT_FREE_FUNC() {
@@ -44,22 +43,6 @@ public abstract class FMOD_OUTPUT_FREE_FUNC extends Callback implements FMOD_OUT
 
     FMOD_OUTPUT_FREE_FUNC(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends FMOD_OUTPUT_FREE_FUNC {
-
-        private final FMOD_OUTPUT_FREE_FUNCI delegate;
-
-        Container(long functionPointer, FMOD_OUTPUT_FREE_FUNCI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long ptr, long file, int line) {
-            delegate.invoke(ptr, file, line);
-        }
-
     }
 
 }

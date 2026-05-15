@@ -19,23 +19,22 @@ public abstract class ZSTDFreeFunction extends Callback implements ZSTDFreeFunct
      *
      * @return the new {@code ZSTDFreeFunction}
      */
-    public static ZSTDFreeFunction create(long functionPointer) {
-        ZSTDFreeFunctionI instance = Callback.get(functionPointer);
-        return instance instanceof ZSTDFreeFunction
-            ? (ZSTDFreeFunction)instance
-            : new Container(functionPointer, instance);
-    }
+    public static ZSTDFreeFunction create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable ZSTDFreeFunction createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable ZSTDFreeFunction createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code ZSTDFreeFunction} instance that delegates to the specified {@code ZSTDFreeFunctionI} instance. */
-    public static ZSTDFreeFunction create(ZSTDFreeFunctionI instance) {
+    public static ZSTDFreeFunction create(ZSTDFreeFunctionI instance) { return create(instance, instance.address()); }
+
+    private static ZSTDFreeFunction create(ZSTDFreeFunctionI instance, long functionPointer) {
         return instance instanceof ZSTDFreeFunction
             ? (ZSTDFreeFunction)instance
-            : new Container(instance.address(), instance);
+            : new ZSTDFreeFunction(functionPointer) {
+                @Override public void invoke(long opaque, long address) {
+                    instance.invoke(opaque, address);
+                }
+            };
     }
 
     protected ZSTDFreeFunction() {
@@ -44,22 +43,6 @@ public abstract class ZSTDFreeFunction extends Callback implements ZSTDFreeFunct
 
     ZSTDFreeFunction(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends ZSTDFreeFunction {
-
-        private final ZSTDFreeFunctionI delegate;
-
-        Container(long functionPointer, ZSTDFreeFunctionI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long opaque, long address) {
-            delegate.invoke(opaque, address);
-        }
-
     }
 
 }

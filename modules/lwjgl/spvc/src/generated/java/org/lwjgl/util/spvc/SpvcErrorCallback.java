@@ -19,23 +19,22 @@ public abstract class SpvcErrorCallback extends Callback implements SpvcErrorCal
      *
      * @return the new {@code SpvcErrorCallback}
      */
-    public static SpvcErrorCallback create(long functionPointer) {
-        SpvcErrorCallbackI instance = Callback.get(functionPointer);
-        return instance instanceof SpvcErrorCallback
-            ? (SpvcErrorCallback)instance
-            : new Container(functionPointer, instance);
-    }
+    public static SpvcErrorCallback create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable SpvcErrorCallback createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable SpvcErrorCallback createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code SpvcErrorCallback} instance that delegates to the specified {@code SpvcErrorCallbackI} instance. */
-    public static SpvcErrorCallback create(SpvcErrorCallbackI instance) {
+    public static SpvcErrorCallback create(SpvcErrorCallbackI instance) { return create(instance, instance.address()); }
+
+    private static SpvcErrorCallback create(SpvcErrorCallbackI instance, long functionPointer) {
         return instance instanceof SpvcErrorCallback
             ? (SpvcErrorCallback)instance
-            : new Container(instance.address(), instance);
+            : new SpvcErrorCallback(functionPointer) {
+                @Override public void invoke(long userdata, long error) {
+                    instance.invoke(userdata, error);
+                }
+            };
     }
 
     protected SpvcErrorCallback() {
@@ -57,22 +56,6 @@ public abstract class SpvcErrorCallback extends Callback implements SpvcErrorCal
      */
     public static String getError(long error) {
         return memUTF8(error);
-    }
-
-    private static final class Container extends SpvcErrorCallback {
-
-        private final SpvcErrorCallbackI delegate;
-
-        Container(long functionPointer, SpvcErrorCallbackI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public void invoke(long userdata, long error) {
-            delegate.invoke(userdata, error);
-        }
-
     }
 
 }
