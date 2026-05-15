@@ -1876,18 +1876,34 @@
         <release-module name="ktx" title="KTX" if:true="${binding.ktx}">
             <natives>
                 <get-release platform="freebsd" arch="x64" file="libktx.so"/>
+                <get-release platform="freebsd" arch="x64" file="libktx.so.git"/>
 
                 <get-release platform="linux" arch="x64" file="libktx.so"/>
+                <get-release platform="linux" arch="x64" file="libktx.so.git"/>
+
                 <get-release platform="linux" arch="arm64" file="libktx.so"/>
+                <get-release platform="linux" arch="arm64" file="libktx.so.git"/>
+
                 <get-release platform="linux" arch="arm32" file="libktx.so"/>
+                <get-release platform="linux" arch="arm32" file="libktx.so.git"/>
+
                 <get-release platform="linux" arch="ppc64le" file="libktx.so"/>
+                <get-release platform="linux" arch="ppc64le" file="libktx.so.git"/>
+
                 <get-release platform="linux" arch="riscv64" file="libktx.so"/>
+                <get-release platform="linux" arch="riscv64" file="libktx.so.git"/>
 
                 <get-release platform="macos" arch="x64" file="libktx.dylib"/>
+                <get-release platform="macos" arch="x64" file="libktx.dylib.git"/>
+
                 <get-release platform="macos" arch="arm64" file="libktx.dylib"/>
+                <get-release platform="macos" arch="arm64" file="libktx.dylib.git"/>
 
                 <get-release platform="windows" arch="x64" file="ktx.dll"/>
+                <get-release platform="windows" arch="x64" file="ktx.dll.git"/>
+
                 <get-release platform="windows" arch="arm64" file="ktx.dll"/>
+                <get-release platform="windows" arch="arm64" file="ktx.dll.git"/>
             </natives>
         </release-module>
 
