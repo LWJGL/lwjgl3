@@ -6,7 +6,7 @@ package org.lwjgl.system.ffm;
 
 import java.lang.annotation.*;
 
-/** Marks a group member as auto-sized by another struct member */
+/** Marks a group member as auto-sized by another struct member. */
 @Target({ElementType.METHOD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FFMSize {

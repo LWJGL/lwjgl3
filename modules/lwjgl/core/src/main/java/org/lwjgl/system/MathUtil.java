@@ -15,8 +15,7 @@ public final class MathUtil {
     }
 
     /**
-     * Returns true if the specified integer {@code value} is a power-of-two
-     * number.
+     * Returns true if the specified integer {@code value} is a power-of-two number.
      *
      * @param value the value to test
      *
@@ -27,9 +26,8 @@ public final class MathUtil {
     }
 
     /**
-     * Rounds the specified integer {@code value} up to the next power-of-two
-     * number. The returned value will be equal to {@code value} if it already
-     * is a power-of-two number.
+     * Rounds the specified integer {@code value} up to the next power-of-two number. The returned value will be equal to {@code value} if it already is a
+     * power-of-two number.
      *
      * @param value the value to round-up. Must be a number between {@code 1} and
      *              <code>1 &lt;&lt; 30</code>.
@@ -40,20 +38,16 @@ public final class MathUtil {
         return 1 << (32 - Integer.numberOfLeadingZeros(value - 1));
     }
 
-    public static boolean mathHasZeroByte(int value) {
-        return ((value - 0x01010101) & ~value & 0x80808080) != 0;
-    }
+    public static int mathZeroByteMask(int value)      { return ((value - 0x01_01_01_01) & ~value & 0x80_80_80_80); }
+    public static boolean mathHasZeroByte(int value)   { return ((value - 0x01_01_01_01) & ~value & 0x80_80_80_80) != 0; }
 
-    public static boolean mathHasZeroByte(long value) {
-        return ((value - 0x0101010101010101L) & ~value & 0x8080808080808080L) != 0L;
-    }
+    public static long mathZeroByteMask(long value)    { return ((value - 0x01_01_01_01_01_01_01_01L) & ~value & 0x80_80_80_80_80_80_80_80L); }
+    public static boolean mathHasZeroByte(long value)  { return ((value - 0x01_01_01_01_01_01_01_01L) & ~value & 0x80_80_80_80_80_80_80_80L) != 0L; }
 
-    public static boolean mathHasZeroShort(int value) {
-        return ((value - 0x00010001) & ~value & 0x80008000) != 0;
-    }
+    public static int mathZeroShortMask(int value)     { return ((value - 0x0001_0001) & ~value & 0x8000_8000); }
+    public static boolean mathHasZeroShort(int value)  { return ((value - 0x0001_0001) & ~value & 0x8000_8000) != 0; }
 
-    public static boolean mathHasZeroShort(long value) {
-        return ((value - 0x0001000100010001L) & ~value & 0x8000800080008000L) != 0L;
-    }
+    public static long mathZeroShortMask(long value)   { return ((value - 0x0001_0001_0001_0001L) & ~value & 0x8000_8000_8000_8000L); }
+    public static boolean mathHasZeroShort(long value) { return ((value - 0x0001_0001_0001_0001L) & ~value & 0x8000_8000_8000_8000L) != 0L; }
 
 }

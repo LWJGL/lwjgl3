@@ -59,11 +59,11 @@ public class BindingConfig extends Task {
         ArrayList<String> sources   = new ArrayList<>(modules.size() * 2);
 
         classes.add("bin/libs/java/jspecify.jar");
+        if (LWJGL.getProperty("core.java27") != null) {
+            classes.add("bin/classes/lwjgl/core/META-INF/versions/27");
+        }
         if (LWJGL.getProperty("core.java25") != null) {
             classes.add("bin/classes/lwjgl/core/META-INF/versions/25");
-        }
-        if (LWJGL.getProperty("core.java17") != null) {
-            classes.add("bin/classes/lwjgl/core/META-INF/versions/17");
         }
         if (LWJGL.getProperty("core.java11") != null) {
             classes.add("bin/classes/lwjgl/core/META-INF/versions/11");

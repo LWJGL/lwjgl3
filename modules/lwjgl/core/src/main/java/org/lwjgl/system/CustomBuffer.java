@@ -260,22 +260,22 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> extends Poin
      *
      * <p>The position and limit of this buffer are preserved after a call to this method.</p>
      *
-     * @param offset   the slice offset, it must be &le; {@code this.remaining()}
-     * @param capacity the slice length, it must be &le; {@code this.capacity() - (this.position() + offset)}
+     * @param offset the slice offset, it must be &le; {@code this.remaining()}
+     * @param length the slice length, it must be &le; {@code this.capacity() - (this.position() + offset)}
      *
      * @return the sliced buffer
      */
-    public SELF slice(int offset, int capacity) {
+    public SELF slice(int offset, int length) {
         int position = this.position + offset;
-        if (offset < 0 || this.limit < offset) {
+        if ((offset | position) < 0 || this.limit < position) {
             throw new IllegalArgumentException();
         }
 
-        if (capacity < 0 || this.capacity - position < capacity) {
+        if (length < 0 || this.capacity - position < length) {
             throw new IllegalArgumentException();
         }
 
-        return create(address + Integer.toUnsignedLong(position) * sizeof(), container, -1, 0, capacity, capacity);
+        return create(address + Integer.toUnsignedLong(position) * sizeof(), container, -1, 0, length, length);
     }
 
     /**

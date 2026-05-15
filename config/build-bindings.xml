@@ -139,12 +139,12 @@ This script is included in /config/build-definitions.xml.
                 <local name="module"/><property name="module" value="core11"/>
                 <body/>
             </sequential>
-            <sequential unless:true="@{core8}" if:set="jdk17">
-                <local name="module"/><property name="module" value="core17"/>
-                <body/>
-            </sequential>
             <sequential unless:true="@{core8}" if:set="jdk25">
                 <local name="module"/><property name="module" value="core25"/>
+                <body/>
+            </sequential>
+            <sequential unless:true="@{core8}" if:set="jdk27">
+                <local name="module"/><property name="module" value="core27"/>
                 <body/>
             </sequential>
             <forEachBinding>

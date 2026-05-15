@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_25_PREVIEW">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_25">
     <output url="file://$MODULE_DIR$/../../../bin/classes/samples" />
     <output-test url="file://$MODULE_DIR$/../../../bin/classes/samples" />
     <exclude-output />
@@ -23,7 +23,6 @@
       </library>
     </orderEntry>
     <orderEntry type="module" module-name="lwjgl.core25" scope="TEST" />
-    <orderEntry type="module" module-name="lwjgl.core17" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.core11" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.core" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.assimp" scope="TEST" />

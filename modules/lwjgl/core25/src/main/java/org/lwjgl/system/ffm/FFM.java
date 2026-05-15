@@ -84,14 +84,16 @@ public final class FFM {
         // Generate module-info.class for Java 25+
         var path = Path.of("bin", "classes", "lwjgl", "core", "META-INF", "versions", "25", "module-info.class");
 
-        // Drop the jdk.unsupported module and export the org.lwjgl.system.ffm package
+        // Make the jdk.unsupported module a static requirement and export the org.lwjgl.system.ffm package
         var moduleAttr = ModuleAttribute.of(ModuleDesc.of("org.lwjgl"), mab -> {
             mab
                 .moduleVersion(System.getProperty("module.version"))
                 .requires(ModuleRequireInfo.of(ModuleDesc.of("java.base"), AccessFlag.MODULE.mask(), "25"))
+                .requires(ModuleRequireInfo.of(ModuleDesc.of("jdk.unsupported"), AccessFlag.STATIC_PHASE.mask(), null))
                 .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl"), 0))
                 .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system"), 0))
                 .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.ffm"), 0))
+                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.ffm.mapping"), 0))
                 .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.freebsd"), 0))
                 .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.jni"), 0))
                 .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.libc"), 0))
@@ -99,10 +101,6 @@ public final class FFM {
                 .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.linux"), 0))
                 .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.macosx"), 0))
                 .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.windows"), 0));
-
-            if (Boolean.getBoolean("unsafe")) {
-                mab.requires(ModuleRequireInfo.of(ModuleDesc.of("jdk.unsupported"), AccessFlag.TRANSITIVE.mask(), "25"));
-            }
         });
 
         try {
@@ -793,13 +791,13 @@ public final class FFM {
                     var popularNullableAnnotationClasses = custom
                         ? List.of(annotationClassName)
                         : List.of(
-                        "org.jspecify.annotations.Nullable",
-                        "javax.annotation.Nullable",
-                        "org.jetbrains.annotations.Nullable",
-                        "org.eclipse.jdt.annotation.Nullable",
-                        "edu.umd.cs.findbugs.annotations.Nullable",
-                        "org.checkerframework.checker.nullness.qual.Nullable"
-                    );
+                            "org.jspecify.annotations.Nullable",
+                            "javax.annotation.Nullable",
+                            "org.jetbrains.annotations.Nullable",
+                            "org.eclipse.jdt.annotation.Nullable",
+                            "edu.umd.cs.findbugs.annotations.Nullable",
+                            "org.checkerframework.checker.nullness.qual.Nullable"
+                        );
 
                     for (var className : popularNullableAnnotationClasses) {
                         try {

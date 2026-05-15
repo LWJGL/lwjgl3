@@ -175,6 +175,8 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <detectJDKVersion/>
 
     <!-- May be set in the ant command line to test multi-release implementations. -->
+    <condition property="core.java26"><isset property="core.java27"/></condition>
+    <condition property="core.java25"><isset property="core.java26"/></condition>
     <condition property="core.java21"><isset property="core.java25"/></condition>
     <condition property="core.java17"><isset property="core.java21"/></condition>
     <condition property="core.java11"><isset property="core.java17"/></condition>
@@ -235,27 +237,18 @@ This script is included in /build.xml and /config/update-dependencies.xml.
         </javac>
     </presetdef>
 
-    <presetdef name="lwjgl.javac17">
-        <javac sourcepath="" debug="yes" encoding="UTF-8" includeantruntime="false">
-            <compilerarg line="--release 17"/>
-            <compilerarg value="-proc:full"/>
-            <compilerarg value="-Xlint:all"/>
-            <compilerarg value="-XDignore.symbol.file"/>
-        </javac>
-    </presetdef>
-
-    <presetdef name="lwjgl.javac21">
-        <javac sourcepath="" debug="yes" encoding="UTF-8" includeantruntime="false">
-            <compilerarg line="--release 21"/>
-            <compilerarg value="-proc:full"/>
-            <compilerarg value="-Xlint:all"/>
-            <compilerarg value="-XDignore.symbol.file"/>
-        </javac>
-    </presetdef>
-
     <presetdef name="lwjgl.javac25">
         <javac sourcepath="" debug="yes" encoding="UTF-8" includeantruntime="false">
-            <compilerarg line="--release 25"/>
+            <compilerarg line='--source 25 --target 25 --system "${env.JAVA_HOME}"'/>
+            <compilerarg line="-proc:full"/>
+            <compilerarg value="-Xlint:all,-restricted"/>
+            <compilerarg value="-XDignore.symbol.file"/>
+        </javac>
+    </presetdef>
+
+    <presetdef name="lwjgl.javac27">
+        <javac sourcepath="" debug="yes" encoding="UTF-8" includeantruntime="false">
+            <compilerarg line='--source 27 --target 27 --system "${env.JAVA_HOME}"'/>
             <compilerarg line="-proc:full"/>
             <compilerarg value="-Xlint:all,-restricted"/>
             <compilerarg value="-XDignore.symbol.file"/>

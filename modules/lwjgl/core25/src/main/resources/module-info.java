@@ -3,6 +3,8 @@
  * License terms: https://www.lwjgl.org/license
  */
 module org.lwjgl {
+    requires static jdk.unsupported;
+
     exports org.lwjgl;
     exports org.lwjgl.system;
     exports org.lwjgl.system.ffm;

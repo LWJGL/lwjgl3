@@ -53,7 +53,7 @@ final class BCGroup {
         }
 
         CodeBuilder buildAccessor(CodeBuilder cb, ValueLayout naturalLayout, String accessor, MethodTypeDesc type) {
-            return cb.invokestatic(CD_MemoryUtil, UNSAFE_BACKEND || naturalLayout.byteAlignment() <= layout.byteAlignment() ? accessor : accessor + "Unaligned", type);
+            return cb.invokestatic(CD_MemoryUtil, naturalLayout.byteAlignment() <= layout.byteAlignment() ? accessor : accessor + "Unaligned", type);
         }
     }
 
@@ -1195,7 +1195,7 @@ final class BCGroup {
 
         var byteSize = layout.byteSize();
         // On JDK 26+ the custom loop gets unrolled+vectorized
-        if (512L < byteSize || JAVA_VERSION == 25) {
+        if (512L < byteSize || Platform.getJavaVersion() == 25) {
             // fallback to memcpy
             // the following is an inlined version of MemoryUtilTunables::memcpy for JDK 25+
             if (byteSize < NATIVE_THRESHOLD_COPY || (byteSize & 1L) != 0L) {
@@ -1356,7 +1356,7 @@ final class BCGroup {
 
         var byteSize = layout.byteSize();
         // On JDK 26+ the custom loop gets unrolled+vectorized
-        if (1024L < byteSize || (JAVA_VERSION == 25 && (byteSize <= NATIVE_THRESHOLD_FILL || 64L < byteSize))) {
+        if (1024L < byteSize || (Platform.getJavaVersion() == 25 && (byteSize <= NATIVE_THRESHOLD_FILL || 64L < byteSize))) {
             // fallback to memset
             // the following is an inlined version of MemoryUtilTunables::memset for JDK 25+
             if (byteSize < NATIVE_THRESHOLD_FILL || (byteSize & 1L) != 0L) {

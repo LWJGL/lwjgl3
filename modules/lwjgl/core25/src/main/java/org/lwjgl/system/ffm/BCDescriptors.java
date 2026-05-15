@@ -178,8 +178,7 @@ final class BCDescriptors {
         DMHD_StringConcatFactory_makeConcatWithConstants,
         "makeConcatWithConstants",
         MTD_String_String,
-        new String[] {"0x\u0001"}
-    );
+        "0x\u0001");
 
     private BCDescriptors() {
     }

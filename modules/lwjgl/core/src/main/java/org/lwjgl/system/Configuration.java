@@ -147,6 +147,30 @@ public class Configuration<T> {
     public static final Configuration<String> LIBRARY_NAME = new Configuration<>("org.lwjgl.libname", StateInit.STRING);
 
     /**
+     * Overrides the default {@link MemoryUtil} backend.
+     *
+     * <p>Supported values:</p>
+     * <ul>
+     * <li><em>unsafe</em> - A backend implementation based on {@code jdk.internal.misc.Unsafe}. This is the default backend on JDK 25+ when the JVM is
+     * launched with {@code --add-exports java.base/jdk.internal.misc=ALL-UNNAMED} (or {@code =org.lwjgl} when the module path is used).</li>
+     * <li><em>legacy</em> - A backend implementation based on {@code sun.misc.Unsafe}. This is the default backend on JDK 8-24 and on JDK 25+ if
+     * {@code jdk.internal.misc} is not exported. On JDK 25+ the JVM must be launched with {@code --add-modules jdk.unsupported}.</li>
+     * <li><em>ffm</em> - A backend implementation based on {@code java.lang.foreign} that does not use {@code Unsafe}. May be used on JDK 25+ when no other
+     * backend is available. Performance with this backend may be negatively impacted.</li>
+     * <li><em>&lt;classpath&gt;</em> - A class that implements the {@link MemoryBackend MemoryBackend} interface. It will be instantiated using
+     * reflection.</li>
+     * </ul>
+     *
+     * <p>When set programmatically, it can also be a {@code MemoryBackend} instance.</p>
+     *
+     * <p style="font-family: monospace">
+     * Property: <b>org.lwjgl.system.memoryBackend</b><br>
+     * &nbsp; &nbsp; Type: String or a {@code MemoryBackend} instance<br>
+     * &nbsp; &nbsp;Usage: Static</p>
+     */
+    public static final Configuration<Object> MEMORY_BACKEND = new Configuration<>("org.lwjgl.system.memoryBackend", StateInit.STRING);
+
+    /**
      * Sets the allocator used for the {@link MemoryUtil} explicit memory management API
      * ({@link MemoryUtil#memAlloc memAlloc}/{@link MemoryUtil#memFree memFree}/etc).
      *

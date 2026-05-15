@@ -36,7 +36,7 @@ public class DetectJDKVersion extends Task {
 
         Project LWJGL = getProject();
 
-        int version = Integer.parseInt(matcher.group(1));
+        int version = Math.max(8, Integer.parseInt(matcher.group(1)));
 
         LWJGL.setProperty("jdk.version", Integer.toString(version));
         for (int v = version; LTS_RELEASE_FIRST <= v; v--) {

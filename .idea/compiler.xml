@@ -20,7 +20,8 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_STRING" value="-Xlint:unchecked" />
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="Root" options="" />
+      <module name="lwjgl.core25" options="--source 25 --target 25 --add-exports java.base/jdk.internal.misc=ALL-UNNAMED" />
+      <module name="lwjgl.core27" options="--source 27 --target 27 --add-exports java.base/jdk.internal.misc=ALL-UNNAMED" />
     </option>
   </component>
 </project>

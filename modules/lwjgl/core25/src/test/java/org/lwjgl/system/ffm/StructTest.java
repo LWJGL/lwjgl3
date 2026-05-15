@@ -2470,9 +2470,6 @@ public class StructTest {
                     .m("address", uint64_t)
                     .build();
 
-                @SuppressWarnings("override")
-                @Override
-                long address();
                 Invalid address(long value);
             }
             assertThrows(() -> Objects.requireNonNull(Invalid.$));

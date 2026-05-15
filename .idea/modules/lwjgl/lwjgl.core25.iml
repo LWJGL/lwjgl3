@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_25_PREVIEW">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_25">
     <output url="file://$MODULE_DIR$/../../../bin/classes/lwjgl/core/META-INF/versions/25" />
     <output-test url="file://$MODULE_DIR$/../../../bin/classes/test" />
     <exclude-output />
@@ -11,7 +11,6 @@
     </content>
     <orderEntry type="jdk" jdkName="25" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="lwjgl.core17" />
     <orderEntry type="module" module-name="lwjgl.core11" />
     <orderEntry type="module" module-name="lwjgl.core" />
     <orderEntry type="library" scope="PROVIDED" name="JSpecify" level="project" />

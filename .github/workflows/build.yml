@@ -13,8 +13,9 @@ env:
   JAVA_HOME: jdk8
   ANT_OPTS: -Xmx1G
   LWJGL_BUILD_TYPE: nightly
-  ZULU_BUILD: 90.0.19-ca-jdk8.0.472
-  ZULU_BUILD25: 30.17-ca-jdk25.0.1
+  ZULU_BUILD: 94.0.17-ca-jdk8.0.492
+  ZULU_BUILD25: 34.17-ca-jdk25.0.3
+  ZULU_BUILD27: 0.27-beta-jdk27.0.0-beta.23
 
 jobs:
   cache-kotlinc:
@@ -70,8 +71,10 @@ jobs:
           dnf -y install gcc-toolset-15-gcc gcc-toolset-15-gcc-c++ ant awscli curl zstd make
           mkdir jdk8
           mkdir jdk25
+          mkdir jdk27
           curl -L https://cdn.azul.com/zulu/bin/zulu8.${ZULU_BUILD}-linux_x64.tar.gz | tar xz -C jdk8 --strip-components 1
           curl -L https://cdn.azul.com/zulu/bin/zulu25.${ZULU_BUILD25}-linux_x64.tar.gz | tar xz -C jdk25 --strip-components 1
+          curl -L https://cdn.azul.com/zulu/bin/zulu27.${ZULU_BUILD27}-linux_x64.tar.gz | tar xz -C jdk27 --strip-components 1
       - name: Install LWJGL dependencies
         run: |
           dnf -y install \
@@ -105,6 +108,17 @@ jobs:
         run: |
           source /opt/rh/gcc-toolset-15/enable || true
           JAVA_HOME=jdk25 ant -emacs tests -Dcore.java25=true
+          JAVA_HOME=jdk25 ant -emacs tests -Dcore.java25=true -Djvmargs="--add-exports java.base/jdk.internal.misc=ALL-UNNAMED"
+          JAVA_HOME=jdk25 ant -emacs tests -Dcore.java25=true -Djvmargs="-Dorg.lwjgl.system.memoryBackend=ffm"
+      - name: Print test results
+        run: cat bin/test/testng-results.xml
+        if: failure()
+      - name: Run tests (JDK 27)
+        run: |
+          source /opt/rh/gcc-toolset-15/enable || true
+          JAVA_HOME=jdk27 ant -emacs tests -Dcore.java27=true
+          JAVA_HOME=jdk27 ant -emacs tests -Dcore.java27=true -Djvmargs="--add-exports java.base/jdk.internal.misc=ALL-UNNAMED"
+          JAVA_HOME=jdk27 ant -emacs tests -Dcore.java27=true -Djvmargs="-Dorg.lwjgl.system.memoryBackend=ffm"
       - name: Print test results
         run: cat bin/test/testng-results.xml
         if: failure()
@@ -116,6 +130,9 @@ jobs:
           mkdir jdk-graalvm
           curl -L https://download.oracle.com/graalvm/25/latest/graalvm-jdk-25_linux-x64_bin.tar.gz | tar xz -C jdk-graalvm --strip-components 1
           jdk-graalvm/bin/native-image -cp \
+          bin/classes/lwjgl/core/META-INF/versions/25:\
+          bin/classes/lwjgl/core/META-INF/versions/17:\
+          bin/classes/lwjgl/core/META-INF/versions/11:\
           bin/classes/lwjgl/core:\
           bin/classes/lwjgl/lz4:\
           bin/classes/samples:\
@@ -123,7 +140,9 @@ jobs:
           bin/libs/java/joml.jar:\
           bin/libs/native:\
           config/native-image \
-          org.lwjgl.demo.util.lz4.HelloLZ4 --verbose --no-fallback
+          org.lwjgl.demo.util.lz4.HelloLZ4 --verbose --no-fallback \
+          --add-exports java.base/jdk.internal.misc=ALL-UNNAMED \
+          --enable-native-access=ALL-UNNAMED
       - name: Run demo with GraalVM JIT
         run: JAVA_HOME=jdk-graalvm ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
       - name: Run demo with GraalVM Native Image
@@ -267,6 +286,8 @@ jobs:
           - ARCH: arm64
             JDK: aarch64
     env:
+      JAVA8_HOME: jdk8/Home
+      JAVA_HOME: jdk8/Home
       LWJGL_BUILD_ARCH: ${{matrix.ARCH}}
     steps:
       - name: Checkout repository
@@ -277,8 +298,10 @@ jobs:
         run: |
           mkdir jdk8
           mkdir jdk25
-          curl -L https://cdn.azul.com/zulu/bin/zulu8.${ZULU_BUILD}-macosx_${{matrix.JDK}}.tar.gz | tar xz -C jdk8 --strip-components 1
-          curl -L https://cdn.azul.com/zulu/bin/zulu25.${ZULU_BUILD25}-macosx_${{matrix.JDK}}.tar.gz | tar xz -C jdk25 --strip-components 1
+          mkdir jdk27
+          curl -L https://cdn.azul.com/zulu/bin/zulu8.${ZULU_BUILD}-macosx_${{matrix.JDK}}.tar.gz | tar xz -C jdk8 --strip-components 2
+          curl -L https://cdn.azul.com/zulu/bin/zulu25.${ZULU_BUILD25}-macosx_${{matrix.JDK}}.tar.gz | tar xz -C jdk25 --strip-components 2
+          curl -L https://cdn.azul.com/zulu/bin/zulu27.${ZULU_BUILD27}-macosx_${{matrix.JDK}}.tar.gz | tar xz -C jdk27 --strip-components 2
       - name: Restore kotlinc output
         uses: actions/cache/restore@v3
         with:
@@ -300,7 +323,18 @@ jobs:
         run: cat bin/test/testng-results.xml
         if: failure()
       - name: Run tests (JDK25)
-        run: JAVA_HOME=jdk25 ant -emacs tests
+        run: |
+          JAVA_HOME=jdk25/Home ant -emacs tests -Dcore.java25=true
+          JAVA_HOME=jdk25/Home ant -emacs tests -Dcore.java25=true -Djvmargs="--add-exports java.base/jdk.internal.misc=ALL-UNNAMED"
+          JAVA_HOME=jdk25/Home ant -emacs tests -Dcore.java25=true -Djvmargs="-Dorg.lwjgl.system.memoryBackend=ffm"
+      - name: Print test results
+        run: cat bin/test/testng-results.xml
+        if: failure()
+      - name: Run tests (JDK27)
+        run: |
+          JAVA_HOME=jdk27/Home ant -emacs tests -Dcore.java27=true
+          JAVA_HOME=jdk27/Home ant -emacs tests -Dcore.java27=true -Djvmargs="--add-exports java.base/jdk.internal.misc=ALL-UNNAMED"
+          JAVA_HOME=jdk27/Home ant -emacs tests -Dcore.java27=true -Djvmargs="-Dorg.lwjgl.system.memoryBackend=ffm"
       - name: Print test results
         run: cat bin/test/testng-results.xml
         if: failure()
@@ -309,8 +343,11 @@ jobs:
       - name: Build GraalVM Native Image
         run: |
           mkdir jdk-graalvm
-          curl -L https://download.oracle.com/graalvm/25/latest/graalvm-jdk-25_macos-${{matrix.JDK}}_bin.tar.gz | tar xz -C jdk-graalvm --strip-components 1
-          jdk-graalvm/Contents/Home/bin/native-image -cp \
+          curl -L https://download.oracle.com/graalvm/25/latest/graalvm-jdk-25_macos-${{matrix.JDK}}_bin.tar.gz | tar xz -C jdk-graalvm --strip-components 2
+          jdk-graalvm/Home/bin/native-image -cp \
+          bin/classes/lwjgl/core/META-INF/versions/25:\
+          bin/classes/lwjgl/core/META-INF/versions/17:\
+          bin/classes/lwjgl/core/META-INF/versions/11:\
           bin/classes/lwjgl/core:\
           bin/classes/lwjgl/lz4:\
           bin/classes/samples:\
@@ -318,9 +355,11 @@ jobs:
           bin/libs/java/joml.jar:\
           bin/libs/native:\
           config/native-image \
-          org.lwjgl.demo.util.lz4.HelloLZ4 --verbose --no-fallback
+          org.lwjgl.demo.util.lz4.HelloLZ4 --verbose --no-fallback \
+          --add-exports java.base/jdk.internal.misc=ALL-UNNAMED \
+          --enable-native-access=ALL-UNNAMED
       - name: Run demo with GraalVM JIT
-        run: JAVA_HOME=jdk-graalvm/Contents/Home ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
+        run: JAVA_HOME=jdk-graalvm/Home ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
       - name: Run demo with GraalVM Native Image
         run: ./org.lwjgl.demo.util.lz4.hellolz4
 
@@ -369,6 +408,9 @@ jobs:
           Invoke-WebRequest https://cdn.azul.com/zulu/bin/zulu25.$Env:ZULU_BUILD25-win_x64.zip -OutFile jdk25.zip
           Expand-Archive -Path jdk25.zip -DestinationPath .\
           Rename-Item zulu25.$Env:ZULU_BUILD25-win_x64 jdk25
+          Invoke-WebRequest https://cdn.azul.com/zulu/bin/zulu27.$Env:ZULU_BUILD27-win_x64.zip -OutFile jdk27.zip
+          Expand-Archive -Path jdk27.zip -DestinationPath .\
+          Rename-Item zulu27.$Env:ZULU_BUILD27-win_x64 jdk27
         shell: pwsh
 #      - name: Install Visual Studio 2026 Build Tools
 #        shell: pwsh
@@ -415,7 +457,19 @@ jobs:
       - name: Run tests (JDK25)
         run: |
           set JAVA_HOME=jdk25
-          ant -emacs tests
+          ant -emacs tests -Dcore.java25=true
+          ant -emacs tests -Dcore.java25=true -Djvmargs="--add-exports java.base/jdk.internal.misc=ALL-UNNAMED"
+          ant -emacs tests -Dcore.java25=true -Djvmargs="-Dorg.lwjgl.system.memoryBackend=ffm"
+        if: matrix.ARCH == 'x64'
+      - name: Print test results
+        run: type bin\test\testng-results.xml
+        if: failure()
+      - name: Run tests (JDK27)
+        run: |
+          set JAVA_HOME=jdk27
+          ant -emacs tests -Dcore.java27=true
+          ant -emacs tests -Dcore.java27=true -Djvmargs="--add-exports java.base/jdk.internal.misc=ALL-UNNAMED"
+          ant -emacs tests -Dcore.java27=true -Djvmargs="-Dorg.lwjgl.system.memoryBackend=ffm"
         if: matrix.ARCH == 'x64'
       - name: Print test results
         run: type bin\test\testng-results.xml
@@ -433,6 +487,9 @@ jobs:
       - name: Build GraalVM Native Image
         run: |
           jdk-graalvm\bin\native-image -cp ^
+          bin/classes/lwjgl/core/META-INF/versions/25;^
+          bin/classes/lwjgl/core/META-INF/versions/17;^
+          bin/classes/lwjgl/core/META-INF/versions/11;^
           bin/classes/lwjgl/core;^
           bin/classes/lwjgl/lz4;^
           bin/classes/samples;^
@@ -440,7 +497,9 @@ jobs:
           bin/libs/java/joml.jar;^
           bin/libs/native;^
           config/native-image ^
-          org.lwjgl.demo.util.lz4.HelloLZ4 --verbose --no-fallback
+          org.lwjgl.demo.util.lz4.HelloLZ4 --verbose --no-fallback ^
+          --add-exports java.base/jdk.internal.misc=ALL-UNNAMED ^
+          --enable-native-access=ALL-UNNAMED
         if: matrix.ARCH == 'x64'
       - name: Run demo with GraalVM JIT
         run: |

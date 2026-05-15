@@ -1,5 +1,5 @@
-These module-info.java files are never compiled, they're only used to
+This module-info.java file is never compiled, it's only used to
 build lwjgl-sources.jar & lwjgl-unsafe-sources.jar.
 
-The corresponding module-info.class files are generated using the
+The corresponding module-info.class file is generated using the
 ClassFile API.

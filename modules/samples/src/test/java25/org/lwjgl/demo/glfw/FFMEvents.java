@@ -23,6 +23,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.SegmentStack.*;
 import static org.lwjgl.system.ffm.FFM.*;
+import static org.lwjgl.system.ffm.MemoryUtilFFM.*;
 
 /** FFM port of the GLFW events demo. */
 public final class FFMEvents {
@@ -179,9 +180,9 @@ public final class FFMEvents {
         try (var s = MemoryStack.stackPush()) {
             // TODO: migrate to FFM API
 
-            var w = s.mallocInt(1);
-            var h = s.mallocInt(1);
-            var       comp = s.mallocInt(1);
+            var w    = s.mallocInt(1);
+            var h    = s.mallocInt(1);
+            var comp = s.mallocInt(1);
 
             // Cursor
 

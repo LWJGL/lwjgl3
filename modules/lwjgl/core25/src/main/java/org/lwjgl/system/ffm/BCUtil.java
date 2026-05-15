@@ -4,8 +4,6 @@
  */
 package org.lwjgl.system.ffm;
 
-import org.lwjgl.system.*;
-
 import java.lang.classfile.*;
 import java.lang.constant.*;
 import java.lang.foreign.*;
@@ -20,31 +18,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.ffm.BCDescriptors.*;
 
 final class BCUtil {
-
-    static final int JAVA_VERSION;
-    static final boolean UNSAFE_BACKEND;
-
-    static {
-        var javaVersion = System.getProperty("java.version");
-
-        var matcher = Pattern
-            .compile("^([1-9][0-9]*)(?:(?:\\.0)*\\.[1-9][0-9]*)*(?:-[a-zA-Z0-9]+)?")
-            .matcher(javaVersion);
-
-        if (!matcher.find()) {
-            throw new IllegalStateException("Failed to parse java.version: " + javaVersion);
-        }
-
-        JAVA_VERSION = Integer.parseInt(matcher.group(1));
-
-        var unsafeBackend = false;
-        try {
-            MemoryUtil.class.getDeclaredMethod("memGetIntUnaligned", long.class);
-        } catch (NoSuchMethodException _) {
-            unsafeBackend = true;
-        }
-        UNSAFE_BACKEND = unsafeBackend;
-    }
 
     static final long NATIVE_THRESHOLD_FILL = powerOfPropertyOr("fill", 5);
     static final long NATIVE_THRESHOLD_COPY = powerOfPropertyOr("copy", 6);

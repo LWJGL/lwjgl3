@@ -36,6 +36,34 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         }
     }
 
+    final MemoryAllocator allocator = new MemoryAllocator() {
+        @Override public long getMalloc()       { throw new UnsupportedOperationException(); }
+        @Override public long getCalloc()       { throw new UnsupportedOperationException(); }
+        @Override public long getRealloc()      { throw new UnsupportedOperationException(); }
+        @Override public long getFree()         { throw new UnsupportedOperationException(); }
+        @Override public long getAlignedAlloc() { throw new UnsupportedOperationException(); }
+        @Override public long getAlignedFree()  { throw new UnsupportedOperationException(); }
+
+        @Override public long malloc(long size) {
+            return MemoryStack.this.nmalloc(POINTER_SIZE, (int)size);
+        }
+        @Override public long calloc(long num, long size) {
+            return MemoryStack.this.ncalloc(POINTER_SIZE, (int)num, (int)size);
+        }
+        @Override public long realloc(long ptr, long size) {
+            throw new UnsupportedOperationException();
+        }
+        @Override public void free(long ptr) {
+            throw new UnsupportedOperationException();
+        }
+        @Override public long aligned_alloc(long alignment, long size) {
+            return MemoryStack.this.nmalloc((int)alignment, (int)size);
+        }
+        @Override public void aligned_free(long ptr) {
+            throw new UnsupportedOperationException();
+        }
+    };
+
     @SuppressWarnings({"FieldCanBeLocal", "unused"})
     private final @Nullable ByteBuffer container;
 
@@ -355,14 +383,14 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         if (DEBUG) {
             checkAlignment(alignment);
         }
-        return MemoryUtil.wrapBufferByte(nmalloc(alignment, size), size);
+        return BACKEND.wrapBufferByte(nmalloc(alignment, size), size);
     }
     /** Calloc version of {@link #malloc(int, int)}. */
     public ByteBuffer calloc(int alignment, int size) {
         if (DEBUG) {
             checkAlignment(alignment);
         }
-        return MemoryUtil.wrapBufferByte(ncalloc(alignment, size, 1), size);
+        return BACKEND.wrapBufferByte(ncalloc(alignment, size, 1), size);
     }
 
     /**
@@ -373,11 +401,11 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
      * @return the allocated buffer
      */
     public ByteBuffer malloc(int size) {
-        return MemoryUtil.wrapBufferByte(nmalloc(POINTER_SIZE, size), size);
+        return BACKEND.wrapBufferByte(nmalloc(POINTER_SIZE, size), size);
     }
     /** Calloc version of {@link #malloc(int)}. */
     public ByteBuffer calloc(int size) {
-        return MemoryUtil.wrapBufferByte(ncalloc(POINTER_SIZE, size, 1), size);
+        return BACKEND.wrapBufferByte(ncalloc(POINTER_SIZE, size, 1), size);
     }
 
     /** Unsafe version of {@link #bytes(byte)}. */
@@ -404,13 +432,13 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     // -------------------------------------------------
 
     /** Short version of {@link #malloc(int)}. */
-    public ShortBuffer mallocShort(int size) { return MemoryUtil.wrapBufferShort(nmalloc(2, size << 1), size); }
+    public ShortBuffer mallocShort(int size) { return BACKEND.wrapBufferShort(nmalloc(2, size << 1), size); }
     /** Short version of {@link #calloc(int)}. */
     public ShortBuffer callocShort(int size) {
         int  bytes   = size * 2;
         long address = nmalloc(2, bytes);
         memSet(address, 0, bytes);
-        return MemoryUtil.wrapBufferShort(address, size);
+        return BACKEND.wrapBufferShort(address, size);
     }
 
     /** Unsafe version of {@link #shorts(short)}. */
@@ -437,13 +465,13 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     // -------------------------------------------------
 
     /** Int version of {@link #malloc(int)}. */
-    public IntBuffer mallocInt(int size) { return MemoryUtil.wrapBufferInt(nmalloc(4, size << 2), size); }
+    public IntBuffer mallocInt(int size) { return BACKEND.wrapBufferInt(nmalloc(4, size << 2), size); }
     /** Int version of {@link #calloc(int)}. */
     public IntBuffer callocInt(int size) {
         int  bytes   = size * 4;
         long address = nmalloc(4, bytes);
         memSet(address, 0, bytes);
-        return MemoryUtil.wrapBufferInt(address, size);
+        return BACKEND.wrapBufferInt(address, size);
     }
 
     /** Unsafe version of {@link #ints(int)}. */
@@ -470,13 +498,13 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     // -------------------------------------------------
 
     /** Long version of {@link #malloc(int)}. */
-    public LongBuffer mallocLong(int size) { return MemoryUtil.wrapBufferLong(nmalloc(8, size << 3), size); }
+    public LongBuffer mallocLong(int size) { return BACKEND.wrapBufferLong(nmalloc(8, size << 3), size); }
     /** Long version of {@link #calloc(int)}. */
     public LongBuffer callocLong(int size) {
         int  bytes   = size * 8;
         long address = nmalloc(8, bytes);
         memSet(address, 0, bytes);
-        return MemoryUtil.wrapBufferLong(address, size);
+        return BACKEND.wrapBufferLong(address, size);
     }
 
     /** Unsafe version of {@link #longs(long)}. */
@@ -536,13 +564,13 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     // -------------------------------------------------
 
     /** Float version of {@link #malloc(int)}. */
-    public FloatBuffer mallocFloat(int size) { return MemoryUtil.wrapBufferFloat(nmalloc(4, size << 2), size); }
+    public FloatBuffer mallocFloat(int size) { return BACKEND.wrapBufferFloat(nmalloc(4, size << 2), size); }
     /** Float version of {@link #calloc(int)}. */
     public FloatBuffer callocFloat(int size) {
         int  bytes   = size * 4;
         long address = nmalloc(4, bytes);
         memSet(address, 0, bytes);
-        return MemoryUtil.wrapBufferFloat(address, size);
+        return BACKEND.wrapBufferFloat(address, size);
     }
 
     /** Unsafe version of {@link #floats(float)}. */
@@ -569,13 +597,13 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     // -------------------------------------------------
 
     /** Double version of {@link #malloc(int)}. */
-    public DoubleBuffer mallocDouble(int size) { return MemoryUtil.wrapBufferDouble(nmalloc(8, size << 3), size); }
+    public DoubleBuffer mallocDouble(int size) { return BACKEND.wrapBufferDouble(nmalloc(8, size << 3), size); }
     /** Double version of {@link #calloc(int)}. */
     public DoubleBuffer callocDouble(int size) {
         int  bytes   = size * 8;
         long address = nmalloc(8, bytes);
         memSet(address, 0, bytes);
-        return MemoryUtil.wrapBufferDouble(address, size);
+        return BACKEND.wrapBufferDouble(address, size);
     }
 
     /** Unsafe version of {@link #doubles(double)}. */
@@ -699,9 +727,8 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     // -------------------------------------------------
 
     /**
-     * Allocates a new {@link PointerBuffer} of size {@code buffer.remaining()}
-     * and fills it with the addresses of the values within the provided {@link CustomBuffer}
-     * starting at {@code buffer.position()}.
+     * Allocates a new {@link PointerBuffer} of size {@code buffer.remaining()} and fills it with the addresses of the values within the provided
+     * {@link CustomBuffer} starting at {@code buffer.position()}.
      *
      * @param buffer the {@link CustomBuffer} to obtain its element addresses of
      *
@@ -745,8 +772,12 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     public ByteBuffer ASCII(CharSequence text, boolean nullTerminated) {
         int  length = memLengthASCII(text, nullTerminated);
         long target = nmalloc(POINTER_SIZE, length);
-        encodeASCIIUnsafe(text, nullTerminated, target);
-        return MemoryUtil.wrapBufferByte(target, length);
+        if (text instanceof String) {
+            BACKEND.putStringASCII((String)text, nullTerminated, target);
+        } else {
+            BACKEND.putStringASCII(text, nullTerminated, target);
+        }
+        return BACKEND.wrapBufferByte(target, length);
     }
 
     /**
@@ -759,8 +790,14 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
      * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
      */
     public int nASCII(CharSequence text, boolean nullTerminated) {
-        long target = nmalloc(POINTER_SIZE, memLengthASCII(text, nullTerminated));
-        return encodeASCIIUnsafe(text, nullTerminated, target);
+        int  length = memLengthASCII(text, nullTerminated);
+        long target = nmalloc(POINTER_SIZE, length);
+        if (text instanceof String) {
+            BACKEND.putStringASCII((String)text, nullTerminated, target);
+        } else {
+            BACKEND.putStringASCII(text, nullTerminated, target);
+        }
+        return length;
     }
 
     /** Like {@link #ASCII(CharSequence) ASCII}, but returns {@code null} if {@code text} is {@code null}. */
@@ -799,10 +836,15 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
      * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
      */
     public ByteBuffer UTF8(CharSequence text, boolean nullTerminated) {
+        return text instanceof String
+            ? BACKEND.allocateUTF8((String)text, nullTerminated, allocator)
+            : allocateUTF8(text, nullTerminated);
+    }
+    private ByteBuffer allocateUTF8(CharSequence text, boolean nullTerminated) {
         int  length = memLengthUTF8(text, nullTerminated);
         long target = nmalloc(POINTER_SIZE, length);
-        encodeUTF8Unsafe(text, nullTerminated, target);
-        return MemoryUtil.wrapBufferByte(target, length);
+        BACKEND.putStringUTF8(text, nullTerminated, target);
+        return BACKEND.wrapBufferByte(target, length);
     }
 
     /**
@@ -815,8 +857,18 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
      * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
      */
     public int nUTF8(CharSequence text, boolean nullTerminated) {
-        long target = nmalloc(POINTER_SIZE, memLengthUTF8(text, nullTerminated));
-        return encodeUTF8Unsafe(text, nullTerminated, target);
+        if (text instanceof String) {
+            return BACKEND
+                .allocateUTF8((String)text, nullTerminated, allocator)
+                .remaining();
+        }
+        return nallocateUTF8(text, nullTerminated);
+    }
+    private int nallocateUTF8(CharSequence text, boolean nullTerminated) {
+        int  length = memLengthUTF8(text, nullTerminated);
+        long target = nmalloc(POINTER_SIZE, length);
+        BACKEND.putStringUTF8(text, nullTerminated, target);
+        return length;
     }
 
     /** Like {@link #UTF8(CharSequence) UTF8}, but returns {@code null} if {@code text} is {@code null}. */
@@ -857,8 +909,12 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     public ByteBuffer UTF16(CharSequence text, boolean nullTerminated) {
         int  length = memLengthUTF16(text, nullTerminated);
         long target = nmalloc(POINTER_SIZE, length);
-        encodeUTF16Unsafe(text, nullTerminated, target);
-        return MemoryUtil.wrapBufferByte(target, length);
+        if (text instanceof String) {
+            BACKEND.putStringUTF16((String)text, nullTerminated, target);
+        } else {
+            BACKEND.putStringUTF16(text, nullTerminated, target);
+        }
+        return BACKEND.wrapBufferByte(target, length);
     }
 
     /**
@@ -871,8 +927,14 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
      * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
      */
     public int nUTF16(CharSequence text, boolean nullTerminated) {
-        long target = nmalloc(POINTER_SIZE, memLengthUTF16(text, nullTerminated));
-        return encodeUTF16Unsafe(text, nullTerminated, target);
+        int  length = memLengthUTF16(text, nullTerminated);
+        long target = nmalloc(POINTER_SIZE, length);
+        if (text instanceof String) {
+            BACKEND.putStringUTF16((String)text, nullTerminated, target);
+        } else {
+            BACKEND.putStringUTF16(text, nullTerminated, target);
+        }
+        return length;
     }
 
     /** Like {@link #UTF16(CharSequence) UTF16}, but returns {@code null} if {@code text} is {@code null}. */

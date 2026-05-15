@@ -76,7 +76,7 @@ public class MemSetTest {
             int bytes = arrays[i].length - offset;
 
             int lastByteIndex = bytes - 1;
-            UNSAFE.setMemory(null, trg, lastByteIndex - (bytes & 1), value);
+            UNSAFE.setMemory(null, trg, lastByteIndex + (bytes & 1), value);
             UNSAFE.putByte(null, trg + lastByteIndex, value);
         }
     }

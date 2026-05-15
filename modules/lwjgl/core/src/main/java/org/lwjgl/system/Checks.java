@@ -368,6 +368,18 @@ public final class Checks {
      *
      * @throws IllegalArgumentException if {@code buf.length < size}
      */
+    public static void check(char[] buf, int size) {
+        checkBuffer(buf.length, size);
+    }
+
+    /**
+     * Helper method to ensure a array has enough capacity.
+     *
+     * @param buf  the array to check
+     * @param size the minimum array capacity
+     *
+     * @throws IllegalArgumentException if {@code buf.length < size}
+     */
     public static void check(short[] buf, int size) {
         checkBuffer(buf.length, size);
     }

@@ -418,15 +418,15 @@ final class BCCallDown extends BCCall {
                         // ldc the target handle
                         if (!hasFeature(FF_TRACING)) {
                             // Load target handle via Condy, using MethodHandles::classData as the bootstrap method.
-                            cb.ldc(condyCDataAt(CD_MethodHandle, 0));
+                            bcb.ldc(condyCDataAt(CD_MethodHandle, 0));
                         }
                         if (!hasFunctionAddress) {
                             // Pass the function address manually, to avoid bindTo's additional lambda form.
-                            cb.ldc(condyCDataAt(CD_MemorySegment, 1));
+                            bcb.ldc(condyCDataAt(CD_MemorySegment, 1));
                         }
 
                         if (hasJNI()) {
-                            cb
+                            bcb
                                 .getstatic(CD_MemorySegment, "NULL", CD_MemorySegment)
                                 .getstatic(CD_MemorySegment, "NULL", CD_MemorySegment);
                         }
@@ -436,7 +436,6 @@ final class BCCallDown extends BCCall {
                         for (var p = 0; p < methodTypeDesc.parameterCount(); p++) {
                             var parameter = parameters[p];
                             var type      = parameter.getType();
-
 
                             var slot = bcb.parameterSlot(p);
 
