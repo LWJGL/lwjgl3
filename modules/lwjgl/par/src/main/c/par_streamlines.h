@@ -647,7 +647,7 @@ parsl_mesh* parsl_mesh_from_lines(parsl_context* context,
         float* pvertex = mesh->random_offsets;
         for (uint16_t spine = 0; spine < spines.num_spines; spine++) {
             const uint16_t num_segments = spines.spine_lengths[spine];
-            const float r = (float) rand() / RAND_MAX;
+            const float r = (float) rand() / (float) RAND_MAX;
             for (uint16_t segment = 0; segment < num_segments; segment++) {
                 *pvertex++ = r;
             }
@@ -1058,7 +1058,7 @@ static parsl_position par__sample_annulus(float radius, parsl_position center,
     int* seedptr) {
     unsigned int seed = *seedptr;
     parsl_position r;
-    float rscale = 1.0f / UINT_MAX;
+    float rscale = 1.0f / (float) UINT_MAX;
     while (1) {
         r.x = 4 * rscale * par__randhash(seed++) - 2;
         r.y = 4 * rscale * par__randhash(seed++) - 2;
@@ -1083,7 +1083,7 @@ static parsl_position* par__generate_pts(float width, float height,
     float radius, int seed, parsl_position* result) {
 
     int maxattempts = 30;
-    float rscale = 1.0f / UINT_MAX;
+    float rscale = 1.0f / (float) UINT_MAX;
     parsl_position rvec;
     rvec.x = rvec.y = radius;
     float r2 = radius * radius;
