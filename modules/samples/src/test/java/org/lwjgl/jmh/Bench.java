@@ -9,6 +9,7 @@ import org.openjdk.jmh.profile.*;
 import org.openjdk.jmh.runner.*;
 import org.openjdk.jmh.runner.options.*;
 
+import java.util.*;
 import java.util.concurrent.*;
 
 public final class Bench {
@@ -23,21 +24,41 @@ public final class Bench {
             throw new IllegalArgumentException("Please specify the benchmark include regex.");
         }
 
-        Options opt = new OptionsBuilder()
+        ChainedOptionsBuilder builder = new OptionsBuilder()
             .include(args[0])
             .forks(1)
             //.addProfiler(WinPerfAsmProfiler.class)
             //.addProfiler(GCProfiler.class)
-            .warmupIterations(2)
-            .measurementIterations(3)
+            .warmupIterations(3)
+            .measurementIterations(2)
             .measurementTime(TimeValue.seconds(1))
             .warmupTime(TimeValue.seconds(1))
             .mode(Mode.AverageTime)
             .timeUnit(TimeUnit.NANOSECONDS)
-            .detectJvmArgs()
-            .build();
+            .detectJvmArgs();
 
-        new Runner(opt).run();
+        String jitwatch = System.getProperty("org.lwjgl.util.jitwatch");
+        if (jitwatch != null) {
+            List<String> jvmArgs = new ArrayList<>();
+
+            jvmArgs.add("-XX:+UnlockDiagnosticVMOptions");
+            jvmArgs.add("-XX:+LogCompilation");
+            jvmArgs.add("-XX:CompileCommandFile=config/cli/CompileCommand.args");
+            jvmArgs.add("-XX:PrintAssemblyOptions=intel");
+            jvmArgs.add("-Xlog:class+load=info,jit+compilation=debug");
+            //jvmArgs.add("-XX:-TieredCompilation");
+            //jvmArgs.add("-XX:-UseCompressedOops");
+
+            if (!"true".equalsIgnoreCase(jitwatch)) {
+                jvmArgs.add("-XX:LogFile=" + jitwatch);
+            }
+
+            builder.jvmArgsPrepend(jvmArgs.toArray(new String[0]));
+        } else {
+            builder.jvmArgsPrepend("-XX:+UnlockDiagnosticVMOptions");
+        }
+
+        new Runner(builder.build()).run();
     }
 
     static sun.misc.Unsafe getUnsafeInstance() {
