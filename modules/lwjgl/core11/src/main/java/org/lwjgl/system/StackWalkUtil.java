@@ -10,7 +10,7 @@ import java.util.*;
 
 import static org.lwjgl.system.APIUtil.*;
 
-/** JDK 11+ version of {@code {@link StackWalkUtil}}. */
+/** JDK 11+ version of {@code StackWalkUtil}. */
 final class StackWalkUtil {
 
     private static final StackWalker STACKWALKER = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);

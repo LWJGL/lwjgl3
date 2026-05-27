@@ -2358,6 +2358,7 @@ public class StructTest {
                     .build();
 
                 @SuppressWarnings("override")
+                @Override
                 long address();
                 Invalid address(long value);
             }

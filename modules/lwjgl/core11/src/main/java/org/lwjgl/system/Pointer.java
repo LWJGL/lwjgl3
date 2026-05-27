@@ -29,7 +29,7 @@ public interface Pointer {
     int POINTER_SHIFT = POINTER_SIZE == 8 ? 3 : 2;
 
     /** The value of {@code sizeof(long)} for the current platform. */
-    int CLONG_SIZE = POINTER_SIZE == 8 && Platform.get() == Platform.WINDOWS ? 4 : POINTER_SIZE;
+    int CLONG_SIZE  = POINTER_SIZE == 8 && Platform.get() == Platform.WINDOWS ? 4 : POINTER_SIZE;
 
     /** The value of {@code sizeof(long)} as a power-of-two. */
     int CLONG_SHIFT = CLONG_SIZE == 8 ? 3 : 2;
@@ -50,8 +50,7 @@ public interface Pointer {
     /** Default {@link Pointer} implementation. */
     abstract class Default implements Pointer {
 
-        // Removed final due to JDK-8139758. TODO: Restore if the fix is backported to JDK 8.
-        protected long address;
+        protected final long address; // final in JDK 11+ version
 
         protected Default(long address) {
             if (CHECKS && address == NULL) {
@@ -73,7 +72,7 @@ public interface Pointer {
                 return false;
             }
 
-            Pointer other = (Pointer)o;
+            var other = (Pointer)o;
 
             return this.address == other.address();
         }
