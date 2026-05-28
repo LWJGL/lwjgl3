@@ -101,6 +101,12 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
         println("\n}")
     }
 
+    private fun NativeType.ffmAnnotations(parameter: Boolean) = when {
+        isPointer -> if (parameter) "@FFMNullable @FFMPointer " else "@FFMPointer "
+        mapping === PrimitiveMapping.CLONG -> "@FFMCLong "
+        else -> ""
+    }
+
     fun PrintWriter.generateJavaFFM() {
         javaImport(
             "org.lwjgl.system.ffm.*",
@@ -114,10 +120,10 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
     @FFMFunctionAddress
     private interface JNIBindings {""")
         sortedSignatures.forEach {
-            print("\n$t${t}${if (it.returnType.isPointer) "@FFMPointer " else ""}${it.returnType.nativeMethodType} ${it.signature}(MemorySegment __functionAddress")
+            print("\n$t${t}${it.returnType.ffmAnnotations(parameter = false)}${it.returnType.nativeMethodType} ${it.signature}(MemorySegment __functionAddress")
             if (it.arguments.isNotEmpty()) {
                 print(it.arguments.asSequence()
-                    .mapIndexed { i, param -> "${if (param.isPointer) "@FFMNullable @FFMPointer " else ""}${param.nativeMethodType} param$i" }
+                    .mapIndexed { i, param -> "${param.ffmAnnotations(parameter = true)}${param.nativeMethodType} param$i" }
                     .joinToString(", ", prefix = ", "))
             }
             print(");")

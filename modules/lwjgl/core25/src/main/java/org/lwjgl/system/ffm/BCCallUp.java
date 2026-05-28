@@ -76,9 +76,18 @@ final class BCCallUp extends BCCall {
             var parameter = parameters[i];
             var type      = parameter.getType();
             if (isPointerType(parameter, type)) {
-                if (BITS32 && type == long.class) {
-                    featureFlags |= FF_TYPE_CONVERSION.mask;
+                if (type == long.class) {
+                    if (BITS32) {
+                        featureFlags |= FF_TYPE_CONVERSION.mask;
+                    }
+                    if (parameter.isAnnotationPresent(FFMCLong.class)) {
+                        throw new IllegalStateException("Cannot use both FFMCLong and FFMPointer");
+                    }
                 }
+            } else if (CLONG32 && type == long.class && parameter.isAnnotationPresent(FFMCLong.class)) {
+                featureFlags |= FF_TYPE_CONVERSION.mask;
+                argLayouts.add(ValueLayout.JAVA_INT);
+                continue;
             } else if (type == String.class) {
                 featureFlags |= FF_TYPE_CONVERSION.mask;
             } else if (type == boolean.class) {
@@ -128,7 +137,10 @@ final class BCCallUp extends BCCall {
                     featureFlags |= FF_TYPE_CONVERSION.mask;
                     resLayout = memoryLayoutFrom(cif.rtype());
                 }
-            } else if (BITS32 && type == long.class && method.isAnnotationPresent(FFMPointer.class)) {
+            } else if (type == long.class && (
+                (BITS32 && method.isAnnotationPresent(FFMPointer.class)) ||
+                (CLONG32 && method.isAnnotationPresent(FFMCLong.class))
+            )) {
                 featureFlags |= FF_TYPE_CONVERSION.mask;
                 resLayout = ValueLayout.JAVA_INT;
             } else if (needsBinder(type)) {
@@ -306,10 +318,17 @@ final class BCCallUp extends BCCall {
                             if (booleanInt != null && !booleanInt.binary()) {
                                 cb.ifThenElse(Opcode.IFEQ, CodeBuilder::iconst_0, CodeBuilder::iconst_1);
                             }
-                        } else if (BITS32 && type == long.class && parameter.isAnnotationPresent(FFMPointer.class)) {
-                            // TODO: test
-                            cb.iload(slot);
-                            buildPointer32to64(cb);
+                        } else if (type == long.class) {
+                            if (BITS32 && parameter.isAnnotationPresent(FFMPointer.class)) {
+                                cb.iload(slot);
+                                buildPointer32to64(cb);
+                            } else if (CLONG32 && parameter.isAnnotationPresent(FFMCLong.class)) {
+                                cb
+                                    .iload(slot)
+                                    .i2l();
+                            } else {
+                                cb.lload(slot);
+                            }
                         } else if (needsBinder(type)) {
                             cb
                                 .ldc(condyCDataAt(CD_GroupBinder, featureFlagOffsets[FF_BINDER.ordinal()] + binders.get(type)))
@@ -348,9 +367,13 @@ final class BCCallUp extends BCCall {
                         var type = method.getReturnType();
                         if (type != void.class) {
                             // Return result if non-void, transform if necessary
-                            if (BITS32 && type == long.class && method.isAnnotationPresent(FFMPointer.class)) {
-                                // TODO: test
-                                buildPointer64to32(cb);
+                            if (type == long.class) {
+                                if (
+                                    (BITS32 && method.isAnnotationPresent(FFMPointer.class)) ||
+                                    (CLONG32 && method.isAnnotationPresent(FFMCLong.class))
+                                ) {
+                                    cb.l2i();
+                                }
                             } else if (needsBinder(type)) {
                                 cb
                                     .ldc(condyCDataAt(CD_GroupBinder, featureFlagOffsets[FF_BINDER.ordinal()] + binders.get(type)))

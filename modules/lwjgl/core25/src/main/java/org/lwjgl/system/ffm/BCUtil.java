@@ -235,11 +235,6 @@ final class BCUtil {
         );
     }
 
-    static <T extends CodeBuilder> T buildPointer64to32(T cb) {
-        cb.l2i();
-        return cb;
-    }
-
     static <T extends CodeBuilder> T buildPointer32to64(T cb) {
         cb
             .i2l()

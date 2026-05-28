@@ -123,13 +123,20 @@ final class BCCallDown extends BCCall {
                 if (config.checks && !nullable) {
                     featureFlags |= FF_CHECK.mask; // requires null check
                 }
-                if (BITS32 && type == long.class) {
-                    featureFlags |= FF_TYPE_CONVERSION.mask;
+                if (type == long.class) {
+                    if (BITS32) {
+                        featureFlags |= FF_TYPE_CONVERSION.mask;
+                    }
+                    if (parameter.isAnnotationPresent(FFMCLong.class)) {
+                        throw new IllegalStateException("Cannot use both FFMCLong and FFMPointer");
+                    }
                 }
                 if (type == MemorySegment.class && nullable && !parameter.isAnnotationPresent(FFMNullable.class)) {
                     // need to convert null MemorySegment to MemorySegment.NULL
                     featureFlags |= FF_TYPE_CONVERSION.mask;
                 }
+            } else if (CLONG32 && type == long.class && parameter.isAnnotationPresent(FFMCLong.class)) {
+                featureFlags |= FF_TYPE_CONVERSION.mask;
             } else if (type == String.class) {
                 featureFlags |= FF_STACK.mask;
             } else if (type == boolean.class) {
@@ -176,8 +183,13 @@ final class BCCallDown extends BCCall {
                 if (method.isAnnotationPresent(FFMBooleanInt.class)) {
                     featureFlags |= FF_TYPE_CONVERSION.mask;
                 }
-            } else if (BITS32 && type == long.class && method.isAnnotationPresent(FFMPointer.class)) {
-                featureFlags |= FF_TYPE_CONVERSION.mask;
+            } else if (type == long.class) {
+                if (
+                    (BITS32 && method.isAnnotationPresent(FFMPointer.class)) ||
+                    (CLONG32 && method.isAnnotationPresent(FFMCLong.class))
+                ) {
+                    featureFlags |= FF_TYPE_CONVERSION.mask;
+                }
             }
 
             if (returnAnnotation != null) {
@@ -458,10 +470,15 @@ final class BCCallDown extends BCCall {
                                         b0 -> b0.getstatic(CD_MemorySegment, "NULL", CD_MemorySegment),
                                         b1 -> b1.aload(slot)
                                     );
-                            } else if (BITS32 && type == long.class && parameter.isAnnotationPresent(FFMPointer.class)) {
-                                // TODO: test
-                                bcb.lload(slot);
-                                buildPointer64to32(bcb);
+                            } else if (type == long.class) {
+                                if (
+                                    (BITS32 && parameter.isAnnotationPresent(FFMPointer.class)) ||
+                                    (CLONG32 && parameter.isAnnotationPresent(FFMCLong.class))
+                                ) {
+                                    bcb
+                                        .lload(slot)
+                                        .l2i();
+                                }
                             } else if (needsBinder(type)) {
                                 var binder = config.binders.get(type).binder();
                                 switch (binder) {
@@ -519,9 +536,12 @@ final class BCCallDown extends BCCall {
                                 if (booleanInt != null && !booleanInt.binary()) {
                                     bcb.ifThenElse(Opcode.IFEQ, CodeBuilder::iconst_0, CodeBuilder::iconst_1);
                                 }
-                            } else if (BITS32 && type == long.class && method.isAnnotationPresent(FFMPointer.class)) {
-                                // TODO: test
-                                buildPointer32to64(bcb);
+                            } else if (type == long.class) {
+                                if (BITS32 && method.isAnnotationPresent(FFMPointer.class)) {
+                                    buildPointer32to64(bcb);
+                                } else if (CLONG32 && method.isAnnotationPresent(FFMCLong.class)) {
+                                    bcb.i2l();
+                                }
                             } else if (needsBinder(type)) {
                                 bcb
                                     .ldc(condyCDataAt(CD_GroupBinder, featureFlagOffsets[FF_BINDER.ordinal()] + binders.get(type)))

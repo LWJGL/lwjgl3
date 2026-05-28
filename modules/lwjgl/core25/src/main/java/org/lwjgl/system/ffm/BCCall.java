@@ -4,6 +4,8 @@
  */
 package org.lwjgl.system.ffm;
 
+import org.lwjgl.system.*;
+
 import java.lang.classfile.*;
 import java.lang.constant.*;
 import java.lang.foreign.*;
@@ -17,7 +19,8 @@ import static org.lwjgl.system.ffm.BCDescriptors.*;
 abstract sealed class BCCall
     permits BCCallDown, BCCallUp {
 
-    protected static final boolean BITS32 = ValueLayout.ADDRESS.byteSize() == 4;
+    protected static final boolean BITS32  = ValueLayout.ADDRESS.byteSize() == 4;
+    protected static final boolean CLONG32 = BITS32 || Platform.get() == Platform.WINDOWS;
 
     protected final FFMConfig config;
 
@@ -82,7 +85,8 @@ abstract sealed class BCCall
         } else if (type == int.class) {
             return ValueLayout.JAVA_INT;
         } else if (type == long.class) {
-            return BITS32 && element.isAnnotationPresent(FFMPointer.class)
+            return (BITS32 && element.isAnnotationPresent(FFMPointer.class)) ||
+                   (CLONG32 && element.isAnnotationPresent(FFMCLong.class))
                 ? ValueLayout.JAVA_INT
                 : ValueLayout.JAVA_LONG;
         } else if (type == float.class) {
