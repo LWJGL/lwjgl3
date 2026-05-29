@@ -19,32 +19,37 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class YGIntrinsicSizeTest {
 
-    private final YGMeasureFunc intrinsicMeasureFunction = YGMeasureFunc.create((node, width, widthMode, height, heightMode, __result) -> {
-        String text = (String)YogaNode.create(node).getData();
+    private YGMeasureFunc intrinsicMeasureFunction;
 
-        float measuredWidth;
-        float measuredHeight;
+    @BeforeClass
+    private void setup() {
+        intrinsicMeasureFunction = YGMeasureFunc.create((node, width, widthMode, height, heightMode, __result) -> {
+            String text = (String)YogaNode.create(node).getData();
 
-        if (widthMode == YGMeasureModeExactly) {
-            measuredWidth = width;
-        } else if (widthMode == YGMeasureModeAtMost) {
-            measuredWidth = min(text.length() * widthPerChar, width);
-        } else {
-            measuredWidth = text.length() * widthPerChar;
-        }
+            float measuredWidth;
+            float measuredHeight;
 
-        if (heightMode == YGMeasureModeExactly) {
-            measuredHeight = height;
-        } else if (heightMode == YGMeasureModeAtMost) {
-            measuredHeight = min(calculateHeight(text, max(measuredWidth, getWidestWordWidth(text))), height);
-        } else {
-            measuredHeight = calculateHeight(text, max(measuredWidth, getWidestWordWidth(text)));
-        }
+            if (widthMode == YGMeasureModeExactly) {
+                measuredWidth = width;
+            } else if (widthMode == YGMeasureModeAtMost) {
+                measuredWidth = min(text.length() * widthPerChar, width);
+            } else {
+                measuredWidth = text.length() * widthPerChar;
+            }
 
-        __result
-            .width(measuredWidth)
-            .height(measuredHeight);
-    });
+            if (heightMode == YGMeasureModeExactly) {
+                measuredHeight = height;
+            } else if (heightMode == YGMeasureModeAtMost) {
+                measuredHeight = min(calculateHeight(text, max(measuredWidth, getWidestWordWidth(text))), height);
+            } else {
+                measuredHeight = calculateHeight(text, max(measuredWidth, getWidestWordWidth(text)));
+            }
+
+            __result
+                .width(measuredWidth)
+                .height(measuredHeight);
+        });
+    }
 
     @AfterClass
     private void cleanup() {
