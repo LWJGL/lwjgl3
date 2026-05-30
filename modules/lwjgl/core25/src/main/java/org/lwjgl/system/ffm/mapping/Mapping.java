@@ -577,9 +577,6 @@ public interface Mapping<L extends MemoryLayout> {
      * <p>Using a {@link StructBinder} directly is usually preferred over this mapping.</p>
      */
     record Struct(StructLayout layout) implements GroupMapping<StructLayout> {
-        public Struct {
-            Mappings.check(layout);
-        }
         public Struct(String name, StructLayout layout) {
             this(layout.withName(name));
         }
@@ -596,9 +593,6 @@ public interface Mapping<L extends MemoryLayout> {
      *
      */
     record Union(UnionLayout layout) implements GroupMapping<UnionLayout> {
-        public Union {
-            Mappings.check(layout);
-        }
         public Union(String name, UnionLayout layout) {
             this(layout.withName(name));
         }

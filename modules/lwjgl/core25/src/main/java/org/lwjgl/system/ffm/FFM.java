@@ -71,6 +71,9 @@ public final class FFM {
     // TODO: make external? i.e. the user provides the AnnotatedElement to FFMConfig mapping and is responsible for its lifecycle.
     static final ConcurrentHashMap<AnnotatedElement, FFMConfig> BINDING_CONFIGS = new ConcurrentHashMap<>();
 
+    static final String ANONYMOUS_MEMBER_PREFIX = "__anonymous__";
+    static final String PADDING_MEMBER_PREFIX   = "__padding__";
+
     // LWJGL 3 interop
     static final ScopedValue<Arena> ARENA = ScopedValue.newInstance();
 
@@ -369,27 +372,15 @@ public final class FFM {
         M extends GroupBinder<L, T>,
         SELF extends GroupBinderBuilder<T, L, M, SELF>
         >
+        extends GroupLayoutBuilder<L, M, SELF>
         permits StructBinderBuilder, UnionBinderBuilder {
 
         final Class<T> groupInterface;
         final Field    binderField;
 
-        final SequencedMap<String, MemoryLayout> members = new LinkedHashMap<>();
-
         @Nullable BiPredicate<T, Object> equals;
         @Nullable ToIntFunction<T>       hashCode;
         @Nullable Function<T, String>    toString;
-
-        protected boolean automaticPadding = true;
-        protected boolean checkPadding     = true;
-
-        private int paddingIndex;
-
-        protected long sizeof;
-        protected long alignof;
-
-        protected long packAlignment = Long.MAX_VALUE;
-        private   long alignas;
 
         protected GroupBinderBuilder(Class<T> groupInterface) {
             if (!groupInterface.isInterface()) {
@@ -412,13 +403,6 @@ public final class FFM {
             this.binderField = FFM.findBinderField(groupInterface); // test binder field to report any errors early
         }
 
-        abstract SELF self();
-        abstract BCGroup.Kind kind();
-
-        protected static long align(long offset, long alignment) {
-            return ((offset - 1L) | (alignment - 1L)) + 1L;
-        }
-
         /**
          * Generates a class that implements the {@link GroupBinder} interface for the group type using the current builder state, then returns a new instance
          * of that class.
@@ -426,124 +410,12 @@ public final class FFM {
          * @return the {@code GroupBinder} implementation
          */
         public M build() {
-            var byteAlignment = max(this.alignof, this.alignas);
-
-            if (automaticPadding) {
-                var sizeofAligned = align(sizeof, byteAlignment);
-                if (sizeofAligned != sizeof) {
-                    padding(sizeofAligned - sizeof);
-                }
-            }
-
-            var m = BCGroup.bootstrap(this, byteAlignment);
-
-            if (checkPadding) {
-                if (!isAligned(m.layout().byteSize(), m.layout().byteAlignment())) {
-                    throw new IllegalStateException("Group size is not a multiple of its alignment");
-                }
-            }
-
-            return m;
-        }
-        private static boolean isAligned(long offset, long alignment) {
-            return (offset & (alignment - 1L)) == 0L;
+            return mapping(layout(getNativeName(groupInterface)));
         }
 
-        /**
-         * Enables automatic padding calculation, based on the natural alignment of the group members.
-         *
-         * <p>This option is enabled by default in new builder instances. It may be disabled for advanced use cases that require fine control of the group
-         * alignment.</p>
-         *
-         * @param enabled whether to enable automatic padding
-         *
-         * @return this builder instance
-         */
-        public SELF automaticPadding(boolean enabled) {
-            this.automaticPadding = enabled;
-            return self();
-        }
-
-        /**
-         * Enables validation of the group size with respect to its alignment.
-         *
-         * <p>This option is enabled by default in new builder instances. It may be disabled for advanced use cases that require fine control of the group
-         * size and alignment.</p>
-         *
-         * @param enabled whether to enable size validation
-         *
-         * @return this builder instance
-         */
-        public SELF checkPadding(boolean enabled) {
-            this.checkPadding = enabled;
-            return self();
-        }
-
-        /**
-         * Configures the group pack alignment.
-         *
-         * <p>By default there's no packing alignment. This option may be used to configure a pack alignment lesser than the natural member alignment.</p>
-         *
-         * @param alignment the new pack alignment
-         *
-         * @return this builder instance
-         */
-        public SELF pack(long alignment) {
-            this.packAlignment = alignment;
-            return self();
-        }
-        protected MemoryLayout pack(MemoryLayout layout) {
-            var layoutAlignment = layout.byteAlignment();
-            if (packAlignment < layoutAlignment) {
-                return layout.withByteAlignment(packAlignment);
-            }
-            return layout;
-        }
-
-        /**
-         * Configures the group alignment.
-         *
-         * <p>By default the group alignment is the maximum natural alignment of its members. This option may be used to configure an alignment greater than
-         * the natural alignment.</p>
-         *
-         * @param alignment the new group alignment. Ignored is less than the natural alignment.
-         *
-         * @return this builder instance
-         */
-        public SELF alignas(long alignment) {
-            this.alignas = alignment;
-            return self();
-        }
-
-        /**
-         * Adds a new member to this group.
-         *
-         * @param name    the member name
-         * @param mapping the member's data mapping
-         *
-         * @return this builder instance
-         */
-        public abstract SELF m(String name, DataMapping<?> mapping);
-
-        protected SELF addMember(String name, MemoryLayout layout) {
-            var previous = members.put(name, layout.withName(name));
-            if (previous != null) {
-                throw new IllegalStateException("struct member '" + name + "' is already defined");
-            }
-            return self();
-        }
-
-        /**
-         * Adds padding before the next member of this group.
-         *
-         * @param padding the padding size in bytes
-         *
-         * @return this builder instance
-         */
-        public SELF padding(long padding) {
-            members.put("__padding__" + paddingIndex++, paddingLayout(padding));
-            sizeof += padding;
-            return self();
+        @Override
+        M mapping(L layout) {
+            return BCGroup.bootstrap(this, layout);
         }
 
         /**
@@ -604,21 +476,6 @@ public final class FFM {
         @Override StructBinderBuilder<T> self()       { return this; }
         @Override BCGroup.Kind kind()                 { return BCGroup.Kind.STRUCT; }
 
-        @Override
-        public StructBinderBuilder<T> m(String name, DataMapping<?> mapping) {
-            var layout = pack(mapping.layout());
-
-            var layoutAlignment = layout.byteAlignment();
-            if (automaticPadding && sizeof % layoutAlignment != 0) {
-                padding(align(sizeof, layoutAlignment) - sizeof);
-            }
-
-            alignof = max(alignof, layoutAlignment);
-            sizeof += layout.byteSize();
-
-            return addMember(name, layout);
-        }
-
         /**
          * Generates a class that implements the {@link StructBinder} interface for the struct type using the current builder state, then returns a new instance
          * of that class.
@@ -637,16 +494,6 @@ public final class FFM {
         @Override UnionBinderBuilder<T> self()      { return this; }
         @Override BCGroup.Kind kind()               { return BCGroup.Kind.UNION; }
 
-        @Override
-        public UnionBinderBuilder<T> m(String name, DataMapping<?> mapping) {
-            var layout = pack(mapping.layout());
-
-            alignof = max(alignof, layout.byteAlignment());
-            sizeof = max(sizeof, layout.byteSize());
-
-            return addMember(name, layout);
-        }
-
         /**
          * Generates a class that implements the {@link UnionBinder} interface for the union type using the current builder state, then returns a new instance
          * of that class.
@@ -657,6 +504,160 @@ public final class FFM {
         public UnionBinder<T> build() {
             return super.build(); // just to override the javadoc
         }
+    }
+
+    /** Base class for struct/union layout construction. */
+    public abstract static sealed class GroupLayoutBuilder<
+        L extends GroupLayout,
+        M extends GroupMapping<L>,
+        SELF extends GroupLayoutBuilder<L, M, SELF>
+        >
+        permits GroupBinderBuilder, StructLayoutBuilder, UnionLayoutBuilder {
+
+        final SequencedMap<String, MemoryLayout> members = new LinkedHashMap<>();
+
+        protected boolean automaticPadding = true;
+        protected boolean checkPadding     = true;
+
+        private int virtualMemberIndex;
+
+        protected long sizeof;
+        protected long alignof;
+
+        protected long packAlignment = Long.MAX_VALUE;
+        private   long alignas;
+
+        abstract SELF self();
+        abstract BCGroup.Kind kind();
+
+        abstract M mapping(L layout);
+
+        /** Enables or disables automatic padding calculation. */
+        public SELF automaticPadding(boolean enabled) {
+            this.automaticPadding = enabled;
+            return self();
+        }
+
+        /** Enables or disables validation of the group size with respect to its alignment. */
+        public SELF checkPadding(boolean enabled) {
+            this.checkPadding = enabled;
+            return self();
+        }
+
+        /** Configures the group pack alignment. */
+        public SELF pack(long alignment) {
+            this.packAlignment = alignment;
+            return self();
+        }
+        protected MemoryLayout pack(MemoryLayout layout) {
+            var layoutAlignment = layout.byteAlignment();
+            if (packAlignment < layoutAlignment) {
+                return layout.withByteAlignment(packAlignment);
+            }
+            return layout;
+        }
+
+        /** Configures the group alignment. */
+        public SELF alignas(long alignment) {
+            this.alignas = alignment;
+            return self();
+        }
+
+        /** Adds a new member to this group. */
+        public SELF m(String name, DataMapping<?> mapping) {
+            var layout = pack(mapping.layout());
+
+            switch (kind()) {
+                case STRUCT -> {
+                    var layoutAlignment = layout.byteAlignment();
+                    if (automaticPadding && sizeof % layoutAlignment != 0) {
+                        padding(align(sizeof, layoutAlignment) - sizeof);
+                    }
+
+                    alignof = max(alignof, layoutAlignment);
+                    sizeof += layout.byteSize();
+                }
+                case UNION -> {
+                    alignof = max(alignof, layout.byteAlignment());
+                    sizeof = max(sizeof, layout.byteSize());
+                }
+            }
+
+            var previous = members.put(name, layout.withName(name));
+            if (previous != null) {
+                throw new IllegalStateException("group member '" + name + "' is already defined");
+            }
+            return self();
+        }
+
+        /** Adds an anonymous struct member. Its members are promoted to the scope of this group. */
+        public SELF struct(Consumer<StructLayoutBuilder> builder) { return struct(ANONYMOUS_MEMBER_PREFIX + virtualMemberIndex++, builder); }
+        /** Adds a named struct member without requiring a Java interface for the nested struct type. */
+        public SELF struct(String name, Consumer<StructLayoutBuilder> builder) {
+            var nested = new StructLayoutBuilder();
+            builder.accept(nested);
+            return m(name, nested.mapping(nested.layout(null)));
+        }
+
+        /** Adds an anonymous union member. Its members are promoted to the scope of this group. */
+        public SELF union(Consumer<UnionLayoutBuilder> builder) { return union(ANONYMOUS_MEMBER_PREFIX + virtualMemberIndex++, builder); }
+        /** Adds a named union member without requiring a Java interface for the nested union type. */
+        public SELF union(String name, Consumer<UnionLayoutBuilder> builder) {
+            var nested = new UnionLayoutBuilder();
+            builder.accept(nested);
+            return m(name, nested.mapping(nested.layout(null)));
+        }
+
+        /** Adds padding before the next member of this group. */
+        public SELF padding(long padding) {
+            members.put(PADDING_MEMBER_PREFIX + virtualMemberIndex++, paddingLayout(padding));
+            sizeof += padding;
+            return self();
+        }
+
+        protected L layout(@Nullable String name) {
+            var byteAlignment = Math.max(1L, max(this.alignof, this.alignas));
+
+            if (automaticPadding) {
+                var sizeofAligned = align(sizeof, byteAlignment);
+                if (sizeofAligned != sizeof) {
+                    padding(sizeofAligned - sizeof);
+                }
+            }
+
+            var layout = kind().layout(members.values().toArray(new MemoryLayout[0]));
+            if (name != null) {
+                layout = layout.withName(name);
+            }
+            if (layout.byteAlignment() < byteAlignment) {
+                layout = layout.withByteAlignment(byteAlignment);
+            }
+
+            if (checkPadding) {
+                if (!isAligned(layout.byteSize(), layout.byteAlignment())) {
+                    throw new IllegalStateException("Group size is not a multiple of its alignment");
+                }
+            }
+
+            //noinspection unchecked
+            return (L)layout;
+        }
+    }
+
+    /** A layout-only builder for nested or anonymous struct members. */
+    public static final class StructLayoutBuilder extends GroupLayoutBuilder<StructLayout, Mapping.Struct, StructLayoutBuilder> {
+        StructLayoutBuilder()                                 { }
+        @Override StructLayoutBuilder self()                  { return this; }
+        @Override BCGroup.Kind kind()                         { return BCGroup.Kind.STRUCT; }
+        @Override Mapping.Struct mapping(StructLayout layout) { return new Mapping.Struct(layout); }
+    }
+
+    /** A layout-only builder for nested or anonymous union members. */
+    public static final class UnionLayoutBuilder extends GroupLayoutBuilder<UnionLayout, Mapping.Union, UnionLayoutBuilder> {
+        UnionLayoutBuilder()                                { }
+        @Override UnionLayoutBuilder self()                 { return this; }
+        @Override BCGroup.Kind kind()                       { return BCGroup.Kind.UNION; }
+        @Override Mapping.Union mapping(UnionLayout layout) { return new Mapping.Union(layout); }
     }
 
     /**
@@ -833,11 +834,12 @@ public final class FFM {
         private final MethodHandles.Lookup lookup;
 
         private @Nullable Class<? extends Annotation>
-                                                    nullableAnnotation = defaultNullableAnnotation;
-        private @Nullable SymbolLookup              symbolLookup;
-        private @Nullable TraceConsumer             traceConsumer;
-        private @Nullable Predicate<Method>         tracingFilter;
-        private @Nullable Function<Method, Boolean> criticalOverride;
+                                            nullableAnnotation = defaultNullableAnnotation;
+        private @Nullable SymbolLookup      symbolLookup;
+        private @Nullable TraceConsumer     traceConsumer;
+        private @Nullable Predicate<Method> tracingFilter;
+        private @Nullable Function<Method, @Nullable Boolean>
+                                            criticalOverride;
 
         private boolean checks         = Checks.CHECKS;
         private boolean debugGenerator = Configuration.DEBUG_GENERATOR.get(false);

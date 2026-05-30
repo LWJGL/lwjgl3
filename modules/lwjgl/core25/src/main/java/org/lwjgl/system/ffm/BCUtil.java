@@ -333,6 +333,14 @@ final class BCUtil {
         }
     }
 
+    static long align(long offset, long alignment) {
+        return ((offset - 1L) | (alignment - 1L)) + 1L;
+    }
+
+    static boolean isAligned(long offset, long alignment) {
+        return (offset & (alignment - 1L)) == 0L;
+    }
+
     private static final String PROPERTY_PATH = "java.lang.foreign.native.threshold.power.";
 
     private static long powerOfPropertyOr(String name, int defaultPower) {

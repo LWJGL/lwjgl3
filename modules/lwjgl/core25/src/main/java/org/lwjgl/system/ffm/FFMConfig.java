@@ -31,12 +31,13 @@ public final class FFMConfig {
     final ConcurrentHashMap<Class<?>, BinderField> binders = new ConcurrentHashMap<>();
 
     final @Nullable Class<? extends Annotation>
-                                              nullableAnnotation;
-    final           boolean                   nullableAnnotationOnType;
-    final @Nullable SymbolLookup              symbolLookup;
-    final @Nullable TraceConsumer             traceConsumer;
-    final @Nullable Predicate<Method>         tracingFilter;
-    final @Nullable Function<Method, Boolean> criticalOverride;
+                                      nullableAnnotation;
+    final           boolean           nullableAnnotationOnType;
+    final @Nullable SymbolLookup      symbolLookup;
+    final @Nullable TraceConsumer     traceConsumer;
+    final @Nullable Predicate<Method> tracingFilter;
+    final @Nullable Function<Method, @Nullable Boolean>
+                                      criticalOverride;
 
     final boolean checks;
     final boolean debugGenerator;
@@ -59,7 +60,7 @@ public final class FFMConfig {
         // TODO: tracing pre, post, return values, transformed signature, etc.
         @Nullable TraceConsumer traceConsumer,
         @Nullable Predicate<Method> tracingFilter,
-        @Nullable Function<Method, Boolean> criticalOverride,
+        @Nullable Function<Method, @Nullable Boolean> criticalOverride,
         boolean checks,
         boolean debugGenerator
     ) {

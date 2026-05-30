@@ -998,6 +998,119 @@ public class StructTest {
         }
     }
 
+    public void testAnonymousGroups() {
+        interface AmbiguousPromotedMember {
+            StructBinder<AmbiguousPromotedMember> $ = ffmStruct(AmbiguousPromotedMember.class)
+                .struct(s -> s
+                    .m("same", uint32_t))
+                .struct(s -> s
+                    .m("same", uint32_t))
+                .build();
+        }
+        assertThrows(() -> Objects.requireNonNull(AmbiguousPromotedMember.$));
+
+        interface UnambiguousPromotedMember {
+            StructBinder<UnambiguousPromotedMember> $ = ffmStruct(UnambiguousPromotedMember.class)
+                .struct("first", s -> s
+                    .m("same", uint32_t))
+                .struct("second", s -> s
+                    .m("same", uint32_t))
+                .build();
+        }
+        Objects.requireNonNull(UnambiguousPromotedMember.$);
+
+        interface CacheDesc {
+            StructBinder<CacheDesc> $ = ffmStruct(CacheDesc.class)
+                .m("Level", uint8_t)
+                .m("Associativity", uint8_t)
+                .m("LineSize", uint16_t)
+                .m("Size", uint32_t)
+                .m("Type", uint32_t)
+                .build();
+
+            byte Level();
+            byte Associativity();
+            short LineSize();
+            int Size();
+            int Type();
+
+            CacheDesc Level(byte value);
+            CacheDesc Associativity(byte value);
+            CacheDesc LineSize(short value);
+            CacheDesc Size(int value);
+            CacheDesc Type(int value);
+        }
+
+        interface Info {
+            StructBinder<Info> $ = ffmStruct(Info.class)
+                .m("ProcessorMask", uintptr_t)
+                .m("Relationship", uint32_t)
+                .union(u -> u
+                    .struct("ProcessorCore", s -> s
+                        .m("Flags", uint8_t)
+                    )
+                    .struct("NumaNode", s -> s
+                        .m("NodeNumber", uint32_t)
+                    )
+                    .m("Cache", CacheDesc.$)
+                    .m("Reserved", uint64_t.array(2))
+                )
+                .build();
+
+            int Relationship();
+            @FFMName("ProcessorCore.Flags") byte Flags();
+            @FFMName("NumaNode.NodeNumber") int NumaNode();
+            CacheDesc Cache();
+
+            @FFMName("Cache.Level") byte Cache_Level();
+            @FFMName("Cache.Associativity") byte Cache_Associativity();
+            @FFMName("Cache.LineSize") short Cache_LineSize();
+            @FFMName("Cache.Size") int Cache_Size();
+            @FFMName("Cache.Type") int Cache_Type();
+
+            Info Relationship(int value);
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            var info  = Info.$.allocate(arena);
+            var cache = info.Cache();
+
+            var cacheOffset = Info.$.layout().byteOffset(groupElement(3/*there is padding at index 2*/), groupElement("Cache"));
+
+            assertEquals(
+                CacheDesc.$.addressOf(cache),
+                Info.$.addressOf(info) + cacheOffset
+            );
+
+            info.Relationship(2);
+            cache
+                .Level((byte)1)
+                .Associativity((byte)2)
+                .LineSize((short)64)
+                .Size(32)
+                .Type(0);
+
+            assertEquals(info.Relationship(), 2);
+
+            assertEquals(info.Flags(), (byte)1);
+            assertEquals(info.NumaNode(), ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN
+                ? Integer.reverseBytes(0x0102_4000)
+                : 0x0102_4000);
+
+            assertEquals(info.Cache().Level(), (byte)1);
+            assertEquals(info.Cache().Associativity(), (byte)2);
+            assertEquals(info.Cache().LineSize(), (short)64);
+            assertEquals(info.Cache().Size(), 32);
+            assertEquals(info.Cache().Type(), 0);
+
+            assertEquals(info.Cache_Level(), (byte)1);
+            assertEquals(info.Cache_Associativity(), (byte)2);
+            assertEquals(info.Cache_LineSize(), (short)64);
+            assertEquals(info.Cache_Size(), 32);
+            assertEquals(info.Cache_Type(), 0);
+        }
+    }
+
     public void testRecursive() {
         interface addrinfo {
             StructBinder<addrinfo> $ = ffmStruct(addrinfo.class)

@@ -4,6 +4,7 @@
  */
 package org.lwjgl.system.ffm;
 
+import org.jspecify.annotations.*;
 import org.lwjgl.system.*;
 
 import java.lang.classfile.*;
@@ -18,7 +19,6 @@ import java.util.stream.*;
 
 import static java.lang.classfile.ClassFile.*;
 import static java.lang.constant.ConstantDescs.*;
-import static java.lang.foreign.MemoryLayout.PathElement.*;
 import static java.lang.invoke.MethodType.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
@@ -28,9 +28,33 @@ import static org.lwjgl.system.ffm.BCUtil.*;
 
 final class BCGroup {
 
-    private static final Collector<CharSequence, ?, String> SEMI_COLON = Collectors.joining(";");
+    private static final Collector<@Nullable CharSequence, ?, String> SEMI_COLON = Collectors.joining(";");
 
     private BCGroup() {
+    }
+
+    private record Member(
+        String name,
+        MemoryLayout layout,
+        long offset
+    ) {
+        CodeBuilder buildAddress(CodeBuilder cb, ClassDesc thisClass) {
+            cb
+                .aload(cb.receiverSlot())
+                .getfield(thisClass, "address", CD_long);
+
+            if (offset != 0L) {
+                cb
+                    .loadConstant(offset)
+                    .ladd();
+            }
+
+            return cb;
+        }
+
+        CodeBuilder buildAccessor(CodeBuilder cb, ValueLayout naturalLayout, String accessor, MethodTypeDesc type) {
+            return cb.invokestatic(CD_MemoryUtil, UNSAFE_BACKEND || naturalLayout.byteAlignment() <= layout.byteAlignment() ? accessor : accessor + "Unaligned", type);
+        }
     }
 
     private static RuntimeException memberException(String message, Class<?> groupInterface, String member) {
@@ -71,7 +95,7 @@ final class BCGroup {
                     .return_()
                 ));
 
-            // member name -> list of methods that access the member
+            // member -> list of methods that access the member
             // sorted by layout member order
             var memberMap = compileMemberAccessors(groupInterface, layout);
 
@@ -82,10 +106,10 @@ final class BCGroup {
                 builder.toString == null;
 
             // GENERATE GETTERS
-            var getters = new LinkedHashMap<String, Method>(memberMap.size());
-            for (var member : memberMap.entrySet()) {
-                var memberName = member.getKey();
-                var methods    = member.getValue();
+            var getters = new LinkedHashMap<Member, Method>(memberMap.size());
+            for (var entry : memberMap.entrySet()) {
+                var member  = entry.getKey();
+                var methods = entry.getValue();
 
                 var getterCount       = 0;
                 var nonCanonicalCount = 0;
@@ -98,68 +122,65 @@ final class BCGroup {
                     }
 
                     getterCount++;
-                    nonCanonicalCount += registerCanonicalGetter(groupInterface, method, getters, memberName);
+                    nonCanonicalCount += registerCanonicalGetter(groupInterface, method, getters, member);
 
                     var descriptor = getMethodTypeDesc(method);
                     classBuilder.withMethod(method.getName(), descriptor, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> {
-                            var memberPath   = groupElement(memberName);
-                            var memberLayout = Objects.requireNonNull(layout.select(memberPath));
-
-                            var memberOffset = layout.byteOffset(memberPath);
+                            var memberLayout = member.layout();
 
                             // TODO: handle clong
                             var returnType = method.getReturnType();
                             if (returnType == boolean.class) {
-                                buildMemberAddress(cb, thisClass, memberOffset);
+                                member.buildAddress(cb, thisClass);
                                 switch (memberLayout) {
                                     case ValueLayout.OfBoolean _,
                                          ValueLayout.OfByte _ -> cb.invokestatic(CD_MemoryUtil, "memGetByte", MTD_byte_long);
-                                    case ValueLayout.OfShort _ -> buildAccessor(cb, ValueLayout.JAVA_SHORT, memberLayout, "memGetShort", MTD_short_long);
-                                    case ValueLayout.OfInt _ -> buildAccessor(cb, ValueLayout.JAVA_INT, memberLayout, "memGetInt", MTD_int_long);
+                                    case ValueLayout.OfShort _ -> member.buildAccessor(cb, ValueLayout.JAVA_SHORT, "memGetShort", MTD_short_long);
+                                    case ValueLayout.OfInt _ -> member.buildAccessor(cb, ValueLayout.JAVA_INT, "memGetInt", MTD_int_long);
                                     default -> throw methodException("Unsupported boolean getter layout: " + memberLayout, method);
                                 }
                                 cb.ireturn();
                             } else if (returnType == byte.class) {
-                                buildMemberAddress(cb, thisClass, memberOffset)
+                                member.buildAddress(cb, thisClass)
                                     .invokestatic(CD_MemoryUtil, "memGetByte", MTD_byte_long)
                                     .ireturn();
                             } else if (returnType == short.class) {
-                                buildMemberAddress(cb, thisClass, memberOffset);
-                                buildAccessor(cb, ValueLayout.JAVA_SHORT, memberLayout, "memGetShort", MTD_short_long)
+                                member.buildAddress(cb, thisClass);
+                                member.buildAccessor(cb, ValueLayout.JAVA_SHORT, "memGetShort", MTD_short_long)
                                     .ireturn();
                             } else if (returnType == int.class) {
-                                buildMemberAddress(cb, thisClass, memberOffset);
-                                buildAccessor(cb, ValueLayout.JAVA_INT, memberLayout, "memGetInt", MTD_int_long)
+                                member.buildAddress(cb, thisClass);
+                                member.buildAccessor(cb, ValueLayout.JAVA_INT, "memGetInt", MTD_int_long)
                                     .ireturn();
                             } else if (returnType == long.class) {
-                                buildMemberAddress(cb, thisClass, memberOffset);
+                                member.buildAddress(cb, thisClass);
                                 switch (memberLayout) {
-                                    case AddressLayout _ -> buildAccessor(cb, ValueLayout.ADDRESS, memberLayout, "memGetAddress", MTD_long_long);
+                                    case AddressLayout _ -> member.buildAccessor(cb, ValueLayout.ADDRESS, "memGetAddress", MTD_long_long);
                                     case ValueLayout.OfInt _ -> {
-                                        buildAccessor(cb, ValueLayout.JAVA_INT, memberLayout, "memGetInt", MTD_int_long);
+                                        member.buildAccessor(cb, ValueLayout.JAVA_INT, "memGetInt", MTD_int_long);
                                         if (method.isAnnotationPresent(FFMPointer.class)) {
                                             buildPointer32to64(cb);
                                         } else {
                                             cb.i2l();
                                         }
                                     }
-                                    case ValueLayout.OfLong _ -> buildAccessor(cb, ValueLayout.JAVA_LONG, memberLayout, "memGetLong", MTD_long_long);
+                                    case ValueLayout.OfLong _ -> member.buildAccessor(cb, ValueLayout.JAVA_LONG, "memGetLong", MTD_long_long);
                                     default -> throw methodException("Unsupported long getter layout: " + memberLayout, method);
                                 }
                                 cb.lreturn();
                             } else if (returnType == float.class) {
-                                buildMemberAddress(cb, thisClass, memberOffset);
-                                buildAccessor(cb, ValueLayout.JAVA_FLOAT, memberLayout, "memGetFloat", MTD_float_long)
+                                member.buildAddress(cb, thisClass);
+                                member.buildAccessor(cb, ValueLayout.JAVA_FLOAT, "memGetFloat", MTD_float_long)
                                     .freturn();
                             } else if (returnType == double.class) {
-                                buildMemberAddress(cb, thisClass, memberOffset);
-                                buildAccessor(cb, ValueLayout.JAVA_DOUBLE, memberLayout, "memGetDouble", MTD_double_long)
+                                member.buildAddress(cb, thisClass);
+                                member.buildAccessor(cb, ValueLayout.JAVA_DOUBLE, "memGetDouble", MTD_double_long)
                                     .dreturn();
                             } else if (returnType == MemorySegment.class) {
-                                buildMemberAddress(cb, thisClass, memberOffset);
+                                member.buildAddress(cb, thisClass);
                                 switch (memberLayout) {
                                     case AddressLayout addressLayout -> {
-                                        buildAccessor(cb, ValueLayout.ADDRESS, memberLayout, "memGetAddress", MTD_long_long)
+                                        member.buildAccessor(cb, ValueLayout.ADDRESS, "memGetAddress", MTD_long_long)
                                             .dup2();
                                         if (isNullable(config, method)) {
                                             cb
@@ -203,11 +224,11 @@ final class BCGroup {
 
                                 // TODO: try to reuse the implementation of returnType == MemorySegment.class
                                 // TODO: migrate sized toArray to built-in sized getString when supported in future JDK
-                                buildMemberAddress(cb, thisClass, memberOffset);
+                                member.buildAddress(cb, thisClass);
                                 switch (memberLayout) {
                                     // pointer to string
                                     case AddressLayout _ -> {
-                                        buildAccessor(cb, ValueLayout.ADDRESS, memberLayout, "memGetAddress", MTD_long_long);
+                                        member.buildAccessor(cb, ValueLayout.ADDRESS, "memGetAddress", MTD_long_long);
                                         if (isNullable(config, method)) {
                                             cb
                                                 .dup2()
@@ -272,8 +293,8 @@ final class BCGroup {
                                         // TODO: check actual target of memberLayout
                                         // pointer to group, dereference memory address
                                         cb.getstatic(returnTypeDesc, name, type);
-                                        buildMemberAddress(cb, thisClass, memberOffset);
-                                        buildAccessor(cb, ValueLayout.ADDRESS, memberLayout, "memGetAddress", MTD_long_long)
+                                        member.buildAddress(cb, thisClass);
+                                        member.buildAccessor(cb, ValueLayout.ADDRESS, "memGetAddress", MTD_long_long)
                                             .invokeinterface(CD_GroupBinder, isNullable(config, method) ? "ofAddressSafe" : "ofAddress", MTD_Object_long)
                                         /*.checkcast(returnType.describeConstable().orElseThrow())*/
                                         ;
@@ -284,7 +305,7 @@ final class BCGroup {
                                         }
                                         // nested group, return view of member address
                                         cb.getstatic(returnTypeDesc, name, type);
-                                        buildMemberAddress(cb, thisClass, memberOffset)
+                                        member.buildAddress(cb, thisClass)
                                             .invokeinterface(CD_GroupBinder, "ofAddress", MTD_Object_long)
                                         /*.checkcast(returnType.describeConstable().orElseThrow())*/
                                         ;
@@ -299,7 +320,7 @@ final class BCGroup {
                     );
                 }
                 if (hasPrivateGetters && 1 < getterCount && getterCount == nonCanonicalCount) {
-                    throw memberException("Failed to find canonical getter for layout member", groupInterface, memberName);
+                    throw memberException("Failed to find canonical getter for layout member", groupInterface, member.name);
                 }
             }
 
@@ -315,19 +336,19 @@ final class BCGroup {
 
             // Generate private getters for pointer members
             if (hasPrivateGetters) {
-                for (var member : getters.sequencedEntrySet()) {
-                    var memberPath   = groupElement(member.getKey());
-                    var memberLayout = layout.select(memberPath);
+                for (var entry : getters.sequencedEntrySet()) {
+                    var member       = entry.getKey();
+                    var memberLayout = member.layout();
                     if (!(memberLayout instanceof AddressLayout)) {
                         continue;
                     }
 
-                    var method = member.getValue();
+                    var method = entry.getValue();
                     if (method.getReturnType() == long.class) {
                         continue;
                     }
 
-                    var memberOffset = layout.byteOffset(memberPath);
+                    var memberOffset = member.offset();
 
                     if (builder.equals == null || builder.hashCode == null) {
                         classBuilder.withMethod("__address__" + method.getName(), MTD_long, ACC_PRIVATE | ACC_FINAL, mb -> mb.withCode(cb -> {
@@ -339,7 +360,7 @@ final class BCGroup {
                                         .loadConstant(memberOffset)
                                         .ladd();
                                 }
-                                buildAccessor(cb, ValueLayout.ADDRESS, memberLayout, "memGetAddress", MTD_long_long)
+                                member.buildAccessor(cb, ValueLayout.ADDRESS, "memGetAddress", MTD_long_long)
                                     .lreturn();
                             })
                         );
@@ -355,7 +376,7 @@ final class BCGroup {
                                         .loadConstant(memberOffset)
                                         .ladd();
                                 }
-                                buildAccessor(cb, ValueLayout.ADDRESS, memberLayout, "memGetAddress", MTD_long_long)
+                                member.buildAccessor(cb, ValueLayout.ADDRESS, "memGetAddress", MTD_long_long)
                                     .invokestatic(CD_Long, "toHexString", MTD_String_long)
                                     .invokedynamic(DCSD_StringConcatFactory_makeConcatWithConstants_AddressToHexString)
                                     .areturn();
@@ -366,8 +387,8 @@ final class BCGroup {
             }
 
             // GENERATE SETTERS
-            for (var member : memberMap.entrySet()) {
-                for (var method : member.getValue()) {
+            for (var entry : memberMap.entrySet()) {
+                for (var method : entry.getValue()) {
                     if (method.getParameterCount() == 0) {
                         continue; // getter
                     }
@@ -379,9 +400,8 @@ final class BCGroup {
                     }
                     var descriptor = getMethodTypeDesc(method);
                     classBuilder.withMethod(method.getName(), descriptor, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> {
-                            var memberPath   = groupElement(member.getKey());
-                            var memberLayout = layout.select(memberPath);
-                            var memberOffset = layout.byteOffset(memberPath);
+                            var member       = entry.getKey();
+                            var memberLayout = member.layout();
 
                             var param0 = cb.parameterSlot(0);
 
@@ -389,51 +409,51 @@ final class BCGroup {
                             var parameter     = method.getParameters()[0];
                             var parameterType = parameter.getType();
                             if (parameterType == boolean.class) {
-                                buildMemberAddress(cb, thisClass, memberOffset)
+                                member.buildAddress(cb, thisClass)
                                     .iload(param0);
                                 switch (memberLayout) {
                                     case ValueLayout.OfBoolean _,
                                          ValueLayout.OfByte _ -> cb.invokestatic(CD_MemoryUtil, "memPutByte", MTD_void_long_byte);
-                                    case ValueLayout.OfShort _ -> buildAccessor(cb, ValueLayout.JAVA_SHORT, memberLayout, "memPutShort", MTD_void_long_short);
-                                    case ValueLayout.OfInt _ -> buildAccessor(cb, ValueLayout.JAVA_INT, memberLayout, "memPutInt", MTD_void_long_int);
+                                    case ValueLayout.OfShort _ -> member.buildAccessor(cb, ValueLayout.JAVA_SHORT, "memPutShort", MTD_void_long_short);
+                                    case ValueLayout.OfInt _ -> member.buildAccessor(cb, ValueLayout.JAVA_INT, "memPutInt", MTD_void_long_int);
                                     default -> throw methodException("Unsupported boolean setter layout: " + memberLayout, method);
                                 }
                             } else if (parameterType == byte.class) {
-                                buildMemberAddress(cb, thisClass, memberOffset)
+                                member.buildAddress(cb, thisClass)
                                     .iload(param0)
                                     .invokestatic(CD_MemoryUtil, "memPutByte", MTD_void_long_byte);
                             } else if (parameterType == short.class) {
-                                buildMemberAddress(cb, thisClass, memberOffset)
+                                member.buildAddress(cb, thisClass)
                                     .iload(param0);
-                                buildAccessor(cb, ValueLayout.JAVA_SHORT, memberLayout, "memPutShort", MTD_void_long_short);
+                                member.buildAccessor(cb, ValueLayout.JAVA_SHORT, "memPutShort", MTD_void_long_short);
                             } else if (parameterType == int.class) {
-                                buildMemberAddress(cb, thisClass, memberOffset)
+                                member.buildAddress(cb, thisClass)
                                     .iload(param0);
-                                buildAccessor(cb, ValueLayout.JAVA_INT, memberLayout, "memPutInt", MTD_void_long_int);
+                                member.buildAccessor(cb, ValueLayout.JAVA_INT, "memPutInt", MTD_void_long_int);
                             } else if (parameterType == long.class) {
-                                buildMemberAddress(cb, thisClass, memberOffset)
+                                member.buildAddress(cb, thisClass)
                                     .lload(param0);
                                 switch (memberLayout) {
-                                    case AddressLayout _ -> buildAccessor(cb, ValueLayout.ADDRESS, memberLayout, "memPutAddress", MTD_void_long_long);
+                                    case AddressLayout _ -> member.buildAccessor(cb, ValueLayout.ADDRESS, "memPutAddress", MTD_void_long_long);
                                     case ValueLayout.OfInt _ -> {
                                         cb.l2i();
-                                        buildAccessor(cb, ValueLayout.JAVA_INT, memberLayout, "memPutInt", MTD_void_long_int);
+                                        member.buildAccessor(cb, ValueLayout.JAVA_INT, "memPutInt", MTD_void_long_int);
                                     }
-                                    case ValueLayout.OfLong _ -> buildAccessor(cb, ValueLayout.JAVA_LONG, memberLayout, "memPutLong", MTD_void_long_long);
+                                    case ValueLayout.OfLong _ -> member.buildAccessor(cb, ValueLayout.JAVA_LONG, "memPutLong", MTD_void_long_long);
                                     default -> throw methodException("Unsupported long setter layout: " + memberLayout, method);
                                 }
                             } else if (parameterType == float.class) {
-                                buildMemberAddress(cb, thisClass, memberOffset)
+                                member.buildAddress(cb, thisClass)
                                     .fload(param0);
-                                buildAccessor(cb, ValueLayout.JAVA_FLOAT, memberLayout, "memPutFloat", MTD_void_long_float);
+                                member.buildAccessor(cb, ValueLayout.JAVA_FLOAT, "memPutFloat", MTD_void_long_float);
                             } else if (parameterType == double.class) {
-                                buildMemberAddress(cb, thisClass, memberOffset)
+                                member.buildAddress(cb, thisClass)
                                     .dload(param0);
-                                buildAccessor(cb, ValueLayout.JAVA_DOUBLE, memberLayout, "memPutDouble", MTD_void_long_double);
+                                member.buildAccessor(cb, ValueLayout.JAVA_DOUBLE, "memPutDouble", MTD_void_long_double);
                             } else if (parameterType == MemorySegment.class) {
                                 // TODO: support nullable
                                 // TODO: check actual target of memberLayout
-                                buildMemberAddress(cb, thisClass, memberOffset)
+                                member.buildAddress(cb, thisClass)
                                     .aload(param0);
                                 if (isNullable(config, parameter)) {
                                     if (!parameter.isAnnotationPresent(FFMNullable.class)) {
@@ -450,7 +470,7 @@ final class BCGroup {
                                     cb.invokeinterface(CD_MemorySegment, "address", MTD_long);
                                     buildNullPointerCheck(cb);
                                 }
-                                buildAccessor(cb, ValueLayout.ADDRESS, memberLayout, "memPutAddress", MTD_void_long_long);
+                                member.buildAccessor(cb, ValueLayout.ADDRESS, "memPutAddress", MTD_void_long_long);
                             } else if (parameterType == String.class) {
                                 if (!(memberLayout instanceof SequenceLayout sequenceLayout)) {
                                     throw methodException("Unsupported String setter layout: " + memberLayout, method);
@@ -458,7 +478,7 @@ final class BCGroup {
 
                                 var charset = getCharsetType(method);
 
-                                buildMemberAddress(cb, thisClass, memberOffset)
+                                member.buildAddress(cb, thisClass)
                                     .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
                                     .loadConstant(sequenceLayout.byteSize())
                                     .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long);
@@ -507,11 +527,11 @@ final class BCGroup {
                                     case AddressLayout _ -> {
                                         // TODO: check actual target of memberLayout
                                         // pointer to group, put memory address
-                                        buildMemberAddress(cb, thisClass, memberOffset)
+                                        member.buildAddress(cb, thisClass)
                                             .getstatic(parameterTypeDesc, name, type)
                                             .aload(param0)
                                             .invokeinterface(CD_GroupBinder, isNullable(config, parameter) ? "addressOfSafe" : "addressOf", MTD_long_Object);
-                                        buildAccessor(cb, ValueLayout.ADDRESS, memberLayout, "memPutAddress", MTD_void_long_long);
+                                        member.buildAccessor(cb, ValueLayout.ADDRESS, "memPutAddress", MTD_void_long_long);
                                     }
                                     case GroupLayout _ -> {
                                         if (DEBUG && isNullable(config, parameter)) {
@@ -521,7 +541,7 @@ final class BCGroup {
                                         cb
                                             .getstatic(parameterTypeDesc, name, type)
                                             .dup();
-                                        buildMemberAddress(cb, thisClass, memberOffset)
+                                        member.buildAddress(cb, thisClass)
                                             .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
                                             .invokeinterface(CD_GroupBinder, "reinterpret", MTD_MemorySegment_MemorySegment)
                                             .aload(param0)
@@ -544,7 +564,7 @@ final class BCGroup {
             // GENERATE equals, hashCode, toString
             // TODO: consider using MemorySegment::mismatch for equals (i.e. all bytes, instead of going through getters, which may be incomplete too)
             // TODO: consider a custom hashCode loop for hashCode (i.e. all bytes, instead of going through getters, which may be incomplete too)
-            var bootstrapArgs = hasPrivateGetters ? getBootstrapArgs(layout, getters) : null;
+            var bootstrapArgs = hasPrivateGetters ? getBootstrapArgs(getters) : null;
             classBuilder
                 .withMethod("equals", MTD_boolean_Object, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> {
                     var receiverSlot = cb.receiverSlot();
@@ -732,9 +752,12 @@ final class BCGroup {
         }
     }
 
-    private static SequencedMap<String, List<Method>> compileMemberAccessors(Class<?> groupInterface, GroupLayout layout) {
-        var memberMap = new LinkedHashMap<String, List<Method>>(layout.memberLayouts().size());
+    private static SequencedMap<Member, List<Method>> compileMemberAccessors(Class<?> groupInterface, GroupLayout layout) {
+        var layoutMembers = new LinkedHashMap<String, Member>(layout.memberLayouts().size());
 
+        collectLayoutMembers(groupInterface, layout, "", 0L, layoutMembers);
+
+        // extra map because getMethods() order is not guaranteed and we need to respect layout order
         var methods = new HashMap<String, List<Method>>(layout.memberLayouts().size());
         for (var method : groupInterface.getMethods()) {
             if (Modifier.isStatic(method.getModifiers()) || method.isDefault()) {
@@ -759,25 +782,56 @@ final class BCGroup {
                 .add(method);
         }
 
-        for (var member : layout.memberLayouts()) {
+        var members = new LinkedHashMap<Member, List<Method>>(layout.memberLayouts().size());
+
+        for (var path : layoutMembers.sequencedValues()) {
+            var memberMethods = methods.get(path.name());
+            if (memberMethods != null) {
+                members.put(path, memberMethods);
+            }
+        }
+
+        for (var entry : methods.entrySet()) {
+            if (!layoutMembers.containsKey(entry.getKey())) {
+                throw memberException("No layout member found with this name", groupInterface, entry.getKey());
+            }
+        }
+
+        return members;
+    }
+    private static void collectLayoutMembers(Class<?> groupInterface, GroupLayout groupLayout, String prefix, long baseOffset, LinkedHashMap<String, Member> map) {
+        for (var member : groupLayout.memberLayouts()) {
             var name = member.name().orElse(null);
             if (name == null) {
+                if (!(member instanceof PaddingLayout)) {
+                    throw memberException("Unnamed member is not padding", groupInterface, member.toString());
+                }
                 continue;
             }
 
-            var memberAccessors = methods.get(name);
-            if (memberAccessors != null) {
-                memberMap.put(name, memberAccessors);
+            var path = MemoryLayout.PathElement.groupElement(name);
+
+            var memberLayout = Objects.requireNonNull(groupLayout.select(path));
+            var memberOffset = baseOffset + groupLayout.byteOffset(path);
+
+            if (name.startsWith(FFM.ANONYMOUS_MEMBER_PREFIX)) {
+                if (!(memberLayout instanceof GroupLayout nestedGroupLayout)) {
+                    throw memberException("Anonymous member is not a nested group layout", groupInterface, name);
+                }
+                collectLayoutMembers(groupInterface, nestedGroupLayout, prefix, memberOffset, map); // promote with same prefix
+                continue;
+            }
+
+            var memberName = prefix + name;
+            var previous   = map.put(memberName, new Member(memberName, memberLayout, memberOffset));
+            if (previous != null) {
+                throw memberException("Ambiguous promoted layout member", groupInterface, memberName);
+            }
+
+            if (memberLayout instanceof GroupLayout nestedGroupLayout) {
+                collectLayoutMembers(groupInterface, nestedGroupLayout, memberName + ".", memberOffset, map);
             }
         }
-
-        for (var method : methods.entrySet()) {
-            if (!memberMap.containsKey(method.getKey())) {
-                throw memberException("No layout member found with this name", groupInterface, method.getKey());
-            }
-        }
-
-        return memberMap;
     }
     private static void checkAccessorAliasing(Class<?> groupInterface, Method method) {
         if (switch (method.getName()) {
@@ -793,20 +847,21 @@ final class BCGroup {
         }
     }
 
-    private static int registerCanonicalGetter(Class<?> groupInterface, Method method, LinkedHashMap<String, Method> getters, String memberName) {
+    private static int registerCanonicalGetter(Class<?> groupInterface, Method method, LinkedHashMap<Member, Method> getters, Member member) {
+        var memberName = member.name();
         if (method.isAnnotationPresent(FFMCanonical.class)) {
-            var canonical = getters.get(memberName);
+            var canonical = getters.get(member);
             if (canonical != null && canonical.isAnnotationPresent(FFMCanonical.class)) {
                 throw memberException("Multiple canonical getters found", groupInterface, memberName);
             }
-            getters.put(memberName, method);
+            getters.put(member, method);
         } else if (memberName.equals(method.getName())) {
-            var canonical = getters.get(memberName);
+            var canonical = getters.get(member);
             if (canonical == null || !canonical.isAnnotationPresent(FFMCanonical.class)) {
-                getters.put(memberName, method);
+                getters.put(member, method);
             }
         } else {
-            getters.putIfAbsent(memberName, method);
+            getters.putIfAbsent(member, method);
             return 1;
         }
         return 0;
@@ -819,24 +874,6 @@ final class BCGroup {
             case UnionBinder<?> _ -> CD_UnionBinder;
             default -> throw new UnsupportedOperationException("Unsupported binder type: " + binder.getClass());
         };
-    }
-
-    private static CodeBuilder buildMemberAddress(CodeBuilder cb, ClassDesc thisClass, long memberOffset) {
-        cb
-            .aload(cb.receiverSlot())
-            .getfield(thisClass, "address", CD_long);
-
-        if (memberOffset != 0) {
-            cb
-                .loadConstant(memberOffset)
-                .ladd();
-        }
-
-        return cb;
-    }
-
-    private static CodeBuilder buildAccessor(CodeBuilder cb, ValueLayout naturalLayout, MemoryLayout layout, String accessor, MethodTypeDesc type) {
-        return cb.invokestatic(CD_MemoryUtil, UNSAFE_BACKEND || naturalLayout.byteAlignment() <= layout.byteAlignment() ? accessor : accessor + "Unaligned", type);
     }
 
     private static void buildNullPointerCheck(CodeBuilder cb) {
@@ -855,14 +892,21 @@ final class BCGroup {
     }
 
     private static <T extends CodeBuilder> T buildAutoSize(
-        T cb, ClassDesc groupDesc, SequencedMap<String, List<Method>> memberMap, Method method,
+        T cb, ClassDesc groupDesc, SequencedMap<Member, List<Method>> memberMap, Method method,
         FFMSize autoSize, MemoryLayout elementLayout
     ) {
         // TODO: simplify?
-        var sizeGetter = memberMap.get(autoSize.value()).stream()
+        var sizeGetter = memberMap
+            .sequencedEntrySet()
+            .stream()
+            .filter(it -> it.getKey().name().equals(autoSize.value()))
+            .findFirst()
+            .orElseThrow(() -> methodException("The FFMSize reference \"" + autoSize.value() + "\" was not found", method))
+            .getValue()
+            .stream()
             .filter(it -> it.getReturnType().isPrimitive())
             .findFirst()
-            .orElseThrow(() -> new IllegalStateException("The FFMSize reference \"" + autoSize.value() + "\" not found for " + method));
+            .orElseThrow(() -> methodException("No primitive type getter for FFMSize reference \"" + autoSize.value() + "\"", method));
 
         var mtd = getMethodTypeDesc(sizeGetter);
         cb
@@ -898,7 +942,7 @@ final class BCGroup {
     }
 
     private static <T extends CodeBuilder> T buildMemorySegmentReinterpret(
-        T cb, ClassDesc groupDesc, SequencedMap<String, List<Method>> memberMap, Method method,
+        T cb, ClassDesc groupDesc, SequencedMap<Member, List<Method>> memberMap, Method method,
         AddressLayout addressLayout
     ) {
         var targetLayout = addressLayout.targetLayout().orElseThrow();
@@ -915,7 +959,7 @@ final class BCGroup {
     }
 
     private static <T extends CodeBuilder> T buildStringGetter(
-        T cb, ClassDesc groupDesc, SequencedMap<String, List<Method>> memberMap, Method method,
+        T cb, ClassDesc groupDesc, SequencedMap<Member, List<Method>> memberMap, Method method,
         FFMCharset.Type charset
     ) {
         cb.invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true);
@@ -969,26 +1013,10 @@ final class BCGroup {
     }
 
     @SuppressWarnings("unchecked")
-    static <T, L extends GroupLayout, M extends GroupBinder<L, T>> M bootstrap(
-        FFM.GroupBinderBuilder<T, L, M, ?> builder,
-        long byteAlignment
-    ) {
+    static <T, L extends GroupLayout, M extends GroupBinder<L, T>> M bootstrap(FFM.GroupBinderBuilder<T, L, M, ?> builder, L layout) {
         var groupInterface = builder.groupInterface;
 
-        var members = builder.members;
-
         var kind = builder.kind();
-
-        GroupLayout layout;
-        {
-            var tmp = kind
-                .layout(members.values().toArray(new MemoryLayout[0]))
-                .withName(getNativeName(groupInterface));
-            if (tmp.byteAlignment() < byteAlignment) {
-                tmp = tmp.withByteAlignment(byteAlignment);
-            }
-            layout = tmp;
-        }
 
         var config = FFM.getConfig(groupInterface);
 
@@ -1124,8 +1152,9 @@ final class BCGroup {
         }
     }
 
-    private static String[] getBootstrapArgs(GroupLayout layout, LinkedHashMap<String, Method> getters) {
+    private static String[] getBootstrapArgs(LinkedHashMap<Member, Method> getters) {
         var bootstrapNames = getters.sequencedKeySet().stream()
+            .map(Member::name)
             .collect(SEMI_COLON);
 
         var bootstrapArgsBuilder = Stream.<String>builder()
@@ -1133,13 +1162,11 @@ final class BCGroup {
 
         getters
             .sequencedEntrySet()
-            .forEach(member -> {
-                var method = member.getValue();
+            .forEach(entry -> {
+                var member = entry.getKey();
+                var method = entry.getValue();
 
-                var memberPath   = groupElement(member.getKey());
-                var memberLayout = layout.select(memberPath);
-
-                bootstrapArgsBuilder.add(memberLayout instanceof AddressLayout && method.getReturnType() != long.class
+                bootstrapArgsBuilder.add(member.layout instanceof AddressLayout && method.getReturnType() != long.class
                     ? "__address__" + method.getName()
                     : method.getName());
             });
