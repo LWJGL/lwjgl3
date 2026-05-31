@@ -22,6 +22,7 @@ import static java.lang.constant.ConstantDescs.*;
 import static java.lang.invoke.MethodType.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.ffm.BCCall.FeatureFlag.*;
 import static org.lwjgl.system.ffm.BCDescriptors.*;
 import static org.lwjgl.system.ffm.BCUtil.*;
@@ -29,6 +30,16 @@ import static org.lwjgl.system.ffm.BCUtil.*;
 final class BCGroup {
 
     private static final Collector<@Nullable CharSequence, ?, String> SEMI_COLON = Collectors.joining(";");
+
+    private static final int CDATA_LAYOUT  = 0;
+    private static final int CDATA_BACKEND = 1;
+
+    private static final int CDATA_ADDRESS     = 2;
+    private static final int CDATA_CONSTRUCTOR = 3;
+
+    private static final int CDATA_IMPL_EQUALS   = 2;
+    private static final int CDATA_IMPL_HASHCODE = 3;
+    private static final int CDATA_IMPL_TOSTRING = 4;
 
     private BCGroup() {
     }
@@ -52,8 +63,30 @@ final class BCGroup {
             return cb;
         }
 
-        CodeBuilder buildAccessor(CodeBuilder cb, ValueLayout naturalLayout, String accessor, MethodTypeDesc type) {
-            return cb.invokestatic(CD_MemoryUtil, naturalLayout.byteAlignment() <= layout.byteAlignment() ? accessor : accessor + "Unaligned", type);
+        private String accessorName(ValueLayout naturalLayout, String accessor) {
+            return naturalLayout.byteAlignment() <= layout.byteAlignment()
+                ? accessor
+                : accessor + "Unaligned";
+        }
+
+        CodeBuilder buildGetter(CodeBuilder cb, ClassDesc thisClass, ValueLayout naturalLayout, String accessor, MethodTypeDesc type) {
+            cb.ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND));
+            buildAddress(cb, thisClass);
+            return cb.invokeinterface(CD_MemoryBackend, accessorName(naturalLayout, accessor), type);
+        }
+
+        CodeBuilder buildSetter(CodeBuilder cb, ClassDesc thisClass, ValueLayout naturalLayout, String accessor, MethodTypeDesc type, Function<CodeBuilder, CodeBuilder> codeValue) {
+            cb.ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND));
+            buildAddress(cb, thisClass);
+            codeValue.apply(cb);
+            return cb.invokeinterface(CD_MemoryBackend, accessorName(naturalLayout, accessor), type);
+        }
+
+        CodeBuilder buildSetter(CodeBuilder cb, ClassDesc thisClass, ValueLayout naturalLayout, String accessor, MethodTypeDesc type, ObjIntConsumer<CodeBuilder> codeValue) {
+            cb.ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND));
+            buildAddress(cb, thisClass);
+            codeValue.accept(cb, cb.parameterSlot(0));
+            return cb.invokeinterface(CD_MemoryBackend, accessorName(naturalLayout, accessor), type);
         }
     }
 
@@ -131,56 +164,48 @@ final class BCGroup {
                             // TODO: handle clong
                             var returnType = method.getReturnType();
                             if (returnType == boolean.class) {
-                                member.buildAddress(cb, thisClass);
                                 switch (memberLayout) {
                                     case ValueLayout.OfBoolean _,
-                                         ValueLayout.OfByte _ -> cb.invokestatic(CD_MemoryUtil, "memGetByte", MTD_byte_long);
-                                    case ValueLayout.OfShort _ -> member.buildAccessor(cb, ValueLayout.JAVA_SHORT, "memGetShort", MTD_short_long);
-                                    case ValueLayout.OfInt _ -> member.buildAccessor(cb, ValueLayout.JAVA_INT, "memGetInt", MTD_int_long);
+                                         ValueLayout.OfByte _ -> member.buildGetter(cb, thisClass, ValueLayout.JAVA_BYTE, "getByte", MTD_byte_long);
+                                    case ValueLayout.OfShort _ -> member.buildGetter(cb, thisClass, ValueLayout.JAVA_SHORT, "getShort", MTD_short_long);
+                                    case ValueLayout.OfInt _ -> member.buildGetter(cb, thisClass, ValueLayout.JAVA_INT, "getInt", MTD_int_long);
                                     default -> throw methodException("Unsupported boolean getter layout: " + memberLayout, method);
                                 }
                                 cb.ireturn();
                             } else if (returnType == byte.class) {
-                                member.buildAddress(cb, thisClass)
-                                    .invokestatic(CD_MemoryUtil, "memGetByte", MTD_byte_long)
+                                member.buildGetter(cb, thisClass, ValueLayout.JAVA_BYTE, "getByte", MTD_byte_long)
                                     .ireturn();
                             } else if (returnType == short.class) {
-                                member.buildAddress(cb, thisClass);
-                                member.buildAccessor(cb, ValueLayout.JAVA_SHORT, "memGetShort", MTD_short_long)
+                                member.buildGetter(cb, thisClass, ValueLayout.JAVA_SHORT, "getShort", MTD_short_long)
                                     .ireturn();
                             } else if (returnType == int.class) {
-                                member.buildAddress(cb, thisClass);
-                                member.buildAccessor(cb, ValueLayout.JAVA_INT, "memGetInt", MTD_int_long)
+                                member.buildGetter(cb, thisClass, ValueLayout.JAVA_INT, "getInt", MTD_int_long)
                                     .ireturn();
                             } else if (returnType == long.class) {
-                                member.buildAddress(cb, thisClass);
                                 switch (memberLayout) {
-                                    case AddressLayout _ -> member.buildAccessor(cb, ValueLayout.ADDRESS, "memGetAddress", MTD_long_long);
+                                    case AddressLayout _ -> member.buildGetter(cb, thisClass, ValueLayout.ADDRESS, "getAddress", MTD_long_long);
                                     case ValueLayout.OfInt _ -> {
-                                        member.buildAccessor(cb, ValueLayout.JAVA_INT, "memGetInt", MTD_int_long);
+                                        member.buildGetter(cb, thisClass, ValueLayout.JAVA_INT, "getInt", MTD_int_long);
                                         if (method.isAnnotationPresent(FFMPointer.class)) {
                                             buildPointer32to64(cb);
                                         } else {
                                             cb.i2l();
                                         }
                                     }
-                                    case ValueLayout.OfLong _ -> member.buildAccessor(cb, ValueLayout.JAVA_LONG, "memGetLong", MTD_long_long);
+                                    case ValueLayout.OfLong _ -> member.buildGetter(cb, thisClass, ValueLayout.JAVA_LONG, "getLong", MTD_long_long);
                                     default -> throw methodException("Unsupported long getter layout: " + memberLayout, method);
                                 }
                                 cb.lreturn();
                             } else if (returnType == float.class) {
-                                member.buildAddress(cb, thisClass);
-                                member.buildAccessor(cb, ValueLayout.JAVA_FLOAT, "memGetFloat", MTD_float_long)
+                                member.buildGetter(cb, thisClass, ValueLayout.JAVA_FLOAT, "getFloat", MTD_float_long)
                                     .freturn();
                             } else if (returnType == double.class) {
-                                member.buildAddress(cb, thisClass);
-                                member.buildAccessor(cb, ValueLayout.JAVA_DOUBLE, "memGetDouble", MTD_double_long)
+                                member.buildGetter(cb, thisClass, ValueLayout.JAVA_DOUBLE, "getDouble", MTD_double_long)
                                     .dreturn();
                             } else if (returnType == MemorySegment.class) {
-                                member.buildAddress(cb, thisClass);
                                 switch (memberLayout) {
                                     case AddressLayout addressLayout -> {
-                                        member.buildAccessor(cb, ValueLayout.ADDRESS, "memGetAddress", MTD_long_long)
+                                        member.buildGetter(cb, thisClass, ValueLayout.ADDRESS, "getAddress", MTD_long_long)
                                             .dup2();
                                         if (isNullable(config, method)) {
                                             cb
@@ -206,7 +231,8 @@ final class BCGroup {
                                         }
                                     }
                                     case SequenceLayout sequenceLayout -> {
-                                        cb.invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true);
+                                        member.buildAddress(cb, thisClass)
+                                            .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true);
                                         var autoSize = method.getAnnotation(FFMSize.class);
                                         if (autoSize != null) {
                                             buildAutoSize(cb, groupDesc, memberMap, method, autoSize, sequenceLayout.elementLayout())
@@ -222,13 +248,10 @@ final class BCGroup {
                             } else if (returnType == String.class) {
                                 var charset = getCharsetType(method);
 
-                                // TODO: try to reuse the implementation of returnType == MemorySegment.class
-                                // TODO: migrate sized toArray to built-in sized getString when supported in future JDK
-                                member.buildAddress(cb, thisClass);
                                 switch (memberLayout) {
                                     // pointer to string
                                     case AddressLayout _ -> {
-                                        member.buildAccessor(cb, ValueLayout.ADDRESS, "memGetAddress", MTD_long_long);
+                                        member.buildGetter(cb, thisClass, ValueLayout.ADDRESS, "getAddress", MTD_long_long);
                                         if (isNullable(config, method)) {
                                             cb
                                                 .dup2()
@@ -247,29 +270,9 @@ final class BCGroup {
                                         }
                                     }
                                     // character array
-                                    case SequenceLayout sequenceLayout -> {
-                                        cb.invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true);
-                                        var autoSize = method.getAnnotation(FFMSize.class);
-                                        if (autoSize != null) {
-                                            var arraySlot = cb.allocateLocal(TypeKind.REFERENCE);
-                                            buildAutoSize(cb, groupDesc, memberMap, method, autoSize, sequenceLayout.elementLayout())
-                                                .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
-                                                .getstatic(CD_ValueLayout, "JAVA_BYTE", CD_ValueLayout$OfByte)
-                                                .invokeinterface(CD_MemorySegment, "toArray", MTD_byteArray_ValueLayout$OfByte)
-                                                .astore(arraySlot)
-                                                .new_(CD_String)
-                                                .dup()
-                                                .aload(arraySlot);
-                                            buildCharsetInstance(cb, charset)
-                                                .invokespecial(CD_String, INIT_NAME, MTD_void_byteArray_Charset);
-                                        } else {
-                                            cb
-                                                .loadConstant(sequenceLayout.byteSize())
-                                                .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
-                                                .lconst_0();
-                                            buildCharsetInstance(cb, charset)
-                                                .invokeinterface(CD_MemorySegment, "getString", MTD_String_long_Charset);
-                                        }
+                                    case SequenceLayout _ -> {
+                                        member.buildAddress(cb, thisClass);
+                                        buildStringGetter(cb, groupDesc, memberMap, method, charset);
                                     }
                                     default -> throw methodException("Unsupported String getter layout: " + memberLayout, method);
                                 }
@@ -293,8 +296,7 @@ final class BCGroup {
                                         // TODO: check actual target of memberLayout
                                         // pointer to group, dereference memory address
                                         cb.getstatic(returnTypeDesc, name, type);
-                                        member.buildAddress(cb, thisClass);
-                                        member.buildAccessor(cb, ValueLayout.ADDRESS, "memGetAddress", MTD_long_long)
+                                        member.buildGetter(cb, thisClass, ValueLayout.ADDRESS, "getAddress", MTD_long_long)
                                             .invokeinterface(CD_GroupBinder, isNullable(config, method) ? "ofAddressSafe" : "ofAddress", MTD_Object_long)
                                         /*.checkcast(returnType.describeConstable().orElseThrow())*/
                                         ;
@@ -337,7 +339,8 @@ final class BCGroup {
             // Generate private getters for pointer members
             if (hasPrivateGetters) {
                 for (var entry : getters.sequencedEntrySet()) {
-                    var member       = entry.getKey();
+                    var member = entry.getKey();
+
                     var memberLayout = member.layout();
                     if (!(memberLayout instanceof AddressLayout)) {
                         continue;
@@ -348,19 +351,9 @@ final class BCGroup {
                         continue;
                     }
 
-                    var memberOffset = member.offset();
-
                     if (builder.equals == null || builder.hashCode == null) {
                         classBuilder.withMethod("__address__" + method.getName(), MTD_long, ACC_PRIVATE | ACC_FINAL, mb -> mb.withCode(cb -> {
-                                cb
-                                    .aload(cb.receiverSlot())
-                                    .getfield(thisClass, "address", CD_long);
-                                if (memberOffset != 0) {
-                                    cb
-                                        .loadConstant(memberOffset)
-                                        .ladd();
-                                }
-                                member.buildAccessor(cb, ValueLayout.ADDRESS, "memGetAddress", MTD_long_long)
+                                member.buildGetter(cb, thisClass, ValueLayout.ADDRESS, "getAddress", MTD_long_long)
                                     .lreturn();
                             })
                         );
@@ -368,15 +361,7 @@ final class BCGroup {
 
                     if (builder.toString == null) {
                         classBuilder.withMethod("__toString__" + method.getName(), MTD_String, ACC_PRIVATE | ACC_FINAL, mb -> mb.withCode(cb -> {
-                                cb
-                                    .aload(cb.receiverSlot())
-                                    .getfield(thisClass, "address", CD_long);
-                                if (memberOffset != 0) {
-                                    cb
-                                        .loadConstant(memberOffset)
-                                        .ladd();
-                                }
-                                member.buildAccessor(cb, ValueLayout.ADDRESS, "memGetAddress", MTD_long_long)
+                                member.buildGetter(cb, thisClass, ValueLayout.ADDRESS, "getAddress", MTD_long_long)
                                     .invokestatic(CD_Long, "toHexString", MTD_String_long)
                                     .invokedynamic(DCSD_StringConcatFactory_makeConcatWithConstants_AddressToHexString)
                                     .areturn();
@@ -409,105 +394,85 @@ final class BCGroup {
                             var parameter     = method.getParameters()[0];
                             var parameterType = parameter.getType();
                             if (parameterType == boolean.class) {
-                                member.buildAddress(cb, thisClass)
-                                    .iload(param0);
                                 switch (memberLayout) {
                                     case ValueLayout.OfBoolean _,
-                                         ValueLayout.OfByte _ -> cb.invokestatic(CD_MemoryUtil, "memPutByte", MTD_void_long_byte);
-                                    case ValueLayout.OfShort _ -> member.buildAccessor(cb, ValueLayout.JAVA_SHORT, "memPutShort", MTD_void_long_short);
-                                    case ValueLayout.OfInt _ -> member.buildAccessor(cb, ValueLayout.JAVA_INT, "memPutInt", MTD_void_long_int);
+                                         ValueLayout.OfByte _ ->
+                                        member.buildSetter(cb, thisClass, ValueLayout.JAVA_BYTE, "putByte", MTD_void_long_byte, CodeBuilder::iload);
+                                    case ValueLayout.OfShort _ ->
+                                        member.buildSetter(cb, thisClass, ValueLayout.JAVA_SHORT, "putShort", MTD_void_long_short, CodeBuilder::iload);
+                                    case ValueLayout.OfInt _ ->
+                                        member.buildSetter(cb, thisClass, ValueLayout.JAVA_INT, "putInt", MTD_void_long_int, CodeBuilder::iload);
                                     default -> throw methodException("Unsupported boolean setter layout: " + memberLayout, method);
                                 }
                             } else if (parameterType == byte.class) {
-                                member.buildAddress(cb, thisClass)
-                                    .iload(param0)
-                                    .invokestatic(CD_MemoryUtil, "memPutByte", MTD_void_long_byte);
+                                member.buildSetter(cb, thisClass, ValueLayout.JAVA_BYTE, "putByte", MTD_void_long_byte, CodeBuilder::iload);
                             } else if (parameterType == short.class) {
-                                member.buildAddress(cb, thisClass)
-                                    .iload(param0);
-                                member.buildAccessor(cb, ValueLayout.JAVA_SHORT, "memPutShort", MTD_void_long_short);
+                                member.buildSetter(cb, thisClass, ValueLayout.JAVA_SHORT, "putShort", MTD_void_long_short, CodeBuilder::iload);
                             } else if (parameterType == int.class) {
-                                member.buildAddress(cb, thisClass)
-                                    .iload(param0);
-                                member.buildAccessor(cb, ValueLayout.JAVA_INT, "memPutInt", MTD_void_long_int);
+                                member.buildSetter(cb, thisClass, ValueLayout.JAVA_INT, "putInt", MTD_void_long_int, CodeBuilder::iload);
                             } else if (parameterType == long.class) {
-                                member.buildAddress(cb, thisClass)
-                                    .lload(param0);
                                 switch (memberLayout) {
-                                    case AddressLayout _ -> member.buildAccessor(cb, ValueLayout.ADDRESS, "memPutAddress", MTD_void_long_long);
-                                    case ValueLayout.OfInt _ -> {
-                                        cb.l2i();
-                                        member.buildAccessor(cb, ValueLayout.JAVA_INT, "memPutInt", MTD_void_long_int);
-                                    }
-                                    case ValueLayout.OfLong _ -> member.buildAccessor(cb, ValueLayout.JAVA_LONG, "memPutLong", MTD_void_long_long);
+                                    case AddressLayout _ ->
+                                        member.buildSetter(cb, thisClass, ValueLayout.ADDRESS, "putAddress", MTD_void_long_long, CodeBuilder::lload);
+                                    case ValueLayout.OfInt _ -> member.buildSetter(cb, thisClass, ValueLayout.JAVA_INT, "putInt", MTD_void_long_int, bcb -> bcb
+                                        .lload(param0)
+                                        .l2i());
+                                    case ValueLayout.OfLong _ ->
+                                        member.buildSetter(cb, thisClass, ValueLayout.JAVA_LONG, "putLong", MTD_void_long_long, CodeBuilder::lload);
                                     default -> throw methodException("Unsupported long setter layout: " + memberLayout, method);
                                 }
                             } else if (parameterType == float.class) {
-                                member.buildAddress(cb, thisClass)
-                                    .fload(param0);
-                                member.buildAccessor(cb, ValueLayout.JAVA_FLOAT, "memPutFloat", MTD_void_long_float);
+                                member.buildSetter(cb, thisClass, ValueLayout.JAVA_FLOAT, "putFloat", MTD_void_long_float, CodeBuilder::fload);
                             } else if (parameterType == double.class) {
-                                member.buildAddress(cb, thisClass)
-                                    .dload(param0);
-                                member.buildAccessor(cb, ValueLayout.JAVA_DOUBLE, "memPutDouble", MTD_void_long_double);
+                                member.buildSetter(cb, thisClass, ValueLayout.JAVA_DOUBLE, "putDouble", MTD_void_long_double, CodeBuilder::dload);
                             } else if (parameterType == MemorySegment.class) {
                                 // TODO: support nullable
                                 // TODO: check actual target of memberLayout
-                                member.buildAddress(cb, thisClass)
-                                    .aload(param0);
-                                if (isNullable(config, parameter)) {
-                                    if (!parameter.isAnnotationPresent(FFMNullable.class)) {
-                                        cb.ifThenElse(Opcode.IFNULL,
-                                            CodeBuilder::lconst_0,
-                                            b1 -> b1
-                                                .aload(param0)
-                                                .invokeinterface(CD_MemorySegment, "address", MTD_long)
-                                        );
+                                member.buildSetter(cb, thisClass, ValueLayout.ADDRESS, "putAddress", MTD_void_long_long, bcb -> {
+                                    bcb.aload(param0);
+                                    if (isNullable(config, parameter)) {
+                                        if (!parameter.isAnnotationPresent(FFMNullable.class)) {
+                                            bcb.ifThenElse(Opcode.IFNULL,
+                                                CodeBuilder::lconst_0,
+                                                b1 -> b1
+                                                    .aload(param0)
+                                                    .invokeinterface(CD_MemorySegment, "address", MTD_long)
+                                            );
+                                        } else {
+                                            bcb.invokeinterface(CD_MemorySegment, "address", MTD_long);
+                                        }
                                     } else {
-                                        cb.invokeinterface(CD_MemorySegment, "address", MTD_long);
+                                        bcb.invokeinterface(CD_MemorySegment, "address", MTD_long);
+                                        buildNullPointerCheck(bcb);
                                     }
-                                } else {
-                                    cb.invokeinterface(CD_MemorySegment, "address", MTD_long);
-                                    buildNullPointerCheck(cb);
-                                }
-                                member.buildAccessor(cb, ValueLayout.ADDRESS, "memPutAddress", MTD_void_long_long);
+                                    return bcb;
+                                });
                             } else if (parameterType == String.class) {
                                 if (!(memberLayout instanceof SequenceLayout sequenceLayout)) {
                                     throw methodException("Unsupported String setter layout: " + memberLayout, method);
                                 }
+                                if (Integer.MAX_VALUE < sequenceLayout.byteSize()) {
+                                    throw methodException("String setter target is too large: " + memberLayout, method);
+                                }
 
                                 var charset = getCharsetType(method);
 
-                                member.buildAddress(cb, thisClass)
-                                    .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
-                                    .loadConstant(sequenceLayout.byteSize())
-                                    .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long);
-
+                                cb
+                                    .ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND))
+                                    .aload(param0);
                                 if (parameter.isAnnotationPresent(FFMSize.class)) {
-                                    // TODO: migrate sized toArray to built-in sized setString when supported in future JDK
-                                    var segment = cb.allocateLocal(TypeKind.REFERENCE);
-                                    var array   = cb.allocateLocal(TypeKind.REFERENCE);
-                                    cb
-                                        .astore(segment)
-                                        .aload(param0);
-                                    buildCharsetInstance(cb, charset)
-                                        .invokevirtual(CD_String, "getBytes", MTD_byteArray_Charset)
-                                        .dup()
-                                        .astore(array)
-                                        .iconst_0()
-                                        .aload(segment)
-                                        .getstatic(CD_ValueLayout, "JAVA_BYTE", CD_ValueLayout$OfByte)
-                                        .lconst_0()
-                                        .aload(array)
-                                        .arraylength()
-                                        .invokestatic(CD_MemorySegment, "copy", MTD_void_Object_int_MemorySegment_ValueLayout_long_int, true);
+                                    cb.iconst_0();
                                 } else {
-                                    cb
-                                        .lconst_0()
-                                        .aload(param0);
-                                    buildCharsetInstance(cb, charset)
-                                        .invokeinterface(CD_MemorySegment, "setString", MTD_void_long_String_Charset);
+                                    cb.iconst_1();
                                 }
+                                member.buildAddress(cb, thisClass)
+                                    .loadConstant((int)sequenceLayout.byteSize())
+                                    .invokeinterface(CD_MemoryBackend, switch (charset) {
+                                        case US_ASCII, ISO_8859_1 -> "putStringASCII";
+                                        case UTF8 -> "putStringUTF8";
+                                        case UTF16 -> "putStringUTF16";
+                                    }, MTD_int_String_boolean_long_int)
+                                    .pop();
                             } else {
                                 String    name;
                                 ClassDesc type;
@@ -527,11 +492,10 @@ final class BCGroup {
                                     case AddressLayout _ -> {
                                         // TODO: check actual target of memberLayout
                                         // pointer to group, put memory address
-                                        member.buildAddress(cb, thisClass)
+                                        member.buildSetter(cb, thisClass, ValueLayout.ADDRESS, "putAddress", MTD_void_long_long, bcb -> bcb
                                             .getstatic(parameterTypeDesc, name, type)
                                             .aload(param0)
-                                            .invokeinterface(CD_GroupBinder, isNullable(config, parameter) ? "addressOfSafe" : "addressOf", MTD_long_Object);
-                                        member.buildAccessor(cb, ValueLayout.ADDRESS, "memPutAddress", MTD_void_long_long);
+                                            .invokeinterface(CD_GroupBinder, isNullable(config, parameter) ? "addressOfSafe" : "addressOf", MTD_long_Object));
                                     }
                                     case GroupLayout _ -> {
                                         if (DEBUG && isNullable(config, parameter)) {
@@ -582,7 +546,7 @@ final class BCGroup {
                             );
                     } else {
                         cb
-                            .ldc(condyCDataAt(CD_BiPredicate, 1))
+                            .ldc(condyCDataAt(CD_BiPredicate, CDATA_IMPL_EQUALS))
                             .aload(receiverSlot)
                             .aload(param0Slot)
                             .invokeinterface(CD_BiPredicate, "test", MTD_boolean_Object_Object);
@@ -603,7 +567,7 @@ final class BCGroup {
                             );
                     } else {
                         cb
-                            .ldc(condyCDataAt(CD_ToIntFunction, 2))
+                            .ldc(condyCDataAt(CD_ToIntFunction, CDATA_IMPL_HASHCODE))
                             .aload(receiverSlot)
                             .invokeinterface(CD_ToIntFunction, "applyAsInt", MTD_int_Object);
                     }
@@ -628,7 +592,7 @@ final class BCGroup {
                             );
                     } else {
                         cb
-                            .ldc(condyCDataAt(CD_Function, 3))
+                            .ldc(condyCDataAt(CD_Function, CDATA_IMPL_TOSTRING))
                             .aload(receiverSlot)
                             .invokeinterface(CD_Function, "apply", MTD_Object_Object)
                             .checkcast(CD_String);
@@ -643,7 +607,7 @@ final class BCGroup {
 
                 classBuilder
                     .withMethod("layout", MTD_GroupLayout, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> cb
-                        .ldc(condyCDataAt(layoutDesc, 0))
+                        .ldc(condyCDataAt(layoutDesc, CDATA_LAYOUT))
                         .areturn()))
                     .withMethod("copyFrom", MTD_Group_Group, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> buildCopy(
                         cb, layout,
@@ -683,7 +647,7 @@ final class BCGroup {
                             .aload(ccb.parameterSlot(0))
                             .invokeinterface(CD_MemorySegment, "address", MTD_long)
                             .lload(cb.parameterSlot(1))
-                            .ldc(condyCDataAt(layoutDesc, 0))
+                            .ldc(condyCDataAt(layoutDesc, CDATA_LAYOUT))
                             .invokeinterface(CD_GroupLayout, "byteSize", MTD_long)
                             .lmul()
                             .ladd())
@@ -708,7 +672,7 @@ final class BCGroup {
                             .aload(ccb.parameterSlot(0))
                             .invokeinterface(CD_MemorySegment, "address", MTD_long)
                             .lload(cb.parameterSlot(1))
-                            .ldc(condyCDataAt(layoutDesc, 0))
+                            .ldc(condyCDataAt(layoutDesc, CDATA_LAYOUT))
                             .invokeinterface(CD_GroupLayout, "byteSize", MTD_long)
                             .lmul()
                             .ladd())
@@ -735,10 +699,11 @@ final class BCGroup {
             printModel(of().parse(bytecode));
         }
 
-        // Store the target handle as class data in the hidden class.
+        // Store constants as class data in the hidden class.
         try {
             return config.lookup.defineHiddenClassWithClassData(bytecode, List.of(
                 layout,
+                memBackend(),
                 builder.equals != null ? builder.equals : EMPTY_SLOT,
                 builder.hashCode != null ? builder.hashCode : EMPTY_SLOT,
                 builder.toString != null ? builder.toString : EMPTY_SLOT
@@ -962,27 +927,24 @@ final class BCGroup {
         T cb, ClassDesc groupDesc, SequencedMap<Member, List<Method>> memberMap, Method method,
         FFMCharset.Type charset
     ) {
-        cb.invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true);
+        var accessor = switch (charset) {
+            case US_ASCII, ISO_8859_1 -> "getStringASCII";
+            case UTF8 -> "getStringUTF8";
+            case UTF16 -> "getStringUTF16";
+        };
+
+        cb
+            .ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND))
+            .dup_x2()
+            .pop();
+
         var autoSize = method.getAnnotation(FFMSize.class);
         if (autoSize != null) {
-            var arraySlot = cb.allocateLocal(TypeKind.REFERENCE);
-            buildAutoSize(cb, groupDesc, memberMap, method, autoSize, charset.layout)
-                .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
-                .getstatic(CD_ValueLayout, "JAVA_BYTE", CD_ValueLayout$OfByte)
-                .invokeinterface(CD_MemorySegment, "toArray", MTD_byteArray_ValueLayout$OfByte)
-                .astore(arraySlot)
-                .new_(CD_String)
-                .dup()
-                .aload(arraySlot);
-            buildCharsetInstance(cb, charset)
-                .invokespecial(CD_String, INIT_NAME, MTD_void_byteArray_Charset);
+            buildAutoSize(cb, groupDesc, memberMap, method, autoSize, ValueLayout.JAVA_BYTE)
+                .l2i()
+                .invokeinterface(CD_MemoryBackend, accessor, MTD_String_long_int);
         } else {
-            cb
-                .loadConstant(Long.MAX_VALUE)
-                .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
-                .lconst_0();
-            buildCharsetInstance(cb, charset)
-                .invokeinterface(CD_MemorySegment, "getString", MTD_String_long_Charset);
+            cb.invokeinterface(CD_MemoryBackend, accessor, MTD_String_long);
         }
         return cb;
     }
@@ -1068,11 +1030,11 @@ final class BCGroup {
 
             classBuilder
                 .withMethod("layout", MTD_GroupLayout, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> cb
-                    .ldc(condyCDataAt(kind.layoutDesc(), 0))
+                    .ldc(condyCDataAt(kind.layoutDesc(), CDATA_LAYOUT))
                     .areturn())
                 )
                 .withMethod("addressOf", MTD_long_Object, ACC_PUBLIC | ACC_FINAL, mb -> mb.withCode(cb -> cb
-                    .ldc(condyCDataAt(CD_MethodHandle, 1))
+                    .ldc(condyCDataAt(CD_MethodHandle, CDATA_ADDRESS))
                     .aload(cb.parameterSlot(0))
                     .invokevirtual(CD_MethodHandle, "invokeExact", MethodTypeDesc.of(CD_long, groupDesc))
                     .lreturn()))
@@ -1120,7 +1082,7 @@ final class BCGroup {
                         .aload(cb.parameterSlot(0))
                         .invokeinterface(CD_MemorySegment, "address", MTD_long)
                         .lload(cb.parameterSlot(1))
-                        .ldc(condyCDataAt(kind.layoutDesc(), 0))
+                        .ldc(condyCDataAt(kind.layoutDesc(), CDATA_LAYOUT))
                         .invokeinterface(CD_GroupLayout, "byteSize", MTD_long)
                         .lmul()
                         .ladd())
@@ -1131,11 +1093,12 @@ final class BCGroup {
             printModel(of().parse(bytecode));
         }
 
-        // Store the target handle as class data in the hidden class.
+        // Store constants as class data in the hidden class.
         try {
             var wrapperLookup = config.lookup.defineHiddenClassWithClassData(bytecode,
                 List.of(
                     layout,
+                    memBackend(),
                     implementationAddress,
                     implementationConstructor
                 ), true);
@@ -1177,7 +1140,7 @@ final class BCGroup {
     }
 
     private static <T extends CodeBuilder> T buildConstructor(T cb, MethodTypeDesc constructorDesc, Function<T, T> codeAddress) {
-        cb.ldc(condyCDataAt(CD_MethodHandle, 2));
+        cb.ldc(condyCDataAt(CD_MethodHandle, CDATA_CONSTRUCTOR));
         codeAddress.apply(cb)
             .invokevirtual(CD_MethodHandle, "invokeExact", constructorDesc)
             .areturn();
@@ -1196,71 +1159,23 @@ final class BCGroup {
         var byteSize = layout.byteSize();
         // On JDK 26+ the custom loop gets unrolled+vectorized
         if (512L < byteSize || Platform.getJavaVersion() == 25) {
-            // fallback to memcpy
-            // the following is an inlined version of MemoryUtilTunables::memcpy for JDK 25+
-            if (byteSize < NATIVE_THRESHOLD_COPY || (byteSize & 1L) != 0L) {
-                // destination
-                cb
-                    .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
-                    .loadConstant(byteSize)
-                    .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long);
-                // source
-                codeSrc.apply(cb)
-                    .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
-                    .loadConstant(byteSize)
-                    .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long);
-                // copy
-                cb
-                    .invokeinterface(CD_MemorySegment, "copyFrom", MTD_MemorySegment_MemorySegment)
-                    .pop();
-            } else {
-                // destination
-                var dstSlot = cb.allocateLocal(TypeKind.LONG);
-                cb
-                    .dup2()
-                    .lstore(dstSlot)
-                    .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
-                    .loadConstant(byteSize - 1L)
-                    .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long);
-                // source
-                var srcSlot = cb.allocateLocal(TypeKind.LONG);
-                codeSrc.apply(cb)
-                    .dup2()
-                    .lstore(srcSlot)
-                    .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
-                    .loadConstant(byteSize - 1L)
-                    .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long);
-                // copy
-                cb
-                    .invokeinterface(CD_MemorySegment, "copyFrom", MTD_MemorySegment_MemorySegment)
-                    .pop();
-                // copy last byte
-                cb
-                    .lload(dstSlot)
-                    .loadConstant(byteSize - 1L)
-                    .ladd()
-                    .lload(srcSlot)
-                    .loadConstant(byteSize - 1L)
-                    .ladd()
-                    .invokestatic(CD_MemoryUtil, "memGetByte", MTD_byte_long)
-                    .invokestatic(CD_MemoryUtil, "memPutByte", MTD_void_long_byte);
-            }
-        } else {
-            // custom memset with guaranteed correct alignment
-            var dstSlot = cb.allocateLocal(TypeKind.REFERENCE);
+            var dstSlot = cb.allocateLocal(TypeKind.LONG);
             cb
-                .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
-                .loadConstant(byteSize)
-                .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
-                .astore(dstSlot);
-
-            var srcSlot = cb.allocateLocal(TypeKind.REFERENCE);
+                .lstore(dstSlot)
+                .ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND));
             codeSrc.apply(cb)
-                .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
+                .lload(dstSlot)
                 .loadConstant(byteSize)
-                .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
-                .astore(srcSlot);
+                .invokeinterface(CD_MemoryBackend, "memcpy", MTD_void_long_long_long);
+        } else {
+            // custom memcpy with guaranteed correct alignment
+            var dstSlot = cb.allocateLocal(TypeKind.LONG);
+            cb.lstore(dstSlot);
 
+            var srcSlot = cb.allocateLocal(TypeKind.LONG);
+            codeSrc
+                .apply(cb)
+                .lstore(srcSlot);
 
             if (16L <= byteSize) {
                 var offsetSlot = cb.allocateLocal(TypeKind.LONG);
@@ -1277,14 +1192,16 @@ final class BCGroup {
                     .loadConstant(byteSize & ~7L)
                     .lcmp()
                     .ifge(loopEnd)
-                    .aload(dstSlot)
-                    .getstatic(CD_ValueLayout, "JAVA_LONG_UNALIGNED", CD_ValueLayout$OfLong)
+                    .ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND))
+                    .lload(dstSlot)
                     .lload(offsetSlot)
-                    .aload(srcSlot)
-                    .getstatic(CD_ValueLayout, "JAVA_LONG_UNALIGNED", CD_ValueLayout$OfLong)
+                    .ladd()
+                    .ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND))
+                    .lload(srcSlot)
                     .lload(offsetSlot)
-                    .invokeinterface(CD_MemorySegment, "get", MTD_long_ValueLayout$OfLong_long)
-                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfLong_long_long)
+                    .ladd()
+                    .invokeinterface(CD_MemoryBackend, "getLongUnaligned", MTD_long_long)
+                    .invokeinterface(CD_MemoryBackend, "putLongUnaligned", MTD_void_long_long)
                     .lload(offsetSlot)
                     .loadConstant(8L)
                     .ladd()
@@ -1293,53 +1210,57 @@ final class BCGroup {
                     .labelBinding(loopEnd);
             } else if (8L <= byteSize) {
                 cb
-                    .aload(dstSlot)
-                    .getstatic(CD_ValueLayout, "JAVA_LONG_UNALIGNED", CD_ValueLayout$OfLong)
-                    .lconst_0()
-                    .aload(srcSlot)
-                    .getstatic(CD_ValueLayout, "JAVA_LONG_UNALIGNED", CD_ValueLayout$OfLong)
-                    .lconst_0()
-                    .invokeinterface(CD_MemorySegment, "get", MTD_long_ValueLayout$OfLong_long)
-                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfLong_long_long);
+                    .ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND))
+                    .lload(dstSlot)
+                    .ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND))
+                    .lload(srcSlot)
+                    .invokeinterface(CD_MemoryBackend, "getLongUnaligned", MTD_long_long)
+                    .invokeinterface(CD_MemoryBackend, "putLongUnaligned", MTD_void_long_long);
             }
 
             var offset = byteSize & ~7L;
             if (offset < (byteSize & ~3L)) {
                 cb
-                    .aload(dstSlot)
-                    .getstatic(CD_ValueLayout, "JAVA_INT_UNALIGNED", CD_ValueLayout$OfInt)
+                    .ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND))
+                    .lload(dstSlot)
                     .loadConstant(offset)
-                    .aload(srcSlot)
-                    .getstatic(CD_ValueLayout, "JAVA_INT_UNALIGNED", CD_ValueLayout$OfInt)
+                    .ladd()
+                    .ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND))
+                    .lload(srcSlot)
                     .loadConstant(offset)
-                    .invokeinterface(CD_MemorySegment, "get", MTD_int_ValueLayout$OfInt_long)
-                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfInt_long_int);
+                    .ladd()
+                    .invokeinterface(CD_MemoryBackend, "getIntUnaligned", MTD_int_long)
+                    .invokeinterface(CD_MemoryBackend, "putIntUnaligned", MTD_void_long_int);
                 offset += 4L;
             }
 
             if (offset < (byteSize & ~1L)) {
                 cb
-                    .aload(dstSlot)
-                    .getstatic(CD_ValueLayout, "JAVA_SHORT_UNALIGNED", CD_ValueLayout$OfShort)
+                    .ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND))
+                    .lload(dstSlot)
                     .loadConstant(offset)
-                    .aload(srcSlot)
-                    .getstatic(CD_ValueLayout, "JAVA_SHORT_UNALIGNED", CD_ValueLayout$OfShort)
+                    .ladd()
+                    .ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND))
+                    .lload(srcSlot)
                     .loadConstant(offset)
-                    .invokeinterface(CD_MemorySegment, "get", MTD_short_ValueLayout$OfShort_long)
-                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfShort_long_short);
+                    .ladd()
+                    .invokeinterface(CD_MemoryBackend, "getShortUnaligned", MTD_short_long)
+                    .invokeinterface(CD_MemoryBackend, "putShortUnaligned", MTD_void_long_short);
                 offset += 2L;
             }
 
             if (offset < byteSize) {
                 cb
-                    .aload(dstSlot)
-                    .getstatic(CD_ValueLayout, "JAVA_BYTE", CD_ValueLayout$OfByte)
+                    .ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND))
+                    .lload(dstSlot)
                     .loadConstant(offset)
-                    .aload(srcSlot)
-                    .getstatic(CD_ValueLayout, "JAVA_BYTE", CD_ValueLayout$OfByte)
+                    .ladd()
+                    .ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND))
+                    .lload(srcSlot)
                     .loadConstant(offset)
-                    .invokeinterface(CD_MemorySegment, "get", MTD_byte_ValueLayout$OfByte_long)
-                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfByte_long_byte);
+                    .ladd()
+                    .invokeinterface(CD_MemoryBackend, "getByte", MTD_byte_long)
+                    .invokeinterface(CD_MemoryBackend, "putByte", MTD_void_long_byte);
             }
         }
         codeRet.apply(cb)
@@ -1354,55 +1275,20 @@ final class BCGroup {
     ) {
         codeReceiver.apply(cb);
 
+        var addressSlot = cb.allocateLocal(TypeKind.LONG);
+        cb.lstore(addressSlot);
+
         var byteSize = layout.byteSize();
         // On JDK 26+ the custom loop gets unrolled+vectorized
         if (1024L < byteSize || (Platform.getJavaVersion() == 25 && (byteSize <= NATIVE_THRESHOLD_FILL || 64L < byteSize))) {
-            // fallback to memset
-            // the following is an inlined version of MemoryUtilTunables::memset for JDK 25+
-            if (byteSize < NATIVE_THRESHOLD_FILL || (byteSize & 1L) != 0L) {
-                cb
-                    .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
-                    .loadConstant(byteSize)
-                    .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
-                    .iconst_0()
-                    .invokeinterface(CD_MemorySegment, "fill", MTD_MemorySegment_byte)
-                    .pop();
-            } else {
-                var addressSlot = cb.allocateLocal(TypeKind.LONG);
-                cb
-                    .lstore(addressSlot);
-
-                cb
-                    .lload(addressSlot)
-                    .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
-                    .loadConstant(byteSize - 1L)
-                    .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
-                    .iconst_0()
-                    .invokeinterface(CD_MemorySegment, "fill", MTD_MemorySegment_byte)
-                    .pop();
-
-                cb
-                    .lload(addressSlot)
-                    .loadConstant(byteSize - 1L)
-                    .ladd()
-                    .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
-                    .lconst_1()
-                    .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
-                    .getstatic(CD_ValueLayout, "JAVA_BYTE", CD_ValueLayout$OfByte)
-                    .lconst_0()
-                    .iconst_0()
-                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfByte_long_byte);
-            }
+            cb
+                .ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND))
+                .lload(addressSlot)
+                .iconst_0()
+                .loadConstant(byteSize)
+                .invokeinterface(CD_MemoryBackend, "memset", MTD_void_long_int_long);
         } else {
             // custom memset with guaranteed correct alignment
-            var segmentSlot = cb.allocateLocal(TypeKind.REFERENCE);
-            cb
-                .invokestatic(CD_MemorySegment, "ofAddress", MTD_MemorySegment_long, true)
-                .loadConstant(byteSize)
-                .invokeinterface(CD_MemorySegment, "reinterpret", MTD_MemorySegment_long)
-                .astore(segmentSlot);
-
-
             if (16L <= byteSize) {
                 var offsetSlot = cb.allocateLocal(TypeKind.LONG);
 
@@ -1410,19 +1296,20 @@ final class BCGroup {
                     .lconst_0()
                     .lstore(offsetSlot);
 
-                var loopStart = cb.newBoundLabel();
                 var loopEnd   = cb.newLabel();
+                var loopStart = cb.newBoundLabel();
 
                 cb
                     .lload(offsetSlot)
                     .loadConstant(byteSize & ~7L)
                     .lcmp()
                     .ifge(loopEnd)
-                    .aload(segmentSlot)
-                    .getstatic(CD_ValueLayout, "JAVA_LONG_UNALIGNED", CD_ValueLayout$OfLong)
+                    .ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND))
+                    .lload(addressSlot)
                     .lload(offsetSlot)
+                    .ladd()
                     .lconst_0()
-                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfLong_long_long)
+                    .invokeinterface(CD_MemoryBackend, "putLongUnaligned", MTD_void_long_long)
                     .lload(offsetSlot)
                     .loadConstant(8L)
                     .ladd()
@@ -1431,45 +1318,48 @@ final class BCGroup {
                     .labelBinding(loopEnd);
             } else if (8L <= byteSize) {
                 cb
-                    .aload(segmentSlot)
-                    .getstatic(CD_ValueLayout, "JAVA_LONG_UNALIGNED", CD_ValueLayout$OfLong)
+                    .ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND))
+                    .lload(addressSlot)
                     .lconst_0()
-                    .lconst_0()
-                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfLong_long_long);
+                    .invokeinterface(CD_MemoryBackend, "putLongUnaligned", MTD_void_long_long);
             }
 
             var offset = byteSize & ~7L;
             if (offset < (byteSize & ~3L)) {
                 cb
-                    .aload(segmentSlot)
-                    .getstatic(CD_ValueLayout, "JAVA_INT_UNALIGNED", CD_ValueLayout$OfInt)
+                    .ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND))
+                    .lload(addressSlot)
                     .loadConstant(offset)
+                    .ladd()
                     .iconst_0()
-                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfInt_long_int);
+                    .invokeinterface(CD_MemoryBackend, "putIntUnaligned", MTD_void_long_int);
                 offset += 4L;
             }
 
             if (offset < (byteSize & ~1L)) {
                 cb
-                    .aload(segmentSlot)
-                    .getstatic(CD_ValueLayout, "JAVA_SHORT_UNALIGNED", CD_ValueLayout$OfShort)
+                    .ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND))
+                    .lload(addressSlot)
                     .loadConstant(offset)
+                    .ladd()
                     .iconst_0()
-                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfShort_long_short);
+                    .invokeinterface(CD_MemoryBackend, "putShortUnaligned", MTD_void_long_short);
                 offset += 2L;
             }
 
             if (offset < byteSize) {
                 cb
-                    .aload(segmentSlot)
-                    .getstatic(CD_ValueLayout, "JAVA_BYTE", CD_ValueLayout$OfByte)
+                    .ldc(condyCDataAt(CD_MemoryBackend, CDATA_BACKEND))
+                    .lload(addressSlot)
                     .loadConstant(offset)
+                    .ladd()
                     .iconst_0()
-                    .invokeinterface(CD_MemorySegment, "set", MTD_void_ValueLayout$OfByte_long_byte);
+                    .invokeinterface(CD_MemoryBackend, "putByte", MTD_void_long_byte);
             }
         }
 
-        codeReturn.apply(cb)
+        codeReturn
+            .apply(cb)
             .areturn();
     }
 
@@ -1485,7 +1375,7 @@ final class BCGroup {
             cb
                 .aload(cb.parameterSlot(0))
                 .lconst_0()
-                .ldc(condyCDataAt(layoutDesc, 0))
+                .ldc(condyCDataAt(layoutDesc, CDATA_LAYOUT))
                 .invokeinterface(CD_MemorySegment, "asSlice", MTD_MemorySegment_long_MemoryLayout)
                 .pop(); // discard, we only want the bounds check
         }
@@ -1504,7 +1394,7 @@ final class BCGroup {
             cb
                 .aload(cb.parameterSlot(0))
                 .lload(cb.parameterSlot(1))
-                .ldc(condyCDataAt(layoutDesc, 0))
+                .ldc(condyCDataAt(layoutDesc, CDATA_LAYOUT))
                 .invokeinterface(CD_MemorySegment, "asSlice", MTD_MemorySegment_long_MemoryLayout)
                 .pop(); // discard, we only want the bounds check
         }
@@ -1523,10 +1413,10 @@ final class BCGroup {
             cb
                 .aload(cb.parameterSlot(0))
                 .lload(cb.parameterSlot(1))
-                .ldc(condyCDataAt(layoutDesc, 0))
+                .ldc(condyCDataAt(layoutDesc, CDATA_LAYOUT))
                 .invokeinterface(CD_GroupLayout, "byteSize", MTD_long)
                 .lmul()
-                .ldc(condyCDataAt(layoutDesc, 0))
+                .ldc(condyCDataAt(layoutDesc, CDATA_LAYOUT))
                 .invokeinterface(CD_MemorySegment, "asSlice", MTD_MemorySegment_long_MemoryLayout)
                 .pop(); // discard, we only want the bounds check
         }

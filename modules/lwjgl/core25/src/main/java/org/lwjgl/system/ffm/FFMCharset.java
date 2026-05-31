@@ -37,10 +37,6 @@ public @interface FFMCharset {
         UTF16(
             DEBUG ? ValueLayout.JAVA_SHORT : ValueLayout.JAVA_SHORT_UNALIGNED,
             ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN ? "UTF_16LE" : "UTF_16BE"
-        ),
-        UTF32(
-            DEBUG ? ValueLayout.JAVA_INT : ValueLayout.JAVA_INT_UNALIGNED,
-            ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN ? "UTF_32LE" : "UTF_32BE"
         );
 
         public final ValueLayout layout;

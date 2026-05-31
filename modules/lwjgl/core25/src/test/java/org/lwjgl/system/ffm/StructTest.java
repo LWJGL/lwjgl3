@@ -2234,8 +2234,8 @@ public class StructTest {
             @FFMCharset(FFMCharset.Type.UTF8)
             interface S {
                 StructBinder<S> $ = ffmStruct(S.class)
-                    .m("a", int8_t.array(256))
-                    .m("b", int8_t.array(256))
+                    .m("a", int8_t.array(8))
+                    .m("b", int8_t.array(8))
                     .build();
 
                 String a();
@@ -2251,6 +2251,8 @@ public class StructTest {
             assertEquals(s.b(), "");
 
             assertEquals(s.toString(), "S[a=, b=]");
+
+            assertThrows(BufferOverflowException.class, () -> s.a("hello world!"));
 
             s
                 .a("hello")
