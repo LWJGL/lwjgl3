@@ -7,7 +7,7 @@ package harfbuzz.templates
 import org.lwjgl.generator.*
 import harfbuzz.*
 
-val hb_aat = "AAT".nativeClass(Module.HARFBUZZ, prefix = "HB_ATT", prefixMethod = "hb_att_", binding = HARFBUZZ_BINDING_DELEGATE) {
+val hb_aat = "AAT".nativeClass(Module.HARFBUZZ, prefix = "HB_AAT", prefixMethod = "hb_aat_", binding = HARFBUZZ_BINDING_DELEGATE) {
     EnumConstant(
         "LAYOUT_FEATURE_TYPE_INVALID".enum("0xFFFF"),
         "LAYOUT_FEATURE_TYPE_ALL_TYPOGRAPHIC".enum("0"),
