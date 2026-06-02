@@ -11198,3 +11198,9 @@ val VkPhysicalDevicePrimitiveRestartIndexFeaturesEXT = struct(Module.VULKAN, "Vk
     nullable..opaque_p("pNext")
     VkBool32("primitiveRestartIndex")
 }
+
+val VkPhysicalDeviceCooperativeMatrixDecodeVectorFeaturesNV = struct(Module.VULKAN, "VkPhysicalDeviceCooperativeMatrixDecodeVectorFeaturesNV") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_DECODE_VECTOR_FEATURES_NV")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("cooperativeMatrixDecodeVector")
+}

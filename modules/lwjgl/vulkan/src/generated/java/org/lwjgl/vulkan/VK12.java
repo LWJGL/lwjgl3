@@ -125,7 +125,8 @@ public class VK12 extends VK11 {
         VK_DRIVER_ID_IMAGINATION_OPEN_SOURCE_MESA  = 25,
         VK_DRIVER_ID_MESA_HONEYKRISP               = 26,
         VK_DRIVER_ID_VULKAN_SC_EMULATION_ON_VULKAN = 27,
-        VK_DRIVER_ID_MESA_KOSMICKRISP              = 28;
+        VK_DRIVER_ID_MESA_KOSMICKRISP              = 28,
+        VK_DRIVER_ID_MESA_GFXSTREAM                = 29;
 
     public static final int
         VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY = 0,

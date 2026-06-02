@@ -1807,6 +1807,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_NV_cooperative_matrix;
     /** When true, {@code NV_cooperative_matrix2} is supported. */
     public final boolean VK_NV_cooperative_matrix2;
+    /** When true, {@code NV_cooperative_matrix_decode_vector} is supported. */
+    public final boolean VK_NV_cooperative_matrix_decode_vector;
     /** When true, {@code NV_cooperative_vector} is supported. */
     public final boolean VK_NV_cooperative_vector;
     /** When true, {@code NV_copy_memory_indirect} is supported. */
@@ -2327,6 +2329,7 @@ public class VKCapabilitiesDevice {
         VK_NV_compute_shader_derivatives = ext.contains("VK_NV_compute_shader_derivatives");
         VK_NV_cooperative_matrix = ext.contains("VK_NV_cooperative_matrix");
         VK_NV_cooperative_matrix2 = ext.contains("VK_NV_cooperative_matrix2");
+        VK_NV_cooperative_matrix_decode_vector = ext.contains("VK_NV_cooperative_matrix_decode_vector");
         VK_NV_cooperative_vector = check_NV_cooperative_vector(provider, caps, ext);
         VK_NV_copy_memory_indirect = check_NV_copy_memory_indirect(provider, caps, ext);
         VK_NV_corner_sampled_image = ext.contains("VK_NV_corner_sampled_image");

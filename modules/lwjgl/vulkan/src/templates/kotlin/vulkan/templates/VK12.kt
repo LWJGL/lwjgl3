@@ -137,7 +137,8 @@ val VK12 = "VK12".nativeClass(Module.VULKAN, "VK12", prefix = "VK", binding = VK
         "DRIVER_ID_IMAGINATION_OPEN_SOURCE_MESA".."25",
         "DRIVER_ID_MESA_HONEYKRISP".."26",
         "DRIVER_ID_VULKAN_SC_EMULATION_ON_VULKAN".."27",
-        "DRIVER_ID_MESA_KOSMICKRISP".."28"
+        "DRIVER_ID_MESA_KOSMICKRISP".."28",
+        "DRIVER_ID_MESA_GFXSTREAM".."29"
     )
 
     EnumConstant(
