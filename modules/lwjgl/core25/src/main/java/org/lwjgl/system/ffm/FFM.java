@@ -85,27 +85,25 @@ public final class FFM {
         var path = Path.of("bin", "classes", "lwjgl", "core", "META-INF", "versions", "25", "module-info.class");
 
         // Make the jdk.unsupported module a static requirement and export the org.lwjgl.system.ffm package
-        var moduleAttr = ModuleAttribute.of(ModuleDesc.of("org.lwjgl"), mab -> {
-            mab
-                .moduleVersion(System.getProperty("module.version"))
-                .requires(ModuleRequireInfo.of(ModuleDesc.of("java.base"), AccessFlag.MODULE.mask(), "25"))
-                .requires(ModuleRequireInfo.of(ModuleDesc.of("jdk.unsupported"), AccessFlag.STATIC_PHASE.mask(), null))
-                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl"), 0))
-                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system"), 0))
-                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.ffm"), 0))
-                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.ffm.mapping"), 0))
-                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.freebsd"), 0))
-                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.jni"), 0))
-                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.libc"), 0))
-                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.libffi"), 0))
-                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.linux"), 0))
-                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.macosx"), 0))
-                .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.windows"), 0));
-        });
+        var moduleAttr = ModuleAttribute.of(ModuleDesc.of("org.lwjgl"), mab -> mab
+            .moduleVersion(System.getProperty("module.version"))
+            .requires(ModuleRequireInfo.of(ModuleDesc.of("java.base"), AccessFlag.MODULE.mask(), "25"))
+            .requires(ModuleRequireInfo.of(ModuleDesc.of("jdk.unsupported"), AccessFlag.STATIC_PHASE.mask(), null))
+            .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl"), 0))
+            .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system"), 0))
+            .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.ffm"), 0))
+            .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.ffm.mapping"), 0))
+            .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.freebsd"), 0))
+            .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.jni"), 0))
+            .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.libc"), 0))
+            .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.libffi"), 0))
+            .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.linux"), 0))
+            .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.macosx"), 0))
+            .exports(ModuleExportInfo.of(PackageDesc.of("org.lwjgl.system.windows"), 0)));
 
         try {
             ClassFile.of()
-                .buildModuleTo(path, moduleAttr);
+                .buildModuleTo(path, moduleAttr, cb -> cb.withVersion(JAVA_25_VERSION, 0));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
