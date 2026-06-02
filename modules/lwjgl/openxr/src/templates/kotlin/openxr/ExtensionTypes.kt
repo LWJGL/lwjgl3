@@ -232,6 +232,7 @@ val XrSpatialMarkerAprilTagDictEXT = "XrSpatialMarkerAprilTagDictEXT".enumType
 val XrSpatialPersistenceScopeEXT = "XrSpatialPersistenceScopeEXT".enumType
 val XrSpatialPersistenceContextResultEXT = "XrSpatialPersistenceContextResultEXT".enumType
 val XrSpatialPersistenceStateEXT = "XrSpatialPersistenceStateEXT".enumType
+val XrHapticParametricStreamFrameTypeEXT = "XrHapticParametricStreamFrameTypeEXT".enumType
 val XrSpatialObjectSemanticLabelANDROID = "XrSpatialObjectSemanticLabelANDROID".enumType
 val XrBatteryStateDisplayStateFlagBitsEXT = "XrBatteryStateDisplayStateFlagBitsEXT".enumType
 
@@ -5079,6 +5080,46 @@ val XrSpatialComponentPersistenceListEXT = struct(Module.OPENXR, "XrSpatialCompo
     nullable..opaque_p("next")
     AutoSize("persistData")..uint32_t("persistDataCount")
     XrSpatialPersistenceDataEXT.p("persistData")
+}
+
+val XrHapticParametricPropertiesEXT = struct(Module.OPENXR, "XrHapticParametricPropertiesEXT") {
+    Expression("#TYPE_HAPTIC_PARAMETRIC_PROPERTIES_EXT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrDuration("idealFrameSubmissionRate")
+    XrDuration("minimumFirstFrameDuration")
+    float("minFrequencyHz")
+    float("maxFrequencyHz")
+}
+
+val XrHapticParametricPointEXT = struct(Module.OPENXR, "XrHapticParametricPointEXT") {
+    XrDuration("time")
+    float("value")
+}
+
+val XrHapticParametricTransientEXT = struct(Module.OPENXR, "XrHapticParametricTransientEXT") {
+    XrDuration("time")
+    float("amplitude")
+    float("frequency")
+}
+
+val XrHapticParametricVibrationEXT = struct(Module.OPENXR, "XrHapticParametricVibrationEXT", parentStruct = XrHapticBaseHeader) {
+    Expression("#TYPE_HAPTIC_PARAMETRIC_VIBRATION_EXT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("amplitudePoints")..uint32_t("amplitudePointCount")
+    XrHapticParametricPointEXT.const.p("amplitudePoints")
+    AutoSize("frequencyPoints", optional = true)..uint32_t("frequencyPointCount")
+    nullable..XrHapticParametricPointEXT.const.p("frequencyPoints")
+    AutoSize("transients", optional = true)..uint32_t("transientCount")
+    nullable..XrHapticParametricTransientEXT.const.p("transients")
+    float("minFrequencyHz")
+    float("maxFrequencyHz")
+    XrHapticParametricStreamFrameTypeEXT("streamFrameType")
+}
+
+val XrSystemHapticParametricPropertiesEXT = struct(Module.OPENXR, "XrSystemHapticParametricPropertiesEXT", mutable = false) {
+    Expression("#TYPE_SYSTEM_HAPTIC_PARAMETRIC_PROPERTIES_EXT")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsParametricHaptics")
 }
 
 val XrSpatialEntityPersistInfoEXT = struct(Module.OPENXR, "XrSpatialEntityPersistInfoEXT") {

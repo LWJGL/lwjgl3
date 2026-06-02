@@ -173,6 +173,8 @@ public class XrSystemProperties extends Struct<XrSystemProperties> implements Na
     public XrSystemProperties next(XrSystemHandTrackingMeshPropertiesMSFT value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSystemHandTrackingPropertiesEXT} value to the {@code next} chain. */
     public XrSystemProperties next(XrSystemHandTrackingPropertiesEXT value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrSystemHapticParametricPropertiesEXT} value to the {@code next} chain. */
+    public XrSystemProperties next(XrSystemHapticParametricPropertiesEXT value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSystemHeadsetIdPropertiesMETA} value to the {@code next} chain. */
     public XrSystemProperties next(XrSystemHeadsetIdPropertiesMETA value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSystemImageTrackingPropertiesANDROID} value to the {@code next} chain. */
@@ -524,6 +526,8 @@ public class XrSystemProperties extends Struct<XrSystemProperties> implements Na
         public XrSystemProperties.Buffer next(XrSystemHandTrackingMeshPropertiesMSFT value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSystemHandTrackingPropertiesEXT} value to the {@code next} chain. */
         public XrSystemProperties.Buffer next(XrSystemHandTrackingPropertiesEXT value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrSystemHapticParametricPropertiesEXT} value to the {@code next} chain. */
+        public XrSystemProperties.Buffer next(XrSystemHapticParametricPropertiesEXT value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSystemHeadsetIdPropertiesMETA} value to the {@code next} chain. */
         public XrSystemProperties.Buffer next(XrSystemHeadsetIdPropertiesMETA value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSystemImageTrackingPropertiesANDROID} value to the {@code next} chain. */
