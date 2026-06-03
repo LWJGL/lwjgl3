@@ -18,11 +18,13 @@ struct __kernel_timespec {
 /* <linux/time_types.h> is not available, so it can't be included */
 #define UAPI_LINUX_IO_URING_H_SKIP_LINUX_TIME_TYPES_H 1
 
+#if !defined(__glibc_has_open_how) && !defined(_UAPI_LINUX_OPENAT2_H)
 struct open_how {
 	uint64_t	flags;
 	uint64_t	mode;
 	uint64_t	resolve;
 };
+#endif
 
 #ifndef BLOCK_URING_CMD_DISCARD
 #define BLOCK_URING_CMD_DISCARD                        _IO(0x12, 0)

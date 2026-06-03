@@ -2738,7 +2738,7 @@ static int read_non_idat_chunks(spng_ctx *ctx)
                 ret = read_chunk_bytes(ctx, peek_bytes);
                 if(ret) return ret;
 
-                unsigned char *keyword_nul = memchr(ctx->data, '\0', peek_bytes);
+                const unsigned char *keyword_nul = memchr(ctx->data, '\0', peek_bytes);
                 if(keyword_nul == NULL) return SPNG_EICCP_NAME;
 
                 uint32_t keyword_len = keyword_nul - ctx->data;

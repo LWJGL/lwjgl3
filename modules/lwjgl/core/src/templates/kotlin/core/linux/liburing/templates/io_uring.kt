@@ -14,8 +14,6 @@ val LibIOURing = "LibIOURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubP
 #ifdef LWJGL_LINUX
     _Pragma("GCC diagnostic ignored \"-Wsign-compare\"")
 #endif
-#include "liburing/compat.h"
-#include "liburing/io_uring.h"
 #include "syscall.h"
 ENABLE_WARNINGS()""")
 
