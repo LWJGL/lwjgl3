@@ -1,0 +1,11 @@
+--- /tmp/lwjgl-upstream/lwjgl3-3.3.3/modules/lwjgl/rpmalloc/src/main/c/rpmalloc.c	2023-09-16 21:09:29.000000000 +0800
++++ modules/lwjgl/rpmalloc/src/main/c/rpmalloc.c	2026-06-05 20:07:28.941901300 +0800
+@@ -808,6 +808,8 @@
+ #    else
+ 	__asm__ volatile ("mrs %0, tpidr_el0" : "=r" (tid));
+ #    endif
++#  elif defined(__loongarch__) || defined(__loongarch64)
++	__asm__ volatile ("or %0, $tp, $zero" : "=r" (tid));
+ #  else
+ #    error This platform needs implementation of get_thread_id()
+ #  endif

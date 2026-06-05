@@ -1,0 +1,23 @@
+--- /tmp/lwjgl-upstream/lwjgl3-3.3.3/modules/lwjgl/core/src/main/java/org/lwjgl/system/Platform.java	2023-09-16 21:09:29.000000000 +0800
++++ modules/lwjgl/core/src/main/java/org/lwjgl/system/Platform.java	2026-06-05 17:51:38.879277580 +0800
+@@ -54,7 +54,8 @@
+         X64(true),
+         X86(false),
+         ARM64(true),
+-        ARM32(false);
++        ARM32(false),
++        LOONGARCH64(true);
+ 
+         static final Architecture current;
+ 
+@@ -66,7 +67,9 @@
+ 
+             current = osArch.startsWith("arm") || osArch.startsWith("aarch64")
+                 ? (is64Bit ? Architecture.ARM64 : Architecture.ARM32)
+-                : (is64Bit ? Architecture.X64 : Architecture.X86);
++                : osArch.startsWith("loongarch64") || osArch.startsWith("loong64")
++                    ? Architecture.LOONGARCH64
++                    : (is64Bit ? Architecture.X64 : Architecture.X86);
+         }
+ 
+         Architecture(boolean is64Bit) {

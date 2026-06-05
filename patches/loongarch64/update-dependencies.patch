@@ -1,0 +1,13 @@
+--- /tmp/lwjgl-upstream/lwjgl3-3.3.3/update-dependencies.xml	2023-09-16 21:09:29.000000000 +0800
++++ update-dependencies.xml	2026-06-05 17:56:12.174935387 +0800
+@@ -16,8 +16,8 @@
+         <property name="jquery" value="3.5.1"/>
+         <property name="slf4j" value="1.7.36"/>
+     <property name="joml" value="1.10.5"/>
+-    <property name="kotlinc-version" value="1.9.0"/>
+-    <property name="kotlinc-build" value="1.9.0-release-358"/>
++    <property name="kotlinc-version" value="2.1.20"/>
++    <property name="kotlinc-build" value="2.1.20-release-456"/>
+     <property name="jmh-core" value="1.37"/>
+         <property name="jmh-generator-annprocess" value="1.37"/>
+         <property name="jopt-simple" value="5.0.4"/>

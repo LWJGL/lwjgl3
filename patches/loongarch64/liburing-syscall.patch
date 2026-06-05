@@ -1,0 +1,9 @@
+--- /tmp/lwjgl-upstream/lwjgl3-3.3.3/modules/lwjgl/core/src/main/c/linux/liburing/syscall.h	2023-09-16 21:09:29.000000000 +0800
++++ modules/lwjgl/core/src/main/c/linux/liburing/syscall.h	2026-06-05 17:52:11.378284373 +0800
+@@ -48,4 +48,4 @@
+ /* libc syscall wrappers. */
+ #include "arch/generic/syscall.h"
+ #endif
+-#endif
++#endif
+\ 文件末尾没有换行符

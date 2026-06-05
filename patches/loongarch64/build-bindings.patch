@@ -1,0 +1,45 @@
+--- /tmp/lwjgl-upstream/lwjgl3-3.3.3/config/build-bindings.xml	2023-09-16 21:09:29.000000000 +0800
++++ config/build-bindings.xml	2026-06-05 17:52:49.949013684 +0800
+@@ -37,7 +37,10 @@
+     <property name="binding.lz4" value="true"/>
+     <condition property="binding.meow" value="true" else="false">
+         <or>
+-            <not><isset property="build.arch.arm"/></not>
++            <and>
++                <not><isset property="build.arch.arm"/></not>
++                <not><isset property="build.arch.loongarch64"/></not>
++            </and>
+             <isset property="build.arch.arm64"/>
+         </or>
+     </condition>
+@@ -50,7 +53,7 @@
+     <property name="binding.opencl" value="true"/>
+     <property name="binding.opengl" value="true"/>
+     <property name="binding.opengles" value="true"/>
+-    <condition property="binding.openvr" value="false" else="true"><isset property="build.arch.arm"/></condition>
++    <condition property="binding.openvr" value="false" else="true"><or><isset property="build.arch.arm"/><isset property="build.arch.loongarch64"/></or></condition>
+     <property name="binding.openxr" value="true"/>
+     <property name="binding.opus" value="true"/>
+     <property name="binding.par" value="true"/>
+@@ -63,11 +66,11 @@
+     <property name="binding.rpmalloc" value="true"/>
+     <property name="binding.shaderc" value="true"/>
+     <property name="binding.spvc" value="true"/>
+-    <condition property="binding.sse" value="false" else="true"><isset property="build.arch.arm"/></condition>
++    <condition property="binding.sse" value="false" else="true"><or><isset property="build.arch.arm"/><isset property="build.arch.loongarch64"/></or></condition>
+     <property name="binding.stb" value="true"/>
+     <property name="binding.tinyexr" value="true"/>
+     <property name="binding.tinyfd" value="true"/>
+-    <condition property="binding.tootle" value="false" else="true"><isset property="build.arch.arm"/></condition>
++    <condition property="binding.tootle" value="false" else="true"><or><isset property="build.arch.arm"/><isset property="build.arch.loongarch64"/></or></condition>
+     <property name="binding.vulkan" value="true"/>
+     <condition property="binding.vma" value="true" else="false"><istrue value="${binding.vulkan}"/></condition>
+     <property name="binding.xxhash" value="true"/>
+@@ -90,6 +93,7 @@
+             <isset property="OCULUS_SDK_PATH"/>
+             <available file="${OCULUS_SDK_PATH}/LibOVR/Include/OVR_CAPI.h"/>
+             <not><isset property="build.arch.arm"/></not>
++            <not><isset property="build.arch.loongarch64"/></not>
+         </and>
+     </condition>
+ 

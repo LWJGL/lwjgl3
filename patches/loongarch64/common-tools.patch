@@ -1,0 +1,11 @@
+--- /tmp/lwjgl-upstream/lwjgl3-3.3.3/modules/lwjgl/core/src/main/c/common_tools.c	2023-09-16 21:09:29.000000000 +0800
++++ modules/lwjgl/core/src/main/c/common_tools.c	2026-06-05 20:07:53.472325062 +0800
+@@ -36,7 +36,7 @@
+ }
+ 
+ static inline EnvData* createEnvData(jboolean async, JNIEnv* env) {
+-    EnvData* data = (EnvData*)calloc(sizeof(EnvData), 1);
++    EnvData* data = (EnvData*)calloc(1, sizeof(EnvData));
+ 
+     data->async = async;
+     data->env = env;

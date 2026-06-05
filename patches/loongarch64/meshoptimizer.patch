@@ -1,0 +1,304 @@
+--- /tmp/lwjgl-upstream/lwjgl3-3.3.3/modules/lwjgl/meshoptimizer/src/main/c/vertexfilter.cpp	2023-09-16 21:09:29.000000000 +0800
++++ modules/lwjgl/meshoptimizer/src/main/c/vertexfilter.cpp	2026-06-05 19:57:50.510620219 +0800
+@@ -35,6 +35,16 @@
+ #undef SIMD_SSE
+ #endif
+ 
++// LoongArch LSX SIMD
++#if defined(__loongarch_sx)
++#define SIMD_LOONGARCH_SX
++#include <lsxintrin.h>
++#include <cstdint>
++// Prevent compiling other variant when LoongArch SIMD compilation is active
++#undef SIMD_NEON
++#undef SIMD_SSE
++#undef SIMD_WASM
++#endif
+ #endif // !MESHOPTIMIZER_NO_SIMD
+ 
+ #ifdef SIMD_SSE
+@@ -167,7 +177,7 @@
+ }
+ #endif
+ 
+-#if defined(SIMD_SSE) || defined(SIMD_NEON) || defined(SIMD_WASM)
++#if defined(SIMD_SSE) || defined(SIMD_NEON) || defined(SIMD_WASM) || defined(SIMD_LOONGARCH_SX)
+ template <typename T>
+ static void dispatchSimd(void (*process)(T*, size_t), T* data, size_t count, size_t stride)
+ {
+@@ -795,6 +805,275 @@
+ 	}
+ }
+ #endif
++
++#ifdef SIMD_LOONGARCH_SX
++// Work around missing intrinsics in upstream GCC
++#ifndef __lsx_vfabs_s
++#define __lsx_vfabs_s(v) ((v4f32)__lsx_vbitclri_w((v4i32)(v), 31))
++#endif
++static void decodeFilterOctSimd8(signed char* data, size_t count)
++{
++	const v4i32 sign = (v4i32)__lsx_vreplgr2vr_w(0x80000000);
++
++	for (size_t i = 0; i < count; i += 4)
++	{
++		v4i32 n4 = (v4i32)__lsx_vld(&data[i * 4], 0);
++
++		// sign-extends each of x,y in [x y ? ?] with arithmetic shifts
++		v4i32 xf = __lsx_vsrai_w(__lsx_vslli_w(n4, 24), 24);
++		v4i32 yf = __lsx_vsrai_w(__lsx_vslli_w(n4, 16), 24);
++		v4i32 zf = __lsx_vsrai_w(__lsx_vslli_w(n4, 8), 24);
++
++		v4f32 x = __lsx_vffint_s_w(xf);
++		v4f32 y = __lsx_vffint_s_w(yf);
++		v4f32 z = __lsx_vfsub_s(__lsx_vffint_s_w(zf), __lsx_vfadd_s(__lsx_vfabs_s(x), __lsx_vfabs_s(y)));
++
++		v4f32 t = __lsx_vfmin_s(z, (v4f32)__lsx_vreplgr2vr_w(0));
++
++		x = __lsx_vfadd_s(x, (v4f32)__lsx_vxor_v((v16u8)t, __lsx_vand_v((v16u8)x, (v16u8)sign)));
++		y = __lsx_vfadd_s(y, (v4f32)__lsx_vxor_v((v16u8)t, __lsx_vand_v((v16u8)y, (v16u8)sign)));
++
++		v4f32 ll = __lsx_vfmadd_s(y, y, __lsx_vfmadd_s(x, x, __lsx_vfmul_s(z, z)));
++		v4f32 rl = __lsx_vfrsqrt_s((__m128)ll);
++		v4f32 s = __lsx_vfmul_s((v4f32)__lsx_vreplgr2vr_w(0x42fe0000), rl);
++
++		const v4f32 fsnap = (v4f32)__lsx_vreplgr2vr_w(0x4B400000);
++
++		v4i32 xr = (v4i32)__lsx_vfmadd_s(x, s, fsnap);
++		v4i32 yr = (v4i32)__lsx_vfmadd_s(y, s, fsnap);
++		v4i32 zr = (v4i32)__lsx_vfmadd_s(z, s, fsnap);
++
++		v4i32 res = __lsx_vbitsel_v((v16u8)n4,
++		    (v16u8)__lsx_vor_v(
++		        __lsx_vslli_w(zr, 16),
++		        (v16u8)__lsx_vor_v(
++		            __lsx_vslli_w(xr, 8),
++		            (v16u8)yr)),
++		    (v16u8)__lsx_vreplgr2vr_w(0xff000000));
++
++		__lsx_vst((v16u8)res, &data[i * 4], 0);
++	}
++}
++
++static void decodeFilterOctSimd16(short* data, size_t count)
++{
++	const v4i32 sign = (v4i32)__lsx_vreplgr2vr_w(0x80000000);
++
++	for (size_t i = 0; i < count; i += 4)
++	{
++		v4i32 n4_0 = (v4i32)__lsx_vld(&data[(i + 0) * 4], 0);
++		v4i32 n4_1 = (v4i32)__lsx_vld(&data[(i + 2) * 4], 0);
++
++		v4i32 n4 = __lsx_vilvl_w(n4_1, n4_0);
++
++		v4i32 xf = __lsx_vsrai_w(__lsx_vslli_w(n4, 16), 16);
++		v4i32 yf = __lsx_vsrai_w(n4, 16);
++
++		v4i32 z4 = __lsx_vilvh_w(n4_1, n4_0);
++		v4i32 zf = __lsx_vand_v(z4, (v4i32)__lsx_vreplgr2vr_w(0x7fff));
++
++		v4f32 x = __lsx_vffint_s_w(xf);
++		v4f32 y = __lsx_vffint_s_w(yf);
++		v4f32 z = __lsx_vfsub_s(__lsx_vffint_s_w(zf), __lsx_vfadd_s(__lsx_vfabs_s(x), __lsx_vfabs_s(y)));
++
++		v4f32 t = __lsx_vfmin_s(z, (v4f32)__lsx_vreplgr2vr_w(0));
++
++		x = __lsx_vfadd_s(x, (v4f32)__lsx_vxor_v((v16u8)t, __lsx_vand_v((v16u8)x, (v16u8)sign)));
++		y = __lsx_vfadd_s(y, (v4f32)__lsx_vxor_v((v16u8)t, __lsx_vand_v((v16u8)y, (v16u8)sign)));
++
++		v4f32 ll = __lsx_vfmadd_s(y, y, __lsx_vfmadd_s(x, x, __lsx_vfmul_s(z, z)));
++		v4f32 s = __lsx_vfdiv_s((v4f32)__lsx_vreplgr2vr_w(0x46fffe00), __lsx_vfsqrt_s(ll));
++
++		const v4f32 fsnap = (v4f32)__lsx_vreplgr2vr_w(0x4B400000);
++
++		v4i32 xr = (v4i32)__lsx_vfmadd_s(x, s, fsnap);
++		v4i32 yr = (v4i32)__lsx_vfmadd_s(y, s, fsnap);
++		v4i32 zr = (v4i32)__lsx_vfmadd_s(z, s, fsnap);
++
++		v4i32 xzr = __lsx_vor_v((v16u8)xr, __lsx_vslli_w(zr, 16));
++		v4i32 y0r = __lsx_vand_v(yr, (v4i32)__lsx_vreplgr2vr_w(0xffff));
++
++		v4i32 res_0 = __lsx_vilvl_h((v8i16)y0r, (v8i16)xzr);
++		v4i32 res_1 = __lsx_vilvh_h((v8i16)y0r, (v8i16)xzr);
++
++		v16u8 wmask = (v16u8)__lsx_vreplgr2vr_w(0xffff0000);
++		res_0 = __lsx_vbitsel_v((v16u8)res_0, (v16u8)n4_0, wmask);
++		res_1 = __lsx_vbitsel_v((v16u8)res_1, (v16u8)n4_1, wmask);
++
++		__lsx_vst((v16u8)res_0, &data[(i + 0) * 4], 0);
++		__lsx_vst((v16u8)res_1, &data[(i + 2) * 4], 0);
++	}
++}
++
++static void decodeFilterQuatSimd(short* data, size_t count)
++{
++	const float scale_val = 32767.f / sqrtf(2.f);
++	v4f32 scale_v = (v4f32)__lsx_vreplgr2vr_w(*(int*)&scale_val);
++
++	for (size_t i = 0; i < count; i += 4)
++	{
++		v4i32 q4_0 = (v4i32)__lsx_vld(&data[(i + 0) * 4], 0);
++		v4i32 q4_1 = (v4i32)__lsx_vld(&data[(i + 2) * 4], 0);
++
++		v4i32 q4_xy = __lsx_vilvl_w(q4_1, q4_0);
++		v4i32 q4_zc = __lsx_vilvh_w(q4_1, q4_0);
++
++		v4i32 xf = __lsx_vsrai_w(__lsx_vslli_w(q4_xy, 16), 16);
++		v4i32 yf = __lsx_vsrai_w(q4_xy, 16);
++		v4i32 zf = __lsx_vsrai_w(__lsx_vslli_w(q4_zc, 16), 16);
++		v4i32 cf = __lsx_vsrai_w(q4_zc, 16);
++
++		v4i32 sf = __lsx_vor_v((v16u8)cf, (v16u8)__lsx_vreplgr2vr_w(3));
++		v4f32 s = __lsx_vffint_s_w(sf);
++
++		v4f32 x = __lsx_vffint_s_w(xf);
++		v4f32 y = __lsx_vffint_s_w(yf);
++		v4f32 z = __lsx_vffint_s_w(zf);
++
++		v4f32 ws = __lsx_vfmul_s(s, s);
++		v4f32 ww = __lsx_vfsub_s(__lsx_vfadd_s(ws, ws),
++		    __lsx_vfmadd_s(y, y, __lsx_vfmadd_s(x, x, __lsx_vfmul_s(z, z))));
++		v4f32 w = __lsx_vfsqrt_s(__lsx_vfmax_s(ww, (v4f32)__lsx_vreplgr2vr_w(0)));
++
++		v4f32 ss = __lsx_vfdiv_s(scale_v, s);
++
++		const v4f32 fsnap = (v4f32)__lsx_vreplgr2vr_w(0x4B400000);
++
++		v4i32 xr = (v4i32)__lsx_vfmadd_s(x, ss, fsnap);
++		v4i32 yr = (v4i32)__lsx_vfmadd_s(y, ss, fsnap);
++		v4i32 zr = (v4i32)__lsx_vfmadd_s(z, ss, fsnap);
++		v4i32 wr = (v4i32)__lsx_vfmadd_s(w, ss, fsnap);
++
++		v4i32 xzr = __lsx_vor_v((v16u8)xr, __lsx_vslli_w(zr, 16));
++		v4i32 wyr = __lsx_vor_v((v16u8)wr, __lsx_vslli_w(yr, 16));
++
++		v2i64 res_0 = (v2i64)__lsx_vilvl_h((v8i16)xzr, (v8i16)wyr);
++		v2i64 res_1 = (v2i64)__lsx_vilvh_h((v8i16)xzr, (v8i16)wyr);
++
++		volatile v2i64 res[2];
++		__lsx_vst((v16u8)res_0, (unsigned char*)&res[0], 0);
++		__lsx_vst((v16u8)res_1, (unsigned char*)&res[1], 0);
++
++		uint64_t out[4];
++		out[0] = rotateleft64((uint64_t)(res[0][0]), data[(i + 0) * 4 + 3] << 4);
++		out[1] = rotateleft64((uint64_t)(res[0][1]), data[(i + 1) * 4 + 3] << 4);
++		out[2] = rotateleft64((uint64_t)(res[1][0]), data[(i + 2) * 4 + 3] << 4);
++		out[3] = rotateleft64((uint64_t)(res[1][1]), data[(i + 3) * 4 + 3] << 4);
++		memcpy(&data[i * 4], out, 4 * sizeof(uint64_t));
++	}
++}
++
++static void decodeFilterExpSimd(unsigned int* data, size_t count)
++{
++	for (size_t i = 0; i < count; i += 4)
++	{
++		v4i32 v = (v4i32)__lsx_vld(&data[i], 0);
++
++		v4i32 ef = __lsx_vsrai_w(v, 24);
++		v4i32 es = __lsx_vslli_w(__lsx_vadd_w(ef, (v4i32)__lsx_vreplgr2vr_w(127)), 23);
++
++		v4i32 mf = __lsx_vsrai_w(__lsx_vslli_w(v, 8), 8);
++		v4f32 m = __lsx_vffint_s_w(mf);
++
++		v4f32 r = __lsx_vfmul_s((v4f32)es, m);
++
++		__lsx_vst((v16u8)r, (unsigned char*)&data[i], 0);
++	}
++}
++
++static void decodeFilterColorSimd8(unsigned char* data, size_t count)
++{
++	for (size_t i = 0; i < count; i += 4)
++	{
++		v4i32 c4 = (v4i32)__lsx_vld(&data[i * 4], 0);
++
++		v4i32 yf = __lsx_vand_v(c4, (v4i32)__lsx_vreplgr2vr_w(0xff));
++		v4i32 cof = __lsx_vsrai_w(__lsx_vslli_w(c4, 16), 24);
++		v4i32 cgf = __lsx_vsrai_w(__lsx_vslli_w(c4, 8), 24);
++		v4i32 af = (v4i32)__lsx_vsrli_w((v4u32)c4, 24);
++
++		v4i32 as = af;
++		as = __lsx_vor_v((v16u8)as, (v16u8)__lsx_vsrai_w(as, 1));
++		as = __lsx_vor_v((v16u8)as, (v16u8)__lsx_vsrai_w(as, 2));
++		as = __lsx_vor_v((v16u8)as, (v16u8)__lsx_vsrai_w(as, 4));
++
++		af = __lsx_vor_v((v16u8)__lsx_vand_v((v16u8)__lsx_vslli_w(af, 1), (v16u8)as),
++		                 (v16u8)__lsx_vand_v((v16u8)af, (v16u8)__lsx_vreplgr2vr_w(1)));
++
++		v4f32 ss = __lsx_vfmul_s((v4f32)__lsx_vreplgr2vr_w(0x437f0000),
++		    __lsx_vfrecip_s(__lsx_vffint_s_w(as)));
++
++		v4i32 rf = __lsx_vadd_w(yf, __lsx_vsub_w(cof, cgf));
++		v4i32 gf = __lsx_vadd_w(yf, cgf);
++		v4i32 bf = __lsx_vsub_w(yf, __lsx_vadd_w(cof, cgf));
++
++		const v4f32 fsnap = (v4f32)__lsx_vreplgr2vr_w(0x4B400000);
++
++		v4i32 rr = (v4i32)__lsx_vfmadd_s(__lsx_vffint_s_w(rf), ss, fsnap);
++		v4i32 gr = (v4i32)__lsx_vfmadd_s(__lsx_vffint_s_w(gf), ss, fsnap);
++		v4i32 br = (v4i32)__lsx_vfmadd_s(__lsx_vffint_s_w(bf), ss, fsnap);
++		v4i32 ar = (v4i32)__lsx_vfmadd_s(__lsx_vffint_s_w(af), ss, fsnap);
++
++		v4i32 res = __lsx_vor_v(
++		    (v16u8)rr,
++		    __lsx_vor_v(
++		        __lsx_vslli_w(gr, 8),
++		        __lsx_vor_v(
++		            __lsx_vslli_w(br, 16),
++		            __lsx_vslli_w(ar, 24))));
++
++		__lsx_vst((v16u8)res, &data[i * 4], 0);
++	}
++}
++
++static void decodeFilterColorSimd16(unsigned short* data, size_t count)
++{
++	for (size_t i = 0; i < count; i += 4)
++	{
++		v4i32 c4_0 = (v4i32)__lsx_vld(&data[(i + 0) * 4], 0);
++		v4i32 c4_1 = (v4i32)__lsx_vld(&data[(i + 2) * 4], 0);
++
++		v4i32 c4_yco = __lsx_vilvl_w(c4_1, c4_0);
++		v4i32 c4_cga = __lsx_vilvh_w(c4_1, c4_0);
++
++		v4i32 yf = __lsx_vand_v(c4_yco, (v4i32)__lsx_vreplgr2vr_w(0xffff));
++		v4i32 cof = __lsx_vsrai_w(c4_yco, 16);
++		v4i32 cgf = __lsx_vsrai_w(__lsx_vslli_w(c4_cga, 16), 16);
++		v4i32 af = (v4i32)__lsx_vsrli_w((v4u32)c4_cga, 16);
++
++		v4i32 as = af;
++		as = __lsx_vor_v((v16u8)as, (v16u8)__lsx_vsrai_w(as, 1));
++		as = __lsx_vor_v((v16u8)as, (v16u8)__lsx_vsrai_w(as, 2));
++		as = __lsx_vor_v((v16u8)as, (v16u8)__lsx_vsrai_w(as, 4));
++		as = __lsx_vor_v((v16u8)as, (v16u8)__lsx_vsrai_w(as, 8));
++
++		af = __lsx_vor_v((v16u8)__lsx_vand_v((v16u8)__lsx_vslli_w(af, 1), (v16u8)as),
++		                 (v16u8)__lsx_vand_v((v16u8)af, (v16u8)__lsx_vreplgr2vr_w(1)));
++
++		v4f32 ss = __lsx_vfdiv_s((v4f32)__lsx_vreplgr2vr_w(0x477fff00), __lsx_vffint_s_w(as));
++
++		v4i32 rf = __lsx_vadd_w(yf, __lsx_vsub_w(cof, cgf));
++		v4i32 gf = __lsx_vadd_w(yf, cgf);
++		v4i32 bf = __lsx_vsub_w(yf, __lsx_vadd_w(cof, cgf));
++
++		const v4f32 fsnap = (v4f32)__lsx_vreplgr2vr_w(0x4B400000);
++
++		v4i32 rr = (v4i32)__lsx_vfmadd_s(__lsx_vffint_s_w(rf), ss, fsnap);
++		v4i32 gr = (v4i32)__lsx_vfmadd_s(__lsx_vffint_s_w(gf), ss, fsnap);
++		v4i32 br = (v4i32)__lsx_vfmadd_s(__lsx_vffint_s_w(bf), ss, fsnap);
++		v4i32 ar = (v4i32)__lsx_vfmadd_s(__lsx_vffint_s_w(af), ss, fsnap);
++
++		v4i32 rbr = __lsx_vor_v((v16u8)rr, __lsx_vslli_w(br, 16));
++		v4i32 gar = __lsx_vor_v((v16u8)gr, __lsx_vslli_w(ar, 16));
++
++		v4i32 res_0 = __lsx_vilvl_h((v8i16)gar, (v8i16)rbr);
++		v4i32 res_1 = __lsx_vilvh_h((v8i16)gar, (v8i16)rbr);
++
++		__lsx_vst((v16u8)res_0, (unsigned char*)&data[(i + 0) * 4], 0);
++		__lsx_vst((v16u8)res_1, (unsigned char*)&data[(i + 2) * 4], 0);
++	}
++}
++#endif
+ 
+ // optimized variant of frexp
+ inline int optlog2(float v)
