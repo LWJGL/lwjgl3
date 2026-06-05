@@ -54,7 +54,8 @@ public enum Platform {
         X64(true),
         X86(false),
         ARM64(true),
-        ARM32(false);
+        ARM32(false),
+        LOONGARCH64(true);
 
         static final Architecture current;
 
@@ -66,7 +67,9 @@ public enum Platform {
 
             current = osArch.startsWith("arm") || osArch.startsWith("aarch64")
                 ? (is64Bit ? Architecture.ARM64 : Architecture.ARM32)
-                : (is64Bit ? Architecture.X64 : Architecture.X86);
+                : osArch.startsWith("loongarch64") || osArch.startsWith("loong64")
+                    ? Architecture.LOONGARCH64
+                    : (is64Bit ? Architecture.X64 : Architecture.X86);
         }
 
         Architecture(boolean is64Bit) {

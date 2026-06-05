@@ -808,6 +808,8 @@ get_thread_id(void) {
 #    else
 	__asm__ volatile ("mrs %0, tpidr_el0" : "=r" (tid));
 #    endif
+#  elif defined(__loongarch__) || defined(__loongarch64)
+	__asm__ volatile ("or %0, $tp, $zero" : "=r" (tid));
 #  else
 #    error This platform needs implementation of get_thread_id()
 #  endif

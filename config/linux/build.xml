@@ -5,6 +5,7 @@
 <project name="native-linux" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
     <import file="../build-definitions.xml"/>
 
+    <property name="gcc.prefix" value="" if:set="build.arch.loongarch64"/>
     <property name="gcc.prefix" value="aarch64-linux-gnu-" if:set="build.arch.arm64"/>
     <property name="gcc.prefix" value="arm-linux-gnueabihf-" if:set="build.arch.arm32"/>
 
@@ -38,6 +39,7 @@
                 <arg line="-c -std=gnu++14" if:set="cpp"/>
                 <arg line="-m64" if:set="build.arch.x64"/>
                 <arg line="-m32 -mfpmath=sse -msse -msse2" if:set="build.arch.x86"/>
+                <arg line="-march=la64v1.0 -flax-vector-conversions" if:set="build.arch.loongarch64"/>
                 <arg line="-O3 @{lto} -fPIC @{flags} -pthread -DNDEBUG -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
                 <arg line="-U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_GNU_SOURCE"/>
                 <arg line="-D_FILE_OFFSET_BITS=64"/>
@@ -127,6 +129,7 @@
                 <arg value="-shared"/>
                 <arg value="-m64" if:set="build.arch.x64"/>
                 <arg value="-m32" if:set="build.arch.x86"/>
+                <arg value="-march=la64v1.0" if:set="build.arch.loongarch64"/>
 
                 <arg line="-z noexecstack"/>
                 <arg line="-O3 -flto -fPIC -pthread -o ${lib.arch}/lib${name}.so"/>
@@ -175,9 +178,10 @@
             </beforeCompile>
             <source>
                 <arg value="-I${src.main.rel}/libffi"/>
+                <arg value="-I${src.main.rel}/libffi/loongarch64" if:set="build.arch.loongarch64"/>
                 <arg value="-I${src.main.rel}/libffi/aarch64" if:set="build.arch.arm64"/>
                 <arg value="-I${src.main.rel}/libffi/arm" if:set="build.arch.arm32"/>
-                <arg value="-I${src.main.rel}/libffi/x86" unless:set="build.arch.arm"/>
+                <arg value="-I${src.main.rel}/libffi/x86" unless:set="build.arch.nonx86"/>
                 <arg value="-DX86_64" if:set="build.arch.x64"/> <!-- for libffi/x86/ffitarget.h -->
                 <arg value="-I${src.main.rel}/${platform}/liburing"/>
                 <arg value="-I${src.main.rel}/${platform}/liburing/include"/>
@@ -263,12 +267,18 @@
         <build module="nfd" simple="true" linker="g++" if:true="${binding.nfd}">
             <beforeCompile>
                 <local name="linux.triplet"/>
-                <condition property="linux.triplet" value="x86_64-linux-gnu"><not><isset property="build.arch.arm"/></not></condition>
-                <condition property="linux.triplet" value="arm-linux-gnueabihf"><isset property="build.arch.arm32"/></condition>
-                <condition property="linux.triplet" value="aarch64-linux-gnu"><isset property="build.arch.arm64"/></condition>
+                <condition property="linux.triplet" value="loongarch64-linux-gnu" else="x86_64-linux-gnu">
+                    <isset property="build.arch.loongarch64"/>
+                </condition>
+                <condition property="linux.triplet" value="arm-linux-gnueabihf">
+                    <isset property="build.arch.arm32"/>
+                </condition>
+                <condition property="linux.triplet" value="aarch64-linux-gnu">
+                    <isset property="build.arch.arm64"/>
+                </condition>
 
                 <compile lang="c++">
-                    <arg line="-I/usr/include/gtk-3.0 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/lib/${linux.triplet}/glib-2.0/include -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/atk-1.0"/>
+                    <arg line="-I/usr/include/gtk-3.0 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -I/usr/lib/${linux.triplet}/glib-2.0/include -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/atk-1.0"/>
                     <arg value="-I${src.main.rel}/include"/>
                     <fileset dir="." includes="${src.main}/nfd_gtk.cpp"/>
                 </compile>
@@ -286,12 +296,18 @@
         <build module="nfd" suffix="_portal" simple="true" linker="g++" if:true="${binding.nfd}">
             <beforeCompile>
                 <local name="linux.triplet"/>
-                <condition property="linux.triplet" value="x86_64-linux-gnu"><not><isset property="build.arch.arm"/></not></condition>
-                <condition property="linux.triplet" value="arm-linux-gnueabihf"><isset property="build.arch.arm32"/></condition>
-                <condition property="linux.triplet" value="aarch64-linux-gnu"><isset property="build.arch.arm64"/></condition>
+                <condition property="linux.triplet" value="loongarch64-linux-gnu" else="x86_64-linux-gnu">
+                    <isset property="build.arch.loongarch64"/>
+                </condition>
+                <condition property="linux.triplet" value="arm-linux-gnueabihf">
+                    <isset property="build.arch.arm32"/>
+                </condition>
+                <condition property="linux.triplet" value="aarch64-linux-gnu">
+                    <isset property="build.arch.arm64"/>
+                </condition>
 
                 <compile lang="c++">
-                    <arg line="-I/usr/include/dbus-1.0 -I/usr/lib64/dbus-1.0/include -I/usr/lib/${linux.triplet}/dbus-1.0/include"/>
+                    <arg line="-I/usr/include/dbus-1.0 -I/usr/lib/dbus-1.0/include -I/usr/lib/${linux.triplet}/dbus-1.0/include"/>
                     <arg value="-I${src.main.rel}/include"/>
                     <fileset dir="." includes="${src.main}/nfd_portal.cpp"/>
                 </compile>
@@ -455,7 +471,7 @@
                     <fileset dir="." includes="${src.main}/common/*.c"/>
                     <fileset dir="." includes="${src.main}/compress/*.c"/>
                     <fileset dir="." includes="${src.main}/decompress/*.c"/>
-                    <fileset dir="." includes="${src.main}/decompress/*.S" unless:set="build.arch.arm"/>
+                    <fileset dir="." includes="${src.main}/decompress/*.S" unless:set="build.arch.nonx86"/>
                     <fileset dir="." includes="${src.main}/dictBuilder/*.c"/>
                     <fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/xxhash.c"/>
                 </compile>

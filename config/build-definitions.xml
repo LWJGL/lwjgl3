@@ -20,11 +20,19 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     -->
     <property name="build.arch" value="${env.LWJGL_BUILD_ARCH}" if:set="env.LWJGL_BUILD_ARCH"/>
 
+    <local name="isLoongArch64"/>
     <local name="is64Bit"/>
     <condition property="is64Bit" value="true" else="false">
         <or>
             <contains string="${os.arch}" substring="64"/>
             <contains string="${os.arch}" substring="armv8"/>
+        </or>
+    </condition>
+    <condition property="build.arch.loongarch64" value="true">
+        <or>
+            <contains string="${build.arch}" substring="loongarch64"/>
+            <contains string="${os.arch}"    substring="loongarch64"/>
+            <contains string="${os.arch}"    substring="loong64"/>
         </or>
     </condition>
     <condition property="build.arch.arm" value="true">
@@ -38,11 +46,12 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <!-- Normalize os.arch -->
     <condition property="build.arch" value="arm64" unless:set="build.arch"><and>     <isset property="build.arch.arm"/>      <istrue  value="${is64Bit}"/></and></condition>
     <condition property="build.arch" value="arm32" unless:set="build.arch"><and>     <isset property="build.arch.arm"/>      <isfalse value="${is64Bit}"/></and></condition>
-    <condition property="build.arch" value="x64"   unless:set="build.arch"><and><not><isset property="build.arch.arm"/></not><istrue  value="${is64Bit}"/></and></condition>
-    <condition property="build.arch" value="x86"   unless:set="build.arch"><and><not><isset property="build.arch.arm"/></not><isfalse value="${is64Bit}"/></and></condition>
+    <condition property="build.arch" value="loongarch64" unless:set="build.arch"><isset property="build.arch.loongarch64"/></condition>
+    <condition property="build.arch" value="x64"   unless:set="build.arch"><and><not><isset property="build.arch.arm"/></not><not><isset property="build.arch.loongarch64"/></not><istrue  value="${is64Bit}"/></and></condition>
+    <condition property="build.arch" value="x86"   unless:set="build.arch"><and><not><isset property="build.arch.arm"/></not><not><isset property="build.arch.loongarch64"/></not><isfalse value="${is64Bit}"/></and></condition>
 
-    <fail message="Invalid or unsupported build architecture: ${build.arch}. Supported: x64, x86, arm64, arm32">
-        <condition><not><matches string="${build.arch}" pattern="^(x64|x86|arm64|arm32)$"/></not></condition>
+    <fail message="Invalid or unsupported build architecture: ${build.arch}. Supported: x64, x86, arm64, arm32, loongarch64">
+        <condition><not><matches string="${build.arch}" pattern="^(x64|x86|arm64|arm32|loongarch64)$"/></not></condition>
     </fail>
 
     <property name="build.arch.${build.arch}" value="true"/>
