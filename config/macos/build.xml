@@ -290,8 +290,9 @@
                 <compile lang="c++">
                     <arg value="-I${src.main.rel}"/>
                     <arg value="-I${module.lwjgl.rel}/core/src/main/c/dependencies/miniz"/>
-                    <fileset dir="." includes="${src.main}/*.cc"/>
-                    <fileset dir="." includes="${src.generated}/*.cpp"/>
+                    <arg line="-DTINYEXR_V3_USE_MINIZ=1 -DTINYEXR_V3_USE_SIMD=1"/>
+                    <fileset dir="." includes="${src.main}/*.c*"/>
+                    <fileset dir="." includes="${src.generated}/*.c"/>
                 </compile>
                 <compile>
                     <fileset dir="." includes="${module.lwjgl}/core/src/main/c/dependencies/miniz/*.c"/>
