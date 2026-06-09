@@ -9,6 +9,8 @@ import org.lwjgl.system.*;
 
 import java.lang.foreign.*;
 
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.Pointer.*;
 
 /**
@@ -22,6 +24,427 @@ public final class MemoryUtilFFM {
     private static final MemoryBackend BACKEND = MemoryUtil.memBackend();
 
     private MemoryUtilFFM() {
+    }
+
+    // --- [ memset ] ---
+
+    /**
+     * Sets all bytes in a specified block of memory to a fixed value (usually zero).
+     *
+     * @param ptr   the starting memory address
+     * @param value the value to set (memSet will convert it to unsigned byte)
+     */
+    public static void memSet(MemorySegment ptr, int value) { BACKEND.memset(ptr.address(), value, ptr.byteSize()); }
+
+    // --- [ memcpy ] ---
+
+    /**
+     * Sets all bytes in a specified block of memory to a copy of another block.
+     *
+     * @param src the source memory address
+     * @param dst the destination memory address
+     */
+    public static void memCopy(MemorySegment src, MemorySegment dst) {
+        if (CHECKS) {
+            check(dst, src.byteSize());
+        }
+        BACKEND.memcpy(src.address(), dst.address(), src.byteSize());
+    }
+
+    // --- [ Array to MemorySegment memcpy ] ---
+
+    /**
+     * Copies the source array to the current position of the destination memory segment.
+     *
+     * @param src the source array
+     * @param dst the destination memory segment
+     */
+    public static void memCopy(byte[] src, MemorySegment dst) {
+        if (CHECKS) {
+            check(dst, src.length);
+        }
+        BACKEND.memcpy(src, dst.address(), 0, src.length);
+    }
+
+    /**
+     * Copies the source array to the current position of the destination memory segment.
+     *
+     * @param src the source array
+     * @param dst the destination memory segment
+     */
+    public static void memCopy(char[] src, MemorySegment dst) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(src.length, 1));
+        }
+        BACKEND.memcpy(src, dst.address(), 0, src.length);
+    }
+
+    /**
+     * Copies the source array to the current position of the destination memory segment.
+     *
+     * @param src the source array
+     * @param dst the destination memory segment
+     */
+    public static void memCopy(short[] src, MemorySegment dst) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(src.length, 1));
+        }
+        BACKEND.memcpy(src, dst.address(), 0, src.length);
+    }
+
+    /**
+     * Copies the source array to the current position of the destination memory segment.
+     *
+     * @param src the source array
+     * @param dst the destination memory segment
+     */
+    public static void memCopy(int[] src, MemorySegment dst) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(src.length, 2));
+        }
+        BACKEND.memcpy(src, dst.address(), 0, src.length);
+    }
+
+    /**
+     * Copies the source array to the current position of the destination memory segment.
+     *
+     * @param src the source array
+     * @param dst the destination memory segment
+     */
+    public static void memCopy(long[] src, MemorySegment dst) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(src.length, 3));
+        }
+        BACKEND.memcpy(src, dst.address(), 0, src.length);
+    }
+
+    /**
+     * Copies the source array to the current position of the destination memory segment.
+     *
+     * @param src the source array
+     * @param dst the destination memory segment
+     */
+    public static void memCopy(float[] src, MemorySegment dst) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(src.length, 2));
+        }
+        BACKEND.memcpy(src, dst.address(), 0, src.length);
+    }
+
+    /**
+     * Copies the source array to the current position of the destination memory segment.
+     *
+     * @param src the source array
+     * @param dst the destination memory segment
+     */
+    public static void memCopy(double[] src, MemorySegment dst) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(src.length, 3));
+        }
+        BACKEND.memcpy(src, dst.address(), 0, src.length);
+    }
+
+    /**
+     * Copies {@code size} elements from the source array, starting at {@code offset}, to the current position of the destination memory segment.
+     *
+     * @param src    the source array
+     * @param dst    the destination memory segment
+     * @param offset the offset into the source array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(byte[] src, MemorySegment dst, int offset, int size) {
+        if (CHECKS) {
+            check(dst, size);
+        }
+        BACKEND.memcpy(src, dst.address(), offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source array, starting at {@code offset}, to the current position of the destination memory segment.
+     *
+     * @param src    the source array
+     * @param dst    the destination memory segment
+     * @param offset the offset into the source array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(char[] src, MemorySegment dst, int offset, int size) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(size, 1));
+        }
+        BACKEND.memcpy(src, dst.address(), offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source array, starting at {@code offset}, to the current position of the destination memory segment.
+     *
+     * @param src    the source array
+     * @param dst    the destination memory segment
+     * @param offset the offset into the source array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(short[] src, MemorySegment dst, int offset, int size) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(size, 1));
+        }
+        BACKEND.memcpy(src, dst.address(), offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source array, starting at {@code offset}, to the current position of the destination memory segment.
+     *
+     * @param src    the source array
+     * @param dst    the destination memory segment
+     * @param offset the offset into the source array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(int[] src, MemorySegment dst, int offset, int size) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(size, 2));
+        }
+        BACKEND.memcpy(src, dst.address(), offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source array, starting at {@code offset}, to the current position of the destination memory segment.
+     *
+     * @param src    the source array
+     * @param dst    the destination memory segment
+     * @param offset the offset into the source array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(long[] src, MemorySegment dst, int offset, int size) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(size, 3));
+        }
+        BACKEND.memcpy(src, dst.address(), offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source array, starting at {@code offset}, to the current position of the destination memory segment.
+     *
+     * @param src    the source array
+     * @param dst    the destination memory segment
+     * @param offset the offset into the source array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(float[] src, MemorySegment dst, int offset, int size) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(size, 2));
+        }
+        BACKEND.memcpy(src, dst.address(), offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source array, starting at {@code offset}, to the current position of the destination memory segment.
+     *
+     * @param src    the source array
+     * @param dst    the destination memory segment
+     * @param offset the offset into the source array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(double[] src, MemorySegment dst, int offset, int size) {
+        if (CHECKS) {
+            check(dst, apiGetBytes(size, 3));
+        }
+        BACKEND.memcpy(src, dst.address(), offset, size);
+    }
+
+    // --- [ Buffer to Array memcpy ] ---
+
+    /**
+     * Copies the source memory segment to the destination array.
+     *
+     * @param src the source memory segment
+     * @param dst the destination array
+     */
+    public static void memCopy(MemorySegment src, byte[] dst) {
+        if (CHECKS) {
+            check(src, dst.length);
+        }
+        BACKEND.memcpy(src.address(), dst, 0, dst.length);
+    }
+
+    /**
+     * Copies the source memory segment to the destination array.
+     *
+     * @param src the source memory segment
+     * @param dst the destination array
+     */
+    public static void memCopy(MemorySegment src, char[] dst) {
+        if (CHECKS) {
+            check(src, apiGetBytes(dst.length, 1));
+        }
+        BACKEND.memcpy(src.address(), dst, 0, dst.length);
+    }
+
+    /**
+     * Copies the source memory segment to the destination array.
+     *
+     * @param src the source memory segment
+     * @param dst the destination array
+     */
+    public static void memCopy(MemorySegment src, short[] dst) {
+        if (CHECKS) {
+            check(src, apiGetBytes(dst.length, 1));
+        }
+        BACKEND.memcpy(src.address(), dst, 0, dst.length);
+    }
+
+    /**
+     * Copies the source memory segment to the destination array.
+     *
+     * @param src the source memory segment
+     * @param dst the destination array
+     */
+    public static void memCopy(MemorySegment src, int[] dst) {
+        if (CHECKS) {
+            check(src, apiGetBytes(dst.length, 2));
+        }
+        BACKEND.memcpy(src.address(), dst, 0, dst.length);
+    }
+
+    /**
+     * Copies the source memory segment to the destination array.
+     *
+     * @param src the source memory segment
+     * @param dst the destination array
+     */
+    public static void memCopy(MemorySegment src, long[] dst) {
+        if (CHECKS) {
+            check(src, apiGetBytes(dst.length, 3));
+        }
+        BACKEND.memcpy(src.address(), dst, 0, dst.length);
+    }
+
+    /**
+     * Copies the source memory segment to the destination array.
+     *
+     * @param src the source memory segment
+     * @param dst the destination array
+     */
+    public static void memCopy(MemorySegment src, float[] dst) {
+        if (CHECKS) {
+            check(src, apiGetBytes(dst.length, 2));
+        }
+        BACKEND.memcpy(src.address(), dst, 0, dst.length);
+    }
+
+    /**
+     * Copies the source memory segment to the destination array.
+     *
+     * @param src the source memory segment
+     * @param dst the destination array
+     */
+    public static void memCopy(MemorySegment src, double[] dst) {
+        if (CHECKS) {
+            check(src, apiGetBytes(dst.length, 3));
+        }
+        BACKEND.memcpy(src.address(), dst, 0, dst.length);
+    }
+
+    /**
+     * Copies {@code size} elements from the source memory segment to the destination array, starting at {@code offset}.
+     *
+     * @param src    the source memory segment
+     * @param dst    the destination array
+     * @param offset the offset into the destination array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(MemorySegment src, byte[] dst, int offset, int size) {
+        if (CHECKS) {
+            check(src, size);
+        }
+        BACKEND.memcpy(src.address(), dst, offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source memory segment to the destination array, starting at {@code offset}.
+     *
+     * @param src    the source memory segment
+     * @param dst    the destination array
+     * @param offset the offset into the destination array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(MemorySegment src, char[] dst, int offset, int size) {
+        if (CHECKS) {
+            check(src, apiGetBytes(size, 1));
+        }
+        BACKEND.memcpy(src.address(), dst, offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source memory segment to the destination array, starting at {@code offset}.
+     *
+     * @param src    the source memory segment
+     * @param dst    the destination array
+     * @param offset the offset into the destination array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(MemorySegment src, short[] dst, int offset, int size) {
+        if (CHECKS) {
+            check(src, apiGetBytes(size, 1));
+        }
+        BACKEND.memcpy(src.address(), dst, offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source memory segment to the destination array, starting at {@code offset}.
+     *
+     * @param src    the source memory segment
+     * @param dst    the destination array
+     * @param offset the offset into the destination array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(MemorySegment src, int[] dst, int offset, int size) {
+        if (CHECKS) {
+            check(src, apiGetBytes(size, 2));
+        }
+        BACKEND.memcpy(src.address(), dst, offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source memory segment to the destination array, starting at {@code offset}.
+     *
+     * @param src    the source memory segment
+     * @param dst    the destination array
+     * @param offset the offset into the destination array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(MemorySegment src, long[] dst, int offset, int size) {
+        if (CHECKS) {
+            check(src, apiGetBytes(size, 3));
+        }
+        BACKEND.memcpy(src.address(), dst, offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source memory segment to the destination array, starting at {@code offset}.
+     *
+     * @param src    the source memory segment
+     * @param dst    the destination array
+     * @param offset the offset into the destination array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(MemorySegment src, float[] dst, int offset, int size) {
+        if (CHECKS) {
+            check(src, apiGetBytes(size, 2));
+        }
+        BACKEND.memcpy(src.address(), dst, offset, size);
+    }
+
+    /**
+     * Copies {@code size} elements from the source memory segment to the destination array, starting at {@code offset}.
+     *
+     * @param src    the source memory segment
+     * @param dst    the destination array
+     * @param offset the offset into the destination array
+     * @param size   the number of elements to copy
+     */
+    public static void memCopy(MemorySegment src, double[] dst, int offset, int size) {
+        if (CHECKS) {
+            check(src, apiGetBytes(size, 3));
+        }
+        BACKEND.memcpy(src.address(), dst, offset, size);
     }
 
     public static boolean memGetBoolean(MemorySegment segment, long offset)                          { return BACKEND.getBoolean(segment.address() + offset); }
@@ -111,5 +534,15 @@ public final class MemoryUtilFFM {
     public static void memPutAddressAtIndex(MemorySegment segment, long index, long value)           { BACKEND.putAddress(segment.address() + (index << POINTER_SHIFT), value); }
     public static void memPutAddressUnaligned(MemorySegment segment, long offset, long value)        { BACKEND.putAddressUnaligned(segment.address() + offset, value); }
     public static void memPutAddressUnalignedAtIndex(MemorySegment segment, long index, long value)  { BACKEND.putAddressUnaligned(segment.address() + (index << POINTER_SHIFT), value); }
+
+    private static void check(MemorySegment segment, long size) {
+        if (segment.byteSize() < size) {
+            throwIAE(segment.byteSize(), size);
+        }
+    }
+
+    private static void throwIAE(long segmentSize, long minimumSize) {
+        throw new IllegalArgumentException("MemorySegment size is " + segmentSize + ", must be at least " + minimumSize);
+    }
 
 }
