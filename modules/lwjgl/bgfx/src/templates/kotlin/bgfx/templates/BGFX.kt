@@ -9,7 +9,7 @@ import org.lwjgl.generator.*
 
 val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx_", binding = BGFX_BINDING) {
     IntConstant(
-        "API_VERSION".."143"
+        "API_VERSION".."145"
     )
 
     ShortConstant(
@@ -1414,6 +1414,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT
         )..Unsafe..void.p("_data"),
+        MapToInt..uint16_t("_layer"),
         MapToInt..uint8_t("_mip")
     )
 
@@ -1958,6 +1959,20 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     )
 
     void(
+        "encoder_set_texture_view",
+
+        bgfx_encoder_t.p("_this"),
+        MapToInt..uint8_t("_stage"),
+        bgfx_uniform_handle_t("_sampler"),
+        bgfx_texture_handle_t("_handle"),
+        MapToInt..uint16_t("_firstLayer"),
+        MapToInt..uint16_t("_numLayers"),
+        MapToInt..uint8_t("_firstMip"),
+        MapToInt..uint8_t("_numMips"),
+        uint32_t("_flags")
+    )
+
+    void(
         "encoder_touch",
 
         bgfx_encoder_t.p("_this"),
@@ -2330,6 +2345,19 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         MapToInt..uint8_t("_stage"),
         bgfx_uniform_handle_t("_sampler"),
         bgfx_texture_handle_t("_handle"),
+        uint32_t("_flags")
+    )
+
+    void(
+        "set_texture_view",
+
+        MapToInt..uint8_t("_stage"),
+        bgfx_uniform_handle_t("_sampler"),
+        bgfx_texture_handle_t("_handle"),
+        MapToInt..uint16_t("_firstLayer"),
+        MapToInt..uint16_t("_numLayers"),
+        MapToInt..uint8_t("_firstMip"),
+        MapToInt..uint8_t("_numMips"),
         uint32_t("_flags")
     )
 
