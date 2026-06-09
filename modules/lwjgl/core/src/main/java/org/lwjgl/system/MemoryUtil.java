@@ -2634,6 +2634,124 @@ public final class MemoryUtil {
     public static void memPutAddress(long ptr, long value)           { BACKEND.putAddress(ptr, value); }
     public static void memPutAddressUnaligned(long ptr, long value)  { BACKEND.putAddressUnaligned(ptr, value); }
 
+    // Unsafe accessors that bypass buffer bounds & session liveness checks.
+
+    public static byte memGet(ByteBuffer buffer, long offset)                                   { return BACKEND.getByte(BACKEND.getAddress0(buffer) + offset); }
+
+    public static char memGet(CharBuffer buffer, long offset)                                   { return BACKEND.getChar(BACKEND.getAddress0(buffer) + offset); }
+    public static short memGet(ShortBuffer buffer, long offset)                                 { return BACKEND.getShort(BACKEND.getAddress0(buffer) + offset); }
+    public static int memGet(IntBuffer buffer, long offset)                                     { return BACKEND.getInt(BACKEND.getAddress0(buffer) + offset); }
+    public static long memGet(LongBuffer buffer, long offset)                                   { return BACKEND.getLong(BACKEND.getAddress0(buffer) + offset); }
+    public static float memGet(FloatBuffer buffer, long offset)                                 { return BACKEND.getFloat(BACKEND.getAddress0(buffer) + offset); }
+    public static double memGet(DoubleBuffer buffer, long offset)                               { return BACKEND.getDouble(BACKEND.getAddress0(buffer) + offset); }
+
+    public static char memGetAtIndex(CharBuffer buffer, int index)                              { return BACKEND.getChar(BACKEND.getAddress0(buffer) + ((long)index << 1)); }
+    public static short memGetAtIndex(ShortBuffer buffer, int index)                            { return BACKEND.getShort(BACKEND.getAddress0(buffer) + ((long)index << 1)); }
+    public static int memGetAtIndex(IntBuffer buffer, int index)                                { return BACKEND.getInt(BACKEND.getAddress0(buffer) + ((long)index << 2)); }
+    public static long memGetAtIndex(LongBuffer buffer, int index)                              { return BACKEND.getLong(BACKEND.getAddress0(buffer) + ((long)index << 3)); }
+    public static float memGetAtIndex(FloatBuffer buffer, int index)                            { return BACKEND.getFloat(BACKEND.getAddress0(buffer) + ((long)index << 2)); }
+    public static double memGetAtIndex(DoubleBuffer buffer, int index)                          { return BACKEND.getDouble(BACKEND.getAddress0(buffer) + ((long)index << 3)); }
+
+    public static boolean memGetBoolean(ByteBuffer buffer, long offset)                         { return BACKEND.getBoolean(BACKEND.getAddress0(buffer) + offset); }
+
+    public static char memGetChar(ByteBuffer buffer, long offset)                               { return BACKEND.getChar(BACKEND.getAddress0(buffer) + offset); }
+    public static char memGetCharAtIndex(ByteBuffer buffer, int index)                          { return BACKEND.getChar(BACKEND.getAddress0(buffer) + ((long)index << 1)); }
+    public static char memGetCharUnaligned(ByteBuffer buffer, long offset)                      { return BACKEND.getCharUnaligned(BACKEND.getAddress0(buffer) + offset); }
+    public static char memGetCharUnalignedAtIndex(ByteBuffer buffer, int index)                 { return BACKEND.getCharUnaligned(BACKEND.getAddress0(buffer) + ((long)index << 1)); }
+
+    public static short memGetShort(ByteBuffer buffer, long offset)                             { return BACKEND.getShort(BACKEND.getAddress0(buffer) + offset); }
+    public static short memGetShortAtIndex(ByteBuffer buffer, int index)                        { return BACKEND.getShort(BACKEND.getAddress0(buffer) + ((long)index << 1)); }
+    public static short memGetShortUnaligned(ByteBuffer buffer, long offset)                    { return BACKEND.getShortUnaligned(BACKEND.getAddress0(buffer) + offset); }
+    public static short memGetShortUnalignedAtIndex(ByteBuffer buffer, int index)               { return BACKEND.getShortUnaligned(BACKEND.getAddress0(buffer) + ((long)index << 1)); }
+
+    public static int memGetInt(ByteBuffer buffer, long offset)                                 { return BACKEND.getInt(BACKEND.getAddress0(buffer) + offset); }
+    public static int memGetIntAtIndex(ByteBuffer buffer, int index)                            { return BACKEND.getInt(BACKEND.getAddress0(buffer) + ((long)index << 2)); }
+    public static int memGetIntUnaligned(ByteBuffer buffer, long offset)                        { return BACKEND.getIntUnaligned(BACKEND.getAddress0(buffer) + offset); }
+    public static int memGetIntUnalignedAtIndex(ByteBuffer buffer, int index)                   { return BACKEND.getIntUnaligned(BACKEND.getAddress0(buffer) + ((long)index << 2)); }
+
+    public static long memGetLong(ByteBuffer buffer, long offset)                               { return BACKEND.getLong(BACKEND.getAddress0(buffer) + offset); }
+    public static long memGetLongAtIndex(ByteBuffer buffer, int index)                          { return BACKEND.getLong(BACKEND.getAddress0(buffer) + ((long)index << 3)); }
+    public static long memGetLongUnaligned(ByteBuffer buffer, long offset)                      { return BACKEND.getLongUnaligned(BACKEND.getAddress0(buffer) + offset); }
+    public static long memGetLongUnalignedAtIndex(ByteBuffer buffer, int index)                 { return BACKEND.getLongUnaligned(BACKEND.getAddress0(buffer) + ((long)index << 3)); }
+
+    public static float memGetFloat(ByteBuffer buffer, long offset)                             { return BACKEND.getFloat(BACKEND.getAddress0(buffer) + offset); }
+    public static float memGetFloatAtIndex(ByteBuffer buffer, int index)                        { return BACKEND.getFloat(BACKEND.getAddress0(buffer) + ((long)index << 2)); }
+    public static float memGetFloatUnaligned(ByteBuffer buffer, long offset)                    { return BACKEND.getFloatUnaligned(BACKEND.getAddress0(buffer) + offset); }
+    public static float memGetFloatUnalignedAtIndex(ByteBuffer buffer, int index)               { return BACKEND.getFloatUnaligned(BACKEND.getAddress0(buffer) + ((long)index << 2)); }
+
+    public static double memGetDouble(ByteBuffer buffer, long offset)                           { return BACKEND.getDouble(BACKEND.getAddress0(buffer) + offset); }
+    public static double memGetDoubleAtIndex(ByteBuffer buffer, int index)                      { return BACKEND.getDouble(BACKEND.getAddress0(buffer) + ((long)index << 3)); }
+    public static double memGetDoubleUnaligned(ByteBuffer buffer, long offset)                  { return BACKEND.getDoubleUnaligned(BACKEND.getAddress0(buffer) + offset); }
+    public static double memGetDoubleUnalignedAtIndex(ByteBuffer buffer, int index)             { return BACKEND.getDoubleUnaligned(BACKEND.getAddress0(buffer) + ((long)index << 3)); }
+
+    public static long memGetCLong(ByteBuffer buffer, long offset)                              { return BACKEND.getCLong(BACKEND.getAddress0(buffer) + offset); }
+    public static long memGetCLongAtIndex(ByteBuffer buffer, int index)                         { return BACKEND.getCLong(BACKEND.getAddress0(buffer) + ((long)index << CLONG_SHIFT)); }
+    public static long memGetCLongUnaligned(ByteBuffer buffer, long offset)                     { return BACKEND.getCLongUnaligned(BACKEND.getAddress0(buffer) + offset); }
+    public static long memGetCLongUnalignedAtIndex(ByteBuffer buffer, int index)                { return BACKEND.getCLongUnaligned(BACKEND.getAddress0(buffer) + ((long)index << CLONG_SHIFT)); }
+
+    public static long memGetAddress(ByteBuffer buffer, long offset)                            { return BACKEND.getAddress(BACKEND.getAddress0(buffer) + offset); }
+    public static long memGetAddressAtIndex(ByteBuffer buffer, int index)                       { return BACKEND.getAddress(BACKEND.getAddress0(buffer) + ((long)index << POINTER_SHIFT)); }
+    public static long memGetAddressUnaligned(ByteBuffer buffer, long offset)                   { return BACKEND.getAddressUnaligned(BACKEND.getAddress0(buffer) + offset); }
+    public static long memGetAddressUnalignedAtIndex(ByteBuffer buffer, int index)              { return BACKEND.getAddressUnaligned(BACKEND.getAddress0(buffer) + ((long)index << POINTER_SHIFT)); }
+
+    public static void memPut(ByteBuffer buffer, long offset, byte value)                       { BACKEND.putByte(BACKEND.getAddress0(buffer) + offset, value); }
+
+    public static void memPut(CharBuffer buffer, long offset, char value)                       { BACKEND.putChar(BACKEND.getAddress0(buffer) + offset, value); }
+    public static void memPut(ShortBuffer buffer, long offset, short value)                     { BACKEND.putShort(BACKEND.getAddress0(buffer) + offset, value); }
+    public static void memPut(IntBuffer buffer, long offset, int value)                         { BACKEND.putInt(BACKEND.getAddress0(buffer) + offset, value); }
+    public static void memPut(LongBuffer buffer, long offset, long value)                       { BACKEND.putLong(BACKEND.getAddress0(buffer) + offset, value); }
+    public static void memPut(FloatBuffer buffer, long offset, float value)                     { BACKEND.putFloat(BACKEND.getAddress0(buffer) + offset, value); }
+    public static void memPut(DoubleBuffer buffer, long offset, double value)                   { BACKEND.putDouble(BACKEND.getAddress0(buffer) + offset, value); }
+
+    public static void memPutAtIndex(CharBuffer buffer, int index, char value)                  { BACKEND.putChar(BACKEND.getAddress0(buffer) + ((long)index << 1), value); }
+    public static void memPutAtIndex(ShortBuffer buffer, int index, short value)                { BACKEND.putShort(BACKEND.getAddress0(buffer) + ((long)index << 1), value); }
+    public static void memPutAtIndex(IntBuffer buffer, int index, int value)                    { BACKEND.putInt(BACKEND.getAddress0(buffer) + ((long)index << 2), value); }
+    public static void memPutAtIndex(LongBuffer buffer, int index, long value)                  { BACKEND.putLong(BACKEND.getAddress0(buffer) + ((long)index << 3), value); }
+    public static void memPutAtIndex(FloatBuffer buffer, int index, float value)                { BACKEND.putFloat(BACKEND.getAddress0(buffer) + ((long)index << 2), value); }
+    public static void memPutAtIndex(DoubleBuffer buffer, int index, double value)              { BACKEND.putDouble(BACKEND.getAddress0(buffer) + ((long)index << 3), value); }
+
+    public static void memPutBoolean(ByteBuffer buffer, long offset, boolean value)             { BACKEND.putBoolean(BACKEND.getAddress0(buffer) + offset, value); }
+
+    public static void memPutChar(ByteBuffer buffer, long offset, char value)                   { BACKEND.putChar(BACKEND.getAddress0(buffer) + offset, value); }
+    public static void memPutCharAtIndex(ByteBuffer buffer, int index, char value)              { BACKEND.putChar(BACKEND.getAddress0(buffer) + ((long)index << 1), value); }
+    public static void memPutCharUnaligned(ByteBuffer buffer, long offset, char value)          { BACKEND.putCharUnaligned(BACKEND.getAddress0(buffer) + offset, value); }
+    public static void memPutCharUnalignedAtIndex(ByteBuffer buffer, int index, char value)     { BACKEND.putCharUnaligned(BACKEND.getAddress0(buffer) + ((long)index << 1), value); }
+
+    public static void memPutShort(ByteBuffer buffer, long offset, short value)                 { BACKEND.putShort(BACKEND.getAddress0(buffer) + offset, value); }
+    public static void memPutShortAtIndex(ByteBuffer buffer, int index, short value)            { BACKEND.putShort(BACKEND.getAddress0(buffer) + ((long)index << 1), value); }
+    public static void memPutShortUnaligned(ByteBuffer buffer, long offset, short value)        { BACKEND.putShortUnaligned(BACKEND.getAddress0(buffer) + offset, value); }
+    public static void memPutShortUnalignedAtIndex(ByteBuffer buffer, int index, short value)   { BACKEND.putShortUnaligned(BACKEND.getAddress0(buffer) + ((long)index << 1), value); }
+
+    public static void memPutInt(ByteBuffer buffer, long offset, int value)                     { BACKEND.putInt(BACKEND.getAddress0(buffer) + offset, value); }
+    public static void memPutIntAtIndex(ByteBuffer buffer, int index, int value)                { BACKEND.putInt(BACKEND.getAddress0(buffer) + ((long)index << 2), value); }
+    public static void memPutIntUnaligned(ByteBuffer buffer, long offset, int value)            { BACKEND.putIntUnaligned(BACKEND.getAddress0(buffer) + offset, value); }
+    public static void memPutIntUnalignedAtIndex(ByteBuffer buffer, int index, int value)       { BACKEND.putIntUnaligned(BACKEND.getAddress0(buffer) + ((long)index << 2), value); }
+
+    public static void memPutLong(ByteBuffer buffer, long offset, long value)                   { BACKEND.putLong(BACKEND.getAddress0(buffer) + offset, value); }
+    public static void memPutLongAtIndex(ByteBuffer buffer, int index, long value)              { BACKEND.putLong(BACKEND.getAddress0(buffer) + ((long)index << 3), value); }
+    public static void memPutLongUnaligned(ByteBuffer buffer, long offset, long value)          { BACKEND.putLongUnaligned(BACKEND.getAddress0(buffer) + offset, value); }
+    public static void memPutLongUnalignedAtIndex(ByteBuffer buffer, int index, long value)     { BACKEND.putLongUnaligned(BACKEND.getAddress0(buffer) + ((long)index << 3), value); }
+
+    public static void memPutFloat(ByteBuffer buffer, long offset, float value)                 { BACKEND.putFloat(BACKEND.getAddress0(buffer) + offset, value); }
+    public static void memPutFloatAtIndex(ByteBuffer buffer, int index, float value)            { BACKEND.putFloat(BACKEND.getAddress0(buffer) + ((long)index << 2), value); }
+    public static void memPutFloatUnaligned(ByteBuffer buffer, long offset, float value)        { BACKEND.putFloatUnaligned(BACKEND.getAddress0(buffer) + offset, value); }
+    public static void memPutFloatUnalignedAtIndex(ByteBuffer buffer, int index, float value)   { BACKEND.putFloatUnaligned(BACKEND.getAddress0(buffer) + ((long)index << 2), value); }
+
+    public static void memPutDouble(ByteBuffer buffer, long offset, double value)               { BACKEND.putDouble(BACKEND.getAddress0(buffer) + offset, value); }
+    public static void memPutDoubleAtIndex(ByteBuffer buffer, int index, double value)          { BACKEND.putDouble(BACKEND.getAddress0(buffer) + ((long)index << 3), value); }
+    public static void memPutDoubleUnaligned(ByteBuffer buffer, long offset, double value)      { BACKEND.putDoubleUnaligned(BACKEND.getAddress0(buffer) + offset, value); }
+    public static void memPutDoubleUnalignedAtIndex(ByteBuffer buffer, int index, double value) { BACKEND.putDoubleUnaligned(BACKEND.getAddress0(buffer) + ((long)index << 3), value); }
+
+    public static void memPutCLong(ByteBuffer buffer, long offset, long value)                  { BACKEND.putCLong(BACKEND.getAddress0(buffer) + offset, value); }
+    public static void memPutCLongAtIndex(ByteBuffer buffer, int index, long value)             { BACKEND.putCLong(BACKEND.getAddress0(buffer) + ((long)index << CLONG_SHIFT), value); }
+    public static void memPutCLongUnaligned(ByteBuffer buffer, long offset, long value)         { BACKEND.putCLongUnaligned(BACKEND.getAddress0(buffer) + offset, value); }
+    public static void memPutCLongUnalignedAtIndex(ByteBuffer buffer, int index, long value)    { BACKEND.putCLongUnaligned(BACKEND.getAddress0(buffer) + ((long)index << CLONG_SHIFT), value); }
+
+    public static void memPutAddress(ByteBuffer buffer, long offset, long value)                { BACKEND.putAddress(BACKEND.getAddress0(buffer) + offset, value); }
+    public static void memPutAddressAtIndex(ByteBuffer buffer, int index, long value)           { BACKEND.putAddress(BACKEND.getAddress0(buffer) + ((long)index << POINTER_SHIFT), value); }
+    public static void memPutAddressUnaligned(ByteBuffer buffer, long offset, long value)       { BACKEND.putAddressUnaligned(BACKEND.getAddress0(buffer) + offset, value); }
+    public static void memPutAddressUnalignedAtIndex(ByteBuffer buffer, int index, long value)  { BACKEND.putAddressUnaligned(BACKEND.getAddress0(buffer) + ((long)index << POINTER_SHIFT), value); }
+
     /*  -------------------------------------
         -------------------------------------
                   JNI UTILITIES API
