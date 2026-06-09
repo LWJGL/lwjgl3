@@ -23,6 +23,8 @@ public class Vma {
 
     static { LibVma.initialize(); }
 
+    public static final int VMA_VERSION = VK10.VK_MAKE_VERSION(3, 4, 0);
+
     public static final int
         VMA_ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT    = 0x1,
         VMA_ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT   = 0x2,
@@ -398,6 +400,21 @@ public class Vma {
         return nvmaAllocateMemory(allocator, pVkMemoryRequirements.address(), pCreateInfo.address(), memAddress(pAllocation), memAddressSafe(pAllocationInfo));
     }
 
+    // --- [ vmaAllocateDedicatedMemory ] ---
+
+    /** {@code VkResult vmaAllocateDedicatedMemory(VmaAllocator allocator, VkMemoryRequirements const * pVkMemoryRequirements, VmaAllocationCreateInfo const * pCreateInfo, void * pMemoryAllocateNext, VmaAllocation * pAllocation, VmaAllocationInfo * pAllocationInfo)} */
+    public static native int nvmaAllocateDedicatedMemory(long allocator, long pVkMemoryRequirements, long pCreateInfo, long pMemoryAllocateNext, long pAllocation, long pAllocationInfo);
+
+    /** {@code VkResult vmaAllocateDedicatedMemory(VmaAllocator allocator, VkMemoryRequirements const * pVkMemoryRequirements, VmaAllocationCreateInfo const * pCreateInfo, void * pMemoryAllocateNext, VmaAllocation * pAllocation, VmaAllocationInfo * pAllocationInfo)} */
+    @NativeType("VkResult")
+    public static int vmaAllocateDedicatedMemory(@NativeType("VmaAllocator") long allocator, @NativeType("VkMemoryRequirements const *") VkMemoryRequirements pVkMemoryRequirements, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pCreateInfo, @NativeType("void *") long pMemoryAllocateNext, @NativeType("VmaAllocation *") PointerBuffer pAllocation, @NativeType("VmaAllocationInfo *") @Nullable VmaAllocationInfo pAllocationInfo) {
+        if (CHECKS) {
+            check(allocator);
+            check(pAllocation, 1);
+        }
+        return nvmaAllocateDedicatedMemory(allocator, pVkMemoryRequirements.address(), pCreateInfo.address(), pMemoryAllocateNext, memAddress(pAllocation), memAddressSafe(pAllocationInfo));
+    }
+
     // --- [ vmaAllocateMemoryPages ] ---
 
     /** {@code VkResult vmaAllocateMemoryPages(VmaAllocator allocator, VkMemoryRequirements const * pVkMemoryRequirements, VmaAllocationCreateInfo const * pCreateInfo, size_t allocationCount, VmaAllocation * pAllocations, VmaAllocationInfo * pAllocationInfo)} */
@@ -572,6 +589,22 @@ public class Vma {
             check(pHandle, 1);
         }
         return nvmaGetMemoryWin32Handle(allocator, allocation, hTargetProcess, memAddress(pHandle));
+    }
+
+    // --- [ vmaGetMemoryWin32Handle2 ] ---
+
+    /** {@code VkResult vmaGetMemoryWin32Handle2(VmaAllocator allocator, VmaAllocation allocation, VkExternalMemoryHandleTypeFlagBits handleType, HANDLE hTargetProcess, HANDLE * pHandle)} */
+    public static native int nvmaGetMemoryWin32Handle2(long allocator, long allocation, int handleType, long hTargetProcess, long pHandle);
+
+    /** {@code VkResult vmaGetMemoryWin32Handle2(VmaAllocator allocator, VmaAllocation allocation, VkExternalMemoryHandleTypeFlagBits handleType, HANDLE hTargetProcess, HANDLE * pHandle)} */
+    @NativeType("VkResult")
+    public static int vmaGetMemoryWin32Handle2(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("VkExternalMemoryHandleTypeFlagBits") int handleType, @NativeType("HANDLE") long hTargetProcess, @NativeType("HANDLE *") PointerBuffer pHandle) {
+        if (CHECKS) {
+            check(allocator);
+            check(allocation);
+            check(pHandle, 1);
+        }
+        return nvmaGetMemoryWin32Handle2(allocator, allocation, handleType, hTargetProcess, memAddress(pHandle));
     }
 
     // --- [ vmaMapMemory ] ---
@@ -843,20 +876,20 @@ public class Vma {
         return nvmaCreateBuffer(allocator, pBufferCreateInfo.address(), pAllocationCreateInfo.address(), memAddress(pBuffer), memAddress(pAllocation), memAddressSafe(pAllocationInfo));
     }
 
-    // --- [ vmaCreateBufferWithAlignment ] ---
+    // --- [ vmaCreateDedicatedBuffer ] ---
 
-    /** {@code VkResult vmaCreateBufferWithAlignment(VmaAllocator allocator, VkBufferCreateInfo const * pBufferCreateInfo, VmaAllocationCreateInfo const * pAllocationCreateInfo, VkDeviceSize minAlignment, VkBuffer * pBuffer, VmaAllocation * pAllocation, VmaAllocationInfo * pAllocationInfo)} */
-    public static native int nvmaCreateBufferWithAlignment(long allocator, long pBufferCreateInfo, long pAllocationCreateInfo, long minAlignment, long pBuffer, long pAllocation, long pAllocationInfo);
+    /** {@code VkResult vmaCreateDedicatedBuffer(VmaAllocator allocator, VkBufferCreateInfo const * pBufferCreateInfo, VmaAllocationCreateInfo const * pAllocationCreateInfo, void * pMemoryAllocateNext, VkBuffer * pBuffer, VmaAllocation * pAllocation, VmaAllocationInfo * pAllocationInfo)} */
+    public static native int nvmaCreateDedicatedBuffer(long allocator, long pBufferCreateInfo, long pAllocationCreateInfo, long pMemoryAllocateNext, long pBuffer, long pAllocation, long pAllocationInfo);
 
-    /** {@code VkResult vmaCreateBufferWithAlignment(VmaAllocator allocator, VkBufferCreateInfo const * pBufferCreateInfo, VmaAllocationCreateInfo const * pAllocationCreateInfo, VkDeviceSize minAlignment, VkBuffer * pBuffer, VmaAllocation * pAllocation, VmaAllocationInfo * pAllocationInfo)} */
+    /** {@code VkResult vmaCreateDedicatedBuffer(VmaAllocator allocator, VkBufferCreateInfo const * pBufferCreateInfo, VmaAllocationCreateInfo const * pAllocationCreateInfo, void * pMemoryAllocateNext, VkBuffer * pBuffer, VmaAllocation * pAllocation, VmaAllocationInfo * pAllocationInfo)} */
     @NativeType("VkResult")
-    public static int vmaCreateBufferWithAlignment(@NativeType("VmaAllocator") long allocator, @NativeType("VkBufferCreateInfo const *") VkBufferCreateInfo pBufferCreateInfo, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pAllocationCreateInfo, @NativeType("VkDeviceSize") long minAlignment, @NativeType("VkBuffer *") LongBuffer pBuffer, @NativeType("VmaAllocation *") PointerBuffer pAllocation, @NativeType("VmaAllocationInfo *") @Nullable VmaAllocationInfo pAllocationInfo) {
+    public static int vmaCreateDedicatedBuffer(@NativeType("VmaAllocator") long allocator, @NativeType("VkBufferCreateInfo const *") VkBufferCreateInfo pBufferCreateInfo, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pAllocationCreateInfo, @NativeType("void *") long pMemoryAllocateNext, @NativeType("VkBuffer *") LongBuffer pBuffer, @NativeType("VmaAllocation *") PointerBuffer pAllocation, @NativeType("VmaAllocationInfo *") @Nullable VmaAllocationInfo pAllocationInfo) {
         if (CHECKS) {
             check(allocator);
             check(pBuffer, 1);
             check(pAllocation, 1);
         }
-        return nvmaCreateBufferWithAlignment(allocator, pBufferCreateInfo.address(), pAllocationCreateInfo.address(), minAlignment, memAddress(pBuffer), memAddress(pAllocation), memAddressSafe(pAllocationInfo));
+        return nvmaCreateDedicatedBuffer(allocator, pBufferCreateInfo.address(), pAllocationCreateInfo.address(), pMemoryAllocateNext, memAddress(pBuffer), memAddress(pAllocation), memAddressSafe(pAllocationInfo));
     }
 
     // --- [ vmaCreateAliasingBuffer ] ---
@@ -918,6 +951,22 @@ public class Vma {
             check(pAllocation, 1);
         }
         return nvmaCreateImage(allocator, pImageCreateInfo.address(), pAllocationCreateInfo.address(), memAddress(pImage), memAddress(pAllocation), memAddressSafe(pAllocationInfo));
+    }
+
+    // --- [ vmaCreateDedicatedImage ] ---
+
+    /** {@code VkResult vmaCreateDedicatedImage(VmaAllocator allocator, VkImageCreateInfo const * pImageCreateInfo, VmaAllocationCreateInfo const * pAllocationCreateInfo, void * pMemoryAllocateNext, VkImage * pImage, VmaAllocation * pAllocation, VmaAllocationInfo * pAllocationInfo)} */
+    public static native int nvmaCreateDedicatedImage(long allocator, long pImageCreateInfo, long pAllocationCreateInfo, long pMemoryAllocateNext, long pImage, long pAllocation, long pAllocationInfo);
+
+    /** {@code VkResult vmaCreateDedicatedImage(VmaAllocator allocator, VkImageCreateInfo const * pImageCreateInfo, VmaAllocationCreateInfo const * pAllocationCreateInfo, void * pMemoryAllocateNext, VkImage * pImage, VmaAllocation * pAllocation, VmaAllocationInfo * pAllocationInfo)} */
+    @NativeType("VkResult")
+    public static int vmaCreateDedicatedImage(@NativeType("VmaAllocator") long allocator, @NativeType("VkImageCreateInfo const *") VkImageCreateInfo pImageCreateInfo, @NativeType("VmaAllocationCreateInfo const *") VmaAllocationCreateInfo pAllocationCreateInfo, @NativeType("void *") long pMemoryAllocateNext, @NativeType("VkImage *") LongBuffer pImage, @NativeType("VmaAllocation *") PointerBuffer pAllocation, @NativeType("VmaAllocationInfo *") @Nullable VmaAllocationInfo pAllocationInfo) {
+        if (CHECKS) {
+            check(allocator);
+            check(pImage, 1);
+            check(pAllocation, 1);
+        }
+        return nvmaCreateDedicatedImage(allocator, pImageCreateInfo.address(), pAllocationCreateInfo.address(), pMemoryAllocateNext, memAddress(pImage), memAddress(pAllocation), memAddressSafe(pAllocationInfo));
     }
 
     // --- [ vmaCreateAliasingImage ] ---

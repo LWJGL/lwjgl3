@@ -26,6 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VmaPool pool;
  *     void * pUserData;
  *     float priority;
+ *     VkDeviceSize minAlignment;
  * }}</pre>
  */
 public class VmaAllocationCreateInfo extends Struct<VmaAllocationCreateInfo> implements NativeResource {
@@ -45,7 +46,8 @@ public class VmaAllocationCreateInfo extends Struct<VmaAllocationCreateInfo> imp
         MEMORYTYPEBITS,
         POOL,
         PUSERDATA,
-        PRIORITY;
+        PRIORITY,
+        MINALIGNMENT;
 
     static {
         Layout layout = __struct(
@@ -56,7 +58,8 @@ public class VmaAllocationCreateInfo extends Struct<VmaAllocationCreateInfo> imp
             __member(4),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
-            __member(4)
+            __member(4),
+            __member(8)
         );
 
         SIZEOF = layout.getSize();
@@ -70,6 +73,7 @@ public class VmaAllocationCreateInfo extends Struct<VmaAllocationCreateInfo> imp
         POOL = layout.offsetof(5);
         PUSERDATA = layout.offsetof(6);
         PRIORITY = layout.offsetof(7);
+        MINALIGNMENT = layout.offsetof(8);
     }
 
     protected VmaAllocationCreateInfo(long address, @Nullable ByteBuffer container) {
@@ -117,6 +121,9 @@ public class VmaAllocationCreateInfo extends Struct<VmaAllocationCreateInfo> imp
     public long pUserData() { return npUserData(address()); }
     /** @return the value of the {@code priority} field. */
     public float priority() { return npriority(address()); }
+    /** @return the value of the {@code minAlignment} field. */
+    @NativeType("VkDeviceSize")
+    public long minAlignment() { return nminAlignment(address()); }
 
     /** Sets the specified value to the {@code flags} field. */
     public VmaAllocationCreateInfo flags(@NativeType("VmaAllocationCreateFlags") int value) { nflags(address(), value); return this; }
@@ -134,6 +141,8 @@ public class VmaAllocationCreateInfo extends Struct<VmaAllocationCreateInfo> imp
     public VmaAllocationCreateInfo pUserData(@NativeType("void *") long value) { npUserData(address(), value); return this; }
     /** Sets the specified value to the {@code priority} field. */
     public VmaAllocationCreateInfo priority(float value) { npriority(address(), value); return this; }
+    /** Sets the specified value to the {@code minAlignment} field. */
+    public VmaAllocationCreateInfo minAlignment(@NativeType("VkDeviceSize") long value) { nminAlignment(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VmaAllocationCreateInfo set(
@@ -144,7 +153,8 @@ public class VmaAllocationCreateInfo extends Struct<VmaAllocationCreateInfo> imp
         int memoryTypeBits,
         long pool,
         long pUserData,
-        float priority
+        float priority,
+        long minAlignment
     ) {
         flags(flags);
         usage(usage);
@@ -154,6 +164,7 @@ public class VmaAllocationCreateInfo extends Struct<VmaAllocationCreateInfo> imp
         pool(pool);
         pUserData(pUserData);
         priority(priority);
+        minAlignment(minAlignment);
 
         return this;
     }
@@ -297,6 +308,8 @@ public class VmaAllocationCreateInfo extends Struct<VmaAllocationCreateInfo> imp
     public static long npUserData(long struct) { return memGetAddress(struct + VmaAllocationCreateInfo.PUSERDATA); }
     /** Unsafe version of {@link #priority}. */
     public static float npriority(long struct) { return memGetFloat(struct + VmaAllocationCreateInfo.PRIORITY); }
+    /** Unsafe version of {@link #minAlignment}. */
+    public static long nminAlignment(long struct) { return memGetLong(struct + VmaAllocationCreateInfo.MINALIGNMENT); }
 
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { memPutInt(struct + VmaAllocationCreateInfo.FLAGS, value); }
@@ -314,6 +327,8 @@ public class VmaAllocationCreateInfo extends Struct<VmaAllocationCreateInfo> imp
     public static void npUserData(long struct, long value) { memPutAddress(struct + VmaAllocationCreateInfo.PUSERDATA, value); }
     /** Unsafe version of {@link #priority(float) priority}. */
     public static void npriority(long struct, float value) { memPutFloat(struct + VmaAllocationCreateInfo.PRIORITY, value); }
+    /** Unsafe version of {@link #minAlignment(long) minAlignment}. */
+    public static void nminAlignment(long struct, long value) { memPutLong(struct + VmaAllocationCreateInfo.MINALIGNMENT, value); }
 
     // -----------------------------------
 
@@ -381,6 +396,9 @@ public class VmaAllocationCreateInfo extends Struct<VmaAllocationCreateInfo> imp
         public long pUserData() { return VmaAllocationCreateInfo.npUserData(address()); }
         /** @return the value of the {@code priority} field. */
         public float priority() { return VmaAllocationCreateInfo.npriority(address()); }
+        /** @return the value of the {@code minAlignment} field. */
+        @NativeType("VkDeviceSize")
+        public long minAlignment() { return VmaAllocationCreateInfo.nminAlignment(address()); }
 
         /** Sets the specified value to the {@code flags} field. */
         public VmaAllocationCreateInfo.Buffer flags(@NativeType("VmaAllocationCreateFlags") int value) { VmaAllocationCreateInfo.nflags(address(), value); return this; }
@@ -398,6 +416,8 @@ public class VmaAllocationCreateInfo extends Struct<VmaAllocationCreateInfo> imp
         public VmaAllocationCreateInfo.Buffer pUserData(@NativeType("void *") long value) { VmaAllocationCreateInfo.npUserData(address(), value); return this; }
         /** Sets the specified value to the {@code priority} field. */
         public VmaAllocationCreateInfo.Buffer priority(float value) { VmaAllocationCreateInfo.npriority(address(), value); return this; }
+        /** Sets the specified value to the {@code minAlignment} field. */
+        public VmaAllocationCreateInfo.Buffer minAlignment(@NativeType("VkDeviceSize") long value) { VmaAllocationCreateInfo.nminAlignment(address(), value); return this; }
 
     }
 

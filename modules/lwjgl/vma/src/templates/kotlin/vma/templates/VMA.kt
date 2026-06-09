@@ -23,22 +23,27 @@ DISABLE_WARNINGS()
 #define VMA_VULKAN_VERSION 1004000
 #define VMA_DEDICATED_ALLOCATION 1
 #define VMA_BIND_MEMORY2 1
+#define VMA_GET_PHYSICAL_DEVICE_PROPERTIES2 1
 #define VMA_MEMORY_BUDGET 1
 #define VMA_BUFFER_DEVICE_ADDRESS 1
 #define VMA_MEMORY_PRIORITY 1
+#define VMA_KHR_MAINTENANCE4 1
+#define VMA_KHR_MAINTENANCE5 1
 #define VMA_EXTERNAL_MEMORY 1
 #ifdef LWJGL_WINDOWS
     #define VMA_EXTERNAL_MEMORY_WIN32 1
     #define VK_USE_PLATFORM_WIN32_KHR 1
 #endif
-#define VMA_KHR_MAINTENANCE4 1
-#define VMA_KHR_MAINTENANCE5 1
 #include "vk_mem_alloc.h"
 ENABLE_WARNINGS()"""
     )
     javaImport("org.lwjgl.vulkan.*")
 
     cpp = true
+
+    IntConstant(
+        "VERSION".."VK10.VK_MAKE_VERSION(3, 4, 0)"
+    )
 
     EnumConstant(
         "ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT".enum(0x00000001),
@@ -274,6 +279,17 @@ ENABLE_WARNINGS()"""
     )
 
     VkResult(
+        "AllocateDedicatedMemory",
+
+        VmaAllocator("allocator"),
+        VkMemoryRequirements.const.p("pVkMemoryRequirements"),
+        VmaAllocationCreateInfo.const.p("pCreateInfo"),
+        nullable..opaque_p("pMemoryAllocateNext"),
+        Check(1)..VmaAllocation.p("pAllocation"),
+        nullable..VmaAllocationInfo.p("pAllocationInfo")
+    )
+
+    VkResult(
         "AllocateMemoryPages",
 
         VmaAllocator("allocator"),
@@ -364,6 +380,16 @@ ENABLE_WARNINGS()"""
 
         VmaAllocator("allocator"),
         VmaAllocation("allocation"),
+        nullable.."HANDLE".handle("hTargetProcess"),
+        Check(1).."HANDLE".handle.p("pHandle")
+    ).ifDirective("def LWJGL_WINDOWS")
+
+    VkResult(
+        "GetMemoryWin32Handle2",
+
+        VmaAllocator("allocator"),
+        VmaAllocation("allocation"),
+        VkExternalMemoryHandleTypeFlagBits("handleType"),
         nullable.."HANDLE".handle("hTargetProcess"),
         Check(1).."HANDLE".handle.p("pHandle")
     ).ifDirective("def LWJGL_WINDOWS")
@@ -524,7 +550,7 @@ ENABLE_WARNINGS()"""
         nullable..opaque_const_p("pNext")
     )
 
-    val CreateBuffer = VkResult(
+    VkResult(
         "CreateBuffer",
 
         VmaAllocator("allocator"),
@@ -536,15 +562,15 @@ ENABLE_WARNINGS()"""
     )
 
     VkResult(
-        "CreateBufferWithAlignment",
+        "CreateDedicatedBuffer",
 
-        CreateBuffer["allocator"],
-        CreateBuffer["pBufferCreateInfo"],
-        CreateBuffer["pAllocationCreateInfo"],
-        VkDeviceSize("minAlignment"),
-        CreateBuffer["pBuffer"],
-        CreateBuffer["pAllocation"],
-        CreateBuffer["pAllocationInfo"]
+        VmaAllocator("allocator"),
+        VkBufferCreateInfo.const.p("pBufferCreateInfo"),
+        VmaAllocationCreateInfo.const.p("pAllocationCreateInfo"),
+        nullable..opaque_p("pMemoryAllocateNext"),
+        Check(1)..VkBuffer.p("pBuffer"),
+        Check(1)..VmaAllocation.p("pAllocation"),
+        nullable..VmaAllocationInfo.p("pAllocationInfo")
     )
 
     VkResult(
@@ -580,6 +606,18 @@ ENABLE_WARNINGS()"""
         VmaAllocator("allocator"),
         VkImageCreateInfo.const.p("pImageCreateInfo"),
         VmaAllocationCreateInfo.const.p("pAllocationCreateInfo"),
+        Check(1)..VkImage.p("pImage"),
+        Check(1)..VmaAllocation.p("pAllocation"),
+        nullable..VmaAllocationInfo.p("pAllocationInfo")
+    )
+
+    VkResult(
+        "CreateDedicatedImage",
+
+        VmaAllocator("allocator"),
+        VkImageCreateInfo.const.p("pImageCreateInfo"),
+        VmaAllocationCreateInfo.const.p("pAllocationCreateInfo"),
+        nullable..opaque_p("pMemoryAllocateNext"),
         Check(1)..VkImage.p("pImage"),
         Check(1)..VmaAllocation.p("pAllocation"),
         nullable..VmaAllocationInfo.p("pAllocationInfo")
