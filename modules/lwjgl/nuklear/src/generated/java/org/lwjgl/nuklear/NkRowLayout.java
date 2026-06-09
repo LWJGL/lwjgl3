@@ -58,6 +58,8 @@ public class NkRowLayout extends Struct<NkRowLayout> {
         TEMPLATES;
 
     static {
+        NkRect.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

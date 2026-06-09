@@ -38,6 +38,9 @@ public class VkRectLayerKHR extends Struct<VkRectLayerKHR> implements NativeReso
         LAYER;
 
     static {
+        VkOffset2D.createSafe(NULL);
+        VkExtent2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(VkOffset2D.SIZEOF, VkOffset2D.ALIGNOF),
             __member(VkExtent2D.SIZEOF, VkExtent2D.ALIGNOF),

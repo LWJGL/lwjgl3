@@ -49,6 +49,10 @@ public class XrCompositionLayerQuad extends Struct<XrCompositionLayerQuad> imple
         SIZE;
 
     static {
+        XrSwapchainSubImage.createSafe(NULL);
+        XrPosef.createSafe(NULL);
+        XrExtent2Df.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

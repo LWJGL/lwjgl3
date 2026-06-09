@@ -38,6 +38,8 @@ public class VkRenderPassFragmentDensityMapCreateInfoEXT extends Struct<VkRender
         FRAGMENTDENSITYMAPATTACHMENT;
 
     static {
+        VkAttachmentReference.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

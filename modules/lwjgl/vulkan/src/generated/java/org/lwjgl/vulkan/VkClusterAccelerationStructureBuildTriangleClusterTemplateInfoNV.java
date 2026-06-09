@@ -64,6 +64,8 @@ public class VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV ex
         INSTANTIATIONBOUNDINGBOXLIMIT;
 
     static {
+        VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

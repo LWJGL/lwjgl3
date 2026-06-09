@@ -47,6 +47,8 @@ public class ParSLConfig extends Struct<ParSLConfig> implements NativeResource {
         MITER_LIMIT;
 
     static {
+        ParSLViewport.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

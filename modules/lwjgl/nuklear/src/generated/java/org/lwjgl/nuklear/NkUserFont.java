@@ -43,6 +43,10 @@ public class NkUserFont extends Struct<NkUserFont> implements NativeResource {
         TEXTURE;
 
     static {
+        NkHandle.createSafe(NULL);
+        java.util.Objects.requireNonNull(NkTextWidthCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(NkQueryFontGlyphCallbackI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(NkHandle.SIZEOF, NkHandle.ALIGNOF),
             __member(4),

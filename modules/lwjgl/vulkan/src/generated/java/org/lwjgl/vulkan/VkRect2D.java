@@ -36,6 +36,9 @@ public class VkRect2D extends Struct<VkRect2D> implements NativeResource {
         EXTENT;
 
     static {
+        VkOffset2D.createSafe(NULL);
+        VkExtent2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(VkOffset2D.SIZEOF, VkOffset2D.ALIGNOF),
             __member(VkExtent2D.SIZEOF, VkExtent2D.ALIGNOF)

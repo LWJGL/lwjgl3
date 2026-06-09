@@ -41,6 +41,8 @@ public class FMOD_STUDIO_SOUND_INFO extends Struct<FMOD_STUDIO_SOUND_INFO> imple
         SUBSOUNDINDEX;
 
     static {
+        FMOD_CREATESOUNDEXINFO.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(4),

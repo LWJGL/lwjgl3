@@ -38,6 +38,8 @@ public class VkSurfaceFormat2KHR extends Struct<VkSurfaceFormat2KHR> implements 
         SURFACEFORMAT;
 
     static {
+        VkSurfaceFormatKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

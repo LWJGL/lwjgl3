@@ -39,6 +39,8 @@ public class LZ4Stream extends Struct<LZ4Stream> {
         INTERNAL_DONOTUSE;
 
     static {
+        LZ4StreamInternal.createSafe(NULL);
+
         Layout layout = __union(
             __array(POINTER_SIZE, LZ4_STREAM_MINSIZE),
             __member(LZ4StreamInternal.SIZEOF, LZ4StreamInternal.ALIGNOF)

@@ -51,6 +51,9 @@ public class AICamera extends Struct<AICamera> implements NativeResource {
         MORTHOGRAPHICWIDTH;
 
     static {
+        AIString.createSafe(NULL);
+        AIVector3D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(AIString.SIZEOF, AIString.ALIGNOF),
             __member(AIVector3D.SIZEOF, AIVector3D.ALIGNOF),

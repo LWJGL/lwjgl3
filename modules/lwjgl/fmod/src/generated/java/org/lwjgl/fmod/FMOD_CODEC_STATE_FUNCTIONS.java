@@ -49,6 +49,15 @@ public class FMOD_CODEC_STATE_FUNCTIONS extends Struct<FMOD_CODEC_STATE_FUNCTION
         SIZE;
 
     static {
+        java.util.Objects.requireNonNull(FMOD_CODEC_METADATA_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_CODEC_ALLOC_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_CODEC_FREE_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_CODEC_LOG_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_CODEC_FILE_READ_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_CODEC_FILE_SEEK_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_CODEC_FILE_TELL_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_CODEC_FILE_SIZE_FUNCI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

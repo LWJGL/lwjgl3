@@ -46,6 +46,8 @@ public class StdVideoEncodeAV1OperatingPointInfo extends Struct<StdVideoEncodeAV
         INITIAL_DISPLAY_DELAY_MINUS_1;
 
     static {
+        StdVideoEncodeAV1OperatingPointInfoFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoEncodeAV1OperatingPointInfoFlags.SIZEOF, StdVideoEncodeAV1OperatingPointInfoFlags.ALIGNOF),
             __member(2),

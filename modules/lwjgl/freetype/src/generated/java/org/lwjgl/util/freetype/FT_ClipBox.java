@@ -40,6 +40,8 @@ public class FT_ClipBox extends Struct<FT_ClipBox> implements NativeResource {
         BOTTOM_RIGHT;
 
     static {
+        FT_Vector.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FT_Vector.SIZEOF, FT_Vector.ALIGNOF),
             __member(FT_Vector.SIZEOF, FT_Vector.ALIGNOF),

@@ -46,6 +46,9 @@ public class AIBone extends Struct<AIBone> implements NativeResource {
         MOFFSETMATRIX;
 
     static {
+        AIString.createSafe(NULL);
+        AIMatrix4x4.createSafe(NULL);
+
         Layout layout = __struct(
             __member(AIString.SIZEOF, AIString.ALIGNOF),
             __member(4),

@@ -41,6 +41,8 @@ public class VkClusterAccelerationStructureInstantiateClusterInfoNV extends Stru
         VERTEXBUFFER;
 
     static {
+        VkStridedDeviceAddressNV.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

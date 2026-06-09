@@ -53,6 +53,9 @@ public class VkPhysicalDeviceProperties extends Struct<VkPhysicalDevicePropertie
         SPARSEPROPERTIES;
 
     static {
+        VkPhysicalDeviceLimits.createSafe(NULL);
+        VkPhysicalDeviceSparseProperties.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

@@ -45,6 +45,8 @@ public class XrAnchorSpaceCreateInfoANDROID extends Struct<XrAnchorSpaceCreateIn
         TRACKABLE;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -38,6 +38,8 @@ public class VkSparseImageFormatProperties2 extends Struct<VkSparseImageFormatPr
         PROPERTIES;
 
     static {
+        VkSparseImageFormatProperties.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

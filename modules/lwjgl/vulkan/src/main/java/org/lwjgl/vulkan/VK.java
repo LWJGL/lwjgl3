@@ -94,6 +94,8 @@ public final class VK {
                 throw new IllegalStateException();
         }
         create(VK);
+        // Avoid "unloaded signature classes" when calling VK functions that accept VkAllocationCallbacks, which is usually null.
+        VkAllocationCallbacks.createSafe(NULL);
     }
 
     /**

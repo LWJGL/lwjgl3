@@ -53,6 +53,8 @@ public class StdVideoEncodeH264PictureInfo extends Struct<StdVideoEncodeH264Pict
         PREFLISTS;
 
     static {
+        StdVideoEncodeH264PictureInfoFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoEncodeH264PictureInfoFlags.SIZEOF, StdVideoEncodeH264PictureInfoFlags.ALIGNOF),
             __member(1),

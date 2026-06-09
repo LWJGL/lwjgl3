@@ -52,6 +52,9 @@ public class XrCompositionLayerSpaceWarpInfoFB extends Struct<XrCompositionLayer
         FARZ;
 
     static {
+        XrSwapchainSubImage.createSafe(NULL);
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

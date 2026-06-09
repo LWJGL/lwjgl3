@@ -43,6 +43,8 @@ public class NkNineSlice extends Struct<NkNineSlice> implements NativeResource {
         B;
 
     static {
+        NkImage.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkImage.SIZEOF, NkImage.ALIGNOF),
             __member(2),

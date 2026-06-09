@@ -56,6 +56,8 @@ public class VkImageMemoryBarrier2 extends Struct<VkImageMemoryBarrier2> impleme
         SUBRESOURCERANGE;
 
     static {
+        VkImageSubresourceRange.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

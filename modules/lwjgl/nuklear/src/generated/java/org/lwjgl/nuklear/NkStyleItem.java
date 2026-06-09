@@ -37,6 +37,8 @@ public class NkStyleItem extends Struct<NkStyleItem> implements NativeResource {
         DATA;
 
     static {
+        NkStyleItemData.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(NkStyleItemData.SIZEOF, NkStyleItemData.ALIGNOF)

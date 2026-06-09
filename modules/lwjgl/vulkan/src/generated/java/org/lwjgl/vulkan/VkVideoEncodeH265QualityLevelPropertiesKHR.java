@@ -52,6 +52,8 @@ public class VkVideoEncodeH265QualityLevelPropertiesKHR extends Struct<VkVideoEn
         PREFERREDMAXL1REFERENCECOUNT;
 
     static {
+        VkVideoEncodeH265QpKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

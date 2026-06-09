@@ -46,6 +46,8 @@ public class VkDisplayPropertiesKHR extends Struct<VkDisplayPropertiesKHR> imple
         PERSISTENTCONTENT;
 
     static {
+        VkExtent2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(8),
             __member(POINTER_SIZE),

@@ -56,6 +56,10 @@ public class XrFrameSynthesisInfoEXT extends Struct<XrFrameSynthesisInfoEXT> imp
         FARZ;
 
     static {
+        XrSwapchainSubImage.createSafe(NULL);
+        XrVector4f.createSafe(NULL);
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

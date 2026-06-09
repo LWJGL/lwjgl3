@@ -54,6 +54,8 @@ public class IOURingZCRXIfqReg extends Struct<IOURingZCRXIfqReg> implements Nati
         __RESV;
 
     static {
+        IOURingZCRXOffsets.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

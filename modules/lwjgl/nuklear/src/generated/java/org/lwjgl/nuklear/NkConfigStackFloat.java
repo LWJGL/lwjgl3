@@ -36,6 +36,8 @@ class NkConfigStackFloat extends Struct<NkConfigStackFloat> {
         ELEMENTS;
 
     static {
+        NkConfigStackFloatElement.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __array(NkConfigStackFloatElement.SIZEOF, NkConfigStackFloatElement.ALIGNOF, 32)

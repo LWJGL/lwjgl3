@@ -57,6 +57,8 @@ public class SDL_HapticCondition extends Struct<SDL_HapticCondition> implements 
         CENTER;
 
     static {
+        SDL_HapticDirection.createSafe(NULL);
+
         Layout layout = __struct(
             __member(2),
             __member(SDL_HapticDirection.SIZEOF, SDL_HapticDirection.ALIGNOF),

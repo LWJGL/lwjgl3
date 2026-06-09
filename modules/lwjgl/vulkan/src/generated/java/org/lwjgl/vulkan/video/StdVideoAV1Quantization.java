@@ -52,6 +52,8 @@ public class StdVideoAV1Quantization extends Struct<StdVideoAV1Quantization> imp
         QM_V;
 
     static {
+        StdVideoAV1QuantizationFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoAV1QuantizationFlags.SIZEOF, StdVideoAV1QuantizationFlags.ALIGNOF),
             __member(1),

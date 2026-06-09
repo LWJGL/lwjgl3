@@ -38,6 +38,8 @@ public class XrRoomMeshFaceMETA extends Struct<XrRoomMeshFaceMETA> implements Na
         SEMANTICLABEL;
 
     static {
+        XrUuid.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrUuid.SIZEOF, XrUuid.ALIGNOF),
             __member(XrUuid.SIZEOF, XrUuid.ALIGNOF),

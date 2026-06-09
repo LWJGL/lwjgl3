@@ -38,6 +38,8 @@ public class XrControllerModelNodeStateMSFT extends Struct<XrControllerModelNode
         NODEPOSE;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

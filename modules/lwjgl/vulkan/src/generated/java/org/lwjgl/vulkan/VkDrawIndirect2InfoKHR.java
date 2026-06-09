@@ -42,6 +42,8 @@ public class VkDrawIndirect2InfoKHR extends Struct<VkDrawIndirect2InfoKHR> imple
         DRAWCOUNT;
 
     static {
+        VkStridedDeviceAddressRangeKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

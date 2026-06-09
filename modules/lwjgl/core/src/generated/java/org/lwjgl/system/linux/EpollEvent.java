@@ -37,6 +37,8 @@ public class EpollEvent extends Struct<EpollEvent> implements NativeResource {
         DATA;
 
     static {
+        EpollData.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(EpollData.SIZEOF, EpollData.ALIGNOF)

@@ -44,6 +44,8 @@ public class VmaDetailedStatistics extends Struct<VmaDetailedStatistics> impleme
         UNUSEDRANGESIZEMAX;
 
     static {
+        VmaStatistics.createSafe(NULL);
+
         Layout layout = __struct(
             __member(VmaStatistics.SIZEOF, VmaStatistics.ALIGNOF),
             __member(4),

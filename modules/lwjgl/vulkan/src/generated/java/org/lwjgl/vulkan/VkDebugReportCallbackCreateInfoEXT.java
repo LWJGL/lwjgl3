@@ -43,6 +43,8 @@ public class VkDebugReportCallbackCreateInfoEXT extends Struct<VkDebugReportCall
         PUSERDATA;
 
     static {
+        java.util.Objects.requireNonNull(VkDebugReportCallbackEXTI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

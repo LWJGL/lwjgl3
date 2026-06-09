@@ -41,6 +41,10 @@ public class FT_Memory extends Struct<FT_Memory> implements NativeResource {
         REALLOC;
 
     static {
+        java.util.Objects.requireNonNull(FT_Alloc_FuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FT_Free_FuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FT_Realloc_FuncI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

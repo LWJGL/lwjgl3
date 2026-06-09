@@ -45,6 +45,8 @@ public class StdVideoVP9Segmentation extends Struct<StdVideoVP9Segmentation> imp
         FEATUREDATA;
 
     static {
+        StdVideoVP9SegmentationFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoVP9SegmentationFlags.SIZEOF, StdVideoVP9SegmentationFlags.ALIGNOF),
             __array(1, STD_VIDEO_VP9_MAX_SEGMENTATION_TREE_PROBS),

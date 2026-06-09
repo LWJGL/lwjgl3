@@ -41,6 +41,8 @@ public class AITexture extends Struct<AITexture> {
         MFILENAME;
 
     static {
+        AIString.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

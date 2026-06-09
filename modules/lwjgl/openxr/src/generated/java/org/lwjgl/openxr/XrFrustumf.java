@@ -40,6 +40,9 @@ public class XrFrustumf extends Struct<XrFrustumf> implements NativeResource {
         FARZ;
 
     static {
+        XrPosef.createSafe(NULL);
+        XrFovf.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrPosef.SIZEOF, XrPosef.ALIGNOF),
             __member(XrFovf.SIZEOF, XrFovf.ALIGNOF),

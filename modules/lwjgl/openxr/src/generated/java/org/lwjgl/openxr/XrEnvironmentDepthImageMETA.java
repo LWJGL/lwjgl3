@@ -45,6 +45,8 @@ public class XrEnvironmentDepthImageMETA extends Struct<XrEnvironmentDepthImageM
         VIEWS;
 
     static {
+        XrEnvironmentDepthImageViewMETA.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

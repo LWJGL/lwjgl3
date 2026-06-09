@@ -893,6 +893,35 @@ $indentation}"""
                     """
     static {"""
                 )
+
+                // --------------------------------------------------
+                // When a function-pointer or nested-struct member is always set to NULL, its corresponding class may never be initialized.
+                // This creates an interesting way for EA to fail:
+                //   * The member setter always sees null as input -> class not initialized
+                //   * The member setter is never inlined because of "unloaded signature classes" (HotSpot: callee_method->has_unloaded_classes_in_signature())
+                //   * Because the member setter is not inlined, the struct instance escapes by-definition.
+                //   * The struct instance cannot be scalar replaced.
+                //
+                // Example: VkCommandBufferBeginInfo::pInheritanceInfo
+                // Workaround: eagerly initialize member classes when the struct class is initialized.
+                val classInitSet = HashSet<NativeType>()
+                for (member in visibleMembers) {
+                    if (classInitSet.contains(member.nativeType)) {
+                        continue;
+                    }
+                    if (member.nativeType is StructType && member.nativeType.name != ANONYMOUS) {
+                        print("\n$t$t${member.nativeType.javaMethodType}.createSafe(NULL);")
+                        classInitSet.add(member.nativeType)
+                    } else if (member.nativeType is FunctionType) {
+                        print("\n$t${t}java.util.Objects.requireNonNull(${member.nativeType.javaMethodType}.DESCRIPTOR);")
+                        classInitSet.add(member.nativeType)
+                    }
+                }
+                if (classInitSet.isNotEmpty()) {
+                    println()
+                }
+                // --------------------------------------------------
+
                 if (static != null)
                     print(
                         """

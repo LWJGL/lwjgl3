@@ -51,6 +51,8 @@ public class VkPartitionedAccelerationStructureWriteInstanceDataNV extends Struc
         ACCELERATIONSTRUCTURE;
 
     static {
+        VkTransformMatrixKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(VkTransformMatrixKHR.SIZEOF, VkTransformMatrixKHR.ALIGNOF),
             __array(4, 6),

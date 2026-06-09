@@ -40,6 +40,8 @@ public class StdVideoEncodeH265ReferenceInfo extends Struct<StdVideoEncodeH265Re
         TEMPORALID;
 
     static {
+        StdVideoEncodeH265ReferenceInfoFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoEncodeH265ReferenceInfoFlags.SIZEOF, StdVideoEncodeH265ReferenceInfoFlags.ALIGNOF),
             __member(4),

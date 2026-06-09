@@ -53,6 +53,8 @@ public class VkVideoDecodeInfoKHR extends Struct<VkVideoDecodeInfoKHR> implement
         PREFERENCESLOTS;
 
     static {
+        VkVideoPictureResourceInfoKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

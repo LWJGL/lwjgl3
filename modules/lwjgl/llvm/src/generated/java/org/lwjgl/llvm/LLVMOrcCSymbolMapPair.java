@@ -37,6 +37,8 @@ public class LLVMOrcCSymbolMapPair extends Struct<LLVMOrcCSymbolMapPair> impleme
         SYM;
 
     static {
+        LLVMJITEvaluatedSymbol.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(LLVMJITEvaluatedSymbol.SIZEOF, LLVMJITEvaluatedSymbol.ALIGNOF)

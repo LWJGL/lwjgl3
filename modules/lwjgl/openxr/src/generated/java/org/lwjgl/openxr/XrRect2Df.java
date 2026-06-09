@@ -36,6 +36,9 @@ public class XrRect2Df extends Struct<XrRect2Df> implements NativeResource {
         EXTENT;
 
     static {
+        XrOffset2Df.createSafe(NULL);
+        XrExtent2Df.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrOffset2Df.SIZEOF, XrOffset2Df.ALIGNOF),
             __member(XrExtent2Df.SIZEOF, XrExtent2Df.ALIGNOF)

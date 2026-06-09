@@ -39,6 +39,8 @@ public class XrSwapchainSubImage extends Struct<XrSwapchainSubImage> implements 
         IMAGEARRAYINDEX;
 
     static {
+        XrRect2Di.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(XrRect2Di.SIZEOF, XrRect2Di.ALIGNOF),

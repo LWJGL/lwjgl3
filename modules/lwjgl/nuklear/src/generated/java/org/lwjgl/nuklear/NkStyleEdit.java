@@ -81,6 +81,11 @@ public class NkStyleEdit extends Struct<NkStyleEdit> implements NativeResource {
         DISABLED_FACTOR;
 
     static {
+        NkStyleItem.createSafe(NULL);
+        NkColor.createSafe(NULL);
+        NkStyleScrollbar.createSafe(NULL);
+        NkVec2.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkStyleItem.SIZEOF, NkStyleItem.ALIGNOF),
             __member(NkStyleItem.SIZEOF, NkStyleItem.ALIGNOF),

@@ -48,6 +48,13 @@ public class FMOD_OUTPUT_STATE extends Struct<FMOD_OUTPUT_STATE> implements Nati
         REQUESTRESET;
 
     static {
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_READFROMMIXER_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_ALLOC_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_FREE_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_LOG_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_COPYPORT_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_REQUESTRESET_FUNCI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

@@ -37,6 +37,8 @@ public class LLVMOrcCDependenceMapPair extends Struct<LLVMOrcCDependenceMapPair>
         NAMES;
 
     static {
+        LLVMOrcCSymbolsList.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(LLVMOrcCSymbolsList.SIZEOF, LLVMOrcCSymbolsList.ALIGNOF)

@@ -38,6 +38,8 @@ public class NFDPickFolderArgs extends Struct<NFDPickFolderArgs> implements Nati
         PARENTWINDOW;
 
     static {
+        NFDWindowHandle.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(NFDWindowHandle.SIZEOF, NFDWindowHandle.ALIGNOF)

@@ -49,6 +49,10 @@ public class VkMemoryToImageCopy extends Struct<VkMemoryToImageCopy> implements 
         IMAGEEXTENT;
 
     static {
+        VkImageSubresourceLayers.createSafe(NULL);
+        VkOffset3D.createSafe(NULL);
+        VkExtent3D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -36,6 +36,8 @@ public class XrSceneSphereBoundMSFT extends Struct<XrSceneSphereBoundMSFT> imple
         RADIUS;
 
     static {
+        XrVector3f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrVector3f.SIZEOF, XrVector3f.ALIGNOF),
             __member(4)

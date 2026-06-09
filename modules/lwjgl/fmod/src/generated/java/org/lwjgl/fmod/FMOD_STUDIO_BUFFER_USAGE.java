@@ -36,6 +36,8 @@ public class FMOD_STUDIO_BUFFER_USAGE extends Struct<FMOD_STUDIO_BUFFER_USAGE> i
         STUDIOHANDLE;
 
     static {
+        FMOD_STUDIO_BUFFER_INFO.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FMOD_STUDIO_BUFFER_INFO.SIZEOF, FMOD_STUDIO_BUFFER_INFO.ALIGNOF),
             __member(FMOD_STUDIO_BUFFER_INFO.SIZEOF, FMOD_STUDIO_BUFFER_INFO.ALIGNOF)

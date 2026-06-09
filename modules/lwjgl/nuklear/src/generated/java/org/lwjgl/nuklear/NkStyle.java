@@ -82,6 +82,21 @@ public class NkStyle extends Struct<NkStyle> implements NativeResource {
         WINDOW;
 
     static {
+        NkStyleText.createSafe(NULL);
+        NkStyleButton.createSafe(NULL);
+        NkStyleToggle.createSafe(NULL);
+        NkStyleSelectable.createSafe(NULL);
+        NkStyleSlider.createSafe(NULL);
+        NkStyleKnob.createSafe(NULL);
+        NkStyleProgress.createSafe(NULL);
+        NkStyleProperty.createSafe(NULL);
+        NkStyleEdit.createSafe(NULL);
+        NkStyleChart.createSafe(NULL);
+        NkStyleScrollbar.createSafe(NULL);
+        NkStyleTab.createSafe(NULL);
+        NkStyleCombo.createSafe(NULL);
+        NkStyleWindow.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __array(POINTER_SIZE, NK_CURSOR_COUNT),

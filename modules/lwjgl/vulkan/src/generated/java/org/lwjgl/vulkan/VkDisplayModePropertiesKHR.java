@@ -36,6 +36,8 @@ public class VkDisplayModePropertiesKHR extends Struct<VkDisplayModePropertiesKH
         PARAMETERS;
 
     static {
+        VkDisplayModeParametersKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(8),
             __member(VkDisplayModeParametersKHR.SIZEOF, VkDisplayModeParametersKHR.ALIGNOF)

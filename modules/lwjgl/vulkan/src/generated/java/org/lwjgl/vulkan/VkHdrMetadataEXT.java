@@ -52,6 +52,8 @@ public class VkHdrMetadataEXT extends Struct<VkHdrMetadataEXT> implements Native
         MAXFRAMEAVERAGELIGHTLEVEL;
 
     static {
+        VkXYColorEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

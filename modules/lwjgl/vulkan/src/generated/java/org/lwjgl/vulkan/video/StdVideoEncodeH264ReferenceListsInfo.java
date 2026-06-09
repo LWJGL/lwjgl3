@@ -59,6 +59,8 @@ public class StdVideoEncodeH264ReferenceListsInfo extends Struct<StdVideoEncodeH
         PREFPICMARKINGOPERATIONS;
 
     static {
+        StdVideoEncodeH264ReferenceListsInfoFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoEncodeH264ReferenceListsInfoFlags.SIZEOF, StdVideoEncodeH264ReferenceListsInfoFlags.ALIGNOF),
             __member(1),

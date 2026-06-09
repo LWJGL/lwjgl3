@@ -54,6 +54,9 @@ public class VkVideoCapabilitiesKHR extends Struct<VkVideoCapabilitiesKHR> imple
         STDHEADERVERSION;
 
     static {
+        VkExtent2D.createSafe(NULL);
+        VkExtensionProperties.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

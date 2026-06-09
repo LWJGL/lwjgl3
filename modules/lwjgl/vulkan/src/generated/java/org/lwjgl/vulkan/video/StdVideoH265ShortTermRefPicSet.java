@@ -63,6 +63,8 @@ public class StdVideoH265ShortTermRefPicSet extends Struct<StdVideoH265ShortTerm
         DELTA_POC_S1_MINUS1;
 
     static {
+        StdVideoH265ShortTermRefPicSetFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoH265ShortTermRefPicSetFlags.SIZEOF, StdVideoH265ShortTermRefPicSetFlags.ALIGNOF),
             __member(4),

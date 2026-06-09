@@ -94,6 +94,10 @@ public class FT_Face extends Struct<FT_Face> {
         INTERNAL;
 
     static {
+        FT_Generic.createSafe(NULL);
+        FT_BBox.createSafe(NULL);
+        FT_List.createSafe(NULL);
+
         Layout layout = __struct(
             __member(CLONG_SIZE),
             __member(CLONG_SIZE),

@@ -38,6 +38,9 @@ public class XrSpatialMeshDataEXT extends Struct<XrSpatialMeshDataEXT> implement
         INDEXBUFFER;
 
     static {
+        XrPosef.createSafe(NULL);
+        XrSpatialBufferEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrPosef.SIZEOF, XrPosef.ALIGNOF),
             __member(XrSpatialBufferEXT.SIZEOF, XrSpatialBufferEXT.ALIGNOF),

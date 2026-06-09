@@ -38,6 +38,8 @@ public class VkDispatchGraphCountInfoAMDX extends Struct<VkDispatchGraphCountInf
         STRIDE;
 
     static {
+        VkDeviceOrHostAddressConstAMDX.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(VkDeviceOrHostAddressConstAMDX.SIZEOF, VkDeviceOrHostAddressConstAMDX.ALIGNOF),

@@ -53,6 +53,10 @@ public class XrCompositionLayerEquirectKHR extends Struct<XrCompositionLayerEqui
         BIAS;
 
     static {
+        XrSwapchainSubImage.createSafe(NULL);
+        XrPosef.createSafe(NULL);
+        XrVector2f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

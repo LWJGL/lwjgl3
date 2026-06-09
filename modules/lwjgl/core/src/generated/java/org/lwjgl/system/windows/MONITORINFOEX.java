@@ -42,6 +42,8 @@ public class MONITORINFOEX extends Struct<MONITORINFOEX> implements NativeResour
         SZDEVICE;
 
     static {
+        RECT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(RECT.SIZEOF, RECT.ALIGNOF),

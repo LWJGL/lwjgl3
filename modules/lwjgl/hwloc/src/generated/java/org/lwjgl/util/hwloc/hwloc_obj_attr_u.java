@@ -45,6 +45,13 @@ public class hwloc_obj_attr_u extends Struct<hwloc_obj_attr_u> implements Native
         OSDEV;
 
     static {
+        hwloc_numanode_attr_s.createSafe(NULL);
+        hwloc_cache_attr_s.createSafe(NULL);
+        hwloc_group_attr_s.createSafe(NULL);
+        hwloc_pcidev_attr_s.createSafe(NULL);
+        hwloc_bridge_attr_s.createSafe(NULL);
+        hwloc_osdev_attr_s.createSafe(NULL);
+
         Layout layout = __union(
             __member(hwloc_numanode_attr_s.SIZEOF, hwloc_numanode_attr_s.ALIGNOF),
             __member(hwloc_cache_attr_s.SIZEOF, hwloc_cache_attr_s.ALIGNOF),

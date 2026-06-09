@@ -39,6 +39,8 @@ public class LLVMOrcCSymbolDependenceGroup extends Struct<LLVMOrcCSymbolDependen
         NUMDEPENDENCIES;
 
     static {
+        LLVMOrcCSymbolsList.createSafe(NULL);
+
         Layout layout = __struct(
             __member(LLVMOrcCSymbolsList.SIZEOF, LLVMOrcCSymbolsList.ALIGNOF),
             __member(POINTER_SIZE),

@@ -40,6 +40,8 @@ public class VkExternalImageFormatPropertiesNV extends Struct<VkExternalImageFor
         COMPATIBLEHANDLETYPES;
 
     static {
+        VkImageFormatProperties.createSafe(NULL);
+
         Layout layout = __struct(
             __member(VkImageFormatProperties.SIZEOF, VkImageFormatProperties.ALIGNOF),
             __member(4),

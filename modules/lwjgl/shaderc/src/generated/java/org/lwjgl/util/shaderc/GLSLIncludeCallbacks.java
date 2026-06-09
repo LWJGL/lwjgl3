@@ -39,6 +39,10 @@ public class GLSLIncludeCallbacks extends Struct<GLSLIncludeCallbacks> implement
         FREE_INCLUDE_RESULT;
 
     static {
+        java.util.Objects.requireNonNull(GLSLIncludeSystemFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(GLSLIncludeLocalFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(GLSLFreeIncludeResultFuncI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

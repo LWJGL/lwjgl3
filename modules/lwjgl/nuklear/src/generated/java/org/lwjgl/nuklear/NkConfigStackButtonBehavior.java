@@ -36,6 +36,8 @@ class NkConfigStackButtonBehavior extends Struct<NkConfigStackButtonBehavior> {
         ELEMENTS;
 
     static {
+        NkConfigStackButtonBehaviorElement.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __array(NkConfigStackButtonBehaviorElement.SIZEOF, NkConfigStackButtonBehaviorElement.ALIGNOF, 8)

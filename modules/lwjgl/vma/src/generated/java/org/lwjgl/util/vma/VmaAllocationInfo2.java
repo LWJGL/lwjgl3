@@ -38,6 +38,8 @@ public class VmaAllocationInfo2 extends Struct<VmaAllocationInfo2> implements Na
         DEDICATEDMEMORY;
 
     static {
+        VmaAllocationInfo.createSafe(NULL);
+
         Layout layout = __struct(
             __member(VmaAllocationInfo.SIZEOF, VmaAllocationInfo.ALIGNOF),
             __member(8),

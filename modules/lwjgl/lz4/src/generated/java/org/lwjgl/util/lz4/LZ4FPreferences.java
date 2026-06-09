@@ -44,6 +44,8 @@ public class LZ4FPreferences extends Struct<LZ4FPreferences> implements NativeRe
         RESERVED;
 
     static {
+        LZ4FFrameInfo.createSafe(NULL);
+
         Layout layout = __struct(
             __member(LZ4FFrameInfo.SIZEOF, LZ4FFrameInfo.ALIGNOF),
             __member(4),

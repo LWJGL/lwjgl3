@@ -54,6 +54,9 @@ public class BGFXCaps extends Struct<BGFXCaps> {
         FORMATS;
 
     static {
+        BGFXCapsGPU.createSafe(NULL);
+        BGFXCapsLimits.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(8),

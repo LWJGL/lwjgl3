@@ -38,6 +38,8 @@ public class VkSparseImageFormatProperties extends Struct<VkSparseImageFormatPro
         FLAGS;
 
     static {
+        VkExtent3D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(VkExtent3D.SIZEOF, VkExtent3D.ALIGNOF),

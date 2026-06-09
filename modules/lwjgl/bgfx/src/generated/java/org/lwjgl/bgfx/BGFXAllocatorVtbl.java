@@ -36,6 +36,8 @@ public class BGFXAllocatorVtbl extends Struct<BGFXAllocatorVtbl> implements Nati
         REALLOC;
 
     static {
+        java.util.Objects.requireNonNull(BGFXReallocCallbackI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE)
         );

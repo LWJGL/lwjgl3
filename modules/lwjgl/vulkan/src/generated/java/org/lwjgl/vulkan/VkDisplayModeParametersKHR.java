@@ -36,6 +36,8 @@ public class VkDisplayModeParametersKHR extends Struct<VkDisplayModeParametersKH
         REFRESHRATE;
 
     static {
+        VkExtent2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(VkExtent2D.SIZEOF, VkExtent2D.ALIGNOF),
             __member(4)

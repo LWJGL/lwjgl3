@@ -37,6 +37,8 @@ public class NkStr extends Struct<NkStr> implements NativeResource {
         LEN;
 
     static {
+        NkBuffer.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkBuffer.SIZEOF, NkBuffer.ALIGNOF),
             __member(4)

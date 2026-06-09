@@ -37,6 +37,8 @@ public class NkMouseButton extends Struct<NkMouseButton> {
         CLICKED_POS;
 
     static {
+        NkVec2.createSafe(NULL);
+
         Layout layout = __struct(
             __member(1),
             __member(4),

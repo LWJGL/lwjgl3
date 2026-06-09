@@ -51,6 +51,9 @@ public class NkChartSlot extends Struct<NkChartSlot> {
         SHOW_MARKERS;
 
     static {
+        NkColor.createSafe(NULL);
+        NkVec2.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(NkColor.SIZEOF, NkColor.ALIGNOF),

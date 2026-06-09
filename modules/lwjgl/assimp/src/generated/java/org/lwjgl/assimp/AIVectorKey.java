@@ -39,6 +39,8 @@ public class AIVectorKey extends Struct<AIVectorKey> implements NativeResource {
         MINTERPOLATION;
 
     static {
+        AIVector3D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(8),
             __member(AIVector3D.SIZEOF, AIVector3D.ALIGNOF),

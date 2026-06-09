@@ -54,6 +54,8 @@ public class VkVideoEncodeH264QualityLevelPropertiesKHR extends Struct<VkVideoEn
         PREFERREDSTDENTROPYCODINGMODEFLAG;
 
     static {
+        VkVideoEncodeH264QpKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

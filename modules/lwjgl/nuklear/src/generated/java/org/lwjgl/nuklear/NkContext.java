@@ -77,6 +77,17 @@ public class NkContext extends Struct<NkContext> implements NativeResource {
         SEQ;
 
     static {
+        NkInput.createSafe(NULL);
+        NkStyle.createSafe(NULL);
+        NkBuffer.createSafe(NULL);
+        NkClipboard.createSafe(NULL);
+        NkConfigurationStacks.createSafe(NULL);
+        NkDrawList.createSafe(NULL);
+        NkHandle.createSafe(NULL);
+        NkTextEdit.createSafe(NULL);
+        NkCommandBuffer.createSafe(NULL);
+        NkPool.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkInput.SIZEOF, NkInput.ALIGNOF),
             __member(NkStyle.SIZEOF, NkStyle.ALIGNOF),

@@ -40,6 +40,8 @@ public class VkPushDataInfoEXT extends Struct<VkPushDataInfoEXT> implements Nati
         DATA;
 
     static {
+        VkHostAddressRangeConstEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

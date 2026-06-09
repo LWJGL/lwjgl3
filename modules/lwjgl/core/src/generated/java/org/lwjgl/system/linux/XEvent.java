@@ -101,6 +101,40 @@ public class XEvent extends Struct<XEvent> implements NativeResource {
         XCOOKIE;
 
     static {
+        XAnyEvent.createSafe(NULL);
+        XKeyEvent.createSafe(NULL);
+        XButtonEvent.createSafe(NULL);
+        XMotionEvent.createSafe(NULL);
+        XCrossingEvent.createSafe(NULL);
+        XFocusChangeEvent.createSafe(NULL);
+        XExposeEvent.createSafe(NULL);
+        XGraphicsExposeEvent.createSafe(NULL);
+        XNoExposeEvent.createSafe(NULL);
+        XVisibilityEvent.createSafe(NULL);
+        XCreateWindowEvent.createSafe(NULL);
+        XDestroyWindowEvent.createSafe(NULL);
+        XUnmapEvent.createSafe(NULL);
+        XMapEvent.createSafe(NULL);
+        XMapRequestEvent.createSafe(NULL);
+        XReparentEvent.createSafe(NULL);
+        XConfigureEvent.createSafe(NULL);
+        XGravityEvent.createSafe(NULL);
+        XResizeRequestEvent.createSafe(NULL);
+        XConfigureRequestEvent.createSafe(NULL);
+        XCirculateEvent.createSafe(NULL);
+        XCirculateRequestEvent.createSafe(NULL);
+        XPropertyEvent.createSafe(NULL);
+        XSelectionClearEvent.createSafe(NULL);
+        XSelectionRequestEvent.createSafe(NULL);
+        XSelectionEvent.createSafe(NULL);
+        XColormapEvent.createSafe(NULL);
+        XClientMessageEvent.createSafe(NULL);
+        XMappingEvent.createSafe(NULL);
+        XErrorEvent.createSafe(NULL);
+        XKeymapEvent.createSafe(NULL);
+        XGenericEvent.createSafe(NULL);
+        XGenericEventCookie.createSafe(NULL);
+
         Layout layout = __union(
             __member(4),
             __member(XAnyEvent.SIZEOF, XAnyEvent.ALIGNOF),

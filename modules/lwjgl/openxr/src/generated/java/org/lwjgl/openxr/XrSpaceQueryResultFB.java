@@ -36,6 +36,8 @@ public class XrSpaceQueryResultFB extends Struct<XrSpaceQueryResultFB> implement
         UUID;
 
     static {
+        XrUuidEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(XrUuidEXT.SIZEOF, XrUuidEXT.ALIGNOF)

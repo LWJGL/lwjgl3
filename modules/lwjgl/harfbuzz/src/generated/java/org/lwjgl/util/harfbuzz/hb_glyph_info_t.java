@@ -42,6 +42,8 @@ public class hb_glyph_info_t extends Struct<hb_glyph_info_t> implements NativeRe
         VAR2;
 
     static {
+        hb_var_int_t.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

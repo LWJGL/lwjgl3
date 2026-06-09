@@ -72,6 +72,8 @@ public class AIScene extends Struct<AIScene> implements NativeResource {
         MPRIVATE;
 
     static {
+        AIString.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

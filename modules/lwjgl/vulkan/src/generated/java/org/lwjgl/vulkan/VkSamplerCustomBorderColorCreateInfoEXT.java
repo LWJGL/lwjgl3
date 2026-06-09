@@ -40,6 +40,8 @@ public class VkSamplerCustomBorderColorCreateInfoEXT extends Struct<VkSamplerCus
         FORMAT;
 
     static {
+        VkClearColorValue.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

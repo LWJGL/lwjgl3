@@ -36,6 +36,8 @@ public class XrEyeANDROID extends Struct<XrEyeANDROID> implements NativeResource
         EYEPOSE;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(XrPosef.SIZEOF, XrPosef.ALIGNOF)

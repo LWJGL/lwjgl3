@@ -39,6 +39,10 @@ public class NkClipboard extends Struct<NkClipboard> implements NativeResource {
         COPY;
 
     static {
+        NkHandle.createSafe(NULL);
+        java.util.Objects.requireNonNull(NkPluginPasteI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(NkPluginCopyI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(NkHandle.SIZEOF, NkHandle.ALIGNOF),
             __member(POINTER_SIZE),

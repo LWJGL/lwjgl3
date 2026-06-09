@@ -36,6 +36,8 @@ public class XrSpatialPersistenceDataEXT extends Struct<XrSpatialPersistenceData
         PERSISTSTATE;
 
     static {
+        XrUuid.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrUuid.SIZEOF, XrUuid.ALIGNOF),
             __member(4)

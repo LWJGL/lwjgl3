@@ -239,6 +239,8 @@ public class GLSLangResource extends Struct<GLSLangResource> implements NativeRe
         LIMITS;
 
     static {
+        GLSLangLimits.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

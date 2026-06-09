@@ -57,6 +57,10 @@ public class BGFXInit extends Struct<BGFXInit> implements NativeResource {
         ALLOCATOR;
 
     static {
+        BGFXPlatformData.createSafe(NULL);
+        BGFXResolution.createSafe(NULL);
+        BGFXInitLimits.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(2),

@@ -53,6 +53,10 @@ public class NkStyleChart extends Struct<NkStyleChart> implements NativeResource
         SHOW_MARKERS;
 
     static {
+        NkStyleItem.createSafe(NULL);
+        NkColor.createSafe(NULL);
+        NkVec2.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkStyleItem.SIZEOF, NkStyleItem.ALIGNOF),
             __member(NkColor.SIZEOF, NkColor.ALIGNOF),

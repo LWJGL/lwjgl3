@@ -38,6 +38,8 @@ public class XrFoveationConfigurationHTC extends Struct<XrFoveationConfiguration
         FOCALCENTEROFFSET;
 
     static {
+        XrVector2f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

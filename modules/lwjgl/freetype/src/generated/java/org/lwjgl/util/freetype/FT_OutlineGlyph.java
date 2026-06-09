@@ -35,6 +35,9 @@ public class FT_OutlineGlyph extends Struct<FT_OutlineGlyph> {
         OUTLINE;
 
     static {
+        FT_Glyph.createSafe(NULL);
+        FT_Outline.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FT_Glyph.SIZEOF, FT_Glyph.ALIGNOF),
             __member(FT_Outline.SIZEOF, FT_Outline.ALIGNOF)

@@ -45,6 +45,8 @@ public class StdVideoDecodeAV1ReferenceInfo extends Struct<StdVideoDecodeAV1Refe
         SAVEDORDERHINTS;
 
     static {
+        StdVideoDecodeAV1ReferenceInfoFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoDecodeAV1ReferenceInfoFlags.SIZEOF, StdVideoDecodeAV1ReferenceInfoFlags.ALIGNOF),
             __member(1),

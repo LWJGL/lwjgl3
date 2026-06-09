@@ -38,6 +38,8 @@ public class VkPhysicalDeviceMemoryProperties2 extends Struct<VkPhysicalDeviceMe
         MEMORYPROPERTIES;
 
     static {
+        VkPhysicalDeviceMemoryProperties.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

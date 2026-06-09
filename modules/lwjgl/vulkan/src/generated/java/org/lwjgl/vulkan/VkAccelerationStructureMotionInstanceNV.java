@@ -38,6 +38,8 @@ public class VkAccelerationStructureMotionInstanceNV extends Struct<VkAccelerati
         DATA;
 
     static {
+        VkAccelerationStructureMotionInstanceDataNV.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

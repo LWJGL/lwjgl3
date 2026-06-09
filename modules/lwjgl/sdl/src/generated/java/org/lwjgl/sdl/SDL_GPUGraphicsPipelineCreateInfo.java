@@ -50,6 +50,12 @@ public class SDL_GPUGraphicsPipelineCreateInfo extends Struct<SDL_GPUGraphicsPip
         PROPS;
 
     static {
+        SDL_GPUVertexInputState.createSafe(NULL);
+        SDL_GPURasterizerState.createSafe(NULL);
+        SDL_GPUMultisampleState.createSafe(NULL);
+        SDL_GPUDepthStencilState.createSafe(NULL);
+        SDL_GPUGraphicsPipelineTargetInfo.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

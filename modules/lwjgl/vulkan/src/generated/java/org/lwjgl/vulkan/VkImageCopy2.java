@@ -46,6 +46,10 @@ public class VkImageCopy2 extends Struct<VkImageCopy2> implements NativeResource
         EXTENT;
 
     static {
+        VkImageSubresourceLayers.createSafe(NULL);
+        VkOffset3D.createSafe(NULL);
+        VkExtent3D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

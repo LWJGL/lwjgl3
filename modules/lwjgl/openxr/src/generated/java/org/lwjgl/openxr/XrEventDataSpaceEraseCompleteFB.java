@@ -46,6 +46,8 @@ public class XrEventDataSpaceEraseCompleteFB extends Struct<XrEventDataSpaceEras
         LOCATION;
 
     static {
+        XrUuidEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

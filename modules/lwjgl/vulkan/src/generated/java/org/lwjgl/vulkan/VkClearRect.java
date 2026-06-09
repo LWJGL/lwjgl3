@@ -38,6 +38,8 @@ public class VkClearRect extends Struct<VkClearRect> implements NativeResource {
         LAYERCOUNT;
 
     static {
+        VkRect2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(VkRect2D.SIZEOF, VkRect2D.ALIGNOF),
             __member(4),

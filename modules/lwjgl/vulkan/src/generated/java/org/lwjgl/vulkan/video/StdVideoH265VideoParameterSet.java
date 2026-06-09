@@ -57,6 +57,8 @@ public class StdVideoH265VideoParameterSet extends Struct<StdVideoH265VideoParam
         PPROFILETIERLEVEL;
 
     static {
+        StdVideoH265VpsFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoH265VpsFlags.SIZEOF, StdVideoH265VpsFlags.ALIGNOF),
             __member(1),

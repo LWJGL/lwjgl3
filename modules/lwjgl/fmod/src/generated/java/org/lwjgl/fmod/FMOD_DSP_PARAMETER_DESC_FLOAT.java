@@ -40,6 +40,8 @@ public class FMOD_DSP_PARAMETER_DESC_FLOAT extends Struct<FMOD_DSP_PARAMETER_DES
         MAPPING;
 
     static {
+        FMOD_DSP_PARAMETER_FLOAT_MAPPING.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

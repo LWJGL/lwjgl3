@@ -47,6 +47,8 @@ public class VkDebugUtilsMessengerCreateInfoEXT extends Struct<VkDebugUtilsMesse
         PUSERDATA;
 
     static {
+        java.util.Objects.requireNonNull(VkDebugUtilsMessengerCallbackEXTI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

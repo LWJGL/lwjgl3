@@ -41,6 +41,8 @@ public class XrSpatialAnchorPersistenceInfoMSFT extends Struct<XrSpatialAnchorPe
         SPATIALANCHOR;
 
     static {
+        XrSpatialAnchorPersistenceNameMSFT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

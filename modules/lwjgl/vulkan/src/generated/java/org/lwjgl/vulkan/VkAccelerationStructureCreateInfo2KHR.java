@@ -44,6 +44,8 @@ public class VkAccelerationStructureCreateInfo2KHR extends Struct<VkAcceleration
         TYPE;
 
     static {
+        VkDeviceAddressRangeKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

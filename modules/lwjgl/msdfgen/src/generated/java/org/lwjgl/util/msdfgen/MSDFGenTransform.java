@@ -39,6 +39,9 @@ public class MSDFGenTransform extends Struct<MSDFGenTransform> implements Native
         DISTANCE_MAPPING;
 
     static {
+        MSDFGenVector2.createSafe(NULL);
+        MSDFGenRange.createSafe(NULL);
+
         Layout layout = __struct(
             __member(MSDFGenVector2.SIZEOF, MSDFGenVector2.ALIGNOF),
             __member(MSDFGenVector2.SIZEOF, MSDFGenVector2.ALIGNOF),

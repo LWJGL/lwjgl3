@@ -65,6 +65,8 @@ public class StdVideoH265HrdParameters extends Struct<StdVideoH265HrdParameters>
         PSUBLAYERHRDPARAMETERSVCL;
 
     static {
+        StdVideoH265HrdFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoH265HrdFlags.SIZEOF, StdVideoH265HrdFlags.ALIGNOF),
             __member(1),

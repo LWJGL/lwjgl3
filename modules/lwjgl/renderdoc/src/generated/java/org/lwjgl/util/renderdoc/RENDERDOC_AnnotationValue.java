@@ -53,6 +53,8 @@ public class RENDERDOC_AnnotationValue extends Struct<RENDERDOC_AnnotationValue>
         APIOBJECT;
 
     static {
+        RENDERDOC_AnnotationVectorValue.createSafe(NULL);
+
         Layout layout = __union(
             __member(1),
             __member(4),

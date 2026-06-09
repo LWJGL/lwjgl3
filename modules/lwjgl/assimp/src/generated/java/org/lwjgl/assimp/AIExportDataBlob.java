@@ -42,6 +42,8 @@ public class AIExportDataBlob extends Struct<AIExportDataBlob> implements Native
         NEXT;
 
     static {
+        AIString.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

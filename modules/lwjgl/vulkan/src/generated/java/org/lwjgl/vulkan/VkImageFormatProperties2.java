@@ -38,6 +38,8 @@ public class VkImageFormatProperties2 extends Struct<VkImageFormatProperties2> i
         IMAGEFORMATPROPERTIES;
 
     static {
+        VkImageFormatProperties.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

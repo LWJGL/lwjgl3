@@ -41,6 +41,11 @@ public class SVG_RendererHooks extends Struct<SVG_RendererHooks> implements Nati
         PRESET_SLOT;
 
     static {
+        java.util.Objects.requireNonNull(SVG_Lib_Init_FuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SVG_Lib_Free_FuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SVG_Lib_Render_FuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SVG_Lib_Preset_Slot_FuncI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

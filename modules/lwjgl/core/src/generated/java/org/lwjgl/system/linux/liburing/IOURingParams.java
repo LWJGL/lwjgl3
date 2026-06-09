@@ -54,6 +54,9 @@ public class IOURingParams extends Struct<IOURingParams> implements NativeResour
         CQ_OFF;
 
     static {
+        IOSQRingOffsets.createSafe(NULL);
+        IOCQRingOffsets.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

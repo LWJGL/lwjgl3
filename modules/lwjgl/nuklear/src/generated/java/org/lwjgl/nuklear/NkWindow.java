@@ -71,6 +71,13 @@ public class NkWindow extends Struct<NkWindow> {
         PARENT;
 
     static {
+        NkRect.createSafe(NULL);
+        NkScroll.createSafe(NULL);
+        NkCommandBuffer.createSafe(NULL);
+        NkPropertyState.createSafe(NULL);
+        NkPopupState.createSafe(NULL);
+        NkEditState.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

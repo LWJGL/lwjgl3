@@ -57,6 +57,8 @@ public class StdVideoEncodeH265WeightTable extends Struct<StdVideoEncodeH265Weig
         DELTA_CHROMA_OFFSET_L1;
 
     static {
+        StdVideoEncodeH265WeightTableFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoEncodeH265WeightTableFlags.SIZEOF, StdVideoEncodeH265WeightTableFlags.ALIGNOF),
             __member(1),

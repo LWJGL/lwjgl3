@@ -38,6 +38,8 @@ public class VkMemoryRequirements2 extends Struct<VkMemoryRequirements2> impleme
         MEMORYREQUIREMENTS;
 
     static {
+        VkMemoryRequirements.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

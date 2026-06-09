@@ -44,6 +44,8 @@ public class GPU_DEVICE extends Struct<GPU_DEVICE> implements NativeResource {
         RCVIRTUALSCREEN;
 
     static {
+        RECT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __array(1, 32),

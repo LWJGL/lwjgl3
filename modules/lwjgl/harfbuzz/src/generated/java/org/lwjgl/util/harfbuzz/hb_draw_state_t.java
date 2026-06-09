@@ -56,6 +56,8 @@ public class hb_draw_state_t extends Struct<hb_draw_state_t> implements NativeRe
         RESERVED7;
 
     static {
+        hb_var_num_t.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

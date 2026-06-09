@@ -52,6 +52,9 @@ public class NkMouse extends Struct<NkMouse> {
         UNGRAB;
 
     static {
+        NkMouseButton.createSafe(NULL);
+        NkVec2.createSafe(NULL);
+
         Layout layout = __struct(
             __array(NkMouseButton.SIZEOF, NkMouseButton.ALIGNOF, NK_BUTTON_MAX),
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),

@@ -58,6 +58,9 @@ public class VkMicromapBuildInfoEXT extends Struct<VkMicromapBuildInfoEXT> imple
         TRIANGLEARRAYSTRIDE;
 
     static {
+        VkDeviceOrHostAddressConstKHR.createSafe(NULL);
+        VkDeviceOrHostAddressKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

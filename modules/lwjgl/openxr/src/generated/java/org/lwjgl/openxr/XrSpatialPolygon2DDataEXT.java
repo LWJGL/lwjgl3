@@ -36,6 +36,9 @@ public class XrSpatialPolygon2DDataEXT extends Struct<XrSpatialPolygon2DDataEXT>
         VERTEXBUFFER;
 
     static {
+        XrPosef.createSafe(NULL);
+        XrSpatialBufferEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrPosef.SIZEOF, XrPosef.ALIGNOF),
             __member(XrSpatialBufferEXT.SIZEOF, XrSpatialBufferEXT.ALIGNOF)

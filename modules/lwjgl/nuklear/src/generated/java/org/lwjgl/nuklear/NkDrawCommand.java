@@ -39,6 +39,9 @@ public class NkDrawCommand extends Struct<NkDrawCommand> {
         USERDATA;
 
     static {
+        NkRect.createSafe(NULL);
+        NkHandle.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(NkRect.SIZEOF, NkRect.ALIGNOF),

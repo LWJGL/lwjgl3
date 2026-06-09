@@ -46,6 +46,8 @@ public class NkChart extends Struct<NkChart> {
         SLOTS;
 
     static {
+        NkChartSlot.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

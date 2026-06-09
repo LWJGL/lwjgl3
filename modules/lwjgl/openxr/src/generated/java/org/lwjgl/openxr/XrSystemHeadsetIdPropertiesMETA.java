@@ -38,6 +38,8 @@ public class XrSystemHeadsetIdPropertiesMETA extends Struct<XrSystemHeadsetIdPro
         ID;
 
     static {
+        XrUuidEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -36,6 +36,8 @@ public class StdVideoDecodeH265ReferenceInfo extends Struct<StdVideoDecodeH265Re
         PICORDERCNTVAL;
 
     static {
+        StdVideoDecodeH265ReferenceInfoFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoDecodeH265ReferenceInfoFlags.SIZEOF, StdVideoDecodeH265ReferenceInfoFlags.ALIGNOF),
             __member(4)

@@ -38,6 +38,8 @@ public class VkSubresourceLayout2 extends Struct<VkSubresourceLayout2> implement
         SUBRESOURCELAYOUT;
 
     static {
+        VkSubresourceLayout.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

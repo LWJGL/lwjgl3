@@ -47,6 +47,10 @@ public class FT_SVG_Document extends Struct<FT_SVG_Document> {
         DELTA;
 
     static {
+        FT_Size_Metrics.createSafe(NULL);
+        FT_Matrix.createSafe(NULL);
+        FT_Vector.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(CLONG_SIZE),

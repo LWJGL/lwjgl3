@@ -57,6 +57,8 @@ public class StdVideoEncodeH265PictureInfo extends Struct<StdVideoEncodeH265Pict
         PLONGTERMREFPICS;
 
     static {
+        StdVideoEncodeH265PictureInfoFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoEncodeH265PictureInfoFlags.SIZEOF, StdVideoEncodeH265PictureInfoFlags.ALIGNOF),
             __member(4),

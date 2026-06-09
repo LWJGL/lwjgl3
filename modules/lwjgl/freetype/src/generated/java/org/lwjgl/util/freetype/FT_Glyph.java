@@ -39,6 +39,8 @@ public class FT_Glyph extends Struct<FT_Glyph> {
         ADVANCE;
 
     static {
+        FT_Vector.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

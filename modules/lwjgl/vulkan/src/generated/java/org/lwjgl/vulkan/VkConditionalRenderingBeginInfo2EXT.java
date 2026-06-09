@@ -42,6 +42,8 @@ public class VkConditionalRenderingBeginInfo2EXT extends Struct<VkConditionalRen
         FLAGS;
 
     static {
+        VkDeviceAddressRangeKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -42,6 +42,9 @@ public class VkImageViewSampleWeightCreateInfoQCOM extends Struct<VkImageViewSam
         NUMPHASES;
 
     static {
+        VkOffset2D.createSafe(NULL);
+        VkExtent2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

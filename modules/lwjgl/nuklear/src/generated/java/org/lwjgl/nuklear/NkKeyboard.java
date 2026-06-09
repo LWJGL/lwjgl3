@@ -40,6 +40,8 @@ public class NkKeyboard extends Struct<NkKeyboard> {
         TEXT_LEN;
 
     static {
+        NkKey.createSafe(NULL);
+
         Layout layout = __struct(
             __array(NkKey.SIZEOF, NkKey.ALIGNOF, NK_KEY_MAX),
             __array(1, NK_INPUT_MAX),

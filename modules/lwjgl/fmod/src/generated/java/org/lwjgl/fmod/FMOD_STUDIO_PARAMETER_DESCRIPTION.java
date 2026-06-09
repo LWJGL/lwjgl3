@@ -49,6 +49,9 @@ public class FMOD_STUDIO_PARAMETER_DESCRIPTION extends Struct<FMOD_STUDIO_PARAME
         GUID;
 
     static {
+        FMOD_STUDIO_PARAMETER_ID.createSafe(NULL);
+        FMOD_GUID.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(FMOD_STUDIO_PARAMETER_ID.SIZEOF, FMOD_STUDIO_PARAMETER_ID.ALIGNOF),

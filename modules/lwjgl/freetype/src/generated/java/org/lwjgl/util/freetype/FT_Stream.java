@@ -53,6 +53,10 @@ public class FT_Stream extends Struct<FT_Stream> implements NativeResource {
         LIMIT;
 
     static {
+        FT_StreamDesc.createSafe(NULL);
+        java.util.Objects.requireNonNull(FT_Stream_IoFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FT_Stream_CloseFuncI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(CLONG_SIZE),

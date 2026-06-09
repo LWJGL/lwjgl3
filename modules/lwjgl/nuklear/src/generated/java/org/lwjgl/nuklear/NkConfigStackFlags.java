@@ -36,6 +36,8 @@ class NkConfigStackFlags extends Struct<NkConfigStackFlags> {
         ELEMENTS;
 
     static {
+        NkConfigStackFlagsElement.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __array(NkConfigStackFlagsElement.SIZEOF, NkConfigStackFlagsElement.ALIGNOF, 32)

@@ -36,6 +36,8 @@ public class XrSpaceVelocityData extends Struct<XrSpaceVelocityData> {
         ANGULARVELOCITY;
 
     static {
+        XrVector3f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(8),
             __member(XrVector3f.SIZEOF, XrVector3f.ALIGNOF),

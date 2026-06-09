@@ -63,6 +63,11 @@ public class NkStyleWindowHeader extends Struct<NkStyleWindowHeader> implements 
         SPACING;
 
     static {
+        NkStyleItem.createSafe(NULL);
+        NkStyleButton.createSafe(NULL);
+        NkColor.createSafe(NULL);
+        NkVec2.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkStyleItem.SIZEOF, NkStyleItem.ALIGNOF),
             __member(NkStyleItem.SIZEOF, NkStyleItem.ALIGNOF),

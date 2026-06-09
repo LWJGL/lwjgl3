@@ -50,6 +50,9 @@ public class AINode extends Struct<AINode> implements NativeResource {
         MMETADATA;
 
     static {
+        AIString.createSafe(NULL);
+        AIMatrix4x4.createSafe(NULL);
+
         Layout layout = __struct(
             __member(AIString.SIZEOF, AIString.ALIGNOF),
             __member(AIMatrix4x4.SIZEOF, AIMatrix4x4.ALIGNOF),

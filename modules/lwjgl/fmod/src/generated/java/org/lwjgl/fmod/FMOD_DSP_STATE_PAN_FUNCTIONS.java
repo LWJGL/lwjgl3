@@ -45,6 +45,13 @@ public class FMOD_DSP_STATE_PAN_FUNCTIONS extends Struct<FMOD_DSP_STATE_PAN_FUNC
         GETROLLOFFGAIN;
 
     static {
+        java.util.Objects.requireNonNull(FMOD_DSP_PAN_SUMMONOMATRIX_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_PAN_SUMSTEREOMATRIX_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_PAN_SUMSURROUNDMATRIX_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_PAN_SUMMONOTOSURROUNDMATRIX_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_PAN_SUMSTEREOTOSURROUNDMATRIX_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_PAN_GETROLLOFFGAIN_FUNCI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

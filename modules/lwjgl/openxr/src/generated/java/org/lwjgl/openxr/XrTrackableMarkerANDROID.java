@@ -48,6 +48,9 @@ public class XrTrackableMarkerANDROID extends Struct<XrTrackableMarkerANDROID> i
         EXTENTS;
 
     static {
+        XrPosef.createSafe(NULL);
+        XrExtent2Df.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

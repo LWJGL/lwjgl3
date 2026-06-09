@@ -38,6 +38,8 @@ public class XrHandJointLocationEXT extends Struct<XrHandJointLocationEXT> imple
         RADIUS;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(8),
             __member(XrPosef.SIZEOF, XrPosef.ALIGNOF),

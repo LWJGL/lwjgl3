@@ -52,6 +52,11 @@ public class VkDeviceMemoryImageCopyKHR extends Struct<VkDeviceMemoryImageCopyKH
         IMAGEEXTENT;
 
     static {
+        VkDeviceAddressRangeKHR.createSafe(NULL);
+        VkImageSubresourceLayers.createSafe(NULL);
+        VkOffset3D.createSafe(NULL);
+        VkExtent3D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

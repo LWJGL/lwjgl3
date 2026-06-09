@@ -53,6 +53,9 @@ public class NkPopupState extends Struct<NkPopupState> {
         HEADER;
 
     static {
+        NkPopupBuffer.createSafe(NULL);
+        NkRect.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(4),

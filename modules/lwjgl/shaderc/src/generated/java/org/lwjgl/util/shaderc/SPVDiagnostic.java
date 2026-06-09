@@ -39,6 +39,8 @@ public class SPVDiagnostic extends Struct<SPVDiagnostic> implements NativeResour
         ISTEXTSOURCE;
 
     static {
+        SPVPosition.createSafe(NULL);
+
         Layout layout = __struct(
             __member(SPVPosition.SIZEOF, SPVPosition.ALIGNOF),
             __member(POINTER_SIZE),

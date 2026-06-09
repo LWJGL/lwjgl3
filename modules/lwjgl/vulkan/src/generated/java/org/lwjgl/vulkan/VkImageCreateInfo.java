@@ -62,6 +62,8 @@ public class VkImageCreateInfo extends Struct<VkImageCreateInfo> implements Nati
         INITIALLAYOUT;
 
     static {
+        VkExtent3D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

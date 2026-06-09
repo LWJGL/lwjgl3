@@ -38,6 +38,8 @@ public class VkImageSubresource2 extends Struct<VkImageSubresource2> implements 
         IMAGESUBRESOURCE;
 
     static {
+        VkImageSubresource.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

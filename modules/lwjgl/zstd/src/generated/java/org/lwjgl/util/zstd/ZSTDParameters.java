@@ -37,6 +37,9 @@ public class ZSTDParameters extends Struct<ZSTDParameters> implements NativeReso
         FPARAMS;
 
     static {
+        ZSTDCompressionParameters.createSafe(NULL);
+        ZSTDFrameParameters.createSafe(NULL);
+
         Layout layout = __struct(
             __member(ZSTDCompressionParameters.SIZEOF, ZSTDCompressionParameters.ALIGNOF),
             __member(ZSTDFrameParameters.SIZEOF, ZSTDFrameParameters.ALIGNOF)

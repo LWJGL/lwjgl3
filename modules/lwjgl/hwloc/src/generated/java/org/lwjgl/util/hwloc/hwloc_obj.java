@@ -97,6 +97,8 @@ public class hwloc_obj extends Struct<hwloc_obj> implements NativeResource {
         GP_INDEX;
 
     static {
+        hwloc_infos_s.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

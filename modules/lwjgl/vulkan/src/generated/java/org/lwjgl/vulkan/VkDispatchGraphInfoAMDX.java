@@ -40,6 +40,8 @@ public class VkDispatchGraphInfoAMDX extends Struct<VkDispatchGraphInfoAMDX> imp
         PAYLOADSTRIDE;
 
     static {
+        VkDeviceOrHostAddressConstAMDX.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

@@ -52,6 +52,9 @@ public class SDL_GPUBlitInfo extends Struct<SDL_GPUBlitInfo> implements NativeRe
         PADDING3;
 
     static {
+        SDL_GPUBlitRegion.createSafe(NULL);
+        SDL_FColor.createSafe(NULL);
+
         Layout layout = __struct(
             __member(SDL_GPUBlitRegion.SIZEOF, SDL_GPUBlitRegion.ALIGNOF),
             __member(SDL_GPUBlitRegion.SIZEOF, SDL_GPUBlitRegion.ALIGNOF),

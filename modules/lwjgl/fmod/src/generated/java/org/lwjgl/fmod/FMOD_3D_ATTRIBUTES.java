@@ -40,6 +40,8 @@ public class FMOD_3D_ATTRIBUTES extends Struct<FMOD_3D_ATTRIBUTES> implements Na
         UP;
 
     static {
+        FMOD_VECTOR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FMOD_VECTOR.SIZEOF, FMOD_VECTOR.ALIGNOF),
             __member(FMOD_VECTOR.SIZEOF, FMOD_VECTOR.ALIGNOF),

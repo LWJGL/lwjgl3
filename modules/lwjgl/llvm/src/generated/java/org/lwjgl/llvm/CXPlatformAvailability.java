@@ -44,6 +44,9 @@ public class CXPlatformAvailability extends Struct<CXPlatformAvailability> imple
         MESSAGE;
 
     static {
+        CXString.createSafe(NULL);
+        CXVersion.createSafe(NULL);
+
         Layout layout = __struct(
             __member(CXString.SIZEOF, CXString.ALIGNOF),
             __member(CXVersion.SIZEOF, CXVersion.ALIGNOF),

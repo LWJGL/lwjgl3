@@ -44,6 +44,12 @@ public class FT_Raster_Funcs extends Struct<FT_Raster_Funcs> implements NativeRe
         RASTER_DONE;
 
     static {
+        java.util.Objects.requireNonNull(FT_Raster_NewFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FT_Raster_ResetFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FT_Raster_SetModeFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FT_Raster_RenderFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FT_Raster_DoneFuncI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

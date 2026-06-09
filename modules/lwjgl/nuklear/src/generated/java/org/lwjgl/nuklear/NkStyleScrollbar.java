@@ -79,6 +79,14 @@ public class NkStyleScrollbar extends Struct<NkStyleScrollbar> implements Native
         DRAW_END;
 
     static {
+        NkStyleItem.createSafe(NULL);
+        NkColor.createSafe(NULL);
+        NkVec2.createSafe(NULL);
+        NkStyleButton.createSafe(NULL);
+        NkHandle.createSafe(NULL);
+        java.util.Objects.requireNonNull(NkDrawBeginCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(NkDrawEndCallbackI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(NkStyleItem.SIZEOF, NkStyleItem.ALIGNOF),
             __member(NkStyleItem.SIZEOF, NkStyleItem.ALIGNOF),

@@ -36,6 +36,9 @@ public class XrPosef extends Struct<XrPosef> implements NativeResource {
         POSITION;
 
     static {
+        XrQuaternionf.createSafe(NULL);
+        XrVector3f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrQuaternionf.SIZEOF, XrQuaternionf.ALIGNOF),
             __member(XrVector3f.SIZEOF, XrVector3f.ALIGNOF)

@@ -89,6 +89,8 @@ public class StdVideoEncodeAV1PictureInfo extends Struct<StdVideoEncodeAV1Pictur
         PBUFFERREMOVALTIMES;
 
     static {
+        StdVideoEncodeAV1PictureInfoFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoEncodeAV1PictureInfoFlags.SIZEOF, StdVideoEncodeAV1PictureInfoFlags.ALIGNOF),
             __member(4),

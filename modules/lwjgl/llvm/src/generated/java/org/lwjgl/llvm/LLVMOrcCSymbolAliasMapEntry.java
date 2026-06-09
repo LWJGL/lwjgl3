@@ -37,6 +37,8 @@ public class LLVMOrcCSymbolAliasMapEntry extends Struct<LLVMOrcCSymbolAliasMapEn
         FLAGS;
 
     static {
+        LLVMJITSymbolFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(LLVMJITSymbolFlags.SIZEOF, LLVMJITSymbolFlags.ALIGNOF)

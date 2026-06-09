@@ -36,6 +36,9 @@ public class CXIdxObjCProtocolRefInfo extends Struct<CXIdxObjCProtocolRefInfo> {
         LOC;
 
     static {
+        CXCursor.createSafe(NULL);
+        CXIdxLoc.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(CXCursor.SIZEOF, CXCursor.ALIGNOF),

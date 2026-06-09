@@ -39,6 +39,9 @@ public class FT_BitmapGlyph extends Struct<FT_BitmapGlyph> {
         BITMAP;
 
     static {
+        FT_Glyph.createSafe(NULL);
+        FT_Bitmap.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FT_Glyph.SIZEOF, FT_Glyph.ALIGNOF),
             __member(4),

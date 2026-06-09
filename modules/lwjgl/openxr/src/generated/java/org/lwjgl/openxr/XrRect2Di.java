@@ -36,6 +36,9 @@ public class XrRect2Di extends Struct<XrRect2Di> implements NativeResource {
         EXTENT;
 
     static {
+        XrOffset2Di.createSafe(NULL);
+        XrExtent2Di.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrOffset2Di.SIZEOF, XrOffset2Di.ALIGNOF),
             __member(XrExtent2Di.SIZEOF, XrExtent2Di.ALIGNOF)

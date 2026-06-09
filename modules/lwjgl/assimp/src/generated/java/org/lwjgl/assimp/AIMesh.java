@@ -76,6 +76,9 @@ public class AIMesh extends Struct<AIMesh> implements NativeResource {
         MTEXTURECOORDSNAMES;
 
     static {
+        AIString.createSafe(NULL);
+        AIAABB.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

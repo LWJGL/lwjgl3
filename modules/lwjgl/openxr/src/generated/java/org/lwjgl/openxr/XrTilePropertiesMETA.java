@@ -42,6 +42,10 @@ public class XrTilePropertiesMETA extends Struct<XrTilePropertiesMETA> implement
         ORIGIN;
 
     static {
+        XrExtent3DiMETA.createSafe(NULL);
+        XrExtent2Di.createSafe(NULL);
+        XrOffset2Di.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

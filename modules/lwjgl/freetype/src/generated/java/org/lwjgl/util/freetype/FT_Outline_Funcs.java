@@ -44,6 +44,11 @@ public class FT_Outline_Funcs extends Struct<FT_Outline_Funcs> implements Native
         DELTA;
 
     static {
+        java.util.Objects.requireNonNull(FT_Outline_MoveToFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FT_Outline_LineToFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FT_Outline_ConicToFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FT_Outline_CubicToFuncI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

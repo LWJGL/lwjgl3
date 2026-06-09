@@ -34,6 +34,8 @@ public class XrBodySkeletonJointHTC extends Struct<XrBodySkeletonJointHTC> imple
         POSE;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrPosef.SIZEOF, XrPosef.ALIGNOF)
         );

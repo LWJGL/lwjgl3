@@ -37,6 +37,8 @@ public class LLVMOrcCSymbolAliasMapPair extends Struct<LLVMOrcCSymbolAliasMapPai
         ENTRY;
 
     static {
+        LLVMOrcCSymbolAliasMapEntry.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(LLVMOrcCSymbolAliasMapEntry.SIZEOF, LLVMOrcCSymbolAliasMapEntry.ALIGNOF)

@@ -37,6 +37,8 @@ public class hwloc_location extends Struct<hwloc_location> implements NativeReso
         LOCATION;
 
     static {
+        hwloc_location_u.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(hwloc_location_u.SIZEOF, hwloc_location_u.ALIGNOF)

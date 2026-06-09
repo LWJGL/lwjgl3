@@ -47,6 +47,8 @@ public class VkPhysicalDeviceSampleLocationsPropertiesEXT extends Struct<VkPhysi
         VARIABLESAMPLELOCATIONS;
 
     static {
+        VkExtent2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

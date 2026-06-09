@@ -97,6 +97,11 @@ public class NkStyleWindow extends Struct<NkStyleWindow> implements NativeResour
         TOOLTIP_OFFSET;
 
     static {
+        NkStyleWindowHeader.createSafe(NULL);
+        NkStyleItem.createSafe(NULL);
+        NkColor.createSafe(NULL);
+        NkVec2.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkStyleWindowHeader.SIZEOF, NkStyleWindowHeader.ALIGNOF),
             __member(NkStyleItem.SIZEOF, NkStyleItem.ALIGNOF),

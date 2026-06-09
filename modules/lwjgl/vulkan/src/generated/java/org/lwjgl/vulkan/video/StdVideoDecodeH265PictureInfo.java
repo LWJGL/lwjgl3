@@ -55,6 +55,8 @@ public class StdVideoDecodeH265PictureInfo extends Struct<StdVideoDecodeH265Pict
         REFPICSETLTCURR;
 
     static {
+        StdVideoDecodeH265PictureInfoFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoDecodeH265PictureInfoFlags.SIZEOF, StdVideoDecodeH265PictureInfoFlags.ALIGNOF),
             __member(1),

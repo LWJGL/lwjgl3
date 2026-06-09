@@ -51,6 +51,10 @@ public class NkFont extends Struct<NkFont> implements NativeResource {
         CONFIG;
 
     static {
+        NkUserFont.createSafe(NULL);
+        NkBakedFont.createSafe(NULL);
+        NkHandle.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(NkUserFont.SIZEOF, NkUserFont.ALIGNOF),

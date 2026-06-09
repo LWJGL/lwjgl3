@@ -48,6 +48,8 @@ public class VkVideoFormatPropertiesKHR extends Struct<VkVideoFormatPropertiesKH
         IMAGEUSAGEFLAGS;
 
     static {
+        VkComponentMapping.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

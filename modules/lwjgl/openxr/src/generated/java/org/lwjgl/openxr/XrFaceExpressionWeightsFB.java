@@ -49,6 +49,8 @@ public class XrFaceExpressionWeightsFB extends Struct<XrFaceExpressionWeightsFB>
         TIME;
 
     static {
+        XrFaceExpressionStatusFB.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

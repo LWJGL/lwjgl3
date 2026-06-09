@@ -41,6 +41,8 @@ public class NkMenuState extends Struct<NkMenuState> {
         OFFSET;
 
     static {
+        NkScroll.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

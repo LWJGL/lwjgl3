@@ -36,6 +36,8 @@ public class FMOD_DSP_PARAMETER_3DATTRIBUTES extends Struct<FMOD_DSP_PARAMETER_3
         ABSOLUTE;
 
     static {
+        FMOD_3D_ATTRIBUTES.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FMOD_3D_ATTRIBUTES.SIZEOF, FMOD_3D_ATTRIBUTES.ALIGNOF),
             __member(FMOD_3D_ATTRIBUTES.SIZEOF, FMOD_3D_ATTRIBUTES.ALIGNOF)

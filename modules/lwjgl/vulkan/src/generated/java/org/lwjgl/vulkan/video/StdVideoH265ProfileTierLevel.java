@@ -38,6 +38,8 @@ public class StdVideoH265ProfileTierLevel extends Struct<StdVideoH265ProfileTier
         GENERAL_LEVEL_IDC;
 
     static {
+        StdVideoH265ProfileTierLevelFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoH265ProfileTierLevelFlags.SIZEOF, StdVideoH265ProfileTierLevelFlags.ALIGNOF),
             __member(4),

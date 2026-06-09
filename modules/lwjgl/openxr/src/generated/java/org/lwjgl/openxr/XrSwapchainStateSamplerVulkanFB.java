@@ -60,6 +60,8 @@ public class XrSwapchainStateSamplerVulkanFB extends Struct<XrSwapchainStateSamp
         BORDERCOLOR;
 
     static {
+        XrColor4f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -40,6 +40,9 @@ public class CXIdxObjCCategoryDeclInfo extends Struct<CXIdxObjCCategoryDeclInfo>
         PROTOCOLS;
 
     static {
+        CXCursor.createSafe(NULL);
+        CXIdxLoc.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

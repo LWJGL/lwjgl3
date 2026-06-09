@@ -37,6 +37,9 @@ public class OpusEncCallbacks extends Struct<OpusEncCallbacks> implements Native
         CLOSE;
 
     static {
+        java.util.Objects.requireNonNull(OPEWriteFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(OPECloseFuncI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE)

@@ -47,6 +47,8 @@ public class SpvcHLSLResourceBinding extends Struct<SpvcHLSLResourceBinding> imp
         SAMPLER;
 
     static {
+        SpvcHLSLResourceBindingMapping.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

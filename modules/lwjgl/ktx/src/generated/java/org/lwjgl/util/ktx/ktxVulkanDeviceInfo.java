@@ -53,6 +53,9 @@ public class ktxVulkanDeviceInfo extends Struct<ktxVulkanDeviceInfo> implements 
         VKFUNCS;
 
     static {
+        VkPhysicalDeviceMemoryProperties.createSafe(NULL);
+        ktxVulkanFunctions.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

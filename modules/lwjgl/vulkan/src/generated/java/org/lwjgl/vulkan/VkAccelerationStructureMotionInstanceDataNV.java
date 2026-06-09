@@ -38,6 +38,10 @@ public class VkAccelerationStructureMotionInstanceDataNV extends Struct<VkAccele
         SRTMOTIONINSTANCE;
 
     static {
+        VkAccelerationStructureInstanceKHR.createSafe(NULL);
+        VkAccelerationStructureMatrixMotionInstanceNV.createSafe(NULL);
+        VkAccelerationStructureSRTMotionInstanceNV.createSafe(NULL);
+
         Layout layout = __union(
             __member(VkAccelerationStructureInstanceKHR.SIZEOF, VkAccelerationStructureInstanceKHR.ALIGNOF),
             __member(VkAccelerationStructureMatrixMotionInstanceNV.SIZEOF, VkAccelerationStructureMatrixMotionInstanceNV.ALIGNOF),

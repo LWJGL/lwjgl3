@@ -38,6 +38,8 @@ public class XrSpatialMarkerDataEXT extends Struct<XrSpatialMarkerDataEXT> imple
         DATA;
 
     static {
+        XrSpatialBufferEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

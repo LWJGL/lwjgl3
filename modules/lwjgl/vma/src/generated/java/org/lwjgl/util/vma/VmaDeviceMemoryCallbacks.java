@@ -38,6 +38,9 @@ public class VmaDeviceMemoryCallbacks extends Struct<VmaDeviceMemoryCallbacks> i
         PUSERDATA;
 
     static {
+        java.util.Objects.requireNonNull(VmaAllocateDeviceMemoryFunctionI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(VmaFreeDeviceMemoryFunctionI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

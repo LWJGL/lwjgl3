@@ -44,6 +44,8 @@ public class XrActionStateVector2f extends Struct<XrActionStateVector2f> impleme
         ISACTIVE;
 
     static {
+        XrVector2f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

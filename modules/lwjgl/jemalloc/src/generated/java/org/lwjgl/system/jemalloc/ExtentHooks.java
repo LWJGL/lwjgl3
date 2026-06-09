@@ -52,6 +52,15 @@ public class ExtentHooks extends Struct<ExtentHooks> implements NativeResource {
         MERGE;
 
     static {
+        java.util.Objects.requireNonNull(ExtentAllocI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(ExtentDallocI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(ExtentDestroyI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(ExtentCommitI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(ExtentDecommitI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(ExtentPurgeI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(ExtentSplitI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(ExtentMergeI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

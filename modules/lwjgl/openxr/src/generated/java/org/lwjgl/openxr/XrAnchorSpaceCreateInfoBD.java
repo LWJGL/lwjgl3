@@ -41,6 +41,8 @@ public class XrAnchorSpaceCreateInfoBD extends Struct<XrAnchorSpaceCreateInfoBD>
         POSEINANCHORSPACE;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

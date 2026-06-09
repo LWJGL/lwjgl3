@@ -43,6 +43,8 @@ public class AIMaterialProperty extends Struct<AIMaterialProperty> {
         MDATA;
 
     static {
+        AIString.createSafe(NULL);
+
         Layout layout = __struct(
             __member(AIString.SIZEOF, AIString.ALIGNOF),
             __member(4),

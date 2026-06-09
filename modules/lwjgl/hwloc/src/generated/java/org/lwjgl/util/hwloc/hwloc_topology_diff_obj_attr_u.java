@@ -37,6 +37,10 @@ public class hwloc_topology_diff_obj_attr_u extends Struct<hwloc_topology_diff_o
         STRING;
 
     static {
+        hwloc_topology_diff_obj_attr_generic_s.createSafe(NULL);
+        hwloc_topology_diff_obj_attr_uint64_s.createSafe(NULL);
+        hwloc_topology_diff_obj_attr_string_s.createSafe(NULL);
+
         Layout layout = __union(
             __member(hwloc_topology_diff_obj_attr_generic_s.SIZEOF, hwloc_topology_diff_obj_attr_generic_s.ALIGNOF),
             __member(hwloc_topology_diff_obj_attr_uint64_s.SIZEOF, hwloc_topology_diff_obj_attr_uint64_s.ALIGNOF),

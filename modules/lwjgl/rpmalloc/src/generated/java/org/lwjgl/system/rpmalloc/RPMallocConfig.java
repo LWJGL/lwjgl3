@@ -54,6 +54,11 @@ public class RPMallocConfig extends Struct<RPMallocConfig> implements NativeReso
         HUGE_PAGE_NAME;
 
     static {
+        java.util.Objects.requireNonNull(RPMemoryMapCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(RPMemoryUnmapCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(RPErrorCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(RPMapFailCallbackI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

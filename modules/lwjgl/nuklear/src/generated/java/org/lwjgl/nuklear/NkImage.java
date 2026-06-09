@@ -42,6 +42,8 @@ public class NkImage extends Struct<NkImage> implements NativeResource {
         REGION;
 
     static {
+        NkHandle.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkHandle.SIZEOF, NkHandle.ALIGNOF),
             __member(2),

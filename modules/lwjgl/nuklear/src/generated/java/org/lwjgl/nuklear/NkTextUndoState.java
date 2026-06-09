@@ -44,6 +44,8 @@ public class NkTextUndoState extends Struct<NkTextUndoState> {
         REDO_CHAR_POINT;
 
     static {
+        NkTextUndoRecord.createSafe(NULL);
+
         Layout layout = __struct(
             __array(NkTextUndoRecord.SIZEOF, NkTextUndoRecord.ALIGNOF, 99),
             __array(4, 999),

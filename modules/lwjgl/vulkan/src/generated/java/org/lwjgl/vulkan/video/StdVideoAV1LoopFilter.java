@@ -49,6 +49,8 @@ public class StdVideoAV1LoopFilter extends Struct<StdVideoAV1LoopFilter> impleme
         LOOP_FILTER_MODE_DELTAS;
 
     static {
+        StdVideoAV1LoopFilterFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoAV1LoopFilterFlags.SIZEOF, StdVideoAV1LoopFilterFlags.ALIGNOF),
             __array(1, STD_VIDEO_AV1_MAX_LOOP_FILTER_STRENGTHS),

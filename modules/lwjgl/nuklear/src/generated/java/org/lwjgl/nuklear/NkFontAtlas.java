@@ -60,6 +60,10 @@ public class NkFontAtlas extends Struct<NkFontAtlas> implements NativeResource {
         FONT_NUM;
 
     static {
+        NkAllocator.createSafe(NULL);
+        NkRecti.createSafe(NULL);
+        NkCursor.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(4),

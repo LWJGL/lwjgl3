@@ -40,6 +40,10 @@ public class FT_Incremental_Funcs extends Struct<FT_Incremental_Funcs> implement
         GET_GLYPH_METRICS;
 
     static {
+        java.util.Objects.requireNonNull(FT_Incremental_GetGlyphDataFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FT_Incremental_FreeGlyphDataFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FT_Incremental_GetGlyphMetricsFuncI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

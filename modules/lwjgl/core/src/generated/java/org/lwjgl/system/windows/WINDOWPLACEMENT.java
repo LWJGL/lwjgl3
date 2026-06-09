@@ -44,6 +44,9 @@ public class WINDOWPLACEMENT extends Struct<WINDOWPLACEMENT> implements NativeRe
         RCNORMALPOSITION;
 
     static {
+        POINT.createSafe(NULL);
+        RECT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

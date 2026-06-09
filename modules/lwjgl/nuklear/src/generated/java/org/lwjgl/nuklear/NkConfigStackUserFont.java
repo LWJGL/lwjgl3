@@ -36,6 +36,8 @@ class NkConfigStackUserFont extends Struct<NkConfigStackUserFont> {
         ELEMENTS;
 
     static {
+        NkConfigStackUserFontElement.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __array(NkConfigStackUserFontElement.SIZEOF, NkConfigStackUserFontElement.ALIGNOF, 8)

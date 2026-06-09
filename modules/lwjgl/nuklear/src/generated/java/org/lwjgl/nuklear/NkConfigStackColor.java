@@ -36,6 +36,8 @@ class NkConfigStackColor extends Struct<NkConfigStackColor> {
         ELEMENTS;
 
     static {
+        NkConfigStackColorElement.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __array(NkConfigStackColorElement.SIZEOF, NkConfigStackColorElement.ALIGNOF, 32)

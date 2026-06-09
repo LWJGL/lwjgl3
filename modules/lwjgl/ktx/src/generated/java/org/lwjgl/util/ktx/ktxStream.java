@@ -70,6 +70,14 @@ public class ktxStream extends Struct<ktxStream> implements NativeResource {
         CLOSEONDESTRUCT;
 
     static {
+        java.util.Objects.requireNonNull(ktxStream_readI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(ktxStream_skipI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(ktxStream_writeI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(ktxStream_getposI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(ktxStream_setposI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(ktxStream_getsizeI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(ktxStream_destructI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

@@ -85,6 +85,15 @@ public class SDL_VirtualJoystickDesc extends Struct<SDL_VirtualJoystickDesc> imp
         CLEANUP;
 
     static {
+        java.util.Objects.requireNonNull(SDL_VirtualJoystickDescUpdateCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_VirtualJoystickDescSetPlayerIndexCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_VirtualJoystickDescRumbleCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_VirtualJoystickDescRumbleTriggersCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_VirtualJoystickDescSetLEDCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_VirtualJoystickDescSendEffectCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_VirtualJoystickDescSetSensorsEnabledCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_VirtualJoystickDescCleanupCallbackI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(4),
             __member(2),

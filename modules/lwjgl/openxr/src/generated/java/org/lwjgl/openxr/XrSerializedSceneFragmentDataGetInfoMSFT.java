@@ -38,6 +38,8 @@ public class XrSerializedSceneFragmentDataGetInfoMSFT extends Struct<XrSerialize
         SCENEFRAGMENTID;
 
     static {
+        XrUuidMSFT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

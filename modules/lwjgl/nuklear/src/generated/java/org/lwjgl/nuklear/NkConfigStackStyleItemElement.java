@@ -35,6 +35,8 @@ class NkConfigStackStyleItemElement extends Struct<NkConfigStackStyleItemElement
         OLD_VALUE;
 
     static {
+        NkStyleItem.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(NkStyleItem.SIZEOF, NkStyleItem.ALIGNOF)

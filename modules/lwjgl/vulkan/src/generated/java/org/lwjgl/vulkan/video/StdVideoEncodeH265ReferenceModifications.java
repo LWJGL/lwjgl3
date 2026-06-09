@@ -51,6 +51,8 @@ public class StdVideoEncodeH265ReferenceModifications extends Struct<StdVideoEnc
         LIST_ENTRY_L1;
 
     static {
+        StdVideoEncodeH265ReferenceModificationFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoEncodeH265ReferenceModificationFlags.SIZEOF, StdVideoEncodeH265ReferenceModificationFlags.ALIGNOF),
             __member(1),

@@ -36,6 +36,8 @@ class NkConfigStackStyleItem extends Struct<NkConfigStackStyleItem> {
         ELEMENTS;
 
     static {
+        NkConfigStackStyleItemElement.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __array(NkConfigStackStyleItemElement.SIZEOF, NkConfigStackStyleItemElement.ALIGNOF, 16)

@@ -50,6 +50,8 @@ public class FMOD_ASYNCREADINFO extends Struct<FMOD_ASYNCREADINFO> implements Na
         DONE;
 
     static {
+        java.util.Objects.requireNonNull(FMOD_FILE_ASYNCDONE_FUNCI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(4),

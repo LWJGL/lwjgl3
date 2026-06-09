@@ -38,6 +38,8 @@ public class AILogStream extends Struct<AILogStream> implements NativeResource {
         USER;
 
     static {
+        java.util.Objects.requireNonNull(AILogStreamCallbackI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE)

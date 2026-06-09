@@ -39,6 +39,10 @@ public class NkAllocator extends Struct<NkAllocator> implements NativeResource {
         MFREE;
 
     static {
+        NkHandle.createSafe(NULL);
+        java.util.Objects.requireNonNull(NkPluginAllocI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(NkPluginFreeI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(NkHandle.SIZEOF, NkHandle.ALIGNOF),
             __member(POINTER_SIZE),

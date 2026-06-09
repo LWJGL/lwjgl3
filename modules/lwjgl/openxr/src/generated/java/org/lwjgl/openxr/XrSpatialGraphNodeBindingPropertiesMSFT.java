@@ -43,6 +43,8 @@ public class XrSpatialGraphNodeBindingPropertiesMSFT extends Struct<XrSpatialGra
         POSEINNODESPACE;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -53,6 +53,9 @@ public class XrCompositionLayerCylinderKHR extends Struct<XrCompositionLayerCyli
         ASPECTRATIO;
 
     static {
+        XrSwapchainSubImage.createSafe(NULL);
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

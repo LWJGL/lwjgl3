@@ -38,6 +38,8 @@ public class VkDisplayPlaneProperties2KHR extends Struct<VkDisplayPlanePropertie
         DISPLAYPLANEPROPERTIES;
 
     static {
+        VkDisplayPlanePropertiesKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

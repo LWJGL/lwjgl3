@@ -40,6 +40,8 @@ public class VkAccelerationStructureCreateInfoNV extends Struct<VkAccelerationSt
         INFO;
 
     static {
+        VkAccelerationStructureInfoNV.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

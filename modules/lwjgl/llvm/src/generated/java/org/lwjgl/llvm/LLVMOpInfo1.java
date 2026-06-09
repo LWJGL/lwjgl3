@@ -41,6 +41,8 @@ public class LLVMOpInfo1 extends Struct<LLVMOpInfo1> implements NativeResource {
         VARIANTKIND;
 
     static {
+        LLVMOpInfoSymbol1.createSafe(NULL);
+
         Layout layout = __struct(
             __member(LLVMOpInfoSymbol1.SIZEOF, LLVMOpInfoSymbol1.ALIGNOF),
             __member(LLVMOpInfoSymbol1.SIZEOF, LLVMOpInfoSymbol1.ALIGNOF),

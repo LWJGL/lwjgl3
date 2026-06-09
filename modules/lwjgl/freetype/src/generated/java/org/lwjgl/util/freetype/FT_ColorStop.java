@@ -36,6 +36,8 @@ public class FT_ColorStop extends Struct<FT_ColorStop> implements NativeResource
         COLOR;
 
     static {
+        FT_ColorIndex.createSafe(NULL);
+
         Layout layout = __struct(
             __member(CLONG_SIZE),
             __member(FT_ColorIndex.SIZEOF, FT_ColorIndex.ALIGNOF)

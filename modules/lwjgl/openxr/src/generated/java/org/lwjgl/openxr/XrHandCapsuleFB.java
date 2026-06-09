@@ -39,6 +39,8 @@ public class XrHandCapsuleFB extends Struct<XrHandCapsuleFB> {
         JOINT;
 
     static {
+        XrVector3f.createSafe(NULL);
+
         Layout layout = __struct(
             __array(XrVector3f.SIZEOF, XrVector3f.ALIGNOF, XR_HAND_TRACKING_CAPSULE_POINT_COUNT_FB),
             __member(4),

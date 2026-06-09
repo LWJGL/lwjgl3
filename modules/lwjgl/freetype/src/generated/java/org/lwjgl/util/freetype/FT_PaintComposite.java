@@ -36,6 +36,8 @@ public class FT_PaintComposite extends Struct<FT_PaintComposite> {
         BACKDROP_PAINT;
 
     static {
+        FT_OpaquePaint.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FT_OpaquePaint.SIZEOF, FT_OpaquePaint.ALIGNOF),
             __member(4),

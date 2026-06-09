@@ -38,6 +38,8 @@ public class VkClearAttachment extends Struct<VkClearAttachment> implements Nati
         CLEARVALUE;
 
     static {
+        VkClearValue.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

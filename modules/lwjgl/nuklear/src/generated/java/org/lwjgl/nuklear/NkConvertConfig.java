@@ -54,6 +54,8 @@ public class NkConvertConfig extends Struct<NkConvertConfig> implements NativeRe
         VERTEX_ALIGNMENT;
 
     static {
+        NkDrawNullTexture.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

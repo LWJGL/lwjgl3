@@ -42,6 +42,10 @@ public class LZ4FCustomMem extends Struct<LZ4FCustomMem> implements NativeResour
         OPAQUESTATE;
 
     static {
+        java.util.Objects.requireNonNull(LZ4FAllocFunctionI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(LZ4FCallocFunctionI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(LZ4FFreeFunctionI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

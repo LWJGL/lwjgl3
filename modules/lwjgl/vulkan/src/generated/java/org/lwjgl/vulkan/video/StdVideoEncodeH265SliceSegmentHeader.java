@@ -65,6 +65,8 @@ public class StdVideoEncodeH265SliceSegmentHeader extends Struct<StdVideoEncodeH
         PWEIGHTTABLE;
 
     static {
+        StdVideoEncodeH265SliceSegmentHeaderFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoEncodeH265SliceSegmentHeaderFlags.SIZEOF, StdVideoEncodeH265SliceSegmentHeaderFlags.ALIGNOF),
             __member(4),

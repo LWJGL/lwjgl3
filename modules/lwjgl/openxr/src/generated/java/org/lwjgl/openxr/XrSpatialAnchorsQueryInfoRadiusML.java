@@ -45,6 +45,8 @@ public class XrSpatialAnchorsQueryInfoRadiusML extends Struct<XrSpatialAnchorsQu
         RADIUS;
 
     static {
+        XrVector3f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

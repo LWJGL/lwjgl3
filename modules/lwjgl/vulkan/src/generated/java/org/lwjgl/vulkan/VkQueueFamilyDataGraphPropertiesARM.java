@@ -40,6 +40,9 @@ public class VkQueueFamilyDataGraphPropertiesARM extends Struct<VkQueueFamilyDat
         OPERATION;
 
     static {
+        VkPhysicalDeviceDataGraphProcessingEngineARM.createSafe(NULL);
+        VkPhysicalDeviceDataGraphOperationSupportARM.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

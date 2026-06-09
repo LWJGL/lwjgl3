@@ -34,6 +34,8 @@ public class CXIdxContainerInfo extends Struct<CXIdxContainerInfo> implements Na
         CURSOR;
 
     static {
+        CXCursor.createSafe(NULL);
+
         Layout layout = __struct(
             __member(CXCursor.SIZEOF, CXCursor.ALIGNOF)
         );

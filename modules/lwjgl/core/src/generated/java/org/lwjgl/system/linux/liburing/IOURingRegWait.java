@@ -50,6 +50,8 @@ public class IOURingRegWait extends Struct<IOURingRegWait> implements NativeReso
         PAD2;
 
     static {
+        KernelTimespec.createSafe(NULL);
+
         Layout layout = __struct(
             __member(KernelTimespec.SIZEOF, KernelTimespec.ALIGNOF),
             __member(4),

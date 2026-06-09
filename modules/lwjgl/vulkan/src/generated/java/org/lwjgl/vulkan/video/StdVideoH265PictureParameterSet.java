@@ -107,6 +107,8 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
         PPREDICTORPALETTEENTRIES;
 
     static {
+        StdVideoH265PpsFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoH265PpsFlags.SIZEOF, StdVideoH265PpsFlags.ALIGNOF),
             __member(1),

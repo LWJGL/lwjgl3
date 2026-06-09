@@ -36,6 +36,9 @@ public class VkClearValue extends Struct<VkClearValue> implements NativeResource
         DEPTHSTENCIL;
 
     static {
+        VkClearColorValue.createSafe(NULL);
+        VkClearDepthStencilValue.createSafe(NULL);
+
         Layout layout = __union(
             __member(VkClearColorValue.SIZEOF, VkClearColorValue.ALIGNOF),
             __member(VkClearDepthStencilValue.SIZEOF, VkClearDepthStencilValue.ALIGNOF)

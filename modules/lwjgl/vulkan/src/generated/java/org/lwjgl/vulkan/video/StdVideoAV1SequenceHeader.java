@@ -61,6 +61,8 @@ public class StdVideoAV1SequenceHeader extends Struct<StdVideoAV1SequenceHeader>
         PTIMINGINFO;
 
     static {
+        StdVideoAV1SequenceHeaderFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoAV1SequenceHeaderFlags.SIZEOF, StdVideoAV1SequenceHeaderFlags.ALIGNOF),
             __member(4),

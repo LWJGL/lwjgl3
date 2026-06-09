@@ -42,6 +42,8 @@ public class VkAccelerationStructureGeometryKHR extends Struct<VkAccelerationStr
         FLAGS;
 
     static {
+        VkAccelerationStructureGeometryDataKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

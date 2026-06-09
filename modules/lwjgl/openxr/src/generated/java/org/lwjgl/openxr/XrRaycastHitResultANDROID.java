@@ -38,6 +38,8 @@ public class XrRaycastHitResultANDROID extends Struct<XrRaycastHitResultANDROID>
         POSE;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(8),

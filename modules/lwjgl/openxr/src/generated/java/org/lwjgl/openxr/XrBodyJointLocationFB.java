@@ -36,6 +36,8 @@ public class XrBodyJointLocationFB extends Struct<XrBodyJointLocationFB> impleme
         POSE;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(8),
             __member(XrPosef.SIZEOF, XrPosef.ALIGNOF)

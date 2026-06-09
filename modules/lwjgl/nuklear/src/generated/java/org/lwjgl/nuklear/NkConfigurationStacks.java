@@ -45,6 +45,14 @@ class NkConfigurationStacks extends Struct<NkConfigurationStacks> {
         BUTTON_BEHAVIORS;
 
     static {
+        NkConfigStackStyleItem.createSafe(NULL);
+        NkConfigStackFloat.createSafe(NULL);
+        NkConfigStackVec2.createSafe(NULL);
+        NkConfigStackFlags.createSafe(NULL);
+        NkConfigStackColor.createSafe(NULL);
+        NkConfigStackUserFont.createSafe(NULL);
+        NkConfigStackButtonBehavior.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkConfigStackStyleItem.SIZEOF, NkConfigStackStyleItem.ALIGNOF),
             __member(NkConfigStackFloat.SIZEOF, NkConfigStackFloat.ALIGNOF),

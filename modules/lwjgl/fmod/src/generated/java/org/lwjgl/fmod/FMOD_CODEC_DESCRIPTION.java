@@ -59,6 +59,15 @@ public class FMOD_CODEC_DESCRIPTION extends Struct<FMOD_CODEC_DESCRIPTION> imple
         GETWAVEFORMAT;
 
     static {
+        java.util.Objects.requireNonNull(FMOD_CODEC_OPEN_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_CODEC_CLOSE_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_CODEC_READ_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_CODEC_GETLENGTH_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_CODEC_SETPOSITION_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_CODEC_GETPOSITION_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_CODEC_SOUNDCREATE_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_CODEC_GETWAVEFORMAT_CALLBACKI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

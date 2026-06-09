@@ -45,6 +45,8 @@ public class XrDebugUtilsMessengerCreateInfoEXT extends Struct<XrDebugUtilsMesse
         USERDATA;
 
     static {
+        java.util.Objects.requireNonNull(XrDebugUtilsMessengerCallbackEXTI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

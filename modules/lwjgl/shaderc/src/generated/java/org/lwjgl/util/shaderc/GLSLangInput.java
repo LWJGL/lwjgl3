@@ -64,6 +64,8 @@ public class GLSLangInput extends Struct<GLSLangInput> implements NativeResource
         CALLBACKS_CTX;
 
     static {
+        GLSLIncludeCallbacks.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

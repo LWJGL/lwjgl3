@@ -52,6 +52,8 @@ public class VkAndroidHardwareBufferFormatProperties2ANDROID extends Struct<VkAn
         SUGGESTEDYCHROMAOFFSET;
 
     static {
+        VkComponentMapping.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

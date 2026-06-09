@@ -36,6 +36,8 @@ public class FT_Size_Internal extends Struct<FT_Size_Internal> {
         AUTOHINT_METRICS;
 
     static {
+        FT_Size_Metrics.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(4),

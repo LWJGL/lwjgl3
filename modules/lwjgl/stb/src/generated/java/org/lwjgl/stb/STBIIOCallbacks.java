@@ -40,6 +40,10 @@ public class STBIIOCallbacks extends Struct<STBIIOCallbacks> implements NativeRe
         EOF;
 
     static {
+        java.util.Objects.requireNonNull(STBIReadCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(STBISkipCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(STBIEOFCallbackI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

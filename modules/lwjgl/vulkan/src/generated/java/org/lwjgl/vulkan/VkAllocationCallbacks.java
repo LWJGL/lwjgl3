@@ -44,6 +44,12 @@ public class VkAllocationCallbacks extends Struct<VkAllocationCallbacks> impleme
         PFNINTERNALFREE;
 
     static {
+        java.util.Objects.requireNonNull(VkAllocationFunctionI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(VkReallocationFunctionI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(VkFreeFunctionI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(VkInternalAllocationNotificationI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(VkInternalFreeNotificationI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

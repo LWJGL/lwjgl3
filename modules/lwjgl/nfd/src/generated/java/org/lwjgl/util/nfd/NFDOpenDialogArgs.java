@@ -42,6 +42,8 @@ public class NFDOpenDialogArgs extends Struct<NFDOpenDialogArgs> implements Nati
         PARENTWINDOW;
 
     static {
+        NFDWindowHandle.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(4),

@@ -44,6 +44,10 @@ public class VkBufferImageCopy extends Struct<VkBufferImageCopy> implements Nati
         IMAGEEXTENT;
 
     static {
+        VkImageSubresourceLayers.createSafe(NULL);
+        VkOffset3D.createSafe(NULL);
+        VkExtent3D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(8),
             __member(4),

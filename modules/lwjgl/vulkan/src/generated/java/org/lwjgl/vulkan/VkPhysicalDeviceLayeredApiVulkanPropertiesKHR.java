@@ -38,6 +38,8 @@ public class VkPhysicalDeviceLayeredApiVulkanPropertiesKHR extends Struct<VkPhys
         PROPERTIES;
 
     static {
+        VkPhysicalDeviceProperties2.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -43,6 +43,9 @@ public class VkPhysicalDeviceMemoryProperties extends Struct<VkPhysicalDeviceMem
         MEMORYHEAPS;
 
     static {
+        VkMemoryType.createSafe(NULL);
+        VkMemoryHeap.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __array(VkMemoryType.SIZEOF, VkMemoryType.ALIGNOF, VK_MAX_MEMORY_TYPES),

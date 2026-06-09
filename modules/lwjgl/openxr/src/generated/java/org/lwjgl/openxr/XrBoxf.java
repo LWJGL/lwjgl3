@@ -36,6 +36,9 @@ public class XrBoxf extends Struct<XrBoxf> implements NativeResource {
         EXTENTS;
 
     static {
+        XrPosef.createSafe(NULL);
+        XrExtent3Df.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrPosef.SIZEOF, XrPosef.ALIGNOF),
             __member(XrExtent3Df.SIZEOF, XrExtent3Df.ALIGNOF)

@@ -38,6 +38,8 @@ public class XrBodySkeletonJointFB extends Struct<XrBodySkeletonJointFB> impleme
         POSE;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

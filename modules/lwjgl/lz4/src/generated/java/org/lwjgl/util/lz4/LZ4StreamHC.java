@@ -38,6 +38,8 @@ public class LZ4StreamHC extends Struct<LZ4StreamHC> {
         INTERNAL_DONOTUSE;
 
     static {
+        LZ4HCCCtxInternal.createSafe(NULL);
+
         Layout layout = __union(
             __array(1, LZ4_STREAMHC_MINSIZE),
             __member(LZ4HCCCtxInternal.SIZEOF, LZ4HCCCtxInternal.ALIGNOF)

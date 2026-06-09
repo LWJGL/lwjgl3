@@ -37,6 +37,9 @@ public class NkDrawNullTexture extends Struct<NkDrawNullTexture> implements Nati
         UV;
 
     static {
+        NkHandle.createSafe(NULL);
+        NkVec2.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkHandle.SIZEOF, NkHandle.ALIGNOF),
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF)

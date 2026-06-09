@@ -38,6 +38,8 @@ public class XrSpatialEntityComponentDataBoundingBox2DBD extends Struct<XrSpatia
         BOUNDINGBOX2D;
 
     static {
+        XrRect2Df.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -74,6 +74,8 @@ public class ktxTexture extends Struct<ktxTexture> implements NativeResource {
         PDATA;
 
     static {
+        ktxOrientation.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

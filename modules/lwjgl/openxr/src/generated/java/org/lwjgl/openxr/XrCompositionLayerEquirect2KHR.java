@@ -55,6 +55,9 @@ public class XrCompositionLayerEquirect2KHR extends Struct<XrCompositionLayerEqu
         LOWERVERTICALANGLE;
 
     static {
+        XrSwapchainSubImage.createSafe(NULL);
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

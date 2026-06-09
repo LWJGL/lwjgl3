@@ -69,6 +69,9 @@ public class CID_FaceInfo extends Struct<CID_FaceInfo> {
         DATA_OFFSET;
 
     static {
+        PS_FontInfo.createSafe(NULL);
+        FT_BBox.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(CLONG_SIZE),

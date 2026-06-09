@@ -36,6 +36,9 @@ public class VkGeometryDataNV extends Struct<VkGeometryDataNV> implements Native
         AABBS;
 
     static {
+        VkGeometryTrianglesNV.createSafe(NULL);
+        VkGeometryAABBNV.createSafe(NULL);
+
         Layout layout = __struct(
             __member(VkGeometryTrianglesNV.SIZEOF, VkGeometryTrianglesNV.ALIGNOF),
             __member(VkGeometryAABBNV.SIZEOF, VkGeometryAABBNV.ALIGNOF)

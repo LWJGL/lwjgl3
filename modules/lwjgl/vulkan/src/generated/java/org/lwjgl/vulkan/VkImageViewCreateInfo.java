@@ -48,6 +48,9 @@ public class VkImageViewCreateInfo extends Struct<VkImageViewCreateInfo> impleme
         SUBRESOURCERANGE;
 
     static {
+        VkComponentMapping.createSafe(NULL);
+        VkImageSubresourceRange.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

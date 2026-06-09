@@ -47,6 +47,8 @@ class NkPool extends Struct<NkPool> {
         CAP;
 
     static {
+        NkAllocator.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkAllocator.SIZEOF, NkAllocator.ALIGNOF),
             __member(4),

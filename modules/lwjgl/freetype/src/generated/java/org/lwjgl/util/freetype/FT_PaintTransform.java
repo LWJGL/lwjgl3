@@ -34,6 +34,9 @@ public class FT_PaintTransform extends Struct<FT_PaintTransform> {
         AFFINE;
 
     static {
+        FT_OpaquePaint.createSafe(NULL);
+        FT_Affine23.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FT_OpaquePaint.SIZEOF, FT_OpaquePaint.ALIGNOF),
             __member(FT_Affine23.SIZEOF, FT_Affine23.ALIGNOF)

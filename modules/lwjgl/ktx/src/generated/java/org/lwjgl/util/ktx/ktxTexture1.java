@@ -84,6 +84,8 @@ public class ktxTexture1 extends Struct<ktxTexture1> implements NativeResource {
         _PRIVATE;
 
     static {
+        ktxOrientation.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

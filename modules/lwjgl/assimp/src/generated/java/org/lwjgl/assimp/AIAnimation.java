@@ -52,6 +52,8 @@ public class AIAnimation extends Struct<AIAnimation> implements NativeResource {
         MMORPHMESHCHANNELS;
 
     static {
+        AIString.createSafe(NULL);
+
         Layout layout = __struct(
             __member(AIString.SIZEOF, AIString.ALIGNOF),
             __member(8),

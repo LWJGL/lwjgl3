@@ -39,6 +39,10 @@ public class NkStyleItemData extends Struct<NkStyleItemData> implements NativeRe
         SLICE;
 
     static {
+        NkColor.createSafe(NULL);
+        NkImage.createSafe(NULL);
+        NkNineSlice.createSafe(NULL);
+
         Layout layout = __union(
             __member(NkColor.SIZEOF, NkColor.ALIGNOF),
             __member(NkImage.SIZEOF, NkImage.ALIGNOF),

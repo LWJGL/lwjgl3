@@ -142,6 +142,8 @@ public class VkPhysicalDeviceVulkan12Properties extends Struct<VkPhysicalDeviceV
         FRAMEBUFFERINTEGERCOLORSAMPLECOUNTS;
 
     static {
+        VkConformanceVersion.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

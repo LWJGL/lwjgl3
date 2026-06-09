@@ -44,6 +44,8 @@ public class MSG extends Struct<MSG> implements NativeResource {
         PT;
 
     static {
+        POINT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(4),

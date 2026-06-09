@@ -40,6 +40,8 @@ public class XrViewConfigurationViewFovEPIC extends Struct<XrViewConfigurationVi
         MAXMUTABLEFOV;
 
     static {
+        XrFovf.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

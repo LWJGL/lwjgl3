@@ -36,6 +36,8 @@ class NkConfigStackVec2 extends Struct<NkConfigStackVec2> {
         ELEMENTS;
 
     static {
+        NkConfigStackVec2Element.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __array(NkConfigStackVec2Element.SIZEOF, NkConfigStackVec2Element.ALIGNOF, 16)

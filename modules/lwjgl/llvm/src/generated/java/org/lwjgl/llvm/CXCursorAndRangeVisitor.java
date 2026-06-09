@@ -37,6 +37,8 @@ public class CXCursorAndRangeVisitor extends Struct<CXCursorAndRangeVisitor> imp
         VISIT;
 
     static {
+        java.util.Objects.requireNonNull(CXCursorAndRangeVisitI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE)

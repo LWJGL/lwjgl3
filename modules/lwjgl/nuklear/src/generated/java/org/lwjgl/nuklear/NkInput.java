@@ -37,6 +37,9 @@ public class NkInput extends Struct<NkInput> implements NativeResource {
         MOUSE;
 
     static {
+        NkKeyboard.createSafe(NULL);
+        NkMouse.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkKeyboard.SIZEOF, NkKeyboard.ALIGNOF),
             __member(NkMouse.SIZEOF, NkMouse.ALIGNOF)

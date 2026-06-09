@@ -52,6 +52,8 @@ public class AINodeAnim extends Struct<AINodeAnim> implements NativeResource {
         MPOSTSTATE;
 
     static {
+        AIString.createSafe(NULL);
+
         Layout layout = __struct(
             __member(AIString.SIZEOF, AIString.ALIGNOF),
             __member(4),

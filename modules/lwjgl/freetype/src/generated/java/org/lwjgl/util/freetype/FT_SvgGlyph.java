@@ -51,6 +51,11 @@ public class FT_SvgGlyph extends Struct<FT_SvgGlyph> {
         DELTA;
 
     static {
+        FT_Glyph.createSafe(NULL);
+        FT_Size_Metrics.createSafe(NULL);
+        FT_Matrix.createSafe(NULL);
+        FT_Vector.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FT_Glyph.SIZEOF, FT_Glyph.ALIGNOF),
             __member(POINTER_SIZE),

@@ -40,6 +40,8 @@ public class XrScenePlaneMSFT extends Struct<XrScenePlaneMSFT> implements Native
         SUPPORTSINDICESUINT16;
 
     static {
+        XrExtent2Df.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(XrExtent2Df.SIZEOF, XrExtent2Df.ALIGNOF),

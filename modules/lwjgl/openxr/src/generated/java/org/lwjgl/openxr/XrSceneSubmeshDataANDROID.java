@@ -54,6 +54,8 @@ public class XrSceneSubmeshDataANDROID extends Struct<XrSceneSubmeshDataANDROID>
         INDICES;
 
     static {
+        XrUuid.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

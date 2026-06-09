@@ -50,6 +50,9 @@ public class VkDeviceFaultInfoKHR extends Struct<VkDeviceFaultInfoKHR> implement
         VENDORINFO;
 
     static {
+        VkDeviceFaultAddressInfoKHR.createSafe(NULL);
+        VkDeviceFaultVendorInfoKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

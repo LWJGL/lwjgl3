@@ -43,6 +43,8 @@ public class XrActionSpaceCreateInfo extends Struct<XrActionSpaceCreateInfo> imp
         POSEINACTIONSPACE;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -52,6 +52,9 @@ public class VkClusterAccelerationStructureCommandsInfoNV extends Struct<VkClust
         ADDRESSRESOLUTIONFLAGS;
 
     static {
+        VkClusterAccelerationStructureInputInfoNV.createSafe(NULL);
+        VkStridedDeviceAddressRegionKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

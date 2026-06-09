@@ -47,6 +47,9 @@ public class XrGeometryInstanceCreateInfoFB extends Struct<XrGeometryInstanceCre
         SCALE;
 
     static {
+        XrPosef.createSafe(NULL);
+        XrVector3f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

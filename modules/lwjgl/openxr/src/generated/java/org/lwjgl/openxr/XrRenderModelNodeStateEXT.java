@@ -36,6 +36,8 @@ public class XrRenderModelNodeStateEXT extends Struct<XrRenderModelNodeStateEXT>
         ISVISIBLE;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrPosef.SIZEOF, XrPosef.ALIGNOF),
             __member(4)

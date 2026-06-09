@@ -44,6 +44,10 @@ public class VkSparseImageMemoryBind extends Struct<VkSparseImageMemoryBind> imp
         FLAGS;
 
     static {
+        VkImageSubresource.createSafe(NULL);
+        VkOffset3D.createSafe(NULL);
+        VkExtent3D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(VkImageSubresource.SIZEOF, VkImageSubresource.ALIGNOF),
             __member(VkOffset3D.SIZEOF, VkOffset3D.ALIGNOF),

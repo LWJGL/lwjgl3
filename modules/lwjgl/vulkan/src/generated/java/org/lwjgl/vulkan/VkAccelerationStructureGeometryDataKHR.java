@@ -38,6 +38,10 @@ public class VkAccelerationStructureGeometryDataKHR extends Struct<VkAcceleratio
         INSTANCES;
 
     static {
+        VkAccelerationStructureGeometryTrianglesDataKHR.createSafe(NULL);
+        VkAccelerationStructureGeometryAabbsDataKHR.createSafe(NULL);
+        VkAccelerationStructureGeometryInstancesDataKHR.createSafe(NULL);
+
         Layout layout = __union(
             __member(VkAccelerationStructureGeometryTrianglesDataKHR.SIZEOF, VkAccelerationStructureGeometryTrianglesDataKHR.ALIGNOF),
             __member(VkAccelerationStructureGeometryAabbsDataKHR.SIZEOF, VkAccelerationStructureGeometryAabbsDataKHR.ALIGNOF),

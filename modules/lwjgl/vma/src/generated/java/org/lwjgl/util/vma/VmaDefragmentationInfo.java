@@ -46,6 +46,8 @@ public class VmaDefragmentationInfo extends Struct<VmaDefragmentationInfo> imple
         PBREAKCALLBACKUSERDATA;
 
     static {
+        java.util.Objects.requireNonNull(VmaCheckDefragmentationBreakFunctionI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

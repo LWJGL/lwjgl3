@@ -44,6 +44,9 @@ public class CXIdxEntityRefInfo extends Struct<CXIdxEntityRefInfo> {
         ROLE;
 
     static {
+        CXCursor.createSafe(NULL);
+        CXIdxLoc.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(CXCursor.SIZEOF, CXCursor.ALIGNOF),

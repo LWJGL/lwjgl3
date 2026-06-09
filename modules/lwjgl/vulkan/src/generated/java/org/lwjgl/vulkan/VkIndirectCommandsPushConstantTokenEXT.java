@@ -34,6 +34,8 @@ public class VkIndirectCommandsPushConstantTokenEXT extends Struct<VkIndirectCom
         UPDATERANGE;
 
     static {
+        VkPushConstantRange.createSafe(NULL);
+
         Layout layout = __struct(
             __member(VkPushConstantRange.SIZEOF, VkPushConstantRange.ALIGNOF)
         );

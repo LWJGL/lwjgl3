@@ -40,6 +40,9 @@ public class ZSTDCustomMem extends Struct<ZSTDCustomMem> implements NativeResour
         OPAQUE;
 
     static {
+        java.util.Objects.requireNonNull(ZSTDAllocFunctionI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(ZSTDFreeFunctionI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

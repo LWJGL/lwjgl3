@@ -41,6 +41,9 @@ public class NkStyleText extends Struct<NkStyleText> implements NativeResource {
         DISABLED_FACTOR;
 
     static {
+        NkColor.createSafe(NULL);
+        NkVec2.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkColor.SIZEOF, NkColor.ALIGNOF),
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),

@@ -47,6 +47,11 @@ public class FMOD_STUDIO_BANK_INFO extends Struct<FMOD_STUDIO_BANK_INFO> impleme
         SEEKCALLBACK;
 
     static {
+        java.util.Objects.requireNonNull(FMOD_FILE_OPEN_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_FILE_CLOSE_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_FILE_READ_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_FILE_SEEK_CALLBACKI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

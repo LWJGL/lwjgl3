@@ -36,6 +36,9 @@ public class XrSpatialBounded2DDataEXT extends Struct<XrSpatialBounded2DDataEXT>
         EXTENTS;
 
     static {
+        XrPosef.createSafe(NULL);
+        XrExtent2Df.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrPosef.SIZEOF, XrPosef.ALIGNOF),
             __member(XrExtent2Df.SIZEOF, XrExtent2Df.ALIGNOF)

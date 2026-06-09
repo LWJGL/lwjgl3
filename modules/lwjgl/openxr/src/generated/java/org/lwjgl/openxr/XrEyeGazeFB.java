@@ -38,6 +38,8 @@ public class XrEyeGazeFB extends Struct<XrEyeGazeFB> implements NativeResource {
         GAZECONFIDENCE;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(XrPosef.SIZEOF, XrPosef.ALIGNOF),

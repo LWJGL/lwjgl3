@@ -46,6 +46,10 @@ public class VkImageResolve2 extends Struct<VkImageResolve2> implements NativeRe
         EXTENT;
 
     static {
+        VkImageSubresourceLayers.createSafe(NULL);
+        VkOffset3D.createSafe(NULL);
+        VkExtent3D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

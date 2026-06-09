@@ -48,6 +48,9 @@ public class XrSystemProperties extends Struct<XrSystemProperties> implements Na
         TRACKINGPROPERTIES;
 
     static {
+        XrSystemGraphicsProperties.createSafe(NULL);
+        XrSystemTrackingProperties.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

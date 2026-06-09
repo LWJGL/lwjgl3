@@ -45,6 +45,9 @@ public class XrWorldMeshStateRequestInfoML extends Struct<XrWorldMeshStateReques
         BOUNDINGBOXEXTENTS;
 
     static {
+        XrPosef.createSafe(NULL);
+        XrExtent3DfEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

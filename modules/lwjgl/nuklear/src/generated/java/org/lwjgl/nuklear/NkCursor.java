@@ -39,6 +39,9 @@ public class NkCursor extends Struct<NkCursor> implements NativeResource {
         OFFSET;
 
     static {
+        NkImage.createSafe(NULL);
+        NkVec2.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkImage.SIZEOF, NkImage.ALIGNOF),
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),

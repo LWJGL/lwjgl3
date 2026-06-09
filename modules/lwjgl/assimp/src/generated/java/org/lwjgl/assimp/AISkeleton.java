@@ -40,6 +40,8 @@ public class AISkeleton extends Struct<AISkeleton> implements NativeResource {
         MBONES;
 
     static {
+        AIString.createSafe(NULL);
+
         Layout layout = __struct(
             __member(AIString.SIZEOF, AIString.ALIGNOF),
             __member(4),

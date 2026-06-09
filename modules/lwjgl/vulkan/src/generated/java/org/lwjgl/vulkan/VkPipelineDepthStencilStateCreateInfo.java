@@ -56,6 +56,8 @@ public class VkPipelineDepthStencilStateCreateInfo extends Struct<VkPipelineDept
         MAXDEPTHBOUNDS;
 
     static {
+        VkStencilOpState.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

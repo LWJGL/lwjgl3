@@ -38,6 +38,8 @@ public class VkFormatProperties2 extends Struct<VkFormatProperties2> implements 
         FORMATPROPERTIES;
 
     static {
+        VkFormatProperties.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

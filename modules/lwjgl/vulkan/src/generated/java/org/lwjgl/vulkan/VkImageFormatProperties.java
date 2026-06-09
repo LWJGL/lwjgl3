@@ -42,6 +42,8 @@ public class VkImageFormatProperties extends Struct<VkImageFormatProperties> imp
         MAXRESOURCESIZE;
 
     static {
+        VkExtent3D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(VkExtent3D.SIZEOF, VkExtent3D.ALIGNOF),
             __member(4),

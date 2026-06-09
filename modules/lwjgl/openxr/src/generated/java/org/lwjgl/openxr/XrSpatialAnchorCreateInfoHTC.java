@@ -43,6 +43,9 @@ public class XrSpatialAnchorCreateInfoHTC extends Struct<XrSpatialAnchorCreateIn
         NAME;
 
     static {
+        XrPosef.createSafe(NULL);
+        XrSpatialAnchorNameHTC.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -48,6 +48,15 @@ public class IndexerCallbacks extends Struct<IndexerCallbacks> implements Native
         INDEXENTITYREFERENCE;
 
     static {
+        java.util.Objects.requireNonNull(IndexerAbortQueryI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(IndexerDiagnosticI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(IndexerEnteredMainFileI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(IndexerIncludedFileI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(IndexerImportedASTFileI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(IndexerStartedTranslationUnitI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(IndexerIndexDeclarationI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(IndexerIndexEntityReferenceI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

@@ -42,6 +42,8 @@ public class XrKeyboardTrackingDescriptionFB extends Struct<XrKeyboardTrackingDe
         NAME;
 
     static {
+        XrVector3f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(8),
             __member(XrVector3f.SIZEOF, XrVector3f.ALIGNOF),

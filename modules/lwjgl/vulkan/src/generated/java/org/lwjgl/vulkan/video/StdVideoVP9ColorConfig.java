@@ -44,6 +44,8 @@ public class StdVideoVP9ColorConfig extends Struct<StdVideoVP9ColorConfig> imple
         COLOR_SPACE;
 
     static {
+        StdVideoVP9ColorConfigFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoVP9ColorConfigFlags.SIZEOF, StdVideoVP9ColorConfigFlags.ALIGNOF),
             __member(1),

@@ -36,6 +36,8 @@ public class VkSubpassSampleLocationsEXT extends Struct<VkSubpassSampleLocations
         SAMPLELOCATIONSINFO;
 
     static {
+        VkSampleLocationsInfoEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(VkSampleLocationsInfoEXT.SIZEOF, VkSampleLocationsInfoEXT.ALIGNOF)

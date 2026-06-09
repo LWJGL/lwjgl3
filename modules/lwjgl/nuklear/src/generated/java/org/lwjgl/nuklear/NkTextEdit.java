@@ -64,6 +64,12 @@ public class NkTextEdit extends Struct<NkTextEdit> implements NativeResource {
         UNDO;
 
     static {
+        NkClipboard.createSafe(NULL);
+        NkStr.createSafe(NULL);
+        java.util.Objects.requireNonNull(NkPluginFilterI.DESCRIPTOR);
+        NkVec2.createSafe(NULL);
+        NkTextUndoState.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkClipboard.SIZEOF, NkClipboard.ALIGNOF),
             __member(NkStr.SIZEOF, NkStr.ALIGNOF),

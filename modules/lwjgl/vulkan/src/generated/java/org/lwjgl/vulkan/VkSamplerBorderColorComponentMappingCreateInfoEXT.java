@@ -40,6 +40,8 @@ public class VkSamplerBorderColorComponentMappingCreateInfoEXT extends Struct<Vk
         SRGB;
 
     static {
+        VkComponentMapping.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

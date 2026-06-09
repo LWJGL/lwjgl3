@@ -52,6 +52,8 @@ public class STBRPContext extends Struct<STBRPContext> implements NativeResource
         EXTRA;
 
     static {
+        STBRPNode.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

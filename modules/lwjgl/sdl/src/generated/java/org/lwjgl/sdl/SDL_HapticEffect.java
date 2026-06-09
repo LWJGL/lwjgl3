@@ -46,6 +46,13 @@ public class SDL_HapticEffect extends Struct<SDL_HapticEffect> implements Native
         CUSTOM;
 
     static {
+        SDL_HapticConstant.createSafe(NULL);
+        SDL_HapticPeriodic.createSafe(NULL);
+        SDL_HapticCondition.createSafe(NULL);
+        SDL_HapticRamp.createSafe(NULL);
+        SDL_HapticLeftRight.createSafe(NULL);
+        SDL_HapticCustom.createSafe(NULL);
+
         Layout layout = __union(
             __member(2),
             __member(SDL_HapticConstant.SIZEOF, SDL_HapticConstant.ALIGNOF),

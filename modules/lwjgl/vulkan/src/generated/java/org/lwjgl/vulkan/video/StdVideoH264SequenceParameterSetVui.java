@@ -65,6 +65,8 @@ public class StdVideoH264SequenceParameterSetVui extends Struct<StdVideoH264Sequ
         PHRDPARAMETERS;
 
     static {
+        StdVideoH264SpsVuiFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoH264SpsVuiFlags.SIZEOF, StdVideoH264SpsVuiFlags.ALIGNOF),
             __member(4),

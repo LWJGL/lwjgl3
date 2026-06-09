@@ -36,6 +36,8 @@ public class XrHandMeshVertexMSFT extends Struct<XrHandMeshVertexMSFT> implement
         NORMAL;
 
     static {
+        XrVector3f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrVector3f.SIZEOF, XrVector3f.ALIGNOF),
             __member(XrVector3f.SIZEOF, XrVector3f.ALIGNOF)

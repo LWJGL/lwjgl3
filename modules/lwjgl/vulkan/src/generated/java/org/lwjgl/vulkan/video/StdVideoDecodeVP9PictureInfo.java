@@ -71,6 +71,8 @@ public class StdVideoDecodeVP9PictureInfo extends Struct<StdVideoDecodeVP9Pictur
         PSEGMENTATION;
 
     static {
+        StdVideoDecodeVP9PictureInfoFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoDecodeVP9PictureInfoFlags.SIZEOF, StdVideoDecodeVP9PictureInfoFlags.ALIGNOF),
             __member(4),

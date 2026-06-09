@@ -54,6 +54,8 @@ public class VkAccelerationStructureBuildGeometryInfoKHR extends Struct<VkAccele
         SCRATCHDATA;
 
     static {
+        VkDeviceOrHostAddressKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

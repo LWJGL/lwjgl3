@@ -48,6 +48,12 @@ public class AIFile extends Struct<AIFile> implements NativeResource {
         USERDATA;
 
     static {
+        java.util.Objects.requireNonNull(AIFileReadProcI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(AIFileWriteProcI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(AIFileTellProcI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(AIFileSeekI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(AIFileFlushProcI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

@@ -41,6 +41,8 @@ public class XrPassthroughColorMapMonoToRgbaFB extends Struct<XrPassthroughColor
         TEXTURECOLORMAP;
 
     static {
+        XrColor4f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

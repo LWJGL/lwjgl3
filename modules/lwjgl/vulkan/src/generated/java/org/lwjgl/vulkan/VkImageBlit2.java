@@ -45,6 +45,9 @@ public class VkImageBlit2 extends Struct<VkImageBlit2> implements NativeResource
         DSTOFFSETS;
 
     static {
+        VkImageSubresourceLayers.createSafe(NULL);
+        VkOffset3D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

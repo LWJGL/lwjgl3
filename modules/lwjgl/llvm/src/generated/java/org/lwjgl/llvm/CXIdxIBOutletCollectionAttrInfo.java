@@ -38,6 +38,9 @@ public class CXIdxIBOutletCollectionAttrInfo extends Struct<CXIdxIBOutletCollect
         CLASSLOC;
 
     static {
+        CXCursor.createSafe(NULL);
+        CXIdxLoc.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

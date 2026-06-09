@@ -49,6 +49,8 @@ public class StdVideoVP9LoopFilter extends Struct<StdVideoVP9LoopFilter> impleme
         LOOP_FILTER_MODE_DELTAS;
 
     static {
+        StdVideoVP9LoopFilterFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoVP9LoopFilterFlags.SIZEOF, StdVideoVP9LoopFilterFlags.ALIGNOF),
             __member(1),

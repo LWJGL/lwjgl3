@@ -37,6 +37,8 @@ public class AIAABB extends Struct<AIAABB> implements NativeResource {
         MMAX;
 
     static {
+        AIVector3D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(AIVector3D.SIZEOF, AIVector3D.ALIGNOF),
             __member(AIVector3D.SIZEOF, AIVector3D.ALIGNOF)

@@ -41,6 +41,8 @@ public class FMOD_DSP_PARAMETER_3DATTRIBUTES_MULTI extends Struct<FMOD_DSP_PARAM
         ABSOLUTE;
 
     static {
+        FMOD_3D_ATTRIBUTES.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __array(FMOD_3D_ATTRIBUTES.SIZEOF, FMOD_3D_ATTRIBUTES.ALIGNOF, 8),

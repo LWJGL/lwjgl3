@@ -42,6 +42,9 @@ public class FT_Size extends Struct<FT_Size> implements NativeResource {
         INTERNAL;
 
     static {
+        FT_Generic.createSafe(NULL);
+        FT_Size_Metrics.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(FT_Generic.SIZEOF, FT_Generic.ALIGNOF),

@@ -36,6 +36,8 @@ public class VkPerformanceValueINTEL extends Struct<VkPerformanceValueINTEL> imp
         DATA;
 
     static {
+        VkPerformanceValueDataINTEL.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(VkPerformanceValueDataINTEL.SIZEOF, VkPerformanceValueDataINTEL.ALIGNOF)

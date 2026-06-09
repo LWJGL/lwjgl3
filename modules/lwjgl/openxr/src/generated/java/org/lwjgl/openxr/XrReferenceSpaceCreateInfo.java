@@ -40,6 +40,8 @@ public class XrReferenceSpaceCreateInfo extends Struct<XrReferenceSpaceCreateInf
         POSEINREFERENCESPACE;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -54,6 +54,14 @@ public class VkDescriptorMappingSourceDataEXT extends Struct<VkDescriptorMapping
         SHADERRECORDADDRESSOFFSET;
 
     static {
+        VkDescriptorMappingSourceConstantOffsetEXT.createSafe(NULL);
+        VkDescriptorMappingSourcePushIndexEXT.createSafe(NULL);
+        VkDescriptorMappingSourceIndirectIndexEXT.createSafe(NULL);
+        VkDescriptorMappingSourceIndirectIndexArrayEXT.createSafe(NULL);
+        VkDescriptorMappingSourceHeapDataEXT.createSafe(NULL);
+        VkDescriptorMappingSourceIndirectAddressEXT.createSafe(NULL);
+        VkDescriptorMappingSourceShaderRecordIndexEXT.createSafe(NULL);
+
         Layout layout = __union(
             __member(VkDescriptorMappingSourceConstantOffsetEXT.SIZEOF, VkDescriptorMappingSourceConstantOffsetEXT.ALIGNOF),
             __member(VkDescriptorMappingSourcePushIndexEXT.SIZEOF, VkDescriptorMappingSourcePushIndexEXT.ALIGNOF),

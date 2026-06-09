@@ -68,6 +68,8 @@ public class NkFontConfig extends Struct<NkFontConfig> implements NativeResource
         P;
 
     static {
+        NkVec2.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

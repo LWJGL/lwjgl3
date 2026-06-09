@@ -36,6 +36,9 @@ public class FMOD_STUDIO_TIMELINE_NESTED_BEAT_PROPERTIES extends Struct<FMOD_STU
         PROPERTIES;
 
     static {
+        FMOD_GUID.createSafe(NULL);
+        FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FMOD_GUID.SIZEOF, FMOD_GUID.ALIGNOF),
             __member(FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.SIZEOF, FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.ALIGNOF)

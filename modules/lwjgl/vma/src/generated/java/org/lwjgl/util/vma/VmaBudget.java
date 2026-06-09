@@ -38,6 +38,8 @@ public class VmaBudget extends Struct<VmaBudget> implements NativeResource {
         BUDGET;
 
     static {
+        VmaStatistics.createSafe(NULL);
+
         Layout layout = __struct(
             __member(VmaStatistics.SIZEOF, VmaStatistics.ALIGNOF),
             __member(8),

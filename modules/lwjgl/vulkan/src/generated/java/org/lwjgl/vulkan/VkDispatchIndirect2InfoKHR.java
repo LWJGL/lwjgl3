@@ -40,6 +40,8 @@ public class VkDispatchIndirect2InfoKHR extends Struct<VkDispatchIndirect2InfoKH
         ADDRESSFLAGS;
 
     static {
+        VkDeviceAddressRangeKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

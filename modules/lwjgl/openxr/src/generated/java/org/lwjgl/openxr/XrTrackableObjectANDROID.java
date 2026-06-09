@@ -46,6 +46,9 @@ public class XrTrackableObjectANDROID extends Struct<XrTrackableObjectANDROID> i
         LASTUPDATEDTIME;
 
     static {
+        XrPosef.createSafe(NULL);
+        XrExtent3DfEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -55,6 +55,10 @@ public class CID_FaceDict extends Struct<CID_FaceDict> {
         SD_BYTES;
 
     static {
+        PS_Private.createSafe(NULL);
+        FT_Matrix.createSafe(NULL);
+        FT_Vector.createSafe(NULL);
+
         Layout layout = __struct(
             __member(PS_Private.SIZEOF, PS_Private.ALIGNOF),
             __member(4),

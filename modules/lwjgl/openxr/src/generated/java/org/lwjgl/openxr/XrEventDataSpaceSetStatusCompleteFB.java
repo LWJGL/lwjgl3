@@ -48,6 +48,8 @@ public class XrEventDataSpaceSetStatusCompleteFB extends Struct<XrEventDataSpace
         ENABLED;
 
     static {
+        XrUuidEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -83,6 +83,8 @@ public class EXRHeader extends Struct<EXRHeader> implements NativeResource {
         NAME;
 
     static {
+        EXRBox2i.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

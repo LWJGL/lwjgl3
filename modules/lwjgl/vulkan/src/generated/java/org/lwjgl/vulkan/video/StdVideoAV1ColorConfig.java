@@ -50,6 +50,8 @@ public class StdVideoAV1ColorConfig extends Struct<StdVideoAV1ColorConfig> imple
         CHROMA_SAMPLE_POSITION;
 
     static {
+        StdVideoAV1ColorConfigFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoAV1ColorConfigFlags.SIZEOF, StdVideoAV1ColorConfigFlags.ALIGNOF),
             __member(1),

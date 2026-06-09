@@ -52,6 +52,9 @@ public class IOURing extends Struct<IOURing> implements NativeResource {
         PAD2;
 
     static {
+        IOURingSQ.createSafe(NULL);
+        IOURingCQ.createSafe(NULL);
+
         Layout layout = __struct(
             __member(IOURingSQ.SIZEOF, IOURingSQ.ALIGNOF),
             __member(IOURingCQ.SIZEOF, IOURingCQ.ALIGNOF),

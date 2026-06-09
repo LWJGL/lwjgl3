@@ -37,6 +37,9 @@ public class FMOD_DSP_STATE_DFT_FUNCTIONS extends Struct<FMOD_DSP_STATE_DFT_FUNC
         INVERSEFFTREAL;
 
     static {
+        java.util.Objects.requireNonNull(FMOD_DSP_DFT_FFTREAL_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_DFT_IFFTREAL_FUNCI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE)

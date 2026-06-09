@@ -44,6 +44,8 @@ public class NSVGGradient extends Struct<NSVGGradient> {
         PSTOPS;
 
     static {
+        NSVGGradientStop.createSafe(NULL);
+
         Layout layout = __struct(
             __array(4, 6),
             __member(1),

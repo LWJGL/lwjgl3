@@ -85,6 +85,8 @@ public class StdVideoAV1FilmGrain extends Struct<StdVideoAV1FilmGrain> implement
         CR_OFFSET;
 
     static {
+        StdVideoAV1FilmGrainFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoAV1FilmGrainFlags.SIZEOF, StdVideoAV1FilmGrainFlags.ALIGNOF),
             __member(1),

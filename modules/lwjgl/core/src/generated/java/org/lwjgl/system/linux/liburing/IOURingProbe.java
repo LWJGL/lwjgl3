@@ -44,6 +44,8 @@ public class IOURingProbe extends Struct<IOURingProbe> implements NativeResource
         OPS;
 
     static {
+        IOURingProbeOp.createSafe(NULL);
+
         Layout layout = __struct(
             __member(1),
             __member(1),

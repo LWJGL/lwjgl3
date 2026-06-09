@@ -46,6 +46,8 @@ public class XrRoomLayoutFB extends Struct<XrRoomLayoutFB> implements NativeReso
         WALLUUIDS;
 
     static {
+        XrUuidEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

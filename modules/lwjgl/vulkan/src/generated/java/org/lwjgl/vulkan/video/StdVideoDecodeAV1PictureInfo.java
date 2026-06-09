@@ -83,6 +83,8 @@ public class StdVideoDecodeAV1PictureInfo extends Struct<StdVideoDecodeAV1Pictur
         PFILMGRAIN;
 
     static {
+        StdVideoDecodeAV1PictureInfoFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoDecodeAV1PictureInfoFlags.SIZEOF, StdVideoDecodeAV1PictureInfoFlags.ALIGNOF),
             __member(4),

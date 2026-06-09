@@ -36,6 +36,8 @@ public class XrSpatialAnchorCompletionResultML extends Struct<XrSpatialAnchorCom
         RESULT;
 
     static {
+        XrUuidEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrUuidEXT.SIZEOF, XrUuidEXT.ALIGNOF),
             __member(4)

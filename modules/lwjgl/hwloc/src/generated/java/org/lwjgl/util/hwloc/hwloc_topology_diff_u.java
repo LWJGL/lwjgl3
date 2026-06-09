@@ -37,6 +37,10 @@ public class hwloc_topology_diff_u extends Struct<hwloc_topology_diff_u> {
         TOO_COMPLEX;
 
     static {
+        hwloc_topology_diff_generic_s.createSafe(NULL);
+        hwloc_topology_diff_obj_attr_s.createSafe(NULL);
+        hwloc_topology_diff_too_complex_s.createSafe(NULL);
+
         Layout layout = __union(
             __member(hwloc_topology_diff_generic_s.SIZEOF, hwloc_topology_diff_generic_s.ALIGNOF),
             __member(hwloc_topology_diff_obj_attr_s.SIZEOF, hwloc_topology_diff_obj_attr_s.ALIGNOF),

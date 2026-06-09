@@ -56,6 +56,8 @@ public class SDL_HapticRamp extends Struct<SDL_HapticRamp> implements NativeReso
         FADE_LEVEL;
 
     static {
+        SDL_HapticDirection.createSafe(NULL);
+
         Layout layout = __struct(
             __member(2),
             __member(SDL_HapticDirection.SIZEOF, SDL_HapticDirection.ALIGNOF),

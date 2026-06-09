@@ -40,6 +40,8 @@ public class StdVideoAV1TimingInfo extends Struct<StdVideoAV1TimingInfo> impleme
         NUM_TICKS_PER_PICTURE_MINUS_1;
 
     static {
+        StdVideoAV1TimingInfoFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoAV1TimingInfoFlags.SIZEOF, StdVideoAV1TimingInfoFlags.ALIGNOF),
             __member(4),

@@ -45,6 +45,8 @@ public class ZDICTCoverParams extends Struct<ZDICTCoverParams> implements Native
         ZPARAMS;
 
     static {
+        ZDICTParams.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

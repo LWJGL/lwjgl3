@@ -38,6 +38,9 @@ public class XrSceneFrustumBoundMSFT extends Struct<XrSceneFrustumBoundMSFT> imp
         FARDISTANCE;
 
     static {
+        XrPosef.createSafe(NULL);
+        XrFovf.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrPosef.SIZEOF, XrPosef.ALIGNOF),
             __member(XrFovf.SIZEOF, XrFovf.ALIGNOF),

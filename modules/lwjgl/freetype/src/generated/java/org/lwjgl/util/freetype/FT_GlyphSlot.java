@@ -75,6 +75,12 @@ public class FT_GlyphSlot extends Struct<FT_GlyphSlot> {
         INTERNAL;
 
     static {
+        FT_Generic.createSafe(NULL);
+        FT_Glyph_Metrics.createSafe(NULL);
+        FT_Vector.createSafe(NULL);
+        FT_Bitmap.createSafe(NULL);
+        FT_Outline.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

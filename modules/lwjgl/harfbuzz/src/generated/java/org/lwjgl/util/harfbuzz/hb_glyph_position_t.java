@@ -42,6 +42,8 @@ public class hb_glyph_position_t extends Struct<hb_glyph_position_t> implements 
         VAR;
 
     static {
+        hb_var_int_t.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

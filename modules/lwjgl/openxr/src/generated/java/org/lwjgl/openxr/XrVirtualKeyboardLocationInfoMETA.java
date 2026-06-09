@@ -45,6 +45,8 @@ public class XrVirtualKeyboardLocationInfoMETA extends Struct<XrVirtualKeyboardL
         SCALE;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

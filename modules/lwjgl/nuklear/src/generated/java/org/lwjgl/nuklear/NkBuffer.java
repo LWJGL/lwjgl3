@@ -52,6 +52,10 @@ public class NkBuffer extends Struct<NkBuffer> implements NativeResource {
         SIZE;
 
     static {
+        NkBufferMarker.createSafe(NULL);
+        NkAllocator.createSafe(NULL);
+        NkMemory.createSafe(NULL);
+
         Layout layout = __struct(
             __array(NkBufferMarker.SIZEOF, NkBufferMarker.ALIGNOF, 2),
             __member(NkAllocator.SIZEOF, NkAllocator.ALIGNOF),

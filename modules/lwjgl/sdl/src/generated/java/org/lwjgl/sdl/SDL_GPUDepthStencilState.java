@@ -54,6 +54,8 @@ public class SDL_GPUDepthStencilState extends Struct<SDL_GPUDepthStencilState> i
         PADDING3;
 
     static {
+        SDL_GPUStencilOpState.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(SDL_GPUStencilOpState.SIZEOF, SDL_GPUStencilOpState.ALIGNOF),

@@ -44,6 +44,8 @@ public class NkUserFontGlyph extends Struct<NkUserFontGlyph> implements NativeRe
         XADVANCE;
 
     static {
+        NkVec2.createSafe(NULL);
+
         Layout layout = __struct(
             __array(NkVec2.SIZEOF, NkVec2.ALIGNOF, 2),
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),

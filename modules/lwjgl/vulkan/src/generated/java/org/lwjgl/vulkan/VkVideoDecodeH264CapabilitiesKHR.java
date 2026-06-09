@@ -42,6 +42,8 @@ public class VkVideoDecodeH264CapabilitiesKHR extends Struct<VkVideoDecodeH264Ca
         FIELDOFFSETGRANULARITY;
 
     static {
+        VkOffset2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

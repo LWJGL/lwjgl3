@@ -47,6 +47,8 @@ public class XrSpatialRaycastInfoANDROID extends Struct<XrSpatialRaycastInfoANDR
         MAXDISTANCE;
 
     static {
+        XrVector3f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

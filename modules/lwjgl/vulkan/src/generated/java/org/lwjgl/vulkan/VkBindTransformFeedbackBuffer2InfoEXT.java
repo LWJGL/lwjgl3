@@ -40,6 +40,8 @@ public class VkBindTransformFeedbackBuffer2InfoEXT extends Struct<VkBindTransfor
         ADDRESSFLAGS;
 
     static {
+        VkDeviceAddressRangeKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

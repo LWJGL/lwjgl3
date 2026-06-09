@@ -48,6 +48,9 @@ public class VkVideoEncodeH264RateControlLayerInfoKHR extends Struct<VkVideoEnco
         MAXFRAMESIZE;
 
     static {
+        VkVideoEncodeH264QpKHR.createSafe(NULL);
+        VkVideoEncodeH264FrameSizeKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

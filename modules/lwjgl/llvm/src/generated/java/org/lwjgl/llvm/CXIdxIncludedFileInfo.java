@@ -42,6 +42,8 @@ public class CXIdxIncludedFileInfo extends Struct<CXIdxIncludedFileInfo> {
         ISMODULEIMPORT;
 
     static {
+        CXIdxLoc.createSafe(NULL);
+
         Layout layout = __struct(
             __member(CXIdxLoc.SIZEOF, CXIdxLoc.ALIGNOF),
             __member(POINTER_SIZE),

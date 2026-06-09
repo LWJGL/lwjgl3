@@ -46,6 +46,8 @@ public class FMOD_OUTPUT_OBJECT3DINFO extends Struct<FMOD_OUTPUT_OBJECT3DINFO> i
         PRIORITY;
 
     static {
+        FMOD_VECTOR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(4),

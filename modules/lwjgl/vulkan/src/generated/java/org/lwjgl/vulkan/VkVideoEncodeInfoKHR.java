@@ -55,6 +55,8 @@ public class VkVideoEncodeInfoKHR extends Struct<VkVideoEncodeInfoKHR> implement
         PRECEDINGEXTERNALLYENCODEDBYTES;
 
     static {
+        VkVideoPictureResourceInfoKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

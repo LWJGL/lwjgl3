@@ -72,6 +72,8 @@ public class NSVGShape extends Struct<NSVGShape> {
         NEXT;
 
     static {
+        NSVGPaint.createSafe(NULL);
+
         Layout layout = __struct(
             __array(1, 64),
             __member(NSVGPaint.SIZEOF, NSVGPaint.ALIGNOF),

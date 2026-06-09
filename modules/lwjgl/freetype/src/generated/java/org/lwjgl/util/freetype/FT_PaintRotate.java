@@ -38,6 +38,8 @@ public class FT_PaintRotate extends Struct<FT_PaintRotate> {
         CENTER_Y;
 
     static {
+        FT_OpaquePaint.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FT_OpaquePaint.SIZEOF, FT_OpaquePaint.ALIGNOF),
             __member(CLONG_SIZE),

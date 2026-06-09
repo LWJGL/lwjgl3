@@ -45,6 +45,9 @@ public class NkCommandBuffer extends Struct<NkCommandBuffer> {
         LAST;
 
     static {
+        NkRect.createSafe(NULL);
+        NkHandle.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(NkRect.SIZEOF, NkRect.ALIGNOF),

@@ -50,6 +50,8 @@ public class VkAccelerationStructureGeometryTrianglesDataKHR extends Struct<VkAc
         TRANSFORMDATA;
 
     static {
+        VkDeviceOrHostAddressConstKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

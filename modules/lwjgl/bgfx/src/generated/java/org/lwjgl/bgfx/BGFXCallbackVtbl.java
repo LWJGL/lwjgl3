@@ -58,6 +58,19 @@ public class BGFXCallbackVtbl extends Struct<BGFXCallbackVtbl> implements Native
         CAPTURE_FRAME;
 
     static {
+        java.util.Objects.requireNonNull(BGFXFatalCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXTraceVarArgsCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXProfilerBeginI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXProfilerBeginLiteralI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXProfilerEndI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXCacheReadSizeCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXCacheReadCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXCacheWriteCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXScreenShotCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXCaptureBeginCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXCaptureEndCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXCaptureFrameCallbackI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

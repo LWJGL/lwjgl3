@@ -38,6 +38,8 @@ public class XrStationaryReferenceSpaceGenerationIdResultEXT extends Struct<XrSt
         GENERATIONID;
 
     static {
+        XrUuid.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -44,6 +44,8 @@ public class XrEventDataSpatialAnchorCreateCompleteFB extends Struct<XrEventData
         UUID;
 
     static {
+        XrUuidEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

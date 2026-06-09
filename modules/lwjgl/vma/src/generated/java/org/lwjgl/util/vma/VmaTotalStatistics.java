@@ -39,6 +39,8 @@ public class VmaTotalStatistics extends Struct<VmaTotalStatistics> implements Na
         TOTAL;
 
     static {
+        VmaDetailedStatistics.createSafe(NULL);
+
         Layout layout = __struct(
             __array(VmaDetailedStatistics.SIZEOF, VmaDetailedStatistics.ALIGNOF, 32),
             __array(VmaDetailedStatistics.SIZEOF, VmaDetailedStatistics.ALIGNOF, 16),

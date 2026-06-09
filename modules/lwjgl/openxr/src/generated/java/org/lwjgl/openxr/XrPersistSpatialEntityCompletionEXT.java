@@ -42,6 +42,8 @@ public class XrPersistSpatialEntityCompletionEXT extends Struct<XrPersistSpatial
         PERSISTUUID;
 
     static {
+        XrUuid.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -43,6 +43,8 @@ public class VkDeviceDeviceMemoryReportCreateInfoEXT extends Struct<VkDeviceDevi
         PUSERDATA;
 
     static {
+        java.util.Objects.requireNonNull(VkDeviceMemoryReportCallbackEXTI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

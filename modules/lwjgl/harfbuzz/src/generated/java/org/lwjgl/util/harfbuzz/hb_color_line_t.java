@@ -61,6 +61,9 @@ public class hb_color_line_t extends Struct<hb_color_line_t> implements NativeRe
         RESERVED8;
 
     static {
+        java.util.Objects.requireNonNull(hb_color_line_get_color_stops_func_tI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(hb_color_line_get_extend_func_tI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

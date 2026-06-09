@@ -48,6 +48,8 @@ public class VkDescriptorSetAndBindingMappingEXT extends Struct<VkDescriptorSetA
         SOURCEDATA;
 
     static {
+        VkDescriptorMappingSourceDataEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

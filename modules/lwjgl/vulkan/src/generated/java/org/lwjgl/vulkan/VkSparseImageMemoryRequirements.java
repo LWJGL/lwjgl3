@@ -42,6 +42,8 @@ public class VkSparseImageMemoryRequirements extends Struct<VkSparseImageMemoryR
         IMAGEMIPTAILSTRIDE;
 
     static {
+        VkSparseImageFormatProperties.createSafe(NULL);
+
         Layout layout = __struct(
             __member(VkSparseImageFormatProperties.SIZEOF, VkSparseImageFormatProperties.ALIGNOF),
             __member(4),

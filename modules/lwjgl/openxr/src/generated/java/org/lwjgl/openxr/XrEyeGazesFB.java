@@ -43,6 +43,8 @@ public class XrEyeGazesFB extends Struct<XrEyeGazesFB> implements NativeResource
         TIME;
 
     static {
+        XrEyeGazeFB.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

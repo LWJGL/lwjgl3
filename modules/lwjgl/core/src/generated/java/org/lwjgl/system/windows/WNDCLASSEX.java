@@ -57,6 +57,8 @@ public class WNDCLASSEX extends Struct<WNDCLASSEX> implements NativeResource {
         HICONSM;
 
     static {
+        java.util.Objects.requireNonNull(WindowProcI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

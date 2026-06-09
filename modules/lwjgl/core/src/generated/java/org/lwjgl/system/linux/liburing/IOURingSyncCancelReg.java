@@ -50,6 +50,8 @@ public class IOURingSyncCancelReg extends Struct<IOURingSyncCancelReg> implement
         PAD2;
 
     static {
+        KernelTimespec.createSafe(NULL);
+
         Layout layout = __struct(
             __member(8),
             __member(4),

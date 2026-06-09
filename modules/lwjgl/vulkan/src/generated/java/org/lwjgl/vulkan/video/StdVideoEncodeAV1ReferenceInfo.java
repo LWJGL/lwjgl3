@@ -45,6 +45,8 @@ public class StdVideoEncodeAV1ReferenceInfo extends Struct<StdVideoEncodeAV1Refe
         PEXTENSIONHEADER;
 
     static {
+        StdVideoEncodeAV1ReferenceInfoFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoEncodeAV1ReferenceInfoFlags.SIZEOF, StdVideoEncodeAV1ReferenceInfoFlags.ALIGNOF),
             __member(4),

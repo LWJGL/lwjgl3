@@ -66,6 +66,8 @@ public class VkVideoEncodeAV1QualityLevelPropertiesKHR extends Struct<VkVideoEnc
         PREFERREDBIDIRECTIONALCOMPOUNDREFERENCENAMEMASK;
 
     static {
+        VkVideoEncodeAV1QIndexKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

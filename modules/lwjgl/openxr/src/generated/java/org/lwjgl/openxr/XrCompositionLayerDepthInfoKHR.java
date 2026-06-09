@@ -46,6 +46,8 @@ public class XrCompositionLayerDepthInfoKHR extends Struct<XrCompositionLayerDep
         FARZ;
 
     static {
+        XrSwapchainSubImage.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

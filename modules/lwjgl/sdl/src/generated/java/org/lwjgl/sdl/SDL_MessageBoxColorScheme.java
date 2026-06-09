@@ -35,6 +35,8 @@ public class SDL_MessageBoxColorScheme extends Struct<SDL_MessageBoxColorScheme>
         COLORS;
 
     static {
+        SDL_MessageBoxColor.createSafe(NULL);
+
         Layout layout = __struct(
             __array(SDL_MessageBoxColor.SIZEOF, SDL_MessageBoxColor.ALIGNOF, 5)
         );

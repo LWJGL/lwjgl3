@@ -40,6 +40,8 @@ public class VkIndirectExecutionSetCreateInfoEXT extends Struct<VkIndirectExecut
         INFO;
 
     static {
+        VkIndirectExecutionSetInfoEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

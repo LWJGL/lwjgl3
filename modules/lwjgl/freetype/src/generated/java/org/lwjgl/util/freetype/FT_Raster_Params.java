@@ -50,6 +50,9 @@ public class FT_Raster_Params extends Struct<FT_Raster_Params> implements Native
         CLIP_BOX;
 
     static {
+        java.util.Objects.requireNonNull(FT_SpanFuncI.DESCRIPTOR);
+        FT_BBox.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

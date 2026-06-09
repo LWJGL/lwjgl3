@@ -36,6 +36,8 @@ public class LLVMJITEvaluatedSymbol extends Struct<LLVMJITEvaluatedSymbol> imple
         FLAGS;
 
     static {
+        LLVMJITSymbolFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(8),
             __member(LLVMJITSymbolFlags.SIZEOF, LLVMJITSymbolFlags.ALIGNOF)

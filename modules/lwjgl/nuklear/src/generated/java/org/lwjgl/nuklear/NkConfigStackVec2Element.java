@@ -35,6 +35,8 @@ class NkConfigStackVec2Element extends Struct<NkConfigStackVec2Element> {
         OLD_VALUE;
 
     static {
+        NkVec2.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF)

@@ -44,6 +44,8 @@ public class VkAccelerationStructureMatrixMotionInstanceNV extends Struct<VkAcce
         ACCELERATIONSTRUCTUREREFERENCE;
 
     static {
+        VkTransformMatrixKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(VkTransformMatrixKHR.SIZEOF, VkTransformMatrixKHR.ALIGNOF),
             __member(VkTransformMatrixKHR.SIZEOF, VkTransformMatrixKHR.ALIGNOF),

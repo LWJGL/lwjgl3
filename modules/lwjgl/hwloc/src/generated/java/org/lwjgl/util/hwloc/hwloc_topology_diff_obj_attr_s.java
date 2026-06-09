@@ -40,6 +40,8 @@ public class hwloc_topology_diff_obj_attr_s extends Struct<hwloc_topology_diff_o
         DIFF;
 
     static {
+        hwloc_topology_diff_obj_attr_u.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

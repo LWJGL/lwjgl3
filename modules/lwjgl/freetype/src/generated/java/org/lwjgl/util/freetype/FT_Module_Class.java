@@ -51,6 +51,10 @@ public class FT_Module_Class extends Struct<FT_Module_Class> implements NativeRe
         GET_INTERFACE;
 
     static {
+        java.util.Objects.requireNonNull(FT_Module_ConstructorI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FT_Module_DestructorI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FT_Module_RequesterI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(CLONG_SIZE),
             __member(CLONG_SIZE),

@@ -40,6 +40,9 @@ public class AIFileIO extends Struct<AIFileIO> implements NativeResource {
         USERDATA;
 
     static {
+        java.util.Objects.requireNonNull(AIFileOpenProcI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(AIFileCloseProcI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

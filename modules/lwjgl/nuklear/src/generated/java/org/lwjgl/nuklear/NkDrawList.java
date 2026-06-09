@@ -64,6 +64,11 @@ public class NkDrawList extends Struct<NkDrawList> implements NativeResource {
         USERDATA;
 
     static {
+        NkRect.createSafe(NULL);
+        NkVec2.createSafe(NULL);
+        NkConvertConfig.createSafe(NULL);
+        NkHandle.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkRect.SIZEOF, NkRect.ALIGNOF),
             __array(NkVec2.SIZEOF, NkVec2.ALIGNOF, 12),

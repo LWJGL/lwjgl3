@@ -40,6 +40,8 @@ public class XrSceneComponentMSFT extends Struct<XrSceneComponentMSFT> implement
         UPDATETIME;
 
     static {
+        XrUuidMSFT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(XrUuidMSFT.SIZEOF, XrUuidMSFT.ALIGNOF),

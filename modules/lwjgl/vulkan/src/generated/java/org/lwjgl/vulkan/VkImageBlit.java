@@ -41,6 +41,9 @@ public class VkImageBlit extends Struct<VkImageBlit> implements NativeResource {
         DSTOFFSETS;
 
     static {
+        VkImageSubresourceLayers.createSafe(NULL);
+        VkOffset3D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(VkImageSubresourceLayers.SIZEOF, VkImageSubresourceLayers.ALIGNOF),
             __array(VkOffset3D.SIZEOF, VkOffset3D.ALIGNOF, 2),

@@ -58,6 +58,9 @@ public class CXIdxDeclInfo extends Struct<CXIdxDeclInfo> implements NativeResour
         FLAGS;
 
     static {
+        CXCursor.createSafe(NULL);
+        CXIdxLoc.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(CXCursor.SIZEOF, CXCursor.ALIGNOF),

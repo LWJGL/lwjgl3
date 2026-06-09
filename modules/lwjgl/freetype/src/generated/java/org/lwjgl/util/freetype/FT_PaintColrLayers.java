@@ -32,6 +32,8 @@ public class FT_PaintColrLayers extends Struct<FT_PaintColrLayers> {
         LAYER_ITERATOR;
 
     static {
+        FT_LayerIterator.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FT_LayerIterator.SIZEOF, FT_LayerIterator.ALIGNOF)
         );

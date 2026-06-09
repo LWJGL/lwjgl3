@@ -39,6 +39,8 @@ public class hb_ot_name_entry_t extends Struct<hb_ot_name_entry_t> implements Na
         LANGUAGE;
 
     static {
+        hb_var_int_t.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(hb_var_int_t.SIZEOF, hb_var_int_t.ALIGNOF),

@@ -59,6 +59,11 @@ public class AILight extends Struct<AILight> {
         MSIZE;
 
     static {
+        AIString.createSafe(NULL);
+        AIVector3D.createSafe(NULL);
+        AIColor3D.createSafe(NULL);
+        AIVector2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(AIString.SIZEOF, AIString.ALIGNOF),
             __member(4),

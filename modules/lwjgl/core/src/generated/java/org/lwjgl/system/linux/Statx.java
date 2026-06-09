@@ -80,6 +80,8 @@ public class Statx extends Struct<Statx> implements NativeResource {
         __SPARE3;
 
     static {
+        StatxTimestamp.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

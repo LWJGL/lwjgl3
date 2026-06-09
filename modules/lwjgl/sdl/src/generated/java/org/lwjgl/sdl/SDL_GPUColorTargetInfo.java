@@ -59,6 +59,8 @@ public class SDL_GPUColorTargetInfo extends Struct<SDL_GPUColorTargetInfo> imple
         PADDING2;
 
     static {
+        SDL_FColor.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(4),

@@ -45,6 +45,8 @@ public class VkShaderStatisticsInfoAMD extends Struct<VkShaderStatisticsInfoAMD>
         COMPUTEWORKGROUPSIZE;
 
     static {
+        VkShaderResourceUsageAMD.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(VkShaderResourceUsageAMD.SIZEOF, VkShaderResourceUsageAMD.ALIGNOF),

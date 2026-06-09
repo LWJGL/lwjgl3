@@ -42,6 +42,10 @@ public class VkImageResolve extends Struct<VkImageResolve> implements NativeReso
         EXTENT;
 
     static {
+        VkImageSubresourceLayers.createSafe(NULL);
+        VkOffset3D.createSafe(NULL);
+        VkExtent3D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(VkImageSubresourceLayers.SIZEOF, VkImageSubresourceLayers.ALIGNOF),
             __member(VkOffset3D.SIZEOF, VkOffset3D.ALIGNOF),

@@ -44,6 +44,10 @@ public class XrSceneSubmeshStateANDROID extends Struct<XrSceneSubmeshStateANDROI
         BOUNDS;
 
     static {
+        XrUuid.createSafe(NULL);
+        XrPosef.createSafe(NULL);
+        XrExtent3Df.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

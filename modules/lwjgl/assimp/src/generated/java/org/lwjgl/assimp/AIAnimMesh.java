@@ -52,6 +52,8 @@ public class AIAnimMesh extends Struct<AIAnimMesh> implements NativeResource {
         MWEIGHT;
 
     static {
+        AIString.createSafe(NULL);
+
         Layout layout = __struct(
             __member(AIString.SIZEOF, AIString.ALIGNOF),
             __member(POINTER_SIZE),

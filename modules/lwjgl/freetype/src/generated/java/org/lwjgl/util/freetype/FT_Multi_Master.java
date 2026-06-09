@@ -41,6 +41,8 @@ public class FT_Multi_Master extends Struct<FT_Multi_Master> implements NativeRe
         AXIS;
 
     static {
+        FT_MM_Axis.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

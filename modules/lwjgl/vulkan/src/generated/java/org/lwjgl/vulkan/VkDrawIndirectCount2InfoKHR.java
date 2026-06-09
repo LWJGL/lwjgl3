@@ -46,6 +46,9 @@ public class VkDrawIndirectCount2InfoKHR extends Struct<VkDrawIndirectCount2Info
         MAXDRAWCOUNT;
 
     static {
+        VkStridedDeviceAddressRangeKHR.createSafe(NULL);
+        VkDeviceAddressRangeKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

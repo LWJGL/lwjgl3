@@ -53,6 +53,8 @@ public class StdVideoAV1TileInfo extends Struct<StdVideoAV1TileInfo> implements 
         PHEIGHTINSBSMINUS1;
 
     static {
+        StdVideoAV1TileInfoFlag.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoAV1TileInfoFlag.SIZEOF, StdVideoAV1TileInfoFlag.ALIGNOF),
             __member(1),

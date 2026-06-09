@@ -45,6 +45,8 @@ public class XrNewSceneComputeInfoMSFT extends Struct<XrNewSceneComputeInfoMSFT>
         BOUNDS;
 
     static {
+        XrSceneBoundsMSFT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

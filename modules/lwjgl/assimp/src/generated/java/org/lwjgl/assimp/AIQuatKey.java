@@ -39,6 +39,8 @@ public class AIQuatKey extends Struct<AIQuatKey> implements NativeResource {
         MINTERPOLATION;
 
     static {
+        AIQuaternion.createSafe(NULL);
+
         Layout layout = __struct(
             __member(8),
             __member(AIQuaternion.SIZEOF, AIQuaternion.ALIGNOF),

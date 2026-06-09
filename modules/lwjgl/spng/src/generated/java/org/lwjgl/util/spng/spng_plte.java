@@ -38,6 +38,8 @@ public class spng_plte extends Struct<spng_plte> implements NativeResource {
         ENTRIES;
 
     static {
+        spng_plte_entry.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __array(spng_plte_entry.SIZEOF, spng_plte_entry.ALIGNOF, 256)

@@ -38,6 +38,8 @@ public class XrPersistedAnchorSpaceCreateInfoANDROID extends Struct<XrPersistedA
         ANCHORID;
 
     static {
+        XrUuidEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

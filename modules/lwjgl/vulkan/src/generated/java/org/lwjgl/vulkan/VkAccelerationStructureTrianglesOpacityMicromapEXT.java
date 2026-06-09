@@ -52,6 +52,8 @@ public class VkAccelerationStructureTrianglesOpacityMicromapEXT extends Struct<V
         MICROMAP;
 
     static {
+        VkDeviceOrHostAddressConstKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

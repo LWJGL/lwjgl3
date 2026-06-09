@@ -40,6 +40,8 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct<XrCompositionLay
         COLORBIAS;
 
     static {
+        XrColor4f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

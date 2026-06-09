@@ -42,6 +42,8 @@ public class VkBindHeapInfoEXT extends Struct<VkBindHeapInfoEXT> implements Nati
         RESERVEDRANGESIZE;
 
     static {
+        VkDeviceAddressRangeEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

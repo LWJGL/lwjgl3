@@ -40,6 +40,9 @@ public class FT_PaintRadialGradient extends Struct<FT_PaintRadialGradient> {
         R1;
 
     static {
+        FT_ColorLine.createSafe(NULL);
+        FT_Vector.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FT_ColorLine.SIZEOF, FT_ColorLine.ALIGNOF),
             __member(FT_Vector.SIZEOF, FT_Vector.ALIGNOF),

@@ -44,6 +44,8 @@ public class VkAccelerationStructureSRTMotionInstanceNV extends Struct<VkAcceler
         ACCELERATIONSTRUCTUREREFERENCE;
 
     static {
+        VkSRTDataNV.createSafe(NULL);
+
         Layout layout = __struct(
             __member(VkSRTDataNV.SIZEOF, VkSRTDataNV.ALIGNOF),
             __member(VkSRTDataNV.SIZEOF, VkSRTDataNV.ALIGNOF),

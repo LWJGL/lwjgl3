@@ -38,6 +38,8 @@ public class VkDisplayProperties2KHR extends Struct<VkDisplayProperties2KHR> imp
         DISPLAYPROPERTIES;
 
     static {
+        VkDisplayPropertiesKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -39,6 +39,8 @@ public class AIUVTransform extends Struct<AIUVTransform> implements NativeResour
         MROTATION;
 
     static {
+        AIVector2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(AIVector2D.SIZEOF, AIVector2D.ALIGNOF),
             __member(AIVector2D.SIZEOF, AIVector2D.ALIGNOF),

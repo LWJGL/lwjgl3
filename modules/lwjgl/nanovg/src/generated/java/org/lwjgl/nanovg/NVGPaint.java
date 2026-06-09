@@ -48,6 +48,8 @@ public class NVGPaint extends Struct<NVGPaint> implements NativeResource {
         IMAGE;
 
     static {
+        NVGColor.createSafe(NULL);
+
         Layout layout = __struct(
             __array(4, 6),
             __array(4, 2),

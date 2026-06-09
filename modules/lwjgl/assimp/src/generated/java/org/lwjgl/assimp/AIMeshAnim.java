@@ -40,6 +40,8 @@ public class AIMeshAnim extends Struct<AIMeshAnim> implements NativeResource {
         MKEYS;
 
     static {
+        AIString.createSafe(NULL);
+
         Layout layout = __struct(
             __member(AIString.SIZEOF, AIString.ALIGNOF),
             __member(4),

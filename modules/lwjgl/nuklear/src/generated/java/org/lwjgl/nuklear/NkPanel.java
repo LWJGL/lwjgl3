@@ -67,6 +67,11 @@ public class NkPanel extends Struct<NkPanel> {
         PARENT;
 
     static {
+        NkRect.createSafe(NULL);
+        NkMenuState.createSafe(NULL);
+        NkRowLayout.createSafe(NULL);
+        NkChart.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

@@ -42,6 +42,10 @@ public class GLFWAllocator extends Struct<GLFWAllocator> implements NativeResour
         USER;
 
     static {
+        java.util.Objects.requireNonNull(GLFWAllocateCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(GLFWReallocateCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(GLFWDeallocateCallbackI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

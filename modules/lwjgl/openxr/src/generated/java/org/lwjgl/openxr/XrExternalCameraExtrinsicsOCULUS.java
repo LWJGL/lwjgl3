@@ -40,6 +40,8 @@ public class XrExternalCameraExtrinsicsOCULUS extends Struct<XrExternalCameraExt
         RELATIVEPOSE;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(8),
             __member(8),

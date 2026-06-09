@@ -40,6 +40,8 @@ public class FT_PaintScale extends Struct<FT_PaintScale> {
         CENTER_Y;
 
     static {
+        FT_OpaquePaint.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FT_OpaquePaint.SIZEOF, FT_OpaquePaint.ALIGNOF),
             __member(CLONG_SIZE),

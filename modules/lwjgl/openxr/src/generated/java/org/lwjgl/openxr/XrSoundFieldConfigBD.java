@@ -47,6 +47,8 @@ public class XrSoundFieldConfigBD extends Struct<XrSoundFieldConfigBD> implement
         LFEGAIN;
 
     static {
+        XrQuaternionf.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

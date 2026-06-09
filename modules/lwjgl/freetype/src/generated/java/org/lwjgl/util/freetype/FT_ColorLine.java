@@ -34,6 +34,8 @@ public class FT_ColorLine extends Struct<FT_ColorLine> {
         COLOR_STOP_ITERATOR;
 
     static {
+        FT_ColorStopIterator.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(FT_ColorStopIterator.SIZEOF, FT_ColorStopIterator.ALIGNOF)

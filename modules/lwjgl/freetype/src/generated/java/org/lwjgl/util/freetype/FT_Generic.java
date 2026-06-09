@@ -37,6 +37,8 @@ public class FT_Generic extends Struct<FT_Generic> implements NativeResource {
         FINALIZER;
 
     static {
+        java.util.Objects.requireNonNull(FT_Generic_FinalizerI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE)

@@ -55,6 +55,8 @@ public class StdVideoH264PictureParameterSet extends Struct<StdVideoH264PictureP
         PSCALINGLISTS;
 
     static {
+        StdVideoH264PpsFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoH264PpsFlags.SIZEOF, StdVideoH264PpsFlags.ALIGNOF),
             __member(1),

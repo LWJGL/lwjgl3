@@ -41,6 +41,11 @@ public class OpusFileCallbacks extends Struct<OpusFileCallbacks> implements Nati
         CLOSE;
 
     static {
+        java.util.Objects.requireNonNull(OPReadFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(OPSeekFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(OPTellFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(OPCloseFuncI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

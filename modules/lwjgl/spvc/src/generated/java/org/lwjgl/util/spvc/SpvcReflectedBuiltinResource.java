@@ -39,6 +39,8 @@ public class SpvcReflectedBuiltinResource extends Struct<SpvcReflectedBuiltinRes
         RESOURCE;
 
     static {
+        SpvcReflectedResource.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

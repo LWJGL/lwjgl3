@@ -70,6 +70,13 @@ public class RMTSettings extends Struct<RMTSettings> implements NativeResource {
         LOGPATH;
 
     static {
+        java.util.Objects.requireNonNull(RMTMallocI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(RMTReallocI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(RMTFreeI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(RMTInputHandlerI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(RMTSampleTreeHandlerI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(RMTPropertyHandlerI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(2),
             __member(4),

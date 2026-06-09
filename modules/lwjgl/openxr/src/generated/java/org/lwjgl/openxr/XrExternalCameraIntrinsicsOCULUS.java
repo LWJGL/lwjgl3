@@ -42,6 +42,9 @@ public class XrExternalCameraIntrinsicsOCULUS extends Struct<XrExternalCameraInt
         IMAGESENSORPIXELRESOLUTION;
 
     static {
+        XrFovf.createSafe(NULL);
+        XrExtent2Di.createSafe(NULL);
+
         Layout layout = __struct(
             __member(8),
             __member(XrFovf.SIZEOF, XrFovf.ALIGNOF),
