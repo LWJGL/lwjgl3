@@ -90,6 +90,8 @@ public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct<VkPhysicalDeviceV
     public VkPhysicalDeviceVideoFormatInfoKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceVideoFormatInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkImageUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceVideoFormatInfoKHR pNext(VkImageUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoProfileListInfoKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceVideoFormatInfoKHR pNext(VkVideoProfileListInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code imageUsage} field. */
@@ -304,6 +306,8 @@ public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct<VkPhysicalDeviceV
         public VkPhysicalDeviceVideoFormatInfoKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceVideoFormatInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceVideoFormatInfoKHR.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkImageUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceVideoFormatInfoKHR.Buffer pNext(VkImageUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoProfileListInfoKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceVideoFormatInfoKHR.Buffer pNext(VkVideoProfileListInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code imageUsage} field. */

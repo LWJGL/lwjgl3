@@ -122,14 +122,20 @@ public class VkPhysicalDeviceImageFormatInfo2 extends Struct<VkPhysicalDeviceIma
     public VkPhysicalDeviceImageFormatInfo2 pNext(VkDataGraphOpticalFlowImageFormatInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageCompressionControlEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageCompressionControlEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkImageCreateFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageCreateFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageFormatListCreateInfo} value to the {@code pNext} chain. */
     public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageFormatListCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageFormatListCreateInfoKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageFormatListCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkImageStencilUsage2CreateInfoKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageStencilUsage2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageStencilUsageCreateInfo} value to the {@code pNext} chain. */
     public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageStencilUsageCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageStencilUsageCreateInfoEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageStencilUsageCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkImageUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkOpticalFlowImageFormatInfoNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceImageFormatInfo2 pNext(VkOpticalFlowImageFormatInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceExternalImageFormatInfo} value to the {@code pNext} chain. */
@@ -402,14 +408,20 @@ public class VkPhysicalDeviceImageFormatInfo2 extends Struct<VkPhysicalDeviceIma
         public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkDataGraphOpticalFlowImageFormatInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageCompressionControlEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageCompressionControlEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkImageCreateFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageCreateFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageFormatListCreateInfo} value to the {@code pNext} chain. */
         public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageFormatListCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageFormatListCreateInfoKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageFormatListCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkImageStencilUsage2CreateInfoKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageStencilUsage2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageStencilUsageCreateInfo} value to the {@code pNext} chain. */
         public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageStencilUsageCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageStencilUsageCreateInfoEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageStencilUsageCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkImageUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkOpticalFlowImageFormatInfoNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkOpticalFlowImageFormatInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceExternalImageFormatInfo} value to the {@code pNext} chain. */

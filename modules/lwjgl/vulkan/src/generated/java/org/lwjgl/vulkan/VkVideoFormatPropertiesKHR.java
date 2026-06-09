@@ -126,6 +126,10 @@ public class VkVideoFormatPropertiesKHR extends Struct<VkVideoFormatPropertiesKH
     public VkVideoFormatPropertiesKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkVideoFormatPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkImageCreateFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoFormatPropertiesKHR pNext(VkImageCreateFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkImageUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoFormatPropertiesKHR pNext(VkImageUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoFormatAV1QuantizationMapPropertiesKHR} value to the {@code pNext} chain. */
     public VkVideoFormatPropertiesKHR pNext(VkVideoFormatAV1QuantizationMapPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoFormatH265QuantizationMapPropertiesKHR} value to the {@code pNext} chain. */
@@ -362,6 +366,10 @@ public class VkVideoFormatPropertiesKHR extends Struct<VkVideoFormatPropertiesKH
         public VkVideoFormatPropertiesKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkVideoFormatPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoFormatPropertiesKHR.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkImageCreateFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoFormatPropertiesKHR.Buffer pNext(VkImageCreateFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkImageUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoFormatPropertiesKHR.Buffer pNext(VkImageUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoFormatAV1QuantizationMapPropertiesKHR} value to the {@code pNext} chain. */
         public VkVideoFormatPropertiesKHR.Buffer pNext(VkVideoFormatAV1QuantizationMapPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoFormatH265QuantizationMapPropertiesKHR} value to the {@code pNext} chain. */

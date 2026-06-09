@@ -136,6 +136,8 @@ public class VkImageViewCreateInfo extends Struct<VkImageViewCreateInfo> impleme
     public VkImageViewCreateInfo pNext(VkImageViewSampleWeightCreateInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageViewSlicedCreateInfoEXT} value to the {@code pNext} chain. */
     public VkImageViewCreateInfo pNext(VkImageViewSlicedCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkImageViewUsage2CreateInfoKHR} value to the {@code pNext} chain. */
+    public VkImageViewCreateInfo pNext(VkImageViewUsage2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageViewUsageCreateInfo} value to the {@code pNext} chain. */
     public VkImageViewCreateInfo pNext(VkImageViewUsageCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageViewUsageCreateInfoKHR} value to the {@code pNext} chain. */
@@ -425,6 +427,8 @@ public class VkImageViewCreateInfo extends Struct<VkImageViewCreateInfo> impleme
         public VkImageViewCreateInfo.Buffer pNext(VkImageViewSampleWeightCreateInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageViewSlicedCreateInfoEXT} value to the {@code pNext} chain. */
         public VkImageViewCreateInfo.Buffer pNext(VkImageViewSlicedCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkImageViewUsage2CreateInfoKHR} value to the {@code pNext} chain. */
+        public VkImageViewCreateInfo.Buffer pNext(VkImageViewUsage2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageViewUsageCreateInfo} value to the {@code pNext} chain. */
         public VkImageViewCreateInfo.Buffer pNext(VkImageViewUsageCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageViewUsageCreateInfoKHR} value to the {@code pNext} chain. */

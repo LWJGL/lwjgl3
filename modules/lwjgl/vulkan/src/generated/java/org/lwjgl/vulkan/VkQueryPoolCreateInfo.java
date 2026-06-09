@@ -119,6 +119,8 @@ public class VkQueryPoolCreateInfo extends Struct<VkQueryPoolCreateInfo> impleme
     public VkQueryPoolCreateInfo pNext(VkQueryPoolPerformanceQueryCreateInfoINTEL value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkQueryPoolVideoEncodeFeedbackCreateInfoKHR} value to the {@code pNext} chain. */
     public VkQueryPoolCreateInfo pNext(VkQueryPoolVideoEncodeFeedbackCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkQueryPoolVideoEncodePerPartitionFeedbackCreateInfoKHR} value to the {@code pNext} chain. */
+    public VkQueryPoolCreateInfo pNext(VkQueryPoolVideoEncodePerPartitionFeedbackCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoDecodeAV1ProfileInfoKHR} value to the {@code pNext} chain. */
     public VkQueryPoolCreateInfo pNext(VkVideoDecodeAV1ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoDecodeH264ProfileInfoKHR} value to the {@code pNext} chain. */
@@ -392,6 +394,8 @@ public class VkQueryPoolCreateInfo extends Struct<VkQueryPoolCreateInfo> impleme
         public VkQueryPoolCreateInfo.Buffer pNext(VkQueryPoolPerformanceQueryCreateInfoINTEL value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkQueryPoolVideoEncodeFeedbackCreateInfoKHR} value to the {@code pNext} chain. */
         public VkQueryPoolCreateInfo.Buffer pNext(VkQueryPoolVideoEncodeFeedbackCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkQueryPoolVideoEncodePerPartitionFeedbackCreateInfoKHR} value to the {@code pNext} chain. */
+        public VkQueryPoolCreateInfo.Buffer pNext(VkQueryPoolVideoEncodePerPartitionFeedbackCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoDecodeAV1ProfileInfoKHR} value to the {@code pNext} chain. */
         public VkQueryPoolCreateInfo.Buffer pNext(VkVideoDecodeAV1ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoDecodeH264ProfileInfoKHR} value to the {@code pNext} chain. */

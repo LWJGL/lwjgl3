@@ -93,10 +93,14 @@ public class VkSurfaceCapabilities2KHR extends Struct<VkSurfaceCapabilities2KHR>
     public VkSurfaceCapabilities2KHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkDisplayNativeHdrSurfaceCapabilitiesAMD} value to the {@code pNext} chain. */
     public VkSurfaceCapabilities2KHR pNext(VkDisplayNativeHdrSurfaceCapabilitiesAMD value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkImageUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+    public VkSurfaceCapabilities2KHR pNext(VkImageUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkLatencySurfaceCapabilitiesNV} value to the {@code pNext} chain. */
     public VkSurfaceCapabilities2KHR pNext(VkLatencySurfaceCapabilitiesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPresentTimingSurfaceCapabilitiesEXT} value to the {@code pNext} chain. */
     public VkSurfaceCapabilities2KHR pNext(VkPresentTimingSurfaceCapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkSharedPresentSurfaceCapabilities2KHR} value to the {@code pNext} chain. */
+    public VkSurfaceCapabilities2KHR pNext(VkSharedPresentSurfaceCapabilities2KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSharedPresentSurfaceCapabilitiesKHR} value to the {@code pNext} chain. */
     public VkSurfaceCapabilities2KHR pNext(VkSharedPresentSurfaceCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSurfaceCapabilitiesFullScreenExclusiveEXT} value to the {@code pNext} chain. */
@@ -117,6 +121,8 @@ public class VkSurfaceCapabilities2KHR extends Struct<VkSurfaceCapabilities2KHR>
     public VkSurfaceCapabilities2KHR pNext(VkSurfacePresentScalingCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSurfaceProtectedCapabilitiesKHR} value to the {@code pNext} chain. */
     public VkSurfaceCapabilities2KHR pNext(VkSurfaceProtectedCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkSwapchainFlagsSurfaceCapabilitiesEXT} value to the {@code pNext} chain. */
+    public VkSurfaceCapabilities2KHR pNext(VkSwapchainFlagsSurfaceCapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     /** Initializes this struct with the specified values. */
     public VkSurfaceCapabilities2KHR set(
@@ -324,10 +330,14 @@ public class VkSurfaceCapabilities2KHR extends Struct<VkSurfaceCapabilities2KHR>
         public VkSurfaceCapabilities2KHR.Buffer pNext(@NativeType("void *") long value) { VkSurfaceCapabilities2KHR.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkDisplayNativeHdrSurfaceCapabilitiesAMD} value to the {@code pNext} chain. */
         public VkSurfaceCapabilities2KHR.Buffer pNext(VkDisplayNativeHdrSurfaceCapabilitiesAMD value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkImageUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+        public VkSurfaceCapabilities2KHR.Buffer pNext(VkImageUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkLatencySurfaceCapabilitiesNV} value to the {@code pNext} chain. */
         public VkSurfaceCapabilities2KHR.Buffer pNext(VkLatencySurfaceCapabilitiesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPresentTimingSurfaceCapabilitiesEXT} value to the {@code pNext} chain. */
         public VkSurfaceCapabilities2KHR.Buffer pNext(VkPresentTimingSurfaceCapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkSharedPresentSurfaceCapabilities2KHR} value to the {@code pNext} chain. */
+        public VkSurfaceCapabilities2KHR.Buffer pNext(VkSharedPresentSurfaceCapabilities2KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSharedPresentSurfaceCapabilitiesKHR} value to the {@code pNext} chain. */
         public VkSurfaceCapabilities2KHR.Buffer pNext(VkSharedPresentSurfaceCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSurfaceCapabilitiesFullScreenExclusiveEXT} value to the {@code pNext} chain. */
@@ -348,6 +358,8 @@ public class VkSurfaceCapabilities2KHR extends Struct<VkSurfaceCapabilities2KHR>
         public VkSurfaceCapabilities2KHR.Buffer pNext(VkSurfacePresentScalingCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSurfaceProtectedCapabilitiesKHR} value to the {@code pNext} chain. */
         public VkSurfaceCapabilities2KHR.Buffer pNext(VkSurfaceProtectedCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkSwapchainFlagsSurfaceCapabilitiesEXT} value to the {@code pNext} chain. */
+        public VkSurfaceCapabilities2KHR.Buffer pNext(VkSwapchainFlagsSurfaceCapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     }
 

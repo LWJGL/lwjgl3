@@ -191,14 +191,14 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
         VkProvokingVertexModeEXT("provokingVertexMode")
     )
 
-    DependsOn("VK_EXT_line_rasterization")..void(
+    DependsOn("""ext.contains("Vulkan14") || ext.contains("VK_KHR_line_rasterization") || ext.contains("VK_EXT_line_rasterization")""")..void(
         "CmdSetLineRasterizationModeEXT",
 
         VkCommandBuffer("commandBuffer"),
         VkLineRasterizationModeEXT("lineRasterizationMode")
     )
 
-    DependsOn("VK_EXT_line_rasterization")..void(
+    DependsOn("""ext.contains("Vulkan14") || ext.contains("VK_KHR_line_rasterization") || ext.contains("VK_EXT_line_rasterization")""")..void(
         "CmdSetLineStippleEnableEXT",
 
         VkCommandBuffer("commandBuffer"),

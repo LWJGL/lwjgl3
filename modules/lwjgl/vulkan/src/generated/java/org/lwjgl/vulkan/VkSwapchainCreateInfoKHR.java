@@ -204,6 +204,8 @@ public class VkSwapchainCreateInfoKHR extends Struct<VkSwapchainCreateInfoKHR> i
     public VkSwapchainCreateInfoKHR pNext(VkImageFormatListCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageFormatListCreateInfoKHR} value to the {@code pNext} chain. */
     public VkSwapchainCreateInfoKHR pNext(VkImageFormatListCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkImageUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+    public VkSwapchainCreateInfoKHR pNext(VkImageUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSurfaceFullScreenExclusiveInfoEXT} value to the {@code pNext} chain. */
     public VkSwapchainCreateInfoKHR pNext(VkSurfaceFullScreenExclusiveInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSurfaceFullScreenExclusiveWin32InfoEXT} value to the {@code pNext} chain. */
@@ -610,6 +612,8 @@ public class VkSwapchainCreateInfoKHR extends Struct<VkSwapchainCreateInfoKHR> i
         public VkSwapchainCreateInfoKHR.Buffer pNext(VkImageFormatListCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageFormatListCreateInfoKHR} value to the {@code pNext} chain. */
         public VkSwapchainCreateInfoKHR.Buffer pNext(VkImageFormatListCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkImageUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+        public VkSwapchainCreateInfoKHR.Buffer pNext(VkImageUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSurfaceFullScreenExclusiveInfoEXT} value to the {@code pNext} chain. */
         public VkSwapchainCreateInfoKHR.Buffer pNext(VkSurfaceFullScreenExclusiveInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSurfaceFullScreenExclusiveWin32InfoEXT} value to the {@code pNext} chain. */

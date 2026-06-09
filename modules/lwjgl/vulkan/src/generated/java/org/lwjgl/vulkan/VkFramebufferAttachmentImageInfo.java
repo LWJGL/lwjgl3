@@ -133,6 +133,10 @@ public class VkFramebufferAttachmentImageInfo extends Struct<VkFramebufferAttach
     public VkFramebufferAttachmentImageInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkFramebufferAttachmentImageInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkImageCreateFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+    public VkFramebufferAttachmentImageInfo pNext(VkImageCreateFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkImageUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+    public VkFramebufferAttachmentImageInfo pNext(VkImageUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code flags} field. */
     public VkFramebufferAttachmentImageInfo flags(@NativeType("VkImageCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@code usage} field. */
@@ -418,6 +422,10 @@ public class VkFramebufferAttachmentImageInfo extends Struct<VkFramebufferAttach
         public VkFramebufferAttachmentImageInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkFramebufferAttachmentImageInfo.Buffer pNext(@NativeType("void const *") long value) { VkFramebufferAttachmentImageInfo.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkImageCreateFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+        public VkFramebufferAttachmentImageInfo.Buffer pNext(VkImageCreateFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkImageUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+        public VkFramebufferAttachmentImageInfo.Buffer pNext(VkImageUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code flags} field. */
         public VkFramebufferAttachmentImageInfo.Buffer flags(@NativeType("VkImageCreateFlags") int value) { VkFramebufferAttachmentImageInfo.nflags(address(), value); return this; }
         /** Sets the specified value to the {@code usage} field. */

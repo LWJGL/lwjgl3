@@ -118,6 +118,8 @@ public class VkPhysicalDeviceSparseImageFormatInfo2 extends Struct<VkPhysicalDev
     public VkPhysicalDeviceSparseImageFormatInfo2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceSparseImageFormatInfo2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkImageUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceSparseImageFormatInfo2 pNext(VkImageUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code format} field. */
     public VkPhysicalDeviceSparseImageFormatInfo2 format(@NativeType("VkFormat") int value) { nformat(address(), value); return this; }
     /** Sets the specified value to the {@code type} field. */
@@ -374,6 +376,8 @@ public class VkPhysicalDeviceSparseImageFormatInfo2 extends Struct<VkPhysicalDev
         public VkPhysicalDeviceSparseImageFormatInfo2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceSparseImageFormatInfo2.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceSparseImageFormatInfo2.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkImageUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceSparseImageFormatInfo2.Buffer pNext(VkImageUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code format} field. */
         public VkPhysicalDeviceSparseImageFormatInfo2.Buffer format(@NativeType("VkFormat") int value) { VkPhysicalDeviceSparseImageFormatInfo2.nformat(address(), value); return this; }
         /** Sets the specified value to the {@code type} field. */

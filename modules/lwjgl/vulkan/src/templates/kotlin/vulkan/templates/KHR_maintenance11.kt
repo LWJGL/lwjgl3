@@ -31,6 +31,11 @@ val KHR_maintenance11 = "KHRMaintenance11".nativeClassVK("KHR_maintenance11", ty
     )
 
     EnumConstant(
+        "PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT".enum(0x00000002),
         "PIPELINE_LAYOUT_CREATE_NO_TASK_SHADER_BIT_KHR".enum(0x00000004)
+    )
+
+    EnumConstantLong(
+        "IMAGE_CREATE_2_ALIAS_SINGLE_LAYER_DESCRIPTOR_BIT_KHR".enum(0x00400000L)
     )
 }

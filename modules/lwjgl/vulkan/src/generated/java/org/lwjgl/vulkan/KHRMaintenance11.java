@@ -19,7 +19,11 @@ public final class KHRMaintenance11 {
 
     public static final int VK_SHADER_CREATE_INDEPENDENT_SETS_BIT_KHR = 0x40000;
 
-    public static final int VK_PIPELINE_LAYOUT_CREATE_NO_TASK_SHADER_BIT_KHR = 0x4;
+    public static final int
+        VK_PIPELINE_LAYOUT_CREATE_INDEPENDENT_SETS_BIT_EXT = 0x2,
+        VK_PIPELINE_LAYOUT_CREATE_NO_TASK_SHADER_BIT_KHR   = 0x4;
+
+    public static final long VK_IMAGE_CREATE_2_ALIAS_SINGLE_LAYER_DESCRIPTOR_BIT_KHR = 0x400000L;
 
     private KHRMaintenance11() {}
 
