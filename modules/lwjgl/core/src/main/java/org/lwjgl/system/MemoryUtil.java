@@ -1616,7 +1616,7 @@ public final class MemoryUtil {
      * @param ptr   the starting memory address
      * @param value the value to set (memSet will convert it to unsigned byte)
      */
-    public static void memSet(ByteBuffer ptr, int value) { memSet(memAddress(ptr), value, ptr.remaining()); }
+    public static void memSet(ByteBuffer ptr, int value) { BACKEND.memset(memAddress(ptr), value, ptr.remaining()); }
 
     /**
      * Sets all bytes in a specified block of memory to a fixed value (usually zero).
@@ -1624,7 +1624,7 @@ public final class MemoryUtil {
      * @param ptr   the starting memory address
      * @param value the value to set (memSet will convert it to unsigned byte)
      */
-    public static void memSet(ShortBuffer ptr, int value) { memSet(memAddress(ptr), value, apiGetBytes(ptr.remaining(), 1)); }
+    public static void memSet(ShortBuffer ptr, int value) { BACKEND.memset(memAddress(ptr), value, apiGetBytes(ptr.remaining(), 1)); }
 
     /**
      * Sets all bytes in a specified block of memory to a fixed value (usually zero).
@@ -1632,7 +1632,7 @@ public final class MemoryUtil {
      * @param ptr   the starting memory address
      * @param value the value to set (memSet will convert it to unsigned byte)
      */
-    public static void memSet(CharBuffer ptr, int value) { memSet(memAddress(ptr), value, apiGetBytes(ptr.remaining(), 1)); }
+    public static void memSet(CharBuffer ptr, int value) { BACKEND.memset(memAddress(ptr), value, apiGetBytes(ptr.remaining(), 1)); }
 
     /**
      * Sets all bytes in a specified block of memory to a fixed value (usually zero).
@@ -1640,7 +1640,7 @@ public final class MemoryUtil {
      * @param ptr   the starting memory address
      * @param value the value to set (memSet will convert it to unsigned byte)
      */
-    public static void memSet(IntBuffer ptr, int value) { memSet(memAddress(ptr), value, apiGetBytes(ptr.remaining(), 2)); }
+    public static void memSet(IntBuffer ptr, int value) { BACKEND.memset(memAddress(ptr), value, apiGetBytes(ptr.remaining(), 2)); }
 
     /**
      * Sets all bytes in a specified block of memory to a fixed value (usually zero).
@@ -1648,7 +1648,7 @@ public final class MemoryUtil {
      * @param ptr   the starting memory address
      * @param value the value to set (memSet will convert it to unsigned byte)
      */
-    public static void memSet(LongBuffer ptr, int value) { memSet(memAddress(ptr), value, apiGetBytes(ptr.remaining(), 3)); }
+    public static void memSet(LongBuffer ptr, int value) { BACKEND.memset(memAddress(ptr), value, apiGetBytes(ptr.remaining(), 3)); }
 
     /**
      * Sets all bytes in a specified block of memory to a fixed value (usually zero).
@@ -1656,7 +1656,7 @@ public final class MemoryUtil {
      * @param ptr   the starting memory address
      * @param value the value to set (memSet will convert it to unsigned byte)
      */
-    public static void memSet(FloatBuffer ptr, int value) { memSet(memAddress(ptr), value, apiGetBytes(ptr.remaining(), 2)); }
+    public static void memSet(FloatBuffer ptr, int value) { BACKEND.memset(memAddress(ptr), value, apiGetBytes(ptr.remaining(), 2)); }
 
     /**
      * Sets all bytes in a specified block of memory to a fixed value (usually zero).
@@ -1664,7 +1664,7 @@ public final class MemoryUtil {
      * @param ptr   the starting memory address
      * @param value the value to set (memSet will convert it to unsigned byte)
      */
-    public static void memSet(DoubleBuffer ptr, int value) { memSet(memAddress(ptr), value, apiGetBytes(ptr.remaining(), 3)); }
+    public static void memSet(DoubleBuffer ptr, int value) { BACKEND.memset(memAddress(ptr), value, apiGetBytes(ptr.remaining(), 3)); }
 
     /**
      * Sets all bytes in a specified block of memory to a fixed value (usually zero).
@@ -1673,7 +1673,7 @@ public final class MemoryUtil {
      * @param value the value to set (memSet will convert it to unsigned byte)
      * @param <T>   the buffer type
      */
-    public static <T extends CustomBuffer<T>> void memSet(T ptr, int value) { memSet(memAddress(ptr), value, Integer.toUnsignedLong(ptr.remaining()) * ptr.sizeof()); }
+    public static <T extends CustomBuffer<T>> void memSet(T ptr, int value) { BACKEND.memset(memAddress(ptr), value, Integer.toUnsignedLong(ptr.remaining()) * ptr.sizeof()); }
 
     /**
      * Sets all bytes in a specified block of memory to a fixed value (usually zero).
@@ -1682,7 +1682,7 @@ public final class MemoryUtil {
      * @param value the value to set (memSet will convert it to unsigned byte)
      * @param <T>   the struct type
      */
-    public static <T extends Struct<T>> void memSet(T ptr, int value) { memSet(ptr.address, value, ptr.sizeof()); }
+    public static <T extends Struct<T>> void memSet(T ptr, int value) { BACKEND.memset(ptr.address, value, ptr.sizeof()); }
 
     // --- [ memcpy ] ---
 
