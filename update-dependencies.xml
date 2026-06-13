@@ -10,14 +10,14 @@
     <import file="${config}/build-definitions.xml" id="defs"/>
 
     <!-- *********************************** -->
-    <property name="kotlinc-version" value="2.4.0-RC"/>
+    <property name="kotlinc-version" value="2.4.0"/>
 
     <property name="jspecify" value="1.0.0"/>
     <property name="testng" value="7.5"/>
         <property name="jcommander" value="1.78"/>
         <property name="jquery" value="3.5.1"/>
         <property name="slf4j" value="1.7.36"/>
-    <property name="joml" value="1.10.8"/>
+    <property name="joml" value="1.10.9"/>
     <property name="jmh-core" value="1.37"/>
         <property name="jmh-generator-annprocess" value="1.37"/>
         <property name="jopt-simple" value="5.0.4"/>
@@ -35,10 +35,10 @@
         <mkdir dir="${lib}/java/kotlinc/lib"/>
 
         <!-- Kotlin Compiler -->
-        <update-mvn name="Jetbrains Annotations" group="org/jetbrains" artifact="annotations" version="26.0.2-1" subfolder="/kotlinc/lib" sources="false"/>
+        <update-mvn name="Jetbrains Annotations" group="org/jetbrains" artifact="annotations" version="26.1.0" subfolder="/kotlinc/lib" sources="false"/>
         <update-mvn name="Kotlin Stdlib" group="org/jetbrains/kotlin" artifact="kotlin-stdlib" version="${kotlinc-version}" subfolder="/kotlinc/lib" sources="true"/>
         <update-mvn name="Kotlin Full Reflection" group="org/jetbrains/kotlin" artifact="kotlin-reflect" version="${kotlinc-version}" subfolder="/kotlinc/lib" sources="true"/>
-        <update-mvn name="Kotlin Coroutines Support" group="org/jetbrains/kotlinx" artifact="kotlinx-coroutines-core-jvm" version="1.8.0" subfolder="/kotlinc/lib" sources="false"/>
+        <update-mvn name="Kotlin Coroutines Support" group="org/jetbrains/kotlinx" artifact="kotlinx-coroutines-core-jvm" version="1.11.0" subfolder="/kotlinc/lib" sources="false"/>
         <update-mvn name="Kotlin Script Runtime" group="org/jetbrains/kotlin" artifact="kotlin-script-runtime" version="${kotlinc-version}" subfolder="/kotlinc/lib" sources="false"/>
         <update-mvn name="Kotlin Compiler" group="org/jetbrains/kotlin" artifact="kotlin-compiler-embeddable" version="${kotlinc-version}" subfolder="/kotlinc" sources="false"/>
         <!--<update-mvn name="Kotlin Scripting Compiler" group="org/jetbrains/kotlin" artifact="kotlin-scripting-compiler-embeddable" version="${kotlinc-version}" subfolder="kotlinc" sources="false"/>-->
