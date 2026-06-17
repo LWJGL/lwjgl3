@@ -351,6 +351,30 @@ enum class Module(
         library = JNILibrary.create("LibMeshOptimizer"),
         arrayOverloads = false
     ),
+    MIMALLOC(
+        "mimalloc",
+        "org.lwjgl.system.mimalloc",
+        """
+        Contains bindings to ${url("https://microsoft.github.io/mimalloc/", "mimalloc")}, a compact general purpose allocator with excellent performance.
+
+        The mimalloc shared library that comes with LWJGL is configured with:
+        ${ul(
+            "-DMI_OVERRIDE=OFF",
+            "-DMI_OSX_INTERPOSE=OFF",
+            "-DMI_OSX_ZONE=OFF",
+            "-DMI_WIN_REDIRECT=OFF"
+        )}
+
+        The shared library may be replaced with a custom build that has more features enabled.
+
+        <h3>Resources</h3>
+        ${ul(
+            url("https://microsoft.github.io/mimalloc/topics.html", "Documentation"),
+            url("https://github.com/microsoft/mimalloc", "Source Repository")
+        )}
+        """,
+        arrayOverloads = false
+    ),
     MSDFGEN(
         "msdfgen",
         "org.lwjgl.util.msdfgen",

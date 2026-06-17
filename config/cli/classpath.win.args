@@ -15,6 +15,7 @@ bin/classes/lwjgl/llvm;\
 bin/classes/lwjgl/lmdb;\
 bin/classes/lwjgl/lz4;\
 bin/classes/lwjgl/meshoptimizer;\
+bin/classes/lwjgl/mimalloc;\
 bin/classes/lwjgl/msdfgen;\
 bin/classes/lwjgl/nanovg;\
 bin/classes/lwjgl/nfd;\

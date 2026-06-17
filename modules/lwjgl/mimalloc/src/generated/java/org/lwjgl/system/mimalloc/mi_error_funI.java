@@ -1,0 +1,44 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: https://www.lwjgl.org/license
+ * MACHINE GENERATED FILE, DO NOT EDIT
+ */
+package org.lwjgl.system.mimalloc;
+
+import org.lwjgl.system.*;
+
+import java.lang.invoke.*;
+
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
+
+/** Callback function: {@link #invoke mi_error_fun} */
+@FunctionalInterface
+@NativeType("mi_error_fun")
+public interface mi_error_funI extends CallbackI {
+
+    Callback.Descriptor DESCRIPTOR = new Callback.Descriptor(
+        mi_error_funI.class,
+        MethodHandles.lookup(),
+        apiCreateCIF(
+            ffi_type_void,
+            ffi_type_sint32, ffi_type_pointer
+        )
+    );
+
+    @Override
+    default Callback.Descriptor getDescriptor() { return DESCRIPTOR; }
+
+    @Override
+    default void callback(long ret, long args) {
+        invoke(
+            memGetInt(memGetAddress(args)),
+            memGetAddress(memGetAddress(args + POINTER_SIZE))
+        );
+    }
+
+    /** {@code void (* mi_error_fun) (int err, void * arg)} */
+    void invoke(int err, @NativeType("void *") long arg);
+
+}

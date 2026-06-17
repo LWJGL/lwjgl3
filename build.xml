@@ -518,6 +518,7 @@
             <compileBinding binding="lmdb"/>
             <compileBinding binding="lz4"/>
             <compileBinding binding="meshoptimizer"/>
+            <compileBinding binding="mimalloc"/>
             <compileBinding binding="msdfgen"/>
             <compileBinding binding="nanovg"/>
             <compileBinding binding="nfd"/>
@@ -1882,6 +1883,9 @@
 
         <!-- meshoptimizer -->
         <release-module name="meshoptimizer" native-library="lwjgl_meshoptimizer" title="meshoptimizer" if:true="${binding.meshoptimizer}"/>
+
+        <!-- mimalloc -->
+        <release-module name="mimalloc" native-library="mimalloc" title="mimalloc" if:true="${binding.mimalloc}"/>
 
         <!-- msdfgen -->
         <release-module name="msdfgen" native-library="lwjgl_msdfgen" title="msdfgen" if:true="${binding.msdfgen}"/>

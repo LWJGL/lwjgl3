@@ -635,6 +635,11 @@ public class Configuration<T> {
     /** Similar to {@link #LIBRARY_NAME} for the LLVM/LTO library (<b>org.lwjgl.llvm.clang.libname</b>). */
     public static final Configuration<String> LLVM_LTO_LIBRARY_NAME = new Configuration<>("org.lwjgl.llvm.lto.libname", StateInit.STRING);
 
+    // -- MIMALLOC
+
+    /** Similar to {@link #LIBRARY_NAME} for the mimalloc library (<b>org.lwjgl.system.mimalloc.libname</b>). */
+    public static final Configuration<String> MIMALLOC_LIBRARY_NAME = new Configuration<>("org.lwjgl.system.mimalloc.libname", StateInit.STRING);
+
     // -- NativeFileDialog
     /**
      * Set to true to enable NativeFileDialog's XDG Desktop Portal backend on Linux.

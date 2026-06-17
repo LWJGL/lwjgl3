@@ -171,6 +171,11 @@ enum class Module(
         "A library that provides algorithms to help optimize meshes.",
         *Platforms.ALL
     ),
+    MIMALLOC(
+        "lwjgl-mimalloc", "LWJGL - mimalloc bindings",
+        "A compact general purpose allocator with excellent performance.",
+        *Platforms.ALL
+    ),
     MSDFGEN(
         "lwjgl-msdfgen", "LWJGL - msdfgen bindings",
         "Multi-channel signed distance field generator.",

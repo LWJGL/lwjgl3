@@ -24,7 +24,7 @@ LWJGL is open source software and freely available at no charge.
 Useful links:
 
 - [Wiki](https://github.com/LWJGL/lwjgl3-wiki/wiki)
-- [Release Notes](https://github.com/LWJGL/lwjgl3/tree/master/doc/notes)  
+- [Release Notes](https://github.com/LWJGL/lwjgl3/tree/master/doc/notes)
 - [JavaDoc](https://javadoc.lwjgl.org)
 - [Blog](https://blog.lwjgl.org)
 
@@ -186,6 +186,7 @@ improve the chances of a quick and useful response.
 | [LLVM](https://llvm.org/)| A collection of modular and reusable compiler and toolchain technologies.|
 | [LMDB](https://www.symas.com/lmdb)| An extraordinarily fast, memory-efficient database. With memory-mapped files, it has the read performance of a pure in-memory database while retaining the persistence of standard disk-based databases.|
 | [LZ4](https://lz4.org/)| A lossless data compression algorithm that is focused on compression and decompression speed.|
+| [mimalloc](https://microsoft.github.io/mimalloc/)| A compact general purpose allocator with excellent performance.|
 | [ODBC](https://docs.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc)| A C programming language interface that makes it possible for applications to access data from a variety of database management systems (DBMSs).|
 | [Remotery](https://github.com/Celtoys/Remotery)| A realtime CPU/GPU profiler hosted in a single C file with a viewer that runs in a web browser.|
 | [RenderDoc](https://renderdoc.org)| An API to control the RenderDoc GPU debugger.|

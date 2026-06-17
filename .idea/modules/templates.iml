@@ -52,6 +52,9 @@
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/meshoptimizer/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/meshoptimizer/src/templates/kotlin" isTestSource="false" />
     </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/mimalloc/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/mimalloc/src/templates/kotlin" isTestSource="false" />
+    </content>
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/msdfgen/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/msdfgen/src/templates/kotlin" isTestSource="false" />
     </content>

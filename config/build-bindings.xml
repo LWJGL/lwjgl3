@@ -34,6 +34,7 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.lmdb" value="true"/>
     <property name="binding.lz4" value="true"/>
     <property name="binding.meshoptimizer" value="true"/>
+    <property name="binding.mimalloc" value="true"/>
     <property name="binding.msdfgen" value="true"/>
     <property name="binding.nanovg" value="true"/>
     <property name="binding.nfd" value="true"/>
@@ -96,6 +97,7 @@ This script is included in /config/build-definitions.xml.
                 <sequential if:true="${binding.lmdb}"><local name="module"/><property name="module" value="lmdb"/><body/></sequential>
                 <sequential if:true="${binding.lz4}"><local name="module"/><property name="module" value="lz4"/><body/></sequential>
                 <sequential if:true="${binding.meshoptimizer}"><local name="module"/><property name="module" value="meshoptimizer"/><body/></sequential>
+                <sequential if:true="${binding.mimalloc}"><local name="module"/><property name="module" value="mimalloc"/><body/></sequential>
                 <sequential if:true="${binding.msdfgen}"><local name="module"/><property name="module" value="msdfgen"/><body/></sequential>
                 <sequential if:true="${binding.nanovg}"><local name="module"/><property name="module" value="nanovg"/><body/></sequential>
                 <sequential if:true="${binding.nfd}"><local name="module"/><property name="module" value="nfd"/><body/></sequential>
