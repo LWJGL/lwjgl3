@@ -1069,11 +1069,12 @@
         <property name="revision" value="liblwjgl.dylib.git" if:set="platform.macos"/>
         <property name="revision" value="lwjgl.dll.git" if:set="platform.windows"/>
 
-        <exec executable="git" failonerror="true" output="${lib.native}/org/lwjgl/${revision}" taskname="Git revision">
+        <exec executable="git" failonerror="true" taskname="Git revision">
             <arg value="log"/>
             <arg value="--first-parent"/>
             <arg value="--pretty=format:%H"/>
-            <arg value="HEAD~2..HEAD~1"/> <!-- Skip the CI commit -->
+            <arg line="--skip 1 -n 1"/> <!-- Skip the CI commit -->
+            <redirector output="${lib.native}/org/lwjgl/${revision}" binaryOutput="true" logError="true"/>
         </exec>
 
         <apply executable="aws" failonerror="true" relative="true" taskname="S3 upload">
