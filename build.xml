@@ -934,7 +934,7 @@
             <jvmarg line="-Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8"/>
             <jvmarg value="-Dorg.lwjgl.util.Debug=true"/>
             <jvmarg value="-Dorg.lwjgl.util.DebugAllocator=true"/>
-            <jvmarg value="--enable-native-access=ALL-UNNAMED" if:set="core.java25"/>
+            <jvmarg value="--enable-native-access=ALL-UNNAMED" if:set="jdk25"/>
             <jvmarg value="-XstartOnFirstThread" if:set="platform.macos"/>
             <jvmarg value="-Xss256k" if:set="build.arch.x64|x86"/> <!-- for StackTest::testSOE -->
             <jvmarg line="${jvmargs}" if:set="jvmargs"/>
@@ -966,7 +966,7 @@
 
             <jvmarg value="-server"/>
             <jvmarg line="-Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8"/>
-            <jvmarg line="--enable-native-access=ALL-UNNAMED" if:set="core.java25"/>
+            <jvmarg line="--enable-native-access=ALL-UNNAMED" if:set="jdk25"/>
             <jvmarg value="-XstartOnFirstThread" if:set="platform.macos"/>
             <!--<jvmarg value="-Xcheck:jni"/>-->
 
