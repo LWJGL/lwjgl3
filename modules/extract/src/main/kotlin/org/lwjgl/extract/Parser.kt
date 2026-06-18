@@ -281,10 +281,7 @@ private fun CXCursor.parseStructMembers(
                             } else {
                                 val pointee = clang_getPointeeType(type, CXType.malloc(stack))
                                 if (pointee.kind() == CXType_FunctionProto) {
-                                    fieldDecl.anonymousFunctionProto(
-                                        stack, pointee, indent, context.header.module, name,
-                                        "Instances of this interface may be set to the {@code $name} field of the ##${if (structName.isNotEmpty()) structName else "FIXME"} struct."
-                                    )
+                                    fieldDecl.functionProto(stack, pointee, indent, context.header.module, name)
                                 } else if (clang_equalTypes(structType, clang_getCanonicalType(pointee, CXType.malloc(stack)))) {
                                     // recursive struct definition
                                     "${if (clang_getCursorKind(clang_getTypeDeclaration(structType, CXCursor.malloc(stack))) == CXCursor_UnionDecl)
@@ -327,13 +324,35 @@ private fun structMember(type: String, name: String, bitWidth: Int = -1): String
     return "$elementType(\"$name\"${if (bitWidth == -1) "" else ", bits = $bitWidth"})$arrayDimensions"
 }
 
+private fun CXCursor.functionProto(
+    stack: MemoryStack,
+    proto: CXType,
+    indent: String,
+    module: String,
+    name: String = ""
+): String {
+    var named: String? = null
+    CXCursorVisitor.create { cursor, _, _ ->
+        if (clang_getCursorKind(cursor) == CXCursor_TypeRef) {
+            val referenced = clang_getCursorReferenced(cursor, CXCursor.malloc(stack))
+
+            if (clang_getCursorKind(referenced) == CXCursor_TypedefDecl) {
+                named = clang_getCursorSpelling(referenced, stack.str).str
+                return@create CXChildVisit_Break
+            }
+        }
+
+        CXChildVisit_Continue
+    }.use { clang_visitChildren(this, it, NULL) }
+    return named ?: this.anonymousFunctionProto(stack, proto, indent, module, name)
+}
+
 private fun CXCursor.anonymousFunctionProto(
     stack: MemoryStack,
     proto: CXType,
     indent: String,
     module: String,
-    name: String = "",
-    documentation: String = "Instances of this interface may be passed to the #FIXME() method."
+    name: String = ""
 ): String {
     val args = ArrayList<CXCursor>(clang_getNumArgTypes(proto))
     CXCursorVisitor.create { cursor, _, _ ->
@@ -350,9 +369,7 @@ private fun CXCursor.anonymousFunctionProto(
     return """Module.$module.callback {
 $indent    ${clang_getResultType(proto, CXType.malloc(stack)).lwjgl}(
 $indent        /*FIXME:*/"$name"${getFunctionArguments(module, proto, name, docIndent, args)}
-$indent    ) {
-$indent        documentation = "$documentation"
-$indent    }
+$indent    ) {}
 $indent}"""
 }
 
@@ -424,10 +441,7 @@ else
                 CXType_Pointer       -> {
                     val pointee = clang_getPointeeType(argType, CXType.malloc(frame))
                     if (pointee.kind() == CXType_FunctionProto) {
-                        args[i].anonymousFunctionProto(
-                            frame, pointee, indent, module, functionName,
-                            "Instances of this interface may be passed to the #$functionName() method."
-                        )
+                        args[i].functionProto(frame, pointee, indent, module, functionName)
                     } else {
                         argType.lwjgl
                     }
@@ -558,12 +572,10 @@ private val CXType.lwjgl: String
             //CXType_VariableArray ->
             //CXType_DependentSizedArray ->
             //CXType_MemberPointer ->
-            CXType_Elaborated      -> {
-                clang_Type_getNamedType(this, CXType.malloc(stack)).lwjgl
-            }
+            CXType_Elaborated      -> clang_Type_getNamedType(this, CXType.malloc(stack)).lwjgl
             else                   -> {
-                println(this.spelling)
-                println(clang_getTypeKindSpelling(kind, stack.str).str)
+                System.err.println(this.spelling)
+                System.err.println(clang_getTypeKindSpelling(kind, stack.str).str)
                 TODO()
             }
         }
