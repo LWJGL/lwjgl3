@@ -286,14 +286,17 @@ public class SegmentStack implements StackAllocator<SegmentStack>, AutoCloseable
             checkAlignment(byteAlignment);
         }
 
-        var address = (container.address() + pointer - byteSize) & -byteAlignment;
+        var base = container.address();
 
-        pointer = (address - container.address());
-        if (CHECKS && pointer < 0) {
+        var address = (base + (pointer - byteSize)) & -byteAlignment;
+
+        var newPointer = address - base;
+        if (CHECKS && newPointer < 0) {
             throw new OutOfMemoryError("Out of stack space.");
         }
 
-        return container.asSlice(pointer, byteSize, 1L);
+        pointer = newPointer;
+        return container.asSlice(newPointer, byteSize, 1L);
     }
 
     // allocate(MemoryLayout) and allocate(MemoryLayout, long) below have the same implementation

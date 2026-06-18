@@ -341,14 +341,17 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
      * @return the memory address on the stack for the requested allocation
      */
     public long nmalloc(int alignment, int size) {
-        // Align address to the specified alignment
-        long address = (this.address + pointer - size) & ~Integer.toUnsignedLong(alignment - 1);
+        long base = this.address;
 
-        pointer = (int)(address - this.address);
-        if (CHECKS && pointer < 0) {
+        // Align address to the specified alignment
+        long address = (base + (pointer - size)) & -Integer.toUnsignedLong(alignment);
+
+        int newPointer = (int)(address - base);
+        if (CHECKS && newPointer < 0) {
             throw new OutOfMemoryError("Out of stack space.");
         }
 
+        pointer = newPointer;
         return address;
     }
 
