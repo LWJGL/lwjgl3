@@ -927,7 +927,7 @@
                 <pathelement path="${lib}/native"/>
             </classpath>
 
-            <jvmarg value="-Xcheck:jni" if:set="jdk21"/>
+            <jvmarg value="-Xcheck:jni" if:set="jdk17"/>
             <jvmarg value="-server"/>
             <jvmarg value="-ea"/>
             <jvmarg line="-Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8"/>
