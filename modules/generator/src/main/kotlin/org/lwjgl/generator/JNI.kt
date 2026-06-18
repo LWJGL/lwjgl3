@@ -112,6 +112,7 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
             "org.lwjgl.system.ffm.*",
             "java.lang.foreign.*",
             "java.lang.invoke.*",
+            "static org.lwjgl.system.APIUtil.*",
             "static org.lwjgl.system.ffm.FFM.*",
         )
         generateJavaPreamble()
@@ -171,6 +172,10 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
             //.withTracing(TRACER)
             .build()
     );
+
+    static {
+        apiLog("FFM downcalls enabled");
+    }
 
     private JNI() {}
 

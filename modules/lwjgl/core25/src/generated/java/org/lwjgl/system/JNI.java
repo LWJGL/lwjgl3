@@ -10,6 +10,7 @@ import org.lwjgl.system.ffm.*;
 import java.lang.foreign.*;
 import java.lang.invoke.*;
 
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.ffm.FFM.*;
 
 public final class JNI {
@@ -1333,6 +1334,10 @@ public final class JNI {
             //.withTracing(TRACER)
             .build()
     );
+
+    static {
+        apiLog("FFM downcalls enabled");
+    }
 
     private JNI() {}
 

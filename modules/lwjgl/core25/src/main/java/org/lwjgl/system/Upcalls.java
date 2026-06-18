@@ -56,8 +56,9 @@ final class Upcalls {
     };
 
     static {
-        apiLog("Upcall Arena: " + ARENA_TYPE.name().toLowerCase());
-        apiLog("Upcall Registry: ConcurrentHashMap");
+        apiLog("FFM upcalls enabled");
+        apiLogMore("Arena: " + ARENA_TYPE.name().toLowerCase());
+        apiLogMore("Registry: ConcurrentHashMap");
 
         MemoryUtil.getAllocator();
     }
