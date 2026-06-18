@@ -461,8 +461,9 @@ NFD_API void NFD_ClearError(void);
 /* path set operations */
 #ifdef _WIN32
 typedef unsigned long nfdpathsetsize_t;
-#elif __APPLE__
-typedef unsigned long nfdpathsetsize_t;
+// LWJGL: cannot be mapped cleanly
+//#elif __APPLE__
+//typedef unsigned long nfdpathsetsize_t;
 #else
 typedef unsigned int nfdpathsetsize_t;
 #endif  // _WIN32, __APPLE__
