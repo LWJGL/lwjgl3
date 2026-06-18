@@ -61,8 +61,9 @@ jobs:
     steps:
       - name: Install git
         run: dnf -y install git
-      - name: Clone repository
-        run: git clone --depth 3 https://github.com/${{ github.repository }}.git .
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 3
       - name: Install build dependencies # make is necessary for -flto=auto
         run: |
           dnf -y install epel-release wget
@@ -257,20 +258,32 @@ jobs:
         run: ant -emacs clean-generated generate
       - name: Build Java
         run: ant -emacs compile
-      - name: Build & Test
-        uses: cross-platform-actions/action@v1.0.0
+      - name: Start VM
+        uses: cross-platform-actions/action@v1.2.0
         with:
           operating_system: freebsd
           architecture: x86-64
           version: '14.3'
           memory: 8G
-          shell: bash
           environment_variables: ANT_OPTS LWJGL_BUILD_TYPE
-          run: |
-            sudo pkg install -y openjdk8 apache-ant git gtk3 dbus
-            ant -emacs compile-native -Dclang.version.print=true
-            ant -emacs tests || (cat bin/test/testng-results.xml ; exit 1) 
-            ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
+      - name: Install build dependencies
+        shell: cpa.sh {0}
+        run: sudo pkg install -y openjdk8 apache-ant git
+      - name: Install LWJGL dependencies
+        shell: cpa.sh {0}
+        run: sudo pkg install -y gtk3 dbus
+      - name: Build native
+        shell: cpa.sh {0}
+        run: ant -emacs compile-native -Dclang.version.print=true
+      - name: Run tests
+        shell: cpa.sh {0}
+        run: ant -emacs tests
+      - name: Print test results
+        run: cat bin/test/testng-results.xml
+        if: failure()
+      - name: Run demo with OpenJDK
+        shell: cpa.sh {0}
+        run: ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
 
   macos:
     name: macOS
@@ -366,7 +379,7 @@ jobs:
   windows:
     name: Windows
     needs: cache-kotlinc
-    runs-on: windows-latest
+    runs-on: windows-2022
     strategy:
       fail-fast: false
       matrix:
