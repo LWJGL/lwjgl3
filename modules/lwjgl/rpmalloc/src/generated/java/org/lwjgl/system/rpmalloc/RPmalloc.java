@@ -559,4 +559,24 @@ public class RPmalloc {
         return nrpmalloc_get_heap_for_ptr(memAddressSafe(ptr));
     }
 
+    public static final class Allocator implements MemoryAllocator {
+        public Allocator() {
+            rpmalloc_initialize();
+        }
+
+        @Override public long getMalloc()                              { return rpmalloc_address(); }
+        @Override public long getCalloc()                              { return rpcalloc_address(); }
+        @Override public long getRealloc()                             { return rprealloc_address(); }
+        @Override public long getFree()                                { return rpfree_address(); }
+        @Override public long getAlignedAlloc()                        { return rpaligned_alloc_address(); }
+        @Override public long getAlignedFree()                         { return rpfree_address(); }
+
+        @Override public long malloc(long size)                        { return nrpmalloc(size); }
+        @Override public long calloc(long num, long size)              { return nrpcalloc(num, size); }
+        @Override public long realloc(long ptr, long size)             { return nrprealloc(ptr, size); }
+        @Override public void free(long ptr)                           { nrpfree(ptr); }
+        @Override public long aligned_alloc(long alignment, long size) { return nrpaligned_alloc(alignment, size); }
+        @Override public void aligned_free(long ptr)                   { nrpfree(ptr); }
+    }
+
 }

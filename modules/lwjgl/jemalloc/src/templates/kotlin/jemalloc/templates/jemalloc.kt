@@ -251,4 +251,21 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
 
         Unsafe..void.const.p("ptr")
     )
+
+    customMethod("""
+    public static final class Allocator implements MemoryAllocator {
+        @Override public long getMalloc()                              { return Functions.malloc; }
+        @Override public long getCalloc()                              { return Functions.calloc; }
+        @Override public long getRealloc()                             { return Functions.realloc; }
+        @Override public long getFree()                                { return Functions.free; }
+        @Override public long getAlignedAlloc()                        { return Functions.aligned_alloc; }
+        @Override public long getAlignedFree()                         { return Functions.free; }
+
+        @Override public long malloc(long size)                        { return nje_malloc(size); }
+        @Override public long calloc(long num, long size)              { return nje_calloc(num, size); }
+        @Override public long realloc(long ptr, long size)             { return nje_realloc(ptr, size); }
+        @Override public void free(long ptr)                           { nje_free(ptr); }
+        @Override public long aligned_alloc(long alignment, long size) { return nje_aligned_alloc(alignment, size); }
+        @Override public void aligned_free(long ptr)                   { nje_free(ptr); }
+    }""")
 }

@@ -201,7 +201,7 @@ public final class MemoryUtil {
                 ? new DebugAllocator(ALLOCATOR_IMPL)
                 : ALLOCATOR_IMPL;
 
-            apiLog("MemoryUtil allocator: " + ALLOCATOR.getClass().getSimpleName());
+            apiLog("MemoryUtil allocator: " + ALLOCATOR.getClass().getName());
             if (debug && !Configuration.DEBUG_MEMORY_ALLOCATOR_FAST.get(false)) {
                 apiLogMore("Reminder: enable Configuration.DEBUG_MEMORY_ALLOCATOR_FAST for low overhead allocation tracking.");
             }
