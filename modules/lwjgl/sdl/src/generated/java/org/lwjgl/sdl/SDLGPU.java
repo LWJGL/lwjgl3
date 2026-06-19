@@ -1199,10 +1199,12 @@ public class SDLGPU {
 
     // --- [ SDL_SetGPUBlendConstants ] ---
 
-    private static final FFICIF SDL_SetGPUBlendConstantsCIF = apiCreateCIF(
-        ffi_type_void,
-        ffi_type_pointer, apiCreateStruct(ffi_type_float, ffi_type_float, ffi_type_float, ffi_type_float)
-    );
+    private static final class SDL_SetGPUBlendConstants {
+        static final FFICIF CIF = apiCreateCIF(
+            ffi_type_void,
+            ffi_type_pointer, apiCreateStruct(ffi_type_float, ffi_type_float, ffi_type_float, ffi_type_float)
+        );
+    }
 
     /** {@code void SDL_SetGPUBlendConstants(SDL_GPURenderPass * render_pass, SDL_FColor blend_constants)} */
     public static void nSDL_SetGPUBlendConstants(long render_pass, long blend_constants) {
@@ -1216,7 +1218,7 @@ public class SDLGPU {
             memPutAddress(arguments, stack.npointer(render_pass));
             memPutAddress(arguments + POINTER_SIZE, blend_constants);
 
-            nffi_call(SDL_SetGPUBlendConstantsCIF.address(), __functionAddress, NULL, arguments);
+            nffi_call(SDL_SetGPUBlendConstants.CIF.address(), __functionAddress, NULL, arguments);
         } finally {
             stack.setPointer(stackPointer);
         }

@@ -2412,10 +2412,12 @@ public class FreeType {
 
     // --- [ FT_Bitmap_Blend ] ---
 
-    private static final FFICIF FT_Bitmap_BlendCIF = apiCreateCIF(
-        ffi_type_sint32,
-        ffi_type_pointer, ffi_type_pointer, apiCreateStruct(ffi_type_slong, ffi_type_slong), ffi_type_pointer, ffi_type_pointer, apiCreateStruct(ffi_type_uint8, ffi_type_uint8, ffi_type_uint8, ffi_type_uint8)
-    );
+    private static final class FT_Bitmap_Blend {
+        static final FFICIF CIF = apiCreateCIF(
+            ffi_type_sint32,
+            ffi_type_pointer, ffi_type_pointer, apiCreateStruct(ffi_type_slong, ffi_type_slong), ffi_type_pointer, ffi_type_pointer, apiCreateStruct(ffi_type_uint8, ffi_type_uint8, ffi_type_uint8, ffi_type_uint8)
+        );
+    }
 
     /** {@code FT_Error FT_Bitmap_Blend(FT_Library library, FT_Bitmap const * source, FT_Vector const source_offset, FT_Bitmap * target, FT_Vector * atarget_offset, FT_Color color)} */
     public static int nFT_Bitmap_Blend(long library, long source, long source_offset, long target, long atarget_offset, long color) {
@@ -2434,7 +2436,7 @@ public class FreeType {
             memPutAddress(arguments + 4 * POINTER_SIZE, stack.npointer(atarget_offset));
             memPutAddress(arguments + 5 * POINTER_SIZE, color);
 
-            nffi_call(FT_Bitmap_BlendCIF.address(), __functionAddress, __result, arguments);
+            nffi_call(FT_Bitmap_Blend.CIF.address(), __functionAddress, __result, arguments);
 
             return memGetInt(__result);
         } finally {
@@ -2846,10 +2848,12 @@ public class FreeType {
 
     // --- [ FT_Palette_Set_Foreground_Color ] ---
 
-    private static final FFICIF FT_Palette_Set_Foreground_ColorCIF = apiCreateCIF(
-        ffi_type_sint32,
-        ffi_type_pointer, apiCreateStruct(ffi_type_uint8, ffi_type_uint8, ffi_type_uint8, ffi_type_uint8)
-    );
+    private static final class FT_Palette_Set_Foreground_Color {
+        static final FFICIF CIF = apiCreateCIF(
+            ffi_type_sint32,
+            ffi_type_pointer, apiCreateStruct(ffi_type_uint8, ffi_type_uint8, ffi_type_uint8, ffi_type_uint8)
+        );
+    }
 
     /** {@code FT_Error FT_Palette_Set_Foreground_Color(FT_Face face, FT_Color foreground_color)} */
     public static int nFT_Palette_Set_Foreground_Color(long face, long foreground_color) {
@@ -2861,7 +2865,7 @@ public class FreeType {
             memPutAddress(arguments, stack.npointer(face));
             memPutAddress(arguments + POINTER_SIZE, foreground_color);
 
-            nffi_call(FT_Palette_Set_Foreground_ColorCIF.address(), __functionAddress, __result, arguments);
+            nffi_call(FT_Palette_Set_Foreground_Color.CIF.address(), __functionAddress, __result, arguments);
 
             return memGetInt(__result);
         } finally {
@@ -2951,10 +2955,12 @@ public class FreeType {
 
     // --- [ FT_Get_Paint ] ---
 
-    private static final FFICIF FT_Get_PaintCIF = apiCreateCIF(
-        ffi_type_uint8,
-        ffi_type_pointer, apiCreateStruct(ffi_type_pointer, ffi_type_uint8), ffi_type_pointer
-    );
+    private static final class FT_Get_Paint {
+        static final FFICIF CIF = apiCreateCIF(
+            ffi_type_uint8,
+            ffi_type_pointer, apiCreateStruct(ffi_type_pointer, ffi_type_uint8), ffi_type_pointer
+        );
+    }
 
     /** {@code FT_Bool FT_Get_Paint(FT_Face face, FT_OpaquePaintRec opaque_paint, FT_COLR_Paint * paint)} */
     public static boolean nFT_Get_Paint(long face, long opaque_paint, long paint) {
@@ -2967,7 +2973,7 @@ public class FreeType {
             memPutAddress(arguments + POINTER_SIZE, opaque_paint);
             memPutAddress(arguments + 2 * POINTER_SIZE, stack.npointer(paint));
 
-            nffi_call(FT_Get_PaintCIF.address(), __functionAddress, __result, arguments);
+            nffi_call(FT_Get_Paint.CIF.address(), __functionAddress, __result, arguments);
 
             return memGetByte(__result) != 0;
         } finally {

@@ -1085,10 +1085,12 @@ public class Assimp {
 
     // --- [ aiGetPredefinedLogStream ] ---
 
-    private static final FFICIF aiGetPredefinedLogStreamCIF = apiCreateCIF(
-        apiCreateStruct(ffi_type_pointer, ffi_type_pointer),
-        ffi_type_uint32, ffi_type_pointer
-    );
+    private static final class aiGetPredefinedLogStream {
+        static final FFICIF CIF = apiCreateCIF(
+            apiCreateStruct(ffi_type_pointer, ffi_type_pointer),
+            ffi_type_uint32, ffi_type_pointer
+        );
+    }
 
     /** {@code struct aiLogStream aiGetPredefinedLogStream(aiDefaultLogStream pStreams, char const * file)} */
     public static void naiGetPredefinedLogStream(int pStreams, long file, long __result) {
@@ -1099,7 +1101,7 @@ public class Assimp {
             memPutAddress(arguments, stack.nint(pStreams));
             memPutAddress(arguments + POINTER_SIZE, stack.npointer(file));
 
-            nffi_call(aiGetPredefinedLogStreamCIF.address(), __functionAddress, __result, arguments);
+            nffi_call(aiGetPredefinedLogStream.CIF.address(), __functionAddress, __result, arguments);
         } finally {
             stack.setPointer(stackPointer);
         }

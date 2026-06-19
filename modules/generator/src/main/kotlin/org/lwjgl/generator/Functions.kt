@@ -713,14 +713,16 @@ class Func(
 
         if (useLibFFI) {
             println("""
-    private static final FFICIF ${name}CIF = apiCreateCIF(
-        ${if (nativeClass.module.callingConvention == CallingConvention.STDCALL) "apiStdcall(), " else ""}${returns.nativeType.libffiType}${
-            if (parameters.isEmpty()) 
-                "" 
-            else 
-                parameters.joinToString(", ", prefix = """,
-        """) { it.nativeType.libffiType }}
-    );""")
+    private static final class $name {
+        static final FFICIF CIF = apiCreateCIF(
+            ${if (nativeClass.module.callingConvention == CallingConvention.STDCALL) "apiStdcall(), " else ""}${returns.nativeType.libffiType}${
+                if (parameters.isEmpty()) 
+                    "" 
+                else 
+                    parameters.joinToString(", ", prefix = """,
+            """) { it.nativeType.libffiType }}
+        );
+    }""")
         }
         println()
 
@@ -850,7 +852,7 @@ class Func(
                 }
             }
 
-            """}nffi_call(${name}CIF.address(), $FUNCTION_ADDRESS, ${if (returns.isVoid) "NULL" else RESULT}, ${if (parameters.isEmpty()) "NULL" else "arguments"});${if (hasReturnStatement) {
+            """}nffi_call(${name}.CIF.address(), $FUNCTION_ADDRESS, ${if (returns.isVoid) "NULL" else RESULT}, ${if (parameters.isEmpty()) "NULL" else "arguments"});${if (hasReturnStatement) {
                 """
 
             return memGet${when {

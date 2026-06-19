@@ -37,10 +37,12 @@ public class SDLGUID {
 
     // --- [ SDL_GUIDToString ] ---
 
-    private static final FFICIF SDL_GUIDToStringCIF = apiCreateCIF(
-        ffi_type_void,
-        apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)), ffi_type_pointer, ffi_type_sint32
-    );
+    private static final class SDL_GUIDToString {
+        static final FFICIF CIF = apiCreateCIF(
+            ffi_type_void,
+            apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)), ffi_type_pointer, ffi_type_sint32
+        );
+    }
 
     /** {@code void SDL_GUIDToString(SDL_GUID guid, char * pszGUID, int cbGUID)} */
     public static void nSDL_GUIDToString(long guid, long pszGUID, int cbGUID) {
@@ -52,7 +54,7 @@ public class SDLGUID {
             memPutAddress(arguments + POINTER_SIZE, stack.npointer(pszGUID));
             memPutAddress(arguments + 2 * POINTER_SIZE, stack.nint(cbGUID));
 
-            nffi_call(SDL_GUIDToStringCIF.address(), __functionAddress, NULL, arguments);
+            nffi_call(SDL_GUIDToString.CIF.address(), __functionAddress, NULL, arguments);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -68,10 +70,12 @@ public class SDLGUID {
 
     // --- [ SDL_StringToGUID ] ---
 
-    private static final FFICIF SDL_StringToGUIDCIF = apiCreateCIF(
-        apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)),
-        ffi_type_pointer
-    );
+    private static final class SDL_StringToGUID {
+        static final FFICIF CIF = apiCreateCIF(
+            apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)),
+            ffi_type_pointer
+        );
+    }
 
     /** {@code SDL_GUID SDL_StringToGUID(char const * pchGUID)} */
     public static void nSDL_StringToGUID(long pchGUID, long __result) {
@@ -81,7 +85,7 @@ public class SDLGUID {
             long arguments = stack.nmalloc(POINTER_SIZE, POINTER_SIZE * 1);
             memPutAddress(arguments, stack.npointer(pchGUID));
 
-            nffi_call(SDL_StringToGUIDCIF.address(), __functionAddress, __result, arguments);
+            nffi_call(SDL_StringToGUID.CIF.address(), __functionAddress, __result, arguments);
         } finally {
             stack.setPointer(stackPointer);
         }

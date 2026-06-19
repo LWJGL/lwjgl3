@@ -220,10 +220,12 @@ public class SDLJoystick {
 
     // --- [ SDL_GetJoystickGUIDForID ] ---
 
-    private static final FFICIF SDL_GetJoystickGUIDForIDCIF = apiCreateCIF(
-        apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)),
-        ffi_type_uint32
-    );
+    private static final class SDL_GetJoystickGUIDForID {
+        static final FFICIF CIF = apiCreateCIF(
+            apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)),
+            ffi_type_uint32
+        );
+    }
 
     /** {@code SDL_GUID SDL_GetJoystickGUIDForID(SDL_JoystickID instance_id)} */
     public static void nSDL_GetJoystickGUIDForID(int instance_id, long __result) {
@@ -233,7 +235,7 @@ public class SDLJoystick {
             long arguments = stack.nmalloc(POINTER_SIZE, POINTER_SIZE * 1);
             memPutAddress(arguments, stack.nint(instance_id));
 
-            nffi_call(SDL_GetJoystickGUIDForIDCIF.address(), __functionAddress, __result, arguments);
+            nffi_call(SDL_GetJoystickGUIDForID.CIF.address(), __functionAddress, __result, arguments);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -493,10 +495,12 @@ public class SDLJoystick {
 
     // --- [ SDL_GetJoystickGUID ] ---
 
-    private static final FFICIF SDL_GetJoystickGUIDCIF = apiCreateCIF(
-        apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)),
-        ffi_type_pointer
-    );
+    private static final class SDL_GetJoystickGUID {
+        static final FFICIF CIF = apiCreateCIF(
+            apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)),
+            ffi_type_pointer
+        );
+    }
 
     /** {@code SDL_GUID SDL_GetJoystickGUID(SDL_Joystick * joystick)} */
     public static void nSDL_GetJoystickGUID(long joystick, long __result) {
@@ -509,7 +513,7 @@ public class SDLJoystick {
             long arguments = stack.nmalloc(POINTER_SIZE, POINTER_SIZE * 1);
             memPutAddress(arguments, stack.npointer(joystick));
 
-            nffi_call(SDL_GetJoystickGUIDCIF.address(), __functionAddress, __result, arguments);
+            nffi_call(SDL_GetJoystickGUID.CIF.address(), __functionAddress, __result, arguments);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -601,10 +605,12 @@ public class SDLJoystick {
 
     // --- [ SDL_GetJoystickGUIDInfo ] ---
 
-    private static final FFICIF SDL_GetJoystickGUIDInfoCIF = apiCreateCIF(
-        ffi_type_void,
-        apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)), ffi_type_pointer, ffi_type_pointer, ffi_type_pointer, ffi_type_pointer
-    );
+    private static final class SDL_GetJoystickGUIDInfo {
+        static final FFICIF CIF = apiCreateCIF(
+            ffi_type_void,
+            apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)), ffi_type_pointer, ffi_type_pointer, ffi_type_pointer, ffi_type_pointer
+        );
+    }
 
     /** {@code void SDL_GetJoystickGUIDInfo(SDL_GUID guid, Uint16 * vendor, Uint16 * product, Uint16 * version, Uint16 * crc16)} */
     public static void nSDL_GetJoystickGUIDInfo(long guid, long vendor, long product, long version, long crc16) {
@@ -618,7 +624,7 @@ public class SDLJoystick {
             memPutAddress(arguments + 3 * POINTER_SIZE, stack.npointer(version));
             memPutAddress(arguments + 4 * POINTER_SIZE, stack.npointer(crc16));
 
-            nffi_call(SDL_GetJoystickGUIDInfoCIF.address(), __functionAddress, NULL, arguments);
+            nffi_call(SDL_GetJoystickGUIDInfo.CIF.address(), __functionAddress, NULL, arguments);
         } finally {
             stack.setPointer(stackPointer);
         }

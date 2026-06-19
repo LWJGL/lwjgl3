@@ -290,10 +290,12 @@ public class SDLGamepad {
 
     // --- [ SDL_GetGamepadMappingForGUID ] ---
 
-    private static final FFICIF SDL_GetGamepadMappingForGUIDCIF = apiCreateCIF(
-        ffi_type_pointer,
-        apiCreateStruct(apiCreateArray(ffi_type_uint8, 16))
-    );
+    private static final class SDL_GetGamepadMappingForGUID {
+        static final FFICIF CIF = apiCreateCIF(
+            ffi_type_pointer,
+            apiCreateStruct(apiCreateArray(ffi_type_uint8, 16))
+        );
+    }
 
     /** {@code char * SDL_GetGamepadMappingForGUID(SDL_GUID guid)} */
     public static long nSDL_GetGamepadMappingForGUID(long guid) {
@@ -304,7 +306,7 @@ public class SDLGamepad {
             long arguments = stack.nmalloc(POINTER_SIZE, POINTER_SIZE * 1);
             memPutAddress(arguments, guid);
 
-            nffi_call(SDL_GetGamepadMappingForGUIDCIF.address(), __functionAddress, __result, arguments);
+            nffi_call(SDL_GetGamepadMappingForGUID.CIF.address(), __functionAddress, __result, arguments);
 
             return memGetAddress(__result);
         } finally {
@@ -456,10 +458,12 @@ public class SDLGamepad {
 
     // --- [ SDL_GetGamepadGUIDForID ] ---
 
-    private static final FFICIF SDL_GetGamepadGUIDForIDCIF = apiCreateCIF(
-        apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)),
-        ffi_type_uint32
-    );
+    private static final class SDL_GetGamepadGUIDForID {
+        static final FFICIF CIF = apiCreateCIF(
+            apiCreateStruct(apiCreateArray(ffi_type_uint8, 16)),
+            ffi_type_uint32
+        );
+    }
 
     /** {@code SDL_GUID SDL_GetGamepadGUIDForID(SDL_JoystickID instance_id)} */
     public static void nSDL_GetGamepadGUIDForID(int instance_id, long __result) {
@@ -469,7 +473,7 @@ public class SDLGamepad {
             long arguments = stack.nmalloc(POINTER_SIZE, POINTER_SIZE * 1);
             memPutAddress(arguments, stack.nint(instance_id));
 
-            nffi_call(SDL_GetGamepadGUIDForIDCIF.address(), __functionAddress, __result, arguments);
+            nffi_call(SDL_GetGamepadGUIDForID.CIF.address(), __functionAddress, __result, arguments);
         } finally {
             stack.setPointer(stackPointer);
         }
