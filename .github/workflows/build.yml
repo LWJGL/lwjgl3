@@ -240,7 +240,6 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 3
-          fetch-tags: true
       - name: Install dependencies
         run: |
           mkdir jdk8
