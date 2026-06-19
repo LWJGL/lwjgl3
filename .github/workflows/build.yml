@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 3
       - name: Download JDK
@@ -35,7 +35,7 @@ jobs:
           git clone https://github.com/LWJGL-CI/OculusSDK.git ../OculusSDK
           ant -emacs compile-templates
       - name: Cache kotlinc output
-        uses: actions/cache/save@v3
+        uses: actions/cache/save@v5
         with:
           path: |
             bin/classes/generator
@@ -61,7 +61,7 @@ jobs:
     steps:
       - name: Install git
         run: dnf -y install git
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 3
       - name: Install build dependencies # make is necessary for -flto=auto
@@ -84,7 +84,7 @@ jobs:
             gtk3-devel \
             dbus-devel
       - name: Restore kotlinc output
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v5
         with:
           path: |
             bin/classes/generator
@@ -181,7 +181,7 @@ jobs:
         shell: bash
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 3
       - name: Install dependencies # make is necessary for -flto=auto
@@ -213,7 +213,7 @@ jobs:
             libxt-dev:${{matrix.CROSS_ARCH}} \
             libdbus-1-dev:${{matrix.CROSS_ARCH}}
       - name: Restore kotlinc output
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v5
         with:
           path: |
             bin/classes/generator
@@ -237,7 +237,7 @@ jobs:
       fail-fast: false
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 3
       - name: Install dependencies
@@ -245,7 +245,7 @@ jobs:
           mkdir jdk8
           curl -L https://cdn.azul.com/zulu/bin/zulu8.${ZULU_BUILD}-linux_x64.tar.gz | tar xz -C jdk8 --strip-components 1
       - name: Restore kotlinc output
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v5
         with:
           path: |
             bin/classes/generator
@@ -287,15 +287,17 @@ jobs:
   macos:
     name: macOS
     needs: cache-kotlinc
-    runs-on: macos-latest
+    runs-on: ${{matrix.RUNNER}}
     strategy:
       fail-fast: false
       matrix:
         ARCH: [x64, arm64]
         include:
           - ARCH: x64
+            RUNNER: macos-26-intel
             JDK: x64
           - ARCH: arm64
+            RUNNER: macos-26
             JDK: aarch64
     env:
       JAVA8_HOME: jdk8/Home
@@ -303,7 +305,7 @@ jobs:
       LWJGL_BUILD_ARCH: ${{matrix.ARCH}}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 3
       - name: Install dependencies
@@ -315,7 +317,7 @@ jobs:
           curl -L https://cdn.azul.com/zulu/bin/zulu25.${ZULU_BUILD25}-macosx_${{matrix.JDK}}.tar.gz | tar xz -C jdk25 --strip-components 2
           curl -L https://cdn.azul.com/zulu/bin/zulu27.${ZULU_BUILD27}-macosx_${{matrix.JDK}}.tar.gz | tar xz -C jdk27 --strip-components 2
       - name: Restore kotlinc output
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v5
         with:
           path: |
             bin/classes/generator
@@ -402,7 +404,7 @@ jobs:
         shell: cmd
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 3
       - name: Configure MSVC
@@ -435,7 +437,7 @@ jobs:
 #            -y `
 #            --ignore-package-exit-codes=3010
       - name: Restore kotlinc output
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v5
         with:
           path: |
             bin/classes/generator
