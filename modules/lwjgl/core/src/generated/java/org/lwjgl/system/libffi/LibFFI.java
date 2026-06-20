@@ -20,9 +20,9 @@ public class LibFFI {
 
     static { Library.initialize(); }
 
-    public static final String FFI_VERSION_STRING = "3.5.0";
+    public static final String FFI_VERSION_STRING = "3.6.0";
 
-    public static final int FFI_VERSION_NUMBER = 0x7724;
+    public static final int FFI_VERSION_NUMBER = 0x7788;
 
     public static final short
         FFI_TYPE_VOID       = 0,
@@ -39,7 +39,10 @@ public class LibFFI {
         FFI_TYPE_UINT64     = 11,
         FFI_TYPE_SINT64     = 12,
         FFI_TYPE_STRUCT     = 13,
-        FFI_TYPE_POINTER    = 14;
+        FFI_TYPE_POINTER    = 14,
+        FFI_TYPE_COMPLEX    = 15,
+        FFI_TYPE_UINT128    = 16,
+        FFI_TYPE_SINT128    = 17;
 
     public static final int
         FFI_FIRST_ABI   = FFI_FIRST_ABI(),
