@@ -1,0 +1,37 @@
+# Statically analyzes this repository's GitHub Actions workflows for security
+# issues using zizmor (https://docs.zizmor.sh). Findings are uploaded to the
+# repository's Security tab via GitHub code scanning (SARIF).
+name: zizmor
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - .github/workflows/**
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  zizmor:
+    name: zizmor
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read         # checkout the repository
+      actions: read          # read workflow definitions (private repos)
+      security-events: write # upload SARIF results to code scanning
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+      - name: Run zizmor
+        uses: zizmorcore/zizmor-action@192e21d79ab29983730a13d1382995c2307fbcaa # v0.5.7
+        with:
+          persona: regular
+          advanced-security: true # Upload findings to the repository's Security tab (default behavior).

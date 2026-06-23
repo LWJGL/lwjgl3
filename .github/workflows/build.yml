@@ -8,6 +8,13 @@ on:
     branches:
       - master
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   ANT_OPTS: -Xmx1G
   LWJGL_BUILD_TYPE: nightly
@@ -18,11 +25,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           fetch-depth: 3
+          persist-credentials: false
       - name: Setup Java
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@ad2b38190b15e4d6bdf0c97fb4fca8412226d287 # v5.3.0
         with:
           distribution: 'zulu'
           java-version: '8'
@@ -32,7 +40,7 @@ jobs:
           git clone https://github.com/LWJGL-CI/OculusSDK.git ../OculusSDK
           ant -emacs compile-templates
       - name: Cache kotlinc output
-        uses: actions/cache/save@v5
+        uses: actions/cache/save@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: |
             bin/classes/generator
@@ -45,7 +53,7 @@ jobs:
     needs: cache-kotlinc
     runs-on: ubuntu-latest
     container:
-      image: almalinux:8
+      image: almalinux:8@sha256:4a87d2615a770506e204c27d6248ac97f4df67f4e41e2e9c47c81f0ed0be98cb
     strategy:
       fail-fast: false
       matrix:
@@ -58,11 +66,12 @@ jobs:
     steps:
       - name: Install git
         run: dnf -y install git
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           fetch-depth: 3
+          persist-credentials: false
       - name: Setup Java
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@ad2b38190b15e4d6bdf0c97fb4fca8412226d287 # v5.3.0
         with:
           distribution: 'zulu'
           java-version: |
@@ -84,7 +93,7 @@ jobs:
             gtk3-devel \
             dbus-devel
       - name: Restore kotlinc output
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: |
             bin/classes/generator
@@ -183,11 +192,12 @@ jobs:
         shell: bash
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           fetch-depth: 3
+          persist-credentials: false
       - name: Setup Java
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@ad2b38190b15e4d6bdf0c97fb4fca8412226d287 # v5.3.0
         with:
           distribution: 'zulu'
           java-version: '8'
@@ -219,7 +229,7 @@ jobs:
             libxt-dev:${{matrix.CROSS_ARCH}} \
             libdbus-1-dev:${{matrix.CROSS_ARCH}}
       - name: Restore kotlinc output
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: |
             bin/classes/generator
@@ -243,17 +253,18 @@ jobs:
       fail-fast: false
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           fetch-depth: 3
+          persist-credentials: false
       - name: Setup Java
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@ad2b38190b15e4d6bdf0c97fb4fca8412226d287 # v5.3.0
         with:
           distribution: 'zulu'
           java-version: '8'
           check-latest: true
       - name: Restore kotlinc output
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: |
             bin/classes/generator
@@ -266,7 +277,7 @@ jobs:
       - name: Build Java
         run: ant -emacs compile
       - name: Start VM
-        uses: cross-platform-actions/action@v1.2.0
+        uses: cross-platform-actions/action@5ea7e8e4677bd726033a10b094ba1c5762b15dee # v1.3.0
         with:
           operating_system: freebsd
           architecture: x86-64
@@ -274,22 +285,22 @@ jobs:
           memory: 8G
           environment_variables: ANT_OPTS LWJGL_BUILD_TYPE
       - name: Install build dependencies
-        shell: cpa.sh {0}
+        shell: cpa.sh {0} # zizmor: ignore[misfeature] cpa.sh runs the step inside the FreeBSD VM
         run: sudo pkg install -y openjdk8 apache-ant git
       - name: Install LWJGL dependencies
-        shell: cpa.sh {0}
+        shell: cpa.sh {0} # zizmor: ignore[misfeature] cpa.sh runs the step inside the FreeBSD VM
         run: sudo pkg install -y gtk3 dbus
       - name: Build native
-        shell: cpa.sh {0}
+        shell: cpa.sh {0} # zizmor: ignore[misfeature] cpa.sh runs the step inside the FreeBSD VM
         run: ant -emacs compile-native -Dclang.version.print=true
       - name: Run tests
-        shell: cpa.sh {0}
+        shell: cpa.sh {0} # zizmor: ignore[misfeature] cpa.sh runs the step inside the FreeBSD VM
         run: ant -emacs tests
       - name: Print test results
         run: cat bin/test/testng-results.xml
         if: failure()
       - name: Run demo with OpenJDK
-        shell: cpa.sh {0}
+        shell: cpa.sh {0} # zizmor: ignore[misfeature] cpa.sh runs the step inside the FreeBSD VM
         run: ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
 
   macos:
@@ -313,11 +324,12 @@ jobs:
       LWJGL_BUILD_ARCH: ${{matrix.ARCH}}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           fetch-depth: 3
+          persist-credentials: false
       - name: Setup Java
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@ad2b38190b15e4d6bdf0c97fb4fca8412226d287 # v5.3.0
         with:
           distribution: 'zulu'
           java-version: |
@@ -326,7 +338,7 @@ jobs:
             8
           check-latest: true
       - name: Restore kotlinc output
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: |
             bin/classes/generator
@@ -412,21 +424,22 @@ jobs:
       LWJGL_BUILD_ARCH: ${{matrix.ARCH}}
     defaults:
       run:
-        shell: cmd
+        shell: cmd # zizmor: ignore[misfeature] Windows build/test steps are written in CMD syntax; pwsh/bash would break them.
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           fetch-depth: 3
+          persist-credentials: false
       - name: Configure MSVC
-        uses: ilammy/msvc-dev-cmd@v1
+        uses: ilammy/msvc-dev-cmd@0b201ec74fa43914dc39ae48a89fd1d8cb592756 # v1.13.0
         with:
           arch: ${{ matrix.MSVC_ARCH }}
       - name: Clone Oculus SDK
         run: git clone https://github.com/LWJGL-CI/OculusSDK.git ../OculusSDK
         if: contains(matrix.ARCH, 'arm') != true
       - name: Setup Java
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@ad2b38190b15e4d6bdf0c97fb4fca8412226d287 # v5.3.0
         with:
           distribution: 'zulu'
           java-version: |
@@ -436,7 +449,7 @@ jobs:
           check-latest: true
         if: matrix.ARCH != 'x86'
       - name: Setup Java x86
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@ad2b38190b15e4d6bdf0c97fb4fca8412226d287 # v5.3.0
         with:
           distribution: 'zulu'
           java-version: 8
@@ -454,7 +467,7 @@ jobs:
 #            -y `
 #            --ignore-package-exit-codes=3010
       - name: Restore kotlinc output
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: |
             bin/classes/generator
