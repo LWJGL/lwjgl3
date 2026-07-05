@@ -25,6 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     bool debug;
  *     bool profile;
  *     bool fallback;
+ *     bool videoDecode;
  *     {@link BGFXPlatformData bgfx_platform_data_t} platformData;
  *     {@link BGFXResolution bgfx_resolution_t} resolution;
  *     {@link BGFXInitLimits bgfx_init_limits_t} limits;
@@ -50,6 +51,7 @@ public class BGFXInit extends Struct<BGFXInit> implements NativeResource {
         DEBUG,
         PROFILE,
         FALLBACK,
+        VIDEODECODE,
         PLATFORMDATA,
         RESOLUTION,
         LIMITS,
@@ -66,6 +68,7 @@ public class BGFXInit extends Struct<BGFXInit> implements NativeResource {
             __member(2),
             __member(2),
             __member(8),
+            __member(1),
             __member(1),
             __member(1),
             __member(1),
@@ -86,11 +89,12 @@ public class BGFXInit extends Struct<BGFXInit> implements NativeResource {
         DEBUG = layout.offsetof(4);
         PROFILE = layout.offsetof(5);
         FALLBACK = layout.offsetof(6);
-        PLATFORMDATA = layout.offsetof(7);
-        RESOLUTION = layout.offsetof(8);
-        LIMITS = layout.offsetof(9);
-        CALLBACK = layout.offsetof(10);
-        ALLOCATOR = layout.offsetof(11);
+        VIDEODECODE = layout.offsetof(7);
+        PLATFORMDATA = layout.offsetof(8);
+        RESOLUTION = layout.offsetof(9);
+        LIMITS = layout.offsetof(10);
+        CALLBACK = layout.offsetof(11);
+        ALLOCATOR = layout.offsetof(12);
     }
 
     protected BGFXInit(long address, @Nullable ByteBuffer container) {
@@ -136,6 +140,9 @@ public class BGFXInit extends Struct<BGFXInit> implements NativeResource {
     /** @return the value of the {@code fallback} field. */
     @NativeType("bool")
     public boolean fallback() { return nfallback(address()); }
+    /** @return the value of the {@code videoDecode} field. */
+    @NativeType("bool")
+    public boolean videoDecode() { return nvideoDecode(address()); }
     /** @return a {@link BGFXPlatformData} view of the {@code platformData} field. */
     @NativeType("bgfx_platform_data_t")
     public BGFXPlatformData platformData() { return nplatformData(address()); }
@@ -166,6 +173,8 @@ public class BGFXInit extends Struct<BGFXInit> implements NativeResource {
     public BGFXInit profile(@NativeType("bool") boolean value) { nprofile(address(), value); return this; }
     /** Sets the specified value to the {@code fallback} field. */
     public BGFXInit fallback(@NativeType("bool") boolean value) { nfallback(address(), value); return this; }
+    /** Sets the specified value to the {@code videoDecode} field. */
+    public BGFXInit videoDecode(@NativeType("bool") boolean value) { nvideoDecode(address(), value); return this; }
     /** Copies the specified {@link BGFXPlatformData} to the {@code platformData} field. */
     public BGFXInit platformData(@NativeType("bgfx_platform_data_t") BGFXPlatformData value) { nplatformData(address(), value); return this; }
     /** Passes the {@code platformData} field to the specified {@link java.util.function.Consumer Consumer}. */
@@ -192,6 +201,7 @@ public class BGFXInit extends Struct<BGFXInit> implements NativeResource {
         boolean debug,
         boolean profile,
         boolean fallback,
+        boolean videoDecode,
         BGFXPlatformData platformData,
         BGFXResolution resolution,
         BGFXInitLimits limits,
@@ -205,6 +215,7 @@ public class BGFXInit extends Struct<BGFXInit> implements NativeResource {
         debug(debug);
         profile(profile);
         fallback(fallback);
+        videoDecode(videoDecode);
         platformData(platformData);
         resolution(resolution);
         limits(limits);
@@ -288,6 +299,8 @@ public class BGFXInit extends Struct<BGFXInit> implements NativeResource {
     public static boolean nprofile(long struct) { return memGetByte(struct + BGFXInit.PROFILE) != 0; }
     /** Unsafe version of {@link #fallback}. */
     public static boolean nfallback(long struct) { return memGetByte(struct + BGFXInit.FALLBACK) != 0; }
+    /** Unsafe version of {@link #videoDecode}. */
+    public static boolean nvideoDecode(long struct) { return memGetByte(struct + BGFXInit.VIDEODECODE) != 0; }
     /** Unsafe version of {@link #platformData}. */
     public static BGFXPlatformData nplatformData(long struct) { return BGFXPlatformData.create(struct + BGFXInit.PLATFORMDATA); }
     /** Unsafe version of {@link #resolution}. */
@@ -313,6 +326,8 @@ public class BGFXInit extends Struct<BGFXInit> implements NativeResource {
     public static void nprofile(long struct, boolean value) { memPutByte(struct + BGFXInit.PROFILE, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #fallback(boolean) fallback}. */
     public static void nfallback(long struct, boolean value) { memPutByte(struct + BGFXInit.FALLBACK, value ? (byte)1 : (byte)0); }
+    /** Unsafe version of {@link #videoDecode(boolean) videoDecode}. */
+    public static void nvideoDecode(long struct, boolean value) { memPutByte(struct + BGFXInit.VIDEODECODE, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #platformData(BGFXPlatformData) platformData}. */
     public static void nplatformData(long struct, BGFXPlatformData value) { memCopy(value.address(), struct + BGFXInit.PLATFORMDATA, BGFXPlatformData.SIZEOF); }
     /** Unsafe version of {@link #resolution(BGFXResolution) resolution}. */

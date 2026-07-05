@@ -14,7 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-import static org.lwjgl.bgfx.BGFX.BGFX_TEXTURE_FORMAT_COUNT;
+import static org.lwjgl.bgfx.BGFX.*;
 
 /**
  * <pre><code>
@@ -29,6 +29,7 @@ import static org.lwjgl.bgfx.BGFX.BGFX_TEXTURE_FORMAT_COUNT;
  *     {@link BGFXCapsGPU bgfx_caps_gpu_t} gpu[4];
  *     {@link BGFXCapsLimits bgfx_caps_limits_t} limits;
  *     uint32_t formats[BGFX_TEXTURE_FORMAT_COUNT];
+ *     uint32_t codecs[BGFX_VIDEO_CODEC_COUNT];
  * }</code></pre>
  */
 @NativeType("struct bgfx_caps_t")
@@ -51,7 +52,8 @@ public class BGFXCaps extends Struct<BGFXCaps> {
         NUMGPUS,
         GPU,
         LIMITS,
-        FORMATS;
+        FORMATS,
+        CODECS;
 
     static {
         BGFXCapsGPU.createSafe(NULL);
@@ -67,7 +69,8 @@ public class BGFXCaps extends Struct<BGFXCaps> {
             __member(1),
             __array(BGFXCapsGPU.SIZEOF, BGFXCapsGPU.ALIGNOF, 4),
             __member(BGFXCapsLimits.SIZEOF, BGFXCapsLimits.ALIGNOF),
-            __array(4, BGFX_TEXTURE_FORMAT_COUNT)
+            __array(4, BGFX_TEXTURE_FORMAT_COUNT),
+            __array(4, BGFX_VIDEO_CODEC_COUNT)
         );
 
         SIZEOF = layout.getSize();
@@ -83,6 +86,7 @@ public class BGFXCaps extends Struct<BGFXCaps> {
         GPU = layout.offsetof(7);
         LIMITS = layout.offsetof(8);
         FORMATS = layout.offsetof(9);
+        CODECS = layout.offsetof(10);
     }
 
     protected BGFXCaps(long address, @Nullable ByteBuffer container) {
@@ -143,6 +147,12 @@ public class BGFXCaps extends Struct<BGFXCaps> {
     /** @return the value at the specified index of the {@code formats} field. */
     @NativeType("uint32_t")
     public int formats(int index) { return nformats(address(), index); }
+    /** @return a {@link IntBuffer} view of the {@code codecs} field. */
+    @NativeType("uint32_t[BGFX_VIDEO_CODEC_COUNT]")
+    public IntBuffer codecs() { return ncodecs(address()); }
+    /** @return the value at the specified index of the {@code codecs} field. */
+    @NativeType("uint32_t")
+    public int codecs(int index) { return ncodecs(address(), index); }
 
     // -----------------------------------
 
@@ -185,6 +195,12 @@ public class BGFXCaps extends Struct<BGFXCaps> {
     /** Unsafe version of {@link #formats(int) formats}. */
     public static int nformats(long struct, int index) {
         return memGetInt(struct + BGFXCaps.FORMATS + check(index, BGFX_TEXTURE_FORMAT_COUNT) * 4);
+    }
+    /** Unsafe version of {@link #codecs}. */
+    public static IntBuffer ncodecs(long struct) { return memIntBuffer(struct + BGFXCaps.CODECS, BGFX_VIDEO_CODEC_COUNT); }
+    /** Unsafe version of {@link #codecs(int) codecs}. */
+    public static int ncodecs(long struct, int index) {
+        return memGetInt(struct + BGFXCaps.CODECS + check(index, BGFX_VIDEO_CODEC_COUNT) * 4);
     }
 
 }

@@ -2811,6 +2811,10 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_system_JNI_invokePPPPPPZ__JJJJJJJ(JNIE
     UNUSED_PARAMS(__env, clazz)
     return ((jboolean (*) (uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t))(uintptr_t)__functionAddress)((uintptr_t)param0, (uintptr_t)param1, (uintptr_t)param2, (uintptr_t)param3, (uintptr_t)param4, (uintptr_t)param5);
 }
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_system_JNI_invokeUUCCUUZ__IBBSSBBJ(JNIEnv *__env, jclass clazz, jint param0, jbyte param1, jbyte param2, jshort param3, jshort param4, jbyte param5, jbyte param6, jlong __functionAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    return ((jboolean (*) (jint, uint8_t, uint8_t, uint16_t, uint16_t, uint8_t, uint8_t))(uintptr_t)__functionAddress)(param0, (uint8_t)param1, (uint8_t)param2, (uint16_t)param3, (uint16_t)param4, (uint8_t)param5, (uint8_t)param6);
+}
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_system_JNI_invokePPPPPPZ__JJJIJIJIIJIIJ(JNIEnv *__env, jclass clazz, jlong param0, jlong param1, jlong param2, jint param3, jlong param4, jint param5, jlong param6, jint param7, jint param8, jlong param9, jint param10, jint param11, jlong __functionAddress) {
     UNUSED_PARAMS(__env, clazz)
     return ((jboolean (*) (uintptr_t, uintptr_t, uintptr_t, jint, uintptr_t, jint, uintptr_t, jint, jint, uintptr_t, jint, jint))(uintptr_t)__functionAddress)((uintptr_t)param0, (uintptr_t)param1, (uintptr_t)param2, param3, (uintptr_t)param4, param5, (uintptr_t)param6, param7, param8, (uintptr_t)param9, param10, param11);

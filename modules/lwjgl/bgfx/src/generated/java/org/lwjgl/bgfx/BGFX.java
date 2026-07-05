@@ -97,6 +97,7 @@ public class BGFX {
             create_compute_program                               = apiGetFunctionAddress(BGFX, "bgfx_create_compute_program"),
             destroy_program                                      = apiGetFunctionAddress(BGFX, "bgfx_destroy_program"),
             is_texture_valid                                     = apiGetFunctionAddress(BGFX, "bgfx_is_texture_valid"),
+            is_video_codec_valid                                 = apiGetFunctionAddress(BGFX, "bgfx_is_video_codec_valid"),
             is_frame_buffer_valid                                = apiGetFunctionAddress(BGFX, "bgfx_is_frame_buffer_valid"),
             calc_texture_size                                    = apiGetFunctionAddress(BGFX, "bgfx_calc_texture_size"),
             create_texture                                       = apiGetFunctionAddress(BGFX, "bgfx_create_texture"),
@@ -236,7 +237,7 @@ public class BGFX {
         return BGFX;
     }
 
-    public static final int BGFX_API_VERSION = 145;
+    public static final int BGFX_API_VERSION = 147;
 
     public static final short BGFX_INVALID_HANDLE = (short)0xFFFF;
 
@@ -588,7 +589,8 @@ public class BGFX {
         BGFX_CAPS_VERTEX_ATTRIB_HALF       = 0x40000000L,
         BGFX_CAPS_VERTEX_ATTRIB_UINT10     = 0x80000000L,
         BGFX_CAPS_VERTEX_ID                = 0x100000000L,
-        BGFX_CAPS_VIEWPORT_LAYER_ARRAY     = 0x200000000L,
+        BGFX_CAPS_VIDEO_DECODE             = 0x200000000L,
+        BGFX_CAPS_VIEWPORT_LAYER_ARRAY     = 0x400000000L,
         BGFX_CAPS_TEXTURE_COMPARE_ALL      = BGFX_CAPS_TEXTURE_COMPARE_RESERVED | BGFX_CAPS_TEXTURE_COMPARE_LEQUAL;
 
     public static final int
@@ -609,7 +611,28 @@ public class BGFX {
         BGFX_CAPS_FORMAT_TEXTURE_FRAMEBUFFER_MSAA = 0x2000,
         BGFX_CAPS_FORMAT_TEXTURE_MSAA             = 0x4000,
         BGFX_CAPS_FORMAT_TEXTURE_MIP_AUTOGEN      = 0x8000,
-        BGFX_CAPS_FORMAT_TEXTURE_BACKBUFFER       = 0x10000;
+        BGFX_CAPS_FORMAT_TEXTURE_BACKBUFFER       = 0x10000,
+        BGFX_CAPS_FORMAT_TEXTURE_VIDEO_DECODE_DST = 0x20000;
+
+    public static final int
+        BGFX_CAPS_VIDEO_CODEC_NONE       = 0x0,
+        BGFX_CAPS_VIDEO_CODEC_BIT_8      = 0x1,
+        BGFX_CAPS_VIDEO_CODEC_BIT_10     = 0x2,
+        BGFX_CAPS_VIDEO_CODEC_BIT_12     = 0x4,
+        BGFX_CAPS_VIDEO_CODEC_CHROMA_420 = 0x8,
+        BGFX_CAPS_VIDEO_CODEC_CHROMA_422 = 0x10,
+        BGFX_CAPS_VIDEO_CODEC_CHROMA_444 = 0x20;
+
+    public static final byte
+        BGFX_VIDEO_DECODER_INIT_NONE   = 0x0,
+        BGFX_VIDEO_DECODER_INIT_RETAIN = 0x1;
+
+    public static final byte
+        BGFX_VIDEO_DECODE_FRAME_NONE    = 0x0,
+        BGFX_VIDEO_DECODE_FRAME_SET     = 0x1,
+        BGFX_VIDEO_DECODE_FRAME_NO_BLIT = 0x2,
+        BGFX_VIDEO_DECODE_FRAME_FINAL   = 0x4,
+        BGFX_VIDEO_DECODE_FRAME_LOOP    = 0x8;
 
     public static final byte
         BGFX_RESOLVE_NONE          = 0x0,
@@ -829,6 +852,12 @@ public class BGFX {
         BGFX_OCCLUSION_QUERY_RESULT_VISIBLE   = 1,
         BGFX_OCCLUSION_QUERY_RESULT_NORESULT  = 2,
         BGFX_OCCLUSION_QUERY_RESULT_COUNT     = 3;
+
+    public static final int
+        BGFX_VIDEO_CODEC_H264  = 0,
+        BGFX_VIDEO_CODEC_H265  = 1,
+        BGFX_VIDEO_CODEC_AV1   = 2,
+        BGFX_VIDEO_CODEC_COUNT = 3;
 
     public static final int
         BGFX_TOPOLOGY_TRI_LIST   = 0,
@@ -2000,6 +2029,20 @@ public class BGFX {
     @NativeType("bool")
     public static boolean bgfx_is_texture_valid(@NativeType("uint16_t") int _depth, @NativeType("bool") boolean _cubeMap, @NativeType("uint16_t") int _numLayers, @NativeType("bgfx_texture_format_t") int _format, @NativeType("uint64_t") long _flags) {
         return nbgfx_is_texture_valid((short)_depth, _cubeMap, (short)_numLayers, _format, _flags);
+    }
+
+    // --- [ bgfx_is_video_codec_valid ] ---
+
+    /** {@code bool bgfx_is_video_codec_valid(bgfx_video_codec_t _codec, uint8_t _chroma, uint8_t _bitDepth, uint16_t _codedWidth, uint16_t _codedHeight, uint8_t _maxDpbSlots, uint8_t _maxActiveReferences)} */
+    public static boolean nbgfx_is_video_codec_valid(int _codec, byte _chroma, byte _bitDepth, short _codedWidth, short _codedHeight, byte _maxDpbSlots, byte _maxActiveReferences) {
+        long __functionAddress = Functions.is_video_codec_valid;
+        return invokeUUCCUUZ(_codec, _chroma, _bitDepth, _codedWidth, _codedHeight, _maxDpbSlots, _maxActiveReferences, __functionAddress);
+    }
+
+    /** {@code bool bgfx_is_video_codec_valid(bgfx_video_codec_t _codec, uint8_t _chroma, uint8_t _bitDepth, uint16_t _codedWidth, uint16_t _codedHeight, uint8_t _maxDpbSlots, uint8_t _maxActiveReferences)} */
+    @NativeType("bool")
+    public static boolean bgfx_is_video_codec_valid(@NativeType("bgfx_video_codec_t") int _codec, @NativeType("uint8_t") int _chroma, @NativeType("uint8_t") int _bitDepth, @NativeType("uint16_t") int _codedWidth, @NativeType("uint16_t") int _codedHeight, @NativeType("uint8_t") int _maxDpbSlots, @NativeType("uint8_t") int _maxActiveReferences) {
+        return nbgfx_is_video_codec_valid(_codec, (byte)_chroma, (byte)_bitDepth, (short)_codedWidth, (short)_codedHeight, (byte)_maxDpbSlots, (byte)_maxActiveReferences);
     }
 
     // --- [ bgfx_is_frame_buffer_valid ] ---
