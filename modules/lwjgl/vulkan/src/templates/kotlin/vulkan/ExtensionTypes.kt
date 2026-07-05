@@ -8091,7 +8091,7 @@ val VkTensorDescriptionARM = struct(Module.VULKAN, "VkTensorDescriptionARM") {
 val VkTensorCreateInfoARM = struct(Module.VULKAN, "VkTensorCreateInfoARM") {
     Expression("#STRUCTURE_TYPE_TENSOR_CREATE_INFO_ARM")..VkStructureType("sType")
     PointerSetter(
-        "VkExternalMemoryTensorCreateInfoARM", "VkOpaqueCaptureDataCreateInfoEXT", "VkOpaqueCaptureDescriptorDataCreateInfoEXT",
+        "VkExternalMemoryTensorCreateInfoARM", "VkOpaqueCaptureDataCreateInfoEXT", "VkOpaqueCaptureDescriptorDataCreateInfoEXT", "VkTensorRollingBackingCreateInfoARM",
         prepend = true
     )..nullable..opaque_const_p("pNext")
     VkTensorCreateFlagsARM("flags")
@@ -10026,6 +10026,23 @@ val VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT = struct(Module.VULKAN
     VkBool32("shaderReplicatedComposites")
 }
 
+val VkTensorRollingBackingCreateInfoARM = struct(Module.VULKAN, "VkTensorRollingBackingCreateInfoARM") {
+    javaImport("static org.lwjgl.vulkan.ARMTensorControls.*")
+    Expression("#STRUCTURE_TYPE_TENSOR_ROLLING_BACKING_CREATE_INFO_ARM")..VkStructureType("sType")
+    nullable..opaque_const_p("pNext")
+    uint32_t("wraps")["VK_MAX_TENSOR_CREATE_INFO_ROLLING_BACKING_WRAP_COUNT_ARM"]
+}
+
+val VkTensorExplicitTilingFormatPropertiesARM = struct(Module.VULKAN, "VkTensorExplicitTilingFormatPropertiesARM", mutable = false) {
+    Expression("#STRUCTURE_TYPE_TENSOR_EXPLICIT_TILING_FORMAT_PROPERTIES_ARM")..VkStructureType("sType").mutable()
+    nullable..opaque_p("pNext").mutable()
+    VkFormatFeatureFlags2("brick16TilingTensorFeatures")
+    VkFormatFeatureFlags2("brick8TilingTensorFeatures")
+    VkFormatFeatureFlags2("brick4TilingTensorFeatures")
+    VkFormatFeatureFlags2("blockUTilingTensorFeatures")
+    VkFormatFeatureFlags2("blockU64kTilingTensorFeatures")
+}
+
 val VkPhysicalDeviceShaderFloat8FeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceShaderFloat8FeaturesEXT") {
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT8_FEATURES_EXT")..VkStructureType("sType")
     nullable..opaque_p("pNext")
@@ -11236,6 +11253,15 @@ val VkSharedPresentSurfaceCapabilities2KHR = struct(Module.VULKAN, "VkSharedPres
     Expression("#STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_2_KHR")..VkStructureType("sType").mutable()
     nullable..opaque_p("pNext").mutable()
     VkImageUsageFlags2KHR("sharedPresentSupportedUsageFlags")
+}
+
+val VkPhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT") {
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_OCP_MICROSCALING_TYPES_FEATURES_EXT")..VkStructureType("sType")
+    nullable..opaque_p("pNext")
+    VkBool32("shaderFloat4")
+    VkBool32("shaderFloat6")
+    VkBool32("shaderFloat8UnsignedE8M0")
+    VkBool32("shaderMXInt8")
 }
 
 val VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE = struct(Module.VULKAN, "VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE") {

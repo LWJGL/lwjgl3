@@ -129,7 +129,8 @@ public class VK10 {
         VK_VENDOR_ID_CODEPLAY = 0x10004,
         VK_VENDOR_ID_MESA     = 0x10005,
         VK_VENDOR_ID_POCL     = 0x10006,
-        VK_VENDOR_ID_MOBILEYE = 0x10007;
+        VK_VENDOR_ID_MOBILEYE = 0x10007,
+        VK_VENDOR_ID_APE      = 0x10008;
 
     public static final int
         VK_FORMAT_UNDEFINED                  = 0,
@@ -746,7 +747,7 @@ public class VK10 {
 
     public static final int VK_API_VERSION_1_0 = VK_MAKE_API_VERSION(0, 1, 0, 0);
 
-    public static final int VK_HEADER_VERSION = 353;
+    public static final int VK_HEADER_VERSION = 356;
 
     public static final long VK_NULL_HANDLE = 0x0L;
 

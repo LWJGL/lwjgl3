@@ -125,6 +125,8 @@ public class VkTensorCreateInfoARM extends Struct<VkTensorCreateInfoARM> impleme
     public VkTensorCreateInfoARM pNext(VkOpaqueCaptureDataCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT} value to the {@code pNext} chain. */
     public VkTensorCreateInfoARM pNext(VkOpaqueCaptureDescriptorDataCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkTensorRollingBackingCreateInfoARM} value to the {@code pNext} chain. */
+    public VkTensorCreateInfoARM pNext(VkTensorRollingBackingCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code flags} field. */
     public VkTensorCreateInfoARM flags(@NativeType("VkTensorCreateFlagsARM") long value) { nflags(address(), value); return this; }
     /** Sets the address of the specified {@link VkTensorDescriptionARM} to the {@code pDescription} field. */
@@ -398,6 +400,8 @@ public class VkTensorCreateInfoARM extends Struct<VkTensorCreateInfoARM> impleme
         public VkTensorCreateInfoARM.Buffer pNext(VkOpaqueCaptureDataCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT} value to the {@code pNext} chain. */
         public VkTensorCreateInfoARM.Buffer pNext(VkOpaqueCaptureDescriptorDataCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkTensorRollingBackingCreateInfoARM} value to the {@code pNext} chain. */
+        public VkTensorCreateInfoARM.Buffer pNext(VkTensorRollingBackingCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code flags} field. */
         public VkTensorCreateInfoARM.Buffer flags(@NativeType("VkTensorCreateFlagsARM") long value) { VkTensorCreateInfoARM.nflags(address(), value); return this; }
         /** Sets the address of the specified {@link VkTensorDescriptionARM} to the {@code pDescription} field. */

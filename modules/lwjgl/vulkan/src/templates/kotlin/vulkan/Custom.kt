@@ -58,7 +58,7 @@ fun templateCustomization() {
         )
 
         IntConstant(
-            "HEADER_VERSION".."353"
+            "HEADER_VERSION".."356"
         )
 
         LongConstant(

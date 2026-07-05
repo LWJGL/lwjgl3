@@ -122,7 +122,8 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         "VENDOR_ID_CODEPLAY".."0x10004",
         "VENDOR_ID_MESA".."0x10005",
         "VENDOR_ID_POCL".."0x10006",
-        "VENDOR_ID_MOBILEYE".."0x10007"
+        "VENDOR_ID_MOBILEYE".."0x10007",
+        "VENDOR_ID_APE".."0x10008"
     )
 
     EnumConstant(

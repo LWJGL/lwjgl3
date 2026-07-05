@@ -1231,6 +1231,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_ARM_shader_core_properties;
     /** When true, {@code ARM_shader_instrumentation} is supported. */
     public final boolean VK_ARM_shader_instrumentation;
+    /** When true, {@code ARM_tensor_controls} is supported. */
+    public final boolean VK_ARM_tensor_controls;
     /** When true, {@code ARM_tensors} is supported. */
     public final boolean VK_ARM_tensors;
     /** When true, {@code EXT_4444_formats} is supported. */
@@ -1455,6 +1457,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_shader_module_identifier;
     /** When true, {@code EXT_shader_object} is supported. */
     public final boolean VK_EXT_shader_object;
+    /** When true, {@code EXT_shader_ocp_microscaling_types} is supported. */
+    public final boolean VK_EXT_shader_ocp_microscaling_types;
     /** When true, {@code EXT_shader_replicated_composites} is supported. */
     public final boolean VK_EXT_shader_replicated_composites;
     /** When true, {@code EXT_shader_split_barrier} is supported. */
@@ -1521,6 +1525,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_HUAWEI_subpass_shading;
     /** When true, {@code IMG_filter_cubic} is supported. */
     public final boolean VK_IMG_filter_cubic;
+    /** When true, {@code IMG_filter_linear_2d} is supported. */
+    public final boolean VK_IMG_filter_linear_2d;
     /** When true, {@code IMG_format_pvrtc} is supported. */
     public final boolean VK_IMG_format_pvrtc;
     /** When true, {@code IMG_relaxed_line_rasterization} is supported. */
@@ -2047,6 +2053,7 @@ public class VKCapabilitiesDevice {
         VK_ARM_shader_core_builtins = ext.contains("VK_ARM_shader_core_builtins");
         VK_ARM_shader_core_properties = ext.contains("VK_ARM_shader_core_properties");
         VK_ARM_shader_instrumentation = check_ARM_shader_instrumentation(provider, caps, ext);
+        VK_ARM_tensor_controls = ext.contains("VK_ARM_tensor_controls");
         VK_ARM_tensors = check_ARM_tensors(provider, caps, ext);
         VK_EXT_4444_formats = ext.contains("VK_EXT_4444_formats");
         VK_EXT_astc_decode_mode = ext.contains("VK_EXT_astc_decode_mode");
@@ -2159,6 +2166,7 @@ public class VKCapabilitiesDevice {
         VK_EXT_shader_long_vector = ext.contains("VK_EXT_shader_long_vector");
         VK_EXT_shader_module_identifier = check_EXT_shader_module_identifier(provider, caps, ext);
         VK_EXT_shader_object = check_EXT_shader_object(provider, caps, ext);
+        VK_EXT_shader_ocp_microscaling_types = ext.contains("VK_EXT_shader_ocp_microscaling_types");
         VK_EXT_shader_replicated_composites = ext.contains("VK_EXT_shader_replicated_composites");
         VK_EXT_shader_split_barrier = ext.contains("VK_EXT_shader_split_barrier");
         VK_EXT_shader_stencil_export = ext.contains("VK_EXT_shader_stencil_export");
@@ -2192,6 +2200,7 @@ public class VKCapabilitiesDevice {
         VK_HUAWEI_invocation_mask = check_HUAWEI_invocation_mask(provider, caps, ext);
         VK_HUAWEI_subpass_shading = check_HUAWEI_subpass_shading(provider, caps, ext);
         VK_IMG_filter_cubic = ext.contains("VK_IMG_filter_cubic");
+        VK_IMG_filter_linear_2d = ext.contains("VK_IMG_filter_linear_2d");
         VK_IMG_format_pvrtc = ext.contains("VK_IMG_format_pvrtc");
         VK_IMG_relaxed_line_rasterization = ext.contains("VK_IMG_relaxed_line_rasterization");
         VK_INTEL_performance_query = check_INTEL_performance_query(provider, caps, ext);
