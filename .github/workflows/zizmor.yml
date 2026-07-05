@@ -9,7 +9,7 @@ on:
     branches:
       - master
     paths:
-      - .github/workflows/**
+      - .github/**
 
 permissions: {}
 
@@ -20,6 +20,7 @@ concurrency:
 jobs:
   zizmor:
     name: zizmor
+    if: github.event.repository.fork == false
     runs-on: ubuntu-latest
     permissions:
       contents: read         # checkout the repository
