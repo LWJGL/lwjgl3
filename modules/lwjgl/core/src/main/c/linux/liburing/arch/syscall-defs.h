@@ -48,12 +48,12 @@ static inline int __sys_madvise(void *addr, size_t length, int advice)
 
 static inline int __sys_getrlimit(int resource, struct rlimit *rlim)
 {
-	return (int) __do_syscall2(__NR_getrlimit, resource, rlim);
+	return (int) __do_syscall4(__NR_prlimit64, 0, resource, NULL, rlim);
 }
 
 static inline int __sys_setrlimit(int resource, const struct rlimit *rlim)
 {
-	return (int) __do_syscall2(__NR_setrlimit, resource, rlim);
+	return (int) __do_syscall4(__NR_prlimit64, 0, resource, rlim, NULL);
 }
 
 static inline int __sys_close(int fd)

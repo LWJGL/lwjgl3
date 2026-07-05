@@ -204,6 +204,13 @@ val io_uring_restriction = struct(Module.CORE_LINUX_LIBURING, "IOURingRestrictio
     __u32("resv2")[3].private()
 }
 
+val io_uring_task_restriction = struct(Module.CORE_LINUX_LIBURING, "IOURingTaskRestriction", nativeName = "struct io_uring_task_restriction") {
+    __u16("flags")
+    __u16("nr_res")
+    __u32("resv")[3].private()
+    io_uring_restriction("restrictions")[0]
+}
+
 val io_uring_clock_register = struct(Module.CORE_LINUX_LIBURING, "IOURingClockRegister", nativeName = "struct io_uring_clock_register") {
     __u32("clockid")
     __u32("__resv")[3].private()
@@ -242,7 +249,8 @@ val io_uring_buf_reg = struct(Module.CORE_LINUX_LIBURING, "IOURingBufReg", nativ
 	__u32("ring_entries")
 	__u16("bgid")
 	__u16("flags")
-	__u64("resv")[3].private()
+    __u32("min_left")
+    __u32("resv")[5].private()
 }
 
 val io_uring_buf_status = struct(Module.CORE_LINUX_LIBURING, "IOURingBufStatus", nativeName = "struct io_uring_buf_status") {
@@ -347,8 +355,28 @@ val io_uring_zcrx_ifq_reg = struct(Module.CORE_LINUX_LIBURING, "IOURingZCRXIfqRe
 
     io_uring_zcrx_offsets("offsets")
     __u32("zcrx_id")
-    __u32("__resv2").private()
+    __u32("rx_buf_len")
     __u64("__resv")[3].private()
+}
+
+val zcrx_ctrl_flush_rq = struct(Module.CORE_LINUX_LIBURING, "IOURingZCRXCtrlFlushRQ", nativeName = "struct zcrx_ctrl_flush_rq") {
+    __u64("__resv")[6].private()
+}
+
+val zcrx_ctrl_export = struct(Module.CORE_LINUX_LIBURING, "IOURingZCRXCtrlExport", nativeName = "struct zcrx_ctrl_export") {
+    __u32("zcrx_fd")
+    __u32("__resv1")[11].private()
+}
+
+val zcrx_ctrl = struct(Module.CORE_LINUX_LIBURING, "IOURingZCRXCtrl", nativeName = "struct zcrx_ctrl") {
+    __u32("zcrx_id")
+    __u32("op")
+    __u64("__resv")[2].private()
+
+    union {
+        zcrx_ctrl_export("zc_export")
+        zcrx_ctrl_flush_rq("zc_flush")
+    }
 }
 
 // liburing.h
@@ -415,6 +443,47 @@ val io_uring_zcrx_rq = struct(Module.CORE_LINUX_LIBURING, "IOURingZCRXRQ", nativ
 
     io_uring_zcrx_rqe.p("rqes")
     opaque_p("ring_ptr")
+}
+
+// bpf_filter.h
+
+val io_uring_bpf_ctx = struct(Module.CORE_LINUX_LIBURING, "IOURingBPFContext", nativeName = "struct io_uring_bpf_ctx") {
+    __u64("user_data")
+    __u8("opcode")
+    __u8("sqe_flags")
+    __u8("pdu_size")
+    __u8("pad")[5].private()
+    union {
+        struct {
+            __u32("family")
+            __u32("type")
+            __u32("protocol")
+        }("socket")
+        struct {
+            __u64("flags")
+            __u64("mode")
+            __u64("resolve")
+        }("open")
+    }
+}
+
+val io_uring_bpf_filter = struct(Module.CORE_LINUX_LIBURING, "IOURingBPFFilter", nativeName = "struct io_uring_bpf_filter") {
+    __u32("opcode")
+    __u32("flags")
+    __u32("filter_len")
+    __u8("pdu_size")
+    __u8("resv")[3].private()
+    __u64("filter_ptr")
+    __u64("resv2")[5].private()
+}
+
+val io_uring_bpf = struct(Module.CORE_LINUX_LIBURING, "IOURingBPF", nativeName = "struct io_uring_bpf") {
+    __u16("cmd_type")
+    __u16("cmd_flags")
+    __u32("resv").private()
+    union {
+        io_uring_bpf_filter("filter")
+    }
 }
 
 // query.h

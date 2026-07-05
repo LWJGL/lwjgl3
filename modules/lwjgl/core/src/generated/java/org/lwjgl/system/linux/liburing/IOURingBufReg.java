@@ -23,7 +23,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     __u32 ring_entries;
  *     __u16 bgid;
  *     __u16 flags;
- *     __u64 resv[3];
+ *     __u32 min_left;
+ *     __u32 resv[5];
  * }}</pre>
  */
 @NativeType("struct io_uring_buf_reg")
@@ -41,6 +42,7 @@ public class IOURingBufReg extends Struct<IOURingBufReg> implements NativeResour
         RING_ENTRIES,
         BGID,
         FLAGS,
+        MIN_LEFT,
         RESV;
 
     static {
@@ -49,7 +51,8 @@ public class IOURingBufReg extends Struct<IOURingBufReg> implements NativeResour
             __member(4),
             __member(2),
             __member(2),
-            __array(8, 3)
+            __member(4),
+            __array(4, 5)
         );
 
         SIZEOF = layout.getSize();
@@ -59,7 +62,8 @@ public class IOURingBufReg extends Struct<IOURingBufReg> implements NativeResour
         RING_ENTRIES = layout.offsetof(1);
         BGID = layout.offsetof(2);
         FLAGS = layout.offsetof(3);
-        RESV = layout.offsetof(4);
+        MIN_LEFT = layout.offsetof(4);
+        RESV = layout.offsetof(5);
     }
 
     protected IOURingBufReg(long address, @Nullable ByteBuffer container) {
@@ -96,6 +100,9 @@ public class IOURingBufReg extends Struct<IOURingBufReg> implements NativeResour
     /** @return the value of the {@code flags} field. */
     @NativeType("__u16")
     public short flags() { return nflags(address()); }
+    /** @return the value of the {@code min_left} field. */
+    @NativeType("__u32")
+    public int min_left() { return nmin_left(address()); }
 
     /** Sets the specified value to the {@code ring_addr} field. */
     public IOURingBufReg ring_addr(@NativeType("__u64") long value) { nring_addr(address(), value); return this; }
@@ -105,18 +112,22 @@ public class IOURingBufReg extends Struct<IOURingBufReg> implements NativeResour
     public IOURingBufReg bgid(@NativeType("__u16") short value) { nbgid(address(), value); return this; }
     /** Sets the specified value to the {@code flags} field. */
     public IOURingBufReg flags(@NativeType("__u16") short value) { nflags(address(), value); return this; }
+    /** Sets the specified value to the {@code min_left} field. */
+    public IOURingBufReg min_left(@NativeType("__u32") int value) { nmin_left(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public IOURingBufReg set(
         long ring_addr,
         int ring_entries,
         short bgid,
-        short flags
+        short flags,
+        int min_left
     ) {
         ring_addr(ring_addr);
         ring_entries(ring_entries);
         bgid(bgid);
         flags(flags);
+        min_left(min_left);
 
         return this;
     }
@@ -252,9 +263,11 @@ public class IOURingBufReg extends Struct<IOURingBufReg> implements NativeResour
     public static short nbgid(long struct) { return memGetShort(struct + IOURingBufReg.BGID); }
     /** Unsafe version of {@link #flags}. */
     public static short nflags(long struct) { return memGetShort(struct + IOURingBufReg.FLAGS); }
-    static LongBuffer nresv(long struct) { return memLongBuffer(struct + IOURingBufReg.RESV, 3); }
-    static long nresv(long struct, int index) {
-        return memGetLong(struct + IOURingBufReg.RESV + check(index, 3) * 8);
+    /** Unsafe version of {@link #min_left}. */
+    public static int nmin_left(long struct) { return memGetInt(struct + IOURingBufReg.MIN_LEFT); }
+    static IntBuffer nresv(long struct) { return memIntBuffer(struct + IOURingBufReg.RESV, 5); }
+    static int nresv(long struct, int index) {
+        return memGetInt(struct + IOURingBufReg.RESV + check(index, 5) * 4);
     }
 
     /** Unsafe version of {@link #ring_addr(long) ring_addr}. */
@@ -265,12 +278,14 @@ public class IOURingBufReg extends Struct<IOURingBufReg> implements NativeResour
     public static void nbgid(long struct, short value) { memPutShort(struct + IOURingBufReg.BGID, value); }
     /** Unsafe version of {@link #flags(short) flags}. */
     public static void nflags(long struct, short value) { memPutShort(struct + IOURingBufReg.FLAGS, value); }
-    static void nresv(long struct, LongBuffer value) {
-        if (CHECKS) { checkGT(value, 3); }
-        memCopy(memAddress(value), struct + IOURingBufReg.RESV, value.remaining() * 8);
+    /** Unsafe version of {@link #min_left(int) min_left}. */
+    public static void nmin_left(long struct, int value) { memPutInt(struct + IOURingBufReg.MIN_LEFT, value); }
+    static void nresv(long struct, IntBuffer value) {
+        if (CHECKS) { checkGT(value, 5); }
+        memCopy(memAddress(value), struct + IOURingBufReg.RESV, value.remaining() * 4);
     }
-    static void nresv(long struct, int index, long value) {
-        memPutLong(struct + IOURingBufReg.RESV + check(index, 3) * 8, value);
+    static void nresv(long struct, int index, int value) {
+        memPutInt(struct + IOURingBufReg.RESV + check(index, 5) * 4, value);
     }
 
     // -----------------------------------
@@ -328,6 +343,9 @@ public class IOURingBufReg extends Struct<IOURingBufReg> implements NativeResour
         /** @return the value of the {@code flags} field. */
         @NativeType("__u16")
         public short flags() { return IOURingBufReg.nflags(address()); }
+        /** @return the value of the {@code min_left} field. */
+        @NativeType("__u32")
+        public int min_left() { return IOURingBufReg.nmin_left(address()); }
 
         /** Sets the specified value to the {@code ring_addr} field. */
         public IOURingBufReg.Buffer ring_addr(@NativeType("__u64") long value) { IOURingBufReg.nring_addr(address(), value); return this; }
@@ -337,6 +355,8 @@ public class IOURingBufReg extends Struct<IOURingBufReg> implements NativeResour
         public IOURingBufReg.Buffer bgid(@NativeType("__u16") short value) { IOURingBufReg.nbgid(address(), value); return this; }
         /** Sets the specified value to the {@code flags} field. */
         public IOURingBufReg.Buffer flags(@NativeType("__u16") short value) { IOURingBufReg.nflags(address(), value); return this; }
+        /** Sets the specified value to the {@code min_left} field. */
+        public IOURingBufReg.Buffer min_left(@NativeType("__u32") int value) { IOURingBufReg.nmin_left(address(), value); return this; }
 
     }
 

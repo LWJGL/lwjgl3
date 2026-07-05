@@ -20,6 +20,23 @@ ENABLE_WARNINGS()""")
 
     LongConstant("LIBURING_UDATA_TIMEOUT".."-1L")
 
+    // bpf_filter.h
+
+    EnumConstant(
+        "BPF_FILTER_DENY_REST".enum("1"),
+        "BPF_FILTER_SZ_STRICT".enum
+    )
+
+    EnumConstant(
+        "BPF_CMD_FILTER".enum("1")
+    )
+
+    // query.h
+
+    EnumConstant(
+        "QUERY_OPCODES".enum("0")
+    )
+
     io_uring_probe.p(
         "get_probe_ring",
 
@@ -454,10 +471,36 @@ ENABLE_WARNINGS()""")
     )
 
     int(
+        "register_zcrx_ctrl",
+
+        io_uring.p("ring"),
+        zcrx_ctrl.p("ctrl")
+    )
+
+    int(
         "register_clock",
 
         io_uring.p("ring"),
         io_uring_clock_register.p("arg")
+    )
+
+    int(
+        "register_bpf_filter",
+
+        io_uring.p("ring"),
+        io_uring_bpf.p("bpf")
+    )
+
+    int(
+        "register_bpf_filter_task",
+
+        io_uring_bpf.p("bpf")
+    )
+
+    int(
+        "register_query",
+
+        io_uring_query_hdr.p("query")
     )
 
     int(
