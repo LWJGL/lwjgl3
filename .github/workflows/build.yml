@@ -281,7 +281,7 @@ jobs:
         with:
           operating_system: freebsd
           architecture: x86-64
-          version: '14.3'
+          version: '14.4'
           memory: 8G
           environment_variables: ANT_OPTS LWJGL_BUILD_TYPE
       - name: Install build dependencies
