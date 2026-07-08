@@ -105,6 +105,12 @@ public class XrBodyJointLocationsBD extends Struct<XrBodyJointLocationsBD> imple
     public XrBodyJointLocationsBD type$Default() { return type(BDBodyTracking.XR_TYPE_BODY_JOINT_LOCATIONS_BD); }
     /** Sets the specified value to the {@code next} field. */
     public XrBodyJointLocationsBD next(@NativeType("void *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrBodyJointAccelerationsBD} value to the {@code next} chain. */
+    public XrBodyJointLocationsBD next(XrBodyJointAccelerationsBD value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrBodyJointVelocitiesBD} value to the {@code next} chain. */
+    public XrBodyJointLocationsBD next(XrBodyJointVelocitiesBD value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrBodyTrackingPostureDataBD} value to the {@code next} chain. */
+    public XrBodyJointLocationsBD next(XrBodyTrackingPostureDataBD value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@code allJointPosesTracked} field. */
     public XrBodyJointLocationsBD allJointPosesTracked(@NativeType("XrBool32") boolean value) { nallJointPosesTracked(address(), value ? 1 : 0); return this; }
     /** Sets the address of the specified {@link XrBodyJointLocationBD.Buffer} to the {@code jointLocations} field. */
@@ -344,6 +350,12 @@ public class XrBodyJointLocationsBD extends Struct<XrBodyJointLocationsBD> imple
         public XrBodyJointLocationsBD.Buffer type$Default() { return type(BDBodyTracking.XR_TYPE_BODY_JOINT_LOCATIONS_BD); }
         /** Sets the specified value to the {@code next} field. */
         public XrBodyJointLocationsBD.Buffer next(@NativeType("void *") long value) { XrBodyJointLocationsBD.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrBodyJointAccelerationsBD} value to the {@code next} chain. */
+        public XrBodyJointLocationsBD.Buffer next(XrBodyJointAccelerationsBD value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrBodyJointVelocitiesBD} value to the {@code next} chain. */
+        public XrBodyJointLocationsBD.Buffer next(XrBodyJointVelocitiesBD value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrBodyTrackingPostureDataBD} value to the {@code next} chain. */
+        public XrBodyJointLocationsBD.Buffer next(XrBodyTrackingPostureDataBD value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@code allJointPosesTracked} field. */
         public XrBodyJointLocationsBD.Buffer allJointPosesTracked(@NativeType("XrBool32") boolean value) { XrBodyJointLocationsBD.nallJointPosesTracked(address(), value ? 1 : 0); return this; }
         /** Sets the address of the specified {@link XrBodyJointLocationBD.Buffer} to the {@code jointLocations} field. */

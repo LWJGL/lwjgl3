@@ -97,6 +97,12 @@ public class XrSpatialDiscoverySnapshotCreateInfoEXT extends Struct<XrSpatialDis
     public XrSpatialDiscoverySnapshotCreateInfoEXT type$Default() { return type(EXTSpatialEntity.XR_TYPE_SPATIAL_DISCOVERY_SNAPSHOT_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@code next} field. */
     public XrSpatialDiscoverySnapshotCreateInfoEXT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrSpatialBoundsBoxfANDROID} value to the {@code next} chain. */
+    public XrSpatialDiscoverySnapshotCreateInfoEXT next(XrSpatialBoundsBoxfANDROID value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrSpatialBoundsFrustumfANDROID} value to the {@code next} chain. */
+    public XrSpatialDiscoverySnapshotCreateInfoEXT next(XrSpatialBoundsFrustumfANDROID value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrSpatialBoundsSpherefANDROID} value to the {@code next} chain. */
+    public XrSpatialDiscoverySnapshotCreateInfoEXT next(XrSpatialBoundsSpherefANDROID value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSpatialDiscoveryPersistenceUuidFilterEXT} value to the {@code next} chain. */
     public XrSpatialDiscoverySnapshotCreateInfoEXT next(XrSpatialDiscoveryPersistenceUuidFilterEXT value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSpatialDiscoveryUniqueEntitiesFilterANDROID} value to the {@code next} chain. */
@@ -328,6 +334,12 @@ public class XrSpatialDiscoverySnapshotCreateInfoEXT extends Struct<XrSpatialDis
         public XrSpatialDiscoverySnapshotCreateInfoEXT.Buffer type$Default() { return type(EXTSpatialEntity.XR_TYPE_SPATIAL_DISCOVERY_SNAPSHOT_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@code next} field. */
         public XrSpatialDiscoverySnapshotCreateInfoEXT.Buffer next(@NativeType("void const *") long value) { XrSpatialDiscoverySnapshotCreateInfoEXT.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrSpatialBoundsBoxfANDROID} value to the {@code next} chain. */
+        public XrSpatialDiscoverySnapshotCreateInfoEXT.Buffer next(XrSpatialBoundsBoxfANDROID value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrSpatialBoundsFrustumfANDROID} value to the {@code next} chain. */
+        public XrSpatialDiscoverySnapshotCreateInfoEXT.Buffer next(XrSpatialBoundsFrustumfANDROID value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrSpatialBoundsSpherefANDROID} value to the {@code next} chain. */
+        public XrSpatialDiscoverySnapshotCreateInfoEXT.Buffer next(XrSpatialBoundsSpherefANDROID value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSpatialDiscoveryPersistenceUuidFilterEXT} value to the {@code next} chain. */
         public XrSpatialDiscoverySnapshotCreateInfoEXT.Buffer next(XrSpatialDiscoveryPersistenceUuidFilterEXT value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSpatialDiscoveryUniqueEntitiesFilterANDROID} value to the {@code next} chain. */

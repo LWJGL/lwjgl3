@@ -765,6 +765,7 @@ public final class JNI {
         int callPPI(MemorySegment __functionAddress, @FFMNullable @FFMPointer long param0, @FFMNullable @FFMPointer long param1, float param2);
         int callPPI(MemorySegment __functionAddress, @FFMNullable @FFMPointer long param0, @FFMNullable @FFMPointer long param1, int param2);
         int callPPI(MemorySegment __functionAddress, int param0, int param1, @FFMNullable @FFMPointer long param2, @FFMNullable @FFMPointer long param3);
+        int callPPI(MemorySegment __functionAddress, @FFMNullable @FFMPointer long param0, double param1, double param2, @FFMNullable @FFMPointer long param3);
         int callPPI(MemorySegment __functionAddress, @FFMNullable @FFMPointer long param0, int param1, float param2, @FFMNullable @FFMPointer long param3);
         int callPPI(MemorySegment __functionAddress, @FFMNullable @FFMPointer long param0, int param1, int param2, @FFMNullable @FFMPointer long param3);
         int callPPI(MemorySegment __functionAddress, @FFMNullable @FFMPointer long param0, int param1, @FFMNullable @FFMPointer long param2, int param3);
@@ -2095,6 +2096,7 @@ public final class JNI {
     public static int callPPI(long param0, long param1, float param2, long __functionAddress) { return jni.callPPI(MemorySegment.ofAddress(__functionAddress), param0, param1, param2); }
     public static int callPPI(long param0, long param1, int param2, long __functionAddress) { return jni.callPPI(MemorySegment.ofAddress(__functionAddress), param0, param1, param2); }
     public static int callPPI(int param0, int param1, long param2, long param3, long __functionAddress) { return jni.callPPI(MemorySegment.ofAddress(__functionAddress), param0, param1, param2, param3); }
+    public static int callPPI(long param0, double param1, double param2, long param3, long __functionAddress) { return jni.callPPI(MemorySegment.ofAddress(__functionAddress), param0, param1, param2, param3); }
     public static int callPPI(long param0, int param1, float param2, long param3, long __functionAddress) { return jni.callPPI(MemorySegment.ofAddress(__functionAddress), param0, param1, param2, param3); }
     public static int callPPI(long param0, int param1, int param2, long param3, long __functionAddress) { return jni.callPPI(MemorySegment.ofAddress(__functionAddress), param0, param1, param2, param3); }
     public static int callPPI(long param0, int param1, long param2, int param3, long __functionAddress) { return jni.callPPI(MemorySegment.ofAddress(__functionAddress), param0, param1, param2, param3); }

@@ -100,6 +100,8 @@ public class XrHandJointsLocateInfoEXT extends Struct<XrHandJointsLocateInfoEXT>
     public XrHandJointsLocateInfoEXT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrHandJointsMotionRangeInfoEXT} value to the {@code next} chain. */
     public XrHandJointsLocateInfoEXT next(XrHandJointsMotionRangeInfoEXT value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrHandTrackingUnextrapolatedPosesRequestMETA} value to the {@code next} chain. */
+    public XrHandJointsLocateInfoEXT next(XrHandTrackingUnextrapolatedPosesRequestMETA value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@code baseSpace} field. */
     public XrHandJointsLocateInfoEXT baseSpace(XrSpace value) { nbaseSpace(address(), value); return this; }
     /** Sets the specified value to the {@code time} field. */
@@ -334,6 +336,8 @@ public class XrHandJointsLocateInfoEXT extends Struct<XrHandJointsLocateInfoEXT>
         public XrHandJointsLocateInfoEXT.Buffer next(@NativeType("void const *") long value) { XrHandJointsLocateInfoEXT.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrHandJointsMotionRangeInfoEXT} value to the {@code next} chain. */
         public XrHandJointsLocateInfoEXT.Buffer next(XrHandJointsMotionRangeInfoEXT value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrHandTrackingUnextrapolatedPosesRequestMETA} value to the {@code next} chain. */
+        public XrHandJointsLocateInfoEXT.Buffer next(XrHandTrackingUnextrapolatedPosesRequestMETA value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@code baseSpace} field. */
         public XrHandJointsLocateInfoEXT.Buffer baseSpace(XrSpace value) { XrHandJointsLocateInfoEXT.nbaseSpace(address(), value); return this; }
         /** Sets the specified value to the {@code time} field. */

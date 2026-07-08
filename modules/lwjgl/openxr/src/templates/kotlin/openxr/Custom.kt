@@ -64,6 +64,7 @@ fun templateCustomization() {
     generateDispatchableHandle(XrFacialTrackerHTC, XrSession)
     generateDispatchableHandle(XrFoveationProfileFB, XrSession)
     generateDispatchableHandle(XrGeometryInstanceFB, XrSession)
+    generateDispatchableHandle(XrGeospatialTrackerANDROID, XrSession)
     generateDispatchableHandle(XrHandTrackerEXT, XrSession)
     generateDispatchableHandle(XrLightEstimatorANDROID, XrSession)
     generateDispatchableHandle(XrMarkerDetectorML, XrSession)
@@ -106,7 +107,7 @@ fun templateCustomization() {
 
     XR10.apply {
         LongConstant(
-            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 1, 60)"
+            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 1, 61)"
         )
 
         LongConstant(

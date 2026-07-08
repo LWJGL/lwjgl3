@@ -115,6 +115,8 @@ public class XrHandJointLocationsEXT extends Struct<XrHandJointLocationsEXT> imp
     public XrHandJointLocationsEXT next(XrHandTrackingDataSourceStateEXT value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrHandTrackingScaleFB} value to the {@code next} chain. */
     public XrHandJointLocationsEXT next(XrHandTrackingScaleFB value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrHandTrackingUnextrapolatedPosesMETA} value to the {@code next} chain. */
+    public XrHandJointLocationsEXT next(XrHandTrackingUnextrapolatedPosesMETA value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@code isActive} field. */
     public XrHandJointLocationsEXT isActive(@NativeType("XrBool32") boolean value) { nisActive(address(), value ? 1 : 0); return this; }
     /** Sets the address of the specified {@link XrHandJointLocationEXT.Buffer} to the {@code jointLocations} field. */
@@ -364,6 +366,8 @@ public class XrHandJointLocationsEXT extends Struct<XrHandJointLocationsEXT> imp
         public XrHandJointLocationsEXT.Buffer next(XrHandTrackingDataSourceStateEXT value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrHandTrackingScaleFB} value to the {@code next} chain. */
         public XrHandJointLocationsEXT.Buffer next(XrHandTrackingScaleFB value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrHandTrackingUnextrapolatedPosesMETA} value to the {@code next} chain. */
+        public XrHandJointLocationsEXT.Buffer next(XrHandTrackingUnextrapolatedPosesMETA value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@code isActive} field. */
         public XrHandJointLocationsEXT.Buffer isActive(@NativeType("XrBool32") boolean value) { XrHandJointLocationsEXT.nisActive(address(), value ? 1 : 0); return this; }
         /** Sets the address of the specified {@link XrHandJointLocationEXT.Buffer} to the {@code jointLocations} field. */
