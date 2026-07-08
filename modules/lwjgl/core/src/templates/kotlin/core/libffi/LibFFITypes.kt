@@ -6,6 +6,8 @@ package core.libffi
 
 import org.lwjgl.generator.*
 
+val ffi_call_plan = "ffi_call_plan".opaque
+
 val ffi_abi = "ffi_abi".enumType
 val ffi_status = "ffi_status".enumType
 

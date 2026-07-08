@@ -332,8 +332,8 @@ size_t ffi_java_raw_size (ffi_cif *cif) __attribute__((deprecated));
 
 /* ---- Version API ------------------------------------------------------ */
 
-#define FFI_VERSION_STRING "3.6.0"
-#define FFI_VERSION_NUMBER 30600
+#define FFI_VERSION_STRING "3.7.0"
+#define FFI_VERSION_NUMBER 30700
 
 #ifndef LIBFFI_ASM
 /* Return a version string. */
@@ -532,6 +532,32 @@ void ffi_call(ffi_cif *cif,
 	      void (*fn)(void),
 	      void *rvalue,
 	      void **avalue);
+
+/* Reusable call plans.
+
+   A plan captures a signature's argument placement once so that repeated
+   calls skip the per-call work that ffi_call would otherwise redo.  Build one
+   with ffi_call_plan_alloc, invoke it as many times as you like, and release
+   it with ffi_call_plan_free.
+
+   The plan is opaque and caller-owned.  The cif must outlive the plan.
+   ffi_call_plan_alloc returns NULL only on allocation failure; a signature
+   with no fast path is still valid and ffi_call_plan_invoke falls back to
+   ffi_call for it.  A plan is immutable once built, so it may be shared and
+   invoked concurrently from multiple threads.  */
+typedef struct ffi_call_plan ffi_call_plan;
+
+FFI_API
+ffi_call_plan *ffi_call_plan_alloc (ffi_cif *cif);
+
+FFI_API
+void ffi_call_plan_invoke (ffi_call_plan *plan,
+			   void (*fn)(void),
+			   void *rvalue,
+			   void **avalue);
+
+FFI_API
+void ffi_call_plan_free (ffi_call_plan *plan);
 
 FFI_API
 ffi_status ffi_get_struct_offsets (ffi_abi abi, ffi_type *struct_type,

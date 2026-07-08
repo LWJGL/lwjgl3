@@ -472,15 +472,53 @@ public class LibFFI {
 
     // --- [ ffi_call ] ---
 
-    /** {@code void ffi_call(ffi_cif * cif, FFI_FN_TYPE fn, void * rvalue, void ** avalues)} */
-    public static native void nffi_call(long cif, long fn, long rvalue, long avalues);
+    /** {@code void ffi_call(ffi_cif * cif, FFI_FN_TYPE fn, void * rvalue, void ** avalue)} */
+    public static native void nffi_call(long cif, long fn, long rvalue, long avalue);
 
-    /** {@code void ffi_call(ffi_cif * cif, FFI_FN_TYPE fn, void * rvalue, void ** avalues)} */
-    public static void ffi_call(@NativeType("ffi_cif *") FFICIF cif, @NativeType("FFI_FN_TYPE") long fn, @NativeType("void *") @Nullable ByteBuffer rvalue, @NativeType("void **") @Nullable PointerBuffer avalues) {
+    /** {@code void ffi_call(ffi_cif * cif, FFI_FN_TYPE fn, void * rvalue, void ** avalue)} */
+    public static void ffi_call(@NativeType("ffi_cif *") FFICIF cif, @NativeType("FFI_FN_TYPE") long fn, @NativeType("void *") @Nullable ByteBuffer rvalue, @NativeType("void **") @Nullable PointerBuffer avalue) {
         if (CHECKS) {
             check(fn);
         }
-        nffi_call(cif.address(), fn, memAddressSafe(rvalue), memAddressSafe(avalues));
+        nffi_call(cif.address(), fn, memAddressSafe(rvalue), memAddressSafe(avalue));
+    }
+
+    // --- [ ffi_call_plan_alloc ] ---
+
+    /** {@code ffi_call_plan * ffi_call_plan_alloc(ffi_cif * cif)} */
+    public static native long nffi_call_plan_alloc(long cif);
+
+    /** {@code ffi_call_plan * ffi_call_plan_alloc(ffi_cif * cif)} */
+    @NativeType("ffi_call_plan *")
+    public static long ffi_call_plan_alloc(@NativeType("ffi_cif *") FFICIF cif) {
+        return nffi_call_plan_alloc(cif.address());
+    }
+
+    // --- [ ffi_call_plan_invoke ] ---
+
+    /** {@code void ffi_call_plan_invoke(ffi_call_plan * plan, FFI_FN_TYPE fn, void * rvalue, void ** avalue)} */
+    public static native void nffi_call_plan_invoke(long plan, long fn, long rvalue, long avalue);
+
+    /** {@code void ffi_call_plan_invoke(ffi_call_plan * plan, FFI_FN_TYPE fn, void * rvalue, void ** avalue)} */
+    public static void ffi_call_plan_invoke(@NativeType("ffi_call_plan *") long plan, @NativeType("FFI_FN_TYPE") long fn, @NativeType("void *") @Nullable ByteBuffer rvalue, @NativeType("void **") @Nullable PointerBuffer avalue) {
+        if (CHECKS) {
+            check(plan);
+            check(fn);
+        }
+        nffi_call_plan_invoke(plan, fn, memAddressSafe(rvalue), memAddressSafe(avalue));
+    }
+
+    // --- [ ffi_call_plan_free ] ---
+
+    /** {@code void ffi_call_plan_free(ffi_call_plan * plan)} */
+    public static native void nffi_call_plan_free(long plan);
+
+    /** {@code void ffi_call_plan_free(ffi_call_plan * plan)} */
+    public static void ffi_call_plan_free(@NativeType("ffi_call_plan *") long plan) {
+        if (CHECKS) {
+            check(plan);
+        }
+        nffi_call_plan_free(plan);
     }
 
     // --- [ ffi_get_struct_offsets ] ---

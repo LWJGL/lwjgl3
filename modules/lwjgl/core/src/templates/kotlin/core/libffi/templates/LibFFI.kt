@@ -199,7 +199,28 @@ typedef void (*FFI_CLOSURE_FUN)(ffi_cif*, void*, void**, void*);
         ffi_cif.p("cif"),
         FFI_FN_TYPE("fn"),
         Unsafe..nullable..void.p("rvalue"),
-        Unsafe..nullable..void.p.p("avalues")
+        Unsafe..nullable..void.p.p("avalue")
+    )
+
+    ffi_call_plan.p(
+        "call_plan_alloc",
+
+        ffi_cif.p("cif")
+    )
+
+    void(
+        "call_plan_invoke",
+
+        ffi_call_plan.p("plan"),
+        FFI_FN_TYPE("fn"),
+        Unsafe..nullable..void.p("rvalue"),
+        Unsafe..nullable..void.p.p("avalue")
+    )
+
+    void(
+        "call_plan_free",
+
+        ffi_call_plan.p("plan")
     )
 
     ffi_status(

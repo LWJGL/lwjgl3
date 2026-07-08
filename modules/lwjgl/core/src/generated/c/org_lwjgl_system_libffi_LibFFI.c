@@ -267,13 +267,34 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_libffi_LibFFI_nffi_1prep_1cif_1var(
     return (jint)ffi_prep_cif_var(cif, (ffi_abi)abi, (unsigned int)nfixedargs, (unsigned int)ntotalargs, rtype, atypes);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_system_libffi_LibFFI_nffi_1call(JNIEnv *__env, jclass clazz, jlong cifAddress, jlong fnAddress, jlong rvalueAddress, jlong avaluesAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_system_libffi_LibFFI_nffi_1call(JNIEnv *__env, jclass clazz, jlong cifAddress, jlong fnAddress, jlong rvalueAddress, jlong avalueAddress) {
     ffi_cif *cif = (ffi_cif *)(uintptr_t)cifAddress;
     FFI_FN_TYPE fn = (FFI_FN_TYPE)(uintptr_t)fnAddress;
     void *rvalue = (void *)(uintptr_t)rvalueAddress;
-    void **avalues = (void **)(uintptr_t)avaluesAddress;
+    void **avalue = (void **)(uintptr_t)avalueAddress;
     UNUSED_PARAMS(__env, clazz)
-    ffi_call(cif, fn, rvalue, avalues);
+    ffi_call(cif, fn, rvalue, avalue);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_libffi_LibFFI_nffi_1call_1plan_1alloc(JNIEnv *__env, jclass clazz, jlong cifAddress) {
+    ffi_cif *cif = (ffi_cif *)(uintptr_t)cifAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)ffi_call_plan_alloc(cif);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_system_libffi_LibFFI_nffi_1call_1plan_1invoke(JNIEnv *__env, jclass clazz, jlong planAddress, jlong fnAddress, jlong rvalueAddress, jlong avalueAddress) {
+    ffi_call_plan *plan = (ffi_call_plan *)(uintptr_t)planAddress;
+    FFI_FN_TYPE fn = (FFI_FN_TYPE)(uintptr_t)fnAddress;
+    void *rvalue = (void *)(uintptr_t)rvalueAddress;
+    void **avalue = (void **)(uintptr_t)avalueAddress;
+    UNUSED_PARAMS(__env, clazz)
+    ffi_call_plan_invoke(plan, fn, rvalue, avalue);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_system_libffi_LibFFI_nffi_1call_1plan_1free(JNIEnv *__env, jclass clazz, jlong planAddress) {
+    ffi_call_plan *plan = (ffi_call_plan *)(uintptr_t)planAddress;
+    UNUSED_PARAMS(__env, clazz)
+    ffi_call_plan_free(plan);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_libffi_LibFFI_nffi_1get_1struct_1offsets(JNIEnv *__env, jclass clazz, jint abi, jlong struct_typeAddress, jlong offsetsAddress) {
