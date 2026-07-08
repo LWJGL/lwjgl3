@@ -18,6 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <pre><code>
  * union struct hwloc_obj_attr_u {
+ *     {@link hwloc_core_attr_s hwloc_core_attr_s} core;
  *     {@link hwloc_numanode_attr_s hwloc_numanode_attr_s} numanode;
  *     {@link hwloc_cache_attr_s hwloc_cache_attr_s} cache;
  *     {@link hwloc_group_attr_s hwloc_group_attr_s} group;
@@ -37,6 +38,7 @@ public class hwloc_obj_attr_u extends Struct<hwloc_obj_attr_u> implements Native
 
     /** The struct member offsets. */
     public static final int
+        CORE,
         NUMANODE,
         CACHE,
         GROUP,
@@ -45,6 +47,7 @@ public class hwloc_obj_attr_u extends Struct<hwloc_obj_attr_u> implements Native
         OSDEV;
 
     static {
+        hwloc_core_attr_s.createSafe(NULL);
         hwloc_numanode_attr_s.createSafe(NULL);
         hwloc_cache_attr_s.createSafe(NULL);
         hwloc_group_attr_s.createSafe(NULL);
@@ -53,6 +56,7 @@ public class hwloc_obj_attr_u extends Struct<hwloc_obj_attr_u> implements Native
         hwloc_osdev_attr_s.createSafe(NULL);
 
         Layout layout = __union(
+            __member(hwloc_core_attr_s.SIZEOF, hwloc_core_attr_s.ALIGNOF),
             __member(hwloc_numanode_attr_s.SIZEOF, hwloc_numanode_attr_s.ALIGNOF),
             __member(hwloc_cache_attr_s.SIZEOF, hwloc_cache_attr_s.ALIGNOF),
             __member(hwloc_group_attr_s.SIZEOF, hwloc_group_attr_s.ALIGNOF),
@@ -64,12 +68,13 @@ public class hwloc_obj_attr_u extends Struct<hwloc_obj_attr_u> implements Native
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        NUMANODE = layout.offsetof(0);
-        CACHE = layout.offsetof(1);
-        GROUP = layout.offsetof(2);
-        PCIDEV = layout.offsetof(3);
-        BRIDGE = layout.offsetof(4);
-        OSDEV = layout.offsetof(5);
+        CORE = layout.offsetof(0);
+        NUMANODE = layout.offsetof(1);
+        CACHE = layout.offsetof(2);
+        GROUP = layout.offsetof(3);
+        PCIDEV = layout.offsetof(4);
+        BRIDGE = layout.offsetof(5);
+        OSDEV = layout.offsetof(6);
     }
 
     protected hwloc_obj_attr_u(long address, @Nullable ByteBuffer container) {
@@ -94,6 +99,8 @@ public class hwloc_obj_attr_u extends Struct<hwloc_obj_attr_u> implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
+    /** @return a {@link hwloc_core_attr_s} view of the {@code core} field. */
+    public hwloc_core_attr_s core() { return ncore(address()); }
     /** @return a {@link hwloc_numanode_attr_s} view of the {@code numanode} field. */
     public hwloc_numanode_attr_s numanode() { return nnumanode(address()); }
     /** @return a {@link hwloc_cache_attr_s} view of the {@code cache} field. */
@@ -218,6 +225,8 @@ public class hwloc_obj_attr_u extends Struct<hwloc_obj_attr_u> implements Native
 
     // -----------------------------------
 
+    /** Unsafe version of {@link #core}. */
+    public static hwloc_core_attr_s ncore(long struct) { return hwloc_core_attr_s.create(struct + hwloc_obj_attr_u.CORE); }
     /** Unsafe version of {@link #numanode}. */
     public static hwloc_numanode_attr_s nnumanode(long struct) { return hwloc_numanode_attr_s.create(struct + hwloc_obj_attr_u.NUMANODE); }
     /** Unsafe version of {@link #cache}. */
@@ -274,6 +283,8 @@ public class hwloc_obj_attr_u extends Struct<hwloc_obj_attr_u> implements Native
             return ELEMENT_FACTORY;
         }
 
+        /** @return a {@link hwloc_core_attr_s} view of the {@code core} field. */
+        public hwloc_core_attr_s core() { return hwloc_obj_attr_u.ncore(address()); }
         /** @return a {@link hwloc_numanode_attr_s} view of the {@code numanode} field. */
         public hwloc_numanode_attr_s numanode() { return hwloc_obj_attr_u.nnumanode(address()); }
         /** @return a {@link hwloc_cache_attr_s} view of the {@code cache} field. */

@@ -803,7 +803,8 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
         nullable..charASCII.p("string"),
         AutoSize("string")..size_t("size"),
         hwloc_obj_t("obj"),
-        unsigned_long("flags")
+        unsigned_long("flags"),
+        nullable..hwloc_topology_t("topology")
     )
 
     int(
@@ -813,7 +814,8 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
         AutoSize("string")..size_t("size"),
         hwloc_obj_t("obj"),
         charASCII.const.p("separator"),
-        unsigned_long("flags")
+        unsigned_long("flags"),
+        nullable..hwloc_topology_t("topology")
     )
 
     int(
@@ -1891,6 +1893,17 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
         return hwloc_get_pcidev_by_busid(topology, domain, bus, dev, func);
     }""")
 
+    int(
+        "get_pci_busid_cpuset",
+
+        hwloc_topology_t("topology"),
+        hwloc_cpuset_t("cpuset"),
+        unsigned("domain"),
+        unsigned("bus"),
+        unsigned("dev"),
+        unsigned("func")
+    )
+
     customMethod("""
     @Nullable
     @NativeType("hwloc_obj_t")
@@ -2067,6 +2080,24 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
         nullable..hwloc_location.p("initiator"),
         unsigned_long("flags"),
         hwloc_uint64_t("value")
+    )
+
+    int(
+        "memtiers_get_nr",
+
+        hwloc_topology_t("topology"),
+        unsigned_long("flags")
+    )
+
+    int(
+        "memtiers_get_info",
+
+        hwloc_topology_t("topology"),
+        unsigned_int("tier_index"),
+        nullable..hwloc_bitmap_t("nodeset"),
+        Check(1)..nullable..unsigned_long.p("kinds"),
+        Check(1)..nullable..hwloc_infos_s.p.p("infosp"),
+        unsigned_long("flags")
     )
 
     // cpukinds.h

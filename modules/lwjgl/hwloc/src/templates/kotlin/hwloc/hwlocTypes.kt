@@ -69,15 +69,20 @@ val hwloc_pcidev_attr_s = struct(Module.HWLOC, "hwloc_pcidev_attr_s", mutable = 
 }
 
 val hwloc_obj_attr_u = union(Module.HWLOC, "hwloc_obj_attr_u", nativeName = "struct hwloc_obj_attr_u", mutable = false) {
+    struct(Module.HWLOC, "hwloc_core_attr_s", mutable = false) {
+        int("cpukind")
+    }("core")
     struct(Module.HWLOC, "hwloc_numanode_attr_s", mutable = false) {
         hwloc_uint64_t("local_memory")
+        int("memory_tier")
     }("numanode")
     struct(Module.HWLOC, "hwloc_cache_attr_s", mutable = false) {
         hwloc_uint64_t("size")
+        hwloc_obj_cache_type_t("type")
         unsigned("depth")
         unsigned("linesize")
         int("associativity")
-        hwloc_obj_cache_type_t("type")
+        int("inclusive")
     }("cache")
     struct(Module.HWLOC, "hwloc_group_attr_s", mutable = false) {
         unsigned("depth")

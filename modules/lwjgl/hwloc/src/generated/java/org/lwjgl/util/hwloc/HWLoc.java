@@ -173,6 +173,7 @@ public class HWLoc {
             topology_get_complete_nodeset         = apiGetFunctionAddress(HWLOC, "hwloc_topology_get_complete_nodeset"),
             topology_get_topology_nodeset         = apiGetFunctionAddress(HWLOC, "hwloc_topology_get_topology_nodeset"),
             topology_get_allowed_nodeset          = apiGetFunctionAddress(HWLOC, "hwloc_topology_get_allowed_nodeset"),
+            get_pci_busid_cpuset                  = apiGetFunctionAddress(HWLOC, "hwloc_get_pci_busid_cpuset"),
             memattr_get_by_name                   = apiGetFunctionAddress(HWLOC, "hwloc_memattr_get_by_name"),
             get_local_numanode_objs               = apiGetFunctionAddress(HWLOC, "hwloc_get_local_numanode_objs"),
             topology_get_default_nodeset          = apiGetFunctionAddress(HWLOC, "hwloc_topology_get_default_nodeset"),
@@ -185,6 +186,8 @@ public class HWLoc {
             memattr_get_flags                     = apiGetFunctionAddress(HWLOC, "hwloc_memattr_get_flags"),
             memattr_register                      = apiGetFunctionAddress(HWLOC, "hwloc_memattr_register"),
             memattr_set_value                     = apiGetFunctionAddress(HWLOC, "hwloc_memattr_set_value"),
+            memtiers_get_nr                       = apiGetFunctionAddress(HWLOC, "hwloc_memtiers_get_nr"),
+            memtiers_get_info                     = apiGetFunctionAddress(HWLOC, "hwloc_memtiers_get_info"),
             cpukinds_get_nr                       = apiGetFunctionAddress(HWLOC, "hwloc_cpukinds_get_nr"),
             cpukinds_get_by_cpuset                = apiGetFunctionAddress(HWLOC, "hwloc_cpukinds_get_by_cpuset"),
             cpukinds_get_info                     = apiGetFunctionAddress(HWLOC, "hwloc_cpukinds_get_info"),
@@ -1309,40 +1312,40 @@ public class HWLoc {
 
     // --- [ hwloc_obj_type_snprintf ] ---
 
-    /** {@code int hwloc_obj_type_snprintf(char * string, size_t size, hwloc_obj_t obj, unsigned long flags)} */
-    public static int nhwloc_obj_type_snprintf(long string, long size, long obj, long flags) {
+    /** {@code int hwloc_obj_type_snprintf(char * string, size_t size, hwloc_obj_t obj, unsigned long flags, hwloc_topology_t topology)} */
+    public static int nhwloc_obj_type_snprintf(long string, long size, long obj, long flags, long topology) {
         long __functionAddress = Functions.obj_type_snprintf;
-        return invokePPPNI(string, size, obj, flags, __functionAddress);
+        return invokePPPNPI(string, size, obj, flags, topology, __functionAddress);
     }
 
-    /** {@code int hwloc_obj_type_snprintf(char * string, size_t size, hwloc_obj_t obj, unsigned long flags)} */
-    public static int hwloc_obj_type_snprintf(@NativeType("char *") @Nullable ByteBuffer string, @NativeType("hwloc_obj_t") hwloc_obj obj, @NativeType("unsigned long") long flags) {
-        return nhwloc_obj_type_snprintf(memAddressSafe(string), remainingSafe(string), obj.address(), flags);
+    /** {@code int hwloc_obj_type_snprintf(char * string, size_t size, hwloc_obj_t obj, unsigned long flags, hwloc_topology_t topology)} */
+    public static int hwloc_obj_type_snprintf(@NativeType("char *") @Nullable ByteBuffer string, @NativeType("hwloc_obj_t") hwloc_obj obj, @NativeType("unsigned long") long flags, @NativeType("hwloc_topology_t") long topology) {
+        return nhwloc_obj_type_snprintf(memAddressSafe(string), remainingSafe(string), obj.address(), flags, topology);
     }
 
     // --- [ hwloc_obj_attr_snprintf ] ---
 
-    /** {@code int hwloc_obj_attr_snprintf(char * string, size_t size, hwloc_obj_t obj, char const * separator, unsigned long flags)} */
-    public static int nhwloc_obj_attr_snprintf(long string, long size, long obj, long separator, long flags) {
+    /** {@code int hwloc_obj_attr_snprintf(char * string, size_t size, hwloc_obj_t obj, char const * separator, unsigned long flags, hwloc_topology_t topology)} */
+    public static int nhwloc_obj_attr_snprintf(long string, long size, long obj, long separator, long flags, long topology) {
         long __functionAddress = Functions.obj_attr_snprintf;
-        return invokePPPPNI(string, size, obj, separator, flags, __functionAddress);
+        return invokePPPPNPI(string, size, obj, separator, flags, topology, __functionAddress);
     }
 
-    /** {@code int hwloc_obj_attr_snprintf(char * string, size_t size, hwloc_obj_t obj, char const * separator, unsigned long flags)} */
-    public static int hwloc_obj_attr_snprintf(@NativeType("char *") ByteBuffer string, @NativeType("hwloc_obj_t") hwloc_obj obj, @NativeType("char const *") ByteBuffer separator, @NativeType("unsigned long") long flags) {
+    /** {@code int hwloc_obj_attr_snprintf(char * string, size_t size, hwloc_obj_t obj, char const * separator, unsigned long flags, hwloc_topology_t topology)} */
+    public static int hwloc_obj_attr_snprintf(@NativeType("char *") ByteBuffer string, @NativeType("hwloc_obj_t") hwloc_obj obj, @NativeType("char const *") ByteBuffer separator, @NativeType("unsigned long") long flags, @NativeType("hwloc_topology_t") long topology) {
         if (CHECKS) {
             checkNT1(separator);
         }
-        return nhwloc_obj_attr_snprintf(memAddress(string), string.remaining(), obj.address(), memAddress(separator), flags);
+        return nhwloc_obj_attr_snprintf(memAddress(string), string.remaining(), obj.address(), memAddress(separator), flags, topology);
     }
 
-    /** {@code int hwloc_obj_attr_snprintf(char * string, size_t size, hwloc_obj_t obj, char const * separator, unsigned long flags)} */
-    public static int hwloc_obj_attr_snprintf(@NativeType("char *") ByteBuffer string, @NativeType("hwloc_obj_t") hwloc_obj obj, @NativeType("char const *") CharSequence separator, @NativeType("unsigned long") long flags) {
+    /** {@code int hwloc_obj_attr_snprintf(char * string, size_t size, hwloc_obj_t obj, char const * separator, unsigned long flags, hwloc_topology_t topology)} */
+    public static int hwloc_obj_attr_snprintf(@NativeType("char *") ByteBuffer string, @NativeType("hwloc_obj_t") hwloc_obj obj, @NativeType("char const *") CharSequence separator, @NativeType("unsigned long") long flags, @NativeType("hwloc_topology_t") long topology) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(separator, true);
             long separatorEncoded = stack.getPointerAddress();
-            return nhwloc_obj_attr_snprintf(memAddress(string), string.remaining(), obj.address(), separatorEncoded, flags);
+            return nhwloc_obj_attr_snprintf(memAddress(string), string.remaining(), obj.address(), separatorEncoded, flags, topology);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2482,6 +2485,18 @@ public class HWLoc {
         return invokePP(topology, __functionAddress);
     }
 
+    // --- [ hwloc_get_pci_busid_cpuset ] ---
+
+    /** {@code int hwloc_get_pci_busid_cpuset(hwloc_topology_t topology, hwloc_cpuset_t cpuset, unsigned domain, unsigned bus, unsigned dev, unsigned func)} */
+    public static int hwloc_get_pci_busid_cpuset(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_cpuset_t") long cpuset, @NativeType("unsigned") int domain, @NativeType("unsigned") int bus, @NativeType("unsigned") int dev, @NativeType("unsigned") int func) {
+        long __functionAddress = Functions.get_pci_busid_cpuset;
+        if (CHECKS) {
+            check(topology);
+            check(cpuset);
+        }
+        return invokePPI(topology, cpuset, domain, bus, dev, func, __functionAddress);
+    }
+
     // --- [ hwloc_memattr_get_by_name ] ---
 
     /** {@code int hwloc_memattr_get_by_name(hwloc_topology_t topology, char const * name, hwloc_memattr_id_t * id)} */
@@ -2737,6 +2752,37 @@ public class HWLoc {
     /** {@code int hwloc_memattr_set_value(hwloc_topology_t topology, hwloc_memattr_id_t attribute, hwloc_obj_t target_node, struct hwloc_location * initiator, unsigned long flags, hwloc_uint64_t value)} */
     public static int hwloc_memattr_set_value(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_memattr_id_t") int attribute, @NativeType("hwloc_obj_t") hwloc_obj target_node, @NativeType("struct hwloc_location *") @Nullable hwloc_location initiator, @NativeType("unsigned long") long flags, @NativeType("hwloc_uint64_t") long value) {
         return nhwloc_memattr_set_value(topology, attribute, target_node.address(), memAddressSafe(initiator), flags, value);
+    }
+
+    // --- [ hwloc_memtiers_get_nr ] ---
+
+    /** {@code int hwloc_memtiers_get_nr(hwloc_topology_t topology, unsigned long flags)} */
+    public static int hwloc_memtiers_get_nr(@NativeType("hwloc_topology_t") long topology, @NativeType("unsigned long") long flags) {
+        long __functionAddress = Functions.memtiers_get_nr;
+        if (CHECKS) {
+            check(topology);
+        }
+        return invokePNI(topology, flags, __functionAddress);
+    }
+
+    // --- [ hwloc_memtiers_get_info ] ---
+
+    /** {@code int hwloc_memtiers_get_info(hwloc_topology_t topology, unsigned int tier_index, hwloc_bitmap_t nodeset, unsigned long * kinds, struct hwloc_infos_s ** infosp, unsigned long flags)} */
+    public static int nhwloc_memtiers_get_info(long topology, int tier_index, long nodeset, long kinds, long infosp, long flags) {
+        long __functionAddress = Functions.memtiers_get_info;
+        if (CHECKS) {
+            check(topology);
+        }
+        return invokePPPPNI(topology, tier_index, nodeset, kinds, infosp, flags, __functionAddress);
+    }
+
+    /** {@code int hwloc_memtiers_get_info(hwloc_topology_t topology, unsigned int tier_index, hwloc_bitmap_t nodeset, unsigned long * kinds, struct hwloc_infos_s ** infosp, unsigned long flags)} */
+    public static int hwloc_memtiers_get_info(@NativeType("hwloc_topology_t") long topology, @NativeType("unsigned int") int tier_index, @NativeType("hwloc_bitmap_t") long nodeset, @NativeType("unsigned long *") @Nullable CLongBuffer kinds, @NativeType("struct hwloc_infos_s **") @Nullable PointerBuffer infosp, @NativeType("unsigned long") long flags) {
+        if (CHECKS) {
+            checkSafe(kinds, 1);
+            checkSafe(infosp, 1);
+        }
+        return nhwloc_memtiers_get_info(topology, tier_index, nodeset, memAddressSafe(kinds), memAddressSafe(infosp), flags);
     }
 
     // --- [ hwloc_cpukinds_get_nr ] ---
