@@ -219,8 +219,6 @@ public final class JNI {
     public static native int invokePPPPPI(long param0, long param1, int param2, long param3, long param4, int param5, int param6, long param7, long __functionAddress);
     public static native int invokePPPPPI(long param0, long param1, long param2, int param3, long param4, int param5, int param6, long param7, long __functionAddress);
     public static native int invokePPPPPI(long param0, long param1, long param2, int param3, int param4, int param5, float param6, long param7, long param8, long __functionAddress);
-    public static native int invokePJJPPPI(long param0, long param1, long param2, long param3, long param4, long param5, long __functionAddress);
-    public static native int invokePJPJPPI(long param0, long param1, long param2, long param3, long param4, long param5, long __functionAddress);
     public static native int invokePPPPNPI(long param0, long param1, long param2, long param3, long param4, long param5, long __functionAddress);
     public static native int invokePPPPPPI(long param0, long param1, long param2, long param3, long param4, long param5, long __functionAddress);
     public static native int invokePPUUUUI(long param0, long param1, byte param2, byte param3, byte param4, byte param5, long __functionAddress);
@@ -525,7 +523,6 @@ public final class JNI {
     public static native void invokeCPCV(short param0, long param1, short param2, long __functionAddress);
     public static native void invokeCPPV(short param0, long param1, long param2, long __functionAddress);
     public static native void invokeJPPV(long param0, long param1, long param2, long __functionAddress);
-    public static native void invokePJJV(long param0, long param1, long param2, long __functionAddress);
     public static native void invokePJPV(long param0, long param1, long param2, long __functionAddress);
     public static native void invokePNNV(long param0, long param1, long param2, long __functionAddress);
     public static native void invokePNPV(long param0, long param1, long param2, long __functionAddress);

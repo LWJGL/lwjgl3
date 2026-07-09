@@ -22,1615 +22,784 @@ public class TinyEXR {
     static { LibTinyEXR.initialize(); }
 
     public static final int
-        TINYEXR_C_API_VERSION_MAJOR = 3,
-        TINYEXR_C_API_VERSION_MINOR = 0,
-        TINYEXR_C_API_VERSION_PATCH = 0,
-        TINYEXR_C_API_VERSION       = ((TINYEXR_C_API_VERSION_MAJOR << 22) | (TINYEXR_C_API_VERSION_MINOR << 12) | TINYEXR_C_API_VERSION_PATCH);
+        TINYEXR_SUCCESS                    = 0,
+        TINYEXR_ERROR_INVALID_MAGIC_NUMBER = -1,
+        TINYEXR_ERROR_INVALID_EXR_VERSION  = -2,
+        TINYEXR_ERROR_INVALID_ARGUMENT     = -3,
+        TINYEXR_ERROR_INVALID_DATA         = -4,
+        TINYEXR_ERROR_INVALID_FILE         = -5,
+        TINYEXR_ERROR_INVALID_PARAMETER    = -6,
+        TINYEXR_ERROR_CANT_OPEN_FILE       = -7,
+        TINYEXR_ERROR_UNSUPPORTED_FORMAT   = -8,
+        TINYEXR_ERROR_INVALID_HEADER       = -9,
+        TINYEXR_ERROR_UNSUPPORTED_FEATURE  = -10,
+        TINYEXR_ERROR_CANT_WRITE_FILE      = -11,
+        TINYEXR_ERROR_SERIALIZATION_FAILED = -12,
+        TINYEXR_ERROR_LAYER_NOT_FOUND      = -13,
+        TINYEXR_ERROR_DATA_TOO_LARGE       = -14;
 
     public static final int
-        EXR_SUCCESS                       = 0,
-        EXR_INCOMPLETE                    = 1,
-        EXR_WOULD_BLOCK                   = 2,
-        EXR_SUSPENDED                     = 3,
-        EXR_ERROR_INVALID_HANDLE          = -1,
-        EXR_ERROR_INVALID_ARGUMENT        = -2,
-        EXR_ERROR_OUT_OF_MEMORY           = -3,
-        EXR_ERROR_INVALID_MAGIC           = -4,
-        EXR_ERROR_INVALID_VERSION         = -5,
-        EXR_ERROR_INVALID_DATA            = -6,
-        EXR_ERROR_UNSUPPORTED_FORMAT      = -7,
-        EXR_ERROR_UNSUPPORTED_COMPRESSION = -8,
-        EXR_ERROR_DECOMPRESSION_FAILED    = -9,
-        EXR_ERROR_COMPRESSION_FAILED      = -10,
-        EXR_ERROR_IO                      = -11,
-        EXR_ERROR_BUFFER_TOO_SMALL        = -12,
-        EXR_ERROR_TIMEOUT                 = -13,
-        EXR_ERROR_CANCELLED               = -14,
-        EXR_ERROR_NOT_READY               = -15,
-        EXR_ERROR_MISSING_ATTRIBUTE       = -16,
-        EXR_ERROR_FETCH_FAILED            = -17,
-        EXR_ERROR_OUT_OF_BOUNDS           = -18,
-        EXR_ERROR_ALREADY_INITIALIZED     = -19,
-        EXR_ERROR_NOT_INITIALIZED         = -20,
-        EXR_ERROR_INVALID_STATE           = -21;
-
-    public static final long EXR_NULL_HANDLE = 0L;
+        TINYEXR_PIXELTYPE_UINT  = 0,
+        TINYEXR_PIXELTYPE_HALF  = 1,
+        TINYEXR_PIXELTYPE_FLOAT = 2;
 
     public static final int
-        EXR_PIXEL_UINT  = 0,
-        EXR_PIXEL_HALF  = 1,
-        EXR_PIXEL_FLOAT = 2;
+        TINYEXR_MAX_HEADER_ATTRIBUTES = 1024,
+        TINYEXR_MAX_CUSTOM_ATTRIBUTES = 128;
 
     public static final int
-        EXR_COMPRESSION_NONE  = 0,
-        EXR_COMPRESSION_RLE   = 1,
-        EXR_COMPRESSION_ZIPS  = 2,
-        EXR_COMPRESSION_ZIP   = 3,
-        EXR_COMPRESSION_PIZ   = 4,
-        EXR_COMPRESSION_PXR24 = 5,
-        EXR_COMPRESSION_B44   = 6,
-        EXR_COMPRESSION_B44A  = 7,
-        EXR_COMPRESSION_DWAA  = 8,
-        EXR_COMPRESSION_DWAB  = 9;
+        TINYEXR_COMPRESSIONTYPE_NONE  = 0,
+        TINYEXR_COMPRESSIONTYPE_RLE   = 1,
+        TINYEXR_COMPRESSIONTYPE_ZIPS  = 2,
+        TINYEXR_COMPRESSIONTYPE_ZIP   = 3,
+        TINYEXR_COMPRESSIONTYPE_PIZ   = 4,
+        TINYEXR_COMPRESSIONTYPE_PXR24 = 5,
+        TINYEXR_COMPRESSIONTYPE_B44   = 6,
+        TINYEXR_COMPRESSIONTYPE_B44A  = 7,
+        TINYEXR_COMPRESSIONTYPE_DWAA  = 8,
+        TINYEXR_COMPRESSIONTYPE_DWAB  = 9,
+        TINYEXR_COMPRESSIONTYPE_ZFP   = 128;
 
     public static final int
-        EXR_LINE_ORDER_INCREASING_Y = 0,
-        EXR_LINE_ORDER_DECREASING_Y = 1,
-        EXR_LINE_ORDER_RANDOM_Y     = 2;
+        TINYEXR_ZFP_COMPRESSIONTYPE_RATE      = 0,
+        TINYEXR_ZFP_COMPRESSIONTYPE_PRECISION = 1,
+        TINYEXR_ZFP_COMPRESSIONTYPE_ACCURACY  = 2;
 
     public static final int
-        EXR_TILE_ONE_LEVEL     = 0,
-        EXR_TILE_MIPMAP_LEVELS = 1,
-        EXR_TILE_RIPMAP_LEVELS = 2;
+        TINYEXR_TILE_ONE_LEVEL     = 0,
+        TINYEXR_TILE_MIPMAP_LEVELS = 1,
+        TINYEXR_TILE_RIPMAP_LEVELS = 2;
 
     public static final int
-        EXR_TILE_ROUND_DOWN = 0,
-        EXR_TILE_ROUND_UP   = 1;
+        TINYEXR_TILE_ROUND_DOWN = 0,
+        TINYEXR_TILE_ROUND_UP   = 1;
 
     public static final int
-        EXR_PART_SCANLINE      = 0,
-        EXR_PART_TILED         = 1,
-        EXR_PART_DEEP_SCANLINE = 2,
-        EXR_PART_DEEP_TILED    = 3;
-
-    public static final int
-        EXR_LAYOUT_PLANAR      = 0,
-        EXR_LAYOUT_INTERLEAVED = 1,
-        EXR_LAYOUT_NATIVE      = 2;
-
-    public static final int
-        EXR_DATA_SOURCE_SEEKABLE   = 0x0001,
-        EXR_DATA_SOURCE_ASYNC      = 0x0002,
-        EXR_DATA_SOURCE_STREAMING  = 0x0004,
-        EXR_DATA_SOURCE_SIZE_KNOWN = 0x0008;
-
-    public static final int
-        EXR_CONTEXT_ENABLE_VALIDATION = 0x0001,
-        EXR_CONTEXT_ENABLE_DEBUG_INFO = 0x0002,
-        EXR_CONTEXT_SINGLE_THREADED   = 0x0004,
-        EXR_CONTEXT_SIMD_DISABLED     = 0x0008;
-
-    public static final int
-        EXR_MEMORY_POOL_THREAD_LOCAL = 0x0001,
-        EXR_MEMORY_POOL_PERSISTENT   = 0x0002;
-
-    public static final int
-        EXR_DECODER_LAZY_LOAD       = 0x0001,
-        EXR_DECODER_VALIDATE_CHUNKS = 0x0002,
-        EXR_DECODER_ALLOW_TRUNCATED = 0x0004;
-
-    public static final int
-        EXR_IMAGE_TILED      = 0x0001,
-        EXR_IMAGE_MULTIPART  = 0x0002,
-        EXR_IMAGE_DEEP       = 0x0004,
-        EXR_IMAGE_LONG_NAMES = 0x0008;
-
-    public static final int
-        EXR_ATTR_UNKNOWN        = 0,
-        EXR_ATTR_INT            = 1,
-        EXR_ATTR_FLOAT          = 2,
-        EXR_ATTR_DOUBLE         = 3,
-        EXR_ATTR_STRING         = 4,
-        EXR_ATTR_BOX2I          = 5,
-        EXR_ATTR_BOX2F          = 6,
-        EXR_ATTR_V2I            = 7,
-        EXR_ATTR_V2F            = 8,
-        EXR_ATTR_V3I            = 9,
-        EXR_ATTR_V3F            = 10,
-        EXR_ATTR_M33F           = 11,
-        EXR_ATTR_M44F           = 12,
-        EXR_ATTR_CHLIST         = 13,
-        EXR_ATTR_COMPRESSION    = 14,
-        EXR_ATTR_LINEORDER      = 15,
-        EXR_ATTR_TILEDESC       = 16,
-        EXR_ATTR_PREVIEW        = 17,
-        EXR_ATTR_RATIONAL       = 18,
-        EXR_ATTR_KEYCODE        = 19,
-        EXR_ATTR_TIMECODE       = 20,
-        EXR_ATTR_CHROMATICITIES = 21,
-        EXR_ATTR_ENVMAP         = 22,
-        EXR_ATTR_DEEPIMAGETYPE  = 23,
-        EXR_ATTR_OPAQUE         = 24;
-
-    public static final int
-        EXR_CMD_ONE_TIME_SUBMIT  = 0x0001,
-        EXR_CMD_SIMULTANEOUS_USE = 0x0002;
-
-    public static final int EXR_FENCE_SIGNALED = 0x0001;
-
-    public static final int EXR_ENCODER_PARALLEL = 0x0001;
-
-    public static final int
-        EXR_WRITE_TILED     = 0x0001,
-        EXR_WRITE_MULTIPART = 0x0002,
-        EXR_WRITE_MIPMAP    = 0x0004,
-        EXR_WRITE_RIPMAP    = 0x0008,
-        EXR_WRITE_DEEP      = 0x0010;
-
-    public static final int
-        EXR_SIMD_NONE   = 0,
-        EXR_SIMD_SSE2   = 0x0001,
-        EXR_SIMD_SSE4_1 = 0x0002,
-        EXR_SIMD_AVX    = 0x0004,
-        EXR_SIMD_AVX2   = 0x0008,
-        EXR_SIMD_AVX512 = 0x0010,
-        EXR_SIMD_NEON   = 0x0020,
-        EXR_SIMD_BMI1   = 0x0040,
-        EXR_SIMD_BMI2   = 0x0080;
+        TINYEXR_SPECTRUM_REFLECTIVE = 0,
+        TINYEXR_SPECTRUM_EMISSIVE   = 1,
+        TINYEXR_SPECTRUM_POLARISED  = 2;
 
     protected TinyEXR() {
         throw new UnsupportedOperationException();
     }
 
-    // --- [ exr_get_default_allocator ] ---
+    // --- [ LoadEXRWithLayer ] ---
 
-    /** {@code ExrAllocator const * exr_get_default_allocator(void)} */
-    public static native long nexr_get_default_allocator();
+    /** {@code int LoadEXRWithLayer(float ** out_rgba, int * width, int * height, char const * filename, char const * layer_name, char const ** err)} */
+    public static native int nLoadEXRWithLayer(long out_rgba, long width, long height, long filename, long layer_name, long err);
 
-    /** {@code ExrAllocator const * exr_get_default_allocator(void)} */
-    @NativeType("ExrAllocator const *")
-    public static @Nullable ExrAllocator exr_get_default_allocator() {
-        long __result = nexr_get_default_allocator();
-        return ExrAllocator.createSafe(__result);
-    }
-
-    // --- [ exr_data_source_from_memory ] ---
-
-    /** {@code ExrResult exr_data_source_from_memory(void const * data, size_t size, ExrDataSource * out_source)} */
-    public static native int nexr_data_source_from_memory(long data, long size, long out_source);
-
-    /** {@code ExrResult exr_data_source_from_memory(void const * data, size_t size, ExrDataSource * out_source)} */
-    @NativeType("ExrResult")
-    public static int exr_data_source_from_memory(@NativeType("void const *") ByteBuffer data, @NativeType("ExrDataSource *") ExrDataSource out_source) {
-        return nexr_data_source_from_memory(memAddress(data), data.remaining(), out_source.address());
-    }
-
-    // --- [ exr_data_sink_to_memory ] ---
-
-    /** {@code ExrResult exr_data_sink_to_memory(ExrContext ctx, ExrDataSink * out_sink, void ** out_data, size_t * out_size)} */
-    public static native int nexr_data_sink_to_memory(long ctx, long out_sink, long out_data, long out_size);
-
-    /** {@code ExrResult exr_data_sink_to_memory(ExrContext ctx, ExrDataSink * out_sink, void ** out_data, size_t * out_size)} */
-    @NativeType("ExrResult")
-    public static int exr_data_sink_to_memory(@NativeType("ExrContext") long ctx, @NativeType("ExrDataSink *") ExrDataSink out_sink, @NativeType("void **") PointerBuffer out_data, @NativeType("size_t *") PointerBuffer out_size) {
+    /** {@code int LoadEXRWithLayer(float ** out_rgba, int * width, int * height, char const * filename, char const * layer_name, char const ** err)} */
+    public static int LoadEXRWithLayer(@NativeType("float **") PointerBuffer out_rgba, @NativeType("int *") IntBuffer width, @NativeType("int *") IntBuffer height, @NativeType("char const *") ByteBuffer filename, @NativeType("char const *") ByteBuffer layer_name, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
-            check(ctx);
-            check(out_data, 1);
-            check(out_size, 1);
+            check(out_rgba, 1);
+            check(width, 1);
+            check(height, 1);
+            checkNT1(filename);
+            checkNT1(layer_name);
+            check(err, 1);
         }
-        return nexr_data_sink_to_memory(ctx, out_sink.address(), memAddress(out_data), memAddress(out_size));
+        return nLoadEXRWithLayer(memAddress(out_rgba), memAddress(width), memAddress(height), memAddress(filename), memAddress(layer_name), memAddress(err));
     }
 
-    // --- [ exr_get_last_error ] ---
-
-    /** {@code ExrResult exr_get_last_error(ExrContext ctx, ExrErrorInfo * out_info)} */
-    public static native int nexr_get_last_error(long ctx, long out_info);
-
-    /** {@code ExrResult exr_get_last_error(ExrContext ctx, ExrErrorInfo * out_info)} */
-    @NativeType("ExrResult")
-    public static int exr_get_last_error(@NativeType("ExrContext") long ctx, @NativeType("ExrErrorInfo *") ExrErrorInfo out_info) {
+    /** {@code int LoadEXRWithLayer(float ** out_rgba, int * width, int * height, char const * filename, char const * layer_name, char const ** err)} */
+    public static int LoadEXRWithLayer(@NativeType("float **") PointerBuffer out_rgba, @NativeType("int *") IntBuffer width, @NativeType("int *") IntBuffer height, @NativeType("char const *") CharSequence filename, @NativeType("char const *") CharSequence layer_name, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
-            check(ctx);
+            check(out_rgba, 1);
+            check(width, 1);
+            check(height, 1);
+            check(err, 1);
         }
-        return nexr_get_last_error(ctx, out_info.address());
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            stack.nUTF8(layer_name, true);
+            long layer_nameEncoded = stack.getPointerAddress();
+            return nLoadEXRWithLayer(memAddress(out_rgba), memAddress(width), memAddress(height), filenameEncoded, layer_nameEncoded, memAddress(err));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
     }
 
-    // --- [ exr_get_error_count ] ---
+    // --- [ EXRLayers ] ---
 
-    /** {@code uint32_t exr_get_error_count(ExrContext ctx)} */
-    public static native int nexr_get_error_count(long ctx);
+    /** {@code int EXRLayers(char const * filename, char const *** layer_names, int * num_layers, char const ** err)} */
+    public static native int nEXRLayers(long filename, long layer_names, long num_layers, long err);
 
-    /** {@code uint32_t exr_get_error_count(ExrContext ctx)} */
-    @NativeType("uint32_t")
-    public static int exr_get_error_count(@NativeType("ExrContext") long ctx) {
+    /** {@code int EXRLayers(char const * filename, char const *** layer_names, int * num_layers, char const ** err)} */
+    public static int EXRLayers(@NativeType("char const *") ByteBuffer filename, @NativeType("char const ***") PointerBuffer layer_names, @NativeType("int *") IntBuffer num_layers, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
-            check(ctx);
+            checkNT1(filename);
+            check(layer_names, 1);
+            check(num_layers, 1);
+            check(err, 1);
         }
-        return nexr_get_error_count(ctx);
+        return nEXRLayers(memAddress(filename), memAddress(layer_names), memAddress(num_layers), memAddress(err));
     }
 
-    // --- [ exr_get_error_at ] ---
-
-    /** {@code ExrResult exr_get_error_at(ExrContext ctx, uint32_t index, ExrErrorInfo * out_info)} */
-    public static native int nexr_get_error_at(long ctx, int index, long out_info);
-
-    /** {@code ExrResult exr_get_error_at(ExrContext ctx, uint32_t index, ExrErrorInfo * out_info)} */
-    @NativeType("ExrResult")
-    public static int exr_get_error_at(@NativeType("ExrContext") long ctx, @NativeType("uint32_t") int index, @NativeType("ExrErrorInfo *") ExrErrorInfo out_info) {
+    /** {@code int EXRLayers(char const * filename, char const *** layer_names, int * num_layers, char const ** err)} */
+    public static int EXRLayers(@NativeType("char const *") CharSequence filename, @NativeType("char const ***") PointerBuffer layer_names, @NativeType("int *") IntBuffer num_layers, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
-            check(ctx);
+            check(layer_names, 1);
+            check(num_layers, 1);
+            check(err, 1);
         }
-        return nexr_get_error_at(ctx, index, out_info.address());
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nEXRLayers(filenameEncoded, memAddress(layer_names), memAddress(num_layers), memAddress(err));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
     }
 
-    // --- [ exr_clear_errors ] ---
+    // --- [ IsEXRFromMemory ] ---
 
-    /** {@code void exr_clear_errors(ExrContext ctx)} */
-    public static native void nexr_clear_errors(long ctx);
+    /** {@code int IsEXRFromMemory(unsigned char const * memory, size_t size)} */
+    public static native int nIsEXRFromMemory(long memory, long size);
 
-    /** {@code void exr_clear_errors(ExrContext ctx)} */
-    public static void exr_clear_errors(@NativeType("ExrContext") long ctx) {
+    /** {@code int IsEXRFromMemory(unsigned char const * memory, size_t size)} */
+    public static int IsEXRFromMemory(@NativeType("unsigned char const *") ByteBuffer memory) {
+        return nIsEXRFromMemory(memAddress(memory), memory.remaining());
+    }
+
+    // --- [ EXRNumLevels ] ---
+
+    /** {@code int EXRNumLevels(EXRImage const * exr_image)} */
+    public static native int nEXRNumLevels(long exr_image);
+
+    /** {@code int EXRNumLevels(EXRImage const * exr_image)} */
+    public static int EXRNumLevels(@NativeType("EXRImage const *") EXRImage exr_image) {
         if (CHECKS) {
-            check(ctx);
+            EXRImage.validate(exr_image.address());
         }
-        nexr_clear_errors(ctx);
+        return nEXRNumLevels(exr_image.address());
     }
 
-    // --- [ exr_result_to_string ] ---
+    // --- [ InitEXRHeader ] ---
 
-    /** {@code char const * exr_result_to_string(ExrResult result)} */
-    public static native long nexr_result_to_string(int result);
+    /** {@code void InitEXRHeader(EXRHeader * exr_header)} */
+    public static native void nInitEXRHeader(long exr_header);
 
-    /** {@code char const * exr_result_to_string(ExrResult result)} */
-    @NativeType("char const *")
-    public static @Nullable String exr_result_to_string(@NativeType("ExrResult") int result) {
-        long __result = nexr_result_to_string(result);
-        return memASCIISafe(__result);
+    /** {@code void InitEXRHeader(EXRHeader * exr_header)} */
+    public static void InitEXRHeader(@NativeType("EXRHeader *") EXRHeader exr_header) {
+        nInitEXRHeader(exr_header.address());
     }
 
-    // --- [ exr_context_create ] ---
+    // --- [ EXRSetNameAttr ] ---
 
-    /** {@code ExrResult exr_context_create(ExrContextCreateInfo const * create_info, ExrContext * out_ctx)} */
-    public static native int nexr_context_create(long create_info, long out_ctx);
+    /** {@code void EXRSetNameAttr(EXRHeader * exr_header, char const * name)} */
+    public static native void nEXRSetNameAttr(long exr_header, long name);
 
-    /** {@code ExrResult exr_context_create(ExrContextCreateInfo const * create_info, ExrContext * out_ctx)} */
-    @NativeType("ExrResult")
-    public static int exr_context_create(@NativeType("ExrContextCreateInfo const *") ExrContextCreateInfo create_info, @NativeType("ExrContext *") PointerBuffer out_ctx) {
+    /** {@code void EXRSetNameAttr(EXRHeader * exr_header, char const * name)} */
+    public static void EXRSetNameAttr(@NativeType("EXRHeader *") EXRHeader exr_header, @NativeType("char const *") ByteBuffer name) {
         if (CHECKS) {
-            check(out_ctx, 1);
-            ExrContextCreateInfo.validate(create_info.address());
+            checkNT1(name);
         }
-        return nexr_context_create(create_info.address(), memAddress(out_ctx));
+        nEXRSetNameAttr(exr_header.address(), memAddress(name));
     }
 
-    // --- [ exr_context_destroy ] ---
+    /** {@code void EXRSetNameAttr(EXRHeader * exr_header, char const * name)} */
+    public static void EXRSetNameAttr(@NativeType("EXRHeader *") EXRHeader exr_header, @NativeType("char const *") CharSequence name) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            nEXRSetNameAttr(exr_header.address(), nameEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
 
-    /** {@code void exr_context_destroy(ExrContext ctx)} */
-    public static native void nexr_context_destroy(long ctx);
+    // --- [ InitEXRImage ] ---
 
-    /** {@code void exr_context_destroy(ExrContext ctx)} */
-    public static void exr_context_destroy(@NativeType("ExrContext") long ctx) {
+    /** {@code void InitEXRImage(EXRImage * exr_image)} */
+    public static native void nInitEXRImage(long exr_image);
+
+    /** {@code void InitEXRImage(EXRImage * exr_image)} */
+    public static void InitEXRImage(@NativeType("EXRImage *") EXRImage exr_image) {
+        nInitEXRImage(exr_image.address());
+    }
+
+    // --- [ FreeEXRHeader ] ---
+
+    /** {@code int FreeEXRHeader(EXRHeader * exr_header)} */
+    public static native int nFreeEXRHeader(long exr_header);
+
+    /** {@code int FreeEXRHeader(EXRHeader * exr_header)} */
+    public static int FreeEXRHeader(@NativeType("EXRHeader *") EXRHeader exr_header) {
+        return nFreeEXRHeader(exr_header.address());
+    }
+
+    // --- [ FreeEXRImage ] ---
+
+    /** {@code int FreeEXRImage(EXRImage * exr_image)} */
+    public static native int nFreeEXRImage(long exr_image);
+
+    /** {@code int FreeEXRImage(EXRImage * exr_image)} */
+    public static int FreeEXRImage(@NativeType("EXRImage *") EXRImage exr_image) {
+        return nFreeEXRImage(exr_image.address());
+    }
+
+    // --- [ FreeEXRErrorMessage ] ---
+
+    /** {@code void FreeEXRErrorMessage(char const * msg)} */
+    public static native void nFreeEXRErrorMessage(long msg);
+
+    /** {@code void FreeEXRErrorMessage(char const * msg)} */
+    public static void FreeEXRErrorMessage(@NativeType("char const *") ByteBuffer msg) {
+        nFreeEXRErrorMessage(memAddress(msg));
+    }
+
+    // --- [ ParseEXRVersionFromFile ] ---
+
+    /** {@code int ParseEXRVersionFromFile(EXRVersion * version, char const * filename)} */
+    public static native int nParseEXRVersionFromFile(long version, long filename);
+
+    /** {@code int ParseEXRVersionFromFile(EXRVersion * version, char const * filename)} */
+    public static int ParseEXRVersionFromFile(@NativeType("EXRVersion *") EXRVersion version, @NativeType("char const *") ByteBuffer filename) {
         if (CHECKS) {
-            check(ctx);
+            checkNT1(filename);
         }
-        nexr_context_destroy(ctx);
+        return nParseEXRVersionFromFile(version.address(), memAddress(filename));
     }
 
-    // --- [ exr_context_add_ref ] ---
+    /** {@code int ParseEXRVersionFromFile(EXRVersion * version, char const * filename)} */
+    public static int ParseEXRVersionFromFile(@NativeType("EXRVersion *") EXRVersion version, @NativeType("char const *") CharSequence filename) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nParseEXRVersionFromFile(version.address(), filenameEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
 
-    /** {@code void exr_context_add_ref(ExrContext ctx)} */
-    public static native void nexr_context_add_ref(long ctx);
+    // --- [ ParseEXRVersionFromMemory ] ---
 
-    /** {@code void exr_context_add_ref(ExrContext ctx)} */
-    public static void exr_context_add_ref(@NativeType("ExrContext") long ctx) {
+    /** {@code int ParseEXRVersionFromMemory(EXRVersion * version, unsigned char const * memory, size_t size)} */
+    public static native int nParseEXRVersionFromMemory(long version, long memory, long size);
+
+    /** {@code int ParseEXRVersionFromMemory(EXRVersion * version, unsigned char const * memory, size_t size)} */
+    public static int ParseEXRVersionFromMemory(@NativeType("EXRVersion *") EXRVersion version, @NativeType("unsigned char const *") ByteBuffer memory) {
+        return nParseEXRVersionFromMemory(version.address(), memAddress(memory), memory.remaining());
+    }
+
+    // --- [ ParseEXRHeaderFromFile ] ---
+
+    /** {@code int ParseEXRHeaderFromFile(EXRHeader * header, EXRVersion const * version, char const * filename, char const ** err)} */
+    public static native int nParseEXRHeaderFromFile(long header, long version, long filename, long err);
+
+    /** {@code int ParseEXRHeaderFromFile(EXRHeader * header, EXRVersion const * version, char const * filename, char const ** err)} */
+    public static int ParseEXRHeaderFromFile(@NativeType("EXRHeader *") EXRHeader header, @NativeType("EXRVersion const *") EXRVersion version, @NativeType("char const *") ByteBuffer filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
-            check(ctx);
+            checkNT1(filename);
+            check(err, 1);
         }
-        nexr_context_add_ref(ctx);
+        return nParseEXRHeaderFromFile(header.address(), version.address(), memAddress(filename), memAddress(err));
     }
 
-    // --- [ exr_context_release ] ---
-
-    /** {@code void exr_context_release(ExrContext ctx)} */
-    public static native void nexr_context_release(long ctx);
-
-    /** {@code void exr_context_release(ExrContext ctx)} */
-    public static void exr_context_release(@NativeType("ExrContext") long ctx) {
+    /** {@code int ParseEXRHeaderFromFile(EXRHeader * header, EXRVersion const * version, char const * filename, char const ** err)} */
+    public static int ParseEXRHeaderFromFile(@NativeType("EXRHeader *") EXRHeader header, @NativeType("EXRVersion const *") EXRVersion version, @NativeType("char const *") CharSequence filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
-            check(ctx);
+            check(err, 1);
         }
-        nexr_context_release(ctx);
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nParseEXRHeaderFromFile(header.address(), version.address(), filenameEncoded, memAddress(err));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
     }
 
-    // --- [ exr_memory_pool_create ] ---
+    // --- [ ParseEXRHeaderFromMemory ] ---
 
-    /** {@code ExrResult exr_memory_pool_create(ExrContext ctx, ExrMemoryPoolCreateInfo const * create_info, ExrMemoryPool * out_pool)} */
-    public static native int nexr_memory_pool_create(long ctx, long create_info, long out_pool);
+    /** {@code int ParseEXRHeaderFromMemory(EXRHeader * header, EXRVersion const * version, unsigned char const * memory, size_t size, char const ** err)} */
+    public static native int nParseEXRHeaderFromMemory(long header, long version, long memory, long size, long err);
 
-    /** {@code ExrResult exr_memory_pool_create(ExrContext ctx, ExrMemoryPoolCreateInfo const * create_info, ExrMemoryPool * out_pool)} */
-    @NativeType("ExrResult")
-    public static int exr_memory_pool_create(@NativeType("ExrContext") long ctx, @NativeType("ExrMemoryPoolCreateInfo const *") ExrMemoryPoolCreateInfo create_info, @NativeType("ExrMemoryPool *") PointerBuffer out_pool) {
+    /** {@code int ParseEXRHeaderFromMemory(EXRHeader * header, EXRVersion const * version, unsigned char const * memory, size_t size, char const ** err)} */
+    public static int ParseEXRHeaderFromMemory(@NativeType("EXRHeader *") EXRHeader header, @NativeType("EXRVersion const *") EXRVersion version, @NativeType("unsigned char const *") ByteBuffer memory, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
-            check(ctx);
-            check(out_pool, 1);
+            check(err, 1);
         }
-        return nexr_memory_pool_create(ctx, create_info.address(), memAddress(out_pool));
+        return nParseEXRHeaderFromMemory(header.address(), version.address(), memAddress(memory), memory.remaining(), memAddress(err));
     }
 
-    // --- [ exr_memory_pool_destroy ] ---
+    // --- [ ParseEXRMultipartHeaderFromFile ] ---
 
-    /** {@code void exr_memory_pool_destroy(ExrMemoryPool pool)} */
-    public static native void nexr_memory_pool_destroy(long pool);
+    /** {@code int ParseEXRMultipartHeaderFromFile(EXRHeader *** headers, int * num_headers, EXRVersion const * version, char const * filename, char const ** err)} */
+    public static native int nParseEXRMultipartHeaderFromFile(long headers, long num_headers, long version, long filename, long err);
 
-    /** {@code void exr_memory_pool_destroy(ExrMemoryPool pool)} */
-    public static void exr_memory_pool_destroy(@NativeType("ExrMemoryPool") long pool) {
+    /** {@code int ParseEXRMultipartHeaderFromFile(EXRHeader *** headers, int * num_headers, EXRVersion const * version, char const * filename, char const ** err)} */
+    public static int ParseEXRMultipartHeaderFromFile(@NativeType("EXRHeader ***") PointerBuffer headers, @NativeType("int *") IntBuffer num_headers, @NativeType("EXRVersion const *") EXRVersion version, @NativeType("char const *") ByteBuffer filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
-            check(pool);
+            check(headers, 1);
+            check(num_headers, 1);
+            checkNT1(filename);
+            check(err, 1);
         }
-        nexr_memory_pool_destroy(pool);
+        return nParseEXRMultipartHeaderFromFile(memAddress(headers), memAddress(num_headers), version.address(), memAddress(filename), memAddress(err));
     }
 
-    // --- [ exr_memory_pool_reset ] ---
-
-    /** {@code void exr_memory_pool_reset(ExrMemoryPool pool)} */
-    public static native void nexr_memory_pool_reset(long pool);
-
-    /** {@code void exr_memory_pool_reset(ExrMemoryPool pool)} */
-    public static void exr_memory_pool_reset(@NativeType("ExrMemoryPool") long pool) {
+    /** {@code int ParseEXRMultipartHeaderFromFile(EXRHeader *** headers, int * num_headers, EXRVersion const * version, char const * filename, char const ** err)} */
+    public static int ParseEXRMultipartHeaderFromFile(@NativeType("EXRHeader ***") PointerBuffer headers, @NativeType("int *") IntBuffer num_headers, @NativeType("EXRVersion const *") EXRVersion version, @NativeType("char const *") CharSequence filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
-            check(pool);
+            check(headers, 1);
+            check(num_headers, 1);
+            check(err, 1);
         }
-        nexr_memory_pool_reset(pool);
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nParseEXRMultipartHeaderFromFile(memAddress(headers), memAddress(num_headers), version.address(), filenameEncoded, memAddress(err));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
     }
 
-    // --- [ exr_memory_pool_get_used ] ---
+    // --- [ ParseEXRMultipartHeaderFromMemory ] ---
 
-    /** {@code size_t exr_memory_pool_get_used(ExrMemoryPool pool)} */
-    public static native long nexr_memory_pool_get_used(long pool);
+    /** {@code int ParseEXRMultipartHeaderFromMemory(EXRHeader *** headers, int * num_headers, EXRVersion const * version, unsigned char const * memory, size_t size, char const ** err)} */
+    public static native int nParseEXRMultipartHeaderFromMemory(long headers, long num_headers, long version, long memory, long size, long err);
 
-    /** {@code size_t exr_memory_pool_get_used(ExrMemoryPool pool)} */
+    /** {@code int ParseEXRMultipartHeaderFromMemory(EXRHeader *** headers, int * num_headers, EXRVersion const * version, unsigned char const * memory, size_t size, char const ** err)} */
+    public static int ParseEXRMultipartHeaderFromMemory(@NativeType("EXRHeader ***") PointerBuffer headers, @NativeType("int *") IntBuffer num_headers, @NativeType("EXRVersion const *") EXRVersion version, @NativeType("unsigned char const *") ByteBuffer memory, @NativeType("char const **") PointerBuffer err) {
+        if (CHECKS) {
+            check(headers, 1);
+            check(num_headers, 1);
+            check(err, 1);
+        }
+        return nParseEXRMultipartHeaderFromMemory(memAddress(headers), memAddress(num_headers), version.address(), memAddress(memory), memory.remaining(), memAddress(err));
+    }
+
+    // --- [ LoadEXRImageFromFile ] ---
+
+    /** {@code int LoadEXRImageFromFile(EXRImage * image, EXRHeader const * header, char const * filename, char const ** err)} */
+    public static native int nLoadEXRImageFromFile(long image, long header, long filename, long err);
+
+    /** {@code int LoadEXRImageFromFile(EXRImage * image, EXRHeader const * header, char const * filename, char const ** err)} */
+    public static int LoadEXRImageFromFile(@NativeType("EXRImage *") EXRImage image, @NativeType("EXRHeader const *") EXRHeader header, @NativeType("char const *") ByteBuffer filename, @NativeType("char const **") PointerBuffer err) {
+        if (CHECKS) {
+            checkNT1(filename);
+            check(err, 1);
+            EXRHeader.validate(header.address());
+        }
+        return nLoadEXRImageFromFile(image.address(), header.address(), memAddress(filename), memAddress(err));
+    }
+
+    /** {@code int LoadEXRImageFromFile(EXRImage * image, EXRHeader const * header, char const * filename, char const ** err)} */
+    public static int LoadEXRImageFromFile(@NativeType("EXRImage *") EXRImage image, @NativeType("EXRHeader const *") EXRHeader header, @NativeType("char const *") CharSequence filename, @NativeType("char const **") PointerBuffer err) {
+        if (CHECKS) {
+            check(err, 1);
+            EXRHeader.validate(header.address());
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nLoadEXRImageFromFile(image.address(), header.address(), filenameEncoded, memAddress(err));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ LoadEXRImageFromMemory ] ---
+
+    /** {@code int LoadEXRImageFromMemory(EXRImage * image, EXRHeader const * header, unsigned char const * memory, size_t size, char const ** err)} */
+    public static native int nLoadEXRImageFromMemory(long image, long header, long memory, long size, long err);
+
+    /** {@code int LoadEXRImageFromMemory(EXRImage * image, EXRHeader const * header, unsigned char const * memory, size_t size, char const ** err)} */
+    public static int LoadEXRImageFromMemory(@NativeType("EXRImage *") EXRImage image, @NativeType("EXRHeader const *") EXRHeader header, @NativeType("unsigned char const *") ByteBuffer memory, @NativeType("char const **") PointerBuffer err) {
+        if (CHECKS) {
+            check(err, 1);
+            EXRHeader.validate(header.address());
+        }
+        return nLoadEXRImageFromMemory(image.address(), header.address(), memAddress(memory), memory.remaining(), memAddress(err));
+    }
+
+    // --- [ LoadEXRMultipartImageFromFile ] ---
+
+    /** {@code int LoadEXRMultipartImageFromFile(EXRImage * images, EXRHeader const ** headers, unsigned int num_parts, char const * filename, char const ** err)} */
+    public static native int nLoadEXRMultipartImageFromFile(long images, long headers, int num_parts, long filename, long err);
+
+    /** {@code int LoadEXRMultipartImageFromFile(EXRImage * images, EXRHeader const ** headers, unsigned int num_parts, char const * filename, char const ** err)} */
+    public static int LoadEXRMultipartImageFromFile(@NativeType("EXRImage *") EXRImage.Buffer images, @NativeType("EXRHeader const **") PointerBuffer headers, @NativeType("char const *") ByteBuffer filename, @NativeType("char const **") PointerBuffer err) {
+        if (CHECKS) {
+            check(headers, images.remaining());
+            checkNT1(filename);
+            check(err, 1);
+        }
+        return nLoadEXRMultipartImageFromFile(images.address(), memAddress(headers), images.remaining(), memAddress(filename), memAddress(err));
+    }
+
+    /** {@code int LoadEXRMultipartImageFromFile(EXRImage * images, EXRHeader const ** headers, unsigned int num_parts, char const * filename, char const ** err)} */
+    public static int LoadEXRMultipartImageFromFile(@NativeType("EXRImage *") EXRImage.Buffer images, @NativeType("EXRHeader const **") PointerBuffer headers, @NativeType("char const *") CharSequence filename, @NativeType("char const **") PointerBuffer err) {
+        if (CHECKS) {
+            check(headers, images.remaining());
+            check(err, 1);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nLoadEXRMultipartImageFromFile(images.address(), memAddress(headers), images.remaining(), filenameEncoded, memAddress(err));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ LoadEXRMultipartImageFromMemory ] ---
+
+    /** {@code int LoadEXRMultipartImageFromMemory(EXRImage * images, EXRHeader const ** headers, unsigned int num_parts, unsigned char const * memory, size_t size, char const ** err)} */
+    public static native int nLoadEXRMultipartImageFromMemory(long images, long headers, int num_parts, long memory, long size, long err);
+
+    /** {@code int LoadEXRMultipartImageFromMemory(EXRImage * images, EXRHeader const ** headers, unsigned int num_parts, unsigned char const * memory, size_t size, char const ** err)} */
+    public static int LoadEXRMultipartImageFromMemory(@NativeType("EXRImage *") EXRImage.Buffer images, @NativeType("EXRHeader const **") PointerBuffer headers, @NativeType("unsigned char const *") ByteBuffer memory, @NativeType("char const **") PointerBuffer err) {
+        if (CHECKS) {
+            check(headers, images.remaining());
+            check(err, 1);
+        }
+        return nLoadEXRMultipartImageFromMemory(images.address(), memAddress(headers), images.remaining(), memAddress(memory), memory.remaining(), memAddress(err));
+    }
+
+    // --- [ SaveEXRImageToFile ] ---
+
+    /** {@code int SaveEXRImageToFile(EXRImage const * image, EXRHeader const * exr_header, char const * filename, char const ** err)} */
+    public static native int nSaveEXRImageToFile(long image, long exr_header, long filename, long err);
+
+    /** {@code int SaveEXRImageToFile(EXRImage const * image, EXRHeader const * exr_header, char const * filename, char const ** err)} */
+    public static int SaveEXRImageToFile(@NativeType("EXRImage const *") EXRImage image, @NativeType("EXRHeader const *") EXRHeader exr_header, @NativeType("char const *") ByteBuffer filename, @NativeType("char const **") PointerBuffer err) {
+        if (CHECKS) {
+            checkNT1(filename);
+            check(err, 1);
+            EXRImage.validate(image.address());
+            EXRHeader.validate(exr_header.address());
+        }
+        return nSaveEXRImageToFile(image.address(), exr_header.address(), memAddress(filename), memAddress(err));
+    }
+
+    /** {@code int SaveEXRImageToFile(EXRImage const * image, EXRHeader const * exr_header, char const * filename, char const ** err)} */
+    public static int SaveEXRImageToFile(@NativeType("EXRImage const *") EXRImage image, @NativeType("EXRHeader const *") EXRHeader exr_header, @NativeType("char const *") CharSequence filename, @NativeType("char const **") PointerBuffer err) {
+        if (CHECKS) {
+            check(err, 1);
+            EXRImage.validate(image.address());
+            EXRHeader.validate(exr_header.address());
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nSaveEXRImageToFile(image.address(), exr_header.address(), filenameEncoded, memAddress(err));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ SaveEXRImageToMemory ] ---
+
+    /** {@code size_t SaveEXRImageToMemory(EXRImage const * image, EXRHeader const * exr_header, unsigned char ** memory, char const ** err)} */
+    public static native long nSaveEXRImageToMemory(long image, long exr_header, long memory, long err);
+
+    /** {@code size_t SaveEXRImageToMemory(EXRImage const * image, EXRHeader const * exr_header, unsigned char ** memory, char const ** err)} */
     @NativeType("size_t")
-    public static long exr_memory_pool_get_used(@NativeType("ExrMemoryPool") long pool) {
+    public static long SaveEXRImageToMemory(@NativeType("EXRImage const *") EXRImage image, @NativeType("EXRHeader const *") EXRHeader exr_header, @NativeType("unsigned char **") PointerBuffer memory, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
-            check(pool);
+            check(memory, 1);
+            check(err, 1);
+            EXRImage.validate(image.address());
+            EXRHeader.validate(exr_header.address());
         }
-        return nexr_memory_pool_get_used(pool);
+        return nSaveEXRImageToMemory(image.address(), exr_header.address(), memAddress(memory), memAddress(err));
     }
 
-    // --- [ exr_decoder_create ] ---
+    // --- [ SaveEXRMultipartImageToFile ] ---
 
-    /** {@code ExrResult exr_decoder_create(ExrContext ctx, ExrDecoderCreateInfo const * create_info, ExrDecoder * out_decoder)} */
-    public static native int nexr_decoder_create(long ctx, long create_info, long out_decoder);
+    /** {@code int SaveEXRMultipartImageToFile(EXRImage const * images, EXRHeader const ** exr_headers, unsigned int num_parts, char const * filename, char const ** err)} */
+    public static native int nSaveEXRMultipartImageToFile(long images, long exr_headers, int num_parts, long filename, long err);
 
-    /** {@code ExrResult exr_decoder_create(ExrContext ctx, ExrDecoderCreateInfo const * create_info, ExrDecoder * out_decoder)} */
-    @NativeType("ExrResult")
-    public static int exr_decoder_create(@NativeType("ExrContext") long ctx, @NativeType("ExrDecoderCreateInfo const *") ExrDecoderCreateInfo create_info, @NativeType("ExrDecoder *") PointerBuffer out_decoder) {
+    /** {@code int SaveEXRMultipartImageToFile(EXRImage const * images, EXRHeader const ** exr_headers, unsigned int num_parts, char const * filename, char const ** err)} */
+    public static int SaveEXRMultipartImageToFile(@NativeType("EXRImage const *") EXRImage.Buffer images, @NativeType("EXRHeader const **") PointerBuffer exr_headers, @NativeType("char const *") ByteBuffer filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
-            check(ctx);
-            check(out_decoder, 1);
-            ExrDecoderCreateInfo.validate(create_info.address());
+            check(exr_headers, images.remaining());
+            checkNT1(filename);
+            check(err, 1);
+            Struct.validate(images.address(), images.remaining(), EXRImage.SIZEOF, EXRImage::validate);
         }
-        return nexr_decoder_create(ctx, create_info.address(), memAddress(out_decoder));
+        return nSaveEXRMultipartImageToFile(images.address(), memAddress(exr_headers), images.remaining(), memAddress(filename), memAddress(err));
     }
 
-    // --- [ exr_decoder_destroy ] ---
-
-    /** {@code void exr_decoder_destroy(ExrDecoder decoder)} */
-    public static native void nexr_decoder_destroy(long decoder);
-
-    /** {@code void exr_decoder_destroy(ExrDecoder decoder)} */
-    public static void exr_decoder_destroy(@NativeType("ExrDecoder") long decoder) {
+    /** {@code int SaveEXRMultipartImageToFile(EXRImage const * images, EXRHeader const ** exr_headers, unsigned int num_parts, char const * filename, char const ** err)} */
+    public static int SaveEXRMultipartImageToFile(@NativeType("EXRImage const *") EXRImage.Buffer images, @NativeType("EXRHeader const **") PointerBuffer exr_headers, @NativeType("char const *") CharSequence filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
-            check(decoder);
-        }
-        nexr_decoder_destroy(decoder);
-    }
-
-    // --- [ exr_decoder_parse_header ] ---
-
-    /** {@code ExrResult exr_decoder_parse_header(ExrDecoder decoder, ExrImage * out_image)} */
-    public static native int nexr_decoder_parse_header(long decoder, long out_image);
-
-    /** {@code ExrResult exr_decoder_parse_header(ExrDecoder decoder, ExrImage * out_image)} */
-    @NativeType("ExrResult")
-    public static int exr_decoder_parse_header(@NativeType("ExrDecoder") long decoder, @NativeType("ExrImage *") PointerBuffer out_image) {
-        if (CHECKS) {
-            check(decoder);
-            check(out_image, 1);
-        }
-        return nexr_decoder_parse_header(decoder, memAddress(out_image));
-    }
-
-    // --- [ exr_decoder_wait_idle ] ---
-
-    /** {@code ExrResult exr_decoder_wait_idle(ExrDecoder decoder)} */
-    public static native int nexr_decoder_wait_idle(long decoder);
-
-    /** {@code ExrResult exr_decoder_wait_idle(ExrDecoder decoder)} */
-    @NativeType("ExrResult")
-    public static int exr_decoder_wait_idle(@NativeType("ExrDecoder") long decoder) {
-        if (CHECKS) {
-            check(decoder);
-        }
-        return nexr_decoder_wait_idle(decoder);
-    }
-
-    // --- [ exr_decoder_get_suspend_state ] ---
-
-    /** {@code ExrResult exr_decoder_get_suspend_state(ExrDecoder decoder, ExrSuspendState * out_state)} */
-    public static native int nexr_decoder_get_suspend_state(long decoder, long out_state);
-
-    /** {@code ExrResult exr_decoder_get_suspend_state(ExrDecoder decoder, ExrSuspendState * out_state)} */
-    @NativeType("ExrResult")
-    public static int exr_decoder_get_suspend_state(@NativeType("ExrDecoder") long decoder, @NativeType("ExrSuspendState *") PointerBuffer out_state) {
-        if (CHECKS) {
-            check(decoder);
-            check(out_state, 1);
-        }
-        return nexr_decoder_get_suspend_state(decoder, memAddress(out_state));
-    }
-
-    // --- [ exr_suspend_get_pending_fetch ] ---
-
-    /** {@code ExrResult exr_suspend_get_pending_fetch(ExrSuspendState state, ExrPendingFetch * out_fetch)} */
-    public static native int nexr_suspend_get_pending_fetch(long state, long out_fetch);
-
-    /** {@code ExrResult exr_suspend_get_pending_fetch(ExrSuspendState state, ExrPendingFetch * out_fetch)} */
-    @NativeType("ExrResult")
-    public static int exr_suspend_get_pending_fetch(@NativeType("ExrSuspendState") long state, @NativeType("ExrPendingFetch *") ExrPendingFetch out_fetch) {
-        if (CHECKS) {
-            check(state);
-        }
-        return nexr_suspend_get_pending_fetch(state, out_fetch.address());
-    }
-
-    // --- [ exr_suspend_complete_fetch ] ---
-
-    /** {@code ExrResult exr_suspend_complete_fetch(ExrSuspendState state, void const * data, size_t size)} */
-    public static native int nexr_suspend_complete_fetch(long state, long data, long size);
-
-    /** {@code ExrResult exr_suspend_complete_fetch(ExrSuspendState state, void const * data, size_t size)} */
-    @NativeType("ExrResult")
-    public static int exr_suspend_complete_fetch(@NativeType("ExrSuspendState") long state, @NativeType("void const *") ByteBuffer data) {
-        if (CHECKS) {
-            check(state);
-        }
-        return nexr_suspend_complete_fetch(state, memAddress(data), data.remaining());
-    }
-
-    // --- [ exr_decoder_resume ] ---
-
-    /** {@code ExrResult exr_decoder_resume(ExrDecoder decoder)} */
-    public static native int nexr_decoder_resume(long decoder);
-
-    /** {@code ExrResult exr_decoder_resume(ExrDecoder decoder)} */
-    @NativeType("ExrResult")
-    public static int exr_decoder_resume(@NativeType("ExrDecoder") long decoder) {
-        if (CHECKS) {
-            check(decoder);
-        }
-        return nexr_decoder_resume(decoder);
-    }
-
-    // --- [ exr_image_get_info ] ---
-
-    /** {@code ExrResult exr_image_get_info(ExrImage image, ExrImageInfo * out_info)} */
-    public static native int nexr_image_get_info(long image, long out_info);
-
-    /** {@code ExrResult exr_image_get_info(ExrImage image, ExrImageInfo * out_info)} */
-    @NativeType("ExrResult")
-    public static int exr_image_get_info(@NativeType("ExrImage") long image, @NativeType("ExrImageInfo *") ExrImageInfo out_info) {
-        if (CHECKS) {
-            check(image);
-        }
-        return nexr_image_get_info(image, out_info.address());
-    }
-
-    // --- [ exr_image_destroy ] ---
-
-    /** {@code void exr_image_destroy(ExrImage image)} */
-    public static native void nexr_image_destroy(long image);
-
-    /** {@code void exr_image_destroy(ExrImage image)} */
-    public static void exr_image_destroy(@NativeType("ExrImage") long image) {
-        if (CHECKS) {
-            check(image);
-        }
-        nexr_image_destroy(image);
-    }
-
-    // --- [ exr_image_get_channel_count ] ---
-
-    /** {@code ExrResult exr_image_get_channel_count(ExrImage image, uint32_t * out_count)} */
-    public static native int nexr_image_get_channel_count(long image, long out_count);
-
-    /** {@code ExrResult exr_image_get_channel_count(ExrImage image, uint32_t * out_count)} */
-    @NativeType("ExrResult")
-    public static int exr_image_get_channel_count(@NativeType("ExrImage") long image, @NativeType("uint32_t *") IntBuffer out_count) {
-        if (CHECKS) {
-            check(image);
-            check(out_count, 1);
-        }
-        return nexr_image_get_channel_count(image, memAddress(out_count));
-    }
-
-    // --- [ exr_image_get_channel ] ---
-
-    /** {@code ExrResult exr_image_get_channel(ExrImage image, uint32_t index, ExrChannelInfo * out_info)} */
-    public static native int nexr_image_get_channel(long image, int index, long out_info);
-
-    /** {@code ExrResult exr_image_get_channel(ExrImage image, uint32_t index, ExrChannelInfo * out_info)} */
-    @NativeType("ExrResult")
-    public static int exr_image_get_channel(@NativeType("ExrImage") long image, @NativeType("uint32_t") int index, @NativeType("ExrChannelInfo *") ExrChannelInfo out_info) {
-        if (CHECKS) {
-            check(image);
-        }
-        return nexr_image_get_channel(image, index, out_info.address());
-    }
-
-    // --- [ exr_image_find_channel ] ---
-
-    /** {@code ExrResult exr_image_find_channel(ExrImage image, char const * name, uint32_t * out_index)} */
-    public static native int nexr_image_find_channel(long image, long name, long out_index);
-
-    /** {@code ExrResult exr_image_find_channel(ExrImage image, char const * name, uint32_t * out_index)} */
-    @NativeType("ExrResult")
-    public static int exr_image_find_channel(@NativeType("ExrImage") long image, @NativeType("char const *") ByteBuffer name, @NativeType("uint32_t *") IntBuffer out_index) {
-        if (CHECKS) {
-            check(image);
-            checkNT1(name);
-            check(out_index, 1);
-        }
-        return nexr_image_find_channel(image, memAddress(name), memAddress(out_index));
-    }
-
-    /** {@code ExrResult exr_image_find_channel(ExrImage image, char const * name, uint32_t * out_index)} */
-    @NativeType("ExrResult")
-    public static int exr_image_find_channel(@NativeType("ExrImage") long image, @NativeType("char const *") CharSequence name, @NativeType("uint32_t *") IntBuffer out_index) {
-        if (CHECKS) {
-            check(image);
-            check(out_index, 1);
+            check(exr_headers, images.remaining());
+            check(err, 1);
+            Struct.validate(images.address(), images.remaining(), EXRImage.SIZEOF, EXRImage::validate);
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nASCII(name, true);
-            long nameEncoded = stack.getPointerAddress();
-            return nexr_image_find_channel(image, nameEncoded, memAddress(out_index));
+            stack.nUTF8(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nSaveEXRMultipartImageToFile(images.address(), memAddress(exr_headers), images.remaining(), filenameEncoded, memAddress(err));
         } finally {
             stack.setPointer(stackPointer);
         }
     }
 
-    // --- [ exr_image_get_part_count ] ---
+    // --- [ SaveEXRMultipartImageToMemory ] ---
 
-    /** {@code ExrResult exr_image_get_part_count(ExrImage image, uint32_t * out_count)} */
-    public static native int nexr_image_get_part_count(long image, long out_count);
+    /** {@code size_t SaveEXRMultipartImageToMemory(EXRImage const * images, EXRHeader const ** exr_headers, unsigned int num_parts, unsigned char ** memory, char const ** err)} */
+    public static native long nSaveEXRMultipartImageToMemory(long images, long exr_headers, int num_parts, long memory, long err);
 
-    /** {@code ExrResult exr_image_get_part_count(ExrImage image, uint32_t * out_count)} */
-    @NativeType("ExrResult")
-    public static int exr_image_get_part_count(@NativeType("ExrImage") long image, @NativeType("uint32_t *") IntBuffer out_count) {
+    /** {@code size_t SaveEXRMultipartImageToMemory(EXRImage const * images, EXRHeader const ** exr_headers, unsigned int num_parts, unsigned char ** memory, char const ** err)} */
+    @NativeType("size_t")
+    public static long SaveEXRMultipartImageToMemory(@NativeType("EXRImage const *") EXRImage.Buffer images, @NativeType("EXRHeader const **") PointerBuffer exr_headers, @NativeType("unsigned char **") PointerBuffer memory, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
-            check(image);
-            check(out_count, 1);
+            check(exr_headers, images.remaining());
+            check(memory, 1);
+            check(err, 1);
+            Struct.validate(images.address(), images.remaining(), EXRImage.SIZEOF, EXRImage::validate);
         }
-        return nexr_image_get_part_count(image, memAddress(out_count));
+        return nSaveEXRMultipartImageToMemory(images.address(), memAddress(exr_headers), images.remaining(), memAddress(memory), memAddress(err));
     }
 
-    // --- [ exr_image_get_part ] ---
+    // --- [ LoadDeepEXR ] ---
 
-    /** {@code ExrResult exr_image_get_part(ExrImage image, uint32_t index, ExrPart * out_part)} */
-    public static native int nexr_image_get_part(long image, int index, long out_part);
+    /** {@code int LoadDeepEXR(DeepImage * out_image, char const * filename, char const ** err)} */
+    public static native int nLoadDeepEXR(long out_image, long filename, long err);
 
-    /** {@code ExrResult exr_image_get_part(ExrImage image, uint32_t index, ExrPart * out_part)} */
-    @NativeType("ExrResult")
-    public static int exr_image_get_part(@NativeType("ExrImage") long image, @NativeType("uint32_t") int index, @NativeType("ExrPart *") PointerBuffer out_part) {
+    /** {@code int LoadDeepEXR(DeepImage * out_image, char const * filename, char const ** err)} */
+    public static int LoadDeepEXR(@NativeType("DeepImage *") DeepImage out_image, @NativeType("char const *") ByteBuffer filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
-            check(image);
-            check(out_part, 1);
+            checkNT1(filename);
+            check(err, 1);
         }
-        return nexr_image_get_part(image, index, memAddress(out_part));
+        return nLoadDeepEXR(out_image.address(), memAddress(filename), memAddress(err));
     }
 
-    // --- [ exr_image_find_part_by_name ] ---
-
-    /** {@code ExrResult exr_image_find_part_by_name(ExrImage image, char const * name, ExrPart * out_part)} */
-    public static native int nexr_image_find_part_by_name(long image, long name, long out_part);
-
-    /** {@code ExrResult exr_image_find_part_by_name(ExrImage image, char const * name, ExrPart * out_part)} */
-    @NativeType("ExrResult")
-    public static int exr_image_find_part_by_name(@NativeType("ExrImage") long image, @NativeType("char const *") ByteBuffer name, @NativeType("ExrPart *") PointerBuffer out_part) {
+    /** {@code int LoadDeepEXR(DeepImage * out_image, char const * filename, char const ** err)} */
+    public static int LoadDeepEXR(@NativeType("DeepImage *") DeepImage out_image, @NativeType("char const *") CharSequence filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
-            check(image);
-            checkNT1(name);
-            check(out_part, 1);
-        }
-        return nexr_image_find_part_by_name(image, memAddress(name), memAddress(out_part));
-    }
-
-    /** {@code ExrResult exr_image_find_part_by_name(ExrImage image, char const * name, ExrPart * out_part)} */
-    @NativeType("ExrResult")
-    public static int exr_image_find_part_by_name(@NativeType("ExrImage") long image, @NativeType("char const *") CharSequence name, @NativeType("ExrPart *") PointerBuffer out_part) {
-        if (CHECKS) {
-            check(image);
-            check(out_part, 1);
+            check(err, 1);
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nASCII(name, true);
-            long nameEncoded = stack.getPointerAddress();
-            return nexr_image_find_part_by_name(image, nameEncoded, memAddress(out_part));
+            stack.nUTF8(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nLoadDeepEXR(out_image.address(), filenameEncoded, memAddress(err));
         } finally {
             stack.setPointer(stackPointer);
         }
     }
 
-    // --- [ exr_part_destroy ] ---
+    // --- [ IsSpectralEXR ] ---
 
-    /** {@code void exr_part_destroy(ExrPart part)} */
-    public static native void nexr_part_destroy(long part);
+    /** {@code int IsSpectralEXR(char const * filename)} */
+    public static native int nIsSpectralEXR(long filename);
 
-    /** {@code void exr_part_destroy(ExrPart part)} */
-    public static void exr_part_destroy(@NativeType("ExrPart") long part) {
+    /** {@code int IsSpectralEXR(char const * filename)} */
+    public static int IsSpectralEXR(@NativeType("char const *") ByteBuffer filename) {
         if (CHECKS) {
-            check(part);
+            checkNT1(filename);
         }
-        nexr_part_destroy(part);
+        return nIsSpectralEXR(memAddress(filename));
     }
 
-    // --- [ exr_part_get_info ] ---
-
-    /** {@code ExrResult exr_part_get_info(ExrPart part, ExrPartInfo * out_info)} */
-    public static native int nexr_part_get_info(long part, long out_info);
-
-    /** {@code ExrResult exr_part_get_info(ExrPart part, ExrPartInfo * out_info)} */
-    @NativeType("ExrResult")
-    public static int exr_part_get_info(@NativeType("ExrPart") long part, @NativeType("ExrPartInfo *") ExrPartInfo out_info) {
-        if (CHECKS) {
-            check(part);
-        }
-        return nexr_part_get_info(part, out_info.address());
-    }
-
-    // --- [ exr_part_get_channel ] ---
-
-    /** {@code ExrResult exr_part_get_channel(ExrPart part, uint32_t index, ExrChannelInfo * out_info)} */
-    public static native int nexr_part_get_channel(long part, int index, long out_info);
-
-    /** {@code ExrResult exr_part_get_channel(ExrPart part, uint32_t index, ExrChannelInfo * out_info)} */
-    @NativeType("ExrResult")
-    public static int exr_part_get_channel(@NativeType("ExrPart") long part, @NativeType("uint32_t") int index, @NativeType("ExrChannelInfo *") ExrChannelInfo out_info) {
-        if (CHECKS) {
-            check(part);
-        }
-        return nexr_part_get_channel(part, index, out_info.address());
-    }
-
-    // --- [ exr_part_get_attribute_count ] ---
-
-    /** {@code ExrResult exr_part_get_attribute_count(ExrPart part, uint32_t * out_count)} */
-    public static native int nexr_part_get_attribute_count(long part, long out_count);
-
-    /** {@code ExrResult exr_part_get_attribute_count(ExrPart part, uint32_t * out_count)} */
-    @NativeType("ExrResult")
-    public static int exr_part_get_attribute_count(@NativeType("ExrPart") long part, @NativeType("uint32_t *") IntBuffer out_count) {
-        if (CHECKS) {
-            check(part);
-            check(out_count, 1);
-        }
-        return nexr_part_get_attribute_count(part, memAddress(out_count));
-    }
-
-    // --- [ exr_part_get_attribute ] ---
-
-    /** {@code ExrResult exr_part_get_attribute(ExrPart part, char const * name, ExrAttribute * out_attr)} */
-    public static native int nexr_part_get_attribute(long part, long name, long out_attr);
-
-    /** {@code ExrResult exr_part_get_attribute(ExrPart part, char const * name, ExrAttribute * out_attr)} */
-    @NativeType("ExrResult")
-    public static int exr_part_get_attribute(@NativeType("ExrPart") long part, @NativeType("char const *") ByteBuffer name, @NativeType("ExrAttribute *") ExrAttribute out_attr) {
-        if (CHECKS) {
-            check(part);
-            checkNT1(name);
-        }
-        return nexr_part_get_attribute(part, memAddress(name), out_attr.address());
-    }
-
-    /** {@code ExrResult exr_part_get_attribute(ExrPart part, char const * name, ExrAttribute * out_attr)} */
-    @NativeType("ExrResult")
-    public static int exr_part_get_attribute(@NativeType("ExrPart") long part, @NativeType("char const *") CharSequence name, @NativeType("ExrAttribute *") ExrAttribute out_attr) {
-        if (CHECKS) {
-            check(part);
-        }
+    /** {@code int IsSpectralEXR(char const * filename)} */
+    public static int IsSpectralEXR(@NativeType("char const *") CharSequence filename) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nASCII(name, true);
-            long nameEncoded = stack.getPointerAddress();
-            return nexr_part_get_attribute(part, nameEncoded, out_attr.address());
+            stack.nUTF8(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nIsSpectralEXR(filenameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
     }
 
-    // --- [ exr_part_get_attribute_at ] ---
+    // --- [ IsSpectralEXRFromMemory ] ---
 
-    /** {@code ExrResult exr_part_get_attribute_at(ExrPart part, uint32_t index, ExrAttribute * out_attr)} */
-    public static native int nexr_part_get_attribute_at(long part, int index, long out_attr);
+    /** {@code int IsSpectralEXRFromMemory(unsigned char const * memory, size_t size)} */
+    public static native int nIsSpectralEXRFromMemory(long memory, long size);
 
-    /** {@code ExrResult exr_part_get_attribute_at(ExrPart part, uint32_t index, ExrAttribute * out_attr)} */
-    @NativeType("ExrResult")
-    public static int exr_part_get_attribute_at(@NativeType("ExrPart") long part, @NativeType("uint32_t") int index, @NativeType("ExrAttribute *") ExrAttribute out_attr) {
-        if (CHECKS) {
-            check(part);
-        }
-        return nexr_part_get_attribute_at(part, index, out_attr.address());
+    /** {@code int IsSpectralEXRFromMemory(unsigned char const * memory, size_t size)} */
+    public static int IsSpectralEXRFromMemory(@NativeType("unsigned char const *") ByteBuffer memory) {
+        return nIsSpectralEXRFromMemory(memAddress(memory), memory.remaining());
     }
 
-    // --- [ exr_part_has_attribute ] ---
+    // --- [ EXRGetSpectrumType ] ---
 
-    /** {@code int exr_part_has_attribute(ExrPart part, char const * name)} */
-    public static native int nexr_part_has_attribute(long part, long name);
+    /** {@code int EXRGetSpectrumType(EXRHeader const * exr_header)} */
+    public static native int nEXRGetSpectrumType(long exr_header);
 
-    /** {@code int exr_part_has_attribute(ExrPart part, char const * name)} */
-    public static int exr_part_has_attribute(@NativeType("ExrPart") long part, @NativeType("char const *") ByteBuffer name) {
+    /** {@code int EXRGetSpectrumType(EXRHeader const * exr_header)} */
+    public static int EXRGetSpectrumType(@NativeType("EXRHeader const *") EXRHeader exr_header) {
         if (CHECKS) {
-            check(part);
-            checkNT1(name);
+            EXRHeader.validate(exr_header.address());
         }
-        return nexr_part_has_attribute(part, memAddress(name));
+        return nEXRGetSpectrumType(exr_header.address());
     }
 
-    /** {@code int exr_part_has_attribute(ExrPart part, char const * name)} */
-    public static int exr_part_has_attribute(@NativeType("ExrPart") long part, @NativeType("char const *") CharSequence name) {
+    // --- [ EXRFormatWavelength ] ---
+
+    /** {@code void EXRFormatWavelength(char * buffer, size_t buffer_size, float wavelength_nm)} */
+    public static native void nEXRFormatWavelength(long buffer, long buffer_size, float wavelength_nm);
+
+    /** {@code void EXRFormatWavelength(char * buffer, size_t buffer_size, float wavelength_nm)} */
+    public static void EXRFormatWavelength(@NativeType("char *") ByteBuffer buffer, float wavelength_nm) {
+        nEXRFormatWavelength(memAddress(buffer), buffer.remaining(), wavelength_nm);
+    }
+
+    // --- [ EXRSpectralChannelName ] ---
+
+    /** {@code void EXRSpectralChannelName(char * buffer, size_t buffer_size, float wavelength_nm, int stokes_component)} */
+    public static native void nEXRSpectralChannelName(long buffer, long buffer_size, float wavelength_nm, int stokes_component);
+
+    /** {@code void EXRSpectralChannelName(char * buffer, size_t buffer_size, float wavelength_nm, int stokes_component)} */
+    public static void EXRSpectralChannelName(@NativeType("char *") ByteBuffer buffer, float wavelength_nm, int stokes_component) {
+        nEXRSpectralChannelName(memAddress(buffer), buffer.remaining(), wavelength_nm, stokes_component);
+    }
+
+    // --- [ EXRReflectiveChannelName ] ---
+
+    /** {@code void EXRReflectiveChannelName(char * buffer, size_t buffer_size, float wavelength_nm)} */
+    public static native void nEXRReflectiveChannelName(long buffer, long buffer_size, float wavelength_nm);
+
+    /** {@code void EXRReflectiveChannelName(char * buffer, size_t buffer_size, float wavelength_nm)} */
+    public static void EXRReflectiveChannelName(@NativeType("char *") ByteBuffer buffer, float wavelength_nm) {
+        nEXRReflectiveChannelName(memAddress(buffer), buffer.remaining(), wavelength_nm);
+    }
+
+    // --- [ EXRParseSpectralChannelWavelength ] ---
+
+    /** {@code float EXRParseSpectralChannelWavelength(char const * channel_name)} */
+    public static native float nEXRParseSpectralChannelWavelength(long channel_name);
+
+    /** {@code float EXRParseSpectralChannelWavelength(char const * channel_name)} */
+    public static float EXRParseSpectralChannelWavelength(@NativeType("char const *") ByteBuffer channel_name) {
         if (CHECKS) {
-            check(part);
+            checkNT1(channel_name);
         }
+        return nEXRParseSpectralChannelWavelength(memAddress(channel_name));
+    }
+
+    /** {@code float EXRParseSpectralChannelWavelength(char const * channel_name)} */
+    public static float EXRParseSpectralChannelWavelength(@NativeType("char const *") CharSequence channel_name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nASCII(name, true);
-            long nameEncoded = stack.getPointerAddress();
-            return nexr_part_has_attribute(part, nameEncoded);
+            stack.nASCII(channel_name, true);
+            long channel_nameEncoded = stack.getPointerAddress();
+            return nEXRParseSpectralChannelWavelength(channel_nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
     }
 
-    // --- [ exr_part_get_chunk_count ] ---
+    // --- [ EXRGetStokesComponent ] ---
 
-    /** {@code ExrResult exr_part_get_chunk_count(ExrPart part, uint32_t * out_count)} */
-    public static native int nexr_part_get_chunk_count(long part, long out_count);
+    /** {@code int EXRGetStokesComponent(char const * channel_name)} */
+    public static native int nEXRGetStokesComponent(long channel_name);
 
-    /** {@code ExrResult exr_part_get_chunk_count(ExrPart part, uint32_t * out_count)} */
-    @NativeType("ExrResult")
-    public static int exr_part_get_chunk_count(@NativeType("ExrPart") long part, @NativeType("uint32_t *") IntBuffer out_count) {
+    /** {@code int EXRGetStokesComponent(char const * channel_name)} */
+    public static int EXRGetStokesComponent(@NativeType("char const *") ByteBuffer channel_name) {
         if (CHECKS) {
-            check(part);
-            check(out_count, 1);
+            checkNT1(channel_name);
         }
-        return nexr_part_get_chunk_count(part, memAddress(out_count));
+        return nEXRGetStokesComponent(memAddress(channel_name));
     }
 
-    // --- [ exr_command_buffer_create ] ---
-
-    /** {@code ExrResult exr_command_buffer_create(ExrContext ctx, ExrCommandBufferCreateInfo const * create_info, ExrCommandBuffer * out_cmd)} */
-    public static native int nexr_command_buffer_create(long ctx, long create_info, long out_cmd);
-
-    /** {@code ExrResult exr_command_buffer_create(ExrContext ctx, ExrCommandBufferCreateInfo const * create_info, ExrCommandBuffer * out_cmd)} */
-    @NativeType("ExrResult")
-    public static int exr_command_buffer_create(@NativeType("ExrContext") long ctx, @NativeType("ExrCommandBufferCreateInfo const *") ExrCommandBufferCreateInfo create_info, @NativeType("ExrCommandBuffer *") PointerBuffer out_cmd) {
-        if (CHECKS) {
-            check(ctx);
-            check(out_cmd, 1);
-            ExrCommandBufferCreateInfo.validate(create_info.address());
-        }
-        return nexr_command_buffer_create(ctx, create_info.address(), memAddress(out_cmd));
-    }
-
-    // --- [ exr_command_buffer_destroy ] ---
-
-    /** {@code void exr_command_buffer_destroy(ExrCommandBuffer cmd)} */
-    public static native void nexr_command_buffer_destroy(long cmd);
-
-    /** {@code void exr_command_buffer_destroy(ExrCommandBuffer cmd)} */
-    public static void exr_command_buffer_destroy(@NativeType("ExrCommandBuffer") long cmd) {
-        if (CHECKS) {
-            check(cmd);
-        }
-        nexr_command_buffer_destroy(cmd);
-    }
-
-    // --- [ exr_command_buffer_reset ] ---
-
-    /** {@code ExrResult exr_command_buffer_reset(ExrCommandBuffer cmd)} */
-    public static native int nexr_command_buffer_reset(long cmd);
-
-    /** {@code ExrResult exr_command_buffer_reset(ExrCommandBuffer cmd)} */
-    @NativeType("ExrResult")
-    public static int exr_command_buffer_reset(@NativeType("ExrCommandBuffer") long cmd) {
-        if (CHECKS) {
-            check(cmd);
-        }
-        return nexr_command_buffer_reset(cmd);
-    }
-
-    // --- [ exr_command_buffer_begin ] ---
-
-    /** {@code ExrResult exr_command_buffer_begin(ExrCommandBuffer cmd)} */
-    public static native int nexr_command_buffer_begin(long cmd);
-
-    /** {@code ExrResult exr_command_buffer_begin(ExrCommandBuffer cmd)} */
-    @NativeType("ExrResult")
-    public static int exr_command_buffer_begin(@NativeType("ExrCommandBuffer") long cmd) {
-        if (CHECKS) {
-            check(cmd);
-        }
-        return nexr_command_buffer_begin(cmd);
-    }
-
-    // --- [ exr_command_buffer_end ] ---
-
-    /** {@code ExrResult exr_command_buffer_end(ExrCommandBuffer cmd)} */
-    public static native int nexr_command_buffer_end(long cmd);
-
-    /** {@code ExrResult exr_command_buffer_end(ExrCommandBuffer cmd)} */
-    @NativeType("ExrResult")
-    public static int exr_command_buffer_end(@NativeType("ExrCommandBuffer") long cmd) {
-        if (CHECKS) {
-            check(cmd);
-        }
-        return nexr_command_buffer_end(cmd);
-    }
-
-    // --- [ exr_cmd_request_tile ] ---
-
-    /** {@code ExrResult exr_cmd_request_tile(ExrCommandBuffer cmd, ExrTileRequest const * request)} */
-    public static native int nexr_cmd_request_tile(long cmd, long request);
-
-    /** {@code ExrResult exr_cmd_request_tile(ExrCommandBuffer cmd, ExrTileRequest const * request)} */
-    @NativeType("ExrResult")
-    public static int exr_cmd_request_tile(@NativeType("ExrCommandBuffer") long cmd, @NativeType("ExrTileRequest const *") ExrTileRequest request) {
-        if (CHECKS) {
-            check(cmd);
-            ExrTileRequest.validate(request.address());
-        }
-        return nexr_cmd_request_tile(cmd, request.address());
-    }
-
-    // --- [ exr_cmd_request_tiles ] ---
-
-    /** {@code ExrResult exr_cmd_request_tiles(ExrCommandBuffer cmd, uint32_t count, ExrTileRequest const * requests)} */
-    public static native int nexr_cmd_request_tiles(long cmd, int count, long requests);
-
-    /** {@code ExrResult exr_cmd_request_tiles(ExrCommandBuffer cmd, uint32_t count, ExrTileRequest const * requests)} */
-    @NativeType("ExrResult")
-    public static int exr_cmd_request_tiles(@NativeType("ExrCommandBuffer") long cmd, @NativeType("uint32_t") int count, @NativeType("ExrTileRequest const *") ExrTileRequest requests) {
-        if (CHECKS) {
-            check(cmd);
-            ExrTileRequest.validate(requests.address());
-        }
-        return nexr_cmd_request_tiles(cmd, count, requests.address());
-    }
-
-    // --- [ exr_cmd_request_scanlines ] ---
-
-    /** {@code ExrResult exr_cmd_request_scanlines(ExrCommandBuffer cmd, ExrScanlineRequest const * request)} */
-    public static native int nexr_cmd_request_scanlines(long cmd, long request);
-
-    /** {@code ExrResult exr_cmd_request_scanlines(ExrCommandBuffer cmd, ExrScanlineRequest const * request)} */
-    @NativeType("ExrResult")
-    public static int exr_cmd_request_scanlines(@NativeType("ExrCommandBuffer") long cmd, @NativeType("ExrScanlineRequest const *") ExrScanlineRequest request) {
-        if (CHECKS) {
-            check(cmd);
-            ExrScanlineRequest.validate(request.address());
-        }
-        return nexr_cmd_request_scanlines(cmd, request.address());
-    }
-
-    // --- [ exr_cmd_request_scanline_blocks ] ---
-
-    /** {@code ExrResult exr_cmd_request_scanline_blocks(ExrCommandBuffer cmd, uint32_t count, ExrScanlineRequest const * requests)} */
-    public static native int nexr_cmd_request_scanline_blocks(long cmd, int count, long requests);
-
-    /** {@code ExrResult exr_cmd_request_scanline_blocks(ExrCommandBuffer cmd, uint32_t count, ExrScanlineRequest const * requests)} */
-    @NativeType("ExrResult")
-    public static int exr_cmd_request_scanline_blocks(@NativeType("ExrCommandBuffer") long cmd, @NativeType("ExrScanlineRequest const *") ExrScanlineRequest.Buffer requests) {
-        if (CHECKS) {
-            check(cmd);
-            Struct.validate(requests.address(), requests.remaining(), ExrScanlineRequest.SIZEOF, ExrScanlineRequest::validate);
-        }
-        return nexr_cmd_request_scanline_blocks(cmd, requests.remaining(), requests.address());
-    }
-
-    // --- [ exr_part_get_deep_sample_counts ] ---
-
-    /** {@code ExrResult exr_part_get_deep_sample_counts(ExrDecoder decoder, ExrPart part, int32_t y_start, int32_t num_lines, ExrDeepSampleInfo * out_info)} */
-    public static native int nexr_part_get_deep_sample_counts(long decoder, long part, int y_start, int num_lines, long out_info);
-
-    /** {@code ExrResult exr_part_get_deep_sample_counts(ExrDecoder decoder, ExrPart part, int32_t y_start, int32_t num_lines, ExrDeepSampleInfo * out_info)} */
-    @NativeType("ExrResult")
-    public static int exr_part_get_deep_sample_counts(@NativeType("ExrDecoder") long decoder, @NativeType("ExrPart") long part, @NativeType("int32_t") int y_start, @NativeType("int32_t") int num_lines, @NativeType("ExrDeepSampleInfo *") ExrDeepSampleInfo out_info) {
-        if (CHECKS) {
-            check(decoder);
-            check(part);
-        }
-        return nexr_part_get_deep_sample_counts(decoder, part, y_start, num_lines, out_info.address());
-    }
-
-    // --- [ exr_deep_sample_info_free ] ---
-
-    /** {@code void exr_deep_sample_info_free(ExrContext ctx, ExrDeepSampleInfo * info)} */
-    public static native void nexr_deep_sample_info_free(long ctx, long info);
-
-    /** {@code void exr_deep_sample_info_free(ExrContext ctx, ExrDeepSampleInfo * info)} */
-    public static void exr_deep_sample_info_free(@NativeType("ExrContext") long ctx, @NativeType("ExrDeepSampleInfo *") ExrDeepSampleInfo info) {
-        if (CHECKS) {
-            check(ctx);
-        }
-        nexr_deep_sample_info_free(ctx, info.address());
-    }
-
-    // --- [ exr_cmd_request_deep_scanlines ] ---
-
-    /** {@code ExrResult exr_cmd_request_deep_scanlines(ExrCommandBuffer cmd, ExrDeepScanlineRequest const * request)} */
-    public static native int nexr_cmd_request_deep_scanlines(long cmd, long request);
-
-    /** {@code ExrResult exr_cmd_request_deep_scanlines(ExrCommandBuffer cmd, ExrDeepScanlineRequest const * request)} */
-    @NativeType("ExrResult")
-    public static int exr_cmd_request_deep_scanlines(@NativeType("ExrCommandBuffer") long cmd, @NativeType("ExrDeepScanlineRequest const *") ExrDeepScanlineRequest request) {
-        if (CHECKS) {
-            check(cmd);
-            ExrDeepScanlineRequest.validate(request.address());
-        }
-        return nexr_cmd_request_deep_scanlines(cmd, request.address());
-    }
-
-    // --- [ exr_part_get_deep_tile_sample_counts ] ---
-
-    /** {@code ExrResult exr_part_get_deep_tile_sample_counts(ExrDecoder decoder, ExrPart part, int32_t tile_x, int32_t tile_y, int32_t level_x, int32_t level_y, ExrDeepTileSampleInfo * out_info)} */
-    public static native int nexr_part_get_deep_tile_sample_counts(long decoder, long part, int tile_x, int tile_y, int level_x, int level_y, long out_info);
-
-    /** {@code ExrResult exr_part_get_deep_tile_sample_counts(ExrDecoder decoder, ExrPart part, int32_t tile_x, int32_t tile_y, int32_t level_x, int32_t level_y, ExrDeepTileSampleInfo * out_info)} */
-    @NativeType("ExrResult")
-    public static int exr_part_get_deep_tile_sample_counts(@NativeType("ExrDecoder") long decoder, @NativeType("ExrPart") long part, @NativeType("int32_t") int tile_x, @NativeType("int32_t") int tile_y, @NativeType("int32_t") int level_x, @NativeType("int32_t") int level_y, @NativeType("ExrDeepTileSampleInfo *") ExrDeepTileSampleInfo out_info) {
-        if (CHECKS) {
-            check(decoder);
-            check(part);
-        }
-        return nexr_part_get_deep_tile_sample_counts(decoder, part, tile_x, tile_y, level_x, level_y, out_info.address());
-    }
-
-    // --- [ exr_deep_tile_sample_info_free ] ---
-
-    /** {@code void exr_deep_tile_sample_info_free(ExrContext ctx, ExrDeepTileSampleInfo * info)} */
-    public static native void nexr_deep_tile_sample_info_free(long ctx, long info);
-
-    /** {@code void exr_deep_tile_sample_info_free(ExrContext ctx, ExrDeepTileSampleInfo * info)} */
-    public static void exr_deep_tile_sample_info_free(@NativeType("ExrContext") long ctx, @NativeType("ExrDeepTileSampleInfo *") ExrDeepTileSampleInfo info) {
-        if (CHECKS) {
-            check(ctx);
-        }
-        nexr_deep_tile_sample_info_free(ctx, info.address());
-    }
-
-    // --- [ exr_cmd_request_deep_tiles ] ---
-
-    /** {@code ExrResult exr_cmd_request_deep_tiles(ExrCommandBuffer cmd, ExrDeepTileRequest const * request)} */
-    public static native int nexr_cmd_request_deep_tiles(long cmd, long request);
-
-    /** {@code ExrResult exr_cmd_request_deep_tiles(ExrCommandBuffer cmd, ExrDeepTileRequest const * request)} */
-    @NativeType("ExrResult")
-    public static int exr_cmd_request_deep_tiles(@NativeType("ExrCommandBuffer") long cmd, @NativeType("ExrDeepTileRequest const *") ExrDeepTileRequest request) {
-        if (CHECKS) {
-            check(cmd);
-            ExrDeepTileRequest.validate(request.address());
-        }
-        return nexr_cmd_request_deep_tiles(cmd, request.address());
-    }
-
-    // --- [ exr_cmd_request_deep_tile_batch ] ---
-
-    /** {@code ExrResult exr_cmd_request_deep_tile_batch(ExrCommandBuffer cmd, uint32_t count, ExrDeepTileRequest const * requests)} */
-    public static native int nexr_cmd_request_deep_tile_batch(long cmd, int count, long requests);
-
-    /** {@code ExrResult exr_cmd_request_deep_tile_batch(ExrCommandBuffer cmd, uint32_t count, ExrDeepTileRequest const * requests)} */
-    @NativeType("ExrResult")
-    public static int exr_cmd_request_deep_tile_batch(@NativeType("ExrCommandBuffer") long cmd, @NativeType("ExrDeepTileRequest const *") ExrDeepTileRequest.Buffer requests) {
-        if (CHECKS) {
-            check(cmd);
-            Struct.validate(requests.address(), requests.remaining(), ExrDeepTileRequest.SIZEOF, ExrDeepTileRequest::validate);
-        }
-        return nexr_cmd_request_deep_tile_batch(cmd, requests.remaining(), requests.address());
-    }
-
-    // --- [ exr_cmd_request_full_image ] ---
-
-    /** {@code ExrResult exr_cmd_request_full_image(ExrCommandBuffer cmd, ExrFullImageRequest const * request)} */
-    public static native int nexr_cmd_request_full_image(long cmd, long request);
-
-    /** {@code ExrResult exr_cmd_request_full_image(ExrCommandBuffer cmd, ExrFullImageRequest const * request)} */
-    @NativeType("ExrResult")
-    public static int exr_cmd_request_full_image(@NativeType("ExrCommandBuffer") long cmd, @NativeType("ExrFullImageRequest const *") ExrFullImageRequest request) {
-        if (CHECKS) {
-            check(cmd);
-            ExrFullImageRequest.validate(request.address());
-        }
-        return nexr_cmd_request_full_image(cmd, request.address());
-    }
-
-    // --- [ exr_submit ] ---
-
-    /** {@code ExrResult exr_submit(ExrDecoder decoder, ExrSubmitInfo const * submit_info)} */
-    public static native int nexr_submit(long decoder, long submit_info);
-
-    /** {@code ExrResult exr_submit(ExrDecoder decoder, ExrSubmitInfo const * submit_info)} */
-    @NativeType("ExrResult")
-    public static int exr_submit(@NativeType("ExrDecoder") long decoder, @NativeType("ExrSubmitInfo const *") ExrSubmitInfo submit_info) {
-        if (CHECKS) {
-            check(decoder);
-            ExrSubmitInfo.validate(submit_info.address());
-        }
-        return nexr_submit(decoder, submit_info.address());
-    }
-
-    // --- [ exr_fence_create ] ---
-
-    /** {@code ExrResult exr_fence_create(ExrContext ctx, ExrFenceCreateInfo const * create_info, ExrFence * out_fence)} */
-    public static native int nexr_fence_create(long ctx, long create_info, long out_fence);
-
-    /** {@code ExrResult exr_fence_create(ExrContext ctx, ExrFenceCreateInfo const * create_info, ExrFence * out_fence)} */
-    @NativeType("ExrResult")
-    public static int exr_fence_create(@NativeType("ExrContext") long ctx, @NativeType("ExrFenceCreateInfo const *") ExrFenceCreateInfo create_info, @NativeType("ExrFence *") PointerBuffer out_fence) {
-        if (CHECKS) {
-            check(ctx);
-            check(out_fence, 1);
-        }
-        return nexr_fence_create(ctx, create_info.address(), memAddress(out_fence));
-    }
-
-    // --- [ exr_fence_destroy ] ---
-
-    /** {@code void exr_fence_destroy(ExrFence fence)} */
-    public static native void nexr_fence_destroy(long fence);
-
-    /** {@code void exr_fence_destroy(ExrFence fence)} */
-    public static void exr_fence_destroy(@NativeType("ExrFence") long fence) {
-        if (CHECKS) {
-            check(fence);
-        }
-        nexr_fence_destroy(fence);
-    }
-
-    // --- [ exr_fence_wait ] ---
-
-    /** {@code ExrResult exr_fence_wait(ExrFence fence, uint64_t timeout_ns)} */
-    public static native int nexr_fence_wait(long fence, long timeout_ns);
-
-    /** {@code ExrResult exr_fence_wait(ExrFence fence, uint64_t timeout_ns)} */
-    @NativeType("ExrResult")
-    public static int exr_fence_wait(@NativeType("ExrFence") long fence, @NativeType("uint64_t") long timeout_ns) {
-        if (CHECKS) {
-            check(fence);
-        }
-        return nexr_fence_wait(fence, timeout_ns);
-    }
-
-    // --- [ exr_fence_get_status ] ---
-
-    /** {@code ExrResult exr_fence_get_status(ExrFence fence)} */
-    public static native int nexr_fence_get_status(long fence);
-
-    /** {@code ExrResult exr_fence_get_status(ExrFence fence)} */
-    @NativeType("ExrResult")
-    public static int exr_fence_get_status(@NativeType("ExrFence") long fence) {
-        if (CHECKS) {
-            check(fence);
-        }
-        return nexr_fence_get_status(fence);
-    }
-
-    // --- [ exr_fence_reset ] ---
-
-    /** {@code ExrResult exr_fence_reset(ExrFence fence)} */
-    public static native int nexr_fence_reset(long fence);
-
-    /** {@code ExrResult exr_fence_reset(ExrFence fence)} */
-    @NativeType("ExrResult")
-    public static int exr_fence_reset(@NativeType("ExrFence") long fence) {
-        if (CHECKS) {
-            check(fence);
-        }
-        return nexr_fence_reset(fence);
-    }
-
-    // --- [ exr_get_suspend_state ] ---
-
-    /** {@code ExrResult exr_get_suspend_state(ExrDecoder decoder, ExrSuspendState * out_state)} */
-    public static native int nexr_get_suspend_state(long decoder, long out_state);
-
-    /** {@code ExrResult exr_get_suspend_state(ExrDecoder decoder, ExrSuspendState * out_state)} */
-    @NativeType("ExrResult")
-    public static int exr_get_suspend_state(@NativeType("ExrDecoder") long decoder, @NativeType("ExrSuspendState *") PointerBuffer out_state) {
-        if (CHECKS) {
-            check(decoder);
-            check(out_state, 1);
-        }
-        return nexr_get_suspend_state(decoder, memAddress(out_state));
-    }
-
-    // --- [ exr_resume ] ---
-
-    /** {@code ExrResult exr_resume(ExrDecoder decoder, ExrSuspendState state)} */
-    public static native int nexr_resume(long decoder, long state);
-
-    /** {@code ExrResult exr_resume(ExrDecoder decoder, ExrSuspendState state)} */
-    @NativeType("ExrResult")
-    public static int exr_resume(@NativeType("ExrDecoder") long decoder, @NativeType("ExrSuspendState") long state) {
-        if (CHECKS) {
-            check(decoder);
-            check(state);
-        }
-        return nexr_resume(decoder, state);
-    }
-
-    // --- [ exr_suspend_state_destroy ] ---
-
-    /** {@code void exr_suspend_state_destroy(ExrSuspendState state)} */
-    public static native void nexr_suspend_state_destroy(long state);
-
-    /** {@code void exr_suspend_state_destroy(ExrSuspendState state)} */
-    public static void exr_suspend_state_destroy(@NativeType("ExrSuspendState") long state) {
-        if (CHECKS) {
-            check(state);
-        }
-        nexr_suspend_state_destroy(state);
-    }
-
-    // --- [ exr_decoder_set_progress_callback ] ---
-
-    /** {@code ExrResult exr_decoder_set_progress_callback(ExrDecoder decoder, ExrProgressCallback callback, void * userdata, int32_t interval_ms)} */
-    public static native int nexr_decoder_set_progress_callback(long decoder, long callback, long userdata, int interval_ms);
-
-    /** {@code ExrResult exr_decoder_set_progress_callback(ExrDecoder decoder, ExrProgressCallback callback, void * userdata, int32_t interval_ms)} */
-    @NativeType("ExrResult")
-    public static int exr_decoder_set_progress_callback(@NativeType("ExrDecoder") long decoder, @NativeType("ExrProgressCallback") ExrProgressCallbackI callback, @NativeType("void *") long userdata, @NativeType("int32_t") int interval_ms) {
-        if (CHECKS) {
-            check(decoder);
-        }
-        return nexr_decoder_set_progress_callback(decoder, callback.address(), userdata, interval_ms);
-    }
-
-    // --- [ exr_encoder_create ] ---
-
-    /** {@code ExrResult exr_encoder_create(ExrContext ctx, ExrEncoderCreateInfo const * create_info, ExrEncoder * out_encoder)} */
-    public static native int nexr_encoder_create(long ctx, long create_info, long out_encoder);
-
-    /** {@code ExrResult exr_encoder_create(ExrContext ctx, ExrEncoderCreateInfo const * create_info, ExrEncoder * out_encoder)} */
-    @NativeType("ExrResult")
-    public static int exr_encoder_create(@NativeType("ExrContext") long ctx, @NativeType("ExrEncoderCreateInfo const *") ExrEncoderCreateInfo create_info, @NativeType("ExrEncoder *") PointerBuffer out_encoder) {
-        if (CHECKS) {
-            check(ctx);
-            check(out_encoder, 1);
-            ExrEncoderCreateInfo.validate(create_info.address());
-        }
-        return nexr_encoder_create(ctx, create_info.address(), memAddress(out_encoder));
-    }
-
-    // --- [ exr_encoder_destroy ] ---
-
-    /** {@code void exr_encoder_destroy(ExrEncoder encoder)} */
-    public static native void nexr_encoder_destroy(long encoder);
-
-    /** {@code void exr_encoder_destroy(ExrEncoder encoder)} */
-    public static void exr_encoder_destroy(@NativeType("ExrEncoder") long encoder) {
-        if (CHECKS) {
-            check(encoder);
-        }
-        nexr_encoder_destroy(encoder);
-    }
-
-    // --- [ exr_write_image_create ] ---
-
-    /** {@code ExrResult exr_write_image_create(ExrEncoder encoder, ExrWriteImageCreateInfo const * create_info, ExrWriteImage * out_image)} */
-    public static native int nexr_write_image_create(long encoder, long create_info, long out_image);
-
-    /** {@code ExrResult exr_write_image_create(ExrEncoder encoder, ExrWriteImageCreateInfo const * create_info, ExrWriteImage * out_image)} */
-    @NativeType("ExrResult")
-    public static int exr_write_image_create(@NativeType("ExrEncoder") long encoder, @NativeType("ExrWriteImageCreateInfo const *") ExrWriteImageCreateInfo create_info, @NativeType("ExrWriteImage *") PointerBuffer out_image) {
-        if (CHECKS) {
-            check(encoder);
-            check(out_image, 1);
-            ExrWriteImageCreateInfo.validate(create_info.address());
-        }
-        return nexr_write_image_create(encoder, create_info.address(), memAddress(out_image));
-    }
-
-    // --- [ exr_write_image_destroy ] ---
-
-    /** {@code void exr_write_image_destroy(ExrWriteImage image)} */
-    public static native void nexr_write_image_destroy(long image);
-
-    /** {@code void exr_write_image_destroy(ExrWriteImage image)} */
-    public static void exr_write_image_destroy(@NativeType("ExrWriteImage") long image) {
-        if (CHECKS) {
-            check(image);
-        }
-        nexr_write_image_destroy(image);
-    }
-
-    // --- [ exr_write_image_set_attribute ] ---
-
-    /** {@code ExrResult exr_write_image_set_attribute(ExrWriteImage image, char const * name, char const * type, void const * value, uint32_t size)} */
-    public static native int nexr_write_image_set_attribute(long image, long name, long type, long value, int size);
-
-    /** {@code ExrResult exr_write_image_set_attribute(ExrWriteImage image, char const * name, char const * type, void const * value, uint32_t size)} */
-    @NativeType("ExrResult")
-    public static int exr_write_image_set_attribute(@NativeType("ExrWriteImage") long image, @NativeType("char const *") ByteBuffer name, @NativeType("char const *") ByteBuffer type, @NativeType("void const *") ByteBuffer value) {
-        if (CHECKS) {
-            check(image);
-            checkNT1(name);
-            checkNT1(type);
-        }
-        return nexr_write_image_set_attribute(image, memAddress(name), memAddress(type), memAddress(value), value.remaining());
-    }
-
-    /** {@code ExrResult exr_write_image_set_attribute(ExrWriteImage image, char const * name, char const * type, void const * value, uint32_t size)} */
-    @NativeType("ExrResult")
-    public static int exr_write_image_set_attribute(@NativeType("ExrWriteImage") long image, @NativeType("char const *") CharSequence name, @NativeType("char const *") CharSequence type, @NativeType("void const *") ByteBuffer value) {
-        if (CHECKS) {
-            check(image);
-        }
+    /** {@code int EXRGetStokesComponent(char const * channel_name)} */
+    public static int EXRGetStokesComponent(@NativeType("char const *") CharSequence channel_name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nASCII(name, true);
-            long nameEncoded = stack.getPointerAddress();
-            stack.nASCII(type, true);
-            long typeEncoded = stack.getPointerAddress();
-            return nexr_write_image_set_attribute(image, nameEncoded, typeEncoded, memAddress(value), value.remaining());
+            stack.nASCII(channel_name, true);
+            long channel_nameEncoded = stack.getPointerAddress();
+            return nEXRGetStokesComponent(channel_nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
     }
 
-    // --- [ exr_write_image_set_int_attribute ] ---
+    // --- [ EXRIsSpectralChannel ] ---
 
-    /** {@code ExrResult exr_write_image_set_int_attribute(ExrWriteImage image, char const * name, int32_t value)} */
-    public static native int nexr_write_image_set_int_attribute(long image, long name, int value);
+    /** {@code int EXRIsSpectralChannel(char const * channel_name)} */
+    public static native int nEXRIsSpectralChannel(long channel_name);
 
-    /** {@code ExrResult exr_write_image_set_int_attribute(ExrWriteImage image, char const * name, int32_t value)} */
-    @NativeType("ExrResult")
-    public static int exr_write_image_set_int_attribute(@NativeType("ExrWriteImage") long image, @NativeType("char const *") ByteBuffer name, @NativeType("int32_t") int value) {
+    /** {@code int EXRIsSpectralChannel(char const * channel_name)} */
+    public static int EXRIsSpectralChannel(@NativeType("char const *") ByteBuffer channel_name) {
         if (CHECKS) {
-            check(image);
-            checkNT1(name);
+            checkNT1(channel_name);
         }
-        return nexr_write_image_set_int_attribute(image, memAddress(name), value);
+        return nEXRIsSpectralChannel(memAddress(channel_name));
     }
 
-    /** {@code ExrResult exr_write_image_set_int_attribute(ExrWriteImage image, char const * name, int32_t value)} */
-    @NativeType("ExrResult")
-    public static int exr_write_image_set_int_attribute(@NativeType("ExrWriteImage") long image, @NativeType("char const *") CharSequence name, @NativeType("int32_t") int value) {
-        if (CHECKS) {
-            check(image);
-        }
+    /** {@code int EXRIsSpectralChannel(char const * channel_name)} */
+    public static int EXRIsSpectralChannel(@NativeType("char const *") CharSequence channel_name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nASCII(name, true);
-            long nameEncoded = stack.getPointerAddress();
-            return nexr_write_image_set_int_attribute(image, nameEncoded, value);
+            stack.nASCII(channel_name, true);
+            long channel_nameEncoded = stack.getPointerAddress();
+            return nEXRIsSpectralChannel(channel_nameEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
     }
 
-    // --- [ exr_write_image_set_float_attribute ] ---
+    // --- [ EXRGetWavelengths ] ---
 
-    /** {@code ExrResult exr_write_image_set_float_attribute(ExrWriteImage image, char const * name, float value)} */
-    public static native int nexr_write_image_set_float_attribute(long image, long name, float value);
+    /** {@code int EXRGetWavelengths(EXRHeader const * exr_header, float * wavelengths, int max_wavelengths)} */
+    public static native int nEXRGetWavelengths(long exr_header, long wavelengths, int max_wavelengths);
 
-    /** {@code ExrResult exr_write_image_set_float_attribute(ExrWriteImage image, char const * name, float value)} */
-    @NativeType("ExrResult")
-    public static int exr_write_image_set_float_attribute(@NativeType("ExrWriteImage") long image, @NativeType("char const *") ByteBuffer name, float value) {
+    /** {@code int EXRGetWavelengths(EXRHeader const * exr_header, float * wavelengths, int max_wavelengths)} */
+    public static int EXRGetWavelengths(@NativeType("EXRHeader const *") EXRHeader exr_header, @NativeType("float *") FloatBuffer wavelengths) {
         if (CHECKS) {
-            check(image);
-            checkNT1(name);
+            EXRHeader.validate(exr_header.address());
         }
-        return nexr_write_image_set_float_attribute(image, memAddress(name), value);
+        return nEXRGetWavelengths(exr_header.address(), memAddress(wavelengths), wavelengths.remaining());
     }
 
-    /** {@code ExrResult exr_write_image_set_float_attribute(ExrWriteImage image, char const * name, float value)} */
-    @NativeType("ExrResult")
-    public static int exr_write_image_set_float_attribute(@NativeType("ExrWriteImage") long image, @NativeType("char const *") CharSequence name, float value) {
+    // --- [ EXRSetSpectralAttributes ] ---
+
+    /** {@code int EXRSetSpectralAttributes(EXRHeader * exr_header, int spectrum_type, char const * units)} */
+    public static native int nEXRSetSpectralAttributes(long exr_header, int spectrum_type, long units);
+
+    /** {@code int EXRSetSpectralAttributes(EXRHeader * exr_header, int spectrum_type, char const * units)} */
+    public static int EXRSetSpectralAttributes(@NativeType("EXRHeader *") EXRHeader exr_header, int spectrum_type, @NativeType("char const *") ByteBuffer units) {
         if (CHECKS) {
-            check(image);
+            checkNT1(units);
         }
+        return nEXRSetSpectralAttributes(exr_header.address(), spectrum_type, memAddress(units));
+    }
+
+    /** {@code int EXRSetSpectralAttributes(EXRHeader * exr_header, int spectrum_type, char const * units)} */
+    public static int EXRSetSpectralAttributes(@NativeType("EXRHeader *") EXRHeader exr_header, int spectrum_type, @NativeType("char const *") CharSequence units) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nASCII(name, true);
-            long nameEncoded = stack.getPointerAddress();
-            return nexr_write_image_set_float_attribute(image, nameEncoded, value);
+            stack.nASCII(units, true);
+            long unitsEncoded = stack.getPointerAddress();
+            return nEXRSetSpectralAttributes(exr_header.address(), spectrum_type, unitsEncoded);
         } finally {
             stack.setPointer(stackPointer);
         }
     }
 
-    // --- [ exr_write_image_set_string_attribute ] ---
+    // --- [ EXRGetSpectralUnits ] ---
 
-    /** {@code ExrResult exr_write_image_set_string_attribute(ExrWriteImage image, char const * name, char const * value)} */
-    public static native int nexr_write_image_set_string_attribute(long image, long name, long value);
+    /** {@code char const * EXRGetSpectralUnits(EXRHeader const * exr_header)} */
+    public static native long nEXRGetSpectralUnits(long exr_header);
 
-    /** {@code ExrResult exr_write_image_set_string_attribute(ExrWriteImage image, char const * name, char const * value)} */
-    @NativeType("ExrResult")
-    public static int exr_write_image_set_string_attribute(@NativeType("ExrWriteImage") long image, @NativeType("char const *") ByteBuffer name, @NativeType("char const *") ByteBuffer value) {
-        if (CHECKS) {
-            check(image);
-            checkNT1(name);
-            checkNT1(value);
-        }
-        return nexr_write_image_set_string_attribute(image, memAddress(name), memAddress(value));
-    }
-
-    /** {@code ExrResult exr_write_image_set_string_attribute(ExrWriteImage image, char const * name, char const * value)} */
-    @NativeType("ExrResult")
-    public static int exr_write_image_set_string_attribute(@NativeType("ExrWriteImage") long image, @NativeType("char const *") CharSequence name, @NativeType("char const *") CharSequence value) {
-        if (CHECKS) {
-            check(image);
-        }
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            stack.nASCII(name, true);
-            long nameEncoded = stack.getPointerAddress();
-            stack.nASCII(value, true);
-            long valueEncoded = stack.getPointerAddress();
-            return nexr_write_image_set_string_attribute(image, nameEncoded, valueEncoded);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
-    }
-
-    // --- [ exr_cmd_write_tile ] ---
-
-    /** {@code ExrResult exr_cmd_write_tile(ExrCommandBuffer cmd, ExrTileWrite const * write)} */
-    public static native int nexr_cmd_write_tile(long cmd, long write);
-
-    /** {@code ExrResult exr_cmd_write_tile(ExrCommandBuffer cmd, ExrTileWrite const * write)} */
-    @NativeType("ExrResult")
-    public static int exr_cmd_write_tile(@NativeType("ExrCommandBuffer") long cmd, @NativeType("ExrTileWrite const *") ExrTileWrite write) {
-        if (CHECKS) {
-            check(cmd);
-            ExrTileWrite.validate(write.address());
-        }
-        return nexr_cmd_write_tile(cmd, write.address());
-    }
-
-    // --- [ exr_cmd_write_tiles ] ---
-
-    /** {@code ExrResult exr_cmd_write_tiles(ExrCommandBuffer cmd, uint32_t count, ExrTileWrite const * writes)} */
-    public static native int nexr_cmd_write_tiles(long cmd, int count, long writes);
-
-    /** {@code ExrResult exr_cmd_write_tiles(ExrCommandBuffer cmd, uint32_t count, ExrTileWrite const * writes)} */
-    @NativeType("ExrResult")
-    public static int exr_cmd_write_tiles(@NativeType("ExrCommandBuffer") long cmd, @NativeType("ExrTileWrite const *") ExrTileWrite.Buffer writes) {
-        if (CHECKS) {
-            check(cmd);
-            Struct.validate(writes.address(), writes.remaining(), ExrTileWrite.SIZEOF, ExrTileWrite::validate);
-        }
-        return nexr_cmd_write_tiles(cmd, writes.remaining(), writes.address());
-    }
-
-    // --- [ exr_cmd_write_scanlines ] ---
-
-    /** {@code ExrResult exr_cmd_write_scanlines(ExrCommandBuffer cmd, ExrScanlineWrite const * write)} */
-    public static native int nexr_cmd_write_scanlines(long cmd, long write);
-
-    /** {@code ExrResult exr_cmd_write_scanlines(ExrCommandBuffer cmd, ExrScanlineWrite const * write)} */
-    @NativeType("ExrResult")
-    public static int exr_cmd_write_scanlines(@NativeType("ExrCommandBuffer") long cmd, @NativeType("ExrScanlineWrite const *") ExrScanlineWrite write) {
-        if (CHECKS) {
-            check(cmd);
-            ExrScanlineWrite.validate(write.address());
-        }
-        return nexr_cmd_write_scanlines(cmd, write.address());
-    }
-
-    // --- [ exr_cmd_write_deep_scanlines ] ---
-
-    /** {@code ExrResult exr_cmd_write_deep_scanlines(ExrCommandBuffer cmd, ExrDeepScanlineWrite const * write)} */
-    public static native int nexr_cmd_write_deep_scanlines(long cmd, long write);
-
-    /** {@code ExrResult exr_cmd_write_deep_scanlines(ExrCommandBuffer cmd, ExrDeepScanlineWrite const * write)} */
-    @NativeType("ExrResult")
-    public static int exr_cmd_write_deep_scanlines(@NativeType("ExrCommandBuffer") long cmd, @NativeType("ExrDeepScanlineWrite const *") ExrDeepScanlineWrite write) {
-        if (CHECKS) {
-            check(cmd);
-            ExrDeepScanlineWrite.validate(write.address());
-        }
-        return nexr_cmd_write_deep_scanlines(cmd, write.address());
-    }
-
-    // --- [ exr_cmd_write_deep_tiles ] ---
-
-    /** {@code ExrResult exr_cmd_write_deep_tiles(ExrCommandBuffer cmd, ExrDeepTileWrite const * write)} */
-    public static native int nexr_cmd_write_deep_tiles(long cmd, long write);
-
-    /** {@code ExrResult exr_cmd_write_deep_tiles(ExrCommandBuffer cmd, ExrDeepTileWrite const * write)} */
-    @NativeType("ExrResult")
-    public static int exr_cmd_write_deep_tiles(@NativeType("ExrCommandBuffer") long cmd, @NativeType("ExrDeepTileWrite const *") ExrDeepTileWrite write) {
-        if (CHECKS) {
-            check(cmd);
-            ExrDeepTileWrite.validate(write.address());
-        }
-        return nexr_cmd_write_deep_tiles(cmd, write.address());
-    }
-
-    // --- [ exr_submit_write ] ---
-
-    /** {@code ExrResult exr_submit_write(ExrEncoder encoder, ExrSubmitInfo const * submit_info)} */
-    public static native int nexr_submit_write(long encoder, long submit_info);
-
-    /** {@code ExrResult exr_submit_write(ExrEncoder encoder, ExrSubmitInfo const * submit_info)} */
-    @NativeType("ExrResult")
-    public static int exr_submit_write(@NativeType("ExrEncoder") long encoder, @NativeType("ExrSubmitInfo const *") ExrSubmitInfo submit_info) {
-        if (CHECKS) {
-            check(encoder);
-            ExrSubmitInfo.validate(submit_info.address());
-        }
-        return nexr_submit_write(encoder, submit_info.address());
-    }
-
-    // --- [ exr_encoder_finalize ] ---
-
-    /** {@code ExrResult exr_encoder_finalize(ExrEncoder encoder)} */
-    public static native int nexr_encoder_finalize(long encoder);
-
-    /** {@code ExrResult exr_encoder_finalize(ExrEncoder encoder)} */
-    @NativeType("ExrResult")
-    public static int exr_encoder_finalize(@NativeType("ExrEncoder") long encoder) {
-        if (CHECKS) {
-            check(encoder);
-        }
-        return nexr_encoder_finalize(encoder);
-    }
-
-    // --- [ exr_decompress_chunk ] ---
-
-    /** {@code ExrResult exr_decompress_chunk(ExrContext ctx, ExrDecompressInfo const * info)} */
-    public static native int nexr_decompress_chunk(long ctx, long info);
-
-    /** {@code ExrResult exr_decompress_chunk(ExrContext ctx, ExrDecompressInfo const * info)} */
-    @NativeType("ExrResult")
-    public static int exr_decompress_chunk(@NativeType("ExrContext") long ctx, @NativeType("ExrDecompressInfo const *") ExrDecompressInfo info) {
-        if (CHECKS) {
-            check(ctx);
-            ExrDecompressInfo.validate(info.address());
-        }
-        return nexr_decompress_chunk(ctx, info.address());
-    }
-
-    // --- [ exr_compress_chunk ] ---
-
-    /** {@code ExrResult exr_compress_chunk(ExrContext ctx, ExrCompressInfo const * info)} */
-    public static native int nexr_compress_chunk(long ctx, long info);
-
-    /** {@code ExrResult exr_compress_chunk(ExrContext ctx, ExrCompressInfo const * info)} */
-    @NativeType("ExrResult")
-    public static int exr_compress_chunk(@NativeType("ExrContext") long ctx, @NativeType("ExrCompressInfo const *") ExrCompressInfo info) {
-        if (CHECKS) {
-            check(ctx);
-            ExrCompressInfo.validate(info.address());
-        }
-        return nexr_compress_chunk(ctx, info.address());
-    }
-
-    // --- [ exr_convert_half_to_float ] ---
-
-    /** {@code void exr_convert_half_to_float(uint16_t const * src, float * dst, size_t count)} */
-    public static native void nexr_convert_half_to_float(long src, long dst, long count);
-
-    /** {@code void exr_convert_half_to_float(uint16_t const * src, float * dst, size_t count)} */
-    public static void exr_convert_half_to_float(@NativeType("uint16_t const *") ShortBuffer src, @NativeType("float *") FloatBuffer dst) {
-        if (CHECKS) {
-            check(dst, src.remaining());
-        }
-        nexr_convert_half_to_float(memAddress(src), memAddress(dst), src.remaining());
-    }
-
-    // --- [ exr_convert_float_to_half ] ---
-
-    /** {@code void exr_convert_float_to_half(float const * src, uint16_t * dst, size_t count)} */
-    public static native void nexr_convert_float_to_half(long src, long dst, long count);
-
-    /** {@code void exr_convert_float_to_half(float const * src, uint16_t * dst, size_t count)} */
-    public static void exr_convert_float_to_half(@NativeType("float const *") FloatBuffer src, @NativeType("uint16_t *") ShortBuffer dst) {
-        if (CHECKS) {
-            check(dst, src.remaining());
-        }
-        nexr_convert_float_to_half(memAddress(src), memAddress(dst), src.remaining());
-    }
-
-    // --- [ exr_interleave_rgba ] ---
-
-    /** {@code void exr_interleave_rgba(float const * r, float const * g, float const * b, float const * a, float * rgba, size_t pixel_count)} */
-    public static native void nexr_interleave_rgba(long r, long g, long b, long a, long rgba, long pixel_count);
-
-    /** {@code void exr_interleave_rgba(float const * r, float const * g, float const * b, float const * a, float * rgba, size_t pixel_count)} */
-    public static void exr_interleave_rgba(@NativeType("float const *") FloatBuffer r, @NativeType("float const *") FloatBuffer g, @NativeType("float const *") FloatBuffer b, @NativeType("float const *") FloatBuffer a, @NativeType("float *") FloatBuffer rgba) {
-        int pixel_count = rgba.remaining() >> 2;
-        if (CHECKS) {
-            check(r, pixel_count);
-            check(g, pixel_count);
-            check(b, pixel_count);
-            check(a, pixel_count);
-        }
-        nexr_interleave_rgba(memAddress(r), memAddress(g), memAddress(b), memAddress(a), memAddress(rgba), pixel_count);
-    }
-
-    // --- [ exr_deinterleave_rgba ] ---
-
-    /** {@code void exr_deinterleave_rgba(float const * rgba, float * r, float * g, float * b, float * a, size_t pixel_count)} */
-    public static native void nexr_deinterleave_rgba(long rgba, long r, long g, long b, long a, long pixel_count);
-
-    /** {@code void exr_deinterleave_rgba(float const * rgba, float * r, float * g, float * b, float * a, size_t pixel_count)} */
-    public static void exr_deinterleave_rgba(@NativeType("float const *") FloatBuffer rgba, @NativeType("float *") FloatBuffer r, @NativeType("float *") FloatBuffer g, @NativeType("float *") FloatBuffer b, @NativeType("float *") FloatBuffer a) {
-        int pixel_count = rgba.remaining() >> 2;
-        if (CHECKS) {
-            check(r, pixel_count);
-            check(g, pixel_count);
-            check(b, pixel_count);
-            check(a, pixel_count);
-        }
-        nexr_deinterleave_rgba(memAddress(rgba), memAddress(r), memAddress(g), memAddress(b), memAddress(a), pixel_count);
-    }
-
-    // --- [ exr_get_simd_capabilities ] ---
-
-    /** {@code uint32_t exr_get_simd_capabilities(void)} */
-    @NativeType("uint32_t")
-    public static native int exr_get_simd_capabilities();
-
-    // --- [ exr_get_simd_info ] ---
-
-    /** {@code char * exr_get_simd_info(void)} */
-    public static native long nexr_get_simd_info();
-
-    /** {@code char * exr_get_simd_info(void)} */
-    @NativeType("char *")
-    public static @Nullable String exr_get_simd_info() {
-        long __result = nexr_get_simd_info();
-        return memASCIISafe(__result);
-    }
-
-    // --- [ exr_get_version ] ---
-
-    /** {@code void exr_get_version(int * major, int * minor, int * patch)} */
-    public static native void nexr_get_version(long major, long minor, long patch);
-
-    /** {@code void exr_get_version(int * major, int * minor, int * patch)} */
-    public static void exr_get_version(@NativeType("int *") IntBuffer major, @NativeType("int *") IntBuffer minor, @NativeType("int *") IntBuffer patch) {
-        if (CHECKS) {
-            check(major, 1);
-            check(minor, 1);
-            check(patch, 1);
-        }
-        nexr_get_version(memAddress(major), memAddress(minor), memAddress(patch));
-    }
-
-    // --- [ exr_get_version_string ] ---
-
-    /** {@code char const * exr_get_version_string(void)} */
-    public static native long nexr_get_version_string();
-
-    /** {@code char const * exr_get_version_string(void)} */
+    /** {@code char const * EXRGetSpectralUnits(EXRHeader const * exr_header)} */
     @NativeType("char const *")
-    public static @Nullable String exr_get_version_string() {
-        long __result = nexr_get_version_string();
+    public static @Nullable String EXRGetSpectralUnits(@NativeType("EXRHeader const *") EXRHeader exr_header) {
+        if (CHECKS) {
+            EXRHeader.validate(exr_header.address());
+        }
+        long __result = nEXRGetSpectralUnits(exr_header.address());
         return memASCIISafe(__result);
-    }
-
-    public static boolean EXR_SUCCEEDED(int result) {
-        return 0 <= result;
-    }
-
-    public static boolean EXR_FAILED(int result) {
-        return result < 0;
     }
 
 }

@@ -20,9 +20,6 @@ public final class HelloTinyEXR {
     }
 
     public static void main(String[] args) {
-        System.out.println("exr_get_version_string() = " + exr_get_version_string());
-        System.out.println("exr_get_simd_info() = " + exr_get_simd_info());
-
         String filename = args.length == 0 ? "https://github.com/syoyo/tinyexr/raw/release/asakusa.exr" : args[0];
 
         ByteBuffer memory;
@@ -32,112 +29,88 @@ public final class HelloTinyEXR {
             throw new RuntimeException(e);
         }
 
+        int result;
         try (MemoryStack stack = MemoryStack.stackPush()) {
-            PointerBuffer pp = stack.mallocPointer(1);
+            EXRHeader  header  = EXRHeader.malloc(stack);
+            EXRVersion version = EXRVersion.malloc(stack);
 
-            check(exr_context_create(ExrContextCreateInfo.calloc(stack).api_version(TINYEXR_C_API_VERSION), pp));
+            PointerBuffer err = stack.mallocPointer(1);
 
-            long ctx = pp.get(0);
-
-            System.out.println("ctx = " + ctx);
-
-            ExrDataSource source = ExrDataSource.calloc(stack);
-            check(exr_data_source_from_memory(memory, source));
-
-            System.out.println("source.total_size() = " + source.total_size());
-            System.out.println("source.flags() = " + source.flags());
-
-            check(exr_decoder_create(ctx, ExrDecoderCreateInfo.calloc(stack)
-                .source(source), pp));
-
-            long decoder = pp.get(0);
-
-            //exr_decoder_parse_header()
-            System.out.println("decoder = " + decoder);
-
-            check(exr_decoder_parse_header(decoder, pp));
-
-            long image = pp.get(0);
-            System.out.println("image = " + image);
-
-            ExrImageInfo info = ExrImageInfo.calloc(stack);
-            check(exr_image_get_info(image, info));
-
-            System.out.println("info.width() = " + info.width());
-            System.out.println("info.height() = " + info.height());
-            System.out.println("info.data_window() = " + info.data_window());
-            System.out.println("info.display_window() = " + info.display_window());
-            System.out.println("info.num_channels() = " + info.num_channels());
-            System.out.println("info.num_parts() = " + info.num_parts());
-            System.out.println("info.compression() = " + info.compression());
-            System.out.println("info.flags() = " + info.flags());
-            System.out.println("info.tile_size_x() = " + info.tile_size_x());
-            System.out.println("info.tile_size_y() = " + info.tile_size_y());
-            System.out.println("info.num_x_levels() = " + info.num_x_levels());
-            System.out.println("info.num_y_levels() = " + info.num_y_levels());
-            System.out.println("info.pixel_aspect_ratio() = " + info.pixel_aspect_ratio());
-            System.out.println("info.screen_window_center() = " + info.screen_window_center());
-            System.out.println("info.screen_window_width() = " + info.screen_window_width());
-
-            IntBuffer pi = stack.mallocInt(1);
-
-            check(exr_image_get_channel_count(image, pi));
-            int channelCount = pi.get(0);
-            System.out.println("channelCount = " + channelCount);
-
-            for (int c = 0; c < channelCount; c++) {
-                try (MemoryStack frame = stack.push()) {
-                    System.out.println("CHANNEL: " + c);
-                    ExrChannelInfo channelInfo = ExrChannelInfo.calloc(frame);
-                    check(exr_image_get_channel(image, c, channelInfo));
-
-                    System.out.println("channelInfo.name() = " + channelInfo.nameString());
-                    System.out.println("channelInfo.pixel_type() = " + channelInfo.pixel_type());
-                    System.out.println("channelInfo.x_sampling() = " + channelInfo.x_sampling());
-                    System.out.println("channelInfo.y_sampling() = " + channelInfo.y_sampling());
-                    System.out.println("channelInfo.p_linear() = " + channelInfo.p_linear());
-                }
+            result = ParseEXRVersionFromMemory(version, memory);
+            if (result < 0) {
+                throw new IllegalStateException("Failed to parse EXR image version: " + result);
             }
 
-            check(exr_image_get_part_count(image, pi));
-            int partCount = pi.get(0);
-            System.out.println("partCount = " + partCount);
+            System.out.println("Parsed EXR image version successfully.");
+            System.out.println("--------------------------------------");
 
-            for (int p = 0; p < partCount; p++) {
-                try (MemoryStack frame = stack.push()) {
-                    System.out.println("PART: " + p);
-                    check(exr_image_get_part(image, p, pp));
+            System.out.println("Version : " + version.version());
+            System.out.println("Tiled : " + version.tiled());
+            System.out.println("Long name : " + version.long_name());
+            System.out.println("Non-image : " + version.non_image());
+            System.out.println("Multipart : " + version.multipart());
 
-                    long part = pp.get(0);
+            InitEXRHeader(header);
+            result = ParseEXRHeaderFromMemory(header, version, memory, err);
+            check(result, err);
 
-                    ExrPartInfo partInfo = ExrPartInfo.calloc(frame);
-                    check(exr_part_get_info(part, partInfo));
+            System.out.println();
+            System.out.println("Parsed EXR image header successfully.");
+            System.out.println("-------------------------------------");
 
-                    System.out.println("partInfo.name() = " + partInfo.nameString());
-                    System.out.println("partInfo.part_type() = " + partInfo.part_type());
-                    System.out.println("partInfo.width() = " + partInfo.width());
-                    System.out.println("partInfo.height() = " + partInfo.height());
-                    System.out.println("partInfo.num_channels() = " + partInfo.num_channels());
-                    System.out.println("partInfo.compression() = " + partInfo.compression());
-                    System.out.println("partInfo.flags() = " + partInfo.flags());
+            System.out.println("Pixel aspect ratio : " + header.pixel_aspect_ratio());
+            System.out.println("Line order : " + header.line_order());
+            System.out.println("Data window : " + header.data_window().min_x() + ", " + header.data_window().min_y() + " -> " + header.data_window().max_x() + ", " + header.data_window().max_y());
+            System.out.println("Display window : " + header.display_window().min_x() + ", " + header.display_window().min_y() + " -> " + header.display_window().max_x() + ", " + header.display_window().max_y());
+            System.out.println("Screen window center : " + header.screen_window_center().get(0) + ", " + header.screen_window_center().get(1));
+            System.out.println("Screen window width : " + header.screen_window_width());
+            System.out.println("Chunk count : " + header.chunk_count());
+            System.out.println("Tiled : " + header.tiled());
+            System.out.println("Tile size x : " + header.tile_size_x());
+            System.out.println("Tile size y : " + header.tile_size_y());
+            System.out.println("Tile level mode : " + header.tile_level_mode());
+            System.out.println("Tile rounding mode : " + header.tile_rounding_mode());
+            System.out.println("Long name : " + header.long_name());
+            System.out.println("Non-image : " + header.non_image());
+            System.out.println("Multipart : " + header.multipart());
+            System.out.println("Header length : " + header.header_len());
+            System.out.println("Number of custom attributes : " + header.num_custom_attributes());
+            System.out.println("Custom attributes : " + header.custom_attributes());
+            System.out.println("Channels : " + header.channels().remaining());
+            System.out.println("Pixel types : " + header.pixel_types().remaining());
+            System.out.println("Number of channels : " + header.num_channels());
+            System.out.println("Compression type : " + header.compression_type());
+            System.out.println("Requested pixel types : " + header.requested_pixel_types().remaining());
+            System.out.println("Name : " + header.nameString());
 
-                    check(exr_part_get_chunk_count(part, pi));
-                    int chunkCount = pi.get(0);
-                    System.out.println("chunkCount = " + chunkCount);
+            EXRImage image = EXRImage.malloc(stack);
+            InitEXRImage(image);
 
-                    exr_part_destroy(part);
-                }
-            }
+            result = LoadEXRImageFromMemory(image, header, memory, err);
+            check(result, err);
 
-            exr_decoder_destroy(decoder);
+            System.out.println();
+            System.out.println("Parsed EXR image successfully.");
+            System.out.println("------------------------------");
 
-            exr_context_destroy(ctx);
+            System.out.println("Level x: " + image.level_x());
+            System.out.println("Level y: " + image.level_y());
+            System.out.println("Images: " + image.images().remaining());
+            System.out.println("Width: " + image.width());
+            System.out.println("Height: " + image.height());
+            System.out.println("Number of channels: " + image.num_channels());
+            System.out.println("Number of tiles: " + image.num_tiles());
+
+            FreeEXRImage(image);
+            FreeEXRHeader(header);
         }
     }
 
-    private static void check(int result) {
-        if (EXR_FAILED(result)) {
-            throw new IllegalStateException("EXR error: " + result);
+    private static void check(int result, PointerBuffer err) {
+        if (result < 0) {
+            String msg = err.getStringASCII(0);
+            nFreeEXRErrorMessage(err.get(0));
+            throw new IllegalStateException("EXR error: " + result + " | " + msg);
         }
     }
 

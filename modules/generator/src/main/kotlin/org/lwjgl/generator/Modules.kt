@@ -784,7 +784,7 @@ git branch -D @{-1}""")}"""}()}
 
         tinyexr is a small, single header-only library to load and save OpenEXR(.exr) images.
         """,
-        library = JNILibrary.create("LibTinyEXR", setupAllocator = true),
+        library = JNILibrary.create("LibTinyEXR", setupAllocator = true, cpp = true),
         arrayOverloads = false
     ),
     TINYFD(
