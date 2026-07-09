@@ -163,28 +163,32 @@ jobs:
   linux-cross:
     name: Linux Cross
     needs: cache-kotlinc
-    runs-on: ubuntu-22.04
+    runs-on: ${{matrix.RUNNER}}
     strategy:
       fail-fast: false
       matrix:
         ARCH: [arm32, arm64, ppc64le, riscv64]
         include:
-          # ----
           - ARCH: arm32
+            RUNNER: ubuntu-22.04
             CROSS_ARCH: armhf
             TRIPLET: arm-linux-gnueabihf
-          # ----
+            GCC: 12
           - ARCH: arm64
+            RUNNER: ubuntu-22.04
             CROSS_ARCH: arm64
             TRIPLET: aarch64-linux-gnu
-          # ----
+            GCC: 12
           - ARCH: ppc64le
+            RUNNER: ubuntu-22.04
             CROSS_ARCH: ppc64el
             TRIPLET: powerpc64le-linux-gnu
-          # ----
+            GCC: 12
           - ARCH: riscv64
+            RUNNER: ubuntu-24.04
             CROSS_ARCH: riscv64
             TRIPLET: riscv64-linux-gnu
+            GCC: 14
     env:
       LWJGL_BUILD_ARCH: ${{matrix.ARCH}}
     defaults:
@@ -205,18 +209,56 @@ jobs:
       - name: Install dependencies # make is necessary for -flto=auto
         run: |
           git config --global --add safe.directory $(pwd)
-          DEBIAN_FRONTEND=noninteractive sudo apt-get -yq update
-          DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install ant awscli curl zstd make \
-            gcc-12-${{matrix.TRIPLET}} \
-            g++-12-${{matrix.TRIPLET}} \
+          sudo apt-mark hold python3
+          sudo apt-get -yq update
+          sudo apt-get -yq install ant curl zstd make \
+            gcc-${{matrix.GCC}}-${{matrix.TRIPLET}} \
+            g++-${{matrix.GCC}}-${{matrix.TRIPLET}} \
             libc6-dev-${{matrix.CROSS_ARCH}}-cross
       - name: Prepare cross-compilation for ${{matrix.CROSS_ARCH}}
+        if: matrix.RUNNER == 'ubuntu-22.04'
         run: |
           sudo grep 'deb ' /etc/apt/sources.list | sudo tee /etc/apt/sources.list.d/ports.list
           sudo sed -i 's/^deb /deb [arch=amd64] /' /etc/apt/sources.list
           sudo sed -i 's#^deb [^ ]\+#deb [arch=${{matrix.CROSS_ARCH}}] https://ports.ubuntu.com/ubuntu-ports/#' /etc/apt/sources.list.d/ports.list
           sudo dpkg --add-architecture ${{matrix.CROSS_ARCH}}
-          sudo apt-get update || true
+          sudo apt-get update
+      - name: Prepare cross-compilation for ${{matrix.CROSS_ARCH}}
+        if: matrix.RUNNER == 'ubuntu-24.04'
+        run: |
+          native="$(dpkg --print-architecture)"
+          . /etc/os-release
+          suite="${VERSION_CODENAME}"
+          keyring="/usr/share/keyrings/ubuntu-archive-keyring.gpg"
+          components="main restricted universe multiverse"
+
+          sudo tee /etc/apt/sources.list.d/ubuntu.sources >/dev/null <<EOF
+          Types: deb
+          URIs: http://archive.ubuntu.com/ubuntu/
+          Suites: ${suite} ${suite}-updates ${suite}-backports
+          Components: ${components}
+          Architectures: ${native}
+          Signed-By: ${keyring}
+          
+          Types: deb
+          URIs: http://security.ubuntu.com/ubuntu/
+          Suites: ${suite}-security
+          Components: ${components}
+          Architectures: ${native}
+          Signed-By: ${keyring}
+          EOF
+
+          sudo tee /etc/apt/sources.list.d/ci-ubuntu-ports.sources >/dev/null <<EOF
+          Types: deb
+          URIs: https://ports.ubuntu.com/ubuntu-ports/
+          Suites: ${suite} ${suite}-updates ${suite}-backports ${suite}-security
+          Components: ${components}
+          Architectures: ${{matrix.CROSS_ARCH}}
+          Signed-By: ${keyring}
+          EOF
+
+          sudo dpkg --add-architecture ${{matrix.CROSS_ARCH}}
+          sudo apt-get update
       - name: Install cross-compilation dependencies
         run: |
           DEBIAN_FRONTEND=noninteractive sudo apt-get -yq install \
@@ -224,7 +266,8 @@ jobs:
             libatk-bridge2.0-dev:${{matrix.CROSS_ARCH}} \
             libgdk-pixbuf2.0-dev:${{matrix.CROSS_ARCH}} \
             libglu-dev:${{matrix.CROSS_ARCH}} \
-            libgl1-mesa-glx:${{matrix.CROSS_ARCH}} \
+            libgl1:${{matrix.CROSS_ARCH}} \
+            libglx-mesa0:${{matrix.CROSS_ARCH}} \
             libx11-dev:${{matrix.CROSS_ARCH}} \
             libxt-dev:${{matrix.CROSS_ARCH}} \
             libdbus-1-dev:${{matrix.CROSS_ARCH}}
@@ -242,7 +285,7 @@ jobs:
       - name: Build Java
         run: ant -emacs compile
       - name: Build native
-        run: ant -emacs compile-native -Dgcc.version=12 -Dgcc.version.print=true -Dgcc.libpath.opengl=/usr/lib/${{matrix.TRIPLET}}/mesa
+        run: ant -emacs compile-native -Dgcc.version=${{matrix.GCC}} -Dgcc.version.print=true -Dgcc.libpath.opengl=/usr/lib/${{matrix.TRIPLET}}/mesa
 
   freebsd-cross:
     name: FreeBSD Cross
