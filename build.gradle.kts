@@ -312,7 +312,7 @@ enum class Module(
         *Platforms.ALL
     );
 
-    private fun directory(buildDir: String) = "$buildDir/$artifact"
+    private fun directory(buildDir: String) = "./$buildDir/$artifact"
 
     private fun path() = "${directory("bin/MAVEN")}/$artifact"
 
@@ -322,9 +322,9 @@ enum class Module(
 
     fun artifact(classifier: String? = null) =
         if (classifier === null)
-            File("${path()}.jar")
+            File("${path()}.jar").absoluteFile
         else
-            File("${path()}-$classifier.jar")
+            File("${path()}-$classifier.jar").absoluteFile
 
 }
 
