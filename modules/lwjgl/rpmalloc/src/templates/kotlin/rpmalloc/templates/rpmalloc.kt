@@ -7,17 +7,30 @@ package rpmalloc.templates
 import org.lwjgl.generator.*
 import rpmalloc.*
 
-val rpmalloc = "RPmalloc".nativeClass(Module.RPMALLOC, prefix = "RP", prefixConstant = "RP") {
+val rpmalloc = "RPmalloc".nativeClass(Module.RPMALLOC, prefix = "RP", prefixConstant = "RPMALLOC_") {
     nativeDirective("""DISABLE_WARNINGS()
 //#define ENABLE_STATISTICS 1
-#define RPMALLOC_CONFIGURABLE 1
 #define RPMALLOC_FIRST_CLASS_HEAPS 1
+//#define RPMALLOC_HEAP_STATISTICS 1
 #include "rpmalloc.c"
 ENABLE_WARNINGS()""")
 
+    StringConstant("VERSION".."2.0.0")
+
     IntConstant(
-        "MALLOC_NO_PRESERVE".."1",
-        "MALLOC_GROW_OR_FAIL".."2"
+        "VERSION_MAJOR".."2",
+        "VERSION_MINOR".."0",
+        "VERSION_PATCH".."0",
+        "VERSION_NUMBER".."RPMALLOC_VERSION_MAJOR * 10000 + RPMALLOC_VERSION_MINOR * 100 + RPMALLOC_VERSION_PATCH"
+    )
+
+    IntConstant(
+        "MAX_ALIGNMENT".."256 * 1024"
+    )
+
+    IntConstant(
+        "NO_PRESERVE".."1",
+        "GROW_OR_FAIL".."2"
     )
 
     arrayOf(
@@ -30,22 +43,24 @@ ENABLE_WARNINGS()""")
         Code(nativeCall = "${t}return (jlong)(uintptr_t)&rp$it;")..internal..opaque_p("${it}_address", void())
     }
 
-    intb("malloc_initialize", void())
+    intb(
+        "malloc_initialize",
+
+        nullable..rpmalloc_interface_t.p("memory_interface")
+    )
 
     intb(
         "malloc_initialize_config",
 
-        nullable..rpmalloc_config_t.const.p("config")
+        nullable..rpmalloc_interface_t.p("memory_interface"),
+        nullable..rpmalloc_config_t.p("config")
     )
 
     Nonnull..rpmalloc_config_t.const.p("malloc_config", void())
 
     void("malloc_finalize", void())
     void("malloc_thread_initialize", void())
-    void(
-        "malloc_thread_finalize",
-        intb("release_caches")
-    )
+    void("malloc_thread_finalize", void())
     void("malloc_thread_collect", void())
     intb("malloc_is_thread_initialized", void())
 
@@ -67,10 +82,10 @@ ENABLE_WARNINGS()""")
         AutoSizeResult..size_t("size")
     )
 
-    void(
-        "free",
+    void.p(
+        "zalloc",
 
-        MultiTypeAll..Unsafe..nullable..void.p("ptr")
+        AutoSizeResult..size_t("size")
     )
 
     void.p(
@@ -105,6 +120,13 @@ ENABLE_WARNINGS()""")
     )
 
     void.p(
+        "aligned_zalloc",
+
+        size_t("alignment"),
+        AutoSizeResult..size_t("size")
+    )
+
+    void.p(
         "aligned_calloc",
 
         size_t("alignment"),
@@ -125,6 +147,12 @@ ENABLE_WARNINGS()""")
         Check(1)..void.p.p("memptr"),
         size_t("alignment"),
         size_t("size")
+    )
+
+    void(
+        "free",
+
+        MultiTypeAll..Unsafe..nullable..void.p("ptr")
     )
 
     size_t(
@@ -154,6 +182,14 @@ ENABLE_WARNINGS()""")
 
     void.p(
         "malloc_heap_aligned_alloc",
+
+        rpmalloc_heap_t.p("heap"),
+        size_t("alignment"),
+        AutoSizeResult..size_t("size")
+    )
+
+    void.p(
+        "malloc_heap_aligned_zalloc",
 
         rpmalloc_heap_t.p("heap"),
         size_t("alignment"),
@@ -209,6 +245,12 @@ ENABLE_WARNINGS()""")
         rpmalloc_heap_t.p("heap")
     )
 
+    rpmalloc_heap_statistics_t(
+        "malloc_heap_statistics",
+
+        rpmalloc_heap_t.p("heap")
+    )
+
     void(
         "malloc_heap_thread_set_current",
 
@@ -223,10 +265,6 @@ ENABLE_WARNINGS()""")
 
     customMethod("""
     public static final class Allocator implements MemoryAllocator {
-        public Allocator() {
-            rpmalloc_initialize();
-        }
-
         @Override public long getMalloc()                              { return rpmalloc_address(); }
         @Override public long getCalloc()                              { return rpcalloc_address(); }
         @Override public long getRealloc()                             { return rprealloc_address(); }

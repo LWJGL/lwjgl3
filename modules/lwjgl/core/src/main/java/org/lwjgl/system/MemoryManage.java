@@ -33,15 +33,20 @@ final class MemoryManage {
         if (!"system".equals(allocator)) {
             List<String> allocatorClasses = new ArrayList<>();
 
-            if (allocator == null || "mimalloc".equals(allocator)) {
+            if (allocator == null) {
                 allocatorClasses.add("org.lwjgl.system.mimalloc.mimalloc$Allocator");
-            }
-            if (allocator == null || "jemalloc".equals(allocator)) {
-                allocatorClasses.add("org.lwjgl.system.jemalloc.JEmalloc$Allocator");
-            } else if ("rpmalloc".equals(allocator)) {
                 allocatorClasses.add("org.lwjgl.system.rpmalloc.RPmalloc$Allocator");
+                allocatorClasses.add("org.lwjgl.system.jemalloc.JEmalloc$Allocator");
             } else {
-                allocatorClasses.add(allocator.toString());
+                if ("mimalloc".equals(allocator)) {
+                    allocatorClasses.add("org.lwjgl.system.mimalloc.mimalloc$Allocator");
+                } else if ("rpmalloc".equals(allocator)) {
+                    allocatorClasses.add("org.lwjgl.system.rpmalloc.RPmalloc$Allocator");
+                } else if ("jemalloc".equals(allocator)) {
+                    allocatorClasses.add("org.lwjgl.system.jemalloc.JEmalloc$Allocator");
+                } else {
+                    allocatorClasses.add(allocator.toString());
+                }
             }
 
             for (String allocatorClass : allocatorClasses) {

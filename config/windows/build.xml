@@ -314,6 +314,9 @@ EXPORTS
 
         <!-- rpmalloc -->
         <build module="rpmalloc" simple="true" if:true="${binding.rpmalloc}">
+            <compileargs>
+                <arg line="/std:c11 /experimental:c11atomics"/>
+            </compileargs>
             <linkargs>
                 <arg value="Advapi32.lib"/>
             </linkargs>

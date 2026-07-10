@@ -6,8 +6,8 @@
 #include "common_tools.h"
 DISABLE_WARNINGS()
 //#define ENABLE_STATISTICS 1
-#define RPMALLOC_CONFIGURABLE 1
 #define RPMALLOC_FIRST_CLASS_HEAPS 1
+//#define RPMALLOC_HEAP_STATISTICS 1
 #include "rpmalloc.c"
 ENABLE_WARNINGS()
 
@@ -38,15 +38,17 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_rpaligned_1alloc
     return (jlong)(uintptr_t)&rpaligned_alloc;
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc_1initialize(JNIEnv *__env, jclass clazz) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc_1initialize(JNIEnv *__env, jclass clazz, jlong memory_interfaceAddress) {
+    rpmalloc_interface_t *memory_interface = (rpmalloc_interface_t *)(uintptr_t)memory_interfaceAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)rpmalloc_initialize();
+    return (jint)rpmalloc_initialize(memory_interface);
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc_1initialize_1config(JNIEnv *__env, jclass clazz, jlong configAddress) {
-    rpmalloc_config_t const *config = (rpmalloc_config_t const *)(uintptr_t)configAddress;
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc_1initialize_1config(JNIEnv *__env, jclass clazz, jlong memory_interfaceAddress, jlong configAddress) {
+    rpmalloc_interface_t *memory_interface = (rpmalloc_interface_t *)(uintptr_t)memory_interfaceAddress;
+    rpmalloc_config_t *config = (rpmalloc_config_t *)(uintptr_t)configAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)rpmalloc_initialize_config(config);
+    return (jint)rpmalloc_initialize_config(memory_interface, config);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc_1config(JNIEnv *__env, jclass clazz) {
@@ -64,9 +66,9 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_rpmalloc_1thread_
     rpmalloc_thread_initialize();
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc_1thread_1finalize(JNIEnv *__env, jclass clazz, jint release_caches) {
+JNIEXPORT void JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_rpmalloc_1thread_1finalize(JNIEnv *__env, jclass clazz) {
     UNUSED_PARAMS(__env, clazz)
-    rpmalloc_thread_finalize(release_caches);
+    rpmalloc_thread_finalize();
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_rpmalloc_1thread_1collect(JNIEnv *__env, jclass clazz) {
@@ -96,10 +98,9 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc(JNIEnv
     return (jlong)(uintptr_t)rpmalloc((size_t)size);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpfree(JNIEnv *__env, jclass clazz, jlong ptrAddress) {
-    void *ptr = (void *)(uintptr_t)ptrAddress;
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpzalloc(JNIEnv *__env, jclass clazz, jlong size) {
     UNUSED_PARAMS(__env, clazz)
-    rpfree(ptr);
+    return (jlong)(uintptr_t)rpzalloc((size_t)size);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpcalloc(JNIEnv *__env, jclass clazz, jlong num, jlong size) {
@@ -124,6 +125,11 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpaligned_1allo
     return (jlong)(uintptr_t)rpaligned_alloc((size_t)alignment, (size_t)size);
 }
 
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpaligned_1zalloc(JNIEnv *__env, jclass clazz, jlong alignment, jlong size) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)rpaligned_zalloc((size_t)alignment, (size_t)size);
+}
+
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpaligned_1calloc(JNIEnv *__env, jclass clazz, jlong alignment, jlong num, jlong size) {
     UNUSED_PARAMS(__env, clazz)
     return (jlong)(uintptr_t)rpaligned_calloc((size_t)alignment, (size_t)num, (size_t)size);
@@ -138,6 +144,12 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpposix_1memalig
     void **memptr = (void **)(uintptr_t)memptrAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jint)rpposix_memalign(memptr, (size_t)alignment, (size_t)size);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpfree(JNIEnv *__env, jclass clazz, jlong ptrAddress) {
+    void *ptr = (void *)(uintptr_t)ptrAddress;
+    UNUSED_PARAMS(__env, clazz)
+    rpfree(ptr);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc_1usable_1size(JNIEnv *__env, jclass clazz, jlong ptrAddress) {
@@ -167,6 +179,12 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc_1heap_
     rpmalloc_heap_t *heap = (rpmalloc_heap_t *)(uintptr_t)heapAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jlong)(uintptr_t)rpmalloc_heap_aligned_alloc(heap, (size_t)alignment, (size_t)size);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc_1heap_1aligned_1zalloc(JNIEnv *__env, jclass clazz, jlong heapAddress, jlong alignment, jlong size) {
+    rpmalloc_heap_t *heap = (rpmalloc_heap_t *)(uintptr_t)heapAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)rpmalloc_heap_aligned_zalloc(heap, (size_t)alignment, (size_t)size);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc_1heap_1calloc(JNIEnv *__env, jclass clazz, jlong heapAddress, jlong num, jlong size) {
@@ -206,6 +224,12 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc_1heap_1
     rpmalloc_heap_t *heap = (rpmalloc_heap_t *)(uintptr_t)heapAddress;
     UNUSED_PARAMS(__env, clazz)
     rpmalloc_heap_free_all(heap);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_nrpmalloc_1heap_1statistics(JNIEnv *__env, jclass clazz, jlong heapAddress, jlong __result) {
+    rpmalloc_heap_t *heap = (rpmalloc_heap_t *)(uintptr_t)heapAddress;
+    UNUSED_PARAMS(__env, clazz)
+    *((struct rpmalloc_heap_statistics_t*)(uintptr_t)__result) = rpmalloc_heap_statistics(heap);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_rpmalloc_RPmalloc_rpmalloc_1heap_1thread_1set_1current(JNIEnv *__env, jclass clazz, jlong heapAddress) {

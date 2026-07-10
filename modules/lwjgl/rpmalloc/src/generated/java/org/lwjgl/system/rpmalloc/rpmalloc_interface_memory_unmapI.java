@@ -15,15 +15,15 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 
 /** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
-@NativeType("void (*) (void *, size_t, size_t, int)")
-public interface RPMemoryUnmapCallbackI extends CallbackI {
+@NativeType("void (*) (void *, size_t, size_t)")
+public interface rpmalloc_interface_memory_unmapI extends CallbackI {
 
     Callback.Descriptor DESCRIPTOR = new Callback.Descriptor(
-        RPMemoryUnmapCallbackI.class,
+        rpmalloc_interface_memory_unmapI.class,
         MethodHandles.lookup(),
         apiCreateCIF(
             ffi_type_void,
-            ffi_type_pointer, ffi_type_pointer, ffi_type_pointer, ffi_type_uint32
+            ffi_type_pointer, ffi_type_pointer, ffi_type_pointer
         )
     );
 
@@ -35,12 +35,11 @@ public interface RPMemoryUnmapCallbackI extends CallbackI {
         invoke(
             memGetAddress(memGetAddress(args)),
             memGetAddress(memGetAddress(args + POINTER_SIZE)),
-            memGetAddress(memGetAddress(args + 2 * POINTER_SIZE)),
-            memGetInt(memGetAddress(args + 3 * POINTER_SIZE)) != 0
+            memGetAddress(memGetAddress(args + 2 * POINTER_SIZE))
         );
     }
 
-    /** {@code void (*) (void * address, size_t size, size_t offset, int release)} */
-    void invoke(@NativeType("void *") long address, @NativeType("size_t") long size, @NativeType("size_t") long offset, @NativeType("int") boolean release);
+    /** {@code void (*) (void * address, size_t offset, size_t mapped_size)} */
+    void invoke(@NativeType("void *") long address, @NativeType("size_t") long offset, @NativeType("size_t") long mapped_size);
 
 }

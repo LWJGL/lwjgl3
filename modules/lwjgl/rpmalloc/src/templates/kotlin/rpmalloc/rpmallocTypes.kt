@@ -8,92 +8,105 @@ import org.lwjgl.generator.*
 
 val rpmalloc_heap_t = "rpmalloc_heap_t".opaque
 
-val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "rpmalloc_config_t", skipBuffer = true) {
+val rpmalloc_interface_t = struct(Module.RPMALLOC, "rpmalloc_interface_t", nativeName = "rpmalloc_interface_t", skipBuffer = true) {
     nullable..Module.RPMALLOC.callback {
         opaque_p(
-            "RPMemoryMapCallback",
+            "rpmalloc_interface_memory_map",
 
             size_t("size"),
-            Check(1)..size_t.p("offset")
+            size_t("alignment"),
+            Check(1)..size_t.p("offset"),
+            Check(1)..size_t.p("mapped_size")
         ) {}
     }("memory_map")
     nullable..Module.RPMALLOC.callback {
-        void(
-            "RPMemoryUnmapCallback",
+        int(
+            "rpmalloc_interface_memory_commit",
 
-            //void* address, size_t size, size_t offset, int release
-            opaque_p("address"),
-            size_t("size"),
+            void.p("address"),
+            AutoSize("address")..size_t("size")
+        ) {}
+    }("memory_commit")
+    nullable..Module.RPMALLOC.callback {
+        int(
+            "rpmalloc_interface_memory_decommit",
+
+            void.p("address"),
+            AutoSize("address")..size_t("size")
+        ) {}
+    }("memory_decommit")
+    nullable..Module.RPMALLOC.callback {
+        void(
+            "rpmalloc_interface_memory_unmap",
+
+            void.p("address"),
             size_t("offset"),
-            intb("release")
+            AutoSize("address")..size_t("mapped_size")
         ) {}
     }("memory_unmap")
     nullable..Module.RPMALLOC.callback {
-        void(
-            "RPErrorCallback",
-
-            charASCII.const.p("message")
-        ) {}
-    }("error_callback")
-    nullable..Module.RPMALLOC.callback {
         int(
-            "RPMapFailCallback",
+            "rpmalloc_interface_map_fail_callback",
 
             size_t("size")
         ) {}
     }("map_fail_callback")
-	size_t("page_size")
-    size_t("span_size")
-    size_t("span_map_count")
+    nullable..Module.RPMALLOC.callback {
+        void(
+            "rpmalloc_interface_error_callback",
+
+            charASCII.const.p("message")
+        ) {}
+    }("error_callback")
+}
+
+val rpmalloc_config_t = struct(Module.RPMALLOC, "rpmalloc_config_t", nativeName = "rpmalloc_config_t", skipBuffer = true) {
+ 	size_t("page_size")
 	intb("enable_huge_pages")
+    intb("enable_thp")
+    intb("disable_decommit")
     nullable..charASCII.const.p("page_name")
     nullable..charASCII.const.p("huge_page_name")
+    intb("unmap_on_finalize")
+    intb("disable_thp")
 }
 
-val rpmalloc_global_statistics_t = struct(
-    Module.RPMALLOC,
-    "RPmallocGlobalStatistics",
-    nativeName = "rpmalloc_global_statistics_t",
-    mutable = false
-) {
+val rpmalloc_global_statistics_t = struct(Module.RPMALLOC, "rpmalloc_global_statistics_t", mutable = false) {
     size_t("mapped")
 	size_t("mapped_peak")
-    size_t("cached")
+	size_t("committed")
+	size_t("decommitted")
+	size_t("active")
+	size_t("active_peak")
 	size_t("huge_alloc")
 	size_t("huge_alloc_peak")
-    size_t("mapped_total")
-    size_t("unmapped_total")
+	size_t("heap_count")
 }
 
-val rpmalloc_thread_statistics_t = struct(
-    Module.RPMALLOC,
-    "RPmallocThreadStatistics",
-    nativeName = "rpmalloc_thread_statistics_t",
-    mutable = false
-) {
+val rpmalloc_thread_statistics_t = struct(Module.RPMALLOC, "rpmalloc_thread_statistics_t", mutable = false) {
     size_t("sizecache")
 	size_t("spancache")
 	size_t("thread_to_global")
 	size_t("global_to_thread")
 	struct {
 		size_t("current")
-		size_t("peak")
-		size_t("to_global")
-		size_t("from_global")
-		size_t("to_cache")
-		size_t("from_cache")
-		size_t("to_reserved")
-		size_t("from_reserved")
 		size_t("map_calls")
-	}("span_use")[64]
+	}("span_use")[5]
 	struct {
 		size_t("alloc_current")
 		size_t("alloc_peak")
 		size_t("alloc_total")
 		size_t("free_total")
-		size_t("spans_to_cache")
-		size_t("spans_from_cache")
-		size_t("spans_from_reserved")
-		size_t("map_calls")
 	}("size_use")[128]
+}
+
+val rpmalloc_heap_statistics_t = struct(
+    Module.RPMALLOC,
+    "rpmalloc_heap_statistics_t",
+    nativeName = "struct rpmalloc_heap_statistics_t",
+    mutable = false
+) {
+    size_t("allocated_size")
+    size_t("committed_size")
+    size_t("mapped_size")
 }

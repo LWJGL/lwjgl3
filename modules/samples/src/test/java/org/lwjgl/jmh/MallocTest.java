@@ -24,10 +24,6 @@ import static org.lwjgl.system.rpmalloc.RPmalloc.*;
 @State(Scope.Thread)
 public class MallocTest {
 
-    static {
-        rpmalloc_initialize();
-    }
-
     @Param({"8", "32", "128", "1024"})
     public int size;
 
@@ -40,7 +36,6 @@ public class MallocTest {
 
     @Setup(Level.Trial)
     public void threadLocalSetup() {
-        rpmalloc_thread_initialize();
         theap = mi_theap_get_default();
         stack = stackGet();
     }

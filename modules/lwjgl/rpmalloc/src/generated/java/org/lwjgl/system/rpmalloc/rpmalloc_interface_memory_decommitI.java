@@ -15,15 +15,15 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 
 /** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
-@NativeType("void (*) (char const *)")
-public interface RPErrorCallbackI extends CallbackI {
+@NativeType("int (*) (void *, size_t)")
+public interface rpmalloc_interface_memory_decommitI extends CallbackI {
 
     Callback.Descriptor DESCRIPTOR = new Callback.Descriptor(
-        RPErrorCallbackI.class,
+        rpmalloc_interface_memory_decommitI.class,
         MethodHandles.lookup(),
         apiCreateCIF(
-            ffi_type_void,
-            ffi_type_pointer
+            ffi_type_sint32,
+            ffi_type_pointer, ffi_type_pointer
         )
     );
 
@@ -32,12 +32,14 @@ public interface RPErrorCallbackI extends CallbackI {
 
     @Override
     default void callback(long ret, long args) {
-        invoke(
-            memGetAddress(memGetAddress(args))
+        int __result = invoke(
+            memGetAddress(memGetAddress(args)),
+            memGetAddress(memGetAddress(args + POINTER_SIZE))
         );
+        apiClosureRet(ret, __result);
     }
 
-    /** {@code void (*) (char const * message)} */
-    void invoke(@NativeType("char const *") long message);
+    /** {@code int (*) (void * address, size_t size)} */
+    int invoke(@NativeType("void *") long address, @NativeType("size_t") long size);
 
 }

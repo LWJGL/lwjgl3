@@ -20,6 +20,16 @@ public class RPmalloc {
 
     static { LibRPmalloc.initialize(); }
 
+    public static final String RPMALLOC_VERSION = "2.0.0";
+
+    public static final int
+        RPMALLOC_VERSION_MAJOR  = 2,
+        RPMALLOC_VERSION_MINOR  = 0,
+        RPMALLOC_VERSION_PATCH  = 0,
+        RPMALLOC_VERSION_NUMBER = RPMALLOC_VERSION_MAJOR * 10000 + RPMALLOC_VERSION_MINOR * 100 + RPMALLOC_VERSION_PATCH;
+
+    public static final int RPMALLOC_MAX_ALIGNMENT = 256 * 1024;
+
     public static final int
         RPMALLOC_NO_PRESERVE  = 1,
         RPMALLOC_GROW_OR_FAIL = 2;
@@ -60,24 +70,24 @@ public class RPmalloc {
 
     // --- [ rpmalloc_initialize ] ---
 
-    /** {@code int rpmalloc_initialize(void)} */
-    public static native int nrpmalloc_initialize();
+    /** {@code int rpmalloc_initialize(rpmalloc_interface_t * memory_interface)} */
+    public static native int nrpmalloc_initialize(long memory_interface);
 
-    /** {@code int rpmalloc_initialize(void)} */
+    /** {@code int rpmalloc_initialize(rpmalloc_interface_t * memory_interface)} */
     @NativeType("int")
-    public static boolean rpmalloc_initialize() {
-        return nrpmalloc_initialize() != 0;
+    public static boolean rpmalloc_initialize(@NativeType("rpmalloc_interface_t *") @Nullable rpmalloc_interface_t memory_interface) {
+        return nrpmalloc_initialize(memAddressSafe(memory_interface)) != 0;
     }
 
     // --- [ rpmalloc_initialize_config ] ---
 
-    /** {@code int rpmalloc_initialize_config(rpmalloc_config_t const * config)} */
-    public static native int nrpmalloc_initialize_config(long config);
+    /** {@code int rpmalloc_initialize_config(rpmalloc_interface_t * memory_interface, rpmalloc_config_t * config)} */
+    public static native int nrpmalloc_initialize_config(long memory_interface, long config);
 
-    /** {@code int rpmalloc_initialize_config(rpmalloc_config_t const * config)} */
+    /** {@code int rpmalloc_initialize_config(rpmalloc_interface_t * memory_interface, rpmalloc_config_t * config)} */
     @NativeType("int")
-    public static boolean rpmalloc_initialize_config(@NativeType("rpmalloc_config_t const *") @Nullable RPMallocConfig config) {
-        return nrpmalloc_initialize_config(memAddressSafe(config)) != 0;
+    public static boolean rpmalloc_initialize_config(@NativeType("rpmalloc_interface_t *") @Nullable rpmalloc_interface_t memory_interface, @NativeType("rpmalloc_config_t *") @Nullable rpmalloc_config_t config) {
+        return nrpmalloc_initialize_config(memAddressSafe(memory_interface), memAddressSafe(config)) != 0;
     }
 
     // --- [ rpmalloc_config ] ---
@@ -87,9 +97,9 @@ public class RPmalloc {
 
     /** {@code rpmalloc_config_t const * rpmalloc_config(void)} */
     @NativeType("rpmalloc_config_t const *")
-    public static RPMallocConfig rpmalloc_config() {
+    public static rpmalloc_config_t rpmalloc_config() {
         long __result = nrpmalloc_config();
-        return RPMallocConfig.create(__result);
+        return rpmalloc_config_t.create(__result);
     }
 
     // --- [ rpmalloc_finalize ] ---
@@ -104,13 +114,8 @@ public class RPmalloc {
 
     // --- [ rpmalloc_thread_finalize ] ---
 
-    /** {@code void rpmalloc_thread_finalize(int release_caches)} */
-    public static native void nrpmalloc_thread_finalize(int release_caches);
-
-    /** {@code void rpmalloc_thread_finalize(int release_caches)} */
-    public static void rpmalloc_thread_finalize(@NativeType("int") boolean release_caches) {
-        nrpmalloc_thread_finalize(release_caches ? 1 : 0);
-    }
+    /** {@code void rpmalloc_thread_finalize(void)} */
+    public static native void rpmalloc_thread_finalize();
 
     // --- [ rpmalloc_thread_collect ] ---
 
@@ -134,7 +139,7 @@ public class RPmalloc {
     public static native void nrpmalloc_thread_statistics(long stats);
 
     /** {@code void rpmalloc_thread_statistics(rpmalloc_thread_statistics_t * stats)} */
-    public static void rpmalloc_thread_statistics(@NativeType("rpmalloc_thread_statistics_t *") RPmallocThreadStatistics stats) {
+    public static void rpmalloc_thread_statistics(@NativeType("rpmalloc_thread_statistics_t *") rpmalloc_thread_statistics_t stats) {
         nrpmalloc_thread_statistics(stats.address());
     }
 
@@ -144,7 +149,7 @@ public class RPmalloc {
     public static native void nrpmalloc_global_statistics(long stats);
 
     /** {@code void rpmalloc_global_statistics(rpmalloc_global_statistics_t * stats)} */
-    public static void rpmalloc_global_statistics(@NativeType("rpmalloc_global_statistics_t *") RPmallocGlobalStatistics stats) {
+    public static void rpmalloc_global_statistics(@NativeType("rpmalloc_global_statistics_t *") rpmalloc_global_statistics_t stats) {
         nrpmalloc_global_statistics(stats.address());
     }
 
@@ -160,44 +165,16 @@ public class RPmalloc {
         return memByteBufferSafe(__result, (int)size);
     }
 
-    // --- [ rpfree ] ---
+    // --- [ rpzalloc ] ---
 
-    /** {@code void rpfree(void * ptr)} */
-    public static native void nrpfree(long ptr);
+    /** {@code void * rpzalloc(size_t size)} */
+    public static native long nrpzalloc(long size);
 
-    /** {@code void rpfree(void * ptr)} */
-    public static void rpfree(@NativeType("void *") @Nullable ByteBuffer ptr) {
-        nrpfree(memAddressSafe(ptr));
-    }
-
-    /** {@code void rpfree(void * ptr)} */
-    public static void rpfree(@NativeType("void *") @Nullable ShortBuffer ptr) {
-        nrpfree(memAddressSafe(ptr));
-    }
-
-    /** {@code void rpfree(void * ptr)} */
-    public static void rpfree(@NativeType("void *") @Nullable IntBuffer ptr) {
-        nrpfree(memAddressSafe(ptr));
-    }
-
-    /** {@code void rpfree(void * ptr)} */
-    public static void rpfree(@NativeType("void *") @Nullable LongBuffer ptr) {
-        nrpfree(memAddressSafe(ptr));
-    }
-
-    /** {@code void rpfree(void * ptr)} */
-    public static void rpfree(@NativeType("void *") @Nullable FloatBuffer ptr) {
-        nrpfree(memAddressSafe(ptr));
-    }
-
-    /** {@code void rpfree(void * ptr)} */
-    public static void rpfree(@NativeType("void *") @Nullable DoubleBuffer ptr) {
-        nrpfree(memAddressSafe(ptr));
-    }
-
-    /** {@code void rpfree(void * ptr)} */
-    public static void rpfree(@NativeType("void *") @Nullable PointerBuffer ptr) {
-        nrpfree(memAddressSafe(ptr));
+    /** {@code void * rpzalloc(size_t size)} */
+    @NativeType("void *")
+    public static @Nullable ByteBuffer rpzalloc(@NativeType("size_t") long size) {
+        long __result = nrpzalloc(size);
+        return memByteBufferSafe(__result, (int)size);
     }
 
     // --- [ rpcalloc ] ---
@@ -248,6 +225,18 @@ public class RPmalloc {
         return memByteBufferSafe(__result, (int)size);
     }
 
+    // --- [ rpaligned_zalloc ] ---
+
+    /** {@code void * rpaligned_zalloc(size_t alignment, size_t size)} */
+    public static native long nrpaligned_zalloc(long alignment, long size);
+
+    /** {@code void * rpaligned_zalloc(size_t alignment, size_t size)} */
+    @NativeType("void *")
+    public static @Nullable ByteBuffer rpaligned_zalloc(@NativeType("size_t") long alignment, @NativeType("size_t") long size) {
+        long __result = nrpaligned_zalloc(alignment, size);
+        return memByteBufferSafe(__result, (int)size);
+    }
+
     // --- [ rpaligned_calloc ] ---
 
     /** {@code void * rpaligned_calloc(size_t alignment, size_t num, size_t size)} */
@@ -283,6 +272,46 @@ public class RPmalloc {
             check(memptr, 1);
         }
         return nrpposix_memalign(memAddress(memptr), alignment, size);
+    }
+
+    // --- [ rpfree ] ---
+
+    /** {@code void rpfree(void * ptr)} */
+    public static native void nrpfree(long ptr);
+
+    /** {@code void rpfree(void * ptr)} */
+    public static void rpfree(@NativeType("void *") @Nullable ByteBuffer ptr) {
+        nrpfree(memAddressSafe(ptr));
+    }
+
+    /** {@code void rpfree(void * ptr)} */
+    public static void rpfree(@NativeType("void *") @Nullable ShortBuffer ptr) {
+        nrpfree(memAddressSafe(ptr));
+    }
+
+    /** {@code void rpfree(void * ptr)} */
+    public static void rpfree(@NativeType("void *") @Nullable IntBuffer ptr) {
+        nrpfree(memAddressSafe(ptr));
+    }
+
+    /** {@code void rpfree(void * ptr)} */
+    public static void rpfree(@NativeType("void *") @Nullable LongBuffer ptr) {
+        nrpfree(memAddressSafe(ptr));
+    }
+
+    /** {@code void rpfree(void * ptr)} */
+    public static void rpfree(@NativeType("void *") @Nullable FloatBuffer ptr) {
+        nrpfree(memAddressSafe(ptr));
+    }
+
+    /** {@code void rpfree(void * ptr)} */
+    public static void rpfree(@NativeType("void *") @Nullable DoubleBuffer ptr) {
+        nrpfree(memAddressSafe(ptr));
+    }
+
+    /** {@code void rpfree(void * ptr)} */
+    public static void rpfree(@NativeType("void *") @Nullable PointerBuffer ptr) {
+        nrpfree(memAddressSafe(ptr));
     }
 
     // --- [ rpmalloc_usable_size ] ---
@@ -370,6 +399,21 @@ public class RPmalloc {
             check(heap);
         }
         long __result = nrpmalloc_heap_aligned_alloc(heap, alignment, size);
+        return memByteBufferSafe(__result, (int)size);
+    }
+
+    // --- [ rpmalloc_heap_aligned_zalloc ] ---
+
+    /** {@code void * rpmalloc_heap_aligned_zalloc(rpmalloc_heap_t * heap, size_t alignment, size_t size)} */
+    public static native long nrpmalloc_heap_aligned_zalloc(long heap, long alignment, long size);
+
+    /** {@code void * rpmalloc_heap_aligned_zalloc(rpmalloc_heap_t * heap, size_t alignment, size_t size)} */
+    @NativeType("void *")
+    public static @Nullable ByteBuffer rpmalloc_heap_aligned_zalloc(@NativeType("rpmalloc_heap_t *") long heap, @NativeType("size_t") long alignment, @NativeType("size_t") long size) {
+        if (CHECKS) {
+            check(heap);
+        }
+        long __result = nrpmalloc_heap_aligned_zalloc(heap, alignment, size);
         return memByteBufferSafe(__result, (int)size);
     }
 
@@ -507,6 +551,21 @@ public class RPmalloc {
         nrpmalloc_heap_free_all(heap);
     }
 
+    // --- [ rpmalloc_heap_statistics ] ---
+
+    /** {@code struct rpmalloc_heap_statistics_t rpmalloc_heap_statistics(rpmalloc_heap_t * heap)} */
+    public static native void nrpmalloc_heap_statistics(long heap, long __result);
+
+    /** {@code struct rpmalloc_heap_statistics_t rpmalloc_heap_statistics(rpmalloc_heap_t * heap)} */
+    @NativeType("struct rpmalloc_heap_statistics_t")
+    public static rpmalloc_heap_statistics_t rpmalloc_heap_statistics(@NativeType("rpmalloc_heap_t *") long heap, @NativeType("struct rpmalloc_heap_statistics_t") rpmalloc_heap_statistics_t __result) {
+        if (CHECKS) {
+            check(heap);
+        }
+        nrpmalloc_heap_statistics(heap, __result.address());
+        return __result;
+    }
+
     // --- [ rpmalloc_heap_thread_set_current ] ---
 
     /** {@code void rpmalloc_heap_thread_set_current(rpmalloc_heap_t * heap)} */
@@ -560,10 +619,6 @@ public class RPmalloc {
     }
 
     public static final class Allocator implements MemoryAllocator {
-        public Allocator() {
-            rpmalloc_initialize();
-        }
-
         @Override public long getMalloc()                              { return rpmalloc_address(); }
         @Override public long getCalloc()                              { return rpcalloc_address(); }
         @Override public long getRealloc()                             { return rprealloc_address(); }

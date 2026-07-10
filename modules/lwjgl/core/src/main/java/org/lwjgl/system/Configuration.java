@@ -177,10 +177,8 @@ public class Configuration<T> {
      * <p>Supported values:</p>
      * <ul>
      * <li><em>jemalloc</em> - The allocator provided by the jemalloc library.</li>
-     * <li><em>rpmalloc</em> - The allocator provided by the rpmalloc library.<br>
-     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><p>LWJGL calls {@code rpmalloc_initialize} once, when the allocator is
-     * created. It never calls {@code rpmalloc_finalize}. The user is responsible for calling {@code rpmalloc_thread_initialize} and
-     * {@code rpmalloc_thread_finalize} when appropriate.</p></div></li>
+     * <li><em>mimalloc</em> - The allocator provided by the mimalloc library.</li>
+     * <li><em>rpmalloc</em> - The allocator provided by the rpmalloc library.</li>
      * <li><em>system</em> - The default system memory allocator</li>
      * <li><em>&lt;classpath&gt;</em> - A class that implements the {@link MemoryAllocator MemoryAllocator} interface. It will be instantiated using reflection.</li>
      * </ul>
