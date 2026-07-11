@@ -60,8 +60,8 @@ public class MemoryUtilTest {
             throw new SkipException("This test may not run with checks disabled.");
         }
 
-        expectThrows(OutOfMemoryError.class, () -> nmemAllocChecked(-1L));
-        expectThrows(OutOfMemoryError.class, () -> nmemCallocChecked(1, -1L));
+        expectThrows(OutOfMemoryError.class, () -> nmemAllocChecked(Pointer.BITS64 ? -1L : Integer.MAX_VALUE));
+        expectThrows(OutOfMemoryError.class, () -> nmemCallocChecked(1, Pointer.BITS64 ? -1L : Integer.MAX_VALUE));
     }
 
     public void testMemSet() {

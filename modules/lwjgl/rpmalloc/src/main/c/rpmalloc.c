@@ -71,6 +71,9 @@
 #endif
 #include <windows.h>
 #include <fibersapi.h>
+#if ENABLE_VALIDATE_ARGS
+#include <intsafe.h>
+#endif
 static DWORD fls_key;
 //! VirtualAlloc2 (Windows 10+), resolved dynamically; null on older systems
 typedef PVOID(WINAPI* virtualalloc2_fn)(HANDLE, PVOID, SIZE_T, ULONG, ULONG, MEM_EXTENDED_PARAMETER*, ULONG);
@@ -230,7 +233,12 @@ madvise(caddr_t, size_t, int);
 #define LARGE_PAGE_SIZE (1 << LARGE_PAGE_SIZE_SHIFT)
 #define LARGE_PAGE_MASK (~((uintptr_t)LARGE_PAGE_SIZE - 1))
 
+#if ARCH_32BIT
+#define SPAN_SIZE (64 * 1024 * 1024)
+#else
 #define SPAN_SIZE (256 * 1024 * 1024)
+#endif
+
 #define SPAN_MASK (~((uintptr_t)(SPAN_SIZE - 1)))
 
 #if ENABLE_VALIDATE_ARGS
@@ -381,7 +389,7 @@ rpmalloc_clz(uintptr_t x) {
 #if defined(_M_ARM64) || defined(_M_ARM)
 	return (size_t)_CountLeadingZeros((unsigned long)x);  // __lzcnt32 is x86-only
 #else
-	return (size_t)__lzcnt32(x);
+	return (size_t)__lzcnt(x);
 #endif
 #else
 	return (size_t)__builtin_clzl(x);
@@ -2629,6 +2637,9 @@ rpmalloc_linker_reference(void) {
 //////
 
 static void
+#if PLATFORM_WINDOWS
+WINAPI
+#endif
 rpmalloc_thread_destructor(void* value) {
 	// If this is called on main thread assume it means rpmalloc_finalize
 	// has not been called and shutdown is forced (through _exit) or unclean
