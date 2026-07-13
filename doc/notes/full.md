@@ -1,3 +1,67 @@
+### 3.4.2
+
+_Released 2026 Jul 13_
+
+#### Bindings
+
+- Added [mimalloc](https://microsoft.github.io/mimalloc/) bindings.
+- Assimp: Updated to 6.0.5 (up from 6.0.3)
+- bgfx: Updated to API version 149 (up from 136)
+- freetype: Updated to 2.14.3 (up from 2.14.1)
+- harfbuzz: Updated to 14.2.1 (up from 12.3.2)
+  * Added experimental `harfbuzz-raster` & `harfbuzz-vector` libraries.
+  * Added `harfbuzz-gpu` library.
+- hwloc: Updated to 2.14.0 (up from 2.12.2)
+- jemalloc: Updated to 5.3.1 (up from 5.3.0)
+- KTX: Updated to 5.0.0-rc1 (up from 4.4.2)
+- libffi: Updated to 3.7.1 (up from 3.5.2)
+- LLVM/Clang: Updated to 22.1.5 (up from 21.1.2)
+- lmdb: Updated to 0.9.35 (up from 0.9.33)
+- liburing: Updated to 2.15 (up from 2.13)
+- meshoptimizer: Updated to 1.2.0 (up from 1.0.0)
+- Nuklear: Updated to 4.13.3 (up from 4.13.0)
+- OpenAL Soft: Updated to 1.25.2 (up from 1.25.1)
+- OpenCL: Added support for OpenCL 3.1.
+- OpenGL: Added missing APPLE extensions. (#1105)
+- OpenXR: Updated to 1.1.61 (up from 1.1.54)
+- RenderDoc: Updated to 1.7.0 (up from 1.6.0)
+- rpmalloc: Updated to 2.0.0 (up from 1.4.5)
+- SDL: Updated to 3.4.12 (up from pre-release 3.4.1)
+- Shaderc: Updated to 2026.2 (up from 2026.2)
+  * Updated SPIRV Tools to 2026.2.rc1 (up from 2026.1)
+- stb
+  * Updated `stb_image_resize` to 2.18 (up from 2.17)
+- vma: Updated to 3.4.0 (up from 3.3.0)
+- Vulkan: Updated to 1.4.356 (up from 1.4.342)
+
+#### Fixes
+
+- Core: Struct parameters passed by value to LWJGL 3 callbacks are now supported with the FFM backend. (#1107)
+- Core: Upcall allocations with the FFM backend are now tracked when the debug allocator is enabled.
+- Freetype: Fixed `FT_LOAD_TARGET_*` constant names. (#1119)
+- HarfBuzz: Fixed AAT constant and function names. (#1123)
+- SDL: Hid `SDL_DisplayMode::internal`. (#1110)
+
+#### Improvements
+
+- Core: `MemoryUtil` backends are now configurable at runtime. (#1111)
+  * See `Configuration::MEMORY_BACKEND` for details.
+  * The new default on JDK 25+ is FFM-based downcalls/upcalls and Unsafe-based memory access.
+- Core: The default memory allocator is now mimalloc.
+  * If available on the class/module-path.
+  * Fallbacks: rpmalloc -> jemalloc -> system allocator
+- Core: New features in the runtime bindings generator.
+  * Now supports C `long` types in downcalls/upcalls with the `@FFMCLong` annotation on Java `long` carriers.
+  * Now supports nested anonymous structs and unions.
+- Core: The `SharedLibraryLoader` now prints exceptions when it is able to extract a library, but not load it. (#1120)
+  * Requires `Configuration::DEBUG_LOADER` to be enabled.
+- FreeBSD: LWJGL now requires FreeBSD 14.4 or later. (up from 13.5)
+
+#### Breaking changes
+
+- Core: The `MemorySegment` access methods have been moved from `MemoryUtil` to `MemoryUtilFFM`.
+- Unsafe accessor methods for private struct members are now package private.
+
 ### 3.4.1
 
 _Released 2026 Feb 03_
