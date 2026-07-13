@@ -69,10 +69,10 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
 
     private final int size;
 
-    private int pointer;
+    private long pointer;
 
-    private   int[] frames;
-    protected int   frameIndex;
+    private   long[] frames;
+    protected int    frameIndex;
 
     /**
      * Creates a new {@code MemoryStack} backed by the specified memory region.
@@ -88,9 +88,9 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         this.container = container;
 
         this.size = size;
-        this.pointer = size;
+        this.pointer = address + size;
 
-        this.frames = new int[DEFAULT_STACK_FRAMES];
+        this.frames = new long[DEFAULT_STACK_FRAMES];
     }
 
     /**
@@ -279,7 +279,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
 
     /** Returns the memory address at the current stack pointer. */
     public long getPointerAddress() {
-        return address + (pointer & 0xFFFF_FFFFL);
+        return pointer;
     }
 
     /**
@@ -291,7 +291,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
      * <p>Effectively, this methods returns how many more bytes may be allocated on the stack.</p>
      */
     public int getPointer() {
-        return pointer;
+        return (int)(pointer - address);
     }
 
     /**
@@ -305,7 +305,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
             checkPointer(pointer);
         }
 
-        this.pointer = pointer;
+        this.pointer = address + pointer;
     }
 
     private void checkPointer(int pointer) {
@@ -341,17 +341,14 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
      * @return the memory address on the stack for the requested allocation
      */
     public long nmalloc(int alignment, int size) {
-        long base = this.address;
-
         // Align address to the specified alignment
-        long address = (base + (pointer - size)) & -Integer.toUnsignedLong(alignment);
+        long address = (pointer - size) & -Integer.toUnsignedLong(alignment);
 
-        int newPointer = (int)(address - base);
-        if (CHECKS && newPointer < 0) {
+        if (CHECKS && address < this.address) {
             throw new OutOfMemoryError("Out of stack space.");
         }
 
-        pointer = newPointer;
+        pointer = address;
         return address;
     }
 

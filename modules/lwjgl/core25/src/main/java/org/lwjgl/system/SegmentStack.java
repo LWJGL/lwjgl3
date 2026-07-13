@@ -22,7 +22,7 @@ import static org.lwjgl.system.StackWalkUtil.*;
  * @see Configuration#STACK_SIZE
  * @see Configuration#DEBUG_STACK
  */
-public class SegmentStack implements StackAllocator<SegmentStack>, AutoCloseable {
+public class SegmentStack extends Pointer.Default implements StackAllocator<SegmentStack>, AutoCloseable {
 
     private static final long DEFAULT_STACK_SIZE   = Configuration.STACK_SIZE.get(64) * 1024L;
     private static final int  DEFAULT_STACK_FRAMES = 8;
@@ -52,10 +52,12 @@ public class SegmentStack implements StackAllocator<SegmentStack>, AutoCloseable
      * @param container the backing memory buffer, may be null
      */
     protected SegmentStack(MemorySegment container) {
+        super(container.address());
+
         this.container = container;
 
         this.size = container.byteSize();
-        this.pointer = container.byteSize();
+        this.pointer = address + size;
 
         this.frames = new long[DEFAULT_STACK_FRAMES];
     }
@@ -209,7 +211,7 @@ public class SegmentStack implements StackAllocator<SegmentStack>, AutoCloseable
      * <p>The stack grows "downwards", so the bottom of the stack is at {@code address + size}, while the top is at {@code address}.</p>
      */
     public long getAddress() {
-        return container.address();
+        return address;
     }
 
     /**
@@ -218,7 +220,7 @@ public class SegmentStack implements StackAllocator<SegmentStack>, AutoCloseable
      * <p>This is the maximum number of bytes that may be allocated on the stack.</p>
      */
     public long getSize() {
-        return container.byteSize();
+        return size;
     }
 
     /**
@@ -232,7 +234,7 @@ public class SegmentStack implements StackAllocator<SegmentStack>, AutoCloseable
 
     /** Returns the memory address at the current stack pointer. */
     public long getPointerAddress() {
-        return container.address() + pointer;
+        return pointer;
     }
 
     /**
@@ -244,7 +246,7 @@ public class SegmentStack implements StackAllocator<SegmentStack>, AutoCloseable
      * <p>Effectively, this methods returns how many more bytes may be allocated on the stack.</p>
      */
     public long getPointer() {
-        return pointer;
+        return pointer - address;
     }
 
     /**
@@ -258,7 +260,7 @@ public class SegmentStack implements StackAllocator<SegmentStack>, AutoCloseable
             checkPointer(pointer);
         }
 
-        this.pointer = pointer;
+        this.pointer = address + pointer;
     }
 
     private void checkPointer(long pointer) {
@@ -286,17 +288,15 @@ public class SegmentStack implements StackAllocator<SegmentStack>, AutoCloseable
             checkAlignment(byteAlignment);
         }
 
-        var base = container.address();
+        // Align address to the specified alignment
+        var address = (pointer - byteSize) & -byteAlignment;
 
-        var address = (base + (pointer - byteSize)) & -byteAlignment;
-
-        var newPointer = address - base;
-        if (CHECKS && newPointer < 0) {
+        if (CHECKS && address < this.address) {
             throw new OutOfMemoryError("Out of stack space.");
         }
 
-        pointer = newPointer;
-        return container.asSlice(newPointer, byteSize, 1L);
+        pointer = address;
+        return container.asSlice(address - this.address, byteSize, 1L);
     }
 
     // allocate(MemoryLayout) and allocate(MemoryLayout, long) below have the same implementation
