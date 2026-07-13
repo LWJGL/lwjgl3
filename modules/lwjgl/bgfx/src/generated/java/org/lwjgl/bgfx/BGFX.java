@@ -183,6 +183,7 @@ public class BGFX {
             encoder_set_compute_dynamic_vertex_buffer            = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_compute_dynamic_vertex_buffer"),
             encoder_set_compute_indirect_buffer                  = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_compute_indirect_buffer"),
             encoder_set_image                                    = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_image"),
+            encoder_set_image_view                               = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_image_view"),
             encoder_dispatch                                     = apiGetFunctionAddress(BGFX, "bgfx_encoder_dispatch"),
             encoder_dispatch_indirect                            = apiGetFunctionAddress(BGFX, "bgfx_encoder_dispatch_indirect"),
             encoder_discard                                      = apiGetFunctionAddress(BGFX, "bgfx_encoder_discard"),
@@ -225,6 +226,7 @@ public class BGFX {
             set_compute_dynamic_vertex_buffer                    = apiGetFunctionAddress(BGFX, "bgfx_set_compute_dynamic_vertex_buffer"),
             set_compute_indirect_buffer                          = apiGetFunctionAddress(BGFX, "bgfx_set_compute_indirect_buffer"),
             set_image                                            = apiGetFunctionAddress(BGFX, "bgfx_set_image"),
+            set_image_view                                       = apiGetFunctionAddress(BGFX, "bgfx_set_image_view"),
             dispatch                                             = apiGetFunctionAddress(BGFX, "bgfx_dispatch"),
             dispatch_indirect                                    = apiGetFunctionAddress(BGFX, "bgfx_dispatch_indirect"),
             discard                                              = apiGetFunctionAddress(BGFX, "bgfx_discard"),
@@ -237,7 +239,7 @@ public class BGFX {
         return BGFX;
     }
 
-    public static final int BGFX_API_VERSION = 147;
+    public static final int BGFX_API_VERSION = 149;
 
     public static final short BGFX_INVALID_HANDLE = (short)0xFFFF;
 
@@ -351,8 +353,7 @@ public class BGFX {
         BGFX_STENCIL_OP_PASS_Z_DECR    = 0x50000000,
         BGFX_STENCIL_OP_PASS_Z_DECRSAT = 0x60000000,
         BGFX_STENCIL_OP_PASS_Z_INVERT  = 0x70000000,
-        BGFX_STENCIL_NONE              = 0x0,
-        BGFX_STENCIL_DEFAULT           = 0x0;
+        BGFX_STENCIL_NONE              = 0xFF00;
 
     public static final int
         BGFX_STENCIL_FUNC_REF_SHIFT   = 0,
@@ -3425,6 +3426,22 @@ public class BGFX {
         nbgfx_encoder_set_image(_this, (byte)_stage, _handle, (byte)_mip, _access, _format);
     }
 
+    // --- [ bgfx_encoder_set_image_view ] ---
+
+    /** {@code void bgfx_encoder_set_image_view(bgfx_encoder_t * _this, uint8_t _stage, bgfx_texture_handle_t _handle, uint16_t _firstLayer, uint16_t _numLayers, uint8_t _mip, bgfx_access_t _access, bgfx_texture_format_t _format)} */
+    public static void nbgfx_encoder_set_image_view(long _this, byte _stage, short _handle, short _firstLayer, short _numLayers, byte _mip, int _access, int _format) {
+        long __functionAddress = Functions.encoder_set_image_view;
+        if (CHECKS) {
+            check(_this);
+        }
+        invokePUCCCUV(_this, _stage, _handle, _firstLayer, _numLayers, _mip, _access, _format, __functionAddress);
+    }
+
+    /** {@code void bgfx_encoder_set_image_view(bgfx_encoder_t * _this, uint8_t _stage, bgfx_texture_handle_t _handle, uint16_t _firstLayer, uint16_t _numLayers, uint8_t _mip, bgfx_access_t _access, bgfx_texture_format_t _format)} */
+    public static void bgfx_encoder_set_image_view(@NativeType("bgfx_encoder_t *") long _this, @NativeType("uint8_t") int _stage, @NativeType("bgfx_texture_handle_t") short _handle, @NativeType("uint16_t") int _firstLayer, @NativeType("uint16_t") int _numLayers, @NativeType("uint8_t") int _mip, @NativeType("bgfx_access_t") int _access, @NativeType("bgfx_texture_format_t") int _format) {
+        nbgfx_encoder_set_image_view(_this, (byte)_stage, _handle, (short)_firstLayer, (short)_numLayers, (byte)_mip, _access, _format);
+    }
+
     // --- [ bgfx_encoder_dispatch ] ---
 
     /** {@code void bgfx_encoder_dispatch(bgfx_encoder_t * _this, bgfx_view_id_t _id, bgfx_program_handle_t _handle, uint32_t _numX, uint32_t _numY, uint32_t _numZ, uint8_t _flags)} */
@@ -4009,6 +4026,19 @@ public class BGFX {
     /** {@code void bgfx_set_image(uint8_t _stage, bgfx_texture_handle_t _handle, uint8_t _mip, bgfx_access_t _access, bgfx_texture_format_t _format)} */
     public static void bgfx_set_image(@NativeType("uint8_t") int _stage, @NativeType("bgfx_texture_handle_t") short _handle, @NativeType("uint8_t") int _mip, @NativeType("bgfx_access_t") int _access, @NativeType("bgfx_texture_format_t") int _format) {
         nbgfx_set_image((byte)_stage, _handle, (byte)_mip, _access, _format);
+    }
+
+    // --- [ bgfx_set_image_view ] ---
+
+    /** {@code void bgfx_set_image_view(uint8_t _stage, bgfx_texture_handle_t _handle, uint16_t _firstLayer, uint16_t _numLayers, uint8_t _mip, bgfx_access_t _access, bgfx_texture_format_t _format)} */
+    public static void nbgfx_set_image_view(byte _stage, short _handle, short _firstLayer, short _numLayers, byte _mip, int _access, int _format) {
+        long __functionAddress = Functions.set_image_view;
+        invokeUCCCUV(_stage, _handle, _firstLayer, _numLayers, _mip, _access, _format, __functionAddress);
+    }
+
+    /** {@code void bgfx_set_image_view(uint8_t _stage, bgfx_texture_handle_t _handle, uint16_t _firstLayer, uint16_t _numLayers, uint8_t _mip, bgfx_access_t _access, bgfx_texture_format_t _format)} */
+    public static void bgfx_set_image_view(@NativeType("uint8_t") int _stage, @NativeType("bgfx_texture_handle_t") short _handle, @NativeType("uint16_t") int _firstLayer, @NativeType("uint16_t") int _numLayers, @NativeType("uint8_t") int _mip, @NativeType("bgfx_access_t") int _access, @NativeType("bgfx_texture_format_t") int _format) {
+        nbgfx_set_image_view((byte)_stage, _handle, (short)_firstLayer, (short)_numLayers, (byte)_mip, _access, _format);
     }
 
     // --- [ bgfx_dispatch ] ---

@@ -9,7 +9,7 @@ import org.lwjgl.generator.*
 
 val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx_", binding = BGFX_BINDING) {
     IntConstant(
-        "API_VERSION".."147"
+        "API_VERSION".."149"
     )
 
     ShortConstant(
@@ -143,8 +143,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "STENCIL_OP_PASS_Z_DECRSAT"..0x60000000,
         "STENCIL_OP_PASS_Z_INVERT"..0x70000000,
 
-        "STENCIL_NONE"..0x00000000,
-        "STENCIL_DEFAULT"..0x00000000
+        "STENCIL_NONE"..0x0000ff00
     )
 
     IntConstant(
@@ -2130,6 +2129,19 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     )
 
     void(
+        "encoder_set_image_view",
+
+        bgfx_encoder_t.p("_this"),
+        MapToInt..uint8_t("_stage"),
+        bgfx_texture_handle_t("_handle"),
+        MapToInt..uint16_t("_firstLayer"),
+        MapToInt..uint16_t("_numLayers"),
+        MapToInt..uint8_t("_mip"),
+        bgfx_access_t("_access"),
+        bgfx_texture_format_t("_format")
+    )
+
+    void(
         "encoder_dispatch",
 
         bgfx_encoder_t.p("_this"),
@@ -2502,6 +2514,18 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
 
         MapToInt..uint8_t("_stage"),
         bgfx_texture_handle_t("_handle"),
+        MapToInt..uint8_t("_mip"),
+        bgfx_access_t("_access"),
+        bgfx_texture_format_t("_format")
+    )
+
+    void(
+        "set_image_view",
+
+        MapToInt..uint8_t("_stage"),
+        bgfx_texture_handle_t("_handle"),
+        MapToInt..uint16_t("_firstLayer"),
+        MapToInt..uint16_t("_numLayers"),
         MapToInt..uint8_t("_mip"),
         bgfx_access_t("_access"),
         bgfx_texture_format_t("_format")
