@@ -160,7 +160,8 @@ public class mimalloc {
             option_get_clamp                   = apiGetFunctionAddress(MIMALLOC, "mi_option_get_clamp"),
             option_get_size                    = apiGetFunctionAddress(MIMALLOC, "mi_option_get_size"),
             option_set                         = apiGetFunctionAddress(MIMALLOC, "mi_option_set"),
-            option_set_default                 = apiGetFunctionAddress(MIMALLOC, "mi_option_set_default");
+            option_set_default                 = apiGetFunctionAddress(MIMALLOC, "mi_option_set_default"),
+            aligned_alloc                      = apiGetFunctionAddress(MIMALLOC, "mi_aligned_alloc");
 
     }
 
@@ -2223,12 +2224,27 @@ public class mimalloc {
         invokeNV(option, value, __functionAddress);
     }
 
+    // --- [ mi_aligned_alloc ] ---
+
+    /** {@code void * mi_aligned_alloc(size_t alignment, size_t size)} */
+    private static long nmi_aligned_alloc(long alignment, long size) {
+        long __functionAddress = Functions.aligned_alloc;
+        return invokePPP(alignment, size, __functionAddress);
+    }
+
+    /** {@code void * mi_aligned_alloc(size_t alignment, size_t size)} */
+    @NativeType("void *")
+    private static @Nullable ByteBuffer mi_aligned_alloc(@NativeType("size_t") long alignment, @NativeType("size_t") long size) {
+        long __result = nmi_aligned_alloc(alignment, size);
+        return memByteBufferSafe(__result, (int)size);
+    }
+
     public static final class Allocator implements MemoryAllocator {
         @Override public long getMalloc()                              { return Functions.malloc; }
         @Override public long getCalloc()                              { return Functions.calloc; }
         @Override public long getRealloc()                             { return Functions.realloc; }
         @Override public long getFree()                                { return Functions.free; }
-        @Override public long getAlignedAlloc()                        { return Functions.malloc_aligned; }
+        @Override public long getAlignedAlloc()                        { return Functions.aligned_alloc; }
         @Override public long getAlignedFree()                         { return Functions.free; }
 
         @Override public long malloc(long size)                        { return nmi_malloc(size); }

@@ -61,3 +61,28 @@ _Released 2026 Jul 13_
 
 - Core: The `MemorySegment` access methods have been moved from `MemoryUtil` to `MemoryUtilFFM`.
 - Unsafe accessor methods for private struct members are now package private.
+
+#### Known issues
+
+- mimalloc: `MemoryAllocator::getAlignedAlloc` does not return a function compatible with `aligned_alloc`.
+  * Breaks the LMDB and VMA modules when mimalloc is the default allocator.
+  * Use this workaround to correct it:
+
+```java
+Configuration.MEMORY_ALLOCATOR.set(new MemoryUtil.MemoryAllocator() {
+    private final long aligned_alloc = mimalloc.getLibrary().getFunctionAddress("aligned_alloc");
+
+    @Override public long getMalloc()                              { return mimalloc.Functions.malloc; }
+    @Override public long getCalloc()                              { return mimalloc.Functions.calloc; }
+    @Override public long getRealloc()                             { return mimalloc.Functions.realloc; }
+    @Override public long getFree()                                { return mimalloc.Functions.free; }
+    @Override public long getAlignedAlloc()                        { return aligned_alloc; }
+    @Override public long getAlignedFree()                         { return mimalloc.Functions.free; }
+
+    @Override public long malloc(long size)                        { return mimalloc.nmi_malloc(size); }
+    @Override public long calloc(long num, long size)              { return mimalloc.nmi_calloc(num, size); }
+    @Override public long realloc(long ptr, long size)             { return mimalloc.nmi_realloc(ptr, size); }
+    @Override public void free(long ptr)                           { mimalloc.nmi_free(ptr); }
+    @Override public long aligned_alloc(long alignment, long size) { return mimalloc.nmi_malloc_aligned(size, alignment); }
+    @Override public void aligned_free(long ptr)                   { mimalloc.nmi_free(ptr); }
+});```

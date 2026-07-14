@@ -1079,13 +1079,21 @@ val mimalloc = "mimalloc".nativeClass(Module.MIMALLOC, prefix = "mi", prefixMeth
         long("value")
     )
 
+    // for MemoryAllocator::aligned_alloc compatibility.
+    private..void.p(
+        "aligned_alloc",
+
+        size_t("alignment"),
+        AutoSizeResult..size_t("size")
+    )
+
     customMethod("""
     public static final class Allocator implements MemoryAllocator {
         @Override public long getMalloc()                              { return Functions.malloc; }
         @Override public long getCalloc()                              { return Functions.calloc; }
         @Override public long getRealloc()                             { return Functions.realloc; }
         @Override public long getFree()                                { return Functions.free; }
-        @Override public long getAlignedAlloc()                        { return Functions.malloc_aligned; }
+        @Override public long getAlignedAlloc()                        { return Functions.aligned_alloc; }
         @Override public long getAlignedFree()                         { return Functions.free; }
 
         @Override public long malloc(long size)                        { return nmi_malloc(size); }
