@@ -12,6 +12,7 @@ val rpmalloc = "RPmalloc".nativeClass(Module.RPMALLOC, prefix = "RP", prefixCons
 //#define ENABLE_STATISTICS 1
 #define RPMALLOC_FIRST_CLASS_HEAPS 1
 //#define RPMALLOC_HEAP_STATISTICS 1
+#define ENABLE_OVERRIDE 0
 #include "rpmalloc.c"
 ENABLE_WARNINGS()""")
 
