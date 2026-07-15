@@ -13,7 +13,7 @@ val mimalloc = "mimalloc".nativeClass(Module.MIMALLOC, prefix = "mi", prefixMeth
     bundledWithLWJGL = true
 )) {
     IntConstant(
-        "MI_MALLOC_VERSION".."30302"
+        "MI_MALLOC_VERSION".."30401"
     ).noPrefix()
 
     IntConstant(

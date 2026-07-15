@@ -170,7 +170,7 @@ public class mimalloc {
         return MIMALLOC;
     }
 
-    public static final int MI_MALLOC_VERSION = 30302;
+    public static final int MI_MALLOC_VERSION = 30401;
 
     public static final int
         MI_SMALL_WSIZE_MAX = 128,
