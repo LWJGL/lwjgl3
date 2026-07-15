@@ -607,6 +607,7 @@ public final class JNI {
     public static native void invokePPPPV(long param0, long param1, long param2, float param3, float param4, float param5, float param6, float param7, float param8, long param9, long __functionAddress);
     public static native void invokeCCCCCV(short param0, short param1, short param2, short param3, short param4, long __functionAddress);
     public static native void invokeCCUPPV(short param0, short param1, byte param2, long param3, long param4, long __functionAddress);
+    public static native void invokeCUUCCV(short param0, byte param1, byte param2, short param3, short param4, long __functionAddress);
     public static native void invokePPCPPV(long param0, long param1, short param2, long param3, long param4, long __functionAddress);
     public static native void invokePPPPPV(long param0, long param1, long param2, long param3, long param4, long __functionAddress);
     public static native void invokePCCCUV(long param0, short param1, short param2, short param3, int param4, byte param5, long __functionAddress);

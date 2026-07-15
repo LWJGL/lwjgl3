@@ -108,6 +108,7 @@ public class BGFX {
             update_texture_2d                                    = apiGetFunctionAddress(BGFX, "bgfx_update_texture_2d"),
             update_texture_3d                                    = apiGetFunctionAddress(BGFX, "bgfx_update_texture_3d"),
             update_texture_cube                                  = apiGetFunctionAddress(BGFX, "bgfx_update_texture_cube"),
+            clear_texture                                        = apiGetFunctionAddress(BGFX, "bgfx_clear_texture"),
             read_texture                                         = apiGetFunctionAddress(BGFX, "bgfx_read_texture"),
             set_texture_name                                     = apiGetFunctionAddress(BGFX, "bgfx_set_texture_name"),
             get_direct_access_ptr                                = apiGetFunctionAddress(BGFX, "bgfx_get_direct_access_ptr"),
@@ -239,7 +240,7 @@ public class BGFX {
         return BGFX;
     }
 
-    public static final int BGFX_API_VERSION = 149;
+    public static final int BGFX_API_VERSION = 151;
 
     public static final short BGFX_INVALID_HANDLE = (short)0xFFFF;
 
@@ -692,25 +693,33 @@ public class BGFX {
         BGFX_ACCESS_COUNT     = 3;
 
     public static final int
-        BGFX_ATTRIB_POSITION  = 0,
-        BGFX_ATTRIB_NORMAL    = 1,
-        BGFX_ATTRIB_TANGENT   = 2,
-        BGFX_ATTRIB_BITANGENT = 3,
-        BGFX_ATTRIB_COLOR0    = 4,
-        BGFX_ATTRIB_COLOR1    = 5,
-        BGFX_ATTRIB_COLOR2    = 6,
-        BGFX_ATTRIB_COLOR3    = 7,
-        BGFX_ATTRIB_INDICES   = 8,
-        BGFX_ATTRIB_WEIGHT    = 9,
-        BGFX_ATTRIB_TEXCOORD0 = 10,
-        BGFX_ATTRIB_TEXCOORD1 = 11,
-        BGFX_ATTRIB_TEXCOORD2 = 12,
-        BGFX_ATTRIB_TEXCOORD3 = 13,
-        BGFX_ATTRIB_TEXCOORD4 = 14,
-        BGFX_ATTRIB_TEXCOORD5 = 15,
-        BGFX_ATTRIB_TEXCOORD6 = 16,
-        BGFX_ATTRIB_TEXCOORD7 = 17,
-        BGFX_ATTRIB_COUNT     = BGFX_ATTRIB_TEXCOORD7 + 1;
+        BGFX_ATTRIB_POSITION   = 0,
+        BGFX_ATTRIB_NORMAL     = 1,
+        BGFX_ATTRIB_TANGENT    = 2,
+        BGFX_ATTRIB_BITANGENT  = 3,
+        BGFX_ATTRIB_COLOR0     = 4,
+        BGFX_ATTRIB_COLOR1     = 5,
+        BGFX_ATTRIB_COLOR2     = 6,
+        BGFX_ATTRIB_COLOR3     = 7,
+        BGFX_ATTRIB_INDICES    = 8,
+        BGFX_ATTRIB_WEIGHT     = 9,
+        BGFX_ATTRIB_TEXCOORD0  = 10,
+        BGFX_ATTRIB_TEXCOORD1  = 11,
+        BGFX_ATTRIB_TEXCOORD2  = 12,
+        BGFX_ATTRIB_TEXCOORD3  = 13,
+        BGFX_ATTRIB_TEXCOORD4  = 14,
+        BGFX_ATTRIB_TEXCOORD5  = 15,
+        BGFX_ATTRIB_TEXCOORD6  = 16,
+        BGFX_ATTRIB_TEXCOORD7  = 17,
+        BGFX_ATTRIB_TEXCOORD8  = 18,
+        BGFX_ATTRIB_TEXCOORD9  = 19,
+        BGFX_ATTRIB_TEXCOORD10 = 20,
+        BGFX_ATTRIB_TEXCOORD11 = 21,
+        BGFX_ATTRIB_TEXCOORD12 = 22,
+        BGFX_ATTRIB_TEXCOORD13 = 23,
+        BGFX_ATTRIB_TEXCOORD14 = 24,
+        BGFX_ATTRIB_TEXCOORD15 = 25,
+        BGFX_ATTRIB_COUNT      = 26;
 
     public static final int
         BGFX_ATTRIB_TYPE_INT8   = 0,
@@ -720,7 +729,9 @@ public class BGFX {
         BGFX_ATTRIB_TYPE_UINT16 = 4,
         BGFX_ATTRIB_TYPE_HALF   = 5,
         BGFX_ATTRIB_TYPE_FLOAT  = 6,
-        BGFX_ATTRIB_TYPE_COUNT  = BGFX_ATTRIB_TYPE_FLOAT + 1;
+        BGFX_ATTRIB_TYPE_INT32  = 7,
+        BGFX_ATTRIB_TYPE_UINT32 = 8,
+        BGFX_ATTRIB_TYPE_COUNT  = 9;
 
     public static final int
         BGFX_TEXTURE_FORMAT_BC1           = 0,
@@ -823,7 +834,7 @@ public class BGFX {
         BGFX_TEXTURE_FORMAT_D24F          = 97,
         BGFX_TEXTURE_FORMAT_D32F          = 98,
         BGFX_TEXTURE_FORMAT_D0S8          = 99,
-        BGFX_TEXTURE_FORMAT_COUNT         = BGFX_TEXTURE_FORMAT_D0S8 + 1;
+        BGFX_TEXTURE_FORMAT_COUNT         = 100;
 
     public static final int
         BGFX_UNIFORM_TYPE_SAMPLER = 0,
@@ -2201,6 +2212,19 @@ public class BGFX {
     /** {@code void bgfx_update_texture_cube(bgfx_texture_handle_t _handle, uint16_t _layer, uint8_t _side, uint8_t _mip, uint16_t _x, uint16_t _y, uint16_t _width, uint16_t _height, bgfx_memory_t const * _mem, uint16_t _pitch)} */
     public static void bgfx_update_texture_cube(@NativeType("bgfx_texture_handle_t") short _handle, @NativeType("uint16_t") int _layer, @NativeType("uint8_t") byte _side, @NativeType("uint8_t") int _mip, @NativeType("uint16_t") int _x, @NativeType("uint16_t") int _y, @NativeType("uint16_t") int _width, @NativeType("uint16_t") int _height, @NativeType("bgfx_memory_t const *") BGFXMemory _mem, @NativeType("uint16_t") int _pitch) {
         nbgfx_update_texture_cube(_handle, (short)_layer, _side, (byte)_mip, (short)_x, (short)_y, (short)_width, (short)_height, _mem.address(), (short)_pitch);
+    }
+
+    // --- [ bgfx_clear_texture ] ---
+
+    /** {@code void bgfx_clear_texture(bgfx_texture_handle_t _handle, uint8_t _mip, uint8_t _numMips, uint16_t _layer, uint16_t _numLayers)} */
+    public static void nbgfx_clear_texture(short _handle, byte _mip, byte _numMips, short _layer, short _numLayers) {
+        long __functionAddress = Functions.clear_texture;
+        invokeCUUCCV(_handle, _mip, _numMips, _layer, _numLayers, __functionAddress);
+    }
+
+    /** {@code void bgfx_clear_texture(bgfx_texture_handle_t _handle, uint8_t _mip, uint8_t _numMips, uint16_t _layer, uint16_t _numLayers)} */
+    public static void bgfx_clear_texture(@NativeType("bgfx_texture_handle_t") short _handle, @NativeType("uint8_t") int _mip, @NativeType("uint8_t") int _numMips, @NativeType("uint16_t") int _layer, @NativeType("uint16_t") int _numLayers) {
+        nbgfx_clear_texture(_handle, (byte)_mip, (byte)_numMips, (short)_layer, (short)_numLayers);
     }
 
     // --- [ bgfx_read_texture ] ---

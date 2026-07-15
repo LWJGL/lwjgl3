@@ -9,7 +9,7 @@ import org.lwjgl.generator.*
 
 val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx_", binding = BGFX_BINDING) {
     IntConstant(
-        "API_VERSION".."149"
+        "API_VERSION".."151"
     )
 
     ShortConstant(
@@ -562,8 +562,16 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "ATTRIB_TEXCOORD5".enum,
         "ATTRIB_TEXCOORD6".enum,
         "ATTRIB_TEXCOORD7".enum,
+        "ATTRIB_TEXCOORD8".enum,
+        "ATTRIB_TEXCOORD9".enum,
+        "ATTRIB_TEXCOORD10".enum,
+        "ATTRIB_TEXCOORD11".enum,
+        "ATTRIB_TEXCOORD12".enum,
+        "ATTRIB_TEXCOORD13".enum,
+        "ATTRIB_TEXCOORD14".enum,
+        "ATTRIB_TEXCOORD15".enum,
 
-        "ATTRIB_COUNT".enum("BGFX_ATTRIB_TEXCOORD7 + 1")
+        "ATTRIB_COUNT".enum
     )
 
     EnumConstant(
@@ -574,8 +582,10 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "ATTRIB_TYPE_UINT16".enum,
         "ATTRIB_TYPE_HALF".enum,
         "ATTRIB_TYPE_FLOAT".enum,
+        "ATTRIB_TYPE_INT32".enum,
+        "ATTRIB_TYPE_UINT32".enum,
 
-        "ATTRIB_TYPE_COUNT".enum("BGFX_ATTRIB_TYPE_FLOAT + 1")
+        "ATTRIB_TYPE_COUNT".enum
     )
 
     EnumConstant(
@@ -684,7 +694,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "TEXTURE_FORMAT_D32F".enum,
         "TEXTURE_FORMAT_D0S8".enum,
 
-        "TEXTURE_FORMAT_COUNT".enum("BGFX_TEXTURE_FORMAT_D0S8 + 1")
+        "TEXTURE_FORMAT_COUNT".enum
     )
 
     EnumConstant(
@@ -1447,6 +1457,16 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         MapToInt..uint16_t("_height"),
         bgfx_memory_t.const.p("_mem"),
         MapToInt..uint16_t("_pitch")
+    )
+
+    void(
+        "clear_texture",
+
+        bgfx_texture_handle_t("_handle"),
+        MapToInt..uint8_t("_mip"),
+        MapToInt..uint8_t("_numMips"),
+        MapToInt..uint16_t("_layer"),
+        MapToInt..uint16_t("_numLayers")
     )
 
     uint32_t(

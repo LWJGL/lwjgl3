@@ -248,6 +248,8 @@ val bgfx_caps_limits_t = struct(Module.BGFX, "BGFXCapsLimits", nativeName = "bgf
     uint32_t("maxComputeBindings")
     uint32_t("maxVertexLayouts")
     uint32_t("maxVertexStreams")
+    uint32_t("maxVertexAttributes")
+    uint32_t("maxInstanceData")
     uint32_t("maxIndexBuffers")
     uint32_t("maxVertexBuffers")
     uint32_t("maxDynamicIndexBuffers")

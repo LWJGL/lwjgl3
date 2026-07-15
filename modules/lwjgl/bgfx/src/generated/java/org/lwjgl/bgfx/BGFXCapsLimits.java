@@ -30,6 +30,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     uint32_t maxComputeBindings;
  *     uint32_t maxVertexLayouts;
  *     uint32_t maxVertexStreams;
+ *     uint32_t maxVertexAttributes;
+ *     uint32_t maxInstanceData;
  *     uint32_t maxIndexBuffers;
  *     uint32_t maxVertexBuffers;
  *     uint32_t maxDynamicIndexBuffers;
@@ -68,6 +70,8 @@ public class BGFXCapsLimits extends Struct<BGFXCapsLimits> {
         MAXCOMPUTEBINDINGS,
         MAXVERTEXLAYOUTS,
         MAXVERTEXSTREAMS,
+        MAXVERTEXATTRIBUTES,
+        MAXINSTANCEDATA,
         MAXINDEXBUFFERS,
         MAXVERTEXBUFFERS,
         MAXDYNAMICINDEXBUFFERS,
@@ -82,6 +86,8 @@ public class BGFXCapsLimits extends Struct<BGFXCapsLimits> {
 
     static {
         Layout layout = __struct(
+            __member(4),
+            __member(4),
             __member(4),
             __member(4),
             __member(4),
@@ -126,17 +132,19 @@ public class BGFXCapsLimits extends Struct<BGFXCapsLimits> {
         MAXCOMPUTEBINDINGS = layout.offsetof(11);
         MAXVERTEXLAYOUTS = layout.offsetof(12);
         MAXVERTEXSTREAMS = layout.offsetof(13);
-        MAXINDEXBUFFERS = layout.offsetof(14);
-        MAXVERTEXBUFFERS = layout.offsetof(15);
-        MAXDYNAMICINDEXBUFFERS = layout.offsetof(16);
-        MAXDYNAMICVERTEXBUFFERS = layout.offsetof(17);
-        MAXUNIFORMS = layout.offsetof(18);
-        MAXOCCLUSIONQUERIES = layout.offsetof(19);
-        MAXENCODERS = layout.offsetof(20);
-        MINRESOURCECBSIZE = layout.offsetof(21);
-        MAXTRANSIENTVBSIZE = layout.offsetof(22);
-        MAXTRANSIENTIBSIZE = layout.offsetof(23);
-        MINUNIFORMBUFFERSIZE = layout.offsetof(24);
+        MAXVERTEXATTRIBUTES = layout.offsetof(14);
+        MAXINSTANCEDATA = layout.offsetof(15);
+        MAXINDEXBUFFERS = layout.offsetof(16);
+        MAXVERTEXBUFFERS = layout.offsetof(17);
+        MAXDYNAMICINDEXBUFFERS = layout.offsetof(18);
+        MAXDYNAMICVERTEXBUFFERS = layout.offsetof(19);
+        MAXUNIFORMS = layout.offsetof(20);
+        MAXOCCLUSIONQUERIES = layout.offsetof(21);
+        MAXENCODERS = layout.offsetof(22);
+        MINRESOURCECBSIZE = layout.offsetof(23);
+        MAXTRANSIENTVBSIZE = layout.offsetof(24);
+        MAXTRANSIENTIBSIZE = layout.offsetof(25);
+        MINUNIFORMBUFFERSIZE = layout.offsetof(26);
     }
 
     protected BGFXCapsLimits(long address, @Nullable ByteBuffer container) {
@@ -203,6 +211,12 @@ public class BGFXCapsLimits extends Struct<BGFXCapsLimits> {
     /** @return the value of the {@code maxVertexStreams} field. */
     @NativeType("uint32_t")
     public int maxVertexStreams() { return nmaxVertexStreams(address()); }
+    /** @return the value of the {@code maxVertexAttributes} field. */
+    @NativeType("uint32_t")
+    public int maxVertexAttributes() { return nmaxVertexAttributes(address()); }
+    /** @return the value of the {@code maxInstanceData} field. */
+    @NativeType("uint32_t")
+    public int maxInstanceData() { return nmaxInstanceData(address()); }
     /** @return the value of the {@code maxIndexBuffers} field. */
     @NativeType("uint32_t")
     public int maxIndexBuffers() { return nmaxIndexBuffers(address()); }
@@ -294,6 +308,10 @@ public class BGFXCapsLimits extends Struct<BGFXCapsLimits> {
     public static int nmaxVertexLayouts(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXVERTEXLAYOUTS); }
     /** Unsafe version of {@link #maxVertexStreams}. */
     public static int nmaxVertexStreams(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXVERTEXSTREAMS); }
+    /** Unsafe version of {@link #maxVertexAttributes}. */
+    public static int nmaxVertexAttributes(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXVERTEXATTRIBUTES); }
+    /** Unsafe version of {@link #maxInstanceData}. */
+    public static int nmaxInstanceData(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXINSTANCEDATA); }
     /** Unsafe version of {@link #maxIndexBuffers}. */
     public static int nmaxIndexBuffers(long struct) { return memGetInt(struct + BGFXCapsLimits.MAXINDEXBUFFERS); }
     /** Unsafe version of {@link #maxVertexBuffers}. */
@@ -402,6 +420,12 @@ public class BGFXCapsLimits extends Struct<BGFXCapsLimits> {
         /** @return the value of the {@code maxVertexStreams} field. */
         @NativeType("uint32_t")
         public int maxVertexStreams() { return BGFXCapsLimits.nmaxVertexStreams(address()); }
+        /** @return the value of the {@code maxVertexAttributes} field. */
+        @NativeType("uint32_t")
+        public int maxVertexAttributes() { return BGFXCapsLimits.nmaxVertexAttributes(address()); }
+        /** @return the value of the {@code maxInstanceData} field. */
+        @NativeType("uint32_t")
+        public int maxInstanceData() { return BGFXCapsLimits.nmaxInstanceData(address()); }
         /** @return the value of the {@code maxIndexBuffers} field. */
         @NativeType("uint32_t")
         public int maxIndexBuffers() { return BGFXCapsLimits.nmaxIndexBuffers(address()); }
