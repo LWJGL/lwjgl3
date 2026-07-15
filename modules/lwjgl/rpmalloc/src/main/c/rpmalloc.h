@@ -19,10 +19,10 @@
 //! rpmalloc version. RPMALLOC_VERSION is a human-readable string and may carry a pre-release
 //  suffix such as "-rc1". RPMALLOC_VERSION_NUMBER is a monotonic integer for comparisons,
 //  computed as major*10000 + minor*100 + patch (pre-release suffixes are not encoded).
-#define RPMALLOC_VERSION "2.0.0"
+#define RPMALLOC_VERSION "2.0.1"
 #define RPMALLOC_VERSION_MAJOR 2
 #define RPMALLOC_VERSION_MINOR 0
-#define RPMALLOC_VERSION_PATCH 0
+#define RPMALLOC_VERSION_PATCH 1
 #define RPMALLOC_VERSION_NUMBER \
 	(RPMALLOC_VERSION_MAJOR * 10000 + RPMALLOC_VERSION_MINOR * 100 + RPMALLOC_VERSION_PATCH)
 

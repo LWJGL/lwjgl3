@@ -397,8 +397,29 @@ rpmalloc_clz(uintptr_t x) {
 #endif
 }
 
+//! Yield the rest of this thread's scheduling quantum so another runnable thread (e.g. a lock
+//! holder that has been preempted) can run. This is a real scheduler yield, unlike the per-arch
+//! CPU pause/yield hint used by wait_spin below.
 static inline void
-wait_spin(void) {
+thread_yield(void) {
+#if PLATFORM_WINDOWS
+	SwitchToThread();
+#else
+	sched_yield();
+#endif
+}
+
+#ifndef WAIT_SPIN_YIELD_THRESHOLD
+//! Number of cheap CPU-pause spins before wait_spin escalates to a real OS scheduler yield.
+#define WAIT_SPIN_YIELD_THRESHOLD 100
+#endif
+
+static inline void
+wait_spin(uint32_t* spin_count) {
+	if (++(*spin_count) >= WAIT_SPIN_YIELD_THRESHOLD) {
+		thread_yield();
+		return;
+	}
 #if defined(_MSC_VER)
 #if defined(_M_ARM64)
 	__yield();
@@ -649,8 +670,16 @@ static int global_heap_creating;
 static atomic_uintptr_t global_heap_lock;
 //! Heap ID counter
 static atomic_uint global_heap_id = 1;
-//! Initialized flag
-static int global_rpmalloc_initialized;
+//! Global initialization state. rpmalloc_initialize can be called concurrently from multiple
+//! threads (the first allocation on any thread may trigger it), so it is driven as an atomic
+//! state machine: exactly one thread performs the global setup while the others wait for it to
+//! complete before allocating - they must never observe, or allocate against, a partially
+//! written global_config. Release/acquire ordering on the DONE transition publishes all of the
+//! global_config writes to threads that observe completion.
+#define RPMALLOC_INIT_UNINIT 0
+#define RPMALLOC_INIT_RUNNING 1
+#define RPMALLOC_INIT_DONE 2
+static atomic_int global_rpmalloc_init_state;
 //! Memory interface
 static rpmalloc_interface_t* global_memory_interface;
 //! Default memory interface
@@ -1353,9 +1382,10 @@ page_adopt_thread_free_block_list(page_t* page) {
 	unsigned long long thread_free = atomic_load_explicit(&page->thread_free, memory_order_relaxed);
 	if (thread_free != 0) {
 		// Other threads can only replace with another valid list head, this will never change to 0 in other threads
+		uint32_t spin = 0;
 		while (!atomic_compare_exchange_weak_explicit(&page->thread_free, &thread_free, 0, memory_order_acquire,
 		                                              memory_order_relaxed))
-			wait_spin();
+			wait_spin(&spin);
 		page->local_free_count = page_block_from_thread_free_list(page, thread_free, &page->local_free);
 		rpmalloc_assert(page->local_free_count <= page->block_used, "Page thread free list count internal failure");
 		page->block_used -= page->local_free_count;
@@ -1372,10 +1402,11 @@ page_put_thread_free_block(page_t* page, block_t* block) {
 		heap_t* heap = page->heap;
 		uintptr_t prev_head = atomic_load_explicit(&heap->thread_free[page->page_type], memory_order_relaxed);
 		block->next = (void*)prev_head;
+		uint32_t spin = 0;
 		while (!atomic_compare_exchange_weak_explicit(&heap->thread_free[page->page_type], &prev_head, (uintptr_t)block,
 		                                              memory_order_release, memory_order_relaxed)) {
 			block->next = (void*)prev_head;
-			wait_spin();
+			wait_spin(&spin);
 		}
 	} else {
 		unsigned long long prev_thread_free = atomic_load_explicit(&page->thread_free, memory_order_relaxed);
@@ -1383,11 +1414,12 @@ page_put_thread_free_block(page_t* page, block_t* block) {
 		rpmalloc_assert(page_block(page, block_index) == block, "Block pointer is not aligned to start of block");
 		uint32_t list_size = page_block_from_thread_free_list(page, prev_thread_free, &block->next) + 1;
 		uint64_t thread_free = page_block_to_thread_free_list(page, block_index, list_size);
+		uint32_t spin = 0;
 		while (!atomic_compare_exchange_weak_explicit(&page->thread_free, &prev_thread_free, thread_free,
 		                                              memory_order_release, memory_order_relaxed)) {
 			list_size = page_block_from_thread_free_list(page, prev_thread_free, &block->next) + 1;
 			thread_free = page_block_to_thread_free_list(page, block_index, list_size);
-			wait_spin();
+			wait_spin(&spin);
 		}
 	}
 }
@@ -1590,10 +1622,11 @@ static huge_cache_t global_huge_cache;
 static inline void
 huge_cache_lock_acquire(void) {
 	uintptr_t lock = 0;
+	uint32_t spin = 0;
 	while (!atomic_compare_exchange_weak_explicit(&global_huge_cache.lock, &lock, 1, memory_order_acquire,
 	                                              memory_order_relaxed)) {
 		lock = 0;
-		wait_spin();
+		wait_spin(&spin);
 	}
 }
 
@@ -1812,9 +1845,10 @@ static inline void
 heap_lock_acquire(void) {
 	uintptr_t lock = 0;
 	uintptr_t this_lock = get_thread_id();
+	uint32_t spin = 0;
 	while (!atomic_compare_exchange_strong(&global_heap_lock, &lock, this_lock)) {
 		lock = 0;
-		wait_spin();
+		wait_spin(&spin);
 	}
 }
 
@@ -1851,6 +1885,7 @@ heap_allocate_new(int first_class) {
 		rpmalloc_initialize(0);
 
 	heap_lock_acquire();
+	uint32_t spin = 0;
 	while (1) {
 		if (!first_class && global_heap_queue) {
 			heap_t* heap = global_heap_queue;
@@ -1867,7 +1902,7 @@ heap_allocate_new(int first_class) {
 		if (!global_heap_creating)
 			break;
 		heap_lock_release();
-		wait_spin();
+		wait_spin(&spin);
 		heap_lock_acquire();
 	}
 	global_heap_creating = 1;
@@ -2105,9 +2140,10 @@ heap_get_page_generic(heap_t* heap, uint32_t size_class) {
 	// Check if there is a free page from multithreaded deallocations
 	uintptr_t block_mt = atomic_load_explicit(&heap->thread_free[page_type], memory_order_relaxed);
 	if (UNEXPECTED(block_mt != 0)) {
+		uint32_t spin = 0;
 		while (!atomic_compare_exchange_weak_explicit(&heap->thread_free[page_type], &block_mt, 0, memory_order_acquire,
 		                                              memory_order_relaxed)) {
-			wait_spin();
+			wait_spin(&spin);
 		}
 		block_t* block = (void*)block_mt;
 		while (block) {
@@ -2637,9 +2673,6 @@ rpmalloc_linker_reference(void) {
 //////
 
 static void
-#if PLATFORM_WINDOWS
-WINAPI
-#endif
 rpmalloc_thread_destructor(void* value) {
 	// If this is called on main thread assume it means rpmalloc_finalize
 	// has not been called and shutdown is forced (through _exit) or unclean
@@ -2677,7 +2710,7 @@ os_read_system_file(const char* path, char* buffer, size_t capacity) {
 
 extern int
 rpmalloc_initialize_config(rpmalloc_interface_t* memory_interface, rpmalloc_config_t* config) {
-	if (global_rpmalloc_initialized) {
+	if (atomic_load_explicit(&global_rpmalloc_init_state, memory_order_acquire) == RPMALLOC_INIT_DONE) {
 		rpmalloc_thread_initialize();
 		if (config)
 			*config = global_config;
@@ -2697,12 +2730,24 @@ rpmalloc_initialize_config(rpmalloc_interface_t* memory_interface, rpmalloc_conf
 
 extern int
 rpmalloc_initialize(rpmalloc_interface_t* memory_interface) {
-	if (global_rpmalloc_initialized) {
-		rpmalloc_thread_initialize();
-		return 0;
+	for (;;) {
+		int state = atomic_load_explicit(&global_rpmalloc_init_state, memory_order_acquire);
+		if (state == RPMALLOC_INIT_DONE) {
+			rpmalloc_thread_initialize();
+			return 0;
+		}
+		if (state == RPMALLOC_INIT_RUNNING) {
+			while (atomic_load_explicit(&global_rpmalloc_init_state, memory_order_acquire) ==
+			       RPMALLOC_INIT_RUNNING)
+				thread_yield();
+			continue;
+		}
+		int expected = RPMALLOC_INIT_UNINIT;
+		if (atomic_compare_exchange_strong_explicit(&global_rpmalloc_init_state, &expected,
+		                                            RPMALLOC_INIT_RUNNING, memory_order_acq_rel,
+		                                            memory_order_acquire))
+			break;
 	}
-
-	global_rpmalloc_initialized = 1;
 
 	// Remember whether the caller explicitly requested huge pages, the detection below
 	// overwrites global_config.enable_huge_pages with what is actually available.
@@ -2861,7 +2906,7 @@ rpmalloc_initialize(rpmalloc_interface_t* memory_interface) {
 		// huge page size. Leave the allocator uninitialized (and the requested flag cleared)
 		// so the caller can detect this and re-initialize without huge pages if desired.
 		global_config.enable_huge_pages = 0;
-		global_rpmalloc_initialized = 0;
+		atomic_store_explicit(&global_rpmalloc_init_state, RPMALLOC_INIT_UNINIT, memory_order_release);
 		return -1;
 	}
 
@@ -2918,6 +2963,8 @@ rpmalloc_initialize(rpmalloc_interface_t* memory_interface) {
 #endif
 
 	global_main_thread_id = get_thread_id();
+
+	atomic_store_explicit(&global_rpmalloc_init_state, RPMALLOC_INIT_DONE, memory_order_release);
 
 	rpmalloc_thread_initialize();
 
@@ -3066,7 +3113,7 @@ rpmalloc_finalize(void) {
 
 	global_heap_creating = 0;
 	global_main_thread_id = 0;
-	global_rpmalloc_initialized = 0;
+	atomic_store_explicit(&global_rpmalloc_init_state, RPMALLOC_INIT_UNINIT, memory_order_release);
 }
 
 extern void

@@ -20,12 +20,12 @@ public class RPmalloc {
 
     static { LibRPmalloc.initialize(); }
 
-    public static final String RPMALLOC_VERSION = "2.0.0";
+    public static final String RPMALLOC_VERSION = "2.0.1";
 
     public static final int
         RPMALLOC_VERSION_MAJOR  = 2,
         RPMALLOC_VERSION_MINOR  = 0,
-        RPMALLOC_VERSION_PATCH  = 0,
+        RPMALLOC_VERSION_PATCH  = 1,
         RPMALLOC_VERSION_NUMBER = RPMALLOC_VERSION_MAJOR * 10000 + RPMALLOC_VERSION_MINOR * 100 + RPMALLOC_VERSION_PATCH;
 
     public static final int RPMALLOC_MAX_ALIGNMENT = 256 * 1024;

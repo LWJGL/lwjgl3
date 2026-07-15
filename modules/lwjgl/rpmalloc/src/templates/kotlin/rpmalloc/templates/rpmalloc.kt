@@ -16,12 +16,12 @@ val rpmalloc = "RPmalloc".nativeClass(Module.RPMALLOC, prefix = "RP", prefixCons
 #include "rpmalloc.c"
 ENABLE_WARNINGS()""")
 
-    StringConstant("VERSION".."2.0.0")
+    StringConstant("VERSION".."2.0.1")
 
     IntConstant(
         "VERSION_MAJOR".."2",
         "VERSION_MINOR".."0",
-        "VERSION_PATCH".."0",
+        "VERSION_PATCH".."1",
         "VERSION_NUMBER".."RPMALLOC_VERSION_MAJOR * 10000 + RPMALLOC_VERSION_MINOR * 100 + RPMALLOC_VERSION_PATCH"
     )
 
