@@ -470,13 +470,12 @@ final class BCCallDown extends BCCall {
                                         b1 -> b1.aload(slot)
                                     );
                             } else if (type == long.class) {
+                                bcb.lload(slot);
                                 if (
                                     (BITS32 && parameter.isAnnotationPresent(FFMPointer.class)) ||
                                     (CLONG32 && parameter.isAnnotationPresent(FFMCLong.class))
                                 ) {
-                                    bcb
-                                        .lload(slot)
-                                        .l2i();
+                                    bcb.l2i();
                                 }
                             } else if (needsBinder(type)) {
                                 var binder = config.binders.get(type).binder();

@@ -64,6 +64,9 @@ _Released 2026 Jul 13_
 
 #### Known issues
 
+- Core: The FFM backend for downcalls does not property handle `long` arguments for functions that require wrapping.
+  * Breaks the FreeType and hwloc modules and a few rarely used functions in other modules.
+  * Switch to the `org.lwjgl:lwjgl:3.4.2:unsafe` artifact to fix it.
 - mimalloc: `MemoryAllocator::getAlignedAlloc` does not return a function compatible with `aligned_alloc`.
   * Breaks the LMDB and VMA modules when mimalloc is the default allocator.
   * Use this workaround to correct it:
