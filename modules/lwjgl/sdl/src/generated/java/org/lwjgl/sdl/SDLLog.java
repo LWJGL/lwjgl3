@@ -435,15 +435,10 @@ public class SDLLog {
     // --- [ SDL_GetDefaultLogOutputFunction ] ---
 
     /** {@code SDL_LogOutputFunction SDL_GetDefaultLogOutputFunction(void)} */
-    public static long nSDL_GetDefaultLogOutputFunction() {
+    @NativeType("SDL_LogOutputFunction")
+    public static long SDL_GetDefaultLogOutputFunction() {
         long __functionAddress = Functions.GetDefaultLogOutputFunction;
         return invokeP(__functionAddress);
-    }
-
-    /** {@code SDL_LogOutputFunction SDL_GetDefaultLogOutputFunction(void)} */
-    @NativeType("SDL_LogOutputFunction")
-    public static @Nullable SDL_LogOutputFunction SDL_GetDefaultLogOutputFunction() {
-        return SDL_LogOutputFunction.createSafe(nSDL_GetDefaultLogOutputFunction());
     }
 
     // --- [ SDL_GetLogOutputFunction ] ---

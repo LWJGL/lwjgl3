@@ -89,7 +89,7 @@ val SDL_log = "SDLLog".nativeClassSDL("SDL_log") {
         va_list("ap")
     )
 
-    SDL_LogOutputFunction("GetDefaultLogOutputFunction", void())
+    "SDL_LogOutputFunction".handle("GetDefaultLogOutputFunction", void())
 
     void(
         "GetLogOutputFunction",
