@@ -159,6 +159,7 @@ val spv = "SPV".nativeClass(Module.SHADERC, prefix = "SPV", prefixMethod = "spv"
         "OPERAND_TYPE_OPTIONAL_TENSOR_OPERANDS".enum,
         "OPERAND_TYPE_OPTIONAL_CAPABILITY".enum,
         "OPERAND_TYPE_VARIABLE_CAPABILITY".enum,
+        "OPERAND_TYPE_GATHER_MODES".enum,
         "OPERAND_TYPE_NUM_OPERAND_TYPES".enum
     )
 
@@ -173,10 +174,12 @@ val spv = "SPV".nativeClass(Module.SHADERC, prefix = "SPV", prefixMethod = "spv"
         "EXT_INST_TYPE_DEBUGINFO".enum,
         "EXT_INST_TYPE_OPENCL_DEBUGINFO_100".enum,
         "EXT_INST_TYPE_NONSEMANTIC_CLSPVREFLECTION".enum,
+        "EXT_INST_TYPE_NONSEMANTIC_GRAPH_DEBUGINFO".enum,
         "EXT_INST_TYPE_NONSEMANTIC_SHADER_DEBUGINFO_100".enum,
         "EXT_INST_TYPE_NONSEMANTIC_VKSPREFLECTION".enum,
         "EXT_INST_TYPE_TOSA_001000_1".enum,
         "EXT_INST_TYPE_ARM_MOTION_ENGINE_100".enum,
+        "EXT_INST_TYPE_ARM_EXPERIMENTAL_ML_OPERATIONS".enum,
         "EXT_INST_TYPE_NONSEMANTIC_UNKNOWN".enum
     )
 
@@ -194,7 +197,12 @@ val spv = "SPV".nativeClass(Module.SHADERC, prefix = "SPV", prefixMethod = "spv"
         "FP_ENCODING_IEEE754_BINARY64".enum,
         "FP_ENCODING_BFLOAT16".enum,
         "FP_ENCODING_FLOAT8_E4M3".enum,
-        "FP_ENCODING_FLOAT8_E5M2".enum
+        "FP_ENCODING_FLOAT8_E5M2".enum,
+        "FP_ENCODING_FLOAT6_E2M3".enum,
+        "FP_ENCODING_FLOAT6_E3M2".enum,
+        "FP_ENCODING_FLOAT4_E2M1".enum,
+        "FP_ENCODING_FLOAT8_UNSIGNED_E8M0".enum,
+        "FP_ENCODING_MXINT8".enum
     )
 
     EnumConstant(

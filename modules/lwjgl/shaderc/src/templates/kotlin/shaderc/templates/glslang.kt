@@ -135,7 +135,8 @@ val glslang = "GLSLang".nativeClass(Module.SHADERC, prefix = "GLSLANG", prefixMe
         "MSG_ABSOLUTE_PATH".enum("(1 << 16)"),
         "MSG_DISPLAY_ERROR_COLUMN".enum("(1 << 17)"),
         "MSG_LINK_TIME_OPTIMIZATION_BIT".enum("(1 << 18)"),
-        "MSG_VALIDATE_CROSS_STAGE_IO_BIT".enum("(1 << 19)")
+        "MSG_VALIDATE_CROSS_STAGE_IO_BIT".enum("(1 << 19)"),
+        "MSG_RELAX_SET_BINDING_LIMITS_BIT".enum("(1 << 20)")
     )
 
     EnumConstant(

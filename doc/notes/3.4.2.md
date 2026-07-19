@@ -27,7 +27,7 @@ _Released 2026 Jul 13_
 - RenderDoc: Updated to 1.7.0 (up from 1.6.0)
 - rpmalloc: Updated to 2.0.0 (up from 1.4.5)
 - SDL: Updated to 3.4.12 (up from pre-release 3.4.1)
-- Shaderc: Updated to 2026.2 (up from 2026.2)
+- Shaderc: Updated to 2026.2 (up from 2026.1)
   * Updated SPIRV Tools to 2026.2.rc1 (up from 2026.1)
 - stb
   * Updated `stb_image_resize` to 2.18 (up from 2.17)
