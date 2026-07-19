@@ -1052,7 +1052,7 @@ val VkSpecializationInfo = struct(Module.VULKAN, "VkSpecializationInfo") {
 val VkPipelineShaderStageCreateInfo = struct(Module.VULKAN, "VkPipelineShaderStageCreateInfo") {
     Expression("#STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO")..VkStructureType("sType")
     PointerSetter(
-        "VkDebugUtilsObjectNameInfoEXT", "VkPipelineRobustnessCreateInfo", "VkPipelineRobustnessCreateInfoEXT", "VkPipelineShaderStageModuleIdentifierCreateInfoEXT", "VkPipelineShaderStageNodeCreateInfoAMDX", "VkPipelineShaderStageRequiredSubgroupSizeCreateInfo", "VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT", "VkShaderDescriptorSetAndBindingMappingInfoEXT", "VkShaderModuleCreateInfo", "VkShaderModuleValidationCacheCreateInfoEXT", "VkShaderRequiredSubgroupSizeCreateInfoEXT",
+        "VkDebugUtilsObjectNameInfoEXT", "VkPipelineRobustnessCreateInfo", "VkPipelineRobustnessCreateInfoEXT", "VkPipelineShaderStageModuleIdentifierCreateInfoEXT", "VkPipelineShaderStageNodeCreateInfoAMDX", "VkPipelineShaderStageRequiredSubgroupSizeCreateInfo", "VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT", "VkShaderDescriptorSetAndBindingMappingInfoEXT", "VkShaderModuleCreateInfo", "VkShaderModuleValidationCacheCreateInfoEXT", "VkShaderRequiredSubgroupSizeCreateInfoEXT", "VkValidationFeaturesEXT",
         prepend = true
     )..nullable..opaque_const_p("pNext")
     VkPipelineShaderStageCreateFlags("flags")
@@ -1065,7 +1065,7 @@ val VkPipelineShaderStageCreateInfo = struct(Module.VULKAN, "VkPipelineShaderSta
 val VkComputePipelineCreateInfo = struct(Module.VULKAN, "VkComputePipelineCreateInfo") {
     Expression("#STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO")..VkStructureType("sType")
     PointerSetter(
-        "VkComputePipelineIndirectBufferInfoNV", "VkPipelineBinaryInfoKHR", "VkPipelineCompilerControlCreateInfoAMD", "VkPipelineCreateFlags2CreateInfo", "VkPipelineCreateFlags2CreateInfoKHR", "VkPipelineCreationFeedbackCreateInfo", "VkPipelineCreationFeedbackCreateInfoEXT", "VkPipelineRobustnessCreateInfo", "VkPipelineRobustnessCreateInfoEXT", "VkSubpassShadingPipelineCreateInfoHUAWEI",
+        "VkComputePipelineIndirectBufferInfoNV", "VkPipelineBinaryInfoKHR", "VkPipelineCompilerControlCreateInfoAMD", "VkPipelineCreateFlags2CreateInfo", "VkPipelineCreateFlags2CreateInfoKHR", "VkPipelineCreationFeedbackCreateInfo", "VkPipelineCreationFeedbackCreateInfoEXT", "VkPipelineRobustnessCreateInfo", "VkPipelineRobustnessCreateInfoEXT", "VkSubpassShadingPipelineCreateInfoHUAWEI", "VkValidationFeaturesEXT",
         prepend = true
     )..nullable..opaque_const_p("pNext")
     VkPipelineCreateFlags("flags")
@@ -1384,7 +1384,7 @@ val VkPipelineViewportStateCreateInfo = struct(Module.VULKAN, "VkPipelineViewpor
 val VkGraphicsPipelineCreateInfo = struct(Module.VULKAN, "VkGraphicsPipelineCreateInfo") {
     Expression("#STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO")..VkStructureType("sType")
     PointerSetter(
-        "VkAttachmentSampleCountInfoAMD", "VkAttachmentSampleCountInfoNV", "VkCustomResolveCreateInfoEXT", "VkExternalFormatANDROID", "VkGraphicsPipelineLibraryCreateInfoEXT", "VkGraphicsPipelineShaderGroupsCreateInfoNV", "VkMultiviewPerViewAttributesInfoNVX", "VkPipelineBinaryInfoKHR", "VkPipelineCompilerControlCreateInfoAMD", "VkPipelineCreateFlags2CreateInfo", "VkPipelineCreateFlags2CreateInfoKHR", "VkPipelineCreationFeedbackCreateInfo", "VkPipelineCreationFeedbackCreateInfoEXT", "VkPipelineDiscardRectangleStateCreateInfoEXT", "VkPipelineFragmentDensityMapLayeredCreateInfoVALVE", "VkPipelineFragmentShadingRateEnumStateCreateInfoNV", "VkPipelineFragmentShadingRateStateCreateInfoKHR", "VkPipelineLibraryCreateInfoKHR", "VkPipelineRenderingCreateInfo", "VkPipelineRenderingCreateInfoKHR", "VkPipelineRepresentativeFragmentTestStateCreateInfoNV", "VkPipelineRobustnessCreateInfo", "VkPipelineRobustnessCreateInfoEXT", "VkRenderingAttachmentLocationInfo", "VkRenderingAttachmentLocationInfoKHR", "VkRenderingInputAttachmentIndexInfo", "VkRenderingInputAttachmentIndexInfoKHR",
+        "VkAttachmentSampleCountInfoAMD", "VkAttachmentSampleCountInfoNV", "VkCustomResolveCreateInfoEXT", "VkExternalFormatANDROID", "VkGraphicsPipelineLibraryCreateInfoEXT", "VkGraphicsPipelineShaderGroupsCreateInfoNV", "VkMultiviewPerViewAttributesInfoNVX", "VkPipelineBinaryInfoKHR", "VkPipelineCompilerControlCreateInfoAMD", "VkPipelineCreateFlags2CreateInfo", "VkPipelineCreateFlags2CreateInfoKHR", "VkPipelineCreationFeedbackCreateInfo", "VkPipelineCreationFeedbackCreateInfoEXT", "VkPipelineDiscardRectangleStateCreateInfoEXT", "VkPipelineFragmentDensityMapLayeredCreateInfoVALVE", "VkPipelineFragmentShadingRateEnumStateCreateInfoNV", "VkPipelineFragmentShadingRateStateCreateInfoKHR", "VkPipelineLibraryCreateInfoKHR", "VkPipelineRenderingCreateInfo", "VkPipelineRenderingCreateInfoKHR", "VkPipelineRepresentativeFragmentTestStateCreateInfoNV", "VkPipelineRobustnessCreateInfo", "VkPipelineRobustnessCreateInfoEXT", "VkRenderingAttachmentLocationInfo", "VkRenderingAttachmentLocationInfoKHR", "VkRenderingInputAttachmentIndexInfo", "VkRenderingInputAttachmentIndexInfoKHR", "VkValidationFeaturesEXT",
         prepend = true
     )..nullable..opaque_const_p("pNext")
     VkPipelineCreateFlags("flags")
