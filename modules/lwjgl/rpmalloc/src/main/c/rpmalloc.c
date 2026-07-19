@@ -2673,6 +2673,9 @@ rpmalloc_linker_reference(void) {
 //////
 
 static void
+#if PLATFORM_WINDOWS
+WINAPI
+#endif
 rpmalloc_thread_destructor(void* value) {
 	// If this is called on main thread assume it means rpmalloc_finalize
 	// has not been called and shutdown is forced (through _exit) or unclean
