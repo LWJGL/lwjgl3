@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoDecodeH264SessionParametersCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t maxStdSPSCount;
  *     uint32_t maxStdPPSCount;
  *     {@link VkVideoDecodeH264SessionParametersAddInfoKHR VkVideoDecodeH264SessionParametersAddInfoKHR} const * pParametersAddInfo;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoDecodeH264SessionParametersCreateInfoKHR extends Struct<VkVideoDecodeH264SessionParametersCreateInfoKHR> implements NativeResource {
 

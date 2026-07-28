@@ -172,6 +172,8 @@ public class VmaPoolCreateInfo extends Struct<VmaPoolCreateInfo> implements Nati
     public VmaPoolCreateInfo pMemoryAllocateNext(VkMemoryDedicatedAllocateInfo value) { return this.pMemoryAllocateNext(value.pNext(this.pMemoryAllocateNext()).address()); }
     /** Prepends the specified {@link VkMemoryDedicatedAllocateInfoKHR} value to the {@code pMemoryAllocateNext} chain. */
     public VmaPoolCreateInfo pMemoryAllocateNext(VkMemoryDedicatedAllocateInfoKHR value) { return this.pMemoryAllocateNext(value.pNext(this.pMemoryAllocateNext()).address()); }
+    /** Prepends the specified {@link VkMemoryDedicatedAllocateInfoTensorARM} value to the {@code pMemoryAllocateNext} chain. */
+    public VmaPoolCreateInfo pMemoryAllocateNext(VkMemoryDedicatedAllocateInfoTensorARM value) { return this.pMemoryAllocateNext(value.pNext(this.pMemoryAllocateNext()).address()); }
     /** Prepends the specified {@link VkMemoryOpaqueCaptureAddressAllocateInfo} value to the {@code pMemoryAllocateNext} chain. */
     public VmaPoolCreateInfo pMemoryAllocateNext(VkMemoryOpaqueCaptureAddressAllocateInfo value) { return this.pMemoryAllocateNext(value.pNext(this.pMemoryAllocateNext()).address()); }
     /** Prepends the specified {@link VkMemoryOpaqueCaptureAddressAllocateInfoKHR} value to the {@code pMemoryAllocateNext} chain. */
@@ -284,25 +286,6 @@ public class VmaPoolCreateInfo extends Struct<VmaPoolCreateInfo> implements Nati
     public static VmaPoolCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VmaPoolCreateInfo mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VmaPoolCreateInfo callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VmaPoolCreateInfo mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VmaPoolCreateInfo callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VmaPoolCreateInfo.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VmaPoolCreateInfo.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VmaPoolCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VmaPoolCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VmaPoolCreateInfo} instance allocated on the specified {@link MemoryStack}.
@@ -497,6 +480,8 @@ public class VmaPoolCreateInfo extends Struct<VmaPoolCreateInfo> implements Nati
         public VmaPoolCreateInfo.Buffer pMemoryAllocateNext(VkMemoryDedicatedAllocateInfo value) { return this.pMemoryAllocateNext(value.pNext(this.pMemoryAllocateNext()).address()); }
         /** Prepends the specified {@link VkMemoryDedicatedAllocateInfoKHR} value to the {@code pMemoryAllocateNext} chain. */
         public VmaPoolCreateInfo.Buffer pMemoryAllocateNext(VkMemoryDedicatedAllocateInfoKHR value) { return this.pMemoryAllocateNext(value.pNext(this.pMemoryAllocateNext()).address()); }
+        /** Prepends the specified {@link VkMemoryDedicatedAllocateInfoTensorARM} value to the {@code pMemoryAllocateNext} chain. */
+        public VmaPoolCreateInfo.Buffer pMemoryAllocateNext(VkMemoryDedicatedAllocateInfoTensorARM value) { return this.pMemoryAllocateNext(value.pNext(this.pMemoryAllocateNext()).address()); }
         /** Prepends the specified {@link VkMemoryOpaqueCaptureAddressAllocateInfo} value to the {@code pMemoryAllocateNext} chain. */
         public VmaPoolCreateInfo.Buffer pMemoryAllocateNext(VkMemoryOpaqueCaptureAddressAllocateInfo value) { return this.pMemoryAllocateNext(value.pNext(this.pMemoryAllocateNext()).address()); }
         /** Prepends the specified {@link VkMemoryOpaqueCaptureAddressAllocateInfoKHR} value to the {@code pMemoryAllocateNext} chain. */

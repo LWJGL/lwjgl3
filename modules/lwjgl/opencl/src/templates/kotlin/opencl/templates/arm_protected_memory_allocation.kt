@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import opencl.*
 
 val arm_protected_memory_allocation = "ARMProtectedMemoryAllocation".nativeClassCL("arm_protected_memory_allocation", ARM) {
-    IntConstant(
-        "MEM_PROTECTED_ALLOC_ARM".."1 << 36"
+    LongConstant(
+        "MEM_PROTECTED_ALLOC_ARM".."1L << 36"
     )
 }

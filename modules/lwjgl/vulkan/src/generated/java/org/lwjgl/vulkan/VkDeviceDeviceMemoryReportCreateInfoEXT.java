@@ -17,14 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDeviceDeviceMemoryReportCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkDeviceMemoryReportFlagsEXT flags;
  *     {@link VkDeviceMemoryReportCallbackEXTI PFN_vkDeviceMemoryReportCallbackEXT} pfnUserCallback;
  *     void * pUserData;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDeviceDeviceMemoryReportCreateInfoEXT extends Struct<VkDeviceDeviceMemoryReportCreateInfoEXT> implements NativeResource {
 
@@ -43,6 +43,8 @@ public class VkDeviceDeviceMemoryReportCreateInfoEXT extends Struct<VkDeviceDevi
         PUSERDATA;
 
     static {
+        java.util.Objects.requireNonNull(VkDeviceMemoryReportCallbackEXTI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -272,7 +274,7 @@ public class VkDeviceDeviceMemoryReportCreateInfoEXT extends Struct<VkDeviceDevi
     /** Unsafe version of {@link #pfnUserCallback(VkDeviceMemoryReportCallbackEXTI) pfnUserCallback}. */
     public static void npfnUserCallback(long struct, VkDeviceMemoryReportCallbackEXTI value) { memPutAddress(struct + VkDeviceDeviceMemoryReportCreateInfoEXT.PFNUSERCALLBACK, value.address()); }
     /** Unsafe version of {@link #pUserData(long) pUserData}. */
-    public static void npUserData(long struct, long value) { memPutAddress(struct + VkDeviceDeviceMemoryReportCreateInfoEXT.PUSERDATA, check(value)); }
+    public static void npUserData(long struct, long value) { memPutAddress(struct + VkDeviceDeviceMemoryReportCreateInfoEXT.PUSERDATA, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -281,7 +283,6 @@ public class VkDeviceDeviceMemoryReportCreateInfoEXT extends Struct<VkDeviceDevi
      */
     public static void validate(long struct) {
         check(memGetAddress(struct + VkDeviceDeviceMemoryReportCreateInfoEXT.PFNUSERCALLBACK));
-        check(memGetAddress(struct + VkDeviceDeviceMemoryReportCreateInfoEXT.PUSERDATA));
     }
 
     // -----------------------------------

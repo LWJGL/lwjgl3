@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkRenderPassCreateInfo2 {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkSubpassDependency2 VkSubpassDependency2} const * pDependencies;
  *     uint32_t correlatedViewMaskCount;
  *     uint32_t const * pCorrelatedViewMasks;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkRenderPassCreateInfo2 extends Struct<VkRenderPassCreateInfo2> implements NativeResource {
 

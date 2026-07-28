@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre>{@code
  * struct VkSurfaceProtectedCapabilitiesKHR {
  *     VkStructureType sType;
- *     void const * pNext;
+ *     void * pNext;
  *     VkBool32 supportsProtected;
  * }}</pre>
  */
@@ -78,7 +78,7 @@ public class VkSurfaceProtectedCapabilitiesKHR extends Struct<VkSurfaceProtected
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** @return the value of the {@code pNext} field. */
-    @NativeType("void const *")
+    @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** @return the value of the {@code supportsProtected} field. */
     @NativeType("VkBool32")
@@ -89,7 +89,7 @@ public class VkSurfaceProtectedCapabilitiesKHR extends Struct<VkSurfaceProtected
     /** Sets the {@link KHRSurfaceProtectedCapabilities#VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR} value to the {@code sType} field. */
     public VkSurfaceProtectedCapabilitiesKHR sType$Default() { return sType(KHRSurfaceProtectedCapabilities.VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
-    public VkSurfaceProtectedCapabilitiesKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    public VkSurfaceProtectedCapabilitiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkSurfaceProtectedCapabilitiesKHR set(
@@ -184,25 +184,6 @@ public class VkSurfaceProtectedCapabilitiesKHR extends Struct<VkSurfaceProtected
     public static VkSurfaceProtectedCapabilitiesKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkSurfaceProtectedCapabilitiesKHR mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkSurfaceProtectedCapabilitiesKHR callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkSurfaceProtectedCapabilitiesKHR mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkSurfaceProtectedCapabilitiesKHR callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkSurfaceProtectedCapabilitiesKHR.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkSurfaceProtectedCapabilitiesKHR.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkSurfaceProtectedCapabilitiesKHR.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkSurfaceProtectedCapabilitiesKHR.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkSurfaceProtectedCapabilitiesKHR} instance allocated on the specified {@link MemoryStack}.
@@ -303,7 +284,7 @@ public class VkSurfaceProtectedCapabilitiesKHR extends Struct<VkSurfaceProtected
         @NativeType("VkStructureType")
         public int sType() { return VkSurfaceProtectedCapabilitiesKHR.nsType(address()); }
         /** @return the value of the {@code pNext} field. */
-        @NativeType("void const *")
+        @NativeType("void *")
         public long pNext() { return VkSurfaceProtectedCapabilitiesKHR.npNext(address()); }
         /** @return the value of the {@code supportsProtected} field. */
         @NativeType("VkBool32")
@@ -314,7 +295,7 @@ public class VkSurfaceProtectedCapabilitiesKHR extends Struct<VkSurfaceProtected
         /** Sets the {@link KHRSurfaceProtectedCapabilities#VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR} value to the {@code sType} field. */
         public VkSurfaceProtectedCapabilitiesKHR.Buffer sType$Default() { return sType(KHRSurfaceProtectedCapabilities.VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
-        public VkSurfaceProtectedCapabilitiesKHR.Buffer pNext(@NativeType("void const *") long value) { VkSurfaceProtectedCapabilitiesKHR.npNext(address(), value); return this; }
+        public VkSurfaceProtectedCapabilitiesKHR.Buffer pNext(@NativeType("void *") long value) { VkSurfaceProtectedCapabilitiesKHR.npNext(address(), value); return this; }
 
     }
 

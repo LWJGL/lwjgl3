@@ -1374,3 +1374,111 @@ val StdVideoEncodeAV1ReferenceInfo = struct(Module.VULKAN, "StdVideoEncodeAV1Ref
     uint8_t("reserved1")[3].private()
     StdVideoEncodeAV1ExtensionHeader.const.p("pExtensionHeader")
 }
+
+// vulkan_video_codec_vp9std.h
+
+val StdVideoVP9Profile = "StdVideoVP9Profile".enumType
+val StdVideoVP9Level = "StdVideoVP9Level".enumType
+val StdVideoVP9FrameType = "StdVideoVP9FrameType".enumType
+val StdVideoVP9InterpolationFilter = "StdVideoVP9InterpolationFilter".enumType
+val StdVideoVP9ColorSpace = "StdVideoVP9ColorSpace".enumType
+
+val StdVideoVP9ColorConfigFlags = struct(Module.VULKAN, "StdVideoVP9ColorConfigFlags") {
+    subpackage = "video"
+
+    uint32_tb("color_range", bits = 1)
+    uint32_tb("reserved", bits = 31).private()
+}
+
+val StdVideoVP9ColorConfig = struct(Module.VULKAN, "StdVideoVP9ColorConfig") {
+    subpackage = "video"
+
+    StdVideoVP9ColorConfigFlags("flags")
+    uint8_t("BitDepth")
+    uint8_t("subsampling_x")
+    uint8_t("subsampling_y")
+    uint8_t("reserved1").private()
+    StdVideoVP9ColorSpace("color_space")
+}
+
+val StdVideoVP9LoopFilterFlags = struct(Module.VULKAN, "StdVideoVP9LoopFilterFlags") {
+    subpackage = "video"
+
+    uint32_tb("loop_filter_delta_enabled", bits = 1)
+    uint32_tb("loop_filter_delta_update", bits = 1)
+    uint32_t("reserved", bits = 30).private()
+}
+
+val StdVideoVP9LoopFilter = struct(Module.VULKAN, "StdVideoVP9LoopFilter") {
+    subpackage = "video"
+    javaImport("static org.lwjgl.vulkan.video.STDVulkanVideoCodecVP9.*")
+
+    StdVideoVP9LoopFilterFlags("flags")
+    uint8_t("loop_filter_level")
+    uint8_t("loop_filter_sharpness")
+    uint8_t("update_ref_delta")
+    int8_t("loop_filter_ref_deltas")["STD_VIDEO_VP9_MAX_REF_FRAMES"]
+    uint8_t("update_mode_delta")
+    int8_t("loop_filter_mode_deltas")["STD_VIDEO_VP9_LOOP_FILTER_ADJUSTMENTS"]
+}
+
+val StdVideoVP9SegmentationFlags = struct(Module.VULKAN, "StdVideoVP9SegmentationFlags") {
+    subpackage = "video"
+
+    uint32_tb("segmentation_update_map", bits = 1)
+    uint32_tb("segmentation_temporal_update", bits = 1)
+    uint32_tb("segmentation_update_data", bits = 1)
+    uint32_tb("segmentation_abs_or_delta_update", bits = 1)
+    uint32_t("reserved", bits = 28).private()
+}
+
+val StdVideoVP9Segmentation = struct(Module.VULKAN, "StdVideoVP9Segmentation") {
+    subpackage = "video"
+    javaImport("static org.lwjgl.vulkan.video.STDVulkanVideoCodecVP9.*")
+
+    StdVideoVP9SegmentationFlags("flags")
+    uint8_t("segmentation_tree_probs")["STD_VIDEO_VP9_MAX_SEGMENTATION_TREE_PROBS"]
+    uint8_t("segmentation_pred_prob")["STD_VIDEO_VP9_MAX_SEGMENTATION_PRED_PROB"]
+    uint8_t("FeatureEnabled")["STD_VIDEO_VP9_MAX_SEGMENTS"]
+    int16_t("FeatureData")["STD_VIDEO_VP9_MAX_SEGMENTS"]["STD_VIDEO_VP9_SEG_LVL_MAX"]
+}
+
+// vulkan_video_codec_vp9std_decode.h
+
+val StdVideoDecodeVP9PictureInfoFlags = struct(Module.VULKAN, "StdVideoDecodeVP9PictureInfoFlags") {
+    subpackage = "video"
+
+    uint32_tb("error_resilient_mode", bits = 1)
+    uint32_tb("intra_only", bits = 1)
+    uint32_tb("allow_high_precision_mv", bits = 1)
+    uint32_tb("refresh_frame_context", bits = 1)
+    uint32_tb("frame_parallel_decoding_mode", bits = 1)
+    uint32_tb("segmentation_enabled", bits = 1)
+    uint32_tb("show_frame", bits = 1)
+    uint32_tb("UsePrevFrameMvs", bits = 1)
+    uint32_t("reserved", bits = 24).private()
+}
+
+val StdVideoDecodeVP9PictureInfo = struct(Module.VULKAN, "StdVideoDecodeVP9PictureInfo") {
+    subpackage = "video"
+    javaImport("static org.lwjgl.vulkan.video.STDVulkanVideoCodecVP9.*")
+
+    StdVideoDecodeVP9PictureInfoFlags("flags")
+    StdVideoVP9Profile("profile")
+    StdVideoVP9FrameType("frame_type")
+    uint8_t("frame_context_idx")
+    uint8_t("reset_frame_context")
+    uint8_t("refresh_frame_flags")
+    uint8_t("ref_frame_sign_bias_mask")
+    StdVideoVP9InterpolationFilter("interpolation_filter")
+    uint8_t("base_q_idx")
+    int8_t("delta_q_y_dc")
+    int8_t("delta_q_uv_dc")
+    int8_t("delta_q_uv_ac")
+    uint8_t("tile_cols_log2")
+    uint8_t("tile_rows_log2")
+    uint16_t("reserved1")[3].private()
+    StdVideoVP9ColorConfig.const.p("pColorConfig")
+    StdVideoVP9LoopFilter.const.p("pLoopFilter")
+    StdVideoVP9Segmentation.const.p("pSegmentation")
+}

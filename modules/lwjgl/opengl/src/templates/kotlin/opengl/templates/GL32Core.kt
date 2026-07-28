@@ -306,7 +306,7 @@ val GL32C = "GL32C".nativeClassGL("GL32C") {
     void(
         "DeleteSync",
 
-        GLsync("sync")
+        nullable..GLsync("sync")
     )
 
     GLenum(

@@ -10,7 +10,7 @@ import openxr.*
 
 val EXT_hand_interaction = "EXTHandInteraction".nativeClassXR("EXT_hand_interaction", type = "instance", postfix = "EXT") {
     IntConstant(
-        "EXT_hand_interaction_SPEC_VERSION".."1"
+        "EXT_hand_interaction_SPEC_VERSION".."2"
     )
 
     StringConstant(

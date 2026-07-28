@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiScene {
  *     unsigned int mFlags;
  *     {@link AINode struct aiNode} * mRootNode;
@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int mNumSkeletons;
  *     {@link AISkeleton struct aiSkeleton} ** mSkeletons;
  *     char * mPrivate;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiScene")
 public class AIScene extends Struct<AIScene> implements NativeResource {
@@ -72,6 +72,8 @@ public class AIScene extends Struct<AIScene> implements NativeResource {
         MPRIVATE;
 
     static {
+        AIString.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -332,25 +334,6 @@ public class AIScene extends Struct<AIScene> implements NativeResource {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static AIScene mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static AIScene callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static AIScene mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static AIScene callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static AIScene.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static AIScene.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static AIScene.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static AIScene.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
-
     /**
      * Returns a new {@code AIScene} instance allocated on the specified {@link MemoryStack}.
      *
@@ -427,7 +410,7 @@ public class AIScene extends Struct<AIScene> implements NativeResource {
     public static int nmNumSkeletons(long struct) { return memGetInt(struct + AIScene.MNUMSKELETONS); }
     /** Unsafe version of {@link #mSkeletons() mSkeletons}. */
     public static @Nullable PointerBuffer nmSkeletons(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIScene.MSKELETONS), nmNumSkeletons(struct)); }
-    public static ByteBuffer nmPrivate(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + AIScene.MPRIVATE), capacity); }
+    static ByteBuffer nmPrivate(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + AIScene.MPRIVATE), capacity); }
 
     /** Unsafe version of {@link #mFlags(int) mFlags}. */
     public static void nmFlags(long struct, int value) { memPutInt(struct + AIScene.MFLAGS, value); }
@@ -465,7 +448,7 @@ public class AIScene extends Struct<AIScene> implements NativeResource {
     public static void nmNumSkeletons(long struct, int value) { memPutInt(struct + AIScene.MNUMSKELETONS, value); }
     /** Unsafe version of {@link #mSkeletons(PointerBuffer) mSkeletons}. */
     public static void nmSkeletons(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + AIScene.MSKELETONS, memAddressSafe(value)); nmNumSkeletons(struct, value == null ? 0 : value.remaining()); }
-    public static void nmPrivate(long struct, ByteBuffer value) { memPutAddress(struct + AIScene.MPRIVATE, memAddress(value)); }
+    static void nmPrivate(long struct, ByteBuffer value) { memPutAddress(struct + AIScene.MPRIVATE, memAddress(value)); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

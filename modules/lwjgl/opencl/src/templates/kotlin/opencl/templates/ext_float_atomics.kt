@@ -14,12 +14,12 @@ val ext_float_atomics = "EXTFloatAtomics".nativeClassCL("ext_float_atomics", EXT
         "DEVICE_HALF_FP_ATOMIC_CAPABILITIES_EXT"..0x4233
     )
 
-    IntConstant(
-        "DEVICE_GLOBAL_FP_ATOMIC_LOAD_STORE_EXT".."1 << 0",
-        "DEVICE_GLOBAL_FP_ATOMIC_ADD_EXT".."1 << 1",
-        "DEVICE_GLOBAL_FP_ATOMIC_MIN_MAX_EXT".."1 << 2",
-        "DEVICE_LOCAL_FP_ATOMIC_LOAD_STORE_EXT".."1 << 16",
-        "DEVICE_LOCAL_FP_ATOMIC_ADD_EXT".."1 << 17",
-        "DEVICE_LOCAL_FP_ATOMIC_MIN_MAX_EXT".."1 << 18"
+    LongConstant(
+        "DEVICE_GLOBAL_FP_ATOMIC_LOAD_STORE_EXT".."1L << 0",
+        "DEVICE_GLOBAL_FP_ATOMIC_ADD_EXT".."1L << 1",
+        "DEVICE_GLOBAL_FP_ATOMIC_MIN_MAX_EXT".."1L << 2",
+        "DEVICE_LOCAL_FP_ATOMIC_LOAD_STORE_EXT".."1L << 16",
+        "DEVICE_LOCAL_FP_ATOMIC_ADD_EXT".."1L << 17",
+        "DEVICE_LOCAL_FP_ATOMIC_MIN_MAX_EXT".."1L << 18"
     )
 }

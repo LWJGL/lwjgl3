@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoCapabilitiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t maxDpbSlots;
  *     uint32_t maxActiveReferencePictures;
  *     {@link VkExtensionProperties VkExtensionProperties} stdHeaderVersion;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoCapabilitiesKHR extends Struct<VkVideoCapabilitiesKHR> implements NativeResource {
 
@@ -54,6 +54,9 @@ public class VkVideoCapabilitiesKHR extends Struct<VkVideoCapabilitiesKHR> imple
         STDHEADERVERSION;
 
     static {
+        VkExtent2D.createSafe(NULL);
+        VkExtensionProperties.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -150,12 +153,16 @@ public class VkVideoCapabilitiesKHR extends Struct<VkVideoCapabilitiesKHR> imple
     public VkVideoCapabilitiesKHR pNext(VkVideoDecodeH264CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoDecodeH265CapabilitiesKHR} value to the {@code pNext} chain. */
     public VkVideoCapabilitiesKHR pNext(VkVideoDecodeH265CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoDecodeVP9CapabilitiesKHR} value to the {@code pNext} chain. */
+    public VkVideoCapabilitiesKHR pNext(VkVideoDecodeVP9CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeAV1CapabilitiesKHR} value to the {@code pNext} chain. */
     public VkVideoCapabilitiesKHR pNext(VkVideoEncodeAV1CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeAV1QuantizationMapCapabilitiesKHR} value to the {@code pNext} chain. */
     public VkVideoCapabilitiesKHR pNext(VkVideoEncodeAV1QuantizationMapCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeCapabilitiesKHR} value to the {@code pNext} chain. */
     public VkVideoCapabilitiesKHR pNext(VkVideoEncodeCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeFeedback2CapabilitiesKHR} value to the {@code pNext} chain. */
+    public VkVideoCapabilitiesKHR pNext(VkVideoEncodeFeedback2CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH264CapabilitiesKHR} value to the {@code pNext} chain. */
     public VkVideoCapabilitiesKHR pNext(VkVideoEncodeH264CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH264QuantizationMapCapabilitiesKHR} value to the {@code pNext} chain. */
@@ -164,8 +171,12 @@ public class VkVideoCapabilitiesKHR extends Struct<VkVideoCapabilitiesKHR> imple
     public VkVideoCapabilitiesKHR pNext(VkVideoEncodeH265CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH265QuantizationMapCapabilitiesKHR} value to the {@code pNext} chain. */
     public VkVideoCapabilitiesKHR pNext(VkVideoEncodeH265QuantizationMapCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeIntraRefreshCapabilitiesKHR} value to the {@code pNext} chain. */
+    public VkVideoCapabilitiesKHR pNext(VkVideoEncodeIntraRefreshCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeQuantizationMapCapabilitiesKHR} value to the {@code pNext} chain. */
     public VkVideoCapabilitiesKHR pNext(VkVideoEncodeQuantizationMapCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeRgbConversionCapabilitiesVALVE} value to the {@code pNext} chain. */
+    public VkVideoCapabilitiesKHR pNext(VkVideoEncodeRgbConversionCapabilitiesVALVE value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     /** Initializes this struct with the specified values. */
     public VkVideoCapabilitiesKHR set(
@@ -416,12 +427,16 @@ public class VkVideoCapabilitiesKHR extends Struct<VkVideoCapabilitiesKHR> imple
         public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoDecodeH264CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoDecodeH265CapabilitiesKHR} value to the {@code pNext} chain. */
         public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoDecodeH265CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoDecodeVP9CapabilitiesKHR} value to the {@code pNext} chain. */
+        public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoDecodeVP9CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeAV1CapabilitiesKHR} value to the {@code pNext} chain. */
         public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoEncodeAV1CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeAV1QuantizationMapCapabilitiesKHR} value to the {@code pNext} chain. */
         public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoEncodeAV1QuantizationMapCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeCapabilitiesKHR} value to the {@code pNext} chain. */
         public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoEncodeCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeFeedback2CapabilitiesKHR} value to the {@code pNext} chain. */
+        public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoEncodeFeedback2CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH264CapabilitiesKHR} value to the {@code pNext} chain. */
         public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoEncodeH264CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH264QuantizationMapCapabilitiesKHR} value to the {@code pNext} chain. */
@@ -430,8 +445,12 @@ public class VkVideoCapabilitiesKHR extends Struct<VkVideoCapabilitiesKHR> imple
         public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoEncodeH265CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH265QuantizationMapCapabilitiesKHR} value to the {@code pNext} chain. */
         public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoEncodeH265QuantizationMapCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeIntraRefreshCapabilitiesKHR} value to the {@code pNext} chain. */
+        public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoEncodeIntraRefreshCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeQuantizationMapCapabilitiesKHR} value to the {@code pNext} chain. */
         public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoEncodeQuantizationMapCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeRgbConversionCapabilitiesVALVE} value to the {@code pNext} chain. */
+        public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoEncodeRgbConversionCapabilitiesVALVE value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     }
 

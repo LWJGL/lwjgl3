@@ -12,7 +12,7 @@ import static org.lwjgl.system.JNI.*;
 
 public class QCOMTileShading {
 
-    public static final int VK_QCOM_TILE_SHADING_SPEC_VERSION = 1;
+    public static final int VK_QCOM_TILE_SHADING_SPEC_VERSION = 2;
 
     public static final String VK_QCOM_TILE_SHADING_EXTENSION_NAME = "VK_QCOM_tile_shading";
 
@@ -40,13 +40,18 @@ public class QCOMTileShading {
 
     // --- [ vkCmdDispatchTileQCOM ] ---
 
-    /** {@code void vkCmdDispatchTileQCOM(VkCommandBuffer commandBuffer)} */
-    public static void vkCmdDispatchTileQCOM(VkCommandBuffer commandBuffer) {
+    /** {@code void vkCmdDispatchTileQCOM(VkCommandBuffer commandBuffer, VkDispatchTileInfoQCOM const * pDispatchTileInfo)} */
+    public static void nvkCmdDispatchTileQCOM(VkCommandBuffer commandBuffer, long pDispatchTileInfo) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdDispatchTileQCOM;
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(commandBuffer.address(), __functionAddress);
+        callPPV(commandBuffer.address(), pDispatchTileInfo, __functionAddress);
+    }
+
+    /** {@code void vkCmdDispatchTileQCOM(VkCommandBuffer commandBuffer, VkDispatchTileInfoQCOM const * pDispatchTileInfo)} */
+    public static void vkCmdDispatchTileQCOM(VkCommandBuffer commandBuffer, @NativeType("VkDispatchTileInfoQCOM const *") VkDispatchTileInfoQCOM pDispatchTileInfo) {
+        nvkCmdDispatchTileQCOM(commandBuffer, pDispatchTileInfo.address());
     }
 
     // --- [ vkCmdBeginPerTileExecutionQCOM ] ---

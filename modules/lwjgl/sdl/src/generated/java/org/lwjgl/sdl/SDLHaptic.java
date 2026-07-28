@@ -60,6 +60,8 @@ public class SDLHaptic {
 
     }
 
+    public static final int SDL_HAPTIC_INFINITY = 0xffffffff;
+
     public static final int
         SDL_HAPTIC_CONSTANT     = (1<<0),
         SDL_HAPTIC_SINE         = (1<<1),
@@ -87,8 +89,6 @@ public class SDLHaptic {
         SDL_HAPTIC_CARTESIAN     = 1,
         SDL_HAPTIC_SPHERICAL     = 2,
         SDL_HAPTIC_STEERING_AXIS = 3;
-
-    public static final int SDL_HAPTIC_INFINITY = 0xffffffff;
 
     protected SDLHaptic() {
         throw new UnsupportedOperationException();
@@ -295,7 +295,7 @@ public class SDLHaptic {
 
     // --- [ SDL_CreateHapticEffect ] ---
 
-    /** {@code int SDL_CreateHapticEffect(SDL_Haptic * haptic, SDL_HapticEffect const * effect)} */
+    /** {@code SDL_HapticEffectID SDL_CreateHapticEffect(SDL_Haptic * haptic, SDL_HapticEffect const * effect)} */
     public static int nSDL_CreateHapticEffect(long haptic, long effect) {
         long __functionAddress = Functions.CreateHapticEffect;
         if (CHECKS) {
@@ -304,14 +304,15 @@ public class SDLHaptic {
         return invokePPI(haptic, effect, __functionAddress);
     }
 
-    /** {@code int SDL_CreateHapticEffect(SDL_Haptic * haptic, SDL_HapticEffect const * effect)} */
+    /** {@code SDL_HapticEffectID SDL_CreateHapticEffect(SDL_Haptic * haptic, SDL_HapticEffect const * effect)} */
+    @NativeType("SDL_HapticEffectID")
     public static int SDL_CreateHapticEffect(@NativeType("SDL_Haptic *") long haptic, @NativeType("SDL_HapticEffect const *") SDL_HapticEffect effect) {
         return nSDL_CreateHapticEffect(haptic, effect.address());
     }
 
     // --- [ SDL_UpdateHapticEffect ] ---
 
-    /** {@code bool SDL_UpdateHapticEffect(SDL_Haptic * haptic, int effect, SDL_HapticEffect const * data)} */
+    /** {@code bool SDL_UpdateHapticEffect(SDL_Haptic * haptic, SDL_HapticEffectID effect, SDL_HapticEffect const * data)} */
     public static boolean nSDL_UpdateHapticEffect(long haptic, int effect, long data) {
         long __functionAddress = Functions.UpdateHapticEffect;
         if (CHECKS) {
@@ -320,17 +321,17 @@ public class SDLHaptic {
         return invokePPZ(haptic, effect, data, __functionAddress);
     }
 
-    /** {@code bool SDL_UpdateHapticEffect(SDL_Haptic * haptic, int effect, SDL_HapticEffect const * data)} */
+    /** {@code bool SDL_UpdateHapticEffect(SDL_Haptic * haptic, SDL_HapticEffectID effect, SDL_HapticEffect const * data)} */
     @NativeType("bool")
-    public static boolean SDL_UpdateHapticEffect(@NativeType("SDL_Haptic *") long haptic, int effect, @NativeType("SDL_HapticEffect const *") SDL_HapticEffect data) {
+    public static boolean SDL_UpdateHapticEffect(@NativeType("SDL_Haptic *") long haptic, @NativeType("SDL_HapticEffectID") int effect, @NativeType("SDL_HapticEffect const *") SDL_HapticEffect data) {
         return nSDL_UpdateHapticEffect(haptic, effect, data.address());
     }
 
     // --- [ SDL_RunHapticEffect ] ---
 
-    /** {@code bool SDL_RunHapticEffect(SDL_Haptic * haptic, int effect, Uint32 iterations)} */
+    /** {@code bool SDL_RunHapticEffect(SDL_Haptic * haptic, SDL_HapticEffectID effect, Uint32 iterations)} */
     @NativeType("bool")
-    public static boolean SDL_RunHapticEffect(@NativeType("SDL_Haptic *") long haptic, int effect, @NativeType("Uint32") int iterations) {
+    public static boolean SDL_RunHapticEffect(@NativeType("SDL_Haptic *") long haptic, @NativeType("SDL_HapticEffectID") int effect, @NativeType("Uint32") int iterations) {
         long __functionAddress = Functions.RunHapticEffect;
         if (CHECKS) {
             check(haptic);
@@ -340,9 +341,9 @@ public class SDLHaptic {
 
     // --- [ SDL_StopHapticEffect ] ---
 
-    /** {@code bool SDL_StopHapticEffect(SDL_Haptic * haptic, int effect)} */
+    /** {@code bool SDL_StopHapticEffect(SDL_Haptic * haptic, SDL_HapticEffectID effect)} */
     @NativeType("bool")
-    public static boolean SDL_StopHapticEffect(@NativeType("SDL_Haptic *") long haptic, int effect) {
+    public static boolean SDL_StopHapticEffect(@NativeType("SDL_Haptic *") long haptic, @NativeType("SDL_HapticEffectID") int effect) {
         long __functionAddress = Functions.StopHapticEffect;
         if (CHECKS) {
             check(haptic);
@@ -352,8 +353,8 @@ public class SDLHaptic {
 
     // --- [ SDL_DestroyHapticEffect ] ---
 
-    /** {@code void SDL_DestroyHapticEffect(SDL_Haptic * haptic, int effect)} */
-    public static void SDL_DestroyHapticEffect(@NativeType("SDL_Haptic *") long haptic, int effect) {
+    /** {@code void SDL_DestroyHapticEffect(SDL_Haptic * haptic, SDL_HapticEffectID effect)} */
+    public static void SDL_DestroyHapticEffect(@NativeType("SDL_Haptic *") long haptic, @NativeType("SDL_HapticEffectID") int effect) {
         long __functionAddress = Functions.DestroyHapticEffect;
         if (CHECKS) {
             check(haptic);
@@ -363,9 +364,9 @@ public class SDLHaptic {
 
     // --- [ SDL_GetHapticEffectStatus ] ---
 
-    /** {@code bool SDL_GetHapticEffectStatus(SDL_Haptic * haptic, int effect)} */
+    /** {@code bool SDL_GetHapticEffectStatus(SDL_Haptic * haptic, SDL_HapticEffectID effect)} */
     @NativeType("bool")
-    public static boolean SDL_GetHapticEffectStatus(@NativeType("SDL_Haptic *") long haptic, int effect) {
+    public static boolean SDL_GetHapticEffectStatus(@NativeType("SDL_Haptic *") long haptic, @NativeType("SDL_HapticEffectID") int effect) {
         long __functionAddress = Functions.GetHapticEffectStatus;
         if (CHECKS) {
             check(haptic);

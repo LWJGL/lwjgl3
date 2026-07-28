@@ -97,6 +97,8 @@ public class XrSpatialEntityComponentGetInfoBD extends Struct<XrSpatialEntityCom
     public XrSpatialEntityComponentGetInfoBD type$Default() { return type(BDSpatialSensing.XR_TYPE_SPATIAL_ENTITY_COMPONENT_GET_INFO_BD); }
     /** Sets the specified value to the {@code next} field. */
     public XrSpatialEntityComponentGetInfoBD next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrSpatialEntityLocationGetInfoBD} value to the {@code next} chain. */
+    public XrSpatialEntityComponentGetInfoBD next(XrSpatialEntityLocationGetInfoBD value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@code entityId} field. */
     public XrSpatialEntityComponentGetInfoBD entityId(@NativeType("XrSpatialEntityIdBD") long value) { nentityId(address(), value); return this; }
     /** Sets the specified value to the {@code componentType} field. */
@@ -320,6 +322,8 @@ public class XrSpatialEntityComponentGetInfoBD extends Struct<XrSpatialEntityCom
         public XrSpatialEntityComponentGetInfoBD.Buffer type$Default() { return type(BDSpatialSensing.XR_TYPE_SPATIAL_ENTITY_COMPONENT_GET_INFO_BD); }
         /** Sets the specified value to the {@code next} field. */
         public XrSpatialEntityComponentGetInfoBD.Buffer next(@NativeType("void const *") long value) { XrSpatialEntityComponentGetInfoBD.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrSpatialEntityLocationGetInfoBD} value to the {@code next} chain. */
+        public XrSpatialEntityComponentGetInfoBD.Buffer next(XrSpatialEntityLocationGetInfoBD value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@code entityId} field. */
         public XrSpatialEntityComponentGetInfoBD.Buffer entityId(@NativeType("XrSpatialEntityIdBD") long value) { XrSpatialEntityComponentGetInfoBD.nentityId(address(), value); return this; }
         /** Sets the specified value to the {@code componentType} field. */

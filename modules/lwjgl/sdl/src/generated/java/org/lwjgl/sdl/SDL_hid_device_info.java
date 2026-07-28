@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct SDL_hid_device_info {
  *     char * path;
  *     unsigned short vendor_id;
@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int interface_protocol;
  *     SDL_hid_bus_type bus_type;
  *     {@link SDL_hid_device_info SDL_hid_device_info} * next;
- * }}</pre>
+ * }</code></pre>
  */
 public class SDL_hid_device_info extends Struct<SDL_hid_device_info> implements NativeResource {
 

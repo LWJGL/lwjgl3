@@ -433,7 +433,7 @@ public class StdVideoEncodeAV1PictureInfoFlags extends Struct<StdVideoEncodeAV1P
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoEncodeAV1PictureInfoFlags.BITFIELD0); }
+    static int nbitfield0(long struct) { return memGetInt(struct + StdVideoEncodeAV1PictureInfoFlags.BITFIELD0); }
     /** Unsafe version of {@link #error_resilient_mode}. */
     public static int nerror_resilient_mode(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #disable_cdf_update}. */
@@ -492,10 +492,10 @@ public class StdVideoEncodeAV1PictureInfoFlags extends Struct<StdVideoEncodeAV1P
     public static int nshow_frame(long struct) { return (nbitfield0(struct) & 0x08_00_00_00) >>> 27; }
     /** Unsafe version of {@link #showable_frame}. */
     public static int nshowable_frame(long struct) { return (nbitfield0(struct) & 0x10_00_00_00) >>> 28; }
-    public static int nbitfield1(long struct) { return memGetInt(struct + StdVideoEncodeAV1PictureInfoFlags.BITFIELD1); }
-    public static int nreserved(long struct) { return nbitfield1(struct) & 0x00_00_00_07; }
+    static int nbitfield1(long struct) { return memGetInt(struct + StdVideoEncodeAV1PictureInfoFlags.BITFIELD1); }
+    static int nreserved(long struct) { return nbitfield1(struct) & 0x00_00_00_07; }
 
-    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoEncodeAV1PictureInfoFlags.BITFIELD0, value); }
+    static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoEncodeAV1PictureInfoFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #error_resilient_mode(boolean) error_resilient_mode}. */
     public static void nerror_resilient_mode(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #disable_cdf_update(boolean) disable_cdf_update}. */
@@ -554,8 +554,8 @@ public class StdVideoEncodeAV1PictureInfoFlags extends Struct<StdVideoEncodeAV1P
     public static void nshow_frame(long struct, int value) { nbitfield0(struct, ((value << 27) & 0x08_00_00_00) | (nbitfield0(struct) & 0xF7_FF_FF_FF)); }
     /** Unsafe version of {@link #showable_frame(boolean) showable_frame}. */
     public static void nshowable_frame(long struct, int value) { nbitfield0(struct, ((value << 28) & 0x10_00_00_00) | (nbitfield0(struct) & 0xEF_FF_FF_FF)); }
-    public static void nbitfield1(long struct, int value) { memPutInt(struct + StdVideoEncodeAV1PictureInfoFlags.BITFIELD1, value); }
-    public static void nreserved(long struct, int value) { nbitfield1(struct, (nbitfield1(struct) & 0xFF_FF_FF_F8) | (value & 0x00_00_00_07)); }
+    static void nbitfield1(long struct, int value) { memPutInt(struct + StdVideoEncodeAV1PictureInfoFlags.BITFIELD1, value); }
+    static void nreserved(long struct, int value) { nbitfield1(struct, (nbitfield1(struct) & 0xFF_FF_FF_F8) | (value & 0x00_00_00_07)); }
 
     // -----------------------------------
 

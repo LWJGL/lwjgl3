@@ -279,25 +279,6 @@ public class XGraphicsExposeEvent extends Struct<XGraphicsExposeEvent> implement
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static XGraphicsExposeEvent mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static XGraphicsExposeEvent callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static XGraphicsExposeEvent mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static XGraphicsExposeEvent callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static XGraphicsExposeEvent.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static XGraphicsExposeEvent.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static XGraphicsExposeEvent.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static XGraphicsExposeEvent.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
-
     /**
      * Returns a new {@code XGraphicsExposeEvent} instance allocated on the specified {@link MemoryStack}.
      *

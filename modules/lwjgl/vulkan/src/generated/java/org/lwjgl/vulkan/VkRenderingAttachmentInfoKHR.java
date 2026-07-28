@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkRenderingAttachmentInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkAttachmentLoadOp loadOp;
  *     VkAttachmentStoreOp storeOp;
  *     {@link VkClearValue VkClearValue} clearValue;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkRenderingAttachmentInfoKHR extends VkRenderingAttachmentInfo {
 

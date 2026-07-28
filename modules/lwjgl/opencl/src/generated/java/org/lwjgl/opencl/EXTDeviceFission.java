@@ -31,19 +31,19 @@ public class EXTDeviceFission {
         CL_DEVICE_REFERENCE_COUNT_EXT  = 0x4057,
         CL_DEVICE_PARTITION_STYLE_EXT  = 0x4058;
 
-    public static final int
-        CL_DEVICE_PARTITION_EQUALLY_EXT            = 0x4050,
-        CL_DEVICE_PARTITION_BY_COUNTS_EXT          = 0x4051,
-        CL_DEVICE_PARTITION_BY_NAMES_EXT           = 0x4052,
-        CL_DEVICE_PARTITION_BY_AFFINITY_DOMAIN_EXT = 0x4053;
+    public static final long
+        CL_DEVICE_PARTITION_EQUALLY_EXT            = 0x4050L,
+        CL_DEVICE_PARTITION_BY_COUNTS_EXT          = 0x4051L,
+        CL_DEVICE_PARTITION_BY_NAMES_EXT           = 0x4052L,
+        CL_DEVICE_PARTITION_BY_AFFINITY_DOMAIN_EXT = 0x4053L;
 
-    public static final int
-        CL_AFFINITY_DOMAIN_L1_CACHE_EXT         = 0x1,
-        CL_AFFINITY_DOMAIN_L2_CACHE_EXT         = 0x2,
-        CL_AFFINITY_DOMAIN_L3_CACHE_EXT         = 0x3,
-        CL_AFFINITY_DOMAIN_L4_CACHE_EXT         = 0x4,
-        CL_AFFINITY_DOMAIN_NUMA_EXT             = 0x10,
-        CL_AFFINITY_DOMAIN_NEXT_FISSIONABLE_EXT = 0x100;
+    public static final long
+        CL_AFFINITY_DOMAIN_L1_CACHE_EXT         = 0x1L,
+        CL_AFFINITY_DOMAIN_L2_CACHE_EXT         = 0x2L,
+        CL_AFFINITY_DOMAIN_L3_CACHE_EXT         = 0x3L,
+        CL_AFFINITY_DOMAIN_L4_CACHE_EXT         = 0x4L,
+        CL_AFFINITY_DOMAIN_NUMA_EXT             = 0x10L,
+        CL_AFFINITY_DOMAIN_NEXT_FISSIONABLE_EXT = 0x100L;
 
     public static final long
         CL_PROPERTIES_LIST_END_EXT          = 0L,

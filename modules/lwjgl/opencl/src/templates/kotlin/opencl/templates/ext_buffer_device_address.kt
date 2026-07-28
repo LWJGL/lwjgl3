@@ -8,8 +8,11 @@ import org.lwjgl.generator.*
 import opencl.*
 
 val ext_buffer_device_address = "EXTBufferDeviceAddress".nativeClassCL("ext_buffer_device_address", EXT) {
+    LongConstant(
+        "MEM_DEVICE_PRIVATE_ADDRESS_EXT"..0x5000L
+    )
+
     IntConstant(
-        "MEM_DEVICE_PRIVATE_ADDRESS_EXT"..0x5000,
         "MEM_DEVICE_ADDRESS_EXT"..0x5001,
         "KERNEL_EXEC_INFO_DEVICE_PTRS_EXT"..0x5002
     )

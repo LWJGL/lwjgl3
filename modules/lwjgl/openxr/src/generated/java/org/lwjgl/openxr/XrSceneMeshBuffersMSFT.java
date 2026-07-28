@@ -83,6 +83,12 @@ public class XrSceneMeshBuffersMSFT extends Struct<XrSceneMeshBuffersMSFT> imple
     public XrSceneMeshBuffersMSFT type$Default() { return type(MSFTSceneUnderstanding.XR_TYPE_SCENE_MESH_BUFFERS_MSFT); }
     /** Sets the specified value to the {@code next} field. */
     public XrSceneMeshBuffersMSFT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrSceneMeshIndicesUint16MSFT} value to the {@code next} chain. */
+    public XrSceneMeshBuffersMSFT next(XrSceneMeshIndicesUint16MSFT value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrSceneMeshIndicesUint32MSFT} value to the {@code next} chain. */
+    public XrSceneMeshBuffersMSFT next(XrSceneMeshIndicesUint32MSFT value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrSceneMeshVertexBufferMSFT} value to the {@code next} chain. */
+    public XrSceneMeshBuffersMSFT next(XrSceneMeshVertexBufferMSFT value) { return this.next(value.next(this.next()).address()); }
 
     /** Initializes this struct with the specified values. */
     public XrSceneMeshBuffersMSFT set(
@@ -284,6 +290,12 @@ public class XrSceneMeshBuffersMSFT extends Struct<XrSceneMeshBuffersMSFT> imple
         public XrSceneMeshBuffersMSFT.Buffer type$Default() { return type(MSFTSceneUnderstanding.XR_TYPE_SCENE_MESH_BUFFERS_MSFT); }
         /** Sets the specified value to the {@code next} field. */
         public XrSceneMeshBuffersMSFT.Buffer next(@NativeType("void *") long value) { XrSceneMeshBuffersMSFT.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrSceneMeshIndicesUint16MSFT} value to the {@code next} chain. */
+        public XrSceneMeshBuffersMSFT.Buffer next(XrSceneMeshIndicesUint16MSFT value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrSceneMeshIndicesUint32MSFT} value to the {@code next} chain. */
+        public XrSceneMeshBuffersMSFT.Buffer next(XrSceneMeshIndicesUint32MSFT value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrSceneMeshVertexBufferMSFT} value to the {@code next} chain. */
+        public XrSceneMeshBuffersMSFT.Buffer next(XrSceneMeshVertexBufferMSFT value) { return this.next(value.next(this.next()).address()); }
 
     }
 

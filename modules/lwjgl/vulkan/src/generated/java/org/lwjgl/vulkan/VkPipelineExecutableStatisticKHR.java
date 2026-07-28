@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPipelineExecutableStatisticKHR {
  *     VkStructureType sType;
  *     void * pNext;
@@ -26,7 +26,7 @@ import static org.lwjgl.vulkan.VK10.*;
  *     char description[VK_MAX_DESCRIPTION_SIZE];
  *     VkPipelineExecutableStatisticFormatKHR format;
  *     {@link VkPipelineExecutableStatisticValueKHR VkPipelineExecutableStatisticValueKHR} value;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPipelineExecutableStatisticKHR extends Struct<VkPipelineExecutableStatisticKHR> implements NativeResource {
 
@@ -46,6 +46,8 @@ public class VkPipelineExecutableStatisticKHR extends Struct<VkPipelineExecutabl
         VALUE;
 
     static {
+        VkPipelineExecutableStatisticValueKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -212,25 +214,6 @@ public class VkPipelineExecutableStatisticKHR extends Struct<VkPipelineExecutabl
     public static VkPipelineExecutableStatisticKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPipelineExecutableStatisticKHR mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPipelineExecutableStatisticKHR callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPipelineExecutableStatisticKHR mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPipelineExecutableStatisticKHR callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPipelineExecutableStatisticKHR.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPipelineExecutableStatisticKHR.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPipelineExecutableStatisticKHR.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPipelineExecutableStatisticKHR.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkPipelineExecutableStatisticKHR} instance allocated on the specified {@link MemoryStack}.

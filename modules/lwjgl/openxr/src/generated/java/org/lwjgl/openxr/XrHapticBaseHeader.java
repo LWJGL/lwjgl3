@@ -148,6 +148,11 @@ public class XrHapticBaseHeader extends Struct<XrHapticBaseHeader> implements Na
         return new XrHapticBaseHeader(value.address(), __getContainer(value));
     }
 
+    /** Upcasts the specified {@code XrHapticParametricVibrationEXT} instance to {@code XrHapticBaseHeader}. */
+    public static XrHapticBaseHeader create(XrHapticParametricVibrationEXT value) {
+        return new XrHapticBaseHeader(value.address(), __getContainer(value));
+    }
+
     /**
      * Returns a new {@link XrHapticBaseHeader.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -203,6 +208,11 @@ public class XrHapticBaseHeader extends Struct<XrHapticBaseHeader> implements Na
 
     /** Upcasts the specified {@code XrHapticPcmVibrationFB.Buffer} instance to {@code XrHapticBaseHeader.Buffer}. */
     public static XrHapticBaseHeader.Buffer create(XrHapticPcmVibrationFB.Buffer value) {
+        return new XrHapticBaseHeader.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
+    /** Upcasts the specified {@code XrHapticParametricVibrationEXT.Buffer} instance to {@code XrHapticBaseHeader.Buffer}. */
+    public static XrHapticBaseHeader.Buffer create(XrHapticParametricVibrationEXT.Buffer value) {
         return new XrHapticBaseHeader.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 

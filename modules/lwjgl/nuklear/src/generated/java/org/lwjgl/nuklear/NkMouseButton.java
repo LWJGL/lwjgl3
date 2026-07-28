@@ -14,12 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_mouse_button {
  *     nk_bool down;
  *     unsigned int clicked;
  *     {@link NkVec2 struct nk_vec2} clicked_pos;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_mouse_button")
 public class NkMouseButton extends Struct<NkMouseButton> {
@@ -37,6 +37,8 @@ public class NkMouseButton extends Struct<NkMouseButton> {
         CLICKED_POS;
 
     static {
+        NkVec2.createSafe(NULL);
+
         Layout layout = __struct(
             __member(1),
             __member(4),

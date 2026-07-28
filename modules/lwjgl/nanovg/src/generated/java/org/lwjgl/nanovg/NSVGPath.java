@@ -15,14 +15,14 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct NSVGpath {
  *     float * pts;
  *     int npts;
  *     char closed;
  *     float bounds[4];
  *     {@link NSVGPath NSVGpath} * next;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct NSVGpath")
 public class NSVGPath extends Struct<NSVGPath> {

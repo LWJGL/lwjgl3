@@ -7,7 +7,7 @@ package org.lwjgl.openxr;
 
 public final class MNDHeadless {
 
-    public static final int XR_MND_headless_SPEC_VERSION = 2;
+    public static final int XR_MND_headless_SPEC_VERSION = 3;
 
     public static final String XR_MND_HEADLESS_EXTENSION_NAME = "XR_MND_headless";
 

@@ -7,7 +7,7 @@ package org.lwjgl.opencl;
 
 public final class ARMProtectedMemoryAllocation {
 
-    public static final int CL_MEM_PROTECTED_ALLOC_ARM = 1 << 36;
+    public static final long CL_MEM_PROTECTED_ALLOC_ARM = 1L << 36;
 
     private ARMProtectedMemoryAllocation() {}
 

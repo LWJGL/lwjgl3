@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_style_tab {
  *     {@link NkStyleItem struct nk_style_item} background;
  *     {@link NkColor struct nk_color} border_color;
@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkVec2 struct nk_vec2} spacing;
  *     float color_factor;
  *     float disabled_factor;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_style_tab")
 public class NkStyleTab extends Struct<NkStyleTab> implements NativeResource {
@@ -65,6 +65,11 @@ public class NkStyleTab extends Struct<NkStyleTab> implements NativeResource {
         DISABLED_FACTOR;
 
     static {
+        NkStyleItem.createSafe(NULL);
+        NkColor.createSafe(NULL);
+        NkStyleButton.createSafe(NULL);
+        NkVec2.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkStyleItem.SIZEOF, NkStyleItem.ALIGNOF),
             __member(NkColor.SIZEOF, NkColor.ALIGNOF),
@@ -343,25 +348,6 @@ public class NkStyleTab extends Struct<NkStyleTab> implements NativeResource {
     public static NkStyleTab.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkStyleTab mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkStyleTab callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkStyleTab mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkStyleTab callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkStyleTab.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkStyleTab.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkStyleTab.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkStyleTab.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code NkStyleTab} instance allocated on the specified {@link MemoryStack}.

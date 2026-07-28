@@ -17,12 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * union VkClusterAccelerationStructureOpInputNV {
  *     {@link VkClusterAccelerationStructureClustersBottomLevelInputNV VkClusterAccelerationStructureClustersBottomLevelInputNV} * pClustersBottomLevel;
  *     {@link VkClusterAccelerationStructureTriangleClusterInputNV VkClusterAccelerationStructureTriangleClusterInputNV} * pTriangleClusters;
  *     {@link VkClusterAccelerationStructureMoveObjectsInputNV VkClusterAccelerationStructureMoveObjectsInputNV} * pMoveObjects;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkClusterAccelerationStructureOpInputNV extends Struct<VkClusterAccelerationStructureOpInputNV> implements NativeResource {
 

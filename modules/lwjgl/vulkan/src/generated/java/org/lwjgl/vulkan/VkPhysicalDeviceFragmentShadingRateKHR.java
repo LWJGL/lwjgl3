@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPhysicalDeviceFragmentShadingRateKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkSampleCountFlags sampleCounts;
  *     {@link VkExtent2D VkExtent2D} fragmentSize;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceFragmentShadingRateKHR extends Struct<VkPhysicalDeviceFragmentShadingRateKHR> implements NativeResource {
 
@@ -40,6 +40,8 @@ public class VkPhysicalDeviceFragmentShadingRateKHR extends Struct<VkPhysicalDev
         FRAGMENTSIZE;
 
     static {
+        VkExtent2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

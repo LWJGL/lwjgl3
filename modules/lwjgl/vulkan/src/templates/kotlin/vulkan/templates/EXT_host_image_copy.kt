@@ -39,6 +39,7 @@ val EXT_host_image_copy = "EXTHostImageCopy".nativeClassVK("EXT_host_image_copy"
     )
 
     EnumConstant(
+        "HOST_IMAGE_COPY_MEMCPY_BIT_EXT".enum(0x00000001),
         "HOST_IMAGE_COPY_MEMCPY_EXT".enum(0x00000001)
     )
 

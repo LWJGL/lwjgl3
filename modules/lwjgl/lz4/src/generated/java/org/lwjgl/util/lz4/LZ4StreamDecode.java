@@ -17,11 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.lz4.LZ4.LZ4_STREAMDECODE_MINSIZE;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * union LZ4_streamDecode_t {
  *     char minStateSize[LZ4_STREAMDECODE_MINSIZE];
  *     {@link LZ4StreamDecodeInternal LZ4_streamDecode_t_internal} internal_donotuse;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("union LZ4_streamDecode_t")
 public class LZ4StreamDecode extends Struct<LZ4StreamDecode> {
@@ -38,6 +38,8 @@ public class LZ4StreamDecode extends Struct<LZ4StreamDecode> {
         INTERNAL_DONOTUSE;
 
     static {
+        LZ4StreamDecodeInternal.createSafe(NULL);
+
         Layout layout = __union(
             __array(1, LZ4_STREAMDECODE_MINSIZE),
             __member(LZ4StreamDecodeInternal.SIZEOF, LZ4StreamDecodeInternal.ALIGNOF)

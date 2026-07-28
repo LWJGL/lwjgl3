@@ -11,9 +11,9 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
 
 int io_uring_enter2(unsigned int fd, unsigned int to_submit,
 		    unsigned int min_complete, unsigned int flags,
-		    sigset_t *sig, size_t sz)
+		    void *arg, size_t sz)
 {
-	return __sys_io_uring_enter2(fd, to_submit, min_complete, flags, sig,
+	return __sys_io_uring_enter2(fd, to_submit, min_complete, flags, arg,
 				     sz);
 }
 

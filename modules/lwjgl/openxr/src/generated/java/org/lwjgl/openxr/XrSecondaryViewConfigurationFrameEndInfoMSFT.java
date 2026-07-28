@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSecondaryViewConfigurationFrameEndInfoMSFT {
  *     XrStructureType type;
  *     void const * next;
  *     uint32_t viewConfigurationCount;
  *     {@link XrSecondaryViewConfigurationLayerInfoMSFT XrSecondaryViewConfigurationLayerInfoMSFT} const * viewConfigurationLayersInfo;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSecondaryViewConfigurationFrameEndInfoMSFT extends Struct<XrSecondaryViewConfigurationFrameEndInfoMSFT> implements NativeResource {
 

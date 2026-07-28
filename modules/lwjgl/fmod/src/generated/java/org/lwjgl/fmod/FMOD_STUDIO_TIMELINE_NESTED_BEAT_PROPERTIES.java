@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FMOD_STUDIO_TIMELINE_NESTED_BEAT_PROPERTIES {
  *     {@link FMOD_GUID FMOD_GUID} eventid;
  *     {@link FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES} properties;
- * }}</pre>
+ * }</code></pre>
  */
 public class FMOD_STUDIO_TIMELINE_NESTED_BEAT_PROPERTIES extends Struct<FMOD_STUDIO_TIMELINE_NESTED_BEAT_PROPERTIES> implements NativeResource {
 
@@ -36,6 +36,9 @@ public class FMOD_STUDIO_TIMELINE_NESTED_BEAT_PROPERTIES extends Struct<FMOD_STU
         PROPERTIES;
 
     static {
+        FMOD_GUID.createSafe(NULL);
+        FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FMOD_GUID.SIZEOF, FMOD_GUID.ALIGNOF),
             __member(FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.SIZEOF, FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES.ALIGNOF)

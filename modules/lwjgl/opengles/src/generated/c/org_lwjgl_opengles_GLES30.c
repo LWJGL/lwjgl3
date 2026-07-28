@@ -594,7 +594,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengles_GLES30_nglIsSync(JNIEnv *__en
     return glIsSync(sync);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES30_nglDeleteSync(JNIEnv *__env, jclass clazz, jlong syncAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES30_glDeleteSync(JNIEnv *__env, jclass clazz, jlong syncAddress) {
     glDeleteSyncPROC glDeleteSync = (glDeleteSyncPROC)tlsGetFunction(214);
     uintptr_t sync = (uintptr_t)syncAddress;
     UNUSED_PARAM(clazz)

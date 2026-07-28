@@ -81,6 +81,8 @@ public class XrLoaderInitInfoBaseHeaderKHR extends Struct<XrLoaderInitInfoBaseHe
     public XrLoaderInitInfoBaseHeaderKHR type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
     /** Sets the specified value to the {@code next} field. */
     public XrLoaderInitInfoBaseHeaderKHR next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrLoaderInitInfoPropertiesEXT} value to the {@code next} chain. */
+    public XrLoaderInitInfoBaseHeaderKHR next(XrLoaderInitInfoPropertiesEXT value) { return this.next(value.next(this.next()).address()); }
 
     /** Initializes this struct with the specified values. */
     public XrLoaderInitInfoBaseHeaderKHR set(
@@ -133,6 +135,11 @@ public class XrLoaderInitInfoBaseHeaderKHR extends Struct<XrLoaderInitInfoBaseHe
         return address == NULL ? null : new XrLoaderInitInfoBaseHeaderKHR(address, null);
     }
 
+    /** Upcasts the specified {@code XrLoaderInitInfoPropertiesEXT} instance to {@code XrLoaderInitInfoBaseHeaderKHR}. */
+    public static XrLoaderInitInfoBaseHeaderKHR create(XrLoaderInitInfoPropertiesEXT value) {
+        return new XrLoaderInitInfoBaseHeaderKHR(value.address(), __getContainer(value));
+    }
+
     /**
      * Returns a new {@link XrLoaderInitInfoBaseHeaderKHR.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -174,6 +181,11 @@ public class XrLoaderInitInfoBaseHeaderKHR extends Struct<XrLoaderInitInfoBaseHe
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     public static XrLoaderInitInfoBaseHeaderKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
+    }
+
+    /** Upcasts the specified {@code XrLoaderInitInfoPropertiesEXT.Buffer} instance to {@code XrLoaderInitInfoBaseHeaderKHR.Buffer}. */
+    public static XrLoaderInitInfoBaseHeaderKHR.Buffer create(XrLoaderInitInfoPropertiesEXT.Buffer value) {
+        return new XrLoaderInitInfoBaseHeaderKHR.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /**
@@ -280,6 +292,8 @@ public class XrLoaderInitInfoBaseHeaderKHR extends Struct<XrLoaderInitInfoBaseHe
         public XrLoaderInitInfoBaseHeaderKHR.Buffer type(@NativeType("XrStructureType") int value) { XrLoaderInitInfoBaseHeaderKHR.ntype(address(), value); return this; }
         /** Sets the specified value to the {@code next} field. */
         public XrLoaderInitInfoBaseHeaderKHR.Buffer next(@NativeType("void const *") long value) { XrLoaderInitInfoBaseHeaderKHR.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrLoaderInitInfoPropertiesEXT} value to the {@code next} chain. */
+        public XrLoaderInitInfoBaseHeaderKHR.Buffer next(XrLoaderInitInfoPropertiesEXT value) { return this.next(value.next(this.next()).address()); }
 
     }
 

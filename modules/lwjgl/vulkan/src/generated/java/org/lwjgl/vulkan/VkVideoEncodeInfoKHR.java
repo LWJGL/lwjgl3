@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoEncodeInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t referenceSlotCount;
  *     {@link VkVideoReferenceSlotInfoKHR VkVideoReferenceSlotInfoKHR} const * pReferenceSlots;
  *     uint32_t precedingExternallyEncodedBytes;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoEncodeInfoKHR extends Struct<VkVideoEncodeInfoKHR> implements NativeResource {
 
@@ -55,6 +55,8 @@ public class VkVideoEncodeInfoKHR extends Struct<VkVideoEncodeInfoKHR> implement
         PRECEDINGEXTERNALLYENCODEDBYTES;
 
     static {
+        VkVideoPictureResourceInfoKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -152,6 +154,8 @@ public class VkVideoEncodeInfoKHR extends Struct<VkVideoEncodeInfoKHR> implement
     public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH264PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH265PictureInfoKHR} value to the {@code pNext} chain. */
     public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH265PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeIntraRefreshInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoEncodeInfoKHR pNext(VkVideoEncodeIntraRefreshInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeQuantizationMapInfoKHR} value to the {@code pNext} chain. */
     public VkVideoEncodeInfoKHR pNext(VkVideoEncodeQuantizationMapInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoInlineQueryInfoKHR} value to the {@code pNext} chain. */
@@ -470,6 +474,8 @@ public class VkVideoEncodeInfoKHR extends Struct<VkVideoEncodeInfoKHR> implement
         public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH264PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH265PictureInfoKHR} value to the {@code pNext} chain. */
         public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH265PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeIntraRefreshInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeIntraRefreshInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeQuantizationMapInfoKHR} value to the {@code pNext} chain. */
         public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeQuantizationMapInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoInlineQueryInfoKHR} value to the {@code pNext} chain. */

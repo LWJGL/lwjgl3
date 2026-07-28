@@ -66,7 +66,7 @@ class Parameter(
             PrimitiveMapping.BOOLEAN2     -> true
             PrimitiveMapping.BOOLEAN4     -> true
             else                          -> false
-        } || modifiers.any { it.value.isSpecial }
+        } || modifiers.any { (_, value) -> value.isSpecial }
 
     private val NativeType.isInput: Boolean
         get() =

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrVirtualKeyboardLocationInfoMETA {
  *     XrStructureType type;
  *     void const * next;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrSpace space;
  *     {@link XrPosef XrPosef} poseInSpace;
  *     float scale;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrVirtualKeyboardLocationInfoMETA extends Struct<XrVirtualKeyboardLocationInfoMETA> implements NativeResource {
 
@@ -45,6 +45,8 @@ public class XrVirtualKeyboardLocationInfoMETA extends Struct<XrVirtualKeyboardL
         SCALE;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

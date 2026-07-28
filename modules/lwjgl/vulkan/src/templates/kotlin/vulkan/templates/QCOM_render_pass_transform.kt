@@ -10,7 +10,7 @@ import vulkan.*
 
 val QCOM_render_pass_transform = "QCOMRenderPassTransform".nativeClassVK("QCOM_render_pass_transform", type = "device", postfix = "QCOM") {
     IntConstant(
-        "QCOM_RENDER_PASS_TRANSFORM_SPEC_VERSION".."4"
+        "QCOM_RENDER_PASS_TRANSFORM_SPEC_VERSION".."5"
     )
 
     StringConstant(

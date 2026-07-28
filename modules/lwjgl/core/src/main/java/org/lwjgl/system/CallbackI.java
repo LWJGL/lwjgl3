@@ -6,6 +6,8 @@ package org.lwjgl.system;
 
 import org.lwjgl.system.libffi.*;
 
+import static org.lwjgl.system.Upcalls.*;
+
 /**
  * Interface for dynamically created native functions that call into Java code (upcalls).
  *
@@ -13,16 +15,12 @@ import org.lwjgl.system.libffi.*;
  */
 public interface CallbackI extends Pointer {
 
-    /**
-     * Returns the libffi Call Interface for this callback function. [INTERNAL API]
-     *
-     * @return the CIF structure for this callback function
-     */
-    FFICIF getCallInterface();
+    /** Returns the descriptor for this callback function. [INTERNAL API] */
+    Callback.Descriptor getDescriptor();
 
     @Override
     default long address() {
-        return Callback.create(getCallInterface(), this);
+        return upcallCreate(getDescriptor(), this);
     }
 
     /**

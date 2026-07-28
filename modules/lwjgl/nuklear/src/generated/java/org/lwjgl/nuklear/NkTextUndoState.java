@@ -15,7 +15,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_text_undo_state {
  *     {@link NkTextUndoRecord struct nk_text_undo_record} undo_rec[99];
  *     nk_rune undo_char[999];
@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     short redo_point;
  *     short undo_char_point;
  *     short redo_char_point;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_text_undo_state")
 public class NkTextUndoState extends Struct<NkTextUndoState> {
@@ -44,6 +44,8 @@ public class NkTextUndoState extends Struct<NkTextUndoState> {
         REDO_CHAR_POINT;
 
     static {
+        NkTextUndoRecord.createSafe(NULL);
+
         Layout layout = __struct(
             __array(NkTextUndoRecord.SIZEOF, NkTextUndoRecord.ALIGNOF, 99),
             __array(4, 999),

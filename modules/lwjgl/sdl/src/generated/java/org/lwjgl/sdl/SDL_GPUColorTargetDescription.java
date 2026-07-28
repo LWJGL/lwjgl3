@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct SDL_GPUColorTargetDescription {
  *     SDL_GPUTextureFormat format;
  *     {@link SDL_GPUColorTargetBlendState SDL_GPUColorTargetBlendState} blend_state;
- * }}</pre>
+ * }</code></pre>
  */
 public class SDL_GPUColorTargetDescription extends Struct<SDL_GPUColorTargetDescription> implements NativeResource {
 
@@ -36,6 +36,8 @@ public class SDL_GPUColorTargetDescription extends Struct<SDL_GPUColorTargetDesc
         BLEND_STATE;
 
     static {
+        SDL_GPUColorTargetBlendState.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(SDL_GPUColorTargetBlendState.SIZEOF, SDL_GPUColorTargetBlendState.ALIGNOF)

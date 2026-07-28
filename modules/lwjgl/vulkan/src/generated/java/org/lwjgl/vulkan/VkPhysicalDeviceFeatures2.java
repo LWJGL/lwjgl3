@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPhysicalDeviceFeatures2 {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkPhysicalDeviceFeatures VkPhysicalDeviceFeatures} features;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2> implements NativeResource {
 
@@ -38,6 +38,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         FEATURES;
 
     static {
+        VkPhysicalDeviceFeatures.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -135,6 +137,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceColorWriteEnableFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceCommandBufferInheritanceFeaturesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceCommandBufferInheritanceFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} value to the {@code pNext} chain. */
@@ -143,12 +147,18 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceConditionalRenderingFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceCooperativeMatrix2FeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceCooperativeMatrixDecodeVectorFeaturesNV} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceCooperativeMatrixDecodeVectorFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceCooperativeMatrixFeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceCooperativeMatrixFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceCooperativeMatrixFeaturesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceCooperativeMatrixFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceCooperativeVectorFeaturesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceCooperativeVectorFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceCopyMemoryIndirectFeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceCopyMemoryIndirectFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceCopyMemoryIndirectFeaturesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceCopyMemoryIndirectFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceCornerSampledImageFeaturesNV} value to the {@code pNext} chain. */
@@ -163,8 +173,20 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceCudaKernelLaunchFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceCustomBorderColorFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceCustomBorderColorFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceCustomResolveFeaturesEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceCustomResolveFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceDataGraphFeaturesARM} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceDataGraphFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceDataGraphModelFeaturesQCOM} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceDataGraphModelFeaturesQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceDataGraphNeuralAcceleratorStatisticsFeaturesARM} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceDataGraphNeuralAcceleratorStatisticsFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceDepthBiasControlFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceDepthBiasControlFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceDepthClampControlFeaturesEXT} value to the {@code pNext} chain. */
@@ -179,6 +201,10 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceDepthClipEnableFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceDescriptorBufferFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceDescriptorBufferFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceDescriptorBufferTensorFeaturesARM} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceDescriptorBufferTensorFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceDescriptorHeapFeaturesEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceDescriptorHeapFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceDescriptorIndexingFeatures} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceDescriptorIndexingFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceDescriptorIndexingFeaturesEXT} value to the {@code pNext} chain. */
@@ -187,6 +213,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceDeviceAddressCommandsFeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceDeviceAddressCommandsFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT} value to the {@code pNext} chain. */
@@ -209,6 +237,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceElapsedTimerQueryFeaturesQCOM} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceElapsedTimerQueryFeaturesQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceExclusiveScissorFeaturesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceExclusiveScissorFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceExtendedDynamicState2FeaturesEXT} value to the {@code pNext} chain. */
@@ -217,6 +247,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceExtendedDynamicState3FeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceExtendedDynamicStateFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceExtendedDynamicStateFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceExtendedFlagsFeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceExtendedFlagsFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceExternalFormatResolveFeaturesANDROID} value to the {@code pNext} chain. */
@@ -225,12 +257,18 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceExternalMemoryRDMAFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceFaultFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceFaultFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceFaultFeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceFaultFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceFloat16Int8FeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceFloat16Int8FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceFormatPackFeaturesARM} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceFormatPackFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceFragmentDensityMap2FeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceFragmentDensityMap2FeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceFragmentDensityMapFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM} value to the {@code pNext} chain. */
@@ -253,6 +291,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceGpaFeaturesAMD} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceGpaFeaturesAMD value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceHdrVividFeaturesHUAWEI} value to the {@code pNext} chain. */
@@ -275,6 +315,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceImageProcessing2FeaturesQCOM} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceImageProcessing2FeaturesQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceImageProcessing3FeaturesQCOM} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceImageProcessing3FeaturesQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceImageProcessingFeaturesQCOM} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceImageProcessingFeaturesQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceImageRobustnessFeatures} value to the {@code pNext} chain. */
@@ -301,6 +343,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceInlineUniformBlockFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceInlineUniformBlockFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceInternallySynchronizedQueuesFeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceInternallySynchronizedQueuesFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceInvocationMaskFeaturesHUAWEI} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceInvocationMaskFeaturesHUAWEI value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceLegacyDitheringFeaturesEXT} value to the {@code pNext} chain. */
@@ -315,6 +359,10 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceLineRasterizationFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceLinearColorAttachmentFeaturesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceLinearColorAttachmentFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceMaintenance10FeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceMaintenance10FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceMaintenance11FeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceMaintenance11FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceMaintenance4Features} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceMaintenance4Features value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceMaintenance4FeaturesKHR} value to the {@code pNext} chain. */
@@ -331,8 +379,12 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceMaintenance7FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceMaintenance8FeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceMaintenance8FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceMaintenance9FeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceMaintenance9FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceMapMemoryPlacedFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceMapMemoryPlacedFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceMemoryDecompressionFeaturesEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceMemoryDecompressionFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceMemoryDecompressionFeaturesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceMemoryDecompressionFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceMemoryPriorityFeaturesEXT} value to the {@code pNext} chain. */
@@ -345,6 +397,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceMultiDrawFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceMultisampledRenderToSwapchainFeaturesEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceMultisampledRenderToSwapchainFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceMultiviewFeatures} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceMultiviewFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceMultiviewFeaturesKHR} value to the {@code pNext} chain. */
@@ -363,6 +417,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceOpacityMicromapFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceOpacityMicromapFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceOpacityMicromapFeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceOpacityMicromapFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceOpticalFlowFeaturesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceOpticalFlowFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT} value to the {@code pNext} chain. */
@@ -371,10 +427,14 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDevicePartitionedAccelerationStructureFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePerStageDescriptorSetFeaturesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDevicePerStageDescriptorSetFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDevicePerformanceCountersByRegionFeaturesARM} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDevicePerformanceCountersByRegionFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePerformanceQueryFeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDevicePerformanceQueryFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePipelineBinaryFeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDevicePipelineBinaryFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePipelineCreationCacheControlFeatures} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDevicePipelineCreationCacheControlFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT} value to the {@code pNext} chain. */
@@ -399,14 +459,24 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDevicePortabilitySubsetFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePresentBarrierFeaturesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDevicePresentBarrierFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDevicePresentId2FeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDevicePresentId2FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePresentIdFeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDevicePresentIdFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePresentMeteringFeaturesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDevicePresentMeteringFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDevicePresentTimingFeaturesEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDevicePresentTimingFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDevicePresentWait2FeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDevicePresentWait2FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePresentWaitFeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDevicePresentWaitFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDevicePrimitiveRestartIndexFeaturesEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDevicePrimitiveRestartIndexFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT} value to the {@code pNext} chain. */
@@ -419,6 +489,10 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceProtectedMemoryFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceProvokingVertexFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceProvokingVertexFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDevicePushConstantBankFeaturesNV} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDevicePushConstantBankFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceQueuePerfHintFeaturesQCOM} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceQueuePerfHintFeaturesQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM} value to the {@code pNext} chain. */
@@ -429,6 +503,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceRawAccessChainsFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceRayQueryFeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceRayQueryFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceRayTracingInvocationReorderFeaturesEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceRayTracingInvocationReorderFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV} value to the {@code pNext} chain. */
@@ -467,6 +543,10 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceShader64BitIndexingFeaturesEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShader64BitIndexingFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceShaderAbortFeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderAbortFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT} value to the {@code pNext} chain. */
@@ -481,6 +561,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderBfloat16FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderClockFeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderClockFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceShaderConstantDataFeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderConstantDataFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures} value to the {@code pNext} chain. */
@@ -503,24 +585,38 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderFloat16Int8Features value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderFloat16Int8FeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderFloat16Int8FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceShaderFloat8FeaturesEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderFloat8FeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderFloatControls2Features} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderFloatControls2Features value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderFloatControls2FeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderFloatControls2FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceShaderFmaFeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderFmaFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderImageFootprintFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceShaderInstrumentationFeaturesARM} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderInstrumentationFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderIntegerDotProductFeatures} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderIntegerDotProductFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceShaderLongVectorFeaturesEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderLongVectorFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceShaderMultipleWaitQueuesFeaturesQCOM} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderMultipleWaitQueuesFeaturesQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderObjectFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderObjectFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderQuadControlFeaturesKHR} value to the {@code pNext} chain. */
@@ -531,10 +627,14 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderSMBuiltinsFeaturesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderSMBuiltinsFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceShaderSplitBarrierFeaturesEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderSplitBarrierFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceShaderSubgroupPartitionedFeaturesEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderSubgroupPartitionedFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderSubgroupRotateFeatures} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderSubgroupRotateFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR} value to the {@code pNext} chain. */
@@ -547,6 +647,10 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShaderTileImageFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderTileImageFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceShaderUniformBufferUnsizedArrayFeaturesEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderUniformBufferUnsizedArrayFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceShaderUntypedPointersFeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShaderUntypedPointersFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceShadingRateImageFeaturesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceShadingRateImageFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceSubgroupSizeControlFeatures} value to the {@code pNext} chain. */
@@ -559,16 +663,24 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceSubpassShadingFeaturesHUAWEI value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceSwapchainMaintenance1FeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceSwapchainMaintenance1FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceSynchronization2Features} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceSynchronization2Features value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceSynchronization2FeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceSynchronization2FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceTensorFeaturesARM} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceTensorFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceTextureCompressionASTCHDRFeatures} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceTextureCompressionASTCHDRFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceThrottleHintFeaturesSEC} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceThrottleHintFeaturesSEC value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceTileMemoryHeapFeaturesQCOM} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceTileMemoryHeapFeaturesQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceTilePropertiesFeaturesQCOM} value to the {@code pNext} chain. */
@@ -581,6 +693,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceTimelineSemaphoreFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceTransformFeedbackFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceTransformFeedbackFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceUnifiedImageLayoutsFeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceUnifiedImageLayoutsFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceUniformBufferStandardLayoutFeatures} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceUniformBufferStandardLayoutFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR} value to the {@code pNext} chain. */
@@ -603,10 +717,18 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceVideoDecodeVP9FeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceVideoDecodeVP9FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceVideoEncodeAV1FeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceVideoEncodeAV1FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceVideoEncodeFeedback2FeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceVideoEncodeFeedback2FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceVideoMaintenance1FeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceVideoMaintenance1FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceVideoMaintenance2FeaturesKHR} value to the {@code pNext} chain. */
@@ -737,25 +859,6 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
     public static VkPhysicalDeviceFeatures2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceFeatures2 mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceFeatures2 callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceFeatures2 mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceFeatures2 callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceFeatures2.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceFeatures2.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceFeatures2.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceFeatures2.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkPhysicalDeviceFeatures2} instance allocated on the specified {@link MemoryStack}.
@@ -915,6 +1018,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceColorWriteEnableFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceCommandBufferInheritanceFeaturesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceCommandBufferInheritanceFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} value to the {@code pNext} chain. */
@@ -923,12 +1028,18 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceConditionalRenderingFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceCooperativeMatrix2FeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceCooperativeMatrixDecodeVectorFeaturesNV} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceCooperativeMatrixDecodeVectorFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceCooperativeMatrixFeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceCooperativeMatrixFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceCooperativeMatrixFeaturesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceCooperativeMatrixFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceCooperativeVectorFeaturesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceCooperativeVectorFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceCopyMemoryIndirectFeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceCopyMemoryIndirectFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceCopyMemoryIndirectFeaturesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceCopyMemoryIndirectFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceCornerSampledImageFeaturesNV} value to the {@code pNext} chain. */
@@ -943,8 +1054,20 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceCudaKernelLaunchFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceCustomBorderColorFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceCustomBorderColorFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceCustomResolveFeaturesEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceCustomResolveFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceDataGraphFeaturesARM} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceDataGraphFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceDataGraphModelFeaturesQCOM} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceDataGraphModelFeaturesQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceDataGraphNeuralAcceleratorStatisticsFeaturesARM} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceDataGraphNeuralAcceleratorStatisticsFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceDepthBiasControlFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceDepthBiasControlFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceDepthClampControlFeaturesEXT} value to the {@code pNext} chain. */
@@ -959,6 +1082,10 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceDepthClipEnableFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceDescriptorBufferFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceDescriptorBufferFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceDescriptorBufferTensorFeaturesARM} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceDescriptorBufferTensorFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceDescriptorHeapFeaturesEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceDescriptorHeapFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceDescriptorIndexingFeatures} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceDescriptorIndexingFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceDescriptorIndexingFeaturesEXT} value to the {@code pNext} chain. */
@@ -967,6 +1094,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceDeviceAddressCommandsFeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceDeviceAddressCommandsFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT} value to the {@code pNext} chain. */
@@ -989,6 +1118,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceElapsedTimerQueryFeaturesQCOM} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceElapsedTimerQueryFeaturesQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceExclusiveScissorFeaturesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceExclusiveScissorFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceExtendedDynamicState2FeaturesEXT} value to the {@code pNext} chain. */
@@ -997,6 +1128,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceExtendedDynamicState3FeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceExtendedDynamicStateFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceExtendedDynamicStateFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceExtendedFlagsFeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceExtendedFlagsFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceExternalFormatResolveFeaturesANDROID} value to the {@code pNext} chain. */
@@ -1005,12 +1138,18 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceExternalMemoryRDMAFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceFaultFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceFaultFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceFaultFeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceFaultFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceFloat16Int8FeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceFloat16Int8FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceFormatPackFeaturesARM} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceFormatPackFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceFragmentDensityMap2FeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceFragmentDensityMap2FeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceFragmentDensityMapFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM} value to the {@code pNext} chain. */
@@ -1033,6 +1172,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceGpaFeaturesAMD} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceGpaFeaturesAMD value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceHdrVividFeaturesHUAWEI} value to the {@code pNext} chain. */
@@ -1055,6 +1196,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceImageProcessing2FeaturesQCOM} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceImageProcessing2FeaturesQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceImageProcessing3FeaturesQCOM} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceImageProcessing3FeaturesQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceImageProcessingFeaturesQCOM} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceImageProcessingFeaturesQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceImageRobustnessFeatures} value to the {@code pNext} chain. */
@@ -1081,6 +1224,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceInlineUniformBlockFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceInlineUniformBlockFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceInternallySynchronizedQueuesFeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceInternallySynchronizedQueuesFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceInvocationMaskFeaturesHUAWEI} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceInvocationMaskFeaturesHUAWEI value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceLegacyDitheringFeaturesEXT} value to the {@code pNext} chain. */
@@ -1095,6 +1240,10 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceLineRasterizationFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceLinearColorAttachmentFeaturesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceLinearColorAttachmentFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceMaintenance10FeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceMaintenance10FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceMaintenance11FeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceMaintenance11FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceMaintenance4Features} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceMaintenance4Features value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceMaintenance4FeaturesKHR} value to the {@code pNext} chain. */
@@ -1111,8 +1260,12 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceMaintenance7FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceMaintenance8FeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceMaintenance8FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceMaintenance9FeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceMaintenance9FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceMapMemoryPlacedFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceMapMemoryPlacedFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceMemoryDecompressionFeaturesEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceMemoryDecompressionFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceMemoryDecompressionFeaturesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceMemoryDecompressionFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceMemoryPriorityFeaturesEXT} value to the {@code pNext} chain. */
@@ -1125,6 +1278,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceMultiDrawFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceMultisampledRenderToSwapchainFeaturesEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceMultisampledRenderToSwapchainFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceMultiviewFeatures} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceMultiviewFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceMultiviewFeaturesKHR} value to the {@code pNext} chain. */
@@ -1143,6 +1298,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceOpacityMicromapFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceOpacityMicromapFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceOpacityMicromapFeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceOpacityMicromapFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceOpticalFlowFeaturesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceOpticalFlowFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT} value to the {@code pNext} chain. */
@@ -1151,10 +1308,14 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDevicePartitionedAccelerationStructureFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePerStageDescriptorSetFeaturesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDevicePerStageDescriptorSetFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDevicePerformanceCountersByRegionFeaturesARM} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDevicePerformanceCountersByRegionFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePerformanceQueryFeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDevicePerformanceQueryFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePipelineBinaryFeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDevicePipelineBinaryFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePipelineCreationCacheControlFeatures} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDevicePipelineCreationCacheControlFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT} value to the {@code pNext} chain. */
@@ -1179,14 +1340,24 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDevicePortabilitySubsetFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePresentBarrierFeaturesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDevicePresentBarrierFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDevicePresentId2FeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDevicePresentId2FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePresentIdFeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDevicePresentIdFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePresentMeteringFeaturesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDevicePresentMeteringFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDevicePresentTimingFeaturesEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDevicePresentTimingFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDevicePresentWait2FeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDevicePresentWait2FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePresentWaitFeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDevicePresentWaitFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDevicePrimitiveRestartIndexFeaturesEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDevicePrimitiveRestartIndexFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT} value to the {@code pNext} chain. */
@@ -1199,6 +1370,10 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceProtectedMemoryFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceProvokingVertexFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceProvokingVertexFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDevicePushConstantBankFeaturesNV} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDevicePushConstantBankFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceQueuePerfHintFeaturesQCOM} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceQueuePerfHintFeaturesQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM} value to the {@code pNext} chain. */
@@ -1209,6 +1384,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceRawAccessChainsFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceRayQueryFeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceRayQueryFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceRayTracingInvocationReorderFeaturesEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceRayTracingInvocationReorderFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV} value to the {@code pNext} chain. */
@@ -1247,6 +1424,10 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceShader64BitIndexingFeaturesEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShader64BitIndexingFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceShaderAbortFeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderAbortFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT} value to the {@code pNext} chain. */
@@ -1261,6 +1442,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderBfloat16FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderClockFeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderClockFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceShaderConstantDataFeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderConstantDataFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures} value to the {@code pNext} chain. */
@@ -1283,24 +1466,38 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderFloat16Int8Features value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderFloat16Int8FeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderFloat16Int8FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceShaderFloat8FeaturesEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderFloat8FeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderFloatControls2Features} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderFloatControls2Features value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderFloatControls2FeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderFloatControls2FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceShaderFmaFeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderFmaFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderImageFootprintFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceShaderInstrumentationFeaturesARM} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderInstrumentationFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderIntegerDotProductFeatures} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderIntegerDotProductFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceShaderLongVectorFeaturesEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderLongVectorFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceShaderMultipleWaitQueuesFeaturesQCOM} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderMultipleWaitQueuesFeaturesQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderObjectFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderObjectFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderQuadControlFeaturesKHR} value to the {@code pNext} chain. */
@@ -1311,10 +1508,14 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderSMBuiltinsFeaturesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderSMBuiltinsFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceShaderSplitBarrierFeaturesEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderSplitBarrierFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceShaderSubgroupPartitionedFeaturesEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderSubgroupPartitionedFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderSubgroupRotateFeatures} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderSubgroupRotateFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR} value to the {@code pNext} chain. */
@@ -1327,6 +1528,10 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShaderTileImageFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderTileImageFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceShaderUniformBufferUnsizedArrayFeaturesEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderUniformBufferUnsizedArrayFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceShaderUntypedPointersFeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShaderUntypedPointersFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceShadingRateImageFeaturesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceShadingRateImageFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceSubgroupSizeControlFeatures} value to the {@code pNext} chain. */
@@ -1339,16 +1544,24 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceSubpassShadingFeaturesHUAWEI value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceSwapchainMaintenance1FeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceSwapchainMaintenance1FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceSynchronization2Features} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceSynchronization2Features value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceSynchronization2FeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceSynchronization2FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceTensorFeaturesARM} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceTensorFeaturesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceTextureCompressionASTCHDRFeatures} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceTextureCompressionASTCHDRFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceThrottleHintFeaturesSEC} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceThrottleHintFeaturesSEC value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceTileMemoryHeapFeaturesQCOM} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceTileMemoryHeapFeaturesQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceTilePropertiesFeaturesQCOM} value to the {@code pNext} chain. */
@@ -1361,6 +1574,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceTimelineSemaphoreFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceTransformFeedbackFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceTransformFeedbackFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceUnifiedImageLayoutsFeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceUnifiedImageLayoutsFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceUniformBufferStandardLayoutFeatures} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceUniformBufferStandardLayoutFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR} value to the {@code pNext} chain. */
@@ -1383,10 +1598,18 @@ public class VkPhysicalDeviceFeatures2 extends Struct<VkPhysicalDeviceFeatures2>
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceVideoDecodeVP9FeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceVideoDecodeVP9FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceVideoEncodeAV1FeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceVideoEncodeAV1FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceVideoEncodeFeedback2FeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceVideoEncodeFeedback2FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceVideoMaintenance1FeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceVideoMaintenance1FeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceVideoMaintenance2FeaturesKHR} value to the {@code pNext} chain. */

@@ -12,8 +12,8 @@
     <condition property="linux.triplet" value="loongarch64-unknown-linux-gnu"><isset property="build.arch.loongarch64"/></condition>
     <condition property="linux.triplet" value="x86_64-linux-gnu"><isset property="build.arch.x64|x86"/></condition>
 
-    <condition property="gcc.prefix" value="" else="${linux.triplet}-">
-        <isset property="build.arch.x64|x86"/>
+    <condition property="gcc.prefix" value="${linux.triplet}-" else="">
+        <isset property="env.LWJGL_BUILD_ARCH"/>
     </condition>
     <condition property="gcc.suffix" value="-${gcc.version}" else="">
         <isset property="gcc.version"/>
@@ -160,12 +160,13 @@
     </macrodef>
 
     <target name="compile-native-platform">
-        <local name="gcc.version.string"/>
-        <exec executable="bash" outputproperty="gcc.version.string" logError="true" failonerror="true">
-            <arg line="-o pipefail -c"/>
-            <arg value="${gcc.prefix}gcc${gcc.suffix} --version | grep ^.*gcc"/>
-        </exec>
-        <echo message='${gcc.prefix}gcc${gcc.suffix} --version: "${gcc.version.string}"' taskname="Compiler"/>
+        <sequential if:set="gcc.version.print">
+            <echo message="GCC executable: ${gcc.prefix}gcc${gcc.suffix}"/>
+            <exec executable="bash" logError="true" failonerror="false" taskname="Compiler">
+                <arg line="-o pipefail -c"/>
+                <arg value="${gcc.prefix}gcc${gcc.suffix} --version | grep ^.*gcc"/>
+            </exec>
+        </sequential>
 
         <parallel threadsPerProcessor="2">
 
@@ -188,6 +189,7 @@
                 <arg value="-I${src.main.rel}/libffi/loongarch64" if:set="build.arch.loongarch64"/>
                 <arg value="-I${src.main.rel}/libffi/x86" if:set="build.arch.x64|x86"/>
                 <arg value="-DX86_64" if:set="build.arch.x64"/> <!-- for libffi/x86/ffitarget.h -->
+                <arg value="-DPOWERPC" if:set="build.arch.ppc64le"/> <!-- for libffi/ppc64le/ffitarget.h -->
                 <arg value="-I${src.main.rel}/${platform}/liburing"/>
                 <arg value="-I${src.main.rel}/${platform}/liburing/include"/>
                 <fileset dir=".">
@@ -249,9 +251,10 @@
         <!-- msdfgen -->
         <build module="msdfgen" simple="true" linker="g++" if:true="${binding.msdfgen}">
             <beforeCompile>
-                <compile lang="c++">
+                <compile flags="-DMSDFGEN_DYNAMIC_FREETYPE" lang="c++">
                     <arg value="-I${src.main.rel}"/>
-                    <fileset dir="." includes="${src.main}/*.cpp"/>
+                    <fileset dir="." includes="${src.main}/core/*.cpp"/>
+                    <fileset dir="." includes="${src.main}/ext/*.cpp"/>
                 </compile>
             </beforeCompile>
             <link>
@@ -463,9 +466,13 @@
             <update-dependency module="freetype" artifact="libfreetype.so"/>
             <update-dependency module="glfw" artifact="libglfw.so"/>
             <update-dependency module="harfbuzz" artifact="libharfbuzz.so"/>
+                <update-dependency module="harfbuzz" artifact="libharfbuzz-gpu.so"/>
+                <update-dependency module="harfbuzz" artifact="libharfbuzz-raster.so"/>
+                <update-dependency module="harfbuzz" artifact="libharfbuzz-vector.so"/>
             <update-dependency module="hwloc" artifact="libhwloc.so"/>
             <update-dependency module="jemalloc" artifact="libjemalloc.so"/>
             <update-dependency module="ktx" artifact="libktx.so"/>
+            <update-dependency module="mimalloc" artifact="libmimalloc.so"/>
             <update-dependency module="openal" artifact="libopenal.so"/>
             <update-dependency module="openxr" artifact="libopenxr_loader.so"/>
             <update-dependency module="opus" artifact="libopus.so"/>

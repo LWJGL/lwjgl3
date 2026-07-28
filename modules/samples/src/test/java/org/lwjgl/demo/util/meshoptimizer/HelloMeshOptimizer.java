@@ -32,8 +32,8 @@ public class HelloMeshOptimizer {
         FloatBuffer normalBuffer = Objects.requireNonNull(mesh.normals(mesh.npoints() * 3));
 
         nmeshopt_setAllocator(
-            MemoryUtil.getAllocator().getMalloc(),
-            MemoryUtil.getAllocator().getFree()
+            MemoryUtil.getAllocator(true).getMalloc(),
+            MemoryUtil.getAllocator(true).getFree()
         );
 
         MeshoptStream.Buffer streams = MeshoptStream.create(2)
@@ -42,7 +42,7 @@ public class HelloMeshOptimizer {
                 .size(4 * 3)
                 .stride(4 * 3))
             .apply(1, it -> it
-                .data(memByteBuffer(vertexBuffer))
+                .data(memByteBuffer(normalBuffer))
                 .size(4 * 3)
                 .stride(4 * 3));
 

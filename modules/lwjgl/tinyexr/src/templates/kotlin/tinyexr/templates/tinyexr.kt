@@ -48,6 +48,11 @@ ENABLE_WARNINGS()""")
         "COMPRESSIONTYPE_ZIPS".."2",
         "COMPRESSIONTYPE_ZIP".."3",
         "COMPRESSIONTYPE_PIZ".."4",
+        "COMPRESSIONTYPE_PXR24".."5",
+        "COMPRESSIONTYPE_B44".."6",
+        "COMPRESSIONTYPE_B44A".."7",
+        "COMPRESSIONTYPE_DWAA".."8",
+        "COMPRESSIONTYPE_DWAB".."9",
         "COMPRESSIONTYPE_ZFP".."128"
     )
 
@@ -66,6 +71,12 @@ ENABLE_WARNINGS()""")
     IntConstant(
         "TILE_ROUND_DOWN".."0",
         "TILE_ROUND_UP".."1"
+    )
+
+    IntConstant(
+        "SPECTRUM_REFLECTIVE".."0",
+        "SPECTRUM_EMISSIVE".."1",
+        "SPECTRUM_POLARISED".."2"
     )
 
     int(
@@ -297,4 +308,88 @@ ENABLE_WARNINGS()""")
         const..charUTF8_p("filename"),
         Check(1)..const..charASCII_pp("err")
     )*/
+
+    int(
+        "IsSpectralEXR",
+
+        charUTF8.const.p("filename")
+    )
+
+    int(
+        "IsSpectralEXRFromMemory",
+
+        unsigned_char.const.p("memory"),
+        AutoSize("memory")..size_t("size")
+    )
+
+    int(
+        "EXRGetSpectrumType",
+
+        EXRHeader.const.p("exr_header")
+    )
+
+    void(
+        "EXRFormatWavelength",
+
+        char.p("buffer"),
+        AutoSize("buffer")..size_t("buffer_size"),
+        float("wavelength_nm")
+    )
+
+    void(
+        "EXRSpectralChannelName",
+
+        char.p("buffer"),
+        AutoSize("buffer")..size_t("buffer_size"),
+        float("wavelength_nm"),
+        int("stokes_component")
+    )
+
+    void(
+        "EXRReflectiveChannelName",
+
+        char.p("buffer"),
+        AutoSize("buffer")..size_t("buffer_size"),
+        float("wavelength_nm")
+    )
+
+    float(
+        "EXRParseSpectralChannelWavelength",
+
+        charASCII.const.p("channel_name")
+    )
+
+    int(
+        "EXRGetStokesComponent",
+
+        charASCII.const.p("channel_name")
+    )
+
+    int(
+        "EXRIsSpectralChannel",
+
+        charASCII.const.p("channel_name")
+    )
+
+    int(
+        "EXRGetWavelengths",
+
+        EXRHeader.const.p("exr_header"),
+        float.p("wavelengths"),
+        AutoSize("wavelengths")..int("max_wavelengths")
+    )
+
+    int(
+        "EXRSetSpectralAttributes",
+
+        EXRHeader.p("exr_header"),
+        int("spectrum_type"),
+        charASCII.const.p("units")
+    )
+
+    charASCII.const.p(
+        "EXRGetSpectralUnits",
+
+        EXRHeader.const.p("exr_header")
+    )
 }

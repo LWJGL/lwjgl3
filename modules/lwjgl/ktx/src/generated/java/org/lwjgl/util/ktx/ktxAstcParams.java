@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     ktx_uint32_t threadCount;
  *     ktx_uint32_t blockDimension;
  *     ktx_uint32_t mode;
- *     ktx_uint32_t qualityLevel;
+ *     ktx_pack_astc_quality_levels qualityLevel;
  *     ktx_bool_t normalMap;
  *     ktx_bool_t perceptual;
  *     char inputSwizzle[4];
@@ -115,7 +115,7 @@ public class ktxAstcParams extends Struct<ktxAstcParams> implements NativeResour
     @NativeType("ktx_uint32_t")
     public int mode() { return nmode(address()); }
     /** @return the value of the {@code qualityLevel} field. */
-    @NativeType("ktx_uint32_t")
+    @NativeType("ktx_pack_astc_quality_levels")
     public int qualityLevel() { return nqualityLevel(address()); }
     /** @return the value of the {@code normalMap} field. */
     @NativeType("ktx_bool_t")
@@ -141,7 +141,7 @@ public class ktxAstcParams extends Struct<ktxAstcParams> implements NativeResour
     /** Sets the specified value to the {@code mode} field. */
     public ktxAstcParams mode(@NativeType("ktx_uint32_t") int value) { nmode(address(), value); return this; }
     /** Sets the specified value to the {@code qualityLevel} field. */
-    public ktxAstcParams qualityLevel(@NativeType("ktx_uint32_t") int value) { nqualityLevel(address(), value); return this; }
+    public ktxAstcParams qualityLevel(@NativeType("ktx_pack_astc_quality_levels") int value) { nqualityLevel(address(), value); return this; }
     /** Sets the specified value to the {@code normalMap} field. */
     public ktxAstcParams normalMap(@NativeType("ktx_bool_t") boolean value) { nnormalMap(address(), value); return this; }
     /** Sets the specified value to the {@code perceptual} field. */
@@ -407,7 +407,7 @@ public class ktxAstcParams extends Struct<ktxAstcParams> implements NativeResour
         @NativeType("ktx_uint32_t")
         public int mode() { return ktxAstcParams.nmode(address()); }
         /** @return the value of the {@code qualityLevel} field. */
-        @NativeType("ktx_uint32_t")
+        @NativeType("ktx_pack_astc_quality_levels")
         public int qualityLevel() { return ktxAstcParams.nqualityLevel(address()); }
         /** @return the value of the {@code normalMap} field. */
         @NativeType("ktx_bool_t")
@@ -433,7 +433,7 @@ public class ktxAstcParams extends Struct<ktxAstcParams> implements NativeResour
         /** Sets the specified value to the {@code mode} field. */
         public ktxAstcParams.Buffer mode(@NativeType("ktx_uint32_t") int value) { ktxAstcParams.nmode(address(), value); return this; }
         /** Sets the specified value to the {@code qualityLevel} field. */
-        public ktxAstcParams.Buffer qualityLevel(@NativeType("ktx_uint32_t") int value) { ktxAstcParams.nqualityLevel(address(), value); return this; }
+        public ktxAstcParams.Buffer qualityLevel(@NativeType("ktx_pack_astc_quality_levels") int value) { ktxAstcParams.nqualityLevel(address(), value); return this; }
         /** Sets the specified value to the {@code normalMap} field. */
         public ktxAstcParams.Buffer normalMap(@NativeType("ktx_bool_t") boolean value) { ktxAstcParams.nnormalMap(address(), value); return this; }
         /** Sets the specified value to the {@code perceptual} field. */

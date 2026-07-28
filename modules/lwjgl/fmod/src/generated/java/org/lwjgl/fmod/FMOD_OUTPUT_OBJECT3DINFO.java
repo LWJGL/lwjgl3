@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FMOD_OUTPUT_OBJECT3DINFO {
  *     float * buffer;
  *     unsigned int bufferlength;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float gain;
  *     float spread;
  *     float priority;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct FMOD_OUTPUT_OBJECT3DINFO")
 public class FMOD_OUTPUT_OBJECT3DINFO extends Struct<FMOD_OUTPUT_OBJECT3DINFO> implements NativeResource {
@@ -46,6 +46,8 @@ public class FMOD_OUTPUT_OBJECT3DINFO extends Struct<FMOD_OUTPUT_OBJECT3DINFO> i
         PRIORITY;
 
     static {
+        FMOD_VECTOR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(4),

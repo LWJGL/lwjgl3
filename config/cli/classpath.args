@@ -15,6 +15,7 @@ bin/classes/lwjgl/llvm:\
 bin/classes/lwjgl/lmdb:\
 bin/classes/lwjgl/lz4:\
 bin/classes/lwjgl/meshoptimizer:\
+bin/classes/lwjgl/mimalloc:\
 bin/classes/lwjgl/msdfgen:\
 bin/classes/lwjgl/nanovg:\
 bin/classes/lwjgl/nfd:\
@@ -28,6 +29,7 @@ bin/classes/lwjgl/openxr:\
 bin/classes/lwjgl/opus:\
 bin/classes/lwjgl/par:\
 bin/classes/lwjgl/remotery:\
+bin/classes/lwjgl/renderdoc:\
 bin/classes/lwjgl/rpmalloc:\
 bin/classes/lwjgl/sdl:\
 bin/classes/lwjgl/shaderc:\
@@ -44,6 +46,7 @@ bin/classes/test:\
 bin/classes/samples:\
 ../lwjgl3-demos/target/classes:\
 modules/samples/src/test/resources:\
+bin/libs/java/jspecify.jar:\
 bin/libs/java/testng.jar:\
 bin/libs/java/jcommander.jar:\
 bin/libs/java/jquery.jar:\

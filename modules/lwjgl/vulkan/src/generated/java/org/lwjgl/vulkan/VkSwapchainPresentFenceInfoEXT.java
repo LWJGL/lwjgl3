@@ -24,37 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkFence const * pFences;
  * }}</pre>
  */
-public class VkSwapchainPresentFenceInfoEXT extends Struct<VkSwapchainPresentFenceInfoEXT> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        SWAPCHAINCOUNT,
-        PFENCES;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(POINTER_SIZE)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        SWAPCHAINCOUNT = layout.offsetof(2);
-        PFENCES = layout.offsetof(3);
-    }
+public class VkSwapchainPresentFenceInfoEXT extends VkSwapchainPresentFenceInfoKHR {
 
     protected VkSwapchainPresentFenceInfoEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -72,37 +42,27 @@ public class VkSwapchainPresentFenceInfoEXT extends Struct<VkSwapchainPresentFen
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSwapchainPresentFenceInfoEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** @return the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** @return the value of the {@code swapchainCount} field. */
-    @NativeType("uint32_t")
-    public int swapchainCount() { return nswapchainCount(address()); }
-    /** @return a {@link LongBuffer} view of the data pointed to by the {@code pFences} field. */
-    @NativeType("VkFence const *")
-    public @Nullable LongBuffer pFences() { return npFences(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkSwapchainPresentFenceInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_FENCE_INFO_EXT STRUCTURE_TYPE_SWAPCHAIN_PRESENT_FENCE_INFO_EXT} value to the {@code sType} field. */
-    public VkSwapchainPresentFenceInfoEXT sType$Default() { return sType(EXTSwapchainMaintenance1.VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_FENCE_INFO_EXT); }
+    /** Sets the {@link KHRSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_FENCE_INFO_KHR STRUCTURE_TYPE_SWAPCHAIN_PRESENT_FENCE_INFO_KHR} value to the {@code sType} field. */
+    @Override
+    public VkSwapchainPresentFenceInfoEXT sType$Default() { return sType(KHRSwapchainMaintenance1.VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_FENCE_INFO_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkSwapchainPresentFenceInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code swapchainCount} field. */
+    @Override
     public VkSwapchainPresentFenceInfoEXT swapchainCount(@NativeType("uint32_t") int value) { nswapchainCount(address(), value); return this; }
     /** Sets the address of the specified {@link LongBuffer} to the {@code pFences} field. */
+    @Override
     public VkSwapchainPresentFenceInfoEXT pFences(@Nullable @NativeType("VkFence const *") LongBuffer value) { npFences(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkSwapchainPresentFenceInfoEXT set(
         int sType,
         long pNext,
@@ -240,28 +200,8 @@ public class VkSwapchainPresentFenceInfoEXT extends Struct<VkSwapchainPresentFen
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkSwapchainPresentFenceInfoEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkSwapchainPresentFenceInfoEXT.PNEXT); }
-    /** Unsafe version of {@link #swapchainCount}. */
-    public static int nswapchainCount(long struct) { return memGetInt(struct + VkSwapchainPresentFenceInfoEXT.SWAPCHAINCOUNT); }
-    /** Unsafe version of {@link #pFences() pFences}. */
-    public static @Nullable LongBuffer npFences(long struct) { return memLongBufferSafe(memGetAddress(struct + VkSwapchainPresentFenceInfoEXT.PFENCES), nswapchainCount(struct)); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkSwapchainPresentFenceInfoEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkSwapchainPresentFenceInfoEXT.PNEXT, value); }
-    /** Sets the specified value to the {@code swapchainCount} field of the specified {@code struct}. */
-    public static void nswapchainCount(long struct, int value) { memPutInt(struct + VkSwapchainPresentFenceInfoEXT.SWAPCHAINCOUNT, value); }
-    /** Unsafe version of {@link #pFences(LongBuffer) pFences}. */
-    public static void npFences(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkSwapchainPresentFenceInfoEXT.PFENCES, memAddressSafe(value)); if (value != null) { nswapchainCount(struct, value.remaining()); } }
-
-    // -----------------------------------
-
     /** An array of {@link VkSwapchainPresentFenceInfoEXT} structs. */
-    public static class Buffer extends StructBuffer<VkSwapchainPresentFenceInfoEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkSwapchainPresentFenceInfoKHR.Buffer {
 
         private static final VkSwapchainPresentFenceInfoEXT ELEMENT_FACTORY = VkSwapchainPresentFenceInfoEXT.create(-1L);
 
@@ -275,7 +215,7 @@ public class VkSwapchainPresentFenceInfoEXT extends Struct<VkSwapchainPresentFen
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -301,28 +241,20 @@ public class VkSwapchainPresentFenceInfoEXT extends Struct<VkSwapchainPresentFen
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkSwapchainPresentFenceInfoEXT.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkSwapchainPresentFenceInfoEXT.npNext(address()); }
-        /** @return the value of the {@code swapchainCount} field. */
-        @NativeType("uint32_t")
-        public int swapchainCount() { return VkSwapchainPresentFenceInfoEXT.nswapchainCount(address()); }
-        /** @return a {@link LongBuffer} view of the data pointed to by the {@code pFences} field. */
-        @NativeType("VkFence const *")
-        public @Nullable LongBuffer pFences() { return VkSwapchainPresentFenceInfoEXT.npFences(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkSwapchainPresentFenceInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSwapchainPresentFenceInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_FENCE_INFO_EXT STRUCTURE_TYPE_SWAPCHAIN_PRESENT_FENCE_INFO_EXT} value to the {@code sType} field. */
-        public VkSwapchainPresentFenceInfoEXT.Buffer sType$Default() { return sType(EXTSwapchainMaintenance1.VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_FENCE_INFO_EXT); }
+        /** Sets the {@link KHRSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_FENCE_INFO_KHR STRUCTURE_TYPE_SWAPCHAIN_PRESENT_FENCE_INFO_KHR} value to the {@code sType} field. */
+        @Override
+        public VkSwapchainPresentFenceInfoEXT.Buffer sType$Default() { return sType(KHRSwapchainMaintenance1.VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_FENCE_INFO_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkSwapchainPresentFenceInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkSwapchainPresentFenceInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code swapchainCount} field. */
+        @Override
         public VkSwapchainPresentFenceInfoEXT.Buffer swapchainCount(@NativeType("uint32_t") int value) { VkSwapchainPresentFenceInfoEXT.nswapchainCount(address(), value); return this; }
         /** Sets the address of the specified {@link LongBuffer} to the {@code pFences} field. */
+        @Override
         public VkSwapchainPresentFenceInfoEXT.Buffer pFences(@Nullable @NativeType("VkFence const *") LongBuffer value) { VkSwapchainPresentFenceInfoEXT.npFences(address(), value); return this; }
 
     }

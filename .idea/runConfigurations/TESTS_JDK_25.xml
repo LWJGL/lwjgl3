@@ -1,0 +1,23 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="TESTS JDK 25" type="TestNG">
+    <module name="samples.samples25" />
+    <shortenClasspath name="NONE" />
+    <option name="SUITE_NAME" value="$PROJECT_DIR$/config/tests25.xml" />
+    <option name="PACKAGE_NAME" value="" />
+    <option name="MAIN_CLASS_NAME" value="" />
+    <option name="METHOD_NAME" value="" />
+    <option name="GROUP_NAME" value="" />
+    <option name="TEST_OBJECT" value="SUITE" />
+    <option name="VM_PARAMETERS" value="-Xcheck:jni -ea -Dorg.lwjgl.util.Debug=true -Dorg.lwjgl.util.DebugAllocator=true -Dorg.lwjgl.util.DebugGenerator=false --enable-preview --enable-native-access=ALL-UNNAMED" />
+    <option name="PARAMETERS" value="" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <option name="OUTPUT_DIRECTORY" value="" />
+    <option name="PROPERTIES_FILE" value="" />
+    <properties />
+    <listeners />
+    <method v="2">
+      <option name="Make" enabled="true" />
+      <option name="AntTarget" enabled="true" antfile="file://$PROJECT_DIR$/build.xml" target="compile-native" />
+    </method>
+  </configuration>
+</component>

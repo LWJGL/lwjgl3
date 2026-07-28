@@ -17,9 +17,9 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class NVCreateBuffer {
 
-    public static final int
-        CL_MEM_LOCATION_HOST_NV = (1 << 0),
-        CL_MEM_PINNED_NV        = (1 << 1);
+    public static final long
+        CL_MEM_LOCATION_HOST_NV = (1L << 0),
+        CL_MEM_PINNED_NV        = (1L << 1);
 
     protected NVCreateBuffer() {
         throw new UnsupportedOperationException();

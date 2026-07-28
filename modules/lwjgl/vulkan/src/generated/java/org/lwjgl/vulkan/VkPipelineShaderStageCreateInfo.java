@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPipelineShaderStageCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkShaderModule module;
  *     char const * pName;
  *     {@link VkSpecializationInfo VkSpecializationInfo} const * pSpecializationInfo;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStageCreateInfo> implements NativeResource {
 
@@ -136,12 +136,16 @@ public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStag
     public VkPipelineShaderStageCreateInfo pNext(VkPipelineShaderStageRequiredSubgroupSizeCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT} value to the {@code pNext} chain. */
     public VkPipelineShaderStageCreateInfo pNext(VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkShaderDescriptorSetAndBindingMappingInfoEXT} value to the {@code pNext} chain. */
+    public VkPipelineShaderStageCreateInfo pNext(VkShaderDescriptorSetAndBindingMappingInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkShaderModuleCreateInfo} value to the {@code pNext} chain. */
     public VkPipelineShaderStageCreateInfo pNext(VkShaderModuleCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkShaderModuleValidationCacheCreateInfoEXT} value to the {@code pNext} chain. */
     public VkPipelineShaderStageCreateInfo pNext(VkShaderModuleValidationCacheCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkShaderRequiredSubgroupSizeCreateInfoEXT} value to the {@code pNext} chain. */
     public VkPipelineShaderStageCreateInfo pNext(VkShaderRequiredSubgroupSizeCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkValidationFeaturesEXT} value to the {@code pNext} chain. */
+    public VkPipelineShaderStageCreateInfo pNext(VkValidationFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code flags} field. */
     public VkPipelineShaderStageCreateInfo flags(@NativeType("VkPipelineShaderStageCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@code stage} field. */
@@ -256,25 +260,6 @@ public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStag
     public static VkPipelineShaderStageCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPipelineShaderStageCreateInfo mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPipelineShaderStageCreateInfo callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPipelineShaderStageCreateInfo mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPipelineShaderStageCreateInfo callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPipelineShaderStageCreateInfo.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPipelineShaderStageCreateInfo.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPipelineShaderStageCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPipelineShaderStageCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkPipelineShaderStageCreateInfo} instance allocated on the specified {@link MemoryStack}.
@@ -452,12 +437,16 @@ public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStag
         public VkPipelineShaderStageCreateInfo.Buffer pNext(VkPipelineShaderStageRequiredSubgroupSizeCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT} value to the {@code pNext} chain. */
         public VkPipelineShaderStageCreateInfo.Buffer pNext(VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkShaderDescriptorSetAndBindingMappingInfoEXT} value to the {@code pNext} chain. */
+        public VkPipelineShaderStageCreateInfo.Buffer pNext(VkShaderDescriptorSetAndBindingMappingInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkShaderModuleCreateInfo} value to the {@code pNext} chain. */
         public VkPipelineShaderStageCreateInfo.Buffer pNext(VkShaderModuleCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkShaderModuleValidationCacheCreateInfoEXT} value to the {@code pNext} chain. */
         public VkPipelineShaderStageCreateInfo.Buffer pNext(VkShaderModuleValidationCacheCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkShaderRequiredSubgroupSizeCreateInfoEXT} value to the {@code pNext} chain. */
         public VkPipelineShaderStageCreateInfo.Buffer pNext(VkShaderRequiredSubgroupSizeCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkValidationFeaturesEXT} value to the {@code pNext} chain. */
+        public VkPipelineShaderStageCreateInfo.Buffer pNext(VkValidationFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code flags} field. */
         public VkPipelineShaderStageCreateInfo.Buffer flags(@NativeType("VkPipelineShaderStageCreateFlags") int value) { VkPipelineShaderStageCreateInfo.nflags(address(), value); return this; }
         /** Sets the specified value to the {@code stage} field. */

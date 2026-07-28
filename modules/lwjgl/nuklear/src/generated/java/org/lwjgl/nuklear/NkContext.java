@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_context {
  *     {@link NkInput struct nk_input} input;
  *     {@link NkStyle struct nk_style} style;
@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     struct nk_page_element * freelist;
  *     unsigned int count;
  *     unsigned int seq;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_context")
 public class NkContext extends Struct<NkContext> implements NativeResource {
@@ -77,6 +77,17 @@ public class NkContext extends Struct<NkContext> implements NativeResource {
         SEQ;
 
     static {
+        NkInput.createSafe(NULL);
+        NkStyle.createSafe(NULL);
+        NkBuffer.createSafe(NULL);
+        NkClipboard.createSafe(NULL);
+        NkConfigurationStacks.createSafe(NULL);
+        NkDrawList.createSafe(NULL);
+        NkHandle.createSafe(NULL);
+        NkTextEdit.createSafe(NULL);
+        NkCommandBuffer.createSafe(NULL);
+        NkPool.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkInput.SIZEOF, NkInput.ALIGNOF),
             __member(NkStyle.SIZEOF, NkStyle.ALIGNOF),
@@ -203,17 +214,6 @@ public class NkContext extends Struct<NkContext> implements NativeResource {
         return address == NULL ? null : new NkContext(address, null);
     }
 
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkContext mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkContext callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkContext mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkContext callocStack(MemoryStack stack) { return calloc(stack); }
-
     /**
      * Returns a new {@code NkContext} instance allocated on the specified {@link MemoryStack}.
      *
@@ -250,19 +250,19 @@ public class NkContext extends Struct<NkContext> implements NativeResource {
     public static NkConfigurationStacks nstacks(long struct) { return NkConfigurationStacks.create(struct + NkContext.STACKS); }
     /** Unsafe version of {@link #delta_time_seconds}. */
     public static float ndelta_time_seconds(long struct) { return memGetFloat(struct + NkContext.DELTA_TIME_SECONDS); }
-    public static NkDrawList ndraw_list(long struct) { return NkDrawList.create(struct + NkContext.DRAW_LIST); }
-    public static NkHandle nuserdata(long struct) { return NkHandle.create(struct + NkContext.USERDATA); }
-    public static NkTextEdit ntext_edit(long struct) { return NkTextEdit.create(struct + NkContext.TEXT_EDIT); }
-    public static NkCommandBuffer noverlay(long struct) { return NkCommandBuffer.create(struct + NkContext.OVERLAY); }
-    public static int nbuild(long struct) { return memGetInt(struct + NkContext.BUILD); }
-    public static int nuse_pool(long struct) { return memGetInt(struct + NkContext.USE_POOL); }
-    public static NkPool npool(long struct) { return NkPool.create(struct + NkContext.POOL); }
-    public static long nbegin(long struct) { return memGetAddress(struct + NkContext.BEGIN); }
-    public static long nend(long struct) { return memGetAddress(struct + NkContext.END); }
-    public static long nactive(long struct) { return memGetAddress(struct + NkContext.ACTIVE); }
-    public static long ncurrent(long struct) { return memGetAddress(struct + NkContext.CURRENT); }
-    public static long nfreelist(long struct) { return memGetAddress(struct + NkContext.FREELIST); }
-    public static int ncount(long struct) { return memGetInt(struct + NkContext.COUNT); }
-    public static int nseq(long struct) { return memGetInt(struct + NkContext.SEQ); }
+    static NkDrawList ndraw_list(long struct) { return NkDrawList.create(struct + NkContext.DRAW_LIST); }
+    static NkHandle nuserdata(long struct) { return NkHandle.create(struct + NkContext.USERDATA); }
+    static NkTextEdit ntext_edit(long struct) { return NkTextEdit.create(struct + NkContext.TEXT_EDIT); }
+    static NkCommandBuffer noverlay(long struct) { return NkCommandBuffer.create(struct + NkContext.OVERLAY); }
+    static int nbuild(long struct) { return memGetInt(struct + NkContext.BUILD); }
+    static int nuse_pool(long struct) { return memGetInt(struct + NkContext.USE_POOL); }
+    static NkPool npool(long struct) { return NkPool.create(struct + NkContext.POOL); }
+    static long nbegin(long struct) { return memGetAddress(struct + NkContext.BEGIN); }
+    static long nend(long struct) { return memGetAddress(struct + NkContext.END); }
+    static long nactive(long struct) { return memGetAddress(struct + NkContext.ACTIVE); }
+    static long ncurrent(long struct) { return memGetAddress(struct + NkContext.CURRENT); }
+    static long nfreelist(long struct) { return memGetAddress(struct + NkContext.FREELIST); }
+    static int ncount(long struct) { return memGetInt(struct + NkContext.COUNT); }
+    static int nseq(long struct) { return memGetInt(struct + NkContext.SEQ); }
 
 }

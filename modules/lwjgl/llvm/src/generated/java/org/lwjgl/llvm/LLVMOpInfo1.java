@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct LLVMOpInfo1 {
  *     {@link LLVMOpInfoSymbol1 struct LLVMOpInfoSymbol1} AddSymbol;
  *     {@link LLVMOpInfoSymbol1 struct LLVMOpInfoSymbol1} SubtractSymbol;
  *     uint64_t Value;
  *     uint64_t VariantKind;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct LLVMOpInfo1")
 public class LLVMOpInfo1 extends Struct<LLVMOpInfo1> implements NativeResource {
@@ -41,6 +41,8 @@ public class LLVMOpInfo1 extends Struct<LLVMOpInfo1> implements NativeResource {
         VARIANTKIND;
 
     static {
+        LLVMOpInfoSymbol1.createSafe(NULL);
+
         Layout layout = __struct(
             __member(LLVMOpInfoSymbol1.SIZEOF, LLVMOpInfoSymbol1.ALIGNOF),
             __member(LLVMOpInfoSymbol1.SIZEOF, LLVMOpInfoSymbol1.ALIGNOF),
@@ -202,25 +204,6 @@ public class LLVMOpInfo1 extends Struct<LLVMOpInfo1> implements NativeResource {
     public static LLVMOpInfo1.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static LLVMOpInfo1 mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static LLVMOpInfo1 callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static LLVMOpInfo1 mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static LLVMOpInfo1 callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static LLVMOpInfo1.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static LLVMOpInfo1.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static LLVMOpInfo1.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static LLVMOpInfo1.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code LLVMOpInfo1} instance allocated on the specified {@link MemoryStack}.

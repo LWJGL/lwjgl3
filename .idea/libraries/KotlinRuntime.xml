@@ -1,13 +1,15 @@
 <component name="libraryTable">
   <library name="KotlinRuntime">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/bin/libs/kotlinc/lib/kotlin-reflect.jar!/" />
-      <root url="jar://$PROJECT_DIR$/bin/libs/kotlinc/lib/kotlin-stdlib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/libs/java/kotlinc/lib/kotlin-reflect.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/libs/java/kotlinc/lib/kotlin-stdlib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/libs/java/kotlinc/lib/annotations.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/bin/libs/kotlinc/lib/kotlin-reflect-sources.jar!/" />
-      <root url="jar://$PROJECT_DIR$/bin/libs/kotlinc/lib/kotlin-stdlib-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/libs/java/kotlinc/lib/kotlin-reflect-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/libs/java/kotlinc/lib/kotlin-stdlib-sources.jar!/commonMain" />
+      <root url="jar://$PROJECT_DIR$/bin/libs/java/kotlinc/lib/kotlin-stdlib-sources.jar!/jvmMain" />
     </SOURCES>
   </library>
 </component>

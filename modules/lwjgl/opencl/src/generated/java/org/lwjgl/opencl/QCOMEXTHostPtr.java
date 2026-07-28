@@ -23,7 +23,7 @@ public class QCOMEXTHostPtr {
         CL_DEVICE_EXT_MEM_PADDING_IN_BYTES_QCOM = 0x40A0,
         CL_DEVICE_PAGE_SIZE_QCOM                = 0x40A1;
 
-    public static final int CL_MEM_EXT_HOST_PTR_QCOM = 1 << 29;
+    public static final long CL_MEM_EXT_HOST_PTR_QCOM = 1L << 29;
 
     public static final int
         CL_MEM_HOST_UNCACHED_QCOM        = 0x40A4,

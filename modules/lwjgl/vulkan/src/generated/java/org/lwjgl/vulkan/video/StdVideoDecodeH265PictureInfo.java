@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoDecodeH265PictureInfo {
  *     {@link StdVideoDecodeH265PictureInfoFlags StdVideoDecodeH265PictureInfoFlags} flags;
  *     uint8_t sps_seq_parameter_set_id;
@@ -31,7 +31,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
  *     uint8_t RefPicSetStCurrBefore[STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE];
  *     uint8_t RefPicSetStCurrAfter[STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE];
  *     uint8_t RefPicSetLtCurr[STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE];
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoDecodeH265PictureInfo extends Struct<StdVideoDecodeH265PictureInfo> implements NativeResource {
 
@@ -55,6 +55,8 @@ public class StdVideoDecodeH265PictureInfo extends Struct<StdVideoDecodeH265Pict
         REFPICSETLTCURR;
 
     static {
+        StdVideoDecodeH265PictureInfoFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoDecodeH265PictureInfoFlags.SIZEOF, StdVideoDecodeH265PictureInfoFlags.ALIGNOF),
             __member(1),
@@ -328,7 +330,7 @@ public class StdVideoDecodeH265PictureInfo extends Struct<StdVideoDecodeH265Pict
     public static int nPicOrderCntVal(long struct) { return memGetInt(struct + StdVideoDecodeH265PictureInfo.PICORDERCNTVAL); }
     /** Unsafe version of {@link #NumBitsForSTRefPicSetInSlice}. */
     public static short nNumBitsForSTRefPicSetInSlice(long struct) { return memGetShort(struct + StdVideoDecodeH265PictureInfo.NUMBITSFORSTREFPICSETINSLICE); }
-    public static short nreserved(long struct) { return memGetShort(struct + StdVideoDecodeH265PictureInfo.RESERVED); }
+    static short nreserved(long struct) { return memGetShort(struct + StdVideoDecodeH265PictureInfo.RESERVED); }
     /** Unsafe version of {@link #RefPicSetStCurrBefore}. */
     public static ByteBuffer nRefPicSetStCurrBefore(long struct) { return memByteBuffer(struct + StdVideoDecodeH265PictureInfo.REFPICSETSTCURRBEFORE, STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE); }
     /** Unsafe version of {@link #RefPicSetStCurrBefore(int) RefPicSetStCurrBefore}. */
@@ -360,7 +362,7 @@ public class StdVideoDecodeH265PictureInfo extends Struct<StdVideoDecodeH265Pict
     public static void nPicOrderCntVal(long struct, int value) { memPutInt(struct + StdVideoDecodeH265PictureInfo.PICORDERCNTVAL, value); }
     /** Unsafe version of {@link #NumBitsForSTRefPicSetInSlice(short) NumBitsForSTRefPicSetInSlice}. */
     public static void nNumBitsForSTRefPicSetInSlice(long struct, short value) { memPutShort(struct + StdVideoDecodeH265PictureInfo.NUMBITSFORSTREFPICSETINSLICE, value); }
-    public static void nreserved(long struct, short value) { memPutShort(struct + StdVideoDecodeH265PictureInfo.RESERVED, value); }
+    static void nreserved(long struct, short value) { memPutShort(struct + StdVideoDecodeH265PictureInfo.RESERVED, value); }
     /** Unsafe version of {@link #RefPicSetStCurrBefore(ByteBuffer) RefPicSetStCurrBefore}. */
     public static void nRefPicSetStCurrBefore(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE); }

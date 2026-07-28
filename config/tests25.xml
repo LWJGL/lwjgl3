@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright LWJGL. All rights reserved.
+  ~ License terms: https://www.lwjgl.org/license
+  -->
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="LWJGL cross-platform tests (JDK 25)">
+    <test name="core25">
+        <packages>
+            <package name="org.lwjgl.system.ffm"/>
+        </packages>
+    </test>
+</suite>

@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre>{@code
  * struct VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT {
  *     VkStructureType sType;
- *     void * pNext;
+ *     void const * pNext;
  *     uint32_t requiredSubgroupSize;
  * }}</pre>
  */
@@ -52,16 +52,21 @@ public class VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT extends VkPi
     public VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
-    public VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    public VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the specified value to the {@code requiredSubgroupSize} field. */
+    @Override
+    public VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT requiredSubgroupSize(@NativeType("uint32_t") int value) { nrequiredSubgroupSize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     @Override
     public VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT set(
         int sType,
-        long pNext
+        long pNext,
+        int requiredSubgroupSize
     ) {
         sType(sType);
         pNext(pNext);
+        requiredSubgroupSize(requiredSubgroupSize);
 
         return this;
     }
@@ -148,25 +153,6 @@ public class VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT extends VkPi
     public static VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT} instance allocated on the specified {@link MemoryStack}.
@@ -257,7 +243,10 @@ public class VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT extends VkPi
         public VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
-        public VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.Buffer pNext(@NativeType("void *") long value) { VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.npNext(address(), value); return this; }
+        public VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.npNext(address(), value); return this; }
+        /** Sets the specified value to the {@code requiredSubgroupSize} field. */
+        @Override
+        public VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.Buffer requiredSubgroupSize(@NativeType("uint32_t") int value) { VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.nrequiredSubgroupSize(address(), value); return this; }
 
     }
 

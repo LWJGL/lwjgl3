@@ -63,10 +63,12 @@ public class EXTConformanceAutomation {
 
     // --- [ xrSetInputDeviceStateVector2fEXT ] ---
 
-    private static final FFICIF xrSetInputDeviceStateVector2fEXTCIF = apiCreateCIF(
-        apiStdcall(), ffi_type_uint32,
-        ffi_type_pointer, ffi_type_uint64, ffi_type_uint64, apiCreateStruct(ffi_type_float, ffi_type_float)
-    );
+    private static final class xrSetInputDeviceStateVector2fEXT {
+        static final FFICIF CIF = apiCreateCIF(
+            apiStdcall(), ffi_type_uint32,
+            ffi_type_pointer, ffi_type_uint64, ffi_type_uint64, apiCreateStruct(ffi_type_float, ffi_type_float)
+        );
+    }
 
     /** {@code XrResult xrSetInputDeviceStateVector2fEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrVector2f state)} */
     public static int nxrSetInputDeviceStateVector2fEXT(XrSession session, long topLevelPath, long inputSourcePath, long state) {
@@ -83,7 +85,7 @@ public class EXTConformanceAutomation {
             memPutAddress(arguments + 2 * POINTER_SIZE, stack.nlong(inputSourcePath));
             memPutAddress(arguments + 3 * POINTER_SIZE, state);
 
-            nffi_call(xrSetInputDeviceStateVector2fEXTCIF.address(), __functionAddress, __result, arguments);
+            nffi_call(xrSetInputDeviceStateVector2fEXT.CIF.address(), __functionAddress, __result, arguments);
 
             return memGetInt(__result);
         } finally {
@@ -99,10 +101,12 @@ public class EXTConformanceAutomation {
 
     // --- [ xrSetInputDeviceLocationEXT ] ---
 
-    private static final FFICIF xrSetInputDeviceLocationEXTCIF = apiCreateCIF(
-        apiStdcall(), ffi_type_uint32,
-        ffi_type_pointer, ffi_type_uint64, ffi_type_uint64, ffi_type_pointer, apiCreateStruct(apiCreateStruct(ffi_type_float, ffi_type_float, ffi_type_float, ffi_type_float), apiCreateStruct(ffi_type_float, ffi_type_float, ffi_type_float))
-    );
+    private static final class xrSetInputDeviceLocationEXT {
+        static final FFICIF CIF = apiCreateCIF(
+            apiStdcall(), ffi_type_uint32,
+            ffi_type_pointer, ffi_type_uint64, ffi_type_uint64, ffi_type_pointer, apiCreateStruct(apiCreateStruct(ffi_type_float, ffi_type_float, ffi_type_float, ffi_type_float), apiCreateStruct(ffi_type_float, ffi_type_float, ffi_type_float))
+        );
+    }
 
     /** {@code XrResult xrSetInputDeviceLocationEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrSpace space, XrPosef pose)} */
     public static int nxrSetInputDeviceLocationEXT(XrSession session, long topLevelPath, long inputSourcePath, XrSpace space, long pose) {
@@ -120,7 +124,7 @@ public class EXTConformanceAutomation {
             memPutAddress(arguments + 3 * POINTER_SIZE, stack.npointer(space));
             memPutAddress(arguments + 4 * POINTER_SIZE, pose);
 
-            nffi_call(xrSetInputDeviceLocationEXTCIF.address(), __functionAddress, __result, arguments);
+            nffi_call(xrSetInputDeviceLocationEXT.CIF.address(), __functionAddress, __result, arguments);
 
             return memGetInt(__result);
         } finally {

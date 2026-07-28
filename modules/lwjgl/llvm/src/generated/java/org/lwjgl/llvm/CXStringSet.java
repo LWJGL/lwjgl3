@@ -14,11 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct CXStringSet {
  *     {@link CXString CXString} * Strings;
  *     unsigned Count;
- * }}</pre>
+ * }</code></pre>
  */
 public class CXStringSet extends Struct<CXStringSet> {
 

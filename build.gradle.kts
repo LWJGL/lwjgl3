@@ -2,7 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-import java.net.*
+import java.net.URI
 
 plugins {
     `java-platform`
@@ -18,9 +18,8 @@ val sonatypeUsername: String by project
 val sonatypePassword: String by project
 
 defaultTasks = mutableListOf("publish")
-buildDir = file("bin/MAVEN")
+layout.buildDirectory.set(layout.projectDirectory.dir("bin/MAVEN"))
 group = "org.lwjgl"
-version = lwjglVersion
 
 enum class BuildType {
     LOCAL,
@@ -30,57 +29,69 @@ enum class BuildType {
 
 data class Deployment(
     val type: BuildType,
-    val repo: URI
+    val repo: URI,
+    val version: String
 )
 
 val deployment = when {
     hasProperty("release") -> Deployment(
         type = BuildType.RELEASE,
-        repo = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+        repo = uri("https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/"),
+        version = lwjglVersion
     )
-    hasProperty("snapshot") -> {
-        version = "$version-SNAPSHOT"
-        Deployment(
-            type = BuildType.SNAPSHOT,
-            repo = uri("https://oss.sonatype.org/content/repositories/snapshots/")
-        )
-    }
-    else -> {
-        version = "$version-SNAPSHOT"
-        Deployment(
-            type = BuildType.LOCAL,
-            repo = repositories.mavenLocal().url
-        )
-    }
+    hasProperty("snapshot") -> Deployment(
+        type = BuildType.SNAPSHOT,
+        repo = uri("https://central.sonatype.com/repository/maven-snapshots/"),
+        version = "$lwjglVersion-SNAPSHOT"
+    )
+    else -> Deployment(
+        type = BuildType.LOCAL,
+        repo = repositories.mavenLocal().url,
+        version = "$lwjglVersion-SNAPSHOT"
+    )
 }
+version = deployment.version
 println("${deployment.type.name} BUILD")
 
 enum class Platforms(val classifier: String) {
-    FREEBSD("freebsd"),
-    LINUX("linux"),
-    LINUX_ARM64("linux-arm64"),
-    LINUX_ARM32("linux-arm32"),
-    LINUX_PPC64LE("linux-ppc64le"),
-    LINUX_RISCV64("linux-riscv64"),
-    LINUX_LOONGARCH64("linux-loongarch64"),
-    MACOS("macos"),
-    MACOS_ARM64("macos-arm64"),
-    WINDOWS("windows"),
-    WINDOWS_X86("windows-x86"),
-    WINDOWS_ARM64("windows-arm64");
+    FREEBSD("natives-freebsd"),
+    LINUX("natives-linux"),
+    LINUX_ARM64("natives-linux-arm64"),
+    LINUX_ARM32("natives-linux-arm32"),
+    LINUX_PPC64LE("natives-linux-ppc64le"),
+    LINUX_RISCV64("natives-linux-riscv64"),
+    LINUX_LOONGARCH64("natives-linux-loongarch64"),
+    MACOS("natives-macos"),
+    MACOS_ARM64("natives-macos-arm64"),
+    WINDOWS("natives-windows"),
+    WINDOWS_X86("natives-windows-x86"),
+    WINDOWS_ARM64("natives-windows-arm64");
 
     companion object {
         val ALL = values()
     }
 }
 
-enum class Artifacts(
+data class CustomArtifacts(
+    val classifiersForBOM: List<String>,
+    val publication: MavenPublication.() -> Unit
+)
+
+enum class Module(
     val artifact: String,
     val projectName: String,
     val projectDescription: String,
-    vararg val platforms: Platforms
+    vararg val platforms: Platforms,
+    val custom: CustomArtifacts? = null
 ) {
-    CORE("lwjgl", "LWJGL", "The LWJGL core library.", *Platforms.ALL),
+    CORE("lwjgl", "LWJGL", "The LWJGL core library.", *Platforms.ALL, custom = CustomArtifacts(listOf("unsafe")) {
+        artifact(CORE.artifact("unsafe")) {
+            classifier = "unsafe"
+        }
+        artifact(CORE.artifact("unsafe-sources")) {
+            classifier = "unsafe-sources"
+        }
+    }),
     ASSIMP(
         "lwjgl-assimp", "LWJGL - Assimp bindings",
         "A portable Open Source library to import various well-known 3D model formats in a uniform manner.",
@@ -159,6 +170,11 @@ enum class Artifacts(
         "A library that provides algorithms to help optimize meshes.",
         *Platforms.ALL
     ),
+    MIMALLOC(
+        "lwjgl-mimalloc", "LWJGL - mimalloc bindings",
+        "A compact general purpose allocator with excellent performance.",
+        *Platforms.ALL
+    ),
     MSDFGEN(
         "lwjgl-msdfgen", "LWJGL - msdfgen bindings",
         "Multi-channel signed distance field generator.",
@@ -227,6 +243,10 @@ enum class Artifacts(
         Platforms.MACOS, Platforms.MACOS_ARM64,
         Platforms.WINDOWS, Platforms.WINDOWS_X86
     ),
+    RENDERDOC(
+        "lwjgl-renderdoc", "LWJGL - RenderDoc bindings",
+        "An API to control the RenderDoc debugger."
+    ),
     RPMALLOC(
         "lwjgl-rpmalloc", "LWJGL - rpmalloc bindings",
         "A public domain cross platform lock free thread caching 16-byte aligned memory allocator implemented in C.",
@@ -293,7 +313,7 @@ enum class Artifacts(
         *Platforms.ALL
     );
 
-    fun directory(buildDir: String) = "$buildDir/$artifact"
+    private fun directory(buildDir: String) = "./$buildDir/$artifact"
 
     private fun path() = "${directory("bin/MAVEN")}/$artifact"
 
@@ -303,13 +323,13 @@ enum class Artifacts(
 
     fun artifact(classifier: String? = null) =
         if (classifier === null)
-            File("${path()}.jar")
+            File("${path()}.jar").absoluteFile
         else
-            File("${path()}-$classifier.jar")
+            File("${path()}-$classifier.jar").absoluteFile
 
 }
 
-publishing {
+fun PublishingExtension.setupRepository() {
     repositories {
         maven {
             url = deployment.repo
@@ -322,104 +342,121 @@ publishing {
             }
         }
     }
-    publications {
-        /*
-        Ideally, we'd have the following structure:
-        -------------------------------------------
-        lwjgl
-            lwjgl-windows (depends on lwjgl)
-        glfw (depends on lwjgl)
-            glfw-windows (depends on glfw & lwjgl-windows)
-        stb (depends on lwjgl)
-            stb-windows (depends on stb & lwjgl-windows)
-        -------------------------------------------
-        If a user wanted to use GLFW + stb in their project, running on
-        the Windows platform, they'd only have to define glfw-windows
-        and stb-windows as dependencies. This would automatically
-        resolve stb, glfw, lwjgl and lwjgl-windows as transitive
-        dependencies. Unfortunately, it is not possible to define such
-        a relationship between Maven artifacts when using classifiers.
-        A method to make this work is make the natives-<arch> classified
-        JARs separate artifacts. We do not do it for aesthetic reasons.
-        Instead, we assume that a tool is available (on the LWJGL website)
-        that automatically generates POM/Gradle dependency structures for
-        projects wanting to use LWJGL. The output is going to be verbose;
-        the above example is going to look like this in Gradle:
-        -------------------------------------------
-        compile 'org.lwjgl:lwjgl:$lwjglVersion' // NOTE: this is optional, all binding artifacts have a dependency on lwjgl
-            compile 'org.lwjgl:lwjgl:$lwjglVersion:natives-$lwjglArch'
-        compile 'org.lwjgl:lwjgl-glfw:$lwjglVersion'
-            compile 'org.lwjgl:lwjgl-glfw:$lwjglVersion:natives-$lwjglArch'
-        compile 'org.lwjgl:lwjgl-stb:$lwjglVersion'
-            compile 'org.lwjgl:lwjgl-stb:$lwjglVersion:natives-$lwjglArch'
-        -------------------------------------------
-        and a whole lot more verbose in Maven. Hopefully, the automation
-        is going to alleviate the pain.
-         */
-        fun org.gradle.api.publish.maven.MavenPom.setupPom(pomName: String, pomDescription: String, pomPackaging: String) {
-            name.set(pomName)
-            description.set(pomDescription)
-            url.set("https://www.lwjgl.org")
-            packaging = pomPackaging
+}
 
-            scm {
-                connection.set("scm:git:https://github.com/LWJGL/lwjgl3.git")
-                developerConnection.set("scm:git:https://github.com/LWJGL/lwjgl3.git")
-                url.set("https://github.com/LWJGL/lwjgl3.git")
-            }
+fun MavenPom.setupPom(pomName: String, pomDescription: String, pomPackaging: String) {
+    name.set(pomName)
+    description.set(pomDescription)
+    url.set("https://www.lwjgl.org")
+    packaging = pomPackaging
 
-            licenses {
-                license {
-                    name.set("BSD-3-Clause")
-                    url.set("https://www.lwjgl.org/license")
-                    distribution.set("repo")
-                }
-            }
+    scm {
+        connection.set("scm:git:https://github.com/LWJGL/lwjgl3.git")
+        developerConnection.set("scm:git:https://github.com/LWJGL/lwjgl3.git")
+        url.set("https://github.com/LWJGL/lwjgl3.git")
+    }
 
-            developers {
-                developer {
-                    id.set("spasi")
-                    name.set("Ioannis Tsakpinis")
-                    email.set("iotsakp@gmail.com")
-                    url.set("https://github.com/Spasi")
-                }
-            }
+    licenses {
+        license {
+            name.set("BSD-3-Clause")
+            url.set("https://www.lwjgl.org/license")
+            distribution.set("repo")
         }
+    }
 
-        Artifacts.values().forEach { module ->
-            if (module.isActive) {
-                create<MavenPublication>("maven${module.name}") {
-                    artifactId = module.artifact
-                    artifact(module.artifact())
-                    if (deployment.type !== BuildType.LOCAL || module.hasArtifact("sources")) {
-                        artifact(module.artifact("sources")) {
-                            classifier = "sources"
+    developers {
+        developer {
+            id.set("spasi")
+            name.set("Ioannis Tsakpinis")
+            email.set("iotsakp@gmail.com")
+            url.set("https://github.com/Spasi")
+        }
+    }
+}
+
+Module.values().forEach { module ->
+    project(":modules:lwjgl:${if (module === Module.CORE) "core" else module.artifact.removePrefix("lwjgl-")}") {
+        group = rootProject.group
+        version = rootProject.version
+        layout.buildDirectory.set(rootProject.layout.projectDirectory.dir("bin/MAVEN/gradle/${module.artifact}"))
+
+        plugins.apply("maven-publish")
+        plugins.apply("signing")
+
+        extensions.configure<PublishingExtension> {
+            setupRepository()
+            publications {
+                if (module.isActive) {
+                    val moduleVersion = deployment.version // do not inline: required for compatibility with --configuration-cache
+                    create<MavenPublication>("maven${module.name}") {
+                        artifactId = module.artifact
+                        artifact(module.artifact())
+                        if (module.custom != null) {
+                            module.custom.publication(this)
                         }
-                    }
-                    if (deployment.type !== BuildType.LOCAL || module.hasArtifact("javadoc")) {
-                        artifact(module.artifact("javadoc")) {
-                            classifier = "javadoc"
-                        }
-                    }
-                    module.platforms.forEach {
-                        if (deployment.type !== BuildType.LOCAL || module.hasArtifact("natives-${it.classifier}")) {
-                            artifact(module.artifact("natives-${it.classifier}")) {
-                                classifier = "natives-${it.classifier}"
+                        if (deployment.type !== BuildType.LOCAL || module.hasArtifact("sources")) {
+                            artifact(module.artifact("sources")) {
+                                classifier = "sources"
                             }
                         }
-                    }
+                        if (deployment.type !== BuildType.LOCAL || module.hasArtifact("javadoc")) {
+                            artifact(module.artifact("javadoc")) {
+                                classifier = "javadoc"
+                            }
+                        }
+                        module.platforms.forEach {
+                            if (deployment.type !== BuildType.LOCAL || module.hasArtifact(it.classifier)) {
+                                artifact(module.artifact(it.classifier)) {
+                                    classifier = it.classifier
+                                }
+                            }
+                        }
 
-                    pom {
-                        setupPom(module.projectName, module.projectDescription, "jar")
+                        pom {
+                            setupPom(module.projectName, module.projectDescription, "jar")
 
-                        if (module != Artifacts.CORE) {
-                            withXml {
-                                asNode().appendNode("dependencies").apply {
-                                    appendNode("dependency").apply {
-                                        appendNode("groupId", "org.lwjgl")
-                                        appendNode("artifactId", "lwjgl")
-                                        appendNode("version", project.version)
-                                        appendNode("scope", "compile")
+                            if (module != Module.CORE) {
+                                /*
+                                Ideally, we'd have the following structure:
+                                -------------------------------------------
+                                lwjgl
+                                    lwjgl-windows (depends on lwjgl)
+                                glfw (depends on lwjgl)
+                                    glfw-windows (depends on glfw & lwjgl-windows)
+                                stb (depends on lwjgl)
+                                    stb-windows (depends on stb & lwjgl-windows)
+                                -------------------------------------------
+                                If a user wanted to use GLFW + stb in their project, running on
+                                the Windows platform, they'd only have to define glfw-windows
+                                and stb-windows as dependencies. This would automatically
+                                resolve stb, glfw, lwjgl and lwjgl-windows as transitive
+                                dependencies. Unfortunately, it is not possible to define such
+                                a relationship between Maven artifacts when using classifiers.
+                                A method to make this work is make the natives-<arch> classified
+                                JARs separate artifacts. We do not do it for aesthetic reasons.
+                                Instead, we assume that a tool is available (on the LWJGL website)
+                                that automatically generates POM/Gradle dependency structures for
+                                projects wanting to use LWJGL. The output is going to be verbose;
+                                the above example is going to look like this in Gradle:
+                                -------------------------------------------
+                                compile 'org.lwjgl:lwjgl:$lwjglVersion' // NOTE: this is optional, all binding artifacts have a dependency on lwjgl
+                                    compile 'org.lwjgl:lwjgl:$lwjglVersion:natives-$lwjglArch'
+                                compile 'org.lwjgl:lwjgl-glfw:$lwjglVersion'
+                                    compile 'org.lwjgl:lwjgl-glfw:$lwjglVersion:natives-$lwjglArch'
+                                compile 'org.lwjgl:lwjgl-stb:$lwjglVersion'
+                                    compile 'org.lwjgl:lwjgl-stb:$lwjglVersion:natives-$lwjglArch'
+                                -------------------------------------------
+                                and a whole lot more verbose in Maven. Hopefully, the automation
+                                is going to alleviate the pain.
+                                 */
+                                withXml {
+                                    asNode().appendNode("dependencies").apply {
+                                        appendNode("dependency").apply {
+                                            appendNode("groupId", "org.lwjgl")
+                                            appendNode("artifactId", "lwjgl")
+                                            appendNode("version", moduleVersion)
+                                            appendNode("scope", "compile")
+                                        }
                                     }
                                 }
                             }
@@ -429,6 +466,21 @@ publishing {
             }
         }
 
+        extensions.configure<SigningExtension> {
+            useInMemoryPgpKeys(
+                signingKeyId,
+                signingKey,
+                signingPassword
+            )
+            sign(extensions.getByType<PublishingExtension>().publications)
+        }
+    }
+}
+
+publishing {
+    setupRepository()
+    publications {
+        val bomVersion = deployment.version // do not inline: required for compatibility with --configuration-cache
         create<MavenPublication>("lwjglBOM") {
             from(components["javaPlatform"])
             artifactId = "lwjgl-bom"
@@ -439,14 +491,37 @@ publishing {
                 withXml {
                     asElement().getElementsByTagName("dependencyManagement").item(0).apply {
                         asElement().getElementsByTagName("dependencies").item(0).apply {
-                            Artifacts.values().forEach { module ->
-                                module.platforms.forEach {
-                                    ownerDocument.createElement("dependency").also(::appendChild).apply {
-                                        appendChild(ownerDocument.createElement("groupId").also(::appendChild).apply { textContent = "org.lwjgl" })
-                                        appendChild(ownerDocument.createElement("artifactId").also(::appendChild).apply { textContent = module.artifact })
-                                        appendChild(ownerDocument.createElement("version").also(::appendChild).apply { textContent = project.version as String })
-                                        appendChild(ownerDocument.createElement("classifier").also(::appendChild).apply { textContent = "natives-${it.classifier}" })
-                                    }
+                            Module.values().forEach { module ->
+                                val classifiers =
+                                    (module.custom?.classifiersForBOM?.asSequence() ?: emptySequence()) +
+                                    module.platforms.map { it.classifier }
+
+                                classifiers.forEach {
+                                    appendChild(
+                                        ownerDocument
+                                            .createElement("dependency")
+                                            .apply {
+                                                appendChild(
+                                                    ownerDocument
+                                                        .createElement("groupId")
+                                                        .apply { textContent = "org.lwjgl" }
+                                                )
+                                                appendChild(
+                                                    ownerDocument
+                                                        .createElement("artifactId")
+                                                        .apply { textContent = module.artifact }
+                                                )
+                                                appendChild(
+                                                    ownerDocument
+                                                        .createElement("version")
+                                                        .apply { textContent = bomVersion }
+                                                )
+                                                appendChild(
+                                                    ownerDocument
+                                                        .createElement("classifier")
+                                                        .apply { textContent = it }
+                                                )
+                                            })
                                 }
                             }
                         }
@@ -459,6 +534,11 @@ publishing {
         }
     }
 }
+tasks.named("publish") {
+    dependsOn(project(":modules:lwjgl")
+        .subprojects
+        .map { it.tasks.named("publish") })
+}
 
 signing {
     useInMemoryPgpKeys(
@@ -469,19 +549,27 @@ signing {
     sign(publishing.publications)
 }
 
-val copyArchives = tasks.create<Copy>("copyArchives") {
+val copyArchives = tasks.register<Copy>("copyArchives") {
     from("bin/RELEASE")
     include("**")
-    destinationDir = buildDir
+    destinationDir = layout.buildDirectory.asFile.get()
 }
-
-tasks.withType<Sign> {
-    dependsOn(copyArchives)
+// run copyArchives before other tasks
+allprojects {
+    tasks.withType<GenerateMavenPom>().configureEach {
+        dependsOn(copyArchives)
+    }
+    tasks.withType<Sign>().configureEach {
+        dependsOn(copyArchives)
+    }
+    tasks.withType<PublishToMavenRepository>().configureEach {
+        dependsOn(copyArchives)
+    }
 }
 
 dependencies {
     constraints {
-        Artifacts.values().forEach { module ->
+        Module.values().forEach { module ->
             api("org.lwjgl:${module.artifact}:$version")
         }
     }

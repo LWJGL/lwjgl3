@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV {
  *     uint32_t clusterID;
  *     VkClusterAccelerationStructureClusterFlagsNV clusterFlags;
@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkDeviceAddress opacityMicromapArray;
  *     VkDeviceAddress opacityMicromapIndexBuffer;
  *     VkDeviceAddress instantiationBoundingBoxLimit;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV extends Struct<VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV> implements NativeResource {
 
@@ -64,6 +64,8 @@ public class VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV ex
         INSTANTIATIONBOUNDINGBOXLIMIT;
 
     static {
+        VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),
@@ -385,7 +387,7 @@ public class VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV ex
     public static int nclusterID(long struct) { return memGetInt(struct + VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV.CLUSTERID); }
     /** Unsafe version of {@link #clusterFlags}. */
     public static int nclusterFlags(long struct) { return memGetInt(struct + VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV.CLUSTERFLAGS); }
-    public static int nbitfield0(long struct) { return memGetInt(struct + VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV.BITFIELD0); }
+    static int nbitfield0(long struct) { return memGetInt(struct + VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV.BITFIELD0); }
     /** Unsafe version of {@link #triangleCount}. */
     public static int ntriangleCount(long struct) { return nbitfield0(struct) & 0x00_00_01_FF; }
     /** Unsafe version of {@link #vertexCount}. */
@@ -423,7 +425,7 @@ public class VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV ex
     public static void nclusterID(long struct, int value) { memPutInt(struct + VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV.CLUSTERID, value); }
     /** Unsafe version of {@link #clusterFlags(int) clusterFlags}. */
     public static void nclusterFlags(long struct, int value) { memPutInt(struct + VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV.CLUSTERFLAGS, value); }
-    public static void nbitfield0(long struct, int value) { memPutInt(struct + VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV.BITFIELD0, value); }
+    static void nbitfield0(long struct, int value) { memPutInt(struct + VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV.BITFIELD0, value); }
     /** Unsafe version of {@link #triangleCount(int) triangleCount}. */
     public static void ntriangleCount(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FE_00) | (value & 0x00_00_01_FF)); }
     /** Unsafe version of {@link #vertexCount(int) vertexCount}. */

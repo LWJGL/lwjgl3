@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrInteractionProfileAnalogThresholdVALVE {
  *     XrStructureType type;
  *     void const * next;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float offThreshold;
  *     {@link XrHapticBaseHeader XrHapticBaseHeader} const * onHaptic;
  *     {@link XrHapticBaseHeader XrHapticBaseHeader} const * offHaptic;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrInteractionProfileAnalogThresholdVALVE extends Struct<XrInteractionProfileAnalogThresholdVALVE> implements NativeResource {
 

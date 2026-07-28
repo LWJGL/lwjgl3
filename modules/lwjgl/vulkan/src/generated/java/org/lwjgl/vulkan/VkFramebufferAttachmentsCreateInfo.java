@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkFramebufferAttachmentsCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t attachmentImageInfoCount;
  *     {@link VkFramebufferAttachmentImageInfo VkFramebufferAttachmentImageInfo} const * pAttachmentImageInfos;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkFramebufferAttachmentsCreateInfo extends Struct<VkFramebufferAttachmentsCreateInfo> implements NativeResource {
 

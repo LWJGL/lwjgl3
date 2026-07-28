@@ -31,6 +31,8 @@ extern "C" {
 MSDF_DEFINE_HANDLE_TYPE(msdf_ft);
 MSDF_DEFINE_HANDLE_TYPE(msdf_ft_font);
 
+#ifdef MSDFGEN_DYNAMIC_FREETYPE // Runtime loader API
+
 typedef void* (*msdf_ft_load_callback)(const char* functionName);
 
 /**
@@ -45,6 +47,8 @@ MSDF_API int msdf_ft_set_load_callback(msdf_ft_load_callback callback);
  * @returns A pointer to the current FreeType load callback function.
  */
 MSDF_API msdf_ft_load_callback msdf_ft_get_load_callback();
+
+#endif
 
 /**
  * Initializes a new FreeType instance to be used with msdfgen.
@@ -85,14 +89,15 @@ MSDF_API int msdf_ft_load_font_data(msdf_ft_handle handle, const void* data, siz
 /**
  * Loads a single glyph from the given font and converts it into a vector shape
  * for rendering glyph sprites.
- * @param font A handle to the font to load the glyph shape from.
+ * @param font A handle to the font to use for generating the glyph shape.
  * @param cp The codepoint to generate a shape for.
  * @param coordinateScaling The type of coordinate transform applied to the shape.
+ * @param advance A pointer to a double to be populated with the glyph advance value.
  * @param shape A pointer to a handle to be populated with the address of the newly created shape.
  *  This shape must later be freed using msdf_shape_free!
  * @returns @code MSDF_SUCCESS@endcode on success, otherwise one of the constants prefixed with @code MSDF_ERR_@endcode.
  */
-MSDF_API int msdf_ft_font_load_glyph(msdf_ft_font_handle font, unsigned cp, int coordinateScaling, msdf_shape_handle* shape);
+MSDF_API int msdf_ft_font_load_glyph(msdf_ft_font_handle font, unsigned cp, int coordinateScaling, double *advance, msdf_shape_handle* shape);
 
 /**
  * Loads a single glyph from the given font and converts it into a vector shape
@@ -100,11 +105,12 @@ MSDF_API int msdf_ft_font_load_glyph(msdf_ft_font_handle font, unsigned cp, int 
  * @param font A handle to the font to load the glyph shape from.
  * @param index The glyph index to generate a shape for.
  * @param coordinateScaling The type of coordinate transform applied to the shape.
+ * @param advance A pointer to a double to be populated with the glyph advance value.
  * @param shape A pointer to a handle to be populated with the address of the newly created shape.
  *  This shape must later be freed using msdf_shape_free!
  * @returns @code MSDF_SUCCESS@endcode on success, otherwise one of the constants prefixed with @code MSDF_ERR_@endcode.
  */
-MSDF_API int msdf_ft_font_load_glyph_by_index(msdf_ft_font_handle font, unsigned index, int coordinateScaling, msdf_shape_handle* shape);
+MSDF_API int msdf_ft_font_load_glyph_by_index(msdf_ft_font_handle font, unsigned index, int coordinateScaling, double *advance, msdf_shape_handle* shape);
 
 /**
  * Retrieves the glyph index of the given unicode codepoint.

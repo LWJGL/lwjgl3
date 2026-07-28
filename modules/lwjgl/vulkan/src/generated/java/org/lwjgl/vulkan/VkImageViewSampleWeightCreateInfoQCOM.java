@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkImageViewSampleWeightCreateInfoQCOM {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link VkOffset2D VkOffset2D} filterCenter;
  *     {@link VkExtent2D VkExtent2D} filterSize;
  *     uint32_t numPhases;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkImageViewSampleWeightCreateInfoQCOM extends Struct<VkImageViewSampleWeightCreateInfoQCOM> implements NativeResource {
 
@@ -42,6 +42,9 @@ public class VkImageViewSampleWeightCreateInfoQCOM extends Struct<VkImageViewSam
         NUMPHASES;
 
     static {
+        VkOffset2D.createSafe(NULL);
+        VkExtent2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

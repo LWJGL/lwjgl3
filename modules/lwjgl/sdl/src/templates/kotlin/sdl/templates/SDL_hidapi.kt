@@ -16,6 +16,10 @@ val SDL_hidapi = "SDLHIDAPI".nativeClassSDL("SDL_hidapi") {
         "HID_API_BUS_SPI".enum("0x04")
     )
 
+    StringConstant(
+        "PROP_HIDAPI_LIBUSB_DEVICE_HANDLE_POINTER".."SDL.hidapi.libusb.device.handle"
+    )
+
     int("hid_init", void())
     int("hid_exit", void())
 
@@ -46,6 +50,12 @@ val SDL_hidapi = "SDLHIDAPI".nativeClassSDL("SDL_hidapi") {
         "hid_open_path",
 
         charUTF8.const.p("path")
+    )
+
+    SDL_PropertiesID(
+        "hid_get_properties",
+
+        SDL_hid_device.p("dev")
     )
 
     int(

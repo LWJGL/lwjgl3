@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_style_combo {
  *     {@link NkStyleItem struct nk_style_item} normal;
  *     {@link NkStyleItem struct nk_style_item} hover;
@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkVec2 struct nk_vec2} spacing;
  *     float color_factor;
  *     float disabled_factor;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_style_combo")
 public class NkStyleCombo extends Struct<NkStyleCombo> implements NativeResource {
@@ -75,6 +75,11 @@ public class NkStyleCombo extends Struct<NkStyleCombo> implements NativeResource
         DISABLED_FACTOR;
 
     static {
+        NkStyleItem.createSafe(NULL);
+        NkColor.createSafe(NULL);
+        NkStyleButton.createSafe(NULL);
+        NkVec2.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkStyleItem.SIZEOF, NkStyleItem.ALIGNOF),
             __member(NkStyleItem.SIZEOF, NkStyleItem.ALIGNOF),
@@ -409,25 +414,6 @@ public class NkStyleCombo extends Struct<NkStyleCombo> implements NativeResource
     public static NkStyleCombo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkStyleCombo mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkStyleCombo callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkStyleCombo mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkStyleCombo callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkStyleCombo.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkStyleCombo.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkStyleCombo.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkStyleCombo.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code NkStyleCombo} instance allocated on the specified {@link MemoryStack}.

@@ -30,6 +30,10 @@ import static org.lwjgl.nuklear.Nuklear.NK_MAX_NUMBER_BUFFER;
  *     unsigned int seq;
  *     unsigned int old;
  *     int state;
+ *     int prev_state;
+ *     nk_hash prev_name;
+ *     char prev_buffer[NK_MAX_NUMBER_BUFFER];
+ *     int prev_length;
  * }}</pre>
  */
 @NativeType("struct nk_property_state")
@@ -53,7 +57,11 @@ public class NkPropertyState extends Struct<NkPropertyState> {
         NAME,
         SEQ,
         OLD,
-        STATE;
+        STATE,
+        PREV_STATE,
+        PREV_NAME,
+        PREV_BUFFER,
+        PREV_LENGTH;
 
     static {
         Layout layout = __struct(
@@ -67,6 +75,10 @@ public class NkPropertyState extends Struct<NkPropertyState> {
             __member(4),
             __member(4),
             __member(4),
+            __member(4),
+            __member(4),
+            __member(4),
+            __array(1, NK_MAX_NUMBER_BUFFER),
             __member(4)
         );
 
@@ -84,6 +96,10 @@ public class NkPropertyState extends Struct<NkPropertyState> {
         SEQ = layout.offsetof(8);
         OLD = layout.offsetof(9);
         STATE = layout.offsetof(10);
+        PREV_STATE = layout.offsetof(11);
+        PREV_NAME = layout.offsetof(12);
+        PREV_BUFFER = layout.offsetof(13);
+        PREV_LENGTH = layout.offsetof(14);
     }
 
     protected NkPropertyState(long address, @Nullable ByteBuffer container) {
@@ -137,6 +153,19 @@ public class NkPropertyState extends Struct<NkPropertyState> {
     public int old() { return nold(address()); }
     /** @return the value of the {@code state} field. */
     public int state() { return nstate(address()); }
+    /** @return the value of the {@code prev_state} field. */
+    public int prev_state() { return nprev_state(address()); }
+    /** @return the value of the {@code prev_name} field. */
+    @NativeType("nk_hash")
+    public int prev_name() { return nprev_name(address()); }
+    /** @return a {@link ByteBuffer} view of the {@code prev_buffer} field. */
+    @NativeType("char[NK_MAX_NUMBER_BUFFER]")
+    public ByteBuffer prev_buffer() { return nprev_buffer(address()); }
+    /** @return the value at the specified index of the {@code prev_buffer} field. */
+    @NativeType("char")
+    public byte prev_buffer(int index) { return nprev_buffer(address(), index); }
+    /** @return the value of the {@code prev_length} field. */
+    public int prev_length() { return nprev_length(address()); }
 
     // -----------------------------------
 
@@ -193,6 +222,18 @@ public class NkPropertyState extends Struct<NkPropertyState> {
     public static int nold(long struct) { return memGetInt(struct + NkPropertyState.OLD); }
     /** Unsafe version of {@link #state}. */
     public static int nstate(long struct) { return memGetInt(struct + NkPropertyState.STATE); }
+    /** Unsafe version of {@link #prev_state}. */
+    public static int nprev_state(long struct) { return memGetInt(struct + NkPropertyState.PREV_STATE); }
+    /** Unsafe version of {@link #prev_name}. */
+    public static int nprev_name(long struct) { return memGetInt(struct + NkPropertyState.PREV_NAME); }
+    /** Unsafe version of {@link #prev_buffer}. */
+    public static ByteBuffer nprev_buffer(long struct) { return memByteBuffer(struct + NkPropertyState.PREV_BUFFER, NK_MAX_NUMBER_BUFFER); }
+    /** Unsafe version of {@link #prev_buffer(int) prev_buffer}. */
+    public static byte nprev_buffer(long struct, int index) {
+        return memGetByte(struct + NkPropertyState.PREV_BUFFER + check(index, NK_MAX_NUMBER_BUFFER) * 1);
+    }
+    /** Unsafe version of {@link #prev_length}. */
+    public static int nprev_length(long struct) { return memGetInt(struct + NkPropertyState.PREV_LENGTH); }
 
     // -----------------------------------
 
@@ -266,6 +307,19 @@ public class NkPropertyState extends Struct<NkPropertyState> {
         public int old() { return NkPropertyState.nold(address()); }
         /** @return the value of the {@code state} field. */
         public int state() { return NkPropertyState.nstate(address()); }
+        /** @return the value of the {@code prev_state} field. */
+        public int prev_state() { return NkPropertyState.nprev_state(address()); }
+        /** @return the value of the {@code prev_name} field. */
+        @NativeType("nk_hash")
+        public int prev_name() { return NkPropertyState.nprev_name(address()); }
+        /** @return a {@link ByteBuffer} view of the {@code prev_buffer} field. */
+        @NativeType("char[NK_MAX_NUMBER_BUFFER]")
+        public ByteBuffer prev_buffer() { return NkPropertyState.nprev_buffer(address()); }
+        /** @return the value at the specified index of the {@code prev_buffer} field. */
+        @NativeType("char")
+        public byte prev_buffer(int index) { return NkPropertyState.nprev_buffer(address(), index); }
+        /** @return the value of the {@code prev_length} field. */
+        public int prev_length() { return NkPropertyState.nprev_length(address()); }
 
     }
 

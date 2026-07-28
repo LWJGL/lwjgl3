@@ -16,9 +16,9 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct SDL_HapticRamp {
- *     Uint16 type;
+ *     SDL_HapticEffectType type;
  *     {@link SDL_HapticDirection SDL_HapticDirection} direction;
  *     Uint32 length;
  *     Uint16 delay;
@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     Uint16 attack_level;
  *     Uint16 fade_length;
  *     Uint16 fade_level;
- * }}</pre>
+ * }</code></pre>
  */
 public class SDL_HapticRamp extends Struct<SDL_HapticRamp> implements NativeResource {
 
@@ -56,6 +56,8 @@ public class SDL_HapticRamp extends Struct<SDL_HapticRamp> implements NativeReso
         FADE_LEVEL;
 
     static {
+        SDL_HapticDirection.createSafe(NULL);
+
         Layout layout = __struct(
             __member(2),
             __member(SDL_HapticDirection.SIZEOF, SDL_HapticDirection.ALIGNOF),
@@ -111,7 +113,7 @@ public class SDL_HapticRamp extends Struct<SDL_HapticRamp> implements NativeReso
     public int sizeof() { return SIZEOF; }
 
     /** @return the value of the {@code type} field. */
-    @NativeType("Uint16")
+    @NativeType("SDL_HapticEffectType")
     public short type() { return ntype(address()); }
     /** @return a {@link SDL_HapticDirection} view of the {@code direction} field. */
     public SDL_HapticDirection direction() { return ndirection(address()); }
@@ -147,7 +149,7 @@ public class SDL_HapticRamp extends Struct<SDL_HapticRamp> implements NativeReso
     public short fade_level() { return nfade_level(address()); }
 
     /** Sets the specified value to the {@code type} field. */
-    public SDL_HapticRamp type(@NativeType("Uint16") short value) { ntype(address(), value); return this; }
+    public SDL_HapticRamp type(@NativeType("SDL_HapticEffectType") short value) { ntype(address(), value); return this; }
     /** Copies the specified {@link SDL_HapticDirection} to the {@code direction} field. */
     public SDL_HapticRamp direction(SDL_HapticDirection value) { ndirection(address(), value); return this; }
     /** Passes the {@code direction} field to the specified {@link java.util.function.Consumer Consumer}. */
@@ -421,7 +423,7 @@ public class SDL_HapticRamp extends Struct<SDL_HapticRamp> implements NativeReso
         }
 
         /** @return the value of the {@code type} field. */
-        @NativeType("Uint16")
+        @NativeType("SDL_HapticEffectType")
         public short type() { return SDL_HapticRamp.ntype(address()); }
         /** @return a {@link SDL_HapticDirection} view of the {@code direction} field. */
         public SDL_HapticDirection direction() { return SDL_HapticRamp.ndirection(address()); }
@@ -457,7 +459,7 @@ public class SDL_HapticRamp extends Struct<SDL_HapticRamp> implements NativeReso
         public short fade_level() { return SDL_HapticRamp.nfade_level(address()); }
 
         /** Sets the specified value to the {@code type} field. */
-        public SDL_HapticRamp.Buffer type(@NativeType("Uint16") short value) { SDL_HapticRamp.ntype(address(), value); return this; }
+        public SDL_HapticRamp.Buffer type(@NativeType("SDL_HapticEffectType") short value) { SDL_HapticRamp.ntype(address(), value); return this; }
         /** Copies the specified {@link SDL_HapticDirection} to the {@code direction} field. */
         public SDL_HapticRamp.Buffer direction(SDL_HapticDirection value) { SDL_HapticRamp.ndirection(address(), value); return this; }
         /** Passes the {@code direction} field to the specified {@link java.util.function.Consumer Consumer}. */

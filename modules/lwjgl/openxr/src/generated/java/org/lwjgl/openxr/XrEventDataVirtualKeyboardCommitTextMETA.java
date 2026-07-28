@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -103,22 +102,14 @@ public class XrEventDataVirtualKeyboardCommitTextMETA extends Struct<XrEventData
     public XrEventDataVirtualKeyboardCommitTextMETA type$Default() { return type(METAVirtualKeyboard.XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META); }
     /** Sets the specified value to the {@code next} field. */
     public XrEventDataVirtualKeyboardCommitTextMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@code keyboard} field. */
-    public XrEventDataVirtualKeyboardCommitTextMETA keyboard(XrVirtualKeyboardMETA value) { nkeyboard(address(), value); return this; }
-    /** Copies the specified encoded string to the {@code text} field. */
-    public XrEventDataVirtualKeyboardCommitTextMETA text(@NativeType("char[XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META]") ByteBuffer value) { ntext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrEventDataVirtualKeyboardCommitTextMETA set(
         int type,
-        long next,
-        XrVirtualKeyboardMETA keyboard,
-        ByteBuffer text
+        long next
     ) {
         type(type);
         next(next);
-        keyboard(keyboard);
-        text(text);
 
         return this;
     }
@@ -163,6 +154,11 @@ public class XrEventDataVirtualKeyboardCommitTextMETA extends Struct<XrEventData
         return address == NULL ? null : new XrEventDataVirtualKeyboardCommitTextMETA(address, null);
     }
 
+    /** Downcasts the specified {@code XrEventDataBaseHeader} instance to {@code XrEventDataVirtualKeyboardCommitTextMETA}. */
+    public static XrEventDataVirtualKeyboardCommitTextMETA create(XrEventDataBaseHeader value) {
+        return new XrEventDataVirtualKeyboardCommitTextMETA(value.address(), __getContainer(value));
+    }
+
     /**
      * Returns a new {@link XrEventDataVirtualKeyboardCommitTextMETA.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -204,6 +200,11 @@ public class XrEventDataVirtualKeyboardCommitTextMETA extends Struct<XrEventData
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     public static XrEventDataVirtualKeyboardCommitTextMETA.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrEventDataBaseHeader.Buffer} instance to {@code XrEventDataVirtualKeyboardCommitTextMETA.Buffer}. */
+    public static XrEventDataVirtualKeyboardCommitTextMETA.Buffer create(XrEventDataBaseHeader.Buffer value) {
+        return new XrEventDataVirtualKeyboardCommitTextMETA.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /**
@@ -261,25 +262,6 @@ public class XrEventDataVirtualKeyboardCommitTextMETA extends Struct<XrEventData
     public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataVirtualKeyboardCommitTextMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataVirtualKeyboardCommitTextMETA.NEXT, value); }
-    /** Unsafe version of {@link #keyboard(XrVirtualKeyboardMETA) keyboard}. */
-    public static void nkeyboard(long struct, XrVirtualKeyboardMETA value) { memPutAddress(struct + XrEventDataVirtualKeyboardCommitTextMETA.KEYBOARD, value.address()); }
-    /** Unsafe version of {@link #text(ByteBuffer) text}. */
-    public static void ntext(long struct, ByteBuffer value) {
-        if (CHECKS) {
-            checkNT1(value);
-            checkGT(value, XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META);
-        }
-        memCopy(memAddress(value), struct + XrEventDataVirtualKeyboardCommitTextMETA.TEXT, value.remaining());
-    }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrEventDataVirtualKeyboardCommitTextMETA.KEYBOARD));
-    }
 
     // -----------------------------------
 
@@ -346,10 +328,6 @@ public class XrEventDataVirtualKeyboardCommitTextMETA extends Struct<XrEventData
         public XrEventDataVirtualKeyboardCommitTextMETA.Buffer type$Default() { return type(METAVirtualKeyboard.XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META); }
         /** Sets the specified value to the {@code next} field. */
         public XrEventDataVirtualKeyboardCommitTextMETA.Buffer next(@NativeType("void const *") long value) { XrEventDataVirtualKeyboardCommitTextMETA.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@code keyboard} field. */
-        public XrEventDataVirtualKeyboardCommitTextMETA.Buffer keyboard(XrVirtualKeyboardMETA value) { XrEventDataVirtualKeyboardCommitTextMETA.nkeyboard(address(), value); return this; }
-        /** Copies the specified encoded string to the {@code text} field. */
-        public XrEventDataVirtualKeyboardCommitTextMETA.Buffer text(@NativeType("char[XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META]") ByteBuffer value) { XrEventDataVirtualKeyboardCommitTextMETA.ntext(address(), value); return this; }
 
     }
 

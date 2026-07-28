@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FMOD_OUTPUT_DESCRIPTION {
  *     unsigned int apiversion;
  *     char const * name;
@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link FMOD_OUTPUT_OPENPORT_CALLBACKI FMOD_OUTPUT_OPENPORT_CALLBACK} openport;
  *     {@link FMOD_OUTPUT_CLOSEPORT_CALLBACKI FMOD_OUTPUT_CLOSEPORT_CALLBACK} closeport;
  *     {@link FMOD_OUTPUT_DEVICELISTCHANGED_CALLBACKI FMOD_OUTPUT_DEVICELISTCHANGED_CALLBACK} devicelistchanged;
- * }}</pre>
+ * }</code></pre>
  */
 public class FMOD_OUTPUT_DESCRIPTION extends Struct<FMOD_OUTPUT_DESCRIPTION> implements NativeResource {
 
@@ -73,6 +73,23 @@ public class FMOD_OUTPUT_DESCRIPTION extends Struct<FMOD_OUTPUT_DESCRIPTION> imp
         DEVICELISTCHANGED;
 
     static {
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_GETNUMDRIVERS_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_GETDRIVERINFO_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_INIT_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_START_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_STOP_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_CLOSE_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_UPDATE_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_GETHANDLE_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_MIXER_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_OBJECT3DGETINFO_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_OBJECT3DALLOC_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_OBJECT3DFREE_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_OBJECT3DUPDATE_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_OPENPORT_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_CLOSEPORT_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_OUTPUT_DEVICELISTCHANGED_CALLBACKI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

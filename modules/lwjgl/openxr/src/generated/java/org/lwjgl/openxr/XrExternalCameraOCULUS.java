@@ -18,14 +18,14 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.OCULUSExternalCamera.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrExternalCameraOCULUS {
  *     XrStructureType type;
  *     void const * next;
  *     char name[XR_MAX_EXTERNAL_CAMERA_NAME_SIZE_OCULUS];
  *     {@link XrExternalCameraIntrinsicsOCULUS XrExternalCameraIntrinsicsOCULUS} intrinsics;
  *     {@link XrExternalCameraExtrinsicsOCULUS XrExternalCameraExtrinsicsOCULUS} extrinsics;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrExternalCameraOCULUS extends Struct<XrExternalCameraOCULUS> implements NativeResource {
 
@@ -44,6 +44,9 @@ public class XrExternalCameraOCULUS extends Struct<XrExternalCameraOCULUS> imple
         EXTRINSICS;
 
     static {
+        XrExternalCameraIntrinsicsOCULUS.createSafe(NULL);
+        XrExternalCameraExtrinsicsOCULUS.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

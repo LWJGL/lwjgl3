@@ -5,11 +5,14 @@
  */
 package org.lwjgl.llvm;
 
+import org.lwjgl.*;
+
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 public class LLVMOrcEE {
 
@@ -20,14 +23,37 @@ public class LLVMOrcEE {
 
         /** Function address. */
         public static final long
-            OrcCreateRTDyldObjectLinkingLayerWithSectionMemoryManager            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOrcCreateRTDyldObjectLinkingLayerWithSectionMemoryManager"),
-            OrcCreateRTDyldObjectLinkingLayerWithMCJITMemoryManagerLikeCallbacks = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMOrcCreateRTDyldObjectLinkingLayerWithMCJITMemoryManagerLikeCallbacks"),
-            OrcRTDyldObjectLinkingLayerRegisterJITEventListener                  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOrcRTDyldObjectLinkingLayerRegisterJITEventListener");
+            OrcCreateObjectLinkingLayerWithInProcessMemoryManager                 = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMOrcCreateObjectLinkingLayerWithInProcessMemoryManager"),
+            OrcCreateRTDyldObjectLinkingLayerWithSectionMemoryManager             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOrcCreateRTDyldObjectLinkingLayerWithSectionMemoryManager"),
+            OrcCreateRTDyldObjectLinkingLayerWithSectionMemoryManagerReserveAlloc = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMOrcCreateRTDyldObjectLinkingLayerWithSectionMemoryManagerReserveAlloc"),
+            OrcCreateRTDyldObjectLinkingLayerWithMCJITMemoryManagerLikeCallbacks  = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMOrcCreateRTDyldObjectLinkingLayerWithMCJITMemoryManagerLikeCallbacks"),
+            OrcRTDyldObjectLinkingLayerRegisterJITEventListener                   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOrcRTDyldObjectLinkingLayerRegisterJITEventListener");
 
     }
 
     protected LLVMOrcEE() {
         throw new UnsupportedOperationException();
+    }
+
+    // --- [ LLVMOrcCreateObjectLinkingLayerWithInProcessMemoryManager ] ---
+
+    /** {@code LLVMErrorRef LLVMOrcCreateObjectLinkingLayerWithInProcessMemoryManager(LLVMOrcObjectLayerRef * Result, LLVMOrcExecutionSessionRef ES)} */
+    public static long nLLVMOrcCreateObjectLinkingLayerWithInProcessMemoryManager(long Result, long ES) {
+        long __functionAddress = Functions.OrcCreateObjectLinkingLayerWithInProcessMemoryManager;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(ES);
+        }
+        return invokePPP(Result, ES, __functionAddress);
+    }
+
+    /** {@code LLVMErrorRef LLVMOrcCreateObjectLinkingLayerWithInProcessMemoryManager(LLVMOrcObjectLayerRef * Result, LLVMOrcExecutionSessionRef ES)} */
+    @NativeType("LLVMErrorRef")
+    public static long LLVMOrcCreateObjectLinkingLayerWithInProcessMemoryManager(@NativeType("LLVMOrcObjectLayerRef *") PointerBuffer Result, @NativeType("LLVMOrcExecutionSessionRef") long ES) {
+        if (CHECKS) {
+            check(Result, 1);
+        }
+        return nLLVMOrcCreateObjectLinkingLayerWithInProcessMemoryManager(memAddress(Result), ES);
     }
 
     // --- [ LLVMOrcCreateRTDyldObjectLinkingLayerWithSectionMemoryManager ] ---
@@ -40,6 +66,19 @@ public class LLVMOrcEE {
             check(ES);
         }
         return invokePP(ES, __functionAddress);
+    }
+
+    // --- [ LLVMOrcCreateRTDyldObjectLinkingLayerWithSectionMemoryManagerReserveAlloc ] ---
+
+    /** {@code LLVMOrcObjectLayerRef LLVMOrcCreateRTDyldObjectLinkingLayerWithSectionMemoryManagerReserveAlloc(LLVMOrcExecutionSessionRef ES, LLVMBool ReserveAlloc)} */
+    @NativeType("LLVMOrcObjectLayerRef")
+    public static long LLVMOrcCreateRTDyldObjectLinkingLayerWithSectionMemoryManagerReserveAlloc(@NativeType("LLVMOrcExecutionSessionRef") long ES, @NativeType("LLVMBool") boolean ReserveAlloc) {
+        long __functionAddress = Functions.OrcCreateRTDyldObjectLinkingLayerWithSectionMemoryManagerReserveAlloc;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(ES);
+        }
+        return invokePP(ES, ReserveAlloc ? 1 : 0, __functionAddress);
     }
 
     // --- [ LLVMOrcCreateRTDyldObjectLinkingLayerWithMCJITMemoryManagerLikeCallbacks ] ---

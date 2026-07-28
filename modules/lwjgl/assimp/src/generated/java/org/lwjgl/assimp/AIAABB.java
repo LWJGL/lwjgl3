@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiAABB {
  *     {@link AIVector3D struct aiVector3D} mMin;
  *     {@link AIVector3D struct aiVector3D} mMax;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiAABB")
 public class AIAABB extends Struct<AIAABB> implements NativeResource {
@@ -37,6 +37,8 @@ public class AIAABB extends Struct<AIAABB> implements NativeResource {
         MMAX;
 
     static {
+        AIVector3D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(AIVector3D.SIZEOF, AIVector3D.ALIGNOF),
             __member(AIVector3D.SIZEOF, AIVector3D.ALIGNOF)
@@ -180,25 +182,6 @@ public class AIAABB extends Struct<AIAABB> implements NativeResource {
     public static AIAABB.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static AIAABB mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static AIAABB callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static AIAABB mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static AIAABB callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static AIAABB.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static AIAABB.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static AIAABB.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static AIAABB.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code AIAABB} instance allocated on the specified {@link MemoryStack}.

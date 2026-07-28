@@ -12,6 +12,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public final class SharedLibraryUtil {
 
+    private SharedLibraryUtil() {}
+
     private static native int getLibraryPath(long pLib, long sOut, int bufSize);
 
     public static @Nullable String getLibraryPath(long pLib) {

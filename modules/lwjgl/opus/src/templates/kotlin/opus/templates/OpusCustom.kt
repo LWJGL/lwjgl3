@@ -78,6 +78,19 @@ val OpusCustom = "OpusCustom".nativeClass(Module.OPUS, prefix = "OPUS", prefixMe
         AutoSize("compressed")..int("maxCompressedBytes")
     )
 
+    int(
+        "custom_encode24",
+
+        OpusCustomEncoder.p("st"),
+        Check(
+            // Reading OpusCustomEncoder internal state here
+            "frame_size * memGetInt(st + Pointer.POINTER_SIZE)"
+        )..opus_int32.const.p("pcm"),
+        int("frame_size"),
+        unsigned_char.p("compressed"),
+        AutoSize("compressed")..int("maxCompressedBytes")
+    )
+
     private..int(
         "custom_encoder_ctl",
 
@@ -139,6 +152,19 @@ val OpusCustom = "OpusCustom".nativeClass(Module.OPUS, prefix = "OPUS", prefixMe
         int("frame_size")
     )
 
+    int(
+        "custom_decode24",
+
+        OpusCustomDecoder.p("st"),
+        nullable..unsigned_char.const.p("data"),
+        AutoSize("data")..int("len"),
+        Check(
+            // Reading OpusCustomDecoder internal state here
+            "frame_size * memGetInt(st + (Pointer.POINTER_SIZE + 4))"
+        )..opus_int32.p("pcm"),
+        int("frame_size")
+    )
+
     private..int(
         "custom_decoder_ctl",
 
@@ -146,42 +172,18 @@ val OpusCustom = "OpusCustom".nativeClass(Module.OPUS, prefix = "OPUS", prefixMe
     )
 
     customMethod("""
-    /**
-     * Performs a CTL function on an Opus custom encoder.
-     *
-     * @param st      encoder state
-     * @param request CTL request
-     */
     public static int opus_custom_encoder_ctl(@NativeType("OpusCustomEncoder *") long st, int request) {
         return new CTLRequestV(request).apply(st, Functions.custom_encoder_ctl);
     }
 
-    /**
-     * Performs a CTL function on an Opus custom encoder.
-     *
-     * @param st      encoder state
-     * @param request CTL request
-     */
     public static int opus_custom_encoder_ctl(@NativeType("OpusCustomEncoder *") long st, CTLRequest request) {
         return request.apply(st, Functions.custom_encoder_ctl);
     }
 
-    /**
-     * Performs a CTL function on an Opus custom decoder.
-     *
-     * @param st      decoder state
-     * @param request CTL request
-     */
     public static int opus_custom_decoder_ctl(@NativeType("OpusCustomDecoder *") long st, int request) {
         return new CTLRequestV(request).apply(st, Functions.custom_decoder_ctl);
     }
 
-    /**
-     * Performs a CTL function on an Opus custom decoder.
-     *
-     * @param st      decoder state
-     * @param request CTL request
-     */
     public static int opus_custom_decoder_ctl(@NativeType("OpusCustomDecoder *") long st, CTLRequest request) {
         return request.apply(st, Functions.custom_decoder_ctl);
     }

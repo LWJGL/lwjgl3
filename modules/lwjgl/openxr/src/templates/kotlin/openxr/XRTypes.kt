@@ -115,7 +115,7 @@ val XrSystemProperties = struct(Module.OPENXR, "XrSystemProperties", mutable = f
     javaImport("static org.lwjgl.openxr.XR10.*")
     Expression("#TYPE_SYSTEM_PROPERTIES")..XrStructureType("type").mutable()
     PointerSetter(
-        "XrSystemAnchorPropertiesHTC", "XrSystemBodyTrackingPropertiesBD", "XrSystemBodyTrackingPropertiesFB", "XrSystemBodyTrackingPropertiesHTC", "XrSystemColocationDiscoveryPropertiesMETA", "XrSystemColorSpacePropertiesFB", "XrSystemEnvironmentDepthPropertiesMETA", "XrSystemEyeGazeInteractionPropertiesEXT", "XrSystemEyeTrackingPropertiesFB", "XrSystemFaceTrackingProperties2FB", "XrSystemFaceTrackingPropertiesFB", "XrSystemFacialExpressionPropertiesML", "XrSystemFacialTrackingPropertiesHTC", "XrSystemForceFeedbackCurlPropertiesMNDX", "XrSystemFoveatedRenderingPropertiesVARJO", "XrSystemFoveationEyeTrackedPropertiesMETA", "XrSystemHandTrackingMeshPropertiesMSFT", "XrSystemHandTrackingPropertiesEXT", "XrSystemHeadsetIdPropertiesMETA", "XrSystemKeyboardTrackingPropertiesFB", "XrSystemMarkerTrackingPropertiesVARJO", "XrSystemMarkerUnderstandingPropertiesML", "XrSystemPassthroughColorLutPropertiesMETA", "XrSystemPassthroughProperties2FB", "XrSystemPassthroughPropertiesFB", "XrSystemPlaneDetectionPropertiesEXT", "XrSystemRenderModelPropertiesFB", "XrSystemSpaceWarpPropertiesFB", "XrSystemSpatialAnchorPropertiesBD", "XrSystemSpatialAnchorSharingPropertiesBD", "XrSystemSpatialEntityGroupSharingPropertiesMETA", "XrSystemSpatialEntityPropertiesFB", "XrSystemSpatialEntitySharingPropertiesMETA", "XrSystemSpatialMeshPropertiesBD", "XrSystemSpatialScenePropertiesBD", "XrSystemSpatialSensingPropertiesBD", "XrSystemUserPresencePropertiesEXT", "XrSystemVirtualKeyboardPropertiesMETA",
+        "XrSystemAnchorPropertiesHTC", "XrSystemAnchorSharingExportPropertiesANDROID", "XrSystemBodyTrackingPropertiesBD", "XrSystemBodyTrackingPropertiesFB", "XrSystemBodyTrackingPropertiesHTC", "XrSystemBoundaryVisibilityPropertiesMETA", "XrSystemColocationDiscoveryPropertiesMETA", "XrSystemColorSpacePropertiesFB", "XrSystemDeviceAnchorPersistencePropertiesANDROID", "XrSystemDynamicObjectKeyboardPropertiesBD", "XrSystemDynamicObjectMousePropertiesBD", "XrSystemDynamicObjectTrackingPropertiesBD", "XrSystemEnvironmentDepthPropertiesMETA", "XrSystemEnvironmentRaycastPropertiesMETA", "XrSystemEyeGazeInteractionPropertiesEXT", "XrSystemEyeTrackingPropertiesANDROID", "XrSystemEyeTrackingPropertiesFB", "XrSystemFaceTrackingProperties2FB", "XrSystemFaceTrackingPropertiesANDROID", "XrSystemFaceTrackingPropertiesFB", "XrSystemFaceTrackingVisemesPropertiesMETA", "XrSystemFacialExpressionPropertiesML", "XrSystemFacialSimulationPropertiesBD", "XrSystemFacialTrackingPropertiesHTC", "XrSystemForceFeedbackCurlPropertiesMNDX", "XrSystemFoveatedRenderingPropertiesVARJO", "XrSystemFoveationEyeTrackedPropertiesMETA", "XrSystemGeospatialAnchorPropertiesANDROID", "XrSystemGeospatialPropertiesANDROID", "XrSystemHandTrackingMeshPropertiesMSFT", "XrSystemHandTrackingPropertiesEXT", "XrSystemHapticParametricPropertiesEXT", "XrSystemHeadsetIdPropertiesMETA", "XrSystemImageTrackingPropertiesANDROID", "XrSystemKeyboardTrackingPropertiesFB", "XrSystemLightEstimationPropertiesANDROID", "XrSystemMarkerTrackingPropertiesANDROID", "XrSystemMarkerTrackingPropertiesVARJO", "XrSystemMarkerUnderstandingPropertiesML", "XrSystemPassthroughCameraStatePropertiesANDROID", "XrSystemPassthroughColorLutPropertiesMETA", "XrSystemPassthroughLayerPropertiesANDROID", "XrSystemPassthroughProperties2FB", "XrSystemPassthroughPropertiesFB", "XrSystemPlaneDetectionPropertiesEXT", "XrSystemPropertiesBodyTrackingCalibrationMETA", "XrSystemPropertiesBodyTrackingFidelityMETA", "XrSystemPropertiesBodyTrackingFullBodyMETA", "XrSystemQrCodeTrackingPropertiesANDROID", "XrSystemRenderModelPropertiesFB", "XrSystemSceneMeshingPropertiesANDROID", "XrSystemSimultaneousHandsAndControllersPropertiesMETA", "XrSystemSpaceDiscoveryPropertiesMETA", "XrSystemSpacePersistencePropertiesMETA", "XrSystemSpaceWarpPropertiesFB", "XrSystemSpatialAnchorPropertiesBD", "XrSystemSpatialAnchorSharingPropertiesBD", "XrSystemSpatialEntityGroupSharingPropertiesMETA", "XrSystemSpatialEntityPropertiesFB", "XrSystemSpatialEntitySharingPropertiesMETA", "XrSystemSpatialMeshPropertiesBD", "XrSystemSpatialPlanePropertiesBD", "XrSystemSpatialScenePropertiesBD", "XrSystemSpatialSensingPropertiesBD", "XrSystemTrackablesPropertiesANDROID", "XrSystemUserPresencePropertiesEXT", "XrSystemVirtualKeyboardPropertiesMETA",
         prepend = true
     )..nullable..opaque_p("next").mutable()
     XrSystemId("systemId")
@@ -215,7 +215,7 @@ val XrViewConfigurationView = struct(Module.OPENXR, "XrViewConfigurationView") {
 val XrSwapchainCreateInfo = struct(Module.OPENXR, "XrSwapchainCreateInfo") {
     Expression("#TYPE_SWAPCHAIN_CREATE_INFO")..XrStructureType("type")
     PointerSetter(
-        "XrSecondaryViewConfigurationSwapchainCreateInfoMSFT", "XrSwapchainCreateInfoFoveationFB", "XrVulkanSwapchainCreateInfoMETA",
+        "XrSecondaryViewConfigurationSwapchainCreateInfoMSFT", "XrSwapchainCreateInfoFoveationFB", "XrVulkanSwapchainCreateInfoMETA", "XrVulkanSwapchainFormatListCreateInfoKHR",
         prepend = true
     )..nullable..opaque_const_p("next")
     XrSwapchainCreateFlags("createFlags")
@@ -378,7 +378,10 @@ val XrSessionActionSetsAttachInfo = struct(Module.OPENXR, "XrSessionActionSetsAt
 
 val XrInteractionProfileState = struct(Module.OPENXR, "XrInteractionProfileState") {
     Expression("#TYPE_INTERACTION_PROFILE_STATE")..XrStructureType("type")
-    nullable..opaque_p("next")
+    PointerSetter(
+        "XrBatteryStateDisplayEXT",
+        prepend = true
+    )..nullable..opaque_p("next")
     XrPath("interactionProfile")
 }
 

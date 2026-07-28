@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct CXIdxDeclInfo {
  *     {@link CXIdxEntityInfo CXIdxEntityInfo} const * entityInfo;
  *     {@link CXCursor CXCursor} cursor;
@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link CXIdxAttrInfo CXIdxAttrInfo} const * const * attributes;
  *     unsigned numAttributes;
  *     unsigned flags;
- * }}</pre>
+ * }</code></pre>
  */
 public class CXIdxDeclInfo extends Struct<CXIdxDeclInfo> implements NativeResource {
 
@@ -58,6 +58,9 @@ public class CXIdxDeclInfo extends Struct<CXIdxDeclInfo> implements NativeResour
         FLAGS;
 
     static {
+        CXCursor.createSafe(NULL);
+        CXIdxLoc.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(CXCursor.SIZEOF, CXCursor.ALIGNOF),
@@ -222,25 +225,6 @@ public class CXIdxDeclInfo extends Struct<CXIdxDeclInfo> implements NativeResour
     public static CXIdxDeclInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static CXIdxDeclInfo mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static CXIdxDeclInfo callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static CXIdxDeclInfo mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static CXIdxDeclInfo callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static CXIdxDeclInfo.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static CXIdxDeclInfo.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static CXIdxDeclInfo.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static CXIdxDeclInfo.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code CXIdxDeclInfo} instance allocated on the specified {@link MemoryStack}.

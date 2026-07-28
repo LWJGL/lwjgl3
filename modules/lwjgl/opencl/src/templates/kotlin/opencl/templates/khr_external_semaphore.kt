@@ -18,9 +18,9 @@ val khr_external_semaphore = "KHRExternalSemaphore".nativeClassCL("khr_external_
         "DEVICE_SEMAPHORE_EXPORT_HANDLE_TYPES_KHR"..0x204E
     )
 
-    IntConstant(
-        "SEMAPHORE_EXPORT_HANDLE_TYPES_KHR"..0x203F,
-        "SEMAPHORE_EXPORT_HANDLE_TYPES_LIST_END_KHR".."0"
+    LongConstant(
+        "SEMAPHORE_EXPORT_HANDLE_TYPES_KHR"..0x203FL,
+        "SEMAPHORE_EXPORT_HANDLE_TYPES_LIST_END_KHR".."0L"
     )
 
     IntConstant(

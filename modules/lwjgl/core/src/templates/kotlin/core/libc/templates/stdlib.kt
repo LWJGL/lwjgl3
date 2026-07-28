@@ -19,7 +19,7 @@ val stdlib = "LibCStdlib".nativeClass(Module.CORE_LIBC) {
     #if defined(__USE_ISOC11)
         #define __aligned_alloc aligned_alloc
     #else
-        inline void* __aligned_alloc(size_t alignment, size_t size) {
+        static inline void* __aligned_alloc(size_t alignment, size_t size) {
             void *p;
             return posix_memalign(&p, alignment, size) ? NULL : p;
         }

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct SDL_GPUDepthStencilState {
  *     SDL_GPUCompareOp compare_op;
  *     {@link SDL_GPUStencilOpState SDL_GPUStencilOpState} back_stencil_state;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     Uint8 padding1;
  *     Uint8 padding2;
  *     Uint8 padding3;
- * }}</pre>
+ * }</code></pre>
  */
 public class SDL_GPUDepthStencilState extends Struct<SDL_GPUDepthStencilState> implements NativeResource {
 
@@ -54,6 +54,8 @@ public class SDL_GPUDepthStencilState extends Struct<SDL_GPUDepthStencilState> i
         PADDING3;
 
     static {
+        SDL_GPUStencilOpState.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(SDL_GPUStencilOpState.SIZEOF, SDL_GPUStencilOpState.ALIGNOF),
@@ -312,9 +314,9 @@ public class SDL_GPUDepthStencilState extends Struct<SDL_GPUDepthStencilState> i
     public static boolean nenable_depth_write(long struct) { return memGetByte(struct + SDL_GPUDepthStencilState.ENABLE_DEPTH_WRITE) != 0; }
     /** Unsafe version of {@link #enable_stencil_test}. */
     public static boolean nenable_stencil_test(long struct) { return memGetByte(struct + SDL_GPUDepthStencilState.ENABLE_STENCIL_TEST) != 0; }
-    public static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUDepthStencilState.PADDING1); }
-    public static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUDepthStencilState.PADDING2); }
-    public static byte npadding3(long struct) { return memGetByte(struct + SDL_GPUDepthStencilState.PADDING3); }
+    static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUDepthStencilState.PADDING1); }
+    static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUDepthStencilState.PADDING2); }
+    static byte npadding3(long struct) { return memGetByte(struct + SDL_GPUDepthStencilState.PADDING3); }
 
     /** Unsafe version of {@link #compare_op(int) compare_op}. */
     public static void ncompare_op(long struct, int value) { memPutInt(struct + SDL_GPUDepthStencilState.COMPARE_OP, value); }
@@ -332,9 +334,9 @@ public class SDL_GPUDepthStencilState extends Struct<SDL_GPUDepthStencilState> i
     public static void nenable_depth_write(long struct, boolean value) { memPutByte(struct + SDL_GPUDepthStencilState.ENABLE_DEPTH_WRITE, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #enable_stencil_test(boolean) enable_stencil_test}. */
     public static void nenable_stencil_test(long struct, boolean value) { memPutByte(struct + SDL_GPUDepthStencilState.ENABLE_STENCIL_TEST, value ? (byte)1 : (byte)0); }
-    public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUDepthStencilState.PADDING1, value); }
-    public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUDepthStencilState.PADDING2, value); }
-    public static void npadding3(long struct, byte value) { memPutByte(struct + SDL_GPUDepthStencilState.PADDING3, value); }
+    static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUDepthStencilState.PADDING1, value); }
+    static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUDepthStencilState.PADDING2, value); }
+    static void npadding3(long struct, byte value) { memPutByte(struct + SDL_GPUDepthStencilState.PADDING3, value); }
 
     // -----------------------------------
 

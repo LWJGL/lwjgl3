@@ -6,7 +6,7 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../modules/samples">
       <sourceFolder url="file://$MODULE_DIR$/../../../modules/samples/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../modules/samples/src/test/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../modules/samples/src/test/resources" type="java-resource" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -39,6 +39,7 @@
     <orderEntry type="module" module-name="lwjgl.lmdb" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.lz4" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.meshoptimizer" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.mimalloc" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.msdfgen" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.nanovg" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.nfd" scope="TEST" />
@@ -52,6 +53,7 @@
     <orderEntry type="module" module-name="lwjgl.opus" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.par" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.remotery" scope="TEST" />
+    <orderEntry type="module" module-name="lwjgl.renderdoc" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.rpmalloc" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.sdl" scope="TEST" />
     <orderEntry type="module" module-name="lwjgl.shaderc" scope="TEST" />

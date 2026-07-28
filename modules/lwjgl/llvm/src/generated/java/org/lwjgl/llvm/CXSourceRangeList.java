@@ -14,11 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct CXSourceRangeList {
  *     unsigned count;
  *     {@link CXSourceRange CXSourceRange} * ranges;
- * }}</pre>
+ * }</code></pre>
  */
 public class CXSourceRangeList extends Struct<CXSourceRangeList> {
 

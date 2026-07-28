@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t (* cache_read_size) (bgfx_callback_interface_t * _this, uint64_t _id);
  *     bool (* cache_read) (bgfx_callback_interface_t * _this, uint64_t _id, void * _data, uint32_t _size);
  *     void (* cache_write) (bgfx_callback_interface_t * _this, uint64_t _id, void const * _data, uint32_t _size);
- *     void (* screen_shot) (bgfx_callback_interface_t * _this, char const * _filePath, uint32_t _width, uint32_t _height, uint32_t _pitch, void const * _data, uint32_t _size, bool _yflip);
+ *     void (* screen_shot) (bgfx_callback_interface_t * _this, char const * _filePath, uint32_t _width, uint32_t _height, uint32_t _pitch, bgfx_texture_format_t _format, void const * _data, uint32_t _size, bool _yflip);
  *     void (* capture_begin) (bgfx_callback_interface_t * _this, uint32_t _width, uint32_t _height, uint32_t _pitch, bgfx_texture_format_t _format, bool _yflip);
  *     void (* capture_end) (bgfx_callback_interface_t * _this);
  *     void (* capture_frame) (bgfx_callback_interface_t * _this, void const * _data, uint32_t _size);
@@ -58,6 +58,19 @@ public class BGFXCallbackVtbl extends Struct<BGFXCallbackVtbl> implements Native
         CAPTURE_FRAME;
 
     static {
+        java.util.Objects.requireNonNull(BGFXFatalCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXTraceVarArgsCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXProfilerBeginI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXProfilerBeginLiteralI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXProfilerEndI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXCacheReadSizeCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXCacheReadCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXCacheWriteCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXScreenShotCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXCaptureBeginCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXCaptureEndCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(BGFXCaptureFrameCallbackI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
@@ -137,7 +150,7 @@ public class BGFXCallbackVtbl extends Struct<BGFXCallbackVtbl> implements Native
     @NativeType("void (*) (bgfx_callback_interface_t *, uint64_t, void const *, uint32_t)")
     public BGFXCacheWriteCallback cache_write() { return ncache_write(address()); }
     /** @return the value of the {@code screen_shot} field. */
-    @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint32_t, uint32_t, uint32_t, void const *, uint32_t, bool)")
+    @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint32_t, uint32_t, uint32_t, bgfx_texture_format_t, void const *, uint32_t, bool)")
     public BGFXScreenShotCallback screen_shot() { return nscreen_shot(address()); }
     /** @return the value of the {@code capture_begin} field. */
     @NativeType("void (*) (bgfx_callback_interface_t *, uint32_t, uint32_t, uint32_t, bgfx_texture_format_t, bool)")
@@ -166,7 +179,7 @@ public class BGFXCallbackVtbl extends Struct<BGFXCallbackVtbl> implements Native
     /** Sets the specified value to the {@code cache_write} field. */
     public BGFXCallbackVtbl cache_write(@NativeType("void (*) (bgfx_callback_interface_t *, uint64_t, void const *, uint32_t)") BGFXCacheWriteCallbackI value) { ncache_write(address(), value); return this; }
     /** Sets the specified value to the {@code screen_shot} field. */
-    public BGFXCallbackVtbl screen_shot(@NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint32_t, uint32_t, uint32_t, void const *, uint32_t, bool)") BGFXScreenShotCallbackI value) { nscreen_shot(address(), value); return this; }
+    public BGFXCallbackVtbl screen_shot(@NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint32_t, uint32_t, uint32_t, bgfx_texture_format_t, void const *, uint32_t, bool)") BGFXScreenShotCallbackI value) { nscreen_shot(address(), value); return this; }
     /** Sets the specified value to the {@code capture_begin} field. */
     public BGFXCallbackVtbl capture_begin(@NativeType("void (*) (bgfx_callback_interface_t *, uint32_t, uint32_t, uint32_t, bgfx_texture_format_t, bool)") BGFXCaptureBeginCallbackI value) { ncapture_begin(address(), value); return this; }
     /** Sets the specified value to the {@code capture_end} field. */
@@ -244,17 +257,6 @@ public class BGFXCallbackVtbl extends Struct<BGFXCallbackVtbl> implements Native
     public static @Nullable BGFXCallbackVtbl createSafe(long address) {
         return address == NULL ? null : new BGFXCallbackVtbl(address, null);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static BGFXCallbackVtbl mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static BGFXCallbackVtbl callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static BGFXCallbackVtbl mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static BGFXCallbackVtbl callocStack(MemoryStack stack) { return calloc(stack); }
 
     /**
      * Returns a new {@code BGFXCallbackVtbl} instance allocated on the specified {@link MemoryStack}.

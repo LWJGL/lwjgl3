@@ -14,12 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_ListNodeRec {
  *     {@link FT_ListNode FT_ListNode} prev;
  *     {@link FT_ListNode FT_ListNode} next;
  *     void * data;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct FT_ListNodeRec")
 public class FT_ListNode extends Struct<FT_ListNode> {

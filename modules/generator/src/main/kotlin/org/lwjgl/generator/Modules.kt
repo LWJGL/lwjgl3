@@ -264,7 +264,8 @@ enum class Module(
             url("https://jemalloc.net/jemalloc.3.html", "Documentation"),
             url("https://github.com/jemalloc/jemalloc", "Source Repository")
         )}
-        """
+        """,
+        arrayOverloads = false
     ),
     KTX(
         "ktx",
@@ -348,6 +349,30 @@ enum class Module(
         "org.lwjgl.util.meshoptimizer",
         "Contains bindings to ${url("https://github.com/zeux/meshoptimizer", "meshoptimizer")}, a library that provides algorithms to help optimize meshes.",
         library = JNILibrary.create("LibMeshOptimizer"),
+        arrayOverloads = false
+    ),
+    MIMALLOC(
+        "mimalloc",
+        "org.lwjgl.system.mimalloc",
+        """
+        Contains bindings to ${url("https://microsoft.github.io/mimalloc/", "mimalloc")}, a compact general purpose allocator with excellent performance.
+
+        The mimalloc shared library that comes with LWJGL is configured with:
+        ${ul(
+            "-DMI_OVERRIDE=OFF",
+            "-DMI_OSX_INTERPOSE=OFF",
+            "-DMI_OSX_ZONE=OFF",
+            "-DMI_WIN_REDIRECT=OFF"
+        )}
+
+        The shared library may be replaced with a custom build that has more features enabled.
+
+        <h3>Resources</h3>
+        ${ul(
+            url("https://microsoft.github.io/mimalloc/topics.html", "Documentation"),
+            url("https://github.com/microsoft/mimalloc", "Source Repository")
+        )}
+        """,
         arrayOverloads = false
     ),
     MSDFGEN(
@@ -585,6 +610,24 @@ git branch -D @{-1}""")}"""}()}
         library = JNILibrary.create("LibRemotery"),
         arrayOverloads = false
     ),
+    RENDERDOC(
+        "renderdoc",
+        "org.lwjgl.util.renderdoc",
+        """
+        Contains bindings to the ${url("https://renderdoc.org", "RenderDoc")} in-application API. RenderDoc is a free MIT licensed stand-alone graphics
+        debugger that allows quick and easy single-frame capture and detailed introspection of any application using Vulkan, D3D11, OpenGL &amp; OpenGL ES or
+        D3D12 across Windows, Linux, Android, or Nintendo Switch™.
+
+        <h3>Resources</h3>
+        ${
+            ul(
+                url("https://renderdoc.org/docs/", "Documentation"),
+                url("https://github.com/baldurk/renderdoc/", "Source Repository"),
+            )
+        }
+        """,
+        arrayOverloads = false
+    ),
     RPMALLOC(
         "rpmalloc",
         "org.lwjgl.system.rpmalloc",
@@ -693,7 +736,14 @@ git branch -D @{-1}""")}"""}()}
         "spng",
         "org.lwjgl.util.spng",
         """
-        libspbg (simple png) is a C library for reading and writing Portable Network Graphics (PNG) format files with a focus on security and easy of use.
+        Contains bindings to ${url("https://libspng.org/", "libspbg")} (simple png), a C library for reading and writing Portable Network Graphics (PNG) format
+        files with a focus on security and easy of use.
+
+        <h3>Resources</h3>
+        ${ul(
+            url("https://libspng.org/docs/", "Documentation"),
+            url("https://github.com/randy408/libspng/", "Source Repository"),
+        )}
         """,
         library = JNILibrary.create("LibSPNG", setupAllocator = true),
         arrayOverloads = false

@@ -50,10 +50,6 @@ public class EXTShaderObject {
         VK_SHADER_CODE_TYPE_BINARY_EXT = 0,
         VK_SHADER_CODE_TYPE_SPIRV_EXT  = 1;
 
-    public static final int
-        VK_DEPTH_CLAMP_MODE_VIEWPORT_RANGE_EXT     = 0,
-        VK_DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT = 1;
-
     protected EXTShaderObject() {
         throw new UnsupportedOperationException();
     }
@@ -414,8 +410,8 @@ public class EXTShaderObject {
     }
 
     /** {@code void vkCmdSetSampleMaskEXT(VkCommandBuffer commandBuffer, VkSampleCountFlagBits samples, VkSampleMask const * pSampleMask)} */
-    public static void vkCmdSetSampleMaskEXT(VkCommandBuffer commandBuffer, @NativeType("VkSampleCountFlagBits") int samples, @NativeType("VkSampleMask const *") IntBuffer pSampleMask) {
-        nvkCmdSetSampleMaskEXT(commandBuffer, samples, memAddress(pSampleMask));
+    public static void vkCmdSetSampleMaskEXT(VkCommandBuffer commandBuffer, @NativeType("VkSampleCountFlagBits") int samples, @NativeType("VkSampleMask const *") @Nullable IntBuffer pSampleMask) {
+        nvkCmdSetSampleMaskEXT(commandBuffer, samples, memAddressSafe(pSampleMask));
     }
 
     // --- [ vkCmdSetAlphaToCoverageEnableEXT ] ---
@@ -785,7 +781,7 @@ public class EXTShaderObject {
     }
 
     /** {@code void vkCmdSetSampleMaskEXT(VkCommandBuffer commandBuffer, VkSampleCountFlagBits samples, VkSampleMask const * pSampleMask)} */
-    public static void vkCmdSetSampleMaskEXT(VkCommandBuffer commandBuffer, @NativeType("VkSampleCountFlagBits") int samples, @NativeType("VkSampleMask const *") int[] pSampleMask) {
+    public static void vkCmdSetSampleMaskEXT(VkCommandBuffer commandBuffer, @NativeType("VkSampleCountFlagBits") int samples, @NativeType("VkSampleMask const *") int @Nullable [] pSampleMask) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdSetSampleMaskEXT;
         if (CHECKS) {
             check(__functionAddress);

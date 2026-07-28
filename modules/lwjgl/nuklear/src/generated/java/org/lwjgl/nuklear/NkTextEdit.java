@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_text_edit {
  *     {@link NkClipboard struct nk_clipboard} clip;
  *     {@link NkStr struct nk_str} string;
@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     char[1];
  *     float preferred_x;
  *     {@link NkTextUndoState struct nk_text_undo_state} undo;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_text_edit")
 public class NkTextEdit extends Struct<NkTextEdit> implements NativeResource {
@@ -64,6 +64,12 @@ public class NkTextEdit extends Struct<NkTextEdit> implements NativeResource {
         UNDO;
 
     static {
+        NkClipboard.createSafe(NULL);
+        NkStr.createSafe(NULL);
+        java.util.Objects.requireNonNull(NkPluginFilterI.DESCRIPTOR);
+        NkVec2.createSafe(NULL);
+        NkTextUndoState.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkClipboard.SIZEOF, NkClipboard.ALIGNOF),
             __member(NkStr.SIZEOF, NkStr.ALIGNOF),
@@ -237,25 +243,6 @@ public class NkTextEdit extends Struct<NkTextEdit> implements NativeResource {
     public static NkTextEdit.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkTextEdit mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkTextEdit callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkTextEdit mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkTextEdit callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkTextEdit.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkTextEdit.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkTextEdit.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkTextEdit.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code NkTextEdit} instance allocated on the specified {@link MemoryStack}.

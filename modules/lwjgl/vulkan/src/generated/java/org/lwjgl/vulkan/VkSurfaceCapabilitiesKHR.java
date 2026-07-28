@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkSurfaceCapabilitiesKHR {
  *     uint32_t minImageCount;
  *     uint32_t maxImageCount;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkSurfaceTransformFlagBitsKHR currentTransform;
  *     VkCompositeAlphaFlagsKHR supportedCompositeAlpha;
  *     VkImageUsageFlags supportedUsageFlags;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkSurfaceCapabilitiesKHR extends Struct<VkSurfaceCapabilitiesKHR> implements NativeResource {
 
@@ -52,6 +52,8 @@ public class VkSurfaceCapabilitiesKHR extends Struct<VkSurfaceCapabilitiesKHR> i
         SUPPORTEDUSAGEFLAGS;
 
     static {
+        VkExtent2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),
@@ -200,25 +202,6 @@ public class VkSurfaceCapabilitiesKHR extends Struct<VkSurfaceCapabilitiesKHR> i
     public static VkSurfaceCapabilitiesKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkSurfaceCapabilitiesKHR mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkSurfaceCapabilitiesKHR callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkSurfaceCapabilitiesKHR mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkSurfaceCapabilitiesKHR callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkSurfaceCapabilitiesKHR.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkSurfaceCapabilitiesKHR.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkSurfaceCapabilitiesKHR.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkSurfaceCapabilitiesKHR.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkSurfaceCapabilitiesKHR} instance allocated on the specified {@link MemoryStack}.

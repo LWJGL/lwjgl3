@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class METAEnvironmentDepth {
 
-    public static final int XR_META_environment_depth_SPEC_VERSION = 1;
+    public static final int XR_META_environment_depth_SPEC_VERSION = 2;
 
     public static final String XR_META_ENVIRONMENT_DEPTH_EXTENSION_NAME = "XR_META_environment_depth";
 
@@ -35,7 +35,8 @@ public class METAEnvironmentDepth {
         XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META            = 1000291004,
         XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_META                 = 1000291005,
         XR_TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META = 1000291006,
-        XR_TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META     = 1000291007;
+        XR_TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META     = 1000291007,
+        XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_TIMESTAMP_META       = 1000291008;
 
     public static final int XR_ENVIRONMENT_DEPTH_NOT_AVAILABLE_META = 1000291000;
 

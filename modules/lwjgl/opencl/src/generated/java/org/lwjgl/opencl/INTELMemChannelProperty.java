@@ -7,7 +7,7 @@ package org.lwjgl.opencl;
 
 public final class INTELMemChannelProperty {
 
-    public static final int CL_MEM_CHANNEL_INTEL = 0x4213;
+    public static final long CL_MEM_CHANNEL_INTEL = 0x4213L;
 
     private INTELMemChannelProperty() {}
 

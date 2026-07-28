@@ -19,47 +19,30 @@ public abstract class MDBMsgFunc extends Callback implements MDBMsgFuncI {
      *
      * @return the new {@code MDBMsgFunc}
      */
-    public static MDBMsgFunc create(long functionPointer) {
-        MDBMsgFuncI instance = Callback.get(functionPointer);
-        return instance instanceof MDBMsgFunc
-            ? (MDBMsgFunc)instance
-            : new Container(functionPointer, instance);
-    }
+    public static MDBMsgFunc create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable MDBMsgFunc createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable MDBMsgFunc createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code MDBMsgFunc} instance that delegates to the specified {@code MDBMsgFuncI} instance. */
-    public static MDBMsgFunc create(MDBMsgFuncI instance) {
+    public static MDBMsgFunc create(MDBMsgFuncI instance) { return create(instance, instance.address()); }
+
+    private static MDBMsgFunc create(MDBMsgFuncI instance, long functionPointer) {
         return instance instanceof MDBMsgFunc
             ? (MDBMsgFunc)instance
-            : new Container(instance.address(), instance);
+            : new MDBMsgFunc(functionPointer) {
+                @Override public int invoke(long msg, long ctx) {
+                    return instance.invoke(msg, ctx);
+                }
+            };
     }
 
     protected MDBMsgFunc() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     MDBMsgFunc(long functionPointer) {
         super(functionPointer);
-    }
-
-    private static final class Container extends MDBMsgFunc {
-
-        private final MDBMsgFuncI delegate;
-
-        Container(long functionPointer, MDBMsgFuncI delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public int invoke(long msg, long ctx) {
-            return delegate.invoke(msg, ctx);
-        }
-
     }
 
 }

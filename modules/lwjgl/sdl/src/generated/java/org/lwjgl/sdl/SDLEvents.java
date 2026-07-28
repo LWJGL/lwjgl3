@@ -7,6 +7,8 @@ package org.lwjgl.sdl;
 
 import org.jspecify.annotations.*;
 
+import java.nio.*;
+
 import org.lwjgl.*;
 
 import org.lwjgl.system.*;
@@ -14,6 +16,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 public class SDLEvents {
@@ -25,25 +28,26 @@ public class SDLEvents {
 
         /** Function address. */
         public static final long
-            PumpEvents         = apiGetFunctionAddress(SDL.getLibrary(), "SDL_PumpEvents"),
-            PeepEvents         = apiGetFunctionAddress(SDL.getLibrary(), "SDL_PeepEvents"),
-            HasEvent           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_HasEvent"),
-            HasEvents          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_HasEvents"),
-            FlushEvent         = apiGetFunctionAddress(SDL.getLibrary(), "SDL_FlushEvent"),
-            FlushEvents        = apiGetFunctionAddress(SDL.getLibrary(), "SDL_FlushEvents"),
-            PollEvent          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_PollEvent"),
-            WaitEvent          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_WaitEvent"),
-            WaitEventTimeout   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_WaitEventTimeout"),
-            PushEvent          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_PushEvent"),
-            SetEventFilter     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetEventFilter"),
-            GetEventFilter     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetEventFilter"),
-            AddEventWatch      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_AddEventWatch"),
-            RemoveEventWatch   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RemoveEventWatch"),
-            FilterEvents       = apiGetFunctionAddress(SDL.getLibrary(), "SDL_FilterEvents"),
-            SetEventEnabled    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetEventEnabled"),
-            EventEnabled       = apiGetFunctionAddress(SDL.getLibrary(), "SDL_EventEnabled"),
-            RegisterEvents     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RegisterEvents"),
-            GetWindowFromEvent = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetWindowFromEvent");
+            PumpEvents          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_PumpEvents"),
+            PeepEvents          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_PeepEvents"),
+            HasEvent            = apiGetFunctionAddress(SDL.getLibrary(), "SDL_HasEvent"),
+            HasEvents           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_HasEvents"),
+            FlushEvent          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_FlushEvent"),
+            FlushEvents         = apiGetFunctionAddress(SDL.getLibrary(), "SDL_FlushEvents"),
+            PollEvent           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_PollEvent"),
+            WaitEvent           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_WaitEvent"),
+            WaitEventTimeout    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_WaitEventTimeout"),
+            PushEvent           = apiGetFunctionAddress(SDL.getLibrary(), "SDL_PushEvent"),
+            SetEventFilter      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetEventFilter"),
+            GetEventFilter      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetEventFilter"),
+            AddEventWatch       = apiGetFunctionAddress(SDL.getLibrary(), "SDL_AddEventWatch"),
+            RemoveEventWatch    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RemoveEventWatch"),
+            FilterEvents        = apiGetFunctionAddress(SDL.getLibrary(), "SDL_FilterEvents"),
+            SetEventEnabled     = apiGetFunctionAddress(SDL.getLibrary(), "SDL_SetEventEnabled"),
+            EventEnabled        = apiGetFunctionAddress(SDL.getLibrary(), "SDL_EventEnabled"),
+            RegisterEvents      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_RegisterEvents"),
+            GetWindowFromEvent  = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetWindowFromEvent"),
+            GetEventDescription = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetEventDescription");
 
     }
 
@@ -65,8 +69,9 @@ public class SDLEvents {
         SDL_EVENT_DISPLAY_DESKTOP_MODE_CHANGED  = 0x155,
         SDL_EVENT_DISPLAY_CURRENT_MODE_CHANGED  = 0x156,
         SDL_EVENT_DISPLAY_CONTENT_SCALE_CHANGED = 0x157,
+        SDL_EVENT_DISPLAY_USABLE_BOUNDS_CHANGED = 0x158,
         SDL_EVENT_DISPLAY_FIRST                 = SDL_EVENT_DISPLAY_ORIENTATION,
-        SDL_EVENT_DISPLAY_LAST                  = SDL_EVENT_DISPLAY_CONTENT_SCALE_CHANGED,
+        SDL_EVENT_DISPLAY_LAST                  = SDL_EVENT_DISPLAY_USABLE_BOUNDS_CHANGED,
         SDL_EVENT_WINDOW_SHOWN                  = 0x202,
         SDL_EVENT_WINDOW_HIDDEN                 = 0x203,
         SDL_EVENT_WINDOW_EXPOSED                = 0x204,
@@ -102,6 +107,8 @@ public class SDLEvents {
         SDL_EVENT_KEYBOARD_ADDED                = 0x305,
         SDL_EVENT_KEYBOARD_REMOVED              = 0x306,
         SDL_EVENT_TEXT_EDITING_CANDIDATES       = 0x307,
+        SDL_EVENT_SCREEN_KEYBOARD_SHOWN         = 0x308,
+        SDL_EVENT_SCREEN_KEYBOARD_HIDDEN        = 0x309,
         SDL_EVENT_MOUSE_MOTION                  = 0x400,
         SDL_EVENT_MOUSE_BUTTON_DOWN             = 0x401,
         SDL_EVENT_MOUSE_BUTTON_UP               = 0x402,
@@ -133,6 +140,9 @@ public class SDLEvents {
         SDL_EVENT_FINGER_UP                     = 0x701,
         SDL_EVENT_FINGER_MOTION                 = 0x702,
         SDL_EVENT_FINGER_CANCELED               = 0x703,
+        SDL_EVENT_PINCH_BEGIN                   = 0x710,
+        SDL_EVENT_PINCH_UPDATE                  = 0x711,
+        SDL_EVENT_PINCH_END                     = 0x712,
         SDL_EVENT_CLIPBOARD_UPDATE              = 0x900,
         SDL_EVENT_DROP_FILE                     = 0x1000,
         SDL_EVENT_DROP_TEXT                     = 0x1001,
@@ -396,6 +406,38 @@ public class SDLEvents {
     @NativeType("SDL_Window *")
     public static long SDL_GetWindowFromEvent(@NativeType("SDL_Event const *") SDL_Event event) {
         return nSDL_GetWindowFromEvent(event.address());
+    }
+
+    // --- [ SDL_GetEventDescription ] ---
+
+    /** {@code int SDL_GetEventDescription(SDL_Event const * event, char * buf, int buflen)} */
+    public static int nSDL_GetEventDescription(long event, long buf, int buflen) {
+        long __functionAddress = Functions.GetEventDescription;
+        return invokePPI(event, buf, buflen, __functionAddress);
+    }
+
+    /** {@code int SDL_GetEventDescription(SDL_Event const * event, char * buf, int buflen)} */
+    public static int SDL_GetEventDescription(@NativeType("SDL_Event const *") @Nullable SDL_Event event, @NativeType("char *") @Nullable ByteBuffer buf) {
+        return nSDL_GetEventDescription(memAddressSafe(event), memAddressSafe(buf), remainingSafe(buf));
+    }
+
+    /** {@code int SDL_GetEventDescription(SDL_Event const * event, char * buf, int buflen)} */
+    @NativeType("int")
+    public static String SDL_GetEventDescription(@NativeType("SDL_Event const *") @Nullable SDL_Event event, int buflen) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            ByteBuffer buf = stack.malloc(buflen);
+            int __result = nSDL_GetEventDescription(memAddressSafe(event), memAddress(buf), buflen);
+            return memASCII(buf, __result);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    /** {@code int SDL_GetEventDescription(SDL_Event const * event, char * buf, int buflen)} */
+    @NativeType("int")
+    public static String SDL_GetEventDescription(@NativeType("SDL_Event const *") @Nullable SDL_Event event) {
+        return SDL_GetEventDescription(event, SDL_GetEventDescription(event, null) + 1);
     }
 
 }

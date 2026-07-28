@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct rmtSettings {
  *     rmtU16 port;
  *     rmtBool reuse_open_port;
@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void * snapshot_context;
  *     void * input_handler_context;
  *     rmtPStr logPath;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct rmtSettings")
 public class RMTSettings extends Struct<RMTSettings> implements NativeResource {
@@ -70,6 +70,13 @@ public class RMTSettings extends Struct<RMTSettings> implements NativeResource {
         LOGPATH;
 
     static {
+        java.util.Objects.requireNonNull(RMTMallocI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(RMTReallocI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(RMTFreeI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(RMTInputHandlerI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(RMTSampleTreeHandlerI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(RMTPropertyHandlerI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(2),
             __member(4),
@@ -313,17 +320,6 @@ public class RMTSettings extends Struct<RMTSettings> implements NativeResource {
     public static @Nullable RMTSettings createSafe(long address) {
         return address == NULL ? null : new RMTSettings(address, null);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static RMTSettings mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static RMTSettings callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static RMTSettings mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static RMTSettings callocStack(MemoryStack stack) { return calloc(stack); }
 
     /**
      * Returns a new {@code RMTSettings} instance allocated on the specified {@link MemoryStack}.

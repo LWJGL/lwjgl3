@@ -301,7 +301,7 @@ public class SDL_MouseButtonEvent extends Struct<SDL_MouseButtonEvent> implement
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_MouseButtonEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_MouseButtonEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_MouseButtonEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_MouseButtonEvent.TIMESTAMP); }
     /** Unsafe version of {@link #windowID}. */
@@ -314,7 +314,7 @@ public class SDL_MouseButtonEvent extends Struct<SDL_MouseButtonEvent> implement
     public static boolean ndown(long struct) { return memGetByte(struct + SDL_MouseButtonEvent.DOWN) != 0; }
     /** Unsafe version of {@link #clicks}. */
     public static byte nclicks(long struct) { return memGetByte(struct + SDL_MouseButtonEvent.CLICKS); }
-    public static byte npadding(long struct) { return memGetByte(struct + SDL_MouseButtonEvent.PADDING); }
+    static byte npadding(long struct) { return memGetByte(struct + SDL_MouseButtonEvent.PADDING); }
     /** Unsafe version of {@link #x}. */
     public static float nx(long struct) { return memGetFloat(struct + SDL_MouseButtonEvent.X); }
     /** Unsafe version of {@link #y}. */
@@ -322,7 +322,7 @@ public class SDL_MouseButtonEvent extends Struct<SDL_MouseButtonEvent> implement
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_MouseButtonEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_MouseButtonEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_MouseButtonEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_MouseButtonEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #windowID(int) windowID}. */
@@ -335,7 +335,7 @@ public class SDL_MouseButtonEvent extends Struct<SDL_MouseButtonEvent> implement
     public static void ndown(long struct, boolean value) { memPutByte(struct + SDL_MouseButtonEvent.DOWN, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #clicks(byte) clicks}. */
     public static void nclicks(long struct, byte value) { memPutByte(struct + SDL_MouseButtonEvent.CLICKS, value); }
-    public static void npadding(long struct, byte value) { memPutByte(struct + SDL_MouseButtonEvent.PADDING, value); }
+    static void npadding(long struct, byte value) { memPutByte(struct + SDL_MouseButtonEvent.PADDING, value); }
     /** Unsafe version of {@link #x(float) x}. */
     public static void nx(long struct, float value) { memPutFloat(struct + SDL_MouseButtonEvent.X, value); }
     /** Unsafe version of {@link #y(float) y}. */

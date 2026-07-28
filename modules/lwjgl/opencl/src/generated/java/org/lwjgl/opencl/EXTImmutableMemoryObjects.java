@@ -7,7 +7,7 @@ package org.lwjgl.opencl;
 
 public final class EXTImmutableMemoryObjects {
 
-    public static final int CL_MEM_IMMUTABLE_EXT = 1 << 6;
+    public static final long CL_MEM_IMMUTABLE_EXT = 1L << 6;
 
     private EXTImmutableMemoryObjects() {}
 

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkWriteDescriptorSet {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkDescriptorImageInfo VkDescriptorImageInfo} const * pImageInfo;
  *     {@link VkDescriptorBufferInfo VkDescriptorBufferInfo} const * pBufferInfo;
  *     VkBufferView const * pTexelBufferView;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkWriteDescriptorSet extends Struct<VkWriteDescriptorSet> implements NativeResource {
 
@@ -149,6 +149,8 @@ public class VkWriteDescriptorSet extends Struct<VkWriteDescriptorSet> implement
     public VkWriteDescriptorSet pNext(VkWriteDescriptorSetInlineUniformBlockEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkWriteDescriptorSetPartitionedAccelerationStructureNV} value to the {@code pNext} chain. */
     public VkWriteDescriptorSet pNext(VkWriteDescriptorSetPartitionedAccelerationStructureNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkWriteDescriptorSetTensorARM} value to the {@code pNext} chain. */
+    public VkWriteDescriptorSet pNext(VkWriteDescriptorSetTensorARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code dstSet} field. */
     public VkWriteDescriptorSet dstSet(@NativeType("VkDescriptorSet") long value) { ndstSet(address(), value); return this; }
     /** Sets the specified value to the {@code dstBinding} field. */
@@ -275,25 +277,6 @@ public class VkWriteDescriptorSet extends Struct<VkWriteDescriptorSet> implement
     public static VkWriteDescriptorSet.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkWriteDescriptorSet mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkWriteDescriptorSet callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkWriteDescriptorSet mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkWriteDescriptorSet callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkWriteDescriptorSet.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkWriteDescriptorSet.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkWriteDescriptorSet.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkWriteDescriptorSet.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkWriteDescriptorSet} instance allocated on the specified {@link MemoryStack}.
@@ -467,6 +450,8 @@ public class VkWriteDescriptorSet extends Struct<VkWriteDescriptorSet> implement
         public VkWriteDescriptorSet.Buffer pNext(VkWriteDescriptorSetInlineUniformBlockEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkWriteDescriptorSetPartitionedAccelerationStructureNV} value to the {@code pNext} chain. */
         public VkWriteDescriptorSet.Buffer pNext(VkWriteDescriptorSetPartitionedAccelerationStructureNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkWriteDescriptorSetTensorARM} value to the {@code pNext} chain. */
+        public VkWriteDescriptorSet.Buffer pNext(VkWriteDescriptorSetTensorARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code dstSet} field. */
         public VkWriteDescriptorSet.Buffer dstSet(@NativeType("VkDescriptorSet") long value) { VkWriteDescriptorSet.ndstSet(address(), value); return this; }
         /** Sets the specified value to the {@code dstBinding} field. */

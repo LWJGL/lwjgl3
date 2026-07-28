@@ -26,10 +26,11 @@ val GLFWNativeGLX = "GLFWNativeGLX".nativeClass(Module.GLFW, nativeSubPath = "li
         GLFWwindow.p("window")
     )
 
-    IgnoreMissing..GLXWindow(
+    intb(
         "GetGLXFBConfig",
 
-        GLFWwindow.p("window")
+        GLFWwindow.p("window"),
+        Check(1)..GLXFBConfig.p("config")
     )
 
     customMethod("""
@@ -75,8 +76,17 @@ val GLFWNativeGLX = "GLFWNativeGLX".nativeClass(Module.GLFW, nativeSubPath = "li
 
         long a = memGetAddress(override);
         if (a != NULL) {
-            nmemFree(a);
+            getAllocator().free(a);
+            a = NULL;
         }
-        memPutAddress(override, path == null ? NULL : memAddress(memUTF8(path)));
+
+        if (path != null) {
+            int length = memLengthUTF8(path, true);
+
+            a = getAllocator().malloc(length);
+            memUTF8(path, true, memByteBuffer(a, length));
+        }
+
+        memPutAddress(override, a);
     }""")
 }

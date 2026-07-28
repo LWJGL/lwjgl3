@@ -14,12 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_PaintTranslate {
  *     {@link FT_OpaquePaint FT_OpaquePaintRec} paint;
  *     FT_Fixed dx;
  *     FT_Fixed dy;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_PaintTranslate extends Struct<FT_PaintTranslate> {
 
@@ -36,6 +36,8 @@ public class FT_PaintTranslate extends Struct<FT_PaintTranslate> {
         DY;
 
     static {
+        FT_OpaquePaint.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FT_OpaquePaint.SIZEOF, FT_OpaquePaint.ALIGNOF),
             __member(CLONG_SIZE),

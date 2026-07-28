@@ -15,8 +15,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-import org.lwjgl.system.windows.*;
-
 public class KHRWin32Surface {
 
     public static final int VK_KHR_WIN32_SURFACE_SPEC_VERSION = 6;

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_list_view {
  *     int begin;
  *     int end;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkContext struct nk_context} * ctx;
  *     nk_uint * scroll_pointer;
  *     nk_uint scroll_value;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_list_view")
 public class NkListView extends Struct<NkListView> implements NativeResource {
@@ -169,25 +169,6 @@ public class NkListView extends Struct<NkListView> implements NativeResource {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkListView mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkListView callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkListView mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkListView callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkListView.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkListView.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkListView.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkListView.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
-
     /**
      * Returns a new {@code NkListView} instance allocated on the specified {@link MemoryStack}.
      *
@@ -234,10 +215,10 @@ public class NkListView extends Struct<NkListView> implements NativeResource {
     public static int nend(long struct) { return memGetInt(struct + NkListView.END); }
     /** Unsafe version of {@link #count}. */
     public static int ncount(long struct) { return memGetInt(struct + NkListView.COUNT); }
-    public static int ntotal_height(long struct) { return memGetInt(struct + NkListView.TOTAL_HEIGHT); }
-    public static NkContext nctx(long struct) { return NkContext.create(memGetAddress(struct + NkListView.CTX)); }
-    public static IntBuffer nscroll_pointer(long struct, int capacity) { return memIntBuffer(memGetAddress(struct + NkListView.SCROLL_POINTER), capacity); }
-    public static int nscroll_value(long struct) { return memGetInt(struct + NkListView.SCROLL_VALUE); }
+    static int ntotal_height(long struct) { return memGetInt(struct + NkListView.TOTAL_HEIGHT); }
+    static NkContext nctx(long struct) { return NkContext.create(memGetAddress(struct + NkListView.CTX)); }
+    static IntBuffer nscroll_pointer(long struct, int capacity) { return memIntBuffer(memGetAddress(struct + NkListView.SCROLL_POINTER), capacity); }
+    static int nscroll_value(long struct) { return memGetInt(struct + NkListView.SCROLL_VALUE); }
 
     // -----------------------------------
 

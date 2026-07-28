@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VmaDefragmentationPassMoveInfo {
  *     uint32_t moveCount;
  *     {@link VmaDefragmentationMove VmaDefragmentationMove} * pMoves;
- * }}</pre>
+ * }</code></pre>
  */
 public class VmaDefragmentationPassMoveInfo extends Struct<VmaDefragmentationPassMoveInfo> implements NativeResource {
 

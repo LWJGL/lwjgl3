@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpheref {
  *     {@link XrPosef XrPosef} center;
  *     float radius;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpheref extends Struct<XrSpheref> implements NativeResource {
 
@@ -36,6 +36,8 @@ public class XrSpheref extends Struct<XrSpheref> implements NativeResource {
         RADIUS;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrPosef.SIZEOF, XrPosef.ALIGNOF),
             __member(4)

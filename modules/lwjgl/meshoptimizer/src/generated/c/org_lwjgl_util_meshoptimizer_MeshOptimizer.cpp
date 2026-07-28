@@ -24,6 +24,16 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt
     return (jlong)meshopt_generateVertexRemapMulti(destination, indices, (size_t)index_count, (size_t)vertex_count, streams, (size_t)stream_count);
 }
 
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1generateVertexRemapCustom(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong indicesAddress, jlong index_count, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride, jlong callbackAddress, jlong contextAddress) {
+    unsigned int *destination = (unsigned int *)(uintptr_t)destinationAddress;
+    unsigned int const *indices = (unsigned int const *)(uintptr_t)indicesAddress;
+    float const *vertex_positions = (float const *)(uintptr_t)vertex_positionsAddress;
+    int (*callback) (void *, unsigned int, unsigned int) = (int (*) (void *, unsigned int, unsigned int))(uintptr_t)callbackAddress;
+    void *context = (void *)(uintptr_t)contextAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)meshopt_generateVertexRemapCustom(destination, indices, (size_t)index_count, vertex_positions, (size_t)vertex_count, (size_t)vertex_positions_stride, callback, context);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1remapVertexBuffer(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong verticesAddress, jlong vertex_count, jlong vertex_size, jlong remapAddress) {
     void *destination = (void *)(uintptr_t)destinationAddress;
     void const *vertices = (void const *)(uintptr_t)verticesAddress;
@@ -40,6 +50,22 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_
     meshopt_remapIndexBuffer(destination, indices, (size_t)index_count, remap);
 }
 
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1filterIndexBuffer(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong indicesAddress, jlong index_count, jlong verticesAddress, jlong vertex_count, jlong vertex_size, jlong vertex_stride) {
+    unsigned int *destination = (unsigned int *)(uintptr_t)destinationAddress;
+    unsigned int const *indices = (unsigned int const *)(uintptr_t)indicesAddress;
+    void const *vertices = (void const *)(uintptr_t)verticesAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)meshopt_filterIndexBuffer(destination, indices, (size_t)index_count, vertices, (size_t)vertex_count, (size_t)vertex_size, (size_t)vertex_stride);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1filterIndexBufferMulti(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong indicesAddress, jlong index_count, jlong vertex_count, jlong streamsAddress, jlong stream_count) {
+    unsigned int *destination = (unsigned int *)(uintptr_t)destinationAddress;
+    unsigned int const *indices = (unsigned int const *)(uintptr_t)indicesAddress;
+    struct meshopt_Stream const *streams = (struct meshopt_Stream const *)(uintptr_t)streamsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)meshopt_filterIndexBufferMulti(destination, indices, (size_t)index_count, (size_t)vertex_count, streams, (size_t)stream_count);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1generateShadowIndexBuffer(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong indicesAddress, jlong index_count, jlong verticesAddress, jlong vertex_count, jlong vertex_size, jlong vertex_stride) {
     unsigned int *destination = (unsigned int *)(uintptr_t)destinationAddress;
     unsigned int const *indices = (unsigned int const *)(uintptr_t)indicesAddress;
@@ -54,6 +80,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_
     struct meshopt_Stream const *streams = (struct meshopt_Stream const *)(uintptr_t)streamsAddress;
     UNUSED_PARAMS(__env, clazz)
     meshopt_generateShadowIndexBufferMulti(destination, indices, (size_t)index_count, (size_t)vertex_count, streams, (size_t)stream_count);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1generatePositionRemap(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride) {
+    unsigned int *destination = (unsigned int *)(uintptr_t)destinationAddress;
+    float const *vertex_positions = (float const *)(uintptr_t)vertex_positionsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    meshopt_generatePositionRemap(destination, vertex_positions, (size_t)vertex_count, (size_t)vertex_positions_stride);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1generateAdjacencyIndexBuffer(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong indicesAddress, jlong index_count, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride) {
@@ -173,6 +206,35 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_
     return (jint)meshopt_decodeIndexSequence(destination, (size_t)index_count, (size_t)index_size, buffer, (size_t)buffer_size);
 }
 
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1encodeMeshlet(JNIEnv *__env, jclass clazz, jlong bufferAddress, jlong buffer_size, jlong verticesAddress, jlong vertex_count, jlong trianglesAddress, jlong triangle_count) {
+    unsigned char *buffer = (unsigned char *)(uintptr_t)bufferAddress;
+    unsigned int const *vertices = (unsigned int const *)(uintptr_t)verticesAddress;
+    unsigned char const *triangles = (unsigned char const *)(uintptr_t)trianglesAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)meshopt_encodeMeshlet(buffer, (size_t)buffer_size, vertices, (size_t)vertex_count, triangles, (size_t)triangle_count);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_meshopt_1encodeMeshletBound(JNIEnv *__env, jclass clazz, jlong max_vertices, jlong max_triangles) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)meshopt_encodeMeshletBound((size_t)max_vertices, (size_t)max_triangles);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1decodeMeshlet(JNIEnv *__env, jclass clazz, jlong verticesAddress, jlong vertex_count, jlong vertex_size, jlong trianglesAddress, jlong triangle_count, jlong triangle_size, jlong bufferAddress, jlong buffer_size) {
+    void *vertices = (void *)(uintptr_t)verticesAddress;
+    void *triangles = (void *)(uintptr_t)trianglesAddress;
+    unsigned char const *buffer = (unsigned char const *)(uintptr_t)bufferAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)meshopt_decodeMeshlet(vertices, (size_t)vertex_count, (size_t)vertex_size, triangles, (size_t)triangle_count, (size_t)triangle_size, buffer, (size_t)buffer_size);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1decodeMeshletRaw(JNIEnv *__env, jclass clazz, jlong verticesAddress, jlong vertex_count, jlong trianglesAddress, jlong triangle_count, jlong bufferAddress, jlong buffer_size) {
+    unsigned int *vertices = (unsigned int *)(uintptr_t)verticesAddress;
+    unsigned int *triangles = (unsigned int *)(uintptr_t)trianglesAddress;
+    unsigned char const *buffer = (unsigned char const *)(uintptr_t)bufferAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)meshopt_decodeMeshletRaw(vertices, (size_t)vertex_count, triangles, (size_t)triangle_count, buffer, (size_t)buffer_size);
+}
+
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1encodeVertexBuffer(JNIEnv *__env, jclass clazz, jlong bufferAddress, jlong buffer_size, jlong verticesAddress, jlong vertex_count, jlong vertex_size) {
     unsigned char *buffer = (unsigned char *)(uintptr_t)bufferAddress;
     void const *vertices = (void const *)(uintptr_t)verticesAddress;
@@ -185,11 +247,11 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_meshopt_
     return (jlong)meshopt_encodeVertexBufferBound((size_t)vertex_count, (size_t)vertex_size);
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1encodeVertexBufferLevel(JNIEnv *__env, jclass clazz, jlong bufferAddress, jlong buffer_size, jlong verticesAddress, jlong vertex_count, jlong vertex_size, jint level) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1encodeVertexBufferLevel(JNIEnv *__env, jclass clazz, jlong bufferAddress, jlong buffer_size, jlong verticesAddress, jlong vertex_count, jlong vertex_size, jint level, jint version) {
     unsigned char *buffer = (unsigned char *)(uintptr_t)bufferAddress;
     void const *vertices = (void const *)(uintptr_t)verticesAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)meshopt_encodeVertexBufferLevel(buffer, (size_t)buffer_size, vertices, (size_t)vertex_count, (size_t)vertex_size, level);
+    return (jlong)meshopt_encodeVertexBufferLevel(buffer, (size_t)buffer_size, vertices, (size_t)vertex_count, (size_t)vertex_size, level, version);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_meshopt_1encodeVertexVersion(JNIEnv *__env, jclass clazz, jint version) {
@@ -228,6 +290,12 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_
     meshopt_decodeFilterExp(buffer, (size_t)count, (size_t)stride);
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1decodeFilterColor(JNIEnv *__env, jclass clazz, jlong bufferAddress, jlong count, jlong stride) {
+    void *buffer = (void *)(uintptr_t)bufferAddress;
+    UNUSED_PARAMS(__env, clazz)
+    meshopt_decodeFilterColor(buffer, (size_t)count, (size_t)stride);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1encodeFilterOct(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong count, jlong stride, jint bits, jlong dataAddress) {
     void *destination = (void *)(uintptr_t)destinationAddress;
     float const *data = (float const *)(uintptr_t)dataAddress;
@@ -247,6 +315,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_
     float const *data = (float const *)(uintptr_t)dataAddress;
     UNUSED_PARAMS(__env, clazz)
     meshopt_encodeFilterExp(destination, (size_t)count, (size_t)stride, bits, data, (enum meshopt_EncodeExpMode)mode);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1encodeFilterColor(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong count, jlong stride, jint bits, jlong dataAddress) {
+    void *destination = (void *)(uintptr_t)destinationAddress;
+    float const *data = (float const *)(uintptr_t)dataAddress;
+    UNUSED_PARAMS(__env, clazz)
+    meshopt_encodeFilterColor(destination, (size_t)count, (size_t)stride, bits, data);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1simplify(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong indicesAddress, jlong index_count, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride, jlong target_index_count, jfloat target_error, jint options, jlong result_errorAddress) {
@@ -270,13 +345,33 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt
     return (jlong)meshopt_simplifyWithAttributes(destination, indices, (size_t)index_count, vertex_positions, (size_t)vertex_count, (size_t)vertex_positions_stride, vertex_attributes, (size_t)vertex_attributes_stride, attribute_weights, (size_t)attribute_count, vertex_lock, (size_t)target_index_count, target_error, (unsigned int)options, result_error);
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1simplifySloppy(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong indicesAddress, jlong index_count, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride, jlong target_index_count, jfloat target_error, jlong result_errorAddress) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1simplifyWithUpdate(JNIEnv *__env, jclass clazz, jlong indicesAddress, jlong index_count, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride, jlong vertex_attributesAddress, jlong vertex_attributes_stride, jlong attribute_weightsAddress, jlong attribute_count, jlong vertex_lockAddress, jlong target_index_count, jfloat target_error, jint options, jlong result_errorAddress) {
+    unsigned int *indices = (unsigned int *)(uintptr_t)indicesAddress;
+    float *vertex_positions = (float *)(uintptr_t)vertex_positionsAddress;
+    float *vertex_attributes = (float *)(uintptr_t)vertex_attributesAddress;
+    float const *attribute_weights = (float const *)(uintptr_t)attribute_weightsAddress;
+    unsigned char const *vertex_lock = (unsigned char const *)(uintptr_t)vertex_lockAddress;
+    float *result_error = (float *)(uintptr_t)result_errorAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)meshopt_simplifyWithUpdate(indices, (size_t)index_count, vertex_positions, (size_t)vertex_count, (size_t)vertex_positions_stride, vertex_attributes, (size_t)vertex_attributes_stride, attribute_weights, (size_t)attribute_count, vertex_lock, (size_t)target_index_count, target_error, (unsigned int)options, result_error);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1simplifySloppy(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong indicesAddress, jlong index_count, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride, jlong vertex_lockAddress, jlong target_index_count, jfloat target_error, jlong result_errorAddress) {
     unsigned int *destination = (unsigned int *)(uintptr_t)destinationAddress;
     unsigned int const *indices = (unsigned int const *)(uintptr_t)indicesAddress;
     float const *vertex_positions = (float const *)(uintptr_t)vertex_positionsAddress;
+    unsigned char const *vertex_lock = (unsigned char const *)(uintptr_t)vertex_lockAddress;
     float *result_error = (float *)(uintptr_t)result_errorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)meshopt_simplifySloppy(destination, indices, (size_t)index_count, vertex_positions, (size_t)vertex_count, (size_t)vertex_positions_stride, (size_t)target_index_count, target_error, result_error);
+    return (jlong)meshopt_simplifySloppy(destination, indices, (size_t)index_count, vertex_positions, (size_t)vertex_count, (size_t)vertex_positions_stride, vertex_lock, (size_t)target_index_count, target_error, result_error);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1simplifyPrune(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong indicesAddress, jlong index_count, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride, jfloat target_error) {
+    unsigned int *destination = (unsigned int *)(uintptr_t)destinationAddress;
+    unsigned int const *indices = (unsigned int const *)(uintptr_t)indicesAddress;
+    float const *vertex_positions = (float const *)(uintptr_t)vertex_positionsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)meshopt_simplifyPrune(destination, indices, (size_t)index_count, vertex_positions, (size_t)vertex_count, (size_t)vertex_positions_stride, target_error);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1simplifyPoints(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride, jlong vertex_colorsAddress, jlong vertex_colors_stride, jfloat color_weight, jlong target_vertex_count) {
@@ -323,6 +418,12 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_
     *((struct meshopt_VertexCacheStatistics*)(uintptr_t)__result) = meshopt_analyzeVertexCache(indices, (size_t)index_count, (size_t)vertex_count, (unsigned int)cache_size, (unsigned int)warp_size, (unsigned int)primgroup_size);
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1analyzeVertexFetch(JNIEnv *__env, jclass clazz, jlong indicesAddress, jlong index_count, jlong vertex_count, jlong vertex_size, jlong __result) {
+    unsigned int const *indices = (unsigned int const *)(uintptr_t)indicesAddress;
+    UNUSED_PARAMS(__env, clazz)
+    *((struct meshopt_VertexFetchStatistics*)(uintptr_t)__result) = meshopt_analyzeVertexFetch(indices, (size_t)index_count, (size_t)vertex_count, (size_t)vertex_size);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1analyzeOverdraw(JNIEnv *__env, jclass clazz, jlong indicesAddress, jlong index_count, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride, jlong __result) {
     unsigned int const *indices = (unsigned int const *)(uintptr_t)indicesAddress;
     float const *vertex_positions = (float const *)(uintptr_t)vertex_positionsAddress;
@@ -330,10 +431,11 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_
     *((struct meshopt_OverdrawStatistics*)(uintptr_t)__result) = meshopt_analyzeOverdraw(indices, (size_t)index_count, vertex_positions, (size_t)vertex_count, (size_t)vertex_positions_stride);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1analyzeVertexFetch(JNIEnv *__env, jclass clazz, jlong indicesAddress, jlong index_count, jlong vertex_count, jlong vertex_size, jlong __result) {
+JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1analyzeCoverage(JNIEnv *__env, jclass clazz, jlong indicesAddress, jlong index_count, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride, jlong __result) {
     unsigned int const *indices = (unsigned int const *)(uintptr_t)indicesAddress;
+    float const *vertex_positions = (float const *)(uintptr_t)vertex_positionsAddress;
     UNUSED_PARAMS(__env, clazz)
-    *((struct meshopt_VertexFetchStatistics*)(uintptr_t)__result) = meshopt_analyzeVertexFetch(indices, (size_t)index_count, (size_t)vertex_count, (size_t)vertex_size);
+    *((struct meshopt_CoverageStatistics*)(uintptr_t)__result) = meshopt_analyzeCoverage(indices, (size_t)index_count, vertex_positions, (size_t)vertex_count, (size_t)vertex_positions_stride);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1buildMeshlets(JNIEnv *__env, jclass clazz, jlong meshletsAddress, jlong meshlet_verticesAddress, jlong meshlet_trianglesAddress, jlong indicesAddress, jlong index_count, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride, jlong max_vertices, jlong max_triangles, jfloat cone_weight) {
@@ -370,11 +472,28 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt
     return (jlong)meshopt_buildMeshletsFlex(meshlets, meshlet_vertices, meshlet_triangles, indices, (size_t)index_count, vertex_positions, (size_t)vertex_count, (size_t)vertex_positions_stride, (size_t)max_vertices, (size_t)min_triangles, (size_t)max_triangles, cone_weight, split_factor);
 }
 
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1buildMeshletsSpatial(JNIEnv *__env, jclass clazz, jlong meshletsAddress, jlong meshlet_verticesAddress, jlong meshlet_trianglesAddress, jlong indicesAddress, jlong index_count, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride, jlong max_vertices, jlong min_triangles, jlong max_triangles, jfloat fill_weight) {
+    struct meshopt_Meshlet *meshlets = (struct meshopt_Meshlet *)(uintptr_t)meshletsAddress;
+    unsigned int *meshlet_vertices = (unsigned int *)(uintptr_t)meshlet_verticesAddress;
+    unsigned char *meshlet_triangles = (unsigned char *)(uintptr_t)meshlet_trianglesAddress;
+    unsigned int const *indices = (unsigned int const *)(uintptr_t)indicesAddress;
+    float const *vertex_positions = (float const *)(uintptr_t)vertex_positionsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)meshopt_buildMeshletsSpatial(meshlets, meshlet_vertices, meshlet_triangles, indices, (size_t)index_count, vertex_positions, (size_t)vertex_count, (size_t)vertex_positions_stride, (size_t)max_vertices, (size_t)min_triangles, (size_t)max_triangles, fill_weight);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1optimizeMeshlet(JNIEnv *__env, jclass clazz, jlong meshlet_verticesAddress, jlong meshlet_trianglesAddress, jlong triangle_count, jlong vertex_count) {
     unsigned int *meshlet_vertices = (unsigned int *)(uintptr_t)meshlet_verticesAddress;
     unsigned char *meshlet_triangles = (unsigned char *)(uintptr_t)meshlet_trianglesAddress;
     UNUSED_PARAMS(__env, clazz)
     meshopt_optimizeMeshlet(meshlet_vertices, meshlet_triangles, (size_t)triangle_count, (size_t)vertex_count);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1optimizeMeshletLevel(JNIEnv *__env, jclass clazz, jlong meshlet_verticesAddress, jlong vertex_count, jlong meshlet_trianglesAddress, jlong triangle_count, jint level) {
+    unsigned int *meshlet_vertices = (unsigned int *)(uintptr_t)meshlet_verticesAddress;
+    unsigned char *meshlet_triangles = (unsigned char *)(uintptr_t)meshlet_trianglesAddress;
+    UNUSED_PARAMS(__env, clazz)
+    meshopt_optimizeMeshletLevel(meshlet_vertices, (size_t)vertex_count, meshlet_triangles, (size_t)triangle_count, level);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1computeClusterBounds(JNIEnv *__env, jclass clazz, jlong indicesAddress, jlong index_count, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride, jlong __result) {
@@ -399,12 +518,21 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_
     *((struct meshopt_Bounds*)(uintptr_t)__result) = meshopt_computeSphereBounds(positions, (size_t)count, (size_t)positions_stride, radii, (size_t)radii_stride);
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1partitionClusters(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong cluster_indicesAddress, jlong total_index_count, jlong cluster_index_countsAddress, jlong cluster_count, jlong vertex_count, jlong target_partition_size) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1extractMeshletIndices(JNIEnv *__env, jclass clazz, jlong verticesAddress, jlong trianglesAddress, jlong indicesAddress, jlong index_count) {
+    unsigned int *vertices = (unsigned int *)(uintptr_t)verticesAddress;
+    unsigned char *triangles = (unsigned char *)(uintptr_t)trianglesAddress;
+    unsigned int const *indices = (unsigned int const *)(uintptr_t)indicesAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)meshopt_extractMeshletIndices(vertices, triangles, indices, (size_t)index_count);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1partitionClusters(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong cluster_indicesAddress, jlong total_index_count, jlong cluster_index_countsAddress, jlong cluster_count, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride, jlong target_partition_size) {
     unsigned int *destination = (unsigned int *)(uintptr_t)destinationAddress;
     unsigned int const *cluster_indices = (unsigned int const *)(uintptr_t)cluster_indicesAddress;
     unsigned int const *cluster_index_counts = (unsigned int const *)(uintptr_t)cluster_index_countsAddress;
+    float const *vertex_positions = (float const *)(uintptr_t)vertex_positionsAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)meshopt_partitionClusters(destination, cluster_indices, (size_t)total_index_count, cluster_index_counts, (size_t)cluster_count, (size_t)vertex_count, (size_t)target_partition_size);
+    return (jlong)meshopt_partitionClusters(destination, cluster_indices, (size_t)total_index_count, cluster_index_counts, (size_t)cluster_count, vertex_positions, (size_t)vertex_count, (size_t)vertex_positions_stride, (size_t)target_partition_size);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1spatialSortRemap(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride) {
@@ -420,6 +548,57 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_
     float const *vertex_positions = (float const *)(uintptr_t)vertex_positionsAddress;
     UNUSED_PARAMS(__env, clazz)
     meshopt_spatialSortTriangles(destination, indices, (size_t)index_count, vertex_positions, (size_t)vertex_count, (size_t)vertex_positions_stride);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1spatialClusterPoints(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride, jlong cluster_size) {
+    unsigned int *destination = (unsigned int *)(uintptr_t)destinationAddress;
+    float const *vertex_positions = (float const *)(uintptr_t)vertex_positionsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    meshopt_spatialClusterPoints(destination, vertex_positions, (size_t)vertex_count, (size_t)vertex_positions_stride, (size_t)cluster_size);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1opacityMapMeasure(JNIEnv *__env, jclass clazz, jlong levelsAddress, jlong sourcesAddress, jlong omm_indicesAddress, jlong indicesAddress, jlong index_count, jlong vertex_uvsAddress, jlong vertex_count, jlong vertex_uvs_stride, jint texture_width, jint texture_height, jint max_level, jfloat target_edge) {
+    unsigned char *levels = (unsigned char *)(uintptr_t)levelsAddress;
+    unsigned int *sources = (unsigned int *)(uintptr_t)sourcesAddress;
+    int *omm_indices = (int *)(uintptr_t)omm_indicesAddress;
+    unsigned int const *indices = (unsigned int const *)(uintptr_t)indicesAddress;
+    float const *vertex_uvs = (float const *)(uintptr_t)vertex_uvsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)meshopt_opacityMapMeasure(levels, sources, omm_indices, indices, (size_t)index_count, vertex_uvs, (size_t)vertex_count, (size_t)vertex_uvs_stride, (unsigned int)texture_width, (unsigned int)texture_height, max_level, target_edge);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1opacityMapRasterize(JNIEnv *__env, jclass clazz, jlong resultAddress, jint level, jint states, jlong uv0Address, jlong uv1Address, jlong uv2Address, jlong texture_dataAddress, jlong texture_stride, jlong texture_pitch, jint texture_width, jint texture_height) {
+    unsigned char *result = (unsigned char *)(uintptr_t)resultAddress;
+    float const *uv0 = (float const *)(uintptr_t)uv0Address;
+    float const *uv1 = (float const *)(uintptr_t)uv1Address;
+    float const *uv2 = (float const *)(uintptr_t)uv2Address;
+    unsigned char const *texture_data = (unsigned char const *)(uintptr_t)texture_dataAddress;
+    UNUSED_PARAMS(__env, clazz)
+    meshopt_opacityMapRasterize(result, level, states, uv0, uv1, uv2, texture_data, (size_t)texture_stride, (size_t)texture_pitch, (unsigned int)texture_width, (unsigned int)texture_height);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_meshopt_1opacityMapEntrySize(JNIEnv *__env, jclass clazz, jint level, jint states) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)meshopt_opacityMapEntrySize(level, states);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1opacityMapCompact(JNIEnv *__env, jclass clazz, jlong dataAddress, jlong data_size, jlong levelsAddress, jlong offsetsAddress, jlong omm_count, jlong omm_indicesAddress, jlong triangle_count, jint states) {
+    unsigned char *data = (unsigned char *)(uintptr_t)dataAddress;
+    unsigned char *levels = (unsigned char *)(uintptr_t)levelsAddress;
+    unsigned int *offsets = (unsigned int *)(uintptr_t)offsetsAddress;
+    int *omm_indices = (int *)(uintptr_t)omm_indicesAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)meshopt_opacityMapCompact(data, (size_t)data_size, levels, offsets, (size_t)omm_count, omm_indices, (size_t)triangle_count, states);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1generateTangents(JNIEnv *__env, jclass clazz, jlong resultAddress, jlong indicesAddress, jlong index_count, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride, jlong vertex_normalsAddress, jlong vertex_normals_stride, jlong vertex_uvsAddress, jlong vertex_uvs_stride, jint options) {
+    float *result = (float *)(uintptr_t)resultAddress;
+    unsigned int const *indices = (unsigned int const *)(uintptr_t)indicesAddress;
+    float const *vertex_positions = (float const *)(uintptr_t)vertex_positionsAddress;
+    float const *vertex_normals = (float const *)(uintptr_t)vertex_normalsAddress;
+    float const *vertex_uvs = (float const *)(uintptr_t)vertex_uvsAddress;
+    UNUSED_PARAMS(__env, clazz)
+    meshopt_generateTangents(result, indices, (size_t)index_count, vertex_positions, (size_t)vertex_count, (size_t)vertex_positions_stride, vertex_normals, (size_t)vertex_normals_stride, vertex_uvs, (size_t)vertex_uvs_stride, (unsigned int)options);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1quantizeUnorm_1ref(JNIEnv *__env, jclass clazz, jfloat v, jint N) {
@@ -445,6 +624,13 @@ JNIEXPORT jfloat JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshop
 JNIEXPORT jfloat JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1dequantizeHalf_1ref(JNIEnv *__env, jclass clazz, jshort h) {
     UNUSED_PARAMS(__env, clazz)
     return (jfloat)meshopt_dequantizeHalf((unsigned short)h);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1computePositionExponent(JNIEnv *__env, jclass clazz, jlong minvAddress, jlong maxvAddress, jint min_exp, jint max_bits) {
+    float const *minv = (float const *)(uintptr_t)minvAddress;
+    float const *maxv = (float const *)(uintptr_t)maxvAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)meshopt_computePositionExponent(minv, maxv, min_exp, max_bits);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1setAllocator(JNIEnv *__env, jclass clazz, jlong allocateAddress, jlong deallocateAddress) {

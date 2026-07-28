@@ -19,13 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPhysicalDeviceMemoryProperties {
  *     uint32_t memoryTypeCount;
  *     {@link VkMemoryType VkMemoryType} memoryTypes[VK_MAX_MEMORY_TYPES];
  *     uint32_t memoryHeapCount;
  *     {@link VkMemoryHeap VkMemoryHeap} memoryHeaps[VK_MAX_MEMORY_HEAPS];
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceMemoryProperties extends Struct<VkPhysicalDeviceMemoryProperties> implements NativeResource {
 
@@ -43,6 +43,9 @@ public class VkPhysicalDeviceMemoryProperties extends Struct<VkPhysicalDeviceMem
         MEMORYHEAPS;
 
     static {
+        VkMemoryType.createSafe(NULL);
+        VkMemoryHeap.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __array(VkMemoryType.SIZEOF, VkMemoryType.ALIGNOF, VK_MAX_MEMORY_TYPES),
@@ -168,25 +171,6 @@ public class VkPhysicalDeviceMemoryProperties extends Struct<VkPhysicalDeviceMem
     public static VkPhysicalDeviceMemoryProperties.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceMemoryProperties mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceMemoryProperties callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceMemoryProperties mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceMemoryProperties callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceMemoryProperties.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceMemoryProperties.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceMemoryProperties.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceMemoryProperties.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkPhysicalDeviceMemoryProperties} instance allocated on the specified {@link MemoryStack}.

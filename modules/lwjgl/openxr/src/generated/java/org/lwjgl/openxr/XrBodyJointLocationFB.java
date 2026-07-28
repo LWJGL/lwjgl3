@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrBodyJointLocationFB {
  *     XrSpaceLocationFlags locationFlags;
  *     {@link XrPosef XrPosef} pose;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrBodyJointLocationFB extends Struct<XrBodyJointLocationFB> implements NativeResource {
 
@@ -36,6 +36,8 @@ public class XrBodyJointLocationFB extends Struct<XrBodyJointLocationFB> impleme
         POSE;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(8),
             __member(XrPosef.SIZEOF, XrPosef.ALIGNOF)

@@ -247,7 +247,7 @@ public class IOURingRSRCRegister extends Struct<IOURingRSRCRegister> implements 
     public static int nnr(long struct) { return memGetInt(struct + IOURingRSRCRegister.NR); }
     /** Unsafe version of {@link #flags}. */
     public static int nflags(long struct) { return memGetInt(struct + IOURingRSRCRegister.FLAGS); }
-    public static long nresv2(long struct) { return memGetLong(struct + IOURingRSRCRegister.RESV2); }
+    static long nresv2(long struct) { return memGetLong(struct + IOURingRSRCRegister.RESV2); }
     /** Unsafe version of {@link #data}. */
     public static long ndata(long struct) { return memGetLong(struct + IOURingRSRCRegister.DATA); }
     /** Unsafe version of {@link #tags}. */
@@ -257,7 +257,7 @@ public class IOURingRSRCRegister extends Struct<IOURingRSRCRegister> implements 
     public static void nnr(long struct, int value) { memPutInt(struct + IOURingRSRCRegister.NR, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { memPutInt(struct + IOURingRSRCRegister.FLAGS, value); }
-    public static void nresv2(long struct, long value) { memPutLong(struct + IOURingRSRCRegister.RESV2, value); }
+    static void nresv2(long struct, long value) { memPutLong(struct + IOURingRSRCRegister.RESV2, value); }
     /** Unsafe version of {@link #data(long) data}. */
     public static void ndata(long struct, long value) { memPutLong(struct + IOURingRSRCRegister.DATA, value); }
     /** Unsafe version of {@link #tags(long) tags}. */

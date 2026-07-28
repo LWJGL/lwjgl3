@@ -14,10 +14,12 @@ val LibIOURing = "LibIOURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubP
 #ifdef LWJGL_LINUX
     _Pragma("GCC diagnostic ignored \"-Wsign-compare\"")
 #endif
-#include "liburing/compat.h"
-#include "liburing/io_uring.h"
 #include "syscall.h"
 ENABLE_WARNINGS()""")
+
+    IntConstant(
+        "RW_ATTR_FLAG_PI".."1 << 0"
+    )
 
     IntConstant(
         "FILE_INDEX_ALLOC".."~0"
@@ -63,7 +65,10 @@ ENABLE_WARNINGS()""")
         "SETUP_NO_MMAP".enum("1 << 14"),
         "SETUP_REGISTERED_FD_ONLY".enum("1 << 15"),
         "SETUP_NO_SQARRAY".enum("1 << 16"),
-        "SETUP_HYBRID_IOPOLL".enum("1 << 17")
+        "SETUP_HYBRID_IOPOLL".enum("1 << 17"),
+        "SETUP_CQE_MIXED".enum("1 << 18"),
+        "SETUP_SQE_MIXED".enum("1 << 19"),
+        "SETUP_SQ_REWIND".enum("1 << 20")
     )
 
     EnumConstantByte(
@@ -125,6 +130,13 @@ ENABLE_WARNINGS()""")
         "OP_FTRUNCATE".enumByte,
         "OP_BIND".enumByte,
         "OP_LISTEN".enumByte,
+        "OP_RECV_ZC".enumByte,
+        "OP_EPOLL_WAIT".enumByte,
+        "OP_READV_FIXED".enumByte,
+        "OP_WRITEV_FIXED".enumByte,
+        "OP_PIPE".enumByte,
+        "OP_NOP128".enumByte,
+        "OP_URING_CMD128".enumByte,
         "OP_LAST".enumByte
     )
 
@@ -145,6 +157,7 @@ ENABLE_WARNINGS()""")
         "LINK_TIMEOUT_UPDATE".enum("1 << 4"),
         "TIMEOUT_ETIME_SUCCESS".enum("1 << 5"),
         "TIMEOUT_MULTISHOT".enum("1 << 6"),
+        "TIMEOUT_IMMEDIATE_ARG".enum("1 << 7"),
         "TIMEOUT_CLOCK_MASK".enum("IORING_TIMEOUT_BOOTTIME | IORING_TIMEOUT_REALTIME"),
         "TIMEOUT_UPDATE_MASK".enum("IORING_TIMEOUT_UPDATE | IORING_LINK_TIMEOUT_UPDATE")
     )
@@ -174,7 +187,8 @@ ENABLE_WARNINGS()""")
         "RECV_MULTISHOT".enum("1 << 1"),
         "RECVSEND_FIXED_BUF".enum("1 << 2"),
         "SEND_ZC_REPORT_USAGE".enum("1 << 3"),
-        "RECVSEND_BUNDLE".enum("1 << 4")
+        "RECVSEND_BUNDLE".enum("1 << 4"),
+        "SEND_VECTORIZED".enum("1 << 5")
     )
 
     IntConstant("NOTIF_USAGE_ZC_COPIED".."1 << 31")
@@ -200,7 +214,8 @@ ENABLE_WARNINGS()""")
     )
 
     EnumConstant(
-        "NOP_INJECT_RESULT".enum("1 << 0")
+        "NOP_INJECT_RESULT".enum("1 << 0"),
+        "NOP_CQE32".enum("1 << 5")
     )
 
     EnumConstant(
@@ -209,6 +224,8 @@ ENABLE_WARNINGS()""")
         "CQE_F_SOCK_NONEMPTY".enum("1 << 2"),
         "CQE_F_NOTIF".enum("1 << 3"),
         "CQE_F_BUF_MORE".enum("1 << 4"),
+        "CQE_F_SKIP".enum("1 << 5"),
+        "CQE_F_32".enum("1 << 15")
     )
 
     IntConstant(
@@ -241,7 +258,8 @@ ENABLE_WARNINGS()""")
         "ENTER_EXT_ARG".enum("1 << 3"),
         "ENTER_REGISTERED_RING".enum("1 << 4"),
         "ENTER_ABS_TIMER".enum("1 << 5"),
-        "ENTER_EXT_ARG_REG".enum("1 << 6")
+        "ENTER_EXT_ARG_REG".enum("1 << 6"),
+        "ENTER_NO_IOWAIT".enum("1 << 7")
     )
 
     EnumConstant(
@@ -260,7 +278,9 @@ ENABLE_WARNINGS()""")
         "FEAT_LINKED_FILE".enum("1 << 12"),
         "FEAT_REG_REG_RING".enum("1 << 13"),
         "FEAT_RECVSEND_BUNDLE".enum("1 << 14"),
-        "FEAT_MIN_TIMEOUT".enum("1 << 15")
+        "FEAT_MIN_TIMEOUT".enum("1 << 15"),
+        "FEAT_RW_ATTR".enum("1 << 16"),
+        "FEAT_NO_IOWAIT".enum("1 << 17")
     )
 
     EnumConstant(
@@ -295,8 +315,13 @@ ENABLE_WARNINGS()""")
         "UNREGISTER_NAPI".enum,
         "REGISTER_CLOCK".enum,
         "REGISTER_CLONE_BUFFERS".enum,
-        "REGISTER_RESIZE_RINGS".enum("33"),
+        "REGISTER_SEND_MSG_RING".enum,
+        "REGISTER_ZCRX_IFQ".enum,
+        "REGISTER_RESIZE_RINGS".enum,
         "REGISTER_MEM_REGION".enum,
+        "REGISTER_QUERY".enum,
+        "REGISTER_ZCRX_CTRL".enum,
+        "REGISTER_BPF_FILTER".enum,
 
         "REGISTER_LAST".enum,
 
@@ -355,7 +380,31 @@ ENABLE_WARNINGS()""")
         "SOCKET_URING_OP_SIOCOUTQ".enum,
         "SOCKET_URING_OP_GETSOCKOPT".enum,
         "SOCKET_URING_OP_SETSOCKOPT".enum,
+        "SOCKET_URING_OP_TX_TIMESTAMP".enum,
+        "SOCKET_URING_OP_GETSOCKNAME".enum
     ).noPrefix()
+
+    IntConstant(
+        "TIMESTAMP_HW_SHIFT".."16",
+        "TIMESTAMP_TYPE_SHIFT".."IORING_TIMESTAMP_HW_SHIFT + 1",
+        "CQE_F_TSTAMP_HW".."1 << IORING_TIMESTAMP_HW_SHIFT"
+    )
+
+    IntConstant("ZCRX_AREA_SHIFT".."48")
+    LongConstant("ZCRX_AREA_MASK".."~((1L << IORING_ZCRX_AREA_SHIFT) - 1)")
+
+    EnumConstant(
+        "ZCRX_AREA_DMABUF".enum("1")
+    )
+
+    EnumConstant(
+        "ZCRX_REG_IMPORT".enum("1"),
+        "ZCRX_REG_NODEV".enum
+    )
+
+    EnumConstant(
+        "ZCRX_FEATURE_RX_PAGE_SIZE".enum("1 << 0")
+    )
 
     NativeName("__sys_io_uring_setup")..int(
         "setup",

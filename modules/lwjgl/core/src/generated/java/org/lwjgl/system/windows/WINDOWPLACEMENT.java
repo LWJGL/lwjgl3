@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct WINDOWPLACEMENT {
  *     UINT length;
  *     UINT flags;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link POINT POINT} ptMinPosition;
  *     {@link POINT POINT} ptMaxPosition;
  *     {@link RECT RECT} rcNormalPosition;
- * }}</pre>
+ * }</code></pre>
  */
 public class WINDOWPLACEMENT extends Struct<WINDOWPLACEMENT> implements NativeResource {
 
@@ -44,6 +44,9 @@ public class WINDOWPLACEMENT extends Struct<WINDOWPLACEMENT> implements NativeRe
         RCNORMALPOSITION;
 
     static {
+        POINT.createSafe(NULL);
+        RECT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),
@@ -222,25 +225,6 @@ public class WINDOWPLACEMENT extends Struct<WINDOWPLACEMENT> implements NativeRe
     public static WINDOWPLACEMENT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static WINDOWPLACEMENT mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static WINDOWPLACEMENT callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static WINDOWPLACEMENT mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static WINDOWPLACEMENT callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static WINDOWPLACEMENT.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static WINDOWPLACEMENT.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static WINDOWPLACEMENT.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static WINDOWPLACEMENT.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code WINDOWPLACEMENT} instance allocated on the specified {@link MemoryStack}.

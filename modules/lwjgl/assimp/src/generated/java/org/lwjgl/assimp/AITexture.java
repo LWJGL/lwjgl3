@@ -14,14 +14,14 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiTexture {
  *     unsigned int mWidth;
  *     unsigned int mHeight;
  *     char achFormatHint[9];
  *     {@link AITexel struct aiTexel} * pcData;
  *     {@link AIString struct aiString} mFilename;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiTexture")
 public class AITexture extends Struct<AITexture> {
@@ -41,6 +41,8 @@ public class AITexture extends Struct<AITexture> {
         MFILENAME;
 
     static {
+        AIString.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

@@ -22,31 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void const * pNext;
  * }}</pre>
  */
-public class VkRenderingEndInfoEXT extends Struct<VkRenderingEndInfoEXT> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-    }
+public class VkRenderingEndInfoEXT extends VkRenderingEndInfoKHR {
 
     protected VkRenderingEndInfoEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -64,31 +40,21 @@ public class VkRenderingEndInfoEXT extends Struct<VkRenderingEndInfoEXT> impleme
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkRenderingEndInfoEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** @return the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkRenderingEndInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTFragmentDensityMapOffset#VK_STRUCTURE_TYPE_RENDERING_END_INFO_EXT STRUCTURE_TYPE_RENDERING_END_INFO_EXT} value to the {@code sType} field. */
-    public VkRenderingEndInfoEXT sType$Default() { return sType(EXTFragmentDensityMapOffset.VK_STRUCTURE_TYPE_RENDERING_END_INFO_EXT); }
+    /** Sets the {@link KHRMaintenance10#VK_STRUCTURE_TYPE_RENDERING_END_INFO_KHR STRUCTURE_TYPE_RENDERING_END_INFO_KHR} value to the {@code sType} field. */
+    @Override
+    public VkRenderingEndInfoEXT sType$Default() { return sType(KHRMaintenance10.VK_STRUCTURE_TYPE_RENDERING_END_INFO_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkRenderingEndInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Prepends the specified {@link VkRenderPassFragmentDensityMapOffsetEndInfoEXT} value to the {@code pNext} chain. */
-    public VkRenderingEndInfoEXT pNext(VkRenderPassFragmentDensityMapOffsetEndInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkSubpassFragmentDensityMapOffsetEndInfoQCOM} value to the {@code pNext} chain. */
-    public VkRenderingEndInfoEXT pNext(VkSubpassFragmentDensityMapOffsetEndInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkRenderingEndInfoEXT set(
         int sType,
         long pNext
@@ -222,20 +188,8 @@ public class VkRenderingEndInfoEXT extends Struct<VkRenderingEndInfoEXT> impleme
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkRenderingEndInfoEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkRenderingEndInfoEXT.PNEXT); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkRenderingEndInfoEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderingEndInfoEXT.PNEXT, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkRenderingEndInfoEXT} structs. */
-    public static class Buffer extends StructBuffer<VkRenderingEndInfoEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkRenderingEndInfoKHR.Buffer {
 
         private static final VkRenderingEndInfoEXT ELEMENT_FACTORY = VkRenderingEndInfoEXT.create(-1L);
 
@@ -249,7 +203,7 @@ public class VkRenderingEndInfoEXT extends Struct<VkRenderingEndInfoEXT> impleme
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -275,23 +229,15 @@ public class VkRenderingEndInfoEXT extends Struct<VkRenderingEndInfoEXT> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkRenderingEndInfoEXT.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkRenderingEndInfoEXT.npNext(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkRenderingEndInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderingEndInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTFragmentDensityMapOffset#VK_STRUCTURE_TYPE_RENDERING_END_INFO_EXT STRUCTURE_TYPE_RENDERING_END_INFO_EXT} value to the {@code sType} field. */
-        public VkRenderingEndInfoEXT.Buffer sType$Default() { return sType(EXTFragmentDensityMapOffset.VK_STRUCTURE_TYPE_RENDERING_END_INFO_EXT); }
+        /** Sets the {@link KHRMaintenance10#VK_STRUCTURE_TYPE_RENDERING_END_INFO_KHR STRUCTURE_TYPE_RENDERING_END_INFO_KHR} value to the {@code sType} field. */
+        @Override
+        public VkRenderingEndInfoEXT.Buffer sType$Default() { return sType(KHRMaintenance10.VK_STRUCTURE_TYPE_RENDERING_END_INFO_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkRenderingEndInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkRenderingEndInfoEXT.npNext(address(), value); return this; }
-        /** Prepends the specified {@link VkRenderPassFragmentDensityMapOffsetEndInfoEXT} value to the {@code pNext} chain. */
-        public VkRenderingEndInfoEXT.Buffer pNext(VkRenderPassFragmentDensityMapOffsetEndInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkSubpassFragmentDensityMapOffsetEndInfoQCOM} value to the {@code pNext} chain. */
-        public VkRenderingEndInfoEXT.Buffer pNext(VkSubpassFragmentDensityMapOffsetEndInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     }
 

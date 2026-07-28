@@ -29,10 +29,8 @@
 #endif
 
 #ifndef container_of
-#define container_of(PTR, TYPE, FIELD) ({			\
-	__typeof__(((TYPE *)0)->FIELD) *__FIELD_PTR = (PTR);	\
-	(TYPE *)((char *) __FIELD_PTR - offsetof(TYPE, FIELD));	\
-})
+#define container_of(PTR, TYPE, MEMBER)				\
+	((TYPE *)((char *)(PTR) - __builtin_offsetof(TYPE, MEMBER)))
 #endif
 
 #define __maybe_unused		__attribute__((__unused__))

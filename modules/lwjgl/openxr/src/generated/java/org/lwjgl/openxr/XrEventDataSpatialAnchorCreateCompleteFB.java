@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrEventDataSpatialAnchorCreateCompleteFB {
  *     XrStructureType type;
  *     void const * next;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrResult result;
  *     XrSpace space;
  *     {@link XrUuidEXT XrUuidEXT} uuid;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrEventDataSpatialAnchorCreateCompleteFB extends Struct<XrEventDataSpatialAnchorCreateCompleteFB> implements NativeResource {
 
@@ -44,6 +44,8 @@ public class XrEventDataSpatialAnchorCreateCompleteFB extends Struct<XrEventData
         UUID;
 
     static {
+        XrUuidEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrScenePlaneMSFT {
  *     XrScenePlaneAlignmentTypeMSFT alignment;
  *     {@link XrExtent2Df XrExtent2Df} size;
  *     uint64_t meshBufferId;
  *     XrBool32 supportsIndicesUint16;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrScenePlaneMSFT extends Struct<XrScenePlaneMSFT> implements NativeResource {
 
@@ -40,6 +40,8 @@ public class XrScenePlaneMSFT extends Struct<XrScenePlaneMSFT> implements Native
         SUPPORTSINDICESUINT16;
 
     static {
+        XrExtent2Df.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(XrExtent2Df.SIZEOF, XrExtent2Df.ALIGNOF),

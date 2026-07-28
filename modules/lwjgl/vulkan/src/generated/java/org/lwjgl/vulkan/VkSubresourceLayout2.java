@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkSubresourceLayout2 {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkSubresourceLayout VkSubresourceLayout} subresourceLayout;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkSubresourceLayout2 extends Struct<VkSubresourceLayout2> implements NativeResource {
 
@@ -38,6 +38,8 @@ public class VkSubresourceLayout2 extends Struct<VkSubresourceLayout2> implement
         SUBRESOURCELAYOUT;
 
     static {
+        VkSubresourceLayout.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkRayTracingInvocationReorderModeNV rayTracingInvocationReorderReorderingHint;
+ *     VkRayTracingInvocationReorderModeEXT rayTracingInvocationReorderReorderingHint;
  * }}</pre>
  */
 public class VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV extends Struct<VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV> implements NativeResource {
@@ -81,7 +81,7 @@ public class VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV extends Str
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** @return the value of the {@code rayTracingInvocationReorderReorderingHint} field. */
-    @NativeType("VkRayTracingInvocationReorderModeNV")
+    @NativeType("VkRayTracingInvocationReorderModeEXT")
     public int rayTracingInvocationReorderReorderingHint() { return nrayTracingInvocationReorderReorderingHint(address()); }
 
     /** Sets the specified value to the {@code sType} field. */
@@ -287,7 +287,7 @@ public class VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV extends Str
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.npNext(address()); }
         /** @return the value of the {@code rayTracingInvocationReorderReorderingHint} field. */
-        @NativeType("VkRayTracingInvocationReorderModeNV")
+        @NativeType("VkRayTracingInvocationReorderModeEXT")
         public int rayTracingInvocationReorderReorderingHint() { return VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.nrayTracingInvocationReorderReorderingHint(address()); }
 
         /** Sets the specified value to the {@code sType} field. */

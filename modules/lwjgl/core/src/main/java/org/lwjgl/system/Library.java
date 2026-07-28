@@ -38,6 +38,9 @@ public final class Library {
 
     private static final Pattern NATIVES_JAR = Pattern.compile("/[\\w-]+?-natives-\\w+.jar!/");
 
+    private static final String EXPECTED_MANIFEST_PLATFORM =
+        Platform.get().name().toLowerCase() + '/' + Platform.getArchitecture().name().toLowerCase();
+
     static {
         if (DEBUG) {
             DEBUG_STREAM.print(
@@ -413,19 +416,22 @@ public final class Library {
      * @throws UnsatisfiedLinkError if the library could not be loaded
      */
     public static SharedLibrary loadNative(Class<?> context, String module, @Nullable Configuration<String> name, @Nullable Supplier<SharedLibrary> fallback, String... defaultNames) {
-        if (defaultNames.length == 0) {
-            throw new IllegalArgumentException("No default names specified.");
-        }
-
         if (name != null) {
             String libraryName = name.get();
             if (libraryName != null) {
-                return loadNative(context, module, libraryName);
+                return loadNative(context, module, libraryName, false);
             }
         }
 
-        if (fallback == null && defaultNames.length <= 1) {
-            return loadNative(context, module, defaultNames[0]);
+        if (defaultNames.length == 0) {
+            if (fallback == null) {
+                throw new IllegalArgumentException("No fallback library supplier specified.");
+            }
+            return fallback.get();
+        }
+
+        if (fallback == null && defaultNames.length == 1) {
+            return loadNative(context, module, defaultNames[0], false);
         }
 
         try {
@@ -512,7 +518,7 @@ public final class Library {
 
                     if (moduleTitle.equals(attribs.getValue("Implementation-Title"))) {
                         String jarPlatform = attribs.getValue("LWJGL-Platform");
-                        if (jarPlatform != null) {
+                        if (jarPlatform != null && !EXPECTED_MANIFEST_PLATFORM.equals(jarPlatform)) {
                             platforms.add(jarPlatform);
                         }
                     }

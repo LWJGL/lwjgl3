@@ -11,7 +11,7 @@ typedef void (APIENTRY *glDrawBuffersARBPROC) (jint, uintptr_t);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBDrawBuffers_nglDrawBuffersARB__IJ(JNIEnv *__env, jclass clazz, jint n, jlong bufsAddress) {
-    glDrawBuffersARBPROC glDrawBuffersARB = (glDrawBuffersARBPROC)tlsGetFunction(1137);
+    glDrawBuffersARBPROC glDrawBuffersARB = (glDrawBuffersARBPROC)tlsGetFunction(1171);
     uintptr_t bufs = (uintptr_t)bufsAddress;
     UNUSED_PARAM(clazz)
     glDrawBuffersARB(n, bufs);

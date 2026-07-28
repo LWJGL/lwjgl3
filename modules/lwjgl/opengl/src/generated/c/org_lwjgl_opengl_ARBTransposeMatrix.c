@@ -14,28 +14,28 @@ typedef void (APIENTRY *glMultTransposeMatrixdARBPROC) (uintptr_t);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBTransposeMatrix_nglLoadTransposeMatrixfARB__J(JNIEnv *__env, jclass clazz, jlong mAddress) {
-    glLoadTransposeMatrixfARBPROC glLoadTransposeMatrixfARB = (glLoadTransposeMatrixfARBPROC)tlsGetFunction(1380);
+    glLoadTransposeMatrixfARBPROC glLoadTransposeMatrixfARB = (glLoadTransposeMatrixfARBPROC)tlsGetFunction(1414);
     uintptr_t m = (uintptr_t)mAddress;
     UNUSED_PARAM(clazz)
     glLoadTransposeMatrixfARB(m);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBTransposeMatrix_nglLoadTransposeMatrixdARB__J(JNIEnv *__env, jclass clazz, jlong mAddress) {
-    glLoadTransposeMatrixdARBPROC glLoadTransposeMatrixdARB = (glLoadTransposeMatrixdARBPROC)tlsGetFunction(1381);
+    glLoadTransposeMatrixdARBPROC glLoadTransposeMatrixdARB = (glLoadTransposeMatrixdARBPROC)tlsGetFunction(1415);
     uintptr_t m = (uintptr_t)mAddress;
     UNUSED_PARAM(clazz)
     glLoadTransposeMatrixdARB(m);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBTransposeMatrix_nglMultTransposeMatrixfARB__J(JNIEnv *__env, jclass clazz, jlong mAddress) {
-    glMultTransposeMatrixfARBPROC glMultTransposeMatrixfARB = (glMultTransposeMatrixfARBPROC)tlsGetFunction(1382);
+    glMultTransposeMatrixfARBPROC glMultTransposeMatrixfARB = (glMultTransposeMatrixfARBPROC)tlsGetFunction(1416);
     uintptr_t m = (uintptr_t)mAddress;
     UNUSED_PARAM(clazz)
     glMultTransposeMatrixfARB(m);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBTransposeMatrix_nglMultTransposeMatrixdARB__J(JNIEnv *__env, jclass clazz, jlong mAddress) {
-    glMultTransposeMatrixdARBPROC glMultTransposeMatrixdARB = (glMultTransposeMatrixdARBPROC)tlsGetFunction(1383);
+    glMultTransposeMatrixdARBPROC glMultTransposeMatrixdARB = (glMultTransposeMatrixdARBPROC)tlsGetFunction(1417);
     uintptr_t m = (uintptr_t)mAddress;
     UNUSED_PARAM(clazz)
     glMultTransposeMatrixdARB(m);

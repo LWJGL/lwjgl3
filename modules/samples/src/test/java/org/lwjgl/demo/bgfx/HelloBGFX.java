@@ -135,7 +135,7 @@ public final class HelloBGFX {
 
             // Advance to next frame. Rendering thread will be kicked to
             // process submitted rendering primitives.
-            bgfx_frame(false);
+            bgfx_frame(BGFX_FRAME_NONE);
         }
 
         bgfx_shutdown();

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkImageResolve2 {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} dstSubresource;
  *     {@link VkOffset3D VkOffset3D} dstOffset;
  *     {@link VkExtent3D VkExtent3D} extent;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkImageResolve2 extends Struct<VkImageResolve2> implements NativeResource {
 
@@ -46,6 +46,10 @@ public class VkImageResolve2 extends Struct<VkImageResolve2> implements NativeRe
         EXTENT;
 
     static {
+        VkImageSubresourceLayers.createSafe(NULL);
+        VkOffset3D.createSafe(NULL);
+        VkExtent3D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

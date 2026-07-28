@@ -540,47 +540,31 @@ public class OpusEnc {
         return invokeI(__functionAddress);
     }
 
-    /**
-     * Sets encoder options.
-     *
-     * @param enc     encoder
-     * @param request use a request macro
-     *
-     * @return error code
-     */
     public static int ope_encoder_ctl(@NativeType("OggOpusEnc *") long enc, int request) {
         return new CTLRequestV(request).apply(enc, Functions.encoder_ctl);
     }
 
-    /**
-     * Sets encoder options.
-     *
-     * @param enc     encoder
-     * @param request use a request macro
-     *
-     * @return error code
-     */
     public static int ope_encoder_ctl(@NativeType("OggOpusEnc *") long enc, CTLRequest request) {
         return request.apply(enc, Functions.encoder_ctl);
     }
 
     public static CTLRequest OPE_SET_DECISION_DELAY_REQUEST(int value) { return new CTLRequestI(OPE_SET_DECISION_DELAY_REQUEST, value); }
     public static CTLRequest OPE_GET_DECISION_DELAY_REQUEST(IntBuffer __result) { return new CTLRequestP(OPE_GET_DECISION_DELAY_REQUEST, memAddress(__result)); }
-    
+
     public static CTLRequest OPE_SET_MUXING_DELAY_REQUEST(int value) { return new CTLRequestI(OPE_SET_MUXING_DELAY_REQUEST, value); }
     public static CTLRequest OPE_GET_MUXING_DELAY_REQUEST(IntBuffer __result) { return new CTLRequestP(OPE_GET_MUXING_DELAY_REQUEST, memAddress(__result)); }
-    
+
     public static CTLRequest OPE_SET_COMMENT_PADDING_REQUEST(int value) { return new CTLRequestI(OPE_SET_COMMENT_PADDING_REQUEST, value); }
     public static CTLRequest OPE_GET_COMMENT_PADDING_REQUEST(IntBuffer __result) { return new CTLRequestP(OPE_GET_COMMENT_PADDING_REQUEST, memAddress(__result)); }
-    
+
     public static CTLRequest OPE_SET_SERIALNO_REQUEST(int value) { return new CTLRequestI(OPE_SET_SERIALNO_REQUEST, value); }
     public static CTLRequest OPE_GET_SERIALNO_REQUEST(IntBuffer __result) { return new CTLRequestP(OPE_GET_SERIALNO_REQUEST, memAddress(__result)); }
-    
+
     public static CTLRequest OPE_SET_PACKET_CALLBACK_REQUEST(OPEPacketFuncI value) { return new CTLRequestP(OPE_SET_PACKET_CALLBACK_REQUEST, value.address()); }
-    
+
     public static CTLRequest OPE_SET_HEADER_GAIN_REQUEST(int value) { return new CTLRequestI(OPE_SET_HEADER_GAIN_REQUEST, value); }
     public static CTLRequest OPE_GET_HEADER_GAIN_REQUEST(IntBuffer __result) { return new CTLRequestP(OPE_GET_HEADER_GAIN_REQUEST, memAddress(__result)); }
-    
+
     public static CTLRequest OPE_GET_NB_STREAMS_REQUEST(IntBuffer __result) { return new CTLRequestP(OPE_GET_NB_STREAMS_REQUEST, memAddress(__result)); }
     public static CTLRequest OPE_GET_NB_COUPLED_STREAMS_REQUEST(IntBuffer __result) { return new CTLRequestP(OPE_GET_NB_COUPLED_STREAMS_REQUEST, memAddress(__result)); }
 

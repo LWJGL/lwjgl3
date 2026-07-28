@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct ktxTexture1 {
  *     class_id classId;
  *     {@link ktxTexture_vtbl struct ktxTexture_vtbl} * vtbl;
@@ -44,7 +44,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     ktx_uint32_t glBaseInternalformat;
  *     ktx_uint32_t glType;
  *     struct ktxTexture1_private * _private;
- * }}</pre>
+ * }</code></pre>
  */
 public class ktxTexture1 extends Struct<ktxTexture1> implements NativeResource {
 
@@ -84,6 +84,8 @@ public class ktxTexture1 extends Struct<ktxTexture1> implements NativeResource {
         _PRIVATE;
 
     static {
+        ktxOrientation.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -403,7 +405,7 @@ public class ktxTexture1 extends Struct<ktxTexture1> implements NativeResource {
     public static int nglBaseInternalformat(long struct) { return memGetInt(struct + ktxTexture1.GLBASEINTERNALFORMAT); }
     /** Unsafe version of {@link #glType}. */
     public static int nglType(long struct) { return memGetInt(struct + ktxTexture1.GLTYPE); }
-    public static PointerBuffer n_private(long struct, int capacity) { return memPointerBuffer(memGetAddress(struct + ktxTexture1._PRIVATE), capacity); }
+    static PointerBuffer n_private(long struct, int capacity) { return memPointerBuffer(memGetAddress(struct + ktxTexture1._PRIVATE), capacity); }
 
     // -----------------------------------
 

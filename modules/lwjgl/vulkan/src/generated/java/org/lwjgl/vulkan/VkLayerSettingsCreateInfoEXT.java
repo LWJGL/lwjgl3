@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkLayerSettingsCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t settingCount;
  *     {@link VkLayerSettingEXT VkLayerSettingEXT} const * pSettings;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkLayerSettingsCreateInfoEXT extends Struct<VkLayerSettingsCreateInfoEXT> implements NativeResource {
 

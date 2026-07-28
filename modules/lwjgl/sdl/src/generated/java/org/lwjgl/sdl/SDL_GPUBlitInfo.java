@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct SDL_GPUBlitInfo {
  *     {@link SDL_GPUBlitRegion SDL_GPUBlitRegion} source;
  *     {@link SDL_GPUBlitRegion SDL_GPUBlitRegion} destination;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     Uint8 padding1;
  *     Uint8 padding2;
  *     Uint8 padding3;
- * }}</pre>
+ * }</code></pre>
  */
 public class SDL_GPUBlitInfo extends Struct<SDL_GPUBlitInfo> implements NativeResource {
 
@@ -52,6 +52,9 @@ public class SDL_GPUBlitInfo extends Struct<SDL_GPUBlitInfo> implements NativeRe
         PADDING3;
 
     static {
+        SDL_GPUBlitRegion.createSafe(NULL);
+        SDL_FColor.createSafe(NULL);
+
         Layout layout = __struct(
             __member(SDL_GPUBlitRegion.SIZEOF, SDL_GPUBlitRegion.ALIGNOF),
             __member(SDL_GPUBlitRegion.SIZEOF, SDL_GPUBlitRegion.ALIGNOF),
@@ -300,9 +303,9 @@ public class SDL_GPUBlitInfo extends Struct<SDL_GPUBlitInfo> implements NativeRe
     public static int nfilter(long struct) { return memGetInt(struct + SDL_GPUBlitInfo.FILTER); }
     /** Unsafe version of {@link #cycle}. */
     public static boolean ncycle(long struct) { return memGetByte(struct + SDL_GPUBlitInfo.CYCLE) != 0; }
-    public static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUBlitInfo.PADDING1); }
-    public static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUBlitInfo.PADDING2); }
-    public static byte npadding3(long struct) { return memGetByte(struct + SDL_GPUBlitInfo.PADDING3); }
+    static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUBlitInfo.PADDING1); }
+    static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUBlitInfo.PADDING2); }
+    static byte npadding3(long struct) { return memGetByte(struct + SDL_GPUBlitInfo.PADDING3); }
 
     /** Unsafe version of {@link #source(SDL_GPUBlitRegion) source}. */
     public static void nsource(long struct, SDL_GPUBlitRegion value) { memCopy(value.address(), struct + SDL_GPUBlitInfo.SOURCE, SDL_GPUBlitRegion.SIZEOF); }
@@ -318,9 +321,9 @@ public class SDL_GPUBlitInfo extends Struct<SDL_GPUBlitInfo> implements NativeRe
     public static void nfilter(long struct, int value) { memPutInt(struct + SDL_GPUBlitInfo.FILTER, value); }
     /** Unsafe version of {@link #cycle(boolean) cycle}. */
     public static void ncycle(long struct, boolean value) { memPutByte(struct + SDL_GPUBlitInfo.CYCLE, value ? (byte)1 : (byte)0); }
-    public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUBlitInfo.PADDING1, value); }
-    public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUBlitInfo.PADDING2, value); }
-    public static void npadding3(long struct, byte value) { memPutByte(struct + SDL_GPUBlitInfo.PADDING3, value); }
+    static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUBlitInfo.PADDING1, value); }
+    static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUBlitInfo.PADDING2, value); }
+    static void npadding3(long struct, byte value) { memPutByte(struct + SDL_GPUBlitInfo.PADDING3, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

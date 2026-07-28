@@ -11,7 +11,7 @@ typedef void (APIENTRY *glTexPageCommitmentEXTPROC) (jint, jint, jint, jint, jin
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTSparseTexture_glTexPageCommitmentEXT(JNIEnv *__env, jclass clazz, jint target, jint level, jint xoffset, jint yoffset, jint zoffset, jint width, jint height, jint depth, jboolean commit) {
-    glTexPageCommitmentEXTPROC glTexPageCommitmentEXT = (glTexPageCommitmentEXTPROC)tlsGetFunction(543);
+    glTexPageCommitmentEXTPROC glTexPageCommitmentEXT = (glTexPageCommitmentEXTPROC)tlsGetFunction(547);
     UNUSED_PARAM(clazz)
     glTexPageCommitmentEXT(target, level, xoffset, yoffset, zoffset, width, height, depth, commit);
 }

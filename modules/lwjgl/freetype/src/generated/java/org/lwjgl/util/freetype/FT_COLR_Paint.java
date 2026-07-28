@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_COLR_Paint {
  *     FT_PaintFormat format;
  *     union {
@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         {@link FT_PaintComposite FT_PaintComposite} composite;
  *         {@link FT_PaintColrGlyph FT_PaintColrGlyph} colr_glyph;
  *     } u;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_COLR_Paint extends Struct<FT_COLR_Paint> implements NativeResource {
 

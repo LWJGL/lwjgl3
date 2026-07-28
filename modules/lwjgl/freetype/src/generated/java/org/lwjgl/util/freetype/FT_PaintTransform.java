@@ -14,11 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_PaintTransform {
  *     {@link FT_OpaquePaint FT_OpaquePaintRec} paint;
  *     {@link FT_Affine23 FT_Affine23} affine;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_PaintTransform extends Struct<FT_PaintTransform> {
 
@@ -34,6 +34,9 @@ public class FT_PaintTransform extends Struct<FT_PaintTransform> {
         AFFINE;
 
     static {
+        FT_OpaquePaint.createSafe(NULL);
+        FT_Affine23.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FT_OpaquePaint.SIZEOF, FT_OpaquePaint.ALIGNOF),
             __member(FT_Affine23.SIZEOF, FT_Affine23.ALIGNOF)

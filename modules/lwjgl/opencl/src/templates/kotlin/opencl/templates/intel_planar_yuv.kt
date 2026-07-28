@@ -8,9 +8,9 @@ import org.lwjgl.generator.*
 import opencl.*
 
 val intel_planar_yuv = "INTELPlanarYUV".nativeClassCL("intel_planar_yuv", INTEL) {
-    IntConstant(
-        "MEM_NO_ACCESS_INTEL".."1 << 24",
-        "MEM_ACCESS_FLAGS_UNRESTRICTED_INTEL".."1 << 25"
+    LongConstant(
+        "MEM_NO_ACCESS_INTEL".."1L << 24",
+        "MEM_ACCESS_FLAGS_UNRESTRICTED_INTEL".."1L << 25"
     )
 
     IntConstant(

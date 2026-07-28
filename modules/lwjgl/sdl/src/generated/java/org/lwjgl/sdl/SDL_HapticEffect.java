@@ -16,16 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * union SDL_HapticEffect {
- *     Uint16 type;
+ *     SDL_HapticEffectType type;
  *     {@link SDL_HapticConstant SDL_HapticConstant} constant;
  *     {@link SDL_HapticPeriodic SDL_HapticPeriodic} periodic;
  *     {@link SDL_HapticCondition SDL_HapticCondition} condition;
  *     {@link SDL_HapticRamp SDL_HapticRamp} ramp;
  *     {@link SDL_HapticLeftRight SDL_HapticLeftRight} leftright;
  *     {@link SDL_HapticCustom SDL_HapticCustom} custom;
- * }}</pre>
+ * }</code></pre>
  */
 public class SDL_HapticEffect extends Struct<SDL_HapticEffect> implements NativeResource {
 
@@ -46,6 +46,13 @@ public class SDL_HapticEffect extends Struct<SDL_HapticEffect> implements Native
         CUSTOM;
 
     static {
+        SDL_HapticConstant.createSafe(NULL);
+        SDL_HapticPeriodic.createSafe(NULL);
+        SDL_HapticCondition.createSafe(NULL);
+        SDL_HapticRamp.createSafe(NULL);
+        SDL_HapticLeftRight.createSafe(NULL);
+        SDL_HapticCustom.createSafe(NULL);
+
         Layout layout = __union(
             __member(2),
             __member(SDL_HapticConstant.SIZEOF, SDL_HapticConstant.ALIGNOF),
@@ -91,7 +98,7 @@ public class SDL_HapticEffect extends Struct<SDL_HapticEffect> implements Native
     public int sizeof() { return SIZEOF; }
 
     /** @return the value of the {@code type} field. */
-    @NativeType("Uint16")
+    @NativeType("SDL_HapticEffectType")
     public short type() { return ntype(address()); }
     /** @return a {@link SDL_HapticConstant} view of the {@code constant} field. */
     public SDL_HapticConstant constant() { return nconstant(address()); }
@@ -107,7 +114,7 @@ public class SDL_HapticEffect extends Struct<SDL_HapticEffect> implements Native
     public SDL_HapticCustom custom() { return ncustom(address()); }
 
     /** Sets the specified value to the {@code type} field. */
-    public SDL_HapticEffect type(@NativeType("Uint16") short value) { ntype(address(), value); return this; }
+    public SDL_HapticEffect type(@NativeType("SDL_HapticEffectType") short value) { ntype(address(), value); return this; }
     /** Copies the specified {@link SDL_HapticConstant} to the {@code constant} field. */
     public SDL_HapticEffect constant(SDL_HapticConstant value) { nconstant(address(), value); return this; }
     /** Passes the {@code constant} field to the specified {@link java.util.function.Consumer Consumer}. */
@@ -330,7 +337,7 @@ public class SDL_HapticEffect extends Struct<SDL_HapticEffect> implements Native
         }
 
         /** @return the value of the {@code type} field. */
-        @NativeType("Uint16")
+        @NativeType("SDL_HapticEffectType")
         public short type() { return SDL_HapticEffect.ntype(address()); }
         /** @return a {@link SDL_HapticConstant} view of the {@code constant} field. */
         public SDL_HapticConstant constant() { return SDL_HapticEffect.nconstant(address()); }
@@ -346,7 +353,7 @@ public class SDL_HapticEffect extends Struct<SDL_HapticEffect> implements Native
         public SDL_HapticCustom custom() { return SDL_HapticEffect.ncustom(address()); }
 
         /** Sets the specified value to the {@code type} field. */
-        public SDL_HapticEffect.Buffer type(@NativeType("Uint16") short value) { SDL_HapticEffect.ntype(address(), value); return this; }
+        public SDL_HapticEffect.Buffer type(@NativeType("SDL_HapticEffectType") short value) { SDL_HapticEffect.ntype(address(), value); return this; }
         /** Copies the specified {@link SDL_HapticConstant} to the {@code constant} field. */
         public SDL_HapticEffect.Buffer constant(SDL_HapticConstant value) { SDL_HapticEffect.nconstant(address(), value); return this; }
         /** Passes the {@code constant} field to the specified {@link java.util.function.Consumer Consumer}. */

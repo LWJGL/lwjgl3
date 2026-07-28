@@ -124,7 +124,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_nfd_NativeFileDialog_nNFD_1PathSet_1G
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_nfd_NativeFileDialog_nNFD_1PathSet_1FreePath(JNIEnv *__env, jclass clazz, jlong filePathAddress) {
-    nfdchar_t *filePath = (nfdchar_t *)(uintptr_t)filePathAddress;
+    nfdchar_t const *filePath = (nfdchar_t const *)(uintptr_t)filePathAddress;
     UNUSED_PARAMS(__env, clazz)
     NFD_PathSet_FreePath(filePath);
 }

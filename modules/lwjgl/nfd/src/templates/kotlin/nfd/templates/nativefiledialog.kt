@@ -150,7 +150,7 @@ val nativefiledialog = "NativeFileDialog".nativeClass(Module.NFD, prefix = "NFD"
     void(
         "PathSet_FreePath",
 
-        RawPointer..nfdchar_t.p("filePath")
+        RawPointer..nfdchar_t.const.p("filePath")
     )
 
     nfdresult_t(

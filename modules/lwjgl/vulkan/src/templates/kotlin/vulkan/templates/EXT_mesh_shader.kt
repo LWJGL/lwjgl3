@@ -69,7 +69,7 @@ val EXT_mesh_shader = "EXTMeshShader".nativeClassVK("EXT_mesh_shader", type = "d
         uint32_t("stride")
     )
 
-    DependsOn("""ext.contains("VK_KHR_draw_indirect_count") || ext.contains("Vulkan12")""")..void(
+    DependsOn("""ext.contains("Vulkan12") || ext.contains("VK_KHR_draw_indirect_count") || ext.contains("VK_AMD_draw_indirect_count")""")..void(
         "CmdDrawMeshTasksIndirectCountEXT",
 
         VkCommandBuffer("commandBuffer"),

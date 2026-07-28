@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkIndirectCommandsLayoutCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkPipelineLayout pipelineLayout;
  *     uint32_t tokenCount;
  *     {@link VkIndirectCommandsLayoutTokenEXT VkIndirectCommandsLayoutTokenEXT} const * pTokens;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkIndirectCommandsLayoutCreateInfoEXT extends Struct<VkIndirectCommandsLayoutCreateInfoEXT> implements NativeResource {
 

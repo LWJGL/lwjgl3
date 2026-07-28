@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrHandMeshVertexMSFT {
  *     {@link XrVector3f XrVector3f} position;
  *     {@link XrVector3f XrVector3f} normal;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrHandMeshVertexMSFT extends Struct<XrHandMeshVertexMSFT> implements NativeResource {
 
@@ -36,6 +36,8 @@ public class XrHandMeshVertexMSFT extends Struct<XrHandMeshVertexMSFT> implement
         NORMAL;
 
     static {
+        XrVector3f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrVector3f.SIZEOF, XrVector3f.ALIGNOF),
             __member(XrVector3f.SIZEOF, XrVector3f.ALIGNOF)

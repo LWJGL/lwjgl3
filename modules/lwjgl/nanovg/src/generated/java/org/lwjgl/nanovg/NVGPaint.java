@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct NVGpaint {
  *     float xform[6];
  *     float extent[2];
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NVGColor NVGcolor} innerColor;
  *     {@link NVGColor NVGcolor} outerColor;
  *     int image;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct NVGpaint")
 public class NVGPaint extends Struct<NVGPaint> implements NativeResource {
@@ -48,6 +48,8 @@ public class NVGPaint extends Struct<NVGPaint> implements NativeResource {
         IMAGE;
 
     static {
+        NVGColor.createSafe(NULL);
+
         Layout layout = __struct(
             __array(4, 6),
             __array(4, 2),
@@ -241,25 +243,6 @@ public class NVGPaint extends Struct<NVGPaint> implements NativeResource {
     public static NVGPaint.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NVGPaint mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NVGPaint callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NVGPaint mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NVGPaint callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NVGPaint.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NVGPaint.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NVGPaint.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NVGPaint.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code NVGPaint} instance allocated on the specified {@link MemoryStack}.

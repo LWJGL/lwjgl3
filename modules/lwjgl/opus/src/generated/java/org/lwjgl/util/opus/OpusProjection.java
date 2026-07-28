@@ -31,6 +31,7 @@ public class OpusProjection {
             projection_ambisonics_encoder_create   = apiGetFunctionAddress(Opus.getLibrary(), "opus_projection_ambisonics_encoder_create"),
             projection_ambisonics_encoder_init     = apiGetFunctionAddress(Opus.getLibrary(), "opus_projection_ambisonics_encoder_init"),
             projection_encode                      = apiGetFunctionAddress(Opus.getLibrary(), "opus_projection_encode"),
+            projection_encode24                    = apiGetFunctionAddress(Opus.getLibrary(), "opus_projection_encode24"),
             projection_encode_float                = apiGetFunctionAddress(Opus.getLibrary(), "opus_projection_encode_float"),
             projection_encoder_ctl                 = apiGetFunctionAddress(Opus.getLibrary(), "opus_projection_encoder_ctl"),
             projection_encoder_destroy             = apiGetFunctionAddress(Opus.getLibrary(), "opus_projection_encoder_destroy"),
@@ -38,6 +39,7 @@ public class OpusProjection {
             projection_decoder_create              = apiGetFunctionAddress(Opus.getLibrary(), "opus_projection_decoder_create"),
             projection_decoder_init                = apiGetFunctionAddress(Opus.getLibrary(), "opus_projection_decoder_init"),
             projection_decode                      = apiGetFunctionAddress(Opus.getLibrary(), "opus_projection_decode"),
+            projection_decode24                    = apiGetFunctionAddress(Opus.getLibrary(), "opus_projection_decode24"),
             projection_decode_float                = apiGetFunctionAddress(Opus.getLibrary(), "opus_projection_decode_float"),
             projection_decoder_ctl                 = apiGetFunctionAddress(Opus.getLibrary(), "opus_projection_decoder_ctl"),
             projection_decoder_destroy             = apiGetFunctionAddress(Opus.getLibrary(), "opus_projection_decoder_destroy");
@@ -118,6 +120,25 @@ public class OpusProjection {
             check(pcm, frame_size * memGetInt(st + 8 + memGetInt(st) + memGetInt(st + 4)));
         }
         return nopus_projection_encode(st, memAddress(pcm), frame_size, memAddress(data), data.remaining());
+    }
+
+    // --- [ opus_projection_encode24 ] ---
+
+    /** {@code int opus_projection_encode24(OpusProjectionEncoder * st, opus_int32 const * pcm, int frame_size, unsigned char * data, opus_int32 max_data_bytes)} */
+    public static int nopus_projection_encode24(long st, long pcm, int frame_size, long data, int max_data_bytes) {
+        long __functionAddress = Functions.projection_encode24;
+        if (CHECKS) {
+            check(st);
+        }
+        return invokePPPI(st, pcm, frame_size, data, max_data_bytes, __functionAddress);
+    }
+
+    /** {@code int opus_projection_encode24(OpusProjectionEncoder * st, opus_int32 const * pcm, int frame_size, unsigned char * data, opus_int32 max_data_bytes)} */
+    public static int opus_projection_encode24(@NativeType("OpusProjectionEncoder *") long st, @NativeType("opus_int32 const *") IntBuffer pcm, int frame_size, @NativeType("unsigned char *") ByteBuffer data) {
+        if (CHECKS) {
+            check(pcm, frame_size * memGetInt(st + 8 + memGetInt(st) + memGetInt(st + 4)));
+        }
+        return nopus_projection_encode24(st, memAddress(pcm), frame_size, memAddress(data), data.remaining());
     }
 
     // --- [ opus_projection_encode_float ] ---
@@ -222,6 +243,25 @@ public class OpusProjection {
         return nopus_projection_decode(st, memAddressSafe(data), remainingSafe(data), memAddress(pcm), frame_size, decode_fec);
     }
 
+    // --- [ opus_projection_decode24 ] ---
+
+    /** {@code int opus_projection_decode24(OpusProjectionDecoder * st, unsigned char const * data, opus_int32 len, opus_int32 * pcm, int frame_size, int decode_fec)} */
+    public static int nopus_projection_decode24(long st, long data, int len, long pcm, int frame_size, int decode_fec) {
+        long __functionAddress = Functions.projection_decode24;
+        if (CHECKS) {
+            check(st);
+        }
+        return invokePPPI(st, data, len, pcm, frame_size, decode_fec, __functionAddress);
+    }
+
+    /** {@code int opus_projection_decode24(OpusProjectionDecoder * st, unsigned char const * data, opus_int32 len, opus_int32 * pcm, int frame_size, int decode_fec)} */
+    public static int opus_projection_decode24(@NativeType("OpusProjectionDecoder *") long st, @NativeType("unsigned char const *") @Nullable ByteBuffer data, @NativeType("opus_int32 *") IntBuffer pcm, int frame_size, int decode_fec) {
+        if (CHECKS) {
+            check(pcm, frame_size * memGetInt(st + 4 + memGetInt(st)));
+        }
+        return nopus_projection_decode24(st, memAddressSafe(data), remainingSafe(data), memAddress(pcm), frame_size, decode_fec);
+    }
+
     // --- [ opus_projection_decode_float ] ---
 
     /** {@code int opus_projection_decode_float(OpusMSDecoder * st, unsigned char const * data, opus_int32 len, float * pcm, int frame_size, int decode_fec)} */
@@ -263,65 +303,26 @@ public class OpusProjection {
         return invokePI(st, __functionAddress);
     }
 
-    /**
-     * Performs a CTL function on an projection Opus encoder.
-     *
-     * @param st      projection encoder state
-     * @param request CTL request
-     */
     public static int opus_projection_encoder_ctl(@NativeType("OpusProjectionEncoder *") long st, int request) {
         return new CTLRequestV(request).apply(st, Functions.projection_encoder_ctl);
     }
 
-    /**
-     * Performs a CTL function on an projection Opus encoder.
-     *
-     * @param st      projection encoder state
-     * @param request CTL request
-     */
     public static int opus_projection_encoder_ctl(@NativeType("OpusProjectionEncoder *") long st, CTLRequest request) {
         return request.apply(st, Functions.projection_encoder_ctl);
     }
 
-    /**
-     * Performs a CTL function on a projection Opus decoder.
-     *
-     * @param st      projection decoder state
-     * @param request CTL request
-     */
     public static int opus_projection_decoder_ctl(@NativeType("OpusProjectionDecoder *") long st, int request) {
         return new CTLRequestV(request).apply(st, Functions.projection_decoder_ctl);
     }
 
-    /**
-     * Performs a CTL function on a projection Opus decoder.
-     *
-     * @param st      projection decoder state
-     * @param request CTL request
-     */
     public static int opus_projection_decoder_ctl(@NativeType("OpusProjectionDecoder *") long st, CTLRequest request) {
         return request.apply(st, Functions.projection_decoder_ctl);
     }
 
-    /**
-     * Gets the gain (in dB. S7.8-format) of the demixing matrix from the encoder.
-     *
-     * @return the gain (in dB. S7.8-format) of the demixing matrix.
-     */
     public static CTLRequest OPUS_PROJECTION_GET_DEMIXING_MATRIX_GAIN(IntBuffer value) { return new CTLRequestP(OPUS_PROJECTION_GET_DEMIXING_MATRIX_GAIN_REQUEST, memAddress(value)); }
 
-    /**
-     * Gets the size in bytes of the demixing matrix from the encoder.
-     *
-     * @return the size in bytes of the demixing matrix.
-     */
     public static CTLRequest OPUS_PROJECTION_GET_DEMIXING_MATRIX_SIZE(IntBuffer value) { return new CTLRequestP(OPUS_PROJECTION_GET_DEMIXING_MATRIX_SIZE_REQUEST, memAddress(value)); }
 
-    /**
-     * Copies the demixing matrix to the supplied pointer location.
-     *
-     * @param matrix returns the demixing matrix to the supplied pointer location.
-     */
     public static CTLRequest OPUS_PROJECTION_GET_DEMIXING_MATRIX(ByteBuffer matrix) {  return new CTLRequestPI(OPUS_PROJECTION_GET_DEMIXING_MATRIX_REQUEST, memAddress(matrix), matrix.remaining()); }
 
 }

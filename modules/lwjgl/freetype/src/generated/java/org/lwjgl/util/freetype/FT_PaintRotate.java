@@ -14,13 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_PaintRotate {
  *     {@link FT_OpaquePaint FT_OpaquePaintRec} paint;
  *     FT_Fixed angle;
  *     FT_Fixed center_x;
  *     FT_Fixed center_y;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_PaintRotate extends Struct<FT_PaintRotate> {
 
@@ -38,6 +38,8 @@ public class FT_PaintRotate extends Struct<FT_PaintRotate> {
         CENTER_Y;
 
     static {
+        FT_OpaquePaint.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FT_OpaquePaint.SIZEOF, FT_OpaquePaint.ALIGNOF),
             __member(CLONG_SIZE),

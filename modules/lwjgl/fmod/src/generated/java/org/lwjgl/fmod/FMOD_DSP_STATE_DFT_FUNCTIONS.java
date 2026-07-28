@@ -17,11 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FMOD_DSP_STATE_DFT_FUNCTIONS {
  *     {@link FMOD_DSP_DFT_FFTREAL_FUNCI FMOD_DSP_DFT_FFTREAL_FUNC} fftreal;
  *     {@link FMOD_DSP_DFT_IFFTREAL_FUNCI FMOD_DSP_DFT_IFFTREAL_FUNC} inversefftreal;
- * }}</pre>
+ * }</code></pre>
  */
 public class FMOD_DSP_STATE_DFT_FUNCTIONS extends Struct<FMOD_DSP_STATE_DFT_FUNCTIONS> implements NativeResource {
 
@@ -37,6 +37,9 @@ public class FMOD_DSP_STATE_DFT_FUNCTIONS extends Struct<FMOD_DSP_STATE_DFT_FUNC
         INVERSEFFTREAL;
 
     static {
+        java.util.Objects.requireNonNull(FMOD_DSP_DFT_FFTREAL_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_DFT_IFFTREAL_FUNCI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE)

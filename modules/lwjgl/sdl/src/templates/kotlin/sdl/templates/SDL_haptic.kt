@@ -8,6 +8,8 @@ import org.lwjgl.generator.*
 import sdl.*
 
 val SDL_haptic = "SDLHaptic".nativeClassSDL("SDL_haptic") {
+    IntConstant("HAPTIC_INFINITY".."0xffffffff")
+
     IntConstant(
         "HAPTIC_CONSTANT".."(1<<0)",
         "HAPTIC_SINE".."(1<<1)",
@@ -37,8 +39,6 @@ val SDL_haptic = "SDLHaptic".nativeClassSDL("SDL_haptic") {
         "HAPTIC_SPHERICAL".."2",
         "HAPTIC_STEERING_AXIS".."3",
     )
-
-    IntConstant("HAPTIC_INFINITY".."0xffffffff")
 
     SDL_HapticID.p("GetHaptics", AutoSizeResult..int.p("count"))
 
@@ -72,7 +72,7 @@ val SDL_haptic = "SDLHaptic".nativeClassSDL("SDL_haptic") {
         SDL_HapticEffect.const.p("effect")
     )
 
-    int(
+    SDL_HapticEffectID(
         "CreateHapticEffect",
 
         SDL_Haptic.p("haptic"),
@@ -83,7 +83,7 @@ val SDL_haptic = "SDLHaptic".nativeClassSDL("SDL_haptic") {
         "UpdateHapticEffect",
 
         SDL_Haptic.p("haptic"),
-        int("effect"),
+        SDL_HapticEffectID("effect"),
         SDL_HapticEffect.const.p("data")
     )
 
@@ -91,7 +91,7 @@ val SDL_haptic = "SDLHaptic".nativeClassSDL("SDL_haptic") {
         "RunHapticEffect",
 
         SDL_Haptic.p("haptic"),
-        int("effect"),
+        SDL_HapticEffectID("effect"),
         Uint32("iterations")
     )
 
@@ -99,21 +99,21 @@ val SDL_haptic = "SDLHaptic".nativeClassSDL("SDL_haptic") {
         "StopHapticEffect",
 
         SDL_Haptic.p("haptic"),
-        int("effect")
+        SDL_HapticEffectID("effect")
     )
 
     void(
         "DestroyHapticEffect",
 
         SDL_Haptic.p("haptic"),
-        int("effect")
+        SDL_HapticEffectID("effect")
     )
 
     bool(
         "GetHapticEffectStatus",
 
         SDL_Haptic.p("haptic"),
-        int("effect")
+        SDL_HapticEffectID("effect")
     )
 
     bool(

@@ -17,11 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct LLVMOrcCSymbolMapPair {
  *     LLVMOrcSymbolStringPoolEntryRef Name;
  *     {@link LLVMJITEvaluatedSymbol LLVMJITEvaluatedSymbol} Sym;
- * }}</pre>
+ * }</code></pre>
  */
 public class LLVMOrcCSymbolMapPair extends Struct<LLVMOrcCSymbolMapPair> implements NativeResource {
 
@@ -37,6 +37,8 @@ public class LLVMOrcCSymbolMapPair extends Struct<LLVMOrcCSymbolMapPair> impleme
         SYM;
 
     static {
+        LLVMJITEvaluatedSymbol.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(LLVMJITEvaluatedSymbol.SIZEOF, LLVMJITEvaluatedSymbol.ALIGNOF)

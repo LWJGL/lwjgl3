@@ -14,7 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_command_buffer {
  *     {@link NkBuffer struct nk_buffer} * base;
  *     {@link NkRect struct nk_rect} clip;
@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     nk_size begin;
  *     nk_size end;
  *     nk_size last;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_command_buffer")
 public class NkCommandBuffer extends Struct<NkCommandBuffer> {
@@ -45,6 +45,9 @@ public class NkCommandBuffer extends Struct<NkCommandBuffer> {
         LAST;
 
     static {
+        NkRect.createSafe(NULL);
+        NkHandle.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(NkRect.SIZEOF, NkRect.ALIGNOF),

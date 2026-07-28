@@ -5,6 +5,8 @@
  */
 package org.lwjgl.util.tinyexr;
 
+import org.jspecify.annotations.*;
+
 import java.nio.*;
 
 import org.lwjgl.*;
@@ -46,12 +48,17 @@ public class TinyEXR {
         TINYEXR_MAX_CUSTOM_ATTRIBUTES = 128;
 
     public static final int
-        TINYEXR_COMPRESSIONTYPE_NONE = 0,
-        TINYEXR_COMPRESSIONTYPE_RLE  = 1,
-        TINYEXR_COMPRESSIONTYPE_ZIPS = 2,
-        TINYEXR_COMPRESSIONTYPE_ZIP  = 3,
-        TINYEXR_COMPRESSIONTYPE_PIZ  = 4,
-        TINYEXR_COMPRESSIONTYPE_ZFP  = 128;
+        TINYEXR_COMPRESSIONTYPE_NONE  = 0,
+        TINYEXR_COMPRESSIONTYPE_RLE   = 1,
+        TINYEXR_COMPRESSIONTYPE_ZIPS  = 2,
+        TINYEXR_COMPRESSIONTYPE_ZIP   = 3,
+        TINYEXR_COMPRESSIONTYPE_PIZ   = 4,
+        TINYEXR_COMPRESSIONTYPE_PXR24 = 5,
+        TINYEXR_COMPRESSIONTYPE_B44   = 6,
+        TINYEXR_COMPRESSIONTYPE_B44A  = 7,
+        TINYEXR_COMPRESSIONTYPE_DWAA  = 8,
+        TINYEXR_COMPRESSIONTYPE_DWAB  = 9,
+        TINYEXR_COMPRESSIONTYPE_ZFP   = 128;
 
     public static final int
         TINYEXR_ZFP_COMPRESSIONTYPE_RATE      = 0,
@@ -66,6 +73,11 @@ public class TinyEXR {
     public static final int
         TINYEXR_TILE_ROUND_DOWN = 0,
         TINYEXR_TILE_ROUND_UP   = 1;
+
+    public static final int
+        TINYEXR_SPECTRUM_REFLECTIVE = 0,
+        TINYEXR_SPECTRUM_EMISSIVE   = 1,
+        TINYEXR_SPECTRUM_POLARISED  = 2;
 
     protected TinyEXR() {
         throw new UnsupportedOperationException();
@@ -582,6 +594,212 @@ public class TinyEXR {
         } finally {
             stack.setPointer(stackPointer);
         }
+    }
+
+    // --- [ IsSpectralEXR ] ---
+
+    /** {@code int IsSpectralEXR(char const * filename)} */
+    public static native int nIsSpectralEXR(long filename);
+
+    /** {@code int IsSpectralEXR(char const * filename)} */
+    public static int IsSpectralEXR(@NativeType("char const *") ByteBuffer filename) {
+        if (CHECKS) {
+            checkNT1(filename);
+        }
+        return nIsSpectralEXR(memAddress(filename));
+    }
+
+    /** {@code int IsSpectralEXR(char const * filename)} */
+    public static int IsSpectralEXR(@NativeType("char const *") CharSequence filename) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nIsSpectralEXR(filenameEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ IsSpectralEXRFromMemory ] ---
+
+    /** {@code int IsSpectralEXRFromMemory(unsigned char const * memory, size_t size)} */
+    public static native int nIsSpectralEXRFromMemory(long memory, long size);
+
+    /** {@code int IsSpectralEXRFromMemory(unsigned char const * memory, size_t size)} */
+    public static int IsSpectralEXRFromMemory(@NativeType("unsigned char const *") ByteBuffer memory) {
+        return nIsSpectralEXRFromMemory(memAddress(memory), memory.remaining());
+    }
+
+    // --- [ EXRGetSpectrumType ] ---
+
+    /** {@code int EXRGetSpectrumType(EXRHeader const * exr_header)} */
+    public static native int nEXRGetSpectrumType(long exr_header);
+
+    /** {@code int EXRGetSpectrumType(EXRHeader const * exr_header)} */
+    public static int EXRGetSpectrumType(@NativeType("EXRHeader const *") EXRHeader exr_header) {
+        if (CHECKS) {
+            EXRHeader.validate(exr_header.address());
+        }
+        return nEXRGetSpectrumType(exr_header.address());
+    }
+
+    // --- [ EXRFormatWavelength ] ---
+
+    /** {@code void EXRFormatWavelength(char * buffer, size_t buffer_size, float wavelength_nm)} */
+    public static native void nEXRFormatWavelength(long buffer, long buffer_size, float wavelength_nm);
+
+    /** {@code void EXRFormatWavelength(char * buffer, size_t buffer_size, float wavelength_nm)} */
+    public static void EXRFormatWavelength(@NativeType("char *") ByteBuffer buffer, float wavelength_nm) {
+        nEXRFormatWavelength(memAddress(buffer), buffer.remaining(), wavelength_nm);
+    }
+
+    // --- [ EXRSpectralChannelName ] ---
+
+    /** {@code void EXRSpectralChannelName(char * buffer, size_t buffer_size, float wavelength_nm, int stokes_component)} */
+    public static native void nEXRSpectralChannelName(long buffer, long buffer_size, float wavelength_nm, int stokes_component);
+
+    /** {@code void EXRSpectralChannelName(char * buffer, size_t buffer_size, float wavelength_nm, int stokes_component)} */
+    public static void EXRSpectralChannelName(@NativeType("char *") ByteBuffer buffer, float wavelength_nm, int stokes_component) {
+        nEXRSpectralChannelName(memAddress(buffer), buffer.remaining(), wavelength_nm, stokes_component);
+    }
+
+    // --- [ EXRReflectiveChannelName ] ---
+
+    /** {@code void EXRReflectiveChannelName(char * buffer, size_t buffer_size, float wavelength_nm)} */
+    public static native void nEXRReflectiveChannelName(long buffer, long buffer_size, float wavelength_nm);
+
+    /** {@code void EXRReflectiveChannelName(char * buffer, size_t buffer_size, float wavelength_nm)} */
+    public static void EXRReflectiveChannelName(@NativeType("char *") ByteBuffer buffer, float wavelength_nm) {
+        nEXRReflectiveChannelName(memAddress(buffer), buffer.remaining(), wavelength_nm);
+    }
+
+    // --- [ EXRParseSpectralChannelWavelength ] ---
+
+    /** {@code float EXRParseSpectralChannelWavelength(char const * channel_name)} */
+    public static native float nEXRParseSpectralChannelWavelength(long channel_name);
+
+    /** {@code float EXRParseSpectralChannelWavelength(char const * channel_name)} */
+    public static float EXRParseSpectralChannelWavelength(@NativeType("char const *") ByteBuffer channel_name) {
+        if (CHECKS) {
+            checkNT1(channel_name);
+        }
+        return nEXRParseSpectralChannelWavelength(memAddress(channel_name));
+    }
+
+    /** {@code float EXRParseSpectralChannelWavelength(char const * channel_name)} */
+    public static float EXRParseSpectralChannelWavelength(@NativeType("char const *") CharSequence channel_name) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCII(channel_name, true);
+            long channel_nameEncoded = stack.getPointerAddress();
+            return nEXRParseSpectralChannelWavelength(channel_nameEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ EXRGetStokesComponent ] ---
+
+    /** {@code int EXRGetStokesComponent(char const * channel_name)} */
+    public static native int nEXRGetStokesComponent(long channel_name);
+
+    /** {@code int EXRGetStokesComponent(char const * channel_name)} */
+    public static int EXRGetStokesComponent(@NativeType("char const *") ByteBuffer channel_name) {
+        if (CHECKS) {
+            checkNT1(channel_name);
+        }
+        return nEXRGetStokesComponent(memAddress(channel_name));
+    }
+
+    /** {@code int EXRGetStokesComponent(char const * channel_name)} */
+    public static int EXRGetStokesComponent(@NativeType("char const *") CharSequence channel_name) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCII(channel_name, true);
+            long channel_nameEncoded = stack.getPointerAddress();
+            return nEXRGetStokesComponent(channel_nameEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ EXRIsSpectralChannel ] ---
+
+    /** {@code int EXRIsSpectralChannel(char const * channel_name)} */
+    public static native int nEXRIsSpectralChannel(long channel_name);
+
+    /** {@code int EXRIsSpectralChannel(char const * channel_name)} */
+    public static int EXRIsSpectralChannel(@NativeType("char const *") ByteBuffer channel_name) {
+        if (CHECKS) {
+            checkNT1(channel_name);
+        }
+        return nEXRIsSpectralChannel(memAddress(channel_name));
+    }
+
+    /** {@code int EXRIsSpectralChannel(char const * channel_name)} */
+    public static int EXRIsSpectralChannel(@NativeType("char const *") CharSequence channel_name) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCII(channel_name, true);
+            long channel_nameEncoded = stack.getPointerAddress();
+            return nEXRIsSpectralChannel(channel_nameEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ EXRGetWavelengths ] ---
+
+    /** {@code int EXRGetWavelengths(EXRHeader const * exr_header, float * wavelengths, int max_wavelengths)} */
+    public static native int nEXRGetWavelengths(long exr_header, long wavelengths, int max_wavelengths);
+
+    /** {@code int EXRGetWavelengths(EXRHeader const * exr_header, float * wavelengths, int max_wavelengths)} */
+    public static int EXRGetWavelengths(@NativeType("EXRHeader const *") EXRHeader exr_header, @NativeType("float *") FloatBuffer wavelengths) {
+        if (CHECKS) {
+            EXRHeader.validate(exr_header.address());
+        }
+        return nEXRGetWavelengths(exr_header.address(), memAddress(wavelengths), wavelengths.remaining());
+    }
+
+    // --- [ EXRSetSpectralAttributes ] ---
+
+    /** {@code int EXRSetSpectralAttributes(EXRHeader * exr_header, int spectrum_type, char const * units)} */
+    public static native int nEXRSetSpectralAttributes(long exr_header, int spectrum_type, long units);
+
+    /** {@code int EXRSetSpectralAttributes(EXRHeader * exr_header, int spectrum_type, char const * units)} */
+    public static int EXRSetSpectralAttributes(@NativeType("EXRHeader *") EXRHeader exr_header, int spectrum_type, @NativeType("char const *") ByteBuffer units) {
+        if (CHECKS) {
+            checkNT1(units);
+        }
+        return nEXRSetSpectralAttributes(exr_header.address(), spectrum_type, memAddress(units));
+    }
+
+    /** {@code int EXRSetSpectralAttributes(EXRHeader * exr_header, int spectrum_type, char const * units)} */
+    public static int EXRSetSpectralAttributes(@NativeType("EXRHeader *") EXRHeader exr_header, int spectrum_type, @NativeType("char const *") CharSequence units) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCII(units, true);
+            long unitsEncoded = stack.getPointerAddress();
+            return nEXRSetSpectralAttributes(exr_header.address(), spectrum_type, unitsEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ EXRGetSpectralUnits ] ---
+
+    /** {@code char const * EXRGetSpectralUnits(EXRHeader const * exr_header)} */
+    public static native long nEXRGetSpectralUnits(long exr_header);
+
+    /** {@code char const * EXRGetSpectralUnits(EXRHeader const * exr_header)} */
+    @NativeType("char const *")
+    public static @Nullable String EXRGetSpectralUnits(@NativeType("EXRHeader const *") EXRHeader exr_header) {
+        if (CHECKS) {
+            EXRHeader.validate(exr_header.address());
+        }
+        long __result = nEXRGetSpectralUnits(exr_header.address());
+        return memASCIISafe(__result);
     }
 
 }

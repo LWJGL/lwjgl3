@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct SQL_INTERVAL_STRUCT {
  *     SQLINTERVAL interval_type;
  *     SQLSMALLINT interval_sign;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         {@link SQL_YEAR_MONTH_STRUCT SQL_YEAR_MONTH_STRUCT} year_month;
  *         {@link SQL_DAY_SECOND_STRUCT SQL_DAY_SECOND_STRUCT} day_second;
  *     } intval;
- * }}</pre>
+ * }</code></pre>
  */
 public class SQL_INTERVAL_STRUCT extends Struct<SQL_INTERVAL_STRUCT> implements NativeResource {
 
@@ -205,25 +205,6 @@ public class SQL_INTERVAL_STRUCT extends Struct<SQL_INTERVAL_STRUCT> implements 
     public static SQL_INTERVAL_STRUCT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static SQL_INTERVAL_STRUCT mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static SQL_INTERVAL_STRUCT callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static SQL_INTERVAL_STRUCT mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static SQL_INTERVAL_STRUCT callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static SQL_INTERVAL_STRUCT.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static SQL_INTERVAL_STRUCT.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static SQL_INTERVAL_STRUCT.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static SQL_INTERVAL_STRUCT.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code SQL_INTERVAL_STRUCT} instance allocated on the specified {@link MemoryStack}.

@@ -10,7 +10,7 @@ import openxr.*
 
 val FB_passthrough = "FBPassthrough".nativeClassXR("FB_passthrough", type = "instance", postfix = "FB") {
     IntConstant(
-        "FB_passthrough_SPEC_VERSION".."4"
+        "FB_passthrough_SPEC_VERSION".."5"
     )
 
     StringConstant(

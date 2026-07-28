@@ -47,6 +47,13 @@ public class SDL_IOStreamInterface extends Struct<SDL_IOStreamInterface> impleme
         CLOSE;
 
     static {
+        java.util.Objects.requireNonNull(SDL_IOStreamInterfaceSizeCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_IOStreamInterfaceSeekCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_IOStreamInterfaceReadCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_IOStreamInterfaceWriteCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_IOStreamInterfaceFlushCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_IOStreamInterfaceCloseCallbackI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -79,11 +79,11 @@ public class BGFXPlatform {
 
     // --- [ bgfx_override_internal_texture_ptr ] ---
 
-    /** {@code uintptr_t bgfx_override_internal_texture_ptr(bgfx_texture_handle_t _handle, uintptr_t _ptr)} */
+    /** {@code uintptr_t bgfx_override_internal_texture_ptr(bgfx_texture_handle_t _handle, uintptr_t _ptr, uint16_t _layerIndex)} */
     @NativeType("uintptr_t")
-    public static long bgfx_override_internal_texture_ptr(@NativeType("bgfx_texture_handle_t") short _handle, @NativeType("uintptr_t") long _ptr) {
+    public static long bgfx_override_internal_texture_ptr(@NativeType("bgfx_texture_handle_t") short _handle, @NativeType("uintptr_t") long _ptr, @NativeType("uint16_t") short _layerIndex) {
         long __functionAddress = Functions.override_internal_texture_ptr;
-        return invokeCPP(_handle, _ptr, __functionAddress);
+        return invokeCPCP(_handle, _ptr, _layerIndex, __functionAddress);
     }
 
     // --- [ bgfx_override_internal_texture ] ---

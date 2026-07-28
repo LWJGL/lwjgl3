@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkIndirectExecutionSetShaderInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t maxShaderCount;
  *     uint32_t pushConstantRangeCount;
  *     {@link VkPushConstantRange VkPushConstantRange} const * pPushConstantRanges;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkIndirectExecutionSetShaderInfoEXT extends Struct<VkIndirectExecutionSetShaderInfoEXT> implements NativeResource {
 

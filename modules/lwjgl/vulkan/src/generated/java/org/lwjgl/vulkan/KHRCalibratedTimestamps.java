@@ -23,6 +23,12 @@ public class KHRCalibratedTimestamps {
 
     public static final int VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_KHR = 1000184000;
 
+    public static final int
+        VK_TIME_DOMAIN_DEVICE_KHR                    = 0,
+        VK_TIME_DOMAIN_CLOCK_MONOTONIC_KHR           = 1,
+        VK_TIME_DOMAIN_CLOCK_MONOTONIC_RAW_KHR       = 2,
+        VK_TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_KHR = 3;
+
     protected KHRCalibratedTimestamps() {
         throw new UnsupportedOperationException();
     }

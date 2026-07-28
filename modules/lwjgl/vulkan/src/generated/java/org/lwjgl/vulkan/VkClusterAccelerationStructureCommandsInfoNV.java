@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkClusterAccelerationStructureCommandsInfoNV {
  *     VkStructureType sType;
  *     void * pNext;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkStridedDeviceAddressRegionKHR VkStridedDeviceAddressRegionKHR} srcInfosArray;
  *     VkDeviceAddress srcInfosCount;
  *     VkClusterAccelerationStructureAddressResolutionFlagsNV addressResolutionFlags;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkClusterAccelerationStructureCommandsInfoNV extends Struct<VkClusterAccelerationStructureCommandsInfoNV> implements NativeResource {
 
@@ -52,6 +52,9 @@ public class VkClusterAccelerationStructureCommandsInfoNV extends Struct<VkClust
         ADDRESSRESOLUTIONFLAGS;
 
     static {
+        VkClusterAccelerationStructureInputInfoNV.createSafe(NULL);
+        VkStridedDeviceAddressRegionKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

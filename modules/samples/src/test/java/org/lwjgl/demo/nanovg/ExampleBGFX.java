@@ -124,7 +124,7 @@ public final class ExampleBGFX extends Demo {
                         .cache_read_size((_this, _id) -> 0)
                         .cache_read((_this, _id, _data, _size) -> false)
                         .cache_write((_this, _id, _data, _size) -> { /* intentionally empty */ })
-                        .screen_shot((_this, _filePath, _width, _height, _pitch, _data, _size, _yflip) -> {
+                        .screen_shot((_this, _filePath, _width, _height, _pitch, _format, _data, _size, _yflip) -> {
                             ByteBuffer image = memByteBuffer(_data, _size);
 
                             // convert BGRA to RGBA
@@ -238,7 +238,7 @@ public final class ExampleBGFX extends Demo {
                 bgfx_request_screen_shot(BGFX_INVALID_HANDLE, "nanovg_bgfx.png");
             }
 
-            bgfx_frame(false);
+            bgfx_frame(BGFX_FRAME_NONE);
 
             glfwPollEvents();
         }

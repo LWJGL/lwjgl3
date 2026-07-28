@@ -11,7 +11,7 @@ import java.util.*;
 /**
  * Stack-walking utilities.
  *
- * <p>On Java 9 these methods are implemented using {@code java.lang.StackWalker}, which has much lower overhead.</p>
+ * <p>On JDK 11+ these methods are implemented using {@code java.lang.StackWalker}, which has much lower overhead.</p>
  */
 final class StackWalkUtil {
 

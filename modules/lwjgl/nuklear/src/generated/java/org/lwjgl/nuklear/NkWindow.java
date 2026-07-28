@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.nuklear.Nuklear.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_window {
  *     unsigned int seq;
  *     nk_hash name;
@@ -37,7 +37,7 @@ import static org.lwjgl.nuklear.Nuklear.*;
  *     {@link NkWindow struct nk_window} * next;
  *     {@link NkWindow struct nk_window} * prev;
  *     {@link NkWindow struct nk_window} * parent;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_window")
 public class NkWindow extends Struct<NkWindow> {
@@ -71,6 +71,13 @@ public class NkWindow extends Struct<NkWindow> {
         PARENT;
 
     static {
+        NkRect.createSafe(NULL);
+        NkScroll.createSafe(NULL);
+        NkCommandBuffer.createSafe(NULL);
+        NkPropertyState.createSafe(NULL);
+        NkPopupState.createSafe(NULL);
+        NkEditState.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

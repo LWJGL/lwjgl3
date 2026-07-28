@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDescriptorUpdateTemplateCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkPipelineBindPoint pipelineBindPoint;
  *     VkPipelineLayout pipelineLayout;
  *     uint32_t set;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDescriptorUpdateTemplateCreateInfo extends Struct<VkDescriptorUpdateTemplateCreateInfo> implements NativeResource {
 
@@ -262,25 +262,6 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct<VkDescriptorUpd
     public static VkDescriptorUpdateTemplateCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorUpdateTemplateCreateInfo mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorUpdateTemplateCreateInfo callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorUpdateTemplateCreateInfo mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorUpdateTemplateCreateInfo callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorUpdateTemplateCreateInfo.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorUpdateTemplateCreateInfo.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorUpdateTemplateCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorUpdateTemplateCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkDescriptorUpdateTemplateCreateInfo} instance allocated on the specified {@link MemoryStack}.

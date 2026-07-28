@@ -15,12 +15,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct CXIdxCXXClassDeclInfo {
  *     {@link CXIdxDeclInfo CXIdxDeclInfo} const * declInfo;
  *     {@link CXIdxBaseClassInfo CXIdxBaseClassInfo} const * const * bases;
  *     unsigned numBases;
- * }}</pre>
+ * }</code></pre>
  */
 public class CXIdxCXXClassDeclInfo extends Struct<CXIdxCXXClassDeclInfo> {
 

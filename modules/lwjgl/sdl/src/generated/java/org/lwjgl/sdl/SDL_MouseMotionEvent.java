@@ -295,7 +295,7 @@ public class SDL_MouseMotionEvent extends Struct<SDL_MouseMotionEvent> implement
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_MouseMotionEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_MouseMotionEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_MouseMotionEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_MouseMotionEvent.TIMESTAMP); }
     /** Unsafe version of {@link #windowID}. */
@@ -315,7 +315,7 @@ public class SDL_MouseMotionEvent extends Struct<SDL_MouseMotionEvent> implement
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_MouseMotionEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_MouseMotionEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_MouseMotionEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_MouseMotionEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #windowID(int) windowID}. */

@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSceneMeshVertexBufferMSFT {
  *     XrStructureType type;
  *     void * next;
  *     uint32_t vertexCapacityInput;
  *     uint32_t vertexCountOutput;
  *     {@link XrVector3f XrVector3f} * vertices;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSceneMeshVertexBufferMSFT extends Struct<XrSceneMeshVertexBufferMSFT> implements NativeResource {
 

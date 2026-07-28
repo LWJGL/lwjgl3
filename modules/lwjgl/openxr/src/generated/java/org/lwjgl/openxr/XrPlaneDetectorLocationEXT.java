@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrPlaneDetectorLocationEXT {
  *     XrStructureType type;
  *     void * next;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrPlaneDetectorOrientationEXT orientation;
  *     XrPlaneDetectorSemanticTypeEXT semanticType;
  *     uint32_t polygonBufferCount;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrPlaneDetectorLocationEXT extends Struct<XrPlaneDetectorLocationEXT> implements NativeResource {
 
@@ -50,6 +50,9 @@ public class XrPlaneDetectorLocationEXT extends Struct<XrPlaneDetectorLocationEX
         POLYGONBUFFERCOUNT;
 
     static {
+        XrPosef.createSafe(NULL);
+        XrExtent2Df.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

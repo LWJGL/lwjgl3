@@ -17,12 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_Incremental_FuncsRec {
  *     {@link FT_Incremental_GetGlyphDataFuncI FT_Incremental_GetGlyphDataFunc} get_glyph_data;
  *     {@link FT_Incremental_FreeGlyphDataFuncI FT_Incremental_FreeGlyphDataFunc} free_glyph_data;
  *     {@link FT_Incremental_GetGlyphMetricsFuncI FT_Incremental_GetGlyphMetricsFunc} get_glyph_metrics;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct FT_Incremental_FuncsRec")
 public class FT_Incremental_Funcs extends Struct<FT_Incremental_Funcs> implements NativeResource {
@@ -40,6 +40,10 @@ public class FT_Incremental_Funcs extends Struct<FT_Incremental_Funcs> implement
         GET_GLYPH_METRICS;
 
     static {
+        java.util.Objects.requireNonNull(FT_Incremental_GetGlyphDataFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FT_Incremental_FreeGlyphDataFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FT_Incremental_GetGlyphMetricsFuncI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

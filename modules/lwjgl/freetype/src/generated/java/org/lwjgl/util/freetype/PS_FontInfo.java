@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_String * full_name;
  *     FT_String * family_name;
  *     FT_String * weight;
- *     FT_Long italic_angle;
+ *     FT_Fixed italic_angle;
  *     FT_Bool is_fixed_pitch;
  *     FT_Short underline_position;
  *     FT_UShort underline_thickness;
@@ -128,7 +128,7 @@ public class PS_FontInfo extends Struct<PS_FontInfo> {
     @NativeType("FT_String *")
     public String weightString() { return nweightString(address()); }
     /** @return the value of the {@code italic_angle} field. */
-    @NativeType("FT_Long")
+    @NativeType("FT_Fixed")
     public long italic_angle() { return nitalic_angle(address()); }
     /** @return the value of the {@code is_fixed_pitch} field. */
     @NativeType("FT_Bool")
@@ -272,7 +272,7 @@ public class PS_FontInfo extends Struct<PS_FontInfo> {
         @NativeType("FT_String *")
         public String weightString() { return PS_FontInfo.nweightString(address()); }
         /** @return the value of the {@code italic_angle} field. */
-        @NativeType("FT_Long")
+        @NativeType("FT_Fixed")
         public long italic_angle() { return PS_FontInfo.nitalic_angle(address()); }
         /** @return the value of the {@code is_fixed_pitch} field. */
         @NativeType("FT_Bool")

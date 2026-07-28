@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_ColorStop {
  *     FT_Fixed stop_offset;
  *     {@link FT_ColorIndex FT_ColorIndex} color;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_ColorStop extends Struct<FT_ColorStop> implements NativeResource {
 
@@ -36,6 +36,8 @@ public class FT_ColorStop extends Struct<FT_ColorStop> implements NativeResource
         COLOR;
 
     static {
+        FT_ColorIndex.createSafe(NULL);
+
         Layout layout = __struct(
             __member(CLONG_SIZE),
             __member(FT_ColorIndex.SIZEOF, FT_ColorIndex.ALIGNOF)

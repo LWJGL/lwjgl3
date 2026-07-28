@@ -368,6 +368,18 @@ public final class Checks {
      *
      * @throws IllegalArgumentException if {@code buf.length < size}
      */
+    public static void check(char[] buf, int size) {
+        checkBuffer(buf.length, size);
+    }
+
+    /**
+     * Helper method to ensure a array has enough capacity.
+     *
+     * @param buf  the array to check
+     * @param size the minimum array capacity
+     *
+     * @throws IllegalArgumentException if {@code buf.length < size}
+     */
     public static void check(short[] buf, int size) {
         checkBuffer(buf.length, size);
     }
@@ -537,6 +549,15 @@ public final class Checks {
         // Convert to long to support addressing up to 2^31-1 elements, regardless of sizeof(element).
         // The unsigned conversion helps the JIT produce code that is as fast as if int was returned.
         return Integer.toUnsignedLong(index);
+    }
+
+    public static void checkMemcpy(long address, int offset, int size, int length) {
+        if (CHECKS) {
+            if (address == NULL) {
+                throw new NullPointerException();
+            }
+            checkFromIndexSize(offset, size, length);
+        }
     }
 
     // Separate calls to help inline check.

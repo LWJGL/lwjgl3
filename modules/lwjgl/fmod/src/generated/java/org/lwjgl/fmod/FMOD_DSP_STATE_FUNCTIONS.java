@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FMOD_DSP_STATE_FUNCTIONS {
  *     {@link FMOD_DSP_ALLOC_FUNCI FMOD_DSP_ALLOC_FUNC} alloc;
  *     {@link FMOD_DSP_REALLOC_FUNCI FMOD_DSP_REALLOC_FUNC} realloc;
@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link FMOD_DSP_GETLISTENERATTRIBUTES_FUNCI FMOD_DSP_GETLISTENERATTRIBUTES_FUNC} getlistenerattributes;
  *     {@link FMOD_DSP_LOG_FUNCI FMOD_DSP_LOG_FUNC} log;
  *     {@link FMOD_DSP_GETUSERDATA_FUNCI FMOD_DSP_GETUSERDATA_FUNC} getuserdata;
- * }}</pre>
+ * }</code></pre>
  */
 public class FMOD_DSP_STATE_FUNCTIONS extends Struct<FMOD_DSP_STATE_FUNCTIONS> implements NativeResource {
 
@@ -57,6 +57,17 @@ public class FMOD_DSP_STATE_FUNCTIONS extends Struct<FMOD_DSP_STATE_FUNCTIONS> i
         GETUSERDATA;
 
     static {
+        java.util.Objects.requireNonNull(FMOD_DSP_ALLOC_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_REALLOC_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_FREE_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_GETSAMPLERATE_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_GETBLOCKSIZE_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_GETSPEAKERMODE_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_GETCLOCK_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_GETLISTENERATTRIBUTES_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_LOG_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_GETUSERDATA_FUNCI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class BDSpatialAnchorSharing {
 
-    public static final int XR_BD_spatial_anchor_sharing_SPEC_VERSION = 1;
+    public static final int XR_BD_spatial_anchor_sharing_SPEC_VERSION = 2;
 
     public static final String XR_BD_SPATIAL_ANCHOR_SHARING_EXTENSION_NAME = "XR_BD_spatial_anchor_sharing";
 

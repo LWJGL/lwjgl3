@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoAV1TileInfo {
  *     {@link StdVideoAV1TileInfoFlag StdVideoAV1TileInfoFlag} flags;
  *     uint8_t TileCols;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint16_t const * pMiRowStarts;
  *     uint16_t const * pWidthInSbsMinus1;
  *     uint16_t const * pHeightInSbsMinus1;
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoAV1TileInfo extends Struct<StdVideoAV1TileInfo> implements NativeResource {
 
@@ -53,6 +53,8 @@ public class StdVideoAV1TileInfo extends Struct<StdVideoAV1TileInfo> implements 
         PHEIGHTINSBSMINUS1;
 
     static {
+        StdVideoAV1TileInfoFlag.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoAV1TileInfoFlag.SIZEOF, StdVideoAV1TileInfoFlag.ALIGNOF),
             __member(1),
@@ -309,8 +311,8 @@ public class StdVideoAV1TileInfo extends Struct<StdVideoAV1TileInfo> implements 
     public static short ncontext_update_tile_id(long struct) { return memGetShort(struct + StdVideoAV1TileInfo.CONTEXT_UPDATE_TILE_ID); }
     /** Unsafe version of {@link #tile_size_bytes_minus_1}. */
     public static byte ntile_size_bytes_minus_1(long struct) { return memGetByte(struct + StdVideoAV1TileInfo.TILE_SIZE_BYTES_MINUS_1); }
-    public static ByteBuffer nreserved1(long struct) { return memByteBuffer(struct + StdVideoAV1TileInfo.RESERVED1, 7); }
-    public static byte nreserved1(long struct, int index) {
+    static ByteBuffer nreserved1(long struct) { return memByteBuffer(struct + StdVideoAV1TileInfo.RESERVED1, 7); }
+    static byte nreserved1(long struct, int index) {
         return memGetByte(struct + StdVideoAV1TileInfo.RESERVED1 + check(index, 7) * 1);
     }
     /** Unsafe version of {@link #pMiColStarts() pMiColStarts}. */
@@ -332,11 +334,11 @@ public class StdVideoAV1TileInfo extends Struct<StdVideoAV1TileInfo> implements 
     public static void ncontext_update_tile_id(long struct, short value) { memPutShort(struct + StdVideoAV1TileInfo.CONTEXT_UPDATE_TILE_ID, value); }
     /** Unsafe version of {@link #tile_size_bytes_minus_1(byte) tile_size_bytes_minus_1}. */
     public static void ntile_size_bytes_minus_1(long struct, byte value) { memPutByte(struct + StdVideoAV1TileInfo.TILE_SIZE_BYTES_MINUS_1, value); }
-    public static void nreserved1(long struct, ByteBuffer value) {
+    static void nreserved1(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 7); }
         memCopy(memAddress(value), struct + StdVideoAV1TileInfo.RESERVED1, value.remaining() * 1);
     }
-    public static void nreserved1(long struct, int index, byte value) {
+    static void nreserved1(long struct, int index, byte value) {
         memPutByte(struct + StdVideoAV1TileInfo.RESERVED1 + check(index, 7) * 1, value);
     }
     /** Unsafe version of {@link #pMiColStarts(ShortBuffer) pMiColStarts}. */

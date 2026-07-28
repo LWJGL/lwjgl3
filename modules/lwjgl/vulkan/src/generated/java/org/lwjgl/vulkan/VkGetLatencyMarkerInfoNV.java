@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkGetLatencyMarkerInfoNV {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t timingCount;
  *     {@link VkLatencyTimingsFrameReportNV VkLatencyTimingsFrameReportNV} * pTimings;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkGetLatencyMarkerInfoNV extends Struct<VkGetLatencyMarkerInfoNV> implements NativeResource {
 

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpatialAnchorsQueryCompletionML {
  *     XrStructureType type;
  *     void * next;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t uuidCapacityInput;
  *     uint32_t uuidCountOutput;
  *     {@link XrUuidEXT XrUuidEXT} * uuids;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpatialAnchorsQueryCompletionML extends Struct<XrSpatialAnchorsQueryCompletionML> implements NativeResource {
 

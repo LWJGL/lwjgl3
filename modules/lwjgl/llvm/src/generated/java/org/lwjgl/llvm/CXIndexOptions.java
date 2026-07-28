@@ -292,14 +292,14 @@ public class CXIndexOptions extends Struct<CXIndexOptions> implements NativeReso
     public static byte nThreadBackgroundPriorityForIndexing(long struct) { return memGetByte(struct + CXIndexOptions.THREADBACKGROUNDPRIORITYFORINDEXING); }
     /** Unsafe version of {@link #ThreadBackgroundPriorityForEditing}. */
     public static byte nThreadBackgroundPriorityForEditing(long struct) { return memGetByte(struct + CXIndexOptions.THREADBACKGROUNDPRIORITYFOREDITING); }
-    public static int nbitfield0(long struct) { return memGetInt(struct + CXIndexOptions.BITFIELD0); }
+    static int nbitfield0(long struct) { return memGetInt(struct + CXIndexOptions.BITFIELD0); }
     /** Unsafe version of {@link #ExcludeDeclarationsFromPCH}. */
     public static int nExcludeDeclarationsFromPCH(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #DisplayDiagnostics}. */
     public static int nDisplayDiagnostics(long struct) { return (nbitfield0(struct) & 0x00_00_00_02) >>> 1; }
     /** Unsafe version of {@link #StorePreamblesInMemory}. */
     public static int nStorePreamblesInMemory(long struct) { return (nbitfield0(struct) & 0x00_00_00_04) >>> 2; }
-    public static int nReserved(long struct) { return (nbitfield0(struct) & 0x00_00_FF_F8) >>> 3; }
+    static int nReserved(long struct) { return (nbitfield0(struct) & 0x00_00_FF_F8) >>> 3; }
     /** Unsafe version of {@link #PreambleStoragePath}. */
     public static @Nullable ByteBuffer nPreambleStoragePath(long struct) { return memByteBufferNT1Safe(memGetAddress(struct + CXIndexOptions.PREAMBLESTORAGEPATH)); }
     /** Unsafe version of {@link #PreambleStoragePathString}. */
@@ -315,14 +315,14 @@ public class CXIndexOptions extends Struct<CXIndexOptions> implements NativeReso
     public static void nThreadBackgroundPriorityForIndexing(long struct, byte value) { memPutByte(struct + CXIndexOptions.THREADBACKGROUNDPRIORITYFORINDEXING, value); }
     /** Unsafe version of {@link #ThreadBackgroundPriorityForEditing(byte) ThreadBackgroundPriorityForEditing}. */
     public static void nThreadBackgroundPriorityForEditing(long struct, byte value) { memPutByte(struct + CXIndexOptions.THREADBACKGROUNDPRIORITYFOREDITING, value); }
-    public static void nbitfield0(long struct, int value) { memPutInt(struct + CXIndexOptions.BITFIELD0, value); }
+    static void nbitfield0(long struct, int value) { memPutInt(struct + CXIndexOptions.BITFIELD0, value); }
     /** Unsafe version of {@link #ExcludeDeclarationsFromPCH(boolean) ExcludeDeclarationsFromPCH}. */
     public static void nExcludeDeclarationsFromPCH(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #DisplayDiagnostics(boolean) DisplayDiagnostics}. */
     public static void nDisplayDiagnostics(long struct, int value) { nbitfield0(struct, ((value << 1) & 0x00_00_00_02) | (nbitfield0(struct) & 0xFF_FF_FF_FD)); }
     /** Unsafe version of {@link #StorePreamblesInMemory(boolean) StorePreamblesInMemory}. */
     public static void nStorePreamblesInMemory(long struct, int value) { nbitfield0(struct, ((value << 2) & 0x00_00_00_04) | (nbitfield0(struct) & 0xFF_FF_FF_FB)); }
-    public static void nReserved(long struct, int value) { nbitfield0(struct, ((value << 3) & 0x00_00_FF_F8) | (nbitfield0(struct) & 0xFF_FF_00_07)); }
+    static void nReserved(long struct, int value) { nbitfield0(struct, ((value << 3) & 0x00_00_FF_F8) | (nbitfield0(struct) & 0xFF_FF_00_07)); }
     /** Unsafe version of {@link #PreambleStoragePath(ByteBuffer) PreambleStoragePath}. */
     public static void nPreambleStoragePath(long struct, @Nullable ByteBuffer value) {
         if (CHECKS) { checkNT1Safe(value); }

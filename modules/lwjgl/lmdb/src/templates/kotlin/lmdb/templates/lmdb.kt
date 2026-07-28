@@ -20,12 +20,12 @@ ENABLE_WARNINGS()""")
     IntConstant(
         "VERSION_MAJOR".."0",
         "VERSION_MINOR".."9",
-        "VERSION_PATCH".."33"
+        "VERSION_PATCH".."35"
     )
 
     IntConstant("VERSION_FULL".."(MDB_VERSION_MAJOR << 24) | (MDB_VERSION_MINOR << 16) | MDB_VERSION_PATCH")
 
-    StringConstant("VERSION_DATE".."May 21, 2024")
+    StringConstant("VERSION_DATE".."Jan 27, 2026")
     StringConstant(
         "VERSION_STRING".expr("String.format(\"LMDB %d.%d.%d: (%s)\", MDB_VERSION_MAJOR, MDB_VERSION_MINOR, MDB_VERSION_PATCH, MDB_VERSION_DATE)")
     )

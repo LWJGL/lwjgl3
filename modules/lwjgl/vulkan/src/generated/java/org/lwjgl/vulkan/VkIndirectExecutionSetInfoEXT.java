@@ -17,11 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * union VkIndirectExecutionSetInfoEXT {
  *     {@link VkIndirectExecutionSetPipelineInfoEXT VkIndirectExecutionSetPipelineInfoEXT} const * pPipelineInfo;
  *     {@link VkIndirectExecutionSetShaderInfoEXT VkIndirectExecutionSetShaderInfoEXT} const * pShaderInfo;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkIndirectExecutionSetInfoEXT extends Struct<VkIndirectExecutionSetInfoEXT> implements NativeResource {
 

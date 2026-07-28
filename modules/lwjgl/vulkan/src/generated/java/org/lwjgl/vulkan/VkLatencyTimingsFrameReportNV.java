@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre>{@code
  * struct VkLatencyTimingsFrameReportNV {
  *     VkStructureType sType;
- *     void const * pNext;
+ *     void * pNext;
  *     uint64_t presentID;
  *     uint64_t inputSampleTimeUs;
  *     uint64_t simStartTimeUs;
@@ -130,7 +130,7 @@ public class VkLatencyTimingsFrameReportNV extends Struct<VkLatencyTimingsFrameR
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** @return the value of the {@code pNext} field. */
-    @NativeType("void const *")
+    @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** @return the value of the {@code presentID} field. */
     @NativeType("uint64_t")
@@ -180,7 +180,7 @@ public class VkLatencyTimingsFrameReportNV extends Struct<VkLatencyTimingsFrameR
     /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_TIMINGS_FRAME_REPORT_NV STRUCTURE_TYPE_LATENCY_TIMINGS_FRAME_REPORT_NV} value to the {@code sType} field. */
     public VkLatencyTimingsFrameReportNV sType$Default() { return sType(NVLowLatency2.VK_STRUCTURE_TYPE_LATENCY_TIMINGS_FRAME_REPORT_NV); }
     /** Sets the specified value to the {@code pNext} field. */
-    public VkLatencyTimingsFrameReportNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    public VkLatencyTimingsFrameReportNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkLatencyTimingsFrameReportNV set(
@@ -401,7 +401,7 @@ public class VkLatencyTimingsFrameReportNV extends Struct<VkLatencyTimingsFrameR
         @NativeType("VkStructureType")
         public int sType() { return VkLatencyTimingsFrameReportNV.nsType(address()); }
         /** @return the value of the {@code pNext} field. */
-        @NativeType("void const *")
+        @NativeType("void *")
         public long pNext() { return VkLatencyTimingsFrameReportNV.npNext(address()); }
         /** @return the value of the {@code presentID} field. */
         @NativeType("uint64_t")
@@ -451,7 +451,7 @@ public class VkLatencyTimingsFrameReportNV extends Struct<VkLatencyTimingsFrameR
         /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_TIMINGS_FRAME_REPORT_NV STRUCTURE_TYPE_LATENCY_TIMINGS_FRAME_REPORT_NV} value to the {@code sType} field. */
         public VkLatencyTimingsFrameReportNV.Buffer sType$Default() { return sType(NVLowLatency2.VK_STRUCTURE_TYPE_LATENCY_TIMINGS_FRAME_REPORT_NV); }
         /** Sets the specified value to the {@code pNext} field. */
-        public VkLatencyTimingsFrameReportNV.Buffer pNext(@NativeType("void const *") long value) { VkLatencyTimingsFrameReportNV.npNext(address(), value); return this; }
+        public VkLatencyTimingsFrameReportNV.Buffer pNext(@NativeType("void *") long value) { VkLatencyTimingsFrameReportNV.npNext(address(), value); return this; }
 
     }
 

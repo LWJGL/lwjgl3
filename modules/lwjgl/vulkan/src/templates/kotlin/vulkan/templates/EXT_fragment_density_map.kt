@@ -10,7 +10,7 @@ import vulkan.*
 
 val EXT_fragment_density_map = "EXTFragmentDensityMap".nativeClassVK("EXT_fragment_density_map", type = "device", postfix = "EXT") {
     IntConstant(
-        "EXT_FRAGMENT_DENSITY_MAP_SPEC_VERSION".."2"
+        "EXT_FRAGMENT_DENSITY_MAP_SPEC_VERSION".."3"
     )
 
     StringConstant(

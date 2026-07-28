@@ -5,6 +5,8 @@
  */
 package org.lwjgl.vulkan;
 
+import org.jspecify.annotations.*;
+
 import java.nio.*;
 
 import org.lwjgl.system.*;
@@ -105,8 +107,8 @@ public class EXTExtendedDynamicState3 {
     }
 
     /** {@code void vkCmdSetSampleMaskEXT(VkCommandBuffer commandBuffer, VkSampleCountFlagBits samples, VkSampleMask const * pSampleMask)} */
-    public static void vkCmdSetSampleMaskEXT(VkCommandBuffer commandBuffer, @NativeType("VkSampleCountFlagBits") int samples, @NativeType("VkSampleMask const *") IntBuffer pSampleMask) {
-        nvkCmdSetSampleMaskEXT(commandBuffer, samples, memAddress(pSampleMask));
+    public static void vkCmdSetSampleMaskEXT(VkCommandBuffer commandBuffer, @NativeType("VkSampleCountFlagBits") int samples, @NativeType("VkSampleMask const *") @Nullable IntBuffer pSampleMask) {
+        nvkCmdSetSampleMaskEXT(commandBuffer, samples, memAddressSafe(pSampleMask));
     }
 
     // --- [ vkCmdSetAlphaToCoverageEnableEXT ] ---
@@ -437,7 +439,7 @@ public class EXTExtendedDynamicState3 {
     }
 
     /** {@code void vkCmdSetSampleMaskEXT(VkCommandBuffer commandBuffer, VkSampleCountFlagBits samples, VkSampleMask const * pSampleMask)} */
-    public static void vkCmdSetSampleMaskEXT(VkCommandBuffer commandBuffer, @NativeType("VkSampleCountFlagBits") int samples, @NativeType("VkSampleMask const *") int[] pSampleMask) {
+    public static void vkCmdSetSampleMaskEXT(VkCommandBuffer commandBuffer, @NativeType("VkSampleCountFlagBits") int samples, @NativeType("VkSampleMask const *") int @Nullable [] pSampleMask) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdSetSampleMaskEXT;
         if (CHECKS) {
             check(__functionAddress);

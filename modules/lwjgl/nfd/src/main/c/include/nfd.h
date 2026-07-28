@@ -461,8 +461,9 @@ NFD_API void NFD_ClearError(void);
 /* path set operations */
 #ifdef _WIN32
 typedef unsigned long nfdpathsetsize_t;
-#elif __APPLE__
-typedef unsigned long nfdpathsetsize_t;
+// LWJGL: cannot be mapped cleanly
+//#elif __APPLE__
+//typedef unsigned long nfdpathsetsize_t;
 #else
 typedef unsigned int nfdpathsetsize_t;
 #endif  // _WIN32, __APPLE__
@@ -490,10 +491,10 @@ NFD_API nfdresult_t NFD_PathSet_GetPathU8(const nfdpathset_t* pathSet,
                                           nfdu8char_t** outPath);
 
 /** Free the path gotten by NFD_PathSet_GetPathN(). */
-NFD_API void NFD_PathSet_FreePathN(nfdnchar_t* filePath);
+NFD_API void NFD_PathSet_FreePathN(const nfdnchar_t* filePath);
 
 /** Free the path gotten by NFD_PathSet_GetPathU8(). */
-NFD_API void NFD_PathSet_FreePathU8(nfdu8char_t* filePath);
+NFD_API void NFD_PathSet_FreePathU8(const nfdu8char_t* filePath);
 
 /** Gets an enumerator of the path set.
  *

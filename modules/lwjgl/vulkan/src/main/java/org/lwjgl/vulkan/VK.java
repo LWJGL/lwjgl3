@@ -12,6 +12,7 @@ import java.nio.*;
 import java.util.*;
 
 import static java.lang.Math.*;
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -55,7 +56,7 @@ public final class VK {
         }
     }
 
-    private VK() {}
+    private VK() { }
 
     /**
      * Loads the Vulkan shared library, using the default library name.
@@ -93,6 +94,8 @@ public final class VK {
                 throw new IllegalStateException();
         }
         create(VK);
+        // Avoid "unloaded signature classes" when calling VK functions that accept VkAllocationCallbacks, which is usually null.
+        VkAllocationCallbacks.createSafe(NULL);
     }
 
     /**
@@ -212,13 +215,20 @@ public final class VK {
         int minorVersion = VK_VERSION_MINOR(apiVersion);
 
         int[] VK_VERSIONS = {
-            3 // Vulkan 1.0 to 1.3
+            4 // Vulkan 1.0 to 1.4
         };
+
+        if (VK_VERSIONS.length < majorVersion) {
+            printUnsupportedVersion(majorVersion, minorVersion);
+        }
 
         int maxMajor = min(majorVersion, VK_VERSIONS.length);
         for (int M = 1; M <= maxMajor; M++) {
             int maxMinor = VK_VERSIONS[M - 1];
             if (M == majorVersion) {
+                if (maxMinor < minorVersion) {
+                    printUnsupportedVersion(majorVersion, minorVersion);
+                }
                 maxMinor = min(minorVersion, maxMinor);
             }
             for (int m = 0; m <= maxMinor; m++) {
@@ -233,6 +243,10 @@ public final class VK {
         }
 
         return enabledExtensions;
+    }
+
+    private static void printUnsupportedVersion(int majorVersion, int minorVersion) {
+        apiLog("[Vulkan] Detected unsupported Vulkan version: " + majorVersion + '.' + minorVersion);
     }
 
 }

@@ -46,6 +46,7 @@ val KHR_device_group = "KHRDeviceGroup".nativeClassVK("KHR_device_group", type =
 
     EnumConstant(
         "PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHR".enum(0x00000008),
+        "PIPELINE_CREATE_DISPATCH_BASE_BIT_KHR".enum(0x00000010),
         "PIPELINE_CREATE_DISPATCH_BASE_KHR".enum(0x00000010)
     )
 
@@ -59,6 +60,13 @@ val KHR_device_group = "KHRDeviceGroup".nativeClassVK("KHR_device_group", type =
 
     EnumConstant(
         "SWAPCHAIN_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR".enum(0x00000001)
+    )
+
+    EnumConstant(
+        "DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR".enum(0x00000001),
+        "DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR".enum(0x00000002),
+        "DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR".enum(0x00000004),
+        "DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR".enum(0x00000008)
     )
 
     void(

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrCompositionLayerSpaceWarpInfoFB {
  *     XrStructureType type;
  *     void const * next;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float maxDepth;
  *     float nearZ;
  *     float farZ;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrCompositionLayerSpaceWarpInfoFB extends Struct<XrCompositionLayerSpaceWarpInfoFB> implements NativeResource {
 
@@ -52,6 +52,9 @@ public class XrCompositionLayerSpaceWarpInfoFB extends Struct<XrCompositionLayer
         FARZ;
 
     static {
+        XrSwapchainSubImage.createSafe(NULL);
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -28,9 +28,12 @@ val khr_semaphore = "KHRSemaphore".nativeClassCL("khr_semaphore", KHR) {
     )
 
     IntConstant(
-        "SEMAPHORE_TYPE_KHR"..0x203D,
-        "SEMAPHORE_DEVICE_HANDLE_LIST_KHR"..0x2051,
-        "SEMAPHORE_DEVICE_HANDLE_LIST_END_KHR".."0"
+        "SEMAPHORE_TYPE_KHR"..0x203D
+    )
+
+    LongConstant(
+        "SEMAPHORE_DEVICE_HANDLE_LIST_KHR"..0x2051L,
+        "SEMAPHORE_DEVICE_HANDLE_LIST_END_KHR".."0L"
     )
 
     IntConstant(

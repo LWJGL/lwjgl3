@@ -30,6 +30,8 @@ public final class STDVulkanVideoCodecH264 {
         STD_VIDEO_H264_PROFILE_IDC_BASELINE            = 66,
         STD_VIDEO_H264_PROFILE_IDC_MAIN                = 77,
         STD_VIDEO_H264_PROFILE_IDC_HIGH                = 100,
+        STD_VIDEO_H264_PROFILE_IDC_HIGH_10             = 110,
+        STD_VIDEO_H264_PROFILE_IDC_HIGH_422            = 122,
         STD_VIDEO_H264_PROFILE_IDC_HIGH_444_PREDICTIVE = 244,
         STD_VIDEO_H264_PROFILE_IDC_INVALID             = 0x7FFFFFFF;
 

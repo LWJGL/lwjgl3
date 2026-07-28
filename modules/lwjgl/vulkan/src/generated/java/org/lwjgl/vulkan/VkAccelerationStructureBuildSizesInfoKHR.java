@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre>{@code
  * struct VkAccelerationStructureBuildSizesInfoKHR {
  *     VkStructureType sType;
- *     void const * pNext;
+ *     void * pNext;
  *     VkDeviceSize accelerationStructureSize;
  *     VkDeviceSize updateScratchSize;
  *     VkDeviceSize buildScratchSize;
@@ -86,7 +86,7 @@ public class VkAccelerationStructureBuildSizesInfoKHR extends Struct<VkAccelerat
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** @return the value of the {@code pNext} field. */
-    @NativeType("void const *")
+    @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** @return the value of the {@code accelerationStructureSize} field. */
     @NativeType("VkDeviceSize")
@@ -103,7 +103,7 @@ public class VkAccelerationStructureBuildSizesInfoKHR extends Struct<VkAccelerat
     /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR} value to the {@code sType} field. */
     public VkAccelerationStructureBuildSizesInfoKHR sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
-    public VkAccelerationStructureBuildSizesInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    public VkAccelerationStructureBuildSizesInfoKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkAccelerationStructureBuildSizesInfoKHR set(
@@ -302,7 +302,7 @@ public class VkAccelerationStructureBuildSizesInfoKHR extends Struct<VkAccelerat
         @NativeType("VkStructureType")
         public int sType() { return VkAccelerationStructureBuildSizesInfoKHR.nsType(address()); }
         /** @return the value of the {@code pNext} field. */
-        @NativeType("void const *")
+        @NativeType("void *")
         public long pNext() { return VkAccelerationStructureBuildSizesInfoKHR.npNext(address()); }
         /** @return the value of the {@code accelerationStructureSize} field. */
         @NativeType("VkDeviceSize")
@@ -319,7 +319,7 @@ public class VkAccelerationStructureBuildSizesInfoKHR extends Struct<VkAccelerat
         /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR} value to the {@code sType} field. */
         public VkAccelerationStructureBuildSizesInfoKHR.Buffer sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
-        public VkAccelerationStructureBuildSizesInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureBuildSizesInfoKHR.npNext(address(), value); return this; }
+        public VkAccelerationStructureBuildSizesInfoKHR.Buffer pNext(@NativeType("void *") long value) { VkAccelerationStructureBuildSizesInfoKHR.npNext(address(), value); return this; }
 
     }
 

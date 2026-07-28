@@ -17,14 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkOpticalFlowExecuteInfoNV {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkOpticalFlowExecuteFlagsNV flags;
  *     uint32_t regionCount;
  *     {@link VkRect2D VkRect2D} const * pRegions;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkOpticalFlowExecuteInfoNV extends Struct<VkOpticalFlowExecuteInfoNV> implements NativeResource {
 

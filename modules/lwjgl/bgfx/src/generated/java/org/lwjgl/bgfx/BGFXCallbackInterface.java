@@ -17,10 +17,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct bgfx_callback_interface_t {
  *     {@link BGFXCallbackVtbl bgfx_callback_vtbl_t} const * vtbl;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct bgfx_callback_interface_t")
 public class BGFXCallbackInterface extends Struct<BGFXCallbackInterface> implements NativeResource {
@@ -114,17 +114,6 @@ public class BGFXCallbackInterface extends Struct<BGFXCallbackInterface> impleme
     public static @Nullable BGFXCallbackInterface createSafe(long address) {
         return address == NULL ? null : new BGFXCallbackInterface(address, null);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static BGFXCallbackInterface mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static BGFXCallbackInterface callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static BGFXCallbackInterface mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static BGFXCallbackInterface callocStack(MemoryStack stack) { return calloc(stack); }
 
     /**
      * Returns a new {@code BGFXCallbackInterface} instance allocated on the specified {@link MemoryStack}.

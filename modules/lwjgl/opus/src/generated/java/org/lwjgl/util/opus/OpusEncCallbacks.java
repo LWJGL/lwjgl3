@@ -17,11 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct OpusEncCallbacks {
  *     {@link OPEWriteFuncI ope_write_func} write;
  *     {@link OPECloseFuncI ope_close_func} close;
- * }}</pre>
+ * }</code></pre>
  */
 public class OpusEncCallbacks extends Struct<OpusEncCallbacks> implements NativeResource {
 
@@ -37,6 +37,9 @@ public class OpusEncCallbacks extends Struct<OpusEncCallbacks> implements Native
         CLOSE;
 
     static {
+        java.util.Objects.requireNonNull(OPEWriteFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(OPECloseFuncI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE)

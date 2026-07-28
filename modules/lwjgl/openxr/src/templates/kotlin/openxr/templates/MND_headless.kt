@@ -10,7 +10,7 @@ import openxr.*
 
 val MND_headless = "MNDHeadless".nativeClassXR("MND_headless", type = "instance", postfix = "MND") {
     IntConstant(
-        "MND_headless_SPEC_VERSION".."2"
+        "MND_headless_SPEC_VERSION".."3"
     )
 
     StringConstant(

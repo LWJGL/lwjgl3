@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkCopyMemoryToAccelerationStructureInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} src;
  *     VkAccelerationStructureKHR dst;
  *     VkCopyAccelerationStructureModeKHR mode;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkCopyMemoryToAccelerationStructureInfoKHR extends Struct<VkCopyMemoryToAccelerationStructureInfoKHR> implements NativeResource {
 
@@ -42,6 +42,8 @@ public class VkCopyMemoryToAccelerationStructureInfoKHR extends Struct<VkCopyMem
         MODE;
 
     static {
+        VkDeviceOrHostAddressConstKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

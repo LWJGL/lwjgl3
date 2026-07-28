@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkGeneratedCommandsInfoNV {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkDeviceSize sequencesCountOffset;
  *     VkBuffer sequencesIndexBuffer;
  *     VkDeviceSize sequencesIndexOffset;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkGeneratedCommandsInfoNV extends Struct<VkGeneratedCommandsInfoNV> implements NativeResource {
 

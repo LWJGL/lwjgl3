@@ -14,23 +14,23 @@ import java.lang.module.*;
 final class VersionImpl {
 
     static String find() {
-        Package org_lwjgl = Version.class.getPackage();
+        var org_lwjgl = Version.class.getPackage();
 
-        String specVersion = org_lwjgl.getSpecificationVersion();
-        String implVersion = org_lwjgl.getImplementationVersion();
+        var specVersion = org_lwjgl.getSpecificationVersion();
+        var implVersion = org_lwjgl.getImplementationVersion();
         if (specVersion != null && implVersion != null) {
             return Version.createImplementation(specVersion, implVersion);
         }
 
-        Module module = Version.class.getModule();
+        var module = Version.class.getModule();
         if ("org.lwjgl".equals(module.getName())) {
-            String moduleVersion = module.getDescriptor()
+            var moduleVersion = module.getDescriptor()
                 .version()
                 .map(ModuleDescriptor.Version::toString)
                 .orElse(null);
 
             if (moduleVersion != null) {
-                int plusIndex = moduleVersion.indexOf('+');
+                var plusIndex = moduleVersion.indexOf('+');
                 if (plusIndex != -1) {
                     return Version.createImplementation(
                         moduleVersion.substring(0, plusIndex),
@@ -40,7 +40,7 @@ final class VersionImpl {
             }
         }
 
-        String version = Version.findImplementationFromManifest();
+        var version = Version.findImplementationFromManifest();
         if (version != null) {
             return version;
         }

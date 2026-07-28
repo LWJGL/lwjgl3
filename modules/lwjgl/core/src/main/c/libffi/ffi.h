@@ -63,6 +63,8 @@ extern "C" {
 #define FFI_EXEC_TRAMPOLINE_TABLE 0
 #endif
 
+/* ---- System configuration information --------------------------------- */
+
 /* If these change, update src/mips/ffitarget.h. */
 #define FFI_TYPE_VOID       0
 #define FFI_TYPE_INT        1
@@ -84,9 +86,11 @@ extern "C" {
 #define FFI_TYPE_STRUCT     13
 #define FFI_TYPE_POINTER    14
 #define FFI_TYPE_COMPLEX    15
+#define FFI_TYPE_UINT128    16
+#define FFI_TYPE_SINT128    17
 
 /* This should always refer to the last type code (for sanity checks).  */
-#define FFI_TYPE_LAST       FFI_TYPE_COMPLEX
+#define FFI_TYPE_LAST       FFI_TYPE_SINT128
 
 #include <ffitarget.h>
 
@@ -150,10 +154,8 @@ typedef struct _ffi_type
 #if defined _MSC_VER && !defined(FFI_STATIC_BUILD)
 # if defined FFI_BUILDING_DLL /* Building libffi.DLL with msvcc.sh */
 #  define FFI_API __declspec(dllexport)
-# elif !defined FFI_BUILDING  /* Importing libffi.DLL */
+# else  /* Importing libffi.DLL */
 #  define FFI_API __declspec(dllimport)
-# else                        /* Building/linking static library */
-#  define FFI_API
 # endif
 #else
 # define FFI_API
@@ -235,6 +237,11 @@ FFI_EXTERN ffi_type ffi_type_longdouble;
 FFI_EXTERN ffi_type ffi_type_complex_float;
 FFI_EXTERN ffi_type ffi_type_complex_double;
 FFI_EXTERN ffi_type ffi_type_complex_longdouble;
+#endif
+
+#ifdef FFI_TARGET_HAS_INT128
+FFI_EXTERN ffi_type ffi_type_uint128;
+FFI_EXTERN ffi_type ffi_type_sint128;
 #endif
 #endif /* LIBFFI_HIDE_BASIC_TYPES */
 
@@ -323,6 +330,24 @@ void ffi_java_raw_to_ptrarray (ffi_cif *cif, ffi_java_raw *raw, void **args) __a
 FFI_API
 size_t ffi_java_raw_size (ffi_cif *cif) __attribute__((deprecated));
 
+/* ---- Version API ------------------------------------------------------ */
+
+#define FFI_VERSION_STRING "3.7.0"
+#define FFI_VERSION_NUMBER 30700
+
+#ifndef LIBFFI_ASM
+/* Return a version string. */
+FFI_API const char *ffi_get_version (void);
+
+/* Return the version as an unsigned long value: (x * 10000 + y * 100 + z) */
+FFI_API unsigned long ffi_get_version_number (void);
+#endif
+
+/* ---- Internals API ---------------------------------------------------- */
+
+FFI_API unsigned int ffi_get_default_abi (void);
+FFI_API size_t ffi_get_closure_size (void);
+
 /* ---- Definitions for closures ----------------------------------------- */
 
 #if FFI_CLOSURES
@@ -335,6 +360,11 @@ typedef struct {
   void *trampoline_table;
   void *trampoline_table_entry;
 #else
+  /* Anonymous unions are C11 (a GNU extension in C99); __extension__ keeps
+     the field names without tripping -Wpedantic under -std=c99 (#795).  */
+#ifdef __GNUC__
+  __extension__
+#endif
   union {
     char tramp[FFI_TRAMPOLINE_SIZE];
     void *ftramp;
@@ -502,6 +532,32 @@ void ffi_call(ffi_cif *cif,
 	      void (*fn)(void),
 	      void *rvalue,
 	      void **avalue);
+
+/* Reusable call plans.
+
+   A plan captures a signature's argument placement once so that repeated
+   calls skip the per-call work that ffi_call would otherwise redo.  Build one
+   with ffi_call_plan_alloc, invoke it as many times as you like, and release
+   it with ffi_call_plan_free.
+
+   The plan is opaque and caller-owned.  The cif must outlive the plan.
+   ffi_call_plan_alloc returns NULL only on allocation failure; a signature
+   with no fast path is still valid and ffi_call_plan_invoke falls back to
+   ffi_call for it.  A plan is immutable once built, so it may be shared and
+   invoked concurrently from multiple threads.  */
+typedef struct ffi_call_plan ffi_call_plan;
+
+FFI_API
+ffi_call_plan *ffi_call_plan_alloc (ffi_cif *cif);
+
+FFI_API
+void ffi_call_plan_invoke (ffi_call_plan *plan,
+			   void (*fn)(void),
+			   void *rvalue,
+			   void **avalue);
+
+FFI_API
+void ffi_call_plan_free (ffi_call_plan *plan);
 
 FFI_API
 ffi_status ffi_get_struct_offsets (ffi_abi abi, ffi_type *struct_type,

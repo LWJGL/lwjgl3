@@ -50,11 +50,6 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         "SHADER_CODE_TYPE_SPIRV_EXT".."1"
     )
 
-    EnumConstant(
-        "DEPTH_CLAMP_MODE_VIEWPORT_RANGE_EXT".."0",
-        "DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT".."1"
-    )
-
     VkResult(
         "CreateShadersEXT",
 
@@ -264,7 +259,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
 
         VkCommandBuffer("commandBuffer"),
         VkSampleCountFlagBits("samples"),
-        Unsafe..VkSampleMask.const.p("pSampleMask")
+        Unsafe..nullable..VkSampleMask.const.p("pSampleMask")
     )
 
     void(
@@ -366,14 +361,14 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         VkProvokingVertexModeEXT("provokingVertexMode")
     )
 
-    DependsOn("VK_EXT_line_rasterization")..void(
+    DependsOn("""ext.contains("Vulkan14") || ext.contains("VK_KHR_line_rasterization") || ext.contains("VK_EXT_line_rasterization")""")..void(
         "CmdSetLineRasterizationModeEXT",
 
         VkCommandBuffer("commandBuffer"),
         VkLineRasterizationModeEXT("lineRasterizationMode")
     )
 
-    DependsOn("VK_EXT_line_rasterization")..void(
+    DependsOn("""ext.contains("Vulkan14") || ext.contains("VK_KHR_line_rasterization") || ext.contains("VK_EXT_line_rasterization")""")..void(
         "CmdSetLineStippleEnableEXT",
 
         VkCommandBuffer("commandBuffer"),

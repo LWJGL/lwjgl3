@@ -16,7 +16,7 @@ static void JNICALL functionMissingAbort(void) {
     char msg[256];
     snprintf(
         msg, 256,
-        "%s: No context is current or a function that is not available in the current context was called. The JVM will abort execution.",
+        "[LWJGL] %s: No context is current or a function that is not available in the current context was called. The JVM will abort execution.",
         (*env)->GetStringUTFChars(env, threadName, NULL)
     );
     (*env)->FatalError(env, msg);
@@ -42,6 +42,10 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_system_ThreadLocalUtil_setupEnvData(JNIEn
     UNUSED_PARAM(clazz)
 
     void *envCopy = malloc(functionCount * sizeof(void *));
+    if (envCopy == NULL) {
+        (*env)->FatalError(env, "[LWJGL] Failed to allocate JNIEnv copy.");
+    }
+
     memcpy(envCopy, *env, functionCount * sizeof(void *));
     *(void **)env = envCopy;
 

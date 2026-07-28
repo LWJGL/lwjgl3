@@ -19,14 +19,14 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.system.windows.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkExportSemaphoreWin32HandleInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link SECURITY_ATTRIBUTES SECURITY_ATTRIBUTES} const * pAttributes;
  *     DWORD dwAccess;
  *     LPCWSTR name;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkExportSemaphoreWin32HandleInfoKHR extends Struct<VkExportSemaphoreWin32HandleInfoKHR> implements NativeResource {
 
@@ -216,25 +216,6 @@ public class VkExportSemaphoreWin32HandleInfoKHR extends Struct<VkExportSemaphor
     public static VkExportSemaphoreWin32HandleInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkExportSemaphoreWin32HandleInfoKHR mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkExportSemaphoreWin32HandleInfoKHR callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkExportSemaphoreWin32HandleInfoKHR mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkExportSemaphoreWin32HandleInfoKHR callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkExportSemaphoreWin32HandleInfoKHR.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkExportSemaphoreWin32HandleInfoKHR.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkExportSemaphoreWin32HandleInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkExportSemaphoreWin32HandleInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkExportSemaphoreWin32HandleInfoKHR} instance allocated on the specified {@link MemoryStack}.

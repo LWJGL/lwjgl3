@@ -265,8 +265,8 @@ public class IOUringRegionDesc extends Struct<IOUringRegionDesc> implements Nati
     public static int nid(long struct) { return memGetInt(struct + IOUringRegionDesc.ID); }
     /** Unsafe version of {@link #mmap_offset}. */
     public static long nmmap_offset(long struct) { return memGetLong(struct + IOUringRegionDesc.MMAP_OFFSET); }
-    public static LongBuffer n__resv(long struct) { return memLongBuffer(struct + IOUringRegionDesc.__RESV, 4); }
-    public static long n__resv(long struct, int index) {
+    static LongBuffer n__resv(long struct) { return memLongBuffer(struct + IOUringRegionDesc.__RESV, 4); }
+    static long n__resv(long struct, int index) {
         return memGetLong(struct + IOUringRegionDesc.__RESV + check(index, 4) * 8);
     }
 
@@ -280,11 +280,11 @@ public class IOUringRegionDesc extends Struct<IOUringRegionDesc> implements Nati
     public static void nid(long struct, int value) { memPutInt(struct + IOUringRegionDesc.ID, value); }
     /** Unsafe version of {@link #mmap_offset(long) mmap_offset}. */
     public static void nmmap_offset(long struct, long value) { memPutLong(struct + IOUringRegionDesc.MMAP_OFFSET, value); }
-    public static void n__resv(long struct, LongBuffer value) {
+    static void n__resv(long struct, LongBuffer value) {
         if (CHECKS) { checkGT(value, 4); }
         memCopy(memAddress(value), struct + IOUringRegionDesc.__RESV, value.remaining() * 8);
     }
-    public static void n__resv(long struct, int index, long value) {
+    static void n__resv(long struct, int index, long value) {
         memPutLong(struct + IOUringRegionDesc.__RESV + check(index, 4) * 8, value);
     }
 

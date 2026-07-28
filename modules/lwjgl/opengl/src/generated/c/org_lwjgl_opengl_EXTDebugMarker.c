@@ -13,21 +13,21 @@ typedef void (APIENTRY *glPopGroupMarkerEXTPROC) (void);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDebugMarker_nglInsertEventMarkerEXT(JNIEnv *__env, jclass clazz, jint length, jlong markerAddress) {
-    glInsertEventMarkerEXTPROC glInsertEventMarkerEXT = (glInsertEventMarkerEXTPROC)tlsGetFunction(1504);
+    glInsertEventMarkerEXTPROC glInsertEventMarkerEXT = (glInsertEventMarkerEXTPROC)tlsGetFunction(1538);
     uintptr_t marker = (uintptr_t)markerAddress;
     UNUSED_PARAM(clazz)
     glInsertEventMarkerEXT(length, marker);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDebugMarker_nglPushGroupMarkerEXT(JNIEnv *__env, jclass clazz, jint length, jlong markerAddress) {
-    glPushGroupMarkerEXTPROC glPushGroupMarkerEXT = (glPushGroupMarkerEXTPROC)tlsGetFunction(1505);
+    glPushGroupMarkerEXTPROC glPushGroupMarkerEXT = (glPushGroupMarkerEXTPROC)tlsGetFunction(1539);
     uintptr_t marker = (uintptr_t)markerAddress;
     UNUSED_PARAM(clazz)
     glPushGroupMarkerEXT(length, marker);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDebugMarker_glPopGroupMarkerEXT(JNIEnv *__env, jclass clazz) {
-    glPopGroupMarkerEXTPROC glPopGroupMarkerEXT = (glPopGroupMarkerEXTPROC)tlsGetFunction(1506);
+    glPopGroupMarkerEXTPROC glPopGroupMarkerEXT = (glPopGroupMarkerEXTPROC)tlsGetFunction(1540);
     UNUSED_PARAM(clazz)
     glPopGroupMarkerEXT();
 }

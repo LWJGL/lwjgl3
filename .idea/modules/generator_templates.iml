@@ -23,6 +23,7 @@
     <orderEntry type="module" module-name="templates.lmdb" />
     <orderEntry type="module" module-name="templates.lz4" />
     <orderEntry type="module" module-name="templates.meshoptimizer" />
+    <orderEntry type="module" module-name="templates.mimalloc" />
     <orderEntry type="module" module-name="templates.msdfgen" />
     <orderEntry type="module" module-name="templates.nanovg" />
     <orderEntry type="module" module-name="templates.nfd" />
@@ -36,6 +37,7 @@
     <orderEntry type="module" module-name="templates.opus" />
     <orderEntry type="module" module-name="templates.par" />
     <orderEntry type="module" module-name="templates.remotery" />
+    <orderEntry type="module" module-name="templates.renderdoc" />
     <orderEntry type="module" module-name="templates.rpmalloc" />
     <orderEntry type="module" module-name="templates.sdl" />
     <orderEntry type="module" module-name="templates.shaderc" />

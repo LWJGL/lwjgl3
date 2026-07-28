@@ -131,6 +131,8 @@ public class VkCommandBufferInheritanceInfo extends Struct<VkCommandBufferInheri
     public VkCommandBufferInheritanceInfo pNext(VkAttachmentSampleCountInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkCommandBufferInheritanceConditionalRenderingInfoEXT} value to the {@code pNext} chain. */
     public VkCommandBufferInheritanceInfo pNext(VkCommandBufferInheritanceConditionalRenderingInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkCommandBufferInheritanceDescriptorHeapInfoEXT} value to the {@code pNext} chain. */
+    public VkCommandBufferInheritanceInfo pNext(VkCommandBufferInheritanceDescriptorHeapInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkCommandBufferInheritanceRenderPassTransformInfoQCOM} value to the {@code pNext} chain. */
     public VkCommandBufferInheritanceInfo pNext(VkCommandBufferInheritanceRenderPassTransformInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkCommandBufferInheritanceRenderingInfo} value to the {@code pNext} chain. */
@@ -139,6 +141,8 @@ public class VkCommandBufferInheritanceInfo extends Struct<VkCommandBufferInheri
     public VkCommandBufferInheritanceInfo pNext(VkCommandBufferInheritanceRenderingInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkCommandBufferInheritanceViewportScissorInfoNV} value to the {@code pNext} chain. */
     public VkCommandBufferInheritanceInfo pNext(VkCommandBufferInheritanceViewportScissorInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkCustomResolveCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkCommandBufferInheritanceInfo pNext(VkCustomResolveCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkExternalFormatANDROID} value to the {@code pNext} chain. */
     public VkCommandBufferInheritanceInfo pNext(VkExternalFormatANDROID value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMultiviewPerViewAttributesInfoNVX} value to the {@code pNext} chain. */
@@ -273,25 +277,6 @@ public class VkCommandBufferInheritanceInfo extends Struct<VkCommandBufferInheri
     public static VkCommandBufferInheritanceInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkCommandBufferInheritanceInfo mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkCommandBufferInheritanceInfo callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkCommandBufferInheritanceInfo mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkCommandBufferInheritanceInfo callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkCommandBufferInheritanceInfo.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkCommandBufferInheritanceInfo.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkCommandBufferInheritanceInfo.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkCommandBufferInheritanceInfo.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkCommandBufferInheritanceInfo} instance allocated on the specified {@link MemoryStack}.
@@ -447,6 +432,8 @@ public class VkCommandBufferInheritanceInfo extends Struct<VkCommandBufferInheri
         public VkCommandBufferInheritanceInfo.Buffer pNext(VkAttachmentSampleCountInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkCommandBufferInheritanceConditionalRenderingInfoEXT} value to the {@code pNext} chain. */
         public VkCommandBufferInheritanceInfo.Buffer pNext(VkCommandBufferInheritanceConditionalRenderingInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkCommandBufferInheritanceDescriptorHeapInfoEXT} value to the {@code pNext} chain. */
+        public VkCommandBufferInheritanceInfo.Buffer pNext(VkCommandBufferInheritanceDescriptorHeapInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkCommandBufferInheritanceRenderPassTransformInfoQCOM} value to the {@code pNext} chain. */
         public VkCommandBufferInheritanceInfo.Buffer pNext(VkCommandBufferInheritanceRenderPassTransformInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkCommandBufferInheritanceRenderingInfo} value to the {@code pNext} chain. */
@@ -455,6 +442,8 @@ public class VkCommandBufferInheritanceInfo extends Struct<VkCommandBufferInheri
         public VkCommandBufferInheritanceInfo.Buffer pNext(VkCommandBufferInheritanceRenderingInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkCommandBufferInheritanceViewportScissorInfoNV} value to the {@code pNext} chain. */
         public VkCommandBufferInheritanceInfo.Buffer pNext(VkCommandBufferInheritanceViewportScissorInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkCustomResolveCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkCommandBufferInheritanceInfo.Buffer pNext(VkCustomResolveCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkExternalFormatANDROID} value to the {@code pNext} chain. */
         public VkCommandBufferInheritanceInfo.Buffer pNext(VkExternalFormatANDROID value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMultiviewPerViewAttributesInfoNVX} value to the {@code pNext} chain. */

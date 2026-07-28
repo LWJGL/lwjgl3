@@ -160,25 +160,6 @@ public class VkDescriptorSetLayoutBindingFlagsCreateInfoEXT extends VkDescriptor
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorSetLayoutBindingFlagsCreateInfoEXT mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorSetLayoutBindingFlagsCreateInfoEXT callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorSetLayoutBindingFlagsCreateInfoEXT mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorSetLayoutBindingFlagsCreateInfoEXT callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
-
     /**
      * Returns a new {@code VkDescriptorSetLayoutBindingFlagsCreateInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *

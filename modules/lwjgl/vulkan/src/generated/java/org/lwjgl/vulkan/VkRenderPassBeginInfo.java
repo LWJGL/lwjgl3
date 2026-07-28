@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkRenderPassBeginInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkRect2D VkRect2D} renderArea;
  *     uint32_t clearValueCount;
  *     {@link VkClearValue VkClearValue} const * pClearValues;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkRenderPassBeginInfo extends Struct<VkRenderPassBeginInfo> implements NativeResource {
 
@@ -46,6 +46,8 @@ public class VkRenderPassBeginInfo extends Struct<VkRenderPassBeginInfo> impleme
         PCLEARVALUES;
 
     static {
+        VkRect2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -127,6 +129,8 @@ public class VkRenderPassBeginInfo extends Struct<VkRenderPassBeginInfo> impleme
     public VkRenderPassBeginInfo pNext(VkRenderPassAttachmentBeginInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderPassAttachmentBeginInfoKHR} value to the {@code pNext} chain. */
     public VkRenderPassBeginInfo pNext(VkRenderPassAttachmentBeginInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkRenderPassPerformanceCountersByRegionBeginInfoARM} value to the {@code pNext} chain. */
+    public VkRenderPassBeginInfo pNext(VkRenderPassPerformanceCountersByRegionBeginInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderPassSampleLocationsBeginInfoEXT} value to the {@code pNext} chain. */
     public VkRenderPassBeginInfo pNext(VkRenderPassSampleLocationsBeginInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderPassStripeBeginInfoARM} value to the {@code pNext} chain. */
@@ -249,25 +253,6 @@ public class VkRenderPassBeginInfo extends Struct<VkRenderPassBeginInfo> impleme
     public static VkRenderPassBeginInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkRenderPassBeginInfo mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkRenderPassBeginInfo callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkRenderPassBeginInfo mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkRenderPassBeginInfo callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkRenderPassBeginInfo.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkRenderPassBeginInfo.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkRenderPassBeginInfo.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkRenderPassBeginInfo.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkRenderPassBeginInfo} instance allocated on the specified {@link MemoryStack}.
@@ -419,6 +404,8 @@ public class VkRenderPassBeginInfo extends Struct<VkRenderPassBeginInfo> impleme
         public VkRenderPassBeginInfo.Buffer pNext(VkRenderPassAttachmentBeginInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderPassAttachmentBeginInfoKHR} value to the {@code pNext} chain. */
         public VkRenderPassBeginInfo.Buffer pNext(VkRenderPassAttachmentBeginInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkRenderPassPerformanceCountersByRegionBeginInfoARM} value to the {@code pNext} chain. */
+        public VkRenderPassBeginInfo.Buffer pNext(VkRenderPassPerformanceCountersByRegionBeginInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderPassSampleLocationsBeginInfoEXT} value to the {@code pNext} chain. */
         public VkRenderPassBeginInfo.Buffer pNext(VkRenderPassSampleLocationsBeginInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderPassStripeBeginInfoARM} value to the {@code pNext} chain. */

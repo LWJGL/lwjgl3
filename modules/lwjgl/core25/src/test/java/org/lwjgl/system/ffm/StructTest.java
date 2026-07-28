@@ -1,0 +1,2625 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: https://www.lwjgl.org/license
+ */
+package org.lwjgl.system.ffm;
+
+import org.jspecify.annotations.*;
+import org.lwjgl.sdl.*;
+import org.lwjgl.system.*;
+import org.lwjgl.system.ffm.mapping.*;
+import org.testng.annotations.*;
+
+import java.lang.annotation.*;
+import java.lang.foreign.*;
+import java.lang.invoke.*;
+import java.nio.*;
+import java.nio.charset.*;
+import java.util.*;
+import java.util.regex.*;
+
+import static java.lang.Math.*;
+import static java.lang.foreign.MemoryLayout.PathElement.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.SegmentStack.*;
+import static org.lwjgl.system.ffm.FFM.*;
+import static org.testng.Assert.*;
+
+@NullMarked
+@Test
+public class StructTest {
+
+    // Use a custom annotation to test that everything works without jspecify in the classpath
+    @Target({ElementType.METHOD, ElementType.PARAMETER})
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface MyNullable {
+    }
+
+    static {
+        ffmConfig(
+            StructTest.class,
+            ffmConfigBuilder(MethodHandles.lookup())
+                .withChecks(true)
+                .withNullableAnnotation(MyNullable.class)
+                .build());
+    }
+
+    private static void assertEqualsSegment(MemorySegment actual, MemorySegment expected) {
+        assertEquals(actual.address(), expected.address());
+        assertEquals(actual.byteSize(), expected.byteSize());
+    }
+
+    public void testEmpty() {
+        interface Empty {
+            StructBinder<Empty> $ = ffmStruct(Empty.class)
+                .build();
+        }
+
+        var layout = Empty.$.layout();
+
+        assertEquals(Empty.$.sizeof(), 0);
+        assertEquals(Empty.$.alignof(), 1);
+        assertTrue(layout.memberLayouts().isEmpty());
+
+        try (var stack = stackPush()) {
+            var empty = Empty.$.allocateSegment(stack);
+            assertEquals(empty.byteSize(), 0);
+        }
+    }
+
+    public void testBinderName() {
+        interface StructType {
+            StructBinder<StructType> THIS_CAN_BE_ANYTHING = ffmStruct(StructType.class)
+                .build();
+        }
+
+        var layout = StructType.THIS_CAN_BE_ANYTHING.layout();
+
+        assertEquals(layout.toString(), "[](StructType)");
+    }
+
+    public void testBinderWrongClass() {
+        interface AnotherStructType {
+            StructBinder<AnotherStructType> $ = ffmStruct(AnotherStructType.class)
+                .build();
+        }
+
+        interface StructType {
+            StructBinder<AnotherStructType> $ = ffmStruct(AnotherStructType.class)
+                .build();
+        }
+
+        assertEquals(AnotherStructType.$.layout().toString(), "[](AnotherStructType)");
+        assertEquals(StructType.$.layout().toString(), "[](AnotherStructType)");
+
+        interface Caller {
+            void test(@MyNullable StructType s);
+        }
+
+        var caller = ffmGenerate(Caller.class);
+        //noinspection DataFlowIssue
+        assertThrows(() -> caller.test(null));
+
+        interface StructParent {
+            StructBinder<StructParent> $ = ffmStruct(StructParent.class)
+                .m("child", StructType.$)
+                .build();
+
+            @SuppressWarnings("unused")
+            StructType child();
+        }
+        assertThrows(() -> Objects.requireNonNull(StructParent.$));
+    }
+
+    public void testBinderMultipleNotAllowed() {
+        interface StructType {
+            StructBinder<StructType> $0 = ffmStruct(StructType.class)
+                .build();
+            StructBinder<StructType> $1 = ffmStruct(StructType.class)
+                .build();
+        }
+
+        assertThrows(() -> Objects.requireNonNull(StructType.$0));
+        assertThrows(() -> Objects.requireNonNull(StructType.$1));
+
+        interface Caller {
+            void test(@MyNullable StructType s);
+        }
+
+        var caller = ffmGenerate(Caller.class);
+        //noinspection DataFlowIssue
+        assertThrows(() -> caller.test(null));
+
+        interface StructParent {
+            StructBinder<StructParent> $ = ffmStruct(StructParent.class)
+                .m("child", StructType.$0)
+                .build();
+        }
+        assertThrows(() -> Objects.requireNonNull(StructParent.$));
+    }
+
+    public void testSimple() {
+        interface Simple {
+            StructBinder<Simple> $ = ffmStruct(Simple.class)
+                .m("a", int32_t)
+                .build();
+
+            int a();
+            Simple a(int a);
+        }
+
+        var layout = Simple.$.layout();
+
+        assertEquals(Simple.$.sizeof(), 4L);
+        assertEquals(Simple.$.alignof(), 4L);
+        assertEquals(layout.memberLayouts().size(), 1);
+        assertEquals(layout.select(groupElement(0)), int32_t.layout().withName("a"));
+        assertEquals(layout.select(groupElement("a")), int32_t.layout().withName("a"));
+
+        try (var stack = stackPush()) {
+            stack.push();
+
+            {
+                var simpleMS = Simple.$.allocateSegment(stack); // note zeroing zeroing allocation
+                assertEquals(simpleMS.byteSize(), 4);
+
+                var simple = Simple.$.get(simpleMS);
+                assertEquals(simple.a(), 0);
+                simple.a(0xBAADF00D);
+                assertEquals(simple.a(), 0xBAADF00D);
+            }
+
+            stack.pop();
+
+            {
+                var simpleMS = Simple.$.mallocSegment(stack); // note non-zeroing allocation
+                assertEquals(simpleMS.byteSize(), 4);
+
+                var simple = Simple.$.get(simpleMS);
+                assertEquals(simple.a(), 0xBAADF00D); // dirty memory!
+                simple.a(0);
+                assertEquals(simple.a(), 0);
+            }
+        }
+    }
+
+    public void testFFMName() {
+        {
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("a", int32_t)
+                    .build();
+
+                int b();
+                S b(int b);
+            }
+            assertThrows(() -> Objects.requireNonNull(S.$));
+        }
+
+        {
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("a", int32_t)
+                    .build();
+
+                @FFMName("a") int b();
+            }
+            Objects.requireNonNull(S.$.layout());
+        }
+    }
+
+    public void testLayoutPaddingInvalid() {
+        interface StructWithPaddingInternal {
+            StructBinder<StructWithPaddingInternal> $ = ffmStruct(StructWithPaddingInternal.class)
+                .automaticPadding(false)
+                .m("a", int32_t)
+                .m("b", int64_t)
+                .build();
+        }
+        assertThrows(() -> Objects.requireNonNull(StructWithPaddingInternal.$));
+
+        interface StructWithPaddingTail {
+            StructBinder<StructWithPaddingTail> $ = ffmStruct(StructWithPaddingTail.class)
+                .automaticPadding(false)
+                .m("a", int64_t)
+                .m("b", int32_t)
+                .build();
+        }
+        assertThrows(() -> Objects.requireNonNull(StructWithPaddingTail.$));
+
+        interface StructWithPaddingTailNoCheck {
+            StructBinder<StructWithPaddingTailNoCheck> $ = ffmStruct(StructWithPaddingTailNoCheck.class)
+                .automaticPadding(false)
+                .checkPadding(false)
+                .m("a", int64_t)
+                .m("b", int32_t)
+                .build();
+        }
+        assertEquals(StructWithPaddingTailNoCheck.$.layout().toString(), "[j8(a)i4(b)](StructWithPaddingTailNoCheck)");
+
+        try (var arena = Arena.ofConfined()) {
+            assertNotNull(StructWithPaddingTailNoCheck.$.allocate(arena));
+            assertThrows(() -> StructWithPaddingTailNoCheck.$.allocate(arena, 2L));
+        }
+    }
+
+    public void testLayoutPaddingExplicit() {
+        interface StructWithPaddingInternal {
+            StructBinder<StructWithPaddingInternal> $ = ffmStruct(StructWithPaddingInternal.class)
+                .automaticPadding(false)
+                .m("a", int32_t)
+                .padding(4L)
+                .m("b", int64_t)
+                .build();
+        }
+        assertEquals(StructWithPaddingInternal.$.layout().toString(), "[i4(a)x4j8(b)](StructWithPaddingInternal)");
+
+        interface StructWithPaddingTail {
+            StructBinder<StructWithPaddingTail> $ = ffmStruct(StructWithPaddingTail.class)
+                .automaticPadding(false)
+                .m("a", int64_t)
+                .m("b", int32_t)
+                .padding(4L)
+                .build();
+        }
+        assertEquals(StructWithPaddingTail.$.layout().toString(), "[j8(a)i4(b)x4](StructWithPaddingTail)");
+    }
+
+    private static void check(GroupLayout layout, List<MemoryLayout> members, int index, long byteSize, long byteOffset) {
+        assertEquals(members.get(index).byteSize(), byteSize);
+        assertEquals(layout.byteOffset(groupElement(index)), byteOffset);
+    }
+
+    private static void check(GroupLayout layout, List<MemoryLayout> members, int index, long byteSize, long byteOffset, String name) {
+        assertEquals(members.get(index).byteSize(), byteSize);
+        assertEquals(layout.byteOffset(groupElement(index)), byteOffset);
+        assertEquals(layout.byteOffset(groupElement(name)), byteOffset);
+    }
+
+    public void testLayout() {
+        {
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("a", int8_t)
+                    .m("b", int16_t)
+                    .m("c", int32_t)
+                    .m("d", int64_t)
+                    .build();
+            }
+
+            var layout  = S.$.layout();
+            var members = layout.memberLayouts();
+
+            assertEquals(members.size(), 5);
+
+            check(layout, members, 0, 1L, 0L, "a");
+            check(layout, members, 1, 1L, 1L); // automatic padding element
+            check(layout, members, 2, 2L, 2L, "b");
+            check(layout, members, 3, 4L, 4L, "c");
+            check(layout, members, 4, 8L, 8L, "d");
+
+            assertEquals(S.$.alignof(), 8L);
+            assertEquals(S.$.sizeof(), 16L);
+        }
+
+        {
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("a", int64_t)
+                    .m("b", int32_t)
+                    .m("c", int16_t)
+                    .m("d", int8_t)
+                    .build();
+            }
+
+            var layout  = S.$.layout();
+            var members = layout.memberLayouts();
+
+            assertEquals(members.size(), 5);
+
+            check(layout, members, 0, 8L, 0L, "a");
+            check(layout, members, 1, 4L, 8L, "b");
+            check(layout, members, 2, 2L, 12L, "c");
+            check(layout, members, 3, 1L, 14L, "d");
+            check(layout, members, 4, 1L, 15L); // automatic padding element
+
+            assertEquals(S.$.alignof(), 8L);
+            assertEquals(S.$.sizeof(), 16L);
+        }
+    }
+
+    public void testLayoutCustomAlignment() {
+        {
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .alignas(8L)
+                    .m("a", int32_t)
+                    .m("b", int32_t)
+                    .m("c", int32_t)
+                    .m("d", int32_t)
+                    .build();
+            }
+
+            var layout  = S.$.layout();
+            var members = layout.memberLayouts();
+
+            assertEquals(members.size(), 4);
+
+            check(layout, members, 0, 4L, 0L, "a");
+            check(layout, members, 1, 4L, 4L, "b");
+            check(layout, members, 2, 4L, 8L, "c");
+            check(layout, members, 3, 4L, 12L, "d");
+
+            assertEquals(S.$.alignof(), 8L);
+            assertEquals(S.$.sizeof(), 16L);
+        }
+
+        {
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .alignas(32L)
+                    .m("a", int32_t)
+                    .m("b", int32_t)
+                    .m("c", int32_t)
+                    .m("d", int32_t)
+                    .build();
+            }
+
+            var layout  = S.$.layout();
+            var members = layout.memberLayouts();
+
+            assertEquals(members.size(), 5);
+
+            check(layout, members, 0, 4L, 0L, "a");
+            check(layout, members, 1, 4L, 4L, "b");
+            check(layout, members, 2, 4L, 8L, "c");
+            check(layout, members, 3, 4L, 12L, "d");
+            check(layout, members, 4, 16L, 16L); // automatic padding element
+
+            assertEquals(S.$.alignof(), 32L);
+            assertEquals(S.$.sizeof(), 32L);
+
+            interface P1 {
+                StructBinder<P1> $ = ffmStruct(P1.class)
+                    .m("s", S.$)
+                    .m("i", int32_t)
+                    .build();
+            }
+
+            layout = P1.$.layout();
+            members = layout.memberLayouts();
+
+            assertEquals(members.size(), 3);
+
+            check(layout, members, 0, 32L, 0L, "s");
+            check(layout, members, 1, 4L, 32L, "i");
+            check(layout, members, 2, 28L, 36L); // automatic padding element
+
+            assertEquals(P1.$.alignof(), 32L);
+            assertEquals(P1.$.sizeof(), 64L);
+
+            interface P2 {
+                StructBinder<P1> $ = ffmStruct(P1.class)
+                    .m("i", int32_t)
+                    .m("s", S.$)
+                    .build();
+            }
+
+            layout = P2.$.layout();
+            members = layout.memberLayouts();
+
+            assertEquals(members.size(), 3);
+
+            check(layout, members, 0, 4L, 0L, "i");
+            check(layout, members, 1, 28L, 4L); // automatic padding element
+            check(layout, members, 2, 32L, 32L, "s");
+
+            assertEquals(P2.$.alignof(), 32L);
+            assertEquals(P2.$.sizeof(), 64L);
+        }
+    }
+
+    public void testLayoutCustomPackAligment() {
+        interface PackUtil {
+            static <T> StructBinder<T> struct(Class<T> structClass, long byteAlignment) {
+                return ffmStruct(structClass)
+                    .pack(byteAlignment)
+                    .m("a", int8_t)
+                    .m("b", int16_t)
+                    .m("c", int64_t)
+                    // TODO: support alignas on struct members?
+                    // MSVC: alignas(32) on a member of a packed struct forces 32-bit alignment for both the member and the struct
+                    // GCC/Clang: alignas on a member of a packed struct is ignored
+                    .m("d", int64_t.withByteAlignment(32L))
+                    .m("e", int8_t)
+                    .m("f", int64_t)
+                    .m("b0", int8_t)
+                    .m("f32", float32)
+                    .m("b1", int8_t)
+                    .m("f64", float64)
+                    .m("b2", int8_t)
+                    .m("p", uintptr_t)
+                    .m("tail", int8_t)
+                    .build();
+            }
+        }
+
+        interface Base {
+            byte a();
+            short b();
+            long c();
+            long d();
+            byte e();
+            long f();
+            float f32();
+            double f64();
+            @FFMPointer long p();
+            byte tail();
+
+            Base a(byte value);
+            Base b(short value);
+            Base c(long value);
+            Base d(long value);
+            Base e(byte value);
+            Base f(long value);
+            Base f32(float value);
+            Base f64(double value);
+            Base p(@FFMNullable @FFMPointer long value);
+            Base tail(byte value);
+
+            static <T extends Base> void test(StructBinder<T> binder) {
+                try (var arena = Arena.ofConfined()) {
+                    var segment = binder.allocateSegment(arena);
+                    var packed  = binder.get(segment);
+
+                    assertEquals(packed.a(), 0);
+                    assertEquals(packed.b(), (short)0);
+                    assertEquals(packed.c(), 0L);
+                    assertEquals(packed.d(), 0L);
+                    assertEquals(packed.e(), 0);
+                    assertEquals(packed.f(), 0L);
+                    assertEquals(packed.f32(), 0.0f);
+                    assertEquals(packed.f64(), 0.0);
+                    assertEquals(packed.p(), 0L);
+                    assertEquals(packed.tail(), 0);
+
+                    packed
+                        .a((byte)0x7F)
+                        .b((short)0x7FFF)
+                        .c(0x7FFFFFFFFFFFFFFFL)
+                        .d(0x7FFFFFFFFFFFFFFFL)
+                        .e((byte)0x7F)
+                        .f(0x7FFFFFFFFFFFFFFFL)
+                        .f32(3.14f)
+                        .f64(2.718281828459045)
+                        .p(0x7FFFFFFFFFFFFFFFL)
+                        .tail((byte)0x7F);
+
+                    assertEquals(packed.a(), (byte)0x7F);
+                    assertEquals(packed.b(), (short)0x7FFF);
+                    assertEquals(packed.c(), 0x7FFFFFFFFFFFFFFFL);
+                    assertEquals(packed.d(), 0x7FFFFFFFFFFFFFFFL);
+                    assertEquals(packed.e(), (byte)0x7F);
+                    assertEquals(packed.f(), 0x7FFFFFFFFFFFFFFFL);
+                    assertEquals(packed.f32(), 3.14f);
+                    assertEquals(packed.f64(), 2.718281828459045);
+                    assertEquals(packed.p(), 0x7FFFFFFFFFFFFFFFL);
+                    assertEquals(packed.tail(), (byte)0x7F);
+                }
+            }
+        }
+
+        var PS = ValueLayout.ADDRESS.byteSize();
+
+        {
+            interface Packed1 extends Base {
+                StructBinder<Packed1> $ = PackUtil.struct(Packed1.class, 1L);
+            }
+
+            var layout  = Packed1.$.layout();
+            var members = layout.memberLayouts();
+
+            assertEquals(Packed1.$.alignof(), 1L);
+            assertEquals(members.size(), 13);
+
+            var i = 0;
+            check(layout, members, i++, 1L, 0L, "a");
+            check(layout, members, i++, 2L, 1L, "b");
+            check(layout, members, i++, 8L, 3L, "c");
+            check(layout, members, i++, 8L, 11L, "d");
+            check(layout, members, i++, 1L, 19L, "e");
+            check(layout, members, i++, 8L, 20L, "f");
+            check(layout, members, i++, 1L, 28L, "b0");
+            check(layout, members, i++, 4L, 29L, "f32");
+            check(layout, members, i++, 1L, 33L, "b1");
+            check(layout, members, i++, 8L, 34L, "f64");
+            check(layout, members, i++, 1L, 42L, "b2");
+            check(layout, members, i++, PS, 43L, "p");
+            check(layout, members, i, 1L, 43L + PS, "tail");
+
+            assertEquals(Packed1.$.sizeof(), 44L + PS);
+
+            Base.test(Packed1.$);
+        }
+
+        {
+            interface Packed2 extends Base {
+                StructBinder<Packed2> $ = PackUtil.struct(Packed2.class, 2L);
+            }
+
+            var layout  = Packed2.$.layout();
+            var members = layout.memberLayouts();
+
+            assertEquals(Packed2.$.alignof(), 2L);
+            assertEquals(members.size(), 19);
+
+            var i = 0;
+            check(layout, members, i++, 1L, 0L, "a");
+            check(layout, members, i++, 1L, 1L);
+            check(layout, members, i++, 2L, 2L, "b");
+            check(layout, members, i++, 8L, 4L, "c");
+            check(layout, members, i++, 8L, 12L, "d");
+            check(layout, members, i++, 1L, 20L, "e");
+            check(layout, members, i++, 1L, 21L);
+            check(layout, members, i++, 8L, 22L, "f");
+            check(layout, members, i++, 1L, 30L, "b0");
+            check(layout, members, i++, 1L, 31L);
+            check(layout, members, i++, 4L, 32L, "f32");
+            check(layout, members, i++, 1L, 36L, "b1");
+            check(layout, members, i++, 1L, 37L);
+            check(layout, members, i++, 8L, 38L, "f64");
+            check(layout, members, i++, 1L, 46L, "b2");
+            check(layout, members, i++, 1L, 47L);
+            check(layout, members, i++, PS, 48L, "p");
+            check(layout, members, i++, 1L, 48L + PS, "tail");
+            check(layout, members, i, 1L, 49L + PS);
+
+            assertEquals(Packed2.$.sizeof(), 50L + PS);
+
+            Base.test(Packed2.$);
+        }
+
+        {
+            interface Packed4 extends Base {
+                StructBinder<Packed4> $ = PackUtil.struct(Packed4.class, 4L);
+            }
+
+            var layout  = Packed4.$.layout();
+            var members = layout.memberLayouts();
+
+            assertEquals(Packed4.$.alignof(), 4L);
+            assertEquals(members.size(), 19);
+
+            var i = 0;
+            check(layout, members, i++, 1L, 0L, "a");
+            check(layout, members, i++, 1L, 1L);
+            check(layout, members, i++, 2L, 2L, "b");
+            check(layout, members, i++, 8L, 4L, "c");
+            check(layout, members, i++, 8L, 12L, "d");
+            check(layout, members, i++, 1L, 20L, "e");
+            check(layout, members, i++, 3L, 21L);
+            check(layout, members, i++, 8L, 24L, "f");
+            check(layout, members, i++, 1L, 32L, "b0");
+            check(layout, members, i++, 3L, 33L);
+            check(layout, members, i++, 4L, 36L, "f32");
+            check(layout, members, i++, 1L, 40L, "b1");
+            check(layout, members, i++, 3L, 41L);
+            check(layout, members, i++, 8L, 44L, "f64");
+            check(layout, members, i++, 1L, 52L, "b2");
+            check(layout, members, i++, 3L, 53L);
+            check(layout, members, i++, PS, 56L, "p");
+            check(layout, members, i++, 1L, 56L + PS, "tail");
+            check(layout, members, i, 3L, 57L + PS);
+
+
+            assertEquals(Packed4.$.sizeof(), 60L + PS);
+
+            Base.test(Packed4.$);
+        }
+
+        {
+            interface Packed8 extends Base {
+                StructBinder<Packed8> $ = PackUtil.struct(Packed8.class, 8L);
+            }
+
+            var layout  = Packed8.$.layout();
+            var members = layout.memberLayouts();
+
+            assertEquals(Packed8.$.alignof(), 8L);
+            assertEquals(members.size(), 20);
+
+            var i = 0;
+            check(layout, members, i++, 1L, 0L, "a");
+            check(layout, members, i++, 1L, 1L);
+            check(layout, members, i++, 2L, 2L, "b");
+            check(layout, members, i++, 4L, 4L);
+            check(layout, members, i++, 8L, 8L, "c");
+            check(layout, members, i++, 8L, 16L, "d");
+            check(layout, members, i++, 1L, 24L, "e");
+            check(layout, members, i++, 7L, 25L);
+            check(layout, members, i++, 8L, 32L, "f");
+            check(layout, members, i++, 1L, 40L, "b0");
+            check(layout, members, i++, 3L, 41L);
+            check(layout, members, i++, 4L, 44L, "f32");
+            check(layout, members, i++, 1L, 48L, "b1");
+            check(layout, members, i++, 7L, 49L);
+            check(layout, members, i++, 8L, 56L, "f64");
+            check(layout, members, i++, 1L, 64L, "b2");
+            check(layout, members, i++, PS - 1, 65L);
+            check(layout, members, i++, PS, 64L + PS, "p");
+            check(layout, members, i++, 1L, 64L + PS + PS, "tail");
+            check(layout, members, i, PS - 1, 65L + PS + PS);
+
+            assertEquals(Packed8.$.sizeof(), 64L + PS + PS + PS);
+
+            Base.test(Packed8.$);
+        }
+    }
+
+    public void testLayoutCustomPackAligmentUnion() {
+        interface U {
+            UnionBinder<U> $ = ffmUnion(U.class)
+                .pack(1L)
+                .m("a", int64_t)
+                .m("b", int8_t)
+                .build();
+        }
+
+        assertEquals(U.$.alignof(), 1L);
+        assertEquals(U.$.layout().byteAlignment(), 1L);
+        assertEquals(U.$.sizeof(), 8L);
+    }
+
+    public void testFFMInterop() {
+        interface S {
+            StructBinder<S> $ = ffmStruct(S.class)
+                .m("z", bool)
+                .m("b", int8_t)
+                .m("s", int16_t)
+                .m("i", int32_t)
+                .m("j", int64_t)
+                .m("f", float32)
+                .m("d", float64)
+                .build();
+
+            boolean z();
+            byte b();
+            short s();
+            int i();
+            long j();
+            float f();
+            double d();
+
+            S z(boolean z);
+            S b(byte b);
+            S s(short s);
+            S i(int i);
+            S j(long j);
+            S f(float f);
+            S d(double d);
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            var segment = S.$.allocateSegment(arena);
+            var s       = S.$.get(segment);
+
+            assertFalse(s.z());
+            assertEquals(s.b(), (byte)0);
+            assertEquals(s.s(), (short)0);
+            assertEquals(s.i(), 0);
+            assertEquals(s.j(), 0L);
+            assertEquals(s.f(), 0.0f);
+            assertEquals(s.d(), 0.0);
+
+            s
+                .z(true)
+                .b((byte)0x7F)
+                .s((short)0x7FFF)
+                .i(0x7FFFFFFF)
+                .j(0x7FFFFFFFFFFFFFFFL)
+                .f(3.14f)
+                .d(2.718281828459045);
+
+            assertTrue(s.z());
+            assertEquals(s.b(), (byte)0x7F);
+            assertEquals(s.s(), (short)0x7FFF);
+            assertEquals(s.i(), 0x7FFFFFFF);
+            assertEquals(s.j(), 0x7FFFFFFFFFFFFFFFL);
+            assertEquals(s.f(), 3.14f);
+            assertEquals(s.d(), 2.718281828459045);
+
+            var layout = S.$.layout();
+
+            assertTrue(bool.get(segment, layout.byteOffset(groupElement("z"))));
+            assertEquals(int8_t.get(segment, layout.byteOffset(groupElement("b"))), s.b());
+            assertEquals(int16_t.get(segment, layout.byteOffset(groupElement("s"))), s.s());
+            assertEquals(int32_t.get(segment, layout.byteOffset(groupElement("i"))), s.i());
+            assertEquals(int64_t.get(segment, layout.byteOffset(groupElement("j"))), s.j());
+            assertEquals(float32.get(segment, layout.byteOffset(groupElement("f"))), s.f());
+            assertEquals(float64.get(segment, layout.byteOffset(groupElement("d"))), s.d());
+
+            var offset = 0L;
+            for (var member : S.$.layout().memberLayouts()) {
+                if (member instanceof PaddingLayout) {
+                    for (var i = offset; i < offset + member.byteSize(); i++) {
+                        assertEquals(segment.get(ValueLayout.JAVA_BYTE, i), (byte)0);
+                    }
+                }
+                offset += member.byteSize();
+            }
+
+            // Test java.lang.Record components
+
+            var components = s.getClass().getRecordComponents();
+            assertNotNull(components);
+
+            assertEquals(components.length, 7);
+            assertEquals(components[0].getName(), "z");
+            assertEquals(components[0].getType(), boolean.class);
+            assertEquals(components[1].getName(), "b");
+            assertEquals(components[1].getType(), byte.class);
+            assertEquals(components[2].getName(), "s");
+            assertEquals(components[2].getType(), short.class);
+            assertEquals(components[3].getName(), "i");
+            assertEquals(components[3].getType(), int.class);
+            assertEquals(components[4].getName(), "j");
+            assertEquals(components[4].getType(), long.class);
+            assertEquals(components[5].getName(), "f");
+            assertEquals(components[5].getType(), float.class);
+            assertEquals(components[6].getName(), "d");
+            assertEquals(components[6].getType(), double.class);
+        }
+    }
+
+    public void testFFMAlignment() {
+        try (var arena = Arena.ofConfined()) {
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("a", int32_t)
+                    .m("b", int64_t)
+                    .build();
+
+                int a();
+                long b();
+            }
+
+            var segment = S.$.allocateSegment(arena, 10);
+
+            Objects.requireNonNull(S.$.get(segment));
+            Objects.requireNonNull(S.$.get(segment, 7 * S.$.sizeof()));
+            Objects.requireNonNull(S.$.getAtIndex(segment, 7));
+
+            assertThrows(() -> S.$.get(segment.asSlice(4L)));
+            assertThrows(() -> S.$.get(segment, 4L));
+            assertThrows(() -> S.$.getAtIndex(segment.asSlice(4L), 0));
+        }
+    }
+
+    public void testIteration() {
+        interface S {
+            StructBinder<S> $ = ffmStruct(S.class)
+                .m("a", int32_t)
+                .m("b", int64_t)
+                .build();
+
+            int a();
+            long b();
+
+            S a(int a);
+            S b(long b);
+        }
+
+
+        try (var arena = Arena.ofConfined()) {
+            var segment = S.$.allocateSegment(arena, 10);
+            segment.fill((byte)0x01);
+
+            var i = 0;
+            var l = 0L;
+            for (var s : S.$.iterable(segment)) {
+                i += s.a();
+                l += s.b();
+            }
+
+            assertEquals(i, 0x0101_0101 * 10);
+            assertEquals(l, 0x0101_0101_0101_0101L * 10);
+
+            S.$.forEach(segment, it -> it
+                .a(0x0202_0202)
+                .b(0x0202_0202_0202_0202L));
+
+            assertEquals(S.$.stream(segment).mapToInt(S::a).sum(), 0x0202_0202 * 10);
+            assertEquals(S.$.stream(segment).mapToLong(S::b).sum(), 0x0202_0202_0202_0202L * 10);
+
+            for (var index = 0; index < 10; index++) {
+                S.$.applyAtIndex(segment, index, S.$::clear);
+            }
+
+            assertEquals(S.$.parallelStream(segment).mapToInt(S::a).sum(), 0);
+            assertEquals(S.$.parallelStream(segment).mapToLong(S::b).sum(), 0);
+
+            var iterator = S.$.iterator(segment);
+
+            var index = 0;
+            while (iterator.hasNext()) {
+                iterator.next()
+                    .a(0x0101_0101 * index)
+                    .b(0x0101_0101_0101_0101L * index);
+                index++;
+            }
+
+            index = 0;
+            for (var s : S.$.array(segment)) {
+                assertEquals(s.a(), 0x0101_0101 * index);
+                assertEquals(s.b(), 0x0101_0101_0101_0101L * index);
+                index++;
+            }
+        }
+    }
+
+    public void testNesting() {
+        interface Inner {
+            StructBinder<Inner> $ = ffmStruct(Inner.class)
+                .m("a", int32_t)
+                .m("b", int64_t)
+                .build();
+
+            int a();
+            long b();
+
+            Inner a(int a);
+            Inner b(long b);
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            interface Outer {
+                StructBinder<Outer> $ = ffmStruct(Outer.class)
+                    .m("c", float32)
+                    .m("inner", Inner.$)
+                    .m("d", float64)
+                    .build();
+
+                float c();
+                Inner inner();
+                double d();
+
+                Outer c(float c);
+                Outer inner(Inner inner);
+                Outer d(double d);
+            }
+
+            var segment = Outer.$.allocateSegment(arena);
+
+            var outer       = Outer.$.get(segment);
+            var inner       = outer.inner();
+            var innerOffset = Outer.$.layout().byteOffset(groupElement("inner"));
+
+            assertEquals(
+                Inner.$.addressOf(inner),
+                Outer.$.addressOf(outer) + innerOffset
+            );
+
+            assertEquals(outer.c(), 0.0f);
+            assertEquals(inner.a(), 0);
+            assertEquals(inner.b(), 0L);
+            assertEquals(outer.d(), 0.0f);
+
+            outer.c(3.14f);
+            inner.a(42);
+            inner.b(0x7FFFFFFFFFFFFFFFL);
+            outer.d(2.718281828459045);
+
+            assertEquals(outer.c(), 3.14f);
+            assertEquals(inner.a(), 42);
+            assertEquals(inner.b(), 0x7FFFFFFFFFFFFFFFL);
+            assertEquals(outer.d(), 2.718281828459045);
+
+            assertEquals(float32.get(segment, Outer.$.layout().byteOffset(groupElement("c"))), outer.c());
+            assertEquals(int32_t.get(segment, innerOffset + Inner.$.layout().byteOffset(groupElement("a"))), inner.a());
+            assertEquals(int64_t.get(segment, innerOffset + Inner.$.layout().byteOffset(groupElement("b"))), inner.b());
+            assertEquals(float64.get(segment, Outer.$.layout().byteOffset(groupElement("d"))), outer.d());
+
+            var innerOther = Inner.$.allocate(arena);
+
+            innerOther.a(0xDEADBEEF);
+            innerOther.b(0xFEEDFACECAFEBABEL);
+
+            assertEquals(innerOther.a(), 0xDEADBEEF);
+            assertEquals(innerOther.b(), 0xFEEDFACECAFEBABEL);
+
+            assertNotEquals(
+                Inner.$.addressOf(inner),
+                Inner.$.addressOf(innerOther)
+            );
+
+            outer.inner(innerOther);
+
+            assertEquals(inner.a(), 0xDEADBEEF);
+            assertEquals(inner.b(), 0xFEEDFACECAFEBABEL);
+
+            assertEquals(inner, innerOther); // test generated equals method
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            interface Outer {
+                StructBinder<Outer> $ = ffmStruct(Outer.class)
+                    .m("c", float32)
+                    .m("inner", Inner.$.p())
+                    .m("d", float64)
+                    .build();
+
+                float c();
+                @MyNullable Inner inner();
+                double d();
+
+                Outer c(float c);
+                Outer inner(@MyNullable Inner inner);
+                Outer d(double d);
+            }
+
+            var segment = Outer.$.allocateSegment(arena);
+
+            var outer = Outer.$.get(segment);
+
+            assertEquals(outer.c(), 0.0f);
+            //noinspection DataFlowIssue
+            assertNull(outer.inner());
+            assertEquals(outer.d(), 0.0f);
+
+            var innerBuffer = Inner.$.allocateSegment(arena);
+            var inner       = Inner.$.get(innerBuffer);
+
+            assertEquals(inner.a(), 0);
+            assertEquals(inner.b(), 0L);
+
+            outer.c(3.14f);
+            outer.inner(inner);
+            outer.d(2.718281828459045);
+
+            inner.a(42);
+            inner.b(0x7FFFFFFFFFFFFFFFL);
+
+            assertEquals(outer.c(), 3.14f);
+            assertEquals(Inner.$.addressOfSafe(outer.inner()), Inner.$.addressOf(inner));
+            assertEquals(outer.d(), 2.718281828459045);
+            assertEquals(inner.a(), 42);
+            assertEquals(inner.b(), 0x7FFFFFFFFFFFFFFFL);
+
+            assertEquals(float32.get(segment, Outer.$.layout().byteOffset(groupElement("c"))), outer.c());
+            assertEquals(uintptr_t.get(segment, Outer.$.layout().byteOffset(groupElement("inner"))), Inner.$.addressOf(inner));
+            assertEquals(float64.get(segment, Outer.$.layout().byteOffset(groupElement("d"))), outer.d());
+
+            assertEquals(int32_t.get(innerBuffer, Inner.$.layout().byteOffset(groupElement("a"))), inner.a());
+            assertEquals(int64_t.get(innerBuffer, Inner.$.layout().byteOffset(groupElement("b"))), inner.b());
+
+            outer.inner(null);
+            assertNull(outer.inner());
+            assertEquals(uintptr_t.get(segment, Outer.$.layout().byteOffset(groupElement("inner"))), NULL);
+        }
+    }
+
+    public void testAnonymousGroups() {
+        interface AmbiguousPromotedMember {
+            StructBinder<AmbiguousPromotedMember> $ = ffmStruct(AmbiguousPromotedMember.class)
+                .struct(s -> s
+                    .m("same", uint32_t))
+                .struct(s -> s
+                    .m("same", uint32_t))
+                .build();
+        }
+        assertThrows(() -> Objects.requireNonNull(AmbiguousPromotedMember.$));
+
+        interface UnambiguousPromotedMember {
+            StructBinder<UnambiguousPromotedMember> $ = ffmStruct(UnambiguousPromotedMember.class)
+                .struct("first", s -> s
+                    .m("same", uint32_t))
+                .struct("second", s -> s
+                    .m("same", uint32_t))
+                .build();
+        }
+        Objects.requireNonNull(UnambiguousPromotedMember.$);
+
+        interface CacheDesc {
+            StructBinder<CacheDesc> $ = ffmStruct(CacheDesc.class)
+                .m("Level", uint8_t)
+                .m("Associativity", uint8_t)
+                .m("LineSize", uint16_t)
+                .m("Size", uint32_t)
+                .m("Type", uint32_t)
+                .build();
+
+            byte Level();
+            byte Associativity();
+            short LineSize();
+            int Size();
+            int Type();
+
+            CacheDesc Level(byte value);
+            CacheDesc Associativity(byte value);
+            CacheDesc LineSize(short value);
+            CacheDesc Size(int value);
+            CacheDesc Type(int value);
+        }
+
+        interface Info {
+            StructBinder<Info> $ = ffmStruct(Info.class)
+                .m("ProcessorMask", uintptr_t)
+                .m("Relationship", uint32_t)
+                .union(u -> u
+                    .struct("ProcessorCore", s -> s
+                        .m("Flags", uint8_t)
+                    )
+                    .struct("NumaNode", s -> s
+                        .m("NodeNumber", uint32_t)
+                    )
+                    .m("Cache", CacheDesc.$)
+                    .m("Reserved", uint64_t.array(2))
+                )
+                .build();
+
+            int Relationship();
+            @FFMName("ProcessorCore.Flags") byte Flags();
+            @FFMName("NumaNode.NodeNumber") int NumaNode();
+            CacheDesc Cache();
+
+            @FFMName("Cache.Level") byte Cache_Level();
+            @FFMName("Cache.Associativity") byte Cache_Associativity();
+            @FFMName("Cache.LineSize") short Cache_LineSize();
+            @FFMName("Cache.Size") int Cache_Size();
+            @FFMName("Cache.Type") int Cache_Type();
+
+            Info Relationship(int value);
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            var info  = Info.$.allocate(arena);
+            var cache = info.Cache();
+
+            var cacheOffset = Info.$.layout().byteOffset(groupElement(3/*there is padding at index 2*/), groupElement("Cache"));
+
+            assertEquals(
+                CacheDesc.$.addressOf(cache),
+                Info.$.addressOf(info) + cacheOffset
+            );
+
+            info.Relationship(2);
+            cache
+                .Level((byte)1)
+                .Associativity((byte)2)
+                .LineSize((short)64)
+                .Size(32)
+                .Type(0);
+
+            assertEquals(info.Relationship(), 2);
+
+            assertEquals(info.Flags(), (byte)1);
+            assertEquals(info.NumaNode(), ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN
+                ? Integer.reverseBytes(0x0102_4000)
+                : 0x0102_4000);
+
+            assertEquals(info.Cache().Level(), (byte)1);
+            assertEquals(info.Cache().Associativity(), (byte)2);
+            assertEquals(info.Cache().LineSize(), (short)64);
+            assertEquals(info.Cache().Size(), 32);
+            assertEquals(info.Cache().Type(), 0);
+
+            assertEquals(info.Cache_Level(), (byte)1);
+            assertEquals(info.Cache_Associativity(), (byte)2);
+            assertEquals(info.Cache_LineSize(), (short)64);
+            assertEquals(info.Cache_Size(), 32);
+            assertEquals(info.Cache_Type(), 0);
+        }
+    }
+
+    public void testRecursive() {
+        interface addrinfo {
+            StructBinder<addrinfo> $ = ffmStruct(addrinfo.class)
+                .m("ai_flags", cint)
+                .m("ai_family", cint)
+                .m("ai_socktype", cint)
+                .m("ai_protocol", cint)
+                .m("ai_addrlen", unsigned_int)
+                .m("ai_addr", opaque.typedef("struct sockaddr").p())
+                .m("ai_canonname", cchar.p())
+                .m("ai_next", opaque.typedef("struct addrinfo").p())
+                .build();
+
+            int ai_flags();
+            int ai_family();
+            int ai_socktype();
+            int ai_protocol();
+            int ai_addrlen();
+            @FFMPointer long ai_addr();
+            @MyNullable String ai_canonname();
+            @MyNullable addrinfo ai_next(); // recursive access
+
+            addrinfo ai_flags(int value);
+            addrinfo ai_family(int value);
+            addrinfo ai_socktype(int value);
+            addrinfo ai_protocol(int value);
+            addrinfo ai_addrlen(int value);
+            addrinfo ai_addr(@FFMNullable @FFMPointer long value);
+            addrinfo ai_canonname(@MyNullable MemorySegment value);
+            addrinfo ai_next(@MyNullable addrinfo value); // recursive access
+        }
+
+        Objects.requireNonNull(addrinfo.$.layout());
+
+        try (var arena = Arena.ofConfined()) {
+            var segment0 = addrinfo.$.allocateSegment(arena);
+            var segment1 = addrinfo.$.allocateSegment(arena);
+
+            var ai0 = addrinfo.$.get(segment0)
+                .ai_flags(0xDEADBEEF)
+                .ai_family(0xFEEDFACE)
+                .ai_socktype(0xBAADF00D)
+                .ai_protocol(0xCAFEBABE)
+                .ai_addrlen(0x8BADF00D)
+                .ai_addr(0x1234_5678_9ABC_DEF0L);
+
+            var ai1 = addrinfo.$.get(segment1)
+                .ai_flags(-1)
+                .ai_family(-1)
+                .ai_socktype(-1)
+                .ai_protocol(-1)
+                .ai_addrlen(-1)
+                .ai_addr(-1L);
+
+            ai0.ai_next(ai1);
+
+            var next = Objects.requireNonNull(ai0.ai_next());
+
+            assertEquals(
+                addrinfo.$.addressOf(next),
+                addrinfo.$.addressOf(ai1)
+            );
+            assertEquals(next, ai1);
+        }
+    }
+
+    public void testUnion() {
+        interface A {
+            StructBinder<A> $ = ffmStruct(A.class)
+                .m("a", int8_t)
+                .m("b", int8_t)
+                .m("c", int8_t)
+                .m("d", int8_t)
+                .build();
+
+            byte a();
+            byte b();
+            byte c();
+            byte d();
+
+            A a(byte a);
+            A b(byte b);
+            A c(byte c);
+            A d(byte d);
+
+            default void checkValues(int value) {
+                assertEquals(a(), (byte)((value >> 24) & 0xFF));
+                assertEquals(b(), (byte)((value >> 16) & 0xFF));
+                assertEquals(c(), (byte)((value >> 8) & 0xFF));
+                assertEquals(d(), (byte)((value >> 0) & 0xFF));
+            }
+        }
+
+        {
+            var layout  = A.$.layout();
+            var members = layout.memberLayouts();
+
+            assertEquals(members.size(), 4);
+
+            check(layout, members, 0, 1L, 0L, "a");
+            check(layout, members, 1, 1L, 1L, "b");
+            check(layout, members, 2, 1L, 2L, "c");
+            check(layout, members, 3, 1L, 3L, "d");
+        }
+
+        interface B {
+            UnionBinder<B> $ = ffmUnion(B.class)
+                .m("i", int32_t)
+                .m("f", float32)
+                .build();
+
+            int i();
+            float f();
+
+            B i(int i);
+            B f(float f);
+
+            default void checkValues(MemorySegment segment, int value) {
+                assertEquals(i(), value);
+                assertEquals(int32_t.get(segment, 0), value);
+                assertEquals(f(), Float.intBitsToFloat(value));
+                assertEquals(float32.get(segment, 0), Float.intBitsToFloat(value));
+            }
+
+            default void checkf() {
+                assertEquals(f(), Float.intBitsToFloat(i()));
+            }
+        }
+
+        {
+            var layout  = B.$.layout();
+            var members = layout.memberLayouts();
+
+            assertEquals(members.size(), 2);
+
+            check(layout, members, 0, 4L, 0L, "i");
+            check(layout, members, 1, 4L, 0L, "f");
+        }
+
+        interface U {
+            UnionBinder<U> $ = ffmUnion(U.class)
+                .m("A", A.$)
+                .m("B", B.$)
+                .build();
+
+            A A();
+            B B();
+
+            U A(A a);
+            U B(B b);
+        }
+
+        {
+            var layout  = U.$.layout();
+            var members = layout.memberLayouts();
+
+            assertEquals(members.size(), 2);
+            assertEquals(U.$.sizeof(), max(
+                A.$.sizeof(),
+                B.$.sizeof()
+            ));
+
+            check(layout, members, 0, A.$.sizeof(), 0L, "A");
+            check(layout, members, 1, B.$.sizeof(), 0L, "B");
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            var segment = U.$.allocateSegment(arena);
+
+            var u = U.$.get(segment);
+
+            var a = u.A();
+            var b = u.B();
+
+            a.checkValues(0);
+            b.checkValues(segment, 0x0000_0000);
+
+            var LE = ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN;
+
+            a.a((byte)0x7F);
+
+            a.checkValues(0x7F00_0000);
+            b.checkValues(segment, LE ? 0x0000_007F : 0x7F00_0000);
+
+            a
+                .a((byte)0)
+                .b((byte)0x7F);
+
+            a.checkValues(0x007F_0000);
+            b.checkValues(segment, LE ? 0x0000_7F00 : 0x007F_0000);
+
+            a
+                .b((byte)0)
+                .c((byte)0x7F);
+
+            a.checkValues(0x0000_7F00);
+            b.checkValues(segment, LE ? 0x007F_0000 : 0x0000_7F00);
+
+            a
+                .c((byte)0)
+                .d((byte)0x7F);
+
+            a.checkValues(0x0000_007F);
+            b.checkValues(segment, LE ? 0x7F00_0000 : 0x0000_007F);
+
+            b.i(0);
+            b.checkf();
+            a.checkValues(0);
+
+            b.i(LE ? 0x0000_007F : 0x7F00_0000);
+            b.checkf();
+            a.checkValues(0x7F00_0000);
+
+            b.i(LE ? 0x007F_0000 : 0x0000_7F00);
+            b.checkf();
+            a.checkValues(0x0000_7F00);
+
+            b.i(LE ? 0x0000_7F00 : 0x007F_0000);
+            b.checkf();
+            a.checkValues(0x007F_0000);
+
+            b.i(LE ? 0x7F00_0000 : 0x0000_007F);
+            b.checkf();
+            a.checkValues(0x0000_007F);
+        }
+    }
+
+    public void testUnionInheritance() {
+        interface BaseEvent {
+            int type();
+            BaseEvent type(int value);
+        }
+
+        interface CommonEvent extends BaseEvent {
+            StructBinder<CommonEvent> $ = ffmStruct(CommonEvent.class)
+                .m("type", int32_t)
+                .m("timestamp", uint64_t)
+                .build();
+
+            long timestamp();
+            CommonEvent timestamp(long value);
+        }
+
+        interface KeyboardEvent extends CommonEvent {
+            StructBinder<KeyboardEvent> $ = ffmStruct(KeyboardEvent.class)
+                .m("type", int32_t)
+                .m("timestamp", uint64_t)
+                .m("key", int32_t)
+                .m("mod", int16_t)
+                .m("down", uint8_t)
+                .build();
+
+            int key();
+            boolean down();
+
+            KeyboardEvent key(int value);
+            KeyboardEvent down(boolean value);
+        }
+
+        interface MouseEvent extends CommonEvent {
+            StructBinder<MouseEvent> $ = ffmStruct(MouseEvent.class)
+                .m("type", int32_t)
+                .m("timestamp", uint64_t)
+                .m("button", int32_t)
+                .m("down", uint8_t)
+                .m("x", float32)
+                .m("y", float32)
+                .build();
+
+            int button();
+            boolean down();
+            float x();
+            float y();
+
+            MouseEvent button(int value);
+            MouseEvent down(boolean value);
+            MouseEvent x(float value);
+            MouseEvent y(float value);
+        }
+
+        interface Event extends BaseEvent {
+            UnionBinder<Event> $ = ffmUnion(Event.class)
+                .m("type", int32_t)
+                .m("common", CommonEvent.$)
+                .m("key", KeyboardEvent.$)
+                .m("mouse", MouseEvent.$)
+                .build();
+
+            CommonEvent common();
+            KeyboardEvent key();
+            MouseEvent mouse();
+
+            Event common(CommonEvent value);
+            Event key(KeyboardEvent value);
+            Event mouse(MouseEvent value);
+        }
+
+        Objects.requireNonNull(Event.$);
+
+        try (var arena = Arena.ofConfined()) {
+            var event = Event.$.allocate(arena);
+
+            var t = System.currentTimeMillis();
+
+            event.type(0xFEEDBEEF);
+            event.common().timestamp(t);
+
+            assertEquals(event.type(), 0xFEEDBEEF);
+            assertEquals(event.common().timestamp(), t);
+
+            assertEquals(event.key().type(), event.type());
+            assertEquals(event.key().timestamp(), event.common().timestamp());
+
+            assertEquals(event.mouse().type(), event.type());
+            assertEquals(event.mouse().timestamp(), event.common().timestamp());
+        }
+    }
+
+    public void testFFMSize() {
+        try (var arena = Arena.ofConfined()) {
+            interface S8 {
+                StructBinder<S8> $ = ffmStruct(S8.class)
+                    .m("buffer", int8_t.p())
+                    .m("size", int8_t)
+                    .build();
+
+                @FFMSize("size") MemorySegment buffer();
+                byte size();
+
+                S8 buffer(MemorySegment buffer);
+                S8 size(byte size);
+            }
+
+            var s = S8.$.allocate(arena);
+
+            assertEqualsSegment(s.buffer(), MemorySegment.NULL);
+            //assertThrows(NullPointerException.class, s::buffer);
+            assertEquals(s.size(), (byte)0);
+
+            var buffer = int8_t.allocateSegment(arena, 0xFFL);
+
+            s
+                .buffer(buffer)
+                .size((byte)0xFF);
+
+            assertEqualsSegment(s.buffer(), buffer);
+            assertEquals(s.size() & 0xFF, 0xFF);
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            interface S16 {
+                StructBinder<S16> $ = ffmStruct(S16.class)
+                    .m("buffer", int8_t.p())
+                    .m("size", int16_t)
+                    .build();
+
+                @FFMSize("size") MemorySegment buffer();
+                short size();
+
+                S16 buffer(MemorySegment buffer);
+                S16 size(short size);
+            }
+
+            var s = S16.$.allocate(arena);
+
+            assertEqualsSegment(s.buffer(), MemorySegment.NULL);
+            //assertThrows(NullPointerException.class, s::buffer);
+            assertEquals(s.size(), (short)0);
+
+            var buffer = int8_t.allocateSegment(arena, 0xFFL);
+
+            s
+                .buffer(buffer)
+                .size((short)0xFF);
+
+            assertEqualsSegment(s.buffer(), buffer);
+            assertEquals(s.size() & 0xFF, 0xFF);
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            interface S32 {
+                StructBinder<S32> $ = ffmStruct(S32.class)
+                    .m("buffer", int8_t.p())
+                    .m("size", int32_t)
+                    .build();
+
+                @FFMSize("size") MemorySegment buffer();
+                int size();
+
+                S32 buffer(MemorySegment buffer);
+                S32 size(int size);
+            }
+
+            var s = S32.$.allocate(arena);
+
+            assertEqualsSegment(s.buffer(), MemorySegment.NULL);
+            //assertThrows(NullPointerException.class, s::buffer);
+            assertEquals(s.size(), 0);
+
+            var buffer = int8_t.allocateSegment(arena, 0xFFL);
+
+            s
+                .buffer(buffer)
+                .size(0xFF);
+
+            assertEqualsSegment(s.buffer(), buffer);
+            assertEquals(s.size() & 0xFF, 0xFF);
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            interface S64 {
+                StructBinder<S64> $ = ffmStruct(S64.class)
+                    .m("buffer", int8_t.p())
+                    .m("size", int64_t)
+                    .build();
+
+                @FFMSize("size") MemorySegment buffer();
+                long size();
+
+                S64 buffer(MemorySegment buffer);
+                S64 size(long size);
+            }
+
+            var s = S64.$.allocate(arena);
+
+            assertEqualsSegment(s.buffer(), MemorySegment.NULL);
+            //assertThrows(NullPointerException.class, s::buffer);
+            assertEquals(s.size(), 0L);
+
+            var buffer = int8_t.allocateSegment(arena, 0xFFL);
+
+            s
+                .buffer(buffer)
+                .size(0xFFL);
+
+            assertEqualsSegment(s.buffer(), buffer);
+            assertEquals(s.size() & 0xFFL, 0xFFL);
+        }
+    }
+
+    public void testAliasingObject() {
+        {
+            interface Invalid {
+                StructBinder<Invalid> $ = ffmStruct(Invalid.class)
+                    .m("equals", uint8_t)
+                    .build();
+
+                boolean equals();
+                @SuppressWarnings("CovariantEquals")
+                Invalid equals(boolean value);
+            }
+            assertThrows(() -> Objects.requireNonNull(Invalid.$));
+        }
+
+        {
+            interface Valid {
+                StructBinder<Valid> $ = ffmStruct(Valid.class)
+                    .m("equals", uint8_t)
+                    .build();
+
+                @FFMName("equals")
+                boolean myEquals();
+
+                @FFMName("equals")
+                Valid myEquals(boolean value);
+            }
+            Objects.requireNonNull(Valid.$);
+        }
+
+        {
+            interface Invalid {
+                StructBinder<Invalid> $ = ffmStruct(Invalid.class)
+                    .m("hashCode", int32_t)
+                    .build();
+
+                int hashCode();
+                Invalid hashCode(int value);
+            }
+            assertThrows(() -> Objects.requireNonNull(Invalid.$));
+        }
+
+        {
+            interface Valid {
+                StructBinder<Valid> $ = ffmStruct(Valid.class)
+                    .m("hashCode", int32_t)
+                    .build();
+
+                @FFMName("hashCode")
+                int myHashCode();
+
+                @FFMName("hashCode")
+                Valid myHashCode(int value);
+            }
+            Objects.requireNonNull(Valid.$);
+        }
+
+        {
+            @FFMCharset(FFMCharset.Type.UTF8)
+            interface Invalid {
+                StructBinder<Invalid> $ = ffmStruct(Invalid.class)
+                    .m("toString", int8_t.array(128))
+                    .build();
+
+                String toString();
+                Invalid toString(String value);
+            }
+            assertThrows(() -> Objects.requireNonNull(Invalid.$));
+        }
+
+        {
+            @FFMCharset(FFMCharset.Type.UTF8)
+            interface Valid {
+                StructBinder<Valid> $ = ffmStruct(Valid.class)
+                    .m("toString", int8_t.array(128))
+                    .build();
+
+                @FFMName("toString")
+                String myToString();
+
+                @FFMName("toString")
+                Valid myToString(String value);
+            }
+            Objects.requireNonNull(Valid.$);
+        }
+    }
+
+    public void testEquals() {
+        try (var arena = Arena.ofConfined()) {
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("x", int32_t)
+                    .m("y", int32_t)
+                    .build();
+
+                int x();
+                int y();
+
+                S x(int x);
+                S y(int y);
+            }
+
+            var segment = S.$.allocateSegment(arena, 2);
+
+            var a = S.$.getAtIndex(segment, 0);
+            var b = S.$.getAtIndex(segment, 1);
+
+            assertNotEquals(S.$.addressOf(a), S.$.addressOf(b));
+            assertNotSame(a, b);
+
+            {
+                assertEquals(a.x(), 0);
+                assertEquals(a.y(), 0);
+
+                assertEquals(b.x(), 0);
+                assertEquals(b.y(), 0);
+
+                assertEquals(a, b);
+            }
+
+            {
+                a.x(0xDEADBEEF);
+                a.y(0xFEEDFACE);
+
+                assertEquals(a.x(), 0xDEADBEEF);
+                assertEquals(a.y(), 0xFEEDFACE);
+
+                assertEquals(b.x(), 0);
+                assertEquals(b.y(), 0);
+
+                assertNotEquals(a, b);
+            }
+
+            {
+                b.x(0xDEADBEEF);
+                b.y(0xFEEDFACE);
+
+                assertEquals(a.x(), 0xDEADBEEF);
+                assertEquals(a.y(), 0xFEEDFACE);
+
+                assertEquals(b.x(), 0xDEADBEEF);
+                assertEquals(b.y(), 0xFEEDFACE);
+
+                assertEquals(a, b);
+            }
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("x", int32_t)
+                    .m("y", int32_t)
+                    .withEquals((s1, o) -> {
+                        var s2 = (S)o;
+                        return s1.x() == s2.x(); // intentionally only x
+                    })
+                    .build();
+
+                int x();
+                int y();
+
+                S x(int x);
+                S y(int y);
+            }
+
+            var segment = S.$.allocateSegment(arena, 2);
+
+            var a = S.$.getAtIndex(segment, 0);
+            var b = S.$.getAtIndex(segment, 1);
+
+            assertNotEquals(S.$.addressOf(a), S.$.addressOf(b));
+            assertNotSame(a, b);
+
+            {
+                assertEquals(a.x(), 0);
+                assertEquals(a.y(), 0);
+
+                assertEquals(b.x(), 0);
+                assertEquals(b.y(), 0);
+
+                assertEquals(a, b);
+            }
+
+            {
+                a.x(0xDEADBEEF);
+                a.y(0xFEEDFACE);
+
+                assertEquals(a.x(), 0xDEADBEEF);
+                assertEquals(a.y(), 0xFEEDFACE);
+
+                assertEquals(b.x(), 0);
+                assertEquals(b.y(), 0);
+
+                assertNotEquals(a, b);
+            }
+
+            {
+                b.x(0xDEADBEEF);
+
+                assertEquals(a.x(), 0xDEADBEEF);
+                assertEquals(a.y(), 0xFEEDFACE);
+
+                assertEquals(b.x(), 0xDEADBEEF);
+                assertEquals(b.y(), 0);
+
+                assertEquals(a, b);
+            }
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("x", int32_t)
+                    .padding(8)
+                    .m("y", int32_t)
+                    .build();
+
+                int x();
+                int y();
+            }
+
+            var layout = S.$.layout();
+
+            var paddingOffset = layout.byteOffset(groupElement(1));
+
+            var segment = S.$.allocateSegment(arena, 2);
+
+            // pollute padding bytes with random data
+
+            jint.set(segment, paddingOffset, 0xDEADBEEF);
+            jint.set(segment, paddingOffset + 4, 0xCAFEBABE);
+
+            jint.set(segment, S.$.sizeof() + paddingOffset, 0xFEEDFACE);
+            jint.set(segment, S.$.sizeof() + paddingOffset + 4, 0xBAADF00D);
+
+            // verify that equals uses getters only
+
+            assertEquals(S.$.getAtIndex(segment, 0), S.$.getAtIndex(segment, 1));
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("x", int32_t)
+                    .padding(8)
+                    .m("y", int32_t)
+                    .withEquals((it, o) -> {
+                        var ot = (S)o;
+                        return S.$.asSegment(it).mismatch(S.$.asSegment(ot)) == -1L;
+                    })
+                    .build();
+
+                int x();
+                int y();
+            }
+
+            var layout = S.$.layout();
+
+            var paddingOffset = layout.byteOffset(groupElement(1));
+
+            var segment = S.$.allocateSegment(arena, 2);
+
+            // pollute padding bytes with random data
+
+            jint.set(segment, paddingOffset, 0xDEADBEEF);
+            jint.set(segment, paddingOffset + 4, 0xCAFEBABE);
+
+            jint.set(segment, S.$.sizeof() + paddingOffset, 0xFEEDFACE);
+            jint.set(segment, S.$.sizeof() + paddingOffset + 4, 0xBAADF00D);
+
+            // verify that equals fails due to padding mismatch
+
+            assertNotEquals(S.$.getAtIndex(segment, 0), S.$.getAtIndex(segment, 1));
+        }
+    }
+
+    public void testHashCode() {
+        try (var arena = Arena.ofConfined()) {
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("x", int32_t)
+                    .m("y", int32_t)
+                    .build();
+
+                int x();
+                int y();
+
+                S x(int x);
+                S y(int y);
+            }
+
+            var segment = S.$.allocateSegment(arena, 2);
+
+            var a = S.$.getAtIndex(segment, 0);
+            var b = S.$.getAtIndex(segment, 1);
+
+            assertNotEquals(S.$.addressOf(a), S.$.addressOf(b));
+            assertNotSame(a, b);
+
+            {
+                assertEquals(a.x(), 0);
+                assertEquals(a.y(), 0);
+
+                assertEquals(b.x(), 0);
+                assertEquals(b.y(), 0);
+
+                assertEquals(a.hashCode(), b.hashCode());
+            }
+
+            {
+                a.x(0xDEADBEEF);
+                a.y(0xFEEDFACE);
+
+                assertEquals(a.x(), 0xDEADBEEF);
+                assertEquals(a.y(), 0xFEEDFACE);
+
+                assertEquals(b.x(), 0);
+                assertEquals(b.y(), 0);
+
+                assertNotEquals(a.hashCode(), b.hashCode());
+            }
+
+            {
+                b.x(0xDEADBEEF);
+                b.y(0xFEEDFACE);
+
+                assertEquals(a.x(), 0xDEADBEEF);
+                assertEquals(a.y(), 0xFEEDFACE);
+
+                assertEquals(b.x(), 0xDEADBEEF);
+                assertEquals(b.y(), 0xFEEDFACE);
+
+                assertEquals(a.hashCode(), b.hashCode());
+            }
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("x", int32_t)
+                    .m("y", int32_t)
+                    .withHashCode((s) -> Integer.hashCode(s.x())) // intentionally only x
+                    .build();
+
+                int x();
+                int y();
+
+                S x(int x);
+                S y(int y);
+            }
+
+            var segment = S.$.allocateSegment(arena, 2);
+
+            var a = S.$.getAtIndex(segment, 0);
+            var b = S.$.getAtIndex(segment, 1);
+
+            assertNotEquals(S.$.addressOf(a), S.$.addressOf(b));
+            assertNotSame(a, b);
+
+            {
+                assertEquals(a.x(), 0);
+                assertEquals(a.y(), 0);
+
+                assertEquals(b.x(), 0);
+                assertEquals(b.y(), 0);
+
+                assertEquals(a.hashCode(), b.hashCode());
+            }
+
+            {
+                a.x(0xDEADBEEF);
+                a.y(0xFEEDFACE);
+
+                assertEquals(a.x(), 0xDEADBEEF);
+                assertEquals(a.y(), 0xFEEDFACE);
+
+                assertEquals(b.x(), 0);
+                assertEquals(b.y(), 0);
+
+                assertNotEquals(a.hashCode(), b.hashCode());
+            }
+
+            {
+                b.x(0xDEADBEEF);
+
+                assertEquals(a.x(), 0xDEADBEEF);
+                assertEquals(a.y(), 0xFEEDFACE);
+
+                assertEquals(b.x(), 0xDEADBEEF);
+                assertEquals(b.y(), 0);
+
+                assertEquals(a.hashCode(), b.hashCode());
+            }
+        }
+    }
+
+    public void testToString() {
+        try (var arena = Arena.ofConfined()) {
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("x", int32_t)
+                    .m("y", int32_t)
+                    .m("pointer", int32_t.p())
+                    .build();
+
+                int x();
+                int y();
+                MemorySegment pointer();
+
+                S x(int x);
+                S y(int y);
+                S pointer(MemorySegment pointer);
+            }
+
+            var segment = S.$.allocateSegment(arena);
+
+            var s = S.$.get(segment);
+
+            assertEquals(s.x(), 0);
+            assertEquals(s.y(), 0);
+            assertEqualsSegment(s.pointer(), MemorySegment.NULL);
+            //assertThrows(NullPointerException.class, s::pointer);
+            assertEquals(s.toString(), "S[x=0, y=0, pointer=0x0]");
+
+            s
+                .x(12345)
+                .y(54321)
+                .pointer(segment);
+
+            var matcher = Pattern.compile("(?<=address: )0x[0-9a-f]+")
+                .matcher(segment.toString());
+
+            assertTrue(matcher.find());
+            assertEquals(s.toString(), "S[x=12345, y=54321, pointer=" + matcher.group(0) + "]");
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("x", int32_t)
+                    .m("y", int32_t)
+                    .m("pointer", int32_t.array(16).p())
+                    .withToString(s -> "My S Rendering: x=" + s.x() + ", y=" + s.y() + ", pointer=" + s.pointer())
+                    .build();
+
+                int x();
+                int y();
+                MemorySegment pointer();
+
+                S x(int x);
+                S y(int y);
+                S pointer(MemorySegment pointer);
+            }
+
+            var s = S.$.allocate(arena);
+
+            assertEquals(s.x(), 0);
+            assertEquals(s.y(), 0);
+            assertEqualsSegment(s.pointer(), MemorySegment.NULL);
+            //assertThrows(NullPointerException.class, s::pointer);
+            assertEquals(s.toString(), "My S Rendering: x=0, y=0, pointer=" + MemorySegment.NULL);
+
+            var buffer = int32_t.allocateSegment(arena, 16);
+
+            s
+                .x(12345)
+                .y(54321)
+                .pointer(buffer);
+
+            assertEquals(s.toString(), "My S Rendering: x=12345, y=54321, pointer=" + buffer);
+        }
+    }
+
+    public void testFFMCanonical() {
+        {
+            // test multiple getters without FFMCanonical
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("text", int8_t.array(256))
+                    .build();
+
+                @FFMName("text") String foo();
+                @FFMName("text") MemorySegment bar();
+            }
+            assertThrows(() -> Objects.requireNonNull(S.$));
+        }
+        {
+            // test multiple getters without FFMCanonical, but custom equals/hashCode/toString
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("text", int8_t.array(256))
+                    .withEquals((s1, o) -> {
+                        var s2 = (S)o;
+                        return s1.foo().equals(s2.foo());
+                    })
+                    .withHashCode(it -> it.foo().hashCode())
+                    .withToString(S::foo)
+                    .build();
+
+                @FFMName("text") String foo();
+                @FFMName("text") MemorySegment bar();
+            }
+            Objects.requireNonNull(S.$);
+        }
+        {
+            // test multiple getters with multiple FFMCanonical
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("text", int8_t.array(256))
+                    .build();
+
+                @FFMCanonical @FFMName("text") String foo();
+                @FFMCanonical @FFMName("text") MemorySegment bar();
+            }
+            assertThrows(() -> Objects.requireNonNull(S.$));
+        }
+        try (var arena = Arena.ofConfined()) {
+            // test multiple getters with single FFMCanonical (1)
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("text", int8_t.array(256))
+                    .build();
+
+                @FFMCanonical @FFMName("text") String foo();
+                @FFMName("text") MemorySegment bar();
+            }
+            Objects.requireNonNull(S.$);
+
+            assertEquals("S[text=]", S.$.allocate(arena).toString());
+        }
+        try (var arena = Arena.ofConfined()) {
+            // test multiple getters with single FFMCanonical (2)
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("text", int8_t.array(256))
+                    .build();
+
+                @FFMName("text") String foo();
+                @FFMCanonical @FFMName("text") MemorySegment bar();
+            }
+            Objects.requireNonNull(S.$);
+
+            var segment = S.$.allocateSegment(arena);
+            assertEquals("S[text=MemorySegment{ kind: native, address: 0x" + Long.toHexString(segment.address()) + ", byteSize: 256 }]", S.$.get(segment).toString());
+        }
+    }
+
+    public void testBoolean() {
+        {
+            interface Invalid {
+                StructBinder<Invalid> $ = ffmStruct(Invalid.class)
+                    .m("b", int64_t) // supported up to 32-bits
+                    .build();
+
+                boolean b();
+            }
+
+            assertThrows(() -> Objects.requireNonNull(Invalid.$));
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("a", int8_t)
+                    .m("b", int16_t)
+                    .m("c", int32_t)
+                    .build();
+
+                boolean a();
+                boolean b();
+                boolean c();
+
+                S a(boolean a);
+                S b(boolean b);
+                S c(boolean c);
+            }
+
+            var layout = S.$.layout();
+
+            var members = layout.memberLayouts();
+
+            assertEquals(members.size(), 4);
+
+            check(layout, members, 0, 1L, 0L, "a");
+            check(layout, members, 1, 1L, 1L); // automatic padding element
+            check(layout, members, 2, 2L, 2L, "b");
+            check(layout, members, 3, 4L, 4L, "c");
+
+            assertEquals(S.$.alignof(), 4L);
+            assertEquals(S.$.sizeof(), 8L);
+
+            var segment = S.$.allocateSegment(arena);
+
+            var s = S.$.get(segment);
+
+            assertFalse(s.a());
+            assertFalse(s.b());
+            assertFalse(s.c());
+
+            s.a(true);
+
+            assertTrue(s.a());
+            assertFalse(s.b());
+            assertFalse(s.c());
+            assertEquals(int64_t.get(segment, 0L), 0x0000_0000_0000_0001L);
+
+            int8_t.set(segment, 0L, (byte)0xFF); // dirty bits
+            s.a(true);
+            assertEquals(int64_t.get(segment, 0L), 0x0000_0000_0000_0001L);
+
+            s
+                .a(false)
+                .b(true);
+
+            assertFalse(s.a());
+            assertTrue(s.b());
+            assertFalse(s.c());
+            assertEquals(int64_t.get(segment, 0L), 0x0000_0000_0001_0000L);
+
+            int16_t.set(segment, 2L, (short)0xFFFF); // dirty bits
+            s.b(true);
+            assertEquals(int64_t.get(segment, 0L), 0x0000_0000_0001_0000L);
+
+            s
+                .b(false)
+                .c(true);
+
+            assertFalse(s.a());
+            assertFalse(s.b());
+            assertTrue(s.c());
+            assertEquals(int64_t.get(segment, 0L), 0x0000_0001_0000_0000L);
+
+            int32_t.set(segment, 4L, 0xFFFF_FFFF); // dirty bits
+            s.c(true);
+            assertEquals(int64_t.get(segment, 0L), 0x0000_0001_0000_0000L);
+        }
+    }
+
+    public void testCLong() {
+        interface S {
+            StructBinder<S> $ = ffmStruct(S.class)
+                .m("x", clong)
+                .m("y", clong)
+                .build();
+
+            long x();
+            long y();
+
+            S x(long x);
+            S y(long y);
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            var layout = S.$.layout();
+
+            var members = layout.memberLayouts();
+
+            assertEquals(members.size(), 2);
+
+            check(layout, members, 0, Pointer.CLONG_SIZE, 0L, "x");
+            check(layout, members, 1, Pointer.CLONG_SIZE, Pointer.CLONG_SIZE, "y");
+
+            assertEquals(S.$.alignof(), Pointer.CLONG_SIZE);
+            assertEquals(S.$.sizeof(), 2 * Pointer.CLONG_SIZE);
+
+            var s = S.$.allocate(arena);
+
+            assertEquals(s.x(), 0L);
+            assertEquals(s.y(), 0L);
+
+            s
+                .x(0x7FFF_FFFF_7FFF_FFFFL)
+                .y(0xFFFF_FFFF_FFFF_FFFFL);
+
+            assertEquals(s.x(), Pointer.CLONG_SIZE == 8 ? 0x7FFF_FFFF_7FFF_FFFFL : 0x7FFF_FFFF);
+            assertEquals(s.y(), Pointer.CLONG_SIZE == 8 ? 0xFFFF_FFFF_FFFF_FFFFL : 0xFFFF_FFFF);
+        }
+    }
+
+    public void testString() {
+        try (var arena = Arena.ofConfined()) {
+            @FFMCharset(FFMCharset.Type.UTF8)
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("a", int8_t.array(8))
+                    .m("b", int8_t.array(8))
+                    .build();
+
+                String a();
+                String b();
+
+                S a(String value);
+                S b(String value);
+            }
+
+            var s = S.$.allocate(arena);
+
+            assertEquals(s.a(), "");
+            assertEquals(s.b(), "");
+
+            assertEquals(s.toString(), "S[a=, b=]");
+
+            assertThrows(BufferOverflowException.class, () -> s.a("hello world!"));
+
+            s
+                .a("hello")
+                .b("world!");
+
+            assertEquals(s.a(), "hello");
+            assertEquals(s.b(), "world!");
+
+            assertEquals(s.toString(), "S[a=hello, b=world!]");
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            @FFMCharset(FFMCharset.Type.UTF8)
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("a", int8_t.array(256))
+                    .m("b", int8_t.array(256))
+                    .withToString(it -> it.a() + " " + it.b())
+                    .build();
+
+                String a();
+                String b();
+
+                S a(String value);
+                S b(String value);
+            }
+
+            var s = S.$.allocate(arena);
+
+            assertEquals(s.a(), "");
+            assertEquals(s.b(), "");
+
+            assertEquals(s.toString(), " ");
+
+            s
+                .a("hello")
+                .b("world!");
+
+            assertEquals(s.a(), "hello");
+            assertEquals(s.b(), "world!");
+
+            assertEquals(s.toString(), "hello world!");
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            @FFMCharset(FFMCharset.Type.UTF8)
+            interface S {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("pointerNT", int8_t.p())
+                    .m("pointer", int8_t.p())
+                    .m("pointerLength", int32_t)
+
+                    .m("arrayNT", int8_t.array(256))
+                    .m("array", int8_t.array(256))
+                    .m("arrayLength", int32_t)
+
+                    .build();
+
+                @MyNullable String pointerNT();
+                @FFMSize("pointerLength") @MyNullable String pointer();
+                int pointerLength();
+
+                String arrayNT();
+                @FFMSize("arrayLength") String array();
+                int arrayLength();
+
+                // TODO:
+                //@NullTerminated @FFMName("pointerNT") MemorySegment pointerNTSegment();
+                @FFMSize("pointerLength") @FFMName("pointer") MemorySegment pointerSegment();
+
+                // TODO:
+                //@NullTerminated @FFMName("arrayNT") MemorySegment arrayNTSegment();
+                @FFMSize("arrayLength") @FFMName("array") MemorySegment arraySegment();
+
+                S pointerNT(MemorySegment value);
+                S pointer(MemorySegment value);
+                S pointerLength(int value);
+
+                S arrayNT(String value);
+                S array(@FFMSize("arrayLength") String value);
+                S arrayLength(int value);
+            }
+
+            var layout = S.$.layout();
+
+            var members = layout.memberLayouts();
+
+            assertEquals(members.size(), 6);
+            assertEquals(S.$.sizeof(), uintptr_t.layout().byteSize() * 2 + 4L + 256L + 256L + 4L);
+            assertEquals(S.$.alignof(), uintptr_t.layout().byteAlignment());
+
+            var s = S.$.allocate(arena);
+
+            var helloNT = arena.allocateFrom("γεια σου", StandardCharsets.UTF_8);
+            var worldNT = arena.allocateFrom("κόσμε!", StandardCharsets.UTF_8);
+
+            var hello = helloNT.reinterpret(helloNT.byteSize() - 1);
+            var world = worldNT.reinterpret(worldNT.byteSize() - 1);
+
+            {
+                //noinspection DataFlowIssue
+                assertNull(s.pointerNT());
+                assertNull(s.pointer());
+                assertEquals(s.pointerLength(), 0);
+                assertEqualsSegment(s.pointerSegment(), MemorySegment.NULL);
+                //assertThrows(NullPointerException.class, s::pointerSegment);
+
+                s.pointerNT(helloNT);
+
+                assertEquals(s.pointerNT(), "γεια σου");
+                assertNull(s.pointer());
+                assertEquals(s.pointerLength(), 0);
+                assertEqualsSegment(s.pointerSegment(), MemorySegment.NULL);
+                //assertThrows(NullPointerException.class, s::pointerSegment);
+
+                s.pointer(hello);
+
+                assertEquals(s.pointerNT(), "γεια σου");
+                assertEquals(s.pointer(), "");
+                assertEquals(s.pointerLength(), 0);
+                assertEquals(s.pointerSegment().byteSize(), 0L);
+
+                s.pointerLength((int)hello.byteSize());
+
+                assertEquals(s.pointerNT(), "γεια σου");
+                assertEquals(s.pointer(), "γεια σου");
+                assertEquals(s.pointerLength(), (int)hello.byteSize());
+                assertEquals(s.pointerSegment().address(), hello.address());
+                assertEquals(s.pointerSegment().byteSize(), hello.byteSize());
+            }
+
+            {
+                assertEquals(
+                    s.arraySegment().address(),
+                    S.$.addressOf(s) + layout.byteOffset(groupElement("array"))
+                );
+
+                assertEquals(s.arrayNT(), "");
+                assertEquals(s.array(), "");
+                assertEquals(s.arrayLength(), 0);
+                assertEquals(s.arraySegment().byteSize(), 0L);
+
+                s.arrayNT("κόσμε!");
+
+                assertEquals(s.arrayNT(), "κόσμε!");
+                assertEquals(s.array(), "");
+                assertEquals(s.arrayLength(), 0);
+                assertEquals(s.arraySegment().byteSize(), 0L);
+
+                s.array("κόσμε!");
+
+                assertEquals(s.arrayNT(), "κόσμε!");
+                assertEquals(s.array(), "");
+                assertEquals(s.arrayLength(), 0);
+                assertEquals(s.arraySegment().byteSize(), 0L);
+
+                s.arrayLength((int)world.byteSize());
+
+                assertEquals(s.arrayNT(), "κόσμε!");
+                assertEquals(s.array(), "κόσμε!");
+                assertEquals(s.arrayLength(), (int)world.byteSize());
+                assertEquals(s.arraySegment().byteSize(), world.byteSize());
+            }
+
+            assertEquals(
+                s.toString(),
+                "S[pointerNT=0x" + Long.toHexString(helloNT.address()) + ", pointer=0x" + Long.toHexString(helloNT.address()) + ", pointerLength=" + hello.byteSize() + ", arrayNT=κόσμε!, array=κόσμε!, arrayLength=" + world.byteSize() + "]"
+            );
+        }
+    }
+
+    private static final Mapping.Byte Uint8 = uint8_t.typedef("Uint8");
+
+    public void testFFMByValue() {
+        interface SDL_GUID {
+            StructBinder<SDL_GUID> $ = ffmStruct(SDL_GUID.class)
+                .m("data", Uint8.array(16))
+                .build();
+
+            MemorySegment data();
+        }
+
+        @FFMCharset(FFMCharset.Type.US_ASCII)
+        @FFMPrefix("SDL_")
+        @FFMFunctionAddress
+        interface SDL_guid_h {
+            @FFMByValue SDL_GUID StringToGUID(MemorySegment SDL_StringToGUID, SegmentAllocator allocator, String pchGUID);
+            void GUIDToString(MemorySegment SDL_GUIDToString, @FFMByValue SDL_GUID guid, MemorySegment pszGUID, int cbGUID);
+        }
+
+        var SDL = ffmGenerate(SDL_guid_h.class);
+
+        var SDL_StringToGUID = MemorySegment.ofAddress(SDLGUID.Functions.StringToGUID);
+        var SDL_GUIDToString = MemorySegment.ofAddress(SDLGUID.Functions.GUIDToString);
+
+        try (var arena = Arena.ofConfined()) {
+            var guid = SDL.StringToGUID(SDL_StringToGUID, arena, "1234567890abcdef1234567890abcdef");
+
+            assertEquals(
+                uint64_t.get(guid.data(), 0L),
+                uint64_t.get(guid.data(), 8L)
+            );
+
+            var segment = Uint8.allocateSegment(arena, 33);
+
+            SDL.GUIDToString(SDL_GUIDToString, guid, segment, (int)segment.byteSize());
+
+            assertEquals(segment.getString(0L), "1234567890abcdef1234567890abcdef");
+        }
+    }
+
+    public void testCapabilityPointer() {
+        {
+            // test aliasing
+            interface Invalid extends Pointer {
+                StructBinder<Invalid> $ = ffmStruct(Invalid.class)
+                    .m("address", uint64_t)
+                    .build();
+
+                Invalid address(long value);
+            }
+            assertThrows(() -> Objects.requireNonNull(Invalid.$));
+
+            interface Valid extends Pointer {
+                StructBinder<Valid> $ = ffmStruct(Valid.class)
+                    .m("address", uint64_t)
+                    .build();
+
+                @FFMName("address")
+                long myAddress();
+
+                @FFMName("address")
+                Valid myAddress(long value);
+            }
+            Objects.requireNonNull(Valid.$);
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            interface S extends Pointer {
+                StructBinder<S> $ = ffmStruct(S.class)
+                    .m("a", int32_t)
+                    .m("b", int32_t)
+                    .build();
+            }
+
+            var segment = S.$.allocateSegment(arena);
+
+            var s = S.$.get(segment);
+
+            assertEquals(s.address(), segment.address());
+        }
+    }
+
+    public void testCapabilityNativeResource() {
+        interface S extends NativeResource {
+            StructBinder<S> $ = ffmStruct(S.class)
+                .m("a", int32_t)
+                .m("b", int32_t)
+                .build();
+
+            int a();
+            int b();
+
+            S a(int a);
+            S b(int b);
+        }
+
+        var memory = nmemAlloc(S.$.sizeof());
+
+        try (var s = S.$.ofAddress(memory)) {
+            s.a(42);
+            s.b(84);
+
+            assertEquals(s.a(), 42);
+            assertEquals(s.b(), 84);
+        }
+    }
+
+    public void testCapabilityBinder() {
+        interface S extends Struct<S> {
+            StructBinder<S> $ = ffmStruct(S.class)
+                .m("a", int32_t)
+                .m("b", int32_t)
+                .build();
+
+            int a();
+            int b();
+
+            S a(int a);
+            S b(int b);
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            var segment = S.$.allocateSegment(arena, 2);
+
+            var s = S.$.get(segment);
+            var o = S.$.getAtIndex(segment, 1L);
+
+            assertEquals(s.address(), segment.address());
+            assertEquals(s.layout(), S.$.layout());
+            assertEquals(s.sizeof(), S.$.sizeof());
+            assertEquals(s.alignof(), S.$.alignof());
+            assertEqualsSegment(s.asSegment(), S.$.asSegment(s));
+            assertEqualsSegment(s.asSegment(), segment.asSlice(0L, s.sizeof()));
+
+            s
+                .a(0xFEEDBEEF)
+                .b(0xBAADF00D)
+                .clear();
+
+            assertEquals(s.a(), 0);
+            assertEquals(s.b(), 0);
+
+            o
+                .a(0xFEEDBEEF)
+                .b(0xBAADF00D);
+            s.copyFrom(o);
+
+            assertEquals(s.a(), 0xFEEDBEEF);
+            assertEquals(s.b(), 0xBAADF00D);
+
+            s.clear();
+            o.set(segment);
+
+            assertEquals(s.a(), 0xFEEDBEEF);
+            assertEquals(s.b(), 0xBAADF00D);
+
+            s.clear();
+            o.set(segment, 0L);
+
+            assertEquals(s.a(), 0xFEEDBEEF);
+            assertEquals(s.b(), 0xBAADF00D);
+
+            s.clear();
+            o.setAtIndex(segment, 0L);
+
+            assertEquals(s.a(), 0xFEEDBEEF);
+            assertEquals(s.b(), 0xBAADF00D);
+        }
+    }
+
+    public void testNullable() {
+        interface S {
+            StructBinder<S> $ = ffmStruct(S.class)
+                .m("a", int32_t.p())
+                .m("b", int32_t.p())
+                .build();
+
+            MemorySegment a();
+            @MyNullable MemorySegment b();
+
+            S a(@FFMNullable MemorySegment a);
+            S b(@MyNullable MemorySegment b);
+        }
+
+        try (var arena = Arena.ofConfined()) {
+            var s = S.$.allocate(arena);
+
+            assertEqualsSegment(s.a(), MemorySegment.NULL);
+            assertNull(s.b());
+
+            assertThrows(NullPointerException.class, () -> s.a(null));
+            s
+                .a(MemorySegment.NULL)
+                .b(null)
+                .b(MemorySegment.NULL);
+        }
+    }
+
+}

@@ -97,6 +97,7 @@ public class FMOD {
             System_CreateStream               = apiGetFunctionAddress(FMOD, "FMOD_System_CreateStream"),
             System_CreateDSP                  = apiGetFunctionAddress(FMOD, "FMOD_System_CreateDSP"),
             System_CreateDSPByType            = apiGetFunctionAddress(FMOD, "FMOD_System_CreateDSPByType"),
+            System_CreateDSPConnection        = apiGetFunctionAddressOptional(FMOD, "FMOD_System_CreateDSPConnection"),
             System_CreateChannelGroup         = apiGetFunctionAddress(FMOD, "FMOD_System_CreateChannelGroup"),
             System_CreateSoundGroup           = apiGetFunctionAddress(FMOD, "FMOD_System_CreateSoundGroup"),
             System_CreateReverb3D             = apiGetFunctionAddress(FMOD, "FMOD_System_CreateReverb3D"),
@@ -337,6 +338,7 @@ public class FMOD {
             DSP_Release                       = apiGetFunctionAddress(FMOD, "FMOD_DSP_Release"),
             DSP_GetSystemObject               = apiGetFunctionAddress(FMOD, "FMOD_DSP_GetSystemObject"),
             DSP_AddInput                      = apiGetFunctionAddress(FMOD, "FMOD_DSP_AddInput"),
+            DSP_AddInputPreallocated          = apiGetFunctionAddressOptional(FMOD, "FMOD_DSP_AddInputPreallocated"),
             DSP_DisconnectFrom                = apiGetFunctionAddress(FMOD, "FMOD_DSP_DisconnectFrom"),
             DSP_DisconnectAll                 = apiGetFunctionAddress(FMOD, "FMOD_DSP_DisconnectAll"),
             DSP_GetNumInputs                  = apiGetFunctionAddress(FMOD, "FMOD_DSP_GetNumInputs"),
@@ -421,9 +423,9 @@ public class FMOD {
         return FMOD;
     }
 
-    public static final int FMOD_VERSION = 0x20307;
+    public static final int FMOD_VERSION = 0x20311;
 
-    public static final int FMOD_BUILDNUMBER = 150747;
+    public static final int FMOD_BUILDNUMBER = 158528;
 
     public static final int
         FMOD_DEBUG_LEVEL_NONE          = 0x0,
@@ -434,6 +436,7 @@ public class FMOD {
         FMOD_DEBUG_TYPE_FILE           = 0x200,
         FMOD_DEBUG_TYPE_CODEC          = 0x400,
         FMOD_DEBUG_TYPE_TRACE          = 0x800,
+        FMOD_DEBUG_TYPE_VIRTUAL        = 0x1000,
         FMOD_DEBUG_DISPLAY_TIMESTAMPS  = 0x10000,
         FMOD_DEBUG_DISPLAY_LINENUMBERS = 0x20000,
         FMOD_DEBUG_DISPLAY_THREAD      = 0x40000;
@@ -965,7 +968,8 @@ public class FMOD {
         FMOD_DSPCONNECTION_TYPE_SIDECHAIN      = 1,
         FMOD_DSPCONNECTION_TYPE_SEND           = 2,
         FMOD_DSPCONNECTION_TYPE_SEND_SIDECHAIN = 3,
-        FMOD_DSPCONNECTION_TYPE_MAX            = 4;
+        FMOD_DSPCONNECTION_TYPE_PREALLOCATED   = 4,
+        FMOD_DSPCONNECTION_TYPE_MAX            = 5;
 
     public static final int
         FMOD_TAGTYPE_UNKNOWN       = 0,
@@ -1486,7 +1490,8 @@ public class FMOD {
         FMOD_DSP_PARAMETER_DATA_TYPE_FFT                = -4,
         FMOD_DSP_PARAMETER_DATA_TYPE_3DATTRIBUTES_MULTI = -5,
         FMOD_DSP_PARAMETER_DATA_TYPE_ATTENUATION_RANGE  = -6,
-        FMOD_DSP_PARAMETER_DATA_TYPE_DYNAMIC_RESPONSE   = -7;
+        FMOD_DSP_PARAMETER_DATA_TYPE_DYNAMIC_RESPONSE   = -7,
+        FMOD_DSP_PARAMETER_DATA_TYPE_FINITE_LENGTH      = -8;
 
     protected FMOD() {
         throw new UnsupportedOperationException();
@@ -2686,6 +2691,27 @@ public class FMOD {
             check(dsp, 1);
         }
         return nFMOD_System_CreateDSPByType(system, type, memAddress(dsp));
+    }
+
+    // --- [ FMOD_System_CreateDSPConnection ] ---
+
+    /** {@code FMOD_RESULT FMOD_System_CreateDSPConnection(FMOD_SYSTEM * system, FMOD_DSPCONNECTION_TYPE type, FMOD_DSPCONNECTION ** connection)} */
+    public static int nFMOD_System_CreateDSPConnection(long system, int type, long connection) {
+        long __functionAddress = Functions.System_CreateDSPConnection;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(system);
+        }
+        return callPPI(system, type, connection, __functionAddress);
+    }
+
+    /** {@code FMOD_RESULT FMOD_System_CreateDSPConnection(FMOD_SYSTEM * system, FMOD_DSPCONNECTION_TYPE type, FMOD_DSPCONNECTION ** connection)} */
+    @NativeType("FMOD_RESULT")
+    public static int FMOD_System_CreateDSPConnection(@NativeType("FMOD_SYSTEM *") long system, @NativeType("FMOD_DSPCONNECTION_TYPE") int type, @NativeType("FMOD_DSPCONNECTION **") PointerBuffer connection) {
+        if (CHECKS) {
+            check(connection, 1);
+        }
+        return nFMOD_System_CreateDSPConnection(system, type, memAddress(connection));
     }
 
     // --- [ FMOD_System_CreateChannelGroup ] ---
@@ -6853,6 +6879,28 @@ public class FMOD {
             checkSafe(connection, 1);
         }
         return nFMOD_DSP_AddInput(dsp, input, memAddressSafe(connection), type);
+    }
+
+    // --- [ FMOD_DSP_AddInputPreallocated ] ---
+
+    /** {@code FMOD_RESULT FMOD_DSP_AddInputPreallocated(FMOD_DSP * dsp, FMOD_DSP * input, FMOD_DSPCONNECTION ** connection)} */
+    public static int nFMOD_DSP_AddInputPreallocated(long dsp, long input, long connection) {
+        long __functionAddress = Functions.DSP_AddInputPreallocated;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(dsp);
+            check(input);
+        }
+        return callPPPI(dsp, input, connection, __functionAddress);
+    }
+
+    /** {@code FMOD_RESULT FMOD_DSP_AddInputPreallocated(FMOD_DSP * dsp, FMOD_DSP * input, FMOD_DSPCONNECTION ** connection)} */
+    @NativeType("FMOD_RESULT")
+    public static int FMOD_DSP_AddInputPreallocated(@NativeType("FMOD_DSP *") long dsp, @NativeType("FMOD_DSP *") long input, @NativeType("FMOD_DSPCONNECTION **") @Nullable PointerBuffer connection) {
+        if (CHECKS) {
+            checkSafe(connection, 1);
+        }
+        return nFMOD_DSP_AddInputPreallocated(dsp, input, memAddressSafe(connection));
     }
 
     // --- [ FMOD_DSP_DisconnectFrom ] ---

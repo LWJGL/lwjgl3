@@ -72,32 +72,26 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         "DEVICE_PREFERRED_LOCAL_ATOMIC_ALIGNMENT"..0x105A
     )
 
-    IntConstant(
-        "QUEUE_ON_DEVICE".."1 << 2",
-        "QUEUE_ON_DEVICE_DEFAULT".."1 << 3"
+    LongConstant(
+        "QUEUE_ON_DEVICE".."1L << 2",
+        "QUEUE_ON_DEVICE_DEFAULT".."1L << 3"
     )
 
-    IntConstant(
-        "DEVICE_SVM_COARSE_GRAIN_BUFFER".."1 << 0",
-        "DEVICE_SVM_FINE_GRAIN_BUFFER".."1 << 1",
-        "DEVICE_SVM_FINE_GRAIN_SYSTEM".."1 << 2",
-        "DEVICE_SVM_ATOMICS".."1 << 3"
+    LongConstant(
+        "DEVICE_SVM_COARSE_GRAIN_BUFFER".."1L << 0",
+        "DEVICE_SVM_FINE_GRAIN_BUFFER".."1L << 1",
+        "DEVICE_SVM_FINE_GRAIN_SYSTEM".."1L << 2",
+        "DEVICE_SVM_ATOMICS".."1L << 3"
     )
 
     IntConstant(
         "QUEUE_SIZE"..0x1094
     )
 
-    IntConstant(
-        "MEM_SVM_FINE_GRAIN_BUFFER".."1 << 10"
-    )
-
-    IntConstant(
-        "MEM_SVM_ATOMICS".."1 << 11"
-    )
-
-    IntConstant(
-        "MEM_KERNEL_READ_AND_WRITE".."1 << 12"
+    LongConstant(
+        "MEM_SVM_FINE_GRAIN_BUFFER".."1L << 10",
+        "MEM_SVM_ATOMICS".."1L << 11",
+        "MEM_KERNEL_READ_AND_WRITE".."1L << 12"
     )
 
     IntConstant(
@@ -134,8 +128,8 @@ val CL20 = "CL20".nativeClassCL("CL20") {
         "PROGRAM_BUILD_GLOBAL_VARIABLE_TOTAL_SIZE"..0x1185
     )
 
-    IntConstant(
-        "KERNEL_ARG_TYPE_PIPE".."1 << 3"
+    LongConstant(
+        "KERNEL_ARG_TYPE_PIPE".."1L << 3"
     )
 
     IntConstant(

@@ -23,12 +23,12 @@ static inline int __sys_io_uring_setup(unsigned int entries,
 
 static inline int __sys_io_uring_enter2(unsigned int fd, unsigned int to_submit,
 					unsigned int min_complete,
-					unsigned int flags, sigset_t *sig,
+					unsigned int flags, void *arg,
 					size_t sz)
 {
 	int ret;
 	ret = syscall(__NR_io_uring_enter, fd, to_submit, min_complete, flags,
-		      sig, sz);
+		      arg, sz);
 	return (ret < 0) ? -errno : ret;
 }
 

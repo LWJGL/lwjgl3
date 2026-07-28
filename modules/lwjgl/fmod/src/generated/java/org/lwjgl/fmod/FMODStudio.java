@@ -812,10 +812,12 @@ public class FMODStudio {
 
     // --- [ FMOD_Studio_System_GetParameterDescriptionByID ] ---
 
-    private static final FFICIF FMOD_Studio_System_GetParameterDescriptionByIDCIF = apiCreateCIF(
-        apiStdcall(), ffi_type_uint32,
-        ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_uint32), ffi_type_pointer
-    );
+    private static final class FMOD_Studio_System_GetParameterDescriptionByID {
+        static final FFICIF CIF = apiCreateCIF(
+            apiStdcall(), ffi_type_uint32,
+            ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_uint32), ffi_type_pointer
+        );
+    }
 
     /** {@code FMOD_RESULT FMOD_Studio_System_GetParameterDescriptionByID(FMOD_STUDIO_SYSTEM * system, FMOD_STUDIO_PARAMETER_ID id, FMOD_STUDIO_PARAMETER_DESCRIPTION * parameter)} */
     public static int nFMOD_Studio_System_GetParameterDescriptionByID(long system, long id, long parameter) {
@@ -831,7 +833,7 @@ public class FMODStudio {
             memPutAddress(arguments + POINTER_SIZE, id);
             memPutAddress(arguments + 2 * POINTER_SIZE, stack.npointer(parameter));
 
-            nffi_call(FMOD_Studio_System_GetParameterDescriptionByIDCIF.address(), __functionAddress, __result, arguments);
+            nffi_call(FMOD_Studio_System_GetParameterDescriptionByID.CIF.address(), __functionAddress, __result, arguments);
 
             return memGetInt(__result);
         } finally {
@@ -884,10 +886,12 @@ public class FMODStudio {
 
     // --- [ FMOD_Studio_System_GetParameterLabelByID ] ---
 
-    private static final FFICIF FMOD_Studio_System_GetParameterLabelByIDCIF = apiCreateCIF(
-        apiStdcall(), ffi_type_uint32,
-        ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_uint32), ffi_type_sint32, ffi_type_pointer, ffi_type_sint32, ffi_type_pointer
-    );
+    private static final class FMOD_Studio_System_GetParameterLabelByID {
+        static final FFICIF CIF = apiCreateCIF(
+            apiStdcall(), ffi_type_uint32,
+            ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_uint32), ffi_type_sint32, ffi_type_pointer, ffi_type_sint32, ffi_type_pointer
+        );
+    }
 
     /** {@code FMOD_RESULT FMOD_Studio_System_GetParameterLabelByID(FMOD_STUDIO_SYSTEM * system, FMOD_STUDIO_PARAMETER_ID id, int labelindex, char * label, int size, int * retrieved)} */
     public static int nFMOD_Studio_System_GetParameterLabelByID(long system, long id, int labelindex, long label, int size, long retrieved) {
@@ -906,7 +910,7 @@ public class FMODStudio {
             memPutAddress(arguments + 4 * POINTER_SIZE, stack.nint(size));
             memPutAddress(arguments + 5 * POINTER_SIZE, stack.npointer(retrieved));
 
-            nffi_call(FMOD_Studio_System_GetParameterLabelByIDCIF.address(), __functionAddress, __result, arguments);
+            nffi_call(FMOD_Studio_System_GetParameterLabelByID.CIF.address(), __functionAddress, __result, arguments);
 
             return memGetInt(__result);
         } finally {
@@ -925,10 +929,12 @@ public class FMODStudio {
 
     // --- [ FMOD_Studio_System_GetParameterByID ] ---
 
-    private static final FFICIF FMOD_Studio_System_GetParameterByIDCIF = apiCreateCIF(
-        apiStdcall(), ffi_type_uint32,
-        ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_uint32), ffi_type_pointer, ffi_type_pointer
-    );
+    private static final class FMOD_Studio_System_GetParameterByID {
+        static final FFICIF CIF = apiCreateCIF(
+            apiStdcall(), ffi_type_uint32,
+            ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_uint32), ffi_type_pointer, ffi_type_pointer
+        );
+    }
 
     /** {@code FMOD_RESULT FMOD_Studio_System_GetParameterByID(FMOD_STUDIO_SYSTEM * system, FMOD_STUDIO_PARAMETER_ID id, float * value, float * finalvalue)} */
     public static int nFMOD_Studio_System_GetParameterByID(long system, long id, long value, long finalvalue) {
@@ -945,7 +951,7 @@ public class FMODStudio {
             memPutAddress(arguments + 2 * POINTER_SIZE, stack.npointer(value));
             memPutAddress(arguments + 3 * POINTER_SIZE, stack.npointer(finalvalue));
 
-            nffi_call(FMOD_Studio_System_GetParameterByIDCIF.address(), __functionAddress, __result, arguments);
+            nffi_call(FMOD_Studio_System_GetParameterByID.CIF.address(), __functionAddress, __result, arguments);
 
             return memGetInt(__result);
         } finally {
@@ -965,10 +971,12 @@ public class FMODStudio {
 
     // --- [ FMOD_Studio_System_SetParameterByID ] ---
 
-    private static final FFICIF FMOD_Studio_System_SetParameterByIDCIF = apiCreateCIF(
-        apiStdcall(), ffi_type_uint32,
-        ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_uint32), ffi_type_float, ffi_type_sint32
-    );
+    private static final class FMOD_Studio_System_SetParameterByID {
+        static final FFICIF CIF = apiCreateCIF(
+            apiStdcall(), ffi_type_uint32,
+            ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_uint32), ffi_type_float, ffi_type_sint32
+        );
+    }
 
     /** {@code FMOD_RESULT FMOD_Studio_System_SetParameterByID(FMOD_STUDIO_SYSTEM * system, FMOD_STUDIO_PARAMETER_ID id, float value, FMOD_BOOL ignoreseekspeed)} */
     public static int nFMOD_Studio_System_SetParameterByID(long system, long id, float value, int ignoreseekspeed) {
@@ -985,7 +993,7 @@ public class FMODStudio {
             memPutAddress(arguments + 2 * POINTER_SIZE, stack.nfloat(value));
             memPutAddress(arguments + 3 * POINTER_SIZE, stack.nint(ignoreseekspeed));
 
-            nffi_call(FMOD_Studio_System_SetParameterByIDCIF.address(), __functionAddress, __result, arguments);
+            nffi_call(FMOD_Studio_System_SetParameterByID.CIF.address(), __functionAddress, __result, arguments);
 
             return memGetInt(__result);
         } finally {
@@ -1001,10 +1009,12 @@ public class FMODStudio {
 
     // --- [ FMOD_Studio_System_SetParameterByIDWithLabel ] ---
 
-    private static final FFICIF FMOD_Studio_System_SetParameterByIDWithLabelCIF = apiCreateCIF(
-        apiStdcall(), ffi_type_uint32,
-        ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_uint32), ffi_type_pointer, ffi_type_sint32
-    );
+    private static final class FMOD_Studio_System_SetParameterByIDWithLabel {
+        static final FFICIF CIF = apiCreateCIF(
+            apiStdcall(), ffi_type_uint32,
+            ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_uint32), ffi_type_pointer, ffi_type_sint32
+        );
+    }
 
     /** {@code FMOD_RESULT FMOD_Studio_System_SetParameterByIDWithLabel(FMOD_STUDIO_SYSTEM * system, FMOD_STUDIO_PARAMETER_ID id, char const * label, FMOD_BOOL ignoreseekspeed)} */
     public static int nFMOD_Studio_System_SetParameterByIDWithLabel(long system, long id, long label, int ignoreseekspeed) {
@@ -1021,7 +1031,7 @@ public class FMODStudio {
             memPutAddress(arguments + 2 * POINTER_SIZE, stack.npointer(label));
             memPutAddress(arguments + 3 * POINTER_SIZE, stack.nint(ignoreseekspeed));
 
-            nffi_call(FMOD_Studio_System_SetParameterByIDWithLabelCIF.address(), __functionAddress, __result, arguments);
+            nffi_call(FMOD_Studio_System_SetParameterByIDWithLabel.CIF.address(), __functionAddress, __result, arguments);
 
             return memGetInt(__result);
         } finally {
@@ -1887,10 +1897,12 @@ public class FMODStudio {
 
     // --- [ FMOD_Studio_EventDescription_GetParameterDescriptionByID ] ---
 
-    private static final FFICIF FMOD_Studio_EventDescription_GetParameterDescriptionByIDCIF = apiCreateCIF(
-        apiStdcall(), ffi_type_uint32,
-        ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_uint32), ffi_type_pointer
-    );
+    private static final class FMOD_Studio_EventDescription_GetParameterDescriptionByID {
+        static final FFICIF CIF = apiCreateCIF(
+            apiStdcall(), ffi_type_uint32,
+            ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_uint32), ffi_type_pointer
+        );
+    }
 
     /** {@code FMOD_RESULT FMOD_Studio_EventDescription_GetParameterDescriptionByID(FMOD_STUDIO_EVENTDESCRIPTION * eventdescription, FMOD_STUDIO_PARAMETER_ID id, FMOD_STUDIO_PARAMETER_DESCRIPTION * parameter)} */
     public static int nFMOD_Studio_EventDescription_GetParameterDescriptionByID(long eventdescription, long id, long parameter) {
@@ -1906,7 +1918,7 @@ public class FMODStudio {
             memPutAddress(arguments + POINTER_SIZE, id);
             memPutAddress(arguments + 2 * POINTER_SIZE, stack.npointer(parameter));
 
-            nffi_call(FMOD_Studio_EventDescription_GetParameterDescriptionByIDCIF.address(), __functionAddress, __result, arguments);
+            nffi_call(FMOD_Studio_EventDescription_GetParameterDescriptionByID.CIF.address(), __functionAddress, __result, arguments);
 
             return memGetInt(__result);
         } finally {
@@ -1979,10 +1991,12 @@ public class FMODStudio {
 
     // --- [ FMOD_Studio_EventDescription_GetParameterLabelByID ] ---
 
-    private static final FFICIF FMOD_Studio_EventDescription_GetParameterLabelByIDCIF = apiCreateCIF(
-        apiStdcall(), ffi_type_uint32,
-        ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_uint32), ffi_type_sint32, ffi_type_pointer, ffi_type_sint32, ffi_type_pointer
-    );
+    private static final class FMOD_Studio_EventDescription_GetParameterLabelByID {
+        static final FFICIF CIF = apiCreateCIF(
+            apiStdcall(), ffi_type_uint32,
+            ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_uint32), ffi_type_sint32, ffi_type_pointer, ffi_type_sint32, ffi_type_pointer
+        );
+    }
 
     /** {@code FMOD_RESULT FMOD_Studio_EventDescription_GetParameterLabelByID(FMOD_STUDIO_EVENTDESCRIPTION * eventdescription, FMOD_STUDIO_PARAMETER_ID id, int labelindex, char * label, int size, int * retrieved)} */
     public static int nFMOD_Studio_EventDescription_GetParameterLabelByID(long eventdescription, long id, int labelindex, long label, int size, long retrieved) {
@@ -2001,7 +2015,7 @@ public class FMODStudio {
             memPutAddress(arguments + 4 * POINTER_SIZE, stack.nint(size));
             memPutAddress(arguments + 5 * POINTER_SIZE, stack.npointer(retrieved));
 
-            nffi_call(FMOD_Studio_EventDescription_GetParameterLabelByIDCIF.address(), __functionAddress, __result, arguments);
+            nffi_call(FMOD_Studio_EventDescription_GetParameterLabelByID.CIF.address(), __functionAddress, __result, arguments);
 
             return memGetInt(__result);
         } finally {
@@ -2973,10 +2987,12 @@ public class FMODStudio {
 
     // --- [ FMOD_Studio_EventInstance_GetParameterByID ] ---
 
-    private static final FFICIF FMOD_Studio_EventInstance_GetParameterByIDCIF = apiCreateCIF(
-        apiStdcall(), ffi_type_uint32,
-        ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_uint32), ffi_type_pointer, ffi_type_pointer
-    );
+    private static final class FMOD_Studio_EventInstance_GetParameterByID {
+        static final FFICIF CIF = apiCreateCIF(
+            apiStdcall(), ffi_type_uint32,
+            ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_uint32), ffi_type_pointer, ffi_type_pointer
+        );
+    }
 
     /** {@code FMOD_RESULT FMOD_Studio_EventInstance_GetParameterByID(FMOD_STUDIO_EVENTINSTANCE * eventinstance, FMOD_STUDIO_PARAMETER_ID id, float * value, float * finalvalue)} */
     public static int nFMOD_Studio_EventInstance_GetParameterByID(long eventinstance, long id, long value, long finalvalue) {
@@ -2993,7 +3009,7 @@ public class FMODStudio {
             memPutAddress(arguments + 2 * POINTER_SIZE, stack.npointer(value));
             memPutAddress(arguments + 3 * POINTER_SIZE, stack.npointer(finalvalue));
 
-            nffi_call(FMOD_Studio_EventInstance_GetParameterByIDCIF.address(), __functionAddress, __result, arguments);
+            nffi_call(FMOD_Studio_EventInstance_GetParameterByID.CIF.address(), __functionAddress, __result, arguments);
 
             return memGetInt(__result);
         } finally {
@@ -3013,10 +3029,12 @@ public class FMODStudio {
 
     // --- [ FMOD_Studio_EventInstance_SetParameterByID ] ---
 
-    private static final FFICIF FMOD_Studio_EventInstance_SetParameterByIDCIF = apiCreateCIF(
-        apiStdcall(), ffi_type_uint32,
-        ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_uint32), ffi_type_float, ffi_type_sint32
-    );
+    private static final class FMOD_Studio_EventInstance_SetParameterByID {
+        static final FFICIF CIF = apiCreateCIF(
+            apiStdcall(), ffi_type_uint32,
+            ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_uint32), ffi_type_float, ffi_type_sint32
+        );
+    }
 
     /** {@code FMOD_RESULT FMOD_Studio_EventInstance_SetParameterByID(FMOD_STUDIO_EVENTINSTANCE * eventinstance, FMOD_STUDIO_PARAMETER_ID id, float value, FMOD_BOOL ignoreseekspeed)} */
     public static int nFMOD_Studio_EventInstance_SetParameterByID(long eventinstance, long id, float value, int ignoreseekspeed) {
@@ -3033,7 +3051,7 @@ public class FMODStudio {
             memPutAddress(arguments + 2 * POINTER_SIZE, stack.nfloat(value));
             memPutAddress(arguments + 3 * POINTER_SIZE, stack.nint(ignoreseekspeed));
 
-            nffi_call(FMOD_Studio_EventInstance_SetParameterByIDCIF.address(), __functionAddress, __result, arguments);
+            nffi_call(FMOD_Studio_EventInstance_SetParameterByID.CIF.address(), __functionAddress, __result, arguments);
 
             return memGetInt(__result);
         } finally {
@@ -3049,10 +3067,12 @@ public class FMODStudio {
 
     // --- [ FMOD_Studio_EventInstance_SetParameterByIDWithLabel ] ---
 
-    private static final FFICIF FMOD_Studio_EventInstance_SetParameterByIDWithLabelCIF = apiCreateCIF(
-        apiStdcall(), ffi_type_uint32,
-        ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_uint32), ffi_type_pointer, ffi_type_sint32
-    );
+    private static final class FMOD_Studio_EventInstance_SetParameterByIDWithLabel {
+        static final FFICIF CIF = apiCreateCIF(
+            apiStdcall(), ffi_type_uint32,
+            ffi_type_pointer, apiCreateStruct(ffi_type_uint32, ffi_type_uint32), ffi_type_pointer, ffi_type_sint32
+        );
+    }
 
     /** {@code FMOD_RESULT FMOD_Studio_EventInstance_SetParameterByIDWithLabel(FMOD_STUDIO_EVENTINSTANCE * eventinstance, FMOD_STUDIO_PARAMETER_ID id, char const * label, FMOD_BOOL ignoreseekspeed)} */
     public static int nFMOD_Studio_EventInstance_SetParameterByIDWithLabel(long eventinstance, long id, long label, int ignoreseekspeed) {
@@ -3069,7 +3089,7 @@ public class FMODStudio {
             memPutAddress(arguments + 2 * POINTER_SIZE, stack.npointer(label));
             memPutAddress(arguments + 3 * POINTER_SIZE, stack.nint(ignoreseekspeed));
 
-            nffi_call(FMOD_Studio_EventInstance_SetParameterByIDWithLabelCIF.address(), __functionAddress, __result, arguments);
+            nffi_call(FMOD_Studio_EventInstance_SetParameterByIDWithLabel.CIF.address(), __functionAddress, __result, arguments);
 
             return memGetInt(__result);
         } finally {

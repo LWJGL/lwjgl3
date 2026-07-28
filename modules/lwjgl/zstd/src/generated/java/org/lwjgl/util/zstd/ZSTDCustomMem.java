@@ -17,12 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct ZSTD_customMem {
  *     {@link ZSTDAllocFunctionI ZSTD_allocFunction} customAlloc;
  *     {@link ZSTDFreeFunctionI ZSTD_freeFunction} customFree;
  *     void * opaque;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct ZSTD_customMem")
 public class ZSTDCustomMem extends Struct<ZSTDCustomMem> implements NativeResource {
@@ -40,6 +40,9 @@ public class ZSTDCustomMem extends Struct<ZSTDCustomMem> implements NativeResour
         OPAQUE;
 
     static {
+        java.util.Objects.requireNonNull(ZSTDAllocFunctionI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(ZSTDFreeFunctionI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
@@ -188,25 +191,6 @@ public class ZSTDCustomMem extends Struct<ZSTDCustomMem> implements NativeResour
     public static ZSTDCustomMem.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static ZSTDCustomMem mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static ZSTDCustomMem callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static ZSTDCustomMem mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static ZSTDCustomMem callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static ZSTDCustomMem.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static ZSTDCustomMem.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static ZSTDCustomMem.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static ZSTDCustomMem.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code ZSTDCustomMem} instance allocated on the specified {@link MemoryStack}.

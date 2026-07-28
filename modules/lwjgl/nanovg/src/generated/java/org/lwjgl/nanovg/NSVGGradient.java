@@ -15,7 +15,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct NSVGgradient {
  *     float xform[6];
  *     char spread;
@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     float fy;
  *     int nstops;
  *     {@link NSVGGradientStop NSVGgradientStop} pstops[1];
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct NSVGgradient")
 public class NSVGGradient extends Struct<NSVGGradient> {
@@ -44,6 +44,8 @@ public class NSVGGradient extends Struct<NSVGGradient> {
         PSTOPS;
 
     static {
+        NSVGGradientStop.createSafe(NULL);
+
         Layout layout = __struct(
             __array(4, 6),
             __member(1),

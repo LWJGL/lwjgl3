@@ -19,6 +19,13 @@
 
 #include "nfd.h"
 
+/*
+Define NFD_CASE_SENSITIVE_FILTER if you want file filters to be case-sensitive.  The default
+is case-insensitive.  While Linux uses a case-sensitive filesystem and is designed for
+case-sensitive file extensions, perhaps in the vast majority of cases users actually expect the file
+filters to be case-insensitive.
+*/
+
 namespace {
 
 template <typename T>
@@ -66,6 +73,27 @@ T* copy(const T* begin, const T* end, T* out) {
     return out;
 }
 
+#ifndef NFD_CASE_SENSITIVE_FILTER
+nfdnchar_t* emit_case_insensitive_glob(const nfdnchar_t* begin,
+                                       const nfdnchar_t* end,
+                                       nfdnchar_t* out) {
+    // this code will only make regular Latin characters case-insensitive; other
+    // characters remain case sensitive
+    for (; begin != end; ++begin) {
+        if ((*begin >= 'A' && *begin <= 'Z') || (*begin >= 'a' && *begin <= 'z')) {
+            *out++ = '[';
+            *out++ = *begin;
+            // invert the case of the original character
+            *out++ = *begin ^ static_cast<nfdnchar_t>(0x20);
+            *out++ = ']';
+        } else {
+            *out++ = *begin;
+        }
+    }
+    return out;
+}
+#endif
+
 // Does not own the filter and extension.
 struct Pair_GtkFileFilter_FileExtension {
     GtkFileFilter* filter;
@@ -92,7 +120,7 @@ void AddFiltersToDialog(GtkFileChooser* chooser,
             // count number of file extensions
             size_t sep = 1;
             for (const nfdnchar_t* p_spec = filterList[index].spec; *p_spec; ++p_spec) {
-                if (*p_spec == L',') {
+                if (*p_spec == ',') {
                     ++sep;
                 }
             }
@@ -122,6 +150,7 @@ void AddFiltersToDialog(GtkFileChooser* chooser,
                         *p_nameBuf++ = ' ';
                     }
 
+#ifdef NFD_CASE_SENSITIVE_FILTER
                     // +1 for the trailing '\0'
                     nfdnchar_t* extnBuf = NFDi_Malloc<nfdnchar_t>(sizeof(nfdnchar_t) *
                                                                   (p_spec - p_extensionStart + 3));
@@ -130,10 +159,23 @@ void AddFiltersToDialog(GtkFileChooser* chooser,
                     *p_extnBufEnd++ = '.';
                     p_extnBufEnd = copy(p_extensionStart, p_spec, p_extnBufEnd);
                     *p_extnBufEnd++ = '\0';
-                    assert((size_t)(p_extnBufEnd - extnBuf) ==
-                           sizeof(nfdnchar_t) * (p_spec - p_extensionStart + 3));
                     gtk_file_filter_add_pattern(filter, extnBuf);
                     NFDi_Free(extnBuf);
+#else
+                    // Each character in the Latin alphabet is converted into 4 characters.  E.g.
+                    // 'a' is converted into "[Aa]".  Other characters are preserved.  Then we +1
+                    // for the trailing '\0'.
+                    nfdnchar_t* extnBuf = NFDi_Malloc<nfdnchar_t>(
+                        sizeof(nfdnchar_t) * ((p_spec - p_extensionStart) * 4 + 3));
+                    nfdnchar_t* p_extnBufEnd = extnBuf;
+                    *p_extnBufEnd++ = '*';
+                    *p_extnBufEnd++ = '.';
+                    p_extnBufEnd =
+                        emit_case_insensitive_glob(p_extensionStart, p_spec, p_extnBufEnd);
+                    *p_extnBufEnd++ = '\0';
+                    gtk_file_filter_add_pattern(filter, extnBuf);
+                    NFDi_Free(extnBuf);
+#endif
 
                     if (*p_spec) {
                         // update the extension start point
@@ -192,7 +234,7 @@ Pair_GtkFileFilter_FileExtension* AddFiltersToDialogWithMap(GtkFileChooser* choo
             // count number of file extensions
             size_t sep = 1;
             for (const nfdnchar_t* p_spec = filterList[index].spec; *p_spec; ++p_spec) {
-                if (*p_spec == L',') {
+                if (*p_spec == ',') {
                     ++sep;
                 }
             }
@@ -222,6 +264,7 @@ Pair_GtkFileFilter_FileExtension* AddFiltersToDialogWithMap(GtkFileChooser* choo
                         *p_nameBuf++ = ' ';
                     }
 
+#ifdef NFD_CASE_SENSITIVE_FILTER
                     // +1 for the trailing '\0'
                     nfdnchar_t* extnBuf = NFDi_Malloc<nfdnchar_t>(sizeof(nfdnchar_t) *
                                                                   (p_spec - p_extensionStart + 3));
@@ -230,10 +273,23 @@ Pair_GtkFileFilter_FileExtension* AddFiltersToDialogWithMap(GtkFileChooser* choo
                     *p_extnBufEnd++ = '.';
                     p_extnBufEnd = copy(p_extensionStart, p_spec, p_extnBufEnd);
                     *p_extnBufEnd++ = '\0';
-                    assert((size_t)(p_extnBufEnd - extnBuf) ==
-                           sizeof(nfdnchar_t) * (p_spec - p_extensionStart + 3));
                     gtk_file_filter_add_pattern(filter, extnBuf);
                     NFDi_Free(extnBuf);
+#else
+                    // Each character in the Latin alphabet is converted into 4 characters.  E.g.
+                    // 'a' is converted into "[Aa]".  Other characters are preserved.  Then we +1
+                    // for the trailing '\0'.
+                    nfdnchar_t* extnBuf = NFDi_Malloc<nfdnchar_t>(
+                        sizeof(nfdnchar_t) * ((p_spec - p_extensionStart) * 4 + 3));
+                    nfdnchar_t* p_extnBufEnd = extnBuf;
+                    *p_extnBufEnd++ = '*';
+                    *p_extnBufEnd++ = '.';
+                    p_extnBufEnd =
+                        emit_case_insensitive_glob(p_extensionStart, p_spec, p_extnBufEnd);
+                    *p_extnBufEnd++ = '\0';
+                    gtk_file_filter_add_pattern(filter, extnBuf);
+                    NFDi_Free(extnBuf);
+#endif
 
                     // store current pointer in map (if it's
                     // the first one)
@@ -447,8 +503,7 @@ void RealizedSignalHandler(GtkWidget* window, void* userdata) {
 }
 
 struct NativeWindowParenter {
-    NativeWindowParenter(GtkWidget* widget, const nfdwindowhandle_t& parentWindow) noexcept
-        : widget(widget) {
+    NativeWindowParenter(GtkWidget* w, const nfdwindowhandle_t& parentWindow) noexcept : widget(w) {
         parent = GetAllocNativeWindowHandle(parentWindow);
 
         if (parent) {
@@ -866,13 +921,13 @@ nfdresult_t NFD_PathSet_GetPathU8(const nfdpathset_t* pathSet,
                                   nfdu8char_t** outPath)
     __attribute__((alias("NFD_PathSet_GetPathN")));
 
-void NFD_PathSet_FreePathN(nfdnchar_t* filePath) {
+void NFD_PathSet_FreePathN(const nfdnchar_t* filePath) {
     assert(filePath);
     (void)filePath;  // prevent warning in release build
     // no-op, because NFD_PathSet_Free does the freeing for us
 }
 
-void NFD_PathSet_FreePathU8(nfdu8char_t* filePath)
+void NFD_PathSet_FreePathU8(const nfdu8char_t* filePath)
     __attribute__((alias("NFD_PathSet_FreePathN")));
 
 void NFD_PathSet_Free(const nfdpathset_t* pathSet) {

@@ -20,16 +20,15 @@ public class DynamicLinkLoader {
     static { Library.initialize(); }
 
     public static final int
-        RTLD_LAZY         = 0x1,
-        RTLD_NOW          = 0x2,
-        RTLD_BINDING_MASK = 0x3,
-        RTLD_NOLOAD       = 0x4,
-        RTLD_DEEPBIND     = 0x8;
-
-    public static final int
+        RTLD_LAZY     = 1,
+        RTLD_NOW      = 2,
+        RTLD_MODEMASK = 0x3,
         RTLD_GLOBAL   = 0x100,
         RTLD_LOCAL    = 0,
-        RTLD_NODELETE = 0x1000;
+        RTLD_TRACE    = 0x200,
+        RTLD_NODELETE = 0x1000,
+        RTLD_NOLOAD   = 0x2000,
+        RTLD_DEEPBIND = 0x4000;
 
     protected DynamicLinkLoader() {
         throw new UnsupportedOperationException();

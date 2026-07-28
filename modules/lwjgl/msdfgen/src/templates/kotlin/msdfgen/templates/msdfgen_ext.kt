@@ -8,7 +8,9 @@ import msdfgen.*
 import org.lwjgl.generator.*
 
 val msdfGenExt = "MSDFGenExt".nativeClass(Module.MSDFGEN, prefix = "MSDF", prefixMethod = "msdf_") {
-    nativeImport("msdfgen-ext-c.h")
+    nativeDirective("""
+#define MSDFGEN_DYNAMIC_FREETYPE
+#include "msdfgen-ext-c.h"""")
 
     EnumConstant(
         "FONT_SCALING_NONE".enum("0"),
@@ -65,6 +67,7 @@ val msdfGenExt = "MSDFGenExt".nativeClass(Module.MSDFGEN, prefix = "MSDF", prefi
         msdf_ft_font_handle("font"),
         unsigned("cp"),
         int("coordinateScaling"),
+        Check(1)..nullable..double.p("advance"),
         Check(1)..msdf_shape_handle.p("shape")
     )
 
@@ -74,6 +77,7 @@ val msdfGenExt = "MSDFGenExt".nativeClass(Module.MSDFGEN, prefix = "MSDF", prefi
         msdf_ft_font_handle("font"),
         unsigned("index"),
         int("coordinateScaling"),
+        Check(1)..nullable..double.p("advance"),
         Check(1)..msdf_shape_handle.p("shape")
     )
 

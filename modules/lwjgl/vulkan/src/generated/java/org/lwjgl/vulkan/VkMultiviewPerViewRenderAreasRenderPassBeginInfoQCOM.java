@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t perViewRenderAreaCount;
  *     {@link VkRect2D VkRect2D} const * pPerViewRenderAreas;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM extends Struct<VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM> implements NativeResource {
 

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct CXPlatformAvailability {
  *     {@link CXString CXString} Platform;
  *     {@link CXVersion CXVersion} Introduced;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link CXVersion CXVersion} Obsoleted;
  *     int Unavailable;
  *     {@link CXString CXString} Message;
- * }}</pre>
+ * }</code></pre>
  */
 public class CXPlatformAvailability extends Struct<CXPlatformAvailability> implements NativeResource {
 
@@ -44,6 +44,9 @@ public class CXPlatformAvailability extends Struct<CXPlatformAvailability> imple
         MESSAGE;
 
     static {
+        CXString.createSafe(NULL);
+        CXVersion.createSafe(NULL);
+
         Layout layout = __struct(
             __member(CXString.SIZEOF, CXString.ALIGNOF),
             __member(CXVersion.SIZEOF, CXVersion.ALIGNOF),
@@ -169,25 +172,6 @@ public class CXPlatformAvailability extends Struct<CXPlatformAvailability> imple
     public static CXPlatformAvailability.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static CXPlatformAvailability mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static CXPlatformAvailability callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static CXPlatformAvailability mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static CXPlatformAvailability callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static CXPlatformAvailability.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static CXPlatformAvailability.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static CXPlatformAvailability.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static CXPlatformAvailability.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code CXPlatformAvailability} instance allocated on the specified {@link MemoryStack}.

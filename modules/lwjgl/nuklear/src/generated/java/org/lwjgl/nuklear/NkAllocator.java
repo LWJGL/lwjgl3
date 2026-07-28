@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_allocator {
  *     {@link NkHandle nk_handle} userdata;
  *     {@link NkPluginAllocI nk_plugin_alloc} alloc;
  *     {@link NkPluginFreeI nk_plugin_free} mfree;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_allocator")
 public class NkAllocator extends Struct<NkAllocator> implements NativeResource {
@@ -39,6 +39,10 @@ public class NkAllocator extends Struct<NkAllocator> implements NativeResource {
         MFREE;
 
     static {
+        NkHandle.createSafe(NULL);
+        java.util.Objects.requireNonNull(NkPluginAllocI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(NkPluginFreeI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(NkHandle.SIZEOF, NkHandle.ALIGNOF),
             __member(POINTER_SIZE),
@@ -189,25 +193,6 @@ public class NkAllocator extends Struct<NkAllocator> implements NativeResource {
     public static NkAllocator.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkAllocator mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkAllocator callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkAllocator mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkAllocator callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkAllocator.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkAllocator.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkAllocator.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkAllocator.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code NkAllocator} instance allocated on the specified {@link MemoryStack}.

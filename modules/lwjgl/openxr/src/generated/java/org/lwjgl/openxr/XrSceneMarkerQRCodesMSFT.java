@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSceneMarkerQRCodesMSFT {
  *     XrStructureType type;
  *     void const * next;
  *     uint32_t qrCodeCapacityInput;
  *     {@link XrSceneMarkerQRCodeMSFT XrSceneMarkerQRCodeMSFT} * qrCodes;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSceneMarkerQRCodesMSFT extends Struct<XrSceneMarkerQRCodesMSFT> implements NativeResource {
 

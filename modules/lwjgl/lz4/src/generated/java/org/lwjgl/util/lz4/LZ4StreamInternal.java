@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.lz4.LZ4.LZ4_HASH_SIZE_U32;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct LZ4_stream_t_internal {
  *     LZ4_u32 hashTable[LZ4_HASH_SIZE_U32];
  *     LZ4_byte const * dictionary;
@@ -25,7 +25,7 @@ import static org.lwjgl.util.lz4.LZ4.LZ4_HASH_SIZE_U32;
  *     LZ4_u32 currentOffset;
  *     LZ4_u32 tableType;
  *     LZ4_u32 dictSize;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct LZ4_stream_t_internal")
 public class LZ4StreamInternal extends Struct<LZ4StreamInternal> {

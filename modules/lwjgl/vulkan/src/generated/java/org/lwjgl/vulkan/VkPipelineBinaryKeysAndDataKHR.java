@@ -17,12 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPipelineBinaryKeysAndDataKHR {
  *     uint32_t binaryCount;
  *     {@link VkPipelineBinaryKeyKHR VkPipelineBinaryKeyKHR} const * pPipelineBinaryKeys;
  *     {@link VkPipelineBinaryDataKHR VkPipelineBinaryDataKHR} const * pPipelineBinaryData;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPipelineBinaryKeysAndDataKHR extends Struct<VkPipelineBinaryKeysAndDataKHR> implements NativeResource {
 

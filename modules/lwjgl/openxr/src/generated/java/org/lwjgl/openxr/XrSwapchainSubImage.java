@@ -17,12 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSwapchainSubImage {
  *     XrSwapchain swapchain;
  *     {@link XrRect2Di XrRect2Di} imageRect;
  *     uint32_t imageArrayIndex;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSwapchainSubImage extends Struct<XrSwapchainSubImage> implements NativeResource {
 
@@ -39,6 +39,8 @@ public class XrSwapchainSubImage extends Struct<XrSwapchainSubImage> implements 
         IMAGEARRAYINDEX;
 
     static {
+        XrRect2Di.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(XrRect2Di.SIZEOF, XrRect2Di.ALIGNOF),

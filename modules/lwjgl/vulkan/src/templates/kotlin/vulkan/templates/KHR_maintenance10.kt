@@ -1,0 +1,61 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: https://www.lwjgl.org/license
+ * MACHINE GENERATED FILE, DO NOT EDIT
+ */
+package vulkan.templates
+
+import org.lwjgl.generator.*
+import vulkan.*
+
+val KHR_maintenance10 = "KHRMaintenance10".nativeClassVK("KHR_maintenance10", type = "device", postfix = "KHR") {
+    IntConstant(
+        "KHR_MAINTENANCE_10_SPEC_VERSION".."1"
+    )
+
+    StringConstant(
+        "KHR_MAINTENANCE_10_EXTENSION_NAME".."VK_KHR_maintenance10"
+    )
+
+    EnumConstant(
+        "STRUCTURE_TYPE_RENDERING_END_INFO_KHR".."1000619003",
+        "STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_10_FEATURES_KHR".."1000630000",
+        "STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_10_PROPERTIES_KHR".."1000630001",
+        "STRUCTURE_TYPE_RENDERING_ATTACHMENT_FLAGS_INFO_KHR".."1000630002",
+        "STRUCTURE_TYPE_RESOLVE_IMAGE_MODE_INFO_KHR".."1000630004"
+    )
+
+    EnumConstant(
+        "ATTACHMENT_DESCRIPTION_RESOLVE_SKIP_TRANSFER_FUNCTION_BIT_KHR".enum(0x00000002),
+        "ATTACHMENT_DESCRIPTION_RESOLVE_ENABLE_TRANSFER_FUNCTION_BIT_KHR".enum(0x00000004)
+    )
+
+    EnumConstant(
+        "RENDERING_LOCAL_READ_CONCURRENT_ACCESS_CONTROL_BIT_KHR".enum(0x00000100)
+    )
+
+    EnumConstant(
+        "RENDERING_ATTACHMENT_INPUT_ATTACHMENT_FEEDBACK_BIT_KHR".enum(0x00000001),
+        "RENDERING_ATTACHMENT_RESOLVE_SKIP_TRANSFER_FUNCTION_BIT_KHR".enum(0x00000002),
+        "RENDERING_ATTACHMENT_RESOLVE_ENABLE_TRANSFER_FUNCTION_BIT_KHR".enum(0x00000004)
+    )
+
+    EnumConstantLong(
+        "FORMAT_FEATURE_2_DEPTH_COPY_ON_COMPUTE_QUEUE_BIT_KHR".enum(0x10000000000000L),
+        "FORMAT_FEATURE_2_DEPTH_COPY_ON_TRANSFER_QUEUE_BIT_KHR".enum(0x20000000000000L),
+        "FORMAT_FEATURE_2_STENCIL_COPY_ON_COMPUTE_QUEUE_BIT_KHR".enum(0x40000000000000L),
+        "FORMAT_FEATURE_2_STENCIL_COPY_ON_TRANSFER_QUEUE_BIT_KHR".enum(0x80000000000000L)
+    )
+
+    EnumConstant(
+        "RESOLVE_IMAGE_SKIP_TRANSFER_FUNCTION_BIT_KHR".enum(0x00000001),
+        "RESOLVE_IMAGE_ENABLE_TRANSFER_FUNCTION_BIT_KHR".enum(0x00000002)
+    )
+
+    void(
+        "CmdEndRendering2KHR",
+
+        VkCommandBuffer("commandBuffer"),
+        nullable..VkRenderingEndInfoKHR.const.p("pRenderingEndInfo")
+    )
+}

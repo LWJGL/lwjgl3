@@ -238,7 +238,7 @@ public class IOURingBuf extends Struct<IOURingBuf> implements NativeResource {
     public static int nlen(long struct) { return memGetInt(struct + IOURingBuf.LEN); }
     /** Unsafe version of {@link #bid}. */
     public static short nbid(long struct) { return memGetShort(struct + IOURingBuf.BID); }
-    public static short nresv(long struct) { return memGetShort(struct + IOURingBuf.RESV); }
+    static short nresv(long struct) { return memGetShort(struct + IOURingBuf.RESV); }
 
     /** Unsafe version of {@link #addr(long) addr}. */
     public static void naddr(long struct, long value) { memPutLong(struct + IOURingBuf.ADDR, value); }
@@ -246,7 +246,7 @@ public class IOURingBuf extends Struct<IOURingBuf> implements NativeResource {
     public static void nlen(long struct, int value) { memPutInt(struct + IOURingBuf.LEN, value); }
     /** Unsafe version of {@link #bid(short) bid}. */
     public static void nbid(long struct, short value) { memPutShort(struct + IOURingBuf.BID, value); }
-    public static void nresv(long struct, short value) { memPutShort(struct + IOURingBuf.RESV, value); }
+    static void nresv(long struct, short value) { memPutShort(struct + IOURingBuf.RESV, value); }
 
     // -----------------------------------
 

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrFrameSynthesisInfoEXT {
  *     XrStructureType type;
  *     void const * next;
@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float maxDepth;
  *     float nearZ;
  *     float farZ;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrFrameSynthesisInfoEXT extends Struct<XrFrameSynthesisInfoEXT> implements NativeResource {
 
@@ -56,6 +56,10 @@ public class XrFrameSynthesisInfoEXT extends Struct<XrFrameSynthesisInfoEXT> imp
         FARZ;
 
     static {
+        XrSwapchainSubImage.createSafe(NULL);
+        XrVector4f.createSafe(NULL);
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -14,12 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpaceVelocityData {
  *     XrSpaceVelocityFlags velocityFlags;
  *     {@link XrVector3f XrVector3f} linearVelocity;
  *     {@link XrVector3f XrVector3f} angularVelocity;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpaceVelocityData extends Struct<XrSpaceVelocityData> {
 
@@ -36,6 +36,8 @@ public class XrSpaceVelocityData extends Struct<XrSpaceVelocityData> {
         ANGULARVELOCITY;
 
     static {
+        XrVector3f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(8),
             __member(XrVector3f.SIZEOF, XrVector3f.ALIGNOF),

@@ -12,10 +12,10 @@ val khr_command_buffer_multi_device = "KHRCommandBufferMultiDevice".nativeClassC
         "PLATFORM_COMMAND_BUFFER_CAPABILITIES_KHR"..0x0908
     )
 
-    IntConstant(
-        "COMMAND_BUFFER_PLATFORM_UNIVERSAL_SYNC_KHR".."1 << 0",
-        "COMMAND_BUFFER_PLATFORM_REMAP_QUEUES_KHR".."1 << 1",
-        "COMMAND_BUFFER_PLATFORM_AUTOMATIC_REMAP_KHR".."1 << 2"
+    LongConstant(
+        "COMMAND_BUFFER_PLATFORM_UNIVERSAL_SYNC_KHR".."1L << 0",
+        "COMMAND_BUFFER_PLATFORM_REMAP_QUEUES_KHR".."1L << 1",
+        "COMMAND_BUFFER_PLATFORM_AUTOMATIC_REMAP_KHR".."1L << 2"
     )
 
     IntConstant(
@@ -23,12 +23,12 @@ val khr_command_buffer_multi_device = "KHRCommandBufferMultiDevice".nativeClassC
         "DEVICE_COMMAND_BUFFER_SYNC_DEVICES_KHR"..0x12AC
     )
 
-    IntConstant(
-        "COMMAND_BUFFER_CAPABILITY_MULTIPLE_QUEUE_KHR".."1 << 4"
+    LongConstant(
+        "COMMAND_BUFFER_CAPABILITY_MULTIPLE_QUEUE_KHR".."1L << 4"
     )
 
-    IntConstant(
-        "COMMAND_BUFFER_DEVICE_SIDE_SYNC_KHR".."1 << 2"
+    LongConstant(
+        "COMMAND_BUFFER_DEVICE_SIDE_SYNC_KHR".."1L << 2"
     )
 
     cl_command_buffer_khr(

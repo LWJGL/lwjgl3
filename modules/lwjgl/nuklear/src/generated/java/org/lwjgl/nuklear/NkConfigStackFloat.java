@@ -15,11 +15,11 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_config_stack_float {
  *     int head;
  *     {@link NkConfigStackFloatElement struct nk_config_stack_float_element} elements[32];
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_config_stack_float")
 class NkConfigStackFloat extends Struct<NkConfigStackFloat> {
@@ -36,6 +36,8 @@ class NkConfigStackFloat extends Struct<NkConfigStackFloat> {
         ELEMENTS;
 
     static {
+        NkConfigStackFloatElement.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __array(NkConfigStackFloatElement.SIZEOF, NkConfigStackFloatElement.ALIGNOF, 32)

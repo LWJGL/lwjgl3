@@ -203,18 +203,18 @@ public class SDL_VirtualJoystickTouchpadDesc extends Struct<SDL_VirtualJoystickT
 
     /** Unsafe version of {@link #nfingers}. */
     public static short nnfingers(long struct) { return memGetShort(struct + SDL_VirtualJoystickTouchpadDesc.NFINGERS); }
-    public static ShortBuffer npadding(long struct) { return memShortBuffer(struct + SDL_VirtualJoystickTouchpadDesc.PADDING, 3); }
-    public static short npadding(long struct, int index) {
+    static ShortBuffer npadding(long struct) { return memShortBuffer(struct + SDL_VirtualJoystickTouchpadDesc.PADDING, 3); }
+    static short npadding(long struct, int index) {
         return memGetShort(struct + SDL_VirtualJoystickTouchpadDesc.PADDING + check(index, 3) * 2);
     }
 
     /** Unsafe version of {@link #nfingers(short) nfingers}. */
     public static void nnfingers(long struct, short value) { memPutShort(struct + SDL_VirtualJoystickTouchpadDesc.NFINGERS, value); }
-    public static void npadding(long struct, ShortBuffer value) {
+    static void npadding(long struct, ShortBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + SDL_VirtualJoystickTouchpadDesc.PADDING, value.remaining() * 2);
     }
-    public static void npadding(long struct, int index, short value) {
+    static void npadding(long struct, int index, short value) {
         memPutShort(struct + SDL_VirtualJoystickTouchpadDesc.PADDING + check(index, 3) * 2, value);
     }
 

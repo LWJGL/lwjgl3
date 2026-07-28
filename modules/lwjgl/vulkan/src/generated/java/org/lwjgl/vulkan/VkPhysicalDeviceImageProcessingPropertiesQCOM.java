@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPhysicalDeviceImageProcessingPropertiesQCOM {
  *     VkStructureType sType;
  *     void * pNext;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkExtent2D VkExtent2D} maxWeightFilterDimension;
  *     {@link VkExtent2D VkExtent2D} maxBlockMatchRegion;
  *     {@link VkExtent2D VkExtent2D} maxBoxFilterBlockSize;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceImageProcessingPropertiesQCOM extends Struct<VkPhysicalDeviceImageProcessingPropertiesQCOM> implements NativeResource {
 
@@ -44,6 +44,8 @@ public class VkPhysicalDeviceImageProcessingPropertiesQCOM extends Struct<VkPhys
         MAXBOXFILTERBLOCKSIZE;
 
     static {
+        VkExtent2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -121,6 +121,8 @@ public class VkPushConstantsInfo extends Struct<VkPushConstantsInfo> implements 
     public VkPushConstantsInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkPipelineLayoutCreateInfo} value to the {@code pNext} chain. */
     public VkPushConstantsInfo pNext(VkPipelineLayoutCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPushConstantBankInfoNV} value to the {@code pNext} chain. */
+    public VkPushConstantsInfo pNext(VkPushConstantBankInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code layout} field. */
     public VkPushConstantsInfo layout(@NativeType("VkPipelineLayout") long value) { nlayout(address(), value); return this; }
     /** Sets the specified value to the {@code stageFlags} field. */
@@ -384,6 +386,8 @@ public class VkPushConstantsInfo extends Struct<VkPushConstantsInfo> implements 
         public VkPushConstantsInfo.Buffer pNext(@NativeType("void const *") long value) { VkPushConstantsInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkPipelineLayoutCreateInfo} value to the {@code pNext} chain. */
         public VkPushConstantsInfo.Buffer pNext(VkPipelineLayoutCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPushConstantBankInfoNV} value to the {@code pNext} chain. */
+        public VkPushConstantsInfo.Buffer pNext(VkPushConstantBankInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code layout} field. */
         public VkPushConstantsInfo.Buffer layout(@NativeType("VkPipelineLayout") long value) { VkPushConstantsInfo.nlayout(address(), value); return this; }
         /** Sets the specified value to the {@code stageFlags} field. */

@@ -97,6 +97,8 @@ public class VkCommandPoolCreateInfo extends Struct<VkCommandPoolCreateInfo> imp
     public VkCommandPoolCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkCommandPoolCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkDataGraphProcessingEngineCreateInfoARM} value to the {@code pNext} chain. */
+    public VkCommandPoolCreateInfo pNext(VkDataGraphProcessingEngineCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code flags} field. */
     public VkCommandPoolCreateInfo flags(@NativeType("VkCommandPoolCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@code queueFamilyIndex} field. */
@@ -199,25 +201,6 @@ public class VkCommandPoolCreateInfo extends Struct<VkCommandPoolCreateInfo> imp
     public static VkCommandPoolCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkCommandPoolCreateInfo mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkCommandPoolCreateInfo callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkCommandPoolCreateInfo mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkCommandPoolCreateInfo callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkCommandPoolCreateInfo.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkCommandPoolCreateInfo.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkCommandPoolCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkCommandPoolCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkCommandPoolCreateInfo} instance allocated on the specified {@link MemoryStack}.
@@ -339,6 +322,8 @@ public class VkCommandPoolCreateInfo extends Struct<VkCommandPoolCreateInfo> imp
         public VkCommandPoolCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkCommandPoolCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkCommandPoolCreateInfo.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkDataGraphProcessingEngineCreateInfoARM} value to the {@code pNext} chain. */
+        public VkCommandPoolCreateInfo.Buffer pNext(VkDataGraphProcessingEngineCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code flags} field. */
         public VkCommandPoolCreateInfo.Buffer flags(@NativeType("VkCommandPoolCreateFlags") int value) { VkCommandPoolCreateInfo.nflags(address(), value); return this; }
         /** Sets the specified value to the {@code queueFamilyIndex} field. */

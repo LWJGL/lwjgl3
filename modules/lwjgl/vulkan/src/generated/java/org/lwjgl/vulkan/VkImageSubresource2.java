@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkImageSubresource2 {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkImageSubresource VkImageSubresource} imageSubresource;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkImageSubresource2 extends Struct<VkImageSubresource2> implements NativeResource {
 
@@ -38,6 +38,8 @@ public class VkImageSubresource2 extends Struct<VkImageSubresource2> implements 
         IMAGESUBRESOURCE;
 
     static {
+        VkImageSubresource.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

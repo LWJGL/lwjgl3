@@ -8,36 +8,21 @@ import org.lwjgl.generator.*
 import opencl.*
 
 val arm_import_memory = "ARMImportMemory".nativeClassCL("arm_import_memory", ARM) {
-    IntConstant(
-        "IMPORT_TYPE_ARM"..0x40B2
+    LongConstant(
+        "IMPORT_TYPE_ARM"..0x40B2L,
+        "IMPORT_TYPE_HOST_ARM"..0x40B3L,
+        "IMPORT_TYPE_DMA_BUF_ARM"..0x40B4L,
+        "IMPORT_TYPE_PROTECTED_ARM"..0x40B5L
     )
 
-    IntConstant(
-        "IMPORT_TYPE_HOST_ARM"..0x40B3
+    LongConstant(
+        "IMPORT_TYPE_ANDROID_HARDWARE_BUFFER_ARM"..0x41E2L,
+        "IMPORT_DMA_BUF_DATA_CONSISTENCY_WITH_HOST_ARM"..0x41E3L
     )
 
-    IntConstant(
-        "IMPORT_TYPE_DMA_BUF_ARM"..0x40B4
-    )
-
-    IntConstant(
-        "IMPORT_TYPE_PROTECTED_ARM"..0x40B5
-    )
-
-    IntConstant(
-        "IMPORT_TYPE_ANDROID_HARDWARE_BUFFER_ARM"..0x41E2
-    )
-
-    IntConstant(
-        "IMPORT_DMA_BUF_DATA_CONSISTENCY_WITH_HOST_ARM"..0x41E3
-    )
-
-    IntConstant(
-        "IMPORT_ANDROID_HARDWARE_BUFFER_PLANE_INDEX_ARM"..0x41EF
-    )
-
-    IntConstant(
-        "IMPORT_ANDROID_HARDWARE_BUFFER_LAYER_INDEX_ARM"..0x41F0
+    LongConstant(
+        "IMPORT_ANDROID_HARDWARE_BUFFER_PLANE_INDEX_ARM"..0x41EFL,
+        "IMPORT_ANDROID_HARDWARE_BUFFER_LAYER_INDEX_ARM"..0x41F0L
     )
 
     LongConstant(

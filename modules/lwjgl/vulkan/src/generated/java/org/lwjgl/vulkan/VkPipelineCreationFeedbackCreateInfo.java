@@ -17,14 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPipelineCreationFeedbackCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link VkPipelineCreationFeedback VkPipelineCreationFeedback} * pPipelineCreationFeedback;
  *     uint32_t pipelineStageCreationFeedbackCount;
  *     {@link VkPipelineCreationFeedback VkPipelineCreationFeedback} * pPipelineStageCreationFeedbacks;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPipelineCreationFeedbackCreateInfo extends Struct<VkPipelineCreationFeedbackCreateInfo> implements NativeResource {
 

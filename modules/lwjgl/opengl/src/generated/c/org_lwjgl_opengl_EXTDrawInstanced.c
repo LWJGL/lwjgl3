@@ -12,13 +12,13 @@ typedef void (APIENTRY *glDrawElementsInstancedEXTPROC) (jint, jint, jint, uintp
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDrawInstanced_glDrawArraysInstancedEXT(JNIEnv *__env, jclass clazz, jint mode, jint start, jint count, jint primcount) {
-    glDrawArraysInstancedEXTPROC glDrawArraysInstancedEXT = (glDrawArraysInstancedEXTPROC)tlsGetFunction(1726);
+    glDrawArraysInstancedEXTPROC glDrawArraysInstancedEXT = (glDrawArraysInstancedEXTPROC)tlsGetFunction(1760);
     UNUSED_PARAM(clazz)
     glDrawArraysInstancedEXT(mode, start, count, primcount);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDrawInstanced_nglDrawElementsInstancedEXT(JNIEnv *__env, jclass clazz, jint mode, jint count, jint type, jlong indicesAddress, jint primcount) {
-    glDrawElementsInstancedEXTPROC glDrawElementsInstancedEXT = (glDrawElementsInstancedEXTPROC)tlsGetFunction(1727);
+    glDrawElementsInstancedEXTPROC glDrawElementsInstancedEXT = (glDrawElementsInstancedEXTPROC)tlsGetFunction(1761);
     uintptr_t indices = (uintptr_t)indicesAddress;
     UNUSED_PARAM(clazz)
     glDrawElementsInstancedEXT(mode, count, type, indices, primcount);

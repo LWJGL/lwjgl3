@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkGraphicsPipelineShaderGroupsCreateInfoNV {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkGraphicsShaderGroupCreateInfoNV VkGraphicsShaderGroupCreateInfoNV} const * pGroups;
  *     uint32_t pipelineCount;
  *     VkPipeline const * pPipelines;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkGraphicsPipelineShaderGroupsCreateInfoNV extends Struct<VkGraphicsPipelineShaderGroupsCreateInfoNV> implements NativeResource {
 

@@ -21,6 +21,13 @@ val KHR_calibrated_timestamps = "KHRCalibratedTimestamps".nativeClassVK("KHR_cal
         "STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_KHR".."1000184000"
     )
 
+    EnumConstant(
+        "TIME_DOMAIN_DEVICE_KHR".."0",
+        "TIME_DOMAIN_CLOCK_MONOTONIC_KHR".."1",
+        "TIME_DOMAIN_CLOCK_MONOTONIC_RAW_KHR".."2",
+        "TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_KHR".."3"
+    )
+
     VkResult(
         "GetPhysicalDeviceCalibrateableTimeDomainsKHR",
 

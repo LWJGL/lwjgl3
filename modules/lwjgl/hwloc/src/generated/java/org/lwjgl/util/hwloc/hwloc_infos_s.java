@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct hwloc_infos_s {
  *     {@link hwloc_info_s struct hwloc_info_s} * array;
  *     unsigned count;
  *     unsigned allocated;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct hwloc_infos_s")
 public class hwloc_infos_s extends Struct<hwloc_infos_s> implements NativeResource {
@@ -197,7 +197,7 @@ public class hwloc_infos_s extends Struct<hwloc_infos_s> implements NativeResour
     public static hwloc_info_s.@Nullable Buffer narray(long struct) { return hwloc_info_s.createSafe(memGetAddress(struct + hwloc_infos_s.ARRAY), ncount(struct)); }
     /** Unsafe version of {@link #count}. */
     public static int ncount(long struct) { return memGetInt(struct + hwloc_infos_s.COUNT); }
-    public static int nallocated(long struct) { return memGetInt(struct + hwloc_infos_s.ALLOCATED); }
+    static int nallocated(long struct) { return memGetInt(struct + hwloc_infos_s.ALLOCATED); }
 
     // -----------------------------------
 

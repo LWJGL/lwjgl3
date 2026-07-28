@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpatialAnchorCompletionResultML {
  *     {@link XrUuidEXT XrUuidEXT} uuid;
  *     XrResult result;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpatialAnchorCompletionResultML extends Struct<XrSpatialAnchorCompletionResultML> implements NativeResource {
 
@@ -36,6 +36,8 @@ public class XrSpatialAnchorCompletionResultML extends Struct<XrSpatialAnchorCom
         RESULT;
 
     static {
+        XrUuidEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrUuidEXT.SIZEOF, XrUuidEXT.ALIGNOF),
             __member(4)

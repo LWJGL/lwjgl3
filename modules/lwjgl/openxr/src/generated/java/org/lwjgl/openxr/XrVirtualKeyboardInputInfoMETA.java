@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrVirtualKeyboardInputInfoMETA {
  *     XrStructureType type;
  *     void const * next;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrSpace inputSpace;
  *     {@link XrPosef XrPosef} inputPoseInSpace;
  *     XrVirtualKeyboardInputStateFlagsMETA inputState;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrVirtualKeyboardInputInfoMETA extends Struct<XrVirtualKeyboardInputInfoMETA> implements NativeResource {
 
@@ -44,6 +44,8 @@ public class XrVirtualKeyboardInputInfoMETA extends Struct<XrVirtualKeyboardInpu
         INPUTSTATE;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -97,7 +99,7 @@ public class XrVirtualKeyboardInputInfoMETA extends Struct<XrVirtualKeyboardInpu
     public int inputSource() { return ninputSource(address()); }
     /** @return the value of the {@code inputSpace} field. */
     @NativeType("XrSpace")
-    public @Nullable long inputSpace() { return ninputSpace(address()); }
+    public long inputSpace() { return ninputSpace(address()); }
     /** @return a {@link XrPosef} view of the {@code inputPoseInSpace} field. */
     public XrPosef inputPoseInSpace() { return ninputPoseInSpace(address()); }
     /** @return the value of the {@code inputState} field. */
@@ -343,7 +345,7 @@ public class XrVirtualKeyboardInputInfoMETA extends Struct<XrVirtualKeyboardInpu
         public int inputSource() { return XrVirtualKeyboardInputInfoMETA.ninputSource(address()); }
         /** @return the value of the {@code inputSpace} field. */
         @NativeType("XrSpace")
-        public @Nullable long inputSpace() { return XrVirtualKeyboardInputInfoMETA.ninputSpace(address()); }
+        public long inputSpace() { return XrVirtualKeyboardInputInfoMETA.ninputSpace(address()); }
         /** @return a {@link XrPosef} view of the {@code inputPoseInSpace} field. */
         public XrPosef inputPoseInSpace() { return XrVirtualKeyboardInputInfoMETA.ninputPoseInSpace(address()); }
         /** @return the value of the {@code inputState} field. */

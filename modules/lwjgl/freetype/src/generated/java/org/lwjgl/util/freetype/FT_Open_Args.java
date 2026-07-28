@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_Open_Args {
  *     FT_UInt flags;
  *     FT_Byte const * memory_base;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     FT_Module driver;
  *     FT_Int num_params;
  *     {@link FT_Parameter FT_Parameter} * params;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_Open_Args extends Struct<FT_Open_Args> implements NativeResource {
 

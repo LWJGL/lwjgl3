@@ -14,11 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct hwloc_topology_diff_generic_s {
  *     hwloc_topology_diff_type_t type;
  *     {@link hwloc_topology_diff_u hwloc_topology_diff_u} * next;
- * }}</pre>
+ * }</code></pre>
  */
 public class hwloc_topology_diff_generic_s extends Struct<hwloc_topology_diff_generic_s> {
 

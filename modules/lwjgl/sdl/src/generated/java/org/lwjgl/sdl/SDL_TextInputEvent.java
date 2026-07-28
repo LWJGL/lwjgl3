@@ -248,7 +248,7 @@ public class SDL_TextInputEvent extends Struct<SDL_TextInputEvent> implements Na
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_TextInputEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_TextInputEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_TextInputEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_TextInputEvent.TIMESTAMP); }
     /** Unsafe version of {@link #windowID}. */
@@ -260,7 +260,7 @@ public class SDL_TextInputEvent extends Struct<SDL_TextInputEvent> implements Na
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_TextInputEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_TextInputEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_TextInputEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_TextInputEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #windowID(int) windowID}. */

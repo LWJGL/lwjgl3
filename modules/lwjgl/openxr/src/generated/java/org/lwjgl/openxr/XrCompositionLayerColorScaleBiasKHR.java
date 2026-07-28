@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrCompositionLayerColorScaleBiasKHR {
  *     XrStructureType type;
  *     void const * next;
  *     {@link XrColor4f XrColor4f} colorScale;
  *     {@link XrColor4f XrColor4f} colorBias;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrCompositionLayerColorScaleBiasKHR extends Struct<XrCompositionLayerColorScaleBiasKHR> implements NativeResource {
 
@@ -40,6 +40,8 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct<XrCompositionLay
         COLORBIAS;
 
     static {
+        XrColor4f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

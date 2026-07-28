@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpherefKHR {
  *     {@link XrPosef XrPosef} center;
  *     float radius;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpherefKHR extends XrSpheref {
 

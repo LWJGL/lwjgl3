@@ -74,28 +74,12 @@ public class VK13 extends VK12 {
     public static final int VK_OBJECT_TYPE_PRIVATE_DATA_SLOT = 1000295000;
 
     public static final int
-        VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT = 0x100,
-        VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT           = 0x200;
-
-    public static final int VK_PIPELINE_COMPILE_REQUIRED = 1000297000;
-
-    public static final int VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT = 0x1;
-
-    public static final int VK_EVENT_CREATE_DEVICE_ONLY_BIT = 0x1;
-
-    public static final int
         VK_IMAGE_LAYOUT_READ_ONLY_OPTIMAL  = 1000314000,
         VK_IMAGE_LAYOUT_ATTACHMENT_OPTIMAL = 1000314001;
 
     public static final int VK_PIPELINE_STAGE_NONE = 0;
 
     public static final int VK_ACCESS_NONE = 0;
-
-    public static final int
-        VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT = 0x1,
-        VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT      = 0x2;
-
-    public static final int VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK = 1000138000;
 
     public static final int
         VK_FORMAT_ASTC_4x4_SFLOAT_BLOCK                     = 1000066000,
@@ -118,25 +102,6 @@ public class VK13 extends VK12 {
         VK_FORMAT_G16_B16R16_2PLANE_444_UNORM               = 1000330003,
         VK_FORMAT_A4R4G4B4_UNORM_PACK16                     = 1000340000,
         VK_FORMAT_A4B4G4R4_UNORM_PACK16                     = 1000340001;
-
-    public static final int VK_ATTACHMENT_STORE_OP_NONE = 1000301000;
-
-    public static final int
-        VK_DYNAMIC_STATE_CULL_MODE                   = 1000267000,
-        VK_DYNAMIC_STATE_FRONT_FACE                  = 1000267001,
-        VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY          = 1000267002,
-        VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT         = 1000267003,
-        VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT          = 1000267004,
-        VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE = 1000267005,
-        VK_DYNAMIC_STATE_DEPTH_TEST_ENABLE           = 1000267006,
-        VK_DYNAMIC_STATE_DEPTH_WRITE_ENABLE          = 1000267007,
-        VK_DYNAMIC_STATE_DEPTH_COMPARE_OP            = 1000267008,
-        VK_DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE    = 1000267009,
-        VK_DYNAMIC_STATE_STENCIL_TEST_ENABLE         = 1000267010,
-        VK_DYNAMIC_STATE_STENCIL_OP                  = 1000267011,
-        VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE   = 1000377001,
-        VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE           = 1000377002,
-        VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE    = 1000377004;
 
     public static final long
         VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_BIT                                                           = 0x1L,
@@ -170,9 +135,39 @@ public class VK13 extends VK12 {
     public static final int VK_IMAGE_ASPECT_NONE = 0;
 
     public static final int
-        VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT                          = 0x1,
-        VK_PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT = 0x2,
-        VK_PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT     = 0x4;
+        VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT = 0x100,
+        VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT           = 0x200;
+
+    public static final int VK_PIPELINE_COMPILE_REQUIRED = 1000297000;
+
+    public static final int VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT = 0x1;
+
+    public static final int VK_EVENT_CREATE_DEVICE_ONLY_BIT = 0x1;
+
+    public static final int
+        VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT = 0x1,
+        VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT      = 0x2;
+
+    public static final int VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK = 1000138000;
+
+    public static final int VK_ATTACHMENT_STORE_OP_NONE = 1000301000;
+
+    public static final int
+        VK_DYNAMIC_STATE_CULL_MODE                   = 1000267000,
+        VK_DYNAMIC_STATE_FRONT_FACE                  = 1000267001,
+        VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY          = 1000267002,
+        VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT         = 1000267003,
+        VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT          = 1000267004,
+        VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE = 1000267005,
+        VK_DYNAMIC_STATE_DEPTH_TEST_ENABLE           = 1000267006,
+        VK_DYNAMIC_STATE_DEPTH_WRITE_ENABLE          = 1000267007,
+        VK_DYNAMIC_STATE_DEPTH_COMPARE_OP            = 1000267008,
+        VK_DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE    = 1000267009,
+        VK_DYNAMIC_STATE_STENCIL_TEST_ENABLE         = 1000267010,
+        VK_DYNAMIC_STATE_STENCIL_OP                  = 1000267011,
+        VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE   = 1000377001,
+        VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE           = 1000377002,
+        VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE    = 1000377004;
 
     public static final int
         VK_TOOL_PURPOSE_VALIDATION_BIT          = 0x1,
@@ -233,6 +228,11 @@ public class VK13 extends VK12 {
         VK_ACCESS_2_SHADER_STORAGE_WRITE_BIT           = 0x400000000L;
 
     public static final int VK_SUBMIT_PROTECTED_BIT = 0x1;
+
+    public static final int
+        VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT                          = 0x1,
+        VK_PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT = 0x2,
+        VK_PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT     = 0x4;
 
     public static final int
         VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT = 0x1,
@@ -331,54 +331,6 @@ public class VK13 extends VK12 {
             check(pData, 1);
         }
         nvkGetPrivateData(device, objectType, objectHandle, privateDataSlot, memAddress(pData));
-    }
-
-    // --- [ vkCmdSetEvent2 ] ---
-
-    /** {@code void vkCmdSetEvent2(VkCommandBuffer commandBuffer, VkEvent event, VkDependencyInfo const * pDependencyInfo)} */
-    public static void nvkCmdSetEvent2(VkCommandBuffer commandBuffer, long event, long pDependencyInfo) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdSetEvent2;
-        if (CHECKS) {
-            check(__functionAddress);
-            VkDependencyInfo.validate(pDependencyInfo);
-        }
-        callPJPV(commandBuffer.address(), event, pDependencyInfo, __functionAddress);
-    }
-
-    /** {@code void vkCmdSetEvent2(VkCommandBuffer commandBuffer, VkEvent event, VkDependencyInfo const * pDependencyInfo)} */
-    public static void vkCmdSetEvent2(VkCommandBuffer commandBuffer, @NativeType("VkEvent") long event, @NativeType("VkDependencyInfo const *") VkDependencyInfo pDependencyInfo) {
-        nvkCmdSetEvent2(commandBuffer, event, pDependencyInfo.address());
-    }
-
-    // --- [ vkCmdResetEvent2 ] ---
-
-    /** {@code void vkCmdResetEvent2(VkCommandBuffer commandBuffer, VkEvent event, VkPipelineStageFlags2 stageMask)} */
-    public static void vkCmdResetEvent2(VkCommandBuffer commandBuffer, @NativeType("VkEvent") long event, @NativeType("VkPipelineStageFlags2") long stageMask) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdResetEvent2;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        callPJJV(commandBuffer.address(), event, stageMask, __functionAddress);
-    }
-
-    // --- [ vkCmdWaitEvents2 ] ---
-
-    /** {@code void vkCmdWaitEvents2(VkCommandBuffer commandBuffer, uint32_t eventCount, VkEvent const * pEvents, VkDependencyInfo const * pDependencyInfos)} */
-    public static void nvkCmdWaitEvents2(VkCommandBuffer commandBuffer, int eventCount, long pEvents, long pDependencyInfos) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdWaitEvents2;
-        if (CHECKS) {
-            check(__functionAddress);
-            Struct.validate(pDependencyInfos, eventCount, VkDependencyInfo.SIZEOF, VkDependencyInfo::validate);
-        }
-        callPPPV(commandBuffer.address(), eventCount, pEvents, pDependencyInfos, __functionAddress);
-    }
-
-    /** {@code void vkCmdWaitEvents2(VkCommandBuffer commandBuffer, uint32_t eventCount, VkEvent const * pEvents, VkDependencyInfo const * pDependencyInfos)} */
-    public static void vkCmdWaitEvents2(VkCommandBuffer commandBuffer, @NativeType("VkEvent const *") LongBuffer pEvents, @NativeType("VkDependencyInfo const *") VkDependencyInfo.Buffer pDependencyInfos) {
-        if (CHECKS) {
-            check(pDependencyInfos, pEvents.remaining());
-        }
-        nvkCmdWaitEvents2(commandBuffer, pEvents.remaining(), memAddress(pEvents), pDependencyInfos.address());
     }
 
     // --- [ vkCmdPipelineBarrier2 ] ---
@@ -493,6 +445,109 @@ public class VK13 extends VK12 {
     /** {@code void vkCmdCopyImageToBuffer2(VkCommandBuffer commandBuffer, VkCopyImageToBufferInfo2 const * pCopyImageToBufferInfo)} */
     public static void vkCmdCopyImageToBuffer2(VkCommandBuffer commandBuffer, @NativeType("VkCopyImageToBufferInfo2 const *") VkCopyImageToBufferInfo2 pCopyImageToBufferInfo) {
         nvkCmdCopyImageToBuffer2(commandBuffer, pCopyImageToBufferInfo.address());
+    }
+
+    // --- [ vkGetDeviceBufferMemoryRequirements ] ---
+
+    /** {@code void vkGetDeviceBufferMemoryRequirements(VkDevice device, VkDeviceBufferMemoryRequirements const * pInfo, VkMemoryRequirements2 * pMemoryRequirements)} */
+    public static void nvkGetDeviceBufferMemoryRequirements(VkDevice device, long pInfo, long pMemoryRequirements) {
+        long __functionAddress = device.getCapabilities().vkGetDeviceBufferMemoryRequirements;
+        if (CHECKS) {
+            check(__functionAddress);
+            VkDeviceBufferMemoryRequirements.validate(pInfo);
+        }
+        callPPPV(device.address(), pInfo, pMemoryRequirements, __functionAddress);
+    }
+
+    /** {@code void vkGetDeviceBufferMemoryRequirements(VkDevice device, VkDeviceBufferMemoryRequirements const * pInfo, VkMemoryRequirements2 * pMemoryRequirements)} */
+    public static void vkGetDeviceBufferMemoryRequirements(VkDevice device, @NativeType("VkDeviceBufferMemoryRequirements const *") VkDeviceBufferMemoryRequirements pInfo, @NativeType("VkMemoryRequirements2 *") VkMemoryRequirements2 pMemoryRequirements) {
+        nvkGetDeviceBufferMemoryRequirements(device, pInfo.address(), pMemoryRequirements.address());
+    }
+
+    // --- [ vkGetDeviceImageMemoryRequirements ] ---
+
+    /** {@code void vkGetDeviceImageMemoryRequirements(VkDevice device, VkDeviceImageMemoryRequirements const * pInfo, VkMemoryRequirements2 * pMemoryRequirements)} */
+    public static void nvkGetDeviceImageMemoryRequirements(VkDevice device, long pInfo, long pMemoryRequirements) {
+        long __functionAddress = device.getCapabilities().vkGetDeviceImageMemoryRequirements;
+        if (CHECKS) {
+            check(__functionAddress);
+            VkDeviceImageMemoryRequirements.validate(pInfo);
+        }
+        callPPPV(device.address(), pInfo, pMemoryRequirements, __functionAddress);
+    }
+
+    /** {@code void vkGetDeviceImageMemoryRequirements(VkDevice device, VkDeviceImageMemoryRequirements const * pInfo, VkMemoryRequirements2 * pMemoryRequirements)} */
+    public static void vkGetDeviceImageMemoryRequirements(VkDevice device, @NativeType("VkDeviceImageMemoryRequirements const *") VkDeviceImageMemoryRequirements pInfo, @NativeType("VkMemoryRequirements2 *") VkMemoryRequirements2 pMemoryRequirements) {
+        nvkGetDeviceImageMemoryRequirements(device, pInfo.address(), pMemoryRequirements.address());
+    }
+
+    // --- [ vkGetDeviceImageSparseMemoryRequirements ] ---
+
+    /** {@code void vkGetDeviceImageSparseMemoryRequirements(VkDevice device, VkDeviceImageMemoryRequirements const * pInfo, uint32_t * pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements2 * pSparseMemoryRequirements)} */
+    public static void nvkGetDeviceImageSparseMemoryRequirements(VkDevice device, long pInfo, long pSparseMemoryRequirementCount, long pSparseMemoryRequirements) {
+        long __functionAddress = device.getCapabilities().vkGetDeviceImageSparseMemoryRequirements;
+        if (CHECKS) {
+            check(__functionAddress);
+            VkDeviceImageMemoryRequirements.validate(pInfo);
+        }
+        callPPPPV(device.address(), pInfo, pSparseMemoryRequirementCount, pSparseMemoryRequirements, __functionAddress);
+    }
+
+    /** {@code void vkGetDeviceImageSparseMemoryRequirements(VkDevice device, VkDeviceImageMemoryRequirements const * pInfo, uint32_t * pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements2 * pSparseMemoryRequirements)} */
+    public static void vkGetDeviceImageSparseMemoryRequirements(VkDevice device, @NativeType("VkDeviceImageMemoryRequirements const *") VkDeviceImageMemoryRequirements pInfo, @NativeType("uint32_t *") IntBuffer pSparseMemoryRequirementCount, @NativeType("VkSparseImageMemoryRequirements2 *") VkSparseImageMemoryRequirements2.@Nullable Buffer pSparseMemoryRequirements) {
+        if (CHECKS) {
+            check(pSparseMemoryRequirementCount, 1);
+            checkSafe(pSparseMemoryRequirements, pSparseMemoryRequirementCount.get(pSparseMemoryRequirementCount.position()));
+        }
+        nvkGetDeviceImageSparseMemoryRequirements(device, pInfo.address(), memAddress(pSparseMemoryRequirementCount), memAddressSafe(pSparseMemoryRequirements));
+    }
+
+    // --- [ vkCmdSetEvent2 ] ---
+
+    /** {@code void vkCmdSetEvent2(VkCommandBuffer commandBuffer, VkEvent event, VkDependencyInfo const * pDependencyInfo)} */
+    public static void nvkCmdSetEvent2(VkCommandBuffer commandBuffer, long event, long pDependencyInfo) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdSetEvent2;
+        if (CHECKS) {
+            check(__functionAddress);
+            VkDependencyInfo.validate(pDependencyInfo);
+        }
+        callPJPV(commandBuffer.address(), event, pDependencyInfo, __functionAddress);
+    }
+
+    /** {@code void vkCmdSetEvent2(VkCommandBuffer commandBuffer, VkEvent event, VkDependencyInfo const * pDependencyInfo)} */
+    public static void vkCmdSetEvent2(VkCommandBuffer commandBuffer, @NativeType("VkEvent") long event, @NativeType("VkDependencyInfo const *") VkDependencyInfo pDependencyInfo) {
+        nvkCmdSetEvent2(commandBuffer, event, pDependencyInfo.address());
+    }
+
+    // --- [ vkCmdResetEvent2 ] ---
+
+    /** {@code void vkCmdResetEvent2(VkCommandBuffer commandBuffer, VkEvent event, VkPipelineStageFlags2 stageMask)} */
+    public static void vkCmdResetEvent2(VkCommandBuffer commandBuffer, @NativeType("VkEvent") long event, @NativeType("VkPipelineStageFlags2") long stageMask) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdResetEvent2;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPJJV(commandBuffer.address(), event, stageMask, __functionAddress);
+    }
+
+    // --- [ vkCmdWaitEvents2 ] ---
+
+    /** {@code void vkCmdWaitEvents2(VkCommandBuffer commandBuffer, uint32_t eventCount, VkEvent const * pEvents, VkDependencyInfo const * pDependencyInfos)} */
+    public static void nvkCmdWaitEvents2(VkCommandBuffer commandBuffer, int eventCount, long pEvents, long pDependencyInfos) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdWaitEvents2;
+        if (CHECKS) {
+            check(__functionAddress);
+            Struct.validate(pDependencyInfos, eventCount, VkDependencyInfo.SIZEOF, VkDependencyInfo::validate);
+        }
+        callPPPV(commandBuffer.address(), eventCount, pEvents, pDependencyInfos, __functionAddress);
+    }
+
+    /** {@code void vkCmdWaitEvents2(VkCommandBuffer commandBuffer, uint32_t eventCount, VkEvent const * pEvents, VkDependencyInfo const * pDependencyInfos)} */
+    public static void vkCmdWaitEvents2(VkCommandBuffer commandBuffer, @NativeType("VkEvent const *") LongBuffer pEvents, @NativeType("VkDependencyInfo const *") VkDependencyInfo.Buffer pDependencyInfos) {
+        if (CHECKS) {
+            check(pDependencyInfos, pEvents.remaining());
+        }
+        nvkCmdWaitEvents2(commandBuffer, pEvents.remaining(), memAddress(pEvents), pDependencyInfos.address());
     }
 
     // --- [ vkCmdBlitImage2 ] ---
@@ -742,61 +797,6 @@ public class VK13 extends VK12 {
         callPV(commandBuffer.address(), primitiveRestartEnable ? 1 : 0, __functionAddress);
     }
 
-    // --- [ vkGetDeviceBufferMemoryRequirements ] ---
-
-    /** {@code void vkGetDeviceBufferMemoryRequirements(VkDevice device, VkDeviceBufferMemoryRequirements const * pInfo, VkMemoryRequirements2 * pMemoryRequirements)} */
-    public static void nvkGetDeviceBufferMemoryRequirements(VkDevice device, long pInfo, long pMemoryRequirements) {
-        long __functionAddress = device.getCapabilities().vkGetDeviceBufferMemoryRequirements;
-        if (CHECKS) {
-            check(__functionAddress);
-            VkDeviceBufferMemoryRequirements.validate(pInfo);
-        }
-        callPPPV(device.address(), pInfo, pMemoryRequirements, __functionAddress);
-    }
-
-    /** {@code void vkGetDeviceBufferMemoryRequirements(VkDevice device, VkDeviceBufferMemoryRequirements const * pInfo, VkMemoryRequirements2 * pMemoryRequirements)} */
-    public static void vkGetDeviceBufferMemoryRequirements(VkDevice device, @NativeType("VkDeviceBufferMemoryRequirements const *") VkDeviceBufferMemoryRequirements pInfo, @NativeType("VkMemoryRequirements2 *") VkMemoryRequirements2 pMemoryRequirements) {
-        nvkGetDeviceBufferMemoryRequirements(device, pInfo.address(), pMemoryRequirements.address());
-    }
-
-    // --- [ vkGetDeviceImageMemoryRequirements ] ---
-
-    /** {@code void vkGetDeviceImageMemoryRequirements(VkDevice device, VkDeviceImageMemoryRequirements const * pInfo, VkMemoryRequirements2 * pMemoryRequirements)} */
-    public static void nvkGetDeviceImageMemoryRequirements(VkDevice device, long pInfo, long pMemoryRequirements) {
-        long __functionAddress = device.getCapabilities().vkGetDeviceImageMemoryRequirements;
-        if (CHECKS) {
-            check(__functionAddress);
-            VkDeviceImageMemoryRequirements.validate(pInfo);
-        }
-        callPPPV(device.address(), pInfo, pMemoryRequirements, __functionAddress);
-    }
-
-    /** {@code void vkGetDeviceImageMemoryRequirements(VkDevice device, VkDeviceImageMemoryRequirements const * pInfo, VkMemoryRequirements2 * pMemoryRequirements)} */
-    public static void vkGetDeviceImageMemoryRequirements(VkDevice device, @NativeType("VkDeviceImageMemoryRequirements const *") VkDeviceImageMemoryRequirements pInfo, @NativeType("VkMemoryRequirements2 *") VkMemoryRequirements2 pMemoryRequirements) {
-        nvkGetDeviceImageMemoryRequirements(device, pInfo.address(), pMemoryRequirements.address());
-    }
-
-    // --- [ vkGetDeviceImageSparseMemoryRequirements ] ---
-
-    /** {@code void vkGetDeviceImageSparseMemoryRequirements(VkDevice device, VkDeviceImageMemoryRequirements const * pInfo, uint32_t * pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements2 * pSparseMemoryRequirements)} */
-    public static void nvkGetDeviceImageSparseMemoryRequirements(VkDevice device, long pInfo, long pSparseMemoryRequirementCount, long pSparseMemoryRequirements) {
-        long __functionAddress = device.getCapabilities().vkGetDeviceImageSparseMemoryRequirements;
-        if (CHECKS) {
-            check(__functionAddress);
-            VkDeviceImageMemoryRequirements.validate(pInfo);
-        }
-        callPPPPV(device.address(), pInfo, pSparseMemoryRequirementCount, pSparseMemoryRequirements, __functionAddress);
-    }
-
-    /** {@code void vkGetDeviceImageSparseMemoryRequirements(VkDevice device, VkDeviceImageMemoryRequirements const * pInfo, uint32_t * pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements2 * pSparseMemoryRequirements)} */
-    public static void vkGetDeviceImageSparseMemoryRequirements(VkDevice device, @NativeType("VkDeviceImageMemoryRequirements const *") VkDeviceImageMemoryRequirements pInfo, @NativeType("uint32_t *") IntBuffer pSparseMemoryRequirementCount, @NativeType("VkSparseImageMemoryRequirements2 *") VkSparseImageMemoryRequirements2.@Nullable Buffer pSparseMemoryRequirements) {
-        if (CHECKS) {
-            check(pSparseMemoryRequirementCount, 1);
-            checkSafe(pSparseMemoryRequirements, pSparseMemoryRequirementCount.get(pSparseMemoryRequirementCount.position()));
-        }
-        nvkGetDeviceImageSparseMemoryRequirements(device, pInfo.address(), memAddress(pSparseMemoryRequirementCount), memAddressSafe(pSparseMemoryRequirements));
-    }
-
     /** {@code VkResult vkGetPhysicalDeviceToolProperties(VkPhysicalDevice physicalDevice, uint32_t * pToolCount, VkPhysicalDeviceToolProperties * pToolProperties)} */
     @NativeType("VkResult")
     public static int vkGetPhysicalDeviceToolProperties(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pToolCount, @NativeType("VkPhysicalDeviceToolProperties *") VkPhysicalDeviceToolProperties.@Nullable Buffer pToolProperties) {
@@ -830,6 +830,18 @@ public class VK13 extends VK12 {
         callPJJPV(device.address(), objectType, objectHandle, privateDataSlot, pData, __functionAddress);
     }
 
+    /** {@code void vkGetDeviceImageSparseMemoryRequirements(VkDevice device, VkDeviceImageMemoryRequirements const * pInfo, uint32_t * pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements2 * pSparseMemoryRequirements)} */
+    public static void vkGetDeviceImageSparseMemoryRequirements(VkDevice device, @NativeType("VkDeviceImageMemoryRequirements const *") VkDeviceImageMemoryRequirements pInfo, @NativeType("uint32_t *") int[] pSparseMemoryRequirementCount, @NativeType("VkSparseImageMemoryRequirements2 *") VkSparseImageMemoryRequirements2.@Nullable Buffer pSparseMemoryRequirements) {
+        long __functionAddress = device.getCapabilities().vkGetDeviceImageSparseMemoryRequirements;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(pSparseMemoryRequirementCount, 1);
+            checkSafe(pSparseMemoryRequirements, pSparseMemoryRequirementCount[0]);
+            VkDeviceImageMemoryRequirements.validate(pInfo.address());
+        }
+        callPPPPV(device.address(), pInfo.address(), pSparseMemoryRequirementCount, memAddressSafe(pSparseMemoryRequirements), __functionAddress);
+    }
+
     /** {@code void vkCmdWaitEvents2(VkCommandBuffer commandBuffer, uint32_t eventCount, VkEvent const * pEvents, VkDependencyInfo const * pDependencyInfos)} */
     public static void vkCmdWaitEvents2(VkCommandBuffer commandBuffer, @NativeType("VkEvent const *") long[] pEvents, @NativeType("VkDependencyInfo const *") VkDependencyInfo.Buffer pDependencyInfos) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdWaitEvents2;
@@ -851,18 +863,6 @@ public class VK13 extends VK12 {
             checkSafe(pStrides, pBuffers.length);
         }
         callPPPPPV(commandBuffer.address(), firstBinding, pBuffers.length, pBuffers, pOffsets, pSizes, pStrides, __functionAddress);
-    }
-
-    /** {@code void vkGetDeviceImageSparseMemoryRequirements(VkDevice device, VkDeviceImageMemoryRequirements const * pInfo, uint32_t * pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements2 * pSparseMemoryRequirements)} */
-    public static void vkGetDeviceImageSparseMemoryRequirements(VkDevice device, @NativeType("VkDeviceImageMemoryRequirements const *") VkDeviceImageMemoryRequirements pInfo, @NativeType("uint32_t *") int[] pSparseMemoryRequirementCount, @NativeType("VkSparseImageMemoryRequirements2 *") VkSparseImageMemoryRequirements2.@Nullable Buffer pSparseMemoryRequirements) {
-        long __functionAddress = device.getCapabilities().vkGetDeviceImageSparseMemoryRequirements;
-        if (CHECKS) {
-            check(__functionAddress);
-            check(pSparseMemoryRequirementCount, 1);
-            checkSafe(pSparseMemoryRequirements, pSparseMemoryRequirementCount[0]);
-            VkDeviceImageMemoryRequirements.validate(pInfo.address());
-        }
-        callPPPPV(device.address(), pInfo.address(), pSparseMemoryRequirementCount, memAddressSafe(pSparseMemoryRequirements), __functionAddress);
     }
 
 }

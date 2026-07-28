@@ -11,7 +11,7 @@ typedef void (APIENTRY *glPrimitiveBoundingBoxARBPROC) (jfloat, jfloat, jfloat, 
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBES32Compatibility_glPrimitiveBoundingBoxARB(JNIEnv *__env, jclass clazz, jfloat minX, jfloat minY, jfloat minZ, jfloat minW, jfloat maxX, jfloat maxY, jfloat maxZ, jfloat maxW) {
-    glPrimitiveBoundingBoxARBPROC glPrimitiveBoundingBoxARB = (glPrimitiveBoundingBoxARBPROC)tlsGetFunction(1144);
+    glPrimitiveBoundingBoxARBPROC glPrimitiveBoundingBoxARB = (glPrimitiveBoundingBoxARBPROC)tlsGetFunction(1178);
     UNUSED_PARAM(clazz)
     glPrimitiveBoundingBoxARB(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW);
 }

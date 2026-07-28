@@ -244,7 +244,7 @@ public class SDL_PenProximityEvent extends Struct<SDL_PenProximityEvent> impleme
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_PenProximityEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_PenProximityEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_PenProximityEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_PenProximityEvent.TIMESTAMP); }
     /** Unsafe version of {@link #windowID}. */
@@ -254,7 +254,7 @@ public class SDL_PenProximityEvent extends Struct<SDL_PenProximityEvent> impleme
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_PenProximityEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_PenProximityEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_PenProximityEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_PenProximityEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #windowID(int) windowID}. */

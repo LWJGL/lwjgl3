@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrPlaneDetectorBeginInfoEXT {
  *     XrStructureType type;
  *     void const * next;
@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float minArea;
  *     {@link XrPosef XrPosef} boundingBoxPose;
  *     {@link XrExtent3DfEXT XrExtent3DfEXT} boundingBoxExtent;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrPlaneDetectorBeginInfoEXT extends Struct<XrPlaneDetectorBeginInfoEXT> implements NativeResource {
 
@@ -57,6 +57,9 @@ public class XrPlaneDetectorBeginInfoEXT extends Struct<XrPlaneDetectorBeginInfo
         BOUNDINGBOXEXTENT;
 
     static {
+        XrPosef.createSafe(NULL);
+        XrExtent3DfEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

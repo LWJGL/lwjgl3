@@ -25,6 +25,17 @@ val NV_cooperative_vector = "NVCooperativeVector".nativeClassVK("NV_cooperative_
     )
 
     EnumConstant(
+        "COMPONENT_TYPE_FLOAT16_KHR".."0",
+        "COMPONENT_TYPE_FLOAT32_KHR".."1",
+        "COMPONENT_TYPE_FLOAT64_KHR".."2",
+        "COMPONENT_TYPE_SINT8_KHR".."3",
+        "COMPONENT_TYPE_SINT16_KHR".."4",
+        "COMPONENT_TYPE_SINT32_KHR".."5",
+        "COMPONENT_TYPE_SINT64_KHR".."6",
+        "COMPONENT_TYPE_UINT8_KHR".."7",
+        "COMPONENT_TYPE_UINT16_KHR".."8",
+        "COMPONENT_TYPE_UINT32_KHR".."9",
+        "COMPONENT_TYPE_UINT64_KHR".."10",
         "COMPONENT_TYPE_SINT8_PACKED_NV".."1000491000",
         "COMPONENT_TYPE_UINT8_PACKED_NV".."1000491001",
         "COMPONENT_TYPE_FLOAT_E4M3_NV".."1000491002",

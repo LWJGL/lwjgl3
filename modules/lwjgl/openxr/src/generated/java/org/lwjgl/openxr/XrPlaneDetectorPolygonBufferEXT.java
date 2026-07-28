@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrPlaneDetectorPolygonBufferEXT {
  *     XrStructureType type;
  *     void * next;
  *     uint32_t vertexCapacityInput;
  *     uint32_t vertexCountOutput;
  *     {@link XrVector2f XrVector2f} * vertices;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrPlaneDetectorPolygonBufferEXT extends Struct<XrPlaneDetectorPolygonBufferEXT> implements NativeResource {
 

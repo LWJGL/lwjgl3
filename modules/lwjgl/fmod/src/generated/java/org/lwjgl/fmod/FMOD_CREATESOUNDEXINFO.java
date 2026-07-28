@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FMOD_CREATESOUNDEXINFO {
  *     int cbsize;
  *     unsigned int length;
@@ -55,7 +55,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int minmidigranularity;
  *     int nonblockthreadid;
  *     {@link FMOD_GUID FMOD_GUID} * fsbguid;
- * }}</pre>
+ * }</code></pre>
  */
 public class FMOD_CREATESOUNDEXINFO extends Struct<FMOD_CREATESOUNDEXINFO> implements NativeResource {
 
@@ -105,6 +105,16 @@ public class FMOD_CREATESOUNDEXINFO extends Struct<FMOD_CREATESOUNDEXINFO> imple
         FSBGUID;
 
     static {
+        java.util.Objects.requireNonNull(FMOD_SOUND_PCMREAD_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_SOUND_PCMSETPOS_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_SOUND_NONBLOCK_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_FILE_OPEN_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_FILE_CLOSE_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_FILE_READ_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_FILE_SEEK_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_FILE_ASYNCREAD_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_FILE_ASYNCCANCEL_CALLBACKI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

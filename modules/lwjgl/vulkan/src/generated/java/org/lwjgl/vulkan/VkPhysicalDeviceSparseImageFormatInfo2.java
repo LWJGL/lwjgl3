@@ -118,6 +118,8 @@ public class VkPhysicalDeviceSparseImageFormatInfo2 extends Struct<VkPhysicalDev
     public VkPhysicalDeviceSparseImageFormatInfo2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceSparseImageFormatInfo2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkImageUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceSparseImageFormatInfo2 pNext(VkImageUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code format} field. */
     public VkPhysicalDeviceSparseImageFormatInfo2 format(@NativeType("VkFormat") int value) { nformat(address(), value); return this; }
     /** Sets the specified value to the {@code type} field. */
@@ -232,25 +234,6 @@ public class VkPhysicalDeviceSparseImageFormatInfo2 extends Struct<VkPhysicalDev
     public static VkPhysicalDeviceSparseImageFormatInfo2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceSparseImageFormatInfo2 mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceSparseImageFormatInfo2 callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceSparseImageFormatInfo2 mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceSparseImageFormatInfo2 callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceSparseImageFormatInfo2.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceSparseImageFormatInfo2.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceSparseImageFormatInfo2.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceSparseImageFormatInfo2.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkPhysicalDeviceSparseImageFormatInfo2} instance allocated on the specified {@link MemoryStack}.
@@ -393,6 +376,8 @@ public class VkPhysicalDeviceSparseImageFormatInfo2 extends Struct<VkPhysicalDev
         public VkPhysicalDeviceSparseImageFormatInfo2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceSparseImageFormatInfo2.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceSparseImageFormatInfo2.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkImageUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceSparseImageFormatInfo2.Buffer pNext(VkImageUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code format} field. */
         public VkPhysicalDeviceSparseImageFormatInfo2.Buffer format(@NativeType("VkFormat") int value) { VkPhysicalDeviceSparseImageFormatInfo2.nformat(address(), value); return this; }
         /** Sets the specified value to the {@code type} field. */

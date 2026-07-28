@@ -23,15 +23,18 @@ after the acquire operation executes. This is implemented using
 
 #ifdef __cplusplus
 #include <atomic>
+#define LIBURING_NOEXCEPT noexcept
 
 template <typename T>
-static inline void IO_URING_WRITE_ONCE(T &var, T val)
+_LOCAL_INLINE void IO_URING_WRITE_ONCE(T &var, T val)
+	LIBURING_NOEXCEPT
 {
 	std::atomic_store_explicit(reinterpret_cast<std::atomic<T> *>(&var),
 				   val, std::memory_order_relaxed);
 }
 template <typename T>
-static inline T IO_URING_READ_ONCE(const T &var)
+_LOCAL_INLINE T IO_URING_READ_ONCE(const T &var)
+	LIBURING_NOEXCEPT
 {
 	return std::atomic_load_explicit(
 		reinterpret_cast<const std::atomic<T> *>(&var),
@@ -39,21 +42,24 @@ static inline T IO_URING_READ_ONCE(const T &var)
 }
 
 template <typename T>
-static inline void io_uring_smp_store_release(T *p, T v)
+_LOCAL_INLINE void io_uring_smp_store_release(T *p, T v)
+	LIBURING_NOEXCEPT
 {
 	std::atomic_store_explicit(reinterpret_cast<std::atomic<T> *>(p), v,
 				   std::memory_order_release);
 }
 
 template <typename T>
-static inline T io_uring_smp_load_acquire(const T *p)
+_LOCAL_INLINE T io_uring_smp_load_acquire(const T *p)
+	LIBURING_NOEXCEPT
 {
 	return std::atomic_load_explicit(
 		reinterpret_cast<const std::atomic<T> *>(p),
 		std::memory_order_acquire);
 }
 
-static inline void io_uring_smp_mb()
+_LOCAL_INLINE void io_uring_smp_mb()
+	LIBURING_NOEXCEPT
 {
 	std::atomic_thread_fence(std::memory_order_seq_cst);
 }

@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_SizeRec {
  *     {@link FT_Face FT_Face} face;
  *     {@link FT_Generic FT_Generic} generic;
  *     {@link FT_Size_Metrics FT_Size_Metrics} metrics;
  *     {@link FT_Size_Internal FT_Size_Internal} * internal;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct FT_SizeRec")
 public class FT_Size extends Struct<FT_Size> implements NativeResource {
@@ -42,6 +42,9 @@ public class FT_Size extends Struct<FT_Size> implements NativeResource {
         INTERNAL;
 
     static {
+        FT_Generic.createSafe(NULL);
+        FT_Size_Metrics.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(FT_Generic.SIZEOF, FT_Generic.ALIGNOF),
@@ -238,7 +241,7 @@ public class FT_Size extends Struct<FT_Size> implements NativeResource {
     public static FT_Generic ngeneric(long struct) { return FT_Generic.create(struct + FT_Size.GENERIC); }
     /** Unsafe version of {@link #metrics}. */
     public static FT_Size_Metrics nmetrics(long struct) { return FT_Size_Metrics.create(struct + FT_Size.METRICS); }
-    public static FT_Size_Internal ninternal(long struct) { return FT_Size_Internal.create(memGetAddress(struct + FT_Size.INTERNAL)); }
+    static FT_Size_Internal ninternal(long struct) { return FT_Size_Internal.create(memGetAddress(struct + FT_Size.INTERNAL)); }
 
     /** Unsafe version of {@link #face(FT_Face) face}. */
     public static void nface(long struct, FT_Face value) { memPutAddress(struct + FT_Size.FACE, value.address()); }
@@ -246,7 +249,7 @@ public class FT_Size extends Struct<FT_Size> implements NativeResource {
     public static void ngeneric(long struct, FT_Generic value) { memCopy(value.address(), struct + FT_Size.GENERIC, FT_Generic.SIZEOF); }
     /** Unsafe version of {@link #metrics(FT_Size_Metrics) metrics}. */
     public static void nmetrics(long struct, FT_Size_Metrics value) { memCopy(value.address(), struct + FT_Size.METRICS, FT_Size_Metrics.SIZEOF); }
-    public static void ninternal(long struct, FT_Size_Internal value) { memPutAddress(struct + FT_Size.INTERNAL, value.address()); }
+    static void ninternal(long struct, FT_Size_Internal value) { memPutAddress(struct + FT_Size.INTERNAL, value.address()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

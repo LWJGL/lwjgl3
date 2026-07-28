@@ -19,21 +19,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class ARMImportMemory {
 
-    public static final int CL_IMPORT_TYPE_ARM = 0x40B2;
+    public static final long
+        CL_IMPORT_TYPE_ARM           = 0x40B2L,
+        CL_IMPORT_TYPE_HOST_ARM      = 0x40B3L,
+        CL_IMPORT_TYPE_DMA_BUF_ARM   = 0x40B4L,
+        CL_IMPORT_TYPE_PROTECTED_ARM = 0x40B5L;
 
-    public static final int CL_IMPORT_TYPE_HOST_ARM = 0x40B3;
+    public static final long
+        CL_IMPORT_TYPE_ANDROID_HARDWARE_BUFFER_ARM       = 0x41E2L,
+        CL_IMPORT_DMA_BUF_DATA_CONSISTENCY_WITH_HOST_ARM = 0x41E3L;
 
-    public static final int CL_IMPORT_TYPE_DMA_BUF_ARM = 0x40B4;
-
-    public static final int CL_IMPORT_TYPE_PROTECTED_ARM = 0x40B5;
-
-    public static final int CL_IMPORT_TYPE_ANDROID_HARDWARE_BUFFER_ARM = 0x41E2;
-
-    public static final int CL_IMPORT_DMA_BUF_DATA_CONSISTENCY_WITH_HOST_ARM = 0x41E3;
-
-    public static final int CL_IMPORT_ANDROID_HARDWARE_BUFFER_PLANE_INDEX_ARM = 0x41EF;
-
-    public static final int CL_IMPORT_ANDROID_HARDWARE_BUFFER_LAYER_INDEX_ARM = 0x41F0;
+    public static final long
+        CL_IMPORT_ANDROID_HARDWARE_BUFFER_PLANE_INDEX_ARM = 0x41EFL,
+        CL_IMPORT_ANDROID_HARDWARE_BUFFER_LAYER_INDEX_ARM = 0x41F0L;
 
     public static final long CL_IMPORT_MEMORY_WHOLE_ALLOCATION_ARM = -1L;
 

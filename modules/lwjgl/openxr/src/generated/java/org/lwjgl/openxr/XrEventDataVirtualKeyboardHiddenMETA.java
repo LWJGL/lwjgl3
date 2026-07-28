@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -91,18 +90,14 @@ public class XrEventDataVirtualKeyboardHiddenMETA extends Struct<XrEventDataVirt
     public XrEventDataVirtualKeyboardHiddenMETA type$Default() { return type(METAVirtualKeyboard.XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_HIDDEN_META); }
     /** Sets the specified value to the {@code next} field. */
     public XrEventDataVirtualKeyboardHiddenMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@code keyboard} field. */
-    public XrEventDataVirtualKeyboardHiddenMETA keyboard(XrVirtualKeyboardMETA value) { nkeyboard(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrEventDataVirtualKeyboardHiddenMETA set(
         int type,
-        long next,
-        XrVirtualKeyboardMETA keyboard
+        long next
     ) {
         type(type);
         next(next);
-        keyboard(keyboard);
 
         return this;
     }
@@ -147,6 +142,11 @@ public class XrEventDataVirtualKeyboardHiddenMETA extends Struct<XrEventDataVirt
         return address == NULL ? null : new XrEventDataVirtualKeyboardHiddenMETA(address, null);
     }
 
+    /** Downcasts the specified {@code XrEventDataBaseHeader} instance to {@code XrEventDataVirtualKeyboardHiddenMETA}. */
+    public static XrEventDataVirtualKeyboardHiddenMETA create(XrEventDataBaseHeader value) {
+        return new XrEventDataVirtualKeyboardHiddenMETA(value.address(), __getContainer(value));
+    }
+
     /**
      * Returns a new {@link XrEventDataVirtualKeyboardHiddenMETA.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -188,6 +188,11 @@ public class XrEventDataVirtualKeyboardHiddenMETA extends Struct<XrEventDataVirt
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     public static XrEventDataVirtualKeyboardHiddenMETA.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrEventDataBaseHeader.Buffer} instance to {@code XrEventDataVirtualKeyboardHiddenMETA.Buffer}. */
+    public static XrEventDataVirtualKeyboardHiddenMETA.Buffer create(XrEventDataBaseHeader.Buffer value) {
+        return new XrEventDataVirtualKeyboardHiddenMETA.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /**
@@ -241,17 +246,6 @@ public class XrEventDataVirtualKeyboardHiddenMETA extends Struct<XrEventDataVirt
     public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataVirtualKeyboardHiddenMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataVirtualKeyboardHiddenMETA.NEXT, value); }
-    /** Unsafe version of {@link #keyboard(XrVirtualKeyboardMETA) keyboard}. */
-    public static void nkeyboard(long struct, XrVirtualKeyboardMETA value) { memPutAddress(struct + XrEventDataVirtualKeyboardHiddenMETA.KEYBOARD, value.address()); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrEventDataVirtualKeyboardHiddenMETA.KEYBOARD));
-    }
 
     // -----------------------------------
 
@@ -312,8 +306,6 @@ public class XrEventDataVirtualKeyboardHiddenMETA extends Struct<XrEventDataVirt
         public XrEventDataVirtualKeyboardHiddenMETA.Buffer type$Default() { return type(METAVirtualKeyboard.XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_HIDDEN_META); }
         /** Sets the specified value to the {@code next} field. */
         public XrEventDataVirtualKeyboardHiddenMETA.Buffer next(@NativeType("void const *") long value) { XrEventDataVirtualKeyboardHiddenMETA.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@code keyboard} field. */
-        public XrEventDataVirtualKeyboardHiddenMETA.Buffer keyboard(XrVirtualKeyboardMETA value) { XrEventDataVirtualKeyboardHiddenMETA.nkeyboard(address(), value); return this; }
 
     }
 

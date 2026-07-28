@@ -54,7 +54,8 @@ val LLVMCore = "LLVMCore".nativeClass(
         "FPTrunc".enum,
         "FPExt".enum,
         "PtrToInt".enum,
-        "IntToPtr".enum,
+        "PtrToAddr".enum("69"),
+        "IntToPtr".enum("40"),
         "BitCast".enum,
         "AddrSpaceCast".enum("60"),
         "ICmp".enum("42"),
@@ -253,11 +254,6 @@ val LLVMCore = "LLVMCore".nativeClass(
     )
 
     EnumConstant(
-        "LandingPadCatch".enum("0"),
-        "LandingPadFilter".enum
-    )
-
-    EnumConstant(
         "NotThreadLocal".enum("0"),
         "GeneralDynamicTLSModel".enum,
         "LocalDynamicTLSModel".enum,
@@ -294,7 +290,9 @@ val LLVMCore = "LLVMCore".nativeClass(
         "AtomicRMWBinOpUIncWrap".enum,
         "AtomicRMWBinOpUDecWrap".enum,
         "AtomicRMWBinOpUSubCond".enum,
-        "AtomicRMWBinOpUSubSat".enum
+        "AtomicRMWBinOpUSubSat".enum,
+        "AtomicRMWBinOpFMaximum".enum,
+        "AtomicRMWBinOpFMinimum".enum
     )
 
     EnumConstant(
@@ -350,6 +348,13 @@ val LLVMCore = "LLVMCore".nativeClass(
         "GEPFlagInBounds".enum("1 << 0"),
         "GEPFlagNUSW".enum("1 << 1"),
         "GEPFlagNUW".enum("1 << 2"),
+    )
+
+    EnumConstant(
+        "DbgRecordLabel".enum("0"),
+        "DbgRecordDeclare".enum,
+        "DbgRecordValue".enum,
+        "DbgRecordAssign".enum,
     )
 
     split {
@@ -954,6 +959,15 @@ val LLVMCore = "LLVMCore".nativeClass(
             LLVMTypeRef("FunctionTy")
         )
 
+        IgnoreMissing..LLVMValueRef(
+            "GetOrInsertFunction",
+
+            LLVMModuleRef("M"),
+            charUTF8.const.p("Name"),
+            AutoSize("Name")..size_t("NameLen"),
+            LLVMTypeRef("FunctionTy")
+        )
+
         LLVMValueRef(
             "GetNamedFunction",
 
@@ -1418,7 +1432,7 @@ val LLVMCore = "LLVMCore".nativeClass(
             void()
         )
         LLVMTypeRef("LabelType", void())
-        LLVMTypeRef("X86MMXType", void())
+        IgnoreMissing..LLVMTypeRef("X86MMXType", void())
         IgnoreMissing..LLVMTypeRef(
             "X86AMXType",
 
@@ -1819,6 +1833,13 @@ val LLVMCore = "LLVMCore".nativeClass(
             AutoSize("Text")..unsigned_int("SLen")
         )
 
+        IgnoreMissing..LLVMValueRef(
+            "ConstFPFromBits",
+
+            LLVMTypeRef("Ty"),
+            Unsafe..uint64_t.const.p("N")
+        )
+
         unsigned_long_long(
             "ConstIntGetZExtValue",
 
@@ -1877,6 +1898,14 @@ val LLVMCore = "LLVMCore".nativeClass(
             AutoSizeResult..size_t.p("Length")
         )
 
+        IgnoreMissing..Nonnull..char.const.p(
+            "GetRawDataValues",
+
+            LLVMValueRef("c"),
+            AutoSizeResult..size_t.p("SizeInBytes")
+        )
+
+
         LLVMValueRef(
             "ConstStructInContext",
 
@@ -1908,6 +1937,14 @@ val LLVMCore = "LLVMCore".nativeClass(
             LLVMTypeRef("ElementTy"),
             LLVMValueRef.p("ConstantVals"),
             AutoSize("ConstantVals")..uint64_t("Length")
+        )
+
+        IgnoreMissing..LLVMValueRef(
+            "ConstDataArray",
+
+            LLVMTypeRef("ElementTy"),
+            char.const.p("Data"),
+            AutoSize("Data")..size_t("SizeInBytes")
         )
 
         LLVMValueRef(
@@ -2052,21 +2089,21 @@ val LLVMCore = "LLVMCore".nativeClass(
             LLVMValueRef("RHSConstant")
         )
 
-        LLVMValueRef(
+        IgnoreMissing..LLVMValueRef(
             "ConstMul",
 
             LLVMValueRef("LHSConstant"),
             LLVMValueRef("RHSConstant")
         )
 
-        LLVMValueRef(
+        IgnoreMissing..LLVMValueRef(
             "ConstNSWMul",
 
             LLVMValueRef("LHSConstant"),
             LLVMValueRef("RHSConstant")
         )
 
-        LLVMValueRef(
+        IgnoreMissing..LLVMValueRef(
             "ConstNUWMul",
 
             LLVMValueRef("LHSConstant"),
@@ -2569,6 +2606,14 @@ val LLVMCore = "LLVMCore".nativeClass(
         )
 
         IgnoreMissing..void(
+            "GlobalAddMetadata",
+
+            LLVMValueRef("Global"),
+            unsigned("Kind"),
+            LLVMMetadataRef("MD")
+        )
+
+        IgnoreMissing..void(
             "GlobalEraseMetadata",
 
             LLVMValueRef("Global"),
@@ -2579,6 +2624,13 @@ val LLVMCore = "LLVMCore".nativeClass(
             "GlobalClearMetadata",
 
             LLVMValueRef("Global")
+        )
+
+        IgnoreMissing..void(
+            "GlobalAddDebugInfo",
+
+            LLVMValueRef("Global"),
+            LLVMMetadataRef("GVE")
         )
 
         IgnoreMissing..LLVMValueMetadataEntry.p(
@@ -3515,6 +3567,19 @@ val LLVMCore = "LLVMCore".nativeClass(
             LLVMValueRef("Inst")
         )
 
+        IgnoreMissing..LLVMBool(
+            "GetICmpSameSign",
+
+            LLVMValueRef("Inst")
+        )
+
+        IgnoreMissing..void(
+            "SetICmpSameSign",
+
+            LLVMValueRef("Inst"),
+            LLVMBool("SameSign")
+        )
+
         LLVMRealPredicate(
             "GetFCmpPredicate",
 
@@ -3538,6 +3603,12 @@ val LLVMCore = "LLVMCore".nativeClass(
 
         IgnoreMissing..LLVMDbgRecordRef("GetNextDbgRecord",     LLVMDbgRecordRef("DbgRecord"))
         IgnoreMissing..LLVMDbgRecordRef("GetPreviousDbgRecord", LLVMDbgRecordRef("DbgRecord"))
+
+        IgnoreMissing..LLVMMetadataRef("DbgRecordGetDebugLoc", LLVMDbgRecordRef("Rec"))
+        IgnoreMissing..LLVMDbgRecordKind("DbgRecordGetKind", LLVMDbgRecordRef("Rec"))
+        IgnoreMissing..LLVMValueRef("DbgVariableRecordGetValue", LLVMDbgRecordRef("Rec"), unsigned("OpIdx"))
+        IgnoreMissing..LLVMMetadataRef("DbgVariableRecordGetVariable", LLVMDbgRecordRef("Rec"))
+        IgnoreMissing..LLVMMetadataRef("DbgVariableRecordGetExpression", LLVMDbgRecordRef("Rec"))
 
         unsigned_int(
             "GetNumArgOperands",
@@ -3765,6 +3836,21 @@ val LLVMCore = "LLVMCore".nativeClass(
             "GetSwitchDefaultDest",
 
             LLVMValueRef("SwitchInstr")
+        )
+
+        IgnoreMissing..LLVMValueRef(
+            "GetSwitchCaseValue",
+
+            LLVMValueRef("SwitchInstr"),
+            unsigned("i")
+        )
+
+        IgnoreMissing..void(
+            "SetSwitchCaseValue",
+
+            LLVMValueRef("SwitchInstr"),
+            unsigned("i"),
+            LLVMValueRef("CaseValue")
         )
 
         LLVMTypeRef(
@@ -4783,7 +4869,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMBool(
             "GetVolatile",
 
-            LLVMValueRef("MemoryAccessInst")
+            LLVMValueRef("Inst")
         )
 
         void(

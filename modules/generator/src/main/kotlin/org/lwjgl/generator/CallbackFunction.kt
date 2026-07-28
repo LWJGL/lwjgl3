@@ -100,27 +100,44 @@ import static org.lwjgl.system.MemoryUtil.*;
      *
      * @return the new {@code $className}
      */
-    public static $className create(long functionPointer) {
-        ${className}I instance = Callback.get(functionPointer);
-        return instance instanceof $className
-            ? ($className)instance
-            : new Container(functionPointer, instance);
-    }
+    public static $className create(long functionPointer) { return create(Callback.get(functionPointer), functionPointer); }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
-    public static @Nullable $className createSafe(long functionPointer) {
-        return functionPointer == NULL ? null : create(functionPointer);
-    }
+    public static @Nullable $className createSafe(long functionPointer) { return functionPointer == NULL ? null : create(functionPointer); }
 
     /** Creates a {@code $className} instance that delegates to the specified {@code ${className}I} instance. */
-    public static $className create(${className}I instance) {
+    public static $className create(${className}I instance) { return create(instance, instance.address()); }
+
+    private static $className create(${className}I instance, long functionPointer) {
         return instance instanceof $className
             ? ($className)instance
-            : new Container(instance.address(), instance);
+            : new $className(functionPointer) {
+                @Override public ${if (returns is StructType) "void" else returns.nativeMethodType} invoke(${
+            signature.asSequence()
+                .map {
+                    "${
+                        if (it.nativeType.mapping.isPseudoBoolean()) "boolean"
+                        else if (it.nativeType is StructType)
+                            it.nativeType.definition.className
+                        else
+                            it.nativeType.nativeMethodType
+                    } ${if (it.name == "instance") "_instance" else it.name}"
+                }
+                .let { if (returns is StructType) it + "${returns.javaMethodType} $RESULT" else it }
+                .joinToString(", ")
+        }) {
+                    ${if (returns.mapping !== TypeMapping.VOID && returns !is StructType) "return " else ""}instance.invoke(${
+            signature.asSequence()
+                .map { if (it.name == "instance") "_instance" else it.name }
+                .let { if (returns is StructType) it + RESULT else it }
+                .joinToString(", ")
+        });
+                }
+            };
     }
 
     protected $className() {
-        super(CIF);
+        super(DESCRIPTOR);
     }
 
     $className(long functionPointer) {
@@ -134,35 +151,6 @@ import static org.lwjgl.system.MemoryUtil.*;
         }
 
         print("""
-    private static final class Container extends $className {
-
-        private final ${className}I delegate;
-
-        Container(long functionPointer, ${className}I delegate) {
-            super(functionPointer);
-            this.delegate = delegate;
-        }
-
-        @Override
-        public ${if (returns is StructType) "void" else returns.nativeMethodType} invoke(${signature.asSequence()
-            .map {
-                "${if (it.nativeType.mapping.isPseudoBoolean()) "boolean"
-                else if (it.nativeType is StructType)
-                    it.nativeType.definition.className
-                else
-                    it.nativeType.nativeMethodType} ${it.name}"
-            }
-            .let { if (returns is StructType) it + "${returns.javaMethodType} $RESULT" else it }
-            .joinToString(", ")}) {
-            ${if (returns.mapping !== TypeMapping.VOID && returns !is StructType) "return " else ""}delegate.invoke(${signature.asSequence()
-                .map { it.name }
-                .let { if (returns is StructType) it + RESULT else it }
-                .joinToString(", ")
-            });
-        }
-
-    }
-
 }""")
     }
 
@@ -170,13 +158,13 @@ import static org.lwjgl.system.MemoryUtil.*;
         print(HEADER)
         println("package $packageName;\n")
 
-        println("import org.lwjgl.system.*;")
-        println("import org.lwjgl.system.libffi.*;\n")
+        println("import org.lwjgl.system.*;\n")
+        println("import java.lang.invoke.*;\n")
         println("import static org.lwjgl.system.APIUtil.*;")
         if (signature.isNotEmpty()) {
             println("import static org.lwjgl.system.MemoryUtil.*;")
-            println("import static org.lwjgl.system.libffi.LibFFI.*;")
         }
+        println("import static org.lwjgl.system.libffi.LibFFI.*;")
         println()
 
         generateDocumentation()
@@ -184,14 +172,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 @NativeType("$nativeType")
 ${access.modifier}interface ${className}I extends CallbackI {
 
-    FFICIF CIF = apiCreateCIF(
-        ${if (callingConvention === CallingConvention.STDCALL) "apiStdcall()" else "FFI_DEFAULT_ABI"},
-        ${returns.libffi},
-        ${signature.joinToString(", ") { it.nativeType.libffi }}
+    Callback.Descriptor DESCRIPTOR = new Callback.Descriptor(
+        ${className}I.class,
+        MethodHandles.lookup(),
+        apiCreateCIF(${if (callingConvention === CallingConvention.STDCALL) """
+            apiStdcall(),""" else ""}
+            ${returns.libffi}${if (signature.isEmpty()) "" else """,
+            ${signature.joinToString(", ") { it.nativeType.libffi }}"""}
+        )
     );
 
     @Override
-    default FFICIF getCallInterface() { return CIF; }
+    default Callback.Descriptor getDescriptor() { return DESCRIPTOR; }
 
     @Override
     default void callback(long ret, long args) {

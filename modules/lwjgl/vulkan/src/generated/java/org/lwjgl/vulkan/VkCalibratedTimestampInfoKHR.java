@@ -90,6 +90,8 @@ public class VkCalibratedTimestampInfoKHR extends Struct<VkCalibratedTimestampIn
     public VkCalibratedTimestampInfoKHR sType$Default() { return sType(KHRCalibratedTimestamps.VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkCalibratedTimestampInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkSwapchainCalibratedTimestampInfoEXT} value to the {@code pNext} chain. */
+    public VkCalibratedTimestampInfoKHR pNext(VkSwapchainCalibratedTimestampInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code timeDomain} field. */
     public VkCalibratedTimestampInfoKHR timeDomain(@NativeType("VkTimeDomainKHR") int value) { ntimeDomain(address(), value); return this; }
 
@@ -302,6 +304,8 @@ public class VkCalibratedTimestampInfoKHR extends Struct<VkCalibratedTimestampIn
         public VkCalibratedTimestampInfoKHR.Buffer sType$Default() { return sType(KHRCalibratedTimestamps.VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkCalibratedTimestampInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkCalibratedTimestampInfoKHR.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkSwapchainCalibratedTimestampInfoEXT} value to the {@code pNext} chain. */
+        public VkCalibratedTimestampInfoKHR.Buffer pNext(VkSwapchainCalibratedTimestampInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code timeDomain} field. */
         public VkCalibratedTimestampInfoKHR.Buffer timeDomain(@NativeType("VkTimeDomainKHR") int value) { VkCalibratedTimestampInfoKHR.ntimeDomain(address(), value); return this; }
 

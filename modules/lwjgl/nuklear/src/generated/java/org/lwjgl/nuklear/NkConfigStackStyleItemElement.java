@@ -14,11 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_config_stack_style_item_element {
  *     {@link NkStyleItem struct nk_style_item} * pValues;
  *     {@link NkStyleItem struct nk_style_item} old_value;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_config_stack_style_item_element")
 class NkConfigStackStyleItemElement extends Struct<NkConfigStackStyleItemElement> {
@@ -35,6 +35,8 @@ class NkConfigStackStyleItemElement extends Struct<NkConfigStackStyleItemElement
         OLD_VALUE;
 
     static {
+        NkStyleItem.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(NkStyleItem.SIZEOF, NkStyleItem.ALIGNOF)

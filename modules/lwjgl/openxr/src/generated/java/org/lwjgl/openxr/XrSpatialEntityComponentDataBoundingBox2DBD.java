@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpatialEntityComponentDataBoundingBox2DBD {
  *     XrStructureType type;
  *     void * next;
  *     {@link XrRect2Df XrRect2Df} boundingBox2D;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpatialEntityComponentDataBoundingBox2DBD extends Struct<XrSpatialEntityComponentDataBoundingBox2DBD> implements NativeResource {
 
@@ -38,6 +38,8 @@ public class XrSpatialEntityComponentDataBoundingBox2DBD extends Struct<XrSpatia
         BOUNDINGBOX2D;
 
     static {
+        XrRect2Df.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

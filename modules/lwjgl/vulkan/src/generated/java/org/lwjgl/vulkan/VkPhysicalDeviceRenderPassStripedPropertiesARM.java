@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPhysicalDeviceRenderPassStripedPropertiesARM {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkExtent2D VkExtent2D} renderPassStripeGranularity;
  *     uint32_t maxRenderPassStripes;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceRenderPassStripedPropertiesARM extends Struct<VkPhysicalDeviceRenderPassStripedPropertiesARM> implements NativeResource {
 
@@ -40,6 +40,8 @@ public class VkPhysicalDeviceRenderPassStripedPropertiesARM extends Struct<VkPhy
         MAXRENDERPASSSTRIPES;
 
     static {
+        VkExtent2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -56,6 +56,7 @@ val EXT_shader_implicit_conversions = EXT_FLAG.nativeClassGLES("EXT_shader_impli
 val EXT_shader_integer_mix = EXT_FLAG.nativeClassGLES("EXT_shader_integer_mix", postfix = EXT)
 val EXT_shader_io_blocks = EXT_FLAG.nativeClassGLES("EXT_shader_io_blocks", postfix = EXT)
 val EXT_shader_non_constant_global_initializers = EXT_FLAG.nativeClassGLES("EXT_shader_non_constant_global_initializers", postfix = EXT)
+val EXT_shader_realtime_clock = EXT_FLAG.nativeClassGLES("EXT_shader_realtime_clock", postfix = EXT)
 val EXT_shader_samples_identical = EXT_FLAG.nativeClassGLES("EXT_shader_samples_identical", postfix = EXT)
 val EXT_shader_texture_lod = EXT_FLAG.nativeClassGLES("EXT_shader_texture_lod", postfix = EXT)
 val EXT_sparse_texture2 = EXT_FLAG.nativeClassGLES("EXT_sparse_texture2", postfix = EXT)

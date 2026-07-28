@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrQueriedSenseDataBD {
  *     XrStructureType type;
  *     void * next;
  *     uint32_t stateCapacityInput;
  *     uint32_t stateCountOutput;
  *     {@link XrSpatialEntityStateBD XrSpatialEntityStateBD} * states;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrQueriedSenseDataBD extends Struct<XrQueriedSenseDataBD> implements NativeResource {
 

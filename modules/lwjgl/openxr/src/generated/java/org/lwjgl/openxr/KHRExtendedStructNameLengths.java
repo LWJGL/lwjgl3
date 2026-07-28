@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class KHRExtendedStructNameLengths {
 
-    public static final int XR_KHR_extended_struct_name_lengths_SPEC_VERSION = 1;
+    public static final int XR_KHR_extended_struct_name_lengths_SPEC_VERSION = 2;
 
     public static final String XR_KHR_EXTENDED_STRUCT_NAME_LENGTHS_EXTENSION_NAME = "XR_KHR_extended_struct_name_lengths";
 

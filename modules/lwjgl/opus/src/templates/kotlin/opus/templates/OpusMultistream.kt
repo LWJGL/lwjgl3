@@ -92,6 +92,19 @@ val OpusMultistream = "OpusMultistream".nativeClass(Module.OPUS, prefix = "OPUS"
     )
 
     int(
+        "multistream_encode24",
+
+        OpusMSEncoder.p("st"),
+        Check(
+            // Reading OpusMSEncoder internal state here
+            "frame_size * memGetInt(st)"
+        )..opus_int32.const.p("pcm"),
+        int("frame_size"),
+        unsigned_char.p("data"),
+        AutoSize("data")..opus_int32("max_data_bytes")
+    )
+
+    int(
         "multistream_encode_float",
 
         OpusMSEncoder.p("st"),
@@ -160,6 +173,20 @@ val OpusMultistream = "OpusMultistream".nativeClass(Module.OPUS, prefix = "OPUS"
     )
 
     int(
+        "multistream_decode24",
+
+        OpusMSDecoder.p("st"),
+        nullable..unsigned_char.const.p("data"),
+        AutoSize("data")..opus_int32("len"),
+        Check(
+            // Reading OpusMSDecoder internal state here
+            "frame_size * memGetInt(st)"
+        )..opus_int32.p("pcm"),
+        int("frame_size"),
+        int("decode_fec")
+    )
+
+    int(
         "multistream_decode_float",
 
         OpusMSDecoder.p("st"),
@@ -186,42 +213,18 @@ val OpusMultistream = "OpusMultistream".nativeClass(Module.OPUS, prefix = "OPUS"
     )
 
     customMethod("""
-    /**
-     * Performs a CTL function on an multistream Opus encoder.
-     *
-     * @param st      encoder state
-     * @param request CTL request
-     */
     public static int opus_multistream_encoder_ctl(@NativeType("OpusMSEncoder *") long st, int request) {
         return new CTLRequestV(request).apply(st, Functions.multistream_encoder_ctl);
     }
 
-    /**
-     * Performs a CTL function on an multistream Opus encoder.
-     *
-     * @param st      encoder state
-     * @param request CTL request
-     */
     public static int opus_multistream_encoder_ctl(@NativeType("OpusMSEncoder *") long st, CTLRequest request) {
         return request.apply(st, Functions.multistream_encoder_ctl);
     }
 
-    /**
-     * Performs a CTL function on a multistream Opus decoder.
-     *
-     * @param st      decoder state
-     * @param request CTL request
-     */
     public static int opus_multistream_decoder_ctl(@NativeType("OpusMSDecoder *") long st, int request) {
         return new CTLRequestV(request).apply(st, Functions.multistream_decoder_ctl);
     }
 
-    /**
-     * Performs a CTL function on a multistream Opus decoder.
-     *
-     * @param st      decoder state
-     * @param request CTL request
-     */
     public static int opus_multistream_decoder_ctl(@NativeType("OpusMSDecoder *") long st, CTLRequest request) {
         return request.apply(st, Functions.multistream_decoder_ctl);
     }

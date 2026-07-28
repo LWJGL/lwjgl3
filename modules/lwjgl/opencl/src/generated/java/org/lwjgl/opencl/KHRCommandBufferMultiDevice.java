@@ -21,18 +21,18 @@ public class KHRCommandBufferMultiDevice {
 
     public static final int CL_PLATFORM_COMMAND_BUFFER_CAPABILITIES_KHR = 0x908;
 
-    public static final int
-        CL_COMMAND_BUFFER_PLATFORM_UNIVERSAL_SYNC_KHR  = 1 << 0,
-        CL_COMMAND_BUFFER_PLATFORM_REMAP_QUEUES_KHR    = 1 << 1,
-        CL_COMMAND_BUFFER_PLATFORM_AUTOMATIC_REMAP_KHR = 1 << 2;
+    public static final long
+        CL_COMMAND_BUFFER_PLATFORM_UNIVERSAL_SYNC_KHR  = 1L << 0,
+        CL_COMMAND_BUFFER_PLATFORM_REMAP_QUEUES_KHR    = 1L << 1,
+        CL_COMMAND_BUFFER_PLATFORM_AUTOMATIC_REMAP_KHR = 1L << 2;
 
     public static final int
         CL_DEVICE_COMMAND_BUFFER_NUM_SYNC_DEVICES_KHR = 0x12AB,
         CL_DEVICE_COMMAND_BUFFER_SYNC_DEVICES_KHR     = 0x12AC;
 
-    public static final int CL_COMMAND_BUFFER_CAPABILITY_MULTIPLE_QUEUE_KHR = 1 << 4;
+    public static final long CL_COMMAND_BUFFER_CAPABILITY_MULTIPLE_QUEUE_KHR = 1L << 4;
 
-    public static final int CL_COMMAND_BUFFER_DEVICE_SIDE_SYNC_KHR = 1 << 2;
+    public static final long CL_COMMAND_BUFFER_DEVICE_SIDE_SYNC_KHR = 1L << 2;
 
     protected KHRCommandBufferMultiDevice() {
         throw new UnsupportedOperationException();

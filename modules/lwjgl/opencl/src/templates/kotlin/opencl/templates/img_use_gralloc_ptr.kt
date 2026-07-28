@@ -18,8 +18,8 @@ val img_use_gralloc_ptr = "IMGUseGrallocPtr".nativeClassCL("img_use_gralloc_ptr"
         "INVALID_GRALLOC_OBJECT_IMG"..0x40D5
     )
 
-    IntConstant(
-        "MEM_USE_GRALLOC_PTR_IMG".."1 << 28"
+    LongConstant(
+        "MEM_USE_GRALLOC_PTR_IMG".."1L << 28"
     )
 
     cl_int(

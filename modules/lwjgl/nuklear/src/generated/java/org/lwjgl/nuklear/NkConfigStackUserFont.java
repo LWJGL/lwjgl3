@@ -15,11 +15,11 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_config_stack_user_font {
  *     int head;
  *     {@link NkConfigStackUserFontElement struct nk_config_stack_user_font_element} elements[8];
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_config_stack_user_font")
 class NkConfigStackUserFont extends Struct<NkConfigStackUserFont> {
@@ -36,6 +36,8 @@ class NkConfigStackUserFont extends Struct<NkConfigStackUserFont> {
         ELEMENTS;
 
     static {
+        NkConfigStackUserFontElement.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __array(NkConfigStackUserFontElement.SIZEOF, NkConfigStackUserFontElement.ALIGNOF, 8)

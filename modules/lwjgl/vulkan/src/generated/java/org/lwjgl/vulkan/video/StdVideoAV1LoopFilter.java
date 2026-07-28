@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoAV1LoopFilter {
  *     {@link StdVideoAV1LoopFilterFlags StdVideoAV1LoopFilterFlags} flags;
  *     uint8_t loop_filter_level[STD_VIDEO_AV1_MAX_LOOP_FILTER_STRENGTHS];
@@ -28,7 +28,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*;
  *     int8_t loop_filter_ref_deltas[STD_VIDEO_AV1_TOTAL_REFS_PER_FRAME];
  *     uint8_t update_mode_delta;
  *     int8_t loop_filter_mode_deltas[STD_VIDEO_AV1_LOOP_FILTER_ADJUSTMENTS];
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoAV1LoopFilter extends Struct<StdVideoAV1LoopFilter> implements NativeResource {
 
@@ -49,6 +49,8 @@ public class StdVideoAV1LoopFilter extends Struct<StdVideoAV1LoopFilter> impleme
         LOOP_FILTER_MODE_DELTAS;
 
     static {
+        StdVideoAV1LoopFilterFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoAV1LoopFilterFlags.SIZEOF, StdVideoAV1LoopFilterFlags.ALIGNOF),
             __array(1, STD_VIDEO_AV1_MAX_LOOP_FILTER_STRENGTHS),

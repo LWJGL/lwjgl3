@@ -24,37 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkPresentModeKHR * pPresentModes;
  * }}</pre>
  */
-public class VkSurfacePresentModeCompatibilityEXT extends Struct<VkSurfacePresentModeCompatibilityEXT> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        PRESENTMODECOUNT,
-        PPRESENTMODES;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(POINTER_SIZE)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        PRESENTMODECOUNT = layout.offsetof(2);
-        PPRESENTMODES = layout.offsetof(3);
-    }
+public class VkSurfacePresentModeCompatibilityEXT extends VkSurfacePresentModeCompatibilityKHR {
 
     protected VkSurfacePresentModeCompatibilityEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -72,37 +42,27 @@ public class VkSurfacePresentModeCompatibilityEXT extends Struct<VkSurfacePresen
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSurfacePresentModeCompatibilityEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** @return the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** @return the value of the {@code presentModeCount} field. */
-    @NativeType("uint32_t")
-    public int presentModeCount() { return npresentModeCount(address()); }
-    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pPresentModes} field. */
-    @NativeType("VkPresentModeKHR *")
-    public @Nullable IntBuffer pPresentModes() { return npPresentModes(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkSurfacePresentModeCompatibilityEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTSurfaceMaintenance1#VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_COMPATIBILITY_EXT STRUCTURE_TYPE_SURFACE_PRESENT_MODE_COMPATIBILITY_EXT} value to the {@code sType} field. */
-    public VkSurfacePresentModeCompatibilityEXT sType$Default() { return sType(EXTSurfaceMaintenance1.VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_COMPATIBILITY_EXT); }
+    /** Sets the {@link KHRSurfaceMaintenance1#VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_COMPATIBILITY_KHR STRUCTURE_TYPE_SURFACE_PRESENT_MODE_COMPATIBILITY_KHR} value to the {@code sType} field. */
+    @Override
+    public VkSurfacePresentModeCompatibilityEXT sType$Default() { return sType(KHRSurfaceMaintenance1.VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_COMPATIBILITY_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkSurfacePresentModeCompatibilityEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code presentModeCount} field. */
+    @Override
     public VkSurfacePresentModeCompatibilityEXT presentModeCount(@NativeType("uint32_t") int value) { npresentModeCount(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@code pPresentModes} field. */
+    @Override
     public VkSurfacePresentModeCompatibilityEXT pPresentModes(@Nullable @NativeType("VkPresentModeKHR *") IntBuffer value) { npPresentModes(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkSurfacePresentModeCompatibilityEXT set(
         int sType,
         long pNext,
@@ -240,28 +200,8 @@ public class VkSurfacePresentModeCompatibilityEXT extends Struct<VkSurfacePresen
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkSurfacePresentModeCompatibilityEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkSurfacePresentModeCompatibilityEXT.PNEXT); }
-    /** Unsafe version of {@link #presentModeCount}. */
-    public static int npresentModeCount(long struct) { return memGetInt(struct + VkSurfacePresentModeCompatibilityEXT.PRESENTMODECOUNT); }
-    /** Unsafe version of {@link #pPresentModes() pPresentModes}. */
-    public static @Nullable IntBuffer npPresentModes(long struct) { return memIntBufferSafe(memGetAddress(struct + VkSurfacePresentModeCompatibilityEXT.PPRESENTMODES), npresentModeCount(struct)); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkSurfacePresentModeCompatibilityEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkSurfacePresentModeCompatibilityEXT.PNEXT, value); }
-    /** Sets the specified value to the {@code presentModeCount} field of the specified {@code struct}. */
-    public static void npresentModeCount(long struct, int value) { memPutInt(struct + VkSurfacePresentModeCompatibilityEXT.PRESENTMODECOUNT, value); }
-    /** Unsafe version of {@link #pPresentModes(IntBuffer) pPresentModes}. */
-    public static void npPresentModes(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkSurfacePresentModeCompatibilityEXT.PPRESENTMODES, memAddressSafe(value)); if (value != null) { npresentModeCount(struct, value.remaining()); } }
-
-    // -----------------------------------
-
     /** An array of {@link VkSurfacePresentModeCompatibilityEXT} structs. */
-    public static class Buffer extends StructBuffer<VkSurfacePresentModeCompatibilityEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkSurfacePresentModeCompatibilityKHR.Buffer {
 
         private static final VkSurfacePresentModeCompatibilityEXT ELEMENT_FACTORY = VkSurfacePresentModeCompatibilityEXT.create(-1L);
 
@@ -275,7 +215,7 @@ public class VkSurfacePresentModeCompatibilityEXT extends Struct<VkSurfacePresen
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -301,28 +241,20 @@ public class VkSurfacePresentModeCompatibilityEXT extends Struct<VkSurfacePresen
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkSurfacePresentModeCompatibilityEXT.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkSurfacePresentModeCompatibilityEXT.npNext(address()); }
-        /** @return the value of the {@code presentModeCount} field. */
-        @NativeType("uint32_t")
-        public int presentModeCount() { return VkSurfacePresentModeCompatibilityEXT.npresentModeCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pPresentModes} field. */
-        @NativeType("VkPresentModeKHR *")
-        public @Nullable IntBuffer pPresentModes() { return VkSurfacePresentModeCompatibilityEXT.npPresentModes(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkSurfacePresentModeCompatibilityEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSurfacePresentModeCompatibilityEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTSurfaceMaintenance1#VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_COMPATIBILITY_EXT STRUCTURE_TYPE_SURFACE_PRESENT_MODE_COMPATIBILITY_EXT} value to the {@code sType} field. */
-        public VkSurfacePresentModeCompatibilityEXT.Buffer sType$Default() { return sType(EXTSurfaceMaintenance1.VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_COMPATIBILITY_EXT); }
+        /** Sets the {@link KHRSurfaceMaintenance1#VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_COMPATIBILITY_KHR STRUCTURE_TYPE_SURFACE_PRESENT_MODE_COMPATIBILITY_KHR} value to the {@code sType} field. */
+        @Override
+        public VkSurfacePresentModeCompatibilityEXT.Buffer sType$Default() { return sType(KHRSurfaceMaintenance1.VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_COMPATIBILITY_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkSurfacePresentModeCompatibilityEXT.Buffer pNext(@NativeType("void *") long value) { VkSurfacePresentModeCompatibilityEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code presentModeCount} field. */
+        @Override
         public VkSurfacePresentModeCompatibilityEXT.Buffer presentModeCount(@NativeType("uint32_t") int value) { VkSurfacePresentModeCompatibilityEXT.npresentModeCount(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@code pPresentModes} field. */
+        @Override
         public VkSurfacePresentModeCompatibilityEXT.Buffer pPresentModes(@Nullable @NativeType("VkPresentModeKHR *") IntBuffer value) { VkSurfacePresentModeCompatibilityEXT.npPresentModes(address(), value); return this; }
 
     }

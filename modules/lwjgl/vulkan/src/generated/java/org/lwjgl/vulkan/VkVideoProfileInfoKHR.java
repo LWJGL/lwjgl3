@@ -119,12 +119,16 @@ public class VkVideoProfileInfoKHR extends Struct<VkVideoProfileInfoKHR> impleme
     public VkVideoProfileInfoKHR pNext(VkVideoDecodeH265ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoDecodeUsageInfoKHR} value to the {@code pNext} chain. */
     public VkVideoProfileInfoKHR pNext(VkVideoDecodeUsageInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoDecodeVP9ProfileInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoProfileInfoKHR pNext(VkVideoDecodeVP9ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeAV1ProfileInfoKHR} value to the {@code pNext} chain. */
     public VkVideoProfileInfoKHR pNext(VkVideoEncodeAV1ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH264ProfileInfoKHR} value to the {@code pNext} chain. */
     public VkVideoProfileInfoKHR pNext(VkVideoEncodeH264ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH265ProfileInfoKHR} value to the {@code pNext} chain. */
     public VkVideoProfileInfoKHR pNext(VkVideoEncodeH265ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeProfileRgbConversionInfoVALVE} value to the {@code pNext} chain. */
+    public VkVideoProfileInfoKHR pNext(VkVideoEncodeProfileRgbConversionInfoVALVE value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeUsageInfoKHR} value to the {@code pNext} chain. */
     public VkVideoProfileInfoKHR pNext(VkVideoEncodeUsageInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code videoCodecOperation} field. */
@@ -380,12 +384,16 @@ public class VkVideoProfileInfoKHR extends Struct<VkVideoProfileInfoKHR> impleme
         public VkVideoProfileInfoKHR.Buffer pNext(VkVideoDecodeH265ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoDecodeUsageInfoKHR} value to the {@code pNext} chain. */
         public VkVideoProfileInfoKHR.Buffer pNext(VkVideoDecodeUsageInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoDecodeVP9ProfileInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoProfileInfoKHR.Buffer pNext(VkVideoDecodeVP9ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeAV1ProfileInfoKHR} value to the {@code pNext} chain. */
         public VkVideoProfileInfoKHR.Buffer pNext(VkVideoEncodeAV1ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH264ProfileInfoKHR} value to the {@code pNext} chain. */
         public VkVideoProfileInfoKHR.Buffer pNext(VkVideoEncodeH264ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH265ProfileInfoKHR} value to the {@code pNext} chain. */
         public VkVideoProfileInfoKHR.Buffer pNext(VkVideoEncodeH265ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeProfileRgbConversionInfoVALVE} value to the {@code pNext} chain. */
+        public VkVideoProfileInfoKHR.Buffer pNext(VkVideoEncodeProfileRgbConversionInfoVALVE value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeUsageInfoKHR} value to the {@code pNext} chain. */
         public VkVideoProfileInfoKHR.Buffer pNext(VkVideoEncodeUsageInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code videoCodecOperation} field. */

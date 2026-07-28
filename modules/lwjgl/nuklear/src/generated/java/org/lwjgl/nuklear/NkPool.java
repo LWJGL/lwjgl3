@@ -14,7 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_pool {
  *     {@link NkAllocator struct nk_allocator} alloc;
  *     enum nk_allocation_type type;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     unsigned capacity;
  *     nk_size size;
  *     nk_size cap;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_pool")
 class NkPool extends Struct<NkPool> {
@@ -47,6 +47,8 @@ class NkPool extends Struct<NkPool> {
         CAP;
 
     static {
+        NkAllocator.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkAllocator.SIZEOF, NkAllocator.ALIGNOF),
             __member(4),

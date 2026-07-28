@@ -158,6 +158,14 @@ EXPORTS
 
     <target name="compile-native-platform">
         <mkdir dir="${bin.native}/build"/>
+        <sequential if:set="cl.version.print">
+            <exec executable="cmd" logError="true" failonerror="false">
+                <arg line="/c cl.exe 2>&amp;1 | findstr Version"/>
+            </exec>
+            <exec executable="cmd" logError="true" failonerror="false" >
+                <arg line='/c clang --version | findstr "clang version"'/>
+            </exec>
+        </sequential>
 
         <parallel threadsPerProcessor="1">
 
@@ -244,9 +252,10 @@ EXPORTS
         <!-- msdfgen -->
         <build module="msdfgen" simple="true" if:true="${binding.msdfgen}">
             <beforeCompile>
-                <compile>
+                <compile flags="/DMSDFGEN_DYNAMIC_FREETYPE">
                     <arg value="/I${src.main}"/>
-                    <fileset dir="." includes="${src.main}/*.cpp"/>
+                    <fileset dir="." includes="${src.main}/core/*.cpp"/>
+                    <fileset dir="." includes="${src.main}/ext/*.cpp"/>
                 </compile>
             </beforeCompile>
         </build>
@@ -305,6 +314,9 @@ EXPORTS
 
         <!-- rpmalloc -->
         <build module="rpmalloc" simple="true" if:true="${binding.rpmalloc}">
+            <compileargs>
+                <arg line="/std:c11 /experimental:c11atomics"/>
+            </compileargs>
             <linkargs>
                 <arg value="Advapi32.lib"/>
             </linkargs>
@@ -412,9 +424,13 @@ EXPORTS
             <update-dependency module="freetype" artifact="freetype.dll"/>
             <update-dependency module="glfw" artifact="glfw.dll"/>
             <update-dependency module="harfbuzz" artifact="harfbuzz.dll"/>
+                <update-dependency module="harfbuzz" artifact="harfbuzz-gpu.dll"/>
+                <update-dependency module="harfbuzz" artifact="harfbuzz-raster.dll"/>
+                <update-dependency module="harfbuzz" artifact="harfbuzz-vector.dll"/>
             <update-dependency module="hwloc" artifact="hwloc.dll"/>
             <update-dependency module="jemalloc" artifact="jemalloc.dll"/>
             <update-dependency module="ktx" artifact="ktx.dll" unless:set="build.arch.x86"/>
+            <update-dependency module="mimalloc" artifact="mimalloc.dll"/>
             <update-dependency module="openal" artifact="OpenAL.dll"/>
             <update-dependency module="openxr" artifact="openxr-loader.dll"/>
             <update-dependency module="opus" artifact="opus.dll"/>

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.nuklear.Nuklear.NK_BUTTON_MAX;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_mouse {
  *     {@link NkMouseButton struct nk_mouse_button} buttons[NK_BUTTON_MAX];
  *     {@link NkVec2 struct nk_vec2} pos;
@@ -28,7 +28,7 @@ import static org.lwjgl.nuklear.Nuklear.NK_BUTTON_MAX;
  *     bool grab;
  *     bool grabbed;
  *     bool ungrab;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_mouse")
 public class NkMouse extends Struct<NkMouse> {
@@ -52,6 +52,9 @@ public class NkMouse extends Struct<NkMouse> {
         UNGRAB;
 
     static {
+        NkMouseButton.createSafe(NULL);
+        NkVec2.createSafe(NULL);
+
         Layout layout = __struct(
             __array(NkMouseButton.SIZEOF, NkMouseButton.ALIGNOF, NK_BUTTON_MAX),
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),

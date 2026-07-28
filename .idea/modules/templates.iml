@@ -52,6 +52,9 @@
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/meshoptimizer/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/meshoptimizer/src/templates/kotlin" isTestSource="false" />
     </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/mimalloc/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/mimalloc/src/templates/kotlin" isTestSource="false" />
+    </content>
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/msdfgen/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/msdfgen/src/templates/kotlin" isTestSource="false" />
     </content>
@@ -90,6 +93,9 @@
     </content>
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/remotery/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/remotery/src/templates/kotlin" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../modules/lwjgl/renderdoc/src/templates">
+      <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/renderdoc/src/templates/kotlin" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/../../modules/lwjgl/rpmalloc/src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../modules/lwjgl/rpmalloc/src/templates/kotlin" isTestSource="false" />

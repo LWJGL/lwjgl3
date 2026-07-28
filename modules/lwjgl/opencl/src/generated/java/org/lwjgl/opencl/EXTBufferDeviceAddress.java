@@ -12,8 +12,9 @@ import static org.lwjgl.system.JNI.*;
 
 public class EXTBufferDeviceAddress {
 
+    public static final long CL_MEM_DEVICE_PRIVATE_ADDRESS_EXT = 0x5000L;
+
     public static final int
-        CL_MEM_DEVICE_PRIVATE_ADDRESS_EXT   = 0x5000,
         CL_MEM_DEVICE_ADDRESS_EXT           = 0x5001,
         CL_KERNEL_EXEC_INFO_DEVICE_PTRS_EXT = 0x5002;
 

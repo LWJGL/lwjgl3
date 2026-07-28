@@ -14,14 +14,14 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_PaintScale {
  *     {@link FT_OpaquePaint FT_OpaquePaintRec} paint;
  *     FT_Fixed scale_x;
  *     FT_Fixed scale_y;
  *     FT_Fixed center_x;
  *     FT_Fixed center_y;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_PaintScale extends Struct<FT_PaintScale> {
 
@@ -40,6 +40,8 @@ public class FT_PaintScale extends Struct<FT_PaintScale> {
         CENTER_Y;
 
     static {
+        FT_OpaquePaint.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FT_OpaquePaint.SIZEOF, FT_OpaquePaint.ALIGNOF),
             __member(CLONG_SIZE),

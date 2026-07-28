@@ -376,6 +376,7 @@ fun typedef(typedef: IntegerType, name: String) = IntegerType(name, typedef.mapp
 fun <T: DataType> typedef(typedef: CArrayType<T>, name: String) = CArrayType(name, typedef.elementType, typedef.dimensions)
 fun <T: NativeType> typedef(typedef: PointerType<T>, name: String) = PointerType(name, typedef.mapping, true, typedef.elementType)
 fun typedef(typedef: CharSequenceType, name: String) = CharSequenceType(name, typedef.mapping, true, typedef.elementType)
+fun typedef(typedef: FunctionType, name: String) = FunctionType(typedef.function, name)
 fun typedef(typedef: StructType, name: String, className: String = name) = typedef.definition.copy(className, name).let {
     if (Generator.structs.contains(typedef.definition)) {
         Generator.register(it)

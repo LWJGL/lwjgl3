@@ -36,7 +36,7 @@ val SDL_audio = "SDLAudio".nativeClassSDL("SDL_audio") {
         "AUDIO_F32BE".enum("0x9120"),
         "AUDIO_S16".enum("ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN ? SDL_AUDIO_S16LE : SDL_AUDIO_S16BE"),
         "AUDIO_S32".enum("ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN ? SDL_AUDIO_S32LE : SDL_AUDIO_S32BE"),
-        "AUDIO_F32".enum("ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN ? SDL_AUDIO_S32LE : SDL_AUDIO_S32BE")
+        "AUDIO_F32".enum("ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN ? SDL_AUDIO_F32LE : SDL_AUDIO_F32BE")
     )
 
     macro(expression = "x & SDL_AUDIO_MASK_BITSIZE")..uint32_t("AUDIO_BITSIZE", SDL_AudioFormat("x"))
@@ -51,6 +51,10 @@ val SDL_audio = "SDLAudio".nativeClassSDL("SDL_audio") {
     IntConstant(
         "AUDIO_DEVICE_DEFAULT_PLAYBACK".."0xFFFFFFFF",
         "AUDIO_DEVICE_DEFAULT_RECORDING".."0xFFFFFFFE"
+    )
+
+    StringConstant(
+        "PROP_AUDIOSTREAM_AUTO_CLEANUP_BOOLEAN".."SDL.audiostream.auto_cleanup"
     )
 
     macro(expression = "SDL_AUDIO_BYTESIZE(x.format()) * x.channels()")..uint32_t(
@@ -180,8 +184,8 @@ val SDL_audio = "SDLAudio".nativeClassSDL("SDL_audio") {
     SDL_AudioStream.p(
         "CreateAudioStream",
 
-        SDL_AudioSpec.const.p("src_spec"),
-        SDL_AudioSpec.const.p("dst_spec")
+        nullable..SDL_AudioSpec.const.p("src_spec"),
+        nullable..SDL_AudioSpec.const.p("dst_spec")
     )
 
     SDL_PropertiesID(
@@ -268,6 +272,25 @@ val SDL_audio = "SDLAudio".nativeClassSDL("SDL_audio") {
         SDL_AudioStream.p("stream"),
         void.const.p("buf"),
         AutoSize("buf")..int("len")
+    )
+
+    bool(
+        "PutAudioStreamDataNoCopy",
+
+        SDL_AudioStream.p("stream"),
+        void.const.p("buf"),
+        AutoSize("buf")..int("len"),
+        nullable..SDL_AudioStreamDataCompleteCallback("callback"),
+        nullable..opaque_p("userdata")
+    )
+
+    bool(
+        "PutAudioStreamPlanarData",
+
+        SDL_AudioStream.p("stream"),
+        Unsafe..void.const.p.const.p("channel_buffers"),
+        int("num_channels"),
+        int("num_samples")
     )
 
     int(
@@ -403,10 +426,10 @@ val SDL_audio = "SDLAudio".nativeClassSDL("SDL_audio") {
     bool(
         "ConvertAudioSamples",
 
-        SDL_AudioSpec.const.p("src_spec"),
+        nullable..SDL_AudioSpec.const.p("src_spec"),
         Uint8.const.p("src_data"),
         AutoSize("src_data")..int("src_len"),
-        SDL_AudioSpec.const.p("dst_spec"),
+        nullable..SDL_AudioSpec.const.p("dst_spec"),
         Check(1)..Uint8.p.p("dst_data"),
         Check(1)..int.p("dst_len")
     )

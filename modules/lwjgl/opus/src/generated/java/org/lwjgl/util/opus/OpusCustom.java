@@ -35,6 +35,7 @@ public class OpusCustom {
             custom_encoder_destroy  = apiGetFunctionAddress(Opus.getLibrary(), "opus_custom_encoder_destroy"),
             custom_encode_float     = apiGetFunctionAddress(Opus.getLibrary(), "opus_custom_encode_float"),
             custom_encode           = apiGetFunctionAddress(Opus.getLibrary(), "opus_custom_encode"),
+            custom_encode24         = apiGetFunctionAddress(Opus.getLibrary(), "opus_custom_encode24"),
             custom_encoder_ctl      = apiGetFunctionAddress(Opus.getLibrary(), "opus_custom_encoder_ctl"),
             custom_decoder_get_size = apiGetFunctionAddress(Opus.getLibrary(), "opus_custom_decoder_get_size"),
             custom_decoder_init     = apiGetFunctionAddress(Opus.getLibrary(), "opus_custom_decoder_init"),
@@ -42,6 +43,7 @@ public class OpusCustom {
             custom_decoder_destroy  = apiGetFunctionAddress(Opus.getLibrary(), "opus_custom_decoder_destroy"),
             custom_decode_float     = apiGetFunctionAddress(Opus.getLibrary(), "opus_custom_decode_float"),
             custom_decode           = apiGetFunctionAddress(Opus.getLibrary(), "opus_custom_decode"),
+            custom_decode24         = apiGetFunctionAddress(Opus.getLibrary(), "opus_custom_decode24"),
             custom_decoder_ctl      = apiGetFunctionAddress(Opus.getLibrary(), "opus_custom_decoder_ctl");
 
     }
@@ -170,6 +172,25 @@ public class OpusCustom {
         return nopus_custom_encode(st, memAddress(pcm), frame_size, memAddress(compressed), compressed.remaining());
     }
 
+    // --- [ opus_custom_encode24 ] ---
+
+    /** {@code int opus_custom_encode24(OpusCustomEncoder * st, opus_int32 const * pcm, int frame_size, unsigned char * compressed, int maxCompressedBytes)} */
+    public static int nopus_custom_encode24(long st, long pcm, int frame_size, long compressed, int maxCompressedBytes) {
+        long __functionAddress = Functions.custom_encode24;
+        if (CHECKS) {
+            check(st);
+        }
+        return invokePPPI(st, pcm, frame_size, compressed, maxCompressedBytes, __functionAddress);
+    }
+
+    /** {@code int opus_custom_encode24(OpusCustomEncoder * st, opus_int32 const * pcm, int frame_size, unsigned char * compressed, int maxCompressedBytes)} */
+    public static int opus_custom_encode24(@NativeType("OpusCustomEncoder *") long st, @NativeType("opus_int32 const *") IntBuffer pcm, int frame_size, @NativeType("unsigned char *") ByteBuffer compressed) {
+        if (CHECKS) {
+            check(pcm, frame_size * memGetInt(st + Pointer.POINTER_SIZE));
+        }
+        return nopus_custom_encode24(st, memAddress(pcm), frame_size, memAddress(compressed), compressed.remaining());
+    }
+
     // --- [ opus_custom_encoder_ctl ] ---
 
     /** {@code int opus_custom_encoder_ctl(OpusCustomEncoder * st)} */
@@ -273,6 +294,25 @@ public class OpusCustom {
         return nopus_custom_decode(st, memAddressSafe(data), remainingSafe(data), memAddress(pcm), frame_size);
     }
 
+    // --- [ opus_custom_decode24 ] ---
+
+    /** {@code int opus_custom_decode24(OpusCustomDecoder * st, unsigned char const * data, int len, opus_int32 * pcm, int frame_size)} */
+    public static int nopus_custom_decode24(long st, long data, int len, long pcm, int frame_size) {
+        long __functionAddress = Functions.custom_decode24;
+        if (CHECKS) {
+            check(st);
+        }
+        return invokePPPI(st, data, len, pcm, frame_size, __functionAddress);
+    }
+
+    /** {@code int opus_custom_decode24(OpusCustomDecoder * st, unsigned char const * data, int len, opus_int32 * pcm, int frame_size)} */
+    public static int opus_custom_decode24(@NativeType("OpusCustomDecoder *") long st, @NativeType("unsigned char const *") @Nullable ByteBuffer data, @NativeType("opus_int32 *") IntBuffer pcm, int frame_size) {
+        if (CHECKS) {
+            check(pcm, frame_size * memGetInt(st + (Pointer.POINTER_SIZE + 4)));
+        }
+        return nopus_custom_decode24(st, memAddressSafe(data), remainingSafe(data), memAddress(pcm), frame_size);
+    }
+
     // --- [ opus_custom_decoder_ctl ] ---
 
     /** {@code int opus_custom_decoder_ctl(OpusCustomDecoder * st)} */
@@ -284,42 +324,18 @@ public class OpusCustom {
         return invokePI(st, __functionAddress);
     }
 
-    /**
-     * Performs a CTL function on an Opus custom encoder.
-     *
-     * @param st      encoder state
-     * @param request CTL request
-     */
     public static int opus_custom_encoder_ctl(@NativeType("OpusCustomEncoder *") long st, int request) {
         return new CTLRequestV(request).apply(st, Functions.custom_encoder_ctl);
     }
 
-    /**
-     * Performs a CTL function on an Opus custom encoder.
-     *
-     * @param st      encoder state
-     * @param request CTL request
-     */
     public static int opus_custom_encoder_ctl(@NativeType("OpusCustomEncoder *") long st, CTLRequest request) {
         return request.apply(st, Functions.custom_encoder_ctl);
     }
 
-    /**
-     * Performs a CTL function on an Opus custom decoder.
-     *
-     * @param st      decoder state
-     * @param request CTL request
-     */
     public static int opus_custom_decoder_ctl(@NativeType("OpusCustomDecoder *") long st, int request) {
         return new CTLRequestV(request).apply(st, Functions.custom_decoder_ctl);
     }
 
-    /**
-     * Performs a CTL function on an Opus custom decoder.
-     *
-     * @param st      decoder state
-     * @param request CTL request
-     */
     public static int opus_custom_decoder_ctl(@NativeType("OpusCustomDecoder *") long st, CTLRequest request) {
         return request.apply(st, Functions.custom_decoder_ctl);
     }

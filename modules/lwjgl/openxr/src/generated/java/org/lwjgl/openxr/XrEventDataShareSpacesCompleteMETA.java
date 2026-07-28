@@ -97,22 +97,14 @@ public class XrEventDataShareSpacesCompleteMETA extends Struct<XrEventDataShareS
     public XrEventDataShareSpacesCompleteMETA type$Default() { return type(METASpatialEntitySharing.XR_TYPE_EVENT_DATA_SHARE_SPACES_COMPLETE_META); }
     /** Sets the specified value to the {@code next} field. */
     public XrEventDataShareSpacesCompleteMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@code requestId} field. */
-    public XrEventDataShareSpacesCompleteMETA requestId(@NativeType("XrAsyncRequestIdFB") long value) { nrequestId(address(), value); return this; }
-    /** Sets the specified value to the {@code result} field. */
-    public XrEventDataShareSpacesCompleteMETA result(@NativeType("XrResult") int value) { nresult(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrEventDataShareSpacesCompleteMETA set(
         int type,
-        long next,
-        long requestId,
-        int result
+        long next
     ) {
         type(type);
         next(next);
-        requestId(requestId);
-        result(result);
 
         return this;
     }
@@ -157,6 +149,11 @@ public class XrEventDataShareSpacesCompleteMETA extends Struct<XrEventDataShareS
         return address == NULL ? null : new XrEventDataShareSpacesCompleteMETA(address, null);
     }
 
+    /** Downcasts the specified {@code XrEventDataBaseHeader} instance to {@code XrEventDataShareSpacesCompleteMETA}. */
+    public static XrEventDataShareSpacesCompleteMETA create(XrEventDataBaseHeader value) {
+        return new XrEventDataShareSpacesCompleteMETA(value.address(), __getContainer(value));
+    }
+
     /**
      * Returns a new {@link XrEventDataShareSpacesCompleteMETA.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -198,6 +195,11 @@ public class XrEventDataShareSpacesCompleteMETA extends Struct<XrEventDataShareS
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     public static XrEventDataShareSpacesCompleteMETA.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrEventDataBaseHeader.Buffer} instance to {@code XrEventDataShareSpacesCompleteMETA.Buffer}. */
+    public static XrEventDataShareSpacesCompleteMETA.Buffer create(XrEventDataBaseHeader.Buffer value) {
+        return new XrEventDataShareSpacesCompleteMETA.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /**
@@ -253,10 +255,6 @@ public class XrEventDataShareSpacesCompleteMETA extends Struct<XrEventDataShareS
     public static void ntype(long struct, int value) { memPutInt(struct + XrEventDataShareSpacesCompleteMETA.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataShareSpacesCompleteMETA.NEXT, value); }
-    /** Unsafe version of {@link #requestId(long) requestId}. */
-    public static void nrequestId(long struct, long value) { memPutLong(struct + XrEventDataShareSpacesCompleteMETA.REQUESTID, value); }
-    /** Unsafe version of {@link #result(int) result}. */
-    public static void nresult(long struct, int value) { memPutInt(struct + XrEventDataShareSpacesCompleteMETA.RESULT, value); }
 
     // -----------------------------------
 
@@ -320,10 +318,6 @@ public class XrEventDataShareSpacesCompleteMETA extends Struct<XrEventDataShareS
         public XrEventDataShareSpacesCompleteMETA.Buffer type$Default() { return type(METASpatialEntitySharing.XR_TYPE_EVENT_DATA_SHARE_SPACES_COMPLETE_META); }
         /** Sets the specified value to the {@code next} field. */
         public XrEventDataShareSpacesCompleteMETA.Buffer next(@NativeType("void const *") long value) { XrEventDataShareSpacesCompleteMETA.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@code requestId} field. */
-        public XrEventDataShareSpacesCompleteMETA.Buffer requestId(@NativeType("XrAsyncRequestIdFB") long value) { XrEventDataShareSpacesCompleteMETA.nrequestId(address(), value); return this; }
-        /** Sets the specified value to the {@code result} field. */
-        public XrEventDataShareSpacesCompleteMETA.Buffer result(@NativeType("XrResult") int value) { XrEventDataShareSpacesCompleteMETA.nresult(address(), value); return this; }
 
     }
 

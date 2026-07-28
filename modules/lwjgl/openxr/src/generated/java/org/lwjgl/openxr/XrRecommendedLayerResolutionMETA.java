@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrRecommendedLayerResolutionMETA {
  *     XrStructureType type;
  *     void * next;
  *     {@link XrExtent2Di XrExtent2Di} recommendedImageDimensions;
  *     XrBool32 isValid;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrRecommendedLayerResolutionMETA extends Struct<XrRecommendedLayerResolutionMETA> implements NativeResource {
 
@@ -40,6 +40,8 @@ public class XrRecommendedLayerResolutionMETA extends Struct<XrRecommendedLayerR
         ISVALID;
 
     static {
+        XrExtent2Di.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

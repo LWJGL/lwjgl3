@@ -9,7 +9,7 @@ import org.lwjgl.generator.*
 
 val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx_", binding = BGFX_BINDING) {
     IntConstant(
-        "API_VERSION".."129"
+        "API_VERSION".."151"
     )
 
     ShortConstant(
@@ -143,8 +143,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "STENCIL_OP_PASS_Z_DECRSAT"..0x60000000,
         "STENCIL_OP_PASS_Z_INVERT"..0x70000000,
 
-        "STENCIL_NONE"..0x00000000,
-        "STENCIL_DEFAULT"..0x00000000
+        "STENCIL_NONE"..0x0000ff00
     )
 
     IntConstant(
@@ -272,7 +271,8 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "TEXTURE_COMPUTE_WRITE"..0x0000100000000000L,
         "TEXTURE_SRGB"..0x0000200000000000L,
         "TEXTURE_BLIT_DST"..0x0000400000000000L,
-        "TEXTURE_READ_BACK"..0x0000800000000000L
+        "TEXTURE_READ_BACK"..0x0000800000000000L,
+        "TEXTURE_EXTERNAL_SHARED"..0x0001000000000000L
     )
 
     IntConstant(
@@ -417,14 +417,18 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "CAPS_TEXTURE_COMPARE_RESERVED"..0x0000000000100000L,
         "CAPS_TEXTURE_CUBE_ARRAY"..0x0000000000200000L,
         "CAPS_TEXTURE_DIRECT_ACCESS"..0x0000000000400000L,
-        "CAPS_TEXTURE_READ_BACK"..0x0000000000800000L,
-        "CAPS_TEXTURE_2D_ARRAY"..0x0000000001000000L,
-        "CAPS_TEXTURE_3D"..0x0000000002000000L,
-        "CAPS_TRANSPARENT_BACKBUFFER"..0x0000000004000000L,
-        "CAPS_VERTEX_ATTRIB_HALF"..0x0000000008000000L,
-        "CAPS_VERTEX_ATTRIB_UINT10"..0x0000000010000000L,
-        "CAPS_VERTEX_ID"..0x0000000020000000L,
-        "CAPS_VIEWPORT_LAYER_ARRAY"..0x0000000040000000L,
+        "CAPS_TEXTURE_EXTERNAL"..0x0000000000800000L,
+        "CAPS_TEXTURE_EXTERNAL_SHARED"..0x0000000001000000L,
+        "CAPS_TEXTURE_READ_BACK"..0x0000000002000000L,
+        "CAPS_TEXTURE_2D_ARRAY"..0x0000000004000000L,
+        "CAPS_TEXTURE_3D"..0x0000000008000000L,
+        "CAPS_TRANSPARENT_BACKBUFFER"..0x0000000010000000L,
+        "CAPS_VARIABLE_RATE_SHADING"..0x0000000020000000L,
+        "CAPS_VERTEX_ATTRIB_HALF"..0x0000000040000000L,
+        "CAPS_VERTEX_ATTRIB_UINT10"..0x0000000080000000L,
+        "CAPS_VERTEX_ID"..0x0000000100000000L,
+        "CAPS_VIDEO_DECODE"..0x0000000200000000L,
+        "CAPS_VIEWPORT_LAYER_ARRAY"..0x0000000400000000,
         "CAPS_TEXTURE_COMPARE_ALL".."BGFX_CAPS_TEXTURE_COMPARE_RESERVED | BGFX_CAPS_TEXTURE_COMPARE_LEQUAL"
     )
 
@@ -445,7 +449,32 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "CAPS_FORMAT_TEXTURE_FRAMEBUFFER"..0x00001000,
         "CAPS_FORMAT_TEXTURE_FRAMEBUFFER_MSAA"..0x00002000,
         "CAPS_FORMAT_TEXTURE_MSAA"..0x00004000,
-        "CAPS_FORMAT_TEXTURE_MIP_AUTOGEN"..0x00008000
+        "CAPS_FORMAT_TEXTURE_MIP_AUTOGEN"..0x00008000,
+        "CAPS_FORMAT_TEXTURE_BACKBUFFER"..0x00010000,
+        "CAPS_FORMAT_TEXTURE_VIDEO_DECODE_DST"..0x00020000
+    )
+
+    IntConstant(
+        "CAPS_VIDEO_CODEC_NONE"..0x00000000,
+        "CAPS_VIDEO_CODEC_BIT_8"..0x00000001,
+        "CAPS_VIDEO_CODEC_BIT_10"..0x00000002,
+        "CAPS_VIDEO_CODEC_BIT_12"..0x00000004,
+        "CAPS_VIDEO_CODEC_CHROMA_420"..0x00000008,
+        "CAPS_VIDEO_CODEC_CHROMA_422"..0x00000010,
+        "CAPS_VIDEO_CODEC_CHROMA_444"..0x00000020
+    )
+
+    ByteConstant(
+        "VIDEO_DECODER_INIT_NONE"..0x00.b,
+        "VIDEO_DECODER_INIT_RETAIN"..0x01.b
+    )
+
+    ByteConstant(
+        "VIDEO_DECODE_FRAME_NONE"..0x00.b,
+        "VIDEO_DECODE_FRAME_SET"..0x01.b,
+        "VIDEO_DECODE_FRAME_NO_BLIT"..0x02.b,
+        "VIDEO_DECODE_FRAME_FINAL"..0x04.b,
+        "VIDEO_DECODE_FRAME_LOOP"..0x08.b
     )
 
     ByteConstant(
@@ -473,6 +502,13 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "CUBE_MAP_NEGATIVE_Z"..0x05.b
     )
 
+    ByteConstant(
+        "FRAME_NONE"..0x00.b,
+        "FRAME_DEBUG_CAPTURE"..0x01.b,
+        "FRAME_DISCARD"..0x02.b,
+        "FRAME_FLUSH"..0x04.b
+    )
+
     EnumConstant(
         "FATAL_DEBUG_CHECK".enum,
         "FATAL_INVALID_SHADER".enum,
@@ -494,6 +530,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "RENDERER_TYPE_OPENGLES".enum,
         "RENDERER_TYPE_OPENGL".enum,
         "RENDERER_TYPE_VULKAN".enum,
+        "RENDERER_TYPE_WEBGPU".enum,
 
         "RENDERER_TYPE_COUNT".enum
     )
@@ -525,18 +562,30 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "ATTRIB_TEXCOORD5".enum,
         "ATTRIB_TEXCOORD6".enum,
         "ATTRIB_TEXCOORD7".enum,
+        "ATTRIB_TEXCOORD8".enum,
+        "ATTRIB_TEXCOORD9".enum,
+        "ATTRIB_TEXCOORD10".enum,
+        "ATTRIB_TEXCOORD11".enum,
+        "ATTRIB_TEXCOORD12".enum,
+        "ATTRIB_TEXCOORD13".enum,
+        "ATTRIB_TEXCOORD14".enum,
+        "ATTRIB_TEXCOORD15".enum,
 
-        "ATTRIB_COUNT".enum("BGFX_ATTRIB_TEXCOORD7 + 1")
+        "ATTRIB_COUNT".enum
     )
 
     EnumConstant(
+        "ATTRIB_TYPE_INT8".enum,
         "ATTRIB_TYPE_UINT8".enum,
         "ATTRIB_TYPE_UINT10".enum,
         "ATTRIB_TYPE_INT16".enum,
+        "ATTRIB_TYPE_UINT16".enum,
         "ATTRIB_TYPE_HALF".enum,
         "ATTRIB_TYPE_FLOAT".enum,
+        "ATTRIB_TYPE_INT32".enum,
+        "ATTRIB_TYPE_UINT32".enum,
 
-        "ATTRIB_TYPE_COUNT".enum("BGFX_ATTRIB_TYPE_FLOAT + 1")
+        "ATTRIB_TYPE_COUNT".enum
     )
 
     EnumConstant(
@@ -551,6 +600,10 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "TEXTURE_FORMAT_ETC2".enum,
         "TEXTURE_FORMAT_ETC2A".enum,
         "TEXTURE_FORMAT_ETC2A1".enum,
+        "TEXTURE_FORMAT_EACR11".enum,
+        "TEXTURE_FORMAT_EACR11S".enum,
+        "TEXTURE_FORMAT_EACRG11".enum,
+        "TEXTURE_FORMAT_EACRG11S".enum,
         "TEXTURE_FORMAT_PTC12".enum,
         "TEXTURE_FORMAT_PTC14".enum,
         "TEXTURE_FORMAT_PTC12A".enum,
@@ -641,7 +694,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "TEXTURE_FORMAT_D32F".enum,
         "TEXTURE_FORMAT_D0S8".enum,
 
-        "TEXTURE_FORMAT_COUNT".enum("BGFX_TEXTURE_FORMAT_D0S8 + 1")
+        "TEXTURE_FORMAT_COUNT".enum
     )
 
     EnumConstant(
@@ -653,6 +706,14 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "UNIFORM_TYPE_MAT4".enum,
 
         "UNIFORM_TYPE_COUNT".enum
+    )
+
+    EnumConstant(
+        "UNIFORM_FREQ_DRAW".enum,
+        "UNIFORM_FREQ_VIEW".enum,
+        "UNIFORM_FREQ_FRAME".enum,
+
+        "UNIFORM_FREQ_COUNT".enum
     )
 
     EnumConstant(
@@ -672,6 +733,14 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "OCCLUSION_QUERY_RESULT_NORESULT".enum,
 
         "OCCLUSION_QUERY_RESULT_COUNT".enum
+    )
+
+    EnumConstant(
+        "VIDEO_CODEC_H264".enum,
+        "VIDEO_CODEC_H265".enum,
+        "VIDEO_CODEC_AV1".enum,
+
+        "VIDEO_CODEC_COUNT".enum
     )
 
     EnumConstant(
@@ -718,6 +787,18 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "VIEW_MODE_DEPTH_DESCENDING".enum,
 
         "VIEW_MODE_COUNT".enum
+    )
+
+    EnumConstant(
+        "SHADING_RATE_RATE_1X_1".enum("0"),
+        "SHADING_RATE_RATE_1X_2".enum,
+        "SHADING_RATE_RATE_2X_1".enum,
+        "SHADING_RATE_RATE_2X_2".enum,
+        "SHADING_RATE_RATE_2X_4".enum,
+        "SHADING_RATE_RATE_4X_2".enum,
+        "SHADING_RATE_RATE_4X_4".enum,
+
+        "SHADING_RATE_COUNT".enum
     )
 
     EnumConstant(
@@ -840,20 +921,6 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     )
 
     uint32_t(
-        "weld_vertices",
-
-        MultiType(
-            PointerMapping.DATA_SHORT,
-            PointerMapping.DATA_INT
-        )..void.p("_output"),
-        bgfx_vertex_layout_t.const.p("_layout"),
-        Unsafe..void.const.p("_data"),
-        AutoSizeShr("_index32 ? 2 : 1", "_output")..uint32_t("_num"),
-        bool("_index32"),
-        float("_epsilon")
-    )
-
-    uint32_t(
         "topology_convert",
 
         bgfx_topology_convert_t("_conversion"),
@@ -930,7 +997,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     uint32_t(
         "frame",
 
-        bool("_capture")
+        MapToInt..uint8_t("_flags")
     )
 
     bgfx_renderer_type_t(
@@ -1261,6 +1328,18 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     )
 
     bool(
+        "is_video_codec_valid",
+
+        bgfx_video_codec_t("_codec"),
+        MapToInt..uint8_t("_chroma"),
+        MapToInt..uint8_t("_bitDepth"),
+        MapToInt..uint16_t("_codedWidth"),
+        MapToInt..uint16_t("_codedHeight"),
+        MapToInt..uint8_t("_maxDpbSlots"),
+        MapToInt..uint8_t("_maxActiveReferences")
+    )
+
+    bool(
         "is_frame_buffer_valid",
 
         AutoSize("_attachment")..uint8_t("_num"),
@@ -1270,7 +1349,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     void(
         "calc_texture_size",
 
-        bgfx_texture_info_t_p("_info"),
+        bgfx_texture_info_t.p("_info"),
         MapToInt..uint16_t("_width"),
         MapToInt..uint16_t("_height"),
         MapToInt..uint16_t("_depth"),
@@ -1286,7 +1365,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         bgfx_memory_t.const.p("_mem"),
         uint64_t("_flags"),
         MapToInt..uint8_t("_skip"),
-        nullable..bgfx_texture_info_t_p("_info")
+        nullable..bgfx_texture_info_t.p("_info")
     )
 
     bgfx_texture_handle_t(
@@ -1298,7 +1377,8 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         MapToInt..uint16_t("_numLayers"),
         bgfx_texture_format_t("_format"),
         uint64_t("_flags"),
-        nullable..bgfx_memory_t.const.p("_mem")
+        nullable..bgfx_memory_t.const.p("_mem"),
+        uint64_t("_external")
     )
 
     bgfx_texture_handle_t(
@@ -1320,7 +1400,8 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         bool("_hasMips"),
         bgfx_texture_format_t("_format"),
         uint64_t("_flags"),
-        nullable..bgfx_memory_t.const.p("_mem")
+        nullable..bgfx_memory_t.const.p("_mem"),
+        uint64_t("_external")
     )
 
     bgfx_texture_handle_t(
@@ -1331,7 +1412,8 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         MapToInt..uint16_t("_numLayers"),
         bgfx_texture_format_t("_format"),
         uint64_t("_flags"),
-        nullable..bgfx_memory_t.const.p("_mem")
+        nullable..bgfx_memory_t.const.p("_mem"),
+        uint64_t("_external")
     )
 
     void(
@@ -1377,6 +1459,16 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         MapToInt..uint16_t("_pitch")
     )
 
+    void(
+        "clear_texture",
+
+        bgfx_texture_handle_t("_handle"),
+        MapToInt..uint8_t("_mip"),
+        MapToInt..uint8_t("_numMips"),
+        MapToInt..uint16_t("_layer"),
+        MapToInt..uint16_t("_numLayers")
+    )
+
     uint32_t(
         "read_texture",
 
@@ -1386,6 +1478,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
             PointerMapping.DATA_INT,
             PointerMapping.DATA_FLOAT
         )..Unsafe..void.p("_data"),
+        MapToInt..uint16_t("_layer"),
         MapToInt..uint8_t("_mip")
     )
 
@@ -1481,11 +1574,20 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         MapToInt..uint16_t("_num")
     )
 
+    bgfx_uniform_handle_t(
+        "create_uniform_with_freq",
+
+        charASCII.const.p("_name"),
+        bgfx_uniform_freq_t("_freq"),
+        bgfx_uniform_type_t("_type"),
+        MapToInt..uint16_t("_num")
+    )
+
     void(
         "get_uniform_info",
 
         bgfx_uniform_handle_t("_handle"),
-        bgfx_uniform_info_t_p("_info")
+        bgfx_uniform_info_t.p("_info")
     )
 
     void(
@@ -1636,6 +1738,13 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     )
 
     void(
+        "set_view_shading_rate",
+
+        MapToInt..bgfx_view_id_t("_id"),
+        bgfx_shading_rate_t("_shadingRate")
+    )
+
+    void(
         "reset_view",
 
         MapToInt..bgfx_view_id_t("_id")
@@ -1644,7 +1753,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     bgfx_encoder_t.p(
         "encoder_begin",
 
-        bool("_forThread")
+        bool("_forceNewEncoder")
     )
 
     void(
@@ -1732,6 +1841,35 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "encoder_set_uniform",
 
         bgfx_encoder_t.p("_this"),
+        bgfx_uniform_handle_t("_handle"),
+        MultiType(
+            PointerMapping.DATA_SHORT,
+            PointerMapping.DATA_INT,
+            PointerMapping.DATA_LONG,
+            PointerMapping.DATA_FLOAT,
+            PointerMapping.DATA_DOUBLE
+        )..Unsafe..void.const.p("_value"),
+        MapToInt..uint16_t("_num")
+    )
+
+    void(
+        "set_view_uniform",
+
+        MapToInt..bgfx_view_id_t("_id"),
+        bgfx_uniform_handle_t("_handle"),
+        MultiType(
+            PointerMapping.DATA_SHORT,
+            PointerMapping.DATA_INT,
+            PointerMapping.DATA_LONG,
+            PointerMapping.DATA_FLOAT,
+            PointerMapping.DATA_DOUBLE
+        )..Unsafe..void.const.p("_value"),
+        MapToInt..uint16_t("_num")
+    )
+
+    void(
+        "set_frame_uniform",
+
         bgfx_uniform_handle_t("_handle"),
         MultiType(
             PointerMapping.DATA_SHORT,
@@ -1885,6 +2023,20 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     )
 
     void(
+        "encoder_set_texture_view",
+
+        bgfx_encoder_t.p("_this"),
+        MapToInt..uint8_t("_stage"),
+        bgfx_uniform_handle_t("_sampler"),
+        bgfx_texture_handle_t("_handle"),
+        MapToInt..uint16_t("_firstLayer"),
+        MapToInt..uint16_t("_numLayers"),
+        MapToInt..uint8_t("_firstMip"),
+        MapToInt..uint8_t("_numMips"),
+        uint32_t("_flags")
+    )
+
+    void(
         "encoder_touch",
 
         bgfx_encoder_t.p("_this"),
@@ -1991,6 +2143,19 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         bgfx_encoder_t.p("_this"),
         MapToInt..uint8_t("_stage"),
         bgfx_texture_handle_t("_handle"),
+        MapToInt..uint8_t("_mip"),
+        bgfx_access_t("_access"),
+        bgfx_texture_format_t("_format")
+    )
+
+    void(
+        "encoder_set_image_view",
+
+        bgfx_encoder_t.p("_this"),
+        MapToInt..uint8_t("_stage"),
+        bgfx_texture_handle_t("_handle"),
+        MapToInt..uint16_t("_firstLayer"),
+        MapToInt..uint16_t("_numLayers"),
         MapToInt..uint8_t("_mip"),
         bgfx_access_t("_access"),
         bgfx_texture_format_t("_format")
@@ -2261,6 +2426,19 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     )
 
     void(
+        "set_texture_view",
+
+        MapToInt..uint8_t("_stage"),
+        bgfx_uniform_handle_t("_sampler"),
+        bgfx_texture_handle_t("_handle"),
+        MapToInt..uint16_t("_firstLayer"),
+        MapToInt..uint16_t("_numLayers"),
+        MapToInt..uint8_t("_firstMip"),
+        MapToInt..uint8_t("_numMips"),
+        uint32_t("_flags")
+    )
+
+    void(
         "touch",
 
         MapToInt..bgfx_view_id_t("_id")
@@ -2356,6 +2534,18 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
 
         MapToInt..uint8_t("_stage"),
         bgfx_texture_handle_t("_handle"),
+        MapToInt..uint8_t("_mip"),
+        bgfx_access_t("_access"),
+        bgfx_texture_format_t("_format")
+    )
+
+    void(
+        "set_image_view",
+
+        MapToInt..uint8_t("_stage"),
+        bgfx_texture_handle_t("_handle"),
+        MapToInt..uint16_t("_firstLayer"),
+        MapToInt..uint16_t("_numLayers"),
         MapToInt..uint8_t("_mip"),
         bgfx_access_t("_access"),
         bgfx_texture_format_t("_format")

@@ -28,6 +28,7 @@ val NV_displacement_micromap = "NVDisplacementMicromap".nativeClassVK("NV_displa
     )
 
     EnumConstant(
+        "BUILD_ACCELERATION_STRUCTURE_ALLOW_DISPLACEMENT_MICROMAP_UPDATE_BIT_NV".enum(0x00000200),
         "BUILD_ACCELERATION_STRUCTURE_ALLOW_DISPLACEMENT_MICROMAP_UPDATE_NV".enum(0x00000200)
     )
 

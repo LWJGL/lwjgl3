@@ -14,13 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct CXIdxImportedASTFileInfo {
  *     CXFile file;
  *     CXModule module;
  *     {@link CXIdxLoc CXIdxLoc} loc;
  *     int isImplicit;
- * }}</pre>
+ * }</code></pre>
  */
 public class CXIdxImportedASTFileInfo extends Struct<CXIdxImportedASTFileInfo> {
 
@@ -38,6 +38,8 @@ public class CXIdxImportedASTFileInfo extends Struct<CXIdxImportedASTFileInfo> {
         ISIMPLICIT;
 
     static {
+        CXIdxLoc.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

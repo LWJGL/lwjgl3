@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FMOD_DSP_PARAMETER_3DATTRIBUTES {
  *     {@link FMOD_3D_ATTRIBUTES FMOD_3D_ATTRIBUTES} relative;
  *     {@link FMOD_3D_ATTRIBUTES FMOD_3D_ATTRIBUTES} absolute;
- * }}</pre>
+ * }</code></pre>
  */
 public class FMOD_DSP_PARAMETER_3DATTRIBUTES extends Struct<FMOD_DSP_PARAMETER_3DATTRIBUTES> implements NativeResource {
 
@@ -36,6 +36,8 @@ public class FMOD_DSP_PARAMETER_3DATTRIBUTES extends Struct<FMOD_DSP_PARAMETER_3
         ABSOLUTE;
 
     static {
+        FMOD_3D_ATTRIBUTES.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FMOD_3D_ATTRIBUTES.SIZEOF, FMOD_3D_ATTRIBUTES.ALIGNOF),
             __member(FMOD_3D_ATTRIBUTES.SIZEOF, FMOD_3D_ATTRIBUTES.ALIGNOF)

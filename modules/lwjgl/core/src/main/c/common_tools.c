@@ -116,7 +116,7 @@ static inline void linkEnvData(EnvData* data, JNIEnv *env) {
         return data;
     }
 
-    inline EnvData* tlsGetEnvData(void) {
+    static inline EnvData* tlsGetEnvData(void) {
         EnvData* data = (EnvData*)TlsGetValue(envTLS);
         if (data == NULL) {
             data = tlsCreateEnvData();
@@ -181,7 +181,7 @@ static inline void linkEnvData(EnvData* data, JNIEnv *env) {
         return data;
     }
 
-    inline EnvData* tlsGetEnvData(void) {
+    static inline EnvData* tlsGetEnvData(void) {
         EnvData* data = (EnvData*)pthread_getspecific(envTLS);
         if (data == NULL) {
             data = tlsCreateEnvData();
@@ -190,7 +190,7 @@ static inline void linkEnvData(EnvData* data, JNIEnv *env) {
     }
 #endif
 
-inline JNIEnv* getEnv(jboolean *async) {
+JNIEnv* getEnv(jboolean *async) {
     EnvData* data = tlsGetEnvData();
     *async = data->async;
     return data->env;
@@ -212,5 +212,19 @@ JNIEXPORT void JNICALL JNI_OnUnload(JavaVM *vm, void *reserved) {
     UNUSED_PARAMS(vm, reserved);
     tlsDestroy();
 }
+
+// Intentionally empty functions for benchmarking purposes
+JNIEXPORT void JNICALL org_lwjgl_system_noop(void) {}
+JNIEXPORT void JNICALL org_lwjgl_system_noop_params(void *param0, void *param1, int param2) {
+    UNUSED_PARAMS(param0, param1);
+    UNUSED_PARAM(param2);
+}
+
+JNIEXPORT void noop_params0(void) {}
+JNIEXPORT void noop_params1(void *param0) { UNUSED_PARAM(param0); }
+JNIEXPORT void noop_params2(void *param0, void *param1) { UNUSED_PARAMS(param0, param1); }
+JNIEXPORT void noop_params3(void *param0, void *param1, void *param2) { UNUSED_PARAMS(param0, param1); UNUSED_PARAM(param2); }
+JNIEXPORT void noop_params4(void *param0, void *param1, void *param2, void *param3) { UNUSED_PARAMS(param0, param1); UNUSED_PARAMS(param2, param3); }
+JNIEXPORT void noop_params5(int param0, int param1, void *param2, void *param3, void *param4) { UNUSED_PARAMS(param0, param1); UNUSED_PARAMS(param2, param3); UNUSED_PARAM(param4); }
 
 EXTERN_C_EXIT

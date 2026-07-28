@@ -11,7 +11,7 @@ typedef void (APIENTRY *glVertexArrayVertexAttribLOffsetEXTPROC) (jint, jint, ji
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBVertexAttrib64Bit_glVertexArrayVertexAttribLOffsetEXT(JNIEnv *__env, jclass clazz, jint vaobj, jint buffer, jint index, jint size, jint type, jint stride, jlong offset) {
-    glVertexArrayVertexAttribLOffsetEXTPROC glVertexArrayVertexAttribLOffsetEXT = (glVertexArrayVertexAttribLOffsetEXTPROC)tlsGetFunction(1384);
+    glVertexArrayVertexAttribLOffsetEXTPROC glVertexArrayVertexAttribLOffsetEXT = (glVertexArrayVertexAttribLOffsetEXTPROC)tlsGetFunction(1418);
     UNUSED_PARAM(clazz)
     glVertexArrayVertexAttribLOffsetEXT(vaobj, buffer, index, size, type, stride, (uintptr_t)offset);
 }

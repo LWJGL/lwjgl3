@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrHandJointLocationEXT {
  *     XrSpaceLocationFlags locationFlags;
  *     {@link XrPosef XrPosef} pose;
  *     float radius;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrHandJointLocationEXT extends Struct<XrHandJointLocationEXT> implements NativeResource {
 
@@ -38,6 +38,8 @@ public class XrHandJointLocationEXT extends Struct<XrHandJointLocationEXT> imple
         RADIUS;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(8),
             __member(XrPosef.SIZEOF, XrPosef.ALIGNOF),

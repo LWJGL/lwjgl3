@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_style_knob {
  *     {@link NkStyleItem struct nk_style_item} normal;
  *     {@link NkStyleItem struct nk_style_item} hover;
@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkHandle nk_handle} userdata;
  *     {@link NkDrawBeginCallbackI nk_draw_begin} draw_begin;
  *     {@link NkDrawEndCallbackI nk_draw_end} draw_end;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_style_knob")
 public class NkStyleKnob extends Struct<NkStyleKnob> implements NativeResource {
@@ -75,6 +75,13 @@ public class NkStyleKnob extends Struct<NkStyleKnob> implements NativeResource {
         DRAW_END;
 
     static {
+        NkStyleItem.createSafe(NULL);
+        NkColor.createSafe(NULL);
+        NkVec2.createSafe(NULL);
+        NkHandle.createSafe(NULL);
+        java.util.Objects.requireNonNull(NkDrawBeginCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(NkDrawEndCallbackI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(NkStyleItem.SIZEOF, NkStyleItem.ALIGNOF),
             __member(NkStyleItem.SIZEOF, NkStyleItem.ALIGNOF),

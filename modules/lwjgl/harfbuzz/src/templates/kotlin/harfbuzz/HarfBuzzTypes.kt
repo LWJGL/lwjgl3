@@ -48,6 +48,24 @@ $t}""")
 }
 val HARFBUZZ_BINDING_DELEGATE = HARFBUZZ_BINDING.delegate("HarfBuzz.getLibrary()")
 
+val HARFBUZZ_GPU_BINDING = simpleBinding(
+    Module.HARFBUZZ,
+    libraryExpression = """Configuration.HARFBUZZ_GPU_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("harfbuzz-gpu"))""",
+    bundledWithLWJGL = true
+)
+
+val HARFBUZZ_RASTER_BINDING = simpleBinding(
+    Module.HARFBUZZ,
+    libraryExpression = """Configuration.HARFBUZZ_RASTER_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("harfbuzz-raster"))""",
+    bundledWithLWJGL = true
+)
+
+val HARFBUZZ_VECTOR_BINDING = simpleBinding(
+    Module.HARFBUZZ,
+    libraryExpression = """Configuration.HARFBUZZ_VECTOR_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("harfbuzz-vector"))""",
+    bundledWithLWJGL = true
+)
+
 val hb_language_t = "hb_language_t".handle
 
 val hb_blob_t = "hb_blob_t".opaque
@@ -439,6 +457,25 @@ val hb_font_get_glyph_origin_func_t = Module.HARFBUZZ.callback {
     )
 }
 
+val hb_font_get_glyph_origins_func_t = Module.HARFBUZZ.callback {
+    hb_bool_t(
+        "hb_font_get_glyph_origins_func_t",
+
+        hb_font_t.p("font"),
+        nullable..opaque_p("font_data"),
+        unsigned_int("count"),
+        Check("(count * glyph_stride) >> 2")..hb_codepoint_t.const.p("first_glyph"),
+        unsigned("glyph_stride"),
+        Check("(count * x_stride) >> 2")..hb_position_t.p("first_x"),
+        unsigned("x_stride"),
+        Check("(count * y_stride) >> 2")..hb_position_t.p("first_y"),
+        unsigned("y_stride"),
+        nullable..opaque_p("user_data"),
+
+        nativeType = "hb_font_get_glyph_origins_func_t"
+    )
+}
+
 val hb_font_get_glyph_kerning_func_t = Module.HARFBUZZ.callback {
     hb_position_t(
         "hb_font_get_glyph_kerning_func_t",
@@ -653,6 +690,31 @@ val hb_paint_push_clip_rectangle_func_t = Module.HARFBUZZ.callback {
     )
 }
 
+val hb_paint_push_clip_path_start_func_t = Module.HARFBUZZ.callback {
+    hb_draw_funcs_t.p(
+        "hb_paint_push_clip_path_start_func_t",
+
+        hb_paint_funcs_t.p("funcs"),
+        nullable..opaque_p("paint_data"),
+        Check(1)..opaque_p.p("draw_data"),
+        nullable..opaque_p("user_data"),
+
+        nativeType = "hb_paint_push_clip_path_start_func_t"
+    )
+}
+
+val hb_paint_push_clip_path_end_func_t = Module.HARFBUZZ.callback {
+    void(
+        "hb_paint_push_clip_path_end_func_t",
+
+        hb_paint_funcs_t.p("funcs"),
+        nullable..opaque_p("paint_data"),
+        nullable..opaque_p("user_data"),
+
+        nativeType = "hb_paint_push_clip_path_end_func_t"
+    )
+}
+
 val hb_paint_pop_clip_func_t = Module.HARFBUZZ.callback {
     void(
         "hb_paint_pop_clip_func_t",
@@ -818,6 +880,19 @@ val hb_paint_push_group_func_t = Module.HARFBUZZ.callback {
     )
 }
 
+val hb_paint_push_group_for_func_t = Module.HARFBUZZ.callback {
+    void(
+        "hb_paint_push_group_for_func_t",
+
+        hb_paint_funcs_t.p("funcs"),
+        nullable..opaque_p("paint_data"),
+        hb_paint_composite_mode_t("mode"),
+        nullable..opaque_p("user_data"),
+
+        nativeType = "hb_paint_push_group_for_func_t"
+    )
+}
+
 val hb_paint_pop_group_func_t = Module.HARFBUZZ.callback {
     void(
         "hb_paint_pop_group_func_t",
@@ -845,16 +920,32 @@ val hb_paint_custom_palette_color_func_t = Module.HARFBUZZ.callback {
     )
 }
 
+val hb_paint_sweep_gradient_tile_func_t = Module.HARFBUZZ.callback {
+    void(
+        "hb_paint_sweep_gradient_tile_func_t",
+
+        float("a0"),
+        hb_color_t.p("c0"),
+        float("a1"),
+        hb_color_t.p("c1"),
+        nullable..opaque_p("user_data"),
+
+        nativeType = "hb_paint_sweep_gradient_tile_func_t"
+    )
+}
+
 val hb_font_get_font_h_extents_func_t = typedef(hb_font_get_font_extents_func_t, "hb_font_get_font_h_extents_func_t")
 val hb_font_get_font_v_extents_func_t = typedef(hb_font_get_font_extents_func_t, "hb_font_get_font_v_extents_func_t")
 val hb_font_get_glyph_h_advance_func_t = typedef(hb_font_get_glyph_advance_func_t, "hb_font_get_glyph_h_advance_func_t")
 val hb_font_get_glyph_h_advances_func_t = typedef(hb_font_get_glyph_advances_func_t, "hb_font_get_glyph_h_advances_func_t")
 val hb_font_get_glyph_h_kerning_func_t = typedef(hb_font_get_glyph_kerning_func_t, "hb_font_get_glyph_h_kerning_func_t")
 val hb_font_get_glyph_h_origin_func_t = typedef(hb_font_get_glyph_origin_func_t, "hb_font_get_glyph_h_origin_func_t")
+val hb_font_get_glyph_h_origins_func_t = typedef(hb_font_get_glyph_origins_func_t, "hb_font_get_glyph_h_origins_func_t")
 val hb_font_get_glyph_v_advance_func_t = typedef(hb_font_get_glyph_advance_func_t, "hb_font_get_glyph_v_advance_func_t")
 val hb_font_get_glyph_v_advances_func_t = typedef(hb_font_get_glyph_advances_func_t, "hb_font_get_glyph_v_advances_func_t")
 val hb_font_get_glyph_v_kerning_func_t = typedef(hb_font_get_glyph_kerning_func_t, "hb_font_get_glyph_v_kerning_func_t")
 val hb_font_get_glyph_v_origin_func_t = typedef(hb_font_get_glyph_origin_func_t, "hb_font_get_glyph_v_origin_func_t")
+val hb_font_get_glyph_v_origins_func_t = typedef(hb_font_get_glyph_origins_func_t, "hb_font_get_glyph_v_origins_func_t")
 
 val hb_glyph_info_t = struct(Module.HARFBUZZ, "hb_glyph_info_t") {
     hb_codepoint_t("codepoint")
@@ -905,4 +996,47 @@ val hb_get_table_tags_func_t = Module.HARFBUZZ.callback {
 
         nativeType = "hb_get_table_tags_func_t"
     )
+}
+
+// hb-draw.h
+
+val hb_draw_line_cap_t = "hb_draw_line_cap_t".enumType
+
+// hb-gpu.h
+
+val hb_gpu_draw_t = "hb_gpu_draw_t".opaque
+val hb_gpu_paint_t = "hb_gpu_paint_t".opaque
+
+val hb_gpu_shader_lang_t = "hb_gpu_shader_lang_t".enumType
+val hb_gpu_shader_stage_t = "hb_gpu_shader_stage_t".enumType
+
+// hb-raster.h
+
+val hb_raster_draw_t = "hb_raster_draw_t".opaque
+val hb_raster_image_t = "hb_raster_image_t".opaque
+val hb_raster_paint_t = "hb_raster_paint_t".opaque
+
+val hb_raster_format_t = "hb_raster_format_t".enumType
+
+val hb_raster_extents_t = struct(Module.HARFBUZZ, "hb_raster_extents_t") {
+    int("x_origin")
+    int("y_origin")
+    unsigned_int("width")
+    unsigned_int("height")
+    unsigned_int("stride")
+}
+
+// hb-vector.h
+
+val hb_vector_draw_t = "hb_vector_draw_t".opaque
+val hb_vector_paint_t = "hb_vector_paint_t".opaque
+
+val hb_vector_format_t = "hb_vector_format_t".enumType
+val hb_vector_extents_mode_t = "hb_vector_extents_mode_t".enumType
+
+val hb_vector_extents_t = struct(Module.HARFBUZZ, "hb_vector_extents_t") {
+    float("x")
+    float("y")
+    float("width")
+    float("height")
 }

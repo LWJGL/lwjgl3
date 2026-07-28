@@ -159,7 +159,15 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         "DIStringTypeMetadataKind".enum,
         "DIGenericSubrangeMetadataKind".enum,
         "DIArgListMetadataKind".enum,
-        "DIAssignIDMetadataKind".enum
+        "DIAssignIDMetadataKind".enum,
+        "DISubrangeTypeMetadataKind".enum,
+        "DIFixedPointTypeMetadataKind".enum
+    )
+
+    EnumConstant(
+        "CSK_MD5".enum("0"),
+        "CSK_SHA1".enum,
+        "CSK_SHA256".enum
     )
 
     EnumConstant(
@@ -250,6 +258,21 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         AutoSize("Filename")..size_t("FilenameLen"),
         charUTF8.const.p("Directory"),
         AutoSize("Directory")..size_t("DirectoryLen")
+    )
+
+    IgnoreMissing..LLVMMetadataRef(
+        "DIBuilderCreateFileWithChecksum",
+
+        LLVMDIBuilderRef("Builder"),
+        charUTF8.const.p("Filename"),
+        AutoSize("Filename")..size_t("FilenameLen"),
+        charUTF8.const.p("Directory"),
+        AutoSize("Directory")..size_t("DirectoryLen"),
+        LLVMChecksumKind("ChecksumKind"),
+        char.const.p("Checksum"),
+        AutoSize("Checksum")..size_t("ChecksumLen"),
+        charUTF8.const.p("Source"),
+        AutoSize("Source")..size_t("SourceLen")
     )
 
     LLVMMetadataRef(
@@ -474,6 +497,17 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         LLVMBool("IsUnsigned")
     )
 
+    IgnoreMissing..LLVMMetadataRef(
+        "DIBuilderCreateEnumeratorOfArbitraryPrecision",
+
+        LLVMDIBuilderRef("Builder"),
+        char.const.p("Name"),
+        AutoSize("Name")..size_t("NameLen"),
+        uint64_t("SizeInBits"),
+        Check("(SizeInBits + 63) / 64")..uint64_t.const.p("Words"),
+        LLVMBool("IsUnsigned")
+    )
+
     LLVMMetadataRef(
         "DIBuilderCreateEnumerationType",
 
@@ -518,6 +552,69 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         LLVMMetadataRef("Ty"),
         LLVMMetadataRef.p("Subscripts"),
         AutoSize("Subscripts")..unsigned_int("NumSubscripts")
+    )
+
+    IgnoreMissing..LLVMMetadataRef(
+        "DIBuilderCreateSetType",
+
+        LLVMDIBuilderRef("Builder"),
+        LLVMMetadataRef("Scope"),
+        char.const.p("Name"),
+        AutoSize("Name")..size_t("NameLen"),
+        LLVMMetadataRef("File"),
+        unsigned("LineNumber"),
+        uint64_t("SizeInBits"),
+        uint32_t("AlignInBits"),
+        LLVMMetadataRef("BaseTy")
+    )
+
+    IgnoreMissing..LLVMMetadataRef(
+        "DIBuilderCreateSubrangeType",
+
+        LLVMDIBuilderRef("Builder"),
+        LLVMMetadataRef("Scope"),
+        char.const.p("Name"),
+        AutoSize("Name")..size_t("NameLen"),
+        unsigned("LineNo"),
+        LLVMMetadataRef("File"),
+        uint64_t("SizeInBits"),
+        uint32_t("AlignInBits"),
+        LLVMDIFlags("Flags"),
+        LLVMMetadataRef("BaseTy"),
+        LLVMMetadataRef("LowerBound"),
+        LLVMMetadataRef("UpperBound"),
+        LLVMMetadataRef("Stride"),
+        LLVMMetadataRef("Bias")
+    )
+
+    IgnoreMissing..LLVMMetadataRef(
+        "DIBuilderCreateDynamicArrayType",
+
+        LLVMDIBuilderRef("Builder"),
+        LLVMMetadataRef("Scope"),
+        char.const.p("Name"),
+        AutoSize("Name")..size_t("NameLen"),
+        unsigned("LineNo"),
+        LLVMMetadataRef("File"),
+        uint64_t("Size"),
+        uint32_t("AlignInBits"),
+        LLVMMetadataRef("Ty"),
+        LLVMMetadataRef.p("Subscripts"),
+        AutoSize("Subscripts")..unsigned("NumSubscripts"),
+        nullable..LLVMMetadataRef("DataLocation"),
+        nullable..LLVMMetadataRef("Associated"),
+        nullable..LLVMMetadataRef("Allocated"),
+        nullable..LLVMMetadataRef("Rank"),
+        LLVMMetadataRef("BitStride")
+    )
+
+    IgnoreMissing..void(
+        "ReplaceArrays",
+
+        LLVMDIBuilderRef("Builder"),
+        Check(1)..LLVMMetadataRef.p("T"),
+        LLVMMetadataRef.p("Elements"),
+        AutoSize("Elements")..unsigned("NumElements")
     )
 
     LLVMMetadataRef(
@@ -1086,6 +1183,13 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         "DISubprogramGetLine",
 
         LLVMMetadataRef("Subprogram")
+    )
+
+    IgnoreMissing..void(
+        "DISubprogramReplaceType",
+
+        LLVMMetadataRef("Subprogram"),
+        LLVMMetadataRef("SubroutineType")
     )
 
     IgnoreMissing..unsigned(

@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK12.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPhysicalDeviceVulkan12Properties {
  *     VkStructureType sType;
  *     void * pNext;
@@ -74,7 +74,7 @@ import static org.lwjgl.vulkan.VK12.*;
  *     VkBool32 filterMinmaxImageComponentMapping;
  *     uint64_t maxTimelineSemaphoreValueDifference;
  *     VkSampleCountFlags framebufferIntegerColorSampleCounts;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceVulkan12Properties extends Struct<VkPhysicalDeviceVulkan12Properties> implements NativeResource {
 
@@ -142,6 +142,8 @@ public class VkPhysicalDeviceVulkan12Properties extends Struct<VkPhysicalDeviceV
         FRAMEBUFFERINTEGERCOLORSAMPLECOUNTS;
 
     static {
+        VkConformanceVersion.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

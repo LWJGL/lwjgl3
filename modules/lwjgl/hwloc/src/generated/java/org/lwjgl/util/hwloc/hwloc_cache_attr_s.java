@@ -17,10 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <pre>{@code
  * struct hwloc_cache_attr_s {
  *     hwloc_uint64_t size;
+ *     hwloc_obj_cache_type_t type;
  *     unsigned depth;
  *     unsigned linesize;
  *     int associativity;
- *     hwloc_obj_cache_type_t type;
+ *     int inclusive;
  * }}</pre>
  */
 public class hwloc_cache_attr_s extends Struct<hwloc_cache_attr_s> {
@@ -34,14 +35,16 @@ public class hwloc_cache_attr_s extends Struct<hwloc_cache_attr_s> {
     /** The struct member offsets. */
     public static final int
         SIZE,
+        TYPE,
         DEPTH,
         LINESIZE,
         ASSOCIATIVITY,
-        TYPE;
+        INCLUSIVE;
 
     static {
         Layout layout = __struct(
             __member(8),
+            __member(4),
             __member(4),
             __member(4),
             __member(4),
@@ -52,10 +55,11 @@ public class hwloc_cache_attr_s extends Struct<hwloc_cache_attr_s> {
         ALIGNOF = layout.getAlignment();
 
         SIZE = layout.offsetof(0);
-        DEPTH = layout.offsetof(1);
-        LINESIZE = layout.offsetof(2);
-        ASSOCIATIVITY = layout.offsetof(3);
-        TYPE = layout.offsetof(4);
+        TYPE = layout.offsetof(1);
+        DEPTH = layout.offsetof(2);
+        LINESIZE = layout.offsetof(3);
+        ASSOCIATIVITY = layout.offsetof(4);
+        INCLUSIVE = layout.offsetof(5);
     }
 
     protected hwloc_cache_attr_s(long address, @Nullable ByteBuffer container) {
@@ -83,6 +87,9 @@ public class hwloc_cache_attr_s extends Struct<hwloc_cache_attr_s> {
     /** @return the value of the {@code size} field. */
     @NativeType("hwloc_uint64_t")
     public long size() { return nsize(address()); }
+    /** @return the value of the {@code type} field. */
+    @NativeType("hwloc_obj_cache_type_t")
+    public int type() { return ntype(address()); }
     /** @return the value of the {@code depth} field. */
     @NativeType("unsigned")
     public int depth() { return ndepth(address()); }
@@ -91,9 +98,8 @@ public class hwloc_cache_attr_s extends Struct<hwloc_cache_attr_s> {
     public int linesize() { return nlinesize(address()); }
     /** @return the value of the {@code associativity} field. */
     public int associativity() { return nassociativity(address()); }
-    /** @return the value of the {@code type} field. */
-    @NativeType("hwloc_obj_cache_type_t")
-    public int type() { return ntype(address()); }
+    /** @return the value of the {@code inclusive} field. */
+    public int inclusive() { return ninclusive(address()); }
 
     // -----------------------------------
 
@@ -126,14 +132,16 @@ public class hwloc_cache_attr_s extends Struct<hwloc_cache_attr_s> {
 
     /** Unsafe version of {@link #size}. */
     public static long nsize(long struct) { return memGetLong(struct + hwloc_cache_attr_s.SIZE); }
+    /** Unsafe version of {@link #type}. */
+    public static int ntype(long struct) { return memGetInt(struct + hwloc_cache_attr_s.TYPE); }
     /** Unsafe version of {@link #depth}. */
     public static int ndepth(long struct) { return memGetInt(struct + hwloc_cache_attr_s.DEPTH); }
     /** Unsafe version of {@link #linesize}. */
     public static int nlinesize(long struct) { return memGetInt(struct + hwloc_cache_attr_s.LINESIZE); }
     /** Unsafe version of {@link #associativity}. */
     public static int nassociativity(long struct) { return memGetInt(struct + hwloc_cache_attr_s.ASSOCIATIVITY); }
-    /** Unsafe version of {@link #type}. */
-    public static int ntype(long struct) { return memGetInt(struct + hwloc_cache_attr_s.TYPE); }
+    /** Unsafe version of {@link #inclusive}. */
+    public static int ninclusive(long struct) { return memGetInt(struct + hwloc_cache_attr_s.INCLUSIVE); }
 
     // -----------------------------------
 
@@ -181,6 +189,9 @@ public class hwloc_cache_attr_s extends Struct<hwloc_cache_attr_s> {
         /** @return the value of the {@code size} field. */
         @NativeType("hwloc_uint64_t")
         public long size() { return hwloc_cache_attr_s.nsize(address()); }
+        /** @return the value of the {@code type} field. */
+        @NativeType("hwloc_obj_cache_type_t")
+        public int type() { return hwloc_cache_attr_s.ntype(address()); }
         /** @return the value of the {@code depth} field. */
         @NativeType("unsigned")
         public int depth() { return hwloc_cache_attr_s.ndepth(address()); }
@@ -189,9 +200,8 @@ public class hwloc_cache_attr_s extends Struct<hwloc_cache_attr_s> {
         public int linesize() { return hwloc_cache_attr_s.nlinesize(address()); }
         /** @return the value of the {@code associativity} field. */
         public int associativity() { return hwloc_cache_attr_s.nassociativity(address()); }
-        /** @return the value of the {@code type} field. */
-        @NativeType("hwloc_obj_cache_type_t")
-        public int type() { return hwloc_cache_attr_s.ntype(address()); }
+        /** @return the value of the {@code inclusive} field. */
+        public int inclusive() { return hwloc_cache_attr_s.ninclusive(address()); }
 
     }
 

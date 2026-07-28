@@ -14,13 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_GlyphRec {
  *     FT_Library library;
  *     FT_Glyph_Class const * clazz;
  *     FT_Glyph_Format format;
  *     {@link FT_Vector FT_Vector} advance;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct FT_GlyphRec")
 public class FT_Glyph extends Struct<FT_Glyph> {
@@ -39,6 +39,8 @@ public class FT_Glyph extends Struct<FT_Glyph> {
         ADVANCE;
 
     static {
+        FT_Vector.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
@@ -117,7 +119,7 @@ public class FT_Glyph extends Struct<FT_Glyph> {
 
     /** Unsafe version of {@link #library}. */
     public static long nlibrary(long struct) { return memGetAddress(struct + FT_Glyph.LIBRARY); }
-    public static long nclazz(long struct) { return memGetAddress(struct + FT_Glyph.CLAZZ); }
+    static long nclazz(long struct) { return memGetAddress(struct + FT_Glyph.CLAZZ); }
     /** Unsafe version of {@link #format}. */
     public static int nformat(long struct) { return memGetInt(struct + FT_Glyph.FORMAT); }
     /** Unsafe version of {@link #advance}. */

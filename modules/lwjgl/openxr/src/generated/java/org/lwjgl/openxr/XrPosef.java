@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrPosef {
  *     {@link XrQuaternionf XrQuaternionf} orientation;
  *     {@link XrVector3f XrVector3f} position;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrPosef extends Struct<XrPosef> implements NativeResource {
 
@@ -36,6 +36,9 @@ public class XrPosef extends Struct<XrPosef> implements NativeResource {
         POSITION;
 
     static {
+        XrQuaternionf.createSafe(NULL);
+        XrVector3f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrQuaternionf.SIZEOF, XrQuaternionf.ALIGNOF),
             __member(XrVector3f.SIZEOF, XrVector3f.ALIGNOF)

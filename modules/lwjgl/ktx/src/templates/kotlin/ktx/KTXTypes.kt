@@ -36,6 +36,8 @@ val ktxTexture2_private = "struct ktxTexture2_private".handle
 val ktxTexture_protected = "struct ktxTexture_protected".handle
 
 val ktxTextureCreateFlags = typedef(ktx_uint32_t, "ktxTextureCreateFlags")
+val ktx_basis_codec = typedef(ktx_uint32_t, "ktx_basis_codec")
+val ktx_pack_astc_quality_levels = typedef(ktx_uint32_t, "ktx_pack_astc_quality_levels")
 val ktx_pack_uastc_flags = typedef(ktx_uint32_t, "ktx_pack_uastc_flags")
 val ktx_transcode_flags = typedef(ktx_uint32_t, "ktx_transcode_flags")
 
@@ -50,7 +52,6 @@ val ktxTextureCreateStorageEnum = "ktxTextureCreateStorageEnum".enumType
 val ktx_error_code_e = "KTX_error_code".enumType
 val ktx_pack_astc_block_dimension_e = "ktx_pack_astc_block_dimension_e".enumType
 val ktx_pack_astc_encoder_mode_e = "ktx_pack_astc_encoder_mode_e".enumType
-val ktx_pack_astc_quality_levels_e = "ktx_pack_astc_quality_levels_e".enumType
 val ktx_pack_uastc_flag_bits_e = "ktx_pack_uastc_flag_bits_e".enumType
 val ktx_transcode_flag_bits_e = "ktx_transcode_flag_bits_e".enumType
 val ktx_transcode_fmt_e = "ktx_transcode_fmt_e".enumType
@@ -128,6 +129,8 @@ val ktxTexture_vtbl = struct(Module.KTX, "ktxTexture_vtbl", nativeName = "struct
     "PFNKTEXITERATELEVELS".handle("IterateLevels")
     "PFNKTEXITERATELOADLEVELFACES".handle("IterateLoadLevelFaces")
     "PFNKTEXNEEDSTRANSCODING".handle("NeedsTranscoding")
+    "PFNKTEXISTRANSCODABLE".handle("IsTranscodable")
+    "PFNKTEXISHDR".handle("IsHDR")
     "PFNKTEXLOADIMAGEDATA".handle("LoadImageData")
     "PFNKTEXSETIMAGEFROMMEMORY".handle("SetImageFromMemory")
     "PFNKTEXSETIMAGEFROMSTDIOSTREAM".handle("SetImageFromStdioStream")
@@ -320,7 +323,7 @@ val ktxAstcParams = struct(Module.KTX, "ktxAstcParams") {
     ktx_uint32_t("threadCount")
     ktx_uint32_t("blockDimension")
     ktx_uint32_t("mode")
-    ktx_uint32_t("qualityLevel")
+    ktx_pack_astc_quality_levels("qualityLevel")
     ktx_bool_t("normalMap")
     ktx_bool_t("perceptual")
     char("inputSwizzle")[4]
@@ -328,11 +331,11 @@ val ktxAstcParams = struct(Module.KTX, "ktxAstcParams") {
 
 val ktxBasisParams = struct(Module.KTX, "ktxBasisParams") {
     ktx_uint32_t("structSize")
-    ktx_bool_t("uastc")
+    ktx_basis_codec("codec")
     ktx_bool_t("verbose")
     ktx_bool_t("noSSE")
     ktx_uint32_t("threadCount")
-    ktx_uint32_t("compressionLevel")
+    ktx_uint32_t("etc1sCompressionLevel")
     ktx_uint32_t("qualityLevel")
     ktx_uint32_t("maxEndpoints")
     float("endpointRDOThreshold")
@@ -352,6 +355,12 @@ val ktxBasisParams = struct(Module.KTX, "ktxBasisParams") {
     float("uastcRDOMaxSmoothBlockStdDev")
     ktx_bool_t("uastcRDODontFavorSimplerModes")
     ktx_bool_t("uastcRDONoMultithreading")
+    ktx_uint32_t("uastcHDRQuality")
+    ktx_bool_t("uastcHDRUberMode")
+    ktx_bool_t("uastcHDRUltraQuant")
+    ktx_bool_t("uastcHDRFavorAstc")
+    float("uastcHDRLambda")
+    ktx_uint32_t("uastcHDRLevel")
 }
 
 // ktxvulkan.h

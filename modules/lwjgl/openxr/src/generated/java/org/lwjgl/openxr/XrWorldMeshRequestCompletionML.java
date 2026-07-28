@@ -17,14 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrWorldMeshRequestCompletionML {
  *     XrStructureType type;
  *     void * next;
  *     XrResult futureResult;
  *     uint32_t blockCount;
  *     {@link XrWorldMeshBlockML XrWorldMeshBlockML} * blocks;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrWorldMeshRequestCompletionML extends Struct<XrWorldMeshRequestCompletionML> implements NativeResource {
 

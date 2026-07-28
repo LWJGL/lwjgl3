@@ -330,6 +330,11 @@ internal fun parse(
                                     }
                                 }
                             }
+                            CXType_FunctionProto -> {
+                                if (options.parseTypes) {
+                                    aggregateTypes[name] = cursor.parseCallback(header, underlyingType, name)
+                                }
+                            }
                             else              -> {
                                 if (options.parseTypes) {
                                     typedefs.add(parseTypedef(name, underlyingType))

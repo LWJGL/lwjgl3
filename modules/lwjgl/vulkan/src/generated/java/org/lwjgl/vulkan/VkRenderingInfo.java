@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkRenderingInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkRenderingAttachmentInfo VkRenderingAttachmentInfo} const * pColorAttachments;
  *     {@link VkRenderingAttachmentInfo VkRenderingAttachmentInfo} const * pDepthAttachment;
  *     {@link VkRenderingAttachmentInfo VkRenderingAttachmentInfo} const * pStencilAttachment;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkRenderingInfo extends Struct<VkRenderingInfo> implements NativeResource {
 
@@ -53,6 +53,8 @@ public class VkRenderingInfo extends Struct<VkRenderingInfo> implements NativeRe
         PSTENCILATTACHMENT;
 
     static {
+        VkRect2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -149,6 +151,8 @@ public class VkRenderingInfo extends Struct<VkRenderingInfo> implements NativeRe
     public VkRenderingInfo pNext(VkMultiviewPerViewAttributesInfoNVX value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM} value to the {@code pNext} chain. */
     public VkRenderingInfo pNext(VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkRenderPassPerformanceCountersByRegionBeginInfoARM} value to the {@code pNext} chain. */
+    public VkRenderingInfo pNext(VkRenderPassPerformanceCountersByRegionBeginInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderPassStripeBeginInfoARM} value to the {@code pNext} chain. */
     public VkRenderingInfo pNext(VkRenderPassStripeBeginInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderPassTileShadingCreateInfoQCOM} value to the {@code pNext} chain. */
@@ -466,6 +470,8 @@ public class VkRenderingInfo extends Struct<VkRenderingInfo> implements NativeRe
         public VkRenderingInfo.Buffer pNext(VkMultiviewPerViewAttributesInfoNVX value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM} value to the {@code pNext} chain. */
         public VkRenderingInfo.Buffer pNext(VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkRenderPassPerformanceCountersByRegionBeginInfoARM} value to the {@code pNext} chain. */
+        public VkRenderingInfo.Buffer pNext(VkRenderPassPerformanceCountersByRegionBeginInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderPassStripeBeginInfoARM} value to the {@code pNext} chain. */
         public VkRenderingInfo.Buffer pNext(VkRenderPassStripeBeginInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderPassTileShadingCreateInfoQCOM} value to the {@code pNext} chain. */

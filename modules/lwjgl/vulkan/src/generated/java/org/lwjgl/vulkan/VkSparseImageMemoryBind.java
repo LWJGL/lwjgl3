@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkSparseImageMemoryBind {
  *     {@link VkImageSubresource VkImageSubresource} subresource;
  *     {@link VkOffset3D VkOffset3D} offset;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkDeviceMemory memory;
  *     VkDeviceSize memoryOffset;
  *     VkSparseMemoryBindFlags flags;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkSparseImageMemoryBind extends Struct<VkSparseImageMemoryBind> implements NativeResource {
 
@@ -44,6 +44,10 @@ public class VkSparseImageMemoryBind extends Struct<VkSparseImageMemoryBind> imp
         FLAGS;
 
     static {
+        VkImageSubresource.createSafe(NULL);
+        VkOffset3D.createSafe(NULL);
+        VkExtent3D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(VkImageSubresource.SIZEOF, VkImageSubresource.ALIGNOF),
             __member(VkOffset3D.SIZEOF, VkOffset3D.ALIGNOF),
@@ -222,25 +226,6 @@ public class VkSparseImageMemoryBind extends Struct<VkSparseImageMemoryBind> imp
     public static VkSparseImageMemoryBind.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkSparseImageMemoryBind mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkSparseImageMemoryBind callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkSparseImageMemoryBind mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkSparseImageMemoryBind callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkSparseImageMemoryBind.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkSparseImageMemoryBind.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkSparseImageMemoryBind.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkSparseImageMemoryBind.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkSparseImageMemoryBind} instance allocated on the specified {@link MemoryStack}.

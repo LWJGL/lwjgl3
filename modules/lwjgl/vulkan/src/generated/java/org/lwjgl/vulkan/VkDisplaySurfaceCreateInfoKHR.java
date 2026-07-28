@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDisplaySurfaceCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float globalAlpha;
  *     VkDisplayPlaneAlphaFlagBitsKHR alphaMode;
  *     {@link VkExtent2D VkExtent2D} imageExtent;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDisplaySurfaceCreateInfoKHR extends Struct<VkDisplaySurfaceCreateInfoKHR> implements NativeResource {
 
@@ -52,6 +52,8 @@ public class VkDisplaySurfaceCreateInfoKHR extends Struct<VkDisplaySurfaceCreate
         IMAGEEXTENT;
 
     static {
+        VkExtent2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -267,25 +269,6 @@ public class VkDisplaySurfaceCreateInfoKHR extends Struct<VkDisplaySurfaceCreate
     public static VkDisplaySurfaceCreateInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkDisplaySurfaceCreateInfoKHR mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkDisplaySurfaceCreateInfoKHR callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkDisplaySurfaceCreateInfoKHR mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkDisplaySurfaceCreateInfoKHR callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDisplaySurfaceCreateInfoKHR.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDisplaySurfaceCreateInfoKHR.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDisplaySurfaceCreateInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDisplaySurfaceCreateInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkDisplaySurfaceCreateInfoKHR} instance allocated on the specified {@link MemoryStack}.

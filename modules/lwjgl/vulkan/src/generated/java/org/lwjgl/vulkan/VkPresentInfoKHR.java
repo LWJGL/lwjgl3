@@ -132,18 +132,28 @@ public class VkPresentInfoKHR extends Struct<VkPresentInfoKHR> implements Native
     public VkPresentInfoKHR pNext(VkDisplayPresentInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkFrameBoundaryEXT} value to the {@code pNext} chain. */
     public VkPresentInfoKHR pNext(VkFrameBoundaryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkFrameBoundaryTensorsARM} value to the {@code pNext} chain. */
+    public VkPresentInfoKHR pNext(VkFrameBoundaryTensorsARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPresentId2KHR} value to the {@code pNext} chain. */
+    public VkPresentInfoKHR pNext(VkPresentId2KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPresentIdKHR} value to the {@code pNext} chain. */
     public VkPresentInfoKHR pNext(VkPresentIdKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPresentRegionsKHR} value to the {@code pNext} chain. */
     public VkPresentInfoKHR pNext(VkPresentRegionsKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPresentTimesInfoGOOGLE} value to the {@code pNext} chain. */
     public VkPresentInfoKHR pNext(VkPresentTimesInfoGOOGLE value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPresentTimingsInfoEXT} value to the {@code pNext} chain. */
+    public VkPresentInfoKHR pNext(VkPresentTimingsInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSetPresentConfigNV} value to the {@code pNext} chain. */
     public VkPresentInfoKHR pNext(VkSetPresentConfigNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSwapchainPresentFenceInfoEXT} value to the {@code pNext} chain. */
     public VkPresentInfoKHR pNext(VkSwapchainPresentFenceInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkSwapchainPresentFenceInfoKHR} value to the {@code pNext} chain. */
+    public VkPresentInfoKHR pNext(VkSwapchainPresentFenceInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSwapchainPresentModeInfoEXT} value to the {@code pNext} chain. */
     public VkPresentInfoKHR pNext(VkSwapchainPresentModeInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkSwapchainPresentModeInfoKHR} value to the {@code pNext} chain. */
+    public VkPresentInfoKHR pNext(VkSwapchainPresentModeInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the address of the specified {@link LongBuffer} to the {@code pWaitSemaphores} field. */
     public VkPresentInfoKHR pWaitSemaphores(@Nullable @NativeType("VkSemaphore const *") LongBuffer value) { npWaitSemaphores(address(), value); return this; }
     /** Sets the specified value to the {@code swapchainCount} field. */
@@ -258,25 +268,6 @@ public class VkPresentInfoKHR extends Struct<VkPresentInfoKHR> implements Native
     public static VkPresentInfoKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPresentInfoKHR mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPresentInfoKHR callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPresentInfoKHR mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPresentInfoKHR callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPresentInfoKHR.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPresentInfoKHR.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPresentInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPresentInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkPresentInfoKHR} instance allocated on the specified {@link MemoryStack}.
@@ -445,18 +436,28 @@ public class VkPresentInfoKHR extends Struct<VkPresentInfoKHR> implements Native
         public VkPresentInfoKHR.Buffer pNext(VkDisplayPresentInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkFrameBoundaryEXT} value to the {@code pNext} chain. */
         public VkPresentInfoKHR.Buffer pNext(VkFrameBoundaryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkFrameBoundaryTensorsARM} value to the {@code pNext} chain. */
+        public VkPresentInfoKHR.Buffer pNext(VkFrameBoundaryTensorsARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPresentId2KHR} value to the {@code pNext} chain. */
+        public VkPresentInfoKHR.Buffer pNext(VkPresentId2KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPresentIdKHR} value to the {@code pNext} chain. */
         public VkPresentInfoKHR.Buffer pNext(VkPresentIdKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPresentRegionsKHR} value to the {@code pNext} chain. */
         public VkPresentInfoKHR.Buffer pNext(VkPresentRegionsKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPresentTimesInfoGOOGLE} value to the {@code pNext} chain. */
         public VkPresentInfoKHR.Buffer pNext(VkPresentTimesInfoGOOGLE value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPresentTimingsInfoEXT} value to the {@code pNext} chain. */
+        public VkPresentInfoKHR.Buffer pNext(VkPresentTimingsInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSetPresentConfigNV} value to the {@code pNext} chain. */
         public VkPresentInfoKHR.Buffer pNext(VkSetPresentConfigNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSwapchainPresentFenceInfoEXT} value to the {@code pNext} chain. */
         public VkPresentInfoKHR.Buffer pNext(VkSwapchainPresentFenceInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkSwapchainPresentFenceInfoKHR} value to the {@code pNext} chain. */
+        public VkPresentInfoKHR.Buffer pNext(VkSwapchainPresentFenceInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSwapchainPresentModeInfoEXT} value to the {@code pNext} chain. */
         public VkPresentInfoKHR.Buffer pNext(VkSwapchainPresentModeInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkSwapchainPresentModeInfoKHR} value to the {@code pNext} chain. */
+        public VkPresentInfoKHR.Buffer pNext(VkSwapchainPresentModeInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the address of the specified {@link LongBuffer} to the {@code pWaitSemaphores} field. */
         public VkPresentInfoKHR.Buffer pWaitSemaphores(@Nullable @NativeType("VkSemaphore const *") LongBuffer value) { VkPresentInfoKHR.npWaitSemaphores(address(), value); return this; }
         /** Sets the specified value to the {@code swapchainCount} field. */

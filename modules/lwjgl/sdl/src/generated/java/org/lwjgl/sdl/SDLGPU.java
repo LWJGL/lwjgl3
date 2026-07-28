@@ -39,6 +39,7 @@ public class SDLGPU {
             GetGPUDriver                          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetGPUDriver"),
             GetGPUDeviceDriver                    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetGPUDeviceDriver"),
             GetGPUShaderFormats                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetGPUShaderFormats"),
+            GetGPUDeviceProperties                = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetGPUDeviceProperties"),
             CreateGPUComputePipeline              = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateGPUComputePipeline"),
             CreateGPUGraphicsPipeline             = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateGPUGraphicsPipeline"),
             CreateGPUSampler                      = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CreateGPUSampler"),
@@ -121,7 +122,9 @@ public class SDLGPU {
             GPUTextureFormatTexelBlockSize        = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GPUTextureFormatTexelBlockSize"),
             GPUTextureSupportsFormat              = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GPUTextureSupportsFormat"),
             GPUTextureSupportsSampleCount         = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GPUTextureSupportsSampleCount"),
-            CalculateGPUTextureFormatSize         = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CalculateGPUTextureFormatSize");
+            CalculateGPUTextureFormatSize         = apiGetFunctionAddress(SDL.getLibrary(), "SDL_CalculateGPUTextureFormatSize"),
+            GetPixelFormatFromGPUTextureFormat    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetPixelFormatFromGPUTextureFormat"),
+            GetGPUTextureFormatFromPixelFormat    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetGPUTextureFormatFromPixelFormat");
 
     }
 
@@ -436,16 +439,27 @@ public class SDLGPU {
         SDL_GPU_SWAPCHAINCOMPOSITION_HDR10_ST2084        = 3;
 
     public static final String
-        SDL_PROP_GPU_DEVICE_CREATE_DEBUGMODE_BOOLEAN          = "SDL.gpu.device.create.debugmode",
-        SDL_PROP_GPU_DEVICE_CREATE_PREFERLOWPOWER_BOOLEAN     = "SDL.gpu.device.create.preferlowpower",
-        SDL_PROP_GPU_DEVICE_CREATE_NAME_STRING                = "SDL.gpu.device.create.name",
-        SDL_PROP_GPU_DEVICE_CREATE_SHADERS_PRIVATE_BOOLEAN    = "SDL.gpu.device.create.shaders.private",
-        SDL_PROP_GPU_DEVICE_CREATE_SHADERS_SPIRV_BOOLEAN      = "SDL.gpu.device.create.shaders.spirv",
-        SDL_PROP_GPU_DEVICE_CREATE_SHADERS_DXBC_BOOLEAN       = "SDL.gpu.device.create.shaders.dxbc",
-        SDL_PROP_GPU_DEVICE_CREATE_SHADERS_DXIL_BOOLEAN       = "SDL.gpu.device.create.shaders.dxil",
-        SDL_PROP_GPU_DEVICE_CREATE_SHADERS_MSL_BOOLEAN        = "SDL.gpu.device.create.shaders.msl",
-        SDL_PROP_GPU_DEVICE_CREATE_SHADERS_METALLIB_BOOLEAN   = "SDL.gpu.device.create.shaders.metallib",
-        SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING = "SDL.gpu.device.create.d3d12.semantic";
+        SDL_PROP_GPU_DEVICE_CREATE_DEBUGMODE_BOOLEAN                            = "SDL.gpu.device.create.debugmode",
+        SDL_PROP_GPU_DEVICE_CREATE_PREFERLOWPOWER_BOOLEAN                       = "SDL.gpu.device.create.preferlowpower",
+        SDL_PROP_GPU_DEVICE_CREATE_VERBOSE_BOOLEAN                              = "SDL.gpu.device.create.verbose",
+        SDL_PROP_GPU_DEVICE_CREATE_NAME_STRING                                  = "SDL.gpu.device.create.name",
+        SDL_PROP_GPU_DEVICE_CREATE_FEATURE_CLIP_DISTANCE_BOOLEAN                = "SDL.gpu.device.create.feature.clip_distance",
+        SDL_PROP_GPU_DEVICE_CREATE_FEATURE_DEPTH_CLAMPING_BOOLEAN               = "SDL.gpu.device.create.feature.depth_clamping",
+        SDL_PROP_GPU_DEVICE_CREATE_FEATURE_INDIRECT_DRAW_FIRST_INSTANCE_BOOLEAN = "SDL.gpu.device.create.feature.indirect_draw_first_instance",
+        SDL_PROP_GPU_DEVICE_CREATE_FEATURE_ANISOTROPY_BOOLEAN                   = "SDL.gpu.device.create.feature.anisotropy",
+        SDL_PROP_GPU_DEVICE_CREATE_SHADERS_PRIVATE_BOOLEAN                      = "SDL.gpu.device.create.shaders.private",
+        SDL_PROP_GPU_DEVICE_CREATE_SHADERS_SPIRV_BOOLEAN                        = "SDL.gpu.device.create.shaders.spirv",
+        SDL_PROP_GPU_DEVICE_CREATE_SHADERS_DXBC_BOOLEAN                         = "SDL.gpu.device.create.shaders.dxbc",
+        SDL_PROP_GPU_DEVICE_CREATE_SHADERS_DXIL_BOOLEAN                         = "SDL.gpu.device.create.shaders.dxil",
+        SDL_PROP_GPU_DEVICE_CREATE_SHADERS_MSL_BOOLEAN                          = "SDL.gpu.device.create.shaders.msl",
+        SDL_PROP_GPU_DEVICE_CREATE_SHADERS_METALLIB_BOOLEAN                     = "SDL.gpu.device.create.shaders.metallib",
+        SDL_PROP_GPU_DEVICE_CREATE_D3D12_ALLOW_FEWER_RESOURCE_SLOTS_BOOLEAN     = "SDL.gpu.device.create.d3d12.allowtier1resourcebinding",
+        SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING                   = "SDL.gpu.device.create.d3d12.semantic",
+        SDL_PROP_GPU_DEVICE_CREATE_D3D12_AGILITY_SDK_VERSION_NUMBER             = "SDL.gpu.device.create.d3d12.agility_sdk_version",
+        SDL_PROP_GPU_DEVICE_CREATE_D3D12_AGILITY_SDK_PATH_STRING                = "SDL.gpu.device.create.d3d12.agility_sdk_path",
+        SDL_PROP_GPU_DEVICE_CREATE_VULKAN_REQUIRE_HARDWARE_ACCELERATION_BOOLEAN = "SDL.gpu.device.create.vulkan.requirehardwareacceleration",
+        SDL_PROP_GPU_DEVICE_CREATE_VULKAN_OPTIONS_POINTER                       = "SDL.gpu.device.create.vulkan.options",
+        SDL_PROP_GPU_DEVICE_CREATE_METAL_ALLOW_MACFAMILY1_BOOLEAN               = "SDL.gpu.device.create.metal.allowmacfamily1";
 
     public static final String
         SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_R_FLOAT        = "SDL.gpu.texture.create.d3d12.clear.r",
@@ -454,6 +468,12 @@ public class SDLGPU {
         SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_A_FLOAT        = "SDL.gpu.texture.create.d3d12.clear.a",
         SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_DEPTH_FLOAT    = "SDL.gpu.texture.create.d3d12.clear.depth",
         SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_STENCIL_NUMBER = "SDL.gpu.texture.create.d3d12.clear.stencil";
+
+    public static final String
+        SDL_PROP_GPU_DEVICE_NAME_STRING           = "SDL.gpu.device.name",
+        SDL_PROP_GPU_DEVICE_DRIVER_NAME_STRING    = "SDL.gpu.device.driver_name",
+        SDL_PROP_GPU_DEVICE_DRIVER_VERSION_STRING = "SDL.gpu.device.driver_version",
+        SDL_PROP_GPU_DEVICE_DRIVER_INFO_STRING    = "SDL.gpu.device.driver_info";
 
     public static final String
         SDL_PROP_GPU_COMPUTEPIPELINE_CREATE_NAME_STRING  = "SDL.gpu.computepipeline.create.name",
@@ -604,6 +624,18 @@ public class SDLGPU {
     @NativeType("SDL_GPUShaderFormat")
     public static int SDL_GetGPUShaderFormats(@NativeType("SDL_GPUDevice *") long device) {
         long __functionAddress = Functions.GetGPUShaderFormats;
+        if (CHECKS) {
+            check(device);
+        }
+        return invokePI(device, __functionAddress);
+    }
+
+    // --- [ SDL_GetGPUDeviceProperties ] ---
+
+    /** {@code SDL_PropertiesID SDL_GetGPUDeviceProperties(SDL_GPUDevice * device)} */
+    @NativeType("SDL_PropertiesID")
+    public static int SDL_GetGPUDeviceProperties(@NativeType("SDL_GPUDevice *") long device) {
+        long __functionAddress = Functions.GetGPUDeviceProperties;
         if (CHECKS) {
             check(device);
         }
@@ -1167,10 +1199,12 @@ public class SDLGPU {
 
     // --- [ SDL_SetGPUBlendConstants ] ---
 
-    private static final FFICIF SDL_SetGPUBlendConstantsCIF = apiCreateCIF(
-        FFI_DEFAULT_ABI, ffi_type_void,
-        ffi_type_pointer, apiCreateStruct(ffi_type_float, ffi_type_float, ffi_type_float, ffi_type_float)
-    );
+    private static final class SDL_SetGPUBlendConstants {
+        static final FFICIF CIF = apiCreateCIF(
+            ffi_type_void,
+            ffi_type_pointer, apiCreateStruct(ffi_type_float, ffi_type_float, ffi_type_float, ffi_type_float)
+        );
+    }
 
     /** {@code void SDL_SetGPUBlendConstants(SDL_GPURenderPass * render_pass, SDL_FColor blend_constants)} */
     public static void nSDL_SetGPUBlendConstants(long render_pass, long blend_constants) {
@@ -1184,7 +1218,7 @@ public class SDLGPU {
             memPutAddress(arguments, stack.npointer(render_pass));
             memPutAddress(arguments + POINTER_SIZE, blend_constants);
 
-            nffi_call(SDL_SetGPUBlendConstantsCIF.address(), __functionAddress, NULL, arguments);
+            nffi_call(SDL_SetGPUBlendConstants.CIF.address(), __functionAddress, NULL, arguments);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1511,7 +1545,7 @@ public class SDLGPU {
 
     // --- [ SDL_MapGPUTransferBuffer ] ---
 
-    /** {@code void * SDL_MapGPUTransferBuffer(SDL_GPUDevice * device, SDL_GPUTransferBuffer * transfer_buffer, bool cycle, size_t buffer_size)} */
+    /** {@code void * SDL_MapGPUTransferBuffer(SDL_GPUDevice * device, SDL_GPUTransferBuffer * transfer_buffer, bool cycle)} */
     public static long nSDL_MapGPUTransferBuffer(long device, long transfer_buffer, boolean cycle) {
         long __functionAddress = Functions.MapGPUTransferBuffer;
         if (CHECKS) {
@@ -1521,7 +1555,7 @@ public class SDLGPU {
         return invokePPP(device, transfer_buffer, cycle, __functionAddress);
     }
 
-    /** {@code void * SDL_MapGPUTransferBuffer(SDL_GPUDevice * device, SDL_GPUTransferBuffer * transfer_buffer, bool cycle, size_t buffer_size)} */
+    /** {@code void * SDL_MapGPUTransferBuffer(SDL_GPUDevice * device, SDL_GPUTransferBuffer * transfer_buffer, bool cycle)} */
     @NativeType("void *")
     public static @Nullable ByteBuffer SDL_MapGPUTransferBuffer(@NativeType("SDL_GPUDevice *") long device, @NativeType("SDL_GPUTransferBuffer *") long transfer_buffer, @NativeType("bool") boolean cycle, @NativeType("size_t") long buffer_size) {
         long __result = nSDL_MapGPUTransferBuffer(device, transfer_buffer, cycle);
@@ -1978,6 +2012,24 @@ public class SDLGPU {
     public static int SDL_CalculateGPUTextureFormatSize(@NativeType("SDL_GPUTextureFormat") int format, @NativeType("Uint32") int width, @NativeType("Uint32") int height, @NativeType("Uint32") int depth_or_layer_count) {
         long __functionAddress = Functions.CalculateGPUTextureFormatSize;
         return invokeI(format, width, height, depth_or_layer_count, __functionAddress);
+    }
+
+    // --- [ SDL_GetPixelFormatFromGPUTextureFormat ] ---
+
+    /** {@code SDL_PixelFormat SDL_GetPixelFormatFromGPUTextureFormat(SDL_GPUTextureFormat format)} */
+    @NativeType("SDL_PixelFormat")
+    public static int SDL_GetPixelFormatFromGPUTextureFormat(@NativeType("SDL_GPUTextureFormat") int format) {
+        long __functionAddress = Functions.GetPixelFormatFromGPUTextureFormat;
+        return invokeI(format, __functionAddress);
+    }
+
+    // --- [ SDL_GetGPUTextureFormatFromPixelFormat ] ---
+
+    /** {@code SDL_GPUTextureFormat SDL_GetGPUTextureFormatFromPixelFormat(SDL_PixelFormat format)} */
+    @NativeType("SDL_GPUTextureFormat")
+    public static int SDL_GetGPUTextureFormatFromPixelFormat(@NativeType("SDL_PixelFormat") int format) {
+        long __functionAddress = Functions.GetGPUTextureFormatFromPixelFormat;
+        return invokeI(format, __functionAddress);
     }
 
 }

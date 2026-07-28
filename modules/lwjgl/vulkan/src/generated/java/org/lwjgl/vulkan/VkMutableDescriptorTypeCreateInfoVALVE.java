@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkMutableDescriptorTypeCreateInfoVALVE {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t mutableDescriptorTypeListCount;
  *     {@link VkMutableDescriptorTypeListEXT VkMutableDescriptorTypeListEXT} const * pMutableDescriptorTypeLists;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkMutableDescriptorTypeCreateInfoVALVE extends VkMutableDescriptorTypeCreateInfoEXT {
 

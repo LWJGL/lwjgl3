@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpaceVelocities {
  *     XrStructureType type;
  *     void * next;
  *     uint32_t velocityCount;
  *     {@link XrSpaceVelocityData XrSpaceVelocityData} * velocities;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpaceVelocities extends Struct<XrSpaceVelocities> implements NativeResource {
 

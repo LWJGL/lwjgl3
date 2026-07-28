@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct rmtProperty {
  *     rmtBool initialised;
  *     rmtPropertyType type;
@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link RMTProperty rmtProperty} * nextSibling;
  *     rmtU32 nameHash;
  *     rmtU32 uniqueID;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct rmtProperty")
 public class RMTProperty extends Struct<RMTProperty> implements NativeResource {
@@ -66,6 +66,8 @@ public class RMTProperty extends Struct<RMTProperty> implements NativeResource {
         UNIQUEID;
 
     static {
+        RMTPropertyValue.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

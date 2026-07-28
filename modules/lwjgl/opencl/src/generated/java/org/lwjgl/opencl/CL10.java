@@ -81,12 +81,12 @@ public class CL10 {
         CL_PLATFORM_VENDOR     = 0x903,
         CL_PLATFORM_EXTENSIONS = 0x904;
 
-    public static final int
-        CL_DEVICE_TYPE_DEFAULT     = 1 << 0,
-        CL_DEVICE_TYPE_CPU         = 1 << 1,
-        CL_DEVICE_TYPE_GPU         = 1 << 2,
-        CL_DEVICE_TYPE_ACCELERATOR = 1 << 3,
-        CL_DEVICE_TYPE_ALL         = 0xFFFFFFFF;
+    public static final long
+        CL_DEVICE_TYPE_DEFAULT     = 1L << 0,
+        CL_DEVICE_TYPE_CPU         = 1L << 1,
+        CL_DEVICE_TYPE_GPU         = 1L << 2,
+        CL_DEVICE_TYPE_ACCELERATOR = 1L << 3,
+        CL_DEVICE_TYPE_ALL         = 0xFFFFFFFFL;
 
     public static final int
         CL_DEVICE_TYPE                          = 0x1000,
@@ -140,13 +140,13 @@ public class CL10 {
         CL_DEVICE_EXTENSIONS                    = 0x1030,
         CL_DEVICE_PLATFORM                      = 0x1031;
 
-    public static final int
-        CL_FP_DENORM           = 1 << 0,
-        CL_FP_INF_NAN          = 1 << 1,
-        CL_FP_ROUND_TO_NEAREST = 1 << 2,
-        CL_FP_ROUND_TO_ZERO    = 1 << 3,
-        CL_FP_ROUND_TO_INF     = 1 << 4,
-        CL_FP_FMA              = 1 << 5;
+    public static final long
+        CL_FP_DENORM           = 1L << 0,
+        CL_FP_INF_NAN          = 1L << 1,
+        CL_FP_ROUND_TO_NEAREST = 1L << 2,
+        CL_FP_ROUND_TO_ZERO    = 1L << 3,
+        CL_FP_ROUND_TO_INF     = 1L << 4,
+        CL_FP_FMA              = 1L << 5;
 
     public static final int
         CL_NONE             = 0x0,
@@ -157,13 +157,13 @@ public class CL10 {
         CL_LOCAL  = 0x1,
         CL_GLOBAL = 0x2;
 
-    public static final int
-        CL_EXEC_KERNEL        = 1 << 0,
-        CL_EXEC_NATIVE_KERNEL = 1 << 1;
+    public static final long
+        CL_EXEC_KERNEL        = 1L << 0,
+        CL_EXEC_NATIVE_KERNEL = 1L << 1;
 
-    public static final int
-        CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE = 1 << 0,
-        CL_QUEUE_PROFILING_ENABLE              = 1 << 1;
+    public static final long
+        CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE = 1L << 0,
+        CL_QUEUE_PROFILING_ENABLE              = 1L << 1;
 
     public static final int
         CL_CONTEXT_REFERENCE_COUNT = 0x1080,
@@ -178,13 +178,13 @@ public class CL10 {
         CL_QUEUE_REFERENCE_COUNT = 0x1092,
         CL_QUEUE_PROPERTIES      = 0x1093;
 
-    public static final int
-        CL_MEM_READ_WRITE     = 1 << 0,
-        CL_MEM_WRITE_ONLY     = 1 << 1,
-        CL_MEM_READ_ONLY      = 1 << 2,
-        CL_MEM_USE_HOST_PTR   = 1 << 3,
-        CL_MEM_ALLOC_HOST_PTR = 1 << 4,
-        CL_MEM_COPY_HOST_PTR  = 1 << 5;
+    public static final long
+        CL_MEM_READ_WRITE     = 1L << 0,
+        CL_MEM_WRITE_ONLY     = 1L << 1,
+        CL_MEM_READ_ONLY      = 1L << 2,
+        CL_MEM_USE_HOST_PTR   = 1L << 3,
+        CL_MEM_ALLOC_HOST_PTR = 1L << 4,
+        CL_MEM_COPY_HOST_PTR  = 1L << 5;
 
     public static final int
         CL_R         = 0x10B0,
@@ -255,9 +255,9 @@ public class CL10 {
         CL_SAMPLER_ADDRESSING_MODE   = 0x1153,
         CL_SAMPLER_FILTER_MODE       = 0x1154;
 
-    public static final int
-        CL_MAP_READ  = 1 << 0,
-        CL_MAP_WRITE = 1 << 1;
+    public static final long
+        CL_MAP_READ  = 1L << 0,
+        CL_MAP_WRITE = 1L << 1;
 
     public static final int
         CL_PROGRAM_REFERENCE_COUNT = 0x1160,

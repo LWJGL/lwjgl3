@@ -14,13 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct CXIdxIBOutletCollectionAttrInfo {
  *     {@link CXIdxAttrInfo CXIdxAttrInfo} const * attrInfo;
  *     {@link CXIdxEntityInfo CXIdxEntityInfo} const * objcClass;
  *     {@link CXCursor CXCursor} classCursor;
  *     {@link CXIdxLoc CXIdxLoc} classLoc;
- * }}</pre>
+ * }</code></pre>
  */
 public class CXIdxIBOutletCollectionAttrInfo extends Struct<CXIdxIBOutletCollectionAttrInfo> {
 
@@ -38,6 +38,9 @@ public class CXIdxIBOutletCollectionAttrInfo extends Struct<CXIdxIBOutletCollect
         CLASSLOC;
 
     static {
+        CXCursor.createSafe(NULL);
+        CXIdxLoc.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

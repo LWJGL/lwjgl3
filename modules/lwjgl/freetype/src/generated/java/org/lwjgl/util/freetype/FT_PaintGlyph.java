@@ -14,11 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_PaintGlyph {
  *     {@link FT_OpaquePaint FT_OpaquePaintRec} paint;
  *     FT_UInt glyphID;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_PaintGlyph extends Struct<FT_PaintGlyph> {
 
@@ -34,6 +34,8 @@ public class FT_PaintGlyph extends Struct<FT_PaintGlyph> {
         GLYPHID;
 
     static {
+        FT_OpaquePaint.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FT_OpaquePaint.SIZEOF, FT_OpaquePaint.ALIGNOF),
             __member(4)

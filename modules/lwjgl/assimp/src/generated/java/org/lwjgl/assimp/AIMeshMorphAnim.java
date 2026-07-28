@@ -17,12 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiMeshMorphAnim {
  *     {@link AIString struct aiString} mName;
  *     unsigned int mNumKeys;
  *     {@link AIMeshMorphKey struct aiMeshMorphKey} * mKeys;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiMeshMorphAnim")
 public class AIMeshMorphAnim extends Struct<AIMeshMorphAnim> implements NativeResource {
@@ -40,6 +40,8 @@ public class AIMeshMorphAnim extends Struct<AIMeshMorphAnim> implements NativeRe
         MKEYS;
 
     static {
+        AIString.createSafe(NULL);
+
         Layout layout = __struct(
             __member(AIString.SIZEOF, AIString.ALIGNOF),
             __member(4),
@@ -186,25 +188,6 @@ public class AIMeshMorphAnim extends Struct<AIMeshMorphAnim> implements NativeRe
     public static AIMeshMorphAnim.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static AIMeshMorphAnim mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static AIMeshMorphAnim callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static AIMeshMorphAnim mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static AIMeshMorphAnim callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static AIMeshMorphAnim.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static AIMeshMorphAnim.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static AIMeshMorphAnim.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static AIMeshMorphAnim.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code AIMeshMorphAnim} instance allocated on the specified {@link MemoryStack}.

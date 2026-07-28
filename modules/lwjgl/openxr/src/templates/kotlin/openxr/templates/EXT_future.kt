@@ -10,7 +10,7 @@ import openxr.*
 
 val EXT_future = "EXTFuture".nativeClassXR("EXT_future", type = "instance", postfix = "EXT") {
     IntConstant(
-        "EXT_future_SPEC_VERSION".."1"
+        "EXT_future_SPEC_VERSION".."2"
     )
 
     StringConstant(

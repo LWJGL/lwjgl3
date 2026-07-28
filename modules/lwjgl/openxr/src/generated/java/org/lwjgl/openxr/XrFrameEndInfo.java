@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrFrameEndInfo {
  *     XrStructureType type;
  *     void const * next;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrEnvironmentBlendMode environmentBlendMode;
  *     uint32_t layerCount;
  *     {@link XrCompositionLayerBaseHeader XrCompositionLayerBaseHeader} const * const * layers;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrFrameEndInfo extends Struct<XrFrameEndInfo> implements NativeResource {
 

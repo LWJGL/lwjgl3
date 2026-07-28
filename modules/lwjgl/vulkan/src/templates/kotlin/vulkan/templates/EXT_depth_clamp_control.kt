@@ -26,6 +26,11 @@ val EXT_depth_clamp_control = "EXTDepthClampControl".nativeClassVK("EXT_depth_cl
         "DYNAMIC_STATE_DEPTH_CLAMP_RANGE_EXT".."1000582000"
     )
 
+    EnumConstant(
+        "DEPTH_CLAMP_MODE_VIEWPORT_RANGE_EXT".."0",
+        "DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT".."1"
+    )
+
     void(
         "CmdSetDepthClampRangeEXT",
 

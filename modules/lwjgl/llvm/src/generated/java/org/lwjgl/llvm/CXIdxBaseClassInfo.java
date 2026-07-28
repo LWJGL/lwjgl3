@@ -14,12 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct CXIdxBaseClassInfo {
  *     {@link CXIdxEntityInfo CXIdxEntityInfo} const * base;
  *     {@link CXCursor CXCursor} cursor;
  *     {@link CXIdxLoc CXIdxLoc} loc;
- * }}</pre>
+ * }</code></pre>
  */
 public class CXIdxBaseClassInfo extends Struct<CXIdxBaseClassInfo> {
 
@@ -36,6 +36,9 @@ public class CXIdxBaseClassInfo extends Struct<CXIdxBaseClassInfo> {
         LOC;
 
     static {
+        CXCursor.createSafe(NULL);
+        CXIdxLoc.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(CXCursor.SIZEOF, CXCursor.ALIGNOF),

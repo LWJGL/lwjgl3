@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpaceLocationData {
  *     XrSpaceLocationFlags locationFlags;
  *     {@link XrPosef XrPosef} pose;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpaceLocationData extends Struct<XrSpaceLocationData> implements NativeResource {
 
@@ -36,6 +36,8 @@ public class XrSpaceLocationData extends Struct<XrSpaceLocationData> implements 
         POSE;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(8),
             __member(XrPosef.SIZEOF, XrPosef.ALIGNOF)

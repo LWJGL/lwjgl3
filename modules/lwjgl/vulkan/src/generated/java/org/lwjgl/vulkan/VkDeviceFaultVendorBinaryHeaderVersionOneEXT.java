@@ -22,7 +22,7 @@ import static org.lwjgl.vulkan.VK10.*;
  * <pre>{@code
  * struct VkDeviceFaultVendorBinaryHeaderVersionOneEXT {
  *     uint32_t headerSize;
- *     VkDeviceFaultVendorBinaryHeaderVersionEXT headerVersion;
+ *     VkDeviceFaultVendorBinaryHeaderVersionKHR headerVersion;
  *     uint32_t vendorID;
  *     uint32_t deviceID;
  *     uint32_t driverVersion;
@@ -34,58 +34,7 @@ import static org.lwjgl.vulkan.VK10.*;
  *     uint32_t apiVersion;
  * }}</pre>
  */
-public class VkDeviceFaultVendorBinaryHeaderVersionOneEXT extends Struct<VkDeviceFaultVendorBinaryHeaderVersionOneEXT> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        HEADERSIZE,
-        HEADERVERSION,
-        VENDORID,
-        DEVICEID,
-        DRIVERVERSION,
-        PIPELINECACHEUUID,
-        APPLICATIONNAMEOFFSET,
-        APPLICATIONVERSION,
-        ENGINENAMEOFFSET,
-        ENGINEVERSION,
-        APIVERSION;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __array(1, VK_UUID_SIZE),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        HEADERSIZE = layout.offsetof(0);
-        HEADERVERSION = layout.offsetof(1);
-        VENDORID = layout.offsetof(2);
-        DEVICEID = layout.offsetof(3);
-        DRIVERVERSION = layout.offsetof(4);
-        PIPELINECACHEUUID = layout.offsetof(5);
-        APPLICATIONNAMEOFFSET = layout.offsetof(6);
-        APPLICATIONVERSION = layout.offsetof(7);
-        ENGINENAMEOFFSET = layout.offsetof(8);
-        ENGINEVERSION = layout.offsetof(9);
-        APIVERSION = layout.offsetof(10);
-    }
+public class VkDeviceFaultVendorBinaryHeaderVersionOneEXT extends VkDeviceFaultVendorBinaryHeaderVersionOneKHR {
 
     protected VkDeviceFaultVendorBinaryHeaderVersionOneEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -103,75 +52,48 @@ public class VkDeviceFaultVendorBinaryHeaderVersionOneEXT extends Struct<VkDevic
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** @return the value of the {@code headerSize} field. */
-    @NativeType("uint32_t")
-    public int headerSize() { return nheaderSize(address()); }
-    /** @return the value of the {@code headerVersion} field. */
-    @NativeType("VkDeviceFaultVendorBinaryHeaderVersionEXT")
-    public int headerVersion() { return nheaderVersion(address()); }
-    /** @return the value of the {@code vendorID} field. */
-    @NativeType("uint32_t")
-    public int vendorID() { return nvendorID(address()); }
-    /** @return the value of the {@code deviceID} field. */
-    @NativeType("uint32_t")
-    public int deviceID() { return ndeviceID(address()); }
-    /** @return the value of the {@code driverVersion} field. */
-    @NativeType("uint32_t")
-    public int driverVersion() { return ndriverVersion(address()); }
-    /** @return a {@link ByteBuffer} view of the {@code pipelineCacheUUID} field. */
-    @NativeType("uint8_t[VK_UUID_SIZE]")
-    public ByteBuffer pipelineCacheUUID() { return npipelineCacheUUID(address()); }
-    /** @return the value at the specified index of the {@code pipelineCacheUUID} field. */
-    @NativeType("uint8_t")
-    public byte pipelineCacheUUID(int index) { return npipelineCacheUUID(address(), index); }
-    /** @return the value of the {@code applicationNameOffset} field. */
-    @NativeType("uint32_t")
-    public int applicationNameOffset() { return napplicationNameOffset(address()); }
-    /** @return the value of the {@code applicationVersion} field. */
-    @NativeType("uint32_t")
-    public int applicationVersion() { return napplicationVersion(address()); }
-    /** @return the value of the {@code engineNameOffset} field. */
-    @NativeType("uint32_t")
-    public int engineNameOffset() { return nengineNameOffset(address()); }
-    /** @return the value of the {@code engineVersion} field. */
-    @NativeType("uint32_t")
-    public int engineVersion() { return nengineVersion(address()); }
-    /** @return the value of the {@code apiVersion} field. */
-    @NativeType("uint32_t")
-    public int apiVersion() { return napiVersion(address()); }
-
     /** Sets the specified value to the {@code headerSize} field. */
+    @Override
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT headerSize(@NativeType("uint32_t") int value) { nheaderSize(address(), value); return this; }
     /** Sets the specified value to the {@code headerVersion} field. */
-    public VkDeviceFaultVendorBinaryHeaderVersionOneEXT headerVersion(@NativeType("VkDeviceFaultVendorBinaryHeaderVersionEXT") int value) { nheaderVersion(address(), value); return this; }
+    @Override
+    public VkDeviceFaultVendorBinaryHeaderVersionOneEXT headerVersion(@NativeType("VkDeviceFaultVendorBinaryHeaderVersionKHR") int value) { nheaderVersion(address(), value); return this; }
     /** Sets the specified value to the {@code vendorID} field. */
+    @Override
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT vendorID(@NativeType("uint32_t") int value) { nvendorID(address(), value); return this; }
     /** Sets the specified value to the {@code deviceID} field. */
+    @Override
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT deviceID(@NativeType("uint32_t") int value) { ndeviceID(address(), value); return this; }
     /** Sets the specified value to the {@code driverVersion} field. */
+    @Override
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT driverVersion(@NativeType("uint32_t") int value) { ndriverVersion(address(), value); return this; }
     /** Copies the specified {@link ByteBuffer} to the {@code pipelineCacheUUID} field. */
+    @Override
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT pipelineCacheUUID(@NativeType("uint8_t[VK_UUID_SIZE]") ByteBuffer value) { npipelineCacheUUID(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code pipelineCacheUUID} field. */
+    @Override
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT pipelineCacheUUID(int index, @NativeType("uint8_t") byte value) { npipelineCacheUUID(address(), index, value); return this; }
     /** Sets the specified value to the {@code applicationNameOffset} field. */
+    @Override
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT applicationNameOffset(@NativeType("uint32_t") int value) { napplicationNameOffset(address(), value); return this; }
     /** Sets the specified value to the {@code applicationVersion} field. */
+    @Override
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT applicationVersion(@NativeType("uint32_t") int value) { napplicationVersion(address(), value); return this; }
     /** Sets the specified value to the {@code engineNameOffset} field. */
+    @Override
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT engineNameOffset(@NativeType("uint32_t") int value) { nengineNameOffset(address(), value); return this; }
     /** Sets the specified value to the {@code engineVersion} field. */
+    @Override
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT engineVersion(@NativeType("uint32_t") int value) { nengineVersion(address(), value); return this; }
     /** Sets the specified value to the {@code apiVersion} field. */
+    @Override
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT apiVersion(@NativeType("uint32_t") int value) { napiVersion(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT set(
         int headerSize,
         int headerVersion,
@@ -323,67 +245,8 @@ public class VkDeviceFaultVendorBinaryHeaderVersionOneEXT extends Struct<VkDevic
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #headerSize}. */
-    public static int nheaderSize(long struct) { return memGetInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.HEADERSIZE); }
-    /** Unsafe version of {@link #headerVersion}. */
-    public static int nheaderVersion(long struct) { return memGetInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.HEADERVERSION); }
-    /** Unsafe version of {@link #vendorID}. */
-    public static int nvendorID(long struct) { return memGetInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.VENDORID); }
-    /** Unsafe version of {@link #deviceID}. */
-    public static int ndeviceID(long struct) { return memGetInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.DEVICEID); }
-    /** Unsafe version of {@link #driverVersion}. */
-    public static int ndriverVersion(long struct) { return memGetInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.DRIVERVERSION); }
-    /** Unsafe version of {@link #pipelineCacheUUID}. */
-    public static ByteBuffer npipelineCacheUUID(long struct) { return memByteBuffer(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.PIPELINECACHEUUID, VK_UUID_SIZE); }
-    /** Unsafe version of {@link #pipelineCacheUUID(int) pipelineCacheUUID}. */
-    public static byte npipelineCacheUUID(long struct, int index) {
-        return memGetByte(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.PIPELINECACHEUUID + check(index, VK_UUID_SIZE) * 1);
-    }
-    /** Unsafe version of {@link #applicationNameOffset}. */
-    public static int napplicationNameOffset(long struct) { return memGetInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.APPLICATIONNAMEOFFSET); }
-    /** Unsafe version of {@link #applicationVersion}. */
-    public static int napplicationVersion(long struct) { return memGetInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.APPLICATIONVERSION); }
-    /** Unsafe version of {@link #engineNameOffset}. */
-    public static int nengineNameOffset(long struct) { return memGetInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.ENGINENAMEOFFSET); }
-    /** Unsafe version of {@link #engineVersion}. */
-    public static int nengineVersion(long struct) { return memGetInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.ENGINEVERSION); }
-    /** Unsafe version of {@link #apiVersion}. */
-    public static int napiVersion(long struct) { return memGetInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.APIVERSION); }
-
-    /** Unsafe version of {@link #headerSize(int) headerSize}. */
-    public static void nheaderSize(long struct, int value) { memPutInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.HEADERSIZE, value); }
-    /** Unsafe version of {@link #headerVersion(int) headerVersion}. */
-    public static void nheaderVersion(long struct, int value) { memPutInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.HEADERVERSION, value); }
-    /** Unsafe version of {@link #vendorID(int) vendorID}. */
-    public static void nvendorID(long struct, int value) { memPutInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.VENDORID, value); }
-    /** Unsafe version of {@link #deviceID(int) deviceID}. */
-    public static void ndeviceID(long struct, int value) { memPutInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.DEVICEID, value); }
-    /** Unsafe version of {@link #driverVersion(int) driverVersion}. */
-    public static void ndriverVersion(long struct, int value) { memPutInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.DRIVERVERSION, value); }
-    /** Unsafe version of {@link #pipelineCacheUUID(ByteBuffer) pipelineCacheUUID}. */
-    public static void npipelineCacheUUID(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, VK_UUID_SIZE); }
-        memCopy(memAddress(value), struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.PIPELINECACHEUUID, value.remaining() * 1);
-    }
-    /** Unsafe version of {@link #pipelineCacheUUID(int, byte) pipelineCacheUUID}. */
-    public static void npipelineCacheUUID(long struct, int index, byte value) {
-        memPutByte(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.PIPELINECACHEUUID + check(index, VK_UUID_SIZE) * 1, value);
-    }
-    /** Unsafe version of {@link #applicationNameOffset(int) applicationNameOffset}. */
-    public static void napplicationNameOffset(long struct, int value) { memPutInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.APPLICATIONNAMEOFFSET, value); }
-    /** Unsafe version of {@link #applicationVersion(int) applicationVersion}. */
-    public static void napplicationVersion(long struct, int value) { memPutInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.APPLICATIONVERSION, value); }
-    /** Unsafe version of {@link #engineNameOffset(int) engineNameOffset}. */
-    public static void nengineNameOffset(long struct, int value) { memPutInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.ENGINENAMEOFFSET, value); }
-    /** Unsafe version of {@link #engineVersion(int) engineVersion}. */
-    public static void nengineVersion(long struct, int value) { memPutInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.ENGINEVERSION, value); }
-    /** Unsafe version of {@link #apiVersion(int) apiVersion}. */
-    public static void napiVersion(long struct, int value) { memPutInt(struct + VkDeviceFaultVendorBinaryHeaderVersionOneEXT.APIVERSION, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT} structs. */
-    public static class Buffer extends StructBuffer<VkDeviceFaultVendorBinaryHeaderVersionOneEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkDeviceFaultVendorBinaryHeaderVersionOneKHR.Buffer {
 
         private static final VkDeviceFaultVendorBinaryHeaderVersionOneEXT ELEMENT_FACTORY = VkDeviceFaultVendorBinaryHeaderVersionOneEXT.create(-1L);
 
@@ -397,7 +260,7 @@ public class VkDeviceFaultVendorBinaryHeaderVersionOneEXT extends Struct<VkDevic
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -423,66 +286,41 @@ public class VkDeviceFaultVendorBinaryHeaderVersionOneEXT extends Struct<VkDevic
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code headerSize} field. */
-        @NativeType("uint32_t")
-        public int headerSize() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.nheaderSize(address()); }
-        /** @return the value of the {@code headerVersion} field. */
-        @NativeType("VkDeviceFaultVendorBinaryHeaderVersionEXT")
-        public int headerVersion() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.nheaderVersion(address()); }
-        /** @return the value of the {@code vendorID} field. */
-        @NativeType("uint32_t")
-        public int vendorID() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.nvendorID(address()); }
-        /** @return the value of the {@code deviceID} field. */
-        @NativeType("uint32_t")
-        public int deviceID() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.ndeviceID(address()); }
-        /** @return the value of the {@code driverVersion} field. */
-        @NativeType("uint32_t")
-        public int driverVersion() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.ndriverVersion(address()); }
-        /** @return a {@link ByteBuffer} view of the {@code pipelineCacheUUID} field. */
-        @NativeType("uint8_t[VK_UUID_SIZE]")
-        public ByteBuffer pipelineCacheUUID() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.npipelineCacheUUID(address()); }
-        /** @return the value at the specified index of the {@code pipelineCacheUUID} field. */
-        @NativeType("uint8_t")
-        public byte pipelineCacheUUID(int index) { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.npipelineCacheUUID(address(), index); }
-        /** @return the value of the {@code applicationNameOffset} field. */
-        @NativeType("uint32_t")
-        public int applicationNameOffset() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.napplicationNameOffset(address()); }
-        /** @return the value of the {@code applicationVersion} field. */
-        @NativeType("uint32_t")
-        public int applicationVersion() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.napplicationVersion(address()); }
-        /** @return the value of the {@code engineNameOffset} field. */
-        @NativeType("uint32_t")
-        public int engineNameOffset() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.nengineNameOffset(address()); }
-        /** @return the value of the {@code engineVersion} field. */
-        @NativeType("uint32_t")
-        public int engineVersion() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.nengineVersion(address()); }
-        /** @return the value of the {@code apiVersion} field. */
-        @NativeType("uint32_t")
-        public int apiVersion() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.napiVersion(address()); }
-
         /** Sets the specified value to the {@code headerSize} field. */
+        @Override
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer headerSize(@NativeType("uint32_t") int value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.nheaderSize(address(), value); return this; }
         /** Sets the specified value to the {@code headerVersion} field. */
-        public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer headerVersion(@NativeType("VkDeviceFaultVendorBinaryHeaderVersionEXT") int value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.nheaderVersion(address(), value); return this; }
+        @Override
+        public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer headerVersion(@NativeType("VkDeviceFaultVendorBinaryHeaderVersionKHR") int value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.nheaderVersion(address(), value); return this; }
         /** Sets the specified value to the {@code vendorID} field. */
+        @Override
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer vendorID(@NativeType("uint32_t") int value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.nvendorID(address(), value); return this; }
         /** Sets the specified value to the {@code deviceID} field. */
+        @Override
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer deviceID(@NativeType("uint32_t") int value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.ndeviceID(address(), value); return this; }
         /** Sets the specified value to the {@code driverVersion} field. */
+        @Override
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer driverVersion(@NativeType("uint32_t") int value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.ndriverVersion(address(), value); return this; }
         /** Copies the specified {@link ByteBuffer} to the {@code pipelineCacheUUID} field. */
+        @Override
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer pipelineCacheUUID(@NativeType("uint8_t[VK_UUID_SIZE]") ByteBuffer value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.npipelineCacheUUID(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code pipelineCacheUUID} field. */
+        @Override
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer pipelineCacheUUID(int index, @NativeType("uint8_t") byte value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.npipelineCacheUUID(address(), index, value); return this; }
         /** Sets the specified value to the {@code applicationNameOffset} field. */
+        @Override
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer applicationNameOffset(@NativeType("uint32_t") int value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.napplicationNameOffset(address(), value); return this; }
         /** Sets the specified value to the {@code applicationVersion} field. */
+        @Override
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer applicationVersion(@NativeType("uint32_t") int value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.napplicationVersion(address(), value); return this; }
         /** Sets the specified value to the {@code engineNameOffset} field. */
+        @Override
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer engineNameOffset(@NativeType("uint32_t") int value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.nengineNameOffset(address(), value); return this; }
         /** Sets the specified value to the {@code engineVersion} field. */
+        @Override
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer engineVersion(@NativeType("uint32_t") int value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.nengineVersion(address(), value); return this; }
         /** Sets the specified value to the {@code apiVersion} field. */
+        @Override
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer apiVersion(@NativeType("uint32_t") int value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.napiVersion(address(), value); return this; }
 
     }

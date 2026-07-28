@@ -25,6 +25,10 @@ public class EXTDepthClampControl {
 
     public static final int VK_DYNAMIC_STATE_DEPTH_CLAMP_RANGE_EXT = 1000582000;
 
+    public static final int
+        VK_DEPTH_CLAMP_MODE_VIEWPORT_RANGE_EXT     = 0,
+        VK_DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT = 1;
+
     protected EXTDepthClampControl() {
         throw new UnsupportedOperationException();
     }

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkBindSparseInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkSparseImageMemoryBindInfo VkSparseImageMemoryBindInfo} const * pImageBinds;
  *     uint32_t signalSemaphoreCount;
  *     VkSemaphore const * pSignalSemaphores;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkBindSparseInfo extends Struct<VkBindSparseInfo> implements NativeResource {
 
@@ -160,6 +160,8 @@ public class VkBindSparseInfo extends Struct<VkBindSparseInfo> implements Native
     public VkBindSparseInfo pNext(VkDeviceGroupBindSparseInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkFrameBoundaryEXT} value to the {@code pNext} chain. */
     public VkBindSparseInfo pNext(VkFrameBoundaryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkFrameBoundaryTensorsARM} value to the {@code pNext} chain. */
+    public VkBindSparseInfo pNext(VkFrameBoundaryTensorsARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkTimelineSemaphoreSubmitInfo} value to the {@code pNext} chain. */
     public VkBindSparseInfo pNext(VkTimelineSemaphoreSubmitInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkTimelineSemaphoreSubmitInfoKHR} value to the {@code pNext} chain. */
@@ -278,25 +280,6 @@ public class VkBindSparseInfo extends Struct<VkBindSparseInfo> implements Native
     public static VkBindSparseInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkBindSparseInfo mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkBindSparseInfo callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkBindSparseInfo mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkBindSparseInfo callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkBindSparseInfo.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkBindSparseInfo.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkBindSparseInfo.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkBindSparseInfo.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkBindSparseInfo} instance allocated on the specified {@link MemoryStack}.
@@ -512,6 +495,8 @@ public class VkBindSparseInfo extends Struct<VkBindSparseInfo> implements Native
         public VkBindSparseInfo.Buffer pNext(VkDeviceGroupBindSparseInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkFrameBoundaryEXT} value to the {@code pNext} chain. */
         public VkBindSparseInfo.Buffer pNext(VkFrameBoundaryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkFrameBoundaryTensorsARM} value to the {@code pNext} chain. */
+        public VkBindSparseInfo.Buffer pNext(VkFrameBoundaryTensorsARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkTimelineSemaphoreSubmitInfo} value to the {@code pNext} chain. */
         public VkBindSparseInfo.Buffer pNext(VkTimelineSemaphoreSubmitInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkTimelineSemaphoreSubmitInfoKHR} value to the {@code pNext} chain. */

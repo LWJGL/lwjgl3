@@ -263,7 +263,7 @@ public class SDL_GamepadButtonEvent extends Struct<SDL_GamepadButtonEvent> imple
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_GamepadButtonEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_GamepadButtonEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_GamepadButtonEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_GamepadButtonEvent.TIMESTAMP); }
     /** Unsafe version of {@link #which}. */
@@ -272,12 +272,12 @@ public class SDL_GamepadButtonEvent extends Struct<SDL_GamepadButtonEvent> imple
     public static byte nbutton(long struct) { return memGetByte(struct + SDL_GamepadButtonEvent.BUTTON); }
     /** Unsafe version of {@link #down}. */
     public static boolean ndown(long struct) { return memGetByte(struct + SDL_GamepadButtonEvent.DOWN) != 0; }
-    public static byte npadding1(long struct) { return memGetByte(struct + SDL_GamepadButtonEvent.PADDING1); }
-    public static byte npadding2(long struct) { return memGetByte(struct + SDL_GamepadButtonEvent.PADDING2); }
+    static byte npadding1(long struct) { return memGetByte(struct + SDL_GamepadButtonEvent.PADDING1); }
+    static byte npadding2(long struct) { return memGetByte(struct + SDL_GamepadButtonEvent.PADDING2); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_GamepadButtonEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_GamepadButtonEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_GamepadButtonEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_GamepadButtonEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #which(int) which}. */
@@ -286,8 +286,8 @@ public class SDL_GamepadButtonEvent extends Struct<SDL_GamepadButtonEvent> imple
     public static void nbutton(long struct, byte value) { memPutByte(struct + SDL_GamepadButtonEvent.BUTTON, value); }
     /** Unsafe version of {@link #down(boolean) down}. */
     public static void ndown(long struct, boolean value) { memPutByte(struct + SDL_GamepadButtonEvent.DOWN, value ? (byte)1 : (byte)0); }
-    public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GamepadButtonEvent.PADDING1, value); }
-    public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GamepadButtonEvent.PADDING2, value); }
+    static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GamepadButtonEvent.PADDING1, value); }
+    static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GamepadButtonEvent.PADDING2, value); }
 
     // -----------------------------------
 

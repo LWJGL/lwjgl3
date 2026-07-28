@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpaceLocationDataKHR {
  *     XrSpaceLocationFlags locationFlags;
  *     {@link XrPosef XrPosef} pose;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpaceLocationDataKHR extends XrSpaceLocationData {
 

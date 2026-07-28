@@ -20,6 +20,10 @@ public class LibFFI {
 
     static { Library.initialize(); }
 
+    public static final String FFI_VERSION_STRING = "3.6.0";
+
+    public static final int FFI_VERSION_NUMBER = 0x7788;
+
     public static final short
         FFI_TYPE_VOID       = 0,
         FFI_TYPE_INT        = 1,
@@ -35,7 +39,10 @@ public class LibFFI {
         FFI_TYPE_UINT64     = 11,
         FFI_TYPE_SINT64     = 12,
         FFI_TYPE_STRUCT     = 13,
-        FFI_TYPE_POINTER    = 14;
+        FFI_TYPE_POINTER    = 14,
+        FFI_TYPE_COMPLEX    = 15,
+        FFI_TYPE_UINT128    = 16,
+        FFI_TYPE_SINT128    = 17;
 
     public static final int
         FFI_FIRST_ABI   = FFI_FIRST_ABI(),
@@ -417,6 +424,30 @@ public class LibFFI {
     /** {@code ffi_type * ffi_type_pointer(void)} */
     public static final FFIType ffi_type_pointer = ffi_type_pointer();
 
+    // --- [ ffi_get_version ] ---
+
+    /** {@code char const * ffi_get_version(void)} */
+    public static native long nffi_get_version();
+
+    /** {@code char const * ffi_get_version(void)} */
+    @NativeType("char const *")
+    public static @Nullable String ffi_get_version() {
+        long __result = nffi_get_version();
+        return memASCIISafe(__result);
+    }
+
+    // --- [ ffi_get_version_number ] ---
+
+    /** {@code unsigned long ffi_get_version_number(void)} */
+    @NativeType("unsigned long")
+    public static native long ffi_get_version_number();
+
+    // --- [ ffi_get_default_abi ] ---
+
+    /** {@code unsigned int ffi_get_default_abi(void)} */
+    @NativeType("unsigned int")
+    public static native int ffi_get_default_abi();
+
     // --- [ ffi_prep_cif ] ---
 
     /** {@code ffi_status ffi_prep_cif(ffi_cif * cif, ffi_abi abi, unsigned int nargs, ffi_type * rtype, ffi_type ** atypes)} */
@@ -441,15 +472,53 @@ public class LibFFI {
 
     // --- [ ffi_call ] ---
 
-    /** {@code void ffi_call(ffi_cif * cif, FFI_FN_TYPE fn, void * rvalue, void ** avalues)} */
-    public static native void nffi_call(long cif, long fn, long rvalue, long avalues);
+    /** {@code void ffi_call(ffi_cif * cif, FFI_FN_TYPE fn, void * rvalue, void ** avalue)} */
+    public static native void nffi_call(long cif, long fn, long rvalue, long avalue);
 
-    /** {@code void ffi_call(ffi_cif * cif, FFI_FN_TYPE fn, void * rvalue, void ** avalues)} */
-    public static void ffi_call(@NativeType("ffi_cif *") FFICIF cif, @NativeType("FFI_FN_TYPE") long fn, @NativeType("void *") @Nullable ByteBuffer rvalue, @NativeType("void **") @Nullable PointerBuffer avalues) {
+    /** {@code void ffi_call(ffi_cif * cif, FFI_FN_TYPE fn, void * rvalue, void ** avalue)} */
+    public static void ffi_call(@NativeType("ffi_cif *") FFICIF cif, @NativeType("FFI_FN_TYPE") long fn, @NativeType("void *") @Nullable ByteBuffer rvalue, @NativeType("void **") @Nullable PointerBuffer avalue) {
         if (CHECKS) {
             check(fn);
         }
-        nffi_call(cif.address(), fn, memAddressSafe(rvalue), memAddressSafe(avalues));
+        nffi_call(cif.address(), fn, memAddressSafe(rvalue), memAddressSafe(avalue));
+    }
+
+    // --- [ ffi_call_plan_alloc ] ---
+
+    /** {@code ffi_call_plan * ffi_call_plan_alloc(ffi_cif * cif)} */
+    public static native long nffi_call_plan_alloc(long cif);
+
+    /** {@code ffi_call_plan * ffi_call_plan_alloc(ffi_cif * cif)} */
+    @NativeType("ffi_call_plan *")
+    public static long ffi_call_plan_alloc(@NativeType("ffi_cif *") FFICIF cif) {
+        return nffi_call_plan_alloc(cif.address());
+    }
+
+    // --- [ ffi_call_plan_invoke ] ---
+
+    /** {@code void ffi_call_plan_invoke(ffi_call_plan * plan, FFI_FN_TYPE fn, void * rvalue, void ** avalue)} */
+    public static native void nffi_call_plan_invoke(long plan, long fn, long rvalue, long avalue);
+
+    /** {@code void ffi_call_plan_invoke(ffi_call_plan * plan, FFI_FN_TYPE fn, void * rvalue, void ** avalue)} */
+    public static void ffi_call_plan_invoke(@NativeType("ffi_call_plan *") long plan, @NativeType("FFI_FN_TYPE") long fn, @NativeType("void *") @Nullable ByteBuffer rvalue, @NativeType("void **") @Nullable PointerBuffer avalue) {
+        if (CHECKS) {
+            check(plan);
+            check(fn);
+        }
+        nffi_call_plan_invoke(plan, fn, memAddressSafe(rvalue), memAddressSafe(avalue));
+    }
+
+    // --- [ ffi_call_plan_free ] ---
+
+    /** {@code void ffi_call_plan_free(ffi_call_plan * plan)} */
+    public static native void nffi_call_plan_free(long plan);
+
+    /** {@code void ffi_call_plan_free(ffi_call_plan * plan)} */
+    public static void ffi_call_plan_free(@NativeType("ffi_call_plan *") long plan) {
+        if (CHECKS) {
+            check(plan);
+        }
+        nffi_call_plan_free(plan);
     }
 
     // --- [ ffi_get_struct_offsets ] ---
@@ -462,6 +531,12 @@ public class LibFFI {
     public static int ffi_get_struct_offsets(@NativeType("ffi_abi") int abi, @NativeType("ffi_type *") FFIType struct_type, @NativeType("size_t *") @Nullable PointerBuffer offsets) {
         return nffi_get_struct_offsets(abi, struct_type.address(), memAddressSafe(offsets));
     }
+
+    // --- [ ffi_get_closure_size ] ---
+
+    /** {@code size_t ffi_get_closure_size(void)} */
+    @NativeType("size_t")
+    public static native long ffi_get_closure_size();
 
     // --- [ ffi_closure_alloc ] ---
 

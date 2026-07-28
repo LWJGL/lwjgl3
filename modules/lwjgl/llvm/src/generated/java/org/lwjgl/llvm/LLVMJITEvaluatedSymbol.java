@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct LLVMJITEvaluatedSymbol {
  *     LLVMOrcExecutorAddress Address;
  *     {@link LLVMJITSymbolFlags LLVMJITSymbolFlags} Flags;
- * }}</pre>
+ * }</code></pre>
  */
 public class LLVMJITEvaluatedSymbol extends Struct<LLVMJITEvaluatedSymbol> implements NativeResource {
 
@@ -36,6 +36,8 @@ public class LLVMJITEvaluatedSymbol extends Struct<LLVMJITEvaluatedSymbol> imple
         FLAGS;
 
     static {
+        LLVMJITSymbolFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(8),
             __member(LLVMJITSymbolFlags.SIZEOF, LLVMJITSymbolFlags.ALIGNOF)

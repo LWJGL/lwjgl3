@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPresentTimesInfoGOOGLE {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t swapchainCount;
  *     {@link VkPresentTimeGOOGLE VkPresentTimeGOOGLE} const * pTimes;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPresentTimesInfoGOOGLE extends Struct<VkPresentTimesInfoGOOGLE> implements NativeResource {
 
@@ -199,25 +199,6 @@ public class VkPresentTimesInfoGOOGLE extends Struct<VkPresentTimesInfoGOOGLE> i
     public static VkPresentTimesInfoGOOGLE.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPresentTimesInfoGOOGLE mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPresentTimesInfoGOOGLE callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPresentTimesInfoGOOGLE mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPresentTimesInfoGOOGLE callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPresentTimesInfoGOOGLE.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPresentTimesInfoGOOGLE.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPresentTimesInfoGOOGLE.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPresentTimesInfoGOOGLE.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkPresentTimesInfoGOOGLE} instance allocated on the specified {@link MemoryStack}.

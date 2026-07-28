@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSceneFrustumBoundMSFT {
  *     {@link XrPosef XrPosef} pose;
  *     {@link XrFovf XrFovf} fov;
  *     float farDistance;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSceneFrustumBoundMSFT extends Struct<XrSceneFrustumBoundMSFT> implements NativeResource {
 
@@ -38,6 +38,9 @@ public class XrSceneFrustumBoundMSFT extends Struct<XrSceneFrustumBoundMSFT> imp
         FARDISTANCE;
 
     static {
+        XrPosef.createSafe(NULL);
+        XrFovf.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrPosef.SIZEOF, XrPosef.ALIGNOF),
             __member(XrFovf.SIZEOF, XrFovf.ALIGNOF),

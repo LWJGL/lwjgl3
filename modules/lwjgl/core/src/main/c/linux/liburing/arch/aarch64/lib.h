@@ -6,6 +6,18 @@
 #include <elf.h>
 #include "../../syscall.h"
 
+#ifndef CONFIG_NOLIBC
+#include <unistd.h>
+
+static inline long __get_page_size(void)
+{
+	long ret = sysconf(_SC_PAGESIZE);
+
+	if (ret < 0)
+		ret = 4096;
+	return ret;
+}
+#else
 static inline long __get_page_size(void)
 {
 	Elf64_Off buf[2];
@@ -32,6 +44,7 @@ static inline long __get_page_size(void)
 	__sys_close(fd);
 	return ret;
 }
+#endif
 
 static inline long get_page_size(void)
 {

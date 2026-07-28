@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrBoxf {
  *     {@link XrPosef XrPosef} center;
  *     {@link XrExtent3Df XrExtent3Df} extents;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrBoxf extends Struct<XrBoxf> implements NativeResource {
 
@@ -36,6 +36,9 @@ public class XrBoxf extends Struct<XrBoxf> implements NativeResource {
         EXTENTS;
 
     static {
+        XrPosef.createSafe(NULL);
+        XrExtent3Df.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrPosef.SIZEOF, XrPosef.ALIGNOF),
             __member(XrExtent3Df.SIZEOF, XrExtent3Df.ALIGNOF)

@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkCopyMemoryToMicromapInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} src;
  *     VkMicromapEXT dst;
  *     VkCopyMicromapModeEXT mode;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkCopyMemoryToMicromapInfoEXT extends Struct<VkCopyMemoryToMicromapInfoEXT> implements NativeResource {
 
@@ -42,6 +42,8 @@ public class VkCopyMemoryToMicromapInfoEXT extends Struct<VkCopyMemoryToMicromap
         MODE;
 
     static {
+        VkDeviceOrHostAddressConstKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

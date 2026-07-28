@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrCompositionLayerReprojectionPlaneOverrideMSFT {
  *     XrStructureType type;
  *     void const * next;
  *     {@link XrVector3f XrVector3f} position;
  *     {@link XrVector3f XrVector3f} normal;
  *     {@link XrVector3f XrVector3f} velocity;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrCompositionLayerReprojectionPlaneOverrideMSFT extends Struct<XrCompositionLayerReprojectionPlaneOverrideMSFT> implements NativeResource {
 
@@ -42,6 +42,8 @@ public class XrCompositionLayerReprojectionPlaneOverrideMSFT extends Struct<XrCo
         VELOCITY;
 
     static {
+        XrVector3f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

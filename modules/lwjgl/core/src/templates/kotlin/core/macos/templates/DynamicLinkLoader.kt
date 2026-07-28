@@ -16,6 +16,12 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_MACOS, nativeSubPath = "
         "RTLD_GLOBAL"..0x8
     )
 
+    IntConstant(
+        "RTLD_NOLOAD"..0x10,
+        "RTLD_NODELETE"..0x80,
+        "RTLD_FIRST"..0x100
+    )
+
     LongConstant(
         "RTLD_NEXT"..-1L,
         "RTLD_DEFAULT"..-2L,
@@ -48,5 +54,4 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_MACOS, nativeSubPath = "
 
         opaque_p("handle")
     )
-
 }

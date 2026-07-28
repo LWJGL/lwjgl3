@@ -347,6 +347,8 @@ public final class ALCapabilities {
     public final boolean OpenAL10;
     /** When true, {@code AL11} is supported. */
     public final boolean OpenAL11;
+    /** When true, {@code EXT_32bit_formats} is supported. */
+    public final boolean AL_EXT_32bit_formats;
     /** When true, {@code EXT_ALAW} is supported. */
     public final boolean AL_EXT_ALAW;
     /** When true, {@code EXT_BFORMAT} is supported. */
@@ -448,6 +450,7 @@ public final class ALCapabilities {
 
         OpenAL10 = check_AL10(provider, caps, ext);
         OpenAL11 = check_AL11(provider, caps, ext);
+        AL_EXT_32bit_formats = ext.contains("AL_EXT_32bit_formats");
         AL_EXT_ALAW = ext.contains("AL_EXT_ALAW");
         AL_EXT_BFORMAT = ext.contains("AL_EXT_BFORMAT");
         AL_EXT_debug = check_EXT_debug(provider, caps, ext);

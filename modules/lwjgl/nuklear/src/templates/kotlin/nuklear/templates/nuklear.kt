@@ -27,6 +27,9 @@ val nuklear = "Nuklear".nativeClass(Module.NUKLEAR, prefix = "NK", prefixMethod 
 #define NK_INV_SQRT(expr) (1.0f / sqrt(expr))
 #define NK_SIN sinf
 #define NK_COS cosf
+#define NK_ATAN atanf
+#define NK_ATAN2 atan2f
+#define NK_STRTOD strtod
 #include <math.h>
 #include <string.h>
 #include "nuklear.h"
@@ -144,6 +147,20 @@ ENABLE_WARNINGS()""")
     )
 
     EnumConstant(
+        "TOP_LEFT".enum,
+        "TOP_CENTER".enum,
+        "TOP_RIGHT".enum,
+
+        "MIDDLE_LEFT".enum,
+        "MIDDLE_CENTER".enum,
+        "MIDDLE_RIGHT".enum,
+
+        "BOTTOM_LEFT".enum,
+        "BOTTOM_CENTER".enum,
+        "BOTTOM_RIGHT".enum
+    )
+
+    EnumConstant(
         "SYMBOL_NONE".enum,
         "SYMBOL_X".enum,
         "SYMBOL_UNDERSCORE".enum,
@@ -204,6 +221,8 @@ ENABLE_WARNINGS()""")
         "BUTTON_MIDDLE".enum,
         "BUTTON_RIGHT".enum,
         "BUTTON_DOUBLE".enum,
+        "BUTTON_X1".enum,
+        "BUTTON_X2".enum,
 
         "BUTTON_MAX".enum
     )
@@ -318,7 +337,7 @@ ENABLE_WARNINGS()""")
         "EDIT_INACTIVE".enum(1.NK_FLAG),
         "EDIT_ACTIVATED".enum(2.NK_FLAG),
         "EDIT_DEACTIVATED".enum(3.NK_FLAG),
-        "EDIT_COMMITED".enum(4.NK_FLAG)
+        "EDIT_COMMITTED".enum(4.NK_FLAG)
     )
 
     EnumConstant(
@@ -1676,7 +1695,7 @@ ENABLE_WARNINGS()""")
             nk_color_format("fmt")
         )
 
-        void(
+        nk_bool(
             "property_int",
 
             ctx,
@@ -1688,7 +1707,7 @@ ENABLE_WARNINGS()""")
             float("inc_per_pixel")
         )
 
-        void(
+        nk_bool(
             "property_float",
 
             ctx,
@@ -1700,7 +1719,7 @@ ENABLE_WARNINGS()""")
             float("inc_per_pixel")
         )
 
-        void(
+        nk_bool(
             "property_double",
 
             ctx,
@@ -1947,7 +1966,7 @@ ENABLE_WARNINGS()""")
             nk_vec2("size")
         )
 
-        void(
+        nk_bool(
             "combobox",
 
             ctx,
@@ -1958,7 +1977,7 @@ ENABLE_WARNINGS()""")
             nk_vec2("size")
         )
 
-        void(
+        nk_bool(
             "combobox_string",
 
             ctx,
@@ -1969,7 +1988,7 @@ ENABLE_WARNINGS()""")
             nk_vec2("size")
         )
 
-        void(
+        nk_bool(
             "combobox_separator",
 
             ctx,
@@ -1981,7 +2000,7 @@ ENABLE_WARNINGS()""")
             nk_vec2("size")
         )
 
-        void(
+        nk_bool(
             "combobox_callback",
 
             ctx,
@@ -2204,11 +2223,29 @@ ENABLE_WARNINGS()""")
             charUTF8.const.p("text")
         )
 
+        void(
+            "tooltip_offset",
+
+            ctx,
+            charUTF8.const.p("text"),
+            nk_tooltip_pos("position"),
+            nk_vec2("offset")
+        )
+
         nk_bool(
             "tooltip_begin",
 
             ctx,
             float("width")
+        )
+
+        nk_bool(
+            "tooltip_begin_offset",
+
+            ctx,
+            float("width"),
+            nk_tooltip_pos("position"),
+            nk_vec2("offset")
         )
 
         void("tooltip_end", ctx)
@@ -3224,12 +3261,12 @@ ENABLE_WARNINGS()""")
             Check(1)..charUTF8.p.p("endptr")
         )
 
-        double(
+        /*double(
             "strtod",
 
             charUTF8.const.p("str"),
             Check(1)..charUTF8.p.p("endptr")
-        )
+        )*/
 
         nk_bool(
             "strfilter",
@@ -4011,6 +4048,12 @@ ENABLE_WARNINGS()""")
 
             nk_input.const.p("i"),
             nk_rect("rect")
+        )
+
+        nk_bool(
+            "input_is_mouse_moved",
+
+            nk_input.const.p("i")
         )
 
         nk_bool(

@@ -18,13 +18,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.FBKeyboardTracking.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrKeyboardTrackingDescriptionFB {
  *     uint64_t trackedKeyboardId;
  *     {@link XrVector3f XrVector3f} size;
  *     XrKeyboardTrackingFlagsFB flags;
  *     char name[XR_MAX_KEYBOARD_TRACKING_NAME_SIZE_FB];
- * }}</pre>
+ * }</code></pre>
  */
 public class XrKeyboardTrackingDescriptionFB extends Struct<XrKeyboardTrackingDescriptionFB> implements NativeResource {
 
@@ -42,6 +42,8 @@ public class XrKeyboardTrackingDescriptionFB extends Struct<XrKeyboardTrackingDe
         NAME;
 
     static {
+        XrVector3f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(8),
             __member(XrVector3f.SIZEOF, XrVector3f.ALIGNOF),

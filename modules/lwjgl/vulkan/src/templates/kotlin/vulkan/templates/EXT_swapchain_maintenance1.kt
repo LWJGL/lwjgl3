@@ -34,6 +34,6 @@ val EXT_swapchain_maintenance1 = "EXTSwapchainMaintenance1".nativeClassVK("EXT_s
         "ReleaseSwapchainImagesEXT",
 
         VkDevice("device"),
-        VkReleaseSwapchainImagesInfoEXT.const.p("pReleaseInfo")
+        VkReleaseSwapchainImagesInfoKHR.const.p("pReleaseInfo")
     )
 }

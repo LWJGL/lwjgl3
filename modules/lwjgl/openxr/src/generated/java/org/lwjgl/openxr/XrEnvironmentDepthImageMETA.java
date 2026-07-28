@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrEnvironmentDepthImageMETA {
  *     XrStructureType type;
  *     void const * next;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float nearZ;
  *     float farZ;
  *     {@link XrEnvironmentDepthImageViewMETA XrEnvironmentDepthImageViewMETA} views[2];
- * }}</pre>
+ * }</code></pre>
  */
 public class XrEnvironmentDepthImageMETA extends Struct<XrEnvironmentDepthImageMETA> implements NativeResource {
 
@@ -45,6 +45,8 @@ public class XrEnvironmentDepthImageMETA extends Struct<XrEnvironmentDepthImageM
         VIEWS;
 
     static {
+        XrEnvironmentDepthImageViewMETA.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -112,6 +114,8 @@ public class XrEnvironmentDepthImageMETA extends Struct<XrEnvironmentDepthImageM
     public XrEnvironmentDepthImageMETA type$Default() { return type(METAEnvironmentDepth.XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_META); }
     /** Sets the specified value to the {@code next} field. */
     public XrEnvironmentDepthImageMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrEnvironmentDepthImageTimestampMETA} value to the {@code next} chain. */
+    public XrEnvironmentDepthImageMETA next(XrEnvironmentDepthImageTimestampMETA value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@code swapchainIndex} field. */
     public XrEnvironmentDepthImageMETA swapchainIndex(@NativeType("uint32_t") int value) { nswapchainIndex(address(), value); return this; }
     /** Sets the specified value to the {@code nearZ} field. */
@@ -374,6 +378,8 @@ public class XrEnvironmentDepthImageMETA extends Struct<XrEnvironmentDepthImageM
         public XrEnvironmentDepthImageMETA.Buffer type$Default() { return type(METAEnvironmentDepth.XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_META); }
         /** Sets the specified value to the {@code next} field. */
         public XrEnvironmentDepthImageMETA.Buffer next(@NativeType("void const *") long value) { XrEnvironmentDepthImageMETA.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrEnvironmentDepthImageTimestampMETA} value to the {@code next} chain. */
+        public XrEnvironmentDepthImageMETA.Buffer next(XrEnvironmentDepthImageTimestampMETA value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@code swapchainIndex} field. */
         public XrEnvironmentDepthImageMETA.Buffer swapchainIndex(@NativeType("uint32_t") int value) { XrEnvironmentDepthImageMETA.nswapchainIndex(address(), value); return this; }
         /** Sets the specified value to the {@code nearZ} field. */

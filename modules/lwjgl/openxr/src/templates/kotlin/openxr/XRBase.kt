@@ -37,11 +37,24 @@ val xcb_visualid_t = typedef(uint32_t, "xcb_visualid_t")
 val xcb_glx_drawable_t = typedef(uint32_t, "xcb_glx_drawable_t")
 val xcb_glx_context_t = typedef(uint32_t, "xcb_glx_context_t")
 
+// XR_ANDROID_anchor_sharing_export
+val AIBinder = "AIBinder".opaque
+
+// XR_ANDROID_trackables
+val XrTrackableANDROID = XR_DEFINE_ATOM("XrTrackableANDROID")
+
 // XR_BD_spatial_sensing
 val XrSpatialEntityIdBD = XR_DEFINE_ATOM("XrSpatialEntityIdBD")
 
 // XR_EXT_future
 val XrFutureEXT = typedef(uint64_t, "XrFutureEXT")
+
+// XR_EXT_render_model
+val XrRenderModelIdEXT = XR_DEFINE_ATOM("XrRenderModelIdEXT")
+
+// XR_EXT_spatial_entity
+val XrSpatialEntityIdEXT = XR_DEFINE_ATOM("XrSpatialEntityIdEXT")
+val XrSpatialBufferIdEXT = XR_DEFINE_ATOM("XrSpatialBufferIdEXT")
 
 // XR_FB_spatial_entity_user
 val XrSpaceUserIdFB = typedef(uint64_t, "XrSpaceUserIdFB")

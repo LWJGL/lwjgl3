@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrHandMeshMSFT {
  *     XrStructureType type;
  *     void * next;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrBool32 vertexBufferChanged;
  *     {@link XrHandMeshIndexBufferMSFT XrHandMeshIndexBufferMSFT} indexBuffer;
  *     {@link XrHandMeshVertexBufferMSFT XrHandMeshVertexBufferMSFT} vertexBuffer;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrHandMeshMSFT extends Struct<XrHandMeshMSFT> implements NativeResource {
 
@@ -46,6 +46,9 @@ public class XrHandMeshMSFT extends Struct<XrHandMeshMSFT> implements NativeReso
         VERTEXBUFFER;
 
     static {
+        XrHandMeshIndexBufferMSFT.createSafe(NULL);
+        XrHandMeshVertexBufferMSFT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

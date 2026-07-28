@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class BDSpatialSensing {
 
-    public static final int XR_BD_spatial_sensing_SPEC_VERSION = 1;
+    public static final int XR_BD_spatial_sensing_SPEC_VERSION = 2;
 
     public static final String XR_BD_SPATIAL_SENSING_EXTENSION_NAME = "XR_BD_spatial_sensing";
 
@@ -50,7 +50,8 @@ public class BDSpatialSensing {
         XR_TYPE_QUERIED_SENSE_DATA_BD                            = 1000389018,
         XR_TYPE_SPATIAL_ENTITY_STATE_BD                          = 1000389019,
         XR_TYPE_SPATIAL_ENTITY_ANCHOR_CREATE_INFO_BD             = 1000389020,
-        XR_TYPE_ANCHOR_SPACE_CREATE_INFO_BD                      = 1000389021;
+        XR_TYPE_ANCHOR_SPACE_CREATE_INFO_BD                      = 1000389021,
+        XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_SPHERE_BD          = 1000389022;
 
     public static final int
         XR_OBJECT_TYPE_SENSE_DATA_PROVIDER_BD = 1000389000,
@@ -63,7 +64,8 @@ public class BDSpatialSensing {
         XR_SPATIAL_ENTITY_COMPONENT_TYPE_BOUNDING_BOX_2D_BD = 2,
         XR_SPATIAL_ENTITY_COMPONENT_TYPE_POLYGON_BD         = 3,
         XR_SPATIAL_ENTITY_COMPONENT_TYPE_BOUNDING_BOX_3D_BD = 4,
-        XR_SPATIAL_ENTITY_COMPONENT_TYPE_TRIANGLE_MESH_BD   = 5;
+        XR_SPATIAL_ENTITY_COMPONENT_TYPE_TRIANGLE_MESH_BD   = 5,
+        XR_SPATIAL_ENTITY_COMPONENT_TYPE_SPHERE_BD          = 6;
 
     public static final int
         XR_SEMANTIC_LABEL_UNKNOWN_BD         = 0,

@@ -10,7 +10,7 @@ import openxr.*
 
 val BD_spatial_sensing = "BDSpatialSensing".nativeClassXR("BD_spatial_sensing", type = "instance", postfix = "BD") {
     IntConstant(
-        "BD_spatial_sensing_SPEC_VERSION".."1"
+        "BD_spatial_sensing_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -45,7 +45,8 @@ val BD_spatial_sensing = "BDSpatialSensing".nativeClassXR("BD_spatial_sensing", 
         "TYPE_QUERIED_SENSE_DATA_BD".."1000389018",
         "TYPE_SPATIAL_ENTITY_STATE_BD".."1000389019",
         "TYPE_SPATIAL_ENTITY_ANCHOR_CREATE_INFO_BD".."1000389020",
-        "TYPE_ANCHOR_SPACE_CREATE_INFO_BD".."1000389021"
+        "TYPE_ANCHOR_SPACE_CREATE_INFO_BD".."1000389021",
+        "TYPE_SPATIAL_ENTITY_COMPONENT_DATA_SPHERE_BD".."1000389022"
     )
 
     EnumConstant(
@@ -60,7 +61,8 @@ val BD_spatial_sensing = "BDSpatialSensing".nativeClassXR("BD_spatial_sensing", 
         "SPATIAL_ENTITY_COMPONENT_TYPE_BOUNDING_BOX_2D_BD".."2",
         "SPATIAL_ENTITY_COMPONENT_TYPE_POLYGON_BD".."3",
         "SPATIAL_ENTITY_COMPONENT_TYPE_BOUNDING_BOX_3D_BD".."4",
-        "SPATIAL_ENTITY_COMPONENT_TYPE_TRIANGLE_MESH_BD".."5"
+        "SPATIAL_ENTITY_COMPONENT_TYPE_TRIANGLE_MESH_BD".."5",
+        "SPATIAL_ENTITY_COMPONENT_TYPE_SPHERE_BD".."6"
     )
 
     EnumConstant(

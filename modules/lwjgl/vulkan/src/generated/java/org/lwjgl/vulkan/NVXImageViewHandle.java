@@ -12,7 +12,7 @@ import static org.lwjgl.system.JNI.*;
 
 public class NVXImageViewHandle {
 
-    public static final int VK_NVX_IMAGE_VIEW_HANDLE_SPEC_VERSION = 3;
+    public static final int VK_NVX_IMAGE_VIEW_HANDLE_SPEC_VERSION = 4;
 
     public static final String VK_NVX_IMAGE_VIEW_HANDLE_EXTENSION_NAME = "VK_NVX_image_view_handle";
 
@@ -73,6 +73,18 @@ public class NVXImageViewHandle {
     @NativeType("VkResult")
     public static int vkGetImageViewAddressNVX(VkDevice device, @NativeType("VkImageView") long imageView, @NativeType("VkImageViewAddressPropertiesNVX *") VkImageViewAddressPropertiesNVX pProperties) {
         return nvkGetImageViewAddressNVX(device, imageView, pProperties.address());
+    }
+
+    // --- [ vkGetDeviceCombinedImageSamplerIndexNVX ] ---
+
+    /** {@code uint64_t vkGetDeviceCombinedImageSamplerIndexNVX(VkDevice device, uint64_t imageViewIndex, uint64_t samplerIndex)} */
+    @NativeType("uint64_t")
+    public static long vkGetDeviceCombinedImageSamplerIndexNVX(VkDevice device, @NativeType("uint64_t") long imageViewIndex, @NativeType("uint64_t") long samplerIndex) {
+        long __functionAddress = device.getCapabilities().vkGetDeviceCombinedImageSamplerIndexNVX;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callPJJJ(device.address(), imageViewIndex, samplerIndex, __functionAddress);
     }
 
 }

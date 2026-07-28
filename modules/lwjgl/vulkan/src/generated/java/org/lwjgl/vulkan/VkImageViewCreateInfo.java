@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkImageViewCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkFormat format;
  *     {@link VkComponentMapping VkComponentMapping} components;
  *     {@link VkImageSubresourceRange VkImageSubresourceRange} subresourceRange;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkImageViewCreateInfo extends Struct<VkImageViewCreateInfo> implements NativeResource {
 
@@ -48,6 +48,9 @@ public class VkImageViewCreateInfo extends Struct<VkImageViewCreateInfo> impleme
         SUBRESOURCERANGE;
 
     static {
+        VkComponentMapping.createSafe(NULL);
+        VkImageSubresourceRange.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -133,6 +136,8 @@ public class VkImageViewCreateInfo extends Struct<VkImageViewCreateInfo> impleme
     public VkImageViewCreateInfo pNext(VkImageViewSampleWeightCreateInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageViewSlicedCreateInfoEXT} value to the {@code pNext} chain. */
     public VkImageViewCreateInfo pNext(VkImageViewSlicedCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkImageViewUsage2CreateInfoKHR} value to the {@code pNext} chain. */
+    public VkImageViewCreateInfo pNext(VkImageViewUsage2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageViewUsageCreateInfo} value to the {@code pNext} chain. */
     public VkImageViewCreateInfo pNext(VkImageViewUsageCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageViewUsageCreateInfoKHR} value to the {@code pNext} chain. */
@@ -265,25 +270,6 @@ public class VkImageViewCreateInfo extends Struct<VkImageViewCreateInfo> impleme
     public static VkImageViewCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkImageViewCreateInfo mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkImageViewCreateInfo callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkImageViewCreateInfo mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkImageViewCreateInfo callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkImageViewCreateInfo.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkImageViewCreateInfo.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkImageViewCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkImageViewCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkImageViewCreateInfo} instance allocated on the specified {@link MemoryStack}.
@@ -441,6 +427,8 @@ public class VkImageViewCreateInfo extends Struct<VkImageViewCreateInfo> impleme
         public VkImageViewCreateInfo.Buffer pNext(VkImageViewSampleWeightCreateInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageViewSlicedCreateInfoEXT} value to the {@code pNext} chain. */
         public VkImageViewCreateInfo.Buffer pNext(VkImageViewSlicedCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkImageViewUsage2CreateInfoKHR} value to the {@code pNext} chain. */
+        public VkImageViewCreateInfo.Buffer pNext(VkImageViewUsage2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageViewUsageCreateInfo} value to the {@code pNext} chain. */
         public VkImageViewCreateInfo.Buffer pNext(VkImageViewUsageCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageViewUsageCreateInfoKHR} value to the {@code pNext} chain. */

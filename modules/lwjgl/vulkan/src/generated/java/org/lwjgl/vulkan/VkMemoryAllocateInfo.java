@@ -133,6 +133,8 @@ public class VkMemoryAllocateInfo extends Struct<VkMemoryAllocateInfo> implement
     public VkMemoryAllocateInfo pNext(VkMemoryDedicatedAllocateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMemoryDedicatedAllocateInfoKHR} value to the {@code pNext} chain. */
     public VkMemoryAllocateInfo pNext(VkMemoryDedicatedAllocateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkMemoryDedicatedAllocateInfoTensorARM} value to the {@code pNext} chain. */
+    public VkMemoryAllocateInfo pNext(VkMemoryDedicatedAllocateInfoTensorARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMemoryOpaqueCaptureAddressAllocateInfo} value to the {@code pNext} chain. */
     public VkMemoryAllocateInfo pNext(VkMemoryOpaqueCaptureAddressAllocateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMemoryOpaqueCaptureAddressAllocateInfoKHR} value to the {@code pNext} chain. */
@@ -241,25 +243,6 @@ public class VkMemoryAllocateInfo extends Struct<VkMemoryAllocateInfo> implement
     public static VkMemoryAllocateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkMemoryAllocateInfo mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkMemoryAllocateInfo callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkMemoryAllocateInfo mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkMemoryAllocateInfo callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkMemoryAllocateInfo.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkMemoryAllocateInfo.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkMemoryAllocateInfo.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkMemoryAllocateInfo.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkMemoryAllocateInfo} instance allocated on the specified {@link MemoryStack}.
@@ -417,6 +400,8 @@ public class VkMemoryAllocateInfo extends Struct<VkMemoryAllocateInfo> implement
         public VkMemoryAllocateInfo.Buffer pNext(VkMemoryDedicatedAllocateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMemoryDedicatedAllocateInfoKHR} value to the {@code pNext} chain. */
         public VkMemoryAllocateInfo.Buffer pNext(VkMemoryDedicatedAllocateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkMemoryDedicatedAllocateInfoTensorARM} value to the {@code pNext} chain. */
+        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryDedicatedAllocateInfoTensorARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMemoryOpaqueCaptureAddressAllocateInfo} value to the {@code pNext} chain. */
         public VkMemoryAllocateInfo.Buffer pNext(VkMemoryOpaqueCaptureAddressAllocateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMemoryOpaqueCaptureAddressAllocateInfoKHR} value to the {@code pNext} chain. */

@@ -11,7 +11,7 @@ typedef void (APIENTRY *glBlendFuncSeparateEXTPROC) (jint, jint, jint, jint);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTBlendFuncSeparate_glBlendFuncSeparateEXT(JNIEnv *__env, jclass clazz, jint sfactorRGB, jint dfactorRGB, jint sfactorAlpha, jint dfactorAlpha) {
-    glBlendFuncSeparateEXTPROC glBlendFuncSeparateEXT = (glBlendFuncSeparateEXTPROC)tlsGetFunction(1498);
+    glBlendFuncSeparateEXTPROC glBlendFuncSeparateEXT = (glBlendFuncSeparateEXTPROC)tlsGetFunction(1532);
     UNUSED_PARAM(clazz)
     glBlendFuncSeparateEXT(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha);
 }

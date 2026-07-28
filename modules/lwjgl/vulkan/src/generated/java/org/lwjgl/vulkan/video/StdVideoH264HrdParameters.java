@@ -332,7 +332,7 @@ public class StdVideoH264HrdParameters extends Struct<StdVideoH264HrdParameters>
     public static byte nbit_rate_scale(long struct) { return memGetByte(struct + StdVideoH264HrdParameters.BIT_RATE_SCALE); }
     /** Unsafe version of {@link #cpb_size_scale}. */
     public static byte ncpb_size_scale(long struct) { return memGetByte(struct + StdVideoH264HrdParameters.CPB_SIZE_SCALE); }
-    public static byte nreserved1(long struct) { return memGetByte(struct + StdVideoH264HrdParameters.RESERVED1); }
+    static byte nreserved1(long struct) { return memGetByte(struct + StdVideoH264HrdParameters.RESERVED1); }
     /** Unsafe version of {@link #bit_rate_value_minus1}. */
     public static IntBuffer nbit_rate_value_minus1(long struct) { return memIntBuffer(struct + StdVideoH264HrdParameters.BIT_RATE_VALUE_MINUS1, STD_VIDEO_H264_CPB_CNT_LIST_SIZE); }
     /** Unsafe version of {@link #bit_rate_value_minus1(int) bit_rate_value_minus1}. */
@@ -366,7 +366,7 @@ public class StdVideoH264HrdParameters extends Struct<StdVideoH264HrdParameters>
     public static void nbit_rate_scale(long struct, byte value) { memPutByte(struct + StdVideoH264HrdParameters.BIT_RATE_SCALE, value); }
     /** Unsafe version of {@link #cpb_size_scale(byte) cpb_size_scale}. */
     public static void ncpb_size_scale(long struct, byte value) { memPutByte(struct + StdVideoH264HrdParameters.CPB_SIZE_SCALE, value); }
-    public static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoH264HrdParameters.RESERVED1, value); }
+    static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoH264HrdParameters.RESERVED1, value); }
     /** Unsafe version of {@link #bit_rate_value_minus1(IntBuffer) bit_rate_value_minus1}. */
     public static void nbit_rate_value_minus1(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, STD_VIDEO_H264_CPB_CNT_LIST_SIZE); }

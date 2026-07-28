@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkIndirectCommandsLayoutTokenEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkIndirectCommandsTokenTypeEXT type;
  *     {@link VkIndirectCommandsTokenDataEXT VkIndirectCommandsTokenDataEXT} data;
  *     uint32_t offset;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkIndirectCommandsLayoutTokenEXT extends Struct<VkIndirectCommandsLayoutTokenEXT> implements NativeResource {
 
@@ -42,6 +42,8 @@ public class VkIndirectCommandsLayoutTokenEXT extends Struct<VkIndirectCommandsL
         OFFSET;
 
     static {
+        VkIndirectCommandsTokenDataEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -103,6 +105,8 @@ public class VkIndirectCommandsLayoutTokenEXT extends Struct<VkIndirectCommandsL
     public VkIndirectCommandsLayoutTokenEXT sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkIndirectCommandsLayoutTokenEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkPushConstantBankInfoNV} value to the {@code pNext} chain. */
+    public VkIndirectCommandsLayoutTokenEXT pNext(VkPushConstantBankInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code type} field. */
     public VkIndirectCommandsLayoutTokenEXT type(@NativeType("VkIndirectCommandsTokenTypeEXT") int value) { ntype(address(), value); return this; }
     /** Copies the specified {@link VkIndirectCommandsTokenDataEXT} to the {@code data} field. */
@@ -338,6 +342,8 @@ public class VkIndirectCommandsLayoutTokenEXT extends Struct<VkIndirectCommandsL
         public VkIndirectCommandsLayoutTokenEXT.Buffer sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkIndirectCommandsLayoutTokenEXT.Buffer pNext(@NativeType("void const *") long value) { VkIndirectCommandsLayoutTokenEXT.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkPushConstantBankInfoNV} value to the {@code pNext} chain. */
+        public VkIndirectCommandsLayoutTokenEXT.Buffer pNext(VkPushConstantBankInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code type} field. */
         public VkIndirectCommandsLayoutTokenEXT.Buffer type(@NativeType("VkIndirectCommandsTokenTypeEXT") int value) { VkIndirectCommandsLayoutTokenEXT.ntype(address(), value); return this; }
         /** Copies the specified {@link VkIndirectCommandsTokenDataEXT} to the {@code data} field. */

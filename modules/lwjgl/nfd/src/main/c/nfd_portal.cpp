@@ -36,6 +36,13 @@ know that we appended an extension, so they will not check or whitelist the corr
 NFD_APPEND_EXTENSION is not recommended for portals.
 */
 
+/*
+Define NFD_CASE_SENSITIVE_FILTER if you want file filters to be case-sensitive.  The default
+is case-insensitive.  While Linux uses a case-sensitive filesystem and is designed for
+case-sensitive file extensions, perhaps in the vast majority of cases users actually expect the file
+filters to be case-insensitive.
+*/
+
 namespace {
 
 template <typename T = void>
@@ -123,6 +130,27 @@ T* reverse_copy(const T* begin, const T* end, T* out) {
     }
     return out;
 }
+
+#ifndef NFD_CASE_SENSITIVE_FILTER
+nfdnchar_t* emit_case_insensitive_glob(const nfdnchar_t* begin,
+                                       const nfdnchar_t* end,
+                                       nfdnchar_t* out) {
+    // this code will only make regular Latin characters case-insensitive; other
+    // characters remain case sensitive
+    for (; begin != end; ++begin) {
+        if ((*begin >= 'A' && *begin <= 'Z') || (*begin >= 'a' && *begin <= 'z')) {
+            *out++ = '[';
+            *out++ = *begin;
+            // invert the case of the original character
+            *out++ = *begin ^ static_cast<nfdnchar_t>(0x20);
+            *out++ = ']';
+        } else {
+            *out++ = *begin;
+        }
+    }
+    return out;
+}
+#endif
 
 // Returns true if ch is in [0-9A-Za-z], false otherwise.
 bool IsHex(char ch) {
@@ -278,7 +306,7 @@ void AppendSingleFilter(DBusMessageIter& base_iter, const nfdnfilteritem_t& filt
     // count number of file extensions
     size_t sep = 1;
     for (const char* p = filter.spec; *p; ++p) {
-        if (*p == L',') {
+        if (*p == ',') {
             ++sep;
         }
     }
@@ -316,13 +344,25 @@ void AppendSingleFilter(DBusMessageIter& base_iter, const nfdnfilteritem_t& filt
             do {
                 ++extn_end;
             } while (*extn_end != ',' && *extn_end != '\0');
-            char* buf = static_cast<char*>(alloca(2 + (extn_end - extn_begin) + 1));
-            char* buf_end = buf;
-            *buf_end++ = '*';
-            *buf_end++ = '.';
-            buf_end = copy(extn_begin, extn_end, buf_end);
-            *buf_end = '\0';
-            dbus_message_iter_append_basic(&filter_sublist_struct_iter, DBUS_TYPE_STRING, &buf);
+            {
+#ifdef NFD_CASE_SENSITIVE_FILTER
+                char* buf = static_cast<char*>(alloca(2 + (extn_end - extn_begin) + 1));
+                char* buf_end = buf;
+                *buf_end++ = '*';
+                *buf_end++ = '.';
+                buf_end = copy(extn_begin, extn_end, buf_end);
+                *buf_end = '\0';
+                dbus_message_iter_append_basic(&filter_sublist_struct_iter, DBUS_TYPE_STRING, &buf);
+#else
+                char* buf = static_cast<char*>(alloca(2 + (extn_end - extn_begin) * 4 + 1));
+                char* buf_end = buf;
+                *buf_end++ = '*';
+                *buf_end++ = '.';
+                buf_end = emit_case_insensitive_glob(extn_begin, extn_end, buf_end);
+                *buf_end = '\0';
+                dbus_message_iter_append_basic(&filter_sublist_struct_iter, DBUS_TYPE_STRING, &buf);
+#endif
+            }
             dbus_message_iter_close_container(&filter_sublist_iter, &filter_sublist_struct_iter);
             if (*extn_end == '\0') {
                 break;
@@ -346,7 +386,7 @@ bool AppendSingleFilterCheckExtn(DBusMessageIter& base_iter,
     // count number of file extensions
     size_t sep = 1;
     for (const char* p = filter.spec; *p; ++p) {
-        if (*p == L',') {
+        if (*p == ',') {
             ++sep;
         }
     }
@@ -385,13 +425,25 @@ bool AppendSingleFilterCheckExtn(DBusMessageIter& base_iter,
             do {
                 ++extn_end;
             } while (*extn_end != ',' && *extn_end != '\0');
-            char* buf = static_cast<char*>(alloca(2 + (extn_end - extn_begin) + 1));
-            char* buf_end = buf;
-            *buf_end++ = '*';
-            *buf_end++ = '.';
-            buf_end = copy(extn_begin, extn_end, buf_end);
-            *buf_end = '\0';
-            dbus_message_iter_append_basic(&filter_sublist_struct_iter, DBUS_TYPE_STRING, &buf);
+            {
+#ifdef NFD_CASE_SENSITIVE_FILTER
+                char* buf = static_cast<char*>(alloca(2 + (extn_end - extn_begin) + 1));
+                char* buf_end = buf;
+                *buf_end++ = '*';
+                *buf_end++ = '.';
+                buf_end = copy(extn_begin, extn_end, buf_end);
+                *buf_end = '\0';
+                dbus_message_iter_append_basic(&filter_sublist_struct_iter, DBUS_TYPE_STRING, &buf);
+#else
+                char* buf = static_cast<char*>(alloca(2 + (extn_end - extn_begin) * 4 + 1));
+                char* buf_end = buf;
+                *buf_end++ = '*';
+                *buf_end++ = '.';
+                buf_end = emit_case_insensitive_glob(extn_begin, extn_end, buf_end);
+                *buf_end = '\0';
+                dbus_message_iter_append_basic(&filter_sublist_struct_iter, DBUS_TYPE_STRING, &buf);
+#endif
+            }
             dbus_message_iter_close_container(&filter_sublist_iter, &filter_sublist_struct_iter);
             if (!extn_matched) {
                 const char* match_extn_p;
@@ -495,8 +547,7 @@ void AppendSaveFileQueryDictEntryFilters(DBusMessageIter& sub_iter,
         if (defaultName) {
             const nfdnchar_t* p = defaultName;
             while (*p) ++p;
-            while (*--p != '.')
-                ;
+            while (*--p != '.');
             ++p;
             if (*p) extn = p;
         }
@@ -1106,8 +1157,7 @@ bool TryGetValidExtension(const char* extn,
     ++extn;
     if (*extn != '.') return false;
     trimmed_extn = extn;
-    for (++extn; *extn != '\0'; ++extn)
-        ;
+    for (++extn; *extn != '\0'; ++extn);
     ++extn;
     trimmed_extn_end = extn;
     return true;
@@ -1605,17 +1655,17 @@ nfdresult_t NFD_PickFolderN_With_Impl(nfdversion_t version,
     (void)version;
 
     {
-        dbus_uint32_t version;
-        const nfdresult_t res = NFD_DBus_GetVersion(version);
+        dbus_uint32_t portal_version;
+        const nfdresult_t res = NFD_DBus_GetVersion(portal_version);
         if (res != NFD_OKAY) {
             return res;
         }
-        if (version < 3) {
+        if (portal_version < 3) {
             NFDi_SetFormattedError(
                 "The xdg-desktop-portal installed on this system does not support a folder picker; "
                 "at least version 3 of the org.freedesktop.portal.FileChooser interface is "
                 "required but the installed interface version is %u.",
-                version);
+                portal_version);
             return NFD_ERROR;
         }
     }
@@ -1662,17 +1712,17 @@ nfdresult_t NFD_PickFolderMultipleN_With_Impl(nfdversion_t version,
     (void)version;
 
     {
-        dbus_uint32_t version;
-        const nfdresult_t res = NFD_DBus_GetVersion(version);
+        dbus_uint32_t portal_version;
+        const nfdresult_t res = NFD_DBus_GetVersion(portal_version);
         if (res != NFD_OKAY) {
             return res;
         }
-        if (version < 3) {
+        if (portal_version < 3) {
             NFDi_SetFormattedError(
                 "The xdg-desktop-portal installed on this system does not support a folder picker; "
                 "at least version 3 of the org.freedesktop.portal.FileChooser interface is "
                 "required but the installed interface version is %u.",
-                version);
+                portal_version);
             return NFD_ERROR;
         }
     }
@@ -1745,12 +1795,12 @@ nfdresult_t NFD_PathSet_GetPathU8(const nfdpathset_t* pathSet,
                                   nfdu8char_t** outPath)
     __attribute__((alias("NFD_PathSet_GetPathN")));
 
-void NFD_PathSet_FreePathN(nfdnchar_t* filePath) {
+void NFD_PathSet_FreePathN(const nfdnchar_t* filePath) {
     assert(filePath);
-    NFD_FreePathN(filePath);
+    NFD_FreePathN(const_cast<nfdnchar_t*>(filePath));
 }
 
-void NFD_PathSet_FreePathU8(nfdu8char_t* filePath)
+void NFD_PathSet_FreePathU8(const nfdu8char_t* filePath)
     __attribute__((alias("NFD_PathSet_FreePathN")));
 
 void NFD_PathSet_Free(const nfdpathset_t* pathSet) {

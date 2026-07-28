@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkClusterAccelerationStructureInputInfoNV {
  *     VkStructureType sType;
  *     void * pNext;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkClusterAccelerationStructureOpTypeNV opType;
  *     VkClusterAccelerationStructureOpModeNV opMode;
  *     {@link VkClusterAccelerationStructureOpInputNV VkClusterAccelerationStructureOpInputNV} opInput;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkClusterAccelerationStructureInputInfoNV extends Struct<VkClusterAccelerationStructureInputInfoNV> implements NativeResource {
 
@@ -46,6 +46,8 @@ public class VkClusterAccelerationStructureInputInfoNV extends Struct<VkClusterA
         OPINPUT;
 
     static {
+        VkClusterAccelerationStructureOpInputNV.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

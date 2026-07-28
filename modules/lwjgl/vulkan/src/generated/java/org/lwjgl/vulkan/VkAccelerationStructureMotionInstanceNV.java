@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkAccelerationStructureMotionInstanceNV {
  *     VkAccelerationStructureMotionInstanceTypeNV type;
  *     VkAccelerationStructureMotionInstanceFlagsNV flags;
  *     {@link VkAccelerationStructureMotionInstanceDataNV VkAccelerationStructureMotionInstanceDataNV} data;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkAccelerationStructureMotionInstanceNV extends Struct<VkAccelerationStructureMotionInstanceNV> implements NativeResource {
 
@@ -38,6 +38,8 @@ public class VkAccelerationStructureMotionInstanceNV extends Struct<VkAccelerati
         DATA;
 
     static {
+        VkAccelerationStructureMotionInstanceDataNV.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkImageCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t queueFamilyIndexCount;
  *     uint32_t const * pQueueFamilyIndices;
  *     VkImageLayout initialLayout;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkImageCreateInfo extends Struct<VkImageCreateInfo> implements NativeResource {
 
@@ -62,6 +62,8 @@ public class VkImageCreateInfo extends Struct<VkImageCreateInfo> implements Nati
         INITIALLAYOUT;
 
     static {
+        VkExtent3D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -173,6 +175,8 @@ public class VkImageCreateInfo extends Struct<VkImageCreateInfo> implements Nati
     public VkImageCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkImageCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkDataGraphOpticalFlowImageFormatInfoARM} value to the {@code pNext} chain. */
+    public VkImageCreateInfo pNext(VkDataGraphOpticalFlowImageFormatInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDedicatedAllocationImageCreateInfoNV} value to the {@code pNext} chain. */
     public VkImageCreateInfo pNext(VkDedicatedAllocationImageCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkExportMetalObjectCreateInfoEXT} value to the {@code pNext} chain. */
@@ -189,6 +193,8 @@ public class VkImageCreateInfo extends Struct<VkImageCreateInfo> implements Nati
     public VkImageCreateInfo pNext(VkImageAlignmentControlCreateInfoMESA value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageCompressionControlEXT} value to the {@code pNext} chain. */
     public VkImageCreateInfo pNext(VkImageCompressionControlEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkImageCreateFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+    public VkImageCreateInfo pNext(VkImageCreateFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageDrmFormatModifierExplicitCreateInfoEXT} value to the {@code pNext} chain. */
     public VkImageCreateInfo pNext(VkImageDrmFormatModifierExplicitCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageDrmFormatModifierListCreateInfoEXT} value to the {@code pNext} chain. */
@@ -197,16 +203,22 @@ public class VkImageCreateInfo extends Struct<VkImageCreateInfo> implements Nati
     public VkImageCreateInfo pNext(VkImageFormatListCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageFormatListCreateInfoKHR} value to the {@code pNext} chain. */
     public VkImageCreateInfo pNext(VkImageFormatListCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkImageStencilUsage2CreateInfoKHR} value to the {@code pNext} chain. */
+    public VkImageCreateInfo pNext(VkImageStencilUsage2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageStencilUsageCreateInfo} value to the {@code pNext} chain. */
     public VkImageCreateInfo pNext(VkImageStencilUsageCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageStencilUsageCreateInfoEXT} value to the {@code pNext} chain. */
     public VkImageCreateInfo pNext(VkImageStencilUsageCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageSwapchainCreateInfoKHR} value to the {@code pNext} chain. */
     public VkImageCreateInfo pNext(VkImageSwapchainCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkImageUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+    public VkImageCreateInfo pNext(VkImageUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImportMetalIOSurfaceInfoEXT} value to the {@code pNext} chain. */
     public VkImageCreateInfo pNext(VkImportMetalIOSurfaceInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImportMetalTextureInfoEXT} value to the {@code pNext} chain. */
     public VkImageCreateInfo pNext(VkImportMetalTextureInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkOpaqueCaptureDataCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkImageCreateInfo pNext(VkOpaqueCaptureDataCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT} value to the {@code pNext} chain. */
     public VkImageCreateInfo pNext(VkOpaqueCaptureDescriptorDataCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkOpticalFlowImageFormatInfoNV} value to the {@code pNext} chain. */
@@ -361,25 +373,6 @@ public class VkImageCreateInfo extends Struct<VkImageCreateInfo> implements Nati
     public static VkImageCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkImageCreateInfo mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkImageCreateInfo callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkImageCreateInfo mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkImageCreateInfo callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkImageCreateInfo.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkImageCreateInfo.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkImageCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkImageCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkImageCreateInfo} instance allocated on the specified {@link MemoryStack}.
@@ -577,6 +570,8 @@ public class VkImageCreateInfo extends Struct<VkImageCreateInfo> implements Nati
         public VkImageCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkImageCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkImageCreateInfo.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkDataGraphOpticalFlowImageFormatInfoARM} value to the {@code pNext} chain. */
+        public VkImageCreateInfo.Buffer pNext(VkDataGraphOpticalFlowImageFormatInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDedicatedAllocationImageCreateInfoNV} value to the {@code pNext} chain. */
         public VkImageCreateInfo.Buffer pNext(VkDedicatedAllocationImageCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkExportMetalObjectCreateInfoEXT} value to the {@code pNext} chain. */
@@ -593,6 +588,8 @@ public class VkImageCreateInfo extends Struct<VkImageCreateInfo> implements Nati
         public VkImageCreateInfo.Buffer pNext(VkImageAlignmentControlCreateInfoMESA value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageCompressionControlEXT} value to the {@code pNext} chain. */
         public VkImageCreateInfo.Buffer pNext(VkImageCompressionControlEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkImageCreateFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+        public VkImageCreateInfo.Buffer pNext(VkImageCreateFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageDrmFormatModifierExplicitCreateInfoEXT} value to the {@code pNext} chain. */
         public VkImageCreateInfo.Buffer pNext(VkImageDrmFormatModifierExplicitCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageDrmFormatModifierListCreateInfoEXT} value to the {@code pNext} chain. */
@@ -601,16 +598,22 @@ public class VkImageCreateInfo extends Struct<VkImageCreateInfo> implements Nati
         public VkImageCreateInfo.Buffer pNext(VkImageFormatListCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageFormatListCreateInfoKHR} value to the {@code pNext} chain. */
         public VkImageCreateInfo.Buffer pNext(VkImageFormatListCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkImageStencilUsage2CreateInfoKHR} value to the {@code pNext} chain. */
+        public VkImageCreateInfo.Buffer pNext(VkImageStencilUsage2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageStencilUsageCreateInfo} value to the {@code pNext} chain. */
         public VkImageCreateInfo.Buffer pNext(VkImageStencilUsageCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageStencilUsageCreateInfoEXT} value to the {@code pNext} chain. */
         public VkImageCreateInfo.Buffer pNext(VkImageStencilUsageCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageSwapchainCreateInfoKHR} value to the {@code pNext} chain. */
         public VkImageCreateInfo.Buffer pNext(VkImageSwapchainCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkImageUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+        public VkImageCreateInfo.Buffer pNext(VkImageUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImportMetalIOSurfaceInfoEXT} value to the {@code pNext} chain. */
         public VkImageCreateInfo.Buffer pNext(VkImportMetalIOSurfaceInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImportMetalTextureInfoEXT} value to the {@code pNext} chain. */
         public VkImageCreateInfo.Buffer pNext(VkImportMetalTextureInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkOpaqueCaptureDataCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkImageCreateInfo.Buffer pNext(VkOpaqueCaptureDataCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT} value to the {@code pNext} chain. */
         public VkImageCreateInfo.Buffer pNext(VkOpaqueCaptureDescriptorDataCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkOpticalFlowImageFormatInfoNV} value to the {@code pNext} chain. */

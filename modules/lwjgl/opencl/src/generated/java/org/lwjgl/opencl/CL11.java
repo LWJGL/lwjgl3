@@ -38,7 +38,7 @@ public class CL11 extends CL10 {
         CL_DEVICE_NATIVE_VECTOR_WIDTH_HALF    = 0x103C,
         CL_DEVICE_OPENCL_C_VERSION            = 0x103D;
 
-    public static final int CL_FP_SOFT_FLOAT = 1 << 6;
+    public static final long CL_FP_SOFT_FLOAT = 1L << 6;
 
     public static final int CL_CONTEXT_NUM_DEVICES = 0x1083;
 

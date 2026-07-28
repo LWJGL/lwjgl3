@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkRect2D {
  *     {@link VkOffset2D VkOffset2D} offset;
  *     {@link VkExtent2D VkExtent2D} extent;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkRect2D extends Struct<VkRect2D> implements NativeResource {
 
@@ -36,6 +36,9 @@ public class VkRect2D extends Struct<VkRect2D> implements NativeResource {
         EXTENT;
 
     static {
+        VkOffset2D.createSafe(NULL);
+        VkExtent2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(VkOffset2D.SIZEOF, VkOffset2D.ALIGNOF),
             __member(VkExtent2D.SIZEOF, VkExtent2D.ALIGNOF)
@@ -177,25 +180,6 @@ public class VkRect2D extends Struct<VkRect2D> implements NativeResource {
     public static VkRect2D.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkRect2D mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkRect2D callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkRect2D mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkRect2D callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkRect2D.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkRect2D.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkRect2D.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkRect2D.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkRect2D} instance allocated on the specified {@link MemoryStack}.

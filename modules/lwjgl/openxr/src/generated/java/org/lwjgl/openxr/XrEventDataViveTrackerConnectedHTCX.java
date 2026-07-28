@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrEventDataViveTrackerConnectedHTCX {
  *     XrStructureType type;
  *     void const * next;
  *     {@link XrViveTrackerPathsHTCX XrViveTrackerPathsHTCX} * paths;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrEventDataViveTrackerConnectedHTCX extends Struct<XrEventDataViveTrackerConnectedHTCX> implements NativeResource {
 

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct msghdr {
  *     void * msg_name;
  *     socklen_t msg_namelen;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void * msg_control;
  *     size_t msg_controllen;
  *     int msg_flags;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct msghdr")
 public class Msghdr extends Struct<Msghdr> implements NativeResource {

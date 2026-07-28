@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrBindingModificationsKHR {
  *     XrStructureType type;
  *     void const * next;
  *     uint32_t bindingModificationCount;
  *     {@link XrBindingModificationBaseHeaderKHR XrBindingModificationBaseHeaderKHR} const * const * bindingModifications;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrBindingModificationsKHR extends Struct<XrBindingModificationsKHR> implements NativeResource {
 

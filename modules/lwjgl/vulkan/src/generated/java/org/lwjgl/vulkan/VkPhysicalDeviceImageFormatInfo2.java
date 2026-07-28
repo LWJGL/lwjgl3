@@ -118,16 +118,24 @@ public class VkPhysicalDeviceImageFormatInfo2 extends Struct<VkPhysicalDeviceIma
     public VkPhysicalDeviceImageFormatInfo2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceImageFormatInfo2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkDataGraphOpticalFlowImageFormatInfoARM} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceImageFormatInfo2 pNext(VkDataGraphOpticalFlowImageFormatInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageCompressionControlEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageCompressionControlEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkImageCreateFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageCreateFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageFormatListCreateInfo} value to the {@code pNext} chain. */
     public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageFormatListCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageFormatListCreateInfoKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageFormatListCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkImageStencilUsage2CreateInfoKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageStencilUsage2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageStencilUsageCreateInfo} value to the {@code pNext} chain. */
     public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageStencilUsageCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageStencilUsageCreateInfoEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageStencilUsageCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkImageUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkOpticalFlowImageFormatInfoNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceImageFormatInfo2 pNext(VkOpticalFlowImageFormatInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceExternalImageFormatInfo} value to the {@code pNext} chain. */
@@ -254,25 +262,6 @@ public class VkPhysicalDeviceImageFormatInfo2 extends Struct<VkPhysicalDeviceIma
     public static VkPhysicalDeviceImageFormatInfo2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceImageFormatInfo2 mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceImageFormatInfo2 callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceImageFormatInfo2 mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceImageFormatInfo2 callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceImageFormatInfo2.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceImageFormatInfo2.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceImageFormatInfo2.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceImageFormatInfo2.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkPhysicalDeviceImageFormatInfo2} instance allocated on the specified {@link MemoryStack}.
@@ -415,16 +404,24 @@ public class VkPhysicalDeviceImageFormatInfo2 extends Struct<VkPhysicalDeviceIma
         public VkPhysicalDeviceImageFormatInfo2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceImageFormatInfo2.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkDataGraphOpticalFlowImageFormatInfoARM} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkDataGraphOpticalFlowImageFormatInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageCompressionControlEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageCompressionControlEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkImageCreateFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageCreateFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageFormatListCreateInfo} value to the {@code pNext} chain. */
         public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageFormatListCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageFormatListCreateInfoKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageFormatListCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkImageStencilUsage2CreateInfoKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageStencilUsage2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageStencilUsageCreateInfo} value to the {@code pNext} chain. */
         public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageStencilUsageCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageStencilUsageCreateInfoEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageStencilUsageCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkImageUsageFlags2CreateInfoKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkOpticalFlowImageFormatInfoNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkOpticalFlowImageFormatInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceExternalImageFormatInfo} value to the {@code pNext} chain. */

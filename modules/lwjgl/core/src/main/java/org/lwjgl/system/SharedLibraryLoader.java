@@ -303,14 +303,22 @@ final class SharedLibraryLoader {
             Files.delete(testFile);
 
             if (load != null) {
-                // We have write access, the JVM has locked the file, but System.load can still fail. There are at least two known cases:
+                // We have write access, the JVM has locked the file, but System.load can still fail. There are at least three known cases:
                 //
                 // 1. On Windows, when the path contains unicode characters. See JDK-8195129 for details.
-                // 2. When the target directory is mounted on a volume protected by `noexec`. This is common practice on Linux for the /tmp directory.
+                // 2. On Linux, when the target directory is mounted on a volume protected by `noexec`. This is common practice.
+                // 3. On Linux, when there is a GLIBC incompatibility.
                 //
                 // Test for this here and try other paths if it fails.
                 try (FileChannel ignored = extract(file, resource)) {
-                    load.accept(file.toAbsolutePath().toString());
+                    try {
+                        load.accept(file.toAbsolutePath().toString());
+                    } catch (Throwable t) {
+                        if (Configuration.DEBUG_LOADER.get(false)) {
+                            t.printStackTrace(DEBUG_STREAM);
+                        }
+                        throw t;
+                    }
                 }
                 checkedLoad = true;
             }

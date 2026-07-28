@@ -20,45 +20,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkSwapchainPresentScalingCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
- *     VkPresentScalingFlagsEXT scalingBehavior;
- *     VkPresentGravityFlagsEXT presentGravityX;
- *     VkPresentGravityFlagsEXT presentGravityY;
+ *     VkPresentScalingFlagsKHR scalingBehavior;
+ *     VkPresentGravityFlagsKHR presentGravityX;
+ *     VkPresentGravityFlagsKHR presentGravityY;
  * }}</pre>
  */
-public class VkSwapchainPresentScalingCreateInfoEXT extends Struct<VkSwapchainPresentScalingCreateInfoEXT> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        SCALINGBEHAVIOR,
-        PRESENTGRAVITYX,
-        PRESENTGRAVITYY;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(4),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        SCALINGBEHAVIOR = layout.offsetof(2);
-        PRESENTGRAVITYX = layout.offsetof(3);
-        PRESENTGRAVITYY = layout.offsetof(4);
-    }
+public class VkSwapchainPresentScalingCreateInfoEXT extends VkSwapchainPresentScalingCreateInfoKHR {
 
     protected VkSwapchainPresentScalingCreateInfoEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -76,42 +43,30 @@ public class VkSwapchainPresentScalingCreateInfoEXT extends Struct<VkSwapchainPr
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSwapchainPresentScalingCreateInfoEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** @return the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** @return the value of the {@code scalingBehavior} field. */
-    @NativeType("VkPresentScalingFlagsEXT")
-    public int scalingBehavior() { return nscalingBehavior(address()); }
-    /** @return the value of the {@code presentGravityX} field. */
-    @NativeType("VkPresentGravityFlagsEXT")
-    public int presentGravityX() { return npresentGravityX(address()); }
-    /** @return the value of the {@code presentGravityY} field. */
-    @NativeType("VkPresentGravityFlagsEXT")
-    public int presentGravityY() { return npresentGravityY(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkSwapchainPresentScalingCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_SCALING_CREATE_INFO_EXT STRUCTURE_TYPE_SWAPCHAIN_PRESENT_SCALING_CREATE_INFO_EXT} value to the {@code sType} field. */
-    public VkSwapchainPresentScalingCreateInfoEXT sType$Default() { return sType(EXTSwapchainMaintenance1.VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_SCALING_CREATE_INFO_EXT); }
+    /** Sets the {@link KHRSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_SCALING_CREATE_INFO_KHR STRUCTURE_TYPE_SWAPCHAIN_PRESENT_SCALING_CREATE_INFO_KHR} value to the {@code sType} field. */
+    @Override
+    public VkSwapchainPresentScalingCreateInfoEXT sType$Default() { return sType(KHRSwapchainMaintenance1.VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_SCALING_CREATE_INFO_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkSwapchainPresentScalingCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code scalingBehavior} field. */
-    public VkSwapchainPresentScalingCreateInfoEXT scalingBehavior(@NativeType("VkPresentScalingFlagsEXT") int value) { nscalingBehavior(address(), value); return this; }
+    @Override
+    public VkSwapchainPresentScalingCreateInfoEXT scalingBehavior(@NativeType("VkPresentScalingFlagsKHR") int value) { nscalingBehavior(address(), value); return this; }
     /** Sets the specified value to the {@code presentGravityX} field. */
-    public VkSwapchainPresentScalingCreateInfoEXT presentGravityX(@NativeType("VkPresentGravityFlagsEXT") int value) { npresentGravityX(address(), value); return this; }
+    @Override
+    public VkSwapchainPresentScalingCreateInfoEXT presentGravityX(@NativeType("VkPresentGravityFlagsKHR") int value) { npresentGravityX(address(), value); return this; }
     /** Sets the specified value to the {@code presentGravityY} field. */
-    public VkSwapchainPresentScalingCreateInfoEXT presentGravityY(@NativeType("VkPresentGravityFlagsEXT") int value) { npresentGravityY(address(), value); return this; }
+    @Override
+    public VkSwapchainPresentScalingCreateInfoEXT presentGravityY(@NativeType("VkPresentGravityFlagsKHR") int value) { npresentGravityY(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkSwapchainPresentScalingCreateInfoEXT set(
         int sType,
         long pNext,
@@ -251,32 +206,8 @@ public class VkSwapchainPresentScalingCreateInfoEXT extends Struct<VkSwapchainPr
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkSwapchainPresentScalingCreateInfoEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkSwapchainPresentScalingCreateInfoEXT.PNEXT); }
-    /** Unsafe version of {@link #scalingBehavior}. */
-    public static int nscalingBehavior(long struct) { return memGetInt(struct + VkSwapchainPresentScalingCreateInfoEXT.SCALINGBEHAVIOR); }
-    /** Unsafe version of {@link #presentGravityX}. */
-    public static int npresentGravityX(long struct) { return memGetInt(struct + VkSwapchainPresentScalingCreateInfoEXT.PRESENTGRAVITYX); }
-    /** Unsafe version of {@link #presentGravityY}. */
-    public static int npresentGravityY(long struct) { return memGetInt(struct + VkSwapchainPresentScalingCreateInfoEXT.PRESENTGRAVITYY); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkSwapchainPresentScalingCreateInfoEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkSwapchainPresentScalingCreateInfoEXT.PNEXT, value); }
-    /** Unsafe version of {@link #scalingBehavior(int) scalingBehavior}. */
-    public static void nscalingBehavior(long struct, int value) { memPutInt(struct + VkSwapchainPresentScalingCreateInfoEXT.SCALINGBEHAVIOR, value); }
-    /** Unsafe version of {@link #presentGravityX(int) presentGravityX}. */
-    public static void npresentGravityX(long struct, int value) { memPutInt(struct + VkSwapchainPresentScalingCreateInfoEXT.PRESENTGRAVITYX, value); }
-    /** Unsafe version of {@link #presentGravityY(int) presentGravityY}. */
-    public static void npresentGravityY(long struct, int value) { memPutInt(struct + VkSwapchainPresentScalingCreateInfoEXT.PRESENTGRAVITYY, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkSwapchainPresentScalingCreateInfoEXT} structs. */
-    public static class Buffer extends StructBuffer<VkSwapchainPresentScalingCreateInfoEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkSwapchainPresentScalingCreateInfoKHR.Buffer {
 
         private static final VkSwapchainPresentScalingCreateInfoEXT ELEMENT_FACTORY = VkSwapchainPresentScalingCreateInfoEXT.create(-1L);
 
@@ -290,7 +221,7 @@ public class VkSwapchainPresentScalingCreateInfoEXT extends Struct<VkSwapchainPr
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -316,34 +247,24 @@ public class VkSwapchainPresentScalingCreateInfoEXT extends Struct<VkSwapchainPr
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkSwapchainPresentScalingCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkSwapchainPresentScalingCreateInfoEXT.npNext(address()); }
-        /** @return the value of the {@code scalingBehavior} field. */
-        @NativeType("VkPresentScalingFlagsEXT")
-        public int scalingBehavior() { return VkSwapchainPresentScalingCreateInfoEXT.nscalingBehavior(address()); }
-        /** @return the value of the {@code presentGravityX} field. */
-        @NativeType("VkPresentGravityFlagsEXT")
-        public int presentGravityX() { return VkSwapchainPresentScalingCreateInfoEXT.npresentGravityX(address()); }
-        /** @return the value of the {@code presentGravityY} field. */
-        @NativeType("VkPresentGravityFlagsEXT")
-        public int presentGravityY() { return VkSwapchainPresentScalingCreateInfoEXT.npresentGravityY(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkSwapchainPresentScalingCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSwapchainPresentScalingCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_SCALING_CREATE_INFO_EXT STRUCTURE_TYPE_SWAPCHAIN_PRESENT_SCALING_CREATE_INFO_EXT} value to the {@code sType} field. */
-        public VkSwapchainPresentScalingCreateInfoEXT.Buffer sType$Default() { return sType(EXTSwapchainMaintenance1.VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_SCALING_CREATE_INFO_EXT); }
+        /** Sets the {@link KHRSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_SCALING_CREATE_INFO_KHR STRUCTURE_TYPE_SWAPCHAIN_PRESENT_SCALING_CREATE_INFO_KHR} value to the {@code sType} field. */
+        @Override
+        public VkSwapchainPresentScalingCreateInfoEXT.Buffer sType$Default() { return sType(KHRSwapchainMaintenance1.VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_SCALING_CREATE_INFO_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkSwapchainPresentScalingCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkSwapchainPresentScalingCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code scalingBehavior} field. */
-        public VkSwapchainPresentScalingCreateInfoEXT.Buffer scalingBehavior(@NativeType("VkPresentScalingFlagsEXT") int value) { VkSwapchainPresentScalingCreateInfoEXT.nscalingBehavior(address(), value); return this; }
+        @Override
+        public VkSwapchainPresentScalingCreateInfoEXT.Buffer scalingBehavior(@NativeType("VkPresentScalingFlagsKHR") int value) { VkSwapchainPresentScalingCreateInfoEXT.nscalingBehavior(address(), value); return this; }
         /** Sets the specified value to the {@code presentGravityX} field. */
-        public VkSwapchainPresentScalingCreateInfoEXT.Buffer presentGravityX(@NativeType("VkPresentGravityFlagsEXT") int value) { VkSwapchainPresentScalingCreateInfoEXT.npresentGravityX(address(), value); return this; }
+        @Override
+        public VkSwapchainPresentScalingCreateInfoEXT.Buffer presentGravityX(@NativeType("VkPresentGravityFlagsKHR") int value) { VkSwapchainPresentScalingCreateInfoEXT.npresentGravityX(address(), value); return this; }
         /** Sets the specified value to the {@code presentGravityY} field. */
-        public VkSwapchainPresentScalingCreateInfoEXT.Buffer presentGravityY(@NativeType("VkPresentGravityFlagsEXT") int value) { VkSwapchainPresentScalingCreateInfoEXT.npresentGravityY(address(), value); return this; }
+        @Override
+        public VkSwapchainPresentScalingCreateInfoEXT.Buffer presentGravityY(@NativeType("VkPresentGravityFlagsKHR") int value) { VkSwapchainPresentScalingCreateInfoEXT.npresentGravityY(address(), value); return this; }
 
     }
 

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPipelineColorBlendStateCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t attachmentCount;
  *     {@link VkPipelineColorBlendAttachmentState VkPipelineColorBlendAttachmentState} const * pAttachments;
  *     float blendConstants[4];
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPipelineColorBlendStateCreateInfo extends Struct<VkPipelineColorBlendStateCreateInfo> implements NativeResource {
 
@@ -252,25 +252,6 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct<VkPipelineColorB
     public static VkPipelineColorBlendStateCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPipelineColorBlendStateCreateInfo mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPipelineColorBlendStateCreateInfo callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPipelineColorBlendStateCreateInfo mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPipelineColorBlendStateCreateInfo callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPipelineColorBlendStateCreateInfo.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPipelineColorBlendStateCreateInfo.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPipelineColorBlendStateCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPipelineColorBlendStateCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkPipelineColorBlendStateCreateInfo} instance allocated on the specified {@link MemoryStack}.

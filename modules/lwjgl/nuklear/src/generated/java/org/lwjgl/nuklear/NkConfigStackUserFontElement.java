@@ -15,11 +15,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_config_stack_user_font_element {
  *     {@link NkUserFont struct nk_user_font} ** pValues;
  *     {@link NkUserFont struct nk_user_font} * old_value;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_config_stack_user_font_element")
 class NkConfigStackUserFontElement extends Struct<NkConfigStackUserFontElement> {

@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrShareSpacesRecipientGroupsMETA {
  *     XrStructureType type;
  *     void const * next;
  *     uint32_t groupCount;
  *     {@link XrUuid XrUuid} * groups;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrShareSpacesRecipientGroupsMETA extends Struct<XrShareSpacesRecipientGroupsMETA> implements NativeResource {
 

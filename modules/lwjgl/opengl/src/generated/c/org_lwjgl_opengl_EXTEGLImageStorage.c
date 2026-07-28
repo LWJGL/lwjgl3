@@ -12,7 +12,7 @@ typedef void (APIENTRY *glEGLImageTargetTextureStorageEXTPROC) (jint, uintptr_t,
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTEGLImageStorage_nglEGLImageTargetTexStorageEXT__IJJ(JNIEnv *__env, jclass clazz, jint target, jlong imageAddress, jlong attrib_listAddress) {
-    glEGLImageTargetTexStorageEXTPROC glEGLImageTargetTexStorageEXT = (glEGLImageTargetTexStorageEXTPROC)tlsGetFunction(1728);
+    glEGLImageTargetTexStorageEXTPROC glEGLImageTargetTexStorageEXT = (glEGLImageTargetTexStorageEXTPROC)tlsGetFunction(1762);
     uintptr_t image = (uintptr_t)imageAddress;
     uintptr_t attrib_list = (uintptr_t)attrib_listAddress;
     UNUSED_PARAM(clazz)
@@ -20,7 +20,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTEGLImageStorage_nglEGLImageTarge
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTEGLImageStorage_nglEGLImageTargetTextureStorageEXT__IJJ(JNIEnv *__env, jclass clazz, jint texture, jlong imageAddress, jlong attrib_listAddress) {
-    glEGLImageTargetTextureStorageEXTPROC glEGLImageTargetTextureStorageEXT = (glEGLImageTargetTextureStorageEXTPROC)tlsGetFunction(1729);
+    glEGLImageTargetTextureStorageEXTPROC glEGLImageTargetTextureStorageEXT = (glEGLImageTargetTextureStorageEXTPROC)tlsGetFunction(1763);
     uintptr_t image = (uintptr_t)imageAddress;
     uintptr_t attrib_list = (uintptr_t)attrib_listAddress;
     UNUSED_PARAM(clazz)

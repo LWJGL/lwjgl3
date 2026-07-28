@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiNode {
  *     {@link AIString struct aiString} mName;
  *     {@link AIMatrix4x4 struct aiMatrix4x4} mTransformation;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int mNumMeshes;
  *     unsigned int * mMeshes;
  *     {@link AIMetaData struct aiMetadata} * mMetadata;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiNode")
 public class AINode extends Struct<AINode> implements NativeResource {
@@ -50,6 +50,9 @@ public class AINode extends Struct<AINode> implements NativeResource {
         MMETADATA;
 
     static {
+        AIString.createSafe(NULL);
+        AIMatrix4x4.createSafe(NULL);
+
         Layout layout = __struct(
             __member(AIString.SIZEOF, AIString.ALIGNOF),
             __member(AIMatrix4x4.SIZEOF, AIMatrix4x4.ALIGNOF),
@@ -239,25 +242,6 @@ public class AINode extends Struct<AINode> implements NativeResource {
     public static AINode.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static AINode mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static AINode callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static AINode mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static AINode callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static AINode.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static AINode.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static AINode.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static AINode.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code AINode} instance allocated on the specified {@link MemoryStack}.

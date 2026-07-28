@@ -17,12 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDeviceBufferMemoryRequirements {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link VkBufferCreateInfo VkBufferCreateInfo} const * pCreateInfo;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDeviceBufferMemoryRequirements extends Struct<VkDeviceBufferMemoryRequirements> implements NativeResource {
 

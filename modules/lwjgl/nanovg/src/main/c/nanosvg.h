@@ -106,6 +106,12 @@ enum NSVGflags {
 	NSVG_FLAGS_VISIBLE = 0x01
 };
 
+enum NSVGpaintOrder {
+	NSVG_PAINT_FILL = 0x00,
+	NSVG_PAINT_MARKERS = 0x01,
+	NSVG_PAINT_STROKE = 0x02,
+};
+
 typedef struct NSVGgradientStop {
 	unsigned int color;
 	float offset;
@@ -150,6 +156,7 @@ typedef struct NSVGshape
 	char strokeLineCap;			// Stroke cap type.
 	float miterLimit;			// Miter limit
 	char fillRule;				// Fill rule, see NSVGfillRule.
+    unsigned char paintOrder;	// Encoded paint order (3×2-bit fields) see NSVGpaintOrder
 	unsigned char flags;		// Logical or of NSVG_FLAGS_* flags
 	float bounds[4];			// Tight bounding box of the shape [minx,miny,maxx,maxy].
 	char fillGradient[64];		// Optional 'id' of fill gradient
@@ -438,6 +445,7 @@ typedef struct NSVGattrib
 	char hasFill;
 	char hasStroke;
 	char visible;
+    unsigned char paintOrder;
 } NSVGattrib;
 
 typedef struct NSVGparser
@@ -615,6 +623,10 @@ static void nsvg__curveBounds(float* bounds, float* curve)
 	}
 }
 
+static unsigned char nsvg__encodePaintOrder(enum NSVGpaintOrder a, enum NSVGpaintOrder b, enum NSVGpaintOrder c) {
+    return (a & 0x03) | ((b & 0x03) << 2) | ((c & 0x03) << 4);
+}
+
 static NSVGparser* nsvg__createParser(void)
 {
 	NSVGparser* p;
@@ -642,6 +654,7 @@ static NSVGparser* nsvg__createParser(void)
 	p->attr[0].fillRule = NSVG_FILLRULE_NONZERO;
 	p->attr[0].hasFill = 1;
 	p->attr[0].visible = 1;
+    p->attr[0].paintOrder = nsvg__encodePaintOrder(NSVG_PAINT_FILL, NSVG_PAINT_STROKE, NSVG_PAINT_MARKERS);
 
 	return p;
 
@@ -973,6 +986,7 @@ static void nsvg__addShape(NSVGparser* p)
 	shape->miterLimit = attr->miterLimit;
 	shape->fillRule = attr->fillRule;
 	shape->opacity = attr->opacity;
+    shape->paintOrder = attr->paintOrder;
 
 	shape->paths = p->plist;
 	p->plist = NULL;
@@ -1787,6 +1801,24 @@ static char nsvg__parseFillRule(const char* str)
 	return NSVG_FILLRULE_NONZERO;
 }
 
+static unsigned char nsvg__parsePaintOrder(const char* str)
+{
+	if (strcmp(str, "normal") == 0 || strcmp(str, "fill stroke markers") == 0)
+		return nsvg__encodePaintOrder(NSVG_PAINT_FILL, NSVG_PAINT_STROKE, NSVG_PAINT_MARKERS);
+	else if (strcmp(str, "fill markers stroke") == 0)
+		return nsvg__encodePaintOrder(NSVG_PAINT_FILL, NSVG_PAINT_MARKERS, NSVG_PAINT_STROKE);
+	else if (strcmp(str, "markers fill stroke") == 0)
+		return nsvg__encodePaintOrder(NSVG_PAINT_MARKERS, NSVG_PAINT_FILL, NSVG_PAINT_STROKE);
+	else if (strcmp(str, "markers stroke fill") == 0)
+		return nsvg__encodePaintOrder(NSVG_PAINT_MARKERS, NSVG_PAINT_STROKE, NSVG_PAINT_FILL);
+	else if (strcmp(str, "stroke fill markers") == 0)
+		return nsvg__encodePaintOrder(NSVG_PAINT_STROKE, NSVG_PAINT_FILL, NSVG_PAINT_MARKERS);
+	else if (strcmp(str, "stroke markers fill") == 0)
+		return nsvg__encodePaintOrder(NSVG_PAINT_STROKE, NSVG_PAINT_MARKERS, NSVG_PAINT_FILL);
+	// TODO: handle inherit.
+	return nsvg__encodePaintOrder(NSVG_PAINT_FILL, NSVG_PAINT_STROKE, NSVG_PAINT_MARKERS);
+}
+
 static const char* nsvg__getNextDashItem(const char* s, char* it)
 {
 	int n = 0;
@@ -1909,6 +1941,8 @@ static int nsvg__parseAttr(NSVGparser* p, const char* name, const char* value)
 		attr->stopOpacity = nsvg__parseOpacity(value);
 	} else if (strcmp(name, "offset") == 0) {
 		attr->stopOffset = nsvg__parseCoordinate(p, value, 0.0f, 1.0f);
+	} else if (strcmp(name, "paint-order") == 0) {
+		attr->paintOrder = nsvg__parsePaintOrder(value);
 	} else if (strcmp(name, "id") == 0) {
 		strncpy(attr->id, value, 63);
 		attr->id[63] = '\0';

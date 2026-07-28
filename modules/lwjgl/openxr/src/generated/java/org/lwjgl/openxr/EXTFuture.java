@@ -12,7 +12,7 @@ import static org.lwjgl.system.JNI.*;
 
 public class EXTFuture {
 
-    public static final int XR_EXT_future_SPEC_VERSION = 1;
+    public static final int XR_EXT_future_SPEC_VERSION = 2;
 
     public static final String XR_EXT_FUTURE_EXTENSION_NAME = "XR_EXT_future";
 

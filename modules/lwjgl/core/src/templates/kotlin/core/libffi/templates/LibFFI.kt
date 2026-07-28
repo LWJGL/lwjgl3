@@ -10,7 +10,7 @@ import core.libffi.*
 fun LibFFI() = "LibFFI".nativeClass(Module.CORE_LIBFFI, prefix = "FFI_") {
     nativeDirective("""
 DISABLE_WARNINGS()
-#define FFI_BUILDING
+#define FFI_STATIC_BUILD
 #include "ffi.h"
 ENABLE_WARNINGS()
 typedef void (*FFI_FN_TYPE)(void);
@@ -53,6 +53,9 @@ typedef void (*FFI_CLOSURE_FUN)(ffi_cif*, void*, void**, void*);
 #define FFI_VFP -1
 #endif""")
 
+    StringConstant("VERSION_STRING".."3.6.0")
+    IntConstant("VERSION_NUMBER"..30600)
+
     ShortConstant(
         "TYPE_VOID".."0",
         "TYPE_INT".."1",
@@ -68,7 +71,10 @@ typedef void (*FFI_CLOSURE_FUN)(ffi_cif*, void*, void**, void*);
         "TYPE_UINT64".."11",
         "TYPE_SINT64".."12",
         "TYPE_STRUCT".."13",
-        "TYPE_POINTER".."14"
+        "TYPE_POINTER".."14",
+        "TYPE_COMPLEX".."15",
+        "TYPE_UINT128".."16",
+        "TYPE_SINT128".."17"
     )
 
     macro(variable=true)..private..short(
@@ -148,6 +154,24 @@ typedef void (*FFI_CLOSURE_FUN)(ffi_cif*, void*, void**, void*);
 
     macro..Address..ffi_type.p("type_pointer", void())
 
+    charASCII.const.p(
+        "get_version",
+
+        void()
+    )
+
+    unsigned_long(
+        "get_version_number",
+
+        void()
+    )
+
+    unsigned_int(
+        "get_default_abi",
+
+        void()
+    )
+
     ffi_status(
         "prep_cif",
 
@@ -175,7 +199,28 @@ typedef void (*FFI_CLOSURE_FUN)(ffi_cif*, void*, void**, void*);
         ffi_cif.p("cif"),
         FFI_FN_TYPE("fn"),
         Unsafe..nullable..void.p("rvalue"),
-        Unsafe..nullable..void.p.p("avalues")
+        Unsafe..nullable..void.p.p("avalue")
+    )
+
+    ffi_call_plan.p(
+        "call_plan_alloc",
+
+        ffi_cif.p("cif")
+    )
+
+    void(
+        "call_plan_invoke",
+
+        ffi_call_plan.p("plan"),
+        FFI_FN_TYPE("fn"),
+        Unsafe..nullable..void.p("rvalue"),
+        Unsafe..nullable..void.p.p("avalue")
+    )
+
+    void(
+        "call_plan_free",
+
+        ffi_call_plan.p("plan")
     )
 
     ffi_status(
@@ -184,6 +229,12 @@ typedef void (*FFI_CLOSURE_FUN)(ffi_cif*, void*, void**, void*);
         ffi_abi("abi"),
         ffi_type.p("struct_type"),
         Unsafe..nullable..size_t.p("offsets")
+    )
+
+    size_t(
+        "get_closure_size",
+
+        void()
     )
 
     ffi_closure.p(

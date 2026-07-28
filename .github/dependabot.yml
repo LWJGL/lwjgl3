@@ -1,0 +1,19 @@
+# Keeps the SHA-pinned GitHub Actions used by the workflows in .github/workflows
+# up to date. Dependabot bumps the pinned commit SHA and its trailing version
+# comment (e.g. "# v7.0.0") together, so the actions stay both pinned and current.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    # Wait this many days after a release before proposing an update, so a
+    # malicious or broken action release has time to be caught and yanked.
+    cooldown:
+      default-days: 7
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    commit-message:
+      prefix: build

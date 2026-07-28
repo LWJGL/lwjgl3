@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_user_font {
  *     {@link NkHandle nk_handle} userdata;
  *     float height;
  *     {@link NkTextWidthCallbackI nk_text_width_f} width;
  *     {@link NkQueryFontGlyphCallbackI nk_query_font_glyph_f} query;
  *     {@link NkHandle nk_handle} texture;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_user_font")
 public class NkUserFont extends Struct<NkUserFont> implements NativeResource {
@@ -43,6 +43,10 @@ public class NkUserFont extends Struct<NkUserFont> implements NativeResource {
         TEXTURE;
 
     static {
+        NkHandle.createSafe(NULL);
+        java.util.Objects.requireNonNull(NkTextWidthCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(NkQueryFontGlyphCallbackI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(NkHandle.SIZEOF, NkHandle.ALIGNOF),
             __member(4),
@@ -212,25 +216,6 @@ public class NkUserFont extends Struct<NkUserFont> implements NativeResource {
     public static NkUserFont.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkUserFont mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkUserFont callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkUserFont mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkUserFont callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkUserFont.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkUserFont.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkUserFont.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkUserFont.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code NkUserFont} instance allocated on the specified {@link MemoryStack}.

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoAV1ColorConfig {
  *     {@link StdVideoAV1ColorConfigFlags StdVideoAV1ColorConfigFlags} flags;
  *     uint8_t BitDepth;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     StdVideoAV1TransferCharacteristics transfer_characteristics;
  *     StdVideoAV1MatrixCoefficients matrix_coefficients;
  *     StdVideoAV1ChromaSamplePosition chroma_sample_position;
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoAV1ColorConfig extends Struct<StdVideoAV1ColorConfig> implements NativeResource {
 
@@ -50,6 +50,8 @@ public class StdVideoAV1ColorConfig extends Struct<StdVideoAV1ColorConfig> imple
         CHROMA_SAMPLE_POSITION;
 
     static {
+        StdVideoAV1ColorConfigFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoAV1ColorConfigFlags.SIZEOF, StdVideoAV1ColorConfigFlags.ALIGNOF),
             __member(1),
@@ -295,7 +297,7 @@ public class StdVideoAV1ColorConfig extends Struct<StdVideoAV1ColorConfig> imple
     public static byte nsubsampling_x(long struct) { return memGetByte(struct + StdVideoAV1ColorConfig.SUBSAMPLING_X); }
     /** Unsafe version of {@link #subsampling_y}. */
     public static byte nsubsampling_y(long struct) { return memGetByte(struct + StdVideoAV1ColorConfig.SUBSAMPLING_Y); }
-    public static byte nreserved1(long struct) { return memGetByte(struct + StdVideoAV1ColorConfig.RESERVED1); }
+    static byte nreserved1(long struct) { return memGetByte(struct + StdVideoAV1ColorConfig.RESERVED1); }
     /** Unsafe version of {@link #color_primaries}. */
     public static int ncolor_primaries(long struct) { return memGetInt(struct + StdVideoAV1ColorConfig.COLOR_PRIMARIES); }
     /** Unsafe version of {@link #transfer_characteristics}. */
@@ -313,7 +315,7 @@ public class StdVideoAV1ColorConfig extends Struct<StdVideoAV1ColorConfig> imple
     public static void nsubsampling_x(long struct, byte value) { memPutByte(struct + StdVideoAV1ColorConfig.SUBSAMPLING_X, value); }
     /** Unsafe version of {@link #subsampling_y(byte) subsampling_y}. */
     public static void nsubsampling_y(long struct, byte value) { memPutByte(struct + StdVideoAV1ColorConfig.SUBSAMPLING_Y, value); }
-    public static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoAV1ColorConfig.RESERVED1, value); }
+    static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoAV1ColorConfig.RESERVED1, value); }
     /** Unsafe version of {@link #color_primaries(int) color_primaries}. */
     public static void ncolor_primaries(long struct, int value) { memPutInt(struct + StdVideoAV1ColorConfig.COLOR_PRIMARIES, value); }
     /** Unsafe version of {@link #transfer_characteristics(int) transfer_characteristics}. */

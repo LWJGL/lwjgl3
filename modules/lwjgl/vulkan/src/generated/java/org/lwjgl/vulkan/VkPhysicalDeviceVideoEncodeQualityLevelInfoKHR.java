@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link VkVideoProfileInfoKHR VkVideoProfileInfoKHR} const * pVideoProfile;
  *     uint32_t qualityLevel;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR extends Struct<VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR> implements NativeResource {
 

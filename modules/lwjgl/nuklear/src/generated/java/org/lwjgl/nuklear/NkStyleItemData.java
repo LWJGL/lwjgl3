@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * union nk_style_item_data {
  *     {@link NkColor struct nk_color} color;
  *     {@link NkImage struct nk_image} image;
  *     {@link NkNineSlice struct nk_nine_slice} slice;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("union nk_style_item_data")
 public class NkStyleItemData extends Struct<NkStyleItemData> implements NativeResource {
@@ -39,6 +39,10 @@ public class NkStyleItemData extends Struct<NkStyleItemData> implements NativeRe
         SLICE;
 
     static {
+        NkColor.createSafe(NULL);
+        NkImage.createSafe(NULL);
+        NkNineSlice.createSafe(NULL);
+
         Layout layout = __union(
             __member(NkColor.SIZEOF, NkColor.ALIGNOF),
             __member(NkImage.SIZEOF, NkImage.ALIGNOF),
@@ -180,25 +184,6 @@ public class NkStyleItemData extends Struct<NkStyleItemData> implements NativeRe
     public static NkStyleItemData.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkStyleItemData mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkStyleItemData callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkStyleItemData mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkStyleItemData callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkStyleItemData.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkStyleItemData.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkStyleItemData.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkStyleItemData.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code NkStyleItemData} instance allocated on the specified {@link MemoryStack}.

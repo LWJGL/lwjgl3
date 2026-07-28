@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrCompositionLayerPassthroughHTC {
  *     XrStructureType type;
  *     void const * next;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrSpace space;
  *     XrPassthroughHTC passthrough;
  *     {@link XrPassthroughColorHTC XrPassthroughColorHTC} color;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrCompositionLayerPassthroughHTC extends Struct<XrCompositionLayerPassthroughHTC> implements NativeResource {
 
@@ -45,6 +45,8 @@ public class XrCompositionLayerPassthroughHTC extends Struct<XrCompositionLayerP
         COLOR;
 
     static {
+        XrPassthroughColorHTC.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

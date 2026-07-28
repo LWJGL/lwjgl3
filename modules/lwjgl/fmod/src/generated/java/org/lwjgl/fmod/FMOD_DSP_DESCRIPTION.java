@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FMOD_DSP_DESCRIPTION {
  *     unsigned int pluginsdkversion;
  *     char name[32];
@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link FMOD_DSP_SYSTEM_REGISTER_CALLBACKI FMOD_DSP_SYSTEM_REGISTER_CALLBACK} sys_register;
  *     {@link FMOD_DSP_SYSTEM_DEREGISTER_CALLBACKI FMOD_DSP_SYSTEM_DEREGISTER_CALLBACK} sys_deregister;
  *     {@link FMOD_DSP_SYSTEM_MIX_CALLBACKI FMOD_DSP_SYSTEM_MIX_CALLBACK} sys_mix;
- * }}</pre>
+ * }</code></pre>
  */
 public class FMOD_DSP_DESCRIPTION extends Struct<FMOD_DSP_DESCRIPTION> implements NativeResource {
 
@@ -85,6 +85,25 @@ public class FMOD_DSP_DESCRIPTION extends Struct<FMOD_DSP_DESCRIPTION> implement
         SYS_MIX;
 
     static {
+        java.util.Objects.requireNonNull(FMOD_DSP_CREATE_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_RELEASE_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_RESET_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_READ_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_PROCESS_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_SETPOSITION_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_SETPARAM_FLOAT_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_SETPARAM_INT_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_SETPARAM_BOOL_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_SETPARAM_DATA_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_GETPARAM_FLOAT_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_GETPARAM_INT_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_GETPARAM_BOOL_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_GETPARAM_DATA_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_SHOULDIPROCESS_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_SYSTEM_REGISTER_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_SYSTEM_DEREGISTER_CALLBACKI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_SYSTEM_MIX_CALLBACKI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(4),
             __array(1, 32),

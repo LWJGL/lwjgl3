@@ -10,17 +10,15 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_FREEBSD, nativeSubPath =
     nativeImport("<dlfcn.h>")
 
     IntConstant(
-        "RTLD_LAZY"..0x00001,
-        "RTLD_NOW"..0x00002,
-        "RTLD_BINDING_MASK"..0x3,
-        "RTLD_NOLOAD"..0x00004,
-        "RTLD_DEEPBIND"..0x00008
-    )
-
-    IntConstant(
-        "RTLD_GLOBAL"..0x00100,
+        "RTLD_LAZY".."1",
+        "RTLD_NOW".."2",
+        "RTLD_MODEMASK"..0x3,
+        "RTLD_GLOBAL"..0x100,
         "RTLD_LOCAL".."0",
-        "RTLD_NODELETE"..0x01000
+        "RTLD_TRACE"..0x200,
+        "RTLD_NODELETE"..0x01000,
+        "RTLD_NOLOAD"..0x02000,
+        "RTLD_DEEPBIND"..0x04000
     )
 
     opaque_p(
@@ -47,5 +45,4 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_FREEBSD, nativeSubPath =
 
         opaque_p("handle")
     )
-
 }

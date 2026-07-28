@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkCommandBufferInheritanceViewportScissorInfoNV {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkBool32 viewportScissor2D;
  *     uint32_t viewportDepthCount;
  *     {@link VkViewport VkViewport} const * pViewportDepths;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkCommandBufferInheritanceViewportScissorInfoNV extends Struct<VkCommandBufferInheritanceViewportScissorInfoNV> implements NativeResource {
 

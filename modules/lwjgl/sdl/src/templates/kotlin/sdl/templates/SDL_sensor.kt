@@ -18,7 +18,8 @@ val SDL_sensor = "SDLSensor".nativeClassSDL("SDL_sensor") {
         "SENSOR_ACCEL_L".enum,
         "SENSOR_GYRO_L".enum,
         "SENSOR_ACCEL_R".enum,
-        "SENSOR_GYRO_R".enum
+        "SENSOR_GYRO_R".enum,
+        "SENSOR_COUNT".enum
     )
 
     SDL_SensorID.p(

@@ -51,6 +51,11 @@ public class SDLCamera {
         SDL_CAMERA_POSITION_FRONT_FACING = 1,
         SDL_CAMERA_POSITION_BACK_FACING  = 2;
 
+    public static final int
+        SDL_CAMERA_PERMISSION_STATE_DENIED   = -1,
+        SDL_CAMERA_PERMISSION_STATE_PENDING  = 0,
+        SDL_CAMERA_PERMISSION_STATE_APPROVED = 1;
+
     protected SDLCamera() {
         throw new UnsupportedOperationException();
     }
@@ -175,7 +180,8 @@ public class SDLCamera {
 
     // --- [ SDL_GetCameraPermissionState ] ---
 
-    /** {@code int SDL_GetCameraPermissionState(SDL_Camera * camera)} */
+    /** {@code SDL_CameraPermissionState SDL_GetCameraPermissionState(SDL_Camera * camera)} */
+    @NativeType("SDL_CameraPermissionState")
     public static int SDL_GetCameraPermissionState(@NativeType("SDL_Camera *") long camera) {
         long __functionAddress = Functions.GetCameraPermissionState;
         if (CHECKS) {

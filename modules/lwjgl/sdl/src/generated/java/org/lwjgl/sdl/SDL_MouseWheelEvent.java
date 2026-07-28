@@ -317,7 +317,7 @@ public class SDL_MouseWheelEvent extends Struct<SDL_MouseWheelEvent> implements 
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_MouseWheelEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_MouseWheelEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_MouseWheelEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_MouseWheelEvent.TIMESTAMP); }
     /** Unsafe version of {@link #windowID}. */
@@ -341,7 +341,7 @@ public class SDL_MouseWheelEvent extends Struct<SDL_MouseWheelEvent> implements 
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_MouseWheelEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_MouseWheelEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_MouseWheelEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_MouseWheelEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #windowID(int) windowID}. */

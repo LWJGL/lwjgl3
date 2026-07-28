@@ -1136,7 +1136,7 @@ static par_shapes__rule* par_shapes__pick_rule(const char* name,
     if (rand_fn) {
         r = rand_fn(context);
     } else {
-        r = (float) rand() / RAND_MAX;
+        r = (float) rand() / (float) RAND_MAX;
     }
     float t = 0;
     for (int i = 0; i < nrules; i++) {

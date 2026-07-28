@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrBodyJointLocationsHTC {
  *     XrStructureType type;
  *     void * next;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t jointLocationCount;
  *     {@link XrBodyJointLocationHTC XrBodyJointLocationHTC} * jointLocations;
  *     uint32_t skeletonGenerationId;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrBodyJointLocationsHTC extends Struct<XrBodyJointLocationsHTC> implements NativeResource {
 

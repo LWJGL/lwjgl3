@@ -34,6 +34,7 @@ public class OpusMultistream {
             multistream_encoder_init              = apiGetFunctionAddress(Opus.getLibrary(), "opus_multistream_encoder_init"),
             multistream_surround_encoder_init     = apiGetFunctionAddress(Opus.getLibrary(), "opus_multistream_surround_encoder_init"),
             multistream_encode                    = apiGetFunctionAddress(Opus.getLibrary(), "opus_multistream_encode"),
+            multistream_encode24                  = apiGetFunctionAddress(Opus.getLibrary(), "opus_multistream_encode24"),
             multistream_encode_float              = apiGetFunctionAddress(Opus.getLibrary(), "opus_multistream_encode_float"),
             multistream_encoder_destroy           = apiGetFunctionAddress(Opus.getLibrary(), "opus_multistream_encoder_destroy"),
             multistream_encoder_ctl               = apiGetFunctionAddress(Opus.getLibrary(), "opus_multistream_encoder_ctl"),
@@ -41,6 +42,7 @@ public class OpusMultistream {
             multistream_decoder_create            = apiGetFunctionAddress(Opus.getLibrary(), "opus_multistream_decoder_create"),
             multistream_decoder_init              = apiGetFunctionAddress(Opus.getLibrary(), "opus_multistream_decoder_init"),
             multistream_decode                    = apiGetFunctionAddress(Opus.getLibrary(), "opus_multistream_decode"),
+            multistream_decode24                  = apiGetFunctionAddress(Opus.getLibrary(), "opus_multistream_decode24"),
             multistream_decode_float              = apiGetFunctionAddress(Opus.getLibrary(), "opus_multistream_decode_float"),
             multistream_decoder_ctl               = apiGetFunctionAddress(Opus.getLibrary(), "opus_multistream_decoder_ctl"),
             multistream_decoder_destroy           = apiGetFunctionAddress(Opus.getLibrary(), "opus_multistream_decoder_destroy");
@@ -164,6 +166,25 @@ public class OpusMultistream {
         return nopus_multistream_encode(st, memAddress(pcm), frame_size, memAddress(data), data.remaining());
     }
 
+    // --- [ opus_multistream_encode24 ] ---
+
+    /** {@code int opus_multistream_encode24(OpusMSEncoder * st, opus_int32 const * pcm, int frame_size, unsigned char * data, opus_int32 max_data_bytes)} */
+    public static int nopus_multistream_encode24(long st, long pcm, int frame_size, long data, int max_data_bytes) {
+        long __functionAddress = Functions.multistream_encode24;
+        if (CHECKS) {
+            check(st);
+        }
+        return invokePPPI(st, pcm, frame_size, data, max_data_bytes, __functionAddress);
+    }
+
+    /** {@code int opus_multistream_encode24(OpusMSEncoder * st, opus_int32 const * pcm, int frame_size, unsigned char * data, opus_int32 max_data_bytes)} */
+    public static int opus_multistream_encode24(@NativeType("OpusMSEncoder *") long st, @NativeType("opus_int32 const *") IntBuffer pcm, int frame_size, @NativeType("unsigned char *") ByteBuffer data) {
+        if (CHECKS) {
+            check(pcm, frame_size * memGetInt(st));
+        }
+        return nopus_multistream_encode24(st, memAddress(pcm), frame_size, memAddress(data), data.remaining());
+    }
+
     // --- [ opus_multistream_encode_float ] ---
 
     /** {@code int opus_multistream_encode_float(OpusMSEncoder * st, float const * pcm, int frame_size, unsigned char * data, opus_int32 max_data_bytes)} */
@@ -266,6 +287,25 @@ public class OpusMultistream {
         return nopus_multistream_decode(st, memAddressSafe(data), remainingSafe(data), memAddress(pcm), frame_size, decode_fec);
     }
 
+    // --- [ opus_multistream_decode24 ] ---
+
+    /** {@code int opus_multistream_decode24(OpusMSDecoder * st, unsigned char const * data, opus_int32 len, opus_int32 * pcm, int frame_size, int decode_fec)} */
+    public static int nopus_multistream_decode24(long st, long data, int len, long pcm, int frame_size, int decode_fec) {
+        long __functionAddress = Functions.multistream_decode24;
+        if (CHECKS) {
+            check(st);
+        }
+        return invokePPPI(st, data, len, pcm, frame_size, decode_fec, __functionAddress);
+    }
+
+    /** {@code int opus_multistream_decode24(OpusMSDecoder * st, unsigned char const * data, opus_int32 len, opus_int32 * pcm, int frame_size, int decode_fec)} */
+    public static int opus_multistream_decode24(@NativeType("OpusMSDecoder *") long st, @NativeType("unsigned char const *") @Nullable ByteBuffer data, @NativeType("opus_int32 *") IntBuffer pcm, int frame_size, int decode_fec) {
+        if (CHECKS) {
+            check(pcm, frame_size * memGetInt(st));
+        }
+        return nopus_multistream_decode24(st, memAddressSafe(data), remainingSafe(data), memAddress(pcm), frame_size, decode_fec);
+    }
+
     // --- [ opus_multistream_decode_float ] ---
 
     /** {@code int opus_multistream_decode_float(OpusMSDecoder * st, unsigned char const * data, opus_int32 len, float * pcm, int frame_size, int decode_fec)} */
@@ -307,42 +347,18 @@ public class OpusMultistream {
         invokePV(st, __functionAddress);
     }
 
-    /**
-     * Performs a CTL function on an multistream Opus encoder.
-     *
-     * @param st      encoder state
-     * @param request CTL request
-     */
     public static int opus_multistream_encoder_ctl(@NativeType("OpusMSEncoder *") long st, int request) {
         return new CTLRequestV(request).apply(st, Functions.multistream_encoder_ctl);
     }
 
-    /**
-     * Performs a CTL function on an multistream Opus encoder.
-     *
-     * @param st      encoder state
-     * @param request CTL request
-     */
     public static int opus_multistream_encoder_ctl(@NativeType("OpusMSEncoder *") long st, CTLRequest request) {
         return request.apply(st, Functions.multistream_encoder_ctl);
     }
 
-    /**
-     * Performs a CTL function on a multistream Opus decoder.
-     *
-     * @param st      decoder state
-     * @param request CTL request
-     */
     public static int opus_multistream_decoder_ctl(@NativeType("OpusMSDecoder *") long st, int request) {
         return new CTLRequestV(request).apply(st, Functions.multistream_decoder_ctl);
     }
 
-    /**
-     * Performs a CTL function on a multistream Opus decoder.
-     *
-     * @param st      decoder state
-     * @param request CTL request
-     */
     public static int opus_multistream_decoder_ctl(@NativeType("OpusMSDecoder *") long st, CTLRequest request) {
         return request.apply(st, Functions.multistream_decoder_ctl);
     }

@@ -96,6 +96,8 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct<VkPhysicalDeviceSurf
     public VkPhysicalDeviceSurfaceInfo2KHR pNext(VkSurfaceFullScreenExclusiveWin32InfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSurfacePresentModeEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceSurfaceInfo2KHR pNext(VkSurfacePresentModeEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkSurfacePresentModeKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceSurfaceInfo2KHR pNext(VkSurfacePresentModeKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code surface} field. */
     public VkPhysicalDeviceSurfaceInfo2KHR surface(@NativeType("VkSurfaceKHR") long value) { nsurface(address(), value); return this; }
 
@@ -194,25 +196,6 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct<VkPhysicalDeviceSurf
     public static VkPhysicalDeviceSurfaceInfo2KHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceSurfaceInfo2KHR mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceSurfaceInfo2KHR callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceSurfaceInfo2KHR mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceSurfaceInfo2KHR callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceSurfaceInfo2KHR.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceSurfaceInfo2KHR.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceSurfaceInfo2KHR.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceSurfaceInfo2KHR.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkPhysicalDeviceSurfaceInfo2KHR} instance allocated on the specified {@link MemoryStack}.
@@ -333,6 +316,8 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct<VkPhysicalDeviceSurf
         public VkPhysicalDeviceSurfaceInfo2KHR.Buffer pNext(VkSurfaceFullScreenExclusiveWin32InfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSurfacePresentModeEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceSurfaceInfo2KHR.Buffer pNext(VkSurfacePresentModeEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkSurfacePresentModeKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceSurfaceInfo2KHR.Buffer pNext(VkSurfacePresentModeKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code surface} field. */
         public VkPhysicalDeviceSurfaceInfo2KHR.Buffer surface(@NativeType("VkSurfaceKHR") long value) { VkPhysicalDeviceSurfaceInfo2KHR.nsurface(address(), value); return this; }
 

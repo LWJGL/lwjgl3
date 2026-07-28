@@ -37,7 +37,7 @@ public class CL12 extends CL11 {
         CL_BLOCKING     = CL10.CL_TRUE,
         CL_NON_BLOCKING = CL10.CL_FALSE;
 
-    public static final int CL_DEVICE_TYPE_CUSTOM = 1 << 4;
+    public static final long CL_DEVICE_TYPE_CUSTOM = 1L << 4;
 
     public static final int
         CL_DEVICE_DOUBLE_FP_CONFIG            = 0x1032,
@@ -54,7 +54,7 @@ public class CL12 extends CL11 {
         CL_DEVICE_PREFERRED_INTEROP_USER_SYNC = 0x1048,
         CL_DEVICE_PRINTF_BUFFER_SIZE          = 0x1049;
 
-    public static final int CL_FP_CORRECTLY_ROUNDED_DIVIDE_SQRT = 1 << 7;
+    public static final long CL_FP_CORRECTLY_ROUNDED_DIVIDE_SQRT = 1L << 7;
 
     public static final int CL_CONTEXT_INTEROP_USER_SYNC = 0x1085;
 
@@ -66,22 +66,22 @@ public class CL12 extends CL11 {
 
     public static final int CL_DEVICE_PARTITION_BY_AFFINITY_DOMAIN = 0x1088;
 
-    public static final int
-        CL_DEVICE_AFFINITY_DOMAIN_NUMA               = 1 << 0,
-        CL_DEVICE_AFFINITY_DOMAIN_L4_CACHE           = 1 << 1,
-        CL_DEVICE_AFFINITY_DOMAIN_L3_CACHE           = 1 << 2,
-        CL_DEVICE_AFFINITY_DOMAIN_L2_CACHE           = 1 << 3,
-        CL_DEVICE_AFFINITY_DOMAIN_L1_CACHE           = 1 << 4,
-        CL_DEVICE_AFFINITY_DOMAIN_NEXT_PARTITIONABLE = 1 << 5;
+    public static final long
+        CL_DEVICE_AFFINITY_DOMAIN_NUMA               = 1L << 0,
+        CL_DEVICE_AFFINITY_DOMAIN_L4_CACHE           = 1L << 1,
+        CL_DEVICE_AFFINITY_DOMAIN_L3_CACHE           = 1L << 2,
+        CL_DEVICE_AFFINITY_DOMAIN_L2_CACHE           = 1L << 3,
+        CL_DEVICE_AFFINITY_DOMAIN_L1_CACHE           = 1L << 4,
+        CL_DEVICE_AFFINITY_DOMAIN_NEXT_PARTITIONABLE = 1L << 5;
 
-    public static final int
-        CL_MEM_HOST_WRITE_ONLY = 1 << 7,
-        CL_MEM_HOST_READ_ONLY  = 1 << 8,
-        CL_MEM_HOST_NO_ACCESS  = 1 << 9;
+    public static final long
+        CL_MEM_HOST_WRITE_ONLY = 1L << 7,
+        CL_MEM_HOST_READ_ONLY  = 1L << 8,
+        CL_MEM_HOST_NO_ACCESS  = 1L << 9;
 
-    public static final int
-        CL_MIGRATE_MEM_OBJECT_HOST              = 1 << 0,
-        CL_MIGRATE_MEM_OBJECT_CONTENT_UNDEFINED = 1 << 1;
+    public static final long
+        CL_MIGRATE_MEM_OBJECT_HOST              = 1L << 0,
+        CL_MIGRATE_MEM_OBJECT_CONTENT_UNDEFINED = 1L << 1;
 
     public static final int
         CL_MEM_OBJECT_IMAGE2D_ARRAY  = 0x10F3,
@@ -95,7 +95,7 @@ public class CL12 extends CL11 {
         CL_IMAGE_NUM_MIP_LEVELS = 0x1119,
         CL_IMAGE_NUM_SAMPLES    = 0x111A;
 
-    public static final int CL_MAP_WRITE_INVALIDATE_REGION = 1 << 2;
+    public static final long CL_MAP_WRITE_INVALIDATE_REGION = 1L << 2;
 
     public static final int
         CL_PROGRAM_NUM_KERNELS  = 0x1167,
@@ -130,11 +130,11 @@ public class CL12 extends CL11 {
         CL_KERNEL_ARG_ACCESS_READ_WRITE = 0x11A2,
         CL_KERNEL_ARG_ACCESS_NONE       = 0x11A3;
 
-    public static final int
-        CL_KERNEL_ARG_TYPE_NONE     = 0,
-        CL_KERNEL_ARG_TYPE_CONST    = 1 << 0,
-        CL_KERNEL_ARG_TYPE_RESTRICT = 1 << 1,
-        CL_KERNEL_ARG_TYPE_VOLATILE = 1 << 2;
+    public static final long
+        CL_KERNEL_ARG_TYPE_NONE     = 0L,
+        CL_KERNEL_ARG_TYPE_CONST    = 1L << 0,
+        CL_KERNEL_ARG_TYPE_RESTRICT = 1L << 1,
+        CL_KERNEL_ARG_TYPE_VOLATILE = 1L << 2;
 
     public static final int CL_KERNEL_GLOBAL_WORK_SIZE = 0x11B5;
 

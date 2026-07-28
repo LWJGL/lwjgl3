@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_Outline_Funcs {
  *     {@link FT_Outline_MoveToFuncI FT_Outline_MoveToFunc} move_to;
  *     {@link FT_Outline_LineToFuncI FT_Outline_LineToFunc} line_to;
@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link FT_Outline_CubicToFuncI FT_Outline_CubicToFunc} cubic_to;
  *     int shift;
  *     FT_Pos delta;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_Outline_Funcs extends Struct<FT_Outline_Funcs> implements NativeResource {
 
@@ -44,6 +44,11 @@ public class FT_Outline_Funcs extends Struct<FT_Outline_Funcs> implements Native
         DELTA;
 
     static {
+        java.util.Objects.requireNonNull(FT_Outline_MoveToFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FT_Outline_LineToFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FT_Outline_ConicToFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FT_Outline_CubicToFuncI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

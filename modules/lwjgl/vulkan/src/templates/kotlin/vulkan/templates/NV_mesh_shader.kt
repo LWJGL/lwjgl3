@@ -55,7 +55,7 @@ val NV_mesh_shader = "NVMeshShader".nativeClassVK("NV_mesh_shader", type = "devi
         uint32_t("stride")
     )
 
-    DependsOn("""ext.contains("VK_KHR_draw_indirect_count") || ext.contains("Vulkan12")""")..void(
+    DependsOn("""ext.contains("Vulkan12") || ext.contains("VK_KHR_draw_indirect_count") || ext.contains("VK_AMD_draw_indirect_count")""")..void(
         "CmdDrawMeshTasksIndirectCountNV",
 
         VkCommandBuffer("commandBuffer"),

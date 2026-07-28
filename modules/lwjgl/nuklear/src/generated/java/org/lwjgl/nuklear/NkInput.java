@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_input {
  *     {@link NkKeyboard struct nk_keyboard} keyboard;
  *     {@link NkMouse struct nk_mouse} mouse;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_input")
 public class NkInput extends Struct<NkInput> implements NativeResource {
@@ -37,6 +37,9 @@ public class NkInput extends Struct<NkInput> implements NativeResource {
         MOUSE;
 
     static {
+        NkKeyboard.createSafe(NULL);
+        NkMouse.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkKeyboard.SIZEOF, NkKeyboard.ALIGNOF),
             __member(NkMouse.SIZEOF, NkMouse.ALIGNOF)
@@ -148,25 +151,6 @@ public class NkInput extends Struct<NkInput> implements NativeResource {
     public static NkInput.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkInput mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkInput callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkInput mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkInput callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkInput.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkInput.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkInput.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkInput.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code NkInput} instance allocated on the specified {@link MemoryStack}.

@@ -24,11 +24,6 @@ val NV_fragment_shading_rate_enums = "NVFragmentShadingRateEnums".nativeClassVK(
     )
 
     EnumConstant(
-        "FRAGMENT_SHADING_RATE_TYPE_FRAGMENT_SIZE_NV".."0",
-        "FRAGMENT_SHADING_RATE_TYPE_ENUMS_NV".."1"
-    )
-
-    EnumConstant(
         "FRAGMENT_SHADING_RATE_1_INVOCATION_PER_PIXEL_NV".."0",
         "FRAGMENT_SHADING_RATE_1_INVOCATION_PER_1X2_PIXELS_NV".."1",
         "FRAGMENT_SHADING_RATE_1_INVOCATION_PER_2X1_PIXELS_NV".."4",
@@ -41,6 +36,11 @@ val NV_fragment_shading_rate_enums = "NVFragmentShadingRateEnums".nativeClassVK(
         "FRAGMENT_SHADING_RATE_8_INVOCATIONS_PER_PIXEL_NV".."13",
         "FRAGMENT_SHADING_RATE_16_INVOCATIONS_PER_PIXEL_NV".."14",
         "FRAGMENT_SHADING_RATE_NO_INVOCATIONS_NV".."15"
+    )
+
+    EnumConstant(
+        "FRAGMENT_SHADING_RATE_TYPE_FRAGMENT_SIZE_NV".."0",
+        "FRAGMENT_SHADING_RATE_TYPE_ENUMS_NV".."1"
     )
 
     void(

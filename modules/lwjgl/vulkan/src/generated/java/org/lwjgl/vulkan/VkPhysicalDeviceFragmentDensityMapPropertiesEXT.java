@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPhysicalDeviceFragmentDensityMapPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkExtent2D VkExtent2D} minFragmentDensityTexelSize;
  *     {@link VkExtent2D VkExtent2D} maxFragmentDensityTexelSize;
  *     VkBool32 fragmentDensityInvocations;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceFragmentDensityMapPropertiesEXT extends Struct<VkPhysicalDeviceFragmentDensityMapPropertiesEXT> implements NativeResource {
 
@@ -42,6 +42,8 @@ public class VkPhysicalDeviceFragmentDensityMapPropertiesEXT extends Struct<VkPh
         FRAGMENTDENSITYINVOCATIONS;
 
     static {
+        VkExtent2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -196,25 +198,6 @@ public class VkPhysicalDeviceFragmentDensityMapPropertiesEXT extends Struct<VkPh
     public static VkPhysicalDeviceFragmentDensityMapPropertiesEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceFragmentDensityMapPropertiesEXT mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceFragmentDensityMapPropertiesEXT callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceFragmentDensityMapPropertiesEXT mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceFragmentDensityMapPropertiesEXT callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceFragmentDensityMapPropertiesEXT.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceFragmentDensityMapPropertiesEXT.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceFragmentDensityMapPropertiesEXT.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceFragmentDensityMapPropertiesEXT.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkPhysicalDeviceFragmentDensityMapPropertiesEXT} instance allocated on the specified {@link MemoryStack}.

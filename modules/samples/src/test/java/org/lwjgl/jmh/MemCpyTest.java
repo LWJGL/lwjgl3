@@ -33,12 +33,17 @@ public class MemCpyTest {
 
     @Benchmark
     public void offheap_baseline() {
-        UNSAFE.copyMemory(null, f, null, t, length);
-    }
+        // Much better performance on Java 16+
+        //UNSAFE.copyMemory(null, f, null, t, length);
 
-    @Benchmark
-    public void offheap_java() {
-        memCopyAligned(f, t, length);
+        // TODO: reevaluate in future JDKs
+
+        // On x64, set/copyMemory have degraded performance with even byte counts (>2x slower).
+        // Workaround by copying all but the last byte with copyMemory, then copying the last byte separately.
+        // Does not hurt on non-x64.
+        long lastByteIndex = length - 1L;
+        UNSAFE.copyMemory(null, f, null, t, lastByteIndex + (length & 1L));
+        UNSAFE.putByte(null, t + lastByteIndex, UNSAFE.getByte(null, f + lastByteIndex));
     }
 
     @Benchmark
@@ -54,20 +59,6 @@ public class MemCpyTest {
     @Benchmark
     public void array_libc() {
         nmemcpy(b, a, length);
-    }
-
-    private static void memCopyAligned(long src, long dst, int bytes) {
-        int aligned = bytes & ~7;
-
-        // Aligned body
-        for (int i = 0; i < aligned; i += 8) {
-            UNSAFE.putLong(null, dst + i, UNSAFE.getLong(null, src + i));
-        }
-
-        // Unaligned tail
-        for (int i = aligned; i < bytes; i++) {
-            UNSAFE.putByte(null, dst + i, UNSAFE.getByte(null, src + i));
-        }
     }
 
 }

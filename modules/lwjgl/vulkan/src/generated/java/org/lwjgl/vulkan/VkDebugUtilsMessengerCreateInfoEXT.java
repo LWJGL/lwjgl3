@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDebugUtilsMessengerCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkDebugUtilsMessageTypeFlagsEXT messageType;
  *     {@link VkDebugUtilsMessengerCallbackEXTI PFN_vkDebugUtilsMessengerCallbackEXT} pfnUserCallback;
  *     void * pUserData;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDebugUtilsMessengerCreateInfoEXT extends Struct<VkDebugUtilsMessengerCreateInfoEXT> implements NativeResource {
 
@@ -47,6 +47,8 @@ public class VkDebugUtilsMessengerCreateInfoEXT extends Struct<VkDebugUtilsMesse
         PUSERDATA;
 
     static {
+        java.util.Objects.requireNonNull(VkDebugUtilsMessengerCallbackEXTI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -233,25 +235,6 @@ public class VkDebugUtilsMessengerCreateInfoEXT extends Struct<VkDebugUtilsMesse
     public static VkDebugUtilsMessengerCreateInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkDebugUtilsMessengerCreateInfoEXT mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkDebugUtilsMessengerCreateInfoEXT callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkDebugUtilsMessengerCreateInfoEXT mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkDebugUtilsMessengerCreateInfoEXT callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDebugUtilsMessengerCreateInfoEXT.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDebugUtilsMessengerCreateInfoEXT.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDebugUtilsMessengerCreateInfoEXT.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDebugUtilsMessengerCreateInfoEXT.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkDebugUtilsMessengerCreateInfoEXT} instance allocated on the specified {@link MemoryStack}.

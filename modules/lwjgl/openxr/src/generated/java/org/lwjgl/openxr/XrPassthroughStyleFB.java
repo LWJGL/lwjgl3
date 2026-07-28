@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrPassthroughStyleFB {
  *     XrStructureType type;
  *     void const * next;
  *     float textureOpacityFactor;
  *     {@link XrColor4f XrColor4f} edgeColor;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrPassthroughStyleFB extends Struct<XrPassthroughStyleFB> implements NativeResource {
 
@@ -40,6 +40,8 @@ public class XrPassthroughStyleFB extends Struct<XrPassthroughStyleFB> implement
         EDGECOLOR;
 
     static {
+        XrColor4f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

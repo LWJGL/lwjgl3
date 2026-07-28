@@ -6,7 +6,8 @@
 package org.lwjgl.sdl;
 
 import org.lwjgl.system.*;
-import org.lwjgl.system.libffi.*;
+
+import java.lang.invoke.*;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -17,14 +18,17 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 @NativeType("Sint64 (*) (void *)")
 public interface SDL_IOStreamInterfaceSizeCallbackI extends CallbackI {
 
-    FFICIF CIF = apiCreateCIF(
-        FFI_DEFAULT_ABI,
-        ffi_type_sint64,
-        ffi_type_pointer
+    Callback.Descriptor DESCRIPTOR = new Callback.Descriptor(
+        SDL_IOStreamInterfaceSizeCallbackI.class,
+        MethodHandles.lookup(),
+        apiCreateCIF(
+            ffi_type_sint64,
+            ffi_type_pointer
+        )
     );
 
     @Override
-    default FFICIF getCallInterface() { return CIF; }
+    default Callback.Descriptor getDescriptor() { return DESCRIPTOR; }
 
     @Override
     default void callback(long ret, long args) {

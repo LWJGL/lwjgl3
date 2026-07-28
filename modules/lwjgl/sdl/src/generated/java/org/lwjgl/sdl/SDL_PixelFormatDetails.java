@@ -206,8 +206,8 @@ public class SDL_PixelFormatDetails extends Struct<SDL_PixelFormatDetails> {
     public static byte nbits_per_pixel(long struct) { return memGetByte(struct + SDL_PixelFormatDetails.BITS_PER_PIXEL); }
     /** Unsafe version of {@link #bytes_per_pixel}. */
     public static byte nbytes_per_pixel(long struct) { return memGetByte(struct + SDL_PixelFormatDetails.BYTES_PER_PIXEL); }
-    public static ByteBuffer npadding(long struct) { return memByteBuffer(struct + SDL_PixelFormatDetails.PADDING, 2); }
-    public static byte npadding(long struct, int index) {
+    static ByteBuffer npadding(long struct) { return memByteBuffer(struct + SDL_PixelFormatDetails.PADDING, 2); }
+    static byte npadding(long struct, int index) {
         return memGetByte(struct + SDL_PixelFormatDetails.PADDING + check(index, 2) * 1);
     }
     /** Unsafe version of {@link #Rmask}. */

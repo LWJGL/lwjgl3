@@ -58,6 +58,19 @@ val OpusProjection = "OpusProjection".nativeClass(Module.OPUS, prefix = "OPUS", 
     )
 
     int(
+        "projection_encode24",
+
+        OpusProjectionEncoder.p("st"),
+        Check(
+            // Reading OpusProjectionEncoder internal state here
+            "frame_size * memGetInt(st + 8 + memGetInt(st) + memGetInt(st + 4))"
+        )..opus_int32.const.p("pcm"),
+        int("frame_size"),
+        unsigned_char.p("data"),
+        AutoSize("data")..opus_int32("max_data_bytes")
+    )
+
+    int(
         "projection_encode_float",
 
         OpusProjectionEncoder.p("st"),
@@ -129,6 +142,20 @@ val OpusProjection = "OpusProjection".nativeClass(Module.OPUS, prefix = "OPUS", 
     )
 
     int(
+        "projection_decode24",
+
+        OpusProjectionDecoder.p("st"),
+        nullable..unsigned_char.const.p("data"),
+        AutoSize("data")..opus_int32("len"),
+        Check(
+            // Reading OpusProjectionDecoder internal state here
+            "frame_size * memGetInt(st + 4 + memGetInt(st))"
+        )..opus_int32.p("pcm"),
+        int("frame_size"),
+        int("decode_fec")
+    )
+
+    int(
         "projection_decode_float",
 
         OpusMSDecoder.p("st"),
@@ -159,65 +186,26 @@ val OpusProjection = "OpusProjection".nativeClass(Module.OPUS, prefix = "OPUS", 
     )
 
     customMethod("""
-    /**
-     * Performs a CTL function on an projection Opus encoder.
-     *
-     * @param st      projection encoder state
-     * @param request CTL request
-     */
     public static int opus_projection_encoder_ctl(@NativeType("OpusProjectionEncoder *") long st, int request) {
         return new CTLRequestV(request).apply(st, Functions.projection_encoder_ctl);
     }
 
-    /**
-     * Performs a CTL function on an projection Opus encoder.
-     *
-     * @param st      projection encoder state
-     * @param request CTL request
-     */
     public static int opus_projection_encoder_ctl(@NativeType("OpusProjectionEncoder *") long st, CTLRequest request) {
         return request.apply(st, Functions.projection_encoder_ctl);
     }
 
-    /**
-     * Performs a CTL function on a projection Opus decoder.
-     *
-     * @param st      projection decoder state
-     * @param request CTL request
-     */
     public static int opus_projection_decoder_ctl(@NativeType("OpusProjectionDecoder *") long st, int request) {
         return new CTLRequestV(request).apply(st, Functions.projection_decoder_ctl);
     }
 
-    /**
-     * Performs a CTL function on a projection Opus decoder.
-     *
-     * @param st      projection decoder state
-     * @param request CTL request
-     */
     public static int opus_projection_decoder_ctl(@NativeType("OpusProjectionDecoder *") long st, CTLRequest request) {
         return request.apply(st, Functions.projection_decoder_ctl);
     }
 
-    /**
-     * Gets the gain (in dB. S7.8-format) of the demixing matrix from the encoder.
-     *
-     * @return the gain (in dB. S7.8-format) of the demixing matrix.
-     */
     public static CTLRequest OPUS_PROJECTION_GET_DEMIXING_MATRIX_GAIN(IntBuffer value) { return new CTLRequestP(OPUS_PROJECTION_GET_DEMIXING_MATRIX_GAIN_REQUEST, memAddress(value)); }
 
-    /**
-     * Gets the size in bytes of the demixing matrix from the encoder.
-     *
-     * @return the size in bytes of the demixing matrix.
-     */
     public static CTLRequest OPUS_PROJECTION_GET_DEMIXING_MATRIX_SIZE(IntBuffer value) { return new CTLRequestP(OPUS_PROJECTION_GET_DEMIXING_MATRIX_SIZE_REQUEST, memAddress(value)); }
 
-    /**
-     * Copies the demixing matrix to the supplied pointer location.
-     *
-     * @param matrix returns the demixing matrix to the supplied pointer location.
-     */
     public static CTLRequest OPUS_PROJECTION_GET_DEMIXING_MATRIX(ByteBuffer matrix) {  return new CTLRequestPI(OPUS_PROJECTION_GET_DEMIXING_MATRIX_REQUEST, memAddress(matrix), matrix.remaining()); }
     """)
 }

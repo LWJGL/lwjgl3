@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoSessionCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t maxDpbSlots;
  *     uint32_t maxActiveReferencePictures;
  *     {@link VkExtensionProperties VkExtensionProperties} const * pStdHeaderVersion;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoSessionCreateInfoKHR extends Struct<VkVideoSessionCreateInfoKHR> implements NativeResource {
 
@@ -55,6 +55,8 @@ public class VkVideoSessionCreateInfoKHR extends Struct<VkVideoSessionCreateInfo
         PSTDHEADERVERSION;
 
     static {
+        VkExtent2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -152,6 +154,10 @@ public class VkVideoSessionCreateInfoKHR extends Struct<VkVideoSessionCreateInfo
     public VkVideoSessionCreateInfoKHR pNext(VkVideoEncodeH264SessionCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH265SessionCreateInfoKHR} value to the {@code pNext} chain. */
     public VkVideoSessionCreateInfoKHR pNext(VkVideoEncodeH265SessionCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeSessionIntraRefreshCreateInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoSessionCreateInfoKHR pNext(VkVideoEncodeSessionIntraRefreshCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeSessionRgbConversionCreateInfoVALVE} value to the {@code pNext} chain. */
+    public VkVideoSessionCreateInfoKHR pNext(VkVideoEncodeSessionRgbConversionCreateInfoVALVE value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code queueFamilyIndex} field. */
     public VkVideoSessionCreateInfoKHR queueFamilyIndex(@NativeType("uint32_t") int value) { nqueueFamilyIndex(address(), value); return this; }
     /** Sets the specified value to the {@code flags} field. */
@@ -469,6 +475,10 @@ public class VkVideoSessionCreateInfoKHR extends Struct<VkVideoSessionCreateInfo
         public VkVideoSessionCreateInfoKHR.Buffer pNext(VkVideoEncodeH264SessionCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH265SessionCreateInfoKHR} value to the {@code pNext} chain. */
         public VkVideoSessionCreateInfoKHR.Buffer pNext(VkVideoEncodeH265SessionCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeSessionIntraRefreshCreateInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoSessionCreateInfoKHR.Buffer pNext(VkVideoEncodeSessionIntraRefreshCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeSessionRgbConversionCreateInfoVALVE} value to the {@code pNext} chain. */
+        public VkVideoSessionCreateInfoKHR.Buffer pNext(VkVideoEncodeSessionRgbConversionCreateInfoVALVE value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code queueFamilyIndex} field. */
         public VkVideoSessionCreateInfoKHR.Buffer queueFamilyIndex(@NativeType("uint32_t") int value) { VkVideoSessionCreateInfoKHR.nqueueFamilyIndex(address(), value); return this; }
         /** Sets the specified value to the {@code flags} field. */

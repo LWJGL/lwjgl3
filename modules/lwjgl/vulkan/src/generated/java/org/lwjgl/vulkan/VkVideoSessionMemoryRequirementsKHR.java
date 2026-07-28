@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoSessionMemoryRequirementsKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     uint32_t memoryBindIndex;
  *     {@link VkMemoryRequirements VkMemoryRequirements} memoryRequirements;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoSessionMemoryRequirementsKHR extends Struct<VkVideoSessionMemoryRequirementsKHR> implements NativeResource {
 
@@ -40,6 +40,8 @@ public class VkVideoSessionMemoryRequirementsKHR extends Struct<VkVideoSessionMe
         MEMORYREQUIREMENTS;
 
     static {
+        VkMemoryRequirements.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

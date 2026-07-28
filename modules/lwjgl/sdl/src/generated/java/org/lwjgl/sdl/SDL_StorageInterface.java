@@ -56,6 +56,18 @@ public class SDL_StorageInterface extends Struct<SDL_StorageInterface> implement
         SPACE_REMAINING;
 
     static {
+        java.util.Objects.requireNonNull(SDL_StorageInterfaceCloseCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_StorageInterfaceReadyCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_StorageInterfaceEnumerateCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_StorageInterfaceInfoCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_StorageInterfaceReadFileCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_StorageInterfaceWriteFileCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_StorageInterfaceMkdirCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_StorageInterfaceRemoveCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_StorageInterfaceRenameCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_StorageInterfaceCopyCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(SDL_StorageInterfaceSpaceRemainingCallbackI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

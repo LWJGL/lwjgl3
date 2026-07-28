@@ -16,21 +16,21 @@ val intel_unified_shared_memory = "INTELUnifiedSharedMemory".nativeClassCL("inte
         "DEVICE_SHARED_SYSTEM_MEM_CAPABILITIES_INTEL"..0x4194
     )
 
-    IntConstant(
-        "UNIFIED_SHARED_MEMORY_ACCESS_INTEL".."1 << 0",
-        "UNIFIED_SHARED_MEMORY_ATOMIC_ACCESS_INTEL".."1 << 1",
-        "UNIFIED_SHARED_MEMORY_CONCURRENT_ACCESS_INTEL".."1 << 2",
-        "UNIFIED_SHARED_MEMORY_CONCURRENT_ATOMIC_ACCESS_INTEL".."1 << 3"
+    LongConstant(
+        "UNIFIED_SHARED_MEMORY_ACCESS_INTEL".."1L << 0",
+        "UNIFIED_SHARED_MEMORY_ATOMIC_ACCESS_INTEL".."1L << 1",
+        "UNIFIED_SHARED_MEMORY_CONCURRENT_ACCESS_INTEL".."1L << 2",
+        "UNIFIED_SHARED_MEMORY_CONCURRENT_ATOMIC_ACCESS_INTEL".."1L << 3"
     )
 
-    IntConstant(
-        "MEM_ALLOC_FLAGS_INTEL"..0x4195
+    LongConstant(
+        "MEM_ALLOC_FLAGS_INTEL"..0x4195L
     )
 
-    EnumConstant(
-        "MEM_ALLOC_WRITE_COMBINED_INTEL".enum("1 << 0"),
-        "MEM_ALLOC_INITIAL_PLACEMENT_DEVICE_INTEL".enum("1 << 1"),
-        "MEM_ALLOC_INITIAL_PLACEMENT_HOST_INTEL".enum("1 << 2")
+    LongConstant(
+        "MEM_ALLOC_WRITE_COMBINED_INTEL".."1L << 0",
+        "MEM_ALLOC_INITIAL_PLACEMENT_DEVICE_INTEL".."1L << 1",
+        "MEM_ALLOC_INITIAL_PLACEMENT_HOST_INTEL".."1L << 2"
     )
 
     IntConstant(

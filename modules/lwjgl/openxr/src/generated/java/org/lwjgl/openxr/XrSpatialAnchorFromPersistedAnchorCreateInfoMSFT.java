@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT {
  *     XrStructureType type;
  *     void const * next;
  *     XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore;
  *     {@link XrSpatialAnchorPersistenceNameMSFT XrSpatialAnchorPersistenceNameMSFT} spatialAnchorPersistenceName;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT extends Struct<XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT> implements NativeResource {
 
@@ -41,6 +41,8 @@ public class XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT extends Struct<XrS
         SPATIALANCHORPERSISTENCENAME;
 
     static {
+        XrSpatialAnchorPersistenceNameMSFT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

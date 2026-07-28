@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpatialEntityComponentDataTriangleMeshBD {
  *     XrStructureType type;
  *     void * next;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t indexCapacityInput;
  *     uint32_t indexCountOutput;
  *     uint16_t * indices;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpatialEntityComponentDataTriangleMeshBD extends Struct<XrSpatialEntityComponentDataTriangleMeshBD> implements NativeResource {
 

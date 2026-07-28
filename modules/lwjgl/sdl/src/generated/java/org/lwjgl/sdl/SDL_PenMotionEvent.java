@@ -275,7 +275,7 @@ public class SDL_PenMotionEvent extends Struct<SDL_PenMotionEvent> implements Na
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_PenMotionEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_PenMotionEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_PenMotionEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_PenMotionEvent.TIMESTAMP); }
     /** Unsafe version of {@link #windowID}. */
@@ -291,7 +291,7 @@ public class SDL_PenMotionEvent extends Struct<SDL_PenMotionEvent> implements Na
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_PenMotionEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_PenMotionEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_PenMotionEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_PenMotionEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #windowID(int) windowID}. */

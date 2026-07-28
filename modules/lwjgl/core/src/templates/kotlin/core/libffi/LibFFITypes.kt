@@ -6,6 +6,8 @@ package core.libffi
 
 import org.lwjgl.generator.*
 
+val ffi_call_plan = "ffi_call_plan".opaque
+
 val ffi_abi = "ffi_abi".enumType
 val ffi_status = "ffi_status".enumType
 
@@ -25,7 +27,7 @@ DISABLE_WARNINGS()
 ENABLE_WARNINGS()""")
 
     ffi_abi("abi")
-    unsigned("nargs")
+    AutoSize("arg_types")..unsigned("nargs")
     ffi_type.p.p("arg_types")
     ffi_type.p("rtype")
     unsigned("bytes")
@@ -42,6 +44,6 @@ ENABLE_WARNINGS()""")
 
     ffi_cif.p("cif")
     "void (*)(ffi_cif*,void*,void**,void*)".handle("fun")
-    opaque_p("user_data")
+    nullable..opaque_p("user_data")
 }
 val FFI_CLOSURE_FUN = "FFI_CLOSURE_FUN".handle

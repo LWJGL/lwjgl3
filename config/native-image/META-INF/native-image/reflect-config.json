@@ -9,5 +9,58 @@
   {"name": "java.nio.DirectIntBufferU", "allDeclaredFields": true, "unsafeAllocated": true},
   {"name": "java.nio.DirectLongBufferU", "allDeclaredFields": true, "unsafeAllocated": true},
   {"name": "java.nio.DirectShortBufferU", "allDeclaredFields": true, "unsafeAllocated": true},
-  {"name": "sun.misc.Unsafe", "allDeclaredFields": true}
+
+  {"name": "sun.misc.Unsafe", "allDeclaredFields": true},
+
+  {"name": "org.lwjgl.system.MemoryBackendUnsafe", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendUnsafe$P64CL32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendUnsafe$P32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+
+  {"name": "org.lwjgl.system.MemoryBackendUnsafe26", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendUnsafe26$P64CL32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendUnsafe26$P32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+
+  {"name": "org.lwjgl.system.MemoryBackendUnsafe27", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendUnsafe27$P64CL32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendUnsafe27$P32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+
+  {"name": "org.lwjgl.system.MemoryBackendUnsafeLegacy", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendUnsafeLegacy$P64CL32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendUnsafeLegacy$P32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+
+  {"name": "org.lwjgl.system.MemoryBackendUnsafeLegacy9", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendUnsafeLegacy9$P64CL32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendUnsafeLegacy9$P32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+
+  {"name": "org.lwjgl.system.MemoryBackendUnsafeLegacy17", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendUnsafeLegacy17$P64CL32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendUnsafeLegacy17$P32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+
+  {"name": "org.lwjgl.system.MemoryBackendUnsafeLegacy22", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendUnsafeLegacy22$P64CL32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendUnsafeLegacy22$P32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+
+  {"name": "org.lwjgl.system.MemoryBackendUnsafeLegacy25", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendUnsafeLegacy25$P64CL32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendUnsafeLegacy25$P32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+
+  {"name": "org.lwjgl.system.MemoryBackendUnsafeLegacy26", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendUnsafeLegacy26$P64CL32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendUnsafeLegacy26$P32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+
+  {"name": "org.lwjgl.system.MemoryBackendUnsafeLegacy27", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendUnsafeLegacy27$P64CL32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendUnsafeLegacy27$P32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+
+  {"name": "org.lwjgl.system.MemoryBackendFFM", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendFFM$P64CL32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendFFM$P32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+
+  {"name": "org.lwjgl.system.MemoryBackendFFM26", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendFFM26$P64CL32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendFFM26$P32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+
+  {"name": "org.lwjgl.system.MemoryBackendFFM27", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendFFM27$P64CL32", "methods": [{"name": "<init>", "parameterTypes": []}]},
+  {"name": "org.lwjgl.system.MemoryBackendFFM27$P32", "methods": [{"name": "<init>", "parameterTypes": []}]}
 ]

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FMOD_DSP_STATE_PAN_FUNCTIONS {
  *     {@link FMOD_DSP_PAN_SUMMONOMATRIX_FUNCI FMOD_DSP_PAN_SUMMONOMATRIX_FUNC} summonomatrix;
  *     {@link FMOD_DSP_PAN_SUMSTEREOMATRIX_FUNCI FMOD_DSP_PAN_SUMSTEREOMATRIX_FUNC} sumstereomatrix;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link FMOD_DSP_PAN_SUMMONOTOSURROUNDMATRIX_FUNCI FMOD_DSP_PAN_SUMMONOTOSURROUNDMATRIX_FUNC} summonotosurroundmatrix;
  *     {@link FMOD_DSP_PAN_SUMSTEREOTOSURROUNDMATRIX_FUNCI FMOD_DSP_PAN_SUMSTEREOTOSURROUNDMATRIX_FUNC} sumstereotosurroundmatrix;
  *     {@link FMOD_DSP_PAN_GETROLLOFFGAIN_FUNCI FMOD_DSP_PAN_GETROLLOFFGAIN_FUNC} getrolloffgain;
- * }}</pre>
+ * }</code></pre>
  */
 public class FMOD_DSP_STATE_PAN_FUNCTIONS extends Struct<FMOD_DSP_STATE_PAN_FUNCTIONS> implements NativeResource {
 
@@ -45,6 +45,13 @@ public class FMOD_DSP_STATE_PAN_FUNCTIONS extends Struct<FMOD_DSP_STATE_PAN_FUNC
         GETROLLOFFGAIN;
 
     static {
+        java.util.Objects.requireNonNull(FMOD_DSP_PAN_SUMMONOMATRIX_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_PAN_SUMSTEREOMATRIX_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_PAN_SUMSURROUNDMATRIX_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_PAN_SUMMONOTOSURROUNDMATRIX_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_PAN_SUMSTEREOTOSURROUNDMATRIX_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_DSP_PAN_GETROLLOFFGAIN_FUNCI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

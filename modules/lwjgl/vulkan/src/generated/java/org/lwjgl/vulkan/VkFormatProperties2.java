@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkFormatProperties2 {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkFormatProperties VkFormatProperties} formatProperties;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkFormatProperties2 extends Struct<VkFormatProperties2> implements NativeResource {
 
@@ -38,6 +38,8 @@ public class VkFormatProperties2 extends Struct<VkFormatProperties2> implements 
         FORMATPROPERTIES;
 
     static {
+        VkFormatProperties.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -97,8 +99,14 @@ public class VkFormatProperties2 extends Struct<VkFormatProperties2> implements 
     public VkFormatProperties2 pNext(VkFormatProperties3 value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkFormatProperties3KHR} value to the {@code pNext} chain. */
     public VkFormatProperties2 pNext(VkFormatProperties3KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkFormatProperties4KHR} value to the {@code pNext} chain. */
+    public VkFormatProperties2 pNext(VkFormatProperties4KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSubpassResolvePerformanceQueryEXT} value to the {@code pNext} chain. */
     public VkFormatProperties2 pNext(VkSubpassResolvePerformanceQueryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkTensorExplicitTilingFormatPropertiesARM} value to the {@code pNext} chain. */
+    public VkFormatProperties2 pNext(VkTensorExplicitTilingFormatPropertiesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkTensorFormatPropertiesARM} value to the {@code pNext} chain. */
+    public VkFormatProperties2 pNext(VkTensorFormatPropertiesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     /** Initializes this struct with the specified values. */
     public VkFormatProperties2 set(
@@ -193,25 +201,6 @@ public class VkFormatProperties2 extends Struct<VkFormatProperties2> implements 
     public static VkFormatProperties2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkFormatProperties2 mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkFormatProperties2 callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkFormatProperties2 mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkFormatProperties2 callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkFormatProperties2.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkFormatProperties2.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkFormatProperties2.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkFormatProperties2.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkFormatProperties2} instance allocated on the specified {@link MemoryStack}.
@@ -331,8 +320,14 @@ public class VkFormatProperties2 extends Struct<VkFormatProperties2> implements 
         public VkFormatProperties2.Buffer pNext(VkFormatProperties3 value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkFormatProperties3KHR} value to the {@code pNext} chain. */
         public VkFormatProperties2.Buffer pNext(VkFormatProperties3KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkFormatProperties4KHR} value to the {@code pNext} chain. */
+        public VkFormatProperties2.Buffer pNext(VkFormatProperties4KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSubpassResolvePerformanceQueryEXT} value to the {@code pNext} chain. */
         public VkFormatProperties2.Buffer pNext(VkSubpassResolvePerformanceQueryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkTensorExplicitTilingFormatPropertiesARM} value to the {@code pNext} chain. */
+        public VkFormatProperties2.Buffer pNext(VkTensorExplicitTilingFormatPropertiesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkTensorFormatPropertiesARM} value to the {@code pNext} chain. */
+        public VkFormatProperties2.Buffer pNext(VkTensorFormatPropertiesARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     }
 

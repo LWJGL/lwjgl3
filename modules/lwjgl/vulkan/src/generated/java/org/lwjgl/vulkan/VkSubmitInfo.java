@@ -143,12 +143,16 @@ public class VkSubmitInfo extends Struct<VkSubmitInfo> implements NativeResource
     public VkSubmitInfo pNext(VkDeviceGroupSubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkFrameBoundaryEXT} value to the {@code pNext} chain. */
     public VkSubmitInfo pNext(VkFrameBoundaryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkFrameBoundaryTensorsARM} value to the {@code pNext} chain. */
+    public VkSubmitInfo pNext(VkFrameBoundaryTensorsARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkLatencySubmissionPresentIdNV} value to the {@code pNext} chain. */
     public VkSubmitInfo pNext(VkLatencySubmissionPresentIdNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPerformanceQuerySubmitInfoKHR} value to the {@code pNext} chain. */
     public VkSubmitInfo pNext(VkPerformanceQuerySubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkProtectedSubmitInfo} value to the {@code pNext} chain. */
     public VkSubmitInfo pNext(VkProtectedSubmitInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkThrottleHintSubmitInfoSEC} value to the {@code pNext} chain. */
+    public VkSubmitInfo pNext(VkThrottleHintSubmitInfoSEC value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkTimelineSemaphoreSubmitInfo} value to the {@code pNext} chain. */
     public VkSubmitInfo pNext(VkTimelineSemaphoreSubmitInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkTimelineSemaphoreSubmitInfoKHR} value to the {@code pNext} chain. */
@@ -271,25 +275,6 @@ public class VkSubmitInfo extends Struct<VkSubmitInfo> implements NativeResource
     public static VkSubmitInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkSubmitInfo mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkSubmitInfo callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkSubmitInfo mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkSubmitInfo callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkSubmitInfo.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkSubmitInfo.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkSubmitInfo.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkSubmitInfo.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkSubmitInfo} instance allocated on the specified {@link MemoryStack}.
@@ -473,12 +458,16 @@ public class VkSubmitInfo extends Struct<VkSubmitInfo> implements NativeResource
         public VkSubmitInfo.Buffer pNext(VkDeviceGroupSubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkFrameBoundaryEXT} value to the {@code pNext} chain. */
         public VkSubmitInfo.Buffer pNext(VkFrameBoundaryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkFrameBoundaryTensorsARM} value to the {@code pNext} chain. */
+        public VkSubmitInfo.Buffer pNext(VkFrameBoundaryTensorsARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkLatencySubmissionPresentIdNV} value to the {@code pNext} chain. */
         public VkSubmitInfo.Buffer pNext(VkLatencySubmissionPresentIdNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPerformanceQuerySubmitInfoKHR} value to the {@code pNext} chain. */
         public VkSubmitInfo.Buffer pNext(VkPerformanceQuerySubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkProtectedSubmitInfo} value to the {@code pNext} chain. */
         public VkSubmitInfo.Buffer pNext(VkProtectedSubmitInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkThrottleHintSubmitInfoSEC} value to the {@code pNext} chain. */
+        public VkSubmitInfo.Buffer pNext(VkThrottleHintSubmitInfoSEC value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkTimelineSemaphoreSubmitInfo} value to the {@code pNext} chain. */
         public VkSubmitInfo.Buffer pNext(VkTimelineSemaphoreSubmitInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkTimelineSemaphoreSubmitInfoKHR} value to the {@code pNext} chain. */

@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrActiveActionSetPrioritiesEXT {
  *     XrStructureType type;
  *     void const * next;
  *     uint32_t actionSetPriorityCount;
  *     {@link XrActiveActionSetPriorityEXT XrActiveActionSetPriorityEXT} const * actionSetPriorities;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrActiveActionSetPrioritiesEXT extends Struct<XrActiveActionSetPrioritiesEXT> implements NativeResource {
 

@@ -17,12 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct LLVMOrcCSymbolDependenceGroup {
  *     {@link LLVMOrcCSymbolsList LLVMOrcCSymbolsList} Symbols;
  *     {@link LLVMOrcCDependenceMapPair LLVMOrcCDependenceMapPair}s Dependencies;
  *     size_t NumDependencies;
- * }}</pre>
+ * }</code></pre>
  */
 public class LLVMOrcCSymbolDependenceGroup extends Struct<LLVMOrcCSymbolDependenceGroup> implements NativeResource {
 
@@ -39,6 +39,8 @@ public class LLVMOrcCSymbolDependenceGroup extends Struct<LLVMOrcCSymbolDependen
         NUMDEPENDENCIES;
 
     static {
+        LLVMOrcCSymbolsList.createSafe(NULL);
+
         Layout layout = __struct(
             __member(LLVMOrcCSymbolsList.SIZEOF, LLVMOrcCSymbolsList.ALIGNOF),
             __member(POINTER_SIZE),

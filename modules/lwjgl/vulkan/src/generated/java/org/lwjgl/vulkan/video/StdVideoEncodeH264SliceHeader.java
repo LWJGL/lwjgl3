@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoEncodeH264SliceHeader {
  *     {@link StdVideoEncodeH264SliceHeaderFlags StdVideoEncodeH264SliceHeaderFlags} flags;
  *     uint32_t first_mb_in_slice;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     StdVideoH264CabacInitIdc cabac_init_idc;
  *     StdVideoH264DisableDeblockingFilterIdc disable_deblocking_filter_idc;
  *     {@link StdVideoEncodeH264WeightTable StdVideoEncodeH264WeightTable} const * pWeightTable;
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoEncodeH264SliceHeader extends Struct<StdVideoEncodeH264SliceHeader> implements NativeResource {
 
@@ -53,6 +53,8 @@ public class StdVideoEncodeH264SliceHeader extends Struct<StdVideoEncodeH264Slic
         PWEIGHTTABLE;
 
     static {
+        StdVideoEncodeH264SliceHeaderFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoEncodeH264SliceHeaderFlags.SIZEOF, StdVideoEncodeH264SliceHeaderFlags.ALIGNOF),
             __member(4),
@@ -311,7 +313,7 @@ public class StdVideoEncodeH264SliceHeader extends Struct<StdVideoEncodeH264Slic
     public static byte nslice_beta_offset_div2(long struct) { return memGetByte(struct + StdVideoEncodeH264SliceHeader.SLICE_BETA_OFFSET_DIV2); }
     /** Unsafe version of {@link #slice_qp_delta}. */
     public static byte nslice_qp_delta(long struct) { return memGetByte(struct + StdVideoEncodeH264SliceHeader.SLICE_QP_DELTA); }
-    public static byte nreserved1(long struct) { return memGetByte(struct + StdVideoEncodeH264SliceHeader.RESERVED1); }
+    static byte nreserved1(long struct) { return memGetByte(struct + StdVideoEncodeH264SliceHeader.RESERVED1); }
     /** Unsafe version of {@link #cabac_init_idc}. */
     public static int ncabac_init_idc(long struct) { return memGetInt(struct + StdVideoEncodeH264SliceHeader.CABAC_INIT_IDC); }
     /** Unsafe version of {@link #disable_deblocking_filter_idc}. */
@@ -331,7 +333,7 @@ public class StdVideoEncodeH264SliceHeader extends Struct<StdVideoEncodeH264Slic
     public static void nslice_beta_offset_div2(long struct, byte value) { memPutByte(struct + StdVideoEncodeH264SliceHeader.SLICE_BETA_OFFSET_DIV2, value); }
     /** Unsafe version of {@link #slice_qp_delta(byte) slice_qp_delta}. */
     public static void nslice_qp_delta(long struct, byte value) { memPutByte(struct + StdVideoEncodeH264SliceHeader.SLICE_QP_DELTA, value); }
-    public static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoEncodeH264SliceHeader.RESERVED1, value); }
+    static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoEncodeH264SliceHeader.RESERVED1, value); }
     /** Unsafe version of {@link #cabac_init_idc(int) cabac_init_idc}. */
     public static void ncabac_init_idc(long struct, int value) { memPutInt(struct + StdVideoEncodeH264SliceHeader.CABAC_INIT_IDC, value); }
     /** Unsafe version of {@link #disable_deblocking_filter_idc(int) disable_deblocking_filter_idc}. */

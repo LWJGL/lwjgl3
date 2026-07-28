@@ -13,19 +13,19 @@ typedef void (APIENTRY *glGetBufferPointervOESPROC) (jint, jint, uintptr_t);
 EXTERN_C_ENTER
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_opengles_OESMapbuffer_nglMapBufferOES(JNIEnv *__env, jclass clazz, jint target, jint access) {
-    glMapBufferOESPROC glMapBufferOES = (glMapBufferOESPROC)tlsGetFunction(807);
+    glMapBufferOESPROC glMapBufferOES = (glMapBufferOESPROC)tlsGetFunction(811);
     UNUSED_PARAM(clazz)
     return (jlong)glMapBufferOES(target, access);
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengles_OESMapbuffer_glUnmapBufferOES(JNIEnv *__env, jclass clazz, jint target) {
-    glUnmapBufferOESPROC glUnmapBufferOES = (glUnmapBufferOESPROC)tlsGetFunction(808);
+    glUnmapBufferOESPROC glUnmapBufferOES = (glUnmapBufferOESPROC)tlsGetFunction(812);
     UNUSED_PARAM(clazz)
     return glUnmapBufferOES(target);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_OESMapbuffer_nglGetBufferPointervOES(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
-    glGetBufferPointervOESPROC glGetBufferPointervOES = (glGetBufferPointervOESPROC)tlsGetFunction(809);
+    glGetBufferPointervOESPROC glGetBufferPointervOES = (glGetBufferPointervOESPROC)tlsGetFunction(813);
     uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetBufferPointervOES(target, pname, params);

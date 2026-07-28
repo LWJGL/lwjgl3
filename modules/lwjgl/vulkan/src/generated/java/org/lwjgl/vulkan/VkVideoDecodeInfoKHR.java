@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoDecodeInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkVideoReferenceSlotInfoKHR VkVideoReferenceSlotInfoKHR} const * pSetupReferenceSlot;
  *     uint32_t referenceSlotCount;
  *     {@link VkVideoReferenceSlotInfoKHR VkVideoReferenceSlotInfoKHR} const * pReferenceSlots;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoDecodeInfoKHR extends Struct<VkVideoDecodeInfoKHR> implements NativeResource {
 
@@ -53,6 +53,8 @@ public class VkVideoDecodeInfoKHR extends Struct<VkVideoDecodeInfoKHR> implement
         PREFERENCESLOTS;
 
     static {
+        VkVideoPictureResourceInfoKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -151,6 +153,8 @@ public class VkVideoDecodeInfoKHR extends Struct<VkVideoDecodeInfoKHR> implement
     public VkVideoDecodeInfoKHR pNext(VkVideoDecodeH265InlineSessionParametersInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoDecodeH265PictureInfoKHR} value to the {@code pNext} chain. */
     public VkVideoDecodeInfoKHR pNext(VkVideoDecodeH265PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoDecodeVP9PictureInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoDecodeInfoKHR pNext(VkVideoDecodeVP9PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoInlineQueryInfoKHR} value to the {@code pNext} chain. */
     public VkVideoDecodeInfoKHR pNext(VkVideoInlineQueryInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code flags} field. */
@@ -462,6 +466,8 @@ public class VkVideoDecodeInfoKHR extends Struct<VkVideoDecodeInfoKHR> implement
         public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoDecodeH265InlineSessionParametersInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoDecodeH265PictureInfoKHR} value to the {@code pNext} chain. */
         public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoDecodeH265PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoDecodeVP9PictureInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoDecodeVP9PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoInlineQueryInfoKHR} value to the {@code pNext} chain. */
         public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoInlineQueryInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code flags} field. */

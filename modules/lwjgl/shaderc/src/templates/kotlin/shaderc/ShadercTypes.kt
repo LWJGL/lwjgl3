@@ -6,13 +6,17 @@ package shaderc
 
 import org.lwjgl.generator.*
 
+val SHADERC_BINDING = simpleBinding(
+    Module.SHADERC,
+    libraryExpression = """Configuration.SHADERC_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("shaderc"))""",
+    bundledWithLWJGL = true
+)
+
 val shaderc_compilation_result_t = "shaderc_compilation_result_t".handle
 val shaderc_compile_options_t = "shaderc_compile_options_t".handle
 val shaderc_compiler_t = "shaderc_compiler_t".handle
 
 val shaderc_compilation_status = "shaderc_compilation_status".enumType
-val shaderc_env_version = "shaderc_env_version".enumType
-val shaderc_include_type = "enum shaderc_include_type".enumType
 val shaderc_limit = "shaderc_limit".enumType
 val shaderc_optimization_level = "shaderc_optimization_level".enumType
 val shaderc_profile = "shaderc_profile".enumType

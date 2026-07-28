@@ -14,7 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct parsl_mesh {
  *     uint32_t num_vertices;
  *     uint32_t num_triangles;
@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link ParSLAnnotation parsl_annotation} * annotations;
  *     float * spine_lengths;
  *     float * random_offsets;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct parsl_mesh")
 public class ParSLMesh extends Struct<ParSLMesh> {

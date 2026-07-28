@@ -14,11 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_ColorLine {
  *     FT_PaintExtend extend;
  *     {@link FT_ColorStopIterator FT_ColorStopIterator} color_stop_iterator;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_ColorLine extends Struct<FT_ColorLine> {
 
@@ -34,6 +34,8 @@ public class FT_ColorLine extends Struct<FT_ColorLine> {
         COLOR_STOP_ITERATOR;
 
     static {
+        FT_ColorStopIterator.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(FT_ColorStopIterator.SIZEOF, FT_ColorStopIterator.ALIGNOF)

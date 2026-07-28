@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrWorldMeshBlockStateML {
  *     XrStructureType type;
  *     void * next;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link XrExtent3DfEXT XrExtent3DfEXT} meshBoundingBoxExtents;
  *     XrTime lastUpdateTime;
  *     XrWorldMeshBlockStatusML status;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrWorldMeshBlockStateML extends Struct<XrWorldMeshBlockStateML> implements NativeResource {
 
@@ -46,6 +46,10 @@ public class XrWorldMeshBlockStateML extends Struct<XrWorldMeshBlockStateML> imp
         STATUS;
 
     static {
+        XrUuidEXT.createSafe(NULL);
+        XrPosef.createSafe(NULL);
+        XrExtent3DfEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

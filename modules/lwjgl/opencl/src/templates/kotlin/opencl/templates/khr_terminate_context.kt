@@ -12,12 +12,12 @@ val khr_terminate_context = "KHRTerminateContext".nativeClassCL("khr_terminate_c
         "DEVICE_TERMINATE_CAPABILITY_KHR"..0x2031
     )
 
-    IntConstant(
-        "CONTEXT_TERMINATE_KHR"..0x2032
+    LongConstant(
+        "CONTEXT_TERMINATE_KHR"..0x2032L
     )
 
-    IntConstant(
-        "DEVICE_TERMINATE_CAPABILITY_CONTEXT_KHR".."1 << 0"
+    LongConstant(
+        "DEVICE_TERMINATE_CAPABILITY_CONTEXT_KHR".."1L << 0"
     )
 
     IntConstant(

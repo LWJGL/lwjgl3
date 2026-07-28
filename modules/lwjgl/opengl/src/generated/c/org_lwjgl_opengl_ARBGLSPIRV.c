@@ -11,7 +11,7 @@ typedef void (APIENTRY *glSpecializeShaderARBPROC) (jint, uintptr_t, jint, uintp
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBGLSPIRV_nglSpecializeShaderARB__IJIJJ(JNIEnv *__env, jclass clazz, jint shader, jlong pEntryPointAddress, jint numSpecializationConstants, jlong pConstantIndexAddress, jlong pConstantValueAddress) {
-    glSpecializeShaderARBPROC glSpecializeShaderARB = (glSpecializeShaderARBPROC)tlsGetFunction(1151);
+    glSpecializeShaderARBPROC glSpecializeShaderARB = (glSpecializeShaderARBPROC)tlsGetFunction(1185);
     uintptr_t pEntryPoint = (uintptr_t)pEntryPointAddress;
     uintptr_t pConstantIndex = (uintptr_t)pConstantIndexAddress;
     uintptr_t pConstantValue = (uintptr_t)pConstantValueAddress;

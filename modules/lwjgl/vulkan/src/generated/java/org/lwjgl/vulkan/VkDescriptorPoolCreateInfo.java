@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDescriptorPoolCreateInfo {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t maxSets;
  *     uint32_t poolSizeCount;
  *     {@link VkDescriptorPoolSize VkDescriptorPoolSize} const * pPoolSizes;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDescriptorPoolCreateInfo extends Struct<VkDescriptorPoolCreateInfo> implements NativeResource {
 
@@ -112,6 +112,8 @@ public class VkDescriptorPoolCreateInfo extends Struct<VkDescriptorPoolCreateInf
     public VkDescriptorPoolCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkDescriptorPoolCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkDataGraphProcessingEngineCreateInfoARM} value to the {@code pNext} chain. */
+    public VkDescriptorPoolCreateInfo pNext(VkDataGraphProcessingEngineCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDescriptorPoolInlineUniformBlockCreateInfo} value to the {@code pNext} chain. */
     public VkDescriptorPoolCreateInfo pNext(VkDescriptorPoolInlineUniformBlockCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDescriptorPoolInlineUniformBlockCreateInfoEXT} value to the {@code pNext} chain. */
@@ -226,25 +228,6 @@ public class VkDescriptorPoolCreateInfo extends Struct<VkDescriptorPoolCreateInf
     public static VkDescriptorPoolCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorPoolCreateInfo mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorPoolCreateInfo callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorPoolCreateInfo mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorPoolCreateInfo callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorPoolCreateInfo.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorPoolCreateInfo.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorPoolCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDescriptorPoolCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkDescriptorPoolCreateInfo} instance allocated on the specified {@link MemoryStack}.
@@ -391,6 +374,8 @@ public class VkDescriptorPoolCreateInfo extends Struct<VkDescriptorPoolCreateInf
         public VkDescriptorPoolCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkDescriptorPoolCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkDescriptorPoolCreateInfo.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkDataGraphProcessingEngineCreateInfoARM} value to the {@code pNext} chain. */
+        public VkDescriptorPoolCreateInfo.Buffer pNext(VkDataGraphProcessingEngineCreateInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDescriptorPoolInlineUniformBlockCreateInfo} value to the {@code pNext} chain. */
         public VkDescriptorPoolCreateInfo.Buffer pNext(VkDescriptorPoolInlineUniformBlockCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDescriptorPoolInlineUniformBlockCreateInfoEXT} value to the {@code pNext} chain. */

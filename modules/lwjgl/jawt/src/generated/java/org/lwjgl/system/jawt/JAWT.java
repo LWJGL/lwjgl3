@@ -169,17 +169,6 @@ public class JAWT extends Struct<JAWT> implements NativeResource {
         return address == NULL ? null : new JAWT(address, null);
     }
 
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static JAWT mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static JAWT callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static JAWT mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static JAWT callocStack(MemoryStack stack) { return calloc(stack); }
-
     /**
      * Returns a new {@code JAWT} instance allocated on the specified {@link MemoryStack}.
      *

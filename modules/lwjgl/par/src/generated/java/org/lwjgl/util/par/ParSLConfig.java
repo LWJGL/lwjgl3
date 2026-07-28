@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct parsl_config {
  *     float thickness;
  *     uint32_t flags;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float streamlines_seed_spacing;
  *     {@link ParSLViewport parsl_viewport} streamlines_seed_viewport;
  *     float miter_limit;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct parsl_config")
 public class ParSLConfig extends Struct<ParSLConfig> implements NativeResource {
@@ -47,6 +47,8 @@ public class ParSLConfig extends Struct<ParSLConfig> implements NativeResource {
         MITER_LIMIT;
 
     static {
+        ParSLViewport.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),
@@ -228,25 +230,6 @@ public class ParSLConfig extends Struct<ParSLConfig> implements NativeResource {
     public static ParSLConfig.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static ParSLConfig mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static ParSLConfig callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static ParSLConfig mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static ParSLConfig callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static ParSLConfig.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static ParSLConfig.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static ParSLConfig.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static ParSLConfig.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code ParSLConfig} instance allocated on the specified {@link MemoryStack}.

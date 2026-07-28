@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * union VkAccelerationStructureGeometryDataKHR {
  *     {@link VkAccelerationStructureGeometryTrianglesDataKHR VkAccelerationStructureGeometryTrianglesDataKHR} triangles;
  *     {@link VkAccelerationStructureGeometryAabbsDataKHR VkAccelerationStructureGeometryAabbsDataKHR} aabbs;
  *     {@link VkAccelerationStructureGeometryInstancesDataKHR VkAccelerationStructureGeometryInstancesDataKHR} instances;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkAccelerationStructureGeometryDataKHR extends Struct<VkAccelerationStructureGeometryDataKHR> implements NativeResource {
 
@@ -38,6 +38,10 @@ public class VkAccelerationStructureGeometryDataKHR extends Struct<VkAcceleratio
         INSTANCES;
 
     static {
+        VkAccelerationStructureGeometryTrianglesDataKHR.createSafe(NULL);
+        VkAccelerationStructureGeometryAabbsDataKHR.createSafe(NULL);
+        VkAccelerationStructureGeometryInstancesDataKHR.createSafe(NULL);
+
         Layout layout = __union(
             __member(VkAccelerationStructureGeometryTrianglesDataKHR.SIZEOF, VkAccelerationStructureGeometryTrianglesDataKHR.ALIGNOF),
             __member(VkAccelerationStructureGeometryAabbsDataKHR.SIZEOF, VkAccelerationStructureGeometryAabbsDataKHR.ALIGNOF),

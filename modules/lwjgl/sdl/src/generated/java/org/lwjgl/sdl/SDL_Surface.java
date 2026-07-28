@@ -285,7 +285,7 @@ public class SDL_Surface extends Struct<SDL_Surface> implements NativeResource {
     public static @Nullable ByteBuffer npixels(long struct) { return memByteBufferSafe(memGetAddress(struct + SDL_Surface.PIXELS), npitch(struct) * nh(struct)); }
     /** Unsafe version of {@link #refcount}. */
     public static int nrefcount(long struct) { return memGetInt(struct + SDL_Surface.REFCOUNT); }
-    public static long nreserved(long struct) { return memGetAddress(struct + SDL_Surface.RESERVED); }
+    static long nreserved(long struct) { return memGetAddress(struct + SDL_Surface.RESERVED); }
 
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { memPutInt(struct + SDL_Surface.FLAGS, value); }
@@ -301,7 +301,7 @@ public class SDL_Surface extends Struct<SDL_Surface> implements NativeResource {
     public static void npixels(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + SDL_Surface.PIXELS, memAddressSafe(value)); }
     /** Unsafe version of {@link #refcount(int) refcount}. */
     public static void nrefcount(long struct, int value) { memPutInt(struct + SDL_Surface.REFCOUNT, value); }
-    public static void nreserved(long struct, long value) { memPutAddress(struct + SDL_Surface.RESERVED, value); }
+    static void nreserved(long struct, long value) { memPutAddress(struct + SDL_Surface.RESERVED, value); }
 
     // -----------------------------------
 

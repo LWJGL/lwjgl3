@@ -87,6 +87,7 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
     nullable.."PFN_vkGetDeviceBufferMemoryRequirementsKHR".handle("vkGetDeviceBufferMemoryRequirements")
     nullable.."PFN_vkGetDeviceImageMemoryRequirementsKHR".handle("vkGetDeviceImageMemoryRequirements")
     nullable.."PFN_vkGetMemoryWin32HandleKHR".handle("vkGetMemoryWin32HandleKHR")
+    nullable.."PFN_vkGetPhysicalDeviceProperties2KHR".handle("vkGetPhysicalDeviceProperties2KHR")
 
     customMethod("""
     /**
@@ -192,6 +193,7 @@ val VmaAllocationCreateInfo = struct(Module.VMA, "VmaAllocationCreateInfo") {
     nullable..VmaPool("pool")
     nullable..opaque_p("pUserData")
     float("priority")
+    VkDeviceSize("minAlignment")
 }
 
 val VmaPoolCreateInfo = struct(Module.VMA, "VmaPoolCreateInfo") {

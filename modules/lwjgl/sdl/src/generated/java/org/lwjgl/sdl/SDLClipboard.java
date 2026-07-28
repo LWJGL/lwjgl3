@@ -168,15 +168,15 @@ public class SDLClipboard {
 
     // --- [ SDL_SetClipboardData ] ---
 
-    /** {@code bool SDL_SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCleanupCallback cleanup, void * userdata, char const ** mime_types, size_t num_mime_types)} */
+    /** {@code bool SDL_SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCleanupCallback cleanup, void * userdata, char const * const * mime_types, size_t num_mime_types)} */
     public static boolean nSDL_SetClipboardData(long callback, long cleanup, long userdata, long mime_types, long num_mime_types) {
         long __functionAddress = Functions.SetClipboardData;
         return invokePPPPPZ(callback, cleanup, userdata, mime_types, num_mime_types, __functionAddress);
     }
 
-    /** {@code bool SDL_SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCleanupCallback cleanup, void * userdata, char const ** mime_types, size_t num_mime_types)} */
+    /** {@code bool SDL_SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCleanupCallback cleanup, void * userdata, char const * const * mime_types, size_t num_mime_types)} */
     @NativeType("bool")
-    public static boolean SDL_SetClipboardData(@NativeType("SDL_ClipboardDataCallback") SDL_ClipboardDataCallbackI callback, @NativeType("SDL_ClipboardCleanupCallback") SDL_ClipboardCleanupCallbackI cleanup, @NativeType("void *") long userdata, @NativeType("char const **") PointerBuffer mime_types) {
+    public static boolean SDL_SetClipboardData(@NativeType("SDL_ClipboardDataCallback") SDL_ClipboardDataCallbackI callback, @NativeType("SDL_ClipboardCleanupCallback") SDL_ClipboardCleanupCallbackI cleanup, @NativeType("void *") long userdata, @NativeType("char const * const *") PointerBuffer mime_types) {
         return nSDL_SetClipboardData(callback.address(), cleanup.address(), userdata, memAddress(mime_types), mime_types.remaining());
     }
 

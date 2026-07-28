@@ -19,11 +19,11 @@ val SDL_init = "SDLInit".nativeClassSDL("SDL_init") {
         "INIT_CAMERA".."0x00010000"
     )
 
-    /*EnumConstant(
+    EnumConstant(
         "APP_CONTINUE".enum("0"),
         "APP_SUCCESS".enum,
         "APP_FAILURE".enum
-    )*/
+    )
 
     StringConstant(
         "PROP_APP_METADATA_NAME_STRING".."SDL.app.metadata.name",

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoAV1Quantization {
  *     {@link StdVideoAV1QuantizationFlags StdVideoAV1QuantizationFlags} flags;
  *     uint8_t base_q_idx;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint8_t qm_y;
  *     uint8_t qm_u;
  *     uint8_t qm_v;
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoAV1Quantization extends Struct<StdVideoAV1Quantization> implements NativeResource {
 
@@ -52,6 +52,8 @@ public class StdVideoAV1Quantization extends Struct<StdVideoAV1Quantization> imp
         QM_V;
 
     static {
+        StdVideoAV1QuantizationFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoAV1QuantizationFlags.SIZEOF, StdVideoAV1QuantizationFlags.ALIGNOF),
             __member(1),

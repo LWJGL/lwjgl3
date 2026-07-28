@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkTilePropertiesQCOM {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkExtent3D VkExtent3D} tileSize;
  *     {@link VkExtent2D VkExtent2D} apronSize;
  *     {@link VkOffset2D VkOffset2D} origin;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkTilePropertiesQCOM extends Struct<VkTilePropertiesQCOM> implements NativeResource {
 
@@ -42,6 +42,10 @@ public class VkTilePropertiesQCOM extends Struct<VkTilePropertiesQCOM> implement
         ORIGIN;
 
     static {
+        VkExtent3D.createSafe(NULL);
+        VkExtent2D.createSafe(NULL);
+        VkOffset2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

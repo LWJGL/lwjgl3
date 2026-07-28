@@ -14,21 +14,21 @@ typedef jint (APIENTRY *glGetDebugMessageLogARBPROC) (jint, jint, uintptr_t, uin
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBDebugOutput_nglDebugMessageControlARB__IIIIJZ(JNIEnv *__env, jclass clazz, jint source, jint type, jint severity, jint count, jlong idsAddress, jboolean enabled) {
-    glDebugMessageControlARBPROC glDebugMessageControlARB = (glDebugMessageControlARBPROC)tlsGetFunction(1133);
+    glDebugMessageControlARBPROC glDebugMessageControlARB = (glDebugMessageControlARBPROC)tlsGetFunction(1167);
     uintptr_t ids = (uintptr_t)idsAddress;
     UNUSED_PARAM(clazz)
     glDebugMessageControlARB(source, type, severity, count, ids, enabled);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBDebugOutput_nglDebugMessageInsertARB(JNIEnv *__env, jclass clazz, jint source, jint type, jint id, jint severity, jint length, jlong bufAddress) {
-    glDebugMessageInsertARBPROC glDebugMessageInsertARB = (glDebugMessageInsertARBPROC)tlsGetFunction(1134);
+    glDebugMessageInsertARBPROC glDebugMessageInsertARB = (glDebugMessageInsertARBPROC)tlsGetFunction(1168);
     uintptr_t buf = (uintptr_t)bufAddress;
     UNUSED_PARAM(clazz)
     glDebugMessageInsertARB(source, type, id, severity, length, buf);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBDebugOutput_nglDebugMessageCallbackARB(JNIEnv *__env, jclass clazz, jlong callbackAddress, jlong userParamAddress) {
-    glDebugMessageCallbackARBPROC glDebugMessageCallbackARB = (glDebugMessageCallbackARBPROC)tlsGetFunction(1135);
+    glDebugMessageCallbackARBPROC glDebugMessageCallbackARB = (glDebugMessageCallbackARBPROC)tlsGetFunction(1169);
     uintptr_t callback = (uintptr_t)callbackAddress;
     uintptr_t userParam = (uintptr_t)userParamAddress;
     UNUSED_PARAM(clazz)
@@ -36,7 +36,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBDebugOutput_nglDebugMessageCallb
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_ARBDebugOutput_nglGetDebugMessageLogARB__IIJJJJJJ(JNIEnv *__env, jclass clazz, jint count, jint bufSize, jlong sourcesAddress, jlong typesAddress, jlong idsAddress, jlong severitiesAddress, jlong lengthsAddress, jlong messageLogAddress) {
-    glGetDebugMessageLogARBPROC glGetDebugMessageLogARB = (glGetDebugMessageLogARBPROC)tlsGetFunction(1136);
+    glGetDebugMessageLogARBPROC glGetDebugMessageLogARB = (glGetDebugMessageLogARBPROC)tlsGetFunction(1170);
     uintptr_t sources = (uintptr_t)sourcesAddress;
     uintptr_t types = (uintptr_t)typesAddress;
     uintptr_t ids = (uintptr_t)idsAddress;

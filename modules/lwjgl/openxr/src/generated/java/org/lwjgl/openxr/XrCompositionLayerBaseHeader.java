@@ -208,6 +208,11 @@ public class XrCompositionLayerBaseHeader extends Struct<XrCompositionLayerBaseH
         return new XrCompositionLayerBaseHeader(value.address(), __getContainer(value));
     }
 
+    /** Upcasts the specified {@code XrCompositionLayerPassthroughANDROID} instance to {@code XrCompositionLayerBaseHeader}. */
+    public static XrCompositionLayerBaseHeader create(XrCompositionLayerPassthroughANDROID value) {
+        return new XrCompositionLayerBaseHeader(value.address(), __getContainer(value));
+    }
+
     /**
      * Returns a new {@link XrCompositionLayerBaseHeader.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -288,6 +293,11 @@ public class XrCompositionLayerBaseHeader extends Struct<XrCompositionLayerBaseH
 
     /** Upcasts the specified {@code XrCompositionLayerPassthroughHTC.Buffer} instance to {@code XrCompositionLayerBaseHeader.Buffer}. */
     public static XrCompositionLayerBaseHeader.Buffer create(XrCompositionLayerPassthroughHTC.Buffer value) {
+        return new XrCompositionLayerBaseHeader.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
+    }
+
+    /** Upcasts the specified {@code XrCompositionLayerPassthroughANDROID.Buffer} instance to {@code XrCompositionLayerBaseHeader.Buffer}. */
+    public static XrCompositionLayerBaseHeader.Buffer create(XrCompositionLayerPassthroughANDROID.Buffer value) {
         return new XrCompositionLayerBaseHeader.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 

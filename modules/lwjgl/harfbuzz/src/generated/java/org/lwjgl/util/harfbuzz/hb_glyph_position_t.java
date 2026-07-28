@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct hb_glyph_position_t {
  *     hb_position_t x_advance;
  *     hb_position_t y_advance;
  *     hb_position_t x_offset;
  *     hb_position_t y_offset;
  *     {@link hb_var_int_t hb_var_int_t} var;
- * }}</pre>
+ * }</code></pre>
  */
 public class hb_glyph_position_t extends Struct<hb_glyph_position_t> implements NativeResource {
 
@@ -42,6 +42,8 @@ public class hb_glyph_position_t extends Struct<hb_glyph_position_t> implements 
         VAR;
 
     static {
+        hb_var_int_t.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),
@@ -250,7 +252,7 @@ public class hb_glyph_position_t extends Struct<hb_glyph_position_t> implements 
     public static int nx_offset(long struct) { return memGetInt(struct + hb_glyph_position_t.X_OFFSET); }
     /** Unsafe version of {@link #y_offset}. */
     public static int ny_offset(long struct) { return memGetInt(struct + hb_glyph_position_t.Y_OFFSET); }
-    public static hb_var_int_t nvar(long struct) { return hb_var_int_t.create(struct + hb_glyph_position_t.VAR); }
+    static hb_var_int_t nvar(long struct) { return hb_var_int_t.create(struct + hb_glyph_position_t.VAR); }
 
     /** Unsafe version of {@link #x_advance(int) x_advance}. */
     public static void nx_advance(long struct, int value) { memPutInt(struct + hb_glyph_position_t.X_ADVANCE, value); }
@@ -260,7 +262,7 @@ public class hb_glyph_position_t extends Struct<hb_glyph_position_t> implements 
     public static void nx_offset(long struct, int value) { memPutInt(struct + hb_glyph_position_t.X_OFFSET, value); }
     /** Unsafe version of {@link #y_offset(int) y_offset}. */
     public static void ny_offset(long struct, int value) { memPutInt(struct + hb_glyph_position_t.Y_OFFSET, value); }
-    public static void nvar(long struct, hb_var_int_t value) { memCopy(value.address(), struct + hb_glyph_position_t.VAR, hb_var_int_t.SIZEOF); }
+    static void nvar(long struct, hb_var_int_t value) { memCopy(value.address(), struct + hb_glyph_position_t.VAR, hb_var_int_t.SIZEOF); }
 
     // -----------------------------------
 

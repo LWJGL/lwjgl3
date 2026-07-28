@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPipelineSampleLocationsStateCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkBool32 sampleLocationsEnable;
  *     {@link VkSampleLocationsInfoEXT VkSampleLocationsInfoEXT} sampleLocationsInfo;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct<VkPipelineSampleLocationsStateCreateInfoEXT> implements NativeResource {
 
@@ -40,6 +40,8 @@ public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct<VkPipeli
         SAMPLELOCATIONSINFO;
 
     static {
+        VkSampleLocationsInfoEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -200,25 +202,6 @@ public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct<VkPipeli
     public static VkPipelineSampleLocationsStateCreateInfoEXT.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPipelineSampleLocationsStateCreateInfoEXT mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPipelineSampleLocationsStateCreateInfoEXT callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPipelineSampleLocationsStateCreateInfoEXT mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPipelineSampleLocationsStateCreateInfoEXT callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPipelineSampleLocationsStateCreateInfoEXT.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPipelineSampleLocationsStateCreateInfoEXT.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPipelineSampleLocationsStateCreateInfoEXT.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPipelineSampleLocationsStateCreateInfoEXT.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkPipelineSampleLocationsStateCreateInfoEXT} instance allocated on the specified {@link MemoryStack}.

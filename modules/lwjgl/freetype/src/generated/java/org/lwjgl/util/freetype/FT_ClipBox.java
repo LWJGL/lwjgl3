@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_ClipBox {
  *     {@link FT_Vector FT_Vector} bottom_left;
  *     {@link FT_Vector FT_Vector} top_left;
  *     {@link FT_Vector FT_Vector} top_right;
  *     {@link FT_Vector FT_Vector} bottom_right;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_ClipBox extends Struct<FT_ClipBox> implements NativeResource {
 
@@ -40,6 +40,8 @@ public class FT_ClipBox extends Struct<FT_ClipBox> implements NativeResource {
         BOTTOM_RIGHT;
 
     static {
+        FT_Vector.createSafe(NULL);
+
         Layout layout = __struct(
             __member(FT_Vector.SIZEOF, FT_Vector.ALIGNOF),
             __member(FT_Vector.SIZEOF, FT_Vector.ALIGNOF),

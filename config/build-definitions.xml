@@ -128,8 +128,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <property name="build.output" location="${env.LWJGL_BUILD_OUTPUT}" relative="false" if:set="env.LWJGL_BUILD_OUTPUT"/>
 
     <property name="lib" location="bin/libs" relative="true"/>
-
-    <property name="kotlinc" location="${lib}/kotlinc" relative="true"/>
+    <property name="kotlinc" location="${lib}/java/kotlinc" relative="true"/>
 
     <property name="module.lwjgl" location="modules/lwjgl" relative="true"/>
 
@@ -148,9 +147,6 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <property name="bin.test.html" location="bin/test" relative="true"/>
 
     <property name="release" location="bin/RELEASE" relative="true"/>
-    <property name="release.doc" location="${release}/doc" relative="true"/>
-    <property name="release.jar" location="${release}/jar" relative="true"/>
-    <property name="release.native" location="${release}/native" relative="true"/>
 
     <!--
         Offline build flag. This is useful when working offline, or when custom binary dependencies
@@ -187,9 +183,9 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <detectJDKVersion/>
 
     <!-- May be set in the ant command line to test multi-release implementations. -->
-    <condition property="core.java23"><isset property="core.java24"/></condition>
-    <condition property="core.java22"><isset property="core.java23"/></condition>
-    <condition property="core.java21"><isset property="core.java22"/></condition>
+    <condition property="core.java26"><isset property="core.java27"/></condition>
+    <condition property="core.java25"><isset property="core.java26"/></condition>
+    <condition property="core.java21"><isset property="core.java25"/></condition>
     <condition property="core.java17"><isset property="core.java21"/></condition>
     <condition property="core.java11"><isset property="core.java17"/></condition>
 
@@ -208,9 +204,32 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <import file="build-bindings.xml"/>
     <bindingConfig/>
 
+    <presetdef name="kotlinc">
+        <java
+            classname="org.jetbrains.kotlin.cli.jvm.K2JVMCompiler"
+            fork="true"
+            failonerror="true"
+        >
+            <classpath>
+                <pathelement path="${kotlinc}/lib/annotations.jar"/>
+                <pathelement path="${kotlinc}/lib/kotlin-stdlib.jar"/>
+                <pathelement path="${kotlinc}/lib/kotlin-reflect.jar"/>
+                <pathelement path="${kotlinc}/lib/kotlinx-coroutines-core-jvm.jar"/>
+                <!--<pathelement path="${kotlinc}/lib/kotlin-script-runtime.jar"/>-->
+                <pathelement path="${kotlinc}/kotlin-compiler-embeddable.jar"/>
+                <!--<pathelement path="${kotlinc}/kotlin-scripting-compiler-embeddable.jar"/>-->
+            </classpath>
+
+            <arg line="-kotlin-home ${kotlinc}"/>
+            <arg line='-jdk-home "${env.JAVA8_HOME}"' if:set="env.JAVA8_HOME"/>
+            <arg value="@config/cli/kotlinc.args"/>
+        </java>
+    </presetdef>
+
     <presetdef name="lwjgl.javac">
         <javac sourcepath="" debug="yes" source="8" target="8" encoding="UTF-8" includeantruntime="false">
             <compilerarg line='--boot-class-path "${env.JAVA8_HOME}/jre/lib/rt.jar"' if:set="set-boot-class-path"/>
+            <compilerarg line="-proc:full" if:set="jdk11"/>
             <compilerarg value="-Xlint:all" unless:set="jdk21"/>
             <compilerarg line="-Xlint:all,-options" if:set="jdk21"/>
             <compilerarg value="-XDignore.symbol.file"/> <!-- Suppresses internal API (e.g. Unsafe) usage warnings -->
@@ -220,23 +239,26 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <presetdef name="lwjgl.javac11">
         <javac sourcepath="" debug="yes" encoding="UTF-8" includeantruntime="false">
             <compilerarg line="--release 11"/>
+            <compilerarg value="-proc:full"/>
             <compilerarg value="-Xlint:all"/>
             <compilerarg value="-XDignore.symbol.file"/>
         </javac>
     </presetdef>
 
-    <presetdef name="lwjgl.javac17">
+    <presetdef name="lwjgl.javac25">
         <javac sourcepath="" debug="yes" encoding="UTF-8" includeantruntime="false">
-            <compilerarg line="--release 17"/>
-            <compilerarg value="-Xlint:all"/>
+            <compilerarg line='--source 25 --target 25 --system "${env.JAVA_HOME}"'/>
+            <compilerarg line="-proc:full"/>
+            <compilerarg value="-Xlint:all,-restricted"/>
             <compilerarg value="-XDignore.symbol.file"/>
         </javac>
     </presetdef>
 
-    <presetdef name="lwjgl.javac21">
+    <presetdef name="lwjgl.javac27">
         <javac sourcepath="" debug="yes" encoding="UTF-8" includeantruntime="false">
-            <compilerarg line="--release 21"/>
-            <compilerarg value="-Xlint:all"/>
+            <compilerarg line='--source 27 --target 27 --system "${env.JAVA_HOME}"'/>
+            <compilerarg line="-proc:full"/>
+            <compilerarg value="-Xlint:all,-restricted"/>
             <compilerarg value="-XDignore.symbol.file"/>
         </javac>
     </presetdef>

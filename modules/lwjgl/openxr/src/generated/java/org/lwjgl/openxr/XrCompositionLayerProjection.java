@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrCompositionLayerProjection {
  *     XrStructureType type;
  *     void const * next;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrSpace space;
  *     uint32_t viewCount;
  *     {@link XrCompositionLayerProjectionView XrCompositionLayerProjectionView} const * views;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrCompositionLayerProjection extends Struct<XrCompositionLayerProjection> implements NativeResource {
 

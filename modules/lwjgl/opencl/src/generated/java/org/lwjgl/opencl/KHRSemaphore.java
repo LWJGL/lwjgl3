@@ -32,10 +32,11 @@ public class KHRSemaphore {
         CL_SEMAPHORE_PROPERTIES_KHR      = 0x203B,
         CL_SEMAPHORE_PAYLOAD_KHR         = 0x203C;
 
-    public static final int
-        CL_SEMAPHORE_TYPE_KHR                   = 0x203D,
-        CL_SEMAPHORE_DEVICE_HANDLE_LIST_KHR     = 0x2051,
-        CL_SEMAPHORE_DEVICE_HANDLE_LIST_END_KHR = 0;
+    public static final int CL_SEMAPHORE_TYPE_KHR = 0x203D;
+
+    public static final long
+        CL_SEMAPHORE_DEVICE_HANDLE_LIST_KHR     = 0x2051L,
+        CL_SEMAPHORE_DEVICE_HANDLE_LIST_END_KHR = 0L;
 
     public static final int
         CL_COMMAND_SEMAPHORE_WAIT_KHR   = 0x2042,

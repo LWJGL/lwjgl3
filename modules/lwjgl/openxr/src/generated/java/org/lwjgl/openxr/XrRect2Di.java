@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrRect2Di {
  *     {@link XrOffset2Di XrOffset2Di} offset;
  *     {@link XrExtent2Di XrExtent2Di} extent;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrRect2Di extends Struct<XrRect2Di> implements NativeResource {
 
@@ -36,6 +36,9 @@ public class XrRect2Di extends Struct<XrRect2Di> implements NativeResource {
         EXTENT;
 
     static {
+        XrOffset2Di.createSafe(NULL);
+        XrExtent2Di.createSafe(NULL);
+
         Layout layout = __struct(
             __member(XrOffset2Di.SIZEOF, XrOffset2Di.ALIGNOF),
             __member(XrExtent2Di.SIZEOF, XrExtent2Di.ALIGNOF)

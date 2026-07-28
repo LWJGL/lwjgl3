@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct io_uring {
  *     {@link IOURingSQ struct io_uring_sq} sq;
  *     {@link IOURingCQ struct io_uring_cq} cq;
@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     __u8 int_flags;
  *     __u8 pad[3];
  *     unsigned pad2;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct io_uring")
 public class IOURing extends Struct<IOURing> implements NativeResource {
@@ -52,6 +52,9 @@ public class IOURing extends Struct<IOURing> implements NativeResource {
         PAD2;
 
     static {
+        IOURingSQ.createSafe(NULL);
+        IOURingCQ.createSafe(NULL);
+
         Layout layout = __struct(
             __member(IOURingSQ.SIZEOF, IOURingSQ.ALIGNOF),
             __member(IOURingCQ.SIZEOF, IOURingCQ.ALIGNOF),
@@ -297,11 +300,11 @@ public class IOURing extends Struct<IOURing> implements NativeResource {
     public static int nenter_ring_fd(long struct) { return memGetInt(struct + IOURing.ENTER_RING_FD); }
     /** Unsafe version of {@link #int_flags}. */
     public static byte nint_flags(long struct) { return memGetByte(struct + IOURing.INT_FLAGS); }
-    public static ByteBuffer npad(long struct) { return memByteBuffer(struct + IOURing.PAD, 3); }
-    public static byte npad(long struct, int index) {
+    static ByteBuffer npad(long struct) { return memByteBuffer(struct + IOURing.PAD, 3); }
+    static byte npad(long struct, int index) {
         return memGetByte(struct + IOURing.PAD + check(index, 3) * 1);
     }
-    public static int npad2(long struct) { return memGetInt(struct + IOURing.PAD2); }
+    static int npad2(long struct) { return memGetInt(struct + IOURing.PAD2); }
 
     /** Unsafe version of {@link #sq(IOURingSQ) sq}. */
     public static void nsq(long struct, IOURingSQ value) { memCopy(value.address(), struct + IOURing.SQ, IOURingSQ.SIZEOF); }
@@ -317,14 +320,14 @@ public class IOURing extends Struct<IOURing> implements NativeResource {
     public static void nenter_ring_fd(long struct, int value) { memPutInt(struct + IOURing.ENTER_RING_FD, value); }
     /** Unsafe version of {@link #int_flags(byte) int_flags}. */
     public static void nint_flags(long struct, byte value) { memPutByte(struct + IOURing.INT_FLAGS, value); }
-    public static void npad(long struct, ByteBuffer value) {
+    static void npad(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + IOURing.PAD, value.remaining() * 1);
     }
-    public static void npad(long struct, int index, byte value) {
+    static void npad(long struct, int index, byte value) {
         memPutByte(struct + IOURing.PAD + check(index, 3) * 1, value);
     }
-    public static void npad2(long struct, int value) { memPutInt(struct + IOURing.PAD2, value); }
+    static void npad2(long struct, int value) { memPutInt(struct + IOURing.PAD2, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

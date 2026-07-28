@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoBeginCodingInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkVideoSessionParametersKHR videoSessionParameters;
  *     uint32_t referenceSlotCount;
  *     {@link VkVideoReferenceSlotInfoKHR VkVideoReferenceSlotInfoKHR} const * pReferenceSlots;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoBeginCodingInfoKHR extends Struct<VkVideoBeginCodingInfoKHR> implements NativeResource {
 

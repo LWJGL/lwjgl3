@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkDisplayPlaneCapabilitiesKHR {
  *     VkDisplayPlaneAlphaFlagsKHR supportedAlpha;
  *     {@link VkOffset2D VkOffset2D} minSrcPosition;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkOffset2D VkOffset2D} maxDstPosition;
  *     {@link VkExtent2D VkExtent2D} minDstExtent;
  *     {@link VkExtent2D VkExtent2D} maxDstExtent;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDisplayPlaneCapabilitiesKHR extends Struct<VkDisplayPlaneCapabilitiesKHR> implements NativeResource {
 
@@ -50,6 +50,9 @@ public class VkDisplayPlaneCapabilitiesKHR extends Struct<VkDisplayPlaneCapabili
         MAXDSTEXTENT;
 
     static {
+        VkOffset2D.createSafe(NULL);
+        VkExtent2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(VkOffset2D.SIZEOF, VkOffset2D.ALIGNOF),
@@ -188,25 +191,6 @@ public class VkDisplayPlaneCapabilitiesKHR extends Struct<VkDisplayPlaneCapabili
     public static VkDisplayPlaneCapabilitiesKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkDisplayPlaneCapabilitiesKHR mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkDisplayPlaneCapabilitiesKHR callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkDisplayPlaneCapabilitiesKHR mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkDisplayPlaneCapabilitiesKHR callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDisplayPlaneCapabilitiesKHR.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDisplayPlaneCapabilitiesKHR.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDisplayPlaneCapabilitiesKHR.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkDisplayPlaneCapabilitiesKHR.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkDisplayPlaneCapabilitiesKHR} instance allocated on the specified {@link MemoryStack}.

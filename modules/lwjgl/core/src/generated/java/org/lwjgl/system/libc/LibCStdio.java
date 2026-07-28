@@ -23,6 +23,77 @@ public class LibCStdio {
         throw new UnsupportedOperationException();
     }
 
+    // --- [ stdin ] ---
+
+    @NativeType("FILE *")
+    private static native long stdin();
+
+    /** {@code FILE * stdin(void)} */
+    public static final long stdin = stdin();
+
+    // --- [ stdout ] ---
+
+    @NativeType("FILE *")
+    private static native long stdout();
+
+    /** {@code FILE * stdout(void)} */
+    public static final long stdout = stdout();
+
+    // --- [ stderr ] ---
+
+    @NativeType("FILE *")
+    private static native long stderr();
+
+    /** {@code FILE * stderr(void)} */
+    public static final long stderr = stderr();
+
+    // --- [ fflush ] ---
+
+    /** {@code int fflush(FILE * stream)} */
+    public static native int nfflush(long stream);
+
+    /** {@code int fflush(FILE * stream)} */
+    public static int fflush(@NativeType("FILE *") long stream) {
+        if (CHECKS) {
+            check(stream);
+        }
+        return nfflush(stream);
+    }
+
+    // --- [ feof ] ---
+
+    /** {@code int feof(FILE * stream)} */
+    public static native int nfeof(long stream);
+
+    /** {@code int feof(FILE * stream)} */
+    public static int feof(@NativeType("FILE *") long stream) {
+        if (CHECKS) {
+            check(stream);
+        }
+        return nfeof(stream);
+    }
+
+    // --- [ ferror ] ---
+
+    /** {@code int ferror(FILE * stream)} */
+    public static native int nferror(long stream);
+
+    /** {@code int ferror(FILE * stream)} */
+    public static int ferror(@NativeType("FILE *") long stream) {
+        if (CHECKS) {
+            check(stream);
+        }
+        return nferror(stream);
+    }
+
+    // --- [ fscanf ] ---
+
+    @NativeType("void *")
+    private static native long fscanf();
+
+    /** {@code void * fscanf(void)} */
+    public static final long fscanf = fscanf();
+
     // --- [ sscanf ] ---
 
     @NativeType("void *")
@@ -62,6 +133,14 @@ public class LibCStdio {
             stack.setPointer(stackPointer);
         }
     }
+
+    // --- [ fprintf ] ---
+
+    @NativeType("void *")
+    private static native long fprintf();
+
+    /** {@code void * fprintf(void)} */
+    public static final long fprintf = fprintf();
 
     // --- [ snprintf ] ---
 

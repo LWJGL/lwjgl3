@@ -10,7 +10,7 @@ import vulkan.*
 
 val NVX_image_view_handle = "NVXImageViewHandle".nativeClassVK("NVX_image_view_handle", type = "device", postfix = "NVX") {
     IntConstant(
-        "NVX_IMAGE_VIEW_HANDLE_SPEC_VERSION".."3"
+        "NVX_IMAGE_VIEW_HANDLE_SPEC_VERSION".."4"
     )
 
     StringConstant(
@@ -42,5 +42,13 @@ val NVX_image_view_handle = "NVXImageViewHandle".nativeClassVK("NVX_image_view_h
         VkDevice("device"),
         VkImageView("imageView"),
         VkImageViewAddressPropertiesNVX.p("pProperties")
+    )
+
+    uint64_t(
+        "GetDeviceCombinedImageSamplerIndexNVX",
+
+        VkDevice("device"),
+        uint64_t("imageViewIndex"),
+        uint64_t("samplerIndex")
     )
 }

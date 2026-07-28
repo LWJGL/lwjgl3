@@ -17,12 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.nuklear.Nuklear.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_keyboard {
  *     {@link NkKey struct nk_key} keys[NK_KEY_MAX];
  *     char text[NK_INPUT_MAX];
  *     int text_len;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_keyboard")
 public class NkKeyboard extends Struct<NkKeyboard> {
@@ -40,6 +40,8 @@ public class NkKeyboard extends Struct<NkKeyboard> {
         TEXT_LEN;
 
     static {
+        NkKey.createSafe(NULL);
+
         Layout layout = __struct(
             __array(NkKey.SIZEOF, NkKey.ALIGNOF, NK_KEY_MAX),
             __array(1, NK_INPUT_MAX),

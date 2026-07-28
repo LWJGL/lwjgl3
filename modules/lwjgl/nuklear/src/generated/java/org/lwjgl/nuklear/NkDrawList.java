@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_draw_list {
  *     {@link NkRect struct nk_rect} clip_rect;
  *     {@link NkVec2 struct nk_vec2} circle_vtx[12];
@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     enum nk_anti_aliasing line_AA;
  *     enum nk_anti_aliasing shape_AA;
  *     {@link NkHandle nk_handle} userdata;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_draw_list")
 public class NkDrawList extends Struct<NkDrawList> implements NativeResource {
@@ -64,6 +64,11 @@ public class NkDrawList extends Struct<NkDrawList> implements NativeResource {
         USERDATA;
 
     static {
+        NkRect.createSafe(NULL);
+        NkVec2.createSafe(NULL);
+        NkConvertConfig.createSafe(NULL);
+        NkHandle.createSafe(NULL);
+
         Layout layout = __struct(
             __member(NkRect.SIZEOF, NkRect.ALIGNOF),
             __array(NkVec2.SIZEOF, NkVec2.ALIGNOF, 12),
@@ -243,25 +248,6 @@ public class NkDrawList extends Struct<NkDrawList> implements NativeResource {
     public static NkDrawList.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkDrawList mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkDrawList callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkDrawList mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkDrawList callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkDrawList.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkDrawList.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkDrawList.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkDrawList.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code NkDrawList} instance allocated on the specified {@link MemoryStack}.

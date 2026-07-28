@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK12.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPhysicalDeviceDriverPropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
@@ -26,7 +26,7 @@ import static org.lwjgl.vulkan.VK12.*;
  *     char driverName[VK_MAX_DRIVER_NAME_SIZE];
  *     char driverInfo[VK_MAX_DRIVER_INFO_SIZE];
  *     {@link VkConformanceVersion VkConformanceVersion} conformanceVersion;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceDriverPropertiesKHR extends VkPhysicalDeviceDriverProperties {
 
@@ -153,25 +153,6 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends VkPhysicalDeviceDriverP
     public static VkPhysicalDeviceDriverPropertiesKHR.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceDriverPropertiesKHR mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceDriverPropertiesKHR callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceDriverPropertiesKHR mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceDriverPropertiesKHR callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceDriverPropertiesKHR.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceDriverPropertiesKHR.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceDriverPropertiesKHR.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkPhysicalDeviceDriverPropertiesKHR.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkPhysicalDeviceDriverPropertiesKHR} instance allocated on the specified {@link MemoryStack}.

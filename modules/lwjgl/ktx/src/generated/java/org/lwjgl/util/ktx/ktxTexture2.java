@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct ktxTexture2 {
  *     class_id classId;
  *     {@link ktxTexture_vtbl struct ktxTexture_vtbl} * vtbl;
@@ -47,7 +47,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     ktx_uint32_t timescale;
  *     ktx_uint32_t loopcount;
  *     struct ktxTexture2_private * _private;
- * }}</pre>
+ * }</code></pre>
  */
 public class ktxTexture2 extends Struct<ktxTexture2> implements NativeResource {
 
@@ -90,6 +90,8 @@ public class ktxTexture2 extends Struct<ktxTexture2> implements NativeResource {
         _PRIVATE;
 
     static {
+        ktxOrientation.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -430,7 +432,7 @@ public class ktxTexture2 extends Struct<ktxTexture2> implements NativeResource {
     public static int ntimescale(long struct) { return memGetInt(struct + ktxTexture2.TIMESCALE); }
     /** Unsafe version of {@link #loopcount}. */
     public static int nloopcount(long struct) { return memGetInt(struct + ktxTexture2.LOOPCOUNT); }
-    public static PointerBuffer n_private(long struct, int capacity) { return memPointerBuffer(memGetAddress(struct + ktxTexture2._PRIVATE), capacity); }
+    static PointerBuffer n_private(long struct, int capacity) { return memPointerBuffer(memGetAddress(struct + ktxTexture2._PRIVATE), capacity); }
 
     // -----------------------------------
 

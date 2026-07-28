@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct spng_alloc {
  *     {@link spng_malloc_fnI spng_malloc_fn} * malloc_fn;
  *     {@link spng_realloc_fnI spng_realloc_fn} * realloc_fn;
  *     {@link spng_calloc_fnI spng_calloc_fn} * calloc_fn;
  *     {@link spng_free_fnI spng_free_fn} * free_fn;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct spng_alloc")
 public class spng_alloc extends Struct<spng_alloc> implements NativeResource {

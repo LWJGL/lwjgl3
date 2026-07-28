@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoFormatQuantizationMapPropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkExtent2D VkExtent2D} quantizationMapTexelSize;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoFormatQuantizationMapPropertiesKHR extends Struct<VkVideoFormatQuantizationMapPropertiesKHR> implements NativeResource {
 
@@ -38,6 +38,8 @@ public class VkVideoFormatQuantizationMapPropertiesKHR extends Struct<VkVideoFor
         QUANTIZATIONMAPTEXELSIZE;
 
     static {
+        VkExtent2D.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

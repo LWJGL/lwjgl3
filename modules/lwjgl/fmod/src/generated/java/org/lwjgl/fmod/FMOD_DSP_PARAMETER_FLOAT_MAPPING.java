@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FMOD_DSP_PARAMETER_FLOAT_MAPPING {
  *     FMOD_DSP_PARAMETER_FLOAT_MAPPING_TYPE type;
  *     {@link FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR} piecewiselinearmapping;
- * }}</pre>
+ * }</code></pre>
  */
 public class FMOD_DSP_PARAMETER_FLOAT_MAPPING extends Struct<FMOD_DSP_PARAMETER_FLOAT_MAPPING> implements NativeResource {
 
@@ -36,6 +36,8 @@ public class FMOD_DSP_PARAMETER_FLOAT_MAPPING extends Struct<FMOD_DSP_PARAMETER_
         PIECEWISELINEARMAPPING;
 
     static {
+        FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR.SIZEOF, FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR.ALIGNOF)

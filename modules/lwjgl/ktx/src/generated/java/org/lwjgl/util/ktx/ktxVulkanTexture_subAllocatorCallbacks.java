@@ -45,6 +45,13 @@ public class ktxVulkanTexture_subAllocatorCallbacks extends Struct<ktxVulkanText
         FREEMEMFUNCPTR;
 
     static {
+        java.util.Objects.requireNonNull(ktxVulkanTexture_subAllocatorAllocMemFuncPtrI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(ktxVulkanTexture_subAllocatorBindBufferFuncPtrI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(ktxVulkanTexture_subAllocatorBindImageFuncPtrI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(ktxVulkanTexture_subAllocatorMemoryMapFuncPtrI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtrI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(ktxVulkanTexture_subAllocatorFreeMemFuncPtrI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

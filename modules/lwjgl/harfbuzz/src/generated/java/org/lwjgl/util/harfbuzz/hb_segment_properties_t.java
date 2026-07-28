@@ -241,8 +241,8 @@ public class hb_segment_properties_t extends Struct<hb_segment_properties_t> imp
     public static int nscript(long struct) { return memGetInt(struct + hb_segment_properties_t.SCRIPT); }
     /** Unsafe version of {@link #language}. */
     public static long nlanguage(long struct) { return memGetAddress(struct + hb_segment_properties_t.LANGUAGE); }
-    public static long nreserved1(long struct) { return memGetAddress(struct + hb_segment_properties_t.RESERVED1); }
-    public static long nreserved2(long struct) { return memGetAddress(struct + hb_segment_properties_t.RESERVED2); }
+    static long nreserved1(long struct) { return memGetAddress(struct + hb_segment_properties_t.RESERVED1); }
+    static long nreserved2(long struct) { return memGetAddress(struct + hb_segment_properties_t.RESERVED2); }
 
     /** Unsafe version of {@link #direction(int) direction}. */
     public static void ndirection(long struct, int value) { memPutInt(struct + hb_segment_properties_t.DIRECTION, value); }
@@ -250,8 +250,8 @@ public class hb_segment_properties_t extends Struct<hb_segment_properties_t> imp
     public static void nscript(long struct, int value) { memPutInt(struct + hb_segment_properties_t.SCRIPT, value); }
     /** Unsafe version of {@link #language(long) language}. */
     public static void nlanguage(long struct, long value) { memPutAddress(struct + hb_segment_properties_t.LANGUAGE, value); }
-    public static void nreserved1(long struct, long value) { memPutAddress(struct + hb_segment_properties_t.RESERVED1, value); }
-    public static void nreserved2(long struct, long value) { memPutAddress(struct + hb_segment_properties_t.RESERVED2, value); }
+    static void nreserved1(long struct, long value) { memPutAddress(struct + hb_segment_properties_t.RESERVED1, value); }
+    static void nreserved2(long struct, long value) { memPutAddress(struct + hb_segment_properties_t.RESERVED2, value); }
 
     // -----------------------------------
 

@@ -20,11 +20,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkCooperativeVectorPropertiesNV {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkComponentTypeNV inputType;
- *     VkComponentTypeNV inputInterpretation;
- *     VkComponentTypeNV matrixInterpretation;
- *     VkComponentTypeNV biasInterpretation;
- *     VkComponentTypeNV resultType;
+ *     VkComponentTypeKHR inputType;
+ *     VkComponentTypeKHR inputInterpretation;
+ *     VkComponentTypeKHR matrixInterpretation;
+ *     VkComponentTypeKHR biasInterpretation;
+ *     VkComponentTypeKHR resultType;
  *     VkBool32 transpose;
  * }}</pre>
  */
@@ -101,19 +101,19 @@ public class VkCooperativeVectorPropertiesNV extends Struct<VkCooperativeVectorP
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** @return the value of the {@code inputType} field. */
-    @NativeType("VkComponentTypeNV")
+    @NativeType("VkComponentTypeKHR")
     public int inputType() { return ninputType(address()); }
     /** @return the value of the {@code inputInterpretation} field. */
-    @NativeType("VkComponentTypeNV")
+    @NativeType("VkComponentTypeKHR")
     public int inputInterpretation() { return ninputInterpretation(address()); }
     /** @return the value of the {@code matrixInterpretation} field. */
-    @NativeType("VkComponentTypeNV")
+    @NativeType("VkComponentTypeKHR")
     public int matrixInterpretation() { return nmatrixInterpretation(address()); }
     /** @return the value of the {@code biasInterpretation} field. */
-    @NativeType("VkComponentTypeNV")
+    @NativeType("VkComponentTypeKHR")
     public int biasInterpretation() { return nbiasInterpretation(address()); }
     /** @return the value of the {@code resultType} field. */
-    @NativeType("VkComponentTypeNV")
+    @NativeType("VkComponentTypeKHR")
     public int resultType() { return nresultType(address()); }
     /** @return the value of the {@code transpose} field. */
     @NativeType("VkBool32")
@@ -126,15 +126,15 @@ public class VkCooperativeVectorPropertiesNV extends Struct<VkCooperativeVectorP
     /** Sets the specified value to the {@code pNext} field. */
     public VkCooperativeVectorPropertiesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code inputType} field. */
-    public VkCooperativeVectorPropertiesNV inputType(@NativeType("VkComponentTypeNV") int value) { ninputType(address(), value); return this; }
+    public VkCooperativeVectorPropertiesNV inputType(@NativeType("VkComponentTypeKHR") int value) { ninputType(address(), value); return this; }
     /** Sets the specified value to the {@code inputInterpretation} field. */
-    public VkCooperativeVectorPropertiesNV inputInterpretation(@NativeType("VkComponentTypeNV") int value) { ninputInterpretation(address(), value); return this; }
+    public VkCooperativeVectorPropertiesNV inputInterpretation(@NativeType("VkComponentTypeKHR") int value) { ninputInterpretation(address(), value); return this; }
     /** Sets the specified value to the {@code matrixInterpretation} field. */
-    public VkCooperativeVectorPropertiesNV matrixInterpretation(@NativeType("VkComponentTypeNV") int value) { nmatrixInterpretation(address(), value); return this; }
+    public VkCooperativeVectorPropertiesNV matrixInterpretation(@NativeType("VkComponentTypeKHR") int value) { nmatrixInterpretation(address(), value); return this; }
     /** Sets the specified value to the {@code biasInterpretation} field. */
-    public VkCooperativeVectorPropertiesNV biasInterpretation(@NativeType("VkComponentTypeNV") int value) { nbiasInterpretation(address(), value); return this; }
+    public VkCooperativeVectorPropertiesNV biasInterpretation(@NativeType("VkComponentTypeKHR") int value) { nbiasInterpretation(address(), value); return this; }
     /** Sets the specified value to the {@code resultType} field. */
-    public VkCooperativeVectorPropertiesNV resultType(@NativeType("VkComponentTypeNV") int value) { nresultType(address(), value); return this; }
+    public VkCooperativeVectorPropertiesNV resultType(@NativeType("VkComponentTypeKHR") int value) { nresultType(address(), value); return this; }
     /** Sets the specified value to the {@code transpose} field. */
     public VkCooperativeVectorPropertiesNV transpose(@NativeType("VkBool32") boolean value) { ntranspose(address(), value ? 1 : 0); return this; }
 
@@ -368,19 +368,19 @@ public class VkCooperativeVectorPropertiesNV extends Struct<VkCooperativeVectorP
         @NativeType("void *")
         public long pNext() { return VkCooperativeVectorPropertiesNV.npNext(address()); }
         /** @return the value of the {@code inputType} field. */
-        @NativeType("VkComponentTypeNV")
+        @NativeType("VkComponentTypeKHR")
         public int inputType() { return VkCooperativeVectorPropertiesNV.ninputType(address()); }
         /** @return the value of the {@code inputInterpretation} field. */
-        @NativeType("VkComponentTypeNV")
+        @NativeType("VkComponentTypeKHR")
         public int inputInterpretation() { return VkCooperativeVectorPropertiesNV.ninputInterpretation(address()); }
         /** @return the value of the {@code matrixInterpretation} field. */
-        @NativeType("VkComponentTypeNV")
+        @NativeType("VkComponentTypeKHR")
         public int matrixInterpretation() { return VkCooperativeVectorPropertiesNV.nmatrixInterpretation(address()); }
         /** @return the value of the {@code biasInterpretation} field. */
-        @NativeType("VkComponentTypeNV")
+        @NativeType("VkComponentTypeKHR")
         public int biasInterpretation() { return VkCooperativeVectorPropertiesNV.nbiasInterpretation(address()); }
         /** @return the value of the {@code resultType} field. */
-        @NativeType("VkComponentTypeNV")
+        @NativeType("VkComponentTypeKHR")
         public int resultType() { return VkCooperativeVectorPropertiesNV.nresultType(address()); }
         /** @return the value of the {@code transpose} field. */
         @NativeType("VkBool32")
@@ -393,15 +393,15 @@ public class VkCooperativeVectorPropertiesNV extends Struct<VkCooperativeVectorP
         /** Sets the specified value to the {@code pNext} field. */
         public VkCooperativeVectorPropertiesNV.Buffer pNext(@NativeType("void *") long value) { VkCooperativeVectorPropertiesNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code inputType} field. */
-        public VkCooperativeVectorPropertiesNV.Buffer inputType(@NativeType("VkComponentTypeNV") int value) { VkCooperativeVectorPropertiesNV.ninputType(address(), value); return this; }
+        public VkCooperativeVectorPropertiesNV.Buffer inputType(@NativeType("VkComponentTypeKHR") int value) { VkCooperativeVectorPropertiesNV.ninputType(address(), value); return this; }
         /** Sets the specified value to the {@code inputInterpretation} field. */
-        public VkCooperativeVectorPropertiesNV.Buffer inputInterpretation(@NativeType("VkComponentTypeNV") int value) { VkCooperativeVectorPropertiesNV.ninputInterpretation(address(), value); return this; }
+        public VkCooperativeVectorPropertiesNV.Buffer inputInterpretation(@NativeType("VkComponentTypeKHR") int value) { VkCooperativeVectorPropertiesNV.ninputInterpretation(address(), value); return this; }
         /** Sets the specified value to the {@code matrixInterpretation} field. */
-        public VkCooperativeVectorPropertiesNV.Buffer matrixInterpretation(@NativeType("VkComponentTypeNV") int value) { VkCooperativeVectorPropertiesNV.nmatrixInterpretation(address(), value); return this; }
+        public VkCooperativeVectorPropertiesNV.Buffer matrixInterpretation(@NativeType("VkComponentTypeKHR") int value) { VkCooperativeVectorPropertiesNV.nmatrixInterpretation(address(), value); return this; }
         /** Sets the specified value to the {@code biasInterpretation} field. */
-        public VkCooperativeVectorPropertiesNV.Buffer biasInterpretation(@NativeType("VkComponentTypeNV") int value) { VkCooperativeVectorPropertiesNV.nbiasInterpretation(address(), value); return this; }
+        public VkCooperativeVectorPropertiesNV.Buffer biasInterpretation(@NativeType("VkComponentTypeKHR") int value) { VkCooperativeVectorPropertiesNV.nbiasInterpretation(address(), value); return this; }
         /** Sets the specified value to the {@code resultType} field. */
-        public VkCooperativeVectorPropertiesNV.Buffer resultType(@NativeType("VkComponentTypeNV") int value) { VkCooperativeVectorPropertiesNV.nresultType(address(), value); return this; }
+        public VkCooperativeVectorPropertiesNV.Buffer resultType(@NativeType("VkComponentTypeKHR") int value) { VkCooperativeVectorPropertiesNV.nresultType(address(), value); return this; }
         /** Sets the specified value to the {@code transpose} field. */
         public VkCooperativeVectorPropertiesNV.Buffer transpose(@NativeType("VkBool32") boolean value) { VkCooperativeVectorPropertiesNV.ntranspose(address(), value ? 1 : 0); return this; }
 

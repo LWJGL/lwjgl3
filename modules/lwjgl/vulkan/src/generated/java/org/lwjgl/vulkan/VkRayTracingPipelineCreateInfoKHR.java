@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkRayTracingPipelineCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkPipelineLayout layout;
  *     VkPipeline basePipelineHandle;
  *     int32_t basePipelineIndex;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkRayTracingPipelineCreateInfoKHR extends Struct<VkRayTracingPipelineCreateInfoKHR> implements NativeResource {
 
@@ -184,6 +184,8 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct<VkRayTracingPipeli
     public VkRayTracingPipelineCreateInfoKHR pNext(VkPipelineRobustnessCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRayTracingPipelineClusterAccelerationStructureCreateInfoNV} value to the {@code pNext} chain. */
     public VkRayTracingPipelineCreateInfoKHR pNext(VkRayTracingPipelineClusterAccelerationStructureCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkValidationFeaturesEXT} value to the {@code pNext} chain. */
+    public VkRayTracingPipelineCreateInfoKHR pNext(VkValidationFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code flags} field. */
     public VkRayTracingPipelineCreateInfoKHR flags(@NativeType("VkPipelineCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@code pStages} field. */
@@ -550,6 +552,8 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct<VkRayTracingPipeli
         public VkRayTracingPipelineCreateInfoKHR.Buffer pNext(VkPipelineRobustnessCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRayTracingPipelineClusterAccelerationStructureCreateInfoNV} value to the {@code pNext} chain. */
         public VkRayTracingPipelineCreateInfoKHR.Buffer pNext(VkRayTracingPipelineClusterAccelerationStructureCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkValidationFeaturesEXT} value to the {@code pNext} chain. */
+        public VkRayTracingPipelineCreateInfoKHR.Buffer pNext(VkValidationFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code flags} field. */
         public VkRayTracingPipelineCreateInfoKHR.Buffer flags(@NativeType("VkPipelineCreateFlags") int value) { VkRayTracingPipelineCreateInfoKHR.nflags(address(), value); return this; }
         /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@code pStages} field. */

@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkAccelerationStructureCreateInfoNV {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkDeviceSize compactedSize;
  *     {@link VkAccelerationStructureInfoNV VkAccelerationStructureInfoNV} info;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkAccelerationStructureCreateInfoNV extends Struct<VkAccelerationStructureCreateInfoNV> implements NativeResource {
 
@@ -40,6 +40,8 @@ public class VkAccelerationStructureCreateInfoNV extends Struct<VkAccelerationSt
         INFO;
 
     static {
+        VkAccelerationStructureInfoNV.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -202,25 +204,6 @@ public class VkAccelerationStructureCreateInfoNV extends Struct<VkAccelerationSt
     public static VkAccelerationStructureCreateInfoNV.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkAccelerationStructureCreateInfoNV mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkAccelerationStructureCreateInfoNV callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkAccelerationStructureCreateInfoNV mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkAccelerationStructureCreateInfoNV callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkAccelerationStructureCreateInfoNV.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkAccelerationStructureCreateInfoNV.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkAccelerationStructureCreateInfoNV.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkAccelerationStructureCreateInfoNV.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkAccelerationStructureCreateInfoNV} instance allocated on the specified {@link MemoryStack}.

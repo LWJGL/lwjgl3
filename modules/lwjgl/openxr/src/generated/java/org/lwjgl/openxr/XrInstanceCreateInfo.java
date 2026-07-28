@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrInstanceCreateInfo {
  *     XrStructureType type;
  *     void const * next;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     char const * const * enabledApiLayerNames;
  *     uint32_t enabledExtensionCount;
  *     char const * const * enabledExtensionNames;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrInstanceCreateInfo extends Struct<XrInstanceCreateInfo> implements NativeResource {
 
@@ -49,6 +49,8 @@ public class XrInstanceCreateInfo extends Struct<XrInstanceCreateInfo> implement
         ENABLEDEXTENSIONNAMES;
 
     static {
+        XrApplicationInfo.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

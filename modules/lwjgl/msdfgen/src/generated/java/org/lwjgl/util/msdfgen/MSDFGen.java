@@ -52,6 +52,10 @@ public class MSDFGen {
         MSDF_EDGE_COLOR_WHITE   = 7;
 
     public static final int
+        MSDF_ORIENTATION_Y_UPWARD   = 0,
+        MSDF_ORIENTATION_Y_DOWNWARD = 1;
+
+    public static final int
         MSDF_ERROR_CORRECTION_MODE_DISABLED       = 0,
         MSDF_ERROR_CORRECTION_MODE_INDISCRIMINATE = 1,
         MSDF_ERROR_CORRECTION_MODE_EDGE_PRIORITY  = 2,
@@ -224,18 +228,31 @@ public class MSDFGen {
         return nmsdf_shape_get_edge_count(shape, memAddress(count));
     }
 
-    // --- [ msdf_shape_has_inverse_y_axis ] ---
+    // --- [ msdf_shape_get_y_axis_orientation ] ---
 
-    /** {@code int msdf_shape_has_inverse_y_axis(msdf_shape_const_handle shape, int * inverse_y_axis)} */
-    public static native int nmsdf_shape_has_inverse_y_axis(long shape, long inverse_y_axis);
+    /** {@code int msdf_shape_get_y_axis_orientation(msdf_shape_const_handle shape, int * yAxisOrientation)} */
+    public static native int nmsdf_shape_get_y_axis_orientation(long shape, long yAxisOrientation);
 
-    /** {@code int msdf_shape_has_inverse_y_axis(msdf_shape_const_handle shape, int * inverse_y_axis)} */
-    public static int msdf_shape_has_inverse_y_axis(@NativeType("msdf_shape_const_handle") long shape, @NativeType("int *") IntBuffer inverse_y_axis) {
+    /** {@code int msdf_shape_get_y_axis_orientation(msdf_shape_const_handle shape, int * yAxisOrientation)} */
+    public static int msdf_shape_get_y_axis_orientation(@NativeType("msdf_shape_const_handle") long shape, @NativeType("int *") IntBuffer yAxisOrientation) {
         if (CHECKS) {
             check(shape);
-            check(inverse_y_axis, 1);
+            check(yAxisOrientation, 1);
         }
-        return nmsdf_shape_has_inverse_y_axis(shape, memAddress(inverse_y_axis));
+        return nmsdf_shape_get_y_axis_orientation(shape, memAddress(yAxisOrientation));
+    }
+
+    // --- [ msdf_shape_set_y_axis_orientation ] ---
+
+    /** {@code int msdf_shape_set_y_axis_orientation(msdf_shape_handle shape, int yAxisOrientation)} */
+    public static native int nmsdf_shape_set_y_axis_orientation(long shape, int yAxisOrientation);
+
+    /** {@code int msdf_shape_set_y_axis_orientation(msdf_shape_handle shape, int yAxisOrientation)} */
+    public static int msdf_shape_set_y_axis_orientation(@NativeType("msdf_shape_handle") long shape, int yAxisOrientation) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_shape_set_y_axis_orientation(shape, yAxisOrientation);
     }
 
     // --- [ msdf_shape_normalize ] ---
@@ -688,6 +705,39 @@ public class MSDFGen {
             check(segment);
         }
         nmsdf_segment_free(segment);
+    }
+
+    // --- [ msdf_error_correction ] ---
+
+    /** {@code int msdf_error_correction(struct msdf_bitmap * bitmap, msdf_shape_const_handle shape, struct msdf_transform const * transform)} */
+    public static native int nmsdf_error_correction(long bitmap, long shape, long transform);
+
+    /** {@code int msdf_error_correction(struct msdf_bitmap * bitmap, msdf_shape_const_handle shape, struct msdf_transform const * transform)} */
+    public static int msdf_error_correction(@NativeType("struct msdf_bitmap *") MSDFGenBitmap bitmap, @NativeType("msdf_shape_const_handle") long shape, @NativeType("struct msdf_transform const *") MSDFGenTransform transform) {
+        if (CHECKS) {
+            check(shape);
+        }
+        return nmsdf_error_correction(bitmap.address(), shape, transform.address());
+    }
+
+    // --- [ msdf_error_correction_fast_distance ] ---
+
+    /** {@code int msdf_error_correction_fast_distance(struct msdf_bitmap * bitmap, struct msdf_transform const * transform)} */
+    public static native int nmsdf_error_correction_fast_distance(long bitmap, long transform);
+
+    /** {@code int msdf_error_correction_fast_distance(struct msdf_bitmap * bitmap, struct msdf_transform const * transform)} */
+    public static int msdf_error_correction_fast_distance(@NativeType("struct msdf_bitmap *") MSDFGenBitmap bitmap, @NativeType("struct msdf_transform const *") MSDFGenTransform transform) {
+        return nmsdf_error_correction_fast_distance(bitmap.address(), transform.address());
+    }
+
+    // --- [ msdf_error_correction_fast_edge ] ---
+
+    /** {@code int msdf_error_correction_fast_edge(struct msdf_bitmap * bitmap, struct msdf_transform const * transform)} */
+    public static native int nmsdf_error_correction_fast_edge(long bitmap, long transform);
+
+    /** {@code int msdf_error_correction_fast_edge(struct msdf_bitmap * bitmap, struct msdf_transform const * transform)} */
+    public static int msdf_error_correction_fast_edge(@NativeType("struct msdf_bitmap *") MSDFGenBitmap bitmap, @NativeType("struct msdf_transform const *") MSDFGenTransform transform) {
+        return nmsdf_error_correction_fast_edge(bitmap.address(), transform.address());
     }
 
     // --- [ msdf_generate_sdf ] ---

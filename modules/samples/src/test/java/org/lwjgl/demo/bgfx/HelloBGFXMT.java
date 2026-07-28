@@ -93,7 +93,7 @@ public final class HelloBGFXMT implements AutoCloseable {
 
                 while (!glfwWindowShouldClose(window)) {
                     graphicsRenderer.render(width, height);
-                    bgfx_frame(false);
+                    bgfx_frame(BGFX_FRAME_NONE);
                 }
             } catch (Throwable t) {
                 t.printStackTrace();

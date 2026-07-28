@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkRenderPassStripeSubmitInfoARM {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t stripeSemaphoreInfoCount;
  *     {@link VkSemaphoreSubmitInfo VkSemaphoreSubmitInfo} const * pStripeSemaphoreInfos;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkRenderPassStripeSubmitInfoARM extends Struct<VkRenderPassStripeSubmitInfoARM> implements NativeResource {
 

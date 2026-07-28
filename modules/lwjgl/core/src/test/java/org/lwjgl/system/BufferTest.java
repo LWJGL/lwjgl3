@@ -50,21 +50,28 @@ public class BufferTest {
     }
 
     public void testLargeBuffer() {
+        int size = 0x3FFFFFFF + 1;
+
+        long a = nmemAlloc((long)size * Short.BYTES);
+        if (a == NULL) {
+            throw new SkipException("Large buffer allocation failed (32-bit JVM)");
+        }
+
         try {
-            ShortBuffer buffer = memCallocShort(0x3FFFFFFF + 1);
+            ShortBuffer buffer = memShortBuffer(a, size);
 
             buffer.put(buffer.limit() - 1, (short)0xBEEF);
             assertEquals(buffer.get(buffer.limit() - 1), (short)0xBEEF);
-
-            memFree(buffer);
-        } catch (OutOfMemoryError e) {
-            throw new SkipException("Large buffer allocation failed."); // 32-bit JVM
+        } catch (IllegalStateException e) {
+            throw new SkipException("Large buffer allocation failed (FFM backend)"); // FFM backend
+        } finally {
+            nmemFree(a);
         }
     }
 
     public void testPointerBuffer() {
         PointerBuffer buffer = memCallocPointer(8);
-        long[] array = new long[buffer.capacity()];
+        long[]        array  = new long[buffer.capacity()];
 
         for (int i = 0; i < buffer.capacity(); i++) {
             buffer.put(i);

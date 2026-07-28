@@ -16,13 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSceneMarkersMSFT {
  *     XrStructureType type;
  *     void const * next;
  *     uint32_t sceneMarkerCapacityInput;
  *     {@link XrSceneMarkerMSFT XrSceneMarkerMSFT} * sceneMarkers;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSceneMarkersMSFT extends Struct<XrSceneMarkersMSFT> implements NativeResource {
 

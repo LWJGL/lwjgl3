@@ -17,10 +17,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct SDL_MessageBoxColorScheme {
  *     {@link SDL_MessageBoxColor SDL_MessageBoxColor} colors[5];
- * }}</pre>
+ * }</code></pre>
  */
 public class SDL_MessageBoxColorScheme extends Struct<SDL_MessageBoxColorScheme> implements NativeResource {
 
@@ -35,6 +35,8 @@ public class SDL_MessageBoxColorScheme extends Struct<SDL_MessageBoxColorScheme>
         COLORS;
 
     static {
+        SDL_MessageBoxColor.createSafe(NULL);
+
         Layout layout = __struct(
             __array(SDL_MessageBoxColor.SIZEOF, SDL_MessageBoxColor.ALIGNOF, 5)
         );

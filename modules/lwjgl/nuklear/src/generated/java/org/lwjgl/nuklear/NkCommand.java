@@ -14,12 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_command {
  *     enum nk_command_type type;
  *     nk_size next;
  *     {@link NkHandle nk_handle} userdata;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_command")
 public class NkCommand extends Struct<NkCommand> {
@@ -37,6 +37,8 @@ public class NkCommand extends Struct<NkCommand> {
         USERDATA;
 
     static {
+        NkHandle.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -17,14 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrActionSpaceCreateInfo {
  *     XrStructureType type;
  *     void const * next;
  *     XrAction action;
  *     XrPath subactionPath;
  *     {@link XrPosef XrPosef} poseInActionSpace;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrActionSpaceCreateInfo extends Struct<XrActionSpaceCreateInfo> implements NativeResource {
 
@@ -43,6 +43,8 @@ public class XrActionSpaceCreateInfo extends Struct<XrActionSpaceCreateInfo> imp
         POSEINACTIONSPACE;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

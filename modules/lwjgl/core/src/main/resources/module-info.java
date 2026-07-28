@@ -3,10 +3,11 @@
  * License terms: https://www.lwjgl.org/license
  */
 module org.lwjgl {
-    requires transitive jdk.unsupported;
+    requires jdk.unsupported;
 
     exports org.lwjgl;
     exports org.lwjgl.system;
+    exports org.lwjgl.system.freebsd;
     exports org.lwjgl.system.jni;
     exports org.lwjgl.system.libc;
     exports org.lwjgl.system.libffi;

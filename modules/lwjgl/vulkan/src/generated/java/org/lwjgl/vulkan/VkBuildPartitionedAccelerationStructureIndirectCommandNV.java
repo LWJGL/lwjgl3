@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkBuildPartitionedAccelerationStructureIndirectCommandNV {
  *     VkPartitionedAccelerationStructureOpTypeNV opType;
  *     uint32_t argCount;
  *     {@link VkStridedDeviceAddressNV VkStridedDeviceAddressNV} argData;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkBuildPartitionedAccelerationStructureIndirectCommandNV extends Struct<VkBuildPartitionedAccelerationStructureIndirectCommandNV> implements NativeResource {
 
@@ -38,6 +38,8 @@ public class VkBuildPartitionedAccelerationStructureIndirectCommandNV extends St
         ARGDATA;
 
     static {
+        VkStridedDeviceAddressNV.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

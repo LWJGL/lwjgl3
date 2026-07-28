@@ -255,7 +255,7 @@ public class SDL_DisplayEvent extends Struct<SDL_DisplayEvent> implements Native
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_DisplayEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_DisplayEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_DisplayEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_DisplayEvent.TIMESTAMP); }
     /** Unsafe version of {@link #displayID}. */
@@ -267,7 +267,7 @@ public class SDL_DisplayEvent extends Struct<SDL_DisplayEvent> implements Native
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_DisplayEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_DisplayEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_DisplayEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_DisplayEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #displayID(int) displayID}. */

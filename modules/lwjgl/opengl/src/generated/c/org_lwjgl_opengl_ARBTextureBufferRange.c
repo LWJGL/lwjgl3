@@ -11,7 +11,7 @@ typedef void (APIENTRY *glTextureBufferRangeEXTPROC) (jint, jint, jint, jint, ui
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBTextureBufferRange_glTextureBufferRangeEXT(JNIEnv *__env, jclass clazz, jint texture, jint target, jint internalformat, jint buffer, jlong offset, jlong size) {
-    glTextureBufferRangeEXTPROC glTextureBufferRangeEXT = (glTextureBufferRangeEXTPROC)tlsGetFunction(1367);
+    glTextureBufferRangeEXTPROC glTextureBufferRangeEXT = (glTextureBufferRangeEXTPROC)tlsGetFunction(1401);
     UNUSED_PARAM(clazz)
     glTextureBufferRangeEXT(texture, target, internalformat, buffer, (uintptr_t)offset, (uintptr_t)size);
 }

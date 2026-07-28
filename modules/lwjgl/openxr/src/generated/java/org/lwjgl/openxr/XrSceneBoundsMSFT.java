@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSceneBoundsMSFT {
  *     XrSpace space;
  *     XrTime time;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link XrSceneOrientedBoxBoundMSFT XrSceneOrientedBoxBoundMSFT} const * boxes;
  *     uint32_t frustumCount;
  *     {@link XrSceneFrustumBoundMSFT XrSceneFrustumBoundMSFT} const * frustums;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSceneBoundsMSFT extends Struct<XrSceneBoundsMSFT> implements NativeResource {
 

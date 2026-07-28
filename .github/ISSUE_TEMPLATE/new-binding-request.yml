@@ -28,6 +28,7 @@ body:
       description: Please select the platforms supported by the native library.
       multiple: true
       options:
+        - FreeBSD x64
         - Linux x64
         - Linux arm64
         - Linux arm32

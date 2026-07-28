@@ -977,7 +977,7 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
     void(
         "DeleteSync",
 
-        GLsync("sync")
+        nullable..GLsync("sync")
     )
 
     GLenum(

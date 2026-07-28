@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_style_property {
  *     {@link NkStyleItem struct nk_style_item} normal;
  *     {@link NkStyleItem struct nk_style_item} hover;
@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkHandle nk_handle} userdata;
  *     {@link NkDrawBeginCallbackI nk_draw_begin} draw_begin;
  *     {@link NkDrawEndCallbackI nk_draw_end} draw_end;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_style_property")
 public class NkStyleProperty extends Struct<NkStyleProperty> implements NativeResource {
@@ -73,6 +73,15 @@ public class NkStyleProperty extends Struct<NkStyleProperty> implements NativeRe
         DRAW_END;
 
     static {
+        NkStyleItem.createSafe(NULL);
+        NkColor.createSafe(NULL);
+        NkVec2.createSafe(NULL);
+        NkStyleEdit.createSafe(NULL);
+        NkStyleButton.createSafe(NULL);
+        NkHandle.createSafe(NULL);
+        java.util.Objects.requireNonNull(NkDrawBeginCallbackI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(NkDrawEndCallbackI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(NkStyleItem.SIZEOF, NkStyleItem.ALIGNOF),
             __member(NkStyleItem.SIZEOF, NkStyleItem.ALIGNOF),
@@ -394,25 +403,6 @@ public class NkStyleProperty extends Struct<NkStyleProperty> implements NativeRe
     public static NkStyleProperty.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkStyleProperty mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkStyleProperty callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static NkStyleProperty mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static NkStyleProperty callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkStyleProperty.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkStyleProperty.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkStyleProperty.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static NkStyleProperty.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code NkStyleProperty} instance allocated on the specified {@link MemoryStack}.

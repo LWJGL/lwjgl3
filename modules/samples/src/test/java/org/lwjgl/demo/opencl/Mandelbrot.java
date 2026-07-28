@@ -141,7 +141,7 @@ public class Mandelbrot {
 
     Callback debugProc;
 
-    public Mandelbrot(long platform, CLCapabilities platformCaps, GLFWWindow window, int deviceType, boolean debugGL, int maxIterations) {
+    public Mandelbrot(long platform, CLCapabilities platformCaps, GLFWWindow window, long deviceType, boolean debugGL, int maxIterations) {
         this.platform = platform;
 
         this.window = window;
@@ -467,7 +467,7 @@ public class Mandelbrot {
         });
     }
 
-    private static long getDevice(long platform, CLCapabilities platformCaps, int deviceType) {
+    private static long getDevice(long platform, CLCapabilities platformCaps, long deviceType) {
         try (MemoryStack stack = stackPush()) {
             IntBuffer pi = stack.mallocInt(1);
             checkCLError(clGetDeviceIDs(platform, deviceType, null, pi));

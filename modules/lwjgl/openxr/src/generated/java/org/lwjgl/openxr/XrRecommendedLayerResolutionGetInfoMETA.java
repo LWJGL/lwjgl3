@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrRecommendedLayerResolutionGetInfoMETA {
  *     XrStructureType type;
  *     void const * next;
  *     {@link XrCompositionLayerBaseHeader XrCompositionLayerBaseHeader} const * layer;
  *     XrTime predictedDisplayTime;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrRecommendedLayerResolutionGetInfoMETA extends Struct<XrRecommendedLayerResolutionGetInfoMETA> implements NativeResource {
 

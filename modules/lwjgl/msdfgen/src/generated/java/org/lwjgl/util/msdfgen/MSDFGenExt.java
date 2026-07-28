@@ -125,30 +125,32 @@ public class MSDFGenExt {
 
     // --- [ msdf_ft_font_load_glyph ] ---
 
-    /** {@code int msdf_ft_font_load_glyph(msdf_ft_font_handle font, unsigned cp, int coordinateScaling, msdf_shape_handle * shape)} */
-    public static native int nmsdf_ft_font_load_glyph(long font, int cp, int coordinateScaling, long shape);
+    /** {@code int msdf_ft_font_load_glyph(msdf_ft_font_handle font, unsigned cp, int coordinateScaling, double * advance, msdf_shape_handle * shape)} */
+    public static native int nmsdf_ft_font_load_glyph(long font, int cp, int coordinateScaling, long advance, long shape);
 
-    /** {@code int msdf_ft_font_load_glyph(msdf_ft_font_handle font, unsigned cp, int coordinateScaling, msdf_shape_handle * shape)} */
-    public static int msdf_ft_font_load_glyph(@NativeType("msdf_ft_font_handle") long font, @NativeType("unsigned") int cp, int coordinateScaling, @NativeType("msdf_shape_handle *") PointerBuffer shape) {
+    /** {@code int msdf_ft_font_load_glyph(msdf_ft_font_handle font, unsigned cp, int coordinateScaling, double * advance, msdf_shape_handle * shape)} */
+    public static int msdf_ft_font_load_glyph(@NativeType("msdf_ft_font_handle") long font, @NativeType("unsigned") int cp, int coordinateScaling, @NativeType("double *") @Nullable DoubleBuffer advance, @NativeType("msdf_shape_handle *") PointerBuffer shape) {
         if (CHECKS) {
             check(font);
+            checkSafe(advance, 1);
             check(shape, 1);
         }
-        return nmsdf_ft_font_load_glyph(font, cp, coordinateScaling, memAddress(shape));
+        return nmsdf_ft_font_load_glyph(font, cp, coordinateScaling, memAddressSafe(advance), memAddress(shape));
     }
 
     // --- [ msdf_ft_font_load_glyph_by_index ] ---
 
-    /** {@code int msdf_ft_font_load_glyph_by_index(msdf_ft_font_handle font, unsigned index, int coordinateScaling, msdf_shape_handle * shape)} */
-    public static native int nmsdf_ft_font_load_glyph_by_index(long font, int index, int coordinateScaling, long shape);
+    /** {@code int msdf_ft_font_load_glyph_by_index(msdf_ft_font_handle font, unsigned index, int coordinateScaling, double * advance, msdf_shape_handle * shape)} */
+    public static native int nmsdf_ft_font_load_glyph_by_index(long font, int index, int coordinateScaling, long advance, long shape);
 
-    /** {@code int msdf_ft_font_load_glyph_by_index(msdf_ft_font_handle font, unsigned index, int coordinateScaling, msdf_shape_handle * shape)} */
-    public static int msdf_ft_font_load_glyph_by_index(@NativeType("msdf_ft_font_handle") long font, @NativeType("unsigned") int index, int coordinateScaling, @NativeType("msdf_shape_handle *") PointerBuffer shape) {
+    /** {@code int msdf_ft_font_load_glyph_by_index(msdf_ft_font_handle font, unsigned index, int coordinateScaling, double * advance, msdf_shape_handle * shape)} */
+    public static int msdf_ft_font_load_glyph_by_index(@NativeType("msdf_ft_font_handle") long font, @NativeType("unsigned") int index, int coordinateScaling, @NativeType("double *") @Nullable DoubleBuffer advance, @NativeType("msdf_shape_handle *") PointerBuffer shape) {
         if (CHECKS) {
             check(font);
+            checkSafe(advance, 1);
             check(shape, 1);
         }
-        return nmsdf_ft_font_load_glyph_by_index(font, index, coordinateScaling, memAddress(shape));
+        return nmsdf_ft_font_load_glyph_by_index(font, index, coordinateScaling, memAddressSafe(advance), memAddress(shape));
     }
 
     // --- [ msdf_ft_font_get_glyph_index ] ---

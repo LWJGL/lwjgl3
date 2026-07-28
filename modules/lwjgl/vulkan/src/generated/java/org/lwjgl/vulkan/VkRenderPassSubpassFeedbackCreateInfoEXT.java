@@ -17,12 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkRenderPassSubpassFeedbackCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link VkRenderPassSubpassFeedbackInfoEXT VkRenderPassSubpassFeedbackInfoEXT} * pSubpassFeedback;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkRenderPassSubpassFeedbackCreateInfoEXT extends Struct<VkRenderPassSubpassFeedbackCreateInfoEXT> implements NativeResource {
 

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FMOD_CODEC_STATE_FUNCTIONS {
  *     {@link FMOD_CODEC_METADATA_FUNCI FMOD_CODEC_METADATA_FUNC} metadata;
  *     {@link FMOD_CODEC_ALLOC_FUNCI FMOD_CODEC_ALLOC_FUNC} alloc;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link FMOD_CODEC_FILE_SEEK_FUNCI FMOD_CODEC_FILE_SEEK_FUNC} seek;
  *     {@link FMOD_CODEC_FILE_TELL_FUNCI FMOD_CODEC_FILE_TELL_FUNC} tell;
  *     {@link FMOD_CODEC_FILE_SIZE_FUNCI FMOD_CODEC_FILE_SIZE_FUNC} size;
- * }}</pre>
+ * }</code></pre>
  */
 public class FMOD_CODEC_STATE_FUNCTIONS extends Struct<FMOD_CODEC_STATE_FUNCTIONS> implements NativeResource {
 
@@ -49,6 +49,15 @@ public class FMOD_CODEC_STATE_FUNCTIONS extends Struct<FMOD_CODEC_STATE_FUNCTION
         SIZE;
 
     static {
+        java.util.Objects.requireNonNull(FMOD_CODEC_METADATA_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_CODEC_ALLOC_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_CODEC_FREE_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_CODEC_LOG_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_CODEC_FILE_READ_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_CODEC_FILE_SEEK_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_CODEC_FILE_TELL_FUNCI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(FMOD_CODEC_FILE_SIZE_FUNCI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

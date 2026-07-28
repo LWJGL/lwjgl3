@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoEncodeRateControlInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkVideoEncodeRateControlLayerInfoKHR VkVideoEncodeRateControlLayerInfoKHR} const * pLayers;
  *     uint32_t virtualBufferSizeInMs;
  *     uint32_t initialVirtualBufferSizeInMs;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoEncodeRateControlInfoKHR extends Struct<VkVideoEncodeRateControlInfoKHR> implements NativeResource {
 

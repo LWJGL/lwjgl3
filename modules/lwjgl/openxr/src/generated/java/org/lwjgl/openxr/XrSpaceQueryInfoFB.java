@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpaceQueryInfoFB {
  *     XrStructureType type;
  *     void const * next;
@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrDuration timeout;
  *     {@link XrSpaceFilterInfoBaseHeaderFB XrSpaceFilterInfoBaseHeaderFB} const * filter;
  *     {@link XrSpaceFilterInfoBaseHeaderFB XrSpaceFilterInfoBaseHeaderFB} const * excludeFilter;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpaceQueryInfoFB extends Struct<XrSpaceQueryInfoFB> implements NativeResource {
 

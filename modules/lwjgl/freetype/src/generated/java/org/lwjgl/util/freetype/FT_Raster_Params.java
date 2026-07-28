@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_Raster_Params {
  *     {@link FT_Bitmap FT_Bitmap} const * target;
  *     void const * source;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     FT_Raster_BitTest_Func bit_set;
  *     void * user;
  *     {@link FT_BBox FT_BBox} clip_box;
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_Raster_Params extends Struct<FT_Raster_Params> implements NativeResource {
 
@@ -50,6 +50,9 @@ public class FT_Raster_Params extends Struct<FT_Raster_Params> implements Native
         CLIP_BOX;
 
     static {
+        java.util.Objects.requireNonNull(FT_SpanFuncI.DESCRIPTOR);
+        FT_BBox.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
@@ -279,9 +282,9 @@ public class FT_Raster_Params extends Struct<FT_Raster_Params> implements Native
     public static int nflags(long struct) { return memGetInt(struct + FT_Raster_Params.FLAGS); }
     /** Unsafe version of {@link #gray_spans}. */
     public static @Nullable FT_SpanFunc ngray_spans(long struct) { return FT_SpanFunc.createSafe(memGetAddress(struct + FT_Raster_Params.GRAY_SPANS)); }
-    public static @Nullable FT_SpanFunc nblack_spans(long struct) { return FT_SpanFunc.createSafe(memGetAddress(struct + FT_Raster_Params.BLACK_SPANS)); }
-    public static long nbit_test(long struct) { return memGetAddress(struct + FT_Raster_Params.BIT_TEST); }
-    public static long nbit_set(long struct) { return memGetAddress(struct + FT_Raster_Params.BIT_SET); }
+    static @Nullable FT_SpanFunc nblack_spans(long struct) { return FT_SpanFunc.createSafe(memGetAddress(struct + FT_Raster_Params.BLACK_SPANS)); }
+    static long nbit_test(long struct) { return memGetAddress(struct + FT_Raster_Params.BIT_TEST); }
+    static long nbit_set(long struct) { return memGetAddress(struct + FT_Raster_Params.BIT_SET); }
     /** Unsafe version of {@link #user}. */
     public static long nuser(long struct) { return memGetAddress(struct + FT_Raster_Params.USER); }
     /** Unsafe version of {@link #clip_box}. */
@@ -295,9 +298,9 @@ public class FT_Raster_Params extends Struct<FT_Raster_Params> implements Native
     public static void nflags(long struct, int value) { memPutInt(struct + FT_Raster_Params.FLAGS, value); }
     /** Unsafe version of {@link #gray_spans(FT_SpanFuncI) gray_spans}. */
     public static void ngray_spans(long struct, @Nullable FT_SpanFuncI value) { memPutAddress(struct + FT_Raster_Params.GRAY_SPANS, memAddressSafe(value)); }
-    public static void nblack_spans(long struct, @Nullable FT_SpanFuncI value) { memPutAddress(struct + FT_Raster_Params.BLACK_SPANS, memAddressSafe(value)); }
-    public static void nbit_test(long struct, long value) { memPutAddress(struct + FT_Raster_Params.BIT_TEST, value); }
-    public static void nbit_set(long struct, long value) { memPutAddress(struct + FT_Raster_Params.BIT_SET, value); }
+    static void nblack_spans(long struct, @Nullable FT_SpanFuncI value) { memPutAddress(struct + FT_Raster_Params.BLACK_SPANS, memAddressSafe(value)); }
+    static void nbit_test(long struct, long value) { memPutAddress(struct + FT_Raster_Params.BIT_TEST, value); }
+    static void nbit_set(long struct, long value) { memPutAddress(struct + FT_Raster_Params.BIT_SET, value); }
     /** Unsafe version of {@link #user(long) user}. */
     public static void nuser(long struct, long value) { memPutAddress(struct + FT_Raster_Params.USER, value); }
     /** Unsafe version of {@link #clip_box(FT_BBox) clip_box}. */

@@ -81,6 +81,8 @@ public class XrSpaceQueryInfoBaseHeaderFB extends Struct<XrSpaceQueryInfoBaseHea
     public XrSpaceQueryInfoBaseHeaderFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
     /** Sets the specified value to the {@code next} field. */
     public XrSpaceQueryInfoBaseHeaderFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrSpaceGroupUuidFilterInfoMETA} value to the {@code next} chain. */
+    public XrSpaceQueryInfoBaseHeaderFB next(XrSpaceGroupUuidFilterInfoMETA value) { return this.next(value.next(this.next()).address()); }
 
     /** Initializes this struct with the specified values. */
     public XrSpaceQueryInfoBaseHeaderFB set(
@@ -290,6 +292,8 @@ public class XrSpaceQueryInfoBaseHeaderFB extends Struct<XrSpaceQueryInfoBaseHea
         public XrSpaceQueryInfoBaseHeaderFB.Buffer type(@NativeType("XrStructureType") int value) { XrSpaceQueryInfoBaseHeaderFB.ntype(address(), value); return this; }
         /** Sets the specified value to the {@code next} field. */
         public XrSpaceQueryInfoBaseHeaderFB.Buffer next(@NativeType("void const *") long value) { XrSpaceQueryInfoBaseHeaderFB.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrSpaceGroupUuidFilterInfoMETA} value to the {@code next} chain. */
+        public XrSpaceQueryInfoBaseHeaderFB.Buffer next(XrSpaceGroupUuidFilterInfoMETA value) { return this.next(value.next(this.next()).address()); }
 
     }
 

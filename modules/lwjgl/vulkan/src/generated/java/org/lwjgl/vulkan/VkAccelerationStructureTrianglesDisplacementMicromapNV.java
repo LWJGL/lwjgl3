@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkAccelerationStructureTrianglesDisplacementMicromapNV {
  *     VkStructureType sType;
  *     void * pNext;
@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkMicromapUsageEXT VkMicromapUsageEXT} const * pUsageCounts;
  *     {@link VkMicromapUsageEXT VkMicromapUsageEXT} const * const * ppUsageCounts;
  *     VkMicromapEXT micromap;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkAccelerationStructureTrianglesDisplacementMicromapNV extends Struct<VkAccelerationStructureTrianglesDisplacementMicromapNV> implements NativeResource {
 
@@ -68,6 +68,8 @@ public class VkAccelerationStructureTrianglesDisplacementMicromapNV extends Stru
         MICROMAP;
 
     static {
+        VkDeviceOrHostAddressConstKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

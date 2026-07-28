@@ -10,7 +10,7 @@ import vulkan.*
 
 val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK_BINDING_INSTANCE) {
     extends = VK12
-    
+
     EnumConstant(
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_3_FEATURES".."53",
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_3_PROPERTIES".."54",
@@ -71,23 +71,6 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
     )
 
     EnumConstant(
-        "PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT".enum(0x00000100),
-        "PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT".enum(0x00000200)
-    )
-
-    EnumConstant(
-        "PIPELINE_COMPILE_REQUIRED".."1000297000"
-    )
-
-    EnumConstant(
-        "PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT".enum(0x00000001)
-    )
-
-    EnumConstant(
-        "EVENT_CREATE_DEVICE_ONLY_BIT".enum(0x00000001)
-    )
-
-    EnumConstant(
         "IMAGE_LAYOUT_READ_ONLY_OPTIMAL".."1000314000",
         "IMAGE_LAYOUT_ATTACHMENT_OPTIMAL".."1000314001"
     )
@@ -98,15 +81,6 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 
     EnumConstant(
         "ACCESS_NONE".."0"
-    )
-
-    EnumConstant(
-        "PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT".enum(0x00000001),
-        "PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT".enum(0x00000002)
-    )
-
-    EnumConstant(
-        "DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK".."1000138000"
     )
 
     EnumConstant(
@@ -130,28 +104,6 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
         "FORMAT_G16_B16R16_2PLANE_444_UNORM".."1000330003",
         "FORMAT_A4R4G4B4_UNORM_PACK16".."1000340000",
         "FORMAT_A4B4G4R4_UNORM_PACK16".."1000340001"
-    )
-
-    EnumConstant(
-        "ATTACHMENT_STORE_OP_NONE".."1000301000"
-    )
-
-    EnumConstant(
-        "DYNAMIC_STATE_CULL_MODE".."1000267000",
-        "DYNAMIC_STATE_FRONT_FACE".."1000267001",
-        "DYNAMIC_STATE_PRIMITIVE_TOPOLOGY".."1000267002",
-        "DYNAMIC_STATE_VIEWPORT_WITH_COUNT".."1000267003",
-        "DYNAMIC_STATE_SCISSOR_WITH_COUNT".."1000267004",
-        "DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE".."1000267005",
-        "DYNAMIC_STATE_DEPTH_TEST_ENABLE".."1000267006",
-        "DYNAMIC_STATE_DEPTH_WRITE_ENABLE".."1000267007",
-        "DYNAMIC_STATE_DEPTH_COMPARE_OP".."1000267008",
-        "DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE".."1000267009",
-        "DYNAMIC_STATE_STENCIL_TEST_ENABLE".."1000267010",
-        "DYNAMIC_STATE_STENCIL_OP".."1000267011",
-        "DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE".."1000377001",
-        "DYNAMIC_STATE_DEPTH_BIAS_ENABLE".."1000377002",
-        "DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE".."1000377004"
     )
 
     EnumConstantLong(
@@ -189,9 +141,51 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
     )
 
     EnumConstant(
-        "PIPELINE_CREATION_FEEDBACK_VALID_BIT".enum(0x00000001),
-        "PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT".enum(0x00000002),
-        "PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT".enum(0x00000004)
+        "PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT".enum(0x00000100),
+        "PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT".enum(0x00000200)
+    )
+
+    EnumConstant(
+        "PIPELINE_COMPILE_REQUIRED".."1000297000"
+    )
+
+    EnumConstant(
+        "PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT".enum(0x00000001)
+    )
+
+    EnumConstant(
+        "EVENT_CREATE_DEVICE_ONLY_BIT".enum(0x00000001)
+    )
+
+    EnumConstant(
+        "PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT".enum(0x00000001),
+        "PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT".enum(0x00000002)
+    )
+
+    EnumConstant(
+        "DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK".."1000138000"
+    )
+
+    EnumConstant(
+        "ATTACHMENT_STORE_OP_NONE".."1000301000"
+    )
+
+    EnumConstant(
+        "DYNAMIC_STATE_CULL_MODE".."1000267000",
+        "DYNAMIC_STATE_FRONT_FACE".."1000267001",
+        "DYNAMIC_STATE_PRIMITIVE_TOPOLOGY".."1000267002",
+        "DYNAMIC_STATE_VIEWPORT_WITH_COUNT".."1000267003",
+        "DYNAMIC_STATE_SCISSOR_WITH_COUNT".."1000267004",
+        "DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE".."1000267005",
+        "DYNAMIC_STATE_DEPTH_TEST_ENABLE".."1000267006",
+        "DYNAMIC_STATE_DEPTH_WRITE_ENABLE".."1000267007",
+        "DYNAMIC_STATE_DEPTH_COMPARE_OP".."1000267008",
+        "DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE".."1000267009",
+        "DYNAMIC_STATE_STENCIL_TEST_ENABLE".."1000267010",
+        "DYNAMIC_STATE_STENCIL_OP".."1000267011",
+        "DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE".."1000377001",
+        "DYNAMIC_STATE_DEPTH_BIAS_ENABLE".."1000377002",
+        "DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE".."1000377004"
     )
 
     EnumConstant(
@@ -260,6 +254,12 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
     )
 
     EnumConstant(
+        "PIPELINE_CREATION_FEEDBACK_VALID_BIT".enum(0x00000001),
+        "PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT".enum(0x00000002),
+        "PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT".enum(0x00000004)
+    )
+
+    EnumConstant(
         "RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT".enum(0x00000001),
         "RENDERING_SUSPENDING_BIT".enum(0x00000002),
         "RENDERING_RESUMING_BIT".enum(0x00000004)
@@ -317,31 +317,6 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
     // Promoted from VK_KHR_synchronization2 (extension 315)
 
     void(
-        "CmdSetEvent2",
-
-        VkCommandBuffer("commandBuffer"),
-        VkEvent("event"),
-        VkDependencyInfo.const.p("pDependencyInfo")
-    )
-
-    void(
-        "CmdResetEvent2",
-
-        VkCommandBuffer("commandBuffer"),
-        VkEvent("event"),
-        VkPipelineStageFlags2("stageMask")
-    )
-
-    void(
-        "CmdWaitEvents2",
-
-        VkCommandBuffer("commandBuffer"),
-        AutoSize("pEvents", "pDependencyInfos")..uint32_t("eventCount"),
-        VkEvent.const.p("pEvents"),
-        VkDependencyInfo.const.p("pDependencyInfos")
-    )
-
-    void(
         "CmdPipelineBarrier2",
 
         VkCommandBuffer("commandBuffer"),
@@ -395,6 +370,62 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
         VkCommandBuffer("commandBuffer"),
         VkCopyImageToBufferInfo2.const.p("pCopyImageToBufferInfo")
     )
+
+    // Promoted from VK_KHR_maintenance4 (extension 414)
+
+    void(
+        "GetDeviceBufferMemoryRequirements",
+
+        VkDevice("device"),
+        VkDeviceBufferMemoryRequirements.const.p("pInfo"),
+        VkMemoryRequirements2.p("pMemoryRequirements")
+    )
+
+    void(
+        "GetDeviceImageMemoryRequirements",
+
+        VkDevice("device"),
+        VkDeviceImageMemoryRequirements.const.p("pInfo"),
+        VkMemoryRequirements2.p("pMemoryRequirements")
+    )
+
+    void(
+        "GetDeviceImageSparseMemoryRequirements",
+
+        VkDevice("device"),
+        VkDeviceImageMemoryRequirements.const.p("pInfo"),
+        AutoSize("pSparseMemoryRequirements")..Check(1)..uint32_t.p("pSparseMemoryRequirementCount"),
+        nullable..VkSparseImageMemoryRequirements2.p("pSparseMemoryRequirements")
+    )
+
+    // Promoted from VK_KHR_synchronization2 (extension 315)
+
+    void(
+        "CmdSetEvent2",
+
+        VkCommandBuffer("commandBuffer"),
+        VkEvent("event"),
+        VkDependencyInfo.const.p("pDependencyInfo")
+    )
+
+    void(
+        "CmdResetEvent2",
+
+        VkCommandBuffer("commandBuffer"),
+        VkEvent("event"),
+        VkPipelineStageFlags2("stageMask")
+    )
+
+    void(
+        "CmdWaitEvents2",
+
+        VkCommandBuffer("commandBuffer"),
+        AutoSize("pEvents", "pDependencyInfos")..uint32_t("eventCount"),
+        VkEvent.const.p("pEvents"),
+        VkDependencyInfo.const.p("pDependencyInfos")
+    )
+
+    // Promoted from VK_KHR_copy_commands2 (extension 338)
 
     void(
         "CmdBlitImage2",
@@ -543,33 +574,6 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 
         VkCommandBuffer("commandBuffer"),
         VkBool32("primitiveRestartEnable")
-    )
-
-    // Promoted from VK_KHR_maintenance4 (extension 414)
-
-    void(
-        "GetDeviceBufferMemoryRequirements",
-
-        VkDevice("device"),
-        VkDeviceBufferMemoryRequirements.const.p("pInfo"),
-        VkMemoryRequirements2.p("pMemoryRequirements")
-    )
-
-    void(
-        "GetDeviceImageMemoryRequirements",
-
-        VkDevice("device"),
-        VkDeviceImageMemoryRequirements.const.p("pInfo"),
-        VkMemoryRequirements2.p("pMemoryRequirements")
-    )
-
-    void(
-        "GetDeviceImageSparseMemoryRequirements",
-
-        VkDevice("device"),
-        VkDeviceImageMemoryRequirements.const.p("pInfo"),
-        AutoSize("pSparseMemoryRequirements")..Check(1)..uint32_t.p("pSparseMemoryRequirementCount"),
-        nullable..VkSparseImageMemoryRequirements2.p("pSparseMemoryRequirements")
     )
 
 }

@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH264.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoEncodeH264ReferenceListsInfo {
  *     {@link StdVideoEncodeH264ReferenceListsInfoFlags StdVideoEncodeH264ReferenceListsInfoFlags} flags;
  *     uint8_t num_ref_idx_l0_active_minus1;
@@ -33,7 +33,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH264.*;
  *     {@link StdVideoEncodeH264RefListModEntry StdVideoEncodeH264RefListModEntry} const * pRefList0ModOperations;
  *     {@link StdVideoEncodeH264RefListModEntry StdVideoEncodeH264RefListModEntry} const * pRefList1ModOperations;
  *     {@link StdVideoEncodeH264RefPicMarkingEntry StdVideoEncodeH264RefPicMarkingEntry} const * pRefPicMarkingOperations;
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoEncodeH264ReferenceListsInfo extends Struct<StdVideoEncodeH264ReferenceListsInfo> implements NativeResource {
 
@@ -59,6 +59,8 @@ public class StdVideoEncodeH264ReferenceListsInfo extends Struct<StdVideoEncodeH
         PREFPICMARKINGOPERATIONS;
 
     static {
+        StdVideoEncodeH264ReferenceListsInfoFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoEncodeH264ReferenceListsInfoFlags.SIZEOF, StdVideoEncodeH264ReferenceListsInfoFlags.ALIGNOF),
             __member(1),
@@ -353,8 +355,8 @@ public class StdVideoEncodeH264ReferenceListsInfo extends Struct<StdVideoEncodeH
     public static byte nrefList1ModOpCount(long struct) { return memGetByte(struct + StdVideoEncodeH264ReferenceListsInfo.REFLIST1MODOPCOUNT); }
     /** Unsafe version of {@link #refPicMarkingOpCount}. */
     public static byte nrefPicMarkingOpCount(long struct) { return memGetByte(struct + StdVideoEncodeH264ReferenceListsInfo.REFPICMARKINGOPCOUNT); }
-    public static ByteBuffer nreserved1(long struct) { return memByteBuffer(struct + StdVideoEncodeH264ReferenceListsInfo.RESERVED1, 7); }
-    public static byte nreserved1(long struct, int index) {
+    static ByteBuffer nreserved1(long struct) { return memByteBuffer(struct + StdVideoEncodeH264ReferenceListsInfo.RESERVED1, 7); }
+    static byte nreserved1(long struct, int index) {
         return memGetByte(struct + StdVideoEncodeH264ReferenceListsInfo.RESERVED1 + check(index, 7) * 1);
     }
     /** Unsafe version of {@link #pRefList0ModOperations}. */
@@ -394,11 +396,11 @@ public class StdVideoEncodeH264ReferenceListsInfo extends Struct<StdVideoEncodeH
     public static void nrefList1ModOpCount(long struct, byte value) { memPutByte(struct + StdVideoEncodeH264ReferenceListsInfo.REFLIST1MODOPCOUNT, value); }
     /** Sets the specified value to the {@code refPicMarkingOpCount} field of the specified {@code struct}. */
     public static void nrefPicMarkingOpCount(long struct, byte value) { memPutByte(struct + StdVideoEncodeH264ReferenceListsInfo.REFPICMARKINGOPCOUNT, value); }
-    public static void nreserved1(long struct, ByteBuffer value) {
+    static void nreserved1(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 7); }
         memCopy(memAddress(value), struct + StdVideoEncodeH264ReferenceListsInfo.RESERVED1, value.remaining() * 1);
     }
-    public static void nreserved1(long struct, int index, byte value) {
+    static void nreserved1(long struct, int index, byte value) {
         memPutByte(struct + StdVideoEncodeH264ReferenceListsInfo.RESERVED1 + check(index, 7) * 1, value);
     }
     /** Unsafe version of {@link #pRefList0ModOperations(StdVideoEncodeH264RefListModEntry.Buffer) pRefList0ModOperations}. */

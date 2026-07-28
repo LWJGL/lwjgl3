@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.lz4.LZ4HC.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct LZ4HC_CCtx_internal {
  *     LZ4_u32 hashTable[LZ4HC_HASHTABLESIZE];
  *     LZ4_u16 chainTable[LZ4HC_MAXD];
@@ -31,7 +31,7 @@ import static org.lwjgl.util.lz4.LZ4HC.*;
  *     LZ4_i8 favorDecSpeed;
  *     LZ4_i8 dirty;
  *     {@link LZ4HCCCtxInternal LZ4HC_CCtx_internal} * const dictCtx;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct LZ4HC_CCtx_internal")
 public class LZ4HCCCtxInternal extends Struct<LZ4HCCCtxInternal> {

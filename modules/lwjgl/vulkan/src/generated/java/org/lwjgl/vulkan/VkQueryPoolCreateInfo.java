@@ -119,6 +119,8 @@ public class VkQueryPoolCreateInfo extends Struct<VkQueryPoolCreateInfo> impleme
     public VkQueryPoolCreateInfo pNext(VkQueryPoolPerformanceQueryCreateInfoINTEL value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkQueryPoolVideoEncodeFeedbackCreateInfoKHR} value to the {@code pNext} chain. */
     public VkQueryPoolCreateInfo pNext(VkQueryPoolVideoEncodeFeedbackCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkQueryPoolVideoEncodePerPartitionFeedbackCreateInfoKHR} value to the {@code pNext} chain. */
+    public VkQueryPoolCreateInfo pNext(VkQueryPoolVideoEncodePerPartitionFeedbackCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoDecodeAV1ProfileInfoKHR} value to the {@code pNext} chain. */
     public VkQueryPoolCreateInfo pNext(VkVideoDecodeAV1ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoDecodeH264ProfileInfoKHR} value to the {@code pNext} chain. */
@@ -127,6 +129,8 @@ public class VkQueryPoolCreateInfo extends Struct<VkQueryPoolCreateInfo> impleme
     public VkQueryPoolCreateInfo pNext(VkVideoDecodeH265ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoDecodeUsageInfoKHR} value to the {@code pNext} chain. */
     public VkQueryPoolCreateInfo pNext(VkVideoDecodeUsageInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoDecodeVP9ProfileInfoKHR} value to the {@code pNext} chain. */
+    public VkQueryPoolCreateInfo pNext(VkVideoDecodeVP9ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeAV1ProfileInfoKHR} value to the {@code pNext} chain. */
     public VkQueryPoolCreateInfo pNext(VkVideoEncodeAV1ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH264ProfileInfoKHR} value to the {@code pNext} chain. */
@@ -247,25 +251,6 @@ public class VkQueryPoolCreateInfo extends Struct<VkQueryPoolCreateInfo> impleme
     public static VkQueryPoolCreateInfo.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkQueryPoolCreateInfo mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkQueryPoolCreateInfo callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkQueryPoolCreateInfo mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkQueryPoolCreateInfo callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkQueryPoolCreateInfo.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkQueryPoolCreateInfo.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkQueryPoolCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkQueryPoolCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkQueryPoolCreateInfo} instance allocated on the specified {@link MemoryStack}.
@@ -409,6 +394,8 @@ public class VkQueryPoolCreateInfo extends Struct<VkQueryPoolCreateInfo> impleme
         public VkQueryPoolCreateInfo.Buffer pNext(VkQueryPoolPerformanceQueryCreateInfoINTEL value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkQueryPoolVideoEncodeFeedbackCreateInfoKHR} value to the {@code pNext} chain. */
         public VkQueryPoolCreateInfo.Buffer pNext(VkQueryPoolVideoEncodeFeedbackCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkQueryPoolVideoEncodePerPartitionFeedbackCreateInfoKHR} value to the {@code pNext} chain. */
+        public VkQueryPoolCreateInfo.Buffer pNext(VkQueryPoolVideoEncodePerPartitionFeedbackCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoDecodeAV1ProfileInfoKHR} value to the {@code pNext} chain. */
         public VkQueryPoolCreateInfo.Buffer pNext(VkVideoDecodeAV1ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoDecodeH264ProfileInfoKHR} value to the {@code pNext} chain. */
@@ -417,6 +404,8 @@ public class VkQueryPoolCreateInfo extends Struct<VkQueryPoolCreateInfo> impleme
         public VkQueryPoolCreateInfo.Buffer pNext(VkVideoDecodeH265ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoDecodeUsageInfoKHR} value to the {@code pNext} chain. */
         public VkQueryPoolCreateInfo.Buffer pNext(VkVideoDecodeUsageInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoDecodeVP9ProfileInfoKHR} value to the {@code pNext} chain. */
+        public VkQueryPoolCreateInfo.Buffer pNext(VkVideoDecodeVP9ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeAV1ProfileInfoKHR} value to the {@code pNext} chain. */
         public VkQueryPoolCreateInfo.Buffer pNext(VkVideoEncodeAV1ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH264ProfileInfoKHR} value to the {@code pNext} chain. */

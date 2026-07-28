@@ -29,7 +29,7 @@ public interface Pointer {
     int POINTER_SHIFT = POINTER_SIZE == 8 ? 3 : 2;
 
     /** The value of {@code sizeof(long)} for the current platform. */
-    int CLONG_SIZE  = POINTER_SIZE == 8 && Platform.get() == Platform.WINDOWS ? 4 : POINTER_SIZE;
+    int CLONG_SIZE = POINTER_SIZE == 8 && Platform.get() == Platform.WINDOWS ? 4 : POINTER_SIZE;
 
     /** The value of {@code sizeof(long)} as a power-of-two. */
     int CLONG_SHIFT = CLONG_SIZE == 8 ? 3 : 2;
@@ -73,9 +73,9 @@ public interface Pointer {
                 return false;
             }
 
-            Pointer that = (Pointer)o;
+            Pointer other = (Pointer)o;
 
-            return address == that.address();
+            return this.address == other.address();
         }
 
         public int hashCode() {

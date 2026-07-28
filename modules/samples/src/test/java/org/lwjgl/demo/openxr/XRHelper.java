@@ -4,8 +4,9 @@
  */
 package org.lwjgl.demo.openxr;
 
-import org.joml.Math;
 import org.joml.*;
+import org.joml.Math;
+import org.lwjgl.*;
 import org.lwjgl.egl.*;
 import org.lwjgl.openxr.*;
 import org.lwjgl.system.*;
@@ -15,7 +16,6 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFWNativeEGL.*;
 import static org.lwjgl.glfw.GLFWNativeGLX.*;
 import static org.lwjgl.glfw.GLFWNativeWGL.*;
-import static org.lwjgl.glfw.GLFWNativeWayland.*;
 import static org.lwjgl.glfw.GLFWNativeWin32.*;
 import static org.lwjgl.glfw.GLFWNativeX11.*;
 import static org.lwjgl.opengl.GLX.*;
@@ -147,15 +147,20 @@ final class XRHelper {
     static XrSessionCreateInfo createGraphicsBindingOpenGL(
         XrSessionCreateInfo sessionCreateInfo, MemoryStack stack, long window, boolean useEGL
     ) throws IllegalStateException {
+        PointerBuffer pp = stack.mallocPointer(1);
         if (useEGL) {
             System.out.println("Using XrGraphicsBindingEGLMNDX to create the session...");
+            if (!glfwGetEGLConfig(window, pp)) {
+                throw new IllegalStateException("Failed to get EGL config");
+            }
+            long eglConfig = pp.get(0);
             return sessionCreateInfo.next(
                 XrGraphicsBindingEGLMNDX.malloc(stack)
                     .type$Default()
                     .next(NULL)
                     .getProcAddress(EGL.getCapabilities().eglGetProcAddress)
                     .display(glfwGetEGLDisplay())
-                    .config(glfwGetEGLConfig(window))
+                    .config(eglConfig)
                     .context(glfwGetEGLContext(window))
             );
         }
@@ -164,10 +169,13 @@ final class XRHelper {
             case LINUX:
                 int platform = glfwGetPlatform();
                 if (platform == GLFW_PLATFORM_X11) {
-                    long display   = glfwGetX11Display();
-                    long glxConfig = glfwGetGLXFBConfig(window);
+                    long display = glfwGetX11Display();
+                    if (!glfwGetGLXFBConfig(window, pp)) {
+                        throw new IllegalStateException("Failed to get GLX FB config");
+                    }
+                    long glxFBConfig = pp.get(0);
 
-                    XVisualInfo visualInfo = glXGetVisualFromFBConfig(display, glxConfig);
+                    XVisualInfo visualInfo = glXGetVisualFromFBConfig(display, glxFBConfig);
                     if (visualInfo == null) {
                         throw new IllegalStateException("Failed to get visual info");
                     }
@@ -179,7 +187,7 @@ final class XRHelper {
                             .type$Default()
                             .xDisplay(display)
                             .visualid((int)visualid)
-                            .glxFBConfig(glxConfig)
+                            .glxFBConfig(glxFBConfig)
                             .glxDrawable(glXGetCurrentDrawable())
                             .glxContext(glfwGetGLXContext(window))
                     );

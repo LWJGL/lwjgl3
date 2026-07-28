@@ -145,12 +145,20 @@ typedef SSIZE_T	ssize_t;
 #elif defined(__APPLE__) || defined (BSD) || defined(__FreeBSD_kernel__)
 # define MDB_USE_POSIX_SEM	1
 # if defined(__APPLE__)
-#  define MDB_FDATASYNC(fd)	fcntl(fd, F_FULLFSYNC)
+#  define MDB_FDATASYNC(fd)		fcntl(fd, F_FULLFSYNC)
 # else
 #  define MDB_FDATASYNC		fsync
 # endif
 #elif defined(ANDROID)
 # define MDB_FDATASYNC		fsync
+#elif defined(__HAIKU__)
+# define MDB_USE_POSIX_SEM	1
+# define MDB_FDATASYNC		fsync
+#endif
+
+/* NetBSD does not define union semun in sys/sem.h */
+#if defined(__NetBSD__) && !defined(_SEM_SEMUN_UNDEFINED)
+# define _SEM_SEMUN_UNDEFINED  1
 #endif
 
 #ifndef _WIN32
@@ -2990,8 +2998,10 @@ renew:
 		rc = mdb_txn_renew0(txn);
 	}
 	if (rc) {
-		if (txn != env->me_txn0)
+		if (txn != env->me_txn0) {
+			LMDB_FREE(txn->mt_u.dirty_list);
 			LMDB_FREE(txn);
+		}
 	} else {
 		txn->mt_flags |= flags;	/* could not change txn=me_txn0 earlier */
 		*ret = txn;
@@ -3092,6 +3102,7 @@ mdb_txn_end(MDB_txn *txn, unsigned mode)
 
 		txn->mt_numdbs = 0;
 		txn->mt_flags = MDB_TXN_FINISHED;
+		mdb_midl_free(txn->mt_spill_pgs);
 
 		if (!txn->mt_parent) {
 			mdb_midl_shrink(&txn->mt_free_pgs);
@@ -3113,7 +3124,6 @@ mdb_txn_end(MDB_txn *txn, unsigned mode)
 			mdb_midl_free(txn->mt_free_pgs);
 			LMDB_FREE(txn->mt_u.dirty_list);
 		}
-		mdb_midl_free(txn->mt_spill_pgs);
 
 		mdb_midl_free(pghead);
 	}
@@ -8622,7 +8632,7 @@ mdb_cursor_del0(MDB_cursor *mc)
 						goto fail;
 				}
 				if (m3->mc_xcursor && !(m3->mc_flags & C_EOF)) {
-					MDB_node *node = NODEPTR(m3->mc_pg[m3->mc_top], m3->mc_ki[m3->mc_top]);
+					MDB_node *node = NODEPTR(m3->mc_pg[mc->mc_top], m3->mc_ki[mc->mc_top]);
 					/* If this node has dupdata, it may need to be reinited
 					 * because its data has moved.
 					 * If the xcursor was not initd it must be reinited.
@@ -9190,8 +9200,8 @@ typedef struct mdb_copy {
 	pthread_cond_t mc_cond;	/**< Condition variable for #mc_new */
 	char *mc_wbuf[2];
 	char *mc_over[2];
-	int mc_wlen[2];
-	int mc_olen[2];
+	size_t mc_wlen[2];
+	size_t mc_olen[2];
 	pgno_t mc_next_pgno;
 	HANDLE mc_fd;
 	int mc_toggle;			/**< Buffer number in provider */
@@ -9208,7 +9218,8 @@ mdb_env_copythr(void *arg)
 {
 	mdb_copy *my = arg;
 	char *ptr;
-	int toggle = 0, wsize, rc;
+	int toggle = 0, rc;
+	size_t wsize;
 #ifdef _WIN32
 	DWORD len;
 #define DO_WRITE(rc, fd, ptr, w2, len)	rc = WriteFile(fd, ptr, w2, &len, NULL)

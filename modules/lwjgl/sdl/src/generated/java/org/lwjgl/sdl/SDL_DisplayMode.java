@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -117,9 +116,6 @@ public class SDL_DisplayMode extends Struct<SDL_DisplayMode> implements NativeRe
     public int refresh_rate_numerator() { return nrefresh_rate_numerator(address()); }
     /** @return the value of the {@code refresh_rate_denominator} field. */
     public int refresh_rate_denominator() { return nrefresh_rate_denominator(address()); }
-    /** @return the value of the {@code internal} field. */
-    @NativeType("SDL_DisplayModeData *")
-    public long internal() { return ninternal(address()); }
 
     /** Sets the specified value to the {@code displayID} field. */
     public SDL_DisplayMode displayID(@NativeType("SDL_DisplayID") int value) { ndisplayID(address(), value); return this; }
@@ -137,8 +133,6 @@ public class SDL_DisplayMode extends Struct<SDL_DisplayMode> implements NativeRe
     public SDL_DisplayMode refresh_rate_numerator(int value) { nrefresh_rate_numerator(address(), value); return this; }
     /** Sets the specified value to the {@code refresh_rate_denominator} field. */
     public SDL_DisplayMode refresh_rate_denominator(int value) { nrefresh_rate_denominator(address(), value); return this; }
-    /** Sets the specified value to the {@code internal} field. */
-    public SDL_DisplayMode internal(@NativeType("SDL_DisplayModeData *") long value) { ninternal(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public SDL_DisplayMode set(
@@ -149,8 +143,7 @@ public class SDL_DisplayMode extends Struct<SDL_DisplayMode> implements NativeRe
         float pixel_density,
         float refresh_rate,
         int refresh_rate_numerator,
-        int refresh_rate_denominator,
-        long internal
+        int refresh_rate_denominator
     ) {
         displayID(displayID);
         format(format);
@@ -160,7 +153,6 @@ public class SDL_DisplayMode extends Struct<SDL_DisplayMode> implements NativeRe
         refresh_rate(refresh_rate);
         refresh_rate_numerator(refresh_rate_numerator);
         refresh_rate_denominator(refresh_rate_denominator);
-        internal(internal);
 
         return this;
     }
@@ -304,8 +296,7 @@ public class SDL_DisplayMode extends Struct<SDL_DisplayMode> implements NativeRe
     public static int nrefresh_rate_numerator(long struct) { return memGetInt(struct + SDL_DisplayMode.REFRESH_RATE_NUMERATOR); }
     /** Unsafe version of {@link #refresh_rate_denominator}. */
     public static int nrefresh_rate_denominator(long struct) { return memGetInt(struct + SDL_DisplayMode.REFRESH_RATE_DENOMINATOR); }
-    /** Unsafe version of {@link #internal}. */
-    public static long ninternal(long struct) { return memGetAddress(struct + SDL_DisplayMode.INTERNAL); }
+    static long ninternal(long struct) { return memGetAddress(struct + SDL_DisplayMode.INTERNAL); }
 
     /** Unsafe version of {@link #displayID(int) displayID}. */
     public static void ndisplayID(long struct, int value) { memPutInt(struct + SDL_DisplayMode.DISPLAYID, value); }
@@ -323,17 +314,7 @@ public class SDL_DisplayMode extends Struct<SDL_DisplayMode> implements NativeRe
     public static void nrefresh_rate_numerator(long struct, int value) { memPutInt(struct + SDL_DisplayMode.REFRESH_RATE_NUMERATOR, value); }
     /** Unsafe version of {@link #refresh_rate_denominator(int) refresh_rate_denominator}. */
     public static void nrefresh_rate_denominator(long struct, int value) { memPutInt(struct + SDL_DisplayMode.REFRESH_RATE_DENOMINATOR, value); }
-    /** Unsafe version of {@link #internal(long) internal}. */
-    public static void ninternal(long struct, long value) { memPutAddress(struct + SDL_DisplayMode.INTERNAL, check(value)); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + SDL_DisplayMode.INTERNAL));
-    }
+    static void ninternal(long struct, long value) { memPutAddress(struct + SDL_DisplayMode.INTERNAL, value); }
 
     // -----------------------------------
 
@@ -396,9 +377,6 @@ public class SDL_DisplayMode extends Struct<SDL_DisplayMode> implements NativeRe
         public int refresh_rate_numerator() { return SDL_DisplayMode.nrefresh_rate_numerator(address()); }
         /** @return the value of the {@code refresh_rate_denominator} field. */
         public int refresh_rate_denominator() { return SDL_DisplayMode.nrefresh_rate_denominator(address()); }
-        /** @return the value of the {@code internal} field. */
-        @NativeType("SDL_DisplayModeData *")
-        public long internal() { return SDL_DisplayMode.ninternal(address()); }
 
         /** Sets the specified value to the {@code displayID} field. */
         public SDL_DisplayMode.Buffer displayID(@NativeType("SDL_DisplayID") int value) { SDL_DisplayMode.ndisplayID(address(), value); return this; }
@@ -416,8 +394,6 @@ public class SDL_DisplayMode extends Struct<SDL_DisplayMode> implements NativeRe
         public SDL_DisplayMode.Buffer refresh_rate_numerator(int value) { SDL_DisplayMode.nrefresh_rate_numerator(address(), value); return this; }
         /** Sets the specified value to the {@code refresh_rate_denominator} field. */
         public SDL_DisplayMode.Buffer refresh_rate_denominator(int value) { SDL_DisplayMode.nrefresh_rate_denominator(address(), value); return this; }
-        /** Sets the specified value to the {@code internal} field. */
-        public SDL_DisplayMode.Buffer internal(@NativeType("SDL_DisplayModeData *") long value) { SDL_DisplayMode.ninternal(address(), value); return this; }
 
     }
 

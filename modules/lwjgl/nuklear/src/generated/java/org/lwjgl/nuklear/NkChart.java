@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.nuklear.Nuklear.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_chart {
  *     int slot;
  *     float x;
@@ -25,7 +25,7 @@ import static org.lwjgl.nuklear.Nuklear.*;
  *     float w;
  *     float h;
  *     {@link NkChartSlot struct nk_chart_slot} slots[NK_CHART_MAX_SLOT];
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_chart")
 public class NkChart extends Struct<NkChart> {
@@ -46,6 +46,8 @@ public class NkChart extends Struct<NkChart> {
         SLOTS;
 
     static {
+        NkChartSlot.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

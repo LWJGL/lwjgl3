@@ -8,19 +8,14 @@ import org.lwjgl.generator.*
 import opencl.*
 
 val intel_driver_diagnostics = "INTELDriverDiagnostics".nativeClassCL("intel_driver_diagnostics", INTEL) {
-    IntConstant(
-        "CONTEXT_SHOW_DIAGNOSTICS_INTEL"..0x4106
+    LongConstant(
+        "CONTEXT_SHOW_DIAGNOSTICS_INTEL"..0x4106L
     )
 
-    EnumConstant(
-        "CONTEXT_DIAGNOSTICS_LEVEL_GOOD_INTEL".enum(
-            0x1
-        ),
-        "CONTEXT_DIAGNOSTICS_LEVEL_BAD_INTEL".enum(
-            0x2
-        ),
-        "CONTEXT_DIAGNOSTICS_LEVEL_NEUTRAL_INTEL".enum(
-            0x4
-        )
+    LongConstant(
+        "CONTEXT_DIAGNOSTICS_LEVEL_ALL_INTEL".."0xFF",
+        "CONTEXT_DIAGNOSTICS_LEVEL_GOOD_INTEL".."1L << 0",
+        "CONTEXT_DIAGNOSTICS_LEVEL_BAD_INTEL".."1L << 1",
+        "CONTEXT_DIAGNOSTICS_LEVEL_NEUTRAL_INTEL".."1L << 2"
     )
 }

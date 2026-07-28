@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.egl.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSwapchainStateSamplerOpenGLESFB {
  *     XrStructureType type;
  *     void * next;
@@ -32,7 +32,7 @@ import org.lwjgl.egl.*;
  *     EGLenum swizzleAlpha;
  *     float maxAnisotropy;
  *     {@link XrColor4f XrColor4f} borderColor;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSwapchainStateSamplerOpenGLESFB extends Struct<XrSwapchainStateSamplerOpenGLESFB> implements NativeResource {
 
@@ -58,6 +58,8 @@ public class XrSwapchainStateSamplerOpenGLESFB extends Struct<XrSwapchainStateSa
         BORDERCOLOR;
 
     static {
+        XrColor4f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

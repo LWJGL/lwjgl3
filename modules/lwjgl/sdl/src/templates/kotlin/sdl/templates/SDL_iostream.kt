@@ -32,7 +32,8 @@ val SDL_iostream = "SDLIOStream".nativeClassSDL("SDL_iostream") {
 
     StringConstant(
         "PROP_IOSTREAM_MEMORY_POINTER".."SDL.iostream.memory.base",
-        "PROP_IOSTREAM_MEMORY_SIZE_NUMBER".."SDL.iostream.memory.size"
+        "PROP_IOSTREAM_MEMORY_SIZE_NUMBER".."SDL.iostream.memory.size",
+        "PROP_IOSTREAM_MEMORY_FREE_FUNC_POINTER".."SDL.iostream.memory.free"
     )
 
     StringConstant(

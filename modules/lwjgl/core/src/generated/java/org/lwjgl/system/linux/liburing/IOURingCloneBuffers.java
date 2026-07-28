@@ -265,8 +265,8 @@ public class IOURingCloneBuffers extends Struct<IOURingCloneBuffers> implements 
     public static int ndst_off(long struct) { return memGetInt(struct + IOURingCloneBuffers.DST_OFF); }
     /** Unsafe version of {@link #nr}. */
     public static int nnr(long struct) { return memGetInt(struct + IOURingCloneBuffers.NR); }
-    public static IntBuffer npad(long struct) { return memIntBuffer(struct + IOURingCloneBuffers.PAD, 3); }
-    public static int npad(long struct, int index) {
+    static IntBuffer npad(long struct) { return memIntBuffer(struct + IOURingCloneBuffers.PAD, 3); }
+    static int npad(long struct, int index) {
         return memGetInt(struct + IOURingCloneBuffers.PAD + check(index, 3) * 4);
     }
 
@@ -280,11 +280,11 @@ public class IOURingCloneBuffers extends Struct<IOURingCloneBuffers> implements 
     public static void ndst_off(long struct, int value) { memPutInt(struct + IOURingCloneBuffers.DST_OFF, value); }
     /** Unsafe version of {@link #nr(int) nr}. */
     public static void nnr(long struct, int value) { memPutInt(struct + IOURingCloneBuffers.NR, value); }
-    public static void npad(long struct, IntBuffer value) {
+    static void npad(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + IOURingCloneBuffers.PAD, value.remaining() * 4);
     }
-    public static void npad(long struct, int index, int value) {
+    static void npad(long struct, int index, int value) {
         memPutInt(struct + IOURingCloneBuffers.PAD + check(index, 3) * 4, value);
     }
 

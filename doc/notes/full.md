@@ -1,6 +1,202 @@
+### 3.4.2
+
+_Released 2026 Jul 13_
+
+#### Bindings
+
+- Added [mimalloc](https://microsoft.github.io/mimalloc/) bindings.
+- Assimp: Updated to 6.0.5 (up from 6.0.3)
+- bgfx: Updated to API version 149 (up from 136)
+- freetype: Updated to 2.14.3 (up from 2.14.1)
+- harfbuzz: Updated to 14.2.1 (up from 12.3.2)
+  * Added experimental `harfbuzz-raster` & `harfbuzz-vector` libraries.
+  * Added `harfbuzz-gpu` library.
+- hwloc: Updated to 2.14.0 (up from 2.12.2)
+- jemalloc: Updated to 5.3.1 (up from 5.3.0)
+- KTX: Updated to 5.0.0-rc1 (up from 4.4.2)
+- libffi: Updated to 3.7.1 (up from 3.5.2)
+- LLVM/Clang: Updated to 22.1.5 (up from 21.1.2)
+- lmdb: Updated to 0.9.35 (up from 0.9.33)
+- liburing: Updated to 2.15 (up from 2.13)
+- meshoptimizer: Updated to 1.2.0 (up from 1.0.0)
+- Nuklear: Updated to 4.13.3 (up from 4.13.0)
+- OpenAL Soft: Updated to 1.25.2 (up from 1.25.1)
+- OpenCL: Added support for OpenCL 3.1.
+- OpenGL: Added missing APPLE extensions. (#1105)
+- OpenXR: Updated to 1.1.61 (up from 1.1.54)
+- RenderDoc: Updated to 1.7.0 (up from 1.6.0)
+- rpmalloc: Updated to 2.0.0 (up from 1.4.5)
+- SDL: Updated to 3.4.12 (up from pre-release 3.4.1)
+- Shaderc: Updated to 2026.2 (up from 2026.1)
+  * Updated SPIRV Tools to 2026.2.rc1 (up from 2026.1)
+- stb
+  * Updated `stb_image_resize` to 2.18 (up from 2.17)
+- vma: Updated to 3.4.0 (up from 3.3.0)
+- Vulkan: Updated to 1.4.356 (up from 1.4.342)
+
+#### Fixes
+
+- Core: Struct parameters passed by value to LWJGL 3 callbacks are now supported with the FFM backend. (#1107)
+- Core: Upcall allocations with the FFM backend are now tracked when the debug allocator is enabled.
+- Freetype: Fixed `FT_LOAD_TARGET_*` constant names. (#1119)
+- HarfBuzz: Fixed AAT constant and function names. (#1123)
+- SDL: Hid `SDL_DisplayMode::internal`. (#1110)
+
+#### Improvements
+
+- Core: `MemoryUtil` backends are now configurable at runtime. (#1111)
+  * See `Configuration::MEMORY_BACKEND` for details.
+  * The new default on JDK 25+ is FFM-based downcalls/upcalls and Unsafe-based memory access.
+- Core: The default memory allocator is now mimalloc.
+  * If available on the class/module-path.
+  * Fallbacks: rpmalloc -> jemalloc -> system allocator
+- Core: New features in the runtime bindings generator.
+  * Now supports C `long` types in downcalls/upcalls with the `@FFMCLong` annotation on Java `long` carriers.
+  * Now supports nested anonymous structs and unions.
+- Core: The `SharedLibraryLoader` now prints exceptions when it is able to extract a library, but not load it. (#1120)
+  * Requires `Configuration::DEBUG_LOADER` to be enabled.
+- FreeBSD: LWJGL now requires FreeBSD 14.4 or later. (up from 13.5)
+
+#### Breaking changes
+
+- Core: The `MemorySegment` access methods have been moved from `MemoryUtil` to `MemoryUtilFFM`.
+- Unsafe accessor methods for private struct members are now package private.
+
+### 3.4.1
+
+_Released 2026 Feb 03_
+
+This build includes the following changes:
+
+#### Bindings
+
+- Assimp: Updated to 6.0.3 (up from 6.0.2)
+- harfbuzz: Updated to 12.3.2 (up from 12.3.0)
+- OpenAL Soft: Updated to 1.25.1 (up from 1.25.0)
+- SDL: Updated to pre-release 3.4.1 (up from 3.4.0)
+- Shaderc: Updated to 2026.1 (up from 2025.5)
+  * Updated glslang to 16.2.0 (up from 16.1.0)
+  * Updated SPIRV Tools to 2026.1 (up from 2025.5)
+- Vulkan: Updated to 1.4.342 (up from 1.4.338)
+
+#### Fixes
+
+- Windows: Reverted to building with Visual Studio 2022 to fix another case of #1005.
+
+#### Breaking Changes
+
+- Shaderc/glslang: Extracted the resource limits interface (`resource_limits_c.h`) to a separate class. (#1101)
+  * Added `Configuration.GLSLANG_RESOURCE_LIBRARY_NAME`
+- Shaderc/SPIRV Tools: Extracted the optimizer interface to a separate class. (#1101)
+  * Added `Configuration.SPIRV_TOOLS_OPTIMIZER_LIBRARY_NAME`
+
+### 3.4.0
+
+_Released 2026 Jan 18_
+
+This build includes the following changes:
+
+#### Bindings
+
+- Added [RenderDoc](https://renderdoc.org) bindings.
+- Added [SDL 3](https://libsdl.org/) bindings.
+- Added [libspng](https://libspng.org/) bindings.
+- Assimp: Updated to 6.0.2 (up from 5.4.3)
+- bgfx: Updated to API version 136 (up from 129)
+- FMOD: Updated to 2.03.11 (up from 2.03.04)
+- freetype: Updated to 2.14.1 (up from 2.13.3)
+- harfbuzz: Updated to 12.3.0 (up from 10.1.0)
+- hwloc: Updated to 2.12.2 (up from 2.11.2)
+- KTX: Updated to 4.4.2 (up from 4.3.2)
+- libffi: Updated to 3.5.2 (up from 3.4.6)
+- liburing: Updated to 2.13 (up from 2.8)
+- LLVM/Clang: Updated to 21.1.2 (up from 19.1.0)
+- meshoptimizer: Updated to 1.0.0 (up from 0.22)
+- msdfgen: Updated to 1.13.0 (up from 1.11.0)
+  * Added error correction functions.
+  * Added optional `advance` parameter to `msdf_ft_font_load_glyph*`.
+  * Replaced `msdf_shape_has_inverse_y_axis` with `msdf_shape_set/get_y_axis_orientation`.
+- NativeFileDialog: Update to 1.3.0 (up from 1.2.1)
+- Nuklear: Updated to 4.13.0 (up from 4.12.3)
+- OpenAL Soft: Updated to 1.25.0 (up from 1.24.1)
+  * Added `AL_SOFT_bformat_hoa` extension.
+- OpenGL (ES): Added latest extensions.
+  * `EXT_fragment_shading_rate`
+  * `EXT_mesh_shader`
+  * `EXT_shader_realtime_clock`
+  * `EXT_shader_texture_samples`
+- OpenXR: Updated to 1.1.54 (up from 1.1.43)
+- Opus: Updated to 1.6.0 (up from 1.5.2)
+- Shaderc: Updated to 2025.5 (up from 2024.4)
+  * Added bindings to glslang.
+  * Added bindings to SPIRV Tools.
+- SPIRV-Cross: Updated to 0.68.0 (up from 0.64.0)
+- stb
+  * Updated `stb_image_resize` to 2.17 (up from 2.12)
+- tinyexr: Updated to 1.0.12 (up from 1.0.8)
+- tinyfiledialogs: Updated to 3.19.1 (up from 3.18.1)
+- vma: Updated to 3.3.0 (up from 3.2.0)
+- Vulkan: Updated to 1.4.338 (up from 1.4.304)
+  * Includes MoltenVK 1.4.1 (up from 1.2.11)
+- Zstd: Updated to 1.5.7 (up from 1.5.6)
+
+LWJGL bindings no longer include API documentation in javadoc form. What remains:
+
+- Native struct definitions.
+- Native function signatures for downcalls (new in 3.4.0) and upcalls.
+- The `package-info` javadoc in each module now also includes links to useful resources, such as:
+  * The official API documentation.
+  * The official source repository.
+  * Guides, tutorials, SDKs, etc.
+
+LWJGL no longer includes the following bindings:
+
+- `lwjgl-cuda`
+- `lwjgl-libdivide`
+- `lwjgl-meow`
+- `lwjgl-nanovg`: the Blendish and OUI bindings only
+- `lwjgl-openvr`
+- `lwjgl-ovr`
+- `lwjgl-sse`
+- `lwjgl-tootle`
+
+#### Improvements
+
+- Core: Added the Runtime Bindings Generator.
+  * A preview API, in `org.lwjgl.system.ffm`, that allows users to define and use custom bindings.
+  * Based on the Foreign Function & Memory (FFM) and ClassFile APIs (requires JDK 25 or later).
+- Core: Added a new backend for downcalls, upcalls and off-heap memory access based on FFM.
+  * Enabled by default on JDK 25 or later.
+  * LWJGL is now fully functional with `--sun-misc-unsafe-memory-access=deny`.
+  * See the [FFM Guide](../FFM.md) for details.
+- Core: Added `memCopy` support for Java arrays. (#972)
+  * Array to buffer
+  * Buffer to array
+  * Corresponding unsafe overloads
+- FreeBSD: LWJGL now requires FreeBSD 13.5 or later. (up from 13.3)
+- Linux: x86_64 shared libraries are now built with GCC 15.1 (up from GCC 11.2)
+  * The minimum GLIBC version is now 2.28. (up from 2.17)
+- Linux: non-x86_64 shared libraries are now built with GCC 12.3 (up from GCC 11.4)
+  * No change to minimum GLIBC version (2.35).
+- Windows: Shared libraries are now built with Visual Studio 2026 (up from 2022)
+
+#### Fixes
+
+- Opus: Fixed missing function exports in Windows binaries.
+- tinyfiledialogs: Fixed `tinyfd_messageBox` signature to support the `yesnocancel` dialog type.
+- Vulkan: Fixed stack OOME on VkInstance creation with recent drivers.
+- Vulkan: Fixed support for Vulkan 1.4.
+
+#### Breaking Changes
+
+- Generator: Removed deprecated `mallocStack`/`callocStack` methods from structs.
+- OpenCL: Fixed the carrier type of `cl_ulong` constants. (#1087)
+  * Now mapped to `long` to avoid unintentional sign extension for negative values.
+- Vulkan: MoltenVK on x64 now requires macOS 11.0 or later. (up from 10.13)
+
 ### 3.3.6
 
-_Release 2025 Jan 04_
+_Released 2025 Jan 04_
 
 This build includes the following changes:
 
@@ -17,7 +213,7 @@ This build includes the following changes:
 
 ### 3.3.5
 
-_Release 2024 Dec 15_
+_Released 2024 Dec 15_
 
 This build includes the following changes:
 
@@ -80,7 +276,7 @@ This build includes the following changes:
 
 ### 3.3.4
 
-_Release 2024 Jul 17_
+_Released 2024 Jul 17_
 
 This build includes the following changes:
 

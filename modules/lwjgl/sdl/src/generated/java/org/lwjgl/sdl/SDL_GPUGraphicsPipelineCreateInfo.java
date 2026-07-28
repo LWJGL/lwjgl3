@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct SDL_GPUGraphicsPipelineCreateInfo {
  *     SDL_GPUShader * vertex_shader;
  *     SDL_GPUShader * fragment_shader;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link SDL_GPUDepthStencilState SDL_GPUDepthStencilState} depth_stencil_state;
  *     {@link SDL_GPUGraphicsPipelineTargetInfo SDL_GPUGraphicsPipelineTargetInfo} target_info;
  *     SDL_PropertiesID props;
- * }}</pre>
+ * }</code></pre>
  */
 public class SDL_GPUGraphicsPipelineCreateInfo extends Struct<SDL_GPUGraphicsPipelineCreateInfo> implements NativeResource {
 
@@ -50,6 +50,12 @@ public class SDL_GPUGraphicsPipelineCreateInfo extends Struct<SDL_GPUGraphicsPip
         PROPS;
 
     static {
+        SDL_GPUVertexInputState.createSafe(NULL);
+        SDL_GPURasterizerState.createSafe(NULL);
+        SDL_GPUMultisampleState.createSafe(NULL);
+        SDL_GPUDepthStencilState.createSafe(NULL);
+        SDL_GPUGraphicsPipelineTargetInfo.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

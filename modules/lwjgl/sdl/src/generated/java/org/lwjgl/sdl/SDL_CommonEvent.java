@@ -222,13 +222,13 @@ public class SDL_CommonEvent extends Struct<SDL_CommonEvent> implements NativeRe
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_CommonEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_CommonEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_CommonEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_CommonEvent.TIMESTAMP); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_CommonEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_CommonEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_CommonEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_CommonEvent.TIMESTAMP, value); }
 

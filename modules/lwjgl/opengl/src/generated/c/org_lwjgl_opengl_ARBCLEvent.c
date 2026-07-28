@@ -11,7 +11,7 @@ typedef uintptr_t (APIENTRY *glCreateSyncFromCLeventARBPROC) (uintptr_t, uintptr
 EXTERN_C_ENTER
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_opengl_ARBCLEvent_nglCreateSyncFromCLeventARB(JNIEnv *__env, jclass clazz, jlong contextAddress, jlong eventAddress, jint flags) {
-    glCreateSyncFromCLeventARBPROC glCreateSyncFromCLeventARB = (glCreateSyncFromCLeventARBPROC)tlsGetFunction(1128);
+    glCreateSyncFromCLeventARBPROC glCreateSyncFromCLeventARB = (glCreateSyncFromCLeventARBPROC)tlsGetFunction(1162);
     uintptr_t context = (uintptr_t)contextAddress;
     uintptr_t event = (uintptr_t)eventAddress;
     UNUSED_PARAM(clazz)

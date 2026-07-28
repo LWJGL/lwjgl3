@@ -34,6 +34,8 @@ val STD_vulkan_video_codec_h264 = "STDVulkanVideoCodecH264".nativeClassVK("STD_v
         "H264_PROFILE_IDC_BASELINE".enum("66"),
         "H264_PROFILE_IDC_MAIN".enum("77"),
         "H264_PROFILE_IDC_HIGH".enum("100"),
+        "H264_PROFILE_IDC_HIGH_10".enum("110"),
+        "H264_PROFILE_IDC_HIGH_422".enum("122"),
         "H264_PROFILE_IDC_HIGH_444_PREDICTIVE".enum("244"),
         "H264_PROFILE_IDC_INVALID".enum(0x7FFFFFFF)
     )

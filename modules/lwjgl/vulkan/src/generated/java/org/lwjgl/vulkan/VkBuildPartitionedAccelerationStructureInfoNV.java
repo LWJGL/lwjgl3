@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkBuildPartitionedAccelerationStructureInfoNV {
  *     VkStructureType sType;
  *     void * pNext;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkDeviceAddress scratchData;
  *     VkDeviceAddress srcInfos;
  *     VkDeviceAddress srcInfosCount;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkBuildPartitionedAccelerationStructureInfoNV extends Struct<VkBuildPartitionedAccelerationStructureInfoNV> implements NativeResource {
 
@@ -48,6 +48,8 @@ public class VkBuildPartitionedAccelerationStructureInfoNV extends Struct<VkBuil
         SRCINFOSCOUNT;
 
     static {
+        VkPartitionedAccelerationStructureInstancesInputNV.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

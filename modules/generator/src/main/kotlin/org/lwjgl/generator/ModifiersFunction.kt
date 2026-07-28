@@ -79,10 +79,10 @@ class Code(
             NO_STATEMENTS !== javaFinally
 
     internal fun hasStatements(statements: List<Statement>, alternative: Boolean, arrays: Boolean) =
-        if (statements === NO_STATEMENTS) false else statements.any { it.applyTo.filter(alternative, arrays) }
+        if (statements === NO_STATEMENTS) false else statements.any { (_, applyTo) -> applyTo.filter(alternative, arrays) }
 
     internal fun getStatements(statements: List<Statement>, alternative: Boolean, arrays: Boolean) =
-        if (statements === NO_STATEMENTS) statements else statements.filter { it.applyTo.filter(alternative, arrays) }
+        if (statements === NO_STATEMENTS) statements else statements.filter { (_, applyTo) -> applyTo.filter(alternative, arrays) }
 
     private fun List<Statement>.append(other: List<Statement>) =
         if (this === NO_STATEMENTS && other === NO_STATEMENTS) NO_STATEMENTS else this + other

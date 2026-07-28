@@ -16,10 +16,10 @@ val arm_controlled_kernel_termination = "ARMControlledKernelTermination".nativeC
         "DEVICE_CONTROLLED_TERMINATION_CAPABILITIES_ARM"..0x41EE
     )
 
-    IntConstant(
-        "DEVICE_CONTROLLED_TERMINATION_SUCCESS_ARM".."(1 << 0)",
-        "DEVICE_CONTROLLED_TERMINATION_FAILURE_ARM".."(1 << 1)",
-        "DEVICE_CONTROLLED_TERMINATION_QUERY_ARM".."(1 << 2)"
+    LongConstant(
+        "DEVICE_CONTROLLED_TERMINATION_SUCCESS_ARM".."(1L << 0)",
+        "DEVICE_CONTROLLED_TERMINATION_FAILURE_ARM".."(1L << 1)",
+        "DEVICE_CONTROLLED_TERMINATION_QUERY_ARM".."(1L << 2)"
     )
 
     IntConstant(

@@ -8,11 +8,11 @@ import org.lwjgl.generator.*
 import opencl.*
 
 val img_mem_properties = "IMGMemProperties".nativeClassCL("img_mem_properties", IMG) {
-    IntConstant(
-        "MEM_ALLOC_FLAGS_IMG"..0x40D7
+    LongConstant(
+        "MEM_ALLOC_FLAGS_IMG"..0x40D7L
     )
 
-    IntConstant(
-        "MEM_ALLOC_RELAX_REQUIREMENTS_IMG".."1 << 0"
+    LongConstant(
+        "MEM_ALLOC_RELAX_REQUIREMENTS_IMG".."1L << 0"
     )
 }

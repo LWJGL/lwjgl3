@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoEncodeAV1QualityLevelPropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t preferredMaxBidirectionalCompoundGroup1ReferenceCount;
  *     uint32_t preferredMaxBidirectionalCompoundGroup2ReferenceCount;
  *     uint32_t preferredBidirectionalCompoundReferenceNameMask;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoEncodeAV1QualityLevelPropertiesKHR extends Struct<VkVideoEncodeAV1QualityLevelPropertiesKHR> implements NativeResource {
 
@@ -66,6 +66,8 @@ public class VkVideoEncodeAV1QualityLevelPropertiesKHR extends Struct<VkVideoEnc
         PREFERREDBIDIRECTIONALCOMPOUNDREFERENCENAMEMASK;
 
     static {
+        VkVideoEncodeAV1QIndexKHR.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

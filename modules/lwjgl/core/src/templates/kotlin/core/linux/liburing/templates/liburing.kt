@@ -20,6 +20,23 @@ ENABLE_WARNINGS()""")
 
     LongConstant("LIBURING_UDATA_TIMEOUT".."-1L")
 
+    // bpf_filter.h
+
+    EnumConstant(
+        "BPF_FILTER_DENY_REST".enum("1"),
+        "BPF_FILTER_SZ_STRICT".enum
+    )
+
+    EnumConstant(
+        "BPF_CMD_FILTER".enum("1")
+    )
+
+    // query.h
+
+    EnumConstant(
+        "QUERY_OPCODES".enum("0")
+    )
+
     io_uring_probe.p(
         "get_probe_ring",
 
@@ -447,10 +464,43 @@ ENABLE_WARNINGS()""")
     )
 
     int(
+        "register_ifq",
+
+        io_uring.p("ring"),
+        io_uring_zcrx_ifq_reg.p("reg")
+    )
+
+    int(
+        "register_zcrx_ctrl",
+
+        io_uring.p("ring"),
+        zcrx_ctrl.p("ctrl")
+    )
+
+    int(
         "register_clock",
 
         io_uring.p("ring"),
         io_uring_clock_register.p("arg")
+    )
+
+    int(
+        "register_bpf_filter",
+
+        io_uring.p("ring"),
+        io_uring_bpf.p("bpf")
+    )
+
+    int(
+        "register_bpf_filter_task",
+
+        io_uring_bpf.p("bpf")
+    )
+
+    int(
+        "register_query",
+
+        io_uring_query_hdr.p("query")
     )
 
     int(
@@ -482,8 +532,8 @@ ENABLE_WARNINGS()""")
         unsigned_int("to_submit"),
         unsigned_int("min_complete"),
         unsigned_int("flags"),
-        sigset_t.p("sig"),
-        size_t("sz")
+        void.p("arg"),
+        AutoSize("arg")..size_t("sz")
     )
 
     int(
@@ -526,6 +576,38 @@ ENABLE_WARNINGS()""")
         io_uring_buf_ring.p("br"),
         unsigned_int("nentries"),
         int("bgid")
+    )
+
+    int(
+        "set_iowait",
+
+        io_uring.p("ring"),
+        bool("enable_iowait")
+    )
+
+    unsigned(
+        "cqe_shift_from_flags",
+
+        unsigned("flags")
+    )
+
+    unsigned(
+        "cqe_shift",
+
+        io_uring.const.p("ring")
+    )
+
+    unsigned(
+        "cqe_nr",
+
+        io_uring_cqe.const.p("cqe")
+    )
+
+    void(
+        "cq_advance",
+
+        io_uring.p("ring"),
+        unsigned("nr")
     )
 
     void(
@@ -573,6 +655,12 @@ ENABLE_WARNINGS()""")
 
         io_uring_sqe.p("sqe"),
         int("bgid")
+    )
+
+    void(
+        "initialize_sqe",
+
+        io_uring_sqe.p("sqe")
     )
 
     void(
@@ -625,7 +713,19 @@ ENABLE_WARNINGS()""")
         int("fd"),
         void.p("buf"),
         AutoSize("buf")..unsigned_int("nbytes"),
-        int("offset"),
+        __u64("offset"),
+        int("buf_index")
+    )
+
+    void(
+        "prep_readv_fixed",
+
+        io_uring_sqe.p("sqe"),
+        int("fd"),
+        iovec.const.p("iovecs"),
+        AutoSize("iovecs")..unsigned_int("nr_vecs"),
+        __u64("offset"),
+        int("flags"),
         int("buf_index")
     )
 
@@ -636,7 +736,7 @@ ENABLE_WARNINGS()""")
         int("fd"),
         iovec.const.p("iovecs"),
         AutoSize("iovecs")..unsigned_int("nr_vecs"),
-        int("offset")
+        __u64("offset")
     )
 
     void(
@@ -646,7 +746,7 @@ ENABLE_WARNINGS()""")
         int("fd"),
         iovec.const.p("iovecs"),
         AutoSize("iovecs")..unsigned_int("nr_vecs"),
-        int("offset"),
+        __u64("offset"),
         int("flags")
     )
 
@@ -657,7 +757,19 @@ ENABLE_WARNINGS()""")
         int("fd"),
         void.const.p("buf"),
         AutoSize("buf")..unsigned_int("nbytes"),
-        int("offset"),
+        __u64("offset"),
+        int("buf_index")
+    )
+
+    void(
+        "prep_writev_fixed",
+
+        io_uring_sqe.p("sqe"),
+        int("fd"),
+        iovec.const.p("iovecs"),
+        AutoSize("iovecs")..unsigned_int("nr_vecs"),
+        __u64("offset"),
+        int("flags"),
         int("buf_index")
     )
 
@@ -667,7 +779,7 @@ ENABLE_WARNINGS()""")
         io_uring_sqe.p("sqe"),
         int("fd"),
         msghdr.p("msg"),
-        unsigned_int("flags")
+        unsigned("flags")
     )
 
     void(
@@ -685,7 +797,7 @@ ENABLE_WARNINGS()""")
         io_uring_sqe.p("sqe"),
         int("fd"),
         msghdr.const.p("msg"),
-        unsigned_int("flags")
+        unsigned("flags")
     )
 
     void(
@@ -693,7 +805,7 @@ ENABLE_WARNINGS()""")
 
         io_uring_sqe.p("sqe"),
         int("fd"),
-        unsigned_int("poll_mask")
+        unsigned("poll_mask")
     )
 
     void(
@@ -701,7 +813,7 @@ ENABLE_WARNINGS()""")
 
         io_uring_sqe.p("sqe"),
         int("fd"),
-        unsigned_int("poll_mask")
+        unsigned("poll_mask")
     )
 
     void(
@@ -717,8 +829,8 @@ ENABLE_WARNINGS()""")
         io_uring_sqe.p("sqe"),
         __u64("old_user_data"),
         __u64("new_user_data"),
-        unsigned_int("poll_mask"),
-        unsigned_int("flags")
+        unsigned("poll_mask"),
+        unsigned("flags")
     )
 
     void(
@@ -726,7 +838,7 @@ ENABLE_WARNINGS()""")
 
         io_uring_sqe.p("sqe"),
         int("fd"),
-        unsigned_int("fsync_flags") // TODO:
+        unsigned("fsync_flags") // TODO:
     )
 
     void(
@@ -736,12 +848,18 @@ ENABLE_WARNINGS()""")
     )
 
     void(
+        "prep_nop128",
+
+        io_uring_sqe.p("sqe")
+    )
+
+    void(
         "prep_timeout",
 
         io_uring_sqe.p("sqe"),
-        __kernel_timespec.p("ts"),
-        unsigned_int("count"),
-        unsigned_int("flags")
+        __kernel_timespec.const.p("ts"),
+        unsigned("count"),
+        unsigned("flags")
     )
 
     void(
@@ -749,16 +867,16 @@ ENABLE_WARNINGS()""")
 
         io_uring_sqe.p("sqe"),
         __u64("user_data"),
-        unsigned_int("flags")
+        unsigned("flags")
     )
 
     void(
         "prep_timeout_update",
 
         io_uring_sqe.p("sqe"),
-        __kernel_timespec.p("ts"),
+        __kernel_timespec.const.p("ts"),
         __u64("user_data"),
-        unsigned_int("flags")
+        unsigned("flags")
     )
 
     void(
@@ -814,7 +932,7 @@ ENABLE_WARNINGS()""")
         "prep_cancel",
 
         io_uring_sqe.p("sqe"),
-        opaque_p("user_data"),
+        nullable..opaque_p("user_data"),
         int("flags") // TODO:
     )
 
@@ -830,8 +948,8 @@ ENABLE_WARNINGS()""")
         "prep_link_timeout",
 
         io_uring_sqe.p("sqe"),
-        __kernel_timespec.p("ts"),
-        unsigned_int("flags")
+        __kernel_timespec.const.p("ts"),
+        unsigned("flags")
     )
 
     void(
@@ -848,7 +966,7 @@ ENABLE_WARNINGS()""")
 
         io_uring_sqe.p("sqe"),
         int("fd"),
-        sockaddr.p("addr"),
+        sockaddr.const.p("addr"),
         socklen_t("addrlen")
     )
 
@@ -861,11 +979,21 @@ ENABLE_WARNINGS()""")
     )
 
     void(
+        "prep_epoll_wait",
+
+        io_uring_sqe.p("sqe"),
+        int("fd"),
+        epoll_event.p("events"),
+        AutoSize("events")..unsigned_int("maxevents"),
+        unsigned("flags")
+    )
+
+    void(
         "prep_files_update",
 
         io_uring_sqe.p("sqe"),
         int.p("fds"),
-        AutoSize("fds")..unsigned_int("nr_fds"),
+        AutoSize("fds")..unsigned("nr_fds"),
         int("offset")
     )
 
@@ -875,8 +1003,8 @@ ENABLE_WARNINGS()""")
         io_uring_sqe.p("sqe"),
         int("fd"),
         int("mode"), // TODO:
-        off_t("offset"),
-        off_t("len")
+        __u64("offset"),
+        __u64("len")
     )
 
     void(
@@ -940,7 +1068,7 @@ ENABLE_WARNINGS()""")
         int("fd"),
         void.p("buf"),
         AutoSize("buf")..unsigned_int("nbytes"),
-        int("offset")
+        __u64("offset")
     )
 
     void(
@@ -960,7 +1088,7 @@ ENABLE_WARNINGS()""")
         int("fd"),
         void.const.p("buf"),
         AutoSize("buf")..unsigned_int("nbytes"),
-        int("offset")
+        __u64("offset")
     )
 
     void(
@@ -970,7 +1098,7 @@ ENABLE_WARNINGS()""")
         int("dfd"),
         charUTF8.const.p("path"),
         int("flags"),
-        unsigned_int("mask"),
+        unsigned("mask"),
         statx.p("statxbuf")
     )
 
@@ -999,7 +1127,7 @@ ENABLE_WARNINGS()""")
         io_uring_sqe.p("sqe"),
         int("fd"),
         __u64("offset"),
-        __u32("len"),
+        off_t("len"),
         int("advice") // TODO:
     )
 
@@ -1084,6 +1212,16 @@ ENABLE_WARNINGS()""")
     )
 
     void(
+        "prep_sendmsg_zc_fixed",
+
+        io_uring_sqe.p("sqe"),
+        int("fd"),
+        msghdr.const.p("msg"),
+        unsigned("flags"),
+        unsigned("buf_index")
+    )
+
+    void(
         "prep_recv",
 
         io_uring_sqe.p("sqe"),
@@ -1153,7 +1291,7 @@ ENABLE_WARNINGS()""")
         io_uring_sqe.p("sqe"),
         int("dfd"),
         charUTF8.const.p("path"),
-        open_how.p("how")
+        open_how.const.p("how")
     )
 
     void(
@@ -1162,8 +1300,8 @@ ENABLE_WARNINGS()""")
         io_uring_sqe.p("sqe"),
         int("dfd"),
         charUTF8.const.p("path"),
-        open_how.p("how"),
-        unsigned_int("file_index")
+        open_how.const.p("how"),
+        unsigned("file_index")
     )
 
     void(
@@ -1173,7 +1311,7 @@ ENABLE_WARNINGS()""")
         int("epfd"),
         int("fd"),
         int("op"),
-        epoll_event.p("ev")
+        epoll_event.const.p("ev")
     )
 
     void(
@@ -1244,8 +1382,8 @@ ENABLE_WARNINGS()""")
 
         io_uring_sqe.p("sqe"),
         int("fd"),
-        unsigned_int("len"),
-        int("offset"),
+        unsigned("len"),
+        __u64("offset"),
         int("flags") // TODO:
     )
 
@@ -1404,7 +1542,7 @@ ENABLE_WARNINGS()""")
         int("domain"),
         int("type"),
         int("protocol"),
-        unsigned_int("file_index"),
+        unsigned("file_index"),
         unsigned_int("flags") // TODO:
     )
 
@@ -1419,6 +1557,22 @@ ENABLE_WARNINGS()""")
     )
 
     void(
+        "prep_uring_cmd",
+
+        io_uring_sqe.p("sqe"),
+        int("cmd_op"),
+        int("fd")
+    )
+
+    void(
+        "prep_uring_cmd128",
+
+        io_uring_sqe.p("sqe"),
+        int("cmd_op"),
+        int("fd")
+    )
+
+    void(
         "prep_cmd_sock",
 
         io_uring_sqe.p("sqe"),
@@ -1428,6 +1582,16 @@ ENABLE_WARNINGS()""")
         int("optname"),
         void.p("optval"),
         AutoSize("optval")..int("optlen")
+    )
+
+    void(
+        "prep_cmd_getsockname",
+
+        io_uring_sqe.p("sqe"),
+        int("fd"),
+        sockaddr.p("sockaddr"),
+        Check(1)..socklen_t.p("sockaddr_len"),
+        int("peer")
     )
 
     void(
@@ -1445,7 +1609,7 @@ ENABLE_WARNINGS()""")
         "prep_futex_wake",
 
         io_uring_sqe.p("sqe"),
-        Check(1)..uint32_t.p("futex"),
+        Check(1)..uint32_t.const.p("futex"),
         uint64_t("val"),
         uint64_t("mask"),
         uint32_t("futex_flags"),
@@ -1456,7 +1620,7 @@ ENABLE_WARNINGS()""")
         "prep_futex_wait",
 
         io_uring_sqe.p("sqe"),
-        Check(1)..uint32_t.p("futex"),
+        Check(1)..uint32_t.const.p("futex"),
         uint64_t("val"),
         uint64_t("mask"),
         uint32_t("futex_flags"),
@@ -1467,7 +1631,7 @@ ENABLE_WARNINGS()""")
         "prep_futex_waitv",
 
         io_uring_sqe.p("sqe"),
-        "struct futex_waitv".handle.p("futex"),
+        "struct futex_waitv".handle.const.p("futex"),
         AutoSize("futex")..unsigned_int("nr_futex"),
         unsigned_int("flags")
     )
@@ -1497,6 +1661,29 @@ ENABLE_WARNINGS()""")
         uint64_t("nbytes")
     )
 
+    void(
+        "prep_pipe",
+
+        io_uring_sqe.p("sqe"),
+        Check(2)..int.p("fds"),
+        int("pipe_flags")
+    )
+
+    void(
+        "prep_pipe_direct",
+
+        io_uring_sqe.p("sqe"),
+        Check(2)..int.p("fds"),
+        int("pipe_flags"),
+        unsigned_int("file_index")
+    )
+
+    unsigned(
+        "load_sq_head",
+
+        io_uring.const.p("ring")
+    )
+
     unsigned_int(
         "sq_ready",
 
@@ -1505,6 +1692,18 @@ ENABLE_WARNINGS()""")
 
     unsigned_int(
         "sq_space_left",
+
+        io_uring.const.p("ring")
+    )
+
+    unsigned(
+        "sqe_shift_from_flags",
+
+        unsigned("flags")
+    )
+
+    unsigned(
+        "sqe_shift",
 
         io_uring.const.p("ring")
     )
@@ -1609,6 +1808,12 @@ ENABLE_WARNINGS()""")
         io_uring.p("ring")
     )
 
+    io_uring_sqe.p(
+        "get_sqe128",
+
+        io_uring.p("ring")
+    )
+
     int(
         "mlock_size",
 
@@ -1618,6 +1823,20 @@ ENABLE_WARNINGS()""")
 
     int(
         "mlock_size_params",
+
+        unsigned("entries"),
+        io_uring_params.p("p")
+    )
+
+    ssize_t(
+        "memory_size",
+
+        unsigned("entries"),
+        unsigned("flags")
+    )
+
+    ssize_t(
+        "memory_size_params",
 
         unsigned("entries"),
         io_uring_params.p("p")

@@ -90,6 +90,8 @@ public class XrSenseDataProviderCreateInfoBD extends Struct<XrSenseDataProviderC
     public XrSenseDataProviderCreateInfoBD type$Default() { return type(BDSpatialSensing.XR_TYPE_SENSE_DATA_PROVIDER_CREATE_INFO_BD); }
     /** Sets the specified value to the {@code next} field. */
     public XrSenseDataProviderCreateInfoBD next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrSenseDataProviderCreateInfoDynamicObjectBD} value to the {@code next} chain. */
+    public XrSenseDataProviderCreateInfoBD next(XrSenseDataProviderCreateInfoDynamicObjectBD value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSenseDataProviderCreateInfoSpatialMeshBD} value to the {@code next} chain. */
     public XrSenseDataProviderCreateInfoBD next(XrSenseDataProviderCreateInfoSpatialMeshBD value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@code providerType} field. */
@@ -304,6 +306,8 @@ public class XrSenseDataProviderCreateInfoBD extends Struct<XrSenseDataProviderC
         public XrSenseDataProviderCreateInfoBD.Buffer type$Default() { return type(BDSpatialSensing.XR_TYPE_SENSE_DATA_PROVIDER_CREATE_INFO_BD); }
         /** Sets the specified value to the {@code next} field. */
         public XrSenseDataProviderCreateInfoBD.Buffer next(@NativeType("void const *") long value) { XrSenseDataProviderCreateInfoBD.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrSenseDataProviderCreateInfoDynamicObjectBD} value to the {@code next} chain. */
+        public XrSenseDataProviderCreateInfoBD.Buffer next(XrSenseDataProviderCreateInfoDynamicObjectBD value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSenseDataProviderCreateInfoSpatialMeshBD} value to the {@code next} chain. */
         public XrSenseDataProviderCreateInfoBD.Buffer next(XrSenseDataProviderCreateInfoSpatialMeshBD value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@code providerType} field. */

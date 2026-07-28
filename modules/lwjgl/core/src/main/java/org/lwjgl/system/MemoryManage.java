@@ -5,8 +5,8 @@
 package org.lwjgl.system;
 
 import org.jspecify.annotations.*;
-import org.lwjgl.system.libffi.*;
 
+import java.lang.invoke.*;
 import java.util.*;
 import java.util.Map.*;
 import java.util.concurrent.*;
@@ -31,24 +31,40 @@ final class MemoryManage {
         }
 
         if (!"system".equals(allocator)) {
-            String className;
-            if (allocator == null || "jemalloc".equals(allocator)) {
-                className = "org.lwjgl.system.jemalloc.JEmallocAllocator";
-            } else if ("rpmalloc".equals(allocator)) {
-                className = "org.lwjgl.system.rpmalloc.RPmallocAllocator";
+            List<String> allocatorClasses = new ArrayList<>();
+
+            if (allocator == null) {
+                allocatorClasses.add("org.lwjgl.system.mimalloc.mimalloc$Allocator");
+                allocatorClasses.add("org.lwjgl.system.rpmalloc.RPmalloc$Allocator");
+                allocatorClasses.add("org.lwjgl.system.jemalloc.JEmalloc$Allocator");
             } else {
-                className = allocator.toString();
+                if ("mimalloc".equals(allocator)) {
+                    allocatorClasses.add("org.lwjgl.system.mimalloc.mimalloc$Allocator");
+                } else if ("rpmalloc".equals(allocator)) {
+                    allocatorClasses.add("org.lwjgl.system.rpmalloc.RPmalloc$Allocator");
+                } else if ("jemalloc".equals(allocator)) {
+                    allocatorClasses.add("org.lwjgl.system.jemalloc.JEmalloc$Allocator");
+                } else {
+                    allocatorClasses.add(allocator.toString());
+                }
             }
 
-            try {
-                Class<?> allocatorClass = Class.forName(className);
-                return (MemoryAllocator)allocatorClass.getConstructor().newInstance();
-            } catch (Throwable t) {
-                if (Checks.DEBUG && (allocator != null || !(t instanceof ClassNotFoundException))) {
-                    t.printStackTrace(DEBUG_STREAM);
+            for (String allocatorClass : allocatorClasses) {
+                try {
+                    return (MemoryAllocator)Class.forName(allocatorClass)
+                        .getDeclaredConstructor()
+                        .newInstance();
+                } catch (Throwable t) {
+                    if (Checks.DEBUG && (allocator != null || !(t instanceof ClassNotFoundException))) {
+                        t.printStackTrace(DEBUG_STREAM);
+                        if (t.getCause() != null) {
+                            t.getCause().printStackTrace(DEBUG_STREAM);
+                        }
+                    }
+                    apiLog(String.format("Warning: Failed to instantiate memory allocator: %s", allocatorClass));
                 }
-                apiLog(String.format("Warning: Failed to instantiate memory allocator: %s. Using the system default.", className));
             }
+            apiLogMore("Using the system default.");
         }
 
         return new StdlibAllocator();
@@ -87,63 +103,12 @@ final class MemoryManage {
             this.allocator = allocator;
 
             this.callbacks = new long[] {
-                new CallbackI() {
-                    @Override public FFICIF getCallInterface() {
-                        return apiCreateCIF(FFI_DEFAULT_ABI, ffi_type_pointer, ffi_type_pointer);
-                    }
-                    @Override public void callback(long ret, long args) {
-                        long size = memGetAddress(memGetAddress(args));
-                        memPutAddress(ret, malloc(size));
-                    }
-                }.address(),
-                new CallbackI() {
-                    @Override public FFICIF getCallInterface() {
-                        return apiCreateCIF(FFI_DEFAULT_ABI, ffi_type_pointer, ffi_type_pointer, ffi_type_pointer);
-                    }
-                    @Override public void callback(long ret, long args) {
-                        long num  = memGetAddress(memGetAddress(args));
-                        long size = memGetAddress(memGetAddress(args + POINTER_SIZE));
-                        memPutAddress(ret, calloc(num, size));
-                    }
-                }.address(),
-                new CallbackI() {
-                    @Override public FFICIF getCallInterface() {
-                        return apiCreateCIF(FFI_DEFAULT_ABI, ffi_type_pointer, ffi_type_pointer, ffi_type_pointer);
-                    }
-                    @Override public void callback(long ret, long args) {
-                        long ptr  = memGetAddress(memGetAddress(args));
-                        long size = memGetAddress(memGetAddress(args + POINTER_SIZE));
-                        memPutAddress(ret, realloc(ptr, size));
-                    }
-                }.address(),
-                new CallbackI() {
-                    @Override public FFICIF getCallInterface() {
-                        return apiCreateCIF(FFI_DEFAULT_ABI, ffi_type_void, ffi_type_pointer);
-                    }
-                    @Override public void callback(long ret, long args) {
-                        long ptr = memGetAddress(memGetAddress(args));
-                        free(ptr);
-                    }
-                }.address(),
-                new CallbackI() {
-                    @Override public FFICIF getCallInterface() {
-                        return apiCreateCIF(FFI_DEFAULT_ABI, ffi_type_pointer, ffi_type_pointer, ffi_type_pointer);
-                    }
-                    @Override public void callback(long ret, long args) {
-                        long alignment = memGetAddress(memGetAddress(args));
-                        long size      = memGetAddress(memGetAddress(args + POINTER_SIZE));
-                        memPutAddress(ret, aligned_alloc(alignment, size));
-                    }
-                }.address(),
-                new CallbackI() {
-                    @Override public FFICIF getCallInterface() {
-                        return apiCreateCIF(FFI_DEFAULT_ABI, ffi_type_void, ffi_type_pointer);
-                    }
-                    @Override public void callback(long ret, long args) {
-                        long ptr = memGetAddress(memGetAddress(args));
-                        aligned_free(ptr);
-                    }
-                }.address()
+                ((CallbackPP)this::malloc).address(),
+                ((CallbackPPP)this::calloc).address(),
+                ((CallbackPPP)this::realloc).address(),
+                ((CallbackIV)this::free).address(),
+                ((CallbackPPP)this::aligned_alloc).address(),
+                ((CallbackIV)this::aligned_free).address()
             };
 
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
@@ -175,7 +140,7 @@ final class MemoryManage {
                         for (Object el : stackTrace) {
                             sb
                                 .append("\tat ")
-                                .append(el.toString())
+                                .append(el)
                                 .append("\n");
                         }
                     } else {
@@ -189,6 +154,40 @@ final class MemoryManage {
                     DEBUG_STREAM.print("[LWJGL] Reminder: disable Configuration.DEBUG_MEMORY_ALLOCATOR_FAST to get stacktraces of leaking allocations.\n");
                 }
             }));
+        }
+
+        @FunctionalInterface
+        public interface CallbackPP extends CallbackI {
+            Callback.Descriptor DESCRIPTOR = new Callback.Descriptor(CallbackPP.class, MethodHandles.lookup(), apiCreateCIF(ffi_type_pointer, ffi_type_pointer));
+            @Override default Callback.Descriptor getDescriptor() { return DESCRIPTOR; }
+            @Override default void callback(long ret, long args) {
+                long size = memGetAddress(memGetAddress(args));
+                memPutAddress(ret, invoke(size));
+            }
+            long invoke(long size);
+        }
+
+        @FunctionalInterface
+        public interface CallbackPPP extends CallbackI {
+            Callback.Descriptor DESCRIPTOR = new Callback.Descriptor(CallbackPPP.class, MethodHandles.lookup(), apiCreateCIF(ffi_type_pointer, ffi_type_pointer, ffi_type_pointer));
+            @Override default Callback.Descriptor getDescriptor() { return DESCRIPTOR; }
+            @Override default void callback(long ret, long args) {
+                long num  = memGetAddress(memGetAddress(args));
+                long size = memGetAddress(memGetAddress(args + POINTER_SIZE));
+                memPutAddress(ret, invoke(num, size));
+            }
+            long invoke(long num, long size);
+        }
+
+        @FunctionalInterface
+        public interface CallbackIV extends CallbackI {
+            Callback.Descriptor DESCRIPTOR = new Callback.Descriptor(CallbackIV.class, MethodHandles.lookup(), apiCreateCIF(ffi_type_void, ffi_type_pointer));
+            @Override default Callback.Descriptor getDescriptor() { return DESCRIPTOR; }
+            @Override default void callback(long ret, long args) {
+                long ptr = memGetAddress(memGetAddress(args));
+                invoke(ptr);
+            }
+            void invoke(long ptr);
         }
 
         @Override public long getMalloc()       { return callbacks[0]; }
@@ -301,7 +300,7 @@ final class MemoryManage {
                 for (Object el : stackTrace) {
                     sb
                         .append("\tat ")
-                        .append(el.toString())
+                        .append(el)
                         .append("\n");
                 }
             }
@@ -316,15 +315,15 @@ final class MemoryManage {
 
             Allocation allocation = ALLOCATIONS.remove(new Allocation(address, 0L, NULL, null));
             if (allocation == null) {
-                untrackAbort(address);
+                throw untrackAbort(address);
             }
 
             return allocation.size;
         }
-        private static void untrackAbort(long address) {
+        private static IllegalStateException untrackAbort(long address) {
             String addressHex = Long.toHexString(address).toUpperCase();
 
-            throw new IllegalStateException("The memory address specified is not being tracked: 0x" + addressHex);
+            return new IllegalStateException("The memory address specified is not being tracked: 0x" + addressHex);
         }
 
         private static class Allocation {

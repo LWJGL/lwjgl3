@@ -6,7 +6,8 @@
 package org.lwjgl.util.lz4;
 
 import org.lwjgl.system.*;
-import org.lwjgl.system.libffi.*;
+
+import java.lang.invoke.*;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -17,14 +18,17 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 @NativeType("LZ4F_CallocFunction")
 public interface LZ4FCallocFunctionI extends CallbackI {
 
-    FFICIF CIF = apiCreateCIF(
-        FFI_DEFAULT_ABI,
-        ffi_type_pointer,
-        ffi_type_pointer, ffi_type_pointer
+    Callback.Descriptor DESCRIPTOR = new Callback.Descriptor(
+        LZ4FCallocFunctionI.class,
+        MethodHandles.lookup(),
+        apiCreateCIF(
+            ffi_type_pointer,
+            ffi_type_pointer, ffi_type_pointer
+        )
     );
 
     @Override
-    default FFICIF getCallInterface() { return CIF; }
+    default Callback.Descriptor getDescriptor() { return DESCRIPTOR; }
 
     @Override
     default void callback(long ret, long args) {

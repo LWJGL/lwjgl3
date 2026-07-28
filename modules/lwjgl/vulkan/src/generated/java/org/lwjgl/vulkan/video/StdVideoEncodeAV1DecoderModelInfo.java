@@ -248,7 +248,7 @@ public class StdVideoEncodeAV1DecoderModelInfo extends Struct<StdVideoEncodeAV1D
     public static byte nbuffer_removal_time_length_minus_1(long struct) { return memGetByte(struct + StdVideoEncodeAV1DecoderModelInfo.BUFFER_REMOVAL_TIME_LENGTH_MINUS_1); }
     /** Unsafe version of {@link #frame_presentation_time_length_minus_1}. */
     public static byte nframe_presentation_time_length_minus_1(long struct) { return memGetByte(struct + StdVideoEncodeAV1DecoderModelInfo.FRAME_PRESENTATION_TIME_LENGTH_MINUS_1); }
-    public static byte nreserved1(long struct) { return memGetByte(struct + StdVideoEncodeAV1DecoderModelInfo.RESERVED1); }
+    static byte nreserved1(long struct) { return memGetByte(struct + StdVideoEncodeAV1DecoderModelInfo.RESERVED1); }
     /** Unsafe version of {@link #num_units_in_decoding_tick}. */
     public static int nnum_units_in_decoding_tick(long struct) { return memGetInt(struct + StdVideoEncodeAV1DecoderModelInfo.NUM_UNITS_IN_DECODING_TICK); }
 
@@ -258,7 +258,7 @@ public class StdVideoEncodeAV1DecoderModelInfo extends Struct<StdVideoEncodeAV1D
     public static void nbuffer_removal_time_length_minus_1(long struct, byte value) { memPutByte(struct + StdVideoEncodeAV1DecoderModelInfo.BUFFER_REMOVAL_TIME_LENGTH_MINUS_1, value); }
     /** Unsafe version of {@link #frame_presentation_time_length_minus_1(byte) frame_presentation_time_length_minus_1}. */
     public static void nframe_presentation_time_length_minus_1(long struct, byte value) { memPutByte(struct + StdVideoEncodeAV1DecoderModelInfo.FRAME_PRESENTATION_TIME_LENGTH_MINUS_1, value); }
-    public static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoEncodeAV1DecoderModelInfo.RESERVED1, value); }
+    static void nreserved1(long struct, byte value) { memPutByte(struct + StdVideoEncodeAV1DecoderModelInfo.RESERVED1, value); }
     /** Unsafe version of {@link #num_units_in_decoding_tick(int) num_units_in_decoding_tick}. */
     public static void nnum_units_in_decoding_tick(long struct, int value) { memPutInt(struct + StdVideoEncodeAV1DecoderModelInfo.NUM_UNITS_IN_DECODING_TICK, value); }
 

@@ -23,34 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 presentModeFifoLatestReady;
  * }}</pre>
  */
-public class VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT extends Struct<VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        PRESENTMODEFIFOLATESTREADY;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        PRESENTMODEFIFOLATESTREADY = layout.offsetof(2);
-    }
+public class VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT extends VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR {
 
     protected VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -68,32 +41,24 @@ public class VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT extends Struc
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** @return the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** @return the value of the {@code presentModeFifoLatestReady} field. */
-    @NativeType("VkBool32")
-    public boolean presentModeFifoLatestReady() { return npresentModeFifoLatestReady(address()) != 0; }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTPresentModeFifoLatestReady#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_EXT} value to the {@code sType} field. */
-    public VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT sType$Default() { return sType(EXTPresentModeFifoLatestReady.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_EXT); }
+    /** Sets the {@link KHRPresentModeFifoLatestReady#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_KHR} value to the {@code sType} field. */
+    @Override
+    public VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT sType$Default() { return sType(KHRPresentModeFifoLatestReady.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code presentModeFifoLatestReady} field. */
+    @Override
     public VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT presentModeFifoLatestReady(@NativeType("VkBool32") boolean value) { npresentModeFifoLatestReady(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT set(
         int sType,
         long pNext,
@@ -229,24 +194,8 @@ public class VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT extends Struc
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT.PNEXT); }
-    /** Unsafe version of {@link #presentModeFifoLatestReady}. */
-    public static int npresentModeFifoLatestReady(long struct) { return memGetInt(struct + VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT.PRESENTMODEFIFOLATESTREADY); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT.PNEXT, value); }
-    /** Unsafe version of {@link #presentModeFifoLatestReady(boolean) presentModeFifoLatestReady}. */
-    public static void npresentModeFifoLatestReady(long struct, int value) { memPutInt(struct + VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT.PRESENTMODEFIFOLATESTREADY, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR.Buffer {
 
         private static final VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT ELEMENT_FACTORY = VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT.create(-1L);
 
@@ -260,7 +209,7 @@ public class VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT extends Struc
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -286,23 +235,17 @@ public class VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT extends Struc
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@code presentModeFifoLatestReady} field. */
-        @NativeType("VkBool32")
-        public boolean presentModeFifoLatestReady() { return VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT.npresentModeFifoLatestReady(address()) != 0; }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTPresentModeFifoLatestReady#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_EXT} value to the {@code sType} field. */
-        public VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT.Buffer sType$Default() { return sType(EXTPresentModeFifoLatestReady.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_EXT); }
+        /** Sets the {@link KHRPresentModeFifoLatestReady#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_KHR} value to the {@code sType} field. */
+        @Override
+        public VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT.Buffer sType$Default() { return sType(KHRPresentModeFifoLatestReady.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code presentModeFifoLatestReady} field. */
+        @Override
         public VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT.Buffer presentModeFifoLatestReady(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT.npresentModeFifoLatestReady(address(), value ? 1 : 0); return this; }
 
     }

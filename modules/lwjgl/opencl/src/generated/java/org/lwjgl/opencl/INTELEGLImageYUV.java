@@ -7,7 +7,7 @@ package org.lwjgl.opencl;
 
 public final class INTELEGLImageYUV {
 
-    public static final int CL_EGL_YUV_PLANE_INTEL = 0x4107;
+    public static final long CL_EGL_YUV_PLANE_INTEL = 0x4107L;
 
     private INTELEGLImageYUV() {}
 

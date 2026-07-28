@@ -20,7 +20,7 @@ public class MeshOptimizer {
 
     static { LibMeshOptimizer.initialize(); }
 
-    public static final int MESHOPTIMIZER_VERSION = 230;
+    public static final int MESHOPTIMIZER_VERSION = 1020;
 
     public static final int
         meshopt_EncodeExpSeparate        = 0,
@@ -29,10 +29,18 @@ public class MeshOptimizer {
         meshopt_EncodeExpClamped         = 3;
 
     public static final int
-        meshopt_SimplifyLockBorder    = 1 << 0,
-        meshopt_SimplifySparse        = 1 << 1,
-        meshopt_SimplifyErrorAbsolute = 1 << 2,
-        meshopt_SimplifyPrune         = 1 << 3;
+        meshopt_SimplifyLockBorder      = 1 << 0,
+        meshopt_SimplifySparse          = 1 << 1,
+        meshopt_SimplifyErrorAbsolute   = 1 << 2,
+        meshopt_SimplifyPrune           = 1 << 3,
+        meshopt_SimplifyRegularize      = 1 << 4,
+        meshopt_SimplifyPermissive      = 1 << 5,
+        meshopt_SimplifyRegularizeLight = 1 << 6;
+
+    public static final int
+        meshopt_SimplifyVertex_Lock     = 1 << 0,
+        meshopt_SimplifyVertex_Protect  = 1 << 1,
+        meshopt_SimplifyVertex_Priority = 1 << 2;
 
     protected MeshOptimizer() {
         throw new UnsupportedOperationException();
@@ -69,6 +77,21 @@ public class MeshOptimizer {
         return nmeshopt_generateVertexRemapMulti(memAddress(destination), memAddressSafe(indices), remainingSafe(indices), vertex_count, streams.address(), streams.remaining());
     }
 
+    // --- [ meshopt_generateVertexRemapCustom ] ---
+
+    /** {@code size_t meshopt_generateVertexRemapCustom(unsigned int * destination, unsigned int const * indices, size_t index_count, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride, int (*) (void *, unsigned int, unsigned int) callback, void * context)} */
+    public static native long nmeshopt_generateVertexRemapCustom(long destination, long indices, long index_count, long vertex_positions, long vertex_count, long vertex_positions_stride, long callback, long context);
+
+    /** {@code size_t meshopt_generateVertexRemapCustom(unsigned int * destination, unsigned int const * indices, size_t index_count, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride, int (*) (void *, unsigned int, unsigned int) callback, void * context)} */
+    @NativeType("size_t")
+    public static long meshopt_generateVertexRemapCustom(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") @Nullable IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("int (*) (void *, unsigned int, unsigned int)") @Nullable MeshoptEqualsI callback, @NativeType("void *") long context) {
+        if (CHECKS) {
+            check(destination, vertex_count);
+            check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
+        }
+        return nmeshopt_generateVertexRemapCustom(memAddress(destination), memAddressSafe(indices), remainingSafe(indices), memAddress(vertex_positions), vertex_count, vertex_positions_stride, memAddressSafe(callback), context);
+    }
+
     // --- [ meshopt_remapVertexBuffer ] ---
 
     /** {@code void meshopt_remapVertexBuffer(void * destination, void const * vertices, size_t vertex_count, size_t vertex_size, unsigned int const * remap)} */
@@ -97,6 +120,36 @@ public class MeshOptimizer {
         nmeshopt_remapIndexBuffer(memAddress(destination), memAddressSafe(indices), index_count, memAddress(remap));
     }
 
+    // --- [ meshopt_filterIndexBuffer ] ---
+
+    /** {@code size_t meshopt_filterIndexBuffer(unsigned int * destination, unsigned int const * indices, size_t index_count, void const * vertices, size_t vertex_count, size_t vertex_size, size_t vertex_stride)} */
+    public static native long nmeshopt_filterIndexBuffer(long destination, long indices, long index_count, long vertices, long vertex_count, long vertex_size, long vertex_stride);
+
+    /** {@code size_t meshopt_filterIndexBuffer(unsigned int * destination, unsigned int const * indices, size_t index_count, void const * vertices, size_t vertex_count, size_t vertex_size, size_t vertex_stride)} */
+    @NativeType("size_t")
+    public static long meshopt_filterIndexBuffer(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("void const *") ByteBuffer vertices, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_size, @NativeType("size_t") long vertex_stride) {
+        if (CHECKS) {
+            check(destination, indices.remaining());
+            check(vertices, vertex_count * vertex_stride);
+        }
+        return nmeshopt_filterIndexBuffer(memAddress(destination), memAddress(indices), indices.remaining(), memAddress(vertices), vertex_count, vertex_size, vertex_stride);
+    }
+
+    // --- [ meshopt_filterIndexBufferMulti ] ---
+
+    /** {@code size_t meshopt_filterIndexBufferMulti(unsigned int * destination, unsigned int const * indices, size_t index_count, size_t vertex_count, struct meshopt_Stream const * streams, size_t stream_count)} */
+    public static native long nmeshopt_filterIndexBufferMulti(long destination, long indices, long index_count, long vertex_count, long streams, long stream_count);
+
+    /** {@code size_t meshopt_filterIndexBufferMulti(unsigned int * destination, unsigned int const * indices, size_t index_count, size_t vertex_count, struct meshopt_Stream const * streams, size_t stream_count)} */
+    @NativeType("size_t")
+    public static long meshopt_filterIndexBufferMulti(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("size_t") long vertex_count, @NativeType("struct meshopt_Stream const *") MeshoptStream.Buffer streams) {
+        if (CHECKS) {
+            check(destination, indices.remaining());
+            Struct.validate(streams.address(), streams.remaining(), MeshoptStream.SIZEOF, MeshoptStream::validate);
+        }
+        return nmeshopt_filterIndexBufferMulti(memAddress(destination), memAddress(indices), indices.remaining(), vertex_count, streams.address(), streams.remaining());
+    }
+
     // --- [ meshopt_generateShadowIndexBuffer ] ---
 
     /** {@code void meshopt_generateShadowIndexBuffer(unsigned int * destination, unsigned int const * indices, size_t index_count, void const * vertices, size_t vertex_count, size_t vertex_size, size_t vertex_stride)} */
@@ -123,6 +176,20 @@ public class MeshOptimizer {
             Struct.validate(streams.address(), streams.remaining(), MeshoptStream.SIZEOF, MeshoptStream::validate);
         }
         nmeshopt_generateShadowIndexBufferMulti(memAddress(destination), memAddress(indices), indices.remaining(), vertex_count, streams.address(), streams.remaining());
+    }
+
+    // --- [ meshopt_generatePositionRemap ] ---
+
+    /** {@code void meshopt_generatePositionRemap(unsigned int * destination, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride)} */
+    public static native void nmeshopt_generatePositionRemap(long destination, long vertex_positions, long vertex_count, long vertex_positions_stride);
+
+    /** {@code void meshopt_generatePositionRemap(unsigned int * destination, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride)} */
+    public static void meshopt_generatePositionRemap(@NativeType("unsigned int *") IntBuffer destination, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride) {
+        if (CHECKS) {
+            check(destination, vertex_count);
+            check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
+        }
+        nmeshopt_generatePositionRemap(memAddress(destination), memAddress(vertex_positions), vertex_count, vertex_positions_stride);
     }
 
     // --- [ meshopt_generateAdjacencyIndexBuffer ] ---
@@ -323,6 +390,47 @@ public class MeshOptimizer {
         return nmeshopt_decodeIndexSequence(memAddress(destination), index_count, index_size, memAddress(buffer), buffer.remaining());
     }
 
+    // --- [ meshopt_encodeMeshlet ] ---
+
+    /** {@code size_t meshopt_encodeMeshlet(unsigned char * buffer, size_t buffer_size, unsigned int const * vertices, size_t vertex_count, unsigned char const * triangles, size_t triangle_count)} */
+    public static native long nmeshopt_encodeMeshlet(long buffer, long buffer_size, long vertices, long vertex_count, long triangles, long triangle_count);
+
+    /** {@code size_t meshopt_encodeMeshlet(unsigned char * buffer, size_t buffer_size, unsigned int const * vertices, size_t vertex_count, unsigned char const * triangles, size_t triangle_count)} */
+    @NativeType("size_t")
+    public static long meshopt_encodeMeshlet(@NativeType("unsigned char *") ByteBuffer buffer, @NativeType("unsigned int const *") @Nullable IntBuffer vertices, @NativeType("unsigned char const *") ByteBuffer triangles) {
+        return nmeshopt_encodeMeshlet(memAddress(buffer), buffer.remaining(), memAddressSafe(vertices), remainingSafe(vertices), memAddress(triangles), triangles.remaining());
+    }
+
+    // --- [ meshopt_encodeMeshletBound ] ---
+
+    /** {@code size_t meshopt_encodeMeshletBound(size_t max_vertices, size_t max_triangles)} */
+    @NativeType("size_t")
+    public static native long meshopt_encodeMeshletBound(@NativeType("size_t") long max_vertices, @NativeType("size_t") long max_triangles);
+
+    // --- [ meshopt_decodeMeshlet ] ---
+
+    /** {@code int meshopt_decodeMeshlet(void * vertices, size_t vertex_count, size_t vertex_size, void * triangles, size_t triangle_count, size_t triangle_size, unsigned char const * buffer, size_t buffer_size)} */
+    public static native int nmeshopt_decodeMeshlet(long vertices, long vertex_count, long vertex_size, long triangles, long triangle_count, long triangle_size, long buffer, long buffer_size);
+
+    /** {@code int meshopt_decodeMeshlet(void * vertices, size_t vertex_count, size_t vertex_size, void * triangles, size_t triangle_count, size_t triangle_size, unsigned char const * buffer, size_t buffer_size)} */
+    public static int meshopt_decodeMeshlet(@NativeType("void *") @Nullable ByteBuffer vertices, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_size, @NativeType("void *") ByteBuffer triangles, @NativeType("size_t") long triangle_count, @NativeType("size_t") long triangle_size, @NativeType("unsigned char const *") ByteBuffer buffer) {
+        if (CHECKS) {
+            checkSafe(vertices, vertex_count * vertex_size);
+            check(triangles, triangle_count * triangle_size);
+        }
+        return nmeshopt_decodeMeshlet(memAddressSafe(vertices), vertex_count, vertex_size, memAddress(triangles), triangle_count, triangle_size, memAddress(buffer), buffer.remaining());
+    }
+
+    // --- [ meshopt_decodeMeshletRaw ] ---
+
+    /** {@code int meshopt_decodeMeshletRaw(unsigned int * vertices, size_t vertex_count, unsigned int * triangles, size_t triangle_count, unsigned char const * buffer, size_t buffer_size)} */
+    public static native int nmeshopt_decodeMeshletRaw(long vertices, long vertex_count, long triangles, long triangle_count, long buffer, long buffer_size);
+
+    /** {@code int meshopt_decodeMeshletRaw(unsigned int * vertices, size_t vertex_count, unsigned int * triangles, size_t triangle_count, unsigned char const * buffer, size_t buffer_size)} */
+    public static int meshopt_decodeMeshletRaw(@NativeType("unsigned int *") @Nullable IntBuffer vertices, @NativeType("unsigned int *") IntBuffer triangles, @NativeType("unsigned char const *") ByteBuffer buffer) {
+        return nmeshopt_decodeMeshletRaw(memAddressSafe(vertices), remainingSafe(vertices), memAddress(triangles), triangles.remaining(), memAddress(buffer), buffer.remaining());
+    }
+
     // --- [ meshopt_encodeVertexBuffer ] ---
 
     /** {@code size_t meshopt_encodeVertexBuffer(unsigned char * buffer, size_t buffer_size, void const * vertices, size_t vertex_count, size_t vertex_size)} */
@@ -345,16 +453,16 @@ public class MeshOptimizer {
 
     // --- [ meshopt_encodeVertexBufferLevel ] ---
 
-    /** {@code size_t meshopt_encodeVertexBufferLevel(unsigned char * buffer, size_t buffer_size, void const * vertices, size_t vertex_count, size_t vertex_size, int level)} */
-    public static native long nmeshopt_encodeVertexBufferLevel(long buffer, long buffer_size, long vertices, long vertex_count, long vertex_size, int level);
+    /** {@code size_t meshopt_encodeVertexBufferLevel(unsigned char * buffer, size_t buffer_size, void const * vertices, size_t vertex_count, size_t vertex_size, int level, int version)} */
+    public static native long nmeshopt_encodeVertexBufferLevel(long buffer, long buffer_size, long vertices, long vertex_count, long vertex_size, int level, int version);
 
-    /** {@code size_t meshopt_encodeVertexBufferLevel(unsigned char * buffer, size_t buffer_size, void const * vertices, size_t vertex_count, size_t vertex_size, int level)} */
+    /** {@code size_t meshopt_encodeVertexBufferLevel(unsigned char * buffer, size_t buffer_size, void const * vertices, size_t vertex_count, size_t vertex_size, int level, int version)} */
     @NativeType("size_t")
-    public static long meshopt_encodeVertexBufferLevel(@NativeType("unsigned char *") ByteBuffer buffer, @NativeType("void const *") ByteBuffer vertices, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_size, int level) {
+    public static long meshopt_encodeVertexBufferLevel(@NativeType("unsigned char *") ByteBuffer buffer, @NativeType("void const *") ByteBuffer vertices, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_size, int level, int version) {
         if (CHECKS) {
             check(vertices, vertex_count * vertex_size);
         }
-        return nmeshopt_encodeVertexBufferLevel(memAddress(buffer), buffer.remaining(), memAddress(vertices), vertex_count, vertex_size, level);
+        return nmeshopt_encodeVertexBufferLevel(memAddress(buffer), buffer.remaining(), memAddress(vertices), vertex_count, vertex_size, level, version);
     }
 
     // --- [ meshopt_encodeVertexVersion ] ---
@@ -448,6 +556,27 @@ public class MeshOptimizer {
         nmeshopt_decodeFilterExp(memAddress(buffer), count, stride);
     }
 
+    // --- [ meshopt_decodeFilterColor ] ---
+
+    /** {@code void meshopt_decodeFilterColor(void * buffer, size_t count, size_t stride)} */
+    public static native void nmeshopt_decodeFilterColor(long buffer, long count, long stride);
+
+    /** {@code void meshopt_decodeFilterColor(void * buffer, size_t count, size_t stride)} */
+    public static void meshopt_decodeFilterColor(@NativeType("void *") ByteBuffer buffer, @NativeType("size_t") long count, @NativeType("size_t") long stride) {
+        if (CHECKS) {
+            check(buffer, count * stride);
+        }
+        nmeshopt_decodeFilterColor(memAddress(buffer), count, stride);
+    }
+
+    /** {@code void meshopt_decodeFilterColor(void * buffer, size_t count, size_t stride)} */
+    public static void meshopt_decodeFilterColor(@NativeType("void *") ShortBuffer buffer, @NativeType("size_t") long count, @NativeType("size_t") long stride) {
+        if (CHECKS) {
+            check(buffer, (count * stride) >> 1);
+        }
+        nmeshopt_decodeFilterColor(memAddress(buffer), count, stride);
+    }
+
     // --- [ meshopt_encodeFilterOct ] ---
 
     /** {@code void meshopt_encodeFilterOct(void * destination, size_t count, size_t stride, int bits, float const * data)} */
@@ -456,7 +585,7 @@ public class MeshOptimizer {
     /** {@code void meshopt_encodeFilterOct(void * destination, size_t count, size_t stride, int bits, float const * data)} */
     public static void meshopt_encodeFilterOct(@NativeType("void *") ByteBuffer destination, @NativeType("size_t") long count, @NativeType("size_t") long stride, int bits, @NativeType("float const *") FloatBuffer data) {
         if (CHECKS) {
-            check(destination, count * 4 * (stride >> 2));
+            check(destination, count * stride);
             check(data, count * 4);
         }
         nmeshopt_encodeFilterOct(memAddress(destination), count, stride, bits, memAddress(data));
@@ -465,7 +594,7 @@ public class MeshOptimizer {
     /** {@code void meshopt_encodeFilterOct(void * destination, size_t count, size_t stride, int bits, float const * data)} */
     public static void meshopt_encodeFilterOct(@NativeType("void *") ShortBuffer destination, @NativeType("size_t") long count, @NativeType("size_t") long stride, int bits, @NativeType("float const *") FloatBuffer data) {
         if (CHECKS) {
-            check(destination, (count * 4 * (stride >> 2)) >> 1);
+            check(destination, (count * stride) >> 1);
             check(data, count * 4);
         }
         nmeshopt_encodeFilterOct(memAddress(destination), count, stride, bits, memAddress(data));
@@ -479,7 +608,7 @@ public class MeshOptimizer {
     /** {@code void meshopt_encodeFilterQuat(void * destination, size_t count, size_t stride, int bits, float const * data)} */
     public static void meshopt_encodeFilterQuat(@NativeType("void *") ByteBuffer destination, @NativeType("size_t") long count, @NativeType("size_t") long stride, int bits, @NativeType("float const *") FloatBuffer data) {
         if (CHECKS) {
-            check(destination, count * 4 * 2);
+            check(destination, count * stride);
             check(data, count * 4);
         }
         nmeshopt_encodeFilterQuat(memAddress(destination), count, stride, bits, memAddress(data));
@@ -488,7 +617,7 @@ public class MeshOptimizer {
     /** {@code void meshopt_encodeFilterQuat(void * destination, size_t count, size_t stride, int bits, float const * data)} */
     public static void meshopt_encodeFilterQuat(@NativeType("void *") ShortBuffer destination, @NativeType("size_t") long count, @NativeType("size_t") long stride, int bits, @NativeType("float const *") FloatBuffer data) {
         if (CHECKS) {
-            check(destination, (count * 4 * 2) >> 1);
+            check(destination, (count * stride) >> 1);
             check(data, count * 4);
         }
         nmeshopt_encodeFilterQuat(memAddress(destination), count, stride, bits, memAddress(data));
@@ -502,7 +631,7 @@ public class MeshOptimizer {
     /** {@code void meshopt_encodeFilterExp(void * destination, size_t count, size_t stride, int bits, float const * data, enum meshopt_EncodeExpMode mode)} */
     public static void meshopt_encodeFilterExp(@NativeType("void *") ByteBuffer destination, @NativeType("size_t") long count, @NativeType("size_t") long stride, int bits, @NativeType("float const *") FloatBuffer data, @NativeType("enum meshopt_EncodeExpMode") int mode) {
         if (CHECKS) {
-            check(destination, count * (stride >> 2) * 4);
+            check(destination, count * stride);
             check(data, count * (stride >> 2));
         }
         nmeshopt_encodeFilterExp(memAddress(destination), count, stride, bits, memAddress(data), mode);
@@ -511,10 +640,33 @@ public class MeshOptimizer {
     /** {@code void meshopt_encodeFilterExp(void * destination, size_t count, size_t stride, int bits, float const * data, enum meshopt_EncodeExpMode mode)} */
     public static void meshopt_encodeFilterExp(@NativeType("void *") IntBuffer destination, @NativeType("size_t") long count, @NativeType("size_t") long stride, int bits, @NativeType("float const *") FloatBuffer data, @NativeType("enum meshopt_EncodeExpMode") int mode) {
         if (CHECKS) {
-            check(destination, (count * (stride >> 2) * 4) >> 2);
+            check(destination, (count * stride) >> 2);
             check(data, count * (stride >> 2));
         }
         nmeshopt_encodeFilterExp(memAddress(destination), count, stride, bits, memAddress(data), mode);
+    }
+
+    // --- [ meshopt_encodeFilterColor ] ---
+
+    /** {@code void meshopt_encodeFilterColor(void * destination, size_t count, size_t stride, int bits, float const * data)} */
+    public static native void nmeshopt_encodeFilterColor(long destination, long count, long stride, int bits, long data);
+
+    /** {@code void meshopt_encodeFilterColor(void * destination, size_t count, size_t stride, int bits, float const * data)} */
+    public static void meshopt_encodeFilterColor(@NativeType("void *") ByteBuffer destination, @NativeType("size_t") long count, @NativeType("size_t") long stride, int bits, @NativeType("float const *") FloatBuffer data) {
+        if (CHECKS) {
+            check(destination, count * stride);
+            check(data, count * 4);
+        }
+        nmeshopt_encodeFilterColor(memAddress(destination), count, stride, bits, memAddress(data));
+    }
+
+    /** {@code void meshopt_encodeFilterColor(void * destination, size_t count, size_t stride, int bits, float const * data)} */
+    public static void meshopt_encodeFilterColor(@NativeType("void *") ShortBuffer destination, @NativeType("size_t") long count, @NativeType("size_t") long stride, int bits, @NativeType("float const *") FloatBuffer data) {
+        if (CHECKS) {
+            check(destination, (count * stride) >> 1);
+            check(data, count * 4);
+        }
+        nmeshopt_encodeFilterColor(memAddress(destination), count, stride, bits, memAddress(data));
     }
 
     // --- [ meshopt_simplify ] ---
@@ -551,20 +703,53 @@ public class MeshOptimizer {
         return nmeshopt_simplifyWithAttributes(memAddress(destination), memAddress(indices), indices.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride, memAddress(vertex_attributes), vertex_attributes_stride, memAddress(attribute_weights), attribute_weights.remaining(), memAddressSafe(vertex_lock), target_index_count, target_error, options, memAddressSafe(result_error));
     }
 
+    // --- [ meshopt_simplifyWithUpdate ] ---
+
+    /** {@code size_t meshopt_simplifyWithUpdate(unsigned int * indices, size_t index_count, float * vertex_positions, size_t vertex_count, size_t vertex_positions_stride, float * vertex_attributes, size_t vertex_attributes_stride, float const * attribute_weights, size_t attribute_count, unsigned char const * vertex_lock, size_t target_index_count, float target_error, unsigned int options, float * result_error)} */
+    public static native long nmeshopt_simplifyWithUpdate(long indices, long index_count, long vertex_positions, long vertex_count, long vertex_positions_stride, long vertex_attributes, long vertex_attributes_stride, long attribute_weights, long attribute_count, long vertex_lock, long target_index_count, float target_error, int options, long result_error);
+
+    /** {@code size_t meshopt_simplifyWithUpdate(unsigned int * indices, size_t index_count, float * vertex_positions, size_t vertex_count, size_t vertex_positions_stride, float * vertex_attributes, size_t vertex_attributes_stride, float const * attribute_weights, size_t attribute_count, unsigned char const * vertex_lock, size_t target_index_count, float target_error, unsigned int options, float * result_error)} */
+    @NativeType("size_t")
+    public static long meshopt_simplifyWithUpdate(@NativeType("unsigned int *") IntBuffer indices, @NativeType("float *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("float *") FloatBuffer vertex_attributes, @NativeType("size_t") long vertex_attributes_stride, @NativeType("float const *") FloatBuffer attribute_weights, @NativeType("unsigned char const *") @Nullable ByteBuffer vertex_lock, @NativeType("size_t") long target_index_count, float target_error, @NativeType("unsigned int") int options, @NativeType("float *") @Nullable FloatBuffer result_error) {
+        if (CHECKS) {
+            check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
+            check(vertex_attributes, vertex_count * (vertex_attributes_stride >>> 2));
+            checkSafe(vertex_lock, vertex_count);
+            checkSafe(result_error, 1);
+        }
+        return nmeshopt_simplifyWithUpdate(memAddress(indices), indices.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride, memAddress(vertex_attributes), vertex_attributes_stride, memAddress(attribute_weights), attribute_weights.remaining(), memAddressSafe(vertex_lock), target_index_count, target_error, options, memAddressSafe(result_error));
+    }
+
     // --- [ meshopt_simplifySloppy ] ---
 
-    /** {@code size_t meshopt_simplifySloppy(unsigned int * destination, unsigned int const * indices, size_t index_count, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride, size_t target_index_count, float target_error, float * result_error)} */
-    public static native long nmeshopt_simplifySloppy(long destination, long indices, long index_count, long vertex_positions, long vertex_count, long vertex_positions_stride, long target_index_count, float target_error, long result_error);
+    /** {@code size_t meshopt_simplifySloppy(unsigned int * destination, unsigned int const * indices, size_t index_count, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride, unsigned char const * vertex_lock, size_t target_index_count, float target_error, float * result_error)} */
+    public static native long nmeshopt_simplifySloppy(long destination, long indices, long index_count, long vertex_positions, long vertex_count, long vertex_positions_stride, long vertex_lock, long target_index_count, float target_error, long result_error);
 
-    /** {@code size_t meshopt_simplifySloppy(unsigned int * destination, unsigned int const * indices, size_t index_count, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride, size_t target_index_count, float target_error, float * result_error)} */
+    /** {@code size_t meshopt_simplifySloppy(unsigned int * destination, unsigned int const * indices, size_t index_count, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride, unsigned char const * vertex_lock, size_t target_index_count, float target_error, float * result_error)} */
     @NativeType("size_t")
-    public static long meshopt_simplifySloppy(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("size_t") long target_index_count, float target_error, @NativeType("float *") @Nullable FloatBuffer result_error) {
+    public static long meshopt_simplifySloppy(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("unsigned char const *") @Nullable ByteBuffer vertex_lock, @NativeType("size_t") long target_index_count, float target_error, @NativeType("float *") @Nullable FloatBuffer result_error) {
         if (CHECKS) {
             check(destination, indices.remaining());
             check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
+            checkSafe(vertex_lock, vertex_count);
             checkSafe(result_error, 1);
         }
-        return nmeshopt_simplifySloppy(memAddress(destination), memAddress(indices), indices.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride, target_index_count, target_error, memAddressSafe(result_error));
+        return nmeshopt_simplifySloppy(memAddress(destination), memAddress(indices), indices.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride, memAddressSafe(vertex_lock), target_index_count, target_error, memAddressSafe(result_error));
+    }
+
+    // --- [ meshopt_simplifyPrune ] ---
+
+    /** {@code size_t meshopt_simplifyPrune(unsigned int * destination, unsigned int const * indices, size_t index_count, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride, float target_error)} */
+    public static native long nmeshopt_simplifyPrune(long destination, long indices, long index_count, long vertex_positions, long vertex_count, long vertex_positions_stride, float target_error);
+
+    /** {@code size_t meshopt_simplifyPrune(unsigned int * destination, unsigned int const * indices, size_t index_count, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride, float target_error)} */
+    @NativeType("size_t")
+    public static long meshopt_simplifyPrune(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, float target_error) {
+        if (CHECKS) {
+            check(destination, indices.remaining());
+            check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
+        }
+        return nmeshopt_simplifyPrune(memAddress(destination), memAddress(indices), indices.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride, target_error);
     }
 
     // --- [ meshopt_simplifyPoints ] ---
@@ -642,6 +827,18 @@ public class MeshOptimizer {
         return __result;
     }
 
+    // --- [ meshopt_analyzeVertexFetch ] ---
+
+    /** {@code struct meshopt_VertexFetchStatistics meshopt_analyzeVertexFetch(unsigned int const * indices, size_t index_count, size_t vertex_count, size_t vertex_size)} */
+    public static native void nmeshopt_analyzeVertexFetch(long indices, long index_count, long vertex_count, long vertex_size, long __result);
+
+    /** {@code struct meshopt_VertexFetchStatistics meshopt_analyzeVertexFetch(unsigned int const * indices, size_t index_count, size_t vertex_count, size_t vertex_size)} */
+    @NativeType("struct meshopt_VertexFetchStatistics")
+    public static MeshoptVertexFetchStatistics meshopt_analyzeVertexFetch(@NativeType("unsigned int const *") IntBuffer indices, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_size, @NativeType("struct meshopt_VertexFetchStatistics") MeshoptVertexFetchStatistics __result) {
+        nmeshopt_analyzeVertexFetch(memAddress(indices), indices.remaining(), vertex_count, vertex_size, __result.address());
+        return __result;
+    }
+
     // --- [ meshopt_analyzeOverdraw ] ---
 
     /** {@code struct meshopt_OverdrawStatistics meshopt_analyzeOverdraw(unsigned int const * indices, size_t index_count, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride)} */
@@ -657,15 +854,18 @@ public class MeshOptimizer {
         return __result;
     }
 
-    // --- [ meshopt_analyzeVertexFetch ] ---
+    // --- [ meshopt_analyzeCoverage ] ---
 
-    /** {@code struct meshopt_VertexFetchStatistics meshopt_analyzeVertexFetch(unsigned int const * indices, size_t index_count, size_t vertex_count, size_t vertex_size)} */
-    public static native void nmeshopt_analyzeVertexFetch(long indices, long index_count, long vertex_count, long vertex_size, long __result);
+    /** {@code struct meshopt_CoverageStatistics meshopt_analyzeCoverage(unsigned int const * indices, size_t index_count, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride)} */
+    public static native void nmeshopt_analyzeCoverage(long indices, long index_count, long vertex_positions, long vertex_count, long vertex_positions_stride, long __result);
 
-    /** {@code struct meshopt_VertexFetchStatistics meshopt_analyzeVertexFetch(unsigned int const * indices, size_t index_count, size_t vertex_count, size_t vertex_size)} */
-    @NativeType("struct meshopt_VertexFetchStatistics")
-    public static MeshoptVertexFetchStatistics meshopt_analyzeVertexFetch(@NativeType("unsigned int const *") IntBuffer indices, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_size, @NativeType("struct meshopt_VertexFetchStatistics") MeshoptVertexFetchStatistics __result) {
-        nmeshopt_analyzeVertexFetch(memAddress(indices), indices.remaining(), vertex_count, vertex_size, __result.address());
+    /** {@code struct meshopt_CoverageStatistics meshopt_analyzeCoverage(unsigned int const * indices, size_t index_count, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride)} */
+    @NativeType("struct meshopt_CoverageStatistics")
+    public static MeshoptCoverageStatistics meshopt_analyzeCoverage(@NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("struct meshopt_CoverageStatistics") MeshoptCoverageStatistics __result) {
+        if (CHECKS) {
+            check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
+        }
+        nmeshopt_analyzeCoverage(memAddress(indices), indices.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride, __result.address());
         return __result;
     }
 
@@ -678,8 +878,8 @@ public class MeshOptimizer {
     @NativeType("size_t")
     public static long meshopt_buildMeshlets(@NativeType("struct meshopt_Meshlet *") MeshoptMeshlet.Buffer meshlets, @NativeType("unsigned int *") IntBuffer meshlet_vertices, @NativeType("unsigned char *") ByteBuffer meshlet_triangles, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("size_t") long max_vertices, @NativeType("size_t") long max_triangles, float cone_weight) {
         if (CHECKS) {
-            check(meshlet_vertices, meshlets.remaining() * max_vertices);
-            check(meshlet_triangles, meshlets.remaining() * max_triangles * 3);
+            check(meshlet_vertices, indices.remaining());
+            check(meshlet_triangles, indices.remaining());
             check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
         }
         return nmeshopt_buildMeshlets(meshlets.address(), memAddress(meshlet_vertices), memAddress(meshlet_triangles), memAddress(indices), indices.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride, max_vertices, max_triangles, cone_weight);
@@ -694,8 +894,8 @@ public class MeshOptimizer {
     @NativeType("size_t")
     public static long meshopt_buildMeshletsScan(@NativeType("struct meshopt_Meshlet *") MeshoptMeshlet.Buffer meshlets, @NativeType("unsigned int *") IntBuffer meshlet_vertices, @NativeType("unsigned char *") ByteBuffer meshlet_triangles, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("size_t") long vertex_count, @NativeType("size_t") long max_vertices, @NativeType("size_t") long max_triangles) {
         if (CHECKS) {
-            check(meshlet_vertices, meshlets.remaining() * max_vertices);
-            check(meshlet_triangles, meshlets.remaining() * max_triangles * 3);
+            check(meshlet_vertices, indices.remaining());
+            check(meshlet_triangles, indices.remaining());
         }
         return nmeshopt_buildMeshletsScan(meshlets.address(), memAddress(meshlet_vertices), memAddress(meshlet_triangles), memAddress(indices), indices.remaining(), vertex_count, max_vertices, max_triangles);
     }
@@ -715,11 +915,27 @@ public class MeshOptimizer {
     @NativeType("size_t")
     public static long meshopt_buildMeshletsFlex(@NativeType("struct meshopt_Meshlet *") MeshoptMeshlet.Buffer meshlets, @NativeType("unsigned int *") IntBuffer meshlet_vertices, @NativeType("unsigned char *") ByteBuffer meshlet_triangles, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("size_t") long max_vertices, @NativeType("size_t") long min_triangles, @NativeType("size_t") long max_triangles, float cone_weight, float split_factor) {
         if (CHECKS) {
-            check(meshlet_vertices, meshlets.remaining() * max_vertices);
-            check(meshlet_triangles, meshlets.remaining() * max_triangles * 3);
+            check(meshlet_vertices, indices.remaining());
+            check(meshlet_triangles, indices.remaining());
             check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
         }
         return nmeshopt_buildMeshletsFlex(meshlets.address(), memAddress(meshlet_vertices), memAddress(meshlet_triangles), memAddress(indices), indices.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride, max_vertices, min_triangles, max_triangles, cone_weight, split_factor);
+    }
+
+    // --- [ meshopt_buildMeshletsSpatial ] ---
+
+    /** {@code size_t meshopt_buildMeshletsSpatial(struct meshopt_Meshlet * meshlets, unsigned int * meshlet_vertices, unsigned char * meshlet_triangles, unsigned int const * indices, size_t index_count, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride, size_t max_vertices, size_t min_triangles, size_t max_triangles, float fill_weight)} */
+    public static native long nmeshopt_buildMeshletsSpatial(long meshlets, long meshlet_vertices, long meshlet_triangles, long indices, long index_count, long vertex_positions, long vertex_count, long vertex_positions_stride, long max_vertices, long min_triangles, long max_triangles, float fill_weight);
+
+    /** {@code size_t meshopt_buildMeshletsSpatial(struct meshopt_Meshlet * meshlets, unsigned int * meshlet_vertices, unsigned char * meshlet_triangles, unsigned int const * indices, size_t index_count, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride, size_t max_vertices, size_t min_triangles, size_t max_triangles, float fill_weight)} */
+    @NativeType("size_t")
+    public static long meshopt_buildMeshletsSpatial(@NativeType("struct meshopt_Meshlet *") MeshoptMeshlet.Buffer meshlets, @NativeType("unsigned int *") IntBuffer meshlet_vertices, @NativeType("unsigned char *") ByteBuffer meshlet_triangles, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("size_t") long max_vertices, @NativeType("size_t") long min_triangles, @NativeType("size_t") long max_triangles, float fill_weight) {
+        if (CHECKS) {
+            check(meshlet_vertices, indices.remaining());
+            check(meshlet_triangles, indices.remaining());
+            check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
+        }
+        return nmeshopt_buildMeshletsSpatial(meshlets.address(), memAddress(meshlet_vertices), memAddress(meshlet_triangles), memAddress(indices), indices.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride, max_vertices, min_triangles, max_triangles, fill_weight);
     }
 
     // --- [ meshopt_optimizeMeshlet ] ---
@@ -730,6 +946,16 @@ public class MeshOptimizer {
     /** {@code void meshopt_optimizeMeshlet(unsigned int * meshlet_vertices, unsigned char * meshlet_triangles, size_t triangle_count, size_t vertex_count)} */
     public static void meshopt_optimizeMeshlet(@NativeType("unsigned int *") IntBuffer meshlet_vertices, @NativeType("unsigned char *") ByteBuffer meshlet_triangles) {
         nmeshopt_optimizeMeshlet(memAddress(meshlet_vertices), memAddress(meshlet_triangles), Integer.toUnsignedLong(meshlet_triangles.remaining()) / 3, meshlet_vertices.remaining());
+    }
+
+    // --- [ meshopt_optimizeMeshletLevel ] ---
+
+    /** {@code void meshopt_optimizeMeshletLevel(unsigned int * meshlet_vertices, size_t vertex_count, unsigned char * meshlet_triangles, size_t triangle_count, int level)} */
+    public static native void nmeshopt_optimizeMeshletLevel(long meshlet_vertices, long vertex_count, long meshlet_triangles, long triangle_count, int level);
+
+    /** {@code void meshopt_optimizeMeshletLevel(unsigned int * meshlet_vertices, size_t vertex_count, unsigned char * meshlet_triangles, size_t triangle_count, int level)} */
+    public static void meshopt_optimizeMeshletLevel(@NativeType("unsigned int *") IntBuffer meshlet_vertices, @NativeType("unsigned char *") ByteBuffer meshlet_triangles, int level) {
+        nmeshopt_optimizeMeshletLevel(memAddress(meshlet_vertices), meshlet_vertices.remaining(), memAddress(meshlet_triangles), Integer.toUnsignedLong(meshlet_triangles.remaining()) / 3, level);
     }
 
     // --- [ meshopt_computeClusterBounds ] ---
@@ -778,18 +1004,33 @@ public class MeshOptimizer {
         return __result;
     }
 
+    // --- [ meshopt_extractMeshletIndices ] ---
+
+    /** {@code size_t meshopt_extractMeshletIndices(unsigned int * vertices, unsigned char * triangles, unsigned int const * indices, size_t index_count)} */
+    public static native long nmeshopt_extractMeshletIndices(long vertices, long triangles, long indices, long index_count);
+
+    /** {@code size_t meshopt_extractMeshletIndices(unsigned int * vertices, unsigned char * triangles, unsigned int const * indices, size_t index_count)} */
+    @NativeType("size_t")
+    public static long meshopt_extractMeshletIndices(@NativeType("unsigned int *") IntBuffer vertices, @NativeType("unsigned char *") ByteBuffer triangles, @NativeType("unsigned int const *") IntBuffer indices) {
+        if (CHECKS) {
+            check(triangles, indices.remaining());
+        }
+        return nmeshopt_extractMeshletIndices(memAddress(vertices), memAddress(triangles), memAddress(indices), indices.remaining());
+    }
+
     // --- [ meshopt_partitionClusters ] ---
 
-    /** {@code size_t meshopt_partitionClusters(unsigned int * destination, unsigned int const * cluster_indices, size_t total_index_count, unsigned int const * cluster_index_counts, size_t cluster_count, size_t vertex_count, size_t target_partition_size)} */
-    public static native long nmeshopt_partitionClusters(long destination, long cluster_indices, long total_index_count, long cluster_index_counts, long cluster_count, long vertex_count, long target_partition_size);
+    /** {@code size_t meshopt_partitionClusters(unsigned int * destination, unsigned int const * cluster_indices, size_t total_index_count, unsigned int const * cluster_index_counts, size_t cluster_count, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride, size_t target_partition_size)} */
+    public static native long nmeshopt_partitionClusters(long destination, long cluster_indices, long total_index_count, long cluster_index_counts, long cluster_count, long vertex_positions, long vertex_count, long vertex_positions_stride, long target_partition_size);
 
-    /** {@code size_t meshopt_partitionClusters(unsigned int * destination, unsigned int const * cluster_indices, size_t total_index_count, unsigned int const * cluster_index_counts, size_t cluster_count, size_t vertex_count, size_t target_partition_size)} */
+    /** {@code size_t meshopt_partitionClusters(unsigned int * destination, unsigned int const * cluster_indices, size_t total_index_count, unsigned int const * cluster_index_counts, size_t cluster_count, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride, size_t target_partition_size)} */
     @NativeType("size_t")
-    public static long meshopt_partitionClusters(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer cluster_indices, @NativeType("unsigned int const *") IntBuffer cluster_index_counts, @NativeType("size_t") long vertex_count, @NativeType("size_t") long target_partition_size) {
+    public static long meshopt_partitionClusters(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer cluster_indices, @NativeType("unsigned int const *") IntBuffer cluster_index_counts, @NativeType("float const *") @Nullable FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("size_t") long target_partition_size) {
         if (CHECKS) {
             check(destination, cluster_index_counts.remaining());
+            checkSafe(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
         }
-        return nmeshopt_partitionClusters(memAddress(destination), memAddress(cluster_indices), cluster_indices.remaining(), memAddress(cluster_index_counts), cluster_index_counts.remaining(), vertex_count, target_partition_size);
+        return nmeshopt_partitionClusters(memAddress(destination), memAddress(cluster_indices), cluster_indices.remaining(), memAddress(cluster_index_counts), cluster_index_counts.remaining(), memAddressSafe(vertex_positions), vertex_count, vertex_positions_stride, target_partition_size);
     }
 
     // --- [ meshopt_spatialSortRemap ] ---
@@ -818,6 +1059,87 @@ public class MeshOptimizer {
             check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
         }
         nmeshopt_spatialSortTriangles(memAddress(destination), memAddress(indices), indices.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride);
+    }
+
+    // --- [ meshopt_spatialClusterPoints ] ---
+
+    /** {@code void meshopt_spatialClusterPoints(unsigned int * destination, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride, size_t cluster_size)} */
+    public static native void nmeshopt_spatialClusterPoints(long destination, long vertex_positions, long vertex_count, long vertex_positions_stride, long cluster_size);
+
+    /** {@code void meshopt_spatialClusterPoints(unsigned int * destination, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride, size_t cluster_size)} */
+    public static void meshopt_spatialClusterPoints(@NativeType("unsigned int *") IntBuffer destination, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("size_t") long cluster_size) {
+        if (CHECKS) {
+            check(destination, vertex_count);
+            check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
+        }
+        nmeshopt_spatialClusterPoints(memAddress(destination), memAddress(vertex_positions), vertex_count, vertex_positions_stride, cluster_size);
+    }
+
+    // --- [ meshopt_opacityMapMeasure ] ---
+
+    /** {@code size_t meshopt_opacityMapMeasure(unsigned char * levels, unsigned int * sources, int * omm_indices, unsigned int const * indices, size_t index_count, float const * vertex_uvs, size_t vertex_count, size_t vertex_uvs_stride, unsigned int texture_width, unsigned int texture_height, int max_level, float target_edge)} */
+    public static native long nmeshopt_opacityMapMeasure(long levels, long sources, long omm_indices, long indices, long index_count, long vertex_uvs, long vertex_count, long vertex_uvs_stride, int texture_width, int texture_height, int max_level, float target_edge);
+
+    /** {@code size_t meshopt_opacityMapMeasure(unsigned char * levels, unsigned int * sources, int * omm_indices, unsigned int const * indices, size_t index_count, float const * vertex_uvs, size_t vertex_count, size_t vertex_uvs_stride, unsigned int texture_width, unsigned int texture_height, int max_level, float target_edge)} */
+    @NativeType("size_t")
+    public static long meshopt_opacityMapMeasure(@NativeType("unsigned char *") ByteBuffer levels, @NativeType("unsigned int *") IntBuffer sources, @NativeType("int *") IntBuffer omm_indices, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_uvs, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_uvs_stride, @NativeType("unsigned int") int texture_width, @NativeType("unsigned int") int texture_height, int max_level, float target_edge) {
+        if (CHECKS) {
+            check(vertex_uvs, vertex_count * vertex_uvs_stride);
+        }
+        return nmeshopt_opacityMapMeasure(memAddress(levels), memAddress(sources), memAddress(omm_indices), memAddress(indices), indices.remaining(), memAddress(vertex_uvs), vertex_count, vertex_uvs_stride, texture_width, texture_height, max_level, target_edge);
+    }
+
+    // --- [ meshopt_opacityMapRasterize ] ---
+
+    /** {@code void meshopt_opacityMapRasterize(unsigned char * result, int level, int states, float const * uv0, float const * uv1, float const * uv2, unsigned char const * texture_data, size_t texture_stride, size_t texture_pitch, unsigned int texture_width, unsigned int texture_height)} */
+    public static native void nmeshopt_opacityMapRasterize(long result, int level, int states, long uv0, long uv1, long uv2, long texture_data, long texture_stride, long texture_pitch, int texture_width, int texture_height);
+
+    /** {@code void meshopt_opacityMapRasterize(unsigned char * result, int level, int states, float const * uv0, float const * uv1, float const * uv2, unsigned char const * texture_data, size_t texture_stride, size_t texture_pitch, unsigned int texture_width, unsigned int texture_height)} */
+    public static void meshopt_opacityMapRasterize(@NativeType("unsigned char *") ByteBuffer result, int level, int states, @NativeType("float const *") FloatBuffer uv0, @NativeType("float const *") FloatBuffer uv1, @NativeType("float const *") FloatBuffer uv2, @NativeType("unsigned char const *") ByteBuffer texture_data, @NativeType("size_t") long texture_stride, @NativeType("size_t") long texture_pitch, @NativeType("unsigned int") int texture_width, @NativeType("unsigned int") int texture_height) {
+        if (CHECKS) {
+            check(uv0, 2);
+            check(uv1, 2);
+            check(uv2, 2);
+            check(texture_data, texture_pitch * texture_height);
+        }
+        nmeshopt_opacityMapRasterize(memAddress(result), level, states, memAddress(uv0), memAddress(uv1), memAddress(uv2), memAddress(texture_data), texture_stride, texture_pitch, texture_width, texture_height);
+    }
+
+    // --- [ meshopt_opacityMapEntrySize ] ---
+
+    /** {@code size_t meshopt_opacityMapEntrySize(int level, int states)} */
+    @NativeType("size_t")
+    public static native long meshopt_opacityMapEntrySize(int level, int states);
+
+    // --- [ meshopt_opacityMapCompact ] ---
+
+    /** {@code size_t meshopt_opacityMapCompact(unsigned char * data, size_t data_size, unsigned char * levels, unsigned int * offsets, size_t omm_count, int * omm_indices, size_t triangle_count, int states)} */
+    public static native long nmeshopt_opacityMapCompact(long data, long data_size, long levels, long offsets, long omm_count, long omm_indices, long triangle_count, int states);
+
+    /** {@code size_t meshopt_opacityMapCompact(unsigned char * data, size_t data_size, unsigned char * levels, unsigned int * offsets, size_t omm_count, int * omm_indices, size_t triangle_count, int states)} */
+    @NativeType("size_t")
+    public static long meshopt_opacityMapCompact(@NativeType("unsigned char *") ByteBuffer data, @NativeType("unsigned char *") ByteBuffer levels, @NativeType("unsigned int *") IntBuffer offsets, @NativeType("int *") IntBuffer omm_indices, int states) {
+        if (CHECKS) {
+            check(offsets, levels.remaining());
+        }
+        return nmeshopt_opacityMapCompact(memAddress(data), data.remaining(), memAddress(levels), memAddress(offsets), levels.remaining(), memAddress(omm_indices), omm_indices.remaining(), states);
+    }
+
+    // --- [ meshopt_generateTangents ] ---
+
+    /** {@code void meshopt_generateTangents(float * result, unsigned int const * indices, size_t index_count, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride, float const * vertex_normals, size_t vertex_normals_stride, float const * vertex_uvs, size_t vertex_uvs_stride, unsigned int options)} */
+    public static native void nmeshopt_generateTangents(long result, long indices, long index_count, long vertex_positions, long vertex_count, long vertex_positions_stride, long vertex_normals, long vertex_normals_stride, long vertex_uvs, long vertex_uvs_stride, int options);
+
+    /** {@code void meshopt_generateTangents(float * result, unsigned int const * indices, size_t index_count, float const * vertex_positions, size_t vertex_count, size_t vertex_positions_stride, float const * vertex_normals, size_t vertex_normals_stride, float const * vertex_uvs, size_t vertex_uvs_stride, unsigned int options)} */
+    public static void meshopt_generateTangents(@NativeType("float *") FloatBuffer result, @NativeType("unsigned int const *") @Nullable IntBuffer indices, @NativeType("size_t") long index_count, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("float const *") FloatBuffer vertex_normals, @NativeType("size_t") long vertex_normals_stride, @NativeType("float const *") FloatBuffer vertex_uvs, @NativeType("size_t") long vertex_uvs_stride, @NativeType("unsigned int") int options) {
+        if (CHECKS) {
+            check(result, index_count * 4);
+            checkSafe(indices, index_count);
+            check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
+            check(vertex_normals, vertex_count * (vertex_normals_stride >>> 2));
+            check(vertex_uvs, vertex_count * (vertex_uvs_stride >>> 2));
+        }
+        nmeshopt_generateTangents(memAddress(result), memAddressSafe(indices), index_count, memAddress(vertex_positions), vertex_count, vertex_positions_stride, memAddress(vertex_normals), vertex_normals_stride, memAddress(vertex_uvs), vertex_uvs_stride, options);
     }
 
     // --- [ meshopt_quantizeUnorm_ref ] ---
@@ -868,6 +1190,20 @@ public class MeshOptimizer {
     /** {@code float meshopt_dequantizeHalf_ref(unsigned short h)} */
     static float meshopt_dequantizeHalf_ref(@NativeType("unsigned short") short h) {
         return nmeshopt_dequantizeHalf_ref(h);
+    }
+
+    // --- [ meshopt_computePositionExponent ] ---
+
+    /** {@code int meshopt_computePositionExponent(float const * minv, float const * maxv, int min_exp, int max_bits)} */
+    public static native int nmeshopt_computePositionExponent(long minv, long maxv, int min_exp, int max_bits);
+
+    /** {@code int meshopt_computePositionExponent(float const * minv, float const * maxv, int min_exp, int max_bits)} */
+    public static int meshopt_computePositionExponent(@NativeType("float const *") FloatBuffer minv, @NativeType("float const *") FloatBuffer maxv, int min_exp, int max_bits) {
+        if (CHECKS) {
+            check(minv, 3);
+            check(maxv, 3);
+        }
+        return nmeshopt_computePositionExponent(memAddress(minv), memAddress(maxv), min_exp, max_bits);
     }
 
     // --- [ meshopt_setAllocator ] ---

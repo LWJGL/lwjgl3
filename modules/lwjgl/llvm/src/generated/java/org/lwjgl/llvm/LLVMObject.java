@@ -84,7 +84,8 @@ public class LLVMObject {
         LLVMBinaryTypeMachO64L             = 12,
         LLVMBinaryTypeMachO64B             = 13,
         LLVMBinaryTypeWasm                 = 14,
-        LLVMBinaryTypeOffload              = 15;
+        LLVMBinaryTypeOffload              = 15,
+        LLVMBinaryTypeDXcontainer          = 16;
 
     protected LLVMObject() {
         throw new UnsupportedOperationException();

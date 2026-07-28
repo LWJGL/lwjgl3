@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkRenderPassStripeBeginInfoARM {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t stripeInfoCount;
  *     {@link VkRenderPassStripeInfoARM VkRenderPassStripeInfoARM} const * pStripeInfos;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkRenderPassStripeBeginInfoARM extends Struct<VkRenderPassStripeBeginInfoARM> implements NativeResource {
 

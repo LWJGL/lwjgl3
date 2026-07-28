@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrMapLocalizationRequestInfoML {
  *     XrStructureType type;
  *     void const * next;
  *     {@link XrUuidEXT XrUuidEXT} mapUuid;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrMapLocalizationRequestInfoML extends Struct<XrMapLocalizationRequestInfoML> implements NativeResource {
 
@@ -38,6 +38,8 @@ public class XrMapLocalizationRequestInfoML extends Struct<XrMapLocalizationRequ
         MAPUUID;
 
     static {
+        XrUuidEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -6,11 +6,9 @@
 package vulkan.templates
 
 import org.lwjgl.generator.*
-import core.windows.*
 import vulkan.*
 
 val KHR_win32_surface = "KHRWin32Surface".nativeClassVK("KHR_win32_surface", type = "instance", postfix = "KHR") {
-    javaImport("org.lwjgl.system.windows.*")
     IntConstant(
         "KHR_WIN32_SURFACE_SPEC_VERSION".."6"
     )

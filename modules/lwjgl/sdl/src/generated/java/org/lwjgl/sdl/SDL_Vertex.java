@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct SDL_Vertex {
  *     {@link SDL_FPoint SDL_FPoint} position;
  *     {@link SDL_FColor SDL_FColor} color;
  *     {@link SDL_FPoint SDL_FPoint} tex_coord;
- * }}</pre>
+ * }</code></pre>
  */
 public class SDL_Vertex extends Struct<SDL_Vertex> implements NativeResource {
 
@@ -38,6 +38,9 @@ public class SDL_Vertex extends Struct<SDL_Vertex> implements NativeResource {
         TEX_COORD;
 
     static {
+        SDL_FPoint.createSafe(NULL);
+        SDL_FColor.createSafe(NULL);
+
         Layout layout = __struct(
             __member(SDL_FPoint.SIZEOF, SDL_FPoint.ALIGNOF),
             __member(SDL_FColor.SIZEOF, SDL_FColor.ALIGNOF),

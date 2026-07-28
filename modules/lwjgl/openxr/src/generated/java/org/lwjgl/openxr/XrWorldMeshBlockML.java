@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrWorldMeshBlockML {
  *     XrStructureType type;
  *     void * next;
@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link XrVector3f XrVector3f} * normalBuffer;
  *     uint32_t confidenceCount;
  *     float * confidenceBuffer;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrWorldMeshBlockML extends Struct<XrWorldMeshBlockML> implements NativeResource {
 
@@ -61,6 +61,8 @@ public class XrWorldMeshBlockML extends Struct<XrWorldMeshBlockML> implements Na
         CONFIDENCEBUFFER;
 
     static {
+        XrUuidEXT.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

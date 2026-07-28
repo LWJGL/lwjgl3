@@ -23,34 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 memoryDecompression;
  * }}</pre>
  */
-public class VkPhysicalDeviceMemoryDecompressionFeaturesNV extends Struct<VkPhysicalDeviceMemoryDecompressionFeaturesNV> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        MEMORYDECOMPRESSION;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        MEMORYDECOMPRESSION = layout.offsetof(2);
-    }
+public class VkPhysicalDeviceMemoryDecompressionFeaturesNV extends VkPhysicalDeviceMemoryDecompressionFeaturesEXT {
 
     protected VkPhysicalDeviceMemoryDecompressionFeaturesNV(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -68,32 +41,24 @@ public class VkPhysicalDeviceMemoryDecompressionFeaturesNV extends Struct<VkPhys
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceMemoryDecompressionFeaturesNV(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** @return the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** @return the value of the {@code memoryDecompression} field. */
-    @NativeType("VkBool32")
-    public boolean memoryDecompression() { return nmemoryDecompression(address()) != 0; }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceMemoryDecompressionFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVMemoryDecompression#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV} value to the {@code sType} field. */
-    public VkPhysicalDeviceMemoryDecompressionFeaturesNV sType$Default() { return sType(NVMemoryDecompression.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV); }
+    /** Sets the {@link EXTMemoryDecompression#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_EXT} value to the {@code sType} field. */
+    @Override
+    public VkPhysicalDeviceMemoryDecompressionFeaturesNV sType$Default() { return sType(EXTMemoryDecompression.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceMemoryDecompressionFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code memoryDecompression} field. */
+    @Override
     public VkPhysicalDeviceMemoryDecompressionFeaturesNV memoryDecompression(@NativeType("VkBool32") boolean value) { nmemoryDecompression(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceMemoryDecompressionFeaturesNV set(
         int sType,
         long pNext,
@@ -229,24 +194,8 @@ public class VkPhysicalDeviceMemoryDecompressionFeaturesNV extends Struct<VkPhys
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return memGetInt(struct + VkPhysicalDeviceMemoryDecompressionFeaturesNV.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceMemoryDecompressionFeaturesNV.PNEXT); }
-    /** Unsafe version of {@link #memoryDecompression}. */
-    public static int nmemoryDecompression(long struct) { return memGetInt(struct + VkPhysicalDeviceMemoryDecompressionFeaturesNV.MEMORYDECOMPRESSION); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMemoryDecompressionFeaturesNV.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceMemoryDecompressionFeaturesNV.PNEXT, value); }
-    /** Unsafe version of {@link #memoryDecompression(boolean) memoryDecompression}. */
-    public static void nmemoryDecompression(long struct, int value) { memPutInt(struct + VkPhysicalDeviceMemoryDecompressionFeaturesNV.MEMORYDECOMPRESSION, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceMemoryDecompressionFeaturesNV} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceMemoryDecompressionFeaturesNV, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceMemoryDecompressionFeaturesEXT.Buffer {
 
         private static final VkPhysicalDeviceMemoryDecompressionFeaturesNV ELEMENT_FACTORY = VkPhysicalDeviceMemoryDecompressionFeaturesNV.create(-1L);
 
@@ -260,7 +209,7 @@ public class VkPhysicalDeviceMemoryDecompressionFeaturesNV extends Struct<VkPhys
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -286,23 +235,17 @@ public class VkPhysicalDeviceMemoryDecompressionFeaturesNV extends Struct<VkPhys
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceMemoryDecompressionFeaturesNV.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceMemoryDecompressionFeaturesNV.npNext(address()); }
-        /** @return the value of the {@code memoryDecompression} field. */
-        @NativeType("VkBool32")
-        public boolean memoryDecompression() { return VkPhysicalDeviceMemoryDecompressionFeaturesNV.nmemoryDecompression(address()) != 0; }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceMemoryDecompressionFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMemoryDecompressionFeaturesNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVMemoryDecompression#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV} value to the {@code sType} field. */
-        public VkPhysicalDeviceMemoryDecompressionFeaturesNV.Buffer sType$Default() { return sType(NVMemoryDecompression.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV); }
+        /** Sets the {@link EXTMemoryDecompression#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_EXT} value to the {@code sType} field. */
+        @Override
+        public VkPhysicalDeviceMemoryDecompressionFeaturesNV.Buffer sType$Default() { return sType(EXTMemoryDecompression.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceMemoryDecompressionFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMemoryDecompressionFeaturesNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code memoryDecompression} field. */
+        @Override
         public VkPhysicalDeviceMemoryDecompressionFeaturesNV.Buffer memoryDecompression(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMemoryDecompressionFeaturesNV.nmemoryDecompression(address(), value ? 1 : 0); return this; }
 
     }

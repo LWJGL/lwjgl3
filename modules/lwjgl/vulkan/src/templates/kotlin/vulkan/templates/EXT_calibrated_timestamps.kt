@@ -23,13 +23,9 @@ val EXT_calibrated_timestamps = "EXTCalibratedTimestamps".nativeClassVK("EXT_cal
 
     EnumConstant(
         "TIME_DOMAIN_DEVICE_EXT".."0",
-        "TIME_DOMAIN_DEVICE_KHR".."0",
         "TIME_DOMAIN_CLOCK_MONOTONIC_EXT".."1",
-        "TIME_DOMAIN_CLOCK_MONOTONIC_KHR".."1",
         "TIME_DOMAIN_CLOCK_MONOTONIC_RAW_EXT".."2",
-        "TIME_DOMAIN_CLOCK_MONOTONIC_RAW_KHR".."2",
-        "TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_EXT".."3",
-        "TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_KHR".."3"
+        "TIME_DOMAIN_QUERY_PERFORMANCE_COUNTER_EXT".."3"
     )
 
     VkResult(

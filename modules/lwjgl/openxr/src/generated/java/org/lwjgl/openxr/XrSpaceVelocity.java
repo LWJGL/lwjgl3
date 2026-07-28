@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSpaceVelocity {
  *     XrStructureType type;
  *     void * next;
  *     XrSpaceVelocityFlags velocityFlags;
  *     {@link XrVector3f XrVector3f} linearVelocity;
  *     {@link XrVector3f XrVector3f} angularVelocity;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSpaceVelocity extends Struct<XrSpaceVelocity> implements NativeResource {
 
@@ -42,6 +42,8 @@ public class XrSpaceVelocity extends Struct<XrSpaceVelocity> implements NativeRe
         ANGULARVELOCITY;
 
     static {
+        XrVector3f.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

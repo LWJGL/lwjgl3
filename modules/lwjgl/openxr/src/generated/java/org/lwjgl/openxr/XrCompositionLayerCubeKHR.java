@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrCompositionLayerCubeKHR {
  *     XrStructureType type;
  *     void const * next;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrSwapchain swapchain;
  *     uint32_t imageArrayIndex;
  *     {@link XrQuaternionf XrQuaternionf} orientation;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrCompositionLayerCubeKHR extends Struct<XrCompositionLayerCubeKHR> implements NativeResource {
 
@@ -49,6 +49,8 @@ public class XrCompositionLayerCubeKHR extends Struct<XrCompositionLayerCubeKHR>
         ORIENTATION;
 
     static {
+        XrQuaternionf.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

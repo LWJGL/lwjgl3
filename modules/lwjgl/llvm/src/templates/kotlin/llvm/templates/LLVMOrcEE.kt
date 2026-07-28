@@ -13,10 +13,24 @@ val LLVMOrcEE = "LLVMOrcEE".nativeClass(
     prefixMethod = "LLVM",
     binding = LLVM_BINDING_DELEGATE
 ) {
+    IgnoreMissing..LLVMErrorRef(
+        "OrcCreateObjectLinkingLayerWithInProcessMemoryManager",
+
+        Check(1)..LLVMOrcObjectLayerRef.p("Result"),
+        LLVMOrcExecutionSessionRef("ES")
+    )
+
     LLVMOrcObjectLayerRef(
         "OrcCreateRTDyldObjectLinkingLayerWithSectionMemoryManager",
 
         LLVMOrcExecutionSessionRef("ES")
+    )
+
+    IgnoreMissing..LLVMOrcObjectLayerRef(
+        "OrcCreateRTDyldObjectLinkingLayerWithSectionMemoryManagerReserveAlloc",
+
+        LLVMOrcExecutionSessionRef("ES"),
+        LLVMBool("ReserveAlloc")
     )
 
     IgnoreMissing..LLVMOrcObjectLayerRef(

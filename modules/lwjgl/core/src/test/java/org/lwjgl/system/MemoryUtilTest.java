@@ -60,8 +60,8 @@ public class MemoryUtilTest {
             throw new SkipException("This test may not run with checks disabled.");
         }
 
-        expectThrows(OutOfMemoryError.class, () -> nmemAllocChecked(-1L));
-        expectThrows(OutOfMemoryError.class, () -> nmemCallocChecked(1, -1L));
+        expectThrows(OutOfMemoryError.class, () -> nmemAllocChecked(Pointer.BITS64 ? -1L : Integer.MAX_VALUE));
+        expectThrows(OutOfMemoryError.class, () -> nmemCallocChecked(1, Pointer.BITS64 ? -1L : Integer.MAX_VALUE));
     }
 
     public void testMemSet() {
@@ -100,6 +100,8 @@ public class MemoryUtilTest {
     public void testMemSetMisaligned() {
         long ref = nmemAlloc(16);
         long mem = nmemAlloc(16);
+
+        ByteBuffer buffer = memByteBuffer(ref, 16);
         for (int i = 0; i < 16; i++) {
             for (int j = 1; j <= (16 - i); j++) {
                 // cannot trust the memSet in nmemCalloc yet
@@ -113,6 +115,17 @@ public class MemoryUtilTest {
                 for (int k = 0; k < 16; k++) {
                     assertEquals(memGetByte(mem + k), memGetByte(ref + k));
                 }
+
+                if (i <= 14) {
+                    assertEquals(memGetCharUnaligned(mem + i), buffer.getChar(i));
+                    assertEquals(memGetShortUnaligned(mem + i), buffer.getShort(i));
+                }
+                if (i <= 12) {
+                    assertEquals(memGetIntUnaligned(mem + i), buffer.getInt(i));
+                }
+                if (i <= 8) {
+                    assertEquals(memGetLongUnaligned(mem + i), buffer.getLong(i));
+                }
             }
         }
         nmemFree(mem);
@@ -120,8 +133,10 @@ public class MemoryUtilTest {
     }
 
     private static void memSetReference(long m, int value, int bytes) {
+        byte b = (byte)(value & 0xFF);
         for (int i = 0; i < bytes; i++) {
-            memPutByte(m + i, (byte)(value & 0xFF));
+            memPutByte(m + i, b);
+            assertEquals(memGetByte(m + i), b);
         }
     }
 
@@ -312,11 +327,8 @@ public class MemoryUtilTest {
             assertEquals(ib.get(2 + i), 0x0);
         }
 
-        DoubleBuffer db = memDoubleBuffer(memAddress(ib), Integer.MAX_VALUE);
-        assertThrows(IllegalStateException.class, () -> memByteBuffer(db));
-
-        db.limit(Integer.MAX_VALUE >> 3);
-        assertEquals(memByteBuffer(db).remaining(), (Integer.MAX_VALUE >> 3) << 3);
+        DoubleBuffer db = memDoubleBuffer(memAddress(ib), (0x0FFF_FFFF - 1));
+        assertEquals(memByteBuffer(db).remaining(), (0x0FFF_FFFF - 1) << 3);
     }
 
     @FunctionalInterface
@@ -405,6 +417,24 @@ public class MemoryUtilTest {
         testSliceBufferAbs(memAllocDouble(32), DoubleBuffer::duplicate, DoubleBuffer::slice, MemoryUtil::memSlice, DoubleBuffer::order, MemoryUtil::memAddress);
     }
 
+    public void testSliceBufferAbsPastLimit() {
+        testSliceBufferAbsPastLimit(
+            memAlloc(16),
+            it -> it.duplicate().order(it.order()),
+            it -> it.slice().order(it.order()),
+            MemoryUtil::memSlice,
+            ByteBuffer::order,
+            MemoryUtil::memAddress
+        );
+
+        testSliceBufferAbsPastLimit(memAllocChar(16), CharBuffer::duplicate, CharBuffer::slice, MemoryUtil::memSlice, CharBuffer::order, MemoryUtil::memAddress);
+        testSliceBufferAbsPastLimit(memAllocShort(16), ShortBuffer::duplicate, ShortBuffer::slice, MemoryUtil::memSlice, ShortBuffer::order, MemoryUtil::memAddress);
+        testSliceBufferAbsPastLimit(memAllocInt(16), IntBuffer::duplicate, IntBuffer::slice, MemoryUtil::memSlice, IntBuffer::order, MemoryUtil::memAddress);
+        testSliceBufferAbsPastLimit(memAllocLong(16), LongBuffer::duplicate, LongBuffer::slice, MemoryUtil::memSlice, LongBuffer::order, MemoryUtil::memAddress);
+        testSliceBufferAbsPastLimit(memAllocFloat(16), FloatBuffer::duplicate, FloatBuffer::slice, MemoryUtil::memSlice, FloatBuffer::order, MemoryUtil::memAddress);
+        testSliceBufferAbsPastLimit(memAllocDouble(16), DoubleBuffer::duplicate, DoubleBuffer::slice, MemoryUtil::memSlice, DoubleBuffer::order, MemoryUtil::memAddress);
+    }
+
     @FunctionalInterface
     private interface AbsoluteSlicer<T extends Buffer> {
         T apply(T buffer, int offset, int capacity);
@@ -427,6 +457,31 @@ public class MemoryUtilTest {
         assertEquals(memAddress.apply(dup), memAddress.apply(ref));
         assertEquals(dup.capacity(), ref.capacity());
         assertEquals(dup, ref);
+
+        memFree(buffer);
+    }
+
+    private static <T extends Buffer> void testSliceBufferAbsPastLimit(
+        T buffer,
+        Function<T, T> duplicate,
+        Function<T, T> slice,
+        AbsoluteSlicer<T> memSlice,
+        Function<T, ByteOrder> order,
+        BufferAddressGetter<T> memAddress
+    ) {
+        buffer.position(4);
+        buffer.limit(8);
+
+        T ref = sliceRef(buffer, 2, 8, duplicate, slice);
+        T dup = memSlice.apply(buffer, 2, 8);
+
+        assertEquals(order.apply(dup), order.apply(ref));
+        assertEquals(memAddress.apply(dup), memAddress.apply(ref));
+        assertEquals(dup.capacity(), ref.capacity());
+        assertEquals(dup, ref);
+
+        assertEquals(buffer.position(), 4);
+        assertEquals(buffer.limit(), 8);
 
         memFree(buffer);
     }

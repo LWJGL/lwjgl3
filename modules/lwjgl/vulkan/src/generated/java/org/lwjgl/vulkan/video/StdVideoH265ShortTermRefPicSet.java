@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct StdVideoH265ShortTermRefPicSet {
  *     {@link StdVideoH265ShortTermRefPicSetFlags StdVideoH265ShortTermRefPicSetFlags} flags;
  *     uint32_t delta_idx_minus1;
@@ -35,7 +35,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
  *     uint8_t num_positive_pics;
  *     uint16_t delta_poc_s0_minus1[STD_VIDEO_H265_MAX_DPB_SIZE];
  *     uint16_t delta_poc_s1_minus1[STD_VIDEO_H265_MAX_DPB_SIZE];
- * }}</pre>
+ * }</code></pre>
  */
 public class StdVideoH265ShortTermRefPicSet extends Struct<StdVideoH265ShortTermRefPicSet> implements NativeResource {
 
@@ -63,6 +63,8 @@ public class StdVideoH265ShortTermRefPicSet extends Struct<StdVideoH265ShortTerm
         DELTA_POC_S1_MINUS1;
 
     static {
+        StdVideoH265ShortTermRefPicSetFlags.createSafe(NULL);
+
         Layout layout = __struct(
             __member(StdVideoH265ShortTermRefPicSetFlags.SIZEOF, StdVideoH265ShortTermRefPicSetFlags.ALIGNOF),
             __member(4),
@@ -355,9 +357,9 @@ public class StdVideoH265ShortTermRefPicSet extends Struct<StdVideoH265ShortTerm
     public static short nused_by_curr_pic_s0_flag(long struct) { return memGetShort(struct + StdVideoH265ShortTermRefPicSet.USED_BY_CURR_PIC_S0_FLAG); }
     /** Unsafe version of {@link #used_by_curr_pic_s1_flag}. */
     public static short nused_by_curr_pic_s1_flag(long struct) { return memGetShort(struct + StdVideoH265ShortTermRefPicSet.USED_BY_CURR_PIC_S1_FLAG); }
-    public static short nreserved1(long struct) { return memGetShort(struct + StdVideoH265ShortTermRefPicSet.RESERVED1); }
-    public static byte nreserved2(long struct) { return memGetByte(struct + StdVideoH265ShortTermRefPicSet.RESERVED2); }
-    public static byte nreserved3(long struct) { return memGetByte(struct + StdVideoH265ShortTermRefPicSet.RESERVED3); }
+    static short nreserved1(long struct) { return memGetShort(struct + StdVideoH265ShortTermRefPicSet.RESERVED1); }
+    static byte nreserved2(long struct) { return memGetByte(struct + StdVideoH265ShortTermRefPicSet.RESERVED2); }
+    static byte nreserved3(long struct) { return memGetByte(struct + StdVideoH265ShortTermRefPicSet.RESERVED3); }
     /** Unsafe version of {@link #num_negative_pics}. */
     public static byte nnum_negative_pics(long struct) { return memGetByte(struct + StdVideoH265ShortTermRefPicSet.NUM_NEGATIVE_PICS); }
     /** Unsafe version of {@link #num_positive_pics}. */
@@ -389,9 +391,9 @@ public class StdVideoH265ShortTermRefPicSet extends Struct<StdVideoH265ShortTerm
     public static void nused_by_curr_pic_s0_flag(long struct, short value) { memPutShort(struct + StdVideoH265ShortTermRefPicSet.USED_BY_CURR_PIC_S0_FLAG, value); }
     /** Unsafe version of {@link #used_by_curr_pic_s1_flag(short) used_by_curr_pic_s1_flag}. */
     public static void nused_by_curr_pic_s1_flag(long struct, short value) { memPutShort(struct + StdVideoH265ShortTermRefPicSet.USED_BY_CURR_PIC_S1_FLAG, value); }
-    public static void nreserved1(long struct, short value) { memPutShort(struct + StdVideoH265ShortTermRefPicSet.RESERVED1, value); }
-    public static void nreserved2(long struct, byte value) { memPutByte(struct + StdVideoH265ShortTermRefPicSet.RESERVED2, value); }
-    public static void nreserved3(long struct, byte value) { memPutByte(struct + StdVideoH265ShortTermRefPicSet.RESERVED3, value); }
+    static void nreserved1(long struct, short value) { memPutShort(struct + StdVideoH265ShortTermRefPicSet.RESERVED1, value); }
+    static void nreserved2(long struct, byte value) { memPutByte(struct + StdVideoH265ShortTermRefPicSet.RESERVED2, value); }
+    static void nreserved3(long struct, byte value) { memPutByte(struct + StdVideoH265ShortTermRefPicSet.RESERVED3, value); }
     /** Unsafe version of {@link #num_negative_pics(byte) num_negative_pics}. */
     public static void nnum_negative_pics(long struct, byte value) { memPutByte(struct + StdVideoH265ShortTermRefPicSet.NUM_NEGATIVE_PICS, value); }
     /** Unsafe version of {@link #num_positive_pics(byte) num_positive_pics}. */

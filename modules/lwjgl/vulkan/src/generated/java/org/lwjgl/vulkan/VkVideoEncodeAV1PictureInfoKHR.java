@@ -21,7 +21,7 @@ import org.lwjgl.vulkan.video.*;
 import static org.lwjgl.vulkan.KHRVideoEncodeAV1.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoEncodeAV1PictureInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -32,7 +32,7 @@ import static org.lwjgl.vulkan.KHRVideoEncodeAV1.*;
  *     int32_t referenceNameSlotIndices[VK_MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR];
  *     VkBool32 primaryReferenceCdfOnly;
  *     VkBool32 generateObuExtensionHeader;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoEncodeAV1PictureInfoKHR extends Struct<VkVideoEncodeAV1PictureInfoKHR> implements NativeResource {
 

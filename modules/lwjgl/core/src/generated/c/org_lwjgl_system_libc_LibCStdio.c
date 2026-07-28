@@ -11,6 +11,44 @@
 
 EXTERN_C_ENTER
 
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_libc_LibCStdio_stdin(JNIEnv *__env, jclass clazz) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)stdin;
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_libc_LibCStdio_stdout(JNIEnv *__env, jclass clazz) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)stdout;
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_libc_LibCStdio_stderr(JNIEnv *__env, jclass clazz) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)stderr;
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_libc_LibCStdio_nfflush(JNIEnv *__env, jclass clazz, jlong streamAddress) {
+    FILE *stream = (FILE *)(uintptr_t)streamAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)fflush(stream);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_libc_LibCStdio_nfeof(JNIEnv *__env, jclass clazz, jlong streamAddress) {
+    FILE *stream = (FILE *)(uintptr_t)streamAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)feof(stream);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_libc_LibCStdio_nferror(JNIEnv *__env, jclass clazz, jlong streamAddress) {
+    FILE *stream = (FILE *)(uintptr_t)streamAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)ferror(stream);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_libc_LibCStdio_fscanf(JNIEnv *__env, jclass clazz) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)fscanf;
+}
+
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_libc_LibCStdio_sscanf(JNIEnv *__env, jclass clazz) {
     UNUSED_PARAMS(__env, clazz)
     return (jlong)(uintptr_t)sscanf;
@@ -21,6 +59,11 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_libc_LibCStdio_nvsscanf(JNIEnv *__e
     char const *format = (char const *)(uintptr_t)formatAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jint)vsscanf(buffer, format, VA_LIST_CAST(vlist));
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_libc_LibCStdio_fprintf(JNIEnv *__env, jclass clazz) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)fprintf;
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_libc_LibCStdio_snprintf(JNIEnv *__env, jclass clazz) {

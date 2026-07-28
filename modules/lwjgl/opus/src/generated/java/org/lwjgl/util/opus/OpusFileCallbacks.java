@@ -17,13 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct OpusFileCallbacks {
  *     {@link OPReadFuncI op_read_func} read;
  *     {@link OPSeekFuncI op_seek_func} seek;
  *     {@link OPTellFuncI op_tell_func} tell;
  *     {@link OPCloseFuncI op_close_func} close;
- * }}</pre>
+ * }</code></pre>
  */
 public class OpusFileCallbacks extends Struct<OpusFileCallbacks> implements NativeResource {
 
@@ -41,6 +41,11 @@ public class OpusFileCallbacks extends Struct<OpusFileCallbacks> implements Nati
         CLOSE;
 
     static {
+        java.util.Objects.requireNonNull(OPReadFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(OPSeekFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(OPTellFuncI.DESCRIPTOR);
+        java.util.Objects.requireNonNull(OPCloseFuncI.DESCRIPTOR);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),

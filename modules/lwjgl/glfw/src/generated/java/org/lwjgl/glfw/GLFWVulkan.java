@@ -198,9 +198,18 @@ public class GLFWVulkan {
 
         long a = memGetAddress(override);
         if (a != NULL) {
-            nmemFree(a);
+            getAllocator().free(a);
+            a = NULL;
         }
-        memPutAddress(override, path == null ? NULL : memAddress(memUTF8(path)));
+
+        if (path != null) {
+            int length = memLengthUTF8(path, true);
+
+            a = getAllocator().malloc(length);
+            memUTF8(path, true, memByteBuffer(a, length));
+        }
+
+        memPutAddress(override, a);
     }
 
 }

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkResolveImageInfo2 {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkImageLayout dstImageLayout;
  *     uint32_t regionCount;
  *     {@link VkImageResolve2 VkImageResolve2} const * pRegions;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkResolveImageInfo2 extends Struct<VkResolveImageInfo2> implements NativeResource {
 
@@ -126,6 +126,8 @@ public class VkResolveImageInfo2 extends Struct<VkResolveImageInfo2> implements 
     public VkResolveImageInfo2 sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_RESOLVE_IMAGE_INFO_2); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkResolveImageInfo2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkResolveImageModeInfoKHR} value to the {@code pNext} chain. */
+    public VkResolveImageInfo2 pNext(VkResolveImageModeInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code srcImage} field. */
     public VkResolveImageInfo2 srcImage(@NativeType("VkImage") long value) { nsrcImage(address(), value); return this; }
     /** Sets the specified value to the {@code srcImageLayout} field. */
@@ -398,6 +400,8 @@ public class VkResolveImageInfo2 extends Struct<VkResolveImageInfo2> implements 
         public VkResolveImageInfo2.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_RESOLVE_IMAGE_INFO_2); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkResolveImageInfo2.Buffer pNext(@NativeType("void const *") long value) { VkResolveImageInfo2.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkResolveImageModeInfoKHR} value to the {@code pNext} chain. */
+        public VkResolveImageInfo2.Buffer pNext(VkResolveImageModeInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code srcImage} field. */
         public VkResolveImageInfo2.Buffer srcImage(@NativeType("VkImage") long value) { VkResolveImageInfo2.nsrcImage(address(), value); return this; }
         /** Sets the specified value to the {@code srcImageLayout} field. */

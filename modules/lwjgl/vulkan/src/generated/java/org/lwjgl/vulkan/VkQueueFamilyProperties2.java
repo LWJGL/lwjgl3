@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkQueueFamilyProperties2 {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkQueueFamilyProperties VkQueueFamilyProperties} queueFamilyProperties;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkQueueFamilyProperties2 extends Struct<VkQueueFamilyProperties2> implements NativeResource {
 
@@ -38,6 +38,8 @@ public class VkQueueFamilyProperties2 extends Struct<VkQueueFamilyProperties2> i
         QUEUEFAMILYPROPERTIES;
 
     static {
+        VkQueueFamilyProperties.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
@@ -99,6 +101,10 @@ public class VkQueueFamilyProperties2 extends Struct<VkQueueFamilyProperties2> i
     public VkQueueFamilyProperties2 pNext(VkQueueFamilyGlobalPriorityPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkQueueFamilyGlobalPriorityPropertiesKHR} value to the {@code pNext} chain. */
     public VkQueueFamilyProperties2 pNext(VkQueueFamilyGlobalPriorityPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkQueueFamilyOptimalImageTransferGranularityPropertiesKHR} value to the {@code pNext} chain. */
+    public VkQueueFamilyProperties2 pNext(VkQueueFamilyOptimalImageTransferGranularityPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkQueueFamilyOwnershipTransferPropertiesKHR} value to the {@code pNext} chain. */
+    public VkQueueFamilyProperties2 pNext(VkQueueFamilyOwnershipTransferPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkQueueFamilyQueryResultStatusPropertiesKHR} value to the {@code pNext} chain. */
     public VkQueueFamilyProperties2 pNext(VkQueueFamilyQueryResultStatusPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkQueueFamilyVideoPropertiesKHR} value to the {@code pNext} chain. */
@@ -197,25 +203,6 @@ public class VkQueueFamilyProperties2 extends Struct<VkQueueFamilyProperties2> i
     public static VkQueueFamilyProperties2.@Nullable Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : new Buffer(address, capacity);
     }
-
-    // -----------------------------------
-
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkQueueFamilyProperties2 mallocStack() { return malloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkQueueFamilyProperties2 callocStack() { return calloc(stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
-    @Deprecated public static VkQueueFamilyProperties2 mallocStack(MemoryStack stack) { return malloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
-    @Deprecated public static VkQueueFamilyProperties2 callocStack(MemoryStack stack) { return calloc(stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkQueueFamilyProperties2.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkQueueFamilyProperties2.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
-    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkQueueFamilyProperties2.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
-    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
-    @Deprecated public static VkQueueFamilyProperties2.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkQueueFamilyProperties2} instance allocated on the specified {@link MemoryStack}.
@@ -337,6 +324,10 @@ public class VkQueueFamilyProperties2 extends Struct<VkQueueFamilyProperties2> i
         public VkQueueFamilyProperties2.Buffer pNext(VkQueueFamilyGlobalPriorityPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkQueueFamilyGlobalPriorityPropertiesKHR} value to the {@code pNext} chain. */
         public VkQueueFamilyProperties2.Buffer pNext(VkQueueFamilyGlobalPriorityPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkQueueFamilyOptimalImageTransferGranularityPropertiesKHR} value to the {@code pNext} chain. */
+        public VkQueueFamilyProperties2.Buffer pNext(VkQueueFamilyOptimalImageTransferGranularityPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkQueueFamilyOwnershipTransferPropertiesKHR} value to the {@code pNext} chain. */
+        public VkQueueFamilyProperties2.Buffer pNext(VkQueueFamilyOwnershipTransferPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkQueueFamilyQueryResultStatusPropertiesKHR} value to the {@code pNext} chain. */
         public VkQueueFamilyProperties2.Buffer pNext(VkQueueFamilyQueryResultStatusPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkQueueFamilyVideoPropertiesKHR} value to the {@code pNext} chain. */

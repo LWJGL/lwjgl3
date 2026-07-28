@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.nuklear.Nuklear.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_popup_state {
  *     {@link NkWindow struct nk_window} * win;
  *     enum nk_panel_type type;
@@ -28,7 +28,7 @@ import static org.lwjgl.nuklear.Nuklear.*;
  *     unsigned con_old;
  *     unsigned active_con;
  *     {@link NkRect struct nk_rect} header;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_popup_state")
 public class NkPopupState extends Struct<NkPopupState> {
@@ -53,6 +53,9 @@ public class NkPopupState extends Struct<NkPopupState> {
         HEADER;
 
     static {
+        NkPopupBuffer.createSafe(NULL);
+        NkRect.createSafe(NULL);
+
         Layout layout = __struct(
             __member(POINTER_SIZE),
             __member(4),

@@ -238,7 +238,7 @@ public class StdVideoEncodeH264PictureInfoFlags extends Struct<StdVideoEncodeH26
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return memGetInt(struct + StdVideoEncodeH264PictureInfoFlags.BITFIELD0); }
+    static int nbitfield0(long struct) { return memGetInt(struct + StdVideoEncodeH264PictureInfoFlags.BITFIELD0); }
     /** Unsafe version of {@link #IdrPicFlag}. */
     public static int nIdrPicFlag(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #is_reference}. */
@@ -249,9 +249,9 @@ public class StdVideoEncodeH264PictureInfoFlags extends Struct<StdVideoEncodeH26
     public static int nlong_term_reference_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_08) >>> 3; }
     /** Unsafe version of {@link #adaptive_ref_pic_marking_mode_flag}. */
     public static int nadaptive_ref_pic_marking_mode_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_10) >>> 4; }
-    public static int nreserved(long struct) { return nbitfield0(struct) >>> 5; }
+    static int nreserved(long struct) { return nbitfield0(struct) >>> 5; }
 
-    public static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoEncodeH264PictureInfoFlags.BITFIELD0, value); }
+    static void nbitfield0(long struct, int value) { memPutInt(struct + StdVideoEncodeH264PictureInfoFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #IdrPicFlag(boolean) IdrPicFlag}. */
     public static void nIdrPicFlag(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #is_reference(boolean) is_reference}. */
@@ -262,7 +262,7 @@ public class StdVideoEncodeH264PictureInfoFlags extends Struct<StdVideoEncodeH26
     public static void nlong_term_reference_flag(long struct, int value) { nbitfield0(struct, ((value << 3) & 0x00_00_00_08) | (nbitfield0(struct) & 0xFF_FF_FF_F7)); }
     /** Unsafe version of {@link #adaptive_ref_pic_marking_mode_flag(boolean) adaptive_ref_pic_marking_mode_flag}. */
     public static void nadaptive_ref_pic_marking_mode_flag(long struct, int value) { nbitfield0(struct, ((value << 4) & 0x00_00_00_10) | (nbitfield0(struct) & 0xFF_FF_FF_EF)); }
-    public static void nreserved(long struct, int value) { nbitfield0(struct, (value << 5) | (nbitfield0(struct) & 0x00_00_00_1F)); }
+    static void nreserved(long struct, int value) { nbitfield0(struct, (value << 5) | (nbitfield0(struct) & 0x00_00_00_1F)); }
 
     // -----------------------------------
 

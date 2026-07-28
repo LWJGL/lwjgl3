@@ -15,7 +15,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct nk_row_layout {
  *     enum nk_panel_row_layout_type type;
  *     int index;
@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link NkRect struct nk_rect} item;
  *     int tree_depth;
  *     float templates[16];
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct nk_row_layout")
 public class NkRowLayout extends Struct<NkRowLayout> {
@@ -58,6 +58,8 @@ public class NkRowLayout extends Struct<NkRowLayout> {
         TEMPLATES;
 
     static {
+        NkRect.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

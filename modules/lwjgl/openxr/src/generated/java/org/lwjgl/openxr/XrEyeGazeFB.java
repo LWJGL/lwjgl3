@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrEyeGazeFB {
  *     XrBool32 isValid;
  *     {@link XrPosef XrPosef} gazePose;
  *     float gazeConfidence;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrEyeGazeFB extends Struct<XrEyeGazeFB> implements NativeResource {
 
@@ -38,6 +38,8 @@ public class XrEyeGazeFB extends Struct<XrEyeGazeFB> implements NativeResource {
         GAZECONFIDENCE;
 
     static {
+        XrPosef.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(XrPosef.SIZEOF, XrPosef.ALIGNOF),

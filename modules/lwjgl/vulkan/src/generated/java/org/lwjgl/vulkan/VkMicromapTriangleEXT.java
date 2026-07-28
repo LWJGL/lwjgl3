@@ -23,34 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint16_t format;
  * }}</pre>
  */
-public class VkMicromapTriangleEXT extends Struct<VkMicromapTriangleEXT> implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        DATAOFFSET,
-        SUBDIVISIONLEVEL,
-        FORMAT;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(2),
-            __member(2)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        DATAOFFSET = layout.offsetof(0);
-        SUBDIVISIONLEVEL = layout.offsetof(1);
-        FORMAT = layout.offsetof(2);
-    }
+public class VkMicromapTriangleEXT extends VkMicromapTriangleKHR {
 
     protected VkMicromapTriangleEXT(long address, @Nullable ByteBuffer container) {
         super(address, container);
@@ -68,30 +41,21 @@ public class VkMicromapTriangleEXT extends Struct<VkMicromapTriangleEXT> impleme
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkMicromapTriangleEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** @return the value of the {@code dataOffset} field. */
-    @NativeType("uint32_t")
-    public int dataOffset() { return ndataOffset(address()); }
-    /** @return the value of the {@code subdivisionLevel} field. */
-    @NativeType("uint16_t")
-    public short subdivisionLevel() { return nsubdivisionLevel(address()); }
-    /** @return the value of the {@code format} field. */
-    @NativeType("uint16_t")
-    public short format() { return nformat(address()); }
-
     /** Sets the specified value to the {@code dataOffset} field. */
+    @Override
     public VkMicromapTriangleEXT dataOffset(@NativeType("uint32_t") int value) { ndataOffset(address(), value); return this; }
     /** Sets the specified value to the {@code subdivisionLevel} field. */
+    @Override
     public VkMicromapTriangleEXT subdivisionLevel(@NativeType("uint16_t") short value) { nsubdivisionLevel(address(), value); return this; }
     /** Sets the specified value to the {@code format} field. */
+    @Override
     public VkMicromapTriangleEXT format(@NativeType("uint16_t") short value) { nformat(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkMicromapTriangleEXT set(
         int dataOffset,
         short subdivisionLevel,
@@ -227,24 +191,8 @@ public class VkMicromapTriangleEXT extends Struct<VkMicromapTriangleEXT> impleme
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #dataOffset}. */
-    public static int ndataOffset(long struct) { return memGetInt(struct + VkMicromapTriangleEXT.DATAOFFSET); }
-    /** Unsafe version of {@link #subdivisionLevel}. */
-    public static short nsubdivisionLevel(long struct) { return memGetShort(struct + VkMicromapTriangleEXT.SUBDIVISIONLEVEL); }
-    /** Unsafe version of {@link #format}. */
-    public static short nformat(long struct) { return memGetShort(struct + VkMicromapTriangleEXT.FORMAT); }
-
-    /** Unsafe version of {@link #dataOffset(int) dataOffset}. */
-    public static void ndataOffset(long struct, int value) { memPutInt(struct + VkMicromapTriangleEXT.DATAOFFSET, value); }
-    /** Unsafe version of {@link #subdivisionLevel(short) subdivisionLevel}. */
-    public static void nsubdivisionLevel(long struct, short value) { memPutShort(struct + VkMicromapTriangleEXT.SUBDIVISIONLEVEL, value); }
-    /** Unsafe version of {@link #format(short) format}. */
-    public static void nformat(long struct, short value) { memPutShort(struct + VkMicromapTriangleEXT.FORMAT, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkMicromapTriangleEXT} structs. */
-    public static class Buffer extends StructBuffer<VkMicromapTriangleEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkMicromapTriangleKHR.Buffer {
 
         private static final VkMicromapTriangleEXT ELEMENT_FACTORY = VkMicromapTriangleEXT.create(-1L);
 
@@ -258,7 +206,7 @@ public class VkMicromapTriangleEXT extends Struct<VkMicromapTriangleEXT> impleme
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -284,21 +232,14 @@ public class VkMicromapTriangleEXT extends Struct<VkMicromapTriangleEXT> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code dataOffset} field. */
-        @NativeType("uint32_t")
-        public int dataOffset() { return VkMicromapTriangleEXT.ndataOffset(address()); }
-        /** @return the value of the {@code subdivisionLevel} field. */
-        @NativeType("uint16_t")
-        public short subdivisionLevel() { return VkMicromapTriangleEXT.nsubdivisionLevel(address()); }
-        /** @return the value of the {@code format} field. */
-        @NativeType("uint16_t")
-        public short format() { return VkMicromapTriangleEXT.nformat(address()); }
-
         /** Sets the specified value to the {@code dataOffset} field. */
+        @Override
         public VkMicromapTriangleEXT.Buffer dataOffset(@NativeType("uint32_t") int value) { VkMicromapTriangleEXT.ndataOffset(address(), value); return this; }
         /** Sets the specified value to the {@code subdivisionLevel} field. */
+        @Override
         public VkMicromapTriangleEXT.Buffer subdivisionLevel(@NativeType("uint16_t") short value) { VkMicromapTriangleEXT.nsubdivisionLevel(address(), value); return this; }
         /** Sets the specified value to the {@code format} field. */
+        @Override
         public VkMicromapTriangleEXT.Buffer format(@NativeType("uint16_t") short value) { VkMicromapTriangleEXT.nformat(address(), value); return this; }
 
     }

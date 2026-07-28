@@ -19,12 +19,12 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.FBHandTrackingCapsules.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrHandTrackingCapsulesStateFB {
  *     XrStructureType type;
  *     void * next;
  *     {@link XrHandCapsuleFB XrHandCapsuleFB} capsules[XR_HAND_TRACKING_CAPSULE_COUNT_FB];
- * }}</pre>
+ * }</code></pre>
  */
 public class XrHandTrackingCapsulesStateFB extends Struct<XrHandTrackingCapsulesStateFB> implements NativeResource {
 
@@ -41,6 +41,8 @@ public class XrHandTrackingCapsulesStateFB extends Struct<XrHandTrackingCapsules
         CAPSULES;
 
     static {
+        XrHandCapsuleFB.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

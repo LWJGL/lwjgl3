@@ -7,7 +7,7 @@ package org.lwjgl.opencl;
 
 public final class AMDDevicePersistentMemory {
 
-    public static final int CL_MEM_USE_PERSISTENT_MEM_AMD = 1 << 6;
+    public static final long CL_MEM_USE_PERSISTENT_MEM_AMD = 1L << 6;
 
     private AMDDevicePersistentMemory() {}
 

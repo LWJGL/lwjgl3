@@ -234,6 +234,11 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         "SCRIPT_TODHRI".enum("HB_TAG ('T','o','d','r')"),
         "SCRIPT_TULU_TIGALARI".enum("HB_TAG ('T','u','t','g')"),
 
+        "SCRIPT_BERIA_ERFE".enum("HB_TAG('B','e','r','f')"),
+        "SCRIPT_SIDETIC".enum("HB_TAG ('S','i','d','t')"),
+        "SCRIPT_TAI_YO".enum("HB_TAG ('T','a','y','o')"),
+        "SCRIPT_TOLONG_SIKI".enum("HB_TAG ('T','o','l','s')"),
+
         "SCRIPT_INVALID".enum("HB_TAG_NONE")
     )
 
@@ -1138,11 +1143,22 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         nullable..hb_destroy_func_t("destroy")
     )
 
+    void(
+        "buffer_changed",
+
+        hb_buffer_t.p("buffer")
+    )
+
     // hb-draw.h
 
     customMethod("""
     public static final hb_draw_state_t HB_DRAW_STATE_DEFAULT = hb_draw_state_t.create();
     """)
+
+    EnumConstant(
+        "DRAW_LINE_CAP_BUTT".enum("0"),
+        "DRAW_LINE_CAP_SQUARE".enum
+    )
 
     void(
         "draw_funcs_set_move_to_func",
@@ -1295,6 +1311,39 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         hb_draw_funcs_t.p("dfuncs"),
         Unsafe..void.p("draw_data"),
         hb_draw_state_t.p("st")
+    )
+
+    void(
+        "draw_line",
+
+        hb_draw_funcs_t.p("dfuncs"),
+        Unsafe..void.p("draw_data"),
+        hb_draw_state_t.p("st"),
+        float("x0"), float("y0"), float("w0"),
+        float("x1"), float("y1"), float("w1"),
+        hb_draw_line_cap_t("cap")
+    )
+
+    void(
+        "draw_rectangle",
+
+        hb_draw_funcs_t.p("dfuncs"),
+        Unsafe..void.p("draw_data"),
+        hb_draw_state_t.p("st"),
+        float("x"), float("y"),
+        float("w"), float("h"),
+        float("stroke_width")
+    )
+
+    void(
+        "draw_circle",
+
+        hb_draw_funcs_t.p("dfuncs"),
+        Unsafe..void.p("draw_data"),
+        hb_draw_state_t.p("st"),
+        float("cx"), float("cy"),
+        float("r"),
+        float("stroke_width")
     )
 
     // hb-face.h
@@ -1694,6 +1743,24 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     )
 
     void(
+        "font_funcs_set_glyph_h_origins_func",
+
+        hb_font_funcs_t.p("ffuncs"),
+        hb_font_get_glyph_h_origins_func_t("func"),
+        nullable..opaque_p("user_data"),
+        nullable..hb_destroy_func_t("destroy")
+    )
+
+    void(
+        "font_funcs_set_glyph_v_origins_func",
+
+        hb_font_funcs_t.p("ffuncs"),
+        hb_font_get_glyph_v_origins_func_t("func"),
+        nullable..opaque_p("user_data"),
+        nullable..hb_destroy_func_t("destroy")
+    )
+
+    void(
         "font_funcs_set_glyph_h_kerning_func",
 
         hb_font_funcs_t.p("ffuncs"),
@@ -1870,6 +1937,32 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         hb_codepoint_t("glyph"),
         Check(1)..hb_position_t.p("x"),
         Check(1)..hb_position_t.p("y")
+    )
+
+    hb_bool_t(
+        "font_get_glyph_h_origins",
+
+        hb_font_t.p("font"),
+        unsigned_int("count"),
+        Check("(count * glyph_stride) >> 2")..hb_codepoint_t.const.p("first_glyph"),
+        unsigned("glyph_stride"),
+        Check("(count * x_stride) >> 2")..hb_position_t.p("first_x"),
+        unsigned("x_stride"),
+        Check("(count * y_stride) >> 2")..hb_position_t.p("first_y"),
+        unsigned("y_stride")
+    )
+
+    hb_bool_t(
+        "font_get_glyph_v_origins",
+
+        hb_font_t.p("font"),
+        unsigned_int("count"),
+        Check("(count * glyph_stride) >> 2")..hb_codepoint_t.const.p("first_glyph"),
+        unsigned("glyph_stride"),
+        Check("(count * x_stride) >> 2")..hb_position_t.p("first_x"),
+        unsigned("x_stride"),
+        Check("(count * y_stride) >> 2")..hb_position_t.p("first_y"),
+        unsigned("y_stride")
     )
 
     hb_position_t(
@@ -2757,6 +2850,25 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     )
 
     void(
+        "paint_funcs_set_push_clip_path_start_func",
+
+        hb_paint_funcs_t.p("funcs"),
+        hb_paint_push_clip_path_start_func_t("func"),
+        nullable..opaque_p("user_data"),
+        nullable..hb_destroy_func_t("destroy")
+    )
+
+    void(
+        "paint_funcs_set_push_clip_path_end_func",
+
+        hb_paint_funcs_t.p("funcs"),
+        hb_paint_push_clip_path_end_func_t("func"),
+        nullable..opaque_p("user_data"),
+        nullable..hb_destroy_func_t("destroy")
+
+    )
+
+    void(
         "paint_funcs_set_pop_clip_func",
 
         hb_paint_funcs_t.p("funcs"),
@@ -2817,6 +2929,16 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         hb_paint_push_group_func_t("func"),
         nullable..opaque_p("user_data"),
         nullable..hb_destroy_func_t("destroy")
+    )
+
+    void(
+        "paint_funcs_set_push_group_for_func",
+
+        hb_paint_funcs_t.p("funcs"),
+        hb_paint_push_group_for_func_t("func"),
+        nullable..opaque_p("user_data"),
+        nullable..hb_destroy_func_t("destroy")
+
     )
 
     void(
@@ -2902,6 +3024,21 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         float("ymax")
     )
 
+    hb_draw_funcs_t.p(
+        "paint_push_clip_path_start",
+
+        hb_paint_funcs_t.p("funcs"),
+        nullable..opaque_p("paint_data"),
+        Check(1)..opaque_p.p("draw_data")
+    )
+
+    void(
+        "paint_push_clip_path_end",
+
+        hb_paint_funcs_t.p("funcs"),
+        nullable..opaque_p("paint_data")
+    )
+
     void(
         "paint_pop_clip",
 
@@ -2979,6 +3116,14 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     )
 
     void(
+        "paint_push_group_for",
+
+        hb_paint_funcs_t.p("funcs"),
+        nullable..opaque_p("paint_data"),
+        hb_paint_composite_mode_t("mode")
+    )
+
+    void(
         "paint_pop_group",
 
         hb_paint_funcs_t.p("funcs"),
@@ -2993,6 +3138,37 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         nullable..opaque_p("paint_data"),
         unsigned_int("color_index"),
         Check(1)..hb_color_t.p("color")
+    )
+
+    void(
+        "paint_reduce_linear_anchors",
+
+        float("x0"), float("y0"),
+        float("x1"), float("y1"),
+        float("x2"), float("y2"),
+        Check(1)..float.p("xx0"), Check(1)..float.p("yy0"),
+        Check(1)..float.p("xx1"), Check(1)..float.p("yy1")
+    )
+
+    void(
+        "paint_normalize_color_line",
+
+        hb_color_stop_t.p("stops"),
+        AutoSize("stops")..unsigned_int("len"),
+        Check(1)..float.p("min"),
+        Check(1)..float.p("max")
+    )
+
+    void(
+        "paint_sweep_gradient_tiles",
+
+        hb_color_stop_t.p("stops"),
+        AutoSize("stops")..unsigned_int("n_stops"),
+        hb_paint_extend_t("extend"),
+        float("start_angle"),
+        float("end_angle"),
+        hb_paint_sweep_gradient_tile_func_t("emit_patch"),
+        nullable..opaque_p("user_data")
     )
 
     // hb-set.h
@@ -3666,11 +3842,11 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
 
     // hb-version.h
 
-    IntConstant("VERSION_MAJOR".."11")
+    IntConstant("VERSION_MAJOR".."14")
     IntConstant("VERSION_MINOR".."2")
     IntConstant("VERSION_MICRO".."1")
 
-    StringConstant("VERSION_STRING".."11.2.1")
+    StringConstant("VERSION_STRING".."14.2.1")
 
     customMethod("""
     public static boolean HB_VERSION_ATLEAST(int major, int minor, int micro) {

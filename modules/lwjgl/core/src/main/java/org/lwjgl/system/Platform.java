@@ -105,7 +105,17 @@ public enum Platform {
         Architecture(boolean is64Bit) {
             this.is64Bit = is64Bit;
         }
+
+        public boolean is32Bit() {
+            return !is64Bit;
+        }
+
+        public boolean is64Bit() {
+            return is64Bit;
+        }
     }
+
+    private static final int JAVA_VERSION;
 
     private static final Platform current;
 
@@ -113,6 +123,22 @@ public enum Platform {
     private static final Function<String, String> bundledLibraryPathMapper;
 
     static {
+        String javaVersion = System.getProperty("java.version");
+        Matcher matcher = Pattern
+            .compile("^([1-9][0-9]*)(?:(?:\\.0)*\\.[1-9][0-9]*)*(?:-[a-zA-Z0-9]+)?")
+            .matcher(javaVersion);
+
+        if (!matcher.find()) {
+            if (javaVersion.startsWith("1.")) {
+                if (!javaVersion.startsWith("1.8.")) {
+                    throw new UnsupportedOperationException("JDK 8 or newer is required.");
+                }
+            }
+            throw new IllegalStateException("Failed to parse java.version: " + javaVersion);
+        }
+
+        JAVA_VERSION = Math.max(8, Integer.parseInt(matcher.group(1)));
+
         String osName = System.getProperty("os.name");
         if (osName.startsWith("Windows")) {
             current = WINDOWS;
@@ -152,6 +178,10 @@ public enum Platform {
     }
 
     abstract String mapLibraryName(String name);
+
+    public static int getJavaVersion() {
+        return JAVA_VERSION;
+    }
 
     /** Returns the platform on which the library is running. */
     public static Platform get() {

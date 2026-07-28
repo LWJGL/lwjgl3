@@ -14,13 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrSceneMarkerMSFT {
  *     XrSceneMarkerTypeMSFT markerType;
  *     XrTime lastSeenTime;
  *     {@link XrOffset2Df XrOffset2Df} center;
  *     {@link XrExtent2Df XrExtent2Df} size;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrSceneMarkerMSFT extends Struct<XrSceneMarkerMSFT> {
 
@@ -38,6 +38,9 @@ public class XrSceneMarkerMSFT extends Struct<XrSceneMarkerMSFT> {
         SIZE;
 
     static {
+        XrOffset2Df.createSafe(NULL);
+        XrExtent2Df.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(8),

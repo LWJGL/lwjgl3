@@ -16,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkPhysicalDeviceLayeredApiVulkanPropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkPhysicalDeviceProperties2 VkPhysicalDeviceProperties2} properties;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkPhysicalDeviceLayeredApiVulkanPropertiesKHR extends Struct<VkPhysicalDeviceLayeredApiVulkanPropertiesKHR> implements NativeResource {
 
@@ -38,6 +38,8 @@ public class VkPhysicalDeviceLayeredApiVulkanPropertiesKHR extends Struct<VkPhys
         PROPERTIES;
 
     static {
+        VkPhysicalDeviceProperties2.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

@@ -132,25 +132,23 @@
     </macrodef>
 
     <target name="compile-native-platform">
-        <local name="clang.version.string"/>
-        <exec executable="sh" outputproperty="clang.version.string" logError="true" failonerror="true">
+        <exec executable="sh" logError="true" failonerror="false" taskname="Compiler" if:set="clang.version.print">
             <arg line="-o pipefail -c"/>
             <arg value='clang --version | grep "clang version"'/>
         </exec>
-        <echo message="${clang.version.string}" taskname="Compiler"/>
 
         <parallel threadsPerProcessor="2">
 
         <!-- CORE -->
         <build module="core" flags="-Werror -Wfatal-errors -Wall -Wextra -pedantic">
             <source>
-                <arg value="-I/usr/local/include"/>
                 <arg value="-I${src.main.rel}/libffi"/>
                 <arg value="-I${src.main.rel}/libffi/aarch64" if:set="build.arch.arm64"/>
                 <arg value="-I${src.main.rel}/libffi/arm" if:set="build.arch.arm32"/>
                 <arg value="-I${src.main.rel}/libffi/x86" if:set="build.arch.x64|x86"/>
                 <!-- for libffi/x86/ffitarget.h -->
                 <arg value="-DX86_64" if:set="build.arch.x64"/>
+                <arg value="-I/usr/local/include"/>
                 <fileset dir=".">
                     <include name="${src.main}/*.c"/>
                     <include name="${src.generated}/*.c"/>
@@ -209,9 +207,10 @@
         <!-- msdfgen -->
         <build module="msdfgen" simple="true" linker="clang++" if:true="${binding.msdfgen}">
             <beforeCompile>
-                <compile lang="c++">
+                <compile flags="-DMSDFGEN_DYNAMIC_FREETYPE" lang="c++">
                     <arg value="-I${src.main.rel}"/>
-                    <fileset dir="." includes="${src.main}/*.cpp"/>
+                    <fileset dir="." includes="${src.main}/core/*.cpp"/>
+                    <fileset dir="." includes="${src.main}/ext/*.cpp"/>
                 </compile>
             </beforeCompile>
             <link>
@@ -340,7 +339,7 @@
         <build module="tinyexr" simple="true" linker="clang++" if:true="${binding.tinyexr}">
             <beforeCompile>
                 <compile lang="c++">
-                    <arg value="-I${src.main.rel}"/>
+                     <arg value="-I${src.main.rel}"/>
                     <arg value="-I${module.lwjgl.rel}/core/src/main/c/dependencies/miniz"/>
                     <fileset dir="." includes="${src.main}/*.cc"/>
                     <fileset dir="." includes="${src.generated}/*.cpp"/>
@@ -419,9 +418,13 @@
             <update-dependency module="freetype" artifact="libfreetype.so"/>
             <update-dependency module="glfw" artifact="libglfw.so"/>
             <update-dependency module="harfbuzz" artifact="libharfbuzz.so"/>
+                <update-dependency module="harfbuzz" artifact="libharfbuzz-gpu.so"/>
+                <update-dependency module="harfbuzz" artifact="libharfbuzz-raster.so"/>
+                <update-dependency module="harfbuzz" artifact="libharfbuzz-vector.so"/>
             <update-dependency module="hwloc" artifact="libhwloc.so"/>
             <update-dependency module="jemalloc" artifact="libjemalloc.so"/>
             <update-dependency module="ktx" artifact="libktx.so"/>
+            <update-dependency module="mimalloc" artifact="libmimalloc.so"/>
             <update-dependency module="openal" artifact="libopenal.so"/>
             <update-dependency module="openxr" artifact="libopenxr_loader.so"/>
             <update-dependency module="opus" artifact="libopus.so"/>

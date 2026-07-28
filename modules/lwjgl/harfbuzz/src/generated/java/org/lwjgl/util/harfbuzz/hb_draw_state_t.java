@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct hb_draw_state_t {
  *     hb_bool_t path_open;
  *     float path_start_x;
@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link hb_var_num_t hb_var_num_t} reserved5;
  *     {@link hb_var_num_t hb_var_num_t} reserved6;
  *     {@link hb_var_num_t hb_var_num_t} reserved7;
- * }}</pre>
+ * }</code></pre>
  */
 public class hb_draw_state_t extends Struct<hb_draw_state_t> implements NativeResource {
 
@@ -56,6 +56,8 @@ public class hb_draw_state_t extends Struct<hb_draw_state_t> implements NativeRe
         RESERVED7;
 
     static {
+        hb_var_num_t.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),
@@ -283,13 +285,13 @@ public class hb_draw_state_t extends Struct<hb_draw_state_t> implements NativeRe
     public static float ncurrent_x(long struct) { return memGetFloat(struct + hb_draw_state_t.CURRENT_X); }
     /** Unsafe version of {@link #current_y}. */
     public static float ncurrent_y(long struct) { return memGetFloat(struct + hb_draw_state_t.CURRENT_Y); }
-    public static hb_var_num_t nreserved1(long struct) { return hb_var_num_t.create(struct + hb_draw_state_t.RESERVED1); }
-    public static hb_var_num_t nreserved2(long struct) { return hb_var_num_t.create(struct + hb_draw_state_t.RESERVED2); }
-    public static hb_var_num_t nreserved3(long struct) { return hb_var_num_t.create(struct + hb_draw_state_t.RESERVED3); }
-    public static hb_var_num_t nreserved4(long struct) { return hb_var_num_t.create(struct + hb_draw_state_t.RESERVED4); }
-    public static hb_var_num_t nreserved5(long struct) { return hb_var_num_t.create(struct + hb_draw_state_t.RESERVED5); }
-    public static hb_var_num_t nreserved6(long struct) { return hb_var_num_t.create(struct + hb_draw_state_t.RESERVED6); }
-    public static hb_var_num_t nreserved7(long struct) { return hb_var_num_t.create(struct + hb_draw_state_t.RESERVED7); }
+    static hb_var_num_t nreserved1(long struct) { return hb_var_num_t.create(struct + hb_draw_state_t.RESERVED1); }
+    static hb_var_num_t nreserved2(long struct) { return hb_var_num_t.create(struct + hb_draw_state_t.RESERVED2); }
+    static hb_var_num_t nreserved3(long struct) { return hb_var_num_t.create(struct + hb_draw_state_t.RESERVED3); }
+    static hb_var_num_t nreserved4(long struct) { return hb_var_num_t.create(struct + hb_draw_state_t.RESERVED4); }
+    static hb_var_num_t nreserved5(long struct) { return hb_var_num_t.create(struct + hb_draw_state_t.RESERVED5); }
+    static hb_var_num_t nreserved6(long struct) { return hb_var_num_t.create(struct + hb_draw_state_t.RESERVED6); }
+    static hb_var_num_t nreserved7(long struct) { return hb_var_num_t.create(struct + hb_draw_state_t.RESERVED7); }
 
     /** Unsafe version of {@link #path_open(boolean) path_open}. */
     public static void npath_open(long struct, int value) { memPutInt(struct + hb_draw_state_t.PATH_OPEN, value); }
@@ -301,13 +303,13 @@ public class hb_draw_state_t extends Struct<hb_draw_state_t> implements NativeRe
     public static void ncurrent_x(long struct, float value) { memPutFloat(struct + hb_draw_state_t.CURRENT_X, value); }
     /** Unsafe version of {@link #current_y(float) current_y}. */
     public static void ncurrent_y(long struct, float value) { memPutFloat(struct + hb_draw_state_t.CURRENT_Y, value); }
-    public static void nreserved1(long struct, hb_var_num_t value) { memCopy(value.address(), struct + hb_draw_state_t.RESERVED1, hb_var_num_t.SIZEOF); }
-    public static void nreserved2(long struct, hb_var_num_t value) { memCopy(value.address(), struct + hb_draw_state_t.RESERVED2, hb_var_num_t.SIZEOF); }
-    public static void nreserved3(long struct, hb_var_num_t value) { memCopy(value.address(), struct + hb_draw_state_t.RESERVED3, hb_var_num_t.SIZEOF); }
-    public static void nreserved4(long struct, hb_var_num_t value) { memCopy(value.address(), struct + hb_draw_state_t.RESERVED4, hb_var_num_t.SIZEOF); }
-    public static void nreserved5(long struct, hb_var_num_t value) { memCopy(value.address(), struct + hb_draw_state_t.RESERVED5, hb_var_num_t.SIZEOF); }
-    public static void nreserved6(long struct, hb_var_num_t value) { memCopy(value.address(), struct + hb_draw_state_t.RESERVED6, hb_var_num_t.SIZEOF); }
-    public static void nreserved7(long struct, hb_var_num_t value) { memCopy(value.address(), struct + hb_draw_state_t.RESERVED7, hb_var_num_t.SIZEOF); }
+    static void nreserved1(long struct, hb_var_num_t value) { memCopy(value.address(), struct + hb_draw_state_t.RESERVED1, hb_var_num_t.SIZEOF); }
+    static void nreserved2(long struct, hb_var_num_t value) { memCopy(value.address(), struct + hb_draw_state_t.RESERVED2, hb_var_num_t.SIZEOF); }
+    static void nreserved3(long struct, hb_var_num_t value) { memCopy(value.address(), struct + hb_draw_state_t.RESERVED3, hb_var_num_t.SIZEOF); }
+    static void nreserved4(long struct, hb_var_num_t value) { memCopy(value.address(), struct + hb_draw_state_t.RESERVED4, hb_var_num_t.SIZEOF); }
+    static void nreserved5(long struct, hb_var_num_t value) { memCopy(value.address(), struct + hb_draw_state_t.RESERVED5, hb_var_num_t.SIZEOF); }
+    static void nreserved6(long struct, hb_var_num_t value) { memCopy(value.address(), struct + hb_draw_state_t.RESERVED6, hb_var_num_t.SIZEOF); }
+    static void nreserved7(long struct, hb_var_num_t value) { memCopy(value.address(), struct + hb_draw_state_t.RESERVED7, hb_var_num_t.SIZEOF); }
 
     // -----------------------------------
 

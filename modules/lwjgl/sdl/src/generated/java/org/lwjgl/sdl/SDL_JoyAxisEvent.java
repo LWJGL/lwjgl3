@@ -271,35 +271,35 @@ public class SDL_JoyAxisEvent extends Struct<SDL_JoyAxisEvent> implements Native
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_JoyAxisEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_JoyAxisEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_JoyAxisEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_JoyAxisEvent.TIMESTAMP); }
     /** Unsafe version of {@link #which}. */
     public static int nwhich(long struct) { return memGetInt(struct + SDL_JoyAxisEvent.WHICH); }
     /** Unsafe version of {@link #axis}. */
     public static byte naxis(long struct) { return memGetByte(struct + SDL_JoyAxisEvent.AXIS); }
-    public static byte npadding1(long struct) { return memGetByte(struct + SDL_JoyAxisEvent.PADDING1); }
-    public static byte npadding2(long struct) { return memGetByte(struct + SDL_JoyAxisEvent.PADDING2); }
-    public static byte npadding3(long struct) { return memGetByte(struct + SDL_JoyAxisEvent.PADDING3); }
+    static byte npadding1(long struct) { return memGetByte(struct + SDL_JoyAxisEvent.PADDING1); }
+    static byte npadding2(long struct) { return memGetByte(struct + SDL_JoyAxisEvent.PADDING2); }
+    static byte npadding3(long struct) { return memGetByte(struct + SDL_JoyAxisEvent.PADDING3); }
     /** Unsafe version of {@link #value}. */
     public static short nvalue(long struct) { return memGetShort(struct + SDL_JoyAxisEvent.VALUE); }
-    public static short npadding4(long struct) { return memGetShort(struct + SDL_JoyAxisEvent.PADDING4); }
+    static short npadding4(long struct) { return memGetShort(struct + SDL_JoyAxisEvent.PADDING4); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_JoyAxisEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_JoyAxisEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_JoyAxisEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_JoyAxisEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #which(int) which}. */
     public static void nwhich(long struct, int value) { memPutInt(struct + SDL_JoyAxisEvent.WHICH, value); }
     /** Unsafe version of {@link #axis(byte) axis}. */
     public static void naxis(long struct, byte value) { memPutByte(struct + SDL_JoyAxisEvent.AXIS, value); }
-    public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_JoyAxisEvent.PADDING1, value); }
-    public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_JoyAxisEvent.PADDING2, value); }
-    public static void npadding3(long struct, byte value) { memPutByte(struct + SDL_JoyAxisEvent.PADDING3, value); }
+    static void npadding1(long struct, byte value) { memPutByte(struct + SDL_JoyAxisEvent.PADDING1, value); }
+    static void npadding2(long struct, byte value) { memPutByte(struct + SDL_JoyAxisEvent.PADDING2, value); }
+    static void npadding3(long struct, byte value) { memPutByte(struct + SDL_JoyAxisEvent.PADDING3, value); }
     /** Unsafe version of {@link #value(short) value}. */
     public static void nvalue(long struct, short value) { memPutShort(struct + SDL_JoyAxisEvent.VALUE, value); }
-    public static void npadding4(long struct, short value) { memPutShort(struct + SDL_JoyAxisEvent.PADDING4, value); }
+    static void npadding4(long struct, short value) { memPutShort(struct + SDL_JoyAxisEvent.PADDING4, value); }
 
     // -----------------------------------
 

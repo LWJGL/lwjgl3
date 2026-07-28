@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiSkeletonBone {
  *     int mParent;
  *     {@link AINode struct aiNode} * mArmature;
@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link AIVertexWeight struct aiVertexWeight} * mWeights;
  *     {@link AIMatrix4x4 struct aiMatrix4x4} mOffsetMatrix;
  *     {@link AIMatrix4x4 struct aiMatrix4x4} mLocalMatrix;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiSkeletonBone")
 public class AISkeletonBone extends Struct<AISkeletonBone> implements NativeResource {
@@ -50,6 +50,8 @@ public class AISkeletonBone extends Struct<AISkeletonBone> implements NativeReso
         MLOCALMATRIX;
 
     static {
+        AIMatrix4x4.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

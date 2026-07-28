@@ -16,9 +16,9 @@ public final class INTELDeviceAttributeQuery {
         CL_DEVICE_NUM_THREADS_PER_EU_INTEL       = 0x4255,
         CL_DEVICE_FEATURE_CAPABILITIES_INTEL     = 0x4256;
 
-    public static final int
-        CL_DEVICE_FEATURE_FLAG_DP4A_INTEL = 1 << 0,
-        CL_DEVICE_FEATURE_FLAG_DPAS_INTEL = 1 << 1;
+    public static final long
+        CL_DEVICE_FEATURE_FLAG_DP4A_INTEL = 1L << 0,
+        CL_DEVICE_FEATURE_FLAG_DPAS_INTEL = 1L << 1;
 
     private INTELDeviceAttributeQuery() {}
 

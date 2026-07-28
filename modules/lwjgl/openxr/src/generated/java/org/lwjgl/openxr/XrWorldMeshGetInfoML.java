@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrWorldMeshGetInfoML {
  *     XrStructureType type;
  *     void const * next;
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float disconnectedComponentArea;
  *     uint32_t blockCount;
  *     {@link XrWorldMeshBlockRequestML XrWorldMeshBlockRequestML} * blocks;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrWorldMeshGetInfoML extends Struct<XrWorldMeshGetInfoML> implements NativeResource {
 

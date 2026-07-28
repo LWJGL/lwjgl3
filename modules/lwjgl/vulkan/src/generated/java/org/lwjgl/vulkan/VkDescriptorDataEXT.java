@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * union VkDescriptorDataEXT {
  *     VkSampler const * pSampler;
  *     {@link VkDescriptorImageInfo VkDescriptorImageInfo} const * pCombinedImageSampler;
@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkDescriptorAddressInfoEXT VkDescriptorAddressInfoEXT} const * pUniformBuffer;
  *     {@link VkDescriptorAddressInfoEXT VkDescriptorAddressInfoEXT} const * pStorageBuffer;
  *     VkDeviceAddress accelerationStructure;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkDescriptorDataEXT extends Struct<VkDescriptorDataEXT> implements NativeResource {
 

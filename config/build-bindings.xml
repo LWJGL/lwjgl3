@@ -34,6 +34,7 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.lmdb" value="true"/>
     <property name="binding.lz4" value="true"/>
     <property name="binding.meshoptimizer" value="true"/>
+    <property name="binding.mimalloc" value="true"/>
     <property name="binding.msdfgen" value="true"/>
     <property name="binding.nanovg" value="true"/>
     <property name="binding.nfd" value="true"/>
@@ -52,6 +53,7 @@ This script is included in /config/build-definitions.xml.
             <isset property="build.arch.arm"/>
         </and>
     </condition>
+    <property name="binding.renderdoc" value="true"/>
     <property name="binding.rpmalloc" value="true"/>
     <property name="binding.sdl" value="true"/>
     <property name="binding.shaderc" value="true"/>
@@ -72,6 +74,7 @@ This script is included in /config/build-definitions.xml.
     <property name="java-only.binding.jawt" value="true"/>
     <property name="java-only.binding.odbc" value="true"/>
     <property name="java-only.binding.opencl" value="true"/>
+    <property name="java-only.binding.renderdoc" value="true"/>
 
     <!-- // ================================ // -->
 
@@ -94,6 +97,7 @@ This script is included in /config/build-definitions.xml.
                 <sequential if:true="${binding.lmdb}"><local name="module"/><property name="module" value="lmdb"/><body/></sequential>
                 <sequential if:true="${binding.lz4}"><local name="module"/><property name="module" value="lz4"/><body/></sequential>
                 <sequential if:true="${binding.meshoptimizer}"><local name="module"/><property name="module" value="meshoptimizer"/><body/></sequential>
+                <sequential if:true="${binding.mimalloc}"><local name="module"/><property name="module" value="mimalloc"/><body/></sequential>
                 <sequential if:true="${binding.msdfgen}"><local name="module"/><property name="module" value="msdfgen"/><body/></sequential>
                 <sequential if:true="${binding.nanovg}"><local name="module"/><property name="module" value="nanovg"/><body/></sequential>
                 <sequential if:true="${binding.nfd}"><local name="module"/><property name="module" value="nfd"/><body/></sequential>
@@ -107,6 +111,7 @@ This script is included in /config/build-definitions.xml.
                 <sequential if:true="${binding.opus}"><local name="module"/><property name="module" value="opus"/><body/></sequential>
                 <sequential if:true="${binding.par}"><local name="module"/><property name="module" value="par"/><body/></sequential>
                 <sequential if:true="${binding.remotery}"><local name="module"/><property name="module" value="remotery"/><body/></sequential>
+                <sequential if:true="${binding.renderdoc}"><local name="module"/><property name="module" value="renderdoc"/><body/></sequential>
                 <sequential if:true="${binding.rpmalloc}"><local name="module"/><property name="module" value="rpmalloc"/><body/></sequential>
                 <sequential if:true="${binding.sdl}"><local name="module"/><property name="module" value="sdl"/><body/></sequential>
                 <sequential if:true="${binding.shaderc}"><local name="module"/><property name="module" value="shaderc"/><body/></sequential>
@@ -125,10 +130,23 @@ This script is included in /config/build-definitions.xml.
     </macrodef>
 
     <macrodef name="forEachModule">
+        <attribute name="core8" default="false"/>
         <element name="body" implicit="yes"/>
         <sequential>
             <sequential>
                 <local name="module"/><property name="module" value="core"/>
+                <body/>
+            </sequential>
+            <sequential unless:true="@{core8}" if:set="jdk11">
+                <local name="module"/><property name="module" value="core11"/>
+                <body/>
+            </sequential>
+            <sequential unless:true="@{core8}" if:set="jdk25">
+                <local name="module"/><property name="module" value="core25"/>
+                <body/>
+            </sequential>
+            <sequential unless:true="@{core8}" if:set="jdk27">
+                <local name="module"/><property name="module" value="core27"/>
                 <body/>
             </sequential>
             <forEachBinding>

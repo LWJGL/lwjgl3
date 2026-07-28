@@ -256,29 +256,29 @@ public class SDL_AudioDeviceEvent extends Struct<SDL_AudioDeviceEvent> implement
 
     /** Unsafe version of {@link #type}. */
     public static int ntype(long struct) { return memGetInt(struct + SDL_AudioDeviceEvent.TYPE); }
-    public static int nreserved(long struct) { return memGetInt(struct + SDL_AudioDeviceEvent.RESERVED); }
+    static int nreserved(long struct) { return memGetInt(struct + SDL_AudioDeviceEvent.RESERVED); }
     /** Unsafe version of {@link #timestamp}. */
     public static long ntimestamp(long struct) { return memGetLong(struct + SDL_AudioDeviceEvent.TIMESTAMP); }
     /** Unsafe version of {@link #which}. */
     public static int nwhich(long struct) { return memGetInt(struct + SDL_AudioDeviceEvent.WHICH); }
     /** Unsafe version of {@link #recording}. */
     public static boolean nrecording(long struct) { return memGetByte(struct + SDL_AudioDeviceEvent.RECORDING) != 0; }
-    public static byte npadding1(long struct) { return memGetByte(struct + SDL_AudioDeviceEvent.PADDING1); }
-    public static byte npadding2(long struct) { return memGetByte(struct + SDL_AudioDeviceEvent.PADDING2); }
-    public static byte npadding3(long struct) { return memGetByte(struct + SDL_AudioDeviceEvent.PADDING3); }
+    static byte npadding1(long struct) { return memGetByte(struct + SDL_AudioDeviceEvent.PADDING1); }
+    static byte npadding2(long struct) { return memGetByte(struct + SDL_AudioDeviceEvent.PADDING2); }
+    static byte npadding3(long struct) { return memGetByte(struct + SDL_AudioDeviceEvent.PADDING3); }
 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { memPutInt(struct + SDL_AudioDeviceEvent.TYPE, value); }
-    public static void nreserved(long struct, int value) { memPutInt(struct + SDL_AudioDeviceEvent.RESERVED, value); }
+    static void nreserved(long struct, int value) { memPutInt(struct + SDL_AudioDeviceEvent.RESERVED, value); }
     /** Unsafe version of {@link #timestamp(long) timestamp}. */
     public static void ntimestamp(long struct, long value) { memPutLong(struct + SDL_AudioDeviceEvent.TIMESTAMP, value); }
     /** Unsafe version of {@link #which(int) which}. */
     public static void nwhich(long struct, int value) { memPutInt(struct + SDL_AudioDeviceEvent.WHICH, value); }
     /** Unsafe version of {@link #recording(boolean) recording}. */
     public static void nrecording(long struct, boolean value) { memPutByte(struct + SDL_AudioDeviceEvent.RECORDING, value ? (byte)1 : (byte)0); }
-    public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_AudioDeviceEvent.PADDING1, value); }
-    public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_AudioDeviceEvent.PADDING2, value); }
-    public static void npadding3(long struct, byte value) { memPutByte(struct + SDL_AudioDeviceEvent.PADDING3, value); }
+    static void npadding1(long struct, byte value) { memPutByte(struct + SDL_AudioDeviceEvent.PADDING1, value); }
+    static void npadding2(long struct, byte value) { memPutByte(struct + SDL_AudioDeviceEvent.PADDING2, value); }
+    static void npadding3(long struct, byte value) { memPutByte(struct + SDL_AudioDeviceEvent.PADDING3, value); }
 
     // -----------------------------------
 

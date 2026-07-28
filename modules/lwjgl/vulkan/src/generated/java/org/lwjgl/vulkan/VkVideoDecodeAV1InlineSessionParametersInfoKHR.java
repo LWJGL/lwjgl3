@@ -18,12 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.video.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct VkVideoDecodeAV1InlineSessionParametersInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link StdVideoAV1SequenceHeader StdVideoAV1SequenceHeader} const * pStdSequenceHeader;
- * }}</pre>
+ * }</code></pre>
  */
 public class VkVideoDecodeAV1InlineSessionParametersInfoKHR extends Struct<VkVideoDecodeAV1InlineSessionParametersInfoKHR> implements NativeResource {
 

@@ -15,7 +15,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_FaceRec {
  *     FT_Long num_faces;
  *     FT_Long face_index;
@@ -48,7 +48,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link FT_Generic FT_Generic} autohint;
  *     void * extensions;
  *     FT_Face_Internal internal;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct FT_FaceRec")
 public class FT_Face extends Struct<FT_Face> {
@@ -94,6 +94,10 @@ public class FT_Face extends Struct<FT_Face> {
         INTERNAL;
 
     static {
+        FT_Generic.createSafe(NULL);
+        FT_BBox.createSafe(NULL);
+        FT_List.createSafe(NULL);
+
         Layout layout = __struct(
             __member(CLONG_SIZE),
             __member(CLONG_SIZE),
@@ -341,13 +345,13 @@ public class FT_Face extends Struct<FT_Face> {
     public static @Nullable FT_Size nsize(long struct) { return FT_Size.createSafe(memGetAddress(struct + FT_Face.SIZE)); }
     /** Unsafe version of {@link #charmap}. */
     public static @Nullable FT_CharMap ncharmap(long struct) { return FT_CharMap.createSafe(memGetAddress(struct + FT_Face.CHARMAP)); }
-    public static long ndriver(long struct) { return memGetAddress(struct + FT_Face.DRIVER); }
-    public static @Nullable FT_Memory nmemory(long struct) { return FT_Memory.createSafe(memGetAddress(struct + FT_Face.MEMORY)); }
-    public static @Nullable FT_Stream nstream$(long struct) { return FT_Stream.createSafe(memGetAddress(struct + FT_Face.STREAM)); }
-    public static FT_List nsizes_list(long struct) { return FT_List.create(struct + FT_Face.SIZES_LIST); }
-    public static FT_Generic nautohint(long struct) { return FT_Generic.create(struct + FT_Face.AUTOHINT); }
-    public static long nextensions(long struct) { return memGetAddress(struct + FT_Face.EXTENSIONS); }
-    public static long ninternal(long struct) { return memGetAddress(struct + FT_Face.INTERNAL); }
+    static long ndriver(long struct) { return memGetAddress(struct + FT_Face.DRIVER); }
+    static @Nullable FT_Memory nmemory(long struct) { return FT_Memory.createSafe(memGetAddress(struct + FT_Face.MEMORY)); }
+    static @Nullable FT_Stream nstream$(long struct) { return FT_Stream.createSafe(memGetAddress(struct + FT_Face.STREAM)); }
+    static FT_List nsizes_list(long struct) { return FT_List.create(struct + FT_Face.SIZES_LIST); }
+    static FT_Generic nautohint(long struct) { return FT_Generic.create(struct + FT_Face.AUTOHINT); }
+    static long nextensions(long struct) { return memGetAddress(struct + FT_Face.EXTENSIONS); }
+    static long ninternal(long struct) { return memGetAddress(struct + FT_Face.INTERNAL); }
 
     // -----------------------------------
 

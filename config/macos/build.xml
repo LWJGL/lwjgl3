@@ -138,7 +138,13 @@
     </macrodef>
 
     <target name="compile-native-platform">
-        <echo message="${sdkroot}" taskname="SDK Root"/>
+        <sequential if:set="clang.version.print">
+            <echo message="${sdkroot}" taskname="SDK Root"/>
+            <exec executable="sh" logError="true" failonerror="false" taskname="Compiler">
+                <arg line="-o pipefail -c"/>
+                <arg value='clang --version | grep "clang version"'/>
+            </exec>
+        </sequential>
 
         <parallel threadsPerProcessor="2">
 
@@ -209,9 +215,10 @@
         <!-- msdfgen -->
         <build module="msdfgen" simple="true" linker="clang++" if:true="${binding.msdfgen}">
             <beforeCompile>
-                <compile lang="c++">
+                <compile flags="-DMSDFGEN_DYNAMIC_FREETYPE" lang="c++">
                     <arg value="-I${src.main.rel}"/>
-                    <fileset dir="." includes="${src.main}/*.cpp"/>
+                    <fileset dir="." includes="${src.main}/core/*.cpp"/>
+                    <fileset dir="." includes="${src.main}/ext/*.cpp"/>
                 </compile>
             </beforeCompile>
         </build>
@@ -360,9 +367,13 @@
             <update-dependency module="glfw" artifact="libglfw.dylib"/>
             <update-dependency module="glfw" artifact="libglfw_async.dylib"/>
             <update-dependency module="harfbuzz" artifact="libharfbuzz.dylib"/>
+                <update-dependency module="harfbuzz" artifact="libharfbuzz-gpu.dylib"/>
+                <update-dependency module="harfbuzz" artifact="libharfbuzz-raster.dylib"/>
+                <update-dependency module="harfbuzz" artifact="libharfbuzz-vector.dylib"/>
             <update-dependency module="hwloc" artifact="libhwloc.dylib"/>
             <update-dependency module="jemalloc" artifact="libjemalloc.dylib"/>
             <update-dependency module="ktx" artifact="libktx.dylib"/>
+            <update-dependency module="mimalloc" artifact="libmimalloc.dylib"/>
             <update-dependency module="openal" artifact="libopenal.dylib"/>
             <update-dependency module="opus" artifact="libopus.dylib"/>
             <update-dependency module="sdl" artifact="libSDL3.dylib"/>

@@ -17,12 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct aiSkeleton {
  *     {@link AIString struct aiString} mName;
  *     unsigned int mNumBones;
  *     {@link AISkeletonBone struct aiSkeletonBone} ** mBones;
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct aiSkeleton")
 public class AISkeleton extends Struct<AISkeleton> implements NativeResource {
@@ -40,6 +40,8 @@ public class AISkeleton extends Struct<AISkeleton> implements NativeResource {
         MBONES;
 
     static {
+        AIString.createSafe(NULL);
+
         Layout layout = __struct(
             __member(AIString.SIZEOF, AIString.ALIGNOF),
             __member(4),

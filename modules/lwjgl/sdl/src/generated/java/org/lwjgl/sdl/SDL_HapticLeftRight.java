@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * <pre>{@code
  * struct SDL_HapticLeftRight {
- *     Uint16 type;
+ *     SDL_HapticEffectType type;
  *     Uint32 length;
  *     Uint16 large_magnitude;
  *     Uint16 small_magnitude;
@@ -79,7 +79,7 @@ public class SDL_HapticLeftRight extends Struct<SDL_HapticLeftRight> implements 
     public int sizeof() { return SIZEOF; }
 
     /** @return the value of the {@code type} field. */
-    @NativeType("Uint16")
+    @NativeType("SDL_HapticEffectType")
     public short type() { return ntype(address()); }
     /** @return the value of the {@code length} field. */
     @NativeType("Uint32")
@@ -92,7 +92,7 @@ public class SDL_HapticLeftRight extends Struct<SDL_HapticLeftRight> implements 
     public short small_magnitude() { return nsmall_magnitude(address()); }
 
     /** Sets the specified value to the {@code type} field. */
-    public SDL_HapticLeftRight type(@NativeType("Uint16") short value) { ntype(address(), value); return this; }
+    public SDL_HapticLeftRight type(@NativeType("SDL_HapticEffectType") short value) { ntype(address(), value); return this; }
     /** Sets the specified value to the {@code length} field. */
     public SDL_HapticLeftRight length(@NativeType("Uint32") int value) { nlength(address(), value); return this; }
     /** Sets the specified value to the {@code large_magnitude} field. */
@@ -300,7 +300,7 @@ public class SDL_HapticLeftRight extends Struct<SDL_HapticLeftRight> implements 
         }
 
         /** @return the value of the {@code type} field. */
-        @NativeType("Uint16")
+        @NativeType("SDL_HapticEffectType")
         public short type() { return SDL_HapticLeftRight.ntype(address()); }
         /** @return the value of the {@code length} field. */
         @NativeType("Uint32")
@@ -313,7 +313,7 @@ public class SDL_HapticLeftRight extends Struct<SDL_HapticLeftRight> implements 
         public short small_magnitude() { return SDL_HapticLeftRight.nsmall_magnitude(address()); }
 
         /** Sets the specified value to the {@code type} field. */
-        public SDL_HapticLeftRight.Buffer type(@NativeType("Uint16") short value) { SDL_HapticLeftRight.ntype(address(), value); return this; }
+        public SDL_HapticLeftRight.Buffer type(@NativeType("SDL_HapticEffectType") short value) { SDL_HapticLeftRight.ntype(address(), value); return this; }
         /** Sets the specified value to the {@code length} field. */
         public SDL_HapticLeftRight.Buffer length(@NativeType("Uint32") int value) { SDL_HapticLeftRight.nlength(address(), value); return this; }
         /** Sets the specified value to the {@code large_magnitude} field. */

@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrCompositionLayerProjectionView {
  *     XrStructureType type;
  *     void const * next;
  *     {@link XrPosef XrPosef} pose;
  *     {@link XrFovf XrFovf} fov;
  *     {@link XrSwapchainSubImage XrSwapchainSubImage} subImage;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrCompositionLayerProjectionView extends Struct<XrCompositionLayerProjectionView> implements NativeResource {
 
@@ -42,6 +42,10 @@ public class XrCompositionLayerProjectionView extends Struct<XrCompositionLayerP
         SUBIMAGE;
 
     static {
+        XrPosef.createSafe(NULL);
+        XrFovf.createSafe(NULL);
+        XrSwapchainSubImage.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),

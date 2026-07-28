@@ -10,7 +10,7 @@ import openxr.*
 
 val KHR_extended_struct_name_lengths = "KHRExtendedStructNameLengths".nativeClassXR("KHR_extended_struct_name_lengths", type = "instance", postfix = "KHR") {
     IntConstant(
-        "KHR_extended_struct_name_lengths_SPEC_VERSION".."1"
+        "KHR_extended_struct_name_lengths_SPEC_VERSION".."2"
     )
 
     StringConstant(

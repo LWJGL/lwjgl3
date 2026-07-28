@@ -319,8 +319,8 @@ public class SDL_GPUColorTargetBlendState extends Struct<SDL_GPUColorTargetBlend
     public static boolean nenable_blend(long struct) { return memGetByte(struct + SDL_GPUColorTargetBlendState.ENABLE_BLEND) != 0; }
     /** Unsafe version of {@link #enable_color_write_mask}. */
     public static boolean nenable_color_write_mask(long struct) { return memGetByte(struct + SDL_GPUColorTargetBlendState.ENABLE_COLOR_WRITE_MASK) != 0; }
-    public static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUColorTargetBlendState.PADDING1); }
-    public static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUColorTargetBlendState.PADDING2); }
+    static byte npadding1(long struct) { return memGetByte(struct + SDL_GPUColorTargetBlendState.PADDING1); }
+    static byte npadding2(long struct) { return memGetByte(struct + SDL_GPUColorTargetBlendState.PADDING2); }
 
     /** Unsafe version of {@link #src_color_blendfactor(int) src_color_blendfactor}. */
     public static void nsrc_color_blendfactor(long struct, int value) { memPutInt(struct + SDL_GPUColorTargetBlendState.SRC_COLOR_BLENDFACTOR, value); }
@@ -340,8 +340,8 @@ public class SDL_GPUColorTargetBlendState extends Struct<SDL_GPUColorTargetBlend
     public static void nenable_blend(long struct, boolean value) { memPutByte(struct + SDL_GPUColorTargetBlendState.ENABLE_BLEND, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #enable_color_write_mask(boolean) enable_color_write_mask}. */
     public static void nenable_color_write_mask(long struct, boolean value) { memPutByte(struct + SDL_GPUColorTargetBlendState.ENABLE_COLOR_WRITE_MASK, value ? (byte)1 : (byte)0); }
-    public static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUColorTargetBlendState.PADDING1, value); }
-    public static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUColorTargetBlendState.PADDING2, value); }
+    static void npadding1(long struct, byte value) { memPutByte(struct + SDL_GPUColorTargetBlendState.PADDING1, value); }
+    static void npadding2(long struct, byte value) { memPutByte(struct + SDL_GPUColorTargetBlendState.PADDING2, value); }
 
     // -----------------------------------
 

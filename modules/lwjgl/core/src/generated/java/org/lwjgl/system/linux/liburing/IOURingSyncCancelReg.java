@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.system.linux.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct io_uring_sync_cancel_reg {
  *     __u64 addr;
  *     __s32 fd;
@@ -28,7 +28,7 @@ import org.lwjgl.system.linux.*;
  *     __u8 opcode;
  *     __u8 pad[7];
  *     __u64 pad2[3];
- * }}</pre>
+ * }</code></pre>
  */
 @NativeType("struct io_uring_sync_cancel_reg")
 public class IOURingSyncCancelReg extends Struct<IOURingSyncCancelReg> implements NativeResource {
@@ -50,6 +50,8 @@ public class IOURingSyncCancelReg extends Struct<IOURingSyncCancelReg> implement
         PAD2;
 
     static {
+        KernelTimespec.createSafe(NULL);
+
         Layout layout = __struct(
             __member(8),
             __member(4),
@@ -273,12 +275,12 @@ public class IOURingSyncCancelReg extends Struct<IOURingSyncCancelReg> implement
     public static KernelTimespec ntimeout(long struct) { return KernelTimespec.create(struct + IOURingSyncCancelReg.TIMEOUT); }
     /** Unsafe version of {@link #opcode}. */
     public static byte nopcode(long struct) { return memGetByte(struct + IOURingSyncCancelReg.OPCODE); }
-    public static ByteBuffer npad(long struct) { return memByteBuffer(struct + IOURingSyncCancelReg.PAD, 7); }
-    public static byte npad(long struct, int index) {
+    static ByteBuffer npad(long struct) { return memByteBuffer(struct + IOURingSyncCancelReg.PAD, 7); }
+    static byte npad(long struct, int index) {
         return memGetByte(struct + IOURingSyncCancelReg.PAD + check(index, 7) * 1);
     }
-    public static LongBuffer npad2(long struct) { return memLongBuffer(struct + IOURingSyncCancelReg.PAD2, 3); }
-    public static long npad2(long struct, int index) {
+    static LongBuffer npad2(long struct) { return memLongBuffer(struct + IOURingSyncCancelReg.PAD2, 3); }
+    static long npad2(long struct, int index) {
         return memGetLong(struct + IOURingSyncCancelReg.PAD2 + check(index, 3) * 8);
     }
 
@@ -292,18 +294,18 @@ public class IOURingSyncCancelReg extends Struct<IOURingSyncCancelReg> implement
     public static void ntimeout(long struct, KernelTimespec value) { memCopy(value.address(), struct + IOURingSyncCancelReg.TIMEOUT, KernelTimespec.SIZEOF); }
     /** Unsafe version of {@link #opcode(byte) opcode}. */
     public static void nopcode(long struct, byte value) { memPutByte(struct + IOURingSyncCancelReg.OPCODE, value); }
-    public static void npad(long struct, ByteBuffer value) {
+    static void npad(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 7); }
         memCopy(memAddress(value), struct + IOURingSyncCancelReg.PAD, value.remaining() * 1);
     }
-    public static void npad(long struct, int index, byte value) {
+    static void npad(long struct, int index, byte value) {
         memPutByte(struct + IOURingSyncCancelReg.PAD + check(index, 7) * 1, value);
     }
-    public static void npad2(long struct, LongBuffer value) {
+    static void npad2(long struct, LongBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
         memCopy(memAddress(value), struct + IOURingSyncCancelReg.PAD2, value.remaining() * 8);
     }
-    public static void npad2(long struct, int index, long value) {
+    static void npad2(long struct, int index, long value) {
         memPutLong(struct + IOURingSyncCancelReg.PAD2 + check(index, 3) * 8, value);
     }
 

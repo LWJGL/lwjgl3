@@ -19,12 +19,12 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.util.freetype.FreeType.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct FT_Multi_Master {
  *     FT_UInt num_axis;
  *     FT_UInt num_designs;
  *     {@link FT_MM_Axis FT_MM_Axis} axis[T1_MAX_MM_AXIS];
- * }}</pre>
+ * }</code></pre>
  */
 public class FT_Multi_Master extends Struct<FT_Multi_Master> implements NativeResource {
 
@@ -41,6 +41,8 @@ public class FT_Multi_Master extends Struct<FT_Multi_Master> implements NativeRe
         AXIS;
 
     static {
+        FT_MM_Axis.createSafe(NULL);
+
         Layout layout = __struct(
             __member(4),
             __member(4),

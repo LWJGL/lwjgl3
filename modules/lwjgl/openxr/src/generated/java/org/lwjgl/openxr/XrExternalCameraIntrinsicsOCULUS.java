@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <pre>{@code
+ * <pre><code>
  * struct XrExternalCameraIntrinsicsOCULUS {
  *     XrTime lastChangeTime;
  *     {@link XrFovf XrFovf} fov;
  *     float virtualNearPlaneDistance;
  *     float virtualFarPlaneDistance;
  *     {@link XrExtent2Di XrExtent2Di} imageSensorPixelResolution;
- * }}</pre>
+ * }</code></pre>
  */
 public class XrExternalCameraIntrinsicsOCULUS extends Struct<XrExternalCameraIntrinsicsOCULUS> implements NativeResource {
 
@@ -42,6 +42,9 @@ public class XrExternalCameraIntrinsicsOCULUS extends Struct<XrExternalCameraInt
         IMAGESENSORPIXELRESOLUTION;
 
     static {
+        XrFovf.createSafe(NULL);
+        XrExtent2Di.createSafe(NULL);
+
         Layout layout = __struct(
             __member(8),
             __member(XrFovf.SIZEOF, XrFovf.ALIGNOF),
