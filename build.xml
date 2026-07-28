@@ -1214,6 +1214,7 @@
         <element name="linux-arm32-content" optional="true"/>
         <element name="linux-ppc64le-content" optional="true"/>
         <element name="linux-riscv64-content" optional="true"/>
+        <element name="linux-loongarch64-content" optional="true"/>
         <element name="macos-content" optional="true"/>
         <element name="macos-arm64-content" optional="true"/>
         <element name="windows-content" optional="true"/>
@@ -1252,6 +1253,9 @@
 
                 <get-release platform="linux" arch="riscv64" file="lib@{native-library}.so" if:set="auto-natives"/>
                 <get-release platform="linux" arch="riscv64" file="lib@{native-library}.so.git" if:set="git-revision"/>
+
+                <get-release platform="linux" arch="loongarch64" file="lib@{native-library}.so" if:set="auto-natives"/>
+                <get-release platform="linux" arch="loongarch64" file="lib@{native-library}.so.git" if:set="git-revision"/>
 
                 <get-release platform="macos" arch="x64" file="lib@{native-library}.dylib" if:set="auto-natives"/>
                 <get-release platform="macos" arch="x64" file="lib@{native-library}.dylib.git" if:set="git-revision"/>
@@ -1329,6 +1333,9 @@
                     <natives-jar name="@{name}" title="@{title}" platform="linux-riscv64" path="linux/riscv64" type="so">
                         <linux-riscv64-content/>
                     </natives-jar>
+                    <natives-jar name="@{name}" title="@{title}" platform="linux-loongarch64" path="linux/loongarch64" type="so">
+                        <linux-loongarch64-content/>
+                    </natives-jar>
                     <natives-jar name="@{name}" title="@{title}" platform="macos" path="macos/x64" type="dylib">
                         <macos-content/>
                     </natives-jar>
@@ -1360,6 +1367,7 @@
         <element name="linux-arm32" optional="true"/>
         <element name="linux-ppc64le" optional="true"/>
         <element name="linux-riscv64" optional="true"/>
+        <element name="linux-loongarch64" optional="true"/>
         <element name="macos" optional="true"/>
         <element name="macos-arm64" optional="true"/>
         <element name="windows" optional="true"/>
@@ -1390,6 +1398,7 @@
                 <linux-arm32-content><linux-arm32/></linux-arm32-content>
                 <linux-ppc64le-content><linux-ppc64le/></linux-ppc64le-content>
                 <linux-riscv64-content><linux-riscv64/></linux-riscv64-content>
+                <linux-loongarch64-content><linux-loongarch64/></linux-loongarch64-content>
                 <macos-content><macos/></macos-content>
                 <macos-arm64-content><macos-arm64/></macos-arm64-content>
                 <windows-content><windows/></windows-content>
@@ -1649,6 +1658,10 @@
                 <get-release platform="linux" arch="riscv64" file="libassimp.so.git"/>
                 <get-release platform="linux" arch="riscv64" file="libdraco.so"/>
 
+                <get-release platform="linux" arch="loongarch64" file="libassimp.so"/>
+                <get-release platform="linux" arch="loongarch64" file="libassimp.so.git"/>
+                <get-release platform="linux" arch="loongarch64" file="libdraco.so"/>
+
                 <get-release platform="macos" arch="x64" file="libassimp.dylib"/>
                 <get-release platform="macos" arch="x64" file="libassimp.dylib.git"/>
                 <get-release platform="macos" arch="x64" file="libdraco.dylib"/>
@@ -1691,6 +1704,9 @@
 
                 <get-release platform="linux" arch="riscv64" file="libbgfx.so"/>
                 <get-release platform="linux" arch="riscv64" file="libbgfx.so.git"/>
+
+                <get-release platform="linux" arch="loongarch64" file="libbgfx.so"/>
+                <get-release platform="linux" arch="loongarch64" file="libbgfx.so.git"/>
 
                 <get-release platform="macos" arch="x64" file="libbgfx.dylib"/>
                 <get-release platform="macos" arch="x64" file="libbgfx.dylib.git"/>
@@ -1735,6 +1751,9 @@
 
                 <get-release platform="linux" arch="riscv64" file="libglfw.so"/>
                 <get-release platform="linux" arch="riscv64" file="libglfw.so.git"/>
+
+                <get-release platform="linux" arch="loongarch64" file="libglfw.so"/>
+                <get-release platform="linux" arch="loongarch64" file="libglfw.so.git"/>
 
                 <get-release platform="macos" arch="x64" file="libglfw.dylib"/>
                 <get-release platform="macos" arch="x64" file="libglfw.dylib.git"/>
@@ -1858,6 +1877,9 @@
                 <get-release platform="linux" arch="riscv64" file="libktx.so"/>
                 <get-release platform="linux" arch="riscv64" file="libktx.so.git"/>
 
+                <get-release platform="linux" arch="loongarch64" file="libktx.so"/>
+                <get-release platform="linux" arch="loongarch64" file="libktx.so.git"/>
+
                 <get-release platform="macos" arch="x64" file="libktx.dylib"/>
                 <get-release platform="macos" arch="x64" file="libktx.dylib.git"/>
 
@@ -1903,6 +1925,7 @@
                 <get-release platform="linux" arch="arm32" file="liblwjgl_nfd_portal.so"/>
                 <get-release platform="linux" arch="ppc64le" file="liblwjgl_nfd_portal.so"/>
                 <get-release platform="linux" arch="riscv64" file="liblwjgl_nfd_portal.so"/>
+                <get-release platform="linux" arch="loongarch64" file="liblwjgl_nfd_portal.so"/>
             </natives>
         </release-module>
 
@@ -1932,6 +1955,9 @@
 
                 <get-release platform="linux" arch="riscv64" file="libopenal.so"/>
                 <get-release platform="linux" arch="riscv64" file="libopenal.so.git"/>
+
+                <get-release platform="linux" arch="loongarch64" file="libopenal.so"/>
+                <get-release platform="linux" arch="loongarch64" file="libopenal.so.git"/>
 
                 <get-release platform="macos" arch="x64" file="libopenal.dylib"/>
                 <get-release platform="macos" arch="x64" file="libopenal.dylib.git"/>
@@ -1980,6 +2006,9 @@
                 <get-release platform="linux" arch="riscv64" file="libopenxr_loader.so"/>
                 <get-release platform="linux" arch="riscv64" file="libopenxr_loader.so.git"/>
 
+                <get-release platform="linux" arch="loongarch64" file="libopenxr_loader.so"/>
+                <get-release platform="linux" arch="loongarch64" file="libopenxr_loader.so.git"/>
+
                 <get-release platform="windows" arch="x64" file="openxr-loader.dll"/>
                 <get-release platform="windows" arch="x64" file="openxr-loader.dll.git"/>
 
@@ -2007,6 +2036,7 @@
                 <get-release platform="linux" arch="arm32" file="liblwjgl_remotery.so"/>
                 <get-release platform="linux" arch="ppc64le" file="liblwjgl_remotery.so"/>
                 <get-release platform="linux" arch="riscv64" file="liblwjgl_remotery.so"/>
+                <get-release platform="linux" arch="loongarch64" file="liblwjgl_remotery.so"/>
 
                 <get-release platform="macos" arch="x64" file="liblwjgl_remotery.dylib"/>
                 <get-release platform="macos" arch="arm64" file="liblwjgl_remotery.dylib"/>
