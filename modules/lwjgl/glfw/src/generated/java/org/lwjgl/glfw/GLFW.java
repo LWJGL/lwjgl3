@@ -460,6 +460,8 @@ public class GLFW {
 
     public static final int GLFW_ANGLE_PLATFORM_TYPE = 0x50002;
 
+    public static final int GLFW_ANGLE_SURFACE_DIRECT_COMPOSITION = 0x50004;
+
     public static final int GLFW_ANY_POSITION = 0x80000000;
 
     public static final int GLFW_PLATFORM = 0x50003;

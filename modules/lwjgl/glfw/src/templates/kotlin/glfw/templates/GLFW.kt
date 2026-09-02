@@ -329,6 +329,10 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     )
 
     IntConstant(
+        "ANGLE_SURFACE_DIRECT_COMPOSITION"..0x00050004
+    )
+
+    IntConstant(
         "ANY_POSITION"..0x80000000.i
     )
 
