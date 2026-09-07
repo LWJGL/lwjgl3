@@ -1209,6 +1209,7 @@
         <attribute name="native-library"/>
         <element name="content" optional="true"/>
         <element name="freebsd-content" optional="true"/>
+        <element name="freebsd-ppc64le-content" optional="true"/>
         <element name="linux-content" optional="true"/>
         <element name="linux-arm64-content" optional="true"/>
         <element name="linux-arm32-content" optional="true"/>
@@ -1237,6 +1238,9 @@
             <parallel threadsPerProcessor="4" failonany="true">
                 <get-release platform="freebsd" arch="x64" file="lib@{native-library}.so" if:set="auto-natives"/>
                 <get-release platform="freebsd" arch="x64" file="lib@{native-library}.so.git" if:set="git-revision"/>
+
+                <get-release platform="freebsd" arch="ppc64le" file="lib@{native-library}.so" if:set="auto-natives"/>
+                <get-release platform="freebsd" arch="ppc64le" file="lib@{native-library}.so.git" if:set="git-revision"/>
 
                 <get-release platform="linux" arch="x64" file="lib@{native-library}.so" if:set="auto-natives"/>
                 <get-release platform="linux" arch="x64" file="lib@{native-library}.so.git" if:set="git-revision"/>
@@ -1314,6 +1318,9 @@
                     <natives-jar name="@{name}" title="@{title}" platform="freebsd" path="freebsd/x64" type="so">
                         <freebsd-content/>
                     </natives-jar>
+                    <natives-jar name="@{name}" title="@{title}" platform="freebsd-ppc64le" path="freebsd/ppc64le" type="so">
+                        <freebsd-ppc64le-content/>
+                    </natives-jar>
                     <natives-jar name="@{name}" title="@{title}" platform="linux" path="linux/x64" type="so">
                         <linux-content/>
                     </natives-jar>
@@ -1355,6 +1362,7 @@
         <attribute name="native-library" default=""/>
         <element name="natives" optional="true"/>
         <element name="freebsd" optional="true"/>
+        <element name="freebsd-ppc64le" optional="true"/>
         <element name="linux" optional="true"/>
         <element name="linux-arm64" optional="true"/>
         <element name="linux-arm32" optional="true"/>
@@ -1385,6 +1393,7 @@
             <release-natives name="@{name}" title="@{title}" native-library="@{native-library}" unless:set="java-only.binding.@{name}">
                 <content><natives/></content>
                 <freebsd-content><freebsd/></freebsd-content>
+                <freebsd-ppc64le-content><freebsd-ppc64le/></freebsd-ppc64le-content>
                 <linux-content><linux/></linux-content>
                 <linux-arm64-content><linux-arm64/></linux-arm64-content>
                 <linux-arm32-content><linux-arm32/></linux-arm32-content>
@@ -1865,6 +1874,7 @@
         <release-module name="nfd" native-library="lwjgl_nfd" title="Native File Dialog" if:true="${binding.nfd}">
             <natives>
                 <get-release platform="freebsd" arch="x64" file="liblwjgl_nfd_portal.so"/>
+                <get-release platform="freebsd" arch="ppc64le" file="liblwjgl_nfd_portal.so"/>
 
                 <get-release platform="linux" arch="x64" file="liblwjgl_nfd_portal.so"/>
                 <get-release platform="linux" arch="arm64" file="liblwjgl_nfd_portal.so"/>
@@ -1969,6 +1979,7 @@
         <release-module name="remotery" title="remotery" if:true="${binding.remotery}">
             <natives>
                 <get-release platform="freebsd" arch="x64" file="liblwjgl_remotery.so"/>
+                <get-release platform="freebsd" arch="ppc64le" file="liblwjgl_remotery.so"/>
 
                 <get-release platform="linux" arch="x64" file="liblwjgl_remotery.so"/>
                 <get-release platform="linux" arch="arm64" file="liblwjgl_remotery.so"/>

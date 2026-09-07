@@ -145,6 +145,7 @@
                 <arg value="-I${src.main.rel}/libffi"/>
                 <arg value="-I${src.main.rel}/libffi/aarch64" if:set="build.arch.arm64"/>
                 <arg value="-I${src.main.rel}/libffi/arm" if:set="build.arch.arm32"/>
+                <arg value="-I${src.main.rel}/libffi/ppc64le" if:set="build.arch.ppc64le"/>
                 <arg value="-I${src.main.rel}/libffi/x86" if:set="build.arch.x64|x86"/>
                 <!-- for libffi/x86/ffitarget.h -->
                 <arg value="-DX86_64" if:set="build.arch.x64"/>
