@@ -114,6 +114,19 @@ val hb_ot = "OpenType".nativeClass(Module.HARFBUZZ, prefix = "HB_OT", prefixMeth
     )
 
     hb_bool_t(
+        "color_has_paint",
+
+        hb_face_t.p("face")
+    )
+
+    hb_bool_t(
+        "color_glyph_has_paint",
+
+        hb_face_t.p("face"),
+        hb_codepoint_t("glyph")
+    )
+
+    hb_bool_t(
         "color_has_svg",
 
         hb_face_t.p("face")

@@ -40,6 +40,8 @@ public class OpenType {
             color_palette_get_colors                      = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_color_palette_get_colors"),
             color_has_layers                              = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_color_has_layers"),
             color_glyph_get_layers                        = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_color_glyph_get_layers"),
+            color_has_paint                               = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_color_has_paint"),
+            color_glyph_has_paint                         = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_color_glyph_has_paint"),
             color_has_svg                                 = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_color_has_svg"),
             color_get_svg_document_count                  = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_color_get_svg_document_count"),
             color_glyph_get_svg_document_index            = apiGetFunctionAddress(HarfBuzz.getLibrary(), "hb_ot_color_glyph_get_svg_document_index"),
@@ -475,6 +477,30 @@ public class OpenType {
             if (layer_count != null) { checkSafe(layers, layer_count.get(layer_count.position())); }
         }
         return nhb_ot_color_glyph_get_layers(face, glyph, start_offset, memAddressSafe(layer_count), memAddressSafe(layers));
+    }
+
+    // --- [ hb_ot_color_has_paint ] ---
+
+    /** {@code hb_bool_t hb_ot_color_has_paint(hb_face_t * face)} */
+    @NativeType("hb_bool_t")
+    public static boolean hb_ot_color_has_paint(@NativeType("hb_face_t *") long face) {
+        long __functionAddress = Functions.color_has_paint;
+        if (CHECKS) {
+            check(face);
+        }
+        return invokePI(face, __functionAddress) != 0;
+    }
+
+    // --- [ hb_ot_color_glyph_has_paint ] ---
+
+    /** {@code hb_bool_t hb_ot_color_glyph_has_paint(hb_face_t * face, hb_codepoint_t glyph)} */
+    @NativeType("hb_bool_t")
+    public static boolean hb_ot_color_glyph_has_paint(@NativeType("hb_face_t *") long face, @NativeType("hb_codepoint_t") int glyph) {
+        long __functionAddress = Functions.color_glyph_has_paint;
+        if (CHECKS) {
+            check(face);
+        }
+        return invokePI(face, glyph, __functionAddress) != 0;
     }
 
     // --- [ hb_ot_color_has_svg ] ---
