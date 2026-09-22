@@ -425,6 +425,10 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     )
 
     IntConstant(
+        "WIN32_NO_REDIRECTION_BITMAP"..0x00025003
+    )
+
+    IntConstant(
         "WAYLAND_APP_ID"..0x00026001
     )
 

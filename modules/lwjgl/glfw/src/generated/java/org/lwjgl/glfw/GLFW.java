@@ -533,6 +533,8 @@ public class GLFW {
 
     public static final int GLFW_WIN32_SHOWDEFAULT = 0x25002;
 
+    public static final int GLFW_WIN32_NO_REDIRECTION_BITMAP = 0x25003;
+
     public static final int GLFW_WAYLAND_APP_ID = 0x26001;
 
     public static final int
