@@ -48,7 +48,7 @@ val KHR_debug = "KHRDebug".nativeClassEGL("KHR_debug", postfix = KHR) {
 
         EGLDisplay("display"),
         EGLenum("objectType"),
-        EGLObjectKHR("object"),
-        EGLLabelKHR("label")
+        nullable..EGLObjectKHR("object"),
+        nullable..EGLLabelKHR("label")
     )
 }

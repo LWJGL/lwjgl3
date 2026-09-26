@@ -87,8 +87,6 @@ public class KHRDebug {
         if (CHECKS) {
             check(__functionAddress);
             check(display);
-            check(object);
-            check(label);
         }
         return callPPPI(display, objectType, object, label, __functionAddress);
     }
