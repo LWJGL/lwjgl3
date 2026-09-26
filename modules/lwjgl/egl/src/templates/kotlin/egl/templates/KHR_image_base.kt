@@ -20,9 +20,9 @@ val KHR_image_base = "KHRImageBase".nativeClassEGL("KHR_image_base", postfix = K
         "CreateImageKHR",
 
         EGLDisplay("dpy"),
-        EGLContext("ctx"),
+        nullable..EGLContext("ctx"),
         EGLenum("target"),
-        EGLClientBuffer("buffer"),
+        nullable..EGLClientBuffer("buffer"),
         nullable..noneTerminated..EGLint.const.p("attrib_list")
     )
 

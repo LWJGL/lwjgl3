@@ -95,9 +95,9 @@ val EGL15 = "EGL15".nativeClassEGL("EGL15", postfix = "") {
         "CreateImage",
 
         EGLDisplay("dpy"),
-        EGLContext("ctx"),
+        nullable..EGLContext("ctx"),
         EGLenum("target"),
-        EGLClientBuffer("buffer"),
+        nullable..EGLClientBuffer("buffer"),
         nullable..noneTerminated..EGLAttrib.const.p("attrib_list")
     )
 
