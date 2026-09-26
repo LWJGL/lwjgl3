@@ -32,7 +32,7 @@ val KHR_debug = "KHRDebug".nativeClassEGL("KHR_debug", postfix = KHR) {
     EGLint(
         "DebugMessageControlKHR",
 
-        EGLDEBUGPROCKHR("callback"),
+        nullable..EGLDEBUGPROCKHR("callback"),
         nullable..noneTerminated..EGLAttrib.const.p("attrib_list")
     )
 
