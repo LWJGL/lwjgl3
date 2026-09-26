@@ -63,7 +63,7 @@ val EGL15 = "EGL15".nativeClassEGL("EGL15", postfix = "") {
 
         EGLDisplay("dpy"),
         EGLenum("type"),
-        noneTerminated..EGLAttrib.const.p("attrib_list")
+        nullable..noneTerminated..EGLAttrib.const.p("attrib_list")
     )
 
     EGLBoolean(
