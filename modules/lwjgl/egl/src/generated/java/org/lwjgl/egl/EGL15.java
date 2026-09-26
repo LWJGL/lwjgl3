@@ -183,7 +183,6 @@ public class EGL15 extends EGL14 {
         long __functionAddress = EGL.getCapabilities().eglGetPlatformDisplay;
         if (CHECKS) {
             check(__functionAddress);
-            check(native_display);
         }
         return callPPP(platform, native_display, attrib_list, __functionAddress);
     }

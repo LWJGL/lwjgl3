@@ -28,7 +28,6 @@ public class EXTPlatformBase {
         long __functionAddress = EGL.getCapabilities().eglGetPlatformDisplayEXT;
         if (CHECKS) {
             check(__functionAddress);
-            check(native_display);
         }
         return callPPP(platform, native_display, attrib_list, __functionAddress);
     }
@@ -94,7 +93,6 @@ public class EXTPlatformBase {
         long __functionAddress = EGL.getCapabilities().eglGetPlatformDisplayEXT;
         if (CHECKS) {
             check(__functionAddress);
-            check(native_display);
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
         return callPPP(platform, native_display, attrib_list, __functionAddress);
