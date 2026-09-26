@@ -132,7 +132,6 @@ public class EGL10 {
         if (CHECKS) {
             check(__functionAddress);
             check(dpy);
-            check(config);
         }
         return callPPPPP(dpy, config, share_context, attrib_list, __functionAddress);
     }
@@ -534,7 +533,6 @@ public class EGL10 {
         if (CHECKS) {
             check(__functionAddress);
             check(dpy);
-            check(config);
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
         return callPPPPP(dpy, config, share_context, attrib_list, __functionAddress);

@@ -95,7 +95,7 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
         "CreateContext",
 
         EGLDisplay("dpy"),
-        EGLConfig("config"),
+        nullable..EGLConfig("config"),
         nullable..EGLContext("share_context"),
         nullable..noneTerminated..EGLint.const.p("attrib_list")
     )
