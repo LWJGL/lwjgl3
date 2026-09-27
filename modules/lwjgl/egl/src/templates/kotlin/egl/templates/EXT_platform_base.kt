@@ -12,7 +12,7 @@ val EXT_platform_base = "EXTPlatformBase".nativeClassEGL("EXT_platform_base", po
         "GetPlatformDisplayEXT",
 
         EGLenum("platform"),
-        opaque_p("native_display"),
+        nullable..opaque_p("native_display"),
         nullable..noneTerminated..EGLint.const.p("attrib_list")
     )
 

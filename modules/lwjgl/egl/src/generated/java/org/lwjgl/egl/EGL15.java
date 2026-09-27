@@ -82,11 +82,11 @@ public class EGL15 extends EGL14 {
 
     /** {@code EGLSync eglCreateSync(EGLDisplay dpy, EGLenum type, EGLAttrib const * attrib_list)} */
     @NativeType("EGLSync")
-    public static long eglCreateSync(@NativeType("EGLDisplay") long dpy, @NativeType("EGLenum") int type, @NativeType("EGLAttrib const *") PointerBuffer attrib_list) {
+    public static long eglCreateSync(@NativeType("EGLDisplay") long dpy, @NativeType("EGLenum") int type, @NativeType("EGLAttrib const *") @Nullable PointerBuffer attrib_list) {
         if (CHECKS) {
-            checkNT(attrib_list, EGL10.EGL_NONE);
+            checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
-        return neglCreateSync(dpy, type, memAddress(attrib_list));
+        return neglCreateSync(dpy, type, memAddressSafe(attrib_list));
     }
 
     // --- [ eglDestroySync ] ---
@@ -147,8 +147,6 @@ public class EGL15 extends EGL14 {
         if (CHECKS) {
             check(__functionAddress);
             check(dpy);
-            check(ctx);
-            check(buffer);
         }
         return callPPPPP(dpy, ctx, target, buffer, attrib_list, __functionAddress);
     }
@@ -183,7 +181,6 @@ public class EGL15 extends EGL14 {
         long __functionAddress = EGL.getCapabilities().eglGetPlatformDisplay;
         if (CHECKS) {
             check(__functionAddress);
-            check(native_display);
         }
         return callPPP(platform, native_display, attrib_list, __functionAddress);
     }

@@ -33,8 +33,6 @@ public class KHRImageBase {
         if (CHECKS) {
             check(__functionAddress);
             check(dpy);
-            check(ctx);
-            check(buffer);
         }
         return callPPPPP(dpy, ctx, target, buffer, attrib_list, __functionAddress);
     }
@@ -69,8 +67,6 @@ public class KHRImageBase {
         if (CHECKS) {
             check(__functionAddress);
             check(dpy);
-            check(ctx);
-            check(buffer);
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
         return callPPPPP(dpy, ctx, target, buffer, attrib_list, __functionAddress);

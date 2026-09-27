@@ -5,6 +5,8 @@
  */
 package org.lwjgl.egl;
 
+import org.jspecify.annotations.*;
+
 import java.nio.*;
 
 import org.lwjgl.system.*;
@@ -38,22 +40,22 @@ public class NVStreamSync {
 
     /** {@code EGLSyncKHR eglCreateStreamSyncNV(EGLDisplay dpy, EGLStreamKHR stream, EGLenum type, EGLint const * attrib_list)} */
     @NativeType("EGLSyncKHR")
-    public static long eglCreateStreamSyncNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLenum") int type, @NativeType("EGLint const *") IntBuffer attrib_list) {
+    public static long eglCreateStreamSyncNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLenum") int type, @NativeType("EGLint const *") @Nullable IntBuffer attrib_list) {
         if (CHECKS) {
-            checkNT(attrib_list, EGL10.EGL_NONE);
+            checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
-        return neglCreateStreamSyncNV(dpy, stream, type, memAddress(attrib_list));
+        return neglCreateStreamSyncNV(dpy, stream, type, memAddressSafe(attrib_list));
     }
 
     /** {@code EGLSyncKHR eglCreateStreamSyncNV(EGLDisplay dpy, EGLStreamKHR stream, EGLenum type, EGLint const * attrib_list)} */
     @NativeType("EGLSyncKHR")
-    public static long eglCreateStreamSyncNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLenum") int type, @NativeType("EGLint const *") int[] attrib_list) {
+    public static long eglCreateStreamSyncNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLenum") int type, @NativeType("EGLint const *") int @Nullable [] attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglCreateStreamSyncNV;
         if (CHECKS) {
             check(__functionAddress);
             check(dpy);
             check(stream);
-            checkNT(attrib_list, EGL10.EGL_NONE);
+            checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
         return callPPPP(dpy, stream, type, attrib_list, __functionAddress);
     }

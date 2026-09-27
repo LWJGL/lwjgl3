@@ -51,11 +51,11 @@ public class KHRDebug {
 
     /** {@code EGLint eglDebugMessageControlKHR(EGLDEBUGPROCKHR callback, EGLAttrib const * attrib_list)} */
     @NativeType("EGLint")
-    public static int eglDebugMessageControlKHR(@NativeType("EGLDEBUGPROCKHR") EGLDebugMessageKHRCallbackI callback, @NativeType("EGLAttrib const *") @Nullable PointerBuffer attrib_list) {
+    public static int eglDebugMessageControlKHR(@NativeType("EGLDEBUGPROCKHR") @Nullable EGLDebugMessageKHRCallbackI callback, @NativeType("EGLAttrib const *") @Nullable PointerBuffer attrib_list) {
         if (CHECKS) {
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
-        return neglDebugMessageControlKHR(callback.address(), memAddressSafe(attrib_list));
+        return neglDebugMessageControlKHR(memAddressSafe(callback), memAddressSafe(attrib_list));
     }
 
     // --- [ eglQueryDebugKHR ] ---
@@ -87,8 +87,6 @@ public class KHRDebug {
         if (CHECKS) {
             check(__functionAddress);
             check(display);
-            check(object);
-            check(label);
         }
         return callPPPI(display, objectType, object, label, __functionAddress);
     }

@@ -63,7 +63,7 @@ val EGL15 = "EGL15".nativeClassEGL("EGL15", postfix = "") {
 
         EGLDisplay("dpy"),
         EGLenum("type"),
-        noneTerminated..EGLAttrib.const.p("attrib_list")
+        nullable..noneTerminated..EGLAttrib.const.p("attrib_list")
     )
 
     EGLBoolean(
@@ -95,9 +95,9 @@ val EGL15 = "EGL15".nativeClassEGL("EGL15", postfix = "") {
         "CreateImage",
 
         EGLDisplay("dpy"),
-        EGLContext("ctx"),
+        nullable..EGLContext("ctx"),
         EGLenum("target"),
-        EGLClientBuffer("buffer"),
+        nullable..EGLClientBuffer("buffer"),
         nullable..noneTerminated..EGLAttrib.const.p("attrib_list")
     )
 
@@ -112,7 +112,7 @@ val EGL15 = "EGL15".nativeClassEGL("EGL15", postfix = "") {
         "GetPlatformDisplay",
 
         EGLenum("platform"),
-        opaque_p("native_display"),
+        nullable..opaque_p("native_display"),
         nullable..noneTerminated..EGLAttrib.const.p("attrib_list")
     )
 
