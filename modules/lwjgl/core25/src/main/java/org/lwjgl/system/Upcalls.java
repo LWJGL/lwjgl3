@@ -30,22 +30,26 @@ final class Upcalls {
 
     private static final ConcurrentHashMap<Long, Upcall> UPCALL_REGISTRY = new ConcurrentHashMap<>();
 
-    private enum ArenaType {
-        AUTO {
-            @Override Arena create() { return Arena.ofAuto(); }
-            @Override boolean isCloseable() { return false; }
-        },
-        CONFINED {
-            @Override Arena create() { return Arena.ofConfined(); }
-            @Override boolean isCloseable() { return true; }
-        },
-        SHARED {
-            @Override Arena create() { return Arena.ofShared(); }
-            @Override boolean isCloseable() { return true; }
-        };
+    private static enum ArenaType {
+        AUTO,
+        CONFINED,
+        SHARED;
 
-        abstract Arena create();
-        abstract boolean isCloseable();
+        final Arena create() {
+            switch (this) {
+                case AUTO:
+                    return Arena.ofAuto();
+                case CONFINED:
+                    return Arena.ofConfined();
+                case SHARED:
+                    return Arena.ofShared();
+                default:
+                    throw new AssertionError();
+            }
+        }
+        final boolean isCloseable() {
+            return this != AUTO;
+        }
     }
 
     private static final ArenaType ARENA_TYPE = switch (Configuration.FFM_UPCALL_ARENA.get("auto")) {
