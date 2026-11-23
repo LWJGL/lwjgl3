@@ -329,7 +329,7 @@ val XEvent = union(Module.CORE_LINUX, "XEvent", mutable = false) {
 		XAnyEvent copy "window"
 		Atom("message_type")
 		int("format")
-		struct {
+		union {
 			char("b")[20]
 			short("s")[10]
 			long("l")[5]
